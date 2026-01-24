@@ -13,7 +13,7 @@ When the vector is a named vector, the names will be attached to the graph
 as the \code{name} vertex attribute.}
 
 \item{edges}{A vector giving the edges of the graph, the same way as for the
-regular \code{\link[=graph]{graph()}} function. It is checked that the edges indeed
+regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the edges indeed
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
 
@@ -24,7 +24,7 @@ bipartite graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.bipartite()} was renamed to \code{make_bipartite_graph()} to create a more
+\code{graph.bipartite()} was renamed to \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -13,7 +13,8 @@ cluster_fast_greedy(
 )
 }
 \arguments{
-\item{graph}{The input graph}
+\item{graph}{The input graph. It must be undirected and must not have
+multi-edges.}
 
 \item{merges}{Logical scalar, whether to return the merge matrix.}
 

@@ -12,7 +12,7 @@ pkg_review <- function(pkg, pak = TRUE) {
   }
 
   withr::local_dir(pkg_path)
-  system("rh")
+  system("positron .")
 
   if (pak) {
     pak::pak(pkg, dependencies = TRUE, upgrade = TRUE, ask = FALSE)

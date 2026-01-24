@@ -13,7 +13,7 @@
       upgrade_graph(g)
     Condition
       Error in `upgrade_graph()`:
-      ! Don't know how to upgrade graph from version 0 to 4
+      ! Don't know how to upgrade graph from version 0 to 4.
 
 # we can't upgrade from 0.2 to 1.5.0, on the fly
 
@@ -53,8 +53,8 @@
       g
     Message
       This graph was created by an old(er) igraph version.
-        Call upgrade_graph() on it to use with the current igraph version
-        For now we convert it on the fly...
+      i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+      For now we convert it on the fly...
     Output
       IGRAPH D--- 3 3 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
@@ -107,8 +107,8 @@
       s[["1.0.0"]]
     Message
       This graph was created by an old(er) igraph version.
-        Call upgrade_graph() on it to use with the current igraph version
-        For now we convert it on the fly...
+      i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+      For now we convert it on the fly...
     Output
       IGRAPH D--- 3 3 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)

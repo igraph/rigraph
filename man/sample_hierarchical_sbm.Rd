@@ -7,7 +7,7 @@
 \usage{
 sample_hierarchical_sbm(n, m, rho, C, p)
 
-hierarchical_sbm(...)
+hierarchical_sbm(n, m, rho, C, p)
 }
 \arguments{
 \item{n}{Integer scalar, the number of vertices.}
@@ -28,8 +28,6 @@ differ in different blocks.}
 
 \item{p}{Numeric scalar, the Bernoulli rate of connections between vertices
 in different blocks.}
-
-\item{...}{Passed to \code{sample_hierarchical_sbm()}.}
 }
 \value{
 An igraph graph.
@@ -51,12 +49,15 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-if (require(Matrix)) {
-  image(g[])
-}
+
+\dontshow{if (rlang::is_installed("Matrix")) withAutoprint(\{ # examplesIf}
+library("Matrix")
+image(g[])
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
@@ -88,3 +89,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game}{\code{hsbm_game()}}, \href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game}{\code{hsbm_list_game()}}.}
+

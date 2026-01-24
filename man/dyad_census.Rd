@@ -10,10 +10,18 @@ dyad_census(graph)
 \item{graph}{The input graph. A warning is given if it is not directed.}
 }
 \value{
-A named numeric vector with three elements: \item{mut}{The number of
-pairs with mutual connections.} \item{asym}{The number of pairs with
-non-mutual connections.} \item{null}{The number of pairs with no connection
-between them.}
+A named numeric vector with three elements:
+\describe{
+\item{mut}{
+The number of pairs with mutual connections.
+}
+\item{asym}{
+The number of pairs with non-mutual connections.
+}
+\item{null}{
+The number of pairs with no connection between them.
+}
+}
 }
 \description{
 Classify dyads in a directed graphs. The relationship between each pair of
@@ -40,6 +48,7 @@ triples.
 Other graph motifs: 
 \code{\link{count_motifs}()},
 \code{\link{motifs}()},
+\code{\link{motifs_randesu_callback}()},
 \code{\link{sample_motifs}()}
 }
 \author{
@@ -47,3 +56,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{graph motifs}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}.}
+

@@ -7,7 +7,7 @@
 centr_eigen(
   graph,
   directed = FALSE,
-  scale = TRUE,
+  scale = deprecated(),
   options = arpack_defaults(),
   normalized = TRUE
 )
@@ -18,8 +18,8 @@ centr_eigen(
 \item{directed}{logical scalar, whether to use directed shortest paths for
 calculating eigenvector centrality.}
 
-\item{scale}{Whether to rescale the eigenvector centrality scores, such that
-the maximum score is one.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
+eigenvector centralization requires normalized eigenvector centrality scores.}
 
 \item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options
 for the ARPACK eigensolver.}
@@ -29,13 +29,24 @@ centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
-\item{vector}{The node-level centrality scores.}
-\item{value}{The corresponding eigenvalue.}
-\item{options}{ARPACK options, see the return value of
-\code{\link[=eigen_centrality]{eigen_centrality()}} for details.}
-\item{centralization}{The graph level centrality index.}
-\item{theoretical_max}{The same as above, the theoretical maximum
-centralization score for a graph with the same number of vertices.}
+\describe{
+\item{vector}{
+The node-level centrality scores.
+}
+\item{value}{
+The corresponding eigenvalue.
+}
+\item{options}{
+ARPACK options, see the return value of \code{\link[=eigen_centrality]{eigen_centrality()}} for details.
+}
+\item{centralization}{
+The graph level centrality index.
+}
+\item{theoretical_max}{
+The same as above, the theoretical maximum centralization score
+for a graph with the same number of vertices.
+}
+}
 }
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
@@ -66,3 +77,5 @@ Other centralization related:
 \code{\link{centralize}()}
 }
 \concept{centralization related}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}.}
+

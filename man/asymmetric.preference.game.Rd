@@ -24,12 +24,12 @@ types.}
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric.}
 
-\item{loops}{Logical constant, whether self-loops are allowed in the graph.}
+\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{asymmetric.preference.game()} was renamed to \code{sample_asym_pref()} to create a more
+\code{asymmetric.preference.game()} was renamed to \code{\link[=sample_asym_pref]{sample_asym_pref()}} to create a more
 consistent API.
 }
 \keyword{internal}

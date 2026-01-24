@@ -22,9 +22,15 @@ eulerian_cycle(graph)
 For \code{has_eulerian_path()} and \code{has_eulerian_cycle()}, a logical
 value that indicates whether the graph contains an Eulerian path or cycle.
 For \code{eulerian_path()} and \code{eulerian_cycle()}, a named list with two
-entries: \item{epath}{A vector containing the edge ids along the Eulerian
-path or cycle.} \item{vpath}{A vector containing the vertex ids along the
-Eulerian path or cycle.}
+entries:
+\describe{
+\item{epath}{
+A vector containing the edge ids along the Eulerian path or cycle.
+}
+\item{vpath}{
+A vector containing the vertex ids along the Eulerian path or cycle.
+}
+}
 }
 \description{
 \code{has_eulerian_path()} and \code{has_eulerian_cycle()} checks whether there
@@ -59,9 +65,14 @@ try(eulerian_cycle(g))
 \seealso{
 Graph cycles
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+\code{\link{is_dag}()},
+\code{\link{simple_cycles}()}
 }
 \concept{cycles}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian}{\code{is_eulerian()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path}{\code{eulerian_path()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle}{\code{eulerian_cycle()}}.}
+

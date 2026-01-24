@@ -1,4 +1,3 @@
-
 #' Random walk on a graph
 #'
 #' `random_walk()` performs a random walk on the graph and returns the
@@ -48,33 +47,52 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
+#' @cdocs igraph_random_walk
 random_walk <- function(
-    graph,
-    start,
-    steps,
-    weights = NULL,
-    mode = c("out", "in", "all", "total"),
-    stuck = c("return", "error")) {
+  graph,
+  start,
+  steps,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  stuck = c("return", "error")
+) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
-  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  out <- random_walk_impl(
+    graph = graph,
+    start = start,
+    steps = steps,
+    weights = weights,
+    mode = mode,
+    stuck = stuck
+  )
+
   # FIXME: Support returning the full structure
   out$vertices
 }
 
 #' @rdname random_walk
 #' @export
+#' @cdocs igraph_random_walk
 random_edge_walk <- function(
-    graph,
-    start,
-    steps,
-    weights = NULL,
-    mode = c("out", "in", "all", "total"),
-    stuck = c("return", "error")) {
+  graph,
+  start,
+  steps,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  stuck = c("return", "error")
+) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
-  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  out <- random_walk_impl(
+    graph = graph,
+    start = start,
+    steps = steps,
+    weights = weights,
+    mode = mode,
+    stuck = stuck
+  )
+
   # FIXME: Support returning the full structure
   out$edges
 }
-

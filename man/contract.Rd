@@ -66,6 +66,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}
@@ -75,3 +76,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{functions for manipulating graph structure}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}.}
+

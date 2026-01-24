@@ -21,7 +21,7 @@ vertex has one child.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.ring()} was renamed to \code{make_ring()} to create a more
+\code{graph.ring()} was renamed to \code{\link[=make_ring]{make_ring()}} to create a more
 consistent API.
 }
 \keyword{internal}

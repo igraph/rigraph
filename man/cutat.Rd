@@ -17,7 +17,7 @@ communities. Exactly one of \code{no} and \code{steps} must be supplied.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cutat()} was renamed to \code{cut_at()} to create a more
+\code{cutat()} was renamed to \code{\link[=cut_at]{cut_at()}} to create a more
 consistent API.
 }
 \keyword{internal}

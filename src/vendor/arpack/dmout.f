@@ -31,7 +31,7 @@
       DOUBLE PRECISION   A( LDA, * )
 *     ..
 *     .. Local Scalars ..
-      CHARACTER*80       LINE
+      CHARACTER          LINE*80
       INTEGER            I, J, K1, K2, LLL, NDIGIT
 *     ..
 *     .. Local Arrays ..

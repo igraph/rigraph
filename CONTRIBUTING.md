@@ -143,9 +143,26 @@ change, and try to mimic that.
 
 ### Documentation
 
-Please document your new functions using
+- Install roxygen2 but also [igraph.r2cdocs](https://github.com/igraph/igraph.r2cdocs).
+
+```r
+install.packages("roxygen2")
+pak::pak("igraph/igraph.r2cdocs")
+```
+
+- Please document your new functions using
 [roxygen2](https://roxygen2.r-lib.org/), and run `devtools::document()` or `make
 igraph` to update the `.Rd` files.
+
+- Links to C docs are added using the cdocs tag, for instance:
+
+```
+#' @cdocs igraph_assortativity
+```
+
+### Maintaining igraph.r2cdocs
+
+To update the data (when the C docs index has changed after a release) in https://github.com/igraph/igraph.r2cdocs/, run the script that is `data-raw`, commit the csv file and push.
 
 ### Test Cases
 
@@ -158,7 +175,7 @@ some unit testing support functions.
 
 In general, if you are not sure about something, please ask! You can open an
 issue on Github, write to the igraph-help mailing list (see the homepage at
-http://igraph.org), or write to Tamás and Gábor. We prefer the public forums,
+<https://igraph.org>), or write to Tamás and Gábor. We prefer the public forums,
 though, because then others can learn from it, too.
 
 ## Legal Stuff

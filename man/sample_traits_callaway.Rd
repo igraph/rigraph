@@ -16,7 +16,14 @@ sample_traits_callaway(
   directed = FALSE
 )
 
-traits_callaway(...)
+traits_callaway(
+  nodes,
+  types,
+  edge.per.step = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 
 sample_traits(
   nodes,
@@ -27,7 +34,14 @@ sample_traits(
   directed = FALSE
 )
 
-traits(...)
+traits(
+  nodes,
+  types,
+  k = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
@@ -43,9 +57,6 @@ stationary in time.}
 types. These should be probabilities, i.e. numbers between zero and one.}
 
 \item{directed}{Logical constant, whether to generate directed graphs.}
-
-\item{...}{Passed to the constructor, \code{sample_traits()} or
-\code{sample_traits_callaway()}.}
 
 \item{k}{The number of trials per time step, see details below.}
 }
@@ -79,6 +90,7 @@ g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

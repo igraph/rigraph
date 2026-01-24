@@ -40,7 +40,10 @@ Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
+\code{\link{count_reachable}()},
 \code{\link{decompose}()}
 }
 \concept{components}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected()}}.}
+

@@ -20,10 +20,12 @@ in directed graphs and sizes 3-6 in undirected graphs.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
-of the motif (the \code{size} argument). By default no cuts are made.}
+of the motif (the \code{size} argument).
+If \verb{rep(0, size))}, the default, no cuts are made.}
 
 \item{sample.size}{The number of vertices to use as a starting point for
-finding motifs. Only used if the \code{sample} argument is \code{NULL}.}
+finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{If not \code{NULL} then it specifies the vertices to use as a
 starting point for finding motifs.}
@@ -31,7 +33,7 @@ starting point for finding motifs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.motifs.est()} was renamed to \code{sample_motifs()} to create a more
+\code{graph.motifs.est()} was renamed to \code{\link[=sample_motifs]{sample_motifs()}} to create a more
 consistent API.
 }
 \keyword{internal}

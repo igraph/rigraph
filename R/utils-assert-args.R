@@ -1,5 +1,4 @@
 ensure_igraph <- function(graph, optional = FALSE) {
-
   if (is.null(graph)) {
     if (!optional) {
       cli::cli_abort("Must provide a graph object (provided {.code NULL}).")
@@ -17,8 +16,37 @@ ensure_igraph <- function(graph, optional = FALSE) {
   }
 }
 
+switch_igraph_arg <- function(
+  arg,
+  ...,
+  .error_arg = rlang::caller_arg(arg),
+  .error_call = rlang::caller_env()
+) {
+  # Materialize early, before accessing arg
+  force(.error_arg)
 
-igraph.match.arg <- function(arg, values, error_call = rlang::caller_env()) {
+  values <- tolower(...names())
+  if (length(arg) > 1) {
+    values <- intersect(values, tolower(arg))
+  }
+  match <- igraph_match_arg(
+    arg,
+    values,
+    error_arg = .error_arg,
+    error_call = .error_call
+  )
+  switch(match, ...)
+}
+
+igraph_match_arg <- function(
+  arg,
+  values,
+  error_arg = rlang::caller_arg(arg),
+  error_call = rlang::caller_env()
+) {
+  # Materialize early, before accessing arg
+  force(error_arg)
+
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
@@ -30,6 +58,17 @@ igraph.match.arg <- function(arg, values, error_call = rlang::caller_env()) {
   rlang::arg_match(
     arg = arg,
     values = values,
+    error_arg = error_arg,
     error_call = error_call
   )
+}
+
+#' @importFrom rlang caller_env
+ensure_no_na <- function(x, what, call = caller_env()) {
+  if (anyNA(x)) {
+    cli::cli_abort(
+      "Cannot create a graph object because the {what} contains NAs.",
+      call = call
+    )
+  }
 }

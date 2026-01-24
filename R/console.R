@@ -1,15 +1,16 @@
-
+#nocov start
 #' The igraph console
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.console()` was renamed to `console()` to create a more
+#' `igraph.console()` was renamed to [console()] to create a more
 #' consistent API.
 #'
 #' @keywords internal
 #' @export
-igraph.console <- function() { # nocov start
+igraph.console <- function() {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.console()", "console()")
   console()
 } # nocov end
@@ -34,7 +35,6 @@ igraph.console <- function() { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
 
 #' The igraph console
 #'
@@ -68,9 +68,9 @@ console <- function() {
 
 .igraph.pb <- NULL
 
-#' @rdname console
+#' igraph progress
 #' @param percent,message,clean Used internally by `.igraph.progress()` and `.igraph.status()`
-#' @export
+#' @dev
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
     if (!is.null(.igraph.pb)) {
@@ -82,7 +82,8 @@ console <- function() {
   if (is.logical(type) && type) {
     .igraph.progress.txt(percent, message)
   } else {
-    switch(type,
+    switch(
+      type,
       "tk" = .igraph.progress.tk(percent, message),
       "tkconsole" = .igraph.progress.tkconsole(percent, message),
       stop("Cannot interpret 'verbose' option, this should not happen")
@@ -90,14 +91,16 @@ console <- function() {
   }
 }
 
-#' @rdname console
-#' @export
+#' igraph status
+#' @inheritParams .igraph.progress
+#' @dev
 .igraph.status <- function(message) {
   type <- igraph_opt("verbose")
   if (is.logical(type) && type) {
     message(message, appendLF = FALSE)
   } else {
-    switch(type,
+    switch(
+      type,
       "tk" = message(message, appendLF = FALSE),
       "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
       stop("Cannot interpret 'verbose' option, this should not happen")
@@ -131,7 +134,12 @@ console <- function() {
     if (!is.null(pb)) {
       close(pb)
     }
-    pb <- tcltk::tkProgressBar(min = 0, max = 100, title = message, label = "0 %")
+    pb <- tcltk::tkProgressBar(
+      min = 0,
+      max = 100,
+      title = message,
+      label = "0 %"
+    )
   }
   tcltk::setTkProgressBar(pb, percent, label = paste(percent, "%"))
   if (percent == 100) {
@@ -159,7 +167,9 @@ console <- function() {
 
   ## Done
   assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  if (startmess) .igraph.progress.tkconsole.message("Console started.\n")
+  if (startmess) {
+    .igraph.progress.tkconsole.message("Console started.\n")
+  }
   0L
 }
 
@@ -170,19 +180,31 @@ console <- function() {
   fn <- tcltk::tkfont.create(family = "courier", size = 8)
 
   lfr <- tcltk::tkframe(console)
-  image <- tcltk::tkimage.create("photo", "img",
+  image <- tcltk::tkimage.create(
+    "photo",
+    "img",
     format = "gif",
     file = system.file("igraph2.gif", package = "igraph")
   )
-  logo <- tcltk::tklabel(lfr, relief = "flat", padx = 10, pady = 10, image = image)
+  logo <- tcltk::tklabel(
+    lfr,
+    relief = "flat",
+    padx = 10,
+    pady = 10,
+    image = image
+  )
 
-  scr <- tcltk::tkscrollbar(console,
+  scr <- tcltk::tkscrollbar(
+    console,
     repeatinterval = 5,
     command = function(...) tcltk::tkyview(txt, ...)
   )
-  txt <- tcltk::tktext(console,
+  txt <- tcltk::tktext(
+    console,
     yscrollcommand = function(...) tcltk::tkset(scr, ...),
-    width = 60, height = 7, font = fn
+    width = 60,
+    height = 7,
+    font = fn
   )
   tcltk::tkconfigure(txt, state = "disabled")
   pbar <- .igraph.progress.tkconsole.pbar(console)
@@ -200,9 +222,14 @@ console <- function() {
     tcltk::tkdestroy(console)
   })
 
-  tcltk::tkpack(logo,
-    side = "top", fill = "none", expand = 0, anchor = "n",
-    ipadx = 10, ipady = 10
+  tcltk::tkpack(
+    logo,
+    side = "top",
+    fill = "none",
+    expand = 0,
+    anchor = "n",
+    ipadx = 10,
+    ipady = 10
   )
   tcltk::tkpack(bclear, side = "top", fill = "x", expand = 0, padx = 10)
   ## tcltk::tkpack(bstop, side="top", fill="x", expand=0, padx=10)
@@ -264,8 +291,11 @@ close.igraphconsole <- function(con, ...) {
   fn <- tcltk::tkfont.create(family = "helvetica", size = 10)
   frame <- tcltk::tkframe(top)
   if (useText) {
-    .lab <- tcltk::tklabel(frame,
-      text = " ", font = fn, anchor = "w",
+    .lab <- tcltk::tklabel(
+      frame,
+      text = " ",
+      font = fn,
+      anchor = "w",
       padx = 20
     )
     tcltk::tkpack(.lab, side = "left", anchor = "w", padx = 5)
@@ -273,10 +303,7 @@ close.igraphconsole <- function(con, ...) {
     .vlab <- tcltk::tklabel(frame, text = "0%", font = fn2, padx = 20)
     tcltk::tkpack(.vlab, side = "right")
   } else {
-    .lab <- tcltk::tklabel(frame,
-      text = " ", font = fn, anchor = "w",
-      pady = 5
-    )
+    .lab <- tcltk::tklabel(frame, text = " ", font = fn, anchor = "w", pady = 5)
     tcltk::tkpack(.lab, side = "top", anchor = "w", padx = 5)
     tcltk::tkpack(tcltk::tklabel(frame, text = "", font = fn), side = "bottom")
     .val <- tcltk::tclVar()
@@ -296,3 +323,4 @@ close.igraphconsole <- function(con, ...) {
   pb <- list(widget = pBar, get = get, set = set, label = .lab)
   list(frame = frame, pb = pb)
 }
+#nocov end

@@ -302,7 +302,7 @@ test_that("graph_from_adjacency_matrix() works", {
 })
 
 test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
-  skip_if_not_installed("Matrix")
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
 
   M1 <- rbind(
     c(0, 0, 1, 1),
@@ -422,7 +422,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g8 <- graph_from_adjacency_matrix(as(M8, "dgCMatrix"), mode = "directed", weighted = TRUE)
+  g8 <- graph_from_adjacency_matrix(
+    as(M8, "dgCMatrix"),
+    mode = "directed",
+    weighted = TRUE
+  )
   el8 <- cbind(as_edgelist(g8), E(g8)$weight)
   expect_equal(
     el8[order(el8[, 1], el8[, 2]), ],
@@ -439,7 +443,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 2),
     c(3, 0, 2, 0)
   )
-  g9 <- graph_from_adjacency_matrix(as(M9, "dgCMatrix"), mode = "undirected", weighted = TRUE)
+  g9 <- graph_from_adjacency_matrix(
+    as(M9, "dgCMatrix"),
+    mode = "undirected",
+    weighted = TRUE
+  )
   el9 <- cbind(as_edgelist(g9), E(g9)$weight)
   expect_equal(
     el9[order(el9[, 1], el9[, 2]), ],
@@ -456,7 +464,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g10 <- graph_from_adjacency_matrix(as(M10, "dgCMatrix"), mode = "max", weighted = TRUE)
+  g10 <- graph_from_adjacency_matrix(
+    as(M10, "dgCMatrix"),
+    mode = "max",
+    weighted = TRUE
+  )
   el10 <- cbind(as_edgelist(g10), E(g10)$weight)
   expect_equal(
     el10[order(el10[, 1], el10[, 2]), ],
@@ -473,7 +485,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g11 <- graph_from_adjacency_matrix(as(M11, "dgCMatrix"), mode = "min", weighted = TRUE)
+  g11 <- graph_from_adjacency_matrix(
+    as(M11, "dgCMatrix"),
+    mode = "min",
+    weighted = TRUE
+  )
   el11 <- cbind(as_edgelist(g11), E(g11)$weight)
   expect_equal(
     el11[order(el11[, 1], el11[, 2]), ],
@@ -490,7 +506,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g12 <- graph_from_adjacency_matrix(as(M12, "dgCMatrix"), mode = "lower", weighted = TRUE)
+  g12 <- graph_from_adjacency_matrix(
+    as(M12, "dgCMatrix"),
+    mode = "lower",
+    weighted = TRUE
+  )
   el12 <- cbind(as_edgelist(g12), E(g12)$weight)
   expect_equal(
     el12[order(el12[, 1], el12[, 2]), ],
@@ -507,7 +527,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g13 <- graph_from_adjacency_matrix(as(M13, "dgCMatrix"), mode = "upper", weighted = TRUE)
+  g13 <- graph_from_adjacency_matrix(
+    as(M13, "dgCMatrix"),
+    mode = "upper",
+    weighted = TRUE
+  )
   el13 <- cbind(as_edgelist(g13), E(g13)$weight)
   expect_equal(
     el13[order(el13[, 1], el13[, 2]), ],
@@ -524,7 +548,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
     c(1, 0, 0, 0),
     c(1, 0, 2, 0)
   )
-  g14 <- graph_from_adjacency_matrix(as(M14, "dgCMatrix"), mode = "plus", weighted = TRUE)
+  g14 <- graph_from_adjacency_matrix(
+    as(M14, "dgCMatrix"),
+    mode = "plus",
+    weighted = TRUE
+  )
   el14 <- cbind(as_edgelist(g14), E(g14)$weight)
   expect_equal(
     el14[order(el14[, 1], el14[, 2]), ],
@@ -539,7 +567,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
   M15 <- rbind(
     c(1)
   )
-  g15 <- graph_from_adjacency_matrix(as(M15, "dgCMatrix"), mode = "undirected", diag = FALSE)
+  g15 <- graph_from_adjacency_matrix(
+    as(M15, "dgCMatrix"),
+    mode = "undirected",
+    diag = FALSE
+  )
   el15 <- cbind(as_edgelist(g15), E(g15)$weight)
   expect_equal(
     el15[order(el15[, 1], el15[, 2]), ],
@@ -549,7 +581,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
   M16 <- rbind(
     c(1)
   )
-  g16 <- graph_from_adjacency_matrix(as(M16, "dgCMatrix"), mode = "lower", diag = FALSE)
+  g16 <- graph_from_adjacency_matrix(
+    as(M16, "dgCMatrix"),
+    mode = "lower",
+    diag = FALSE
+  )
   el16 <- cbind(as_edgelist(g16), E(g16)$weight)
   expect_equal(
     el16[order(el16[, 1], el16[, 2]), ],
@@ -559,7 +595,11 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
   M17 <- rbind(
     c(1)
   )
-  g17 <- graph_from_adjacency_matrix(as(M17, "dgCMatrix"), mode = "plus", diag = FALSE)
+  g17 <- graph_from_adjacency_matrix(
+    as(M17, "dgCMatrix"),
+    mode = "plus",
+    diag = FALSE
+  )
   el17 <- cbind(as_edgelist(g17), E(g17)$weight)
   expect_equal(
     el17[order(el17[, 1], el17[, 2]), ],
@@ -597,7 +637,7 @@ test_that("graph_from_adjacency_matrix() snapshot", {
 })
 
 test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
-  skip_if_not_installed("Matrix")
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
 
   rlang::local_options(lifecycle_verbosity = "warning")
 
@@ -616,7 +656,11 @@ test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
     graph_from_adjacency_matrix(m, weighted = TRUE)
     graph_from_adjacency_matrix(m, weighted = "w")
 
-    m2 <- Matrix::sparseMatrix(2:1, 1:2, x = c(0.00211360121966095, 0.00211360121966098))
+    m2 <- Matrix::sparseMatrix(
+      2:1,
+      1:2,
+      x = c(0.00211360121966095, 0.00211360121966098)
+    )
     graph_from_adjacency_matrix(m2, mode = "undirected")
   })
 })
@@ -656,4 +700,158 @@ test_that("weighted graph_from_adjacency_matrix() works on integer matrices", {
   data <- matrix(c(0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0), 4)
   g <- graph_from_adjacency_matrix(data, weighted = TRUE)
   expect_equal(as.matrix(g[]), data)
+})
+
+test_that("sparse/dense matrices no loops works", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
+  A <- diag(1, 5)
+  A[1, 2] <- 1
+  g <- graph_from_adjacency_matrix(A, diag = FALSE)
+  expect_ecount(g, 1)
+  expect_equal(get_edge_ids(g, c(1, 2)), 1)
+
+  A <- as(A, "dgCMatrix")
+  g <- graph_from_adjacency_matrix(A, diag = FALSE)
+  expect_ecount(g, 1)
+  expect_equal(get_edge_ids(g, c(1, 2)), 1)
+})
+
+test_that("sparse/dense matrices multiple works", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
+  A <- matrix(0, 5, 5)
+  A[1, 2] <- 3
+  g <- graph_from_adjacency_matrix(A, diag = FALSE, weighted = FALSE)
+  expect_ecount(g, 3)
+  expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
+
+  A <- as(A, "dgCMatrix")
+  g <- graph_from_adjacency_matrix(A, diag = FALSE)
+  expect_ecount(g, 3)
+  expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
+})
+
+test_that("sparse/dense matrices min/max/plus", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
+  A <- matrix(0, 5, 5)
+  A[1, 2] <- 3
+  A[2, 1] <- 2
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "max",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 3)
+
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "min",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 2)
+
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "plus",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 5)
+
+  A <- as(A, "dgCMatrix")
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "max",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 3)
+
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "min",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 2)
+
+  g <- graph_from_adjacency_matrix(
+    A,
+    diag = FALSE,
+    mode = "plus",
+    weighted = TRUE
+  )
+  expect_equal(E(g)$weight[1], 5)
+})
+
+test_that("graph_from_adjacency_matrix errors for NAs", {
+  A <- matrix(c(1, 1, NA, 1), 2, 2)
+  expect_snapshot(graph_from_adjacency_matrix(A), error = TRUE)
+})
+
+test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = FALSE correctly", {
+  # Create test matrix with row and column names
+  M <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  rownames(M) <- c("A", "B")
+  colnames(M) <- c("X", "Y")
+
+  # Test default behavior (should add names)
+  g_default <- graph_from_adjacency_matrix(M)
+  expect_equal(V(g_default)$name, c("X", "Y"))
+
+  # Test add.colnames = FALSE (should not add column names)
+  g_no_colnames <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_null(V(g_no_colnames)$name)
+
+  # Test add.rownames = FALSE (should not add row names)
+  g_no_rownames <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = NA,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_rownames)$name)
+
+  # Test both FALSE
+  g_no_names <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names)$name)
+
+  # Test with custom attribute names and FALSE values
+  g_col_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = "vertex_id"
+  )
+  expect_equal(V(g_col_false)$vertex_id, c("A", "B"))
+  expect_null(V(g_col_false)$name)
+
+  g_row_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = "vertex_name",
+    add.rownames = FALSE
+  )
+  expect_equal(V(g_row_false)$vertex_name, c("X", "Y"))
+  expect_null(V(g_row_false)$name)
+
+  # Test matrix without names and FALSE parameters
+  M_no_names <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  g_no_names_matrix <- graph_from_adjacency_matrix(
+    M_no_names,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names_matrix)$name)
+
+  # Test that FALSE is equivalent to NA behavior
+  g_na_col <- graph_from_adjacency_matrix(M, add.colnames = NA)
+  g_false_col <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_equal(vertex_attr_names(g_na_col), vertex_attr_names(g_false_col))
+
+  g_na_row <- graph_from_adjacency_matrix(M, add.rownames = NA)
+  g_false_row <- graph_from_adjacency_matrix(M, add.rownames = FALSE)
+  expect_equal(vertex_attr_names(g_na_row), vertex_attr_names(g_false_row))
 })

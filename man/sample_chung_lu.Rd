@@ -42,10 +42,16 @@ of the connection probability between vertices \eqn{i} and \eqn{j}. Given
 \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, the following
 formulations are available:
 \describe{
-\item{\dQuote{original}}{the original Chung-Lu model, \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.}
-\item{\dQuote{maxent}}{maximum entropy model with fixed expected degrees,
-\eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.}
-\item{\dQuote{nr}}{Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.}
+\item{\dQuote{original}}{
+the original Chung-Lu model, \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.
+}
+\item{\dQuote{maxent}}{
+maximum entropy model with fixed expected degrees,
+\eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.
+}
+\item{\dQuote{nr}}{
+Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.
+}
 }}
 }
 \value{
@@ -131,7 +137,7 @@ rowMeans(replicate(
 
 rowMeans(replicate(
   100,
-  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
 }
 \references{
@@ -168,6 +174,7 @@ with sharply specified degrees. \code{\link[=sample_gnp]{sample_gnp()}} creates 
 fixed connection probability \eqn{p} between all vertex pairs.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
@@ -195,3 +202,5 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 }
 \concept{games}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
+

@@ -27,7 +27,7 @@ This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.adjlist()} was renamed to \code{graph_from_adj_list()} to create a more
+\code{graph.adjlist()} was renamed to \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} to create a more
 consistent API.
 }
 \keyword{internal}

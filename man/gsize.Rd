@@ -35,7 +35,7 @@ Other structural queries:
 \code{\link{adjacent_vertices}()},
 \code{\link{are_adjacent}()},
 \code{\link{ends}()},
-\code{\link{get.edge.ids}()},
+\code{\link{get_edge_ids}()},
 \code{\link{gorder}()},
 \code{\link{head_of}()},
 \code{\link{incident}()},

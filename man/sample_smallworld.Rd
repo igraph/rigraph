@@ -7,7 +7,7 @@
 \usage{
 sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(...)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{dim}{Integer constant, the dimension of the starting lattice.}
@@ -24,8 +24,6 @@ generated graph.}
 
 \item{multiple}{Logical scalar, whether multiple edges are allowed int the
 generated graph.}
-
-\item{...}{Passed to \code{sample_smallworld()}.}
 }
 \value{
 A graph object.
@@ -65,6 +63,7 @@ Duncan J Watts and Steven H Strogatz: Collective dynamics of
 \code{\link[=make_lattice]{make_lattice()}}, \code{\link[=rewire]{rewire()}}
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

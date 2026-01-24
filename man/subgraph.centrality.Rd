@@ -16,7 +16,7 @@ loops edges from the graph before the calculation.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{subgraph.centrality()} was renamed to \code{subgraph_centrality()} to create a more
+\code{subgraph.centrality()} was renamed to \code{\link[=subgraph_centrality]{subgraph_centrality()}} to create a more
 consistent API.
 }
 \keyword{internal}

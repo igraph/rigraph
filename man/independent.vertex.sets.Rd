@@ -7,8 +7,7 @@
 independent.vertex.sets(graph, min = NULL, max = NULL)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs are considered as undirected,
-loop edges and multiple edges are ignored.}
+\item{graph}{The input graph.}
 
 \item{min}{Numeric constant, limit for the minimum size of the independent
 vertex sets to find. \code{NULL} means no limit.}
@@ -19,7 +18,7 @@ vertex sets to find. \code{NULL} means no limit.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{independent.vertex.sets()} was renamed to \code{ivs()} to create a more
+\code{independent.vertex.sets()} was renamed to \code{\link[=ivs]{ivs()}} to create a more
 consistent API.
 }
 \keyword{internal}

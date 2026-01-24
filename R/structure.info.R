@@ -1,15 +1,15 @@
-
 #' Are two vertices adjacent?
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `are.connected()` was renamed to `are_adjacent()` to create a more
+#' `are.connected()` was renamed to [are_adjacent()] to create a more
 #' consistent API.
 #' @inheritParams are_adjacent
 #' @keywords internal
 #' @export
-are.connected <- function(graph, v1, v2) { # nocov start
+are.connected <- function(graph, v1, v2) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "are.connected()", "are_adjacent()")
   are_adjacent(graph = graph, v1 = v1, v2 = v2)
 } # nocov end
@@ -58,4 +58,11 @@ are.connected <- function(graph, v1, v2) { # nocov start
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
-are_adjacent <- are_adjacent_impl
+#' @cdocs igraph_are_adjacent
+are_adjacent <- function(graph, v1, v2) {
+  are_adjacent_impl(
+    graph = graph,
+    v1 = v1,
+    v2 = v2
+  )
+}

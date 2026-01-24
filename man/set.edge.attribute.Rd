@@ -21,7 +21,7 @@ If \code{NULL}, the input is returned unchanged.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{set.edge.attribute()} was renamed to \code{set_edge_attr()} to create a more
+\code{set.edge.attribute()} was renamed to \code{\link[=set_edge_attr]{set_edge_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

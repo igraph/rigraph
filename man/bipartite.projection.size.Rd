@@ -17,7 +17,7 @@ graph has no \sQuote{\code{type}} vertex attribute.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.projection.size()} was renamed to \code{bipartite_projection_size()} to create a more
+\code{bipartite.projection.size()} was renamed to \code{\link[=bipartite_projection_size]{bipartite_projection_size()}} to create a more
 consistent API.
 }
 \keyword{internal}

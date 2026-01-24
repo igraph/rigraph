@@ -12,7 +12,7 @@ is.directed(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.directed()} was renamed to \code{is_directed()} to create a more
+\code{is.directed()} was renamed to \code{\link[=is_directed]{is_directed()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -1,33 +1,51 @@
-bibentry(bibtype="Article",
-         header="To cite 'igraph' in publications use:",
-         title="The igraph software package for complex network research",
-         author=c(as.person("Gabor Csardi"), as.person("Tamas Nepusz")),
-         journal="InterJournal",
-         volume="Complex Systems",
-         pages="1695",
-         year=2006,
-         url="https://igraph.org")
+citHeader("To cite igraph please use these three references.")
+
+bibentry(
+  bibtype = "Article",
+  title = "The igraph software package for complex network research",
+  author = c(as.person("Gábor Csárdi"), as.person("Tamás Nepusz")),
+  journal = "InterJournal",
+  volume = "Complex Systems",
+  pages = "1695",
+  year = 2006,
+  url = "https://igraph.org"
+)
+
+bibentry(
+  bibtype = "Article",
+  title = "igraph enables fast and robust network analysis across programming languages",
+  author = c(as.person("Michael Antonov"), as.person("Gábor Csárdi"), as.person("Szabolcs Horvát"), as.person("Kirill Müller"), as.person("Tamás Nepusz"), as.person("Daniel Noom"), as.person("Maëlle Salmon"), as.person("Vincent Traag"), as.person("Brooke Foucault Welles"), as.person("Fabio Zanini")),
+  journal = "arXiv preprint arXiv:2311.10260",
+  year = 2023,
+  doi = "10.48550/arXiv.2311.10260"
+)
 
 note <- sprintf("R package version %s", meta$Version)
 # https://github.com/cran/lidR/blob/f0dae39007c9d174f6e1962ff236fd8826f1501d/inst/CITATION#L21
 year <- format(Sys.Date(), "%Y")
 authors <- meta$`Authors@R`
 authors <- utils:::.read_authors_at_R_field(authors)
-authors <- Filter(function(e) {
-  !(is.null(e$given) && is.null(e$family)) && !is.na(match("aut", e$role))
-}, authors)
+authors <- Filter(
+  function(e) {
+    !(is.null(e$given) && is.null(e$family)) && !is.na(match("aut", e$role))
+  },
+  authors
+)
 authors <- format(authors, include = c("given", "family"))
 
 # Step 1: Get text citation and replace there the abb.
-entry_for_txt <- format(bibentry(
-  bibtype = "Manual",
-  title = "{igraph}: Network Analysis and Visualization in R",
-  author = authors,
-  year = year,
-  note = note,
-  doi = "10.5281/zenodo.7682609",
-  url = "https://CRAN.R-project.org/package=igraph"
-), style = "text")
+entry_for_txt <- format(
+  bibentry(
+    bibtype = "Manual",
+    title = "{igraph}: Network Analysis and Visualization in R",
+    author = authors,
+    year = year,
+    note = note,
+    doi = "10.5281/zenodo.7682609",
+    url = "https://CRAN.R-project.org/package=igraph"
+  ),
+  style = "text"
+)
 
 txt <- gsub("Horvát S", "Horvát Sz", entry_for_txt)
 

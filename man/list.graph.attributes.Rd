@@ -12,7 +12,7 @@ list.graph.attributes(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{list.graph.attributes()} was renamed to \code{graph_attr_names()} to create a more
+\code{list.graph.attributes()} was renamed to \code{\link[=graph_attr_names]{graph_attr_names()}} to create a more
 consistent API.
 }
 \keyword{internal}

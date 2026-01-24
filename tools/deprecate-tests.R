@@ -24,7 +24,7 @@ tibblify_call <- function(deprecated_call) {
   args <- deprecated_call |>
     xml2::xml_parent() |>
     xml2::xml_siblings() |>
-    purrr::keep(~xml2::xml_name(.x) == "expr")
+    purrr::keep(~ xml2::xml_name(.x) == "expr")
   old <- xml2::xml_text(args[[1]])
   new <- xml2::xml_text(args[[2]])
   tibble::tibble(old = gsub('"', '', old), new = new)
@@ -37,13 +37,12 @@ deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
 test_scripts <- fs::dir_ls(here::here("R"), glob = "*.R")
 
 fix_test_script <- function(test_script, deprecated_df) {
-
   test_lines <- brio::read_lines(test_script)
 
   look_for_one <- function(test_lines, old_name, new_name) {
-   old_name <- sub("\\.", "\\\\.", old_name)
+    old_name <- sub("\\.", "\\\\.", old_name)
 
-     test_lines <- gsub(
+    test_lines <- gsub(
       sprintf("^%s\\(", old_name),
       sprintf("%s(", new_name),
       test_lines,
@@ -64,8 +63,11 @@ fix_test_script <- function(test_script, deprecated_df) {
   }
 
   test_lines <- purrr::reduce2(
-    deprecated_df$old, deprecated_df$new,
-    \(test_lines, old_name, new_name) look_for_one(test_lines, old_name, new_name),
+    deprecated_df$old,
+    deprecated_df$new,
+    \(test_lines, old_name, new_name) {
+      look_for_one(test_lines, old_name, new_name)
+    },
     .init = test_lines
   )
 
@@ -80,13 +82,12 @@ purrr::walk(test_scripts, fix_test_script, deprecated_df = deprecated_df)
 test_scripts <- fs::dir_ls(here::here("tests", "testthat"), glob = "*.R")
 
 fix_test_script <- function(test_script, deprecated_df) {
-
   test_lines <- brio::read_lines(test_script)
 
   look_for_one <- function(test_lines, old_name, new_name) {
-   old_name <- sub("\\.", "\\\\.", old_name)
+    old_name <- sub("\\.", "\\\\.", old_name)
 
-     test_lines <- gsub(
+    test_lines <- gsub(
       sprintf("^%s\\(", old_name),
       sprintf("%s(", new_name),
       test_lines,
@@ -107,8 +108,11 @@ fix_test_script <- function(test_script, deprecated_df) {
   }
 
   test_lines <- purrr::reduce2(
-    deprecated_df$old, deprecated_df$new,
-    \(test_lines, old_name, new_name) look_for_one(test_lines, old_name, new_name),
+    deprecated_df$old,
+    deprecated_df$new,
+    \(test_lines, old_name, new_name) {
+      look_for_one(test_lines, old_name, new_name)
+    },
     .init = test_lines
   )
 

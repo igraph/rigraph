@@ -73,8 +73,8 @@ the second.
 ## Projection of a full bipartite graph is a full graph
 g <- make_full_bipartite_graph(10, 5)
 proj <- bipartite_projection(g)
-graph.isomorphic(proj[[1]], make_full_graph(10))
-graph.isomorphic(proj[[2]], make_full_graph(5))
+isomorphic(proj[[1]], make_full_graph(10))
+isomorphic(proj[[2]], make_full_graph(5))
 
 ## The projection keeps the vertex attributes
 M <- matrix(0, nrow = 5, ncol = 3)
@@ -100,3 +100,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{bipartite}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}.}
+

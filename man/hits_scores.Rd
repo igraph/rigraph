@@ -23,23 +23,29 @@ in the Euclidean norm.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 scores. If the graph has a \code{weight} edge attribute, then this is used
-by default.
-This function interprets edge weights as connection strengths. In the
-random surfer model, an edge with a larger weight is more likely to be
-selected by the surfer.}
+by default. Pass \code{NA} to ignore the weight attribute. This function
+interprets edge weights as connection strengths. The weights of parallel
+edges are effectively added up.}
 
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
 A named list with members:
-\item{hub}{The hub score of the vertices.}
-\item{authority}{The authority score of the vertices.}
-\item{value}{The corresponding eigenvalue of the calculated
-principal eigenvector.}
-\item{options}{Some information about the ARPACK computation, it has
-the same members as the \code{options} member returned
-by \code{\link[=arpack]{arpack()}}, see that for documentation.}
+\describe{
+\item{hub}{
+The hub score of the vertices.
+}
+\item{authority}{
+The authority score of the vertices.
+}
+\item{value}{
+The corresponding eigenvalue of the calculated principal eigenvector.
+}
+\item{options}{
+Some information about the ARPACK computation, it has the same members as the \code{options} member returned by \code{\link[=arpack]{arpack()}}, see that for documentation.
+}
+}
 }
 \description{
 The hub scores of the vertices are defined as the principal eigenvector
@@ -89,3 +95,5 @@ Centrality measures
 \code{\link{subgraph_centrality}()}
 }
 \concept{centrality}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{hub_and_authority_scores()}}.}
+

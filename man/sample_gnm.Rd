@@ -7,7 +7,7 @@
 \usage{
 sample_gnm(n, m, directed = FALSE, loops = FALSE)
 
-gnm(...)
+gnm(n, m, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
@@ -18,8 +18,6 @@ gnm(...)
 \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
-
-\item{...}{Passed to \code{sample_gnm()}.}
 }
 \value{
 A graph object.
@@ -43,6 +41,7 @@ Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

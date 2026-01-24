@@ -108,9 +108,8 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  *     implementation.
  * \param modularity Pointer to a real number, if not \c NULL then the
  *     modularity score of the solution will be stored here. This is the
- *     gereralized modularity that simplifies to the one defined in
- *     M. E. J. Newman and M. Girvan, Phys. Rev. E 69, 026113 (2004),
- *     if the gamma parameter is one.
+ *     gereralized modularity, taking into account the resolution parameter
+ *     \p gamma. See \ref igraph_modularity() for details.
  * \param temperature Pointer to a real number, if not \c NULL then
  *     the temperature at the end of the algorithm will be stored
  *     here.
@@ -125,7 +124,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  * \param spins Integer giving the number of spins, i.e. the maximum
  *     number of clusters. Even if the number of spins is high the number of
  *     clusters in the result might be small.
- * \param parupdate A logical constant, whether to update all spins in
+ * \param parupdate A Boolean constant, whether to update all spins in
  *     parallel. It is not implemented in the \c IGRAPH_SPINCOMM_INP_NEG
  *     implementation.
  * \param starttemp Real number, the temperature at the start. A reasonable
@@ -159,7 +158,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  *     weights, using the number of spins as the number of colors.
  * \return Error code.
  *
- * \sa igraph_community_spinglass_single() for calculating the community
+ * \sa \ref igraph_community_spinglass_single() for calculating the community
  * of a single vertex.
  *
  * Time complexity: TODO.

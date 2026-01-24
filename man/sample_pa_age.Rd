@@ -22,7 +22,22 @@ sample_pa_age(
   time.window = NULL
 )
 
-pa_age(...)
+pa_age(
+  n,
+  pa.exp,
+  aging.exp,
+  m = NULL,
+  aging.bin = 300,
+  out.dist = NULL,
+  out.seq = NULL,
+  out.pref = FALSE,
+  directed = TRUE,
+  zero.deg.appeal = 1,
+  zero.age.appeal = 0,
+  deg.coef = 1,
+  age.coef = 1,
+  time.window = NULL
+)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
@@ -67,8 +82,6 @@ of the vertices with age zero. It is usually zero, see details below.}
 \item{time.window}{Integer constant, if NULL only adjacent added in the last
 \code{time.windows} time steps are counted as a basis of the preferential
 attachment. See also details below.}
-
-\item{...}{Passed to \code{sample_pa_age()}.}
 }
 \value{
 A new graph.
@@ -136,6 +149,7 @@ max(degree(g3))
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

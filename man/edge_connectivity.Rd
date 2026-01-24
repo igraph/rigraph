@@ -8,7 +8,7 @@
 \usage{
 edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
-edge_disjoint_paths(graph, source, target)
+edge_disjoint_paths(graph, source = NULL, target = NULL)
 
 adhesion(graph, checks = TRUE)
 }
@@ -90,7 +90,7 @@ edge_connectivity(g2, 100, 1)
 edge_disjoint_paths(g2, 100, 1)
 
 g <- sample_gnp(50, 5 / 50)
-g <- as.directed(g)
+g <- as_directed(g)
 g <- induced_subgraph(g, subcomponent(g, 1))
 adhesion(g)
 

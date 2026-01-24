@@ -7,7 +7,7 @@
 eigen_centrality(
   graph,
   directed = FALSE,
-  scale = TRUE,
+  scale = deprecated(),
   weights = NULL,
   options = arpack_defaults()
 )
@@ -18,9 +18,8 @@ eigen_centrality(
 \item{directed}{Logical scalar, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
-\item{scale}{Logical scalar, whether to scale the result to have a maximum
-score of one. If no scaling is used then the result vector has unit length
-in the Euclidean norm.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
+place.}
 
 \item{weights}{A numerical vector or \code{NULL}. This argument can be used
 to give edge weights for calculating the weighted eigenvector centrality of
@@ -38,11 +37,18 @@ weights spread the centrality better.}
 \code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
-A named list with components: \item{vector}{A vector containing the
-centrality scores.} \item{value}{The eigenvalue corresponding to the
-calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
-list, information about the underlying ARPACK computation. See
-\code{\link[=arpack]{arpack()}} for the details.}
+A named list with components:
+\describe{
+\item{vector}{
+A vector containing the centrality scores.
+}
+\item{value}{
+The eigenvalue corresponding to the calculated eigenvector, i.e. the centrality scores.
+}
+\item{options}{
+A named list, information about the underlying ARPACK computation. See \code{\link[=arpack]{arpack()}} for the details.
+}
+}
 }
 \description{
 \code{eigen_centrality()} takes a graph (\code{graph}) and returns the
@@ -118,8 +124,10 @@ Centrality measures
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} and Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
 manual page.
 }
 \concept{centrality}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eigenvector_centrality}{\code{eigenvector_centrality()}}.}
+

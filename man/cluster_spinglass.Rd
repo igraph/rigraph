@@ -20,8 +20,7 @@ cluster_spinglass(
 )
 }
 \arguments{
-\item{graph}{The input graph, can be directed but the direction of the edges
-is neglected.}
+\item{graph}{The input graph. Edge directions are ignored in directed graphs.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -92,12 +91,23 @@ used then a \code{\link[=cluster_spinglass]{cluster_spinglass()}} returns a
 
 If the \code{vertex} argument is present, i.e. the second form is used then a
 named list is returned with the following components:
-\item{community}{Numeric vector giving the ids of the vertices in the same
-community as \code{vertex}.} \item{cohesion}{The cohesion score of the
-result, see references.} \item{adhesion}{The adhesion score of the result,
-see references.} \item{inner.links}{The number of edges within the community
-of \code{vertex}.} \item{outer.links}{The number of edges between the
-community of \code{vertex} and the rest of the graph. }
+\describe{
+\item{community}{
+Numeric vector giving the ids of the vertices in the same community as \code{vertex}.
+}
+\item{cohesion}{
+The cohesion score of the result, see references.
+}
+\item{adhesion}{
+The adhesion score of the result, see references.
+}
+\item{inner.links}{
+The number of edges within the community of \code{vertex}.
+}
+\item{outer.links}{
+The number of edges between the community of \code{vertex} and the rest of the graph.
+}
+}
 }
 \description{
 This function tries to find communities in graphs via a spin-glass model and

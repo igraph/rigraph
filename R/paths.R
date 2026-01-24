@@ -1,15 +1,15 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `path.length.hist()` was renamed to `distance_table()` to create a more
+#' `path.length.hist()` was renamed to [distance_table()] to create a more
 #' consistent API.
 #' @inheritParams distance_table
 #' @keywords internal
 #' @export
-path.length.hist <- function(graph, directed = TRUE) { # nocov start
+path.length.hist <- function(graph, directed = TRUE) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
   distance_table(graph = graph, directed = directed)
 } # nocov end
@@ -19,13 +19,18 @@ path.length.hist <- function(graph, directed = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximum.cardinality.search()` was renamed to `max_cardinality()` to create a more
+#' `maximum.cardinality.search()` was renamed to [max_cardinality()] to create a more
 #' consistent API.
 #' @inheritParams max_cardinality
 #' @keywords internal
 #' @export
-maximum.cardinality.search <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximum.cardinality.search()", "max_cardinality()")
+maximum.cardinality.search <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "maximum.cardinality.search()",
+    "max_cardinality()"
+  )
   max_cardinality(graph = graph)
 } # nocov end
 
@@ -34,12 +39,13 @@ maximum.cardinality.search <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.dag()` was renamed to `is_dag()` to create a more
+#' `is.dag()` was renamed to [is_dag()] to create a more
 #' consistent API.
 #' @inheritParams is_dag
 #' @keywords internal
 #' @export
-is.dag <- function(graph) { # nocov start
+is.dag <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
   is_dag(graph = graph)
 } # nocov end
@@ -68,15 +74,14 @@ is.dag <- function(graph) { # nocov start
 
 #' List all simple paths from one source
 #'
-#' This function lists are simple paths from one source vertex to another
-#' vertex or vertices. A path is simple if the vertices it visits are not
-#' visited more than once.
+#' This function lists all simple paths from one source vertex to another
+#' vertex or vertices. A path is simple if contains no repeated vertices.
 #'
 #' Note that potentially there are exponentially many paths between two
 #' vertices of a graph, and you may run out of memory when using this
 #' function, if your graph is lattice-like.
 #'
-#' This function currently ignored multiple and loop edges.
+#' This function ignores multiple and loop edges.
 #'
 #' @param graph The input graph.
 #' @param from The source vertex.
@@ -87,7 +92,8 @@ is.dag <- function(graph) { # nocov start
 #'   then *to* it will be considered. If `all`, the default, then
 #'   the corresponding undirected graph will be used, i.e. not directed paths
 #'   are searched. This argument is ignored for undirected graphs.
-#' @param cutoff Maximum length of path that is considered. If negative, paths of all lengths are considered.
+#' @param cutoff Maximum length of the paths that are considered. If negative,
+#'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
 #'   vertex ids.
@@ -100,26 +106,26 @@ is.dag <- function(graph) { # nocov start
 #'
 #' @family paths
 #' @export
-all_simple_paths <- function(graph, from, to = V(graph),
-                             mode = c("out", "in", "all", "total"),
-                             cutoff = -1) {
+all_simple_paths <- function(
+  graph,
+  from,
+  to = V(graph),
+  mode = c("out", "in", "all", "total"),
+  cutoff = -1
+) {
   ## Argument checks
   ensure_igraph(graph)
-  from <- as_igraph_vs(graph, from)
-  to <- as_igraph_vs(graph, to)
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(
-    R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.numeric(cutoff), mode
+  res <- with_igraph_opt(
+    list(return.vs.es = FALSE),
+    get_all_simple_paths_impl(
+      graph = graph,
+      from = from,
+      to = to,
+      cutoff = cutoff,
+      mode = mode
+    )
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -153,29 +159,39 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @family cycles
 #' @family structural.properties
 #' @export
-is_dag <- is_dag_impl
+#' @cdocs igraph_is_dag
+is_dag <- function(graph) {
+  is_dag_impl(
+    graph = graph
+  )
+}
 
 #' Acyclic graphs
 #'
 #' This function tests whether the given graph is free of cycles.
 #'
 #' This function looks for directed cycles in directed graphs and undirected
-#' cycles in undirected graphs.
+#' cycles in undirected graphs. Use [find_cycle()] to return a specific cycle.
 #'
 #' @param graph The input graph.
 #' @return A logical vector of length one.
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 #' is_acyclic(g)
-#' is_acyclic(as.undirected(g))
+#' is_acyclic(as_undirected(g))
 #' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
 #' and directed graphs.
 #' @family cycles
 #' @family structural.properties
 #' @export
-is_acyclic <- is_acyclic_impl
+#' @cdocs igraph_is_acyclic
+is_acyclic <- function(graph) {
+  is_acyclic_impl(
+    graph = graph
+  )
+}
 
 #' Maximum cardinality search
 #'
@@ -192,12 +208,18 @@ is_acyclic <- is_acyclic_impl
 #' @aliases max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
-#' @return A list with two components: \item{alpha}{Numeric vector. The
-#'   1-based rank of each vertex in the graph such that the vertex with rank 1
-#'   is visited first, the vertex with rank 2 is visited second and so on.}
-#'   \item{alpham1}{Numeric vector. The inverse of `alpha`. In other words,
-#'   the elements of this vector are the vertices in reverse maximum cardinality
-#'   search order.}
+#' @return A list with two components:
+#'   \describe{
+#'     \item{alpha}{
+#'       Numeric vector. The 1-based rank of each vertex in the graph
+#'       such that the vertex with rank 1 is visited first,
+#'       the vertex with rank 2 is visited second and so on.
+#'     }
+#'     \item{alpham1}{
+#'       Numeric vector. The inverse of `alpha`.
+#'       In other words, the elements of this vector are the vertices in reverse maximum cardinality search order.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [is_chordal()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
@@ -225,7 +247,12 @@ is_acyclic <- is_acyclic_impl
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
-max_cardinality <- maximum_cardinality_search_impl
+#' @cdocs igraph_maximum_cardinality_search
+max_cardinality <- function(graph) {
+  maximum_cardinality_search_impl(
+    graph = graph
+  )
+}
 
 
 #' Eccentricity of the vertices in a graph
@@ -255,8 +282,15 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
-    if (...length() > 0) {
+#' @cdocs igraph_eccentricity_dijkstra
+eccentricity <- function(
+  graph,
+  vids = V(graph),
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
+  if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
       "eccentricity(... =)",
@@ -272,7 +306,12 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
     }
   }
 
-  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+  eccentricity_dijkstra_impl(
+    graph = graph,
+    vids = vids,
+    weights = weights,
+    mode = mode
+  )
 }
 
 
@@ -303,7 +342,13 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
 #' radius(g)
 #' @family paths
 #' @export
-radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+#' @cdocs igraph_radius_dijkstra
+radius <- function(
+  graph,
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
@@ -320,7 +365,11 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
     }
   }
 
-  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+  radius_dijkstra_impl(
+    graph = graph,
+    weights = weights,
+    mode = mode
+  )
 }
 
 #' Central vertices of a graph
@@ -349,10 +398,28 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
 #' graph_center(ring)
 #'
 #' @export
-graph_center <- graph_center_dijkstra_impl
+#' @cdocs igraph_graph_center_dijkstra
+graph_center <- function(
+  graph,
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
+  graph_center_dijkstra_impl(
+    graph = graph,
+    weights = weights,
+    mode = mode
+  )
+}
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-distance_table <- path_length_hist_impl
+#' @cdocs igraph_path_length_hist
+distance_table <- function(graph, directed = TRUE) {
+  path_length_hist_impl(
+    graph = graph,
+    directed = directed
+  )
+}

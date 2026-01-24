@@ -1,4 +1,3 @@
-
 #   IGraph R package
 #   Copyright (C) 2014  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -21,5 +20,5 @@
 ###################################################################
 
 get.all.simple.paths.pp <- function(vect) {
-  .Call(R_igraph_get_all_simple_paths_pp, vect)
+  .Call(Rx_igraph_get_all_simple_paths_pp, vect)
 }

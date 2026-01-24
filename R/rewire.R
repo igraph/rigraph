@@ -1,4 +1,3 @@
-
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -22,7 +21,6 @@
 ##
 ## -----------------------------------------------------------------------
 
-
 #' Rewiring edges of a graph
 #'
 #' See the links below for the implemented rewiring methods.
@@ -42,7 +40,10 @@
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 rewire <- function(graph, with) {
   if (!is(with, "igraph_rewiring_method")) {
-    stop("'with' is not an igraph rewiring method")
+    cli::cli_abort(
+      "{.arg with} must be an igraph rewiring method,
+      not {.obj_type_friendly {with}}."
+    )
   }
   do_call(with$fun, list(graph), .args = with$args)
 }
@@ -82,13 +83,14 @@ keeping_degseq <- function(loops = FALSE, niter = 100) {
 }
 
 rewire_keeping_degseq <- function(graph, loops, niter) {
-  ensure_igraph(graph)
-
   loops <- as.logical(loops)
-  mode <- if (loops) 1 else 0
+  mode <- if (loops) "simple_loops" else "simple"
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
+  rewire_impl(
+    rewire = graph,
+    n = niter,
+    mode = mode
+  )
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex
@@ -126,17 +128,20 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' g <- sample_pa(1000)
 #' g2 <- g %>% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 #' degree(g, mode = "in") == degree(g2, mode = "in")
-each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+each_edge <- function(
+  prob,
+  loops = FALSE,
+  multiple = FALSE,
+  mode = c("all", "out", "in", "total")
+) {
+  mode <- igraph_match_arg(mode)
   multiple <- as.logical(multiple)
-  if (mode != 3) {
+  if (mode != "all" && mode != "total") {
     if (!multiple) {
-      stop("multiple = FALSE not supported when mode != \"all\"")
+      cli::cli_abort(
+        '{.code multiple = FALSE} is not supported
+         when {.code mode != "all"}'
+      )
     }
     method <- list(
       fun = rewire_each_directed_edge,
@@ -152,21 +157,19 @@ each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "ou
 }
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
-    as.logical(multiple)
+  rewire_edges_impl(
+    graph = graph,
+    prob = prob,
+    loops = loops,
+    multiple = multiple
   )
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
-    as.numeric(mode)
+  rewire_directed_edges_impl(
+    graph = graph,
+    prob = prob,
+    loops = loops,
+    mode = mode
   )
 }

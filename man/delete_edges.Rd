@@ -30,7 +30,7 @@ g <- make_ring(10) \%>\%
 g
 
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
 }
 \seealso{
@@ -55,6 +55,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}

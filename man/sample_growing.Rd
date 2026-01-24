@@ -7,14 +7,14 @@
 \usage{
 sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
-growing(...)
+growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 }
 \arguments{
 \item{n}{Numeric constant, number of vertices in the graph.}
 
 \item{m}{Numeric constant, number of edges added in each time step.}
 
-\item{...}{Passed to \code{sample_growing()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 
@@ -42,6 +42,7 @@ g2 <- sample_growing(500, citation = TRUE)
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
@@ -73,3 +74,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}.}
+

@@ -9,7 +9,8 @@ connect.neighborhood(graph, order, mode = c("all", "out", "in", "total"))
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{Integer giving the order of the neighborhood.}
+\item{order}{Integer giving the order of the neighborhood. Negative values
+indicate an infinite order.}
 
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
@@ -22,7 +23,7 @@ argument is ignored for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{connect.neighborhood()} was renamed to \code{connect()} to create a more
+\code{connect.neighborhood()} was renamed to \code{\link[=connect]{connect()}} to create a more
 consistent API.
 }
 \keyword{internal}

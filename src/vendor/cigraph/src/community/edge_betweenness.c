@@ -178,11 +178,11 @@ static igraph_error_t igraph_i_community_eb_get_merges2(const igraph_t *graph,
  * connected.
  *
  * \param graph The input graph.
+ * \param directed Whether to use the directed or undirected version
+ *    of modularity. Will be ignored for undirected graphs.
  * \param edges Vector containing the edges to be removed from the
  *    network, all edges are expected to appear exactly once in the
  *    vector.
- * \param directed Whether to use the directed or undirected version
- *    of modularity. Will be ignored for undirected graphs.
  * \param weights An optional vector containing edge weights. If null,
  *     the unweighted modularity scores will be calculated. If not null,
  *     the weighted modularity scores will be calculated. Ignored if both
@@ -198,7 +198,7 @@ static igraph_error_t igraph_i_community_eb_get_merges2(const igraph_t *graph,
  *    the number of vertices in the graph. So if the first line
  *    contains \c a and \c b that means that components \c a and \c b
  *    are merged into component \c n, the second line creates
- *    component <code>n+1</code>, etc. The matrix will be resized as needed.
+ *    component <code>n + 1</code>, etc. The matrix will be resized as needed.
  * \param bridges Pointer to an initialized vector of \c NULL. If not
  *     \c NULL then the indices into \p edges of all edges which caused
  *     one of the merges will be put here. This is equal to all edge removals
@@ -342,10 +342,7 @@ static igraph_integer_t igraph_i_vector_which_max_not_null(const igraph_vector_t
  * \brief Community finding based on edge betweenness.
  *
  * Community structure detection based on the betweenness of the edges
- * in the network. The algorithm was invented by M. Girvan and
- * M. Newman, see: M. Girvan and M. E. J. Newman: Community structure in
- * social and biological networks, Proc. Nat. Acad. Sci. USA 99, 7821-7826
- * (2002). https://doi.org/10.1073/pnas.122653799
+ * in the network, known as the Grivan-Newman algorithm.
  *
  * </para><para>
  * The idea is that the betweenness of the edges connecting two
@@ -363,6 +360,15 @@ static igraph_integer_t igraph_i_vector_which_max_not_null(const igraph_vector_t
  * of betweenness and modularity are used, however, only splits into
  * \em weakly connected components are detected.
  *
+ * </para><para>
+ * Reference:
+ *
+ * </para><para>
+ * M. Girvan and M. E. J. Newman:
+ * Community structure in social and biological networks.
+ * Proc. Nat. Acad. Sci. USA 99, 7821-7826 (2002).
+ * https://doi.org/10.1073/pnas.122653799
+ *
  * \param graph The input graph.
  * \param removed_edges Pointer to an initialized vector, the result will be
  *     stored here, the IDs of the removed edges in the order of their
@@ -375,8 +381,8 @@ static igraph_integer_t igraph_i_vector_which_max_not_null(const igraph_vector_t
  *     then merges performed by the algorithm are stored here. Even if
  *     this is a divisive algorithm, we can replay it backwards and
  *     note which two clusters were merged. Clusters are numbered from
- *     zero, see the \p merges argument of \ref igraph_community_walktrap()
- *     for details. The matrix will be resized as needed.
+ *     zero. See \ref igraph_community_to_membership() for details. The
+ *     matrix will be resized as needed.
  * \param bridges Pointer to an initialized vector of \c NULL. If not
  *     \c NULL then the indices into \p result of all edges which caused
  *     one of the \p merges will be put here. This is equivalent to all edge removals
@@ -387,7 +393,7 @@ static igraph_integer_t igraph_i_vector_which_max_not_null(const igraph_vector_t
  *     take weights into account if \p weights is not null.
  * \param membership If not a null pointer, then the membership vector,
  *     corresponding to the highest modularity value, is stored here.
- * \param directed Logical constant. Controls whether to calculate directed
+ * \param directed Boolean constant. Controls whether to calculate directed
  *    betweenness (i.e. directed paths) for directed graphs, and whether
  *    to use the directed version of modularity. It is ignored for undirected
  *    graphs.

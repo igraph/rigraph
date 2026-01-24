@@ -173,7 +173,12 @@ VERTEX_SELECTOR:
 
 BIPARTITE_TYPES:
     # A vector containing Booleans that define the two partitions of a
-    # bipartite graph
+    # bipartite graph, for a set of vertices
+    CTYPE: igraph_vector_bool_t
+    FLAGS: BY_REF
+
+ALL_BIPARTITE_TYPES:
+    # Same as BIPARTITE_TYPES, for all vertices of a graph
     CTYPE: igraph_vector_bool_t
     FLAGS: BY_REF
 
@@ -339,6 +344,11 @@ FAS_ALGORITHM:
     CTYPE: igraph_fas_algorithm_t
     FLAGS: ENUM
 
+FVS_ALGORITHM:
+    # Enum representing feedback vertex set algorithms
+    CTYPE: igraph_fvs_algorithm_t
+    FLAGS: ENUM
+
 FWALGORITHM:
     # Enum that describes the variant of the Floyd-Warshall algorithm to use in
     # Floyd-Warshall graph distances computing function
@@ -405,6 +415,11 @@ ORDER:
 PAGERANKALGO:
     # Enum that describes the various implementations of the PageRank algorithm
     CTYPE: igraph_pagerank_algo_t
+    FLAGS: ENUM
+
+GRAPH_PRODUCT_TYPE:
+    # Enum that describes the various implementations of the graph products
+    CTYPE: igraph_product_t
     FLAGS: ENUM
 
 RANDOM_TREE_METHOD:
@@ -527,9 +542,19 @@ ARPACKFUNC:
     CTYPE: igraph_arpack_function_t
 
 CLIQUE_FUNC:
-    # Callback function for igraph_cliques_callback(). called with every clique
+    # Callback function for igraph_cliques_callback(). Called with every clique
     # that was found by the function.
     CTYPE: igraph_clique_handler_t
+
+CYCLE_FUNC:
+    # Callback function for igraph_simple_cycles_callback(). Called with every
+    # cycle that was found by the function.
+    CTYPE: igraph_cycle_handler_t
+
+MOTIFS_HANDLER_FUNC:
+    # Callback function for igraph_motifs_randesu_callback(). Called with every
+    # motif that was found by the function.
+    CTYPE: igraph_motifs_handler_t
 
 BFS_FUNC:
     # Callback function for igraph_bfs(). Called with every vertex that was

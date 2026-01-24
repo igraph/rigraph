@@ -1,16 +1,20 @@
-
 #' Vertex connectivity
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.disjoint.paths()` was renamed to `vertex_disjoint_paths()` to create a more
+#' `vertex.disjoint.paths()` was renamed to [vertex_disjoint_paths()] to create a more
 #' consistent API.
 #' @inheritParams vertex_disjoint_paths
 #' @keywords internal
 #' @export
-vertex.disjoint.paths <- function(graph, source = NULL, target = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "vertex.disjoint.paths()", "vertex_disjoint_paths()")
+vertex.disjoint.paths <- function(graph, source = NULL, target = NULL) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "vertex.disjoint.paths()",
+    "vertex_disjoint_paths()"
+  )
   vertex_disjoint_paths(graph = graph, source = source, target = target)
 } # nocov end
 
@@ -19,14 +23,29 @@ vertex.disjoint.paths <- function(graph, source = NULL, target = NULL) { # nocov
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.connectivity()` was renamed to `vertex_connectivity()` to create a more
+#' `vertex.connectivity()` was renamed to [vertex_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams vertex_connectivity
 #' @keywords internal
 #' @export
-vertex.connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "vertex.connectivity()", "vertex_connectivity()")
-  vertex_connectivity(graph = graph, source = source, target = target, checks = checks)
+vertex.connectivity <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  checks = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "vertex.connectivity()",
+    "vertex_connectivity()"
+  )
+  vertex_connectivity(
+    graph = graph,
+    source = source,
+    target = target,
+    checks = checks
+  )
 } # nocov end
 
 #' List all minimum \((s,t)\)-cuts of a graph
@@ -34,14 +53,20 @@ vertex.connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `stMincuts()` was renamed to `st_min_cuts()` to create a more
+#' `stMincuts()` was renamed to [st_min_cuts()] to create a more
 #' consistent API.
 #' @inheritParams st_min_cuts
 #' @keywords internal
 #' @export
-stMincuts <- function(graph, source, target, capacity = NULL) { # nocov start
+stMincuts <- function(graph, source, target, capacity = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "stMincuts()", "st_min_cuts()")
-  st_min_cuts(graph = graph, source = source, target = target, capacity = capacity)
+  st_min_cuts(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
+  )
 } # nocov end
 
 #' List all (s,t)-cuts of a graph
@@ -49,12 +74,13 @@ stMincuts <- function(graph, source, target, capacity = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `stCuts()` was renamed to `st_cuts()` to create a more
+#' `stCuts()` was renamed to [st_cuts()] to create a more
 #' consistent API.
 #' @inheritParams st_cuts
 #' @keywords internal
 #' @export
-stCuts <- function(graph, source, target) { # nocov start
+stCuts <- function(graph, source, target) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "stCuts()", "st_cuts()")
   st_cuts(graph = graph, source = source, target = target)
 } # nocov end
@@ -64,13 +90,18 @@ stCuts <- function(graph, source, target) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimum.size.separators()` was renamed to `min_separators()` to create a more
+#' `minimum.size.separators()` was renamed to [min_separators()] to create a more
 #' consistent API.
 #' @inheritParams min_separators
 #' @keywords internal
 #' @export
-minimum.size.separators <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "minimum.size.separators()", "min_separators()")
+minimum.size.separators <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "minimum.size.separators()",
+    "min_separators()"
+  )
   min_separators(graph = graph)
 } # nocov end
 
@@ -79,13 +110,18 @@ minimum.size.separators <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimal.st.separators()` was renamed to `min_st_separators()` to create a more
+#' `minimal.st.separators()` was renamed to [min_st_separators()] to create a more
 #' consistent API.
 #' @inheritParams min_st_separators
 #' @keywords internal
 #' @export
-minimal.st.separators <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "minimal.st.separators()", "min_st_separators()")
+minimal.st.separators <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "minimal.st.separators()",
+    "min_st_separators()"
+  )
   min_st_separators(graph = graph)
 } # nocov end
 
@@ -94,12 +130,13 @@ minimal.st.separators <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.separator()` was renamed to `is_separator()` to create a more
+#' `is.separator()` was renamed to [is_separator()] to create a more
 #' consistent API.
 #' @inheritParams is_separator
 #' @keywords internal
 #' @export
-is.separator <- function(graph, candidate) { # nocov start
+is.separator <- function(graph, candidate) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.separator()", "is_separator()")
   is_separator(graph = graph, candidate = candidate)
 } # nocov end
@@ -109,13 +146,18 @@ is.separator <- function(graph, candidate) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.minimal.separator()` was renamed to `is_min_separator()` to create a more
+#' `is.minimal.separator()` was renamed to [is_min_separator()] to create a more
 #' consistent API.
 #' @inheritParams is_min_separator
 #' @keywords internal
 #' @export
-is.minimal.separator <- function(graph, candidate) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.minimal.separator()", "is_min_separator()")
+is.minimal.separator <- function(graph, candidate) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "is.minimal.separator()",
+    "is_min_separator()"
+  )
   is_min_separator(graph = graph, candidate = candidate)
 } # nocov end
 
@@ -124,14 +166,27 @@ is.minimal.separator <- function(graph, candidate) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.mincut()` was renamed to `min_cut()` to create a more
+#' `graph.mincut()` was renamed to [min_cut()] to create a more
 #' consistent API.
 #' @inheritParams min_cut
 #' @keywords internal
 #' @export
-graph.mincut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.only = TRUE) { # nocov start
+graph.mincut <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  capacity = NULL,
+  value.only = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.mincut()", "min_cut()")
-  min_cut(graph = graph, source = source, target = target, capacity = capacity, value.only = value.only)
+  min_cut(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity,
+    value.only = value.only
+  )
 } # nocov end
 
 #' Maximum flow in a graph
@@ -139,12 +194,13 @@ graph.mincut <- function(graph, source = NULL, target = NULL, capacity = NULL, v
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.maxflow()` was renamed to `max_flow()` to create a more
+#' `graph.maxflow()` was renamed to [max_flow()] to create a more
 #' consistent API.
 #' @inheritParams max_flow
 #' @keywords internal
 #' @export
-graph.maxflow <- function(graph, source, target, capacity = NULL) { # nocov start
+graph.maxflow <- function(graph, source, target, capacity = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.maxflow()", "max_flow()")
   max_flow(graph = graph, source = source, target = target, capacity = capacity)
 } # nocov end
@@ -154,12 +210,13 @@ graph.maxflow <- function(graph, source, target, capacity = NULL) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adhesion()` was renamed to `adhesion()` to create a more
+#' `graph.adhesion()` was renamed to [adhesion()] to create a more
 #' consistent API.
 #' @inheritParams adhesion
 #' @keywords internal
 #' @export
-graph.adhesion <- function(graph, checks = TRUE) { # nocov start
+graph.adhesion <- function(graph, checks = TRUE) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.adhesion()", "adhesion()")
   adhesion(graph = graph, checks = checks)
 } # nocov end
@@ -169,14 +226,29 @@ graph.adhesion <- function(graph, checks = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.disjoint.paths()` was renamed to `edge_connectivity()` to create a more
+#' `edge.disjoint.paths()` was renamed to [edge_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams edge_connectivity
 #' @keywords internal
 #' @export
-edge.disjoint.paths <- function(graph, source = NULL, target = NULL, checks = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "edge.disjoint.paths()", "edge_connectivity()")
-  edge_connectivity(graph = graph, source = source, target = target, checks = checks)
+edge.disjoint.paths <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  checks = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "edge.disjoint.paths()",
+    "edge_connectivity()"
+  )
+  edge_connectivity(
+    graph = graph,
+    source = source,
+    target = target,
+    checks = checks
+  )
 } # nocov end
 
 #' Edge connectivity
@@ -184,14 +256,29 @@ edge.disjoint.paths <- function(graph, source = NULL, target = NULL, checks = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.connectivity()` was renamed to `edge_connectivity()` to create a more
+#' `edge.connectivity()` was renamed to [edge_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams edge_connectivity
 #' @keywords internal
 #' @export
-edge.connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "edge.connectivity()", "edge_connectivity()")
-  edge_connectivity(graph = graph, source = source, target = target, checks = checks)
+edge.connectivity <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  checks = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "edge.connectivity()",
+    "edge_connectivity()"
+  )
+  edge_connectivity(
+    graph = graph,
+    source = source,
+    target = target,
+    checks = checks
+  )
 } # nocov end
 
 #' Dominator tree
@@ -199,12 +286,13 @@ edge.connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `dominator.tree()` was renamed to `dominator_tree()` to create a more
+#' `dominator.tree()` was renamed to [dominator_tree()] to create a more
 #' consistent API.
 #' @inheritParams dominator_tree
 #' @keywords internal
 #' @export
-dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) { # nocov start
+dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "dominator.tree()", "dominator_tree()")
   dominator_tree(graph = graph, root = root, mode = mode)
 } # nocov end
@@ -263,16 +351,26 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @return For `min_cut()` a nuieric constant, the value of the minimum
 #'   cut, except if `value.only = FALSE`. In this case a named list with
 #'   components:
-#'   \item{value}{Numeric scalar, the cut value.}
-#'   \item{cut}{Numeric vector, the edges in the cut.}
-#'   \item{partition1}{The vertices in the first partition after the cut
-#'     edges are removed. Note that these vertices might be actually in
-#'     different components (after the cut edges are removed), as the graph
-#'     may fall apart into more than two components.}
-#'   \item{partition2}{The vertices in the second partition
-#'     after the cut edges are removed. Note that these vertices might be
-#'     actually in different components (after the cut edges are removed), as
-#'     the graph may fall apart into more than two components.}
+#'   \describe{
+#'     \item{value}{
+#'       Numeric scalar, the cut value.
+#'     }
+#'     \item{cut}{
+#'       Numeric vector, the edges in the cut.
+#'     }
+#'     \item{partition1}{
+#'       The vertices in the first partition after the cut edges are removed.
+#'       Note that these vertices might be actually in different components
+#'       (after the cut edges are removed),
+#'       as the graph may fall apart into more than two components.
+#'     }
+#'     \item{partition2}{
+#'       The vertices in the second partition after the cut edges are removed.
+#'       Note that these vertices might be actually in different components
+#'       (after the cut edges are removed),
+#'       as the graph may fall apart into more than two components.
+#'     }
+#'   }
 #' @references M. Stoer and F. Wagner: A simple min-cut algorithm,
 #' *Journal of the ACM*, 44 585-591, 1997.
 #' @examples
@@ -285,70 +383,59 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' min_cut(g2, value.only = FALSE)
 #' @family flow
 #' @export
-min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.only = TRUE) {
+min_cut <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  capacity = NULL,
+  value.only = TRUE
+) {
   ensure_igraph(graph)
-  if (is.null(capacity)) {
-    if ("capacity" %in% edge_attr_names(graph)) {
-      capacity <- E(graph)$capacity
-    }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
   }
-  if (length(source) == 0) {
-    source <- NULL
+
+  if (xor(is.null(source), is.null(target))) {
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-  if (is.null(source) && !is.null(target) ||
-    is.null(target) && !is.null(source)) {
-    stop("Please give both source and target or neither")
-  }
+
   if (!is.null(capacity)) {
     capacity <- as.numeric(capacity)
   }
 
   value.only <- as.logical(value.only)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
+
   if (is.null(target) && is.null(source)) {
     if (value.only) {
-      res <- .Call(R_igraph_mincut_value, graph, capacity)
+      res <- mincut_value_impl(graph = graph, capacity = capacity)
     } else {
-      res <- .Call(R_igraph_mincut, graph, capacity)
-      res$cut <- res$cut + 1
-      res$partition1 <- res$partition1 + 1
-      res$partition2 <- res$partition2 + 1
-
-      if (igraph_opt("return.vs.es")) {
-        res$cut <- create_es(graph, res$cut)
-        res$partition1 <- create_vs(graph, res$partition1)
-        res$partition2 <- create_vs(graph, res$partition2)
-      }
+      res <- mincut_impl(graph = graph, capacity = capacity)
     }
   } else {
     if (value.only) {
       res <- .Call(
-        R_igraph_st_mincut_value, graph,
+        Rx_igraph_st_mincut_value,
+        graph,
         as_igraph_vs(graph, source) - 1,
-        as_igraph_vs(graph, target) - 1, capacity
+        as_igraph_vs(graph, target) - 1,
+        capacity
       )
     } else {
-      res <- .Call(
-        R_igraph_st_mincut, graph,
-        as_igraph_vs(graph, source) - 1,
-        as_igraph_vs(graph, target) - 1, capacity
+      res <- st_mincut_impl(
+        graph = graph,
+        source = source,
+        target = target,
+        capacity = capacity
       )
-      # No need to add +1 here; R_igraph_st_mincut() is autogenerated and
-      # adds +1 already
-      if (igraph_opt("return.vs.es")) {
-        res$cut <- create_es(graph, res$cut)
-        res$partition1 <- create_vs(graph, res$partition1)
-        res$partition2 <- create_vs(graph, res$partition2)
-      }
     }
   }
 
   res
 }
-
 
 
 #' Vertex connectivity
@@ -403,7 +490,8 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #'   perform these checks, as they can be done quickly compared to the
 #'   connectivity calculation itself.  They were suggested by Peter McMahan,
 #'   thanks Peter.
-#' @param ... Ignored.
+#' @param ... Additional arguments passed to methods. Not used by `vertex_connectivity()`
+#'   directly but may be used by other methods that implement `cohesion()`.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
@@ -423,34 +511,35 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' vertex_disjoint_paths(g2, 100, 1)
 #'
 #' g <- sample_gnp(50, 5 / 50)
-#' g <- as.directed(g)
+#' g <- as_directed(g)
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' cohesion(g)
 #'
-vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
+vertex_connectivity <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  checks = TRUE
+) {
   ensure_igraph(graph)
 
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_vertex_connectivity, graph, as.logical(checks))
+    vertex_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
-      R_igraph_st_vertex_connectivity, graph, as_igraph_vs(graph, source) - 1,
+      Rx_igraph_st_vertex_connectivity,
+      graph,
+      as_igraph_vs(graph, source) - 1,
       as_igraph_vs(graph, target) - 1
     )
   } else {
-    stop("either give both source and target or neither")
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
 }
-
 
 
 #' Edge connectivity
@@ -527,50 +616,49 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' edge_disjoint_paths(g2, 100, 1)
 #'
 #' g <- sample_gnp(50, 5 / 50)
-#' g <- as.directed(g)
+#' g <- as_directed(g)
 #' g <- induced_subgraph(g, subcomponent(g, 1))
 #' adhesion(g)
 #'
-edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
+edge_connectivity <- function(
+  graph,
+  source = NULL,
+  target = NULL,
+  checks = TRUE
+) {
   ensure_igraph(graph)
 
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_edge_connectivity, graph, as.logical(checks))
+    edge_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
-      R_igraph_st_edge_connectivity, graph,
-      as_igraph_vs(graph, source) - 1, as_igraph_vs(graph, target) - 1
+      Rx_igraph_st_edge_connectivity,
+      graph,
+      as_igraph_vs(graph, source) - 1,
+      as_igraph_vs(graph, target) - 1
     )
   } else {
-    stop("either give both source and target or neither")
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
 }
 
 #' @rdname edge_connectivity
 #' @export
-edge_disjoint_paths <- function(graph, source, target) {
+edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
-
-  if (length(source) == 0) {
-    source <- NULL
+  if (is.null(source) || is.null(target)) {
+    cli::cli_abort("Both source and target must be given")
   }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_edge_disjoint_paths, graph,
-    as_igraph_vs(graph, source) - 1, as_igraph_vs(graph, target) - 1
+    Rx_igraph_edge_disjoint_paths,
+    graph,
+    as_igraph_vs(graph, source) - 1,
+    as_igraph_vs(graph, target) - 1
   )
 }
 
@@ -578,17 +666,15 @@ edge_disjoint_paths <- function(graph, source, target) {
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
-
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
+  if (is.null(source) || is.null(target)) {
+    cli::cli_abort("Both source and target must be given")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_vertex_disjoint_paths, graph, as_igraph_vs(graph, source) - 1,
+    Rx_igraph_vertex_disjoint_paths,
+    graph,
+    as_igraph_vs(graph, source) - 1,
     as_igraph_vs(graph, target) - 1
   )
 }
@@ -596,20 +682,20 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 #' @rdname edge_connectivity
 #' @export
 adhesion <- function(graph, checks = TRUE) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_adhesion, graph, as.logical(checks))
+  adhesion_impl(
+    graph = graph,
+    checks = checks
+  )
 }
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
-  ensure_igraph(x)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_cohesion, x, as.logical(checks))
+  cohesion_impl(
+    graph = x,
+    checks = checks
+  )
 }
 
 #' List all (s,t)-cuts of a graph
@@ -624,13 +710,19 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @param graph The input graph. It must be directed.
 #' @param source The source vertex.
 #' @param target The target vertex.
-#' @return A list with entries: \item{cuts}{A list of numeric vectors
-#'   containing edge ids. Each vector is an \eqn{(s,t)}-cut.}
-#'   \item{partition1s}{A list of numeric vectors containing vertex ids, they
-#'   correspond to the edge cuts. Each vertex set is a generator of the
-#'   corresponding cut, i.e. in the graph \eqn{G=(V,E)}, the vertex set \eqn{X}
-#'   and its complementer \eqn{V-X}, generates the cut that contains exactly the
-#'   edges that go from \eqn{X} to \eqn{V-X}.}
+#' @return A list with entries:
+#'   \describe{
+#'     \item{cuts}{
+#'       A list of numeric vectors containing edge ids.
+#'       Each vector is an \eqn{(s,t)}-cut.
+#'     }
+#'     \item{partition1s}{
+#'       A list of numeric vectors containing vertex ids, they correspond to the edge cuts.
+#'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+#'       the vertex set \eqn{X} and its complementer \eqn{V-X},
+#'       generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
@@ -649,7 +741,14 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
 #' @export
-st_cuts <- all_st_cuts_impl
+#' @cdocs igraph_all_st_cuts
+st_cuts <- function(graph, source, target) {
+  all_st_cuts_impl(
+    graph = graph,
+    source = source,
+    target = target
+  )
+}
 
 
 #' List all minimum \eqn{(s,t)}-cuts of a graph
@@ -676,14 +775,22 @@ st_cuts <- all_st_cuts_impl
 #'   attribute defines the edge capacities. For forcing unit edge capacities,
 #'   even for graphs that have a `weight` edge attribute, supply `NA`
 #'   here.
-#' @return A list with entries: \item{value}{Numeric scalar, the size of the
-#'   minimum cut(s).} \item{cuts}{A list of numeric vectors containing edge ids.
-#'   Each vector is a minimum \eqn{(s,t)}-cut.} \item{partition1s}{A list of
-#'   numeric vectors containing vertex ids, they correspond to the edge cuts.
-#'   Each vertex set is a generator of the corresponding cut, i.e. in the graph
-#'   \eqn{G=(V,E)}, the vertex set \eqn{X} and its complementer \eqn{V-X},
-#'   generates the cut that contains exactly the edges that go from \eqn{X} to
-#'   \eqn{V-X}.}
+#' @return A list with entries:
+#'   \describe{
+#'     \item{value}{
+#'       Numeric scalar, the size of the minimum cut(s).
+#'     }
+#'     \item{cuts}{
+#'       A list of numeric vectors containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.
+#'     }
+#'     \item{partition1s}{
+#'       A list of numeric vectors containing vertex ids,
+#'       they correspond to the edge cuts.
+#'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+#'       the vertex set \eqn{X} and its complementer \eqn{V-X},
+#'       generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
@@ -698,7 +805,15 @@ st_cuts <- all_st_cuts_impl
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
 #' @export
-st_min_cuts <- all_st_mincuts_impl
+#' @cdocs igraph_all_st_mincuts
+st_min_cuts <- function(graph, source, target, capacity = NULL) {
+  all_st_mincuts_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
+  )
+}
 
 
 #' Dominator tree
@@ -728,13 +843,22 @@ st_min_cuts <- all_st_mincuts_impl
 #' @param mode Constant, must be \sQuote{`in`} or \sQuote{`out`}. If
 #'   it is \sQuote{`in`}, then all directions are considered as opposite to
 #'   the original one in the input graph.
-#' @return A list with components: \item{dom}{ A numeric vector giving the
-#'   immediate dominators for each vertex. For vertices that are unreachable from
-#'   the root, it contains `NaN`. For the root vertex itself it contains
-#'   minus one.  } \item{domtree}{ A graph object, the dominator tree. Its vertex
-#'   ids are the as the vertex ids of the input graph. Isolate vertices are the
-#'   ones that are unreachable from the root.  } \item{leftout}{ A numeric vector
-#'   containing the vertex ids that are unreachable from the root.  }
+#' @return A list with components:
+#'   \describe{
+#'     \item{dom}{
+#'       A numeric vector giving the immediate dominators for each vertex.
+#'       For vertices that are unreachable from the root, it contains `NaN`.
+#'       For the root vertex itself it contains minus one.
+#'     }
+#'     \item{domtree}{
+#'       A graph object, the dominator tree.
+#'       Its vertex ids are the as the vertex ids of the input graph.
+#'       Isolate vertices are the ones that are unreachable from the root.
+#'     }
+#'     \item{leftout}{
+#'       A numeric vector containing the vertex ids that are unreachable from the root.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Thomas Lengauer, Robert Endre Tarjan: A fast algorithm for
 #' finding dominators in a flowgraph, *ACM Transactions on Programming
@@ -756,21 +880,21 @@ st_min_cuts <- all_st_mincuts_impl
 #' @export
 dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # Argument checks
- ensure_igraph(graph)
-  root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  if (missing(root) || is.null(root)) {
+    cli::cli_abort("{.arg root} must be specified.")
+  }
+  root <- as_igraph_vs(graph, root)
+
+  mode <- igraph_match_arg(mode)
+
   # Function call
-  res <- .Call(R_igraph_dominator_tree, graph, root - 1, mode)
+  res <- dominator_tree_impl(
+    graph = graph,
+    root = root,
+    mode = mode
+  )
   if (igraph_opt("return.vs.es")) {
     res$leftout <- create_vs(graph, res$leftout)
   }
@@ -830,7 +954,12 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' min_st_separators(g)
 #' ```
 #' @family flow
-min_st_separators <- all_minimal_st_separators_impl
+#' @cdocs igraph_all_minimal_st_separators
+min_st_separators <- function(graph) {
+  all_minimal_st_separators_impl(
+    graph = graph
+  )
+}
 
 
 #' Maximum flow in a graph
@@ -855,30 +984,38 @@ min_st_separators <- all_minimal_st_separators_impl
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
 #'   Note that the `weight` edge attribute is not used by this function.
 #' @return A named list with components:
-#'   \item{value}{A numeric scalar, the value of the maximum flow.}
-#'   \item{flow}{A numeric vector, the flow itself, one entry for each
-#'     edge. For undirected graphs this entry is bit trickier, since for
-#'     these the flow direction is not predetermined by the edge
-#'     direction. For these graphs the elements of the this vector can be
-#'     negative, this means that the flow goes from the bigger vertex id to
-#'     the smaller one. Positive values mean that the flow goes from
-#'     the smaller vertex id to the bigger one.}
-#'   \item{cut}{A numeric vector of edge ids, the minimum cut corresponding
-#'     to the maximum flow.}
-#'   \item{partition1}{A numeric vector of vertex ids, the vertices in the
-#'     first partition of the minimum cut corresponding to the maximum
-#'     flow.}
-#'   \item{partition2}{A numeric vector of vertex ids, the vertices in the
-#'     second partition of the minimum cut corresponding to the maximum
-#'     flow.}
-#'   \item{stats}{A list with some statistics from the push-relabel
-#'     algorithm. Five integer values currently: `nopush` is the
-#'     number of push operations, `norelabel` the number of
-#'     relabelings, `nogap` is the number of times the gap heuristics
-#'     was used, `nogapnodes` is the total number of gap nodes omitted
-#'     because of the gap heuristics and `nobfs` is the number of
-#'     times a global breadth-first-search update was performed to assign
-#'     better height (=distance) values to the vertices.}
+#'   \describe{
+#'     \item{value}{
+#'       A numeric scalar, the value of the maximum flow.
+#'     }
+#'     \item{flow}{
+#'       A numeric vector, the flow itself, one entry for each edge.
+#'       For undirected graphs this entry is bit trickier,
+#'       since for these the flow direction is not predetermined by the edge direction.
+#'       For these graphs the elements of the this vector can be negative,
+#'       this means that the flow goes from the bigger vertex id to the smaller one.
+#'       Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+#'     }
+#'     \item{cut}{
+#'       A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{partition1}{
+#'       A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{partition2}{
+#'       A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{stats}{
+#'       A list with some statistics from the push-relabel algorithm.
+#'       Five integer values currently:
+#'       `nopush` is the number of push operations,
+#'       `norelabel` the number of relabelings,
+#'       `nogap` is the number of times the gap heuristics was used,
+#'       `nogapnodes` is the total number of gap nodes omitted because of the gap heuristics and
+#'       `nobfs` is the number of times a global breadth-first-search update was performed
+#'       to assign better height (=distance) values to the vertices.
+#'     }
+#'   }
 #' @references A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 #' Flow Problem *Journal of the ACM* 35:921-940, 1988.
 #' @examples
@@ -889,16 +1026,24 @@ min_st_separators <- all_minimal_st_separators_impl
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #' @family flow
 #' @export
-max_flow <- maxflow_impl
+#' @cdocs igraph_maxflow
+max_flow <- function(graph, source, target, capacity = NULL) {
+  maxflow_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
+  )
+}
 
 
-#' Vertex separators
+#' Check whether removing this set of vertices would disconnect the graph.
 #'
-#' Check whether a given set of vertices is a vertex separator.
-#'
-#' `is_separator()` decides whether the supplied vertex set is a vertex
-#' separator. A vertex set is a vertex separator if its removal results a
-#' disconnected graph.
+#' `is_separator()` determines whether the supplied vertex set is a vertex
+#' separator:
+#' A vertex set \eqn{S} is a separator if there are vertices \eqn{u} and \eqn{v}
+#' in the graph such that all paths between \eqn{u} and \eqn{v} pass
+#' through some vertices in \eqn{S}.
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
@@ -908,8 +1053,22 @@ max_flow <- maxflow_impl
 #'   vertex separator or not.
 #'   lists all vertex separator of minimum size.
 #' @family flow
+#' @examples
+#' ring <- make_ring(4)
+#' min_st_separators(ring)
+#' is_separator(ring, 1)
+#' is_separator(ring, c(1, 3))
+#' is_separator(ring, c(2, 4))
+#' is_separator(ring, c(2, 3))
+#'
 #' @export
-is_separator <- is_separator_impl
+#' @cdocs igraph_is_separator
+is_separator <- function(graph, candidate) {
+  is_separator_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}
 
 
 #' Minimal vertex separators
@@ -957,7 +1116,13 @@ is_separator <- is_separator_impl
 #'
 #' @family flow
 #' @export
-is_min_separator <- is_minimal_separator_impl
+#' @cdocs igraph_is_minimal_separator
+is_min_separator <- function(graph, candidate) {
+  is_minimal_separator_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}
 
 
 #' Minimum size vertex separators
@@ -1027,4 +1192,9 @@ is_min_separator <- is_minimal_separator_impl
 #'   John - Gery:Russ:Michael
 #' )
 #' min_separators(camp)
-min_separators <- minimum_size_separators_impl
+#' @cdocs igraph_minimum_size_separators
+min_separators <- function(graph) {
+  minimum_size_separators_impl(
+    graph = graph
+  )
+}

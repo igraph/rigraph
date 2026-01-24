@@ -22,7 +22,7 @@ sum up to one; otherwise it is the columns.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.stochastic()} was renamed to \code{stochastic_matrix()} to create a more
+\code{get.stochastic()} was renamed to \code{\link[=stochastic_matrix]{stochastic_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -52,8 +52,16 @@ the energy function.}
 \item{...}{Passed to \code{layout_with_dh()}.}
 }
 \value{
-A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the ids of the vertex ids.
+A matrix with two columns, containing the x and y coordinates
+of the vertices:
+\describe{
+\item{x}{
+The x-coordinate of the vertex.
+}
+\item{y}{
+The y-coordinate of the vertex.
+}
+}
 }
 \description{
 Place vertices of a graph on the plane, according to the simulated annealing
@@ -102,7 +110,7 @@ plot(g_5b, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 g_6 <- make_lattice(c(2, 2, 2))
 plot(g_6, layout = layout_with_dh)
 
-g_7 <- graph_from_literal(1:3:5 -- 2:4:6)
+g_7 <- graph_from_literal(1:3:5 - -2:4:6)
 plot(g_7, layout = layout_with_dh, vertex.label = V(g_7)$name)
 
 g_8 <- make_ring(5) + make_ring(10) + make_ring(5) +

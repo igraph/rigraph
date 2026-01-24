@@ -9,17 +9,20 @@
 \alias{.to}
 \title{Helpers within vertex/index sequences}
 \usage{
-.nei()
+.nei(...)
 
-.innei()
+.innei(...)
 
-.outnei()
+.outnei(...)
 
-.inc()
+.inc(...)
 
-.from()
+.from(...)
 
-.to()
+.to(...)
+}
+\arguments{
+\item{...}{Not used, here for compatibility.}
 }
 \value{
 An error

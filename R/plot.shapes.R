@@ -1,15 +1,15 @@
-
 #' Various vertex shapes when plotting igraph graphs
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noplot()` was renamed to `shape_noplot()` to create a more
+#' `igraph.shape.noplot()` was renamed to [shape_noplot()] to create a more
 #' consistent API.
 #' @inheritParams shape_noplot
 #' @keywords internal
 #' @export
-igraph.shape.noplot <- function(coords, v = NULL, params) { # nocov start
+igraph.shape.noplot <- function(coords, v = NULL, params) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.shape.noplot()", "shape_noplot()")
   shape_noplot(coords = coords, v = v, params = params)
 } # nocov end
@@ -19,12 +19,18 @@ igraph.shape.noplot <- function(coords, v = NULL, params) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noclip()` was renamed to `shape_noclip()` to create a more
+#' `igraph.shape.noclip()` was renamed to [shape_noclip()] to create a more
 #' consistent API.
 #' @inheritParams shape_noclip
 #' @keywords internal
 #' @export
-igraph.shape.noclip <- function(coords, el, params, end = c("both", "from", "to")) { # nocov start
+igraph.shape.noclip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.shape.noclip()", "shape_noclip()")
   shape_noclip(coords = coords, el = el, params = params, end = end)
 } # nocov end
@@ -34,12 +40,13 @@ igraph.shape.noclip <- function(coords, el, params, end = c("both", "from", "to"
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.shapes()` was renamed to `shapes()` to create a more
+#' `vertex.shapes()` was renamed to [shapes()] to create a more
 #' consistent API.
 #' @inheritParams shapes
 #' @keywords internal
 #' @export
-vertex.shapes <- function(shape = NULL) { # nocov start
+vertex.shapes <- function(shape = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "vertex.shapes()", "shapes()")
   shapes(shape = shape)
 } # nocov end
@@ -49,12 +56,18 @@ vertex.shapes <- function(shape = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.vertex.shape()` was renamed to `add_shape()` to create a more
+#' `add.vertex.shape()` was renamed to [add_shape()] to create a more
 #' consistent API.
 #' @inheritParams add_shape
 #' @keywords internal
 #' @export
-add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, parameters = list()) { # nocov start
+add.vertex.shape <- function(
+  shape,
+  clip = shape_noclip,
+  plot = shape_noplot,
+  parameters = list()
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "add.vertex.shape()", "add_shape()")
   add_shape(shape = shape, clip = clip, plot = plot, parameters = parameters)
 } # nocov end
@@ -148,29 +161,28 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'
 #' The clipping function has the following arguments:
 #' \describe{
-#'   \item{coords}{A matrix with four columns, it contains the
-#'     coordinates of the vertices for the edge list supplied in the
-#'     `el` argument.}
-#'   \item{el}{A matrix with two columns, the edges of which some end
-#'     points will be clipped. It should have the same number of rows as
-#'     `coords`.}
-#'   \item{params}{This is a function object that can be called to query
-#'     vertex/edge/plot graphical parameters. The first argument of the
-#'     function is \dQuote{`vertex`}, \dQuote{`edge`} or
-#'     \dQuote{`plot`} to decide the type of the parameter, the
-#'     second is a character string giving the name of the
-#'     parameter. E.g.
-#'     \preformatted{
-#' 	params("vertex", "size")
+#'     \item{coords}{
+#'       A matrix with four columns, it contains the coordinates of the vertices
+#'       for the edge list supplied in the `el` argument.
+#'     }
+#'     \item{el}{
+#'       A matrix with two columns, the edges of which some end points will be clipped.
+#'       It should have the same number of rows as `coords`.
+#'     }
+#'     \item{params}{
+#'       This is a function object that can be called to query vertex/edge/plot graphical parameters.
+#'       The first argument of the function is \dQuote{`vertex`}, \dQuote{`edge`} or \dQuote{`plot`}
+#'       to decide the type of the parameter,
+#'       the second is a character string giving the name of the parameter.
+#'       E.g. `params("vertex", "size")`.
+#'     }
+#'     \item{end}{
+#'       Character string, it gives which end points will be used.
+#'       Possible values are \dQuote{`both`}, \dQuote{`from`} and \dQuote{`to`}.
+#'       If \dQuote{`from`} the function is expected to clip the first column in the `el` edge list,
+#'       \dQuote{`to`} selects the second column, \dQuote{`both`} selects both.
 #'     }
 #'   }
-#'   \item{end}{Character string, it gives which end points will be
-#'     used. Possible values are \dQuote{`both`},
-#'     \dQuote{`from`} and \dQuote{`to`}. If
-#'     \dQuote{`from`} the function is expected to clip the
-#'     first column in the `el` edge list, \dQuote{`to`}
-#'     selects the second column, \dQuote{`both`} selects both.}
-#' }
 #'
 #' The clipping function should return a matrix
 #' with the same number of rows as the `el` arguments.
@@ -180,12 +192,16 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'
 #' The plotting function has the following arguments:
 #' \describe{
-#'   \item{coords}{The coordinates of the vertices, a matrix with two
-#'     columns.}
-#'   \item{v}{The ids of the vertices to plot. It should match the number
-#'     of rows in the `coords` argument.}
-#'   \item{params}{The same as for the clipping function, see above.}
-#' }
+#'     \item{coords}{
+#'       The coordinates of the vertices, a matrix with two columns.
+#'     }
+#'     \item{v}{
+#'       The ids of the vertices to plot. It should match the number of rows in the `coords` argument.
+#'     }
+#'     \item{params}{
+#'       The same as for the clipping function, see above.
+#'     }
+#'   }
 #'
 #' The return value of the plotting function is not used.
 #'
@@ -262,7 +278,7 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'   if (length(vertex.color) != 1 && !is.null(v)) {
 #'     vertex.color <- vertex.color[v]
 #'   }
-#'   vertex.size <- 1 / 200 * params("vertex", "size")
+#'   vertex.size <- params("vertex", "size")
 #'   if (length(vertex.size) != 1 && !is.null(v)) {
 #'     vertex.size <- vertex.size[v]
 #'   }
@@ -290,7 +306,7 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'   if (length(vertex.color) != 1 && !is.null(v)) {
 #'     vertex.color <- vertex.color[v]
 #'   }
-#'   vertex.size <- 1 / 200 * params("vertex", "size")
+#'   vertex.size <- params("vertex", "size")
 #'   if (length(vertex.size) != 1 && !is.null(v)) {
 #'     vertex.size <- vertex.size[v]
 #'   }
@@ -334,9 +350,8 @@ shapes <- function(shape = NULL) {
 
 #' @rdname shapes
 #' @export
-shape_noclip <- function(coords, el, params,
-                         end = c("both", "from", "to")) {
-  end <- igraph.match.arg(end)
+shape_noclip <- function(coords, el, params, end = c("both", "from", "to")) {
+  end <- igraph_match_arg(end)
 
   if (end == "both") {
     coords
@@ -355,31 +370,63 @@ shape_noplot <- function(coords, v = NULL, params) {
 
 #' @rdname shapes
 #' @export
-add_shape <- function(shape, clip = shape_noclip,
-                      plot = shape_noplot,
-                      parameters = list()) {
-  ## TODO
-  ## checkScalarString(shape)
-  ## checkFunction(clip)
-  ## checkFunction(plot)
-  ## checkList(parameters, named=TRUE)
+add_shape <- function(
+  shape,
+  clip = shape_noclip,
+  plot = shape_noplot,
+  parameters = list()
+) {
+  if (!is.character(shape) || length(shape) != 1) {
+    cli::cli_abort(c(
+      "{.arg shape} must be a character of length 1.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (!rlang::is_missing(clip) && !inherits(clip, "function")) {
+    cli::cli_abort(c(
+      "{.arg clip} must be a function.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (!rlang::is_missing(plot) && !inherits(plot, "function")) {
+    cli::cli_abort(c(
+      "{.arg plot} must be a function.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (
+    length(parameters) > 0 &&
+      (!inherits(parameters, "list") || !rlang::is_named(parameters))
+  ) {
+    cli::cli_abort(c(
+      "{.arg parameters} must be a named list.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
-  do.call(igraph.options, parameters)
+  do.call(igraph_options, parameters)
   invisible(TRUE)
 }
 
 ## These are the predefined shapes
-
-.igraph.shape.circle.clip <- function(coords, el, params,
-                                      end = c("both", "from", "to")) {
+#nocov start
+.igraph.shape.circle.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   if (end == "from") {
     phi <- atan2(coords[, 4] - coords[, 2], coords[, 3] - coords[, 1])
@@ -441,7 +488,8 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
+
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -453,50 +501,83 @@ add_shape <- function(shape, clip = shape_noclip,
 
   if (length(vertex.frame.width) == 1) {
     symbols(
-      x = coords[, 1], y = coords[, 2], bg = vertex.color, fg = vertex.frame.color,
-      circles = vertex.size, lwd = vertex.frame.width, add = TRUE, inches = FALSE
+      x = coords[, 1],
+      y = coords[, 2],
+      bg = vertex.color,
+      fg = vertex.frame.color,
+      circles = vertex.size,
+      lwd = vertex.frame.width,
+      add = TRUE,
+      inches = FALSE
     )
   } else {
-    mapply(coords[, 1], coords[, 2], vertex.color, vertex.frame.color,
-      vertex.size, vertex.frame.width,
+    mapply(
+      coords[, 1],
+      coords[, 2],
+      vertex.color,
+      vertex.frame.color,
+      vertex.size,
+      vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
         symbols(
-          x = x, y = y, bg = bg, fg = fg, lwd = lwd,
-          circles = size, add = TRUE, inches = FALSE
+          x = x,
+          y = y,
+          bg = bg,
+          fg = fg,
+          lwd = lwd,
+          circles = size,
+          add = TRUE,
+          inches = FALSE
         )
       }
     )
   }
 }
 
-.igraph.shape.square.clip <- function(coords, el, params,
-                                      end = c("both", "from", "to")) {
+.igraph.shape.square.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   square.shift <- function(x0, y0, x1, y1, vsize) {
     m <- (y0 - y1) / (x0 - x1)
     l <- cbind(
-      x1 - vsize / m, y1 - vsize,
-      x1 - vsize, y1 - vsize * m,
-      x1 + vsize / m, y1 + vsize,
-      x1 + vsize, y1 + vsize * m
+      x1 - vsize / m,
+      y1 - vsize,
+      x1 - vsize,
+      y1 - vsize * m,
+      x1 + vsize / m,
+      y1 + vsize,
+      x1 + vsize,
+      y1 + vsize * m
     )
 
     v <- cbind(
-      x1 - vsize <= l[, 1] & l[, 1] <= x1 + vsize &
-        y1 - vsize <= l[, 2] & l[, 2] <= y1 + vsize,
-      x1 - vsize <= l[, 3] & l[, 3] <= x1 + vsize &
-        y1 - vsize <= l[, 4] & l[, 4] <= y1 + vsize,
-      x1 - vsize <= l[, 5] & l[, 5] <= x1 + vsize &
-        y1 - vsize <= l[, 6] & l[, 6] <= y1 + vsize,
-      x1 - vsize <= l[, 7] & l[, 7] <= x1 + vsize &
-        y1 - vsize <= l[, 8] & l[, 8] <= y1 + vsize
+      x1 - vsize <= l[, 1] &
+        l[, 1] <= x1 + vsize &
+        y1 - vsize <= l[, 2] &
+        l[, 2] <= y1 + vsize,
+      x1 - vsize <= l[, 3] &
+        l[, 3] <= x1 + vsize &
+        y1 - vsize <= l[, 4] &
+        l[, 4] <= y1 + vsize,
+      x1 - vsize <= l[, 5] &
+        l[, 5] <= x1 + vsize &
+        y1 - vsize <= l[, 6] &
+        l[, 6] <= y1 + vsize,
+      x1 - vsize <= l[, 7] &
+        l[, 7] <= x1 + vsize &
+        y1 - vsize <= l[, 8] &
+        l[, 8] <= y1 + vsize
     )
 
     d <- cbind(
@@ -520,7 +601,10 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size[el[, 1]]
     }
     res <- res1 <- square.shift(
-      coords[, 3], coords[, 4], coords[, 1], coords[, 2],
+      coords[, 3],
+      coords[, 4],
+      coords[, 1],
+      coords[, 2],
       vsize
     )
   }
@@ -531,7 +615,10 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size[el[, 2]]
     }
     res <- res2 <- square.shift(
-      coords[, 1], coords[, 2], coords[, 3], coords[, 4],
+      coords[, 1],
+      coords[, 2],
+      coords[, 3],
+      coords[, 4],
       vsize
     )
   }
@@ -556,7 +643,8 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
+
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -568,38 +656,63 @@ add_shape <- function(shape, clip = shape_noclip,
 
   if (length(vertex.frame.width) == 1) {
     symbols(
-      x = coords[, 1], y = coords[, 2], bg = vertex.color, fg = vertex.frame.color,
-      squares = 2 * vertex.size, lwd = vertex.frame.width, add = TRUE, inches = FALSE
+      x = coords[, 1],
+      y = coords[, 2],
+      bg = vertex.color,
+      fg = vertex.frame.color,
+      squares = 2 * vertex.size,
+      lwd = vertex.frame.width,
+      add = TRUE,
+      inches = FALSE
     )
   } else {
-    mapply(coords[, 1], coords[, 2], vertex.color, vertex.frame.color,
-      vertex.size, vertex.frame.width,
+    mapply(
+      coords[, 1],
+      coords[, 2],
+      vertex.color,
+      vertex.frame.color,
+      vertex.size,
+      vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
         symbols(
-          x = x, y = y, bg = bg, fg = fg, lwd = lwd,
-          squares = 2 * size, add = TRUE, inches = FALSE
+          x = x,
+          y = y,
+          bg = bg,
+          fg = fg,
+          lwd = lwd,
+          squares = 2 * size,
+          add = TRUE,
+          inches = FALSE
         )
       }
     )
   }
 }
 
-.igraph.shape.csquare.clip <- function(coords, el, params,
-                                       end = c("both", "from", "to")) {
+.igraph.shape.csquare.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   square.shift <- function(x0, y0, x1, y1, vsize) {
     l <- cbind(
-      x1, y1 - vsize,
-      x1 - vsize, y1,
-      x1, y1 + vsize,
-      x1 + vsize, y1
+      x1,
+      y1 - vsize,
+      x1 - vsize,
+      y1,
+      x1,
+      y1 + vsize,
+      x1 + vsize,
+      y1
     )
 
     d <- cbind(
@@ -622,7 +735,10 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size[el[, 1]]
     }
     res <- res1 <- square.shift(
-      coords[, 3], coords[, 4], coords[, 1], coords[, 2],
+      coords[, 3],
+      coords[, 4],
+      coords[, 1],
+      coords[, 2],
       vsize
     )
   }
@@ -633,7 +749,10 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size[el[, 2]]
     }
     res <- res2 <- square.shift(
-      coords[, 1], coords[, 2], coords[, 3], coords[, 4],
+      coords[, 1],
+      coords[, 2],
+      coords[, 3],
+      coords[, 4],
       vsize
     )
   }
@@ -646,35 +765,51 @@ add_shape <- function(shape, clip = shape_noclip,
 
 .igraph.shape.csquare.plot <- .igraph.shape.square.plot
 
-.igraph.shape.rectangle.clip <- function(coords, el, params,
-                                         end = c("both", "from", "to")) {
+.igraph.shape.rectangle.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     m <- (y0 - y1) / (x0 - x1)
     l <- cbind(
-      x1 - vsize2 / m, y1 - vsize2,
-      x1 - vsize, y1 - vsize * m,
-      x1 + vsize2 / m, y1 + vsize2,
-      x1 + vsize, y1 + vsize * m
+      x1 - vsize2 / m,
+      y1 - vsize2,
+      x1 - vsize,
+      y1 - vsize * m,
+      x1 + vsize2 / m,
+      y1 + vsize2,
+      x1 + vsize,
+      y1 + vsize * m
     )
 
     v <- cbind(
-      x1 - vsize <= l[, 1] & l[, 1] <= x1 + vsize &
-        y1 - vsize2 <= l[, 2] & l[, 2] <= y1 + vsize2,
-      x1 - vsize <= l[, 3] & l[, 3] <= x1 + vsize &
-        y1 - vsize2 <= l[, 4] & l[, 4] <= y1 + vsize2,
-      x1 - vsize <= l[, 5] & l[, 5] <= x1 + vsize &
-        y1 - vsize2 <= l[, 6] & l[, 6] <= y1 + vsize2,
-      x1 - vsize <= l[, 7] & l[, 7] <= x1 + vsize &
-        y1 - vsize2 <= l[, 8] & l[, 8] <= y1 + vsize2
+      x1 - vsize <= l[, 1] &
+        l[, 1] <= x1 + vsize &
+        y1 - vsize2 <= l[, 2] &
+        l[, 2] <= y1 + vsize2,
+      x1 - vsize <= l[, 3] &
+        l[, 3] <= x1 + vsize &
+        y1 - vsize2 <= l[, 4] &
+        l[, 4] <= y1 + vsize2,
+      x1 - vsize <= l[, 5] &
+        l[, 5] <= x1 + vsize &
+        y1 - vsize2 <= l[, 6] &
+        l[, 6] <= y1 + vsize2,
+      x1 - vsize <= l[, 7] &
+        l[, 7] <= x1 + vsize &
+        y1 - vsize2 <= l[, 8] &
+        l[, 8] <= y1 + vsize2
     )
 
     d <- cbind(
@@ -703,8 +838,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 1]]
     }
     res <- res1 <- rec.shift(
-      coords[, 3], coords[, 4], coords[, 1], coords[, 2],
-      vsize, vsize2
+      coords[, 3],
+      coords[, 4],
+      coords[, 1],
+      coords[, 2],
+      vsize,
+      vsize2
     )
   }
   if (end %in% c("to", "both")) {
@@ -719,8 +858,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 2]]
     }
     res <- res2 <- rec.shift(
-      coords[, 1], coords[, 2], coords[, 3], coords[, 4],
-      vsize, vsize2
+      coords[, 1],
+      coords[, 2],
+      coords[, 3],
+      coords[, 4],
+      vsize,
+      vsize2
     )
   }
   if (end == "both") {
@@ -744,12 +887,13 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size2 <- params("vertex", "size2")
+
   if (length(vertex.size2) != 1 && !is.null(v)) {
     vertex.size2 <- vertex.size2[v]
   }
@@ -761,39 +905,65 @@ add_shape <- function(shape, clip = shape_noclip,
 
   if (length(vertex.frame.width) == 1) {
     symbols(
-      x = coords[, 1], y = coords[, 2], bg = vertex.color, fg = vertex.frame.color,
-      rectangles = 2 * vertex.size, lwd = vertex.frame.width, add = TRUE, inches = FALSE
+      x = coords[, 1],
+      y = coords[, 2],
+      bg = vertex.color,
+      fg = vertex.frame.color,
+      rectangles = 2 * vertex.size,
+      lwd = vertex.frame.width,
+      add = TRUE,
+      inches = FALSE
     )
   } else {
-    mapply(coords[, 1], coords[, 2], vertex.color, vertex.frame.color,
-      vertex.size[, 1], vertex.size[, 2], vertex.frame.width,
+    mapply(
+      coords[, 1],
+      coords[, 2],
+      vertex.color,
+      vertex.frame.color,
+      vertex.size[, 1],
+      vertex.size[, 2],
+      vertex.frame.width,
       FUN = function(x, y, bg, fg, size, size2, lwd) {
         symbols(
-          x = x, y = y, bg = bg, fg = fg, lwd = lwd,
-          rectangles = 2 * cbind(size, size2), add = TRUE, inches = FALSE
+          x = x,
+          y = y,
+          bg = bg,
+          fg = fg,
+          lwd = lwd,
+          rectangles = 2 * cbind(size, size2),
+          add = TRUE,
+          inches = FALSE
         )
       }
     )
   }
 }
 
-.igraph.shape.crectangle.clip <- function(coords, el, params,
-                                          end = c("both", "from", "to")) {
+.igraph.shape.crectangle.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     l <- cbind(
-      x1, y1 - vsize2,
-      x1 - vsize, y1,
-      x1, y1 + vsize2,
-      x1 + vsize, y1
+      x1,
+      y1 - vsize2,
+      x1 - vsize,
+      y1,
+      x1,
+      y1 + vsize2,
+      x1 + vsize,
+      y1
     )
 
     d <- cbind(
@@ -821,8 +991,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 1]]
     }
     res <- res1 <- rec.shift(
-      coords[, 3], coords[, 4], coords[, 1], coords[, 2],
-      vsize, vsize2
+      coords[, 3],
+      coords[, 4],
+      coords[, 1],
+      coords[, 2],
+      vsize,
+      vsize2
     )
   }
   if (end %in% c("to", "both")) {
@@ -837,8 +1011,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 2]]
     }
     res <- res2 <- rec.shift(
-      coords[, 1], coords[, 2], coords[, 3], coords[, 4],
-      vsize, vsize2
+      coords[, 1],
+      coords[, 2],
+      coords[, 3],
+      coords[, 4],
+      vsize,
+      vsize2
     )
   }
   if (end == "both") {
@@ -850,16 +1028,20 @@ add_shape <- function(shape, clip = shape_noclip,
 
 .igraph.shape.crectangle.plot <- .igraph.shape.rectangle.plot
 
-.igraph.shape.vrectangle.clip <- function(coords, el, params,
-                                          end = c("both", "from", "to")) {
+.igraph.shape.vrectangle.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     l <- cbind(x1 - vsize, y1, x1 + vsize, y1)
@@ -887,8 +1069,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 1]]
     }
     res <- res1 <- rec.shift(
-      coords[, 3], coords[, 4], coords[, 1], coords[, 2],
-      vsize, vsize2
+      coords[, 3],
+      coords[, 4],
+      coords[, 1],
+      coords[, 2],
+      vsize,
+      vsize2
     )
   }
   if (end %in% c("to", "both")) {
@@ -903,8 +1089,12 @@ add_shape <- function(shape, clip = shape_noclip,
       vertex.size2[el[, 2]]
     }
     res <- res2 <- rec.shift(
-      coords[, 1], coords[, 2], coords[, 3], coords[, 4],
-      vsize, vsize2
+      coords[, 1],
+      coords[, 2],
+      coords[, 3],
+      coords[, 4],
+      vsize,
+      vsize2
     )
   }
   if (end == "both") {
@@ -922,10 +1112,22 @@ add_shape <- function(shape, clip = shape_noclip,
   ## does not plot anything at all
   invisible(NULL)
 }
-
+#nocov end
 #' @importFrom graphics par polygon
-mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
-                  density = NULL, border = NULL, lty = NULL, init.angle = 90, ...) {
+mypie <- function(
+  x,
+  y,
+  values,
+  radius,
+  edges = 200,
+  col = NULL,
+  angle = 45,
+  density = NULL,
+  border = NULL,
+  lty = NULL,
+  init.angle = 90,
+  ...
+) {
   values <- c(0, cumsum(values) / sum(values))
   dx <- diff(values)
   nx <- length(dx)
@@ -933,8 +1135,12 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   if (is.null(col)) {
     col <- if (is.null(density)) {
       c(
-        "white", "lightblue", "mistyrose", "lightcyan",
-        "lavender", "cornsilk"
+        "white",
+        "lightblue",
+        "mistyrose",
+        "lightcyan",
+        "lavender",
+        "cornsilk"
       )
     } else {
       par("fg")
@@ -952,22 +1158,32 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   for (i in 1:nx) {
     n <- max(2, floor(edges * dx[i]))
     P <- t2xy(seq.int(values[i], values[i + 1], length.out = n))
-    polygon(x + c(P$x, 0), y + c(P$y, 0),
-      density = density[i], angle = angle[i],
-      border = border[i], col = col[i], lty = lty[i], ...
+    polygon(
+      x + c(P$x, 0),
+      y + c(P$y, 0),
+      density = density[i],
+      angle = angle[i],
+      border = border[i],
+      col = col[i],
+      lty = lty[i],
+      ...
     )
   }
 }
-
-.igraph.shape.pie.clip <- function(coords, el, params,
-                                   end = c("both", "from", "to")) {
+#nocov start
+.igraph.shape.pie.clip <- function(
+  coords,
+  el,
+  params,
+  end = c("both", "from", "to")
+) {
   end <- match.arg(end)
 
   if (length(coords) == 0) {
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   if (end == "from") {
     phi <- atan2(coords[, 4] - coords[, 2], coords[, 3] - coords[, 1])
@@ -1026,8 +1242,12 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     p
   }
   vertex.color <- getparam("color")
-  vertex.frame.color <- getparam("frame.color")
-  vertex.size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
+
+  vertex.frame.color <- rep(
+    getparam("frame.color"),
+    length = (nrow(coords))
+  )
+  vertex.size <- rep(getparam("size"), length = nrow(coords))
   vertex.pie <- getparam("pie")
   vertex.pie.color <- getparam("pie.color")
   vertex.pie.angle <- getparam("pie.angle")
@@ -1046,11 +1266,15 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
       vertex.pie.color[[i]]
     }
     mypie(
-      x = coords[i, 1], y = coords[i, 2], pie,
-      radius = vertex.size[i], edges = 200, col = col,
+      x = coords[i, 1],
+      y = coords[i, 2],
+      pie,
+      radius = vertex.size[i],
+      edges = 200,
+      col = col,
       angle = na.omit(vertex.pie.angle[c(i, 1)])[1],
       density = na.omit(vertex.pie.density[c(i, 1)])[1],
-      border = na.omit(vertex.frame.color[c(i, 1)])[1],
+      border = vertex.frame.color[i],
       lty = na.omit(vertex.pie.lty[c(i, 1)])[1]
     )
   }
@@ -1068,8 +1292,9 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     }
     p
   }
-  vertex.color <- rep(getparam("color"), length.out = nrow(coords))
-  vertex.size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
+
+  vertex.color <- rep(getparam("color"), length = nrow(coords))
+  vertex.size <- rep(getparam("size"), length = nrow(coords))
 
   ## Need to create a separate image for every different vertex color
   allcols <- unique(vertex.color)
@@ -1091,8 +1316,10 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     vsp2 <- vertex.size[i]
     rasterImage(
       images[[whichImage[i]]],
-      coords[i, 1] - vsp2, coords[i, 2] - vsp2,
-      coords[i, 1] + vsp2, coords[i, 2] + vsp2
+      coords[i, 1] - vsp2,
+      coords[i, 2] - vsp2,
+      coords[i, 1] + vsp2,
+      coords[i, 2] + vsp2
     )
   }
 }
@@ -1109,18 +1336,23 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     p
   }
 
-  size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
-  size2 <- rep(1 / 200 * getparam("size2"), length.out = nrow(coords))
+  size <- rep(getparam("size"), length = nrow(coords))
+  size2 <- rep(getparam("size2"), length = nrow(coords))
   raster <- getparam("raster")
 
   for (i in seq_len(nrow(coords))) {
     ras <- if (!is.list(raster) || length(raster) == 1) raster else raster[[i]]
     rasterImage(
-      ras, coords[i, 1] - size[i], coords[i, 2] - size2[i],
-      coords[i, 1] + size[i], coords[i, 2] + size2[i]
+      ras,
+      coords[i, 1] - size[i],
+      coords[i, 2] - size2[i],
+      coords[i, 1] + size[i],
+      coords[i, 2] + size2[i]
     )
   }
 }
+
+#nocov end
 
 .igraph.shapes <- new.env()
 .igraph.shapes[["circle"]] <- list(

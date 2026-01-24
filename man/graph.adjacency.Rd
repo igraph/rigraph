@@ -37,9 +37,9 @@ the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 
 \item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \sQuote{\code{NULL}} (the default) then, if
+vertex attributes. If it is \code{NULL} (the default) then, if
 present, column names are added as vertex attribute \sQuote{name}. If
-\sQuote{\code{NA}} then they will not be added.  If a character constant,
+\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
 then it gives the name of the vertex attribute to add.}
 
 \item{add.rownames}{Character scalar, whether to add the row names as vertex
@@ -51,7 +51,7 @@ former is ignored.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.adjacency()} was renamed to \code{graph_from_adjacency_matrix()} to create a more
+\code{graph.adjacency()} was renamed to \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}

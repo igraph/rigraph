@@ -17,7 +17,7 @@ details below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.extended.chordal.ring()} was renamed to \code{make_chordal_ring()} to create a more
+\code{graph.extended.chordal.ring()} was renamed to \code{\link[=make_chordal_ring]{make_chordal_ring()}} to create a more
 consistent API.
 }
 \keyword{internal}

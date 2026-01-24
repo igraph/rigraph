@@ -38,10 +38,14 @@ and \code{"last"} takes the last one.}
 }
 \value{
 A named list with two components:
-\item{membership}{numeric vector giving the cluster id to which each vertex
-belongs.}
-\item{distances}{numeric vector giving the distance of each vertex from its
-generator}
+\describe{
+\item{membership}{
+numeric vector giving the cluster id to which each vertex belongs.
+}
+\item{distances}{
+numeric vector giving the distance of each vertex from its generator
+}
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -54,10 +58,10 @@ it is closest.
 }
 \examples{
 
-g <- make_lattice(c(10,10))
+g <- make_lattice(c(10, 10))
 clu <- voronoi_cells(g, c(25, 43, 67))
 groups(clu)
-plot(g, vertex.color=clu$membership)
+plot(g, vertex.color = clu$membership)
 
 }
 \seealso{
@@ -85,3 +89,5 @@ Community detection
 \code{\link{split_join_distance}()}
 }
 \concept{community}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_voronoi}{\code{voronoi()}}.}
+

@@ -37,7 +37,7 @@ Other structural queries:
 \code{\link{[[.igraph}()},
 \code{\link{adjacent_vertices}()},
 \code{\link{ends}()},
-\code{\link{get.edge.ids}()},
+\code{\link{get_edge_ids}()},
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
@@ -48,3 +48,5 @@ Other structural queries:
 \code{\link{tail_of}()}
 }
 \concept{structural queries}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent}{\code{are_adjacent()}}.}
+

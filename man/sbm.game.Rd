@@ -18,14 +18,14 @@ must be symmetric.}
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
-\item{directed}{Logical scalar, whether to generate a directed graph.}
+\item{directed}{Logical scalar, whether to create a directed graph.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{sbm.game()} was renamed to \code{sample_sbm()} to create a more
+\code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more
 consistent API.
 }
 \keyword{internal}

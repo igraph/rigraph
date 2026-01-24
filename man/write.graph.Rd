@@ -20,7 +20,7 @@ to.}
 
 \item{format}{Character string giving the file format. Right now
 \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-\code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
+\code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented. As of igraph 0.4
 this argument is case insensitive.}
 
 \item{...}{Other, format specific arguments, see below.}
@@ -28,7 +28,7 @@ this argument is case insensitive.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{write.graph()} was renamed to \code{write_graph()} to create a more
+\code{write.graph()} was renamed to \code{\link[=write_graph]{write_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

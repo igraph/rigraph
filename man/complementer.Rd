@@ -37,7 +37,7 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-graph.isomorphic(gu, make_full_graph(vcount(g)))
+isomorphic(gu, make_full_graph(vcount(g)))
 
 }
 \seealso{
@@ -62,6 +62,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}

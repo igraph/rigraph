@@ -7,12 +7,10 @@
 \usage{
 make_from_prufer(prufer)
 
-from_prufer(...)
+from_prufer(prufer)
 }
 \arguments{
 \item{prufer}{The Prüfer sequence to convert into a graph}
-
-\item{...}{Passed to \code{make_from_prufer()}}
 }
 \value{
 A graph object.
@@ -44,3 +42,5 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer}{\code{from_prufer()}}.}
+

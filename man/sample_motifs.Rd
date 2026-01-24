@@ -8,7 +8,7 @@ sample_motifs(
   graph,
   size = 3,
   cut.prob = rep(0, size),
-  sample.size = vcount(graph)/10,
+  sample.size = NULL,
   sample = NULL
 )
 }
@@ -20,10 +20,12 @@ in directed graphs and sizes 3-6 in undirected graphs.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
-of the motif (the \code{size} argument). By default no cuts are made.}
+of the motif (the \code{size} argument).
+If \code{NULL}, the default, no cuts are made.}
 
 \item{sample.size}{The number of vertices to use as a starting point for
-finding motifs. Only used if the \code{sample} argument is \code{NULL}.}
+finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{If not \code{NULL} then it specifies the vertices to use as a
 starting point for finding motifs.}
@@ -52,6 +54,7 @@ sample_motifs(g, 3)
 Other graph motifs: 
 \code{\link{count_motifs}()},
 \code{\link{dyad_census}()},
-\code{\link{motifs}()}
+\code{\link{motifs}()},
+\code{\link{motifs_randesu_callback}()}
 }
 \concept{graph motifs}

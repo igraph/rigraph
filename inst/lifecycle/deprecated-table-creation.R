@@ -20,7 +20,7 @@ tibblify_call <- function(deprecated_call) {
   args <- deprecated_call |>
     xml2::xml_parent() |>
     xml2::xml_siblings() |>
-    purrr::keep(~xml2::xml_name(.x) == "expr")
+    purrr::keep(~ xml2::xml_name(.x) == "expr")
   old <- xml2::xml_text(args[[1]])
   new <- xml2::xml_text(args[[2]])
   tibble::tibble(old = gsub('"', '', old), new = new)
@@ -32,7 +32,7 @@ deprecated_df <- do.call(rbind, deprecated_df)
 deprecated_df[["new"]] <-
   purrr::map_chr(
     deprecated_df[["new"]],
-    ~downlit::autolink(sprintf("igraph::%s", .x))
+    ~ downlit::autolink(sprintf("igraph::%s", .x))
   )
 
 readr::write_csv(

@@ -1,15 +1,34 @@
-
 solve_LSAP <- function(x, maximum = FALSE) {
-  if (!is.matrix(x) || any(x < 0)) {
-    stop("x must be a matrix with nonnegative entries.")
+  if (!is.matrix(x)) {
+    cli::cli_abort("{.arg x} must be a matrix, not {.obj_type_friendly {x}}.")
+  }
+  if (any(x < 0)) {
+    cli::cli_abort(c(
+      "{.arg x} must not have negative entries.",
+    i = "It has {sum(x<0)} negative entr{?y/ies}."
+    ))
   }
   nr <- nrow(x)
   nc <- ncol(x)
-  if (nr > nc) stop("x must not have more rows than columns.")
-  if (nc > nr) x <- rbind(x, matrix(2 * sum(x), nc - nr, nc))
-  if (maximum) x <- max(x) - x
-  storage.mode(x) <- "double"
-  out <- .Call(R_igraph_solve_lsap, x, as.numeric(nc)) + 1L
+  if (nr > nc) {
+    cli::cli_abort(
+      c(
+      "{.arg x} must not have more rows than columns.",
+    i = "It has {nrow(x)} rows and {ncol(x)} columns."
+    )
+    )
+  }
+  if (nc > nr) {
+    x <- rbind(x, matrix(2 * sum(x), nc - nr, nc))
+  }
+  if (maximum) {
+    x <- max(x) - x
+  }
+  out <- solve_lsap_impl(
+    c = x,
+    n = as.numeric(nc)
+  ) +
+    1L
   out[seq_len(nr)]
 }
 

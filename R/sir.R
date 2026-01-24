@@ -1,4 +1,3 @@
-
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -70,13 +69,20 @@
 #' @return For `sir()` the results are returned in an object of class
 #'   \sQuote{`sir`}, which is a list, with one element for each simulation.
 #'   Each simulation is itself a list with the following elements. They are all
-#'   numeric vectors, with equal length: \describe{
-#'   \item{times}{The times of the events.}
-#'   \item{NS}{The number of susceptibles in the population, over time.}
-#'   \item{NI}{The number of infected individuals in the population, over
-#'     time.}
-#'   \item{NR}{The number of recovered individuals in the population, over
-#'     time.}
+#'   numeric vectors, with equal length:
+#'   \describe{
+#'     \item{times}{
+#'       The times of the events.
+#'     }
+#'     \item{NS}{
+#'       The number of susceptibles in the population, over time.
+#'     }
+#'     \item{NI}{
+#'       The number of infected individuals in the population, over time.
+#'     }
+#'     \item{NR}{
+#'       The number of recovered individuals in the population, over time.
+#'     }
 #'   }
 #'
 #'   Function `time_bins()` returns a numeric vector, the middle or the
@@ -90,7 +96,7 @@
 #'   one requested) if only one quantile is requested. If multiple quantiles are
 #'   requested, then a list of these vectors is returned, one for each quantile.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}. Eric Kolaczyk
-#' (<http://math.bu.edu/people/kolaczyk/>) wrote the initial version in R.
+#' (<https://kolaczyk.github.io/>) wrote the initial version in R.
 #' @seealso [plot.sir()] to conveniently plot the results
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
@@ -102,4 +108,12 @@
 #' plot(sm)
 #' @family processes
 #' @export
-sir <- sir_impl
+#' @cdocs igraph_sir
+sir <- function(graph, beta, gamma, no.sim = 100) {
+  sir_impl(
+    graph = graph,
+    beta = beta,
+    gamma = gamma,
+    no_sim = no.sim
+  )
+}
