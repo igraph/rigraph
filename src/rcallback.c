@@ -95,7 +95,7 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
   /* Create R vector for clique (add 1 for R's 1-based indexing) */
   PROTECT(clique_r = NEW_INTEGER(igraph_vector_int_size(clique)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(clique); i++) {
-    INTEGER(clique_r)[i] = VECTOR(*clique)[i] + 1;
+    INTEGER(clique_r)[i] = igraph_vector_int_get(clique, i) + 1;
   }
 
   /* Call the R function: callback(clique) */
@@ -157,13 +157,13 @@ igraph_error_t R_igraph_cycle_handler(
   /* Create R vector for vertices (add 1 for R's 1-based indexing) */
   PROTECT(vertices_r = NEW_INTEGER(igraph_vector_int_size(vertices)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(vertices); i++) {
-    INTEGER(vertices_r)[i] = VECTOR(*vertices)[i] + 1;
+    INTEGER(vertices_r)[i] = igraph_vector_int_get(vertices, i) + 1;
   }
 
   /* Create R vector for edges (add 1 for R's 1-based indexing) */
   PROTECT(edges_r = NEW_INTEGER(igraph_vector_int_size(edges)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(edges); i++) {
-    INTEGER(edges_r)[i] = VECTOR(*edges)[i] + 1;
+    INTEGER(edges_r)[i] = igraph_vector_int_get(edges, i) + 1;
   }
 
   /* Call the R function: callback(vertices, edges) */
@@ -213,13 +213,13 @@ igraph_error_t R_igraph_isomorphism_handler(
   /* Create R vector for map12 (add 1 for R's 1-based indexing) */
   PROTECT(map12_r = NEW_INTEGER(igraph_vector_int_size(map12)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(map12); i++) {
-    INTEGER(map12_r)[i] = VECTOR(*map12)[i] + 1;
+    INTEGER(map12_r)[i] = igraph_vector_int_get(map12, i) + 1;
   }
 
   /* Create R vector for map21 (add 1 for R's 1-based indexing) */
   PROTECT(map21_r = NEW_INTEGER(igraph_vector_int_size(map21)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(map21); i++) {
-    INTEGER(map21_r)[i] = VECTOR(*map21)[i] + 1;
+    INTEGER(map21_r)[i] = igraph_vector_int_get(map21, i) + 1;
   }
 
   /* Call the R function: callback(map12, map21) */
