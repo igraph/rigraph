@@ -39,7 +39,6 @@ sample_motifs(g, 3)
 Other graph motifs: 
 \code{\link{dyad_census}()},
 \code{\link{motifs}()},
-\code{\link{motifs_randesu_callback}()},
 \code{\link{sample_motifs}()}
 }
 \concept{graph motifs}
