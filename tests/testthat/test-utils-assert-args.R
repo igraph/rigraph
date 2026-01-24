@@ -7,8 +7,7 @@ test_that("ensure_igraph() works", {
 })
 
 test_that("igraph_match_arg() works", {
-  expect_snapshot(
-    cluster_leiden(make_graph("Zachary"), objective_function = "something"),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    cluster_leiden(make_graph("Zachary"), objective_function = "something")
   )
 })
