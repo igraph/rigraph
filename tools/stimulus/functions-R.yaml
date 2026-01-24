@@ -718,12 +718,12 @@ igraph_read_graph_edgelist:
 
 igraph_read_graph_ncol:
     PARAMS: |-
-        INFILE instream, OPTIONAL VECTOR_STR predefnames, BOOLEAN names=TRUE,
+        OUT GRAPH graph, INFILE instream, OPTIONAL VECTOR_STR predefnames, BOOLEAN names=TRUE,
         ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
 igraph_read_graph_lgl:
     PARAMS: |-
-        INFILE instream, BOOLEAN names=TRUE, ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
+        OUT GRAPH graph, INFILE instream, BOOLEAN names=TRUE, ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
 igraph_read_graph_pajek:
 
