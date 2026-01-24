@@ -25,6 +25,16 @@ REAL:
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
+DOUBLE:
+    # A C double - similar to REAL but uses C's double type instead of igraph_real_t
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+
+ERROR:
+    # An igraph error code - used as input parameter (e.g., in igraph_strerror)
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+
 BOOLEAN:
     DEFAULT:
         'False': 'FALSE'
