@@ -10923,6 +10923,39 @@ SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, S
 }
 
 /*-------------------------------------------/
+/ igraph_layout_merge_dla                    /
+/-------------------------------------------*/
+SEXP R_igraph_layout_merge_dla(SEXP graphs, SEXP coords) {
+                                        /* Declarations */
+  igraph_vector_ptr_t c_graphs;
+  igraph_matrix_list_t c_coords;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  igraph_t *c_graphs_storage;
+  IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(graphs, &c_graphs, &c_graphs_storage));
+  IGRAPH_FINALLY(igraph_vector_ptr_destroy, &c_graphs);
+  Ry_igraph_SEXP_to_matrixlist(coords, &c_coords);
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_layout_merge_dla(&c_graphs, &c_coords, &c_res));
+
+                                        /* Convert output */
+  igraph_vector_ptr_destroy(&c_graphs);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(res=Ry_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_layout_sugiyama                     /
 /-------------------------------------------*/
 SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEXP maxiter, SEXP weights) {
@@ -14482,6 +14515,36 @@ SEXP R_igraph_disjoint_union(SEXP left, SEXP right) {
 }
 
 /*-------------------------------------------/
+/ igraph_disjoint_union_many                 /
+/-------------------------------------------*/
+SEXP R_igraph_disjoint_union_many(SEXP graphs) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_vector_ptr_t c_graphs;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  igraph_t *c_graphs_storage;
+  IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(graphs, &c_graphs, &c_graphs_storage));
+  IGRAPH_FINALLY(igraph_vector_ptr_destroy, &c_graphs);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_disjoint_union_many(&c_res, &c_graphs));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=Ry_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_ptr_destroy(&c_graphs);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_join                                /
 /-------------------------------------------*/
 SEXP R_igraph_join(SEXP left, SEXP right) {
@@ -14561,6 +14624,50 @@ SEXP R_igraph_union(SEXP left, SEXP right) {
 }
 
 /*-------------------------------------------/
+/ igraph_union_many                          /
+/-------------------------------------------*/
+SEXP R_igraph_union_many(SEXP graphs) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_vector_ptr_t c_graphs;
+  igraph_vector_int_list_t c_edgemaps;
+  SEXP res;
+  SEXP edgemaps;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  igraph_t *c_graphs_storage;
+  IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(graphs, &c_graphs, &c_graphs_storage));
+  IGRAPH_FINALLY(igraph_vector_ptr_destroy, &c_graphs);
+  IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_edgemaps, 0));
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_edgemaps);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_union_many(&c_res, &c_graphs, &c_edgemaps));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=Ry_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_ptr_destroy(&c_graphs);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edgemaps=Ry_igraph_vector_int_list_to_SEXP(&c_edgemaps));
+  igraph_vector_int_list_destroy(&c_edgemaps);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, edgemaps);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("edgemaps"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_intersection                        /
 /-------------------------------------------*/
 SEXP R_igraph_intersection(SEXP left, SEXP right) {
@@ -14606,6 +14713,50 @@ SEXP R_igraph_intersection(SEXP left, SEXP right) {
   SET_STRING_ELT(r_names, 2, Rf_mkChar("edge_map_right"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_intersection_many                   /
+/-------------------------------------------*/
+SEXP R_igraph_intersection_many(SEXP graphs) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_vector_ptr_t c_graphs;
+  igraph_vector_int_list_t c_edgemaps;
+  SEXP res;
+  SEXP edgemaps;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  igraph_t *c_graphs_storage;
+  IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(graphs, &c_graphs, &c_graphs_storage));
+  IGRAPH_FINALLY(igraph_vector_ptr_destroy, &c_graphs);
+  IGRAPH_R_CHECK(igraph_vector_int_list_init(&c_edgemaps, 0));
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_edgemaps);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_intersection_many(&c_res, &c_graphs, &c_edgemaps));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=Ry_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_ptr_destroy(&c_graphs);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edgemaps=Ry_igraph_vector_int_list_to_SEXP(&c_edgemaps));
+  igraph_vector_int_list_destroy(&c_edgemaps);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, edgemaps);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("edgemaps"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(r_result);

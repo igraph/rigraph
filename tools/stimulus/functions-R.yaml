@@ -614,8 +614,6 @@ igraph_layout_drl_3d:
     DEPS: weights ON graph
 
 igraph_layout_merge_dla:
-    # Needs custom handling - GRAPH_PTR_LIST type not properly supported
-    IGNORE: RR, RC
 
 #######################################
 # Cocitation and other similarity measures
@@ -755,20 +753,14 @@ igraph_write_graph_dot:
 igraph_disjoint_union:
 
 igraph_disjoint_union_many:
-    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
-    IGNORE: RR, RC, RInit
 
 igraph_union:
 
 igraph_union_many:
-    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
-    IGNORE: RR, RC, RInit
 
 igraph_intersection:
 
 igraph_intersection_many:
-    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
-    IGNORE: RR, RC, RInit
 
 igraph_difference:
 

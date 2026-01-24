@@ -11339,4 +11339,68 @@
       + attr: weight (e/n)
       + edges:
       [1] 4->1 1->2 2->3 3->4
+# disjoint_union_many_impl basic
+
+    Code
+      disjoint_union_many_impl(graphs = list(g1, g2, g3))
+    Output
+      IGRAPH D--- 6 0 -- 
+      + edges:
+
+# union_many_impl basic
+
+    Code
+      union_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 3 -- 
+      + edges:
+      [1] 2->3 1->3 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      numeric(0)
+      
+      $edgemaps[[2]]
+      [1] 2 0
+      
+      $edgemaps[[3]]
+      [1] 1
+      
+      
+
+# intersection_many_impl basic
+
+    Code
+      intersection_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 1 -- 
+      + edge:
+      [1] 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      [1]  0 -1 -1
+      
+      $edgemaps[[2]]
+      [1]  0 -1
+      
+      $edgemaps[[3]]
+      [1] 0
+      
+      
+
+# layout_merge_dla_impl basic
+
+    Code
+      layout_merge_dla_impl(graphs = list(g1, g2), coords = list(coords1, coords2))
+    Output
+                [,1]       [,2]
+      [1,] -2.279507  0.0000000
+      [2,]  0.000000  0.0000000
+      [3,]  2.279507  0.0000000
+      [4,] -6.893133 -0.8307751
+      [5,] -4.613626 -0.8307751
+      [6,] -2.334119 -0.8307751
 

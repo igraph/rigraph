@@ -139,6 +139,7 @@ extern SEXP R_igraph_diameter_dijkstra(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_difference(SEXP, SEXP);
 extern SEXP R_igraph_dim_select(SEXP);
 extern SEXP R_igraph_disjoint_union(SEXP, SEXP);
+extern SEXP R_igraph_disjoint_union_many(SEXP);
 extern SEXP R_igraph_distances(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_distances_bellman_ford(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_distances_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -252,6 +253,7 @@ extern SEXP R_igraph_independent_vertex_sets(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_induced_subgraph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_induced_subgraph_map(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_intersection(SEXP, SEXP);
+extern SEXP R_igraph_intersection_many(SEXP);
 extern SEXP R_igraph_invalidate_cache(SEXP);
 extern SEXP R_igraph_is_acyclic(SEXP);
 extern SEXP R_igraph_is_biconnected(SEXP);
@@ -315,6 +317,7 @@ extern SEXP R_igraph_layout_kamada_kawai(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEX
 extern SEXP R_igraph_layout_kamada_kawai_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_lgl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_mds(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_layout_merge_dla(SEXP, SEXP);
 extern SEXP R_igraph_layout_random(SEXP);
 extern SEXP R_igraph_layout_random_3d(SEXP);
 extern SEXP R_igraph_layout_reingold_tilford(SEXP, SEXP, SEXP, SEXP);
@@ -473,6 +476,7 @@ extern SEXP R_igraph_trussness(SEXP);
 extern SEXP R_igraph_turan(SEXP, SEXP);
 extern SEXP R_igraph_unfold_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_union(SEXP, SEXP);
+extern SEXP R_igraph_union_many(SEXP);
 extern SEXP R_igraph_vcount(SEXP);
 extern SEXP R_igraph_version(void);
 extern SEXP R_igraph_vertex_coloring_greedy(SEXP, SEXP);
@@ -731,6 +735,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_difference",                                 (DL_FUNC) &R_igraph_difference,                                  2},
     {"R_igraph_dim_select",                                 (DL_FUNC) &R_igraph_dim_select,                                  1},
     {"R_igraph_disjoint_union",                             (DL_FUNC) &R_igraph_disjoint_union,                              2},
+    {"R_igraph_disjoint_union_many",                        (DL_FUNC) &R_igraph_disjoint_union_many,                         1},
     {"R_igraph_distances",                                  (DL_FUNC) &R_igraph_distances,                                   4},
     {"R_igraph_distances_bellman_ford",                     (DL_FUNC) &R_igraph_distances_bellman_ford,                      5},
     {"R_igraph_distances_cutoff",                           (DL_FUNC) &R_igraph_distances_cutoff,                            5},
@@ -844,6 +849,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_induced_subgraph",                           (DL_FUNC) &R_igraph_induced_subgraph,                            3},
     {"R_igraph_induced_subgraph_map",                       (DL_FUNC) &R_igraph_induced_subgraph_map,                        3},
     {"R_igraph_intersection",                               (DL_FUNC) &R_igraph_intersection,                                2},
+    {"R_igraph_intersection_many",                          (DL_FUNC) &R_igraph_intersection_many,                           1},
     {"R_igraph_invalidate_cache",                           (DL_FUNC) &R_igraph_invalidate_cache,                            1},
     {"R_igraph_is_acyclic",                                 (DL_FUNC) &R_igraph_is_acyclic,                                  1},
     {"R_igraph_is_biconnected",                             (DL_FUNC) &R_igraph_is_biconnected,                              1},
@@ -907,6 +913,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_kamada_kawai_3d",                     (DL_FUNC) &R_igraph_layout_kamada_kawai_3d,                     13},
     {"R_igraph_layout_lgl",                                 (DL_FUNC) &R_igraph_layout_lgl,                                  8},
     {"R_igraph_layout_mds",                                 (DL_FUNC) &R_igraph_layout_mds,                                  3},
+    {"R_igraph_layout_merge_dla",                           (DL_FUNC) &R_igraph_layout_merge_dla,                            2},
     {"R_igraph_layout_random",                              (DL_FUNC) &R_igraph_layout_random,                               1},
     {"R_igraph_layout_random_3d",                           (DL_FUNC) &R_igraph_layout_random_3d,                            1},
     {"R_igraph_layout_reingold_tilford",                    (DL_FUNC) &R_igraph_layout_reingold_tilford,                     4},
@@ -1065,6 +1072,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_turan",                                      (DL_FUNC) &R_igraph_turan,                                       2},
     {"R_igraph_unfold_tree",                                (DL_FUNC) &R_igraph_unfold_tree,                                 3},
     {"R_igraph_union",                                      (DL_FUNC) &R_igraph_union,                                       2},
+    {"R_igraph_union_many",                                 (DL_FUNC) &R_igraph_union_many,                                  1},
     {"R_igraph_vcount",                                     (DL_FUNC) &R_igraph_vcount,                                      1},
     {"R_igraph_version",                                    (DL_FUNC) &R_igraph_version,                                     0},
     {"R_igraph_vertex_coloring_greedy",                     (DL_FUNC) &R_igraph_vertex_coloring_greedy,                      2},
