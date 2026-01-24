@@ -22,7 +22,9 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
 
   Vector giving the vertex types. They as assumed to be integer numbers,
   starting with one. Non-integer values are converted to integers with
-  [`as.integer()`](https://rdrr.io/r/base/integer.html).
+  [`as.integer()`](https://rdrr.io/r/base/integer.html). Character
+  vectors are converted to integers using
+  [`as.factor()`](https://rdrr.io/r/base/factor.html).
 
 - directed:
 

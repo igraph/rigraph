@@ -69,9 +69,9 @@ Other functions for manipulating graph structure:
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
   vertices("X", "Y")
 g
-#> IGRAPH df3dee1 UN-- 12 10 -- Ring graph
+#> IGRAPH d572114 UN-- 12 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from df3dee1 (vertex names):
+#> + edges from d572114 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 plot(g)
 ```

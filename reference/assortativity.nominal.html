@@ -75,7 +75,8 @@ consistent API.</p>
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>.</p></dd>
+with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>. Character vectors are converted to integers using
+<code><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor()</a></code>.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
