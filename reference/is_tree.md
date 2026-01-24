@@ -74,7 +74,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> + 1/7 vertex, from cc2e77c:
+#> + 1/7 vertex, from 227b076:
 #> [1] 1
 #> 
 ```
