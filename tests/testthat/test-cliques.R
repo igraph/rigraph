@@ -343,19 +343,19 @@ test_that("is_complete works", {
 # Tests for callback functions
 test_that("cliques_callback works", {
   withr::local_seed(123)
-  
+
   g <- sample_gnp(20, 0.3)
-  
+
   # Count cliques using callback
   count <- 0
   clique_sizes <- integer(0)
-  
+
   cliques(g, min = 3, max = 4, callback = function(clique) {
     count <<- count + 1
     clique_sizes <<- c(clique_sizes, length(clique))
     TRUE # continue search
   })
-  
+
   expect_true(count > 0)
   expect_true(all(clique_sizes >= 3))
   expect_true(all(clique_sizes <= 4))
@@ -363,12 +363,12 @@ test_that("cliques_callback works", {
 
 test_that("cliques_callback can stop early", {
   withr::local_seed(123)
-  
+
   g <- sample_gnp(20, 0.3)
-  
+
   # Stop after finding 5 cliques
   count <- 0
-  
+
   cliques(g, min = 3, callback = function(clique) {
     count <<- count + 1
     if (count >= 5) {
@@ -377,13 +377,13 @@ test_that("cliques_callback can stop early", {
       TRUE # continue
     }
   })
-  
+
   expect_equal(count, 5)
 })
 
 test_that("cliques_callback receives correct arguments", {
   g <- make_full_graph(4)
-  
+
   # Check argument types
   cliques(g, min = 3, max = 4, callback = function(clique) {
     expect_true(is.integer(clique))
@@ -395,7 +395,7 @@ test_that("cliques_callback receives correct arguments", {
 
 test_that("cliques_callback handles errors in callback", {
   g <- make_full_graph(5)
-  
+
   # Callback that throws an error
   expect_error(
     cliques(g, min = 3, callback = function(clique) {
@@ -407,31 +407,31 @@ test_that("cliques_callback handles errors in callback", {
 
 test_that("maximal_cliques_callback works", {
   withr::local_seed(123)
-  
+
   g <- sample_gnp(15, 0.3)
-  
+
   # Count maximal cliques using callback
   count <- 0
   clique_sizes <- integer(0)
-  
+
   maximal_cliques(g, min = 3, callback = function(clique) {
     count <<- count + 1
     clique_sizes <<- c(clique_sizes, length(clique))
     TRUE # continue search
   })
-  
+
   expect_true(count > 0)
   expect_true(all(clique_sizes >= 3))
 })
 
 test_that("maximal_cliques_callback can stop early", {
   withr::local_seed(123)
-  
+
   g <- sample_gnp(15, 0.3)
-  
+
   # Stop after finding 3 maximal cliques
   count <- 0
-  
+
   maximal_cliques(g, callback = function(clique) {
     count <<- count + 1
     if (count >= 3) {
@@ -440,13 +440,13 @@ test_that("maximal_cliques_callback can stop early", {
       TRUE # continue
     }
   })
-  
+
   expect_equal(count, 3)
 })
 
 test_that("maximal_cliques_callback handles errors in callback", {
   g <- make_full_graph(5)
-  
+
   # Callback that throws an error
   expect_error(
     maximal_cliques(g, callback = function(clique) {

@@ -119,7 +119,6 @@ simple_cycles <- function(
       max_cycle_length = max %||% -1
     )
   } else {
-
     simple_cycles_callback_closure_impl(
       graph = graph,
       mode = mode,

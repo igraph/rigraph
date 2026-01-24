@@ -338,7 +338,7 @@ max_cliques <- function(
     }
     return(invisible(NULL))
   }
-  
+
   # Use callback-based implementation for both callback and collector modes
   if (is.null(callback)) {
     # Collector mode: collect all cliques in a list
@@ -352,23 +352,32 @@ max_cliques <- function(
         TRUE
       }
     )
-    
+
     # Note: subset parameter is not supported with callback-based implementation
     if (!is.null(subset)) {
-      warning("subset parameter is ignored when using callback-based implementation")
+      cli::cli_abort(
+        "{.arg subset} is ignored when {.arg callback} is provided"
+      )
     }
-    
+
     if (igraph_opt("return.vs.es")) {
-      cliques_list <- lapply(cliques_list, unsafe_create_vs, graph = graph, verts = V(graph))
+      cliques_list <- lapply(
+        cliques_list,
+        unsafe_create_vs,
+        graph = graph,
+        verts = V(graph)
+      )
     }
-    
+
     cliques_list
   } else {
     # Callback mode: call user function
     if (!is.null(subset)) {
-      warning("subset parameter is ignored when using callback-based implementation")
+      cli::cli_abort(
+        "{.arg subset} is ignored when {.arg callback} is provided"
+      )
     }
-    
+
     maximal_cliques_callback_closure_impl(
       graph = graph,
       min_size = min %||% 0,

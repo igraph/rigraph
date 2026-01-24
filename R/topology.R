@@ -1388,7 +1388,7 @@ isomorphisms_vf2 <- function(
 ) {
   # Argument checks
   check_dots_empty()
-  
+
   # Handle default vertex colors from attributes
   if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
     vertex.color1 <- V(graph1)$color
