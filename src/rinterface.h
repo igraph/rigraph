@@ -216,8 +216,6 @@ igraph_error_t igraph_get_isomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *vertex_color2,
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
-    igraph_vector_int_t *map12,
-    igraph_vector_int_t *map21,
     SEXP callback);
 
 igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
@@ -227,6 +225,4 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *vertex_color2,
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
-    igraph_vector_int_t *map12,
-    igraph_vector_int_t *map21,
     SEXP callback);
