@@ -105,6 +105,7 @@ modify_list <- function(x, y) {
 #'
 #' @return This function never returns; it always throws an error.
 #' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' # This will throw an error with source location information
