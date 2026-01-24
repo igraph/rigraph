@@ -108,6 +108,7 @@ REAL:
             REAL(%I%)[0]=%C%;
 
 DOUBLE:
+    # A C double - similar to REAL but uses C's double type instead of igraph_real_t
     CTYPE: double
     CALL:
         IN: '%C%'
@@ -123,6 +124,11 @@ DOUBLE:
             REAL(%I%)[0]=%C%;
 
 ERROR:
+    # An igraph error code
+    # Note: No OUTCONV is provided because ERROR is handled specially as a return
+    # type - it's wrapped in IGRAPH_R_CHECK() which doesn't use output conversion.
+    # When ERROR is used as an input parameter (e.g., in igraph_strerror), only
+    # INCONV is needed.
     CTYPE: igraph_error_t
     CALL:
         IN: '%C%'
