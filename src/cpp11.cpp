@@ -598,6 +598,7 @@ extern SEXP Rx_igraph_st_vertex_connectivity(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_star(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_subcomponent(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_subisomorphic_lad(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_test_error_with_source(void);
 extern SEXP Rx_igraph_transitivity_local_undirected_all(SEXP, SEXP);
 extern SEXP Rx_igraph_union(SEXP, SEXP);
 extern SEXP Rx_igraph_vcount(SEXP);
@@ -1192,6 +1193,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_star",                                      (DL_FUNC) &Rx_igraph_star,                                       3},
     {"Rx_igraph_subcomponent",                              (DL_FUNC) &Rx_igraph_subcomponent,                               3},
     {"Rx_igraph_subisomorphic_lad",                         (DL_FUNC) &Rx_igraph_subisomorphic_lad,                          7},
+    {"Rx_igraph_test_error_with_source",                    (DL_FUNC) &Rx_igraph_test_error_with_source,                     0},
     {"Rx_igraph_transitivity_local_undirected_all",         (DL_FUNC) &Rx_igraph_transitivity_local_undirected_all,          2},
     {"Rx_igraph_union",                                     (DL_FUNC) &Rx_igraph_union,                                      2},
     {"Rx_igraph_vcount",                                    (DL_FUNC) &Rx_igraph_vcount,                                     1},

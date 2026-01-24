@@ -695,12 +695,10 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
     }
     big <- permute(big, perm)
 
-    on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call(Rx_igraph_difference, big, small)
+    res <- difference_impl(orig = big, sub = small)
     permute(res, match(V(res)$name, bnames))
   } else {
-    on.exit(.Call(Rx_igraph_finalizer))
-    .Call(Rx_igraph_difference, big, small)
+    difference_impl(orig = big, sub = small)
   }
 }
 
@@ -746,8 +744,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_complementer, graph, as.logical(loops))
+  complementer_impl(graph = graph, loops = as.logical(loops))
 }
 
 
