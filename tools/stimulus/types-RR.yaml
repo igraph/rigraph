@@ -489,12 +489,6 @@ REWIRING_MODE:
 SPARSEMAT:
     INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
-SPARSEMAT_OR_0:
-    INCONV: |-
-        if (!is.null(%I%)) {
-          requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-        }
-
 VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
 
@@ -502,8 +496,6 @@ MATRIX_COMPLEX:
     INCONV: '%I%[] <- as.complex(%I%)'
 
 PLFIT: {}
-
-SPARSEMATPTR: {}
 
 MAXFLOW_STATS:
     CALL: {}
