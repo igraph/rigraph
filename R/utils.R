@@ -104,7 +104,6 @@ modify_list <- function(x, y) {
 #' error occurred.
 #'
 #' @return This function never returns; it always throws an error.
-#' @export
 #' @keywords internal
 #' @examples
 #' \dontrun{

@@ -5,5 +5,5 @@
     Condition
       Error in `test_error_with_source()`:
       ! Test error message for verifying source location formatting. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: rinterface_extra.c:<linenumber>
 
