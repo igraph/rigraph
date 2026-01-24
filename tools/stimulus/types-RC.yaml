@@ -132,10 +132,6 @@ ERROR:
         IN: |-
             IGRAPH_R_CHECK_INT(%I%);
             %C% = (igraph_error_t) INTEGER(%I%)[0];
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=NEW_INTEGER(1));
-            INTEGER(%I%)[0]=(int) %C%;
 
 BOOLEAN:
     CTYPE: igraph_bool_t

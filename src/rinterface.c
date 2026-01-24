@@ -9736,8 +9736,7 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP res, SEXP min_size, SEXP max
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13290,8 +13289,7 @@ SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP 
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13319,8 +13317,7 @@ SEXP R_igraph_read_graph_lgl(SEXP instream, SEXP names, SEXP weights, SEXP direc
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13562,8 +13559,7 @@ SEXP R_igraph_write_graph_edgelist(SEXP graph, SEXP outstream) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13589,8 +13585,7 @@ SEXP R_igraph_write_graph_ncol(SEXP graph, SEXP outstream, SEXP names, SEXP weig
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13619,8 +13614,7 @@ SEXP R_igraph_write_graph_lgl(SEXP graph, SEXP outstream, SEXP names, SEXP weigh
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13646,8 +13640,7 @@ SEXP R_igraph_write_graph_leda(SEXP graph, SEXP outstream, SEXP names, SEXP weig
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13672,8 +13665,7 @@ SEXP R_igraph_write_graph_graphml(SEXP graph, SEXP outstream, SEXP prefixattr) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13695,8 +13687,7 @@ SEXP R_igraph_write_graph_pajek(SEXP graph, SEXP outstream) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13759,8 +13750,7 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP outstream, SEXP options, SEXP id,
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -13782,8 +13772,7 @@ SEXP R_igraph_write_graph_dot(SEXP graph, SEXP outstream) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -18375,8 +18364,7 @@ SEXP R_igraph_progress(SEXP message, SEXP percent) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -18396,8 +18384,7 @@ SEXP R_igraph_status(SEXP message) {
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
@@ -18577,8 +18564,7 @@ SEXP R_igraph_motifs_randesu_callback_closure(SEXP graph, SEXP size, SEXP cut_pr
 
                                         /* Convert output */
 
-  PROTECT(r_result=NEW_INTEGER(1));
-  INTEGER(r_result)[0]=(int) c_result;
+
 
   return(R_NilValue);
 }
