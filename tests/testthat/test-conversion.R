@@ -197,15 +197,13 @@ test_that("as_adjacency_matrix() works -- dense", {
 
 test_that("as_adjacency_matrix() errors well -- dense", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
-  expect_snapshot(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
   )
 
   E(g)$bla <- letters[1:ecount(g)]
-  expect_snapshot(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
   )
 })
 

@@ -100,13 +100,11 @@ test_that("st_cuts errors work", {
 
   expect_snapshot_igraph_error(st_cuts(g_path, source = "a", target = NULL))
   expect_snapshot_igraph_error(st_cuts(g_path, source = NULL, target = "a"))
-  expect_snapshot(
-    st_min_cuts(g_path, source = "a", target = NULL),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    st_min_cuts(g_path, source = "a", target = NULL)
   )
-  expect_snapshot(
-    st_min_cuts(g_path, source = NULL, target = "a"),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    st_min_cuts(g_path, source = NULL, target = "a")
   )
 })
 
@@ -192,13 +190,11 @@ test_that("edge_disjoint_paths works", {
 
 test_that("edge_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(
-    edge_disjoint_paths(g_path, source = 1, target = NULL),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    edge_disjoint_paths(g_path, source = 1, target = NULL)
   )
-  expect_snapshot(
-    edge_disjoint_paths(g_path, source = NULL, target = 1),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    edge_disjoint_paths(g_path, source = NULL, target = 1)
   )
 })
 
