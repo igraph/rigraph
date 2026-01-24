@@ -5804,7 +5804,7 @@
       hrg_sample_impl(hrg = NULL)
     Condition
       Error in `hrg_sample_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_sample_many_impl basic
@@ -5835,7 +5835,7 @@
       hrg_sample_many_impl(hrg = NULL, num_samples = 2)
     Condition
       Error in `hrg_sample_many_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_game_impl basic
@@ -5857,7 +5857,7 @@
       hrg_game_impl(hrg = NULL)
     Condition
       Error in `hrg_game_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_consensus_impl errors
