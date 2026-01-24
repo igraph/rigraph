@@ -50,7 +50,7 @@ max(abs(rowSums(W)) - 1)
 
 }
 \seealso{
-\code{\link[=as_adj]{as_adj()}}
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

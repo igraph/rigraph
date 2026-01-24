@@ -30,7 +30,8 @@ perform these checks, as they can be done quickly compared to the
 connectivity calculation itself.  They were suggested by Peter McMahan,
 thanks Peter.}
 
-\item{...}{Ignored.}
+\item{...}{Additional arguments passed to methods. Not used by \code{vertex_connectivity()}
+directly but may be used by other methods that implement \code{cohesion()}.}
 }
 \value{
 A scalar real value.
@@ -85,7 +86,7 @@ vertex_connectivity(g2, 100, 1)
 vertex_disjoint_paths(g2, 100, 1)
 
 g <- sample_gnp(50, 5 / 50)
-g <- as.directed(g)
+g <- as_directed(g)
 g <- induced_subgraph(g, subcomponent(g, 1))
 cohesion(g)
 

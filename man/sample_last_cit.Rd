@@ -17,7 +17,13 @@ sample_last_cit(
   directed = TRUE
 )
 
-last_cit(...)
+last_cit(
+  n,
+  edges = 1,
+  agebins = n/7100,
+  pref = (1:(agebins + 1))^-3,
+  directed = TRUE
+)
 
 sample_cit_types(
   n,
@@ -28,7 +34,14 @@ sample_cit_types(
   attr = TRUE
 )
 
-cit_types(...)
+cit_types(
+  n,
+  edges = 1,
+  types = rep(0, n),
+  pref = rep(1, length(types)),
+  directed = TRUE,
+  attr = TRUE
+)
 
 sample_cit_cit_types(
   n,
@@ -39,7 +52,14 @@ sample_cit_cit_types(
   attr = TRUE
 )
 
-cit_cit_types(...)
+cit_cit_types(
+  n,
+  edges = 1,
+  types = rep(0, n),
+  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  directed = TRUE,
+  attr = TRUE
+)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -53,8 +73,6 @@ matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
 probabilities for the different vertex types.}
 
 \item{directed}{Logical scalar, whether to generate directed networks.}
-
-\item{...}{Passed to the actual constructor.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
 Types are numbered from zero.}
@@ -80,9 +98,11 @@ vertex only.
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},

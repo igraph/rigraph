@@ -53,8 +53,11 @@ Other functions for manipulating graph structure:
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}
 }
 \concept{functions for manipulating graph structure}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}.}
+

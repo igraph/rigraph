@@ -1,15 +1,15 @@
-
 #' Simple graphs
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.simple()` was renamed to `is_simple()` to create a more
+#' `is.simple()` was renamed to [is_simple()] to create a more
 #' consistent API.
 #' @inheritParams is_simple
 #' @keywords internal
 #' @export
-is.simple <- function(graph) { # nocov start
+is.simple <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.simple()", "is_simple()")
   is_simple(graph = graph)
 } # nocov end
@@ -88,11 +88,29 @@ is.simple <- function(graph) { # nocov start
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
-simplify <- simplify_impl
+#' @cdocs igraph_simplify
+simplify <- function(
+  graph,
+  remove.multiple = TRUE,
+  remove.loops = TRUE,
+  edge.attr.comb = igraph_opt("edge.attr.comb")
+) {
+  simplify_impl(
+    graph = graph,
+    remove_multiple = remove.multiple,
+    remove_loops = remove.loops,
+    edge_attr_comb = edge.attr.comb
+  )
+}
 
 #' @export
 #' @rdname simplify
-is_simple <- is_simple_impl
+#' @cdocs igraph_is_simple
+is_simple <- function(graph) {
+  is_simple_impl(
+    graph = graph
+  )
+}
 
 #' @export
 #' @rdname simplify
@@ -100,9 +118,10 @@ simplify_and_colorize <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_simplify_and_colorize, graph)
+  res <- simplify_and_colorize_impl(
+    graph = graph
+  )
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

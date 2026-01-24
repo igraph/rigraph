@@ -14,7 +14,7 @@ given. See the Value and Details sections for explanation.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.options()} was renamed to \code{igraph_options()} to create a more
+\code{igraph.options()} was renamed to \code{\link[=igraph_options]{igraph_options()}} to create a more
 consistent API.
 }
 \keyword{internal}

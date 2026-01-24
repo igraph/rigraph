@@ -19,13 +19,22 @@ it is \sQuote{\verb{in}}, then all directions are considered as opposite to
 the original one in the input graph.}
 }
 \value{
-A list with components: \item{dom}{ A numeric vector giving the
-immediate dominators for each vertex. For vertices that are unreachable from
-the root, it contains \code{NaN}. For the root vertex itself it contains
-minus one.  } \item{domtree}{ A graph object, the dominator tree. Its vertex
-ids are the as the vertex ids of the input graph. Isolate vertices are the
-ones that are unreachable from the root.  } \item{leftout}{ A numeric vector
-containing the vertex ids that are unreachable from the root.  }
+A list with components:
+\describe{
+\item{dom}{
+A numeric vector giving the immediate dominators for each vertex.
+For vertices that are unreachable from the root, it contains \code{NaN}.
+For the root vertex itself it contains minus one.
+}
+\item{domtree}{
+A graph object, the dominator tree.
+Its vertex ids are the as the vertex ids of the input graph.
+Isolate vertices are the ones that are unreachable from the root.
+}
+\item{leftout}{
+A numeric vector containing the vertex ids that are unreachable from the root.
+}
+}
 }
 \description{
 Dominator tree of a directed graph.

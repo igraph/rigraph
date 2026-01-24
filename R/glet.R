@@ -1,17 +1,29 @@
-
 #' Graphlet decomposition of a graph
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.project()` was renamed to `graphlet_proj()` to create a more
+#' `graphlets.project()` was renamed to [graphlet_proj()] to create a more
 #' consistent API.
 #' @inheritParams graphlet_proj
 #' @keywords internal
 #' @export
-graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu = rep(1, length(cliques))) { # nocov start
+graphlets.project <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
-  graphlet_proj(graph = graph, weights = weights, cliques = cliques, niter = niter, Mu = Mu)
+  graphlet_proj(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    niter = niter,
+    Mu = Mu
+  )
 } # nocov end
 
 #' Graphlet decomposition of a graph
@@ -19,13 +31,18 @@ graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.candidate.basis()` was renamed to `graphlet_basis()` to create a more
+#' `graphlets.candidate.basis()` was renamed to [graphlet_basis()] to create a more
 #' consistent API.
 #' @inheritParams graphlet_basis
 #' @keywords internal
 #' @export
-graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.candidate.basis()", "graphlet_basis()")
+graphlets.candidate.basis <- function(graph, weights = NULL) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graphlets.candidate.basis()",
+    "graphlet_basis()"
+  )
   graphlet_basis(graph = graph, weights = weights)
 } # nocov end
 
@@ -54,15 +71,27 @@ graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
 #' @param cliques A list of vertex ids, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
-#' @return `graphlets()` returns a list with two members: \item{cliques}{A
-#'   list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
-#'   basis.}
+#' @return `graphlets()` returns a list with two members:
+#'   \describe{
+#'     \item{cliques}{
+#'       A list of subgraphs, the candidate graphlet basis.
+#'       Each subgraph is give by a vector of vertex ids.
+#'     }
+#'     \item{Mu}{
+#'       The weights of the subgraphs in graphlet basis.
+#'     }
+#'   }
 #'
-#'   `graphlet_basis()` returns a list of two elements: \item{cliques}{A list
-#'   of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{thresholds}{The weight thresholds used for
-#'   finding the subgraphs.}
+#'   `graphlet_basis()` returns a list of two elements:
+#'   \describe{
+#'     \item{cliques}{
+#'       A list of subgraphs, the candidate graphlet basis.
+#'       Each subgraph is give by a vector of vertex ids.
+#'     }
+#'     \item{thresholds}{
+#'       The weight thresholds used for finding the subgraphs.
+#'     }
+#'   }
 #'
 #'   `graphlet_proj()` return a numeric vector, the weights of the graphlet
 #'   basis subgraphs.
@@ -107,32 +136,21 @@ graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
 #' @family glet
 #' @export
 graphlet_basis <- function(graph, weights = NULL) {
-  ## Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-
-  ## Drop all attributes, we don't want to deal with them, TODO
-  graph2 <- graph
-  graph2[[igraph_t_idx_attr]] <- list(c(1, 0, 1), list(), list(), list())
-
-  on.exit(.Call(R_igraph_finalizer))
-  ## Function call
-  res <- .Call(R_igraph_graphlets_candidate_basis, graph2, weights)
-
-  res
+  graphlets_candidate_basis_impl(
+    graph = graph,
+    weights = weights
+  )
 }
 
 #' @rdname graphlet_basis
 #' @export
-graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
-                          Mu = rep(1, length(cliques))) {
+graphlet_proj <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -146,11 +164,13 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
-
-  res
+  graphlets_project_impl(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    Muc = Mu,
+    niter = niter
+  )
 }
 
 #################
@@ -191,7 +211,11 @@ function() {
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
 
-  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode = "undirected", weighted = TRUE)
+  g <- graph_from_adjacency_matrix(
+    D1 + D2 + D3,
+    mode = "undirected",
+    weighted = TRUE
+  )
   gl <- graphlets(g, iter = 1000)
 
   fitandplot(g, gl)
@@ -205,4 +229,11 @@ function() {
 
 #' @rdname graphlet_basis
 #' @export
-graphlets <- graphlets_impl
+#' @cdocs igraph_graphlets
+graphlets <- function(graph, weights = NULL, niter = 1000) {
+  graphlets_impl(
+    graph = graph,
+    weights = weights,
+    niter = niter
+  )
+}

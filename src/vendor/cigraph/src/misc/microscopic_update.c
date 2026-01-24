@@ -26,7 +26,7 @@
 #include "igraph_random.h"
 #include "igraph_error.h"
 
-/*
+/**
  * Internal use only.
  * Compute the cumulative proportionate values of a vector. The vector is
  * assumed to hold values associated with edges.
@@ -178,7 +178,7 @@ static igraph_error_t igraph_i_ecumulative_proportionate_values(const igraph_t *
     return IGRAPH_SUCCESS;
 }
 
-/*
+/**
  * Internal use only.
  * Compute the cumulative proportionate values of a vector. The vector is
  * assumed to hold values associated with vertices.
@@ -338,7 +338,7 @@ static igraph_error_t igraph_i_vcumulative_proportionate_values(const igraph_t *
     return IGRAPH_SUCCESS;
 }
 
-/*
+/**
  * Internal use only.
  * A set of standard tests to be performed prior to strategy updates. The
  * tests contained in this function are common to many strategy revision
@@ -427,7 +427,7 @@ static igraph_error_t igraph_i_microscopic_standard_tests(const igraph_t *graph,
 
     igraph_integer_t nvert;
     igraph_vector_int_t degv;
-    *updates = 1;
+    *updates = true;
 
     /* sanity checks */
     if (graph == NULL) {
@@ -460,11 +460,11 @@ static igraph_error_t igraph_i_microscopic_standard_tests(const igraph_t *graph,
      */
     /* given graph has < 2 vertices */
     if (nvert < 2) {
-        *updates = 0;
+        *updates = false;
     }
     /* graph has >= 2 vertices, but no edges */
     if (igraph_ecount(graph) < 1) {
-        *updates = 0;
+        *updates = false;
     }
 
     /* Test for vertex isolation, depending on the perspective given. For
@@ -483,7 +483,7 @@ static igraph_error_t igraph_i_microscopic_standard_tests(const igraph_t *graph,
         IGRAPH_CHECK(igraph_degree(graph, &degv, igraph_vss_1(vid),
                                    mode, IGRAPH_NO_LOOPS));
         if (VECTOR(degv)[0] < 1) {
-            *updates = 0;
+            *updates = false;
         }
         igraph_vector_int_destroy(&degv);
         IGRAPH_FINALLY_CLEAN(1);
@@ -518,7 +518,7 @@ static igraph_error_t igraph_i_microscopic_standard_tests(const igraph_t *graph,
  *        in-neighbours (respectively out-neighbours), but \p vid has zero
  *        in-neighbours (respectively out-neighbours). Loops are ignored in
  *        computing the degree (in, out, all) of \p vid.
- * \param optimality Logical; controls the type of optimality to be used.
+ * \param optimality Boolean; controls the type of optimality to be used.
  *        Supported values are:
  *        \clist
  *        \cli IGRAPH_MAXIMUM
@@ -585,7 +585,7 @@ igraph_error_t igraph_deterministic_optimal_imitation(const igraph_t *graph,
 
     IGRAPH_CHECK(igraph_i_microscopic_standard_tests(graph, vid, quantities,
                  strategies, mode, &updates,
-                 /*is local?*/ 1));
+                 /*is local?*/ true));
     if (!updates) {
         return IGRAPH_SUCCESS;    /* Nothing to do */
     }
@@ -746,7 +746,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     /* don't test for vertex isolation, hence vid = -1 and islocal = 0 */
     IGRAPH_CHECK(igraph_i_microscopic_standard_tests(graph, /*vid*/ -1,
                  quantities, strategies, mode,
-                 &updates, /*is local?*/ 0));
+                 &updates, /*is local?*/ false));
     if (!updates) {
         return IGRAPH_SUCCESS;    /* nothing more to do */
     }
@@ -764,7 +764,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     /* Cumulative proportionate quantities. We are using the global */
     /* perspective, hence islocal = 0, vid = -1 and mode = IGRAPH_ALL. */
     IGRAPH_CHECK(igraph_i_vcumulative_proportionate_values(graph, quantities, &V,
-                 /*is local?*/ 0,
+                 /*is local?*/ false,
                  /*vid*/ -1,
                  /*mode*/ IGRAPH_ALL));
 
@@ -812,7 +812,7 @@ igraph_error_t igraph_moran_process(const igraph_t *graph,
     /* still might happen that the edge weights of interest would sum to zero. */
     /* An error would be raised in that case. */
     IGRAPH_CHECK(igraph_i_ecumulative_proportionate_values(graph, weights, &V,
-                 /*is local?*/ 1,
+                 /*is local?*/ true,
                  /*vertex*/ a, mode));
 
     /* Choose a vertex for death from among all vertices in a's perspective. */
@@ -1149,7 +1149,7 @@ igraph_error_t igraph_stochastic_imitation(const igraph_t *graph,
     }
     IGRAPH_CHECK(igraph_i_microscopic_standard_tests(graph, vid, quantities,
                  strategies, mode, &updates,
-                 /*is local?*/ 1));
+                 /*is local?*/ true));
     if (!updates) {
         return IGRAPH_SUCCESS;    /* nothing more to do */
     }

@@ -6,7 +6,7 @@ c-----------------------------------------------------------------------
 c
       subroutine igraphxdsortr (which, apply, n, x1, x2)
 c
-      character*2 which
+      character  which*2
       integer    apply
       integer    n
       Double precision
@@ -30,7 +30,7 @@ c-----------------------------------------------------------------------
 c
       subroutine igraphxdsortc (which, apply, n, xreal, ximag, y)
 c
-      character*2 which
+      character   which*2
       integer    apply
       integer    n
 c

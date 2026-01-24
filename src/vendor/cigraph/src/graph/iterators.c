@@ -444,7 +444,7 @@ igraph_error_t igraph_vs_vector_copy(igraph_vs_t *vs, const igraph_vector_int_t 
  *
  * Time complexity: O(1).
  *
- * \example examples/simple/igraph_vs_seq.c
+ * \example examples/simple/igraph_vs_range.c
  */
 
 igraph_error_t igraph_vs_range(igraph_vs_t *vs, igraph_integer_t start, igraph_integer_t end) {
@@ -492,7 +492,7 @@ igraph_vs_t igraph_vss_range(igraph_integer_t start, igraph_integer_t end) {
  *
  * Time complexity: O(1).
  *
- * \example examples/simple/igraph_vs_seq.c
+ * \example examples/simple/igraph_vs_range.c
  */
 
 igraph_error_t igraph_vs_seq(igraph_vs_t *vs, igraph_integer_t from, igraph_integer_t to) {
@@ -592,8 +592,9 @@ igraph_error_t igraph_vs_as_vector(const igraph_t *graph, igraph_vs_t vs,
  * \function igraph_vs_copy
  * \brief Creates a copy of a vertex selector.
  *
- * \param src The selector being copied.
  * \param dest An uninitialized selector that will contain the copy.
+ * \param src The selector being copied.
+ * \return Error code.
  */
 igraph_error_t igraph_vs_copy(igraph_vs_t* dest, const igraph_vs_t* src) {
     igraph_vector_int_t *vec;
@@ -632,7 +633,9 @@ igraph_vs_type_t igraph_vs_type(const igraph_vs_t *vs) {
  * yield when it is iterated over.
  *
  * \param graph The graph over which we will iterate.
+ * \param vs the vertex selector.
  * \param result The result will be returned here.
+ * \return Error code.
  */
 igraph_error_t igraph_vs_size(const igraph_t *graph, const igraph_vs_t *vs,
                    igraph_integer_t *result) {
@@ -915,13 +918,16 @@ igraph_error_t igraph_vit_as_vector(const igraph_vit_t *vit, igraph_vector_int_t
  * \param es Pointer to an uninitialized edge selector object.
  * \param order Constant giving the order in which the edges will be
  *        included in the selector. Possible values:
- *        \c IGRAPH_EDGEORDER_ID, edge ID order.
- *        \c IGRAPH_EDGEORDER_FROM, vertex ID order, the id of the
- *           \em source vertex counts for directed graphs. The order
- *           of the incident edges of a given vertex is arbitrary.
- *        \c IGRAPH_EDGEORDER_TO, vertex ID order, the ID of the \em
- *           target vertex counts for directed graphs. The order
- *           of the incident edges of a given vertex is arbitrary.
+ *        \clist
+ *        \cli IGRAPH_EDGEORDER_ID
+ *        Edge ID order; currently performs the fastest.
+ *        \cli IGRAPH_EDGEORDER_FROM
+ *        Vertex ID order, the id of the \em source vertex counts for directed
+ *        graphs. The order of the incident edges of a given vertex is arbitrary.
+ *        \cli IGRAPH_EDGEORDER_TO
+ *        Vertex ID order, the ID of the \em target vertex counts for directed
+ *        graphs. The order of the incident edges of a given vertex is arbitrary.
+ *        \endclist
  *        For undirected graph the latter two is the same.
  * \return Error code.
  * \sa \ref igraph_ess_all(), \ref igraph_es_destroy()
@@ -1156,7 +1162,7 @@ igraph_es_t igraph_ess_vector(const igraph_vector_int_t *v) {
  * interval is closed from the left and open from the right, following C
  * conventions.
  *
- * \param vs Pointer to an uninitialized edge selector object.
+ * \param es Pointer to an uninitialized edge selector object.
  * \param start The first edge ID to be included in the edge selector.
  * \param end The first edge ID \em not to be included in the edge selector.
  * \return Error code.
@@ -1419,14 +1425,14 @@ igraph_error_t igraph_es_path_small(igraph_es_t *es, igraph_bool_t directed, int
  * \param es Pointer to an uninitialized edge selector object.
  * \param from The ID of the source vertex.
  * \param to The ID of the target vertex.
- * \param direectd If edge directions should be taken into account. This
+ * \param directed If edge directions should be taken into account. This
  *      will be ignored if the graph to select from is undirected.
  * \return Error code.
  * \sa \ref igraph_es_destroy()
  *
  * Time complexity: O(1).
  */
-IGRAPH_EXPORT igraph_error_t igraph_es_all_between(
+igraph_error_t igraph_es_all_between(
     igraph_es_t *es, igraph_integer_t from, igraph_integer_t to,
     igraph_bool_t directed
 ) {
@@ -1494,8 +1500,11 @@ igraph_bool_t igraph_es_is_all(const igraph_es_t *es) {
 /**
  * \function igraph_es_copy
  * \brief Creates a copy of an edge selector.
- * \param src The selector being copied.
+ *
  * \param dest An uninitialized selector that will contain the copy.
+ * \param src The selector being copied.
+ * \return Error code.
+ *
  * \sa \ref igraph_es_destroy()
  */
 igraph_error_t igraph_es_copy(igraph_es_t* dest, const igraph_es_t* src) {
@@ -1538,6 +1547,7 @@ igraph_error_t igraph_es_copy(igraph_es_t* dest, const igraph_es_t* src) {
  * \param graph Pointer to a graph to check if the edges in the selector exist.
  * \param es An edge selector object.
  * \param v Pointer to initialized vector. The result will be stored here.
+ * \return Error code.
  *
  * Time complexity: O(n), the number of edges in the selector.
  */
@@ -1577,7 +1587,9 @@ static igraph_error_t igraph_i_es_all_between_size(const igraph_t *graph,
  * yield when it is iterated over.
  *
  * \param graph The graph over which we will iterate.
+ * \param es The edge selector.
  * \param result The result will be returned here.
+ * \return Error code.
  */
 igraph_error_t igraph_es_size(const igraph_t *graph, const igraph_es_t *es,
                    igraph_integer_t *result) {
@@ -1948,7 +1960,7 @@ static igraph_error_t igraph_i_eit_all_between(
  *
  * Time complexity: depends on the type of the edge selector. For edge
  * selectors created by \ref igraph_es_all(), \ref igraph_es_none(),
- * \ref igraph_es_1(), \ref igraph_es_vector(), \ref igraph_es_seq() it is
+ * \ref igraph_es_1(), \ref igraph_es_vector(), \ref igraph_es_range() it is
  * O(1). For \ref igraph_es_incident() it is O(d) where d is the number of
  * incident edges of the vertex.
  */

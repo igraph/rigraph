@@ -22,10 +22,14 @@
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
 #'   list with two entries:
-#'   \item{res}{Logical value that indicates whether the
-#'   graph is a tree.}
-#'   \item{root}{The root vertex of the tree; undefined if
-#'   the graph is not a tree.}
+#'   \describe{
+#'     \item{res}{
+#'       Logical value that indicates whether the graph is a tree.
+#'     }
+#'     \item{root}{
+#'       The root vertex of the tree; undefined if the graph is not a tree.
+#'     }
+#'   }
 #'
 #' @keywords graphs
 #' @examples
@@ -36,8 +40,18 @@
 #'
 #' @family trees
 #' @export
-is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALSE) {
-  out <- is_tree_impl(graph, mode, details)
+#' @cdocs igraph_is_tree
+is_tree <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
+  out <- is_tree_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
     out$root <- V(graph)[1]
   }
@@ -67,20 +81,37 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'   or also a possible root (`TRUE`)
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
-#'   list with two entries: \item{res}{Logical value that indicates whether the
-#'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
-#'   the graph is not a tree.}
+#'   list with two entries:
+#'   \describe{
+#'     \item{res}{
+#'       Logical value that indicates whether the graph is a tree.
+#'     }
+#'     \item{root}{
+#'       The root vertex of the tree; undefined if the graph is not a tree.
+#'     }
+#'   }
 #'
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_tree(3) + make_tree(5,3)
+#' g <- make_tree(3) + make_tree(5, 3)
 #' is_forest(g)
 #' is_forest(g, details = TRUE)
 #'
 #' @family trees
 #' @export
-is_forest <- is_forest_impl
+#' @cdocs igraph_is_forest
+is_forest <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
+  is_forest_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+}
 
 #' Convert a tree graph to its Prüfer sequence
 #'
@@ -106,7 +137,12 @@ is_forest <- is_forest_impl
 #'
 #' @family trees
 #' @export
-to_prufer <- to_prufer_impl
+#' @cdocs igraph_to_prufer
+to_prufer <- function(graph) {
+  to_prufer_impl(
+    graph = graph
+  )
+}
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
@@ -122,16 +158,22 @@ to_prufer <- to_prufer_impl
 #'   given vertex will be processed, and the result will be a spanning tree of the
 #'   component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#'   [subgraph.edges()] to extract the corresponding subgraph.
+#'   [subgraph_from_edges()] to extract the corresponding subgraph.
 #'
 #' @keywords graph
-#' @seealso [subgraph.edges()] to extract the tree itself
+#' @seealso [subgraph_from_edges()] to extract the tree itself
 #' @examples
 #'
 #' g <- make_full_graph(10) %du% make_full_graph(5)
 #' edges <- sample_spanning_tree(g)
-#' forest <- subgraph.edges(g, edges)
+#' forest <- subgraph_from_edges(g, edges)
 #'
 #' @family trees
 #' @export
-sample_spanning_tree <- random_spanning_tree_impl
+#' @cdocs igraph_random_spanning_tree
+sample_spanning_tree <- function(graph, vid = 0) {
+  random_spanning_tree_impl(
+    graph = graph,
+    vid = vid
+  )
+}

@@ -7,7 +7,7 @@
 \usage{
 sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
 
-grg(...)
+grg(nodes, radius, torus = FALSE, coords = FALSE)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
@@ -19,8 +19,6 @@ edge.}
 
 \item{coords}{Logical scalar, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
-
-\item{...}{Passed to \code{sample_grg()}.}
 }
 \value{
 A graph object. If \code{coords} is \code{TRUE} then with vertex
@@ -45,9 +43,11 @@ g2 <- sample_grg(1000, 0.05, torus = TRUE)
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -72,7 +72,7 @@ Random graph models (games)
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}, first version was
-written by Keith Briggs (\url{http://keithbriggs.info/}).
+written by Keith Briggs (\url{https://keithbriggs.info/}).
 }
 \concept{games}
 \keyword{graphs}

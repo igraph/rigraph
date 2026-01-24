@@ -1,15 +1,9 @@
-
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
 ## usethis namespace: start
 #' @importFrom lifecycle deprecated
 #' @importFrom magrittr %>%
-#' @importFrom rlang .data .env
-#' @importFrom rlang check_dots_empty
-#' @importFrom rlang check_installed
-#' @importFrom rlang inject
-#' @importFrom rlang warn
-#' @importFrom rlang %||%
+#' @import rlang
 ## usethis namespace: end
 NULL
 
@@ -90,7 +84,7 @@ NULL
 #'   To create small graphs with a given structure probably the
 #'   [graph_from_literal()] function is easiest. It uses R's formula
 #'   interface, its manual page contains many examples. Another option is
-#'   [graph()], which takes numeric vertex ids directly.
+#'   [make_graph()], which takes numeric vertex ids directly.
 #'   [graph_from_atlas()] creates graph from the Graph Atlas,
 #'   [make_graph()] can create some special graphs.
 #'

@@ -13,7 +13,7 @@ results a warning, and undefined results.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{triad.census()} was renamed to \code{triad_census()} to create a more
+\code{triad.census()} was renamed to \code{\link[=triad_census]{triad_census()}} to create a more
 consistent API.
 }
 \keyword{internal}

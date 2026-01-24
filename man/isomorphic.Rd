@@ -63,17 +63,17 @@ This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:
 \describe{
-\item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-colors of the vertices for colored graph isomorphism. If they
-are not given, but the graph has a \dQuote{color} vertex attribute,
-then it will be used. If you want to ignore these attributes, then
-supply \code{NULL} for both of these arguments. See also examples
-below.}
-\item{edge.color1, edge.color2}{Optional integer vectors giving the
-colors of the edges for edge-colored (sub)graph isomorphism. If they
-are not given, but the graph has a \dQuote{color} edge attribute,
-then it will be used. If you want to ignore these attributes, then
-supply \code{NULL} for both of these arguments.}
+\item{vertex.color1, vertex.color2}{
+Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+See also examples below.
+}
+\item{edge.color1, edge.color2}{
+Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
+}
 }
 }
 
@@ -86,9 +86,9 @@ function is called to transfer them into canonical form; finally the
 canonical forms are compared.
 Extra arguments:
 \describe{
-\item{sh}{Character constant, the heuristics to use in the BLISS
-algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of
-\code{\link[=canonical_permutation]{canonical_permutation()}} for possible values.}
+\item{sh}{
+Character constant, the heuristics to use in the BLISS algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of \code{\link[=canonical_permutation]{canonical_permutation()}} for possible values.
+}
 }
 \code{sh} defaults to \sQuote{fm}.
 }

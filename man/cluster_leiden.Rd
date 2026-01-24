@@ -11,7 +11,7 @@ cluster_leiden(
   ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter,
+  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
@@ -19,7 +19,7 @@ cluster_leiden(
 )
 }
 \arguments{
-\item{graph}{The input graph, only undirected graphs are supported.}
+\item{graph}{The input graph. It must be undirected.}
 
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
@@ -64,7 +64,7 @@ The Leiden algorithm is similar to the Louvain algorithm,
 \code{\link[=cluster_louvain]{cluster_louvain()}}, but it is faster and yields higher quality
 solutions. It can optimize both modularity and the Constant Potts Model,
 which does not suffer from the resolution-limit (see preprint
-http://arxiv.org/abs/1104.3083).
+\url{https://arxiv.org/abs/1104.3083}).
 }
 \details{
 The Leiden algorithm consists of three phases: (1) local moving of nodes,

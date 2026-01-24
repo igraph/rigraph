@@ -25,13 +25,19 @@ missing edge prediction.}
 is an \code{igraphHRGConsensus} object, the second is an
 \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the
 following members:
-\item{parents}{For each vertex, the id of its parent vertex is stored,
-or zero, if the vertex is the root vertex in the tree. The first n
-vertex ids (from 0) refer to the original vertices of the graph, the
-other ids refer to vertex groups.}
-\item{weights}{Numeric vector, counts the number of times a given tree
-split occurred in the generated network samples, for each internal
-vertices. The order is the same as in the \code{parents} vector.}
+\describe{
+\item{parents}{
+For each vertex, the id of its parent vertex is stored,
+or zero, if the vertex is the root vertex in the tree.
+The first n vertex ids (from 0) refer to the original vertices of the graph,
+the other ids refer to vertex groups.
+}
+\item{weights}{
+Numeric vector, counts the number of times a given tree split
+occurred in the generated network samples, for each internal vertices.
+The order is the same as in the \code{parents} vector.
+}
+}
 }
 \description{
 \code{consensus_tree()} creates a consensus tree from several fitted
@@ -52,3 +58,5 @@ Other hierarchical random graph functions:
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus()}}.}
+

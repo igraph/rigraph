@@ -14,7 +14,7 @@ tkplot.getcoords(tkp.id, norm = FALSE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.getcoords()} was renamed to \code{tk_coords()} to create a more
+\code{tkplot.getcoords()} was renamed to \code{\link[=tk_coords]{tk_coords()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -1,4 +1,3 @@
-
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -66,14 +65,26 @@
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
 #'   the values given by [arpack_defaults()].
-#' @return A list containing with entries: \item{X}{Estimated latent positions,
-#'   an `n` times `no` matrix, `n` is the number of vertices.}
-#'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
-#'   positions for directed graphs, an `n` times `no` matrix, `n`
-#'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
-#'   or the singular values (for directed graphs) calculated by the algorithm.}
-#'   \item{options}{A named list, information about the underlying ARPACK
-#'   computation. See [arpack()] for the details.}
+#' @return A list containing with entries:
+#'   \describe{
+#'     \item{X}{
+#'       Estimated latent positions,
+#'       an `n` times `no` matrix, `n` is the number of vertices.
+#'     }
+#'     \item{Y}{
+#'       `NULL` for undirected graphs, the second half of the latent
+#'       positions for directed graphs, an `n` times `no` matrix, `n`
+#'       is the number of vertices.
+#'     }
+#'     \item{D}{
+#'       The eigenvalues (for undirected graphs)
+#'       or the singular values (for directed graphs) calculated by the algorithm.
+#'     }
+#'     \item{options}{
+#'       A named list, information about the underlying ARPACK
+#'       computation. See [arpack()] for the details.
+#'     }
+#'   }
 #' @seealso [sample_dot_product()]
 #' @references Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E.  A
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
@@ -90,7 +101,26 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-embed_adjacency_matrix <- adjacency_spectral_embedding_impl
+#' @cdocs igraph_adjacency_spectral_embedding
+embed_adjacency_matrix <- function(
+  graph,
+  no,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  scaled = TRUE,
+  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
+  options = arpack_defaults()
+) {
+  adjacency_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    scaled = scaled,
+    cvec = cvec,
+    options = options
+  )
+}
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -151,7 +181,12 @@ embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 #'
 #' @family embedding
 #' @export
-dim_select <- dim_select_impl
+#' @cdocs igraph_dim_select
+dim_select <- function(sv) {
+  dim_select_impl(
+    sv = sv
+  )
+}
 
 
 #' Spectral Embedding of the Laplacian of a Graph
@@ -204,14 +239,26 @@ dim_select <- dim_select_impl
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
 #'   the values given by [arpack_defaults()].
-#' @return A list containing with entries: \item{X}{Estimated latent positions,
-#'   an `n` times `no` matrix, `n` is the number of vertices.}
-#'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
-#'   positions for directed graphs, an `n` times `no` matrix, `n`
-#'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
-#'   or the singular values (for directed graphs) calculated by the algorithm.}
-#'   \item{options}{A named list, information about the underlying ARPACK
-#'   computation. See [arpack()] for the details.}
+#' @return A list containing with entries:
+#'   \describe{
+#'     \item{X}{
+#'       Estimated latent positions,
+#'       an `n` times `no` matrix, `n` is the number of vertices.
+#'     }
+#'     \item{Y}{
+#'       `NULL` for undirected graphs, the second half of the latent
+#'       positions for directed graphs, an `n` times `no` matrix, `n`
+#'       is the number of vertices.
+#'     }
+#'     \item{D}{
+#'       The eigenvalues (for undirected graphs)
+#'       or the singular values (for directed graphs) calculated by the algorithm.
+#'     }
+#'     \item{options}{
+#'       A named list, information about the underlying ARPACK
+#'       computation. See [arpack()] for the details.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [embed_adjacency_matrix()],
 #' [sample_dot_product()]
@@ -230,7 +277,26 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-embed_laplacian_matrix <- laplacian_spectral_embedding_impl
+#' @cdocs igraph_laplacian_spectral_embedding
+embed_laplacian_matrix <- function(
+  graph,
+  no,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
+  scaled = TRUE,
+  options = arpack_defaults()
+) {
+  laplacian_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    type = type,
+    scaled = scaled,
+    options = options
+  )
+}
 
 
 #' Sample vectors uniformly from the surface of a sphere
@@ -262,17 +328,13 @@ embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 #' })
 #' vec.norm
 sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_surface, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_surface_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample vectors uniformly from the volume of a sphere
@@ -304,17 +366,13 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' })
 #' vec.norm
 sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_volume, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_volume_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample from a Dirichlet distribution
@@ -341,13 +399,9 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
-  # Argument checks
-  n <- as.numeric(n)
-  alpha <- as.numeric(alpha)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
-
-  res
+  # Use the _impl function
+  sample_dirichlet_impl(
+    n = n,
+    alpha = alpha
+  )
 }

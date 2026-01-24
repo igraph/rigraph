@@ -1,0 +1,10 @@
+name: 'Custom steps to run after R packages are installed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use GLPK on macOS
+      if: runner.os == 'macOS'
+      run: |
+        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee ~/.R/Makevars
+      shell: bash

@@ -29,11 +29,10 @@ undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the generated
-graph.}
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 
 \item{multiple}{Logical scalar, whether to allow multiple edges in the
-generated graph.}
+graph.}
 
 \item{finite.size.correction}{Logical scalar, whether to use the proposed
 finite size correction of Cho et al., see references below.}
@@ -41,7 +40,7 @@ finite size correction of Cho et al., see references below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{static.power.law.game()} was renamed to \code{sample_fitness_pl()} to create a more
+\code{static.power.law.game()} was renamed to \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} to create a more
 consistent API.
 }
 \keyword{internal}

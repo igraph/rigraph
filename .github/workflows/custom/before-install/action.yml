@@ -7,3 +7,9 @@ runs:
       run: |
         echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
       shell: bash
+
+    - name: Install GLPK on macOS
+      if: runner.os == 'macOS'
+      run: |
+        brew install glpk
+      shell: bash

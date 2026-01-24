@@ -7,7 +7,7 @@
 cluster_louvain(graph, weights = NULL, resolution = 1)
 }
 \arguments{
-\item{graph}{The input graph.}
+\item{graph}{The input graph. It must be undirected.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

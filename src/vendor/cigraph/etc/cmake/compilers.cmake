@@ -54,7 +54,7 @@ macro(use_all_warnings TARGET_NAME)
     )
   else()
     # Notes:
-    # GCC does not complain when encountering an unsupported "no"-prefixed wanring option such as -Wno-foo.
+    # GCC does not complain when encountering an unsupported "no"-prefixed warning option such as -Wno-foo.
     # Clang does complain, but these complaints can be silenced with -Wno-unknown-warning-option.
     # Therefore it is generally safe to use -Wno-... options that are only supported by recent GCC/Clang.
     target_compile_options(${TARGET_NAME} PRIVATE
@@ -63,14 +63,15 @@ macro(use_all_warnings TARGET_NAME)
         $<$<BOOL:${IGRAPH_WARNINGS_AS_ERRORS}>:-Werror>
         -Wall -Wextra -pedantic
         -Wstrict-prototypes
-        -Wno-unused-function -Wno-unused-parameter -Wno-unused-but-set-variable -Wno-sign-compare -Wno-constant-logical-operand
+        -Wno-unused-function -Wno-unused-parameter -Wno-unused-but-set-variable -Wno-sign-compare -Wno-constant-logical-operand -Wno-uninitialized-const-pointer
       >
       $<$<BOOL:${COMPILER_SUPPORTS_UNKNOWN_WARNING_OPTION_FLAG}>:-Wno-unknown-warning-option>
       # Intel compiler:
       $<$<C_COMPILER_ID:Intel>:
         # disable #279: controlling expression is constant; affecting assert(condition && "message")
         # disable #592: variable "var" is used before its value is set; affecting IGRAPH_UNUSED
-        -wd279 -wd592 -diag-disable=remark
+        # disable #10148: warning option not supported, as a replacement for -Wno-unknown-warning-option
+        -wd279 -wd592 -diag-disable=remark -diag-disable=10148
       >
       # Intel LLVM:
       $<$<C_COMPILER_ID:IntelLLVM>:

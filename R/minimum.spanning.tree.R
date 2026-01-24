@@ -1,15 +1,20 @@
-
 #' Minimum spanning tree
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimum.spanning.tree()` was renamed to `mst()` to create a more
+#' `minimum.spanning.tree()` was renamed to [mst()] to create a more
 #' consistent API.
 #' @inheritParams mst
 #' @keywords internal
 #' @export
-minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) { # nocov start
+minimum.spanning.tree <- function(
+  graph,
+  weights = NULL,
+  algorithm = NULL,
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
 } # nocov end
@@ -33,8 +38,6 @@ minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) 
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Minimum spanning tree
 #'
@@ -76,8 +79,7 @@ minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) 
 #' g <- sample_gnp(100, 3 / 100)
 #' g_mst <- mst(g)
 #'
-mst <- function(graph, weights = NULL,
-                algorithm = NULL, ...) {
+mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
   ensure_igraph(graph)
 
   if (is.null(algorithm)) {
@@ -89,17 +91,20 @@ mst <- function(graph, weights = NULL,
   }
 
   if (algorithm == "unweighted") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
+    minimum_spanning_tree_unweighted_impl(
+      graph = graph
+    )
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
-      stop("edges weights must be supplied for Prim's algorithm")
+      cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
+    minimum_spanning_tree_prim_impl(
+      graph = graph,
+      weights = weights
+    )
   } else {
-    stop("Invalid algorithm")
+    cli::cli_abort("Invalid {.arg algorithm}.")
   }
 }

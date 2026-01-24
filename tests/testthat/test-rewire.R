@@ -17,5 +17,5 @@ test_that("rewire(each_edge(mode='out')) keeps the out-degree distribution", {
 test_that("rewire() with zero probability does not do anything", {
   g <- sample_pa(100)
   g2 <- g %>% rewire(each_edge(prob = 0))
-  expect_true(identical_graphs(g, g2))
+  expect_identical_graphs(g, g2)
 })

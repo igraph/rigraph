@@ -30,7 +30,8 @@ layout_(make_ring(10), with_fr(), normalize())
 \code{\link[=merge_coords]{merge_coords()}}, \code{\link[=layout_]{layout_()}}.
 
 Other layout modifiers: 
-\code{\link{component_wise}()}
+\code{\link{component_wise}()},
+\code{\link{layout_modifier}()}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

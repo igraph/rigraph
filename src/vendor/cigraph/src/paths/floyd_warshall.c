@@ -46,7 +46,7 @@ static igraph_error_t distances_floyd_warshall_original(igraph_matrix_t *res) {
                 }
                 if (i == j && MATRIX(*res, i, i) < 0) {
                     IGRAPH_ERROR("Negative cycle found while calculating distances with Floyd-Warshall.",
-                                 IGRAPH_ENEGLOOP);
+                                 IGRAPH_ENEGCYCLE);
                 }
             }
         }
@@ -177,7 +177,7 @@ static igraph_error_t distances_floyd_warshall_tree(igraph_matrix_t *res) {
                 }
                 if (i == j && MATRIX(*res, i, i) < 0) {
                     IGRAPH_ERROR("Negative cycle found while calculating distances with Floyd-Warshall.",
-                                 IGRAPH_ENEGLOOP);
+                                 IGRAPH_ENEGCYCLE);
                 }
             }
         }
@@ -248,7 +248,7 @@ static igraph_error_t distances_floyd_warshall_tree(igraph_matrix_t *res) {
  * \param method The type of the algorithm used.
  *        \clist
  *        \cli IGRAPH_FLOYD_WARSHALL_AUTOMATIC
- *          tried to select the best performing variant for the current graph;
+ *          tries to select the best performing variant for the current graph;
  *          presently this option always uses the "Tree" method.
  *        \cli IGRAPH_FLOYD_WARSHALL_ORIGINAL
  *          the basic Floyd-Warshall algorithm.
@@ -256,7 +256,7 @@ static igraph_error_t distances_floyd_warshall_tree(igraph_matrix_t *res) {
  *          the "Tree" speedup of Brodnik et al., faster than the original algorithm
  *          in most cases.
  *        \endclist
- * \return Error code. \c IGRAPH_ENEGLOOP is returned if a negative-weight
+ * \return Error code. \c IGRAPH_ENEGCYCLE is returned if a negative-weight
  *   cycle is found.
  *
  * \sa \ref igraph_distances(), \ref igraph_distances_dijkstra(),
@@ -297,7 +297,7 @@ igraph_error_t igraph_distances_floyd_warshall(
         in = true;
         break;
     default:
-        IGRAPH_ERROR("Invalid mode.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid mode for Floyd-Warshall shortest path calculation.", IGRAPH_EINVMODE);
     }
 
     if (weights && igraph_vector_is_any_nan(weights)) {
@@ -320,11 +320,11 @@ igraph_error_t igraph_distances_floyd_warshall(
             if (mode == IGRAPH_ALL) {
                 IGRAPH_ERRORF("Negative edge weight (%g) found in undirected graph "
                               "while calculating distances with Floyd-Warshall.",
-                              IGRAPH_ENEGLOOP, w);
+                              IGRAPH_ENEGCYCLE, w);
             } else if (to == from) {
                 IGRAPH_ERRORF("Self-loop with negative weight (%g) found "
                               "while calculating distances with Floyd-Warshall.",
-                              IGRAPH_ENEGLOOP, w);
+                              IGRAPH_ENEGCYCLE, w);
             }
         } else if (w == IGRAPH_INFINITY) {
             /* Ignore edges with infinite weight */

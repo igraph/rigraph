@@ -1,15 +1,15 @@
-
 #' Is this object an igraph graph?
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.igraph()` was renamed to `is_igraph()` to create a more
+#' `is.igraph()` was renamed to [is_igraph()] to create a more
 #' consistent API.
 #' @inheritParams is_igraph
 #' @keywords internal
 #' @export
-is.igraph <- function(graph) { # nocov start
+is.igraph <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.igraph()", "is_igraph()")
   is_igraph(graph = graph)
 } # nocov end
@@ -34,8 +34,6 @@ is.igraph <- function(graph) { # nocov start
 #
 ###################################################################
 
-
-
 #' Is this object an igraph graph?
 #'
 #' @param graph An R object.
@@ -58,25 +56,16 @@ is_igraph <- function(graph) {
   TRUE
 }
 
+#' Incident vertices of some graph edges
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Use [ends()].
+#' @inheritParams ends
 #' @export
+#' @keywords internal
 get.edge <- function(graph, id) {
-  .Deprecated("ends", msg = paste(
-    "'get.edge' is deperecated, please use",
-    "'ends' instead."
-  ))
-
-  ensure_igraph(graph)
-
-  id <- as.numeric(id)
-  ec <- ecount(graph)
-
-  if (id < 1 || id > ec) {
-    stop("No such edge")
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_get_edge, graph, as.numeric(id) - 1)
-  res + 1
+  lifecycle::deprecate_stop("2.1.0", "get.edge()", "ends()")
 }
 
 

@@ -1,4 +1,3 @@
-
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -23,7 +22,9 @@
 ## -----------------------------------------------------------------------
 
 make_call <- function(f, ..., .args = list()) {
-  if (is.character(f)) f <- as.name(f)
+  if (is.character(f)) {
+    f <- as.name(f)
+  }
   as.call(c(f, ..., .args))
 }
 
@@ -71,7 +72,7 @@ capitalize <- function(x) {
 }
 
 address <- function(x) {
-  .Call(R_igraph_address, x)
+  .Call(Rx_igraph_address, x)
 }
 
 `%+%` <- function(x, y) {

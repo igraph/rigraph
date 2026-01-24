@@ -12,7 +12,7 @@ list.vertex.attributes(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{list.vertex.attributes()} was renamed to \code{vertex_attr_names()} to create a more
+\code{list.vertex.attributes()} was renamed to \code{\link[=vertex_attr_names]{vertex_attr_names()}} to create a more
 consistent API.
 }
 \keyword{internal}

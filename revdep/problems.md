@@ -1,14 +1,37 @@
-# degreenet
+# Cascade
 
 <details>
 
-* Version: 1.3-5
-* GitHub: NA
-* Source code: https://github.com/cran/degreenet
-* Date/Publication: 2024-02-01 08:00:05 UTC
-* Number of recursive dependencies: 18
+* Version: 2.3
+* GitHub: https://github.com/fbertran/Cascade
+* Source code: https://github.com/cran/Cascade
+* Date/Publication: 2025-09-19 07:00:23 UTC
+* Number of recursive dependencies: 54
 
-Run `revdepcheck::cloud_details(, "degreenet")` for more info
+Run `revdepcheck::cloud_details(, "Cascade")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘Cascade’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: replacing previous import ‘igraph::circulant’ by ‘magic::circulant’ when loading ‘Cascade’
+    See ‘/tmp/workdir/Cascade/new/Cascade.Rcheck/00install.out’ for details.
+    ```
+
+# jewel
+
+<details>
+
+* Version: 2.0.2
+* GitHub: https://github.com/annaplaksienko/jewel
+* Source code: https://github.com/cran/jewel
+* Date/Publication: 2024-05-22 21:20:07 UTC
+* Number of recursive dependencies: 42
+
+Run `revdepcheck::cloud_details(, "jewel")` for more info
 
 </details>
 
@@ -16,96 +39,44 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘degreenet-Ex.R’ failed
+    Running examples in ‘jewel-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: reedmolloy
-    > ### Title: Generate a undirected network with a given sequence of degrees
-    > ### Aliases: reedmolloy
-    > ### Keywords: models
+    > ### Name: constructWeights
+    > ### Title: Construct weights for _jewel_ minimization problem from prior
+    > ###   information on vertices degrees.
+    > ### Aliases: constructWeights
     > 
     > ### ** Examples
     > 
-    > # Now, simulate a Poisson Lognormal distribution over 100
-    > # observations with mean = -1 and s.d. = 1.
-    > 
-    > set.seed(2)
-    > s4 <- simpln(n=100, v=c(-1,1))
-    > table(s4)
-    s4
-     1  2  3  4  5  6 
-    65 18  7  4  4  2 
-    > #
-    > simr <- reedmolloy(s4)
-    Error in reedmolloy(s4) : 
-      The reedmolloy function failed to form a valid network from the passed degree sequence.
+    > {
+    + K <- 3
+    + p <- 50
+    + n <- 20
+    + data <- generateData_rewire(K = K, p = p, n = n, ncores = 1, verbose = FALSE)
+    + G_list_true <- data$Graphs
+    + true_degrees <- rowSums(G_list_true[[1]])
+    + cut <- sort(true_degrees, decreasing = TRUE)[ceiling(p * 0.03)]
+    + apriori_hubs <- ifelse(true_degrees >= cut, 10, 1)
+    + W <- constructWeights(apriori_hubs, K = K)
+    + }
+    Error in rewire_impl(rewire = graph, n = niter, mode = mode) : 
+      At rinterface_extra.c:83 : The value 2.4500000000000002 is not representable as an integer. Invalid value
+    Calls: generateData_rewire ... do_call -> eval -> eval -> <Anonymous> -> rewire_impl
     Execution halted
     ```
 
-# qgraph
+# rSpectral
 
 <details>
 
-* Version: 1.9.8
-* GitHub: https://github.com/SachaEpskamp/qgraph
-* Source code: https://github.com/cran/qgraph
-* Date/Publication: 2023-11-03 11:00:02 UTC
-* Number of recursive dependencies: 88
+* Version: 1.0.0.10
+* GitHub: https://github.com/cmclean5/rSpectral
+* Source code: https://github.com/cran/rSpectral
+* Date/Publication: 2023-01-18 12:00:02 UTC
+* Number of recursive dependencies: 39
 
-Run `revdepcheck::cloud_details(, "qgraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘qgraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: smallworldness
-    > ### Title: Compute the small-worldness index.
-    > ### Aliases: smallworldness
-    > ### Keywords: smallworld transitivity
-    > 
-    > ### ** Examples
-    > 
-    > set.seed(1)
-    > # a regular lattice. Even if the small-worldness is higher than three, the average path length is 
-    > # much higher than that of random networks.
-    > regnet<-igraph::watts.strogatz.game(dim=1, size=1000, nei=10, p=0, loops=FALSE, multiple=FALSE)
-    Warning: `watts.strogatz.game()` was deprecated in igraph 2.0.0.
-    ℹ Please use `sample_smallworld()` instead.
-    > smallworldness(regnet, B=10)
-    Error in `sample_degseq()`:
-    ! `arg` must be one of "configuration", "vl", "fast.heur.simple",
-      "configuration.simple", or "edge.switching.simple", not "simple.no.multiple".
-    Backtrace:
-         ▆
-      1. ├─qgraph::smallworldness(regnet, B = 10)
-      2. │ └─base::lapply(...)
-      3. │   └─qgraph (local) FUN(X[[i]], ...)
-      4. │     └─igraph::degree.sequence.game(deg.dist, method = "simple.no.multiple")
-      5. │       └─igraph::sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
-      6. │         └─igraph:::igraph.match.arg(method)
-      7. │           └─rlang::arg_match(arg = arg, values = values, error_call = error_call)
-      8. │             └─rlang::arg_match0(arg, values, error_arg, error_call = error_call)
-      9. └─rlang:::stop_arg_match(w, values = x, error_arg = y, error_call = z)
-     10.   └─rlang::abort(msg, call = error_call, arg = error_arg)
-    Execution halted
-    ```
-
-# tidygraph
-
-<details>
-
-* Version: 1.3.1
-* GitHub: https://github.com/thomasp85/tidygraph
-* Source code: https://github.com/cran/tidygraph
-* Date/Publication: 2024-01-30 13:40:02 UTC
-* Number of recursive dependencies: 80
-
-Run `revdepcheck::cloud_details(, "tidygraph")` for more info
+Run `revdepcheck::cloud_details(, "rSpectral")` for more info
 
 </details>
 
@@ -121,86 +92,61 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       > #
       > # Where should you do additional test configuration?
       > # Learn more about the roles of various files in:
-      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-      > # * https://testthat.r-lib.org/articles/special-files.html
+      > # * https://r-pkgs.org/tests.html
+      > # * https://testthat.r-lib.org/reference/test_package.html#special-files
       > 
       > library(testthat)
-      > library(tidygraph)
-      
-      Attaching package: 'tidygraph'
-      
-      The following object is masked from 'package:testthat':
-      
-          matches
-      
-      The following object is masked from 'package:stats':
-      
-          filter
-      
+      > library(rSpectral)
       > 
-      > test_check("tidygraph")
-      Ungrouping `.data`...
-      Splitting by nodes
-      Unfocusing graph...
-      `focus()` selected all nodes. Returning unfocused graph
-      `focus()` didn't select any nodes. Returning unfocused graph
-      Unfocusing graph...
-      Unfocusing prior to grouping
-      Unfocusing prior to morphing
-      Unfocusing graph...
-      Joining with `by = join_by(from, to)`
-      Joining with `by = join_by(from, to)`
-      Joining with `by = join_by(from, to)`
-      Joining with `by = join_by(from, to)`
-      Joining with `by = join_by(from, to)`
-      Joining with `by = join_by(from, to)`
-      Ungrouping `.data`...
-      Subsetting by nodes
-      Splitting by nodes
-      Unfocusing prior to morphing
-      [ FAIL 13 | WARN 2 | SKIP 1 | PASS 426 ]
+      > test_check("rSpectral")
+      Loading required package: BiocGenerics
       
-      ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
-      • On CRAN (1): 'test-random-walk.R:19:3'
+      Attaching package: 'BiocGenerics'
+      
+      The following objects are masked from 'package:stats':
+      
+          IQR, mad, sd, var, xtabs
+      
+      The following objects are masked from 'package:base':
+      
+          Filter, Find, Map, Position, Reduce, anyDuplicated, aperm, append,
+          as.data.frame, basename, cbind, colnames, dirname, do.call,
+          duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
+          lapply, mapply, match, mget, order, paste, pmax, pmax.int, pmin,
+          pmin.int, rank, rbind, rownames, sapply, saveRDS, setdiff, table,
+          tapply, union, unique, unsplit, which.max, which.min
+      
+      This graph was created by an old(er) igraph version.
+      i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
+      For now we convert it on the fly...
+      Saving _problems/test-igraph-19.R
+      Saving _problems/test-igraph-26.R
+      [ FAIL 2 | WARN 4 | SKIP 0 | PASS 10 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-graph_measures.R:17:3'): graph measures returns scalars ────────
-      Error in `radius_dijkstra_impl(graph, weights = weights, mode = mode)`: At vendor/cigraph/src/paths/distances.c:328 : Weight vector length (1) does not match number of edges (8). Invalid value
-      Backtrace:
-          ▆
-       1. ├─testthat::expect_length(graph_radius(), 1) at test-graph_measures.R:17:3
-       2. │ └─testthat::quasi_label(enquo(object), arg = "object")
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. └─tidygraph::graph_radius()
-       5.   └─igraph::radius(graph, mode)
-       6.     └─igraph:::radius_dijkstra_impl(graph, weights = weights, mode = mode)
-      ── Failure ('test-graph_measures.R:32:1'): graph context is empty after test ───
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-group.R:92:1'): graph context is empty after test ────────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-group_by.R:15:1'): graph context is empty after test ─────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-local.R:37:1'): graph context is empty after test ────────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-morph.R:135:1'): graph context is empty after test ───────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-mutate.R:15:1'): graph context is empty after test ───────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-node_measures.R:78:1'): graph context is empty after test ────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-node_types.R:58:1'): graph context is empty after test ───────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-pair_measures.R:58:1'): graph context is empty after test ────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-search.R:58:1'): graph context is empty after test ───────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-slice.R:27:1'): graph context is empty after test ────────────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
-      ── Failure ('test-tidyr-utils.R:18:1'): graph context is empty after test ──────
-      environment(.graph_context$free)$private$context has length 1, not length 0.
+      ── Failure ('test-igraph.R:19:3'): membership fix_neig=0 is correct ────────────
+      Expected `c$modularity` to equal `exp_mod10`.
+      Differences:
+        `actual`: 0.432
+      `expected`: 0.408
       
-      [ FAIL 13 | WARN 2 | SKIP 1 | PASS 426 ]
-      Error: Test failures
+      ── Failure ('test-igraph.R:26:3'): membership fix_neig=1 is correct ────────────
+      Expected `c$modularity` to equal `exp_mod11`.
+      Differences:
+        `actual`: 0.3758
+      `expected`: 0.3776
+      
+      
+      [ FAIL 2 | WARN 4 | SKIP 0 | PASS 10 ]
+      Error:
+      ! Test failures.
       Execution halted
+    ```
+
+## In both
+
+*   checking C++ specification ... NOTE
+    ```
+      Specified C++11: please drop specification unless essential
     ```
 

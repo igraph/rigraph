@@ -32,26 +32,14 @@ the graph (for \eqn{G(n,m)} graphs).}
 A graph object.
 }
 \description{
-Simple random graph model, specifying the edge count either precisely
-(\eqn{G(n,m)} model) or on average through a connection probability
-(\eqn{G(n,p)} model).
-}
-\details{
-In \eqn{G(n,m)} graphs, there are precisely \code{m} edges.
-
-In \eqn{G(n,p)} graphs, all vertex pairs are connected with the same
-probability \code{p}.
-
-\code{random.graph.game()} is an alias to this function.
-}
-\section{Deprecated}{
-
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
 \code{random.graph.game()} are deprecated, and \code{\link[=sample_gnp]{sample_gnp()}} and
 \code{\link[=sample_gnm]{sample_gnm()}} should be used instead. See these for more details.
-}
 
+\code{random.graph.game()} is an (also deprecated) alias to this function.
+}
 \examples{
 
 g <- erdos.renyi.game(1000, 1 / 1000)
@@ -64,8 +52,10 @@ Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},

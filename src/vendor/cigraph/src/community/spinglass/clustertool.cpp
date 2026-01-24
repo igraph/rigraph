@@ -108,9 +108,8 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  *     implementation.
  * \param modularity Pointer to a real number, if not \c NULL then the
  *     modularity score of the solution will be stored here. This is the
- *     gereralized modularity that simplifies to the one defined in
- *     M. E. J. Newman and M. Girvan, Phys. Rev. E 69, 026113 (2004),
- *     if the gamma parameter is one.
+ *     gereralized modularity, taking into account the resolution parameter
+ *     \p gamma. See \ref igraph_modularity() for details.
  * \param temperature Pointer to a real number, if not \c NULL then
  *     the temperature at the end of the algorithm will be stored
  *     here.
@@ -125,7 +124,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  * \param spins Integer giving the number of spins, i.e. the maximum
  *     number of clusters. Even if the number of spins is high the number of
  *     clusters in the result might be small.
- * \param parupdate A logical constant, whether to update all spins in
+ * \param parupdate A Boolean constant, whether to update all spins in
  *     parallel. It is not implemented in the \c IGRAPH_SPINCOMM_INP_NEG
  *     implementation.
  * \param starttemp Real number, the temperature at the start. A reasonable
@@ -159,7 +158,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
  *     weights, using the number of spins as the number of colors.
  * \return Error code.
  *
- * \sa igraph_community_spinglass_single() for calculating the community
+ * \sa \ref igraph_community_spinglass_single() for calculating the community
  * of a single vertex.
  *
  * Time complexity: TODO.
@@ -241,7 +240,7 @@ static igraph_error_t igraph_i_community_spinglass_orig(
             IGRAPH_ERROR("Invalid weight vector length.", IGRAPH_EINVAL);
         }
         use_weights = true;
-        if (igraph_vector_min(weights) < 0) {
+        if (igraph_vector_size(weights) > 0 && igraph_vector_min(weights) < 0) {
             IGRAPH_ERROR(
                 "Weights must not be negative when using the original implementation of spinglass communities. "
                 "Select the implementation meant for negative weights.",
@@ -270,7 +269,7 @@ static igraph_error_t igraph_i_community_spinglass_orig(
     if (no_of_nodes < 2) {
         if (membership) {
             IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
-            igraph_vector_int_fill(membership, 0);
+            igraph_vector_int_null(membership);
         }
         if (modularity) {
             IGRAPH_CHECK(igraph_modularity(graph, membership, nullptr, 1, igraph_is_directed(graph), modularity));
@@ -556,7 +555,7 @@ static igraph_error_t igraph_i_community_spinglass_negative(
     if (no_of_nodes < 2) {
         if (membership) {
             IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
-            igraph_vector_int_fill(membership, 0);
+            igraph_vector_int_null(membership);
         }
         if (modularity) {
             IGRAPH_CHECK(igraph_modularity(graph, membership, nullptr, 1, igraph_is_directed(graph), modularity));

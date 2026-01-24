@@ -15,7 +15,7 @@ vertex ids.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{hrg.create()} was renamed to \code{hrg()} to create a more
+\code{hrg.create()} was renamed to \code{\link[=hrg]{hrg()}} to create a more
 consistent API.
 }
 \keyword{internal}

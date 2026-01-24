@@ -143,8 +143,8 @@ g <- add_edges(g, edges = c(38, 37))
 Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%>%`:
 
 ```{r echo = TRUE}
-g <- g %>% 
-  add_edges(edges = c(1, 34)) %>% 
+g <- g %>%
+  add_edges(edges = c(1, 34)) %>%
   add_vertices(3) %>%
   add_edges(edges = c(38, 39, 39, 40, 40, 38, 40, 37))
 g
@@ -153,7 +153,7 @@ g
 Ahora tenemos un grafo no dirigido con 40 vértices y 89 aristas. Los IDs de los vértices y aristas son siempre *contiguos*, así que si borras un vértice, todos los vértices subsecuentes se vuelven a enumerar. Cuando se re-numera un vértice, las aristas **no** se vuelven a enumerar, pero sí sus vértices origen y destino. Puedes usar `delete_vertices()` y `delete_edges()` para realizar estas operaciones. Por ejemplo, para borrar la arista que conecta los vértices `1-34`, obtén su ID y luego bórrala:
 
 ```{r echo = TRUE}
-edge_id_para_borrar <- get.edge.ids(g, c(1,34))
+edge_id_para_borrar <- get_edge_ids(g, c(1,34))
 edge_id_para_borrar
 ```
 
@@ -168,11 +168,11 @@ g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
 
-El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get.edge.ids()`:
+El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get_edge_ids()`:
 
 ```{r echo = TRUE}
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
+g <- delete_edges(g, get_edge_ids(g, c(1,5, 4,5)))
 plot(g)
 ```
 
@@ -180,13 +180,13 @@ Veamos otro ejemplo, hagamos un grafo cordal. Recuerda que un grafo es cordal (o
 
 ```{r}
 g1 <- graph_from_literal(
-  A-B:C:I, 
-  B-A:C:D, 
-  C-A:B:E:H, 
+  A-B:C:I,
+  B-A:C:D,
+  C-A:B:E:H,
   D-B:E:F,
-  E-C:D:F:H, 
-  F-D:E:G, 
-  G-F:H, 
+  E-C:D:F:H,
+  F-D:E:G,
+  G-F:H,
   H-C:E:G:I,
   I-A:H
 )
@@ -257,7 +257,7 @@ Para demostrar el uso de los atributos, creemos una red social sencilla:
 g <- make_graph(
   ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe, 
+  Ibrahim-Nang:Moshe,
   Nang-Samira
 )
 ```
@@ -265,7 +265,7 @@ g <- make_graph(
 Cada vértice representa a una persona, por lo que queremos almacenar sus edades, géneros y el tipo de conexión entre dos personas (`is_formal()` se refiere a si una conexión entre una persona y otra es formal o informal, es decir, colegas o amigos). El operador `$` es un atajo para obtener y establecer atributos de un grafo. Es más corto y tan legible como `graph_attr()` y `set_graph_attr()`.
 
 ```{r echo = TRUE}
-V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
+V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
 V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
 E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
@@ -275,9 +275,9 @@ summary(g)
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
-  ~ Alice-Boris:Himari:Moshe, 
+  ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe, 
+  Ibrahim-Nang:Moshe,
   Nang-Samira
 ) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
@@ -321,7 +321,7 @@ g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
 
-Si quieres guardar un grafo en R con todos los atributos utiliza la función estándar de R `dput` y recupéralo más tarde con `dget`. También puedes simplemente guardar el espacio de trabajo de R y restaurarlo más tarde.
+Si quieres guardar un grafo en R con todos los atributos utiliza la función `saveRDS()` (y `readRDS()` para recuperarlo más tarde).
 
 ## Propiedades estructurales de los grafos
 
@@ -551,7 +551,7 @@ El argumento `layout` también acepta funciones; en este caso, la función será
 
 ```{r}
 plot(
-  g, 
+  g,
   layout = layout_with_fr,
   main = "Red social con el algoritmo de disposición Fruchterman-Reingold"
 )
@@ -562,8 +562,8 @@ Para mejorar el aspecto visual, una adición trivial sería colorear los vértic
 ```{r}
 V(g)$color <- ifelse(V(g)$gender == "m", "yellow", "red")
 plot(
-  g, 
-  layout = layout, 
+  g,
+  layout = layout,
   vertex.label.dist = 3.5,
   main = "Red social - con los géneros como colores"
 )
@@ -573,9 +573,9 @@ También puedes tratar el atributo `gender` como un factor y proporcionar los co
 
 ```{r}
 plot(
-  g, 
-  layout = layout, 
-  vertex.label.dist = 3.5, 
+  g,
+  layout = layout,
+  vertex.label.dist = 3.5,
   vertex.color = as.factor(V(g)$gender))
 ```
 

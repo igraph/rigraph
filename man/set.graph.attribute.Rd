@@ -16,7 +16,7 @@ set.graph.attribute(graph, name, value)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{set.graph.attribute()} was renamed to \code{set_graph_attr()} to create a more
+\code{set.graph.attribute()} was renamed to \code{\link[=set_graph_attr]{set_graph_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

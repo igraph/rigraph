@@ -23,7 +23,7 @@ missing edge prediction.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{hrg.consensus()} was renamed to \code{consensus_tree()} to create a more
+\code{hrg.consensus()} was renamed to \code{\link[=consensus_tree]{consensus_tree()}} to create a more
 consistent API.
 }
 \keyword{internal}

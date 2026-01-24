@@ -51,7 +51,7 @@ void igraph_ncol_yylex_destroy_wrapper (void *scanner ) {
  *
  * </para><para>
  * This format is used by the Large Graph Layout program
- * (http://lgl.sourceforge.net), and it is simply a
+ * (https://lgl.sourceforge.net), and it is simply a
  * symbolic weighted edge list. It is a simple text file with one edge
  * per line. An edge is defined by two symbolic vertex names separated
  * by whitespace. The vertex names themselves cannot contain
@@ -74,7 +74,7 @@ void igraph_ncol_yylex_destroy_wrapper (void *scanner ) {
  *        the <code>.ncol</code> file. If it is not \c NULL and some unknown
  *        vertex names are found in the <code>.ncol</code> file then new vertex
  *        ids will be assigned to them.
- * \param names Logical value, if \c true the symbolic names of the
+ * \param names Boolean value. If \c true, the symbolic names of the
  *        vertices will be added to the graph as a vertex attribute
  *        called \quote name\endquote.
  * \param weights Whether to add the weights of the edges to the

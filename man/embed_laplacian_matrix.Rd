@@ -62,14 +62,26 @@ computation algorithm in ARPACK. By default, the list of values is assigned
 the values given by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
-A list containing with entries: \item{X}{Estimated latent positions,
-an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
-\item{Y}{\code{NULL} for undirected graphs, the second half of the latent
+A list containing with entries:
+\describe{
+\item{X}{
+Estimated latent positions,
+an \code{n} times \code{no} matrix, \code{n} is the number of vertices.
+}
+\item{Y}{
+\code{NULL} for undirected graphs, the second half of the latent
 positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
-is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
-or the singular values (for directed graphs) calculated by the algorithm.}
-\item{options}{A named list, information about the underlying ARPACK
-computation. See \code{\link[=arpack]{arpack()}} for the details.}
+is the number of vertices.
+}
+\item{D}{
+The eigenvalues (for undirected graphs)
+or the singular values (for directed graphs) calculated by the algorithm.
+}
+\item{options}{
+A named list, information about the underlying ARPACK
+computation. See \code{\link[=arpack]{arpack()}} for the details.
+}
+}
 }
 \description{
 Spectral decomposition of Laplacian matrices of graphs.
@@ -110,3 +122,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{embedding}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}.}
+

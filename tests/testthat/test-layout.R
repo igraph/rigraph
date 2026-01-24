@@ -1,0 +1,479 @@
+test_that("layout_with_fr() works", {
+  skip_on_os("solaris")
+
+  withr::with_seed(42, {
+    g <- make_ring(10)
+    l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
+  })
+  expect_equal(sum(l), 4.57228, tolerance = 0.1)
+
+  withr::with_seed(42, {
+    g <- make_star(30)
+    l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
+  })
+  expect_equal(sum(l), -170.9312, tolerance = 0.1)
+})
+
+test_that("layout_with_fr() deprecated argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  expect_snapshot(error = TRUE, {
+    l <- layout_with_fr(
+      g,
+      niter = 50,
+      start.temp = sqrt(10) / 10,
+      coolexp = 1,
+      maxdelta = 1,
+      area = 1,
+      repulserad = 1
+    )
+  })
+})
+
+test_that("layout_nicely() works with proper weights and small trees", {
+  g <- make_star(12, mode = "out")
+  E(g)$weight <- 5:15
+  expect_warning(layout_nicely(g), NA)
+})
+
+test_that("layout_nicely() works with negative weights", {
+  g <- make_graph("petersen")
+  E(g)$weight <- -5:9
+  expect_warning(layout_nicely(g), regexp = "ignoring all weights")
+})
+
+test_that("layout_nicely() does not recurse into itself", {
+  g <- make_graph("petersen")
+  g$layout <- layout_nicely
+  expect_silent(layout_nicely(g)) # should not recurse infinitely
+})
+
+test_that("layout algorithms work for null graphs", {
+  g <- make_empty_graph()
+  mat <- matrix(as.numeric(c()), ncol = 2)
+  mat3 <- matrix(as.numeric(c()), ncol = 3)
+
+  expect_silent(layout_as_tree(g))
+  expect_equal(mat, layout_as_tree(g))
+
+  expect_silent(layout_as_star(g))
+  expect_equal(mat, layout_as_star(g))
+
+  expect_silent(layout_in_circle(g))
+  expect_equal(mat, layout_in_circle(g))
+
+  expect_silent(layout_nicely(g))
+  expect_equal(mat, layout_nicely(g))
+
+  expect_silent(layout_on_grid(g))
+  expect_equal(mat, layout_on_grid(g))
+
+  expect_silent(layout_on_sphere(g))
+  expect_equal(mat3, layout_on_sphere(g))
+
+  expect_silent(layout_randomly(g))
+  expect_equal(mat, layout_randomly(g))
+
+  expect_silent(layout_with_dh(g))
+  expect_equal(mat, layout_with_dh(g))
+
+  expect_silent(layout_with_fr(g))
+  expect_equal(mat, layout_with_fr(g))
+
+  expect_silent(layout_with_gem(g))
+  expect_equal(mat, layout_with_gem(g))
+
+  expect_silent(layout_with_graphopt(g))
+  expect_equal(mat, layout_with_graphopt(g))
+
+  expect_silent(layout_with_kk(g))
+  expect_equal(mat, layout_with_kk(g))
+
+  expect_silent(layout_with_lgl(g))
+  expect_equal(mat, layout_with_lgl(g))
+
+  expect_silent(layout_with_mds(g))
+  expect_equal(mat, layout_with_mds(g))
+
+  expect_silent(layout_with_sugiyama(g))
+  expect_equal(mat, layout_with_sugiyama(g)$layout)
+  expect_equal(mat, layout_with_sugiyama(g)$layout.dummy)
+})
+
+test_that("layout algorithms work for singleton graphs", {
+  g <- make_empty_graph(1)
+
+  check_matrix <- function(mat, nrow = 1, ncol = 2) {
+    expect_equal(dim(mat), c(nrow, ncol))
+    if (nrow > 0) {
+      expect_true(all(is.finite(mat)))
+    }
+  }
+
+  expect_silent(layout_as_tree(g))
+  check_matrix(layout_as_tree(g))
+
+  expect_silent(layout_as_star(g))
+  check_matrix(layout_as_star(g))
+
+  expect_silent(layout_in_circle(g))
+  check_matrix(layout_in_circle(g))
+
+  expect_silent(layout_nicely(g))
+  check_matrix(layout_nicely(g))
+
+  expect_silent(layout_on_grid(g))
+  check_matrix(layout_on_grid(g))
+
+  expect_silent(layout_on_sphere(g))
+  check_matrix(layout_on_sphere(g), ncol = 3)
+
+  expect_silent(layout_randomly(g))
+  check_matrix(layout_randomly(g))
+
+  expect_silent(layout_with_dh(g))
+  check_matrix(layout_with_dh(g))
+
+  expect_silent(layout_with_fr(g))
+  check_matrix(layout_with_fr(g))
+
+  expect_silent(layout_with_gem(g))
+  check_matrix(layout_with_gem(g))
+
+  expect_silent(layout_with_graphopt(g))
+  check_matrix(layout_with_graphopt(g))
+
+  expect_silent(layout_with_kk(g))
+  check_matrix(layout_with_kk(g))
+
+  expect_silent(layout_with_lgl(g))
+  check_matrix(layout_with_lgl(g))
+
+  expect_silent(layout_with_sugiyama(g))
+  check_matrix(layout_with_sugiyama(g)$layout)
+  check_matrix(layout_with_sugiyama(g)$layout.dummy, nrow = 0)
+})
+
+test_that("Kamada-Kawai layout generator works", {
+  skip_on_cran()
+  withr::local_seed(42)
+
+  center_layout <- function(layout) {
+    t(t(layout) - colMeans(layout))
+  }
+
+  get_radii <- function(layout) {
+    apply(layout, 1, function(x) sqrt(sum(x**2)))
+  }
+
+  sort_by_angles <- function(layout) {
+    angles <- apply(layout, 1, function(x) atan2(x[2], x[1]))
+    layout[order(angles), ]
+  }
+
+  looks_circular <- function(layout, check_dists = TRUE, eps = 1e-5) {
+    layout <- center_layout(layout)
+    radii <- get_radii(layout)
+    norm_radii <- (radii - mean(radii)) / mean(radii)
+    layout <- sort_by_angles(layout)
+
+    if (!all(abs(norm_radii) < eps)) {
+      return(FALSE)
+    }
+
+    if (!check_dists) {
+      return(TRUE)
+    }
+
+    dists <- apply(layout[-nrow(layout), ] - layout[-1, ], 1, function(x) {
+      sqrt(sum(x**2))
+    })
+    norm_dists <- (dists - mean(dists)) / mean(dists)
+    all(abs(norm_dists) < eps)
+  }
+
+  g <- make_ring(10)
+  l <- layout_with_kk(g, maxiter = 50, coords = layout_in_circle(g))
+  expect_true(looks_circular(l))
+
+  g <- make_star(12)
+  l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
+  expect_true(looks_circular(l[-1, ]))
+
+  g <- make_ring(10)
+  E(g)$weight <- rep(1:2, length.out = ecount(g))
+  l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
+  expect_true(looks_circular(l, check_dists = FALSE))
+
+  g <- make_star(30)
+  l <- layout_with_kk(g, maxiter = 5000, dim = 3)
+  expect_true(looks_circular(l[-1, ], check_dists = FALSE, eps = 1e-2))
+})
+
+test_that("layout_with_kk() deprecated arguments", {
+  g <- make_ring(10)
+  expect_snapshot(error = TRUE, {
+    l <- layout_with_kk(
+      g,
+      maxiter = 50,
+      coords = layout_in_circle(g),
+      niter = 1,
+      sigma = 1,
+      initemp = 1,
+      coolexp = 1
+    )
+  })
+})
+
+test_that("layout_with_sugiyama() does not demote matrices to vectors in res$layout.dummy", {
+  ex <- graph_from_literal(A -+ B:C, B -+ C:D)
+  layex <- layout_with_sugiyama(ex, layers = NULL)
+  expect_equal(nrow(layex$layout.dummy), 1)
+})
+
+test_that("merge_coords() works", {
+  withr::local_seed(42)
+
+  g <- list(make_ring(10), make_ring(5))
+  l <- lapply(g, layout_with_mds)
+
+  lm <- merge_coords(g, l)
+  expect_true(is.matrix(lm))
+  expect_equal(ncol(lm), 2)
+  expect_equal(nrow(lm), sum(sapply(g, vcount)))
+
+  ## Stress test
+  for (i in 1:10) {
+    g <- sample_gnp(100, 2 / 100)
+    l <- layout_with_mds(g)
+    expect_equal(dim(l), c(vcount(g), 2))
+  }
+})
+
+test_that("`layout_with_mds()` works", {
+  g <- make_tree(10, 2, "undirected")
+
+  mymds <- function(g) {
+    sp <- distances(g)
+    sp <- sp * sp
+    sp <- sp - rowMeans(sp) - rep(rowMeans(sp), each = nrow(sp)) + mean(sp)
+    sp <- sp / -2
+    ei <- eigen(sp)
+    va <- sqrt(abs(ei$values[1:2]))
+    ei$vectors[, 1:2] * rep(va, each = nrow(sp))
+  }
+
+  out1 <- layout_with_mds(g)
+  expect_equal(out1, mymds(g))
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  expect_warning(out2 <- layout_with_mds(g, options = arpack_defaults))
+  expect_equal(out2, out1)
+})
+
+test_that("`layout_with_mds()` stress test, graph with multiple components", {
+  withr::local_seed(42)
+  g <- make_ring(10) + make_ring(3)
+  expect_equal(ncol(layout_with_mds(g)), 2)
+
+  ## Small stress test
+
+  for (i in 1:10) {
+    g <- sample_gnp(100, 2 / 100)
+    l <- layout_with_mds(g)
+    expect_equal(ncol(l), 2)
+  }
+})
+
+
+test_that("two step layouting works", {
+  g <- make_ring(10)
+  l1 <- layout_as_star(g)
+  l2 <- layout_(g, as_star())
+  expect_identical(l1, l2)
+})
+
+test_that("parameters go through", {
+  g <- make_ring(10)
+  l1 <- layout_as_star(g, center = 5)
+  l2 <- layout_(g, as_star(center = 5))
+  expect_identical(l1, l2)
+})
+
+test_that("parameters are evaluated early", {
+  g <- make_ring(10)
+  l1 <- layout_as_star(g, center = 5)
+
+  cc <- 5
+  spec <- as_star(center = cc)
+  cc <- 10
+  l2 <- layout_(g, spec)
+  expect_identical(l1, l2)
+})
+
+test_that("piping form is OK, too", {
+  g <- make_ring(10)
+  l1 <- layout_as_star(g, center = 5)
+  l2 <- g %>%
+    layout_(as_star(center = 5))
+  expect_identical(l1, l2)
+})
+
+test_that("add_layout_ works", {
+  g <- make_ring(10)
+  l1 <- layout_as_star(g, center = 5)
+  l2 <- add_layout_(g, as_star(center = 5))$layout
+  expect_identical(l1, l2)
+
+  l3 <- g %>%
+    add_layout_(as_star(center = 5)) %>%
+    graph_attr("layout")
+  expect_identical(l1, l3)
+})
+
+test_that("layout_randomly() errors well", {
+  g <- make_empty_graph(1)
+  expect_snapshot(error = TRUE, {
+    layout_randomly(g, dim = 4)
+  })
+})
+
+test_that("layout normalization handles all-NaN coordinates correctly", {
+  # Test the internal .layout.norm.col function directly
+  # This tests the fix for all-NaN coordinate normalization
+
+  # Test normal case
+  normal_coords <- c(1, 2, 3, 4, 5)
+  normalized <- igraph:::.layout.norm.col(normal_coords, 0, 1)
+  expect_equal(range(normalized), c(0, 1))
+
+  # Test all-NaN case (this was the bug that was fixed)
+  nan_coords <- rep(NaN, 5)
+  normalized_nan <- igraph:::.layout.norm.col(nan_coords, 0, 1)
+  expected_middle <- rep(0.5, 5) # Should return middle value (0+1)/2 = 0.5
+  expect_equal(normalized_nan, expected_middle)
+
+  # Test all-NaN case with different range
+  normalized_nan_range <- igraph:::.layout.norm.col(nan_coords, -10, 10)
+  expected_middle_range <- rep(0, 5) # Should return middle value (-10+10)/2 = 0
+  expect_equal(normalized_nan_range, expected_middle_range)
+
+  # Test constant values (difference is zero)
+  constant_coords <- rep(5, 5)
+  normalized_constant <- igraph:::.layout.norm.col(constant_coords, 0, 1)
+  expected_constant_middle <- rep(0.5, 5)
+  expect_equal(normalized_constant, expected_constant_middle)
+
+  # Test that norm_coords works with all-NaN layouts
+  layout_all_nan <- matrix(NaN, nrow = 5, ncol = 2)
+  normalized_layout <- norm_coords(layout_all_nan, 0, 1, 0, 1)
+  expect_equal(normalized_layout, matrix(c(rep(0.5, 5), rep(0.5, 5)), ncol = 2))
+
+  # Test 3D layout normalization with all-NaN coordinates
+  layout_3d_nan <- matrix(NaN, nrow = 3, ncol = 3)
+  normalized_3d <- norm_coords(layout_3d_nan, 0, 1, 0, 1, 0, 1)
+  expect_equal(normalized_3d, matrix(rep(0.5, 9), ncol = 3))
+})
+
+test_that("generic modifier mechanism works with existing modifiers", {
+  # Test that component_wise modifier still works
+  g <- make_ring(10) + make_ring(5)
+  l1 <- layout_(g, in_circle(), component_wise())
+  expect_equal(nrow(l1), vcount(g))
+  expect_equal(ncol(l1), 2)
+  expect_true(all(is.finite(l1)))
+
+  # Test that normalize modifier still works
+  g <- make_ring(10)
+  l2 <- layout_(g, with_fr(), normalize())
+  expect_equal(nrow(l2), vcount(g))
+  expect_equal(ncol(l2), 2)
+  expect_true(all(l2 >= -1 & l2 <= 1))
+
+  # Test that both modifiers work together
+  g <- make_ring(10) + make_ring(5)
+  l3 <- layout_(g, in_circle(), component_wise(), normalize())
+  expect_equal(nrow(l3), vcount(g))
+  expect_equal(ncol(l3), 2)
+  expect_true(all(is.finite(l3)))
+  expect_true(all(l3 >= -1 & l3 <= 1))
+})
+
+test_that("custom post-layout modifiers can be created", {
+  # Create a custom modifier that scales coordinates by a factor
+  scale_by <- function(factor = 2) {
+    layout_modifier(
+      id = "scale_by",
+      type = "post",
+      args = list(factor = factor),
+      apply = function(graph, layout, modifier_args) {
+        layout * modifier_args$factor
+      }
+    )
+  }
+
+  g <- make_ring(5)
+  l1 <- layout_(g, in_circle())
+  l2 <- layout_(g, in_circle(), scale_by(factor = 3))
+
+  # l2 should be 3x l1
+  expect_equal(l2, l1 * 3)
+})
+
+test_that("multiple post-layout modifiers are applied in order", {
+  # Create test modifiers
+  add_offset <- function(offset = 1) {
+    layout_modifier(
+      id = "add_offset",
+      type = "post",
+      args = list(offset = offset),
+      apply = function(graph, layout, modifier_args) {
+        layout + modifier_args$offset
+      }
+    )
+  }
+
+  multiply_by <- function(factor = 2) {
+    layout_modifier(
+      id = "multiply_by",
+      type = "post",
+      args = list(factor = factor),
+      apply = function(graph, layout, modifier_args) {
+        layout * modifier_args$factor
+      }
+    )
+  }
+
+  g <- make_ring(5)
+  base_layout <- layout_(g, in_circle())
+
+  # Apply add first, then multiply: (layout + 1) * 2
+  l1 <- layout_(g, in_circle(), add_offset(1), multiply_by(2))
+  expect_equal(l1, (base_layout + 1) * 2)
+
+  # Apply multiply first, then add: (layout * 2) + 1
+  l2 <- layout_(g, in_circle(), multiply_by(2), add_offset(1))
+  expect_equal(l2, (base_layout * 2) + 1)
+
+  # Results should be different
+  expect_false(isTRUE(all.equal(l1, l2)))
+})
+
+test_that("duplicate modifiers are rejected", {
+  g <- make_ring(5)
+  expect_error(
+    layout_(g, in_circle(), normalize(), normalize()),
+    "Duplicate modifiers"
+  )
+})
+
+test_that("modifier types are correctly identified", {
+  cw <- component_wise()
+  expect_equal(cw$type, "pre")
+  expect_true(is.function(cw$apply))
+
+  norm <- normalize()
+  expect_equal(norm$type, "post")
+  expect_true(is.function(norm$apply))
+})

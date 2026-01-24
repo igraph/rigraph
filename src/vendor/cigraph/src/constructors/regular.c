@@ -66,7 +66,7 @@
  * Time complexity: O(|V|), the
  * number of vertices in the graph.
  *
- * \sa \ref igraph_square_lattice(), \ref igraph_ring(), \ref igraph_kary_tree()
+ * \sa \ref igraph_wheel(), \ref igraph_square_lattice(), \ref igraph_ring(), \ref igraph_kary_tree()
  * for creating other regular structures.
  *
  * \example examples/simple/igraph_star.c
@@ -346,6 +346,11 @@ igraph_error_t igraph_lattice(igraph_t *graph, const igraph_vector_int_t *dimvec
  *         \c IGRAPH_EINVAL: invalid (negative) dimension vector or mismatch
  *         between the length of the dimension vector and the periodicity vector.
  *
+ * \sa \ref igraph_hypercube() to create a hypercube graph; \ref igraph_ring()
+ * to create a cycle graph or path graph; \ref igraph_triangular_lattice()
+ * and \ref igraph_hexagonal_lattice() to create other types of lattices;
+ * \ref igraph_regular_tree() to create a Bethe lattice.
+ *
  * Time complexity: If \p nei is less than two then it is O(|V|+|E|) (as
  * far as I remember), |V| and |E| are the number of vertices
  * and edges in the generated graph. Otherwise it is O(|V|*d^k+|E|), d
@@ -492,19 +497,20 @@ igraph_error_t igraph_square_lattice(
  *
  * \param graph Pointer to an uninitialized graph object.
  * \param n The number of vertices in the graph.
- * \param directed Logical, whether to create a directed graph.
+ * \param directed Whether to create a directed graph.
  *        All edges will be oriented in the same direction along
  *        the cycle or path.
- * \param mutual Logical, whether to create mutual edges in directed
+ * \param mutual Whether to create mutual edges in directed
  *        graphs. It is ignored for undirected graphs.
- * \param circular Logical, whether to create a closed ring (a cycle)
+ * \param circular Whether to create a closed ring (a cycle)
  *        or an open path.
  * \return Error code:
  *         \c IGRAPH_EINVAL: invalid number of vertices.
  *
  * Time complexity: O(|V|), the number of vertices in the graph.
  *
- * \sa \ref igraph_lattice() for generating more general lattices.
+ * \sa \ref igraph_square_lattice() for generating more general
+ * (periodic or non-periodic) lattices.
  *
  * \example examples/simple/igraph_ring.c
  */
@@ -566,6 +572,61 @@ igraph_error_t igraph_ring(igraph_t *graph, igraph_integer_t n, igraph_bool_t di
 
 /**
  * \ingroup generators
+ * \function igraph_path_graph
+ * \brief A path graph \c P_n.
+ *
+ * Creates the path graph \c P_n on \p n vertices.
+ *
+ * </para><para>
+ * This is a convenience wrapper to \ref igraph_ring().
+ *
+ * \param graph Pointer to an uninitialized graph object.
+ * \param n The number of vertices in the graph.
+ * \param directed Whether to create a directed graph.
+ * \param mutual Whether to create mutual edges in directed
+ *        graphs. It is ignored for undirected graphs.
+ * \return Error code.
+ *
+ * Time complexity: O(|V|), the number of vertices in the graph.
+ */
+igraph_error_t igraph_path_graph(
+        igraph_t *graph, igraph_integer_t n,
+        igraph_bool_t directed, igraph_bool_t mutual) {
+    return igraph_ring(graph, n, directed, mutual, /* circular= */ false);
+}
+
+/**
+ * \ingroup generators
+ * \function igraph_cycle_graph
+ * \brief A cycle graph \c C_n.
+ *
+ * Creates the cycle graph \c C_n on \p n vertices.
+ *
+ * </para><para>
+ * When \p n is 1 or 2, the result may not be a simple graph:
+ * the one-cycle contains a self-loop and the undirected or reciprocally
+ * connected directed two-cycle contains parallel edges.
+ *
+ * </para><para>
+ * This is a convenience wrapper to \ref igraph_ring().
+ *
+ * \param graph Pointer to an uninitialized graph object.
+ * \param n The number of vertices in the graph.
+ * \param directed Whether to create a directed graph.
+ * \param mutual Whether to create mutual edges in directed
+ *        graphs. It is ignored for undirected graphs.
+ * \return Error code.
+ *
+ * Time complexity: O(|V|), the number of vertices in the graph.
+ */
+igraph_error_t igraph_cycle_graph(
+        igraph_t *graph, igraph_integer_t n,
+        igraph_bool_t directed, igraph_bool_t mutual) {
+    return igraph_ring(graph, n, directed, mutual, /* circular= */ true);
+}
+
+/**
+ * \ingroup generators
  * \function igraph_kary_tree
  * \brief Creates a k-ary tree in which almost all vertices have k children.
  *
@@ -602,9 +663,12 @@ igraph_error_t igraph_ring(igraph_t *graph, igraph_integer_t n, igraph_bool_t di
  * Time complexity: O(|V|+|E|), the
  * number of vertices plus the number of edges in the graph.
  *
- * \sa \ref igraph_lattice(), \ref igraph_star() for creating other regular
- * structures; \ref igraph_from_prufer() for creating arbitrary trees;
- * \ref igraph_tree_game() for uniform random sampling of trees.
+ * \sa \ref igraph_regular_tree(), \ref igraph_symmetric_tree() and \ref igraph_star()
+ * for creating other regular structures; \ref igraph_from_prufer() and
+ * \ref igraph_tree_from_parent_vector() for creating arbitrary trees;
+ * \ref igraph_tree_game() for uniform random sampling of trees;
+ * \ref igraph_realize_degree_sequence() with \c IGRAPH_REALIZE_DEGSEQ_SMALLEST
+ * to create a tree with given degrees.
  *
  * \example examples/simple/igraph_kary_tree.c
  */
@@ -868,7 +932,8 @@ igraph_error_t igraph_regular_tree(igraph_t *graph, igraph_integer_t h, igraph_i
  * \param directed Whether the graph should be directed.
  * \return Error code.
  *
- * \sa \ref igraph_ring(), \ref igraph_lcf(), \ref igraph_lcf_vector().
+ * \sa \ref igraph_ring(), \ref igraph_lcf(), \ref igraph_lcf_vector(),
+ * \ref igraph_circulant()
  *
  * Time complexity: O(|V|+|E|), the number of vertices plus the number
  * of edges.
@@ -929,5 +994,78 @@ igraph_error_t igraph_extended_chordal_ring(
     IGRAPH_CHECK(igraph_create(graph, &edges, nodes, directed));
     igraph_vector_int_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
+    return IGRAPH_SUCCESS;
+}
+
+/**
+ * \function igraph_hypercube
+ * \brief The n-dimensional hypercube graph.
+ *
+ * \experimental
+ *
+ * The hypercube graph \c Q_n has <code>2^n</code> vertices and
+ * <code>2^(n-1) n</code> edges. Two vertices are connected when the binary
+ * representations of their zero-based vertex IDs differs in precisely one bit.
+ *
+ * \param graph An uninitialized graph object.
+ * \param n The dimension of the hypercube graph.
+ * \param directed Whether the graph should be directed. Edges will point
+ *    from lower index vertices towards higher index ones.
+ * \return Error code.
+ *
+ * \sa \ref igraph_square_lattice()
+ *
+ * Time complexity: O(2^n)
+ */
+igraph_error_t igraph_hypercube(igraph_t *graph,
+                                igraph_integer_t n, igraph_bool_t directed) {
+
+    /* An n-dimensional hypercube graph has 2^n vertices and 2^(n-1)*n edges.
+     * The maximum possible dimension is calculated with the assumption that
+     * the largest possible edge count is no more than half IGRAPH_INTEGER_MAX,
+     * which is in fact the current limit. */
+
+    const igraph_integer_t maxn =
+        (IGRAPH_INTEGER_SIZE - 1) - (igraph_integer_t) ceil(log2(IGRAPH_INTEGER_SIZE));
+
+    if (n < 0) {
+        IGRAPH_ERROR("Hypercube dimension must not be negative.", IGRAPH_EINVAL);
+    }
+
+    if (n > maxn) {
+        IGRAPH_ERRORF("The requested hypercube graph dimension (%" IGRAPH_PRId
+                      ") is too high. It must be no greater than %" IGRAPH_PRId ".",
+                      IGRAPH_EINVAL, n, maxn);
+    }
+
+    /* Integer overflow is no longer a concern after the above check. */
+
+    const igraph_integer_t vcount = (igraph_integer_t) 1 << n;
+    const igraph_integer_t ecount = n > 0 ? ((igraph_integer_t) 1 << (n-1)) * n : 0; /* avoid UBSan warning */
+    igraph_vector_int_t edges;
+    igraph_integer_t p;
+    int iter = 0;
+
+    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 2*ecount);
+
+    p = 0;
+    for (igraph_integer_t v=0; v < vcount; v++) {
+        igraph_integer_t bit = 1;
+        for (igraph_integer_t i=0; i < n; i++) {
+            const igraph_integer_t u = v ^ bit;
+            if (v < u) {
+                VECTOR(edges)[p++] = v;
+                VECTOR(edges)[p++] = u;
+            }
+            bit <<= 1;
+        }
+        IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 16);
+    }
+
+    IGRAPH_CHECK(igraph_create(graph, &edges, vcount, directed));
+
+    igraph_vector_int_destroy(&edges);
+    IGRAPH_FINALLY_CLEAN(1);
+
     return IGRAPH_SUCCESS;
 }

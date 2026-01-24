@@ -1,4 +1,3 @@
-
 ## ----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -22,13 +21,12 @@
 ##
 ## ----------------------------------------------------------------------
 
-
 # format versions
-ver_0_1_1 <- 0L   # 0.1.1
-ver_0_4 <- 1L     # 0.4
+ver_0_1_1 <- 0L # 0.1.1
+ver_0_4 <- 1L # 0.4
 ver_0_7_999 <- 2L # 0.7.999
-ver_0_8 <- 3L     # 0.8
-ver_1_5_0 <- 4L   # 1.5.0
+ver_0_8 <- 3L # 0.8
+ver_1_5_0 <- 4L # 1.5.0
 pkg_graph_version <- ver_1_5_0
 
 #' igraph data structure versions
@@ -59,7 +57,7 @@ graph_version <- function(graph) {
   # Don't call is_igraph() here to avoid recursion
   stopifnot(inherits(graph, "igraph"))
 
-  .Call(R_igraph_graph_version, graph)
+  .Call(Rx_igraph_graph_version, graph)
 }
 
 #' igraph data structure versions
@@ -94,52 +92,56 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop("Don't know how to downgrade graph from version ", g_ver, " to ", p_ver)
+    cli::cli_abort(
+      "Don't know how to downgrade graph from version {g_ver} to {p_ver}."
+    )
   }
 
   # g_ver < p_ver
   if (g_ver == ver_0_4) {
-    .Call(R_igraph_add_env, graph)
+    .Call(Rx_igraph_add_env, graph)
   } else if (g_ver == ver_0_7_999) {
     # Not observed in the wild
-    .Call(R_igraph_add_myid_to_env, graph)
-    .Call(R_igraph_add_version_to_env, graph)
+    .Call(Rx_igraph_add_myid_to_env, graph)
+    .Call(Rx_igraph_add_version_to_env, graph)
   } else if (g_ver == ver_0_8) {
-    .Call(R_igraph_add_version_to_env, graph)
+    .Call(Rx_igraph_add_version_to_env, graph)
     graph <- unclass(graph)
     graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
     class(graph) <- "igraph"
 
-    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # Calling for side effect: error if Rz_SEXP_to_igraph() fails, create native igraph,
     # update "me" element of environment
     V(graph)
 
     graph
   } else {
-    stop("Don't know how to upgrade graph from version ", g_ver, " to ", p_ver)
+    cli::cli_abort(
+      "Don't know how to upgrade graph from version {g_ver} to {p_ver}."
+    )
   }
 }
 
 ## Check that the version is the latest
 
 warn_version <- function(graph) {
-  # Calling for side effect: error if R_SEXP_to_igraph() fails
+  # Calling for side effect: error if Rz_SEXP_to_igraph() fails
   # Don't call vcount_impl() to avoid recursion
-  .Call(R_igraph_vcount, graph)
+  .Call(Rx_igraph_vcount, graph)
 
   # graph_version() calls is_igraph(), but that function must call warn_version() for safety
-  their_version <- .Call(R_igraph_graph_version, graph)
+  their_version <- .Call(Rx_igraph_graph_version, graph)
 
   if (pkg_graph_version == their_version) {
     return(FALSE)
   }
 
   if (pkg_graph_version > their_version) {
-    message(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version\n",
-      "  For now we convert it on the fly..."
-    )
+    cli::cli_inform(c(
+      "This graph was created by an old(er) igraph version.",
+      i = "Call {.fun igraph::upgrade_graph} on it to use with the current igraph version.",
+      "For now we convert it on the fly..."
+    ))
 
     # In-place upgrade:
     # - The igraph element in the igraph_t_idx_env component will be added
@@ -149,12 +151,15 @@ warn_version <- function(graph) {
     #   Users will have to call upgrade_graph(), but this is what the message
     #   is about.
     if (pkg_graph_version <= ver_1_5_0) {
-      .Call(R_igraph_add_version_to_env, graph)
+      .Call(Rx_igraph_add_version_to_env, graph)
     }
     return(TRUE)
   }
 
-  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
+  cli::cli_abort(
+    "This graph was created by a newer igraph version.
+    Please install the latest version of igraph and try again."
+  )
 }
 
 oldpredecessors <- function() {
@@ -183,4 +188,60 @@ clear_native_ptr <- function(g) {
   gx <- unclass(g)
   gx[[igraph_t_idx_env]]$igraph <- NULL
   g
+}
+
+#' Query igraph's version string
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.version()` was renamed to [igraph_version()] to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.version <- function() {
+  # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
+  igraph_version()
+} # nocov end
+
+
+# R_igraph_vers -----------------------------------------------------------------------
+
+#' Query igraph's version string
+#'
+#' Returns the R package version,
+#' prints the R package version and C library version.
+#'
+#' @return A character scalar, the igraph version string, with an attribute
+#'  `"c_version"` giving the C library version string.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @keywords graphs
+#' @keywords internal
+#' @export
+#' @examples
+#' igraph_version()
+#'
+igraph_version <- function() {
+  r_version <- getNamespaceInfo("igraph", "spec")[["version"]]
+
+  version <- structure(
+    r_version,
+    class = c("igraph_version", class(r_version)),
+    c_version = c_version()
+  )
+
+  invisible(version)
+}
+
+#' @export
+print.igraph_version <- function(x, ...) {
+  writeLines(paste0("R version: ", x))
+  writeLines(paste0("C version: ", attr(x, "c_version")))
+  invisible(x)
+}
+
+c_version <- function() {
+  version_impl()[["version_string"]]
 }

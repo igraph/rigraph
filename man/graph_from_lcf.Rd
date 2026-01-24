@@ -4,12 +4,15 @@
 \alias{graph_from_lcf}
 \title{Creating a graph from LCF notation}
 \usage{
-graph_from_lcf(n, shifts, repeats = 1)
+graph_from_lcf(shifts, ..., n = NULL, repeats = 1L)
 }
 \arguments{
-\item{n}{Integer, the number of vertices in the graph.}
-
 \item{shifts}{Integer vector, the shifts.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{n}{Integer, the number of vertices in the graph. If \code{NULL} (default),
+it is set to \code{len(shifts) * repeats}.}
 
 \item{repeats}{Integer constant, how many times to repeat the shifts.}
 }
@@ -21,21 +24,23 @@ LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
 3-regular Hamiltonian graphs. It constists of three parameters, the number
 of vertices in the graph, a list of shifts giving additional edges to a
 cycle backbone and another integer giving how many times the shifts should
-be performed. See \url{http://mathworld.wolfram.com/LCFNotation.html} for
-details.
+be performed.
+See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
 }
 \examples{
 
 # This is the Franklin graph:
-g1 <- graph_from_lcf(12, c(5, -5), 6)
+g1 <- graph_from_lcf(shifts = c(5L, -5L), n = 12L, repeats = 6L)
 g2 <- make_graph("Franklin")
 isomorphic(g1, g2)
 }
 \seealso{
-\code{\link[=graph]{graph()}} can create arbitrary graphs, see also the other
+\code{\link[=make_graph]{make_graph()}} can create arbitrary graphs, see also the other
 functions on the its manual page for creating special graphs.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}.}
+

@@ -730,7 +730,7 @@ extern int yylex \
 #undef yyTABLES_NAME
 #endif
 
-#line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 137 "src/vendor/cigraph/src/io/dl-lexer.l"
 
 #line 736 "src/vendor/io/parsers/dl-lexer.h"
 #undef igraph_dl_yyIN_HEADER

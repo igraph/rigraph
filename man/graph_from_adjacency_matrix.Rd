@@ -14,7 +14,14 @@ graph_from_adjacency_matrix(
   add.rownames = NA
 )
 
-from_adjacency(...)
+from_adjacency(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+)
 }
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
@@ -40,9 +47,9 @@ the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 
 \item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \sQuote{\code{NULL}} (the default) then, if
+vertex attributes. If it is \code{NULL} (the default) then, if
 present, column names are added as vertex attribute \sQuote{name}. If
-\sQuote{\code{NA}} then they will not be added.  If a character constant,
+\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
 then it gives the name of the vertex attribute to add.}
 
 \item{add.rownames}{Character scalar, whether to add the row names as vertex
@@ -50,8 +57,6 @@ attributes. Possible values the same as the previous argument. By default
 row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
-
-\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.
@@ -70,49 +75,83 @@ the first row will be vertex 0 in the graph, etc.
 If this argument is \code{NULL} then an unweighted graph is created and an
 element of the adjacency matrix gives the number of edges to create between
 the two corresponding vertices.  The details depend on the value of the
-\code{mode} argument: \describe{ \item{"directed"}{The graph will be
-directed and a matrix element gives the number of edges between two
-vertices.} \item{"undirected"}{This is exactly the same as \code{max},
-for convenience. Note that it is \emph{not} checked whether the matrix is
-symmetric.} \item{"max"}{An undirected graph will be created and
-\code{max(A(i,j), A(j,i))} gives the number of edges.}
-\item{"upper"}{An undirected graph will be created, only the upper
-right triangle (including the diagonal) is used for the number of edges.}
-\item{"lower"}{An undirected graph will be created, only the lower
-left triangle (including the diagonal) is used for creating the edges.}
-\item{"min"}{undirected graph will be created with \code{min(A(i,j), A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
-undirected graph will be created with \code{A(i,j)+A(j,i)} edges between
-vertex \code{i} and \code{j}.} }
+\code{mode} argument:
+\describe{
+\item{"directed"}{
+The graph will be directed and a matrix element gives
+the number of edges between two vertices.
+}
+\item{"undirected"}{
+This is exactly the same as \code{max}, for convenience.
+Note that it is \emph{not} checked whether the matrix is symmetric.
+}
+\item{"max"}{
+An undirected graph will be created and \code{max(A(i,j), A(j,i))}
+gives the number of edges.
+}
+\item{"upper"}{
+An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used for the number of edges.
+}
+\item{"lower"}{
+An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.
+}
+\item{"min"}{
+An undirected graph will be created with \code{min(A(i,j), A(j,i))} edges
+between vertex \code{i} and \code{j}.
+}
+\item{"plus"}{
+An undirected graph will be created with \code{A(i,j)+A(j,i)} edges
+between vertex \code{i} and \code{j}.
+}
+}
 
 If the \code{weighted} argument is not \code{NULL} then the elements of the
 matrix give the weights of the edges (if they are not zero).  The details
-depend on the value of the \code{mode} argument: \describe{
-\item{"directed"}{The graph will be directed and a matrix element
-gives the edge weights.} \item{"undirected"}{First we check that the
-matrix is symmetric. It is an error if not. Then only the upper triangle is
-used to create a weighted undirected graph.} \item{"max"}{An
-undirected graph will be created and \code{max(A(i,j), A(j,i))} gives the
-edge weights.} \item{"upper"}{An undirected graph will be created,
-only the upper right triangle (including the diagonal) is used (for the edge
-weights).} \item{"lower"}{An undirected graph will be created, only
-the lower left triangle (including the diagonal) is used for creating the
-edges.} \item{"min"}{An undirected graph will be created,
-\code{min(A(i,j), A(j,i))} gives the edge weights.} \item{"plus"}{An
-undirected graph will be created, \code{A(i,j)+A(j,i)} gives the edge
-weights.} }
+depend on the value of the \code{mode} argument:
+\describe{
+\item{"directed"}{
+The graph will be directed and a matrix element gives the edge weights.
+}
+\item{"undirected"}{
+First we check that the matrix is symmetric. It is an error if not.
+Then only the upper triangle is used to create a weighted undirected graph.
+}
+\item{"max"}{
+An undirected graph will be created and \code{max(A(i,j), A(j,i))}
+gives the edge weights.
+}
+\item{"upper"}{
+An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used (for the edge weights).
+}
+\item{"lower"}{
+An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.
+}
+\item{"min"}{
+An undirected graph will be created, \code{min(A(i,j), A(j,i))}
+gives the edge weights.
+}
+\item{"plus"}{
+An undirected graph will be created, \code{A(i,j)+A(j,i)}
+gives the edge weights.
+}
+}
 }
 \examples{
 
 g1 <- sample(
-    x = 0:1, size = 100, replace = TRUE,
-    prob = c(0.9, 0.1)
-  ) \%>\%
+  x = 0:1, size = 100, replace = TRUE,
+  prob = c(0.9, 0.1)
+) \%>\%
   matrix(ncol = 10) \%>\%
   graph_from_adjacency_matrix()
 
 g2 <- sample(
-    x = 0:5, size = 100, replace = TRUE,
-    prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
+  x = 0:5, size = 100, replace = TRUE,
+  prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
 ) \%>\%
   matrix(ncol = 10) \%>\%
   graph_from_adjacency_matrix(weighted = TRUE)
@@ -178,8 +217,8 @@ halve_diag <- function(x) {
   x
 }
 expected_g8_weights <- non_zero_sort(
-  halve_diag(adj_matrix + t(adj_matrix)
-)[lower.tri(adj_matrix, diag = TRUE)])
+  halve_diag(adj_matrix + t(adj_matrix))[lower.tri(adj_matrix, diag = TRUE)]
+)
 actual_g8_weights <- sort(E(g8)$weight)
 all(expected_g8_weights == actual_g8_weights)
 
@@ -208,7 +247,7 @@ summary(g10)
 
 }
 \seealso{
-\code{\link[=graph]{graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
+\code{\link[=make_graph]{make_graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
 create graphs.
 }
 \author{

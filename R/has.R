@@ -22,7 +22,10 @@ has_graphml <- make_closure(graphml = NULL, function() {
   if (is.null(graphml)) {
     graphml <<- tryCatch(
       {
-        read_graph(rawConnection(charToRaw("<graphml><graph></graph></graphml>")), format = "graphml")
+        read_graph(
+          rawConnection(charToRaw("<graphml><graph></graph></graphml>")),
+          format = "graphml"
+        )
         TRUE
       },
       error = function(e) FALSE

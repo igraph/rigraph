@@ -19,8 +19,7 @@ test_that("radius() works -- lifecycle", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(radius(g, NULL, "out"))
-
+  expect_snapshot(radius(g, "out"))
 })
 
 test_that("eccentricity() works", {
@@ -44,8 +43,7 @@ test_that("eccentricity() works -- lifecycle", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(eccentricity(g, vids = V(g), NULL, "out"))
-
+  expect_snapshot(eccentricity(g, vids = V(g), "out"))
 })
 
 test_that("graph_center() works", {
@@ -54,7 +52,6 @@ test_that("graph_center() works", {
   expect_equal(as.numeric(graph_center(g)), c(1, 2))
   expect_equal(as.numeric(graph_center(g, mode = "in")), 1)
   expect_equal(as.numeric(graph_center(g, mode = "out")), 16:100)
-
 })
 
 test_that("graph_center() works -- weights", {
@@ -65,3 +62,12 @@ test_that("graph_center() works -- weights", {
   expect_equal(as.numeric(graph_center(g)), 7)
 })
 
+test_that("all_simple_paths() passes on cutoff argument", {
+  g <- make_ring(7)
+  expect_equal(lengths(all_simple_paths(g, 1, cutoff = 1)), c(2, 2))
+  expect_equal(lengths(all_simple_paths(g, 1, cutoff = 2)), c(2, 3, 2, 3))
+  expect_equal(
+    lengths(all_simple_paths(g, 1)),
+    c(2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7)
+  )
+})

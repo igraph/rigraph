@@ -1,15 +1,15 @@
-
 #' Permute the vertices of a graph
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `permute.vertices()` was renamed to `permute()` to create a more
+#' `permute.vertices()` was renamed to [permute()] to create a more
 #' consistent API.
 #' @inheritParams permute
 #' @keywords internal
 #' @export
-permute.vertices <- function(graph, permutation) { # nocov start
+permute.vertices <- function(graph, permutation) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "permute.vertices()", "permute()")
   permute(graph = graph, permutation = permutation)
 } # nocov end
@@ -19,14 +19,23 @@ permute.vertices <- function(graph, permutation) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.isocreate()` was renamed to `graph_from_isomorphism_class()` to create a more
+#' `graph.isocreate()` was renamed to [graph_from_isomorphism_class()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_isomorphism_class
 #' @keywords internal
 #' @export
-graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.isocreate()", "graph_from_isomorphism_class()")
-  graph_from_isomorphism_class(size = size, number = number, directed = directed)
+graph.isocreate <- function(size, number, directed = TRUE) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.isocreate()",
+    "graph_from_isomorphism_class()"
+  )
+  graph_from_isomorphism_class(
+    size = size,
+    number = number,
+    directed = directed
+  )
 } # nocov end
 
 #' Number of automorphisms
@@ -34,13 +43,22 @@ graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.automorphisms()` was renamed to `count_automorphisms()` to create a more
+#' `graph.automorphisms()` was renamed to [count_automorphisms()] to create a more
 #' consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
-graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.automorphisms()", "count_automorphisms()")
+graph.automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.automorphisms()",
+    "count_automorphisms()"
+  )
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
 
@@ -49,13 +67,22 @@ graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "f
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `canonical.permutation()` was renamed to `canonical_permutation()` to create a more
+#' `canonical.permutation()` was renamed to [canonical_permutation()] to create a more
 #' consistent API.
 #' @inheritParams canonical_permutation
 #' @keywords internal
 #' @export
-canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "canonical.permutation()", "canonical_permutation()")
+canonical.permutation <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "canonical.permutation()",
+    "canonical_permutation()"
+  )
   canonical_permutation(graph = graph, colors = colors, sh = sh)
 } # nocov end
 
@@ -64,12 +91,17 @@ canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `automorphisms()` was renamed to `count_automorphisms()` to create a more
+#' `automorphisms()` was renamed to [count_automorphisms()] to create a more
 #' consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
-automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
+automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "automorphisms()", "count_automorphisms()")
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
@@ -96,116 +128,42 @@ automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "f
 ###################################################################
 
 #' @export
-graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
-                                       vertex.color2, edge.color1,
-                                       edge.color2) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
-    vertex.color2, edge.color1, edge.color2
+graph.get.isomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
+) {
+  res <- get_isomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph2)[.x + 1])
 }
 
 #' @export
-graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
-                                          vertex.color2, edge.color1,
-                                          edge.color2) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_subisomorphisms_vf2, graph1, graph2,
-    vertex.color1, vertex.color2, edge.color1, edge.color2
+graph.get.subisomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
+) {
+  res <- get_subisomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph1)[.x + 1])
@@ -217,16 +175,24 @@ graph.isoclass.subgraph <- function(graph, vids) {
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids) - 1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_isoclass_subgraph, graph, vids)
+  res <- isoclass_subgraph_impl(
+    graph = graph,
+    vids = vids
+  )
   res
 }
 
 #' @export
-graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
-                                    induced = FALSE, map = TRUE, all.maps = FALSE,
-                                    time.limit = Inf) {
+graph.subisomorphic.lad <- function(
+  pattern,
+  target,
+  domains = NULL,
+  induced = FALSE,
+  map = TRUE,
+  all.maps = FALSE,
+  time.limit = Inf
+) {
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
@@ -240,19 +206,29 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   all.maps <- as.logical(all.maps)
   if (!is.null(domains)) {
     if (!is.list(domains)) {
-      stop("`domains' must be a list of vertex vectors from `target'")
+      cli::cli_abort(
+        "{.arg domains} must be a list of vertex vectors from {.arg target}."
+      )
     }
     if (length(domains) != vcount(pattern)) {
-      stop("`domains' length and `pattern' number of vertices must match")
+      cli::cli_abort(
+        "{.arg domains} length and {.arg pattern} number of vertices must match."
+      )
     }
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_subisomorphic_lad, pattern, target, domains,
-    induced, time.limit, map, all.maps
+    Rx_igraph_subisomorphic_lad,
+    pattern,
+    target,
+    domains,
+    induced,
+    time.limit,
+    map,
+    all.maps
   )
 
   if (map) {
@@ -261,7 +237,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
       names(res$map) <- V(target)$name[res$map]
     }
   }
-  if (all.maps) res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+  if (all.maps) {
+    res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+  }
 
   res
 }
@@ -294,18 +272,18 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @section \sQuote{bliss} method:
 #' Uses the BLISS algorithm by Junttila and Kaski, and it works for
@@ -315,10 +293,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' canonical forms are compared.
 #' Extra arguments:
 #' \describe{
-#'   \item{sh}{Character constant, the heuristics to use in the BLISS
-#'     algorithm for `graph1` and `graph2`. See the `sh` argument of
-#'     [canonical_permutation()] for possible values.}
-#' }
+#'     \item{sh}{
+#'       Character constant, the heuristics to use in the BLISS algorithm for `graph1` and `graph2`. See the `sh` argument of [canonical_permutation()] for possible values.
+#'     }
+#'   }
 #' `sh` defaults to \sQuote{fm}.
 #'
 #' @param graph1 The first graph.
@@ -372,20 +350,31 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #'   vertex.color1 = NULL,
 #'   vertex.color2 = NULL
 #' )
-isomorphic <- function(graph1, graph2, method = c(
-                         "auto", "direct",
-                         "vf2", "bliss"
-                       ), ...) {
+isomorphic <- function(
+  graph1,
+  graph2,
+  method = c(
+    "auto",
+    "direct",
+    "vf2",
+    "bliss"
+  ),
+  ...
+) {
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "auto") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(
+      graph1 = graph1,
+      graph2 = graph2
+    )
   } else if (method == "direct") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(
+      graph1 = graph1,
+      graph2 = graph2
+    )
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
@@ -394,11 +383,76 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
-graph.isomorphic.bliss <- isomorphic_bliss_impl
+#' @cdocs igraph_isomorphic_bliss
+graph.isomorphic.bliss <- function(
+  graph1,
+  graph2,
+  colors1 = NULL,
+  colors2 = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  isomorphic_bliss_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    colors1 = if (missing(colors1)) missing_arg() else colors1,
+    colors2 = if (missing(colors2)) missing_arg() else colors2,
+    sh = sh
+  )
+}
 #' @export
-graph.isomorphic.vf2 <- isomorphic_vf2_impl
+#' @cdocs igraph_isomorphic_vf2
+graph.isomorphic.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  isomorphic_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex_color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 #' @export
-graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
+#' @cdocs igraph_subisomorphic_vf2
+graph.subisomorphic.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  subisomorphic_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex_color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 
 #' @export
 #' @rdname isomorphic
@@ -415,35 +469,40 @@ is_isomorphic_to <- isomorphic
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -493,15 +552,24 @@ is_isomorphic_to <- isomorphic
 #' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
-subgraph_isomorphic <- function(pattern, target,
-                                method = c("auto", "lad", "vf2"), ...) {
-  method <- igraph.match.arg(method)
+subgraph_isomorphic <- function(
+  pattern,
+  target,
+  method = c("auto", "lad", "vf2"),
+  ...
+) {
+  method <- igraph_match_arg(method)
 
-  if (method == "auto") method <- "lad"
+  if (method == "auto") {
+    method <- "lad"
+  }
 
   if (method == "lad") {
-    graph.subisomorphic.lad(pattern, target,
-      map = FALSE, all.maps = FALSE,
+    graph.subisomorphic.lad(
+      pattern,
+      target,
+      map = FALSE,
+      all.maps = FALSE,
       ...
     )$iso
   } else if (method == "vf2") {
@@ -549,7 +617,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'   vertex.color2 = NULL
 #' )
 count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.count.isomorphisms.vf2(graph1, graph2, ...)
@@ -557,7 +625,32 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 }
 
 #' @export
-graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
+#' @cdocs igraph_count_isomorphisms_vf2
+graph.count.isomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  count_isomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex_color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
 #' another graph
@@ -566,35 +659,38 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph. It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds. It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -620,9 +716,13 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #'
 #' @export
 #' @family graph isomorphism
-count_subgraph_isomorphisms <- function(pattern, target,
-                                        method = c("lad", "vf2"), ...) {
-  method <- igraph.match.arg(method)
+count_subgraph_isomorphisms <- function(
+  pattern,
+  target,
+  method = c("lad", "vf2"),
+  ...
+) {
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     length(graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps)
@@ -632,7 +732,32 @@ count_subgraph_isomorphisms <- function(pattern, target,
 }
 
 #' @export
-graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
+#' @cdocs igraph_count_subisomorphisms_vf2
+graph.count.subisomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  count_subisomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex_color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
 #'
@@ -649,7 +774,7 @@ graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
 #' @export
 #' @family graph isomorphism
 isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
@@ -663,35 +788,40 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -709,9 +839,13 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #'
 #' @export
 #' @family graph isomorphism
-subgraph_isomorphisms <- function(pattern, target,
-                                  method = c("lad", "vf2"), ...) {
-  method <- igraph.match.arg(method)
+subgraph_isomorphisms <- function(
+  pattern,
+  target,
+  method = c("lad", "vf2"),
+  ...
+) {
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps
@@ -754,7 +888,12 @@ isomorphism_class <- function(graph, v) {
 }
 
 #' @export
-graph.isoclass <- isoclass_impl
+#' @cdocs igraph_isoclass
+graph.isoclass <- function(graph) {
+  isoclass_impl(
+    graph = graph
+  )
+}
 
 #' Create a graph from an isomorphism class
 #'
@@ -770,10 +909,16 @@ graph.isoclass <- isoclass_impl
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
-#'
 #' @family graph isomorphism
 #' @export
-graph_from_isomorphism_class <- isoclass_create_impl
+#' @cdocs igraph_isoclass_create
+graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
+  isoclass_create_impl(
+    size = size,
+    number = number,
+    directed = directed
+  )
+}
 
 
 #' Canonical permutation of a graph
@@ -788,13 +933,28 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' See the paper below for the details about BLISS. This and more information
 #' is available at <http://www.tcs.hut.fi/Software/bliss/index.html>.
 #'
-#' The possible values for the `sh` argument are: \describe{
-#' \item{"f"}{First non-singleton cell.} \item{"fl"}{First largest
-#' non-singleton cell.} \item{"fs"}{First smallest non-singleton cell.}
-#' \item{"fm"}{First maximally non-trivially connectec non-singleton
-#' cell.} \item{"flm"}{Largest maximally non-trivially connected
-#' non-singleton cell.} \item{"fsm"}{Smallest maximally non-trivially
-#' connected non-singleton cell.} } See the paper in references for details
+#' The possible values for the `sh` argument are:
+#' \describe{
+#'     \item{"f"}{
+#'       First non-singleton cell.
+#'     }
+#'     \item{"fl"}{
+#'       First largest non-singleton cell.
+#'     }
+#'     \item{"fs"}{
+#'       First smallest non-singleton cell.
+#'     }
+#'     \item{"fm"}{
+#'       First maximally non-trivially connectec non-singleton cell.
+#'     }
+#'     \item{"flm"}{
+#'       Largest maximally non-trivially connected non-singleton cell.
+#'     }
+#'     \item{"fsm"}{
+#'       Smallest maximally non-trivially connected non-singleton cell.
+#'     }
+#'   }
+#' See the paper in references for details
 #' about these.
 #'
 #' @param graph The input graph, treated as undirected.
@@ -806,23 +966,42 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #'   for possible values.
-#' @return A list with the following members: \item{labeling}{The canonical
-#'   permutation which takes the input graph into canonical form. A numeric
-#'   vector, the first element is the new label of vertex 0, the second element
-#'   for vertex 1, etc. } \item{info}{Some information about the BLISS
-#'   computation. A named list with the following members: \describe{
-#'   \item{"nof_nodes"}{The number of nodes in the search tree.}
-#'   \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
-#'   \item{"nof_bad_nodes"}{Number of bad nodes.}
-#'   \item{"nof_canupdates"}{Number of canrep updates.}
-#'   \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
-#'   of the automorphism group of the input graph, as a string. The string
-#'   representation is necessary because the group size can easily exceed
-#'   values that are exactly representable in floating point.} } }
+#' @return A list with the following members:
+#'   \describe{
+#'     \item{labeling}{
+#'       The canonical permutation which takes the input graph into canonical form.
+#'       A numeric vector, the first element is the new label of vertex 0, the second element for vertex 1, etc.
+#'     }
+#'     \item{info}{
+#'       Some information about the BLISS computation. A named list with the following members:
+#'         \describe{
+#'           \item{"nof_nodes"}{
+#'             The number of nodes in the search tree.
+#'           }
+#'           \item{"nof_leaf_nodes"}{
+#'             The number of leaf nodes in the search tree.
+#'           }
+#'           \item{"nof_bad_nodes"}{
+#'             Number of bad nodes.
+#'           }
+#'           \item{"nof_canupdates"}{
+#'             Number of canrep updates.
+#'           }
+#'           \item{"max_level"}{
+#'             Maximum level.
+#'           }
+#'           \item{"group_size"}{
+#'             The size of the automorphism group of the input graph, as a string.
+#'             The string representation is necessary because the group size
+#'             can easily exceed values that are exactly representable in floating point.
+#'           }
+#'         }
+#'     }
+#'   }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso [permute()] to apply a permutation to a graph,
-#' [graph.isomorphic()] for deciding graph isomorphism, possibly
+#' [isomorphic()] for deciding graph isomorphism, possibly
 #' based on canonical labels.
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
@@ -849,7 +1028,18 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' all(el1 == el2)
 #' @family graph isomorphism
 #' @export
-canonical_permutation <- canonical_permutation_impl
+#' @cdocs igraph_canonical_permutation
+canonical_permutation <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  canonical_permutation_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh
+  )
+}
 
 
 #' Permute the vertices of a graph
@@ -876,24 +1066,36 @@ canonical_permutation <- canonical_permutation_impl
 #' # Random permutation of a random graph
 #' g <- sample_gnm(20, 50)
 #' g2 <- permute(g, sample(vcount(g)))
-#' graph.isomorphic(g, g2)
+#' isomorphic(g, g2)
 #'
 #' # Permutation keeps all attributes
 #' g$name <- "Random graph, Gnm, 20, 50"
 #' V(g)$name <- letters[1:vcount(g)]
 #' E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 #' g2 <- permute(g, sample(vcount(g)))
-#' graph.isomorphic(g, g2)
+#' isomorphic(g, g2)
 #' g2$name
 #' V(g2)$name
 #' E(g2)$weight
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
-permute <- permute_vertices_impl
+#' @cdocs igraph_permute_vertices
+permute <- function(graph, permutation) {
+  permute_vertices_impl(
+    graph = graph,
+    permutation = permutation
+  )
+}
 
 #' @export
-graph.isomorphic <- isomorphic_impl
+#' @cdocs igraph_isomorphic
+graph.isomorphic <- function(graph1, graph2) {
+  isomorphic_impl(
+    graph1 = graph1,
+    graph2 = graph2
+  )
+}
 
 #' Number of automorphisms
 #'
@@ -917,20 +1119,44 @@ graph.isomorphic <- isomorphic_impl
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are: \sQuote{`f`}: first non-singleton cell, \sQuote{`fl`}: first
-#'   largest non-singleton cell, \sQuote{`fs`}: first smallest non-singleton
-#'   cell, \sQuote{`fm`}: first maximally non-trivially connected
-#'   non-singleton cell, \sQuote{`flm`}: first largest maximally
-#'   non-trivially connected non-singleton cell, \sQuote{`fsm`}: first
-#'   smallest maximally non-trivially connected non-singleton cell.
-#' @return A named list with the following members: \item{group_size}{The size
-#'   of the automorphism group of the input graph, as a string. This number is
-#'   exact if igraph was compiled with the GMP library, and approximate
-#'   otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
-#'   \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
-#'   \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
-#'   canrep updates.} \item{max_level}{Maximum level.}
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
+#'   are:
+#'   \sQuote{`f`}:
+#'     first non-singleton cell,
+#'   \sQuote{`fl`}:
+#'     first largest non-singleton cell,
+#'   \sQuote{`fs`}:
+#'     first smallest non-singleton cell,
+#'   \sQuote{`fm`}:
+#'     first maximally non-trivially connected
+#'     non-singleton cell,
+#'   \sQuote{`flm`}:
+#'     first largest maximally
+#'     non-trivially connected non-singleton cell,
+#'   \sQuote{`fsm`}:
+#'     first smallest maximally non-trivially connected non-singleton cell.
+#' @return A named list with the following members:
+#'   \describe{
+#'     \item{group_size}{
+#'       The size of the automorphism group of the input graph, as a string.
+#'       This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
+#'     }
+#'     \item{nof_nodes}{
+#'       The number of nodes in the search tree.
+#'     }
+#'     \item{nof_leaf_nodes}{
+#'       The number of leaf nodes in the search tree.
+#'     }
+#'     \item{nof_bad_nodes}{
+#'       Number of bad nodes.
+#'     }
+#'     \item{nof_canupdates}{
+#'       Number of canrep updates.
+#'     }
+#'     \item{max_level}{
+#'       Maximum level.
+#'     }
+#'   }
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
 #' @seealso [canonical_permutation()], [permute()],
@@ -954,7 +1180,18 @@ graph.isomorphic <- isomorphic_impl
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-count_automorphisms <- count_automorphisms_impl
+#' @cdocs igraph_count_automorphisms
+count_automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  count_automorphisms_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh
+  )
+}
 
 
 #' Generating set of the automorphism group of a graph
@@ -981,21 +1218,36 @@ count_automorphisms <- count_automorphisms_impl
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are: \sQuote{`f`}: first non-singleton cell, \sQuote{`fl`}: first
-#'   largest non-singleton cell, \sQuote{`fs`}: first smallest non-singleton
-#'   cell, \sQuote{`fm`}: first maximally non-trivially connected
-#'   non-singleton cell, \sQuote{`flm`}: first largest maximally
-#'   non-trivially connected non-singleton cell, \sQuote{`fsm`}: first
-#'   smallest maximally non-trivially connected non-singleton cell.
+#'   are:
+#'   \sQuote{`f`}:
+#'     first non-singleton cell,
+#'   \sQuote{`fl`}:
+#'     first largest non-singleton cell,
+#'   \sQuote{`fs`}:
+#'     first smallest non-singleton cell,
+#'   \sQuote{`fm`}:
+#'     first maximally non-trivially connected
+#'     non-singleton cell,
+#'   \sQuote{`flm`}:
+#'     first largest maximally
+#'     non-trivially connected non-singleton cell,
+#'   \sQuote{`fsm`}:
+#'     first smallest maximally non-trivially connected non-singleton cell.
 #' @param details Specifies whether to provide additional details about the
 #'   BLISS internals in the result.
 #' @return When `details` is `FALSE`, a list of vertex permutations
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
-#'   \item{generators}{Returns the generators themselves} \item{info}{Additional
-#'   information about the BLISS internals. See [count_automorphisms()] for
-#'   more details.}
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
+#'   \describe{
+#'     \item{generators}{
+#'       Returns the generators themselves
+#'     }
+#'     \item{info}{
+#'       Additional information about the BLISS internals.
+#'       See [count_automorphisms()] for more details.
+#'     }
+#'   }
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
 #' @seealso [canonical_permutation()], [permute()],
@@ -1013,4 +1265,63 @@ count_automorphisms <- count_automorphisms_impl
 #' automorphism_group(g)
 #' @family graph automorphism
 #' @export
-automorphism_group <- automorphism_group_impl
+#' @cdocs igraph_automorphism_group
+automorphism_group <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
+  details = FALSE
+) {
+  automorphism_group_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh,
+    details = details
+  )
+}
+
+#' Transitive closure of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Computes the transitive closure of a graph.
+#' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
+#' if \eqn{j} is reachable from \eqn{i} in the original graph.
+#'
+#' The transitive closure of a graph is a new graph where there is an edge
+#' between any two vertices if there is a path between them in the original
+#' graph.
+#' For directed graphs, an edge from \eqn{i} to \eqn{j} is added if there is
+#' a directed path from \eqn{i} to \eqn{j}.
+#' For undirected graphs, this is equivalent to connecting all vertices that
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#'   It can be directed or undirected.
+#' @return A new graph object representing the transitive closure.
+#'   The returned graph will have the same directedness as the input.
+#' @author Fabio Zanini \email{fabio.zanini@@unsw.edu.au}
+#' @seealso [distances()], [are_adjacent()]
+#' @keywords graphs
+#' @examples
+#'
+#' # Directed graph
+#' g <- make_graph(c(1, 2, 2, 3, 3, 4))
+#' tc <- transitive_closure(g)
+#' # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
+#' print_all(tc)
+#'
+#' # Undirected graph - connects all vertices in same component
+#' g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
+#' tc2 <- transitive_closure(g2)
+#' # Full graph on vertices 1, 2 and full graph on vertices 3, 4
+#' print_all(tc2)
+#' @family functions for manipulating graph structure
+#' @export
+#' @cdocs igraph_transitive_closure
+transitive_closure <- function(graph) {
+  transitive_closure_impl(
+    graph = graph
+  )
+}

@@ -1,17 +1,31 @@
-
 #' Assortativity coefficient
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.nominal()` was renamed to `assortativity_nominal()` to create a more
+#' `assortativity.nominal()` was renamed to [assortativity_nominal()] to create a more
 #' consistent API.
 #' @inheritParams assortativity_nominal
 #' @keywords internal
 #' @export
-assortativity.nominal <- function(graph, types, directed = TRUE, normalized = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "assortativity.nominal()", "assortativity_nominal()")
-  assortativity_nominal(graph = graph, types = types, directed = directed, normalized = normalized)
+assortativity.nominal <- function(
+  graph,
+  types,
+  directed = TRUE,
+  normalized = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "assortativity.nominal()",
+    "assortativity_nominal()"
+  )
+  assortativity_nominal(
+    graph = graph,
+    types = types,
+    directed = directed,
+    normalized = normalized
+  )
 } # nocov end
 
 #' Assortativity coefficient
@@ -19,13 +33,18 @@ assortativity.nominal <- function(graph, types, directed = TRUE, normalized = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.degree()` was renamed to `assortativity_degree()` to create a more
+#' `assortativity.degree()` was renamed to [assortativity_degree()] to create a more
 #' consistent API.
 #' @inheritParams assortativity_degree
 #' @keywords internal
 #' @export
-assortativity.degree <- function(graph, directed = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "assortativity.degree()", "assortativity_degree()")
+assortativity.degree <- function(graph, directed = TRUE) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "assortativity.degree()",
+    "assortativity_degree()"
+  )
   assortativity_degree(graph = graph, directed = directed)
 } # nocov end
 
@@ -51,7 +70,6 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 ##   02110-1301 USA
 ##
 ## -----------------------------------------------------------------------
-
 
 #' Assortativity coefficient
 #'
@@ -142,14 +160,17 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-assortativity <- function(graph,
-                          values,
-                          ...,
-                          values.in = NULL,
-                          directed = TRUE,
-                          normalized = TRUE,
-                          types1 = NULL,
-                          types2 = NULL) {
+#' @cdocs igraph_assortativity
+assortativity <- function(
+  graph,
+  values,
+  ...,
+  values.in = NULL,
+  directed = TRUE,
+  normalized = TRUE,
+  types1 = NULL,
+  types2 = NULL
+) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -191,11 +212,27 @@ assortativity <- function(graph,
     values.in <- types2
   }
 
-  assortativity_impl(graph, values, values.in, directed, normalized)
+  assortativity_impl(
+    graph = graph,
+    values = values,
+    values_in = values.in,
+    directed = directed,
+    normalized = normalized
+  )
 }
 
-assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) {
-  assortativity_impl(graph, types1, types2, directed)
+assortativity_legacy <- function(
+  graph,
+  types1,
+  types2 = NULL,
+  directed = TRUE
+) {
+  assortativity_impl(
+    graph = graph,
+    values = types1,
+    values_in = types2,
+    directed = directed
+  )
 }
 
 #' @param types Vector giving the vertex types. They as assumed to be integer
@@ -203,8 +240,27 @@ assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) 
 #'   with [as.integer()].
 #' @rdname assortativity
 #' @export
-assortativity_nominal <- assortativity_nominal_impl
+#' @cdocs igraph_assortativity_nominal
+assortativity_nominal <- function(
+  graph,
+  types,
+  directed = TRUE,
+  normalized = TRUE
+) {
+  assortativity_nominal_impl(
+    graph = graph,
+    types = types,
+    directed = directed,
+    normalized = normalized
+  )
+}
 
 #' @rdname assortativity
 #' @export
-assortativity_degree <- assortativity_degree_impl
+#' @cdocs igraph_assortativity_degree
+assortativity_degree <- function(graph, directed = TRUE) {
+  assortativity_degree_impl(
+    graph = graph,
+    directed = directed
+  )
+}

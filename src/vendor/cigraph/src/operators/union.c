@@ -20,8 +20,6 @@
 
 */
 
-#include <limits.h>
-
 #include "igraph_operators.h"
 
 #include "igraph_constructors.h"
@@ -69,9 +67,10 @@
  *
  * \example examples/simple/igraph_union.c
  */
-igraph_error_t igraph_union(igraph_t *res,
-                 const igraph_t *left, const igraph_t *right,
-                 igraph_vector_int_t *edge_map1, igraph_vector_int_t *edge_map2) {
+igraph_error_t igraph_union(
+        igraph_t *res,
+        const igraph_t *left, const igraph_t *right,
+        igraph_vector_int_t *edge_map1, igraph_vector_int_t *edge_map2) {
     return igraph_i_merge(res, IGRAPH_MERGE_MODE_UNION, left, right,
                           edge_map1, edge_map2);
 }

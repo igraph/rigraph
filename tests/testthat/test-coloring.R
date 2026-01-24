@@ -27,7 +27,7 @@ test_that("simplify_and_colorize works", {
   result <- simplify_and_colorize(g)
 
   expect_true(is_simple(result))
-  expect_equal(vcount(result), vcount(g))
+  expect_vcount(result, vcount(g))
   expect_equal(as_edgelist(result), matrix(c(1:4, 2:5), ncol = 2))
   expect_equal(V(result)$color, c(0, 0, 0, 0, 1))
   expect_equal(E(result)$color, c(1, 4, 1, 2))

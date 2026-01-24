@@ -24,6 +24,7 @@
 #include "igraph_structural.h"
 #include "igraph_topology.h"
 
+#include "igraph_bitset.h"
 #include "igraph_constructors.h"
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
@@ -65,8 +66,8 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
     igraph_integer_t tree_vertex_count = no_of_nodes;
 
     igraph_vector_int_t edges;
-    igraph_vector_bool_t seen_vertices;
-    igraph_vector_bool_t seen_edges;
+    igraph_bitset_t seen_vertices;
+    igraph_bitset_t seen_edges;
 
     igraph_dqueue_int_t Q;
     igraph_vector_int_t neis;
@@ -81,8 +82,8 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges * 2));
     IGRAPH_DQUEUE_INT_INIT_FINALLY(&Q, 100);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
-    IGRAPH_VECTOR_BOOL_INIT_FINALLY(&seen_vertices, no_of_nodes);
-    IGRAPH_VECTOR_BOOL_INIT_FINALLY(&seen_edges, no_of_edges);
+    IGRAPH_BITSET_INIT_FINALLY(&seen_vertices, no_of_nodes);
+    IGRAPH_BITSET_INIT_FINALLY(&seen_edges, no_of_edges);
 
     if (vertex_index) {
         IGRAPH_CHECK(igraph_vector_int_range(vertex_index, 0, no_of_nodes));
@@ -91,7 +92,7 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
     for (igraph_integer_t r = 0; r < no_of_roots; r++) {
 
         igraph_integer_t root = VECTOR(*roots)[r];
-        VECTOR(seen_vertices)[root] = true;
+        IGRAPH_BIT_SET(seen_vertices, root);
         IGRAPH_CHECK(igraph_dqueue_int_push(&Q, root));
 
         while (!igraph_dqueue_int_empty(&Q)) {
@@ -107,16 +108,16 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
                 igraph_integer_t to = IGRAPH_TO(graph, edge);
                 igraph_integer_t nei = IGRAPH_OTHER(graph, edge, actnode);
 
-                if (! VECTOR(seen_edges)[edge]) {
+                if (! IGRAPH_BIT_TEST(seen_edges, edge)) {
 
-                    VECTOR(seen_edges)[edge] = true;
+                    IGRAPH_BIT_SET(seen_edges, edge);
 
-                    if (! VECTOR(seen_vertices)[nei]) {
+                    if (! IGRAPH_BIT_TEST(seen_vertices, nei)) {
 
                         IGRAPH_CHECK(igraph_vector_int_push_back(&edges, from));
                         IGRAPH_CHECK(igraph_vector_int_push_back(&edges, to));
 
-                        VECTOR(seen_vertices)[nei] = true;
+                        IGRAPH_BIT_SET(seen_vertices, nei);
                         IGRAPH_CHECK(igraph_dqueue_int_push(&Q, nei));
 
                     } else {
@@ -142,8 +143,8 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
 
     } /* r < igraph_vector_int_size(roots) */
 
-    igraph_vector_bool_destroy(&seen_edges);
-    igraph_vector_bool_destroy(&seen_vertices);
+    igraph_bitset_destroy(&seen_edges);
+    igraph_bitset_destroy(&seen_vertices);
     igraph_vector_int_destroy(&neis);
     igraph_dqueue_int_destroy(&Q);
     IGRAPH_FINALLY_CLEAN(4);
@@ -160,13 +161,13 @@ igraph_error_t igraph_unfold_tree(const igraph_t *graph, igraph_t *tree,
 /* count the number of vertices reachable from the root */
 static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_integer_t root, igraph_neimode_t mode, igraph_integer_t *visited_count) {
     igraph_stack_int_t stack;
-    igraph_vector_bool_t visited;
+    igraph_bitset_t visited;
     igraph_vector_int_t neighbors;
     igraph_integer_t i;
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neighbors, 0);
 
-    IGRAPH_VECTOR_BOOL_INIT_FINALLY(&visited, igraph_vcount(graph));
+    IGRAPH_BITSET_INIT_FINALLY(&visited, igraph_vcount(graph));
 
     IGRAPH_CHECK(igraph_stack_int_init(&stack, 0));
     IGRAPH_FINALLY(igraph_stack_int_destroy, &stack);
@@ -182,8 +183,8 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
 
         /* take a vertex from the stack, mark it as visited */
         u = igraph_stack_int_pop(&stack);
-        if (IGRAPH_LIKELY(! VECTOR(visited)[u])) {
-            VECTOR(visited)[u] = true;
+        if (IGRAPH_LIKELY(! IGRAPH_BIT_TEST(visited, u))) {
+            IGRAPH_BIT_SET(visited, u);
             *visited_count += 1;
         }
 
@@ -192,7 +193,7 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
         ncount = igraph_vector_int_size(&neighbors);
         for (i = 0; i < ncount; ++i) {
             igraph_integer_t v = VECTOR(neighbors)[i];
-            if (! VECTOR(visited)[v]) {
+            if (! IGRAPH_BIT_TEST(visited, v)) {
                 IGRAPH_CHECK(igraph_stack_int_push(&stack, v));
             }
         }
@@ -200,7 +201,7 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
 
     igraph_vector_int_destroy(&neighbors);
     igraph_stack_int_destroy(&stack);
-    igraph_vector_bool_destroy(&visited);
+    igraph_bitset_destroy(&visited);
     IGRAPH_FINALLY_CLEAN(3);
 
     return IGRAPH_SUCCESS;
@@ -225,7 +226,7 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
  * not to be connected, and therefore not a tree.
  *
  * \param graph The graph object to analyze.
- * \param res Pointer to a logical variable, the result will be stored
+ * \param res Pointer to a Boolean variable, the result will be stored
  *        here.
  * \param root If not \c NULL, the root node will be stored here. When \p mode
  *        is \c IGRAPH_ALL or the graph is undirected, any vertex can be the root
@@ -243,7 +244,9 @@ static igraph_error_t igraph_i_is_tree_visitor(const igraph_t *graph, igraph_int
  * Time complexity: At most O(|V|+|E|), the
  * number of vertices plus the number of edges in the graph.
  *
- * \sa \ref igraph_is_connected()
+ * \sa \ref igraph_is_forest() to check if all components are trees,
+ * which is equivalent to the graph lacking undirected cycles;
+ * \ref igraph_is_connected(), \ref igraph_is_acyclic()
  *
  * \example examples/simple/igraph_kary_tree.c
  */
@@ -400,7 +403,7 @@ success:
  */
 static igraph_error_t igraph_i_is_forest_visitor(
         const igraph_t *graph, igraph_integer_t root, igraph_neimode_t mode,
-        igraph_vector_bool_t *visited, igraph_stack_int_t *stack, igraph_vector_int_t *neis,
+        igraph_bitset_t *visited, igraph_stack_int_t *stack, igraph_vector_int_t *neis,
         igraph_integer_t *visited_count, igraph_bool_t *res)
 {
     igraph_integer_t i;
@@ -419,8 +422,8 @@ static igraph_error_t igraph_i_is_forest_visitor(
          * Otherwise mark it as visited and continue.
          */
         u = igraph_stack_int_pop(stack);
-        if (IGRAPH_LIKELY(! VECTOR(*visited)[u])) {
-            VECTOR(*visited)[u] = true;
+        if (IGRAPH_LIKELY(! IGRAPH_BIT_TEST(*visited, u))) {
+            IGRAPH_BIT_SET(*visited, u);
             *visited_count += 1;
         }
         else {
@@ -446,7 +449,7 @@ static igraph_error_t igraph_i_is_forest_visitor(
                  * an already discovered vertex (i.e. one that has already been
                  * pushed onto the stack).
                  */
-                if (IGRAPH_LIKELY(! VECTOR(*visited)[v])) {
+                if (IGRAPH_LIKELY(! IGRAPH_BIT_TEST(*visited, v))) {
                     IGRAPH_CHECK(igraph_stack_int_push(stack, v));
                 }
                 /* To check for a self-loop in undirected graph */
@@ -484,7 +487,8 @@ static igraph_error_t igraph_i_is_forest(
  * This test can be controlled using the \p mode parameter.
  *
  * </para><para>
- * By convention, the null graph (i.e. the graph with no vertices) is considered to be a forest.
+ * By convention, the null graph (i.e. the graph with no vertices) is considered
+ * to be a forest.
  *
  * </para><para>
  * The \p res return value of this function is cached in the graph itself if
@@ -493,8 +497,8 @@ static igraph_error_t igraph_i_is_forest(
  * will return a cached value in O(1) time if the roots are not requested.
  *
  * \param graph The graph object to analyze.
- * \param res Pointer to a logical variable. If not \c NULL, then the result will be stored
- *        here.
+ * \param res Pointer to a Boolean variable. If not \c NULL, then the result will
+ *        be stored here.
  * \param roots If not \c NULL, the root nodes will be stored here. When \p mode
  *        is \c IGRAPH_ALL or the graph is undirected, any one vertex from each
  *        component can be the root. When \p mode is \c IGRAPH_OUT
@@ -510,6 +514,9 @@ static igraph_error_t igraph_i_is_forest(
  *
  * Time complexity: At most O(|V|+|E|), the
  * number of vertices plus the number of edges in the graph.
+ *
+ * \sa \ref igraph_is_tree() to check if a graph is a tree, i.e. a forest with
+ * a single component.
  */
 igraph_error_t igraph_is_forest(const igraph_t *graph, igraph_bool_t *res,
                                 igraph_vector_int_t *roots, igraph_neimode_t mode) {
@@ -541,7 +548,7 @@ igraph_error_t igraph_is_forest(const igraph_t *graph, igraph_bool_t *res,
              *  - If the graph is not a forest, we don't need to look for roots.
              */
             if (! no_undirected_cycles) {
-                if (res) { res = false; }
+                if (res) { *res = false; }
                 if (roots) { igraph_vector_int_clear(roots); }
                 return IGRAPH_SUCCESS;
             }
@@ -577,7 +584,7 @@ static igraph_error_t igraph_i_is_forest(
     const igraph_t *graph, igraph_bool_t *res,
     igraph_vector_int_t *roots, igraph_neimode_t mode
 ) {
-    igraph_vector_bool_t visited;
+    igraph_bitset_t visited;
     igraph_vector_int_t neis;
     igraph_stack_int_t stack;
     igraph_integer_t visited_count = 0;
@@ -620,7 +627,7 @@ static igraph_error_t igraph_i_is_forest(
 
     result = true; /* assume success */
 
-    IGRAPH_VECTOR_BOOL_INIT_FINALLY(&visited, vcount);
+    IGRAPH_BITSET_INIT_FINALLY(&visited, vcount);
 
     IGRAPH_CHECK(igraph_stack_int_init(&stack, 0));
     IGRAPH_FINALLY(igraph_stack_int_destroy, &stack);
@@ -647,7 +654,7 @@ static igraph_error_t igraph_i_is_forest(
                 if (!result) {
                     break;
                 }
-                if (! VECTOR(visited)[v]) {
+                if (! IGRAPH_BIT_TEST(visited, v)) {
                     if (roots) {
                         IGRAPH_CHECK(igraph_vector_int_push_back(roots, v));
                     }
@@ -712,7 +719,7 @@ static igraph_error_t igraph_i_is_forest(
 
     igraph_vector_int_destroy(&neis);
     igraph_stack_int_destroy(&stack);
-    igraph_vector_bool_destroy(&visited);
+    igraph_bitset_destroy(&visited);
     IGRAPH_FINALLY_CLEAN(3);
 
     return IGRAPH_SUCCESS;
@@ -723,12 +730,17 @@ static igraph_error_t igraph_i_is_forest(
  * \function igraph_is_acyclic
  * \brief Checks whether a graph is acyclic or not.
  *
- * This function checks whether a graph is acyclic or not.
+ * This function checks whether a graph has any cycles. Edge directions are
+ * considered, i.e. in directed graphs, only directed cycles are searched for.
  *
  * \param graph The input graph.
  * \param res Pointer to a boolean constant, the result
         is stored here.
  * \return Error code.
+ *
+ * \sa \ref igraph_find_cycle() to find a cycle that demonstrates
+ * that the graph is not acyclic; \ref igraph_is_forest() to look
+ * for undirected cycles even in directed graphs.
  *
  * Time complexity: O(|V|+|E|), where |V| and |E| are the number of
  * vertices and edges in the original input graph.

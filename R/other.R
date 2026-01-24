@@ -1,15 +1,15 @@
-
 #' Running mean of a time series
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `running.mean()` was renamed to `running_mean()` to create a more
+#' `running.mean()` was renamed to [running_mean()] to create a more
 #' consistent API.
 #' @inheritParams running_mean
 #' @keywords internal
 #' @export
-running.mean <- function(v, binwidth) { # nocov start
+running.mean <- function(v, binwidth) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "running.mean()", "running_mean()")
   running_mean(v = v, binwidth = binwidth)
 } # nocov end
@@ -19,12 +19,13 @@ running.mean <- function(v, binwidth) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.sample()` was renamed to `sample_seq()` to create a more
+#' `igraph.sample()` was renamed to [sample_seq()] to create a more
 #' consistent API.
 #' @inheritParams sample_seq
 #' @keywords internal
 #' @export
-igraph.sample <- function(low, high, length) { # nocov start
+igraph.sample <- function(low, high, length) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.sample()", "sample_seq()")
   sample_seq(low = low, high = high, length = length)
 } # nocov end
@@ -34,12 +35,13 @@ igraph.sample <- function(low, high, length) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `convex.hull()` was renamed to `convex_hull()` to create a more
+#' `convex.hull()` was renamed to [convex_hull()] to create a more
 #' consistent API.
 #' @inheritParams convex_hull
 #' @keywords internal
 #' @export
-convex.hull <- function(data) { # nocov start
+convex.hull <- function(data) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "convex.hull()", "convex_hull()")
   convex_hull(data = data)
 } # nocov end
@@ -63,8 +65,6 @@ convex.hull <- function(data) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Running mean of a time series
 #'
@@ -92,13 +92,14 @@ running_mean <- function(v, binwidth) {
   v <- as.numeric(v)
   binwidth <- as.numeric(binwidth)
   if (length(v) < binwidth) {
-    stop("Vector too short for this binwidth.")
+    cli::cli_abort("Vector too short for this binwidth.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_running_mean, v, binwidth)
+  running_mean_impl(
+    data = v,
+    binwidth = binwidth
+  )
 }
-
 
 
 #' Sampling a random integer sequence
@@ -128,12 +129,14 @@ running_mean <- function(v, binwidth) {
 #'
 sample_seq <- function(low, high, length) {
   if (length > high - low + 1) {
-    stop("length too big for this interval")
+    cli::cli_abort("length too big for this interval")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_random_sample, as.numeric(low), as.numeric(high),
+    Rx_igraph_random_sample,
+    as.numeric(low),
+    as.numeric(high),
     as.numeric(length)
   )
 }
@@ -154,7 +157,7 @@ sample_seq <- function(low, high, length) {
 #' @return A logical vector representing the resolved vertex type for each
 #'   vertex in the graph
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @keywords internal
+#' @dev
 #'
 handle_vertex_type_arg <- function(types, graph, required = T) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
@@ -162,15 +165,17 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
-      warning("vertex types converted to logical")
+      cli::cli_warn("vertex types converted to logical.")
     }
     types <- as.logical(types)
     if (any(is.na(types))) {
-      stop("`NA' is not allowed in vertex types")
+      cli::cli_abort("`NA' is not allowed in vertex types")
     }
   }
   if (is.null(types) && required) {
-    stop("Not a bipartite graph, supply `types' argument or add a vertex attribute named `type'")
+    cli::cli_abort(
+      "Not a bipartite graph, supply {.arg types} argument or add a vertex attribute named {.arg type}."
+    )
   }
   return(types)
 }
@@ -179,9 +184,14 @@ igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
   } else {
-    new("dgCMatrix",
-      Dim = M$dim, Dimnames = list(NULL, NULL),
-      factors = list(), i = M$i, p = M$p, x = M$x
+    new(
+      "dgCMatrix",
+      Dim = M$dim,
+      Dimnames = list(NULL, NULL),
+      factors = list(),
+      i = M$i,
+      p = M$p,
+      x = M$x
     )
   }
 }
@@ -193,9 +203,15 @@ igraph.i.spMatrix <- function(M) {
 #'
 #'
 #' @param data The data points, a numeric matrix with two columns.
-#' @return A named list with components: \item{resverts}{The indices of the
-#'   input vertices that constritute the convex hull.} \item{rescoords}{The
-#'   coordinates of the corners of the convex hull.}
+#' @return A named list with components:
+#'   \describe{
+#'     \item{resverts}{
+#'       The indices of the input vertices that constritute the convex hull.
+#'     }
+#'     \item{rescoords}{
+#'       The coordinates of the corners of the convex hull.
+#'     }
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
 #' Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and
@@ -208,4 +224,9 @@ igraph.i.spMatrix <- function(M) {
 #' convex_hull(M)
 #' @family other
 #' @export
-convex_hull <- convex_hull_impl
+#' @cdocs igraph_convex_hull
+convex_hull <- function(data) {
+  convex_hull_2d_impl(
+    data = data
+  )
+}

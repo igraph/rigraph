@@ -102,7 +102,6 @@ M. Vento		VF2 graph isomorphism algorithm
 Fabien Viger		gengraph graph generator
 Phuong Vu		ARPACK
 P.J. Weinberger		f2c
-Hadley Wickham          lazyeval
 Garrett A. Wollman	qsort
 B.N. Wylie 		DrL layout generator
 Chao Yang		ARPACK
@@ -117,7 +116,6 @@ The R Development Core Team 	Some random number generators (not used in R)
       		       		R: as.dendrogram from stats package
 The Regents of the University of California	qsort
 Xerox PARC		      	Sparse matrix column ordering
-R Studio                        lazyeval
 
 Other contributors
 ------------------

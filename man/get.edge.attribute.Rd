@@ -18,7 +18,7 @@ for a subset of edges.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.edge.attribute()} was renamed to \code{edge_attr()} to create a more
+\code{get.edge.attribute()} was renamed to \code{\link[=edge_attr]{edge_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

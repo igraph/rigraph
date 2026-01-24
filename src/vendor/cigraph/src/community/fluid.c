@@ -53,9 +53,6 @@
  *   greater than 0 and fewer than number of vertices in the graph.
  * \param membership The result vector mapping vertices to the communities
  * they are assigned to.
- * \param modularity If not a null pointer, then it must be a pointer
- *   to a real number. The modularity score of the detected community
- *   structure is stored here.
  * \return Error code.
  *
  * Time complexity: O(|E|)
@@ -78,7 +75,7 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
     if (no_of_nodes < 2) {
         if (membership) {
             IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
-            igraph_vector_int_fill(membership, 0);
+            igraph_vector_int_null(membership);
         }
         return IGRAPH_SUCCESS;
     }

@@ -18,7 +18,18 @@ sample_pa(
   start.graph = NULL
 )
 
-pa(...)
+pa(
+  n,
+  power = 1,
+  m = NULL,
+  out.dist = NULL,
+  out.seq = NULL,
+  out.pref = FALSE,
+  zero.appeal = 1,
+  directed = TRUE,
+  algorithm = c("psumtree", "psumtree-multiple", "bag"),
+  start.graph = NULL
+)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -66,8 +77,6 @@ algorithm. The graph should have at least one vertex. If a graph is supplied
 here and the \code{out.seq} argument is not \code{NULL}, then it should
 contain the out degrees of the new vertices only, not the ones in the
 \code{start.graph}.}
-
-\item{...}{Passed to \code{sample_pa()}.}
 }
 \value{
 A graph object.
@@ -127,9 +136,11 @@ de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},

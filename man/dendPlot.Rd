@@ -18,7 +18,7 @@ function.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{dendPlot()} was renamed to \code{plot_dendrogram()} to create a more
+\code{dendPlot()} was renamed to \code{\link[=plot_dendrogram]{plot_dendrogram()}} to create a more
 consistent API.
 }
 \keyword{internal}

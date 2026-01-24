@@ -7,7 +7,7 @@
 \usage{
 sample_dot_product(vecs, directed = FALSE)
 
-dot_product(...)
+dot_product(vecs, directed = FALSE)
 }
 \arguments{
 \item{vecs}{A numeric matrix in which each latent position vector is a
@@ -15,8 +15,6 @@ column.}
 
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
-
-\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product
@@ -57,9 +55,11 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -87,3 +87,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}.}
+

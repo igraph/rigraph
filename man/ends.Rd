@@ -3,7 +3,6 @@
 \name{ends}
 \alias{ends}
 \alias{get.edges}
-\alias{get.edge}
 \title{Incident vertices of some graph edges}
 \usage{
 ends(graph, es, names = TRUE)
@@ -32,7 +31,7 @@ Other structural queries:
 \code{\link{[[.igraph}()},
 \code{\link{adjacent_vertices}()},
 \code{\link{are_adjacent}()},
-\code{\link{get.edge.ids}()},
+\code{\link{get_edge_ids}()},
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},

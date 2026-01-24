@@ -31,7 +31,7 @@ igraph  1.2.7  1.2.8              TRUE
 Do you want to install from sources the package which needs compilation? (Yes/no/cancel) no
 ```
 
-CRAN provides Windows and macOS binaries only for the last two minor releases of R (e.g. 4.4 and 4.3), but not for older ones (e.g. 4.2). Make sure that you are using one of these supported R versions. Refer to https://r-project.org/ to find out what the latest R version is at the moment.
+CRAN provides Windows and macOS binaries only for the last two minor releases of R (e.g. 4.5 and 4.4), but not for older ones (e.g. 4.3). Make sure that you are using one of these supported R versions. Refer to https://r-project.org/ to find out what the latest R version is at the moment.
 
 Note that the pre-compiled binaries on CRAN are only compatible with the R distribution [provided by CRAN itself](https://www.r-project.org/). If you obtained R from different sources, such as Homebrew or MacPorts on macOS, you will not be able to use these, and the only way to install packages will be to compile them from sources.
 

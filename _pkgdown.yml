@@ -1,17 +1,13 @@
 url: https://r.igraph.org/
 
 template:
+  math-rendering: mathjax
   bootstrap: 5
-
 
 navbar:
   structure:
-    left:
-    - intro
-    - reference
-    - news
-    - articles
-    right: github
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
   components:
     intro:
       text: Get started
@@ -69,6 +65,7 @@ reference:
   - has_concept("plot.common")
   - has_concept("plot.shapes")
   - vertex.shape.pie
+  - align_layout
 - subtitle: Graph coloring
 - contents:
   - has_concept("coloring")
@@ -116,6 +113,9 @@ reference:
   - running_mean
   - sample_seq
   - fit_power_law
+- subtitle: Low-level operations
+- contents:
+  - has_concept("low-level operations")
 # [[[ network analysis start
 - title: Structural properties
 - contents:
@@ -217,28 +217,22 @@ reference:
   - has_concept("processes")
   - has_concept("random_walk")
 # -----
-- title: Demo
-- contents:
-  - has_concept("demo")
 - title: I/O read/write files
 - contents:
   - has_concept("foreign")
 - title: Interactive functions
 - contents:
-  - has_concept("socnet")
   - has_concept("tkplot")
   - has_concept("console")
 - title: Versions
 - contents:
   - has_concept("versions")
+- title: Experimental functions
+  contents:
+  - has_lifecycle("experimental")
 - title: internal
   contents:
   - igraph-package
-  - has_concept("test")
-  - layout.reingold.tilford
-  - layout.fruchterman.reingold.grid
-  - layout.spring
-  - layout.svd
   - "%>%"
 
 authors:
@@ -256,6 +250,10 @@ authors:
     href: "https://github.com/GroteGnoom"
   Kirill Müller:
     href: "https://krlmlr.info/"
+  David Schoch:
+    href: "https://mr.schochastics.net/"
+  Maëlle Salmon:
+    href: "https://masalmon.eu/"
 
 home:
   links:
