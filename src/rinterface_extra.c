@@ -3308,6 +3308,35 @@ SEXP Rx_igraph_0orsparsemat_to_SEXP(const igraph_sparsemat_t *sp) {
   }
 }
 
+void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
+  /* sm is expected to be a dgCMatrix from the Matrix package
+   * with slots: i (row indices), p (column pointers), x (values), Dim (dimensions)
+   */
+  
+  SEXP i_slot = GET_SLOT(sm, Rf_install("i"));
+  SEXP p_slot = GET_SLOT(sm, Rf_install("p"));
+  SEXP x_slot = GET_SLOT(sm, Rf_install("x"));
+  SEXP dim_slot = GET_SLOT(sm, Rf_install("Dim"));
+  
+  igraph_integer_t nrow = INTEGER(dim_slot)[0];
+  igraph_integer_t ncol = INTEGER(dim_slot)[1];
+  igraph_integer_t nzmax = Rf_xlength(x_slot);
+  
+  int *p = INTEGER(p_slot);
+  int *i = INTEGER(i_slot);
+  double *x = REAL(x_slot);
+  
+  /* Initialize sparse matrix in triplet format */
+  igraph_sparsemat_init(sp, nrow, ncol, nzmax);
+  
+  /* Convert from compressed column to triplet format */
+  for (igraph_integer_t col = 0; col < ncol; col++) {
+    for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
+      igraph_sparsemat_entry(sp, i[j], col, x[j]);
+    }
+  }
+}
+
 igraph_error_t Rz_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
   igraph_integer_t length = Rf_xlength(vectorlist);
 

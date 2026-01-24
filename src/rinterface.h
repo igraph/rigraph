@@ -73,6 +73,7 @@ SEXP Ry_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list);
 SEXP Ry_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg);
 SEXP Ry_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit);
 SEXP Ry_igraph_sparsemat_to_SEXP(const igraph_sparsemat_t *sp);
+void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp);
 SEXP Rx_igraph_0orsparsemat_to_SEXP(const igraph_sparsemat_t *sp);
 SEXP Ry_igraph_maxflow_stats_to_SEXP(const igraph_maxflow_stats_t *st);
 SEXP Ry_igraph_sirlist_to_SEXP(const igraph_vector_ptr_t *sl);
