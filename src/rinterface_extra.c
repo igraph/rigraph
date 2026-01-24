@@ -3053,7 +3053,7 @@ igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *pt
   /* Convert each graph */
   for (igraph_integer_t i = 0; i < n; i++) {
     SEXP item = VECTOR_ELT(graphlist, i);
-    Rz_SEXP_to_igraph_copy(item, &(*storage)[i]);
+    IGRAPH_R_CHECK(Rz_SEXP_to_igraph_copy(item, &(*storage)[i]));
     VECTOR(*ptr)[i] = &(*storage)[i];
   }
   
