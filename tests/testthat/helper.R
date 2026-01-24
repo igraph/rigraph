@@ -47,6 +47,7 @@ expect_not_identical_graphs <- function(g1, g2, ...) {
 scrub_igraph_file_paths <- function(y) {
   # Scrub file name and line number from error/warning messages
   # Handles "Source: filename:linenumber" and "At path/to/file:line :" patterns
+  # The "At" pattern may have an optional space before the final colon
   y <- gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
   y <- gsub("At [^:]+:(\\d+|xx) ?:", "At <file>:<line>:", y)
   y
