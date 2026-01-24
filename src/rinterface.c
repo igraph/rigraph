@@ -490,6 +490,39 @@ SEXP R_igraph_edges(SEXP graph, SEXP eids) {
 }
 
 /*-------------------------------------------/
+/ igraph_get_eid                             /
+/-------------------------------------------*/
+SEXP R_igraph_get_eid(SEXP graph, SEXP from, SEXP to, SEXP directed, SEXP error) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_eid;
+  igraph_integer_t c_from;
+  igraph_integer_t c_to;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_error;
+  SEXP eid;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  c_from = (igraph_integer_t) REAL(from)[0];
+  c_to = (igraph_integer_t) REAL(to)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(error);
+  c_error = LOGICAL(error)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_eid(&c_graph, c_eid, c_from, c_to, c_directed, c_error));
+
+                                        /* Convert output */
+
+  r_result = eid;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_eids                            /
 /-------------------------------------------*/
 SEXP R_igraph_get_eids(SEXP graph, SEXP pairs, SEXP directed, SEXP error) {
@@ -16756,6 +16789,55 @@ SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
   SET_STRING_ELT(r_names, 1, Rf_mkChar("info"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_subisomorphic_lad                   /
+/-------------------------------------------*/
+SEXP R_igraph_subisomorphic_lad(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_t c_res;
+  igraph_vector_int_t c_vertex_color;
+  igraph_vector_int_t c_edge_color;
+  SEXP res;
+  SEXP vertex_color;
+  SEXP edge_color;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_subisomorphic_lad(&c_graph, &c_res, &c_vertex_color, &c_edge_color));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=Ry_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(vertex_color=Ry_igraph_vector_int_to_SEXP(&c_vertex_color));
+  igraph_vector_int_destroy(&c_vertex_color);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edge_color=Ry_igraph_vector_int_to_SEXP(&c_edge_color));
+  igraph_vector_int_destroy(&c_edge_color);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, vertex_color);
+  SET_VECTOR_ELT(r_result, 2, edge_color);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("vertex_color"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("edge_color"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
 
   UNPROTECT(1);
   return(r_result);

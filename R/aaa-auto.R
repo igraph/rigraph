@@ -304,6 +304,46 @@ edges_impl <- function(
   res
 }
 
+get_eid_impl <- function(
+  graph,
+  from,
+  to,
+  directed = TRUE,
+  error = TRUE
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  from <- as_igraph_vs(graph, from)
+  if (length(from) == 0) {
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  to <- as_igraph_vs(graph, to)
+  if (length(to) == 0) {
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  directed <- as.logical(directed)
+  error <- as.logical(error)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_get_eid,
+    graph,
+    from - 1,
+    to - 1,
+    directed,
+    error
+  )
+
+  res
+}
+
 get_eids_impl <- function(
   graph,
   pairs,
@@ -12551,6 +12591,22 @@ automorphism_group_impl <- function(
   if (!details) {
     res <- res$generators
   }
+  res
+}
+
+subisomorphic_lad_impl <- function(
+  graph
+) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_subisomorphic_lad,
+    graph
+  )
+
   res
 }
 
