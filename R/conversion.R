@@ -243,14 +243,12 @@ get.adjacency.dense <- function(
     )
   }
   loops <- igraph_match_arg(loops)
-  loops <- switch(loops, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (!is.null(weights)) {
     weights <- as.numeric(weights)
   }
 
   if (is.null(attr)) {
-    type <- switch(type, "upper" = 0, "lower" = 1, "both" = 2)
     res <- get_adjacency_impl(
       graph,
       type,

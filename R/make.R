@@ -313,12 +313,11 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   res <- kary_tree_impl(
     n,
     children,
-    mode1
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -346,11 +345,10 @@ graph.star <- function(
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   res <- star_impl(
     n,
-    mode1,
+    mode,
     center - 1
   )
   if (igraph_opt("add.params")) {
@@ -1864,11 +1862,10 @@ make_star <- function(
   center = 1
 ) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   res <- star_impl(
     n,
-    mode1,
+    mode,
     center - 1
   )
   if (igraph_opt("add.params")) {
@@ -2171,12 +2168,11 @@ wheel <- function(
 #' make_tree(10, 3, mode = "undirected")
 make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   res <- kary_tree_impl(
     n,
     children,
-    mode1
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
