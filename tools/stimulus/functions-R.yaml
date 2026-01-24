@@ -533,6 +533,7 @@ igraph_cliques:
         max_size: max
 
 igraph_cliques_callback:
+    # Has callback parameter
     IGNORE: RR, RC, RInit
 
 igraph_clique_size_hist:
@@ -546,6 +547,7 @@ igraph_maximal_cliques:
 igraph_maximal_cliques_subset:
 
 igraph_maximal_cliques_callback:
+    # Has callback parameter
     IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques_count:
@@ -825,10 +827,8 @@ igraph_coreness:
 # Graph isomorphism
 #######################################
 
-# TODO: temporarily disabled
-# get_subisomorphisms_vf2_callback_impl gives LTO warnings
-# wrong number of arguments to  R_igraph_get_subisomorphisms_vf2_callback()
 igraph_get_subisomorphisms_vf2_callback:
+    # Has callback parameter
     IGNORE: RR, RC
 
 igraph_subisomorphic_lad:
@@ -895,6 +895,7 @@ igraph_eigen_matrix_symmetric:
 #######################################
 
 igraph_simple_cycles_callback:
+    # Has callback parameter
     IGNORE: RR, RC
 
 #######################################
@@ -904,6 +905,7 @@ igraph_simple_cycles_callback:
 # We ignore the callback function for autogeneration and provide our own _closure function
 # that calls the underlying C implementation
 igraph_motifs_randesu_callback:
+    # Has callback parameter
     IGNORE: RR, RC, RInit
 
 igraph_motifs_randesu_callback_closure:
