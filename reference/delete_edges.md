@@ -59,24 +59,24 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   delete_edges(seq(1, 9, by = 2))
 g
-#> IGRAPH 28b8c58 U--- 10 5 -- Ring graph
+#> IGRAPH 19c18b6 U--- 10 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 28b8c58:
+#> + edges from 19c18b6:
 #> [1] 2-- 3 4-- 5 6-- 7 8-- 9 1--10
 
 g <- make_ring(10) %>%
   delete_edges("10|1")
 g
-#> IGRAPH 4cd89d8 U--- 10 9 -- Ring graph
+#> IGRAPH 1673586 U--- 10 9 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 4cd89d8:
+#> + edges from 1673586:
 #> [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10
 
 g <- make_ring(5)
 g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
-#> IGRAPH e45abc7 U--- 5 3 -- Ring graph
+#> IGRAPH aa5673e U--- 5 3 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from e45abc7:
+#> + edges from aa5673e:
 #> [1] 1--2 2--3 3--4
 ```

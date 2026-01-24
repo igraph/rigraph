@@ -50,7 +50,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> IGRAPH 96c1c23 D--- 10 45 -- Full citation graph
+#> IGRAPH 4497f4b D--- 10 45 -- Full citation graph
 #> + attr: name (g/c)
 #> + graph attributes:
 #> | + name:

@@ -89,10 +89,10 @@ V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
 print_all(g1 %du% g2)
-#> IGRAPH b03fe26 UN-- 20 19 -- 
+#> IGRAPH 8d71521 UN-- 20 19 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mode (g/c), center (g/n), mutual
 #> | (g/l), circular (g/l), name (v/c)
-#> + edges from b03fe26 (vertex names):
+#> + edges from 8d71521 (vertex names):
 #>  [1] a--b a--c a--d a--e a--f a--g a--h a--i a--j k--l l--m m--n n--o o--p p--q
 #> [16] q--r r--s s--t k--t
 ```
