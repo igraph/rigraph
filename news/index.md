@@ -1,5 +1,13 @@
 # Changelog
 
+## igraph 2.2.1.9017
+
+### Features
+
+- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128
+  to 19 ([\#2484](https://github.com/igraph/rigraph/issues/2484),
+  [\#2485](https://github.com/igraph/rigraph/issues/2485)).
+
 ## igraph 2.2.1.9016
 
 ### Chore

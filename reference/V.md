@@ -78,13 +78,13 @@ Other vertex and edge sequences:
 # Vertex ids of an unnamed graph
 g <- make_ring(10)
 V(g)
-#> + 10/10 vertices, from cdffc18:
+#> + 10/10 vertices, from 61b9653:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Vertex ids of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 V(g2)
-#> + 10/10 vertices, named, from f064ce6:
+#> + 10/10 vertices, named, from 9944a60:
 #>  [1] a b c d e f g h i j
 ```
