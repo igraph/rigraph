@@ -11152,7 +11152,7 @@ test_that("sparse_adjacency_impl basic", {
   )
 
   expect_snapshot(sparse_adjacency_impl(adjmatrix = M))
-  
+
   # Create a symmetric matrix for undirected graph
   M_sym <- Matrix::sparseMatrix(
     i = c(1, 1, 2, 2, 3, 3, 4, 4),
@@ -11209,7 +11209,7 @@ test_that("sparse_weighted_adjacency_impl basic", {
   )
 
   expect_snapshot(sparse_weighted_adjacency_impl(adjmatrix = M))
-  
+
   # Create a symmetric weighted matrix for undirected graph
   M_sym <- Matrix::sparseMatrix(
     i = c(1, 1, 2, 2, 3, 3, 4, 4),
