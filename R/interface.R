@@ -554,7 +554,8 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
     as_igraph_vs(graph, vp) - 1,
     directed,
     error
-  ) + 1
+  ) +
+    1
 }
 
 #' Find the edge ids based on the incident vertices of the edges
