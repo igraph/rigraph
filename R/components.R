@@ -209,13 +209,11 @@ decompose <- function(
   if (is.na(max.comps)) {
     max.comps <- -1
   }
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_decompose,
+  decompose_impl(
     graph,
-    as.numeric(mode),
-    as.numeric(max.comps),
-    as.numeric(min.vertices)
+    mode,
+    max.comps,
+    min.vertices
   )
 }
 

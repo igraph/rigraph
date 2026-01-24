@@ -83,15 +83,13 @@ graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -210,15 +208,13 @@ graph.famous <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -289,13 +285,11 @@ line.graph <- function(graph) {
 graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -321,12 +315,10 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode1
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -356,12 +348,10 @@ graph.star <- function(
   mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode1,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -573,12 +563,10 @@ graph.full.bipartite <- function(
 graph.full <- function(n, directed = FALSE, loops = FALSE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -1502,15 +1490,13 @@ make_graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -1880,12 +1866,10 @@ make_star <- function(
   mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode1,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -1917,12 +1901,10 @@ star <- function(n, mode = c("in", "out", "mutual", "undirected"), center = 1) {
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
 make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -2067,13 +2049,11 @@ lattice <- function(
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -2193,12 +2173,10 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode1
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
