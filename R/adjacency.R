@@ -415,22 +415,11 @@ graph.adjacency.dense <- function(
   weighted = NULL,
   diag = c("once", "twice", "ignore")
 ) {
-  mode <- switch(
-    mode,
-    "directed" = 0L,
-    "undirected" = 1L,
-    "upper" = 2L,
-    "lower" = 3L,
-    "min" = 4L,
-    "plus" = 5L,
-    "max" = 6L
-  )
-
   if (is.logical(diag)) {
     diag <- ifelse(diag, "once", "ignore")
   }
   diag <- igraph_match_arg(diag)
-  diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
+  loops <- switch(diag, "ignore" = "none", "twice" = "twice", "once" = "once")
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
     cli::cli_abort("Adjacency matrices must be square.")
@@ -445,9 +434,9 @@ graph.adjacency.dense <- function(
   }
 
   if (is.null(weighted)) {
-    res <- adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = diag)
+    res <- adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
   } else {
-    res <- weighted_adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = diag)
+    res <- weighted_adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
