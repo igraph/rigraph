@@ -11339,6 +11339,7 @@
       + attr: weight (e/n)
       + edges:
       [1] 4->1 1->2 2->3 3->4
+
 # disjoint_union_many_impl basic
 
     Code
