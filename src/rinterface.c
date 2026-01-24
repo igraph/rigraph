@@ -684,6 +684,96 @@ SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
 }
 
 /*-------------------------------------------/
+/ igraph_sparse_adjacency                    /
+/-------------------------------------------*/
+SEXP R_igraph_sparse_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_sparsemat_t c_adjmatrix;
+  igraph_adjacency_t c_mode;
+  igraph_loops_t c_loops;
+  SEXP graph;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_sparsemat(adjmatrix, &c_adjmatrix);
+  c_mode = (igraph_adjacency_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_sparse_adjacency(&c_graph, &c_adjmatrix, c_mode, c_loops));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(adjmatrix=Ry_igraph_sparsemat_to_SEXP(&c_adjmatrix));
+  igraph_sparsemat_destroy(&c_adjmatrix);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, adjmatrix);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("adjmatrix"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sparse_weighted_adjacency           /
+/-------------------------------------------*/
+SEXP R_igraph_sparse_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_sparsemat_t c_adjmatrix;
+  igraph_adjacency_t c_mode;
+  igraph_vector_t c_weights;
+  igraph_loops_t c_loops;
+  SEXP graph;
+  SEXP weights;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_sparsemat(adjmatrix, &c_adjmatrix);
+  c_mode = (igraph_adjacency_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_weights, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
+  weights=R_GlobalEnv; /* hack to have a non-NULL value */
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_sparse_weighted_adjacency(&c_graph, &c_adjmatrix, c_mode, &c_weights, c_loops));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(adjmatrix=Ry_igraph_sparsemat_to_SEXP(&c_adjmatrix));
+  igraph_sparsemat_destroy(&c_adjmatrix);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(weights=Ry_igraph_0orvector_to_SEXP(&c_weights));
+  igraph_vector_destroy(&c_weights);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, adjmatrix);
+  SET_VECTOR_ELT(r_result, 2, weights);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("adjmatrix"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("weights"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_weighted_adjacency                  /
 /-------------------------------------------*/
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
@@ -1770,6 +1860,40 @@ SEXP R_igraph_turan(SEXP n, SEXP r) {
   SET_STRING_ELT(r_names, 1, Rf_mkChar("types"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_weighted_sparsemat                  /
+/-------------------------------------------*/
+SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_sparsemat_t c_A;
+  igraph_bool_t c_directed;
+  const char* c_attr;
+  igraph_bool_t c_loops;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  Rz_SEXP_to_sparsemat(A, &c_A);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  c_attr = Rf_translateCharUTF8(STRING_ELT(attr, 0));
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_weighted_sparsemat(&c_graph, &c_A, c_directed, c_attr, c_loops));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
@@ -13267,15 +13391,12 @@ SEXP R_igraph_read_graph_edgelist(SEXP instream, SEXP n, SEXP directed) {
 /-------------------------------------------*/
 SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP weights, SEXP directed) {
                                         /* Declarations */
-  igraph_t c_graph;
   FILE* c_instream;
   igraph_strvector_t c_predefnames;
   igraph_bool_t c_names;
   igraph_add_weights_t c_weights;
   igraph_bool_t c_directed;
-  SEXP graph;
 
-  SEXP r_result;
                                         /* Convert input */
   c_instream = Ry_igraph_fopen_read(instream);
   IGRAPH_FINALLY(fclose, c_instream);
@@ -13288,17 +13409,13 @@ SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP 
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_read_graph_ncol(&c_graph, c_instream, (Rf_isNull(predefnames) ? 0 : &c_predefnames), c_names, c_weights, c_directed));
+  IGRAPH_R_CHECK(igraph_read_graph_ncol(c_instream, (Rf_isNull(predefnames) ? 0 : &c_predefnames), c_names, c_weights, c_directed));
 
                                         /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
 
-  UNPROTECT(1);
-  return(r_result);
+
+
+  return(R_NilValue);
 }
 
 /*-------------------------------------------/
@@ -13306,14 +13423,11 @@ SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP 
 /-------------------------------------------*/
 SEXP R_igraph_read_graph_lgl(SEXP instream, SEXP names, SEXP weights, SEXP directed) {
                                         /* Declarations */
-  igraph_t c_graph;
   FILE* c_instream;
   igraph_bool_t c_names;
   igraph_add_weights_t c_weights;
   igraph_bool_t c_directed;
-  SEXP graph;
 
-  SEXP r_result;
                                         /* Convert input */
   c_instream = Ry_igraph_fopen_read(instream);
   IGRAPH_FINALLY(fclose, c_instream);
@@ -13323,17 +13437,13 @@ SEXP R_igraph_read_graph_lgl(SEXP instream, SEXP names, SEXP weights, SEXP direc
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_read_graph_lgl(&c_graph, c_instream, c_names, c_weights, c_directed));
+  IGRAPH_R_CHECK(igraph_read_graph_lgl(c_instream, c_names, c_weights, c_directed));
 
                                         /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
 
-  UNPROTECT(1);
-  return(r_result);
+
+
+  return(R_NilValue);
 }
 
 /*-------------------------------------------/
