@@ -48,7 +48,6 @@ triples.
 Other graph motifs: 
 \code{\link{count_motifs}()},
 \code{\link{motifs}()},
-\code{\link{motifs_randesu_callback}()},
 \code{\link{sample_motifs}()}
 }
 \author{
