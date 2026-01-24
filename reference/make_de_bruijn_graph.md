@@ -55,13 +55,13 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # de Bruijn graphs can be created recursively by line graphs as well
 g <- make_de_bruijn_graph(2, 1)
 make_de_bruijn_graph(2, 2)
-#> IGRAPH ae27054 D--- 4 8 -- De-Bruijn graph 2-2
+#> IGRAPH e5b1845 D--- 4 8 -- De-Bruijn graph 2-2
 #> + attr: name (g/c), m (g/n), n (g/n)
-#> + edges from ae27054:
+#> + edges from e5b1845:
 #> [1] 1->1 1->2 2->3 2->4 3->1 3->2 4->3 4->4
 make_line_graph(g)
-#> IGRAPH b23e06c D--- 4 8 -- Line graph
+#> IGRAPH c598a61 D--- 4 8 -- Line graph
 #> + attr: name (g/c)
-#> + edges from b23e06c:
+#> + edges from c598a61:
 #> [1] 1->1 3->1 1->2 3->2 2->3 4->3 2->4 4->4
 ```

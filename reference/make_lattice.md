@@ -102,10 +102,10 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> IGRAPH 1aab3b2 U--- 125 300 -- Lattice graph
+#> IGRAPH 443726d U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from 1aab3b2:
+#> + edges from 443726d:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
@@ -115,10 +115,10 @@ make_lattice(c(5, 5, 5))
 #> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> IGRAPH b03556f U--- 125 300 -- Lattice graph
+#> IGRAPH 7e9cf63 U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from b03556f:
+#> + edges from 7e9cf63:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
