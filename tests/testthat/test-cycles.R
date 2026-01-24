@@ -54,7 +54,7 @@ test_that("simple_cycles_callback works", {
   count <- 0
   cycle_lengths <- integer(0)
   
-  simple_cycles_callback(g, callback = function(vertices, edges) {
+  simple_cycles(g, callback = function(vertices, edges) {
     count <<- count + 1
     cycle_lengths <<- c(cycle_lengths, length(vertices))
     TRUE # continue search
@@ -72,7 +72,7 @@ test_that("simple_cycles_callback can stop early", {
   # Stop after finding 2 cycles
   count <- 0
   
-  simple_cycles_callback(g, callback = function(vertices, edges) {
+  simple_cycles(g, callback = function(vertices, edges) {
     count <<- count + 1
     if (count >= 2) {
       FALSE # stop after 2 cycles
@@ -88,7 +88,7 @@ test_that("simple_cycles_callback receives correct arguments", {
   g <- make_ring(5, directed = TRUE)
   
   # Check argument types
-  simple_cycles_callback(g, callback = function(vertices, edges) {
+  simple_cycles(g, callback = function(vertices, edges) {
     expect_true(is.integer(vertices))
     expect_true(is.integer(edges))
     expect_equal(length(vertices), length(edges))
@@ -102,7 +102,7 @@ test_that("simple_cycles_callback handles errors in callback", {
   
   # Callback that throws an error
   expect_error(
-    simple_cycles_callback(g, callback = function(vertices, edges) {
+    simple_cycles(g, callback = function(vertices, edges) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"

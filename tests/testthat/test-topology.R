@@ -440,7 +440,7 @@ test_that("isomorphisms_vf2_callback works", {
   # Count isomorphisms using callback
   count <- 0
   
-  isomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     count <<- count + 1
     TRUE # continue search (but stop after a few)
     if (count >= 10) return(FALSE)
@@ -459,7 +459,7 @@ test_that("isomorphisms_vf2_callback can stop early", {
   # Stop after finding 3 isomorphisms
   count <- 0
   
-  isomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
       FALSE # stop after 3 isomorphisms
@@ -476,7 +476,7 @@ test_that("isomorphisms_vf2_callback receives correct arguments", {
   g2 <- permute(g1, sample(vcount(g1)))
   
   # Check argument types
-  isomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
     expect_equal(length(map12), vcount(g1))
@@ -491,7 +491,7 @@ test_that("isomorphisms_vf2_callback handles errors in callback", {
   
   # Callback that throws an error
   expect_error(
-    isomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+    isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"
@@ -508,7 +508,7 @@ test_that("subisomorphisms_vf2_callback works", {
   # Count subisomorphisms using callback
   count <- 0
   
-  subisomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 5) return(FALSE) # stop after 5
     TRUE # continue search
@@ -527,7 +527,7 @@ test_that("subisomorphisms_vf2_callback can stop early", {
   # Stop after finding 3 subisomorphisms
   count <- 0
   
-  subisomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
       FALSE # stop after 3 subisomorphisms
@@ -544,7 +544,7 @@ test_that("subisomorphisms_vf2_callback receives correct arguments", {
   g2 <- make_full_graph(5)
   
   # Check argument types
-  subisomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
     expect_equal(length(map12), vcount(g1))
@@ -559,7 +559,7 @@ test_that("subisomorphisms_vf2_callback handles errors in callback", {
   
   # Callback that throws an error
   expect_error(
-    subisomorphisms_vf2_callback(g1, g2, callback = function(map12, map21) {
+    subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"

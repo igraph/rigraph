@@ -111,7 +111,7 @@ simple_cycles <- function(
   ensure_igraph(graph)
   check_dots_empty()
 
-  if (is.null(_callback)) {
+  if (is.null(callback)) {
     simple_cycles_impl(
       graph = graph,
       mode = mode,

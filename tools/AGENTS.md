@@ -184,7 +184,7 @@ In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper. E
 #' @examples
 #' g <- sample_gnp(20, 0.3)
 #' count <- 0
-#' cliques_callback(g, callback = function(clique) {
+#' cliques(g, callback = function(clique) {
 #'   count <<- count + 1
 #'   TRUE  # continue search
 #' }, min = 3, max = 4)
@@ -282,7 +282,7 @@ test_that("cliques_callback works", {
   g <- sample_gnp(20, 0.3)
   
   count <- 0
-  cliques_callback(g, min = 3, max = 4, callback = function(clique) {
+  cliques(g, min = 3, max = 4, callback = function(clique) {
     count <<- count + 1
     TRUE
   })
