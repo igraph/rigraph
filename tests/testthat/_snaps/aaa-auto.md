@@ -5805,7 +5805,7 @@
       hrg_sample_impl(hrg = NULL)
     Condition
       Error in `hrg_sample_impl()`:
-      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_sample_many_impl basic
@@ -5836,7 +5836,7 @@
       hrg_sample_many_impl(hrg = NULL, num_samples = 2)
     Condition
       Error in `hrg_sample_many_impl()`:
-      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_game_impl basic
@@ -5858,7 +5858,7 @@
       hrg_game_impl(hrg = NULL)
     Condition
       Error in `hrg_game_impl()`:
-      ! At <file>:<line> : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_consensus_impl errors
@@ -11199,7 +11199,7 @@
     Condition
       Warning in `connect_neighborhood_impl()`:
       Order smaller than two, graph will be unchanged.
-      Source: operators/connect_neighborhood.c:85
+      Source: <file>:<line>
     Output
       IGRAPH U--- 5 5 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l)

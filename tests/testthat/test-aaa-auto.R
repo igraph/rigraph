@@ -6733,6 +6733,9 @@ test_that("hrg_sample_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  # FIXME: This test triggers an assertion failure in the C code when passing
+  # NULL/empty HRG. The C code should validate input and return a proper error
+  # message instead of an assertion failure.
   expect_snapshot_igraph_error(hrg_sample_impl(
     hrg = NULL
   ))
@@ -6763,6 +6766,9 @@ test_that("hrg_sample_many_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  # FIXME: This test triggers an assertion failure in the C code when passing
+  # NULL/empty HRG. The C code should validate input and return a proper error
+  # message instead of an assertion failure.
   expect_snapshot_igraph_error(hrg_sample_many_impl(
     hrg = NULL,
     num_samples = 2
@@ -6792,6 +6798,9 @@ test_that("hrg_game_impl errors", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  # FIXME: This test triggers an assertion failure in the C code when passing
+  # NULL/empty HRG. The C code should validate input and return a proper error
+  # message instead of an assertion failure.
   expect_snapshot_igraph_error(hrg_game_impl(
     hrg = NULL
   ))
@@ -11044,7 +11053,7 @@ test_that("connect_neighborhood_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_ring(5)
-  expect_snapshot(connect_neighborhood_impl(
+  expect_snapshot_igraph(connect_neighborhood_impl(
     graph = g,
     order = 1,
     mode = c("all", "out", "in")
