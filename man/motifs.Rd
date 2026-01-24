@@ -4,24 +4,33 @@
 \alias{motifs}
 \title{Graph motifs}
 \usage{
-motifs(graph, size = 3, cut.prob = NULL)
+motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
-directed graphs and sizes 3-6 in undirected graphs.}
+directed graphs and sizes 3 to 6 in undirected graphs.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}
+
+\item{callback}{Optional callback function to call for each motif found.
+The function should accept two arguments: \code{vids} (integer vector of vertex IDs
+in the motif) and \code{isoclass} (the isomorphism class of the motif).
+The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+If \code{NULL} (the default), motif counts are returned as a numeric vector.}
 }
 \value{
-\code{motifs()} returns a numeric vector, the number of occurrences of
-each motif in the graph. The motifs are ordered by their isomorphism
-classes. Note that for unconnected subgraphs, which are not considered to be
-motifs, the result will be \code{NA}.
+When \code{callback} is \code{NULL}, \code{motifs()} returns a numeric vector,
+the number of occurrences of each motif in the graph. The motifs are ordered
+by their isomorphism classes. Note that for unconnected subgraphs, which are
+not considered to be motifs, the result will be \code{NA}.
+
+When \code{callback} is provided, the function returns \code{NULL} invisibly and calls
+the callback function for each motif found.
 }
 \description{
 Graph motifs are small connected induced subgraphs with a well-defined
@@ -38,6 +47,13 @@ g <- sample_pa(100)
 motifs(g, 3)
 count_motifs(g, 3)
 sample_motifs(g, 3)
+
+# Using callback to stop search after finding 5 motifs
+count <- 0
+motifs(g, 3, callback = function(vids, isoclass) {
+  count <<- count + 1
+  count < 5  # stop after 5 motifs
+})
 }
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
@@ -45,7 +61,6 @@ sample_motifs(g, 3)
 Other graph motifs: 
 \code{\link{count_motifs}()},
 \code{\link{dyad_census}()},
-\code{\link{motifs_randesu_callback}()},
 \code{\link{sample_motifs}()}
 }
 \concept{graph motifs}
