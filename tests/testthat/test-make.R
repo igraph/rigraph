@@ -292,9 +292,9 @@ test_that("compatibility when arguments are not named", {
 })
 
 test_that("make_empty_graph gives an error for invalid arguments", {
-  expect_snapshot(make_empty_graph(NULL), error = TRUE)
-  expect_snapshot(make_empty_graph("spam"), error = TRUE)
-  expect_snapshot(make_empty_graph(10, "spam"), error = TRUE)
+  expect_snapshot_igraph_error(make_empty_graph(NULL))
+  expect_snapshot_igraph_error(make_empty_graph("spam"))
+  expect_snapshot_igraph_error(make_empty_graph(10, "spam"))
 })
 
 test_that("make_graph_atlas works", {

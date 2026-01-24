@@ -159,7 +159,7 @@ karate <- structure(
 )
 
 test_that("VS/ES require explicit conversion", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     V(karate)
   })
 })

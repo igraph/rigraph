@@ -142,10 +142,10 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
-  expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
 
   E(g)$bla <- letters[1:ecount(g)]
-  expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
 })
 
 test_that("as_adjacency_matrix() works -- sparse undirected", {
@@ -679,7 +679,7 @@ test_that("edge names work", {
 
 test_that("graph_from_edgelist errors for NAs", {
   A <- matrix(c(1, 2, NA, 1), 2, 2)
-  expect_snapshot(graph_from_edgelist(A), error = TRUE)
+  expect_snapshot_igraph_error(graph_from_edgelist(A))
 })
 
 test_that("graph_from_data_frame works with factors", {
