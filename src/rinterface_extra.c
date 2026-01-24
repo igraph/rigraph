@@ -3039,6 +3039,41 @@ SEXP Ry_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
   return result;
 }
 
+/* Convert SEXP list of graphs to igraph_vector_ptr_t */
+igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *ptr, 
+                                          igraph_t **storage) {
+  igraph_integer_t n = Rf_xlength(graphlist);
+  
+  /* Allocate storage for the graphs */
+  *storage = (igraph_t*) R_alloc(n, sizeof(igraph_t));
+  
+  /* Initialize the vector_ptr */
+  IGRAPH_R_CHECK(igraph_vector_ptr_init(ptr, n));
+  
+  /* Convert each graph */
+  for (igraph_integer_t i = 0; i < n; i++) {
+    SEXP item = VECTOR_ELT(graphlist, i);
+    Rz_SEXP_to_igraph_copy(item, &(*storage)[i]);
+    VECTOR(*ptr)[i] = &(*storage)[i];
+  }
+  
+  return IGRAPH_SUCCESS;
+}
+
+/* Convert igraph_vector_ptr_t to SEXP list of graphs */
+SEXP Ry_igraph_graph_ptr_list_to_SEXP(const igraph_vector_ptr_t *ptr) {
+  SEXP result;
+  igraph_integer_t n = igraph_vector_ptr_size(ptr);
+  
+  PROTECT(result = NEW_LIST(n));
+  for (igraph_integer_t i = 0; i < n; i++) {
+    igraph_t *g = (igraph_t*) VECTOR(*ptr)[i];
+    SET_VECTOR_ELT(result, i, Ry_igraph_to_SEXP(g));
+  }
+  UNPROTECT(1);
+  return result;
+}
+
 SEXP Ry_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
   SEXP result, names;
 
