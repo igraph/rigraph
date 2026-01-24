@@ -1373,12 +1373,16 @@ transitive_closure <- function(graph) {
 isomorphisms_vf2_callback <- function(
   graph1,
   graph2,
+  callback,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
-  edge.color2 = NULL,
-  callback
+  edge.color2 = NULL
 ) {
+  # Argument checks
+  check_dots_empty()
+  
   # Handle default vertex colors from attributes
   if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
     vertex.color1 <- V(graph1)$color
@@ -1442,12 +1446,16 @@ isomorphisms_vf2_callback <- function(
 subisomorphisms_vf2_callback <- function(
   graph1,
   graph2,
+  callback,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
-  edge.color2 = NULL,
-  callback
+  edge.color2 = NULL
 ) {
+  # Argument checks
+  check_dots_empty()
+  
   # Handle default vertex colors from attributes
   if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
     vertex.color1 <- V(graph1)$color
