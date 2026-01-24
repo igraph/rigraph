@@ -12959,7 +12959,9 @@ almost_equals_impl <- function(
   eps
 ) {
   # Argument checks
-
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  eps <- as.numeric(eps)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -12979,7 +12981,9 @@ cmp_epsilon_impl <- function(
   eps
 ) {
   # Argument checks
-
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  eps <- as.numeric(eps)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -13802,7 +13806,7 @@ strerror_impl <- function(
   igraph_errno
 ) {
   # Argument checks
-
+  igraph_errno <- as.numeric(igraph_errno)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

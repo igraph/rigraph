@@ -17441,7 +17441,12 @@ SEXP R_igraph_almost_equals(SEXP a, SEXP b, SEXP eps) {
   igraph_bool_t c_result;
   SEXP r_result;
                                         /* Convert input */
-
+  IGRAPH_R_CHECK_REAL(a);
+  c_a = REAL(a)[0];
+  IGRAPH_R_CHECK_REAL(b);
+  c_b = REAL(b)[0];
+  IGRAPH_R_CHECK_REAL(eps);
+  c_eps = REAL(eps)[0];
                                         /* Call igraph */
   c_result=igraph_almost_equals(c_a, c_b, c_eps);
 
@@ -17465,7 +17470,12 @@ SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
   int c_result;
   SEXP r_result;
                                         /* Convert input */
-
+  IGRAPH_R_CHECK_REAL(a);
+  c_a = REAL(a)[0];
+  IGRAPH_R_CHECK_REAL(b);
+  c_b = REAL(b)[0];
+  IGRAPH_R_CHECK_REAL(eps);
+  c_eps = REAL(eps)[0];
                                         /* Call igraph */
   c_result=igraph_cmp_epsilon(c_a, c_b, c_eps);
 
@@ -18526,7 +18536,8 @@ SEXP R_igraph_strerror(SEXP igraph_errno) {
   const char* c_result;
   SEXP r_result;
                                         /* Convert input */
-
+  IGRAPH_R_CHECK_INT(igraph_errno);
+  c_igraph_errno = (igraph_error_t) REAL(igraph_errno)[0];
                                         /* Call igraph */
   c_result=igraph_strerror(c_igraph_errno);
 
