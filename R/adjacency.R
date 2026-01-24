@@ -436,7 +436,11 @@ graph.adjacency.dense <- function(
   if (is.null(weighted)) {
     res <- adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
   } else {
-    res <- weighted_adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
+    res <- weighted_adjacency_impl(
+      adjmatrix = adjmatrix,
+      mode = mode,
+      loops = loops
+    )
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
