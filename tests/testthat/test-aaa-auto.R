@@ -11135,11 +11135,11 @@ test_that("disjoint_union_many_impl basic", {
   g1 <- empty_impl(n = 2)
   g2 <- empty_impl(n = 3)
   g3 <- empty_impl(n = 1)
-  
+
   expect_snapshot(disjoint_union_many_impl(
     graphs = list(g1, g2, g3)
   ))
-  
+
   # Structured tests
   result <- disjoint_union_many_impl(
     graphs = list(g1, g2, g3)
@@ -11154,11 +11154,11 @@ test_that("union_many_impl basic", {
   g1 <- empty_impl(n = 3)
   g2 <- add_edges_impl(g1, c(0, 1, 1, 2))
   g3 <- add_edges_impl(g1, c(0, 2))
-  
+
   expect_snapshot(union_many_impl(
     graphs = list(g1, g2, g3)
   ))
-  
+
   # Structured tests
   result <- union_many_impl(
     graphs = list(g1, g2, g3)
@@ -11173,11 +11173,11 @@ test_that("intersection_many_impl basic", {
   g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2))
   g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
   g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1))
-  
+
   expect_snapshot(intersection_many_impl(
     graphs = list(g1, g2, g3)
   ))
-  
+
   # Structured tests
   result <- intersection_many_impl(
     graphs = list(g1, g2, g3)
@@ -11193,12 +11193,12 @@ test_that("layout_merge_dla_impl basic", {
   g2 <- path_graph_impl(n = 3)
   coords1 <- matrix(c(0, 0, 1, 0, 2, 0), ncol = 2, byrow = TRUE)
   coords2 <- matrix(c(0, 1, 1, 1, 2, 1), ncol = 2, byrow = TRUE)
-  
+
   expect_snapshot(layout_merge_dla_impl(
     graphs = list(g1, g2),
     coords = list(coords1, coords2)
   ))
-  
+
   # Structured tests
   result <- layout_merge_dla_impl(
     graphs = list(g1, g2),
