@@ -238,13 +238,43 @@ clique.number <- function(graph) {
 #'
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
-#' @cdocs igraph_cliques
-cliques <- function(graph, min = 0, max = 0) {
-  cliques_impl(
-    graph = graph,
-    min = min,
-    max = max
-  )
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each clique found. If provided,
+#'   the function should accept one argument: `clique` (integer vector of vertex
+#'   IDs in the clique, 1-based indexing). The function should return `TRUE` to
+#'   continue the search or `FALSE` to stop it. If `NULL` (the default), all
+#'   cliques are collected and returned as a list.
+#' @return If `callback` is `NULL`, returns a list of integer vectors, each
+#'   containing the vertex IDs of a clique. If `callback` is provided, returns
+#'   `NULL` invisibly (the function is called for its side effects).
+#' @cdocs igraph_cliques igraph_cliques_callback
+cliques <- function(graph, ..., min = NULL, max = NULL, callback = NULL) {
+  ensure_igraph(graph)
+  check_dots_empty()
+
+  if (is.null(callback)) {
+    # Collector mode: collect all cliques in a list
+    cliques_list <- list()
+    cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = function(clique) {
+        cliques_list[[length(cliques_list) + 1]] <<- clique
+        TRUE
+      }
+    )
+    return(cliques_list)
+  } else {
+    # Callback mode: call user function
+    cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
+  }
 }
 
 #' @rdname cliques
@@ -270,24 +300,17 @@ largest_cliques <- function(graph) {
 #' @export
 max_cliques <- function(
   graph,
+  ...,
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL
+  file = NULL,
+  callback = NULL
 ) {
   ensure_igraph(graph)
+  check_dots_empty()
 
-  if (is.null(min)) {
-    min <- 0
-  }
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  if (!is.null(subset)) {
-    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
-  }
-
+  # Handle file and subset modes (original functionality)
   if (!is.null(file)) {
     if (
       !is.character(file) ||
@@ -306,30 +329,53 @@ max_cliques <- function(
       graph,
       subset,
       file,
-      as.numeric(min),
-      as.numeric(max)
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
     )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
     }
-    invisible(NULL)
-  } else {
-    on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call(
-      Rx_igraph_maximal_cliques,
-      graph,
-      subset,
-      as.numeric(min),
-      as.numeric(max)
+    return(invisible(NULL))
+  }
+  
+  # Use callback-based implementation for both callback and collector modes
+  if (is.null(callback)) {
+    # Collector mode: collect all cliques in a list
+    cliques_list <- list()
+    maximal_cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = function(clique) {
+        cliques_list[[length(cliques_list) + 1]] <<- clique
+        TRUE
+      }
     )
-    res <- lapply(res, function(x) x + 1)
-
-    if (igraph_opt("return.vs.es")) {
-      res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    
+    # Note: subset parameter is not supported with callback-based implementation
+    if (!is.null(subset)) {
+      warning("subset parameter is ignored when using callback-based implementation")
     }
-
-    res
+    
+    if (igraph_opt("return.vs.es")) {
+      cliques_list <- lapply(cliques_list, unsafe_create_vs, graph = graph, verts = V(graph))
+    }
+    
+    return(cliques_list)
+  } else {
+    # Callback mode: call user function
+    if (!is.null(subset)) {
+      warning("subset parameter is ignored when using callback-based implementation")
+    }
+    
+    maximal_cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
   }
 }
 
@@ -673,115 +719,3 @@ is_ivs <- function(graph, candidate) {
   )
 }
 
-#' Find cliques with a callback function
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function searches for all cliques in a graph within a size range and
-#' calls a user-provided callback function for each clique found.
-#'
-#' @param graph The input graph, directed graphs will be considered as
-#'   undirected ones, multiple edges and loops are ignored.
-#' @param min Numeric constant, lower limit on the size of the cliques to find.
-#'   `NULL` means no limit, i.e. it is the same as 0.
-#' @param max Numeric constant, upper limit on the size of the cliques to find.
-#'   `NULL` means no limit.
-#' @param callback A function to call for each clique found. The function should
-#'   accept one argument: `clique` (integer vector of vertex IDs in the clique,
-#'   1-based indexing). The function should return `TRUE` to continue the search
-#'   or `FALSE` to stop it.
-#' @return `NULL`, invisibly. This function is called for its side effects
-#'   (calling the callback function for each clique).
-#' @seealso [cliques()], [max_cliques()]
-#'
-#' @export
-#' @family cliques
-#' @cdocs igraph_cliques_callback
-#'
-#' @examples
-#' g <- sample_gnp(20, 0.3)
-#' count <- 0
-#' cliques_callback(g, min = 3, max = 4, callback = function(clique) {
-#'   count <<- count + 1
-#'   TRUE  # continue search
-#' })
-#' cat("Found", count, "cliques of size 3-4\n")
-cliques_callback <- function(
-  graph,
-  callback,
-  ...,
-  min = NULL,
-  max = NULL
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  check_dots_empty()
-
-  # Call the autogenerated closure implementation
-  cliques_callback_closure_impl(
-    graph = graph,
-    min_size = min %||% 0,
-    max_size = max %||% 0,
-    callback = callback
-  )
-
-  invisible(NULL)
-}
-
-#' Find maximal cliques with a callback function
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function searches for maximal cliques in a graph and calls a
-#' user-provided callback function for each maximal clique found. A clique is
-#' maximal if it cannot be extended to a larger clique.
-#'
-#' @param graph The input graph, directed graphs will be considered as
-#'   undirected ones, multiple edges and loops are ignored.
-#' @param min Numeric constant, lower limit on the size of the cliques to find.
-#'   `NULL` means no limit, i.e. it is the same as 0.
-#' @param max Numeric constant, upper limit on the size of the cliques to find.
-#'   `NULL` means no limit.
-#' @param callback A function to call for each maximal clique found. The
-#'   function should accept one argument: `clique` (integer vector of vertex IDs
-#'   in the clique, 1-based indexing). The function should return `TRUE` to
-#'   continue the search or `FALSE` to stop it.
-#' @return `NULL`, invisibly. This function is called for its side effects
-#'   (calling the callback function for each clique).
-#' @seealso [max_cliques()], [cliques_callback()]
-#'
-#' @export
-#' @family cliques
-#' @cdocs igraph_maximal_cliques_callback
-#'
-#' @examples
-#' g <- sample_gnp(20, 0.3)
-#' count <- 0
-#' maximal_cliques_callback(g, min = 3, callback = function(clique) {
-#'   count <<- count + 1
-#'   TRUE  # continue search
-#' })
-#' cat("Found", count, "maximal cliques of size >= 3\n")
-maximal_cliques_callback <- function(
-  graph,
-  callback,
-  ...,
-  min = NULL,
-  max = NULL
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  check_dots_empty()
-
-  # Call the autogenerated closure implementation
-  maximal_cliques_callback_closure_impl(
-    graph = graph,
-    min_size = min %||% 0,
-    max_size = max %||% 0,
-    callback = callback
-  )
-
-  invisible(NULL)
-}
