@@ -11126,3 +11126,359 @@ test_that("independent_vertex_sets_impl basic", {
     max_size = 0
   ))
 })
+
+# Callback functions
+
+# motifs_randesu_callback_closure_impl
+
+test_that("motifs_randesu_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_graph(~ A - B - C - A)
+  
+  # Collect motif information for snapshot
+  motif_data <- list()
+  result <- motifs_randesu_callback_closure_impl(
+    graph = g,
+    size = 3,
+    cut_prob = NULL,
+    callback = function(vids, isoclass) {
+      motif_data[[length(motif_data) + 1]] <<- list(
+        vids = vids,
+        isoclass = isoclass
+      )
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of motifs found:", length(motif_data), "\n")
+    cat("First motif:\n")
+    print(motif_data[[1]])
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(length(motif_data) > 0)
+  expect_true(is.integer(motif_data[[1]]$vids))
+  expect_equal(length(motif_data[[1]]$vids), 3)
+  expect_true(is.integer(motif_data[[1]]$isoclass))
+  expect_equal(length(motif_data[[1]]$isoclass), 1)
+})
+
+test_that("motifs_randesu_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_graph(~ A - B - C)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    motifs_randesu_callback_closure_impl(
+      graph = g,
+      size = 3,
+      cut_prob = NULL,
+      callback = "not a function"
+    )
+  )
+})
+
+# cliques_callback_closure_impl
+
+test_that("cliques_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_full_graph(4)
+  
+  # Collect clique information for snapshot
+  clique_data <- list()
+  result <- cliques_callback_closure_impl(
+    graph = g,
+    min_size = 3,
+    max_size = 4,
+    callback = function(clique) {
+      clique_data[[length(clique_data) + 1]] <<- clique
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of cliques found:", length(clique_data), "\n")
+    cat("First clique:\n")
+    print(clique_data[[1]])
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(length(clique_data) > 0)
+  expect_true(is.integer(clique_data[[1]]))
+  expect_true(length(clique_data[[1]]) >= 3)
+  expect_true(length(clique_data[[1]]) <= 4)
+})
+
+test_that("cliques_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_full_graph(4)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    cliques_callback_closure_impl(
+      graph = g,
+      min_size = 3,
+      max_size = 4,
+      callback = "not a function"
+    )
+  )
+})
+
+# maximal_cliques_callback_closure_impl
+
+test_that("maximal_cliques_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- sample_gnp(10, 0.3)
+  
+  # Collect clique information for snapshot
+  clique_data <- list()
+  result <- maximal_cliques_callback_closure_impl(
+    graph = g,
+    min_size = 3,
+    max_size = 0,
+    callback = function(clique) {
+      clique_data[[length(clique_data) + 1]] <<- clique
+      if (length(clique_data) >= 3) return(FALSE)  # Stop after 3
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of maximal cliques found:", length(clique_data), "\n")
+    if (length(clique_data) > 0) {
+      cat("First maximal clique:\n")
+      print(clique_data[[1]])
+    }
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(is.integer(clique_data[[1]]))
+  expect_true(length(clique_data[[1]]) >= 3)
+})
+
+test_that("maximal_cliques_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_full_graph(4)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    maximal_cliques_callback_closure_impl(
+      graph = g,
+      min_size = 3,
+      max_size = 0,
+      callback = "not a function"
+    )
+  )
+})
+
+# simple_cycles_callback_closure_impl
+
+test_that("simple_cycles_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_ring(4, directed = TRUE)
+  
+  # Collect cycle information for snapshot
+  cycle_data <- list()
+  result <- simple_cycles_callback_closure_impl(
+    graph = g,
+    mode = "out",
+    min_cycle_length = -1,
+    max_cycle_length = -1,
+    callback = function(vertices, edges) {
+      cycle_data[[length(cycle_data) + 1]] <<- list(
+        vertices = vertices,
+        edges = edges
+      )
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of cycles found:", length(cycle_data), "\n")
+    cat("First cycle:\n")
+    print(cycle_data[[1]])
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(length(cycle_data) > 0)
+  expect_true(is.integer(cycle_data[[1]]$vertices))
+  expect_true(is.integer(cycle_data[[1]]$edges))
+  expect_equal(length(cycle_data[[1]]$vertices), length(cycle_data[[1]]$edges))
+})
+
+test_that("simple_cycles_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g <- make_ring(4, directed = TRUE)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    simple_cycles_callback_closure_impl(
+      graph = g,
+      mode = "out",
+      min_cycle_length = -1,
+      max_cycle_length = -1,
+      callback = "not a function"
+    )
+  )
+})
+
+# get_isomorphisms_vf2_callback_closure_impl
+
+test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  
+  # Collect isomorphism information for snapshot
+  iso_data <- list()
+  result <- get_isomorphisms_vf2_callback_closure_impl(
+    graph1 = g1,
+    graph2 = g2,
+    vertex_color1 = NULL,
+    vertex_color2 = NULL,
+    edge_color1 = NULL,
+    edge_color2 = NULL,
+    callback = function(map12, map21) {
+      iso_data[[length(iso_data) + 1]] <<- list(
+        map12 = map12,
+        map21 = map21
+      )
+      if (length(iso_data) >= 2) return(FALSE)  # Stop after 2
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of isomorphisms found:", length(iso_data), "\n")
+    cat("First isomorphism:\n")
+    print(iso_data[[1]])
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(length(iso_data) > 0)
+  expect_true(is.integer(iso_data[[1]]$map12))
+  expect_true(is.integer(iso_data[[1]]$map21))
+  expect_equal(length(iso_data[[1]]$map12), vcount(g1))
+  expect_equal(length(iso_data[[1]]$map21), vcount(g2))
+})
+
+test_that("get_isomorphisms_vf2_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    get_isomorphisms_vf2_callback_closure_impl(
+      graph1 = g1,
+      graph2 = g2,
+      vertex_color1 = NULL,
+      vertex_color2 = NULL,
+      edge_color1 = NULL,
+      edge_color2 = NULL,
+      callback = "not a function"
+    )
+  )
+})
+
+# get_subisomorphisms_vf2_callback_closure_impl
+
+test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g1 <- make_ring(3)  # triangle
+  g2 <- make_full_graph(5)
+  
+  # Collect subisomorphism information for snapshot
+  subiso_data <- list()
+  result <- get_subisomorphisms_vf2_callback_closure_impl(
+    graph1 = g1,
+    graph2 = g2,
+    vertex_color1 = NULL,
+    vertex_color2 = NULL,
+    edge_color1 = NULL,
+    edge_color2 = NULL,
+    callback = function(map12, map21) {
+      subiso_data[[length(subiso_data) + 1]] <<- list(
+        map12 = map12,
+        map21 = map21
+      )
+      if (length(subiso_data) >= 2) return(FALSE)  # Stop after 2
+      TRUE
+    }
+  )
+  
+  expect_snapshot({
+    cat("Result:\n")
+    print(result)
+    cat("\nNumber of subisomorphisms found:", length(subiso_data), "\n")
+    cat("First subisomorphism:\n")
+    print(subiso_data[[1]])
+  })
+  
+  # Structured tests
+  expect_null(result)
+  expect_true(length(subiso_data) > 0)
+  expect_true(is.integer(subiso_data[[1]]$map12))
+  expect_true(is.integer(subiso_data[[1]]$map21))
+  expect_equal(length(subiso_data[[1]]$map12), vcount(g1))
+  expect_equal(length(subiso_data[[1]]$map21), vcount(g2))
+})
+
+test_that("get_subisomorphisms_vf2_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  g1 <- make_ring(3)
+  g2 <- make_full_graph(5)
+  
+  # Should error if callback is not a function
+  expect_snapshot_igraph_error(
+    get_subisomorphisms_vf2_callback_closure_impl(
+      graph1 = g1,
+      graph2 = g2,
+      vertex_color1 = NULL,
+      vertex_color2 = NULL,
+      edge_color1 = NULL,
+      edge_color2 = NULL,
+      callback = "not a function"
+    )
+  )
+})

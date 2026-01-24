@@ -405,26 +405,6 @@ test_that("cliques_callback handles errors in callback", {
   )
 })
 
-test_that("cliques_callback_closure_impl works", {
-  g <- make_full_graph(4)
-  
-  # Test the _impl function directly
-  count <- 0
-  result <- cliques_callback_closure_impl(
-    graph = g,
-    min_size = 3,
-    max_size = 4,
-    callback = function(clique) {
-      count <<- count + 1
-      expect_true(is.integer(clique))
-      TRUE
-    }
-  )
-  
-  expect_null(result)
-  expect_true(count > 0)
-})
-
 test_that("maximal_cliques_callback works", {
   withr::local_seed(123)
   

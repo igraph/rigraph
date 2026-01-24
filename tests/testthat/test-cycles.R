@@ -109,24 +109,4 @@ test_that("simple_cycles_callback handles errors in callback", {
   )
 })
 
-test_that("simple_cycles_callback_closure_impl works", {
-  g <- make_ring(4, directed = TRUE)
-  
-  # Test the _impl function directly
-  count <- 0
-  result <- simple_cycles_callback_closure_impl(
-    graph = g,
-    mode = "out",
-    min_cycle_length = -1,
-    max_cycle_length = -1,
-    callback = function(vertices, edges) {
-      count <<- count + 1
-      expect_true(is.integer(vertices))
-      expect_true(is.integer(edges))
-      TRUE
-    }
-  )
-  
-  expect_null(result)
-  expect_true(count > 0)
-})
+
