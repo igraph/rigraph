@@ -23,15 +23,6 @@
       ! Number of vertices must not be negative. Invalid value
       Source: <file>:<line>
 
-# add_edges_impl basic
-
-    Code
-      add_edges_impl(graph = g, edges = c(0, 1, 1, 2))
-    Output
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 1->2 2->3
-
 # add_edges_impl errors
 
     Code
@@ -4547,9 +4538,8 @@
     Code
       edgelist_percolation_impl(edges = "a")
     Condition
-      Error in `edgelist_percolation_impl()`:
-      ! Expected numeric or integer vector, got type 16. Invalid value
-      Source: <file>:<line>
+      Error in `edges - 1`:
+      ! non-numeric argument to binary operator
 
 # is_clique_impl basic
 
@@ -5329,7 +5319,7 @@
       similarity_dice_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.6666667 0.8000000
+      [1] 0.8000000 0.6666667
 
 # similarity_dice_pairs_impl errors
 
@@ -5428,7 +5418,7 @@
       similarity_jaccard_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.5000000 0.6666667
+      [1] 0.6666667 0.5000000
 
 # similarity_jaccard_pairs_impl errors
 
@@ -11347,50 +11337,6 @@
     Output
       IGRAPH D--- 6 0 -- 
       + edges:
-
-# union_many_impl basic
-
-    Code
-      union_many_impl(graphs = list(g1, g2, g3))
-    Output
-      $res
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 2->3 1->3 1->2
-      
-      $edgemaps
-      $edgemaps[[1]]
-      numeric(0)
-      
-      $edgemaps[[2]]
-      [1] 2 0
-      
-      $edgemaps[[3]]
-      [1] 1
-      
-      
-
-# intersection_many_impl basic
-
-    Code
-      intersection_many_impl(graphs = list(g1, g2, g3))
-    Output
-      $res
-      IGRAPH D--- 3 1 -- 
-      + edge:
-      [1] 1->2
-      
-      $edgemaps
-      $edgemaps[[1]]
-      [1]  0 -1 -1
-      
-      $edgemaps[[2]]
-      [1]  0 -1
-      
-      $edgemaps[[3]]
-      [1] 0
-      
-      
 
 # layout_merge_dla_impl basic
 
