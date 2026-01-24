@@ -4548,7 +4548,8 @@
       edgelist_percolation_impl(edges = "a")
     Condition
       Error in `edgelist_percolation_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'character'
+      ! Expected numeric or integer vector, got type 16. Invalid value
+      Source: <file>:<line>
 
 # is_clique_impl basic
 
@@ -11282,6 +11283,62 @@
       + 2/5 vertices:
       [1] 3 5
       
+
+# sparse_adjacency_impl basic
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M)
+    Output
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+
+---
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+
+# sparse_weighted_adjacency_impl basic
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M)
+    Output
+      $graph
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+      
+      $weights
+      [1] 0.5 2.5 1.0 3.0
+      
+
+---
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      $graph
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+      
+      $weights
+      [1] 2.5 1.0 0.5 3.0
+      
+
+# weighted_sparsemat_impl basic
+
+    Code
+      weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
+    Output
+      IGRAPH D-W- 4 4 -- 
+      + attr: weight (e/n)
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
 
 # disjoint_union_many_impl basic
 
