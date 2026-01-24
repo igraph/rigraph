@@ -429,4 +429,3 @@ triad_census <- function(graph) {
     graph = graph
   )
 }
-
