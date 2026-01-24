@@ -494,13 +494,9 @@ REWIRING_MODE:
     INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "simple_loops" = 1L)'
 
 SPARSEMAT:
-    INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-
-SPARSEMAT_OR_0:
     INCONV: |-
-        if (!is.null(%I%)) {
-          requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-        }
+        requireNamespace("Matrix", quietly = TRUE)
+        %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
 VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
@@ -509,8 +505,6 @@ MATRIX_COMPLEX:
     INCONV: '%I%[] <- as.complex(%I%)'
 
 PLFIT: {}
-
-SPARSEMATPTR: {}
 
 MAXFLOW_STATS:
     CALL: {}

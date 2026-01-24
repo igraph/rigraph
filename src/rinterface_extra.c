@@ -3359,6 +3359,53 @@ SEXP Rx_igraph_0orsparsemat_to_SEXP(const igraph_sparsemat_t *sp) {
   }
 }
 
+void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
+  /* sm is expected to be a dgCMatrix from the Matrix package
+   * with slots: i (row indices), p (column pointers), x (values), Dim (dimensions)
+   */
+  
+  SEXP i_slot = GET_SLOT(sm, Rf_install("i"));
+  SEXP p_slot = GET_SLOT(sm, Rf_install("p"));
+  SEXP x_slot = GET_SLOT(sm, Rf_install("x"));
+  SEXP dim_slot = GET_SLOT(sm, Rf_install("Dim"));
+  
+  igraph_integer_t nrow = INTEGER(dim_slot)[0];
+  igraph_integer_t ncol = INTEGER(dim_slot)[1];
+  igraph_integer_t nzmax = Rf_xlength(x_slot);
+  
+  int *p = INTEGER(p_slot);
+  int *i = INTEGER(i_slot);
+  
+  /* Initialize sparse matrix in triplet format */
+  igraph_sparsemat_init(sp, nrow, ncol, nzmax);
+  
+  /* Convert from compressed column to triplet format */
+  /* Handle both numeric and integer x values without coercion */
+  if (TYPEOF(x_slot) == REALSXP) {
+    double *x = REAL(x_slot);
+    for (igraph_integer_t col = 0; col < ncol; col++) {
+      for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
+        igraph_sparsemat_entry(sp, i[j], col, x[j]);
+      }
+    }
+  } else if (TYPEOF(x_slot) == INTSXP) {
+    int *x = INTEGER(x_slot);
+    for (igraph_integer_t col = 0; col < ncol; col++) {
+      for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
+        igraph_sparsemat_entry(sp, i[j], col, (double)x[j]);
+      }
+    }
+  } else {
+    Rf_error("Invalid type for sparse matrix values: expected numeric or integer, got type %d", TYPEOF(x_slot));
+  }
+  
+  /* Compress the sparse matrix to column-compressed format */
+  igraph_sparsemat_t tmp;
+  igraph_sparsemat_compress(sp, &tmp);
+  igraph_sparsemat_destroy(sp);
+  *sp = tmp;
+}
+
 igraph_error_t Rz_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
   igraph_integer_t length = Rf_xlength(vectorlist);
 
@@ -3485,16 +3532,28 @@ igraph_error_t Rz_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v) {
 
 igraph_error_t Rz_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   igraph_integer_t n = Rf_xlength(sv);
-  double *svv=REAL(sv);
-  IGRAPH_CHECK(igraph_vector_int_init(v, n));
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, v);
-  for (igraph_integer_t i = 0; i<n; i++) {
-    VECTOR(*v)[i] = (igraph_integer_t) svv[i];
-    if (VECTOR(*v)[i] != svv[i]) {
-      IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
+  
+  /* Handle both numeric and integer inputs without coercion */
+  if (TYPEOF(sv) == REALSXP) {
+    double *svv = REAL(sv);
+    IGRAPH_CHECK(igraph_vector_int_init(v, n));
+    for (igraph_integer_t i = 0; i < n; i++) {
+      VECTOR(*v)[i] = (igraph_integer_t) svv[i];
+      if (VECTOR(*v)[i] != svv[i]) {
+        igraph_vector_int_destroy(v);
+        IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
+      }
     }
+  } else if (TYPEOF(sv) == INTSXP) {
+    int *svv = INTEGER(sv);
+    IGRAPH_CHECK(igraph_vector_int_init(v, n));
+    for (igraph_integer_t i = 0; i < n; i++) {
+      VECTOR(*v)[i] = (igraph_integer_t) svv[i];
+    }
+  } else {
+    IGRAPH_ERRORF("Expected numeric or integer vector, got type %d", IGRAPH_EINVAL, TYPEOF(sv));
   }
-  IGRAPH_FINALLY_CLEAN(1);
+  
   return IGRAPH_SUCCESS;
 }
 
