@@ -49,7 +49,7 @@
     Condition
       Error in `arpack()`:
       ! ARPACK error. N must be positive
-      Source: linalg/arpack.c:xx
+      Source: <file>:<line>
 
 ---
 
