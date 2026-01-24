@@ -11044,7 +11044,7 @@ test_that("connect_neighborhood_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_ring(5)
-  expect_snapshot(connect_neighborhood_impl(
+  expect_snapshot_igraph(connect_neighborhood_impl(
     graph = g,
     order = 1,
     mode = c("all", "out", "in")
