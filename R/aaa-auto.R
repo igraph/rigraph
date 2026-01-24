@@ -477,6 +477,68 @@ adjacency_impl <- function(
   res
 }
 
+sparse_adjacency_impl <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
+  loops = c("once", "none", "twice")
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_sparse_adjacency,
+    adjmatrix,
+    mode,
+    loops
+  )
+
+  res
+}
+
+sparse_weighted_adjacency_impl <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
+  loops = c("once", "none", "twice")
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_sparse_weighted_adjacency,
+    adjmatrix,
+    mode,
+    loops
+  )
+
+  res
+}
+
 weighted_adjacency_impl <- function(
   adjmatrix,
   mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
@@ -1253,6 +1315,30 @@ turan_impl <- function(
     res$n <- n
     res$r <- r
   }
+
+  res
+}
+
+weighted_sparsemat_impl <- function(
+  A,
+  directed,
+  attr,
+  loops = FALSE
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_weighted_sparsemat,
+    A,
+    directed,
+    attr,
+    loops
+  )
 
   res
 }
