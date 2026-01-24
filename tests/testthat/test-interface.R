@@ -248,3 +248,19 @@ test_that("invalidate_cache errors on invalid input", {
   expect_error(invalidate_cache("not a graph"))
   expect_error(invalidate_cache(123))
 })
+
+test_that("get_edge_ids() returns numeric vector, not igraph.es", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), 3, 2, byrow = TRUE)
+  result <- get_edge_ids(g, mat)
+  expect_true(is.numeric(result))
+  expect_false(inherits(result, "igraph.es"))
+  expect_equal(result, c(1, 2, 3))
+})
+
+test_that("get_edge_ids() returns 0 for missing edges when error=FALSE", {
+  g <- make_empty_graph(10)
+  result <- get_edge_ids(g, c(1, 2), error = FALSE)
+  expect_equal(result, 0)
+  expect_true(is.numeric(result))
+})

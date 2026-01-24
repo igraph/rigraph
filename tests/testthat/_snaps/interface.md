@@ -7,7 +7,7 @@
       `get.edge.ids()` was deprecated in igraph 2.1.0.
       i Please use `get_edge_ids()` instead.
     Output
-      numeric(0)
+      [1] 0
 
 ---
 
