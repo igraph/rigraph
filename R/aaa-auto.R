@@ -2160,6 +2160,16 @@ hsbm_list_game_impl <- function(
   # Argument checks
   n <- as.numeric(n)
   mlist <- as.numeric(mlist)
+  if (!is.list(Clist)) {
+    cli::cli_abort("{.arg Clist} must be a list of matrices")
+  }
+  Clist <- lapply(Clist, function(m) {
+    if (!is.matrix(m)) {
+      cli::cli_abort("{.arg Clist} must be a list of matrices")
+    }
+    m[] <- as.numeric(m)
+    m
+  })
   p <- as.numeric(p)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8193,6 +8203,42 @@ layout_drl_3d_impl <- function(
   res
 }
 
+layout_merge_dla_impl <- function(
+  graphs,
+  coords
+) {
+  # Argument checks
+  if (!is.list(graphs)) {
+    cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+  }
+  graphs <- lapply(graphs, function(g) {
+    if (!inherits(g, "igraph")) {
+      cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+    }
+    g
+  })
+  if (!is.list(coords)) {
+    cli::cli_abort("{.arg coords} must be a list of matrices")
+  }
+  coords <- lapply(coords, function(m) {
+    if (!is.matrix(m)) {
+      cli::cli_abort("{.arg coords} must be a list of matrices")
+    }
+    m[] <- as.numeric(m)
+    m
+  })
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_layout_merge_dla,
+    graphs,
+    coords
+  )
+
+  res
+}
+
 layout_sugiyama_impl <- function(
   graph,
   layers = NULL,
@@ -10720,6 +10766,30 @@ disjoint_union_impl <- function(
   res
 }
 
+disjoint_union_many_impl <- function(
+  graphs
+) {
+  # Argument checks
+  if (!is.list(graphs)) {
+    cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+  }
+  graphs <- lapply(graphs, function(g) {
+    if (!inherits(g, "igraph")) {
+      cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+    }
+    g
+  })
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_disjoint_union_many,
+    graphs
+  )
+
+  res
+}
+
 join_impl <- function(
   left,
   right
@@ -10758,6 +10828,30 @@ union_impl <- function(
   res
 }
 
+union_many_impl <- function(
+  graphs
+) {
+  # Argument checks
+  if (!is.list(graphs)) {
+    cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+  }
+  graphs <- lapply(graphs, function(g) {
+    if (!inherits(g, "igraph")) {
+      cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+    }
+    g
+  })
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_union_many,
+    graphs
+  )
+
+  res
+}
+
 intersection_impl <- function(
   left,
   right
@@ -10772,6 +10866,30 @@ intersection_impl <- function(
     R_igraph_intersection,
     left,
     right
+  )
+
+  res
+}
+
+intersection_many_impl <- function(
+  graphs
+) {
+  # Argument checks
+  if (!is.list(graphs)) {
+    cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+  }
+  graphs <- lapply(graphs, function(g) {
+    if (!inherits(g, "igraph")) {
+      cli::cli_abort("{.arg graphs} must be a list of igraph objects")
+    }
+    g
+  })
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_intersection_many,
+    graphs
   )
 
   res

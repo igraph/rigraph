@@ -668,3 +668,28 @@ CHUNG_LU_VARIANT:
     DEFAULT:
         ORIGINAL: c("original", "maxent", "nr")
     INCONV: '%I% <- switch_igraph_arg(%I%, "original" = 0L, "maxent" = 1L, "nr" = 2L)'
+
+GRAPH_PTR_LIST:
+    INCONV: |-
+        if (!is.list(%I%)) {
+          cli::cli_abort("{.arg %I%} must be a list of igraph objects")
+        }
+        %I% <- lapply(%I%, function(g) {
+          if (!inherits(g, "igraph")) {
+            cli::cli_abort("{.arg %I%} must be a list of igraph objects")
+          }
+          g
+        })
+
+MATRIX_LIST:
+    INCONV: |-
+        if (!is.list(%I%)) {
+          cli::cli_abort("{.arg %I%} must be a list of matrices")
+        }
+        %I% <- lapply(%I%, function(m) {
+          if (!is.matrix(m)) {
+            cli::cli_abort("{.arg %I%} must be a list of matrices")
+          }
+          m[] <- as.numeric(m)
+          m
+        })
