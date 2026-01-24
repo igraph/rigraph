@@ -60,17 +60,16 @@ in a graph based on a sample.
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
-[`motifs()`](https://r.igraph.org/reference/motifs.md),
-[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md)
+[`motifs()`](https://r.igraph.org/reference/motifs.md)
 
 ## Examples
 
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 354  NA  89   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 389  NA  94   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 443
+#> [1] 483
 sample_motifs(g, 3)
-#> [1] 10
+#> [1] 650
 ```

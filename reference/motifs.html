@@ -58,7 +58,7 @@ structure.  These functions search a graph for various motifs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, cut.prob <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, cut.prob <span class="op">=</span> <span class="cn">NULL</span>, callback <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,7 +71,7 @@ structure.  These functions search a graph for various motifs.</p>
 
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
 <dd><p>The size of the motif, currently sizes 3 and 4 are supported in
-directed graphs and sizes 3-6 in undirected graphs.</p></dd>
+directed graphs and sizes 3 to 6 in undirected graphs.</p></dd>
 
 
 <dt id="arg-cut-prob">cut.prob<a class="anchor" aria-label="anchor" href="#arg-cut-prob"></a></dt>
@@ -80,13 +80,23 @@ graph is cut at a certain level. Its length should be the same as the size
 of the motif (the <code>size</code> argument).
 If <code>NULL</code>, the default, no cuts are made.</p></dd>
 
+
+<dt id="arg-callback">callback<a class="anchor" aria-label="anchor" href="#arg-callback"></a></dt>
+<dd><p>Optional callback function to call for each motif found.
+The function should accept two arguments: <code>vids</code> (integer vector of vertex IDs
+in the motif) and <code>isoclass</code> (the isomorphism class of the motif).
+The function should return <code>TRUE</code> to continue the search or <code>FALSE</code> to stop it.
+If <code>NULL</code> (the default), motif counts are returned as a numeric vector.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>motifs()</code> returns a numeric vector, the number of occurrences of
-each motif in the graph. The motifs are ordered by their isomorphism
-classes. Note that for unconnected subgraphs, which are not considered to be
-motifs, the result will be <code>NA</code>.</p>
+    <p>When <code>callback</code> is <code>NULL</code>, <code>motifs()</code> returns a numeric vector,
+the number of occurrences of each motif in the graph. The motifs are ordered
+by their isomorphism classes. Note that for unconnected subgraphs, which are
+not considered to be motifs, the result will be <code>NA</code>.</p>
+<p>When <code>callback</code> is provided, the function returns <code>NULL</code> invisibly and calls
+the callback function for each motif found.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -101,7 +111,6 @@ the motifs is defined by their isomorphism class, see
 <p>Other graph motifs:
 <code><a href="count_motifs.html">count_motifs()</a></code>,
 <code><a href="dyad_census.html">dyad_census()</a></code>,
-<code><a href="motifs_randesu_callback.html">motifs_randesu_callback()</a></code>,
 <code><a href="sample_motifs.html">sample_motifs()</a></code></p></div>
     </div>
 
@@ -114,6 +123,13 @@ the motifs is defined by their isomorphism class, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 346</span>
 <span class="r-in"><span><span class="fu"><a href="sample_motifs.html">sample_motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 60</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using callback to stop search after finding 5 motifs</span></span></span>
+<span class="r-in"><span><span class="va">count</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="fu">motifs</span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span>, callback <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">vids</span>, <span class="va">isoclass</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">count</span> <span class="op">&lt;&lt;-</span> <span class="va">count</span> <span class="op">+</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  <span class="va">count</span> <span class="op">&lt;</span> <span class="fl">5</span>  <span class="co"># stop after 5 motifs</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

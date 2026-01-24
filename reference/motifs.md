@@ -6,7 +6,7 @@ structure. These functions search a graph for various motifs.
 ## Usage
 
 ``` r
-motifs(graph, size = 3, cut.prob = NULL)
+motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
 ```
 
 ## Arguments
@@ -18,7 +18,7 @@ motifs(graph, size = 3, cut.prob = NULL)
 - size:
 
   The size of the motif, currently sizes 3 and 4 are supported in
-  directed graphs and sizes 3-6 in undirected graphs.
+  directed graphs and sizes 3 to 6 in undirected graphs.
 
 - cut.prob:
 
@@ -26,12 +26,24 @@ motifs(graph, size = 3, cut.prob = NULL)
   at a certain level. Its length should be the same as the size of the
   motif (the `size` argument). If `NULL`, the default, no cuts are made.
 
+- callback:
+
+  Optional callback function to call for each motif found. The function
+  should accept two arguments: `vids` (integer vector of vertex IDs in
+  the motif) and `isoclass` (the isomorphism class of the motif). The
+  function should return `TRUE` to continue the search or `FALSE` to
+  stop it. If `NULL` (the default), motif counts are returned as a
+  numeric vector.
+
 ## Value
 
-`motifs()` returns a numeric vector, the number of occurrences of each
-motif in the graph. The motifs are ordered by their isomorphism classes.
-Note that for unconnected subgraphs, which are not considered to be
-motifs, the result will be `NA`.
+When `callback` is `NULL`, `motifs()` returns a numeric vector, the
+number of occurrences of each motif in the graph. The motifs are ordered
+by their isomorphism classes. Note that for unconnected subgraphs, which
+are not considered to be motifs, the result will be `NA`.
+
+When `callback` is provided, the function returns `NULL` invisibly and
+calls the callback function for each motif found.
 
 ## Details
 
@@ -47,7 +59,6 @@ the motifs is defined by their isomorphism class, see
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
-[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Examples
@@ -60,4 +71,11 @@ count_motifs(g, 3)
 #> [1] 346
 sample_motifs(g, 3)
 #> [1] 60
+
+# Using callback to stop search after finding 5 motifs
+count <- 0
+motifs(g, 3, callback = function(vids, isoclass) {
+  count <<- count + 1
+  count < 5  # stop after 5 motifs
+})
 ```

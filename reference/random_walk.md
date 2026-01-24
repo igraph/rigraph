@@ -94,9 +94,9 @@ w <- random_walk(g, start = 1, steps = 10000)
 
 ## These are similar, but not exactly the same
 cor(table(w), ec)
-#> [1] 0.9624873
+#> [1] 0.9625204
 
 ## But these are (almost) the same
 cor(table(w), pg)
-#> [1] 0.9999851
+#> [1] 0.9999881
 ```
