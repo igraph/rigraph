@@ -11143,8 +11143,16 @@ test_that("sparse_adjacency_impl basic", {
   )
 
   expect_snapshot(sparse_adjacency_impl(adjmatrix = M))
+  
+  # Create a symmetric matrix for undirected graph
+  M_sym <- Matrix::sparseMatrix(
+    i = c(1, 1, 2, 2, 3, 3, 4, 4),
+    j = c(2, 4, 1, 3, 2, 4, 1, 3),
+    x = 1,
+    dims = c(4, 4)
+  )
   expect_snapshot(sparse_adjacency_impl(
-    adjmatrix = M,
+    adjmatrix = M_sym,
     mode = "undirected",
     loops = "once"
   ))
@@ -11157,7 +11165,7 @@ test_that("sparse_adjacency_impl basic", {
   expect_true(is_directed(g1))
 
   g2 <- sparse_adjacency_impl(
-    adjmatrix = M,
+    adjmatrix = M_sym,
     mode = "undirected",
     loops = "once"
   )
@@ -11170,8 +11178,10 @@ test_that("sparse_adjacency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
-  # Invalid matrix
-  expect_error(sparse_adjacency_impl(adjmatrix = matrix(1:4, 2, 2)))
+  # Regular matrices are converted to sparse matrices automatically
+  # This should work, not error
+  g <- sparse_adjacency_impl(adjmatrix = matrix(c(0,1,1,0), 2, 2))
+  expect_s3_class(g, "igraph")
 })
 
 # sparse_weighted_adjacency_impl
@@ -11190,8 +11200,16 @@ test_that("sparse_weighted_adjacency_impl basic", {
   )
 
   expect_snapshot(sparse_weighted_adjacency_impl(adjmatrix = M))
+  
+  # Create a symmetric weighted matrix for undirected graph
+  M_sym <- Matrix::sparseMatrix(
+    i = c(1, 1, 2, 2, 3, 3, 4, 4),
+    j = c(2, 4, 1, 3, 2, 4, 1, 3),
+    x = c(2.5, 0.5, 2.5, 1.0, 1.0, 3.0, 0.5, 3.0),
+    dims = c(4, 4)
+  )
   expect_snapshot(sparse_weighted_adjacency_impl(
-    adjmatrix = M,
+    adjmatrix = M_sym,
     mode = "undirected",
     loops = "once"
   ))
@@ -11213,8 +11231,11 @@ test_that("sparse_weighted_adjacency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
-  # Invalid matrix
-  expect_error(sparse_weighted_adjacency_impl(adjmatrix = matrix(1:4, 2, 2)))
+  # Regular matrices are converted to sparse matrices automatically
+  # This should work, not error
+  result <- sparse_weighted_adjacency_impl(adjmatrix = matrix(c(0,1,2,0), 2, 2))
+  expect_s3_class(result$graph, "igraph")
+  expect_type(result$weights, "double")
 })
 
 # weighted_sparsemat_impl
@@ -11258,11 +11279,13 @@ test_that("weighted_sparsemat_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
-  # Invalid matrix
-  expect_error(weighted_sparsemat_impl(
-    A = matrix(1:4, 2, 2),
+  # Regular matrices are converted to sparse matrices automatically
+  # This should work, not error
+  g <- weighted_sparsemat_impl(
+    A = matrix(c(0,1,2,0), 2, 2),
     directed = TRUE,
     attr = "weight",
     loops = FALSE
-  ))
+  )
+  expect_s3_class(g, "igraph")
 })

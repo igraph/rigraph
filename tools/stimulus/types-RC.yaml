@@ -817,11 +817,16 @@ SPARSEMAT:
     CALL: '&%C%'
     CTYPE: igraph_sparsemat_t
     INCONV:
-        IN: Rz_SEXP_to_sparsemat(%I%, &%C%);
+        IN: |-
+            Rz_SEXP_to_sparsemat(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
+        IN: |-
+            igraph_sparsemat_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);

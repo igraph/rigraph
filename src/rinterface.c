@@ -694,30 +694,23 @@ SEXP R_igraph_sparse_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
   igraph_loops_t c_loops;
   SEXP graph;
 
-  SEXP r_result, r_names;
+  SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_sparsemat(adjmatrix, &c_adjmatrix);
+  IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_adjmatrix);
   c_mode = (igraph_adjacency_t) Rf_asInteger(mode);
   c_loops = (igraph_loops_t) Rf_asInteger(loops);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_sparse_adjacency(&c_graph, &c_adjmatrix, c_mode, c_loops));
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(adjmatrix=Ry_igraph_sparsemat_to_SEXP(&c_adjmatrix));
   igraph_sparsemat_destroy(&c_adjmatrix);
   IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, graph);
-  SET_VECTOR_ELT(r_result, 1, adjmatrix);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("adjmatrix"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
@@ -739,6 +732,7 @@ SEXP R_igraph_sparse_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
   SEXP r_result, r_names;
                                         /* Convert input */
   Rz_SEXP_to_sparsemat(adjmatrix, &c_adjmatrix);
+  IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_adjmatrix);
   c_mode = (igraph_adjacency_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK(igraph_vector_init(&c_weights, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
@@ -748,26 +742,23 @@ SEXP R_igraph_sparse_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
   IGRAPH_R_CHECK(igraph_sparse_weighted_adjacency(&c_graph, &c_adjmatrix, c_mode, &c_weights, c_loops));
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(adjmatrix=Ry_igraph_sparsemat_to_SEXP(&c_adjmatrix));
   igraph_sparsemat_destroy(&c_adjmatrix);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(weights=Ry_igraph_0orvector_to_SEXP(&c_weights));
   igraph_vector_destroy(&c_weights);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, graph);
-  SET_VECTOR_ELT(r_result, 1, adjmatrix);
-  SET_VECTOR_ELT(r_result, 2, weights);
+  SET_VECTOR_ELT(r_result, 1, weights);
   SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("adjmatrix"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("weights"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("weights"));
   SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(r_result);
@@ -1880,6 +1871,7 @@ SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
   SEXP r_result;
                                         /* Convert input */
   Rz_SEXP_to_sparsemat(A, &c_A);
+  IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_A);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_attr = Rf_translateCharUTF8(STRING_ELT(attr, 0));
@@ -1892,6 +1884,8 @@ SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_sparsemat_destroy(&c_A);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 

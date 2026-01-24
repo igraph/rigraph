@@ -502,7 +502,6 @@ extern SEXP Rx_igraph_add_env(SEXP);
 extern SEXP Rx_igraph_add_myid_to_env(SEXP);
 extern SEXP Rx_igraph_add_version_to_env(SEXP);
 extern SEXP Rx_igraph_address(SEXP);
-extern SEXP Rx_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_adjacent_vertices(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack_unpack_complex(SEXP, SEXP, SEXP);
@@ -517,19 +516,16 @@ extern SEXP Rx_igraph_community_edge_betweenness(SEXP, SEXP, SEXP, SEXP, SEXP, S
 extern SEXP Rx_igraph_community_fastgreedy(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_community_leading_eigenvector(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_community_to_membership2(SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_complementer(SEXP, SEXP);
 extern SEXP Rx_igraph_compose(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_connect_neighborhood(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_copy_env(SEXP);
 extern SEXP Rx_igraph_copy_from(SEXP);
 extern SEXP Rx_igraph_copy_to(SEXP);
 extern SEXP Rx_igraph_create(SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_create_bipartite(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_decompose(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_degree_sequence_game(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_dfs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_diameter(SEXP, SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_difference(SEXP, SEXP);
 extern SEXP Rx_igraph_disjoint_union(SEXP);
 extern SEXP Rx_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_es_adj(SEXP, SEXP, SEXP, SEXP);
@@ -545,7 +541,6 @@ extern SEXP Rx_igraph_get_adjlist(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_all_simple_paths_pp(SEXP);
 extern SEXP Rx_igraph_get_attr_mode(SEXP, SEXP);
 extern SEXP Rx_igraph_get_diameter(SEXP, SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_get_edgelist(SEXP, SEXP);
 extern SEXP Rx_igraph_get_eids(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_graph_id(SEXP);
 extern SEXP Rx_igraph_get_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -613,7 +608,6 @@ extern SEXP Rx_igraph_watts_strogatz_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
 extern SEXP Rx_igraph_weak_ref_run_finalizer(SEXP);
 extern SEXP Rx_igraph_weak_ref_value(SEXP);
-extern SEXP Rx_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_dimacs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_lgl(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_ncol(SEXP, SEXP, SEXP, SEXP);
@@ -1100,7 +1094,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_add_myid_to_env",                           (DL_FUNC) &Rx_igraph_add_myid_to_env,                            1},
     {"Rx_igraph_add_version_to_env",                        (DL_FUNC) &Rx_igraph_add_version_to_env,                         1},
     {"Rx_igraph_address",                                   (DL_FUNC) &Rx_igraph_address,                                    1},
-    {"Rx_igraph_adjacency",                                 (DL_FUNC) &Rx_igraph_adjacency,                                  3},
     {"Rx_igraph_adjacent_vertices",                         (DL_FUNC) &Rx_igraph_adjacent_vertices,                          3},
     {"Rx_igraph_arpack",                                    (DL_FUNC) &Rx_igraph_arpack,                                     5},
     {"Rx_igraph_arpack_unpack_complex",                     (DL_FUNC) &Rx_igraph_arpack_unpack_complex,                      3},
@@ -1115,19 +1108,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_community_fastgreedy",                      (DL_FUNC) &Rx_igraph_community_fastgreedy,                       5},
     {"Rx_igraph_community_leading_eigenvector",             (DL_FUNC) &Rx_igraph_community_leading_eigenvector,              9},
     {"Rx_igraph_community_to_membership2",                  (DL_FUNC) &Rx_igraph_community_to_membership2,                   3},
-    {"Rx_igraph_complementer",                              (DL_FUNC) &Rx_igraph_complementer,                               2},
     {"Rx_igraph_compose",                                   (DL_FUNC) &Rx_igraph_compose,                                    3},
     {"Rx_igraph_connect_neighborhood",                      (DL_FUNC) &Rx_igraph_connect_neighborhood,                       3},
     {"Rx_igraph_copy_env",                                  (DL_FUNC) &Rx_igraph_copy_env,                                   1},
     {"Rx_igraph_copy_from",                                 (DL_FUNC) &Rx_igraph_copy_from,                                  1},
     {"Rx_igraph_copy_to",                                   (DL_FUNC) &Rx_igraph_copy_to,                                    1},
     {"Rx_igraph_create",                                    (DL_FUNC) &Rx_igraph_create,                                     3},
-    {"Rx_igraph_create_bipartite",                          (DL_FUNC) &Rx_igraph_create_bipartite,                           3},
     {"Rx_igraph_decompose",                                 (DL_FUNC) &Rx_igraph_decompose,                                  4},
     {"Rx_igraph_degree_sequence_game",                      (DL_FUNC) &Rx_igraph_degree_sequence_game,                       3},
     {"Rx_igraph_dfs",                                       (DL_FUNC) &Rx_igraph_dfs,                                       12},
     {"Rx_igraph_diameter",                                  (DL_FUNC) &Rx_igraph_diameter,                                   4},
-    {"Rx_igraph_difference",                                (DL_FUNC) &Rx_igraph_difference,                                 2},
     {"Rx_igraph_disjoint_union",                            (DL_FUNC) &Rx_igraph_disjoint_union,                             1},
     {"Rx_igraph_edge_disjoint_paths",                       (DL_FUNC) &Rx_igraph_edge_disjoint_paths,                        3},
     {"Rx_igraph_es_adj",                                    (DL_FUNC) &Rx_igraph_es_adj,                                     4},
@@ -1143,7 +1133,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_get_all_simple_paths_pp",                   (DL_FUNC) &Rx_igraph_get_all_simple_paths_pp,                    1},
     {"Rx_igraph_get_attr_mode",                             (DL_FUNC) &Rx_igraph_get_attr_mode,                              2},
     {"Rx_igraph_get_diameter",                              (DL_FUNC) &Rx_igraph_get_diameter,                               4},
-    {"Rx_igraph_get_edgelist",                              (DL_FUNC) &Rx_igraph_get_edgelist,                               2},
     {"Rx_igraph_get_eids",                                  (DL_FUNC) &Rx_igraph_get_eids,                                   4},
     {"Rx_igraph_get_graph_id",                              (DL_FUNC) &Rx_igraph_get_graph_id,                               1},
     {"Rx_igraph_get_shortest_paths",                        (DL_FUNC) &Rx_igraph_get_shortest_paths,                        10},
@@ -1211,7 +1200,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_weak_ref_key",                              (DL_FUNC) &Rx_igraph_weak_ref_key,                               1},
     {"Rx_igraph_weak_ref_run_finalizer",                    (DL_FUNC) &Rx_igraph_weak_ref_run_finalizer,                     1},
     {"Rx_igraph_weak_ref_value",                            (DL_FUNC) &Rx_igraph_weak_ref_value,                             1},
-    {"Rx_igraph_weighted_adjacency",                        (DL_FUNC) &Rx_igraph_weighted_adjacency,                         3},
     {"Rx_igraph_write_graph_dimacs",                        (DL_FUNC) &Rx_igraph_write_graph_dimacs,                         5},
     {"Rx_igraph_write_graph_lgl",                           (DL_FUNC) &Rx_igraph_write_graph_lgl,                            5},
     {"Rx_igraph_write_graph_ncol",                          (DL_FUNC) &Rx_igraph_write_graph_ncol,                           4},

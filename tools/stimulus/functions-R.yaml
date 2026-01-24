@@ -59,8 +59,10 @@ igraph_create:
 igraph_adjacency:
 
 igraph_sparse_adjacency:
+  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, LOOPS loops=ONCE
 
 igraph_sparse_weighted_adjacency:
+  PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
 
 # TODO: temporarily disabled
 igraph_weighted_adjacency:

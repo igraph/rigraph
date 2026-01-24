@@ -11284,6 +11284,52 @@
       [1] 3 5
       
 
+# sparse_adjacency_impl basic
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M)
+    Output
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+
+---
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+
+# sparse_weighted_adjacency_impl basic
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M)
+    Output
+      $graph
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+      
+      $weights
+      [1] 0.5 2.5 1.0 3.0
+      
+
+---
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      $graph
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+      
+      $weights
+      [1] 2.5 1.0 0.5 3.0
+      
+
 # weighted_sparsemat_impl basic
 
     Code
