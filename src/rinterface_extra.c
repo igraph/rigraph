@@ -3523,8 +3523,9 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *res) {
   nzmax = (igraph_integer_t) Rf_xlength(slot_i);
   
   /* Initialize the sparse matrix in triplet format */
-  if (igraph_sparsemat_init(res, nrow, ncol, nzmax) != IGRAPH_SUCCESS) {
-    igraph_error("Failed to initialize sparse matrix", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  igraph_error_t err = igraph_sparsemat_init(res, nrow, ncol, nzmax);
+  if (err != IGRAPH_SUCCESS) {
+    igraph_error("Failed to initialize sparse matrix", __FILE__, __LINE__, err);
   }
   
   /* Get pointers to the data */
