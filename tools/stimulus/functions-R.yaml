@@ -524,6 +524,14 @@ igraph_full_bipartite:
 igraph_decompose:
 
 #######################################
+# Percolation
+#######################################
+
+igraph_edgelist_percolation:
+    # VERTEX_INDEX_PAIRS has a dependency that we don't have here
+    PARAMS: INDEX_PAIRS edges, OUT VECTOR_INT giant_size, OUT VECTOR_INT vertex_count
+
+#######################################
 # Cliques
 #######################################
 

@@ -7109,7 +7109,7 @@ edgelist_percolation_impl <- function(
   edges
 ) {
   # Argument checks
-  edges <- as_igraph_vs(%I1%, edges)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
