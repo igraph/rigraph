@@ -75,12 +75,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH 532c30c D--- 5 4 -- 
+#> IGRAPH c5d73ce D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from 532c30c:
+#> + edges from c5d73ce:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from 532c30c:
+#> + 5/5 vertices, from c5d73ce:
 #>   color
 #> 1   red
 #> 2   red
