@@ -43,7 +43,7 @@ g <- make_ring(10)
 shortest_paths(g, 8, 2)
 #> $vpath
 #> $vpath[[1]]
-#> + 5/10 vertices, from 02bc530:
+#> + 5/10 vertices, from ead2f1c:
 #> [1]  8  9 10  1  2
 #> 
 #> 
@@ -60,7 +60,7 @@ E(g)$weight <- seq_len(ecount(g))
 shortest_paths(g, 8, 2)
 #> $vpath
 #> $vpath[[1]]
-#> + 7/10 vertices, from 02bc530:
+#> + 7/10 vertices, from ead2f1c:
 #> [1] 8 7 6 5 4 3 2
 #> 
 #> 
