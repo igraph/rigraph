@@ -436,13 +436,13 @@ test_that("adding and removing attributes", {
 
 test_that("error messages work", {
   g <- make_full_graph(5)
-  expect_snapshot(set_vertex_attr(g, "test", value = c(1, 2)), error = TRUE)
-  expect_snapshot(set_edge_attr(g, "test", value = c(1, 2)), error = TRUE)
-  expect_snapshot(delete_graph_attr(g, "a"), error = TRUE)
-  expect_snapshot(delete_vertex_attr(g, "a"), error = TRUE)
-  expect_snapshot(delete_edge_attr(g, "a"), error = TRUE)
-  expect_snapshot(assert_named_list("a"), error = TRUE)
-  expect_snapshot(assert_named_list(list("a", "b")), error = TRUE)
+  expect_snapshot_igraph_error(set_vertex_attr(g, "test", value = c(1, 2)))
+  expect_snapshot_igraph_error(set_edge_attr(g, "test", value = c(1, 2)))
+  expect_snapshot_igraph_error(delete_graph_attr(g, "a"))
+  expect_snapshot_igraph_error(delete_vertex_attr(g, "a"))
+  expect_snapshot_igraph_error(delete_edge_attr(g, "a"))
+  expect_snapshot_igraph_error(assert_named_list("a"))
+  expect_snapshot_igraph_error(assert_named_list(list("a", "b")))
 })
 
 test_that("empty returns work", {
@@ -465,7 +465,7 @@ test_that("assign data.frame attributes works", {
 
 test_that("good error message when not using character", {
   ring <- graph_from_literal(A - B - C - D - E - F - G - A)
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     set_graph_attr(ring, 1, 1)
   })
 })
@@ -476,7 +476,7 @@ test_that("set_vertex_attrs() works", {
   expect_equal(V(g)$color, rep("blue", vcount(g)))
   expect_equal(V(g)$size, rep(10, vcount(g)))
   expect_equal(V(g)$name, LETTERS[1:10])
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     set_vertex_attrs(g)
   })
 
