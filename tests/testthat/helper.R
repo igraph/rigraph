@@ -51,7 +51,11 @@ expect_snapshot_igraph_error <- function(x, ...) {
     transform = function(y) {
       # Scrub file name and line number from error/warning messages
       # Handles "Source: filename:linenumber" and "At path/to/file:line :" patterns
-      y <- gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
+      y <- gsub(
+        "Source: [^:]+:(\\d+|xx|<linenumber>)",
+        "Source: <file>:<line>",
+        y
+      )
       y <- gsub("At [^:]+:(\\d+|xx) :", "At <file>:<line> :", y)
       y
     },
