@@ -536,6 +536,11 @@ igraph_cliques_callback:
     # Has callback parameter
     IGNORE: RR, RC, RInit
 
+igraph_cliques_callback_closure:
+    PARAMS: |-
+        GRAPH graph, INTEGER min_size=0, INTEGER max_size=0,
+        CLOSURE callback
+
 igraph_clique_size_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
@@ -549,6 +554,11 @@ igraph_maximal_cliques_subset:
 igraph_maximal_cliques_callback:
     # Has callback parameter
     IGNORE: RR, RC, RInit
+
+igraph_maximal_cliques_callback_closure:
+    PARAMS: |-
+        GRAPH graph, INTEGER min_size=0, INTEGER max_size=0,
+        CLOSURE callback
 
 igraph_maximal_cliques_count:
 
@@ -827,9 +837,35 @@ igraph_coreness:
 # Graph isomorphism
 #######################################
 
+igraph_get_isomorphisms_vf2_callback:
+    # Has callback parameter
+    IGNORE: RR, RC, RInit
+
+igraph_get_isomorphisms_vf2_callback_closure:
+    PARAMS: |-
+        GRAPH graph1, GRAPH graph2,
+        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
+        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
+        CLOSURE callback
+    DEPS: |-
+        vertex_color1 ON graph1, vertex_color2 ON graph2,
+        edge_color1 ON graph1, edge_color2 ON graph2
+
 igraph_get_subisomorphisms_vf2_callback:
     # Has callback parameter
-    IGNORE: RR, RC
+    IGNORE: RR, RC, RInit
+
+igraph_get_subisomorphisms_vf2_callback_closure:
+    PARAMS: |-
+        GRAPH graph1, GRAPH graph2,
+        OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
+        OPTIONAL EDGE_COLOR edge_color1, OPTIONAL EDGE_COLOR edge_color2,
+        OPTIONAL OUT INDEX_VECTOR map12, OPTIONAL OUT INDEX_VECTOR map21,
+        CLOSURE callback
+    DEPS: |-
+        vertex_color1 ON graph1, vertex_color2 ON graph2,
+        edge_color1 ON graph1, edge_color2 ON graph2
 
 igraph_subisomorphic_lad:
     # R function is hand-rolled - C signature changed, needs manual update
@@ -896,7 +932,12 @@ igraph_eigen_matrix_symmetric:
 
 igraph_simple_cycles_callback:
     # Has callback parameter
-    IGNORE: RR, RC
+    IGNORE: RR, RC, RInit
+
+igraph_simple_cycles_callback_closure:
+    PARAMS: |-
+        GRAPH graph, NEIMODE mode=OUT, INTEGER min_cycle_length=-1, INTEGER max_cycle_length=-1,
+        CLOSURE callback
 
 #######################################
 # Motifs

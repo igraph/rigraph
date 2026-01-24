@@ -13267,15 +13267,12 @@ SEXP R_igraph_read_graph_edgelist(SEXP instream, SEXP n, SEXP directed) {
 /-------------------------------------------*/
 SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP weights, SEXP directed) {
                                         /* Declarations */
-  igraph_t c_graph;
   FILE* c_instream;
   igraph_strvector_t c_predefnames;
   igraph_bool_t c_names;
   igraph_add_weights_t c_weights;
   igraph_bool_t c_directed;
-  SEXP graph;
 
-  SEXP r_result;
                                         /* Convert input */
   c_instream = Ry_igraph_fopen_read(instream);
   IGRAPH_FINALLY(fclose, c_instream);
@@ -13288,17 +13285,13 @@ SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP 
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_read_graph_ncol(&c_graph, c_instream, (Rf_isNull(predefnames) ? 0 : &c_predefnames), c_names, c_weights, c_directed));
+  IGRAPH_R_CHECK(igraph_read_graph_ncol(c_instream, (Rf_isNull(predefnames) ? 0 : &c_predefnames), c_names, c_weights, c_directed));
 
                                         /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
 
-  UNPROTECT(1);
-  return(r_result);
+
+
+  return(R_NilValue);
 }
 
 /*-------------------------------------------/
@@ -13306,14 +13299,11 @@ SEXP R_igraph_read_graph_ncol(SEXP instream, SEXP predefnames, SEXP names, SEXP 
 /-------------------------------------------*/
 SEXP R_igraph_read_graph_lgl(SEXP instream, SEXP names, SEXP weights, SEXP directed) {
                                         /* Declarations */
-  igraph_t c_graph;
   FILE* c_instream;
   igraph_bool_t c_names;
   igraph_add_weights_t c_weights;
   igraph_bool_t c_directed;
-  SEXP graph;
 
-  SEXP r_result;
                                         /* Convert input */
   c_instream = Ry_igraph_fopen_read(instream);
   IGRAPH_FINALLY(fclose, c_instream);
@@ -13323,17 +13313,13 @@ SEXP R_igraph_read_graph_lgl(SEXP instream, SEXP names, SEXP weights, SEXP direc
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_read_graph_lgl(&c_graph, c_instream, c_names, c_weights, c_directed));
+  IGRAPH_R_CHECK(igraph_read_graph_lgl(c_instream, c_names, c_weights, c_directed));
 
                                         /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
 
-  UNPROTECT(1);
-  return(r_result);
+
+
+  return(R_NilValue);
 }
 
 /*-------------------------------------------/
@@ -15995,89 +15981,6 @@ SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP 
 }
 
 /*-------------------------------------------/
-/ igraph_get_isomorphisms_vf2_callback       /
-/-------------------------------------------*/
-SEXP R_igraph_get_isomorphisms_vf2_callback(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
-                                        /* Declarations */
-  igraph_t c_graph1;
-  igraph_t c_graph2;
-  igraph_vector_int_t c_vertex_color1;
-  igraph_vector_int_t c_vertex_color2;
-  igraph_vector_int_t c_edge_color1;
-  igraph_vector_int_t c_edge_color2;
-  igraph_vector_int_t c_map12;
-  igraph_vector_int_t c_map21;
-
-
-
-
-  SEXP map12;
-  SEXP map21;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  Rz_SEXP_to_igraph(graph1, &c_graph1);
-  Rz_SEXP_to_igraph(graph2, &c_graph2);
-  if (!Rf_isNull(vertex_color1)) {
-    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1));
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
-  if (!Rf_isNull(vertex_color2)) {
-    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2));
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
-  if (!Rf_isNull(edge_color1)) {
-    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1));
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
-  if (!Rf_isNull(edge_color2)) {
-    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2));
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map12, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map12);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map21, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map21);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_isomorphisms_vf2_callback(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_map12, &c_map21, 0, 0, 0, 0));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  igraph_vector_int_destroy(&c_vertex_color1);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vertex_color2);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_edge_color1);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_edge_color2);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map12=Ry_igraph_vector_int_to_SEXPp1(&c_map12));
-  igraph_vector_int_destroy(&c_map12);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map21=Ry_igraph_vector_int_to_SEXPp1(&c_map21));
-  igraph_vector_int_destroy(&c_map21);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, map12);
-  SET_VECTOR_ELT(r_result, 1, map21);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("map12"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("map21"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_count_isomorphisms_vf2              /
 /-------------------------------------------*/
 SEXP R_igraph_count_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
@@ -18543,6 +18446,246 @@ SEXP R_igraph_version(void) {
 
   UNPROTECT(1);
   return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_cliques_callback_closure            /
+/-------------------------------------------*/
+SEXP R_igraph_cliques_callback_closure(SEXP graph, SEXP min_size, SEXP max_size, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_min_size;
+  igraph_integer_t c_max_size;
+  SEXP c_callback;
+
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_cliques_callback_closure(&c_graph, c_min_size, c_max_size, callback));
+
+                                        /* Convert output */
+
+
+
+  return(R_NilValue);
+}
+
+/*-------------------------------------------/
+/ igraph_maximal_cliques_callback_closure    /
+/-------------------------------------------*/
+SEXP R_igraph_maximal_cliques_callback_closure(SEXP graph, SEXP min_size, SEXP max_size, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_min_size;
+  igraph_integer_t c_max_size;
+  SEXP c_callback;
+
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_maximal_cliques_callback_closure(&c_graph, c_min_size, c_max_size, callback));
+
+                                        /* Convert output */
+
+
+
+  return(R_NilValue);
+}
+
+/*-------------------------------------------/
+/ igraph_get_isomorphisms_vf2_callback_closure /
+/-------------------------------------------*/
+SEXP R_igraph_get_isomorphisms_vf2_callback_closure(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph1;
+  igraph_t c_graph2;
+  igraph_vector_int_t c_vertex_color1;
+  igraph_vector_int_t c_vertex_color2;
+  igraph_vector_int_t c_edge_color1;
+  igraph_vector_int_t c_edge_color2;
+  igraph_vector_int_t c_map12;
+  igraph_vector_int_t c_map21;
+  SEXP c_callback;
+  SEXP map12;
+  SEXP map21;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph1, &c_graph1);
+  Rz_SEXP_to_igraph(graph2, &c_graph2);
+  if (!Rf_isNull(vertex_color1)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
+  if (!Rf_isNull(vertex_color2)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
+  if (!Rf_isNull(edge_color1)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
+  if (!Rf_isNull(edge_color2)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map12, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map12);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map21, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map21);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_isomorphisms_vf2_callback_closure(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_map12, &c_map21, callback));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  igraph_vector_int_destroy(&c_vertex_color1);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vertex_color2);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edge_color1);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edge_color2);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(map12=Ry_igraph_vector_int_to_SEXPp1(&c_map12));
+  igraph_vector_int_destroy(&c_map12);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(map21=Ry_igraph_vector_int_to_SEXPp1(&c_map21));
+  igraph_vector_int_destroy(&c_map21);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, map12);
+  SET_VECTOR_ELT(r_result, 1, map21);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("map12"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("map21"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_get_subisomorphisms_vf2_callback_closure /
+/-------------------------------------------*/
+SEXP R_igraph_get_subisomorphisms_vf2_callback_closure(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph1;
+  igraph_t c_graph2;
+  igraph_vector_int_t c_vertex_color1;
+  igraph_vector_int_t c_vertex_color2;
+  igraph_vector_int_t c_edge_color1;
+  igraph_vector_int_t c_edge_color2;
+  igraph_vector_int_t c_map12;
+  igraph_vector_int_t c_map21;
+  SEXP c_callback;
+  SEXP map12;
+  SEXP map21;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph1, &c_graph1);
+  Rz_SEXP_to_igraph(graph2, &c_graph2);
+  if (!Rf_isNull(vertex_color1)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
+  if (!Rf_isNull(vertex_color2)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
+  if (!Rf_isNull(edge_color1)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
+  if (!Rf_isNull(edge_color2)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map12, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map12);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_map21, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map21);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_subisomorphisms_vf2_callback_closure(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_map12, &c_map21, callback));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  igraph_vector_int_destroy(&c_vertex_color1);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vertex_color2);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edge_color1);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edge_color2);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(map12=Ry_igraph_vector_int_to_SEXPp1(&c_map12));
+  igraph_vector_int_destroy(&c_map12);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(map21=Ry_igraph_vector_int_to_SEXPp1(&c_map21));
+  igraph_vector_int_destroy(&c_map21);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, map12);
+  SET_VECTOR_ELT(r_result, 1, map21);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("map12"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("map21"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_simple_cycles_callback_closure      /
+/-------------------------------------------*/
+SEXP R_igraph_simple_cycles_callback_closure(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_neimode_t c_mode;
+  igraph_integer_t c_min_cycle_length;
+  igraph_integer_t c_max_cycle_length;
+  SEXP c_callback;
+
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_INT(min_cycle_length);
+  c_min_cycle_length = (igraph_integer_t) REAL(min_cycle_length)[0];
+  IGRAPH_R_CHECK_INT(max_cycle_length);
+  c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_simple_cycles_callback_closure(&c_graph, c_mode, c_min_cycle_length, c_max_cycle_length, callback));
+
+                                        /* Convert output */
+
+
+
+  return(R_NilValue);
 }
 
 /*-------------------------------------------/
