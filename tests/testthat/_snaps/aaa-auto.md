@@ -11211,3 +11211,13 @@
       [1] 3 5
       
 
+# weighted_sparsemat_impl basic
+
+    Code
+      weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
+    Output
+      IGRAPH D-W- 4 4 -- 
+      + attr: weight (e/n)
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+

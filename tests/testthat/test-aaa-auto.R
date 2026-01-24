@@ -11133,7 +11133,7 @@ test_that("sparse_adjacency_impl basic", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Create a simple sparse matrix
   M <- Matrix::sparseMatrix(
     i = c(1, 2, 3, 4),
@@ -11141,21 +11141,21 @@ test_that("sparse_adjacency_impl basic", {
     x = 1,
     dims = c(4, 4)
   )
-  
+
   expect_snapshot(sparse_adjacency_impl(adjmatrix = M))
   expect_snapshot(sparse_adjacency_impl(
     adjmatrix = M,
     mode = "undirected",
     loops = "once"
   ))
-  
+
   # Structured tests
   g1 <- sparse_adjacency_impl(adjmatrix = M)
   expect_s3_class(g1, "igraph")
   expect_equal(vcount(g1), 4)
   expect_equal(ecount(g1), 4)
   expect_true(is_directed(g1))
-  
+
   g2 <- sparse_adjacency_impl(
     adjmatrix = M,
     mode = "undirected",
@@ -11169,7 +11169,7 @@ test_that("sparse_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Invalid matrix
   expect_error(sparse_adjacency_impl(adjmatrix = matrix(1:4, 2, 2)))
 })
@@ -11180,7 +11180,7 @@ test_that("sparse_weighted_adjacency_impl basic", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Create a weighted sparse matrix
   M <- Matrix::sparseMatrix(
     i = c(1, 2, 3, 4),
@@ -11188,19 +11188,19 @@ test_that("sparse_weighted_adjacency_impl basic", {
     x = c(2.5, 1.0, 3.0, 0.5),
     dims = c(4, 4)
   )
-  
+
   expect_snapshot(sparse_weighted_adjacency_impl(adjmatrix = M))
   expect_snapshot(sparse_weighted_adjacency_impl(
     adjmatrix = M,
     mode = "undirected",
     loops = "once"
   ))
-  
+
   # Structured tests
   result <- sparse_weighted_adjacency_impl(adjmatrix = M)
   g1 <- result$graph
   weights <- result$weights
-  
+
   expect_s3_class(g1, "igraph")
   expect_equal(vcount(g1), 4)
   expect_equal(ecount(g1), 4)
@@ -11212,7 +11212,7 @@ test_that("sparse_weighted_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Invalid matrix
   expect_error(sparse_weighted_adjacency_impl(adjmatrix = matrix(1:4, 2, 2)))
 })
@@ -11223,7 +11223,7 @@ test_that("weighted_sparsemat_impl basic", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Create a weighted sparse matrix
   M <- Matrix::sparseMatrix(
     i = c(1, 2, 3, 4),
@@ -11231,14 +11231,14 @@ test_that("weighted_sparsemat_impl basic", {
     x = c(2.5, 1.0, 3.0, 0.5),
     dims = c(4, 4)
   )
-  
+
   expect_snapshot(weighted_sparsemat_impl(
     A = M,
     directed = TRUE,
     attr = "weight",
     loops = FALSE
   ))
-  
+
   # Structured tests
   g1 <- weighted_sparsemat_impl(
     A = M,
@@ -11246,7 +11246,7 @@ test_that("weighted_sparsemat_impl basic", {
     attr = "weight",
     loops = FALSE
   )
-  
+
   expect_s3_class(g1, "igraph")
   expect_equal(vcount(g1), 4)
   expect_true(is_directed(g1))
@@ -11257,7 +11257,7 @@ test_that("weighted_sparsemat_impl errors", {
   skip_if_not_installed("Matrix")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Invalid matrix
   expect_error(weighted_sparsemat_impl(
     A = matrix(1:4, 2, 2),
