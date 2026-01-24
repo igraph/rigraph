@@ -44,17 +44,19 @@ expect_not_identical_graphs <- function(g1, g2, ...) {
   expect_false(identical_graphs(g1, g2, ...))
 }
 
+scrub_igraph_file_paths <- function(y) {
+  # Scrub file name and line number from error/warning messages
+  # Handles "Source: filename:linenumber" and "At path/to/file:line :" patterns
+  y <- gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
+  y <- gsub("At [^:]+:(\\d+|xx) ?:", "At <file>:<line>:", y)
+  y
+}
+
 expect_snapshot_igraph_error <- function(x, ...) {
   inject(expect_snapshot(
     {{ x }},
     error = TRUE,
-    transform = function(y) {
-      # Scrub file name and line number from error/warning messages
-      # Handles "Source: filename:linenumber" and "At path/to/file:line :" patterns
-      y <- gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
-      y <- gsub("At [^:]+:(\\d+|xx) ?:", "At <file>:<line>:", y)
-      y
-    },
+    transform = scrub_igraph_file_paths,
     ...
   ))
 }
@@ -62,13 +64,7 @@ expect_snapshot_igraph_error <- function(x, ...) {
 expect_snapshot_igraph <- function(x, ...) {
   inject(expect_snapshot(
     {{ x }},
-    transform = function(y) {
-      # Scrub file name and line number from error/warning messages
-      # Handles "Source: filename:linenumber" and "At path/to/file:line :" patterns
-      y <- gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
-      y <- gsub("At [^:]+:(\\d+|xx) ?:", "At <file>:<line>:", y)
-      y
-    },
+    transform = scrub_igraph_file_paths,
     ...
   ))
 }
