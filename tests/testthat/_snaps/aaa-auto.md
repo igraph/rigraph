@@ -11197,7 +11197,8 @@
       connect_neighborhood_impl(graph = g, order = 1, mode = c("all", "out", "in"))
     Condition
       Warning in `connect_neighborhood_impl()`:
-      At vendor/cigraph/src/operators/connect_neighborhood.c:85 : Order smaller than two, graph will be unchanged.
+      Order smaller than two, graph will be unchanged.
+      Source: operators/connect_neighborhood.c:85
     Output
       IGRAPH U--- 5 5 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l)
