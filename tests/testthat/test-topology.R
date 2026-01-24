@@ -442,7 +442,6 @@ test_that("isomorphisms_vf2_callback works", {
 
   isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     count <<- count + 1
-    TRUE # continue search (but stop after a few)
     if (count >= 10) {
       return(FALSE)
     }

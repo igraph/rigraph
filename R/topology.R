@@ -1338,13 +1338,13 @@ transitive_closure <- function(graph) {
 #' @param graph2 The second graph.
 #' @param ... These dots are for future extensions and must be empty.
 #' @param vertex.color1,vertex.color2 Optional integer vectors giving the colors
-#'   of the vertices for colored graph isomorphism. If they are not given, but
-#'   the graph has a "color" vertex attribute, then it will be used. If you want
-#'   to ignore these attributes, then supply `NULL` for both of these arguments.
+#'   of the vertices for colored graph isomorphism. If `NULL` (the default) and
+#'   the graph has a "color" vertex attribute, then it will be used automatically.
+#'   To ignore vertex color attributes, pass an empty vector (e.g., `integer(0)`).
 #' @param edge.color1,edge.color2 Optional integer vectors giving the colors of
-#'   the edges for edge-colored (sub)graph isomorphism. If they are not given,
-#'   but the graph has a "color" edge attribute, then it will be used. If you
-#'   want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'   the edges for edge-colored (sub)graph isomorphism. If `NULL` (the default) and
+#'   the graph has a "color" edge attribute, then it will be used automatically.
+#'   To ignore edge color attributes, pass an empty vector (e.g., `integer(0)`).
 #' @param callback Optional function to call for each isomorphism found. If provided,
 #'   the function should accept two arguments: `map12` (integer vector mapping vertex
 #'   IDs from graph1 to graph2, 1-based indexing) and `map21` (integer vector mapping
@@ -1376,6 +1376,14 @@ transitive_closure <- function(graph) {
 #'   TRUE  # continue search
 #' })
 #' cat("Found at least", count, "isomorphisms\n")
+#' 
+#' # Ignore color attributes by passing empty vector
+#' g1$color <- 1
+#' g2$color <- 1
+#' isos_no_color <- isomorphisms_vf2(g1, g2, 
+#'   vertex.color1 = integer(0), 
+#'   vertex.color2 = integer(0)
+#' )
 isomorphisms_vf2 <- function(
   graph1,
   graph2,
@@ -1387,9 +1395,13 @@ isomorphisms_vf2 <- function(
   callback = NULL
 ) {
   # Argument checks
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   check_dots_empty()
 
   # Handle default vertex colors from attributes
+  # Empty vector (e.g., integer(0)) is treated as "no colors" and passed through
+  # NULL triggers auto-detection from graph attributes if present
   if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
     vertex.color1 <- V(graph1)$color
   }
@@ -1426,6 +1438,98 @@ isomorphisms_vf2 <- function(
   } else {
     # Callback mode: call user function
     get_isomorphisms_vf2_callback_closure_impl(
+      graph1 = graph1,
+      graph2 = graph2,
+      vertex_color1 = vertex.color1,
+      vertex_color2 = vertex.color2,
+      edge_color1 = edge.color1,
+      edge_color2 = edge.color2,
+      callback = callback
+    )
+    invisible(NULL)
+  }
+}
+
+#' Find subisomorphisms between two graphs using VF2 algorithm
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function searches for subisomorphisms of graph1 in graph2 using the VF2
+#' algorithm. A subisomorphism is an isomorphism between graph1 and a subgraph of graph2.
+#' It can work in two modes: collector mode (default) or callback mode.
+#'
+#' @inheritParams isomorphisms_vf2
+#' @return If `callback` is `NULL`, returns a list with two elements: `map12` (list
+#'   of integer vectors with mappings from graph1 to graph2) and `map21` (list of
+#'   integer vectors with mappings from graph2 to graph1). If `callback` is provided,
+#'   returns `NULL` invisibly.
+#' @seealso [isomorphic()], [isomorphisms_vf2()]
+#'
+#' @export
+#' @family graph isomorphism
+#' @cdocs igraph_get_subisomorphisms_vf2 igraph_get_subisomorphisms_vf2_callback
+#'
+#' @examples
+#' # Find a triangle in a larger graph
+#' g1 <- make_ring(3)  # triangle
+#' g2 <- make_full_graph(5)
+#' subisos <- subisomorphisms_vf2(g1, g2)
+#' cat("Found", length(subisos$map12), "subisomorphisms\n")
+subisomorphisms_vf2 <- function(
+  graph1,
+  graph2,
+  ...,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL,
+  callback = NULL
+) {
+  # Argument checks
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
+  check_dots_empty()
+  
+  # Handle default vertex colors from attributes
+  # Empty vector (e.g., integer(0)) is treated as "no colors" and passed through
+  # NULL triggers auto-detection from graph attributes if present
+  if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
+    vertex.color1 <- V(graph1)$color
+  }
+  if (is.null(vertex.color2) && "color" %in% vertex_attr_names(graph2)) {
+    vertex.color2 <- V(graph2)$color
+  }
+
+  # Handle default edge colors from attributes
+  if (is.null(edge.color1) && "color" %in% edge_attr_names(graph1)) {
+    edge.color1 <- E(graph1)$color
+  }
+  if (is.null(edge.color2) && "color" %in% edge_attr_names(graph2)) {
+    edge.color2 <- E(graph2)$color
+  }
+
+  if (is.null(callback)) {
+    # Collector mode: collect all subisomorphisms
+    map12_list <- list()
+    map21_list <- list()
+    get_subisomorphisms_vf2_callback_closure_impl(
+      graph1 = graph1,
+      graph2 = graph2,
+      vertex_color1 = vertex.color1,
+      vertex_color2 = vertex.color2,
+      edge_color1 = edge.color1,
+      edge_color2 = edge.color2,
+      callback = function(map12, map21) {
+        map12_list[[length(map12_list) + 1]] <<- map12
+        map21_list[[length(map21_list) + 1]] <<- map21
+        TRUE
+      }
+    )
+    list(map12 = map12_list, map21 = map21_list)
+  } else {
+    # Callback mode: call user function
+    get_subisomorphisms_vf2_callback_closure_impl(
       graph1 = graph1,
       graph2 = graph2,
       vertex_color1 = vertex.color1,

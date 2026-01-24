@@ -253,18 +253,12 @@ cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
   check_dots_empty()
 
   if (is.null(callback)) {
-    # Collector mode: collect all cliques in a list
-    cliques_list <- list()
-    cliques_callback_closure_impl(
+    # Collector mode: use original implementation
+    cliques_impl(
       graph = graph,
-      min_size = min %||% 0,
-      max_size = max %||% 0,
-      callback = function(clique) {
-        cliques_list[[length(cliques_list) + 1]] <<- clique
-        TRUE
-      }
+      min = min %||% 0,
+      max = max %||% 0
     )
-    cliques_list
   } else {
     # Callback mode: call user function
     cliques_callback_closure_impl(
@@ -339,42 +333,35 @@ max_cliques <- function(
     return(invisible(NULL))
   }
 
-  # Use callback-based implementation for both callback and collector modes
+  # Collector or callback mode
   if (is.null(callback)) {
-    # Collector mode: collect all cliques in a list
-    cliques_list <- list()
-    maximal_cliques_callback_closure_impl(
-      graph = graph,
-      min_size = min %||% 0,
-      max_size = max %||% 0,
-      callback = function(clique) {
-        cliques_list[[length(cliques_list) + 1]] <<- clique
-        TRUE
-      }
-    )
-
-    # Note: subset parameter is not supported with callback-based implementation
-    if (!is.null(subset)) {
-      cli::cli_abort(
-        "{.arg subset} is ignored when {.arg callback} is provided"
-      )
+    # Collector mode: use original implementation
+    if (is.null(subset)) {
+      subset_arg <- NULL
+    } else {
+      subset_arg <- as.numeric(as_igraph_vs(graph, subset) - 1)
     }
+    
+    on.exit(.Call(Rx_igraph_finalizer))
+    res <- .Call(
+      Rx_igraph_maximal_cliques,
+      graph,
+      subset_arg,
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
+    )
+    res <- lapply(res, function(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
-      cliques_list <- lapply(
-        cliques_list,
-        unsafe_create_vs,
-        graph = graph,
-        verts = V(graph)
-      )
+      res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
     }
 
-    cliques_list
+    res
   } else {
     # Callback mode: call user function
     if (!is.null(subset)) {
       cli::cli_abort(
-        "{.arg subset} is ignored when {.arg callback} is provided"
+        "{.arg subset} is not supported when {.arg callback} is provided"
       )
     }
 
