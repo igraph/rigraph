@@ -533,8 +533,8 @@ test_that("subisomorphisms works with callback works", {
 
 test_that("subisomorphisms works with callback can stop early", {
   # Find triangles in a complete graph
-  g1 <- make_ring(3) # triangle
-  g2 <- make_full_graph(6)
+  g1 <- make_full_graph(6)
+  g2 <- make_ring(3) # triangle
 
   # Stop after finding 3 subisomorphisms
   count <- 0
@@ -557,8 +557,8 @@ test_that("subisomorphisms works with callback can stop early", {
 })
 
 test_that("subisomorphisms works with callback receives correct arguments", {
-  g1 <- make_ring(3)
-  g2 <- make_full_graph(5)
+  g1 <- make_full_graph(5)
+  g2 <- make_ring(3)
 
   # Extract graph information before callback (cannot call igraph functions from callback)
   n1 <- vcount(g1)

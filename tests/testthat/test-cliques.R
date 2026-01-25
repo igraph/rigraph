@@ -405,7 +405,7 @@ test_that("cliques_callback handles errors in callback", {
   )
 })
 
-test_that("maximal_cliques_callback works", {
+test_that("max_cliques works with callback", {
   withr::local_seed(123)
 
   g <- sample_gnp(15, 0.3)
@@ -414,7 +414,7 @@ test_that("maximal_cliques_callback works", {
   count <- 0
   clique_sizes <- integer(0)
 
-  maximal_cliques(g, min = 3, callback = function(clique) {
+  max_cliques(g, min = 3, callback = function(clique) {
     count <<- count + 1
     clique_sizes <<- c(clique_sizes, length(clique))
     TRUE # continue search
@@ -424,7 +424,7 @@ test_that("maximal_cliques_callback works", {
   expect_true(all(clique_sizes >= 3))
 })
 
-test_that("maximal_cliques_callback can stop early", {
+test_that("max_cliques can stop early with callback", {
   withr::local_seed(123)
 
   g <- sample_gnp(15, 0.3)
@@ -432,7 +432,7 @@ test_that("maximal_cliques_callback can stop early", {
   # Stop after finding 3 maximal cliques
   count <- 0
 
-  maximal_cliques(g, callback = function(clique) {
+  max_cliques(g, callback = function(clique) {
     count <<- count + 1
     if (count >= 3) {
       FALSE # stop after 3 cliques
@@ -444,12 +444,12 @@ test_that("maximal_cliques_callback can stop early", {
   expect_equal(count, 3)
 })
 
-test_that("maximal_cliques_callback handles errors in callback", {
+test_that("max_cliques handles errors in callback", {
   g <- make_full_graph(5)
 
   # Callback that throws an error
   expect_error(
-    maximal_cliques(g, callback = function(clique) {
+    max_cliques(g, callback = function(clique) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"

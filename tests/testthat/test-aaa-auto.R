@@ -11436,8 +11436,8 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
-  g1 <- make_ring(3) # triangle
-  g2 <- make_full_graph(5)
+  g1 <- make_full_graph(5)
+  g2 <- make_ring(3) # triangle
 
   # Collect subisomorphism information for snapshot
   subiso_data <- list()
