@@ -55,14 +55,14 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
   /* Call the R function: callback(vids, isoclass) */
   PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
   PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-  
+
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
     UNPROTECT(4);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
-  
+
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
@@ -77,9 +77,9 @@ igraph_error_t igraph_motifs_randesu_callback_closure(
     igraph_integer_t size,
     const igraph_vector_t *cut_prob,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_motifs_randesu_callback(
       graph, size, cut_prob,
       R_igraph_motifs_handler, &data);
@@ -101,14 +101,14 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
   /* Call the R function: callback(clique) */
   PROTECT(R_fcall = Rf_lang2(callback, clique_r));
   PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-  
+
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
     UNPROTECT(3);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
-  
+
   cres = Rf_asLogical(result);
 
   UNPROTECT(3);
@@ -122,9 +122,9 @@ igraph_error_t igraph_cliques_callback_closure(
     igraph_integer_t min_size,
     igraph_integer_t max_size,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_cliques_callback(
       graph, min_size, max_size,
       R_igraph_clique_handler, &data);
@@ -135,9 +135,9 @@ igraph_error_t igraph_maximal_cliques_callback_closure(
     igraph_integer_t min_size,
     igraph_integer_t max_size,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_maximal_cliques_callback(
       graph, R_igraph_clique_handler, &data,
       min_size, max_size);
@@ -148,7 +148,7 @@ igraph_error_t R_igraph_cycle_handler(
     const igraph_vector_int_t *vertices,
     const igraph_vector_int_t *edges,
     void *extra) {
-  
+
   R_igraph_callback_data_t *data = (R_igraph_callback_data_t *)extra;
   SEXP callback = data->callback;
   SEXP vertices_r, edges_r, R_fcall, result;
@@ -169,14 +169,14 @@ igraph_error_t R_igraph_cycle_handler(
   /* Call the R function: callback(vertices, edges) */
   PROTECT(R_fcall = Rf_lang3(callback, vertices_r, edges_r));
   PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-  
+
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
     UNPROTECT(4);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
-  
+
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
@@ -191,9 +191,9 @@ igraph_error_t igraph_simple_cycles_callback_closure(
     igraph_integer_t min_cycle_length,
     igraph_integer_t max_cycle_length,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_simple_cycles_callback(
       graph, mode, min_cycle_length, max_cycle_length,
       R_igraph_cycle_handler, &data);
@@ -204,7 +204,7 @@ igraph_error_t R_igraph_isomorphism_handler(
     const igraph_vector_int_t *map12,
     const igraph_vector_int_t *map21,
     void *extra) {
-  
+
   R_igraph_callback_data_t *data = (R_igraph_callback_data_t *)extra;
   SEXP callback = data->callback;
   SEXP map12_r, map21_r, R_fcall, result;
@@ -225,14 +225,14 @@ igraph_error_t R_igraph_isomorphism_handler(
   /* Call the R function: callback(map12, map21) */
   PROTECT(R_fcall = Rf_lang3(callback, map12_r, map21_r));
   PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-  
+
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
     UNPROTECT(4);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
-  
+
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
@@ -249,9 +249,9 @@ igraph_error_t igraph_get_isomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_get_isomorphisms_vf2_callback(
       graph1, graph2,
       vertex_color1, vertex_color2,
@@ -269,9 +269,9 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
     SEXP callback) {
-  
+
   R_igraph_callback_data_t data = { .callback = callback };
-  
+
   return igraph_get_subisomorphisms_vf2_callback(
       graph1, graph2,
       vertex_color1, vertex_color2,
