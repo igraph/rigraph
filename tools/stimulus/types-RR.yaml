@@ -196,9 +196,9 @@ VERTEX:
     CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) != 1) {
+        if (length(%I%) == 0) {
           cli::cli_abort(
-            "{.arg %I%} must specify exactly one vertex",
+            "{.arg %I%} must specify at least one vertex",
             call = rlang::caller_env()
           )
         }
@@ -229,9 +229,9 @@ VERTEX_ROOT:
     CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) != 1) {
+        if (length(%I%) == 0) {
           cli::cli_abort(
-            "{.arg %I%} must specify exactly one vertex",
+            "{.arg %I%} must specify at least one vertex",
             call = rlang::caller_env()
           )
         }
@@ -405,7 +405,7 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%_wrapped'
-    INCONV: |-
+    INCONV: |
         if (!is.function(%I%)) {
           cli::cli_abort("{.arg callback} must be a function")
         }
