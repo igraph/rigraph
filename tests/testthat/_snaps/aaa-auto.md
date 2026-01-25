@@ -11464,7 +11464,8 @@
 # subisomorphic_lad_impl errors
 
     Code
-      subisomorphic_lad_impl(pattern = NULL, target = g, induced = FALSE, time_limit = 0)
+      subisomorphic_lad_impl(pattern = NULL, target = g, domains = list(), induced = FALSE,
+      time_limit = 0)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).

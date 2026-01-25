@@ -11404,11 +11404,11 @@ test_that("get_eid_impl basic", {
   )
   expect_s3_class(result, "igraph.es")
   expect_length(result, 1)
-  
+
   # Test that it finds the correct edge
   result_int <- as.integer(result)
-  expect_equal(result_int, 1L)  # First edge is 0->1
-  
+  expect_equal(result_int, 1L) # First edge is 0->1
+
   # Test directed vs undirected
   result_directed <- get_eid_impl(
     graph = g,
@@ -11425,20 +11425,20 @@ test_that("get_eid_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
-  
+
   expect_snapshot_igraph_error(get_eid_impl(
     graph = NULL,
     from = 1,
     to = 2
   ))
-  
+
   # Test error when from or to is not exactly one vertex
   expect_snapshot_igraph_error(get_eid_impl(
     graph = g,
     from = c(1, 2),
     to = 2
   ))
-  
+
   expect_snapshot_igraph_error(get_eid_impl(
     graph = g,
     from = 1,
@@ -11450,7 +11450,10 @@ test_that("get_eid_impl errors", {
 test_that("community_voronoi_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- add_edges_impl(empty_impl(n = 10), c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9))
+  g <- add_edges_impl(
+    empty_impl(n = 10),
+    c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9)
+  )
 
   expect_snapshot(community_voronoi_impl(
     graph = g
@@ -11470,7 +11473,7 @@ test_that("community_voronoi_impl basic", {
 test_that("community_voronoi_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   expect_snapshot_igraph_error(community_voronoi_impl(
     graph = NULL
   ))
@@ -11480,7 +11483,7 @@ test_that("community_voronoi_impl errors", {
 test_that("subisomorphic_lad_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex setup with pattern/target graphs and domains
   # For now, just verify the function exists and has correct signature
@@ -11495,7 +11498,7 @@ test_that("subisomorphic_lad_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
-  
+
   expect_snapshot_igraph_error(subisomorphic_lad_impl(
     pattern = NULL,
     target = g,
@@ -11503,7 +11506,7 @@ test_that("subisomorphic_lad_impl errors", {
     induced = FALSE,
     time_limit = 0
   ))
-  
+
   # Test that domains must be a list
   expect_snapshot_igraph_error(subisomorphic_lad_impl(
     pattern = g,
@@ -11518,7 +11521,7 @@ test_that("subisomorphic_lad_impl errors", {
 test_that("eigen_matrix_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
@@ -11532,7 +11535,7 @@ test_that("eigen_matrix_impl basic", {
 test_that("eigen_matrix_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Test with invalid matrix dimensions
   expect_error(eigen_matrix_impl(
     A = matrix(0, 0, 0),
@@ -11548,7 +11551,7 @@ test_that("eigen_matrix_impl errors", {
 test_that("eigen_matrix_symmetric_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # FIXME: Add functionality tests once we understand the expected behavior
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
@@ -11562,7 +11565,7 @@ test_that("eigen_matrix_symmetric_impl basic", {
 test_that("eigen_matrix_symmetric_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Test with invalid matrix dimensions
   expect_error(eigen_matrix_symmetric_impl(
     A = matrix(0, 0, 0),
