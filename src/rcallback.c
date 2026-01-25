@@ -54,18 +54,7 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
 
   /* Call the R function: callback(vids, isoclass) */
   PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
-  
-  /* Use R_tryEval to handle errors and prevent nested .Call issues */
-  int errorOccurred;
-  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
-  
-  if (errorOccurred) {
-    UNPROTECT(3);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-  
-  PROTECT(result);
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -111,18 +100,7 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
 
   /* Call the R function: callback(clique) */
   PROTECT(R_fcall = Rf_lang2(callback, clique_r));
-  
-  /* Use R_tryEval to handle errors and prevent nested .Call issues */
-  int errorOccurred;
-  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
-  
-  if (errorOccurred) {
-    UNPROTECT(2);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-  
-  PROTECT(result);
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -190,18 +168,7 @@ igraph_error_t R_igraph_cycle_handler(
 
   /* Call the R function: callback(vertices, edges) */
   PROTECT(R_fcall = Rf_lang3(callback, vertices_r, edges_r));
-  
-  /* Use R_tryEval to handle errors and prevent nested .Call issues */
-  int errorOccurred;
-  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
-  
-  if (errorOccurred) {
-    UNPROTECT(3);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-  
-  PROTECT(result);
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -242,7 +209,6 @@ igraph_error_t R_igraph_isomorphism_handler(
   SEXP callback = data->callback;
   SEXP map12_r, map21_r, R_fcall, result;
   igraph_bool_t cres;
-  int errorOccurred;
 
   /* Create R vector for map12 (add 1 for R's 1-based indexing) */
   PROTECT(map12_r = NEW_INTEGER(igraph_vector_int_size(map12)));
@@ -258,18 +224,7 @@ igraph_error_t R_igraph_isomorphism_handler(
 
   /* Call the R function: callback(map12, map21) */
   PROTECT(R_fcall = Rf_lang3(callback, map12_r, map21_r));
-  
-  /* Use R_tryEval to handle errors without longjmp */
-  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
-  
-  if (errorOccurred) {
-    UNPROTECT(3);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-  
-  /* Protect the result after successful evaluation */
-  PROTECT(result);
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
