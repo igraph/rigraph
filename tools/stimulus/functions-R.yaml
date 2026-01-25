@@ -449,12 +449,31 @@ igraph_bfs:
     # Has callback parameter (BFS_FUNC)
     IGNORE: RR, RC, RInit
 
+igraph_bfs_closure:
+    PARAMS: |-
+        GRAPH graph, VERTEX root, OPTIONAL VERTEX_INDICES roots,
+        NEIMODE mode=OUT, BOOLEAN unreachable,
+        VERTEX_INDICES restricted,
+        OUT VERTEX_INDICES order, OUT VECTOR_INT rank,
+        OUT VECTOR_INT parents,
+        OUT VECTOR_INT pred, OUT VECTOR_INT succ,
+        OUT VECTOR_INT dist, CLOSURE callback
+    DEPS: root ON graph, roots ON graph, restricted ON graph, order ON graph
+
 igraph_bfs_simple:
     DEPS: root ON graph, order ON graph
 
 igraph_dfs:
     # Has callback parameter (DFS_FUNC)
     IGNORE: RR, RC, RInit
+
+igraph_dfs_closure:
+    PARAMS: |-
+        GRAPH graph, VERTEX root, NEIMODE mode=OUT, BOOLEAN unreachable,
+        OUT VERTEX_INDICES order, OUT VERTEX_INDICES order_out,
+        OUT VECTOR_INT father, OUT VECTOR_INT dist,
+        CLOSURE in_callback, CLOSURE out_callback
+    DEPS: root ON graph, order ON graph, order_out ON graph
 
 #######################################
 # Bipartite graphs

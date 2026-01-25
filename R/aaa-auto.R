@@ -13961,6 +13961,131 @@ version_impl <- function(
   res
 }
 
+bfs_closure_impl <- function(
+  graph,
+  root,
+  roots = NULL,
+  mode = c("out", "in", "all", "total"),
+  unreachable,
+  restricted,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  root <- as_igraph_vs(graph, root)
+  if (length(root) == 0) {
+    cli::cli_abort(
+      "{.arg root} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  if (!is.null(roots)) {
+    roots <- as_igraph_vs(graph, roots)
+  }
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+  unreachable <- as.logical(unreachable)
+  restricted <- as_igraph_vs(graph, restricted)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_bfs_closure,
+    graph,
+    root - 1,
+    roots - 1,
+    mode,
+    unreachable,
+    restricted - 1,
+    callback_wrapped
+  )
+  if (igraph_opt("return.vs.es")) {
+    res$order <- create_vs(graph, res$order)
+  }
+  res
+}
+
+dfs_closure_impl <- function(
+  graph,
+  root,
+  mode = c("out", "in", "all", "total"),
+  unreachable,
+  in_callback,
+  out_callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  root <- as_igraph_vs(graph, root)
+  if (length(root) == 0) {
+    cli::cli_abort(
+      "{.arg root} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+  unreachable <- as.logical(unreachable)
+  if (!is.function(in_callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  in_callback_wrapped <- function(...) {
+    tryCatch(
+      in_callback(...),
+      error = function(e) e
+    )
+  }
+
+  if (!is.function(out_callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  out_callback_wrapped <- function(...) {
+    tryCatch(
+      out_callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_dfs_closure,
+    graph,
+    root - 1,
+    mode,
+    unreachable,
+    in_callback_wrapped,
+    out_callback_wrapped
+  )
+  if (igraph_opt("return.vs.es")) {
+    res$order <- create_vs(graph, res$order)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$order_out <- create_vs(graph, res$order_out)
+  }
+  res
+}
+
 cliques_callback_closure_impl <- function(
   graph,
   min_size = 0,

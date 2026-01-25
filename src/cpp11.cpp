@@ -52,6 +52,7 @@ extern SEXP R_igraph_barabasi_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEX
 extern SEXP R_igraph_betweenness(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_bfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bfs_simple(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_biadjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bibcoupling(SEXP, SEXP);
@@ -135,6 +136,7 @@ extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices_idx(SEXP, SEXP);
 extern SEXP R_igraph_density(SEXP, SEXP);
 extern SEXP R_igraph_deterministic_optimal_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_dfs_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_diameter(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_diameter_dijkstra(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_difference(SEXP, SEXP);
@@ -652,6 +654,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_betweenness",                                (DL_FUNC) &R_igraph_betweenness,                                 4},
     {"R_igraph_betweenness_cutoff",                         (DL_FUNC) &R_igraph_betweenness_cutoff,                          5},
     {"R_igraph_betweenness_subset",                         (DL_FUNC) &R_igraph_betweenness_subset,                          6},
+    {"R_igraph_bfs_closure",                                (DL_FUNC) &R_igraph_bfs_closure,                                 7},
     {"R_igraph_bfs_simple",                                 (DL_FUNC) &R_igraph_bfs_simple,                                  3},
     {"R_igraph_biadjacency",                                (DL_FUNC) &R_igraph_biadjacency,                                 4},
     {"R_igraph_bibcoupling",                                (DL_FUNC) &R_igraph_bibcoupling,                                 2},
@@ -735,6 +738,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_delete_vertices_idx",                        (DL_FUNC) &R_igraph_delete_vertices_idx,                         2},
     {"R_igraph_density",                                    (DL_FUNC) &R_igraph_density,                                     2},
     {"R_igraph_deterministic_optimal_imitation",            (DL_FUNC) &R_igraph_deterministic_optimal_imitation,             6},
+    {"R_igraph_dfs_closure",                                (DL_FUNC) &R_igraph_dfs_closure,                                 6},
     {"R_igraph_diameter",                                   (DL_FUNC) &R_igraph_diameter,                                    3},
     {"R_igraph_diameter_dijkstra",                          (DL_FUNC) &R_igraph_diameter_dijkstra,                           4},
     {"R_igraph_difference",                                 (DL_FUNC) &R_igraph_difference,                                  2},
