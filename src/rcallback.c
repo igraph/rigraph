@@ -390,8 +390,8 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
   R_igraph_levc_callback_data_t data = { 
     .callback = callback, 
     .extra = extra ? extra : R_NilValue,  /* Convert NULL to R_NilValue */
-    .env = env,
-    .env_arp = env_arp
+    .env = env ? env : R_GlobalEnv,  /* Ensure env is never NULL */
+    .env_arp = env_arp ? env_arp : R_GlobalEnv  /* Ensure env_arp is never NULL */
   };
 
   return igraph_community_leading_eigenvector(

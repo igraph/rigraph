@@ -156,6 +156,10 @@ igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *re
 igraph_error_t Rw_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
 igraph_error_t Rw_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
 
+/* Helper functions */
+SEXP Rx_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
+SEXP Rx_igraph_getListElement(SEXP list, const char *str);
+
 /* Declarations for functions from rinterface.c needed by wrappers in rinterface_extra.c */
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);

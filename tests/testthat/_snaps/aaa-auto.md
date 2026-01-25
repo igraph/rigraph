@@ -11007,6 +11007,14 @@
       [1] 0 0 0 1 1 1
       
 
+# community_leading_eigenvector_impl errors
+
+    Code
+      community_leading_eigenvector_impl(graph = g, steps = -100)
+    Condition
+      Error in `community_leading_eigenvector_impl()`:
+      ! could not find function "community_leading_eigenvector_impl"
+
 # edge_connectivity_impl basic
 
     Code
