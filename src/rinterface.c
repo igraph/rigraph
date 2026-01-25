@@ -18750,7 +18750,7 @@ SEXP R_igraph_cliques_callback_closure(SEXP graph, SEXP min_size, SEXP max_size,
   igraph_t c_graph;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -18776,7 +18776,7 @@ SEXP R_igraph_maximal_cliques_callback_closure(SEXP graph, SEXP min_size, SEXP m
   igraph_t c_graph;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -18805,7 +18805,7 @@ SEXP R_igraph_get_isomorphisms_vf2_callback_closure(SEXP graph1, SEXP graph2, SE
   igraph_vector_int_t c_vertex_color2;
   igraph_vector_int_t c_edge_color1;
   igraph_vector_int_t c_edge_color2;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph1, &c_graph1);
@@ -18862,7 +18862,7 @@ SEXP R_igraph_get_subisomorphisms_vf2_callback_closure(SEXP graph1, SEXP graph2,
   igraph_vector_int_t c_vertex_color2;
   igraph_vector_int_t c_edge_color1;
   igraph_vector_int_t c_edge_color2;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph1, &c_graph1);
@@ -18917,7 +18917,7 @@ SEXP R_igraph_simple_cycles_callback_closure(SEXP graph, SEXP mode, SEXP min_cyc
   igraph_neimode_t c_mode;
   igraph_integer_t c_min_cycle_length;
   igraph_integer_t c_max_cycle_length;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -18944,7 +18944,7 @@ SEXP R_igraph_motifs_randesu_callback_closure(SEXP graph, SEXP size, SEXP cut_pr
   igraph_t c_graph;
   igraph_integer_t c_size;
   igraph_vector_t c_cut_prob;
-  SEXP c_callback;
+
 
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
