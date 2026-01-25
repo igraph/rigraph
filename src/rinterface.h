@@ -141,6 +141,84 @@ void igraph_vector_int_destroy_pv(void *pv_ptr);
 void igraph_vector_bool_destroy_pv(void *pv_ptr);
 void igraph_vector_int_list_destroy_pv(void *pv_ptr);
 
+/* Local finally stack for reentrant variants of IGRAPH_FINALLY* API */
+
+// Maximum number of elements in a local finally stack
+#define IGRAPH_LOCAL_FINALLY_STACK_SIZE 100
+
+// Declare a local finally stack.
+// This should be placed at the beginning of a function.
+// After this declaration, use IGRAPH_LOCAL_R_CHECK instead of IGRAPH_R_CHECK.
+#define IGRAPH_LOCAL_FINALLY_STACK \
+    struct igraph_i_protectedPtr igraph_i_local_finally_stack[IGRAPH_LOCAL_FINALLY_STACK_SIZE]; \
+    int igraph_i_local_finally_stack_size = 0
+
+// Add a destructor to the local finally stack
+#define IGRAPH_LOCAL_FINALLY_REAL(func_arg, ptr_arg) \
+    do { \
+        int no = igraph_i_local_finally_stack_size; \
+        if (no >= IGRAPH_LOCAL_FINALLY_STACK_SIZE) { \
+            IGRAPH_FATALF("Local finally stack too large: it contains %d elements.", no); \
+        } \
+        igraph_i_local_finally_stack[no].ptr = (ptr_arg); \
+        igraph_i_local_finally_stack[no].func = (func_arg); \
+        igraph_i_local_finally_stack[no].level = 0; \
+        igraph_i_local_finally_stack_size++; \
+    } while (0)
+
+// Remove items from the local finally stack without calling their destructors
+#define IGRAPH_LOCAL_FINALLY_CLEAN(minus) \
+    do { \
+        igraph_i_local_finally_stack_size -= (minus); \
+        if (igraph_i_local_finally_stack_size < 0) { \
+            int left = igraph_i_local_finally_stack_size + (minus); \
+            igraph_i_local_finally_stack_size = 0; \
+            IGRAPH_FATALF("Corrupt local finally stack: trying to pop %d element(s) when only %d left.", (minus), left); \
+        } \
+    } while (0)
+
+// Call all destructors in the local finally stack and empty it
+#define IGRAPH_LOCAL_FINALLY_FREE() \
+    do { \
+        for (; igraph_i_local_finally_stack_size > 0; igraph_i_local_finally_stack_size--) { \
+            int p = igraph_i_local_finally_stack_size - 1; \
+            igraph_i_local_finally_stack[p].func(igraph_i_local_finally_stack[p].ptr); \
+        } \
+    } while (0)
+
+// Variant of IGRAPH_FINALLY for the local stack
+#define IGRAPH_LOCAL_FINALLY(func, ptr) \
+    do { \
+        if (0) { func(ptr); } \
+        IGRAPH_LOCAL_FINALLY_REAL((igraph_finally_func_t*)(func), (ptr)); \
+    } while (0)
+
+// Variant of IGRAPH_FINALLY_PV for the local stack (satisfies UBSAN checks)
+#define IGRAPH_LOCAL_FINALLY_PV(func, ptr) \
+    do { \
+        if (0) { func(ptr); } \
+        IGRAPH_LOCAL_FINALLY_REAL((func##_pv), (ptr)); \
+    } while (0)
+
+// Variant of IGRAPH_R_CHECK for functions with local finally stacks
+// This ensures the local stack is cleaned up before calling error handlers
+#define IGRAPH_LOCAL_R_CHECK(func) \
+    do { \
+        Rx_igraph_attribute_clean_preserve_list(); \
+        Rx_igraph_set_in_r_check(true); \
+        igraph_error_type_t __c = func; \
+        Rx_igraph_set_in_r_check(false); \
+        Rx_igraph_warning(); \
+        if (__c == IGRAPH_INTERRUPTED) { \
+            IGRAPH_LOCAL_FINALLY_FREE(); \
+            Rx_igraph_interrupt(); \
+        } \
+        else if (__c != IGRAPH_SUCCESS) { \
+            IGRAPH_LOCAL_FINALLY_FREE(); \
+            Rx_igraph_error(); \
+        } \
+    } while (0)
+
 #define IGRAPH_R_CHECK_INT(v) R_check_int_scalar(v)
 #define IGRAPH_R_CHECK_REAL(v) R_check_real_scalar(v)
 #define IGRAPH_R_CHECK_BOOL(v) R_check_bool_scalar(v)

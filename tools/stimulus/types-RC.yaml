@@ -5,30 +5,30 @@ GRAPH:
         IN: Rz_SEXP_to_igraph(%I%, &%C%);
         INOUT: |-
             Rz_SEXP_to_igraph_copy(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_destroy, &%C%);
     OUTCONV:
         INOUT: |-
             PROTECT(%I%=Ry_igraph_to_SEXP(&%C%));
             IGRAPH_I_DESTROY(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
-            IGRAPH_FINALLY(igraph_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_destroy, &%C%);
             PROTECT(%I%=Ry_igraph_to_SEXP(&%C%));
             IGRAPH_I_DESTROY(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 GRAPH_LIST:
     CALL: '&%C%'
     CTYPE: igraph_graph_list_t
     INCONV:
         OUT: |-
-            IGRAPH_R_CHECK(igraph_graph_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_graph_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_graph_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_graphlist_to_SEXP(&%C%));
             IGRAPH_FREE(%C%.stor_begin);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 GRAPH_PTR_LIST:
     CALL: '&%C%'
@@ -36,19 +36,19 @@ GRAPH_PTR_LIST:
     INCONV:
         IN: |-
             igraph_t *%C%_storage;
-            IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(%I%, &%C%, &%C%_storage));
-            IGRAPH_FINALLY(igraph_vector_ptr_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_graph_ptr_list(%I%, &%C%, &%C%_storage));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_ptr_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_ptr_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_ptr_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_ptr_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_graph_ptr_list_to_SEXP(&%C%));
             igraph_vector_ptr_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 INTEGER:
     CTYPE: igraph_integer_t
@@ -101,7 +101,7 @@ INFILE:
     INCONV:
         IN: |-
             %C% = Ry_igraph_fopen_read(%I%);
-            IGRAPH_FINALLY(fclose, %C%);
+            IGRAPH_LOCAL_FINALLY(fclose, %C%);
 
 OUTFILE:
     CTYPE: FILE*
@@ -110,7 +110,7 @@ OUTFILE:
     INCONV:
         IN: |-
             %C% = Ry_igraph_fopen_write(%I%);
-            IGRAPH_FINALLY(fclose, %C%);
+            IGRAPH_LOCAL_FINALLY(fclose, %C%);
 
 REAL:
     CTYPE: igraph_real_t
@@ -146,7 +146,7 @@ DOUBLE:
 ERROR:
     # An igraph error code
     # Note: No OUTCONV is provided because ERROR is handled specially as a return
-    # type - it's wrapped in IGRAPH_R_CHECK() which doesn't use output conversion.
+    # type - it's wrapped in IGRAPH_LOCAL_R_CHECK() which doesn't use output conversion.
     # When ERROR is used as an input parameter (e.g., in igraph_strerror), only
     # INCONV is needed.
     CTYPE: igraph_error_t
@@ -180,18 +180,18 @@ INDEX_VECTOR:
     INCONV:
         IN: |-
             Rz_SEXP_to_vector_int_copy(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR:
     CALL: '&%C%'
@@ -199,16 +199,16 @@ VECTOR:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR_BOOL:
     CALL: '&%C%'
@@ -216,35 +216,35 @@ VECTOR_BOOL:
     INCONV:
         IN: Rz_SEXP_to_vector_bool(%I%, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_vector_bool_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_bool_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_bool_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_bool_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR_INT:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 MATRIX_LIST:
     CALL: '&%C%'
@@ -253,13 +253,13 @@ MATRIX_LIST:
         IN: |-
             Ry_igraph_SEXP_to_matrixlist(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_matrix_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_matrix_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_matrix_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Rx_igraph_matrixlist_to_SEXP(&%C%));
             igraph_matrix_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR_LIST:
     CALL: '&%C%'
@@ -267,61 +267,61 @@ VECTOR_LIST:
     INCONV:
         IN: Ry_igraph_SEXP_to_vector_list(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR_INT_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
+        IN: if (!Rf_isNull(%I%)) { IGRAPH_LOCAL_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXP(&%C%));
             igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEXSET_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGESET_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
+            if (!Rf_isNull(%I%)) { IGRAPH_LOCAL_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGE_SELECTOR:
     CALL:
@@ -333,10 +333,10 @@ EDGE_SELECTOR:
     INCONV:
         IN: |-
             igraph_vector_int_t %C%_data;
-            IGRAPH_R_CHECK(Rz_SEXP_to_igraph_es(%I%, &%C1%, &%C%, &%C%_data));
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_igraph_es(%I%, &%C1%, &%C%, &%C%_data));
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%_data);
@@ -344,14 +344,14 @@ EDGE_SELECTOR:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 ADJLIST:
     CALL: '&%C%'
     CTYPE: igraph_adjlist_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_igraph_adjlist(%I%, &%C%));
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_igraph_adjlist(%I%, &%C%));
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
@@ -361,14 +361,14 @@ EDGEWEIGHTS:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEXWEIGHTS:
     CALL: '&%C%'
@@ -376,14 +376,14 @@ VERTEXWEIGHTS:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGE_CAPACITY:
     CALL: '&%C%'
@@ -391,14 +391,14 @@ EDGE_CAPACITY:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 MATRIX:
     CALL: '&%C%'
@@ -406,16 +406,16 @@ MATRIX:
     INCONV:
         IN: Rz_SEXP_to_matrix(%I%, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_igraph_matrix_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_igraph_matrix_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_matrix_init(&%C%, 0, 0));
-            IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_matrix_init(&%C%, 0, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_matrix_to_SEXP(&%C%));
             igraph_matrix_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 MATRIX_INT:
     CALL: '&%C%'
@@ -423,21 +423,21 @@ MATRIX_INT:
     INCONV:
         IN: |-
             Rz_SEXP_to_matrix_int(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_int_destroy, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_igraph_matrix_int_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_igraph_matrix_int_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_matrix_int_init(&%C%, 0, 0));
-            IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_matrix_int_init(&%C%, 0, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_matrix_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_matrix_int_to_SEXP(&%C%));
             igraph_matrix_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX:
     CALL:
@@ -475,16 +475,16 @@ VERTEX_QTY:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 ALL_VERTEX_QTY:
     CALL: '&%C%'
@@ -492,16 +492,16 @@ ALL_VERTEX_QTY:
     INCONV:
         IN: Rz_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 NEIMODE:
     CALL:
@@ -521,8 +521,8 @@ VERTEX_SELECTOR:
             igraph_vector_int_t %C%_data;
             Rz_SEXP_to_igraph_vs(%I%, &%C1%, &%C%, &%C%_data);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%_data);
@@ -530,7 +530,7 @@ VERTEX_SELECTOR:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX_INDICES:
     CALL: '&%C%'
@@ -538,18 +538,18 @@ VERTEX_INDICES:
     INCONV:
         IN: |-
             Rz_SEXP_to_vector_int_copy(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX_INDICES_PV:
     CALL: '&%C%'
@@ -557,20 +557,20 @@ VERTEX_INDICES_PV:
     INCONV:
         IN: |-
             Rz_SEXP_to_vector_int_copy(%I%, &%C%);
-            IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY_PV(igraph_vector_int_destroy, &%C%);
         OUT: |-
             if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
             }
-            IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY_PV(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX_INDEX_PAIRS:
     CALL: '&%C%'
@@ -578,18 +578,18 @@ VERTEX_INDEX_PAIRS:
     INCONV:
         IN: |-
             Rz_SEXP_to_vector_int_copy(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGE_INDICES:
     CALL: '&%C%'
@@ -597,18 +597,18 @@ EDGE_INDICES:
     INCONV:
         IN: |-
             Rz_SEXP_to_vector_int_copy(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 'NULL':
     CALL: '0'
@@ -680,13 +680,13 @@ VECTOR_STR:
     INCONV:
         IN: Rx_igraph_SEXP_to_strvector(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_strvector_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_strvector_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_strvector_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_strvector_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Rx_igraph_strvector_to_SEXP(&%C%));
             igraph_strvector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 BIPARTITE_TYPES:
     CALL:
@@ -696,13 +696,13 @@ BIPARTITE_TYPES:
     INCONV:
         IN: Rz_SEXP_to_vector_bool(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_bool_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 ALL_BIPARTITE_TYPES:
     CALL:
@@ -712,13 +712,13 @@ ALL_BIPARTITE_TYPES:
     INCONV:
         IN: Rz_SEXP_to_vector_bool(%I%, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_bool_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 BIPARTITE_TYPES_UNNAMED:
     CALL:
@@ -726,13 +726,13 @@ BIPARTITE_TYPES_UNNAMED:
     CTYPE: igraph_vector_bool_t
     INCONV:
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_bool_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX_COLOR:
     CALL:
@@ -742,22 +742,22 @@ VERTEX_COLOR:
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-              IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
+              IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
             } else {
-              IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
+              IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGE_COLOR:
     CALL:
@@ -767,22 +767,22 @@ EDGE_COLOR:
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-              IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
+              IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_int_copy(%I%, &%C%));
             } else {
-              IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
+              IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(graph_vector_int_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_int_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
@@ -790,11 +790,11 @@ VERTEX_ATTRIBUTE_COMBINATION:
     INCONV:
         IN: |-
             Rz_SEXP_to_attr_comb(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_attribute_combination_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_attribute_combination_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_attribute_combination_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 EDGE_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
@@ -802,36 +802,36 @@ EDGE_ATTRIBUTE_COMBINATION:
     INCONV:
         IN: |-
             Rz_SEXP_to_attr_comb(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_attribute_combination_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_attribute_combination_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_attribute_combination_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 HRG:
     CALL: '&%C%'
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_hrg_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_hrg_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_hrg_destroy, &%C%);
         INOUT: |-
-            IGRAPH_R_CHECK(Rz_SEXP_to_hrg_copy(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_hrg_copy(%I%, &%C%));
+            IGRAPH_LOCAL_FINALLY(igraph_hrg_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_hrg_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_hrg_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_hrg_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_hrg_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         INOUT: |-
             PROTECT(%I%=Ry_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 SPARSEMAT:
     CALL: '&%C%'
@@ -839,18 +839,18 @@ SPARSEMAT:
     INCONV:
         IN: |-
             Rz_SEXP_to_sparsemat(%I%, &%C%);
-            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_sparsemat_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
-            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
         IN: |-
             igraph_sparsemat_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VECTOR_COMPLEX:
     CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
@@ -859,21 +859,21 @@ VECTOR_COMPLEX:
         IN: if (!Rf_isNull(%I%)) { Rz_SEXP_to_vector_complex(%I%, &%C%); }
         INOUT: |-
             if (!Rf_isNull(%I%)) {
-              IGRAPH_R_CHECK(Rz_SEXP_to_vector_complex_copy(%I%, &%C%));
+              IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_vector_complex_copy(%I%, &%C%));
             } else {
-              IGRAPH_R_CHECK(igraph_vector_complex_init(&%C%, 0));
+              IGRAPH_LOCAL_R_CHECK(igraph_vector_complex_init(&%C%, 0));
             }
-            IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_vector_complex_destroy, &%C%);
             %I%=NEW_NUMERIC(0);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_complex_init(&%C%, 0));
-            IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_complex_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_vector_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_0orvector_complex_to_SEXP(&%C%));
             igraph_vector_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 MATRIX_COMPLEX:
     CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
@@ -882,21 +882,21 @@ MATRIX_COMPLEX:
         IN: if (!Rf_isNull(%I%)) { Rz_SEXP_to_matrix_complex(%I%, &%C%); }
         INOUT: |-
             if (!Rf_isNull(%I%)) {
-              IGRAPH_R_CHECK(Rz_SEXP_to_matrix_complex_copy(%I%, &%C%));
+              IGRAPH_LOCAL_R_CHECK(Rz_SEXP_to_matrix_complex_copy(%I%, &%C%));
             } else {
-              IGRAPH_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
+              IGRAPH_LOCAL_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
             }
-            IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_complex_destroy, &%C%);
             %I%=NEW_NUMERIC(0);
         OUT: |-
-            IGRAPH_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
-            IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
+            IGRAPH_LOCAL_FINALLY(igraph_matrix_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_0ormatrix_complex_to_SEXP(&%C%));
             igraph_matrix_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 PLFIT:
     CALL: '&%C%'
@@ -923,13 +923,13 @@ SIR_LIST:
     CTYPE: igraph_vector_ptr_t
     INCONV:
         OUT: |-
-            IGRAPH_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
-            IGRAPH_FINALLY(Ry_igraph_sirlist_destroy, &%C%);
+            IGRAPH_LOCAL_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
+            IGRAPH_LOCAL_FINALLY(Ry_igraph_sirlist_destroy, &%C%);
     OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_sirlist_to_SEXP(&%C%));
             Ry_igraph_sirlist_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 PAGERANKOPT:
     CTYPE: |-

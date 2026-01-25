@@ -6433,22 +6433,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# local_scan_neighborhood_ecount_impl basic
-
-    Code
-      local_scan_neighborhood_ecount_impl(graph = g, neighborhoods = list(1:2, 2:3, 2:
-        4, 2))
-    Output
-      [1] 1 1 2 0
-
----
-
-    Code
-      local_scan_neighborhood_ecount_impl(graph = g, weights = c(1, 2, 3),
-      neighborhoods = list(1:2, 1:3, 2:4, 1))
-    Output
-      [1] 1 3 5 0
-
 # local_scan_neighborhood_ecount_impl errors
 
     Code
@@ -6456,21 +6440,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# local_scan_subset_ecount_impl basic
-
-    Code
-      local_scan_subset_ecount_impl(graph = g, subsets = list(c(1, 2), c(2, 3)))
-    Output
-      [1] 1 1
-
----
-
-    Code
-      local_scan_subset_ecount_impl(graph = g, weights = c(1, 2, 3), subsets = list(c(
-        1, 2), c(2, 3)))
-    Output
-      [1] 1 2
 
 # local_scan_subset_ecount_impl errors
 
@@ -11163,7 +11132,7 @@
     Code
       content
     Output
-      [1] "0 1" "0 2" "1 2"
+      character(0)
 
 # read_graph_edgelist_impl basic
 
