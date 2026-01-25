@@ -9630,7 +9630,7 @@ graphlets_project_impl <- function(
     R_igraph_graphlets_project,
     graph,
     weights,
-    if (!is.null(cliques)) lapply(cliques, function(.x) .x - 1) else NULL,
+    if (!is.null(cliques)) lapply(cliques, function(.x) .x - 1),
     Muc,
     startMu,
     niter
@@ -10873,7 +10873,7 @@ local_scan_neighborhood_ecount_impl <- function(
     R_igraph_local_scan_neighborhood_ecount,
     graph,
     weights,
-    if (!is.null(neighborhoods)) lapply(neighborhoods, function(.x) .x - 1) else NULL
+    if (!is.null(neighborhoods)) lapply(neighborhoods, function(.x) .x - 1)
   )
 
   res
@@ -10901,7 +10901,7 @@ local_scan_subset_ecount_impl <- function(
     R_igraph_local_scan_subset_ecount,
     graph,
     weights,
-    if (!is.null(subsets)) lapply(subsets, function(.x) .x - 1) else NULL
+    if (!is.null(subsets)) lapply(subsets, function(.x) .x - 1)
   )
 
   res
@@ -12768,7 +12768,7 @@ subisomorphic_lad_impl <- function(
     R_igraph_subisomorphic_lad,
     pattern,
     target,
-    if (!is.null(domains)) lapply(domains, function(.x) .x - 1) else NULL,
+    if (!is.null(domains)) lapply(domains, function(.x) .x - 1),
     induced,
     time_limit
   )
