@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9018
+
+## Bug fixes
+
+- Scrub file paths in error/warning snapshots and fix spacing (#2538).
+
+- Support character labels in `assortativity_nominal()` (#1283, #2432).
+
+- Fix uninitialized variable warnings in R 4.5 on Windows (#2526, #2527).
+
+## Features
+
+- Autogenerate sparse matrix constructor functions with type-safe conversions (#2532).
+
+- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable autogeneration of \*\_many functions (#2531, #2540).
+
+- Improve formatting of error messages from C (#2202, #2515).
+
+## Documentation
+
+- Consolidate Copilot instructions and fix workflow trigger (#2535, #2536).
+
+- Review remaining IGNORE declarations in Stimulus.
+
+## Refactoring
+
+- Integrate callback into `motifs()` function (#2543, #2544).
+
+- Replace `.Call()` expressions with `_impl()` function calls (#2539, #2541).
+
+
 # igraph 2.2.1.9017
 
 ## Features
