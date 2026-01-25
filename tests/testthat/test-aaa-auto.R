@@ -11546,6 +11546,7 @@ test_that("sparse_adjacency_impl basic", {
 
 test_that("sparse_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
+  skip_if_not(getRversion() >= "4.2")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
@@ -11599,6 +11600,7 @@ test_that("sparse_weighted_adjacency_impl basic", {
 
 test_that("sparse_weighted_adjacency_impl errors", {
   skip_if_not_installed("Matrix")
+  skip_if_not(getRversion() >= "4.2")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
@@ -11647,6 +11649,7 @@ test_that("weighted_sparsemat_impl basic", {
 
 test_that("weighted_sparsemat_impl errors", {
   skip_if_not_installed("Matrix")
+  skip_if_not(getRversion() >= "4.2")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
 
