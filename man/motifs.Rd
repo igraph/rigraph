@@ -25,7 +25,7 @@ If \code{NULL} (the default), motif counts are returned as a numeric vector.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
 functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
-so will cause R to crash due to nested \code{.Call()} state corruption. Extract
+so will cause R to crash due to reentrancy issues. Extract
 any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
 }

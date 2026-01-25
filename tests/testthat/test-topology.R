@@ -440,7 +440,7 @@ test_that("isomorphisms_vf2_callback works", {
   # Count isomorphisms using callback
   count <- 0
 
-  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 10) {
       return(FALSE)
@@ -452,7 +452,7 @@ test_that("isomorphisms_vf2_callback works", {
   expect_true(count <= 10)
 })
 
-test_that("isomorphisms_vf2_callback can stop early", {
+test_that("isomorphisms can stop early", {
   # Create two isomorphic graphs
   g1 <- make_ring(6)
   g2 <- permute(g1, sample(vcount(g1)))
@@ -460,7 +460,7 @@ test_that("isomorphisms_vf2_callback can stop early", {
   # Stop after finding 3 isomorphisms
   count <- 0
 
-  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
       FALSE # stop after 3 isomorphisms
@@ -472,7 +472,7 @@ test_that("isomorphisms_vf2_callback can stop early", {
   expect_equal(count, 3)
 })
 
-test_that("isomorphisms_vf2_callback receives correct arguments", {
+test_that("isomorphisms receives correct arguments", {
   g1 <- make_ring(5)
   g2 <- permute(g1, sample(vcount(g1)))
 
@@ -481,7 +481,7 @@ test_that("isomorphisms_vf2_callback receives correct arguments", {
   n2 <- vcount(g2)
 
   # Check argument types
-  isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
     expect_equal(length(map12), n1)
@@ -490,20 +490,20 @@ test_that("isomorphisms_vf2_callback receives correct arguments", {
   })
 })
 
-test_that("isomorphisms_vf2_callback handles errors in callback", {
+test_that("isomorphisms handles errors in callback", {
   g1 <- make_ring(5)
   g2 <- make_ring(5)
 
   # Callback that throws an error
   expect_error(
-    isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+    isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"
   )
 })
 
-test_that("subisomorphisms_vf2_callback works", {
+test_that("subisomorphisms works with callback works", {
   withr::local_seed(123)
 
   # Find triangles in a larger graph
@@ -513,7 +513,7 @@ test_that("subisomorphisms_vf2_callback works", {
   # Count subisomorphisms using callback
   count <- 0
 
-  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 5) {
       return(FALSE)
@@ -526,7 +526,7 @@ test_that("subisomorphisms_vf2_callback works", {
   expect_true(count <= 5)
 })
 
-test_that("subisomorphisms_vf2_callback can stop early", {
+test_that("subisomorphisms works with callback can stop early", {
   # Find triangles in a complete graph
   g1 <- make_ring(3) # triangle
   g2 <- make_full_graph(6)
@@ -534,7 +534,7 @@ test_that("subisomorphisms_vf2_callback can stop early", {
   # Stop after finding 3 subisomorphisms
   count <- 0
 
-  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
       FALSE # stop after 3 subisomorphisms
@@ -546,7 +546,7 @@ test_that("subisomorphisms_vf2_callback can stop early", {
   expect_equal(count, 3)
 })
 
-test_that("subisomorphisms_vf2_callback receives correct arguments", {
+test_that("subisomorphisms works with callback receives correct arguments", {
   g1 <- make_ring(3)
   g2 <- make_full_graph(5)
 
@@ -555,7 +555,7 @@ test_that("subisomorphisms_vf2_callback receives correct arguments", {
   n2 <- vcount(g2)
 
   # Check argument types
-  subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
     expect_equal(length(map12), n1)
@@ -564,13 +564,13 @@ test_that("subisomorphisms_vf2_callback receives correct arguments", {
   })
 })
 
-test_that("subisomorphisms_vf2_callback handles errors in callback", {
+test_that("subisomorphisms works with callback handles errors in callback", {
   g1 <- make_ring(3)
   g2 <- make_full_graph(5)
 
   # Callback that throws an error
   expect_error(
-    subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
+    subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"

@@ -201,9 +201,25 @@ clique.number <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
-#' @return `cliques()`, `largest_cliques()` and `clique_num()`
-#'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class [igraph.vs][V].
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each clique found. If provided,
+#'   the function should accept one argument: `clique` (integer vector of vertex
+#'   IDs in the clique, 1-based indexing). The function should return `TRUE` to
+#'   continue the search or `FALSE` to stop it. If `NULL` (the default), all
+#'   cliques are collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return `cliques()` returns a list containing numeric vectors of vertex ids if
+#'   `callback` is `NULL`. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V]. If `callback` is provided, returns `NULL` invisibly.
+#'
+#'   `largest_cliques()` and `clique_num()` return a list containing numeric
+#'   vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -238,21 +254,6 @@ clique.number <- function(graph) {
 #'
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
-#' @param ... These dots are for future extensions and must be empty.
-#' @param callback Optional function to call for each clique found. If provided,
-#'   the function should accept one argument: `clique` (integer vector of vertex
-#'   IDs in the clique, 1-based indexing). The function should return `TRUE` to
-#'   continue the search or `FALSE` to stop it. If `NULL` (the default), all
-#'   cliques are collected and returned as a list.
-#'
-#'   **Important limitation:** Callback functions must NOT call any igraph
-#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
-#'   so will cause R to crash due to nested `.Call()` state corruption. Extract
-#'   any needed graph information before calling the function with a callback, or
-#'   use collector mode (the default) and process results afterward.
-#' @return If `callback` is `NULL`, returns a list of integer vectors, each
-#'   containing the vertex IDs of a clique. If `callback` is provided, returns
-#'   `NULL` invisibly (the function is called for its side effects).
 #' @cdocs igraph_cliques igraph_cliques_callback
 cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
   ensure_igraph(graph)

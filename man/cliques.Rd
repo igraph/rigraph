@@ -57,7 +57,7 @@ cliques are collected and returned as a list.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
 functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
-so will cause R to crash due to nested \code{.Call()} state corruption. Extract
+so will cause R to crash due to reentrancy issues. Extract
 any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
 
@@ -87,9 +87,13 @@ or only the maximal ones (\code{TRUE}).}
 \item{directed}{Whether to consider edge directions.}
 }
 \value{
-\code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
-return a list containing numeric vectors of vertex ids. Each list element is
-a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
+\code{cliques()} returns a list containing numeric vectors of vertex ids if
+\code{callback} is \code{NULL}. Each list element is a clique, i.e. a vertex sequence
+of class \link[=V]{igraph.vs}. If \code{callback} is provided, returns \code{NULL} invisibly.
+
+\code{largest_cliques()} and \code{clique_num()} return a list containing numeric
+vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+of class \link[=V]{igraph.vs}.
 
 \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}
 argument is not \code{NULL}. The output is written to the specified file in
@@ -101,10 +105,6 @@ scalar.
 \code{clique_size_counts()} returns a numeric vector with the clique sizes such that
 the i-th item belongs to cliques of size i. Trailing zeros are currently
 truncated, but this might change in future versions.
-
-If \code{callback} is \code{NULL}, returns a list of integer vectors, each
-containing the vertex IDs of a clique. If \code{callback} is provided, returns
-\code{NULL} invisibly (the function is called for its side effects).
 
 \code{is_clique()} returns \code{TRUE} if the candidate vertex set forms
 a clique.

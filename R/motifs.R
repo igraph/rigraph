@@ -144,7 +144,7 @@ dyad.census <- function(graph) {
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
-#'   so will cause R to crash due to nested `.Call()` state corruption. Extract
+#'   so will cause R to crash due to reentrancy issues. Extract
 #'   any needed graph information before calling the function with a callback, or
 #'   use collector mode (the default) and process results afterward.
 #' @return When `callback` is `NULL`, `motifs()` returns a numeric vector,

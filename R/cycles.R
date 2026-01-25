@@ -73,9 +73,22 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #' @inheritParams find_cycle
 #' @param min Lower limit on cycle lengths to consider. `NULL` means no limit.
 #' @param max Upper limit on cycle lengths to consider. `NULL` means no limit.
-#' @return A named list, with two entries:
-#' \item{vertices}{The list of cycles in terms of their vertices.}
-#' \item{edges}{The list of cycles in terms of their edges.}
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each cycle found. If provided,
+#'   the function should accept two arguments: `vertices` (integer vector of vertex
+#'   IDs in the cycle) and `edges` (integer vector of edge IDs
+#'   in the cycle). The function should return `TRUE` to continue
+#'   the search or `FALSE` to stop it. If `NULL` (the default), all cycles are
+#'   collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list with two elements: `vertices`
+#'   (list of integer vectors with vertex IDs) and `edges` (list of integer vectors
+#'   with edge IDs). If `callback` is provided, returns `NULL` invisibly.
 #' @keywords graphs
 #' @examples
 #'

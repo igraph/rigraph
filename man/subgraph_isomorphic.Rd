@@ -128,8 +128,6 @@ Other graph isomorphism:
 \code{\link{isomorphic}()},
 \code{\link{isomorphism_class}()},
 \code{\link{isomorphisms}()},
-\code{\link{isomorphisms_vf2}()},
-\code{\link{subgraph_isomorphisms}()},
-\code{\link{subisomorphisms_vf2}()}
+\code{\link{subgraph_isomorphisms}()}
 }
 \concept{graph isomorphism}

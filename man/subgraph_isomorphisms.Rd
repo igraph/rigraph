@@ -5,7 +5,13 @@
 \alias{graph.get.subisomorphisms.vf2}
 \title{All isomorphic mappings between a graph and subgraphs of another graph}
 \usage{
-subgraph_isomorphisms(pattern, target, method = c("lad", "vf2"), ...)
+subgraph_isomorphisms(
+  pattern,
+  target,
+  method = c("lad", "vf2"),
+  ...,
+  callback = NULL
+)
 }
 \arguments{
 \item{pattern}{The smaller graph, it might be directed or
@@ -20,10 +26,25 @@ mutual edges.}
 \sQuote{lad}, \sQuote{vf2}. See their details below.}
 
 \item{...}{Additional arguments, passed to the various methods.}
+
+\item{callback}{Optional callback function to call for each subisomorphism found.
+If provided, the function should accept two arguments: \code{map12} (integer vector
+mapping vertex IDs from pattern to target, 1-based indexing) and \code{map21}
+(integer vector mapping vertex IDs from target to pattern, 1-based indexing).
+The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+If \code{NULL} (the default), all subisomorphisms are collected and returned as a list.
+Only supported for \code{method = "vf2"}.
+
+\strong{Important limitation:} Callback functions must NOT call any igraph
+functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.}
 }
 \value{
-A list of vertex sequences, corresponding to all
-mappings from the first graph to the second.
+If \code{callback} is \code{NULL}, returns a list of vertex sequences, corresponding
+to all mappings from the pattern graph to the target graph. If \code{callback} is
+provided, returns \code{NULL} invisibly.
 }
 \description{
 All isomorphic mappings between a graph and subgraphs of another graph
@@ -80,8 +101,6 @@ Other graph isomorphism:
 \code{\link{isomorphic}()},
 \code{\link{isomorphism_class}()},
 \code{\link{isomorphisms}()},
-\code{\link{isomorphisms_vf2}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subisomorphisms_vf2}()}
+\code{\link{subgraph_isomorphic}()}
 }
 \concept{graph isomorphism}

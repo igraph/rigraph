@@ -40,9 +40,9 @@ any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
 }
 \value{
-A named list, with two entries:
-\item{vertices}{The list of cycles in terms of their vertices.}
-\item{edges}{The list of cycles in terms of their edges.}
+If \code{callback} is \code{NULL}, returns a list with two elements: \code{vertices}
+(list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors
+with edge IDs). If \code{callback} is provided, returns \code{NULL} invisibly.
 
 If \code{callback} is \code{NULL}, returns a list with two elements: \code{vertices}
 (list of integer vectors with vertex IDs) and \code{edges} (list of integer vectors
