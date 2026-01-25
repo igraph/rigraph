@@ -1,5 +1,55 @@
 # Changelog
 
+## igraph 2.2.1.9018
+
+### Bug fixes
+
+- Scrub file paths in error/warning snapshots and fix spacing
+  ([\#2538](https://github.com/igraph/rigraph/issues/2538)).
+
+- Support character labels in
+  [`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)
+  ([\#1283](https://github.com/igraph/rigraph/issues/1283),
+  [\#2432](https://github.com/igraph/rigraph/issues/2432)).
+
+- Fix uninitialized variable warnings in R 4.5 on Windows
+  ([\#2526](https://github.com/igraph/rigraph/issues/2526),
+  [\#2527](https://github.com/igraph/rigraph/issues/2527)).
+
+### Features
+
+- Autogenerate sparse matrix constructor functions with type-safe
+  conversions ([\#2532](https://github.com/igraph/rigraph/issues/2532)).
+
+- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable
+  autogeneration of \*\_many functions
+  ([\#2531](https://github.com/igraph/rigraph/issues/2531),
+  [\#2540](https://github.com/igraph/rigraph/issues/2540)).
+
+- Improve formatting of error messages from C
+  ([\#2202](https://github.com/igraph/rigraph/issues/2202),
+  [\#2515](https://github.com/igraph/rigraph/issues/2515)).
+
+### Documentation
+
+- Consolidate Copilot instructions and fix workflow trigger
+  ([\#2535](https://github.com/igraph/rigraph/issues/2535),
+  [\#2536](https://github.com/igraph/rigraph/issues/2536)).
+
+- Review remaining IGNORE declarations in Stimulus.
+
+### Refactoring
+
+- Integrate callback into
+  [`motifs()`](https://r.igraph.org/reference/motifs.md) function
+  ([\#2543](https://github.com/igraph/rigraph/issues/2543),
+  [\#2544](https://github.com/igraph/rigraph/issues/2544)).
+
+- Replace [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
+  expressions with `_impl()` function calls
+  ([\#2539](https://github.com/igraph/rigraph/issues/2539),
+  [\#2541](https://github.com/igraph/rigraph/issues/2541)).
+
 ## igraph 2.2.1.9017
 
 ### Features
