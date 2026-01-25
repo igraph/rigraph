@@ -310,7 +310,7 @@ EDGEWEIGHTS:
         }
 
 EDGE_LENGTHS:
-    # Edge lengths vector - similar to EDGEWEIGHTS but without automatic attribute lookup
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
     INCONV: |-
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
