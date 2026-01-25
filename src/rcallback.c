@@ -26,18 +26,9 @@
 #include <Rinternals.h>
 #include <igraph.h>
 
-/* Generic structure to hold callback data 
- * 
- * Note on reentrancy: The callback SEXP is protected using R_PreserveObject()
- * in the closure functions to ensure it remains valid even if the user's 
- * callback function calls back into igraph (reentrancy). This is necessary
- * because Rf_eval() can trigger garbage collection, and if the callback calls
- * another igraph function that uses PROTECT/UNPROTECT, it can corrupt the
- * protection stack.
- */
+/* Generic structure to hold callback data */
 typedef struct {
   SEXP callback;
-  igraph_bool_t callback_preserved;  /* Flag to track if callback was preserved */
 } R_igraph_callback_data_t;
 
 /* Handler function for motifs callback - converts C types to R types */
@@ -63,7 +54,18 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
 
   /* Call the R function: callback(vids, isoclass) */
   PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  
+  /* Use R_tryEval to handle errors and prevent nested .Call issues */
+  int errorOccurred;
+  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
+  
+  if (errorOccurred) {
+    UNPROTECT(3);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  
+  PROTECT(result);
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -87,22 +89,11 @@ igraph_error_t igraph_motifs_randesu_callback_closure(
     const igraph_vector_t *cut_prob,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_motifs_randesu_callback(
+  return igraph_motifs_randesu_callback(
       graph, size, cut_prob,
       R_igraph_motifs_handler, &data);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
 
 /* Handler function for clique callbacks - converts C types to R types */
@@ -120,7 +111,18 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
 
   /* Call the R function: callback(clique) */
   PROTECT(R_fcall = Rf_lang2(callback, clique_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  
+  /* Use R_tryEval to handle errors and prevent nested .Call issues */
+  int errorOccurred;
+  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
+  
+  if (errorOccurred) {
+    UNPROTECT(2);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  
+  PROTECT(result);
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -143,22 +145,11 @@ igraph_error_t igraph_cliques_callback_closure(
     igraph_integer_t max_size,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_cliques_callback(
+  return igraph_cliques_callback(
       graph, min_size, max_size,
       R_igraph_clique_handler, &data);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
 
 igraph_error_t igraph_maximal_cliques_callback_closure(
@@ -167,22 +158,11 @@ igraph_error_t igraph_maximal_cliques_callback_closure(
     igraph_integer_t max_size,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_maximal_cliques_callback(
+  return igraph_maximal_cliques_callback(
       graph, R_igraph_clique_handler, &data,
       min_size, max_size);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
 
 /* Handler function for cycle callbacks - converts C types to R types */
@@ -210,7 +190,18 @@ igraph_error_t R_igraph_cycle_handler(
 
   /* Call the R function: callback(vertices, edges) */
   PROTECT(R_fcall = Rf_lang3(callback, vertices_r, edges_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  
+  /* Use R_tryEval to handle errors and prevent nested .Call issues */
+  int errorOccurred;
+  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
+  
+  if (errorOccurred) {
+    UNPROTECT(3);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  
+  PROTECT(result);
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -234,22 +225,11 @@ igraph_error_t igraph_simple_cycles_callback_closure(
     igraph_integer_t max_cycle_length,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_simple_cycles_callback(
+  return igraph_simple_cycles_callback(
       graph, mode, min_cycle_length, max_cycle_length,
       R_igraph_cycle_handler, &data);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
 
 /* Handler function for isomorphism callbacks - converts C types to R types */
@@ -262,6 +242,7 @@ igraph_error_t R_igraph_isomorphism_handler(
   SEXP callback = data->callback;
   SEXP map12_r, map21_r, R_fcall, result;
   igraph_bool_t cres;
+  int errorOccurred;
 
   /* Create R vector for map12 (add 1 for R's 1-based indexing) */
   PROTECT(map12_r = NEW_INTEGER(igraph_vector_int_size(map12)));
@@ -277,7 +258,18 @@ igraph_error_t R_igraph_isomorphism_handler(
 
   /* Call the R function: callback(map12, map21) */
   PROTECT(R_fcall = Rf_lang3(callback, map12_r, map21_r));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  
+  /* Use R_tryEval to handle errors without longjmp */
+  result = R_tryEval(R_fcall, R_GlobalEnv, &errorOccurred);
+  
+  if (errorOccurred) {
+    UNPROTECT(3);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  
+  /* Protect the result after successful evaluation */
+  PROTECT(result);
   
   /* Check if result is an error condition (from tryCatch) */
   if (Rf_inherits(result, "error")) {
@@ -303,26 +295,15 @@ igraph_error_t igraph_get_isomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color2,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_get_isomorphisms_vf2_callback(
+  return igraph_get_isomorphisms_vf2_callback(
       graph1, graph2,
       vertex_color1, vertex_color2,
       edge_color1, edge_color2,
       NULL, NULL,
       R_igraph_isomorphism_handler,
       NULL, NULL, &data);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
 
 igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
@@ -334,24 +315,13 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color2,
     SEXP callback) {
   
-  /* Preserve the callback to protect against reentrancy issues */
-  R_PreserveObject(callback);
+  R_igraph_callback_data_t data = { .callback = callback };
   
-  R_igraph_callback_data_t data = { 
-    .callback = callback,
-    .callback_preserved = 1
-  };
-  
-  igraph_error_t result = igraph_get_subisomorphisms_vf2_callback(
+  return igraph_get_subisomorphisms_vf2_callback(
       graph1, graph2,
       vertex_color1, vertex_color2,
       edge_color1, edge_color2,
       NULL, NULL,
       R_igraph_isomorphism_handler,
       NULL, NULL, &data);
-  
-  /* Release the preserved callback */
-  R_ReleaseObject(callback);
-  
-  return result;
 }
