@@ -150,14 +150,14 @@ void igraph_vector_int_list_destroy_pv(void *pv_ptr);
     int igraph_i_local_finally_stack_size = 0
 
 // Add a destructor to the local finally stack
-#define IGRAPH_LOCAL_FINALLY_REAL(func, ptr) \
+#define IGRAPH_LOCAL_FINALLY_REAL(func_arg, ptr_arg) \
     do { \
         int no = igraph_i_local_finally_stack_size; \
         if (no >= 100) { \
             IGRAPH_FATALF("Local finally stack too large: it contains %d elements.", no); \
         } \
-        igraph_i_local_finally_stack[no].ptr = (ptr); \
-        igraph_i_local_finally_stack[no].func = (func); \
+        igraph_i_local_finally_stack[no].ptr = (ptr_arg); \
+        igraph_i_local_finally_stack[no].func = (func_arg); \
         igraph_i_local_finally_stack[no].level = 0; \
         igraph_i_local_finally_stack_size++; \
     } while (0)

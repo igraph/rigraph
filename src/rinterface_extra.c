@@ -2548,7 +2548,7 @@ SEXP R_igraph_finalizer(void) {
 }
 
 SEXP Rx_igraph_check_finally_stack(void) {
-  if (!(igraph_i_local_finally_stack_size == 0)) {
+  if (!IGRAPH_FINALLY_STACK_EMPTY) {
     Rf_error("igraph callbacks cannot call igraph functions");
   }
   return R_NilValue;
@@ -4746,6 +4746,7 @@ SEXP Rx_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
   igraph_vector_int_t inseq;
   igraph_integer_t method=(igraph_integer_t) REAL(pmethod)[0];
   SEXP result;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(pout_seq, &outseq));
   IGRAPH_LOCAL_FINALLY_PV(igraph_vector_int_destroy, &outseq);
@@ -5161,6 +5162,7 @@ SEXP Rx_igraph_compose(SEXP pleft, SEXP pright, SEXP pedgemaps) {
   igraph_bool_t edgemaps=LOGICAL(pedgemaps)[0];
   igraph_vector_int_t v_edgemap1, *my_edgemap1=edgemaps ? &v_edgemap1 : 0;
   igraph_vector_int_t v_edgemap2, *my_edgemap2=edgemaps ? &v_edgemap2 : 0;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   Rz_SEXP_to_igraph(pleft, &left);
   Rz_SEXP_to_igraph(pright, &right);
@@ -6323,6 +6325,7 @@ SEXP Rx_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
   igraph_integer_t steps=(igraph_integer_t) REAL(psteps)[0];
   igraph_vector_int_t membership;
   SEXP result;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   IGRAPH_R_CHECK(Rz_SEXP_to_matrix_int(pmerges, &merges));
   IGRAPH_LOCAL_FINALLY(igraph_matrix_int_destroy, &merges);
@@ -6446,6 +6449,7 @@ SEXP Rx_igraph_arpack(SEXP function, SEXP extra, SEXP options, SEXP rho,
   Rx_igraph_i_arpack_data_t data;
   igraph_arpack_options_t c_options;
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   if (0 != igraph_matrix_init(&vectors, 0, 0)) {
     igraph_error("Cannot run ARPACK", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -6515,6 +6519,7 @@ SEXP Rx_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
   SEXP fillin;
   SEXP newgraph;
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(alpha)) { Rz_SEXP_to_vector_int_copy(alpha, &c_alpha); }
@@ -7053,6 +7058,7 @@ SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   SEXP maps;
 
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
                                         /* Convert input */
   Rz_SEXP_to_igraph(pattern, &c_pattern);
   Rz_SEXP_to_igraph(target, &c_target);
@@ -7139,6 +7145,7 @@ SEXP Rx_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SEXP cliques;
   SEXP Mu;
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
@@ -7281,6 +7288,7 @@ SEXP Rx_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
   igraph_bool_t directed;
 
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
   /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   directed=igraph_is_directed(&c_graph);
@@ -7359,6 +7367,7 @@ SEXP Rx_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   SEXP multiplicity2;
 
   SEXP result, names;
+  IGRAPH_LOCAL_FINALLY_STACK;
   /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(types)) { Rz_SEXP_to_vector_bool(types, &c_types); }
@@ -7427,6 +7436,7 @@ SEXP Rx_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
   SEXP result;
   size_t i, n;
   igraph_lazy_adjlist_t adjlist;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   Rz_SEXP_to_igraph(pgraph, &graph);
   Rz_SEXP_to_igraph_vs(pv, &graph, &vs, &vs_data);
@@ -7474,6 +7484,7 @@ SEXP Rx_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   SEXP result;
   size_t i, n;
   igraph_lazy_inclist_t adjlist;
+  IGRAPH_LOCAL_FINALLY_STACK;
 
   Rz_SEXP_to_igraph(pgraph, &graph);
   Rz_SEXP_to_igraph_vs(pe, &graph, &vs, &vs_data);
