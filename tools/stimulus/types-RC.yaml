@@ -634,7 +634,7 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%'
-    CTYPE: SEXP
+    CTYPE: ~
     HEADER: '%I%'
 
 ISOCOMPAT_FUNC:

@@ -165,6 +165,8 @@ SEXP R_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP
 SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights);
 
 /* Declarations for callback functions */
+
+/* Motifs */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
                                        igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
@@ -174,4 +176,56 @@ igraph_error_t igraph_motifs_randesu_callback_closure(
     const igraph_t *graph,
     igraph_integer_t size,
     const igraph_vector_t *cut_prob,
+    SEXP callback);
+
+/* Cliques */
+igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *extra);
+
+igraph_error_t igraph_cliques_callback_closure(
+    const igraph_t *graph,
+    igraph_integer_t min_size,
+    igraph_integer_t max_size,
+    SEXP callback);
+
+igraph_error_t igraph_maximal_cliques_callback_closure(
+    const igraph_t *graph,
+    igraph_integer_t min_size,
+    igraph_integer_t max_size,
+    SEXP callback);
+
+/* Cycles */
+igraph_error_t R_igraph_cycle_handler(
+    const igraph_vector_int_t *vertices,
+    const igraph_vector_int_t *edges,
+    void *extra);
+
+igraph_error_t igraph_simple_cycles_callback_closure(
+    const igraph_t *graph,
+    igraph_neimode_t mode,
+    igraph_integer_t min_cycle_length,
+    igraph_integer_t max_cycle_length,
+    SEXP callback);
+
+/* Isomorphisms */
+igraph_error_t R_igraph_isomorphism_handler(
+    const igraph_vector_int_t *map12,
+    const igraph_vector_int_t *map21,
+    void *extra);
+
+igraph_error_t igraph_get_isomorphisms_vf2_callback_closure(
+    const igraph_t *graph1,
+    const igraph_t *graph2,
+    const igraph_vector_int_t *vertex_color1,
+    const igraph_vector_int_t *vertex_color2,
+    const igraph_vector_int_t *edge_color1,
+    const igraph_vector_int_t *edge_color2,
+    SEXP callback);
+
+igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
+    const igraph_t *graph1,
+    const igraph_t *graph2,
+    const igraph_vector_int_t *vertex_color1,
+    const igraph_vector_int_t *vertex_color2,
+    const igraph_vector_int_t *edge_color1,
+    const igraph_vector_int_t *edge_color2,
     SEXP callback);
