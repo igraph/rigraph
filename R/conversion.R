@@ -283,67 +283,33 @@ get.adjacency.sparse <- function(
 
   type <- igraph_match_arg(type)
 
-  vc <- vcount(graph)
-
-  el <- as_edgelist(graph, names = FALSE)
-  use.last.ij <- FALSE
-
+  # Prepare weights parameter
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
       cli::cli_abort("No such edge attribute", call = call)
     }
-    value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
+    weights <- edge_attr(graph, name = attr)
+    if (!is.numeric(weights) && !is.logical(weights)) {
       cli::cli_abort(
         "Matrices must be either numeric or logical, and the edge attribute is not",
         call = call
       )
     }
   } else {
-    value <- rep(1, nrow(el))
+    weights <- NULL
   }
 
-  if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(
-      dims = c(vc, vc),
-      i = el[, 1],
-      j = el[, 2],
-      x = value,
-      use.last.ij = use.last.ij
-    )
-  } else {
-    if (type == "upper") {
-      ## upper
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "lower") {
-      ## lower
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmax(el[, 1], el[, 2]),
-        j = pmin(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "both") {
-      ## both
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        symmetric = TRUE,
-        use.last.ij = use.last.ij
-      )
-      res <- as(res, "generalMatrix")
-    }
-  }
+  # Use the library implementation
+  tmp <- get_adjacency_sparse_impl(
+    graph,
+    type,
+    weights,
+    loops = "once"
+  )
+  
+  # Convert to proper Matrix object
+  res <- igraph.i.spMatrix(tmp)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
