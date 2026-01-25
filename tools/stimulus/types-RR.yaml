@@ -385,7 +385,14 @@ CLOSURE:
         }
         %I%_wrapped <- function(...) {
           tryCatch(
-            %I%(...),
+            {
+              out <- %I%(...)
+              if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+                out
+              } else {
+                rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+              }
+            },
             error = function(e) e
           )
         }
