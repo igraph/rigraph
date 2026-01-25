@@ -223,7 +223,6 @@ get.adjacency.dense <- function(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,
-  weights = NULL,
   loops = c("once", "twice", "ignore"),
   names = TRUE
 ) {
@@ -248,15 +247,12 @@ get.adjacency.dense <- function(
     loops <- "none"
   }
 
-  if (!is.null(weights)) {
-    weights <- as.numeric(weights)
-  }
-
   if (is.null(attr)) {
+    # FIXME: Use get_adjacency_impl() also for non-NULL attr
     res <- get_adjacency_impl(
       graph,
       type,
-      weights,
+      weights = numeric(),
       loops
     )
   } else {
@@ -427,7 +423,6 @@ as_adjacency_matrix <- function(
       graph,
       type = type,
       attr = attr,
-      weights = NULL,
       names = names,
       loops = "once"
     )
