@@ -3217,7 +3217,7 @@ SEXP Rx_igraph_arpack_unpack_complex(SEXP vectors, SEXP values, SEXP nev) {
   IGRAPH_LOCAL_FINALLY_PV(igraph_matrix_destroy, &c_values);
   c_nev=REAL(nev)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_arpack_unpack_complex(&c_vectors, &c_values, c_nev));
+  IGRAPH_LOCAL_R_CHECK(igraph_arpack_unpack_complex(&c_vectors, &c_values, c_nev));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -3989,7 +3989,7 @@ SEXP Rx_igraph_add_edges_manual(SEXP graph, SEXP edges) {
   IGRAPH_LOCAL_FINALLY_PV(igraph_vector_int_destroy, &v);
   Rz_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_LOCAL_FINALLY_PV(igraph_destroy, &g);
-  IGRAPH_R_CHECK(igraph_add_edges(&g, &v, 0));
+  IGRAPH_LOCAL_R_CHECK(igraph_add_edges(&g, &v, 0));
   PROTECT(result=Ry_igraph_to_SEXP(&g));
   igraph_vector_int_destroy(&v);
   IGRAPH_LOCAL_FINALLY_CLEAN(1);
@@ -4731,7 +4731,7 @@ SEXP Rx_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops)
   if (!Rf_isNull(pweights)) { Rz_SEXP_to_vector(pweights, &weights); }
   IGRAPH_LOCAL_FINALLY_STACK;
   igraph_matrix_init(&res, 0, 0);
-  IGRAPH_R_CHECK(igraph_get_adjacency(&g, &res, (igraph_get_adjacency_t) type, Rf_isNull(pweights) ? 0 : &weights, loops));
+  IGRAPH_LOCAL_R_CHECK(igraph_get_adjacency(&g, &res, (igraph_get_adjacency_t) type, Rf_isNull(pweights) ? 0 : &weights, loops));
   PROTECT(result=Ry_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
 
@@ -4776,10 +4776,10 @@ SEXP Rx_igraph_transitivity_local_undirected_all(SEXP graph, SEXP mode) {
 
   IGRAPH_LOCAL_FINALLY_STACK;
   Rz_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_vector_init(&res, 0));
+  IGRAPH_LOCAL_R_CHECK(igraph_vector_init(&res, 0));
   IGRAPH_LOCAL_FINALLY_PV(igraph_vector_destroy, &res);
 
-  IGRAPH_R_CHECK(igraph_transitivity_local_undirected(&g, &res, igraph_vss_all(), isolates));
+  IGRAPH_LOCAL_R_CHECK(igraph_transitivity_local_undirected(&g, &res, igraph_vss_all(), isolates));
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
   igraph_vector_copy_to(&res, REAL(result));
@@ -5172,7 +5172,7 @@ SEXP Rx_igraph_compose(SEXP pleft, SEXP pright, SEXP pedgemaps) {
     igraph_vector_int_init(my_edgemap2, 0);
     IGRAPH_LOCAL_FINALLY_PV(igraph_vector_int_destroy, my_edgemap2);
   }
-  IGRAPH_R_CHECK(igraph_compose(&res, &left, &right, my_edgemap1, my_edgemap2));
+  IGRAPH_LOCAL_R_CHECK(igraph_compose(&res, &left, &right, my_edgemap1, my_edgemap2));
   PROTECT(result=NEW_LIST(3));
   SET_VECTOR_ELT(result, 0, Ry_igraph_to_SEXP(&res));
   IGRAPH_I_DESTROY(&res);
@@ -7160,7 +7160,7 @@ SEXP Rx_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   IGRAPH_LOCAL_FINALLY_PV(igraph_vector_destroy, &c_Mu);
   c_niter=(igraph_integer_t) REAL(niter)[0];
   /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graphlets(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Mu, c_niter));
+  IGRAPH_LOCAL_R_CHECK(igraph_graphlets(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Mu, c_niter));
 
   /* Convert output */
   PROTECT(result=NEW_LIST(2));

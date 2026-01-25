@@ -148,6 +148,7 @@ void igraph_vector_int_list_destroy_pv(void *pv_ptr);
 
 // Declare a local finally stack.
 // This should be placed at the beginning of a function.
+// After this declaration, use IGRAPH_LOCAL_R_CHECK instead of IGRAPH_R_CHECK.
 #define IGRAPH_LOCAL_FINALLY_STACK \
     struct igraph_i_protectedPtr igraph_i_local_finally_stack[IGRAPH_LOCAL_FINALLY_STACK_SIZE]; \
     int igraph_i_local_finally_stack_size = 0
@@ -197,6 +198,25 @@ void igraph_vector_int_list_destroy_pv(void *pv_ptr);
     do { \
         if (0) { func(ptr); } \
         IGRAPH_LOCAL_FINALLY_REAL((func##_pv), (ptr)); \
+    } while (0)
+
+// Variant of IGRAPH_R_CHECK for functions with local finally stacks
+// This ensures the local stack is cleaned up before calling error handlers
+#define IGRAPH_LOCAL_R_CHECK(func) \
+    do { \
+        Rx_igraph_attribute_clean_preserve_list(); \
+        Rx_igraph_set_in_r_check(true); \
+        igraph_error_type_t __c = func; \
+        Rx_igraph_set_in_r_check(false); \
+        Rx_igraph_warning(); \
+        if (__c == IGRAPH_INTERRUPTED) { \
+            IGRAPH_LOCAL_FINALLY_FREE(); \
+            Rx_igraph_interrupt(); \
+        } \
+        else if (__c != IGRAPH_SUCCESS) { \
+            IGRAPH_LOCAL_FINALLY_FREE(); \
+            Rx_igraph_error(); \
+        } \
     } while (0)
 
 #define IGRAPH_R_CHECK_INT(v) R_check_int_scalar(v)
