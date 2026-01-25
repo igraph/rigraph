@@ -32,8 +32,10 @@ Other graph isomorphism:
 \code{\link{isomorphic}()},
 \code{\link{isomorphism_class}()},
 \code{\link{isomorphisms}()},
+\code{\link{isomorphisms_vf2}()},
 \code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+\code{\link{subgraph_isomorphisms}()},
+\code{\link{subisomorphisms_vf2}()}
 }
 \concept{graph isomorphism}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}.}

@@ -1351,6 +1351,12 @@ transitive_closure <- function(graph) {
 #'   vertex IDs from graph2 to graph1, 1-based indexing). The function should return
 #'   `TRUE` to continue the search or `FALSE` to stop it. If `NULL` (the default), all
 #'   isomorphisms are collected and returned as a list.
+#'   
+#'   **Important limitation:** Callback functions must NOT call any igraph 
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to nested `.Call()` state corruption. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
 #' @return If `callback` is `NULL`, returns a list with two elements: `map12` (list
 #'   of integer vectors with mappings from graph1 to graph2) and `map21` (list of
 #'   integer vectors with mappings from graph2 to graph1). If `callback` is provided,

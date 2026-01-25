@@ -21,7 +21,13 @@ If \code{NULL}, the default, no cuts are made.}
 The function should accept two arguments: \code{vids} (integer vector of vertex IDs
 in the motif) and \code{isoclass} (the isomorphism class of the motif).
 The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
-If \code{NULL} (the default), motif counts are returned as a numeric vector.}
+If \code{NULL} (the default), motif counts are returned as a numeric vector.
+
+\strong{Important limitation:} Callback functions must NOT call any igraph
+functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
+so will cause R to crash due to nested \code{.Call()} state corruption. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.}
 }
 \value{
 When \code{callback} is \code{NULL}, \code{motifs()} returns a numeric vector,

@@ -244,6 +244,12 @@ clique.number <- function(graph) {
 #'   IDs in the clique, 1-based indexing). The function should return `TRUE` to
 #'   continue the search or `FALSE` to stop it. If `NULL` (the default), all
 #'   cliques are collected and returned as a list.
+#'   
+#'   **Important limitation:** Callback functions must NOT call any igraph 
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to nested `.Call()` state corruption. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
 #' @return If `callback` is `NULL`, returns a list of integer vectors, each
 #'   containing the vertex IDs of a clique. If `callback` is provided, returns
 #'   `NULL` invisibly (the function is called for its side effects).

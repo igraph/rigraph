@@ -476,12 +476,16 @@ test_that("isomorphisms_vf2_callback receives correct arguments", {
   g1 <- make_ring(5)
   g2 <- permute(g1, sample(vcount(g1)))
 
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
   # Check argument types
   isomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
-    expect_equal(length(map12), vcount(g1))
-    expect_equal(length(map21), vcount(g2))
+    expect_equal(length(map12), n1)
+    expect_equal(length(map21), n2)
     FALSE # stop after first isomorphism
   })
 })
@@ -546,12 +550,16 @@ test_that("subisomorphisms_vf2_callback receives correct arguments", {
   g1 <- make_ring(3)
   g2 <- make_full_graph(5)
 
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
   # Check argument types
   subisomorphisms_vf2(g1, g2, callback = function(map12, map21) {
     expect_true(is.integer(map12))
     expect_true(is.integer(map21))
-    expect_equal(length(map12), vcount(g1))
-    expect_equal(length(map21), vcount(g2))
+    expect_equal(length(map12), n1)
+    expect_equal(length(map21), n2)
     FALSE # stop after first subisomorphism
   })
 })

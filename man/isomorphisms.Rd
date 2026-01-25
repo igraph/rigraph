@@ -32,7 +32,9 @@ Other graph isomorphism:
 \code{\link{graph_from_isomorphism_class}()},
 \code{\link{isomorphic}()},
 \code{\link{isomorphism_class}()},
+\code{\link{isomorphisms_vf2}()},
 \code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+\code{\link{subgraph_isomorphisms}()},
+\code{\link{subisomorphisms_vf2}()}
 }
 \concept{graph isomorphism}
