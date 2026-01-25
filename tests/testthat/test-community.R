@@ -236,22 +236,17 @@ test_that("cluster_leading_eigen works", {
   )
 })
 
-test_that("cluster_leading_eigen callback deprecated", {
+test_that("cluster_leading_eigen callback works", {
   withr::local_seed(20230115)
 
   karate <- make_graph("Zachary")
   
-  # Test that callback parameter is deprecated
-  expect_error(
-    cluster_leading_eigen(karate, callback = function(...) 0),
-    class = "lifecycle_error_deprecated"
-  )
+  # Test with a simple callback that always returns 0 (continue)
+  karate_lc <- cluster_leading_eigen(karate, callback = function(...) 0)
   
-  # Test that extra parameter is deprecated
-  expect_error(
-    cluster_leading_eigen(karate, extra = "test"),
-    class = "lifecycle_error_deprecated"
-  )
+  # Should still get valid results
+  expect_equal(karate_lc$modularity, modularity(karate, karate_lc$membership))
+  expect_length(karate_lc$membership, vcount(karate))
 })
 test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like

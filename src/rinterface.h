@@ -230,3 +230,32 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
     SEXP callback);
+
+/* Leading eigenvector community detection */
+SEXP R_igraph_levc_arpack_multiplier(SEXP extP, SEXP extE, SEXP pv);
+
+igraph_error_t R_igraph_levc_handler(
+    const igraph_vector_int_t *membership,
+    igraph_integer_t comm,
+    igraph_real_t eigenvalue,
+    const igraph_vector_t *eigenvector,
+    igraph_arpack_function_t *arpack_multiplier,
+    void *arpack_extra,
+    void *extra);
+
+igraph_error_t igraph_community_leading_eigenvector_callback_closure(
+    const igraph_t *graph,
+    const igraph_vector_t *weights,
+    igraph_matrix_int_t *merges,
+    igraph_vector_int_t *membership,
+    igraph_integer_t steps,
+    igraph_arpack_options_t *options,
+    igraph_real_t *modularity,
+    igraph_bool_t start,
+    igraph_vector_t *eigenvalues,
+    igraph_vector_list_t *eigenvectors,
+    igraph_vector_t *history,
+    SEXP callback,
+    SEXP extra,
+    SEXP env,
+    SEXP env_arp);

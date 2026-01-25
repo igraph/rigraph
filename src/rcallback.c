@@ -280,3 +280,122 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
       R_igraph_isomorphism_handler,
       NULL, NULL, &data);
 }
+
+/* Leading eigenvector community detection callback support */
+
+/* Structure to hold ARPACK function pointer */
+typedef struct {
+  igraph_arpack_function_t *fun;
+} R_igraph_arpack_function_container_t;
+
+/* Extended callback data structure for leading eigenvector */
+typedef struct {
+  SEXP callback;
+  SEXP extra;
+  SEXP env;
+  SEXP env_arp;
+} R_igraph_levc_callback_data_t;
+
+/* Helper function to call ARPACK multiplier from R - exported for use from R */
+SEXP R_igraph_levc_arpack_multiplier(SEXP extP, SEXP extE, SEXP pv) {
+  R_igraph_arpack_function_container_t *cont = R_ExternalPtrAddr(extP);
+  igraph_arpack_function_t *fun = cont->fun;
+  void *extra = R_ExternalPtrAddr(extE);
+  SEXP res;
+
+  PROTECT(res = NEW_NUMERIC(Rf_xlength(pv)));
+  fun(REAL(res), REAL(pv), Rf_xlength(pv), extra);
+
+  UNPROTECT(1);
+  return res;
+}
+
+/* Handler for leading eigenvector callbacks - converts C types to R types */
+igraph_error_t R_igraph_levc_handler(
+    const igraph_vector_int_t *membership,
+    igraph_integer_t comm,
+    igraph_real_t eigenvalue,
+    const igraph_vector_t *eigenvector,
+    igraph_arpack_function_t *arpack_multiplier,
+    void *arpack_extra,
+    void *extra) {
+
+  R_igraph_levc_callback_data_t *data = (R_igraph_levc_callback_data_t *)extra;
+  SEXP callback = data->callback;
+  SEXP s_memb, s_comm, s_evalue, s_evector, s_multip;
+  SEXP R_fcall, R_multip_call;
+  SEXP res, l1, l2, l3;
+  int result;
+  R_igraph_arpack_function_container_t cont = { arpack_multiplier };
+
+  /* Convert C types to R types */
+  PROTECT(s_memb = Ry_igraph_vector_int_to_SEXP(membership));
+  PROTECT(s_comm = NEW_NUMERIC(1));
+  REAL(s_comm)[0] = comm;
+  PROTECT(s_evalue = NEW_NUMERIC(1));
+  REAL(s_evalue)[0] = eigenvalue;
+  PROTECT(s_evector = Ry_igraph_vector_to_SEXP(eigenvector));
+  
+  /* Create the ARPACK multiplier function accessible from R */
+  PROTECT(l1 = Rf_install("igraph.i.levc.arp"));
+  PROTECT(l2 = R_MakeExternalPtr((void*)&cont, R_NilValue, R_NilValue));
+  PROTECT(l3 = R_MakeExternalPtr(arpack_extra, R_NilValue, R_NilValue));
+  PROTECT(R_multip_call = Rf_lang3(l1, l2, l3));
+  PROTECT(s_multip = Rf_eval(R_multip_call, data->env_arp));
+
+  /* Build the call: callback(membership, community, value, vector, multiplier, extra) */
+  PROTECT(R_fcall = Rx_igraph_i_lang7(callback, s_memb, s_comm, s_evalue, s_evector, s_multip, data->extra));
+  PROTECT(res = Rf_eval(R_fcall, data->env));
+
+  /* Check if result is an error condition (from tryCatch) */
+  if (Rf_inherits(res, "error")) {
+    UNPROTECT(11);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+
+  result = (int) REAL(AS_NUMERIC(res))[0];
+
+  UNPROTECT(11);
+  return result;
+}
+
+/* Closure function for leading eigenvector community detection */
+igraph_error_t igraph_community_leading_eigenvector_callback_closure(
+    const igraph_t *graph,
+    const igraph_vector_t *weights,
+    igraph_matrix_int_t *merges,
+    igraph_vector_int_t *membership,
+    igraph_integer_t steps,
+    igraph_arpack_options_t *options,
+    igraph_real_t *modularity,
+    igraph_bool_t start,
+    igraph_vector_t *eigenvalues,
+    igraph_vector_list_t *eigenvectors,
+    igraph_vector_t *history,
+    SEXP callback,
+    SEXP extra,
+    SEXP env,
+    SEXP env_arp) {
+
+  /* If callback is NULL, pass NULL to the C function */
+  if (Rf_isNull(callback)) {
+    return igraph_community_leading_eigenvector(
+        graph, weights, merges, membership, steps, options, modularity, start,
+        eigenvalues, eigenvectors, history,
+        NULL, NULL);
+  }
+
+  /* Otherwise, use the handler */
+  R_igraph_levc_callback_data_t data = { 
+    .callback = callback, 
+    .extra = extra ? extra : R_NilValue,  /* Convert NULL to R_NilValue */
+    .env = env,
+    .env_arp = env_arp
+  };
+
+  return igraph_community_leading_eigenvector(
+      graph, weights, merges, membership, steps, options, modularity, start,
+      eigenvalues, eigenvectors, history,
+      R_igraph_levc_handler, &data);
+}
