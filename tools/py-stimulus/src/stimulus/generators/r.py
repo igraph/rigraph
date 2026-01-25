@@ -22,7 +22,7 @@ from .utils import create_indentation_function
 indent = create_indentation_function("  ")
 
 init_functions = {
-    "igraph_vector_int_t": "IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));\nIGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);"
+    "igraph_vector_int_t": "IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));\nIGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);"
 }
 
 
@@ -548,6 +548,10 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result;"])
         else:
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result, r_names;"])
+        
+        # Add local finally stack declaration
+        res += "\nIGRAPH_LOCAL_FINALLY_STACK;"
+        
         return indent(res)
 
     def chunk_inconv(self, desc: FunctionDescriptor) -> str:
