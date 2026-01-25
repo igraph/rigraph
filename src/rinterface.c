@@ -12721,6 +12721,9 @@ SEXP R_igraph_community_voronoi(SEXP graph, SEXP lengths, SEXP weights, SEXP mod
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_generators, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_generators);
+  if (!Rf_isNull(lengths)) {
+    Rz_SEXP_to_vector(lengths, &c_lengths);
+  }
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
@@ -12728,7 +12731,7 @@ SEXP R_igraph_community_voronoi(SEXP graph, SEXP lengths, SEXP weights, SEXP mod
   IGRAPH_R_CHECK_REAL(radius);
   c_radius = REAL(radius)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_voronoi(&c_graph, &c_membership, &c_generators, &c_modularity, (Rf_isNull(lengths) ? 0 : c_lengths), (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_radius));
+  IGRAPH_R_CHECK(igraph_community_voronoi(&c_graph, &c_membership, &c_generators, &c_modularity, (Rf_isNull(lengths) ? 0 : &c_lengths), (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_radius));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));

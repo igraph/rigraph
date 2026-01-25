@@ -370,6 +370,22 @@ EDGEWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+EDGE_LENGTHS:
+    # Edge lengths vector - similar to EDGEWEIGHTS but without automatic attribute lookup
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: Rz_SEXP_to_vector(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEXWEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t

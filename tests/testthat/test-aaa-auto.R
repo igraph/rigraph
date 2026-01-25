@@ -11383,3 +11383,188 @@ test_that("layout_merge_dla_impl basic", {
   expect_equal(nrow(result), 6)
   expect_equal(ncol(result), 2)
 })
+
+# get_eid_impl
+test_that("get_eid_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4))
+
+  expect_snapshot(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  ))
+
+  # Structured tests
+  result <- get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  )
+  expect_type(result, "integer")
+  expect_length(result, 1)
+  expect_true(result >= 1)
+})
+
+test_that("get_eid_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = NULL,
+    from = 1,
+    to = 2
+  ))
+})
+
+# community_voronoi_impl
+test_that("community_voronoi_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 10), c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9))
+
+  expect_snapshot(community_voronoi_impl(
+    graph = g
+  ))
+
+  # Structured tests
+  result <- community_voronoi_impl(
+    graph = g
+  )
+  expect_type(result, "list")
+  expect_named(result, c("membership", "generators", "modularity"))
+})
+
+test_that("community_voronoi_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  expect_snapshot_igraph_error(community_voronoi_impl(
+    graph = NULL
+  ))
+})
+
+# subisomorphic_lad_impl
+test_that("subisomorphic_lad_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  pattern <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  target <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4))
+
+  expect_snapshot(subisomorphic_lad_impl(
+    pattern = pattern,
+    target = target,
+    induced = FALSE,
+    time_limit = 0
+  ))
+
+  # Structured tests
+  result <- subisomorphic_lad_impl(
+    pattern = pattern,
+    target = target,
+    induced = FALSE,
+    time_limit = 0
+  )
+  expect_type(result, "list")
+})
+
+test_that("subisomorphic_lad_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = NULL,
+    target = g,
+    induced = FALSE,
+    time_limit = 0
+  ))
+})
+
+# eigen_matrix_impl
+test_that("eigen_matrix_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  A <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
+
+  expect_snapshot(eigen_matrix_impl(
+    A = A,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1),
+    options = arpack_defaults()
+  ))
+
+  # Structured tests
+  result <- eigen_matrix_impl(
+    A = A,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1),
+    options = arpack_defaults()
+  )
+  expect_type(result, "list")
+})
+
+test_that("eigen_matrix_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  expect_snapshot_igraph_error(eigen_matrix_impl(
+    A = NULL,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
+})
+
+# eigen_matrix_symmetric_impl
+test_that("eigen_matrix_symmetric_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  A <- matrix(c(1, 2, 2, 1), nrow = 2, ncol = 2)
+
+  expect_snapshot(eigen_matrix_symmetric_impl(
+    A = A,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1),
+    options = arpack_defaults()
+  ))
+
+  # Structured tests
+  result <- eigen_matrix_symmetric_impl(
+    A = A,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1),
+    options = arpack_defaults()
+  )
+  expect_type(result, "list")
+})
+
+test_that("eigen_matrix_symmetric_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  
+  expect_snapshot_igraph_error(eigen_matrix_symmetric_impl(
+    A = NULL,
+    sA = NULL,
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
+})

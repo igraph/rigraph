@@ -9505,6 +9505,11 @@ community_voronoi_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (!is.null(lengths) && !all(is.na(lengths))) {
+    lengths <- as.numeric(lengths)
+  } else {
+    lengths <- NULL
+  }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
