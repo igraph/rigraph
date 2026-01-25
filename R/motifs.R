@@ -141,6 +141,12 @@ dyad.census <- function(graph) {
 #'   in the motif) and `isoclass` (the isomorphism class of the motif).
 #'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
 #'   If `NULL` (the default), motif counts are returned as a numeric vector.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
 #' @return When `callback` is `NULL`, `motifs()` returns a numeric vector,
 #'   the number of occurrences of each motif in the graph. The motifs are ordered
 #'   by their isomorphism classes. Note that for unconnected subgraphs, which are
