@@ -9620,6 +9620,12 @@ graphlets_project_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(cliques) && !is.list(cliques)) {
+    cli::cli_abort(
+      "{.arg cliques} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
   Muc <- as.numeric(Muc)
   startMu <- as.logical(startMu)
   niter <- as.numeric(niter)
@@ -10866,6 +10872,12 @@ local_scan_neighborhood_ecount_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(neighborhoods) && !is.list(neighborhoods)) {
+    cli::cli_abort(
+      "{.arg neighborhoods} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -10893,6 +10905,12 @@ local_scan_subset_ecount_impl <- function(
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
+  }
+  if (!is.null(subsets) && !is.list(subsets)) {
+    cli::cli_abort(
+      "{.arg subsets} must be a list or NULL",
+      call = rlang::caller_env()
+    )
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -12751,13 +12769,11 @@ subisomorphic_lad_impl <- function(
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
-  if (!is.null(domains)) {
-    if (!is.list(domains)) {
-      cli::cli_abort(
-        "{.arg domains} must be a list or NULL",
-        call = rlang::caller_env()
-      )
-    }
+  if (!is.null(domains) && !is.list(domains)) {
+    cli::cli_abort(
+      "{.arg domains} must be a list or NULL",
+      call = rlang::caller_env()
+    )
   }
   induced <- as.logical(induced)
   time_limit <- as.numeric(time_limit)
@@ -14193,7 +14209,6 @@ cliques_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14226,7 +14241,6 @@ maximal_cliques_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -14302,7 +14316,6 @@ get_isomorphisms_vf2_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -14382,7 +14395,6 @@ get_subisomorphisms_vf2_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14427,7 +14439,6 @@ simple_cycles_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14463,7 +14474,6 @@ motifs_randesu_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

@@ -405,7 +405,7 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%_wrapped'
-    INCONV: |
+    INCONV: |-
         if (!is.function(%I%)) {
           cli::cli_abort("{.arg callback} must be a function")
         }
@@ -426,6 +426,14 @@ ISOMORPHISM_FUNC:
 
 VERTEXSET_LIST:
     CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
+    INCONV:
+        IN: |-
+            if (!is.null(%I%) && !is.list(%I%)) {
+              cli::cli_abort(
+                "{.arg %I%} must be a list or NULL",
+                call = rlang::caller_env()
+              )
+            }
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
