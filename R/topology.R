@@ -790,55 +790,53 @@ graph.count.subisomorphisms.vf2 <- function(
 isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
   method <- igraph_match_arg(method)
 
-  if (!is.null(callback) && method != "vf2") {
+  if (method != "vf2") {
     cli::cli_abort(
-      "Callback parameter is only supported for {.arg method} = {.val vf2}."
+      "Only {.arg method} = {.val vf2} is currently supported."
     )
   }
 
-  if (method == "vf2") {
-    if (is.null(callback)) {
-      graph.get.isomorphisms.vf2(graph1, graph2, ...)
-    } else {
-      # Extract color parameters from ... if present
-      dots <- list(...)
-      vertex.color1 <- dots$vertex.color1 %||% NULL
-      vertex.color2 <- dots$vertex.color2 %||% NULL
-      edge.color1 <- dots$edge.color1 %||% NULL
-      edge.color2 <- dots$edge.color2 %||% NULL
-      
-      # Validate graphs
-      ensure_igraph(graph1)
-      ensure_igraph(graph2)
-      
-      # Handle default vertex colors from attributes
-      if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
-        vertex.color1 <- V(graph1)$color
-      }
-      if (is.null(vertex.color2) && "color" %in% vertex_attr_names(graph2)) {
-        vertex.color2 <- V(graph2)$color
-      }
-      
-      # Handle default edge colors from attributes
-      if (is.null(edge.color1) && "color" %in% edge_attr_names(graph1)) {
-        edge.color1 <- E(graph1)$color
-      }
-      if (is.null(edge.color2) && "color" %in% edge_attr_names(graph2)) {
-        edge.color2 <- E(graph2)$color
-      }
-      
-      # Call the closure implementation
-      get_isomorphisms_vf2_callback_closure_impl(
-        graph1 = graph1,
-        graph2 = graph2,
-        vertex_color1 = vertex.color1,
-        vertex_color2 = vertex.color2,
-        edge_color1 = edge.color1,
-        edge_color2 = edge.color2,
-        callback = callback
-      )
-      invisible(NULL)
+  if (is.null(callback)) {
+    graph.get.isomorphisms.vf2(graph1, graph2, ...)
+  } else {
+    # Extract color parameters from ... if present
+    dots <- list(...)
+    vertex.color1 <- dots$vertex.color1 %||% NULL
+    vertex.color2 <- dots$vertex.color2 %||% NULL
+    edge.color1 <- dots$edge.color1 %||% NULL
+    edge.color2 <- dots$edge.color2 %||% NULL
+    
+    # Validate graphs
+    ensure_igraph(graph1)
+    ensure_igraph(graph2)
+    
+    # Handle default vertex colors from attributes
+    if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
+      vertex.color1 <- V(graph1)$color
     }
+    if (is.null(vertex.color2) && "color" %in% vertex_attr_names(graph2)) {
+      vertex.color2 <- V(graph2)$color
+    }
+    
+    # Handle default edge colors from attributes
+    if (is.null(edge.color1) && "color" %in% edge_attr_names(graph1)) {
+      edge.color1 <- E(graph1)$color
+    }
+    if (is.null(edge.color2) && "color" %in% edge_attr_names(graph2)) {
+      edge.color2 <- E(graph2)$color
+    }
+    
+    # Call the closure implementation
+    get_isomorphisms_vf2_callback_closure_impl(
+      graph1 = graph1,
+      graph2 = graph2,
+      vertex_color1 = vertex.color1,
+      vertex_color2 = vertex.color2,
+      edge_color1 = edge.color1,
+      edge_color2 = edge.color2,
+      callback = callback
+    )
+    invisible(NULL)
   }
 }
 

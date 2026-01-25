@@ -430,7 +430,7 @@ test_that("transitive_closure preserves isolated vertices", {
 })
 
 # Tests for isomorphism callback functions
-test_that("isomorphisms_vf2_callback works", {
+test_that("isomorphisms works with callback", {
   withr::local_seed(123)
 
   # Create two isomorphic graphs
