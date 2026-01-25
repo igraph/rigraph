@@ -3,7 +3,7 @@
     Code
       empty_impl()
     Output
-      IGRAPH D--- 0 0 --
+      IGRAPH D--- 0 0 -- 
       + edges:
 
 ---
@@ -11,7 +11,7 @@
     Code
       empty_impl(n = 5, directed = FALSE)
     Output
-      IGRAPH U--- 5 0 --
+      IGRAPH U--- 5 0 -- 
       + edges:
 
 # empty_impl errors
@@ -22,6 +22,15 @@
       Error in `empty_impl()`:
       ! Number of vertices must not be negative. Invalid value
       Source: <file>:<line>
+
+# add_edges_impl basic
+
+    Code
+      add_edges_impl(graph = g, edges = c(1, 2, 2, 3))
+    Output
+      IGRAPH D--- 3 2 -- 
+      + edges:
+      [1] 1->2 2->3
 
 # add_edges_impl errors
 
@@ -36,7 +45,7 @@
     Code
       copy_impl(from = g)
     Output
-      IGRAPH D--- 2 0 --
+      IGRAPH D--- 2 0 -- 
       + edges:
 
 # copy_impl errors
@@ -53,15 +62,15 @@
       delete_vertices_idx_impl(graph = g, vertices = 1)
     Output
       $graph
-      IGRAPH D--- 2 0 --
+      IGRAPH D--- 2 0 -- 
       + edges:
-
+      
       $idx
       [1] 0 1 2
-
+      
       $invidx
       [1] 1 2
-
+      
 
 # delete_vertices_idx_impl errors
 
@@ -128,7 +137,7 @@
     Code
       wheel_impl(n = 5)
     Output
-      IGRAPH D--- 5 8 --
+      IGRAPH D--- 5 8 -- 
       + edges:
       [1] 1->2 1->3 1->4 1->5 2->3 3->4 4->5 5->2
 
@@ -137,7 +146,7 @@
     Code
       wheel_impl(n = 5, mode = "in", center = 2)
     Output
-      IGRAPH D--- 5 8 --
+      IGRAPH D--- 5 8 -- 
       + edges:
       [1] 1->3 2->3 4->3 5->3 1->2 2->4 4->5 5->1
 
@@ -155,7 +164,7 @@
     Code
       hypercube_impl(n = 3)
     Output
-      IGRAPH U--- 8 12 --
+      IGRAPH U--- 8 12 -- 
       + edges:
        [1] 1--2 1--3 1--5 2--4 2--6 3--4 3--7 4--8 5--6 5--7 6--8 7--8
 
@@ -164,7 +173,7 @@
     Code
       hypercube_impl(n = 3, directed = TRUE)
     Output
-      IGRAPH D--- 8 12 --
+      IGRAPH D--- 8 12 -- 
       + edges:
        [1] 1->2 1->3 1->5 2->4 2->6 3->4 3->7 4->8 5->6 5->7 6->8 7->8
 
@@ -182,7 +191,7 @@
     Code
       square_lattice_impl(dimvector = c(2, 2))
     Output
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--2 1--3 2--4 3--4
 
@@ -192,7 +201,7 @@
       square_lattice_impl(dimvector = c(2, 2), nei = 2, directed = TRUE, mutual = TRUE,
       periodic = c(TRUE, TRUE))
     Output
-      IGRAPH D--- 4 10 --
+      IGRAPH D--- 4 10 -- 
       + edges:
        [1] 1->2 1->3 2->1 2->4 3->4 3->1 4->3 4->2 1->4 2->3
 
@@ -210,7 +219,7 @@
     Code
       triangular_lattice_impl(dimvector = c(2, 2))
     Output
-      IGRAPH U--- 4 5 --
+      IGRAPH U--- 4 5 -- 
       + edges:
       [1] 1--2 1--4 1--3 2--4 3--4
 
@@ -219,7 +228,7 @@
     Code
       triangular_lattice_impl(dimvector = c(2, 2), directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 4 10 --
+      IGRAPH D--- 4 10 -- 
       + edges:
        [1] 1->2 2->1 1->4 4->1 1->3 3->1 2->4 4->2 3->4 4->3
 
@@ -237,7 +246,7 @@
     Code
       path_graph_impl(n = 5)
     Output
-      IGRAPH U--- 5 4 --
+      IGRAPH U--- 5 4 -- 
       + edges:
       [1] 1--2 2--3 3--4 4--5
 
@@ -246,7 +255,7 @@
     Code
       path_graph_impl(n = 5, directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 5 8 --
+      IGRAPH D--- 5 8 -- 
       + edges:
       [1] 1->2 2->1 2->3 3->2 3->4 4->3 4->5 5->4
 
@@ -264,7 +273,7 @@
     Code
       cycle_graph_impl(n = 5)
     Output
-      IGRAPH U--- 5 5 --
+      IGRAPH U--- 5 5 -- 
       + edges:
       [1] 1--2 2--3 3--4 4--5 1--5
 
@@ -273,7 +282,7 @@
     Code
       cycle_graph_impl(n = 5, directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 5 10 --
+      IGRAPH D--- 5 10 -- 
       + edges:
        [1] 1->2 2->1 2->3 3->2 3->4 4->3 4->5 5->4 5->1 1->5
 
@@ -291,7 +300,7 @@
     Code
       symmetric_tree_impl(branches = 3)
     Output
-      IGRAPH D--- 4 3 --
+      IGRAPH D--- 4 3 -- 
       + edges:
       [1] 1->2 1->3 1->4
 
@@ -300,7 +309,7 @@
     Code
       symmetric_tree_impl(branches = 3, type = "in")
     Output
-      IGRAPH D--- 4 3 --
+      IGRAPH D--- 4 3 -- 
       + edges:
       [1] 2->1 3->1 4->1
 
@@ -318,7 +327,7 @@
     Code
       regular_tree_impl(h = 2)
     Output
-      IGRAPH U--- 10 9 --
+      IGRAPH U--- 10 9 -- 
       + edges:
       [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 3-- 7 3-- 8 4-- 9 4--10
 
@@ -327,7 +336,7 @@
     Code
       regular_tree_impl(h = 2, k = 4, type = "in")
     Output
-      IGRAPH D--- 17 16 --
+      IGRAPH D--- 17 16 -- 
       + edges:
        [1]  2->1  3->1  4->1  5->1  6->2  7->2  8->2  9->3 10->3 11->3 12->4 13->4
       [13] 14->4 15->5 16->5 17->5
@@ -346,7 +355,7 @@
     Code
       full_citation_impl(n = 5)
     Output
-      IGRAPH D--- 5 10 --
+      IGRAPH D--- 5 10 -- 
       + edges:
        [1] 2->1 3->1 3->2 4->1 4->2 4->3 5->1 5->2 5->3 5->4
 
@@ -355,7 +364,7 @@
     Code
       full_citation_impl(n = 5, directed = FALSE)
     Output
-      IGRAPH U--- 5 10 --
+      IGRAPH U--- 5 10 -- 
       + edges:
        [1] 1--2 1--3 2--3 1--4 2--4 3--4 1--5 2--5 3--5 4--5
 
@@ -373,7 +382,7 @@
     Code
       atlas_impl(number = 0)
     Output
-      IGRAPH U--- 0 0 --
+      IGRAPH U--- 0 0 -- 
       + edges:
 
 ---
@@ -381,7 +390,7 @@
     Code
       atlas_impl(number = 5)
     Output
-      IGRAPH U--- 3 1 --
+      IGRAPH U--- 3 1 -- 
       + edge:
       [1] 2--3
 
@@ -399,7 +408,7 @@
     Code
       extended_chordal_ring_impl(nodes = 5, W = matrix(c(1, 2)))
     Output
-      IGRAPH U--- 5 15 --
+      IGRAPH U--- 5 15 -- 
       + edges:
        [1] 1--2 2--3 3--4 4--5 1--5 1--2 1--3 2--3 2--4 3--4 3--5 4--5 1--4 1--5 2--5
 
@@ -408,7 +417,7 @@
     Code
       extended_chordal_ring_impl(nodes = 5, W = matrix(c(1, 2)), directed = TRUE)
     Output
-      IGRAPH D--- 5 15 --
+      IGRAPH D--- 5 15 -- 
       + edges:
        [1] 1->2 2->3 3->4 4->5 5->1 1->2 1->3 2->3 2->4 3->4 3->5 4->5 4->1 5->1 5->2
 
@@ -426,7 +435,7 @@
     Code
       graph_power_impl(graph = g, order = 2)
     Output
-      IGRAPH U--- 5 7 --
+      IGRAPH U--- 5 7 -- 
       + edges:
       [1] 1--2 2--3 3--4 4--5 1--3 2--4 3--5
 
@@ -435,7 +444,7 @@
     Code
       graph_power_impl(graph = g, order = 2, directed = TRUE)
     Output
-      IGRAPH U--- 5 7 --
+      IGRAPH U--- 5 7 -- 
       + edges:
       [1] 1--2 2--3 3--4 4--5 1--3 2--4 3--5
 
@@ -452,7 +461,7 @@
     Code
       linegraph_impl(graph = g)
     Output
-      IGRAPH U--- 4 3 --
+      IGRAPH U--- 4 3 -- 
       + edges:
       [1] 1--2 2--3 3--4
 
@@ -469,7 +478,7 @@
     Code
       de_bruijn_impl(m = 2, n = 3)
     Output
-      IGRAPH D--- 8 16 --
+      IGRAPH D--- 8 16 -- 
       + edges:
        [1] 1->1 1->2 2->3 2->4 3->5 3->6 4->7 4->8 5->1 5->2 6->3 6->4 7->5 7->6 8->7
       [16] 8->8
@@ -488,7 +497,7 @@
     Code
       kautz_impl(m = 2, n = 3)
     Output
-      IGRAPH D--- 24 48 --
+      IGRAPH D--- 24 48 -- 
       + edges:
        [1]  1-> 9  1->10  2->11  2->12  3->13  3->14  4->15  4->16  5->17  5->18
       [11]  6->19  6->20  7->21  7->22  8->23  8->24  9-> 1  9-> 2 10-> 3 10-> 4
@@ -530,7 +539,7 @@
     Code
       mycielski_graph_impl(k = 3)
     Output
-      IGRAPH U--- 5 5 --
+      IGRAPH U--- 5 5 -- 
       + edges:
       [1] 1--2 1--4 2--3 3--5 4--5
 
@@ -548,7 +557,7 @@
     Code
       adjlist_impl(adjlist = list(c(2, 3), c(1), c(1)), mode = "out")
     Output
-      IGRAPH D--- 3 4 --
+      IGRAPH D--- 3 4 -- 
       + edges:
       [1] 1->2 1->3 2->1 3->1
 
@@ -567,13 +576,13 @@
       full_bipartite_impl(n1 = 2, n2 = 3)
     Output
       $graph
-      IGRAPH U--- 5 6 --
+      IGRAPH U--- 5 6 -- 
       + edges:
       [1] 1--3 1--4 1--5 2--3 2--4 2--5
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
-
+      
 
 ---
 
@@ -581,13 +590,13 @@
       full_bipartite_impl(n1 = 2, n2 = 3, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 5 6 --
+      IGRAPH D--- 5 6 -- 
       + edges:
       [1] 3->1 4->1 5->1 3->2 4->2 5->2
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
-
+      
 
 # full_bipartite_impl errors
 
@@ -604,23 +613,23 @@
       full_multipartite_impl(n = c(2, 3, 4))
     Output
       $graph
-      IGRAPH U--- 9 26 --
+      IGRAPH U--- 9 26 -- 
       + edges:
        [1] 1--3 1--4 1--5 1--6 1--7 1--8 1--9 2--3 2--4 2--5 2--6 2--7 2--8 2--9 3--6
       [16] 3--7 3--8 3--9 4--6 4--7 4--8 4--9 5--6 5--7 5--8 5--9
-
+      
       $types
       [1] 1 1 2 2 2 3 3 3 3
-
+      
       $name
       [1] "Full multipartite graph"
-
+      
       $n
       [1] 2 3 4
-
+      
       $mode
       [1] 3
-
+      
 
 ---
 
@@ -628,23 +637,23 @@
       full_multipartite_impl(n = c(2, 3, 4), directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 9 26 --
+      IGRAPH D--- 9 26 -- 
       + edges:
        [1] 3->1 4->1 5->1 6->1 7->1 8->1 9->1 3->2 4->2 5->2 6->2 7->2 8->2 9->2 6->3
       [16] 7->3 8->3 9->3 6->4 7->4 8->4 9->4 6->5 7->5 8->5 9->5
-
+      
       $types
       [1] 1 1 2 2 2 3 3 3 3
-
+      
       $name
       [1] "Full multipartite graph"
-
+      
       $n
       [1] 2 3 4
-
+      
       $mode
       [1] 2
-
+      
 
 # full_multipartite_impl errors
 
@@ -753,7 +762,7 @@
     Code
       generalized_petersen_impl(n = 5, k = 2)
     Output
-      IGRAPH U--- 10 15 --
+      IGRAPH U--- 10 15 -- 
       + edges:
        [1] 1-- 2 1-- 6 6-- 8 2-- 3 2-- 7 7-- 9 3-- 4 3-- 8 8--10 4-- 5 4-- 9 6-- 9
       [13] 1-- 5 5--10 7--10
@@ -773,22 +782,22 @@
       turan_impl(n = 5, r = 2)
     Output
       $graph
-      IGRAPH U--- 5 6 --
+      IGRAPH U--- 5 6 -- 
       + edges:
       [1] 1--4 1--5 2--4 2--5 3--4 3--5
-
+      
       $types
       [1] 1 1 1 2 2
-
+      
       $name
       [1] "Turan graph"
-
+      
       $n
       [1] 5
-
+      
       $r
       [1] 2
-
+      
 
 # turan_impl errors
 
@@ -804,7 +813,7 @@
     Code
       erdos_renyi_game_gnp_impl(n = 5, p = 0.5)
     Output
-      IGRAPH U--- 5 7 --
+      IGRAPH U--- 5 7 -- 
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
 
@@ -813,7 +822,7 @@
     Code
       erdos_renyi_game_gnp_impl(n = 5, p = 0.5, directed = TRUE, loops = TRUE)
     Output
-      IGRAPH D--- 5 12 --
+      IGRAPH D--- 5 12 -- 
       + edges:
        [1] 2->1 3->1 4->1 2->2 1->3 2->3 4->3 1->4 2->4 5->4 3->5 4->5
 
@@ -831,7 +840,7 @@
     Code
       erdos_renyi_game_gnm_impl(n = 5, m = 3)
     Output
-      IGRAPH U--- 5 3 --
+      IGRAPH U--- 5 3 -- 
       + edges:
       [1] 3--4 2--5 4--5
 
@@ -840,7 +849,7 @@
     Code
       erdos_renyi_game_gnm_impl(n = 5, m = 3, directed = TRUE, loops = TRUE)
     Output
-      IGRAPH D--- 5 3 --
+      IGRAPH D--- 5 3 -- 
       + edges:
       [1] 4->3 5->3 3->5
 
@@ -899,13 +908,13 @@
       fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Output
       $graph
-      IGRAPH U--- 5 4 --
+      IGRAPH U--- 5 4 -- 
       + edges:
       [1] 1--3 3--4 1--4 1--5
-
+      
       $node_type_vec
       [1] 1 0 0 1 1
-
+      
 
 # preference_game_impl errors
 
@@ -925,16 +934,16 @@
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Output
       $graph
-      IGRAPH D--- 5 9 --
+      IGRAPH D--- 5 9 -- 
       + edges:
       [1] 2->4 4->2 5->2 1->3 4->3 4->5 3->1 1->4 1->5
-
+      
       $node_type_out_vec
       [1] 1 0 1 1 1
-
+      
       $node_type_in_vec
       [1] 1 0 0 1 1
-
+      
 
 # asymmetric_preference_game_impl errors
 
@@ -952,7 +961,7 @@
     Code
       rewire_edges_impl(graph = g, prob = 0.5)
     Output
-      IGRAPH U--- 5 4 --
+      IGRAPH U--- 5 4 -- 
       + edges:
       [1] 2--4 3--4 1--3 2--5
 
@@ -969,7 +978,7 @@
     Code
       rewire_directed_edges_impl(graph = g, prob = 0.5)
     Output
-      IGRAPH D--- 5 4 --
+      IGRAPH D--- 5 4 -- 
       + edges:
       [1] 1->4 2->3 3->2 4->5
 
@@ -1256,15 +1265,15 @@
       correlated_pair_game_impl(n = 5, corr = 0.5, p = 0.5)
     Output
       $graph1
-      IGRAPH U--- 5 7 --
+      IGRAPH U--- 5 7 -- 
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
-
+      
       $graph2
-      IGRAPH U--- 5 7 --
+      IGRAPH U--- 5 7 -- 
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 3--5
-
+      
 
 ---
 
@@ -1272,15 +1281,15 @@
       correlated_pair_game_impl(n = 5, corr = 0.5, p = 0.5, directed = TRUE)
     Output
       $graph1
-      IGRAPH D--- 5 10 --
+      IGRAPH D--- 5 10 -- 
       + edges:
        [1] 4->1 5->1 2->5 4->2 5->2 3->5 1->4 2->4 4->5 5->4
-
+      
       $graph2
-      IGRAPH D--- 5 9 --
+      IGRAPH D--- 5 9 -- 
       + edges:
       [1] 1->5 2->1 2->5 4->2 4->3 1->4 2->4 4->5 5->4
-
+      
 
 # correlated_pair_game_impl errors
 
@@ -1300,7 +1309,7 @@
       Greater than 1 connection probability in dot-product graph.
       Source: games/dotproduct.c:90
     Output
-      IGRAPH U--- 2 1 --
+      IGRAPH U--- 2 1 -- 
       + edge:
       [1] 1--2
 
@@ -1313,7 +1322,7 @@
       Greater than 1 connection probability in dot-product graph.
       Source: games/dotproduct.c:90
     Output
-      IGRAPH D--- 2 2 --
+      IGRAPH D--- 2 2 -- 
       + edges:
       [1] 1->2 2->1
 
@@ -1424,13 +1433,13 @@
     Output
       $res
       [1] 0.3333333 0.5000000 0.3333333
-
+      
       $reachable_count
       [1] 2 2 2
-
+      
       $all_reachable
       [1] TRUE
-
+      
 
 ---
 
@@ -1439,13 +1448,13 @@
     Output
       $res
       [1] 0.6666667 1.0000000 0.6666667
-
+      
       $reachable_count
       [1] 2 2 2
-
+      
       $all_reachable
       [1] TRUE
-
+      
 
 ---
 
@@ -1454,13 +1463,13 @@
     Output
       $res
       [1] 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667
-
+      
       $reachable_count
       [1] 4 4 4 4 4
-
+      
       $all_reachable
       [1] TRUE
-
+      
 
 # closeness_impl errors
 
@@ -1477,13 +1486,13 @@
     Output
       $res
       [1] 0.3333333 0.5000000 0.3333333
-
+      
       $reachable_count
       [1] 2 2 2
-
+      
       $all_reachable
       [1] TRUE
-
+      
 
 ---
 
@@ -1492,13 +1501,13 @@
     Output
       $res
       [1] 1 1 1
-
+      
       $reachable_count
       [1] 1 2 1
-
+      
       $all_reachable
       [1] FALSE
-
+      
 
 # closeness_cutoff_impl errors
 
@@ -1516,11 +1525,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
 
 # get_shortest_path_impl errors
 
@@ -1538,11 +1547,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
 
 # get_shortest_path_bellman_ford_impl errors
 
@@ -1560,11 +1569,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
 
 # get_shortest_path_dijkstra_impl errors
 
@@ -1583,17 +1592,17 @@
       $vpaths[[1]]
       + 3/3 vertices:
       [1] 1 2 3
-
-
+      
+      
       $epaths
       $epaths[[1]]
       + 2/2 edges:
       [1] 1--2 2--3
-
-
+      
+      
       $nrgeo
       [1] 1 1 1
-
+      
 
 # get_all_shortest_paths_impl errors
 
@@ -1612,17 +1621,17 @@
       $vpaths[[1]]
       + 3/3 vertices:
       [1] 1 2 3
-
-
+      
+      
       $epaths
       $epaths[[1]]
       + 2/2 edges:
       [1] 1--2 2--3
-
-
+      
+      
       $nrgeo
       [1] 1 1 1
-
+      
 
 # get_all_shortest_paths_dijkstra_impl errors
 
@@ -1639,10 +1648,10 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $distances
       [1] 0 1 2
-
+      
 
 ---
 
@@ -1651,10 +1660,10 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $distances
       [1] 0 1 2
-
+      
 
 ---
 
@@ -1663,10 +1672,10 @@
     Output
       $membership
        [1] 0 0 0 1 1 1 1 1 0 0
-
+      
       $distances
        [1] 0 1 2 1 0 1 2 3 2 1
-
+      
 
 # voronoi_impl errors
 
@@ -1701,14 +1710,14 @@
       $vpaths[[1]]
       + 3/3 vertices:
       [1] 1 2 3
-
-
+      
+      
       $epaths
       $epaths[[1]]
       + 2/2 edges:
       [1] 1--2 2--3
-
-
+      
+      
 
 # get_k_shortest_paths_impl errors
 
@@ -1726,11 +1735,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
 
 # get_widest_path_impl errors
 
@@ -1749,20 +1758,20 @@
       $vertices[[1]]
       + 3/3 vertices:
       [1] 1 2 3
-
-
+      
+      
       $edges
       $edges[[1]]
       + 2/2 edges:
       [1] 1--2 2--3
-
-
+      
+      
       $parents
       [1] -1  0  1
-
+      
       $inbound_edges
       [1] -1  0  1
-
+      
 
 # get_widest_paths_impl errors
 
@@ -1900,13 +1909,13 @@
     Output
       $vector
       [1] 0.2567568 0.4864865 0.2567568
-
+      
       $value
       [1] 1
-
+      
       $options
       NULL
-
+      
 
 ---
 
@@ -1915,72 +1924,72 @@
     Output
       $vector
       [1] 0.2543860 0.4912281 0.2543860
-
+      
       $value
       [1] 1
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LR"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
 
 # personalized_pagerank_impl errors
 
@@ -2005,72 +2014,72 @@
     Output
       $vector
       [1] 0.3452703 0.4594595 0.1952703
-
+      
       $value
       [1] 1
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LR"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
 
 # personalized_pagerank_vs_impl errors
 
@@ -2085,7 +2094,7 @@
     Code
       induced_subgraph_impl(graph = g, vids = 1:2)
     Output
-      IGRAPH U--- 2 1 --
+      IGRAPH U--- 2 1 -- 
       + edge:
       [1] 1--2
 
@@ -2102,7 +2111,7 @@
     Code
       subgraph_from_edges_impl(graph = g, eids = 1)
     Output
-      IGRAPH U--- 2 1 --
+      IGRAPH U--- 2 1 -- 
       + edge:
       [1] 1--2
 
@@ -2119,7 +2128,7 @@
     Code
       reverse_edges_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -2138,10 +2147,10 @@
     Output
       $res
       [1] 2 1
-
+      
       $unconnected
       [1] 0
-
+      
 
 ---
 
@@ -2150,10 +2159,10 @@
     Output
       $res
       [1] 2 1
-
+      
       $unconnected
       [1] 0
-
+      
 
 # path_length_hist_impl errors
 
@@ -2168,7 +2177,7 @@
     Code
       simplify_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -2177,7 +2186,7 @@
     Code
       simplify_impl(graph = g, remove_multiple = FALSE, remove_loops = FALSE)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -2589,72 +2598,72 @@
     Output
       $vector
       [1] 0.7071068 1.0000000 0.7071068
-
+      
       $value
       [1] 1.414214
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
 
 ---
 
@@ -2663,72 +2672,72 @@
     Output
       $vector
       [1] 0.5000000 0.7071068 0.5000000
-
+      
       $value
       [1] 1.414214
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
 
 # eigenvector_centrality_impl errors
 
@@ -2745,75 +2754,75 @@
     Output
       $hub
       [1] 1 1 1 1 1
-
+      
       $authority
       [1] 1 1 1 1 1
-
+      
       $value
       [1] 16
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 5
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 4
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 4
-
-
+      
+      
 
 ---
 
@@ -2822,75 +2831,75 @@
     Output
       $hub
       [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
-
+      
       $authority
       [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
-
+      
       $value
       [1] 16
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 5
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 4
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 4
-
-
+      
+      
 
 # hub_and_authority_scores_impl errors
 
@@ -2906,13 +2915,13 @@
       unfold_tree_impl(graph = g, roots = 1)
     Output
       $tree
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $vertex_index
       [1] 1 2 3
-
+      
 
 ---
 
@@ -2920,13 +2929,13 @@
       unfold_tree_impl(graph = g, mode = "in", roots = 1)
     Output
       $tree
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $vertex_index
       [1] 1 2 3
-
+      
 
 # unfold_tree_impl errors
 
@@ -2987,11 +2996,11 @@
     Output
       $alpha
       [1] 3 2 1
-
+      
       $alpham1
       + 3/3 vertices:
       [1] 3 2 1
-
+      
 
 # maximum_cardinality_search_impl errors
 
@@ -3008,10 +3017,10 @@
     Output
       $knn
       [1] 2 1 2
-
+      
       $knnk
       [1] 2 1
-
+      
 
 ---
 
@@ -3020,10 +3029,10 @@
     Output
       $knn
       [1] 2 1 2
-
+      
       $knnk
       [1] 2 1
-
+      
 
 # avg_nearest_neighbor_degree_impl errors
 
@@ -3130,13 +3139,13 @@
     Output
       $res
       [1] 1 2 1
-
+      
       $centralization
       [1] 0.3333333
-
+      
       $theoretical_max
       [1] 6
-
+      
 
 ---
 
@@ -3145,13 +3154,13 @@
     Output
       $res
       [1] 1 2 1
-
+      
       $centralization
       [1] 2
-
+      
       $theoretical_max
       [1] 2
-
+      
 
 # centralization_degree_impl errors
 
@@ -3191,13 +3200,13 @@
     Output
       $res
       [1] 0 1 0
-
+      
       $centralization
       [1] 1
-
+      
       $theoretical_max
       [1] 2
-
+      
 
 ---
 
@@ -3206,13 +3215,13 @@
     Output
       $res
       [1] 0 1 0
-
+      
       $centralization
       [1] 2
-
+      
       $theoretical_max
       [1] 2
-
+      
 
 # centralization_betweenness_impl errors
 
@@ -3252,13 +3261,13 @@
     Output
       $res
       [1] 0.6666667 1.0000000 0.6666667
-
+      
       $centralization
       [1] 1
-
+      
       $theoretical_max
       [1] 0.6666667
-
+      
 
 ---
 
@@ -3267,13 +3276,13 @@
     Output
       $res
       [1] 0.6666667 1.0000000 0.6666667
-
+      
       $centralization
       [1] 0.6666667
-
+      
       $theoretical_max
       [1] 0.6666667
-
+      
 
 # centralization_closeness_impl errors
 
@@ -3313,78 +3322,78 @@
     Output
       $vector
       [1] 0.7071068 1.0000000 0.7071068
-
+      
       $value
       [1] 1.414214
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
       $centralization
       [1] 0.5857864
-
+      
       $theoretical_max
       [1] 1
-
+      
 
 ---
 
@@ -3394,78 +3403,78 @@
     Output
       $vector
       [1] 0.7071068 1.0000000 0.7071068
-
+      
       $value
       [1] 1.414214
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
       $centralization
       [1] 0.5857864
-
+      
       $theoretical_max
       [1] 1
-
+      
 
 # centralization_eigenvector_centrality_impl errors
 
@@ -3654,7 +3663,7 @@
     Code
       contract_vertices_impl(graph = g, mapping = c(1, 1, 2))
     Output
-      IGRAPH U--- 2 2 --
+      IGRAPH U--- 2 2 -- 
       + edges:
       [1] 1--1 1--2
 
@@ -3741,13 +3750,13 @@
     Output
       $diameter
       [1] 2
-
+      
       $from
       [1] 0
-
+      
       $to
       [1] 2
-
+      
 
 ---
 
@@ -3756,13 +3765,13 @@
     Output
       $diameter
       [1] 2
-
+      
       $from
       [1] 0
-
+      
       $to
       [1] 2
-
+      
 
 # pseudo_diameter_impl errors
 
@@ -3779,13 +3788,13 @@
     Output
       $diameter
       [1] 2
-
+      
       $from
       [1] 0
-
+      
       $to
       [1] 2
-
+      
 
 ---
 
@@ -3795,13 +3804,13 @@
     Output
       $diameter
       [1] 2
-
+      
       $from
       [1] 0
-
+      
       $to
       [1] 2
-
+      
 
 # pseudo_diameter_dijkstra_impl errors
 
@@ -3834,11 +3843,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
 
 ---
 
@@ -3848,11 +3857,11 @@
       $vertices
       + 3/3 vertices:
       [1] 1 2 1
-
+      
       $edges
       + 2/2 edges:
       [1] 1--2 1--2
-
+      
 
 # random_walk_impl errors
 
@@ -3933,7 +3942,7 @@
     Code
       transitive_closure_dag_impl(graph = g)
     Output
-      IGRAPH D--- 3 3 --
+      IGRAPH D--- 3 3 -- 
       + edges:
       [1] 1->3 1->2 2->3
 
@@ -3950,7 +3959,7 @@
     Code
       transitive_closure_impl(graph = g)
     Output
-      IGRAPH U--- 3 3 --
+      IGRAPH U--- 3 3 -- 
       + edges:
       [1] 1--2 1--3 2--3
 
@@ -4011,13 +4020,13 @@
       $order
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $layers
       [1] 0 1 2 3
-
+      
       $parents
       [1] -1  0  1
-
+      
 
 ---
 
@@ -4027,13 +4036,13 @@
       $order
       + 3/3 vertices:
       [1] 1 2 3
-
+      
       $layers
       [1] 0 1 2 3
-
+      
       $parents
       [1] -1  0  1
-
+      
 
 # bfs_simple_impl errors
 
@@ -4050,16 +4059,16 @@
     Output
       $vcount1
       [1] 2
-
+      
       $ecount1
       [1] 1
-
+      
       $vcount2
       [1] 2
-
+      
       $ecount2
       [1] 1
-
+      
 
 # bipartite_projection_size_impl errors
 
@@ -4075,13 +4084,13 @@
       biadjacency_impl(incidence = m)
     Output
       $graph
-      IGRAPH U--- 5 4 --
+      IGRAPH U--- 5 4 -- 
       + edges:
       [1] 1--3 1--4 1--5 2--5
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
-
+      
 
 ---
 
@@ -4089,13 +4098,13 @@
       biadjacency_impl(incidence = m, directed = TRUE, mode = "in", multiple = TRUE)
     Output
       $graph
-      IGRAPH D--- 5 4 --
+      IGRAPH D--- 5 4 -- 
       + edges:
       [1] 3->1 4->1 5->1 5->2
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
-
+      
 
 # biadjacency_impl errors
 
@@ -4115,13 +4124,13 @@
       $res
            [,1] [,2]
       [1,]    1    1
-
+      
       $row_ids
       [1] 2
-
+      
       $col_ids
       [1] 1 3
-
+      
 
 # get_biadjacency_impl errors
 
@@ -4138,10 +4147,10 @@
     Output
       $res
       [1] TRUE
-
+      
       $type
       [1] FALSE  TRUE FALSE
-
+      
 
 # is_bipartite_impl errors
 
@@ -4157,13 +4166,13 @@
       bipartite_game_gnp_impl(n1 = 2, n2 = 2, p = 0.5)
     Output
       $graph
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--3 2--3 1--4 2--4
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE
-
+      
 
 ---
 
@@ -4171,13 +4180,13 @@
       bipartite_game_gnp_impl(n1 = 2, n2 = 2, p = 0.5, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 4 1 --
+      IGRAPH D--- 4 1 -- 
       + edge:
       [1] 3->2
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE
-
+      
 
 # bipartite_game_gnp_impl errors
 
@@ -4194,13 +4203,13 @@
       bipartite_game_gnm_impl(n1 = 2, n2 = 2, m = 1)
     Output
       $graph
-      IGRAPH U--- 4 1 --
+      IGRAPH U--- 4 1 -- 
       + edge:
       [1] 2--4
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE
-
+      
 
 ---
 
@@ -4208,13 +4217,13 @@
       bipartite_game_gnm_impl(n1 = 2, n2 = 2, m = 1, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 4 1 --
+      IGRAPH D--- 4 1 -- 
       + edge:
       [1] 3->1
-
+      
       $types
       [1] FALSE FALSE  TRUE  TRUE
-
+      
 
 # bipartite_game_gnm_impl errors
 
@@ -4261,19 +4270,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 0 1 2 0 1 1 2
-
+      
       $i
       [1] 0 1 2 1 0 2 1
-
+      
       $x
       [1]  1  2  1 -1 -1 -1 -1
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -4285,19 +4294,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 0 1 2 0 1 1 2
-
+      
       $i
       [1] 0 1 2 1 0 2 1
-
+      
       $x
       [1]  1.0000000  1.0000000  1.0000000 -0.5773503 -0.5773503 -0.8164966 -0.8164966
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -4323,13 +4332,13 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $csize
       [1] 3
-
+      
       $no
       [1] 1
-
+      
 
 # connected_components_impl errors
 
@@ -4384,41 +4393,41 @@
     Output
       $no
       [1] 2
-
+      
       $tree_edges
       $tree_edges[[1]]
       + 1/2 edge:
       [1] 2--3
-
+      
       $tree_edges[[2]]
       + 1/2 edge:
       [1] 1--2
-
-
+      
+      
       $component_edges
       $component_edges[[1]]
       + 1/2 edge:
       [1] 2--3
-
+      
       $component_edges[[2]]
       + 1/2 edge:
       [1] 1--2
-
-
+      
+      
       $components
       $components[[1]]
       + 2/3 vertices:
       [1] 3 2
-
+      
       $components[[2]]
       + 2/3 vertices:
       [1] 2 1
-
-
+      
+      
       $articulation_points
       + 1/3 vertex:
       [1] 2
-
+      
 
 # biconnected_components_impl errors
 
@@ -4488,10 +4497,10 @@
     Output
       $giant_size
       numeric(0)
-
+      
       $vetex_count
       numeric(0)
-
+      
 
 # bond_percolation_impl errors
 
@@ -4508,10 +4517,10 @@
     Output
       $giant_size
       numeric(0)
-
+      
       $edge_count
       numeric(0)
-
+      
 
 # site_percolation_impl errors
 
@@ -4528,10 +4537,10 @@
     Output
       $giant_size
       [1] 2 3
-
+      
       $vertex_count
       [1] 2 3
-
+      
 
 # edgelist_percolation_impl errors
 
@@ -4571,23 +4580,23 @@
       [[1]]
       + 1/3 vertex:
       [1] 2
-
+      
       [[2]]
       + 1/3 vertex:
       [1] 3
-
+      
       [[3]]
       + 2/3 vertices:
       [1] 2 3
-
+      
       [[4]]
       + 1/3 vertex:
       [1] 1
-
+      
       [[5]]
       + 2/3 vertices:
       [1] 1 2
-
+      
 
 ---
 
@@ -4597,11 +4606,11 @@
       [[1]]
       + 2/3 vertices:
       [1] 2 3
-
+      
       [[2]]
       + 2/3 vertices:
       [1] 1 2
-
+      
 
 # cliques_impl errors
 
@@ -4641,11 +4650,11 @@
       [[1]]
       + 2/3 vertices:
       [1] 1 2
-
+      
       [[2]]
       + 2/3 vertices:
       [1] 2 3
-
+      
 
 # largest_cliques_impl errors
 
@@ -4700,23 +4709,23 @@
       [[1]]
       + 1/3 vertex:
       [1] 2
-
+      
       [[2]]
       + 1/3 vertex:
       [1] 3
-
+      
       [[3]]
       + 2/3 vertices:
       [1] 2 3
-
+      
       [[4]]
       + 1/3 vertex:
       [1] 1
-
+      
       [[5]]
       + 2/3 vertices:
       [1] 1 2
-
+      
 
 ---
 
@@ -4727,7 +4736,7 @@
       [[1]]
       + 2/3 vertices:
       [1] 1 2
-
+      
 
 # weighted_cliques_impl errors
 
@@ -4745,11 +4754,11 @@
       [[1]]
       + 2/3 vertices:
       [1] 1 2
-
+      
       [[2]]
       + 2/3 vertices:
       [1] 2 3
-
+      
 
 ---
 
@@ -4759,7 +4768,7 @@
       [[1]]
       + 2/3 vertices:
       [1] 2 3
-
+      
 
 # largest_weighted_cliques_impl errors
 
@@ -5010,15 +5019,15 @@
       [1,]  0.0    1
       [2,]  0.5    0
       [3,]  1.0    1
-
+      
       $extd_graph
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $extd_to_orig_eids
       [1] 1 2
-
+      
 
 ---
 
@@ -5031,15 +5040,15 @@
       [1,]    0    0
       [2,]    0    2
       [3,]    0    4
-
+      
       $extd_graph
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $extd_to_orig_eids
       [1] 1 2
-
+      
 
 # layout_sugiyama_impl errors
 
@@ -5557,14 +5566,14 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $memberships
            [,1] [,2] [,3]
       [1,]    0    0    0
-
+      
       $modularity
       [1] 0
-
+      
 
 ---
 
@@ -5573,14 +5582,14 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $memberships
            [,1] [,2] [,3]
       [1,]    0    0    0
-
+      
       $modularity
       [1] 0.5
-
+      
 
 # community_multilevel_impl errors
 
@@ -5597,10 +5606,10 @@
     Output
       $modularity
       [1] 0
-
+      
       $membership
       [1] 0 0 0
-
+      
 
 ---
 
@@ -5609,10 +5618,10 @@
     Output
       $modularity
       [1] 1.850372e-17
-
+      
       $membership
       [1] 0 0 0
-
+      
 
 # community_optimal_modularity_impl errors
 
@@ -5630,13 +5639,13 @@
     Output
       $membership
       [1] 0 1 2
-
+      
       $nb_clusters
       [1] 3
-
+      
       $quality
       [1] -1.166667
-
+      
 
 # community_leiden_impl errors
 
@@ -5653,10 +5662,10 @@
     Output
       $distance12
       [1] 0
-
+      
       $distance21
       [1] 0
-
+      
 
 # split_join_distance_impl errors
 
@@ -5676,10 +5685,10 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $codelength
       [1] 1.512987
-
+      
 
 ---
 
@@ -5689,10 +5698,10 @@
     Output
       $membership
       [1] 0 0 0
-
+      
       $codelength
       [1] 1.462254
-
+      
 
 # community_infomap_impl errors
 
@@ -5711,15 +5720,15 @@
       $cliques[[1]]
       + 2/3 vertices:
       [1] 2 3
-
+      
       $cliques[[2]]
       + 2/3 vertices:
       [1] 1 2
-
-
+      
+      
       $Mu
       [1] 0.6665667 0.3332333
-
+      
 
 ---
 
@@ -5730,15 +5739,15 @@
       $cliques[[1]]
       + 2/3 vertices:
       [1] 2 3
-
+      
       $cliques[[2]]
       + 2/3 vertices:
       [1] 1 2
-
-
+      
+      
       $Mu
       [1] 1.333233 0.999900
-
+      
 
 # graphlets_impl errors
 
@@ -5755,19 +5764,19 @@
     Output
       $left
       [1] -2  0
-
+      
       $right
       [1] 1 2
-
+      
       $prob
       [1] 1 0
-
+      
       $edges
       [1] 2 0
-
+      
       $vertices
       [1] 3 2
-
+      
 
 # hrg_fit_impl errors
 
@@ -5782,7 +5791,7 @@
     Code
       hrg_sample_impl(hrg = hrg_model)
     Output
-      IGRAPH U--- 10 45 --
+      IGRAPH U--- 10 45 -- 
       + edges:
        [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
       [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
@@ -5804,21 +5813,21 @@
       hrg_sample_many_impl(hrg = hrg_model, num_samples = 2)
     Output
       [[1]]
-      IGRAPH U--- 10 45 --
+      IGRAPH U--- 10 45 -- 
       + edges:
        [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
       [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
       [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
       [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
-
+      
       [[2]]
-      IGRAPH U--- 10 45 --
+      IGRAPH U--- 10 45 -- 
       + edges:
        [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
       [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
       [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
       [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
-
+      
 
 # hrg_sample_many_impl errors
 
@@ -5892,19 +5901,19 @@
     Output
       $left
       [1]  0 -9 -6 -2
-
+      
       $right
       [1] -4  4  7 -8
-
+      
       $prob
       [1] 1 1 1 1
-
+      
       $edges
       [1]  9  6  3 14
-
+      
       $vertices
       [1] 10  7  4  9
-
+      
 
 # hrg_resize_impl errors
 
@@ -5937,14 +5946,14 @@
       from_hrg_dendrogram_impl(hrg = hrg_model)
     Output
       $graph
-      IGRAPH D--- 19 18 --
+      IGRAPH D--- 19 18 -- 
       + edges:
        [1] 11-> 1 11->14 12->19 12-> 5 13->16 13-> 8 14->12 14->18 15-> 3 15-> 6
       [11] 16->15 16->10 17->13 17-> 4 18-> 7 18-> 9 19-> 2 19->17
-
+      
       $prob
        [1] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN   1   1   1   1   1   1   1   1   1
-
+      
 
 # from_hrg_dendrogram_impl errors
 
@@ -5962,19 +5971,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 0 1 1 2
-
+      
       $i
       [1] 1 0 2 1
-
+      
       $x
       [1] 1 1 1 1
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -5985,19 +5994,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 1 2
-
+      
       $i
       [1] 0 1
-
+      
       $x
       [1] 1 2
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -6044,19 +6053,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 0 1 1 2
-
+      
       $i
       [1] 1 0 2 1
-
+      
       $x
       [1] 0.5 1.0 1.0 0.5
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -6067,19 +6076,19 @@
     Output
       $type
       [1] "triplet"
-
+      
       $dim
       [1] 3 3
-
+      
       $p
       [1] 0 1 1 2
-
+      
       $i
       [1] 1 0 2 1
-
+      
       $x
       [1] 1.0000000 0.3333333 0.6666667 1.0000000
-
+      
       attr(,"class")
       [1] "igraph.tmp.sparse"
 
@@ -6096,7 +6105,7 @@
     Code
       to_directed_impl(graph = g)
     Output
-      IGRAPH D--- 3 4 --
+      IGRAPH D--- 3 4 -- 
       + edges:
       [1] 1->2 2->3 2->1 3->2
 
@@ -6105,7 +6114,7 @@
     Code
       to_directed_impl(graph = g, mode = "acyclic")
     Output
-      IGRAPH D--- 3 2 --
+      IGRAPH D--- 3 2 -- 
       + edges:
       [1] 1->2 2->3
 
@@ -6122,7 +6131,7 @@
     Code
       to_undirected_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -6131,7 +6140,7 @@
     Code
       to_undirected_impl(graph = g, mode = "mutual", edge_attr_comb = "sum")
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -6218,13 +6227,13 @@
     Output
       $mut
       [1] 2
-
+      
       $asym
       [1] 0
-
+      
       $null
       [1] 1
-
+      
 
 # dyad_census_impl errors
 
@@ -6490,7 +6499,7 @@
     Code
       join_impl(left = g1, right = g2)
     Output
-      IGRAPH U--- 6 13 --
+      IGRAPH U--- 6 13 -- 
       + edges:
        [1] 1--2 2--3 4--5 5--6 1--4 1--5 1--6 2--4 2--5 2--6 3--4 3--5 3--6
 
@@ -6508,16 +6517,16 @@
       induced_subgraph_map_impl(graph = g, vids = 1:2, impl = "auto")
     Output
       $res
-      IGRAPH U--- 2 1 --
+      IGRAPH U--- 2 1 -- 
       + edge:
       [1] 1--2
-
+      
       $map
       [1] 2 3 1
-
+      
       $invmap
       [1] 1 2
-
+      
 
 ---
 
@@ -6525,16 +6534,16 @@
       induced_subgraph_map_impl(graph = g, vids = 1:2, impl = "copy_and_delete")
     Output
       $res
-      IGRAPH U--- 2 1 --
+      IGRAPH U--- 2 1 -- 
       + edge:
       [1] 1--2
-
+      
       $map
       [1] 2 3 1
-
+      
       $invmap
       [1] 1 2
-
+      
 
 # induced_subgraph_map_impl errors
 
@@ -6549,7 +6558,7 @@
     Code
       mycielskian_impl(graph = g)
     Output
-      IGRAPH U--- 7 9 --
+      IGRAPH U--- 7 9 -- 
       + edges:
       [1] 1--2 2--3 1--5 2--4 2--6 3--5 4--7 5--7 6--7
 
@@ -6558,7 +6567,7 @@
     Code
       mycielskian_impl(graph = g, k = 2)
     Output
-      IGRAPH U--- 15 34 --
+      IGRAPH U--- 15 34 -- 
       + edges:
        [1]  1-- 2  2-- 3  1-- 5  2-- 4  2-- 6  3-- 5  4-- 7  5-- 7  6-- 7  1-- 9
       [11]  2-- 8  2--10  3-- 9  1--12  5-- 8  2--11  4-- 9  2--13  6-- 9  3--12
@@ -6578,7 +6587,7 @@
     Code
       product_impl(g1 = g1, g2 = g2)
     Output
-      IGRAPH U--- 9 12 --
+      IGRAPH U--- 9 12 -- 
       + edges:
        [1] 1--4 2--5 3--6 4--7 5--8 6--9 1--2 4--5 7--8 2--3 5--6 8--9
 
@@ -6587,7 +6596,7 @@
     Code
       product_impl(g1 = g1, g2 = g2, type = "tensor")
     Output
-      IGRAPH U--- 9 8 --
+      IGRAPH U--- 9 8 -- 
       + edges:
       [1] 1--5 2--4 2--6 3--5 4--8 5--7 5--9 6--8
 
@@ -6604,7 +6613,7 @@
     Code
       rooted_product_impl(g1 = g1, g2 = g2, root = 1)
     Output
-      IGRAPH U--- 9 8 --
+      IGRAPH U--- 9 8 -- 
       + edges:
       [1] 1--4 4--7 1--2 4--5 7--8 2--3 5--6 8--9
 
@@ -6622,13 +6631,13 @@
       gomory_hu_tree_impl(graph = g)
     Output
       $tree
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $flows
       [1] 1 1
-
+      
 
 ---
 
@@ -6636,13 +6645,13 @@
       gomory_hu_tree_impl(graph = g, capacity = c(1, 2))
     Output
       $tree
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $flows
       [1] 1 2
-
+      
 
 # gomory_hu_tree_impl errors
 
@@ -6659,39 +6668,39 @@
     Output
       $value
       [1] 1
-
+      
       $flow
       [1] 1 1
-
+      
       $cut
       + 1/2 edge:
       [1] 2--3
-
+      
       $partition1
       + 2/3 vertices:
       [1] 1 2
-
+      
       $partition2
       + 1/3 vertex:
       [1] 3
-
+      
       $stats
       $stats$nopush
       [1] 1
-
+      
       $stats$norelabel
       [1] 0
-
+      
       $stats$nogap
       [1] 0
-
+      
       $stats$nogapnodes
       [1] 0
-
+      
       $stats$nobfs
       [1] 1
-
-
+      
+      
 
 ---
 
@@ -6700,39 +6709,39 @@
     Output
       $value
       [1] 1
-
+      
       $flow
       [1] 1 1
-
+      
       $cut
       + 1/2 edge:
       [1] 1--2
-
+      
       $partition1
       + 1/3 vertex:
       [1] 1
-
+      
       $partition2
       + 2/3 vertices:
       [1] 2 3
-
+      
       $stats
       $stats$nopush
       [1] 1
-
+      
       $stats$norelabel
       [1] 0
-
+      
       $stats$nogap
       [1] 0
-
+      
       $stats$nogapnodes
       [1] 0
-
+      
       $stats$nobfs
       [1] 1
-
-
+      
+      
 
 # maxflow_impl errors
 
@@ -6748,12 +6757,12 @@
       residual_graph_impl(graph = g, capacity = c(1, 2), flow = c(1, 2))
     Output
       $residual
-      IGRAPH D--- 3 0 --
+      IGRAPH D--- 3 0 -- 
       + edges:
-
+      
       $residual_capacity
       numeric(0)
-
+      
 
 # residual_graph_impl errors
 
@@ -6768,7 +6777,7 @@
     Code
       reverse_residual_graph_impl(graph = g, capacity = c(1, 2), flow = c(1, 2))
     Output
-      IGRAPH D--- 3 2 --
+      IGRAPH D--- 3 2 -- 
       + edges:
       [1] 2->1 3->2
 
@@ -6787,19 +6796,19 @@
     Output
       $value
       [1] 1
-
+      
       $cut
       + 1/2 edge:
       [1] 2--3
-
+      
       $partition1
       + 2/3 vertices:
       [1] 1 2
-
+      
       $partition2
       + 1/3 vertex:
       [1] 3
-
+      
 
 ---
 
@@ -6808,19 +6817,19 @@
     Output
       $value
       [1] 1
-
+      
       $cut
       + 1/2 edge:
       [1] 1--2
-
+      
       $partition1
       + 1/3 vertex:
       [1] 1
-
+      
       $partition2
       + 2/3 vertices:
       [1] 2 3
-
+      
 
 # st_mincut_impl errors
 
@@ -6837,15 +6846,15 @@
     Output
       $dom
       [1] 0 1 2
-
+      
       $domtree
-      IGRAPH D--- 3 2 --
+      IGRAPH D--- 3 2 -- 
       + edges:
       [1] 1->2 2->3
-
+      
       $leftout
       + 0/3 vertices:
-
+      
 
 ---
 
@@ -6854,15 +6863,15 @@
     Output
       $dom
       [1]  0 -1 -1
-
+      
       $domtree
-      IGRAPH D--- 3 0 --
+      IGRAPH D--- 3 0 -- 
       + edges:
-
+      
       $leftout
       + 2/3 vertices:
       [1] 2 3
-
+      
 
 # dominator_tree_impl errors
 
@@ -6881,22 +6890,22 @@
       $cuts[[1]]
       + 1/2 edge:
       [1] 1->2
-
+      
       $cuts[[2]]
       + 1/2 edge:
       [1] 2->3
-
-
+      
+      
       $partition1s
       $partition1s[[1]]
       + 1/3 vertex:
       [1] 1
-
+      
       $partition1s[[2]]
       + 2/3 vertices:
       [1] 1 2
-
-
+      
+      
 
 # all_st_cuts_impl errors
 
@@ -6913,27 +6922,27 @@
     Output
       $value
       [1] 1
-
+      
       $cuts
       $cuts[[1]]
       + 1/2 edge:
       [1] 1->2
-
+      
       $cuts[[2]]
       + 1/2 edge:
       [1] 2->3
-
-
+      
+      
       $partition1s
       $partition1s[[1]]
       + 1/3 vertex:
       [1] 1
-
+      
       $partition1s[[2]]
       + 2/3 vertices:
       [1] 1 2
-
-
+      
+      
 
 ---
 
@@ -6942,19 +6951,19 @@
     Output
       $value
       [1] 1
-
+      
       $cuts
       $cuts[[1]]
       + 1/2 edge:
       [1] 1->2
-
-
+      
+      
       $partition1s
       $partition1s[[1]]
       + 1/3 vertex:
       [1] 1
-
-
+      
+      
 
 # all_st_mincuts_impl errors
 
@@ -6970,13 +6979,13 @@
       even_tarjan_reduction_impl(graph = g)
     Output
       $graphbar
-      IGRAPH D--- 6 7 --
+      IGRAPH D--- 6 7 -- 
       + edges:
       [1] 1->4 2->5 3->6 5->1 4->2 6->2 5->3
-
+      
       $capacity
       [1] 1 1 1 3 3 3 3
-
+      
 
 # even_tarjan_reduction_impl errors
 
@@ -7024,7 +7033,7 @@
       [[1]]
       + 1/3 vertex:
       [1] 2
-
+      
 
 # all_minimal_st_separators_impl errors
 
@@ -7042,7 +7051,7 @@
       [[1]]
       + 1/3 vertex:
       [1] 2
-
+      
 
 # minimum_size_separators_impl errors
 
@@ -7102,7 +7111,7 @@
     Code
       isoclass_create_impl(size = 3, number = 1)
     Output
-      IGRAPH D--- 3 1 --
+      IGRAPH D--- 3 1 -- 
       + edge:
       [1] 2->1
 
@@ -7111,7 +7120,7 @@
     Code
       isoclass_create_impl(size = 3, number = 1, directed = FALSE)
     Output
-      IGRAPH U--- 3 1 --
+      IGRAPH U--- 3 1 -- 
       + edge:
       [1] 1--2
 
@@ -7133,13 +7142,13 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
 
 ---
 
@@ -7149,13 +7158,13 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
 
 # isomorphic_vf2_impl errors
 
@@ -7195,10 +7204,10 @@
     Output
       [[1]]
       [1] 0 1 2
-
+      
       [[2]]
       [1] 2 1 0
-
+      
 
 ---
 
@@ -7208,7 +7217,7 @@
     Output
       [[1]]
       [1] 0 1 2
-
+      
 
 # get_isomorphisms_vf2_impl errors
 
@@ -7240,13 +7249,13 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
 
 ---
 
@@ -7256,13 +7265,13 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
 
 # subisomorphic_vf2_impl errors
 
@@ -7302,10 +7311,10 @@
     Output
       [[1]]
       [1] 0 1 2
-
+      
       [[2]]
       [1] 2 1 0
-
+      
 
 ---
 
@@ -7315,7 +7324,7 @@
     Output
       [[1]]
       [1] 0 1 2
-
+      
 
 # get_subisomorphisms_vf2_impl errors
 
@@ -7332,27 +7341,27 @@
     Output
       $labeling
       [1] 2 3 1
-
+      
       $info
       $info$nof_nodes
       [1] 3
-
+      
       $info$nof_leaf_nodes
       [1] 3
-
+      
       $info$nof_bad_nodes
       [1] 0
-
+      
       $info$nof_canupdates
       [1] 1
-
+      
       $info$max_level
       [1] 1
-
+      
       $info$group_size
       [1] "2"
-
-
+      
+      
 
 ---
 
@@ -7361,27 +7370,27 @@
     Output
       $labeling
       [1] 1 2 3
-
+      
       $info
       $info$nof_nodes
       [1] 1
-
+      
       $info$nof_leaf_nodes
       [1] 1
-
+      
       $info$nof_bad_nodes
       [1] 0
-
+      
       $info$nof_canupdates
       [1] 0
-
+      
       $info$max_level
       [1] 0
-
+      
       $info$group_size
       [1] "1"
-
-
+      
+      
 
 # canonical_permutation_impl errors
 
@@ -7396,7 +7405,7 @@
     Code
       permute_vertices_impl(graph = g, permutation = 3:1)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 2--3 1--2
 
@@ -7415,53 +7424,53 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
       $info1
       $info1$nof_nodes
       [1] 3
-
+      
       $info1$nof_leaf_nodes
       [1] 3
-
+      
       $info1$nof_bad_nodes
       [1] 0
-
+      
       $info1$nof_canupdates
       [1] 1
-
+      
       $info1$max_level
       [1] 1
-
+      
       $info1$group_size
       [1] "2"
-
-
+      
+      
       $info2
       $info2$nof_nodes
       [1] 3
-
+      
       $info2$nof_leaf_nodes
       [1] 3
-
+      
       $info2$nof_bad_nodes
       [1] 0
-
+      
       $info2$nof_canupdates
       [1] 1
-
+      
       $info2$max_level
       [1] 1
-
+      
       $info2$group_size
       [1] "2"
-
-
+      
+      
 
 ---
 
@@ -7471,53 +7480,53 @@
     Output
       $iso
       [1] TRUE
-
+      
       $map12
       [1] 1 2 3
-
+      
       $map21
       [1] 1 2 3
-
+      
       $info1
       $info1$nof_nodes
       [1] 1
-
+      
       $info1$nof_leaf_nodes
       [1] 1
-
+      
       $info1$nof_bad_nodes
       [1] 0
-
+      
       $info1$nof_canupdates
       [1] 0
-
+      
       $info1$max_level
       [1] 0
-
+      
       $info1$group_size
       [1] "1"
-
-
+      
+      
       $info2
       $info2$nof_nodes
       [1] 1
-
+      
       $info2$nof_leaf_nodes
       [1] 1
-
+      
       $info2$nof_bad_nodes
       [1] 0
-
+      
       $info2$nof_canupdates
       [1] 0
-
+      
       $info2$max_level
       [1] 0
-
+      
       $info2$group_size
       [1] "1"
-
-
+      
+      
 
 # isomorphic_bliss_impl errors
 
@@ -7534,22 +7543,22 @@
     Output
       $nof_nodes
       [1] 3
-
+      
       $nof_leaf_nodes
       [1] 3
-
+      
       $nof_bad_nodes
       [1] 0
-
+      
       $nof_canupdates
       [1] 1
-
+      
       $max_level
       [1] 1
-
+      
       $group_size
       [1] "2"
-
+      
 
 ---
 
@@ -7558,22 +7567,22 @@
     Output
       $nof_nodes
       [1] 1
-
+      
       $nof_leaf_nodes
       [1] 1
-
+      
       $nof_bad_nodes
       [1] 0
-
+      
       $nof_canupdates
       [1] 0
-
+      
       $max_level
       [1] 0
-
+      
       $group_size
       [1] "1"
-
+      
 
 # count_automorphisms_impl errors
 
@@ -7591,7 +7600,7 @@
       [[1]]
       + 3/3 vertices:
       [1] 3 2 1
-
+      
 
 ---
 
@@ -7600,27 +7609,27 @@
     Output
       $generators
       list()
-
+      
       $info
       $info$nof_nodes
       [1] 1
-
+      
       $info$nof_leaf_nodes
       [1] 1
-
+      
       $info$nof_bad_nodes
       [1] 0
-
+      
       $info$nof_canupdates
       [1] 0
-
+      
       $info$max_level
       [1] 0
-
+      
       $info$group_size
       [1] "1"
-
-
+      
+      
 
 # automorphism_group_impl errors
 
@@ -7636,16 +7645,16 @@
       simplify_and_colorize_impl(graph = g)
     Output
       $res
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
-
+      
       $vertex_color
       [1] 0 0 0
-
+      
       $edge_color
       [1] 1 1
-
+      
 
 # simplify_and_colorize_impl errors
 
@@ -7732,13 +7741,13 @@
     Output
       $matching_size
       [1] 1
-
+      
       $matching_weight
       [1] 1
-
+      
       $matching
       [1] 2 1 0
-
+      
 
 ---
 
@@ -7748,13 +7757,13 @@
     Output
       $matching_size
       [1] 1
-
+      
       $matching_weight
       [1] 2
-
+      
       $matching
       [1] 0 3 2
-
+      
 
 # maximum_bipartite_matching_impl errors
 
@@ -7774,78 +7783,78 @@
       [1,] 0.6718598 -0.4487712
       [2,] 1.1328501  0.5323058
       [3,] 0.6718598 -0.4487712
-
+      
       $Y
                 [,1]       [,2]
       [1,] 0.6718598 -0.4487712
       [2,] 1.1328501  0.5323058
       [3,] 0.6718598 -0.4487712
-
+      
       $D
       [1]  2.1861407 -0.6861407
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LM"
-
+      
       $options$nev
       [1] 2
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 3
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 2
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 2
-
-
+      
+      
 
 ---
 
@@ -7858,78 +7867,78 @@
       [1,] 0.1720265 -0.7864357
       [2,] 0.6311790 -0.3743620
       [3,] 0.7563200  0.4912963
-
+      
       $Y
                 [,1]       [,2]
       [1,] 0.1720265 -0.7864357
       [2,] 0.6311790 -0.3743620
       [3,] 0.7563200  0.4912963
-
+      
       $D
       [1] 4.669079 1.476024
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 2
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 3
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 10
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 2
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 2
-
-
+      
+      
 
 # adjacency_spectral_embedding_impl errors
 
@@ -7949,78 +7958,78 @@
       [1,] -0.7071068 -0.7071068
       [2,]  1.4142136  0.0000000
       [3,] -0.7071068  0.7071068
-
+      
       $Y
                  [,1]       [,2]
       [1,] -0.7071068 -0.7071068
       [2,]  1.4142136  0.0000000
       [3,] -0.7071068  0.7071068
-
+      
       $D
       [1] 3 1
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LM"
-
+      
       $options$nev
       [1] 2
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 3
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 2
-
+      
       $options$numop
       [1] 3
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 3
-
-
+      
+      
 
 # laplacian_spectral_embedding_impl errors
 
@@ -8038,80 +8047,80 @@
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 3
-
+      
       $options$which
       [1] "LM"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 2
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 0
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 29
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 30
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 16
-
-
+      
+      
       $values
       [1] -1.414214
-
+      
       $vectors
                  [,1]
       [1,] -0.5000000
       [2,]  0.7071068
       [3,] -0.5000000
-
+      
       $cmplxvalues
       complex(0)
-
+      
       $cmplxvectors
       <0 x 0 matrix>
-
+      
 
 ---
 
@@ -8138,19 +8147,19 @@
     Output
       $continuous
       [1] FALSE
-
+      
       $alpha
       [1] 1.646771
-
+      
       $xmin
       [1] 1
-
+      
       $logLik
       [1] -5.272517
-
+      
       $KS.stat
       [1] 0.2640998
-
+      
 
 ---
 
@@ -8159,19 +8168,19 @@
     Output
       $continuous
       [1] TRUE
-
+      
       $alpha
       [1] 2.116221
-
+      
       $xmin
       [1] 1
-
+      
       $logLik
       [1] -3.461912
-
+      
       $KS.stat
       [1] 0.3533555
-
+      
 
 # power_law_fit_impl errors
 
@@ -8192,1403 +8201,1403 @@
       [[1]]
       [[1]]$times
       [1]  0.000000  6.326537  8.018361  8.809852  9.405480 17.386752
-
+      
       [[1]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[1]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[1]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[2]]
       [[2]]$times
       [1]  0.000000  3.674354 13.783038 13.921168
-
+      
       [[2]]$NS
       [1] 2 1 1 1
-
+      
       [[2]]$NI
       [1] 1 2 1 0
-
+      
       [[2]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[3]]
       [[3]]$times
       [1]  0.000000  3.277542  7.521770 16.781182 18.515742 29.375613
-
+      
       [[3]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[3]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[3]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[4]]
       [[4]]$times
       [1] 0.0000000 0.3027921
-
+      
       [[4]]$NS
       [1] 2 2
-
+      
       [[4]]$NI
       [1] 1 0
-
+      
       [[4]]$NR
       [1] 0 1
-
-
+      
+      
       [[5]]
       [[5]]$times
       [1]  0.000000  3.559451  5.615586 20.582742
-
+      
       [[5]]$NS
       [1] 2 1 1 1
-
+      
       [[5]]$NI
       [1] 1 2 1 0
-
+      
       [[5]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[6]]
       [[6]]$times
       [1] 0.0000000 0.7300885 0.7328203 1.2536518 1.9258569 5.1406208
-
+      
       [[6]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[6]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[6]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[7]]
       [[7]]$times
       [1] 0.000000 0.865533
-
+      
       [[7]]$NS
       [1] 2 2
-
+      
       [[7]]$NI
       [1] 1 0
-
+      
       [[7]]$NR
       [1] 0 1
-
-
+      
+      
       [[8]]
       [[8]]$times
       [1]  0.00000 10.68605
-
+      
       [[8]]$NS
       [1] 2 2
-
+      
       [[8]]$NI
       [1] 1 0
-
+      
       [[8]]$NR
       [1] 0 1
-
-
+      
+      
       [[9]]
       [[9]]$times
       [1]  0.000000  2.185910  7.669126 16.635095 21.440723 23.497554
-
+      
       [[9]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[9]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[9]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[10]]
       [[10]]$times
       [1]  0.000000  4.105424  4.424244 22.891743 24.099505 32.514828
-
+      
       [[10]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[10]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[10]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[11]]
       [[11]]$times
       [1]  0.00000  4.93042 21.00935 21.07441 23.37619 41.26694
-
+      
       [[11]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[11]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[11]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[12]]
       [[12]]$times
       [1]  0.00000 15.47343 26.09187 38.01744 43.76847 50.41068
-
+      
       [[12]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[12]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[12]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[13]]
       [[13]]$times
       [1] 0.000000 3.540437
-
+      
       [[13]]$NS
       [1] 2 2
-
+      
       [[13]]$NI
       [1] 1 0
-
+      
       [[13]]$NR
       [1] 0 1
-
-
+      
+      
       [[14]]
       [[14]]$times
       [1]  0.000000  7.081426  7.638086 11.569527
-
+      
       [[14]]$NS
       [1] 2 1 1 1
-
+      
       [[14]]$NI
       [1] 1 2 1 0
-
+      
       [[14]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[15]]
       [[15]]$times
       [1]  0.00000 15.60443 15.66654 20.19745 22.11224 42.62196
-
+      
       [[15]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[15]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[15]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[16]]
       [[16]]$times
       [1]  0.000000  3.239708 17.193626 18.833130 19.040959 35.199892
-
+      
       [[16]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[16]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[16]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[17]]
       [[17]]$times
       [1]  0.0000000  0.2300489  1.8970602  6.9851496 16.0587095 28.8528567
-
+      
       [[17]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[17]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[17]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[18]]
       [[18]]$times
       [1]  0.000000  4.674879  5.319832 17.366640 63.357258 86.262883
-
+      
       [[18]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[18]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[18]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[19]]
       [[19]]$times
       [1] 0.000000 1.972293
-
+      
       [[19]]$NS
       [1] 2 2
-
+      
       [[19]]$NI
       [1] 1 0
-
+      
       [[19]]$NR
       [1] 0 1
-
-
+      
+      
       [[20]]
       [[20]]$times
       [1] 0.000000 3.177922
-
+      
       [[20]]$NS
       [1] 2 2
-
+      
       [[20]]$NI
       [1] 1 0
-
+      
       [[20]]$NR
       [1] 0 1
-
-
+      
+      
       [[21]]
       [[21]]$times
       [1]  0.000000  1.994279  2.508129  8.208209 28.478526 36.256169
-
+      
       [[21]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[21]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[21]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[22]]
       [[22]]$times
       [1]  0.000000  5.226609 14.744785 16.304309
-
+      
       [[22]]$NS
       [1] 2 1 1 1
-
+      
       [[22]]$NI
       [1] 1 2 1 0
-
+      
       [[22]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[23]]
       [[23]]$times
       [1]  0.000000  3.254634 13.673154 21.069828
-
+      
       [[23]]$NS
       [1] 2 1 1 1
-
+      
       [[23]]$NI
       [1] 1 2 1 0
-
+      
       [[23]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[24]]
       [[24]]$times
       [1]  0.00000 18.01982 18.36106 44.55144
-
+      
       [[24]]$NS
       [1] 2 1 1 1
-
+      
       [[24]]$NI
       [1] 1 2 1 0
-
+      
       [[24]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[25]]
       [[25]]$times
       [1]  0.00000 18.09036 30.47469 36.51570
-
+      
       [[25]]$NS
       [1] 2 1 1 1
-
+      
       [[25]]$NI
       [1] 1 2 1 0
-
+      
       [[25]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[26]]
       [[26]]$times
       [1]  0.00000 11.21296
-
+      
       [[26]]$NS
       [1] 2 2
-
+      
       [[26]]$NI
       [1] 1 0
-
+      
       [[26]]$NR
       [1] 0 1
-
-
+      
+      
       [[27]]
       [[27]]$times
       [1] 0.000000 1.605373
-
+      
       [[27]]$NS
       [1] 2 2
-
+      
       [[27]]$NI
       [1] 1 0
-
+      
       [[27]]$NR
       [1] 0 1
-
-
+      
+      
       [[28]]
       [[28]]$times
       [1]  0.000000  3.448751 12.086502 17.941228
-
+      
       [[28]]$NS
       [1] 2 1 1 1
-
+      
       [[28]]$NI
       [1] 1 2 1 0
-
+      
       [[28]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[29]]
       [[29]]$times
       [1] 0.000000 8.277924
-
+      
       [[29]]$NS
       [1] 2 2
-
+      
       [[29]]$NI
       [1] 1 0
-
+      
       [[29]]$NR
       [1] 0 1
-
-
+      
+      
       [[30]]
       [[30]]$times
       [1] 0.000000 9.146159
-
+      
       [[30]]$NS
       [1] 2 2
-
+      
       [[30]]$NI
       [1] 1 0
-
+      
       [[30]]$NR
       [1] 0 1
-
-
+      
+      
       [[31]]
       [[31]]$times
       [1] 0.00000000 0.07833588
-
+      
       [[31]]$NS
       [1] 2 2
-
+      
       [[31]]$NI
       [1] 1 0
-
+      
       [[31]]$NR
       [1] 0 1
-
-
+      
+      
       [[32]]
       [[32]]$times
       [1] 0.000000 7.825191
-
+      
       [[32]]$NS
       [1] 2 2
-
+      
       [[32]]$NI
       [1] 1 0
-
+      
       [[32]]$NR
       [1] 0 1
-
-
+      
+      
       [[33]]
       [[33]]$times
       [1] 0.0000000 0.4018017
-
+      
       [[33]]$NS
       [1] 2 2
-
+      
       [[33]]$NI
       [1] 1 0
-
+      
       [[33]]$NR
       [1] 0 1
-
-
+      
+      
       [[34]]
       [[34]]$times
       [1] 0.000000 1.433794
-
+      
       [[34]]$NS
       [1] 2 2
-
+      
       [[34]]$NI
       [1] 1 0
-
+      
       [[34]]$NR
       [1] 0 1
-
-
+      
+      
       [[35]]
       [[35]]$times
       [1] 0.00000000 0.06959151 2.61176819 2.76819228
-
+      
       [[35]]$NS
       [1] 2 1 1 1
-
+      
       [[35]]$NI
       [1] 1 2 1 0
-
+      
       [[35]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[36]]
       [[36]]$times
       [1]  0.000000  1.539839 17.502742 21.550799 31.779748 59.056912
-
+      
       [[36]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[36]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[36]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[37]]
       [[37]]$times
       [1] 0.000000 8.878624
-
+      
       [[37]]$NS
       [1] 2 2
-
+      
       [[37]]$NI
       [1] 1 0
-
+      
       [[37]]$NR
       [1] 0 1
-
-
+      
+      
       [[38]]
       [[38]]$times
       [1] 0.000000 6.855525
-
+      
       [[38]]$NS
       [1] 2 2
-
+      
       [[38]]$NI
       [1] 1 0
-
+      
       [[38]]$NR
       [1] 0 1
-
-
+      
+      
       [[39]]
       [[39]]$times
       [1] 0.000000 2.628739 3.809460 7.051204
-
+      
       [[39]]$NS
       [1] 2 1 1 1
-
+      
       [[39]]$NI
       [1] 1 2 1 0
-
+      
       [[39]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[40]]
       [[40]]$times
       [1] 0.000000 2.484282
-
+      
       [[40]]$NS
       [1] 2 2
-
+      
       [[40]]$NI
       [1] 1 0
-
+      
       [[40]]$NR
       [1] 0 1
-
-
+      
+      
       [[41]]
       [[41]]$times
       [1] 0.0000000 0.8248393
-
+      
       [[41]]$NS
       [1] 2 2
-
+      
       [[41]]$NI
       [1] 1 0
-
+      
       [[41]]$NR
       [1] 0 1
-
-
+      
+      
       [[42]]
       [[42]]$times
       [1]  0.000000  2.300359  3.886947  6.810196  7.223496 28.297207
-
+      
       [[42]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[42]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[42]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[43]]
       [[43]]$times
       [1]  0.00000  5.52241 10.93993 29.15486
-
+      
       [[43]]$NS
       [1] 2 1 1 1
-
+      
       [[43]]$NI
       [1] 1 2 1 0
-
+      
       [[43]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[44]]
       [[44]]$times
       [1]  0.000000  9.526317 12.154710 21.171748
-
+      
       [[44]]$NS
       [1] 2 1 1 1
-
+      
       [[44]]$NI
       [1] 1 2 1 0
-
+      
       [[44]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[45]]
       [[45]]$times
       [1] 0.000000 4.448428
-
+      
       [[45]]$NS
       [1] 2 2
-
+      
       [[45]]$NI
       [1] 1 0
-
+      
       [[45]]$NR
       [1] 0 1
-
-
+      
+      
       [[46]]
       [[46]]$times
       [1] 0.0000000 0.0560511
-
+      
       [[46]]$NS
       [1] 2 2
-
+      
       [[46]]$NI
       [1] 1 0
-
+      
       [[46]]$NR
       [1] 0 1
-
-
+      
+      
       [[47]]
       [[47]]$times
       [1]  0.00000 11.57560 12.20970 12.58732 26.47299 36.19628
-
+      
       [[47]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[47]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[47]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[48]]
       [[48]]$times
       [1] 0.000000 3.687231
-
+      
       [[48]]$NS
       [1] 2 2
-
+      
       [[48]]$NI
       [1] 1 0
-
+      
       [[48]]$NR
       [1] 0 1
-
-
+      
+      
       [[49]]
       [[49]]$times
       [1] 0.0000000 0.3436458 1.0908931 1.4640857
-
+      
       [[49]]$NS
       [1] 2 1 1 1
-
+      
       [[49]]$NI
       [1] 1 2 1 0
-
+      
       [[49]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[50]]
       [[50]]$times
       [1] 0.000000 1.536136
-
+      
       [[50]]$NS
       [1] 2 2
-
+      
       [[50]]$NI
       [1] 1 0
-
+      
       [[50]]$NR
       [1] 0 1
-
-
+      
+      
       [[51]]
       [[51]]$times
       [1] 0.000000 2.021208
-
+      
       [[51]]$NS
       [1] 2 2
-
+      
       [[51]]$NI
       [1] 1 0
-
+      
       [[51]]$NR
       [1] 0 1
-
-
+      
+      
       [[52]]
       [[52]]$times
       [1] 0.00000 4.29424
-
+      
       [[52]]$NS
       [1] 2 2
-
+      
       [[52]]$NI
       [1] 1 0
-
+      
       [[52]]$NR
       [1] 0 1
-
-
+      
+      
       [[53]]
       [[53]]$times
       [1]  0.000000  1.884908  5.139700  8.417338 12.272436 15.154107
-
+      
       [[53]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[53]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[53]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[54]]
       [[54]]$times
       [1] 0.0000000 0.1997796
-
+      
       [[54]]$NS
       [1] 2 2
-
+      
       [[54]]$NI
       [1] 1 0
-
+      
       [[54]]$NR
       [1] 0 1
-
-
+      
+      
       [[55]]
       [[55]]$times
       [1] 0.0000000 0.1825065
-
+      
       [[55]]$NS
       [1] 2 2
-
+      
       [[55]]$NI
       [1] 1 0
-
+      
       [[55]]$NR
       [1] 0 1
-
-
+      
+      
       [[56]]
       [[56]]$times
       [1] 0.000000 1.913698 2.656593 7.598135
-
+      
       [[56]]$NS
       [1] 2 1 1 1
-
+      
       [[56]]$NI
       [1] 1 2 1 0
-
+      
       [[56]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[57]]
       [[57]]$times
       [1] 0.000000 3.435708
-
+      
       [[57]]$NS
       [1] 2 2
-
+      
       [[57]]$NI
       [1] 1 0
-
+      
       [[57]]$NR
       [1] 0 1
-
-
+      
+      
       [[58]]
       [[58]]$times
       [1]  0.000000  0.583133  5.284710 10.065112 18.657681 21.137430
-
+      
       [[58]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[58]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[58]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[59]]
       [[59]]$times
       [1] 0.000000 8.526031
-
+      
       [[59]]$NS
       [1] 2 2
-
+      
       [[59]]$NI
       [1] 1 0
-
+      
       [[59]]$NR
       [1] 0 1
-
-
+      
+      
       [[60]]
       [[60]]$times
       [1] 0.000000 3.470768
-
+      
       [[60]]$NS
       [1] 2 2
-
+      
       [[60]]$NI
       [1] 1 0
-
+      
       [[60]]$NR
       [1] 0 1
-
-
+      
+      
       [[61]]
       [[61]]$times
       [1] 0.000000 2.311806
-
+      
       [[61]]$NS
       [1] 2 2
-
+      
       [[61]]$NI
       [1] 1 0
-
+      
       [[61]]$NR
       [1] 0 1
-
-
+      
+      
       [[62]]
       [[62]]$times
       [1] 0.000000 5.603495
-
+      
       [[62]]$NS
       [1] 2 2
-
+      
       [[62]]$NI
       [1] 1 0
-
+      
       [[62]]$NR
       [1] 0 1
-
-
+      
+      
       [[63]]
       [[63]]$times
       [1] 0.0000000 0.2376974
-
+      
       [[63]]$NS
       [1] 2 2
-
+      
       [[63]]$NI
       [1] 1 0
-
+      
       [[63]]$NR
       [1] 0 1
-
-
+      
+      
       [[64]]
       [[64]]$times
       [1] 0.000000 1.164209 4.169140 7.017509
-
+      
       [[64]]$NS
       [1] 2 1 1 1
-
+      
       [[64]]$NI
       [1] 1 2 1 0
-
+      
       [[64]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[65]]
       [[65]]$times
       [1]  0.000000  6.415227  6.561435 14.007083
-
+      
       [[65]]$NS
       [1] 2 1 1 1
-
+      
       [[65]]$NI
       [1] 1 2 1 0
-
+      
       [[65]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[66]]
       [[66]]$times
       [1]  0.00000 14.28491 31.69273 39.51170
-
+      
       [[66]]$NS
       [1] 2 1 1 1
-
+      
       [[66]]$NI
       [1] 1 2 1 0
-
+      
       [[66]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[67]]
       [[67]]$times
       [1]  0.000000  3.592755  4.363836 11.200455
-
+      
       [[67]]$NS
       [1] 2 1 1 1
-
+      
       [[67]]$NI
       [1] 1 2 1 0
-
+      
       [[67]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[68]]
       [[68]]$times
       [1]  0.000000  8.044133 10.227368 12.702160 16.225120 23.696870
-
+      
       [[68]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[68]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[68]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[69]]
       [[69]]$times
       [1] 0.000000 3.324148
-
+      
       [[69]]$NS
       [1] 2 2
-
+      
       [[69]]$NI
       [1] 1 0
-
+      
       [[69]]$NR
       [1] 0 1
-
-
+      
+      
       [[70]]
       [[70]]$times
       [1] 0.000000 6.316816
-
+      
       [[70]]$NS
       [1] 2 2
-
+      
       [[70]]$NI
       [1] 1 0
-
+      
       [[70]]$NR
       [1] 0 1
-
-
+      
+      
       [[71]]
       [[71]]$times
       [1]  0.000000  7.473339  7.757794 15.139281
-
+      
       [[71]]$NS
       [1] 2 1 1 1
-
+      
       [[71]]$NI
       [1] 1 2 1 0
-
+      
       [[71]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[72]]
       [[72]]$times
       [1] 0.000000 4.073649 6.034897 8.135670
-
+      
       [[72]]$NS
       [1] 2 1 1 1
-
+      
       [[72]]$NI
       [1] 1 2 1 0
-
+      
       [[72]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[73]]
       [[73]]$times
       [1] 0.00000 1.60059
-
+      
       [[73]]$NS
       [1] 2 2
-
+      
       [[73]]$NI
       [1] 1 0
-
+      
       [[73]]$NR
       [1] 0 1
-
-
+      
+      
       [[74]]
       [[74]]$times
       [1] 0.000000 1.497596
-
+      
       [[74]]$NS
       [1] 2 2
-
+      
       [[74]]$NI
       [1] 1 0
-
+      
       [[74]]$NR
       [1] 0 1
-
-
+      
+      
       [[75]]
       [[75]]$times
       [1] 0.000000 1.916758
-
+      
       [[75]]$NS
       [1] 2 2
-
+      
       [[75]]$NI
       [1] 1 0
-
+      
       [[75]]$NR
       [1] 0 1
-
-
+      
+      
       [[76]]
       [[76]]$times
       [1]  0.0000000  0.8368377  4.1462512 14.4447646
-
+      
       [[76]]$NS
       [1] 2 1 1 1
-
+      
       [[76]]$NI
       [1] 1 2 1 0
-
+      
       [[76]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[77]]
       [[77]]$times
       [1]  0.000000  8.546053  9.275575 11.920068 14.117820 14.371987
-
+      
       [[77]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[77]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[77]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[78]]
       [[78]]$times
       [1]  0.000000  2.730273  6.669293  7.301694 14.402306 22.580301
-
+      
       [[78]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[78]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[78]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[79]]
       [[79]]$times
       [1]  0.00000 13.02458
-
+      
       [[79]]$NS
       [1] 2 2
-
+      
       [[79]]$NI
       [1] 1 0
-
+      
       [[79]]$NR
       [1] 0 1
-
-
+      
+      
       [[80]]
       [[80]]$times
       [1]  0.000000  4.655717 10.847343 15.188912 38.570735 51.548959
-
+      
       [[80]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[80]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[80]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[81]]
       [[81]]$times
       [1]  0.000000  7.919139 12.774389 13.210280 20.037088 27.652380
-
+      
       [[81]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[81]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[81]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[82]]
       [[82]]$times
       [1]  0.000000  4.565727  4.640174  5.827227  8.181199 13.514984
-
+      
       [[82]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[82]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[82]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[83]]
       [[83]]$times
       [1] 0.0000000 0.4331829
-
+      
       [[83]]$NS
       [1] 2 2
-
+      
       [[83]]$NI
       [1] 1 0
-
+      
       [[83]]$NR
       [1] 0 1
-
-
+      
+      
       [[84]]
       [[84]]$times
       [1] 0.0000000 0.5663187
-
+      
       [[84]]$NS
       [1] 2 2
-
+      
       [[84]]$NI
       [1] 1 0
-
+      
       [[84]]$NR
       [1] 0 1
-
-
+      
+      
       [[85]]
       [[85]]$times
       [1]  0.000000  4.717821  7.368033 15.405952 20.251957 28.844191
-
+      
       [[85]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[85]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[85]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[86]]
       [[86]]$times
       [1]  0.00000 10.41346 13.17259 31.58865 35.49247 39.20284
-
+      
       [[86]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[86]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[86]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[87]]
       [[87]]$times
       [1] 0.000000 7.800903
-
+      
       [[87]]$NS
       [1] 2 2
-
+      
       [[87]]$NI
       [1] 1 0
-
+      
       [[87]]$NR
       [1] 0 1
-
-
+      
+      
       [[88]]
       [[88]]$times
       [1] 0.000000 1.164975 2.214760 3.395779 4.269503 6.277390
-
+      
       [[88]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[88]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[88]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[89]]
       [[89]]$times
       [1]  0.000000  1.419246  5.241578 10.249121
-
+      
       [[89]]$NS
       [1] 2 1 1 1
-
+      
       [[89]]$NI
       [1] 1 2 1 0
-
+      
       [[89]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[90]]
       [[90]]$times
       [1] 0.000000 4.015171
-
+      
       [[90]]$NS
       [1] 2 2
-
+      
       [[90]]$NI
       [1] 1 0
-
+      
       [[90]]$NR
       [1] 0 1
-
-
+      
+      
       [[91]]
       [[91]]$times
       [1]  0.00000 10.95119 10.95895 13.37237 15.94527 20.47069
-
+      
       [[91]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[91]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[91]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[92]]
       [[92]]$times
       [1] 0.000000 1.719506
-
+      
       [[92]]$NS
       [1] 2 2
-
+      
       [[92]]$NI
       [1] 1 0
-
+      
       [[92]]$NR
       [1] 0 1
-
-
+      
+      
       [[93]]
       [[93]]$times
       [1]  0.00000 20.34997 23.10320 33.53507 37.61908 42.59392
-
+      
       [[93]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[93]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[93]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[94]]
       [[94]]$times
       [1]  0.000000  2.981562  4.220980  4.501876  5.930935 17.597979
-
+      
       [[94]]$NS
       [1] 2 1 0 0 0 0
-
+      
       [[94]]$NI
       [1] 1 2 3 2 1 0
-
+      
       [[94]]$NR
       [1] 0 0 0 1 2 3
-
-
+      
+      
       [[95]]
       [[95]]$times
       [1] 0.0000000 0.8570038 6.2225289 7.4542303
-
+      
       [[95]]$NS
       [1] 2 1 1 1
-
+      
       [[95]]$NI
       [1] 1 2 1 0
-
+      
       [[95]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[96]]
       [[96]]$times
       [1]  0.00000 10.99346
-
+      
       [[96]]$NS
       [1] 2 2
-
+      
       [[96]]$NI
       [1] 1 0
-
+      
       [[96]]$NR
       [1] 0 1
-
-
+      
+      
       [[97]]
       [[97]]$times
       [1]  0.000000  6.324172 10.943694 11.370294
-
+      
       [[97]]$NS
       [1] 2 1 1 1
-
+      
       [[97]]$NI
       [1] 1 2 1 0
-
+      
       [[97]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[98]]
       [[98]]$times
       [1] 0.00000000 0.07582625 1.04605163 3.19140611 3.57055288 9.94371399
-
+      
       [[98]]$NS
       [1] 2 1 1 0 0 0
-
+      
       [[98]]$NI
       [1] 1 2 1 2 1 0
-
+      
       [[98]]$NR
       [1] 0 0 1 1 2 3
-
-
+      
+      
       [[99]]
       [[99]]$times
       [1] 0.000000 1.910419
-
+      
       [[99]]$NS
       [1] 2 2
-
+      
       [[99]]$NI
       [1] 1 0
-
+      
       [[99]]$NR
       [1] 0 1
-
-
+      
+      
       [[100]]
       [[100]]$times
       [1] 0.000000 2.446835
-
+      
       [[100]]$NS
       [1] 2 2
-
+      
       [[100]]$NI
       [1] 1 0
-
+      
       [[100]]$NR
       [1] 0 1
-
-
+      
+      
       attr(,"class")
       [1] "sir"
 
@@ -9600,31 +9609,31 @@
       [[1]]
       [[1]]$times
       [1] 0.0000000 0.5059133 5.9903814 8.4444363
-
+      
       [[1]]$NS
       [1] 2 1 1 1
-
+      
       [[1]]$NI
       [1] 1 2 1 0
-
+      
       [[1]]$NR
       [1] 0 0 1 2
-
-
+      
+      
       [[2]]
       [[2]]$times
       [1] 0.000000 4.481524
-
+      
       [[2]]$NS
       [1] 2 2
-
+      
       [[2]]$NI
       [1] 1 0
-
+      
       [[2]]$NR
       [1] 0 1
-
-
+      
+      
       attr(,"class")
       [1] "sir"
 
@@ -9643,12 +9652,12 @@
     Output
       $resverts
       [1] 1 3
-
+      
       $rescoords
            [,1] [,2]
       [1,]    1    4
       [2,]    3    6
-
+      
 
 # convex_hull_2d_impl errors
 
@@ -9700,10 +9709,10 @@
     Output
       $vertices
       + 0/3 vertices:
-
+      
       $edges
       + 0/2 edges:
-
+      
 
 ---
 
@@ -9712,10 +9721,10 @@
     Output
       $vertices
       + 0/3 vertices:
-
+      
       $edges
       + 0/2 edges:
-
+      
 
 # find_cycle_impl errors
 
@@ -9732,10 +9741,10 @@
     Output
       $vertices
       list()
-
+      
       $edges
       list()
-
+      
 
 ---
 
@@ -9745,10 +9754,10 @@
     Output
       $vertices
       list()
-
+      
       $edges
       list()
-
+      
 
 # simple_cycles_impl errors
 
@@ -9765,10 +9774,10 @@
     Output
       $has_path
       [1] TRUE
-
+      
       $has_cycle
       [1] FALSE
-
+      
 
 # is_eulerian_impl errors
 
@@ -9786,11 +9795,11 @@
       $epath
       + 2/2 edges:
       [1] 1--2 2--3
-
+      
       $vpath
       + 3/3 vertices:
       [1] 1 2 3
-
+      
 
 # eulerian_path_impl errors
 
@@ -9817,11 +9826,11 @@
       $epath
       + 4/4 edges:
       [1] 1--2 2--3 3--4 1--4
-
+      
       $vpath
       + 5/4 vertices:
       [1] 1 2 3 4 1
-
+      
 
 # eulerian_cycle_impl errors
 
@@ -9890,11 +9899,11 @@
     Output
       $res
       [1] TRUE
-
+      
       $root
       + 1/3 vertex:
       [1] 1
-
+      
 
 # is_tree_impl errors
 
@@ -9918,11 +9927,11 @@
     Output
       $res
       [1] TRUE
-
+      
       $roots
       + 1/3 vertex:
       [1] 1
-
+      
 
 # is_forest_impl errors
 
@@ -9973,7 +9982,7 @@
     Code
       tree_from_parent_vector_impl(parents = c(-1, 1, 2, 3))
     Output
-      IGRAPH D--- 4 3 --
+      IGRAPH D--- 4 3 -- 
       + edges:
       [1] 1->2 2->3 3->4
 
@@ -9982,7 +9991,7 @@
     Code
       tree_from_parent_vector_impl(parents = c(-1, 1, 2, 3), type = "in")
     Output
-      IGRAPH D--- 4 3 --
+      IGRAPH D--- 4 3 -- 
       + edges:
       [1] 2->1 3->2 4->3
 
@@ -10033,7 +10042,7 @@
     Code
       tree_game_impl(n = 3)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 2--3 1--2
 
@@ -10042,7 +10051,7 @@
     Code
       tree_game_impl(n = 3, directed = TRUE, method = "lerw")
     Output
-      IGRAPH D--- 3 2 --
+      IGRAPH D--- 3 2 -- 
       + edges:
       [1] 3->1 1->2
 
@@ -10164,10 +10173,10 @@
     Output
       $quantities
       [1] 1 3 3
-
+      
       $strategies
       [1] 1 3 3
-
+      
 
 # moran_process_impl errors
 
@@ -10233,7 +10242,7 @@
     Code
       invalidate_cache_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 --
+      IGRAPH U--- 3 2 -- 
       + edges:
       [1] 1--2 2--3
 
@@ -10434,7 +10443,7 @@
     Code
       famous_impl(name = "Zachary")
     Output
-      IGRAPH U--- 34 78 --
+      IGRAPH U--- 34 78 -- 
       + edges:
        [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
       [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
@@ -10514,16 +10523,16 @@
       union_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH D--- 4 4 --
+      IGRAPH D--- 4 4 -- 
       + edges:
       [1] 1->2 1->3 2->3 3->4
-
+      
       $edge_map_left
       [1] 1 3
-
+      
       $edge_map_right
       [1] 2 4
-
+      
 
 # union_impl errors
 
@@ -10539,16 +10548,16 @@
       intersection_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH D--- 3 2 --
+      IGRAPH D--- 3 2 -- 
       + edges:
       [1] 1->2 2->3
-
+      
       $edge_map_left
       [1] 1 2
-
+      
       $edge_map_right
       [1] 1 2
-
+      
 
 # intersection_impl errors
 
@@ -10563,7 +10572,7 @@
     Code
       star_impl(n = 5, mode = "out", center = 0)
     Output
-      IGRAPH D--- 5 4 --
+      IGRAPH D--- 5 4 -- 
       + edges:
       [1] 1->2 1->3 1->4 1->5
 
@@ -10572,7 +10581,7 @@
     Code
       star_impl(n = 6, mode = "in", center = 1)
     Output
-      IGRAPH D--- 6 5 --
+      IGRAPH D--- 6 5 -- 
       + edges:
       [1] 1->2 3->2 4->2 5->2 6->2
 
@@ -10581,7 +10590,7 @@
     Code
       star_impl(n = 4, mode = "undirected", center = 0)
     Output
-      IGRAPH U--- 4 3 --
+      IGRAPH U--- 4 3 -- 
       + edges:
       [1] 1--2 1--3 1--4
 
@@ -10590,7 +10599,7 @@
     Code
       ring_impl(n = 5, directed = FALSE, mutual = FALSE, circular = TRUE)
     Output
-      IGRAPH U--- 5 5 --
+      IGRAPH U--- 5 5 -- 
       + edges:
       [1] 1--2 2--3 3--4 4--5 1--5
 
@@ -10599,7 +10608,7 @@
     Code
       ring_impl(n = 4, directed = TRUE, mutual = FALSE, circular = FALSE)
     Output
-      IGRAPH D--- 4 3 --
+      IGRAPH D--- 4 3 -- 
       + edges:
       [1] 1->2 2->3 3->4
 
@@ -10608,7 +10617,7 @@
     Code
       full_impl(n = 4, directed = FALSE, loops = FALSE)
     Output
-      IGRAPH U--- 4 6 --
+      IGRAPH U--- 4 6 -- 
       + edges:
       [1] 1--2 1--3 1--4 2--3 2--4 3--4
 
@@ -10617,7 +10626,7 @@
     Code
       full_impl(n = 3, directed = TRUE, loops = FALSE)
     Output
-      IGRAPH D--- 3 6 --
+      IGRAPH D--- 3 6 -- 
       + edges:
       [1] 1->2 1->3 2->1 2->3 3->1 3->2
 
@@ -10626,7 +10635,7 @@
     Code
       kary_tree_impl(n = 7, children = 2, type = c("out", "in", "undirected"))
     Output
-      IGRAPH D--- 7 6 --
+      IGRAPH D--- 7 6 -- 
       + edges:
       [1] 1->2 1->3 2->4 2->5 3->6 3->7
 
@@ -10635,7 +10644,7 @@
     Code
       kary_tree_impl(n = 10, children = 3, type = c("in", "out", "undirected"))
     Output
-      IGRAPH D--- 10 9 --
+      IGRAPH D--- 10 9 -- 
       + edges:
       [1]  2->1  3->1  4->1  5->2  6->2  7->2  8->3  9->3 10->3
 
@@ -10644,7 +10653,7 @@
     Code
       barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag")
     Output
-      IGRAPH U--- 10 18 --
+      IGRAPH U--- 10 18 -- 
       + edges:
        [1] 1-- 2 1-- 2 2-- 3 1-- 3 2-- 4 2-- 4 2-- 5 2-- 5 4-- 6 2-- 6 2-- 7 1-- 7
       [13] 3-- 8 2-- 8 8-- 9 5-- 9 6--10 5--10
@@ -10654,7 +10663,7 @@
     Code
       barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree")
     Output
-      IGRAPH U--- 10 17 --
+      IGRAPH U--- 10 17 -- 
       + edges:
        [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 4-- 5 1-- 6 3-- 6 6-- 7 3-- 7 6-- 8
       [13] 2-- 8 3-- 9 5-- 9 2--10 6--10
@@ -10665,25 +10674,25 @@
       grg_game_impl(nodes = 10, radius = 0.3, torus = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 12 --
+      IGRAPH U--- 10 12 -- 
       + edges:
        [1] 3-- 5 3-- 6 5-- 6 5-- 7 5-- 8 6-- 8 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
-
+      
       $x
        [1] 0.08565451 0.15145413 0.45222514 0.45939554 0.55956278 0.61872370
        [7] 0.76201957 0.82545284 0.86690370 0.95857358
-
+      
       $y
        [1] 0.07820721 0.85018913 0.08700766 0.73223568 0.33212277 0.14562638
        [7] 0.53326474 0.32235478 0.49679861 0.31410636
-
+      
 
 # watts_strogatz_game_impl basic
 
     Code
       watts_strogatz_game_impl(dim = 1, size = 10, nei = 2, p = 0.1)
     Output
-      IGRAPH U--- 10 20 --
+      IGRAPH U--- 10 20 -- 
       + edges:
        [1] 1-- 2 2-- 6 2-- 3 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10 1-- 8 1-- 9
       [13] 2--10 2-- 4 3-- 5 4-- 6 5-- 7 6-- 8 7-- 9 8--10
@@ -10708,19 +10717,19 @@
     Output
       $res
       [1] 5
-
+      
       $from
       [1] 0
-
+      
       $to
       [1] 5
-
+      
       $vertex_path
       [1] 0 1 2 3 4 5
-
+      
       $edge_path
       [1] 0 1 2 3 4
-
+      
 
 # get_shortest_paths_impl basic
 
@@ -10732,20 +10741,20 @@
       $vertices[[1]]
       + 3/5 vertices:
       [1] 1 2 3
-
-
+      
+      
       $edges
       $edges[[1]]
       + 2/5 edges:
       [1] 1--2 2--3
-
-
+      
+      
       $parents
       [1] -1  0  1 -2  0
-
+      
       $inbound_edges
       [1] -1  0  1 -1  4
-
+      
 
 # subcomponent_impl basic
 
@@ -10777,13 +10786,13 @@
     Output
       $vector
       [1] 0.2 0.2 0.2 0.2 0.2
-
+      
       $value
       [1] 1
-
+      
       $options
       NULL
-
+      
 
 # hub_score_impl basic
 
@@ -10792,69 +10801,69 @@
     Output
       $value
       [1] 4
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 5
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 4
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 4
-
-
+      
+      
 
 # authority_score_impl basic
 
@@ -10863,69 +10872,69 @@
     Output
       $value
       [1] 4
-
+      
       $options
       $options$bmat
       [1] "I"
-
+      
       $options$n
       [1] 5
-
+      
       $options$which
       [1] "LA"
-
+      
       $options$nev
       [1] 1
-
+      
       $options$tol
       [1] 0
-
+      
       $options$ncv
       [1] 0
-
+      
       $options$ldv
       [1] 0
-
+      
       $options$ishift
       [1] 1
-
+      
       $options$maxiter
       [1] 3000
-
+      
       $options$nb
       [1] 1
-
+      
       $options$mode
       [1] 1
-
+      
       $options$start
       [1] 1
-
+      
       $options$sigma
       [1] 0
-
+      
       $options$sigmai
       [1] 0
-
+      
       $options$info
       [1] 0
-
+      
       $options$iter
       [1] 1
-
+      
       $options$nconv
       [1] 1
-
+      
       $options$numop
       [1] 4
-
+      
       $options$numopb
       [1] 0
-
+      
       $options$numreo
       [1] 4
-
-
+      
+      
 
 # community_walktrap_impl basic
 
@@ -10939,13 +10948,13 @@
       [3,]    3    6
       [4,]    0    7
       [5,]    8    9
-
+      
       $modularity
       [1] -0.17346939 -0.07142857  0.03061224  0.19387755  0.35714286  0.00000000
-
+      
       $membership
       [1] 0 0 0 1 1 1
-
+      
 
 # community_fastgreedy_impl basic
 
@@ -10959,14 +10968,14 @@
       [3,]    5    4
       [4,]    3    8
       [5,]    9    7
-
+      
       $modularity
       [1] -1.734694e-01 -7.142857e-02  9.183673e-02  1.938776e-01  3.571429e-01
       [6]  5.551115e-17
-
+      
       $membership
       [1] 1 1 1 0 0 0
-
+      
 
 # community_edge_betweenness_impl basic
 
@@ -10975,10 +10984,10 @@
     Output
       $removed_edges
       [1] 2 0 1 3 4 5 6
-
+      
       $edge_betweenness
       [1] 9 1 2 1 1 2 1
-
+      
       $merges
            [,1] [,2]
       [1,]    5    4
@@ -10986,16 +10995,16 @@
       [3,]    2    1
       [4,]    8    0
       [5,]    7    9
-
+      
       $bridges
       [1] 7 6 4 3 1
-
+      
       $modularity
       [1] -0.17346939 -0.07142857  0.09183673  0.19387755  0.35714286  0.00000000
-
+      
       $membership
       [1] 0 0 0 1 1 1
-
+      
 
 # edge_connectivity_impl basic
 
@@ -11017,7 +11026,7 @@
       create_bipartite_impl(types = c(FALSE, FALSE, TRUE, TRUE), edges = c(0, 2, 0, 3,
         1, 2, 1, 3), directed = FALSE)
     Output
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--3 1--4 2--3 2--4
 
@@ -11027,13 +11036,13 @@
       bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 10 --
+      IGRAPH U--- 10 10 -- 
       + edges:
        [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
-
+      
       $types
        [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-
+      
 
 ---
 
@@ -11041,13 +11050,13 @@
       bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 10 --
+      IGRAPH U--- 10 10 -- 
       + edges:
        [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
-
+      
       $types
        [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-
+      
 
 # decompose_impl basic
 
@@ -11055,17 +11064,17 @@
       decompose_impl(graph = g, mode = c("weak", "strong"))
     Output
       [[1]]
-      IGRAPH UN-- 3 2 --
+      IGRAPH UN-- 3 2 -- 
       + attr: name (v/c)
       + edges (vertex names):
       [1] A--B B--C
-
+      
       [[2]]
-      IGRAPH UN-- 2 1 --
+      IGRAPH UN-- 2 1 -- 
       + attr: name (v/c)
       + edge (vertex names):
       [1] D--E
-
+      
 
 # neighborhood_impl basic
 
@@ -11076,23 +11085,23 @@
       [[1]]
       + 3/5 vertices:
       [1] 1 2 5
-
+      
       [[2]]
       + 3/5 vertices:
       [1] 2 1 3
-
+      
       [[3]]
       + 3/5 vertices:
       [1] 3 2 4
-
+      
       [[4]]
       + 3/5 vertices:
       [1] 4 3 5
-
+      
       [[5]]
       + 3/5 vertices:
       [1] 5 1 4
-
+      
 
 # neighborhood_size_impl basic
 
@@ -11109,16 +11118,16 @@
     Output
       $chordal
       [1] TRUE
-
+      
       $fillin
       numeric(0)
-
+      
       $newgraph
       IGRAPH U--- 4 6 -- Full graph
       + attr: name (g/c), loops (g/l)
       + edges:
       [1] 1--2 1--3 1--4 2--3 2--4 3--4
-
+      
 
 ---
 
@@ -11127,16 +11136,16 @@
     Output
       $chordal
       [1] FALSE
-
+      
       $fillin
       [1] 1 3
-
+      
       $newgraph
       IGRAPH U--- 4 5 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l)
       + edges:
       [1] 1--2 2--3 3--4 1--4 2--4
-
+      
 
 # get_adjacency_impl basic
 
@@ -11160,7 +11169,7 @@
     Code
       read_graph_edgelist_impl(instream = tmp, n = 3, directed = FALSE)
     Output
-      IGRAPH U--- 3 3 --
+      IGRAPH U--- 3 3 -- 
       + edges:
       [1] 1--2 2--3 1--3
 
@@ -11169,7 +11178,7 @@
     Code
       degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration")
     Output
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 2--4 3--3 1--4 1--2
 
@@ -11178,7 +11187,7 @@
     Code
       degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl")
     Output
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--2 1--4 2--3 3--4
 
@@ -11226,7 +11235,7 @@
       [[1]]
       + 4/4 vertices:
       [1] 1 2 4 3
-
+      
 
 # independent_vertex_sets_impl basic
 
@@ -11236,43 +11245,43 @@
       [[1]]
       + 1/5 vertex:
       [1] 1
-
+      
       [[2]]
       + 1/5 vertex:
       [1] 2
-
+      
       [[3]]
       + 1/5 vertex:
       [1] 3
-
+      
       [[4]]
       + 1/5 vertex:
       [1] 4
-
+      
       [[5]]
       + 1/5 vertex:
       [1] 5
-
+      
       [[6]]
       + 2/5 vertices:
       [1] 1 3
-
+      
       [[7]]
       + 2/5 vertices:
       [1] 1 4
-
+      
       [[8]]
       + 2/5 vertices:
       [1] 2 4
-
+      
       [[9]]
       + 2/5 vertices:
       [1] 2 5
-
+      
       [[10]]
       + 2/5 vertices:
       [1] 3 5
-
+      
 
 # motifs_randesu_callback_closure_impl basic
 
@@ -11287,8 +11296,8 @@
     Code
       cat("\nNumber of motifs found:", length(motif_data), "\n")
     Output
-
-      Number of motifs found: 1
+      
+      Number of motifs found: 1 
     Code
       cat("First motif:\n")
     Output
@@ -11298,10 +11307,10 @@
     Output
       $vids
       [1] 1 3 2
-
+      
       $isoclass
       [1] 4
-
+      
 
 # motifs_randesu_callback_closure_impl errors
 
@@ -11325,8 +11334,8 @@
     Code
       cat("\nNumber of cliques found:", length(clique_data), "\n")
     Output
-
-      Number of cliques found: 5
+      
+      Number of cliques found: 5 
     Code
       cat("First clique:\n")
     Output
@@ -11357,8 +11366,8 @@
     Code
       cat("\nNumber of maximal cliques found:", length(clique_data), "\n")
     Output
-
-      Number of maximal cliques found: 3
+      
+      Number of maximal cliques found: 3 
     Code
       if (length(clique_data) > 0) {
         cat("First maximal clique:\n")
@@ -11390,8 +11399,8 @@
     Code
       cat("\nNumber of cycles found:", length(cycle_data), "\n")
     Output
-
-      Number of cycles found: 1
+      
+      Number of cycles found: 1 
     Code
       cat("First cycle:\n")
     Output
@@ -11401,10 +11410,10 @@
     Output
       $vertices
       [1] 1 2 3 4
-
+      
       $edges
       [1] 1 2 3 4
-
+      
 
 # simple_cycles_callback_closure_impl errors
 
@@ -11428,8 +11437,8 @@
     Code
       cat("\nNumber of isomorphisms found:", length(iso_data), "\n")
     Output
-
-      Number of isomorphisms found: 2
+      
+      Number of isomorphisms found: 2 
     Code
       cat("First isomorphism:\n")
     Output
@@ -11439,10 +11448,10 @@
     Output
       $map12
       [1] 1 2 3 4 5
-
+      
       $map21
       [1] 1 2 3 4 5
-
+      
 
 # get_isomorphisms_vf2_callback_closure_impl errors
 
@@ -11467,8 +11476,8 @@
     Code
       cat("\nNumber of subisomorphisms found:", length(subiso_data), "\n")
     Output
-
-      Number of subisomorphisms found: 2
+      
+      Number of subisomorphisms found: 2 
     Code
       cat("First subisomorphism:\n")
     Output
@@ -11478,10 +11487,10 @@
     Output
       $map12
       [1] 1 2 3 0 0
-
+      
       $map21
       [1] 1 2 3
-
+      
 
 # get_subisomorphisms_vf2_callback_closure_impl errors
 
@@ -11498,7 +11507,7 @@
     Code
       sparse_adjacency_impl(adjmatrix = M)
     Output
-      IGRAPH D--- 4 4 --
+      IGRAPH D--- 4 4 -- 
       + edges:
       [1] 4->1 1->2 2->3 3->4
 
@@ -11507,7 +11516,7 @@
     Code
       sparse_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
     Output
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--2 2--3 1--4 3--4
 
@@ -11517,13 +11526,13 @@
       sparse_weighted_adjacency_impl(adjmatrix = M)
     Output
       $graph
-      IGRAPH D--- 4 4 --
+      IGRAPH D--- 4 4 -- 
       + edges:
       [1] 4->1 1->2 2->3 3->4
-
+      
       $weights
       [1] 0.5 2.5 1.0 3.0
-
+      
 
 ---
 
@@ -11531,20 +11540,20 @@
       sparse_weighted_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
     Output
       $graph
-      IGRAPH U--- 4 4 --
+      IGRAPH U--- 4 4 -- 
       + edges:
       [1] 1--2 2--3 1--4 3--4
-
+      
       $weights
       [1] 2.5 1.0 0.5 3.0
-
+      
 
 # weighted_sparsemat_impl basic
 
     Code
       weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
     Output
-      IGRAPH D-W- 4 4 --
+      IGRAPH D-W- 4 4 -- 
       + attr: weight (e/n)
       + edges:
       [1] 4->1 1->2 2->3 3->4
@@ -11554,8 +11563,52 @@
     Code
       disjoint_union_many_impl(graphs = list(g1, g2, g3))
     Output
-      IGRAPH D--- 6 0 --
+      IGRAPH D--- 6 0 -- 
       + edges:
+
+# union_many_impl basic
+
+    Code
+      union_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 3 -- 
+      + edges:
+      [1] 2->3 1->3 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      numeric(0)
+      
+      $edgemaps[[2]]
+      [1] 2 0
+      
+      $edgemaps[[3]]
+      [1] 1
+      
+      
+
+# intersection_many_impl basic
+
+    Code
+      intersection_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 1 -- 
+      + edge:
+      [1] 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      [1]  0 -1 -1
+      
+      $edgemaps[[2]]
+      [1]  0 -1
+      
+      $edgemaps[[3]]
+      [1] 0
+      
+      
 
 # layout_merge_dla_impl basic
 
@@ -11569,26 +11622,4 @@
       [4,] -6.893133 -0.8307751
       [5,] -4.613626 -0.8307751
       [6,] -2.334119 -0.8307751
-
-# union_many_impl basic
-
-    Code
-      union_many_impl(graphs = list(g1, g2, g3))
-    Output
-      $res
-      IGRAPH D--- 3 3 --
-      + edges:
-      [1] 2->3 1->3 1->2
-
-      $edgemaps
-      $edgemaps[[1]]
-      numeric(0)
-
-      $edgemaps[[2]]
-      [1] 2 0
-
-      $edgemaps[[3]]
-      [1] 1
-
-
 
