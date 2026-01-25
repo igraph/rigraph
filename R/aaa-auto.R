@@ -189,9 +189,9 @@ neighbors_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -339,16 +339,16 @@ get_all_eids_between_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -377,9 +377,9 @@ incident_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2439,16 +2439,16 @@ are_adjacent_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   v1 <- as_igraph_vs(graph, v1)
-  if (length(v1) == 0) {
+  if (length(v1) != 1) {
     cli::cli_abort(
-      "{.arg v1} must specify at least one vertex",
+      "{.arg v1} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   v2 <- as_igraph_vs(graph, v2)
-  if (length(v2) == 0) {
+  if (length(v2) != 1) {
     cli::cli_abort(
-      "{.arg v2} must specify at least one vertex",
+      "{.arg v2} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2473,16 +2473,16 @@ are_connected_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   v1 <- as_igraph_vs(graph, v1)
-  if (length(v1) == 0) {
+  if (length(v1) != 1) {
     cli::cli_abort(
-      "{.arg v1} must specify at least one vertex",
+      "{.arg v1} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   v2 <- as_igraph_vs(graph, v2)
-  if (length(v2) == 0) {
+  if (length(v2) != 1) {
     cli::cli_abort(
-      "{.arg v2} must specify at least one vertex",
+      "{.arg v2} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2716,16 +2716,16 @@ get_shortest_path_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2765,16 +2765,16 @@ get_shortest_path_bellman_ford_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2823,16 +2823,16 @@ get_shortest_path_dijkstra_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2882,16 +2882,16 @@ get_shortest_path_astar_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2940,9 +2940,9 @@ get_shortest_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -2982,9 +2982,9 @@ get_all_shortest_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3110,9 +3110,9 @@ get_shortest_paths_dijkstra_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3162,9 +3162,9 @@ get_shortest_paths_bellman_ford_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3214,9 +3214,9 @@ get_all_shortest_paths_dijkstra_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3426,9 +3426,9 @@ get_all_simple_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3480,16 +3480,16 @@ get_k_shortest_paths_impl <- function(
   }
   k <- as.numeric(k)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3531,16 +3531,16 @@ get_widest_path_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3589,9 +3589,9 @@ get_widest_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -3752,9 +3752,9 @@ subcomponent_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -6192,9 +6192,9 @@ pseudo_diameter_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   start_vid <- as_igraph_vs(graph, start_vid)
-  if (length(start_vid) == 0) {
+  if (length(start_vid) != 1) {
     cli::cli_abort(
-      "{.arg start_vid} must specify at least one vertex",
+      "{.arg start_vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -6232,9 +6232,9 @@ pseudo_diameter_dijkstra_impl <- function(
     weights <- NULL
   }
   start_vid <- as_igraph_vs(graph, start_vid)
-  if (length(start_vid) == 0) {
+  if (length(start_vid) != 1) {
     cli::cli_abort(
-      "{.arg start_vid} must specify at least one vertex",
+      "{.arg start_vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -6305,9 +6305,9 @@ random_walk_impl <- function(
     weights <- NULL
   }
   start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
+  if (length(start) != 1) {
     cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
+      "{.arg start} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -6360,9 +6360,9 @@ random_edge_walk_impl <- function(
     weights <- NULL
   }
   start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
+  if (length(start) != 1) {
     cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
+      "{.arg start} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -6621,9 +6621,9 @@ bfs_simple_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
+  if (length(root) != 1) {
     cli::cli_abort(
-      "{.arg root} must specify at least one vertex",
+      "{.arg root} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -7670,9 +7670,9 @@ layout_star_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   center <- as_igraph_vs(graph, center)
-  if (length(center) == 0) {
+  if (length(center) != 1) {
     cli::cli_abort(
-      "{.arg center} must specify at least one vertex",
+      "{.arg center} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -10313,16 +10313,16 @@ write_graph_dimacs_flow_impl <- function(
   check_string(outstream)
 
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11125,9 +11125,9 @@ rooted_product_impl <- function(
   ensure_igraph(g1)
   ensure_igraph(g2)
   root <- as_igraph_vs(g2, root)
-  if (length(root) == 0) {
+  if (length(root) != 1) {
     cli::cli_abort(
-      "{.arg root} must specify at least one vertex",
+      "{.arg root} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11179,16 +11179,16 @@ maxflow_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11231,16 +11231,16 @@ maxflow_value_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11393,16 +11393,16 @@ st_mincut_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11445,16 +11445,16 @@ st_mincut_value_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11489,16 +11489,16 @@ st_vertex_connectivity_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11550,16 +11550,16 @@ st_edge_connectivity_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11603,16 +11603,16 @@ edge_disjoint_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11637,16 +11637,16 @@ vertex_disjoint_paths_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11709,9 +11709,9 @@ dominator_tree_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
+  if (length(root) != 1) {
     cli::cli_abort(
-      "{.arg root} must specify at least one vertex",
+      "{.arg root} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11745,16 +11745,16 @@ all_st_cuts_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -11785,16 +11785,16 @@ all_st_mincuts_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
+  if (length(source) != 1) {
     cli::cli_abort(
-      "{.arg source} must specify at least one vertex",
+      "{.arg source} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
+  if (length(target) != 1) {
     cli::cli_abort(
-      "{.arg target} must specify at least one vertex",
+      "{.arg target} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -13204,9 +13204,9 @@ fundamental_cycles_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) {
     start <- as_igraph_vs(graph, start)
-    if (length(start) == 0) {
+    if (length(start) != 1) {
       cli::cli_abort(
-        "{.arg start} must specify at least one vertex",
+        "{.arg start} must specify exactly one vertex",
         call = rlang::caller_env()
       )
     }
@@ -13485,9 +13485,9 @@ random_spanning_tree_impl <- function(
   ensure_igraph(graph)
   if (!is.null(vid)) {
     vid <- as_igraph_vs(graph, vid)
-    if (length(vid) == 0) {
+    if (length(vid) != 1) {
       cli::cli_abort(
-        "{.arg vid} must specify at least one vertex",
+        "{.arg vid} must specify exactly one vertex",
         call = rlang::caller_env()
       )
     }
@@ -13636,9 +13636,9 @@ deterministic_optimal_imitation_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -13720,9 +13720,9 @@ roulette_wheel_imitation_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -13762,9 +13762,9 @@ stochastic_imitation_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
+  if (length(vid) != 1) {
     cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
+      "{.arg vid} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -13916,9 +13916,9 @@ vertex_path_from_edge_path_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) {
     start <- as_igraph_vs(graph, start)
-    if (length(start) == 0) {
+    if (length(start) != 1) {
       cli::cli_abort(
-        "{.arg start} must specify at least one vertex",
+        "{.arg start} must specify exactly one vertex",
         call = rlang::caller_env()
       )
     }
@@ -13981,7 +13981,6 @@ cliques_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14014,7 +14013,6 @@ maximal_cliques_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -14090,7 +14088,6 @@ get_isomorphisms_vf2_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -14170,7 +14167,6 @@ get_subisomorphisms_vf2_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14215,7 +14211,6 @@ simple_cycles_callback_closure_impl <- function(
     )
   }
 
-
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -14251,7 +14246,6 @@ motifs_randesu_callback_closure_impl <- function(
       error = function(e) e
     )
   }
-
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
