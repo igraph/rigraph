@@ -354,10 +354,14 @@ igraph_error_t igraph_bfs_closure(
 
   R_igraph_callback_data_t data = { .callback = callback };
 
+  /* Pass NULL if callback is R_NilValue */
+  igraph_bfshandler_t *handler = Rf_isNull(callback) ? NULL : R_igraph_bfs_handler;
+  void *extra = Rf_isNull(callback) ? NULL : &data;
+
   return igraph_bfs(
       graph, root, roots, mode, unreachable, restricted,
       order, rank, parents, pred, succ, dist,
-      R_igraph_bfs_handler, &data);
+      handler, extra);
 }
 
 /* Handler function for DFS in-callbacks - converts C types to R types */
