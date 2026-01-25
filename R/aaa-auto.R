@@ -9224,6 +9224,47 @@ reindex_membership_impl <- function(
   res
 }
 
+community_leading_eigenvector_impl <- function(
+  graph,
+  weights = NULL,
+  membership = NULL,
+  steps = -1,
+  options = arpack_defaults(),
+  start = FALSE
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  if (!is.null(membership)) {
+    membership <- as.numeric(membership)
+  }
+  steps <- as.numeric(steps)
+  options <- modify_list(arpack_defaults(), options)
+  start <- as.logical(start)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_community_leading_eigenvector,
+    graph,
+    weights,
+    membership,
+    steps,
+    options,
+    start
+  )
+
+  class(res) <- "igraph.eigenc"
+  res
+}
+
 community_fluid_communities_impl <- function(
   graph,
   no_of_communities

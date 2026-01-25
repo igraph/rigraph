@@ -94,6 +94,7 @@ extern SEXP R_igraph_community_fastgreedy(SEXP, SEXP);
 extern SEXP R_igraph_community_fluid_communities(SEXP, SEXP);
 extern SEXP R_igraph_community_infomap(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_label_propagation(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_community_leading_eigenvector(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leiden(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_multilevel(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP);
@@ -522,7 +523,6 @@ extern SEXP Rx_igraph_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_citing_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_community_edge_betweenness(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_community_fastgreedy(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_community_leading_eigenvector(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_community_to_membership2(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_compose(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_connect_neighborhood(SEXP, SEXP, SEXP);
@@ -694,6 +694,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_fluid_communities",                (DL_FUNC) &R_igraph_community_fluid_communities,                 2},
     {"R_igraph_community_infomap",                          (DL_FUNC) &R_igraph_community_infomap,                           4},
     {"R_igraph_community_label_propagation",                (DL_FUNC) &R_igraph_community_label_propagation,                 5},
+    {"R_igraph_community_leading_eigenvector",              (DL_FUNC) &R_igraph_community_leading_eigenvector,               6},
     {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            8},
     {"R_igraph_community_multilevel",                       (DL_FUNC) &R_igraph_community_multilevel,                        3},
     {"R_igraph_community_optimal_modularity",               (DL_FUNC) &R_igraph_community_optimal_modularity,                2},
@@ -1122,7 +1123,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_citing_cited_type_game",                    (DL_FUNC) &Rx_igraph_citing_cited_type_game,                     5},
     {"Rx_igraph_community_edge_betweenness",                (DL_FUNC) &Rx_igraph_community_edge_betweenness,                 8},
     {"Rx_igraph_community_fastgreedy",                      (DL_FUNC) &Rx_igraph_community_fastgreedy,                       5},
-    {"Rx_igraph_community_leading_eigenvector",             (DL_FUNC) &Rx_igraph_community_leading_eigenvector,              9},
     {"Rx_igraph_community_to_membership2",                  (DL_FUNC) &Rx_igraph_community_to_membership2,                   3},
     {"Rx_igraph_compose",                                   (DL_FUNC) &Rx_igraph_compose,                                    3},
     {"Rx_igraph_connect_neighborhood",                      (DL_FUNC) &Rx_igraph_connect_neighborhood,                       3},

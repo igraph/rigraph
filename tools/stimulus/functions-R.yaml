@@ -657,8 +657,18 @@ igraph_le_community_to_membership:
 igraph_reindex_membership:
 
 igraph_community_leading_eigenvector:
-    # Needs custom handling - has callback parameter (LEVCFUNC)
-    IGNORE: RR, RC, RInit
+    PARAMS: |-
+        GRAPH graph, OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL OUT MATRIX_INT merges, OPTIONAL INOUT VECTOR_INT membership,
+        INTEGER steps=-1,
+        INOUT ARPACKOPT options=ARPACK_DEFAULTS,
+        OPTIONAL OUT REAL modularity, BOOLEAN start=False,
+        OPTIONAL OUT VECTOR eigenvalues,
+        OPTIONAL OUT VECTOR_LIST eigenvectors,
+        OPTIONAL OUT VECTOR history,
+        OPTIONAL NULL callback,
+        OPTIONAL NULL callback_extra
+    DEPS: weights ON graph, membership ON graph
     R:
         CLASS: igraph.eigenc
 
