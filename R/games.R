@@ -826,8 +826,9 @@ aging.prefatt.game <- function(
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
 #'   i.e. linear preferential attachment.
-#' @param m Numeric constant, the number of edges to add in each time step This
-#'   argument is only used if both `out.dist` and `out.seq` are omitted
+#' @param m Numeric constant, the number of edges to add in each time step,
+#'   defaults to 1.
+#'   This argument is only used if both `out.dist` and `out.seq` are omitted
 #'   or NULL.
 #' @param out.dist Numeric vector, the distribution of the number of edges to
 #'   add in each time step. This argument is only used if the `out.seq`
@@ -911,15 +912,13 @@ sample_pa <- function(
     cli::cli_warn("{.arg m} is zero, graph will be empty.")
   }
 
-  if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
+  if (is.null(m)) {
     m <- 1
   }
+  m <- as.numeric(m)
 
   n <- as.numeric(n)
   power <- as.numeric(power)
-  if (!is.null(m)) {
-    m <- as.numeric(m)
-  }
   if (!is.null(out.dist)) {
     out.dist <- as.numeric(out.dist)
   }

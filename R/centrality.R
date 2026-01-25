@@ -1996,7 +1996,7 @@ alpha.centrality.dense <- function(
     attr <- "weight"
   } else {
     ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
+    attr <- numeric()
   }
 
   d <- t(as_adjacency_matrix(graph, attr = attr, sparse = FALSE))

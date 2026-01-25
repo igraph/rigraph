@@ -57,13 +57,13 @@ test_that("add_edges_impl basic", {
 
   expect_snapshot(add_edges_impl(
     graph = g,
-    edges = c(0, 1, 1, 2)
+    edges = c(1, 2, 2, 3)
   ))
 
   # Structured tests
   result <- add_edges_impl(
     graph = g,
-    edges = c(0, 1, 1, 2)
+    edges = c(1, 2, 2, 3)
   )
   expect_s3_class(result, "igraph")
   expect_equal(vcount(result), 3)
@@ -11327,8 +11327,8 @@ test_that("union_many_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g1 <- empty_impl(n = 3)
-  g2 <- add_edges_impl(g1, c(0, 1, 1, 2))
-  g3 <- add_edges_impl(g1, c(0, 2))
+  g2 <- add_edges_impl(g1, c(0, 1, 1, 2) + 1)
+  g3 <- add_edges_impl(g1, c(0, 2) + 1)
 
   expect_snapshot(union_many_impl(
     graphs = list(g1, g2, g3)
@@ -11345,9 +11345,9 @@ test_that("union_many_impl basic", {
 test_that("intersection_many_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2))
-  g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
-  g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1))
+  g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2) + 1)
+  g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
+  g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1) + 1)
 
   expect_snapshot(intersection_many_impl(
     graphs = list(g1, g2, g3)
