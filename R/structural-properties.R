@@ -2633,7 +2633,8 @@ count_loops <- function(graph) {
 #' @param dist Logical scalar, whether to return the distance from the root of
 #'   the search tree.
 #' @param callback If not `NULL`, then it must be callback function. This
-#'   is called whenever a vertex is visited. See details below.
+#'   is called whenever a vertex is visited. The callback function should
+#'   return `FALSE` to continue the search or `TRUE` to stop it. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated

@@ -21,7 +21,7 @@ isomorphisms(graph1, graph2, method = "vf2", ..., callback = NULL)
 If provided, the function should accept two arguments: \code{map12} (integer vector
 mapping vertex IDs from graph1 to graph2, 1-based indexing) and \code{map21}
 (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
-The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
 If \code{NULL} (the default), all isomorphisms are collected and returned as a list.
 Only supported for \code{method = "vf2"}.
 

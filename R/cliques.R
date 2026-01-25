@@ -204,8 +204,8 @@ clique.number <- function(graph) {
 #' @param ... These dots are for future extensions and must be empty.
 #' @param callback Optional function to call for each clique found. If provided,
 #'   the function should accept one argument: `clique` (integer vector of vertex
-#'   IDs in the clique, 1-based indexing). The function should return `TRUE` to
-#'   continue the search or `FALSE` to stop it. If `NULL` (the default), all
+#'   IDs in the clique, 1-based indexing). The function should return `FALSE` to
+#'   continue the search or `TRUE` to stop it. If `NULL` (the default), all
 #'   cliques are collected and returned as a list.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph
