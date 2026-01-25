@@ -209,31 +209,8 @@ test_that("label.propagation.community works", {
 test_that("cluster_leading_eigen works", {
   withr::local_seed(20230115)
 
-  check_eigen_value <- function(
-    membership,
-    community,
-    value,
-    vector,
-    multiplier,
-    extra
-  ) {
-    M <- sapply(1:length(vector), function(x) {
-      v <- rep(0, length(vector))
-      v[x] <- 1
-      multiplier(v)
-    })
-    ev <- eigen(M)
-    ret <- 0
-    expect_equal(ev$values[1], value)
-    if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
-      ev$vectors <- -ev$vectors
-    }
-    expect_equal(ev$vectors[, 1], vector)
-    0
-  }
-
   karate <- make_graph("Zachary")
-  karate_lc <- cluster_leading_eigen(karate, callback = check_eigen_value)
+  karate_lc <- cluster_leading_eigen(karate)
 
   expect_equal(karate_lc$modularity, modularity(karate, karate_lc$membership))
   expect_equal(
@@ -257,34 +234,24 @@ test_that("cluster_leading_eigen works", {
       class = "table"
     )
   )
+})
 
-  ## Check that the modularity matrix is correct
+test_that("cluster_leading_eigen callback deprecated", {
+  withr::local_seed(20230115)
 
-  mod_mat_caller <- function(
-    membership,
-    community,
-    value,
-    vector,
-    multiplier,
-    extra
-  ) {
-    M <- sapply(1:length(vector), function(x) {
-      v <- rep(0, length(vector))
-      v[x] <- 1
-      multiplier(v)
-    })
-    myc <- membership == community
-    B <- A[myc, myc] - (deg[myc] %*% t(deg[myc])) / 2 / ec
-    BG <- B - diag(rowSums(B))
-
-    expect_equal(M, BG)
-    0
-  }
-
-  A <- as_adjacency_matrix(karate, sparse = FALSE)
-  ec <- ecount(karate)
-  deg <- degree(karate)
-  karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
+  karate <- make_graph("Zachary")
+  
+  # Test that callback parameter is deprecated
+  expect_error(
+    cluster_leading_eigen(karate, callback = function(...) 0),
+    class = "lifecycle_error_deprecated"
+  )
+  
+  # Test that extra parameter is deprecated
+  expect_error(
+    cluster_leading_eigen(karate, extra = "test"),
+    class = "lifecycle_error_deprecated"
+  )
 })
 test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
