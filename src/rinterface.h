@@ -155,19 +155,6 @@ igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *re
 igraph_error_t Rw_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
 igraph_error_t Rw_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
 
-/* Safe evaluation with interrupt handling */
-typedef enum {
-  SAFEEVAL_OK,
-  SAFEEVAL_ERROR,
-  SAFEEVAL_INTERRUPTION
-} Rx_igraph_safe_eval_result_t;
-
-Rx_igraph_safe_eval_result_t Rx_igraph_safe_eval_classify_result(SEXP result);
-SEXP Rx_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, Rx_igraph_safe_eval_result_t* result);
-SEXP Rx_igraph_handle_safe_eval_result_in_env(SEXP result, SEXP rho);
-SEXP Rx_igraph_safe_eval(SEXP expr_call, Rx_igraph_safe_eval_result_t* result);
-SEXP Rx_igraph_handle_safe_eval_result(SEXP result);
-
 /* Declarations for functions from rinterface.c needed by wrappers in rinterface_extra.c */
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
