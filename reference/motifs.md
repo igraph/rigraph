@@ -35,6 +35,14 @@ motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
   stop it. If `NULL` (the default), motif counts are returned as a
   numeric vector.
 
+  **Important limitation:** Callback functions must NOT call any igraph
+  functions (including simple queries like
+  [`vcount()`](https://r.igraph.org/reference/gorder.md) or
+  [`ecount()`](https://r.igraph.org/reference/gsize.md)). Doing so will
+  cause R to crash due to reentrancy issues. Extract any needed graph
+  information before calling the function with a callback, or use
+  collector mode (the default) and process results afterward.
+
 ## Value
 
 When `callback` is `NULL`, `motifs()` returns a numeric vector, the

@@ -74,7 +74,9 @@ this combinatorial explosion.</p>
 <span>  <span class="va">graph</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  min <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  max <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  callback <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -99,17 +101,34 @@ and <code>all</code> ignores edge directions. Ignored in undirected graphs.</p><
 <dt id="arg-max">max<a class="anchor" aria-label="anchor" href="#arg-max"></a></dt>
 <dd><p>Upper limit on cycle lengths to consider. <code>NULL</code> means no limit.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
+<dt id="arg-callback">callback<a class="anchor" aria-label="anchor" href="#arg-callback"></a></dt>
+<dd><p>Optional function to call for each cycle found. If provided,
+the function should accept two arguments: <code>vertices</code> (integer vector of vertex
+IDs in the cycle) and <code>edges</code> (integer vector of edge IDs
+in the cycle). The function should return <code>TRUE</code> to continue
+the search or <code>FALSE</code> to stop it. If <code>NULL</code> (the default), all cycles are
+collected and returned as a list.</p>
+<p><strong>Important limitation:</strong> Callback functions must NOT call any igraph
+functions (including simple queries like <code><a href="gorder.html">vcount()</a></code> or <code><a href="gsize.html">ecount()</a></code>). Doing
+so will cause R to crash due to nested <code><a href="https://rdrr.io/r/base/CallExternal.html" class="external-link">.Call()</a></code> state corruption. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list, with two entries:</p>
-<dl><dt>vertices</dt>
-<dd><p>The list of cycles in terms of their vertices.</p></dd>
-
-<dt>edges</dt>
-<dd><p>The list of cycles in terms of their edges.</p></dd>
-
-</dl></div>
+    <p>If <code>callback</code> is <code>NULL</code>, returns a list with two elements: <code>vertices</code>
+(list of integer vectors with vertex IDs) and <code>edges</code> (list of integer vectors
+with edge IDs). If <code>callback</code> is provided, returns <code>NULL</code> invisibly.</p>
+<p>If <code>callback</code> is <code>NULL</code>, returns a list with two elements: <code>vertices</code>
+(list of integer vectors with vertex IDs) and <code>edges</code> (list of integer vectors
+with edge IDs). If <code>callback</code> is provided, returns <code>NULL</code> invisibly.</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Graph cycles
@@ -123,7 +142,7 @@ and <code>all</code> ignores edge directions. Ignored in undirected graphs.</p><
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles" class="external-link"><code>simple_cycles()</code></a>.</p>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles" class="external-link"><code>simple_cycles()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles_callback" class="external-link"><code>simple_cycles_callback()</code></a>.</p>
     </div>
 
     <div class="section level2">
@@ -133,95 +152,95 @@ and <code>all</code> ignores edge directions. Ignored in undirected graphs.</p><
 <span class="r-in"><span><span class="fu">simple_cycles</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A B C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/6 vertex, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/6 vertex, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;B B-&gt;C C-&gt;A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;F F-&gt;A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 edge from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 edge from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] E-&gt;E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">simple_cycles</span><span class="op">(</span><span class="va">g</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span> <span class="co"># ignore edge directions</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A B C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A D E F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A D E F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/6 vertex, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/6 vertex, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;B B-&gt;C C-&gt;A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;D D-&gt;E F-&gt;E F-&gt;A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;D D-&gt;E F-&gt;E A-&gt;F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] F-&gt;A A-&gt;F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 edge from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 edge from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] E-&gt;E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">simple_cycles</span><span class="op">(</span><span class="va">g</span>, mode <span class="op">=</span> <span class="st">"all"</span>, min <span class="op">=</span> <span class="fl">2</span>, max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># limit cycle lengths</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A B C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from f9ba534:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from 3eed494:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A-&gt;B B-&gt;C C-&gt;A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from f9ba534 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 edges from 3eed494 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] F-&gt;A A-&gt;F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

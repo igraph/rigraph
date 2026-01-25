@@ -61,13 +61,13 @@ Other deterministic constructors:
 
 ``` r
 make_tree(10, 2)
-#> IGRAPH ee90abc D--- 10 9 -- Tree
+#> IGRAPH 7448dc8 D--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from ee90abc:
+#> + edges from 7448dc8:
 #> [1] 1-> 2 1-> 3 2-> 4 2-> 5 3-> 6 3-> 7 4-> 8 4-> 9 5->10
 make_tree(10, 3, mode = "undirected")
-#> IGRAPH ad288f0 U--- 10 9 -- Tree
+#> IGRAPH 78493a8 U--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from ad288f0:
+#> + edges from 78493a8:
 #> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10
 ```

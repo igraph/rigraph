@@ -86,7 +86,12 @@ If <code>NULL</code>, the default, no cuts are made.</p></dd>
 The function should accept two arguments: <code>vids</code> (integer vector of vertex IDs
 in the motif) and <code>isoclass</code> (the isomorphism class of the motif).
 The function should return <code>TRUE</code> to continue the search or <code>FALSE</code> to stop it.
-If <code>NULL</code> (the default), motif counts are returned as a numeric vector.</p></dd>
+If <code>NULL</code> (the default), motif counts are returned as a numeric vector.</p>
+<p><strong>Important limitation:</strong> Callback functions must NOT call any igraph
+functions (including simple queries like <code><a href="gorder.html">vcount()</a></code> or <code><a href="gsize.html">ecount()</a></code>). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.</p></dd>
 
 </dl></div>
     <div class="section level2">

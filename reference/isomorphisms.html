@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">isomorphisms</span><span class="op">(</span><span class="va">graph1</span>, <span class="va">graph2</span>, method <span class="op">=</span> <span class="st">"vf2"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">isomorphisms</span><span class="op">(</span><span class="va">graph1</span>, <span class="va">graph2</span>, method <span class="op">=</span> <span class="st">"vf2"</span>, <span class="va">...</span>, callback <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -78,11 +78,27 @@
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Extra arguments, passed to the various methods.</p></dd>
 
+
+<dt id="arg-callback">callback<a class="anchor" aria-label="anchor" href="#arg-callback"></a></dt>
+<dd><p>Optional callback function to call for each isomorphism found.
+If provided, the function should accept two arguments: <code>map12</code> (integer vector
+mapping vertex IDs from graph1 to graph2, 1-based indexing) and <code>map21</code>
+(integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
+The function should return <code>TRUE</code> to continue the search or <code>FALSE</code> to stop it.
+If <code>NULL</code> (the default), all isomorphisms are collected and returned as a list.
+Only supported for <code>method = "vf2"</code>.</p>
+<p><strong>Important limitation:</strong> Callback functions must NOT call any igraph
+functions (including simple queries like <code><a href="gorder.html">vcount()</a></code> or <code><a href="gsize.html">ecount()</a></code>). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of vertex sequences, corresponding to all
-mappings from the first graph to the second.</p>
+    <p>If <code>callback</code> is <code>NULL</code>, returns a list of vertex sequences, corresponding
+to all mappings from the first graph to the second. If <code>callback</code> is provided,
+returns <code>NULL</code> invisibly.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
