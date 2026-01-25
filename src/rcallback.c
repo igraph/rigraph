@@ -318,18 +318,10 @@ igraph_error_t R_igraph_bfs_handler(
   INTEGER(args)[4] = dist;
   SET_NAMES(args, names);
 
-  /* Call the R function: callback(args) */
+  /* Call the R function with safe evaluation: callback(args) */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-
-  /* Check if result is an error condition (from tryCatch) */
-  if (Rf_inherits(result, "error")) {
-    UNPROTECT(4);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-
-  cres = Rf_asLogical(result);
+  PROTECT(result = Rx_igraph_safe_eval(R_fcall, NULL));
+  cres = Rf_asLogical(Rx_igraph_handle_safe_eval_result(result));
 
   UNPROTECT(4);
   /* R callback returns FALSE to continue, TRUE to stop */
@@ -386,18 +378,10 @@ igraph_error_t R_igraph_dfs_handler_in(
   REAL(args)[1] = dist;
   SET_NAMES(args, names);
 
-  /* Call the R function: callback(args) */
+  /* Call the R function with safe evaluation: callback(args) */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-
-  /* Check if result is an error condition (from tryCatch) */
-  if (Rf_inherits(result, "error")) {
-    UNPROTECT(4);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-
-  cres = Rf_asLogical(result);
+  PROTECT(result = Rx_igraph_safe_eval(R_fcall, NULL));
+  cres = Rf_asLogical(Rx_igraph_handle_safe_eval_result(result));
 
   UNPROTECT(4);
   /* R callback returns FALSE to continue, TRUE to stop */
@@ -426,18 +410,10 @@ igraph_error_t R_igraph_dfs_handler_out(
   REAL(args)[1] = dist;
   SET_NAMES(args, names);
 
-  /* Call the R function: callback(args) */
+  /* Call the R function with safe evaluation: callback(args) */
   PROTECT(R_fcall = Rf_lang2(callback, args));
-  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
-
-  /* Check if result is an error condition (from tryCatch) */
-  if (Rf_inherits(result, "error")) {
-    UNPROTECT(4);
-    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
-    return IGRAPH_FAILURE;
-  }
-
-  cres = Rf_asLogical(result);
+  PROTECT(result = Rx_igraph_safe_eval(R_fcall, NULL));
+  cres = Rf_asLogical(Rx_igraph_handle_safe_eval_result(result));
 
   UNPROTECT(4);
   /* R callback returns FALSE to continue, TRUE to stop */

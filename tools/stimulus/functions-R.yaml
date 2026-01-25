@@ -453,7 +453,7 @@ igraph_bfs_closure:
     PARAMS: |-
         GRAPH graph, VERTEX root, OPTIONAL VERTEX_INDICES roots,
         NEIMODE mode=OUT, BOOLEAN unreachable,
-        VERTEX_INDICES restricted,
+        OPTIONAL VERTEX_INDICES restricted,
         OUT VERTEX_INDICES order, OUT VECTOR_INT rank,
         OUT VECTOR_INT parents,
         OUT VECTOR_INT pred, OUT VECTOR_INT succ,

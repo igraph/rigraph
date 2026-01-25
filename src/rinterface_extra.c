@@ -217,11 +217,6 @@ SEXP Rx_igraph_c2(SEXP x1, SEXP x2) {
  * longjmp() back to the top level. Adapted from include/Rcpp/api/meat/Rcpp_eval.h
  * in the Rcpp project */
 
-typedef enum {
-  SAFEEVAL_OK = 0,
-  SAFEEVAL_ERROR = 1,
-  SAFEEVAL_INTERRUPTION = 2
-} Rx_igraph_safe_eval_result_t;
 
 Rx_igraph_safe_eval_result_t Rx_igraph_safe_eval_classify_result(SEXP result) {
   if (Rf_inherits(result, "condition")) {

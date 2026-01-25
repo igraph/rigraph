@@ -18781,8 +18781,13 @@ SEXP R_igraph_bfs_closure(SEXP graph, SEXP root, SEXP roots, SEXP mode, SEXP unr
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(unreachable);
   c_unreachable = LOGICAL(unreachable)[0];
-  Rz_SEXP_to_vector_int_copy(restricted, &c_restricted);
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_restricted);
+  if (!Rf_isNull(restricted)) {
+    Rz_SEXP_to_vector_int_copy(restricted, &c_restricted);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_restricted);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_restricted, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_restricted);
+  }
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_order, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_order);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_rank, 0));
@@ -18796,7 +18801,7 @@ SEXP R_igraph_bfs_closure(SEXP graph, SEXP root, SEXP roots, SEXP mode, SEXP unr
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_dist, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_dist);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_bfs_closure(&c_graph, c_root, (Rf_isNull(roots) ? 0 : &c_roots), c_mode, c_unreachable, &c_restricted, &c_order, &c_rank, &c_parents, &c_pred, &c_succ, &c_dist, callback));
+  IGRAPH_R_CHECK(igraph_bfs_closure(&c_graph, c_root, (Rf_isNull(roots) ? 0 : &c_roots), c_mode, c_unreachable, (Rf_isNull(restricted) ? 0 : &c_restricted), &c_order, &c_rank, &c_parents, &c_pred, &c_succ, &c_dist, callback));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(6));

@@ -13967,7 +13967,7 @@ bfs_closure_impl <- function(
   roots = NULL,
   mode = c("out", "in", "all", "total"),
   unreachable,
-  restricted,
+  restricted = NULL,
   callback
 ) {
   # Argument checks
@@ -13990,7 +13990,9 @@ bfs_closure_impl <- function(
     "total" = 3L
   )
   unreachable <- as.logical(unreachable)
-  restricted <- as_igraph_vs(graph, restricted)
+  if (!is.null(restricted)) {
+    restricted <- as_igraph_vs(graph, restricted)
+  }
   if (!is.function(callback)) {
     cli::cli_abort("{.arg callback} must be a function")
   }
