@@ -284,7 +284,9 @@ get.adjacency.sparse <- function(
   type <- igraph_match_arg(type)
 
   # Prepare weights parameter
-  if (!is.null(attr)) {
+  if (is.null(attr)) {
+    weights <- numeric()
+  } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
       cli::cli_abort("No such edge attribute", call = call)
@@ -296,8 +298,6 @@ get.adjacency.sparse <- function(
         call = call
       )
     }
-  } else {
-    weights <- NULL
   }
 
   # Use the library implementation
