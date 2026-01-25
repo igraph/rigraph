@@ -773,7 +773,7 @@ EDGE_COLOR:
             }
             IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            IGRAPH_R_CHECK(graph_vector_int_init(&%C%, 0));
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_LOCAL_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
