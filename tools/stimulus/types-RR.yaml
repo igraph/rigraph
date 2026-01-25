@@ -393,7 +393,8 @@ CLOSURE:
                 rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
               }
             },
-            error = function(e) e
+            error = function(e) e,
+            interrupt = function(e) e
           )
         }
 

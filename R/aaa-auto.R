@@ -14006,7 +14006,8 @@ bfs_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14067,7 +14068,8 @@ dfs_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14084,7 +14086,8 @@ dfs_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14132,7 +14135,8 @@ cliques_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14173,7 +14177,8 @@ maximal_cliques_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14256,7 +14261,8 @@ get_isomorphisms_vf2_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14342,7 +14348,8 @@ get_subisomorphisms_vf2_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14394,7 +14401,8 @@ simple_cycles_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 
@@ -14438,7 +14446,8 @@ motifs_randesu_callback_closure_impl <- function(
           rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
         }
       },
-      error = function(e) e
+      error = function(e) e,
+      interrupt = function(e) e
     )
   }
 

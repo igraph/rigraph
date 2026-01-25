@@ -68,6 +68,10 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
@@ -113,6 +117,10 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
     UNPROTECT(3);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(3);
+    return IGRAPH_INTERRUPTED;
   }
 
   cres = Rf_asLogical(result);
@@ -182,6 +190,10 @@ igraph_error_t R_igraph_cycle_handler(
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
@@ -237,6 +249,10 @@ igraph_error_t R_igraph_isomorphism_handler(
     UNPROTECT(4);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
   }
 
   cres = Rf_asLogical(result);
@@ -328,6 +344,10 @@ igraph_error_t R_igraph_bfs_handler(
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
@@ -396,6 +416,10 @@ igraph_error_t R_igraph_dfs_handler_in(
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
@@ -435,6 +459,10 @@ igraph_error_t R_igraph_dfs_handler_out(
     UNPROTECT(4);
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
   }
 
   cres = Rf_asLogical(result);
