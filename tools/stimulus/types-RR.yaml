@@ -208,6 +208,23 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
+EDGE:
+    # A single edge index
+    CALL: '%I% - 1'
+    INCONV: |-
+        %I% <- as_igraph_es(%I1%, %I%)
+        if (length(%I%) == 0) {
+          cli::cli_abort(
+            "{.arg %I%} must specify at least one edge",
+            call = rlang::caller_env()
+          )
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
 VERTEX_ROOT:
     CALL: '%I% - 1'
     INCONV: |-
