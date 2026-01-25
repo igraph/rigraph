@@ -307,7 +307,7 @@ get.adjacency.sparse <- function(
     weights,
     loops = "once"
   )
-  
+
   # Convert to proper Matrix object
   res <- igraph.i.spMatrix(tmp)
 
