@@ -352,8 +352,8 @@ igraph_error_t R_igraph_bfs_handler(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns FALSE to continue, TRUE to stop */
-  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+  /* R callback returns TRUE to continue, FALSE to stop */
+  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
 }
 
 /* Closure function for igraph_bfs */
@@ -424,8 +424,8 @@ igraph_error_t R_igraph_dfs_handler_in(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns FALSE to continue, TRUE to stop */
-  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+  /* R callback returns TRUE to continue, FALSE to stop */
+  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
 }
 
 /* Handler function for DFS out-callbacks - converts C types to R types */
@@ -468,8 +468,8 @@ igraph_error_t R_igraph_dfs_handler_out(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns FALSE to continue, TRUE to stop */
-  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+  /* R callback returns TRUE to continue, FALSE to stop */
+  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
 }
 
 /* Closure function for igraph_dfs */
