@@ -5,7 +5,7 @@
 \alias{graph.get.isomorphisms.vf2}
 \title{Calculate all isomorphic mappings between the vertices of two graphs}
 \usage{
-isomorphisms(graph1, graph2, method = "vf2", ...)
+isomorphisms(graph1, graph2, method = "vf2", ..., callback = NULL)
 }
 \arguments{
 \item{graph1}{The first graph.}
@@ -16,10 +16,25 @@ isomorphisms(graph1, graph2, method = "vf2", ...)
 \code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Extra arguments, passed to the various methods.}
+
+\item{callback}{Optional callback function to call for each isomorphism found.
+If provided, the function should accept two arguments: \code{map12} (integer vector
+mapping vertex IDs from graph1 to graph2, 1-based indexing) and \code{map21}
+(integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
+The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+If \code{NULL} (the default), all isomorphisms are collected and returned as a list.
+Only supported for \code{method = "vf2"}.
+
+\strong{Important limitation:} Callback functions must NOT call any igraph
+functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.}
 }
 \value{
-A list of vertex sequences, corresponding to all
-mappings from the first graph to the second.
+If \code{callback} is \code{NULL}, returns a list of vertex sequences, corresponding
+to all mappings from the first graph to the second. If \code{callback} is provided,
+returns \code{NULL} invisibly.
 }
 \description{
 Calculate all isomorphic mappings between the vertices of two graphs
