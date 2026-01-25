@@ -76,8 +76,8 @@ cat("Found at least", count, "isomorphisms\n")
 # Ignore color attributes by passing empty vector
 g1$color <- 1
 g2$color <- 1
-isos_no_color <- isomorphisms_vf2(g1, g2, 
-  vertex.color1 = integer(0), 
+isos_no_color <- isomorphisms_vf2(g1, g2,
+  vertex.color1 = integer(0),
   vertex.color2 = integer(0)
 )
 }

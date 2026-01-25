@@ -11284,6 +11284,196 @@
       [1] 3 5
       
 
+# motifs_randesu_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of motifs found:", length(motif_data), "\n")
+    Output
+      
+      Number of motifs found: 1 
+    Code
+      cat("First motif:\n")
+    Output
+      First motif:
+    Code
+      print(motif_data[[1]])
+    Output
+      $vids
+      [1] 1 3 2
+      
+      $isoclass
+      [1] 4
+      
+
+# motifs_randesu_callback_closure_impl errors
+
+    Code
+      motifs_randesu_callback_closure_impl(graph = g, size = 3, cut_prob = NULL,
+        callback = "not a function")
+    Condition
+      Error in `motifs_randesu_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of cliques found: 5 
+    Code
+      cat("First clique:\n")
+    Output
+      First clique:
+    Code
+      print(clique_data[[1]])
+    Output
+      [1] 2 3 4
+
+# cliques_callback_closure_impl errors
+
+    Code
+      cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 4, callback = "not a function")
+    Condition
+      Error in `cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# maximal_cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of maximal cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of maximal cliques found: 3 
+    Code
+      if (length(clique_data) > 0) {
+        cat("First maximal clique:\n")
+        print(clique_data[[1]])
+      }
+    Output
+      First maximal clique:
+      [1] 2 1 4
+
+# maximal_cliques_callback_closure_impl errors
+
+    Code
+      maximal_cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 0,
+        callback = "not a function")
+    Condition
+      Error in `maximal_cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# simple_cycles_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cycles found:", length(cycle_data), "\n")
+    Output
+      
+      Number of cycles found: 1 
+    Code
+      cat("First cycle:\n")
+    Output
+      First cycle:
+    Code
+      print(cycle_data[[1]])
+    Output
+      $vertices
+      [1] 1 2 3 4
+      
+      $edges
+      [1] 1 2 3 4
+      
+
+# simple_cycles_callback_closure_impl errors
+
+    Code
+      simple_cycles_callback_closure_impl(graph = g, mode = "out", min_cycle_length = -
+        1, max_cycle_length = -1, callback = "not a function")
+    Condition
+      Error in `simple_cycles_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_isomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of isomorphisms found:", length(iso_data), "\n")
+    Output
+      
+      Number of isomorphisms found: 2 
+    Code
+      cat("First isomorphism:\n")
+    Output
+      First isomorphism:
+    Code
+      print(iso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 4 5
+      
+      $map21
+      [1] 1 2 3 4 5
+      
+
+# get_isomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_isomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_isomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_subisomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_subisomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_subisomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
+
 # sparse_adjacency_impl basic
 
     Code
@@ -11369,39 +11559,4 @@
       [1] 1
       
       
-
-# intersection_many_impl basic
-
-    Code
-      intersection_many_impl(graphs = list(g1, g2, g3))
-    Output
-      $res
-      IGRAPH D--- 3 1 -- 
-      + edge:
-      [1] 1->2
-      
-      $edgemaps
-      $edgemaps[[1]]
-      [1]  0 -1 -1
-      
-      $edgemaps[[2]]
-      [1]  0 -1
-      
-      $edgemaps[[3]]
-      [1] 0
-      
-      
-
-# layout_merge_dla_impl basic
-
-    Code
-      layout_merge_dla_impl(graphs = list(g1, g2), coords = list(coords1, coords2))
-    Output
-                [,1]       [,2]
-      [1,] -2.279507  0.0000000
-      [2,]  0.000000  0.0000000
-      [3,]  2.279507  0.0000000
-      [4,] -6.893133 -0.8307751
-      [5,] -4.613626 -0.8307751
-      [6,] -2.334119 -0.8307751
 

@@ -93,8 +93,8 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #'   in the cycle). The function should return `TRUE` to continue
 #'   the search or `FALSE` to stop it. If `NULL` (the default), all cycles are
 #'   collected and returned as a list.
-#'   
-#'   **Important limitation:** Callback functions must NOT call any igraph 
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
 #'   so will cause R to crash due to nested `.Call()` state corruption. Extract
 #'   any needed graph information before calling the function with a callback, or

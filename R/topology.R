@@ -1351,8 +1351,8 @@ transitive_closure <- function(graph) {
 #'   vertex IDs from graph2 to graph1, 1-based indexing). The function should return
 #'   `TRUE` to continue the search or `FALSE` to stop it. If `NULL` (the default), all
 #'   isomorphisms are collected and returned as a list.
-#'   
-#'   **Important limitation:** Callback functions must NOT call any igraph 
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
 #'   so will cause R to crash due to nested `.Call()` state corruption. Extract
 #'   any needed graph information before calling the function with a callback, or
@@ -1382,12 +1382,12 @@ transitive_closure <- function(graph) {
 #'   TRUE  # continue search
 #' })
 #' cat("Found at least", count, "isomorphisms\n")
-#' 
+#'
 #' # Ignore color attributes by passing empty vector
 #' g1$color <- 1
 #' g2$color <- 1
-#' isos_no_color <- isomorphisms_vf2(g1, g2, 
-#'   vertex.color1 = integer(0), 
+#' isos_no_color <- isomorphisms_vf2(g1, g2,
+#'   vertex.color1 = integer(0),
 #'   vertex.color2 = integer(0)
 #' )
 isomorphisms_vf2 <- function(
@@ -1496,7 +1496,7 @@ subisomorphisms_vf2 <- function(
   ensure_igraph(graph1)
   ensure_igraph(graph2)
   check_dots_empty()
-  
+
   # Handle default vertex colors from attributes
   # Empty vector (e.g., integer(0)) is treated as "no colors" and passed through
   # NULL triggers auto-detection from graph attributes if present

@@ -141,8 +141,8 @@ dyad.census <- function(graph) {
 #'   in the motif) and `isoclass` (the isomorphism class of the motif).
 #'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
 #'   If `NULL` (the default), motif counts are returned as a numeric vector.
-#'   
-#'   **Important limitation:** Callback functions must NOT call any igraph 
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
 #'   functions (including simple queries like `vcount()` or `ecount()`). Doing
 #'   so will cause R to crash due to nested `.Call()` state corruption. Extract
 #'   any needed graph information before calling the function with a callback, or
