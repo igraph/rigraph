@@ -213,9 +213,9 @@ EDGE:
     CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_es(%I1%, %I%)
-        if (length(%I%) == 0) {
+        if (length(%I%) != 1) {
           cli::cli_abort(
-            "{.arg %I%} must specify at least one edge",
+            "{.arg %I%} must specify exactly one edge",
             call = rlang::caller_env()
           )
         }

@@ -11402,9 +11402,23 @@ test_that("get_eid_impl basic", {
     from = 1,
     to = 2
   )
-  expect_type(result, "integer")
+  expect_s3_class(result, "igraph.es")
   expect_length(result, 1)
-  expect_true(result >= 1)
+  
+  # Test that it finds the correct edge
+  result_int <- as.integer(result)
+  expect_equal(result_int, 1L)  # First edge is 0->1
+  
+  # Test directed vs undirected
+  result_directed <- get_eid_impl(
+    graph = g,
+    from = 2,
+    to = 1,
+    directed = TRUE,
+    error = FALSE
+  )
+  # No edge from 2 to 1 in directed graph, returns -1 as integer
+  expect_equal(as.integer(result_directed), -1L)
 })
 
 test_that("get_eid_impl errors", {
@@ -11416,6 +11430,19 @@ test_that("get_eid_impl errors", {
     graph = NULL,
     from = 1,
     to = 2
+  ))
+  
+  # Test error when from or to is not exactly one vertex
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = c(1, 2),
+    to = 2
+  ))
+  
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = integer(0)
   ))
 })
 
@@ -11435,6 +11462,9 @@ test_that("community_voronoi_impl basic", {
   )
   expect_type(result, "list")
   expect_named(result, c("membership", "generators", "modularity"))
+  expect_length(result$membership, 10)
+  expect_true(is.numeric(result$modularity))
+  expect_true(length(result$generators) >= 1)
 })
 
 test_that("community_voronoi_impl errors", {
@@ -11450,9 +11480,15 @@ test_that("community_voronoi_impl errors", {
 test_that("subisomorphic_lad_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-
-  # Just verify the function exists
+  
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex setup with pattern/target graphs and domains
+  # For now, just verify the function exists and has correct signature
   expect_true(is.function(subisomorphic_lad_impl))
+  expect_equal(
+    names(formals(subisomorphic_lad_impl)),
+    c("pattern", "target", "domains", "induced", "time_limit")
+  )
 })
 
 test_that("subisomorphic_lad_impl errors", {
@@ -11467,15 +11503,30 @@ test_that("subisomorphic_lad_impl errors", {
     induced = FALSE,
     time_limit = 0
   ))
+  
+  # Test that domains must be a list
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = g,
+    target = g,
+    domains = "not a list",
+    induced = FALSE,
+    time_limit = 0
+  ))
 })
 
 # eigen_matrix_impl
 test_that("eigen_matrix_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-
-  # Just verify the function exists
+  
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_impl))
+  expect_equal(
+    names(formals(eigen_matrix_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
 })
 
 test_that("eigen_matrix_impl errors", {
@@ -11497,9 +11548,15 @@ test_that("eigen_matrix_impl errors", {
 test_that("eigen_matrix_symmetric_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-
-  # Just verify the function exists
+  
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_symmetric_impl))
+  expect_equal(
+    names(formals(eigen_matrix_symmetric_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
 })
 
 test_that("eigen_matrix_symmetric_impl errors", {

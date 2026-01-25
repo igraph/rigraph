@@ -314,16 +314,16 @@ get_eid_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
+  if (length(from) != 1) {
     cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
+      "{.arg from} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
+  if (length(to) != 1) {
     cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
+      "{.arg to} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -12818,6 +12818,14 @@ subisomorphic_lad_impl <- function(
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
+  if (!is.null(domains)) {
+    if (!is.list(domains)) {
+      cli::cli_abort(
+        "{.arg domains} must be a list or NULL",
+        call = rlang::caller_env()
+      )
+    }
+  }
   induced <- as.logical(induced)
   time_limit <- as.numeric(time_limit)
 

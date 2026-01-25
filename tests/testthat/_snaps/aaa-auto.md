@@ -11421,6 +11421,22 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+---
+
+    Code
+      get_eid_impl(graph = g, from = c(1, 2), to = 2)
+    Condition
+      Error:
+      ! `from` must specify exactly one vertex
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = integer(0))
+    Condition
+      Error:
+      ! `to` must specify exactly one vertex
+
 # community_voronoi_impl basic
 
     Code
@@ -11452,4 +11468,13 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      subisomorphic_lad_impl(pattern = g, target = g, domains = "not a list",
+        induced = FALSE, time_limit = 0)
+    Condition
+      Error:
+      ! `domains` must be a list or NULL
 

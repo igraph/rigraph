@@ -31,6 +31,24 @@ igraph_edges:
 
 igraph_get_eid:
     DEPS: eid ON graph, from ON graph, to ON graph
+    R:
+        INCONV:
+            from: |-
+                from <- as_igraph_vs(graph, from)
+                if (length(from) != 1) {
+                  cli::cli_abort(
+                    "{.arg from} must specify exactly one vertex",
+                    call = rlang::caller_env()
+                  )
+                }
+            to: |-
+                to <- as_igraph_vs(graph, to)
+                if (length(to) != 1) {
+                  cli::cli_abort(
+                    "{.arg to} must specify exactly one vertex",
+                    call = rlang::caller_env()
+                  )
+                }
 
 igraph_get_eids:
     DEPS: pairs ON graph, eids ON graph
@@ -818,12 +836,17 @@ igraph_get_subisomorphisms_vf2_callback:
     IGNORE: RR, RC
 
 igraph_subisomorphic_lad:
-    # Despite their names, vertex_color and edge_color are not really colors
-    # but _multiplicities_, so we simply use VECTOR_INT there
-    PARAMS: |-
-        GRAPH pattern, GRAPH target, OPTIONAL VERTEXSET_LIST domains,
-        OPTIONAL OUT BOOLEAN iso, OPTIONAL OUT INDEX_VECTOR map,
-        OPTIONAL OUT VECTOR_INT_LIST maps, BOOLEAN induced, INTEGER time_limit
+    R:
+        INCONV:
+            domains: |-
+                if (!is.null(domains)) {
+                  if (!is.list(domains)) {
+                    cli::cli_abort(
+                      "{.arg domains} must be a list or NULL",
+                      call = rlang::caller_env()
+                    )
+                  }
+                }
 
 #######################################
 # Matching
