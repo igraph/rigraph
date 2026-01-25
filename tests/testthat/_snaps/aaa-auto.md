@@ -11464,6 +11464,35 @@
       Error in `get_isomorphisms_vf2_callback_closure_impl()`:
       ! `callback` must be a function
 
+# get_subisomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of subisomorphisms found:", length(subiso_data), "\n")
+    Output
+      
+      Number of subisomorphisms found: 2 
+    Code
+      cat("First subisomorphism:\n")
+    Output
+      First subisomorphism:
+    Code
+      print(subiso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 0 0
+      
+      $map21
+      [1] 1 2 3
+      
+
 # get_subisomorphisms_vf2_callback_closure_impl errors
 
     Code
