@@ -12868,8 +12868,10 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques, SEXP Muc
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
-  IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(cliques, &c_cliques));
-  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_cliques);
+  if (!Rf_isNull(cliques)) {
+    IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(cliques, &c_cliques));
+    IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_cliques);
+  }
   IGRAPH_R_CHECK(Rz_SEXP_to_vector_copy(Muc, &c_Muc));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Muc);
   IGRAPH_R_CHECK_BOOL(startMu);
@@ -12880,8 +12882,10 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques, SEXP Muc
   IGRAPH_R_CHECK(igraph_graphlets_project(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Muc, c_startMu, c_niter));
 
                                         /* Convert output */
-  igraph_vector_int_list_destroy(&c_cliques);
-  IGRAPH_FINALLY_CLEAN(1);
+  if (!Rf_isNull(cliques)) {
+    igraph_vector_int_list_destroy(&c_cliques);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   PROTECT(Muc=Ry_igraph_vector_to_SEXP(&c_Muc));
   igraph_vector_destroy(&c_Muc);
   IGRAPH_FINALLY_CLEAN(1);
@@ -14501,8 +14505,10 @@ SEXP R_igraph_local_scan_neighborhood_ecount(SEXP graph, SEXP weights, SEXP neig
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
-  IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(neighborhoods, &c_neighborhoods));
-  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_neighborhoods);
+  if (!Rf_isNull(neighborhoods)) {
+    IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(neighborhoods, &c_neighborhoods));
+    IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_neighborhoods);
+  }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_neighborhood_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_neighborhoods));
 
@@ -14510,8 +14516,10 @@ SEXP R_igraph_local_scan_neighborhood_ecount(SEXP graph, SEXP weights, SEXP neig
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_list_destroy(&c_neighborhoods);
-  IGRAPH_FINALLY_CLEAN(1);
+  if (!Rf_isNull(neighborhoods)) {
+    igraph_vector_int_list_destroy(&c_neighborhoods);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   r_result = res;
 
   UNPROTECT(1);
@@ -14537,8 +14545,10 @@ SEXP R_igraph_local_scan_subset_ecount(SEXP graph, SEXP weights, SEXP subsets) {
   if (!Rf_isNull(weights)) {
     Rz_SEXP_to_vector(weights, &c_weights);
   }
-  IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(subsets, &c_subsets));
-  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_subsets);
+  if (!Rf_isNull(subsets)) {
+    IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(subsets, &c_subsets));
+    IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_subsets);
+  }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_subset_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_subsets));
 
@@ -14546,8 +14556,10 @@ SEXP R_igraph_local_scan_subset_ecount(SEXP graph, SEXP weights, SEXP subsets) {
   PROTECT(res=Ry_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_list_destroy(&c_subsets);
-  IGRAPH_FINALLY_CLEAN(1);
+  if (!Rf_isNull(subsets)) {
+    igraph_vector_int_list_destroy(&c_subsets);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   r_result = res;
 
   UNPROTECT(1);
@@ -17024,8 +17036,10 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains, SEXP in
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
   PROTECT(r_names=NEW_CHARACTER(3));
-  igraph_vector_int_list_destroy(&c_domains);
-  IGRAPH_FINALLY_CLEAN(1);
+  if (!Rf_isNull(domains)) {
+    igraph_vector_int_list_destroy(&c_domains);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   PROTECT(iso=NEW_LOGICAL(1));
   LOGICAL(iso)[0]=c_iso;
   PROTECT(map=Ry_igraph_vector_int_to_SEXPp1(&c_map));

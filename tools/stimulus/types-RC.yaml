@@ -294,15 +294,19 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            if (!Rf_isNull(%I%)) {
+              IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+              IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
-            igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            if (!Rf_isNull(%I%)) {
+              igraph_vector_int_list_destroy(&%C%);
+              IGRAPH_FINALLY_CLEAN(1);
+            }
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);

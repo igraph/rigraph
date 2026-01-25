@@ -425,7 +425,7 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: lapply(%I%, function(.x) .x - 1)
+    CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1) else NULL
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
