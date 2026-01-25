@@ -11703,3 +11703,238 @@ test_that("union_many_impl basic", {
   expect_type(result, "list")
   expect_s3_class(result$res, "igraph")
 })
+
+test_that("intersection_many_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2))
+  g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1))
+
+  expect_snapshot(intersection_many_impl(
+    graphs = list(g1, g2, g3)
+  ))
+
+  # Structured tests
+  result <- intersection_many_impl(
+    graphs = list(g1, g2, g3)
+  )
+  expect_type(result, "list")
+  expect_s3_class(result$res, "igraph")
+})
+
+test_that("layout_merge_dla_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- path_graph_impl(n = 3)
+  g2 <- path_graph_impl(n = 3)
+  coords1 <- matrix(c(0, 0, 1, 0, 2, 0), ncol = 2, byrow = TRUE)
+  coords2 <- matrix(c(0, 1, 1, 1, 2, 1), ncol = 2, byrow = TRUE)
+
+  expect_snapshot(layout_merge_dla_impl(
+    graphs = list(g1, g2),
+    coords = list(coords1, coords2)
+  ))
+
+  # Structured tests
+  result <- layout_merge_dla_impl(
+    graphs = list(g1, g2),
+    coords = list(coords1, coords2)
+  )
+  expect_true(is.matrix(result))
+  expect_equal(nrow(result), 6)
+  expect_equal(ncol(result), 2)
+})
+
+# get_eid_impl
+test_that("get_eid_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4))
+
+  expect_snapshot(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  ))
+
+  # Structured tests
+  result <- get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  )
+  expect_s3_class(result, "igraph.es")
+  expect_length(result, 1)
+
+  # Test that it finds the correct edge
+  result_int <- as.integer(result)
+  expect_equal(result_int, 1L) # First edge is 0->1
+
+  # Test directed vs undirected
+  result_directed <- get_eid_impl(
+    graph = g,
+    from = 2,
+    to = 1,
+    directed = TRUE,
+    error = FALSE
+  )
+  # No edge from 2 to 1 in directed graph, returns empty edge sequence
+  expect_length(result_directed, 0)
+})
+
+test_that("get_eid_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = NULL,
+    from = 1,
+    to = 2
+  ))
+
+  # Test error when from or to is not exactly one vertex
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = c(1, 2),
+    to = 2
+  ))
+
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = integer(0)
+  ))
+})
+
+# community_voronoi_impl
+test_that("community_voronoi_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(
+    empty_impl(n = 10),
+    c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9)
+  )
+
+  expect_snapshot(community_voronoi_impl(
+    graph = g
+  ))
+
+  # Structured tests
+  result <- community_voronoi_impl(
+    graph = g
+  )
+  expect_type(result, "list")
+  expect_named(result, c("membership", "generators", "modularity"))
+  expect_length(result$membership, 10)
+  expect_true(is.numeric(result$modularity))
+  expect_true(length(result$generators) >= 1)
+})
+
+test_that("community_voronoi_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  expect_snapshot_igraph_error(community_voronoi_impl(
+    graph = NULL
+  ))
+})
+
+# subisomorphic_lad_impl
+test_that("subisomorphic_lad_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex setup with pattern/target graphs and domains
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(subisomorphic_lad_impl))
+  expect_equal(
+    names(formals(subisomorphic_lad_impl)),
+    c("pattern", "target", "domains", "induced", "time_limit")
+  )
+})
+
+test_that("subisomorphic_lad_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = NULL,
+    target = g,
+    domains = list(),
+    induced = FALSE,
+    time_limit = 0
+  ))
+
+  # Test that domains must be a list
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = g,
+    target = g,
+    domains = "not a list",
+    induced = FALSE,
+    time_limit = 0
+  ))
+})
+
+# eigen_matrix_impl
+test_that("eigen_matrix_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(eigen_matrix_impl))
+  expect_equal(
+    names(formals(eigen_matrix_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
+})
+
+test_that("eigen_matrix_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with invalid matrix dimensions
+  expect_error(eigen_matrix_impl(
+    A = matrix(0, 0, 0),
+    sA = Matrix::Matrix(matrix(0, 0, 0), sparse = TRUE),
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
+})
+
+# eigen_matrix_symmetric_impl
+test_that("eigen_matrix_symmetric_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(eigen_matrix_symmetric_impl))
+  expect_equal(
+    names(formals(eigen_matrix_symmetric_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
+})
+
+test_that("eigen_matrix_symmetric_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with invalid matrix dimensions
+  expect_error(eigen_matrix_symmetric_impl(
+    A = matrix(0, 0, 0),
+    sA = Matrix::Matrix(matrix(0, 0, 0), sparse = TRUE),
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
+})

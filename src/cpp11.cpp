@@ -100,6 +100,7 @@ extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP);
 extern SEXP R_igraph_community_spinglass(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_spinglass_single(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_to_membership(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_community_voronoi(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_walktrap(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_compare_communities(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_complementer(SEXP, SEXP);
@@ -165,6 +166,8 @@ extern SEXP R_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edgelist_percolation(SEXP);
 extern SEXP R_igraph_edges(SEXP, SEXP);
 extern SEXP R_igraph_eigen_adjacency(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_eigen_matrix(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_eigen_matrix_symmetric(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
 extern SEXP R_igraph_empty_attrs(SEXP, SEXP);
@@ -198,6 +201,7 @@ extern SEXP R_igraph_get_all_shortest_paths_dijkstra(SEXP, SEXP, SEXP, SEXP, SEX
 extern SEXP R_igraph_get_all_simple_paths(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_biadjacency(SEXP, SEXP);
 extern SEXP R_igraph_get_edgelist(SEXP, SEXP);
+extern SEXP R_igraph_get_eid(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_eids(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_isomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_isomorphisms_vf2_callback_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -460,6 +464,7 @@ extern SEXP R_igraph_strerror(SEXP);
 extern SEXP R_igraph_subcomponent(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subgraph_from_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic(SEXP, SEXP);
+extern SEXP R_igraph_subisomorphic_lad(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_symmetric_tree(SEXP, SEXP);
 extern SEXP R_igraph_to_directed(SEXP, SEXP);
@@ -700,6 +705,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_spinglass",                        (DL_FUNC) &R_igraph_community_spinglass,                        11},
     {"R_igraph_community_spinglass_single",                 (DL_FUNC) &R_igraph_community_spinglass_single,                  6},
     {"R_igraph_community_to_membership",                    (DL_FUNC) &R_igraph_community_to_membership,                     3},
+    {"R_igraph_community_voronoi",                          (DL_FUNC) &R_igraph_community_voronoi,                           5},
     {"R_igraph_community_walktrap",                         (DL_FUNC) &R_igraph_community_walktrap,                          3},
     {"R_igraph_compare_communities",                        (DL_FUNC) &R_igraph_compare_communities,                         3},
     {"R_igraph_complementer",                               (DL_FUNC) &R_igraph_complementer,                                2},
@@ -765,6 +771,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edgelist_percolation",                       (DL_FUNC) &R_igraph_edgelist_percolation,                        1},
     {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
+    {"R_igraph_eigen_matrix",                               (DL_FUNC) &R_igraph_eigen_matrix,                                7},
+    {"R_igraph_eigen_matrix_symmetric",                     (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                      7},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
     {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 2},
@@ -798,6 +806,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        5},
     {"R_igraph_get_biadjacency",                            (DL_FUNC) &R_igraph_get_biadjacency,                             2},
     {"R_igraph_get_edgelist",                               (DL_FUNC) &R_igraph_get_edgelist,                                2},
+    {"R_igraph_get_eid",                                    (DL_FUNC) &R_igraph_get_eid,                                     5},
     {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    4},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},
     {"R_igraph_get_isomorphisms_vf2_callback_closure",      (DL_FUNC) &R_igraph_get_isomorphisms_vf2_callback_closure,       7},
@@ -1060,6 +1069,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_subcomponent",                               (DL_FUNC) &R_igraph_subcomponent,                                3},
     {"R_igraph_subgraph_from_edges",                        (DL_FUNC) &R_igraph_subgraph_from_edges,                         3},
     {"R_igraph_subisomorphic",                              (DL_FUNC) &R_igraph_subisomorphic,                               2},
+    {"R_igraph_subisomorphic_lad",                          (DL_FUNC) &R_igraph_subisomorphic_lad,                           5},
     {"R_igraph_subisomorphic_vf2",                          (DL_FUNC) &R_igraph_subisomorphic_vf2,                           6},
     {"R_igraph_symmetric_tree",                             (DL_FUNC) &R_igraph_symmetric_tree,                              2},
     {"R_igraph_to_directed",                                (DL_FUNC) &R_igraph_to_directed,                                 2},
