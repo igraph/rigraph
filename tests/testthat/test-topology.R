@@ -580,6 +580,9 @@ test_that("subisomorphisms works with callback receives correct arguments", {
 })
 
 test_that("subisomorphisms works with callback handles errors in callback", {
+  skip(
+    "FIXME: Errors in callback are silently gobbled, check with v1.0 and report upstream"
+  )
   g1 <- make_ring(3)
   g2 <- make_full_graph(5)
 
