@@ -11156,7 +11156,7 @@ test_that("bfs_closure_impl works", {
     restricted = NULL,
     callback = function(args) {
       bfs_visits[[length(bfs_visits) + 1]] <<- args
-      TRUE # Continue
+      FALSE # Continue
     }
   )
 
@@ -11205,10 +11205,10 @@ test_that("bfs_closure_impl works", {
     restricted = NULL,
     callback = function(args) {
       calls <<- calls + 1
-      calls <= 3
+      calls > 3  # Stop after 3 calls
     }
   )
-  expect_equal(calls, 3)
+  expect_equal(calls, 4)  # Called 4 times: 3 continue (FALSE), 1 stop (TRUE)
 })
 
 # dfs_closure_impl
@@ -11229,11 +11229,11 @@ test_that("dfs_closure_impl works", {
     unreachable = TRUE,
     in_callback = function(args) {
       dfs_in_visits[[length(dfs_in_visits) + 1]] <<- args
-      TRUE # Continue
+      FALSE # Continue
     },
     out_callback = function(args) {
       dfs_out_visits[[length(dfs_out_visits) + 1]] <<- args
-      TRUE # Continue
+      FALSE # Continue
     }
   )
 
@@ -11272,7 +11272,7 @@ test_that("motifs_randesu_callback_closure_impl basic", {
         vids = vids,
         isoclass = isoclass
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11326,7 +11326,7 @@ test_that("cliques_callback_closure_impl basic", {
     max_size = 4,
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11380,9 +11380,9 @@ test_that("maximal_cliques_callback_closure_impl basic", {
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
       if (length(clique_data) >= 3) {
-        return(FALSE)
-      } # Stop after 3
-      TRUE
+        return(TRUE)  # Stop after 3
+      }
+      FALSE  # Continue
     }
   )
 
@@ -11439,7 +11439,7 @@ test_that("simple_cycles_callback_closure_impl basic", {
         vertices = vertices,
         edges = edges
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11501,9 +11501,9 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(iso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE)  # Stop after 2
+      }
+      FALSE  # Continue
     }
   )
 
@@ -11569,9 +11569,9 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(subiso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE)  # Stop after 2
+      }
+      FALSE  # Continue
     }
   )
 

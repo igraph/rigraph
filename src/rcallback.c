@@ -76,8 +76,8 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function that wraps igraph_motifs_randesu_callback
@@ -126,8 +126,8 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
   cres = Rf_asLogical(result);
 
   UNPROTECT(3);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure functions for clique callbacks */
@@ -198,8 +198,8 @@ igraph_error_t R_igraph_cycle_handler(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function for simple_cycles_callback */
@@ -258,8 +258,8 @@ igraph_error_t R_igraph_isomorphism_handler(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure functions for isomorphism callbacks */
@@ -352,8 +352,8 @@ igraph_error_t R_igraph_bfs_handler(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function for igraph_bfs */
@@ -424,8 +424,8 @@ igraph_error_t R_igraph_dfs_handler_in(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Handler function for DFS out-callbacks - converts C types to R types */
@@ -468,8 +468,8 @@ igraph_error_t R_igraph_dfs_handler_out(
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function for igraph_dfs */
