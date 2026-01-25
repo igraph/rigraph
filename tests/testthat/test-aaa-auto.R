@@ -11417,8 +11417,8 @@ test_that("get_eid_impl basic", {
     directed = TRUE,
     error = FALSE
   )
-  # No edge from 2 to 1 in directed graph, returns -1 as integer
-  expect_equal(as.integer(result_directed), -1L)
+  # No edge from 2 to 1 in directed graph, returns empty edge sequence
+  expect_length(result_directed, 0)
 })
 
 test_that("get_eid_impl errors", {
