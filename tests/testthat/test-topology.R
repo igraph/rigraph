@@ -513,13 +513,18 @@ test_that("subisomorphisms works with callback works", {
   # Count subisomorphisms using callback
   count <- 0
 
-  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-    count <<- count + 1
-    if (count >= 5) {
-      return(FALSE)
-    } # stop after 5
-    TRUE # continue search
-  })
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 5) {
+        return(FALSE)
+      } # stop after 5
+      TRUE # continue search
+    }
+  )
 
   # May or may not find triangles, depending on the random graph
   expect_true(count >= 0)
@@ -534,14 +539,19 @@ test_that("subisomorphisms works with callback can stop early", {
   # Stop after finding 3 subisomorphisms
   count <- 0
 
-  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-    count <<- count + 1
-    if (count >= 3) {
-      FALSE # stop after 3 subisomorphisms
-    } else {
-      TRUE # continue
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 3) {
+        FALSE # stop after 3 subisomorphisms
+      } else {
+        TRUE # continue
+      }
     }
-  })
+  )
 
   expect_equal(count, 3)
 })
@@ -555,13 +565,18 @@ test_that("subisomorphisms works with callback receives correct arguments", {
   n2 <- vcount(g2)
 
   # Check argument types
-  subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-    expect_true(is.integer(map12))
-    expect_true(is.integer(map21))
-    expect_equal(length(map12), n1)
-    expect_equal(length(map21), n2)
-    FALSE # stop after first subisomorphism
-  })
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      expect_true(is.integer(map12))
+      expect_true(is.integer(map21))
+      expect_equal(length(map12), n1)
+      expect_equal(length(map21), n2)
+      FALSE # stop after first subisomorphism
+    }
+  )
 })
 
 test_that("subisomorphisms works with callback handles errors in callback", {
@@ -570,9 +585,14 @@ test_that("subisomorphisms works with callback handles errors in callback", {
 
   # Callback that throws an error
   expect_error(
-    subgraph_isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-      stop("Intentional error in callback")
-    }),
+    subgraph_isomorphisms(
+      g1,
+      g2,
+      method = "vf2",
+      callback = function(map12, map21) {
+        stop("Intentional error in callback")
+      }
+    ),
     "Error in R callback function"
   )
 })

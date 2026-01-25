@@ -805,11 +805,11 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
     vertex.color2 <- dots$vertex.color2 %||% NULL
     edge.color1 <- dots$edge.color1 %||% NULL
     edge.color2 <- dots$edge.color2 %||% NULL
-    
+
     # Validate graphs
     ensure_igraph(graph1)
     ensure_igraph(graph2)
-    
+
     # Handle default vertex colors from attributes
     if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -817,7 +817,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
     if (is.null(vertex.color2) && "color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     }
-    
+
     # Handle default edge colors from attributes
     if (is.null(edge.color1) && "color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
@@ -825,7 +825,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
     if (is.null(edge.color2) && "color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     }
-    
+
     # Call the closure implementation
     get_isomorphisms_vf2_callback_closure_impl(
       graph1 = graph1,
@@ -939,11 +939,11 @@ subgraph_isomorphisms <- function(
       vertex.color2 <- dots$vertex.color2 %||% NULL
       edge.color1 <- dots$edge.color1 %||% NULL
       edge.color2 <- dots$edge.color2 %||% NULL
-      
+
       # Validate graphs
       ensure_igraph(pattern)
       ensure_igraph(target)
-      
+
       # Handle default vertex colors from attributes
       # Note: pattern is graph1, target is graph2 in the underlying function
       if (is.null(vertex.color1) && "color" %in% vertex_attr_names(pattern)) {
@@ -952,7 +952,7 @@ subgraph_isomorphisms <- function(
       if (is.null(vertex.color2) && "color" %in% vertex_attr_names(target)) {
         vertex.color2 <- V(target)$color
       }
-      
+
       # Handle default edge colors from attributes
       if (is.null(edge.color1) && "color" %in% edge_attr_names(pattern)) {
         edge.color1 <- E(pattern)$color
@@ -960,7 +960,7 @@ subgraph_isomorphisms <- function(
       if (is.null(edge.color2) && "color" %in% edge_attr_names(target)) {
         edge.color2 <- E(target)$color
       }
-      
+
       # Call the closure implementation
       get_subisomorphisms_vf2_callback_closure_impl(
         graph1 = pattern,
