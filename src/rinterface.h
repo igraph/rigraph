@@ -65,6 +65,7 @@ SEXP Rx_igraph_0ormatrix_int_to_SEXP(const igraph_matrix_int_t *m);
 SEXP Ry_igraph_0ormatrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
 SEXP Rx_igraph_strvector_to_SEXP(const igraph_strvector_t *m);
 SEXP Ry_igraph_to_SEXP(const igraph_t *graph);
+SEXP Rx_igraph_vector_list_to_SEXP(const igraph_vector_list_t *list);
 SEXP Ry_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
 SEXP Ry_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list);
 SEXP Rx_igraph_0orvector_int_list_to_SEXP(const igraph_vector_int_list_t *list);

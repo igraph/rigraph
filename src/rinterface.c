@@ -12391,7 +12391,7 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP weights, SEXP membe
   PROTECT(eigenvalues=Ry_igraph_vector_to_SEXP(&c_eigenvalues));
   igraph_vector_destroy(&c_eigenvalues);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(eigenvectors=Rx_igraph_vectorlist_to_SEXP(&c_eigenvectors));
+  PROTECT(eigenvectors=Rx_igraph_vector_list_to_SEXP(&c_eigenvectors));
   igraph_vector_list_destroy(&c_eigenvectors);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(history=Ry_igraph_vector_to_SEXP(&c_history));
