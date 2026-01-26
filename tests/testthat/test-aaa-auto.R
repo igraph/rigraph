@@ -10934,7 +10934,7 @@ test_that("community_leading_eigenvector_callback_closure_impl errors", {
   expect_snapshot_igraph_error(
     community_leading_eigenvector_callback_closure_impl(
       graph = g,
-      steps = -100
+      start = TRUE
     )
   )
 })
