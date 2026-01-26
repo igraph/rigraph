@@ -19090,6 +19090,103 @@ SEXP R_igraph_maximal_cliques_callback_closure(SEXP graph, SEXP min_size, SEXP m
 }
 
 /*-------------------------------------------/
+/ igraph_community_leading_eigenvector_callback_closure /
+/-------------------------------------------*/
+SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP graph, SEXP weights, SEXP membership, SEXP steps, SEXP options, SEXP start, SEXP callback, SEXP extra, SEXP env, SEXP env_arp) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_int_t c_merges;
+  igraph_vector_int_t c_membership;
+  igraph_integer_t c_steps;
+  igraph_arpack_options_t c_options;
+  igraph_real_t c_modularity;
+  igraph_bool_t c_start;
+  igraph_vector_t c_eigenvalues;
+  igraph_vector_list_t c_eigenvectors;
+  igraph_vector_t c_history;
+
+
+
+
+  SEXP merges;
+  SEXP modularity;
+  SEXP eigenvalues;
+  SEXP eigenvectors;
+  SEXP history;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
+  IGRAPH_R_CHECK(igraph_matrix_int_init(&c_merges, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_merges);
+  if (!Rf_isNull(membership)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(membership, &c_membership));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  }
+  IGRAPH_R_CHECK_INT(steps);
+  c_steps = (igraph_integer_t) REAL(steps)[0];
+  Rz_SEXP_to_igraph_arpack_options(options, &c_options);
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK(igraph_vector_init(&c_eigenvalues, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_eigenvalues);
+  IGRAPH_R_CHECK(igraph_vector_list_init(&c_eigenvectors, 0));
+  IGRAPH_FINALLY(igraph_vector_list_destroy, &c_eigenvectors);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_history, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_history);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_community_leading_eigenvector_callback_closure(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_merges, &c_membership, c_steps, &c_options, &c_modularity, c_start, &c_eigenvalues, &c_eigenvectors, &c_history, callback, extra, env, env_arp));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(7));
+  PROTECT(r_names=NEW_CHARACTER(7));
+  PROTECT(merges=Ry_igraph_matrix_int_to_SEXP(&c_merges));
+  igraph_matrix_int_destroy(&c_merges);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(membership=Ry_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(options=Ry_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(modularity=NEW_NUMERIC(1));
+  REAL(modularity)[0]=c_modularity;
+  PROTECT(eigenvalues=Ry_igraph_vector_to_SEXP(&c_eigenvalues));
+  igraph_vector_destroy(&c_eigenvalues);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(eigenvectors=Rx_igraph_vector_list_to_SEXP(&c_eigenvectors));
+  igraph_vector_list_destroy(&c_eigenvectors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(history=Ry_igraph_vector_to_SEXP(&c_history));
+  igraph_vector_destroy(&c_history);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, merges);
+  SET_VECTOR_ELT(r_result, 1, membership);
+  SET_VECTOR_ELT(r_result, 2, options);
+  SET_VECTOR_ELT(r_result, 3, modularity);
+  SET_VECTOR_ELT(r_result, 4, eigenvalues);
+  SET_VECTOR_ELT(r_result, 5, eigenvectors);
+  SET_VECTOR_ELT(r_result, 6, history);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("merges"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("options"));
+  SET_STRING_ELT(r_names, 3, Rf_mkChar("modularity"));
+  SET_STRING_ELT(r_names, 4, Rf_mkChar("eigenvalues"));
+  SET_STRING_ELT(r_names, 5, Rf_mkChar("eigenvectors"));
+  SET_STRING_ELT(r_names, 6, Rf_mkChar("history"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(8);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_isomorphisms_vf2_callback_closure /
 /-------------------------------------------*/
 SEXP R_igraph_get_isomorphisms_vf2_callback_closure(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP callback) {
