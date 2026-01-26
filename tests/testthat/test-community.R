@@ -229,7 +229,7 @@ test_that("cluster_leading_eigen works", {
       ev$vectors <- -ev$vectors
     }
     expect_equal(ev$vectors[, 1], vector)
-    0
+    FALSE # Continue
   }
 
   karate <- make_graph("Zachary")
