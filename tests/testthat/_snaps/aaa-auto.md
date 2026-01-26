@@ -4516,10 +4516,10 @@
       site_percolation_impl(graph = g)
     Output
       $giant_size
-      numeric(0)
+      [1] 1 2 3
       
       $edge_count
-      numeric(0)
+      [1] 0 1 2
       
 
 # site_percolation_impl errors
@@ -11365,33 +11365,62 @@
       print(result)
     Output
       $order
-      + 0/10 vertices:
+      + 10/10 vertices:
+       [1]  1  2 10  3  9  4  8  5  7  6
       
       $rank
-       [1] -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+       [1] 0 1 3 5 7 9 8 6 4 2
       
       $parents
-       [1] -2 -2 -2 -2 -2 -2 -2 -2 -2 -2
+       [1] -1  0  1  2  3  4  7  8  9  0
       
       $pred
-       [1] -2 -2 -2 -2 -2 -2 -2 -2 -2 -2
+       [1] -1  0  9  8  7  6  4  3  2  1
       
       $succ
-       [1] -2 -2 -2 -2 -2 -2 -2 -2 -2 -2
+       [1]  1  9  8  7  6 -1  5  4  3  2
       
       $dist
-       [1] -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+       [1] 0 1 2 3 4 5 4 3 2 1
       
     Code
       cat("\nNumber of BFS visits:", length(bfs_visits), "\n")
     Output
       
-      Number of BFS visits: 0 
+      Number of BFS visits: 10 
     Code
       if (length(bfs_visits) > 0) {
         cat("First visit:\n")
         print(bfs_visits[[1]])
       }
+    Output
+      First visit:
+       vid pred succ rank dist 
+         1    0    2    1    0 
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
 
 # dfs_closure_impl works
 
