@@ -190,7 +190,7 @@ test_that("motifs with callback works", {
   motifs(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     isoclasses <<- c(isoclasses, isoclass)
-    TRUE # continue search
+    FALSE # continue search
   })
 
   expect_true(count > 0)
@@ -209,9 +209,9 @@ test_that("motifs with callback can stop early", {
   motifs(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     if (count >= 3) {
-      FALSE # stop after 3 motifs
+      TRUE # stop after 3 motifs
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 
@@ -230,7 +230,7 @@ test_that("motifs with callback receives correct arguments", {
     expect_equal(length(vids), 3)
     expect_true(is.integer(isoclass))
     expect_equal(length(isoclass), 1)
-    FALSE # stop after first motif
+    TRUE # stop after first motif
   })
 })
 
