@@ -14230,22 +14230,26 @@ bfs_closure_impl <- function(
     restricted <- as_igraph_vs(graph, restricted)
     restricted <- restricted - 1
   }
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14292,40 +14296,48 @@ dfs_closure_impl <- function(
     "total" = 3L
   )
   unreachable <- as.logical(unreachable)
-  if (!is.function(in_callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  in_callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- in_callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(in_callback)) {
+    if (!is.function(in_callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    in_callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- in_callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    in_callback_wrapped <- NULL
   }
 
-  if (!is.function(out_callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  out_callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- out_callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(out_callback)) {
+    if (!is.function(out_callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    out_callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- out_callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    out_callback_wrapped <- NULL
   }
 
 
@@ -14359,22 +14371,26 @@ cliques_callback_closure_impl <- function(
   ensure_igraph(graph)
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14401,22 +14417,26 @@ maximal_cliques_callback_closure_impl <- function(
   ensure_igraph(graph)
   min_size <- as.numeric(min_size)
   max_size <- as.numeric(max_size)
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14430,6 +14450,77 @@ maximal_cliques_callback_closure_impl <- function(
     callback_wrapped
   )
 
+  res
+}
+
+community_leading_eigenvector_callback_closure_impl <- function(
+  graph,
+  weights = NULL,
+  membership = NULL,
+  steps = -1,
+  options = arpack_defaults(),
+  start = FALSE,
+  callback = NULL,
+  extra = NULL,
+  env = parent.frame(),
+  env_arp = environment(igraph.i.levc.arp)
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  if (!is.null(membership)) {
+    membership <- as.numeric(membership)
+  }
+  steps <- as.numeric(steps)
+  options <- modify_list(arpack_defaults(), options)
+  start <- as.logical(start)
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_community_leading_eigenvector_callback_closure,
+    graph,
+    weights,
+    membership,
+    steps,
+    options,
+    start,
+    callback_wrapped,
+    extra,
+    env,
+    env_arp
+  )
+
+  class(res) <- "igraph.eigenc"
   res
 }
 
@@ -14485,22 +14576,26 @@ get_isomorphisms_vf2_callback_closure_impl <- function(
   if (!is.null(edge_color2)) {
     edge_color2 <- as.numeric(edge_color2) - 1
   }
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14572,22 +14667,26 @@ get_subisomorphisms_vf2_callback_closure_impl <- function(
   if (!is.null(edge_color2)) {
     edge_color2 <- as.numeric(edge_color2) - 1
   }
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14625,22 +14724,26 @@ simple_cycles_callback_closure_impl <- function(
   )
   min_cycle_length <- as.numeric(min_cycle_length)
   max_cycle_length <- as.numeric(max_cycle_length)
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 
@@ -14670,22 +14773,26 @@ motifs_randesu_callback_closure_impl <- function(
   if (!is.null(cut_prob)) {
     cut_prob <- as.numeric(cut_prob)
   }
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-  callback_wrapped <- function(...) {
-    tryCatch(
-      {
-        out <- callback(...)
-        if (is.logical(out) && length(out) == 1 && !is.na(out)) {
-          out
-        } else {
-          rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
-        }
-      },
-      error = function(e) e,
-      interrupt = function(e) e
-    )
+  if (!is.null(callback)) {
+    if (!is.function(callback)) {
+      cli::cli_abort("{.arg callback} must be a function")
+    }
+    callback_wrapped <- function(...) {
+      tryCatch(
+        {
+          out <- callback(...)
+          if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+            out
+          } else {
+            rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+          }
+        },
+        error = function(e) e,
+        interrupt = function(e) e
+      )
+    }
+  } else {
+    callback_wrapped <- NULL
   }
 
 

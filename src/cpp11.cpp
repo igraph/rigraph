@@ -95,6 +95,7 @@ extern SEXP R_igraph_community_fastgreedy(SEXP, SEXP);
 extern SEXP R_igraph_community_fluid_communities(SEXP, SEXP);
 extern SEXP R_igraph_community_infomap(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_label_propagation(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_community_leading_eigenvector_callback_closure(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_leiden(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_multilevel(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP);
@@ -338,6 +339,7 @@ extern SEXP R_igraph_layout_umap_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_umap_compute_weights(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_lcf_vector(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_le_community_to_membership(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_levc_arpack_multiplier(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_linegraph(SEXP);
 extern SEXP R_igraph_list_triangles(SEXP);
 extern SEXP R_igraph_local_efficiency(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -702,6 +704,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_fluid_communities",                (DL_FUNC) &R_igraph_community_fluid_communities,                 2},
     {"R_igraph_community_infomap",                          (DL_FUNC) &R_igraph_community_infomap,                           4},
     {"R_igraph_community_label_propagation",                (DL_FUNC) &R_igraph_community_label_propagation,                 5},
+    {"R_igraph_community_leading_eigenvector_callback_closure", (DL_FUNC) &R_igraph_community_leading_eigenvector_callback_closure, 10},
     {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            8},
     {"R_igraph_community_multilevel",                       (DL_FUNC) &R_igraph_community_multilevel,                        3},
     {"R_igraph_community_optimal_modularity",               (DL_FUNC) &R_igraph_community_optimal_modularity,                2},
@@ -710,7 +713,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_to_membership",                    (DL_FUNC) &R_igraph_community_to_membership,                     3},
     {"R_igraph_community_voronoi",                          (DL_FUNC) &R_igraph_community_voronoi,                           5},
     {"R_igraph_community_walktrap",                         (DL_FUNC) &R_igraph_community_walktrap,                          3},
-    {"R_igraph_compare_communities",                        (DL_FUNC) &R_igraph_compare_communities,                         3},
+    {"R_igraph_compare_communities",                        (DL_FUNC) &R_igraph_compare_communities",                         3},
     {"R_igraph_complementer",                               (DL_FUNC) &R_igraph_complementer,                                2},
     {"R_igraph_compose",                                    (DL_FUNC) &R_igraph_compose,                                     2},
     {"R_igraph_connect_neighborhood",                       (DL_FUNC) &R_igraph_connect_neighborhood,                        3},
@@ -945,6 +948,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_umap_compute_weights",                (DL_FUNC) &R_igraph_layout_umap_compute_weights,                 3},
     {"R_igraph_lcf_vector",                                 (DL_FUNC) &R_igraph_lcf_vector,                                  3},
     {"R_igraph_le_community_to_membership",                 (DL_FUNC) &R_igraph_le_community_to_membership,                  3},
+    {"R_igraph_levc_arpack_multiplier",                     (DL_FUNC) &R_igraph_levc_arpack_multiplier,                      3},
     {"R_igraph_linegraph",                                  (DL_FUNC) &R_igraph_linegraph,                                   1},
     {"R_igraph_list_triangles",                             (DL_FUNC) &R_igraph_list_triangles,                              1},
     {"R_igraph_local_efficiency",                           (DL_FUNC) &R_igraph_local_efficiency,                            5},
