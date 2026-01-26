@@ -11205,10 +11205,10 @@ test_that("bfs_closure_impl works", {
     restricted = NULL,
     callback = function(args) {
       calls <<- calls + 1
-      calls > 3  # Stop after 3 calls
+      calls > 3 # Stop after 3 calls
     }
   )
-  expect_equal(calls, 4)  # Called 4 times: 3 continue (FALSE), 1 stop (TRUE)
+  expect_equal(calls, 4) # Called 4 times: 3 continue (FALSE), 1 stop (TRUE)
 })
 
 # dfs_closure_impl
@@ -11380,9 +11380,9 @@ test_that("maximal_cliques_callback_closure_impl basic", {
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
       if (length(clique_data) >= 3) {
-        return(TRUE)  # Stop after 3
+        return(TRUE) # Stop after 3
       }
-      FALSE  # Continue
+      FALSE # Continue
     }
   )
 
@@ -11501,9 +11501,9 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(iso_data) >= 2) {
-        return(TRUE)  # Stop after 2
+        return(TRUE) # Stop after 2
       }
-      FALSE  # Continue
+      FALSE # Continue
     }
   )
 
@@ -11569,9 +11569,9 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(subiso_data) >= 2) {
-        return(TRUE)  # Stop after 2
+        return(TRUE) # Stop after 2
       }
-      FALSE  # Continue
+      FALSE # Continue
     }
   )
 
