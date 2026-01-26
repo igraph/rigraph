@@ -11069,6 +11069,15 @@
     Output
       [1] 0.2217291
 
+# community_leading_eigenvector_callback_closure_impl errors
+
+    Code
+      community_leading_eigenvector_callback_closure_impl(graph = g, start = TRUE)
+    Condition
+      Error in `community_leading_eigenvector_callback_closure_impl()`:
+      ! Supplied memberhsip vector length does not match number of vertices. Invalid value
+      Source: <file>:<line>
+
 # edge_connectivity_impl basic
 
     Code
@@ -11705,18 +11714,10 @@
 ---
 
     Code
-      get_eid_impl(graph = g, from = c(1, 2), to = 2)
-    Condition
-      Error:
-      ! `from` must specify exactly one vertex
-
----
-
-    Code
       get_eid_impl(graph = g, from = 1, to = integer(0))
     Condition
       Error:
-      ! `to` must specify exactly one vertex
+      ! `to` must specify at least one vertex
 
 # community_voronoi_impl basic
 
