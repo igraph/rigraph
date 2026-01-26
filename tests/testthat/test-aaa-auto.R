@@ -10867,13 +10867,16 @@ test_that("community_edge_betweenness_impl basic", {
   expect_snapshot(community_edge_betweenness_impl(graph = g, directed = FALSE))
 })
 
-test_that("community_leading_eigenvector_impl basic", {
+test_that("community_leading_eigenvector_callback_closure_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   
   # Test with a simple graph
   g <- make_graph("Zachary")
-  result <- community_leading_eigenvector_impl(graph = g)
+  result <- community_leading_eigenvector_callback_closure_impl(
+    graph = g,
+    env_arp = environment(igraph.i.levc.arp)
+  )
   
   expect_snapshot({
     cat("Result class:\n")
@@ -10896,7 +10899,7 @@ test_that("community_leading_eigenvector_impl basic", {
   expect_true(is.numeric(result$modularity))
 })
 
-test_that("community_leading_eigenvector_impl with start", {
+test_that("community_leading_eigenvector_callback_closure_impl with start", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   
@@ -10904,10 +10907,11 @@ test_that("community_leading_eigenvector_impl with start", {
   # Create initial membership (0-based for the impl function)
   initial_membership <- rep(0:1, length.out = vcount(g))
   
-  result <- community_leading_eigenvector_impl(
+  result <- community_leading_eigenvector_callback_closure_impl(
     graph = g,
     membership = initial_membership,
-    start = TRUE
+    start = TRUE,
+    env_arp = environment(igraph.i.levc.arp)
   )
   
   expect_snapshot({
@@ -10922,7 +10926,7 @@ test_that("community_leading_eigenvector_impl with start", {
   expect_equal(length(result$membership), vcount(g))
 })
 
-test_that("community_leading_eigenvector_impl errors", {
+test_that("community_leading_eigenvector_callback_closure_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   
@@ -10930,9 +10934,10 @@ test_that("community_leading_eigenvector_impl errors", {
   
   # Test with invalid steps
   expect_snapshot_igraph_error(
-    community_leading_eigenvector_impl(
+    community_leading_eigenvector_callback_closure_impl(
       graph = g,
-      steps = -100
+      steps = -100,
+      env_arp = environment(igraph.i.levc.arp)
     )
   )
 })
