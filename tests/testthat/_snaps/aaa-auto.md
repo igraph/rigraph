@@ -11007,6 +11007,74 @@
       [1] 0 0 0 1 1 1
       
 
+# community_leading_eigenvector_callback_closure_impl basic
+
+    Code
+      cat("Result class:\n")
+    Output
+      Result class:
+    Code
+      print(class(result))
+    Output
+      [1] "igraph.eigenc"
+    Code
+      cat("\nMembership length:\n")
+    Output
+      
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.3934089
+    Code
+      cat("\nMerges dimensions:\n")
+    Output
+      
+      Merges dimensions:
+    Code
+      print(dim(result$merges))
+    Output
+      [1] 3 2
+
+# community_leading_eigenvector_callback_closure_impl with start
+
+    Code
+      cat("Result with start membership:\n")
+    Output
+      Result with start membership:
+    Code
+      cat("Membership length:\n")
+    Output
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.2217291
+
+# edge_connectivity_impl basic
+
+    Code
+      edge_connectivity_impl(graph = g)
+    Output
+      [1] 2
 
 # vertex_connectivity_impl basic
 

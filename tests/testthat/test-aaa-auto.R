@@ -10870,14 +10870,14 @@ test_that("community_edge_betweenness_impl basic", {
 test_that("community_leading_eigenvector_callback_closure_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   # Test with a simple graph
   g <- make_graph("Zachary")
   result <- community_leading_eigenvector_callback_closure_impl(
     graph = g,
     env_arp = environment(igraph.i.levc.arp)
   )
-  
+
   expect_snapshot({
     cat("Result class:\n")
     print(class(result))
@@ -10888,7 +10888,7 @@ test_that("community_leading_eigenvector_callback_closure_impl basic", {
     cat("\nMerges dimensions:\n")
     print(dim(result$merges))
   })
-  
+
   # Structured tests
   expect_s3_class(result, "igraph.eigenc")
   expect_true(is.list(result))
@@ -10902,18 +10902,18 @@ test_that("community_leading_eigenvector_callback_closure_impl basic", {
 test_that("community_leading_eigenvector_callback_closure_impl with start", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   g <- make_graph("Zachary")
   # Create initial membership (0-based for the impl function)
   initial_membership <- rep(0:1, length.out = vcount(g))
-  
+
   result <- community_leading_eigenvector_callback_closure_impl(
     graph = g,
     membership = initial_membership,
     start = TRUE,
     env_arp = environment(igraph.i.levc.arp)
   )
-  
+
   expect_snapshot({
     cat("Result with start membership:\n")
     cat("Membership length:\n")
@@ -10921,7 +10921,7 @@ test_that("community_leading_eigenvector_callback_closure_impl with start", {
     cat("\nModularity:\n")
     print(result$modularity)
   })
-  
+
   expect_s3_class(result, "igraph.eigenc")
   expect_equal(length(result$membership), vcount(g))
 })
@@ -10929,9 +10929,9 @@ test_that("community_leading_eigenvector_callback_closure_impl with start", {
 test_that("community_leading_eigenvector_callback_closure_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  
+
   g <- make_graph("Zachary")
-  
+
   # Test with invalid steps
   expect_snapshot_igraph_error(
     community_leading_eigenvector_callback_closure_impl(
