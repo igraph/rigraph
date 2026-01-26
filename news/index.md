@@ -1,5 +1,22 @@
 # Changelog
 
+## igraph 2.2.1.9019
+
+### Features
+
+- Autogenerate remaining simple functions
+  ([\#2550](https://github.com/igraph/rigraph/issues/2550),
+  [\#2551](https://github.com/igraph/rigraph/issues/2551)).
+
+- Autogenerate all callback non-SPARSEMAT functions with unified
+  dual-mode API
+  ([\#2533](https://github.com/igraph/rigraph/issues/2533),
+  [\#2534](https://github.com/igraph/rigraph/issues/2534)).
+
+### Continuous integration
+
+- Skip tests for old R.
+
 ## igraph 2.2.1.9018
 
 ### Bug fixes
