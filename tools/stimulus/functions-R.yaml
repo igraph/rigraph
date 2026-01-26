@@ -30,8 +30,7 @@ igraph_edge:
 igraph_edges:
 
 igraph_get_eid:
-    # Needs custom handling - OUT parameter eid should be scalar not vector
-    IGNORE: RR, RC, RInit
+    DEPS: eid ON graph, from ON graph, to ON graph
 
 igraph_get_eids:
     DEPS: pairs ON graph, eids ON graph
@@ -682,8 +681,6 @@ igraph_community_leading_eigenvector:
         CLASS: igraph.eigenc
 
 igraph_community_voronoi:
-    # Needs custom handling - optional pointer parameter generates incorrect conditional
-    IGNORE: RR, RC, RInit
 
 #######################################
 # Graphlets
@@ -870,12 +867,6 @@ igraph_get_subisomorphisms_vf2_callback_closure:
         edge_color1 ON graph1, edge_color2 ON graph2
 
 igraph_subisomorphic_lad:
-    # R function is hand-rolled - C signature changed, needs manual update
-    IGNORE: RR, RC, RInit
-    # Despite their names, vertex_color and edge_color are not really colors
-    # but _multiplicities_, so we simply use VECTOR_INT there
-    PARAMS: |-
-        GRAPH graph, OUT GRAPH res, OUT VECTOR_INT vertex_color, OUT VECTOR_INT edge_color
 
 #######################################
 # Matching
@@ -921,12 +912,8 @@ igraph_cmp_epsilon:
 
 # TODO: temporarily disabled
 igraph_eigen_matrix:
-    # TODO: temporarily disabled - missing SPARSEMAT converter
-    IGNORE: RR, RC
 
 igraph_eigen_matrix_symmetric:
-    # TODO: temporarily disabled - missing SPARSEMAT converter
-    IGNORE: RR, RC
 
 #######################################
 # Finding cycles

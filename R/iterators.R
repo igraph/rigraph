@@ -1667,7 +1667,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     )
   }
 
-  graph <- if (length(graphs)) graphs[[1]] else NULL
+  graph <- if (length(graphs)) graphs[[1]]
 
   args <- lapply(args, unclass)
 
