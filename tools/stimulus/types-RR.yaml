@@ -405,16 +405,32 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%_wrapped'
-    INCONV: |-
-        if (!is.function(%I%)) {
-          cli::cli_abort("{.arg callback} must be a function")
+    INCONV: |
+        if (!is.null(%I%)) {
+          if (!is.function(%I%)) {
+            cli::cli_abort("{.arg callback} must be a function")
+          }
+          %I%_wrapped <- function(...) {
+            tryCatch(
+              %I%(...),
+              error = function(e) e
+            )
+          }
+        } else {
+          %I%_wrapped <- NULL
         }
-        %I%_wrapped <- function(...) {
-          tryCatch(
-            %I%(...),
-            error = function(e) e
-          )
-        }
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
+    CALL: '%I%'
+    HEADER: '%I%'
 
 ISOCOMPAT_FUNC:
     CALL: {}

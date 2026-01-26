@@ -10867,6 +10867,78 @@ test_that("community_edge_betweenness_impl basic", {
   expect_snapshot(community_edge_betweenness_impl(graph = g, directed = FALSE))
 })
 
+test_that("community_leading_eigenvector_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with a simple graph
+  g <- make_graph("Zachary")
+  result <- community_leading_eigenvector_callback_closure_impl(
+    graph = g
+  )
+
+  expect_snapshot({
+    cat("Result class:\n")
+    print(class(result))
+    cat("\nMembership length:\n")
+    print(length(result$membership))
+    cat("\nModularity:\n")
+    print(result$modularity)
+    cat("\nMerges dimensions:\n")
+    print(dim(result$merges))
+  })
+
+  # Structured tests
+  expect_s3_class(result, "igraph.eigenc")
+  expect_true(is.list(result))
+  expect_true("membership" %in% names(result))
+  expect_true("modularity" %in% names(result))
+  expect_true("merges" %in% names(result))
+  expect_equal(length(result$membership), vcount(g))
+  expect_true(is.numeric(result$modularity))
+})
+
+test_that("community_leading_eigenvector_callback_closure_impl with start", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_graph("Zachary")
+  # Create initial membership (0-based for the impl function)
+  initial_membership <- rep(0:1, length.out = vcount(g))
+
+  result <- community_leading_eigenvector_callback_closure_impl(
+    graph = g,
+    membership = initial_membership,
+    start = TRUE
+  )
+
+  expect_snapshot({
+    cat("Result with start membership:\n")
+    cat("Membership length:\n")
+    print(length(result$membership))
+    cat("\nModularity:\n")
+    print(result$modularity)
+  })
+
+  expect_s3_class(result, "igraph.eigenc")
+  expect_equal(length(result$membership), vcount(g))
+})
+
+test_that("community_leading_eigenvector_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_graph("Zachary")
+
+  # Test with invalid steps
+  expect_snapshot_igraph_error(
+    community_leading_eigenvector_callback_closure_impl(
+      graph = g,
+      start = TRUE
+    )
+  )
+})
+
 # Connectivity
 
 test_that("edge_connectivity_impl basic", {
@@ -11795,7 +11867,6 @@ test_that("get_eid_impl errors", {
   ))
 
   # Test error when from or to is not exactly one vertex
-  # This is here to stay in f-exactly, merging with main will give a conflict at some point.
   expect_snapshot_igraph_error(get_eid_impl(
     graph = g,
     from = c(1, 2),
