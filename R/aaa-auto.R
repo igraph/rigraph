@@ -3427,6 +3427,7 @@ voronoi_impl <- function(
   check_dots_empty()
   ensure_igraph(graph)
   generators <- as_igraph_vs(graph, generators)
+  generators <- generators - 1
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3449,7 +3450,7 @@ voronoi_impl <- function(
   res <- .Call(
     R_igraph_voronoi,
     graph,
-    generators - 1,
+    generators,
     weights,
     mode,
     tiebreaker
@@ -5365,6 +5366,7 @@ is_chordal_impl <- function(
   }
   if (!is.null(alpham1)) {
     alpham1 <- as_igraph_vs(graph, alpham1)
+    alpham1 <- alpham1 - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -5373,7 +5375,7 @@ is_chordal_impl <- function(
     R_igraph_is_chordal,
     graph,
     alpha,
-    alpham1 - 1
+    alpham1
   )
 
   res
@@ -7221,6 +7223,7 @@ site_percolation_impl <- function(
   ensure_igraph(graph)
   if (!is.null(vertex_order)) {
     vertex_order <- as_igraph_vs(graph, vertex_order)
+    vertex_order <- vertex_order - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -7228,7 +7231,7 @@ site_percolation_impl <- function(
   res <- .Call(
     R_igraph_site_percolation,
     graph,
-    vertex_order - 1
+    vertex_order
   )
 
   res
@@ -7371,6 +7374,7 @@ maximal_cliques_subset_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   subset <- as_igraph_vs(graph, subset)
+  subset <- subset - 1
   if (!is.null(outfile)) {
     check_string(outfile)
 
@@ -7383,7 +7387,7 @@ maximal_cliques_subset_impl <- function(
   res <- .Call(
     R_igraph_maximal_cliques_subset,
     graph,
-    subset - 1,
+    subset,
     outfile,
     min_size,
     max_size
@@ -7961,6 +7965,7 @@ layout_reingold_tilford_impl <- function(
   )
   if (!is.null(roots)) {
     roots <- as_igraph_vs(graph, roots)
+    roots <- roots - 1
   }
   if (!is.null(rootlevel)) {
     rootlevel <- as.numeric(rootlevel)
@@ -7972,7 +7977,7 @@ layout_reingold_tilford_impl <- function(
     R_igraph_layout_reingold_tilford,
     graph,
     mode,
-    roots - 1,
+    roots,
     rootlevel
   )
 
@@ -7996,6 +8001,7 @@ layout_reingold_tilford_circular_impl <- function(
   )
   if (!is.null(roots)) {
     roots <- as_igraph_vs(graph, roots)
+    roots <- roots - 1
   }
   if (!is.null(rootlevel)) {
     rootlevel <- as.numeric(rootlevel)
@@ -8007,7 +8013,7 @@ layout_reingold_tilford_circular_impl <- function(
     R_igraph_layout_reingold_tilford_circular,
     graph,
     mode,
-    roots - 1,
+    roots,
     rootlevel
   )
 
@@ -14105,12 +14111,13 @@ expand_path_to_pairs_impl <- function(
 ) {
   # Argument checks
   path <- as_igraph_vs(path, path)
+  path <- path - 1
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_expand_path_to_pairs,
-    path - 1
+    path
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(path, res)
@@ -14209,6 +14216,7 @@ bfs_closure_impl <- function(
   }
   if (!is.null(roots)) {
     roots <- as_igraph_vs(graph, roots)
+    roots <- roots - 1
   }
   mode <- switch_igraph_arg(
     mode,
@@ -14220,6 +14228,7 @@ bfs_closure_impl <- function(
   unreachable <- as.logical(unreachable)
   if (!is.null(restricted)) {
     restricted <- as_igraph_vs(graph, restricted)
+    restricted <- restricted - 1
   }
   if (!is.function(callback)) {
     cli::cli_abort("{.arg callback} must be a function")
@@ -14246,10 +14255,10 @@ bfs_closure_impl <- function(
     R_igraph_bfs_closure,
     graph,
     root - 1,
-    roots - 1,
+    roots,
     mode,
     unreachable,
-    restricted - 1,
+    restricted,
     callback_wrapped
   )
   if (igraph_opt("return.vs.es")) {
