@@ -41,8 +41,8 @@ subgraph_isomorphisms(
   provided, the function should accept two arguments: `map12` (integer
   vector mapping vertex IDs from pattern to target, 1-based indexing)
   and `map21` (integer vector mapping vertex IDs from target to pattern,
-  1-based indexing). The function should return `TRUE` to continue the
-  search or `FALSE` to stop it. If `NULL` (the default), all
+  1-based indexing). The function should return `FALSE` to continue the
+  search or `TRUE` to stop it. If `NULL` (the default), all
   subisomorphisms are collected and returned as a list. Only supported
   for `method = "vf2"`.
 

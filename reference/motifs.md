@@ -31,7 +31,7 @@ motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
   Optional callback function to call for each motif found. The function
   should accept two arguments: `vids` (integer vector of vertex IDs in
   the motif) and `isoclass` (the isomorphism class of the motif). The
-  function should return `TRUE` to continue the search or `FALSE` to
+  function should return `FALSE` to continue the search or `TRUE` to
   stop it. If `NULL` (the default), motif counts are returned as a
   numeric vector.
 

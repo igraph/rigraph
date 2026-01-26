@@ -25,14 +25,14 @@ Constructor modifiers (and related functions)
 ``` r
 g1 <- make_ring(10)
 g1
-#> IGRAPH 03e5b77 U--- 10 10 -- Ring graph
+#> IGRAPH a9cb81c U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 03e5b77:
+#> + edges from a9cb81c:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 g2 <- make_(ring(10), without_attr())
 g2
-#> IGRAPH 2fc594b U--- 10 10 -- 
-#> + edges from 2fc594b:
+#> IGRAPH 22dc621 U--- 10 10 -- 
+#> + edges from 22dc621:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 ```

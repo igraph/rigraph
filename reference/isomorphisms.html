@@ -84,7 +84,7 @@
 If provided, the function should accept two arguments: <code>map12</code> (integer vector
 mapping vertex IDs from graph1 to graph2, 1-based indexing) and <code>map21</code>
 (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
-The function should return <code>TRUE</code> to continue the search or <code>FALSE</code> to stop it.
+The function should return <code>FALSE</code> to continue the search or <code>TRUE</code> to stop it.
 If <code>NULL</code> (the default), all isomorphisms are collected and returned as a list.
 Only supported for <code>method = "vf2"</code>.</p>
 <p><strong>Important limitation:</strong> Callback functions must NOT call any igraph

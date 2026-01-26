@@ -51,8 +51,8 @@ simple_cycles(
   Optional function to call for each cycle found. If provided, the
   function should accept two arguments: `vertices` (integer vector of
   vertex IDs in the cycle) and `edges` (integer vector of edge IDs in
-  the cycle). The function should return `TRUE` to continue the search
-  or `FALSE` to stop it. If `NULL` (the default), all cycles are
+  the cycle). The function should return `FALSE` to continue the search
+  or `TRUE` to stop it. If `NULL` (the default), all cycles are
   collected and returned as a list.
 
   **Important limitation:** Callback functions must NOT call any igraph
@@ -100,95 +100,95 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from d16db00:
+#> + 3/6 vertices, named, from 4097b46:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from d16db00:
+#> + 2/6 vertices, named, from 4097b46:
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> + 1/6 vertex, named, from d16db00:
+#> + 1/6 vertex, named, from 4097b46:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from d16db00 (vertex names):
+#> + 3/9 edges from 4097b46 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from d16db00 (vertex names):
+#> + 2/9 edges from 4097b46 (vertex names):
 #> [1] A->F F->A
 #> 
 #> $edges[[3]]
-#> + 1/9 edge from d16db00 (vertex names):
+#> + 1/9 edge from 4097b46 (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from d16db00:
+#> + 3/6 vertices, named, from 4097b46:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 4/6 vertices, named, from d16db00:
+#> + 4/6 vertices, named, from 4097b46:
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> + 4/6 vertices, named, from d16db00:
+#> + 4/6 vertices, named, from 4097b46:
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> + 2/6 vertices, named, from d16db00:
+#> + 2/6 vertices, named, from 4097b46:
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> + 1/6 vertex, named, from d16db00:
+#> + 1/6 vertex, named, from 4097b46:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from d16db00 (vertex names):
+#> + 3/9 edges from 4097b46 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 4/9 edges from d16db00 (vertex names):
+#> + 4/9 edges from 4097b46 (vertex names):
 #> [1] A->D D->E F->E F->A
 #> 
 #> $edges[[3]]
-#> + 4/9 edges from d16db00 (vertex names):
+#> + 4/9 edges from 4097b46 (vertex names):
 #> [1] A->D D->E F->E A->F
 #> 
 #> $edges[[4]]
-#> + 2/9 edges from d16db00 (vertex names):
+#> + 2/9 edges from 4097b46 (vertex names):
 #> [1] F->A A->F
 #> 
 #> $edges[[5]]
-#> + 1/9 edge from d16db00 (vertex names):
+#> + 1/9 edge from 4097b46 (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from d16db00:
+#> + 3/6 vertices, named, from 4097b46:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from d16db00:
+#> + 2/6 vertices, named, from 4097b46:
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from d16db00 (vertex names):
+#> + 3/9 edges from 4097b46 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from d16db00 (vertex names):
+#> + 2/9 edges from 4097b46 (vertex names):
 #> [1] F->A A->F
 #> 
 #> 

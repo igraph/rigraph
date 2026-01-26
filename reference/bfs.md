@@ -89,7 +89,9 @@ bfs(
 - callback:
 
   If not `NULL`, then it must be callback function. This is called
-  whenever a vertex is visited. See details below.
+  whenever a vertex is visited. The callback function should return
+  `FALSE` to continue the search or `TRUE` to stop it. See details
+  below.
 
 - extra:
 
@@ -235,22 +237,22 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $order
-#> + 20/20 vertices, from 0f2f261:
+#> + 20/20 vertices, from 8c80795:
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank
 #>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13
 #> 
 #> $parent
-#> + 20/20 vertices, from 0f2f261:
+#> + 20/20 vertices, from 8c80795:
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 #> $pred
-#> + 20/20 vertices, from 0f2f261:
+#> + 20/20 vertices, from 8c80795:
 #>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12
 #> 
 #> $succ
-#> + 20/20 vertices, from 0f2f261:
+#> + 20/20 vertices, from 8c80795:
 #>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13
 #> 
 #> $dist
@@ -260,7 +262,7 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $father
-#> + 20/20 vertices, from 0f2f261:
+#> + 20/20 vertices, from 8c80795:
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 
@@ -327,7 +329,7 @@ bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #> [1] "out"
 #> 
 #> $order
-#> + 20/20 vertices, from 9bfe3bc:
+#> + 20/20 vertices, from c4f9d90:
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank

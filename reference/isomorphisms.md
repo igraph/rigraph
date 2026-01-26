@@ -34,9 +34,9 @@ isomorphisms(graph1, graph2, method = "vf2", ..., callback = NULL)
   provided, the function should accept two arguments: `map12` (integer
   vector mapping vertex IDs from graph1 to graph2, 1-based indexing) and
   `map21` (integer vector mapping vertex IDs from graph2 to graph1,
-  1-based indexing). The function should return `TRUE` to continue the
-  search or `FALSE` to stop it. If `NULL` (the default), all
-  isomorphisms are collected and returned as a list. Only supported for
+  1-based indexing). The function should return `FALSE` to continue the
+  search or `TRUE` to stop it. If `NULL` (the default), all isomorphisms
+  are collected and returned as a list. Only supported for
   `method = "vf2"`.
 
   **Important limitation:** Callback functions must NOT call any igraph

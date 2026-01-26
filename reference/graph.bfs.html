@@ -142,7 +142,8 @@ the search tree.</p></dd>
 
 <dt id="arg-callback">callback<a class="anchor" aria-label="anchor" href="#arg-callback"></a></dt>
 <dd><p>If not <code>NULL</code>, then it must be callback function. This
-is called whenever a vertex is visited. See details below.</p></dd>
+is called whenever a vertex is visited. The callback function should
+return <code>FALSE</code> to continue the search or <code>TRUE</code> to stop it. See details below.</p></dd>
 
 
 <dt id="arg-extra">extra<a class="anchor" aria-label="anchor" href="#arg-extra"></a></dt>
