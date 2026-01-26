@@ -463,9 +463,9 @@ test_that("isomorphisms can stop early", {
   isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
     count <<- count + 1
     if (count >= 3) {
-      FALSE # stop after 3 isomorphisms
+      TRUE # stop after 3 isomorphisms
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 
@@ -546,9 +546,9 @@ test_that("subisomorphisms works with callback can stop early", {
     callback = function(map12, map21) {
       count <<- count + 1
       if (count >= 3) {
-        FALSE # stop after 3 subisomorphisms
+        TRUE # stop after 3 subisomorphisms
       } else {
-        TRUE # continue
+        FALSE # continue
       }
     }
   )
