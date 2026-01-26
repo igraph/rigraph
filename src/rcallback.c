@@ -386,12 +386,6 @@ igraph_error_t igraph_bfs_closure(
                     R_igraph_bfs_handler, &data);
 }
 
-/* DFS callback data structure to hold both in and out callbacks */
-typedef struct {
-  SEXP in_callback;
-  SEXP out_callback;
-} R_igraph_dfs_callback_data_t;
-
 /* Handler function for DFS in-callbacks */
 igraph_error_t R_igraph_dfs_handler_in(
     const igraph_t *graph,
@@ -510,9 +504,9 @@ igraph_error_t igraph_dfs_closure(
   }
 
   /* Otherwise, use the handlers */
-  R_igraph_dfs_callback_data_t data = { 
-    .in_callback = in_callback, 
-    .out_callback = out_callback 
+  R_igraph_dfs_callback_data_t data = {
+    .in_callback = in_callback,
+    .out_callback = out_callback
   };
 
   return igraph_dfs(graph, root, mode, unreachable, order, order_out,
@@ -574,7 +568,7 @@ igraph_error_t R_igraph_levc_handler(
   PROTECT(s_evalue = NEW_NUMERIC(1));
   REAL(s_evalue)[0] = eigenvalue;
   PROTECT(s_evector = Ry_igraph_vector_to_SEXP(eigenvector));
-  
+
   /* Create the ARPACK multiplier function accessible from R */
   PROTECT(l1 = Rf_install("igraph.i.levc.arp"));
   PROTECT(l2 = R_MakeExternalPtr((void*)&cont, R_NilValue, R_NilValue));
@@ -626,8 +620,8 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
   }
 
   /* Otherwise, use the handler */
-  R_igraph_levc_callback_data_t data = { 
-    .callback = callback, 
+  R_igraph_levc_callback_data_t data = {
+    .callback = callback,
     .extra = extra ? extra : R_NilValue,  /* Convert NULL to R_NilValue */
     .env = env ? env : R_GlobalEnv,  /* Ensure env is never NULL */
     .env_arp = env_arp ? env_arp : R_GlobalEnv  /* Ensure env_arp is never NULL */
@@ -637,5 +631,4 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
       graph, weights, merges, membership, steps, options, modularity, start,
       eigenvalues, eigenvectors, history,
       R_igraph_levc_handler, &data);
-}
 }
