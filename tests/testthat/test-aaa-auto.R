@@ -10874,8 +10874,7 @@ test_that("community_leading_eigenvector_callback_closure_impl basic", {
   # Test with a simple graph
   g <- make_graph("Zachary")
   result <- community_leading_eigenvector_callback_closure_impl(
-    graph = g,
-    env_arp = environment(igraph.i.levc.arp)
+    graph = g
   )
 
   expect_snapshot({
@@ -10910,8 +10909,7 @@ test_that("community_leading_eigenvector_callback_closure_impl with start", {
   result <- community_leading_eigenvector_callback_closure_impl(
     graph = g,
     membership = initial_membership,
-    start = TRUE,
-    env_arp = environment(igraph.i.levc.arp)
+    start = TRUE
   )
 
   expect_snapshot({
@@ -10936,8 +10934,7 @@ test_that("community_leading_eigenvector_callback_closure_impl errors", {
   expect_snapshot_igraph_error(
     community_leading_eigenvector_callback_closure_impl(
       graph = g,
-      steps = -100,
-      env_arp = environment(igraph.i.levc.arp)
+      steps = -100
     )
   )
 })

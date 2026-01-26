@@ -672,7 +672,7 @@ igraph_community_leading_eigenvector_callback_closure:
         CLOSURE callback=NULL,
         CLOSURE_EXTRA extra=NULL,
         CLOSURE_ENV env=parent.frame(),
-        CLOSURE_ENV_ARP env_arp
+        CLOSURE_ENV_ARP env_arp=environment(igraph.i.levc.arp)
     DEPS: weights ON graph, membership ON graph
     R:
         CLASS: igraph.eigenc

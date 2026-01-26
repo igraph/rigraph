@@ -14275,7 +14275,7 @@ community_leading_eigenvector_callback_closure_impl <- function(
   callback = NULL,
   extra = NULL,
   env = parent.frame(),
-  env_arp
+  env_arp = environment(igraph.i.levc.arp)
 ) {
   # Argument checks
   ensure_igraph(graph)
