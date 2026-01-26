@@ -208,6 +208,23 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
+EDGE:
+    # A single edge index
+    CALL: '%I% - 1'
+    INCONV: |-
+        %I% <- as_igraph_es(%I1%, %I%)
+        if (length(%I%) != 1) {
+          cli::cli_abort(
+            "{.arg %I%} must specify exactly one edge",
+            call = rlang::caller_env()
+          )
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
 VERTEX_ROOT:
     CALL: '%I% - 1'
     INCONV: |-
@@ -286,6 +303,15 @@ EDGEWEIGHTS:
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$weight
         }
+        if (!is.null(%I%) && !all(is.na(%I%))) {
+          %I% <- as.numeric(%I%)
+        } else {
+          %I% <- NULL
+        }
+
+EDGE_LENGTHS:
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    INCONV: |-
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
         } else {
@@ -415,7 +441,15 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: lapply(%I%, function(.x) .x - 1)
+    CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
+    INCONV:
+        IN: |-
+            if (!is.null(%I%) && !is.list(%I%)) {
+              cli::cli_abort(
+                "{.arg %I%} must be a list or NULL",
+                call = rlang::caller_env()
+              )
+            }
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
