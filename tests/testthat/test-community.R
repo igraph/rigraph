@@ -278,7 +278,7 @@ test_that("cluster_leading_eigen works", {
     BG <- B - diag(rowSums(B))
 
     expect_equal(M, BG)
-    0
+    FALSE # Continue
   }
 
   A <- as_adjacency_matrix(karate, sparse = FALSE)
@@ -286,6 +286,7 @@ test_that("cluster_leading_eigen works", {
   deg <- degree(karate)
   karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
+
 test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
