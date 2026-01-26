@@ -271,7 +271,7 @@ VECTOR_LIST:
             IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_list_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -657,6 +657,21 @@ EXTRA:
     HEADER: {}
 
 CLOSURE:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
     CALL: '%I%'
     CTYPE: ~
     HEADER: '%I%'
