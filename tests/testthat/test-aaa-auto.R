@@ -11795,6 +11795,7 @@ test_that("get_eid_impl errors", {
   ))
 
   # Test error when from or to is not exactly one vertex
+  # This is here to stay in f-exactly, merging with main will give a conflict at some point.
   expect_snapshot_igraph_error(get_eid_impl(
     graph = g,
     from = c(1, 2),
