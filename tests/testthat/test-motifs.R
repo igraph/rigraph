@@ -260,17 +260,12 @@ test_that("motifs with callback output matches expected", {
       vids = vids,
       isoclass = isoclass
     )
-    TRUE
+    FALSE # Continue
   })
 
   # Snapshot test for motif structure
   expect_snapshot({
     cat("Number of motifs found:", length(motif_data), "\n")
-    cat("Sample motif 1:\n")
-    print(motif_data[[1]])
-    if (length(motif_data) > 1) {
-      cat("Sample motif 2:\n")
-      print(motif_data[[2]])
-    }
+    motif_data[1:2]
   })
 })
