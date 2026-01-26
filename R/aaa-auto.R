@@ -305,6 +305,48 @@ edges_impl <- function(
   res
 }
 
+get_eid_impl <- function(
+  graph,
+  from,
+  to,
+  directed = TRUE,
+  error = TRUE
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  from <- as_igraph_vs(graph, from)
+  if (length(from) != 1) {
+    cli::cli_abort(
+      "{.arg from} must specify exactly one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  to <- as_igraph_vs(graph, to)
+  if (length(to) != 1) {
+    cli::cli_abort(
+      "{.arg to} must specify exactly one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  directed <- as.logical(directed)
+  error <- as.logical(error)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_get_eid,
+    graph,
+    from - 1,
+    to - 1,
+    directed,
+    error
+  )
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
+  res
+}
+
 get_eids_impl <- function(
   graph,
   pairs,
@@ -9458,6 +9500,53 @@ community_infomap_impl <- function(
   res
 }
 
+community_voronoi_impl <- function(
+  graph,
+  lengths = NULL,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  radius = -1
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (!is.null(lengths) && !all(is.na(lengths))) {
+    lengths <- as.numeric(lengths)
+  } else {
+    lengths <- NULL
+  }
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+  radius <- as.numeric(radius)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_community_voronoi,
+    graph,
+    lengths,
+    weights,
+    mode,
+    radius
+  )
+  if (igraph_opt("return.vs.es")) {
+    res$generators <- create_vs(graph, res$generators)
+  }
+  res
+}
+
 graphlets_impl <- function(
   graph,
   weights = NULL,
@@ -9535,6 +9624,12 @@ graphlets_project_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(cliques) && !is.list(cliques)) {
+    cli::cli_abort(
+      "{.arg cliques} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
   Muc <- as.numeric(Muc)
   startMu <- as.logical(startMu)
   niter <- as.numeric(niter)
@@ -9545,7 +9640,7 @@ graphlets_project_impl <- function(
     R_igraph_graphlets_project,
     graph,
     weights,
-    lapply(cliques, function(.x) .x - 1),
+    if (!is.null(cliques)) lapply(cliques, function(.x) .x - 1),
     Muc,
     startMu,
     niter
@@ -10781,6 +10876,12 @@ local_scan_neighborhood_ecount_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(neighborhoods) && !is.list(neighborhoods)) {
+    cli::cli_abort(
+      "{.arg neighborhoods} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -10788,7 +10889,7 @@ local_scan_neighborhood_ecount_impl <- function(
     R_igraph_local_scan_neighborhood_ecount,
     graph,
     weights,
-    lapply(neighborhoods, function(.x) .x - 1)
+    if (!is.null(neighborhoods)) lapply(neighborhoods, function(.x) .x - 1)
   )
 
   res
@@ -10809,6 +10910,12 @@ local_scan_subset_ecount_impl <- function(
   } else {
     weights <- NULL
   }
+  if (!is.null(subsets) && !is.list(subsets)) {
+    cli::cli_abort(
+      "{.arg subsets} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -10816,7 +10923,7 @@ local_scan_subset_ecount_impl <- function(
     R_igraph_local_scan_subset_ecount,
     graph,
     weights,
-    lapply(subsets, function(.x) .x - 1)
+    if (!is.null(subsets)) lapply(subsets, function(.x) .x - 1)
   )
 
   res
@@ -12656,6 +12763,39 @@ automorphism_group_impl <- function(
   res
 }
 
+subisomorphic_lad_impl <- function(
+  pattern,
+  target,
+  domains = NULL,
+  induced,
+  time_limit
+) {
+  # Argument checks
+  ensure_igraph(pattern)
+  ensure_igraph(target)
+  if (!is.null(domains) && !is.list(domains)) {
+    cli::cli_abort(
+      "{.arg domains} must be a list or NULL",
+      call = rlang::caller_env()
+    )
+  }
+  induced <- as.logical(induced)
+  time_limit <- as.numeric(time_limit)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_subisomorphic_lad,
+    pattern,
+    target,
+    if (!is.null(domains)) lapply(domains, function(.x) .x - 1),
+    induced,
+    time_limit
+  )
+
+  res
+}
+
 simplify_and_colorize_impl <- function(
   graph
 ) {
@@ -13050,6 +13190,94 @@ cmp_epsilon_impl <- function(
     a,
     b,
     eps
+  )
+
+  res
+}
+
+eigen_matrix_impl <- function(
+  A,
+  sA,
+  fun,
+  n,
+  algorithm,
+  which,
+  options = arpack_defaults()
+) {
+  # Argument checks
+  A[] <- as.numeric(A)
+  requireNamespace("Matrix", quietly = TRUE)
+  sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  n <- as.integer(n)
+  algorithm <- switch_igraph_arg(
+    algorithm,
+    "auto" = 0L,
+    "lapack" = 1L,
+    "arpack" = 2L,
+    "comp_auto" = 3L,
+    "comp_lapack" = 4L,
+    "comp_arpack" = 5L
+  )
+  which.tmp <- eigen_defaults()
+  which.tmp[names(which)] <- which
+  which <- which.tmp
+  options <- modify_list(arpack_defaults(), options)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_eigen_matrix,
+    A,
+    sA,
+    fun,
+    n,
+    algorithm,
+    which,
+    options
+  )
+
+  res
+}
+
+eigen_matrix_symmetric_impl <- function(
+  A,
+  sA,
+  fun,
+  n,
+  algorithm,
+  which,
+  options = arpack_defaults()
+) {
+  # Argument checks
+  A[] <- as.numeric(A)
+  requireNamespace("Matrix", quietly = TRUE)
+  sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  n <- as.integer(n)
+  algorithm <- switch_igraph_arg(
+    algorithm,
+    "auto" = 0L,
+    "lapack" = 1L,
+    "arpack" = 2L,
+    "comp_auto" = 3L,
+    "comp_lapack" = 4L,
+    "comp_arpack" = 5L
+  )
+  which.tmp <- eigen_defaults()
+  which.tmp[names(which)] <- which
+  which <- which.tmp
+  options <- modify_list(arpack_defaults(), options)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_eigen_matrix_symmetric,
+    A,
+    sA,
+    fun,
+    n,
+    algorithm,
+    which,
+    options
   )
 
   res

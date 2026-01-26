@@ -11623,3 +11623,77 @@
       [5,] -4.613626 -0.8307751
       [6,] -2.334119 -0.8307751
 
+# get_eid_impl basic
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = 2)
+    Output
+      + 1/4 edge:
+      [1] 1->2
+
+# get_eid_impl errors
+
+    Code
+      get_eid_impl(graph = NULL, from = 1, to = 2)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = c(1, 2), to = 2)
+    Condition
+      Error:
+      ! `from` must specify exactly one vertex
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = integer(0))
+    Condition
+      Error:
+      ! `to` must specify exactly one vertex
+
+# community_voronoi_impl basic
+
+    Code
+      community_voronoi_impl(graph = g)
+    Output
+      $membership
+       [1] 3 3 3 3 0 3 2 2 1 1
+      
+      $generators
+      + 4/10 vertices:
+      [1] 2 9 7 1
+      
+      $modularity
+      [1] 0.2222222
+      
+
+# community_voronoi_impl errors
+
+    Code
+      community_voronoi_impl(graph = NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# subisomorphic_lad_impl errors
+
+    Code
+      subisomorphic_lad_impl(pattern = NULL, target = g, domains = list(), induced = FALSE,
+      time_limit = 0)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      subisomorphic_lad_impl(pattern = g, target = g, domains = "not a list",
+        induced = FALSE, time_limit = 0)
+    Condition
+      Error:
+      ! `domains` must be a list or NULL
+
