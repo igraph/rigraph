@@ -833,7 +833,7 @@ farthest_vertices <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no farthest_vertices_impl available
     Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
@@ -1245,7 +1245,7 @@ distances <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # distances_impl doesn't support algorithm selection
     Rx_igraph_shortest_paths,
     graph,
     v - 1,
@@ -1329,7 +1329,7 @@ shortest_paths <- function(
 
   to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # get_shortest_paths_impl doesn't support algorithm selection
     Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
@@ -1809,7 +1809,7 @@ transitivity <- function(
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call(
+      res <- .Call( # transitivity_local_undirected_impl requires vids
         Rx_igraph_transitivity_local_undirected_all,
         graph,
         isolates_num
@@ -2723,7 +2723,7 @@ bfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # bfs_simple_impl has different API (no callbacks)
     Rx_igraph_bfs,
     graph,
     root,
@@ -2979,7 +2979,7 @@ dfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # dfs_closure_impl has different API (no callbacks)
     Rx_igraph_dfs,
     graph,
     root,
@@ -3138,7 +3138,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_no_components, graph, mode)
+  .Call(Rx_igraph_no_components, graph, mode) # connected_components_impl returns membership, not count
 }
 
 #' Count reachable vertices
