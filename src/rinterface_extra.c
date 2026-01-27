@@ -8621,7 +8621,9 @@ SEXP R_igraph_add_env(SEXP graph) {
   int px = 0;
 
   if (Rf_xlength(graph) <= igraph_t_idx_env) {
-    Rf_error("igraph object is too old to upgrade.");
+    PROTECT(result = Rf_duplicate(graph)); px++;
+    PROTECT(result = Rf_lengthgets(result, igraph_t_idx_env + 1)); px++;
+    Rf_copyMostAttrib(graph, result);
   }
 
   // Get the base namespace
