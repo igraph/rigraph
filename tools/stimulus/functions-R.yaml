@@ -88,65 +88,65 @@ igraph_growing_random_game:
         OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
         BOOLEAN directed=True, BOOLEAN citation=False
     R:
-        GATTR:
-          name: Growing random graph
-        GATTR-PARAM: m, citation
+      GATTR:
+        name: Growing random graph
+      GATTR-PARAM: m, citation
 
 igraph_forest_fire_game:
     R:
-        GATTR:
-          name: Forest fire model
-        GATTR-PARAM: fw_prob, bw_factor, ambs
+      GATTR:
+        name: Forest fire model
+      GATTR-PARAM: fw_prob, bw_factor, ambs
 
 igraph_simple_interconnected_islands_game:
     R:
-        GATTR:
-          name: Interconnected islands model
-        GATTR-PARAM: islands_n, islands_size, islands_pin, n_inter
+      GATTR:
+        name: Interconnected islands model
+      GATTR-PARAM: islands_n, islands_size, islands_pin, n_inter
 
 igraph_static_fitness_game:
     R:
-        GATTR:
-          name: Static fitness model
-        GATTR-PARAM: loops, multiple
+      GATTR:
+        name: Static fitness model
+      GATTR-PARAM: loops, multiple
 
 igraph_static_power_law_game:
     R:
-        GATTR:
-          name: Static power law model
-        GATTR-PARAM: exponent_out, exponent_in, loops, multiple, finite_size_correction
+      GATTR:
+        name: Static power law model
+      GATTR-PARAM: exponent_out, exponent_in, loops, multiple, finite_size_correction
 
 igraph_k_regular_game:
     R:
-        GATTR:
-          name: k-regular graph
-        GATTR-PARAM: k
+      GATTR:
+        name: k-regular graph
+      GATTR-PARAM: k
 
 igraph_sbm_game:
     R:
-        GATTR:
-          name: Stochastic block model
-        GATTR-PARAM: loops
+      GATTR:
+        name: Stochastic block model
+      GATTR-PARAM: loops
 
 igraph_hsbm_game:
     INTERNAL: true
     R:
-        GATTR:
-          name: Hierarchical stochastic block model
-        GATTR-PARAM: m, rho, C, p
+      GATTR:
+        name: Hierarchical stochastic block model
+      GATTR-PARAM: m, rho, C, p
 
 igraph_hsbm_list_game:
     INTERNAL: true
     R:
-        GATTR:
-          name: Hierarchical stochastic block model
-        GATTR-PARAM: p
+      GATTR:
+        name: Hierarchical stochastic block model
+      GATTR-PARAM: p
 
 igraph_correlated_game:
     R:
-        GATTR:
-          name: Correlated random graph
-        GATTR-PARAM: corr, p
+      GATTR:
+        name: Correlated random graph
+      GATTR-PARAM: corr, p
 
 #######################################
 # Basic query functions
@@ -503,14 +503,13 @@ igraph_community_leading_eigenvector_callback_closure:
         CLOSURE_ENV_ARP env_arp=environment(igraph.i.levc.arp)
     DEPS: weights ON graph, membership ON graph
     R:
-        CLASS: igraph.eigenc
+      CLASS: igraph.eigenc
 
 #######################################
 # Graphlets
 #######################################
 
 igraph_graphlets_project:
-    # FIXME: Is this correct?
     R:
         CLASS: igraphHRG
 
@@ -572,7 +571,7 @@ igraph_write_graph_dimacs_flow:
 
 igraph_cohesive_blocks:
     R:
-        CLASS: cohesiveBlocks
+      CLASS: cohesiveBlocks
 
 #######################################
 # K-Cores
@@ -630,7 +629,7 @@ igraph_get_subisomorphisms_vf2_callback_closure:
 
 igraph_sir:
     R:
-        CLASS: sir
+      CLASS: sir
 
 #######################################
 # Other, not graph related
@@ -691,9 +690,9 @@ igraph_is_tree:
 
 igraph_from_prufer:
     R:
-        GATTR:
-          name: Tree from Prufer sequence
-        GATTR-PARAM: prufer
+      GATTR:
+        name: Tree from Prufer sequence
+      GATTR-PARAM: prufer
 
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
