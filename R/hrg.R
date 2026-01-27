@@ -303,6 +303,14 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     }
 #'   }
 #' @family hierarchical random graph functions
+#' @examples
+#' ## A graph with two dense groups
+#' g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
+#' hrg <- fit_hrg(g)
+#' hrg
+#'
+#' ## The consensus tree for it
+#' consensus_tree(g, hrg = hrg, start = TRUE)
 #' @export
 #' @cdocs igraph_hrg_consensus
 consensus_tree <- function(
