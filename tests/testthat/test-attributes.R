@@ -470,6 +470,19 @@ test_that("good error message when not using character", {
   })
 })
 
+test_that("duplicated vertex names are handled correctly", {
+  g <- make_empty_graph(4)
+  V(g)$name <- LETTERS[1:4]
+  expect_snapshot(error = TRUE, {
+    add_vertices(g, nv = 2, attr = list(name = c("A", "B")))
+  })
+
+  g <- graph_from_literal("A"--"B", "C"--"D")
+  expect_snapshot(error = TRUE, {
+    set_vertex_attr(g, "name", 2:3, "C")
+  })
+})
+
 test_that("set_vertex_attrs() works", {
   g <- make_ring(10)
   g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
