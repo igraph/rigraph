@@ -83,15 +83,13 @@ graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -210,15 +208,13 @@ graph.famous <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -289,13 +285,11 @@ line.graph <- function(graph) {
 graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -319,14 +313,11 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -354,14 +345,11 @@ graph.star <- function(
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -573,12 +561,10 @@ graph.full.bipartite <- function(
 graph.full <- function(n, directed = FALSE, loops = FALSE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -721,8 +707,11 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
   edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
+  res <- create_bipartite_impl(
+    types = types,
+    edges = edges,
+    directed = directed
+  )
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
@@ -999,10 +988,6 @@ make_ <- function(...) {
 #'
 #' blocky2 <- pref_matrix %>%
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
-#'
-#' ## Arguments are passed on from sample_ to sample_sbm
-#' blocky3 <- pref_matrix %>%
-#'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 #' @family games
 #' @family constructor modifiers
 sample_ <- function(...) {
@@ -1503,15 +1488,13 @@ make_graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -1617,9 +1600,10 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
 }
 
 #' @rdname make_empty_graph
-#' @param ... Passed to `make_graph_empty`.
 #' @export
-empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
+empty_graph <- function(n = 0, directed = TRUE) {
+  constructor_spec(make_empty_graph, n = n, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1878,14 +1862,11 @@ make_star <- function(
   center = 1
 ) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -1896,9 +1877,10 @@ make_star <- function(
 }
 
 #' @rdname make_star
-#' @param ... Passed to `make_star()`.
 #' @export
-star <- function(...) constructor_spec(make_star, ...)
+star <- function(n, mode = c("in", "out", "mutual", "undirected"), center = 1) {
+  constructor_spec(make_star, n = n, mode = mode, center = center)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1916,12 +1898,10 @@ star <- function(...) constructor_spec(make_star, ...)
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
 make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -1931,9 +1911,10 @@ make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname make_full_graph
-#' @param ... Passed to `make_full_graph()`.
 #' @export
-full_graph <- function(...) constructor_spec(make_full_graph, ...)
+full_graph <- function(n, directed = FALSE, loops = FALSE) {
+  constructor_spec(make_full_graph, n = n, directed = directed, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2019,9 +2000,29 @@ make_lattice <- function(
 }
 
 #' @rdname make_lattice
-#' @param ... Passed to `make_lattice()`.
 #' @export
-lattice <- function(...) constructor_spec(make_lattice, ...)
+lattice <- function(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+) {
+  constructor_spec(
+    make_lattice,
+    dimvector = dimvector,
+    length = length,
+    dim = dim,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic,
+    circular = circular
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2045,13 +2046,11 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -2062,9 +2061,16 @@ make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 }
 
 #' @rdname make_ring
-#' @param ... Passed to `make_ring()`.
 #' @export
-ring <- function(...) constructor_spec(make_ring, ...)
+ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
+  constructor_spec(
+    make_ring,
+    n,
+    directed = directed,
+    mutual = mutual,
+    circular = circular
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2126,9 +2132,16 @@ make_wheel <- function(
 }
 
 #' @rdname make_wheel
-#' @param ... Passed to `make_wheel()`.
 #' @export
-wheel <- function(...) constructor_spec(make_wheel, ...)
+wheel <- function(
+  n,
+  ...,
+  mode = c("in", "out", "mutual", "undirected"),
+  center = 1
+) {
+  check_dots_empty()
+  constructor_spec(make_wheel, n, mode = mode, center = center)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2155,14 +2168,11 @@ wheel <- function(...) constructor_spec(make_wheel, ...)
 #' make_tree(10, 3, mode = "undirected")
 make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -2247,9 +2257,10 @@ make_from_prufer <- function(prufer) {
 }
 
 #' @rdname make_from_prufer
-#' @param ... Passed to `make_from_prufer()`
 #' @export
-from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
+from_prufer <- function(prufer) {
+  constructor_spec(make_from_prufer, prufer = prufer)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2292,9 +2303,10 @@ graph_from_atlas <- function(n) {
 }
 
 #' @rdname graph_from_atlas
-#' @param ... Passed to `graph_from_atlas()`.
 #' @export
-atlas <- function(...) constructor_spec(graph_from_atlas, ...)
+atlas <- function(n) {
+  constructor_spec(graph_from_atlas, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2339,9 +2351,10 @@ make_chordal_ring <- function(n, w, directed = FALSE) {
 }
 
 #' @rdname make_chordal_ring
-#' @param ... Passed to `make_chordal_ring()`.
 #' @export
-chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
+chordal_ring <- function(n, w, directed = FALSE) {
+  constructor_spec(make_chordal_ring, n = n, w = w, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2378,9 +2391,10 @@ make_circulant <- function(n, shifts, directed = FALSE) {
 }
 
 #' @rdname make_circulant
-#' @param ... Passed to `make_circulant()`.
 #' @export
-circulant <- function(...) constructor_spec(make_circulant, ...)
+circulant <- function(n, shifts, directed = FALSE) {
+  constructor_spec(make_circulant, n = n, shifts = shifts, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2426,9 +2440,10 @@ make_line_graph <- function(graph) {
 }
 
 #' @rdname make_line_graph
-#' @param ... Passed to `make_line_graph()`.
 #' @export
-line_graph <- function(...) constructor_spec(make_line_graph, ...)
+line_graph <- function(graph) {
+  constructor_spec(make_line_graph, graph = graph)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2477,9 +2492,10 @@ make_de_bruijn_graph <- function(m, n) {
 }
 
 #' @rdname make_de_bruijn_graph
-#' @param ... Passed to `make_de_bruijn_graph()`.
 #' @export
-de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
+de_bruijn_graph <- function(m, n) {
+  constructor_spec(make_de_bruijn_graph, m = m, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2524,9 +2540,10 @@ make_kautz_graph <- function(m, n) {
 }
 
 #' @rdname make_kautz_graph
-#' @param ... Passed to `make_kautz_graph()`.
 #' @export
-kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
+kautz_graph <- function(m, n) {
+  constructor_spec(make_kautz_graph, m = m, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2592,10 +2609,20 @@ make_full_bipartite_graph <- function(
 }
 
 #' @rdname make_full_bipartite_graph
-#' @param ... Passed to `make_full_bipartite_graph()`.
 #' @export
-full_bipartite_graph <- function(...) {
-  constructor_spec(make_full_bipartite_graph, ...)
+full_bipartite_graph <- function(
+  n1,
+  n2,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  constructor_spec(
+    make_full_bipartite_graph,
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2662,8 +2689,11 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
   edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
+  res <- create_bipartite_impl(
+    types = types,
+    edges = edges,
+    directed = directed
+  )
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
@@ -2674,9 +2704,15 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 }
 
 #' @rdname make_bipartite_graph
-#' @param ... Passed to `make_bipartite_graph()`.
 #' @export
-bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
+bipartite_graph <- function(types, edges, directed = FALSE) {
+  constructor_spec(
+    make_bipartite_graph,
+    types = types,
+    edges = edges,
+    directed = directed
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2734,10 +2770,18 @@ make_full_multipartite <- function(
 }
 
 #' @rdname make_full_multipartite
-#' @param ... Passed to `make_full_multipartite()`.
 #' @export
-full_multipartite <- function(...) {
-  constructor_spec(make_full_multipartite, ...)
+full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  constructor_spec(
+    make_full_multipartite,
+    n = n,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2790,10 +2834,9 @@ make_turan <- function(n, r) {
 }
 
 #' @rdname make_turan
-#' @param ... Passed to `make_turan()`.
 #' @export
-turan <- function(...) {
-  constructor_spec(make_turan, ...)
+turan <- function(n, r) {
+  constructor_spec(make_turan, n = n, r = r)
 }
 
 ## -----------------------------------------------------------------
@@ -2824,10 +2867,9 @@ make_full_citation_graph <- function(n, directed = TRUE) {
 }
 
 #' @rdname make_full_citation_graph
-#' @param ... Passed to `make_full_citation_graph()`.
 #' @export
-full_citation_graph <- function(...) {
-  constructor_spec(make_full_citation_graph, ...)
+full_citation_graph <- function(n, directed = TRUE) {
+  constructor_spec(make_full_citation_graph, n = n, directed = directed)
 }
 
 ## -----------------------------------------------------------------

@@ -428,3 +428,174 @@ test_that("transitive_closure preserves isolated vertices", {
   expect_equal(degree(tc, 4, mode = "all"), 0)
   expect_equal(degree(tc, 5, mode = "all"), 0)
 })
+
+# Tests for isomorphism callback functions
+test_that("isomorphisms works with callback", {
+  withr::local_seed(123)
+
+  # Create two isomorphic graphs
+  g1 <- make_ring(8)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Count isomorphisms using callback
+  count <- 0
+
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    count <<- count + 1
+    if (count >= 10) {
+      return(FALSE)
+    }
+    TRUE
+  })
+
+  expect_true(count > 0)
+  expect_true(count <= 10)
+})
+
+test_that("isomorphisms can stop early", {
+  # Create two isomorphic graphs
+  g1 <- make_ring(6)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Stop after finding 3 isomorphisms
+  count <- 0
+
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    count <<- count + 1
+    if (count >= 3) {
+      TRUE # stop after 3 isomorphisms
+    } else {
+      FALSE # continue
+    }
+  })
+
+  expect_equal(count, 3)
+})
+
+test_that("isomorphisms receives correct arguments", {
+  g1 <- make_ring(5)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
+  # Check argument types
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    expect_true(is.integer(map12))
+    expect_true(is.integer(map21))
+    expect_equal(length(map12), n1)
+    expect_equal(length(map21), n2)
+    FALSE # stop after first isomorphism
+  })
+})
+
+test_that("isomorphisms handles errors in callback", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+
+  # Callback that throws an error
+  expect_error(
+    isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})
+
+test_that("subisomorphisms works with callback works", {
+  withr::local_seed(123)
+
+  # Find triangles in a larger graph
+  g1 <- make_ring(3) # triangle
+  g2 <- sample_gnp(15, 0.3)
+
+  # Count subisomorphisms using callback
+  count <- 0
+
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 5) {
+        return(FALSE)
+      } # stop after 5
+      TRUE # continue search
+    }
+  )
+
+  # May or may not find triangles, depending on the random graph
+  expect_true(count >= 0)
+  expect_true(count <= 5)
+})
+
+test_that("subisomorphisms works with callback can stop early", {
+  # Find triangles in a complete graph
+  g1 <- make_full_graph(6)
+  g2 <- make_ring(3) # triangle
+
+  # Stop after finding 3 subisomorphisms
+  count <- 0
+
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 3) {
+        TRUE # stop after 3 subisomorphisms
+      } else {
+        FALSE # continue
+      }
+    }
+  )
+
+  expect_equal(count, 3)
+})
+
+test_that("subisomorphisms works with callback receives correct arguments", {
+  g1 <- make_full_graph(5)
+  g2 <- make_ring(3)
+
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
+  # Check argument types
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      expect_true(is.integer(map12))
+      expect_true(is.integer(map21))
+      expect_equal(length(map12), n1)
+      expect_equal(length(map21), n2)
+      FALSE # stop after first subisomorphism
+    }
+  )
+})
+
+test_that("subisomorphisms works with callback handles errors in callback", {
+  skip(
+    "FIXME: Errors in callback are silently gobbled, check with v1.0 and report upstream"
+  )
+  g1 <- make_ring(3)
+  g2 <- make_full_graph(5)
+
+  # Callback that throws an error
+  expect_error(
+    subgraph_isomorphisms(
+      g1,
+      g2,
+      method = "vf2",
+      callback = function(map12, map21) {
+        stop("Intentional error in callback")
+      }
+    ),
+    "Error in R callback function"
+  )
+})

@@ -201,9 +201,25 @@ clique.number <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
-#' @return `cliques()`, `largest_cliques()` and `clique_num()`
-#'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class [igraph.vs][V].
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each clique found. If provided,
+#'   the function should accept one argument: `clique` (integer vector of vertex
+#'   IDs in the clique, 1-based indexing). The function should return `FALSE` to
+#'   continue the search or `TRUE` to stop it. If `NULL` (the default), all
+#'   cliques are collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return `cliques()` returns a list containing numeric vectors of vertex ids if
+#'   `callback` is `NULL`. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V]. If `callback` is provided, returns `NULL` invisibly.
+#'
+#'   `largest_cliques()` and `clique_num()` return a list containing numeric
+#'   vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -238,13 +254,28 @@ clique.number <- function(graph) {
 #'
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
-#' @cdocs igraph_cliques
-cliques <- function(graph, min = 0, max = 0) {
-  cliques_impl(
-    graph = graph,
-    min = min,
-    max = max
-  )
+#' @cdocs igraph_cliques igraph_cliques_callback
+cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
+  ensure_igraph(graph)
+  check_dots_empty()
+
+  if (is.null(callback)) {
+    # Collector mode: use original implementation
+    cliques_impl(
+      graph = graph,
+      min = min %||% 0,
+      max = max %||% 0
+    )
+  } else {
+    # Callback mode: call user function
+    cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
+  }
 }
 
 #' @rdname cliques
@@ -273,21 +304,14 @@ max_cliques <- function(
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL
+  file = NULL,
+  ...,
+  callback = NULL
 ) {
   ensure_igraph(graph)
+  check_dots_empty()
 
-  if (is.null(min)) {
-    min <- 0
-  }
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  if (!is.null(subset)) {
-    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
-  }
-
+  # Handle file and subset modes (original functionality)
   if (!is.null(file)) {
     if (
       !is.character(file) ||
@@ -306,22 +330,32 @@ max_cliques <- function(
       graph,
       subset,
       file,
-      as.numeric(min),
-      as.numeric(max)
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
     )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
     }
-    invisible(NULL)
-  } else {
+    return(invisible(NULL))
+  }
+
+  # Collector or callback mode
+  if (is.null(callback)) {
+    # Collector mode: use original implementation
+    if (is.null(subset)) {
+      subset_arg <- NULL
+    } else {
+      subset_arg <- as.numeric(as_igraph_vs(graph, subset) - 1)
+    }
+
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
       Rx_igraph_maximal_cliques,
       graph,
-      subset,
-      as.numeric(min),
-      as.numeric(max)
+      subset_arg,
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
     )
     res <- lapply(res, function(x) x + 1)
 
@@ -330,6 +364,21 @@ max_cliques <- function(
     }
 
     res
+  } else {
+    # Callback mode: call user function
+    if (!is.null(subset)) {
+      cli::cli_abort(
+        "{.arg subset} is not supported when {.arg callback} is provided"
+      )
+    }
+
+    maximal_cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
   }
 }
 

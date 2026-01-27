@@ -34,8 +34,7 @@ test_that("mst works", {
 
 test_that("mst error works", {
   g <- sample_gnp(10, 0.4)
-  expect_snapshot(
-    mst(g, algorithm = "undefined"),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    mst(g, algorithm = "undefined")
   )
 })

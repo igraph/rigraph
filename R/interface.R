@@ -549,15 +549,15 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_get_eids,
-    graph,
-    as_igraph_vs(graph, vp) - 1,
-    as.logical(directed),
-    as.logical(error)
-  ) +
-    1
+  with_igraph_opt(
+    list(return.vs.es = FALSE),
+    get_eids_impl(
+      graph,
+      as_igraph_vs(graph, vp),
+      directed,
+      error
+    )
+  )
 }
 
 #' Find the edge ids based on the incident vertices of the edges

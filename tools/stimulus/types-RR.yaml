@@ -21,6 +21,17 @@ REAL:
         ECROSSW: 1.0 - sqrt(edge_density(graph))
         ELENW: edge_density(graph) / 10
         NEDISTW: 0.2 * (1 - edge_density(graph))
+        VCOUNT: vcount
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+
+DOUBLE:
+    # A C double - similar to REAL but uses C's double type instead of igraph_real_t
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+
+ERROR:
+    # An igraph error code - used as input parameter (e.g., in igraph_strerror)
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
@@ -103,6 +114,81 @@ TRANSITIVITY_MODE:
         NAN: c("nan", "zero")
     INCONV: '%I% <- switch_igraph_arg(%I%, "nan" = 0L, "zero" = 1L)'
 
+STAR_MODE:
+    DEFAULT:
+        OUT: c("out", "in", "undirected", "mutual")
+        IN: c("in", "out", "undirected", "mutual")
+        UNDIRECTED: c("undirected", "out", "in", "mutual")
+        MUTUAL: c("mutual", "out", "in", "undirected")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "out" = 0L, "in" = 1L, "undirected" = 2L, "mutual" = 3L)'
+
+BARABASI_ALGORITHM:
+    DEFAULT:
+        BAG: c("bag", "psumtree", "psumtree_multiple")
+        PSUMTREE: c("psumtree", "bag", "psumtree_multiple")
+        PSUMTREE_MULTIPLE: c("psumtree_multiple", "bag", "psumtree")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "bag" = 0L, "psumtree" = 1L, "psumtree_multiple" = 2L)'
+
+ERDOS_RENYI_TYPE:
+    DEFAULT:
+        GNP: c("gnp", "gnm")
+        GNM: c("gnm", "gnp")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "gnp" = 0L, "gnm" = 1L)'
+
+DEGSEQ_MODE:
+    DEFAULT:
+        CONFIGURATION: c("configuration", "fast_heur_simple", "configuration_simple", "edge_switching_simple", "vl")
+        VL: c("vl", "configuration", "fast_heur_simple", "configuration_simple", "edge_switching_simple")
+        FAST_HEUR_SIMPLE: c("fast_heur_simple", "configuration", "configuration_simple", "edge_switching_simple", "vl")
+        CONFIGURATION_SIMPLE: c("configuration_simple", "configuration", "fast_heur_simple", "edge_switching_simple", "vl")
+        EDGE_SWITCHING_SIMPLE: c("edge_switching_simple", "configuration", "fast_heur_simple", "configuration_simple", "vl")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "configuration" = 0L, "vl" = 1L, "fast_heur_simple" = 2L, "configuration_simple" = 3L, "edge_switching_simple" = 4L)'
+
+ADJACENCY_MODE:
+    DEFAULT:
+        DIRECTED: c("directed", "undirected", "upper", "lower", "min", "plus", "max")
+        UNDIRECTED: c("undirected", "directed", "upper", "lower", "min", "plus", "max")
+        UPPER: c("upper", "lower", "directed", "undirected", "min", "plus", "max")
+        LOWER: c("lower", "upper", "directed", "undirected", "min", "plus", "max")
+        MIN: c("min", "max", "plus", "directed", "undirected", "upper", "lower")
+        PLUS: c("plus", "min", "max", "directed", "undirected", "upper", "lower")
+        MAX: c("max", "min", "plus", "directed", "undirected", "upper", "lower")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "directed" = 0L, "undirected" = 1L, "upper" = 2L, "lower" = 3L, "min" = 4L, "plus" = 5L, "max" = 6L)'
+
+SPINCOMMUPDATE:
+    DEFAULT:
+        SIMPLE: c("simple", "config")
+        CONFIG: c("config", "simple")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "config" = 1L)'
+
+SPINGLASS_IMPLEMENTATION:
+    DEFAULT:
+        ORIG: c("orig", "neg")
+        NEG: c("neg", "orig")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "orig" = 0L, "neg" = 1L)'
+
+FWALGORITHM:
+    DEFAULT:
+        AUTOMATIC: c("automatic", "original", "tree")
+        ORIGINAL: c("original", "automatic", "tree")
+        TREE: c("tree", "automatic", "original")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "automatic" = 0L, "original" = 1L, "tree" = 2L)'
+
+LAYOUT_GRID:
+    DEFAULT:
+        GRID: c("grid", "nogrid", "auto")
+        NOGRID: c("nogrid", "grid", "auto")
+        AUTO: c("auto", "grid", "nogrid")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)'
+
+VCONNNEI:
+    DEFAULT:
+        ERROR: c("error", "number_of_nodes", "ignore", "negative")
+        NUMBER_OF_NODES: c("number_of_nodes", "error", "ignore", "negative")
+        IGNORE: c("ignore", "error", "number_of_nodes", "negative")
+        NEGATIVE: c("negative", "error", "number_of_nodes", "ignore")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "error" = 0L, "number_of_nodes" = 1L, "ignore" = 2L, "negative" = 3L)'
+
 INT:
     INCONV: '%I% <- as.integer(%I%)'
 
@@ -110,9 +196,9 @@ VERTEX:
     CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) == 0) {
+        if (length(%I%) != 1) {
           cli::cli_abort(
-            "{.arg %I%} must specify at least one vertex",
+            "{.arg %I%} must specify exactly one vertex",
             call = rlang::caller_env()
           )
         }
@@ -122,13 +208,30 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
+EDGE:
+    # A single edge index
+    CALL: '%I% - 1'
+    INCONV: |-
+        %I% <- as_igraph_es(%I1%, %I%)
+        if (length(%I%) != 1) {
+          cli::cli_abort(
+            "{.arg %I%} must specify exactly one edge",
+            call = rlang::caller_env()
+          )
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
 VERTEX_ROOT:
     CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) == 0) {
+        if (length(%I%) != 1) {
           cli::cli_abort(
-            "{.arg %I%} must specify at least one vertex",
+            "{.arg %I%} must specify exactly one vertex",
             call = rlang::caller_env()
           )
         }
@@ -150,10 +253,12 @@ VERTEX_SELECTOR:
             }
 
 VERTEX_INDICES:
-    CALL: '%I% - 1'
+    CALL: '%I%'
     DEFAULT:
-        ALL: V(%I1%)
-    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+        ALL: V(%I1%) - 1
+    INCONV: |-
+        %I% <- as_igraph_vs(%I1%, %I%)
+        %I% <- %I% - 1
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -163,15 +268,24 @@ VERTEX_INDICES:
 # Temporary, for https://github.com/igraph/rigraph/pull/1630
 # We should call the `_PV` versions for all types in the future.
 VERTEX_INDICES_PV:
-    CALL: '%I% - 1'
+    CALL: '%I%'
     DEFAULT:
-        ALL: V(%I1%)
-    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+        ALL: V(%I1%) - 1
+    INCONV: |-
+        %I% <- as_igraph_vs(%I1%, %I%)
+        %I% <- %I% - 1
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
               %I% <- create_vs(%I1%, %I%)
             }
+
+VERTEX_INDEX_PAIRS:
+    CALL: '%I% - 1'
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+
+INDEX_PAIRS:
+    CALL: '%I% - 1'
 
 EDGE_INDICES:
     CALL: '%I% - 1'
@@ -200,6 +314,15 @@ EDGEWEIGHTS:
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$weight
         }
+        if (!is.null(%I%) && !all(is.na(%I%))) {
+          %I% <- as.numeric(%I%)
+        } else {
+          %I% <- NULL
+        }
+
+EDGE_LENGTHS:
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    INCONV: |-
         if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
         } else {
@@ -294,15 +417,39 @@ EXTRA:
 CLOSURE:
     CALL: '%I%_wrapped'
     INCONV: |
-        if (!is.function(%I%)) {
-          cli::cli_abort("{.arg callback} must be a function")
+        if (!is.null(%I%)) {
+          if (!is.function(%I%)) {
+            cli::cli_abort("{.arg callback} must be a function")
+          }
+          %I%_wrapped <- function(...) {
+            tryCatch(
+              {
+                out <- %I%(...)
+                if (is.logical(out) && length(out) == 1 && !is.na(out)) {
+                  out
+                } else {
+                  rlang::error_cnd(message = "Callback returned a value different from TRUE or FALSE")
+                }
+              },
+              error = function(e) e,
+              interrupt = function(e) e
+            )
+          }
+        } else {
+          %I%_wrapped <- NULL
         }
-        %I%_wrapped <- function(...) {
-          tryCatch(
-            %I%(...),
-            error = function(e) e
-          )
-        }
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
+    CALL: '%I%'
+    HEADER: '%I%'
 
 ISOCOMPAT_FUNC:
     CALL: {}
@@ -313,7 +460,15 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: lapply(%I%, function(.x) .x - 1)
+    CALL: if (!is.null(%I%)) lapply(%I%, function(.x) .x - 1)
+    INCONV:
+        IN: |-
+            if (!is.null(%I%) && !is.list(%I%)) {
+              cli::cli_abort(
+                "{.arg %I%} must be a list or NULL",
+                call = rlang::caller_env()
+              )
+            }
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -401,13 +556,9 @@ REWIRING_MODE:
     INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "simple_loops" = 1L)'
 
 SPARSEMAT:
-    INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-
-SPARSEMAT_OR_0:
     INCONV: |-
-        if (!is.null(%I%)) {
-          requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-        }
+        requireNamespace("Matrix", quietly = TRUE)
+        %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
 VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
@@ -416,8 +567,6 @@ MATRIX_COMPLEX:
     INCONV: '%I%[] <- as.complex(%I%)'
 
 PLFIT: {}
-
-SPARSEMATPTR: {}
 
 MAXFLOW_STATS:
     CALL: {}
@@ -476,7 +625,6 @@ PAGERANKOPT:
 
 DEPRECATED:
     CALL: {}
-    HEADER: ~
     INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
 
 LSETYPE:
@@ -583,3 +731,28 @@ CHUNG_LU_VARIANT:
     DEFAULT:
         ORIGINAL: c("original", "maxent", "nr")
     INCONV: '%I% <- switch_igraph_arg(%I%, "original" = 0L, "maxent" = 1L, "nr" = 2L)'
+
+GRAPH_PTR_LIST:
+    INCONV: |-
+        if (!is.list(%I%)) {
+          cli::cli_abort("{.arg %I%} must be a list of igraph objects")
+        }
+        %I% <- lapply(%I%, function(g) {
+          if (!inherits(g, "igraph")) {
+            cli::cli_abort("{.arg %I%} must be a list of igraph objects")
+          }
+          g
+        })
+
+MATRIX_LIST:
+    INCONV: |-
+        if (!is.list(%I%)) {
+          cli::cli_abort("{.arg %I%} must be a list of matrices")
+        }
+        %I% <- lapply(%I%, function(m) {
+          if (!is.matrix(m)) {
+            cli::cli_abort("{.arg %I%} must be a list of matrices")
+          }
+          m[] <- as.numeric(m)
+          m
+        })

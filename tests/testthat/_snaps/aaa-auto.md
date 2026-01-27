@@ -20,12 +20,13 @@
       empty_impl(n = -1)
     Condition
       Error in `empty_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # add_edges_impl basic
 
     Code
-      add_edges_impl(graph = g, edges = c(0, 1, 1, 2))
+      add_edges_impl(graph = g, edges = c(1, 2, 2, 3))
     Output
       IGRAPH D--- 3 2 -- 
       + edges:
@@ -155,7 +156,8 @@
       wheel_impl(n = -1)
     Condition
       Error in `wheel_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Invalid number of vertices. Invalid vertex ID
+      ! Invalid number of vertices. Invalid vertex ID
+      Source: <file>:<line>
 
 # hypercube_impl basic
 
@@ -181,7 +183,8 @@
       hypercube_impl(n = 10000)
     Condition
       Error in `hypercube_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
+      ! The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
+      Source: <file>:<line>
 
 # square_lattice_impl basic
 
@@ -208,7 +211,8 @@
       square_lattice_impl(dimvector = -1)
     Condition
       Error in `square_lattice_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Invalid dimension vector. Invalid value
+      ! Invalid dimension vector. Invalid value
+      Source: <file>:<line>
 
 # triangular_lattice_impl basic
 
@@ -234,7 +238,8 @@
       triangular_lattice_impl(dimvector = -1)
     Condition
       Error in `triangular_lattice_impl()`:
-      ! At vendor/cigraph/src/constructors/lattices.c:xx : Invalid dimension vector. Invalid value
+      ! Invalid dimension vector. Invalid value
+      Source: <file>:<line>
 
 # path_graph_impl basic
 
@@ -260,7 +265,8 @@
       path_graph_impl(n = -1)
     Condition
       Error in `path_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of vertices must be non-negative, got -1. Invalid value
+      ! The number of vertices must be non-negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # cycle_graph_impl basic
 
@@ -286,7 +292,8 @@
       cycle_graph_impl(n = -1)
     Condition
       Error in `cycle_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of vertices must be non-negative, got -1. Invalid value
+      ! The number of vertices must be non-negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # symmetric_tree_impl basic
 
@@ -312,7 +319,8 @@
       symmetric_tree_impl(branches = -1)
     Condition
       Error in `symmetric_tree_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of branches must be positive at each level. Invalid value
+      ! The number of branches must be positive at each level. Invalid value
+      Source: <file>:<line>
 
 # regular_tree_impl basic
 
@@ -339,7 +347,8 @@
       regular_tree_impl(h = -1)
     Condition
       Error in `regular_tree_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Height of regular tree must be positive, got -1. Invalid value
+      ! Height of regular tree must be positive, got -1. Invalid value
+      Source: <file>:<line>
 
 # full_citation_impl basic
 
@@ -365,7 +374,8 @@
       full_citation_impl(n = -1)
     Condition
       Error in `full_citation_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Invalid number of vertices. Invalid value
+      ! Invalid number of vertices. Invalid value
+      Source: <file>:<line>
 
 # atlas_impl basic
 
@@ -390,7 +400,8 @@
       atlas_impl(number = -1)
     Condition
       Error in `atlas_impl()`:
-      ! At vendor/cigraph/src/constructors/atlas.c:xx : No such graph in atlas. The graph index must be less than 1253. Invalid value
+      ! No such graph in atlas. The graph index must be less than 1253. Invalid value
+      Source: <file>:<line>
 
 # extended_chordal_ring_impl basic
 
@@ -416,7 +427,8 @@
       extended_chordal_ring_impl(nodes = -1, W = matrix(c(1, 2)))
     Condition
       Error in `extended_chordal_ring_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : An extended chordal ring has at least 3 nodes. Invalid value
+      ! An extended chordal ring has at least 3 nodes. Invalid value
+      Source: <file>:<line>
 
 # graph_power_impl basic
 
@@ -477,7 +489,8 @@
       de_bruijn_impl(m = -1, n = 3)
     Condition
       Error in `de_bruijn_impl()`:
-      ! At vendor/cigraph/src/constructors/de_bruijn.c:xx : `m' and `n' should be non-negative in a de Bruijn graph, Invalid value
+      ! `m' and `n' should be non-negative in a de Bruijn graph. Invalid value
+      Source: <file>:<line>
 
 # kautz_impl basic
 
@@ -498,7 +511,8 @@
       kautz_impl(m = -1, n = 3)
     Condition
       Error in `kautz_impl()`:
-      ! At vendor/cigraph/src/constructors/kautz.c:xx : `m' and `n' should be non-negative in a Kautz graph, Invalid value
+      ! `m' and `n' should be non-negative in a Kautz graph. Invalid value
+      Source: <file>:<line>
 
 # lcf_vector_impl basic
 
@@ -517,7 +531,8 @@
       lcf_vector_impl(n = -1, shifts = c(3, -3, 4), repeats = 2)
     Condition
       Error in `lcf_vector_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # mycielski_graph_impl basic
 
@@ -534,7 +549,8 @@
       mycielski_graph_impl(k = -1)
     Condition
       Error in `mycielski_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/mycielskian.c:xx : The Mycielski graph order must not be negative. Invalid value
+      ! The Mycielski graph order must not be negative. Invalid value
+      Source: <file>:<line>
 
 # adjlist_impl basic
 
@@ -551,7 +567,8 @@
       adjlist_impl(adjlist = -1, mode = "out")
     Condition
       Error in `adjlist_impl()`:
-      ! At vendor/cigraph/src/constructors/basic_constructors.c:xx : Invalid (negative or too large) vertex ID. Invalid vertex ID
+      ! Invalid (negative or too large) vertex ID. Invalid vertex ID
+      Source: <file>:<line>
 
 # full_bipartite_impl basic
 
@@ -587,7 +604,8 @@
       full_bipartite_impl(n1 = -1, n2 = 3)
     Condition
       Error in `full_bipartite_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite graph. Invalid value
+      Source: <file>:<line>
 
 # full_multipartite_impl basic
 
@@ -643,7 +661,8 @@
       full_multipartite_impl(n = -1)
     Condition
       Error in `full_multipartite_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Number of vertices must not be negative in any partition. Invalid value
+      ! Number of vertices must not be negative in any partition. Invalid value
+      Source: <file>:<line>
 
 # realize_degree_sequence_impl basic
 
@@ -674,7 +693,8 @@
       realize_degree_sequence_impl(out_deg = -1)
     Condition
       Error in `realize_degree_sequence_impl()`:
-      ! At vendor/cigraph/src/misc/degree_sequence.cpp:xx : The sum of degrees must be even for an undirected graph. Invalid value
+      ! The sum of degrees must be even for an undirected graph. Invalid value
+      Source: <file>:<line>
 
 # realize_bipartite_degree_sequence_impl basic
 
@@ -705,7 +725,8 @@
       realize_bipartite_degree_sequence_impl(degrees1 = -1, degrees2 = c(2, 2))
     Condition
       Error in `realize_bipartite_degree_sequence_impl()`:
-      ! At vendor/cigraph/src/misc/degree_sequence.cpp:xx : The given bidegree sequence cannot be realized as a bipartite simple graph. Invalid value
+      ! The given bidegree sequence cannot be realized as a bipartite simple graph. Invalid value
+      Source: <file>:<line>
 
 # circulant_impl basic
 
@@ -733,7 +754,8 @@
       circulant_impl(n = -1, shifts = c(1, 2))
     Condition
       Error in `circulant_impl()`:
-      ! At vendor/cigraph/src/constructors/circulant.c:xx : Number of nodes = -1 must be non-negative. Invalid value
+      ! Number of nodes = -1 must be non-negative. Invalid value
+      Source: <file>:<line>
 
 # generalized_petersen_impl basic
 
@@ -751,7 +773,8 @@
       generalized_petersen_impl(n = -1, k = 2)
     Condition
       Error in `generalized_petersen_impl()`:
-      ! At vendor/cigraph/src/constructors/generalized_petersen.c:xx : n = -1 must be at least 3. Invalid value
+      ! n = -1 must be at least 3. Invalid value
+      Source: <file>:<line>
 
 # turan_impl basic
 
@@ -782,7 +805,8 @@
       turan_impl(n = -1, r = 2)
     Condition
       Error in `turan_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Number of vertices must not be negative, got -1. Invalid value
+      ! Number of vertices must not be negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # erdos_renyi_game_gnp_impl basic
 
@@ -808,7 +832,8 @@
       erdos_renyi_game_gnp_impl(n = -1, p = 0.5)
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! Invalid number of vertices. Invalid value
+      Source: <file>:<line>
 
 # erdos_renyi_game_gnm_impl basic
 
@@ -834,7 +859,8 @@
       erdos_renyi_game_gnm_impl(n = -1, m = 3)
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! Invalid number of vertices. Invalid value
+      Source: <file>:<line>
 
 # growing_random_game_impl basic
 
@@ -856,13 +882,24 @@
       + edges:
       [1] 1--2 1--2 2--3 1--3 1--4 2--4 1--5 4--5
 
+---
+
+    Code
+      growing_random_game_impl(n = 10, m = 1, directed = TRUE, citation = FALSE)
+    Output
+      IGRAPH D--- 10 9 -- Growing random graph
+      + attr: name (g/c), m (g/n), citation (g/l)
+      + edges:
+      [1] 2->2 2->3 4->4 4->4 3->2 1->3 1->8 5->6 5->4
+
 # growing_random_game_impl errors
 
     Code
       growing_random_game_impl(n = -1, m = 2)
     Condition
       Error in `growing_random_game_impl()`:
-      ! At vendor/cigraph/src/games/growing_random.c:xx : Invalid number of vertices. Invalid value
+      ! Invalid number of vertices. Invalid value
+      Source: <file>:<line>
 
 # preference_game_impl basic
 
@@ -886,7 +923,8 @@
       fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `preference_game_impl()`:
-      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must be non-negative. Invalid value
+      ! The number of vertices must be non-negative. Invalid value
+      Source: <file>:<line>
 
 # asymmetric_preference_game_impl basic
 
@@ -915,7 +953,8 @@
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `asymmetric_preference_game_impl()`:
-      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must not be negative. Invalid value
+      ! The number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # rewire_edges_impl basic
 
@@ -978,7 +1017,8 @@
       forest_fire_game_impl(nodes = -1, fw_prob = 0.5)
     Condition
       Error in `forest_fire_game_impl()`:
-      ! At vendor/cigraph/src/games/forestfire.c:xx : Insufficient memory for forest fire model. Out of memory
+      ! Insufficient memory for forest fire model. Out of memory
+      Source: <file>:<line>
 
 # simple_interconnected_islands_game_impl basic
 
@@ -999,7 +1039,8 @@
         islands_pin = 0.5, n_inter = 1)
     Condition
       Error in `simple_interconnected_islands_game_impl()`:
-      ! At vendor/cigraph/src/games/islands.c:xx : Number of islands cannot be negative, got -1. Invalid value
+      ! Number of islands cannot be negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # chung_lu_game_impl basic
 
@@ -1028,7 +1069,8 @@
       chung_lu_game_impl(out_weights = -1)
     Condition
       Error in `chung_lu_game_impl()`:
-      ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
+      ! Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
+      Source: <file>:<line>
 
 # static_fitness_game_impl basic
 
@@ -1057,7 +1099,8 @@
       static_fitness_game_impl(no_of_edges = -1, fitness_out = c(1, 2, 3))
     Condition
       Error in `static_fitness_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
+      ! Number of edges cannot be negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # static_power_law_game_impl basic
 
@@ -1088,7 +1131,8 @@
       static_power_law_game_impl(no_of_nodes = -1, no_of_edges = 4, exponent_out = 2.5)
     Condition
       Error in `static_power_law_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of nodes cannot be negative, got -1. Invalid value
+      ! Number of nodes cannot be negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # k_regular_game_impl basic
 
@@ -1116,7 +1160,8 @@
       k_regular_game_impl(no_of_nodes = -1, k = 2)
     Condition
       Error in `k_regular_game_impl()`:
-      ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
+      ! Number of nodes must be non-negative. Invalid value
+      Source: <file>:<line>
 
 # sbm_game_impl basic
 
@@ -1145,7 +1190,8 @@
       sbm_game_impl(n = -1, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Condition
       Error in `sbm_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
+      ! Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
+      Source: <file>:<line>
 
 # hsbm_game_impl basic
 
@@ -1163,7 +1209,8 @@
       hsbm_game_impl(n = -1, m = 2, rho = 0.5, C = matrix(1, 2, 2), p = 0.5)
     Condition
       Error in `hsbm_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM, Invalid value
+      ! `n' must be positive for HSBM. Invalid value
+      Source: <file>:<line>
 
 # hsbm_list_game_impl basic
 
@@ -1191,7 +1238,8 @@
         matrix(1, 2, 2), matrix(1, 2, 2)), p = 0.5)
     Condition
       Error in `hsbm_list_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM. Invalid value
+      ! `n' must be positive for HSBM. Invalid value
+      Source: <file>:<line>
 
 # correlated_game_impl basic
 
@@ -1249,7 +1297,8 @@
       correlated_pair_game_impl(n = -1, corr = 0.5, p = 0.5)
     Condition
       Error in `correlated_pair_game_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! Invalid number of vertices. Invalid value
+      Source: <file>:<line>
 
 # dot_product_game_impl basic
 
@@ -1257,7 +1306,8 @@
       dot_product_game_impl(vecs = matrix(0.5, 5, 2))
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      Greater than 1 connection probability in dot-product graph.
+      Source: games/dotproduct.c:90
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1269,7 +1319,8 @@
       dot_product_game_impl(vecs = matrix(0.5, 5, 2), directed = TRUE)
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      Greater than 1 connection probability in dot-product graph.
+      Source: games/dotproduct.c:90
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -1309,7 +1360,8 @@
       sample_sphere_surface_impl(dim = -1, n = 5)
     Condition
       Error in `sample_sphere_surface_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
+      ! Sphere must be at least two dimensional to sample from surface. Invalid value
+      Source: <file>:<line>
 
 # sample_sphere_volume_impl basic
 
@@ -1337,7 +1389,8 @@
       sample_sphere_volume_impl(dim = -1, n = 5)
     Condition
       Error in `sample_sphere_volume_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
+      ! Sphere must be at least two dimensional to sample from surface. Invalid value
+      Source: <file>:<line>
 
 # sample_dirichlet_impl basic
 
@@ -1355,7 +1408,8 @@
       sample_dirichlet_impl(n = -1, alpha = c(1, 1, 1))
     Condition
       Error in `sample_dirichlet_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Number of samples should be non-negative, got -1. Invalid value
+      ! Number of samples should be non-negative, got -1. Invalid value
+      Source: <file>:<line>
 
 # are_adjacent_impl basic
 
@@ -1397,6 +1451,21 @@
       
       $reachable_count
       [1] 2 2 2
+      
+      $all_reachable
+      [1] TRUE
+      
+
+---
+
+    Code
+      closeness_impl(graph = g, vids = V(g), mode = c("out", "in", "all", "total"))
+    Output
+      $res
+      [1] 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667
+      
+      $reachable_count
+      [1] 4 4 4 4 4
       
       $all_reachable
       [1] TRUE
@@ -1596,6 +1665,18 @@
       [1] 0 1 2
       
 
+---
+
+    Code
+      voronoi_impl(graph = g, generators = c(1, 5), mode = c("out", "in", "all"))
+    Output
+      $membership
+       [1] 0 0 0 1 1 1 1 1 0 0
+      
+      $distances
+       [1] 0 1 2 1 0 1 2 3 2 1
+      
+
 # voronoi_impl errors
 
     Code
@@ -1708,6 +1789,14 @@
       + 2/2 edges:
       [1] 1--2 2--3
 
+---
+
+    Code
+      spanner_impl(graph = g, stretch = 2)
+    Output
+      + 5/5 edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
 # spanner_impl errors
 
     Code
@@ -1752,6 +1841,13 @@
       edge_betweenness_impl(graph = g)
     Output
       [1] 2 2
+
+---
+
+    Code
+      edge_betweenness_impl(graph = g, directed = FALSE)
+    Output
+      [1] 4 4 4 4
 
 # edge_betweenness_impl errors
 
@@ -2174,7 +2270,8 @@
       transitivity_barrat_impl(graph = g)
     Condition
       Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      No weights given for Barrat's transitivity, unweighted version is used.
+      Source: properties/triangles.c:913
     Output
       [1] NaN   0 NaN
 
@@ -2184,7 +2281,8 @@
       transitivity_barrat_impl(graph = g, mode = "zero")
     Condition
       Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      No weights given for Barrat's transitivity, unweighted version is used.
+      Source: properties/triangles.c:913
     Output
       [1] 0 0 0
 
@@ -3092,7 +3190,8 @@
       centralization_degree_tmax_impl(nodes = -1, loops = TRUE)
     Condition
       Error in `centralization_degree_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # centralization_betweenness_impl basic
 
@@ -3152,7 +3251,8 @@
       centralization_betweenness_tmax_impl(nodes = -1, directed = TRUE)
     Condition
       Error in `centralization_betweenness_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # centralization_closeness_impl basic
 
@@ -3212,7 +3312,8 @@
       centralization_closeness_tmax_impl(nodes = -1)
     Condition
       Error in `centralization_closeness_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # centralization_eigenvector_centrality_impl basic
 
@@ -3403,7 +3504,8 @@
       centralization_eigenvector_centrality_tmax_impl(nodes = -1)
     Condition
       Error in `centralization_eigenvector_centrality_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      ! Number of vertices must not be negative. Invalid value
+      Source: <file>:<line>
 
 # assortativity_nominal_impl basic
 
@@ -3907,7 +4009,8 @@
       Warning in `is_graphical_impl()`:
       NAs introduced by coercion
       Error in `is_graphical_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # bfs_simple_impl basic
 
@@ -4091,7 +4194,8 @@
       bipartite_game_gnp_impl(n1 = -1, n2 = 2, p = 0.5)
     Condition
       Error in `bipartite_game_gnp_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite graph. Invalid value
+      Source: <file>:<line>
 
 # bipartite_game_gnm_impl basic
 
@@ -4127,7 +4231,8 @@
       bipartite_game_gnm_impl(n1 = -1, n2 = 2, m = 1)
     Condition
       Error in `bipartite_game_gnm_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      ! Invalid number of vertices for bipartite graph. Invalid value
+      Source: <file>:<line>
 
 # get_laplacian_impl basic
 
@@ -4411,10 +4516,10 @@
       site_percolation_impl(graph = g)
     Output
       $giant_size
-      numeric(0)
+      [1] 1 2 3
       
       $edge_count
-      numeric(0)
+      [1] 0 1 2
       
 
 # site_percolation_impl errors
@@ -4442,8 +4547,8 @@
     Code
       edgelist_percolation_impl(edges = "a")
     Condition
-      Error in `edgelist_percolation_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'character'
+      Error in `edges - 1`:
+      ! non-numeric argument to binary operator
 
 # is_clique_impl basic
 
@@ -4884,6 +4989,18 @@
       [2,] -0.4861377 0.8738822    0
       [3,]  0.0000000 0.0000000    1
 
+---
+
+    Code
+      layout_sphere_impl(graph = g)
+    Output
+                 [,1]       [,2] [,3]
+      [1,]  0.0000000  0.0000000 -1.0
+      [2,] -0.2461774  0.8302992 -0.5
+      [3,] -0.9468790 -0.3215901  0.0
+      [4,]  0.5001161 -0.7070246  0.5
+      [5,]  0.0000000  0.0000000  1.0
+
 # layout_sphere_impl errors
 
     Code
@@ -5211,7 +5328,7 @@
       similarity_dice_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.6666667 0.8000000
+      [1] 0.8000000 0.6666667
 
 # similarity_dice_pairs_impl errors
 
@@ -5310,7 +5427,7 @@
       similarity_jaccard_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.5000000 0.6666667
+      [1] 0.6666667 0.5000000
 
 # similarity_jaccard_pairs_impl errors
 
@@ -5334,6 +5451,13 @@
     Output
       [1] 1
 
+---
+
+    Code
+      compare_communities_impl(comm1 = comm1, comm2 = comm2, method = "vi")
+    Output
+      [1] 0.5493061
+
 # compare_communities_impl errors
 
     Code
@@ -5342,7 +5466,8 @@
       Warning in `compare_communities_impl()`:
       NAs introduced by coercion
       Error in `compare_communities_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # modularity_impl basic
 
@@ -5550,7 +5675,8 @@
       Warning in `split_join_distance_impl()`:
       NAs introduced by coercion
       Error in `split_join_distance_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # community_infomap_impl basic
 
@@ -5678,7 +5804,7 @@
       hrg_sample_impl(hrg = NULL)
     Condition
       Error in `hrg_sample_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_sample_many_impl basic
@@ -5709,7 +5835,7 @@
       hrg_sample_many_impl(hrg = NULL, num_samples = 2)
     Condition
       Error in `hrg_sample_many_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_game_impl basic
@@ -5731,7 +5857,7 @@
       hrg_game_impl(hrg = NULL)
     Condition
       Error in `hrg_game_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At <file>:<line>: Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_consensus_impl errors
@@ -5765,7 +5891,8 @@
       hrg_create_impl(graph = g, prob = 0.5)
     Condition
       Error in `hrg_create_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg.cc:xx : HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
+      ! HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
+      Source: <file>:<line>
 
 # hrg_resize_impl basic
 
@@ -5794,7 +5921,8 @@
       hrg_resize_impl(hrg = -1, newsize = 2)
     Condition
       Error in `hrg_resize_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # hrg_size_impl basic
 
@@ -5809,7 +5937,8 @@
       hrg_size_impl(hrg = -1)
     Condition
       Error in `hrg_size_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # from_hrg_dendrogram_impl basic
 
@@ -5832,7 +5961,8 @@
       from_hrg_dendrogram_impl(hrg = -1)
     Condition
       Error in `from_hrg_dendrogram_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # get_adjacency_sparse_impl basic
 
@@ -6087,7 +6217,8 @@
       motifs_randesu_no_impl(graph = g, size = 3, cut_prob = c(0.1))
     Condition
       Error in `motifs_randesu_no_impl()`:
-      ! At vendor/cigraph/src/misc/motifs.c:xx : Cut probability vector size (1) must agree with motif size (3). Invalid value
+      ! Cut probability vector size (1) must agree with motif size (3). Invalid value
+      Source: <file>:<line>
 
 # dyad_census_impl basic
 
@@ -6118,7 +6249,8 @@
       triad_census_impl(graph = g)
     Condition
       Warning in `triad_census_impl()`:
-      At vendor/cigraph/src/misc/motifs.c:1157 : Triad census called on an undirected graph. All connections will be treated as mutual.
+      Triad census called on an undirected graph. All connections will be treated as mutual.
+      Source: misc/motifs.c:1157
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -7000,7 +7132,8 @@
       Warning in `isoclass_create_impl()`:
       NAs introduced by coercion
       Error in `isoclass_create_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # isomorphic_vf2_impl basic
 
@@ -7553,7 +7686,8 @@
       Warning in `graph_count_impl()`:
       NAs introduced by coercion
       Error in `graph_count_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # is_matching_impl basic
 
@@ -7651,7 +7785,10 @@
       [3,] 0.6718598 -0.4487712
       
       $Y
-      NULL
+                [,1]       [,2]
+      [1,] 0.6718598 -0.4487712
+      [2,] 1.1328501  0.5323058
+      [3,] 0.6718598 -0.4487712
       
       $D
       [1]  2.1861407 -0.6861407
@@ -7732,7 +7869,10 @@
       [3,] 0.7563200  0.4912963
       
       $Y
-      NULL
+                [,1]       [,2]
+      [1,] 0.1720265 -0.7864357
+      [2,] 0.6311790 -0.3743620
+      [3,] 0.7563200  0.4912963
       
       $D
       [1] 4.669079 1.476024
@@ -7820,7 +7960,10 @@
       [3,] -0.7071068  0.7071068
       
       $Y
-      NULL
+                 [,1]       [,2]
+      [1,] -0.7071068 -0.7071068
+      [2,]  1.4142136  0.0000000
+      [3,] -0.7071068  0.7071068
       
       $D
       [1] 3 1
@@ -7986,7 +8129,8 @@
       options = list(maxiter = 10))
     Condition
       Error in `eigen_adjacency_impl()`:
-      ! At vendor/cigraph/src/linalg/eigen.c:xx : 'LAPACK' algorithm not implemented yet, Unimplemented function call
+      ! 'LAPACK' algorithm not implemented yet. Unimplemented function call
+      Source: <file>:<line>
 
 # eigen_adjacency_impl errors
 
@@ -8046,7 +8190,8 @@
       Warning in `power_law_fit_impl()`:
       NAs introduced by coercion
       Error in `power_law_fit_impl()`:
-      ! At vendor/cigraph/src/misc/power_law_fit.c:xx : xmin must be greater than zero, Invalid value
+      ! xmin must be greater than zero. Invalid value
+      Source: <file>:<line>
 
 # sir_impl basic
 
@@ -9537,7 +9682,8 @@
       dim_select_impl(sv = NULL)
     Condition
       Error in `dim_select_impl()`:
-      ! At vendor/cigraph/src/misc/embedding.c:xx : Need at least one singular value for dimensionality selection, Invalid value
+      ! Need at least one singular value for dimensionality selection. Invalid value
+      Source: <file>:<line>
 
 # solve_lsap_impl basic
 
@@ -9669,7 +9815,8 @@
       eulerian_cycle_impl(graph = g1)
     Condition
       Error in `eulerian_cycle_impl()`:
-      ! At vendor/cigraph/src/paths/eulerian.c:xx : The graph does not have an Eulerian cycle. Input problem has no solution
+      ! The graph does not have an Eulerian cycle. Input problem has no solution
+      Source: <file>:<line>
 
 ---
 
@@ -9812,7 +9959,8 @@
       Warning in `from_prufer_impl()`:
       NAs introduced by coercion
       Error in `from_prufer_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # to_prufer_impl basic
 
@@ -9855,7 +10003,8 @@
       Warning in `tree_from_parent_vector_impl()`:
       NAs introduced by coercion
       Error in `tree_from_parent_vector_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # is_complete_impl basic
 
@@ -9914,7 +10063,8 @@
       Warning in `tree_game_impl()`:
       NAs introduced by coercion
       Error in `tree_game_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      ! The value nan is not representable as an integer. Invalid value
+      Source: <file>:<line>
 
 # vertex_coloring_greedy_impl basic
 
@@ -10310,7 +10460,8 @@
       famous_impl(name = "NonexistentGraph")
     Condition
       Error in `famous_impl()`:
-      ! At vendor/cigraph/src/constructors/famous.c:xx : NonexistentGraph is not a known graph. See the documentation for valid graph names. Invalid value
+      ! NonexistentGraph is not a known graph. See the documentation for valid graph names. Invalid value
+      Source: <file>:<line>
 
 # constraint_impl errors
 
@@ -10415,4 +10566,1314 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# star_impl basic
+
+    Code
+      star_impl(n = 5, mode = "out", center = 0)
+    Output
+      IGRAPH D--- 5 4 -- 
+      + edges:
+      [1] 1->2 1->3 1->4 1->5
+
+---
+
+    Code
+      star_impl(n = 6, mode = "in", center = 1)
+    Output
+      IGRAPH D--- 6 5 -- 
+      + edges:
+      [1] 1->2 3->2 4->2 5->2 6->2
+
+---
+
+    Code
+      star_impl(n = 4, mode = "undirected", center = 0)
+    Output
+      IGRAPH U--- 4 3 -- 
+      + edges:
+      [1] 1--2 1--3 1--4
+
+# ring_impl basic
+
+    Code
+      ring_impl(n = 5, directed = FALSE, mutual = FALSE, circular = TRUE)
+    Output
+      IGRAPH U--- 5 5 -- 
+      + edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
+---
+
+    Code
+      ring_impl(n = 4, directed = TRUE, mutual = FALSE, circular = FALSE)
+    Output
+      IGRAPH D--- 4 3 -- 
+      + edges:
+      [1] 1->2 2->3 3->4
+
+# full_impl basic
+
+    Code
+      full_impl(n = 4, directed = FALSE, loops = FALSE)
+    Output
+      IGRAPH U--- 4 6 -- 
+      + edges:
+      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+
+---
+
+    Code
+      full_impl(n = 3, directed = TRUE, loops = FALSE)
+    Output
+      IGRAPH D--- 3 6 -- 
+      + edges:
+      [1] 1->2 1->3 2->1 2->3 3->1 3->2
+
+# kary_tree_impl basic
+
+    Code
+      kary_tree_impl(n = 7, children = 2, type = c("out", "in", "undirected"))
+    Output
+      IGRAPH D--- 7 6 -- 
+      + edges:
+      [1] 1->2 1->3 2->4 2->5 3->6 3->7
+
+---
+
+    Code
+      kary_tree_impl(n = 10, children = 3, type = c("in", "out", "undirected"))
+    Output
+      IGRAPH D--- 10 9 -- 
+      + edges:
+      [1]  2->1  3->1  4->1  5->2  6->2  7->2  8->3  9->3 10->3
+
+# barabasi_game_impl basic
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag")
+    Output
+      IGRAPH U--- 10 18 -- 
+      + edges:
+       [1] 1-- 2 1-- 2 2-- 3 1-- 3 2-- 4 2-- 4 2-- 5 2-- 5 4-- 6 2-- 6 2-- 7 1-- 7
+      [13] 3-- 8 2-- 8 8-- 9 5-- 9 6--10 5--10
+
+---
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree")
+    Output
+      IGRAPH U--- 10 17 -- 
+      + edges:
+       [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 4-- 5 1-- 6 3-- 6 6-- 7 3-- 7 6-- 8
+      [13] 2-- 8 3-- 9 5-- 9 2--10 6--10
+
+# grg_game_impl basic
+
+    Code
+      grg_game_impl(nodes = 10, radius = 0.3, torus = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 12 -- 
+      + edges:
+       [1] 3-- 5 3-- 6 5-- 6 5-- 7 5-- 8 6-- 8 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      
+      $x
+       [1] 0.08565451 0.15145413 0.45222514 0.45939554 0.55956278 0.61872370
+       [7] 0.76201957 0.82545284 0.86690370 0.95857358
+      
+      $y
+       [1] 0.07820721 0.85018913 0.08700766 0.73223568 0.33212277 0.14562638
+       [7] 0.53326474 0.32235478 0.49679861 0.31410636
+      
+
+# watts_strogatz_game_impl basic
+
+    Code
+      watts_strogatz_game_impl(dim = 1, size = 10, nei = 2, p = 0.1)
+    Output
+      IGRAPH U--- 10 20 -- 
+      + edges:
+       [1] 1-- 2 2-- 6 2-- 3 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10 1-- 8 1-- 9
+      [13] 2--10 2-- 4 3-- 5 4-- 6 5-- 7 6-- 8 7-- 9 8--10
+
+# distances_impl basic
+
+    Code
+      distances_impl(graph = g, from = V(g), to = V(g), mode = c("out", "in", "all",
+        "total"))
+    Output
+           [,1] [,2] [,3] [,4] [,5]
+      [1,]    0    1    2    2    1
+      [2,]    1    0    1    2    2
+      [3,]    2    1    0    1    2
+      [4,]    2    2    1    0    1
+      [5,]    1    2    2    1    0
+
+# diameter_impl basic
+
+    Code
+      diameter_impl(graph = g, directed = FALSE, unconnected = TRUE)
+    Output
+      $res
+      [1] 5
+      
+      $from
+      [1] 0
+      
+      $to
+      [1] 5
+      
+      $vertex_path
+      [1] 0 1 2 3 4 5
+      
+      $edge_path
+      [1] 0 1 2 3 4
+      
+
+# get_shortest_paths_impl basic
+
+    Code
+      get_shortest_paths_impl(graph = g, from = 1, to = 3, mode = c("out", "in",
+        "all", "total"))
+    Output
+      $vertices
+      $vertices[[1]]
+      + 3/5 vertices:
+      [1] 1 2 3
+      
+      
+      $edges
+      $edges[[1]]
+      + 2/5 edges:
+      [1] 1--2 2--3
+      
+      
+      $parents
+      [1] -1  0  1 -2  0
+      
+      $inbound_edges
+      [1] -1  0  1 -1  4
+      
+
+# subcomponent_impl basic
+
+    Code
+      subcomponent_impl(graph = g, v = 1, mode = c("all", "out", "in"))
+    Output
+      + 3/6 vertices, named:
+      [1] A B C
+
+# betweenness_impl basic
+
+    Code
+      betweenness_impl(graph = g, vids = V(g), directed = FALSE)
+    Output
+      [1] 6 0 0 0 0
+
+# harmonic_centrality_impl basic
+
+    Code
+      harmonic_centrality_impl(graph = g, vids = V(g), mode = c("out", "in", "all",
+        "total"))
+    Output
+      [1] 4.0 2.5 2.5 2.5 2.5
+
+# pagerank_impl basic
+
+    Code
+      pagerank_impl(graph = g, vids = V(g), directed = TRUE, damping = 0.85)
+    Output
+      $vector
+      [1] 0.2 0.2 0.2 0.2 0.2
+      
+      $value
+      [1] 1
+      
+      $options
+      NULL
+      
+
+# hub_score_impl basic
+
+    Code
+      out
+    Output
+      $value
+      [1] 4
+      
+      $options
+      $options$bmat
+      [1] "I"
+      
+      $options$n
+      [1] 5
+      
+      $options$which
+      [1] "LA"
+      
+      $options$nev
+      [1] 1
+      
+      $options$tol
+      [1] 0
+      
+      $options$ncv
+      [1] 0
+      
+      $options$ldv
+      [1] 0
+      
+      $options$ishift
+      [1] 1
+      
+      $options$maxiter
+      [1] 3000
+      
+      $options$nb
+      [1] 1
+      
+      $options$mode
+      [1] 1
+      
+      $options$start
+      [1] 1
+      
+      $options$sigma
+      [1] 0
+      
+      $options$sigmai
+      [1] 0
+      
+      $options$info
+      [1] 0
+      
+      $options$iter
+      [1] 1
+      
+      $options$nconv
+      [1] 1
+      
+      $options$numop
+      [1] 4
+      
+      $options$numopb
+      [1] 0
+      
+      $options$numreo
+      [1] 4
+      
+      
+
+# authority_score_impl basic
+
+    Code
+      out
+    Output
+      $value
+      [1] 4
+      
+      $options
+      $options$bmat
+      [1] "I"
+      
+      $options$n
+      [1] 5
+      
+      $options$which
+      [1] "LA"
+      
+      $options$nev
+      [1] 1
+      
+      $options$tol
+      [1] 0
+      
+      $options$ncv
+      [1] 0
+      
+      $options$ldv
+      [1] 0
+      
+      $options$ishift
+      [1] 1
+      
+      $options$maxiter
+      [1] 3000
+      
+      $options$nb
+      [1] 1
+      
+      $options$mode
+      [1] 1
+      
+      $options$start
+      [1] 1
+      
+      $options$sigma
+      [1] 0
+      
+      $options$sigmai
+      [1] 0
+      
+      $options$info
+      [1] 0
+      
+      $options$iter
+      [1] 1
+      
+      $options$nconv
+      [1] 1
+      
+      $options$numop
+      [1] 4
+      
+      $options$numopb
+      [1] 0
+      
+      $options$numreo
+      [1] 4
+      
+      
+
+# community_walktrap_impl basic
+
+    Code
+      community_walktrap_impl(graph = g, steps = 4)
+    Output
+      $merges
+           [,1] [,2]
+      [1,]    4    5
+      [2,]    1    2
+      [3,]    3    6
+      [4,]    0    7
+      [5,]    8    9
+      
+      $modularity
+      [1] -0.17346939 -0.07142857  0.03061224  0.19387755  0.35714286  0.00000000
+      
+      $membership
+      [1] 0 0 0 1 1 1
+      
+
+# community_fastgreedy_impl basic
+
+    Code
+      community_fastgreedy_impl(graph = g)
+    Output
+      $merges
+           [,1] [,2]
+      [1,]    2    1
+      [2,]    0    6
+      [3,]    5    4
+      [4,]    3    8
+      [5,]    9    7
+      
+      $modularity
+      [1] -1.734694e-01 -7.142857e-02  9.183673e-02  1.938776e-01  3.571429e-01
+      [6]  5.551115e-17
+      
+      $membership
+      [1] 1 1 1 0 0 0
+      
+
+# community_edge_betweenness_impl basic
+
+    Code
+      community_edge_betweenness_impl(graph = g, directed = FALSE)
+    Output
+      $removed_edges
+      [1] 2 0 1 3 4 5 6
+      
+      $edge_betweenness
+      [1] 9 1 2 1 1 2 1
+      
+      $merges
+           [,1] [,2]
+      [1,]    5    4
+      [2,]    6    3
+      [3,]    2    1
+      [4,]    8    0
+      [5,]    7    9
+      
+      $bridges
+      [1] 7 6 4 3 1
+      
+      $modularity
+      [1] -0.17346939 -0.07142857  0.09183673  0.19387755  0.35714286  0.00000000
+      
+      $membership
+      [1] 0 0 0 1 1 1
+      
+
+# community_leading_eigenvector_callback_closure_impl basic
+
+    Code
+      cat("Result class:\n")
+    Output
+      Result class:
+    Code
+      print(class(result))
+    Output
+      [1] "igraph.eigenc"
+    Code
+      cat("\nMembership length:\n")
+    Output
+      
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.3934089
+    Code
+      cat("\nMerges dimensions:\n")
+    Output
+      
+      Merges dimensions:
+    Code
+      print(dim(result$merges))
+    Output
+      [1] 3 2
+
+# community_leading_eigenvector_callback_closure_impl with start
+
+    Code
+      cat("Result with start membership:\n")
+    Output
+      Result with start membership:
+    Code
+      cat("Membership length:\n")
+    Output
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.2217291
+
+# community_leading_eigenvector_callback_closure_impl errors
+
+    Code
+      community_leading_eigenvector_callback_closure_impl(graph = g, start = TRUE)
+    Condition
+      Error in `community_leading_eigenvector_callback_closure_impl()`:
+      ! Supplied memberhsip vector length does not match number of vertices. Invalid value
+      Source: <file>:<line>
+
+# edge_connectivity_impl basic
+
+    Code
+      edge_connectivity_impl(graph = g)
+    Output
+      [1] 2
+
+# vertex_connectivity_impl basic
+
+    Code
+      vertex_connectivity_impl(graph = g)
+    Output
+      [1] 2
+
+# create_bipartite_impl basic
+
+    Code
+      create_bipartite_impl(types = c(FALSE, FALSE, TRUE, TRUE), edges = c(0, 2, 0, 3,
+        1, 2, 1, 3), directed = FALSE)
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--3 1--4 2--3 2--4
+
+# bipartite_game_impl basic
+
+    Code
+      bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
+---
+
+    Code
+      bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
+# decompose_impl basic
+
+    Code
+      decompose_impl(graph = g, mode = c("weak", "strong"))
+    Output
+      [[1]]
+      IGRAPH UN-- 3 2 -- 
+      + attr: name (v/c)
+      + edges (vertex names):
+      [1] A--B B--C
+      
+      [[2]]
+      IGRAPH UN-- 2 1 -- 
+      + attr: name (v/c)
+      + edge (vertex names):
+      [1] D--E
+      
+
+# neighborhood_impl basic
+
+    Code
+      neighborhood_impl(graph = g, order = 1, vids = V(g), mode = c("all", "out",
+        "in"))
+    Output
+      [[1]]
+      + 3/5 vertices:
+      [1] 1 2 5
+      
+      [[2]]
+      + 3/5 vertices:
+      [1] 2 1 3
+      
+      [[3]]
+      + 3/5 vertices:
+      [1] 3 2 4
+      
+      [[4]]
+      + 3/5 vertices:
+      [1] 4 3 5
+      
+      [[5]]
+      + 3/5 vertices:
+      [1] 5 1 4
+      
+
+# neighborhood_size_impl basic
+
+    Code
+      neighborhood_size_impl(graph = g, order = 1, vids = V(g), mode = c("all", "out",
+        "in"))
+    Output
+      [1] 3 3 3 3 3
+
+# is_chordal_impl basic
+
+    Code
+      is_chordal_impl(graph = g, alpha = alpha_vec, alpham1 = alpham1_vec)
+    Output
+      $chordal
+      [1] TRUE
+      
+      $fillin
+      numeric(0)
+      
+      $newgraph
+      IGRAPH U--- 4 6 -- Full graph
+      + attr: name (g/c), loops (g/l)
+      + edges:
+      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+      
+
+---
+
+    Code
+      is_chordal_impl(graph = g2, alpha = alpha_vec2, alpham1 = alpham1_vec2)
+    Output
+      $chordal
+      [1] FALSE
+      
+      $fillin
+      [1] 1 3
+      
+      $newgraph
+      IGRAPH U--- 4 5 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l)
+      + edges:
+      [1] 1--2 2--3 3--4 1--4 2--4
+      
+
+# get_adjacency_impl basic
+
+    Code
+      get_adjacency_impl(graph = g, type = c("both", "upper", "lower"))
+    Output
+           [,1] [,2] [,3]
+      [1,]    0    1    1
+      [2,]    1    0    1
+      [3,]    1    1    0
+
+# write_graph_edgelist_impl basic
+
+    Code
+      content
+    Output
+      [1] "0 1" "0 2" "1 2"
+
+# read_graph_edgelist_impl basic
+
+    Code
+      read_graph_edgelist_impl(instream = tmp, n = 3, directed = FALSE)
+    Output
+      IGRAPH U--- 3 3 -- 
+      + edges:
+      [1] 1--2 2--3 1--3
+
+# degree_sequence_game_impl basic
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 2--4 3--3 1--4 1--2
+
+---
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 1--4 2--3 3--4
+
+# connect_neighborhood_impl basic
+
+    Code
+      connect_neighborhood_impl(graph = g, order = 1, mode = c("all", "out", "in"))
+    Condition
+      Warning in `connect_neighborhood_impl()`:
+      Order smaller than two, graph will be unchanged.
+      Source: <file>:<line>
+    Output
+      IGRAPH U--- 5 5 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l)
+      + edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
+# eccentricity_impl basic
+
+    Code
+      eccentricity_impl(graph = g, vids = V(g), mode = c("out", "in", "all"))
+    Output
+      [1] 2 2 2 2 2
+
+# radius_impl basic
+
+    Code
+      radius_impl(graph = g, mode = c("out", "in", "all"))
+    Output
+      [1] 2
+
+# graph_center_impl basic
+
+    Code
+      graph_center_impl(graph = g, mode = c("out", "in", "all"))
+    Output
+      + 1/5 vertex:
+      [1] 1
+
+# maximal_cliques_impl basic
+
+    Code
+      maximal_cliques_impl(graph = g, min_size = 1, max_size = 0)
+    Output
+      [[1]]
+      + 4/4 vertices:
+      [1] 1 2 4 3
+      
+
+# independent_vertex_sets_impl basic
+
+    Code
+      independent_vertex_sets_impl(graph = g, min_size = 1, max_size = 0)
+    Output
+      [[1]]
+      + 1/5 vertex:
+      [1] 1
+      
+      [[2]]
+      + 1/5 vertex:
+      [1] 2
+      
+      [[3]]
+      + 1/5 vertex:
+      [1] 3
+      
+      [[4]]
+      + 1/5 vertex:
+      [1] 4
+      
+      [[5]]
+      + 1/5 vertex:
+      [1] 5
+      
+      [[6]]
+      + 2/5 vertices:
+      [1] 1 3
+      
+      [[7]]
+      + 2/5 vertices:
+      [1] 1 4
+      
+      [[8]]
+      + 2/5 vertices:
+      [1] 2 4
+      
+      [[9]]
+      + 2/5 vertices:
+      [1] 2 5
+      
+      [[10]]
+      + 2/5 vertices:
+      [1] 3 5
+      
+
+# bfs_closure_impl works
+
+    Code
+      cat("BFS result:\n")
+    Output
+      BFS result:
+    Code
+      print(result)
+    Output
+      $order
+      + 10/10 vertices:
+       [1]  1  2 10  3  9  4  8  5  7  6
+      
+      $rank
+       [1] 0 1 3 5 7 9 8 6 4 2
+      
+      $parents
+       [1] -1  0  1  2  3  4  7  8  9  0
+      
+      $pred
+       [1] -1  0  9  8  7  6  4  3  2  1
+      
+      $succ
+       [1]  1  9  8  7  6 -1  5  4  3  2
+      
+      $dist
+       [1] 0 1 2 3 4 5 4 3 2 1
+      
+    Code
+      cat("\nNumber of BFS visits:", length(bfs_visits), "\n")
+    Output
+      
+      Number of BFS visits: 10 
+    Code
+      if (length(bfs_visits) > 0) {
+        cat("First visit:\n")
+        print(bfs_visits[[1]])
+      }
+    Output
+      First visit:
+       vid pred succ rank dist 
+         1    0    2    1    0 
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
+
+# dfs_closure_impl works
+
+    Code
+      cat("DFS result:\n")
+    Output
+      DFS result:
+    Code
+      print(result)
+    Output
+      $order
+      + 10/10 vertices:
+       [1]  1  2  3  4  5  6  7  8  9 10
+      
+      $order_out
+      + 10/10 vertices:
+       [1] 10  9  8  7  6  5  4  3  2  1
+      
+      $father
+       [1] -1  0  1  2  3  4  5  6  7  8
+      
+      $dist
+       [1] 0 1 2 3 4 5 6 7 8 9
+      
+    Code
+      cat("\nNumber of DFS IN visits:", length(dfs_in_visits), "\n")
+    Output
+      
+      Number of DFS IN visits: 10 
+    Code
+      cat("Number of DFS OUT visits:", length(dfs_out_visits), "\n")
+    Output
+      Number of DFS OUT visits: 10 
+    Code
+      if (length(dfs_in_visits) > 0) {
+        cat("First IN visit:\n")
+        print(dfs_in_visits[[1]])
+      }
+    Output
+      First IN visit:
+       vid dist 
+         1    0 
+
+# motifs_randesu_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of motifs found:", length(motif_data), "\n")
+    Output
+      
+      Number of motifs found: 1 
+    Code
+      cat("First motif:\n")
+    Output
+      First motif:
+    Code
+      print(motif_data[[1]])
+    Output
+      $vids
+      [1] 1 3 2
+      
+      $isoclass
+      [1] 4
+      
+
+# motifs_randesu_callback_closure_impl errors
+
+    Code
+      motifs_randesu_callback_closure_impl(graph = g, size = 3, cut_prob = NULL,
+        callback = "not a function")
+    Condition
+      Error in `motifs_randesu_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of cliques found: 5 
+    Code
+      cat("First clique:\n")
+    Output
+      First clique:
+    Code
+      print(clique_data[[1]])
+    Output
+      [1] 2 3 4
+
+# cliques_callback_closure_impl errors
+
+    Code
+      cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 4, callback = "not a function")
+    Condition
+      Error in `cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# maximal_cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of maximal cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of maximal cliques found: 3 
+    Code
+      if (length(clique_data) > 0) {
+        cat("First maximal clique:\n")
+        print(clique_data[[1]])
+      }
+    Output
+      First maximal clique:
+      [1] 2 1 4
+
+# maximal_cliques_callback_closure_impl errors
+
+    Code
+      maximal_cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 0,
+        callback = "not a function")
+    Condition
+      Error in `maximal_cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# simple_cycles_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cycles found:", length(cycle_data), "\n")
+    Output
+      
+      Number of cycles found: 1 
+    Code
+      cat("First cycle:\n")
+    Output
+      First cycle:
+    Code
+      print(cycle_data[[1]])
+    Output
+      $vertices
+      [1] 1 2 3 4
+      
+      $edges
+      [1] 1 2 3 4
+      
+
+# simple_cycles_callback_closure_impl errors
+
+    Code
+      simple_cycles_callback_closure_impl(graph = g, mode = "out", min_cycle_length = -
+        1, max_cycle_length = -1, callback = "not a function")
+    Condition
+      Error in `simple_cycles_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_isomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of isomorphisms found:", length(iso_data), "\n")
+    Output
+      
+      Number of isomorphisms found: 2 
+    Code
+      cat("First isomorphism:\n")
+    Output
+      First isomorphism:
+    Code
+      print(iso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 4 5
+      
+      $map21
+      [1] 1 2 3 4 5
+      
+
+# get_isomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_isomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_isomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_subisomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of subisomorphisms found:", length(subiso_data), "\n")
+    Output
+      
+      Number of subisomorphisms found: 2 
+    Code
+      cat("First subisomorphism:\n")
+    Output
+      First subisomorphism:
+    Code
+      print(subiso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 0 0
+      
+      $map21
+      [1] 1 2 3
+      
+
+# get_subisomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_subisomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_subisomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# sparse_adjacency_impl basic
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M)
+    Output
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+
+---
+
+    Code
+      sparse_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+
+# sparse_weighted_adjacency_impl basic
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M)
+    Output
+      $graph
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+      
+      $weights
+      [1] 0.5 2.5 1.0 3.0
+      
+
+---
+
+    Code
+      sparse_weighted_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
+    Output
+      $graph
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 2--3 1--4 3--4
+      
+      $weights
+      [1] 2.5 1.0 0.5 3.0
+      
+
+# weighted_sparsemat_impl basic
+
+    Code
+      weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
+    Output
+      IGRAPH D-W- 4 4 -- 
+      + attr: weight (e/n)
+      + edges:
+      [1] 4->1 1->2 2->3 3->4
+
+# disjoint_union_many_impl basic
+
+    Code
+      disjoint_union_many_impl(graphs = list(g1, g2, g3))
+    Output
+      IGRAPH D--- 6 0 -- 
+      + edges:
+
+# union_many_impl basic
+
+    Code
+      union_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 3 -- 
+      + edges:
+      [1] 2->3 1->3 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      numeric(0)
+      
+      $edgemaps[[2]]
+      [1] 2 0
+      
+      $edgemaps[[3]]
+      [1] 1
+      
+      
+
+# intersection_many_impl basic
+
+    Code
+      intersection_many_impl(graphs = list(g1, g2, g3))
+    Output
+      $res
+      IGRAPH D--- 3 1 -- 
+      + edge:
+      [1] 1->2
+      
+      $edgemaps
+      $edgemaps[[1]]
+      [1]  0 -1 -1
+      
+      $edgemaps[[2]]
+      [1]  0 -1
+      
+      $edgemaps[[3]]
+      [1] 0
+      
+      
+
+# layout_merge_dla_impl basic
+
+    Code
+      layout_merge_dla_impl(graphs = list(g1, g2), coords = list(coords1, coords2))
+    Output
+                [,1]       [,2]
+      [1,] -2.279507  0.0000000
+      [2,]  0.000000  0.0000000
+      [3,]  2.279507  0.0000000
+      [4,] -6.893133 -0.8307751
+      [5,] -4.613626 -0.8307751
+      [6,] -2.334119 -0.8307751
+
+# get_eid_impl basic
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = 2)
+    Output
+      + 1/4 edge:
+      [1] 1->2
+
+# get_eid_impl errors
+
+    Code
+      get_eid_impl(graph = NULL, from = 1, to = 2)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = c(1, 2), to = 2)
+    Condition
+      Error:
+      ! `from` must specify exactly one vertex
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = integer(0))
+    Condition
+      Error:
+      ! `to` must specify exactly one vertex
+
+# community_voronoi_impl basic
+
+    Code
+      community_voronoi_impl(graph = g)
+    Output
+      $membership
+       [1] 3 3 3 3 0 3 2 2 1 1
+      
+      $generators
+      + 4/10 vertices:
+      [1] 2 9 7 1
+      
+      $modularity
+      [1] 0.2222222
+      
+
+# community_voronoi_impl errors
+
+    Code
+      community_voronoi_impl(graph = NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# subisomorphic_lad_impl errors
+
+    Code
+      subisomorphic_lad_impl(pattern = NULL, target = g, domains = list(), induced = FALSE,
+      time_limit = 0)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      subisomorphic_lad_impl(pattern = g, target = g, domains = "not a list",
+        induced = FALSE, time_limit = 0)
+    Condition
+      Error:
+      ! `domains` must be a list or NULL
 

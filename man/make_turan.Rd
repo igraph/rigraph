@@ -7,14 +7,12 @@
 \usage{
 make_turan(n, r)
 
-turan(...)
+turan(n, r)
 }
 \arguments{
 \item{n}{Integer, the number of vertices in the graph.}
 
 \item{r}{Integer, the number of partitions in the graph, must be positive.}
-
-\item{...}{Passed to \code{make_turan()}.}
 }
 \value{
 An igraph graph with a vertex attribute \code{type} storing the

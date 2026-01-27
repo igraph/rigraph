@@ -54,7 +54,8 @@ Deprecated aliases for \code{values} and \code{values.in}, respectively.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with \code{\link[=as.integer]{as.integer()}}.}
+with \code{\link[=as.integer]{as.integer()}}. Character vectors are converted to integers using
+\code{\link[=as.factor]{as.factor()}}.}
 }
 \value{
 A single real number.

@@ -12,11 +12,19 @@
 \alias{is_clique}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
-cliques(graph, min = 0, max = 0)
+cliques(graph, min = NULL, max = NULL, ..., callback = NULL)
 
 largest_cliques(graph)
 
-max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
+max_cliques(
+  graph,
+  min = NULL,
+  max = NULL,
+  subset = NULL,
+  file = NULL,
+  ...,
+  callback = NULL
+)
 
 count_max_cliques(graph, min = NULL, max = NULL, subset = NULL)
 
@@ -38,6 +46,20 @@ is_clique(graph, candidate, directed = FALSE)
 
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{callback}{Optional function to call for each clique found. If provided,
+the function should accept one argument: \code{clique} (integer vector of vertex
+IDs in the clique, 1-based indexing). The function should return \code{FALSE} to
+continue the search or \code{TRUE} to stop it. If \code{NULL} (the default), all
+cliques are collected and returned as a list.
+
+\strong{Important limitation:} Callback functions must NOT call any igraph
+functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.}
 
 \item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
 numeric or symbolic if the graph is named. The algorithm is run from these
@@ -65,9 +87,13 @@ or only the maximal ones (\code{TRUE}).}
 \item{directed}{Whether to consider edge directions.}
 }
 \value{
-\code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
-return a list containing numeric vectors of vertex ids. Each list element is
-a clique, i.e. a vertex sequence of class \link[=V]{igraph.vs}.
+\code{cliques()} returns a list containing numeric vectors of vertex ids if
+\code{callback} is \code{NULL}. Each list element is a clique, i.e. a vertex sequence
+of class \link[=V]{igraph.vs}. If \code{callback} is provided, returns \code{NULL} invisibly.
+
+\code{largest_cliques()} and \code{clique_num()} return a list containing numeric
+vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+of class \link[=V]{igraph.vs}.
 
 \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}
 argument is not \code{NULL}. The output is written to the specified file in
@@ -143,5 +169,5 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques_callback}{\code{cliques_callback()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}.}
 
