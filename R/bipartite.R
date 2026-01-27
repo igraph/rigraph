@@ -190,7 +190,7 @@ bipartite_projection <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(
+  res <- .Call( # bipartite_projection_impl lacks which/multiplicity parameters
     Rx_igraph_bipartite_projection,
     graph,
     types,

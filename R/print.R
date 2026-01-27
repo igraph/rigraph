@@ -33,7 +33,7 @@
       sep = "",
       gal,
       " (g/",
-      .Call(Rx_igraph_get_attr_mode, object, 2L),
+      .Call(Rx_igraph_get_attr_mode, object, 2L), # internal, no _impl
       ")"
     )
   }
@@ -43,7 +43,7 @@
       sep = "",
       val,
       " (v/",
-      .Call(Rx_igraph_get_attr_mode, object, 3L),
+      .Call(Rx_igraph_get_attr_mode, object, 3L), # internal, no _impl
       ")"
     )
   }
@@ -53,7 +53,7 @@
       sep = "",
       edge_attr_names(object),
       " (e/",
-      .Call(Rx_igraph_get_attr_mode, object, 4L),
+      .Call(Rx_igraph_get_attr_mode, object, 4L), # internal, no _impl
       ")"
     )
   }

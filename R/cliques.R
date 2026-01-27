@@ -325,7 +325,7 @@ max_cliques <- function(
       tmpfile <- FALSE
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call(
+    res <- .Call( # maximal_cliques_file_impl doesn't support subset
       Rx_igraph_maximal_cliques_file,
       graph,
       subset,
@@ -350,7 +350,7 @@ max_cliques <- function(
     }
 
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call(
+    res <- .Call( # maximal_cliques_impl doesn't support subset
       Rx_igraph_maximal_cliques,
       graph,
       subset_arg,
@@ -403,7 +403,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
+  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max) # _impl lacks subset
 
   res
 }
@@ -568,30 +568,11 @@ weighted_clique_num <- function(graph, vertex.weights = NULL) {
 #'
 #' length(max_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
-  ensure_igraph(graph)
-
-  if (is.null(min)) {
-    min <- 0
-  }
-
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_independent_vertex_sets,
-    graph,
-    as.numeric(min),
-    as.numeric(max)
+  independent_vertex_sets_impl(
+    graph = graph,
+    min_size = min %||% 0,
+    max_size = max %||% 0
   )
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
 }
 
 #' @rdname ivs
