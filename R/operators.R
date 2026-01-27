@@ -229,7 +229,7 @@ disjoint_union <- function(...) {
   lapply(graphs, ensure_igraph)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_disjoint_union, graphs)
+  res <- .Call(Rx_igraph_disjoint_union, graphs) # disjoint_union_many_impl() exists but returns different structure
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
@@ -350,9 +350,9 @@ disjoint_union <- function(...) {
 
     on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(Rx_igraph_union, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_union, newgraphs, edgemaps) # union_many_impl() has no edgemaps argument
     } else {
-      res <- .Call(Rx_igraph_intersection, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, newgraphs, edgemaps) # intersection_many_impl() has no edgemaps argument
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -390,9 +390,9 @@ disjoint_union <- function(...) {
 
     on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(Rx_igraph_union, graphs, edgemaps)
+      res <- .Call(Rx_igraph_union, graphs, edgemaps) # union_many_impl() has no edgemaps argument
     } else {
-      res <- .Call(Rx_igraph_intersection, graphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, graphs, edgemaps) # intersection_many_impl() has no edgemaps argument
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -848,7 +848,7 @@ compose <- function(g1, g2, byname = "auto") {
     length(edge_attr_names(g2)) != 0)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_compose, g1, g2, edgemaps)
+  res <- .Call(Rx_igraph_compose, g1, g2, edgemaps) # compose_impl() has no edgemaps argument
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
 

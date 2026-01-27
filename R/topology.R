@@ -220,7 +220,7 @@ graph.subisomorphic.lad <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_subisomorphic_lad,
     pattern,
     target,

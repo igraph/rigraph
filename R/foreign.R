@@ -525,7 +525,7 @@ write_graph <- function(
 
 read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_read_graph_edgelist,
     file,
     as.numeric(n),
@@ -558,7 +558,7 @@ read.graph.ncol <- function(
     "auto" = 2L
   )
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
@@ -584,7 +584,7 @@ write.graph.ncol <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_write_graph_ncol,
     graph,
     file,
@@ -606,7 +606,7 @@ read.graph.lgl <- function(
     "auto" = 2L
   )
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_read_graph_lgl,
     file,
     as.logical(names),
@@ -632,7 +632,7 @@ write.graph.lgl <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_write_graph_lgl,
     graph,
     file,
@@ -662,7 +662,7 @@ write.graph.pajek <- function(graph, file) {
 }
 
 read.graph.dimacs <- function(file, directed = TRUE) {
-  res <- .Call(Rx_igraph_read_graph_dimacs, file, as.logical(directed))
+  res <- .Call(Rx_igraph_read_graph_dimacs, file, as.logical(directed)) # no _impl
   if (res[[1]][1] == "max") {
     graph <- res[[2]]
     graph <- set_graph_attr(graph, "problem", res[[1]])
@@ -696,7 +696,7 @@ write.graph.dimacs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_write_graph_dimacs,
     graph,
     file,

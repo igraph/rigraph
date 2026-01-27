@@ -768,7 +768,7 @@ diameter <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_diameter,
     graph,
     as.logical(directed),
@@ -797,7 +797,7 @@ get_diameter <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
@@ -833,7 +833,7 @@ farthest_vertices <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
@@ -1245,7 +1245,7 @@ distances <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_shortest_paths,
     graph,
     v - 1,
@@ -1329,7 +1329,7 @@ shortest_paths <- function(
 
   to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
@@ -1527,7 +1527,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_subcomponent,
     graph,
     as_igraph_vs(graph, v) - 1,
@@ -1822,7 +1822,7 @@ transitivity <- function(
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call(
+      res <- .Call( # transitivity_local_undirected_impl() requires vids, no "all" variant
         Rx_igraph_transitivity_local_undirected_all,
         graph,
         isolates_num
@@ -2062,7 +2062,7 @@ ego_size <- function(
   mindist <- as.numeric(mindist)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # no _impl
     Rx_igraph_neighborhood_size,
     graph,
     as_igraph_vs(graph, nodes) - 1,
@@ -2176,7 +2176,7 @@ ego <- function(
   mindist <- as.numeric(mindist)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_neighborhood,
     graph,
     as_igraph_vs(graph, nodes) - 1,
@@ -2211,7 +2211,7 @@ make_ego_graph <- function(
   mindist <- as.numeric(mindist)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_neighborhood_graphs,
     graph,
     as_igraph_vs(graph, nodes) - 1,
@@ -2452,7 +2452,7 @@ girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
+  res <- .Call(Rx_igraph_girth, graph, as.logical(circle)) # girth_impl() has no circle argument
   if (res$girth == 0) {
     res$girth <- Inf
   }
@@ -2768,7 +2768,7 @@ bfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_bfs,
     graph,
     root,
@@ -3024,7 +3024,7 @@ dfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # no _impl
     Rx_igraph_dfs,
     graph,
     root,
@@ -3183,7 +3183,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_no_components, graph, mode)
+  .Call(Rx_igraph_no_components, graph, mode) # no _impl
 }
 
 #' Count reachable vertices
