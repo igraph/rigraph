@@ -22,4 +22,9 @@ cran
 /rchk
 /src/*.d
 /src/symbols.rds
+/tests/testthat/testthat-problems.rds
 /covr
+/.vscode/launch.json
+/Rplots.pdf
+/_codeql_detected_source_root
+/tests/testthat/_problems/
