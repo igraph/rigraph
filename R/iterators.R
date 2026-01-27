@@ -84,7 +84,13 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @export
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  .Call(Rx_igraph_identical_graphs, # is_same_graph_impl has different semantics g1, g2, as.logical(attrs))
+  on.exit(.Call(Rx_igraph_finalizer))
+  .Call( # is_same_graph_impl lacks attrs parameter
+    Rx_igraph_identical_graphs,
+    g1,
+    g2,
+    as.logical(attrs)
+  )
 }
 
 add_vses_graph_ref <- function(vses, graph) {
@@ -1057,12 +1063,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ))
 
     # Data objects (visible by default)
+    from_copy <- .Call(Rx_igraph_copy_from, graph) # internal, no _impl
+    to_copy <- .Call(Rx_igraph_copy_to, graph) # internal, no _impl
     bottom <- rlang::new_environment(
       parent = top,
       c(
         attrs,
-        .igraph.from = list(.Call(Rx_igraph_copy_from, graph) # internal, no _impl[as.numeric(x)]),
-        .igraph.to = list(.Call(Rx_igraph_copy_to, graph) # internal, no _impl[as.numeric(x)]),
+        .igraph.from = list(from_copy[as.numeric(x)]),
+        .igraph.to = list(to_copy[as.numeric(x)]),
         .igraph.graph = list(graph),
         .env = env,
         .data = list(attrs)
