@@ -235,6 +235,56 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color2,
     SEXP callback);
 
+/* BFS */
+igraph_error_t R_igraph_bfs_handler(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t pred,
+    igraph_integer_t succ,
+    igraph_integer_t rank,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t igraph_bfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    const igraph_vector_int_t *roots,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    const igraph_vector_int_t *restricted,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *rank,
+    igraph_vector_int_t *parents,
+    igraph_vector_int_t *pred,
+    igraph_vector_int_t *succ,
+    igraph_vector_int_t *dist,
+    SEXP callback);
+
+/* DFS */
+igraph_error_t R_igraph_dfs_handler_in(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t R_igraph_dfs_handler_out(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t igraph_dfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *order_out,
+    igraph_vector_int_t *father,
+    igraph_vector_int_t *dist,
+    SEXP in_callback,
+    SEXP out_callback);
+
 /* Leading eigenvector community detection */
 SEXP R_igraph_levc_arpack_multiplier(SEXP extP, SEXP extE, SEXP pv);
 

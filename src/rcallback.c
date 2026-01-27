@@ -31,6 +31,12 @@ typedef struct {
   SEXP callback;
 } R_igraph_callback_data_t;
 
+/* Structure to hold DFS callback data (both in and out callbacks) */
+typedef struct {
+  SEXP in_callback;
+  SEXP out_callback;
+} R_igraph_dfs_callback_data_t;
+
 /* Handler function for motifs callback - converts C types to R types */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
                                        igraph_vector_int_t *vids,
@@ -62,12 +68,16 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function that wraps igraph_motifs_randesu_callback
@@ -108,12 +118,16 @@ igraph_error_t R_igraph_clique_handler(const igraph_vector_int_t *clique, void *
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(3);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
   UNPROTECT(3);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure functions for clique callbacks */
@@ -176,12 +190,16 @@ igraph_error_t R_igraph_cycle_handler(
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure function for simple_cycles_callback */
@@ -232,12 +250,16 @@ igraph_error_t R_igraph_isomorphism_handler(
     igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
     return IGRAPH_FAILURE;
   }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
 
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);
-  /* R callback returns TRUE to continue, FALSE to stop */
-  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+  /* R callback returns TRUE to stop, FALSE to continue */
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 /* Closure functions for isomorphism callbacks */
@@ -279,6 +301,217 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
       NULL, NULL,
       R_igraph_isomorphism_handler,
       NULL, NULL, &data);
+}
+
+/* Handler function for BFS callbacks - converts C types to R types */
+igraph_error_t R_igraph_bfs_handler(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t pred,
+    igraph_integer_t succ,
+    igraph_integer_t rank,
+    igraph_integer_t dist,
+    void *extra) {
+
+  R_igraph_callback_data_t *data = (R_igraph_callback_data_t *)extra;
+  SEXP callback = data->callback;
+  SEXP args, R_fcall, result, names;
+  igraph_bool_t cres;
+
+  /* Create named integer vector with BFS information */
+  PROTECT(args = NEW_INTEGER(5));
+  PROTECT(names = NEW_CHARACTER(5));
+
+  SET_STRING_ELT(names, 0, Rf_mkChar("vid"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("pred"));
+  SET_STRING_ELT(names, 2, Rf_mkChar("succ"));
+  SET_STRING_ELT(names, 3, Rf_mkChar("rank"));
+  SET_STRING_ELT(names, 4, Rf_mkChar("dist"));
+  INTEGER(args)[0] = vid + 1;   /* R's 1-based indexing */
+  INTEGER(args)[1] = pred + 1;
+  INTEGER(args)[2] = succ + 1;
+  INTEGER(args)[3] = rank + 1;
+  INTEGER(args)[4] = dist;
+  SET_NAMES(args, names);
+
+  /* Call the R callback with the converted data */
+  PROTECT(R_fcall = Rf_lang2(callback, args));
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+
+  /* Check if result is an error or interrupt condition */
+  if (Rf_inherits(result, "error")) {
+    UNPROTECT(4);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
+
+  /* Interpret result: TRUE = stop, FALSE = continue */
+  cres = LOGICAL(AS_LOGICAL(result))[0];
+  UNPROTECT(4);
+
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+}
+
+/* Closure function for BFS - connects R callback to C igraph_bfs */
+igraph_error_t igraph_bfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    const igraph_vector_int_t *roots,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    const igraph_vector_int_t *restricted,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *rank,
+    igraph_vector_int_t *parents,
+    igraph_vector_int_t *pred,
+    igraph_vector_int_t *succ,
+    igraph_vector_int_t *dist,
+    SEXP callback) {
+
+  /* If callback is NULL, pass NULL to the C function */
+  if (Rf_isNull(callback)) {
+    return igraph_bfs(graph, root, roots, mode, unreachable, restricted,
+                      order, rank, parents, pred, succ, dist, NULL, NULL);
+  }
+
+  /* Otherwise, use the handler */
+  R_igraph_callback_data_t data = { .callback = callback };
+
+  return igraph_bfs(graph, root, roots, mode, unreachable, restricted,
+                    order, rank, parents, pred, succ, dist,
+                    R_igraph_bfs_handler, &data);
+}
+
+/* Handler function for DFS in-callbacks */
+igraph_error_t R_igraph_dfs_handler_in(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra) {
+
+  R_igraph_dfs_callback_data_t *data = (R_igraph_dfs_callback_data_t *)extra;
+  SEXP callback = data->in_callback;
+  SEXP args, R_fcall, result, names;
+  igraph_bool_t cres;
+
+  /* If no in_callback, continue */
+  if (Rf_isNull(callback)) {
+    return IGRAPH_SUCCESS;
+  }
+
+  /* Create named integer vector with DFS information */
+  PROTECT(args = NEW_INTEGER(2));
+  PROTECT(names = NEW_CHARACTER(2));
+
+  SET_STRING_ELT(names, 0, Rf_mkChar("vid"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("dist"));
+  INTEGER(args)[0] = vid + 1;   /* R's 1-based indexing */
+  INTEGER(args)[1] = dist;
+  SET_NAMES(args, names);
+
+  /* Call the R callback */
+  PROTECT(R_fcall = Rf_lang2(callback, args));
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+
+  /* Check if result is an error or interrupt condition */
+  if (Rf_inherits(result, "error")) {
+    UNPROTECT(4);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
+
+  /* Interpret result: TRUE = stop, FALSE = continue */
+  cres = LOGICAL(AS_LOGICAL(result))[0];
+  UNPROTECT(4);
+
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+}
+
+/* Handler function for DFS out-callbacks */
+igraph_error_t R_igraph_dfs_handler_out(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra) {
+
+  R_igraph_dfs_callback_data_t *data = (R_igraph_dfs_callback_data_t *)extra;
+  SEXP callback = data->out_callback;
+  SEXP args, R_fcall, result, names;
+  igraph_bool_t cres;
+
+  /* If no out_callback, continue */
+  if (Rf_isNull(callback)) {
+    return IGRAPH_SUCCESS;
+  }
+
+  /* Create named integer vector with DFS information */
+  PROTECT(args = NEW_INTEGER(2));
+  PROTECT(names = NEW_CHARACTER(2));
+
+  SET_STRING_ELT(names, 0, Rf_mkChar("vid"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("dist"));
+  INTEGER(args)[0] = vid + 1;   /* R's 1-based indexing */
+  INTEGER(args)[1] = dist;
+  SET_NAMES(args, names);
+
+  /* Call the R callback */
+  PROTECT(R_fcall = Rf_lang2(callback, args));
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+
+  /* Check if result is an error or interrupt condition */
+  if (Rf_inherits(result, "error")) {
+    UNPROTECT(4);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  if (Rf_inherits(result, "interrupt")) {
+    UNPROTECT(4);
+    return IGRAPH_INTERRUPTED;
+  }
+
+  /* Interpret result: TRUE = stop, FALSE = continue */
+  cres = LOGICAL(AS_LOGICAL(result))[0];
+  UNPROTECT(4);
+
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
+}
+
+/* Closure function for DFS - connects R callbacks to C igraph_dfs */
+igraph_error_t igraph_dfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *order_out,
+    igraph_vector_int_t *father,
+    igraph_vector_int_t *dist,
+    SEXP in_callback,
+    SEXP out_callback) {
+
+  /* If both callbacks are NULL, pass NULL to the C function */
+  if (Rf_isNull(in_callback) && Rf_isNull(out_callback)) {
+    return igraph_dfs(graph, root, mode, unreachable, order, order_out,
+                      father, dist, NULL, NULL, NULL);
+  }
+
+  /* Otherwise, use the handlers */
+  R_igraph_dfs_callback_data_t data = {
+    .in_callback = in_callback,
+    .out_callback = out_callback
+  };
+
+  return igraph_dfs(graph, root, mode, unreachable, order, order_out,
+                    father, dist,
+                    R_igraph_dfs_handler_in, R_igraph_dfs_handler_out, &data);
 }
 
 /* Leading eigenvector community detection callback support */
@@ -335,7 +568,7 @@ igraph_error_t R_igraph_levc_handler(
   PROTECT(s_evalue = NEW_NUMERIC(1));
   REAL(s_evalue)[0] = eigenvalue;
   PROTECT(s_evector = Ry_igraph_vector_to_SEXP(eigenvector));
-  
+
   /* Create the ARPACK multiplier function accessible from R */
   PROTECT(l1 = Rf_install("igraph.i.levc.arp"));
   PROTECT(l2 = R_MakeExternalPtr((void*)&cont, R_NilValue, R_NilValue));
@@ -387,8 +620,8 @@ igraph_error_t igraph_community_leading_eigenvector_callback_closure(
   }
 
   /* Otherwise, use the handler */
-  R_igraph_levc_callback_data_t data = { 
-    .callback = callback, 
+  R_igraph_levc_callback_data_t data = {
+    .callback = callback,
     .extra = extra ? extra : R_NilValue,  /* Convert NULL to R_NilValue */
     .env = env ? env : R_GlobalEnv,  /* Ensure env is never NULL */
     .env_arp = env_arp ? env_arp : R_GlobalEnv  /* Ensure env_arp is never NULL */

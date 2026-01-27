@@ -31,7 +31,7 @@ mutual edges.}
 If provided, the function should accept two arguments: \code{map12} (integer vector
 mapping vertex IDs from pattern to target, 1-based indexing) and \code{map21}
 (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
-The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
 If \code{NULL} (the default), all subisomorphisms are collected and returned as a list.
 Only supported for \code{method = "vf2"}.
 

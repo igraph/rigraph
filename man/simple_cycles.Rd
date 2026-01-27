@@ -29,8 +29,8 @@ and \code{all} ignores edge directions. Ignored in undirected graphs.}
 \item{callback}{Optional function to call for each cycle found. If provided,
 the function should accept two arguments: \code{vertices} (integer vector of vertex
 IDs in the cycle) and \code{edges} (integer vector of edge IDs
-in the cycle). The function should return \code{TRUE} to continue
-the search or \code{FALSE} to stop it. If \code{NULL} (the default), all cycles are
+in the cycle). The function should return \code{FALSE} to continue
+the search or \code{TRUE} to stop it. If \code{NULL} (the default), all cycles are
 collected and returned as a list.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
