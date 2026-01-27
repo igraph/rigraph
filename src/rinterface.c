@@ -18110,7 +18110,7 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
     Rz_SEXP_to_vector(weights, &c_weights);
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, (Rf_isNull(start) ? 0 : c_start), c_bfs_cutoff, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, (Rf_isNull(start) ? -1 : c_start), c_bfs_cutoff, (Rf_isNull(weights) ? 0 : &c_weights)));
 
                                         /* Convert output */
   PROTECT(basis=Ry_igraph_vector_int_list_to_SEXPp1(&c_basis));
@@ -18455,7 +18455,7 @@ SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
     c_vid = (igraph_integer_t) REAL(vid)[0];
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? 0 : c_vid)));
+  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? -1 : c_vid)));
 
                                         /* Convert output */
   PROTECT(res=Ry_igraph_vector_int_to_SEXPp1(&c_res));
@@ -18978,7 +18978,7 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_path);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_vertex_path_from_edge_path(&c_graph, (Rf_isNull(start) ? 0 : c_start), &c_edge_path, &c_vertex_path, c_mode));
+  IGRAPH_R_CHECK(igraph_vertex_path_from_edge_path(&c_graph, (Rf_isNull(start) ? -1 : c_start), &c_edge_path, &c_vertex_path, c_mode));
 
                                         /* Convert output */
   igraph_vector_int_destroy(&c_edge_path);
