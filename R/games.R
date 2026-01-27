@@ -1216,7 +1216,7 @@ random.graph.game <- function(
 #' This generator should be favoured if undirected and connected graphs are to be
 #'  generated and execution time is not a concern. igraph uses
 #'  the original implementation of Fabien Viger; for the algorithm, see
-#'  <https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html>
+#'  <https://web.archive.org/web/20250428012457/https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html>
 #'  and the paper <https://arxiv.org/abs/cs/0502085>.
 #'
 #' The \dQuote{edge.switching.simple} is an MCMC sampler based on
