@@ -1517,8 +1517,15 @@ layout_with_fr <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
+  use_seed <- !is.null(coords)
+  if (is.null(coords)) {
+    # Initialize coords with zeros - will be ignored if use_seed=FALSE
+    n <- vcount(graph)
+    dim_n <- if (dim == "2") 2 else 3
+    coords <- matrix(0, n, dim_n)
+  }
+  coords[] <- as.numeric(coords)
   if (!missing(niter) && !missing(maxiter)) {
     cli::cli_abort(c(
       "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
@@ -1576,7 +1583,7 @@ layout_with_fr <- function(
     res <- layout_fruchterman_reingold_impl(
       graph = graph,
       coords = coords,
-      use_seed = !is.null(coords),
+      use_seed = use_seed,
       niter = niter,
       start_temp = start.temp,
       grid = grid,
@@ -1590,7 +1597,7 @@ layout_with_fr <- function(
     res <- layout_fruchterman_reingold_3d_impl(
       graph = graph,
       coords = coords,
-      use_seed = !is.null(coords),
+      use_seed = use_seed,
       niter = niter,
       start_temp = start.temp,
       weights = weights,
