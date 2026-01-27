@@ -23,7 +23,9 @@ Types are numbered from zero.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types.}
+probabilities for the different vertex types.
+For \code{sample_last_cit()}, this should be a numeric vector of length \code{agebins + 1}.
+A common choice is a power-law decay, e.g., \code{(1:(agebins + 1))^-3}.}
 
 \item{directed}{Logical scalar, whether to generate directed networks.}
 
