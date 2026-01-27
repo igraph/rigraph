@@ -72,7 +72,7 @@ capitalize <- function(x) {
 }
 
 address <- function(x) {
-  .Call(Rx_igraph_address, x)
+  .Call(Rx_igraph_address, x) # internal, no _impl
 }
 
 `%+%` <- function(x, y) {
