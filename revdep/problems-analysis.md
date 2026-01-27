@@ -1,15 +1,18 @@
 # Analysis of Reverse Dependency Problems
 
-This document provides minimal reproducible examples and analysis for the three packages that now fail their checks compared to the most recent CRAN version.
+This document provides minimal reproducible examples and analysis for packages that now fail their checks compared to the most recent CRAN version.
 
-**Note**: Runnable R scripts demonstrating each issue can be found in the `examples/` directory.
+**Note**: Runnable R scripts and markdown outputs demonstrating each issue can be found in the `examples/` directory.
 
 ## Summary
 
-Three packages have newly broken checks:
+Six packages have newly broken checks:
 1. **Cascade** (v2.3): Namespace collision warning
-2. **jewel** (v2.0.2): Error due to strict integer validation
-3. **rSpectral** (v1.0.0.10): Test failures due to modularity calculation changes
+2. **DiagrammeR** (v1.0.11): `neighbors()` requires exactly one vertex
+3. **jewel** (v2.0.2): Error due to strict integer validation
+4. **manynet** (v1.7.0): Scalar integer validation in `sample_last_cit()`
+5. **rSpectral** (v1.0.0.14): Test failures due to modularity calculation changes
+6. **sfnetworks** (v0.6.5): `from` parameter requires exactly one vertex
 
 ## 1. Cascade - Namespace Collision Warning
 
@@ -19,117 +22,126 @@ Warning: replacing previous import 'igraph::circulant' by 'magic::circulant' whe
 ```
 
 ### Root Cause
-igraph recently added a new function `make_circulant()` (and its constructor alias `circulant()`) in version 2.2.1.9003. This creates a namespace collision with the `magic::circulant()` function that the Cascade package also uses.
-
-From NEWS.md:
-```
-# igraph 2.2.1.9003
-- Add `make_circulant()` to expose `igraph_circulant()` (#1563, #2407).
-```
+igraph added `make_circulant()` and its constructor alias `circulant()` in version 2.2.1.9003, creating a namespace collision with `magic::circulant()`.
 
 ### Assessment
-**This is an inadvertent behavior change in igraph, not a bug in Cascade.**
+**Inadvertent behavior change in igraph, not a bug in Cascade.**
 
-The `circulant` function is exported from igraph but is primarily a constructor alias (used as `graph(circulant(...))`). The main function users should use is `make_circulant()`.
+The `circulant` function is exported as a constructor alias. Users should use `make_circulant()` directly.
 
 ### Recommendation
-The `circulant` constructor alias could potentially be unexported to avoid this namespace collision, as users should be using `make_circulant()` directly. However, this would be a breaking change for users already using the constructor form.
+- **For Cascade**: Explicitly import `magic::circulant` in NAMESPACE
+- **For igraph**: Consider unexported the constructor alias or document this known collision
 
-Alternatively, this is a minor warning that doesn't prevent Cascade from working, and Cascade package maintainers could resolve it by explicitly importing `magic::circulant` in their NAMESPACE.
+**Severity**: Low - Warning only, no functionality broken
 
-## 2. jewel - Integer Validation Error
+---
+
+## 2. DiagrammeR - neighbors() Requires Single Vertex
+
+### Issue
+```
+Error in `igraph::neighbors()`:
+! `vid` must specify exactly one vertex
+```
+
+### Root Cause
+igraph added stricter validation requiring exactly one vertex for `neighbors()`. DiagrammeR's `get_leverage_centrality()` passes a vector to `neighbors()`, which previously may have used implicit vectorization or only the first element.
+
+### Assessment
+**Intentional API tightening in igraph for safety and clarity.**
+
+The code `mean(degree_vals[igraph::neighbors(ig_graph, degree_vals)])` attempts to pass a vector where a scalar is expected.
+
+### Recommendation
+**For DiagrammeR**: Iterate over vertices individually:
+```r
+# Change from:
+neighbors(ig_graph, degree_vals)
+
+# To:
+lapply(seq_along(degree_vals), function(i) neighbors(ig_graph, i))
+```
+
+**Severity**: High - Package functionality broken
+
+---
+
+## 3. jewel - Integer Validation Error
 
 ### Issue
 ```
 Error in rewire_impl(rewire = graph, n = niter, mode = mode) : 
-  At rinterface_extra.c:83 : The value 2.4500000000000002 is not representable as an integer. Invalid value
+  The value 2.4500000000000002 is not representable as an integer. Invalid value
 ```
 
 ### Minimal Reproducible Example
-```r
-library(igraph)
-g <- make_ring(10)
-
-# This works (integer value)
-rewire(g, keeping_degseq(niter = 100))  # SUCCESS
-
-# This fails (non-integer value)
-rewire(g, keeping_degseq(niter = 2.45))  # ERROR
-
-# The jewel package computes niter dynamically, e.g., p * 0.05 where p=49
-p <- 49
-niter <- p * 0.05  # = 2.45
-rewire(g, keeping_degseq(niter = niter))  # ERROR
-```
+See `examples/jewel-integer-issue.R` and `.md`
 
 ### Root Cause
-The `rewire_impl()` function in `R/aaa-auto.R` converts the `n` parameter using `as.numeric()`:
-
-```r
-rewire_impl <- function(rewire, n, mode = c("simple", "simple_loops")) {
-  ensure_igraph(rewire)
-  n <- as.numeric(n)  # This preserves non-integer values
-  mode <- switch_igraph_arg(mode, "simple" = 0L, "simple_loops" = 1L)
-  # ...
-  res <- .Call(R_igraph_rewire, rewire, n, mode)
-}
-```
-
-However, the C code in `src/rinterface_extra.c` now strictly validates that numeric values are representable as integers:
-
-```c
-if (((igraph_integer_t) REAL(value)[0]) != REAL(value)[0]) {
-  igraph_errorf("The value %.17g is not representable as an integer.",
-                __FILE__, __LINE__, IGRAPH_EINVAL, REAL(value)[0]);
-}
-```
-
-Previously, the C code may have silently truncated or rounded non-integer values, but now it explicitly rejects them.
+- `rewire_impl()` converts n with `as.numeric()`, preserving fractional parts
+- C code now strictly validates that numeric values are representable as integers
+- Previously may have silently truncated, now explicitly rejects
 
 ### Assessment
-**This is a behavior change in igraph that uncovered a bug in the jewel package.**
+**This uncovered a bug in the jewel package.**
 
-The `niter` parameter should logically be an integer (number of iterations), and the jewel package should be rounding or truncating the computed value. However, igraph's stricter validation now makes this explicit.
+The `niter` parameter should logically be an integer (number of iterations). jewel computes `niter <- p * 0.05` which results in non-integer values.
 
 ### Recommendation
-The fix should be in the jewel package - they should ensure `niter` is an integer:
+**For jewel**: Use integer rounding:
 ```r
 niter <- ceiling(p * 0.05)  # or floor() or round()
 ```
 
-However, igraph could be more user-friendly by automatically rounding the value in `rewire_keeping_degseq()` before passing to `rewire_impl()`:
+**For igraph** (backward compatibility option): Add `as.integer()` in `rewire_keeping_degseq()` before calling `rewire_impl()`.
 
-```r
-rewire_keeping_degseq <- function(graph, loops, niter) {
-  loops <- as.logical(loops)
-  niter <- as.integer(niter)  # Add explicit integer conversion
-  mode <- if (loops) "simple_loops" else "simple"
-  
-  rewire_impl(
-    rewire = graph,
-    n = niter,
-    mode = mode
-  )
-}
-```
+**Severity**: High - Package functionality broken
 
-This would maintain backward compatibility while still enforcing the integer requirement.
+---
 
-## 3. rSpectral - Modularity Calculation Changes
+## 4. manynet - Scalar Integer Validation
 
 ### Issue
-Test failures showing modularity values have changed:
+```
+Error in `lastcit_game_impl(...)`:
+Expecting a scalar integer but received a vector of length 2.
+```
+
+### Root Cause
+igraph added stricter validation for scalar parameters. The C code now validates that parameters expecting scalars are indeed scalars, not vectors.
+
+### Assessment
+**Stricter type checking in igraph.**
+
+manynet's `generate_citations()` may be passing a vector where a scalar is expected.
+
+### Recommendation
+**For manynet**: Ensure scalar values:
+```r
+# If only first value intended:
+edges <- edges[1]
+
+# If multiple values intended, iterate:
+lapply(edges_vec, function(e) sample_last_cit(n, edges = e, ...))
+```
+
+**Severity**: High - Package functionality broken
+
+---
+
+## 5. rSpectral - Modularity Calculation Changes
+
+### Issue
+Test failures due to different modularity values:
 - Expected: 0.408, Actual: 0.432 (difference: +0.024)
 - Expected: 0.3776, Actual: 0.3758 (difference: -0.0018)
 
-### Root Cause
-From NEWS.md:
-```
-# igraph 2.2.1.9004
-- Use `"weights"` edge attribute in `modularity()` if available.
-```
+### Minimal Reproducible Example
+See `examples/rspectral-modularity-issue.R` and `.md`
 
-The `modularity_impl()` function in `R/aaa-auto.R` now has this code:
+### Root Cause
+igraph v2.2.1.9004 changed `modularity()` to automatically use the `"weight"` edge attribute if present:
 
 ```r
 if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -137,100 +149,78 @@ if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
 }
 ```
 
-This means that:
-1. If the graph has a "weight" edge attribute, it will be automatically used for modularity calculations
-2. Even if you explicitly pass `weights = NULL`, the function will still use the graph's weight attribute
-3. There is no way to disable weights if the graph has a weight attribute
-
-Previously, `weights = NULL` meant "don't use weights", but now it means "use default weights if available".
-
-Additionally, there's a note in the test output:
-```
-This graph was created by an old(er) igraph version.
-i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
-For now we convert it on the fly...
-```
-
-This suggests the test is using pre-existing graph objects that may have been created with an older version of igraph, and those graphs may have inadvertently gained or lost weight attributes during the upgrade process.
-
-### Assessment
-**This is an inadvertent breaking change in igraph, but a workaround exists.**
-
-The automatic use of weights in modularity calculations is a behavior change that:
-1. Affects existing code that doesn't expect weights to be used
-2. Cannot be overridden by passing `weights = NULL` (which intuitively should mean "don't use weights")
-3. Makes the behavior dependent on whether the graph happens to have a "weight" attribute
-
-The modularity differences are small but significant for tests that check exact values.
-
-**However**, passing `weights = numeric()` provides a simple workaround to force unweighted calculations.
-
 ### Workaround
-**A workaround exists**: Passing `weights = numeric()` (an empty numeric vector) effectively disables auto-detection and forces unweighted modularity calculation.
+**A workaround exists**: Passing `weights = numeric()` effectively disables auto-detection:
 
 ```r
-# With weight attribute, but want unweighted modularity
-E(g)$weight <- runif(ecount(g))
-modularity(g, membership, weights = numeric())  # Unweighted result
+modularity(g, membership, weights = numeric())  # Forces unweighted calculation
 ```
 
-This works because:
-1. `numeric()` is not `NULL`, so auto-detection is skipped
-2. The condition `!all(is.na(numeric()))` is `FALSE` (since `all()` of empty vector returns `TRUE`)
-3. This causes the code to set `weights <- NULL` internally
+This works because `numeric()` is not `NULL` (skips auto-detection), but `!all(is.na(numeric()))` is `FALSE`, causing the code to set `weights <- NULL` internally.
+
+### Assessment
+**Inadvertent breaking change in igraph, but workaround available.**
 
 ### Recommendation
-**For rSpectral** (and other affected packages):
+**For rSpectral**:
 1. Update saved graph objects using `upgrade_graph()`
-2. Review whether graphs should have weights or not
-3. If unweighted modularity is needed despite weight attribute, use `weights = numeric()`
-4. Alternatively, remove unintended weights: `g <- delete_edge_attr(g, "weight")`
-5. Update expected test values if the new weighted behavior is correct
+2. Review whether graphs should have weights
+3. Use `weights = numeric()` for unweighted modularity
+4. Or remove weights: `g <- delete_edge_attr(g, 'weight')`
+5. Update test expectations if weighted behavior is correct
 
-**For igraph maintainers** (design decision):
-- **Option 1**: Document `weights = numeric()` as the official way to disable auto-detection
-- **Option 2**: Change logic so `weights = NULL` explicitly disables auto-detection (requires distinguishing missing argument from explicit `NULL`)
-- **Option 3**: Revert to old behavior (no auto-detection, require explicit `weights = E(graph)$weight`)
+**For igraph**: Document `weights = numeric()` as the official workaround or fix so `weights = NULL` explicitly disables auto-detection.
+
+**Severity**: Medium - Tests fail but workaround available
+
+---
+
+## 6. sfnetworks - from Parameter Requires Single Vertex
+
+### Issue
+```
+Error in `all_shortest_paths(x, from, to, weights = weights, ...)`:
+! `from` must specify exactly one vertex
+```
+
+### Root Cause
+igraph added stricter validation requiring exactly one vertex for the `from` parameter in `all_shortest_paths()`. sfnetworks passes multiple vertices, which previously may have used only the first vertex implicitly.
+
+### Assessment
+**Intentional API tightening in igraph for safety and clarity.**
+
+### Recommendation
+**For sfnetworks**:
+```r
+# If only first vertex intended:
+from <- from[1]
+
+# If all vertices intended, iterate:
+lapply(from, function(f) all_shortest_paths(g, from = f, to = to))
+
+# Or provide clear warning about multiple vertices
+```
+
+**Severity**: High - Package functionality broken
+
+---
 
 ## Conclusion
 
-| Package | Issue Type | Root Cause | Recommendation |
-|---------|-----------|------------|----------------|
-| Cascade | Namespace collision | New `circulant()` export | Consider unexported constructor or document as known issue |
-| jewel | Integer validation | Stricter type checking in C code | Add `as.integer()` conversion in igraph for backward compatibility |
-| rSpectral | Modularity changes | Automatic weight usage that cannot be overridden with `weights = NULL` | Use `weights = numeric()` workaround, or remove weight attributes |
+| Package | Issue Type | Root Cause | Severity | Recommendation |
+|---------|-----------|------------|----------|----------------|
+| Cascade | Namespace collision | New `circulant()` export | Low | Fix in Cascade NAMESPACE |
+| DiagrammeR | API tightening | `neighbors()` requires scalar | High | Iterate over vertices |
+| jewel | Type validation | Stricter integer checking | High | Round niter values |
+| manynet | Type validation | Scalar parameter checking | High | Ensure scalar inputs |
+| rSpectral | Behavior change | Automatic weight usage | Medium | Use `weights = numeric()` |
+| sfnetworks | API tightening | `from` requires scalar | High | Handle single/multiple vertices |
 
-**Overall Assessment**: 
-- **1 inadvertent behavior change** (Cascade - namespace collision with minor impact)
-- **1 uncovered downstream bug** (jewel - should use integer niter, but igraph could be more forgiving)
-- **1 breaking change** (rSpectral - automatic weights in modularity that cannot be disabled)
+### Overall Assessment
 
-### Detailed Recommendations
+- **1 namespace collision** (Cascade) - Minor impact
+- **3 API tightening changes** (DiagrammeR, manynet, sfnetworks) - Intentional safety improvements
+- **1 uncovered downstream bug** (jewel) - Should use integer values
+- **1 behavior change** (rSpectral) - Automatic weights with workaround available
 
-#### For Cascade (Namespace Collision)
-- **Impact**: Minor - just a warning, doesn't prevent package from working
-- **igraph action**: Consider not exporting the `circulant` constructor alias, only export `make_circulant()`
-- **Package action**: Cascade can add explicit import: `importFrom(magic, circulant)` in NAMESPACE
-
-#### For jewel (Integer Validation)
-- **Impact**: High - package completely breaks
-- **igraph action**: Add backward compatibility by converting to integer in `rewire_keeping_degseq()`:
-  ```r
-  rewire_keeping_degseq <- function(graph, loops, niter) {
-    loops <- as.logical(loops)
-    niter <- as.integer(round(niter))  # Round and convert to integer
-    mode <- if (loops) "simple_loops" else "simple"
-    rewire_impl(rewire = graph, n = niter, mode = mode)
-  }
-  ```
-- **Package action**: jewel should fix their code to use `ceiling(p * 0.05)` instead of `p * 0.05`
-
-#### For rSpectral (Modularity Changes)  
-- **Impact**: Medium - tests fail but core functionality may still work
-- **Workaround available**: Use `weights = numeric()` to disable auto-detection
-- **Package action**: 
-  1. Update saved graphs with `upgrade_graph()`
-  2. Check for unintended weight attributes
-  3. Use `modularity(g, membership, weights = numeric())` for unweighted calculation
-  4. Or remove weights: `g <- delete_edge_attr(g, "weight")`
-  5. Update test expectations if weighted behavior is correct
+Most issues stem from igraph's improved type safety and parameter validation. These are generally positive changes that make the API more explicit and catch errors earlier. Downstream packages need updates to handle the stricter requirements.

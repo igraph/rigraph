@@ -1,75 +1,56 @@
-#!/usr/bin/env Rscript
-# Minimal reproducible example for rSpectral modularity issue
-# Issue: Modularity values have changed slightly
-
-cat("=== rSpectral Modularity Calculation Issue ===\n\n")
+# rSpectral modularity calculation issue
+# Issue: Modularity values have changed due to automatic weight detection
 
 library(igraph)
 
 # Create a test graph
-cat("Creating test graph...\n")
 g <- make_full_graph(5) + make_full_graph(5) + make_full_graph(5)
-cat("Graph:", vcount(g), "vertices,", ecount(g), "edges\n\n")
-
-# Test modularity with clear community structure
 membership <- c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3)
 
-cat("Test 1: Modularity without weights\n")
+# Test 1: Modularity without weights
 mod1 <- modularity(g, membership, weights = NULL)
-cat("  Modularity:", mod1, "\n\n")
+mod1
 
-cat("Test 2: Modularity with default (may use weights if present)\n")
+# Test 2: Modularity with default (may use weights if present)
 mod2 <- modularity(g, membership)
-cat("  Modularity:", mod2, "\n\n")
+mod2
 
 # Add weights to demonstrate the issue
-cat("Test 3: Adding edge weights to graph\n")
 E(g)$weight <- 1.0
-cat("  Added uniform weights of 1.0\n")
 mod3 <- modularity(g, membership)
-cat("  Modularity with weights:", mod3, "\n\n")
+mod3
 
 # Different weights
-cat("Test 4: Using random edge weights\n")
 set.seed(42)
 E(g)$weight <- runif(ecount(g))
 mod4 <- modularity(g, membership)
-cat("  Modularity with random weights:", mod4, "\n\n")
+mod4
 
-cat("Test 5: Explicitly passing weights = NULL (doesn't disable auto-detection!)\n")
+# Test: weights = NULL doesn't disable auto-detection!
 mod5 <- modularity(g, membership, weights = NULL)
-cat("  Modularity (weights = NULL):", mod5, "\n")
-cat("  Note: This does NOT match Test 1 because weights = NULL doesn't disable auto-detection!\n")
-cat("  The function still uses the 'weight' attribute if it exists.\n\n")
+mod5  # Same as mod4, not mod1!
 
-cat("Test 6: WORKAROUND - Using weights = numeric() to disable auto-detection\n")
+# WORKAROUND: Using weights = numeric() to disable auto-detection
 mod6 <- modularity(g, membership, weights = numeric())
-cat("  Modularity (weights = numeric()):", mod6, "\n")
-cat("  Note: This DOES match Test 1! The workaround works!\n")
-cat("  numeric() is not NULL, so auto-detection is skipped\n")
-cat("  Then !all(is.na(numeric())) is FALSE, so weights gets set to NULL internally\n\n")
+mod6  # Matches mod1!
 
-cat("Root cause:\n")
-cat("- igraph v2.2.1.9004 added: 'Use \"weights\" edge attribute in modularity() if available'\n")
-cat("- modularity() now automatically uses edge weights if present\n")
-cat("- Previously may have ignored weights by default\n")
-cat("- rSpectral tests also show: 'This graph was created by an old(er) igraph version'\n\n")
+# Root cause:
+# - igraph v2.2.1.9004 added: 'Use "weights" edge attribute in modularity() if available'
+# - modularity() now automatically uses edge weights if present
+# - weights = NULL doesn't disable this auto-detection
+# - numeric() is not NULL (skips auto-detection), but !all(is.na(numeric())) is FALSE,
+#   so weights gets set to NULL internally
 
-cat("Assessment:\n")
-cat("- This is likely an inadvertent behavior change in igraph\n")
-cat("- Modularity differences are small but significant for exact tests\n")
-cat("- Expected: 0.408, Actual: 0.432 (difference: +0.024)\n")
-cat("- Expected: 0.3776, Actual: 0.3758 (difference: -0.0018)\n\n")
+# Assessment:
+# - This is an inadvertent behavior change in igraph
+# - Modularity differences are small but significant for exact tests
+# - Expected: 0.408, Actual: 0.432 (difference: +0.024)
+# - Expected: 0.3776, Actual: 0.3758 (difference: -0.0018)
 
-cat("Recommendation for rSpectral:\n")
-cat("1. Update saved graph objects using upgrade_graph()\n")
-cat("2. Review whether graphs should have weights or not\n")
-cat("3. WORKAROUND: Use weights = numeric() to get unweighted modularity\n")
-cat("   Example: modularity(g, membership, weights = numeric())\n")
-cat("4. Or remove unintended weights: g <- delete_edge_attr(g, 'weight')\n")
-cat("5. Update expected test values if the new weighted modularity is correct\n\n")
-
-cat("Recommendation for igraph:\n")
-cat("1. Document weights = numeric() as the official workaround\n")
-cat("2. Or fix so that weights = NULL explicitly disables auto-detection\n")
-cat("3. Or clearly document this as a breaking change in NEWS.md\n")
+# Recommendation for rSpectral:
+# 1. Update saved graph objects using upgrade_graph()
+# 2. Review whether graphs should have weights or not
+# 3. WORKAROUND: Use weights = numeric() to get unweighted modularity
+#    Example: modularity(g, membership, weights = numeric())
+# 4. Or remove unintended weights: g <- delete_edge_attr(g, 'weight')
+# 5. Update expected test values if the new weighted modularity is correct

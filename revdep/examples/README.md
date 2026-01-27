@@ -1,38 +1,53 @@
 # Reverse Dependency Problem Examples
 
-This directory contains minimal reproducible examples for the three packages that have newly broken checks compared to the most recent CRAN version of igraph.
+This directory contains minimal reproducible examples for packages that have newly broken checks compared to the most recent CRAN version of igraph.
 
 ## Files
 
-- **`cascade-circulant-issue.R`** - Demonstrates the namespace collision between `igraph::circulant` and `magic::circulant`
-- **`jewel-integer-issue.R`** - Demonstrates the strict integer validation error in `rewire_impl()`
-- **`rspectral-modularity-issue.R`** - Demonstrates the automatic weight usage in modularity calculations
+Each issue has two files:
+- `*.R` - Runnable R script with the minimal example
+- `*.md` - Markdown documentation with example output (reprex-style)
+
+### Issues
+
+1. **cascade-circulant-issue** - Namespace collision between `igraph::circulant` and `magic::circulant`
+2. **diagrammer-neighbors-issue** - `neighbors()` now requires exactly one vertex
+3. **jewel-integer-issue** - Strict integer validation in `rewire_impl()`
+4. **manynet-scalar-issue** - Scalar integer validation in `sample_last_cit()`
+5. **rspectral-modularity-issue** - Automatic weight usage in modularity calculations
+6. **sfnetworks-from-issue** - `from` parameter must specify exactly one vertex
 
 ## Running the Examples
 
-Each example is a standalone R script that can be run with:
+Each R script can be run with:
 
 ```r
-Rscript cascade-circulant-issue.R
-Rscript jewel-integer-issue.R
-Rscript rspectral-modularity-issue.R
-```
-
-Or from within R:
-
-```r
-pkgload::load_all()  # Load the development version of igraph
 source("revdep/examples/cascade-circulant-issue.R")
-source("revdep/examples/jewel-integer-issue.R")
-source("revdep/examples/rspectral-modularity-issue.R")
 ```
+
+Or from the command line:
+
+```bash
+Rscript revdep/examples/cascade-circulant-issue.R
+```
+
+## Format
+
+The examples follow a simplified format:
+- No `cat()` statements for output (comments instead)
+- No `tryCatch()` blocks (commented out error cases)
+- Clean, runnable code that can be used with `reprex::reprex()`
+- Corresponding `.md` files show the expected output
 
 ## Summary of Issues
 
 | Package | Issue | Severity | Type |
 |---------|-------|----------|------|
 | Cascade | Namespace collision warning | Low | Inadvertent behavior change |
+| DiagrammeR | `neighbors()` requires single vertex | High | API tightening |
 | jewel | Integer validation error | High | Uncovered downstream bug |
-| rSpectral | Modularity test failures | Medium | Breaking change |
+| manynet | Scalar integer validation | High | API tightening |
+| rSpectral | Modularity test failures | Medium | Behavior change with workaround |
+| sfnetworks | `from` requires single vertex | High | API tightening |
 
 See `../problems-analysis.md` for detailed analysis and recommendations.
