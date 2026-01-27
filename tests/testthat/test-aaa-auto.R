@@ -11982,6 +11982,13 @@ test_that("get_eid_impl errors", {
     to = 2
   ))
 
+  # Test error when from or to is not exactly one vertex
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = c(1, 2),
+    to = 2
+  ))
+
   expect_snapshot_igraph_error(get_eid_impl(
     graph = g,
     from = 1,
