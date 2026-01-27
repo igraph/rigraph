@@ -992,7 +992,7 @@ arpack <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
+  res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym) # ARPACK, no _impl
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -1030,7 +1030,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev) # ARPACK, no _impl
 
   res
 }

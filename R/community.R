@@ -1311,12 +1311,12 @@ show_trace <- function(communities) {
 #####################################################################
 
 community.to.membership2 <- function(merges, vcount, steps) {
-  mode(merges) <- "numeric"
-  mode(vcount) <- "numeric"
-  mode(steps) <- "numeric"
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
-  res + 1
+  res <- community_to_membership_impl(
+    merges = merges - 1,
+    nodes = vcount,
+    steps = steps
+  )
+  res$membership + 1
 }
 
 #####################################################################
@@ -1480,7 +1480,7 @@ cluster_spinglass <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
-    res <- .Call(
+    res <- .Call( # community_spinglass_impl uses different parameter names
       Rx_igraph_spinglass_community,
       graph,
       weights,
@@ -1502,7 +1502,7 @@ cluster_spinglass <- function(
     }
     class(res) <- "communities"
   } else {
-    res <- .Call(
+    res <- .Call( # community_spinglass_single_impl has different API
       Rx_igraph_spinglass_my_community,
       graph,
       weights,
@@ -1858,7 +1858,7 @@ cluster_walktrap <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # community_walktrap_impl lacks output control parameters
     Rx_igraph_walktrap_community,
     graph,
     weights,
@@ -1986,7 +1986,7 @@ cluster_edge_betweenness <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # community_edge_betweenness_impl lacks output control parameters
     Rx_igraph_community_edge_betweenness,
     graph,
     weights,
@@ -2078,7 +2078,7 @@ cluster_fast_greedy <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # community_fastgreedy_impl lacks output control parameters
     Rx_igraph_community_fastgreedy,
     graph,
     as.logical(merges),
@@ -2100,7 +2100,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(R_igraph_levc_arpack_multiplier, externalP, externalE, v)
+    .Call(R_igraph_levc_arpack_multiplier, externalP, externalE, v) # internal ARPACK, no _impl
   }
   f
 }
