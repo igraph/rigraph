@@ -325,7 +325,7 @@ max_cliques <- function(
       tmpfile <- FALSE
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_maximal_cliques_file,
       graph,
       subset,
@@ -350,7 +350,7 @@ max_cliques <- function(
     }
 
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_maximal_cliques,
       graph,
       subset_arg,
@@ -403,7 +403,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max) # maximal_cliques_count_impl() has no subset argument
+  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
 
   res
 }
@@ -579,7 +579,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # no _impl
+  res <- .Call(
     Rx_igraph_independent_vertex_sets,
     graph,
     as.numeric(min),

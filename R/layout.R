@@ -858,7 +858,7 @@ layout_as_tree <- function(
   flip.y <- as.logical(flip.y)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # no _impl
+  res <- .Call(
     Rx_igraph_layout_reingold_tilford,
     graph,
     root,
@@ -1575,7 +1575,7 @@ layout_with_fr <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_fruchterman_reingold,
       graph,
       coords,
@@ -1589,7 +1589,7 @@ layout_with_fr <- function(
       grid
     )
   } else {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_fruchterman_reingold_3d,
       graph,
       coords,
@@ -1767,7 +1767,7 @@ layout_with_graphopt <- function(
   max.sa.movement <- as.double(max.sa.movement)
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # no _impl
+  .Call(
     Rx_igraph_layout_graphopt,
     graph,
     niter,
@@ -1930,7 +1930,7 @@ layout_with_kk <- function(
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_kamada_kawai,
       graph,
       coords,
@@ -1944,7 +1944,7 @@ layout_with_kk <- function(
       maxy
     )
   } else {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_kamada_kawai_3d,
       graph,
       coords,
@@ -2038,7 +2038,7 @@ layout_with_lgl <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # no _impl
+  .Call(
     Rx_igraph_layout_lgl,
     graph,
     as.double(maxiter),
@@ -2550,7 +2550,7 @@ merge_coords <- function(graphs, layouts, method = "dla") {
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # no _impl
+  .Call(
     Rx_igraph_layout_merge_dla,
     graphs,
     layouts
@@ -2893,7 +2893,7 @@ layout_with_drl <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_drl,
       graph,
       seed,
@@ -2902,7 +2902,7 @@ layout_with_drl <- function(
       weights
     )
   } else {
-    res <- .Call( # no _impl
+    res <- .Call(
       Rx_igraph_layout_drl_3d,
       graph,
       seed,

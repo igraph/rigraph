@@ -20,5 +20,5 @@
 ###################################################################
 
 get.all.simple.paths.pp <- function(vect) {
-  .Call(Rx_igraph_get_all_simple_paths_pp, vect) # no _impl
+  .Call(Rx_igraph_get_all_simple_paths_pp, vect)
 }

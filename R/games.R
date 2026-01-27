@@ -1933,7 +1933,7 @@ traits <- function(
 #'
 sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # no _impl
+  res <- .Call(
     Rx_igraph_grg_game,
     as.double(nodes),
     as.double(radius),
