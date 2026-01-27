@@ -444,9 +444,11 @@ igraph_is_bigraphical:
 # Visitors
 #######################################
 
+# We ignore the callback function for autogeneration and provide our own _closure function
+# that calls the underlying C implementation.
+# See tools/AGENTS.md for details.
 igraph_bfs:
-    # Has callback parameter (BFS_FUNC)
-    IGNORE: RR, RC, RInit
+    IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_bfs_closure:
     PARAMS: |-
@@ -463,8 +465,7 @@ igraph_bfs_simple:
     DEPS: root ON graph, order ON graph
 
 igraph_dfs:
-    # Has callback parameter (DFS_FUNC)
-    IGNORE: RR, RC, RInit
+    IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_dfs_closure:
     PARAMS: |-
@@ -675,8 +676,7 @@ igraph_le_community_to_membership:
 igraph_reindex_membership:
 
 igraph_community_leading_eigenvector:
-    # Has callback parameter - use manual wrapper
-    IGNORE: RR, RC, RInit
+    IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_community_leading_eigenvector_callback_closure:
     PARAMS: |-
@@ -947,8 +947,6 @@ igraph_simple_cycles_callback_closure:
 # Motifs
 #######################################
 
-# We ignore the callback function for autogeneration and provide our own _closure function
-# that calls the underlying C implementation
 igraph_motifs_randesu_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
