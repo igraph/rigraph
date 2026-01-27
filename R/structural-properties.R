@@ -2407,6 +2407,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #' girth(g)
 #'
 girth <- function(graph, circle = TRUE) {
+  # girth_impl always computes circle; slightly less efficient when circle=FALSE
   res <- girth_impl(graph = graph)
   if (res$girth == 0) {
     res$girth <- Inf
