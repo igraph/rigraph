@@ -91,84 +91,84 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 as_adj_list(g)
 #> [[1]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1]  2 10
 #> 
 #> [[2]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 1 3
 #> 
 #> [[3]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 2 4
 #> 
 #> [[4]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 3 5
 #> 
 #> [[5]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 4 6
 #> 
 #> [[6]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 5 7
 #> 
 #> [[7]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 6 8
 #> 
 #> [[8]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 7 9
 #> 
 #> [[9]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1]  8 10
 #> 
 #> [[10]]
-#> + 2/10 vertices, from 2f33ed0:
+#> + 2/10 vertices, from a5994b9:
 #> [1] 1 9
 #> 
 as_adj_edge_list(g)
 #> [[1]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 1-- 2 1--10
 #> 
 #> [[2]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 1--2 2--3
 #> 
 #> [[3]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 2--3 3--4
 #> 
 #> [[4]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 3--4 4--5
 #> 
 #> [[5]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 4--5 5--6
 #> 
 #> [[6]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 5--6 6--7
 #> 
 #> [[7]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 6--7 7--8
 #> 
 #> [[8]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 7--8 8--9
 #> 
 #> [[9]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 8-- 9 9--10
 #> 
 #> [[10]]
-#> + 2/10 edges from 2f33ed0:
+#> + 2/10 edges from a5994b9:
 #> [1] 1--10 9--10
 #> 
 ```
