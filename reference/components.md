@@ -106,7 +106,6 @@ consecutive depth-first searches.
 Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
-[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
@@ -142,7 +141,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`is_connected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected).
+[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected).
 
 ## Examples
 
@@ -172,9 +171,9 @@ groups(clu)
 #> [1] 20
 #> 
 largest_component(g)
-#> IGRAPH 53b589f U--- 14 14 -- Erdos-Renyi (gnp) graph
+#> IGRAPH b671d54 U--- 14 14 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from 53b589f:
+#> + edges from b671d54:
 #>  [1]  2-- 4  4-- 5  2-- 6  2-- 7  1-- 8  2-- 8  2--10  3--12  7--12  9--12
 #> [11] 11--12  9--13 10--13  4--14
 ```

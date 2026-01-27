@@ -7,7 +7,7 @@ Random graph with a fixed number of edges and vertices.
 ``` r
 sample_gnm(n, m, directed = FALSE, loops = FALSE)
 
-gnm(n, m, directed = FALSE, loops = FALSE)
+gnm(...)
 ```
 
 ## Arguments
@@ -27,6 +27,10 @@ gnm(n, m, directed = FALSE, loops = FALSE)
 - loops:
 
   Logical, whether to add loop edges, defaults to `FALSE`.
+
+- ...:
+
+  Passed to `sample_gnm()`.
 
 ## Value
 
@@ -82,5 +86,5 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnm(1000, 1000)
 degree_distribution(g)
-#>  [1] 0.131 0.276 0.256 0.201 0.090 0.033 0.009 0.003 0.000 0.001
+#> [1] 0.148 0.267 0.269 0.153 0.106 0.038 0.011 0.008
 ```

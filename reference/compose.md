@@ -92,7 +92,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -108,7 +107,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> IGRAPH 5fd807e U--- 10 36 -- 
+#> IGRAPH e4a83e0 U--- 10 36 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:
@@ -123,7 +122,7 @@ print_all(gc)
 #>  9 --  1  1  2 10
 #> 10 --  1  2  2  3  4  5  6  7  8  9 10 10
 print_all(simplify(gc))
-#> IGRAPH 720b2b8 U--- 10 24 -- 
+#> IGRAPH 4506d1e U--- 10 24 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:

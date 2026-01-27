@@ -67,9 +67,7 @@ assortativity_degree(graph, directed = TRUE)
 
   Vector giving the vertex types. They as assumed to be integer numbers,
   starting with one. Non-integer values are converted to integers with
-  [`as.integer()`](https://rdrr.io/r/base/integer.html). Character
-  vectors are converted to integers using
-  [`as.factor()`](https://rdrr.io/r/base/factor.html).
+  [`as.integer()`](https://rdrr.io/r/base/integer.html).
 
 ## Value
 
@@ -129,9 +127,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`assortativity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity),
-[`assortativity_nominal()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal),
-[`assortativity_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree).
+[`assortativity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity),
+[`assortativity_nominal()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal),
+[`assortativity_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree).
 
 ## Examples
 

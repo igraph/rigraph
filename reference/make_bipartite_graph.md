@@ -8,7 +8,7 @@ allowed between different kinds.
 ``` r
 make_bipartite_graph(types, edges, directed = FALSE)
 
-bipartite_graph(types, edges, directed = FALSE)
+bipartite_graph(...)
 ```
 
 ## Arguments
@@ -33,6 +33,10 @@ bipartite_graph(types, edges, directed = FALSE)
   Whether to create a directed graph, boolean constant. Note that by
   default undirected graphs are created, as this is more common for
   bipartite graphs.
+
+- ...:
+
+  Passed to `make_bipartite_graph()`.
 
 ## Value
 
@@ -74,8 +78,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> IGRAPH d16ca87 U--B 10 5 -- 
+#> IGRAPH 7b76ce7 U--B 10 5 -- 
 #> + attr: type (v/l)
-#> + edges from d16ca87:
+#> + edges from 7b76ce7:
 #> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```

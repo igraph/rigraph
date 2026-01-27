@@ -15,7 +15,7 @@ a graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></he
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ a graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></he
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Graph layouts</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_.Rd</code></div>
     </div>
 
@@ -115,23 +115,10 @@ final results.</p>
 
 
 <p>Modifiers modify how a layout calculation is performed.
-Modifiers are applied in the order they are specified as arguments to
-<code>layout_()</code>.</p>
-<p>There are two types of modifiers:</p><ul><li><p><strong>Pre-layout modifiers</strong> affect how the layout is calculated.
-Only one pre-layout modifier can be used at a time.</p></li>
-<li><p><strong>Post-layout modifiers</strong> transform the resulting coordinates.
-Multiple post-layout modifiers can be chained together.</p></li>
-</ul><p>Currently implemented modifiers:</p><ul><li><p><code><a href="component_wise.html">component_wise()</a></code> (pre-layout) calculates the layout separately
-for each component of the graph, and then merges them.</p></li>
-<li><p><code><a href="normalize.html">normalize()</a></code> (post-layout) scales the layout to a square.</p></li>
-</ul><p>Custom modifiers can be created using the <code><a href="layout_modifier.html">layout_modifier()</a></code> function.
-A custom modifier must specify:</p><ul><li><p><code>id</code>: A unique identifier string for the modifier</p></li>
-<li><p><code>type</code>: Either <code>"pre"</code> for pre-layout or <code>"post"</code> for post-layout</p></li>
-<li><p><code>args</code>: A list of arguments to pass to the apply function</p></li>
-<li><p><code>apply</code>: A function with signature
-<code>function(graph, layout, modifier_args)</code> that performs the modification.
-For pre-layout modifiers, <code>layout</code> is the layout specification.
-For post-layout modifiers, <code>layout</code> is the coordinate matrix to transform.</p></li>
+Currently implemented modifiers:</p><ul><li><p><code><a href="component_wise.html">component_wise()</a></code> calculates the layout separately
+for each component of the graph, and then merges
+them.</p></li>
+<li><p><code><a href="normalize.html">normalize()</a></code> scales the layout to a square.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -167,27 +154,6 @@ graph as an attribute.</p>
 <span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">layout_</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="layout_as_star.html">as_star</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, layout <span class="op">=</span> <span class="va">coords</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="layout_-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Using modifiers</span></span></span>
-<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">layout_</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="layout_in_circle.html">in_circle</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="component_wise.html">component_wise</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="normalize.html">normalize</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, layout <span class="op">=</span> <span class="va">coords</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="layout_-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Creating a custom post-layout modifier</span></span></span>
-<span class="r-in"><span><span class="va">scale_by</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">factor</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layout_modifier.html">layout_modifier</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    id <span class="op">=</span> <span class="st">"scale_by"</span>,</span></span>
-<span class="r-in"><span>    type <span class="op">=</span> <span class="st">"post"</span>,</span></span>
-<span class="r-in"><span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>factor <span class="op">=</span> <span class="va">factor</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    apply <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph</span>, <span class="va">layout</span>, <span class="va">modifier_args</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>      <span class="va">layout</span> <span class="op">*</span> <span class="va">modifier_args</span><span class="op">$</span><span class="va">factor</span></span></span>
-<span class="r-in"><span>    <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">layout_</span><span class="op">(</span><span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="layout_in_circle.html">in_circle</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">scale_by</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, layout <span class="op">=</span> <span class="va">coords</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="layout_-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

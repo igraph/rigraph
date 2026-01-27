@@ -48,7 +48,6 @@ Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
-[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
 ## Author

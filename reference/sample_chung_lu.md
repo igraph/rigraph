@@ -201,7 +201,7 @@ Random graph models (games)
 
 ## Related documentation in the C library
 
-[`chung_lu_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game).
+[`chung_lu_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game).
 
 ## Examples
 
@@ -212,11 +212,11 @@ rowMeans(replicate(
   100,
   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2)), mode = "out")
 ))
-#> [1] 1.18 3.05 2.00 1.04
+#> [1] 0.88 3.04 1.96 1.03
 
 rowMeans(replicate(
   100,
   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
-#> [1] 0.74 1.69 1.15 0.74
+#> [1] 0.77 1.71 1.37 0.66
 ```

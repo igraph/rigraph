@@ -97,7 +97,7 @@ Nepusz <ntamas@gmail.com> for this manual page.
 
 ## Related documentation in the C library
 
-[`automorphism_group()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group).
+[`automorphism_group()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_automorphism_group).
 
 ## Examples
 
@@ -107,11 +107,11 @@ Nepusz <ntamas@gmail.com> for this manual page.
 g <- make_ring(10)
 automorphism_group(g)
 #> [[1]]
-#> + 10/10 vertices, from 45c1367:
+#> + 10/10 vertices, from 9c1fbf0:
 #>  [1]  1 10  9  8  7  6  5  4  3  2
 #> 
 #> [[2]]
-#> + 10/10 vertices, from 45c1367:
+#> + 10/10 vertices, from 9c1fbf0:
 #>  [1]  2  3  4  5  6  7  8  9 10  1
 #> 
 ```

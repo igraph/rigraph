@@ -33,4 +33,4 @@ Other hierarchical random graph functions:
 
 ## Related documentation in the C library
 
-[`from_hrg_dendrogram()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_from_hrg_dendrogram).
+[`from_hrg_dendrogram()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_from_hrg_dendrogram).

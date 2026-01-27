@@ -135,7 +135,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`laplacian_spectral_embedding()`](https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_laplacian_spectral_embedding).
+[`laplacian_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding).
 
 ## Examples
 

@@ -13,7 +13,7 @@ make_full_bipartite_graph(
   mode = c("all", "out", "in")
 )
 
-full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
+full_bipartite_graph(...)
 ```
 
 ## Arguments
@@ -36,6 +36,10 @@ full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
   is ‘`out`’ then all vertices of the first kind are connected to the
   others; ‘`in`’ specifies the opposite direction; ‘`all`’ creates
   mutual edges. This argument is ignored for undirected graphs.x
+
+- ...:
+
+  Passed to `make_full_bipartite_graph()`.
 
 ## Value
 

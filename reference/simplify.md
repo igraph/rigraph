@@ -97,7 +97,6 @@ Other functions for manipulating graph structure:
 [`permute()`](https://r.igraph.org/reference/permute.md),
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -108,8 +107,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`simplify()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_simple).
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple).
 
 ## Examples
 

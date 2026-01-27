@@ -45,7 +45,7 @@ Other flow:
 
 ## Related documentation in the C library
 
-[`is_minimal_separator()`](https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_minimal_separator).
+[`is_minimal_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator).
 
 ## Examples
 

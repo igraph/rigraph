@@ -19,7 +19,7 @@ probability that an old vertex is cited depends on its in-degree
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ probability that an old vertex is cited depends on its in-degree
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generate an evolving random graph with preferential attachment and aging</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_pa_age.Rd</code></div>
     </div>
 
@@ -81,22 +81,7 @@ probability that an old vertex is cited depends on its in-degree
 <span>  time.window <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pa_age</span><span class="op">(</span></span>
-<span>  <span class="va">n</span>,</span>
-<span>  <span class="va">pa.exp</span>,</span>
-<span>  <span class="va">aging.exp</span>,</span>
-<span>  m <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  aging.bin <span class="op">=</span> <span class="fl">300</span>,</span>
-<span>  out.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  out.seq <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  out.pref <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  zero.deg.appeal <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  zero.age.appeal <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  deg.coef <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  age.coef <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  time.window <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pa_age</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -172,6 +157,10 @@ of the vertices with age zero. It is usually zero, see details below.</p></dd>
 <dd><p>Integer constant, if NULL only adjacent added in the last
 <code>time.windows</code> time steps are counted as a basis of the preferential
 attachment. See also details below.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>sample_pa_age()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -261,11 +250,11 @@ the vertex itself except if <code>out.pref</code> is set to <code>TRUE</code>.</
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">3</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 195</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 25</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

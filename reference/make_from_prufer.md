@@ -8,7 +8,7 @@ sequence.
 ``` r
 make_from_prufer(prufer)
 
-from_prufer(prufer)
+from_prufer(...)
 ```
 
 ## Arguments
@@ -16,6 +16,10 @@ from_prufer(prufer)
 - prufer:
 
   The Prüfer sequence to convert into a graph
+
+- ...:
+
+  Passed to `make_from_prufer()`
 
 ## Value
 
@@ -43,7 +47,7 @@ Other trees:
 
 ## Related documentation in the C library
 
-[`from_prufer()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer).
+[`from_prufer()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_from_prufer).
 
 ## Examples
 

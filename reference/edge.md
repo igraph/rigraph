@@ -59,7 +59,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -75,7 +74,7 @@ g <- g + edge(1, 5, color = "green") +
   edge("8|9")
 
 E(g)[[]]
-#> + 11/11 edges from 4ac2d97:
+#> + 11/11 edges from 972a25b:
 #>    tail head tid hid color
 #> 1     1    2   1   2   red
 #> 2     2    3   2   3   red

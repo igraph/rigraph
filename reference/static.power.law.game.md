@@ -46,11 +46,12 @@ static.power.law.game(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the graph.
+  Logical scalar, whether to allow loop edges in the generated graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the graph.
+  Logical scalar, whether to allow multiple edges in the generated
+  graph.
 
 - finite.size.correction:
 

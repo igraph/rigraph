@@ -193,15 +193,15 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`write_graph_dimacs_flow()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dimacs_flow),
-[`write_graph_dot()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot),
-[`write_graph_edgelist()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist),
-[`write_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml),
-[`write_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml),
-[`write_graph_leda()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda),
-[`write_graph_lgl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_lgl),
-[`write_graph_ncol()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_ncol),
-[`write_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek).
+[`write_graph_dimacs_flow()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dimacs_flow),
+[`write_graph_dot()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot),
+[`write_graph_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist),
+[`write_graph_gml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml),
+[`write_graph_graphml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml),
+[`write_graph_leda()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda),
+[`write_graph_lgl()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_lgl),
+[`write_graph_ncol()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_ncol),
+[`write_graph_pajek()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek).
 
 ## Examples
 

@@ -141,7 +141,7 @@ degree(undirected_graph)
 #>  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 #>  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 is_simple(undirected_graph) # sometimes TRUE, but can be FALSE
-#> [1] FALSE
+#> [1] TRUE
 
 
 directed_graph <- sample_degseq(1:10, 10:1)

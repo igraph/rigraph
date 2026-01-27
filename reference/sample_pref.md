@@ -15,15 +15,7 @@ sample_pref(
   loops = FALSE
 )
 
-pref(
-  nodes,
-  types,
-  type.dist = rep(1, types),
-  fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
-  directed = FALSE,
-  loops = FALSE
-)
+pref(...)
 
 sample_asym_pref(
   nodes,
@@ -33,13 +25,7 @@ sample_asym_pref(
   loops = FALSE
 )
 
-asym_pref(
-  nodes,
-  types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
-  loops = FALSE
-)
+asym_pref(...)
 ```
 
 ## Arguments
@@ -72,11 +58,15 @@ asym_pref(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical constant, whether to create a directed graph.
 
 - loops:
 
-  Logical scalar, whether self-loops are allowed in the graph.
+  Logical constant, whether self-loops are allowed in the graph.
+
+- ...:
+
+  Passed to the constructor, `sample_pref()` or `sample_asym_pref()`.
 
 - type.dist.matrix:
 

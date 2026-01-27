@@ -53,7 +53,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -75,7 +74,7 @@ plot(g2)
 
 g3 <- g2 + path("e", "f", "g", weight = 1:2, color = "red")
 E(g3)[[]]
-#> + 5/5 edges from 7cfa5bb (vertex names):
+#> + 5/5 edges from 2c5046c (vertex names):
 #>   tail head tid hid weight color
 #> 1    a    b   1   2     NA  <NA>
 #> 2    b    c   2   3     NA  <NA>
@@ -85,7 +84,7 @@ E(g3)[[]]
 
 g4 <- g3 + path(c("f", "c", "j", "d"), width = 1:3, color = "green")
 E(g4)[[]]
-#> + 8/8 edges from 2dc3142 (vertex names):
+#> + 8/8 edges from 1b3a005 (vertex names):
 #>   tail head tid hid weight color width
 #> 1    a    b   1   2     NA  <NA>    NA
 #> 2    b    c   2   3     NA  <NA>    NA

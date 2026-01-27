@@ -41,18 +41,14 @@ Other deterministic constructors:
 [`graph_from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md),
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 Constructor modifiers (and related functions)
 [`sample_()`](https://r.igraph.org/reference/sample_.md),

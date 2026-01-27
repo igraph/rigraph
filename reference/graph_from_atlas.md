@@ -20,7 +20,7 @@ are listed:
 ``` r
 graph_from_atlas(n)
 
-atlas(n)
+atlas(...)
 ```
 
 ## Arguments
@@ -28,6 +28,10 @@ atlas(n)
 - n:
 
   The id of the graph to create.
+
+- ...:
+
+  Passed to `graph_from_atlas()`.
 
 ## Value
 
@@ -40,31 +44,27 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 ## Examples
 
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 89a7629 U--- 7 6 -- Graph from the Atlas #282
+#> IGRAPH e2bbd16 U--- 7 6 -- Graph from the Atlas #282
 #> + attr: name (g/c), n (g/n)
-#> + edges from 89a7629:
+#> + edges from e2bbd16:
 #> [1] 1--5 1--4 2--3 3--6 6--7 3--7
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH be5db09 U--- 7 13 -- Graph from the Atlas #1073
+#> IGRAPH 32963ae U--- 7 13 -- Graph from the Atlas #1073
 #> + attr: name (g/c), n (g/n)
-#> + edges from be5db09:
+#> + edges from 32963ae:
 #>  [1] 1--2 1--7 2--5 2--6 3--4 3--5 3--6 3--7 4--5 4--6 4--7 5--7 6--7
 ```

@@ -90,16 +90,16 @@ Graph cycles
 
 ## Related documentation in the C library
 
-[`feedback_arc_set()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_arc_set).
+[`feedback_arc_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set).
 
 ## Examples
 
 ``` r
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 5/40 edges from 25b7af3:
+#> + 5/40 edges from ec1e97d:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 feedback_arc_set(g, algo = "approx_eades")
-#> + 5/40 edges from 25b7af3:
+#> + 5/40 edges from ec1e97d:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 ```

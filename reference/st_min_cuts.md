@@ -89,7 +89,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`all_st_mincuts()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts).
+[`all_st_mincuts()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts).
 
 ## Examples
 
@@ -105,29 +105,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> + 2/14 edges from 0055bfa (vertex names):
+#> + 2/14 edges from 817001c (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/14 edges from 0055bfa (vertex names):
+#> + 2/14 edges from 817001c (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 2/14 edges from 0055bfa (vertex names):
+#> + 2/14 edges from 817001c (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/9 vertex, named, from 0055bfa:
+#> + 1/9 vertex, named, from 817001c:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/9 vertices, named, from 0055bfa:
+#> + 2/9 vertices, named, from 817001c:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 8/9 vertices, named, from 0055bfa:
+#> + 8/9 vertices, named, from 817001c:
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

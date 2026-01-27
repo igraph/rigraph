@@ -121,7 +121,7 @@ Other embedding:
 
 ## Related documentation in the C library
 
-[`adjacency_spectral_embedding()`](https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_adjacency_spectral_embedding).
+[`adjacency_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_adjacency_spectral_embedding).
 
 ## Examples
 

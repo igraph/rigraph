@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>All isomorphic mappings between a graph and subgraphs of another graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
       <div class="d-none name"><code>subgraph_isomorphisms.Rd</code></div>
     </div>
 
@@ -55,13 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">subgraph_isomorphisms</span><span class="op">(</span></span>
-<span>  <span class="va">pattern</span>,</span>
-<span>  <span class="va">target</span>,</span>
-<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lad"</span>, <span class="st">"vf2"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  callback <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">subgraph_isomorphisms</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">target</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lad"</span>, <span class="st">"vf2"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -88,27 +82,11 @@ mutual edges.</p></dd>
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments, passed to the various methods.</p></dd>
 
-
-<dt id="arg-callback">callback<a class="anchor" aria-label="anchor" href="#arg-callback"></a></dt>
-<dd><p>Optional callback function to call for each subisomorphism found.
-If provided, the function should accept two arguments: <code>map12</code> (integer vector
-mapping vertex IDs from pattern to target, 1-based indexing) and <code>map21</code>
-(integer vector mapping vertex IDs from target to pattern, 1-based indexing).
-The function should return <code>FALSE</code> to continue the search or <code>TRUE</code> to stop it.
-If <code>NULL</code> (the default), all subisomorphisms are collected and returned as a list.
-Only supported for <code>method = "vf2"</code>.</p>
-<p><strong>Important limitation:</strong> Callback functions must NOT call any igraph
-functions (including simple queries like <code><a href="gorder.html">vcount()</a></code> or <code><a href="gsize.html">ecount()</a></code>). Doing
-so will cause R to crash due to reentrancy issues. Extract
-any needed graph information before calling the function with a callback, or
-use collector mode (the default) and process results afterward.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If <code>callback</code> is <code>NULL</code>, returns a list of vertex sequences, corresponding
-to all mappings from the pattern graph to the target graph. If <code>callback</code> is
-provided, returns <code>NULL</code> invisibly.</p>
+    <p>A list of vertex sequences, corresponding to all
+mappings from the first graph to the second.</p>
     </div>
     <div class="section level2">
     <h2 id="-lad-method">‘lad’ method<a class="anchor" aria-label="anchor" href="#-lad-method"></a></h2>

@@ -42,7 +42,7 @@ Other flow:
 
 ## Related documentation in the C library
 
-[`is_separator()`](https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_separator).
+[`is_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator).
 
 ## Examples
 
@@ -50,11 +50,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from ffe92b3:
+#> + 2/4 vertices, from 4113116:
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from ffe92b3:
+#> + 2/4 vertices, from 4113116:
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

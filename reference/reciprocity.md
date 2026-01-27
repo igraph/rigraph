@@ -78,12 +78,12 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 ## Related documentation in the C library
 
-[`reciprocity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity).
+[`reciprocity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity).
 
 ## Examples
 
 ``` r
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 reciprocity(g)
-#> [1] 0.2531646
+#> [1] 0.1818182
 ```

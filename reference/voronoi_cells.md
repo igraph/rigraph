@@ -97,7 +97,7 @@ Community detection
 
 ## Related documentation in the C library
 
-[`voronoi()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_voronoi).
+[`voronoi()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_voronoi).
 
 ## Examples
 

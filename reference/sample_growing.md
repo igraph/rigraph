@@ -8,7 +8,7 @@ evolution.
 ``` r
 sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
-growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
+growing(...)
 ```
 
 ## Arguments
@@ -23,7 +23,7 @@ growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
 - ...:
 
-  These dots are for future extensions and must be empty.
+  Passed to `sample_growing()`.
 
 - directed:
 
@@ -82,7 +82,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game).
+[`growing_random_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game).
 
 ## Examples
 

@@ -15,7 +15,7 @@ of make_lattice()."><meta property="og:image" content="https://r.igraph.org/logo
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ of make_lattice()."><meta property="og:image" content="https://r.igraph.org/logo
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create a ring graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_ring.Rd</code></div>
     </div>
 
@@ -60,7 +60,7 @@ of <code><a href="make_lattice.html">make_lattice()</a></code>.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_ring</span><span class="op">(</span><span class="va">n</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, mutual <span class="op">=</span> <span class="cn">FALSE</span>, circular <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ring</span><span class="op">(</span><span class="va">n</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, mutual <span class="op">=</span> <span class="cn">FALSE</span>, circular <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ring</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -85,6 +85,10 @@ undirected graphs.</p></dd>
 ring is essentially a “line”: a tree where every non-leaf
 vertex has one child.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>make_ring()</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,23 +102,19 @@ vertex has one child.</p></dd>
 <code><a href="graph_from_literal.html">graph_from_literal()</a></code>,
 <code><a href="make_.html">make_()</a></code>,
 <code><a href="make_chordal_ring.html">make_chordal_ring()</a></code>,
-<code><a href="make_circulant.html">make_circulant()</a></code>,
 <code><a href="make_empty_graph.html">make_empty_graph()</a></code>,
 <code><a href="make_full_citation_graph.html">make_full_citation_graph()</a></code>,
 <code><a href="make_full_graph.html">make_full_graph()</a></code>,
-<code><a href="make_full_multipartite.html">make_full_multipartite()</a></code>,
 <code><a href="make_graph.html">make_graph()</a></code>,
 <code><a href="make_lattice.html">make_lattice()</a></code>,
 <code><a href="make_star.html">make_star()</a></code>,
-<code><a href="make_tree.html">make_tree()</a></code>,
-<code><a href="make_turan.html">make_turan()</a></code>,
-<code><a href="make_wheel.html">make_wheel()</a></code></p></div>
+<code><a href="make_tree.html">make_tree()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a91ed82 U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c39c760 U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
@@ -123,10 +123,10 @@ vertex has one child.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a91ed82:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c39c760:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mutual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3127089 D--- 10 20 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ca9695a D--- 10 20 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
@@ -135,7 +135,7 @@ vertex has one child.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3127089:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ca9695a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 2  2-&gt; 1  2-&gt; 3  3-&gt; 2  3-&gt; 4  4-&gt; 3  4-&gt; 5  5-&gt; 4  5-&gt; 6  6-&gt; 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  6-&gt; 7  7-&gt; 6  7-&gt; 8  8-&gt; 7  8-&gt; 9  9-&gt; 8  9-&gt;10 10-&gt; 9 10-&gt; 1  1-&gt;10</span>
 </code></pre></div>

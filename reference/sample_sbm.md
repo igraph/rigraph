@@ -7,7 +7,7 @@ Sampling from the stochastic block model of networks
 ``` r
 sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
-sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sbm(...)
 ```
 
 ## Arguments
@@ -30,11 +30,15 @@ sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical scalar, whether to generate a directed graph.
 
 - loops:
 
   Logical scalar, whether self-loops are allowed in the graph.
+
+- ...:
+
+  Passed to `sample_sbm()`.
 
 ## Value
 
@@ -89,7 +93,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`sbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game).
+[`sbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game).
 
 ## Examples
 
@@ -98,16 +102,16 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> IGRAPH 0d316a8 U--- 1000 16990 -- Stochastic block model
+#> IGRAPH 3b14ee8 U--- 1000 17014 -- Stochastic block model
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 0d316a8:
-#>  [1]  1-- 6  1-- 9  5--11  5--12  7--12 11--12  1--14  2--15  2--16  3--16
-#> [11]  5--16 11--16  1--17  2--17  4--17  5--19  9--19 18--19 15--20 16--20
-#> [21] 17--21 18--21  1--23  3--23  4--24  6--24 12--24  5--25 15--25 21--25
-#> [31] 23--25  8--26  5--27  8--27 14--27 20--27 23--27 24--27  1--28  3--28
-#> [41]  9--28 13--28 24--28  2--29 23--29  9--30 24--30 19--31 27--31  6--32
-#> [51]  7--32 14--32 15--32 28--32  3--33 14--34 12--35 16--35 24--35 24--36
-#> [61] 31--36  6--37 19--37  8--38 15--38 17--38 20--38  9--39 19--39 21--39
-#> [71] 25--39 29--39  1--40  7--40 13--40 20--40 26--40  6--41 20--41 24--41
+#> + edges from 3b14ee8:
+#>  [1]  3-- 7  4-- 7  2-- 8  3--10  1--11  3--11  7--11 10--11  2--12  5--12
+#> [11]  7--13  7--14  9--15  5--16  8--16  3--18 15--18  3--19  8--20  3--21
+#> [21] 10--21 15--21  3--22  7--22 22--23  1--24  4--24  5--25 12--25 23--25
+#> [31]  1--26 11--26 15--26 18--26 22--26  9--27 14--27 11--28  2--29 11--29
+#> [41]  4--30 10--30 13--30 29--30  7--31 15--31  8--32  2--33  4--33 23--33
+#> [51]  5--35 29--35 16--36 22--36 32--36 34--36  9--37 20--37 31--37  6--38
+#> [61]  9--38 21--38  4--39  8--39 16--39 30--40 35--40  4--41  5--41 14--41
+#> [71] 23--41 25--41 32--41 40--41  1--42 14--42 25--42 13--43 14--43 17--43
 #> + ... omitted several edges
 ```

@@ -10,7 +10,7 @@ distribution.
 ``` r
 sample_gnp(n, p, directed = FALSE, loops = FALSE)
 
-gnp(n, p, directed = FALSE, loops = FALSE)
+gnp(...)
 ```
 
 ## Arguments
@@ -31,6 +31,10 @@ gnp(n, p, directed = FALSE, loops = FALSE)
 - loops:
 
   Logical, whether to add loop edges, defaults to `FALSE`.
+
+- ...:
+
+  Passed to `sample_gnp()`.
 
 ## Value
 
@@ -91,9 +95,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # Random graph with expected mean degree of 2
 g <- sample_gnp(1000, 2 / 1000)
 mean(degree(g))
-#> [1] 1.982
+#> [1] 2.056
 degree_distribution(g)
-#> [1] 0.132 0.277 0.281 0.165 0.094 0.040 0.006 0.004 0.001
+#>  [1] 0.119 0.274 0.279 0.173 0.099 0.037 0.013 0.004 0.000 0.002
 
 # Pick a simple graph on 6 vertices uniformly at random
 plot(sample_gnp(6, 0.5))

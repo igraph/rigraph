@@ -76,7 +76,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -100,7 +99,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH 0e6256b UN-- 11 15 -- 
+#> IGRAPH 5d1ea4e UN-- 11 15 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n), name (v/c)
 #> + edges (vertex names):

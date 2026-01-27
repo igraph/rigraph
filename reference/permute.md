@@ -59,7 +59,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -70,7 +69,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices).
+[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices).
 
 ## Examples
 
@@ -91,11 +90,11 @@ isomorphic(g, g2)
 g2$name
 #> [1] "Random graph, Gnm, 20, 50"
 V(g2)$name
-#>  [1] "n" "r" "i" "j" "s" "l" "b" "a" "f" "q" "p" "d" "m" "o" "g" "k" "c" "t" "e"
-#> [20] "h"
+#>  [1] "l" "p" "a" "b" "j" "r" "g" "f" "q" "h" "i" "k" "c" "d" "m" "o" "t" "e" "n"
+#> [20] "s"
 E(g2)$weight
-#>  [1] 4 3 3 1 3 5 4 3 5 1 4 1 4 5 5 5 2 1 3 4 4 1 1 3 3 5 5 5 1 3 2 5 4 3 5 2 5 3
-#> [39] 3 3 5 5 2 3 3 5 1 1 2 4
+#>  [1] 4 1 1 5 4 4 4 5 4 4 3 3 2 3 3 2 5 3 1 3 4 4 4 5 3 1 5 1 2 2 2 4 4 5 4 2 1 5
+#> [39] 1 1 5 3 1 4 4 3 1 1 1 3
 all(sort(E(g2)$weight) == sort(E(g)$weight))
 #> [1] TRUE
 ```

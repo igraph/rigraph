@@ -107,7 +107,7 @@ Centrality measures
 
 ## Related documentation in the C library
 
-[`hub_and_authority_scores()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_hub_and_authority_scores).
+[`hub_and_authority_scores()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores).
 
 ## Examples
 
@@ -116,7 +116,7 @@ Centrality measures
 g <- make_star(10)
 hits_scores(g)
 #> $hub
-#>  [1] 2.919382e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
+#>  [1] 2.602085e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #>  [6] 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #> 
 #> $authority
@@ -259,7 +259,7 @@ hits_scores(g2)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 5
+#> [1] 6
 #> 
 #> 
 ```

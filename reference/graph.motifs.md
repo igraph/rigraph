@@ -21,7 +21,7 @@ graph.motifs(graph, size = 3, cut.prob = rep(0, size))
 - size:
 
   The size of the motif, currently sizes 3 and 4 are supported in
-  directed graphs and sizes 3 to 6 in undirected graphs.
+  directed graphs and sizes 3-6 in undirected graphs.
 
 - cut.prob:
 

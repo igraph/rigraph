@@ -8,7 +8,7 @@ to the center vertex and nobody else.
 ``` r
 make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+star(...)
 ```
 
 ## Arguments
@@ -28,6 +28,10 @@ star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
   ID of the center vertex.
 
+- ...:
+
+  Passed to `make_star()`.
+
 ## Value
 
 An igraph graph.
@@ -40,29 +44,25 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 ## Examples
 
 ``` r
 make_star(10, mode = "out")
-#> IGRAPH 4e9c9f9 D--- 10 9 -- Out-star
+#> IGRAPH 5b82c46 D--- 10 9 -- Out-star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 4e9c9f9:
+#> + edges from 5b82c46:
 #> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> IGRAPH 488b52b U--- 5 4 -- Star
+#> IGRAPH 34fc026 U--- 5 4 -- Star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 488b52b:
+#> + edges from 34fc026:
 #> [1] 1--2 1--3 1--4 1--5
 ```

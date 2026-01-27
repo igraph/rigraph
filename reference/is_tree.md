@@ -61,7 +61,7 @@ Other trees:
 
 ## Related documentation in the C library
 
-[`is_tree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_tree).
+[`is_tree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_tree).
 
 ## Examples
 
@@ -74,7 +74,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> + 1/7 vertex, from e789253:
+#> + 1/7 vertex, from 13ec05a:
 #> [1] 1
 #> 
 ```

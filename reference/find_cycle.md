@@ -45,7 +45,7 @@ Graph cycles
 
 ## Related documentation in the C library
 
-[`find_cycle()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_find_cycle).
+[`find_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_find_cycle).
 
 ## Examples
 
@@ -53,20 +53,20 @@ Graph cycles
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> + 4/9 vertices, from ed232ca:
+#> + 4/9 vertices, from 5a714ab:
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> + 4/12 edges from ed232ca:
+#> + 4/12 edges from 5a714ab:
 #> [1] 8--9 6--9 5--6 5--8
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> + 0/5 vertices, from 5b2807b:
+#> + 0/5 vertices, from 09ec2a8:
 #> 
 #> $edges
-#> + 0/4 edges from 5b2807b:
+#> + 0/4 edges from 09ec2a8:
 #> 
 ```

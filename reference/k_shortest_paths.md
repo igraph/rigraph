@@ -11,8 +11,8 @@ k_shortest_paths(
   graph,
   from,
   to,
-  k,
   ...,
+  k,
   weights = NULL,
   mode = c("out", "in", "all", "total")
 )
@@ -32,14 +32,14 @@ k_shortest_paths(
 
   The target vertex of the shortest paths.
 
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 - k:
 
   The number of paths to find. They will be returned in order of
   increasing length.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -110,4 +110,4 @@ Other structural.properties:
 
 ## Related documentation in the C library
 
-[`get_k_shortest_paths()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_k_shortest_paths).
+[`get_k_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths).

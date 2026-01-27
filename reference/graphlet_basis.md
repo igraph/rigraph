@@ -87,7 +87,7 @@ perform them individually: `graphlet_basis()` and `graphlet_proj()`.
 
 ## Related documentation in the C library
 
-[`graphlets()`](https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets).
+[`graphlets()`](https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets).
 
 ## Examples
 

@@ -78,7 +78,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`strength()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength).
+[`strength()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_strength).
 
 ## Examples
 

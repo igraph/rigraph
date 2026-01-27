@@ -76,7 +76,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`adjlist()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist).
+[`adjlist()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist).
 
 ## Examples
 

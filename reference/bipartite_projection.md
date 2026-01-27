@@ -94,7 +94,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`bipartite_projection_size()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size).
+[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size).
 
 ## Examples
 
@@ -123,13 +123,13 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH 29be77a UNW- 5 5 -- Event network
+#> IGRAPH e13d591 UNW- 5 5 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 29be77a (vertex names):
+#> + edges from e13d591 (vertex names):
 #> [1] Alice--Bob   Alice--Dan   Bob  --Dan   Bob  --Ethel Dan  --Ethel
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH df7b509 UNW- 3 2 -- Event network
+#> IGRAPH 3300771 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from df7b509 (vertex names):
+#> + edges from 3300771 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

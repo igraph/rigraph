@@ -15,7 +15,7 @@ a graph. Variants include the Barabási-Abert model and the Price model."><meta 
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ a graph. Variants include the Barabási-Abert model and the Price model."><meta 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generate random graphs using preferential attachment</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_pa.Rd</code></div>
     </div>
 
@@ -71,18 +71,7 @@ a graph. Variants include the Barabási-Abert model and the Price model.</p>
 <span>  start.graph <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pa</span><span class="op">(</span></span>
-<span>  <span class="va">n</span>,</span>
-<span>  power <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  m <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  out.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  out.seq <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  out.pref <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  zero.appeal <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"psumtree"</span>, <span class="st">"psumtree-multiple"</span>, <span class="st">"bag"</span><span class="op">)</span>,</span>
-<span>  start.graph <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pa</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -153,6 +142,10 @@ algorithm. The graph should have at least one vertex. If a graph is supplied
 here and the <code>out.seq</code> argument is not <code>NULL</code>, then it should
 contain the out degrees of the new vertices only, not the ones in the
 <code>start.graph</code>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>sample_pa()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -239,24 +232,17 @@ random networks <em>Science</em>, 286 509–512.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_pa</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.0000 0.6655 0.1672 0.0686 0.0329 0.0177 0.0101 0.0072 0.0063 0.0046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0026 0.0033 0.0016 0.0016 0.0011 0.0016 0.0005 0.0011 0.0009 0.0005</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0004 0.0006 0.0006 0.0005 0.0003 0.0001 0.0006 0.0003 0.0002 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0002 0.0003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0001 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.0000 0.6622 0.1695 0.0672 0.0322 0.0203 0.0119 0.0086 0.0061 0.0051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0026 0.0025 0.0018 0.0008 0.0013 0.0008 0.0010 0.0006 0.0003 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0005 0.0006 0.0004 0.0001 0.0002 0.0001 0.0002 0.0001 0.0001 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0001 0.0001 0.0001 0.0001 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0001 0.0000 0.0001 0.0002 0.0000 0.0000 0.0000 0.0000 0.0002 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0000 0.0002 0.0000 0.0000 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0001</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
