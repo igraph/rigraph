@@ -280,6 +280,13 @@ VERTEX_INDICES_PV:
               %I% <- create_vs(%I1%, %I%)
             }
 
+VERTEX_INDEX_PAIRS:
+    CALL: '%I% - 1'
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+
+INDEX_PAIRS:
+    CALL: '%I% - 1'
+
 EDGE_INDICES:
     CALL: '%I% - 1'
     DEFAULT:

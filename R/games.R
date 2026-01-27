@@ -826,8 +826,9 @@ aging.prefatt.game <- function(
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
 #'   i.e. linear preferential attachment.
-#' @param m Numeric constant, the number of edges to add in each time step This
-#'   argument is only used if both `out.dist` and `out.seq` are omitted
+#' @param m Numeric constant, the number of edges to add in each time step,
+#'   defaults to 1.
+#'   This argument is only used if both `out.dist` and `out.seq` are omitted
 #'   or NULL.
 #' @param out.dist Numeric vector, the distribution of the number of edges to
 #'   add in each time step. This argument is only used if the `out.seq`
@@ -911,15 +912,13 @@ sample_pa <- function(
     cli::cli_warn("{.arg m} is zero, graph will be empty.")
   }
 
-  if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
+  if (is.null(m)) {
     m <- 1
   }
+  m <- as.numeric(m)
 
   n <- as.numeric(n)
   power <- as.numeric(power)
-  if (!is.null(m)) {
-    m <- as.numeric(m)
-  }
   if (!is.null(out.dist)) {
     out.dist <- as.numeric(out.dist)
   }
@@ -943,25 +942,23 @@ sample_pa <- function(
   }
 
   algorithm <- igraph_match_arg(algorithm)
-  algorithm1 <- switch(
+  algorithm_impl <- switch(
     algorithm,
-    "psumtree" = 1,
-    "psumtree-multiple" = 2,
-    "bag" = 0
+    "psumtree" = "psumtree",
+    "psumtree-multiple" = "psumtree_multiple",
+    "bag" = "bag"
   )
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_barabasi_game,
-    n,
-    power,
-    m,
-    out.seq,
-    out.pref,
-    zero.appeal,
-    directed,
-    algorithm1,
-    start.graph
+  res <- barabasi_game_impl(
+    n = n,
+    power = power,
+    m = m,
+    outseq = out.seq,
+    outpref = out.pref,
+    A = zero.appeal,
+    directed = directed,
+    algo = algorithm_impl,
+    start_from = start.graph
   )
 
   if (igraph_opt("add.params")) {
@@ -1415,24 +1412,22 @@ sample_degseq <- function(
   }
 
   # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94
-  method1 <- switch(
+  method_impl <- switch(
     method,
-    "configuration" = 0,
-    "vl" = 1,
-    "fast.heur.simple" = 2,
-    "configuration.simple" = 3,
-    "edge.switching.simple" = 4
+    "configuration" = "configuration",
+    "vl" = "vl",
+    "fast.heur.simple" = "fast_heur_simple",
+    "configuration.simple" = "configuration_simple",
+    "edge.switching.simple" = "edge_switching_simple"
   )
   if (!is.null(in.deg)) {
     in.deg <- as.numeric(in.deg)
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_degree_sequence_game,
-    as.numeric(out.deg),
-    in.deg,
-    as.numeric(method1)
+  res <- degree_sequence_game_impl(
+    out_deg = out.deg,
+    in_deg = in.deg,
+    method = method_impl
   )
   if (igraph_opt("add.params")) {
     res$name <- "Degree sequence random graph"
@@ -1683,36 +1678,33 @@ sample_pa_age <- function(
     out.seq <- numeric()
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   res <- if (is.null(time.window)) {
-    .Call(
-      Rx_igraph_barabasi_aging_game,
-      as.numeric(n),
-      as.numeric(pa.exp),
-      as.numeric(aging.exp),
-      as.numeric(aging.bin),
-      m,
-      out.seq,
-      out.pref,
-      as.numeric(zero.deg.appeal),
-      as.numeric(zero.age.appeal),
-      as.numeric(deg.coef),
-      as.numeric(age.coef),
-      directed
+    barabasi_aging_game_impl(
+      nodes = n,
+      m = m,
+      outseq = out.seq,
+      outpref = out.pref,
+      pa_exp = pa.exp,
+      aging_exp = aging.exp,
+      aging_bin = aging.bin,
+      zero_deg_appeal = zero.deg.appeal,
+      zero_age_appeal = zero.age.appeal,
+      deg_coef = deg.coef,
+      age_coef = age.coef,
+      directed = directed
     )
   } else {
-    .Call(
-      Rx_igraph_recent_degree_aging_game,
-      as.numeric(n),
-      as.numeric(pa.exp),
-      as.numeric(aging.exp),
-      as.numeric(aging.bin),
-      m,
-      out.seq,
-      out.pref,
-      as.numeric(zero.deg.appeal),
-      directed,
-      time.window
+    recent_degree_aging_game_impl(
+      nodes = n,
+      m = m,
+      outseq = out.seq,
+      outpref = out.pref,
+      pa_exp = pa.exp,
+      aging_exp = aging.exp,
+      aging_bin = aging.bin,
+      window = time.window,
+      zero_appeal = zero.deg.appeal,
+      directed = directed
     )
   }
   if (igraph_opt("add.params")) {
@@ -1816,19 +1808,17 @@ sample_traits_callaway <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_callaway_traits_game,
-    as.double(nodes),
-    as.double(types),
-    as.double(edge.per.step),
-    as.double(type.dist),
-    matrix(
+  res <- callaway_traits_game_impl(
+    nodes = nodes,
+    types = types,
+    edges_per_step = edge.per.step,
+    type_dist = type.dist,
+    pref_matrix = matrix(
       as.double(pref.matrix),
       types,
       types
     ),
-    as.logical(directed)
+    directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based Callaway graph"
@@ -1871,15 +1861,13 @@ sample_traits <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_establishment_game,
-    as.double(nodes),
-    as.double(types),
-    as.double(k),
-    as.double(type.dist),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(directed)
+  res <- establishment_game_impl(
+    nodes = nodes,
+    types = types,
+    k = k,
+    type_dist = type.dist,
+    pref_matrix = matrix(as.double(pref.matrix), types, types),
+    directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based growing graph"
@@ -2166,14 +2154,11 @@ asym_pref <- function(
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_connect_neighborhood,
-    graph,
-    as.numeric(order),
-    as.numeric(mode)
+  connect_neighborhood_impl(
+    graph = graph,
+    order = order,
+    mode = mode
   )
 }
 
@@ -2231,15 +2216,13 @@ sample_smallworld <- function(
   loops = FALSE,
   multiple = FALSE
 ) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_watts_strogatz_game,
-    as.numeric(dim),
-    as.numeric(size),
-    as.numeric(nei),
-    as.numeric(p),
-    as.logical(loops),
-    as.logical(multiple)
+  res <- watts_strogatz_game_impl(
+    dim = dim,
+    size = size,
+    nei = nei,
+    p = p,
+    loops = loops,
+    multiple = multiple
   )
   if (igraph_opt("add.params")) {
     res$name <- "Watts-Strogatz random graph"
@@ -2305,14 +2288,12 @@ sample_last_cit <- function(
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_lastcit_game,
-    as.numeric(n),
-    as.numeric(edges),
-    as.numeric(agebins),
-    as.numeric(pref),
-    as.logical(directed)
+  res <- lastcit_game_impl(
+    nodes = n,
+    edges_per_node = edges,
+    agebins = agebins,
+    preference = pref,
+    directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Random citation graph based on last citation"
@@ -2351,14 +2332,12 @@ sample_cit_types <- function(
   directed = TRUE,
   attr = TRUE
 ) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_cited_type_game,
-    as.numeric(n),
-    as.numeric(edges),
-    as.numeric(types),
-    as.numeric(pref),
-    as.logical(directed)
+  res <- cited_type_game_impl(
+    nodes = n,
+    types = types,
+    pref = pref,
+    edges_per_step = edges,
+    directed = directed
   )
   if (attr) {
     V(res)$type <- types
@@ -2402,14 +2381,12 @@ sample_cit_cit_types <- function(
   attr = TRUE
 ) {
   pref[] <- as.numeric(pref)
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_citing_cited_type_game,
-    as.numeric(n),
-    as.numeric(types),
-    pref,
-    as.numeric(edges),
-    as.logical(directed)
+  res <- citing_cited_type_game_impl(
+    nodes = n,
+    types = types,
+    pref = pref,
+    edges_per_step = edges,
+    directed = directed
   )
   if (attr) {
     V(res)$type <- types

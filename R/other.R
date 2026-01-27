@@ -132,13 +132,7 @@ sample_seq <- function(low, high, length) {
     cli::cli_abort("length too big for this interval")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_random_sample,
-    as.numeric(low),
-    as.numeric(high),
-    as.numeric(length)
-  )
+  random_sample_impl(low, high, length)
 }
 
 #' Common handler for vertex type arguments in igraph functions

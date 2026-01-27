@@ -26,7 +26,7 @@
 # add_edges_impl basic
 
     Code
-      add_edges_impl(graph = g, edges = c(0, 1, 1, 2))
+      add_edges_impl(graph = g, edges = c(1, 2, 2, 3))
     Output
       IGRAPH D--- 3 2 -- 
       + edges:
@@ -4547,9 +4547,8 @@
     Code
       edgelist_percolation_impl(edges = "a")
     Condition
-      Error in `edgelist_percolation_impl()`:
-      ! Expected numeric or integer vector, got type 16. Invalid value
-      Source: <file>:<line>
+      Error in `edges - 1`:
+      ! non-numeric argument to binary operator
 
 # is_clique_impl basic
 
@@ -5329,7 +5328,7 @@
       similarity_dice_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.6666667 0.8000000
+      [1] 0.8000000 0.6666667
 
 # similarity_dice_pairs_impl errors
 
@@ -5428,7 +5427,7 @@
       similarity_jaccard_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.5000000 0.6666667
+      [1] 0.6666667 0.5000000
 
 # similarity_jaccard_pairs_impl errors
 

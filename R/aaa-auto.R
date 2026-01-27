@@ -26,13 +26,14 @@ add_edges_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  edges <- as_igraph_vs(graph, edges)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_add_edges,
     graph,
-    edges
+    edges - 1
   )
 
   res
@@ -354,6 +355,7 @@ get_eids_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  pairs <- as_igraph_vs(graph, pairs)
   directed <- as.logical(directed)
   error <- as.logical(error)
 
@@ -362,7 +364,7 @@ get_eids_impl <- function(
   res <- .Call(
     R_igraph_get_eids,
     graph,
-    pairs,
+    pairs - 1,
     directed,
     error
   )
@@ -7247,7 +7249,7 @@ edgelist_percolation_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_edgelist_percolation,
-    edges
+    edges - 1
   )
 
   res
@@ -8769,6 +8771,7 @@ similarity_dice_pairs_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  pairs <- as_igraph_vs(graph, pairs)
   mode <- switch_igraph_arg(
     mode,
     "out" = 1L,
@@ -8783,7 +8786,7 @@ similarity_dice_pairs_impl <- function(
   res <- .Call(
     R_igraph_similarity_dice_pairs,
     graph,
-    pairs,
+    pairs - 1,
     mode,
     loops
   )
@@ -8889,6 +8892,7 @@ similarity_jaccard_pairs_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  pairs <- as_igraph_vs(graph, pairs)
   mode <- switch_igraph_arg(
     mode,
     "out" = 1L,
@@ -8903,7 +8907,7 @@ similarity_jaccard_pairs_impl <- function(
   res <- .Call(
     R_igraph_similarity_jaccard_pairs,
     graph,
-    pairs,
+    pairs - 1,
     mode,
     loops
   )
