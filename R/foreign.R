@@ -549,13 +549,20 @@ read.graph.ncol <- function(
   weights = c("auto", "yes", "no"),
   directed = FALSE
 ) {
-  weights <- igraph_match_arg(weights)
-  read_graph_ncol_impl(
-    instream = file,
-    predefnames = predef,
-    names = names,
-    weights = switch(weights, "no" = FALSE, "yes" = TRUE, "auto" = NA),
-    directed = directed
+  weights <- switch(
+    igraph_match_arg(weights),
+    "no" = 0L,
+    "yes" = 1L,
+    "auto" = 2L
+  )
+  on.exit(.Call(Rx_igraph_finalizer))
+  .Call( # read_graph_ncol_impl has bug with predefnames
+    Rx_igraph_read_graph_ncol,
+    file,
+    as.character(predef),
+    as.logical(names),
+    weights,
+    as.logical(directed)
   )
 }
 
@@ -574,11 +581,13 @@ write.graph.ncol <- function(
     weights <- NULL
   }
 
-  write_graph_ncol_impl(
-    graph = graph,
-    outstream = file,
-    names = names,
-    weights = weights
+  on.exit(.Call(Rx_igraph_finalizer))
+  .Call( # write_graph_ncol_impl can't handle NULL names/weights
+    Rx_igraph_write_graph_ncol,
+    graph,
+    file,
+    names,
+    weights
   )
 }
 
@@ -613,12 +622,14 @@ write.graph.lgl <- function(
     weights <- NULL
   }
 
-  write_graph_lgl_impl(
-    graph = graph,
-    outstream = file,
-    names = names,
-    weights = weights,
-    isolates = isolates
+  on.exit(.Call(Rx_igraph_finalizer))
+  .Call( # write_graph_lgl_impl can't handle NULL names/weights
+    Rx_igraph_write_graph_lgl,
+    graph,
+    file,
+    names,
+    weights,
+    as.logical(isolates)
   )
 }
 
