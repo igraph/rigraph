@@ -11822,7 +11822,7 @@ test_that("layout_merge_dla_impl basic", {
 test_that("get_eid_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4))
+  g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4) + 1)
 
   expect_snapshot(get_eid_impl(
     graph = g,
@@ -11858,7 +11858,7 @@ test_that("get_eid_impl basic", {
 test_that("get_eid_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
 
   expect_snapshot_igraph_error(get_eid_impl(
     graph = NULL,
@@ -11879,7 +11879,7 @@ test_that("community_voronoi_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- add_edges_impl(
     empty_impl(n = 10),
-    c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9)
+    c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9) + 1
   )
 
   expect_snapshot(community_voronoi_impl(
@@ -11924,7 +11924,7 @@ test_that("subisomorphic_lad_impl basic", {
 test_that("subisomorphic_lad_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2))
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
 
   expect_snapshot_igraph_error(subisomorphic_lad_impl(
     pattern = NULL,
