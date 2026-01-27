@@ -509,10 +509,6 @@ igraph_community_leading_eigenvector_callback_closure:
 # Graphlets
 #######################################
 
-igraph_graphlets_project:
-    R:
-        CLASS: igraphHRG
-
 #######################################
 # Hierarchical random graphs
 #######################################
@@ -521,10 +517,11 @@ igraph_hrg_game:
     R:
       GATTR:
         name: Hierarchical random graph model
+      CLASS: igraphHRG
 
 igraph_hrg_create:
     R:
-        CLASS: igraphHRG
+      CLASS: igraphHRG
 
 #######################################
 # Conversion

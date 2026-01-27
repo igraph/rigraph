@@ -9648,7 +9648,6 @@ graphlets_project_impl <- function(
     niter
   )
 
-  class(res) <- "igraphHRG"
   res
 }
 
@@ -9741,6 +9740,7 @@ hrg_game_impl <- function(
     res$name <- 'Hierarchical random graph model'
   }
 
+  class(res) <- "igraphHRG"
   res
 }
 
