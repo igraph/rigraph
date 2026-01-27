@@ -2724,7 +2724,7 @@ bfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # bfs_simple_impl has different API (no callbacks)
+  res <- .Call( # bfs_closure_impl returns only order, not rank/parent/pred/succ/dist
     Rx_igraph_bfs,
     graph,
     root,
@@ -2980,7 +2980,7 @@ dfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # dfs_closure_impl has different API (no callbacks)
+  res <- .Call( # dfs_closure_impl returns only order/order_out, not parent/dist
     Rx_igraph_dfs,
     graph,
     root,
