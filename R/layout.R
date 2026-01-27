@@ -1540,14 +1540,8 @@ layout_with_fr <- function(
 
   grid <- igraph_match_arg(grid)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
+  # Let _impl handle default weights from edge attribute
+  # Pass weights as-is (including NA to signal "no weights")
   if (!is.null(minx)) {
     minx <- as.numeric(minx)
   }
@@ -1763,6 +1757,11 @@ layout_with_graphopt <- function(
   max.sa.movement = 5
 ) {
   ensure_igraph(graph)
+  use_seed <- !is.null(start)
+  if (is.null(start)) {
+    # Initialize with zeros - will be ignored if use_seed=FALSE
+    start <- matrix(0, vcount(graph), 2)
+  }
   start[] <- as.numeric(start)
   niter <- as.double(niter)
   charge <- as.double(charge)
@@ -1780,7 +1779,7 @@ layout_with_graphopt <- function(
     spring_length = spring.length,
     spring_constant = spring.constant,
     max_sa_movement = max.sa.movement,
-    use_seed = TRUE
+    use_seed = use_seed
   )
 }
 
