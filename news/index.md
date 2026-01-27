@@ -1,5 +1,27 @@
 # Changelog
 
+## igraph 2.2.1.9020
+
+### Features
+
+- Autogenerate BFS and DFS callback closures with unified TRUE=stop
+  convention ([\#2552](https://github.com/igraph/rigraph/issues/2552),
+  [\#2553](https://github.com/igraph/rigraph/issues/2553)).
+
+- Autogenerate `igraph_community_leading_eigenvector` with full
+  closure-based callback support
+  ([\#2554](https://github.com/igraph/rigraph/issues/2554),
+  [\#2555](https://github.com/igraph/rigraph/issues/2555)).
+
+### Chore
+
+- Consistent checks.
+
+### Testing
+
+- Snapshot updates for rcc-smoke (null)
+  ([\#2558](https://github.com/igraph/rigraph/issues/2558)).
+
 ## igraph 2.2.1.9019
 
 ### Features
