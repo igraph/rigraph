@@ -10,25 +10,6 @@
 # The basic interface
 #######################################
 
-# Not needed in R, we use igraph_emtpy() instead
-igraph_empty_attrs:
-
-igraph_add_vertices:
-
-igraph_delete_edges:
-
-igraph_delete_vertices:
-
-igraph_ecount:
-
-igraph_is_directed:
-
-igraph_degree:
-
-igraph_edge:
-
-igraph_edges:
-
 igraph_get_eid:
     DEPS: eid ON graph, from ON graph, to ON graph
 
@@ -42,20 +23,13 @@ igraph_get_all_eids_between:
     # in the argument list.
     DEPS: from ON graph, to ON graph, eids ON graph
 
-igraph_incident:
-
 igraph_is_same_graph:
     # Not needed in R; we can simply compare things in the R layer without
     # calling into C
 
-igraph_create:
-
 #######################################
 # Constructors, deterministic
 #######################################
-
-# TODO: temporarily disabled
-igraph_adjacency:
 
 igraph_sparse_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
@@ -64,21 +38,6 @@ igraph_sparse_adjacency:
 igraph_sparse_weighted_adjacency:
   # Turning INOUT SPARSEMAT adjmatrix to IN SPARSEMAT adjmatrix
   PARAMS: OUT GRAPH graph, IN SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
-
-# TODO: temporarily disabled
-igraph_weighted_adjacency:
-
-igraph_star:
-
-igraph_ring:
-
-igraph_kary_tree:
-
-igraph_full:
-
-igraph_connect_neighborhood:
-
-igraph_famous:
 
 igraph_circulant:
     R:
@@ -120,15 +79,9 @@ igraph_turan:
         name: Turan graph
       GATTR-PARAM: n, r
 
-igraph_weighted_sparsemat:
-
 #######################################
 # Constructors, games
 #######################################
-
-igraph_barabasi_game:
-
-igraph_degree_sequence_game:
 
 igraph_growing_random_game:
     PARAMS: |-
@@ -138,26 +91,6 @@ igraph_growing_random_game:
         GATTR:
           name: Growing random graph
         GATTR-PARAM: m, citation
-
-igraph_barabasi_aging_game:
-
-igraph_recent_degree_game:
-
-igraph_recent_degree_aging_game:
-
-igraph_callaway_traits_game:
-
-igraph_establishment_game:
-
-igraph_grg_game:
-
-igraph_watts_strogatz_game:
-
-igraph_lastcit_game:
-
-igraph_cited_type_game:
-
-igraph_citing_cited_type_game:
 
 igraph_forest_fire_game:
     R:
@@ -219,48 +152,19 @@ igraph_correlated_game:
 # Basic query functions
 #######################################
 
-# Deprecated in C core
-igraph_are_connected:
-
 #######################################
 # Structural properties
 #######################################
-
-igraph_diameter:
-
-igraph_diameter_dijkstra:
-
-igraph_distances:
-
-igraph_distances_cutoff:
-
-igraph_get_shortest_path_astar:
-
-igraph_get_shortest_paths:
 
 igraph_get_all_shortest_paths:
     PARAM_NAMES:
         vertices: vpaths
         edges: epaths
 
-igraph_distances_dijkstra:
-
-igraph_distances_dijkstra_cutoff:
-
-igraph_get_shortest_paths_dijkstra:
-
-igraph_get_shortest_paths_bellman_ford:
-
 igraph_get_all_shortest_paths_dijkstra:
     PARAM_NAMES:
         vertices: vpaths
         edges: epaths
-
-igraph_distances_bellman_ford:
-
-igraph_distances_johnson:
-
-igraph_distances_floyd_warshall:
 
 igraph_voronoi:
     FIRST_KW_PARAM: weights
@@ -305,18 +209,9 @@ igraph_widest_path_widths_floyd_warshall:
 igraph_spanner:
     DEPS: weights ON graph, spanner ON graph
 
-igraph_subcomponent:
-
-igraph_betweenness:
-
 igraph_betweenness_subset:
     DEPS: |-
         vids ON graph, weights ON graph, res ON graph vids, sources ON graph, targets ON graph
-
-igraph_harmonic_centrality:
-    # This is handled by igraph_harmonic_centrality_cutoff
-
-igraph_pagerank:
 
 igraph_personalized_pagerank_vs:
     DEPS: vids ON graph, weights ON graph, vector ON graph vids,
@@ -327,29 +222,15 @@ igraph_rewire:
         DEFAULTS:
             mode: 0L
 
-igraph_average_path_length:
-    # No need for it, igraph_average_path_length_dijkstra takes care of the
-    # unweighted case as well
-
 igraph_average_path_length_dijkstra:
     PARAM_NAMES:
         unconn_pairs: unconnected
         unconn: unconnected
 
-igraph_constraint:
-
 igraph_maxdegree:
     PARAM_ORDER: graph, *, vids, ...
     PARAM_NAMES:
         vids: v
-
-igraph_neighborhood_size:
-
-igraph_neighborhood:
-
-igraph_neighborhood_graphs:
-
-igraph_topological_sorting:
 
 igraph_is_loop:
     PARAM_NAMES:
@@ -362,10 +243,6 @@ igraph_is_multiple:
 igraph_count_multiple:
     PARAM_NAMES:
         es: eids
-
-igraph_girth:
-
-igraph_add_edge:
 
 igraph_chung_lu_game:
     PARAMS: |-
@@ -403,22 +280,11 @@ igraph_is_mutual:
     PARAM_NAMES:
         es: eids
 
-igraph_is_chordal:
-
-# We use igraph_eccentricity_dijkstra instead
-igraph_eccentricity:
-
 igraph_eccentricity_dijkstra:
     PARAM_ORDER: graph, vids, *, weights, ...
 
-# We use igraph_graph_center_dijkstra instead
-igraph_graph_center:
-
 igraph_graph_center_dijkstra:
     FIRST_KW_PARAM: weights
-
-# We use igraph_radius_dijkstra instead
-igraph_radius:
 
 igraph_radius_dijkstra:
     FIRST_KW_PARAM: weights
@@ -432,13 +298,9 @@ igraph_pseudo_diameter_dijkstra:
 igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
 
-igraph_random_edge_walk:
-
 #######################################
 # Degree sequences
 #######################################
-
-igraph_is_bigraphical:
 
 #######################################
 # Visitors
@@ -493,8 +355,6 @@ igraph_bipartite_projection_size:
 # Bipartite graphs
 #######################################
 
-igraph_bipartite_projection:
-
 igraph_create_bipartite:
     DEPS: types ON res$graph V(res$graph)
 
@@ -537,8 +397,6 @@ igraph_full_bipartite:
 # Components
 #######################################
 
-igraph_decompose:
-
 #######################################
 # Cliques
 #######################################
@@ -561,11 +419,6 @@ igraph_clique_size_hist:
     # is renamed and internal
     INTERNAL: true
 
-igraph_maximal_cliques:
-
-# TODO: temporarily disabled
-igraph_maximal_cliques_subset:
-
 igraph_maximal_cliques_callback:
     IGNORE: RR, RC, RInit  # Has callback parameter
 
@@ -574,22 +427,10 @@ igraph_maximal_cliques_callback_closure:
         GRAPH graph, INTEGER min_size=0, INTEGER max_size=0,
         CLOSURE callback
 
-igraph_maximal_cliques_count:
-
-igraph_maximal_cliques_file:
-
 igraph_maximal_cliques_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
     INTERNAL: true
-
-igraph_independent_vertex_sets:
-
-igraph_largest_independent_vertex_sets:
-
-igraph_maximal_independent_vertex_sets:
-
-igraph_independence_number:
 
 #######################################
 # Layouts
@@ -607,17 +448,11 @@ igraph_layout_fruchterman_reingold:
         DEPRECATED repulserad=NULL
     DEPS: weights ON graph
 
-igraph_layout_kamada_kawai:
-
 igraph_layout_lgl:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, INTEGER maxiter=150, REAL maxdelta=vcount(graph),
         REAL area=vcount(graph)^2, REAL coolexp=1.5, REAL repulserad=vcount(graph)^3, REAL cellsize=vcount(graph),
         INTEGER root=-1
-
-igraph_layout_reingold_tilford:
-
-igraph_layout_reingold_tilford_circular:
 
 igraph_layout_fruchterman_reingold_3d:
     PARAMS: |-
@@ -632,48 +467,22 @@ igraph_layout_fruchterman_reingold_3d:
         DEPRECATED repulserad=NULL
     DEPS: weights ON graph
 
-igraph_layout_kamada_kawai_3d:
-
-igraph_layout_graphopt:
-
 igraph_layout_drl:
     DEPS: weights ON graph
 
 igraph_layout_drl_3d:
     DEPS: weights ON graph
 
-igraph_layout_merge_dla:
-
 #######################################
 # Cocitation and other similarity measures
 #######################################
-
-igraph_cocitation:
-
-igraph_bibcoupling:
 
 #######################################
 # Community structure
 #######################################
 
-igraph_community_spinglass:
-
-igraph_community_spinglass_single:
-
-igraph_community_walktrap:
-
-igraph_community_edge_betweenness:
-
 igraph_community_eb_get_merges:
     DEPS: edges ON graph, weights ON graph
-
-igraph_community_fastgreedy:
-
-igraph_community_to_membership:
-
-igraph_le_community_to_membership:
-
-igraph_reindex_membership:
 
 igraph_community_leading_eigenvector:
     IGNORE: RR, RC, RInit  # Has callback parameter
@@ -696,23 +505,18 @@ igraph_community_leading_eigenvector_callback_closure:
     R:
         CLASS: igraph.eigenc
 
-igraph_community_voronoi:
-
 #######################################
 # Graphlets
 #######################################
 
-igraph_graphlets:
-
-igraph_graphlets_candidate_basis:
-
 igraph_graphlets_project:
+    # FIXME: Is this correct?
+    R:
+        CLASS: igraphHRG
 
 #######################################
 # Hierarchical random graphs
 #######################################
-    R:
-        CLASS: igraphHRG
 
 igraph_hrg_game:
     R:
@@ -727,19 +531,12 @@ igraph_hrg_create:
 # Conversion
 #######################################
 
-igraph_get_adjacency:
-
-
-igraph_get_edgelist:
-
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
 
 #######################################
 # Read and write foreign formats
 #######################################
-
-igraph_read_graph_edgelist:
 
 igraph_read_graph_ncol:
     PARAMS: |-
@@ -750,39 +547,12 @@ igraph_read_graph_lgl:
     PARAMS: |-
         OUT GRAPH graph, INFILE instream, BOOLEAN names=TRUE, ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
-igraph_read_graph_pajek:
-
-igraph_read_graph_graphml:
-
-# TODO: temporarily disabled
-igraph_read_graph_dimacs_flow:
-
-igraph_read_graph_graphdb:
-
-igraph_read_graph_gml:
-
-igraph_read_graph_dl:
-
-igraph_write_graph_edgelist:
-
-igraph_write_graph_ncol:
-
-igraph_write_graph_lgl:
-
-igraph_write_graph_leda:
-
-igraph_write_graph_graphml:
-
-igraph_write_graph_pajek:
-
 # TODO: temporarily disabled
 igraph_write_graph_dimacs_flow:
     DEPS: source ON graph, target ON graph
     PARAMS: |-
         INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
         VECTOR capacity
-
-igraph_write_graph_dot:
 
 #######################################
 # Motifs
@@ -792,51 +562,9 @@ igraph_write_graph_dot:
 # Graph operators
 #######################################
 
-igraph_disjoint_union:
-
-igraph_disjoint_union_many:
-
-igraph_union:
-
-igraph_union_many:
-
-igraph_intersection:
-
-igraph_intersection_many:
-
-igraph_difference:
-
-igraph_complementer:
-
-igraph_compose:
-
 #######################################
 # Maximum flows, minimum cuts
 #######################################
-
-igraph_maxflow_value:
-
-igraph_mincut:
-
-igraph_mincut_value:
-
-igraph_st_mincut_value:
-
-igraph_st_vertex_connectivity:
-
-igraph_vertex_connectivity:
-
-igraph_st_edge_connectivity:
-
-igraph_edge_connectivity:
-
-igraph_edge_disjoint_paths:
-
-igraph_vertex_disjoint_paths:
-
-igraph_adhesion:
-
-igraph_cohesion:
 
 #######################################
 # Listing s-t cuts, separators
@@ -849,8 +577,6 @@ igraph_cohesive_blocks:
 #######################################
 # K-Cores
 #######################################
-
-igraph_coreness:
 
 #######################################
 # Graph isomorphism
@@ -882,8 +608,6 @@ igraph_get_subisomorphisms_vf2_callback_closure:
         vertex_color1 ON graph1, vertex_color2 ON graph2,
         edge_color1 ON graph1, edge_color2 ON graph2
 
-igraph_subisomorphic_lad:
-
 #######################################
 # Matching
 #######################################
@@ -891,10 +615,6 @@ igraph_subisomorphic_lad:
 #######################################
 # Embedding
 #######################################
-
-igraph_adjacency_spectral_embedding:
-
-igraph_laplacian_spectral_embedding:
 
 #######################################
 # Eigensolvers
@@ -915,21 +635,6 @@ igraph_sir:
 #######################################
 # Other, not graph related
 #######################################
-
-igraph_running_mean:
-
-igraph_random_sample:
-
-# Not needed in R
-igraph_almost_equals:
-
-# Not needed in R
-igraph_cmp_epsilon:
-
-# TODO: temporarily disabled
-igraph_eigen_matrix:
-
-igraph_eigen_matrix_symmetric:
 
 #######################################
 # Finding cycles
@@ -990,12 +695,6 @@ igraph_from_prufer:
           name: Tree from Prufer sequence
         GATTR-PARAM: prufer
 
-igraph_minimum_spanning_tree:
-
-igraph_minimum_spanning_tree_unweighted:
-
-igraph_minimum_spanning_tree_prim:
-
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
 
@@ -1018,20 +717,9 @@ igraph_moran_process:
 # Other, (yet) undocumented functions
 #######################################
 
-igraph_convergence_degree:
-
-# Not needed in R
-igraph_has_attribute_table:
-
 #######################################
 # Progress, status handling
 #######################################
-
-igraph_progress:
-
-igraph_status:
-
-igraph_strerror:
 
 #######################################
 # Other functions, documented, graph related
@@ -1049,5 +737,3 @@ igraph_vertex_path_from_edge_path:
 #######################################
 # Meta info
 #######################################
-
-igraph_version:
