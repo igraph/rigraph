@@ -77,8 +77,8 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #' @param callback Optional function to call for each cycle found. If provided,
 #'   the function should accept two arguments: `vertices` (integer vector of vertex
 #'   IDs in the cycle) and `edges` (integer vector of edge IDs
-#'   in the cycle). The function should return `TRUE` to continue
-#'   the search or `FALSE` to stop it. If `NULL` (the default), all cycles are
+#'   in the cycle). The function should return `FALSE` to continue
+#'   the search or `TRUE` to stop it. If `NULL` (the default), all cycles are
 #'   collected and returned as a list.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph
@@ -103,8 +103,8 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #' @param callback Optional function to call for each cycle found. If provided,
 #'   the function should accept two arguments: `vertices` (integer vector of vertex
 #'   IDs in the cycle) and `edges` (integer vector of edge IDs
-#'   in the cycle). The function should return `TRUE` to continue
-#'   the search or `FALSE` to stop it. If `NULL` (the default), all cycles are
+#'   in the cycle). The function should return `FALSE` to continue
+#'   the search or `TRUE` to stop it. If `NULL` (the default), all cycles are
 #'   collected and returned as a list.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph

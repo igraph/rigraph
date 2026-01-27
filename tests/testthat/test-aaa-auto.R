@@ -11210,6 +11210,122 @@ test_that("independent_vertex_sets_impl basic", {
 
 # Callback functions
 
+# bfs_closure_impl
+
+test_that("bfs_closure_impl works", {
+  withr::local_seed(20250125)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(10)
+
+  # Collect BFS visit data
+  bfs_visits <- list()
+  result <- bfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    restricted = NULL,
+    callback = function(args) {
+      bfs_visits[[length(bfs_visits) + 1]] <<- args
+      FALSE # Continue
+    }
+  )
+
+  expect_snapshot({
+    cat("BFS result:\n")
+    print(result)
+    cat("\nNumber of BFS visits:", length(bfs_visits), "\n")
+    if (length(bfs_visits) > 0) {
+      cat("First visit:\n")
+      print(bfs_visits[[1]])
+    }
+  })
+
+  # Test error handling
+  expect_snapshot_igraph_error({
+    bfs_closure_impl(
+      graph = g,
+      root = 1,
+      mode = "out",
+      unreachable = TRUE,
+      restricted = NULL,
+      callback = function(args) {
+        NA
+      }
+    )
+  })
+
+  expect_snapshot_igraph_error({
+    bfs_closure_impl(
+      graph = g,
+      root = 1,
+      mode = "out",
+      unreachable = TRUE,
+      restricted = NULL,
+      callback = function(args) {
+        NA
+      }
+    )
+  })
+
+  calls <- 0
+  bfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    restricted = NULL,
+    callback = function(args) {
+      calls <<- calls + 1
+      calls > 3 # Stop after 3 calls
+    }
+  )
+  expect_equal(calls, 4) # Called 4 times: 3 continue (FALSE), 1 stop (TRUE)
+})
+
+# dfs_closure_impl
+
+test_that("dfs_closure_impl works", {
+  withr::local_seed(20250125)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(10)
+
+  # Collect DFS visit data
+  dfs_in_visits <- list()
+  dfs_out_visits <- list()
+  result <- dfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    in_callback = function(args) {
+      dfs_in_visits[[length(dfs_in_visits) + 1]] <<- args
+      FALSE # Continue
+    },
+    out_callback = function(args) {
+      dfs_out_visits[[length(dfs_out_visits) + 1]] <<- args
+      FALSE # Continue
+    }
+  )
+
+  expect_snapshot({
+    cat("DFS result:\n")
+    print(result)
+    cat("\nNumber of DFS IN visits:", length(dfs_in_visits), "\n")
+    cat("Number of DFS OUT visits:", length(dfs_out_visits), "\n")
+    if (length(dfs_in_visits) > 0) {
+      cat("First IN visit:\n")
+      print(dfs_in_visits[[1]])
+    }
+  })
+
+  # Structured tests
+  expect_equal(length(dfs_in_visits), 10)
+  expect_equal(length(dfs_out_visits), 10)
+})
+
 # motifs_randesu_callback_closure_impl
 
 test_that("motifs_randesu_callback_closure_impl basic", {
@@ -11229,7 +11345,7 @@ test_that("motifs_randesu_callback_closure_impl basic", {
         vids = vids,
         isoclass = isoclass
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11283,7 +11399,7 @@ test_that("cliques_callback_closure_impl basic", {
     max_size = 4,
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11337,9 +11453,9 @@ test_that("maximal_cliques_callback_closure_impl basic", {
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
       if (length(clique_data) >= 3) {
-        return(FALSE)
-      } # Stop after 3
-      TRUE
+        return(TRUE) # Stop after 3
+      }
+      FALSE # Continue
     }
   )
 
@@ -11396,7 +11512,7 @@ test_that("simple_cycles_callback_closure_impl basic", {
         vertices = vertices,
         edges = edges
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11458,9 +11574,9 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(iso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE) # Stop after 2
+      }
+      FALSE # Continue
     }
   )
 
@@ -11526,9 +11642,9 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(subiso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE) # Stop after 2
+      }
+      FALSE # Continue
     }
   )
 

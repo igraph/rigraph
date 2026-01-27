@@ -372,9 +372,9 @@ test_that("cliques_callback can stop early", {
   cliques(g, min = 3, callback = function(clique) {
     count <<- count + 1
     if (count >= 5) {
-      FALSE # stop after 5 cliques
+      TRUE # stop after 5 cliques
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 
@@ -435,9 +435,9 @@ test_that("max_cliques can stop early with callback", {
   max_cliques(g, callback = function(clique) {
     count <<- count + 1
     if (count >= 3) {
-      FALSE # stop after 3 cliques
+      TRUE # stop after 3 cliques
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 

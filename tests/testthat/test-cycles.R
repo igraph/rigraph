@@ -75,9 +75,9 @@ test_that("simple_cycles_callback can stop early", {
   simple_cycles(g, callback = function(vertices, edges) {
     count <<- count + 1
     if (count >= 2) {
-      FALSE # stop after 2 cycles
+      TRUE # stop after 2 cycles
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 

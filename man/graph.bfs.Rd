@@ -58,7 +58,8 @@ vertices.}
 the search tree.}
 
 \item{callback}{If not \code{NULL}, then it must be callback function. This
-is called whenever a vertex is visited. See details below.}
+is called whenever a vertex is visited. The callback function should
+return \code{FALSE} to continue the search or \code{TRUE} to stop it. See details below.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
