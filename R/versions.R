@@ -126,8 +126,8 @@ upgrade_graph <- function(graph) {
 
 warn_version <- function(graph) {
   # Calling for side effect: error if Rz_SEXP_to_igraph() fails
-  # Don't call vcount_impl() to avoid recursion
-  .Call(Rx_igraph_vcount, graph)
+  # Don't use vcount_impl() to avoid infinite recursion
+  .Call(Rx_igraph_vcount, graph) # igraph_vcount(); avoids recursion via vcount_impl()
 
   # graph_version() calls is_igraph(), but that function must call warn_version() for safety
   their_version <- .Call(Rx_igraph_graph_version, graph) # internal, no _impl
