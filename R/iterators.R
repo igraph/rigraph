@@ -85,7 +85,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # is_same_graph_impl lacks attrs parameter
+  .Call( # R_compute_identical(); is_same_graph_impl lacks attrs param
     Rx_igraph_identical_graphs,
     g1,
     g2,

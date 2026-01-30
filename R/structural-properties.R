@@ -768,7 +768,7 @@ diameter <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # diameter_impl returns more info (path); uses Dijkstra for weighted
+  .Call( # igraph_diameter_dijkstra(); diameter_impl returns path info too
     Rx_igraph_diameter,
     graph,
     as.logical(directed),
@@ -797,7 +797,7 @@ get_diameter <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # diameter_impl returns more info (path)
+  res <- .Call( # igraph_diameter_dijkstra(); diameter_impl returns path info too
     Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
@@ -833,7 +833,7 @@ farthest_vertices <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # no farthest_vertices_impl available
+  res <- .Call( # igraph_diameter_dijkstra(); no farthest_vertices_impl available
     Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
@@ -1245,7 +1245,7 @@ distances <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # distances_impl doesn't support algorithm selection
+  res <- .Call( # igraph_distances*(); distances_impl doesn't support algorithm selection
     Rx_igraph_shortest_paths,
     graph,
     v - 1,
@@ -1329,7 +1329,7 @@ shortest_paths <- function(
 
   to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # get_shortest_paths_impl doesn't support algorithm selection
+  res <- .Call( # igraph_get_shortest_paths*(); _impl doesn't support algorithm selection
     Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
@@ -1809,7 +1809,7 @@ transitivity <- function(
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call( # transitivity_local_undirected_impl requires vids
+      res <- .Call( # igraph_transitivity_local_undirected(); _impl requires vids
         Rx_igraph_transitivity_local_undirected_all,
         graph,
         isolates_num
@@ -2724,7 +2724,7 @@ bfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # bfs_closure_impl returns only order, not rank/parent/pred/succ/dist
+  res <- .Call( # igraph_bfs(); bfs_closure_impl returns only order, not rank/parent/pred/succ/dist
     Rx_igraph_bfs,
     graph,
     root,
@@ -2980,7 +2980,7 @@ dfs <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # dfs_closure_impl returns only order/order_out, not parent/dist
+  res <- .Call( # igraph_dfs(); dfs_closure_impl returns only order/order_out, not parent/dist
     Rx_igraph_dfs,
     graph,
     root,

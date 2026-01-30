@@ -637,7 +637,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
 
-  res <- .Call( # neighbors_impl takes single vertex
+  res <- .Call( # igraph_lazy_adjlist; neighbors_impl takes single vertex
     Rx_igraph_adjacent_vertices,
     graph,
     vv,
@@ -679,7 +679,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
 
-  res <- .Call( # incident_impl takes single vertex
+  res <- .Call( # igraph_lazy_inclist; incident_impl takes single vertex
     Rx_igraph_incident_edges,
     graph,
     vv,

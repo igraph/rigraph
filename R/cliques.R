@@ -325,7 +325,7 @@ max_cliques <- function(
       tmpfile <- FALSE
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call( # maximal_cliques_file_impl doesn't support subset
+    res <- .Call( # igraph_maximal_cliques_subset(); maximal_cliques_file_impl doesn't support subset
       Rx_igraph_maximal_cliques_file,
       graph,
       subset,
@@ -350,7 +350,7 @@ max_cliques <- function(
     }
 
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call( # maximal_cliques_impl doesn't support subset
+    res <- .Call( # igraph_maximal_cliques_subset(); maximal_cliques_impl doesn't support subset
       Rx_igraph_maximal_cliques,
       graph,
       subset_arg,
