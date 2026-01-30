@@ -656,7 +656,8 @@ as_adj_list <- function(
 
   multiple <- if (multiple) 1 else 0
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple) # no _impl
+  # igraph_i_neighbors(); neighbors_impl() lacks loops/multiple and only handles one vertex
+  res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -686,7 +687,8 @@ as_adj_edge_list <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops) # no _impl
+  # igraph_i_incident(); incident_impl() lacks loops and only handles one vertex
+  res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
     names(res) <- V(graph)$name
