@@ -398,14 +398,21 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
   max <- as.numeric(max)
 
   if (!is.null(subset)) {
-    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
+    # Use maximal_cliques_subset_impl when subset is provided
+    maximal_cliques_subset_impl(
+      graph = graph,
+      subset = subset,
+      min_size = min,
+      max_size = max,
+      details = TRUE
+    )$no
+  } else {
+    maximal_cliques_count_impl(
+      graph = graph,
+      min_size = min,
+      max_size = max
+    )
   }
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  # Function call
-  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max) # _impl lacks subset
-
-  res
 }
 
 #' @rdname cliques

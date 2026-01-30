@@ -188,39 +188,37 @@ bipartite_projection <- function(
     cli::cli_warn("{.arg probe1} ignored if only one projection is requested.")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  # Function call
-  res <- .Call( # bipartite_projection_impl lacks which/multiplicity parameters
-    Rx_igraph_bipartite_projection,
-    graph,
-    types,
-    as.numeric(probe1),
-    which
+  # bipartite_projection_impl always computes both projections
+  res <- bipartite_projection_impl(
+    graph = graph,
+    types = types,
+    probe1 = probe1
   )
+
   if (remove.type) {
-    if (is_igraph(res[[1]]) && "type" %in% vertex_attr_names(res[[1]])) {
-      res[[1]] <- delete_vertex_attr(res[[1]], "type")
+    if (is_igraph(res$proj1) && "type" %in% vertex_attr_names(res$proj1)) {
+      res$proj1 <- delete_vertex_attr(res$proj1, "type")
     }
-    if (is_igraph(res[[2]]) && "type" %in% vertex_attr_names(res[[2]])) {
-      res[[2]] <- delete_vertex_attr(res[[2]], "type")
+    if (is_igraph(res$proj2) && "type" %in% vertex_attr_names(res$proj2)) {
+      res$proj2 <- delete_vertex_attr(res$proj2, "type")
     }
   }
   if (which == 0L) {
     if (multiplicity) {
-      E(res[[1]])$weight <- res[[3]]
-      E(res[[2]])$weight <- res[[4]]
+      E(res$proj1)$weight <- res$multiplicity1
+      E(res$proj2)$weight <- res$multiplicity2
     }
-    res[1:2]
+    res[c("proj1", "proj2")]
   } else if (which == 1L) {
     if (multiplicity) {
-      E(res[[1]])$weight <- res[[3]]
+      E(res$proj1)$weight <- res$multiplicity1
     }
-    res[[1]]
+    res$proj1
   } else {
     if (multiplicity) {
-      E(res[[2]])$weight <- res[[4]]
+      E(res$proj2)$weight <- res$multiplicity2
     }
-    res[[2]]
+    res$proj2
   }
 }
 

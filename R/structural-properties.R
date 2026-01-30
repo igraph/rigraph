@@ -3136,10 +3136,8 @@ is_connected <- function(graph, mode = c("weak", "strong")) {
 count_components <- function(graph, mode = c("weak", "strong")) {
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_no_components, graph, mode) # connected_components_impl returns membership, not count
+  connected_components_impl(graph, mode = mode, details = TRUE)$no
 }
 
 #' Count reachable vertices
