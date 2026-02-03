@@ -34,7 +34,7 @@ centrality score by dividing by the theoretical maximum.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}
 }
 
 \keyword{internal}

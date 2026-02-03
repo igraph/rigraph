@@ -35,7 +35,7 @@ vertices, otherwise the edges are connecting new vertex to uniformly
 randomly chosen old vertices.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_growing_random_game}{\code{growing_random_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}
 }
 
 \examples{

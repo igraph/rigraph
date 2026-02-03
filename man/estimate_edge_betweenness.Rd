@@ -34,7 +34,7 @@ so they are interpreted as distances.}
 Use \code{\link[=edge_betweenness]{edge_betweenness()}} with the \code{cutoff} argument instead.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_edge_betweenness_cutoff}{\code{edge_betweenness_cutoff()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_edge_betweenness_cutoff}{\code{edge_betweenness_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \keyword{internal}

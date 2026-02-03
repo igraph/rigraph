@@ -25,7 +25,7 @@ several fluids interacting in a non-homogeneous environment
 interaction and density.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_fluid_communities}{\code{community_fluid_communities()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_fluid_communities}{\code{community_fluid_communities()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

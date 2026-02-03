@@ -27,7 +27,7 @@ determinted automatically.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}
 }
 
 \keyword{internal}

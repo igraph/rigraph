@@ -37,7 +37,7 @@ is the largest possible number of edges, which depends on whether the
 graph is directed or undirected and whether self-loops are allowed.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_erdos_renyi_game_gnp}{\code{erdos_renyi_game_gnp()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp}{\code{erdos_renyi_game_gnp()}}
 }
 
 \examples{

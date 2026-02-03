@@ -16,7 +16,7 @@ Logical scalar, whether the graph is directed.
 Check whether a graph is directed
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
 }
 
 \examples{

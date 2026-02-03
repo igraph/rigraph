@@ -31,7 +31,7 @@ This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}
 }
 
 \keyword{internal}

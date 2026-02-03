@@ -21,7 +21,7 @@ details below.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
 }
 
 \keyword{internal}

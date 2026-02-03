@@ -29,7 +29,7 @@ group. The sum of the vector must match the number of vertices.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_sbm_game}{\code{sbm_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}
 }
 
 \keyword{internal}

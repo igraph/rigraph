@@ -22,7 +22,7 @@ vertices. The \code{prob} argument contains the HRG probability labels
 for each vertex; these are ignored for leaf vertices.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}
 }
 
 \seealso{

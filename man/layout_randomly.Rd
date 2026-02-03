@@ -30,7 +30,7 @@ is probably a useless layout, but it can use as a starting point for other
 layout generators.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}
 }
 
 \seealso{

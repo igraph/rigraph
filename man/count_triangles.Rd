@@ -36,7 +36,7 @@ to the first triangle, etc.
 \code{count_triangles()} counts how many triangles a vertex is part of.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_list_triangles}{\code{list_triangles()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_count_adjacent_triangles}{\code{count_adjacent_triangles()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_list_triangles}{\code{list_triangles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_count_adjacent_triangles}{\code{count_adjacent_triangles()}}
 }
 
 \examples{

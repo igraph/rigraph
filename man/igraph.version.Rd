@@ -13,7 +13,7 @@ igraph.version()
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_version}{\code{version()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version}{\code{version()}}
 }
 
 \keyword{internal}

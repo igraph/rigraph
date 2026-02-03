@@ -24,7 +24,7 @@ If \verb{rep(0, size))}, the default, no cuts are made.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
 }
 
 \keyword{internal}

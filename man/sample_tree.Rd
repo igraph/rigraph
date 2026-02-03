@@ -31,7 +31,7 @@ In other words, the function generates each possible labelled tree with the
 given number of nodes with the same probability.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_tree_game}{\code{tree_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_tree_game}{\code{tree_game()}}
 }
 
 \examples{

@@ -31,7 +31,7 @@ interval, otherwise a warning is given. For negative dot products, no edges
 are added; dot products that are larger than one always add an edge.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_dot_product_game}{\code{dot_product_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}
 }
 
 \examples{

@@ -25,7 +25,7 @@ Calculate the convex hull of a set of points, i.e. the covering polygon that
 has the smallest area.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Spatial.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}
 }
 
 \examples{

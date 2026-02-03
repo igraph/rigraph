@@ -33,7 +33,7 @@ values at the two ends of edges.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}
 }
 
 \keyword{internal}

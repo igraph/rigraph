@@ -108,7 +108,7 @@ Undirected graphs are effectively treated as directed ones with all-reciprocal e
 Thus, self-loops are taken into account twice in undirected graphs.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
 }
 
 \examples{

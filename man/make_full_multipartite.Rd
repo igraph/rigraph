@@ -31,7 +31,7 @@ creates a complete multipartite graph where all possible edges between
 different partitions are present.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

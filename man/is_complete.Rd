@@ -18,7 +18,7 @@ directed pairs of vertices. igraph considers both the singleton graph
 and the null graph complete.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_complete}{\code{is_complete()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_complete}{\code{is_complete()}}
 }
 
 \examples{

@@ -53,7 +53,7 @@ assortativity, and is often disconnected.
 The \dQuote{index} method selects the vertices in order of their index.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_bipartite_degree_sequence}{\code{realize_bipartite_degree_sequence()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence}{\code{realize_bipartite_degree_sequence()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

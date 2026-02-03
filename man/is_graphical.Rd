@@ -37,7 +37,7 @@ can perform the check also when self-loops, multi-edges, or both are allowed
 in the graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
 }
 
 \examples{

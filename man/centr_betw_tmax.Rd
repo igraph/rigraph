@@ -26,7 +26,7 @@ parameters.
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_betweenness_tmax}{\code{centralization_betweenness_tmax()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_betweenness_tmax}{\code{centralization_betweenness_tmax()}}
 }
 
 \examples{

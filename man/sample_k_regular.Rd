@@ -32,7 +32,7 @@ The game simply uses \code{\link[=sample_degseq]{sample_degseq()}} with appropri
 constructed degree sequences.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_k_regular_game}{\code{k_regular_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_k_regular_game}{\code{k_regular_game()}}
 }
 
 \examples{

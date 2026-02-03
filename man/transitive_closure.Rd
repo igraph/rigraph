@@ -30,7 +30,7 @@ For undirected graphs, this is equivalent to connecting all vertices that
 are in the same connected component.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure}{\code{transitive_closure()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitive_closure}{\code{transitive_closure()}}
 }
 
 \examples{

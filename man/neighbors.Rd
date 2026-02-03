@@ -23,7 +23,7 @@ A vertex is a neighbor of another one (in other words, the two
 vertices are adjacent), if they are incident to the same edge.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_neighbors}{\code{neighbors()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_neighbors}{\code{neighbors()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

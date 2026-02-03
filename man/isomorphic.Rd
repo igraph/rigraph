@@ -94,7 +94,7 @@ Character constant, the heuristics to use in the BLISS algorithm for \code{graph
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic}{\code{isomorphic()}}, \href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic_bliss}{\code{isomorphic_bliss()}}, \href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic_vf2}{\code{isomorphic_vf2()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic}{\code{isomorphic()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_bliss}{\code{isomorphic_bliss()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_vf2}{\code{isomorphic_vf2()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
 }
 
 \examples{

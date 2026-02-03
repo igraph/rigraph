@@ -33,7 +33,7 @@ oc
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_simple_interconnected_islands_game}{\code{simple_interconnected_islands_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game}{\code{simple_interconnected_islands_game()}}
 }
 
 \seealso{

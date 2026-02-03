@@ -35,7 +35,7 @@ shuffling its vertices.
 Please see the reference given below.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_correlated_pair_game}{\code{correlated_pair_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game}{\code{correlated_pair_game()}}
 }
 
 \examples{

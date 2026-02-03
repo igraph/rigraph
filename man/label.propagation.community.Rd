@@ -51,7 +51,7 @@ will be ignored. Also note that vertices without labels cannot be fixed.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_label_propagation}{\code{community_label_propagation()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_label_propagation}{\code{community_label_propagation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
 }
 
 \keyword{internal}

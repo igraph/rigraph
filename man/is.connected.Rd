@@ -20,7 +20,7 @@ connected components to search. It is ignored for undirected graphs.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected}{\code{is_connected()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected}{\code{is_connected()}}
 }
 
 \keyword{internal}

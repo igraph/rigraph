@@ -76,7 +76,7 @@ automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_grou
 a compact representation of the automorphism group.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

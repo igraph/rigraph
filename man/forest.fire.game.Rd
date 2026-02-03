@@ -25,7 +25,7 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
 }
 
 \keyword{internal}

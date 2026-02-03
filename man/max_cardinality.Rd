@@ -37,7 +37,7 @@ The algorithm provides a simple basis for deciding whether a graph is
 chordal, see References below, and also \code{\link[=is_chordal]{is_chordal()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maximum_cardinality_search}{\code{maximum_cardinality_search()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_cardinality_search}{\code{maximum_cardinality_search()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

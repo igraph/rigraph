@@ -27,7 +27,7 @@ the vertex that it was connected to to the sequence. Repeat until there are
 only two vertices in the remaining graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer}{\code{from_prufer()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_from_prufer}{\code{from_prufer()}}
 }
 
 \examples{

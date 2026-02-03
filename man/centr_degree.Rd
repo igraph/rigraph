@@ -45,7 +45,7 @@ then the result was divided by this number.
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}
 }
 
 \examples{

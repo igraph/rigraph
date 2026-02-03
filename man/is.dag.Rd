@@ -17,7 +17,7 @@ is.dag(graph)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_dag}{\code{is_dag()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}
 }
 
 \keyword{internal}

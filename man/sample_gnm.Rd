@@ -31,7 +31,7 @@ at random from the set of all vertex pairs. This set includes potential
 self-connections as well if the \code{loops} parameter is \code{TRUE}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_erdos_renyi_game_gnm}{\code{erdos_renyi_game_gnm()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnm}{\code{erdos_renyi_game_gnm()}}
 }
 
 \examples{

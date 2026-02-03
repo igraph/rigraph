@@ -82,7 +82,7 @@ included only for having more descriptive function names.
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
 }
 
 \examples{

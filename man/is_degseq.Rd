@@ -26,7 +26,7 @@ degree vectors are equal and whether their sums are also equal. These are
 known sufficient and necessary conditions for a degree sequence to be valid.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
 }
 
 \examples{

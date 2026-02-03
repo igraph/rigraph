@@ -34,7 +34,7 @@ of total nodes. See also Kotsis, G: Interconnection Topologies for
 Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
 }
 
 \examples{

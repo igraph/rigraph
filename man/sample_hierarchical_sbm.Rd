@@ -40,7 +40,7 @@ The function generates a random graph according to the hierarchical
 stochastic block model.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_hsbm_game}{\code{hsbm_game()}}, \href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_hsbm_list_game}{\code{hsbm_list_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_game}{\code{hsbm_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_list_game}{\code{hsbm_list_game()}}
 }
 
 \examples{

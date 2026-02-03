@@ -18,7 +18,7 @@ graph.kautz(m, n)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_kautz}{\code{kautz()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kautz}{\code{kautz()}}
 }
 
 \keyword{internal}

@@ -53,7 +53,7 @@ Some authors refer to the bipartite adjacency matrix as the
 this naming to avoid confusion with the edge-vertex incidence matrix.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
 }
 
 \examples{
