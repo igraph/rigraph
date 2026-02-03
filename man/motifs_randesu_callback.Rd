@@ -30,6 +30,10 @@ the callback function for each motif).
 This function searches for motifs in a graph and calls a user-provided
 callback function for each motif found.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}
+}
+
 \examples{
 g <- sample_pa(100)
 count <- 0
