@@ -39,6 +39,10 @@ motifs_randesu_callback(graph, size = 3, cut_prob = NULL, callback)
 `NULL`, invisibly. This function is called for its side effects (calling
 the callback function for each motif).
 
+## Related documentation in the C library
+
+[`motifs_randesu_callback_closure()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback)
+
 ## See also
 
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
