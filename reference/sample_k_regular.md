@@ -43,7 +43,7 @@ with appropriately constructed degree sequences.
 
 ## Related documentation in the C library
 
-[`k_regular_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game)
+[`k_regular_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_k_regular_game)
 
 ## See also
 

@@ -28,5 +28,5 @@ topological.sort(graph, mode = c("out", "all", "in"))
 
 ## Related documentation in the C library
 
-[`topological_sorting()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_topological_sorting),
+[`topological_sorting()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_topological_sorting),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

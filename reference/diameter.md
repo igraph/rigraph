@@ -97,11 +97,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> + 5/10 vertices, from 3da36ea:
+#> + 5/10 vertices, from d36b0ea:
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> + 6/10 vertices, from 3da36ea:
+#> + 6/10 vertices, from d36b0ea:
 #> [1] 1 2 3 4 5 6
 ```

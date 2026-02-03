@@ -40,7 +40,7 @@ the given number of nodes with the same probability.
 
 ## Related documentation in the C library
 
-[`tree_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_tree_game)
+[`tree_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_tree_game)
 
 ## See also
 

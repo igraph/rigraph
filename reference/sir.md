@@ -128,7 +128,7 @@ the results, respectively, in bins calculated with `time_bins()`.
 
 ## Related documentation in the C library
 
-[`sir()`](https://igraph.org/c/html/latest/igraph-Spatial-Games.html#igraph_sir)
+[`sir()`](https://igraph.org/c/html/latest/igraph-Processes.html#igraph_sir)
 
 ## References
 

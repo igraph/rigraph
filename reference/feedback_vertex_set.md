@@ -39,7 +39,7 @@ containing the feedback vertex set.
 
 ## Related documentation in the C library
 
-[`feedback_vertex_set()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_vertex_set),
+[`feedback_vertex_set()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_feedback_vertex_set),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
 
 ## See also
@@ -84,6 +84,6 @@ Graph cycles
 ``` r
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> + 2/9 vertices, from dae8417:
+#> + 2/9 vertices, from b97da9c:
 #> [1] 2 8
 ```

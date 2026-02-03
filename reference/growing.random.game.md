@@ -33,4 +33,4 @@ growing.random.game(n, m = 1, directed = TRUE, citation = FALSE)
 
 ## Related documentation in the C library
 
-[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game)
+[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_growing_random_game)

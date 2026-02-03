@@ -43,7 +43,8 @@ belong to the first triangle, etc.
 ## Related documentation in the C library
 
 [`list_triangles()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_list_triangles),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`count_adjacent_triangles()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_count_adjacent_triangles)
 
 ## See also
 

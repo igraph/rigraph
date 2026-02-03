@@ -27,7 +27,7 @@ not, the graph is a DAG.
 
 ## Related documentation in the C library
 
-[`is_dag()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag)
+[`is_dag()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_dag)
 
 ## See also
 

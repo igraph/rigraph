@@ -44,7 +44,6 @@ The vertex IDs of the central vertices.
 
 ## Related documentation in the C library
 
-[`graph_center_dijkstra()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_graph_center_dijkstra),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
 
@@ -65,13 +64,13 @@ Other paths:
 ``` r
 tree <- make_tree(100, 7)
 graph_center(tree)
-#> + 2/100 vertices, from bd6bca1:
+#> + 2/100 vertices, from a215220:
 #> [1] 1 2
 graph_center(tree, mode = "in")
-#> + 1/100 vertex, from bd6bca1:
+#> + 1/100 vertex, from a215220:
 #> [1] 1
 graph_center(tree, mode = "out")
-#> + 85/100 vertices, from bd6bca1:
+#> + 85/100 vertices, from a215220:
 #>  [1]  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
 #> [20]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
 #> [39]  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
@@ -81,11 +80,11 @@ graph_center(tree, mode = "out")
 # Without and with weights
 ring <- make_ring(10)
 graph_center(ring)
-#> + 10/10 vertices, from f66dd06:
+#> + 10/10 vertices, from fe68e68:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 # Add weights
 E(ring)$weight <- seq_len(ecount(ring))
 graph_center(ring)
-#> + 1/10 vertex, from f66dd06:
+#> + 1/10 vertex, from fe68e68:
 #> [1] 7
 ```

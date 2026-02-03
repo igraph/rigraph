@@ -40,7 +40,7 @@ self-connections as well if the `loops` parameter is `TRUE`.
 
 ## Related documentation in the C library
 
-[`erdos_renyi_game_gnm()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnm)
+[`erdos_renyi_game_gnm()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_erdos_renyi_game_gnm)
 
 ## References
 

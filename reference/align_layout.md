@@ -26,6 +26,10 @@ align_layout(graph, layout)
 
 modified layout matrix
 
+## Related documentation in the C library
+
+[`layout_align()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_align)
+
 ## Examples
 
 ``` r

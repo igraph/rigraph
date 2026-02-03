@@ -27,6 +27,10 @@ A named list with components:
 
   The coordinates of the corners of the convex hull.
 
+## Related documentation in the C library
+
+[`convex_hull_2d()`](https://igraph.org/c/html/latest/igraph-Spatial.html#igraph_convex_hull_2d)
+
 ## References
 
 Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford

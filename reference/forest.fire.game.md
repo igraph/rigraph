@@ -37,4 +37,4 @@ forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game)
+[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_forest_fire_game)
