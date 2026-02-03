@@ -50,8 +50,13 @@ preference.game(
 
 - directed:
 
-  Logical constant, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
-  Logical constant, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
+
+## Related documentation in the C library
+
+[`preference_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_preference_game),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

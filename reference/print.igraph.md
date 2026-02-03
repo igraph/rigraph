@@ -124,6 +124,14 @@ details.
 As of igraph 1.1.1, the `str.igraph` function is defunct, use
 `print_all()`.
 
+## Related documentation in the C library
+
+[[`degree()`](https://r.igraph.org/reference/degree.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_degree),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount)
+
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
@@ -133,11 +141,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_ring(10)
 g
-#> IGRAPH ce3a86e U--- 10 10 -- Ring graph
+#> IGRAPH f806666 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from ce3a86e:
+#> + edges from f806666:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH ce3a86e U--- 10 10 -- Ring graph
+#> IGRAPH f806666 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```

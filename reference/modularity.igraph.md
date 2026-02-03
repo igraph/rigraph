@@ -93,6 +93,13 @@ the (possibly weighted) adjacency matrix, \\d_i\\ is the degree of
 vertex \\i\\, and \\m\\ is the number of edges (or the total weights in
 the graph, if it is weighed).
 
+## Related documentation in the C library
+
+[`modularity()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`modularity_matrix()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity_matrix)
+
 ## References
 
 Clauset, A.; Newman, M. E. J. & Moore, C. Finding community structure in

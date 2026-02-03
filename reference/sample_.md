@@ -34,6 +34,12 @@ modifier adds vertex attributes to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
 
+## Related documentation in the C library
+
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 Random graph models (games)
@@ -85,8 +91,4 @@ blocky <- sample_(sbm(
 
 blocky2 <- pref_matrix %>%
   sample_sbm(n = 20, block.sizes = c(10, 10))
-
-## Arguments are passed on from sample_ to sample_sbm
-blocky3 <- pref_matrix %>%
-  sample_(sbm(), n = 20, block.sizes = c(10, 10))
 ```

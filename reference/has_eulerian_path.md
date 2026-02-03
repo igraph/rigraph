@@ -52,6 +52,15 @@ as a result. `eulerian_cycle()` returns a possible Eulerian cycle,
 described with its edge and vertex sequence, or throws an error if no
 such cycle exists.
 
+## Related documentation in the C library
+
+[`is_eulerian()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian),
+[`eulerian_path()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[`eulerian_cycle()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle)
+
 ## See also
 
 Graph cycles
@@ -63,12 +72,6 @@ Graph cycles
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md),
 [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
 
-## Related documentation in the C library
-
-[`is_eulerian()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian),
-[`eulerian_path()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path),
-[`eulerian_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle).
-
 ## Examples
 
 ``` r
@@ -78,17 +81,17 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 4689585 (vertex names):
+#> + 10/10 edges from 59868dd (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 4689585:
+#> + 11/6 vertices, named, from 59868dd:
 #>  [1] A B C D B F A E D F E
 #> 
 
 has_eulerian_cycle(g)
 #> [1] FALSE
 try(eulerian_cycle(g))
-#> Error in eulerian_cycle(g) : 
+#> Error in eulerian_cycle_impl(graph = graph) : 
 #>   At vendor/cigraph/src/paths/eulerian.c:615 : The graph does not have an Eulerian cycle. Input problem has no solution
 ```

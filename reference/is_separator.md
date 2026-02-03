@@ -26,6 +26,11 @@ is_separator(graph, candidate)
 A logical scalar, whether the supplied vertex set is a (minimal) vertex
 separator or not. lists all vertex separator of minimum size.
 
+## Related documentation in the C library
+
+[`is_separator()`](https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_separator),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other flow:
@@ -40,21 +45,17 @@ Other flow:
 [`st_min_cuts()`](https://r.igraph.org/reference/st_min_cuts.md),
 [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
 
-## Related documentation in the C library
-
-[`is_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator).
-
 ## Examples
 
 ``` r
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from 65e6058:
+#> + 2/4 vertices, from 37f5bea:
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from 65e6058:
+#> + 2/4 vertices, from 37f5bea:
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

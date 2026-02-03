@@ -21,3 +21,7 @@ graph.full.citation(n, directed = TRUE)
 - directed:
 
   Whether to create a directed graph.
+
+## Related documentation in the C library
+
+[`full_citation()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_citation)

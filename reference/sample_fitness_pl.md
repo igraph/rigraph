@@ -43,12 +43,11 @@ sample_fitness_pl(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the generated graph.
+  Logical scalar, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the generated
-  graph.
+  Logical scalar, whether to allow multiple edges in the graph.
 
 - finite.size.correction:
 
@@ -86,6 +85,10 @@ where \\i_0\\ is a constant chosen appropriately to ensure that the
 maximum degree is less than the square root of the number of edges times
 the average degree; see the paper of Chung and Lu, and Cho et al for
 more details.
+
+## Related documentation in the C library
+
+[`static_power_law_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game)
 
 ## References
 
@@ -132,10 +135,6 @@ Random graph models (games)
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>
-
-## Related documentation in the C library
-
-[`static_power_law_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game).
 
 ## Examples
 

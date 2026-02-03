@@ -53,6 +53,11 @@ attributes (graph, vertex and edge) of the first graph.
 Note that `big` and `small` must both be directed or both be undirected,
 otherwise an error message is given.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -76,6 +81,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -99,7 +105,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH f60b1ff UN-- 11 15 -- 
+#> IGRAPH f1d7284 UN-- 11 15 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n), name (v/c)
 #> + edges (vertex names):

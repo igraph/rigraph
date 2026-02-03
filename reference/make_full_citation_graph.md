@@ -9,7 +9,7 @@ directed graph, where every `i->j` edge is present if and only if
 ``` r
 make_full_citation_graph(n, directed = TRUE)
 
-full_citation_graph(...)
+full_citation_graph(n, directed = TRUE)
 ```
 
 ## Arguments
@@ -22,13 +22,13 @@ full_citation_graph(...)
 
   Whether to create a directed graph.
 
-- ...:
-
-  Passed to `make_full_citation_graph()`.
-
 ## Value
 
 An igraph graph.
+
+## Related documentation in the C library
+
+[`full_citation()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_citation)
 
 ## See also
 
@@ -38,19 +38,23 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> IGRAPH 8b66d78 D--- 10 45 -- Full citation graph
+#> IGRAPH 4e2323d D--- 10 45 -- Full citation graph
 #> + attr: name (g/c)
 #> + graph attributes:
 #> | + name:

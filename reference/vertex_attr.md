@@ -29,6 +29,10 @@ vertex_attr(graph, name, index = V(graph))
 The value of the vertex attribute, or the list of all vertex attributes,
 if `name` is missing.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Vertex, edge and graph attributes

@@ -16,12 +16,17 @@ component_wise(merge_method = "dla")
   Merging algorithm, the `method` argument of
   [`merge_coords()`](https://r.igraph.org/reference/merge_coords.md).
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 [`merge_coords()`](https://r.igraph.org/reference/merge_coords.md),
 [`layout_()`](https://r.igraph.org/reference/layout_.md).
 
 Other layout modifiers:
+[`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md),
 [`normalize()`](https://r.igraph.org/reference/normalize.md)
 
 Other graph layouts:

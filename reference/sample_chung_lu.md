@@ -129,6 +129,10 @@ and Reittu (2006). For a discussion of these three model variants, see
 Section 16.4 of Bollobás, Janson, Riordan (2007), as well as Van Der
 Hofstad (2013).
 
+## Related documentation in the C library
+
+[`chung_lu_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game)
+
 ## References
 
 Chung, F., and Lu, L. (2002). Connected components in a random graph
@@ -199,10 +203,6 @@ Random graph models (games)
 [`sample_traits_callaway()`](https://r.igraph.org/reference/sample_traits_callaway.md),
 [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md)
 
-## Related documentation in the C library
-
-[`chung_lu_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game).
-
 ## Examples
 
 ``` r
@@ -212,11 +212,11 @@ rowMeans(replicate(
   100,
   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2)), mode = "out")
 ))
-#> [1] 0.88 3.04 1.96 1.03
+#> [1] 1.18 3.08 1.98 1.04
 
 rowMeans(replicate(
   100,
   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
-#> [1] 0.77 1.71 1.37 0.66
+#> [1] 0.75 1.71 1.14 0.74
 ```

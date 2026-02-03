@@ -7,7 +7,7 @@ A graph with no edges
 ``` r
 make_empty_graph(n = 0, directed = TRUE)
 
-empty_graph(...)
+empty_graph(n = 0, directed = TRUE)
 ```
 
 ## Arguments
@@ -20,13 +20,13 @@ empty_graph(...)
 
   Whether to create a directed graph.
 
-- ...:
-
-  Passed to `make_graph_empty`.
-
 ## Value
 
 An igraph graph.
+
+## Related documentation in the C library
+
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty)
 
 ## See also
 
@@ -36,25 +36,25 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
-
-## Related documentation in the C library
-
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty).
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 9d022a6 D--- 10 0 -- 
-#> + edges from 9d022a6:
+#> IGRAPH b4a7709 D--- 10 0 -- 
+#> + edges from b4a7709:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH 9f46347 U--- 5 0 -- 
-#> + edges from 9f46347:
+#> IGRAPH 9e47929 U--- 5 0 -- 
+#> + edges from 9e47929:
 ```

@@ -43,3 +43,7 @@ maximal.cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
   then it will be overwritten.) Each clique will be a separate line in
   the file, given with the numeric ids of its vertices, separated by
   whitespace.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

@@ -34,6 +34,10 @@ count_motifs(graph, size = 3, cut.prob = NULL)
 `count_motifs()` calculates the total number of motifs of a given size
 in graph.
 
+## Related documentation in the C library
+
+[`motifs_randesu_no()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_no)
+
 ## See also
 
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md)
@@ -41,6 +45,7 @@ in graph.
 Other graph motifs:
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
+[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Examples

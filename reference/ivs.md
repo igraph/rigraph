@@ -74,6 +74,14 @@ reference below.
 
 `is_ivs()` tests if no pairs within a vertex set are connected.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`largest_independent_vertex_sets()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_independent_vertex_sets),
+[`maximal_independent_vertex_sets()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_independent_vertex_sets),
+[`independence_number()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_independence_number),
+[`is_independent_vertex_set()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set)
+
 ## References
 
 S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new algorithm for
@@ -92,10 +100,6 @@ Tamas Nepusz <ntamas@gmail.com> ported it from the Very Nauty Graph
 Library by Keith Briggs (<https://keithbriggs.info/>) and Gabor Csardi
 <csardi.gabor@gmail.com> wrote the R interface and this manual page.
 
-## Related documentation in the C library
-
-[`is_independent_vertex_set()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_independent_vertex_set).
-
 ## Examples
 
 ``` r
@@ -108,83 +112,83 @@ ivs_size(g)
 #> [1] 4
 ivs(g, min = ivs_size(g))
 #> [[1]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 37 55 56
 #> 
 #> [[2]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 55 56 69
 #> 
 #> [[3]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 56 69 74
 #> 
 #> [[4]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  8 15 73 80
 #> 
 #> [[5]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  8 15 73 84
 #> 
 #> [[6]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 13 16 37 40
 #> 
 #> [[7]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 21 32 45 61
 #> 
 #> [[8]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 22 55 56 64
 #> 
 #> [[9]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 23 69 75 90
 #> 
 largest_ivs(g)
 #> [[1]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 21 32 45 61
 #> 
 #> [[2]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 37 55 56
 #> 
 #> [[3]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 55 56 69
 #> 
 #> [[4]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  7 56 69 74
 #> 
 #> [[5]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  8 15 73 80
 #> 
 #> [[6]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1]  8 15 73 84
 #> 
 #> [[7]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 22 55 56 64
 #> 
 #> [[8]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 23 69 75 90
 #> 
 #> [[9]]
-#> + 4/100 vertices, from 70df7b6:
+#> + 4/100 vertices, from 55ebbda:
 #> [1] 13 16 37 40
 #> 
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
-#> IGRAPH 4454f3f U--- 4 0 -- Erdos-Renyi (gnp) graph
+#> IGRAPH a5378de U--- 4 0 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from 4454f3f:
+#> + edges from a5378de:
 
 length(max_ivs(g))
 #> [1] 326

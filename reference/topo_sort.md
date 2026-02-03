@@ -37,6 +37,11 @@ function returns a possible topological sort among them. If the graph is
 not acyclic (it has at least one cycle), a partial topological sort is
 returned and a warning is issued.
 
+## Related documentation in the C library
+
+[`topological_sorting()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_topological_sorting),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural.properties:
@@ -75,7 +80,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ``` r
 g <- sample_pa(100)
 topo_sort(g)
-#> + 100/100 vertices, from 1d6bf1a:
+#> + 100/100 vertices, from adf251a:
 #>   [1]   3   4  11  13  18  19  24  26  29  33  34  35  37  38  39  40  41  45
 #>  [19]  47  48  49  50  52  53  55  57  58  59  60  62  63  64  65  66  68  69
 #>  [37]  70  71  72  73  74  75  76  78  79  80  81  82  83  84  85  86  87  88

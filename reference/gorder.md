@@ -20,6 +20,10 @@ gorder(graph)
 
 Number of vertices, numeric scalar.
 
+## Related documentation in the C library
+
+[`vcount()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -36,10 +40,6 @@ Other structural queries:
 [`is_directed()`](https://r.igraph.org/reference/is_directed.md),
 [`neighbors()`](https://r.igraph.org/reference/neighbors.md),
 [`tail_of()`](https://r.igraph.org/reference/tail_of.md)
-
-## Related documentation in the C library
-
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount).
 
 ## Examples
 

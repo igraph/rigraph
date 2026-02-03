@@ -17,3 +17,8 @@ maximal.independent.vertex.sets(graph)
 - graph:
 
   The input graph.
+
+## Related documentation in the C library
+
+[`maximal_independent_vertex_sets()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_independent_vertex_sets),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

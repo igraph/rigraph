@@ -53,6 +53,11 @@ graph.
 `sample_motifs()` estimates the total number of motifs of a given size
 in a graph based on a sample.
 
+## Related documentation in the C library
+
+[`motifs_randesu_estimate()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_estimate),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md)
@@ -60,16 +65,17 @@ in a graph based on a sample.
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
-[`motifs()`](https://r.igraph.org/reference/motifs.md)
+[`motifs()`](https://r.igraph.org/reference/motifs.md),
+[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md)
 
 ## Examples
 
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 401  NA  93   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 354  NA  89   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 494
+#> [1] 443
 sample_motifs(g, 3)
-#> [1] 60
+#> [1] 10
 ```

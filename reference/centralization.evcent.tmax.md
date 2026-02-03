@@ -36,3 +36,7 @@ centralization.evcent.tmax(
 
   **\[deprecated\]** Ignored. Computing eigenvector centralization
   requires normalized eigenvector centrality scores.
+
+## Related documentation in the C library
+
+[`centralization_eigenvector_centrality_tmax()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax)

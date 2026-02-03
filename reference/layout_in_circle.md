@@ -35,6 +35,11 @@ A numeric matrix with two columns, and one row for each vertex.
 If you want to order the vertices differently, then permute them using
 the [`permute()`](https://r.igraph.org/reference/permute.md) function.
 
+## Related documentation in the C library
+
+[`layout_circle()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_circle),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other graph layouts:

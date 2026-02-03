@@ -18,3 +18,8 @@ maximum.cardinality.search(graph)
 
   The input graph. It may be directed, but edge directions are ignored,
   as the algorithm is defined for undirected graphs.
+
+## Related documentation in the C library
+
+[`maximum_cardinality_search()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maximum_cardinality_search),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

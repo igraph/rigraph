@@ -34,3 +34,7 @@ forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 - directed:
 
   Logical scalar, whether to create a directed graph.
+
+## Related documentation in the C library
+
+[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game)

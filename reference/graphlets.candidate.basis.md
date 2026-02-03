@@ -24,3 +24,9 @@ graphlets.candidate.basis(graph, weights = NULL)
   Edge weights. If the graph has a `weight` edge attribute and this
   argument is `NULL` (the default), then the `weight` edge attribute is
   used.
+
+## Related documentation in the C library
+
+[`graphlets_candidate_basis()`](https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets_candidate_basis),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

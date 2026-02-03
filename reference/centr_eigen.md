@@ -69,6 +69,10 @@ A named list with the following components:
   The same as above, the theoretical maximum centralization score for a
   graph with the same number of vertices.
 
+## Related documentation in the C library
+
+[`centralization_eigenvector_centrality()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality)
+
 ## See also
 
 Other centralization related:
@@ -80,10 +84,6 @@ Other centralization related:
 [`centr_degree_tmax()`](https://r.igraph.org/reference/centr_degree_tmax.md),
 [`centr_eigen_tmax()`](https://r.igraph.org/reference/centr_eigen_tmax.md),
 [`centralize()`](https://r.igraph.org/reference/centralize.md)
-
-## Related documentation in the C library
-
-[`centralization_eigenvector_centrality()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality).
 
 ## Examples
 

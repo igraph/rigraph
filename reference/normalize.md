@@ -35,7 +35,8 @@ normalize(
 [`layout_()`](https://r.igraph.org/reference/layout_.md).
 
 Other layout modifiers:
-[`component_wise()`](https://r.igraph.org/reference/component_wise.md)
+[`component_wise()`](https://r.igraph.org/reference/component_wise.md),
+[`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),
@@ -64,15 +65,15 @@ Other graph layouts:
 
 ``` r
 layout_(make_ring(10), with_fr(), normalize())
-#>              [,1]       [,2]
-#>  [1,]  0.09096126 -1.0000000
-#>  [2,] -0.53792883 -0.8813376
-#>  [3,] -0.95684288 -0.4219894
-#>  [4,] -1.00000000  0.1908760
-#>  [5,] -0.67853962  0.7301523
-#>  [6,] -0.09747169  1.0000000
-#>  [7,]  0.53026861  0.8838206
-#>  [8,]  0.94593981  0.4153134
-#>  [9,]  1.00000000 -0.2001062
-#> [10,]  0.67590077 -0.7396812
+#>             [,1]       [,2]
+#>  [1,]  0.7116738  0.7230987
+#>  [2,]  0.1517127  1.0000000
+#>  [3,] -0.4639190  0.8984142
+#>  [4,] -0.9056187  0.4571093
+#>  [5,] -1.0000000 -0.1643782
+#>  [6,] -0.7153917 -0.7176244
+#>  [7,] -0.1541421 -1.0000000
+#>  [8,]  0.4622235 -0.8993136
+#>  [9,]  0.9043890 -0.4515502
+#> [10,]  1.0000000  0.1651288
 ```

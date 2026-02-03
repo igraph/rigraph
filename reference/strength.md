@@ -47,6 +47,12 @@ strength(
 
 A numeric vector giving the strength of the vertices.
 
+## Related documentation in the C library
+
+[`strength()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras, Alessandro
@@ -75,10 +81,6 @@ Centrality measures
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`strength()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_strength).
 
 ## Examples
 

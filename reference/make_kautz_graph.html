@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Kautz graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_kautz_graph.Rd</code></div>
     </div>
 
@@ -57,7 +57,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_kautz_graph</span><span class="op">(</span><span class="va">m</span>, <span class="va">n</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kautz_graph</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">kautz_graph</span><span class="op">(</span><span class="va">m</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -70,10 +70,6 @@
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>Integer scalar, the length of the labels. See details below.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_kautz_graph()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -92,6 +88,10 @@ removing the first letter and appending a letter to it.</p>
 details.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Generators.html#igraph_kautz" class="external-link"><code>kautz()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="make_de_bruijn_graph.html">make_de_bruijn_graph()</a></code>, <code><a href="make_line_graph.html">make_line_graph()</a></code></p></div>
     </div>
@@ -105,16 +105,16 @@ written by Vincent Matossian.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="make_line_graph.html">make_line_graph</a></span><span class="op">(</span><span class="fu">make_kautz_graph</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a029e81 D--- 12 24 -- Line graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 47c262d D--- 12 24 -- Line graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a029e81:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 47c262d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  5-&gt; 1  9-&gt; 1  5-&gt; 2  9-&gt; 2  6-&gt; 3 10-&gt; 3  6-&gt; 4 10-&gt; 4  1-&gt; 5 11-&gt; 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  1-&gt; 6 11-&gt; 6  2-&gt; 7 12-&gt; 7  2-&gt; 8 12-&gt; 8  3-&gt; 9  7-&gt; 9  3-&gt;10  7-&gt;10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  4-&gt;11  8-&gt;11  4-&gt;12  8-&gt;12</span>
 <span class="r-in"><span><span class="fu">make_kautz_graph</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 17e1898 D--- 12 24 -- Kautz graph 2-2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 30e578c D--- 12 24 -- Kautz graph 2-2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), n (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 17e1898:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 30e578c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 5  1-&gt; 6  2-&gt; 7  2-&gt; 8  3-&gt; 9  3-&gt;10  4-&gt;11  4-&gt;12  5-&gt; 1  5-&gt; 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  6-&gt; 3  6-&gt; 4  7-&gt; 9  7-&gt;10  8-&gt;11  8-&gt;12  9-&gt; 1  9-&gt; 2 10-&gt; 3 10-&gt; 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] 11-&gt; 5 11-&gt; 6 12-&gt; 7 12-&gt; 8</span>

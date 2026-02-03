@@ -33,6 +33,12 @@ t(x)
 The result graph where the direction of the edges with the given IDs are
 reversed
 
+## Related documentation in the C library
+
+[`reverse_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -56,21 +62,18 @@ Other functions for manipulating graph structure:
 [`permute()`](https://r.igraph.org/reference/permute.md),
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
-
-## Related documentation in the C library
-
-[`reverse_edges()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges).
 
 ## Examples
 
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH f28bf01 DN-- 4 3 -- 
+#> IGRAPH ae79480 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from f28bf01 (vertex names):
+#> + edges from ae79480 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

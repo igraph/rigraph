@@ -25,7 +25,22 @@ sample_pa_age(
   time.window = NULL
 )
 
-pa_age(...)
+pa_age(
+  n,
+  pa.exp,
+  aging.exp,
+  m = NULL,
+  aging.bin = 300,
+  out.dist = NULL,
+  out.seq = NULL,
+  out.pref = FALSE,
+  directed = TRUE,
+  zero.deg.appeal = 1,
+  zero.age.appeal = 0,
+  deg.coef = 1,
+  age.coef = 1,
+  time.window = NULL
+)
 ```
 
 ## Arguments
@@ -99,10 +114,6 @@ pa_age(...)
   Integer constant, if NULL only adjacent added in the last
   `time.windows` time steps are counted as a basis of the preferential
   attachment. See also details below.
-
-- ...:
-
-  Passed to `sample_pa_age()`.
 
 ## Value
 
@@ -196,9 +207,9 @@ g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
 g2 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -1, aging.bin = 1000)
 g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
 max(degree(g1))
-#> [1] 195
+#> [1] 340
 max(degree(g2))
-#> [1] 25
+#> [1] 31
 max(degree(g3))
-#> [1] 10
+#> [1] 11
 ```

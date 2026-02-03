@@ -37,6 +37,10 @@ we assume that the left and the right of the vector are coming from two
 Normal distributions, with different means, and we want to know their
 border. See examples below.
 
+## Related documentation in the C library
+
+[`dim_select()`](https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_dim_select)
+
 ## References
 
 M. Zhu, and A. Ghodsi (2006). Automatic dimensionality selection from
@@ -54,10 +58,6 @@ Other embedding:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`dim_select()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select).
 
 ## Examples
 

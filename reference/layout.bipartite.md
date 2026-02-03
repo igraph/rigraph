@@ -38,3 +38,8 @@ layout.bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
   Integer scalar, the maximum number of iterations in the crossing
   minimization stage. 100 is a reasonable default; if you feel that you
   have too many edge crossings, increase this.
+
+## Related documentation in the C library
+
+[`layout_bipartite()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_bipartite),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

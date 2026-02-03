@@ -39,6 +39,11 @@ The graph, with the edges (and attributes) added.
 If attributes are supplied, and they are not present in the graph, their
 values for the original edges of the graph are set to `NA`.
 
+## Related documentation in the C library
+
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -62,6 +67,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -79,7 +85,7 @@ g <- make_empty_graph(n = 5) %>%
   set_edge_attr("color", value = "red") %>%
   add_edges(c(5, 1), color = "green")
 E(g)[[]]
-#> + 5/5 edges from 146e520:
+#> + 5/5 edges from 2341958:
 #>   tail head tid hid color
 #> 1    1    2   1   2   red
 #> 2    2    3   2   3   red

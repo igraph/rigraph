@@ -8,7 +8,7 @@ evolution.
 ``` r
 sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
-growing(...)
+growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 ```
 
 ## Arguments
@@ -23,7 +23,7 @@ growing(...)
 
 - ...:
 
-  Passed to `sample_growing()`.
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -45,6 +45,10 @@ added to the graph and `m` new edges are created. If `citation` is
 `FALSE` these edges are connecting two uniformly randomly chosen
 vertices, otherwise the edges are connecting new vertex to uniformly
 randomly chosen old vertices.
+
+## Related documentation in the C library
+
+[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game)
 
 ## See also
 
@@ -79,10 +83,6 @@ Random graph models (games)
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`growing_random_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game).
 
 ## Examples
 

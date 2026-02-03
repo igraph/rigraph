@@ -15,7 +15,7 @@ between different kinds."><meta property="og:image" content="https://r.igraph.or
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ between different kinds."><meta property="og:image" content="https://r.igraph.or
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create a bipartite graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_bipartite_graph.Rd</code></div>
     </div>
 
@@ -60,7 +60,7 @@ between different kinds.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_bipartite_graph</span><span class="op">(</span><span class="va">types</span>, <span class="va">edges</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">bipartite_graph</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">bipartite_graph</span><span class="op">(</span><span class="va">types</span>, <span class="va">edges</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -86,10 +86,6 @@ vector. The vector may be a string vector if <code>types</code> is a named vecto
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.</p></dd>
 
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_bipartite_graph()</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -110,6 +106,10 @@ vertex names; in this case, <code>types</code> must be a named vector that speci
 the type for each vertex name that occurs in <code>edges</code>.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="make_graph.html">make_graph()</a></code> to create one-mode networks</p>
 <p>Bipartite graphs
@@ -127,9 +127,9 @@ the type for each vertex name that occurs in <code>edges</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_bipartite_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4be145f U--B 10 5 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6bd06cf U--B 10 5 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4be145f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6bd06cf:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

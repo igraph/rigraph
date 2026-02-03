@@ -21,3 +21,7 @@ graph.empty(n = 0, directed = TRUE)
 - directed:
 
   Whether to create a directed graph.
+
+## Related documentation in the C library
+
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty)

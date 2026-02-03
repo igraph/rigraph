@@ -15,7 +15,7 @@ square"><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ square"><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Geometric random graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_grg.Rd</code></div>
     </div>
 
@@ -60,7 +60,7 @@ square</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_grg</span><span class="op">(</span><span class="va">nodes</span>, <span class="va">radius</span>, torus <span class="op">=</span> <span class="cn">FALSE</span>, coords <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">grg</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">grg</span><span class="op">(</span><span class="va">nodes</span>, <span class="va">radius</span>, torus <span class="op">=</span> <span class="cn">FALSE</span>, coords <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -84,10 +84,6 @@ edge.</p></dd>
 <dd><p>Logical scalar, whether to add the positions of the vertices
 as vertex attributes called ‘<code>x</code>’ and ‘<code>y</code>’.</p></dd>
 
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>sample_grg()</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -101,6 +97,10 @@ correspond to the vertices of the graph to create. Two points will be
 connected with an undirected edge if they are closer to each other in
 Euclidean norm than a given radius. If the <code>torus</code> argument is
 <code>TRUE</code> then a unit area torus is used instead of a square.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

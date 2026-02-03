@@ -114,3 +114,8 @@ spinglass.community(
   reduces to a graph coloring algorithm, using the number of spins as
   the number of colors. This argument is ignored if the ‘orig’
   implementation is chosen.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

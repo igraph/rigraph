@@ -54,6 +54,10 @@ The idea is that you convert your graph to an adjacency list by
 your modifications to the graphs and finally create again an igraph
 graph by calling `graph_from_adj_list()`.
 
+## Related documentation in the C library
+
+[`adjlist()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist)
+
 ## See also
 
 [`as_edgelist()`](https://r.igraph.org/reference/as_edgelist.md)
@@ -73,10 +77,6 @@ Other conversion:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`adjlist()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist).
 
 ## Examples
 

@@ -34,6 +34,11 @@ add_vertices(graph, nv, ..., attr = list())
 
 The graph, with the vertices (and attributes) added.
 
+## Related documentation in the C library
+
+[`add_vertices()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_add_vertices),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -57,6 +62,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -74,12 +80,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH e6534e2 D--- 5 4 -- 
+#> IGRAPH 9192560 D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from e6534e2:
+#> + edges from 9192560:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from e6534e2:
+#> + 5/5 vertices, from 9192560:
 #>   color
 #> 1   red
 #> 2   red

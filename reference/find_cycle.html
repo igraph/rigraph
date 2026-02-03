@@ -23,7 +23,7 @@ a specific cycle."><meta property="og:image" content="https://r.igraph.org/logo.
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ a specific cycle."><meta property="og:image" content="https://r.igraph.org/logo.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Finds a cycle in a graph, if there is one</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/cycles.R" class="external-link"><code>R/cycles.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/cycles.R" class="external-link"><code>R/cycles.R</code></a></small>
       <div class="d-none name"><code>find_cycle.Rd</code></div>
     </div>
 
@@ -94,6 +94,10 @@ the source vertex to one of the target vertices. A path is given by its
 vertex ids.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_find_cycle" class="external-link"><code>find_cycle()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount" class="external-link"><code><a href="gsize.html">ecount()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Graph cycles
 <code><a href="feedback_arc_set.html">feedback_arc_set()</a></code>,
@@ -104,10 +108,6 @@ vertex ids.</p>
 <code><a href="is_dag.html">is_dag()</a></code>,
 <code><a href="simple_cycles.html">simple_cycles()</a></code></p></div>
     </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_find_cycle" class="external-link"><code>find_cycle()</code></a>.</p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -115,21 +115,21 @@ vertex ids.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_lattice.html">make_lattice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">find_cycle</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 vertices, from 148fc83:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 vertices, from 432b638:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 6 5 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/12 edges from 148fc83:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/12 edges from 432b638:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8--9 6--9 5--6 5--8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empty results are returned for acyclic graphs</span></span></span>
 <span class="r-in"><span><span class="fu">find_cycle</span><span class="op">(</span><span class="fu"><a href="sample_tree.html">sample_tree</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/5 vertices, from eee9ab9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/5 vertices, from bc715d6:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/4 edges from eee9ab9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/4 edges from bc715d6:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

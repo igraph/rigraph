@@ -25,3 +25,7 @@ graph.extended.chordal.ring(n, w, directed = FALSE)
 - directed:
 
   Logical scalar, whether or not to create a directed graph.
+
+## Related documentation in the C library
+
+[`extended_chordal_ring()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_extended_chordal_ring)

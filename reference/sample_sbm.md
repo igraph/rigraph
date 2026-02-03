@@ -7,7 +7,7 @@ Sampling from the stochastic block model of networks
 ``` r
 sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
-sbm(...)
+sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -30,15 +30,11 @@ sbm(...)
 
 - directed:
 
-  Logical scalar, whether to generate a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
   Logical scalar, whether self-loops are allowed in the graph.
-
-- ...:
-
-  Passed to `sample_sbm()`.
 
 ## Value
 
@@ -51,6 +47,10 @@ equivalent of) Bernoulli trials for each potential edge with the
 probabilities given by the Bernoulli rate matrix, `pref.matrix`. The
 order of the vertices in the generated graph corresponds to the
 `block.sizes` argument.
+
+## Related documentation in the C library
+
+[`sbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game)
 
 ## References
 
@@ -91,10 +91,6 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`sbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game).
-
 ## Examples
 
 ``` r
@@ -102,16 +98,16 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> IGRAPH 8d1589c U--- 1000 17014 -- Stochastic block model
+#> IGRAPH 5fa4fa8 U--- 1000 17051 -- Stochastic block model
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 8d1589c:
-#>  [1]  3-- 7  4-- 7  2-- 8  3--10  1--11  3--11  7--11 10--11  2--12  5--12
-#> [11]  7--13  7--14  9--15  5--16  8--16  3--18 15--18  3--19  8--20  3--21
-#> [21] 10--21 15--21  3--22  7--22 22--23  1--24  4--24  5--25 12--25 23--25
-#> [31]  1--26 11--26 15--26 18--26 22--26  9--27 14--27 11--28  2--29 11--29
-#> [41]  4--30 10--30 13--30 29--30  7--31 15--31  8--32  2--33  4--33 23--33
-#> [51]  5--35 29--35 16--36 22--36 32--36 34--36  9--37 20--37 31--37  6--38
-#> [61]  9--38 21--38  4--39  8--39 16--39 30--40 35--40  4--41  5--41 14--41
-#> [71] 23--41 25--41 32--41 40--41  1--42 14--42 25--42 13--43 14--43 17--43
+#> + edges from 5fa4fa8:
+#>  [1]  1-- 6  2-- 8  1-- 9  2--11  2--13 10--13 11--13  7--14 11--14  3--15
+#> [11]  5--15  6--16 12--17  7--18  5--19  8--19 11--19 14--19 16--19 16--20
+#> [21]  6--21  9--21 18--21  4--22  5--22  7--22  1--23  8--23 17--23 14--24
+#> [31] 18--24  3--25  4--25 15--25 21--26  4--27  8--27 20--28  3--29  6--29
+#> [41]  8--29 17--29  8--30 16--30  4--31  7--31 13--31 11--32 28--32  6--33
+#> [51] 13--33 25--33 28--34 11--35 15--35 16--36 26--36  4--37 19--37 23--37
+#> [61] 24--37 27--37  7--38  9--39 27--39 28--39 32--39  5--40 16--40 31--40
+#> [71]  9--41 18--41 32--41 36--41  2--42  5--42  7--42 15--42 26--42 29--42
 #> + ... omitted several edges
 ```

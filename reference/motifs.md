@@ -40,6 +40,10 @@ numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md).
 
+## Related documentation in the C library
+
+[`motifs_randesu()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu)
+
 ## See also
 
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md)
@@ -47,6 +51,7 @@ the motifs is defined by their isomorphism class, see
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
+[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Examples
@@ -54,9 +59,9 @@ Other graph motifs:
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 504  NA  83   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 266  NA  80   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 587
+#> [1] 346
 sample_motifs(g, 3)
-#> [1] 0
+#> [1] 60
 ```

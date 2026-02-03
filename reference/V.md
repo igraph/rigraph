@@ -58,6 +58,10 @@ in the sequence. See
 [`$.igraph.vs()`](https://r.igraph.org/reference/igraph-vs-attributes.md)
 for details.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other vertex and edge sequences:
@@ -78,13 +82,13 @@ Other vertex and edge sequences:
 # Vertex ids of an unnamed graph
 g <- make_ring(10)
 V(g)
-#> + 10/10 vertices, from f67717d:
+#> + 10/10 vertices, from 1840464:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Vertex ids of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 V(g2)
-#> + 10/10 vertices, named, from d24e934:
+#> + 10/10 vertices, named, from 8331bbb:
 #>  [1] a b c d e f g h i j
 ```

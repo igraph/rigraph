@@ -69,6 +69,12 @@ in g1 and g2, respectively, then (a,a) is included in the result. See
 [`simplify()`](https://r.igraph.org/reference/simplify.md) if you want
 to get rid of the self-loops.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -92,6 +98,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -107,7 +114,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> IGRAPH 7892f71 U--- 10 36 -- 
+#> IGRAPH 1b6940a U--- 10 36 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:
@@ -122,7 +129,7 @@ print_all(gc)
 #>  9 --  1  1  2 10
 #> 10 --  1  2  2  3  4  5  6  7  8  9 10 10
 print_all(simplify(gc))
-#> IGRAPH 389cfc1 U--- 10 24 -- 
+#> IGRAPH ab4f408 U--- 10 24 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:

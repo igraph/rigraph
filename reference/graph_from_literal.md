@@ -98,6 +98,13 @@ You can include any character in the vertex names this way, even ‘+’ and
 
 See more examples below.
 
+## Related documentation in the C library
+
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty)
+
 ## See also
 
 Other deterministic constructors:
@@ -105,14 +112,18 @@ Other deterministic constructors:
 [`graph_from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
@@ -124,18 +135,18 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> IGRAPH 6398330 UN-- 6 6 -- 
+#> IGRAPH b3bcee1 UN-- 6 6 -- 
 #> + attr: name (v/c)
-#> + edges from 6398330 (vertex names):
+#> + edges from b3bcee1 (vertex names):
 #> [1] Alice--Bob    Alice--Cecil  Bob  --Cecil  Cecil--Daniel Cecil--Eugene
 #> [6] Cecil--Gordon
 
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> IGRAPH b71f93f UN-- 6 7 -- 
+#> IGRAPH 413bb53 UN-- 6 7 -- 
 #> + attr: name (v/c)
-#> + edges from b71f93f (vertex names):
+#> + edges from 413bb53 (vertex names):
 #> [1] Alice --Bob    Alice --Cecil  Alice --Daniel Cecil --Eugene Cecil --Gordon
 #> [6] Daniel--Eugene Daniel--Gordon
 
@@ -145,18 +156,18 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> IGRAPH 4c0259d DN-- 7 6 -- 
+#> IGRAPH ff70aed DN-- 7 6 -- 
 #> + attr: name (v/c)
-#> + edges from 4c0259d (vertex names):
+#> + edges from ff70aed (vertex names):
 #> [1] Alice ->Bob    Bob   ->Alice  Bob   ->Cecil  Daniel->Cecil  Eugene->Gordon
 #> [6] Eugene->Helen 
 
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> IGRAPH 19f1827 UN-- 6 2 -- 
+#> IGRAPH 4f41283 UN-- 6 2 -- 
 #> + attr: name (v/c)
-#> + edges from 19f1827 (vertex names):
+#> + edges from 4f41283 (vertex names):
 #> [1] Alice--Bob    Bob  --Daniel
 V(g4)$name
 #> [1] "Alice"  "Bob"    "Daniel" "Cecil"  "Gordon" "Helen" 
@@ -164,16 +175,16 @@ V(g4)$name
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> IGRAPH cf5afce DN-- 2 2 -- 
+#> IGRAPH 283e98a DN-- 2 2 -- 
 #> + attr: name (v/c)
-#> + edges from cf5afce (vertex names):
+#> + edges from 283e98a (vertex names):
 #> [1] Alice->Bob   Bob  ->Alice
 
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> IGRAPH 08f3ef7 UN-- 6 3 -- 
+#> IGRAPH 86a5598 UN-- 6 3 -- 
 #> + attr: name (v/c)
-#> + edges from 08f3ef7 (vertex names):
+#> + edges from 86a5598 (vertex names):
 #> [1] + ---   * --/   %%--%/%
 ```

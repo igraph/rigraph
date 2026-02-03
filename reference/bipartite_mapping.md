@@ -46,6 +46,11 @@ Note that the mapping is not necessarily unique, e.g. if the graph has
 at least two components, then the vertices in the separate components
 can be mapped independently.
 
+## Related documentation in the C library
+
+[[`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_is_bipartite),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Bipartite graphs
@@ -56,10 +61,6 @@ Bipartite graphs
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[[`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_is_bipartite).
 
 ## Examples
 

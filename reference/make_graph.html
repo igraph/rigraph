@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create an igraph graph from a list of edges, or a notable graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_graph.Rd</code></div>
     </div>
 
@@ -275,6 +275,10 @@ Journal of Anthropological Research 33, 452-473 (1977).</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify" class="external-link"><code><a href="simplify.html">simplify()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other deterministic constructors:
 <code><a href="graph_from_atlas.html">graph_from_atlas()</a></code>,
@@ -282,25 +286,29 @@ Journal of Anthropological Research 33, 452-473 (1977).</p></dd>
 <code><a href="graph_from_literal.html">graph_from_literal()</a></code>,
 <code><a href="make_.html">make_()</a></code>,
 <code><a href="make_chordal_ring.html">make_chordal_ring()</a></code>,
+<code><a href="make_circulant.html">make_circulant()</a></code>,
 <code><a href="make_empty_graph.html">make_empty_graph()</a></code>,
 <code><a href="make_full_citation_graph.html">make_full_citation_graph()</a></code>,
 <code><a href="make_full_graph.html">make_full_graph()</a></code>,
+<code><a href="make_full_multipartite.html">make_full_multipartite()</a></code>,
 <code><a href="make_lattice.html">make_lattice()</a></code>,
 <code><a href="make_ring.html">make_ring()</a></code>,
 <code><a href="make_star.html">make_star()</a></code>,
-<code><a href="make_tree.html">make_tree()</a></code></p></div>
+<code><a href="make_tree.html">make_tree()</a></code>,
+<code><a href="make_turan.html">make_turan()</a></code>,
+<code><a href="make_wheel.html">make_wheel()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b3908e9 U--- 6 4 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b3908e9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ec39e88 U--- 6 4 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ec39e88:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 2--3 3--4 5--6</span>
 <span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 279ca47 UN-- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9929a3d UN-- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 279ca47 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9929a3d (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A--B B--C C--D</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">solids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>

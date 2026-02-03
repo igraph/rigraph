@@ -67,6 +67,14 @@ attributes from the original graph are discarded as the primary purpose
 of this function is to facilitate the usage of multigraphs with the VF2
 algorithm.
 
+## Related documentation in the C library
+
+[`simplify()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_simple),
+[`simplify_and_colorize()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_simplify_and_colorize),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 [`which_loop()`](https://r.igraph.org/reference/which_multiple.md),
@@ -97,6 +105,7 @@ Other functions for manipulating graph structure:
 [`permute()`](https://r.igraph.org/reference/permute.md),
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -104,11 +113,6 @@ Other functions for manipulating graph structure:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple).
 
 ## Examples
 

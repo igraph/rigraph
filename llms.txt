@@ -118,6 +118,9 @@ specification. Contributions of any kind are welcome!
 - [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md)
   [`chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md)
   : Create an extended chordal ring graph
+- [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
+  [`circulant()`](https://r.igraph.org/reference/make_circulant.md) :
+  Create a circulant graph
 - [`make_clusters()`](https://r.igraph.org/reference/make_clusters.md) :
   Creates a communities object.
 - [`make_de_bruijn_graph()`](https://r.igraph.org/reference/make_de_bruijn_graph.md)
@@ -138,6 +141,9 @@ specification. Contributions of any kind are welcome!
 - [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md)
   [`full_graph()`](https://r.igraph.org/reference/make_full_graph.md) :
   Create a full graph
+- [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  [`full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  : Create a full multipartite graph
 - [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
   [`make_directed_graph()`](https://r.igraph.org/reference/make_graph.md)
   [`make_undirected_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -162,6 +168,12 @@ specification. Contributions of any kind are welcome!
 - [`make_tree()`](https://r.igraph.org/reference/make_tree.md)
   [`tree()`](https://r.igraph.org/reference/make_tree.md) : Create tree
   graphs
+- [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+  [`turan()`](https://r.igraph.org/reference/make_turan.md) : Create a
+  Turán graph
+- [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  [`wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  **\[experimental\]** : Create a wheel graph
 - [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
   : Creating a graph from a given degree sequence, deterministically
 - [`realize_bipartite_degseq()`](https://r.igraph.org/reference/realize_bipartite_degseq.md)
@@ -389,6 +401,9 @@ specification. Contributions of any kind are welcome!
 - [`normalize()`](https://r.igraph.org/reference/normalize.md) :
   Normalize layout
 
+- [`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
+  : Create a layout modifier
+
 - [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md)
   [`with_drl()`](https://r.igraph.org/reference/layout_with_drl.md) :
   The DrL graph layout generator
@@ -502,6 +517,8 @@ specification. Contributions of any kind are welcome!
   [`is_simple()`](https://r.igraph.org/reference/simplify.md)
   [`simplify_and_colorize()`](https://r.igraph.org/reference/simplify.md)
   : Simple graphs
+- [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  **\[experimental\]** : Transitive closure of a graph
 - [`union()`](https://r.igraph.org/reference/union.md) : Union of two or
   more sets
 - [`union(`*`<igraph>`*`)`](https://r.igraph.org/reference/union.igraph.md)
@@ -710,6 +727,11 @@ specification. Contributions of any kind are welcome!
 - [`fit_power_law()`](https://r.igraph.org/reference/fit_power_law.md) :
   Fitting a power-law distribution function to discrete data
 
+### Low-level operations
+
+- [`invalidate_cache()`](https://r.igraph.org/reference/invalidate_cache.md)
+  : Invalidate the cache of a graph
+
 ## Structural properties
 
 - [`bfs()`](https://r.igraph.org/reference/bfs.md) : Breadth-first
@@ -726,6 +748,7 @@ specification. Contributions of any kind are welcome!
   decomposition of graphs
 - [`degree()`](https://r.igraph.org/reference/degree.md)
   [`max_degree()`](https://r.igraph.org/reference/degree.md)
+  [`mean_degree()`](https://r.igraph.org/reference/degree.md)
   [`degree_distribution()`](https://r.igraph.org/reference/degree.md) :
   Degree and degree distribution of the vertices
 - [`dfs()`](https://r.igraph.org/reference/dfs.md) : Depth-first search
@@ -781,7 +804,8 @@ specification. Contributions of any kind are welcome!
   [`any_multiple()`](https://r.igraph.org/reference/which_multiple.md)
   [`count_multiple()`](https://r.igraph.org/reference/which_multiple.md)
   [`which_loop()`](https://r.igraph.org/reference/which_multiple.md)
-  [`any_loop()`](https://r.igraph.org/reference/which_multiple.md) :
+  [`any_loop()`](https://r.igraph.org/reference/which_multiple.md)
+  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) :
   Find the multiple or loop edges in a graph
 - [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md) :
   Find mutual edges in a directed graph
@@ -1017,6 +1041,8 @@ specification. Contributions of any kind are welcome!
 - [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md) :
   Dyad census of a graph
 - [`motifs()`](https://r.igraph.org/reference/motifs.md) : Graph motifs
+- [`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md)
+  : Find motifs with a callback function
 - [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md) :
   Graph motifs
 - [`triad_census()`](https://r.igraph.org/reference/triad_census.md) :
@@ -1218,6 +1244,8 @@ specification. Contributions of any kind are welcome!
   [`is_connected()`](https://r.igraph.org/reference/components.md)
   [`count_components()`](https://r.igraph.org/reference/components.md) :
   Connected components of a graph
+- [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  **\[experimental\]** : Count reachable vertices
 - [`decompose()`](https://r.igraph.org/reference/decompose.md) :
   Decompose a graph into components
 - [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
@@ -1308,6 +1336,8 @@ specification. Contributions of any kind are welcome!
 
 ## Experimental functions
 
+- [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  **\[experimental\]** : Count reachable vertices
 - [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md)
   **\[experimental\]** : Finding a feedback vertex set in a graph
 - [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md)
@@ -1316,6 +1346,9 @@ specification. Contributions of any kind are welcome!
   **\[experimental\]** : Central vertices of a graph
 - [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
   **\[experimental\]** : Check biconnectedness
+- [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  [`wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  **\[experimental\]** : Create a wheel graph
 - [`realize_bipartite_degseq()`](https://r.igraph.org/reference/realize_bipartite_degseq.md)
   **\[experimental\]** : Creating a bipartite graph from two degree
   sequences, deterministically
@@ -1324,6 +1357,8 @@ specification. Contributions of any kind are welcome!
   **\[experimental\]** : Random graph with given expected degrees
 - [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
   **\[experimental\]** : Finds all simple cycles in a graph.
+- [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  **\[experimental\]** : Transitive closure of a graph
 - [`voronoi_cells()`](https://r.igraph.org/reference/voronoi_cells.md)
   **\[experimental\]** : Voronoi partitioning of a graph
 

@@ -37,3 +37,7 @@ graph.adjlist(adjlist, mode = c("out", "in", "all", "total"), duplicate = TRUE)
   the neighbors of `A`.
 
   This argument is ignored if `mode` is `out` or `in`.
+
+## Related documentation in the C library
+
+[`adjlist()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist)

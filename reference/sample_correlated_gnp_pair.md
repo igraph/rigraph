@@ -45,6 +45,10 @@ graphs whose adjacency matrix entries are correlated with `corr`.
 
 Please see the reference given below.
 
+## Related documentation in the C library
+
+[`correlated_pair_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game)
+
 ## References
 
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013). Seeded graph
@@ -81,10 +85,6 @@ Random graph models (games)
 [`sample_traits_callaway()`](https://r.igraph.org/reference/sample_traits_callaway.md),
 [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md)
 
-## Related documentation in the C library
-
-[`correlated_pair_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game).
-
 ## Examples
 
 ``` r
@@ -94,18 +94,17 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> IGRAPH 1af09ac U--- 10 25 -- 
-#> + edges from 1af09ac:
-#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 4-- 6 1-- 7 2-- 7 3-- 7 6-- 7 3-- 8 4-- 8
-#> [13] 1-- 9 2-- 9 4-- 9 6-- 9 7-- 9 8-- 9 1--10 2--10 3--10 5--10 7--10 8--10
-#> [25] 9--10
+#> IGRAPH e4401cf U--- 10 22 -- 
+#> + edges from e4401cf:
+#>  [1] 1-- 2 1-- 4 2-- 4 3-- 5 4-- 5 2-- 6 3-- 6 5-- 6 2-- 7 5-- 8 1-- 9 4-- 9
+#> [13] 5-- 9 6-- 9 7-- 9 2--10 3--10 4--10 5--10 6--10 7--10 8--10
 #> 
 #> $graph2
-#> IGRAPH ad32edf U--- 10 24 -- 
-#> + edges from ad32edf:
-#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 4-- 6 1-- 7 2-- 7 3-- 7 6-- 7 3-- 8 4-- 8
-#> [13] 5-- 8 1-- 9 2-- 9 4-- 9 6-- 9 7-- 9 8-- 9 2--10 3--10 5--10 7--10 9--10
+#> IGRAPH a3e5725 U--- 10 21 -- 
+#> + edges from a3e5725:
+#>  [1] 1-- 4 2-- 4 3-- 5 4-- 5 2-- 6 3-- 6 5-- 6 1-- 7 2-- 7 5-- 8 1-- 9 5-- 9
+#> [13] 6-- 9 7-- 9 2--10 3--10 4--10 5--10 6--10 7--10 8--10
 #> 
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
-#> [1] 0.8807048
+#> [1] 0.8783817
 ```

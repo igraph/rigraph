@@ -26,6 +26,10 @@ hrg(graph, prob)
 
 `hrg()` returns an `igraphHRG` object.
 
+## Related documentation in the C library
+
+[`hrg_create()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create)
+
 ## See also
 
 Other hierarchical random graph functions:
@@ -37,7 +41,3 @@ Other hierarchical random graph functions:
 [`print.igraphHRG()`](https://r.igraph.org/reference/print.igraphHRG.md),
 [`print.igraphHRGConsensus()`](https://r.igraph.org/reference/print.igraphHRGConsensus.md),
 [`sample_hrg()`](https://r.igraph.org/reference/sample_hrg.md)
-
-## Related documentation in the C library
-
-[`hrg_create()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create).

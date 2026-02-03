@@ -15,7 +15,7 @@ for Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 ``` r
 make_chordal_ring(n, w, directed = FALSE)
 
-chordal_ring(...)
+chordal_ring(n, w, directed = FALSE)
 ```
 
 ## Arguments
@@ -32,13 +32,13 @@ chordal_ring(...)
 
   Logical scalar, whether or not to create a directed graph.
 
-- ...:
-
-  Passed to `make_chordal_ring()`.
-
 ## Value
 
 An igraph graph.
+
+## Related documentation in the C library
+
+[`extended_chordal_ring()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_extended_chordal_ring)
 
 ## See also
 
@@ -47,14 +47,18 @@ Other deterministic constructors:
 [`graph_from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md),
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
