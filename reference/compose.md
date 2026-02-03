@@ -114,7 +114,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> IGRAPH 3a4b7bd U--- 10 36 -- 
+#> IGRAPH dfc1ff3 U--- 10 36 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:
@@ -129,7 +129,7 @@ print_all(gc)
 #>  9 --  1  1  2 10
 #> 10 --  1  2  2  3  4  5  6  7  8  9 10 10
 print_all(simplify(gc))
-#> IGRAPH ad427f3 U--- 10 24 -- 
+#> IGRAPH 6a5159f U--- 10 24 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n)
 #> + edges:
