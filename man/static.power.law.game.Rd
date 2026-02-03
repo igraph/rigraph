@@ -44,7 +44,7 @@ finite size correction of Cho et al., see references below.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
+\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
 }
 
 \keyword{internal}

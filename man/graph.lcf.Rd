@@ -20,8 +20,4 @@ it is set to \code{len(shifts) * repeats}.}
 \code{graph.lcf()} was renamed to \code{\link[=graph_from_lcf]{graph_from_lcf()}} to create a more
 consistent API.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}
-}
-
 \keyword{internal}

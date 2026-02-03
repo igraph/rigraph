@@ -39,7 +39,7 @@ The order of the vertices in the generated graph corresponds to the
 \code{block.sizes} argument.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}
+\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_sbm_game}{\code{sbm_game()}}
 }
 
 \examples{

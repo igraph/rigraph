@@ -20,7 +20,7 @@ This function looks for directed cycles in directed graphs and undirected
 cycles in undirected graphs. Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_acyclic}{\code{is_acyclic()}}
+\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_acyclic}{\code{is_acyclic()}}
 }
 
 \examples{

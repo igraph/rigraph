@@ -30,10 +30,6 @@ random dot product graphs
 (the \code{(dim-1)}-sphere) with radius \code{radius}, i.e. the Euclidean
 norm of the samples equal \code{radius}.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_sample_sphere_surface}{\code{sample_sphere_surface()}}
-}
-
 \examples{
 lpvs.sph <- sample_sphere_surface(dim = 10, n = 20, radius = 1)
 RDP.graph.3 <- sample_dot_product(lpvs.sph)

@@ -39,7 +39,7 @@ arc set ensures that the remaining graph is a forest (i.e. every connected
 component is a tree).
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_arc_set}{\code{feedback_arc_set()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_feedback_arc_set}{\code{feedback_arc_set()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{

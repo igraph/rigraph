@@ -27,10 +27,6 @@ cycle backbone and another integer giving how many times the shifts should
 be performed.
 See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}
-}
-
 \examples{
 
 # This is the Franklin graph:

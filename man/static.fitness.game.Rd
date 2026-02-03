@@ -37,7 +37,7 @@ graph.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}
+\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_static_fitness_game}{\code{static_fitness_game()}}
 }
 
 \keyword{internal}

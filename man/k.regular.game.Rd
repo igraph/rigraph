@@ -24,7 +24,7 @@ out-degree and in-degree in a directed graph.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game}{\code{k_regular_game()}}
+\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_k_regular_game}{\code{k_regular_game()}}
 }
 
 \keyword{internal}
