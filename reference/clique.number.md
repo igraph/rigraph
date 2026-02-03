@@ -20,4 +20,4 @@ clique.number(graph)
 
 ## Related documentation in the C library
 
-[`clique_number()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number)
+[`clique_number()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_number)

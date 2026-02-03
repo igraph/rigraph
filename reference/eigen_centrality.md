@@ -117,9 +117,9 @@ for more about ARPACK in igraph.
 
 ## Related documentation in the C library
 
-[`eigenvector_centrality()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eigenvector_centrality),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+[`eigenvector_centrality()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
 
 ## References
 

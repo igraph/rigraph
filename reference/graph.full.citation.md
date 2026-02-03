@@ -24,4 +24,4 @@ graph.full.citation(n, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`full_citation()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_citation)
+[`full_citation()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_citation)

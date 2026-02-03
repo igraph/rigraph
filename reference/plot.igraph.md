@@ -117,13 +117,13 @@ to plot the graph to any R device.
 
 ## Related documentation in the C library
 
-[[`incident()`](https://r.igraph.org/reference/incident.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_incident),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`is_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[`convex_hull_2d()`](https://igraph.org/c/html/latest/igraph-Spatial.html#igraph_convex_hull_2d),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount)
+[[`incident()`](https://r.igraph.org/reference/incident.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`is_loop()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[`convex_hull_2d()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 

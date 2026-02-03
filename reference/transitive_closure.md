@@ -32,7 +32,7 @@ graph will have the same directedness as the input.
 
 ## Related documentation in the C library
 
-[`transitive_closure()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure)
+[`transitive_closure()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitive_closure)
 
 ## See also
 
@@ -77,8 +77,8 @@ g <- make_graph(c(1, 2, 2, 3, 3, 4))
 tc <- transitive_closure(g)
 # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
 print_all(tc)
-#> IGRAPH 9bd01d1 D--- 4 6 -- 
-#> + edges from 9bd01d1:
+#> IGRAPH e93a462 D--- 4 6 -- 
+#> + edges from e93a462:
 #> [1] 1->2 1->3 1->4 2->3 2->4 3->4
 
 # Undirected graph - connects all vertices in same component
@@ -86,7 +86,7 @@ g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
 tc2 <- transitive_closure(g2)
 # Full graph on vertices 1, 2 and full graph on vertices 3, 4
 print_all(tc2)
-#> IGRAPH 1aa7b57 U--- 4 2 -- 
-#> + edges from 1aa7b57:
+#> IGRAPH 87568ff U--- 4 2 -- 
+#> + edges from 87568ff:
 #> [1] 1--2 3--4
 ```

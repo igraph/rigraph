@@ -36,7 +36,7 @@ A breadth-first search is conducted starting from vertex `v`.
 
 ## Related documentation in the C library
 
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -77,12 +77,12 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
-#> + 1/100 vertex, from 73b3b57:
+#> + 1/100 vertex, from 49dc42e:
 #> [1] 1
 subcomponent(g, 1, "out")
-#> + 1/100 vertex, from 73b3b57:
+#> + 1/100 vertex, from 49dc42e:
 #> [1] 1
 subcomponent(g, 1, "all")
-#> + 1/100 vertex, from 73b3b57:
+#> + 1/100 vertex, from 49dc42e:
 #> [1] 1
 ```

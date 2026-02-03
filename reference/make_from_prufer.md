@@ -32,7 +32,7 @@ graph.
 
 ## Related documentation in the C library
 
-[`from_prufer()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer)
+[`from_prufer()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_from_prufer)
 
 ## See also
 

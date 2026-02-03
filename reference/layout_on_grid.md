@@ -50,8 +50,8 @@ the other. If you want to change the order of the vertices, then see the
 
 ## Related documentation in the C library
 
-[`layout_grid()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid),
-[`layout_grid_3d()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid_3d)
+[`layout_grid()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid),
+[`layout_grid_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d)
 
 ## See also
 

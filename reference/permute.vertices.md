@@ -26,4 +26,4 @@ permute.vertices(graph, permutation)
 
 ## Related documentation in the C library
 
-[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices)
+[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices)

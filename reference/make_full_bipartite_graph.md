@@ -49,8 +49,8 @@ vertices of the second kind.
 
 ## Related documentation in the C library
 
-[`full_bipartite()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_full_bipartite),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`full_bipartite()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_full_bipartite),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

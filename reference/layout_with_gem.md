@@ -67,8 +67,8 @@ See the referenced paper below for the details of the algorithm.
 
 ## Related documentation in the C library
 
-[`layout_gem()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_gem),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`layout_gem()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_gem),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 

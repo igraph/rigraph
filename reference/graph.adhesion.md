@@ -30,4 +30,4 @@ graph.adhesion(graph, checks = TRUE)
 
 ## Related documentation in the C library
 
-[[`adhesion()`](https://r.igraph.org/reference/edge_connectivity.md)](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_adhesion)
+[[`adhesion()`](https://r.igraph.org/reference/edge_connectivity.md)](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion)

@@ -101,11 +101,11 @@ canonical forms are compared. Extra arguments:
 
 ## Related documentation in the C library
 
-[`isomorphic()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic),
-[`isomorphic_bliss()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic_bliss),
-[`isomorphic_vf2()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isomorphic_vf2),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+[`isomorphic()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic),
+[`isomorphic_bliss()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_bliss),
+[`isomorphic_vf2()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_vf2),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
 
 ## References
 

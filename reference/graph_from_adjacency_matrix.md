@@ -164,11 +164,11 @@ on the value of the `mode` argument:
 
 ## Related documentation in the C library
 
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
-[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify)
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## See also
 
@@ -292,6 +292,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH fde390a DNW- 10 51 -- 
+#> IGRAPH 1b2428b DNW- 10 51 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

@@ -32,4 +32,4 @@ centralize.scores(scores, theoretical.max = 0, normalized = TRUE)
 
 ## Related documentation in the C library
 
-[[`centralization()`](https://r.igraph.org/reference/centralize.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization)
+[[`centralization()`](https://r.igraph.org/reference/centralize.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization)

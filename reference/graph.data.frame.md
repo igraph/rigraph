@@ -32,7 +32,7 @@ graph.data.frame(d, directed = TRUE, vertices = NULL)
 
 ## Related documentation in the C library
 
-[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_add_vertices),
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)

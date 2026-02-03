@@ -38,7 +38,7 @@ not generate multi-edges or self-loops.
 
 ## Related documentation in the C library
 
-[`circulant()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_circulant)
+[`circulant()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_circulant)
 
 ## See also
 

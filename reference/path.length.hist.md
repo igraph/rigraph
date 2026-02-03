@@ -25,4 +25,4 @@ path.length.hist(graph, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`path_length_hist()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist)
+[`path_length_hist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_path_length_hist)

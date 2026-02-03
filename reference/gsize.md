@@ -22,7 +22,7 @@ Numeric scalar, the number of edges.
 
 ## Related documentation in the C library
 
-[`ecount()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount)
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 

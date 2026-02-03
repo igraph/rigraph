@@ -27,7 +27,7 @@ a specific cycle.
 
 ## Related documentation in the C library
 
-[`is_acyclic()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_acyclic)
+[`is_acyclic()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_acyclic)
 
 ## See also
 

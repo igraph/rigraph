@@ -29,6 +29,6 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 
 ## Related documentation in the C library
 
-[[`subgraph_from_edges()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_subgraph_from_edges),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`subgraph_from_edges()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

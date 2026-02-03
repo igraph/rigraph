@@ -53,8 +53,8 @@ considered to be a forest.
 
 ## Related documentation in the C library
 
-[`is_forest()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`is_forest()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -74,7 +74,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> + 2/8 vertices, from d3a585d:
+#> + 2/8 vertices, from 7bf37eb:
 #> [1] 1 4
 #> 
 ```

@@ -62,8 +62,8 @@ connected by the diameter path.
 
 ## Related documentation in the C library
 
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -97,11 +97,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> + 5/10 vertices, from d36b0ea:
+#> + 5/10 vertices, from 24efb51:
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> + 6/10 vertices, from d36b0ea:
+#> + 6/10 vertices, from 24efb51:
 #> [1] 1 2 3 4 5 6
 ```

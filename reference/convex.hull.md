@@ -20,4 +20,4 @@ convex.hull(data)
 
 ## Related documentation in the C library
 
-[`convex_hull_2d()`](https://igraph.org/c/html/latest/igraph-Spatial.html#igraph_convex_hull_2d)
+[`convex_hull_2d()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d)

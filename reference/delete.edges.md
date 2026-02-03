@@ -27,6 +27,6 @@ delete.edges(graph, edges)
 
 ## Related documentation in the C library
 
-[[`delete_edges()`](https://r.igraph.org/reference/delete_edges.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_delete_edges),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`delete_edges()`](https://r.igraph.org/reference/delete_edges.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_edges),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

@@ -66,8 +66,8 @@ The “index” method selects the vertices in order of their index.
 
 ## Related documentation in the C library
 
-[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_bipartite_degree_sequence),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

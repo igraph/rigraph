@@ -72,8 +72,8 @@ for details.
 
 ## Related documentation in the C library
 
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -95,13 +95,13 @@ Other vertex and edge sequences:
 # Edges of an unnamed graph
 g <- make_ring(10)
 E(g)
-#> + 10/10 edges from c699cc7:
+#> + 10/10 edges from 6c41601:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Edges of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 E(g2)
-#> + 10/10 edges from 9a60872 (vertex names):
+#> + 10/10 edges from 54d5d89 (vertex names):
 #>  [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
 ```

@@ -95,10 +95,10 @@ the graph, if it is weighed).
 
 ## Related documentation in the C library
 
-[`modularity()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`modularity_matrix()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity_matrix)
+[`modularity()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`modularity_matrix()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity_matrix)
 
 ## References
 

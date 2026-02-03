@@ -33,7 +33,7 @@ after calling this function.
 
 ## Related documentation in the C library
 
-[`invalidate_cache()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_invalidate_cache)
+[`invalidate_cache()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_invalidate_cache)
 
 ## Examples
 
@@ -44,9 +44,9 @@ is_simple(g)
 #> [1] TRUE
 # Invalidate cache (for debugging purposes)
 invalidate_cache(g)
-#> IGRAPH 9af305e U--- 10 10 -- Ring graph
+#> IGRAPH 67b2003 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 9af305e:
+#> + edges from 67b2003:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 # Result should be the same
 is_simple(g)

@@ -39,7 +39,7 @@ same connected component.
 
 ## Related documentation in the C library
 
-[`count_reachable()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable)
+[`count_reachable()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_reachable)
 
 ## See also
 

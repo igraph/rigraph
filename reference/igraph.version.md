@@ -14,4 +14,4 @@ igraph.version()
 
 ## Related documentation in the C library
 
-[[`version()`](https://rdrr.io/r/base/Version.html)](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_version)
+[[`version()`](https://rdrr.io/r/base/Version.html)](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version)

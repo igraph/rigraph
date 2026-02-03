@@ -20,4 +20,4 @@ hrg.game(hrg)
 
 ## Related documentation in the C library
 
-[`hrg_game()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_game)
+[`hrg_game()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_game)

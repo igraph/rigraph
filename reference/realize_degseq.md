@@ -72,7 +72,7 @@ The “index” method selects the vertices in order of their index.
 
 ## Related documentation in the C library
 
-[`realize_degree_sequence()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_degree_sequence)
+[`realize_degree_sequence()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_degree_sequence)
 
 ## References
 

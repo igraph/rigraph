@@ -38,5 +38,5 @@ hrg.fit(graph, hrg = NULL, start = FALSE, steps = 0)
 
 ## Related documentation in the C library
 
-[`hrg_fit()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_fit),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`hrg_fit()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_fit),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

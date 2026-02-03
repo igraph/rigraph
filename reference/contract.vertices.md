@@ -37,4 +37,4 @@ contract.vertices(
 
 ## Related documentation in the C library
 
-[`contract_vertices()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices)
+[`contract_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices)

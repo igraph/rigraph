@@ -33,7 +33,7 @@ average of elements `2:(binwidth+1)`, etc.
 
 ## Related documentation in the C library
 
-[`running_mean()`](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_running_mean)
+[`running_mean()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_running_mean)
 
 ## See also
 

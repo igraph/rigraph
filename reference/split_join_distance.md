@@ -43,7 +43,7 @@ distance will be zero.
 
 ## Related documentation in the C library
 
-[`split_join_distance()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_split_join_distance)
+[`split_join_distance()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_split_join_distance)
 
 ## References
 

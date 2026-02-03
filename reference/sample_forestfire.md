@@ -77,7 +77,7 @@ implementation is based on this.
 
 ## Related documentation in the C library
 
-[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_forest_fire_game)
+[`forest_fire_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game)
 
 ## References
 

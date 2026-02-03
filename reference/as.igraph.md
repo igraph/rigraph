@@ -34,10 +34,10 @@ Right now the following objects are supported:
 
 ## Related documentation in the C library
 
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## Author
 
@@ -49,9 +49,9 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> IGRAPH a2cdca1 DN-- 19 18 -- Fitted HRG
+#> IGRAPH 943254c DN-- 19 18 -- Fitted HRG
 #> + attr: name (g/c), name (v/c), prob (v/n)
-#> + edges from a2cdca1 (vertex names):
+#> + edges from 943254c (vertex names):
 #>  [1] g1->g4 g2->g6 g3->g9 g4->g5 g5->g3 g6->6  g7->7  g8->8  g9->1  g1->g2
 #> [11] g2->g7 g3->2  g4->3  g5->5  g6->9  g7->g8 g8->10 g9->4 
 ```

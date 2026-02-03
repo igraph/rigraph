@@ -104,11 +104,11 @@ algorithm with greedy initialization and a global relabeling after every
 
 ## Related documentation in the C library
 
-[`is_matching()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_matching),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`maximum_bipartite_matching()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maximum_bipartite_matching),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[`is_maximal_matching()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_maximal_matching)
+[`is_matching()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`maximum_bipartite_matching()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`is_maximal_matching()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching)
 
 ## See also
 
@@ -164,7 +164,7 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> IGRAPH e66ab06 UN-B 6 5 -- 
+#> IGRAPH 5f89f3c UN-B 6 5 -- 
 #> + attr: name (v/c), type (v/l)
 #> + vertex attributes:
 #> |     name  type
@@ -174,7 +174,7 @@ print_all(g, v = TRUE)
 #> | [4]    d  TRUE
 #> | [5]    e FALSE
 #> | [6]    f  TRUE
-#> + edges from e66ab06 (vertex names):
+#> + edges from 5f89f3c (vertex names):
 #> [1] a--b b--c c--d d--e e--f
 max_bipartite_match(g)
 #> $matching_size
@@ -191,7 +191,7 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> IGRAPH 1dd7411 UN-B 7 6 -- 
+#> IGRAPH bebe09f UN-B 7 6 -- 
 #> + attr: name (v/c), type (v/l)
 #> + vertex attributes:
 #> |     name  type
@@ -202,7 +202,7 @@ print_all(g2, v = TRUE)
 #> | [5]    e FALSE
 #> | [6]    f  TRUE
 #> | [7]    g FALSE
-#> + edges from 1dd7411 (vertex names):
+#> + edges from bebe09f (vertex names):
 #> [1] a--b b--c c--d d--e e--f f--g
 max_bipartite_match(g2)
 #> $matching_size

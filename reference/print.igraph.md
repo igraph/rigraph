@@ -126,11 +126,11 @@ As of igraph 1.1.1, the `str.igraph` function is defunct, use
 
 ## Related documentation in the C library
 
-[[`degree()`](https://r.igraph.org/reference/degree.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_degree),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount)
+[[`degree()`](https://r.igraph.org/reference/degree.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## Author
 
@@ -141,11 +141,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_ring(10)
 g
-#> IGRAPH cf1f36f U--- 10 10 -- Ring graph
+#> IGRAPH 252a9af U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from cf1f36f:
+#> + edges from 252a9af:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH cf1f36f U--- 10 10 -- Ring graph
+#> IGRAPH 252a9af U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```

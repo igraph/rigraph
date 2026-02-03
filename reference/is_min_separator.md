@@ -31,8 +31,8 @@ separator, such that none of its proper subsets are a vertex separator.
 
 ## Related documentation in the C library
 
-[`is_minimal_separator()`](https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_minimal_separator),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`is_minimal_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

@@ -28,5 +28,5 @@ are.connected(graph, v1, v2)
 
 ## Related documentation in the C library
 
-[[`are_adjacent()`](https://r.igraph.org/reference/are_adjacent.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[[`are_adjacent()`](https://r.igraph.org/reference/are_adjacent.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_are_adjacent),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

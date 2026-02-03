@@ -35,9 +35,9 @@ reversed
 
 ## Related documentation in the C library
 
-[`reverse_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`reverse_edges()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -72,8 +72,8 @@ Other functions for manipulating graph structure:
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH 20a62f6 DN-- 4 3 -- 
+#> IGRAPH 171e70c DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 20a62f6 (vertex names):
+#> + edges from 171e70c (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

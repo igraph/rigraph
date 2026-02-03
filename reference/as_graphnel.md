@@ -30,10 +30,10 @@ for this purpose.
 
 ## Related documentation in the C library
 
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`has_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple)
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`has_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple)
 
 ## See also
 
@@ -66,10 +66,10 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> IGRAPH cd4cfc3 UNW- 10 10 -- Ring graph
+#> IGRAPH 7231a98 UNW- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
 #> | (e/n)
-#> + edges from cd4cfc3 (vertex names):
+#> + edges from 7231a98 (vertex names):
 #>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j
 
 ## Directed
@@ -78,8 +78,8 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> IGRAPH 6f5fc9b DNW- 10 9 -- In-star
+#> IGRAPH 6204428 DNW- 10 9 -- In-star
 #> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)
-#> + edges from 6f5fc9b (vertex names):
+#> + edges from 6204428 (vertex names):
 #> [1] b->a c->a d->a e->a f->a g->a h->a i->a j->a
 ```

@@ -24,4 +24,4 @@ graph.kautz(m, n)
 
 ## Related documentation in the C library
 
-[`kautz()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_kautz)
+[`kautz()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kautz)

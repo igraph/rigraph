@@ -45,7 +45,7 @@ group sizes (2)+(3). This measure is calculated if `mode` is `ratio`.
 
 ## Related documentation in the C library
 
-[`reciprocity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity)
+[`reciprocity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity)
 
 ## See also
 

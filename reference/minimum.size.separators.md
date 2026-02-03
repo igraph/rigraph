@@ -20,5 +20,5 @@ minimum.size.separators(graph)
 
 ## Related documentation in the C library
 
-[`minimum_size_separators()`](https://igraph.org/c/html/latest/igraph-Separators.html#igraph_minimum_size_separators),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`minimum_size_separators()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_minimum_size_separators),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

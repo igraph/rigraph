@@ -26,4 +26,4 @@ is.connected(graph, mode = c("weak", "strong"))
 
 ## Related documentation in the C library
 
-[[`is_connected()`](https://r.igraph.org/reference/components.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected)
+[[`is_connected()`](https://r.igraph.org/reference/components.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected)

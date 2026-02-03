@@ -77,10 +77,10 @@ about this. You can use `weights = NA` to silence the warning.
 
 ## Related documentation in the C library
 
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`layout_align()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_align),
-[[`is_forest()`](https://r.igraph.org/reference/is_forest.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`layout_align()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align),
+[[`is_forest()`](https://r.igraph.org/reference/is_forest.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
 
 ## See also
 

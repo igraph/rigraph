@@ -86,10 +86,10 @@ maximum flow is the flow of maximum value.
 
 ## Related documentation in the C library
 
-[`maxflow()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+[`maxflow()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_maxflow),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 
@@ -124,15 +124,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> + 2/6 edges from e729a5e (vertex names):
+#> + 2/6 edges from 90fbb4c (vertex names):
 #> [1] 3->4 1->5
 #> 
 #> $partition1
-#> + 2/6 vertices, named, from e729a5e:
+#> + 2/6 vertices, named, from 90fbb4c:
 #> [1] 1 3
 #> 
 #> $partition2
-#> + 4/6 vertices, named, from e729a5e:
+#> + 4/6 vertices, named, from 90fbb4c:
 #> [1] 4 5 6 2
 #> 
 #> $stats

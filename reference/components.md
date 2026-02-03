@@ -99,10 +99,10 @@ consecutive depth-first searches.
 
 ## Related documentation in the C library
 
-[`connected_components()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_connected_components),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`induced_subgraph()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_induced_subgraph),
-[`is_connected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected)
+[`connected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`induced_subgraph()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected)
 
 ## See also
 
@@ -175,9 +175,9 @@ groups(clu)
 #> [1] 20
 #> 
 largest_component(g)
-#> IGRAPH 9748277 U--- 14 14 -- Erdos-Renyi (gnp) graph
+#> IGRAPH b9f8809 U--- 14 14 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from 9748277:
+#> + edges from b9f8809:
 #>  [1]  2-- 4  4-- 5  2-- 6  2-- 7  1-- 8  2-- 8  2--10  3--12  7--12  9--12
 #> [11] 11--12  9--13 10--13  4--14
 ```

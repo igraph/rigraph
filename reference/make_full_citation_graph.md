@@ -28,7 +28,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`full_citation()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_citation)
+[`full_citation()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_citation)
 
 ## See also
 
@@ -54,7 +54,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> IGRAPH 1c07a19 D--- 10 45 -- Full citation graph
+#> IGRAPH 7b252ea D--- 10 45 -- Full citation graph
 #> + attr: name (g/c)
 #> + graph attributes:
 #> | + name:

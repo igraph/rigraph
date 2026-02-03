@@ -27,4 +27,4 @@ assortativity.degree(graph, directed = TRUE)
 
 ## Related documentation in the C library
 
-[[`assortativity_degree()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree)
+[[`assortativity_degree()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree)

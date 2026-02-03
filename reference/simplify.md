@@ -69,11 +69,11 @@ algorithm.
 
 ## Related documentation in the C library
 
-[`simplify()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_simple),
-[`simplify_and_colorize()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_simplify_and_colorize),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
+[`simplify_and_colorize()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_simplify_and_colorize),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
 
 ## See also
 

@@ -42,7 +42,7 @@ source, e.g. Wikipedia for details.
 
 ## Related documentation in the C library
 
-[`de_bruijn()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_de_bruijn)
+[`de_bruijn()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_de_bruijn)
 
 ## See also
 
@@ -59,13 +59,13 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # de Bruijn graphs can be created recursively by line graphs as well
 g <- make_de_bruijn_graph(2, 1)
 make_de_bruijn_graph(2, 2)
-#> IGRAPH 3b49a2a D--- 4 8 -- De-Bruijn graph 2-2
+#> IGRAPH 18fa94e D--- 4 8 -- De-Bruijn graph 2-2
 #> + attr: name (g/c), m (g/n), n (g/n)
-#> + edges from 3b49a2a:
+#> + edges from 18fa94e:
 #> [1] 1->1 1->2 2->3 2->4 3->1 3->2 4->3 4->4
 make_line_graph(g)
-#> IGRAPH 19458a6 D--- 4 8 -- Line graph
+#> IGRAPH 2b6456a D--- 4 8 -- Line graph
 #> + attr: name (g/c)
-#> + edges from 19458a6:
+#> + edges from 2b6456a:
 #> [1] 1->1 3->1 1->2 3->2 2->3 4->3 2->4 4->4
 ```

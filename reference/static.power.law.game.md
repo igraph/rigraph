@@ -59,4 +59,4 @@ static.power.law.game(
 
 ## Related documentation in the C library
 
-[`static_power_law_game()`](https://igraph.org/c/html/latest/igraph-Games.html#igraph_static_power_law_game)
+[`static_power_law_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game)
