@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9017
+
+## Features
+
+- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128 to 19 (#2484, #2485).
+
+
+# igraph 2.2.1.9016
+
+## Chore
+
+- No roclet needed to share the tag code (#2520).
+
+
+# igraph 2.2.1.9015
+
+## Continuous integration
+
+- Tweaks (#2517).
+
+- Test all R versions on branches that start with cran- (#2516).
+
+
 # igraph 2.2.1.9014
 
 ## Features

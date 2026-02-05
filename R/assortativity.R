@@ -236,7 +236,8 @@ assortativity_legacy <- function(
 
 #' @param types Vector giving the vertex types. They as assumed to be integer
 #'   numbers, starting with one. Non-integer values are converted to integers
-#'   with [as.integer()].
+#'   with [as.integer()]. Character vectors are converted to integers using
+#'   [as.factor()].
 #' @rdname assortativity
 #' @export
 assortativity_nominal <- function(
@@ -245,6 +246,11 @@ assortativity_nominal <- function(
   directed = TRUE,
   normalized = TRUE
 ) {
+  # Convert character types to factor then to integer for categorical data
+  if (is.character(types)) {
+    types <- as.integer(as.factor(types))
+  }
+
   assortativity_nominal_impl(
     graph = graph,
     types = types,
