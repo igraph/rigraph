@@ -488,8 +488,7 @@ as_adj <- function(
 #' @export
 as_edgelist <- function(graph, names = TRUE) {
   ensure_igraph(graph)
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- matrix(.Call(Rx_igraph_get_edgelist, graph, TRUE), ncol = 2)
+  res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
     res <- matrix(V(graph)$name[res], ncol = 2)

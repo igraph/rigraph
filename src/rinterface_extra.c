@@ -2315,6 +2315,18 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
   return is_punctuated(msg) ? "" : punctuation;
 }
 
+/* Strip vendor/cigraph/src/ prefix from file path. This prefix depends on the
+ * build procedure, namely on the directory that the compiler is invoked from. */
+static inline const char* simplify_file_path(const char *file) {
+  const char prefix[] = "vendor/cigraph/src/";
+  const size_t prefix_len = sizeof(prefix) - 1;
+
+  if (strncmp(file, prefix, prefix_len) == 0) {
+    return file + prefix_len;
+  }
+  return file;
+}
+
 void Rx_igraph_fatal_handler(const char *reason, const char *file, int line) {
 #ifdef IGRAPH_SANITIZER_AVAILABLE
     __sanitizer_print_stack_trace();
@@ -2336,10 +2348,12 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
   if (Rx_igraph_errors_count == 0 || !Rx_igraph_in_r_check) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_error_reason, sizeof(Rx_igraph_error_reason),
-      "At %s:%i : %s%s %s", file, line, reason,
-      maybe_add_punctuation(reason, ","),
-      igraph_strerror(igraph_errno));
+      "%s%s %s\nSource: %s:%i", reason,
+      maybe_add_punctuation(reason, "."),
+      igraph_strerror(igraph_errno),
+      simplified_path, line);
     Rx_igraph_error_reason[sizeof(Rx_igraph_error_reason) - 1] = 0;
 
     // FIXME: This is a hack, we should replace all memory allocations in the
@@ -2356,8 +2370,10 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
 
 void Rx_igraph_warning_handler(const char *reason, const char *file, int line) {
   if (Rx_igraph_warnings_count == 0) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_warning_reason, sizeof(Rx_igraph_warning_reason),
-      "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+      "%s%s\nSource: %s:%i", reason, maybe_add_punctuation(reason, "."),
+      simplified_path, line);
     Rx_igraph_warning_reason[sizeof(Rx_igraph_warning_reason) - 1] = 0;
   }
   Rx_igraph_warnings_count++;
@@ -3033,6 +3049,41 @@ SEXP Ry_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
   PROTECT(result=NEW_LIST(n));
   for (igraph_integer_t i=0; i<n; i++) {
     igraph_t *g=igraph_graph_list_get_ptr(list, i);
+    SET_VECTOR_ELT(result, i, Ry_igraph_to_SEXP(g));
+  }
+  UNPROTECT(1);
+  return result;
+}
+
+/* Convert SEXP list of graphs to igraph_vector_ptr_t */
+igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *ptr,
+                                          igraph_t **storage) {
+  igraph_integer_t n = Rf_xlength(graphlist);
+
+  /* Allocate storage for the graphs */
+  *storage = (igraph_t*) R_alloc(n, sizeof(igraph_t));
+
+  /* Initialize the vector_ptr */
+  IGRAPH_R_CHECK(igraph_vector_ptr_init(ptr, n));
+
+  /* Convert each graph - use non-copying version to avoid memory leaks */
+  for (igraph_integer_t i = 0; i < n; i++) {
+    SEXP item = VECTOR_ELT(graphlist, i);
+    IGRAPH_R_CHECK(Rz_SEXP_to_igraph(item, &(*storage)[i]));
+    VECTOR(*ptr)[i] = &(*storage)[i];
+  }
+
+  return IGRAPH_SUCCESS;
+}
+
+/* Convert igraph_vector_ptr_t to SEXP list of graphs */
+SEXP Ry_igraph_graph_ptr_list_to_SEXP(const igraph_vector_ptr_t *ptr) {
+  SEXP result;
+  igraph_integer_t n = igraph_vector_ptr_size(ptr);
+
+  PROTECT(result = NEW_LIST(n));
+  for (igraph_integer_t i = 0; i < n; i++) {
+    igraph_t *g = (igraph_t*) VECTOR(*ptr)[i];
     SET_VECTOR_ELT(result, i, Ry_igraph_to_SEXP(g));
   }
   UNPROTECT(1);
@@ -4576,23 +4627,6 @@ SEXP Rx_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
   return result;
 }
 
-SEXP Rx_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
-
-  igraph_t g;
-  igraph_vector_int_t res;
-  igraph_bool_t bycol=LOGICAL(pbycol)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_get_edgelist(&g, &res, bycol));
-  PROTECT(result=Ry_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP Rx_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) {
 
   igraph_t g;
@@ -5021,38 +5055,6 @@ SEXP Rx_igraph_intersection(SEXP pgraphs, SEXP pedgemaps) {
   }
 
   UNPROTECT(2);
-  return result;
-}
-
-SEXP Rx_igraph_difference(SEXP pleft, SEXP pright) {
-
-  igraph_t left, right;
-  igraph_t res;
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pleft, &left);
-  Rz_SEXP_to_igraph(pright, &right);
-  IGRAPH_R_CHECK(igraph_difference(&res, &left, &right));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_complementer(SEXP pgraph, SEXP ploops) {
-
-  igraph_t g;
-  igraph_t res;
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pgraph, &g);
-  IGRAPH_R_CHECK(igraph_complementer(&res, &g, loops));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
   return result;
 }
 
@@ -7732,18 +7734,6 @@ SEXP Rx_igraph_get_graph_id(SEXP graph) {
 }
 
 // Wrapper functions for functions not in aaa-auto.R
-SEXP Rx_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_weighted_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
-  return R_igraph_create_bipartite(types, edges, directed);
-}
-
 SEXP Rx_igraph_finalizer(void) {
   return R_igraph_finalizer();
 }
