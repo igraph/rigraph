@@ -2763,10 +2763,12 @@ sbm <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE) {
 #' @family games
 #' @export
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
+  # Determine sizes, treating non-lists as single elements
   mlen <- length(m)
   rholen <- if (is.list(rho)) length(rho) else 1
   Clen <- if (is.list(C)) length(C) else 1
 
+  # Use vctrs to find common size, allowing recycling from length 1
   commonlen <- unique(c(mlen, rholen, Clen))
 
   if (length(commonlen) == 1 && commonlen == 1) {
@@ -2782,16 +2784,16 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     if (length(commonlen) != 1) {
       cli::cli_abort("Lengths of {.arg m}, {.arg rho} and {.arg C} must match.")
     }
-    m <- rep(m, length.out = commonlen)
+    m <- vctrs::vec_recycle(m, commonlen)
     rho <- if (is.list(rho)) {
-      rep(rho, length.out = commonlen)
+      vctrs::vec_recycle(rho, commonlen)
     } else {
-      rep(list(rho), length.out = commonlen)
+      vctrs::vec_recycle(list(rho), commonlen)
     }
     C <- if (is.list(C)) {
-      rep(C, length.out = commonlen)
+      vctrs::vec_recycle(C, commonlen)
     } else {
-      rep(list(C), length.out = commonlen)
+      vctrs::vec_recycle(list(C), commonlen)
     }
     hsbm_list_game_impl(
       n = n,
