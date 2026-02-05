@@ -3363,22 +3363,22 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
   /* sm is expected to be a dgCMatrix from the Matrix package
    * with slots: i (row indices), p (column pointers), x (values), Dim (dimensions)
    */
-  
+
   SEXP i_slot = GET_SLOT(sm, Rf_install("i"));
   SEXP p_slot = GET_SLOT(sm, Rf_install("p"));
   SEXP x_slot = GET_SLOT(sm, Rf_install("x"));
   SEXP dim_slot = GET_SLOT(sm, Rf_install("Dim"));
-  
+
   igraph_integer_t nrow = INTEGER(dim_slot)[0];
   igraph_integer_t ncol = INTEGER(dim_slot)[1];
   igraph_integer_t nzmax = Rf_xlength(x_slot);
-  
+
   int *p = INTEGER(p_slot);
   int *i = INTEGER(i_slot);
-  
+
   /* Initialize sparse matrix in triplet format */
   igraph_sparsemat_init(sp, nrow, ncol, nzmax);
-  
+
   /* Convert from compressed column to triplet format */
   /* Handle both numeric and integer x values without coercion */
   if (TYPEOF(x_slot) == REALSXP) {
@@ -3398,7 +3398,7 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
   } else {
     Rf_error("Invalid type for sparse matrix values: expected numeric or integer, got type %d", TYPEOF(x_slot));
   }
-  
+
   /* Compress the sparse matrix to column-compressed format */
   igraph_sparsemat_t tmp;
   igraph_sparsemat_compress(sp, &tmp);
@@ -3532,7 +3532,7 @@ igraph_error_t Rz_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v) {
 
 igraph_error_t Rz_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   igraph_integer_t n = Rf_xlength(sv);
-  
+
   /* Handle both numeric and integer inputs without coercion */
   if (TYPEOF(sv) == REALSXP) {
     double *svv = REAL(sv);
@@ -3553,7 +3553,7 @@ igraph_error_t Rz_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   } else {
     IGRAPH_ERRORF("Expected numeric or integer vector, got type %d", IGRAPH_EINVAL, TYPEOF(sv));
   }
-  
+
   return IGRAPH_SUCCESS;
 }
 

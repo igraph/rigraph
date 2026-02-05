@@ -20,7 +20,7 @@ If \code{NULL}, the default, no cuts are made.}
 \item{callback}{Optional callback function to call for each motif found.
 The function should accept two arguments: \code{vids} (integer vector of vertex IDs
 in the motif) and \code{isoclass} (the isomorphism class of the motif).
-The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
+The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
 If \code{NULL} (the default), motif counts are returned as a numeric vector.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph

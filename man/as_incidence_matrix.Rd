@@ -18,7 +18,7 @@ Some authors refer to the bipartite adjacency matrix as the
 this naming to avoid confusion with the edge-vertex incidence matrix.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \keyword{internal}

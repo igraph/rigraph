@@ -57,13 +57,13 @@ test_that("add_edges_impl basic", {
 
   expect_snapshot(add_edges_impl(
     graph = g,
-    edges = c(0, 1, 1, 2)
+    edges = c(1, 2, 2, 3)
   ))
 
   # Structured tests
   result <- add_edges_impl(
     graph = g,
-    edges = c(0, 1, 1, 2)
+    edges = c(1, 2, 2, 3)
   )
   expect_s3_class(result, "igraph")
   expect_equal(vcount(result), 3)
@@ -10867,6 +10867,78 @@ test_that("community_edge_betweenness_impl basic", {
   expect_snapshot(community_edge_betweenness_impl(graph = g, directed = FALSE))
 })
 
+test_that("community_leading_eigenvector_callback_closure_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with a simple graph
+  g <- make_graph("Zachary")
+  result <- community_leading_eigenvector_callback_closure_impl(
+    graph = g
+  )
+
+  expect_snapshot({
+    cat("Result class:\n")
+    print(class(result))
+    cat("\nMembership length:\n")
+    print(length(result$membership))
+    cat("\nModularity:\n")
+    print(result$modularity)
+    cat("\nMerges dimensions:\n")
+    print(dim(result$merges))
+  })
+
+  # Structured tests
+  expect_s3_class(result, "igraph.eigenc")
+  expect_true(is.list(result))
+  expect_true("membership" %in% names(result))
+  expect_true("modularity" %in% names(result))
+  expect_true("merges" %in% names(result))
+  expect_equal(length(result$membership), vcount(g))
+  expect_true(is.numeric(result$modularity))
+})
+
+test_that("community_leading_eigenvector_callback_closure_impl with start", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_graph("Zachary")
+  # Create initial membership (0-based for the impl function)
+  initial_membership <- rep(0:1, length.out = vcount(g))
+
+  result <- community_leading_eigenvector_callback_closure_impl(
+    graph = g,
+    membership = initial_membership,
+    start = TRUE
+  )
+
+  expect_snapshot({
+    cat("Result with start membership:\n")
+    cat("Membership length:\n")
+    print(length(result$membership))
+    cat("\nModularity:\n")
+    print(result$modularity)
+  })
+
+  expect_s3_class(result, "igraph.eigenc")
+  expect_equal(length(result$membership), vcount(g))
+})
+
+test_that("community_leading_eigenvector_callback_closure_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_graph("Zachary")
+
+  # Test with invalid steps
+  expect_snapshot_igraph_error(
+    community_leading_eigenvector_callback_closure_impl(
+      graph = g,
+      start = TRUE
+    )
+  )
+})
+
 # Connectivity
 
 test_that("edge_connectivity_impl basic", {
@@ -11138,6 +11210,122 @@ test_that("independent_vertex_sets_impl basic", {
 
 # Callback functions
 
+# bfs_closure_impl
+
+test_that("bfs_closure_impl works", {
+  withr::local_seed(20250125)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(10)
+
+  # Collect BFS visit data
+  bfs_visits <- list()
+  result <- bfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    restricted = NULL,
+    callback = function(args) {
+      bfs_visits[[length(bfs_visits) + 1]] <<- args
+      FALSE # Continue
+    }
+  )
+
+  expect_snapshot({
+    cat("BFS result:\n")
+    print(result)
+    cat("\nNumber of BFS visits:", length(bfs_visits), "\n")
+    if (length(bfs_visits) > 0) {
+      cat("First visit:\n")
+      print(bfs_visits[[1]])
+    }
+  })
+
+  # Test error handling
+  expect_snapshot_igraph_error({
+    bfs_closure_impl(
+      graph = g,
+      root = 1,
+      mode = "out",
+      unreachable = TRUE,
+      restricted = NULL,
+      callback = function(args) {
+        NA
+      }
+    )
+  })
+
+  expect_snapshot_igraph_error({
+    bfs_closure_impl(
+      graph = g,
+      root = 1,
+      mode = "out",
+      unreachable = TRUE,
+      restricted = NULL,
+      callback = function(args) {
+        NA
+      }
+    )
+  })
+
+  calls <- 0
+  bfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    restricted = NULL,
+    callback = function(args) {
+      calls <<- calls + 1
+      calls > 3 # Stop after 3 calls
+    }
+  )
+  expect_equal(calls, 4) # Called 4 times: 3 continue (FALSE), 1 stop (TRUE)
+})
+
+# dfs_closure_impl
+
+test_that("dfs_closure_impl works", {
+  withr::local_seed(20250125)
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(10)
+
+  # Collect DFS visit data
+  dfs_in_visits <- list()
+  dfs_out_visits <- list()
+  result <- dfs_closure_impl(
+    graph = g,
+    root = 1,
+    mode = "out",
+    unreachable = TRUE,
+    in_callback = function(args) {
+      dfs_in_visits[[length(dfs_in_visits) + 1]] <<- args
+      FALSE # Continue
+    },
+    out_callback = function(args) {
+      dfs_out_visits[[length(dfs_out_visits) + 1]] <<- args
+      FALSE # Continue
+    }
+  )
+
+  expect_snapshot({
+    cat("DFS result:\n")
+    print(result)
+    cat("\nNumber of DFS IN visits:", length(dfs_in_visits), "\n")
+    cat("Number of DFS OUT visits:", length(dfs_out_visits), "\n")
+    if (length(dfs_in_visits) > 0) {
+      cat("First IN visit:\n")
+      print(dfs_in_visits[[1]])
+    }
+  })
+
+  # Structured tests
+  expect_equal(length(dfs_in_visits), 10)
+  expect_equal(length(dfs_out_visits), 10)
+})
+
 # motifs_randesu_callback_closure_impl
 
 test_that("motifs_randesu_callback_closure_impl basic", {
@@ -11157,7 +11345,7 @@ test_that("motifs_randesu_callback_closure_impl basic", {
         vids = vids,
         isoclass = isoclass
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11211,7 +11399,7 @@ test_that("cliques_callback_closure_impl basic", {
     max_size = 4,
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11265,9 +11453,9 @@ test_that("maximal_cliques_callback_closure_impl basic", {
     callback = function(clique) {
       clique_data[[length(clique_data) + 1]] <<- clique
       if (length(clique_data) >= 3) {
-        return(FALSE)
-      } # Stop after 3
-      TRUE
+        return(TRUE) # Stop after 3
+      }
+      FALSE # Continue
     }
   )
 
@@ -11324,7 +11512,7 @@ test_that("simple_cycles_callback_closure_impl basic", {
         vertices = vertices,
         edges = edges
       )
-      TRUE
+      FALSE # Continue
     }
   )
 
@@ -11386,9 +11574,9 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(iso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE) # Stop after 2
+      }
+      FALSE # Continue
     }
   )
 
@@ -11454,9 +11642,9 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
         map21 = map21
       )
       if (length(subiso_data) >= 2) {
-        return(FALSE)
-      } # Stop after 2
-      TRUE
+        return(TRUE) # Stop after 2
+      }
+      FALSE # Continue
     }
   )
 
@@ -11689,8 +11877,8 @@ test_that("union_many_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g1 <- empty_impl(n = 3)
-  g2 <- add_edges_impl(g1, c(0, 1, 1, 2))
-  g3 <- add_edges_impl(g1, c(0, 2))
+  g2 <- add_edges_impl(g1, c(0, 1, 1, 2) + 1)
+  g3 <- add_edges_impl(g1, c(0, 2) + 1)
 
   expect_snapshot(union_many_impl(
     graphs = list(g1, g2, g3)
@@ -11702,4 +11890,239 @@ test_that("union_many_impl basic", {
   )
   expect_type(result, "list")
   expect_s3_class(result$res, "igraph")
+})
+
+test_that("intersection_many_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2, 0, 2) + 1)
+  g2 <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
+  g3 <- add_edges_impl(empty_impl(n = 3), c(0, 1) + 1)
+
+  expect_snapshot(intersection_many_impl(
+    graphs = list(g1, g2, g3)
+  ))
+
+  # Structured tests
+  result <- intersection_many_impl(
+    graphs = list(g1, g2, g3)
+  )
+  expect_type(result, "list")
+  expect_s3_class(result$res, "igraph")
+})
+
+test_that("layout_merge_dla_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- path_graph_impl(n = 3)
+  g2 <- path_graph_impl(n = 3)
+  coords1 <- matrix(c(0, 0, 1, 0, 2, 0), ncol = 2, byrow = TRUE)
+  coords2 <- matrix(c(0, 1, 1, 1, 2, 1), ncol = 2, byrow = TRUE)
+
+  expect_snapshot(layout_merge_dla_impl(
+    graphs = list(g1, g2),
+    coords = list(coords1, coords2)
+  ))
+
+  # Structured tests
+  result <- layout_merge_dla_impl(
+    graphs = list(g1, g2),
+    coords = list(coords1, coords2)
+  )
+  expect_true(is.matrix(result))
+  expect_equal(nrow(result), 6)
+  expect_equal(ncol(result), 2)
+})
+
+# get_eid_impl
+test_that("get_eid_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 5), c(0, 1, 1, 2, 2, 3, 3, 4) + 1)
+
+  expect_snapshot(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  ))
+
+  # Structured tests
+  result <- get_eid_impl(
+    graph = g,
+    from = 1,
+    to = 2
+  )
+  expect_s3_class(result, "igraph.es")
+  expect_length(result, 1)
+
+  # Test that it finds the correct edge
+  result_int <- as.integer(result)
+  expect_equal(result_int, 1L) # First edge is 0->1
+
+  # Test directed vs undirected
+  result_directed <- get_eid_impl(
+    graph = g,
+    from = 2,
+    to = 1,
+    directed = TRUE,
+    error = FALSE
+  )
+  # No edge from 2 to 1 in directed graph, returns empty edge sequence
+  expect_length(result_directed, 0)
+})
+
+test_that("get_eid_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
+
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = NULL,
+    from = 1,
+    to = 2
+  ))
+
+  # Test error when from or to is not exactly one vertex
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = c(1, 2),
+    to = 2
+  ))
+
+  expect_snapshot_igraph_error(get_eid_impl(
+    graph = g,
+    from = 1,
+    to = integer(0)
+  ))
+})
+
+# community_voronoi_impl
+test_that("community_voronoi_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(
+    empty_impl(n = 10),
+    c(0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9) + 1
+  )
+
+  expect_snapshot(community_voronoi_impl(
+    graph = g
+  ))
+
+  # Structured tests
+  result <- community_voronoi_impl(
+    graph = g
+  )
+  expect_type(result, "list")
+  expect_named(result, c("membership", "generators", "modularity"))
+  expect_length(result$membership, 10)
+  expect_true(is.numeric(result$modularity))
+  expect_true(length(result$generators) >= 1)
+})
+
+test_that("community_voronoi_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  expect_snapshot_igraph_error(community_voronoi_impl(
+    graph = NULL
+  ))
+})
+
+# subisomorphic_lad_impl
+test_that("subisomorphic_lad_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex setup with pattern/target graphs and domains
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(subisomorphic_lad_impl))
+  expect_equal(
+    names(formals(subisomorphic_lad_impl)),
+    c("pattern", "target", "domains", "induced", "time_limit")
+  )
+})
+
+test_that("subisomorphic_lad_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- add_edges_impl(empty_impl(n = 3), c(0, 1, 1, 2) + 1)
+
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = NULL,
+    target = g,
+    domains = list(),
+    induced = FALSE,
+    time_limit = 0
+  ))
+
+  # Test that domains must be a list
+  expect_snapshot_igraph_error(subisomorphic_lad_impl(
+    pattern = g,
+    target = g,
+    domains = "not a list",
+    induced = FALSE,
+    time_limit = 0
+  ))
+})
+
+# eigen_matrix_impl
+test_that("eigen_matrix_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(eigen_matrix_impl))
+  expect_equal(
+    names(formals(eigen_matrix_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
+})
+
+test_that("eigen_matrix_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with invalid matrix dimensions
+  expect_error(eigen_matrix_impl(
+    A = matrix(0, 0, 0),
+    sA = Matrix::Matrix(matrix(0, 0, 0), sparse = TRUE),
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
+})
+
+# eigen_matrix_symmetric_impl
+test_that("eigen_matrix_symmetric_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # FIXME: Add functionality tests once we understand the expected behavior
+  # The function requires complex matrix setup and understanding of eigenvalue computation
+  # For now, just verify the function exists and has correct signature
+  expect_true(is.function(eigen_matrix_symmetric_impl))
+  expect_equal(
+    names(formals(eigen_matrix_symmetric_impl)),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
+})
+
+test_that("eigen_matrix_symmetric_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+
+  # Test with invalid matrix dimensions
+  expect_error(eigen_matrix_symmetric_impl(
+    A = matrix(0, 0, 0),
+    sA = Matrix::Matrix(matrix(0, 0, 0), sparse = TRUE),
+    fun = NULL,
+    n = 0,
+    algorithm = "auto",
+    which = list(pos = "LM", howmany = 1)
+  ))
 })

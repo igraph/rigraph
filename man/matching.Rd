@@ -95,7 +95,7 @@ algorithm with greedy initialization and a global relabeling after every
 \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching}{\code{is_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching}{\code{maximum_bipartite_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching}{\code{is_maximal_matching()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching}{\code{is_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching}{\code{maximum_bipartite_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching}{\code{is_maximal_matching()}}
 }
 
 \examples{

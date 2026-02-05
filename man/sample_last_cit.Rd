@@ -97,7 +97,7 @@ but the probability of an edge depends on the (potentially) cited
 vertex only.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game}{\code{cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game}{\code{citing_cited_type_game()}}
 }
 
 \seealso{

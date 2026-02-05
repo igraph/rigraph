@@ -51,8 +51,8 @@ is_clique(graph, candidate, directed = FALSE)
 
 \item{callback}{Optional function to call for each clique found. If provided,
 the function should accept one argument: \code{clique} (integer vector of vertex
-IDs in the clique, 1-based indexing). The function should return \code{TRUE} to
-continue the search or \code{FALSE} to stop it. If \code{NULL} (the default), all
+IDs in the clique, 1-based indexing). The function should return \code{FALSE} to
+continue the search or \code{TRUE} to stop it. If \code{NULL} (the default), all
 cliques are collected and returned as a list.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph

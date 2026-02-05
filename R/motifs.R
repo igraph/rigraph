@@ -139,7 +139,7 @@ dyad.census <- function(graph) {
 #' @param callback Optional callback function to call for each motif found.
 #'   The function should accept two arguments: `vids` (integer vector of vertex IDs
 #'   in the motif) and `isoclass` (the isomorphism class of the motif).
-#'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
+#'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), motif counts are returned as a numeric vector.
 #'
 #'   **Important limitation:** Callback functions must NOT call any igraph

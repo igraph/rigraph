@@ -27,7 +27,7 @@ their edge IDs in the \code{eids} argument will be reversed. When reversing
 all edges, this operation is also known as graph transpose.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

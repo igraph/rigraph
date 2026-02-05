@@ -703,3 +703,166 @@ test_that("graph_from_data_frame works with factors", {
   expect_true(is.factor(V(g)$gender))
   expect_true(is.factor(g_actors$gender))
 })
+
+test_that("as_adjacency_matrix() comprehensive snapshot tests", {
+  # Directed, unweighted, sparse
+  g_dir_unwt <- make_graph(c(1, 2, 2, 3, 3, 1, 2, 2), directed = TRUE)
+  expect_snapshot(as_adjacency_matrix(g_dir_unwt, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "lower",
+    sparse = TRUE
+  ))
+
+  # Directed, unweighted, dense
+  expect_snapshot(as_adjacency_matrix(g_dir_unwt, sparse = FALSE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "lower",
+    sparse = FALSE
+  ))
+
+  # Directed, weighted, sparse
+  g_dir_wt <- g_dir_unwt
+  E(g_dir_wt)$weight <- c(1.5, 2.3, 3.7, 0.5)
+  expect_snapshot(as_adjacency_matrix(g_dir_wt, attr = "weight", sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    attr = "weight",
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    attr = "weight",
+    type = "lower",
+    sparse = TRUE
+  ))
+
+  # Directed, weighted, dense
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    attr = "weight",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    attr = "weight",
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    attr = "weight",
+    type = "lower",
+    sparse = FALSE
+  ))
+
+  # Undirected, unweighted, sparse
+  g_undir_unwt <- as_undirected(
+    make_graph(c(1, 2, 2, 3, 3, 1)),
+    mode = "collapse"
+  )
+  expect_snapshot(as_adjacency_matrix(g_undir_unwt, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "lower",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "both",
+    sparse = TRUE
+  ))
+
+  # Undirected, unweighted, dense
+  expect_snapshot(as_adjacency_matrix(g_undir_unwt, sparse = FALSE))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "lower",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "both",
+    sparse = FALSE
+  ))
+
+  # Undirected, weighted, sparse
+  g_undir_wt <- g_undir_unwt
+  E(g_undir_wt)$weight <- c(2.1, 3.2, 4.3)
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "lower",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "both",
+    sparse = TRUE
+  ))
+
+  # Undirected, weighted, dense
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "lower",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    attr = "weight",
+    type = "both",
+    sparse = FALSE
+  ))
+
+  # With vertex names
+  g_named <- g_dir_unwt
+  V(g_named)$name <- c("A", "B", "C")
+  expect_snapshot(as_adjacency_matrix(g_named, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(g_named, sparse = FALSE))
+})

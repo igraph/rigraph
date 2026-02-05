@@ -54,7 +54,7 @@ simply the number of edges.
 An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

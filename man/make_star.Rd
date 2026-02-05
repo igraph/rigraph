@@ -27,6 +27,10 @@ An igraph graph.
 \code{star()} creates a star graph, in this every single vertex is
 connected to the center vertex and nobody else.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}
+}
+
 \examples{
 make_star(10, mode = "out")
 make_star(5, mode = "undirected")

@@ -2100,7 +2100,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(Rx_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(R_igraph_levc_arpack_multiplier, externalP, externalE, v)
   }
   f
 }
@@ -2251,26 +2251,27 @@ cluster_leading_eigen <- function(
   } else {
     weights <- NULL
   }
-  if (!is.null(start)) {
+
+  # Convert start membership to 0-based indexing and determine start flag
+  start_flag <- !is.null(start)
+  if (start_flag) {
     start <- as.numeric(start) - 1
   }
 
   options <- modify_list(arpack_defaults(), options)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    Rx_igraph_community_leading_eigenvector,
-    graph,
-    steps,
-    weights,
-    options,
-    start,
-    callback,
-    extra,
-    env,
-    environment(igraph.i.levc.arp)
+  res <- community_leading_eigenvector_callback_closure_impl(
+    graph = graph,
+    weights = weights,
+    membership = start,
+    steps = steps,
+    options = options,
+    start = start_flag,
+    callback = callback,
+    extra = extra,
+    env = env
   )
+
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

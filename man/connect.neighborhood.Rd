@@ -26,4 +26,8 @@ argument is ignored for undirected graphs.}
 \code{connect.neighborhood()} was renamed to \code{\link[=connect]{connect()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood}{\code{connect_neighborhood()}}
+}
+
 \keyword{internal}

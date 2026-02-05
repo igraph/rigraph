@@ -204,18 +204,15 @@ decompose <- function(
 ) {
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   if (is.na(max.comps)) {
     max.comps <- -1
   }
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_decompose,
+  decompose_impl(
     graph,
-    as.numeric(mode),
-    as.numeric(max.comps),
-    as.numeric(min.vertices)
+    mode,
+    max.comps,
+    min.vertices
   )
 }
 

@@ -1,5 +1,35 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9020
+
+## Features
+
+- Autogenerate BFS and DFS callback closures with unified TRUE=stop convention (#2552, #2553).
+
+- Autogenerate `igraph_community_leading_eigenvector` with full closure-based callback support (#2554, #2555).
+
+## Chore
+
+- Consistent checks.
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#2558).
+
+
+# igraph 2.2.1.9019
+
+## Features
+
+- Autogenerate remaining simple functions (#2550, #2551).
+
+- Autogenerate all callback non-SPARSEMAT functions with unified dual-mode API (#2533, #2534).
+
+## Continuous integration
+
+- Skip tests for old R.
+
+
 # igraph 2.2.1.9018
 
 ## Bug fixes

@@ -65,6 +65,7 @@ SEXP Rx_igraph_0ormatrix_int_to_SEXP(const igraph_matrix_int_t *m);
 SEXP Ry_igraph_0ormatrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
 SEXP Rx_igraph_strvector_to_SEXP(const igraph_strvector_t *m);
 SEXP Ry_igraph_to_SEXP(const igraph_t *graph);
+SEXP Rx_igraph_vector_list_to_SEXP(const igraph_vector_list_t *list);
 SEXP Ry_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
 SEXP Ry_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list);
 SEXP Rx_igraph_0orvector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
@@ -155,6 +156,10 @@ igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *re
 igraph_error_t Rw_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
 igraph_error_t Rw_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
 
+/* Helper functions */
+SEXP Rx_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
+SEXP Rx_igraph_getListElement(SEXP list, const char *str);
+
 /* Declarations for functions from rinterface.c needed by wrappers in rinterface_extra.c */
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
@@ -229,3 +234,82 @@ igraph_error_t igraph_get_subisomorphisms_vf2_callback_closure(
     const igraph_vector_int_t *edge_color1,
     const igraph_vector_int_t *edge_color2,
     SEXP callback);
+
+/* BFS */
+igraph_error_t R_igraph_bfs_handler(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t pred,
+    igraph_integer_t succ,
+    igraph_integer_t rank,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t igraph_bfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    const igraph_vector_int_t *roots,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    const igraph_vector_int_t *restricted,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *rank,
+    igraph_vector_int_t *parents,
+    igraph_vector_int_t *pred,
+    igraph_vector_int_t *succ,
+    igraph_vector_int_t *dist,
+    SEXP callback);
+
+/* DFS */
+igraph_error_t R_igraph_dfs_handler_in(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t R_igraph_dfs_handler_out(
+    const igraph_t *graph,
+    igraph_integer_t vid,
+    igraph_integer_t dist,
+    void *extra);
+
+igraph_error_t igraph_dfs_closure(
+    const igraph_t *graph,
+    igraph_integer_t root,
+    igraph_neimode_t mode,
+    igraph_bool_t unreachable,
+    igraph_vector_int_t *order,
+    igraph_vector_int_t *order_out,
+    igraph_vector_int_t *father,
+    igraph_vector_int_t *dist,
+    SEXP in_callback,
+    SEXP out_callback);
+
+/* Leading eigenvector community detection */
+SEXP R_igraph_levc_arpack_multiplier(SEXP extP, SEXP extE, SEXP pv);
+
+igraph_error_t R_igraph_levc_handler(
+    const igraph_vector_int_t *membership,
+    igraph_integer_t comm,
+    igraph_real_t eigenvalue,
+    const igraph_vector_t *eigenvector,
+    igraph_arpack_function_t *arpack_multiplier,
+    void *arpack_extra,
+    void *extra);
+
+igraph_error_t igraph_community_leading_eigenvector_callback_closure(
+    const igraph_t *graph,
+    const igraph_vector_t *weights,
+    igraph_matrix_int_t *merges,
+    igraph_vector_int_t *membership,
+    igraph_integer_t steps,
+    igraph_arpack_options_t *options,
+    igraph_real_t *modularity,
+    igraph_bool_t start,
+    igraph_vector_t *eigenvalues,
+    igraph_vector_list_t *eigenvectors,
+    igraph_vector_t *history,
+    SEXP callback,
+    SEXP extra,
+    SEXP env,
+    SEXP env_arp);

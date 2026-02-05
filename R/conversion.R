@@ -223,7 +223,6 @@ get.adjacency.dense <- function(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,
-  weights = NULL,
   loops = c("once", "twice", "ignore"),
   names = TRUE
 ) {
@@ -243,20 +242,17 @@ get.adjacency.dense <- function(
     )
   }
   loops <- igraph_match_arg(loops)
-  loops <- switch(loops, "ignore" = 0L, "twice" = 1L, "once" = 2L)
-
-  if (!is.null(weights)) {
-    weights <- as.numeric(weights)
+  # Map "ignore" to "none" for get_adjacency_impl
+  if (loops == "ignore") {
+    loops <- "none"
   }
 
   if (is.null(attr)) {
-    on.exit(.Call(Rx_igraph_finalizer))
-    type <- switch(type, "upper" = 0, "lower" = 1, "both" = 2)
-    res <- .Call(
-      Rx_igraph_get_adjacency,
+    # FIXME: Use get_adjacency_impl() also for non-NULL attr
+    res <- get_adjacency_impl(
       graph,
-      as.numeric(type),
-      weights,
+      type,
+      weights = numeric(),
       loops
     )
   } else {
@@ -287,67 +283,33 @@ get.adjacency.sparse <- function(
 
   type <- igraph_match_arg(type)
 
-  vc <- vcount(graph)
-
-  el <- as_edgelist(graph, names = FALSE)
-  use.last.ij <- FALSE
-
-  if (!is.null(attr)) {
+  # Prepare weights parameter
+  if (is.null(attr)) {
+    weights <- numeric()
+  } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
       cli::cli_abort("No such edge attribute", call = call)
     }
-    value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
+    weights <- edge_attr(graph, name = attr)
+    if (!is.numeric(weights) && !is.logical(weights)) {
       cli::cli_abort(
         "Matrices must be either numeric or logical, and the edge attribute is not",
         call = call
       )
     }
-  } else {
-    value <- rep(1, nrow(el))
   }
 
-  if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(
-      dims = c(vc, vc),
-      i = el[, 1],
-      j = el[, 2],
-      x = value,
-      use.last.ij = use.last.ij
-    )
-  } else {
-    if (type == "upper") {
-      ## upper
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "lower") {
-      ## lower
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmax(el[, 1], el[, 2]),
-        j = pmin(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "both") {
-      ## both
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        symmetric = TRUE,
-        use.last.ij = use.last.ij
-      )
-      res <- as(res, "generalMatrix")
-    }
-  }
+  # Use the library implementation
+  tmp <- get_adjacency_sparse_impl(
+    graph,
+    type,
+    weights,
+    loops = "once"
+  )
+
+  # Convert to proper Matrix object
+  res <- igraph.i.spMatrix(tmp)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
@@ -427,7 +389,6 @@ as_adjacency_matrix <- function(
       graph,
       type = type,
       attr = attr,
-      weights = NULL,
       names = names,
       loops = "once"
     )

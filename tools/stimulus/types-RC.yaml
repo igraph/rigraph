@@ -271,7 +271,7 @@ VECTOR_LIST:
             IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_list_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -294,15 +294,19 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            if (!Rf_isNull(%I%)) {
+              IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+              IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
-            igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            if (!Rf_isNull(%I%)) {
+              igraph_vector_int_list_destroy(&%C%);
+              IGRAPH_FINALLY_CLEAN(1);
+            }
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
@@ -356,6 +360,22 @@ ADJLIST:
         IN: igraph_adjlist_destroy(&%C%);
 
 EDGEWEIGHTS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: Rz_SEXP_to_vector(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
+EDGE_LENGTHS:
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -440,6 +460,22 @@ MATRIX_INT:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEX:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+    CTYPE: igraph_integer_t
+    INCONV:
+        IN: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        OUT: '%C% = -1;'
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
+
+EDGE:
+    # A single edge index
     CALL:
         IN: '%C%'
         INOUT: '&%C%'
@@ -591,6 +627,18 @@ VERTEX_INDEX_PAIRS:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+INDEX_PAIRS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
+    INCONV:
+        IN: |-
+            Rz_SEXP_to_vector_int_copy(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 EDGE_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
@@ -621,6 +669,21 @@ EXTRA:
     HEADER: {}
 
 CLOSURE:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
     CALL: '%I%'
     CTYPE: ~
     HEADER: '%I%'

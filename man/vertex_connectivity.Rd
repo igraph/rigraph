@@ -76,7 +76,7 @@ precisely \code{vertex_connectivity()} is the most general, the other two are
 included only for the ease of using more descriptive function names.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity}{\code{vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion}{\code{cohesion()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity}{\code{st_vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity}{\code{vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths}{\code{vertex_disjoint_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion}{\code{cohesion()}}
 }
 
 \examples{

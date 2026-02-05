@@ -25,7 +25,7 @@ These objects are created by the \code{\link[=fit_hrg]{fit_hrg()}} and
 \code{\link[=consensus_tree]{consensus_tree()}} functions.  }
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}
 }
 
 \examples{

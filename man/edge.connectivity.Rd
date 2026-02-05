@@ -30,7 +30,7 @@ thanks Peter.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity}{\code{st_edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \keyword{internal}

@@ -29,8 +29,8 @@ and \code{all} ignores edge directions. Ignored in undirected graphs.}
 \item{callback}{Optional function to call for each cycle found. If provided,
 the function should accept two arguments: \code{vertices} (integer vector of vertex
 IDs in the cycle) and \code{edges} (integer vector of edge IDs
-in the cycle). The function should return \code{TRUE} to continue
-the search or \code{FALSE} to stop it. If \code{NULL} (the default), all cycles are
+in the cycle). The function should return \code{FALSE} to continue
+the search or \code{TRUE} to stop it. If \code{NULL} (the default), all cycles are
 collected and returned as a list.
 
 \strong{Important limitation:} Callback functions must NOT call any igraph
@@ -59,7 +59,7 @@ have exponentially many cycles and the presence of multi-edges exacerbates
 this combinatorial explosion.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

@@ -18,7 +18,7 @@ graph.edgelist(el, directed = TRUE)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}
 }
 
 \keyword{internal}
