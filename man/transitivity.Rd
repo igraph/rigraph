@@ -102,6 +102,10 @@ The \code{barrat} type of transitivity does not work for graphs with
 multiple and/or loop edges. If you want to calculate it for a directed
 graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_ring(10)

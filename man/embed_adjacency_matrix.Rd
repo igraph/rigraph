@@ -88,6 +88,10 @@ For directed graphs the embedding is defined as the pair
 sqrt(D[no])}. (For undirected graphs \eqn{U=V}, so it is enough to keep one
 of them.)
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_adjacency_spectral_embedding}{\code{adjacency_spectral_embedding()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_strength}{\code{strength()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 ## A small graph
@@ -112,5 +116,3 @@ Other embedding:
 }
 \concept{embedding}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_adjacency_spectral_embedding}{\code{adjacency_spectral_embedding()}}.}
-

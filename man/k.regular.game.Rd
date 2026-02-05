@@ -23,4 +23,8 @@ out-degree and in-degree in a directed graph.}
 \code{k.regular.game()} was renamed to \code{\link[=sample_k_regular]{sample_k_regular()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_k_regular_game}{\code{k_regular_game()}}
+}
+
 \keyword{internal}

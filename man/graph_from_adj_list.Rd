@@ -44,6 +44,10 @@ The idea is that you convert your graph to an adjacency list by
 \code{\link[=as_adj_list]{as_adj_list()}}, do your modifications to the graphs and finally
 create again an igraph graph by calling \code{graph_from_adj_list()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}
+}
+
 \examples{
 
 ## Directed
@@ -82,5 +86,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{conversion}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}.}
-

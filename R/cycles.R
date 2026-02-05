@@ -47,7 +47,6 @@
 #' find_cycle(sample_tree(5))
 #'
 #' @family cycles
-#' @cdocs igraph_find_cycle
 #' @export
 
 find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
@@ -98,7 +97,6 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #'
 #' @family cycles
-#' @cdocs igraph_simple_cycles
 #' @param ... These dots are for future extensions and must be empty.
 #' @param callback Optional function to call for each cycle found. If provided,
 #'   the function should accept two arguments: `vertices` (integer vector of vertex
@@ -116,7 +114,6 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #'   (list of integer vectors with vertex IDs) and `edges` (list of integer vectors
 #'   with edge IDs). If `callback` is provided, returns `NULL` invisibly.
 #' @export
-#' @cdocs igraph_simple_cycles igraph_simple_cycles_callback
 
 simple_cycles <- function(
   graph,

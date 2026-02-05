@@ -26,4 +26,8 @@ solving the eigenproblem}
 \code{layout.mds()} was renamed to \code{\link[=layout_with_mds]{layout_with_mds()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds}{\code{layout_mds()}}
+}
+
 \keyword{internal}

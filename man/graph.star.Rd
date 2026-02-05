@@ -23,4 +23,8 @@ are undirected.}
 \code{graph.star()} was renamed to \code{\link[=make_star]{make_star()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}
+}
+
 \keyword{internal}

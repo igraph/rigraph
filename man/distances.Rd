@@ -247,6 +247,10 @@ path length between each pair of vertices. For directed graphs both
 directions are considered, so every pair of vertices appears twice in the
 histogram.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{average_path_length_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths}{\code{get_all_shortest_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra}{\code{get_all_shortest_paths_dijkstra()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -328,5 +332,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \concept{paths}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{average_path_length_dijkstra()}}.}
-

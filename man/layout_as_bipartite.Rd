@@ -43,6 +43,10 @@ to their types. Then the positions within the rows are optimized to minimize
 edge crossings, using the Sugiyama algorithm (see
 \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite}{\code{layout_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Random bipartite graph
 inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)

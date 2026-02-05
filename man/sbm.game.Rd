@@ -28,4 +28,8 @@ group. The sum of the vector must match the number of vertices.}
 \code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}
+}
+
 \keyword{internal}

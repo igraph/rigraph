@@ -60,6 +60,10 @@ and is often disconnected.
 
 The \dQuote{index} method selects the vertices in order of their index.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_degree_sequence}{\code{realize_degree_sequence()}}
+}
+
 \examples{
 
 g <- realize_degseq(rep(2, 100))
@@ -111,5 +115,3 @@ Connectedness matters: construction and exact random sampling of connected netwo
 from graphs with the given degree sequence.
 }
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_degree_sequence}{\code{realize_degree_sequence()}}.}
-

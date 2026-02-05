@@ -19,4 +19,8 @@ first element is the new id of vertex 1, etc. Every number between one and
 \code{permute.vertices()} was renamed to \code{\link[=permute]{permute()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}
+}
+
 \keyword{internal}

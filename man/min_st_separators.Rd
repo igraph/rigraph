@@ -51,6 +51,10 @@ min_st_separators(g)
 }\if{html}{\out{</div>}}
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_all_minimal_st_separators}{\code{all_minimal_st_separators()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ring <- make_ring(4)
@@ -84,5 +88,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{flow}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_all_minimal_st_separators}{\code{all_minimal_st_separators()}}.}
-

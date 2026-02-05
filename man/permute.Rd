@@ -27,6 +27,10 @@ of a graph.
 
 \code{permute()} keeps all graph, vertex and edge attributes of the graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}
+}
+
 \examples{
 
 # Random permutation of a random graph
@@ -79,5 +83,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{functions for manipulating graph structure}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}.}
-

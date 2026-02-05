@@ -22,6 +22,10 @@ An igraph graph
 \description{
 Create a full graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full}{\code{full()}}
+}
+
 \examples{
 make_full_graph(5)
 print_all(make_full_graph(4, directed = TRUE))

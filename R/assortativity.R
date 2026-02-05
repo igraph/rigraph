@@ -160,7 +160,6 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-#' @cdocs igraph_assortativity
 assortativity <- function(
   graph,
   values,
@@ -241,7 +240,6 @@ assortativity_legacy <- function(
 #'   [as.factor()].
 #' @rdname assortativity
 #' @export
-#' @cdocs igraph_assortativity_nominal
 assortativity_nominal <- function(
   graph,
   types,
@@ -263,7 +261,6 @@ assortativity_nominal <- function(
 
 #' @rdname assortativity
 #' @export
-#' @cdocs igraph_assortativity_degree
 assortativity_degree <- function(graph, directed = TRUE) {
   assortativity_degree_impl(
     graph = graph,

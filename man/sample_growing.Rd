@@ -34,6 +34,10 @@ the graph and \code{m} new edges are created. If \code{citation} is
 vertices, otherwise the edges are connecting new vertex to uniformly
 randomly chosen old vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}
+}
+
 \examples{
 
 g <- sample_growing(500, citation = FALSE)
@@ -74,5 +78,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}.}
-

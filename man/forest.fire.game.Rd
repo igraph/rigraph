@@ -24,4 +24,8 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 \code{forest.fire.game()} was renamed to \code{\link[=sample_forestfire]{sample_forestfire()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
+}
+
 \keyword{internal}

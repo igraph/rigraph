@@ -15,4 +15,8 @@ independence.number(graph)
 \code{independence.number()} was renamed to \code{\link[=ivs_size]{ivs_size()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number}{\code{independence_number()}}
+}
+
 \keyword{internal}

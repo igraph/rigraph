@@ -20,4 +20,8 @@ details below.}
 \code{graph.extended.chordal.ring()} was renamed to \code{\link[=make_chordal_ring]{make_chordal_ring()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
+}
+
 \keyword{internal}

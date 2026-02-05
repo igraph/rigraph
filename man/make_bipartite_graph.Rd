@@ -46,6 +46,10 @@ a vertex attribute called \code{type}. \code{edges} may contain strings as
 vertex names; in this case, \code{types} must be a named vector that specifies
 the type for each vertex name that occurs in \code{edges}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))

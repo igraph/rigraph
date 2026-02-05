@@ -67,6 +67,10 @@ For graphs with no vertices, \code{NaN} is returned.
 The degree of a vertex is its most basic structural property, the number of
 its adjacent edges.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -109,5 +113,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree()}}.}
-

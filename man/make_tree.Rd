@@ -30,6 +30,10 @@ An igraph graph
 Create a k-ary tree graph, where almost all vertices other than the leaves
 have the same number of children.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}
+}
+
 \examples{
 make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")

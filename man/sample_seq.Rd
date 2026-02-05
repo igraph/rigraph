@@ -25,6 +25,10 @@ The algorithm runs in \code{O(length)} expected time, even if
 \code{high-low} is big. It is much faster (but of course less general) than
 the builtin \code{sample} function of R.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}
+}
+
 \examples{
 
 rs <- sample_seq(1, 100000000, 10)

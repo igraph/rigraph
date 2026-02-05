@@ -27,6 +27,10 @@ If attributes are supplied, and they are not present in the graph,
 their values for the original vertices of the graph are set to
 \code{NA}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices}{\code{add_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_empty_graph() \%>\%
   add_vertices(3, color = "red") \%>\%

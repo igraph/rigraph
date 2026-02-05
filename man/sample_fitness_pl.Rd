@@ -68,6 +68,10 @@ constant chosen appropriately to ensure that the maximum degree is less than
 the square root of the number of edges times the average degree; see the
 paper of Chung and Lu, and Cho et al for more details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
+}
+
 \examples{
 
 g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
@@ -119,5 +123,3 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}.}
-

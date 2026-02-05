@@ -21,4 +21,8 @@ vertex sets to find. \code{NULL} means no limit.}
 \code{independent.vertex.sets()} was renamed to \code{\link[=ivs]{ivs()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

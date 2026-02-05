@@ -15,4 +15,8 @@ graph.atlas(n)
 \code{graph.atlas()} was renamed to \code{\link[=graph_from_atlas]{graph_from_atlas()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas()}}
+}
+
 \keyword{internal}

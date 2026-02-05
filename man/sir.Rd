@@ -104,6 +104,10 @@ Function \code{median} and \code{quantile} calculate the median and
 quantiles of the results, respectively, in bins calculated with
 \code{time_bins()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}
+}
+
 \examples{
 
 g <- sample_gnm(100, 100)
@@ -126,5 +130,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
 }
 \concept{processes}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}.}
-

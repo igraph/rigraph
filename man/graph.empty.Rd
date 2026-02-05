@@ -17,4 +17,8 @@ graph.empty(n = 0, directed = TRUE)
 \code{graph.empty()} was renamed to \code{\link[=make_empty_graph]{make_empty_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}
+}
+
 \keyword{internal}

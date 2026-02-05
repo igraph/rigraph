@@ -390,7 +390,6 @@ graph.lcf <- function(n, shifts, repeats = 1) {
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
-#' @cdocs igraph_square_lattice
 graph.lattice <- function(
   dimvector = NULL,
   length = NULL,
@@ -1583,7 +1582,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-#' @cdocs igraph_empty
 make_empty_graph <- function(n = 0, directed = TRUE) {
   if (!is.numeric(n)) {
     cli::cli_abort("{.arg n} must be numeric, not {.obj_type_friendly {n}}.")
@@ -1948,7 +1946,6 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
-#' @cdocs igraph_square_lattice
 make_lattice <- function(
   dimvector = NULL,
   length = NULL,
@@ -2105,7 +2102,6 @@ ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @examples
 #' make_wheel(10, mode = "out")
 #' make_wheel(5, mode = "undirected")
-#' @cdocs igraph_wheel
 make_wheel <- function(
   n,
   ...,
@@ -2208,7 +2204,6 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
-#' @cdocs igraph_tree_game
 sample_tree <- function(n, directed = FALSE, method = c("lerw", "prufer")) {
   tree_game_impl(
     n = n,
@@ -2249,7 +2244,6 @@ tree <- function(...) {
 #' to_prufer(g)
 #' @family trees
 #' @export
-#' @cdocs igraph_from_prufer
 make_from_prufer <- function(prufer) {
   from_prufer_impl(
     prufer = prufer
@@ -2743,7 +2737,6 @@ bipartite_graph <- function(types, edges, directed = FALSE) {
 #' # Create a directed multipartite graph
 #' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
 #' plot(g2)
-#' @cdocs igraph_full_multipartite
 make_full_multipartite <- function(
   n,
   directed = FALSE,
@@ -2813,7 +2806,6 @@ full_multipartite <- function(
 #'
 #' # The sizes of the partitions are as balanced as possible
 #' table(V(g)$type)
-#' @cdocs igraph_turan
 make_turan <- function(n, r) {
   n <- as.numeric(n)
   r <- as.numeric(r)
@@ -2902,7 +2894,6 @@ full_citation_graph <- function(n, directed = TRUE) {
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @cdocs igraph_lcf_vector
 graph_from_lcf <- function(
   shifts,
   ...,
@@ -3027,7 +3018,6 @@ graph_from_lcf <- function(
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
-#' @cdocs igraph_realize_degree_sequence
 realize_degseq <- function(
   out.deg,
   in.deg = NULL,
@@ -3092,7 +3082,6 @@ realize_degseq <- function(
 #' @examples
 #' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 #' degree(g)
-#' @cdocs igraph_realize_bipartite_degree_sequence
 realize_bipartite_degseq <- function(
   degrees1,
   degrees2,

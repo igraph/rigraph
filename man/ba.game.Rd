@@ -71,4 +71,8 @@ contain the out degrees of the new vertices only, not the ones in the
 \code{ba.game()} was renamed to \code{\link[=sample_pa]{sample_pa()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game}{\code{barabasi_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

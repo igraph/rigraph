@@ -50,6 +50,10 @@ maximal connected components and calls the supplied \code{layout} function
 for each component separately. Finally it merges the layouts via calling
 \code{merge_coords()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 # create 20 scale-free graphs and place them in a common layout

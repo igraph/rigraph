@@ -84,6 +84,10 @@ Our implementation tries to follow the original publication, as much as
 possible. The only major difference is that coordinates are explicitly kept
 within the bounds of the rectangle of the layout.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
+}
+
 \examples{
 
 set.seed(42)

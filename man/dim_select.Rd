@@ -33,6 +33,10 @@ assume that the left and the right of the vector are coming from two Normal
 distributions, with different means, and we want to know their border. See
 examples below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select}{\code{dim_select()}}
+}
+
 \examples{
 
 # Generate the two groups of singular values with
@@ -78,5 +82,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{embedding}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_dim_select}{\code{dim_select()}}.}
-

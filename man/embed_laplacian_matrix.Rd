@@ -94,6 +94,10 @@ computed via the singular value decomposition of the Laplacian matrix.
 They are essentially doing the same as \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
 but work on the Laplacian matrix, instead of the adjacency matrix.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 ## A small graph
@@ -122,5 +126,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{embedding}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}.}
-

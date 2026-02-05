@@ -229,7 +229,6 @@ function() {
 
 #' @rdname graphlet_basis
 #' @export
-#' @cdocs igraph_graphlets
 graphlets <- function(graph, weights = NULL, niter = 1000) {
   graphlets_impl(
     graph = graph,

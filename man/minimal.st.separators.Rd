@@ -16,4 +16,8 @@ ignored.}
 \code{minimal.st.separators()} was renamed to \code{\link[=min_st_separators]{min_st_separators()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_all_minimal_st_separators}{\code{all_minimal_st_separators()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

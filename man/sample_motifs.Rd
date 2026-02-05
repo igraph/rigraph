@@ -42,6 +42,10 @@ structure.  These functions search a graph for various motifs.
 \code{sample_motifs()} estimates the total number of motifs of a given
 size in a graph based on a sample.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)

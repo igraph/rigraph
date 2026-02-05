@@ -44,6 +44,10 @@ controlled using the mode parameter.
 By convention, the null graph (i.e. the graph with no vertices) is considered
 to be a forest.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_tree(3) + make_tree(5, 3)
@@ -60,5 +64,3 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}.}
-

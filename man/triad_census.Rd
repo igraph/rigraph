@@ -76,6 +76,10 @@ A<->B<->C, A<->C, the complete graph.
 This functions uses the RANDESU motif finder algorithm to find and count the
 subgraphs, see \code{\link[=motifs]{motifs()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census}{\code{triad_census()}}
+}
+
 \examples{
 
 g <- sample_gnm(15, 45, directed = TRUE)
@@ -96,5 +100,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{motifs}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_triad_census}{\code{triad_census()}}.}
-

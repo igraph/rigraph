@@ -18,4 +18,8 @@ vertex ids.}
 \code{hrg.create()} was renamed to \code{\link[=hrg]{hrg()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}
+}
+
 \keyword{internal}

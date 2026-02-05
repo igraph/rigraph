@@ -101,7 +101,6 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-#' @cdocs igraph_adjacency_spectral_embedding
 embed_adjacency_matrix <- function(
   graph,
   no,
@@ -181,7 +180,6 @@ embed_adjacency_matrix <- function(
 #'
 #' @family embedding
 #' @export
-#' @cdocs igraph_dim_select
 dim_select <- function(sv) {
   dim_select_impl(
     sv = sv
@@ -277,7 +275,6 @@ dim_select <- function(sv) {
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-#' @cdocs igraph_laplacian_spectral_embedding
 embed_laplacian_matrix <- function(
   graph,
   no,

@@ -81,6 +81,10 @@ and the paper \url{https://arxiv.org/abs/cs/0502085}.
 The \dQuote{edge.switching.simple} is an MCMC sampler based on
 degree-preserving edge switches. It generates simple undirected or directed graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game}{\code{degree_sequence_game()}}
+}
+
 \examples{
 
 ## The simple generator

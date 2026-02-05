@@ -36,6 +36,10 @@ the average number of edges, \eqn{p m_\text{max}}, where \eqn{m_\text{max}}
 is the largest possible number of edges, which depends on whether the
 graph is directed or undirected and whether self-loops are allowed.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp}{\code{erdos_renyi_game_gnp()}}
+}
+
 \examples{
 
 # Random graph with expected mean degree of 2

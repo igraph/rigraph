@@ -38,6 +38,10 @@ directed acyclic graph (DAG). For undirected graphs, the removal of a feedback
 arc set ensures that the remaining graph is a forest (i.e. every connected
 component is a tree).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set}{\code{feedback_arc_set()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_gnm(20, 40, directed = TRUE)
@@ -88,5 +92,3 @@ Graph cycles
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_arc_set}{\code{feedback_arc_set()}}.}
-

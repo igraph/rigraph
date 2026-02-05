@@ -19,6 +19,10 @@ For undirected graphs, head and tail is not defined.  In this case
 \code{head_of()} returns vertices incident to the supplied edges, and
 \code{tail_of()} returns the other end(s) of the edge(s).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \seealso{
 Other structural queries: 
 \code{\link{[.igraph}()},

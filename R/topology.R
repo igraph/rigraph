@@ -383,7 +383,6 @@ isomorphic <- function(
 }
 
 #' @export
-#' @cdocs igraph_isomorphic_bliss
 graph.isomorphic.bliss <- function(
   graph1,
   graph2,
@@ -400,7 +399,6 @@ graph.isomorphic.bliss <- function(
   )
 }
 #' @export
-#' @cdocs igraph_isomorphic_vf2
 graph.isomorphic.vf2 <- function(
   graph1,
   graph2,
@@ -427,7 +425,6 @@ graph.isomorphic.vf2 <- function(
   )
 }
 #' @export
-#' @cdocs igraph_subisomorphic_vf2
 graph.subisomorphic.vf2 <- function(
   graph1,
   graph2,
@@ -625,7 +622,6 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 }
 
 #' @export
-#' @cdocs igraph_count_isomorphisms_vf2
 graph.count.isomorphisms.vf2 <- function(
   graph1,
   graph2,
@@ -732,7 +728,6 @@ count_subgraph_isomorphisms <- function(
 }
 
 #' @export
-#' @cdocs igraph_count_subisomorphisms_vf2
 graph.count.subisomorphisms.vf2 <- function(
   graph1,
   graph2,
@@ -1010,7 +1005,6 @@ isomorphism_class <- function(graph, v) {
 }
 
 #' @export
-#' @cdocs igraph_isoclass
 graph.isoclass <- function(graph) {
   isoclass_impl(
     graph = graph
@@ -1033,7 +1027,6 @@ graph.isoclass <- function(graph) {
 #'
 #' @family graph isomorphism
 #' @export
-#' @cdocs igraph_isoclass_create
 graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
   isoclass_create_impl(
     size = size,
@@ -1150,7 +1143,6 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 #' all(el1 == el2)
 #' @family graph isomorphism
 #' @export
-#' @cdocs igraph_canonical_permutation
 canonical_permutation <- function(
   graph,
   colors = NULL,
@@ -1202,7 +1194,6 @@ canonical_permutation <- function(
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
-#' @cdocs igraph_permute_vertices
 permute <- function(graph, permutation) {
   permute_vertices_impl(
     graph = graph,
@@ -1211,7 +1202,6 @@ permute <- function(graph, permutation) {
 }
 
 #' @export
-#' @cdocs igraph_isomorphic
 graph.isomorphic <- function(graph1, graph2) {
   isomorphic_impl(
     graph1 = graph1,
@@ -1302,7 +1292,6 @@ graph.isomorphic <- function(graph1, graph2) {
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-#' @cdocs igraph_count_automorphisms
 count_automorphisms <- function(
   graph,
   colors = NULL,
@@ -1387,7 +1376,6 @@ count_automorphisms <- function(
 #' automorphism_group(g)
 #' @family graph automorphism
 #' @export
-#' @cdocs igraph_automorphism_group
 automorphism_group <- function(
   graph,
   colors = NULL,
@@ -1441,7 +1429,6 @@ automorphism_group <- function(
 #' print_all(tc2)
 #' @family functions for manipulating graph structure
 #' @export
-#' @cdocs igraph_transitive_closure
 transitive_closure <- function(graph) {
   transitive_closure_impl(
     graph = graph

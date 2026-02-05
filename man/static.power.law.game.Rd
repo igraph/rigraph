@@ -43,4 +43,8 @@ finite size correction of Cho et al., see references below.}
 \code{static.power.law.game()} was renamed to \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
+}
+
 \keyword{internal}

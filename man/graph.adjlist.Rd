@@ -30,4 +30,8 @@ This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 \code{graph.adjlist()} was renamed to \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}
+}
+
 \keyword{internal}

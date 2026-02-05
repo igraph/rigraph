@@ -30,6 +30,10 @@ articulation point or a single bridge makes it disconnected. If a graph
 contains no articulation points, then its vertex connectivity is at least
 two.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_articulation_points}{\code{articulation_points()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bridges}{\code{bridges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 
 g <- disjoint_union(make_full_graph(5), make_full_graph(5))
@@ -58,5 +62,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{components}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_articulation_points}{\code{articulation_points()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_bridges}{\code{bridges()}}.}
-
