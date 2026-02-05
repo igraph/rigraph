@@ -45,6 +45,7 @@ as a table.
 [[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
@@ -67,20 +68,20 @@ Other vertex and edge sequences:
 # Unnamed graphs
 g <- make_ring(10)
 E(g)
-#> + 10/10 edges from 5528579:
+#> + 10/10 edges from ccb75b4:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Named graphs
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 E(g2)
-#> + 10/10 edges from ce5abdf (vertex names):
+#> + 10/10 edges from 4e0af0c (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 
 # All edges in a long sequence
 g3 <- make_ring(200)
 E(g3)
-#> + 200/200 edges from 8411ff2:
+#> + 200/200 edges from 7a5dc27:
 #>  [1]  1-- 2  2-- 3  3-- 4  4-- 5  5-- 6  6-- 7  7-- 8  8-- 9  9--10 10--11
 #> [11] 11--12 12--13 13--14 14--15 15--16 16--17 17--18 18--19 19--20 20--21
 #> [21] 21--22 22--23 23--24 24--25 25--26 26--27 27--28 28--29 29--30 30--31
@@ -93,7 +94,7 @@ E(g3)
 #> [91] 91--92 92--93 93--94 94--95 95--96 96--97 97--98 98--99
 #> + ... omitted several edges
 E(g3) %>% print(full = TRUE)
-#> + 200/200 edges from 8411ff2:
+#> + 200/200 edges from 7a5dc27:
 #>   [1]   1--  2   2--  3   3--  4   4--  5   5--  6   6--  7   7--  8   8--  9
 #>   [9]   9-- 10  10-- 11  11-- 12  12-- 13  13-- 14  14-- 15  15-- 16  16-- 17
 #>  [17]  17-- 18  18-- 19  19-- 20  20-- 21  21-- 22  22-- 23  23-- 24  24-- 25
@@ -126,10 +127,10 @@ g4 <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "green")
 E(g4)
-#> + 10/10 edges from 2e02d06 (vertex names):
+#> + 10/10 edges from 4b3860d (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 E(g4)[[]]
-#> + 10/10 edges from 2e02d06 (vertex names):
+#> + 10/10 edges from 4b3860d (vertex names):
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 2     B    C   2   3      2 green
@@ -142,7 +143,7 @@ E(g4)[[]]
 #> 9     I    J   9  10      9 green
 #> 10    A    J   1  10     10 green
 E(g4)[[1:5]]
-#> + 5/10 edges from 2e02d06 (vertex names):
+#> + 5/10 edges from 4b3860d (vertex names):
 #>   tail head tid hid weight color
 #> 1    A    B   1   2      1 green
 #> 2    B    C   2   3      2 green

@@ -5,7 +5,7 @@ Calculate all isomorphic mappings between the vertices of two graphs
 ## Usage
 
 ``` r
-isomorphisms(graph1, graph2, method = "vf2", ...)
+isomorphisms(graph1, graph2, method = "vf2", ..., callback = NULL)
 ```
 
 ## Arguments
@@ -28,16 +28,38 @@ isomorphisms(graph1, graph2, method = "vf2", ...)
 
   Extra arguments, passed to the various methods.
 
+- callback:
+
+  Optional callback function to call for each isomorphism found. If
+  provided, the function should accept two arguments: `map12` (integer
+  vector mapping vertex IDs from graph1 to graph2, 1-based indexing) and
+  `map21` (integer vector mapping vertex IDs from graph2 to graph1,
+  1-based indexing). The function should return `FALSE` to continue the
+  search or `TRUE` to stop it. If `NULL` (the default), all isomorphisms
+  are collected and returned as a list. Only supported for
+  `method = "vf2"`.
+
+  **Important limitation:** Callback functions must NOT call any igraph
+  functions (including simple queries like
+  [`vcount()`](https://r.igraph.org/reference/gorder.md) or
+  [`ecount()`](https://r.igraph.org/reference/gsize.md)). Doing so will
+  cause R to crash due to reentrancy issues. Extract any needed graph
+  information before calling the function with a callback, or use
+  collector mode (the default) and process results afterward.
+
 ## Value
 
-A list of vertex sequences, corresponding to all mappings from the first
-graph to the second.
+If `callback` is `NULL`, returns a list of vertex sequences,
+corresponding to all mappings from the first graph to the second. If
+`callback` is provided, returns `NULL` invisibly.
 
 ## Related documentation in the C library
 
 [`get_isomorphisms_vf2()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_get_isomorphisms_vf2),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 

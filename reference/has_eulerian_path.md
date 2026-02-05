@@ -59,6 +59,7 @@ such cycle exists.
 [[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`eulerian_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle)
 
 ## See also
@@ -81,11 +82,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 264d5ed (vertex names):
+#> + 10/10 edges from 616adbb (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 264d5ed:
+#> + 11/6 vertices, named, from 616adbb:
 #>  [1] A B C D B F A E D F E
 #> 
 
@@ -93,5 +94,6 @@ has_eulerian_cycle(g)
 #> [1] FALSE
 try(eulerian_cycle(g))
 #> Error in eulerian_cycle_impl(graph = graph) : 
-#>   At vendor/cigraph/src/paths/eulerian.c:615 : The graph does not have an Eulerian cycle. Input problem has no solution
+#>   The graph does not have an Eulerian cycle. Input problem has no solution
+#> Source: paths/eulerian.c:615
 ```

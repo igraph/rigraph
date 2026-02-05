@@ -164,11 +164,16 @@ on the value of the `mode` argument:
 
 ## Related documentation in the C library
 
+[`adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency),
+[`weighted_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency),
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -292,6 +297,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH 250a6ec DNW- 10 51 -- 
+#> IGRAPH 5fe95ab DNW- 10 51 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

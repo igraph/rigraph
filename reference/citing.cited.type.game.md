@@ -56,4 +56,5 @@ citing.cited.type.game(
 
 ## Related documentation in the C library
 
+[`citing_cited_type_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

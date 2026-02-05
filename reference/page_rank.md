@@ -121,7 +121,9 @@ performance increase at all.
 
 [`personalized_pagerank()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 
@@ -160,10 +162,10 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ``` r
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
-#>  [1] 0.05066669 0.05153582 0.04121790 0.05855531 0.02499356 0.04992431
-#>  [7] 0.05059918 0.03329834 0.04703836 0.03494381 0.05429140 0.10395030
-#> [13] 0.04927266 0.05448965 0.06751537 0.05321759 0.07238569 0.03922930
-#> [19] 0.04145030 0.02142447
+#>  [1] 0.04197122 0.04726315 0.03174648 0.06098307 0.01572577 0.07393040
+#>  [7] 0.04961456 0.06815133 0.07539157 0.02844695 0.04786014 0.03629319
+#> [13] 0.05245524 0.02172359 0.06774167 0.03692350 0.07056335 0.03603099
+#> [19] 0.02574853 0.11143532
 
 g2 <- make_star(10)
 page_rank(g2)$vector

@@ -95,9 +95,11 @@ is used to calculate the minimum cut.
 [`mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut),
 [`mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut_value),
 [`st_mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut),
+[`st_mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut_value),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
 
 ## References
 
@@ -129,11 +131,11 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> [1] 2
 #> 
 #> $partition1
-#> + 1/100 vertex, from fefb239:
+#> + 1/100 vertex, from 2962e80:
 #> [1] 2
 #> 
 #> $partition2
-#> + 99/100 vertices, from fefb239:
+#> + 99/100 vertices, from 2962e80:
 #>  [1]   1   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
 #> [20]  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39
 #> [39]  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58
@@ -142,7 +144,7 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> [96]  97  98  99 100
 #> 
 #> $cut
-#> + 2/100 edges from fefb239:
+#> + 2/100 edges from 2962e80:
 #> [1] 1--2 2--3
 #> 
 
@@ -153,15 +155,15 @@ min_cut(g2, value.only = FALSE)
 #> [1] 1
 #> 
 #> $partition1
-#> + 1/6 vertex, from c8c045e:
+#> + 1/6 vertex, from 36c431f:
 #> [1] 2
 #> 
 #> $partition2
-#> + 5/6 vertices, from c8c045e:
+#> + 5/6 vertices, from 36c431f:
 #> [1] 1 3 4 5 6
 #> 
 #> $cut
-#> + 1/7 edge from c8c045e:
+#> + 1/7 edge from 36c431f:
 #> [1] 2->3
 #> 
 ```

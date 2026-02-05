@@ -32,6 +32,10 @@ star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
 An igraph graph.
 
+## Related documentation in the C library
+
+[`star()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star)
+
 ## See also
 
 Other deterministic constructors:
@@ -56,13 +60,13 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> IGRAPH 0dcb540 D--- 10 9 -- Out-star
+#> IGRAPH e40807a D--- 10 9 -- Out-star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 0dcb540:
+#> + edges from e40807a:
 #> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> IGRAPH c8516f3 U--- 5 4 -- Star
+#> IGRAPH 6899d34 U--- 5 4 -- Star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from c8516f3:
+#> + edges from 6899d34:
 #> [1] 1--2 1--3 1--4 1--5
 ```

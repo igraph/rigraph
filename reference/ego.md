@@ -126,6 +126,7 @@ vertices in its neighborhood.
 
 ## Related documentation in the C library
 
+[`connect_neighborhood()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
@@ -209,82 +210,82 @@ neighborhood_size(g, order = 2, 1:3)
 
 ego(g, order = 0, 1:3)
 #> [[1]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 1
 #> 
 #> [[2]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 2
 #> 
 #> [[3]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 3
 #> 
 ego(g, order = 1, 1:3)
 #> [[1]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1] 3 2 4
 #> 
 ego(g, order = 2, 1:3)
 #> [[1]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1] 3 2 4 1 5
 #> 
 
 # neighborhood() is an alias of ego()
 neighborhood(g, order = 0, 1:3)
 #> [[1]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 1
 #> 
 #> [[2]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 2
 #> 
 #> [[3]]
-#> + 1/10 vertex, from 349d7d7:
+#> + 1/10 vertex, from d4bd06c:
 #> [1] 3
 #> 
 neighborhood(g, order = 1, 1:3)
 #> [[1]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1]  1  2 10
 #> 
 #> [[2]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1] 2 1 3
 #> 
 #> [[3]]
-#> + 3/10 vertices, from 349d7d7:
+#> + 3/10 vertices, from d4bd06c:
 #> [1] 3 2 4
 #> 
 neighborhood(g, order = 2, 1:3)
 #> [[1]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1]  1  2 10  3  9
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1]  2  1  3 10  4
 #> 
 #> [[3]]
-#> + 5/10 vertices, from 349d7d7:
+#> + 5/10 vertices, from d4bd06c:
 #> [1] 3 2 4 1 5
 #> 
 
@@ -292,41 +293,41 @@ neighborhood(g, order = 2, 1:3)
 V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 make_ego_graph(g, order = 2, 1:3)
 #> [[1]]
-#> IGRAPH 9b69d25 UN-- 5 4 -- Ring graph
+#> IGRAPH 681d655 UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 9b69d25 (vertex names):
+#> + edges from 681d655 (vertex names):
 #> [1] a--b b--c a--j i--j
 #> 
 #> [[2]]
-#> IGRAPH 96dee16 UN-- 5 4 -- Ring graph
+#> IGRAPH d26546b UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 96dee16 (vertex names):
+#> + edges from d26546b (vertex names):
 #> [1] a--b b--c c--d a--j
 #> 
 #> [[3]]
-#> IGRAPH 4e9d667 UN-- 5 4 -- Ring graph
+#> IGRAPH e68a53e UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 4e9d667 (vertex names):
+#> + edges from e68a53e (vertex names):
 #> [1] a--b b--c c--d d--e
 #> 
 # make_neighborhood_graph() is an alias of make_ego_graph()
 make_neighborhood_graph(g, order = 2, 1:3)
 #> [[1]]
-#> IGRAPH 832537a UN-- 5 4 -- Ring graph
+#> IGRAPH 2187951 UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 832537a (vertex names):
+#> + edges from 2187951 (vertex names):
 #> [1] a--b b--c a--j i--j
 #> 
 #> [[2]]
-#> IGRAPH e9ac36d UN-- 5 4 -- Ring graph
+#> IGRAPH 3f5be97 UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from e9ac36d (vertex names):
+#> + edges from 3f5be97 (vertex names):
 #> [1] a--b b--c c--d a--j
 #> 
 #> [[3]]
-#> IGRAPH 6d1cbdd UN-- 5 4 -- Ring graph
+#> IGRAPH b7fccf0 UN-- 5 4 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 6d1cbdd (vertex names):
+#> + edges from b7fccf0 (vertex names):
 #> [1] a--b b--c c--d d--e
 #> 
 

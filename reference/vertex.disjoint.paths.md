@@ -28,4 +28,5 @@ vertex.disjoint.paths(graph, source = NULL, target = NULL)
 
 ## Related documentation in the C library
 
+[[`vertex_disjoint_paths()`](https://r.igraph.org/reference/vertex_connectivity.md)](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

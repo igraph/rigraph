@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,81 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9020" id="igraph-2219020">igraph 2.2.1.9020<a class="anchor" aria-label="anchor" href="#igraph-2219020"></a></h2>
+<div class="section level3">
+<h3 id="features-2-2-1-9020">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9020"></a></h3>
+<ul><li><p>Autogenerate BFS and DFS callback closures with unified TRUE=stop convention (<a href="https://github.com/igraph/rigraph/issues/2552" class="external-link">#2552</a>, <a href="https://github.com/igraph/rigraph/issues/2553" class="external-link">#2553</a>).</p></li>
+<li><p>Autogenerate <code>igraph_community_leading_eigenvector</code> with full closure-based callback support (<a href="https://github.com/igraph/rigraph/issues/2554" class="external-link">#2554</a>, <a href="https://github.com/igraph/rigraph/issues/2555" class="external-link">#2555</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-2-1-9020">Chore<a class="anchor" aria-label="anchor" href="#chore-2-2-1-9020"></a></h3>
+<ul><li>Consistent checks.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-2-1-9020">Testing<a class="anchor" aria-label="anchor" href="#testing-2-2-1-9020"></a></h3>
+<ul><li>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/igraph/rigraph/issues/2558" class="external-link">#2558</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9019" id="igraph-2219019">igraph 2.2.1.9019<a class="anchor" aria-label="anchor" href="#igraph-2219019"></a></h2>
+<div class="section level3">
+<h3 id="features-2-2-1-9019">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9019"></a></h3>
+<ul><li><p>Autogenerate remaining simple functions (<a href="https://github.com/igraph/rigraph/issues/2550" class="external-link">#2550</a>, <a href="https://github.com/igraph/rigraph/issues/2551" class="external-link">#2551</a>).</p></li>
+<li><p>Autogenerate all callback non-SPARSEMAT functions with unified dual-mode API (<a href="https://github.com/igraph/rigraph/issues/2533" class="external-link">#2533</a>, <a href="https://github.com/igraph/rigraph/issues/2534" class="external-link">#2534</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-2-1-9019">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-2-1-9019"></a></h3>
+<ul><li>Skip tests for old R.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9018" id="igraph-2219018">igraph 2.2.1.9018<a class="anchor" aria-label="anchor" href="#igraph-2219018"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-2-1-9018">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-2-1-9018"></a></h3>
+<ul><li><p>Scrub file paths in error/warning snapshots and fix spacing (<a href="https://github.com/igraph/rigraph/issues/2538" class="external-link">#2538</a>).</p></li>
+<li><p>Support character labels in <code><a href="../reference/assortativity.html">assortativity_nominal()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1283" class="external-link">#1283</a>, <a href="https://github.com/igraph/rigraph/issues/2432" class="external-link">#2432</a>).</p></li>
+<li><p>Fix uninitialized variable warnings in R 4.5 on Windows (<a href="https://github.com/igraph/rigraph/issues/2526" class="external-link">#2526</a>, <a href="https://github.com/igraph/rigraph/issues/2527" class="external-link">#2527</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-2-1-9018">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9018"></a></h3>
+<ul><li><p>Autogenerate sparse matrix constructor functions with type-safe conversions (<a href="https://github.com/igraph/rigraph/issues/2532" class="external-link">#2532</a>).</p></li>
+<li><p>Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable autogeneration of *_many functions (<a href="https://github.com/igraph/rigraph/issues/2531" class="external-link">#2531</a>, <a href="https://github.com/igraph/rigraph/issues/2540" class="external-link">#2540</a>).</p></li>
+<li><p>Improve formatting of error messages from C (<a href="https://github.com/igraph/rigraph/issues/2202" class="external-link">#2202</a>, <a href="https://github.com/igraph/rigraph/issues/2515" class="external-link">#2515</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-2-1-9018">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-2-1-9018"></a></h3>
+<ul><li><p>Consolidate Copilot instructions and fix workflow trigger (<a href="https://github.com/igraph/rigraph/issues/2535" class="external-link">#2535</a>, <a href="https://github.com/igraph/rigraph/issues/2536" class="external-link">#2536</a>).</p></li>
+<li><p>Review remaining IGNORE declarations in Stimulus.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-2-2-1-9018">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-2-1-9018"></a></h3>
+<ul><li><p>Integrate callback into <code><a href="../reference/motifs.html">motifs()</a></code> function (<a href="https://github.com/igraph/rigraph/issues/2543" class="external-link">#2543</a>, <a href="https://github.com/igraph/rigraph/issues/2544" class="external-link">#2544</a>).</p></li>
+<li><p>Replace <code><a href="https://rdrr.io/r/base/CallExternal.html" class="external-link">.Call()</a></code> expressions with <code>_impl()</code> function calls (<a href="https://github.com/igraph/rigraph/issues/2539" class="external-link">#2539</a>, <a href="https://github.com/igraph/rigraph/issues/2541" class="external-link">#2541</a>).</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9017" id="igraph-2219017">igraph 2.2.1.9017<a class="anchor" aria-label="anchor" href="#igraph-2219017"></a></h2>
+<div class="section level3">
+<h3 id="features-2-2-1-9017">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9017"></a></h3>
+<ul><li>Autogenerate 108 non-callback functions, reduce IGNORE specs from 128 to 19 (<a href="https://github.com/igraph/rigraph/issues/2484" class="external-link">#2484</a>, <a href="https://github.com/igraph/rigraph/issues/2485" class="external-link">#2485</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9016" id="igraph-2219016">igraph 2.2.1.9016<a class="anchor" aria-label="anchor" href="#igraph-2219016"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-2-1-9016">Chore<a class="anchor" aria-label="anchor" href="#chore-2-2-1-9016"></a></h3>
+<ul><li>No roclet needed to share the tag code (<a href="https://github.com/igraph/rigraph/issues/2520" class="external-link">#2520</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9015" id="igraph-2219015">igraph 2.2.1.9015<a class="anchor" aria-label="anchor" href="#igraph-2219015"></a></h2>
+<div class="section level3">
+<h3 id="continuous-integration-2-2-1-9015">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-2-1-9015"></a></h3>
+<ul><li><p>Tweaks (<a href="https://github.com/igraph/rigraph/issues/2517" class="external-link">#2517</a>).</p></li>
+<li><p>Test all R versions on branches that start with cran- (<a href="https://github.com/igraph/rigraph/issues/2516" class="external-link">#2516</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1.9014" id="igraph-2219014">igraph 2.2.1.9014<a class="anchor" aria-label="anchor" href="#igraph-2219014"></a></h2>
 <div class="section level3">

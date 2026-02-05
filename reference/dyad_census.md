@@ -53,7 +53,6 @@ the same classification, but with triples.
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
-[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Author

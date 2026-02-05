@@ -63,6 +63,10 @@ the network does not become fully random even for `p=1`. For appropriate
 choices of `p`, both models exhibit the property of simultaneously
 having short path lengths and high clustering.
 
+## Related documentation in the C library
+
+[`watts_strogatz_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game)
+
 ## References
 
 Duncan J Watts and Steven H Strogatz: Collective dynamics of ‘small
@@ -110,7 +114,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-#> [1] 2.829899
+#> [1] 2.76101
 transitivity(g, type = "average")
-#> [1] 0.538868
+#> [1] 0.5319964
 ```

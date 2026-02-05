@@ -80,6 +80,7 @@ graph(
 
 ## Related documentation in the C library
 
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),

@@ -268,6 +268,8 @@ graph, showing one or more cohesive blocks in it.
 [`write_graph_dot()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot),
 [`write_graph_leda()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
 [[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)
 
 ## References
@@ -312,23 +314,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> + 23/23 vertices, named, from 82cab1a:
+#> + 23/23 vertices, named, from 41705cb:
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> + 14/23 vertices, named, from 82cab1a:
+#> + 14/23 vertices, named, from 41705cb:
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> + 10/23 vertices, named, from 82cab1a:
+#> + 10/23 vertices, named, from 41705cb:
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> + 7/23 vertices, named, from 82cab1a:
+#> + 7/23 vertices, named, from 41705cb:
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> + 4/23 vertices, named, from 82cab1a:
+#> + 4/23 vertices, named, from 41705cb:
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)

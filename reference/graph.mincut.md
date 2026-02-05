@@ -48,6 +48,8 @@ graph.mincut(
 [`mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut),
 [`mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut_value),
 [`st_mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut),
+[`st_mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut_value),
 [[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)

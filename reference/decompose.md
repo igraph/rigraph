@@ -37,6 +37,10 @@ decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
 
 A list of graph objects.
 
+## Related documentation in the C library
+
+[`decompose()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose)
+
 ## See also
 
 [`is_connected()`](https://r.igraph.org/reference/components.md) to

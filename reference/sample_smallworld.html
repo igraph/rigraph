@@ -21,7 +21,7 @@ creation of multi-edges."><meta property="og:image" content="https://r.igraph.or
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,6 +121,10 @@ For appropriate choices of <code>p</code>, both models exhibit the property of
 simultaneously having short path lengths and high clustering.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game" class="external-link"><code>watts_strogatz_game()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Duncan J Watts and Steven H Strogatz: Collective dynamics of
 ‘small world’ networks, Nature 393, 440-442, 1998.</p>
@@ -166,9 +170,9 @@ simultaneously having short path lengths and high clustering.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_smallworld</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">5</span>, <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="distances.html">mean_distance</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.829899</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.76101</span>
 <span class="r-in"><span><span class="fu"><a href="transitivity.html">transitivity</a></span><span class="op">(</span><span class="va">g</span>, type <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.538868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5319964</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

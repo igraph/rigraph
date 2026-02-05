@@ -15,7 +15,7 @@ external property) tend to connect to each, and negative otherwise."><meta prope
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,8 @@ Deprecated aliases for <code>values</code> and <code>values.in</code>, respectiv
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>.</p></dd>
+with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>. Character vectors are converted to integers using
+<code><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

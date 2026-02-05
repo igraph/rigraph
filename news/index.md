@@ -1,5 +1,118 @@
 # Changelog
 
+## igraph 2.2.1.9020
+
+### Features
+
+- Autogenerate BFS and DFS callback closures with unified TRUE=stop
+  convention ([\#2552](https://github.com/igraph/rigraph/issues/2552),
+  [\#2553](https://github.com/igraph/rigraph/issues/2553)).
+
+- Autogenerate `igraph_community_leading_eigenvector` with full
+  closure-based callback support
+  ([\#2554](https://github.com/igraph/rigraph/issues/2554),
+  [\#2555](https://github.com/igraph/rigraph/issues/2555)).
+
+### Chore
+
+- Consistent checks.
+
+### Testing
+
+- Snapshot updates for rcc-smoke (null)
+  ([\#2558](https://github.com/igraph/rigraph/issues/2558)).
+
+## igraph 2.2.1.9019
+
+### Features
+
+- Autogenerate remaining simple functions
+  ([\#2550](https://github.com/igraph/rigraph/issues/2550),
+  [\#2551](https://github.com/igraph/rigraph/issues/2551)).
+
+- Autogenerate all callback non-SPARSEMAT functions with unified
+  dual-mode API
+  ([\#2533](https://github.com/igraph/rigraph/issues/2533),
+  [\#2534](https://github.com/igraph/rigraph/issues/2534)).
+
+### Continuous integration
+
+- Skip tests for old R.
+
+## igraph 2.2.1.9018
+
+### Bug fixes
+
+- Scrub file paths in error/warning snapshots and fix spacing
+  ([\#2538](https://github.com/igraph/rigraph/issues/2538)).
+
+- Support character labels in
+  [`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)
+  ([\#1283](https://github.com/igraph/rigraph/issues/1283),
+  [\#2432](https://github.com/igraph/rigraph/issues/2432)).
+
+- Fix uninitialized variable warnings in R 4.5 on Windows
+  ([\#2526](https://github.com/igraph/rigraph/issues/2526),
+  [\#2527](https://github.com/igraph/rigraph/issues/2527)).
+
+### Features
+
+- Autogenerate sparse matrix constructor functions with type-safe
+  conversions ([\#2532](https://github.com/igraph/rigraph/issues/2532)).
+
+- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable
+  autogeneration of \*\_many functions
+  ([\#2531](https://github.com/igraph/rigraph/issues/2531),
+  [\#2540](https://github.com/igraph/rigraph/issues/2540)).
+
+- Improve formatting of error messages from C
+  ([\#2202](https://github.com/igraph/rigraph/issues/2202),
+  [\#2515](https://github.com/igraph/rigraph/issues/2515)).
+
+### Documentation
+
+- Consolidate Copilot instructions and fix workflow trigger
+  ([\#2535](https://github.com/igraph/rigraph/issues/2535),
+  [\#2536](https://github.com/igraph/rigraph/issues/2536)).
+
+- Review remaining IGNORE declarations in Stimulus.
+
+### Refactoring
+
+- Integrate callback into
+  [`motifs()`](https://r.igraph.org/reference/motifs.md) function
+  ([\#2543](https://github.com/igraph/rigraph/issues/2543),
+  [\#2544](https://github.com/igraph/rigraph/issues/2544)).
+
+- Replace [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
+  expressions with `_impl()` function calls
+  ([\#2539](https://github.com/igraph/rigraph/issues/2539),
+  [\#2541](https://github.com/igraph/rigraph/issues/2541)).
+
+## igraph 2.2.1.9017
+
+### Features
+
+- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128
+  to 19 ([\#2484](https://github.com/igraph/rigraph/issues/2484),
+  [\#2485](https://github.com/igraph/rigraph/issues/2485)).
+
+## igraph 2.2.1.9016
+
+### Chore
+
+- No roclet needed to share the tag code
+  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
+
+## igraph 2.2.1.9015
+
+### Continuous integration
+
+- Tweaks ([\#2517](https://github.com/igraph/rigraph/issues/2517)).
+
+- Test all R versions on branches that start with cran-
+  ([\#2516](https://github.com/igraph/rigraph/issues/2516)).
+
 ## igraph 2.2.1.9014
 
 ### Features

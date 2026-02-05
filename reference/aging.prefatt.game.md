@@ -98,3 +98,8 @@ aging.prefatt.game(
   Integer constant, if NULL only adjacent added in the last
   `time.windows` time steps are counted as a basis of the preferential
   attachment. See also details below.
+
+## Related documentation in the C library
+
+[`barabasi_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game),
+[`recent_degree_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game)

@@ -37,4 +37,5 @@ graph.bipartite(types, edges, directed = FALSE)
 
 ## Related documentation in the C library
 
+[`create_bipartite()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

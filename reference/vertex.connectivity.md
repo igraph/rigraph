@@ -38,5 +38,6 @@ vertex.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 ## Related documentation in the C library
 
+[`st_vertex_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity),
 [[`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

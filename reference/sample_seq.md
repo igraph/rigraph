@@ -33,6 +33,10 @@ The algorithm runs in `O(length)` expected time, even if `high-low` is
 big. It is much faster (but of course less general) than the builtin
 `sample` function of R.
 
+## Related documentation in the C library
+
+[`random_sample()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample)
+
 ## References
 
 Jeffrey Scott Vitter: An Efficient Algorithm for Sequential Random
@@ -53,6 +57,6 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 rs <- sample_seq(1, 100000000, 10)
 rs
-#>  [1]  4768472 13354987 18698917 24092156 31131569 60044587 65630760 69281994
-#>  [9] 70936315 71146365
+#>  [1]  2993803 10864525 34917854 47368824 61268521 66100154 72719076 82951174
+#>  [9] 83574691 94011550
 ```

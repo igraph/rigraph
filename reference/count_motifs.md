@@ -45,7 +45,6 @@ in graph.
 Other graph motifs:
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
-[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Examples

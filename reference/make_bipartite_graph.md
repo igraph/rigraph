@@ -57,6 +57,7 @@ type for each vertex name that occurs in `edges`.
 
 ## Related documentation in the C library
 
+[`create_bipartite()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite),
 [[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
@@ -78,8 +79,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> IGRAPH 1c3d880 U--B 10 5 -- 
+#> IGRAPH b5885b8 U--B 10 5 -- 
 #> + attr: type (v/l)
-#> + edges from 1c3d880:
+#> + edges from b5885b8:
 #> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```
