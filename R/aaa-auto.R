@@ -477,6 +477,70 @@ adjacency_impl <- function(
   res
 }
 
+sparse_adjacency_impl <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
+  loops = c("once", "none", "twice")
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE)
+  adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_sparse_adjacency,
+    adjmatrix,
+    mode,
+    loops
+  )
+
+  res
+}
+
+sparse_weighted_adjacency_impl <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
+  loops = c("once", "none", "twice")
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE)
+  adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
+  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_sparse_weighted_adjacency,
+    adjmatrix,
+    mode,
+    loops
+  )
+
+  res
+}
+
 weighted_adjacency_impl <- function(
   adjmatrix,
   mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
@@ -1253,6 +1317,31 @@ turan_impl <- function(
     res$n <- n
     res$r <- r
   }
+
+  res
+}
+
+weighted_sparsemat_impl <- function(
+  A,
+  directed,
+  attr,
+  loops = FALSE
+) {
+  # Argument checks
+  requireNamespace("Matrix", quietly = TRUE)
+  A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_weighted_sparsemat,
+    A,
+    directed,
+    attr,
+    loops
+  )
 
   res
 }
@@ -12013,73 +12102,6 @@ isomorphic_vf2_impl <- function(
   res
 }
 
-get_isomorphisms_vf2_callback_impl <- function(
-  graph1,
-  graph2,
-  vertex_color1 = NULL,
-  vertex_color2 = NULL,
-  edge_color1 = NULL,
-  edge_color2 = NULL
-) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (is_missing(vertex_color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex_color1 <- V(graph1)$color
-    } else {
-      vertex_color1 <- NULL
-    }
-  }
-  if (!is.null(vertex_color1)) {
-    vertex_color1 <- as.numeric(vertex_color1) - 1
-  }
-  if (is_missing(vertex_color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex_color2 <- V(graph2)$color
-    } else {
-      vertex_color2 <- NULL
-    }
-  }
-  if (!is.null(vertex_color2)) {
-    vertex_color2 <- as.numeric(vertex_color2) - 1
-  }
-  if (is_missing(edge_color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge_color1 <- E(graph1)$color
-    } else {
-      edge_color1 <- NULL
-    }
-  }
-  if (!is.null(edge_color1)) {
-    edge_color1 <- as.numeric(edge_color1) - 1
-  }
-  if (is_missing(edge_color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge_color2 <- E(graph2)$color
-    } else {
-      edge_color2 <- NULL
-    }
-  }
-  if (!is.null(edge_color2)) {
-    edge_color2 <- as.numeric(edge_color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2_callback,
-    graph1,
-    graph2,
-    vertex_color1,
-    vertex_color2,
-    edge_color1,
-    edge_color2
-  )
-
-  res
-}
-
 count_isomorphisms_vf2_impl <- function(
   graph1,
   graph2,
@@ -13934,6 +13956,275 @@ version_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_version
+  )
+
+  res
+}
+
+cliques_callback_closure_impl <- function(
+  graph,
+  min_size = 0,
+  max_size = 0,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_cliques_callback_closure,
+    graph,
+    min_size,
+    max_size,
+    callback_wrapped
+  )
+
+  res
+}
+
+maximal_cliques_callback_closure_impl <- function(
+  graph,
+  min_size = 0,
+  max_size = 0,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_maximal_cliques_callback_closure,
+    graph,
+    min_size,
+    max_size,
+    callback_wrapped
+  )
+
+  res
+}
+
+get_isomorphisms_vf2_callback_closure_impl <- function(
+  graph1,
+  graph2,
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
+  if (is_missing(vertex_color1)) {
+    if ("color" %in% vertex_attr_names(graph1)) {
+      vertex_color1 <- V(graph1)$color
+    } else {
+      vertex_color1 <- NULL
+    }
+  }
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1) - 1
+  }
+  if (is_missing(vertex_color2)) {
+    if ("color" %in% vertex_attr_names(graph2)) {
+      vertex_color2 <- V(graph2)$color
+    } else {
+      vertex_color2 <- NULL
+    }
+  }
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2) - 1
+  }
+  if (is_missing(edge_color1)) {
+    if ("color" %in% edge_attr_names(graph1)) {
+      edge_color1 <- E(graph1)$color
+    } else {
+      edge_color1 <- NULL
+    }
+  }
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1) - 1
+  }
+  if (is_missing(edge_color2)) {
+    if ("color" %in% edge_attr_names(graph2)) {
+      edge_color2 <- E(graph2)$color
+    } else {
+      edge_color2 <- NULL
+    }
+  }
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2) - 1
+  }
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_get_isomorphisms_vf2_callback_closure,
+    graph1,
+    graph2,
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2,
+    callback_wrapped
+  )
+
+  res
+}
+
+get_subisomorphisms_vf2_callback_closure_impl <- function(
+  graph1,
+  graph2,
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
+  if (is_missing(vertex_color1)) {
+    if ("color" %in% vertex_attr_names(graph1)) {
+      vertex_color1 <- V(graph1)$color
+    } else {
+      vertex_color1 <- NULL
+    }
+  }
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1) - 1
+  }
+  if (is_missing(vertex_color2)) {
+    if ("color" %in% vertex_attr_names(graph2)) {
+      vertex_color2 <- V(graph2)$color
+    } else {
+      vertex_color2 <- NULL
+    }
+  }
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2) - 1
+  }
+  if (is_missing(edge_color1)) {
+    if ("color" %in% edge_attr_names(graph1)) {
+      edge_color1 <- E(graph1)$color
+    } else {
+      edge_color1 <- NULL
+    }
+  }
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1) - 1
+  }
+  if (is_missing(edge_color2)) {
+    if ("color" %in% edge_attr_names(graph2)) {
+      edge_color2 <- E(graph2)$color
+    } else {
+      edge_color2 <- NULL
+    }
+  }
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2) - 1
+  }
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_get_subisomorphisms_vf2_callback_closure,
+    graph1,
+    graph2,
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2,
+    callback_wrapped
+  )
+
+  res
+}
+
+simple_cycles_callback_closure_impl <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  min_cycle_length = -1,
+  max_cycle_length = -1,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+  min_cycle_length <- as.numeric(min_cycle_length)
+  max_cycle_length <- as.numeric(max_cycle_length)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_simple_cycles_callback_closure,
+    graph,
+    mode,
+    min_cycle_length,
+    max_cycle_length,
+    callback_wrapped
   )
 
   res

@@ -622,7 +622,7 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%'
-    CTYPE: SEXP
+    CTYPE: ~
     HEADER: '%I%'
 
 ISOCOMPAT_FUNC:
@@ -837,39 +837,18 @@ SPARSEMAT:
     CALL: '&%C%'
     CTYPE: igraph_sparsemat_t
     INCONV:
-        IN: Rz_SEXP_to_sparsemat(%I%, &%C%);
+        IN: |-
+            Rz_SEXP_to_sparsemat(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
-        OUT: |-
-            PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
+        IN: |-
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
-
-SPARSEMATPTR:
-    CALL: '&%C%'
-    CTYPE: igraph_sparsemat_t
-    INCONV:
-        IN: Rz_SEXP_to_sparsemat(%I%, &%C%);
-        OUT: /* Don't need to init. */
-    OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
-            igraph_sparsemat_destroy(&%C%);
-
-SPARSEMAT_OR_0:
-    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
-    CTYPE: igraph_sparsemat_t
-    INCONV:
-        IN: if (!Rf_isNull(%I%)) { Rz_SEXP_to_sparsemat(%I%, &%C%); }
-        OUT: |-
-            IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
-            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
-            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=Rx_igraph_0orsparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 

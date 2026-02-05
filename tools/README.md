@@ -144,3 +144,7 @@ git subrepo status tools/py-stimulus
 
 This shows the remote URL, branch, and commit hashes.
 
+
+## Additional Documentation
+
+For detailed information on implementing R wrappers for callback functions, see [`AGENTS.md`](AGENTS.md) in this directory.

@@ -761,18 +761,77 @@ graph.count.subisomorphisms.vf2 <- function(
 #' @param method Currently only \sQuote{vf2} is supported, see
 #'   [isomorphic()] for details about it and extra arguments.
 #' @param ... Extra arguments, passed to the various methods.
-#' @return A list of vertex sequences, corresponding to all
-#'   mappings from the first graph to the second.
+#' @param callback Optional callback function to call for each isomorphism found.
+#'   If provided, the function should accept two arguments: `map12` (integer vector
+#'   mapping vertex IDs from graph1 to graph2, 1-based indexing) and `map21`
+#'   (integer vector mapping vertex IDs from graph2 to graph1, 1-based indexing).
+#'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
+#'   If `NULL` (the default), all isomorphisms are collected and returned as a list.
+#'   Only supported for `method = "vf2"`.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
+#'   to all mappings from the first graph to the second. If `callback` is provided,
+#'   returns `NULL` invisibly.
 #'
 #' @aliases graph.get.isomorphisms.vf2
 #'
 #' @export
 #' @family graph isomorphism
-isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
+isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
   method <- igraph_match_arg(method)
 
-  if (method == "vf2") {
+  if (method != "vf2") {
+    cli::cli_abort(
+      "Only {.arg method} = {.val vf2} is currently supported."
+    )
+  }
+
+  if (is.null(callback)) {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
+  } else {
+    # Extract color parameters from ... if present
+    dots <- list(...)
+    vertex.color1 <- dots$vertex.color1 %||% NULL
+    vertex.color2 <- dots$vertex.color2 %||% NULL
+    edge.color1 <- dots$edge.color1 %||% NULL
+    edge.color2 <- dots$edge.color2 %||% NULL
+
+    # Validate graphs
+    ensure_igraph(graph1)
+    ensure_igraph(graph2)
+
+    # Handle default vertex colors from attributes
+    if (is.null(vertex.color1) && "color" %in% vertex_attr_names(graph1)) {
+      vertex.color1 <- V(graph1)$color
+    }
+    if (is.null(vertex.color2) && "color" %in% vertex_attr_names(graph2)) {
+      vertex.color2 <- V(graph2)$color
+    }
+
+    # Handle default edge colors from attributes
+    if (is.null(edge.color1) && "color" %in% edge_attr_names(graph1)) {
+      edge.color1 <- E(graph1)$color
+    }
+    if (is.null(edge.color2) && "color" %in% edge_attr_names(graph2)) {
+      edge.color2 <- E(graph2)$color
+    }
+
+    # Call the closure implementation
+    get_isomorphisms_vf2_callback_closure_impl(
+      graph1 = graph1,
+      graph2 = graph2,
+      vertex_color1 = vertex.color1,
+      vertex_color2 = vertex.color2,
+      edge_color1 = edge.color1,
+      edge_color2 = edge.color2,
+      callback = callback
+    )
+    invisible(NULL)
   }
 }
 
@@ -827,8 +886,22 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' @param method The method to use. Possible values: \sQuote{auto},
 #'   \sQuote{lad}, \sQuote{vf2}. See their details below.
 #' @param ... Additional arguments, passed to the various methods.
-#' @return A list of vertex sequences, corresponding to all
-#'   mappings from the first graph to the second.
+#' @param callback Optional callback function to call for each subisomorphism found.
+#'   If provided, the function should accept two arguments: `map12` (integer vector
+#'   mapping vertex IDs from pattern to target, 1-based indexing) and `map21`
+#'   (integer vector mapping vertex IDs from target to pattern, 1-based indexing).
+#'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
+#'   If `NULL` (the default), all subisomorphisms are collected and returned as a list.
+#'   Only supported for `method = "vf2"`.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list of vertex sequences, corresponding
+#'   to all mappings from the pattern graph to the target graph. If `callback` is
+#'   provided, returns `NULL` invisibly.
 #'
 #' @aliases graph.get.subisomorphisms.vf2
 #'
@@ -838,14 +911,63 @@ subgraph_isomorphisms <- function(
   pattern,
   target,
   method = c("lad", "vf2"),
-  ...
+  ...,
+  callback = NULL
 ) {
   method <- igraph_match_arg(method)
+
+  if (!is.null(callback) && method != "vf2") {
+    cli::cli_abort(
+      "Callback parameter is only supported for {.arg method} = {.val vf2}."
+    )
+  }
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps
   } else if (method == "vf2") {
-    graph.get.subisomorphisms.vf2(target, pattern, ...)
+    if (is.null(callback)) {
+      graph.get.subisomorphisms.vf2(target, pattern, ...)
+    } else {
+      # Extract color parameters from ... if present
+      dots <- list(...)
+      vertex.color1 <- dots$vertex.color1 %||% NULL
+      vertex.color2 <- dots$vertex.color2 %||% NULL
+      edge.color1 <- dots$edge.color1 %||% NULL
+      edge.color2 <- dots$edge.color2 %||% NULL
+
+      # Validate graphs
+      ensure_igraph(pattern)
+      ensure_igraph(target)
+
+      # Handle default vertex colors from attributes
+      # Note: pattern is graph1, target is graph2 in the underlying function
+      if (is.null(vertex.color1) && "color" %in% vertex_attr_names(pattern)) {
+        vertex.color1 <- V(pattern)$color
+      }
+      if (is.null(vertex.color2) && "color" %in% vertex_attr_names(target)) {
+        vertex.color2 <- V(target)$color
+      }
+
+      # Handle default edge colors from attributes
+      if (is.null(edge.color1) && "color" %in% edge_attr_names(pattern)) {
+        edge.color1 <- E(pattern)$color
+      }
+      if (is.null(edge.color2) && "color" %in% edge_attr_names(target)) {
+        edge.color2 <- E(target)$color
+      }
+
+      # Call the closure implementation
+      get_subisomorphisms_vf2_callback_closure_impl(
+        graph1 = pattern,
+        graph2 = target,
+        vertex_color1 = vertex.color1,
+        vertex_color2 = vertex.color2,
+        edge_color1 = edge.color1,
+        edge_color2 = edge.color2,
+        callback = callback
+      )
+      invisible(NULL)
+    }
   }
 }
 
