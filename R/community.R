@@ -1311,12 +1311,12 @@ show_trace <- function(communities) {
 #####################################################################
 
 community.to.membership2 <- function(merges, vcount, steps) {
-  mode(merges) <- "numeric"
-  mode(vcount) <- "numeric"
-  mode(steps) <- "numeric"
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
-  res + 1
+  res <- community_to_membership_impl(
+    merges = merges - 1,
+    nodes = vcount,
+    steps = steps
+  )
+  res$membership + 1
 }
 
 #####################################################################
@@ -1480,19 +1480,18 @@ cluster_spinglass <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
-    res <- .Call(
-      Rx_igraph_spinglass_community,
-      graph,
-      weights,
-      as.numeric(spins),
-      as.logical(parupdate),
-      as.numeric(start.temp),
-      as.numeric(stop.temp),
-      as.numeric(cool.fact),
-      as.numeric(update.rule),
-      as.numeric(gamma),
-      as.numeric(implementation),
-      as.numeric(gamma.minus)
+    res <- community_spinglass_impl(
+      graph = graph,
+      weights = weights,
+      spins = spins,
+      parupdate = parupdate,
+      starttemp = start.temp,
+      stoptemp = stop.temp,
+      coolfact = cool.fact,
+      update_rule = if (update.rule == 0) "simple" else "config",
+      gamma = gamma,
+      implementation = if (implementation == 0) "orig" else "neg",
+      lambda = gamma.minus
     )
     res$algorithm <- "spinglass"
     res$vcount <- vcount(graph)
@@ -1502,14 +1501,13 @@ cluster_spinglass <- function(
     }
     class(res) <- "communities"
   } else {
-    res <- .Call(
-      Rx_igraph_spinglass_my_community,
-      graph,
-      weights,
-      as_igraph_vs(graph, vertex) - 1,
-      as.numeric(spins),
-      as.numeric(update.rule),
-      as.numeric(gamma)
+    res <- community_spinglass_single_impl(
+      graph = graph,
+      weights = weights,
+      vertex = as_igraph_vs(graph, vertex) - 1,
+      spins = spins,
+      update_rule = if (update.rule == 0) "simple" else "config",
+      gamma = gamma
     )
     res$community <- res$community + 1
   }
@@ -1858,7 +1856,7 @@ cluster_walktrap <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # igraph_community_walktrap(); _impl lacks output control params (merges/modularity/membership)
     Rx_igraph_walktrap_community,
     graph,
     weights,
@@ -1986,7 +1984,7 @@ cluster_edge_betweenness <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # igraph_community_edge_betweenness(); _impl lacks output control params
     Rx_igraph_community_edge_betweenness,
     graph,
     weights,
@@ -2078,7 +2076,7 @@ cluster_fast_greedy <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # igraph_community_fastgreedy(); _impl lacks output control params
     Rx_igraph_community_fastgreedy,
     graph,
     as.logical(merges),
@@ -2100,7 +2098,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(R_igraph_levc_arpack_multiplier, externalP, externalE, v)
+    .Call(R_igraph_levc_arpack_multiplier, externalP, externalE, v) # internal ARPACK, no _impl
   }
   f
 }

@@ -133,7 +133,7 @@ is_chordal <- function(
   fillin <- as.logical(fillin)
   newgraph <- as.logical(newgraph)
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
+  res <- .Call( # igraph_is_chordal(); is_chordal_impl lacks fillin/newgraph params
     Rx_igraph_is_chordal,
     graph,
     alpha,

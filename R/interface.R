@@ -150,11 +150,9 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   edges.orig <- ecount(graph)
-  on.exit(.Call(Rx_igraph_finalizer))
-  graph <- .Call(
-    Rx_igraph_add_edges_manual,
-    graph,
-    as_igraph_vs(graph, edges) - 1
+  graph <- add_edges_impl(
+    graph = graph,
+    edges = edges
   )
   edges.new <- ecount(graph)
 
@@ -638,7 +636,12 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
 
-  res <- .Call(Rx_igraph_adjacent_vertices, graph, vv, mode)
+  res <- .Call( # igraph_lazy_adjlist; neighbors_impl takes single vertex
+    Rx_igraph_adjacent_vertices,
+    graph,
+    vv,
+    mode
+  )
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -675,7 +678,12 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
 
-  res <- .Call(Rx_igraph_incident_edges, graph, vv, mode)
+  res <- .Call( # igraph_lazy_inclist; incident_impl takes single vertex
+    Rx_igraph_incident_edges,
+    graph,
+    vv,
+    mode
+  )
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
