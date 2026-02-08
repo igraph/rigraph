@@ -1,5 +1,40 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9021
+
+## Bug fixes
+
+- `graphlet_proj()` no longer erroneously assigns class "igraphHRG" to the returned graph.
+
+## Features
+
+- Check that exactly one vertex is passed (#2556).
+
+## Chore
+
+- Revdepcheck results.
+
+- Indent.
+
+- Remove function definitions that are not overridden.
+
+- Harmonize IGNORE in function declarations.
+
+- Formatting.
+
+## Continuous integration
+
+- Use default R version for revdepchecks.
+
+## Documentation
+
+- Automatic linking to C docs (#2518).
+
+## Refactoring
+
+- Replace `.Call()` with `_impl` functions and improve adjacency matrix implementation (#2545, #2546).
+
+
 # igraph 2.2.1.9020
 
 ## Features
