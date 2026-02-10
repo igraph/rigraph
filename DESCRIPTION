@@ -71,7 +71,8 @@ Config/build/compilation-database: false
 Config/build/never-clean: true
 Config/comment/compilation-database: Generate manually with
     pkgload:::generate_db() for faster pkgload::load_all()
-Config/Needs/build: r-lib/roxygen2, devtools, irlba, pkgconfig,
+Config/Needs/build: devtools, irlba, pkgconfig
+Config/Needs/roxygen2: r-lib/roxygen2,
     igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
