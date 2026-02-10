@@ -9744,7 +9744,6 @@ hrg_game_impl <- function(
     res$name <- 'Hierarchical random graph model'
   }
 
-  class(res) <- "igraphHRG"
   res
 }
 
@@ -14212,9 +14211,9 @@ bfs_closure_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
+  if (length(root) != 1) {
     cli::cli_abort(
-      "{.arg root} must specify at least one vertex",
+      "{.arg root} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
@@ -14286,9 +14285,9 @@ dfs_closure_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
+  if (length(root) != 1) {
     cli::cli_abort(
-      "{.arg root} must specify at least one vertex",
+      "{.arg root} must specify exactly one vertex",
       call = rlang::caller_env()
     )
   }
