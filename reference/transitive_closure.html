@@ -65,7 +65,7 @@ are in the same connected component."><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Transitive closure of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
       <div class="d-none name"><code>transitive_closure.Rd</code></div>
     </div>
 
@@ -148,8 +148,8 @@ The returned graph will have the same directedness as the input.</p>
 <span class="r-in"><span><span class="va">tc</span> <span class="op">&lt;-</span> <span class="fu">transitive_closure</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># The closure has edges 1-&gt;2, 1-&gt;3, 1-&gt;4, 2-&gt;3, 2-&gt;4, 3-&gt;4</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">tc</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6f8d935 D--- 4 6 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6f8d935:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4e522d8 D--- 4 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4e522d8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 1-&gt;3 1-&gt;4 2-&gt;3 2-&gt;4 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Undirected graph - connects all vertices in same component</span></span></span>
@@ -157,8 +157,8 @@ The returned graph will have the same directedness as the input.</p>
 <span class="r-in"><span><span class="va">tc2</span> <span class="op">&lt;-</span> <span class="fu">transitive_closure</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Full graph on vertices 1, 2 and full graph on vertices 3, 4</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">tc2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fdcb27c U--- 4 2 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fdcb27c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4f06482 U--- 4 2 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4f06482:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 3--4</span>
 </code></pre></div>
     </div>
