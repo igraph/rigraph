@@ -54,9 +54,9 @@ Vertex, edge and graph attributes
 g <- make_ring(10) %>%
   set_graph_attr("layout", layout_with_fr)
 g
-#> IGRAPH 692f63d U--- 10 10 -- Ring graph
+#> IGRAPH 88763e0 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), layout (g/x)
-#> + edges from 692f63d:
+#> + edges from 88763e0:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```
