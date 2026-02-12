@@ -93,16 +93,6 @@ The average local efficiency of a network is simply the arithmetic mean
 of the local efficiencies of all the vertices; see the definition for
 local efficiency above.
 
-## Related documentation in the C library
-
-[`global_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency),
-[`average_local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency)
-
 ## References
 
 V. Latora and M. Marchiori: Efficient Behavior of Small-World Networks,
@@ -110,6 +100,12 @@ Phys. Rev. Lett. 87, 198701 (2001).
 
 I. Vragović, E. Louis, and A. Díaz-Guilera, Efficiency of informational
 transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
+
+## Related documentation in the C library
+
+[`global_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency),
+[`local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency),
+[`average_local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency).
 
 ## Examples
 

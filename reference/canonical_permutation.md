@@ -113,11 +113,6 @@ The possible values for the `sh` argument are:
 
 See the paper in references for details about these.
 
-## Related documentation in the C library
-
-[`canonical_permutation()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -146,6 +141,10 @@ Other graph isomorphism:
 
 Tommi Junttila for BLISS, Gabor Csardi <csardi.gabor@gmail.com> for the
 igraph and R interfaces.
+
+## Related documentation in the C library
+
+[`canonical_permutation()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation).
 
 ## Examples
 

@@ -33,7 +33,7 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993."><meta property="o
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993."><meta property="o
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create an extended chordal ring graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_chordal_ring.Rd</code></div>
     </div>
 
@@ -87,7 +87,7 @@ Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">chordal_ring</span><span class="op">(</span><span class="va">n</span>, <span class="va">w</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">chordal_ring</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -106,14 +106,14 @@ details below.</p></dd>
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
 <dd><p>Logical scalar, whether or not to create a directed graph.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>make_chordal_ring()</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An igraph graph.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring" class="external-link"><code>extended_chordal_ring()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -122,18 +122,14 @@ details below.</p></dd>
 <code><a href="graph_from_edgelist.html">graph_from_edgelist()</a></code>,
 <code><a href="graph_from_literal.html">graph_from_literal()</a></code>,
 <code><a href="make_.html">make_()</a></code>,
-<code><a href="make_circulant.html">make_circulant()</a></code>,
 <code><a href="make_empty_graph.html">make_empty_graph()</a></code>,
 <code><a href="make_full_citation_graph.html">make_full_citation_graph()</a></code>,
 <code><a href="make_full_graph.html">make_full_graph()</a></code>,
-<code><a href="make_full_multipartite.html">make_full_multipartite()</a></code>,
 <code><a href="make_graph.html">make_graph()</a></code>,
 <code><a href="make_lattice.html">make_lattice()</a></code>,
 <code><a href="make_ring.html">make_ring()</a></code>,
 <code><a href="make_star.html">make_star()</a></code>,
-<code><a href="make_tree.html">make_tree()</a></code>,
-<code><a href="make_turan.html">make_turan()</a></code>,
-<code><a href="make_wheel.html">make_wheel()</a></code></p></div>
+<code><a href="make_tree.html">make_tree()</a></code></p></div>
     </div>
 
     <div class="section level2">

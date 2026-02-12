@@ -40,9 +40,4 @@ asymmetric.preference.game(
 
 - loops:
 
-  Logical scalar, whether self-loops are allowed in the graph.
-
-## Related documentation in the C library
-
-[`asymmetric_preference_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_asymmetric_preference_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+  Logical constant, whether self-loops are allowed in the graph.

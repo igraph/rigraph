@@ -66,15 +66,3 @@ graph.incidence(
   attribute for this, then give the name of the attributes as a
   character string. If this argument is `NA`, then no vertex attributes
   (other than type) will be added.
-
-## Related documentation in the C library
-
-[`biadjacency()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_biadjacency),
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

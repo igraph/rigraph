@@ -46,14 +46,6 @@ vertices, \\s\\ and \\t\\, an \\(s,t)\\-cut is a set of edges, such that
 after removing these edges from \\G\\ there is no directed path from
 \\s\\ to \\t\\.
 
-## Related documentation in the C library
-
-[`all_st_cuts()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_cuts),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in graphs,
@@ -77,6 +69,10 @@ Other flow:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
+## Related documentation in the C library
+
+[`all_st_cuts()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_cuts).
+
 ## Examples
 
 ``` r
@@ -85,37 +81,37 @@ g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 st_cuts(g, source = "a", target = "e")
 #> $cuts
 #> $cuts[[1]]
-#> + 1/4 edge from 29a809c (vertex names):
+#> + 1/4 edge from a1fbff0 (vertex names):
 #> [1] a->b
 #> 
 #> $cuts[[2]]
-#> + 1/4 edge from 29a809c (vertex names):
+#> + 1/4 edge from a1fbff0 (vertex names):
 #> [1] b->c
 #> 
 #> $cuts[[3]]
-#> + 1/4 edge from 29a809c (vertex names):
+#> + 1/4 edge from a1fbff0 (vertex names):
 #> [1] c->d
 #> 
 #> $cuts[[4]]
-#> + 1/4 edge from 29a809c (vertex names):
+#> + 1/4 edge from a1fbff0 (vertex names):
 #> [1] d->e
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/5 vertex, named, from 29a809c:
+#> + 1/5 vertex, named, from a1fbff0:
 #> [1] a
 #> 
 #> $partition1s[[2]]
-#> + 2/5 vertices, named, from 29a809c:
+#> + 2/5 vertices, named, from a1fbff0:
 #> [1] a b
 #> 
 #> $partition1s[[3]]
-#> + 3/5 vertices, named, from 29a809c:
+#> + 3/5 vertices, named, from a1fbff0:
 #> [1] a b c
 #> 
 #> $partition1s[[4]]
-#> + 4/5 vertices, named, from 29a809c:
+#> + 4/5 vertices, named, from a1fbff0:
 #> [1] a b c d
 #> 
 #> 
@@ -128,93 +124,93 @@ g2 <- graph_from_literal(
 st_cuts(g2, source = "s", target = "t")
 #> $cuts
 #> $cuts[[1]]
-#> + 2/10 edges from f51f4a7 (vertex names):
+#> + 2/10 edges from 9885b97 (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/10 edges from f51f4a7 (vertex names):
+#> + 2/10 edges from 9885b97 (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->1 a->2 a->3
 #> 
 #> $cuts[[4]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->1 a->2 3->b
 #> 
 #> $cuts[[5]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->1 a->3 2->b
 #> 
 #> $cuts[[6]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->1 2->b 3->b
 #> 
 #> $cuts[[7]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->2 a->3 1->b
 #> 
 #> $cuts[[8]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->2 1->b 3->b
 #> 
 #> $cuts[[9]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t a->3 1->b 2->b
 #> 
 #> $cuts[[10]]
-#> + 5/10 edges from f51f4a7 (vertex names):
+#> + 5/10 edges from 9885b97 (vertex names):
 #> [1] s->b a->t 1->b 2->b 3->b
 #> 
 #> $cuts[[11]]
-#> + 2/10 edges from f51f4a7 (vertex names):
+#> + 2/10 edges from 9885b97 (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/7 vertex, named, from f51f4a7:
+#> + 1/7 vertex, named, from 9885b97:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/7 vertices, named, from f51f4a7:
+#> + 2/7 vertices, named, from 9885b97:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 2/7 vertices, named, from f51f4a7:
+#> + 2/7 vertices, named, from 9885b97:
 #> [1] s a
 #> 
 #> $partition1s[[4]]
-#> + 3/7 vertices, named, from f51f4a7:
+#> + 3/7 vertices, named, from 9885b97:
 #> [1] s a 3
 #> 
 #> $partition1s[[5]]
-#> + 3/7 vertices, named, from f51f4a7:
+#> + 3/7 vertices, named, from 9885b97:
 #> [1] s a 2
 #> 
 #> $partition1s[[6]]
-#> + 4/7 vertices, named, from f51f4a7:
+#> + 4/7 vertices, named, from 9885b97:
 #> [1] s a 2 3
 #> 
 #> $partition1s[[7]]
-#> + 3/7 vertices, named, from f51f4a7:
+#> + 3/7 vertices, named, from 9885b97:
 #> [1] s a 1
 #> 
 #> $partition1s[[8]]
-#> + 4/7 vertices, named, from f51f4a7:
+#> + 4/7 vertices, named, from 9885b97:
 #> [1] s a 1 3
 #> 
 #> $partition1s[[9]]
-#> + 4/7 vertices, named, from f51f4a7:
+#> + 4/7 vertices, named, from 9885b97:
 #> [1] s a 1 2
 #> 
 #> $partition1s[[10]]
-#> + 5/7 vertices, named, from f51f4a7:
+#> + 5/7 vertices, named, from 9885b97:
 #> [1] s a 1 2 3
 #> 
 #> $partition1s[[11]]
-#> + 6/7 vertices, named, from f51f4a7:
+#> + 6/7 vertices, named, from 9885b97:
 #> [1] s a 1 2 3 b
 #> 
 #> 

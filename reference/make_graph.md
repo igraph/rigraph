@@ -261,14 +261,6 @@ are specified.)
   model for conflict and fission in small groups, Journal of
   Anthropological Research 33, 452-473 (1977).
 
-## Related documentation in the C library
-
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other deterministic constructors:
@@ -277,29 +269,25 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 ## Examples
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 237c21c U--- 6 4 -- 
-#> + edges from 237c21c:
+#> IGRAPH 98573c5 U--- 6 4 -- 
+#> + edges from 98573c5:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH b8c57f5 UN-- 4 3 -- 
+#> IGRAPH 59cdeae UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from b8c57f5 (vertex names):
+#> + edges from 59cdeae (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

@@ -25,22 +25,7 @@ sample_pa_age(
   time.window = NULL
 )
 
-pa_age(
-  n,
-  pa.exp,
-  aging.exp,
-  m = NULL,
-  aging.bin = 300,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  directed = TRUE,
-  zero.deg.appeal = 1,
-  zero.age.appeal = 0,
-  deg.coef = 1,
-  age.coef = 1,
-  time.window = NULL
-)
+pa_age(...)
 ```
 
 ## Arguments
@@ -115,6 +100,10 @@ pa_age(
   `time.windows` time steps are counted as a basis of the preferential
   attachment. See also details below.
 
+- ...:
+
+  Passed to `sample_pa_age()`.
+
 ## Value
 
 A new graph.
@@ -165,11 +154,6 @@ only the adjacent edges added in the previous `time.window` time steps.
 
 This function might generate graphs with multiple edges.
 
-## Related documentation in the C library
-
-[`barabasi_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game),
-[`recent_degree_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game)
-
 ## See also
 
 Random graph models (games)
@@ -212,9 +196,9 @@ g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
 g2 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -1, aging.bin = 1000)
 g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
 max(degree(g1))
-#> [1] 148
+#> [1] 195
 max(degree(g2))
-#> [1] 39
+#> [1] 25
 max(degree(g3))
-#> [1] 11
+#> [1] 10
 ```

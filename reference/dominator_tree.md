@@ -64,11 +64,6 @@ dominator tree.
 This function implements the Lengauer-Tarjan algorithm to construct the
 dominator tree of a directed graph. For details see the reference below.
 
-## Related documentation in the C library
-
-[`dominator_tree()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_dominator_tree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Thomas Lengauer, Robert Endre Tarjan: A fast algorithm for finding

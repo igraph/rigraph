@@ -32,8 +32,3 @@ cluster.distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
   Additional attributes to pass to `cluster`, right now only `mode`
   makes sense.
-
-## Related documentation in the C library
-
-[`connected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

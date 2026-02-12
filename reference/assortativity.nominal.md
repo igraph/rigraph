@@ -22,9 +22,7 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
 
   Vector giving the vertex types. They as assumed to be integer numbers,
   starting with one. Non-integer values are converted to integers with
-  [`as.integer()`](https://rdrr.io/r/base/integer.html). Character
-  vectors are converted to integers using
-  [`as.factor()`](https://rdrr.io/r/base/factor.html).
+  [`as.integer()`](https://rdrr.io/r/base/integer.html).
 
 - directed:
 
@@ -39,7 +37,3 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
   non-normalized nominal assortativity is identical to modularity. The
   non-normalized value-based assortativity is simply the covariance of
   the values at the two ends of edges.
-
-## Related documentation in the C library
-
-[[`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal)

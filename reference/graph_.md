@@ -18,14 +18,6 @@ graph_(...)
 
 TODO
 
-## Related documentation in the C library
-
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## Examples
 
 ``` r
@@ -34,11 +26,11 @@ graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #> Warning: `graph_()` was deprecated in igraph 2.1.0.
 #> ℹ Please use constructors directly, for instance graph_from_edgelist().
 #> ℹ graph_() will be removed in a future version of igraph.
-#> IGRAPH 85f9aef U--- 6 5 -- 
-#> + edges from 85f9aef:
+#> IGRAPH 4384ee9 U--- 6 5 -- 
+#> + edges from 4384ee9:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
-#> IGRAPH 9458d0f U--- 6 5 -- 
-#> + edges from 9458d0f:
+#> IGRAPH 3a12ad9 U--- 6 5 -- 
+#> + edges from 3a12ad9:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 ```

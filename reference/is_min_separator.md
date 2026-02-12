@@ -29,11 +29,6 @@ separator or not.
 minimal vertex separator. A minimal vertex separator is a vertex
 separator, such that none of its proper subsets are a vertex separator.
 
-## Related documentation in the C library
-
-[`is_minimal_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other flow:
@@ -47,6 +42,10 @@ Other flow:
 [`st_cuts()`](https://r.igraph.org/reference/st_cuts.md),
 [`st_min_cuts()`](https://r.igraph.org/reference/st_min_cuts.md),
 [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
+
+## Related documentation in the C library
+
+[`is_minimal_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator).
 
 ## Examples
 

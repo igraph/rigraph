@@ -41,12 +41,6 @@ the input graph.
 It is possible to choose the vertex that will be in the center, and the
 order of the vertices can be also given.
 
-## Related documentation in the C library
-
-[`layout_star()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_star),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`layout_circle()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_circle)
-
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) and

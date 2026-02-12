@@ -17,7 +17,3 @@ is.directed(graph)
 - graph:
 
   The input graph
-
-## Related documentation in the C library
-
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)

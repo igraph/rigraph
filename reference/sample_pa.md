@@ -20,18 +20,7 @@ sample_pa(
   start.graph = NULL
 )
 
-pa(
-  n,
-  power = 1,
-  m = NULL,
-  out.dist = NULL,
-  out.seq = NULL,
-  out.pref = FALSE,
-  zero.appeal = 1,
-  directed = TRUE,
-  algorithm = c("psumtree", "psumtree-multiple", "bag"),
-  start.graph = NULL
-)
+pa(...)
 ```
 
 ## Arguments
@@ -47,9 +36,9 @@ pa(
 
 - m:
 
-  Numeric constant, the number of edges to add in each time step,
-  defaults to 1. This argument is only used if both `out.dist` and
-  `out.seq` are omitted or NULL.
+  Numeric constant, the number of edges to add in each time step This
+  argument is only used if both `out.dist` and `out.seq` are omitted or
+  NULL.
 
 - out.dist:
 
@@ -101,6 +90,10 @@ pa(
   the `out.seq` argument is not `NULL`, then it should contain the out
   degrees of the new vertices only, not the ones in the `start.graph`.
 
+- ...:
+
+  Passed to `sample_pa()`.
+
 ## Value
 
 A graph object.
@@ -140,11 +133,6 @@ added in each time step.
 graph is generated \\k_i\\ denotes the number of adjacent edges not
 initiated by the vertex itself and not the total (in- + out-) degree of
 the vertex, unless the `out.pref` argument is set to `TRUE`.
-
-## Related documentation in the C library
-
-[`barabasi_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 
@@ -193,22 +181,15 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_pa(10000)
 degree_distribution(g)
-#>   [1] 0.0000 0.6655 0.1672 0.0686 0.0329 0.0177 0.0101 0.0072 0.0063 0.0046
-#>  [11] 0.0026 0.0033 0.0016 0.0016 0.0011 0.0016 0.0005 0.0011 0.0009 0.0005
-#>  [21] 0.0004 0.0006 0.0006 0.0005 0.0003 0.0001 0.0006 0.0003 0.0002 0.0001
-#>  [31] 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0002 0.0003
-#>  [41] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000
-#>  [51] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#>  [61] 0.0001 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000
-#>  [71] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#>  [81] 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#>  [91] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [101] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [111] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [121] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000
-#> [131] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [141] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [151] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [161] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
-#> [171] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001
+#>   [1] 0.0000 0.6622 0.1695 0.0672 0.0322 0.0203 0.0119 0.0086 0.0061 0.0051
+#>  [11] 0.0026 0.0025 0.0018 0.0008 0.0013 0.0008 0.0010 0.0006 0.0003 0.0002
+#>  [21] 0.0005 0.0006 0.0004 0.0001 0.0002 0.0001 0.0002 0.0001 0.0001 0.0002
+#>  [31] 0.0001 0.0001 0.0001 0.0001 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000
+#>  [41] 0.0001 0.0000 0.0001 0.0002 0.0000 0.0000 0.0000 0.0000 0.0002 0.0001
+#>  [51] 0.0000 0.0002 0.0000 0.0000 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000
+#>  [61] 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000
+#>  [71] 0.0001 0.0000 0.0001 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000
+#>  [81] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+#>  [91] 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+#> [101] 0.0001
 ```

@@ -114,15 +114,6 @@ They are essentially doing the same as
 [`embed_adjacency_matrix()`](https://r.igraph.org/reference/embed_adjacency_matrix.md),
 but work on the Laplacian matrix, instead of the adjacency matrix.
 
-## Related documentation in the C library
-
-[`laplacian_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E. A Consistent
@@ -141,6 +132,10 @@ Other embedding:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`laplacian_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding).
 
 ## Examples
 

@@ -29,10 +29,6 @@ igraph graph.
 
 `upgrade_graph()` can convert an older data format to the current one.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 graph_version to check the current data format version or the version of

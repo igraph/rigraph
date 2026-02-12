@@ -35,7 +35,3 @@ is.graphical.degree.sequence(
   ‘loops’ means that loop edges are allowed but mutiple edges are not.
   ‘multi’ means that multiple edges are allowed but loop edges are not.
   ‘all’ means that both loop edges and multiple edges are allowed.
-
-## Related documentation in the C library
-
-[[`is_graphical()`](https://r.igraph.org/reference/is_graphical.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical)

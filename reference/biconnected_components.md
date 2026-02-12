@@ -54,14 +54,6 @@ of its edges: every edge is a member of exactly one biconnected
 component. Note that this is not true for vertices: the same vertex can
 be part of many biconnected components.
 
-## Related documentation in the C library
-
-[`biconnected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_biconnected_components),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## See also
 
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
@@ -72,13 +64,16 @@ be part of many biconnected components.
 Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
-[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`biconnected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_biconnected_components).
 
 ## Examples
 

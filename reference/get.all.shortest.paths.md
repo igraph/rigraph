@@ -54,12 +54,3 @@ get.all.shortest.paths(
   If this is `NA` then no weights are used (even if the graph has a
   `weight` attribute). In a weighted graph, the length of a path is the
   sum of the weights of its constituent edges.
-
-## Related documentation in the C library
-
-[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths),
-[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

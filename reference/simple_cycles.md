@@ -16,9 +16,7 @@ simple_cycles(
   graph,
   mode = c("out", "in", "all", "total"),
   min = NULL,
-  max = NULL,
-  ...,
-  callback = NULL
+  max = NULL
 )
 ```
 
@@ -42,48 +40,17 @@ simple_cycles(
 
   Upper limit on cycle lengths to consider. `NULL` means no limit.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
-- callback:
-
-  Optional function to call for each cycle found. If provided, the
-  function should accept two arguments: `vertices` (integer vector of
-  vertex IDs in the cycle) and `edges` (integer vector of edge IDs in
-  the cycle). The function should return `FALSE` to continue the search
-  or `TRUE` to stop it. If `NULL` (the default), all cycles are
-  collected and returned as a list.
-
-  **Important limitation:** Callback functions must NOT call any igraph
-  functions (including simple queries like
-  [`vcount()`](https://r.igraph.org/reference/gorder.md) or
-  [`ecount()`](https://r.igraph.org/reference/gsize.md)). Doing so will
-  cause R to crash due to nested
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) state
-  corruption. Extract any needed graph information before calling the
-  function with a callback, or use collector mode (the default) and
-  process results afterward.
-
 ## Value
 
-If `callback` is `NULL`, returns a list with two elements: `vertices`
-(list of integer vectors with vertex IDs) and `edges` (list of integer
-vectors with edge IDs). If `callback` is provided, returns `NULL`
-invisibly.
+A named list, with two entries:
 
-If `callback` is `NULL`, returns a list with two elements: `vertices`
-(list of integer vectors with vertex IDs) and `edges` (list of integer
-vectors with edge IDs). If `callback` is provided, returns `NULL`
-invisibly.
+- vertices:
 
-## Related documentation in the C library
+  The list of cycles in terms of their vertices.
 
-[`simple_cycles()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+- edges:
+
+  The list of cycles in terms of their edges.
 
 ## See also
 
@@ -96,6 +63,10 @@ Graph cycles
 [`is_acyclic()`](https://r.igraph.org/reference/is_acyclic.md),
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md)
 
+## Related documentation in the C library
+
+[`simple_cycles()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles).
+
 ## Examples
 
 ``` r
@@ -103,95 +74,95 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from e621c50:
+#> + 3/6 vertices, named, from c70574c:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from e621c50:
+#> + 2/6 vertices, named, from c70574c:
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> + 1/6 vertex, named, from e621c50:
+#> + 1/6 vertex, named, from c70574c:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from e621c50 (vertex names):
+#> + 3/9 edges from c70574c (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from e621c50 (vertex names):
+#> + 2/9 edges from c70574c (vertex names):
 #> [1] A->F F->A
 #> 
 #> $edges[[3]]
-#> + 1/9 edge from e621c50 (vertex names):
+#> + 1/9 edge from c70574c (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from e621c50:
+#> + 3/6 vertices, named, from c70574c:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 4/6 vertices, named, from e621c50:
+#> + 4/6 vertices, named, from c70574c:
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> + 4/6 vertices, named, from e621c50:
+#> + 4/6 vertices, named, from c70574c:
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> + 2/6 vertices, named, from e621c50:
+#> + 2/6 vertices, named, from c70574c:
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> + 1/6 vertex, named, from e621c50:
+#> + 1/6 vertex, named, from c70574c:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from e621c50 (vertex names):
+#> + 3/9 edges from c70574c (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 4/9 edges from e621c50 (vertex names):
+#> + 4/9 edges from c70574c (vertex names):
 #> [1] A->D D->E F->E F->A
 #> 
 #> $edges[[3]]
-#> + 4/9 edges from e621c50 (vertex names):
+#> + 4/9 edges from c70574c (vertex names):
 #> [1] A->D D->E F->E A->F
 #> 
 #> $edges[[4]]
-#> + 2/9 edges from e621c50 (vertex names):
+#> + 2/9 edges from c70574c (vertex names):
 #> [1] F->A A->F
 #> 
 #> $edges[[5]]
-#> + 1/9 edge from e621c50 (vertex names):
+#> + 1/9 edge from c70574c (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from e621c50:
+#> + 3/6 vertices, named, from c70574c:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from e621c50:
+#> + 2/6 vertices, named, from c70574c:
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from e621c50 (vertex names):
+#> + 3/9 edges from c70574c (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from e621c50 (vertex names):
+#> + 2/9 edges from c70574c (vertex names):
 #> [1] F->A A->F
 #> 
 #> 

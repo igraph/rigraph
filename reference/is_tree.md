@@ -51,11 +51,6 @@ can be controlled using the mode parameter.
 By convention, the null graph (i.e. the graph with no vertices) is
 considered not to be a tree.
 
-## Related documentation in the C library
-
-[`is_tree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_tree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other trees:
@@ -63,6 +58,10 @@ Other trees:
 [`make_from_prufer()`](https://r.igraph.org/reference/make_from_prufer.md),
 [`sample_spanning_tree()`](https://r.igraph.org/reference/sample_spanning_tree.md),
 [`to_prufer()`](https://r.igraph.org/reference/to_prufer.md)
+
+## Related documentation in the C library
+
+[`is_tree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_tree).
 
 ## Examples
 
@@ -75,7 +74,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> + 1/7 vertex, from c1032f5:
+#> + 1/7 vertex, from 975488f:
 #> [1] 1
 #> 
 ```

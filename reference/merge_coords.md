@@ -62,11 +62,6 @@ maximal connected components and calls the supplied `layout` function
 for each component separately. Finally it merges the layouts via calling
 `merge_coords()`.
 
-## Related documentation in the C library
-
-[[`decompose()`](https://r.igraph.org/reference/decompose.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),

@@ -162,10 +162,6 @@ The callback functions must have the following arguments:
 The callback must return FALSE to continue the search or TRUE to
 terminate it. See examples below on how to use the callback functions.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [`bfs()`](https://r.igraph.org/reference/bfs.md) for breadth-first
@@ -220,15 +216,15 @@ dfs(
 #> [1] "out"
 #> 
 #> $order
-#> + 20/20 vertices, from 23f432c:
+#> + 20/20 vertices, from d8ec01b:
 #>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17
 #> 
 #> $order.out
-#> + 20/20 vertices, from 23f432c:
+#> + 20/20 vertices, from d8ec01b:
 #>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11
 #> 
 #> $parent
-#> + 20/20 vertices, from 23f432c:
+#> + 20/20 vertices, from d8ec01b:
 #>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15
 #> 
 #> $dist
@@ -238,7 +234,7 @@ dfs(
 #> [1] "out"
 #> 
 #> $father
-#> + 20/20 vertices, from 23f432c:
+#> + 20/20 vertices, from d8ec01b:
 #>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15
 #> 
 

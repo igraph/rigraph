@@ -40,7 +40,3 @@ watts.strogatz.game(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
   Logical scalar, whether multiple edges are allowed int the generated
   graph.
-
-## Related documentation in the C library
-
-[`watts_strogatz_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game)

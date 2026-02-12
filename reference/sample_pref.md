@@ -15,15 +15,7 @@ sample_pref(
   loops = FALSE
 )
 
-pref(
-  nodes,
-  types,
-  type.dist = rep(1, types),
-  fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
-  directed = FALSE,
-  loops = FALSE
-)
+pref(...)
 
 sample_asym_pref(
   nodes,
@@ -33,13 +25,7 @@ sample_asym_pref(
   loops = FALSE
 )
 
-asym_pref(
-  nodes,
-  types,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
-  loops = FALSE
-)
+asym_pref(...)
 ```
 
 ## Arguments
@@ -72,11 +58,15 @@ asym_pref(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical constant, whether to create a directed graph.
 
 - loops:
 
-  Logical scalar, whether self-loops are allowed in the graph.
+  Logical constant, whether self-loops are allowed in the graph.
+
+- ...:
+
+  Passed to the constructor, `sample_pref()` or `sample_asym_pref()`.
 
 - type.dist.matrix:
 
@@ -105,12 +95,6 @@ The joint distribution for the in- and out-types is given in the
 The types of the generated vertices can be retrieved from the `type`
 vertex attribute for `sample_pref()` and from the `intype` and `outtype`
 vertex attribute for `sample_asym_pref()`.
-
-## Related documentation in the C library
-
-[`preference_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_preference_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`asymmetric_preference_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_asymmetric_preference_game)
 
 ## See also
 

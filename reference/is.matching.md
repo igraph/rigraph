@@ -29,8 +29,3 @@ is.matching(graph, matching, types = NULL)
 
   Vertex types, if the graph is bipartite. By default they are taken
   from the ‘`type`’ vertex attribute, if present.
-
-## Related documentation in the C library
-
-[[`is_matching()`](https://r.igraph.org/reference/matching.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

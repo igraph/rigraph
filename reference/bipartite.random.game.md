@@ -59,9 +59,3 @@ bipartite.random.game(
   argument is ‘all’, then each edge direction is considered
   independently and mutual edges might be generated. This argument is
   ignored for undirected graphs.
-
-## Related documentation in the C library
-
-[`bipartite_game_gnm()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm),
-[`bipartite_game_gnp()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

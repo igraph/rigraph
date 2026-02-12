@@ -115,14 +115,6 @@ From igraph version 0.5 this function uses ARPACK for the underlying
 computation, see [`arpack()`](https://r.igraph.org/reference/arpack.md)
 for more about ARPACK in igraph.
 
-## Related documentation in the C library
-
-[`eigenvector_centrality()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Bonacich, P. (1987). Power and Centrality: A Family of Measures.
@@ -149,6 +141,10 @@ Centrality measures
 Gabor Csardi <csardi.gabor@gmail.com> and Carter T. Butts
 (<https://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
 manual page.
+
+## Related documentation in the C library
+
+[`eigenvector_centrality()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality).
 
 ## Examples
 

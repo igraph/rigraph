@@ -19,16 +19,7 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(
-  dimvector = NULL,
-  length = NULL,
-  dim = NULL,
-  nei = 1,
-  directed = FALSE,
-  mutual = FALSE,
-  periodic = FALSE,
-  circular = deprecated()
-)
+lattice(...)
 ```
 
 ## Arguments
@@ -70,13 +61,13 @@ lattice(
 
   Deprecated, use `periodic` instead.
 
+- ...:
+
+  Passed to `make_lattice()`.
+
 ## Value
 
 An igraph graph.
-
-## Related documentation in the C library
-
-[`square_lattice()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice)
 
 ## See also
 
@@ -86,26 +77,26 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+
+## Related documentation in the C library
+
+[`square_lattice()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice).
 
 ## Examples
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> IGRAPH e52c837 U--- 125 300 -- Lattice graph
+#> IGRAPH a58d383 U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from e52c837:
+#> + edges from a58d383:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
@@ -115,10 +106,10 @@ make_lattice(c(5, 5, 5))
 #> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> IGRAPH 4a50128 U--- 125 300 -- Lattice graph
+#> IGRAPH 8a0d39b U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from 4a50128:
+#> + edges from 8a0d39b:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16

@@ -40,12 +40,6 @@ belong to the first triangle, etc.
 
 `count_triangles()` counts how many triangles a vertex is part of.
 
-## Related documentation in the C library
-
-[`list_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_list_triangles),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`count_adjacent_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_count_adjacent_triangles)
-
 ## See also
 
 [`transitivity()`](https://r.igraph.org/reference/transitivity.md)
@@ -53,6 +47,11 @@ belong to the first triangle, etc.
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`list_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_list_triangles),
+[`adjacent_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_adjacent_triangles).
 
 ## Examples
 

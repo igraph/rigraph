@@ -28,7 +28,3 @@ graph.tree(n, children = 2, mode = c("out", "in", "undirected"))
   point from the parent to the children, `in` indicates that they point
   from the children to their parents, while `undirected` creates an
   undirected graph.
-
-## Related documentation in the C library
-
-[`kary_tree()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)

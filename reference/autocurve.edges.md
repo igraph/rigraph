@@ -22,8 +22,3 @@ autocurve.edges(graph, start = 0.5)
 
   The curvature at the two extreme edges. All edges will have a
   curvature between `-start` and `start`, spaced equally.
-
-## Related documentation in the C library
-
-[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

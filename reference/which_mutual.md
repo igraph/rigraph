@@ -38,14 +38,6 @@ edges are considered to be mutual.
 
 Undirected graphs contain only mutual edges by definition.
 
-## Related documentation in the C library
-
-[`is_mutual()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_mutual),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## See also
 
 [`reciprocity()`](https://r.igraph.org/reference/reciprocity.md),
@@ -81,6 +73,10 @@ Other structural.properties:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`is_mutual()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_mutual).
 
 ## Examples
 

@@ -46,7 +46,3 @@ lastcit.game(
 - directed:
 
   Logical scalar, whether to generate directed networks.
-
-## Related documentation in the C library
-
-[`lastcit_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game)

@@ -14,13 +14,7 @@ sample_last_cit(
   directed = TRUE
 )
 
-last_cit(
-  n,
-  edges = 1,
-  agebins = n/7100,
-  pref = (1:(agebins + 1))^-3,
-  directed = TRUE
-)
+last_cit(...)
 
 sample_cit_types(
   n,
@@ -31,14 +25,7 @@ sample_cit_types(
   attr = TRUE
 )
 
-cit_types(
-  n,
-  edges = 1,
-  types = rep(0, n),
-  pref = rep(1, length(types)),
-  directed = TRUE,
-  attr = TRUE
-)
+cit_types(...)
 
 sample_cit_cit_types(
   n,
@@ -49,14 +36,7 @@ sample_cit_cit_types(
   attr = TRUE
 )
 
-cit_cit_types(
-  n,
-  edges = 1,
-  types = rep(0, n),
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
-  directed = TRUE,
-  attr = TRUE
-)
+cit_cit_types(...)
 ```
 
 ## Arguments
@@ -83,6 +63,10 @@ cit_cit_types(
 
   Logical scalar, whether to generate directed networks.
 
+- ...:
+
+  Passed to the actual constructor.
+
 - types:
 
   Vector of length ‘`n`’, the types of the vertices. Types are numbered
@@ -105,13 +89,6 @@ growing.
 `sample_cit_types()` is similarly a growing stochastic block model, but
 the probability of an edge depends on the (potentially) cited vertex
 only.
-
-## Related documentation in the C library
-
-[`lastcit_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game),
-[`cited_type_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`citing_cited_type_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game)
 
 ## See also
 

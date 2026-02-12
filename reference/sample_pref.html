@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Trait-based random generation</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_pref.Rd</code></div>
     </div>
 
@@ -65,15 +65,7 @@
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pref</span><span class="op">(</span></span>
-<span>  <span class="va">nodes</span>,</span>
-<span>  <span class="va">types</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  fixed.sizes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  directed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">pref</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">sample_asym_pref</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
@@ -83,13 +75,7 @@
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">asym_pref</span><span class="op">(</span></span>
-<span>  <span class="va">nodes</span>,</span>
-<span>  <span class="va">types</span>,</span>
-<span>  type.dist.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">asym_pref</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -123,11 +109,16 @@ an undirected graph, it must be symmetric.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
-<dd><p>Logical scalar, whether to create a directed graph.</p></dd>
+<dd><p>Logical constant, whether to create a directed graph.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>
-<dd><p>Logical scalar, whether self-loops are allowed in the graph.</p></dd>
+<dd><p>Logical constant, whether self-loops are allowed in the graph.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to the constructor, <code>sample_pref()</code> or
+<code>sample_asym_pref()</code>.</p></dd>
 
 
 <dt id="arg-type-dist-matrix">type.dist.matrix<a class="anchor" aria-label="anchor" href="#arg-type-dist-matrix"></a></dt>
@@ -156,10 +147,6 @@ asymmetric. The joint distribution for the in- and out-types is given in the
 <p>The types of the generated vertices can be retrieved from the
 <code>type</code> vertex attribute for <code>sample_pref()</code> and from the
 <code>intype</code> and <code>outtype</code> vertex attribute for <code>sample_asym_pref()</code>.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_preference_game" class="external-link"><code>preference_game()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_asymmetric_preference_game" class="external-link"><code>asymmetric_preference_game()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

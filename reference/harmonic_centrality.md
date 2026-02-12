@@ -70,14 +70,6 @@ to speed up the calculation. If `cutoff` is negative (which is the
 default), then the function calculates the exact harmonic centrality
 scores.
 
-## Related documentation in the C library
-
-[`harmonic_centrality_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 M. Marchiori and V. Latora, Harmony in the small-world, *Physica A* 285,
@@ -101,6 +93,10 @@ Centrality measures
 [`spectrum()`](https://r.igraph.org/reference/spectrum.md),
 [`strength()`](https://r.igraph.org/reference/strength.md),
 [`subgraph_centrality()`](https://r.igraph.org/reference/subgraph_centrality.md)
+
+## Related documentation in the C library
+
+[`harmonic_centrality_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff).
 
 ## Examples
 

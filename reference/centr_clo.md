@@ -44,10 +44,6 @@ A named list with the following components:
   `normalized` argument was `TRUE`, then the result was divided by this
   number.
 
-## Related documentation in the C library
-
-[`centralization_closeness()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_closeness)
-
 ## See also
 
 Other centralization related:
@@ -59,6 +55,10 @@ Other centralization related:
 [`centr_eigen()`](https://r.igraph.org/reference/centr_eigen.md),
 [`centr_eigen_tmax()`](https://r.igraph.org/reference/centr_eigen_tmax.md),
 [`centralize()`](https://r.igraph.org/reference/centralize.md)
+
+## Related documentation in the C library
+
+[`centralization_closeness()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_closeness).
 
 ## Examples
 

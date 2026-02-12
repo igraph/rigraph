@@ -28,7 +28,3 @@ graph.star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 - center:
 
   ID of the center vertex.
-
-## Related documentation in the C library
-
-[[`star()`](https://r.igraph.org/reference/make_star.md)](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star)

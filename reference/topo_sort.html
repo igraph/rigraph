@@ -15,7 +15,7 @@ its nodes where each node comes before all nodes to which it has edges."><meta p
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ its nodes where each node comes before all nodes to which it has edges."><meta p
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Topological sorting of vertices in a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>topo_sort.Rd</code></div>
     </div>
 
@@ -91,10 +91,6 @@ acyclic (it has at least one cycle), a partial topological sort is returned
 and a warning is issued.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_topological_sorting" class="external-link"><code>topological_sorting()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other structural.properties:
 <code><a href="bfs.html">bfs()</a></code>,
@@ -133,7 +129,7 @@ and a warning is issued.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">topo_sort</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from 57d98b9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from a05a4b1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   3   4  11  13  18  19  24  26  29  33  34  35  37  38  39  40  41  45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  47  48  49  50  52  53  55  57  58  59  60  62  63  64  65  66  68  69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  70  71  72  73  74  75  76  78  79  80  81  82  83  84  85  86  87  88</span>

@@ -5,13 +5,7 @@ All isomorphic mappings between a graph and subgraphs of another graph
 ## Usage
 
 ``` r
-subgraph_isomorphisms(
-  pattern,
-  target,
-  method = c("lad", "vf2"),
-  ...,
-  callback = NULL
-)
+subgraph_isomorphisms(pattern, target, method = c("lad", "vf2"), ...)
 ```
 
 ## Arguments
@@ -35,30 +29,10 @@ subgraph_isomorphisms(
 
   Additional arguments, passed to the various methods.
 
-- callback:
-
-  Optional callback function to call for each subisomorphism found. If
-  provided, the function should accept two arguments: `map12` (integer
-  vector mapping vertex IDs from pattern to target, 1-based indexing)
-  and `map21` (integer vector mapping vertex IDs from target to pattern,
-  1-based indexing). The function should return `FALSE` to continue the
-  search or `TRUE` to stop it. If `NULL` (the default), all
-  subisomorphisms are collected and returned as a list. Only supported
-  for `method = "vf2"`.
-
-  **Important limitation:** Callback functions must NOT call any igraph
-  functions (including simple queries like
-  [`vcount()`](https://r.igraph.org/reference/gorder.md) or
-  [`ecount()`](https://r.igraph.org/reference/gsize.md)). Doing so will
-  cause R to crash due to reentrancy issues. Extract any needed graph
-  information before calling the function with a callback, or use
-  collector mode (the default) and process results afterward.
-
 ## Value
 
-If `callback` is `NULL`, returns a list of vertex sequences,
-corresponding to all mappings from the pattern graph to the target
-graph. If `callback` is provided, returns `NULL` invisibly.
+A list of vertex sequences, corresponding to all mappings from the first
+graph to the second.
 
 ## ‘lad’ method
 
@@ -104,14 +78,6 @@ following extra arguments:
   graph has a “color” edge attribute, then it will be used. If you want
   to ignore these attributes, then supply `NULL` for both of these
   arguments.
-
-## Related documentation in the C library
-
-[`get_subisomorphisms_vf2()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_get_subisomorphisms_vf2),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 

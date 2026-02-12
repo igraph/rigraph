@@ -41,7 +41,3 @@ decompose.graph(
   The minimum number of vertices a component should contain in order to
   place it in the result list. E.g. supply 2 here to ignore isolate
   vertices.
-
-## Related documentation in the C library
-
-[[`decompose()`](https://r.igraph.org/reference/decompose.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose)

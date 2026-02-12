@@ -77,14 +77,6 @@ Closeness centrality is meaningful only for connected graphs. In
 disconnected graphs, consider using the harmonic centrality with
 [`harmonic_centrality()`](https://r.igraph.org/reference/harmonic_centrality.md)
 
-## Related documentation in the C library
-
-[`closeness_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_closeness_cutoff),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Freeman, L.C. (1979). Centrality in Social Networks I: Conceptual

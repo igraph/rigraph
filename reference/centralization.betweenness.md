@@ -27,7 +27,3 @@ centralization.betweenness(graph, directed = TRUE, normalized = TRUE)
 
   Logical scalar. Whether to normalize the graph level centrality score
   by dividing by the theoretical maximum.
-
-## Related documentation in the C library
-
-[`centralization_betweenness()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_betweenness)

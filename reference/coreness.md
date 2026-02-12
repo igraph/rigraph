@@ -35,11 +35,6 @@ always a subgraph of the k-core.
 
 This function calculates the coreness for each vertex.
 
-## Related documentation in the C library
-
-[`coreness()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_coreness),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Vladimir Batagelj, Matjaz Zaversnik: An O(m) Algorithm for Cores

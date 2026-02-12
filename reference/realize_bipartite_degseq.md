@@ -64,15 +64,14 @@ assortativity, and is often disconnected.
 
 The “index” method selects the vertices in order of their index.
 
-## Related documentation in the C library
-
-[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
 to create a not necessarily bipartite graph.
+
+## Related documentation in the C library
+
+[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence).
 
 ## Examples
 

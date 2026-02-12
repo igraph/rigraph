@@ -15,7 +15,7 @@ proportional to node fitness scores."><meta property="og:image" content="https:/
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ proportional to node fitness scores."><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Random graphs from vertex fitness scores</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_fitness.Rd</code></div>
     </div>
 
@@ -128,10 +128,6 @@ distribution. Alternatively, you may use <code><a href="sample_fitness_pl.html">
 which generates the fitnesses for you with a given exponent.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game" class="external-link"><code>static_fitness_game()</code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Goh K-I, Kahng B, Kim D: Universal behaviour of load
 distribution in scale-free networks. <em>Phys Rev Lett</em> 87(27):278701,
@@ -171,6 +167,10 @@ distribution in scale-free networks. <em>Phys Rev Lett</em> 87(27):278701,
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a></p>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game" class="external-link"><code>static_fitness_game()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -178,17 +178,17 @@ distribution in scale-free networks. <em>Phys Rev Lett</em> 87(27):278701,
 <span class="r-in"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_fitness</span><span class="op">(</span><span class="fl">5</span> <span class="op">*</span> <span class="va">N</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">^</span><span class="op">-</span><span class="fl">2</span>, <span class="va">N</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.4787 0.2020 0.0798 0.0457 0.0237 0.0164 0.0125 0.0086 0.0094 0.0064</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0057 0.0050 0.0050 0.0034 0.0041 0.0028 0.0027 0.0030 0.0025 0.0020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0020 0.0018 0.0023 0.0013 0.0020 0.0016 0.0015 0.0013 0.0012 0.0010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0014 0.0014 0.0007 0.0018 0.0010 0.0015 0.0017 0.0012 0.0012 0.0017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0013 0.0009 0.0009 0.0006 0.0006 0.0008 0.0005 0.0003 0.0009 0.0003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0002 0.0000 0.0001 0.0001 0.0000 0.0000 0.0000 0.0000 0.0001 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0000 0.0000 0.0000 0.0000 0.0003 0.0000 0.0003 0.0005 0.0006 0.0003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0003 0.0005 0.0006 0.0008 0.0009 0.0007 0.0007 0.0010 0.0011 0.0012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0014 0.0007 0.0011 0.0010 0.0009 0.0009 0.0004 0.0010 0.0008 0.0010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 0.0008 0.0007 0.0003 0.0001 0.0000 0.0004 0.0001 0.0000 0.0001 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.4612 0.2050 0.0834 0.0463 0.0264 0.0194 0.0138 0.0103 0.0083 0.0088</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0072 0.0057 0.0041 0.0037 0.0035 0.0031 0.0034 0.0027 0.0028 0.0016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0023 0.0028 0.0011 0.0026 0.0017 0.0016 0.0009 0.0016 0.0016 0.0010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0009 0.0011 0.0012 0.0010 0.0011 0.0010 0.0010 0.0014 0.0015 0.0012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0022 0.0009 0.0011 0.0017 0.0011 0.0006 0.0004 0.0014 0.0003 0.0004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0004 0.0003 0.0002 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0002 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0001 0.0002 0.0000 0.0000 0.0003 0.0006 0.0002 0.0005 0.0006 0.0007</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0013 0.0007 0.0011 0.0006 0.0008 0.0007 0.0007 0.0010 0.0016 0.0005</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 0.0003 0.0012 0.0006 0.0010 0.0005 0.0006 0.0006 0.0007 0.0003 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0001 0.0000 0.0001 0.0003 0.0003 0.0001 0.0000 0.0000 0.0000 0.0001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [111] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [121] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [131] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
@@ -199,14 +199,16 @@ distribution in scale-free networks. <em>Phys Rev Lett</em> 87(27):278701,
 <span class="r-out co"><span class="r-pr">#&gt;</span> [181] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [191] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [201] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [211] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [221] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0002 0.0001 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [231] 0.0000 0.0000 0.0000 0.0001 0.0001 0.0000 0.0001 0.0003 0.0001 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [241] 0.0000 0.0002 0.0003 0.0003 0.0006 0.0002 0.0004 0.0004 0.0004 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [251] 0.0008 0.0004 0.0006 0.0012 0.0007 0.0008 0.0007 0.0006 0.0006 0.0003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [261] 0.0005 0.0008 0.0004 0.0012 0.0005 0.0007 0.0005 0.0008 0.0002 0.0003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [271] 0.0003 0.0005 0.0002 0.0006 0.0002 0.0004 0.0004 0.0004 0.0007 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [281] 0.0002 0.0006 0.0001 0.0000 0.0000 0.0001 0.0000 0.0001 0.0000 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [211] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [221] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [231] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [241] 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [251] 0.0001 0.0001 0.0002 0.0002 0.0001 0.0002 0.0003 0.0004 0.0003 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [261] 0.0000 0.0001 0.0004 0.0003 0.0002 0.0006 0.0008 0.0007 0.0005 0.0006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [271] 0.0004 0.0003 0.0009 0.0008 0.0008 0.0008 0.0005 0.0007 0.0004 0.0007</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [281] 0.0008 0.0004 0.0008 0.0002 0.0002 0.0004 0.0005 0.0004 0.0010 0.0004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [291] 0.0000 0.0000 0.0003 0.0005 0.0001 0.0001 0.0003 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [301] 0.0001 0.0002 0.0000 0.0000 0.0001 0.0000 0.0000 0.0001 0.0002</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span>, cumulative <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, log <span class="op">=</span> <span class="st">"xy"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sample_fitness-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>

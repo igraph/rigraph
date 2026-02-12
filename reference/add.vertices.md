@@ -32,8 +32,3 @@ add.vertices(graph, nv, ..., attr = list())
 
   A named list, its elements will be added as vertex attributes, for the
   newly added vertices. See also details below.
-
-## Related documentation in the C library
-
-[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

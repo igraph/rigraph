@@ -32,11 +32,6 @@ A named numeric vector with three elements:
 
   The number of pairs with no connection between them.
 
-## Related documentation in the C library
-
-[`dyad_census()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)
-
 ## References
 
 Holland, P.W. and Leinhardt, S. A Method for Detecting Structure in
@@ -58,6 +53,10 @@ Other graph motifs:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`dyad_census()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census).
 
 ## Examples
 

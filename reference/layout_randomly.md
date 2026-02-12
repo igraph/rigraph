@@ -35,11 +35,6 @@ Randomly places vertices on a \[-1,1\] square (in 2d) or in a cube (in
 3d). It is probably a useless layout, but it can use as a starting point
 for other layout generators.
 
-## Related documentation in the C library
-
-[`layout_random()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random),
-[`layout_random_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d)
-
 ## See also
 
 Other graph layouts:

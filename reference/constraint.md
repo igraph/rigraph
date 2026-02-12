@@ -43,14 +43,6 @@ strengths are defined as \$\$p\_{ij} = \frac{a\_{ij}+a\_{ji}}{\sum\_{k
 of \\A\\ and the latter being the graph adjacency matrix. For isolated
 vertices, constraint is undefined.
 
-## Related documentation in the C library
-
-[`constraint()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_constraint),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Burt, R.S. (2004). Structural holes and good ideas. *American Journal of

@@ -25,8 +25,3 @@ piecewise.layout(graph, layout = layout_with_kk, ...)
 - ...:
 
   Additional arguments to pass to the `layout` layout function.
-
-## Related documentation in the C library
-
-[[`decompose()`](https://r.igraph.org/reference/decompose.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

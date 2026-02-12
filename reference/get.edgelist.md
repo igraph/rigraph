@@ -22,8 +22,3 @@ get.edgelist(graph, names = TRUE)
 
   Whether to return a character matrix containing vertex names (i.e. the
   `name` vertex attribute) if they exist or numeric vertex ids.
-
-## Related documentation in the C library
-
-[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

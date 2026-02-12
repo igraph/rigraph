@@ -43,10 +43,6 @@ The classical concept of graphicality assumes simple graphs. This
 function can perform the check also when self-loops, multi-edges, or
 both are allowed in the graph.
 
-## Related documentation in the C library
-
-[`is_graphical()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical)
-
 ## References
 
 Hakimi SL: On the realizability of a set of integers as degrees of the
@@ -64,6 +60,10 @@ Other graphical degree sequences:
 ## Author
 
 Tamás Nepusz <ntamas@gmail.com>
+
+## Related documentation in the C library
+
+[`is_graphical()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical).
 
 ## Examples
 
