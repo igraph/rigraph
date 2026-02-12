@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,39 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9021" id="igraph-2219021">igraph 2.2.1.9021<a class="anchor" aria-label="anchor" href="#igraph-2219021"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-2-1-9021">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-2-1-9021"></a></h3>
+<ul><li><p>Fix <code>hrg_game_impl()</code> (<a href="https://github.com/igraph/rigraph/issues/2577" class="external-link">#2577</a>, <a href="https://github.com/igraph/rigraph/issues/2578" class="external-link">#2578</a>).</p></li>
+<li><p><code><a href="../reference/graphlet_basis.html">graphlet_proj()</a></code> no longer erroneously assigns class “igraphHRG” to the returned graph.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-2-1-9021">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9021"></a></h3>
+<ul><li>Check that exactly one vertex is passed (<a href="https://github.com/igraph/rigraph/issues/2556" class="external-link">#2556</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-2-1-9021">Chore<a class="anchor" aria-label="anchor" href="#chore-2-2-1-9021"></a></h3>
+<ul><li><p>Fix roxygen2 deps registration (<a href="https://github.com/igraph/rigraph/issues/2579" class="external-link">#2579</a>, <a href="https://github.com/igraph/rigraph/issues/2580" class="external-link">#2580</a>).</p></li>
+<li><p>Revdepcheck results.</p></li>
+<li><p>Indent.</p></li>
+<li><p>Remove function definitions that are not overridden.</p></li>
+<li><p>Harmonize IGNORE in function declarations.</p></li>
+<li><p>Formatting.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-2-1-9021">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-2-1-9021"></a></h3>
+<ul><li>Use default R version for revdepchecks.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-2-1-9021">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-2-1-9021"></a></h3>
+<ul><li>Automatic linking to C docs (<a href="https://github.com/igraph/rigraph/issues/2518" class="external-link">#2518</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-2-2-1-9021">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-2-1-9021"></a></h3>
+<ul><li>Replace <code><a href="https://rdrr.io/r/base/CallExternal.html" class="external-link">.Call()</a></code> with <code>_impl</code> functions and improve adjacency matrix implementation (<a href="https://github.com/igraph/rigraph/issues/2545" class="external-link">#2545</a>, <a href="https://github.com/igraph/rigraph/issues/2546" class="external-link">#2546</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1.9020" id="igraph-2219020">igraph 2.2.1.9020<a class="anchor" aria-label="anchor" href="#igraph-2219020"></a></h2>
 <div class="section level3">

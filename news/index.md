@@ -1,5 +1,53 @@
 # Changelog
 
+## igraph 2.2.1.9021
+
+### Bug fixes
+
+- Fix `hrg_game_impl()`
+  ([\#2577](https://github.com/igraph/rigraph/issues/2577),
+  [\#2578](https://github.com/igraph/rigraph/issues/2578)).
+
+- [`graphlet_proj()`](https://r.igraph.org/reference/graphlet_basis.md)
+  no longer erroneously assigns class “igraphHRG” to the returned graph.
+
+### Features
+
+- Check that exactly one vertex is passed
+  ([\#2556](https://github.com/igraph/rigraph/issues/2556)).
+
+### Chore
+
+- Fix roxygen2 deps registration
+  ([\#2579](https://github.com/igraph/rigraph/issues/2579),
+  [\#2580](https://github.com/igraph/rigraph/issues/2580)).
+
+- Revdepcheck results.
+
+- Indent.
+
+- Remove function definitions that are not overridden.
+
+- Harmonize IGNORE in function declarations.
+
+- Formatting.
+
+### Continuous integration
+
+- Use default R version for revdepchecks.
+
+### Documentation
+
+- Automatic linking to C docs
+  ([\#2518](https://github.com/igraph/rigraph/issues/2518)).
+
+### Refactoring
+
+- Replace [`.Call()`](https://rdrr.io/r/base/CallExternal.html) with
+  `_impl` functions and improve adjacency matrix implementation
+  ([\#2545](https://github.com/igraph/rigraph/issues/2545),
+  [\#2546](https://github.com/igraph/rigraph/issues/2546)).
+
 ## igraph 2.2.1.9020
 
 ### Features

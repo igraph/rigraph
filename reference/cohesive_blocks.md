@@ -314,23 +314,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> + 23/23 vertices, named, from aed8769:
+#> + 23/23 vertices, named, from ccca9b5:
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> + 14/23 vertices, named, from aed8769:
+#> + 14/23 vertices, named, from ccca9b5:
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> + 10/23 vertices, named, from aed8769:
+#> + 10/23 vertices, named, from ccca9b5:
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> + 7/23 vertices, named, from aed8769:
+#> + 7/23 vertices, named, from ccca9b5:
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> + 4/23 vertices, named, from aed8769:
+#> + 4/23 vertices, named, from ccca9b5:
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)
