@@ -178,10 +178,10 @@ jobs:
           results: ${{ runner.os }}-smoke-test
 
       - uses: ./.github/workflows/pkgdown-build
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && github.event_name != 'schedule'
 
       - uses: ./.github/workflows/pkgdown-deploy
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'schedule'
 
       # Upload sha as artifact
       - run: |
