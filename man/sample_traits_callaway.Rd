@@ -83,7 +83,7 @@ depends on the types of the vertices involved and is taken from
 \code{pref.matrix}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game}}
 }
 
 \examples{

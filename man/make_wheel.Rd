@@ -39,7 +39,7 @@ two-vertex wheel graph contains a self-loop, while the three-vertex wheel
 graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_wheel}{\code{wheel()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_wheel}{\code{wheel}}
 }
 
 \examples{

@@ -30,7 +30,7 @@ A list of graph objects.
 Creates a separate graph for each connected component of a graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose}}
 }
 
 \examples{

@@ -31,7 +31,7 @@ random dot product graphs
 norm of the samples equal \code{radius}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_surface}{\code{sample_sphere_surface()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_surface}{\code{sample_sphere_surface}}
 }
 
 \examples{

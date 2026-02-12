@@ -25,7 +25,7 @@ isomorphism class. Currently it can handle directed graphs with 3 or 4
 vertices and undirected graphs with 3 to 6 vertices.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph}{\code{isoclass_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass}{\code{isoclass()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph}{\code{isoclass_subgraph}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass}{\code{isoclass}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

@@ -24,7 +24,7 @@ rotates the layout to achieve a visually pleasing alignment with the coordinate
 axes. Doing this is particularly useful with force-directed layouts such as \code{\link[=layout_with_fr]{layout_with_fr()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align}}
 }
 
 \examples{

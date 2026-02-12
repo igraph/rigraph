@@ -37,7 +37,7 @@ starting point for finding motifs.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate}}
 }
 
 \keyword{internal}

@@ -29,7 +29,7 @@ A ring is a one-dimensional lattice and this function is a special case
 of \code{\link[=make_lattice]{make_lattice()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring}}
 }
 
 \examples{

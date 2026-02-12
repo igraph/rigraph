@@ -49,7 +49,7 @@ This function generates the layout separately for each graph component and
 then merges them via \code{\link[=merge_coords]{merge_coords()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds}{\code{layout_mds()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds}{\code{layout_mds}}
 }
 
 \examples{

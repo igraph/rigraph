@@ -23,7 +23,7 @@ This function is similar to \code{\link[=neighbors]{neighbors()}}, but it querie
 the adjacent vertices for multiple vertices at once.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

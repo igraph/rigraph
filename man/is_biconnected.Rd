@@ -27,7 +27,7 @@ Note that some authors do not consider the graph consisting of
 two connected vertices as biconnected, however, igraph does.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected}}
 }
 
 \examples{

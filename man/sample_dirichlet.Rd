@@ -27,7 +27,7 @@ with given \eqn{\alpha}{alpha} parameter. The sample is drawn from
 \code{length(alpha)-1}-simplex.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_dirichlet}{\code{sample_dirichlet()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_dirichlet}{\code{sample_dirichlet}}
 }
 
 \examples{

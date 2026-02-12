@@ -31,7 +31,7 @@ returned when the number of vertices is zero. A complete graph is
 returned if the number of partitions is greater than the number of vertices.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan}{\code{turan()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan}{\code{turan}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

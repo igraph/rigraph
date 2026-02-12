@@ -127,7 +127,7 @@ variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as
 Van Der Hofstad (2013).
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game}}
 }
 
 \examples{

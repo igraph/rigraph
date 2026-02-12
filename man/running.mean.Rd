@@ -19,7 +19,7 @@ i.e. smaller than the length of \code{v}.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_running_mean}{\code{running_mean()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_running_mean}{\code{running_mean}}
 }
 
 \keyword{internal}

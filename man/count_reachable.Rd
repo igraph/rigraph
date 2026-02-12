@@ -35,7 +35,7 @@ For undirected graphs, two vertices are reachable from each other if they
 are in the same connected component.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable}}
 }
 
 \examples{

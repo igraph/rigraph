@@ -20,7 +20,7 @@ igraph.sample(low, high, length)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample}}
 }
 
 \keyword{internal}

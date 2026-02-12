@@ -29,7 +29,7 @@ vertices from which a given vertex is reachable via a directed path.
 A breadth-first search is conducted starting from vertex \code{v}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

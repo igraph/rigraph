@@ -15,7 +15,7 @@ Returns the R package version,
 prints the R package version and C library version.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version}{\code{version()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version}{\code{version}}
 }
 
 \examples{

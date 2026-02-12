@@ -20,7 +20,7 @@ should be \code{NULL}. For directed graphs it specifies the in-degrees.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical}}
 }
 
 \keyword{internal}

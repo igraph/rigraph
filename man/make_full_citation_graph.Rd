@@ -23,7 +23,7 @@ directed graph, where every \code{i->j} edge is present if and only if
 \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_citation}{\code{full_citation()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_citation}{\code{full_citation}}
 }
 
 \examples{

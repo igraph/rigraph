@@ -56,7 +56,7 @@ generator of the Large Graph Layout software
 (\url{https://lgl.sourceforge.net/}).
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \seealso{

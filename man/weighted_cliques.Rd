@@ -55,7 +55,7 @@ weight is larger than the weight of this clique.
 \code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_weighted_cliques}{\code{weighted_cliques()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_weighted_cliques}{\code{weighted_cliques}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

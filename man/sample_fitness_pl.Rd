@@ -69,7 +69,7 @@ the square root of the number of edges times the average degree; see the
 paper of Chung and Lu, and Cho et al for more details.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game}}
 }
 
 \examples{

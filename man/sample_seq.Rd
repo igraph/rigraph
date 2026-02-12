@@ -26,7 +26,7 @@ The algorithm runs in \code{O(length)} expected time, even if
 the builtin \code{sample} function of R.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample}}
 }
 
 \examples{

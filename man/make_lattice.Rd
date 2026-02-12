@@ -61,7 +61,7 @@ forms. In the first form you only supply \code{dimvector}, but not
 \code{dimvector} and supply \code{length} and \code{dim}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice}}
 }
 
 \examples{

@@ -58,7 +58,7 @@ is deprecated. In the next major version, \code{subgraph()} will overtake the
 functionality of \code{subgraph_from_edges()}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges}{\code{subgraph_from_edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges}{\code{subgraph_from_edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}
 }
 
 \examples{

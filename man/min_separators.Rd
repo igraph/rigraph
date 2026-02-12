@@ -27,7 +27,7 @@ In the special case of a fully connected input graph with \eqn{n} vertices,
 all subsets of size \eqn{n-1} are listed as the result.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_minimum_size_separators}{\code{minimum_size_separators()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_minimum_size_separators}{\code{minimum_size_separators}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

@@ -51,7 +51,7 @@ Place vertices on the plane using the GEM force-directed layout algorithm.
 See the referenced paper below for the details of the algorithm.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_gem}{\code{layout_gem()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_gem}{\code{layout_gem}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

@@ -35,7 +35,7 @@ types. These should be probabilities, i.e. numbers between zero and one.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game}}
 }
 
 \keyword{internal}

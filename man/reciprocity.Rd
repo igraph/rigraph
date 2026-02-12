@@ -36,7 +36,7 @@ The result is the size of group (3), divided by the sum of group sizes
 (2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity}}
 }
 
 \examples{
