@@ -518,12 +518,10 @@ write_graph <- function(
 ################################################################
 
 read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_read_graph_edgelist,
-    file,
-    as.numeric(n),
-    as.logical(directed)
+  read_graph_edgelist_impl(
+    instream = file,
+    n = n,
+    directed = directed
   )
 }
 
@@ -552,7 +550,7 @@ read.graph.ncol <- function(
     "auto" = 2L
   )
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # igraph_read_graph_ncol(); read_graph_ncol_impl has bug with predefnames
     Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
@@ -578,7 +576,7 @@ write.graph.ncol <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # igraph_write_graph_ncol(); write_graph_ncol_impl can't handle NULL names/weights
     Rx_igraph_write_graph_ncol,
     graph,
     file,
@@ -593,19 +591,12 @@ read.graph.lgl <- function(
   weights = c("auto", "yes", "no"),
   directed = FALSE
 ) {
-  weights <- switch(
-    igraph_match_arg(weights),
-    "no" = 0L,
-    "yes" = 1L,
-    "auto" = 2L
-  )
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_read_graph_lgl,
-    file,
-    as.logical(names),
-    weights,
-    as.logical(directed)
+  weights <- igraph_match_arg(weights)
+  read_graph_lgl_impl(
+    instream = file,
+    names = names,
+    weights = weights,
+    directed = directed
   )
 }
 
@@ -626,7 +617,7 @@ write.graph.lgl <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
+  .Call( # igraph_write_graph_lgl(); write_graph_lgl_impl can't handle NULL names/weights
     Rx_igraph_write_graph_lgl,
     graph,
     file,
@@ -656,7 +647,12 @@ write.graph.pajek <- function(graph, file) {
 }
 
 read.graph.dimacs <- function(file, directed = TRUE) {
-  res <- .Call(Rx_igraph_read_graph_dimacs, file, as.logical(directed))
+  on.exit(.Call(Rx_igraph_finalizer))
+  res <- .Call( # igraph_read_graph_dimacs_flow(); _impl returns different structure
+    Rx_igraph_read_graph_dimacs,
+    file,
+    as.logical(directed)
+  )
   if (res[[1]][1] == "max") {
     graph <- res[[2]]
     graph <- set_graph_attr(graph, "problem", res[[1]])
@@ -689,14 +685,12 @@ write.graph.dimacs <- function(
     capacity <- E(graph)$capacity
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_write_graph_dimacs,
-    graph,
-    file,
-    as.numeric(source),
-    as.numeric(target),
-    as.numeric(capacity)
+  write_graph_dimacs_flow_impl(
+    graph = graph,
+    outstream = file,
+    source = source,
+    target = target,
+    capacity = capacity
   )
 }
 

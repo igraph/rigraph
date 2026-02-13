@@ -655,6 +655,7 @@ as_adj_list <- function(
 
   multiple <- if (multiple) 1 else 0
   on.exit(.Call(Rx_igraph_finalizer))
+  # igraph_i_neighbors(); neighbors_impl() lacks loops/multiple and only handles one vertex
   res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
@@ -685,6 +686,7 @@ as_adj_edge_list <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
+  # igraph_i_incident(); incident_impl() lacks loops and only handles one vertex
   res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
@@ -1148,7 +1150,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   what <- igraph_match_arg(what)
 
   if (what %in% c("vertices", "both")) {
-    ver <- .Call(
+    ver <- .Call( # internal, no _impl
       Rx_igraph_mybracket2,
       x,
       igraph_t_idx_attr,
@@ -1167,7 +1169,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
     el <- as_edgelist(x)
     edg <- c(
       list(from = el[, 1], to = el[, 2]),
-      .Call(Rx_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
+      .Call(Rx_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge) # internal, no _impl
     )
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
@@ -1272,7 +1274,7 @@ graph_from_adj_list <- function(
 as_long_data_frame <- function(graph) {
   ensure_igraph(graph)
 
-  ver <- .Call(
+  ver <- .Call( # internal, no _impl
     Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
@@ -1290,7 +1292,7 @@ as_long_data_frame <- function(graph) {
   edg <- c(
     list(from = el[, 1]),
     list(to = el[, 2]),
-    .Call(Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+    .Call(Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge) # internal, no _impl
   )
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))
