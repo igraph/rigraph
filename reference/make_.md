@@ -34,6 +34,14 @@ modifier adds vertex attributes to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
 
+## Related documentation in the C library
+
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 Other deterministic constructors:
@@ -41,14 +49,18 @@ Other deterministic constructors:
 [`graph_from_edgelist()`](https://r.igraph.org/reference/graph_from_edgelist.md),
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 Constructor modifiers (and related functions)
 [`sample_()`](https://r.igraph.org/reference/sample_.md),

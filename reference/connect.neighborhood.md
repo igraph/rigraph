@@ -32,3 +32,7 @@ connect.neighborhood(graph, order, mode = c("all", "out", "in", "total"))
   source vertex is reachable in at most `order` steps are counted.
   ‘"all"’ ignores the direction of the edges. This argument is ignored
   for undirected graphs.
+
+## Related documentation in the C library
+
+[`connect_neighborhood()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood)

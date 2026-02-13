@@ -36,3 +36,8 @@ induced.subgraph(
   that must be kept and then uses them to create the graph from scratch.
   ‘`auto`’ chooses between the two implementations automatically, using
   heuristics based on the size of the original and the result graph.
+
+## Related documentation in the C library
+
+[[`induced_subgraph()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

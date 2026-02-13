@@ -37,6 +37,10 @@ decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
 
 A list of graph objects.
 
+## Related documentation in the C library
+
+[`decompose()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose)
+
 ## See also
 
 [`is_connected()`](https://r.igraph.org/reference/components.md) to
@@ -48,6 +52,7 @@ Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
+[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
 ## Author

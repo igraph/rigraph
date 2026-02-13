@@ -68,3 +68,9 @@ layout.davidson.harel(
 - weight.node.edge.dist:
 
   Weight for the node-edge distance component of the energy function.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`layout_davidson_harel()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_davidson_harel),
+[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density)

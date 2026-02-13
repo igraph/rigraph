@@ -29,3 +29,7 @@ centralize.scores(scores, theoretical.max = 0, normalized = TRUE)
 
   Logical scalar. Whether to normalize the graph level centrality score
   by dividing by the supplied theoretical maximum.
+
+## Related documentation in the C library
+
+[[`centralization()`](https://r.igraph.org/reference/centralize.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization)

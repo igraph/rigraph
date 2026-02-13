@@ -48,3 +48,10 @@ fastgreedy.community(
   to `NA` if the graph was a ‘weight’ edge attribute, but you don't want
   to use it for community detection. A larger edge weight means a
   stronger connection for this function.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

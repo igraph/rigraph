@@ -90,6 +90,17 @@ calculated.
 For undirected graphs the Stoer-Wagner algorithm (see reference below)
 is used to calculate the minimum cut.
 
+## Related documentation in the C library
+
+[`mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut),
+[`mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut_value),
+[`st_mincut()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut),
+[`st_mincut_value()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut_value),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
+
 ## References
 
 M. Stoer and F. Wagner: A simple min-cut algorithm, *Journal of the
@@ -119,22 +130,22 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> $value
 #> [1] 2
 #> 
-#> $cut
-#> + 2/100 edges from 7078b5c:
-#> [1] 1--2 2--3
-#> 
 #> $partition1
-#> + 1/100 vertex, from 7078b5c:
+#> + 1/100 vertex, from 3c5d28b:
 #> [1] 2
 #> 
 #> $partition2
-#> + 99/100 vertices, from 7078b5c:
+#> + 99/100 vertices, from 3c5d28b:
 #>  [1]   1   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
 #> [20]  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39
 #> [39]  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58
 #> [58]  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77
 #> [77]  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96
 #> [96]  97  98  99 100
+#> 
+#> $cut
+#> + 2/100 edges from 3c5d28b:
+#> [1] 1--2 2--3
 #> 
 
 g2 <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
@@ -143,16 +154,16 @@ min_cut(g2, value.only = FALSE)
 #> $value
 #> [1] 1
 #> 
-#> $cut
-#> + 1/7 edge from 5c6e182:
-#> [1] 2->3
-#> 
 #> $partition1
-#> + 1/6 vertex, from 5c6e182:
+#> + 1/6 vertex, from 9352895:
 #> [1] 2
 #> 
 #> $partition2
-#> + 5/6 vertices, from 5c6e182:
+#> + 5/6 vertices, from 9352895:
 #> [1] 1 3 4 5 6
+#> 
+#> $cut
+#> + 1/7 edge from 9352895:
+#> [1] 2->3
 #> 
 ```

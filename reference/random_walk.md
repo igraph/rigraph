@@ -79,7 +79,11 @@ changed to improve consistency with the underlying C library.
 
 ## Related documentation in the C library
 
-[`random_walk()`](https://igraph.org/c/html/0.10.17/igraph-Visitors.html#igraph_random_walk).
+[`random_walk()`](https://igraph.org/c/html/0.10.17/igraph-Visitors.html#igraph_random_walk),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
 
 ## Examples
 
@@ -94,9 +98,9 @@ w <- random_walk(g, start = 1, steps = 10000)
 
 ## These are similar, but not exactly the same
 cor(table(w), ec)
-#> [1] 0.9618877
+#> [1] 0.9625204
 
 ## But these are (almost) the same
 cor(table(w), pg)
-#> [1] 0.9998887
+#> [1] 0.9999881
 ```

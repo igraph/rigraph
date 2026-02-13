@@ -37,6 +37,10 @@ An igraph graph.
     oc <- cluster_optimal(g)
     oc
 
+## Related documentation in the C library
+
+[`simple_interconnected_islands_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game)
+
 ## See also
 
 [`sample_gnp()`](https://r.igraph.org/reference/sample_gnp.md)
@@ -72,7 +76,3 @@ Random graph models (games)
 ## Author
 
 Samuel Thiriot
-
-## Related documentation in the C library
-
-[`simple_interconnected_islands_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game).

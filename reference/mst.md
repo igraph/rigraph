@@ -50,6 +50,15 @@ of minimum spanning trees of all of its components.
 
 If the graph is not connected a minimum spanning forest is returned.
 
+## Related documentation in the C library
+
+[`minimum_spanning_tree_unweighted()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted),
+[`minimum_spanning_tree_prim()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_prim),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 Prim, R.C. 1957. Shortest connection networks and some generalizations

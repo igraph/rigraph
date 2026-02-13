@@ -19,6 +19,10 @@ sample_hrg(hrg)
 
 An igraph graph.
 
+## Related documentation in the C library
+
+[`hrg_game()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_game)
+
 ## See also
 
 Other hierarchical random graph functions:
@@ -30,7 +34,3 @@ Other hierarchical random graph functions:
 [`predict_edges()`](https://r.igraph.org/reference/predict_edges.md),
 [`print.igraphHRG()`](https://r.igraph.org/reference/print.igraphHRG.md),
 [`print.igraphHRGConsensus()`](https://r.igraph.org/reference/print.igraphHRGConsensus.md)
-
-## Related documentation in the C library
-
-[`hrg_game()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_game).

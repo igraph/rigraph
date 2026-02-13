@@ -26,3 +26,11 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 
   Logical scalar, whether to remove vertices that do not have any
   adjacent edges in `eids`.
+
+## Related documentation in the C library
+
+[[`subgraph_from_edges()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_subgraph_from_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

@@ -47,3 +47,8 @@ hrg.predict(
 
   Number of bins for the edge probabilities. Give a higher number for a
   more accurate prediction.
+
+## Related documentation in the C library
+
+[`hrg_predict()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

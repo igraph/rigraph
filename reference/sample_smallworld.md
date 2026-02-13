@@ -11,7 +11,7 @@ multi-edges.
 ``` r
 sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(...)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 ```
 
 ## Arguments
@@ -43,10 +43,6 @@ smallworld(...)
   Logical scalar, whether multiple edges are allowed int the generated
   graph.
 
-- ...:
-
-  Passed to `sample_smallworld()`.
-
 ## Value
 
 A graph object.
@@ -66,6 +62,10 @@ Watts-Strogatz model only rewires a single endpoint of each edge, thus
 the network does not become fully random even for `p=1`. For appropriate
 choices of `p`, both models exhibit the property of simultaneously
 having short path lengths and high clustering.
+
+## Related documentation in the C library
+
+[`watts_strogatz_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game)
 
 ## References
 
@@ -114,7 +114,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-#> [1] 2.651717
+#> [1] 2.76101
 transitivity(g, type = "average")
-#> [1] 0.4970309
+#> [1] 0.5319964
 ```

@@ -8,7 +8,7 @@ square
 ``` r
 sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
 
-grg(...)
+grg(nodes, radius, torus = FALSE, coords = FALSE)
 ```
 
 ## Arguments
@@ -30,10 +30,6 @@ grg(...)
   Logical scalar, whether to add the positions of the vertices as vertex
   attributes called ‘`x`’ and ‘`y`’.
 
-- ...:
-
-  Passed to `sample_grg()`.
-
 ## Value
 
 A graph object. If `coords` is `TRUE` then with vertex attributes ‘`x`’
@@ -46,6 +42,10 @@ correspond to the vertices of the graph to create. Two points will be
 connected with an undirected edge if they are closer to each other in
 Euclidean norm than a given radius. If the `torus` argument is `TRUE`
 then a unit area torus is used instead of a square.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

@@ -9,7 +9,7 @@ of their latent position vectors.
 ``` r
 sample_dot_product(vecs, directed = FALSE)
 
-dot_product(...)
+dot_product(vecs, directed = FALSE)
 ```
 
 ## Arguments
@@ -22,10 +22,6 @@ dot_product(...)
 
   A logical scalar, TRUE if the generated graph should be directed.
 
-- ...:
-
-  Passed to `sample_dot_product()`.
-
 ## Value
 
 An igraph graph object which is the generated random dot product graph.
@@ -36,6 +32,10 @@ The dot product of the latent position vectors should be in the \[0,1\]
 interval, otherwise a warning is given. For negative dot products, no
 edges are added; dot products that are larger than one always add an
 edge.
+
+## Related documentation in the C library
+
+[`dot_product_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game)
 
 ## References
 
@@ -83,10 +83,6 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`dot_product_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game).
-
 ## Examples
 
 ``` r
@@ -97,26 +93,26 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> IGRAPH 546962b U--- 10 32 -- 
-#> + edges from 546962b:
-#>  [1] 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 9 2-- 3 2-- 5 2-- 6 2-- 7 2-- 9 2--10
-#> [13] 3-- 5 3-- 6 3-- 7 3-- 8 3--10 4-- 5 4-- 6 4-- 8 4--10 5-- 6 5-- 7 5-- 8
-#> [25] 6-- 7 6-- 8 6-- 9 7-- 9 7--10 8-- 9 8--10 9--10
+#> IGRAPH 1e83487 U--- 10 28 -- 
+#> + edges from 1e83487:
+#>  [1] 1-- 3 1-- 4 1-- 7 1-- 8 1-- 9 1--10 2-- 4 2-- 6 2-- 9 3-- 4 3-- 5 3-- 6
+#> [13] 3-- 9 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 8 5-- 9 5--10 6-- 7
+#> [25] 6-- 8 6-- 9 6--10 7--10
 
 ## Sample latent vectors from the surface of the unit sphere
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> IGRAPH c788d8f U--- 20 136 -- 
-#> + edges from c788d8f:
-#>  [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 1--11 1--14 1--16
-#> [13] 1--17 1--19 1--20 2-- 3 2-- 4 2-- 5 2-- 7 2-- 8 2-- 9 2--10 2--11 2--12
-#> [25] 2--13 2--14 2--15 2--16 2--17 2--19 2--20 3-- 4 3-- 5 3-- 6 3-- 8 3-- 9
-#> [37] 3--13 3--14 3--15 3--16 3--18 3--19 3--20 4-- 7 4-- 9 4--12 4--13 4--14
-#> [49] 4--16 4--17 4--19 5-- 6 5-- 7 5-- 8 5--10 5--11 5--15 5--17 5--20 6-- 7
-#> [61] 6-- 8 6--10 6--11 6--12 6--14 6--15 6--16 6--19 6--20 7-- 9 7--10 7--12
-#> [73] 7--13 7--14 7--15 7--16 7--18 7--19 8--11 8--13 8--14 8--15 8--16 8--17
-#> [85] 8--18 8--19 8--20 9--10 9--11 9--12 9--13 9--14 9--16 9--17 9--18 9--19
-#> [97] 9--20
+#> IGRAPH 9a332a8 U--- 20 139 -- 
+#> + edges from 9a332a8:
+#>  [1] 1-- 2 1-- 6 1-- 7 1-- 8 1--10 1--11 1--12 1--13 1--15 1--16 1--17 1--18
+#> [13] 1--20 2-- 4 2-- 5 2-- 6 2-- 7 2-- 8 2--10 2--14 2--15 2--17 2--19 3-- 4
+#> [25] 3-- 5 3-- 7 3-- 8 3-- 9 3--10 3--11 3--12 3--13 3--14 3--15 3--17 3--19
+#> [37] 3--20 4-- 5 4-- 6 4-- 8 4--11 4--12 4--13 4--14 4--15 4--16 4--18 4--19
+#> [49] 4--20 5-- 6 5-- 8 5-- 9 5--11 5--12 5--13 5--14 5--15 5--18 5--19 6-- 8
+#> [61] 6-- 9 6--13 6--14 6--16 6--17 6--18 6--19 6--20 7-- 9 7--10 7--12 7--13
+#> [73] 7--14 7--15 7--16 7--17 7--18 7--19 7--20 8-- 9 8--10 8--11 8--15 8--16
+#> [85] 8--18 8--19 8--20 9--10 9--11 9--12 9--13 9--14 9--15 9--16 9--17 9--18
+#> [97] 9--19
 #> + ... omitted several edges
 ```

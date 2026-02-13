@@ -26,3 +26,8 @@ degree.distribution(graph, cumulative = FALSE, ...)
 - ...:
 
   These dots are for future extensions and must be empty.
+
+## Related documentation in the C library
+
+[[`degree()`](https://r.igraph.org/reference/degree.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

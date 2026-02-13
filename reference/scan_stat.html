@@ -19,7 +19,7 @@ vertices and across the time steps."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ vertices and across the time steps."><meta property="og:image" content="https://
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Scan statistics on a time series of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/scan.R" class="external-link"><code>R/scan.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/scan.R" class="external-link"><code>R/scan.R</code></a></small>
       <div class="d-none name"><code>scan_stat.Rd</code></div>
     </div>
 
@@ -112,6 +112,10 @@ It is <code>NA</code> for the initial <code>tau + ell</code> time steps.</p></dd
 
 </dl></div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0" class="external-link"><code>local_scan_0()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them" class="external-link"><code>local_scan_0_them()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount" class="external-link"><code>local_scan_1_ecount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them" class="external-link"><code>local_scan_1_ecount_them()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount" class="external-link"><code>local_scan_k_ecount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them" class="external-link"><code>local_scan_k_ecount_them()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount" class="external-link"><code>local_scan_neighborhood_ecount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph" class="external-link"><code><a href="subgraph.html">induced_subgraph()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code><a href="gsize.html">ecount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other scan statistics:
 <code><a href="local_scan.html">local_scan()</a></code></p></div>
@@ -136,23 +140,23 @@ It is <code>NA</code> for the initial <code>tau + ell</code> time steps.</p></dd
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">scan_stat</span><span class="op">(</span>graphs <span class="op">=</span> <span class="va">tsg</span>, k <span class="op">=</span> <span class="fl">1</span>, tau <span class="op">=</span> <span class="fl">4</span>, ell <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]          NA          NA          NA          NA          NA          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.61509890  3.25000000 -0.60658251  2.11242679 -0.40894749 -1.23697715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  0.46618808 -0.02210365  0.68385192  2.03226081 -1.17851130  1.76776695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19]  1.41421356 15.25330342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]         NA         NA         NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.2780571 -0.2536797  2.3211203  1.3218364  9.1269317 -1.0533636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] -0.7228621  2.0598812 -0.1268390 -2.0269238  0.4509619  3.3259619</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19]  0.7071068 16.2500000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $arg_max_v</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA  4 19  2  4  9  2  7 20 10 19 17 18  5 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA  5 18 18 19 11  7 14  2  3  4  9  5  6 18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">scan_stat</span><span class="op">(</span>graphs <span class="op">=</span> <span class="va">tsg</span>, locality <span class="op">=</span> <span class="st">"them"</span>, k <span class="op">=</span> <span class="fl">1</span>, tau <span class="op">=</span> <span class="fl">4</span>, ell <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]          NA          NA          NA          NA          NA          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  0.12500000 -0.25000000  0.00000000  4.12500000  0.08838835 -2.15033062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  0.70710678 -1.66852709 -0.23570226  2.50000000 -1.03851698  0.42067622</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19]  0.16834091 14.37500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]         NA         NA         NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  0.1250000  1.1250000 -0.7500000  0.6250000  0.2972769  0.1638615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  1.4733366 -1.9047375 -0.2407092 -0.4220484  0.5779516  2.7500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] -0.6567438  9.8315993</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $arg_max_v</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA  9  3 20  4  9  2 11  2 16 19  2 18  5 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA  9 18 14  5  9 18 19 11 13 17  9  5 10 18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

@@ -106,6 +106,16 @@ string “NA”, but the rest of ‘vertices’ is not touched. In other words,
 vertex names (=the first column) cannot be `NA`, but other vertex
 attributes can.
 
+## Related documentation in the C library
+
+[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
@@ -156,10 +166,10 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> IGRAPH d0d3e62 DN-- 5 6 -- 
+#> IGRAPH e3a25bb DN-- 5 6 -- 
 #> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),
 #> | friendship (e/n), advice (e/n)
-#> + edges from d0d3e62 (vertex names):
+#> + edges from e3a25bb (vertex names):
 #> [1] Bob      ->Alice Cecil    ->Bob   Cecil    ->Alice David    ->Alice
 #> [5] David    ->Bob   Esmeralda->Alice
 

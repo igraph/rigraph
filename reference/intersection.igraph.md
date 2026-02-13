@@ -55,6 +55,14 @@ present in all graphs, and it is not renamed in the result graph.
 An error is generated if some input graphs are directed and others are
 undirected.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -78,6 +86,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -96,7 +105,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> IGRAPH fa60db7 UN-- 13 4 -- 
+#> IGRAPH 590f48c UN-- 13 4 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -113,6 +122,6 @@ print_all(net1 %s% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from fa60db7 (vertex names):
+#> + edges from 590f48c (vertex names):
 #> [1] F--H A--B D--F D--A
 ```

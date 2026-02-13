@@ -19,7 +19,7 @@ well as some additional variants with useful properties."><meta property="og:ima
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ well as some additional variants with useful properties."><meta property="og:ima
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Random graph with given expected degrees</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_chung_lu.Rd</code></div>
     </div>
 
@@ -190,6 +190,10 @@ variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as
 Van Der Hofstad (2013).</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game" class="external-link"><code>chung_lu_game()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Chung, F., and Lu, L. (2002). Connected components in a random
 graph with given degree sequences. Annals of Combinatorics, 6, 125-145.
@@ -245,10 +249,6 @@ fixed connection probability \(p\) between all vertex pairs.</p>
 <code><a href="sample_traits_callaway.html">sample_traits_callaway()</a></code>,
 <code><a href="sample_tree.html">sample_tree()</a></code></p></div>
     </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game" class="external-link"><code>chung_lu_game()</code></a>.</p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -259,13 +259,13 @@ fixed connection probability \(p\) between all vertex pairs.</p>
 <span class="r-in"><span>  <span class="fl">100</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="fu">sample_chung_lu</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.88 3.04 1.96 1.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.18 3.05 2.00 1.04</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fl">100</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="fu">sample_chung_lu</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, variant <span class="op">=</span> <span class="st">"maxent"</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.77 1.71 1.37 0.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.74 1.69 1.15 0.74</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

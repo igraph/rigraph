@@ -50,6 +50,14 @@ graph, and taking the maximum.
 This implementation ignores vertex pairs that are in different
 components. Isolated vertices have eccentricity zero.
 
+## Related documentation in the C library
+
+[`radius_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_radius_dijkstra),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35, 1994.
@@ -67,10 +75,6 @@ Other paths:
 [`distance_table()`](https://r.igraph.org/reference/distances.md),
 [`eccentricity()`](https://r.igraph.org/reference/eccentricity.md),
 [`graph_center()`](https://r.igraph.org/reference/graph_center.md)
-
-## Related documentation in the C library
-
-[`radius_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_radius_dijkstra).
 
 ## Examples
 

@@ -105,6 +105,15 @@ For directed graphs the embedding is defined as the pair
 \\X=U^{no}D^{1/2}\\ and \\Y=V^{no}D^{1/2}\\. (For undirected graphs
 \\U=V\\, so it is enough to keep one of them.)
 
+## Related documentation in the C library
+
+[`adjacency_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_adjacency_spectral_embedding),
+[[`strength()`](https://r.igraph.org/reference/strength.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_strength),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E. A Consistent
@@ -118,10 +127,6 @@ of the American Statistical Association*, Vol. 107(499), 2012
 Other embedding:
 [`dim_select()`](https://r.igraph.org/reference/dim_select.md),
 [`embed_laplacian_matrix()`](https://r.igraph.org/reference/embed_laplacian_matrix.md)
-
-## Related documentation in the C library
-
-[`adjacency_spectral_embedding()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_adjacency_spectral_embedding).
 
 ## Examples
 

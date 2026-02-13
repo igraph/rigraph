@@ -36,9 +36,9 @@ barabasi.game(
 
 - m:
 
-  Numeric constant, the number of edges to add in each time step This
-  argument is only used if both `out.dist` and `out.seq` are omitted or
-  NULL.
+  Numeric constant, the number of edges to add in each time step,
+  defaults to 1. This argument is only used if both `out.dist` and
+  `out.seq` are omitted or NULL.
 
 - out.dist:
 
@@ -89,3 +89,8 @@ barabasi.game(
   graph should have at least one vertex. If a graph is supplied here and
   the `out.seq` argument is not `NULL`, then it should contain the out
   degrees of the new vertices only, not the ones in the `start.graph`.
+
+## Related documentation in the C library
+
+[`barabasi_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

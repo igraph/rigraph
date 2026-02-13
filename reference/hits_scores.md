@@ -76,6 +76,14 @@ of the graph.
 For undirected matrices the adjacency matrix is symmetric and the hub
 scores are the same as authority scores.
 
+## Related documentation in the C library
+
+[`hub_and_authority_scores()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 J. Kleinberg. Authoritative sources in a hyperlinked environment. *Proc.
@@ -104,10 +112,6 @@ Centrality measures
 [`spectrum()`](https://r.igraph.org/reference/spectrum.md),
 [`strength()`](https://r.igraph.org/reference/strength.md),
 [`subgraph_centrality()`](https://r.igraph.org/reference/subgraph_centrality.md)
-
-## Related documentation in the C library
-
-[`hub_and_authority_scores()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores).
 
 ## Examples
 

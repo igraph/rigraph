@@ -17,3 +17,7 @@ convex.hull(data)
 - data:
 
   The data points, a numeric matrix with two columns.
+
+## Related documentation in the C library
+
+[`convex_hull_2d()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d)

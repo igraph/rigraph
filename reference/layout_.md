@@ -59,15 +59,41 @@ and then merged to get the final results.
 
 ## Modifiers
 
-Modifiers modify how a layout calculation is performed. Currently
-implemented modifiers:
+Modifiers modify how a layout calculation is performed. Modifiers are
+applied in the order they are specified as arguments to `layout_()`.
+
+There are two types of modifiers:
+
+- **Pre-layout modifiers** affect how the layout is calculated. Only one
+  pre-layout modifier can be used at a time.
+
+- **Post-layout modifiers** transform the resulting coordinates.
+  Multiple post-layout modifiers can be chained together.
+
+Currently implemented modifiers:
 
 - [`component_wise()`](https://r.igraph.org/reference/component_wise.md)
-  calculates the layout separately for each component of the graph, and
-  then merges them.
+  (pre-layout) calculates the layout separately for each component of
+  the graph, and then merges them.
 
-- [`normalize()`](https://r.igraph.org/reference/normalize.md) scales
-  the layout to a square.
+- [`normalize()`](https://r.igraph.org/reference/normalize.md)
+  (post-layout) scales the layout to a square.
+
+Custom modifiers can be created using the
+[`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
+function. A custom modifier must specify:
+
+- `id`: A unique identifier string for the modifier
+
+- `type`: Either `"pre"` for pre-layout or `"post"` for post-layout
+
+- `args`: A list of arguments to pass to the apply function
+
+- `apply`: A function with signature
+  `function(graph, layout, modifier_args)` that performs the
+  modification. For pre-layout modifiers, `layout` is the layout
+  specification. For post-layout modifiers, `layout` is the coordinate
+  matrix to transform.
 
 ## See also
 
@@ -103,4 +129,25 @@ Other graph layouts:
 g <- make_ring(10) + make_full_graph(5)
 coords <- layout_(g, as_star())
 plot(g, layout = coords)
+
+
+# Using modifiers
+g <- make_ring(10) + make_ring(5)
+coords <- layout_(g, in_circle(), component_wise(), normalize())
+plot(g, layout = coords)
+
+
+# Creating a custom post-layout modifier
+scale_by <- function(factor) {
+  layout_modifier(
+    id = "scale_by",
+    type = "post",
+    args = list(factor = factor),
+    apply = function(graph, layout, modifier_args) {
+      layout * modifier_args$factor
+    }
+  )
+}
+coords <- layout_(make_ring(10), in_circle(), scale_by(3))
+plot(make_ring(10), layout = coords)
 ```

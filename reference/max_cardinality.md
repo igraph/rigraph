@@ -42,6 +42,11 @@ The algorithm provides a simple basis for deciding whether a graph is
 chordal, see References below, and also
 [`is_chordal()`](https://r.igraph.org/reference/is_chordal.md).
 
+## Related documentation in the C library
+
+[`maximum_cardinality_search()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_cardinality_search),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 Robert E Tarjan and Mihalis Yannakakis. (1984). Simple linear-time
@@ -60,10 +65,6 @@ Other chordal:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`maximum_cardinality_search()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_cardinality_search).
-
 ## Examples
 
 ``` r
@@ -78,7 +79,7 @@ max_cardinality(g1)
 #> [1] 9 4 6 8 3 5 7 2 1
 #> 
 #> $alpham1
-#> + 9/9 vertices, named, from 1fa6440:
+#> + 9/9 vertices, named, from 7634225:
 #> [1] G F D B E C H I A
 #> 
 is_chordal(g1, fillin = TRUE)
@@ -102,7 +103,7 @@ max_cardinality(g2)
 #>  [1] 10  8  9  6  7  5  4  2  3  1
 #> 
 #> $alpham1
-#> + 10/10 vertices, named, from 5d0268f:
+#> + 10/10 vertices, named, from c597ecd:
 #>  [1] J H I G C F D B E A
 #> 
 is_chordal(g2, fillin = TRUE)

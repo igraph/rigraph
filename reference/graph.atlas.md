@@ -17,3 +17,7 @@ graph.atlas(n)
 - n:
 
   The id of the graph to create.
+
+## Related documentation in the C library
+
+[[`atlas()`](https://r.igraph.org/reference/graph_from_atlas.md)](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)

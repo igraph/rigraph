@@ -85,6 +85,14 @@ The three functions documented on this page calculate similar
 properties, more precisely the most general is `edge_connectivity()`,
 the others are included only for having more descriptive function names.
 
+## Related documentation in the C library
+
+[`st_edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity),
+[`edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edge_disjoint_paths()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_disjoint_paths),
+[`adhesion()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion)
+
 ## References
 
 Douglas R. White and Frank Harary (2001): The cohesiveness of blocks in

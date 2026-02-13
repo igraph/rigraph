@@ -42,6 +42,14 @@ graph_center(graph, ..., weights = NULL, mode = c("all", "out", "in", "total"))
 
 The vertex IDs of the central vertices.
 
+## Related documentation in the C library
+
+[`graph_center_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_graph_center_dijkstra),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 [`eccentricity()`](https://r.igraph.org/reference/eccentricity.md),
@@ -54,22 +62,18 @@ Other paths:
 [`eccentricity()`](https://r.igraph.org/reference/eccentricity.md),
 [`radius()`](https://r.igraph.org/reference/radius.md)
 
-## Related documentation in the C library
-
-[`graph_center_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_graph_center_dijkstra).
-
 ## Examples
 
 ``` r
 tree <- make_tree(100, 7)
 graph_center(tree)
-#> + 2/100 vertices, from 93983f0:
+#> + 2/100 vertices, from 0576fcf:
 #> [1] 1 2
 graph_center(tree, mode = "in")
-#> + 1/100 vertex, from 93983f0:
+#> + 1/100 vertex, from 0576fcf:
 #> [1] 1
 graph_center(tree, mode = "out")
-#> + 85/100 vertices, from 93983f0:
+#> + 85/100 vertices, from 0576fcf:
 #>  [1]  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
 #> [20]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
 #> [39]  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
@@ -79,11 +83,11 @@ graph_center(tree, mode = "out")
 # Without and with weights
 ring <- make_ring(10)
 graph_center(ring)
-#> + 10/10 vertices, from 7135aac:
+#> + 10/10 vertices, from 26ac9ed:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 # Add weights
 E(ring)$weight <- seq_len(ecount(ring))
 graph_center(ring)
-#> + 1/10 vertex, from 7135aac:
+#> + 1/10 vertex, from 26ac9ed:
 #> [1] 7
 ```

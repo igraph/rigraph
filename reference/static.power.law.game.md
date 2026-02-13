@@ -46,14 +46,17 @@ static.power.law.game(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the generated graph.
+  Logical scalar, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the generated
-  graph.
+  Logical scalar, whether to allow multiple edges in the graph.
 
 - finite.size.correction:
 
   Logical scalar, whether to use the proposed finite size correction of
   Cho et al., see references below.
+
+## Related documentation in the C library
+
+[`static_power_law_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game)

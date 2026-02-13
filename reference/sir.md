@@ -126,6 +126,10 @@ Freedman-Diaconis heuristics to determine the bin width.
 Function `median` and `quantile` calculate the median and quantiles of
 the results, respectively, in bins calculated with `time_bins()`.
 
+## Related documentation in the C library
+
+[`sir()`](https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir)
+
 ## References
 
 Bailey, Norman T. J. (1975). The mathematical theory of infectious
@@ -143,10 +147,6 @@ Processes on graphs
 
 Gabor Csardi <csardi.gabor@gmail.com>. Eric Kolaczyk
 (<https://kolaczyk.github.io/>) wrote the initial version in R.
-
-## Related documentation in the C library
-
-[`sir()`](https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir).
 
 ## Examples
 

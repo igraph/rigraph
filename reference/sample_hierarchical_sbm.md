@@ -7,7 +7,7 @@ Sampling from a hierarchical stochastic block model of networks.
 ``` r
 sample_hierarchical_sbm(n, m, rho, C, p)
 
-hierarchical_sbm(...)
+hierarchical_sbm(n, m, rho, C, p)
 ```
 
 ## Arguments
@@ -41,10 +41,6 @@ hierarchical_sbm(...)
   Numeric scalar, the Bernoulli rate of connections between vertices in
   different blocks.
 
-- ...:
-
-  Passed to `sample_hierarchical_sbm()`.
-
 ## Value
 
 An igraph graph.
@@ -53,6 +49,11 @@ An igraph graph.
 
 The function generates a random graph according to the hierarchical
 stochastic block model.
+
+## Related documentation in the C library
+
+[`hsbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_game),
+[`hsbm_list_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_list_game)
 
 ## See also
 
@@ -88,11 +89,6 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`hsbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_game),
-[`hsbm_list_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_list_game).
-
 ## Examples
 
 ``` r
@@ -104,17 +100,17 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-#> IGRAPH 67e11b8 U--- 100 452 -- Hierarchical stochastic block model
+#> IGRAPH 4176865 U--- 100 468 -- Hierarchical stochastic block model
 #> + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
-#> + edges from 67e11b8:
-#>  [1]  1-- 2  1-- 3  2-- 3  1-- 4  2-- 4  3-- 4  2-- 5  1-- 6  2-- 6  3-- 6
-#> [11]  4-- 7  5-- 7  4-- 8  5-- 8  6-- 8  4-- 9  6-- 9  4--10  5--10  6--10
-#> [21]  7-- 8  8-- 9  7--10  8--10  9--10 11--12 11--13 12--13 11--14 13--14
-#> [31] 11--15 12--15 11--16 12--16 13--16 14--17 15--17 16--17 14--18 15--18
-#> [41] 16--18 14--19 15--19 16--19 14--20 15--20 16--20 17--18 17--19 18--19
-#> [51] 17--20 18--20 19--20 21--22 21--23 22--23 22--24 23--24 21--25 22--25
-#> [61] 23--25 21--26 24--27 25--27 26--27 24--28 25--28 25--29 26--29 25--30
-#> [71] 26--30 27--28 27--29 28--29 27--30 28--30 31--32 31--33 32--33 32--34
+#> + edges from 4176865:
+#>  [1]  1-- 2  1-- 3  2-- 3  1-- 4  3-- 4  1-- 5  2-- 5  3-- 5  1-- 6  2-- 6
+#> [11]  3-- 6  6-- 7  5-- 8  6-- 8  4-- 9  6-- 9  4--10  6--10  7-- 8  7--10
+#> [21]  8--10  9--10 11--12 11--13 12--13 11--14 12--15 13--15 12--16 13--16
+#> [31] 14--17 15--17 16--17 14--18 16--18 15--19 16--19 14--20 17--18 17--19
+#> [41] 17--20 18--20 19--20 21--22 21--23 22--23 21--24 22--24 23--24 21--25
+#> [51] 22--25 23--25 21--26 22--26 23--26 24--27 25--27 26--27 25--28 26--28
+#> [61] 24--29 25--29 26--29 24--30 25--30 26--30 27--28 27--29 28--29 28--30
+#> [71] 31--32 31--33 32--33 32--34 33--34 31--36 32--36 33--36 34--37 35--37
 #> + ... omitted several edges
 
 library("Matrix")

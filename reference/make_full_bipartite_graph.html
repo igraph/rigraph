@@ -15,7 +15,7 @@ bipartite graph in which every possible edge is present."><meta property="og:ima
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ bipartite graph in which every possible edge is present."><meta property="og:ima
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create a full bipartite graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_full_bipartite_graph.Rd</code></div>
     </div>
 
@@ -65,7 +65,7 @@ bipartite graph in which every possible edge is present.</p>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">full_bipartite_graph</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">full_bipartite_graph</span><span class="op">(</span><span class="va">n1</span>, <span class="va">n2</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -91,10 +91,6 @@ connected to the others; ‘<code>in</code>’ specifies the opposite
 direction; ‘<code>all</code>’ creates mutual edges. This argument is
 ignored for undirected graphs.x</p></dd>
 
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_full_bipartite_graph()</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -105,6 +101,10 @@ ignored for undirected graphs.x</p></dd>
     <p>Bipartite graphs have a ‘<code>type</code>’ vertex attribute in igraph,
 this is boolean and <code>FALSE</code> for the vertices of the first kind and
 <code>TRUE</code> for vertices of the second kind.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_full_bipartite" class="external-link"><code>full_bipartite()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

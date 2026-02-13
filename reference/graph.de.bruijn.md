@@ -21,3 +21,7 @@ graph.de.bruijn(m, n)
 - n:
 
   Integer scalar, the length of the labels. See details below.
+
+## Related documentation in the C library
+
+[`de_bruijn()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_de_bruijn)

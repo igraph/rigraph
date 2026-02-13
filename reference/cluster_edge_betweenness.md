@@ -101,6 +101,13 @@ the edge IDs in order of the edges' removal; `edge.betweenness` contains
 the betweenness of each of these at the time of their removal; and
 `bridges` contains the IDs of edges whose removal caused a split.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 M Newman and M Girvan: Finding and evaluating community structure in

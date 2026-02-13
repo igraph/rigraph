@@ -39,3 +39,8 @@ automorphisms(
   maximally non-trivially connected non-singleton cell, ‘`flm`’: first
   largest maximally non-trivially connected non-singleton cell, ‘`fsm`’:
   first smallest maximally non-trivially connected non-singleton cell.
+
+## Related documentation in the C library
+
+[[`count_automorphisms()`](https://r.igraph.org/reference/count_automorphisms.md)](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

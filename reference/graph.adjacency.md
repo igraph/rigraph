@@ -63,3 +63,16 @@ graph.adjacency(
   Possible values the same as the previous argument. By default row
   names are not added. If ‘`add.rownames`’ and ‘`add.colnames`’ specify
   the same vertex attribute, then the former is ignored.
+
+## Related documentation in the C library
+
+[`adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency),
+[`weighted_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency),
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

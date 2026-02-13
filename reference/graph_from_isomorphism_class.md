@@ -31,6 +31,10 @@ graph_from_isomorphism_class(size, number, directed = TRUE)
 An igraph object, the graph of the given size, directedness and
 isomorphism class.
 
+## Related documentation in the C library
+
+[`isoclass_create()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create)
+
 ## See also
 
 Other graph isomorphism:
@@ -42,7 +46,3 @@ Other graph isomorphism:
 [`isomorphisms()`](https://r.igraph.org/reference/isomorphisms.md),
 [`subgraph_isomorphic()`](https://r.igraph.org/reference/subgraph_isomorphic.md),
 [`subgraph_isomorphisms()`](https://r.igraph.org/reference/subgraph_isomorphisms.md)
-
-## Related documentation in the C library
-
-[`isoclass_create()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create).

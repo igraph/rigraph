@@ -76,14 +76,19 @@ The Laplacian matrix \\L\\ is defined in terms of the adjacency matrix
 
 - "right": Right-stochastic normalized Laplacian, \\L = I - A D^{-1}\\.
 
-## Author
-
-Gabor Csardi <csardi.gabor@gmail.com>
-
 ## Related documentation in the C library
 
 [`get_laplacian()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_laplacian),
-[`get_laplacian_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_laplacian_sparse).
+[`get_laplacian_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_laplacian_sparse),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
+## Author
+
+Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Examples
 

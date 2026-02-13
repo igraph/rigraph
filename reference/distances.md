@@ -287,6 +287,18 @@ path length between each pair of vertices. For directed graphs both
 directions are considered, so every pair of vertices appears twice in
 the histogram.
 
+## Related documentation in the C library
+
+[`path_length_hist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_path_length_hist),
+[`average_path_length_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_path_length_dijkstra),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths),
+[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra)
+
 ## References
 
 West, D.B. (1996). *Introduction to Graph Theory.* Upper Saddle River,
@@ -331,11 +343,6 @@ Other paths:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`path_length_hist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_path_length_hist),
-[`average_path_length_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_path_length_dijkstra).
-
 ## Examples
 
 ``` r
@@ -355,43 +362,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> + 5/10 vertices, from 3816ecc:
+#> + 5/10 vertices, from b37a978:
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> + 4/10 vertices, from 3816ecc:
+#> + 4/10 vertices, from b37a978:
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> + 3/10 vertices, from 3816ecc:
+#> + 3/10 vertices, from b37a978:
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> + 2/10 vertices, from 3816ecc:
+#> + 2/10 vertices, from b37a978:
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> + 1/10 vertex, from 3816ecc:
+#> + 1/10 vertex, from b37a978:
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> + 2/10 vertices, from 3816ecc:
+#> + 2/10 vertices, from b37a978:
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> + 3/10 vertices, from 3816ecc:
+#> + 3/10 vertices, from b37a978:
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> + 4/10 vertices, from 3816ecc:
+#> + 4/10 vertices, from b37a978:
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> + 5/10 vertices, from 3816ecc:
+#> + 5/10 vertices, from b37a978:
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> + 6/10 vertices, from 3816ecc:
+#> + 6/10 vertices, from b37a978:
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -407,37 +414,37 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> + 6/10 vertices, from 3816ecc:
+#> + 6/10 vertices, from b37a978:
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> + 6/10 vertices, from 3816ecc:
+#> + 6/10 vertices, from b37a978:
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> + 5/10 vertices, from 3816ecc:
+#> + 5/10 vertices, from b37a978:
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> + 4/10 vertices, from 3816ecc:
+#> + 4/10 vertices, from b37a978:
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> + 5/10 edges from 3816ecc:
+#> + 5/10 edges from b37a978:
 #> [1] 1--10 9--10 8-- 9 7-- 8 6-- 7
 #> 
 #> $epaths[[2]]
-#> + 5/10 edges from 3816ecc:
+#> + 5/10 edges from b37a978:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 #> 
 #> $epaths[[3]]
-#> + 4/10 edges from 3816ecc:
+#> + 4/10 edges from b37a978:
 #> [1] 1--10 9--10 8-- 9 7-- 8
 #> 
 #> $epaths[[4]]
-#> + 3/10 edges from 3816ecc:
+#> + 3/10 edges from b37a978:
 #> [1] 1--10 9--10 8-- 9
 #> 
 #> 
@@ -446,19 +453,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> + 6/10 vertices, from 3816ecc:
+#> + 6/10 vertices, from b37a978:
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> + 6/10 vertices, from 3816ecc:
+#> + 6/10 vertices, from b37a978:
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> + 5/10 vertices, from 3816ecc:
+#> + 5/10 vertices, from b37a978:
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> + 4/10 vertices, from 3816ecc:
+#> + 4/10 vertices, from b37a978:
 #> [1]  1 10  9  8
 #> 
 #> 

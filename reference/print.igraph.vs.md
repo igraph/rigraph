@@ -40,6 +40,10 @@ Vertex sequence created with the double bracket operator are printed
 differently, together with all attributes of the vertices in the
 sequence, as a table.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other vertex and edge sequences:
@@ -60,20 +64,20 @@ Other vertex and edge sequences:
 # Unnamed graphs
 g <- make_ring(10)
 V(g)
-#> + 10/10 vertices, from 758b099:
+#> + 10/10 vertices, from ab54bbe:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Named graphs
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g2)
-#> + 10/10 vertices, named, from e124b5a:
+#> + 10/10 vertices, named, from 2f5645e:
 #>  [1] A B C D E F G H I J
 
 # All vertices in the sequence
 g3 <- make_ring(1000)
 V(g3)
-#> + 1000/1000 vertices, from 82c5a44:
+#> + 1000/1000 vertices, from d5ea3e0:
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -86,7 +90,7 @@ V(g3)
 #>  [127]  127  128  129  130  131  132  133  134  135  136  137  138  139  140
 #> + ... omitted several vertices
 print(V(g3), full = TRUE)
-#> + 1000/1000 vertices, from 82c5a44:
+#> + 1000/1000 vertices, from d5ea3e0:
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -165,7 +169,7 @@ g4 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10]) %>%
   set_vertex_attr("color", value = "red")
 V(g4)[[]]
-#> + 10/10 vertices, named, from d977a21:
+#> + 10/10 vertices, named, from 5311b55:
 #>    name color
 #> 1     A   red
 #> 2     B   red
@@ -178,7 +182,7 @@ V(g4)[[]]
 #> 9     I   red
 #> 10    J   red
 V(g4)[[2:5, 7:8]]
-#> + 6/10 vertices, named, from d977a21:
+#> + 6/10 vertices, named, from 5311b55:
 #>   name color
 #> 2    B   red
 #> 3    C   red

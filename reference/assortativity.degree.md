@@ -24,3 +24,7 @@ assortativity.degree(graph, directed = TRUE)
   graphs. This argument is ignored for undirected graphs. Supply `TRUE`
   here to do the natural thing, i.e. use directed version of the measure
   for directed graphs and the undirected version for undirected graphs.
+
+## Related documentation in the C library
+
+[[`assortativity_degree()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree)

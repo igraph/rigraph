@@ -31,6 +31,10 @@ A `dim` (length of the `alpha` vector for `sample_dirichlet()`) times
 with given \\\alpha\\ parameter. The sample is drawn from
 `length(alpha)-1`-simplex.
 
+## Related documentation in the C library
+
+[`sample_dirichlet()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_dirichlet)
+
 ## See also
 
 Other latent position vector samplers:

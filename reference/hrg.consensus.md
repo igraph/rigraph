@@ -35,3 +35,7 @@ hrg.consensus(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 
   Number of samples to use for consensus generation or missing edge
   prediction.
+
+## Related documentation in the C library
+
+[`hrg_consensus()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus)

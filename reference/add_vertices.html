@@ -17,7 +17,7 @@ NA."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><b
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ NA."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><b
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Add vertices to a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
       <div class="d-none name"><code>add_vertices.Rd</code></div>
     </div>
 
@@ -93,6 +93,10 @@ below.</p></dd>
     <p>The graph, with the vertices (and attributes) added.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices" class="external-link"><code>add_vertices()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other functions for manipulating graph structure:
 <code><a href="plus-.igraph.html">+.igraph()</a></code>,
@@ -115,6 +119,7 @@ below.</p></dd>
 <code><a href="rep.igraph.html">rep.igraph()</a></code>,
 <code><a href="reverse_edges.html">reverse_edges()</a></code>,
 <code><a href="simplify.html">simplify()</a></code>,
+<code><a href="transitive_closure.html">transitive_closure()</a></code>,
 <code><a href="union.html">union()</a></code>,
 <code><a href="union.igraph.html">union.igraph()</a></code>,
 <code><a href="vertex.html">vertex()</a></code></p></div>
@@ -132,12 +137,12 @@ below.</p></dd>
 <span class="r-in"><span>    <span class="fl">4</span>, <span class="fl">5</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ca2d760 D--- 5 4 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 53cd3e2 D--- 5 4 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: color (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ca2d760:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 53cd3e2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4 4-&gt;5</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 vertices, from ca2d760:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 vertices, from 53cd3e2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   red</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   red</span>

@@ -35,3 +35,10 @@ similarity.jaccard(
 - loops:
 
   Whether to include vertices themselves in the neighbor sets.
+
+## Related documentation in the C library
+
+[`similarity_dice()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice),
+[`similarity_inverse_log_weighted()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted),
+[`similarity_jaccard()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

@@ -32,6 +32,14 @@ Right now the following objects are supported:
   [`consensus_tree()`](https://r.igraph.org/reference/consensus_tree.md)
   functions.
 
+## Related documentation in the C library
+
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
+
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>.
@@ -42,9 +50,9 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> IGRAPH 6fba83c DN-- 19 18 -- Fitted HRG
+#> IGRAPH af5f606 DN-- 19 18 -- Fitted HRG
 #> + attr: name (g/c), name (v/c), prob (v/n)
-#> + edges from 6fba83c (vertex names):
+#> + edges from af5f606 (vertex names):
 #>  [1] g1->g4 g2->g6 g3->g9 g4->g5 g5->g3 g6->6  g7->7  g8->8  g9->1  g1->g2
 #> [11] g2->g7 g3->2  g4->3  g5->5  g6->9  g7->g8 g8->10 g9->4 
 ```

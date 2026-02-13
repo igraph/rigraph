@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The Page Rank algorithm</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
       <div class="d-none name"><code>page_rank.Rd</code></div>
     </div>
 
@@ -155,6 +155,10 @@ PageRank for only some of the vertices does not result in any performance
 increase at all.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank" class="external-link"><code>personalized_pagerank()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code><a href="gsize.html">ecount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Sergey Brin and Larry Page: The Anatomy of a Large-Scale
 Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
@@ -183,20 +187,16 @@ Conference, Brisbane, Australia, April 1998.</p>
     <p>Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> and Gabor Csardi
 <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
     </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank" class="external-link"><code>personalized_pagerank()</code></a>.</p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span> <span class="op">/</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">page_rank</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.07461604 0.02846375 0.05027611 0.03185239 0.04070845 0.08028440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.05465747 0.03305534 0.05659133 0.02317787 0.05008794 0.03142401</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.07471363 0.09566876 0.01078353 0.07489727 0.01963811 0.03487668</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 0.07330366 0.06092326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.04197122 0.04726315 0.03174648 0.06098307 0.01572577 0.07393040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.04961456 0.06815133 0.07539157 0.02844695 0.04786014 0.03629319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.05245524 0.02172359 0.06774167 0.03692350 0.07056335 0.03603099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 0.02574853 0.11143532</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">page_rank</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>

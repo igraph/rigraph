@@ -32,3 +32,8 @@ graph.full.bipartite(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
   is ‘`out`’ then all vertices of the first kind are connected to the
   others; ‘`in`’ specifies the opposite direction; ‘`all`’ creates
   mutual edges. This argument is ignored for undirected graphs.x
+
+## Related documentation in the C library
+
+[`full_bipartite()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_full_bipartite),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

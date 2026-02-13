@@ -15,7 +15,7 @@ external property) tend to connect to each, and negative otherwise."><meta prope
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ external property) tend to connect to each, and negative otherwise."><meta prope
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Assortativity coefficient</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/assortativity.R" class="external-link"><code>R/assortativity.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/assortativity.R" class="external-link"><code>R/assortativity.R</code></a></small>
       <div class="d-none name"><code>assortativity.Rd</code></div>
     </div>
 
@@ -125,7 +125,8 @@ Deprecated aliases for <code>values</code> and <code>values.in</code>, respectiv
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>.</p></dd>
+with <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>. Character vectors are converted to integers using
+<code><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -164,6 +165,10 @@ and calls <code>assortativity()</code>.</p>
 Thus, self-loops are taken into account twice in undirected graphs.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity" class="external-link"><code>assortativity()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal" class="external-link"><code>assortativity_nominal()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree" class="external-link"><code>assortativity_degree()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>M. E. J. Newman: Mixing patterns in networks, <em>Phys. Rev.
 E</em> 67, 026126 (2003) <a href="https://arxiv.org/abs/cond-mat/0209450" class="external-link">https://arxiv.org/abs/cond-mat/0209450</a></p>
@@ -173,10 +178,6 @@ E</em> 67, 026126 (2003) <a href="https://arxiv.org/abs/cond-mat/0209450" class=
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
-    </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity" class="external-link"><code>assortativity()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal" class="external-link"><code>assortativity_nominal()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree" class="external-link"><code>assortativity_degree()</code></a>.</p>
     </div>
 
     <div class="section level2">

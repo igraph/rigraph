@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Line graph of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_line_graph.Rd</code></div>
     </div>
 
@@ -57,7 +57,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_line_graph</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">line_graph</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">line_graph</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,10 +66,6 @@
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph, it can be directed or undirected.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_line_graph()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -89,6 +85,10 @@ the first vertex's corresponding edge is the same as the source of the
 second vertex's corresponding edge.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_linegraph" class="external-link"><code>linegraph()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a>, the first version of
 the C code was written by Vincent Matossian.</p>
@@ -100,20 +100,20 @@ the C code was written by Vincent Matossian.</p>
 <span class="r-in"><span><span class="co"># generate the first De-Bruijn graphs</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">2</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">make_line_graph</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f10bc47 D--- 4 8 -- Line graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8dd602b D--- 4 8 -- Line graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f10bc47:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8dd602b:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;1 3-&gt;1 1-&gt;2 3-&gt;2 2-&gt;3 4-&gt;3 2-&gt;4 4-&gt;4</span>
 <span class="r-in"><span><span class="fu">make_line_graph</span><span class="op">(</span><span class="fu">make_line_graph</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3b27a92 D--- 8 16 -- Line graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d642ded D--- 8 16 -- Line graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3b27a92:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d642ded:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-&gt;1 2-&gt;1 5-&gt;2 6-&gt;2 1-&gt;3 2-&gt;3 5-&gt;4 6-&gt;4 3-&gt;5 4-&gt;5 7-&gt;6 8-&gt;6 3-&gt;7 4-&gt;7 7-&gt;8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] 8-&gt;8</span>
 <span class="r-in"><span><span class="fu">make_line_graph</span><span class="op">(</span><span class="fu">make_line_graph</span><span class="op">(</span><span class="fu">make_line_graph</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH df1e42b D--- 16 32 -- Line graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 863007c D--- 16 32 -- Line graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from df1e42b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 863007c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 1  2-&gt; 1  3-&gt; 2  4-&gt; 2  9-&gt; 3 10-&gt; 3 11-&gt; 4 12-&gt; 4  1-&gt; 5  2-&gt; 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3-&gt; 6  4-&gt; 6  9-&gt; 7 10-&gt; 7 11-&gt; 8 12-&gt; 8  5-&gt; 9  6-&gt; 9  7-&gt;10  8-&gt;10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] 13-&gt;11 14-&gt;11 15-&gt;12 16-&gt;12  5-&gt;13  6-&gt;13  7-&gt;14  8-&gt;14 13-&gt;15 14-&gt;15</span>

@@ -11,8 +11,8 @@ k_shortest_paths(
   graph,
   from,
   to,
-  ...,
   k,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total")
 )
@@ -32,14 +32,14 @@ k_shortest_paths(
 
   The target vertex of the shortest paths.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - k:
 
   The number of paths to find. They will be returned in order of
   increasing length.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -69,6 +69,14 @@ A named list with two components is returned:
 - epaths:
 
   The list of \\k\\ shortest paths in terms of edges
+
+## Related documentation in the C library
+
+[`get_k_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 
@@ -107,7 +115,3 @@ Other structural.properties:
 [`unfold_tree()`](https://r.igraph.org/reference/unfold_tree.md),
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
-
-## Related documentation in the C library
-
-[`get_k_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths).

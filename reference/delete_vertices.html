@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Delete vertices from a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.2/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
       <div class="d-none name"><code>delete_vertices.Rd</code></div>
     </div>
 
@@ -75,6 +75,10 @@
     <p>The graph, with the vertices removed.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_vertices" class="external-link"><code>delete_vertices()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other functions for manipulating graph structure:
 <code><a href="plus-.igraph.html">+.igraph()</a></code>,
@@ -97,6 +101,7 @@
 <code><a href="rep.igraph.html">rep.igraph()</a></code>,
 <code><a href="reverse_edges.html">reverse_edges()</a></code>,
 <code><a href="simplify.html">simplify()</a></code>,
+<code><a href="transitive_closure.html">transitive_closure()</a></code>,
 <code><a href="union.html">union()</a></code>,
 <code><a href="union.igraph.html">union.igraph()</a></code>,
 <code><a href="vertex.html">vertex()</a></code></p></div>
@@ -107,23 +112,23 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"name"</span>, value <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 611d59f UN-- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6e68cad UN-- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 611d59f (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6e68cad (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 611d59f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 6e68cad:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A B C D E F G H I J</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">delete_vertices</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">delete_vertices</span><span class="op">(</span><span class="st">"B"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0c502b6 UN-- 7 5 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 19c8183 UN-- 7 5 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0c502b6 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 19c8183 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] C--D F--G G--H H--I I--J</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/7 vertices, named, from 0c502b6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/7 vertices, named, from 19c8183:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] C D F G H I J</span>
 </code></pre></div>
     </div>

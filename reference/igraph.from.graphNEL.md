@@ -34,3 +34,12 @@ igraph.from.graphNEL(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
   of the attributes in R lists, if this argument is `TRUE` (the default)
   these will be converted to atomic vectors, whenever possible, before
   adding them to the igraph graph.
+
+## Related documentation in the C library
+
+[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
+[`adjlist()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

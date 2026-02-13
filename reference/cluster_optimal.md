@@ -68,6 +68,14 @@ hundred vertices might be possible.
     fc <- cluster_fast_greedy(g)
     print(modularity(fc))
 
+## Related documentation in the C library
+
+[`community_optimal_modularity()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_optimal_modularity),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 Ulrik Brandes, Daniel Delling, Marco Gaertler, Robert Gorke, Martin

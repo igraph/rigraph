@@ -37,6 +37,11 @@ A vertex sequence (by default, but see the `return.vs.es` option of
 [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md))
 containing the feedback vertex set.
 
+## Related documentation in the C library
+
+[`feedback_vertex_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_vertex_set),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural.properties:
@@ -74,15 +79,11 @@ Graph cycles
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md),
 [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
 
-## Related documentation in the C library
-
-[`feedback_vertex_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_vertex_set).
-
 ## Examples
 
 ``` r
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> + 2/9 vertices, from 51b5808:
+#> + 2/9 vertices, from 317ad16:
 #> [1] 2 8
 ```

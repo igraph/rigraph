@@ -17,3 +17,8 @@ largest.cliques(graph)
 - graph:
 
   The input graph.
+
+## Related documentation in the C library
+
+[[`largest_cliques()`](https://r.igraph.org/reference/cliques.md)](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_cliques),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

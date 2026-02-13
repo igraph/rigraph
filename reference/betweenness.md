@@ -108,6 +108,16 @@ by Brandes (see References) is used.
 `edge_betweenness()` might give false values for graphs with multiple
 edges.
 
+## Related documentation in the C library
+
+[`betweenness_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_betweenness_cutoff),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`edge_betweenness_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_edge_betweenness_cutoff)
+
 ## References
 
 Freeman, L.C. (1979). Centrality in Social Networks I: Conceptual
