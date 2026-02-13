@@ -7750,12 +7750,9 @@ SEXP Rx_igraph_add_env(SEXP graph) {
   int px = 0;
 
   if (Rf_xlength(graph) <= igraph_t_idx_env) {
-    PROTECT(result = NEW_LIST(igraph_t_idx_max)); px++;
-    for (i = 0; i < igraph_t_idx_env; i++) {
-      SET_VECTOR_ELT(result, i, Rf_duplicate(VECTOR_ELT(graph, i)));
-    }
-    SET_ATTRIB(result, Rf_duplicate(ATTRIB(graph)));
-    SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
+    PROTECT(result = Rf_duplicate(graph)); px++;
+    PROTECT(result = Rf_lengthgets(result, igraph_t_idx_env + 1)); px++;
+    Rf_copyMostAttrib(graph, result);
   }
 
   // Get the base namespace
