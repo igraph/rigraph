@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9022
+
+## Continuous integration
+
+- Push pkgdown on schedule.
+
+
 # igraph 2.2.1.9021
 
 ## Bug fixes
