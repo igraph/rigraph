@@ -1,5 +1,11 @@
 # Changelog
 
+## igraph 2.2.1.9022
+
+### Continuous integration
+
+- Push pkgdown on schedule.
+
 ## igraph 2.2.1.9021
 
 ### Bug fixes
@@ -642,6 +648,13 @@
 
 - Improve centralitystress test
   ([\#2214](https://github.com/igraph/rigraph/issues/2214)).
+
+## igraph 2.2.2
+
+### Chore
+
+- Remove calls to unused APIs only used in the conversion of very old
+  graph objects.
 
 ## igraph 2.2.1
 
