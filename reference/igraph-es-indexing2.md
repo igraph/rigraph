@@ -76,10 +76,10 @@ g <- make_(
   with_edge_(weight = 1:10, color = "green")
 )
 E(g)
-#> + 10/10 edges from 8e01cc8 (vertex names):
+#> + 10/10 edges from a6fdb67 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 E(g)[[]]
-#> + 10/10 edges from 8e01cc8 (vertex names):
+#> + 10/10 edges from a6fdb67 (vertex names):
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 2     B    C   2   3      2 green
@@ -92,7 +92,7 @@ E(g)[[]]
 #> 9     I    J   9  10      9 green
 #> 10    A    J   1  10     10 green
 E(g)[[.inc("A")]]
-#> + 2/10 edges from 8e01cc8 (vertex names):
+#> + 2/10 edges from a6fdb67 (vertex names):
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 10    A    J   1  10     10 green
