@@ -53,7 +53,7 @@ argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 first.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

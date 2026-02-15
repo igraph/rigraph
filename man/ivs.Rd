@@ -73,7 +73,7 @@ reference below.
 \code{is_ivs()} tests if no pairs within a vertex set are connected.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_independent_vertex_sets}{\code{largest_independent_vertex_sets()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_independent_vertex_sets}{\code{maximal_independent_vertex_sets()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number}{\code{independence_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{is_independent_vertex_set()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_independent_vertex_sets}{\code{largest_independent_vertex_sets}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_independent_vertex_sets}{\code{maximal_independent_vertex_sets}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number}{\code{independence_number}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{is_independent_vertex_set}}
 }
 
 \examples{

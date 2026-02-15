@@ -21,7 +21,7 @@ An igraph graph.
 A graph with no edges
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty}}
 }
 
 \examples{

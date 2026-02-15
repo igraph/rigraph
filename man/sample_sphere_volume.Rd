@@ -31,7 +31,7 @@ random dot product graphs
 smaller or equal to \code{radius}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume}{\code{sample_sphere_volume()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume}{\code{sample_sphere_volume}}
 }
 
 \examples{

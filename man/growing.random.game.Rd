@@ -23,7 +23,7 @@ each time step the added edges are originating from the new vertex.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game}}
 }
 
 \keyword{internal}

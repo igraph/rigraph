@@ -16,7 +16,7 @@ maximal_ivs(graph)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_independent_vertex_sets}{\code{maximal_independent_vertex_sets()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_independent_vertex_sets}{\code{maximal_independent_vertex_sets}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \keyword{internal}

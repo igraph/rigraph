@@ -29,7 +29,7 @@ does not check whether the graph has multi-edges and will return meaningless
 results for such graphs.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density}}
 }
 
 \examples{

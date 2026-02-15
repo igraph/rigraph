@@ -77,7 +77,7 @@ This functions uses the RANDESU motif finder algorithm to find and count the
 subgraphs, see \code{\link[=motifs]{motifs()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census}{\code{triad_census()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census}{\code{triad_census}}
 }
 
 \examples{

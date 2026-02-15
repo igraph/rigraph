@@ -66,7 +66,7 @@ distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_
 which generates the fitnesses for you with a given exponent.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game}}
 }
 
 \examples{

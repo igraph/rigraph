@@ -27,7 +27,7 @@ missing edge prediction.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus}}
 }
 
 \keyword{internal}

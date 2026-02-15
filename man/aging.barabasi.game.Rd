@@ -72,7 +72,7 @@ attachment. See also details below.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game}{\code{barabasi_aging_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game}{\code{recent_degree_aging_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game}{\code{barabasi_aging_game}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game}{\code{recent_degree_aging_game}}
 }
 
 \keyword{internal}

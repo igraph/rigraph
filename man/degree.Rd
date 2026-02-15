@@ -68,7 +68,7 @@ The degree of a vertex is its most basic structural property, the number of
 its adjacent edges.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree}}
 }
 
 \examples{

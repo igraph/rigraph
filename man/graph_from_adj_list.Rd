@@ -45,7 +45,7 @@ The idea is that you convert your graph to an adjacency list by
 create again an igraph graph by calling \code{graph_from_adj_list()}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist}{\code{adjlist}}
 }
 
 \examples{

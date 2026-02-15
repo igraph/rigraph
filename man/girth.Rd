@@ -37,7 +37,7 @@ symposium on Theory of computing}, 1-10, 1977. The first implementation of
 this function was done by Keith Briggs, thanks Keith.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

@@ -32,7 +32,7 @@ probabilities for the different vertex types.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game}}
 }
 
 \keyword{internal}

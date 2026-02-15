@@ -52,7 +52,7 @@ a result. \code{eulerian_cycle()} returns a possible Eulerian cycle, described
 with its edge and vertex sequence, or throws an error if no such cycle exists.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian}{\code{is_eulerian()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path}{\code{eulerian_path()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle}{\code{eulerian_cycle()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian}{\code{is_eulerian}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path}{\code{eulerian_path}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle}{\code{eulerian_cycle}}
 }
 
 \examples{

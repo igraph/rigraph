@@ -52,7 +52,7 @@ for a graph with the same number of vertices.
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality}}
 }
 
 \examples{

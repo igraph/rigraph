@@ -20,7 +20,7 @@ graph.isocreate(size, number, directed = TRUE)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create}}
 }
 
 \keyword{internal}

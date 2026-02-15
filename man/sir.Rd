@@ -105,7 +105,7 @@ quantiles of the results, respectively, in bins calculated with
 \code{time_bins()}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir}{\code{sir}}
 }
 
 \examples{

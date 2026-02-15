@@ -28,7 +28,7 @@ of a graph.
 \code{permute()} keeps all graph, vertex and edge attributes of the graph.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices}}
 }
 
 \examples{

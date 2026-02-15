@@ -36,7 +36,7 @@ partition is a subpartition of the other, since in this case, the
 corresponding distance will be zero.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_split_join_distance}{\code{split_join_distance()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_split_join_distance}{\code{split_join_distance}}
 }
 
 \references{

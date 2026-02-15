@@ -43,7 +43,7 @@ structure.  These functions search a graph for various motifs.
 size in a graph based on a sample.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \examples{

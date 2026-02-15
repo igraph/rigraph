@@ -21,7 +21,7 @@ it is set to \code{len(shifts) * repeats}.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector}}
 }
 
 \keyword{internal}

@@ -32,7 +32,7 @@ automorphisms.
 }
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas}}
 }
 
 \examples{

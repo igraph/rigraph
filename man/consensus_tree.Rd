@@ -47,7 +47,7 @@ sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
 first, and then samples starting from the optimum.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus}}
 }
 
 \seealso{

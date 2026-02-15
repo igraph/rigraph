@@ -25,7 +25,7 @@ possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 Please use \code{\link[=similarity]{similarity()}} with \code{method = "invlogweighted"} instead.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice}{\code{similarity_dice()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{similarity_inverse_log_weighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard}{\code{similarity_jaccard()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice}{\code{similarity_dice}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{similarity_inverse_log_weighted}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard}{\code{similarity_jaccard}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \keyword{internal}

@@ -16,7 +16,7 @@ has.multiple(graph)
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple}}
 }
 
 \keyword{internal}

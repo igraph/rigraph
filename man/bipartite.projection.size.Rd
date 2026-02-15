@@ -21,7 +21,7 @@ graph has no \sQuote{\code{type}} vertex attribute.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \keyword{internal}

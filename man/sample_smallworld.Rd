@@ -49,7 +49,7 @@ For appropriate choices of \code{p}, both models exhibit the property of
 simultaneously having short path lengths and high clustering.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game}}
 }
 
 \examples{

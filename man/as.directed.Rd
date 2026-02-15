@@ -21,7 +21,7 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_directed}{\code{to_directed()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_directed}{\code{to_directed}}
 }
 
 \keyword{internal}

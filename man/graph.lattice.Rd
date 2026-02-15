@@ -45,7 +45,7 @@ be extended to boolean vector with dimvector length.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice}}
 }
 
 \keyword{internal}

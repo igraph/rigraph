@@ -24,7 +24,7 @@ thanks Peter.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion}}
 }
 
 \keyword{internal}

@@ -28,7 +28,7 @@ An igraph graph.
 connected to the center vertex and nobody else.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star}}
 }
 
 \examples{

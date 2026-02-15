@@ -25,7 +25,7 @@ graph.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree}}
 }
 
 \keyword{internal}

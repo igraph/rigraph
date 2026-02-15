@@ -28,7 +28,7 @@ be performed.
 See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector}}
 }
 
 \examples{

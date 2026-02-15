@@ -46,7 +46,7 @@ is ignored for undirected graphs.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
 }
 
 \keyword{internal}
