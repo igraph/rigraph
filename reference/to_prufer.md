@@ -30,7 +30,7 @@ graph.
 
 ## Related documentation in the C library
 
-[`to_prufer()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_prufer)
+[`to_prufer`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_prufer)
 
 ## See also
 

@@ -37,8 +37,8 @@ number of partitions is greater than the number of vertices.
 
 ## Related documentation in the C library
 
-[`turan()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`turan`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

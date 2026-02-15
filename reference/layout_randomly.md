@@ -37,8 +37,8 @@ for other layout generators.
 
 ## Related documentation in the C library
 
-[`layout_random()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random),
-[`layout_random_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d)
+[`layout_random`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random),
+[`layout_random_3d`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d)
 
 ## See also
 

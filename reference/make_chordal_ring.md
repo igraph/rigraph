@@ -38,7 +38,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`extended_chordal_ring()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring)
+[`extended_chordal_ring`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring)
 
 ## See also
 

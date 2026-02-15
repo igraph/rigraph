@@ -29,8 +29,8 @@ A logical scalar, `TRUE` if edge `(v1, v2)` exists in the graph.
 
 ## Related documentation in the C library
 
-[`are_adjacent()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_are_adjacent),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`are_adjacent`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_are_adjacent),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -54,9 +54,9 @@ Other structural queries:
 ``` r
 ug <- make_ring(10)
 ug
-#> IGRAPH df4977b U--- 10 10 -- Ring graph
+#> IGRAPH 29a53c6 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from df4977b:
+#> + edges from 29a53c6:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 are_adjacent(ug, 1, 2)
 #> [1] TRUE
@@ -65,9 +65,9 @@ are_adjacent(ug, 2, 1)
 
 dg <- make_ring(10, directed = TRUE)
 dg
-#> IGRAPH a5044a7 D--- 10 10 -- Ring graph
+#> IGRAPH cf078e3 D--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from a5044a7:
+#> + edges from cf078e3:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 are_adjacent(ug, 1, 2)
 #> [1] TRUE

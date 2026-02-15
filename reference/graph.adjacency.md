@@ -66,13 +66,13 @@ graph.adjacency(
 
 ## Related documentation in the C library
 
-[`adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency),
-[`weighted_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency),
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`adjacency`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency),
+[`weighted_adjacency`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency),
+[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

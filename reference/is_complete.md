@@ -22,7 +22,7 @@ True if the graph is complete.
 
 ## Related documentation in the C library
 
-[`is_complete()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_complete)
+[`is_complete`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_complete)
 
 ## See also
 

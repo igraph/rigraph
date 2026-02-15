@@ -65,7 +65,7 @@ and then merges them via
 
 ## Related documentation in the C library
 
-[`layout_mds()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds)
+[`layout_mds`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds)
 
 ## References
 

@@ -42,4 +42,4 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 ## Related documentation in the C library
 
-[[`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal)
+[`assortativity_nominal`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal)

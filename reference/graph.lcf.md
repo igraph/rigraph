@@ -29,4 +29,4 @@ graph.lcf(n, shifts, repeats = 1)
 
 ## Related documentation in the C library
 
-[`lcf_vector()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector)
+[`lcf_vector`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector)

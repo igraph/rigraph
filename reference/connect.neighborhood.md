@@ -35,4 +35,4 @@ connect.neighborhood(graph, order, mode = c("all", "out", "in", "total"))
 
 ## Related documentation in the C library
 
-[`connect_neighborhood()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood)
+[`connect_neighborhood`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood)

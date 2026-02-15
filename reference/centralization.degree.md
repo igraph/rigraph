@@ -40,4 +40,4 @@ centralization.degree(
 
 ## Related documentation in the C library
 
-[`centralization_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree)
+[`centralization_degree`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree)

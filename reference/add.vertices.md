@@ -35,5 +35,5 @@ add.vertices(graph, nv, ..., attr = list())
 
 ## Related documentation in the C library
 
-[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`add_vertices`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

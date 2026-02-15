@@ -20,4 +20,4 @@ independence.number(graph)
 
 ## Related documentation in the C library
 
-[[`independence_number()`](https://r.igraph.org/reference/ivs.md)](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number)
+[`independence_number`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number)

@@ -74,8 +74,8 @@ following members:
 
 ## Related documentation in the C library
 
-[`hrg_fit()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_fit),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`hrg_fit`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_fit),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 

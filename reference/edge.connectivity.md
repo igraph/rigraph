@@ -42,6 +42,6 @@ edge.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 ## Related documentation in the C library
 
-[`st_edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity),
-[[`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`st_edge_connectivity`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity),
+[`edge_connectivity`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

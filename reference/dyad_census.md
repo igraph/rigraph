@@ -34,8 +34,8 @@ A named numeric vector with three elements:
 
 ## Related documentation in the C library
 
-[`dyad_census()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)
+[`dyad_census`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census),
+[`is_directed`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)
 
 ## References
 

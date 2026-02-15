@@ -30,8 +30,8 @@ A vertex sequence containing the neighbors of the input vertex.
 
 ## Related documentation in the C library
 
-[`neighbors()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_neighbors),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`neighbors`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_neighbors),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -57,6 +57,6 @@ g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)
 n34 <- neighbors(g, 34)
 intersection(n1, n34)
-#> + 4/34 vertices, from 7d04bf4:
+#> + 4/34 vertices, from 917cae0:
 #> [1]  9 14 20 32
 ```

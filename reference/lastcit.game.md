@@ -49,4 +49,4 @@ lastcit.game(
 
 ## Related documentation in the C library
 
-[`lastcit_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game)
+[`lastcit_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game)

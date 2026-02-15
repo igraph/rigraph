@@ -131,7 +131,7 @@ Hofstad (2013).
 
 ## Related documentation in the C library
 
-[`chung_lu_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game)
+[`chung_lu_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game)
 
 ## References
 

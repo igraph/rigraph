@@ -56,8 +56,8 @@ optimized to minimize edge crossings, using the Sugiyama algorithm (see
 
 ## Related documentation in the C library
 
-[`layout_bipartite()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`layout_bipartite`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

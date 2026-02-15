@@ -21,4 +21,4 @@ is.dag(graph)
 
 ## Related documentation in the C library
 
-[[`is_dag()`](https://r.igraph.org/reference/is_dag.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag)
+[`is_dag`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag)

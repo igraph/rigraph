@@ -27,11 +27,11 @@ The graph, with the edges removed.
 
 ## Related documentation in the C library
 
-[`delete_edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`delete_edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_edges),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -67,24 +67,24 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   delete_edges(seq(1, 9, by = 2))
 g
-#> IGRAPH c813407 U--- 10 5 -- Ring graph
+#> IGRAPH adef455 U--- 10 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from c813407:
+#> + edges from adef455:
 #> [1] 2-- 3 4-- 5 6-- 7 8-- 9 1--10
 
 g <- make_ring(10) %>%
   delete_edges("10|1")
 g
-#> IGRAPH 01ecd77 U--- 10 9 -- Ring graph
+#> IGRAPH 25260f2 U--- 10 9 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 01ecd77:
+#> + edges from 25260f2:
 #> [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10
 
 g <- make_ring(5)
 g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
-#> IGRAPH cef101b U--- 5 3 -- Ring graph
+#> IGRAPH c9dbfc7 U--- 5 3 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from cef101b:
+#> + edges from c9dbfc7:
 #> [1] 1--2 2--3 3--4
 ```

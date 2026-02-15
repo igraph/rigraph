@@ -83,11 +83,11 @@ second.
 
 ## Related documentation in the C library
 
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size)
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`bipartite_projection_size`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size)
 
 ## See also
 
@@ -127,13 +127,13 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH cfb45b5 UNW- 5 5 -- Event network
+#> IGRAPH 34c91c1 UNW- 5 5 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from cfb45b5 (vertex names):
+#> + edges from 34c91c1 (vertex names):
 #> [1] Alice--Bob   Alice--Dan   Bob  --Dan   Bob  --Ethel Dan  --Ethel
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH e4dbe91 UNW- 3 2 -- Event network
+#> IGRAPH 16658b5 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from e4dbe91 (vertex names):
+#> + edges from 16658b5 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

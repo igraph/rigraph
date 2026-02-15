@@ -47,11 +47,11 @@ every connected component is a tree).
 
 ## Related documentation in the C library
 
-[`feedback_arc_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`feedback_arc_set`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 
@@ -101,9 +101,9 @@ Graph cycles
 ``` r
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 5/40 edges from 836dec6:
+#> + 5/40 edges from 8f0a189:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 feedback_arc_set(g, algo = "approx_eades")
-#> + 5/40 edges from 836dec6:
+#> + 5/40 edges from 8f0a189:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 ```

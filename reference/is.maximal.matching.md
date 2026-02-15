@@ -32,5 +32,5 @@ is.maximal.matching(graph, matching, types = NULL)
 
 ## Related documentation in the C library
 
-[`is_maximal_matching()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`is_maximal_matching`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

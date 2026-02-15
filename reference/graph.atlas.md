@@ -20,4 +20,4 @@ graph.atlas(n)
 
 ## Related documentation in the C library
 
-[[`atlas()`](https://r.igraph.org/reference/graph_from_atlas.md)](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)
+[`atlas`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)

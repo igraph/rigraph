@@ -86,11 +86,11 @@ included only for the ease of using more descriptive function names.
 
 ## Related documentation in the C library
 
-[`st_vertex_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity),
-[`vertex_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`vertex_disjoint_paths()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths),
-[`cohesion()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion)
+[`st_vertex_connectivity`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity),
+[`vertex_connectivity`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`vertex_disjoint_paths`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths),
+[`cohesion`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion)
 
 ## References
 

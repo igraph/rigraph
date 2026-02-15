@@ -26,7 +26,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
 
 ## See also
 
@@ -52,9 +52,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 8194503 D--- 10 0 -- 
-#> + edges from 8194503:
+#> IGRAPH b8bd727 D--- 10 0 -- 
+#> + edges from b8bd727:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH ee0e711 U--- 5 0 -- 
-#> + edges from ee0e711:
+#> IGRAPH 819539a U--- 5 0 -- 
+#> + edges from 819539a:
 ```

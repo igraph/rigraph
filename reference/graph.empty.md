@@ -24,4 +24,4 @@ graph.empty(n = 0, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)

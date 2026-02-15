@@ -28,4 +28,4 @@ graph.full(n, directed = FALSE, loops = FALSE)
 
 ## Related documentation in the C library
 
-[`full()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full)
+[`full`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full)

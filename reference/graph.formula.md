@@ -32,8 +32,8 @@ graph.formula(..., simplify = TRUE)
 
 ## Related documentation in the C library
 
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
+[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)

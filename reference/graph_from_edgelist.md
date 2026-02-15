@@ -35,11 +35,11 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
+[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## See also
 
@@ -66,14 +66,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH d7dca5a DN-- 3 2 -- 
+#> IGRAPH 936de41 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from d7dca5a (vertex names):
+#> + edges from 936de41 (vertex names):
 #> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH 631a805 D--- 10 10 -- 
-#> + edges from 631a805:
+#> IGRAPH eb8d5bb D--- 10 10 -- 
+#> + edges from eb8d5bb:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

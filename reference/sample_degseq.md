@@ -94,7 +94,7 @@ directed graphs.
 
 ## Related documentation in the C library
 
-[`degree_sequence_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game)
+[`degree_sequence_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game)
 
 ## See also
 

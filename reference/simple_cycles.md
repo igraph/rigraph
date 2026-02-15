@@ -79,11 +79,11 @@ invisibly.
 
 ## Related documentation in the C library
 
-[`simple_cycles()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`simple_cycles`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -103,95 +103,95 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 802d251:
+#> + 3/6 vertices, named, from 7ef00e7:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from 802d251:
+#> + 2/6 vertices, named, from 7ef00e7:
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> + 1/6 vertex, named, from 802d251:
+#> + 1/6 vertex, named, from 7ef00e7:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 802d251 (vertex names):
+#> + 3/9 edges from 7ef00e7 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from 802d251 (vertex names):
+#> + 2/9 edges from 7ef00e7 (vertex names):
 #> [1] A->F F->A
 #> 
 #> $edges[[3]]
-#> + 1/9 edge from 802d251 (vertex names):
+#> + 1/9 edge from 7ef00e7 (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 802d251:
+#> + 3/6 vertices, named, from 7ef00e7:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 4/6 vertices, named, from 802d251:
+#> + 4/6 vertices, named, from 7ef00e7:
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> + 4/6 vertices, named, from 802d251:
+#> + 4/6 vertices, named, from 7ef00e7:
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> + 2/6 vertices, named, from 802d251:
+#> + 2/6 vertices, named, from 7ef00e7:
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> + 1/6 vertex, named, from 802d251:
+#> + 1/6 vertex, named, from 7ef00e7:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 802d251 (vertex names):
+#> + 3/9 edges from 7ef00e7 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 4/9 edges from 802d251 (vertex names):
+#> + 4/9 edges from 7ef00e7 (vertex names):
 #> [1] A->D D->E F->E F->A
 #> 
 #> $edges[[3]]
-#> + 4/9 edges from 802d251 (vertex names):
+#> + 4/9 edges from 7ef00e7 (vertex names):
 #> [1] A->D D->E F->E A->F
 #> 
 #> $edges[[4]]
-#> + 2/9 edges from 802d251 (vertex names):
+#> + 2/9 edges from 7ef00e7 (vertex names):
 #> [1] F->A A->F
 #> 
 #> $edges[[5]]
-#> + 1/9 edge from 802d251 (vertex names):
+#> + 1/9 edge from 7ef00e7 (vertex names):
 #> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> + 3/6 vertices, named, from 802d251:
+#> + 3/6 vertices, named, from 7ef00e7:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> + 2/6 vertices, named, from 802d251:
+#> + 2/6 vertices, named, from 7ef00e7:
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> + 3/9 edges from 802d251 (vertex names):
+#> + 3/9 edges from 7ef00e7 (vertex names):
 #> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> + 2/9 edges from 802d251 (vertex names):
+#> + 2/9 edges from 7ef00e7 (vertex names):
 #> [1] F->A A->F
 #> 
 #> 

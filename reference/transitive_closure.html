@@ -104,7 +104,7 @@ The returned graph will have the same directedness as the input.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitive_closure" class="external-link"><code>transitive_closure()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitive_closure" class="external-link"><code>transitive_closure</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -148,8 +148,8 @@ The returned graph will have the same directedness as the input.</p>
 <span class="r-in"><span><span class="va">tc</span> <span class="op">&lt;-</span> <span class="fu">transitive_closure</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># The closure has edges 1-&gt;2, 1-&gt;3, 1-&gt;4, 2-&gt;3, 2-&gt;4, 3-&gt;4</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">tc</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e174666 D--- 4 6 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e174666:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 757101a D--- 4 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 757101a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 1-&gt;3 1-&gt;4 2-&gt;3 2-&gt;4 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Undirected graph - connects all vertices in same component</span></span></span>
@@ -157,8 +157,8 @@ The returned graph will have the same directedness as the input.</p>
 <span class="r-in"><span><span class="va">tc2</span> <span class="op">&lt;-</span> <span class="fu">transitive_closure</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Full graph on vertices 1, 2 and full graph on vertices 3, 4</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">tc2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cf3c2c4 U--- 4 2 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cf3c2c4:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 986b70d U--- 4 2 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 986b70d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 3--4</span>
 </code></pre></div>
     </div>

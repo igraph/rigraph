@@ -87,15 +87,15 @@ avoid confusion with the edge-vertex incidence matrix.
 
 ## Related documentation in the C library
 
-[`biadjacency()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_biadjacency),
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`biadjacency`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_biadjacency),
+[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -116,8 +116,8 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> IGRAPH 5b217c7 UN-B 8 8 -- 
+#> IGRAPH 47c0912 UN-B 8 8 -- 
 #> + attr: type (v/l), name (v/c)
-#> + edges from 5b217c7 (vertex names):
+#> + edges from 47c0912 (vertex names):
 #> [1] A--a A--b A--c A--d A--e B--d C--b C--d
 ```

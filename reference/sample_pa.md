@@ -143,8 +143,8 @@ the vertex, unless the `out.pref` argument is set to `TRUE`.
 
 ## Related documentation in the C library
 
-[`barabasi_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`barabasi_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 

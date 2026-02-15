@@ -33,4 +33,4 @@ graph.ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
 ## Related documentation in the C library
 
-[[`ring()`](https://r.igraph.org/reference/make_ring.md)](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring)
+[`ring`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring)

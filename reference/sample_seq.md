@@ -35,7 +35,7 @@ big. It is much faster (but of course less general) than the builtin
 
 ## Related documentation in the C library
 
-[`random_sample()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample)
+[`random_sample`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample)
 
 ## References
 

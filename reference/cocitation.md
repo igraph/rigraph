@@ -45,9 +45,9 @@ change in the future.
 
 ## Related documentation in the C library
 
-[`cocitation()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_cocitation),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`bibcoupling()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bibcoupling)
+[`cocitation`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_cocitation),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`bibcoupling`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bibcoupling)
 
 ## See also
 

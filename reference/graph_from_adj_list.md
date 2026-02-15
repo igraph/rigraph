@@ -56,7 +56,7 @@ graph by calling `graph_from_adj_list()`.
 
 ## Related documentation in the C library
 
-[`adjlist()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist)
+[`adjlist`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjlist)
 
 ## See also
 

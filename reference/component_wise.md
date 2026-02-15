@@ -18,8 +18,8 @@ component_wise(merge_method = "dla")
 
 ## Related documentation in the C library
 
-[[`decompose()`](https://r.igraph.org/reference/decompose.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`decompose`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

@@ -31,4 +31,4 @@ graph.tree(n, children = 2, mode = c("out", "in", "undirected"))
 
 ## Related documentation in the C library
 
-[`kary_tree()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)
+[`kary_tree`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)

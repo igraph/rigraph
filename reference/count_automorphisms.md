@@ -81,8 +81,8 @@ to obtain a compact representation of the automorphism group.
 
 ## Related documentation in the C library
 
-[`count_automorphisms()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`count_automorphisms`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 

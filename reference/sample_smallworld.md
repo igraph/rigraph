@@ -65,7 +65,7 @@ having short path lengths and high clustering.
 
 ## Related documentation in the C library
 
-[`watts_strogatz_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game)
+[`watts_strogatz_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game)
 
 ## References
 

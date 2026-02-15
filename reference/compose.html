@@ -115,7 +115,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices" class="external-link"><code>permute_vertices()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code><a href="gsize.html">ecount()</a></code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices" class="external-link"><code>permute_vertices</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -157,7 +157,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">&lt;-</span> <span class="fu">compose</span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">gc</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 15496a8 U--- 10 36 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 7742db5 U--- 10 36 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/c), center (g/n)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + edges:</span>
@@ -172,7 +172,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
 <span class="r-out co"><span class="r-pr">#&gt;</span>  9 --  1  1  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 --  1  2  2  3  4  5  6  7  8  9 10 10</span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">gc</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b857301 U--- 10 24 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 66fbf52 U--- 10 24 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/c), center (g/n)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + edges:</span>

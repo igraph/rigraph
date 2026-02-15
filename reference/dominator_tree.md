@@ -66,8 +66,8 @@ dominator tree of a directed graph. For details see the reference below.
 
 ## Related documentation in the C library
 
-[`dominator_tree()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_dominator_tree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`dominator_tree`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_dominator_tree),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## References
 

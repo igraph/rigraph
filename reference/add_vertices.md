@@ -36,8 +36,8 @@ The graph, with the vertices (and attributes) added.
 
 ## Related documentation in the C library
 
-[`add_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`add_vertices`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_add_vertices),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -80,12 +80,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH 6fbc918 D--- 5 4 -- 
+#> IGRAPH 2ba1587 D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from 6fbc918:
+#> + edges from 2ba1587:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from 6fbc918:
+#> + 5/5 vertices, from 2ba1587:
 #>   color
 #> 1   red
 #> 2   red

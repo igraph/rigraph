@@ -34,7 +34,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`star()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star)
+[`star`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star)
 
 ## See also
 
@@ -60,13 +60,13 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> IGRAPH 2c985e8 D--- 10 9 -- Out-star
+#> IGRAPH e1f801e D--- 10 9 -- Out-star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 2c985e8:
+#> + edges from e1f801e:
 #> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> IGRAPH 98e61c6 U--- 5 4 -- Star
+#> IGRAPH 5de21b4 U--- 5 4 -- Star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 98e61c6:
+#> + edges from 5de21b4:
 #> [1] 1--2 1--3 1--4 1--5
 ```

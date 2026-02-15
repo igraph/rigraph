@@ -263,11 +263,11 @@ are specified.)
 
 ## Related documentation in the C library
 
-[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -293,13 +293,13 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 1b2571b U--- 6 4 -- 
-#> + edges from 1b2571b:
+#> IGRAPH d2d5021 U--- 6 4 -- 
+#> + edges from d2d5021:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 851a5c8 UN-- 4 3 -- 
+#> IGRAPH d62757a UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 851a5c8 (vertex names):
+#> + edges from d62757a (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

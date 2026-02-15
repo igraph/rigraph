@@ -42,7 +42,7 @@ centrality score for graphs with given order and other parameters.
 
 ## Related documentation in the C library
 
-[`centralization_degree_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree_tmax)
+[`centralization_degree_tmax`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree_tmax)
 
 ## See also
 

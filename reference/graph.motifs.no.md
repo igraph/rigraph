@@ -30,4 +30,4 @@ graph.motifs.no(graph, size = 3, cut.prob = rep(0, size))
 
 ## Related documentation in the C library
 
-[`motifs_randesu_no()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no)
+[`motifs_randesu_no`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no)

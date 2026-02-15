@@ -40,4 +40,4 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 ## Related documentation in the C library
 
-[`sbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game)
+[`sbm_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game)

@@ -76,9 +76,9 @@ realize.
 
 ## Related documentation in the C library
 
-[`bipartite_game_gnm()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`bipartite_game_gnp()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp)
+[`bipartite_game_gnm`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`bipartite_game_gnp`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp)
 
 ## See also
 
@@ -115,15 +115,15 @@ Random graph models (games)
 ``` r
 ## empty graph
 sample_bipartite_gnp(10, 5, p = 0)
-#> IGRAPH 00235a7 U--B 15 0 -- Bipartite Gnp random graph
+#> IGRAPH f2f22a8 U--B 15 0 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 00235a7:
+#> + edges from f2f22a8:
 
 ## full graph
 sample_bipartite_gnp(10, 5, p = 1)
-#> IGRAPH 8bdbaec U--B 15 50 -- Bipartite Gnp random graph
+#> IGRAPH 5bd7fb1 U--B 15 50 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 8bdbaec:
+#> + edges from 5bd7fb1:
 #>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15
 #> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15
 #> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15
@@ -132,16 +132,16 @@ sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite_gnp(10, 5, p = .1)
-#> IGRAPH 63e2328 U--B 15 3 -- Bipartite Gnp random graph
+#> IGRAPH b3ecb27 U--B 15 3 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 63e2328:
+#> + edges from b3ecb27:
 #> [1] 2--11 3--11 3--12
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
-#> IGRAPH e6c5b96 D--B 15 20 -- Bipartite Gnm random graph
+#> IGRAPH d1e6d64 D--B 15 20 -- Bipartite Gnm random graph
 #> + attr: name (g/c), m (g/n), type (v/l)
-#> + edges from e6c5b96:
+#> + edges from d1e6d64:
 #>  [1]  6->11  2->12  9->12 10->12  5->13  2->14  3->14  4->14  5->14  5->15
 #> [11]  7->15 15-> 1 13-> 2 15-> 2 11-> 3 13-> 3 14-> 6 13-> 7 15-> 7 13->10
 ```

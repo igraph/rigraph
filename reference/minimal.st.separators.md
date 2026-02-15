@@ -20,5 +20,5 @@ minimal.st.separators(graph)
 
 ## Related documentation in the C library
 
-[`all_minimal_st_separators()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_all_minimal_st_separators),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`all_minimal_st_separators`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_all_minimal_st_separators),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

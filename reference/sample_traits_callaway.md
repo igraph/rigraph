@@ -97,8 +97,8 @@ realized depends on the types of the vertices involved and is taken from
 
 ## Related documentation in the C library
 
-[`callaway_traits_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game),
-[`establishment_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game)
+[`callaway_traits_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game),
+[`establishment_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game)
 
 ## See also
 

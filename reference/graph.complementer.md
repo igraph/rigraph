@@ -24,4 +24,4 @@ graph.complementer(graph, loops = FALSE)
 
 ## Related documentation in the C library
 
-[[`complementer()`](https://r.igraph.org/reference/complementer.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_complementer)
+[`complementer`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_complementer)

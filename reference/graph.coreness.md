@@ -27,5 +27,5 @@ graph.coreness(graph, mode = c("all", "out", "in"))
 
 ## Related documentation in the C library
 
-[[`coreness()`](https://r.igraph.org/reference/coreness.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_coreness),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`coreness`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_coreness),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

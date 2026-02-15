@@ -79,10 +79,10 @@ For graphs with no vertices, `NaN` is returned. **\[experimental\]**
 
 ## Related documentation in the C library
 
-[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`maxdegree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree),
-[`mean_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree)
+[`degree`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`maxdegree`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree),
+[`mean_degree`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree)
 
 ## See also
 

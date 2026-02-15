@@ -28,7 +28,7 @@ hrg(graph, prob)
 
 ## Related documentation in the C library
 
-[`hrg_create()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create)
+[`hrg_create`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create)
 
 ## See also
 

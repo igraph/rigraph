@@ -39,7 +39,7 @@ An igraph graph
 
 ## Related documentation in the C library
 
-[`kary_tree()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)
+[`kary_tree`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)
 
 ## See also
 
@@ -65,13 +65,13 @@ Other deterministic constructors:
 
 ``` r
 make_tree(10, 2)
-#> IGRAPH 63acf13 D--- 10 9 -- Tree
+#> IGRAPH 294eb7a D--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from 63acf13:
+#> + edges from 294eb7a:
 #> [1] 1-> 2 1-> 3 2-> 4 2-> 5 3-> 6 3-> 7 4-> 8 4-> 9 5->10
 make_tree(10, 3, mode = "undirected")
-#> IGRAPH 0b50b2f U--- 10 9 -- Tree
+#> IGRAPH 1dd7a7f U--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from 0b50b2f:
+#> + edges from 1dd7a7f:
 #> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10
 ```

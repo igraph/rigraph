@@ -30,7 +30,7 @@ An igraph graph
 
 ## Related documentation in the C library
 
-[`full()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full)
+[`full`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full)
 
 ## See also
 
@@ -56,12 +56,12 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> IGRAPH c8ade9a U--- 5 10 -- Full graph
+#> IGRAPH d16330d U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from c8ade9a:
+#> + edges from d16330d:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH ef9ea68 D--- 4 12 -- Full graph
+#> IGRAPH aad77db D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

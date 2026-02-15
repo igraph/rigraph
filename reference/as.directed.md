@@ -28,4 +28,4 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 ## Related documentation in the C library
 
-[`to_directed()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_directed)
+[`to_directed`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_directed)

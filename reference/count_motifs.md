@@ -36,7 +36,7 @@ in graph.
 
 ## Related documentation in the C library
 
-[`motifs_randesu_no()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no)
+[`motifs_randesu_no`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no)
 
 ## See also
 

@@ -39,7 +39,7 @@ border. See examples below.
 
 ## Related documentation in the C library
 
-[`dim_select()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select)
+[`dim_select`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select)
 
 ## References
 

@@ -101,5 +101,5 @@ aging.barabasi.game(
 
 ## Related documentation in the C library
 
-[`barabasi_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game),
-[`recent_degree_aging_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game)
+[`barabasi_aging_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game),
+[`recent_degree_aging_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game)

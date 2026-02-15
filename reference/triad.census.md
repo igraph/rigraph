@@ -21,4 +21,4 @@ triad.census(graph)
 
 ## Related documentation in the C library
 
-[[`triad_census()`](https://r.igraph.org/reference/triad_census.md)](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census)
+[`triad_census`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_triad_census)

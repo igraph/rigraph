@@ -38,4 +38,4 @@ is.graphical.degree.sequence(
 
 ## Related documentation in the C library
 
-[[`is_graphical()`](https://r.igraph.org/reference/is_graphical.md)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical)
+[`is_graphical`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical)

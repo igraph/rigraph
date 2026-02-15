@@ -36,7 +36,7 @@ the [`permute()`](https://r.igraph.org/reference/permute.md) function.
 
 ## Related documentation in the C library
 
-[`layout_sphere()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sphere)
+[`layout_sphere`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sphere)
 
 ## See also
 

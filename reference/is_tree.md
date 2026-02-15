@@ -53,8 +53,8 @@ considered not to be a tree.
 
 ## Related documentation in the C library
 
-[`is_tree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_tree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`is_tree`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_tree),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -75,7 +75,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> + 1/7 vertex, from 82694ab:
+#> + 1/7 vertex, from a2fe866:
 #> [1] 1
 #> 
 ```

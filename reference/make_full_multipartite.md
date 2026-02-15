@@ -38,8 +38,8 @@ index of each vertex. Partition indices start from 1.
 
 ## Related documentation in the C library
 
-[`full_multipartite()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_multipartite),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`full_multipartite`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full_multipartite),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

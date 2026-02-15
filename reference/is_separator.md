@@ -28,8 +28,8 @@ separator or not. lists all vertex separator of minimum size.
 
 ## Related documentation in the C library
 
-[`is_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`is_separator`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -51,11 +51,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from 7ba4cbe:
+#> + 2/4 vertices, from e5c98d1:
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from 7ba4cbe:
+#> + 2/4 vertices, from e5c98d1:
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

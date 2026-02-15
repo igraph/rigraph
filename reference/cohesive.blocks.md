@@ -38,5 +38,5 @@ cohesive.blocks(graph, labels = TRUE)
 
 ## Related documentation in the C library
 
-[[`cohesive_blocks()`](https://r.igraph.org/reference/cohesive_blocks.md)](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`cohesive_blocks`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

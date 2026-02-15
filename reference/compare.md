@@ -44,7 +44,7 @@ A real number.
 
 ## Related documentation in the C library
 
-[`compare_communities()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_compare_communities)
+[`compare_communities`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_compare_communities)
 
 ## References
 

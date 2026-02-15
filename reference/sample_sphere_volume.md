@@ -42,7 +42,7 @@ or equal to `radius`.
 
 ## Related documentation in the C library
 
-[`sample_sphere_volume()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume)
+[`sample_sphere_volume`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume)
 
 ## See also
 

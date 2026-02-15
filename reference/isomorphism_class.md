@@ -29,9 +29,9 @@ An integer number.
 
 ## Related documentation in the C library
 
-[`isoclass_subgraph()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph),
-[`isoclass()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`isoclass_subgraph`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph),
+[`isoclass`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

@@ -16,7 +16,7 @@ A character scalar, the igraph version string, with an attribute
 
 ## Related documentation in the C library
 
-[[`version()`](https://rdrr.io/r/base/Version.html)](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version)
+[`version`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_version)
 
 ## Author
 

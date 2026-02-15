@@ -101,13 +101,13 @@ canonical forms are compared. Extra arguments:
 
 ## Related documentation in the C library
 
-[`isomorphic()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic),
-[`isomorphic_bliss()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_bliss),
-[`isomorphic_vf2()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_vf2),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`isomorphic`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic),
+[`isomorphic_bliss`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_bliss),
+[`isomorphic_vf2`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_vf2),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 

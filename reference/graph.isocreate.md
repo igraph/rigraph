@@ -28,4 +28,4 @@ graph.isocreate(size, number, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`isoclass_create()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create)
+[`isoclass_create`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_create)

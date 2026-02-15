@@ -48,7 +48,7 @@ are allowed.
 
 ## Related documentation in the C library
 
-[`erdos_renyi_game_gnp()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp)
+[`erdos_renyi_game_gnp`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp)
 
 ## References
 

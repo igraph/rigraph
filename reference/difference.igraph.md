@@ -55,9 +55,9 @@ otherwise an error message is given.
 
 ## Related documentation in the C library
 
-[[`difference()`](https://r.igraph.org/reference/difference.md)](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_difference),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices)
+[`difference`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_difference),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`permute_vertices`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices)
 
 ## See also
 
@@ -106,7 +106,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH 99c167c UN-- 11 15 -- 
+#> IGRAPH fe41b2c UN-- 11 15 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n), name (v/c)
 #> + edges (vertex names):

@@ -71,4 +71,4 @@ graph.graphdb(
 
 ## Related documentation in the C library
 
-[`read_graph_graphdb()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb)
+[`read_graph_graphdb`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb)

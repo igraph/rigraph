@@ -117,9 +117,9 @@ undirected graphs.
 
 ## Related documentation in the C library
 
-[`assortativity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity),
-[`assortativity_nominal()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal),
-[`assortativity_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree)
+[`assortativity`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity),
+[`assortativity_nominal`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal),
+[`assortativity_degree`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree)
 
 ## References
 

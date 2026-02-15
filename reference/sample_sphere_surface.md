@@ -42,7 +42,7 @@ the samples equal `radius`.
 
 ## Related documentation in the C library
 
-[`sample_sphere_surface()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_surface)
+[`sample_sphere_surface`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_surface)
 
 ## See also
 

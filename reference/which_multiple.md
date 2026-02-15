@@ -64,16 +64,16 @@ original multiplicity as an edge attribute.
 
 ## Related documentation in the C library
 
-[`is_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`has_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple),
-[`count_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple),
-[`is_loop()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop),
-[`has_loop()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop),
-[`count_loops()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_loops)
+[`is_multiple`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple),
+[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`has_multiple`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple),
+[`count_multiple`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple),
+[`is_loop`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop),
+[`has_loop`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop),
+[`count_loops`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_loops)
 
 ## See also
 
