@@ -66,14 +66,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH b1c9eba DN-- 3 2 -- 
+#> IGRAPH d7dca5a DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from b1c9eba (vertex names):
+#> + edges from d7dca5a (vertex names):
 #> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH 82ba212 D--- 10 10 -- 
-#> + edges from 82ba212:
+#> IGRAPH 631a805 D--- 10 10 -- 
+#> + edges from 631a805:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```
