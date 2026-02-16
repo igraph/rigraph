@@ -148,7 +148,7 @@ plot.igraph <- function(
     "i" = "It is recommended to store the layout as x and y vertex attributes and not as a matrix graph attribute."))
   }
   margin <- params("plot", "margin")
-  margin <- rep(margin, length.out = 4)
+  margin <- vctrs::vec_recycle(margin, 4)
   rescale <- params("plot", "rescale")
   asp <- params("plot", "asp")
   frame.plot <- params("plot", "frame.plot")
@@ -273,11 +273,11 @@ plot.igraph <- function(
     mark.groups <- communities(mark.groups)
   }
 
-  mark.shape <- rep(mark.shape, length.out = length(mark.groups))
-  mark.border <- rep(mark.border, length.out = length(mark.groups))
-  mark.col <- rep(mark.col, length.out = length(mark.groups))
-  mark.expand <- rep(mark.expand, length.out = length(mark.groups))
-  mark.lwd <- rep(mark.lwd, length.out = length(mark.groups))
+  mark.shape <- vctrs::vec_recycle(mark.shape, length(mark.groups))
+  mark.border <- vctrs::vec_recycle(mark.border, length(mark.groups))
+  mark.col <- vctrs::vec_recycle(mark.col, length(mark.groups))
+  mark.expand <- vctrs::vec_recycle(mark.expand, length(mark.groups))
+  mark.lwd <- vctrs::vec_recycle(mark.lwd, length(mark.groups))
 
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
@@ -285,7 +285,7 @@ plot.igraph <- function(
     if (length(vertex.size) == 1) {
       vs <- vertex.size
     } else {
-      vs <- rep(vertex.size, length.out = vcount(graph))[v]
+      vs <- vctrs::vec_recycle(vertex.size, vcount(graph))[v]
     }
     igraph.polygon(
       layout[v, , drop = FALSE],
@@ -335,7 +335,7 @@ plot.igraph <- function(
     )
   } else {
     ## different vertex shapes, do it by "endpoint"
-    shape <- rep(shape, length.out = vcount(graph))
+    shape <- vctrs::vec_recycle(shape, vcount(graph))
     ec <- edge.coords
     ec[, 1:2] <- t(sapply(seq(length.out = nrow(el)), function(x) {
       .igraph.shapes[[shape[el[x, 1]]]]$clip(
@@ -707,7 +707,7 @@ plot.igraph <- function(
     } else {
       ## different kinds of arrows drawn separately as 'arrows' cannot
       ## handle a vector as the 'code' argument
-      curved <- rep(curved, length.out = ecount(graph))[nonloops.e]
+      curved <- vctrs::vec_recycle(curved, ecount(graph))[nonloops.e]
       lc.x <- lc.y <- numeric(length(curved))
       for (code in 0:3) {
         valid <- arrow.mode == code
@@ -772,10 +772,10 @@ plot.igraph <- function(
       ecex <- ecex[nonloops.e]
     }
     en <- length(nonloops.e)
-    ecol <- rep(ecol, length.out = en)
-    efam <- rep(efam, length.out = en)
-    efon <- rep(efon, length.out = en)
-    ecex <- rep(ecex, length.out = en)
+    ecol <- vctrs::vec_recycle(ecol, en)
+    efam <- vctrs::vec_recycle(efam, en)
+    efon <- vctrs::vec_recycle(efon, en)
+    ecex <- vctrs::vec_recycle(ecex, en)
 
     invisible(mapply(
       function(x, y, label, col, family, font, cex) {
@@ -826,13 +826,13 @@ plot.igraph <- function(
   y <- layout[, 2] +
     label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
   if (vc > 0) {
-    label.col <- rep(label.color, length.out = vc)
-    label.fam <- rep(label.family, length.out = vc)
-    label.fnt <- rep(label.font, length.out = vc)
-    label.cex <- rep(label.cex, length.out = vc)
-    label.ang <- rep(label.angle, length.out = vc)
-    label.adj <- rep(list(label.adj), length.out = vc)
-    label.text <- rep(labels, length.out = vc)
+    label.col <- vctrs::vec_recycle(label.color, vc)
+    label.fam <- vctrs::vec_recycle(label.family, vc)
+    label.fnt <- vctrs::vec_recycle(label.font, vc)
+    label.cex <- vctrs::vec_recycle(label.cex, vc)
+    label.ang <- vctrs::vec_recycle(label.angle, vc)
+    label.adj <- vctrs::vec_recycle(list(label.adj), vc)
+    label.text <- vctrs::vec_recycle(labels, vc)
 
     # Draw vertex labels
     invisible(mapply(
@@ -1742,24 +1742,22 @@ igraph.Arrows <- function(
   h.lty = sh.lty,
   curved = FALSE
 ) {
-  n <- length(x1)
+  n <- vctrs::vec_size_common(x1, y1, x2, y2)
 
-  recycle <- function(x) rep(x, length.out = n)
-
-  x1 <- recycle(x1)
-  y1 <- recycle(y1)
-  x2 <- recycle(x2)
-  y2 <- recycle(y2)
-  size <- recycle(size)
-  width <- recycle(width)
-  curved <- recycle(curved)
-  sh.lwd <- recycle(sh.lwd)
-  sh.col <- recycle(sh.col)
-  sh.lty <- recycle(sh.lty)
-  h.col <- recycle(h.col)
-  h.col.bo <- recycle(h.col.bo)
-  h.lwd <- recycle(h.lwd)
-  h.lty <- recycle(h.lty)
+  x1 <- vctrs::vec_recycle(x1, n)
+  y1 <- vctrs::vec_recycle(y1, n)
+  x2 <- vctrs::vec_recycle(x2, n)
+  y2 <- vctrs::vec_recycle(y2, n)
+  size <- vctrs::vec_recycle(size, n)
+  width <- vctrs::vec_recycle(width, n)
+  curved <- vctrs::vec_recycle(curved, n)
+  sh.lwd <- vctrs::vec_recycle(sh.lwd, n)
+  sh.col <- vctrs::vec_recycle(sh.col, n)
+  sh.lty <- vctrs::vec_recycle(sh.lty, n)
+  h.col <- vctrs::vec_recycle(h.col, n)
+  h.col.bo <- vctrs::vec_recycle(h.col.bo, n)
+  h.lwd <- vctrs::vec_recycle(h.lwd, n)
+  h.lty <- vctrs::vec_recycle(h.lty, n)
 
   uin <- 1 / xyinch()
 
