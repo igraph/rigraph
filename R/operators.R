@@ -302,6 +302,67 @@ disjoint_union <- function(...) {
   disjoint_union(x, y)
 }
 
+#' Join of two graphs
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' The join of two graphs is created by connecting all vertices from
+#' the first graph to all vertices in the second graph.
+#'
+#' `graph_join()` creates the join of two graphs. The graphs must be disjoint,
+#' i.e., have distinct vertex sets. First the vertices of the second graph will
+#' be relabeled with new vertex IDs, then the union of the two graphs is formed.
+#' Finally, all vertices from the first graph will be connected to all vertices
+#' from the second graph. If the two graphs have \eqn{|V_1|} and \eqn{|V_2|} vertices and
+#' \eqn{|E_1|} and \eqn{|E_2|} edges respectively, then the new graph will have \eqn{|V_1|+|V_2|}
+#' vertices and \eqn{|E_1|+|E_2|+|V_1| \times |V_2|} edges. This function can also be used via
+#' the `%j%` operator.
+#'
+#' The vertex ordering of the graphs is preserved. In other words, the vertex
+#' IDs of the first graph map to identical values in the new graph, while the
+#' vertex IDs of the second graph map to IDs incremented by the vertex count
+#' of the first graph.
+#'
+#' Both graphs need to have the same directedness, i.e. either both directed or
+#' both undirected. If both graphs are directed, then for each pair of vertices
+#' \eqn{v}, \eqn{u} in graphs \eqn{G_1}, \eqn{G_2} we add edges \eqn{(v, u)} and \eqn{(u, v)} to maintain completeness.
+#'
+#' Note that the current version of this function cannot handle graph, vertex
+#' and edge attributes; they will be lost in the result.
+#'
+#' An error is generated if some input graphs are directed and others are
+#' undirected.
+#'
+#' @aliases %j%
+#' @param g1,g2 Graph objects.
+#' @param x,y Graph objects.
+#' @return A new graph object.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @export
+#' @keywords graphs
+#' @concept graph_operators
+#' @family functions for manipulating graph structure
+#' @examples
+#'
+#' ## A star and a ring
+#' g1 <- make_star(10, mode = "undirected")
+#' g2 <- make_ring(5)
+#' print_all(g1 %j% g2)
+#' @export
+#' @cdocs igraph_join
+graph_join <- function(g1, g2) {
+  ensure_igraph(g1)
+  ensure_igraph(g2)
+
+  join_impl(left = g1, right = g2)
+}
+
+#' @export
+#' @rdname graph_join
+"%j%" <- function(x, y) {
+  graph_join(x, y)
+}
+
 .igraph.graph.union.or.intersection <- function(
   call,
   ...,

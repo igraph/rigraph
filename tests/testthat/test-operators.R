@@ -66,6 +66,64 @@ test_that("disjoint_union() does not convert vertex types", {
   expect_s3_class(vertex_attr(u, "date"), c("POSIXct", "POSIXt"))
 })
 
+test_that("graph_join() works", {
+  # Test basic join of undirected graphs
+  g1 <- make_ring(5)
+  g2 <- make_ring(3)
+  gj <- graph_join(g1, g2)
+
+  # Check vertex and edge counts
+  expect_vcount(gj, 8) # 5 + 3
+  expect_ecount(gj, 23) # 5 + 3 + 5*3 = 23
+
+  # Check that original edges are preserved
+  # Edges from g1 should be 1-2, 2-3, 3-4, 4-5, 5-1
+  # Edges from g2 should be 6-7, 7-8, 8-6 (shifted by vcount(g1)=5)
+  # Plus all cross edges between vertices 1-5 and vertices 6-8
+
+  # Test with operator
+  gj2 <- g1 %j% g2
+  expect_equal(vcount(gj2), 8)
+  expect_equal(ecount(gj2), 23)
+
+  # Test directed graphs
+  g1_dir <- make_ring(4, directed = TRUE)
+  g2_dir <- make_ring(3, directed = TRUE)
+  gj_dir <- graph_join(g1_dir, g2_dir)
+
+  expect_vcount(gj_dir, 7) # 4 + 3
+  # For directed: original edges + 2 * v1 * v2 = 4 + 3 + 2*4*3 = 31
+  expect_ecount(gj_dir, 31)
+
+  # Test mixed directedness should error
+  expect_error(
+    graph_join(g1, g1_dir),
+    "Cannot create join"
+  )
+})
+
+test_that("graph_join() preserves vertex ordering", {
+  g1 <- make_ring(3)
+  g2 <- make_ring(2)
+
+  gj <- graph_join(g1, g2)
+
+  # Check that edges from g1 are preserved
+  el1 <- as_edgelist(g1)
+  el_joined <- as_edgelist(gj)
+
+  # First graph edges should be in the result
+  expect_true(all(apply(el1, 1, function(row) {
+    any(apply(el_joined, 1, function(r) all(r == row)))
+  })))
+
+  # Second graph edges should be shifted by vcount(g1)
+  el2_shifted <- as_edgelist(g2) + vcount(g1)
+  expect_true(all(apply(el2_shifted, 1, function(row) {
+    any(apply(el_joined, 1, function(r) all(r == row)))
+  })))
+})
+
 test_that("intersection() works", {
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
