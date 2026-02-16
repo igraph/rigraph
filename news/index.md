@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.2.1.9024
+
+### Documentation
+
+- Workaround for too much autolinking
+  ([\#2582](https://github.com/igraph/rigraph/issues/2582)).
+
 ## igraph 2.2.1.9023
 
 - Remove calls to unused APIs only used in the conversion of very old
@@ -655,6 +662,8 @@
   ([\#2214](https://github.com/igraph/rigraph/issues/2214)).
 
 ## igraph 2.2.2
+
+CRAN release: 2026-02-12
 
 ### Chore
 

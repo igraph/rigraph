@@ -112,83 +112,83 @@ ivs_size(g)
 #> [1] 4
 ivs(g, min = ivs_size(g))
 #> [[1]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 37 55 56
 #> 
 #> [[2]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 55 56 69
 #> 
 #> [[3]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 56 69 74
 #> 
 #> [[4]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  8 15 73 80
 #> 
 #> [[5]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  8 15 73 84
 #> 
 #> [[6]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 13 16 37 40
 #> 
 #> [[7]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 21 32 45 61
 #> 
 #> [[8]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 22 55 56 64
 #> 
 #> [[9]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 23 69 75 90
 #> 
 largest_ivs(g)
 #> [[1]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 21 32 45 61
 #> 
 #> [[2]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 37 55 56
 #> 
 #> [[3]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 55 56 69
 #> 
 #> [[4]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  7 56 69 74
 #> 
 #> [[5]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  8 15 73 80
 #> 
 #> [[6]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1]  8 15 73 84
 #> 
 #> [[7]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 22 55 56 64
 #> 
 #> [[8]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 23 69 75 90
 #> 
 #> [[9]]
-#> + 4/100 vertices, from 6252943:
+#> + 4/100 vertices, from 6a820c9:
 #> [1] 13 16 37 40
 #> 
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
-#> IGRAPH 5a9bd04 U--- 4 0 -- Erdos-Renyi (gnp) graph
+#> IGRAPH 191b6e9 U--- 4 0 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from 5a9bd04:
+#> + edges from 191b6e9:
 
 length(max_ivs(g))
 #> [1] 326
