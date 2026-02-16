@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9024
+
+## Documentation
+
+- Workaround for too much autolinking (#2582).
+
+
 # igraph 2.2.1.9023
 
 - Remove calls to unused APIs only used in the conversion of very old graph objects.
