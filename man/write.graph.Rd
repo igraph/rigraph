@@ -16,7 +16,7 @@ write.graph(
 \item{graph}{The graph to export.}
 
 \item{file}{A connection or a string giving the file name to write the graph
-to.}
+to. If file is \code{""}, \code{stdout()} or \code{"-"}, then the output is written directly to the terminal.}
 
 \item{format}{Character string giving the file format. Right now
 \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
