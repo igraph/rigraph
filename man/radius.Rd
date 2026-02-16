@@ -62,6 +62,7 @@ Other paths:
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
-\code{\link{graph_center}()}
+\code{\link{graph_center}()},
+\code{\link{widest_path_widths}()}
 }
 \concept{paths}
