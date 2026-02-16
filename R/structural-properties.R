@@ -3674,3 +3674,104 @@ knn <- function(
     weights = weights
   )
 }
+
+#' Degree correlation function
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Computes the \eqn{k_{nn}(k)} degree correlation function, which gives the mean degree
+#' of neighbors of vertices with degree \eqn{k}.
+#'
+#' The \eqn{k_{nn}(k)} function characterizes degree correlations in networks.
+#' It provides the average degree of neighbors as a function of vertex degree.
+#' This is one of the primary ways to measure degree assortativity in networks.
+#'
+#' For directed graphs, this function provides fine-grained control over how
+#' in/out degrees are used through the `from.mode` and `to.mode` parameters.
+#'
+#' Note that for degrees that do not appear in the network, the result is `NaN`
+#' (zero divided by zero).
+#'
+#' The weighted version computes a weighted average as:
+#'
+#' \deqn{k_{nn}(k) = \frac{\sum_{i: k_i=k} \sum_j w_{ij} k_j}{\sum_{i: k_i=k} \sum_j w_{ij}}}{k_nn(k) = sum_(i: k_i=k) sum_j w_ij k_j / sum_(i: k_i=k) sum_j w_ij}
+#'
+#' where the first sum runs over vertices of degree \eqn{k}, the second sum runs
+#' over their neighbors \eqn{j}, \eqn{w_{ij}} is the edge weight, and \eqn{k_j} is the neighbor's degree.
+#'
+#' @param graph The input graph. It may be directed.
+#' @param weights Optional edge weights. If the graph has a `weight` edge
+#'   attribute, then this is used by default. If this argument is given,
+#'   then edge weights are used in the calculation. Set to `NA` to ignore
+#'   the `weight` edge attribute even if present.
+#' @param from.mode How to compute the degree of source vertices in directed graphs?
+#'   `out` uses out-degree, `in` uses in-degree, and `all` or `total` uses
+#'   total degree. Ignored for undirected graphs.
+#' @param to.mode How to compute the degree of target vertices (neighbors) in
+#'   directed graphs? `out` uses out-degree, `in` uses in-degree, and `all`
+#'   or `total` uses total degree. Ignored for undirected graphs.
+#' @param directed.neighbors Logical scalar. Whether to consider edges as directed
+#'   when computing neighbor relationships in directed graphs. If `FALSE`,
+#'   edges are treated as undirected (i.e., reciprocal). Ignored for undirected graphs.
+#' @return A numeric vector.
+#'   Element \eqn{i} contains the mean degree of neighbors of vertices with degree \eqn{i-1}.
+#'   Note that degree 0 is included at index 1.
+#'   The length of the vector is one more than the maximum degree in the graph.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @references
+#' R. Pastor-Satorras, A. Vazquez, A. Vespignani:
+#' Dynamical and Correlation Properties of the Internet,
+#' Phys. Rev. Lett., vol. 87, pp. 258701 (2001).
+#' \doi{10.1103/PhysRevLett.87.258701}
+#'
+#' A. Vazquez, R. Pastor-Satorras, A. Vespignani:
+#' Large-scale topological and dynamical properties of the Internet,
+#' Phys. Rev. E, vol. 65, pp. 066130 (2002).
+#' \doi{10.1103/PhysRevE.65.066130}
+#'
+#' A. Barrat, M. Barthelemy, R. Pastor-Satorras, and A. Vespignani:
+#' The architecture of complex weighted networks,
+#' Proc. Natl. Acad. Sci. USA 101, 3747 (2004).
+#' \doi{10.1073/pnas.0400087101}
+#'
+#' A.-L. Barabási, Network Science (2016). Chapter 7, Degree Correlations.
+#' \url{https://networksciencebook.com/chapter/7#measuring-degree}
+#' @seealso [knn()] for computing average nearest neighbor degree for specific vertices
+#' @keywords graphs
+#' @examples
+#' # Ring graph - all vertices have degree 2
+#' g <- make_ring(10)
+#' knnk(g)
+#'
+#' # Star graph
+#' g2 <- make_star(10)
+#' knnk(g2)
+#'
+#' # Scale-free graph - typically shows degree anti-correlation
+#' g3 <- sample_pa(1000, m = 5)
+#' result <- knnk(g3)
+#' plot(result, xlab = "k", ylab = expression(k[nn](k)), type = "l")
+#'
+#' # Directed graph with different degree modes
+#' g4 <- sample_pa(100, directed = TRUE)
+#' knnk(g4, from.mode = "out", to.mode = "in")
+#' @family structural.properties
+#' @export
+#' @cdocs igraph_degree_correlation_vector
+knnk <- function(
+  graph,
+  weights = NULL,
+  from.mode = c("out", "in", "all", "total"),
+  to.mode = c("in", "out", "all", "total"),
+  directed.neighbors = TRUE
+) {
+  from.mode <- match.arg(from.mode)
+  to.mode <- match.arg(to.mode)
+  degree_correlation_vector_impl(
+    graph = graph,
+    weights = weights,
+    from.mode = from.mode,
+    to.mode = to.mode,
+    directed.neighbors = directed.neighbors
+  )
+}
