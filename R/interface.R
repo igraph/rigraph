@@ -213,7 +213,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- append(attrs, attr)
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
-    stop("please supply names for attributes")
+    cli::cli_abort("Attribute names must be supplied.")
   }
 
   vertices.orig <- vcount(graph)
