@@ -101,9 +101,9 @@ Graph cycles
 ``` r
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 5/40 edges from f113181:
+#> + 5/40 edges from 8fd1bf1:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 feedback_arc_set(g, algo = "approx_eades")
-#> + 5/40 edges from f113181:
+#> + 5/40 edges from 8fd1bf1:
 #> [1]  9-> 8 15-> 9 15->10 16-> 3 16->12
 ```
