@@ -60,13 +60,13 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> IGRAPH d53abc1 D--- 10 9 -- Out-star
+#> IGRAPH 62bd055 D--- 10 9 -- Out-star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from d53abc1:
+#> + edges from 62bd055:
 #> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> IGRAPH 84a1adb U--- 5 4 -- Star
+#> IGRAPH 7de7f6e U--- 5 4 -- Star
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 84a1adb:
+#> + edges from 7de7f6e:
 #> [1] 1--2 1--3 1--4 1--5
 ```

@@ -80,72 +80,72 @@ mw5 <- induced_subgraph(mw, as.character(1:7))
 
 min_separators(mw)
 #> [[1]]
-#> + 1/23 vertex, named, from c6d9f6f:
+#> + 1/23 vertex, named, from 3d720ba:
 #> [1] 7
 #> 
 min_separators(mw1)
 #> [[1]]
-#> + 2/14 vertices, named, from 7269eff:
+#> + 2/14 vertices, named, from 0c3bc43:
 #> [1] 5  19
 #> 
 #> [[2]]
-#> + 2/14 vertices, named, from 7269eff:
+#> + 2/14 vertices, named, from 0c3bc43:
 #> [1] 5 7
 #> 
 #> [[3]]
-#> + 2/14 vertices, named, from 7269eff:
+#> + 2/14 vertices, named, from 0c3bc43:
 #> [1] 7  21
 #> 
 #> [[4]]
-#> + 2/14 vertices, named, from 7269eff:
+#> + 2/14 vertices, named, from 0c3bc43:
 #> [1] 21 19
 #> 
 min_separators(mw2)
 #> [[1]]
-#> + 2/10 vertices, named, from 20e1a4c:
+#> + 2/10 vertices, named, from 5eb98a2:
 #> [1] 10 16
 #> 
 #> [[2]]
-#> + 2/10 vertices, named, from 20e1a4c:
+#> + 2/10 vertices, named, from 5eb98a2:
 #> [1] 14 16
 #> 
 #> [[3]]
-#> + 2/10 vertices, named, from 20e1a4c:
+#> + 2/10 vertices, named, from 5eb98a2:
 #> [1] 8  10
 #> 
 min_separators(mw3)
 #> [[1]]
-#> + 2/7 vertices, named, from 6999a57:
+#> + 2/7 vertices, named, from c4b760e:
 #> [1] 21 19
 #> 
 min_separators(mw4)
 #> [[1]]
-#> + 3/4 vertices, named, from 0d4be75:
+#> + 3/4 vertices, named, from 11c0c09:
 #> [1] 8  11 14
 #> 
 #> [[2]]
-#> + 3/4 vertices, named, from 0d4be75:
+#> + 3/4 vertices, named, from 11c0c09:
 #> [1] 7  11 14
 #> 
 #> [[3]]
-#> + 3/4 vertices, named, from 0d4be75:
+#> + 3/4 vertices, named, from 11c0c09:
 #> [1] 7  8  14
 #> 
 #> [[4]]
-#> + 3/4 vertices, named, from 0d4be75:
+#> + 3/4 vertices, named, from 11c0c09:
 #> [1] 7  8  11
 #> 
 min_separators(mw5)
 #> [[1]]
-#> + 5/7 vertices, named, from b814b5d:
+#> + 5/7 vertices, named, from fbdff92:
 #> [1] 2 3 4 5 6
 #> 
 #> [[2]]
-#> + 5/7 vertices, named, from b814b5d:
+#> + 5/7 vertices, named, from fbdff92:
 #> [1] 1 3 4 5 7
 #> 
 #> [[3]]
-#> + 5/7 vertices, named, from b814b5d:
+#> + 5/7 vertices, named, from fbdff92:
 #> [1] 1 2 4 6 7
 #> 
 
@@ -166,47 +166,47 @@ camp <- graph_from_literal(
 )
 min_separators(camp)
 #> [[1]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Pat   Holly
 #> 
 #> [[2]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Pat     Michael
 #> 
 #> [[3]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Pat  John
 #> 
 #> [[4]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Holly Gery 
 #> 
 #> [[5]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Michael Gery   
 #> 
 #> [[6]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] John Gery
 #> 
 #> [[7]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Gery Russ
 #> 
 #> [[8]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Holly   Michael
 #> 
 #> [[9]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Holly John 
 #> 
 #> [[10]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Steve Bert 
 #> 
 #> [[11]]
-#> + 2/18 vertices, named, from 2bab853:
+#> + 2/18 vertices, named, from 24d0e9e:
 #> [1] Steve Russ 
 #> 
 ```
