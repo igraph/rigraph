@@ -63,10 +63,10 @@ edge_attr(g) <- list(
 )
 edge_attr(g, "label") <- E(g)$name
 g
-#> IGRAPH 964f9be U--- 10 10 -- Ring graph
+#> IGRAPH e218a6c U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (e/c), color
 #> | (e/c), label (e/c)
-#> + edges from 964f9be:
+#> + edges from e218a6c:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```
