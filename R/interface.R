@@ -146,7 +146,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   attrs <- append(attrs, attr)
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
-    stop("please supply names for attributes")
+    cli::cli_abort("All attributes must be named.")
   }
 
   edges.orig <- ecount(graph)
@@ -213,7 +213,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- append(attrs, attr)
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
-    stop("please supply names for attributes")
+    cli::cli_abort("All attributes must be named.")
   }
 
   vertices.orig <- vcount(graph)
@@ -354,7 +354,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort("{.arg v} must specify at least one vertex.")
   }
 
   neighbors_impl(
