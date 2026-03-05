@@ -33,6 +33,9 @@
 - **[Maëlle Salmon](https://masalmon.eu/)**. Author.
   [](https://orcid.org/0000-0002-2815-0399)
 
+- **R Consortium**. Funder.
+  [![ROR](https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg)](https://ror.org/01z833950)
+
 ## Citation
 
 Source:
