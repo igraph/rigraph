@@ -447,3 +447,19 @@ test_that("logical indices are not recycled", {
   expect_snapshot_igraph_error(V(g)[c(TRUE, FALSE)])
   expect_snapshot_igraph_error(E(g)[c(TRUE, FALSE)])
 })
+
+test_that("`[[<-.igraph.es` and `V<-` error well", {
+  g <- make_(
+    ring(10),
+    with_vertex_(
+      name = LETTERS[1:10],
+      color = sample(1:2, 10, replace = TRUE)
+    )
+  )
+  expect_snapshot(error = TRUE, {
+    V(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[1] <- "blue"
+  })
+})
