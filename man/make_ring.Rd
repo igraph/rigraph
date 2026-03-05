@@ -7,7 +7,7 @@
 \usage{
 make_ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
-ring(...)
+ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -20,8 +20,6 @@ undirected graphs.}
 \item{circular}{Whether to create a circular ring. A non-circular
 ring is essentially a \dQuote{line}: a tree where every non-leaf
 vertex has one child.}
-
-\item{...}{Passed to \code{make_ring()}.}
 }
 \value{
 An igraph graph.
@@ -30,6 +28,10 @@ An igraph graph.
 A ring is a one-dimensional lattice and this function is a special case
 of \code{\link[=make_lattice]{make_lattice()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring}}
+}
+
 \examples{
 print_all(make_ring(10))
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
@@ -41,12 +43,16 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}

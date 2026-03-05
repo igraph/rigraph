@@ -3,14 +3,10 @@
 on:
   push:
     branches:
-      - main
-      - fix/*
-  pull_request:
-    branches:
-      - main
-      - fix/*
+      - cran-*
   schedule:
     - cron: '0 2 * * *'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
@@ -38,11 +34,11 @@ jobs:
       - name: run sanitizer
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/cynkra/docker-images/rigraph-san:latest
+          image: ghcr.io/cynkra/docker-images/r-debug-csan-igraph:latest
           options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
           run: |
             set -e
             printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
-            TESTTHAT_PARALLEL=false CI=true R_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
+            CI=true R_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'

@@ -16,7 +16,16 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(...)
+lattice(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+)
 }
 \arguments{
 \item{dimvector}{A vector giving the size of the lattice in each
@@ -40,8 +49,6 @@ periodic along each dimension. This parameter may also be scalar boolen value wh
 be extended to boolean vector with dimvector length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
-
-\item{...}{Passed to \code{make_lattice()}.}
 }
 \value{
 An igraph graph.
@@ -53,6 +60,10 @@ forms. In the first form you only supply \code{dimvector}, but not
 \code{length} and \code{dim}. In the second form you omit
 \code{dimvector} and supply \code{length} and \code{dim}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice}}
+}
+
 \examples{
 make_lattice(c(5, 5, 5))
 make_lattice(length = 5, dim = 3)
@@ -64,15 +75,17 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{Lattice}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}.}
-

@@ -229,7 +229,7 @@ test_that("cluster_leading_eigen works", {
       ev$vectors <- -ev$vectors
     }
     expect_equal(ev$vectors[, 1], vector)
-    0
+    FALSE # Continue
   }
 
   karate <- make_graph("Zachary")
@@ -278,7 +278,7 @@ test_that("cluster_leading_eigen works", {
     BG <- B - diag(rowSums(B))
 
     expect_equal(M, BG)
-    0
+    FALSE # Continue
   }
 
   A <- as_adjacency_matrix(karate, sparse = FALSE)
@@ -286,6 +286,7 @@ test_that("cluster_leading_eigen works", {
   deg <- degree(karate)
   karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
+
 test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
@@ -574,14 +575,25 @@ test_that("modularity() handles NA weights correctly", {
   membership_vec <- membership(comm)
 
   # Test that modularity works with regular weights
-  E(g)$weight <- runif(ecount(g))
-  mod_with_weights <- modularity(g, membership_vec, weights = E(g)$weight)
+  gw <- g
+  E(gw)$weight <- runif(ecount(gw))
+  mod_with_weights <- modularity(gw, membership_vec)
   expect_true(is.numeric(mod_with_weights))
   expect_length(mod_with_weights, 1)
 
+  mod_with_implicit_weights <- modularity(gw, membership_vec, weights = NULL)
+  expect_equal(mod_with_implicit_weights, mod_with_weights)
+
+  mod_with_explicit_weights <- modularity(
+    g,
+    membership_vec,
+    weights = E(gw)$weight
+  )
+  expect_equal(mod_with_explicit_weights, mod_with_weights)
+
   # Test that modularity works when all weights are NA
   mod_with_all_na <- modularity(g, membership_vec, weights = rep(NA, ecount(g)))
-  mod_without_weights <- modularity(g, membership_vec, weights = NULL)
+  mod_without_weights <- modularity(g, membership_vec)
   expect_equal(mod_with_all_na, mod_without_weights)
 
   # Test that modularity works when some weights are NA and some are not
@@ -592,12 +604,6 @@ test_that("modularity() handles NA weights correctly", {
   expect_length(mod_with_mixed_na, 1)
 
   # Test edge case: empty weights vector treated as NA
-  mod_with_empty <- modularity(g, membership_vec, weights = numeric(0))
+  mod_with_empty <- modularity(gw, membership_vec, weights = numeric(0))
   expect_equal(mod_with_empty, mod_without_weights)
-
-  # Test that when all weights are NA, it's equivalent to unweighted
-  all_na_weights <- rep(NA_real_, ecount(g))
-  mod_all_na <- modularity(g, membership_vec, weights = all_na_weights)
-  mod_unweighted <- modularity(g, membership_vec)
-  expect_equal(mod_all_na, mod_unweighted)
 })

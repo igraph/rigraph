@@ -30,6 +30,10 @@ to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}
+}
+
 \examples{
 pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 blocky <- sample_(sbm(
@@ -39,10 +43,6 @@ blocky <- sample_(sbm(
 
 blocky2 <- pref_matrix \%>\%
   sample_sbm(n = 20, block.sizes = c(10, 10))
-
-## Arguments are passed on from sample_ to sample_sbm
-blocky3 <- pref_matrix \%>\%
-  sample_(sbm(), n = 20, block.sizes = c(10, 10))
 }
 \seealso{
 Random graph models (games)

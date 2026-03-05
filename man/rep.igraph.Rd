@@ -25,6 +25,10 @@ currently ignored.}
 The new graph will contain the input graph the given number
 of times, as unconnected components.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
+}
+
 \examples{
 rings <- make_ring(5) * 5
 }
@@ -50,6 +54,7 @@ Other functions for manipulating graph structure:
 \code{\link{permute}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}

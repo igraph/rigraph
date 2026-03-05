@@ -7,7 +7,7 @@
 \usage{
 sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
-sbm(...)
+sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices in the graph.}
@@ -21,11 +21,9 @@ must be symmetric.}
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
-\item{directed}{Logical scalar, whether to generate a directed graph.}
+\item{directed}{Logical scalar, whether to create a directed graph.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
-
-\item{...}{Passed to \code{sample_sbm()}.}
 }
 \value{
 An igraph graph.
@@ -40,6 +38,10 @@ probabilities given by the Bernoulli rate matrix, \code{pref.matrix}.
 The order of the vertices in the generated graph corresponds to the
 \code{block.sizes} argument.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game}}
+}
+
 \examples{
 
 ## Two groups with not only few connection between groups
@@ -85,5 +87,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}.}
-

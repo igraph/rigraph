@@ -16,7 +16,14 @@ sample_traits_callaway(
   directed = FALSE
 )
 
-traits_callaway(...)
+traits_callaway(
+  nodes,
+  types,
+  edge.per.step = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 
 sample_traits(
   nodes,
@@ -27,7 +34,14 @@ sample_traits(
   directed = FALSE
 )
 
-traits(...)
+traits(
+  nodes,
+  types,
+  k = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
@@ -43,9 +57,6 @@ stationary in time.}
 types. These should be probabilities, i.e. numbers between zero and one.}
 
 \item{directed}{Logical constant, whether to generate directed graphs.}
-
-\item{...}{Passed to the constructor, \code{sample_traits()} or
-\code{sample_traits_callaway()}.}
 
 \item{k}{The number of trials per time step, see details below.}
 }
@@ -71,6 +82,10 @@ vertices in the graph. The probability that such a connection is realized
 depends on the types of the vertices involved and is taken from
 \code{pref.matrix}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game}{\code{establishment_game}}
+}
+
 \examples{
 
 # two types of vertices, they like only themselves

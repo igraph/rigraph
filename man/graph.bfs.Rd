@@ -58,7 +58,8 @@ vertices.}
 the search tree.}
 
 \item{callback}{If not \code{NULL}, then it must be callback function. This
-is called whenever a vertex is visited. See details below.}
+is called whenever a vertex is visited. The callback function should
+return \code{FALSE} to continue the search or \code{TRUE} to stop it. See details below.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
@@ -73,4 +74,8 @@ from igraph 1.3.0; use \code{mode} instead.}
 \code{graph.bfs()} was renamed to \code{\link[=bfs]{bfs()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
+}
+
 \keyword{internal}

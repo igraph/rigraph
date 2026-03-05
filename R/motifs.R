@@ -131,15 +131,29 @@ dyad.census <- function(graph) {
 #'
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
-#'   directed graphs and sizes 3-6 in undirected graphs.
+#'   directed graphs and sizes 3 to 6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
 #'   If `NULL`, the default, no cuts are made.
-#' @return `motifs()` returns a numeric vector, the number of occurrences of
-#'   each motif in the graph. The motifs are ordered by their isomorphism
-#'   classes. Note that for unconnected subgraphs, which are not considered to be
-#'   motifs, the result will be `NA`.
+#' @param callback Optional callback function to call for each motif found.
+#'   The function should accept two arguments: `vids` (integer vector of vertex IDs
+#'   in the motif) and `isoclass` (the isomorphism class of the motif).
+#'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
+#'   If `NULL` (the default), motif counts are returned as a numeric vector.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return When `callback` is `NULL`, `motifs()` returns a numeric vector,
+#'   the number of occurrences of each motif in the graph. The motifs are ordered
+#'   by their isomorphism classes. Note that for unconnected subgraphs, which are
+#'   not considered to be motifs, the result will be `NA`.
+#'
+#'   When `callback` is provided, the function returns `NULL` invisibly and calls
+#'   the callback function for each motif found.
 #' @seealso [isomorphism_class()]
 #'
 #' @export
@@ -150,24 +164,36 @@ dyad.census <- function(graph) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-motifs <- function(graph, size = 3, cut.prob = NULL) {
-  ensure_igraph(graph)
-
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
+#'
+#' # Using callback to stop search after finding 5 motifs
+#' count <- 0
+#' motifs(g, 3, callback = function(vids, isoclass) {
+#'   count <<- count + 1
+#'   count < 5  # stop after 5 motifs
+#' })
+motifs <- function(graph, size = 3, cut.prob = NULL, callback = NULL) {
   if (!is.null(cut.prob) && length(cut.prob) != size) {
-    cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
+    cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_motifs_randesu,
-    graph,
-    as.numeric(size),
-    cut.prob
+  # If callback is provided, use the callback implementation
+  if (!is.null(callback)) {
+    motifs_randesu_callback_closure_impl(
+      graph = graph,
+      size = size,
+      cut_prob = cut.prob,
+      callback = callback
+    )
+    return(invisible(NULL))
+  }
+
+  # Otherwise, return motif counts
+  res <- motifs_randesu_impl(
+    graph = graph,
+    size = size,
+    cut_prob = cut.prob
   )
+
   res[is.nan(res)] <- NA
   res
 }
@@ -200,20 +226,14 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
 count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_no,
-    graph,
-    as.numeric(size),
-    cut.prob
+  motifs_randesu_no_impl(
+    graph = graph,
+    size = size,
+    cut_prob = cut.prob
   )
 }
 
@@ -258,10 +278,6 @@ sample_motifs <- function(
 ) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
@@ -275,14 +291,12 @@ sample_motifs <- function(
     sample.size <- 0
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_estimate,
-    graph,
-    as.numeric(size),
-    cut.prob,
-    as.numeric(sample.size),
-    sample
+  motifs_randesu_estimate_impl(
+    graph = graph,
+    size = size,
+    cut_prob = cut.prob,
+    sample_size = sample.size,
+    sample = sample
   )
 }
 
@@ -323,13 +337,14 @@ sample_motifs <- function(
 #' dyad_census(g)
 #' @family graph motifs
 #' @export
-#' @cdocs igraph_dyad_census
 dyad_census <- function(graph) {
   if (!is_directed(graph)) {
     warn("`dyad_census()` requires a directed graph.")
   }
 
-  dyad_census_impl(graph)
+  dyad_census_impl(
+    graph = graph
+  )
 }
 
 
@@ -413,5 +428,8 @@ dyad_census <- function(graph) {
 #' triad_census(g)
 #' @family motifs
 #' @export
-#' @cdocs igraph_triad_census
-triad_census <- triad_census_impl
+triad_census <- function(graph) {
+  triad_census_impl(
+    graph = graph
+  )
+}

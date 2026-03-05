@@ -314,8 +314,13 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-#' @cdocs igraph_centralization
-centralize <- centralization_impl
+centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
+  centralization_impl(
+    scores = scores,
+    theoretical_max = theoretical.max,
+    normalized = normalized
+  )
+}
 
 #' Centralize a graph according to the degrees of vertices
 #'
@@ -356,8 +361,19 @@ centralize <- centralization_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-#' @cdocs igraph_centralization_degree
-centr_degree <- centralization_degree_impl
+centr_degree <- function(
+  graph,
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = TRUE
+) {
+  centralization_degree_impl(
+    graph = graph,
+    mode = mode,
+    loops = loops,
+    normalized = normalized
+  )
+}
 
 #' Theoretical maximum for degree centralization
 #'
@@ -367,8 +383,7 @@ centr_degree <- centralization_degree_impl
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
-#' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#' @inheritParams centr_degree
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -406,7 +421,7 @@ centr_degree_tmax <- function(
 
   # Function call
   res <- centralization_degree_tmax_impl(
-    graph,
+    graph = graph,
     nodes = nodes,
     mode = mode,
     loops = loops
@@ -423,8 +438,7 @@ centr_degree_tmax <- function(
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -460,9 +474,12 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_centralization_betweenness, graph, directed, normalized)
+  res <- centralization_betweenness_impl(
+    graph = graph,
+    directed = directed,
+    normalized = normalized
+  )
 
   res
 }
@@ -492,8 +509,13 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_betweenness_tmax
-centr_betw_tmax <- centralization_betweenness_tmax_impl
+centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
+  centralization_betweenness_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    directed = directed
+  )
+}
 
 #' Centralize a graph according to the closeness of vertices
 #'
@@ -502,8 +524,7 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -532,8 +553,17 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-#' @cdocs igraph_centralization_closeness
-centr_clo <- centralization_closeness_impl
+centr_clo <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  normalized = TRUE
+) {
+  centralization_closeness_impl(
+    graph = graph,
+    mode = mode,
+    normalized = normalized
+  )
+}
 
 #' Theoretical maximum for closeness centralization
 #'
@@ -559,8 +589,17 @@ centr_clo <- centralization_closeness_impl
 #' centr_clo(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_closeness_tmax
-centr_clo_tmax <- centralization_closeness_tmax_impl
+centr_clo_tmax <- function(
+  graph = NULL,
+  nodes = 0,
+  mode = c("out", "in", "all", "total")
+) {
+  centralization_closeness_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    mode = mode
+  )
+}
 
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'
@@ -573,8 +612,7 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{vector}{
@@ -612,7 +650,6 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-#' @cdocs igraph_centralization_eigenvector_centrality
 centr_eigen <- function(
   graph,
   directed = FALSE,
@@ -632,9 +669,9 @@ centr_eigen <- function(
   centralization_eigenvector_centrality_impl(
     graph = graph,
     directed = directed,
+    scale = TRUE,
     options = options,
-    normalized = normalized,
-    scale = TRUE
+    normalized = normalized
   )
 }
 
@@ -664,7 +701,6 @@ centr_eigen <- function(
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_eigenvector_centrality_tmax
 centr_eigen_tmax <- function(
   graph = NULL,
   nodes = 0,

@@ -154,11 +154,7 @@ pak::pak("igraph/igraph.r2cdocs")
 [roxygen2](https://roxygen2.r-lib.org/), and run `devtools::document()` or `make
 igraph` to update the `.Rd` files.
 
-- Links to C docs are added using the cdocs tag, for instance:
-
-```
-#' @cdocs igraph_assortativity
-```
+- Links to C docs are added automatically thanks to the igraph.r2cdocs's roclet.
 
 ### Maintaining igraph.r2cdocs
 

@@ -14,7 +14,7 @@
   sparse = igraph_opt("sparsematrices"),
   edges = FALSE,
   drop = TRUE,
-  attr = if (is_weighted(x)) "weight" else NULL
+  attr = if (is_weighted(x)) "weight"
 )
 }
 \arguments{

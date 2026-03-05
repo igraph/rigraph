@@ -90,7 +90,10 @@ console <- function() {
       type,
       "tk" = .igraph.progress.tk(percent, message),
       "tkconsole" = .igraph.progress.tkconsole(percent, message),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
 }
@@ -107,7 +110,10 @@ console <- function() {
       type,
       "tk" = message(message, appendLF = FALSE),
       "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
   0L

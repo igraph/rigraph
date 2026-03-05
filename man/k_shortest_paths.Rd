@@ -8,8 +8,8 @@ k_shortest_paths(
   graph,
   from,
   to,
-  ...,
   k,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total")
 )
@@ -21,10 +21,10 @@ k_shortest_paths(
 
 \item{to}{The target vertex of the shortest paths.}
 
-\item{...}{These dots are for future extensions and must be empty.}
-
 \item{k}{The number of paths to find. They will be returned in order of
 increasing length.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
@@ -55,6 +55,10 @@ Finds the \eqn{k} shortest paths between the given source and target
 vertex in order of increasing length. Currently this function uses
 Yen's algorithm.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths}{\code{get_k_shortest_paths}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}
+}
+
 \references{
 Yen, Jin Y.:
 An algorithm for finding shortest routes from all source nodes to a given
@@ -93,5 +97,3 @@ Other structural.properties:
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_k_shortest_paths}{\code{get_k_shortest_paths()}}.}
-

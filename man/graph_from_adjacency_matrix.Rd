@@ -14,7 +14,14 @@ graph_from_adjacency_matrix(
   add.rownames = NA
 )
 
-from_adjacency(...)
+from_adjacency(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+)
 }
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
@@ -50,8 +57,6 @@ attributes. Possible values the same as the previous argument. By default
 row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
-
-\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.
@@ -135,6 +140,10 @@ gives the edge weights.
 }
 }
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency}{\code{adjacency}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency}{\code{weighted_adjacency}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}
+}
+
 \examples{
 
 g1 <- sample(

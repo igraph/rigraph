@@ -6,6 +6,7 @@
 \alias{count_multiple}
 \alias{which_loop}
 \alias{any_loop}
+\alias{count_loops}
 \title{Find the multiple or loop edges in a graph}
 \usage{
 which_multiple(graph, eids = E(graph))
@@ -17,6 +18,8 @@ count_multiple(graph, eids = E(graph))
 which_loop(graph, eids = E(graph))
 
 any_loop(graph)
+
+count_loops(graph)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -27,6 +30,7 @@ all edges in the graph.}
 \value{
 \code{any_loop()} and \code{any_multiple()} return a logical scalar.
 \code{which_loop()} and \code{which_multiple()} return a logical vector.
+\code{count_loops()} returns a numeric scalar with the total number of loop edges.
 \code{count_multiple()} returns a numeric vector.
 }
 \description{
@@ -38,6 +42,8 @@ without multiple and loop edges is called a simple graph.
 \code{any_loop()} decides whether the graph has any loop edges.
 
 \code{which_loop()} decides whether the edges of the graph are loop edges.
+
+\code{count_loops()} counts the total number of loop edges in the graph.
 
 \code{any_multiple()} decides whether the graph has any multiple edges.
 
@@ -55,12 +61,17 @@ graph then \code{which_multiple()} returns \code{TRUE} for only two of them whil
 See the examples for getting rid of multiple edges while keeping their
 original multiplicity as an edge attribute.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple}{\code{is_multiple}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple}{\code{count_multiple}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop}{\code{has_loop}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_loops}{\code{count_loops}}
+}
+
 \examples{
 
 # Loops
 g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 any_loop(g)
 which_loop(g)
+count_loops(g)
 
 # Multiple edges
 g <- sample_pa(10, m = 3, algorithm = "bag")
@@ -116,5 +127,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_multiple}{\code{is_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_multiple}{\code{count_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop}{\code{has_loop()}}.}
-

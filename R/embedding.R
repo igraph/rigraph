@@ -101,8 +101,25 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-#' @cdocs igraph_adjacency_spectral_embedding
-embed_adjacency_matrix <- adjacency_spectral_embedding_impl
+embed_adjacency_matrix <- function(
+  graph,
+  no,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  scaled = TRUE,
+  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
+  options = arpack_defaults()
+) {
+  adjacency_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    scaled = scaled,
+    cvec = cvec,
+    options = options
+  )
+}
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -163,8 +180,11 @@ embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 #'
 #' @family embedding
 #' @export
-#' @cdocs igraph_dim_select
-dim_select <- dim_select_impl
+dim_select <- function(sv) {
+  dim_select_impl(
+    sv = sv
+  )
+}
 
 
 #' Spectral Embedding of the Laplacian of a Graph
@@ -255,8 +275,25 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-#' @cdocs igraph_laplacian_spectral_embedding
-embed_laplacian_matrix <- laplacian_spectral_embedding_impl
+embed_laplacian_matrix <- function(
+  graph,
+  no,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
+  scaled = TRUE,
+  options = arpack_defaults()
+) {
+  laplacian_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    type = type,
+    scaled = scaled,
+    options = options
+  )
+}
 
 
 #' Sample vectors uniformly from the surface of a sphere
@@ -360,5 +397,8 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
   # Use the _impl function
-  sample_dirichlet_impl(n = n, alpha = alpha)
+  sample_dirichlet_impl(
+    n = n,
+    alpha = alpha
+  )
 }

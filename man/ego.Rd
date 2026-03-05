@@ -116,6 +116,10 @@ the vertex, edge and graph attributes.
 \code{connect()} creates a new graph by connecting each vertex to
 all other vertices in its neighborhood.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood}{\code{connect_neighborhood}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -171,6 +175,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}

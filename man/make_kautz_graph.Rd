@@ -7,14 +7,12 @@
 \usage{
 make_kautz_graph(m, n)
 
-kautz_graph(...)
+kautz_graph(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet. See details below.}
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
-
-\item{...}{Passed to \code{make_kautz_graph()}.}
 }
 \value{
 A graph object.
@@ -33,6 +31,10 @@ removing the first letter and appending a letter to it.
 Kautz graphs have some interesting properties, see e.g. Wikipedia for
 details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kautz}{\code{kautz}}
+}
+
 \examples{
 
 make_line_graph(make_kautz_graph(2, 1))

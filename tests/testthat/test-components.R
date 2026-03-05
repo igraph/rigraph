@@ -172,10 +172,13 @@ test_that("biconnected_components works", {
   expect_equal(
     sort(names(bc)),
     c(
+    "articulation.points",
     "articulation_points",
+    "component.edges",
     "component_edges",
     "components",
     "no",
+    "tree.edges",
     "tree_edges"
   )
   )

@@ -7,7 +7,7 @@
 \usage{
 sample_dot_product(vecs, directed = FALSE)
 
-dot_product(...)
+dot_product(vecs, directed = FALSE)
 }
 \arguments{
 \item{vecs}{A numeric matrix in which each latent position vector is a
@@ -15,8 +15,6 @@ column.}
 
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
-
-\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product
@@ -32,6 +30,10 @@ The dot product of the latent position vectors should be in the [0,1]
 interval, otherwise a warning is given. For negative dot products, no edges
 are added; dot products that are larger than one always add an edge.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game}}
+}
+
 \examples{
 
 ## A randomly generated  graph
@@ -89,5 +91,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}.}
-

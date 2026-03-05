@@ -201,9 +201,25 @@ clique.number <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
-#' @return `cliques()`, `largest_cliques()` and `clique_num()`
-#'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class [igraph.vs][V].
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each clique found. If provided,
+#'   the function should accept one argument: `clique` (integer vector of vertex
+#'   IDs in the clique, 1-based indexing). The function should return `FALSE` to
+#'   continue the search or `TRUE` to stop it. If `NULL` (the default), all
+#'   cliques are collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return `cliques()` returns a list containing numeric vectors of vertex ids if
+#'   `callback` is `NULL`. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V]. If `callback` is provided, returns `NULL` invisibly.
+#'
+#'   `largest_cliques()` and `clique_num()` return a list containing numeric
+#'   vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+#'   of class [igraph.vs][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -238,13 +254,36 @@ clique.number <- function(graph) {
 #'
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
-#' @cdocs igraph_cliques
-cliques <- cliques_impl
+cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
+  ensure_igraph(graph)
+  check_dots_empty()
+
+  if (is.null(callback)) {
+    # Collector mode: use original implementation
+    cliques_impl(
+      graph = graph,
+      min = min %||% 0,
+      max = max %||% 0
+    )
+  } else {
+    # Callback mode: call user function
+    cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
+  }
+}
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_largest_cliques
-largest_cliques <- largest_cliques_impl
+largest_cliques <- function(graph) {
+  largest_cliques_impl(
+    graph = graph
+  )
+}
 
 #' @rdname cliques
 #' @param subset If not `NULL`, then it must be a vector of vertex ids,
@@ -263,21 +302,14 @@ max_cliques <- function(
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL
+  file = NULL,
+  ...,
+  callback = NULL
 ) {
   ensure_igraph(graph)
+  check_dots_empty()
 
-  if (is.null(min)) {
-    min <- 0
-  }
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  if (!is.null(subset)) {
-    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
-  }
-
+  # Handle file and subset modes (original functionality)
   if (!is.null(file)) {
     if (
       !is.character(file) ||
@@ -290,28 +322,38 @@ max_cliques <- function(
     } else {
       tmpfile <- FALSE
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques_file,
+      Rx_igraph_maximal_cliques_file,
       graph,
       subset,
       file,
-      as.numeric(min),
-      as.numeric(max)
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
     )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
     }
-    invisible(NULL)
-  } else {
-    on.exit(.Call(R_igraph_finalizer))
+    return(invisible(NULL))
+  }
+
+  # Collector or callback mode
+  if (is.null(callback)) {
+    # Collector mode: use original implementation
+    if (is.null(subset)) {
+      subset_arg <- NULL
+    } else {
+      subset_arg <- as.numeric(as_igraph_vs(graph, subset) - 1)
+    }
+
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques,
+      Rx_igraph_maximal_cliques,
       graph,
-      subset,
-      as.numeric(min),
-      as.numeric(max)
+      subset_arg,
+      as.numeric(min %||% 0),
+      as.numeric(max %||% 0)
     )
     res <- lapply(res, function(x) x + 1)
 
@@ -320,6 +362,21 @@ max_cliques <- function(
     }
 
     res
+  } else {
+    # Callback mode: call user function
+    if (!is.null(subset)) {
+      cli::cli_abort(
+        "{.arg subset} is not supported when {.arg callback} is provided"
+      )
+    }
+
+    maximal_cliques_callback_closure_impl(
+      graph = graph,
+      min_size = min %||% 0,
+      max_size = max %||% 0,
+      callback = callback
+    )
+    invisible(NULL)
   }
 }
 
@@ -342,17 +399,20 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
     subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_maximal_cliques_count, graph, subset, min, max)
+  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
 
   res
 }
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_clique_number
-clique_num <- clique_number_impl
+clique_num <- function(graph) {
+  clique_number_impl(
+    graph = graph
+  )
+}
 
 
 #' Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph
@@ -404,16 +464,37 @@ clique_num <- clique_number_impl
 #' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
-#' @cdocs igraph_weighted_cliques
-weighted_cliques <- weighted_cliques_impl
+weighted_cliques <- function(
+  graph,
+  vertex.weights = NULL,
+  min.weight = 0,
+  max.weight = 0,
+  maximal = FALSE
+) {
+  weighted_cliques_impl(
+    graph = graph,
+    vertex_weights = vertex.weights,
+    min_weight = min.weight,
+    max_weight = max.weight,
+    maximal = maximal
+  )
+}
 #' @export
 #' @rdname cliques
-#' @cdocs igraph_largest_weighted_cliques
-largest_weighted_cliques <- largest_weighted_cliques_impl
+largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
+  largest_weighted_cliques_impl(
+    graph = graph,
+    vertex_weights = vertex.weights
+  )
+}
 #' @export
 #' @rdname cliques
-#' @cdocs igraph_weighted_clique_number
-weighted_clique_num <- weighted_clique_number_impl
+weighted_clique_num <- function(graph, vertex.weights = NULL) {
+  weighted_clique_number_impl(
+    graph = graph,
+    vertex_weights = vertex.weights
+  )
+}
 
 #' Independent vertex sets
 #'
@@ -491,9 +572,9 @@ ivs <- function(graph, min = NULL, max = NULL) {
     max <- 0
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_independent_vertex_sets,
+    Rx_igraph_independent_vertex_sets,
     graph,
     as.numeric(min),
     as.numeric(max)
@@ -510,33 +591,17 @@ ivs <- function(graph, min = NULL, max = NULL) {
 #' @rdname ivs
 #' @export
 largest_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  largest_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs
 #' @export
 max_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  maximal_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' Maximal independent vertex sets in the graph
@@ -557,10 +622,9 @@ maximal_ivs <- function(graph) {
 #' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_independence_number, graph)
+  independence_number_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs
@@ -569,13 +633,19 @@ independence_number <- ivs_size
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_maximal_cliques_hist
-#' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
-    maximal_cliques_hist_impl(graph, min, max)
+    maximal_cliques_hist_impl(
+      graph = graph,
+      min_size = min,
+      max_size = max
+    )
   } else {
-    clique_size_hist_impl(graph, min, max)
+    clique_size_hist_impl(
+      graph = graph,
+      min_size = min,
+      max_size = max
+    )
   }
 }
 
@@ -591,7 +661,6 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
 #' @keywords graphs
 #' @seealso [make_full_graph()]
 #' @export
-#' @cdocs igraph_is_complete
 #' @examples
 #'
 #' g <- make_full_graph(6, directed = TRUE)
@@ -600,7 +669,11 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
 #' is_complete(g)
 #' g <- as_undirected(g)
 #' is_complete(g)
-is_complete <- is_complete_impl
+is_complete <- function(graph) {
+  is_complete_impl(
+    graph = graph
+  )
+}
 
 #' @rdname cliques
 #'
@@ -615,8 +688,13 @@ is_complete <- is_complete_impl
 #'   a clique.
 #' @keywords graphs
 #' @export
-#' @cdocs igraph_is_clique
-is_clique <- is_clique_impl
+is_clique <- function(graph, candidate, directed = FALSE) {
+  is_clique_impl(
+    graph = graph,
+    candidate = candidate,
+    directed = directed
+  )
+}
 
 #' @rdname ivs
 #'
@@ -626,5 +704,9 @@ is_clique <- is_clique_impl
 #'   independent set.
 #' @keywords graphs
 #' @export
-#' @cdocs igraph_is_independent_vertex_set
-is_ivs <- is_independent_vertex_set_impl
+is_ivs <- function(graph, candidate) {
+  is_independent_vertex_set_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}

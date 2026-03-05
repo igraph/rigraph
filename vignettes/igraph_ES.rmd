@@ -143,8 +143,8 @@ g <- add_edges(g, edges = c(38, 37))
 Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%>%`:
 
 ```{r echo = TRUE}
-g <- g %>% 
-  add_edges(edges = c(1, 34)) %>% 
+g <- g %>%
+  add_edges(edges = c(1, 34)) %>%
   add_vertices(3) %>%
   add_edges(edges = c(38, 39, 39, 40, 40, 38, 40, 37))
 g
@@ -180,13 +180,13 @@ Veamos otro ejemplo, hagamos un grafo cordal. Recuerda que un grafo es cordal (o
 
 ```{r}
 g1 <- graph_from_literal(
-  A-B:C:I, 
-  B-A:C:D, 
-  C-A:B:E:H, 
+  A-B:C:I,
+  B-A:C:D,
+  C-A:B:E:H,
   D-B:E:F,
-  E-C:D:F:H, 
-  F-D:E:G, 
-  G-F:H, 
+  E-C:D:F:H,
+  F-D:E:G,
+  G-F:H,
   H-C:E:G:I,
   I-A:H
 )
@@ -257,7 +257,7 @@ Para demostrar el uso de los atributos, creemos una red social sencilla:
 g <- make_graph(
   ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe, 
+  Ibrahim-Nang:Moshe,
   Nang-Samira
 )
 ```
@@ -265,7 +265,7 @@ g <- make_graph(
 Cada vértice representa a una persona, por lo que queremos almacenar sus edades, géneros y el tipo de conexión entre dos personas (`is_formal()` se refiere a si una conexión entre una persona y otra es formal o informal, es decir, colegas o amigos). El operador `$` es un atajo para obtener y establecer atributos de un grafo. Es más corto y tan legible como `graph_attr()` y `set_graph_attr()`.
 
 ```{r echo = TRUE}
-V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
+V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
 V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
 E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
@@ -275,9 +275,9 @@ summary(g)
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
-  ~ Alice-Boris:Himari:Moshe, 
+  ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe, 
+  Ibrahim-Nang:Moshe,
   Nang-Samira
 ) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
@@ -551,7 +551,7 @@ El argumento `layout` también acepta funciones; en este caso, la función será
 
 ```{r}
 plot(
-  g, 
+  g,
   layout = layout_with_fr,
   main = "Red social con el algoritmo de disposición Fruchterman-Reingold"
 )
@@ -562,8 +562,8 @@ Para mejorar el aspecto visual, una adición trivial sería colorear los vértic
 ```{r}
 V(g)$color <- ifelse(V(g)$gender == "m", "yellow", "red")
 plot(
-  g, 
-  layout = layout, 
+  g,
+  layout = layout,
   vertex.label.dist = 3.5,
   main = "Red social - con los géneros como colores"
 )
@@ -573,9 +573,9 @@ También puedes tratar el atributo `gender` como un factor y proporcionar los co
 
 ```{r}
 plot(
-  g, 
-  layout = layout, 
-  vertex.label.dist = 3.5, 
+  g,
+  layout = layout,
+  vertex.label.dist = 3.5,
   vertex.color = as.factor(V(g)$gender))
 ```
 

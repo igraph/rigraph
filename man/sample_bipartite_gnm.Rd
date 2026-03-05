@@ -7,9 +7,9 @@
 \alias{sample_bipartite_gnp}
 \title{Bipartite random graphs}
 \usage{
-bipartite_gnm(...)
+bipartite_gnm(n1, n2, m, ..., directed = FALSE, mode = c("out", "in", "all"))
 
-bipartite_gnp(...)
+bipartite_gnp(n1, n2, p, ..., directed = FALSE, mode = c("out", "in", "all"))
 
 sample_bipartite_gnm(
   n1,
@@ -30,13 +30,13 @@ sample_bipartite_gnp(
 )
 }
 \arguments{
-\item{...}{Passed to \code{sample_bipartite_gnp()}.}
-
 \item{n1}{Integer scalar, the number of bottom vertices.}
 
 \item{n2}{Integer scalar, the number of top vertices.}
 
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical scalar, whether to create a directed graph. See also
 the \code{mode} argument.}
@@ -61,6 +61,10 @@ In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
 with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
 uniformly choose \eqn{m} edges to realize.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp}}
+}
+
 \examples{
 
 ## empty graph

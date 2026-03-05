@@ -142,7 +142,7 @@ test_that("Edges stop at outside of rectangle node", {
 test_that("layout as graph attribute error works", {
   g <- make_full_graph(10)
   g$layout <- layout_in_circle(g)[1:5, ]
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     plot(g)
   })
 })

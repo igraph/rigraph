@@ -26,6 +26,10 @@ new graph.
 \code{complementer()} keeps graph and vertex attriubutes, edge
 attributes are lost.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_complementer}{\code{complementer}}
+}
+
 \examples{
 
 ## Complementer of a ring
@@ -62,6 +66,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}
