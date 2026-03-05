@@ -21,7 +21,9 @@ Authors@R: c(
     person("David", "Schoch", , "david.schoch@cynkra.com", role = "aut",
            comment = c(ORCID = "0000-0003-2952-4812")),
     person("Maëlle", "Salmon", , "maelle@cynkra.com", role = "aut",
-           comment = c(ORCID = "0000-0002-2815-0399"))
+           comment = c(ORCID = "0000-0002-2815-0399")),
+    person("R Consortium", role = "fnd",
+           comment = c(ROR = "01z833950"))
   )
 Description: Routines for simple graphs and network analysis. It can
     handle large graphs very well and provides functions for generating
@@ -72,9 +74,9 @@ Config/build/never-clean: true
 Config/comment/compilation-database: Generate manually with
     pkgload:::generate_db() for faster pkgload::load_all()
 Config/Needs/build: devtools, irlba, pkgconfig
-Config/Needs/roxygen2: r-lib/roxygen2,
-    igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
+Config/Needs/roxygen2: r-lib/roxygen2, igraph/igraph.r2cdocs,
+    moodymudskipper/devtag
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
