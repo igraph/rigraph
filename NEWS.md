@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.2.9002
+
+## Chore
+
+- Remove `console()` and `tkplot()` (#39, #2187).
+
+- Replace last calls to `stop()` (#731, #2588).
+
+## Documentation
+
+- List R Consortium as fnd with its ROR ID (#2587).
+
+
 # igraph 2.2.2.9001
 
 ## Bug fixes
