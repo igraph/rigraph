@@ -50,6 +50,7 @@ Other deterministic constructors:
 \code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
+\code{\link{make_mycielski_graph}()},
 \code{\link{make_star}()},
 \code{\link{make_tree}()},
 \code{\link{make_turan}()},
