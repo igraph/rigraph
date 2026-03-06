@@ -1,5 +1,23 @@
 # Changelog
 
+## igraph 2.2.2.9002
+
+### Chore
+
+- Remove [`console()`](https://r.igraph.org/reference/console.md) and
+  [`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+  ([\#39](https://github.com/igraph/rigraph/issues/39),
+  [\#2187](https://github.com/igraph/rigraph/issues/2187)).
+
+- Replace last calls to [`stop()`](https://rdrr.io/r/base/stop.html)
+  ([\#731](https://github.com/igraph/rigraph/issues/731),
+  [\#2588](https://github.com/igraph/rigraph/issues/2588)).
+
+### Documentation
+
+- List R Consortium as fnd with its ROR ID
+  ([\#2587](https://github.com/igraph/rigraph/issues/2587)).
+
 ## igraph 2.2.2.9001
 
 ### Bug fixes
