@@ -104,7 +104,7 @@ g <- make_(
 V(g)$name
 #>  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J"
 V(g)$color
-#>  [1] 2 1 1 1 1 2 1 1 2 2
+#>  [1] 1 2 2 2 2 1 1 1 1 2
 V(g)$frame.color <- V(g)$color
 
 # color vertices of the largest component

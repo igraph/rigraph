@@ -145,7 +145,7 @@ Tamas Nepusz <ntamas@gmail.com> for the C implementation, Gabor Csardi
 g <- sample_gnp(10, 5 / 10) %du% sample_gnp(9, 5 / 9)
 g <- add_edges(g, c(1, 12))
 cluster_label_prop(g)
-#> IGRAPH clustering label propagation, groups: 2, mod: 0.45
+#> IGRAPH clustering label propagation, groups: 2, mod: 0.48
 #> + groups:
 #>   $`1`
 #>    [1]  1  2  3  4  5  6  7  8  9 10

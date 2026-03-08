@@ -179,12 +179,12 @@ fit1 <- fit_power_law(d + 1, 10)
 fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
 
 fit1$alpha
-#> [1] 2.527759
+#> [1] 2.866642
 stats4::coef(fit2)
 #>    alpha 
-#> 2.527372 
+#> 2.866586 
 fit1$logLik
-#> [1] -55.7596
+#> [1] -69.666
 stats4::logLik(fit2)
-#> 'log Lik.' -55.75921 (df=1)
+#> 'log Lik.' -69.66595 (df=1)
 ```

@@ -53,7 +53,7 @@ Other centralization related:
 g <- sample_pa(1000, m = 4)
 centr_betw(g, normalized = FALSE)$centralization %>%
   `/`(centr_betw_tmax(g))
-#> [1] 0.001284695
+#> [1] 0.0005692495
 centr_betw(g, normalized = TRUE)$centralization
-#> [1] 0.001284695
+#> [1] 0.0005692495
 ```

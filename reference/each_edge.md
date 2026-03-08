@@ -62,7 +62,7 @@ mean_distance(g)
 #> [1] 7.141414
 g <- rewire(g, each_edge(prob = 0.05))
 mean_distance(g)
-#> [1] 2.680808
+#> [1] 2.665455
 
 # Rewiring the start of each directed edge preserves the in-degree distribution
 # but not the out-degree distribution

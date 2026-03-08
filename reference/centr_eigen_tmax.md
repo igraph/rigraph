@@ -63,7 +63,7 @@ Other centralization related:
 g <- sample_pa(1000, m = 4)
 centr_eigen(g, normalized = FALSE)$centralization %>%
   `/`(centr_eigen_tmax(g))
-#> [1] 0.9468524
+#> [1] 0.9386488
 centr_eigen(g, normalized = TRUE)$centralization
-#> [1] 0.9468524
+#> [1] 0.9386488
 ```

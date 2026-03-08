@@ -83,7 +83,7 @@ l2 <- make_(lattice(c(3, 3, 3)), with_edge_(weight = 2))
 
 ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "configuration"), simplified())
 degree(ran)
-#> [1] 3 3 3 3 3 3
+#> [1] 3 3 3 1 3 3
 is_simple(ran)
 #> [1] TRUE
 ```

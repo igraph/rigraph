@@ -127,14 +127,14 @@ g <- sample_pa(10, m = 3, algorithm = "bag")
 any_multiple(g)
 #> [1] TRUE
 which_multiple(g)
-#>  [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE
-#> [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-#> [25] FALSE FALSE  TRUE
+#>  [1] FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE
+#> [13] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
+#> [25] FALSE  TRUE  TRUE
 count_multiple(g)
-#>  [1] 3 3 3 1 2 2 3 3 3 2 2 1 1 1 1 1 1 1 2 1 2 1 1 1 2 1 2
+#>  [1] 3 3 3 2 2 1 3 3 3 3 3 3 3 3 3 2 1 2 3 3 3 1 1 1 3 3 3
 which_multiple(simplify(g))
 #>  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [13] FALSE
 all(count_multiple(simplify(g)) == 1)
 #> [1] TRUE
 
@@ -151,5 +151,5 @@ g <- simplify(g, edge.attr.comb = list(weight = "min"))
 any(which_multiple(g))
 #> [1] FALSE
 E(g)$weight
-#>  [1] 3 2 1 2 1 1 1 1 2 1 1 1 1 1 1 1 3 1 1 1
+#>  [1] 3 3 2 1 3 1 1 1 2 1 1 1 1 2 1 2 1
 ```

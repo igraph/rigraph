@@ -91,13 +91,13 @@ Other centralization related:
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
 centr_degree(g)$centralization
-#> [1] 0.1473045
+#> [1] 0.1523145
 centr_clo(g, mode = "all")$centralization
-#> [1] 0.4057694
+#> [1] 0.4128655
 centr_betw(g, directed = FALSE)$centralization
-#> [1] 0.2188419
+#> [1] 0.2245963
 centr_eigen(g, directed = FALSE)$centralization
-#> [1] 0.9409572
+#> [1] 0.9418167
 
 # The most centralized graph according to eigenvector centrality
 g0 <- make_graph(c(2, 1), n = 10, dir = FALSE)

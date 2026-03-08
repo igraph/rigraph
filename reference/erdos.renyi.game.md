@@ -104,5 +104,5 @@ g <- erdos.renyi.game(1000, 1 / 1000)
 #> Warning: `erdos.renyi.game()` was deprecated in igraph 0.8.0.
 #> ℹ Please use `sample_gnp()` instead.
 degree_distribution(g)
-#> [1] 0.394 0.348 0.169 0.075 0.013 0.001
+#> [1] 0.373 0.381 0.183 0.049 0.011 0.002 0.001
 ```

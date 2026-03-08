@@ -67,7 +67,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sing.vals <- c(rnorm(10, mean = 1, sd = 1), rnorm(10, mean = 3, sd = 1))
 dim.chosen <- dim_select(sing.vals)
 dim.chosen
-#> [1] 18
+#> [1] 9
 
 # Sample random vectors with multivariate normal distribution
 # and normalize to unit length

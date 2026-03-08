@@ -157,7 +157,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnp(10, 3 / 10)
 betweenness(g)
-#>  [1] 13 10  0  0  6  1  0  6  0  0
+#>  [1]  0  0  0 14  0  6  6  0  0  0
 edge_betweenness(g)
-#> [1] 15  5  9  4  2  3 12  7  7
+#>  [1]  4  2  7  8 12  1  4  2  7  7
 ```

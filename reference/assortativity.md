@@ -138,7 +138,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 # random network, close to zero
 assortativity_degree(sample_gnp(10000, 3 / 10000))
-#> [1] -0.009772373
+#> [1] 0.0002666471
 
 # BA model, tends to be dissortative
 assortativity_degree(sample_pa(10000, m = 4))

@@ -63,7 +63,7 @@ Other centralization related:
 g <- sample_pa(1000, m = 4)
 centr_degree(g, normalized = FALSE)$centralization %>%
   `/`(centr_degree_tmax(g, loops = FALSE))
-#> [1] 0.1459476
+#> [1] 0.1599896
 centr_degree(g, normalized = TRUE)$centralization
-#> [1] 0.1458015
+#> [1] 0.1598295
 ```

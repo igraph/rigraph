@@ -236,16 +236,16 @@ cluster_spinglass(g, spins = 2)
 #>   
 cluster_spinglass(g, vertex = 1)
 #> $community
-#>  [1]  1  2  4 10  8  5  9  3  6  7
+#>  [1]  1  5  6  7  9 10  4  3  2  8
 #> 
 #> $cohesion
-#> [1] 9.72561
+#> [1] 8.940789
 #> 
 #> $adhesion
-#> [1] -19.45122
+#> [1] -17.88158
 #> 
 #> $inner.links
-#> [1] 21
+#> [1] 20
 #> 
 #> $outer.links
 #> [1] 1

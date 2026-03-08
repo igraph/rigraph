@@ -68,9 +68,9 @@ g <- sample_pa(1000, m = 4)
 centr_degree(g)$centralization
 #> [1] 0.1618335
 centr_clo(g, mode = "all")$centralization
-#> [1] 0.4288587
+#> [1] 0.437051
 centr_betw(g, directed = FALSE)$centralization
-#> [1] 0.2645597
+#> [1] 0.2764392
 centr_eigen(g, directed = FALSE)$centralization
-#> [1] 0.948102
+#> [1] 0.9486925
 ```
