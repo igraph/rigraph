@@ -76,7 +76,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`square_lattice`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice)
+[`square_lattice()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice)
 
 ## See also
 
@@ -102,10 +102,10 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> IGRAPH a6844a9 U--- 125 300 -- Lattice graph
+#> IGRAPH 03334ae U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from a6844a9:
+#> + edges from 03334ae:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
@@ -115,10 +115,10 @@ make_lattice(c(5, 5, 5))
 #> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> IGRAPH 5171558 U--- 125 300 -- Lattice graph
+#> IGRAPH c49673b U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from 5171558:
+#> + edges from c49673b:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16

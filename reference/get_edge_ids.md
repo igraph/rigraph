@@ -51,10 +51,10 @@ vertices.
 
 ## Related documentation in the C library
 
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges)
 
 ## See also
 
@@ -83,7 +83,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> + 2/10 edges from 014bcf5:
+#> + 2/10 edges from 2fa7d91:
 #> [1] 1--2 4--5
 
 ## non-existant edge
@@ -97,6 +97,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> + 2/5 edges from c061618:
+#> + 2/5 edges from 7a5dd96:
 #> [1] 1->2 1->2
 ```

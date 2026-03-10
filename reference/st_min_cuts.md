@@ -66,11 +66,11 @@ An \\(s,t)\\-cut is minimum if it is of the smallest possible size.
 
 ## Related documentation in the C library
 
-[`all_st_mincuts`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`all_st_mincuts()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 
@@ -109,29 +109,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> + 2/14 edges from 8f09b25 (vertex names):
+#> + 2/14 edges from f81fba0 (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/14 edges from 8f09b25 (vertex names):
+#> + 2/14 edges from f81fba0 (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 2/14 edges from 8f09b25 (vertex names):
+#> + 2/14 edges from f81fba0 (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/9 vertex, named, from 8f09b25:
+#> + 1/9 vertex, named, from f81fba0:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/9 vertices, named, from 8f09b25:
+#> + 2/9 vertices, named, from f81fba0:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 8/9 vertices, named, from 8f09b25:
+#> + 8/9 vertices, named, from f81fba0:
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

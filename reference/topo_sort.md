@@ -39,8 +39,8 @@ returned and a warning is issued.
 
 ## Related documentation in the C library
 
-[`topological_sorting`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_topological_sorting),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`topological_sorting()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_topological_sorting),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -80,7 +80,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ``` r
 g <- sample_pa(100)
 topo_sort(g)
-#> + 100/100 vertices, from 40477ec:
+#> + 100/100 vertices, from 64d14fb:
 #>   [1]   6   9  12  13  18  19  20  22  23  24  30  31  32  34  35  36  37  38
 #>  [19]  39  40  41  44  46  47  50  51  52  53  54  55  56  60  61  62  63  64
 #>  [37]  66  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84

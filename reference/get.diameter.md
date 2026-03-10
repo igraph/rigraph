@@ -38,7 +38,7 @@ get.diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 
 ## Related documentation in the C library
 
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

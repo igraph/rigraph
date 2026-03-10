@@ -99,10 +99,10 @@ consecutive depth-first searches.
 
 ## Related documentation in the C library
 
-[`connected_components`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`induced_subgraph`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
-[`is_connected`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected)
+[`connected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`induced_subgraph()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected)
 
 ## See also
 
@@ -178,8 +178,8 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> IGRAPH 30412dd U--- 8 7 -- Erdos-Renyi (gnp) graph
+#> IGRAPH 6a06d11 U--- 8 7 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from 30412dd:
+#> + edges from 6a06d11:
 #> [1] 2--3 1--4 4--5 2--6 5--6 6--7 6--8
 ```

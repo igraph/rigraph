@@ -30,7 +30,7 @@ The graph, with the vertex attributes added or set.
 
 ## Related documentation in the C library
 
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -59,24 +59,24 @@ Vertex, edge and graph attributes
 ``` r
 g <- make_ring(10)
 set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-#> IGRAPH 4fef6bb UN-- 10 10 -- Ring graph
+#> IGRAPH 13c6b87 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), size
 #> | (v/n), name (v/c)
-#> + edges from 4fef6bb (vertex names):
+#> + edges from 13c6b87 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 # use splicing if suplying a list
 x <- list(color = "red", name = LETTERS[1:10])
 set_vertex_attrs(g, !!!x)
-#> IGRAPH 4fef6bb UN-- 10 10 -- Ring graph
+#> IGRAPH 13c6b87 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), name
 #> | (v/c)
-#> + edges from 4fef6bb (vertex names):
+#> + edges from 13c6b87 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 # to set an attribute named "index" use `:=`
 set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-#> IGRAPH 4fef6bb UN-- 10 10 -- Ring graph
+#> IGRAPH 13c6b87 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), index
 #> | (v/n), name (v/c)
-#> + edges from 4fef6bb (vertex names):
+#> + edges from 13c6b87 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 ```

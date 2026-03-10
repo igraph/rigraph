@@ -95,13 +95,13 @@ local efficiency above.
 
 ## Related documentation in the C library
 
-[`global_efficiency`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`local_efficiency`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency),
-[`average_local_efficiency`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency)
+[`global_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency),
+[`average_local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency)
 
 ## References
 

@@ -35,8 +35,8 @@ mod.matrix(graph, membership, weights = NULL, resolution = 1, directed = TRUE)
 
 ## Related documentation in the C library
 
-[`modularity_matrix`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity_matrix),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`modularity_matrix()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity_matrix),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

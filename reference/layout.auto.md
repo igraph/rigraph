@@ -33,9 +33,9 @@ layout.auto(graph, dim = 2, ...)
 
 ## Related documentation in the C library
 
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`layout_align`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align),
-[`is_forest`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`layout_align()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align),
+[`is_forest()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

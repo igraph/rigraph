@@ -34,11 +34,11 @@ Right now the following objects are supported:
 
 ## Related documentation in the C library
 
-[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
-[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## Author
 
@@ -50,9 +50,9 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> IGRAPH c928b83 DN-- 19 18 -- Fitted HRG
+#> IGRAPH ac7deb6 DN-- 19 18 -- Fitted HRG
 #> + attr: name (g/c), name (v/c), prob (v/n)
-#> + edges from c928b83 (vertex names):
+#> + edges from ac7deb6 (vertex names):
 #>  [1] g1->g6 g2->8  g3->g4 g4->6  g5->g3 g6->g7 g7->1  g8->2  g9->4  g1->g5
 #> [11] g2->9  g3->7  g4->10 g5->g2 g6->3  g7->g8 g8->g9 g9->5 
 ```

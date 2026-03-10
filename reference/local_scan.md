@@ -105,18 +105,18 @@ in `graph.them`.
 
 ## Related documentation in the C library
 
-[`local_scan_0`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0),
-[`local_scan_0_them`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them),
-[`local_scan_1_ecount`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount),
-[`local_scan_1_ecount_them`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them),
-[`local_scan_k_ecount`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount),
-[`local_scan_k_ecount_them`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them),
-[`local_scan_neighborhood_ecount`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`induced_subgraph`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`local_scan_0()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0),
+[`local_scan_0_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them),
+[`local_scan_1_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount),
+[`local_scan_1_ecount_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them),
+[`local_scan_k_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount),
+[`local_scan_k_ecount_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them),
+[`local_scan_neighborhood_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`induced_subgraph()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 

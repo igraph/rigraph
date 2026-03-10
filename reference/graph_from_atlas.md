@@ -35,7 +35,7 @@ An igraph graph.
 
 ## Related documentation in the C library
 
-[`atlas`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)
+[`atlas()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)
 
 ## See also
 
@@ -62,13 +62,13 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 38413e2 U--- 7 9 -- Graph from the Atlas #464
+#> IGRAPH d0325e3 U--- 7 9 -- Graph from the Atlas #464
 #> + attr: name (g/c), n (g/n)
-#> + edges from 38413e2:
+#> + edges from d0325e3:
 #> [1] 2--4 2--3 1--3 1--6 5--6 4--5 3--4 1--4 1--5
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 5f8a3ba U--- 6 8 -- Graph from the Atlas #139
+#> IGRAPH e65b605 U--- 6 8 -- Graph from the Atlas #139
 #> + attr: name (g/c), n (g/n)
-#> + edges from 5f8a3ba:
+#> + edges from e65b605:
 #> [1] 1--2 2--3 3--4 4--5 1--5 2--4 2--5 1--6
 ```

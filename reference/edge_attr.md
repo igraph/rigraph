@@ -31,10 +31,10 @@ The value of the edge attribute, or the list of all edge attributes if
 
 ## Related documentation in the C library
 
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -65,10 +65,10 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> IGRAPH c8e6f15 U-W- 10 10 -- Ring graph
+#> IGRAPH 646fd37 U-W- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n), color
 #> | (e/c)
-#> + edges from c8e6f15:
+#> + edges from 646fd37:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g, edge.width = E(g)$weight)
 ```

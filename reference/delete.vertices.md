@@ -24,5 +24,5 @@ delete.vertices(graph, v)
 
 ## Related documentation in the C library
 
-[`delete_vertices`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_vertices),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`delete_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_vertices),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

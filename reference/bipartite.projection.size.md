@@ -27,5 +27,5 @@ bipartite.projection.size(graph, types = NULL)
 
 ## Related documentation in the C library
 
-[`bipartite_projection_size`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

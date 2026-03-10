@@ -47,7 +47,7 @@ Please see the reference given below.
 
 ## Related documentation in the C library
 
-[`correlated_pair_game`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game)
+[`correlated_pair_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game)
 
 ## References
 
@@ -94,14 +94,14 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> IGRAPH c450cca U--- 10 22 -- 
-#> + edges from c450cca:
+#> IGRAPH 6c3ed28 U--- 10 22 -- 
+#> + edges from 6c3ed28:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 4-- 5 1-- 6 3-- 6 5-- 6 1-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 3-- 8 1-- 9 2-- 9 5-- 9 7-- 9 8-- 9 2--10 3--10 8--10 9--10
 #> 
 #> $graph2
-#> IGRAPH 2445a3d U--- 10 20 -- 
-#> + edges from 2445a3d:
+#> IGRAPH de0d896 U--- 10 20 -- 
+#> + edges from de0d896:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 3-- 6 4-- 6 5-- 6 3-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 6-- 8 1-- 9 2-- 9 5-- 9 8-- 9 3--10 8--10 9--10
 #> 

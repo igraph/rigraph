@@ -24,5 +24,5 @@ is.separator(graph, candidate)
 
 ## Related documentation in the C library
 
-[`is_separator`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`is_separator()`](https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

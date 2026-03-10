@@ -100,11 +100,11 @@ See more examples below.
 
 ## Related documentation in the C library
 
-[`create`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
-[`simplify`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`famous`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`empty`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
+[`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)
 
 ## See also
 
@@ -136,18 +136,18 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> IGRAPH cba7ad7 UN-- 6 6 -- 
+#> IGRAPH c918cf9 UN-- 6 6 -- 
 #> + attr: name (v/c)
-#> + edges from cba7ad7 (vertex names):
+#> + edges from c918cf9 (vertex names):
 #> [1] Alice--Bob    Alice--Cecil  Bob  --Cecil  Cecil--Daniel Cecil--Eugene
 #> [6] Cecil--Gordon
 
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> IGRAPH 98c793e UN-- 6 7 -- 
+#> IGRAPH a028c16 UN-- 6 7 -- 
 #> + attr: name (v/c)
-#> + edges from 98c793e (vertex names):
+#> + edges from a028c16 (vertex names):
 #> [1] Alice --Bob    Alice --Cecil  Alice --Daniel Cecil --Eugene Cecil --Gordon
 #> [6] Daniel--Eugene Daniel--Gordon
 
@@ -157,18 +157,18 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> IGRAPH b2cb803 DN-- 7 6 -- 
+#> IGRAPH 69aa6c1 DN-- 7 6 -- 
 #> + attr: name (v/c)
-#> + edges from b2cb803 (vertex names):
+#> + edges from 69aa6c1 (vertex names):
 #> [1] Alice ->Bob    Bob   ->Alice  Bob   ->Cecil  Daniel->Cecil  Eugene->Gordon
 #> [6] Eugene->Helen 
 
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> IGRAPH 8a895c6 UN-- 6 2 -- 
+#> IGRAPH 36fc6ee UN-- 6 2 -- 
 #> + attr: name (v/c)
-#> + edges from 8a895c6 (vertex names):
+#> + edges from 36fc6ee (vertex names):
 #> [1] Alice--Bob    Bob  --Daniel
 V(g4)$name
 #> [1] "Alice"  "Bob"    "Daniel" "Cecil"  "Gordon" "Helen" 
@@ -176,16 +176,16 @@ V(g4)$name
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> IGRAPH a528af5 DN-- 2 2 -- 
+#> IGRAPH 136f009 DN-- 2 2 -- 
 #> + attr: name (v/c)
-#> + edges from a528af5 (vertex names):
+#> + edges from 136f009 (vertex names):
 #> [1] Alice->Bob   Bob  ->Alice
 
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> IGRAPH b362dd3 UN-- 6 3 -- 
+#> IGRAPH da373d7 UN-- 6 3 -- 
 #> + attr: name (v/c)
-#> + edges from b362dd3 (vertex names):
+#> + edges from da373d7 (vertex names):
 #> [1] + ---   * --/   %%--%/%
 ```

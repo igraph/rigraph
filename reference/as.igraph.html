@@ -83,7 +83,7 @@ These objects are created by the <code><a href="fit_hrg.html">fit_hrg()</a></cod
 </ul></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -96,9 +96,9 @@ These objects are created by the <code><a href="fit_hrg.html">fit_hrg()</a></cod
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hrg</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_hrg.html">fit_hrg</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as.igraph</span><span class="op">(</span><span class="va">hrg</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c928b83 DN-- 19 18 -- Fitted HRG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ac7deb6 DN-- 19 18 -- Fitted HRG</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), prob (v/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c928b83 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ac7deb6 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] g1-&gt;g6 g2-&gt;8  g3-&gt;g4 g4-&gt;6  g5-&gt;g3 g6-&gt;g7 g7-&gt;1  g8-&gt;2  g9-&gt;4  g1-&gt;g5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] g2-&gt;9  g3-&gt;7  g4-&gt;10 g5-&gt;g2 g6-&gt;3  g7-&gt;g8 g8-&gt;g9 g9-&gt;5 </span>
 <span class="r-in"><span></span></span>

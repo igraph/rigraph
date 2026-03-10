@@ -35,11 +35,11 @@ reversed
 
 ## Related documentation in the C library
 
-[`reverse_edges`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`reverse_edges()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -74,8 +74,8 @@ Other functions for manipulating graph structure:
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH bcde6bc DN-- 4 3 -- 
+#> IGRAPH 63f4610 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from bcde6bc (vertex names):
+#> + edges from 63f4610 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

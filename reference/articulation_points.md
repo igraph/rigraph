@@ -35,12 +35,12 @@ vertex connectivity is at least two.
 
 ## Related documentation in the C library
 
-[`articulation_points`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_articulation_points),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`bridges`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bridges),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
+[`articulation_points()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_articulation_points),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`bridges()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bridges),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
 
 ## See also
 
@@ -68,11 +68,11 @@ g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)))
 articulation_points(g)
-#> + 2/10 vertices, from 8f62057:
+#> + 2/10 vertices, from 9c00eae:
 #> [1] 6 1
 
 g <- make_graph("krackhardt_kite")
 bridges(g)
-#> + 2/18 edges from 04170d2:
+#> + 2/18 edges from 833f30c:
 #> [1] 9--10 8-- 9
 ```

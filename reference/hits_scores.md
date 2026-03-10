@@ -78,11 +78,11 @@ scores are the same as authority scores.
 
 ## Related documentation in the C library
 
-[`hub_and_authority_scores`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`hub_and_authority_scores()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## References
 
@@ -120,7 +120,7 @@ Centrality measures
 g <- make_star(10)
 hits_scores(g)
 #> $hub
-#>  [1] 3.118782e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
+#>  [1] 2.602085e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #>  [6] 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #> 
 #> $authority
@@ -265,7 +265,7 @@ hits_scores(g2)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 4
+#> [1] 6
 #> 
 #> 
 ```

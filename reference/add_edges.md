@@ -41,10 +41,10 @@ values for the original edges of the graph are set to `NA`.
 
 ## Related documentation in the C library
 
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -87,7 +87,7 @@ g <- make_empty_graph(n = 5) %>%
   set_edge_attr("color", value = "red") %>%
   add_edges(c(5, 1), color = "green")
 E(g)[[]]
-#> + 5/5 edges from f144ae4:
+#> + 5/5 edges from ab3eee6:
 #>   tail head tid hid color
 #> 1    1    2   1   2   red
 #> 2    2    3   2   3   red

@@ -72,10 +72,10 @@ for details.
 
 ## Related documentation in the C library
 
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
 
@@ -97,13 +97,13 @@ Other vertex and edge sequences:
 # Edges of an unnamed graph
 g <- make_ring(10)
 E(g)
-#> + 10/10 edges from c59a51f:
+#> + 10/10 edges from ecb4ee8:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Edges of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 E(g2)
-#> + 10/10 edges from d806bfa (vertex names):
+#> + 10/10 edges from 4bb8c35 (vertex names):
 #>  [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
 ```

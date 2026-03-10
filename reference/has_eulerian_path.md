@@ -54,13 +54,13 @@ such cycle exists.
 
 ## Related documentation in the C library
 
-[`is_eulerian`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian),
-[`eulerian_path`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path),
-[`ecount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`eulerian_cycle`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle)
+[`is_eulerian()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian),
+[`eulerian_path()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`eulerian_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle)
 
 ## See also
 
@@ -82,11 +82,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 67fb83b (vertex names):
+#> + 10/10 edges from dc3ebd1 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 67fb83b:
+#> + 11/6 vertices, named, from dc3ebd1:
 #>  [1] A B C D B F A E D F E
 #> 
 

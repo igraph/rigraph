@@ -29,5 +29,5 @@ degree.distribution(graph, cumulative = FALSE, ...)
 
 ## Related documentation in the C library
 
-[`degree`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
-[`vcount`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
