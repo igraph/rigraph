@@ -105,7 +105,7 @@ girth(g)
 #> [1] Inf
 #> 
 #> $circle
-#> + 0/1000 vertices, from e107da2:
+#> + 0/1000 vertices, from bb4c693:
 #> 
 
 # The worst case running time is for a ring
@@ -115,7 +115,7 @@ girth(g)
 #> [1] 100
 #> 
 #> $circle
-#> + 100/100 vertices, from 5fcf50f:
+#> + 100/100 vertices, from 3d7ff29:
 #>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
 #>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86
 #>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4
@@ -131,7 +131,7 @@ girth(g)
 #> [1] 10
 #> 
 #> $circle
-#> + 10/1000 vertices, from 3e5751c:
+#> + 10/1000 vertices, from 684fc22:
 #>  [1] 819 813 578 477 824 199  53 759 280 787
 #> 
 ```
