@@ -31,8 +31,6 @@
 - [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
   [`circulant()`](https://r.igraph.org/reference/make_circulant.md) :
   Create a circulant graph
-- [`make_clusters()`](https://r.igraph.org/reference/make_clusters.md) :
-  Creates a communities object.
 - [`make_de_bruijn_graph()`](https://r.igraph.org/reference/make_de_bruijn_graph.md)
   [`de_bruijn_graph()`](https://r.igraph.org/reference/make_de_bruijn_graph.md)
   : De Bruijn graphs
@@ -1055,7 +1053,7 @@
   [`graphlets()`](https://r.igraph.org/reference/graphlet_basis.md) :
   Graphlet decomposition of a graph
 
-## Community detection
+## Community detection (clustering)
 
 - [`as_membership()`](https://r.igraph.org/reference/as_membership.md) :
   Declare a numeric vector as a membership vector
