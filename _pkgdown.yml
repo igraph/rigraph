@@ -34,6 +34,7 @@ reference:
 - subtitle: Deterministic constructors
 - contents:
   - starts_with("make_")
+  - -make_clusters
   - realize_degseq
   - realize_bipartite_degseq
   - has_concept("deterministic constructors")
@@ -190,7 +191,7 @@ reference:
 - contents:
   - has_concept("cliques")
   - has_concept("glet")
-- title: Community detection
+- title: Community detection (clustering)
 - contents:
   - has_concept("community")
 - title: Graph cycles
