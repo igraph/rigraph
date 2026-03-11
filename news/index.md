@@ -1,5 +1,16 @@
 # Changelog
 
+## igraph 2.2.2.9003
+
+### Documentation
+
+- Fixes to the reference index
+  ([\#2590](https://github.com/igraph/rigraph/issues/2590),
+  [\#2592](https://github.com/igraph/rigraph/issues/2592)).
+
+- Go back to formatting functions correctly
+  ([\#2591](https://github.com/igraph/rigraph/issues/2591)).
+
 ## igraph 2.2.2.9002
 
 ### Chore

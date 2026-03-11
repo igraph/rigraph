@@ -109,29 +109,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> + 2/14 edges from e8dd08f (vertex names):
+#> + 2/14 edges from a4e4a23 (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/14 edges from e8dd08f (vertex names):
+#> + 2/14 edges from a4e4a23 (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 2/14 edges from e8dd08f (vertex names):
+#> + 2/14 edges from a4e4a23 (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/9 vertex, named, from e8dd08f:
+#> + 1/9 vertex, named, from a4e4a23:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/9 vertices, named, from e8dd08f:
+#> + 2/9 vertices, named, from a4e4a23:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 8/9 vertices, named, from e8dd08f:
+#> + 8/9 vertices, named, from a4e4a23:
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 
