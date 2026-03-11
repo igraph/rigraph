@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.2.9003
+
+## Documentation
+
+- Fixes to the reference index (#2590, #2592).
+
+- Go back to formatting functions correctly (#2591).
+
+
 # igraph 2.2.2.9002
 
 ## Chore
