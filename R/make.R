@@ -2222,6 +2222,61 @@ tree <- function(...) {
 
 ## -----------------------------------------------------------------
 
+#' Create a Mycielski graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with chromatic number \eqn{k}.
+#' It is constructed using the Mycielski transformation as described in [mycielskian()].
+#'
+#' @details
+#' The Mycielski graph \eqn{M_k} is defined for all non-negative integers \eqn{k}.
+#' The first few Mycielski graphs are:
+#' * \eqn{M_0}: Null graph (no vertices)
+#' * \eqn{M_1}: Single vertex
+#' * \eqn{M_2}: Path graph with 2 vertices
+#' * \eqn{M_3}: Cycle graph with 5 vertices (pentagon)
+#' * \eqn{M_4}: Grötzsch graph (triangle-free with chromatic number 4)
+#'
+#' The vertex count of \eqn{M_k} is \eqn{3 \cdot 2^{k-2} - 1} for \eqn{k > 1} and \eqn{k} otherwise.
+#' The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k - 2}} for \eqn{k > 1} and 0 otherwise.
+#'
+#' @param k Integer, the order of the Mycielski graph (must be non-negative).
+#' @inheritParams rlang::args_dots_empty
+#' @return An igraph graph object.
+#'
+#' @concept Mycielski graph
+#' @family deterministic constructors
+#' @seealso [mycielskian()] for the Mycielski transformation of an arbitrary graph
+#' @export
+#' @examples
+#' # Create some Mycielski graphs
+#' g2 <- make_mycielski_graph(2)
+#' print_all(g2)
+#'
+#' # M_3 is a cycle graph with 5 vertices
+#' g3 <- make_mycielski_graph(3)
+#' print_all(g3)
+#' isomorphic(g3, make_ring(5))
+#'
+#' # M_4 is the Grötzsch graph
+#' g4 <- make_mycielski_graph(4)
+#' vcount(g4)
+#' ecount(g4)
+make_mycielski_graph <- function(k, ...) {
+  check_dots_empty()
+  mycielski_graph_impl(k = k)
+}
+
+#' @rdname make_mycielski_graph
+#' @export
+mycielski_graph <- function(k, ...) {
+  constructor_spec(make_mycielski_graph, k = k)
+}
+
+## -----------------------------------------------------------------
+
 #' Create an undirected tree graph from its Prüfer sequence
 #'
 #' `make_from_prufer()` creates an undirected tree graph from its Prüfer
