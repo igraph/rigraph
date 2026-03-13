@@ -1,5 +1,13 @@
 # Changelog
 
+## igraph 2.2.2.9004
+
+### Bug fixes
+
+- Not all loops are plotted
+  ([\#2594](https://github.com/igraph/rigraph/issues/2594),
+  [\#2595](https://github.com/igraph/rigraph/issues/2595)).
+
 ## igraph 2.2.2.9003
 
 ### Documentation
