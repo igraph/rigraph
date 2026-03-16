@@ -87,7 +87,7 @@ g <- make_empty_graph(n = 5) %>%
   set_edge_attr("color", value = "red") %>%
   add_edges(c(5, 1), color = "green")
 E(g)[[]]
-#> + 5/5 edges from 723bf21:
+#> + 5/5 edges from 1b87e74:
 #>   tail head tid hid color
 #> 1    1    2   1   2   red
 #> 2    2    3   2   3   red
