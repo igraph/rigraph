@@ -66,4 +66,8 @@ algorithm. See details below.}
 \code{graph.dfs()} was renamed to \code{\link[=dfs]{dfs()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

@@ -16,6 +16,10 @@ An igraph graph with a vertex attribute called \code{"probability"}.
 \code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
 random graph model.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_from_hrg_dendrogram}{\code{from_hrg_dendrogram()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
@@ -28,5 +32,3 @@ Other hierarchical random graph functions:
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_from_hrg_dendrogram}{\code{from_hrg_dendrogram()}}.}
-

@@ -67,6 +67,10 @@ The sum runs over the neighbors \code{v} of vertex \code{u}
 as indicated by \code{mode}. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
 and \eqn{k_v}{k_v} is the neighbors' degree, specified by \code{neighbor_degree_mode}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 # Some trivial ones
@@ -125,5 +129,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}.}
-

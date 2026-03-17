@@ -23,6 +23,10 @@ all vertex attributes, if \code{name} is missing.
 \description{
 Query vertex attributes of a graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10) \%>\%
   set_vertex_attr("color", value = "red") \%>\%

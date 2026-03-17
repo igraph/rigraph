@@ -548,7 +548,7 @@ i.parse.plot.params <- function(graph, params) {
     range = NULL,
     dontcall = FALSE
   ) {
-    type <- igraph.match.arg(type)
+    type <- igraph_match_arg(type)
     ret <- function() {
       v <- p[[type]][[name]]
       if (is.function(v) && !dontcall) {

@@ -351,7 +351,7 @@ shapes <- function(shape = NULL) {
 #' @rdname shapes
 #' @export
 shape_noclip <- function(coords, el, params, end = c("both", "from", "to")) {
-  end <- igraph.match.arg(end)
+  end <- igraph_match_arg(end)
 
   if (end == "both") {
     coords

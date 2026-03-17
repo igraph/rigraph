@@ -75,12 +75,16 @@ It is a Monte Carlo method based on degree-preserving edge switches.
 This generator should be favoured if undirected and connected graphs are to be
 generated and execution time is not a concern. igraph uses
 the original implementation of Fabien Viger; for the algorithm, see
-\url{https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html}
+\url{https://web.archive.org/web/20250428012457/https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html}
 and the paper \url{https://arxiv.org/abs/cs/0502085}.
 
 The \dQuote{edge.switching.simple} is an MCMC sampler based on
 degree-preserving edge switches. It generates simple undirected or directed graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game}{\code{degree_sequence_game()}}
+}
+
 \examples{
 
 ## The simple generator

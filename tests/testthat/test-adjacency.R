@@ -787,7 +787,7 @@ test_that("sparse/dense matrices min/max/plus", {
 
 test_that("graph_from_adjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
-  expect_snapshot(graph_from_adjacency_matrix(A), error = TRUE)
+  expect_snapshot_igraph_error(graph_from_adjacency_matrix(A))
 })
 
 test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = FALSE correctly", {

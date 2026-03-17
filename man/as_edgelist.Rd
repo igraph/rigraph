@@ -23,6 +23,10 @@ graph, like an edge list.
 \details{
 \code{as_edgelist()} returns the list of edges in a graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_gnp(10, 2 / 10)

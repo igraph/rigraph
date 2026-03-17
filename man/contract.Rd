@@ -28,6 +28,10 @@ The attributes of the graph are kept. Graph and edge attributes are
 unchanged, vertex attributes are combined, according to the
 \code{vertex.attr.comb} parameter.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -66,6 +70,7 @@ Other functions for manipulating graph structure:
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}
@@ -75,5 +80,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{functions for manipulating graph structure}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}.}
-

@@ -7,7 +7,7 @@
 \usage{
 make_bipartite_graph(types, edges, directed = FALSE)
 
-bipartite_graph(...)
+bipartite_graph(types, edges, directed = FALSE)
 }
 \arguments{
 \item{types}{A vector giving the vertex types. It will be coerced into
@@ -23,8 +23,6 @@ vector. The vector may be a string vector if \code{types} is a named vector.}
 \item{directed}{Whether to create a directed graph, boolean constant. Note
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
-
-\item{...}{Passed to \code{make_bipartite_graph()}.}
 }
 \value{
 \code{make_bipartite_graph()} returns a bipartite igraph graph. In other
@@ -48,6 +46,10 @@ a vertex attribute called \code{type}. \code{edges} may contain strings as
 vertex names; in this case, \code{types} must be a named vector that specifies
 the type for each vertex name that occurs in \code{edges}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))

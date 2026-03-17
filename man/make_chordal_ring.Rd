@@ -7,7 +7,7 @@
 \usage{
 make_chordal_ring(n, w, directed = FALSE)
 
-chordal_ring(...)
+chordal_ring(n, w, directed = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices.}
@@ -16,8 +16,6 @@ chordal_ring(...)
 details below.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
-
-\item{...}{Passed to \code{make_chordal_ring()}.}
 }
 \value{
 An igraph graph.
@@ -35,6 +33,10 @@ of rows in \sQuote{\code{W}}: for each row \code{j} an edge
 of total nodes. See also Kotsis, G: Interconnection Topologies for
 Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
+}
+
 \examples{
 chord <- make_chordal_ring(
   15,
@@ -47,13 +49,17 @@ Other deterministic constructors:
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}

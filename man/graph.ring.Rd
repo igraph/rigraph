@@ -24,4 +24,8 @@ vertex has one child.}
 \code{graph.ring()} was renamed to \code{\link[=make_ring]{make_ring()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring()}}
+}
+
 \keyword{internal}

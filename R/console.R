@@ -58,6 +58,10 @@ igraph.console <- function() {
 #' @family console
 #' @export
 console <- function() {
+  lifecycle::deprecate_stop(
+    "3.0.0",
+    "console()",
+  )
   oldverb <- igraph_opt("verbose")
   igraph_options(verbose = "tkconsole")
   pb <- .igraph.progress.tkconsole.create(oldverb)
@@ -86,7 +90,10 @@ console <- function() {
       type,
       "tk" = .igraph.progress.tk(percent, message),
       "tkconsole" = .igraph.progress.tkconsole(percent, message),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
 }
@@ -103,7 +110,10 @@ console <- function() {
       type,
       "tk" = message(message, appendLF = FALSE),
       "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
   0L

@@ -99,7 +99,7 @@ test_that("neighbors works", {
 
 test_that("neighbors prints an error for an empty input vector", {
   g <- make_tree(10)
-  expect_error(neighbors(g, numeric()), "No vertex was specified")
+  expect_error(neighbors(g, numeric()), "at least one vertex")
 })
 
 
@@ -181,7 +181,7 @@ test_that("ends works", {
 test_that("get.edge.ids() deprecation", {
   g <- make_empty_graph(10)
   expect_snapshot(get.edge.ids(g, 1:2))
-  expect_snapshot(get.edge.ids(g, 1:2, multi = TRUE), error = TRUE)
+  expect_snapshot_igraph_error(get.edge.ids(g, 1:2, multi = TRUE))
 })
 
 test_that("get_edge_id() works with data frame", {
@@ -202,7 +202,7 @@ test_that("get_edge_id() works with matrices", {
 test_that("get_edge_id() errors correctly for wrong vp", {
   g <- make_full_graph(3, directed = FALSE)
   el_g <- make_empty_graph()
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     get_edge_ids(g, el_g)
   })
   expect_error(get_edge_ids(g, NULL))
@@ -210,7 +210,7 @@ test_that("get_edge_id() errors correctly for wrong vp", {
 
   V(g)$name <- letters[1:3]
   df <- data.frame(from = c("a", "b"), to = c(1, 2))
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     get_edge_ids(g, df)
   })
 })
@@ -221,4 +221,46 @@ test_that("get_edge_id() errors correctly for wrong matrices", {
   lifecycle::expect_defunct(get_edge_ids(g, mat))
   mat <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2, ncol = 3)
   lifecycle::expect_deprecated(get_edge_ids(g, mat))
+})
+
+test_that("invalidate_cache works", {
+  g <- make_ring(10)
+
+  # Cache is populated when calling is_simple()
+  expect_true(is_simple(g))
+
+  # Invalidate cache
+  result <- invalidate_cache(g)
+
+  # Result should be the same after cache invalidation
+  expect_true(is_simple(result))
+
+  # Function should return a graph object
+  expect_true(is_igraph(result))
+
+  # Graph properties should be preserved
+  expect_equal(vcount(result), 10)
+  expect_equal(ecount(result), 10)
+})
+
+test_that("invalidate_cache errors on invalid input", {
+  expect_error(invalidate_cache(NULL))
+  expect_error(invalidate_cache("not a graph"))
+  expect_error(invalidate_cache(123))
+})
+
+test_that("get_edge_ids() returns numeric vector, not igraph.es", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), 3, 2, byrow = TRUE)
+  result <- get_edge_ids(g, mat)
+  expect_true(is.numeric(result))
+  expect_false(inherits(result, "igraph.es"))
+  expect_equal(result, c(1, 2, 3))
+})
+
+test_that("get_edge_ids() returns 0 for missing edges when error=FALSE", {
+  g <- make_empty_graph(10)
+  result <- get_edge_ids(g, c(1, 2), error = FALSE)
+  expect_equal(result, 0)
+  expect_true(is.numeric(result))
 })

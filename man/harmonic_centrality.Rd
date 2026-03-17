@@ -52,6 +52,10 @@ of length \code{cutoff} or smaller only; this can be used for larger graphs
 to speed up the calculation. If \code{cutoff} is negative (which is the
 default), then the function calculates the exact harmonic centrality scores.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff}{\code{harmonic_centrality_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -85,5 +89,3 @@ Centrality measures
 }
 \concept{centrality}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_harmonic_centrality_cutoff}{\code{harmonic_centrality_cutoff()}}.}
-

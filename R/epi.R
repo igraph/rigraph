@@ -68,7 +68,7 @@ median.sir <- function(x, na.rm = FALSE, ...) {
 #' @export
 quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
-  comp <- toupper(igraph.match.arg(comp))
+  comp <- toupper(igraph_match_arg(comp))
   times <- unlist(sapply(sir, "[[", "times"))
   big.N <- unlist(sapply(sir, function(x) {
     x[[comp]]
@@ -159,7 +159,7 @@ plot.sir <- function(
 ) {
   sir <- x
 
-  comp <- toupper(igraph.match.arg(comp))
+  comp <- toupper(igraph_match_arg(comp))
   if (!all(quantiles >= 0 & quantiles <= 1)) {
     cli::cli_abort("All {.arg quantiles} should be in [0,1].")
   }

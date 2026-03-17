@@ -21,4 +21,8 @@ centrality score by dividing by the theoretical maximum.}
 \code{centralization.betweenness()} was renamed to \code{\link[=centr_betw]{centr_betw()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_betweenness}{\code{centralization_betweenness()}}
+}
+
 \keyword{internal}

@@ -139,5 +139,14 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-#' @cdocs igraph_is_graphical
-is_graphical <- is_graphical_impl
+is_graphical <- function(
+  out.deg,
+  in.deg = NULL,
+  allowed.edge.types = c("simple", "loops", "multi", "all")
+) {
+  is_graphical_impl(
+    out_deg = out.deg,
+    in_deg = in.deg,
+    allowed_edge_types = allowed.edge.types
+  )
+}

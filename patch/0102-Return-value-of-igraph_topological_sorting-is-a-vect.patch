@@ -1,0 +1,27 @@
+From 487e971253fec664a9b7e49e3162efac8f4ec654 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Sun, 2 Nov 2025 15:44:27 +0100
+Subject: [PATCH] Return value of igraph_topological_sorting() is a vector of
+ vertices
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index 6ef2506aff..6a4590b36f 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -847,7 +847,8 @@ igraph_neighborhood_graphs:
+     DEPS: vids ON graph
+ 
+ igraph_topological_sorting:
+-    PARAMS: GRAPH graph, OUT VECTOR_INT res, NEIMODE mode=OUT
++    PARAMS: GRAPH graph, OUT VERTEX_INDICES res, NEIMODE mode=OUT
++    DEPS: res ON graph
+ 
+ igraph_feedback_arc_set:
+     # Default algorithm is the approximate method because it is faster and the
+-- 
+2.50.1
+

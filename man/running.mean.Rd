@@ -18,4 +18,8 @@ i.e. smaller than the length of \code{v}.}
 \code{running.mean()} was renamed to \code{\link[=running_mean]{running_mean()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_running_mean}{\code{running_mean()}}
+}
+
 \keyword{internal}

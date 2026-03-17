@@ -63,6 +63,10 @@ For the exact algorithm, the reference below.
 If the given graph is not a tree, a breadth-first search is executed first
 to obtain a possible spanning tree.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 tree <- make_tree(20, 3)

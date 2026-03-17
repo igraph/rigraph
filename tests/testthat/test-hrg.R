@@ -18,14 +18,14 @@ test_that("as.hclust.igraphHRG() works", {
 })
 
 test_that("sample_hrg() checks its argument", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     sample_hrg(make_ring(10))
   })
 })
 
 
 test_that("hrg_tree() checks its argument", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     hrg_tree(make_ring(10))
   })
 })

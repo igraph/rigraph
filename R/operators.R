@@ -126,7 +126,7 @@ rename.attr.if.needed <- function(
   maps2 = NULL,
   ignore = character()
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   listfun <- switch(
     type,
@@ -228,8 +228,8 @@ disjoint_union <- function(...) {
   )
   lapply(graphs, ensure_igraph)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_disjoint_union, graphs)
+  on.exit(.Call(Rx_igraph_finalizer))
+  res <- .Call(Rx_igraph_disjoint_union, graphs)
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
@@ -348,11 +348,11 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(R_igraph_union, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_union, newgraphs, edgemaps)
     } else {
-      res <- .Call(R_igraph_intersection, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, newgraphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -388,11 +388,11 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(R_igraph_union, graphs, edgemaps)
+      res <- .Call(Rx_igraph_union, graphs, edgemaps)
     } else {
-      res <- .Call(R_igraph_intersection, graphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, graphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -695,12 +695,10 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
     }
     big <- permute(big, perm)
 
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(R_igraph_difference, big, small)
+    res <- difference_impl(orig = big, sub = small)
     permute(res, match(V(res)$name, bnames))
   } else {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_difference, big, small)
+    difference_impl(orig = big, sub = small)
   }
 }
 
@@ -746,8 +744,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_complementer, graph, as.logical(loops))
+  complementer_impl(graph = graph, loops = as.logical(loops))
 }
 
 
@@ -850,8 +847,8 @@ compose <- function(g1, g2, byname = "auto") {
   edgemaps <- (length(edge_attr_names(g1)) != 0 ||
     length(edge_attr_names(g2)) != 0)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_compose, g1, g2, edgemaps)
+  on.exit(.Call(Rx_igraph_finalizer))
+  res <- .Call(Rx_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
 
@@ -967,7 +964,21 @@ edges <- edge
 #' g
 #' plot(g)
 vertex <- function(...) {
-  structure(list(...), class = "igraph.vertex")
+  args <- list(...)
+  arg_names <- names(args)
+
+  # Check for duplicate named arguments
+  if (!is.null(arg_names)) {
+    named_args <- arg_names[arg_names != ""]
+    if (anyDuplicated(named_args)) {
+      duplicates <- unique(named_args[duplicated(named_args)])
+      cli::cli_abort(
+        "Duplicate attribute {cli::qty(duplicates)}name{?s} in {.fn vertices}: {.val {duplicates}}."
+      )
+    }
+  }
+
+  structure(args, class = "igraph.vertex")
 }
 
 #' @export
@@ -1333,8 +1344,12 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
-#' @cdocs igraph_reverse_edges
-reverse_edges <- reverse_edges_impl
+reverse_edges <- function(graph, eids = E(graph)) {
+  reverse_edges_impl(
+    graph = graph,
+    eids = eids
+  )
+}
 
 #' @rdname reverse_edges
 #' @param x The input graph.

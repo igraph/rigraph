@@ -19,6 +19,10 @@ This function tests whether the given graph is free of cycles.
 This function looks for directed cycles in directed graphs and undirected
 cycles in undirected graphs. Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_acyclic}{\code{is_acyclic()}}
+}
+
 \examples{
 
 g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
@@ -67,5 +71,3 @@ Other structural.properties:
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_acyclic}{\code{is_acyclic()}}.}
-

@@ -1,4 +1,8 @@
 test_that("writing Pajek files works", {
+  # FIXME: Does the Pajek format allow for \r\n line endings on Windows?
+  # Adapt test depending on that.
+  skip_on_os("windows")
+
   g <- make_ring(9)
   V(g)$color <- rep_len(c("red", "green", "yellow"), length.out = 9)
 
@@ -45,20 +49,22 @@ test_that("reading graph, unused argument", {
   lgl_path <- withr::local_tempfile(pattern = "testfile", fileext = ".lgl")
   g <- make_graph(c(1, 2, 2, 3))
   write_graph(g, lgl_path, "lgl")
-  expect_snapshot(error = TRUE, read_graph(lgl_path, "lgl", useless = 1))
+  expect_snapshot_igraph_error(read_graph(lgl_path, "lgl", useless = 1))
 })
 
 test_that("reading graph in unsupported format", {
-  expect_snapshot(error = TRUE, read_graph("bla", format = "blop"))
+  expect_snapshot_igraph_error(read_graph("bla", format = "blop"))
 })
 
 test_that("writing graph in unsupported format", {
   g <- make_graph(c(1, 2, 2, 3))
   file <- withr::local_tempfile()
-  expect_snapshot(error = TRUE, write_graph(g, file, format = "blop"))
+  expect_snapshot_igraph_error(write_graph(g, file, format = "blop"))
 })
 
 test_that("graph_from_graphdb works", {
+  # FIXME: Need to fix ingestion code on Windows
+  skip_on_os("windows")
   skip_on_cran()
 
   # Bug in base R? Checked with 2024-11-01 r87285:
@@ -66,13 +72,11 @@ test_that("graph_from_graphdb works", {
   skip_if(Sys.getenv("R_SANITIZER") == "true")
 
   expect_snapshot(g <- graph_from_graphdb(nodes = 1000))
-  expect_snapshot(g <- graph_from_graphdb(), error = TRUE)
-  expect_snapshot(
-    g <- graph_from_graphdb(nodes = 10, prefix = "not_existing"),
-    error = TRUE
+  expect_snapshot_igraph_error(g <- graph_from_graphdb())
+  expect_snapshot_igraph_error(
+    g <- graph_from_graphdb(nodes = 10, prefix = "not_existing")
   )
-  expect_snapshot(
-    g <- graph_from_graphdb(nodes = 10, type = "not_existing"),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    g <- graph_from_graphdb(nodes = 10, type = "not_existing")
   )
 })

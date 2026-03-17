@@ -238,6 +238,10 @@ corresponding to the communities. It passes additional arguments to
 \code{\link[=plot.igraph]{plot.igraph()}}, please see that and also
 \link{igraph.plotting} on how to change the plot.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 karate <- make_graph("Zachary")

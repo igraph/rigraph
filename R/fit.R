@@ -190,7 +190,7 @@ fit_power_law <- function(
   p.precision = NULL,
   ...
 ) {
-  implementation <- igraph.match.arg(implementation)
+  implementation <- igraph_match_arg(implementation)
 
   if (implementation == "r.mle") {
     if (isTRUE(p.value)) {
@@ -264,10 +264,10 @@ power.law.fit.new <- function(
   xmin <- as.numeric(xmin)
   force.continuous <- as.logical(force.continuous)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_power_law_fit_new,
+    Rx_igraph_power_law_fit_new,
     data,
     xmin,
     force.continuous,

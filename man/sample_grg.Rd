@@ -7,7 +7,7 @@
 \usage{
 sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
 
-grg(...)
+grg(nodes, radius, torus = FALSE, coords = FALSE)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
@@ -19,8 +19,6 @@ edge.}
 
 \item{coords}{Logical scalar, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
-
-\item{...}{Passed to \code{sample_grg()}.}
 }
 \value{
 A graph object. If \code{coords} is \code{TRUE} then with vertex
@@ -37,6 +35,10 @@ connected with an undirected edge if they are closer to each other in
 Euclidean norm than a given radius. If the \code{torus} argument is
 \code{TRUE} then a unit area torus is used instead of a square.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_grg(1000, 0.05, torus = FALSE)

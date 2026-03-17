@@ -183,6 +183,10 @@ This is a binary format, used in the ARG Graph Database for isomorphism testing.
 }
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_pajek}{\code{read_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphml}{\code{read_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_gml}{\code{read_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_dl}{\code{read_graph_dl()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \seealso{
 \code{\link[=write_graph]{write_graph()}}
 
@@ -195,5 +199,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{foreign}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dimacs_flow}{\code{read_graph_dimacs_flow()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl}{\code{read_graph_dl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_edgelist}{\code{read_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml}{\code{read_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml}{\code{read_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_lgl}{\code{read_graph_lgl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_ncol}{\code{read_graph_ncol()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek}{\code{read_graph_pajek()}}.}
-

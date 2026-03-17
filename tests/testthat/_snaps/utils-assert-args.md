@@ -10,7 +10,7 @@
 
     Must provide a graph object (provided `NULL`).
 
-# igraph.match.arg() works
+# igraph_match_arg() works
 
     Code
       cluster_leiden(make_graph("Zachary"), objective_function = "something")

@@ -25,6 +25,10 @@ or the data format of a possibly older igraph graph.
 \code{upgrade_graph()} can convert an older data format
 to the current one.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
 graph_version to check the current data format version
 or the version of a graph.

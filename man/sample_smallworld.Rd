@@ -7,7 +7,7 @@
 \usage{
 sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(...)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{dim}{Integer constant, the dimension of the starting lattice.}
@@ -24,8 +24,6 @@ generated graph.}
 
 \item{multiple}{Logical scalar, whether multiple edges are allowed int the
 generated graph.}
-
-\item{...}{Passed to \code{sample_smallworld()}.}
 }
 \value{
 A graph object.
@@ -50,6 +48,10 @@ thus the network does not become fully random even for \code{p=1}.
 For appropriate choices of \code{p}, both models exhibit the property of
 simultaneously having short path lengths and high clustering.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}
+}
+
 \examples{
 
 g <- sample_smallworld(1, 100, 5, 0.05)

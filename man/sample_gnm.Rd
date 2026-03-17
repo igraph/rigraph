@@ -7,7 +7,7 @@
 \usage{
 sample_gnm(n, m, directed = FALSE, loops = FALSE)
 
-gnm(...)
+gnm(n, m, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
@@ -18,8 +18,6 @@ gnm(...)
 \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
-
-\item{...}{Passed to \code{sample_gnm()}.}
 }
 \value{
 A graph object.
@@ -32,6 +30,10 @@ The graph has \code{n} vertices and \code{m} edges. The edges are chosen uniform
 at random from the set of all vertex pairs. This set includes potential
 self-connections as well if the \code{loops} parameter is \code{TRUE}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnm}{\code{erdos_renyi_game_gnm()}}
+}
+
 \examples{
 
 g <- sample_gnm(1000, 1000)

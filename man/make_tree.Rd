@@ -30,6 +30,10 @@ An igraph graph
 Create a k-ary tree graph, where almost all vertices other than the leaves
 have the same number of children.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}
+}
+
 \examples{
 make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")
@@ -41,13 +45,17 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
-\code{\link{make_star}()}
+\code{\link{make_star}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{Trees.}
 \concept{deterministic constructors}

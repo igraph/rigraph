@@ -25,6 +25,10 @@ An edge sequence containing the edges of the spanning tree. Use
 \code{sample_spanning_tree()} picks a spanning tree of an undirected graph
 randomly and uniformly, using loop-erased random walks.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 
 g <- make_full_graph(10) \%du\% make_full_graph(5)
@@ -43,5 +47,3 @@ Other trees:
 }
 \concept{trees}
 \keyword{graph}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}.}
-

@@ -21,6 +21,10 @@ graph.
 \code{is_dag()} checks whether there is a directed cycle in the graph. If not,
 the graph is a DAG.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}
+}
+
 \examples{
 
 g <- make_tree(10)
@@ -71,5 +75,3 @@ Tamas Nepusz \email{ntamas@gmail.com} for the C code, Gabor Csardi
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}.}
-

@@ -177,3 +177,95 @@ test_that("dyad_census works with celegansneural", {
   )
   expect_equal(sum(unlist(dc)), vcount(ce) * (vcount(ce) - 1) / 2)
 })
+
+test_that("motifs with callback works", {
+  withr::local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Count motifs using callback
+  count <- 0
+  isoclasses <- integer(0)
+
+  motifs(g, 3, callback = function(vids, isoclass) {
+    count <<- count + 1
+    isoclasses <<- c(isoclasses, isoclass)
+    FALSE # continue search
+  })
+
+  expect_true(count > 0)
+  expect_true(all(isoclasses >= 1))
+  expect_true(all(isoclasses <= 16)) # max isoclass for size 3
+})
+
+test_that("motifs with callback can stop early", {
+  withr::local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Stop after finding 3 motifs
+  count <- 0
+
+  motifs(g, 3, callback = function(vids, isoclass) {
+    count <<- count + 1
+    if (count >= 3) {
+      TRUE # stop after 3 motifs
+    } else {
+      FALSE # continue
+    }
+  })
+
+  expect_equal(count, 3)
+})
+
+
+test_that("motifs with callback receives correct arguments", {
+  withr::local_seed(123)
+
+  g <- make_graph(~ A - B - C - A)
+
+  # Check argument types
+  motifs(g, 3, callback = function(vids, isoclass) {
+    expect_true(is.integer(vids))
+    expect_equal(length(vids), 3)
+    expect_true(is.integer(isoclass))
+    expect_equal(length(isoclass), 1)
+    TRUE # stop after first motif
+  })
+})
+
+test_that("motifs with callback handles errors in callback", {
+  withr::local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Callback that throws an error
+  expect_error(
+    motifs(g, 3, callback = function(vids, isoclass) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})
+
+test_that("motifs with callback output matches expected", {
+  withr::local_seed(42)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Collect motif information
+  motif_data <- list()
+  motifs(g, 3, callback = function(vids, isoclass) {
+    motif_data[[length(motif_data) + 1]] <<- list(
+      vids = vids,
+      isoclass = isoclass
+    )
+    FALSE # Continue
+  })
+
+  # Snapshot test for motif structure
+  expect_snapshot({
+    cat("Number of motifs found:", length(motif_data), "\n")
+    motif_data[1:2]
+  })
+})

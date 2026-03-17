@@ -16,13 +16,37 @@ ensure_igraph <- function(graph, optional = FALSE) {
   }
 }
 
+switch_igraph_arg <- function(
+  arg,
+  ...,
+  .error_arg = rlang::caller_arg(arg),
+  .error_call = rlang::caller_env()
+) {
+  # Materialize early, before accessing arg
+  force(.error_arg)
 
-igraph.match.arg <- function(
+  values <- tolower(...names())
+  if (length(arg) > 1) {
+    values <- intersect(values, tolower(arg))
+  }
+  match <- igraph_match_arg(
+    arg,
+    values,
+    error_arg = .error_arg,
+    error_call = .error_call
+  )
+  switch(match, ...)
+}
+
+igraph_match_arg <- function(
   arg,
   values,
+  error_arg = rlang::caller_arg(arg),
   error_call = rlang::caller_env()
 ) {
-  error_arg <- rlang::caller_arg(arg)
+  # Materialize early, before accessing arg
+  force(error_arg)
+
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])

@@ -88,13 +88,27 @@ is.simple <- function(graph) {
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
-#' @cdocs igraph_simplify
-simplify <- simplify_impl
+simplify <- function(
+  graph,
+  remove.multiple = TRUE,
+  remove.loops = TRUE,
+  edge.attr.comb = igraph_opt("edge.attr.comb")
+) {
+  simplify_impl(
+    graph = graph,
+    remove_multiple = remove.multiple,
+    remove_loops = remove.loops,
+    edge_attr_comb = edge.attr.comb
+  )
+}
 
 #' @export
 #' @rdname simplify
-#' @cdocs igraph_is_simple
-is_simple <- is_simple_impl
+is_simple <- function(graph) {
+  is_simple_impl(
+    graph = graph
+  )
+}
 
 #' @export
 #' @rdname simplify
@@ -102,9 +116,10 @@ simplify_and_colorize <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_simplify_and_colorize, graph)
+  res <- simplify_and_colorize_impl(
+    graph = graph
+  )
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

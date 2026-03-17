@@ -7,12 +7,10 @@
 \usage{
 make_from_prufer(prufer)
 
-from_prufer(...)
+from_prufer(prufer)
 }
 \arguments{
 \item{prufer}{The Prüfer sequence to convert into a graph}
-
-\item{...}{Passed to \code{make_from_prufer()}}
 }
 \value{
 A graph object.
@@ -28,6 +26,10 @@ find a vertex with degree one, remove it from the tree and add the label of
 the vertex that it was connected to to the sequence. Repeat until there are
 only two vertices in the remaining graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_from_prufer}{\code{from_prufer()}}
+}
+
 \examples{
 
 g <- make_tree(13, 3)
@@ -44,5 +46,3 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer}{\code{from_prufer()}}.}
-

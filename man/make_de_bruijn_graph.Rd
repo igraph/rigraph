@@ -7,14 +7,12 @@
 \usage{
 make_de_bruijn_graph(m, n)
 
-de_bruijn_graph(...)
+de_bruijn_graph(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet. See details below.}
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
-
-\item{...}{Passed to \code{make_de_bruijn_graph()}.}
 }
 \value{
 A graph object.
@@ -37,6 +35,10 @@ for \code{m} and \code{n}.
 De Bruijn graphs have some interesting properties, please see another
 source, e.g. Wikipedia for details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_de_bruijn}{\code{de_bruijn()}}
+}
+
 \examples{
 
 # de Bruijn graphs can be created recursively by line graphs as well

@@ -32,6 +32,10 @@ The vertex IDs of the central vertices.
 
 The center of a graph is the set of its vertices with minimal eccentricity.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_graph_center_dijkstra}{\code{graph_center_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 tree <- make_tree(100, 7)
 graph_center(tree)
@@ -57,5 +61,3 @@ Other paths:
 \code{\link{radius}()}
 }
 \concept{paths}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_graph_center_dijkstra}{\code{graph_center_dijkstra()}}.}
-

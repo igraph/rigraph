@@ -361,3 +361,241 @@ test_that("subgraph_isomorphisms, vf2", {
   g3 <- graph_from_literal(X - Y - Z - X)
   expect_equal(subgraph_isomorphisms(g3, g1, method = "vf2"), list())
 })
+
+test_that("transitive_closure works for directed graphs", {
+  # Simple directed path
+  g <- make_graph(c(1, 2, 2, 3, 3, 4))
+  tc <- transitive_closure(g)
+
+  # Should have edges for all reachable pairs
+  expect_equal(vcount(tc), 4)
+  expect_equal(ecount(tc), 6) # 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
+  expect_true(are_adjacent(tc, 1, 2))
+  expect_true(are_adjacent(tc, 1, 3))
+  expect_true(are_adjacent(tc, 1, 4))
+  expect_true(are_adjacent(tc, 2, 3))
+  expect_true(are_adjacent(tc, 2, 4))
+  expect_true(are_adjacent(tc, 3, 4))
+
+  # Check that reverse edges don't exist
+  expect_false(are_adjacent(tc, 2, 1))
+  expect_false(are_adjacent(tc, 3, 1))
+})
+
+test_that("transitive_closure works for undirected graphs", {
+  # Two disconnected components with 2 vertices each
+  g <- make_graph(c(1, 2, 3, 4), directed = FALSE)
+  tc <- transitive_closure(g)
+
+  # Each 2-vertex component already forms a complete graph,
+  # so transitive closure doesn't add new edges
+  expect_equal(vcount(tc), 4)
+  expect_equal(ecount(tc), 2) # Same as input: one edge per 2-vertex component
+  expect_true(are_adjacent(tc, 1, 2))
+  expect_true(are_adjacent(tc, 3, 4))
+  expect_false(are_adjacent(tc, 1, 3))
+  expect_false(are_adjacent(tc, 1, 4))
+
+  # Test with a path that needs closure
+  g2 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  tc2 <- transitive_closure(g2)
+
+  # Should create a complete graph (triangle)
+  expect_equal(vcount(tc2), 3)
+  expect_equal(ecount(tc2), 3) # Complete graph on 3 vertices
+  expect_true(are_adjacent(tc2, 1, 2))
+  expect_true(are_adjacent(tc2, 2, 3))
+  expect_true(are_adjacent(tc2, 1, 3)) # This edge is added by closure
+})
+
+test_that("transitive_closure handles graphs with cycles", {
+  # Directed cycle
+  g <- make_graph(c(1, 2, 2, 3, 3, 1))
+  tc <- transitive_closure(g)
+
+  # Should be fully connected
+  expect_equal(vcount(tc), 3)
+  expect_equal(ecount(tc), 6) # Complete directed graph on 3 vertices
+})
+
+test_that("transitive_closure preserves isolated vertices", {
+  # Graph with isolated vertex
+  g <- make_graph(c(1, 2, 2, 3), n = 5)
+  tc <- transitive_closure(g)
+
+  # Isolated vertices should remain
+  expect_equal(vcount(tc), 5)
+  expect_equal(degree(tc, 4, mode = "all"), 0)
+  expect_equal(degree(tc, 5, mode = "all"), 0)
+})
+
+# Tests for isomorphism callback functions
+test_that("isomorphisms works with callback", {
+  withr::local_seed(123)
+
+  # Create two isomorphic graphs
+  g1 <- make_ring(8)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Count isomorphisms using callback
+  count <- 0
+
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    count <<- count + 1
+    if (count >= 10) {
+      return(FALSE)
+    }
+    TRUE
+  })
+
+  expect_true(count > 0)
+  expect_true(count <= 10)
+})
+
+test_that("isomorphisms can stop early", {
+  # Create two isomorphic graphs
+  g1 <- make_ring(6)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Stop after finding 3 isomorphisms
+  count <- 0
+
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    count <<- count + 1
+    if (count >= 3) {
+      TRUE # stop after 3 isomorphisms
+    } else {
+      FALSE # continue
+    }
+  })
+
+  expect_equal(count, 3)
+})
+
+test_that("isomorphisms receives correct arguments", {
+  g1 <- make_ring(5)
+  g2 <- permute(g1, sample(vcount(g1)))
+
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
+  # Check argument types
+  isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+    expect_true(is.integer(map12))
+    expect_true(is.integer(map21))
+    expect_equal(length(map12), n1)
+    expect_equal(length(map21), n2)
+    FALSE # stop after first isomorphism
+  })
+})
+
+test_that("isomorphisms handles errors in callback", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+
+  # Callback that throws an error
+  expect_error(
+    isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})
+
+test_that("subisomorphisms works with callback works", {
+  withr::local_seed(123)
+
+  # Find triangles in a larger graph
+  g1 <- make_ring(3) # triangle
+  g2 <- sample_gnp(15, 0.3)
+
+  # Count subisomorphisms using callback
+  count <- 0
+
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 5) {
+        return(FALSE)
+      } # stop after 5
+      TRUE # continue search
+    }
+  )
+
+  # May or may not find triangles, depending on the random graph
+  expect_true(count >= 0)
+  expect_true(count <= 5)
+})
+
+test_that("subisomorphisms works with callback can stop early", {
+  # Find triangles in a complete graph
+  g1 <- make_full_graph(6)
+  g2 <- make_ring(3) # triangle
+
+  # Stop after finding 3 subisomorphisms
+  count <- 0
+
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      count <<- count + 1
+      if (count >= 3) {
+        TRUE # stop after 3 subisomorphisms
+      } else {
+        FALSE # continue
+      }
+    }
+  )
+
+  expect_equal(count, 3)
+})
+
+test_that("subisomorphisms works with callback receives correct arguments", {
+  g1 <- make_full_graph(5)
+  g2 <- make_ring(3)
+
+  # Extract graph information before callback (cannot call igraph functions from callback)
+  n1 <- vcount(g1)
+  n2 <- vcount(g2)
+
+  # Check argument types
+  subgraph_isomorphisms(
+    g1,
+    g2,
+    method = "vf2",
+    callback = function(map12, map21) {
+      expect_true(is.integer(map12))
+      expect_true(is.integer(map21))
+      expect_equal(length(map12), n1)
+      expect_equal(length(map21), n2)
+      FALSE # stop after first subisomorphism
+    }
+  )
+})
+
+test_that("subisomorphisms works with callback handles errors in callback", {
+  skip(
+    "FIXME: Errors in callback are silently gobbled, check with v1.0 and report upstream"
+  )
+  g1 <- make_ring(3)
+  g2 <- make_full_graph(5)
+
+  # Callback that throws an error
+  expect_error(
+    subgraph_isomorphisms(
+      g1,
+      g2,
+      method = "vf2",
+      callback = function(map12, map21) {
+        stop("Intentional error in callback")
+      }
+    ),
+    "Error in R callback function"
+  )
+})

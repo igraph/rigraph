@@ -11,7 +11,7 @@ test_that("Graphlets work for some simple graphs", {
 
   expect_equal(names(full_glet), c("cliques", "thresholds"))
   expect_equal(length(full_glet$cliques), 1)
-  expect_equal(sort(full_glet$cliques[[1]]), 1:vcount(full))
+  expect_equal(sort(full_glet$cliques[[1]]), V(full)[seq_len(vcount(full))])
   expect_equal(full_glet$thresholds, 1)
 
   E(full)[1 %--% 2]$weight <- 2
@@ -19,7 +19,15 @@ test_that("Graphlets work for some simple graphs", {
 
   expect_equal(
     full_glet2,
-    list(cliques = list(1:2, 1:5), thresholds = c(2, 1))
+    list(
+      cliques = lapply(
+        list(1:2, 1:5),
+        unsafe_create_vs,
+        graph = full,
+        verts = V(full)
+      ),
+      thresholds = c(2, 1)
+    )
   )
 })
 
@@ -37,7 +45,7 @@ test_that("Graphlets filtering works", {
   )
   glet <- sortgl(graphlet_basis(g))
 
-  expect_equal(glet$cliques, list(1:3, 2:5))
+  expect_equal(unvs(glet$cliques), list(1:3, 2:5))
   expect_equal(glet$thresholds, c(8, 5))
 })
 
@@ -176,6 +184,5 @@ test_that("Graphlet projection works", {
   glp <- graphlets(g)
   glp2 <- graphlets.project.old(g, cliques = gl$cliques, iter = 1000)
 
-  glp$cliques <- unvs(glp$cliques)
   expect_equal(glp, glp2)
 })

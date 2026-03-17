@@ -29,6 +29,10 @@ A list of graph objects.
 \description{
 Creates a separate graph for each connected component of a graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}
+}
+
 \examples{
 
 # the diameter of each component in a random graph
@@ -45,6 +49,7 @@ Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
+\code{\link{count_reachable}()},
 \code{\link{is_biconnected}()}
 }
 \author{

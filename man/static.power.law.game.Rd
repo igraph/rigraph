@@ -29,11 +29,10 @@ undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the generated
-graph.}
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 
 \item{multiple}{Logical scalar, whether to allow multiple edges in the
-generated graph.}
+graph.}
 
 \item{finite.size.correction}{Logical scalar, whether to use the proposed
 finite size correction of Cho et al., see references below.}
@@ -44,4 +43,8 @@ finite size correction of Cho et al., see references below.}
 \code{static.power.law.game()} was renamed to \code{\link[=sample_fitness_pl]{sample_fitness_pl()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}
+}
+
 \keyword{internal}

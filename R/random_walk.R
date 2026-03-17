@@ -47,7 +47,6 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
-#' @cdocs igraph_random_walk
 random_walk <- function(
   graph,
   start,
@@ -58,14 +57,21 @@ random_walk <- function(
 ) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
-  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  out <- random_walk_impl(
+    graph = graph,
+    start = start,
+    steps = steps,
+    weights = weights,
+    mode = mode,
+    stuck = stuck
+  )
+
   # FIXME: Support returning the full structure
   out$vertices
 }
 
 #' @rdname random_walk
 #' @export
-#' @cdocs igraph_random_walk
 random_edge_walk <- function(
   graph,
   start,
@@ -76,7 +82,15 @@ random_edge_walk <- function(
 ) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
-  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  out <- random_walk_impl(
+    graph = graph,
+    start = start,
+    steps = steps,
+    weights = weights,
+    mode = mode,
+    stuck = stuck
+  )
+
   # FIXME: Support returning the full structure
   out$edges
 }

@@ -15,6 +15,10 @@ This is a layout modifier function, and it can be used
 to calculate the layout separately for each component
 of the graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10) + make_ring(10)
 g \%>\%
@@ -25,6 +29,7 @@ g \%>\%
 \code{\link[=merge_coords]{merge_coords()}}, \code{\link[=layout_]{layout_()}}.
 
 Other layout modifiers: 
+\code{\link{layout_modifier}()},
 \code{\link{normalize}()}
 
 Other graph layouts: 
