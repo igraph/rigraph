@@ -44,9 +44,9 @@ is_simple(g)
 #> [1] TRUE
 # Invalidate cache (for debugging purposes)
 invalidate_cache(g)
-#> IGRAPH b9d1383 U--- 10 10 -- Ring graph
+#> IGRAPH 60fe62e U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from b9d1383:
+#> + edges from 60fe62e:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 # Result should be the same
 is_simple(g)
