@@ -166,10 +166,10 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> IGRAPH aa55e4f DN-- 5 6 -- 
+#> IGRAPH 94da24f DN-- 5 6 -- 
 #> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),
 #> | friendship (e/n), advice (e/n)
-#> + edges from aa55e4f (vertex names):
+#> + edges from 94da24f (vertex names):
 #> [1] Bob      ->Alice Cecil    ->Bob   Cecil    ->Alice David    ->Alice
 #> [5] David    ->Bob   Esmeralda->Alice
 
