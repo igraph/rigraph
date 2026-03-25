@@ -61,22 +61,22 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 g
-#> IGRAPH c951eb1 UN-- 10 10 -- Ring graph
+#> IGRAPH 1ad3a91 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from c951eb1 (vertex names):
+#> + edges from 1ad3a91 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 V(g)
-#> + 10/10 vertices, named, from c951eb1:
+#> + 10/10 vertices, named, from 1ad3a91:
 #>  [1] A B C D E F G H I J
 
 g2 <- delete_vertices(g, c(1, 5)) %>%
   delete_vertices("B")
 g2
-#> IGRAPH d5d9a93 UN-- 7 5 -- Ring graph
+#> IGRAPH 6f32bec UN-- 7 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from d5d9a93 (vertex names):
+#> + edges from 6f32bec (vertex names):
 #> [1] C--D F--G G--H H--I I--J
 V(g2)
-#> + 7/7 vertices, named, from d5d9a93:
+#> + 7/7 vertices, named, from 6f32bec:
 #> [1] C D F G H I J
 ```

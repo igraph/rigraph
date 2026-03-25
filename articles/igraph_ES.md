@@ -94,9 +94,9 @@ aristas:
 g
 ```
 
-    ## IGRAPH 5ff3aa1 UN-- 10 2 -- 
+    ## IGRAPH b64e63d UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from 5ff3aa1 (vertex names):
+    ## + edges from b64e63d (vertex names):
     ## [1] 1--2 1--5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
@@ -115,7 +115,7 @@ aristas:
 summary(g)
 ```
 
-    ## IGRAPH 5ff3aa1 UN-- 10 2 -- 
+    ## IGRAPH b64e63d UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -236,9 +236,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH e606b54 U--- 40 86 -- Zachary
+    ## IGRAPH 8dd73f1 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from e606b54:
+    ## + edges from 8dd73f1:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -364,7 +364,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH 527cc2c U--- 5 3 -- Ring graph
+    ## IGRAPH edf4994 U--- 5 3 -- Ring graph
     ## + attr: name (g/c), mutual (g/l), circular (g/l)
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
@@ -391,7 +391,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH b940cb2 U--- 100 499 -- Geometric random graph
+    ## IGRAPH 29dbfaf U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
@@ -464,7 +464,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH f8d526c UN-- 7 9 -- 
+    ## IGRAPH 3fd08fe UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
@@ -537,7 +537,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from f8d526c:
+    ## + 7/7 vertices, named, from 3fd08fe:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -707,7 +707,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from 10e959e:
+    ## + 3/10 vertices, from 4373eaf:
     ## [1] 2 3 7
 
 ``` r
@@ -715,7 +715,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from 10e959e:
+    ## + 2/10 vertices, from 4373eaf:
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -799,7 +799,7 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from f8d526c (vertex names):
+    ## + 4/9 edges from 3fd08fe (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Por supuesto, también funciona con nombres de vértices:
@@ -808,7 +808,7 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from f8d526c (vertex names):
+    ## + 4/9 edges from 3fd08fe (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Al usar
@@ -833,7 +833,7 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from f8d526c (vertex names):
+    ## + 3/9 edges from 3fd08fe (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -865,7 +865,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from f8d526c (vertex names):
+    ## + 5/9 edges from 3fd08fe (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
@@ -1168,7 +1168,7 @@ sessionInfo()
     ## loaded via a namespace (and not attached):
     ##  [1] vctrs_0.7.2        cli_3.6.5          knitr_1.51         rlang_1.1.7       
     ##  [5] xfun_0.57          otel_0.2.0         textshaping_1.0.5  jsonlite_2.0.0    
-    ##  [9] glue_1.8.0         htmltools_0.5.9    ragg_1.5.1         sass_0.4.10       
+    ##  [9] glue_1.8.0         htmltools_0.5.9    ragg_1.5.2         sass_0.4.10       
     ## [13] rmarkdown_2.30     grid_4.5.3         evaluate_1.0.5     jquerylib_0.1.4   
     ## [17] fastmap_1.2.0      yaml_2.3.12        lifecycle_1.0.5    compiler_4.5.3    
     ## [21] fs_2.0.0           htmlwidgets_1.6.4  pkgconfig_2.0.3    lattice_0.22-9    
