@@ -62,13 +62,13 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 6d43f23 U--- 7 9 -- Graph from the Atlas #464
+#> IGRAPH 9c8ed8c U--- 7 9 -- Graph from the Atlas #464
 #> + attr: name (g/c), n (g/n)
-#> + edges from 6d43f23:
+#> + edges from 9c8ed8c:
 #> [1] 2--4 2--3 1--3 1--6 5--6 4--5 3--4 1--4 1--5
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH b860798 U--- 6 8 -- Graph from the Atlas #139
+#> IGRAPH c78a4a2 U--- 6 8 -- Graph from the Atlas #139
 #> + attr: name (g/c), n (g/n)
-#> + edges from b860798:
+#> + edges from c78a4a2:
 #> [1] 1--2 2--3 3--4 4--5 1--5 2--4 2--5 1--6
 ```

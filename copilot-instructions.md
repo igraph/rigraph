@@ -17,12 +17,9 @@ with a C/C++ backend.
 - Run tests for a single file:
   `testthat::test_local(filter = "foo", reporter = "check")`
 - Format code: `air format .`
-- Update documentation:
-  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-- Build package:
-  [`devtools::build()`](https://devtools.r-lib.org/reference/build.html)
-- Check package:
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
+- Update documentation: `devtools::document()`
+- Build package: `devtools::build()`
+- Check package: `devtools::check()`
 
 ## Key Conventions
 
