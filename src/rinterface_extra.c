@@ -2443,7 +2443,7 @@ igraph_error_t Rx_igraph_status_handler(const char *message, void *data) {
 }
 
 static R_xlen_t Rx_igraph_altrep_length(SEXP vec) {
-  SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+  SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
   igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
   return igraph_ecount(g);
 }
@@ -2452,7 +2452,7 @@ static void *Rx_igraph_altrep_from(SEXP vec, Rboolean writeable) {
   SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
     Rx_igraph_status_handler("Materializing 'from' vector.\n", NULL);
-    SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=Ry_igraph_vector_int_to_SEXP(&g->from);
@@ -2467,7 +2467,7 @@ static void *Rx_igraph_altrep_to(SEXP vec, Rboolean writeable) {
   if (data == R_NilValue) {
     Rx_igraph_status_handler("Materializing 'to' vector.\n", NULL);
 
-    SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=Ry_igraph_vector_int_to_SEXP(&g->to);
@@ -2873,17 +2873,17 @@ igraph_t *Rx_igraph_get_pointer(SEXP graph) {
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
-  SEXP xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
+  SEXP xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
   if (xp == R_UnboundValue || xp == R_NilValue) {
     Rx_igraph_restore_pointer(graph);
-    xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
+    xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
   }
 
   igraph_t *pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
 
   if (!pgraph) {
     Rx_igraph_restore_pointer(graph);
-    xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
+    xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
     pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
   }
 
@@ -7707,7 +7707,7 @@ SEXP Rx_igraph_graph_version(SEXP graph) {
     return Rf_ScalarInteger(ver_0_4);
   }
 
-  SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph));
+  SEXP ver = R_getVarEx(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
   if (ver == R_UnboundValue) {
     return Rf_ScalarInteger(ver_0_7_999);
   }
@@ -7755,14 +7755,7 @@ SEXP Rx_igraph_add_env(SEXP graph) {
     Rf_copyMostAttrib(graph, result);
   }
 
-  // Get the base namespace
-  SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
-  // Get the emptyenv function
-  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
-  // Call emptyenv()
-  SEXP empty_env = PROTECT(Rf_eval(PROTECT(Rf_lang1(empty_env_fun)), R_GlobalEnv)); px++; px++;
-  // Evaluate the call
-  SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
+  SEXP env = PROTECT(R_NewEnv(R_EmptyEnv, 0, 0)); px++;
 
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
@@ -7786,7 +7779,7 @@ SEXP Rx_igraph_add_env(SEXP graph) {
 }
 
 SEXP Rx_igraph_get_graph_id(SEXP graph) {
-  return Rf_findVar(Rf_install("myid"), Rx_igraph_graph_env(graph));
+  return R_getVar(Rf_install("myid"), Rx_igraph_graph_env(graph), TRUE);
 }
 
 // Wrapper functions for functions not in aaa-auto.R
