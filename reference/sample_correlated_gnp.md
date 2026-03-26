@@ -100,9 +100,9 @@ g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
 #> [1] 0.5027749
 g
-#> IGRAPH dd67924 U--- 1000 49901 -- Erdos-Renyi (gnp) graph
+#> IGRAPH efdac62 U--- 1000 49901 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from dd67924:
+#> + edges from efdac62:
 #>  [1]  1-- 3  3-- 5  2-- 7  4-- 8  9--10  6--11 11--12  6--15 11--15 14--15
 #> [11]  1--17  3--17 10--17  4--18  9--18 10--18 16--18  9--19  9--21 15--21
 #> [21]  2--22  8--22 18--22 17--23 21--23 22--23  3--24  8--25 21--25  2--26
@@ -113,9 +113,9 @@ g
 #> [71] 12--36 13--36 14--36 23--36 24--36 33--36  7--37 13--37 17--37 18--37
 #> + ... omitted several edges
 g2
-#> IGRAPH ccaadb0 U--- 1000 50083 -- Correlated random graph
+#> IGRAPH 12ab659 U--- 1000 50083 -- Correlated random graph
 #> + attr: name (g/c), corr (g/n), p (g/n)
-#> + edges from ccaadb0:
+#> + edges from 12ab659:
 #>  [1]  2-- 7  4-- 8  9--10  4--15  6--15  9--15 13--15 14--15 14--16  1--17
 #> [11]  9--18  6--20  5--21  8--22 13--22 15--22 18--22  3--24 15--26 18--26
 #> [21] 21--27  5--28 14--28 16--28 27--28 14--29 18--29 24--29  7--30  3--31
