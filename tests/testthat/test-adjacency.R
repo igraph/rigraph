@@ -855,3 +855,27 @@ test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = F
   g_false_row <- graph_from_adjacency_matrix(M, add.rownames = FALSE)
   expect_equal(vertex_attr_names(g_na_row), vertex_attr_names(g_false_row))
 })
+
+test_that("graph_from_adjacency Na check for upper/lower", {
+  x <- matrix(runif(100), ncol=10, nrow=10)
+  x[lower.tri(x)] <- NA
+  expect_no_error(
+    graph_from_adjacency_matrix(
+      x,
+      mode = "upper",
+      weighted = TRUE,
+      diag = FALSE
+    )
+  )
+
+  x <- matrix(runif(100), ncol=10, nrow=10)
+  x[upper.tri(x)] <- NA
+  expect_no_error(
+    graph_from_adjacency_matrix(
+      x,
+      mode = "lower",
+      weighted = TRUE,
+      diag = FALSE
+    )
+  )
+})
