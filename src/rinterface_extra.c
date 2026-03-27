@@ -1298,7 +1298,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_graph_attr(const igraph_t *graph,
 igraph_error_t Rx_igraph_attribute_get_string_graph_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP gal=VECTOR_ELT(graph->attr, 1);
   SEXP ga=Rx_igraph_getListElement(gal, name);
 
@@ -1319,7 +1318,6 @@ igraph_error_t Rx_igraph_attribute_get_numeric_vertex_attr(const igraph_t *graph
                                                const char *name,
                                                igraph_vs_t vs,
                                                igraph_vector_t *value) {
-  /* TODO: serialization */
   SEXP val=VECTOR_ELT(graph->attr, 2);
   SEXP va=Rx_igraph_getListElement(val, name);
   igraph_vector_t newvalue;
@@ -1367,7 +1365,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_vertex_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_vs_t vs,
                                             igraph_vector_bool_t *value) {
-  /* TODO: serialization */
   SEXP val=VECTOR_ELT(graph->attr, 2);
   SEXP va=Rx_igraph_getListElement(val, name);
   igraph_vector_bool_t newvalue;
@@ -1406,7 +1403,6 @@ igraph_error_t Rx_igraph_attribute_get_string_vertex_attr(const igraph_t *graph,
                                               const char *name,
                                               igraph_vs_t vs,
                                               igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP val, va;
 
   val=VECTOR_ELT(graph->attr, 2);
@@ -1444,7 +1440,6 @@ igraph_error_t Rx_igraph_attribute_get_numeric_edge_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_es_t es,
                                              igraph_vector_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
   igraph_vector_t newvalue;
@@ -1492,7 +1487,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_edge_attr(const igraph_t *graph,
                                           const char *name,
                                           igraph_es_t es,
                                           igraph_vector_bool_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
   igraph_vector_bool_t newvalue;
@@ -1531,7 +1525,6 @@ igraph_error_t Rx_igraph_attribute_get_string_edge_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_es_t es,
                                             igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
 
