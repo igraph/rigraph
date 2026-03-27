@@ -1254,13 +1254,13 @@ cut_at <- function(communities, no, steps) {
         steps <- nrow(mm)
       }
     } else {
-      noc <- n_initial - nrow(mm) # minimum number of communities after all merges
+      min_communities <- n_initial - nrow(mm) # minimum number of communities after all merges
       if (no > n_initial) {
         cli::cli_warn("Cannot have that many communities.")
         no <- n_initial
-      } else if (no < noc) {
+      } else if (no < min_communities) {
         cli::cli_warn("Cannot have that few communities.")
-        no <- noc
+        no <- min_communities
       }
       steps <- n_initial - no
     }
