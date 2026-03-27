@@ -359,7 +359,35 @@ test_that("triangular_lattice_impl errors", {
   ))
 })
 
-# 12. path_graph_impl
+# 11b. hexagonal_lattice_impl
+
+test_that("hexagonal_lattice_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot(hexagonal_lattice_impl(
+    dimvector = c(2, 2)
+  ))
+  expect_snapshot(hexagonal_lattice_impl(
+    dimvector = c(2, 2),
+    directed = TRUE,
+    mutual = TRUE
+  ))
+
+  # Structured tests
+  result <- hexagonal_lattice_impl(
+    dimvector = c(2, 2)
+  )
+  expect_s3_class(result, "igraph")
+})
+
+test_that("hexagonal_lattice_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(hexagonal_lattice_impl(
+    dimvector = -1
+  ))
+})
+
 
 test_that("path_graph_impl basic", {
   withr::local_seed(20250909)

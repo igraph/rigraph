@@ -385,9 +385,9 @@ graph.lcf <- function(n, shifts, repeats = 1) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.lattice()` was renamed to [make_lattice()] to create a more
+#' `graph.lattice()` was renamed to [make_square_lattice()] to create a more
 #' consistent API.
-#' @inheritParams make_lattice
+#' @inheritParams make_square_lattice
 #' @keywords internal
 #' @export
 graph.lattice <- function(
@@ -401,50 +401,17 @@ graph.lattice <- function(
   circular = deprecated()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_lattice()")
-  if (is.numeric(length) && length != floor(length)) {
-    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
-    length <- round(length)
-  }
-
-  if (lifecycle::is_present(circular)) {
-    lifecycle::deprecate_soft(
-      "2.0.3",
-      "graph.lattice(circular = 'use periodic argument instead')",
-      details = c("`circular` is now deprecated, use `periodic` instead.")
-    )
-    periodic <- circular
-  }
-
-  if (is.numeric(length) && length != floor(length)) {
-    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
-    length <- round(length)
-  }
-
-  if (is.null(dimvector)) {
-    dimvector <- rep(length, dim)
-  }
-
-  if (length(periodic) == 1) {
-    periodic <- rep(periodic, length(dimvector))
-  }
-
-  res <- square_lattice_impl(
+  lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_square_lattice()")
+  make_square_lattice(
     dimvector = dimvector,
+    length = length,
+    dim = dim,
     nei = nei,
     directed = directed,
     mutual = mutual,
-    periodic = periodic
+    periodic = periodic,
+    circular = circular
   )
-
-  if (igraph_opt("add.params")) {
-    res$name <- "Lattice graph"
-    res$dimvector <- dimvector
-    res$nei <- nei
-    res$mutual <- mutual
-    res$circular <- periodic
-  }
-  res
 } # nocov end
 
 #' Kautz graphs
@@ -1916,13 +1883,21 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 
 ## -----------------------------------------------------------------
 
-#' Create a lattice graph
+#' Create a square lattice graph
 #'
-#' `make_lattice()` is a flexible function, it can create lattices of
-#' arbitrary dimensions, periodic or aperiodic ones. It has two
-#' forms. In the first form you only supply `dimvector`, but not
-#' `length` and `dim`. In the second form you omit
-#' `dimvector` and supply `length` and `dim`.
+#' `make_square_lattice()` is a flexible function, it can create lattices of
+#' arbitrary dimensions, periodic or aperiodic ones.
+#' It has two forms.
+#' In the first form you only supply `dimvector`, but not `length` and `dim`.
+#' In the second form you omit `dimvector` and supply `length` and `dim`.
+#'
+#' Vertices are ordered so that the first dimension varies the fastest.
+#' For example, in a 3-by-4 lattice, the first three vertices correspond to
+#' positions `(1,1)`, `(2,1)`, `(3,1)`, the next three to `(1,2)`, `(2,2)`,
+#' `(3,2)`, and so on.
+#' When the `lattice.coords` [igraph option][igraph_options()] is `TRUE`
+#' (the default), each vertex is assigned a `coordinates` attribute containing
+#' its integer coordinate vector, e.g. `c(1L, 2L)` for position `(1, 2)`.
 #'
 #' @concept Lattice
 #' @param dimvector A vector giving the size of the lattice in each
@@ -1936,7 +1911,7 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 #' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
 #' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
-#'   periodic along each dimension. This parameter may also be scalar boolen value which will
+#'   periodic along each dimension. This parameter may also be scalar boolean value which will
 #'   be extended to boolean vector with dimvector length.
 #' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
@@ -1944,9 +1919,13 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 #' @family deterministic constructors
 #' @export
 #' @examples
-#' make_lattice(c(5, 5, 5))
-#' make_lattice(length = 5, dim = 3)
-make_lattice <- function(
+#' make_square_lattice(c(5, 5, 5))
+#' make_square_lattice(length = 5, dim = 3)
+#'
+#' # Vertex coordinates are stored as an attribute
+#' g <- make_square_lattice(c(3, 4))
+#' head(V(g)$coordinates)
+make_square_lattice <- function(
   dimvector = NULL,
   length = NULL,
   dim = NULL,
@@ -1959,7 +1938,7 @@ make_lattice <- function(
   if (lifecycle::is_present(circular)) {
     lifecycle::deprecate_soft(
       "2.0.3",
-      "make_lattice(circular = 'use periodic argument instead')",
+      "make_square_lattice(circular = 'use periodic argument instead')",
       details = c("`circular` is now deprecated, use `periodic` instead.")
     )
     periodic <- circular
@@ -1993,10 +1972,85 @@ make_lattice <- function(
     res$mutual <- mutual
     res$circular <- periodic
   }
+
+  if (
+    igraph_opt("lattice.coords") && length(dimvector) > 0 && prod(dimvector) > 0
+  ) {
+    grid_coords <- do.call(expand.grid, lapply(dimvector, seq_len))
+    coords_mat <- unname(as.matrix(grid_coords))
+    mode(coords_mat) <- "integer"
+    vertex_attr(res, "coordinates") <- lapply(
+      seq_len(nrow(coords_mat)),
+      function(i) coords_mat[i, ]
+    )
+  }
+
   res
 }
 
-#' @rdname make_lattice
+#' @rdname make_square_lattice
+#' @export
+square_lattice <- function(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+) {
+  constructor_spec(
+    make_square_lattice,
+    dimvector = dimvector,
+    length = length,
+    dim = dim,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic,
+    circular = circular
+  )
+}
+
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `make_lattice()` was renamed to [make_square_lattice()] to create a more
+#' consistent API.
+#' @rdname make_square_lattice
+#' @keywords internal
+#' @export
+make_lattice <- function(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+) {
+  lifecycle::deprecate_soft("2.1.0", "make_lattice()", "make_square_lattice()")
+  make_square_lattice(
+    dimvector = dimvector,
+    length = length,
+    dim = dim,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic,
+    circular = circular
+  )
+}
+
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `lattice()` was renamed to [square_lattice()] to create a more
+#' consistent API.
+#' @rdname make_square_lattice
+#' @keywords internal
 #' @export
 lattice <- function(
   dimvector = NULL,
@@ -2008,8 +2062,9 @@ lattice <- function(
   periodic = FALSE,
   circular = deprecated()
 ) {
+  lifecycle::deprecate_soft("2.1.0", "lattice()", "square_lattice()")
   constructor_spec(
-    make_lattice,
+    make_square_lattice,
     dimvector = dimvector,
     length = length,
     dim = dim,
@@ -2022,6 +2077,132 @@ lattice <- function(
 }
 
 ## -----------------------------------------------------------------
+
+#' Create a triangular lattice graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Creates a triangular lattice whose vertices have the form `(i, j)` for
+#' non-negative integers `i` and `j`, where `(i, j)` is connected with
+#' `(i + 1, j)`, `(i, j + 1)`, and `(i - 1, j + 1)`.
+#' This function is the planar dual of [make_hex_lattice()].
+#' In particular, there is a one-to-one correspondence between the vertices of
+#' the constructed graph and the hexagonal faces of the graph constructed by
+#' [make_hex_lattice()] with the same `dims` parameter.
+#'
+#' @concept Lattice
+#' @param dims An integer vector defining the shape of the lattice.
+#'   If `dims` has length 1, the resulting lattice has a triangular shape
+#'   where each side of the triangle contains `dims[1]` vertices.
+#'   If `dims` has length 2, the resulting lattice has a "quasi-rectangular"
+#'   shape with sides containing `dims[1]` and `dims[2]` vertices.
+#'   If `dims` has length 3, the resulting lattice has a hexagonal shape
+#'   where the sides of the hexagon contain `dims[1]`, `dims[2]`, and
+#'   `dims[3]` vertices.
+#'   All dimensions must be positive integers.
+#' @param directed Whether to create a directed graph.
+#'   If `mutual` is not `TRUE`, edges are directed from lower-index
+#'   vertices towards higher-index ones.
+#' @param mutual Logical, if `TRUE` directed lattices will be mutually
+#'   connected.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_tri_lattice(c(3, 3))
+make_tri_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  res <- triangular_lattice_impl(
+    dimvector = dims,
+    directed = directed,
+    mutual = mutual
+  )
+
+  if (igraph_opt("add.params")) {
+    res$name <- "Triangular lattice graph"
+    res$dims <- dims
+    res$mutual <- mutual
+  }
+
+  res
+}
+
+#' @rdname make_tri_lattice
+#' @export
+tri_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  constructor_spec(
+    make_tri_lattice,
+    dims,
+    directed = directed,
+    mutual = mutual
+  )
+}
+
+## -----------------------------------------------------------------
+
+#' Create a hexagonal lattice graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Creates a hexagonal lattice, i.e., a graph where vertices are arranged in
+#' a honeycomb-like pattern.
+#' This function is the planar dual of [make_tri_lattice()].
+#' In particular, there is a one-to-one correspondence between the vertices of
+#' the constructed graph and the triangular faces of the graph constructed by
+#' [make_tri_lattice()] with the same `dims` parameter.
+#'
+#' @concept Lattice
+#' @param dims An integer vector defining the shape of the lattice.
+#'   If `dims` has length 1, the resulting lattice has a triangular shape
+#'   where each side of the triangle contains `dims[1]` vertices.
+#'   If `dims` has length 2, the resulting lattice has a "quasi-rectangular"
+#'   shape with sides containing `dims[1]` and `dims[2]` vertices.
+#'   If `dims` has length 3, the resulting lattice has a hexagonal shape
+#'   where the sides of the hexagon contain `dims[1]`, `dims[2]`, and
+#'   `dims[3]` vertices.
+#'   All dimensions must be positive integers.
+#' @param directed Whether to create a directed graph.
+#'   If `mutual` is not `TRUE`, edges are directed from lower-index
+#'   vertices towards higher-index ones.
+#' @param mutual Logical, if `TRUE` directed lattices will be mutually
+#'   connected.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_hex_lattice(c(3, 3))
+make_hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  res <- hexagonal_lattice_impl(
+    dimvector = dims,
+    directed = directed,
+    mutual = mutual
+  )
+
+  if (igraph_opt("add.params")) {
+    res$name <- "Hexagonal lattice graph"
+    res$dims <- dims
+    res$mutual <- mutual
+  }
+
+  res
+}
+
+#' @rdname make_hex_lattice
+#' @export
+hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  constructor_spec(
+    make_hex_lattice,
+    dims,
+    directed = directed,
+    mutual = mutual
+  )
+}
+
 
 #' Create a ring graph
 #'

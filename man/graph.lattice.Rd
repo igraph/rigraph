@@ -33,7 +33,7 @@ lattice will be connected. This parameter is not used right now.}
 mutually connected.}
 
 \item{periodic}{Logical vector, Boolean vector, defines whether the generated lattice is
-periodic along each dimension. This parameter may also be scalar boolen value which will
+periodic along each dimension. This parameter may also be scalar boolean value which will
 be extended to boolean vector with dimvector length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
@@ -41,7 +41,7 @@ be extended to boolean vector with dimvector length.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.lattice()} was renamed to \code{\link[=make_lattice]{make_lattice()}} to create a more
+\code{graph.lattice()} was renamed to \code{\link[=make_square_lattice]{make_square_lattice()}} to create a more
 consistent API.
 }
 \section{Related documentation in the C library}{

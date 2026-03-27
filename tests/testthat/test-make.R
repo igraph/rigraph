@@ -170,7 +170,12 @@ test_that("make_full_graph works", {
 })
 
 test_that("make_lattice works", {
-  lattice_make <- make_lattice(dim = 2, length = 3, periodic = FALSE)
+  local_igraph_options(lattice.coords = FALSE)
+  lattice_make <- suppressWarnings(make_lattice(
+    dim = 2,
+    length = 3,
+    periodic = FALSE
+  ))
   lattice_elist <- make_empty_graph(n = 9) +
     edges(c(
     1, 2,
@@ -188,7 +193,9 @@ test_that("make_lattice works", {
   ))
   expect_equal(as_edgelist(lattice_make), as_edgelist(lattice_elist))
 
-  lattice_make_periodic <- make_lattice(dim = 2, length = 3, periodic = TRUE)
+  lattice_make_periodic <- suppressWarnings(
+    make_lattice(dim = 2, length = 3, periodic = TRUE)
+  )
   lattice_elist_periodic <- make_empty_graph(n = 9) +
     edges(c(
     1, 2,
@@ -225,8 +232,93 @@ test_that("make_lattice prints a warning for fractional length)", {
   suppressWarnings(
     lattice_rounded <- make_lattice(dim = 2, length = sqrt(2000))
   )
-  lattice_integer <- make_lattice(dim = 2, length = 45)
+  lattice_integer <- suppressWarnings(make_lattice(dim = 2, length = 45))
   expect_identical_graphs(lattice_rounded, lattice_integer)
+})
+
+test_that("make_square_lattice works", {
+  lattice_make <- make_square_lattice(dim = 2, length = 3, periodic = FALSE)
+  lattice_elist <- make_empty_graph(n = 9) +
+    edges(c(
+    1, 2,
+    1, 4,
+    2, 3,
+    2, 5,
+    3, 6,
+    4, 5,
+    4, 7,
+    5, 6,
+    5, 8,
+    6, 9,
+    7, 8,
+    8, 9
+  ))
+  expect_equal(as_edgelist(lattice_make), as_edgelist(lattice_elist))
+})
+
+test_that("make_square_lattice adds vertex coordinates", {
+  g <- make_square_lattice(c(3, 4))
+  coords <- V(g)$coordinates
+  expect_type(coords, "list")
+  expect_length(coords, 12L)
+  # First dim varies fastest
+  expect_equal(coords[[1L]], c(1L, 1L))
+  expect_equal(coords[[2L]], c(2L, 1L))
+  expect_equal(coords[[3L]], c(3L, 1L))
+  expect_equal(coords[[4L]], c(1L, 2L))
+  expect_equal(coords[[12L]], c(3L, 4L))
+
+  # 3D lattice
+  g3 <- make_square_lattice(c(2, 3, 4))
+  coords3 <- V(g3)$coordinates
+  expect_length(coords3, 24L)
+  expect_equal(coords3[[1L]], c(1L, 1L, 1L))
+  expect_equal(coords3[[7L]], c(1L, 1L, 2L))
+
+  # Coordinates are suppressed when lattice.coords = FALSE
+  local_igraph_options(lattice.coords = FALSE)
+  g_no_coords <- make_square_lattice(c(3, 4))
+  expect_null(V(g_no_coords)$coordinates)
+})
+
+test_that("make_square_lattice prints a warning for fractional length", {
+  expect_warning(
+    make_square_lattice(dim = 2, length = sqrt(2000)),
+    "`length` was rounded"
+  )
+
+  suppressWarnings(
+    lattice_rounded <- make_square_lattice(dim = 2, length = sqrt(2000))
+  )
+  lattice_integer <- make_square_lattice(dim = 2, length = 45)
+  expect_identical_graphs(lattice_rounded, lattice_integer)
+})
+
+test_that("make_tri_lattice works", {
+  g <- make_tri_lattice(c(3, 3))
+  expect_true(is_igraph(g))
+  expect_equal(vcount(g), 9L)
+  expect_true(!is_directed(g))
+
+  # Directed version
+  g_dir <- make_tri_lattice(c(3, 3), directed = TRUE)
+  expect_true(is_directed(g_dir))
+
+  # Graph params
+  expect_equal(g$name, "Triangular lattice graph")
+})
+
+test_that("make_hex_lattice works", {
+  g <- make_hex_lattice(c(3, 3))
+  expect_true(is_igraph(g))
+  expect_true(!is_directed(g))
+
+  # Directed version
+  g_dir <- make_hex_lattice(c(3, 3), directed = TRUE)
+  expect_true(is_directed(g_dir))
+
+  # Graph params
+  expect_equal(g$name, "Hexagonal lattice graph")
 })
 
 test_that("make_graph works", {

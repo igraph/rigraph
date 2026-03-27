@@ -6,6 +6,20 @@
 
 - Not all loops are plotted (#2594, #2595).
 
+## Features
+
+- `make_square_lattice()` replaces `make_lattice()` (now soft-deprecated).
+  Vertex coordinates are now added as a `coordinates` vertex attribute by
+  default, recording the integer grid position of each vertex.
+  This behavior can be controlled via the new `lattice.coords`
+  [igraph option][igraph_options()] (#786, #994).
+
+- New `make_tri_lattice()` exposes the triangular lattice constructor
+  from the igraph C library (#1405).
+
+- New `make_hex_lattice()` exposes the hexagonal lattice constructor
+  from the igraph C library (#1404).
+
 
 # igraph 2.2.2.9003
 
