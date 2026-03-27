@@ -1256,7 +1256,11 @@ is_weighted <- function(graph) {
 is_bipartite <- function(graph) {
   ensure_igraph(graph)
 
-  "type" %in% vertex_attr_names(graph)
+  if (!"type" %in% vertex_attr_names(graph)) {
+    return(FALSE)
+  }
+  type_vals <- vertex_attr(graph, "type")
+  is.logical(type_vals) || !anyNA(as.logical(type_vals))
 }
 
 #############
