@@ -70,6 +70,15 @@ Specifies what to do with the edge attributes if the graph is modified.
 The default value is \code{list(weight="sum", name="concat", "ignore")}.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
+\item{lattice.coords}{
+Logical scalar, whether to add a \code{coordinates} vertex attribute to
+lattice graphs created by \code{\link[=make_square_lattice]{make_square_lattice()}}, \code{\link[=make_tri_lattice]{make_tri_lattice()}},
+and \code{\link[=make_hex_lattice]{make_hex_lattice()}}.
+The \code{coordinates} attribute is a list where each element is an integer
+vector giving the grid position of the corresponding vertex.
+By default it is \code{TRUE}.
+Set to \code{FALSE} to improve performance when creating very large lattices.
+}
 \item{print.edge.attributes}{
 Logical constant, whether to print edge attributes when printing graphs.
 Defaults to \code{FALSE}.

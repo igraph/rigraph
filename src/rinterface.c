@@ -1016,6 +1016,41 @@ SEXP R_igraph_triangular_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
 }
 
 /*-------------------------------------------/
+/ igraph_hexagonal_lattice                   /
+/-------------------------------------------*/
+SEXP R_igraph_hexagonal_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_dimvector;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_mutual;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(dimvector, &c_dimvector));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_dimvector);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_hexagonal_lattice(&c_graph, &c_dimvector, c_directed, c_mutual));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=Ry_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_dimvector);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_ring                                /
 /-------------------------------------------*/
 SEXP R_igraph_ring(SEXP n, SEXP directed, SEXP mutual, SEXP circular) {

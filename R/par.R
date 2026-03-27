@@ -71,7 +71,8 @@ getIgraphOpt <- function(x, default = NULL) {
   "annotate.plot" = FALSE,
   "auto.print.lines" = 10,
   "return.vs.es" = TRUE,
-  "print.id" = TRUE
+  "print.id" = TRUE,
+  "lattice.coords" = TRUE
 )
 
 igraph.pars.set.verbose <- function(verbose) {
@@ -141,6 +142,15 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
 #'       See [attribute.combination()] for details on this.
+#'     }
+#'     \item{lattice.coords}{
+#'       Logical scalar, whether to add a `coordinates` vertex attribute to
+#'       lattice graphs created by [make_square_lattice()], [make_tri_lattice()],
+#'       and [make_hex_lattice()].
+#'       The `coordinates` attribute is a list where each element is an integer
+#'       vector giving the grid position of the corresponding vertex.
+#'       By default it is `TRUE`.
+#'       Set to `FALSE` to improve performance when creating very large lattices.
 #'     }
 #'     \item{print.edge.attributes}{
 #'       Logical constant, whether to print edge attributes when printing graphs.
