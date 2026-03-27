@@ -304,6 +304,49 @@ test_that("cluster_leading_eigen is deterministic", {
   }
 })
 
+test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
+  g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
+  g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+  lec <- cluster_leading_eigen(g)
+
+  # The algorithm finds 3 communities, with a partial dendrogram (2 merges)
+  expect_equal(max(membership(lec)), 3L)
+  expect_equal(nrow(lec$merges), 2L)
+
+  # cut_at with no= should return the original 3 communities
+  m3 <- cut_at(lec, no = 3)
+  expect_equal(length(unique(m3)), 3L)
+  expect_equal(m3, membership(lec))
+
+  # cut_at with no=2 should merge 2 of the 3 communities
+  m2 <- cut_at(lec, no = 2)
+  expect_equal(length(unique(m2)), 2L)
+
+  # cut_at with no=1 should put all vertices in one community
+  m1 <- cut_at(lec, no = 1)
+  expect_equal(length(unique(m1)), 1L)
+  expect_true(all(m1 == m1[1]))
+
+  # cut_at with steps= should work equivalently
+  expect_equal(cut_at(lec, steps = 0), cut_at(lec, no = 3))
+  expect_equal(cut_at(lec, steps = 1), cut_at(lec, no = 2))
+  expect_equal(cut_at(lec, steps = 2), cut_at(lec, no = 1))
+
+  # Asking for too many communities should warn and clamp
+  expect_warning(
+    m_excess <- cut_at(lec, no = 10),
+    "Cannot have that many communities"
+  )
+  expect_equal(m_excess, membership(lec))
+
+  # Asking for too many steps should warn and clamp
+  expect_warning(
+    m_excess_steps <- cut_at(lec, steps = 10),
+    "Cannot make that many steps"
+  )
+  expect_equal(m_excess_steps, cut_at(lec, no = 1))
+})
+
 test_that("cluster_leiden works", {
   withr::local_seed(42)
 
