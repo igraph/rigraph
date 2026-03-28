@@ -80,7 +80,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ``` r
 g <- sample_pa(100)
 topo_sort(g)
-#> + 100/100 vertices, from 10ad4e4:
+#> + 100/100 vertices, from b594336:
 #>   [1]   6   9  12  13  18  19  20  22  23  24  30  31  32  34  35  36  37  38
 #>  [19]  39  40  41  44  46  47  50  51  52  53  54  55  56  60  61  62  63  64
 #>  [37]  66  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84
