@@ -31,12 +31,6 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-#if R_VERSION >= R_Version(4, 6, 0)
-/* R_getRegisteredNamespace() was added to the C API in R 4.6.
-   It is the C-level equivalent of base::getRegisteredNamespace(). */
-SEXP R_getRegisteredNamespace(const char *name);
-#endif
-
 #if defined(__SANITIZE_ADDRESS__)
 #  define IGRAPH_SANITIZER_AVAILABLE 1
 #elif defined(__has_feature)
