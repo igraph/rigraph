@@ -34,7 +34,7 @@
 #if R_VERSION >= R_Version(4, 6, 0)
 /* R_getRegisteredNamespace() was added to the C API in R 4.6.
    It is the C-level equivalent of base::getRegisteredNamespace(). */
-SEXP R_getRegisteredNamespace(SEXP name);
+SEXP R_getRegisteredNamespace(const char *name);
 #endif
 
 #if defined(__SANITIZE_ADDRESS__)
@@ -2424,7 +2424,7 @@ igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
   int px = 0;
   SEXP rho;
 #if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace(PROTECT(Rf_mkString("igraph"))); UNPROTECT(1);
+  rho = R_getRegisteredNamespace("igraph");
 #else
   SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
   SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
@@ -2447,7 +2447,7 @@ igraph_error_t Rx_igraph_status_handler(const char *message, void *data) {
   int px = 0;
   SEXP rho;
 #if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace(PROTECT(Rf_mkString("igraph"))); UNPROTECT(1);
+  rho = R_getRegisteredNamespace("igraph");
 #else
   SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
   SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
@@ -2551,7 +2551,7 @@ SEXP R_igraph_finalizer(void) {
   int px = 0;
   SEXP rho;
 #if R_VERSION >= R_Version(4, 6, 0)
-  rho = R_getRegisteredNamespace(PROTECT(Rf_mkString("igraph"))); UNPROTECT(1);
+  rho = R_getRegisteredNamespace("igraph");
 #else
   SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
   SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
