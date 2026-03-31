@@ -220,10 +220,14 @@ R_igraph_safe_eval_result_t R_igraph_safe_eval_classify_result(SEXP result) {
 SEXP R_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, R_igraph_safe_eval_result_t* result) {
   /* find `identity` function used to capture errors */
   SEXP identity = PROTECT(Rf_install("identity"));
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP identity_func = PROTECT(R_getVar(identity, R_BaseNamespace, TRUE));
+#else
   SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
   if (identity_func == R_UnboundValue) {
     Rf_error("Failed to find 'base::identity()'");
   }
+#endif
 
   /* define the call -- enclose with `tryCatch` so we can record errors */
   SEXP try_catch = PROTECT(Rf_install("tryCatch"));
@@ -2377,39 +2381,55 @@ igraph_error_t R_igraph_progress_handler(const char *message, double percent,
                               void * data) {
   SEXP ec;
   int ecint;
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(percent));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
-  SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6));
-  PROTECT(ec=Rf_eval(l7, rho));
+  SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarReal(percent)); px++;
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
+  SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6)); px++;
+  PROTECT(ec=Rf_eval(l7, rho)); px++;
 
   ecint=INTEGER(ec)[0];
-  UNPROTECT(11);
+  UNPROTECT(px);
   return ecint;
 }
 
 igraph_error_t R_igraph_status_handler(const char *message, void *data) {
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.status"));
-  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
-  SEXP l6 = PROTECT(Rf_lang2(l4, l5));
-  PROTECT(Rf_eval(l6, rho));
+  SEXP l4 = PROTECT(Rf_install(".igraph.status")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
+  SEXP l6 = PROTECT(Rf_lang2(l4, l5)); px++;
+  PROTECT(Rf_eval(l6, rho)); px++;
 
-  UNPROTECT(10);
+  UNPROTECT(px);
   return 0;
 }
 
 static R_xlen_t R_igraph_altrep_length(SEXP vec) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
   igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
   return igraph_ecount(g);
 }
@@ -2418,7 +2438,11 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
   SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
     R_igraph_status_handler("Materializing 'from' vector.\n", NULL);
+#if R_VERSION >= R_Version(4, 6, 0)
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=R_igraph_vector_int_to_SEXP(&g->from);
@@ -2433,7 +2457,11 @@ static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
   if (data == R_NilValue) {
     R_igraph_status_handler("Materializing 'to' vector.\n", NULL);
 
+#if R_VERSION >= R_Version(4, 6, 0)
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=R_igraph_vector_int_to_SEXP(&g->to);
@@ -2480,18 +2508,24 @@ SEXP R_igraph_set_verbose(SEXP verbose) {
 
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(0.0));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(""))));
-  SEXP l7 = PROTECT(Rf_ScalarLogical(1));
-  SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7));
+  SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarReal(0.0)); px++;
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("")))); px += 2;
+  SEXP l7 = PROTECT(Rf_ScalarLogical(1)); px++;
+  SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7)); px++;
   Rf_eval(l8, rho);
-  UNPROTECT(11);
+  UNPROTECT(px);
   return R_NilValue;
 }
 
@@ -2839,17 +2873,29 @@ igraph_t *R_igraph_get_pointer(SEXP graph) {
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP xp=R_getVarEx(Rf_install("igraph"), R_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (xp == R_NilValue) {
+    R_igraph_restore_pointer(graph);
+    xp=R_getVarEx(Rf_install("igraph"), R_igraph_graph_env(graph), TRUE, R_NilValue);
+  }
+#else
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   if (xp == R_UnboundValue || xp == R_NilValue) {
     R_igraph_restore_pointer(graph);
     xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   }
+#endif
 
   igraph_t *pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
 
   if (!pgraph) {
     R_igraph_restore_pointer(graph);
+#if R_VERSION >= R_Version(4, 6, 0)
+    xp=R_getVarEx(Rf_install("igraph"), R_igraph_graph_env(graph), TRUE, R_NilValue);
+#else
     xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+#endif
     pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
   }
 
@@ -8578,10 +8624,17 @@ SEXP R_igraph_graph_version(SEXP graph) {
     return Rf_ScalarInteger(ver_0_4);
   }
 
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP ver = R_getVarEx(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (ver == R_NilValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+#else
   SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
   if (ver == R_UnboundValue) {
     return Rf_ScalarInteger(ver_0_7_999);
   }
+#endif
 
   if (TYPEOF(ver) == STRSXP) {
     return Rf_ScalarInteger(ver_0_8);
@@ -8615,7 +8668,6 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
 
 SEXP R_igraph_add_env(SEXP graph) {
   SEXP result = graph;
-  R_xlen_t i;
   uuid_t my_id;
   char my_id_chr[40];
   int px = 0;
@@ -8626,14 +8678,7 @@ SEXP R_igraph_add_env(SEXP graph) {
     Rf_copyMostAttrib(graph, result);
   }
 
-  // Get the base namespace
-  SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
-  // Get the emptyenv function
-  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
-  // Call emptyenv()
-  SEXP empty_env = PROTECT(Rf_eval(PROTECT(Rf_lang1(empty_env_fun)), R_GlobalEnv)); px++; px++;
-  // Evaluate the call
-  SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
+  SEXP env = PROTECT(R_NewEnv(R_EmptyEnv, 0, 0)); px++;
 
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
@@ -8657,5 +8702,9 @@ SEXP R_igraph_add_env(SEXP graph) {
 }
 
 SEXP R_igraph_get_graph_id(SEXP graph) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  return R_getVar(Rf_install("myid"), R_igraph_graph_env(graph), TRUE);
+#else
   return Rf_findVar(Rf_install("myid"), R_igraph_graph_env(graph));
+#endif
 }
