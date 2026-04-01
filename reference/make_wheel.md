@@ -73,14 +73,14 @@ Other deterministic constructors:
 
 ``` r
 make_wheel(10, mode = "out")
-#> IGRAPH e88f49c D--- 10 18 -- Out-wheel
+#> IGRAPH 173196d D--- 10 18 -- Out-wheel
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from e88f49c:
+#> + edges from 173196d:
 #>  [1]  1-> 2  1-> 3  1-> 4  1-> 5  1-> 6  1-> 7  1-> 8  1-> 9  1->10  2-> 3
 #> [11]  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 2
 make_wheel(5, mode = "undirected")
-#> IGRAPH d8c24bf U--- 5 8 -- Wheel
+#> IGRAPH 90aa3ac U--- 5 8 -- Wheel
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from d8c24bf:
+#> + edges from 90aa3ac:
 #> [1] 1--2 1--3 1--4 1--5 2--3 3--4 4--5 2--5
 ```
