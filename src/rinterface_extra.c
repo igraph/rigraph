@@ -255,9 +255,6 @@ SEXP Rx_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, Rx_igraph_safe_eval_re
   /* find `identity` function used to capture errors */
   SEXP identity = PROTECT(Rf_install("identity"));
   SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
-  if (identity_func == R_UnboundValue) {
-    Rf_error("Failed to find 'base::identity()'");
-  }
 
   /* define the call -- enclose with `tryCatch` so we can record errors */
   SEXP try_catch = PROTECT(Rf_install("tryCatch"));
@@ -2889,17 +2886,17 @@ igraph_t *Rx_igraph_get_pointer(SEXP graph) {
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
-  SEXP xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
-  if (xp == R_UnboundValue || xp == R_NilValue) {
+  SEXP xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (xp == R_NilValue) {
     Rx_igraph_restore_pointer(graph);
-    xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
+    xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
   }
 
   igraph_t *pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
 
   if (!pgraph) {
     Rx_igraph_restore_pointer(graph);
-    xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
+    xp=IGRAPH_R_GET_VAR_EX(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
     pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
   }
 
@@ -7723,8 +7720,8 @@ SEXP Rx_igraph_graph_version(SEXP graph) {
     return Rf_ScalarInteger(ver_0_4);
   }
 
-  SEXP ver = IGRAPH_R_GET_VAR_EX(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_UnboundValue);
-  if (ver == R_UnboundValue) {
+  SEXP ver = IGRAPH_R_GET_VAR_EX(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (ver == R_NilValue) {
     return Rf_ScalarInteger(ver_0_7_999);
   }
 
