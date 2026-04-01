@@ -1,5 +1,14 @@
 # Changelog
 
+## igraph 2.2.2.9005
+
+### Chore
+
+- Avoid non-API calls to `Rf_findVar()`, `Rf_findVarInFrame()`, and
+  `R_UnboundValue`
+  ([\#2603](https://github.com/igraph/rigraph/issues/2603),
+  [\#2604](https://github.com/igraph/rigraph/issues/2604)).
+
 ## igraph 2.2.2.9004
 
 ### Bug fixes
