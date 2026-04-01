@@ -642,7 +642,7 @@ references:
   title: graph
   abstract: 'graph: graph: A package to handle graph data structures'
   notes: Enhances
-  repository: https://bioconductor.org/
+  repository: https://bioc-release.r-universe.dev
   authors:
   - family-names: Gentleman
     given-names: R
@@ -657,7 +657,6 @@ references:
   - family-names: Shannon
     given-names: Paul
   year: '2026'
-  doi: 10.18129/B9.bioc.graph
 - type: software
   title: cpp11
   abstract: 'cpp11: A C++11 Interface for R''s C Interface'
