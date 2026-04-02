@@ -133,11 +133,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_ring(10)
 g
-#> IGRAPH 036fab6 U--- 10 10 -- Ring graph
+#> IGRAPH b0d2e4b U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 036fab6:
+#> + edges from b0d2e4b:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH 036fab6 U--- 10 10 -- Ring graph
+#> IGRAPH b0d2e4b U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```
