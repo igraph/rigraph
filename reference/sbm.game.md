@@ -32,12 +32,8 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical scalar, whether to generate a directed graph.
 
 - loops:
 
   Logical scalar, whether self-loops are allowed in the graph.
-
-## Related documentation in the C library
-
-[`sbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game)

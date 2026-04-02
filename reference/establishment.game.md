@@ -46,7 +46,3 @@ establishment.game(
 - directed:
 
   Logical constant, whether to generate directed graphs.
-
-## Related documentation in the C library
-
-[`establishment_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game)

@@ -77,11 +77,3 @@ page.rank(
   A named list, to override some ARPACK options. See
   [`arpack()`](https://r.igraph.org/reference/arpack.md) for details.
   This argument is ignored if the PRPACK implementation is used.
-
-## Related documentation in the C library
-
-[`personalized_pagerank()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

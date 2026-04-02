@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The Page Rank algorithm</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.2.3/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
       <div class="d-none name"><code>page_rank.Rd</code></div>
     </div>
 
@@ -155,10 +155,6 @@ PageRank for only some of the vertices does not result in any performance
 increase at all.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank" class="external-link"><code>personalized_pagerank()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Sergey Brin and Larry Page: The Anatomy of a Large-Scale
 Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
@@ -187,16 +183,20 @@ Conference, Brisbane, Australia, April 1998.</p>
     <p>Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> and Gabor Csardi
 <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank" class="external-link"><code>personalized_pagerank()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span> <span class="op">/</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">page_rank</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.06265024 0.04420947 0.05577015 0.05330769 0.02519847 0.05104152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.06457791 0.08617833 0.05618098 0.05861773 0.05355785 0.04694985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.02562674 0.03832697 0.05055077 0.02559788 0.04430313 0.06348034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 0.04774245 0.04613152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.03966142 0.08234418 0.03720686 0.03610574 0.08847248 0.03052639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.02873343 0.04770217 0.05376387 0.03021328 0.02583354 0.04246911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.04807679 0.09581239 0.05252940 0.01699918 0.07637599 0.10906638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 0.02487818 0.03322920</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">page_rank</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
@@ -218,7 +218,7 @@ Conference, Brisbane, Australia, April 1998.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, <a href="https://mr.schochastics.net/" class="external-link">David Schoch</a>, <a href="https://masalmon.eu/" class="external-link">Maëlle Salmon</a>, R Consortium.</p>
+  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, <a href="https://mr.schochastics.net/" class="external-link">David Schoch</a>, <a href="https://masalmon.eu/" class="external-link">Maëlle Salmon</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

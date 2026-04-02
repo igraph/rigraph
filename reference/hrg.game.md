@@ -17,7 +17,3 @@ hrg.game(hrg)
 - hrg:
 
   A hierarchical random graph model.
-
-## Related documentation in the C library
-
-[`hrg_game()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_game)

@@ -42,11 +42,3 @@ graphlets.project(
 - Mu:
 
   Starting weights for the projection.
-
-## Related documentation in the C library
-
-[`graphlets_project()`](https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

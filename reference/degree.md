@@ -22,8 +22,6 @@ max_degree(
   loops = TRUE
 )
 
-mean_degree(graph, loops = TRUE)
-
 degree_distribution(graph, cumulative = FALSE, ...)
 ```
 
@@ -74,16 +72,6 @@ For `max_degree()`, the largest degree in the graph. When no vertices
 are selected, or when the input is the null graph, zero is returned as
 this is the smallest possible degree.
 
-For `mean_degree()`, the average degree in the graph as a single number.
-For graphs with no vertices, `NaN` is returned. **\[experimental\]**
-
-## Related documentation in the C library
-
-[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`maxdegree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree),
-[`mean_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree)
-
 ## See also
 
 Other structural.properties:
@@ -116,6 +104,10 @@ Other structural.properties:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
+## Related documentation in the C library
+
+[`maxdegree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree).
+
 ## Examples
 
 ``` r
@@ -125,8 +117,6 @@ degree(g)
 g2 <- sample_gnp(1000, 10 / 1000)
 max_degree(g2)
 #> [1] 22
-mean_degree(g2)
-#> [1] 9.906
 degree_distribution(g2)
 #>  [1] 0.001 0.000 0.002 0.005 0.026 0.038 0.058 0.101 0.118 0.117 0.118 0.113
 #> [13] 0.098 0.081 0.057 0.027 0.019 0.010 0.004 0.004 0.000 0.002 0.001

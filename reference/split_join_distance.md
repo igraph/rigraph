@@ -41,10 +41,6 @@ from the first. This makes it easier to detect whether a partition is a
 subpartition of the other, since in this case, the corresponding
 distance will be zero.
 
-## Related documentation in the C library
-
-[`split_join_distance()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_split_join_distance)
-
 ## References
 
 van Dongen S: Performance criteria for graph clustering and Markov

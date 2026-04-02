@@ -27,7 +27,3 @@ centralization.betweenness.tmax(graph = NULL, nodes = 0, directed = TRUE)
 
   Logical scalar, whether to use directed shortest paths for calculating
   betweenness. Ignored if an undirected graph was given.
-
-## Related documentation in the C library
-
-[`centralization_betweenness_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_betweenness_tmax)

@@ -25,10 +25,6 @@ undirected cycles in undirected graphs. Use
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md) to return
 a specific cycle.
 
-## Related documentation in the C library
-
-[`is_acyclic()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_acyclic)
-
 ## See also
 
 [`is_forest()`](https://r.igraph.org/reference/is_forest.md) and
@@ -69,6 +65,10 @@ Other structural.properties:
 [`unfold_tree()`](https://r.igraph.org/reference/unfold_tree.md),
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
+
+## Related documentation in the C library
+
+[`is_acyclic()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_acyclic).
 
 ## Examples
 

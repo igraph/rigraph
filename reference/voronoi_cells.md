@@ -70,14 +70,6 @@ A named list with two components:
 
   numeric vector giving the distance of each vertex from its generator
 
-## Related documentation in the C library
-
-[`voronoi()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_voronoi),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## See also
 
 [`distances()`](https://r.igraph.org/reference/distances.md)
@@ -102,6 +94,10 @@ Community detection
 [`modularity.igraph()`](https://r.igraph.org/reference/modularity.igraph.md),
 [`plot_dendrogram()`](https://r.igraph.org/reference/plot_dendrogram.communities.md),
 [`split_join_distance()`](https://r.igraph.org/reference/split_join_distance.md)
+
+## Related documentation in the C library
+
+[`voronoi()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_voronoi).
 
 ## Examples
 

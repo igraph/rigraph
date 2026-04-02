@@ -222,5 +222,3 @@ Other contributors:
 
 - Chan Zuckerberg Initiative ([ROR](https://ror.org/02qenvm24))
   \[funder\]
-
-- R Consortium ([ROR](https://ror.org/01z833950)) \[funder\]

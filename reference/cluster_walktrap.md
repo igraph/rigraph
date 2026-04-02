@@ -67,13 +67,6 @@ This function is the implementation of the Walktrap community finding
 algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in
 large networks using random walks, https://arxiv.org/abs/physics/0512106
 
-## Related documentation in the C library
-
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Pascal Pons, Matthieu Latapy: Computing communities in large networks

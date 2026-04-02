@@ -124,15 +124,6 @@ details.
 As of igraph 1.1.1, the `str.igraph` function is defunct, use
 `print_all()`.
 
-## Related documentation in the C library
-
-[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
-[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
-
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
@@ -142,11 +133,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_ring(10)
 g
-#> IGRAPH 7b96821 U--- 10 10 -- Ring graph
+#> IGRAPH a3d88c9 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 7b96821:
+#> + edges from a3d88c9:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH 7b96821 U--- 10 10 -- Ring graph
+#> IGRAPH a3d88c9 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```

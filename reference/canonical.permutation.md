@@ -35,8 +35,3 @@ canonical.permutation(
 
   Type of the heuristics to use for the BLISS algorithm. See details for
   possible values.
-
-## Related documentation in the C library
-
-[`canonical_permutation()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

@@ -7,7 +7,7 @@ Create a full graph
 ``` r
 make_full_graph(n, directed = FALSE, loops = FALSE)
 
-full_graph(n, directed = FALSE, loops = FALSE)
+full_graph(...)
 ```
 
 ## Arguments
@@ -24,13 +24,13 @@ full_graph(n, directed = FALSE, loops = FALSE)
 
   Whether to add self-loops to the graph.
 
+- ...:
+
+  Passed to `make_full_graph()`.
+
 ## Value
 
 An igraph graph
-
-## Related documentation in the C library
-
-[`full()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_full)
 
 ## See also
 
@@ -40,28 +40,24 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 ## Examples
 
 ``` r
 make_full_graph(5)
-#> IGRAPH 946331b U--- 5 10 -- Full graph
+#> IGRAPH a9e2d63 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 946331b:
+#> + edges from a9e2d63:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH b5dda9f D--- 4 12 -- Full graph
+#> IGRAPH 1ff26e6 D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

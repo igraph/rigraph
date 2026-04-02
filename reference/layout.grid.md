@@ -34,8 +34,3 @@ layout.grid(graph, width = 0, height = 0, dim = 2)
 - dim:
 
   Two or three. Whether to make 2d or a 3d layout.
-
-## Related documentation in the C library
-
-[`layout_grid()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid),
-[`layout_grid_3d()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d)

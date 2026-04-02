@@ -117,14 +117,6 @@ only some of the vertices, all of them must be calculated. Requesting
 the PageRank for only some of the vertices does not result in any
 performance increase at all.
 
-## Related documentation in the C library
-
-[`personalized_pagerank()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual
@@ -157,15 +149,19 @@ Centrality measures
 Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 <csardi.gabor@gmail.com>
 
+## Related documentation in the C library
+
+[`personalized_pagerank()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank).
+
 ## Examples
 
 ``` r
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
-#>  [1] 0.06265024 0.04420947 0.05577015 0.05330769 0.02519847 0.05104152
-#>  [7] 0.06457791 0.08617833 0.05618098 0.05861773 0.05355785 0.04694985
-#> [13] 0.02562674 0.03832697 0.05055077 0.02559788 0.04430313 0.06348034
-#> [19] 0.04774245 0.04613152
+#>  [1] 0.03966142 0.08234418 0.03720686 0.03610574 0.08847248 0.03052639
+#>  [7] 0.02873343 0.04770217 0.05376387 0.03021328 0.02583354 0.04246911
+#> [13] 0.04807679 0.09581239 0.05252940 0.01699918 0.07637599 0.10906638
+#> [19] 0.02487818 0.03322920
 
 g2 <- make_star(10)
 page_rank(g2)$vector

@@ -126,13 +126,6 @@ See the referenced paper below for the details of the algorithm.
 This function was rewritten from scratch in igraph version 0.8.0 and it
 follows truthfully the original publication by Kamada and Kawai now.
 
-## Related documentation in the C library
-
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Kamada, T. and Kawai, S.: An Algorithm for Drawing General Undirected

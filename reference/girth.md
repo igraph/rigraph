@@ -44,10 +44,6 @@ minimum circuit in a graph *Proceedings of the ninth annual ACM
 symposium on Theory of computing*, 1-10, 1977. The first implementation
 of this function was done by Keith Briggs, thanks Keith.
 
-## Related documentation in the C library
-
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Alon Itai and Michael Rodeh: Finding a minimum circuit in a graph
@@ -105,7 +101,7 @@ girth(g)
 #> [1] Inf
 #> 
 #> $circle
-#> + 0/1000 vertices, from 783da28:
+#> + 0/1000 vertices, from 4b8306a:
 #> 
 
 # The worst case running time is for a ring
@@ -115,7 +111,7 @@ girth(g)
 #> [1] 100
 #> 
 #> $circle
-#> + 100/100 vertices, from 35a61aa:
+#> + 100/100 vertices, from c9ce333:
 #>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
 #>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86
 #>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4
@@ -131,7 +127,7 @@ girth(g)
 #> [1] 10
 #> 
 #> $circle
-#> + 10/1000 vertices, from a3d5d38:
+#> + 10/1000 vertices, from 184d8ec:
 #>  [1] 819 813 578 477 824 199  53 759 280 787
 #> 
 ```
