@@ -165,6 +165,13 @@ If the `vertex` argument is given and it is not `NULL`, then it must be
 a vertex id, and the same energy function is used to find the community
 of the the given vertex. See also the examples below.
 
+## Related documentation in the C library
+
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 J. Reichardt and S. Bornholdt: Statistical Mechanics of Community

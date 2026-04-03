@@ -17,3 +17,7 @@ clique.number(graph)
 - graph:
 
   The input graph.
+
+## Related documentation in the C library
+
+[`clique_number()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_clique_number)

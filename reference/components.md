@@ -97,6 +97,13 @@ The weakly connected components are found by a simple breadth-first
 search. The strongly connected components are implemented by two
 consecutive depth-first searches.
 
+## Related documentation in the C library
+
+[`connected_components()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`induced_subgraph()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected)
+
 ## See also
 
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
@@ -106,6 +113,7 @@ consecutive depth-first searches.
 Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
+[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
@@ -139,10 +147,6 @@ Other structural.properties:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected).
-
 ## Examples
 
 ``` r
@@ -174,8 +178,8 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> IGRAPH c2d806f U--- 8 7 -- Erdos-Renyi (gnp) graph
+#> IGRAPH e66ee13 U--- 8 7 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from c2d806f:
+#> + edges from e66ee13:
 #> [1] 2--3 1--4 4--5 2--6 5--6 6--7 6--8
 ```

@@ -63,6 +63,10 @@ This function generates the layout separately for each graph component
 and then merges them via
 [`merge_coords()`](https://r.igraph.org/reference/merge_coords.md).
 
+## Related documentation in the C library
+
+[`layout_mds()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_mds)
+
 ## References
 
 Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional Scaling*. Second

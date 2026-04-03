@@ -46,3 +46,7 @@ graph.neighborhood(
 - mindist:
 
   The minimum distance to include the vertex in the result.
+
+## Related documentation in the C library
+
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

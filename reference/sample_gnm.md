@@ -7,7 +7,7 @@ Random graph with a fixed number of edges and vertices.
 ``` r
 sample_gnm(n, m, directed = FALSE, loops = FALSE)
 
-gnm(...)
+gnm(n, m, directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -28,10 +28,6 @@ gnm(...)
 
   Logical, whether to add loop edges, defaults to `FALSE`.
 
-- ...:
-
-  Passed to `sample_gnm()`.
-
 ## Value
 
 A graph object.
@@ -41,6 +37,10 @@ A graph object.
 The graph has `n` vertices and `m` edges. The edges are chosen uniformly
 at random from the set of all vertex pairs. This set includes potential
 self-connections as well if the `loops` parameter is `TRUE`.
+
+## Related documentation in the C library
+
+[`erdos_renyi_game_gnm()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnm)
 
 ## References
 
@@ -86,5 +86,5 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnm(1000, 1000)
 degree_distribution(g)
-#> [1] 0.145 0.279 0.252 0.169 0.095 0.036 0.019 0.004 0.001
+#> [1] 0.133 0.255 0.291 0.183 0.093 0.033 0.007 0.005
 ```

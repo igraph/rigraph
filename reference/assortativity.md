@@ -67,7 +67,9 @@ assortativity_degree(graph, directed = TRUE)
 
   Vector giving the vertex types. They as assumed to be integer numbers,
   starting with one. Non-integer values are converted to integers with
-  [`as.integer()`](https://rdrr.io/r/base/integer.html).
+  [`as.integer()`](https://rdrr.io/r/base/integer.html). Character
+  vectors are converted to integers using
+  [`as.factor()`](https://rdrr.io/r/base/factor.html).
 
 ## Value
 
@@ -113,6 +115,12 @@ Undirected graphs are effectively treated as directed ones with
 all-reciprocal edges. Thus, self-loops are taken into account twice in
 undirected graphs.
 
+## Related documentation in the C library
+
+[`assortativity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity),
+[`assortativity_nominal()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal),
+[`assortativity_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree)
+
 ## References
 
 M. E. J. Newman: Mixing patterns in networks, *Phys. Rev. E* 67, 026126
@@ -124,12 +132,6 @@ M. E. J. Newman: Assortative mixing in networks, *Phys. Rev. Lett.* 89,
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`assortativity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity),
-[`assortativity_nominal()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal),
-[`assortativity_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree).
 
 ## Examples
 

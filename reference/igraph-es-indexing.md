@@ -152,13 +152,13 @@ Other vertex and edge sequence operations:
 # Special operators for indexing based on graph structure
 g <- sample_pa(100, power = 0.3)
 E(g)[1:3 %--% 2:6]
-#> + 5/99 edges from e3aabc1:
+#> + 5/99 edges from 2d4bfed:
 #> [1] 2->1 3->1 4->1 5->2 6->2
 E(g)[1:5 %->% 1:6]
-#> + 4/99 edges from e3aabc1:
+#> + 4/99 edges from 2d4bfed:
 #> [1] 2->1 3->1 4->1 5->2
 E(g)[1:3 %<-% 2:6]
-#> + 5/99 edges from e3aabc1:
+#> + 5/99 edges from 2d4bfed:
 #> [1] 2->1 3->1 4->1 5->2 6->2
 
 # -----------------------------------------------------------------
@@ -166,7 +166,7 @@ E(g)[1:3 %<-% 2:6]
 g <- sample_pa(100, directed = FALSE)
 d <- get_diameter(g)
 E(g, path = d)
-#> + 12/99 edges from 3fa8df8:
+#> + 12/99 edges from 44fdfa4:
 #>  [1] 50--86 25--50 19--25  9--19  7-- 9  2-- 7  1-- 2  1-- 6  6--14 14--51
 #> [11] 51--60 60--96
 
@@ -175,7 +175,7 @@ E(g, path = d)
 g <- sample_gnp(20, 3 / 20) %>%
   set_edge_attr("weight", value = rnorm(gsize(.)))
 E(g)[[weight < 0]]
-#> + 16/27 edges from ff25457:
+#> + 16/27 edges from 23b212e:
 #>    tail head tid hid     weight
 #> 1     2    4   2   4 -0.5666468
 #> 3     4    6   4   6 -0.5710605
@@ -199,6 +199,6 @@ E(g)[[weight < 0]]
 E(g)$x <- E(g)$weight
 x <- 2
 E(g)[.env$x]
-#> + 1/27 edge from ff25457:
+#> + 1/27 edge from 23b212e:
 #> [1] 3--6
 ```

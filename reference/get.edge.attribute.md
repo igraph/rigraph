@@ -27,3 +27,10 @@ get.edge.attribute(graph, name, index = E(graph))
 
   An optional edge sequence to query edge attributes for a subset of
   edges.
+
+## Related documentation in the C library
+
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

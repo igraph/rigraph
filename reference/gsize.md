@@ -20,6 +20,10 @@ ecount(graph)
 
 Numeric scalar, the number of edges.
 
+## Related documentation in the C library
+
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 Other structural queries:

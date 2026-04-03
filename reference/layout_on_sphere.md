@@ -34,6 +34,10 @@ however what “uniformly on a sphere” means.
 If you want to order the vertices differently, then permute them using
 the [`permute()`](https://r.igraph.org/reference/permute.md) function.
 
+## Related documentation in the C library
+
+[`layout_sphere()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sphere)
+
 ## See also
 
 Other graph layouts:

@@ -34,6 +34,10 @@ to create the canonical form of a graph.
 
 `permute()` keeps all graph, vertex and edge attributes of the graph.
 
+## Related documentation in the C library
+
+[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices)
+
 ## See also
 
 [`canonical_permutation()`](https://r.igraph.org/reference/canonical_permutation.md)
@@ -59,6 +63,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -66,10 +71,6 @@ Other functions for manipulating graph structure:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices).
 
 ## Examples
 
@@ -90,11 +91,11 @@ isomorphic(g, g2)
 g2$name
 #> [1] "Random graph, Gnm, 20, 50"
 V(g2)$name
-#>  [1] "j" "a" "k" "i" "h" "r" "d" "b" "q" "c" "e" "g" "s" "t" "n" "f" "p" "o" "l"
-#> [20] "m"
+#>  [1] "i" "j" "a" "r" "m" "b" "t" "e" "g" "c" "q" "s" "d" "l" "f" "n" "k" "h" "p"
+#> [20] "o"
 E(g2)$weight
-#>  [1] 5 2 4 2 5 2 5 3 5 4 1 4 1 4 4 2 5 5 3 5 1 3 5 1 1 5 1 2 2 4 1 3 3 2 5 3 5 1
-#> [39] 2 3 1 4 3 1 2 2 1 3 2 2
+#>  [1] 3 2 2 2 4 3 2 3 1 4 2 4 3 5 4 4 3 3 2 3 3 2 1 3 3 3 5 5 1 2 3 2 3 1 1 1 3 2
+#> [39] 1 5 2 2 5 3 4 4 1 1 4 1
 all(sort(E(g2)$weight) == sort(E(g)$weight))
 #> [1] TRUE
 ```

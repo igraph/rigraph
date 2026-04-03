@@ -32,6 +32,10 @@ set_vertex_attr(graph, name, index = V(graph), value)
 
 The graph, with the vertex attribute added or set.
 
+## Related documentation in the C library
+
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Vertex, edge and graph attributes
@@ -60,9 +64,9 @@ Vertex, edge and graph attributes
 g <- make_ring(10) %>%
   set_vertex_attr("label", value = LETTERS[1:10])
 g
-#> IGRAPH e1e261d U--- 10 10 -- Ring graph
+#> IGRAPH 58a28cf U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), label (v/c)
-#> + edges from e1e261d:
+#> + edges from 58a28cf:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```

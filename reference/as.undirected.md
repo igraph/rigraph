@@ -37,3 +37,7 @@ as.undirected(
   one in the new graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
   for details on this.
+
+## Related documentation in the C library
+
+[`to_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_undirected)

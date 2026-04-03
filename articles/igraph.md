@@ -90,9 +90,9 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-    ## IGRAPH 6aa16fe UN-- 10 2 -- 
+    ## IGRAPH 60eebd9 UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from 6aa16fe (vertex names):
+    ## + edges from 60eebd9 (vertex names):
     ## [1] 1--2 1--5
 
 This means: **U**ndirected **N**amed graph with **10** vertices and
@@ -111,7 +111,7 @@ edges:
 summary(g)
 ```
 
-    ## IGRAPH 6aa16fe UN-- 10 2 -- 
+    ## IGRAPH 60eebd9 UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 The same function
@@ -214,7 +214,8 @@ g <- add_edges(g, edges = c(38, 37))
 ```
 
     ## Error in `add_edges()`:
-    ## ! At vendor/cigraph/src/graph/type_indexededgelist.c:261 : Out-of-range vertex IDs when adding edges. Invalid vertex ID
+    ## ! Out-of-range vertex IDs when adding edges. Invalid vertex ID
+    ## Source: graph/type_indexededgelist.c:261
 
 Let us add some more vertices and edges to our graph. In `igraph` we can
 use the `magrittr` package, which provides a mechanism for chaining
@@ -228,9 +229,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH 7ce65a9 U--- 40 86 -- Zachary
+    ## IGRAPH 46ef969 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from 7ce65a9:
+    ## + edges from 46ef969:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -295,12 +296,12 @@ the cycle. First, let’s create the initial graph using
 
 ``` r
 g1 <- graph_from_literal(
-  A - B:C:I, B - A:C:D, 
-  C - A:B:E:H, 
+  A - B:C:I, B - A:C:D,
+  C - A:B:E:H,
   D - B:E:F,
-  E - C:D:F:H, 
-  F - D:E:G, 
-  G - F:H, 
+  E - C:D:F:H,
+  F - D:E:G,
+  G - F:H,
   H - C:E:G:I,
   I - A:H
 )
@@ -354,7 +355,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(graph1)
 ```
 
-    ## IGRAPH 8ecfcca U--- 127 126 -- Tree
+    ## IGRAPH 3d48ca6 U--- 127 126 -- Tree
     ## + attr: name (g/c), children (g/n), mode (g/c)
 
 This generates a regular tree graph with 127 vertices, each vertex
@@ -381,7 +382,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH ee62aad U--- 100 499 -- Geometric random graph
+    ## IGRAPH ecd6132 U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 This generates a geometric random graph: *n* points are chosen randomly
@@ -450,7 +451,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH c29a97c UN-- 7 9 -- 
+    ## IGRAPH ab32c27 UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 [`V()`](https://r.igraph.org/reference/V.md) and
@@ -520,7 +521,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from c29a97c:
+    ## + 7/7 vertices, named, from ab32c27:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 To delete attributes:
@@ -683,7 +684,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from 915ff2f:
+    ## + 3/10 vertices, from 9fe9358:
     ## [1] 2 3 7
 
 ``` r
@@ -691,7 +692,7 @@ seq <- seq[1, 3] # filtering an existing vertex set
 seq
 ```
 
-    ## + 2/10 vertices, from 915ff2f:
+    ## + 2/10 vertices, from 9fe9358:
     ## [1] 2 7
 
 Selecting a vertex that does not exist results in an error:
@@ -769,7 +770,7 @@ Carmina (who has vertex index 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from c29a97c (vertex names):
+    ## + 4/9 edges from ab32c27 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Of course it also works with vertex names:
@@ -778,7 +779,7 @@ Of course it also works with vertex names:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from c29a97c (vertex names):
+    ## + 4/9 edges from ab32c27 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Using [`.to()`](https://r.igraph.org/reference/inside-square-error.md)
@@ -799,7 +800,7 @@ index 3), Nang (vertex index 5) and Samira (vertex index 6):
 E(g)[3:5 %--% 5:6]
 ```
 
-    ## + 3/9 edges from c29a97c (vertex names):
+    ## + 3/9 edges from ab32c27 (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 To make the `%--%` operator work with names, you can build string
@@ -830,7 +831,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from c29a97c (vertex names):
+    ## + 5/9 edges from ab32c27 (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
@@ -1111,7 +1112,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.2.2
+    ## [1] igraph_2.2.2.9005
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] vctrs_0.7.2        cli_3.6.5          knitr_1.51         rlang_1.1.7       

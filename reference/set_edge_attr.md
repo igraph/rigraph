@@ -31,6 +31,13 @@ set_edge_attr(graph, name, index = E(graph), value)
 
 The graph, with the edge attribute added or set.
 
+## Related documentation in the C library
+
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 Vertex, edge and graph attributes
@@ -59,9 +66,9 @@ Vertex, edge and graph attributes
 g <- make_ring(10) %>%
   set_edge_attr("label", value = LETTERS[1:10])
 g
-#> IGRAPH a9aa578 U--- 10 10 -- Ring graph
+#> IGRAPH b958438 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), label (e/c)
-#> + edges from a9aa578:
+#> + edges from b958438:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```

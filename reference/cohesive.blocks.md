@@ -35,3 +35,8 @@ cohesive.blocks(graph, labels = TRUE)
   Logical scalar, whether to add the vertex labels to the result object.
   These labels can be then used when reporting and plotting the cohesive
   blocks.
+
+## Related documentation in the C library
+
+[`cohesive_blocks()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

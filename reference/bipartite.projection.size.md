@@ -24,3 +24,8 @@ bipartite.projection.size(graph, types = NULL)
   An optional vertex type vector to use instead of the ‘`type`’ vertex
   attribute. You must supply this argument if the graph has no ‘`type`’
   vertex attribute.
+
+## Related documentation in the C library
+
+[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
