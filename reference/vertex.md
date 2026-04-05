@@ -69,9 +69,9 @@ Other functions for manipulating graph structure:
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
   vertices("X", "Y")
 g
-#> IGRAPH ced4044 UN-- 12 10 -- Ring graph
+#> IGRAPH 1a2faf5 UN-- 12 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from ced4044 (vertex names):
+#> + edges from 1a2faf5 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 plot(g)
 ```
