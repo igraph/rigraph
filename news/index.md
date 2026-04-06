@@ -1,5 +1,11 @@
 # Changelog
 
+## igraph 2.2.3
+
+### Chore
+
+- Remove calls to non-API functions.
+
 ## igraph 2.2.2
 
 CRAN release: 2026-02-12
