@@ -104,9 +104,9 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-#> IGRAPH cfa5e87 U--- 100 450 -- Hierarchical stochastic block model
+#> IGRAPH 4edc7eb U--- 100 450 -- Hierarchical stochastic block model
 #> + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
-#> + edges from cfa5e87:
+#> + edges from 4edc7eb:
 #>  [1]  1-- 2  1-- 3  2-- 3  1-- 4  1-- 5  2-- 5  3-- 5  1-- 6  2-- 6  5-- 7
 #> [11]  6-- 7  5-- 8  4-- 9  5-- 9  4--10  5--10  6--10  7-- 8  7--10 11--12
 #> [21] 11--13 12--13 11--14 12--14 13--14 11--15 12--15 11--16 12--16 15--17
