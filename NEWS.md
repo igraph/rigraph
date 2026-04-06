@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.3
+
+## Chore
+
+- Remove calls to non-API functions.
+
+
 # igraph 2.2.2
 
 ## Chore
