@@ -92,10 +92,6 @@ The “edge.switching.simple” is an MCMC sampler based on
 degree-preserving edge switches. It generates simple undirected or
 directed graphs.
 
-## Related documentation in the C library
-
-[`degree_sequence_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_degree_sequence_game)
-
 ## See also
 
 [`simplify()`](https://r.igraph.org/reference/simplify.md) to get rid of
@@ -145,7 +141,7 @@ degree(undirected_graph)
 #>  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 #>  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 is_simple(undirected_graph) # sometimes TRUE, but can be FALSE
-#> [1] TRUE
+#> [1] FALSE
 
 
 directed_graph <- sample_degseq(1:10, 10:1)

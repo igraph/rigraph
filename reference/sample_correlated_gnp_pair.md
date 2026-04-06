@@ -45,10 +45,6 @@ graphs whose adjacency matrix entries are correlated with `corr`.
 
 Please see the reference given below.
 
-## Related documentation in the C library
-
-[`correlated_pair_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game)
-
 ## References
 
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013). Seeded graph
@@ -85,6 +81,10 @@ Random graph models (games)
 [`sample_traits_callaway()`](https://r.igraph.org/reference/sample_traits_callaway.md),
 [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md)
 
+## Related documentation in the C library
+
+[`correlated_pair_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game).
+
 ## Examples
 
 ``` r
@@ -94,17 +94,17 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> IGRAPH 90a5c15 U--- 10 22 -- 
-#> + edges from 90a5c15:
-#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 4-- 5 1-- 6 3-- 6 5-- 6 1-- 7 4-- 7 6-- 7 1-- 8
-#> [13] 3-- 8 1-- 9 2-- 9 5-- 9 7-- 9 8-- 9 2--10 3--10 8--10 9--10
+#> IGRAPH 6fa832b U--- 10 18 -- 
+#> + edges from 6fa832b:
+#>  [1] 1-- 4 1-- 5 4-- 5 2-- 6 5-- 6 2-- 7 3-- 7 4-- 7 1-- 8 3-- 8 6-- 8 7-- 8
+#> [13] 1-- 9 5-- 9 7-- 9 8-- 9 7--10 8--10
 #> 
 #> $graph2
-#> IGRAPH da7154d U--- 10 20 -- 
-#> + edges from da7154d:
-#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 3-- 6 4-- 6 5-- 6 3-- 7 4-- 7 6-- 7 1-- 8
-#> [13] 6-- 8 1-- 9 2-- 9 5-- 9 8-- 9 3--10 8--10 9--10
+#> IGRAPH 5d93ef0 U--- 10 22 -- 
+#> + edges from 5d93ef0:
+#>  [1] 1-- 3 1-- 4 1-- 5 4-- 5 2-- 6 5-- 6 2-- 7 3-- 7 4-- 7 6-- 7 1-- 8 3-- 8
+#> [13] 6-- 8 7-- 8 1-- 9 4-- 9 5-- 9 7-- 9 8-- 9 2--10 7--10 8--10
 #> 
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
-#> [1] 0.6744005
+#> [1] 0.8461141
 ```

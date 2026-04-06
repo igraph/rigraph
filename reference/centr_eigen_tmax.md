@@ -40,10 +40,6 @@ Real scalar, the theoretical maximum (unnormalized) graph eigenvector
 centrality score for graphs with given vertex count and other
 parameters.
 
-## Related documentation in the C library
-
-[`centralization_eigenvector_centrality_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax)
-
 ## See also
 
 Other centralization related:
@@ -55,6 +51,10 @@ Other centralization related:
 [`centr_degree_tmax()`](https://r.igraph.org/reference/centr_degree_tmax.md),
 [`centr_eigen()`](https://r.igraph.org/reference/centr_eigen.md),
 [`centralize()`](https://r.igraph.org/reference/centralize.md)
+
+## Related documentation in the C library
+
+[`centralization_eigenvector_centrality_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax).
 
 ## Examples
 

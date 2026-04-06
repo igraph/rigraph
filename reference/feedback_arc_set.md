@@ -45,14 +45,6 @@ is a directed acyclic graph (DAG). For undirected graphs, the removal of
 a feedback arc set ensures that the remaining graph is a forest (i.e.
 every connected component is a tree).
 
-## Related documentation in the C library
-
-[`feedback_arc_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective heuristic
@@ -96,14 +88,18 @@ Graph cycles
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md),
 [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
 
+## Related documentation in the C library
+
+[`feedback_arc_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_arc_set).
+
 ## Examples
 
 ``` r
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 6/40 edges from 2ee69f0:
+#> + 6/40 edges from 4024cfb:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 feedback_arc_set(g, algo = "approx_eades")
-#> + 6/40 edges from 2ee69f0:
+#> + 6/40 edges from 4024cfb:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 ```

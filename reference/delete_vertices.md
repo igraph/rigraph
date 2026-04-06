@@ -22,11 +22,6 @@ delete_vertices(graph, v)
 
 The graph, with the vertices removed.
 
-## Related documentation in the C library
-
-[`delete_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_vertices),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other functions for manipulating graph structure:
@@ -50,7 +45,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -61,22 +55,22 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 g
-#> IGRAPH 97f2ef4 UN-- 10 10 -- Ring graph
+#> IGRAPH 08acc87 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 97f2ef4 (vertex names):
+#> + edges from 08acc87 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 V(g)
-#> + 10/10 vertices, named, from 97f2ef4:
+#> + 10/10 vertices, named, from 08acc87:
 #>  [1] A B C D E F G H I J
 
 g2 <- delete_vertices(g, c(1, 5)) %>%
   delete_vertices("B")
 g2
-#> IGRAPH 048dc43 UN-- 7 5 -- Ring graph
+#> IGRAPH a6ce491 UN-- 7 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 048dc43 (vertex names):
+#> + edges from a6ce491 (vertex names):
 #> [1] C--D F--G G--H H--I I--J
 V(g2)
-#> + 7/7 vertices, named, from 048dc43:
+#> + 7/7 vertices, named, from a6ce491:
 #> [1] C D F G H I J
 ```

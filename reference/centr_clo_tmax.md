@@ -30,10 +30,6 @@ centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 Real scalar, the theoretical maximum (unnormalized) graph closeness
 centrality score for graphs with given order and other parameters.
 
-## Related documentation in the C library
-
-[`centralization_closeness_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_closeness_tmax)
-
 ## See also
 
 Other centralization related:
@@ -45,6 +41,10 @@ Other centralization related:
 [`centr_eigen()`](https://r.igraph.org/reference/centr_eigen.md),
 [`centr_eigen_tmax()`](https://r.igraph.org/reference/centr_eigen_tmax.md),
 [`centralize()`](https://r.igraph.org/reference/centralize.md)
+
+## Related documentation in the C library
+
+[`centralization_closeness_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_closeness_tmax).
 
 ## Examples
 

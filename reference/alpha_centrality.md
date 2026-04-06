@@ -88,16 +88,6 @@ versus exogenous factors.
 Singular adjacency matrices cause problems for this algorithm, the
 routine may fail is certain cases.
 
-## Related documentation in the C library
-
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`get_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency),
-[`get_adjacency_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## References
 
 Bonacich, P. and Lloyd, P. (2001). “Eigenvector-like measures of

@@ -37,10 +37,6 @@ tree(...)
 
 An igraph graph
 
-## Related documentation in the C library
-
-[`kary_tree()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree)
-
 ## See also
 
 Other deterministic constructors:
@@ -49,29 +45,25 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
-[`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_star()`](https://r.igraph.org/reference/make_star.md)
 
 ## Examples
 
 ``` r
 make_tree(10, 2)
-#> IGRAPH 8a35e31 D--- 10 9 -- Tree
+#> IGRAPH f03931c D--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from 8a35e31:
+#> + edges from f03931c:
 #> [1] 1-> 2 1-> 3 2-> 4 2-> 5 3-> 6 3-> 7 4-> 8 4-> 9 5->10
 make_tree(10, 3, mode = "undirected")
-#> IGRAPH 634f334 U--- 10 9 -- Tree
+#> IGRAPH ccc793c U--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from 634f334:
+#> + edges from ccc793c:
 #> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10
 ```

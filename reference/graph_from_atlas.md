@@ -20,7 +20,7 @@ are listed:
 ``` r
 graph_from_atlas(n)
 
-atlas(n)
+atlas(...)
 ```
 
 ## Arguments
@@ -29,13 +29,13 @@ atlas(n)
 
   The id of the graph to create.
 
+- ...:
+
+  Passed to `graph_from_atlas()`.
+
 ## Value
 
 An igraph graph.
-
-## Related documentation in the C library
-
-[`atlas()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas)
 
 ## See also
 
@@ -44,31 +44,27 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
-[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
-[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
 
 ## Examples
 
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH e57d9e9 U--- 7 9 -- Graph from the Atlas #464
+#> IGRAPH a1c2eb7 U--- 7 9 -- Graph from the Atlas #464
 #> + attr: name (g/c), n (g/n)
-#> + edges from e57d9e9:
+#> + edges from a1c2eb7:
 #> [1] 2--4 2--3 1--3 1--6 5--6 4--5 3--4 1--4 1--5
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 2033bfa U--- 6 8 -- Graph from the Atlas #139
+#> IGRAPH f5dc0db U--- 6 8 -- Graph from the Atlas #139
 #> + attr: name (g/c), n (g/n)
-#> + edges from 2033bfa:
+#> + edges from f5dc0db:
 #> [1] 1--2 2--3 3--4 4--5 1--5 2--4 2--5 1--6
 ```

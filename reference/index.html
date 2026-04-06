@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,10 +115,10 @@
 
         <dt>
 
-          <code><a href="make_circulant.html">make_circulant()</a></code> <code><a href="make_circulant.html">circulant()</a></code>
+          <code><a href="make_clusters.html">make_clusters()</a></code>
 
         </dt>
-        <dd>Create a circulant graph</dd>
+        <dd>Creates a communities object.</dd>
 
         <dt>
 
@@ -161,13 +161,6 @@
 
         </dt>
         <dd>Create a full graph</dd>
-
-        <dt>
-
-          <code><a href="make_full_multipartite.html">make_full_multipartite()</a></code> <code><a href="make_full_multipartite.html">full_multipartite()</a></code>
-
-        </dt>
-        <dd>Create a full multipartite graph</dd>
 
         <dt>
 
@@ -217,20 +210,6 @@
 
         </dt>
         <dd>Create tree graphs</dd>
-
-        <dt>
-
-          <code><a href="make_turan.html">make_turan()</a></code> <code><a href="make_turan.html">turan()</a></code>
-
-        </dt>
-        <dd>Create a Turán graph</dd>
-
-        <dt>
-
-          <code><a href="make_wheel.html">make_wheel()</a></code> <code><a href="make_wheel.html">wheel()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Create a wheel graph</dd>
 
         <dt>
 
@@ -748,13 +727,6 @@
 
         <dt>
 
-          <code><a href="layout_modifier.html">layout_modifier()</a></code>
-
-        </dt>
-        <dd>Create a layout modifier</dd>
-
-        <dt>
-
           <code><a href="layout_with_drl.html">layout_with_drl()</a></code> <code><a href="layout_with_drl.html">with_drl()</a></code>
 
         </dt>
@@ -1022,13 +994,6 @@
 
         </dt>
         <dd>Simple graphs</dd>
-
-        <dt>
-
-          <code><a href="transitive_closure.html">transitive_closure()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Transitive closure of a graph</dd>
 
         <dt>
 
@@ -1662,22 +1627,6 @@
         </dt>
         <dd>Fitting a power-law distribution function to discrete data</dd>
       </dl></div><div class="section level2">
-
-      <h3 id="low-level-operations">Low-level operations<a class="anchor" aria-label="anchor" href="#low-level-operations"></a></h3>
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="invalidate_cache.html">invalidate_cache()</a></code>
-
-        </dt>
-        <dd>Invalidate the cache of a graph</dd>
-      </dl></div><div class="section level2">
       <h2 id="structural-properties">Structural properties<a class="anchor" aria-label="anchor" href="#structural-properties"></a></h2>
 
 
@@ -1717,7 +1666,7 @@
 
         <dt>
 
-          <code><a href="degree.html">degree()</a></code> <code><a href="degree.html">max_degree()</a></code> <code><a href="degree.html">mean_degree()</a></code> <code><a href="degree.html">degree_distribution()</a></code>
+          <code><a href="degree.html">degree()</a></code> <code><a href="degree.html">max_degree()</a></code> <code><a href="degree.html">degree_distribution()</a></code>
 
         </dt>
         <dd>Degree and degree distribution of the vertices</dd>
@@ -1850,7 +1799,7 @@
 
         <dt>
 
-          <code><a href="which_multiple.html">which_multiple()</a></code> <code><a href="which_multiple.html">any_multiple()</a></code> <code><a href="which_multiple.html">count_multiple()</a></code> <code><a href="which_multiple.html">which_loop()</a></code> <code><a href="which_multiple.html">any_loop()</a></code> <code><a href="which_multiple.html">count_loops()</a></code>
+          <code><a href="which_multiple.html">which_multiple()</a></code> <code><a href="which_multiple.html">any_multiple()</a></code> <code><a href="which_multiple.html">count_multiple()</a></code> <code><a href="which_multiple.html">which_loop()</a></code> <code><a href="which_multiple.html">any_loop()</a></code>
 
         </dt>
         <dd>Find the multiple or loop edges in a graph</dd>
@@ -2773,7 +2722,7 @@
         </dt>
         <dd>Graphlet decomposition of a graph</dd>
       </dl></div><div class="section level2">
-      <h2 id="community-detection-clustering-">Community detection (clustering)<a class="anchor" aria-label="anchor" href="#community-detection-clustering-"></a></h2>
+      <h2 id="community-detection">Community detection<a class="anchor" aria-label="anchor" href="#community-detection"></a></h2>
 
 
 
@@ -3016,13 +2965,6 @@
 
         </dt>
         <dd>Connected components of a graph</dd>
-
-        <dt>
-
-          <code><a href="count_reachable.html">count_reachable()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Count reachable vertices</dd>
 
         <dt>
 
@@ -3280,13 +3222,6 @@
 
       <dl><dt>
 
-          <code><a href="count_reachable.html">count_reachable()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Count reachable vertices</dd>
-
-        <dt>
-
           <code><a href="feedback_vertex_set.html">feedback_vertex_set()</a></code>
           <span class="badge lifecycle lifecycle-experimental">experimental</span>
         </dt>
@@ -3315,13 +3250,6 @@
 
         <dt>
 
-          <code><a href="make_wheel.html">make_wheel()</a></code> <code><a href="make_wheel.html">wheel()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Create a wheel graph</dd>
-
-        <dt>
-
           <code><a href="realize_bipartite_degseq.html">realize_bipartite_degseq()</a></code>
           <span class="badge lifecycle lifecycle-experimental">experimental</span>
         </dt>
@@ -3343,13 +3271,6 @@
 
         <dt>
 
-          <code><a href="transitive_closure.html">transitive_closure()</a></code>
-          <span class="badge lifecycle lifecycle-experimental">experimental</span>
-        </dt>
-        <dd>Transitive closure of a graph</dd>
-
-        <dt>
-
           <code><a href="voronoi_cells.html">voronoi_cells()</a></code>
           <span class="badge lifecycle lifecycle-experimental">experimental</span>
         </dt>
@@ -3360,7 +3281,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, <a href="https://mr.schochastics.net/" class="external-link">David Schoch</a>, <a href="https://masalmon.eu/" class="external-link">Maëlle Salmon</a>, R Consortium.</p>
+  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, <a href="https://mr.schochastics.net/" class="external-link">David Schoch</a>, <a href="https://masalmon.eu/" class="external-link">Maëlle Salmon</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

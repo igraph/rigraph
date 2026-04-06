@@ -1,7 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://r.igraph.org/404.html</loc></url>
-<url><loc>https://r.igraph.org/AGENTS.html</loc></url>
 <url><loc>https://r.igraph.org/AUTHORS-list.html</loc></url>
+<url><loc>https://r.igraph.org/CLAUDE.html</loc></url>
 <url><loc>https://r.igraph.org/CONTRIBUTING.html</loc></url>
 <url><loc>https://r.igraph.org/articles/current-deprecations.html</loc></url>
 <url><loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc></url>
@@ -10,7 +10,6 @@
 <url><loc>https://r.igraph.org/articles/index.html</loc></url>
 <url><loc>https://r.igraph.org/articles/installation-troubleshooting.html</loc></url>
 <url><loc>https://r.igraph.org/authors.html</loc></url>
-<url><loc>https://r.igraph.org/copilot-instructions.html</loc></url>
 <url><loc>https://r.igraph.org/cran-comments.template.html</loc></url>
 <url><loc>https://r.igraph.org/index.html</loc></url>
 <url><loc>https://r.igraph.org/news/index.html</loc></url>
@@ -141,7 +140,6 @@
 <url><loc>https://r.igraph.org/reference/count_automorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_isomorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_motifs.html</loc></url>
-<url><loc>https://r.igraph.org/reference/count_reachable.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_subgraph_isomorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_triangles.html</loc></url>
 <url><loc>https://r.igraph.org/reference/create.communities.html</loc></url>
@@ -360,7 +358,6 @@
 <url><loc>https://r.igraph.org/reference/intersection.igraph.es.html</loc></url>
 <url><loc>https://r.igraph.org/reference/intersection.igraph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc></url>
-<url><loc>https://r.igraph.org/reference/invalidate_cache.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.bipartite.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.chordal.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.connected.html</loc></url>
@@ -438,7 +435,6 @@
 <url><loc>https://r.igraph.org/reference/layout_as_star.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_as_tree.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_in_circle.html</loc></url>
-<url><loc>https://r.igraph.org/reference/layout_modifier.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_nicely.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_on_grid.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout_on_sphere.html</loc></url>
@@ -461,7 +457,6 @@
 <url><loc>https://r.igraph.org/reference/make_.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_bipartite_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_chordal_ring.html</loc></url>
-<url><loc>https://r.igraph.org/reference/make_circulant.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_clusters.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_de_bruijn_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_empty_graph.html</loc></url>
@@ -469,7 +464,6 @@
 <url><loc>https://r.igraph.org/reference/make_full_bipartite_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_full_citation_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_full_graph.html</loc></url>
-<url><loc>https://r.igraph.org/reference/make_full_multipartite.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_kautz_graph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_lattice.html</loc></url>
@@ -477,8 +471,6 @@
 <url><loc>https://r.igraph.org/reference/make_ring.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_star.html</loc></url>
 <url><loc>https://r.igraph.org/reference/make_tree.html</loc></url>
-<url><loc>https://r.igraph.org/reference/make_turan.html</loc></url>
-<url><loc>https://r.igraph.org/reference/make_wheel.html</loc></url>
 <url><loc>https://r.igraph.org/reference/match_vertices.html</loc></url>
 <url><loc>https://r.igraph.org/reference/matching.html</loc></url>
 <url><loc>https://r.igraph.org/reference/max_cardinality.html</loc></url>
@@ -642,7 +634,6 @@
 <url><loc>https://r.igraph.org/reference/to_prufer.html</loc></url>
 <url><loc>https://r.igraph.org/reference/topo_sort.html</loc></url>
 <url><loc>https://r.igraph.org/reference/topological.sort.html</loc></url>
-<url><loc>https://r.igraph.org/reference/transitive_closure.html</loc></url>
 <url><loc>https://r.igraph.org/reference/transitivity.html</loc></url>
 <url><loc>https://r.igraph.org/reference/triad.census.html</loc></url>
 <url><loc>https://r.igraph.org/reference/triad_census.html</loc></url>

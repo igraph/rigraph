@@ -22,7 +22,3 @@ hrg.create(graph, prob)
 
   A vector of probabilities, one for each vertex, in the order of vertex
   ids.
-
-## Related documentation in the C library
-
-[`hrg_create()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create)

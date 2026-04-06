@@ -64,14 +64,6 @@ If `igraph_opt("return.vs.es")` is true (default), the numeric vectors
 of the adjacency lists are coerced to `igraph.vs`, this can be a very
 expensive operation on large graphs.
 
-## Related documentation in the C library
-
-[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
-
 ## See also
 
 [`as_edgelist()`](https://r.igraph.org/reference/as_edgelist.md),
@@ -99,84 +91,84 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 as_adj_list(g)
 #> [[1]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1]  2 10
 #> 
 #> [[2]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 1 3
 #> 
 #> [[3]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 2 4
 #> 
 #> [[4]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 3 5
 #> 
 #> [[5]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 4 6
 #> 
 #> [[6]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 5 7
 #> 
 #> [[7]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 6 8
 #> 
 #> [[8]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 7 9
 #> 
 #> [[9]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1]  8 10
 #> 
 #> [[10]]
-#> + 2/10 vertices, from 2ec6b6f:
+#> + 2/10 vertices, from 24a2266:
 #> [1] 1 9
 #> 
 as_adj_edge_list(g)
 #> [[1]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 1-- 2 1--10
 #> 
 #> [[2]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 1--2 2--3
 #> 
 #> [[3]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 2--3 3--4
 #> 
 #> [[4]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 3--4 4--5
 #> 
 #> [[5]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 4--5 5--6
 #> 
 #> [[6]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 5--6 6--7
 #> 
 #> [[7]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 6--7 7--8
 #> 
 #> [[8]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 7--8 8--9
 #> 
 #> [[9]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 8-- 9 9--10
 #> 
 #> [[10]]
-#> + 2/10 edges from 2ec6b6f:
+#> + 2/10 edges from 24a2266:
 #> [1] 1--10 9--10
 #> 
 ```

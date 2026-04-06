@@ -25,14 +25,6 @@ delete_edges(graph, edges)
 
 The graph, with the edges removed.
 
-## Related documentation in the C library
-
-[`delete_edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_delete_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other functions for manipulating graph structure:
@@ -56,7 +48,6 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
-[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -67,24 +58,24 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   delete_edges(seq(1, 9, by = 2))
 g
-#> IGRAPH 8a4de16 U--- 10 5 -- Ring graph
+#> IGRAPH 6592db1 U--- 10 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 8a4de16:
+#> + edges from 6592db1:
 #> [1] 2-- 3 4-- 5 6-- 7 8-- 9 1--10
 
 g <- make_ring(10) %>%
   delete_edges("10|1")
 g
-#> IGRAPH 5a8bff2 U--- 10 9 -- Ring graph
+#> IGRAPH 8c6adcc U--- 10 9 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 5a8bff2:
+#> + edges from 8c6adcc:
 #> [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10
 
 g <- make_ring(5)
 g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
-#> IGRAPH cef21a8 U--- 5 3 -- Ring graph
+#> IGRAPH 4ed66a2 U--- 5 3 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from cef21a8:
+#> + edges from 4ed66a2:
 #> [1] 1--2 2--3 3--4
 ```

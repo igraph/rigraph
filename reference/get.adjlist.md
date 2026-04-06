@@ -41,8 +41,3 @@ get.adjlist(
 
   Logical scalar, set to `FALSE` to use only one representative of each
   set of parallel edges.
-
-## Related documentation in the C library
-
-[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

@@ -46,7 +46,3 @@ callaway.traits.game(
 - directed:
 
   Logical constant, whether to generate directed graphs.
-
-## Related documentation in the C library
-
-[`callaway_traits_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game)
