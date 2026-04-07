@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`igraph` es una biblioteca rápida y de código abierto para el análisis de grafos o redes. El núcleo de ésta libreria se encuentra escrito en C y contiene enlaces para lenguajes de alto nivel como [R](https://r.igraph.org/), [Python](https://python.igraph.org/), y [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). Esta viñeta pretende darte una visión general de las funciones disponibles de `igraph` en R. Para obtener información detallada de cada función, consulta <https://r.igraph.org/reference/>.
+`igraph` es una biblioteca rápida y de código abierto para el análisis de grafos o redes. El núcleo de ésta libreria se encuentra escrito en C y contiene enlaces para lenguajes de alto nivel como [R](https://r.igraph.org/), [Python](https://python.igraph.org/), y [Mathematica](https://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). Esta viñeta pretende darte una visión general de las funciones disponibles de `igraph` en R. Para obtener información detallada de cada función, consulta <https://r.igraph.org/reference/>.
 
 ------------------------------------------------------------------------
 
