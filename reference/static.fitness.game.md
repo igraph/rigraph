@@ -45,3 +45,7 @@ static.fitness.game(
 - multiple:
 
   Logical scalar, whether to allow multiple edges in the graph.
+
+## Related documentation in the C library
+
+[`static_fitness_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_static_fitness_game)

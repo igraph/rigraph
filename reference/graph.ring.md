@@ -30,3 +30,7 @@ graph.ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
   Whether to create a circular ring. A non-circular ring is essentially
   a “line”: a tree where every non-leaf vertex has one child.
+
+## Related documentation in the C library
+
+[`ring()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring)

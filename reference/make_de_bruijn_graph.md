@@ -7,7 +7,7 @@ De Bruijn graphs are labeled graphs representing the overlap of strings.
 ``` r
 make_de_bruijn_graph(m, n)
 
-de_bruijn_graph(...)
+de_bruijn_graph(m, n)
 ```
 
 ## Arguments
@@ -19,10 +19,6 @@ de_bruijn_graph(...)
 - n:
 
   Integer scalar, the length of the labels. See details below.
-
-- ...:
-
-  Passed to `make_de_bruijn_graph()`.
 
 ## Value
 
@@ -44,6 +40,10 @@ for `m` and `n`.
 De Bruijn graphs have some interesting properties, please see another
 source, e.g. Wikipedia for details.
 
+## Related documentation in the C library
+
+[`de_bruijn()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_de_bruijn)
+
 ## See also
 
 [`make_kautz_graph()`](https://r.igraph.org/reference/make_kautz_graph.md),
@@ -59,13 +59,13 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # de Bruijn graphs can be created recursively by line graphs as well
 g <- make_de_bruijn_graph(2, 1)
 make_de_bruijn_graph(2, 2)
-#> IGRAPH 951ff78 D--- 4 8 -- De-Bruijn graph 2-2
+#> IGRAPH c732f99 D--- 4 8 -- De-Bruijn graph 2-2
 #> + attr: name (g/c), m (g/n), n (g/n)
-#> + edges from 951ff78:
+#> + edges from c732f99:
 #> [1] 1->1 1->2 2->3 2->4 3->1 3->2 4->3 4->4
 make_line_graph(g)
-#> IGRAPH abe8551 D--- 4 8 -- Line graph
+#> IGRAPH be938d2 D--- 4 8 -- Line graph
 #> + attr: name (g/c)
-#> + edges from abe8551:
+#> + edges from be938d2:
 #> [1] 1->1 3->1 1->2 3->2 2->3 4->3 2->4 4->4
 ```

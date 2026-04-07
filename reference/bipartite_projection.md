@@ -81,6 +81,14 @@ second.
 
 `bipartite_projection()` keeps vertex attributes.
 
+## Related documentation in the C library
+
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size)
+
 ## See also
 
 Bipartite graphs
@@ -91,10 +99,6 @@ Bipartite graphs
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`bipartite_projection_size()`](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size).
 
 ## Examples
 
@@ -123,14 +127,14 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH 949fa7b UNW- 5 6 -- Event network
+#> IGRAPH 44917b4 UNW- 5 6 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 949fa7b (vertex names):
+#> + edges from 44917b4 (vertex names):
 #> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  
 #> [6] Cecil--Dan  
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH 45c812f UNW- 3 2 -- Event network
+#> IGRAPH e3b52fd UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 45c812f (vertex names):
+#> + edges from e3b52fd (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

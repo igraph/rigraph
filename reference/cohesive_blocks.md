@@ -257,6 +257,21 @@ The generic function
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html) plots the
 graph, showing one or more cohesive blocks in it.
 
+## Related documentation in the C library
+
+[`cohesive_blocks()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`write_graph_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist),
+[`write_graph_pajek()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek),
+[`write_graph_graphml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml),
+[`write_graph_gml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml),
+[`write_graph_dot()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot),
+[`write_graph_leda()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed)
+
 ## References
 
 J. Moody and D. R. White. Structural cohesion and embeddedness: A
@@ -299,23 +314,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> + 23/23 vertices, named, from 144c4b7:
+#> + 23/23 vertices, named, from c4fbe73:
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> + 14/23 vertices, named, from 144c4b7:
+#> + 14/23 vertices, named, from c4fbe73:
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> + 10/23 vertices, named, from 144c4b7:
+#> + 10/23 vertices, named, from c4fbe73:
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> + 7/23 vertices, named, from 144c4b7:
+#> + 7/23 vertices, named, from c4fbe73:
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> + 4/23 vertices, named, from 144c4b7:
+#> + 4/23 vertices, named, from c4fbe73:
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)

@@ -32,6 +32,14 @@ find_cycle(graph, mode = c("out", "in", "all", "total"))
 A list of integer vectors, each integer vector is a path from the source
 vertex to one of the target vertices. A path is given by its vertex ids.
 
+## Related documentation in the C library
+
+[`find_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_find_cycle),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids)
+
 ## See also
 
 Graph cycles
@@ -43,30 +51,26 @@ Graph cycles
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md),
 [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
 
-## Related documentation in the C library
-
-[`find_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_find_cycle).
-
 ## Examples
 
 ``` r
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> + 4/9 vertices, from 4522959:
+#> + 4/9 vertices, from 13b9663:
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> + 4/12 edges from 4522959:
+#> + 4/12 edges from 13b9663:
 #> [1] 8--9 6--9 5--6 5--8
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> + 0/5 vertices, from 663b4eb:
+#> + 0/5 vertices, from 5e29bd9:
 #> 
 #> $edges
-#> + 0/4 edges from 663b4eb:
+#> + 0/4 edges from 5e29bd9:
 #> 
 ```

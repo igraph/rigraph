@@ -89,6 +89,10 @@ see its old version at
 <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 for the actual format of a graph database file and other information.
 
+## Related documentation in the C library
+
+[`read_graph_graphdb()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb)
+
 ## References
 
 M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database of graphs

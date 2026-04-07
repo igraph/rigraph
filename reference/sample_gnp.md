@@ -10,7 +10,7 @@ distribution.
 ``` r
 sample_gnp(n, p, directed = FALSE, loops = FALSE)
 
-gnp(...)
+gnp(n, p, directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -32,10 +32,6 @@ gnp(...)
 
   Logical, whether to add loop edges, defaults to `FALSE`.
 
-- ...:
-
-  Passed to `sample_gnp()`.
-
 ## Value
 
 A graph object.
@@ -49,6 +45,10 @@ the average number of edges, \\p m\_\text{max}\\, where
 \\m\_\text{max}\\ is the largest possible number of edges, which depends
 on whether the graph is directed or undirected and whether self-loops
 are allowed.
+
+## Related documentation in the C library
+
+[`erdos_renyi_game_gnp()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_erdos_renyi_game_gnp)
 
 ## References
 
@@ -95,9 +95,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # Random graph with expected mean degree of 2
 g <- sample_gnp(1000, 2 / 1000)
 mean(degree(g))
-#> [1] 2.052
+#> [1] 1.926
 degree_distribution(g)
-#> [1] 0.123 0.256 0.275 0.204 0.093 0.034 0.013 0.002
+#> [1] 0.123 0.300 0.278 0.180 0.079 0.029 0.009 0.001 0.001
 
 # Pick a simple graph on 6 vertices uniformly at random
 plot(sample_gnp(6, 0.5))

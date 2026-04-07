@@ -108,6 +108,16 @@ graph with the dummy nodes.
 
 For more details, see the reference below.
 
+## Related documentation in the C library
+
+[`layout_sugiyama()`](https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sugiyama),
+[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
+[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## References
 
 K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual Understanding of

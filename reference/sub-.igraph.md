@@ -16,7 +16,7 @@ Query and manipulate a graph as it were an adjacency matrix
   sparse = igraph_opt("sparsematrices"),
   edges = FALSE,
   drop = TRUE,
-  attr = if (is_weighted(x)) "weight" else NULL
+  attr = if (is_weighted(x)) "weight"
 )
 ```
 

@@ -31,3 +31,12 @@ get.stochastic(
 
   Logical scalar, whether to return a sparse matrix. The `Matrix`
   package is needed for sparse matrices.
+
+## Related documentation in the C library
+
+[`get_stochastic()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic),
+[`get_stochastic_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_stochastic_sparse),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)

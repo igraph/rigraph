@@ -54,6 +54,21 @@ A list with entries:
   statistics, at each time step. It is `NA` for the initial `tau + ell`
   time steps.
 
+## Related documentation in the C library
+
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`local_scan_0()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0),
+[`local_scan_0_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them),
+[`local_scan_1_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount),
+[`local_scan_1_ecount_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them),
+[`local_scan_k_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount),
+[`local_scan_k_ecount_them()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them),
+[`local_scan_neighborhood_ecount()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount),
+[`induced_subgraph()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+
 ## See also
 
 Other scan statistics:
@@ -79,22 +94,22 @@ tsg <- replicate(num_t - 1, P0, simplify = FALSE) %>%
 
 scan_stat(graphs = tsg, k = 1, tau = 4, ell = 2)
 #> $stat
-#>  [1]         NA         NA         NA         NA         NA         NA
-#>  [7] -0.4107949  0.3396761 -1.2467787  4.8807274 -0.6143971 -0.8718242
-#> [13]  0.1806200  4.2597269 -0.9641438 -0.2499335  3.4373546  1.8997444
-#> [19] -3.5675655  1.8114701
+#>  [1]          NA          NA          NA          NA          NA          NA
+#>  [7] -0.05439283 -4.42143833  0.70710678 -0.12194311 -0.44521538  0.52735168
+#> [13]  7.17382416 -0.55300697 -1.04651804 -0.47140452  0.62500000  2.00000000
+#> [19] -2.12132034  7.67715934
 #> 
 #> $arg_max_v
-#>  [1] NA NA NA NA NA NA  2  1  7  3 13 17 15 20  2 19  3  8 20 17
+#>  [1] NA NA NA NA NA NA  5 16  6 10  1  3  2 20  5 10 16  3  9 17
 #> 
 scan_stat(graphs = tsg, locality = "them", k = 1, tau = 4, ell = 2)
 #> $stat
-#>  [1]          NA          NA          NA          NA          NA          NA
-#>  [7]  4.62500000  0.00000000 -1.08604416 -1.12952960  1.31716954  0.50088900
-#> [13] -0.79487298  0.08493649 -1.04006351  1.37500000 -0.70710678 -0.53033009
-#> [19] -0.87500000  7.25000000
+#>  [1]         NA         NA         NA         NA         NA         NA
+#>  [7] -0.7500000 -0.7500000  1.0000000  3.8750000 -0.1631785  0.1767767
+#> [13] -0.6250000 -2.5936848  0.1683409  0.8593424 -0.3750000  3.0710678
+#> [19] -1.0264800  2.6721932
 #> 
 #> $arg_max_v
-#>  [1] NA NA NA NA NA NA  2  1  7  3 13  1 14 12  2  5  5  8 18 18
+#>  [1] NA NA NA NA NA NA  3 16 17  6  1  3 19 14  2 10 18 13  1 17
 #> 
 ```

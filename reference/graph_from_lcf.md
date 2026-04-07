@@ -36,6 +36,10 @@ graph_from_lcf(shifts, ..., n = NULL, repeats = 1L)
 
 A graph object.
 
+## Related documentation in the C library
+
+[`lcf_vector()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector)
+
 ## See also
 
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md) can
@@ -45,10 +49,6 @@ page for creating special graphs.
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`lcf_vector()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lcf_vector).
 
 ## Examples
 

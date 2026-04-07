@@ -37,3 +37,7 @@ centralization.degree.tmax(
 
   Logical scalar, whether to consider loops edges when calculating the
   degree.
+
+## Related documentation in the C library
+
+[`centralization_degree_tmax()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree_tmax)

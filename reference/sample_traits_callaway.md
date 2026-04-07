@@ -15,7 +15,14 @@ sample_traits_callaway(
   directed = FALSE
 )
 
-traits_callaway(...)
+traits_callaway(
+  nodes,
+  types,
+  edge.per.step = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 
 sample_traits(
   nodes,
@@ -26,7 +33,14 @@ sample_traits(
   directed = FALSE
 )
 
-traits(...)
+traits(
+  nodes,
+  types,
+  k = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 ```
 
 ## Arguments
@@ -57,11 +71,6 @@ traits(...)
 
   Logical constant, whether to generate directed graphs.
 
-- ...:
-
-  Passed to the constructor, `sample_traits()` or
-  `sample_traits_callaway()`.
-
 - k:
 
   The number of trials per time step, see details below.
@@ -85,6 +94,11 @@ added at each time step. This new vertex tries to connect to `k`
 vertices in the graph. The probability that such a connection is
 realized depends on the types of the vertices involved and is taken from
 `pref.matrix`.
+
+## Related documentation in the C library
+
+[`callaway_traits_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game),
+[`establishment_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_establishment_game)
 
 ## See also
 

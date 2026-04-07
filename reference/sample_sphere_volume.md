@@ -40,6 +40,10 @@ times `n` matrix, whose columns are the sample vectors.
 (the `(dim-1)`-sphere) i.e. the Euclidean norm of the samples is smaller
 or equal to `radius`.
 
+## Related documentation in the C library
+
+[`sample_sphere_volume()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume)
+
 ## See also
 
 Other latent position vector samplers:
@@ -55,7 +59,7 @@ vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
   sum(x^2)
 })
 vec.norm
-#>  [1] 0.7688615 0.8985828 0.9915932 0.8997797 0.8658223 0.9720607 0.9540394
-#>  [8] 0.8648418 0.9133877 0.6092935 0.9665875 0.7792550 0.8569189 0.7728835
-#> [15] 0.9962108 0.6274424 0.4914820 0.8072766 0.6491814 0.7820460
+#>  [1] 0.8677224 0.3721885 0.9794482 0.8961492 0.8888843 0.7408265 0.6663391
+#>  [8] 0.8284712 0.7891663 0.4069648 0.8902029 0.6007150 0.9983231 0.6678435
+#> [15] 0.8851258 0.9605417 0.9463845 0.9371525 0.9360247 0.8204755
 ```
