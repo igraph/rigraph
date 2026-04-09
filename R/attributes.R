@@ -840,9 +840,21 @@ set_edge_attr <- function(graph, name, index = E(graph), value) {
   call <- rlang::current_env()
   check_string(name)
   if (is_complete_iterator(index)) {
-    i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE, call = call)
+    i_set_edge_attr(
+      graph = graph,
+      name = name,
+      value = value,
+      check = FALSE,
+      call = call
+    )
   } else {
-    i_set_edge_attr(graph = graph, name = name, index = index, value = value, call = call)
+    i_set_edge_attr(
+      graph = graph,
+      name = name,
+      index = index,
+      value = value,
+      call = call
+    )
   }
 }
 
