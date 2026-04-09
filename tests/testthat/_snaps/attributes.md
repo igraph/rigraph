@@ -3,7 +3,7 @@
     Code
       make_(from_literal(A - A:B:C, B - A:B:C), with_vertex_(color = 1:2))
     Condition
-      Error in `i_set_vertex_attr()`:
+      Error in `make_()`:
       ! Length of new attribute value must be 1 or 3, the number of target vertices, not 2.
 
 # with_edge_
@@ -11,7 +11,7 @@
     Code
       make_(from_literal(A - A:B:C, B - A:B:C), with_edge_(color = 1:2))
     Condition
-      Error in `i_set_edge_attr()`:
+      Error in `make_()`:
       ! Length of new attribute value must be 1 or 3, the number of target edges, not 2.
 
 # error messages work
@@ -19,7 +19,7 @@
     Code
       set_vertex_attr(g, "test", value = c(1, 2))
     Condition
-      Error in `i_set_vertex_attr()`:
+      Error in `set_vertex_attr()`:
       ! Length of new attribute value must be 1 or 5, the number of target vertices, not 2.
 
 ---
@@ -27,7 +27,7 @@
     Code
       set_edge_attr(g, "test", value = c(1, 2))
     Condition
-      Error in `i_set_edge_attr()`:
+      Error in `set_edge_attr()`:
       ! Length of new attribute value must be 1 or 10, the number of target edges, not 2.
 
 ---
