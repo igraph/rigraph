@@ -841,7 +841,7 @@ graph.atlas <- function(n) {
 #' @param mods The modifiers to apply
 #' @return The modified graph
 #' @dev
-.apply_modifiers <- function(graph, mods) {
+.apply_modifiers <- function(graph, mods, call = rlang::caller_env()) {
   for (m in mods) {
     if (m$id == "without_attr") {
       ## TODO: speed this up
@@ -870,7 +870,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_vertex_attr(graph, n, value = v)
+        graph <- set_vertex_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_edge_") {
       m$args <- lapply(m$args, eval)
@@ -879,7 +879,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_edge_attr(graph, n, value = v)
+        graph <- set_edge_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
@@ -949,7 +949,7 @@ make_ <- function(...) {
   }
 
   res <- do_call(cons$fun, cons_args, extracted$args)
-  .apply_modifiers(res, extracted$mods)
+  .apply_modifiers(res, extracted$mods, call = sys.call())
 }
 
 #' Sample from a random graph model
