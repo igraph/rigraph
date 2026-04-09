@@ -841,7 +841,7 @@ graph.atlas <- function(n) {
 #' @param mods The modifiers to apply
 #' @return The modified graph
 #' @dev
-.apply_modifiers <- function(graph, mods) {
+.apply_modifiers <- function(graph, mods, call = rlang::caller_env()) {
   for (m in mods) {
     if (m$id == "without_attr") {
       graph.attributes(graph) <- structure(list(), names = character(0))
@@ -866,7 +866,8 @@ graph.atlas <- function(n) {
           vattrs[[nm]] <- unname(v)
         } else {
           cli::cli_abort(
-            "Length of new attribute value must be 1 or {n}, the number of target vertices, not {length(v)}."
+            "Length of new attribute value must be 1 or {n}, the number of target vertices, not {length(v)}.",
+            call = call
           )
         }
       }
@@ -884,7 +885,8 @@ graph.atlas <- function(n) {
           eattrs[[nm]] <- unname(v)
         } else {
           cli::cli_abort(
-            "Length of new attribute value must be 1 or {n}, the number of target edges, not {length(v)}."
+            "Length of new attribute value must be 1 or {n}, the number of target edges, not {length(v)}.",
+            call = call
           )
         }
       }
@@ -952,7 +954,7 @@ make_ <- function(...) {
   }
 
   res <- do_call(cons$fun, cons_args, extracted$args)
-  .apply_modifiers(res, extracted$mods)
+  .apply_modifiers(res, extracted$mods, call = rlang::current_env())
 }
 
 #' Sample from a random graph model
