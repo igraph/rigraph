@@ -1218,6 +1218,14 @@
 - Improve centralitystress test
   ([\#2214](https://github.com/igraph/rigraph/issues/2214)).
 
+## igraph 2.2.3
+
+CRAN release: 2026-04-07
+
+### Chore
+
+- Remove calls to non-API functions.
+
 ## igraph 2.2.2
 
 CRAN release: 2026-02-12

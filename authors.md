@@ -11,7 +11,7 @@
 - **[Vincent Traag](https://www.traag.net/)**. Author.
   [](https://orcid.org/0000-0003-3170-3879)
 
-- **[Szabolcs Horvát](http://szhorvat.net/)**. Author.
+- **[Szabolcs Horvát](https://szhorvat.net/)**. Author.
   [](https://orcid.org/0000-0002-3100-523X)
 
 - **[Fabio Zanini](https://fabilab.org/pages/people.html)**. Author.
