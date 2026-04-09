@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.2.9005
+
+## Chore
+
+- Avoid non-API calls to `Rf_findVar()`, `Rf_findVarInFrame()`, and `R_UnboundValue` (#2603, #2604).
+
+
 # igraph 2.2.2.9004
 
 ## Bug fixes
@@ -851,6 +858,13 @@
 ## Testing
 
 - Improve centralitystress test (#2214).
+
+
+# igraph 2.2.3
+
+## Chore
+
+- Remove calls to non-API functions.
 
 
 # igraph 2.2.2
