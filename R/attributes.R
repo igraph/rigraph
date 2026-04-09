@@ -526,7 +526,8 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_vertex_attr <- function(graph, name, index = V(graph), value, call = rlang::current_env()) {
+set_vertex_attr <- function(graph, name, index = V(graph), value) {
+  call <- rlang::current_env()
   check_string(name)
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(
@@ -567,7 +568,8 @@ set_vertex_attr <- function(graph, name, index = V(graph), value, call = rlang::
 #' set_vertex_attrs(g, !!!x)
 #' # to set an attribute named "index" use `:=`
 #' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-set_vertex_attrs <- function(graph, ..., index = V(graph), call = rlang::current_env()) {
+set_vertex_attrs <- function(graph, ..., index = V(graph)) {
+  call <- rlang::current_env()
   dots <- rlang::list2(...)
 
   if (!rlang::is_named(dots)) {
@@ -834,7 +836,8 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_edge_attr <- function(graph, name, index = E(graph), value, call = rlang::current_env()) {
+set_edge_attr <- function(graph, name, index = E(graph), value) {
+  call <- rlang::current_env()
   check_string(name)
   if (is_complete_iterator(index)) {
     i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE, call = call)

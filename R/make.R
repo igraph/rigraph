@@ -870,7 +870,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_vertex_attr(graph, n, value = v, call = call)
+        graph <- i_set_vertex_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_edge_") {
       m$args <- lapply(m$args, eval)
@@ -879,7 +879,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_edge_attr(graph, n, value = v, call = call)
+        graph <- i_set_edge_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
