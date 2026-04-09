@@ -844,9 +844,9 @@ graph.atlas <- function(n) {
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
-      graph.attributes(graph) <- setNames(list(), character())
-      vertex.attributes(graph) <- setNames(list(), character())
-      edge.attributes(graph) <- setNames(list(), character())
+      graph.attributes(graph) <- structure(list(), names = character(0))
+      vertex.attributes(graph) <- structure(list(), names = character(0))
+      edge.attributes(graph) <- structure(list(), names = character(0))
     } else if (m$id == "without_loops") {
       graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
     } else if (m$id == "without_multiples") {
@@ -892,7 +892,7 @@ graph.atlas <- function(n) {
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
       stopifnot(!is.null(names(m$args)))
-      graph.attributes(graph) <- modifyList(graph.attributes(graph), m$args)
+      graph.attributes(graph) <- modify_list(graph.attributes(graph), m$args)
     }
   }
 
