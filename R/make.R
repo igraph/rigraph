@@ -949,7 +949,7 @@ make_ <- function(...) {
   }
 
   res <- do_call(cons$fun, cons_args, extracted$args)
-  .apply_modifiers(res, extracted$mods, call = sys.call())
+  .apply_modifiers(res, extracted$mods, call = rlang::current_env())
 }
 
 #' Sample from a random graph model
