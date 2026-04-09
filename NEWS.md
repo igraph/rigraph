@@ -860,6 +860,13 @@
 - Improve centralitystress test (#2214).
 
 
+# igraph 2.2.3
+
+## Chore
+
+- Remove calls to non-API functions.
+
+
 # igraph 2.2.2
 
 ## Chore
