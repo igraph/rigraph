@@ -1,5 +1,30 @@
 # Changelog
 
+## igraph 2.2.2.9006
+
+### Bug fixes
+
+- Error call in
+  [`with_vertex_()`](https://r.igraph.org/reference/with_vertex_.md)/[`with_edge_()`](https://r.igraph.org/reference/with_edge_.md)
+  should report [`make_()`](https://r.igraph.org/reference/make_.md),
+  not internal helper
+  ([\#2609](https://github.com/igraph/rigraph/issues/2609)).
+
+### Chore
+
+- Remove stale TODOs in `rinterface_extra.c`
+  ([\#1454](https://github.com/igraph/rigraph/issues/1454),
+  [\#2601](https://github.com/igraph/rigraph/issues/2601)).
+
+### Testing
+
+- Add snapshot test for attributes
+  ([\#2607](https://github.com/igraph/rigraph/issues/2607)).
+
+### Uncategorized
+
+- Remove calls to non-API functions.
+
 ## igraph 2.2.2.9005
 
 ### Chore
