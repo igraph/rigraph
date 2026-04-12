@@ -31,6 +31,8 @@ jobs:
 
     permissions:
       contents: write
+      statuses: read
+      actions: write
 
     steps:
       - uses: actions/checkout@v6
