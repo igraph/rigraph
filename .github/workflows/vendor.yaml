@@ -29,6 +29,9 @@ jobs:
 
     name: "Update vendored sources (${{ matrix.branch }})"
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v6
         with:
