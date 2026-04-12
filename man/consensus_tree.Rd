@@ -53,7 +53,7 @@ hrg <- fit_hrg(g)
 hrg
 
 ## The consensus tree for it
-consensus_tree(g, hrg = hrg, start = TRUE)
+consensus_tree(g, hrg = hrg, start = TRUE, num.samples = 100)
 }
 \seealso{
 Other hierarchical random graph functions: 
