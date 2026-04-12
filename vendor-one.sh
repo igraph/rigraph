@@ -62,9 +62,10 @@ commits_vendored=0
 while [ $commits_vendored -lt $num_commits ]; do
   echo "=== Vendoring commit $((commits_vendored + 1)) of $num_commits ==="
 
+  # Look back 10 commits to find the last vendor commit; needed when vendoring multiple commits per run
   base=$(git log -n 10 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
 
-  original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}" --)
+  original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}")
 
   if [ -z "$original" ]; then
     echo "No more commits to vendor. Done."
