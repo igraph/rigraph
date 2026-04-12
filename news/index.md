@@ -1,5 +1,30 @@
 # Changelog
 
+## igraph 2.2.3.9001
+
+### Chore
+
+- Bump.
+
+- Further sync vendoring scripts with duckdb.
+
+- Adapt vendoring code to match duckdb/duckdb-r
+  ([\#2611](https://github.com/igraph/rigraph/issues/2611)).
+
+### Continuous integration
+
+- More permissions.
+
+- Explicit vendoring permissions.
+
+- Adapt each-rcc workflow.
+
+- Bugfix.
+
+- Do not run fledge in the fork.
+
+- Further adapt vendoring logic to duckdb.
+
 ## igraph 2.2.2.9006
 
 ### Bug fixes
