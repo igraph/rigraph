@@ -45,11 +45,14 @@ rigraph/
 Two moving parts work together to produce the published R package:
 
 ```txt
-igraph/igraph        krlmlr/rigraph          igraph/rigraph        CRAN / r-universe
+krlmlr/igraph        krlmlr/rigraph          igraph/rigraph        CRAN / r-universe
 (upstream C)         (CI/CD fork)            (canonical R pkg)
 ─────────────        ──────────────          ───────────────       ─────────────────
 main            ──►  main-dev           ──►  main               ──►  igraph (CRAN / r-universe)
 ```
+
+At the time of writing, krlmlr/igraph contains a replay of the changes from 0.10.17 to 1.0.1 using a series of self-contained commits.
+When the migration to 1.0.1 is complete, upstream will switch to igraph/igraph.
 
 The arrow from upstream to the CI/CD fork represents automated vendoring; the arrow from the fork
 to the canonical repo represents the release merge.
@@ -64,18 +67,17 @@ This package lives in two GitHub repositories:
 - **`krlmlr/rigraph`** — a disconnected fork used exclusively for CI/CD, so that automated runs
   do not consume the `igraph` organization's GitHub Actions quota. The development (`main-dev`) branch lives here.
 
-The C library is vendored from **`igraph/igraph`** (referred to as *upstream*) into `krlmlr/rigraph`.
+The C library is vendored from **`krlmlr/igraph`** (referred to as *upstream*) into `krlmlr/rigraph`.
 The R code that wraps it lives in `igraph/rigraph` and is synchronized with the dev branch.
 
 ## Branch Overview
 
-There is a single active mainline tracking `igraph/igraph@main` (the bleeding-edge C library development),
-currently converging from igraph C 0.11.0 towards 1.0.1.
+There is a single active mainline tracking `krlmlr/igraph@main-dev` (the replay of the changes from 0.10.17 to 1.0.1 using a series of self-contained commits).
 
-| Branch     | Repo              | Purpose                                                          |
-|------------|-------------------|------------------------------------------------------------------|
-| `main`     | `igraph/rigraph`  | Source of truth for R code, tests, CI/CD; stable baseline       |
-| `main-dev` | `krlmlr/rigraph`  | Vendored dev (upstream `main`); published as development build   |
+| Branch     | Repo             | Purpose                                                            |
+|------------|------------------|--------------------------------------------------------------------|
+| `main-dev` | `krlmlr/rigraph` | Source of truth for R code, tests, CI/CD; stable baseline          |
+| `main-dev` | `krlmlr/rigraph` | Vendored dev (upstream `main-dev`); published as development build |
 
 ### Branch structure
 
@@ -96,11 +98,11 @@ main  (release tag)
 ## Source of Truth
 
 `main` in `igraph/rigraph` is the **source of truth** for the R code, tests, and CI/CD infrastructure.
-Vendored C sources are sourced from `igraph/igraph@main` and land in `krlmlr/rigraph@main-dev` first.
+Vendored C sources are sourced from `krlmlr/igraph@main-dev` and land in `krlmlr/rigraph@main-dev` first.
 
 ## Automated Vendoring
 
-CI/CD pipelines in `krlmlr/rigraph` unconditionally vendor the C code from `igraph/igraph@main`
+CI/CD pipelines in `krlmlr/rigraph` unconditionally vendor the C code from `krlmlr/igraph@main-dev`
 and build the development package.
 
 The vendoring workflow (`.github/workflows/vendor.yaml`):
@@ -125,17 +127,17 @@ To test new igraph C functionality locally:
 
 ```bash
 # Ensure your clone structure:
-# ~/
-#   igraph/         # Main igraph C repository
-#   rigraph/        # This repository (krlmlr/rigraph)
+# ~/.../
+#   igraph/           # Main igraph C repository
+#   R/igraph/igraph/  # This repository (krlmlr/rigraph)
 
 # Update igraph C to desired branch/commit
-cd ~/igraph
+cd ~/.../igraph
 git checkout main  # or desired commit
 
 # Run vendoring
-cd ~/rigraph
-./vendor.sh ../../../igraph
+cd ../R/igraph/igraph
+./vendor.sh
 
 # Build and test
 R CMD INSTALL .
@@ -203,8 +205,8 @@ to `igraph/igraph` so it can be retired eventually.
 
 ## Tooling
 
-| Script / Workflow         | Purpose                                                                          |
-|---------------------------|----------------------------------------------------------------------------------|
-| `vendor.sh`               | Local manual vendoring from a cloned upstream repo                               |
-| `vendor-one.sh`           | CI commit-by-commit vendoring (called by `vendor.yaml`)                          |
-| `.github/workflows/vendor.yaml` | Hourly vendoring for `main-dev` (restricted to `krlmlr/rigraph`)         |
+| Script / Workflow               | Purpose                                                          |
+|---------------------------------|------------------------------------------------------------------|
+| `vendor.sh`                     | Local manual vendoring from a cloned upstream repo               |
+| `vendor-one.sh`                 | CI commit-by-commit vendoring (called by `vendor.yaml`)          |
+| `.github/workflows/vendor.yaml` | Hourly vendoring for `main-dev` (restricted to `krlmlr/rigraph`) |
