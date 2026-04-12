@@ -379,6 +379,11 @@ test_that("with_vertex_", {
   expect_identical_graphs(g1, g2)
   expect_equal(V(g2)$color, rep("red", gorder(g2)))
   expect_equal(V(g2)$foo, paste0("xx", 1:3))
+
+  expect_snapshot(
+    make_(from_literal(A - A:B:C, B - A:B:C), with_vertex_(color = 1:2)),
+    error = TRUE
+  )
 })
 
 
@@ -398,6 +403,11 @@ test_that("with_edge_", {
   expect_identical_graphs(g1, g2)
   expect_equal(E(g1)$color, E(g2)$color)
   expect_equal(E(g1)$foo, E(g2)$foo)
+
+  expect_snapshot(
+    make_(from_literal(A - A:B:C, B - A:B:C), with_edge_(color = 1:2)),
+    error = TRUE
+  )
 })
 
 
@@ -436,13 +446,13 @@ test_that("adding and removing attributes", {
 
 test_that("error messages work", {
   g <- make_full_graph(5)
-  expect_snapshot(set_vertex_attr(g, "test", value = c(1, 2)), error = TRUE)
-  expect_snapshot(set_edge_attr(g, "test", value = c(1, 2)), error = TRUE)
-  expect_snapshot(delete_graph_attr(g, "a"), error = TRUE)
-  expect_snapshot(delete_vertex_attr(g, "a"), error = TRUE)
-  expect_snapshot(delete_edge_attr(g, "a"), error = TRUE)
-  expect_snapshot(assert_named_list("a"), error = TRUE)
-  expect_snapshot(assert_named_list(list("a", "b")), error = TRUE)
+  expect_snapshot_igraph_error(set_vertex_attr(g, "test", value = c(1, 2)))
+  expect_snapshot_igraph_error(set_edge_attr(g, "test", value = c(1, 2)))
+  expect_snapshot_igraph_error(delete_graph_attr(g, "a"))
+  expect_snapshot_igraph_error(delete_vertex_attr(g, "a"))
+  expect_snapshot_igraph_error(delete_edge_attr(g, "a"))
+  expect_snapshot_igraph_error(assert_named_list("a"))
+  expect_snapshot_igraph_error(assert_named_list(list("a", "b")))
 })
 
 test_that("empty returns work", {
@@ -465,7 +475,7 @@ test_that("assign data.frame attributes works", {
 
 test_that("good error message when not using character", {
   ring <- graph_from_literal(A - B - C - D - E - F - G - A)
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     set_graph_attr(ring, 1, 1)
   })
 })
@@ -476,7 +486,7 @@ test_that("set_vertex_attrs() works", {
   expect_equal(V(g)$color, rep("blue", vcount(g)))
   expect_equal(V(g)$size, rep(10, vcount(g)))
   expect_equal(V(g)$name, LETTERS[1:10])
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     set_vertex_attrs(g)
   })
 

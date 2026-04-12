@@ -132,13 +132,7 @@ sample_seq <- function(low, high, length) {
     cli::cli_abort("length too big for this interval")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_random_sample,
-    as.numeric(low),
-    as.numeric(high),
-    as.numeric(length)
-  )
+  random_sample_impl(low, high, length)
 }
 
 #' Common handler for vertex type arguments in igraph functions
@@ -224,7 +218,6 @@ igraph.i.spMatrix <- function(M) {
 #' convex_hull(M)
 #' @family other
 #' @export
-#' @cdocs igraph_convex_hull
 convex_hull <- function(data) {
   convex_hull_2d_impl(
     data = data

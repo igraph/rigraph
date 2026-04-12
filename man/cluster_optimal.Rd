@@ -62,6 +62,10 @@ print(modularity(fc))
 }
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_optimal_modularity}{\code{community_optimal_modularity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \references{
 Ulrik Brandes, Daniel Delling, Marco Gaertler, Robert Gorke,
 Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,

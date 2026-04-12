@@ -18,6 +18,10 @@ Number of vertices, numeric scalar.
 \description{
 \code{vcount()} and \code{gorder()} are aliases.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10)
 gorder(g)
@@ -40,5 +44,3 @@ Other structural queries:
 \code{\link{tail_of}()}
 }
 \concept{structural queries}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}.}
-

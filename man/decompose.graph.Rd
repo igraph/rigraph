@@ -34,4 +34,8 @@ isolate vertices.}
 \code{decompose.graph()} was renamed to \code{\link[=decompose]{decompose()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}
+}
+
 \keyword{internal}

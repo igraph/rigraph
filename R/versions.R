@@ -99,7 +99,7 @@ upgrade_graph <- function(graph) {
 
   # g_ver < p_ver
   if (g_ver == ver_0_4) {
-    .Call(Rx_igraph_add_env, graph)
+    graph <- .Call(Rx_igraph_add_env, graph)
   } else if (g_ver == ver_0_7_999) {
     # Not observed in the wild
     .Call(Rx_igraph_add_myid_to_env, graph)

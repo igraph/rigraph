@@ -146,7 +146,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   attrs <- append(attrs, attr)
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
-    stop("please supply names for attributes")
+    cli::cli_abort("All attributes must be named.")
   }
 
   edges.orig <- ecount(graph)
@@ -213,7 +213,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- append(attrs, attr)
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
-    stop("please supply names for attributes")
+    cli::cli_abort("All attributes must be named.")
   }
 
   vertices.orig <- vcount(graph)
@@ -354,7 +354,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort("{.arg v} must specify at least one vertex.")
   }
 
   neighbors_impl(
@@ -549,15 +549,15 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_get_eids,
-    graph,
-    as_igraph_vs(graph, vp) - 1,
-    as.logical(directed),
-    as.logical(error)
-  ) +
-    1
+  with_igraph_opt(
+    list(return.vs.es = FALSE),
+    get_eids_impl(
+      graph,
+      as_igraph_vs(graph, vp),
+      directed,
+      error
+    )
+  )
 }
 
 #' Find the edge ids based on the incident vertices of the edges
@@ -605,7 +605,6 @@ get.edge.ids <- function(
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
-#' @cdocs igraph_vcount
 vcount <- function(graph) {
   as.numeric(vcount_impl(
     graph = graph

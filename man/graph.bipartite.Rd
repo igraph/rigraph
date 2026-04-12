@@ -27,4 +27,8 @@ bipartite graphs.}
 \code{graph.bipartite()} was renamed to \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

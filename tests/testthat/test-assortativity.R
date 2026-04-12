@@ -52,3 +52,32 @@ test_that("nominal assortativity works", {
 
   expect_equal(nominal_assortativity, reference_nominal_assortativity)
 })
+
+test_that("nominal assortativity works with character types", {
+  set.seed(2)
+  g <- sample_gnm(10, 20)
+
+  # Test with numeric types
+  V(g)$random1 <- sample(c(1, 2), 10, replace = TRUE)
+  result1 <- assortativity_nominal(g, types = V(g)$random1)
+  expect_type(result1, "double")
+  expect_false(is.na(result1))
+
+  # Test with string numeric types
+  V(g)$random2 <- sample(c('1', '2'), 10, replace = TRUE)
+  result2 <- assortativity_nominal(g, types = V(g)$random2)
+  expect_type(result2, "double")
+  expect_false(is.na(result2))
+
+  # Test with string letter types - this was failing before the fix
+  V(g)$random3 <- sample(c('A', 'B'), 10, replace = TRUE)
+  result3 <- assortativity_nominal(g, types = V(g)$random3)
+  expect_type(result3, "double")
+  expect_false(is.na(result3))
+
+  # Verify that equivalent representations produce the same result
+  # Convert character labels to numeric equivalents
+  numeric_from_char <- as.integer(as.factor(V(g)$random3))
+  result_numeric <- assortativity_nominal(g, types = numeric_from_char)
+  expect_equal(result3, result_numeric)
+})

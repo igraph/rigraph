@@ -5,6 +5,7 @@
 /config.status
 /igraph_*.tar.gz
 /igraph_*.tgz
+/igraph/
 /object_files
 /version_number
 igraph.Rcheck/
@@ -27,3 +28,4 @@ cran
 /.vscode/launch.json
 /Rplots.pdf
 /_codeql_detected_source_root
+/tests/testthat/_problems/

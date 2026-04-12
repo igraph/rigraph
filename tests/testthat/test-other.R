@@ -29,9 +29,8 @@ test_that("can create graphs when igraph is not attached", {
 
 test_that("running_mean works", {
   expect_equal(running_mean(1:10, 2), 2:10 - 0.5)
-  expect_snapshot(
-    running_mean(1:3, 4),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    running_mean(1:3, 4)
   )
 })
 
@@ -159,7 +158,7 @@ karate <- structure(
 )
 
 test_that("VS/ES require explicit conversion", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     V(karate)
   })
 })

@@ -178,7 +178,7 @@ test_that("dyad_census works with celegansneural", {
   expect_equal(sum(unlist(dc)), vcount(ce) * (vcount(ce) - 1) / 2)
 })
 
-test_that("motifs_randesu_callback works", {
+test_that("motifs with callback works", {
   withr::local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
@@ -187,10 +187,10 @@ test_that("motifs_randesu_callback works", {
   count <- 0
   isoclasses <- integer(0)
 
-  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+  motifs(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     isoclasses <<- c(isoclasses, isoclass)
-    TRUE # continue search
+    FALSE # continue search
   })
 
   expect_true(count > 0)
@@ -198,7 +198,7 @@ test_that("motifs_randesu_callback works", {
   expect_true(all(isoclasses <= 16)) # max isoclass for size 3
 })
 
-test_that("motifs_randesu_callback can stop early", {
+test_that("motifs with callback can stop early", {
   withr::local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
@@ -206,12 +206,12 @@ test_that("motifs_randesu_callback can stop early", {
   # Stop after finding 3 motifs
   count <- 0
 
-  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+  motifs(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     if (count >= 3) {
-      FALSE # stop after 3 motifs
+      TRUE # stop after 3 motifs
     } else {
-      TRUE # continue
+      FALSE # continue
     }
   })
 
@@ -219,97 +219,53 @@ test_that("motifs_randesu_callback can stop early", {
 })
 
 
-test_that("motifs_randesu_callback receives correct arguments", {
+test_that("motifs with callback receives correct arguments", {
   withr::local_seed(123)
 
   g <- make_graph(~ A - B - C - A)
 
   # Check argument types
-  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+  motifs(g, 3, callback = function(vids, isoclass) {
     expect_true(is.integer(vids))
     expect_equal(length(vids), 3)
     expect_true(is.integer(isoclass))
     expect_equal(length(isoclass), 1)
-    FALSE # stop after first motif
+    TRUE # stop after first motif
   })
 })
 
-test_that("motifs_randesu_callback handles errors in callback", {
+test_that("motifs with callback handles errors in callback", {
   withr::local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 
   # Callback that throws an error
   expect_error(
-    motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+    motifs(g, 3, callback = function(vids, isoclass) {
       stop("Intentional error in callback")
     }),
     "Error in R callback function"
   )
 })
 
-test_that("motifs_randesu_callback_closure_impl works", {
-  withr::local_seed(123)
-
-  g <- make_graph(~ A - B - C - A)
-
-  # Test the _impl function directly
-  count <- 0
-  result <- motifs_randesu_callback_closure_impl(
-    graph = g,
-    size = 3,
-    cut_prob = NULL,
-    callback = function(vids, isoclass) {
-      count <<- count + 1
-      expect_true(is.integer(vids))
-      expect_equal(length(vids), 3)
-      expect_true(is.integer(isoclass))
-      TRUE
-    }
-  )
-
-  expect_null(result)
-  expect_true(count > 0)
-})
-
-test_that("motifs_randesu_callback_closure_impl validates inputs", {
-  g <- make_graph(~ A - B - C)
-
-  # Should error if callback is not a function
-  expect_error(
-    motifs_randesu_callback_closure_impl(
-      graph = g,
-      size = 3,
-      cut_prob = NULL,
-      callback = "not a function"
-    ),
-    "must be a function"
-  )
-})
-
-test_that("motifs_randesu_callback output matches expected", {
+test_that("motifs with callback output matches expected", {
   withr::local_seed(42)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 
   # Collect motif information
   motif_data <- list()
-  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+  motifs(g, 3, callback = function(vids, isoclass) {
     motif_data[[length(motif_data) + 1]] <<- list(
       vids = vids,
       isoclass = isoclass
     )
-    TRUE
+    FALSE # Continue
   })
 
   # Snapshot test for motif structure
   expect_snapshot({
     cat("Number of motifs found:", length(motif_data), "\n")
-    cat("Sample motif 1:\n")
-    print(motif_data[[1]])
-    if (length(motif_data) > 1) {
-      cat("Sample motif 2:\n")
-      print(motif_data[[2]])
-    }
+    motif_data[1:2]
   })
 })

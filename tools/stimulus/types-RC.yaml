@@ -30,6 +30,26 @@ GRAPH_LIST:
             IGRAPH_FREE(%C%.stor_begin);
             IGRAPH_FINALLY_CLEAN(1);
 
+GRAPH_PTR_LIST:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_ptr_t
+    INCONV:
+        IN: |-
+            igraph_t *%C%_storage;
+            IGRAPH_R_CHECK(Rz_SEXP_to_graph_ptr_list(%I%, &%C%, &%C%_storage));
+            IGRAPH_FINALLY(igraph_vector_ptr_destroy, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_ptr_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_ptr_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_graph_ptr_list_to_SEXP(&%C%));
+            igraph_vector_ptr_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 INTEGER:
     CTYPE: igraph_integer_t
     CALL:
@@ -106,6 +126,38 @@ REAL:
         OUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
             REAL(%I%)[0]=%C%;
+
+DOUBLE:
+    # A C double - similar to REAL but uses C's double type instead of igraph_real_t
+    CTYPE: double
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_REAL(%I%);
+            %C% = REAL(%I%)[0];
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=NEW_NUMERIC(1));
+            REAL(%I%)[0]=%C%;
+
+ERROR:
+    # An igraph error code
+    # Note: No OUTCONV is provided because ERROR is handled specially as a return
+    # type - it's wrapped in IGRAPH_R_CHECK() which doesn't use output conversion.
+    # When ERROR is used as an input parameter (e.g., in igraph_strerror), only
+    # INCONV is needed.
+    CTYPE: igraph_error_t
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = (igraph_error_t) REAL(%I%)[0];
 
 BOOLEAN:
     CTYPE: igraph_bool_t
@@ -219,7 +271,7 @@ VECTOR_LIST:
             IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_list_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -242,15 +294,19 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
-            IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            if (!Rf_isNull(%I%)) {
+              IGRAPH_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+              IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
-            igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
+            if (!Rf_isNull(%I%)) {
+              igraph_vector_int_list_destroy(&%C%);
+              IGRAPH_FINALLY_CLEAN(1);
+            }
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
@@ -304,6 +360,22 @@ ADJLIST:
         IN: igraph_adjlist_destroy(&%C%);
 
 EDGEWEIGHTS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: Rz_SEXP_to_vector(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
+EDGE_LENGTHS:
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -388,6 +460,22 @@ MATRIX_INT:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEX:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+    CTYPE: igraph_integer_t
+    INCONV:
+        IN: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        OUT: '%C% = -1;'
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
+
+EDGE:
+    # A single edge index
     CALL:
         IN: '%C%'
         INOUT: '&%C%'
@@ -539,6 +627,18 @@ VERTEX_INDEX_PAIRS:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+INDEX_PAIRS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
+    INCONV:
+        IN: |-
+            Rz_SEXP_to_vector_int_copy(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 EDGE_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
@@ -570,7 +670,22 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%'
-    CTYPE: SEXP
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
+    CALL: '%I%'
+    CTYPE: ~
     HEADER: '%I%'
 
 ISOCOMPAT_FUNC:
@@ -785,39 +900,18 @@ SPARSEMAT:
     CALL: '&%C%'
     CTYPE: igraph_sparsemat_t
     INCONV:
-        IN: Rz_SEXP_to_sparsemat(%I%, &%C%);
+        IN: |-
+            Rz_SEXP_to_sparsemat(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
-        OUT: |-
-            PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
+        IN: |-
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
-
-SPARSEMATPTR:
-    CALL: '&%C%'
-    CTYPE: igraph_sparsemat_t
-    INCONV:
-        IN: Rz_SEXP_to_sparsemat(%I%, &%C%);
-        OUT: /* Don't need to init. */
-    OUTCONV:
         OUT: |-
             PROTECT(%I%=Ry_igraph_sparsemat_to_SEXP(&%C%));
-            igraph_sparsemat_destroy(&%C%);
-
-SPARSEMAT_OR_0:
-    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
-    CTYPE: igraph_sparsemat_t
-    INCONV:
-        IN: if (!Rf_isNull(%I%)) { Rz_SEXP_to_sparsemat(%I%, &%C%); }
-        OUT: |-
-            IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
-            IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
-            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=Rx_igraph_0orsparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 

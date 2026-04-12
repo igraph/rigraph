@@ -89,6 +89,10 @@ the local efficiencies of all the vertices; see the definition for local
 efficiency above.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency}{\code{global_efficiency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency}{\code{local_efficiency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency}{\code{average_local_efficiency()}}
+}
+
 \examples{
 
 g <- make_graph("zachary")
@@ -104,5 +108,3 @@ transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 }
 \concept{efficiency}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_global_efficiency}{\code{global_efficiency()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_efficiency}{\code{local_efficiency()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_local_efficiency}{\code{average_local_efficiency()}}.}
-

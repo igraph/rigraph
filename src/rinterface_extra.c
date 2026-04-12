@@ -238,10 +238,14 @@ Rx_igraph_safe_eval_result_t Rx_igraph_safe_eval_classify_result(SEXP result) {
 SEXP Rx_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, Rx_igraph_safe_eval_result_t* result) {
   /* find `identity` function used to capture errors */
   SEXP identity = PROTECT(Rf_install("identity"));
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP identity_func = PROTECT(R_getVar(identity, R_BaseNamespace, TRUE));
+#else
   SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
   if (identity_func == R_UnboundValue) {
     Rf_error("Failed to find 'base::identity()'");
   }
+#endif
 
   /* define the call -- enclose with `tryCatch` so we can record errors */
   SEXP try_catch = PROTECT(Rf_install("tryCatch"));
@@ -1298,7 +1302,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_graph_attr(const igraph_t *graph,
 igraph_error_t Rx_igraph_attribute_get_string_graph_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP gal=VECTOR_ELT(graph->attr, 1);
   SEXP ga=Rx_igraph_getListElement(gal, name);
 
@@ -1319,7 +1322,6 @@ igraph_error_t Rx_igraph_attribute_get_numeric_vertex_attr(const igraph_t *graph
                                                const char *name,
                                                igraph_vs_t vs,
                                                igraph_vector_t *value) {
-  /* TODO: serialization */
   SEXP val=VECTOR_ELT(graph->attr, 2);
   SEXP va=Rx_igraph_getListElement(val, name);
   igraph_vector_t newvalue;
@@ -1367,7 +1369,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_vertex_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_vs_t vs,
                                             igraph_vector_bool_t *value) {
-  /* TODO: serialization */
   SEXP val=VECTOR_ELT(graph->attr, 2);
   SEXP va=Rx_igraph_getListElement(val, name);
   igraph_vector_bool_t newvalue;
@@ -1406,7 +1407,6 @@ igraph_error_t Rx_igraph_attribute_get_string_vertex_attr(const igraph_t *graph,
                                               const char *name,
                                               igraph_vs_t vs,
                                               igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP val, va;
 
   val=VECTOR_ELT(graph->attr, 2);
@@ -1444,7 +1444,6 @@ igraph_error_t Rx_igraph_attribute_get_numeric_edge_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_es_t es,
                                              igraph_vector_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
   igraph_vector_t newvalue;
@@ -1492,7 +1491,6 @@ igraph_error_t Rx_igraph_attribute_get_bool_edge_attr(const igraph_t *graph,
                                           const char *name,
                                           igraph_es_t es,
                                           igraph_vector_bool_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
   igraph_vector_bool_t newvalue;
@@ -1531,7 +1529,6 @@ igraph_error_t Rx_igraph_attribute_get_string_edge_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_es_t es,
                                             igraph_strvector_t *value) {
-  /* TODO: serialization */
   SEXP eal=VECTOR_ELT(graph->attr, 3);
   SEXP ea=Rx_igraph_getListElement(eal, name);
 
@@ -2315,6 +2312,18 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
   return is_punctuated(msg) ? "" : punctuation;
 }
 
+/* Strip vendor/cigraph/src/ prefix from file path. This prefix depends on the
+ * build procedure, namely on the directory that the compiler is invoked from. */
+static inline const char* simplify_file_path(const char *file) {
+  const char prefix[] = "vendor/cigraph/src/";
+  const size_t prefix_len = sizeof(prefix) - 1;
+
+  if (strncmp(file, prefix, prefix_len) == 0) {
+    return file + prefix_len;
+  }
+  return file;
+}
+
 void Rx_igraph_fatal_handler(const char *reason, const char *file, int line) {
 #ifdef IGRAPH_SANITIZER_AVAILABLE
     __sanitizer_print_stack_trace();
@@ -2336,10 +2345,12 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
   if (Rx_igraph_errors_count == 0 || !Rx_igraph_in_r_check) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_error_reason, sizeof(Rx_igraph_error_reason),
-      "At %s:%i : %s%s %s", file, line, reason,
-      maybe_add_punctuation(reason, ","),
-      igraph_strerror(igraph_errno));
+      "%s%s %s\nSource: %s:%i", reason,
+      maybe_add_punctuation(reason, "."),
+      igraph_strerror(igraph_errno),
+      simplified_path, line);
     Rx_igraph_error_reason[sizeof(Rx_igraph_error_reason) - 1] = 0;
 
     // FIXME: This is a hack, we should replace all memory allocations in the
@@ -2356,8 +2367,10 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
 
 void Rx_igraph_warning_handler(const char *reason, const char *file, int line) {
   if (Rx_igraph_warnings_count == 0) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_warning_reason, sizeof(Rx_igraph_warning_reason),
-      "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+      "%s%s\nSource: %s:%i", reason, maybe_add_punctuation(reason, "."),
+      simplified_path, line);
     Rx_igraph_warning_reason[sizeof(Rx_igraph_warning_reason) - 1] = 0;
   }
   Rx_igraph_warnings_count++;
@@ -2395,39 +2408,55 @@ igraph_error_t Rx_igraph_progress_handler(const char *message, double percent,
                               void * data) {
   SEXP ec;
   int ecint;
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(percent));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
-  SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6));
-  PROTECT(ec=Rf_eval(l7, rho));
+  SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarReal(percent)); px++;
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
+  SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6)); px++;
+  PROTECT(ec=Rf_eval(l7, rho)); px++;
 
   ecint=INTEGER(ec)[0];
-  UNPROTECT(11);
+  UNPROTECT(px);
   return ecint;
 }
 
 igraph_error_t Rx_igraph_status_handler(const char *message, void *data) {
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.status"));
-  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
-  SEXP l6 = PROTECT(Rf_lang2(l4, l5));
-  PROTECT(Rf_eval(l6, rho));
+  SEXP l4 = PROTECT(Rf_install(".igraph.status")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message)))); px += 2;
+  SEXP l6 = PROTECT(Rf_lang2(l4, l5)); px++;
+  PROTECT(Rf_eval(l6, rho)); px++;
 
-  UNPROTECT(10);
+  UNPROTECT(px);
   return 0;
 }
 
 static R_xlen_t Rx_igraph_altrep_length(SEXP vec) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
   igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
   return igraph_ecount(g);
 }
@@ -2436,7 +2465,11 @@ static void *Rx_igraph_altrep_from(SEXP vec, Rboolean writeable) {
   SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
     Rx_igraph_status_handler("Materializing 'from' vector.\n", NULL);
+#if R_VERSION >= R_Version(4, 6, 0)
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=Ry_igraph_vector_int_to_SEXP(&g->from);
@@ -2451,7 +2484,11 @@ static void *Rx_igraph_altrep_to(SEXP vec, Rboolean writeable) {
   if (data == R_NilValue) {
     Rx_igraph_status_handler("Materializing 'to' vector.\n", NULL);
 
+#if R_VERSION >= R_Version(4, 6, 0)
+    SEXP xp=R_getVar(Rf_install("igraph"), R_altrep_data1(vec), TRUE);
+#else
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+#endif
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
     data=Ry_igraph_vector_int_to_SEXP(&g->to);
@@ -2498,18 +2535,24 @@ SEXP Rx_igraph_set_verbose(SEXP verbose) {
 
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+  int px = 0;
+  SEXP rho;
+#if R_VERSION >= R_Version(4, 6, 0)
+  rho = R_getRegisteredNamespace("igraph");
+#else
+  SEXP l1 = PROTECT(Rf_install("getNamespace")); px++;
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph")))); px += 2;
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2)); px++;
+  rho = PROTECT(Rf_eval(l3, R_BaseEnv)); px++;
+#endif
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(0.0));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(""))));
-  SEXP l7 = PROTECT(Rf_ScalarLogical(1));
-  SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7));
+  SEXP l4 = PROTECT(Rf_install(".igraph.progress")); px++;
+  SEXP l5 = PROTECT(Rf_ScalarReal(0.0)); px++;
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("")))); px += 2;
+  SEXP l7 = PROTECT(Rf_ScalarLogical(1)); px++;
+  SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7)); px++;
   Rf_eval(l8, rho);
-  UNPROTECT(11);
+  UNPROTECT(px);
   return R_NilValue;
 }
 
@@ -2857,17 +2900,29 @@ igraph_t *Rx_igraph_get_pointer(SEXP graph) {
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (xp == R_NilValue) {
+    Rx_igraph_restore_pointer(graph);
+    xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  }
+#else
   SEXP xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
   if (xp == R_UnboundValue || xp == R_NilValue) {
     Rx_igraph_restore_pointer(graph);
     xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
   }
+#endif
 
   igraph_t *pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
 
   if (!pgraph) {
     Rx_igraph_restore_pointer(graph);
+#if R_VERSION >= R_Version(4, 6, 0)
+    xp=R_getVarEx(Rf_install("igraph"), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+#else
     xp=Rf_findVar(Rf_install("igraph"), Rx_igraph_graph_env(graph));
+#endif
     pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
   }
 
@@ -3033,6 +3088,41 @@ SEXP Ry_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
   PROTECT(result=NEW_LIST(n));
   for (igraph_integer_t i=0; i<n; i++) {
     igraph_t *g=igraph_graph_list_get_ptr(list, i);
+    SET_VECTOR_ELT(result, i, Ry_igraph_to_SEXP(g));
+  }
+  UNPROTECT(1);
+  return result;
+}
+
+/* Convert SEXP list of graphs to igraph_vector_ptr_t */
+igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *ptr,
+                                          igraph_t **storage) {
+  igraph_integer_t n = Rf_xlength(graphlist);
+
+  /* Allocate storage for the graphs */
+  *storage = (igraph_t*) R_alloc(n, sizeof(igraph_t));
+
+  /* Initialize the vector_ptr */
+  IGRAPH_R_CHECK(igraph_vector_ptr_init(ptr, n));
+
+  /* Convert each graph - use non-copying version to avoid memory leaks */
+  for (igraph_integer_t i = 0; i < n; i++) {
+    SEXP item = VECTOR_ELT(graphlist, i);
+    IGRAPH_R_CHECK(Rz_SEXP_to_igraph(item, &(*storage)[i]));
+    VECTOR(*ptr)[i] = &(*storage)[i];
+  }
+
+  return IGRAPH_SUCCESS;
+}
+
+/* Convert igraph_vector_ptr_t to SEXP list of graphs */
+SEXP Ry_igraph_graph_ptr_list_to_SEXP(const igraph_vector_ptr_t *ptr) {
+  SEXP result;
+  igraph_integer_t n = igraph_vector_ptr_size(ptr);
+
+  PROTECT(result = NEW_LIST(n));
+  for (igraph_integer_t i = 0; i < n; i++) {
+    igraph_t *g = (igraph_t*) VECTOR(*ptr)[i];
     SET_VECTOR_ELT(result, i, Ry_igraph_to_SEXP(g));
   }
   UNPROTECT(1);
@@ -3308,6 +3398,53 @@ SEXP Rx_igraph_0orsparsemat_to_SEXP(const igraph_sparsemat_t *sp) {
   }
 }
 
+void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
+  /* sm is expected to be a dgCMatrix from the Matrix package
+   * with slots: i (row indices), p (column pointers), x (values), Dim (dimensions)
+   */
+
+  SEXP i_slot = GET_SLOT(sm, Rf_install("i"));
+  SEXP p_slot = GET_SLOT(sm, Rf_install("p"));
+  SEXP x_slot = GET_SLOT(sm, Rf_install("x"));
+  SEXP dim_slot = GET_SLOT(sm, Rf_install("Dim"));
+
+  igraph_integer_t nrow = INTEGER(dim_slot)[0];
+  igraph_integer_t ncol = INTEGER(dim_slot)[1];
+  igraph_integer_t nzmax = Rf_xlength(x_slot);
+
+  int *p = INTEGER(p_slot);
+  int *i = INTEGER(i_slot);
+
+  /* Initialize sparse matrix in triplet format */
+  igraph_sparsemat_init(sp, nrow, ncol, nzmax);
+
+  /* Convert from compressed column to triplet format */
+  /* Handle both numeric and integer x values without coercion */
+  if (TYPEOF(x_slot) == REALSXP) {
+    double *x = REAL(x_slot);
+    for (igraph_integer_t col = 0; col < ncol; col++) {
+      for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
+        igraph_sparsemat_entry(sp, i[j], col, x[j]);
+      }
+    }
+  } else if (TYPEOF(x_slot) == INTSXP) {
+    int *x = INTEGER(x_slot);
+    for (igraph_integer_t col = 0; col < ncol; col++) {
+      for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
+        igraph_sparsemat_entry(sp, i[j], col, (double)x[j]);
+      }
+    }
+  } else {
+    Rf_error("Invalid type for sparse matrix values: expected numeric or integer, got type %d", TYPEOF(x_slot));
+  }
+
+  /* Compress the sparse matrix to column-compressed format */
+  igraph_sparsemat_t tmp;
+  igraph_sparsemat_compress(sp, &tmp);
+  igraph_sparsemat_destroy(sp);
+  *sp = tmp;
+}
+
 igraph_error_t Rz_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
   igraph_integer_t length = Rf_xlength(vectorlist);
 
@@ -3434,16 +3571,28 @@ igraph_error_t Rz_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v) {
 
 igraph_error_t Rz_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   igraph_integer_t n = Rf_xlength(sv);
-  double *svv=REAL(sv);
-  IGRAPH_CHECK(igraph_vector_int_init(v, n));
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, v);
-  for (igraph_integer_t i = 0; i<n; i++) {
-    VECTOR(*v)[i] = (igraph_integer_t) svv[i];
-    if (VECTOR(*v)[i] != svv[i]) {
-      IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
+
+  /* Handle both numeric and integer inputs without coercion */
+  if (TYPEOF(sv) == REALSXP) {
+    double *svv = REAL(sv);
+    IGRAPH_CHECK(igraph_vector_int_init(v, n));
+    for (igraph_integer_t i = 0; i < n; i++) {
+      VECTOR(*v)[i] = (igraph_integer_t) svv[i];
+      if (VECTOR(*v)[i] != svv[i]) {
+        igraph_vector_int_destroy(v);
+        IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
+      }
     }
+  } else if (TYPEOF(sv) == INTSXP) {
+    int *svv = INTEGER(sv);
+    IGRAPH_CHECK(igraph_vector_int_init(v, n));
+    for (igraph_integer_t i = 0; i < n; i++) {
+      VECTOR(*v)[i] = (igraph_integer_t) svv[i];
+    }
+  } else {
+    IGRAPH_ERRORF("Expected numeric or integer vector, got type %d", IGRAPH_EINVAL, TYPEOF(sv));
   }
-  IGRAPH_FINALLY_CLEAN(1);
+
   return IGRAPH_SUCCESS;
 }
 
@@ -4576,23 +4725,6 @@ SEXP Rx_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
   return result;
 }
 
-SEXP Rx_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
-
-  igraph_t g;
-  igraph_vector_int_t res;
-  igraph_bool_t bycol=LOGICAL(pbycol)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_get_edgelist(&g, &res, bycol));
-  PROTECT(result=Ry_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP Rx_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) {
 
   igraph_t g;
@@ -5021,38 +5153,6 @@ SEXP Rx_igraph_intersection(SEXP pgraphs, SEXP pedgemaps) {
   }
 
   UNPROTECT(2);
-  return result;
-}
-
-SEXP Rx_igraph_difference(SEXP pleft, SEXP pright) {
-
-  igraph_t left, right;
-  igraph_t res;
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pleft, &left);
-  Rz_SEXP_to_igraph(pright, &right);
-  IGRAPH_R_CHECK(igraph_difference(&res, &left, &right));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_complementer(SEXP pgraph, SEXP ploops) {
-
-  igraph_t g;
-  igraph_t res;
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pgraph, &g);
-  IGRAPH_R_CHECK(igraph_complementer(&res, &g, loops));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
   return result;
 }
 
@@ -7646,10 +7746,17 @@ SEXP Rx_igraph_graph_version(SEXP graph) {
     return Rf_ScalarInteger(ver_0_4);
   }
 
+#if R_VERSION >= R_Version(4, 6, 0)
+  SEXP ver = R_getVarEx(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph), TRUE, R_NilValue);
+  if (ver == R_NilValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+#else
   SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), Rx_igraph_graph_env(graph));
   if (ver == R_UnboundValue) {
     return Rf_ScalarInteger(ver_0_7_999);
   }
+#endif
 
   if (TYPEOF(ver) == STRSXP) {
     return Rf_ScalarInteger(ver_0_8);
@@ -7683,28 +7790,17 @@ SEXP Rx_igraph_add_version_to_env(SEXP graph) {
 
 SEXP Rx_igraph_add_env(SEXP graph) {
   SEXP result = graph;
-  R_xlen_t i;
   uuid_t my_id;
   char my_id_chr[40];
   int px = 0;
 
   if (Rf_xlength(graph) <= igraph_t_idx_env) {
-    PROTECT(result = NEW_LIST(igraph_t_idx_max)); px++;
-    for (i = 0; i < igraph_t_idx_env; i++) {
-      SET_VECTOR_ELT(result, i, Rf_duplicate(VECTOR_ELT(graph, i)));
-    }
-    SET_ATTRIB(result, Rf_duplicate(ATTRIB(graph)));
-    SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
+    PROTECT(result = Rf_duplicate(graph)); px++;
+    PROTECT(result = Rf_lengthgets(result, igraph_t_idx_env + 1)); px++;
+    Rf_copyMostAttrib(graph, result);
   }
 
-  // Get the base namespace
-  SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
-  // Get the emptyenv function
-  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
-  // Call emptyenv()
-  SEXP empty_env = PROTECT(Rf_eval(PROTECT(Rf_lang1(empty_env_fun)), R_GlobalEnv)); px++; px++;
-  // Evaluate the call
-  SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
+  SEXP env = PROTECT(R_NewEnv(R_EmptyEnv, 0, 0)); px++;
 
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
@@ -7728,22 +7824,14 @@ SEXP Rx_igraph_add_env(SEXP graph) {
 }
 
 SEXP Rx_igraph_get_graph_id(SEXP graph) {
+#if R_VERSION >= R_Version(4, 6, 0)
+  return R_getVar(Rf_install("myid"), Rx_igraph_graph_env(graph), TRUE);
+#else
   return Rf_findVar(Rf_install("myid"), Rx_igraph_graph_env(graph));
+#endif
 }
 
 // Wrapper functions for functions not in aaa-auto.R
-SEXP Rx_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_weighted_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
-  return R_igraph_create_bipartite(types, edges, directed);
-}
-
 SEXP Rx_igraph_finalizer(void) {
   return R_igraph_finalizer();
 }

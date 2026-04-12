@@ -20,7 +20,7 @@ test_that("dfs() does not pad order", {
 test_that("dfs() deprecated arguments", {
   g <- make_star(3)
 
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     d <- dfs(
       g,
       root = 2,
@@ -235,7 +235,7 @@ test_that("bfs() works", {
 test_that("bfs() deprecated arguments", {
   g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
 
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     b <- bfs(
       g,
       root = 2,

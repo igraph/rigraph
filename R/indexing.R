@@ -215,7 +215,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   sparse = igraph_opt("sparsematrices"),
   edges = FALSE,
   drop = TRUE,
-  attr = if (is_weighted(x)) "weight" else NULL
+  attr = if (is_weighted(x)) "weight"
 ) {
   ################################################################
   ## Argument checks
@@ -457,7 +457,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
   ...,
   from,
   to,
-  attr = if (is_weighted(x)) "weight" else NULL,
+  attr = if (is_weighted(x)) "weight",
   loops = FALSE,
   value
 ) {

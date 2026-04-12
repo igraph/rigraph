@@ -43,3 +43,68 @@ test_that("simple_cycle() works undirected", {
   expect_length(all_simple_cycles$vertices, 5)
   expect_length(all_simple_cycles$edges, 5)
 })
+
+# Tests for callback function
+test_that("simple_cycles_callback works", {
+  withr::local_seed(123)
+
+  g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A)
+
+  # Count cycles using callback
+  count <- 0
+  cycle_lengths <- integer(0)
+
+  simple_cycles(g, callback = function(vertices, edges) {
+    count <<- count + 1
+    cycle_lengths <<- c(cycle_lengths, length(vertices))
+    TRUE # continue search
+  })
+
+  expect_true(count > 0)
+  expect_true(all(cycle_lengths >= 1))
+})
+
+test_that("simple_cycles_callback can stop early", {
+  withr::local_seed(123)
+
+  g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E -+ D)
+
+  # Stop after finding 2 cycles
+  count <- 0
+
+  simple_cycles(g, callback = function(vertices, edges) {
+    count <<- count + 1
+    if (count >= 2) {
+      TRUE # stop after 2 cycles
+    } else {
+      FALSE # continue
+    }
+  })
+
+  expect_equal(count, 2)
+})
+
+test_that("simple_cycles_callback receives correct arguments", {
+  g <- make_ring(5, directed = TRUE)
+
+  # Check argument types
+  simple_cycles(g, callback = function(vertices, edges) {
+    expect_true(is.integer(vertices))
+    expect_true(is.integer(edges))
+    expect_equal(length(vertices), length(edges))
+    expect_true(length(vertices) >= 1)
+    FALSE # stop after first cycle
+  })
+})
+
+test_that("simple_cycles_callback handles errors in callback", {
+  g <- make_ring(5, directed = TRUE)
+
+  # Callback that throws an error
+  expect_error(
+    simple_cycles(g, callback = function(vertices, edges) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})

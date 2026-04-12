@@ -71,13 +71,9 @@ test_that("sample_degseq() works -- exponential degree error", {
     replace = TRUE,
     prob = exp(-0.5 * (1:100))
   )
-  expect_snapshot(
-    {
-      sample_degseq(exponential_degrees, method = "vl")
-    },
-    error = TRUE,
-    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x)
-  )
+  expect_snapshot_igraph_error({
+    sample_degseq(exponential_degrees, method = "vl")
+  })
 })
 
 test_that("sample_degseq() works -- Power-law degree ok", {
@@ -91,13 +87,9 @@ test_that("sample_degseq() works -- Power-law degree error", {
   withr::local_seed(7)
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 
-  expect_snapshot(
-    {
-      sample_degseq(powerlaw_degrees, method = "vl")
-    },
-    error = TRUE,
-    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x)
-  )
+  expect_snapshot_igraph_error({
+    sample_degseq(powerlaw_degrees, method = "vl")
+  })
 })
 
 test_that("sample_degseq() works -- fast.heur.simple", {

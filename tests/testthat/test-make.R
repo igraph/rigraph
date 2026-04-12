@@ -42,7 +42,7 @@ test_that("sample_, graph_ also work", {
 
 test_that("error messages are proper", {
   rlang::local_options(lifecycle_verbosity = "quiet")
-  expect_snapshot(
+  expect_snapshot_igraph_error(
     {
       make_()
       make_(1:10)
@@ -54,8 +54,7 @@ test_that("error messages are proper", {
       sample_()
       sample_(1:10)
       sample_(directed_graph(), directed_graph())
-    },
-    error = TRUE
+    }
   )
 })
 
@@ -292,9 +291,9 @@ test_that("compatibility when arguments are not named", {
 })
 
 test_that("make_empty_graph gives an error for invalid arguments", {
-  expect_snapshot(make_empty_graph(NULL), error = TRUE)
-  expect_snapshot(make_empty_graph("spam"), error = TRUE)
-  expect_snapshot(make_empty_graph(10, "spam"), error = TRUE)
+  expect_snapshot_igraph_error(make_empty_graph(NULL))
+  expect_snapshot_igraph_error(make_empty_graph("spam"))
+  expect_snapshot_igraph_error(make_empty_graph(10, "spam"))
 })
 
 test_that("make_graph_atlas works", {

@@ -34,4 +34,8 @@ types. These should be probabilities, i.e. numbers between zero and one.}
 \code{callaway.traits.game()} was renamed to \code{\link[=sample_traits_callaway]{sample_traits_callaway()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_callaway_traits_game}{\code{callaway_traits_game()}}
+}
+
 \keyword{internal}

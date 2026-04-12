@@ -30,6 +30,10 @@ This function generates undirected graphs. The null graph is
 returned when the number of vertices is zero. A complete graph is
 returned if the number of partitions is greater than the number of vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_turan}{\code{turan()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Create a Turán graph with 10 vertices and 3 partitions
 g <- make_turan(10, 3)
@@ -58,5 +62,3 @@ Other deterministic constructors:
 \code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_turan}{\code{turan()}}.}
-

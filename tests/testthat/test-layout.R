@@ -17,7 +17,7 @@ test_that("layout_with_fr() works", {
 test_that("layout_with_fr() deprecated argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_ring(10)
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     l <- layout_with_fr(
       g,
       niter = 50,
@@ -212,7 +212,7 @@ test_that("Kamada-Kawai layout generator works", {
 
 test_that("layout_with_kk() deprecated arguments", {
   g <- make_ring(10)
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     l <- layout_with_kk(
       g,
       maxiter = 50,
@@ -334,7 +334,7 @@ test_that("add_layout_ works", {
 
 test_that("layout_randomly() errors well", {
   g <- make_empty_graph(1)
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     layout_randomly(g, dim = 4)
   })
 })

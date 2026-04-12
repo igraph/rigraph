@@ -27,6 +27,10 @@ structure.  These functions search a graph for various motifs.
 \code{count_motifs()} calculates the total number of motifs of a given
 size in graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no}{\code{motifs_randesu_no()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)
@@ -39,7 +43,6 @@ sample_motifs(g, 3)
 Other graph motifs: 
 \code{\link{dyad_census}()},
 \code{\link{motifs}()},
-\code{\link{motifs_randesu_callback}()},
 \code{\link{sample_motifs}()}
 }
 \concept{graph motifs}

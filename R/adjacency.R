@@ -289,8 +289,8 @@ graph_from_adjacency_matrix <- function(
   add.colnames = NULL,
   add.rownames = NA
 ) {
-  ensure_no_na(adjmatrix, "adjacency matrix")
   mode <- igraph_match_arg(mode)
+  ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
     lifecycle::deprecate_soft(
@@ -415,22 +415,11 @@ graph.adjacency.dense <- function(
   weighted = NULL,
   diag = c("once", "twice", "ignore")
 ) {
-  mode <- switch(
-    mode,
-    "directed" = 0L,
-    "undirected" = 1L,
-    "upper" = 2L,
-    "lower" = 3L,
-    "min" = 4L,
-    "plus" = 5L,
-    "max" = 6L
-  )
-
   if (is.logical(diag)) {
     diag <- ifelse(diag, "once", "ignore")
   }
   diag <- igraph_match_arg(diag)
-  diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
+  loops <- switch(diag, "ignore" = "none", "twice" = "twice", "once" = "once")
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
     cli::cli_abort("Adjacency matrices must be square.")
@@ -444,11 +433,14 @@ graph.adjacency.dense <- function(
     weighted <- NULL
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(weighted)) {
-    res <- .Call(Rx_igraph_adjacency, adjmatrix, mode, diag)
+    res <- adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
   } else {
-    res <- .Call(Rx_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- weighted_adjacency_impl(
+      adjmatrix = adjmatrix,
+      mode = mode,
+      loops = loops
+    )
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 

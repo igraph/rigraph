@@ -43,4 +43,8 @@ first smallest maximally non-trivially connected non-singleton cell.}
 \code{graph.automorphisms()} was renamed to \code{\link[=count_automorphisms]{count_automorphisms()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

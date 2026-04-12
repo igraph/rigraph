@@ -37,8 +37,9 @@ pa(
 \item{power}{The power of the preferential attachment, the default is one,
 i.e. linear preferential attachment.}
 
-\item{m}{Numeric constant, the number of edges to add in each time step This
-argument is only used if both \code{out.dist} and \code{out.seq} are omitted
+\item{m}{Numeric constant, the number of edges to add in each time step,
+defaults to 1.
+This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
 or NULL.}
 
 \item{out.dist}{Numeric vector, the distribution of the number of edges to
@@ -121,6 +122,10 @@ of adjacent edges not initiated by the vertex itself and not the total
 (in- + out-) degree of the vertex, unless the \code{out.pref} argument is set to
 \code{TRUE}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game}{\code{barabasi_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_pa(10000)

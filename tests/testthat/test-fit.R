@@ -28,7 +28,7 @@ test_that("fit_power_law() works", {
 })
 
 test_that("fit_power_law() errors well", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     fit_power_law(1, implementation = "R.mle")
   })
 })

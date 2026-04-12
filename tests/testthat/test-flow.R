@@ -98,15 +98,13 @@ test_that("st_cuts() works", {
 test_that("st_cuts errors work", {
   g_path <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 
-  expect_snapshot(st_cuts(g_path, source = "a", target = NULL), error = TRUE)
-  expect_snapshot(st_cuts(g_path, source = NULL, target = "a"), error = TRUE)
-  expect_snapshot(
-    st_min_cuts(g_path, source = "a", target = NULL),
-    error = TRUE
+  expect_snapshot_igraph_error(st_cuts(g_path, source = "a", target = NULL))
+  expect_snapshot_igraph_error(st_cuts(g_path, source = NULL, target = "a"))
+  expect_snapshot_igraph_error(
+    st_min_cuts(g_path, source = "a", target = NULL)
   )
-  expect_snapshot(
-    st_min_cuts(g_path, source = NULL, target = "a"),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    st_min_cuts(g_path, source = NULL, target = "a")
   )
 })
 
@@ -142,7 +140,7 @@ test_that("vertex_connectivity() works", {
 
 test_that("vertex_connectivity error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(vertex_connectivity(g_path, source = 1), error = TRUE)
+  expect_snapshot_igraph_error(vertex_connectivity(g_path, source = 1))
 })
 
 test_that("edge_connectivity works", {
@@ -179,7 +177,7 @@ test_that("edge_connectivity works -- names", {
 
 test_that("edge_connectivity error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(edge_connectivity(g_path, source = 1), error = TRUE)
+  expect_snapshot_igraph_error(edge_connectivity(g_path, source = 1))
 })
 
 test_that("edge_disjoint_paths works", {
@@ -192,13 +190,11 @@ test_that("edge_disjoint_paths works", {
 
 test_that("edge_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(
-    edge_disjoint_paths(g_path, source = 1, target = NULL),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    edge_disjoint_paths(g_path, source = 1, target = NULL)
   )
-  expect_snapshot(
-    edge_disjoint_paths(g_path, source = NULL, target = 1),
-    error = TRUE
+  expect_snapshot_igraph_error(
+    edge_disjoint_paths(g_path, source = NULL, target = 1)
   )
 })
 
@@ -212,7 +208,7 @@ test_that("vertex_disjoint_paths works", {
 
 test_that("vertex_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(vertex_disjoint_paths(g_path, source = 1), error = TRUE)
+  expect_snapshot_igraph_error(vertex_disjoint_paths(g_path, source = 1))
 })
 
 test_that("adhesion works", {
@@ -225,7 +221,7 @@ test_that("adhesion works", {
 
 test_that("vertex_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(vertex_disjoint_paths(g_path, source = 1), error = TRUE)
+  expect_snapshot_igraph_error(vertex_disjoint_paths(g_path, source = 1))
 })
 
 
@@ -252,8 +248,8 @@ test_that("dominator_tree errors work", {
     matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2),
     directed = TRUE
   )
-  expect_snapshot(dominator_tree(g_tree), error = TRUE)
-  expect_snapshot(dominator_tree(g_tree, root = NULL), error = TRUE)
+  expect_snapshot_igraph_error(dominator_tree(g_tree))
+  expect_snapshot_igraph_error(dominator_tree(g_tree, root = NULL))
 })
 
 test_that("dominator_tree works -- legacy", {

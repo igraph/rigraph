@@ -527,20 +527,23 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' g
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
+  call <- rlang::current_env()
   check_string(name)
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(
       graph = graph,
       name = name,
       value = value,
-      check = FALSE
+      check = FALSE,
+      call = call
     ))
   } else {
     return(i_set_vertex_attr(
       graph = graph,
       name = name,
       index = index,
-      value = value
+      value = value,
+      call = call
     ))
   }
   graph
@@ -566,6 +569,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' # to set an attribute named "index" use `:=`
 #' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
 set_vertex_attrs <- function(graph, ..., index = V(graph)) {
+  call <- rlang::current_env()
   dots <- rlang::list2(...)
 
   if (!rlang::is_named(dots)) {
@@ -578,7 +582,8 @@ set_vertex_attrs <- function(graph, ..., index = V(graph)) {
       graph,
       name = attr_name,
       index = index,
-      value = attr_value
+      value = attr_value,
+      call = call
     )
   }
 
@@ -590,7 +595,8 @@ i_set_vertex_attr <- function(
   name,
   index = V(graph),
   value,
-  check = TRUE
+  check = TRUE,
+  call = rlang::caller_env()
 ) {
   ensure_igraph(graph)
   check_string(name)
@@ -632,7 +638,8 @@ i_set_vertex_attr <- function(
       value_in <- unname(value)
     } else {
       cli::cli_abort(
-        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target vertices, not {length(value)}."
+        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target vertices, not {length(value)}.",
+        call = call
       )
     }
 
@@ -830,11 +837,24 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' g
 #' plot(g)
 set_edge_attr <- function(graph, name, index = E(graph), value) {
+  call <- rlang::current_env()
   check_string(name)
   if (is_complete_iterator(index)) {
-    i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE)
+    i_set_edge_attr(
+      graph = graph,
+      name = name,
+      value = value,
+      check = FALSE,
+      call = call
+    )
   } else {
-    i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+    i_set_edge_attr(
+      graph = graph,
+      name = name,
+      index = index,
+      value = value,
+      call = call
+    )
   }
 }
 
@@ -843,7 +863,8 @@ i_set_edge_attr <- function(
   name,
   index = E(graph),
   value,
-  check = TRUE
+  check = TRUE,
+  call = rlang::caller_env()
 ) {
   ensure_igraph(graph)
   check_string(name)
@@ -885,7 +906,8 @@ i_set_edge_attr <- function(
       value_in <- unname(value)
     } else {
       cli::cli_abort(
-        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target edges, not {length(value)}."
+        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target edges, not {length(value)}.",
+        call = call
       )
     }
 

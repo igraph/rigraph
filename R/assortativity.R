@@ -160,7 +160,6 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-#' @cdocs igraph_assortativity
 assortativity <- function(
   graph,
   values,
@@ -237,16 +236,21 @@ assortativity_legacy <- function(
 
 #' @param types Vector giving the vertex types. They as assumed to be integer
 #'   numbers, starting with one. Non-integer values are converted to integers
-#'   with [as.integer()].
+#'   with [as.integer()]. Character vectors are converted to integers using
+#'   [as.factor()].
 #' @rdname assortativity
 #' @export
-#' @cdocs igraph_assortativity_nominal
 assortativity_nominal <- function(
   graph,
   types,
   directed = TRUE,
   normalized = TRUE
 ) {
+  # Convert character types to factor then to integer for categorical data
+  if (is.character(types)) {
+    types <- as.integer(as.factor(types))
+  }
+
   assortativity_nominal_impl(
     graph = graph,
     types = types,
@@ -257,7 +261,6 @@ assortativity_nominal <- function(
 
 #' @rdname assortativity
 #' @export
-#' @cdocs igraph_assortativity_degree
 assortativity_degree <- function(graph, directed = TRUE) {
   assortativity_degree_impl(
     graph = graph,

@@ -845,10 +845,10 @@ test_that("eigen_centrality() deprecated scale argument", {
 
 test_that("arpack() errors well", {
   f <- function(x, extra = NULL) x
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     arpack(
       f,
       options = list(unknown_thing1 = 2, unknown_thing2 = 4),

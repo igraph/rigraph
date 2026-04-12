@@ -83,15 +83,13 @@ graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -210,15 +208,13 @@ graph.famous <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -289,13 +285,11 @@ line.graph <- function(graph) {
 graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -319,14 +313,11 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -354,14 +345,11 @@ graph.star <- function(
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -402,7 +390,6 @@ graph.lcf <- function(n, shifts, repeats = 1) {
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
-#' @cdocs igraph_square_lattice
 graph.lattice <- function(
   dimvector = NULL,
   length = NULL,
@@ -573,12 +560,10 @@ graph.full.bipartite <- function(
 graph.full <- function(n, directed = FALSE, loops = FALSE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -721,8 +706,11 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
   edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
+  res <- create_bipartite_impl(
+    types = types,
+    edges = edges,
+    directed = directed
+  )
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
@@ -853,7 +841,7 @@ graph.atlas <- function(n) {
 #' @param mods The modifiers to apply
 #' @return The modified graph
 #' @dev
-.apply_modifiers <- function(graph, mods) {
+.apply_modifiers <- function(graph, mods, call = rlang::caller_env()) {
   for (m in mods) {
     if (m$id == "without_attr") {
       ## TODO: speed this up
@@ -882,7 +870,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_vertex_attr(graph, n, value = v)
+        graph <- i_set_vertex_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_edge_") {
       m$args <- lapply(m$args, eval)
@@ -891,7 +879,7 @@ graph.atlas <- function(n) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
         stopifnot(!is.null(n))
-        graph <- set_edge_attr(graph, n, value = v)
+        graph <- i_set_edge_attr(graph, n, value = v, call = call)
       }
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
@@ -961,7 +949,7 @@ make_ <- function(...) {
   }
 
   res <- do_call(cons$fun, cons_args, extracted$args)
-  .apply_modifiers(res, extracted$mods)
+  .apply_modifiers(res, extracted$mods, call = rlang::current_env())
 }
 
 #' Sample from a random graph model
@@ -1499,15 +1487,13 @@ make_graph <- function(
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit(.Call(Rx_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(
-          Rx_igraph_create,
-          as.numeric(edges) - 1,
-          as.numeric(n),
-          as.logical(directed)
+        create_impl(
+          edges - 1,
+          n,
+          directed
         )
       }
 
@@ -1596,7 +1582,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-#' @cdocs igraph_empty
 make_empty_graph <- function(n = 0, directed = TRUE) {
   if (!is.numeric(n)) {
     cli::cli_abort("{.arg n} must be numeric, not {.obj_type_friendly {n}}.")
@@ -1875,14 +1860,11 @@ make_star <- function(
   center = 1
 ) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_star,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- star_impl(
+    n,
+    mode,
+    center - 1
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(mode, "in" = "In-star", "out" = "Out-star", "Star")
@@ -1914,12 +1896,10 @@ star <- function(n, mode = c("in", "out", "mutual", "undirected"), center = 1) {
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
 make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_full,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(loops)
+  res <- full_impl(
+    n,
+    directed,
+    loops
   )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
@@ -1966,7 +1946,6 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
-#' @cdocs igraph_square_lattice
 make_lattice <- function(
   dimvector = NULL,
   length = NULL,
@@ -2064,13 +2043,11 @@ lattice <- function(
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_ring,
-    as.numeric(n),
-    as.logical(directed),
-    as.logical(mutual),
-    as.logical(circular)
+  res <- ring_impl(
+    n,
+    directed,
+    mutual,
+    circular
   )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
@@ -2125,7 +2102,6 @@ ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @examples
 #' make_wheel(10, mode = "out")
 #' make_wheel(5, mode = "undirected")
-#' @cdocs igraph_wheel
 make_wheel <- function(
   n,
   ...,
@@ -2188,14 +2164,11 @@ wheel <- function(
 #' make_tree(10, 3, mode = "undirected")
 make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph_match_arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_kary_tree,
-    as.numeric(n),
-    as.numeric(children),
-    as.numeric(mode1)
+  res <- kary_tree_impl(
+    n,
+    children,
+    mode
   )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
@@ -2231,7 +2204,6 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
-#' @cdocs igraph_tree_game
 sample_tree <- function(n, directed = FALSE, method = c("lerw", "prufer")) {
   tree_game_impl(
     n = n,
@@ -2272,7 +2244,6 @@ tree <- function(...) {
 #' to_prufer(g)
 #' @family trees
 #' @export
-#' @cdocs igraph_from_prufer
 make_from_prufer <- function(prufer) {
   from_prufer_impl(
     prufer = prufer
@@ -2712,8 +2683,11 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
   edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
+  res <- create_bipartite_impl(
+    types = types,
+    edges = edges,
+    directed = directed
+  )
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
@@ -2763,7 +2737,6 @@ bipartite_graph <- function(types, edges, directed = FALSE) {
 #' # Create a directed multipartite graph
 #' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
 #' plot(g2)
-#' @cdocs igraph_full_multipartite
 make_full_multipartite <- function(
   n,
   directed = FALSE,
@@ -2833,7 +2806,6 @@ full_multipartite <- function(
 #'
 #' # The sizes of the partitions are as balanced as possible
 #' table(V(g)$type)
-#' @cdocs igraph_turan
 make_turan <- function(n, r) {
   n <- as.numeric(n)
   r <- as.numeric(r)
@@ -2922,7 +2894,6 @@ full_citation_graph <- function(n, directed = TRUE) {
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @cdocs igraph_lcf_vector
 graph_from_lcf <- function(
   shifts,
   ...,
@@ -3047,7 +3018,6 @@ graph_from_lcf <- function(
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
-#' @cdocs igraph_realize_degree_sequence
 realize_degseq <- function(
   out.deg,
   in.deg = NULL,
@@ -3112,7 +3082,6 @@ realize_degseq <- function(
 #' @examples
 #' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 #' degree(g)
-#' @cdocs igraph_realize_bipartite_degree_sequence
 realize_bipartite_degseq <- function(
   degrees1,
   degrees2,

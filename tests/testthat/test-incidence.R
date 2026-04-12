@@ -216,18 +216,18 @@ test_that("graph_from_biadjacency_matrix() errors well", {
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     (g <- graph_from_biadjacency_matrix(inc, weight = 42))
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
   })
 })
 
 test_that("graph_from_biadjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
-  expect_snapshot(graph_from_biadjacency_matrix(A), error = TRUE)
+  expect_snapshot_igraph_error(graph_from_biadjacency_matrix(A))
 })
