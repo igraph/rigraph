@@ -328,10 +328,9 @@ graph_attr <- function(graph, name) {
 
   check_string(name)
 
-  .Call(Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[
-    # internal, no _impl
-    name
-  ]]
+  .Call( # internal: direct R list structure access, no igraph API, no _impl
+    Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph
+  )[[name]]
 }
 
 
