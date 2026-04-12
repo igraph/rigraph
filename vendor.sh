@@ -1,4 +1,5 @@
 #!/bin/bash
+# Vendors igraph sources from upstream repository (manual vendoring)
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
 
@@ -6,6 +7,7 @@ set -e
 set -x
 set -o pipefail
 
+# Change to root of repository
 cd "$(dirname "$0")"
 
 project=igraph
@@ -57,28 +59,29 @@ for commit in $original; do
 
   rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
-  if [ -d "patch" ]; then
-    for f in patch/*.patch; do
-      if patch -i $f -p1 --forward --dry-run; then
-        patch -i $f -p1 --forward --no-backup-if-mismatch
-      else
-        echo "Patch $f does not apply"
-      fi
-    done
-  fi
+  for f in patch/*.patch; do
+    if patch -i "$f" -p1 --forward --dry-run; then
+      patch -i "$f" -p1 --forward --no-backup-if-mismatch
+    else
+      echo "Removing patch $f"
+      rm "$f"
+    fi
+  done
 
   make -f Makefile-cigraph
 
   R -q -e 'cpp11::cpp_register()'
 
   # Always vendor tags
-  if [ $(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -) -eq 0 ]; then
+  if [ "$(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -)" -eq 0 ]; then
     message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
     is_tag=true
     break
   fi
 
-  if [ $(git status --porcelain -- ${vendor_base_dir} | wc -l) -gt 1 ]; then
+  # Expecting one change under ${vendor_base_dir} (and other changes) even if nothing else changed.
+  # Need at least three changed files to consider it a real update.
+  if [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
     message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
     break
   fi
@@ -98,9 +101,13 @@ git add .
   echo
   git -C "$upstream_dir" log -1 --format="Date: %ai" "${commit}"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} |
+  git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
     tee /dev/stderr |
     sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
 ) | git commit --file /dev/stdin
 
 rm -rf "$upstream_dir"
+
+# Remove "unused" warnings
+# Keep the variable for consistency between vendor.sh and vendor-one.sh
+true "${is_tag}"

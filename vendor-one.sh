@@ -1,4 +1,6 @@
 #!/bin/bash
+# Vendors igraph sources commit-by-commit from upstream repository
+# Used by CI automation (.github/workflows/vendor.yaml)
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
 
@@ -6,6 +8,7 @@ set -e
 set -x
 set -o pipefail
 
+# Change to root of repository
 cd "$(dirname "$0")"
 
 project=igraph
@@ -41,8 +44,12 @@ fi
 
 upstream_dir=${project}
 
-if [ "$upstream_basedir" != "$upstream_dir" ]; then
+# Clone the repo only once if it doesn't exist
+if [ ! -d "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
+elif [ "$upstream_basedir" != "$upstream_dir" ]; then
+  # Update existing clone
+  git -C "$upstream_dir" fetch origin
 fi
 
 if [ -n "$(git status --porcelain)" ]; then
@@ -65,7 +72,7 @@ while [ $commits_vendored -lt $num_commits ]; do
   # Look back 10 commits to find the last vendor commit; needed when vendoring multiple commits per run
   base=$(git log -n 10 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
 
-  original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}")
+  original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}" --)
 
   if [ -z "$original" ]; then
     echo "No more commits to vendor. Done."
@@ -96,15 +103,14 @@ while [ $commits_vendored -lt $num_commits ]; do
 
     rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
-    if [ -d "patch" ]; then
-      for f in patch/*.patch; do
-        if patch -i $f -p1 --forward --dry-run; then
-          patch -i $f -p1 --forward --no-backup-if-mismatch
-        else
-          echo "Patch $f does not apply"
-        fi
-      done
-    fi
+    for f in patch/*.patch; do
+      if patch -i "$f" -p1 --forward --dry-run; then
+        patch -i "$f" -p1 --forward --no-backup-if-mismatch
+      else
+        echo "Removing patch $f"
+        rm "$f"
+      fi
+    done
 
     make -f Makefile-cigraph
 
@@ -117,6 +123,8 @@ while [ $commits_vendored -lt $num_commits ]; do
       break
     fi
 
+    # Expecting one change under ${vendor_base_dir} (and other changes) even if nothing else changed.
+    # Need at least three changed files to consider it a real update.
     if [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
       message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
       break
@@ -129,6 +137,32 @@ while [ $commits_vendored -lt $num_commits ]; do
     rm -rf "$upstream_dir"
     exit 0
   fi
+
+  our_tag=$(git describe --tags --abbrev=0 | sed -r 's/-[0-9]$//')
+  upstream_tag=$(git -C "$upstream_dir" describe --tags --abbrev=0)
+
+  echo "Our tag: $our_tag"
+  echo "Upstream tag: $upstream_tag"
+
+  # Increase fifth version component by one
+  # Set to one if missing
+  # Set intermediate components to zero if missing
+  # 1.2.3 -> 1.2.3.0.1
+  # 1.2.3.9000 -> 1.2.3.9000.1
+  # 1.2.3.9000.4 -> 1.2.3.9000.5
+  version=$(sed -r -n '/^Version: (.*)$/ s//\1/p' DESCRIPTION)
+  version_array=(${version//./ })
+  for i in {0..4}; do
+    if [ -z "${version_array[i]}" ]; then
+      version_array[i]=0
+    fi
+  done
+  version_array[4]=$((version_array[4] + 1))
+  new_version=$(IFS=.; echo "${version_array[*]}")
+
+  echo "Updating version from $version to $new_version"
+  sed -i.bak -r 's/^(Version: ).*$/\1'"$new_version"'/' DESCRIPTION
+  rm DESCRIPTION.bak
 
   git add .
 
