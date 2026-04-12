@@ -21,7 +21,7 @@ else
   upstream_basedir="$1"
 fi
 
-upstream_dir=.git/${project}
+upstream_dir=${project}
 
 if [ "$upstream_basedir" != "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"

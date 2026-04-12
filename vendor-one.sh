@@ -39,7 +39,7 @@ if [ -z "$upstream_basedir" ]; then
   upstream_basedir=../../../${project}
 fi
 
-upstream_dir=.git/${project}
+upstream_dir=${project}
 
 if [ "$upstream_basedir" != "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
