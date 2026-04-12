@@ -6,7 +6,7 @@ set -e
 set -x
 set -o pipefail
 
-cd `dirname $0`
+cd "$(dirname "$0")"
 
 project=igraph
 vendor_base_dir=src/vendor
@@ -21,7 +21,7 @@ else
   upstream_basedir="$1"
 fi
 
-upstream_dir=.git/${project}
+upstream_dir=${project}
 
 if [ "$upstream_basedir" != "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
@@ -96,7 +96,11 @@ git add .
 (
   echo "$message"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%'${repo_org}/${repo_name}'\1%g'
+  git -C "$upstream_dir" log -1 --format="Date: %ai" "${commit}"
+  echo
+  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} |
+    tee /dev/stderr |
+    sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
 ) | git commit --file /dev/stdin
 
 rm -rf "$upstream_dir"
