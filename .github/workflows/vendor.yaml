@@ -51,7 +51,7 @@ jobs:
         id: vendor
         run: |
           git pull --rebase
-          ./vendor-one.sh .git/igraph
+          ./vendor-one.sh .git/igraph --commits 30
           rm -rf .git/igraph
           git push --dry-run
           # Check if ahead of upstream branch

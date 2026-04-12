@@ -6,7 +6,7 @@ set -e
 set -x
 set -o pipefail
 
-cd `dirname $0`
+cd "$(dirname "$0")"
 
 project=igraph
 vendor_base_dir=src/vendor
@@ -15,10 +15,28 @@ repo_org=${project}
 repo_name=${project}
 
 
-if [ -z "$1" ]; then
+upstream_basedir=""
+num_commits=1
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --commits|-c)
+      num_commits="$2"
+      shift 2
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      exit 1
+      ;;
+    *)
+      upstream_basedir="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$upstream_basedir" ]; then
   upstream_basedir=../../../${project}
-else
-  upstream_basedir="$1"
 fi
 
 upstream_dir=.git/${project}
@@ -36,69 +54,108 @@ if [ -n "$(git -C "$upstream_dir" status --porcelain)" ]; then
   echo "Warning: working directory $upstream_dir not clean"
 fi
 
-base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
+start=$(git -C "$upstream_dir" rev-parse --verify HEAD)
 
-original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" ${base}..HEAD)
+# Loop for the specified number of commits
+commits_vendored=0
 
-message=
-is_tag=
+while [ $commits_vendored -lt $num_commits ]; do
+  echo "=== Vendoring commit $((commits_vendored + 1)) of $num_commits ==="
 
-for commit in $original; do
-  echo "Importing commit $commit"
+  base=$(git log -n 10 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
 
-  git -C "$upstream_dir" checkout "$commit"
+  original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" "${base}".."${start}" --)
 
-  rm -rf ${vendor_dir}
-  mkdir -p ${vendor_dir}
-
-  git clone "$upstream_dir" ${vendor_dir}
-
-  cmake -S${vendor_dir} -B${vendor_dir}/build
-
-  mv ${vendor_dir}/build/include/igraph_version.h src/vendor/
-
-  rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
-
-  if [ -d "patch" ]; then
-    for f in patch/*.patch; do
-      if patch -i $f -p1 --forward --dry-run; then
-        patch -i $f -p1 --forward --no-backup-if-mismatch
-      else
-        echo "Patch $f does not apply"
-      fi
-    done
+  if [ -z "$original" ]; then
+    echo "No more commits to vendor. Done."
+    rm -rf "$upstream_dir"
+    exit 0
   fi
 
-  make -f Makefile-cigraph
+  message=
+  is_tag=
 
-  R -q -e 'cpp11::cpp_register()'
+  for commit in $original; do
+    echo "Importing commit $commit"
 
-  # Always vendor tags
-  if [ $(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -) -eq 0 ]; then
-    message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
-    is_tag=true
-    break
+    git -C "$upstream_dir" checkout "$commit" || {
+      echo "Error: Failed to checkout commit $commit"
+      rm -rf "$upstream_dir"
+      exit 1
+    }
+
+    rm -rf ${vendor_dir}
+    mkdir -p ${vendor_dir}
+
+    git clone "$upstream_dir" ${vendor_dir}
+
+    cmake -S${vendor_dir} -B${vendor_dir}/build
+
+    mv ${vendor_dir}/build/include/igraph_version.h src/vendor/
+
+    rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
+
+    if [ -d "patch" ]; then
+      for f in patch/*.patch; do
+        if patch -i $f -p1 --forward --dry-run; then
+          patch -i $f -p1 --forward --no-backup-if-mismatch
+        else
+          echo "Patch $f does not apply"
+        fi
+      done
+    fi
+
+    make -f Makefile-cigraph
+
+    R -q -e 'cpp11::cpp_register()'
+
+    # Always vendor tags
+    if [ "$(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -)" -eq 0 ]; then
+      message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
+      is_tag=true
+      break
+    fi
+
+    if [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
+      message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
+      break
+    fi
+  done
+
+  if [ "$message" = "" ]; then
+    echo "No changes found. Done."
+    git checkout -- ${vendor_base_dir}
+    rm -rf "$upstream_dir"
+    exit 0
   fi
 
-  if [ $(git status --porcelain -- ${vendor_base_dir} | wc -l) -gt 1 ]; then
-    message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
-    break
+  git add .
+
+  (
+    echo "$message"
+    echo
+    git -C "$upstream_dir" log -1 --format="Date: %ai" "${commit}"
+    echo
+    git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
+      tee /dev/stderr |
+      sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
+  ) | git commit --file /dev/stdin || {
+    echo "Error: Failed to commit changes"
+    rm -rf "$upstream_dir"
+    exit 1
+  }
+
+  commits_vendored=$((commits_vendored + 1))
+
+  echo "Successfully vendored commit $commits_vendored"
+
+  # If we just vendored a tag, stop here
+  if [ -n "${is_tag}" ]; then
+    echo "Vendored a tag. Stopping."
+    rm -rf "$upstream_dir"
+    exit 0
   fi
 done
 
-if [ "$message" = "" ]; then
-  echo "No changes."
-  git checkout -- ${vendor_base_dir}
-  rm -rf "$upstream_dir"
-  exit 0
-fi
-
-git add .
-
-(
-  echo "$message"
-  echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%'${repo_org}/${repo_name}'\1%g'
-) | git commit --file /dev/stdin
-
+echo "Successfully vendored $commits_vendored commit(s)"
 rm -rf "$upstream_dir"
