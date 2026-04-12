@@ -4,10 +4,10 @@ on:
       - main
     paths:
       - ".github/workflows/vendor.yaml"
-      - "vendor-one.sh"
+      - "scripts/vendor-one.sh"
   workflow_dispatch:
   schedule:
-    - cron: "* 0 * * *"
+    - cron: "0 * * * *"
 
 concurrency:
   group: ${{ github.workflow }}
@@ -17,26 +17,33 @@ name: vendor
 jobs:
   vendor:
     runs-on: ubuntu-latest
+    # Only run in the vendoring repository
+    if: github.repository == 'krlmlr/rigraph'
     strategy:
       matrix:
+        # REMINDER: When changing branch names below,
+        # update the documentation in BRANCHES.md accordingly
         include:
-          - branch: next
-            upstream: main
-    outputs:
-      sha: ${{ steps.commit.outputs.sha }}
+          - branch: main-dev
+            upstream: main-dev
 
     name: "Update vendored sources (${{ matrix.branch }})"
 
+    permissions:
+      contents: write
+      statuses: read
+      actions: write
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: ${{ matrix.branch }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
-          repository: igraph/igraph
-          path: .git/igraph
+          repository: krlmlr/igraph
+          path: ./igraph
           fetch-depth: 0
           ref: ${{ matrix.upstream }}
 
@@ -51,25 +58,19 @@ jobs:
         id: vendor
         run: |
           git pull --rebase
-          ./vendor-one.sh .git/igraph
-          rm -rf .git/igraph
-          git push --dry-run
+          scripts/vendor-one.sh ./igraph --commits 30
+          rm -rf ./igraph
           # Check if ahead of upstream branch
-          # If yes, set a step output
+          # If yes, set a step output and push directly
           if [ $(git rev-list HEAD...origin/${{ matrix.branch }} --count) -gt 0 ]; then
+            git push
             # Avoid set-output, it's deprecated
             echo "vendor=ok" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create PR
-        if: steps.vendor.outputs.vendor != ''
+      - name: Enumerate commits and trigger rcc workflow
+        # if: steps.vendor.outputs.vendor == 'ok'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -x
-          git checkout -b vendor-${{ matrix.branch }}
-          if git push -u origin HEAD; then
-            gh pr create --base ${{ matrix.branch }} --fill-first
-            gh workflow run rcc -f ref=vendor-${{ matrix.branch }}
-            gh pr merge --auto --squash
-          fi
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/each-rcc.sh
+        shell: bash

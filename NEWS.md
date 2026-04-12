@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.2.9006
+
+## Bug fixes
+
+- Error call in `with_vertex_()`/`with_edge_()` should report `make_()`, not internal helper (#2609).
+
+## Chore
+
+- Remove stale TODOs in `rinterface_extra.c` (#1454, #2601).
+
+## Testing
+
+- Add snapshot test for attributes (#2607).
+
+## Uncategorized
+
+- Remove calls to non-API functions.
+
+
 # igraph 2.2.2.9005
 
 ## Chore
@@ -858,6 +877,13 @@
 ## Testing
 
 - Improve centralitystress test (#2214).
+
+
+# igraph 2.2.3
+
+## Chore
+
+- Remove calls to non-API functions.
 
 
 # igraph 2.2.2
