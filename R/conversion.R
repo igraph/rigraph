@@ -1150,7 +1150,8 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   what <- igraph_match_arg(what)
 
   if (what %in% c("vertices", "both")) {
-    ver <- .Call( # internal, no _impl
+    ver <- .Call(
+      # internal, no _impl
       Rx_igraph_mybracket2,
       x,
       igraph_t_idx_attr,
@@ -1274,7 +1275,8 @@ graph_from_adj_list <- function(
 as_long_data_frame <- function(graph) {
   ensure_igraph(graph)
 
-  ver <- .Call( # internal, no _impl
+  ver <- .Call(
+    # internal, no _impl
     Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,

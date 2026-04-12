@@ -266,7 +266,8 @@ power.law.fit.new <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call( # igraph_power_law_fit(); power_law_fit_impl lacks p.value/p.precision params
+  res <- .Call(
+    # igraph_power_law_fit(); power_law_fit_impl lacks p.value/p.precision params
     Rx_igraph_power_law_fit_new,
     data,
     xmin,

@@ -1856,7 +1856,8 @@ cluster_walktrap <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # igraph_community_walktrap(); _impl lacks output control params (merges/modularity/membership)
+  res <- .Call(
+    # igraph_community_walktrap(); _impl lacks output control params (merges/modularity/membership)
     Rx_igraph_walktrap_community,
     graph,
     weights,
@@ -1984,7 +1985,8 @@ cluster_edge_betweenness <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # igraph_community_edge_betweenness(); _impl lacks output control params
+  res <- .Call(
+    # igraph_community_edge_betweenness(); _impl lacks output control params
     Rx_igraph_community_edge_betweenness,
     graph,
     weights,
@@ -2076,7 +2078,8 @@ cluster_fast_greedy <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # igraph_community_fastgreedy(); _impl lacks output control params
+  res <- .Call(
+    # igraph_community_fastgreedy(); _impl lacks output control params
     Rx_igraph_community_fastgreedy,
     graph,
     as.logical(merges),

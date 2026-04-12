@@ -550,7 +550,8 @@ read.graph.ncol <- function(
     "auto" = 2L
   )
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # igraph_read_graph_ncol(); read_graph_ncol_impl has bug with predefnames
+  .Call(
+    # igraph_read_graph_ncol(); read_graph_ncol_impl has bug with predefnames
     Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
@@ -576,7 +577,8 @@ write.graph.ncol <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # igraph_write_graph_ncol(); write_graph_ncol_impl can't handle NULL names/weights
+  .Call(
+    # igraph_write_graph_ncol(); write_graph_ncol_impl can't handle NULL names/weights
     Rx_igraph_write_graph_ncol,
     graph,
     file,
@@ -617,7 +619,8 @@ write.graph.lgl <- function(
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
-  .Call( # igraph_write_graph_lgl(); write_graph_lgl_impl can't handle NULL names/weights
+  .Call(
+    # igraph_write_graph_lgl(); write_graph_lgl_impl can't handle NULL names/weights
     Rx_igraph_write_graph_lgl,
     graph,
     file,
@@ -648,7 +651,8 @@ write.graph.pajek <- function(graph, file) {
 
 read.graph.dimacs <- function(file, directed = TRUE) {
   on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call( # igraph_read_graph_dimacs_flow(); _impl returns different structure
+  res <- .Call(
+    # igraph_read_graph_dimacs_flow(); _impl returns different structure
     Rx_igraph_read_graph_dimacs,
     file,
     as.logical(directed)
