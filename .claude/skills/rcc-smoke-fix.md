@@ -1,8 +1,8 @@
 Scheduled job: scan all `*-dev` branches (including `broken-*-dev`) in
 `krlmlr/rigraph` for the earliest commit whose `rcc` commit-status (set by the
 "Smoke test: stock R" job in the `rcc` workflow) is `failure` since 2026-04-11.
-For each such branch, if no `broken-<branch>-<sha7>` branch exists yet, create
-it, fix `testthat::test_local()` and `R CMD check .`, update snapshots, then
+For each such branch, if no `broken-<sha7>-dev` branch exists yet, create it,
+fix `testthat::test_local()` and `R CMD check .`, update snapshots, then
 cherry-pick all later vendor commits from the `*-dev` branch and push.
 Never modify vendored files (`src/vendor/`, `patch/`).
 
@@ -27,10 +27,10 @@ DEV_BRANCHES=$(git branch -r \
   | grep -E '\-dev$' \
   | sort)
 
-# All broken-* branches already on krlmlr (to skip re-doing work)
+# All broken-*-dev branches already on krlmlr (to skip re-doing work)
 BROKEN_BRANCHES=$(git branch -r \
   | grep -oP 'krlmlr/\K\S+' \
-  | grep -E '^broken-')
+  | grep -E '^broken-.*-dev$')
 
 echo "=== Dev branches ===" && echo "$DEV_BRANCHES"
 echo "=== Broken branches (existing) ===" && echo "$BROKEN_BRANCHES"
@@ -51,7 +51,7 @@ COMMITS_OLDEST_FIRST=$(git log "krlmlr/$BRANCH" \
 FIRST_FAIL=""
 while IFS= read -r SHA; do
   SHORT="${SHA:0:7}"
-  FIX_NAME="broken-${BRANCH}-${SHORT}"
+  FIX_NAME="broken-${SHORT}-dev"
 
   # Skip if fix branch already exists
   if echo "$BROKEN_BRANCHES" | grep -qxF "$FIX_NAME"; then
@@ -88,7 +88,7 @@ Repeat for each `NEEDS_FIX` pair `($BRANCH, $SHA)`:
 
 ```bash
 SHORT="${SHA:0:7}"
-FIX_BRANCH="broken-${BRANCH}-${SHORT}"
+FIX_BRANCH="broken-${SHORT}-dev"
 git checkout -B "$FIX_BRANCH" "$SHA"
 ```
 
@@ -168,10 +168,10 @@ Return to Step 3 / Step 4 for the next `NEEDS_FIX` entry.
 When all are processed, report a summary:
 
 ```
-Fixed: broken-main-dev-abc1234 (cherry-picked N commits)
-Fixed: broken-other-dev-def5678 (cherry-picked M commits)
-Skipped (already fixed): ...
-No failure found: ...
+Fixed: broken-abc1234-dev (from main-dev, cherry-picked N commits)
+Fixed: broken-def5678-dev (from other-dev, cherry-picked M commits)
+Skipped (already fixed): broken-abc1234-dev
+No failure found: yet-another-dev
 ```
 
 ---
