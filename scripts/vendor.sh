@@ -8,7 +8,7 @@ set -x
 set -o pipefail
 
 # Change to root of repository
-cd "$(dirname "$0")"
+cd "$(dirname "$0")"/..
 
 project=igraph
 vendor_base_dir=src/vendor

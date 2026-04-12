@@ -35,8 +35,9 @@ rigraph/
 │   └── workflows/
 │       ├── vendor.yaml             # Hourly automated vendoring
 │       └── …                       # Other CI/CD workflows
-├── vendor-one.sh                   # CI commit-by-commit vendoring script
-├── vendor.sh                       # Manual vendoring script
+├── scripts/
+│   ├── vendor-one.sh               # CI commit-by-commit vendoring script
+│   └── vendor.sh                   # Manual vendoring script
 └── DESCRIPTION                     # Package metadata
 ```
 

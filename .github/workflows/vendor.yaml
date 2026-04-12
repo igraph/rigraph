@@ -4,7 +4,7 @@ on:
       - main
     paths:
       - ".github/workflows/vendor.yaml"
-      - "vendor-one.sh"
+      - "scripts/vendor-one.sh"
   workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
@@ -53,7 +53,7 @@ jobs:
         id: vendor
         run: |
           git pull --rebase
-          ./vendor-one.sh ./igraph --commits 30
+          scripts/vendor-one.sh ./igraph --commits 30
           rm -rf ./igraph
           # Check if ahead of upstream branch
           # If yes, set a step output and push directly
@@ -62,3 +62,10 @@ jobs:
             # Avoid set-output, it's deprecated
             echo "vendor=ok" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Enumerate commits and trigger rcc workflow
+        # if: steps.vendor.outputs.vendor == 'ok'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/each-rcc.sh
+        shell: bash

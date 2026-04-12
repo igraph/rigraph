@@ -69,3 +69,4 @@
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
 ^BRANCHES\.md$
+^scripts$
