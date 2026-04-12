@@ -28,7 +28,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          is_forked=$(([[ "${{ github.repository }}" == "krlmlr/duckdb-r" ]] && echo "true") || $(([[ "${{ github.repository }}" == "krlmlr/rigraph" ]] && echo "true") || (gh api repos/${{ github.repository }} | jq .fork ))
+          is_forked=$(([[ "${{ github.repository }}" == "krlmlr/duckdb-r" ]] && echo "true") || ([[ "${{ github.repository }}" == "krlmlr/rigraph" ]] && echo "true") || (gh api repos/${{ github.repository }} | jq .fork ))
           echo "is_forked=${is_forked}" >> $GITHUB_OUTPUT
         shell: bash
 
