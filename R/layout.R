@@ -848,24 +848,24 @@ layout_as_tree <- function(
   root <- as_igraph_vs(graph, root) - 1
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
-  mode <- switch(
-    igraph_match_arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph_match_arg(mode)
   flip.y <- as.logical(flip.y)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_layout_reingold_tilford,
-    graph,
-    root,
-    mode,
-    rootlevel,
-    circular
-  )
+  if (circular) {
+    res <- layout_reingold_tilford_circular_impl(
+      graph = graph,
+      mode = mode,
+      roots = root,
+      rootlevel = rootlevel
+    )
+  } else {
+    res <- layout_reingold_tilford_impl(
+      graph = graph,
+      mode = mode,
+      roots = root,
+      rootlevel = rootlevel
+    )
+  }
   if (flip.y && vcount(graph) > 0) {
     res[, 2] <- max(res[, 2]) - res[, 2]
   }
@@ -1517,8 +1517,15 @@ layout_with_fr <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
+  use_seed <- !is.null(coords)
+  if (is.null(coords)) {
+    # Initialize coords with zeros - will be ignored if use_seed=FALSE
+    n <- vcount(graph)
+    dim_n <- if (dim == "2") 2 else 3
+    coords <- matrix(0, n, dim_n)
+  }
+  coords[] <- as.numeric(coords)
   if (!missing(niter) && !missing(maxiter)) {
     cli::cli_abort(c(
       "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
@@ -1532,16 +1539,9 @@ layout_with_fr <- function(
   start.temp <- as.numeric(start.temp)
 
   grid <- igraph_match_arg(grid)
-  grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
+  # Let _impl handle default weights from edge attribute
+  # Pass weights as-is (including NA to signal "no weights")
   if (!is.null(minx)) {
     minx <- as.numeric(minx)
   }
@@ -1573,35 +1573,34 @@ layout_with_fr <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_fr(repulserad = )")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
-    res <- .Call(
-      Rx_igraph_layout_fruchterman_reingold,
-      graph,
-      coords,
-      niter,
-      start.temp,
-      weights,
-      minx,
-      maxx,
-      miny,
-      maxy,
-      grid
+    res <- layout_fruchterman_reingold_impl(
+      graph = graph,
+      coords = coords,
+      use_seed = use_seed,
+      niter = niter,
+      start_temp = start.temp,
+      grid = grid,
+      weights = weights,
+      minx = minx,
+      maxx = maxx,
+      miny = miny,
+      maxy = maxy
     )
   } else {
-    res <- .Call(
-      Rx_igraph_layout_fruchterman_reingold_3d,
-      graph,
-      coords,
-      niter,
-      start.temp,
-      weights,
-      minx,
-      maxx,
-      miny,
-      maxy,
-      minz,
-      maxz
+    res <- layout_fruchterman_reingold_3d_impl(
+      graph = graph,
+      coords = coords,
+      use_seed = use_seed,
+      niter = niter,
+      start_temp = start.temp,
+      weights = weights,
+      minx = minx,
+      maxx = maxx,
+      miny = miny,
+      maxy = maxy,
+      minz = minz,
+      maxz = maxz
     )
   }
   res
@@ -1758,6 +1757,11 @@ layout_with_graphopt <- function(
   max.sa.movement = 5
 ) {
   ensure_igraph(graph)
+  use_seed <- !is.null(start)
+  if (is.null(start)) {
+    # Initialize with zeros - will be ignored if use_seed=FALSE
+    start <- matrix(0, vcount(graph), 2)
+  }
   start[] <- as.numeric(start)
   niter <- as.double(niter)
   charge <- as.double(charge)
@@ -1766,17 +1770,16 @@ layout_with_graphopt <- function(
   spring.constant <- as.double(spring.constant)
   max.sa.movement <- as.double(max.sa.movement)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_layout_graphopt,
-    graph,
-    niter,
-    charge,
-    mass,
-    spring.length,
-    spring.constant,
-    max.sa.movement,
-    start
+  layout_graphopt_impl(
+    graph = graph,
+    res = start,
+    niter = niter,
+    node_charge = charge,
+    node_mass = mass,
+    spring_length = spring.length,
+    spring_constant = spring.constant,
+    max_sa_movement = max.sa.movement,
+    use_seed = use_seed
   )
 }
 
@@ -1881,8 +1884,15 @@ layout_with_kk <- function(
   }
 
   ensure_igraph(graph)
-  coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
+  use_seed <- !is.null(coords)
+  if (is.null(coords)) {
+    # Initialize coords with zeros - will be ignored if use_seed=FALSE
+    n <- vcount(graph)
+    dim_n <- if (dim == "2") 2 else 3
+    coords <- matrix(0, n, dim_n)
+  }
+  coords[] <- as.numeric(coords)
 
   maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
@@ -1927,37 +1937,36 @@ layout_with_kk <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_kk(coolexp = )")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call(
-      Rx_igraph_layout_kamada_kawai,
-      graph,
-      coords,
-      maxiter,
-      epsilon,
-      kkconst,
-      weights,
-      minx,
-      maxx,
-      miny,
-      maxy
+    res <- layout_kamada_kawai_impl(
+      graph = graph,
+      coords = coords,
+      use_seed = use_seed,
+      maxiter = maxiter,
+      epsilon = epsilon,
+      kkconst = kkconst,
+      weights = weights,
+      minx = minx,
+      maxx = maxx,
+      miny = miny,
+      maxy = maxy
     )
   } else {
-    res <- .Call(
-      Rx_igraph_layout_kamada_kawai_3d,
-      graph,
-      coords,
-      maxiter,
-      epsilon,
-      kkconst,
-      weights,
-      minx,
-      maxx,
-      miny,
-      maxy,
-      minz,
-      maxz
+    res <- layout_kamada_kawai_3d_impl(
+      graph = graph,
+      coords = coords,
+      use_seed = use_seed,
+      maxiter = maxiter,
+      epsilon = epsilon,
+      kkconst = kkconst,
+      weights = weights,
+      minx = minx,
+      maxx = maxx,
+      miny = miny,
+      maxy = maxy,
+      minz = minz,
+      maxz = maxz
     )
   }
 
@@ -2037,17 +2046,15 @@ layout_with_lgl <- function(
     root <- as_igraph_vs(graph, root) - 1
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_layout_lgl,
-    graph,
-    as.double(maxiter),
-    as.double(maxdelta),
-    as.double(area),
-    as.double(coolexp),
-    as.double(repulserad),
-    as.double(cellsize),
-    root
+  layout_lgl_impl(
+    graph = graph,
+    maxiter = maxiter,
+    maxdelta = maxdelta,
+    area = area,
+    coolexp = coolexp,
+    repulserad = repulserad,
+    cellsize = cellsize,
+    root = root
   )
 }
 
@@ -2549,11 +2556,9 @@ merge_coords <- function(graphs, layouts, method = "dla") {
     cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_layout_merge_dla,
-    graphs,
-    layouts
+  layout_merge_dla_impl(
+    graphs = graphs,
+    coords = layouts
   )
 }
 
@@ -2891,24 +2896,21 @@ layout_with_drl <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
-    res <- .Call(
-      Rx_igraph_layout_drl,
-      graph,
-      seed,
-      use.seed,
-      options,
-      weights
+    res <- layout_drl_impl(
+      graph = graph,
+      res = seed,
+      use_seed = use.seed,
+      options = options,
+      weights = weights
     )
   } else {
-    res <- .Call(
-      Rx_igraph_layout_drl_3d,
-      graph,
-      seed,
-      use.seed,
-      options,
-      weights
+    res <- layout_drl_3d_impl(
+      graph = graph,
+      res = seed,
+      use_seed = use.seed,
+      options = options,
+      weights = weights
     )
   }
   res

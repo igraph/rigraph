@@ -1518,24 +1518,11 @@ k_shortest_paths <- function(
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
 subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_subcomponent,
-    graph,
-    as_igraph_vs(graph, v) - 1,
-    as.numeric(mode)
-  ) +
-    1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-
-  res
+  subcomponent_impl(
+    graph = graph,
+    vid = v,
+    mode = mode
+  )
 }
 
 #' Subgraph of a graph
@@ -2050,19 +2037,12 @@ ego_size <- function(
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_neighborhood_size,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.numeric(mode),
-    mindist
+  neighborhood_size_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
 }
 
@@ -2164,27 +2144,13 @@ ego <- function(
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_neighborhood,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.numeric(mode),
-    mindist
+  neighborhood_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
-  res <- lapply(res, function(x) x + 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
 }
 
 #' @export
@@ -2199,21 +2165,13 @@ make_ego_graph <- function(
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_neighborhood_graphs,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.integer(mode),
-    mindist
+  neighborhood_graphs_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
-  res
 }
 
 #' @export
@@ -2441,15 +2399,13 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #' girth(g)
 #'
 girth <- function(graph, circle = TRUE) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
+  # girth_impl always computes circle; slightly less efficient when circle=FALSE
+  res <- girth_impl(graph = graph)
   if (res$girth == 0) {
     res$girth <- Inf
   }
-  if (igraph_opt("return.vs.es") && circle) {
-    res$circle <- create_vs(graph, res$circle)
+  if (!circle) {
+    res$circle <- NULL
   }
   res
 }
@@ -3165,10 +3121,8 @@ is_connected <- function(graph, mode = c("weak", "strong")) {
 count_components <- function(graph, mode = c("weak", "strong")) {
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_no_components, graph, mode)
+  connected_components_impl(graph, mode = mode, details = TRUE)$no
 }
 
 #' Count reachable vertices

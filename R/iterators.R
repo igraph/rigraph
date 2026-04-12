@@ -84,6 +84,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @export
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 

@@ -228,8 +228,7 @@ disjoint_union <- function(...) {
   )
   lapply(graphs, ensure_igraph)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_disjoint_union, graphs)
+  res <- disjoint_union_many_impl(graphs = graphs)
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
