@@ -137,6 +137,10 @@ If the \code{time.window} argument is given (and not NULL) then
 
 This function might generate graphs with multiple edges.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game}{\code{barabasi_aging_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game}{\code{recent_degree_aging_game()}}
+}
+
 \examples{
 
 # The maximum degree for graph with different aging exponents

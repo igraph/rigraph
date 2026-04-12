@@ -36,4 +36,8 @@ number for a more accurate prediction.}
 \code{hrg.predict()} was renamed to \code{\link[=predict_edges]{predict_edges()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

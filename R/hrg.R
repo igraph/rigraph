@@ -304,7 +304,6 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'   }
 #' @family hierarchical random graph functions
 #' @export
-#' @cdocs igraph_hrg_consensus
 consensus_tree <- function(
   graph,
   hrg = NULL,
@@ -334,7 +333,6 @@ consensus_tree <- function(
 #'
 #' @family hierarchical random graph functions
 #' @export
-#' @cdocs igraph_hrg_create
 hrg <- function(graph, prob) {
   hrg_create_impl(
     graph = graph,
@@ -353,7 +351,6 @@ hrg <- function(graph, prob) {
 #'
 #' @family hierarchical random graph functions
 #' @export
-#' @cdocs igraph_from_hrg_dendrogram
 hrg_tree <- function(hrg) {
   if (!inherits(hrg, "igraphHRG")) {
     cli::cli_abort(
@@ -380,7 +377,6 @@ hrg_tree <- function(hrg) {
 #'
 #' @family hierarchical random graph functions
 #' @export
-#' @cdocs igraph_hrg_game
 sample_hrg <- function(hrg) {
   if (!inherits(hrg, "igraphHRG")) {
     cli::cli_abort(

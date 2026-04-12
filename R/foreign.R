@@ -303,9 +303,6 @@ write.graph.fromraw <- function(buffer, file) {
 #' @keywords graphs
 #' @family foreign
 #' @export
-#' @cdocs igraph_read_graph_dimacs_flow igraph_read_graph_dl igraph_read_graph_edgelist
-#' @cdocs igraph_read_graph_gml igraph_read_graph_graphdb igraph_read_graph_graphml
-#' @cdocs igraph_read_graph_lgl igraph_read_graph_ncol igraph_read_graph_pajek
 read_graph <- function(
   file,
   format = c(
@@ -456,9 +453,6 @@ read_graph <- function(
 #' @family foreign
 #' @export
 #' @keywords graphs
-#' @cdocs igraph_write_graph_dimacs_flow igraph_write_graph_dot igraph_write_graph_edgelist
-#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda
-#' @cdocs igraph_write_graph_lgl igraph_write_graph_ncol igraph_write_graph_pajek
 #' @examples
 #'
 #' g <- make_ring(10)

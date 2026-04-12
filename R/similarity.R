@@ -43,7 +43,6 @@
 #' @keywords graphs
 #' @family similarity
 #' @family cocitation
-#' @cdocs igraph_similarity_jaccard igraph_similarity_dice igraph_similarity_inverse_log_weighted
 #' @export
 #' @examples
 #'

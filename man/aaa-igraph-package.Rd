@@ -196,6 +196,7 @@ Other contributors:
 \itemize{
   \item Michael Antonov [contributor]
   \item Chan Zuckerberg Initiative (\href{https://ror.org/02qenvm24}{ROR}) [funder]
+  \item R Consortium (\href{https://ror.org/01z833950}{ROR}) [funder]
 }
 
 }

@@ -31,4 +31,8 @@ probabilities for the different vertex types.}
 \code{lastcit.game()} was renamed to \code{\link[=sample_last_cit]{sample_last_cit()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}
+}
+
 \keyword{internal}

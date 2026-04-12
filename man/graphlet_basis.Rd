@@ -75,6 +75,10 @@ The second and third functions correspond to the first and second steps of
 the algorithm, and they are useful if the user wishes to perform them
 individually: \code{graphlet_basis()} and \code{graphlet_proj()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_candidate_basis}{\code{graphlets_candidate_basis()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project}{\code{graphlets_project()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets}{\code{graphlets()}}
+}
+
 \examples{
 
 ## Create an example graph first
@@ -115,5 +119,3 @@ for (i in 1:length(gl$cliques)) {
 }
 }
 \concept{glet}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets}{\code{graphlets()}}.}
-

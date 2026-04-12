@@ -15,4 +15,8 @@ line.graph(graph)
 \code{line.graph()} was renamed to \code{\link[=make_line_graph]{make_line_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_linegraph}{\code{linegraph()}}
+}
+
 \keyword{internal}

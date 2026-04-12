@@ -58,6 +58,10 @@ Multi-edges and self-loops are taken into account. Note that typical graphs
 have exponentially many cycles and the presence of multi-edges exacerbates
 this combinatorial explosion.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
@@ -78,5 +82,3 @@ Graph cycles
 }
 \concept{cycles}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles_callback}{\code{simple_cycles_callback()}}.}
-

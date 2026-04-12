@@ -254,7 +254,6 @@ clique.number <- function(graph) {
 #'
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
-#' @cdocs igraph_cliques igraph_cliques_callback
 cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
   ensure_igraph(graph)
   check_dots_empty()
@@ -280,7 +279,6 @@ cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_largest_cliques
 largest_cliques <- function(graph) {
   largest_cliques_impl(
     graph = graph
@@ -417,7 +415,6 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_clique_number
 clique_num <- function(graph) {
   clique_number_impl(
     graph = graph
@@ -474,7 +471,6 @@ clique_num <- function(graph) {
 #' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
-#' @cdocs igraph_weighted_cliques
 weighted_cliques <- function(
   graph,
   vertex.weights = NULL,
@@ -492,7 +488,6 @@ weighted_cliques <- function(
 }
 #' @export
 #' @rdname cliques
-#' @cdocs igraph_largest_weighted_cliques
 largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
   largest_weighted_cliques_impl(
     graph = graph,
@@ -501,7 +496,6 @@ largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
 }
 #' @export
 #' @rdname cliques
-#' @cdocs igraph_weighted_clique_number
 weighted_clique_num <- function(graph, vertex.weights = NULL) {
   weighted_clique_number_impl(
     graph = graph,
@@ -627,8 +621,6 @@ independence_number <- ivs_size
 
 #' @rdname cliques
 #' @export
-#' @cdocs igraph_maximal_cliques_hist
-#' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(
@@ -657,7 +649,6 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
 #' @keywords graphs
 #' @seealso [make_full_graph()]
 #' @export
-#' @cdocs igraph_is_complete
 #' @examples
 #'
 #' g <- make_full_graph(6, directed = TRUE)
@@ -685,7 +676,6 @@ is_complete <- function(graph) {
 #'   a clique.
 #' @keywords graphs
 #' @export
-#' @cdocs igraph_is_clique
 is_clique <- function(graph, candidate, directed = FALSE) {
   is_clique_impl(
     graph = graph,
@@ -702,7 +692,6 @@ is_clique <- function(graph, candidate, directed = FALSE) {
 #'   independent set.
 #' @keywords graphs
 #' @export
-#' @cdocs igraph_is_independent_vertex_set
 is_ivs <- function(graph, candidate) {
   is_independent_vertex_set_impl(
     graph = graph,

@@ -36,6 +36,10 @@ A real number.
 \description{
 This function assesses the distance between two community structures.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_compare_communities}{\code{compare_communities()}}
+}
+
 \examples{
 
 g <- make_graph("Zachary")
