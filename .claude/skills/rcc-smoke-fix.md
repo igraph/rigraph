@@ -223,6 +223,6 @@ No failure found: yet-another-dev
   or any `scripts/vendor*.sh` file. `patch/` **may** be modified.
 - **Never** amend commits that have already been pushed.
 - **Commit status to check**: context `rcc` (not the full check-run name).
-- **Branch target**: all pushes go to the `krlmlr` remote (`krlmlr/rigraph`).
+- **Branch target**: all pushes go to the `krlmlr` remote (`krlmlr/rigraph`) to a branch named `broken-<sha>-dev` (full 40-char SHA).
 - Branches being force-pushed to: always use the freshly-fetched `krlmlr/*`
   ref; never rely on any previously-checked-out state.
