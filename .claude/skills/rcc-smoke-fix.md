@@ -1,10 +1,10 @@
 Scheduled job: scan all `*-dev` branches (including `broken-*-dev`) in
 `krlmlr/rigraph` for the earliest commit whose `rcc` commit-status (set by the
 "Smoke test: stock R" job in the `rcc` workflow) is `failure` since 2026-04-11.
-For each such branch, if no `broken-<sha7>-dev` branch exists yet, create it,
-fix `testthat::test_local()` and `R CMD check .`, update snapshots, then
-cherry-pick all later vendor commits from the `*-dev` branch and push.
-Never modify vendored files (`src/vendor/`, `patch/`).
+For each such branch, if no `broken-<sha>-dev` branch exists yet (full 40-char
+SHA), create it, fix `testthat::test_local()` and `R CMD check .`, update
+snapshots, then cherry-pick all later vendor commits from the `*-dev` branch
+and push. Never modify vendored C sources (`src/vendor/cigraph/`).
 
 ---
 
@@ -50,8 +50,7 @@ COMMITS_OLDEST_FIRST=$(git log "krlmlr/$BRANCH" \
 
 FIRST_FAIL=""
 while IFS= read -r SHA; do
-  SHORT="${SHA:0:7}"
-  FIX_NAME="broken-${SHORT}-dev"
+  FIX_NAME="broken-${SHA}-dev"
 
   # Skip if fix branch already exists
   if echo "$BROKEN_BRANCHES" | grep -qxF "$FIX_NAME"; then
@@ -87,8 +86,7 @@ Repeat for each `NEEDS_FIX` pair `($BRANCH, $SHA)`:
 ### 4a. Check out the failing commit on the new fix branch
 
 ```bash
-SHORT="${SHA:0:7}"
-FIX_BRANCH="broken-${SHORT}-dev"
+FIX_BRANCH="broken-${SHA}-dev"
 git checkout -B "$FIX_BRANCH" "$SHA"
 ```
 
@@ -101,17 +99,40 @@ Rscript -e 'testthat::test_local(stop_on_failure = FALSE)' 2>&1
 
 Read the output carefully.
 
-### 4c. Fix issues — allowed modifications
+### 4c. Fix issues — allowed modifications and priority order
 
-**You may only change files outside `src/vendor/` and `patch/`.** Typical fixes:
+**Never modify `src/vendor/cigraph/` or `src/vendor/igraph_version.h`.**
+Everything else — including `patch/` — may be changed.
+
+Apply fixes in this priority order (stop at the first level that resolves the failure):
+
+1. **`patch/`** — R-specific patches to the C core. Prefer adjusting or adding a
+   patch here when the C API changed in a way that breaks compilation or linking.
+   Assign the next available number; do not renumber existing patches.
+
+2. **Glue / Stimulus definitions** (`src/*.cpp`, auto-generated stubs, `.decor`
+   files, or Stimulus-style interface definitions) — adapt the R↔C bridge to a
+   changed C API before touching any R-level code.
+
+3. **R code** (`R/`) — update high-level R functions, fix argument handling, etc.
+
+4. **Snapshots** (`tests/testthat/_snaps/`) — accept updated snapshots only after
+   the underlying behaviour is confirmed correct:
+   ```
+   Rscript -e 'testthat::snapshot_accept()'
+   ```
+   Or for a single test file: `testthat::snapshot_accept("test-name")`.
+
+5. **Tests** (`tests/testthat/test-*.R`) — change test code **only as a last
+   resort**, e.g. when the test itself was testing a now-removed C-level detail.
+   Do not weaken assertions; adapt them to the new correct behaviour.
+
+Other common fixes:
 
 | Symptom | Fix |
 |---------|-----|
-| Snapshot mismatch | `Rscript -e 'testthat::snapshot_accept()'` then inspect diffs |
-| Snapshot mismatch (specific test) | `Rscript -e 'testthat::snapshot_accept("test-name")'` |
-| Logical test failure | Read failing test in `tests/testthat/test-*.R`; fix R code in `R/` |
-| Missing export / namespace | `Rscript -e 'roxygen2::roxygenize()'` |
-| NOTE / WARNING in R CMD check | Fix in `R/` or `man/` — never in `src/vendor/` |
+| Missing export / namespace error | `Rscript -e 'roxygen2::roxygenize()'` |
+| NOTE / WARNING in R CMD check | Fix in `R/`, `man/`, or `patch/` |
 
 After any change, re-run:
 
@@ -168,9 +189,9 @@ Return to Step 3 / Step 4 for the next `NEEDS_FIX` entry.
 When all are processed, report a summary:
 
 ```
-Fixed: broken-abc1234-dev (from main-dev, cherry-picked N commits)
-Fixed: broken-def5678-dev (from other-dev, cherry-picked M commits)
-Skipped (already fixed): broken-abc1234-dev
+Fixed: broken-<sha40>-dev (from main-dev, cherry-picked N commits)
+Fixed: broken-<sha40>-dev (from other-dev, cherry-picked M commits)
+Skipped (already fixed): broken-<sha40>-dev exists
 No failure found: yet-another-dev
 ```
 
@@ -178,8 +199,8 @@ No failure found: yet-another-dev
 
 ## Constraints (hard rules)
 
-- **Never** modify `src/vendor/cigraph/`, `patch/`, `src/vendor/igraph_version.h`,
-  or any `scripts/vendor*.sh` file.
+- **Never** modify `src/vendor/cigraph/`, `src/vendor/igraph_version.h`,
+  or any `scripts/vendor*.sh` file. `patch/` **may** be modified.
 - **Never** amend commits that have already been pushed.
 - **Commit status to check**: context `rcc` (not the full check-run name).
 - **Branch target**: all pushes go to the `krlmlr` remote (`krlmlr/rigraph`).
