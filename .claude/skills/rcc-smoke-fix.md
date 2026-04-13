@@ -87,6 +87,8 @@ FIX_BRANCH="broken-${SHA}-dev"
 git checkout -B "$FIX_BRANCH" "$SHA"
 ```
 
+IMPORTANT: Keep the `-dev` suffix in the fix branch name. It ensures that each intermediate commit is checked on CI/CD.
+
 ### 4b. Install and run tests; collect failures
 
 ```bash
