@@ -50,19 +50,11 @@ COMMITS_OLDEST_FIRST=$(git log "krlmlr/$BRANCH" \
 
 FIRST_FAIL=""
 while IFS= read -r SHA; do
-  FIX_NAME="broken-${SHA}-dev"
-
-  # Skip if fix branch already exists
-  if echo "$BROKEN_BRANCHES" | grep -qxF "$FIX_NAME"; then
-    # This exact failure is already handled — nothing more to do for this branch
-    break
-  fi
-
   # Check the rcc commit-status for this SHA (context = "rcc")
   STATUS=$(gh api "repos/$REPO/commits/$SHA/statuses" \
     | jq -r '[.[] | select(.context == "rcc")] | first | .state // "none"')
 
-  echo "$BRANCH  $SHORT  $STATUS"
+  echo "$BRANCH  ${SHA:0:7}  $STATUS"
 
   if [[ "$STATUS" == "failure" ]]; then
     FIRST_FAIL="$SHA"
@@ -70,8 +62,13 @@ while IFS= read -r SHA; do
   fi
 done <<< "$COMMITS_OLDEST_FIRST"
 
+# Existence check comes AFTER finding the earliest failure.
+# Checking inside the loop would short-circuit on a later already-fixed commit
+# before reaching an earlier failure that still has no fix branch.
 if [[ -z "$FIRST_FAIL" ]]; then
-  echo "$BRANCH: no unhandled rcc failure — skip"
+  echo "$BRANCH: no rcc failure — skip"
+elif echo "$BROKEN_BRANCHES" | grep -qxF "broken-${FIRST_FAIL}-dev"; then
+  echo "$BRANCH: broken-${FIRST_FAIL}-dev already exists — skip"
 else
   echo "NEEDS_FIX  $BRANCH  $FIRST_FAIL"
 fi
@@ -160,9 +157,7 @@ git diff --cached --quiet || \
   git commit -m "fix: R code and snapshots for failing rcc at ${SHORT}"
 ```
 
-### 4f. Cherry-pick all remaining vendor commits from *-dev
-
-These commits only touch `src/vendor/` and are guaranteed to apply cleanly.
+### 4f. Cherry-pick all remaining commits from *-dev
 
 ```bash
 # Commits on the *-dev branch that come *after* the failing commit
@@ -174,8 +169,28 @@ for C in $REMAINING; do
 done
 ```
 
-If a cherry-pick conflict occurs on a **non-vendored** file, stop immediately
-and report the conflict — it is unexpected.
+Most of these commits are vendor-only and apply cleanly. However, the range
+**may include non-vendor fix commits** (e.g. a later glue-code repair that was
+pushed directly to the `*-dev` branch). That is expected and correct — those
+fixes address *subsequent* breakages that were introduced after our fix point
+and must be carried forward.
+
+Conflict handling:
+- Conflict on `src/vendor/cigraph/` or `src/vendor/igraph_version.h`: should
+  never happen; stop and report.
+- Conflict on any other file (glue code, `patch/`, `R/`, tests): the
+  cherry-picked commit is a fix commit whose change overlaps with our own fix.
+  Resolve by accepting the cherry-picked version (`git checkout --theirs`) or
+  by merging manually, then `git cherry-pick --continue`. Do **not** use
+  `--skip` unless the commit is genuinely a no-op after our fix.
+
+After all cherry-picks, re-run the final check:
+
+```bash
+R CMD check . --no-manual --as-cran 2>&1 | tail -20
+```
+
+to confirm the fully-assembled branch is clean.
 
 ### 4g. Push the fix branch
 
