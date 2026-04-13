@@ -47,6 +47,6 @@ V(g)$name <- letters[1:10]
 is_named(g)
 #> [1] TRUE
 neighbors(g, "a")
-#> + 2/10 vertices, named, from 45b1792:
+#> + 2/10 vertices, named, from 6fa48ed:
 #> [1] b j
 ```
