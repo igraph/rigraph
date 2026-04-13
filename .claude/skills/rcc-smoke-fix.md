@@ -18,7 +18,7 @@ fi
 git fetch krlmlr --force --prune --tags
 ```
 
-## Step 2 — Collect all branches and existing broken-* branches in one pass
+## Step 2 — Collect all branches and existing `broken-*` branches in one pass
 
 ```bash
 # All krlmlr remote-tracking branches that end in -dev
@@ -36,7 +36,7 @@ echo "=== Dev branches ===" && echo "$DEV_BRANCHES"
 echo "=== Broken branches (existing) ===" && echo "$BROKEN_BRANCHES"
 ```
 
-## Step 3 — For each *-dev branch, find the earliest failing commit
+## Step 3 — For each `*-dev` branch, find the earliest failing commit
 
 Iterate over every entry in `$DEV_BRANCHES`. For each `$BRANCH`:
 
@@ -54,7 +54,7 @@ while IFS= read -r SHA; do
   STATUS=$(gh api "repos/$REPO/commits/$SHA/statuses" \
     | jq -r '[.[] | select(.context == "rcc")] | first | .state // "none"')
 
-  echo "$BRANCH  ${SHA:0:7}  $STATUS"
+  echo "$BRANCH  ${SHA}  $STATUS"
 
   if [[ "$STATUS" == "failure" ]]; then
     FIRST_FAIL="$SHA"
@@ -76,7 +76,7 @@ fi
 
 Collect all `NEEDS_FIX  <branch>  <sha>` lines. Process them in order.
 
-## Step 4 — Create, fix, and push a broken-* branch
+## Step 4 — Create, fix, and push a `broken-*` branch
 
 Repeat for each `NEEDS_FIX` pair `($BRANCH, $SHA)`:
 
@@ -115,9 +115,11 @@ Apply fixes in this priority order (stop at the first level that resolves the fa
 
 4. **Snapshots** (`tests/testthat/_snaps/`) — accept updated snapshots only after
    the underlying behaviour is confirmed correct:
-   ```
+
+   ```bash
    Rscript -e 'testthat::snapshot_accept()'
    ```
+
    Or for a single test file: `testthat::snapshot_accept("test-name")`.
 
 5. **Tests** (`tests/testthat/test-*.R`) — change test code **only as a last
@@ -146,18 +148,18 @@ R CMD check . --no-manual --as-cran 2>&1 | tail -20
 ```
 
 Must show `Status: OK` or at most `1 NOTE` (pre-existing CRAN notes are fine).
-Fail if there are ERRORs or new WARNINGs.
+Fix any new ERRORs or new WARNINGs.
 
 ### 4e. Commit the fix
 
 ```bash
-git add R/ tests/ man/ NAMESPACE DESCRIPTION
+git add -- R/ tests/ man/ NAMESPACE DESCRIPTION
 # Only if there are staged changes:
 git diff --cached --quiet || \
   git commit -m "fix: R code and snapshots for failing rcc at ${SHORT}"
 ```
 
-### 4f. Cherry-pick all remaining commits from *-dev
+### 4f. Cherry-pick all remaining commits from `*-dev`
 
 ```bash
 # Commits on the *-dev branch that come *after* the failing commit
@@ -176,6 +178,7 @@ fixes address *subsequent* breakages that were introduced after our fix point
 and must be carried forward.
 
 Conflict handling:
+
 - Conflict on `src/vendor/cigraph/` or `src/vendor/igraph_version.h`: should
   never happen; stop and report.
 - Conflict on any other file (glue code, `patch/`, `R/`, tests): the
@@ -203,7 +206,7 @@ git push krlmlr "$FIX_BRANCH" --force-with-lease
 Return to Step 3 / Step 4 for the next `NEEDS_FIX` entry.
 When all are processed, report a summary:
 
-```
+```text
 Fixed: broken-<sha40>-dev (from main-dev, cherry-picked N commits)
 Fixed: broken-<sha40>-dev (from other-dev, cherry-picked M commits)
 Skipped (already fixed): broken-<sha40>-dev exists
