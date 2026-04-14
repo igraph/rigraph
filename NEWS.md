@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.3.9002
+
+## Continuous integration
+
+- Stress importance of branch naming.
+
+- Stress importance of branch naming.
+
+## Documentation
+
+- Add RCC smoke test fix workflow documentation (#2613).
+
+
 # igraph 2.2.3.9001
 
 ## Chore
