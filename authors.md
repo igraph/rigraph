@@ -39,7 +39,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/igraph/rigraph/blob/cran-2.2.99.9900/inst/CITATION)
+[`inst/CITATION`](https://github.com/igraph/rigraph/blob/main/inst/CITATION)
 
 Csárdi G, Nepusz T (2006). “The igraph software package for complex
 network research.” *InterJournal*, **Complex Systems**, 1695.
