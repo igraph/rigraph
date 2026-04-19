@@ -66,9 +66,9 @@ Vertex, edge and graph attributes
 g <- make_ring(10) %>%
   set_edge_attr("label", value = LETTERS[1:10])
 g
-#> IGRAPH fd1887c U--- 10 10 -- Ring graph
+#> IGRAPH cb15234 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), label (e/c)
-#> + edges from fd1887c:
+#> + edges from cb15234:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g)
 ```
