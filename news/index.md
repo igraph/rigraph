@@ -1,21 +1,200 @@
 # Changelog
 
-## igraph 2.2.3.9002
+## igraph 2.2.99.9900
 
-### Continuous integration
+### revdep
 
-- Stress importance of branch naming.
+- New problems.
 
-- Stress importance of branch naming.
+- Results.
 
-### Documentation
+### ai
 
-- Add RCC smoke test fix workflow documentation
-  ([\#2613](https://github.com/igraph/rigraph/issues/2613)).
+- Specify \[ci skip\].
 
-## igraph 2.2.3.9001
+- Merge \[ci skip\].
+
+- Tags \[ci skip\].
+
+- Prefer `GATTR` \[ci skip\].
+
+### Bug fixes
+
+- Error call in
+  [`with_vertex_()`](https://r.igraph.org/reference/with_vertex_.md)/[`with_edge_()`](https://r.igraph.org/reference/with_edge_.md)
+  should report [`make_()`](https://r.igraph.org/reference/make_.md),
+  not internal helper
+  ([\#2609](https://github.com/igraph/rigraph/issues/2609)).
+
+- Not all loops are plotted
+  ([\#2594](https://github.com/igraph/rigraph/issues/2594),
+  [\#2595](https://github.com/igraph/rigraph/issues/2595)).
+
+- Fix `hrg_game_impl()`
+  ([\#2577](https://github.com/igraph/rigraph/issues/2577),
+  [\#2578](https://github.com/igraph/rigraph/issues/2578)).
+
+- [`graphlet_proj()`](https://r.igraph.org/reference/graphlet_basis.md)
+  no longer erroneously assigns class “igraphHRG” to the returned graph.
+
+- Scrub file paths in error/warning snapshots and fix spacing
+  ([\#2538](https://github.com/igraph/rigraph/issues/2538)).
+
+- Support character labels in
+  [`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)
+  ([\#1283](https://github.com/igraph/rigraph/issues/1283),
+  [\#2432](https://github.com/igraph/rigraph/issues/2432)).
+
+- Fix uninitialized variable warnings in R 4.5 on Windows
+  ([\#2526](https://github.com/igraph/rigraph/issues/2526),
+  [\#2527](https://github.com/igraph/rigraph/issues/2527)).
+
+- Generated code is much closer to air formatting
+  ([\#1410](https://github.com/igraph/rigraph/issues/1410),
+  [\#2433](https://github.com/igraph/rigraph/issues/2433)).
+
+- Use `"weights"` edge attribute in
+  [`modularity()`](https://r.igraph.org/reference/modularity.igraph.md)
+  if available.
+
+- Safer `.dd` generation.
+
+- Fix
+  [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md)
+  crash when `weights` is a custom attribute name
+  ([\#915](https://github.com/igraph/rigraph/issues/915),
+  [\#2403](https://github.com/igraph/rigraph/issues/2403)).
+
+- Use `LC_ALL=C` instead of `LOCALE=C` in `deps.mk`
+  ([\#2446](https://github.com/igraph/rigraph/issues/2446),
+  [\#2447](https://github.com/igraph/rigraph/issues/2447)).
+
+- Fix matrix lists for output.
+
+### Features
+
+- Check that exactly one vertex is passed
+  ([\#2556](https://github.com/igraph/rigraph/issues/2556)).
+
+- Autogenerate BFS and DFS callback closures with unified TRUE=stop
+  convention ([\#2552](https://github.com/igraph/rigraph/issues/2552),
+  [\#2553](https://github.com/igraph/rigraph/issues/2553)).
+
+- Autogenerate `igraph_community_leading_eigenvector` with full
+  closure-based callback support
+  ([\#2554](https://github.com/igraph/rigraph/issues/2554),
+  [\#2555](https://github.com/igraph/rigraph/issues/2555)).
+
+- Autogenerate remaining simple functions
+  ([\#2550](https://github.com/igraph/rigraph/issues/2550),
+  [\#2551](https://github.com/igraph/rigraph/issues/2551)).
+
+- Autogenerate all callback non-SPARSEMAT functions with unified
+  dual-mode API
+  ([\#2533](https://github.com/igraph/rigraph/issues/2533),
+  [\#2534](https://github.com/igraph/rigraph/issues/2534)).
+
+- Autogenerate sparse matrix constructor functions with type-safe
+  conversions ([\#2532](https://github.com/igraph/rigraph/issues/2532)).
+
+- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable
+  autogeneration of \*\_many functions
+  ([\#2531](https://github.com/igraph/rigraph/issues/2531),
+  [\#2540](https://github.com/igraph/rigraph/issues/2540)).
+
+- Improve formatting of error messages from C
+  ([\#2202](https://github.com/igraph/rigraph/issues/2202),
+  [\#2515](https://github.com/igraph/rigraph/issues/2515)).
+
+- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128
+  to 19 ([\#2484](https://github.com/igraph/rigraph/issues/2484),
+  [\#2485](https://github.com/igraph/rigraph/issues/2485)).
+
+- Change constructors to use explicit arguments
+  ([\#2466](https://github.com/igraph/rigraph/issues/2466),
+  [\#2467](https://github.com/igraph/rigraph/issues/2467)).
+
+- Implement generic mechanism for
+  [`layout_()`](https://r.igraph.org/reference/layout_.md) modifiers
+  ([\#1473](https://github.com/igraph/rigraph/issues/1473),
+  [\#2435](https://github.com/igraph/rigraph/issues/2435)).
+
+- Autogenerate `igraph_motifs_randesu_callback()` using closure approach
+  ([\#2464](https://github.com/igraph/rigraph/issues/2464),
+  [\#2465](https://github.com/igraph/rigraph/issues/2465)).
+
+- [`graphlet_basis()`](https://r.igraph.org/reference/graphlet_basis.md)
+  returns a list of vertices in the `"cliques"` component. Replace
+  `.Call(Rx_...)` with `_impl` functions for autogenerated entrypoints
+  ([\#2470](https://github.com/igraph/rigraph/issues/2470),
+  [\#2472](https://github.com/igraph/rigraph/issues/2472)).
+
+- Use snake_case in arguments to `_impl` functions
+  ([\#2461](https://github.com/igraph/rigraph/issues/2461),
+  [\#2462](https://github.com/igraph/rigraph/issues/2462)).
+
+- Add [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md) to
+  expose `igraph_wheel()`
+  ([\#1561](https://github.com/igraph/rigraph/issues/1561),
+  [\#2409](https://github.com/igraph/rigraph/issues/2409)).
+
+- Add
+  [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  function ([\#1350](https://github.com/igraph/rigraph/issues/1350),
+  [\#2413](https://github.com/igraph/rigraph/issues/2413)).
+
+- Add
+  [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  and [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+  graph constructors
+  ([\#1562](https://github.com/igraph/rigraph/issues/1562),
+  [\#2406](https://github.com/igraph/rigraph/issues/2406)).
+
+- Add
+  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) to
+  R interface ([\#1379](https://github.com/igraph/rigraph/issues/1379),
+  [\#2414](https://github.com/igraph/rigraph/issues/2414)).
+
+- Add
+  [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
+  to expose `igraph_circulant()`
+  ([\#1563](https://github.com/igraph/rigraph/issues/1563),
+  [\#2407](https://github.com/igraph/rigraph/issues/2407)).
+
+- Add [`mean_degree()`](https://r.igraph.org/reference/degree.md) to R
+  ([\#1380](https://github.com/igraph/rigraph/issues/1380),
+  [\#2415](https://github.com/igraph/rigraph/issues/2415)).
+
+- [`vertices()`](https://r.igraph.org/reference/vertex.md) errors on
+  duplicate attribute names
+  ([\#1248](https://github.com/igraph/rigraph/issues/1248),
+  [\#2430](https://github.com/igraph/rigraph/issues/2430)).
+
+- Add
+  [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  function to R
+  ([\#1349](https://github.com/igraph/rigraph/issues/1349),
+  [\#2412](https://github.com/igraph/rigraph/issues/2412)).
+
+- Add autogeneration for all C functions currently in use
+  ([\#2424](https://github.com/igraph/rigraph/issues/2424),
+  [\#2442](https://github.com/igraph/rigraph/issues/2442)).
+
+- Add
+  [`invalidate_cache()`](https://r.igraph.org/reference/invalidate_cache.md)
+  to R interface
+  ([\#1387](https://github.com/igraph/rigraph/issues/1387),
+  [\#2416](https://github.com/igraph/rigraph/issues/2416)).
+
+- All arguments in calls to `_impl()` functions are named
+  ([\#2423](https://github.com/igraph/rigraph/issues/2423)).
 
 ### Chore
+
+- Remove [`console()`](https://r.igraph.org/reference/console.md) and
+  [`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+  ([\#39](https://github.com/igraph/rigraph/issues/39),
+  [\#2187](https://github.com/igraph/rigraph/issues/2187)).
 
 - Bump.
 
@@ -24,7 +203,300 @@
 - Adapt vendoring code to match duckdb/duckdb-r
   ([\#2611](https://github.com/igraph/rigraph/issues/2611)).
 
+- Remove stale TODOs in `rinterface_extra.c`
+  ([\#1454](https://github.com/igraph/rigraph/issues/1454),
+  [\#2601](https://github.com/igraph/rigraph/issues/2601)).
+
+- Avoid non-API calls to `Rf_findVar()`, `Rf_findVarInFrame()`, and
+  `R_UnboundValue`
+  ([\#2603](https://github.com/igraph/rigraph/issues/2603),
+  [\#2604](https://github.com/igraph/rigraph/issues/2604)).
+
+- Replace last calls to [`stop()`](https://rdrr.io/r/base/stop.html)
+  ([\#731](https://github.com/igraph/rigraph/issues/731),
+  [\#2588](https://github.com/igraph/rigraph/issues/2588)).
+
+- Bump.
+
+- Fix roxygen2 deps registration
+  ([\#2579](https://github.com/igraph/rigraph/issues/2579),
+  [\#2580](https://github.com/igraph/rigraph/issues/2580)).
+
+- Revdepcheck results.
+
+- Indent.
+
+- Remove function definitions that are not overridden.
+
+- Harmonize IGNORE in function declarations.
+
+- Formatting.
+
+- Consistent checks.
+
+- No roclet needed to share the tag code
+  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
+
+- `Rx_` prefix also for RC-only ignored functions.
+
+- Use `Rx_` and similar prefixes consistently
+  ([\#2478](https://github.com/igraph/rigraph/issues/2478)).
+
+- Rename `R_` to `Rx_` for all
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) functions
+  outside `aaa-auto.R`
+  ([\#2476](https://github.com/igraph/rigraph/issues/2476),
+  [\#2477](https://github.com/igraph/rigraph/issues/2477)).
+
+- Remove dead code.
+
+- Use autogenerated `_impl` functions instead of
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
+  ([\#2434](https://github.com/igraph/rigraph/issues/2434),
+  [\#2471](https://github.com/igraph/rigraph/issues/2471)).
+
+- Remove unused finalizer calls.
+
+- Auto-update from GitHub Actions
+  ([\#2473](https://github.com/igraph/rigraph/issues/2473)).
+
+- Document [`.Call()`](https://rdrr.io/r/base/CallExternal.html) usage
+  \[ci skip\].
+
+- Rename to `igraph_arg_match()`, instructions.
+
+- Fix autogeneration for writing functions.
+
+- Sync autogen.
+
+- Auto-update from GitHub Actions
+  ([\#2454](https://github.com/igraph/rigraph/issues/2454)).
+
+- Format.
+
+- Ensure args are named.
+
+- Use `Rx_` prefix for manually generated functions.
+
+- Clarify error testing preference \[ci skip\].
+
+- Ignore \[ci skip\].
+
+- Use `_impl` variants instead of inline
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) for five
+  functions with changed C signatures
+  ([\#2428](https://github.com/igraph/rigraph/issues/2428),
+  [\#2429](https://github.com/igraph/rigraph/issues/2429)).
+
+- Format \[ci skip\].
+
+- Expand remaining `_impl` aliases
+  ([\#2422](https://github.com/igraph/rigraph/issues/2422)).
+
+- Remove unused `NTIMER` and `NPRINT` macro definitions
+  ([\#1095](https://github.com/igraph/rigraph/issues/1095),
+  [\#2405](https://github.com/igraph/rigraph/issues/2405)).
+
+- Cleanup.
+
+- Request math notation.
+
+#### deps
+
+- Bump jinja2 from 3.1.2 to 3.1.6 in /tools/py-stimulus
+  ([\#2401](https://github.com/igraph/rigraph/issues/2401)).
+
+- Replace `_impl` aliases in `R/flow.R`
+  ([\#2347](https://github.com/igraph/rigraph/issues/2347),
+  [\#2379](https://github.com/igraph/rigraph/issues/2379)).
+
+- Autogenerated file looks more like as if it was formatted with `air`
+  ([\#2395](https://github.com/igraph/rigraph/issues/2395)).
+
+- New `switch_igraph_arg()` to avoid the need for default arguments.
+
+- Fix isomorphism callback function.
+
+- Replace `_impl` aliases with explicit wrapper functions in
+  `R/bipartite.R`
+  ([\#2334](https://github.com/igraph/rigraph/issues/2334),
+  [\#2361](https://github.com/igraph/rigraph/issues/2361)).
+
+- Replace \_impl aliases with explicit wrapper functions in
+  R/centralization.R
+  ([\#2336](https://github.com/igraph/rigraph/issues/2336),
+  [\#2360](https://github.com/igraph/rigraph/issues/2360)).
+
+- Replace `_impl` aliases with explicit wrapper functions in
+  `R/cliques.R`
+  ([\#2337](https://github.com/igraph/rigraph/issues/2337),
+  [\#2363](https://github.com/igraph/rigraph/issues/2363)).
+
+- Replace `_impl` function aliases with explicit wrappers in
+  `R/centrality.R`
+  ([\#2335](https://github.com/igraph/rigraph/issues/2335),
+  [\#2362](https://github.com/igraph/rigraph/issues/2362)).
+
+- Replace `_impl` alias with explicit wrapper in `R/coloring.R`
+  ([\#2338](https://github.com/igraph/rigraph/issues/2338),
+  [\#2364](https://github.com/igraph/rigraph/issues/2364)).
+
+- Embed Stimulus sources, add docs.
+
+- Replace `_impl` aliases with explicit wrappers in R/assortativity.R
+  ([\#2332](https://github.com/igraph/rigraph/issues/2332),
+  [\#2333](https://github.com/igraph/rigraph/issues/2333)).
+
+- Auto-update from GitHub Actions
+  ([\#2331](https://github.com/igraph/rigraph/issues/2331)).
+
+- Auto-update from GitHub Actions
+  ([\#2330](https://github.com/igraph/rigraph/issues/2330)).
+
+- Use autogen-impl functions for 3 motifs functions
+  ([\#2152](https://github.com/igraph/rigraph/issues/2152)).
+
+- Fix roxygen2 deps registration
+  ([\#2579](https://github.com/igraph/rigraph/issues/2579),
+  [\#2580](https://github.com/igraph/rigraph/issues/2580)).
+
+- Revdepcheck results.
+
+- Indent.
+
+- Remove function definitions that are not overridden.
+
+- Harmonize IGNORE in function declarations.
+
+- Formatting.
+
+- Consistent checks.
+
+- No roclet needed to share the tag code
+  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
+
+- `Rx_` prefix also for RC-only ignored functions.
+
+- Use `Rx_` and similar prefixes consistently
+  ([\#2478](https://github.com/igraph/rigraph/issues/2478)).
+
+- Rename `R_` to `Rx_` for all
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) functions
+  outside `aaa-auto.R`
+  ([\#2476](https://github.com/igraph/rigraph/issues/2476),
+  [\#2477](https://github.com/igraph/rigraph/issues/2477)).
+
+- Remove dead code.
+
+- Use autogenerated `_impl` functions instead of
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
+  ([\#2434](https://github.com/igraph/rigraph/issues/2434),
+  [\#2471](https://github.com/igraph/rigraph/issues/2471)).
+
+- Remove unused finalizer calls.
+
+- Auto-update from GitHub Actions
+  ([\#2473](https://github.com/igraph/rigraph/issues/2473)).
+
+- Document [`.Call()`](https://rdrr.io/r/base/CallExternal.html) usage
+  \[ci skip\].
+
+- Rename to `igraph_arg_match()`, instructions.
+
+- Fix autogeneration for writing functions.
+
+- Sync autogen.
+
+- Auto-update from GitHub Actions
+  ([\#2454](https://github.com/igraph/rigraph/issues/2454)).
+
+- Format.
+
+- Ensure args are named.
+
+- Use `Rx_` prefix for manually generated functions.
+
+- Clarify error testing preference \[ci skip\].
+
+- Ignore \[ci skip\].
+
+- Use `_impl` variants instead of inline
+  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) for five
+  functions with changed C signatures
+  ([\#2428](https://github.com/igraph/rigraph/issues/2428),
+  [\#2429](https://github.com/igraph/rigraph/issues/2429)).
+
+- Format \[ci skip\].
+
+- Expand remaining `_impl` aliases
+  ([\#2422](https://github.com/igraph/rigraph/issues/2422)).
+
+- Remove unused `NTIMER` and `NPRINT` macro definitions
+  ([\#1095](https://github.com/igraph/rigraph/issues/1095),
+  [\#2405](https://github.com/igraph/rigraph/issues/2405)).
+
+- Cleanup.
+
+- Request math notation.
+
+#### deps
+
+- Bump jinja2 from 3.1.2 to 3.1.6 in /tools/py-stimulus
+  ([\#2401](https://github.com/igraph/rigraph/issues/2401)).
+
+- Replace `_impl` aliases in `R/flow.R`
+  ([\#2347](https://github.com/igraph/rigraph/issues/2347),
+  [\#2379](https://github.com/igraph/rigraph/issues/2379)).
+
+- Autogenerated file looks more like as if it was formatted with `air`
+  ([\#2395](https://github.com/igraph/rigraph/issues/2395)).
+
+- New `switch_igraph_arg()` to avoid the need for default arguments.
+
+- Fix isomorphism callback function.
+
+- Replace `_impl` aliases with explicit wrapper functions in
+  `R/bipartite.R`
+  ([\#2334](https://github.com/igraph/rigraph/issues/2334),
+  [\#2361](https://github.com/igraph/rigraph/issues/2361)).
+
+- Replace \_impl aliases with explicit wrapper functions in
+  R/centralization.R
+  ([\#2336](https://github.com/igraph/rigraph/issues/2336),
+  [\#2360](https://github.com/igraph/rigraph/issues/2360)).
+
+- Replace `_impl` aliases with explicit wrapper functions in
+  `R/cliques.R`
+  ([\#2337](https://github.com/igraph/rigraph/issues/2337),
+  [\#2363](https://github.com/igraph/rigraph/issues/2363)).
+
+- Replace `_impl` function aliases with explicit wrappers in
+  `R/centrality.R`
+  ([\#2335](https://github.com/igraph/rigraph/issues/2335),
+  [\#2362](https://github.com/igraph/rigraph/issues/2362)).
+
+- Replace `_impl` alias with explicit wrapper in `R/coloring.R`
+  ([\#2338](https://github.com/igraph/rigraph/issues/2338),
+  [\#2364](https://github.com/igraph/rigraph/issues/2364)).
+
+- Embed Stimulus sources, add docs.
+
+- Replace `_impl` aliases with explicit wrappers in R/assortativity.R
+  ([\#2332](https://github.com/igraph/rigraph/issues/2332),
+  [\#2333](https://github.com/igraph/rigraph/issues/2333)).
+
+- Auto-update from GitHub Actions
+  ([\#2331](https://github.com/igraph/rigraph/issues/2331)).
+
+- Auto-update from GitHub Actions
+  ([\#2330](https://github.com/igraph/rigraph/issues/2330)).
+
+- Use autogen-impl functions for 3 motifs functions
+  ([\#2152](https://github.com/igraph/rigraph/issues/2152)).
+
 ### Continuous integration
+
+- Stress importance of branch naming.
 
 - More permissions.
 
@@ -38,51 +510,66 @@
 
 - Further adapt vendoring logic to duckdb.
 
-## igraph 2.2.2.9006
+- Push pkgdown on schedule.
 
-### Bug fixes
+- Use default R version for revdepchecks.
 
-- Error call in
-  [`with_vertex_()`](https://r.igraph.org/reference/with_vertex_.md)/[`with_edge_()`](https://r.igraph.org/reference/with_edge_.md)
-  should report [`make_()`](https://r.igraph.org/reference/make_.md),
-  not internal helper
-  ([\#2609](https://github.com/igraph/rigraph/issues/2609)).
+- Skip tests for old R.
 
-### Chore
+- Tweaks ([\#2517](https://github.com/igraph/rigraph/issues/2517)).
 
-- Remove stale TODOs in `rinterface_extra.c`
-  ([\#1454](https://github.com/igraph/rigraph/issues/1454),
-  [\#2601](https://github.com/igraph/rigraph/issues/2601)).
+- Test all R versions on branches that start with cran-
+  ([\#2516](https://github.com/igraph/rigraph/issues/2516)).
 
-### Testing
+- Install binaries from r-universe for dev workflow
+  ([\#2498](https://github.com/igraph/rigraph/issues/2498)).
 
-- Add snapshot test for attributes
-  ([\#2607](https://github.com/igraph/rigraph/issues/2607)).
+- Skip failing Windows tests.
 
-### Uncategorized
+- Fix reviewdog and add commenting workflow
+  ([\#2493](https://github.com/igraph/rigraph/issues/2493)).
 
-- Remove calls to non-API functions.
+- Use workflows for fledge
+  ([\#2490](https://github.com/igraph/rigraph/issues/2490)).
 
-## igraph 2.2.2.9005
+- Sync ([\#2488](https://github.com/igraph/rigraph/issues/2488)).
 
-### Chore
+- Fix final status as set by Copilot \[ci skip\].
 
-- Avoid non-API calls to `Rf_findVar()`, `Rf_findVarInFrame()`, and
-  `R_UnboundValue`
-  ([\#2603](https://github.com/igraph/rigraph/issues/2603),
-  [\#2604](https://github.com/igraph/rigraph/issues/2604)).
+- Run daily vendoring to avoid noise \[ci skip\].
 
-## igraph 2.2.2.9004
+- Snapshots \[ci skip\].
 
-### Bug fixes
+- Use proper actor name \[ci skip\].
 
-- Not all loops are plotted
-  ([\#2594](https://github.com/igraph/rigraph/issues/2594),
-  [\#2595](https://github.com/igraph/rigraph/issues/2595)).
+- Reduce contention by running big matrices overnight.
 
-## igraph 2.2.2.9003
+- Add workflow to auto-assign to Copilot.
+
+- Run running sanitizer only on cran branches to avoid pipeline
+  contention.
+
+- Install air for Copilot.
+
+- Update status directly for Copilot.
+
+- Remove Claude assistant.
+
+- Avoid passing head branch for status update.
+
+- Always update status after run, in some cases workflows push to the
+  branch.
+
+- Detail.
+
+- Deterministic setup for Copilot.
+
+- Use reviewdog only for foreign PRs.
 
 ### Documentation
+
+- Add RCC smoke test fix workflow documentation
+  ([\#2613](https://github.com/igraph/rigraph/issues/2613)).
 
 - Fixes to the reference index
   ([\#2590](https://github.com/igraph/rigraph/issues/2590),
@@ -91,389 +578,9 @@
 - Go back to formatting functions correctly
   ([\#2591](https://github.com/igraph/rigraph/issues/2591)).
 
-## igraph 2.2.2.9002
-
-### Chore
-
-- Remove [`console()`](https://r.igraph.org/reference/console.md) and
-  [`tkplot()`](https://r.igraph.org/reference/tkplot.md)
-  ([\#39](https://github.com/igraph/rigraph/issues/39),
-  [\#2187](https://github.com/igraph/rigraph/issues/2187)).
-
-- Replace last calls to [`stop()`](https://rdrr.io/r/base/stop.html)
-  ([\#731](https://github.com/igraph/rigraph/issues/731),
-  [\#2588](https://github.com/igraph/rigraph/issues/2588)).
-
-### Documentation
-
 - List R Consortium as fnd with its ROR ID
   ([\#2587](https://github.com/igraph/rigraph/issues/2587)).
 
-## igraph 2.2.2.9001
-
-### Bug fixes
-
-- Fix `hrg_game_impl()`
-  ([\#2577](https://github.com/igraph/rigraph/issues/2577),
-  [\#2578](https://github.com/igraph/rigraph/issues/2578)).
-
-- [`graphlet_proj()`](https://r.igraph.org/reference/graphlet_basis.md)
-  no longer erroneously assigns class “igraphHRG” to the returned graph.
-
-- Scrub file paths in error/warning snapshots and fix spacing
-  ([\#2538](https://github.com/igraph/rigraph/issues/2538)).
-
-- Support character labels in
-  [`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)
-  ([\#1283](https://github.com/igraph/rigraph/issues/1283),
-  [\#2432](https://github.com/igraph/rigraph/issues/2432)).
-
-- Fix uninitialized variable warnings in R 4.5 on Windows
-  ([\#2526](https://github.com/igraph/rigraph/issues/2526),
-  [\#2527](https://github.com/igraph/rigraph/issues/2527)).
-
-- Generated code is much closer to air formatting
-  ([\#1410](https://github.com/igraph/rigraph/issues/1410),
-  [\#2433](https://github.com/igraph/rigraph/issues/2433)).
-
-- Use `"weights"` edge attribute in
-  [`modularity()`](https://r.igraph.org/reference/modularity.igraph.md)
-  if available.
-
-- Safer `.dd` generation.
-
-- Fix
-  [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md)
-  crash when `weights` is a custom attribute name
-  ([\#915](https://github.com/igraph/rigraph/issues/915),
-  [\#2403](https://github.com/igraph/rigraph/issues/2403)).
-
-- Use `LC_ALL=C` instead of `LOCALE=C` in `deps.mk`
-  ([\#2446](https://github.com/igraph/rigraph/issues/2446),
-  [\#2447](https://github.com/igraph/rigraph/issues/2447)).
-
-- Fix matrix lists for output.
-
-### Features
-
-- Check that exactly one vertex is passed
-  ([\#2556](https://github.com/igraph/rigraph/issues/2556)).
-
-- Autogenerate BFS and DFS callback closures with unified TRUE=stop
-  convention ([\#2552](https://github.com/igraph/rigraph/issues/2552),
-  [\#2553](https://github.com/igraph/rigraph/issues/2553)).
-
-- Autogenerate `igraph_community_leading_eigenvector` with full
-  closure-based callback support
-  ([\#2554](https://github.com/igraph/rigraph/issues/2554),
-  [\#2555](https://github.com/igraph/rigraph/issues/2555)).
-
-- Autogenerate remaining simple functions
-  ([\#2550](https://github.com/igraph/rigraph/issues/2550),
-  [\#2551](https://github.com/igraph/rigraph/issues/2551)).
-
-- Autogenerate all callback non-SPARSEMAT functions with unified
-  dual-mode API
-  ([\#2533](https://github.com/igraph/rigraph/issues/2533),
-  [\#2534](https://github.com/igraph/rigraph/issues/2534)).
-
-- Autogenerate sparse matrix constructor functions with type-safe
-  conversions ([\#2532](https://github.com/igraph/rigraph/issues/2532)).
-
-- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable
-  autogeneration of \*\_many functions
-  ([\#2531](https://github.com/igraph/rigraph/issues/2531),
-  [\#2540](https://github.com/igraph/rigraph/issues/2540)).
-
-- Improve formatting of error messages from C
-  ([\#2202](https://github.com/igraph/rigraph/issues/2202),
-  [\#2515](https://github.com/igraph/rigraph/issues/2515)).
-
-- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128
-  to 19 ([\#2484](https://github.com/igraph/rigraph/issues/2484),
-  [\#2485](https://github.com/igraph/rigraph/issues/2485)).
-
-- Change constructors to use explicit arguments
-  ([\#2466](https://github.com/igraph/rigraph/issues/2466),
-  [\#2467](https://github.com/igraph/rigraph/issues/2467)).
-
-- Implement generic mechanism for
-  [`layout_()`](https://r.igraph.org/reference/layout_.md) modifiers
-  ([\#1473](https://github.com/igraph/rigraph/issues/1473),
-  [\#2435](https://github.com/igraph/rigraph/issues/2435)).
-
-- Autogenerate `igraph_motifs_randesu_callback()` using closure approach
-  ([\#2464](https://github.com/igraph/rigraph/issues/2464),
-  [\#2465](https://github.com/igraph/rigraph/issues/2465)).
-
-- [`graphlet_basis()`](https://r.igraph.org/reference/graphlet_basis.md)
-  returns a list of vertices in the `"cliques"` component. Replace
-  `.Call(Rx_...)` with `_impl` functions for autogenerated entrypoints
-  ([\#2470](https://github.com/igraph/rigraph/issues/2470),
-  [\#2472](https://github.com/igraph/rigraph/issues/2472)).
-
-- Use snake_case in arguments to `_impl` functions
-  ([\#2461](https://github.com/igraph/rigraph/issues/2461),
-  [\#2462](https://github.com/igraph/rigraph/issues/2462)).
-
-- Add [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md) to
-  expose `igraph_wheel()`
-  ([\#1561](https://github.com/igraph/rigraph/issues/1561),
-  [\#2409](https://github.com/igraph/rigraph/issues/2409)).
-
-- Add
-  [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
-  function ([\#1350](https://github.com/igraph/rigraph/issues/1350),
-  [\#2413](https://github.com/igraph/rigraph/issues/2413)).
-
-- Add
-  [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
-  and [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
-  graph constructors
-  ([\#1562](https://github.com/igraph/rigraph/issues/1562),
-  [\#2406](https://github.com/igraph/rigraph/issues/2406)).
-
-- Add
-  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) to
-  R interface ([\#1379](https://github.com/igraph/rigraph/issues/1379),
-  [\#2414](https://github.com/igraph/rigraph/issues/2414)).
-
-- Add
-  [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
-  to expose `igraph_circulant()`
-  ([\#1563](https://github.com/igraph/rigraph/issues/1563),
-  [\#2407](https://github.com/igraph/rigraph/issues/2407)).
-
-- Add [`mean_degree()`](https://r.igraph.org/reference/degree.md) to R
-  ([\#1380](https://github.com/igraph/rigraph/issues/1380),
-  [\#2415](https://github.com/igraph/rigraph/issues/2415)).
-
-- [`vertices()`](https://r.igraph.org/reference/vertex.md) errors on
-  duplicate attribute names
-  ([\#1248](https://github.com/igraph/rigraph/issues/1248),
-  [\#2430](https://github.com/igraph/rigraph/issues/2430)).
-
-- Add
-  [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
-  function to R
-  ([\#1349](https://github.com/igraph/rigraph/issues/1349),
-  [\#2412](https://github.com/igraph/rigraph/issues/2412)).
-
-- Add autogeneration for all C functions currently in use
-  ([\#2424](https://github.com/igraph/rigraph/issues/2424),
-  [\#2442](https://github.com/igraph/rigraph/issues/2442)).
-
-- Add
-  [`invalidate_cache()`](https://r.igraph.org/reference/invalidate_cache.md)
-  to R interface
-  ([\#1387](https://github.com/igraph/rigraph/issues/1387),
-  [\#2416](https://github.com/igraph/rigraph/issues/2416)).
-
-- All arguments in calls to `_impl()` functions are named
-  ([\#2423](https://github.com/igraph/rigraph/issues/2423)).
-
-### Chore
-
-- Bump.
-
-- Fix roxygen2 deps registration
-  ([\#2579](https://github.com/igraph/rigraph/issues/2579),
-  [\#2580](https://github.com/igraph/rigraph/issues/2580)).
-
-- Revdepcheck results.
-
-- Indent.
-
-- Remove function definitions that are not overridden.
-
-- Harmonize IGNORE in function declarations.
-
-- Formatting.
-
-- Consistent checks.
-
-- No roclet needed to share the tag code
-  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
-
-- `Rx_` prefix also for RC-only ignored functions.
-
-- Use `Rx_` and similar prefixes consistently
-  ([\#2478](https://github.com/igraph/rigraph/issues/2478)).
-
-- Rename `R_` to `Rx_` for all
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) functions
-  outside `aaa-auto.R`
-  ([\#2476](https://github.com/igraph/rigraph/issues/2476),
-  [\#2477](https://github.com/igraph/rigraph/issues/2477)).
-
-- Remove dead code.
-
-- Use autogenerated `_impl` functions instead of
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
-  ([\#2434](https://github.com/igraph/rigraph/issues/2434),
-  [\#2471](https://github.com/igraph/rigraph/issues/2471)).
-
-- Remove unused finalizer calls.
-
-- Auto-update from GitHub Actions
-  ([\#2473](https://github.com/igraph/rigraph/issues/2473)).
-
-- Document [`.Call()`](https://rdrr.io/r/base/CallExternal.html) usage
-  \[ci skip\].
-
-- Rename to `igraph_arg_match()`, instructions.
-
-- Fix autogeneration for writing functions.
-
-- Sync autogen.
-
-- Auto-update from GitHub Actions
-  ([\#2454](https://github.com/igraph/rigraph/issues/2454)).
-
-- Format.
-
-- Ensure args are named.
-
-- Use `Rx_` prefix for manually generated functions.
-
-- Clarify error testing preference \[ci skip\].
-
-- Ignore \[ci skip\].
-
-- Use `_impl` variants instead of inline
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) for five
-  functions with changed C signatures
-  ([\#2428](https://github.com/igraph/rigraph/issues/2428),
-  [\#2429](https://github.com/igraph/rigraph/issues/2429)).
-
-- Format \[ci skip\].
-
-- Expand remaining `_impl` aliases
-  ([\#2422](https://github.com/igraph/rigraph/issues/2422)).
-
-- Remove unused `NTIMER` and `NPRINT` macro definitions
-  ([\#1095](https://github.com/igraph/rigraph/issues/1095),
-  [\#2405](https://github.com/igraph/rigraph/issues/2405)).
-
-- Cleanup.
-
-- Request math notation.
-
-#### deps
-
-- Bump jinja2 from 3.1.2 to 3.1.6 in /tools/py-stimulus
-  ([\#2401](https://github.com/igraph/rigraph/issues/2401)).
-
-- Replace `_impl` aliases in `R/flow.R`
-  ([\#2347](https://github.com/igraph/rigraph/issues/2347),
-  [\#2379](https://github.com/igraph/rigraph/issues/2379)).
-
-- Autogenerated file looks more like as if it was formatted with `air`
-  ([\#2395](https://github.com/igraph/rigraph/issues/2395)).
-
-- New `switch_igraph_arg()` to avoid the need for default arguments.
-
-- Fix isomorphism callback function.
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/bipartite.R`
-  ([\#2334](https://github.com/igraph/rigraph/issues/2334),
-  [\#2361](https://github.com/igraph/rigraph/issues/2361)).
-
-- Replace \_impl aliases with explicit wrapper functions in
-  R/centralization.R
-  ([\#2336](https://github.com/igraph/rigraph/issues/2336),
-  [\#2360](https://github.com/igraph/rigraph/issues/2360)).
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/cliques.R`
-  ([\#2337](https://github.com/igraph/rigraph/issues/2337),
-  [\#2363](https://github.com/igraph/rigraph/issues/2363)).
-
-- Replace `_impl` function aliases with explicit wrappers in
-  `R/centrality.R`
-  ([\#2335](https://github.com/igraph/rigraph/issues/2335),
-  [\#2362](https://github.com/igraph/rigraph/issues/2362)).
-
-- Replace `_impl` alias with explicit wrapper in `R/coloring.R`
-  ([\#2338](https://github.com/igraph/rigraph/issues/2338),
-  [\#2364](https://github.com/igraph/rigraph/issues/2364)).
-
-- Embed Stimulus sources, add docs.
-
-- Replace `_impl` aliases with explicit wrappers in R/assortativity.R
-  ([\#2332](https://github.com/igraph/rigraph/issues/2332),
-  [\#2333](https://github.com/igraph/rigraph/issues/2333)).
-
-- Auto-update from GitHub Actions
-  ([\#2331](https://github.com/igraph/rigraph/issues/2331)).
-
-- Auto-update from GitHub Actions
-  ([\#2330](https://github.com/igraph/rigraph/issues/2330)).
-
-- Use autogen-impl functions for 3 motifs functions
-  ([\#2152](https://github.com/igraph/rigraph/issues/2152)).
-
-### Continuous integration
-
-- Push pkgdown on schedule.
-
-- Use default R version for revdepchecks.
-
-- Skip tests for old R.
-
-- Tweaks ([\#2517](https://github.com/igraph/rigraph/issues/2517)).
-
-- Test all R versions on branches that start with cran-
-  ([\#2516](https://github.com/igraph/rigraph/issues/2516)).
-
-- Install binaries from r-universe for dev workflow
-  ([\#2498](https://github.com/igraph/rigraph/issues/2498)).
-
-- Skip failing Windows tests.
-
-- Fix reviewdog and add commenting workflow
-  ([\#2493](https://github.com/igraph/rigraph/issues/2493)).
-
-- Use workflows for fledge
-  ([\#2490](https://github.com/igraph/rigraph/issues/2490)).
-
-- Sync ([\#2488](https://github.com/igraph/rigraph/issues/2488)).
-
-- Fix final status as set by Copilot \[ci skip\].
-
-- Run daily vendoring to avoid noise \[ci skip\].
-
-- Snapshots \[ci skip\].
-
-- Use proper actor name \[ci skip\].
-
-- Reduce contention by running big matrices overnight.
-
-- Add workflow to auto-assign to Copilot.
-
-- Run running sanitizer only on cran branches to avoid pipeline
-  contention.
-
-- Install air for Copilot.
-
-- Update status directly for Copilot.
-
-- Remove Claude assistant.
-
-- Avoid passing head branch for status update.
-
-- Always update status after run, in some cases workflows push to the
-  branch.
-
-- Detail.
-
-- Deterministic setup for Copilot.
-
-- Use reviewdog only for foreign PRs.
-
-### Documentation
-
 - Workaround for too much autolinking
   ([\#2582](https://github.com/igraph/rigraph/issues/2582)).
 
@@ -485,14 +592,6 @@
   [\#2536](https://github.com/igraph/rigraph/issues/2536)).
 
 - Review remaining IGNORE declarations in Stimulus.
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
 
 - More instructions \[ci skip\].
 
@@ -582,6 +681,9 @@
 
 ### Testing
 
+- Add snapshot test for attributes
+  ([\#2607](https://github.com/igraph/rigraph/issues/2607)).
+
 - Snapshot updates for rcc-smoke (null)
   ([\#2558](https://github.com/igraph/rigraph/issues/2558)).
 
@@ -597,689 +699,14 @@
 - Improve centralitystress test
   ([\#2214](https://github.com/igraph/rigraph/issues/2214)).
 
-### revdep
-
-- New problems.
-
-- Results.
-
-### ai
-
-- Specify \[ci skip\].
-
-- Merge \[ci skip\].
-
-- Tags \[ci skip\].
-
-- Prefer `GATTR` \[ci skip\].
-
 ### Uncategorized
+
+- Remove calls to non-API functions.
 
 - Remove calls to unused APIs only used in the conversion of very old
   graph objects.
 
 - Merge branch ‘cran-2.2.1’.
-
-## igraph 2.2.1.9024
-
-### Documentation
-
-- Workaround for too much autolinking
-  ([\#2582](https://github.com/igraph/rigraph/issues/2582)).
-
-## igraph 2.2.1.9023
-
-- Remove calls to unused APIs only used in the conversion of very old
-  graph objects.
-
-## igraph 2.2.1.9022
-
-### Continuous integration
-
-- Push pkgdown on schedule.
-
-## igraph 2.2.1.9021
-
-### Bug fixes
-
-- Fix `hrg_game_impl()`
-  ([\#2577](https://github.com/igraph/rigraph/issues/2577),
-  [\#2578](https://github.com/igraph/rigraph/issues/2578)).
-
-- [`graphlet_proj()`](https://r.igraph.org/reference/graphlet_basis.md)
-  no longer erroneously assigns class “igraphHRG” to the returned graph.
-
-### Features
-
-- Check that exactly one vertex is passed
-  ([\#2556](https://github.com/igraph/rigraph/issues/2556)).
-
-### Chore
-
-- Fix roxygen2 deps registration
-  ([\#2579](https://github.com/igraph/rigraph/issues/2579),
-  [\#2580](https://github.com/igraph/rigraph/issues/2580)).
-
-- Revdepcheck results.
-
-- Indent.
-
-- Remove function definitions that are not overridden.
-
-- Harmonize IGNORE in function declarations.
-
-- Formatting.
-
-### Continuous integration
-
-- Use default R version for revdepchecks.
-
-### Documentation
-
-- Automatic linking to C docs
-  ([\#2518](https://github.com/igraph/rigraph/issues/2518)).
-
-### Refactoring
-
-- Replace [`.Call()`](https://rdrr.io/r/base/CallExternal.html) with
-  `_impl` functions and improve adjacency matrix implementation
-  ([\#2545](https://github.com/igraph/rigraph/issues/2545),
-  [\#2546](https://github.com/igraph/rigraph/issues/2546)).
-
-## igraph 2.2.1.9020
-
-### Features
-
-- Autogenerate BFS and DFS callback closures with unified TRUE=stop
-  convention ([\#2552](https://github.com/igraph/rigraph/issues/2552),
-  [\#2553](https://github.com/igraph/rigraph/issues/2553)).
-
-- Autogenerate `igraph_community_leading_eigenvector` with full
-  closure-based callback support
-  ([\#2554](https://github.com/igraph/rigraph/issues/2554),
-  [\#2555](https://github.com/igraph/rigraph/issues/2555)).
-
-### Chore
-
-- Consistent checks.
-
-### Testing
-
-- Snapshot updates for rcc-smoke (null)
-  ([\#2558](https://github.com/igraph/rigraph/issues/2558)).
-
-## igraph 2.2.1.9019
-
-### Features
-
-- Autogenerate remaining simple functions
-  ([\#2550](https://github.com/igraph/rigraph/issues/2550),
-  [\#2551](https://github.com/igraph/rigraph/issues/2551)).
-
-- Autogenerate all callback non-SPARSEMAT functions with unified
-  dual-mode API
-  ([\#2533](https://github.com/igraph/rigraph/issues/2533),
-  [\#2534](https://github.com/igraph/rigraph/issues/2534)).
-
-### Continuous integration
-
-- Skip tests for old R.
-
-## igraph 2.2.1.9018
-
-### Bug fixes
-
-- Scrub file paths in error/warning snapshots and fix spacing
-  ([\#2538](https://github.com/igraph/rigraph/issues/2538)).
-
-- Support character labels in
-  [`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)
-  ([\#1283](https://github.com/igraph/rigraph/issues/1283),
-  [\#2432](https://github.com/igraph/rigraph/issues/2432)).
-
-- Fix uninitialized variable warnings in R 4.5 on Windows
-  ([\#2526](https://github.com/igraph/rigraph/issues/2526),
-  [\#2527](https://github.com/igraph/rigraph/issues/2527)).
-
-### Features
-
-- Autogenerate sparse matrix constructor functions with type-safe
-  conversions ([\#2532](https://github.com/igraph/rigraph/issues/2532)).
-
-- Add GRAPH_PTR_LIST and MATRIX_LIST type support to enable
-  autogeneration of \*\_many functions
-  ([\#2531](https://github.com/igraph/rigraph/issues/2531),
-  [\#2540](https://github.com/igraph/rigraph/issues/2540)).
-
-- Improve formatting of error messages from C
-  ([\#2202](https://github.com/igraph/rigraph/issues/2202),
-  [\#2515](https://github.com/igraph/rigraph/issues/2515)).
-
-### Documentation
-
-- Consolidate Copilot instructions and fix workflow trigger
-  ([\#2535](https://github.com/igraph/rigraph/issues/2535),
-  [\#2536](https://github.com/igraph/rigraph/issues/2536)).
-
-- Review remaining IGNORE declarations in Stimulus.
-
-### Refactoring
-
-- Integrate callback into
-  [`motifs()`](https://r.igraph.org/reference/motifs.md) function
-  ([\#2543](https://github.com/igraph/rigraph/issues/2543),
-  [\#2544](https://github.com/igraph/rigraph/issues/2544)).
-
-- Replace [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
-  expressions with `_impl()` function calls
-  ([\#2539](https://github.com/igraph/rigraph/issues/2539),
-  [\#2541](https://github.com/igraph/rigraph/issues/2541)).
-
-## igraph 2.2.1.9017
-
-### Features
-
-- Autogenerate 108 non-callback functions, reduce IGNORE specs from 128
-  to 19 ([\#2484](https://github.com/igraph/rigraph/issues/2484),
-  [\#2485](https://github.com/igraph/rigraph/issues/2485)).
-
-## igraph 2.2.1.9016
-
-### Chore
-
-- No roclet needed to share the tag code
-  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
-
-## igraph 2.2.1.9015
-
-### Continuous integration
-
-- Tweaks ([\#2517](https://github.com/igraph/rigraph/issues/2517)).
-
-- Test all R versions on branches that start with cran-
-  ([\#2516](https://github.com/igraph/rigraph/issues/2516)).
-
-## igraph 2.2.1.9014
-
-### Features
-
-- Change constructors to use explicit arguments
-  ([\#2466](https://github.com/igraph/rigraph/issues/2466),
-  [\#2467](https://github.com/igraph/rigraph/issues/2467)).
-
-## igraph 2.2.1.9013
-
-### Features
-
-- Implement generic mechanism for
-  [`layout_()`](https://r.igraph.org/reference/layout_.md) modifiers
-  ([\#1473](https://github.com/igraph/rigraph/issues/1473),
-  [\#2435](https://github.com/igraph/rigraph/issues/2435)).
-
-### Continuous integration
-
-- Install binaries from r-universe for dev workflow
-  ([\#2498](https://github.com/igraph/rigraph/issues/2498)).
-
-### revdep
-
-- New problems.
-
-## igraph 2.2.1.9012
-
-### revdep
-
-- Results.
-
-## igraph 2.2.1.9011
-
-### Features
-
-- Autogenerate `igraph_motifs_randesu_callback()` using closure approach
-  ([\#2464](https://github.com/igraph/rigraph/issues/2464),
-  [\#2465](https://github.com/igraph/rigraph/issues/2465)).
-
-## igraph 2.2.1.9010
-
-### Continuous integration
-
-- Skip failing Windows tests.
-
-## igraph 2.2.1.9009
-
-### Continuous integration
-
-- Fix reviewdog and add commenting workflow
-  ([\#2493](https://github.com/igraph/rigraph/issues/2493)).
-
-## igraph 2.2.1.9008
-
-### Continuous integration
-
-- Use workflows for fledge
-  ([\#2490](https://github.com/igraph/rigraph/issues/2490)).
-
-## igraph 2.2.1.9007
-
-### Continuous integration
-
-- Sync ([\#2488](https://github.com/igraph/rigraph/issues/2488)).
-
-## igraph 2.2.1.9006
-
-### Bug fixes
-
-- Generated code is much closer to air formatting
-  ([\#1410](https://github.com/igraph/rigraph/issues/1410),
-  [\#2433](https://github.com/igraph/rigraph/issues/2433)).
-
-### Chore
-
-- `Rx_` prefix also for RC-only ignored functions.
-
-### ai
-
-- Specify \[ci skip\].
-
-## igraph 2.2.1.9005
-
-### Features
-
-- [`graphlet_basis()`](https://r.igraph.org/reference/graphlet_basis.md)
-  returns a list of vertices in the `"cliques"` component. Replace
-  `.Call(Rx_...)` with `_impl` functions for autogenerated entrypoints
-  ([\#2470](https://github.com/igraph/rigraph/issues/2470),
-  [\#2472](https://github.com/igraph/rigraph/issues/2472)).
-
-### Chore
-
-- Use `Rx_` and similar prefixes consistently
-  ([\#2478](https://github.com/igraph/rigraph/issues/2478)).
-
-- Rename `R_` to `Rx_` for all
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) functions
-  outside `aaa-auto.R`
-  ([\#2476](https://github.com/igraph/rigraph/issues/2476),
-  [\#2477](https://github.com/igraph/rigraph/issues/2477)).
-
-- Remove dead code.
-
-- Use autogenerated `_impl` functions instead of
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html)
-  ([\#2434](https://github.com/igraph/rigraph/issues/2434),
-  [\#2471](https://github.com/igraph/rigraph/issues/2471)).
-
-- Remove unused finalizer calls.
-
-## igraph 2.2.1.9004
-
-### Bug fixes
-
-- Use `"weights"` edge attribute in
-  [`modularity()`](https://r.igraph.org/reference/modularity.igraph.md)
-  if available.
-
-- Safer `.dd` generation.
-
-### Features
-
-- Use snake_case in arguments to `_impl` functions
-  ([\#2461](https://github.com/igraph/rigraph/issues/2461),
-  [\#2462](https://github.com/igraph/rigraph/issues/2462)).
-
-- Add [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md) to
-  expose `igraph_wheel()`
-  ([\#1561](https://github.com/igraph/rigraph/issues/1561),
-  [\#2409](https://github.com/igraph/rigraph/issues/2409)).
-
-- Add
-  [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
-  function ([\#1350](https://github.com/igraph/rigraph/issues/1350),
-  [\#2413](https://github.com/igraph/rigraph/issues/2413)).
-
-### Chore
-
-- Auto-update from GitHub Actions
-  ([\#2473](https://github.com/igraph/rigraph/issues/2473)).
-
-- Document [`.Call()`](https://rdrr.io/r/base/CallExternal.html) usage
-  \[ci skip\].
-
-- Rename to `igraph_arg_match()`, instructions.
-
-- Fix autogeneration for writing functions.
-
-- Sync autogen.
-
-### Testing
-
-- Fix snapshots.
-
-- Fix snapshots for `expect_snapshot_igraph_error()`.
-
-### ai
-
-- Merge \[ci skip\].
-
-- Tags \[ci skip\].
-
-- Prefer `GATTR` \[ci skip\].
-
-## igraph 2.2.1.9003
-
-### Bug fixes
-
-- Fix
-  [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md)
-  crash when `weights` is a custom attribute name
-  ([\#915](https://github.com/igraph/rigraph/issues/915),
-  [\#2403](https://github.com/igraph/rigraph/issues/2403)).
-
-### Features
-
-- Add
-  [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
-  and [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
-  graph constructors
-  ([\#1562](https://github.com/igraph/rigraph/issues/1562),
-  [\#2406](https://github.com/igraph/rigraph/issues/2406)).
-
-- Add
-  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) to
-  R interface ([\#1379](https://github.com/igraph/rigraph/issues/1379),
-  [\#2414](https://github.com/igraph/rigraph/issues/2414)).
-
-- Add
-  [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
-  to expose `igraph_circulant()`
-  ([\#1563](https://github.com/igraph/rigraph/issues/1563),
-  [\#2407](https://github.com/igraph/rigraph/issues/2407)).
-
-- Add [`mean_degree()`](https://r.igraph.org/reference/degree.md) to R
-  ([\#1380](https://github.com/igraph/rigraph/issues/1380),
-  [\#2415](https://github.com/igraph/rigraph/issues/2415)).
-
-- [`vertices()`](https://r.igraph.org/reference/vertex.md) errors on
-  duplicate attribute names
-  ([\#1248](https://github.com/igraph/rigraph/issues/1248),
-  [\#2430](https://github.com/igraph/rigraph/issues/2430)).
-
-- Add
-  [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
-  function to R
-  ([\#1349](https://github.com/igraph/rigraph/issues/1349),
-  [\#2412](https://github.com/igraph/rigraph/issues/2412)).
-
-### Chore
-
-- Auto-update from GitHub Actions
-  ([\#2454](https://github.com/igraph/rigraph/issues/2454)).
-
-## igraph 2.2.1.9002
-
-### Bug fixes
-
-- Use `LC_ALL=C` instead of `LOCALE=C` in `deps.mk`
-  ([\#2446](https://github.com/igraph/rigraph/issues/2446),
-  [\#2447](https://github.com/igraph/rigraph/issues/2447)).
-
-### Features
-
-- Add autogeneration for all C functions currently in use
-  ([\#2424](https://github.com/igraph/rigraph/issues/2424),
-  [\#2442](https://github.com/igraph/rigraph/issues/2442)).
-
-### Chore
-
-- Format.
-
-- Ensure args are named.
-
-### Continuous integration
-
-- Fix final status as set by Copilot \[ci skip\].
-
-### Documentation
-
-- More instructions \[ci skip\].
-
-### Refactoring
-
-- Switch from [`.Call()`](https://rdrr.io/r/base/CallExternal.html) to
-  autogenerated `_impl` functions
-  ([\#2434](https://github.com/igraph/rigraph/issues/2434),
-  [\#2443](https://github.com/igraph/rigraph/issues/2443)).
-
-### Testing
-
-- Add structured tests alongside snapshot tests for ALL \_impl functions
-  in test-aaa-auto.R
-  ([\#2448](https://github.com/igraph/rigraph/issues/2448),
-  [\#2449](https://github.com/igraph/rigraph/issues/2449)).
-
-### Uncategorized
-
-- Merge branch ‘cran-2.2.1’.
-
-## igraph 2.2.1.9001
-
-### Bug fixes
-
-- Fix matrix lists for output.
-
-### Features
-
-- Add
-  [`invalidate_cache()`](https://r.igraph.org/reference/invalidate_cache.md)
-  to R interface
-  ([\#1387](https://github.com/igraph/rigraph/issues/1387),
-  [\#2416](https://github.com/igraph/rigraph/issues/2416)).
-
-- All arguments in calls to `_impl()` functions are named
-  ([\#2423](https://github.com/igraph/rigraph/issues/2423)).
-
-### Chore
-
-- Use `Rx_` prefix for manually generated functions.
-
-- Clarify error testing preference \[ci skip\].
-
-- Ignore \[ci skip\].
-
-- Use `_impl` variants instead of inline
-  [`.Call()`](https://rdrr.io/r/base/CallExternal.html) for five
-  functions with changed C signatures
-  ([\#2428](https://github.com/igraph/rigraph/issues/2428),
-  [\#2429](https://github.com/igraph/rigraph/issues/2429)).
-
-- Format \[ci skip\].
-
-- Expand remaining `_impl` aliases
-  ([\#2422](https://github.com/igraph/rigraph/issues/2422)).
-
-- Remove unused `NTIMER` and `NPRINT` macro definitions
-  ([\#1095](https://github.com/igraph/rigraph/issues/1095),
-  [\#2405](https://github.com/igraph/rigraph/issues/2405)).
-
-- Cleanup.
-
-- Request math notation.
-
-#### deps
-
-- Bump jinja2 from 3.1.2 to 3.1.6 in /tools/py-stimulus
-  ([\#2401](https://github.com/igraph/rigraph/issues/2401)).
-
-- Replace `_impl` aliases in `R/flow.R`
-  ([\#2347](https://github.com/igraph/rigraph/issues/2347),
-  [\#2379](https://github.com/igraph/rigraph/issues/2379)).
-
-- Autogenerated file looks more like as if it was formatted with `air`
-  ([\#2395](https://github.com/igraph/rigraph/issues/2395)).
-
-### Continuous integration
-
-- Run daily vendoring to avoid noise \[ci skip\].
-
-- Snapshots \[ci skip\].
-
-- Use proper actor name \[ci skip\].
-
-- Reduce contention by running big matrices overnight.
-
-- Add workflow to auto-assign to Copilot.
-
-- Run running sanitizer only on cran branches to avoid pipeline
-  contention.
-
-### Documentation
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
-
-- More instructions \[ci skip\].
-
-- Experimental.
-
-- New code \[ci skip\].
-
-- Add GitHub Copilot instructions and expand AGENTS.md
-  ([\#2397](https://github.com/igraph/rigraph/issues/2397),
-  [\#2400](https://github.com/igraph/rigraph/issues/2400)).
-
-### Refactoring
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/topology.R`
-  ([\#2366](https://github.com/igraph/rigraph/issues/2366),
-  [\#2398](https://github.com/igraph/rigraph/issues/2398)).
-
-- Replace \_impl aliases in R/other.R
-  ([\#2355](https://github.com/igraph/rigraph/issues/2355),
-  [\#2388](https://github.com/igraph/rigraph/issues/2388)).
-
-## igraph 2.2.1.9000
-
-### Chore
-
-- New `switch_igraph_arg()` to avoid the need for default arguments.
-
-- Fix isomorphism callback function.
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/bipartite.R`
-  ([\#2334](https://github.com/igraph/rigraph/issues/2334),
-  [\#2361](https://github.com/igraph/rigraph/issues/2361)).
-
-- Replace \_impl aliases with explicit wrapper functions in
-  R/centralization.R
-  ([\#2336](https://github.com/igraph/rigraph/issues/2336),
-  [\#2360](https://github.com/igraph/rigraph/issues/2360)).
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/cliques.R`
-  ([\#2337](https://github.com/igraph/rigraph/issues/2337),
-  [\#2363](https://github.com/igraph/rigraph/issues/2363)).
-
-- Replace `_impl` function aliases with explicit wrappers in
-  `R/centrality.R`
-  ([\#2335](https://github.com/igraph/rigraph/issues/2335),
-  [\#2362](https://github.com/igraph/rigraph/issues/2362)).
-
-- Replace `_impl` alias with explicit wrapper in `R/coloring.R`
-  ([\#2338](https://github.com/igraph/rigraph/issues/2338),
-  [\#2364](https://github.com/igraph/rigraph/issues/2364)).
-
-- Embed Stimulus sources, add docs.
-
-- Replace `_impl` aliases with explicit wrappers in R/assortativity.R
-  ([\#2332](https://github.com/igraph/rigraph/issues/2332),
-  [\#2333](https://github.com/igraph/rigraph/issues/2333)).
-
-- Auto-update from GitHub Actions
-  ([\#2331](https://github.com/igraph/rigraph/issues/2331)).
-
-- Auto-update from GitHub Actions
-  ([\#2330](https://github.com/igraph/rigraph/issues/2330)).
-
-- Use autogen-impl functions for 3 motifs functions
-  ([\#2152](https://github.com/igraph/rigraph/issues/2152)).
-
-### Continuous integration
-
-- Install air for Copilot.
-
-- Update status directly for Copilot.
-
-- Remove Claude assistant.
-
-- Avoid passing head branch for status update.
-
-- Always update status after run, in some cases workflows push to the
-  branch.
-
-- Detail.
-
-- Deterministic setup for Copilot.
-
-- Use reviewdog only for foreign PRs.
-
-### Documentation
-
-- Remove spaces from vignettes.
-
-### Refactoring
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/triangles.R`
-  ([\#2368](https://github.com/igraph/rigraph/issues/2368),
-  [\#2369](https://github.com/igraph/rigraph/issues/2369)).
-
-- Replace `_impl` aliases with explicit wrapper functions in `R/make.R`
-  ([\#2352](https://github.com/igraph/rigraph/issues/2352),
-  [\#2384](https://github.com/igraph/rigraph/issues/2384)).
-
-- Replace `_impl` alias with explicit wrapper in `R/layout.R`
-  ([\#2351](https://github.com/igraph/rigraph/issues/2351),
-  [\#2382](https://github.com/igraph/rigraph/issues/2382)).
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/structural-properties.R`
-  ([\#2359](https://github.com/igraph/rigraph/issues/2359),
-  [\#2372](https://github.com/igraph/rigraph/issues/2372)).
-
-- Replace `sir <- sir_impl` alias with explicit wrapper
-  ([\#2358](https://github.com/igraph/rigraph/issues/2358),
-  [\#2370](https://github.com/igraph/rigraph/issues/2370)).
-
-- Replace `_impl` aliases with explicit wrapper functions in `R/games.R`
-  ([\#2348](https://github.com/igraph/rigraph/issues/2348),
-  [\#2383](https://github.com/igraph/rigraph/issues/2383)).
-
-- Replace `_impl` aliases with explicit wrapper functions in
-  `R/simple.R` ([\#2357](https://github.com/igraph/rigraph/issues/2357),
-  [\#2386](https://github.com/igraph/rigraph/issues/2386)).
-
-- Replace `_impl` aliases with explicit wrappers in `R/embedding.R`
-  ([\#2345](https://github.com/igraph/rigraph/issues/2345),
-  [\#2380](https://github.com/igraph/rigraph/issues/2380)).
-
-- Replace `are_adjacent` alias with explicit wrapper in
-  `R/structure.info.R`
-  ([\#2365](https://github.com/igraph/rigraph/issues/2365),
-  [\#2374](https://github.com/igraph/rigraph/issues/2374)).
-
-- Replace `_impl` aliases with explicit wrappers in `R/trees.R`
-  ([\#2367](https://github.com/igraph/rigraph/issues/2367),
-  [\#2373](https://github.com/igraph/rigraph/issues/2373)).
-
-### Testing
-
-- Improve centralitystress test
-  ([\#2214](https://github.com/igraph/rigraph/issues/2214)).
 
 ## igraph 2.2.3
 
