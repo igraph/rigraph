@@ -84,8 +84,6 @@
 
 ## Chore
 
-- Remove `console()` and `tkplot()` (#39, #2187).
-
 - Replace last calls to `stop()` (#731, #2588).
 
 ## Documentation
