@@ -50,7 +50,7 @@ g %>%
   degree()
 #>  [1] 2 2 2 2 2 2 2 2 2 2
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-#> IGRAPH 4ba297d U--- 10 10 -- Ring graph
+#> IGRAPH eee6f29 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -59,6 +59,6 @@ print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 #> |   [1] FALSE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from 4ba297d:
+#> + edges from eee6f29:
 #>  [1] 4-- 7 3-- 6 1-- 8 3-- 5 8-- 9 2--10 6-- 9 1-- 7 2-- 4 5--10
 ```
