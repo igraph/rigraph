@@ -24,4 +24,8 @@ graph.}
 \code{graph.tree()} was renamed to \code{\link[=make_tree]{make_tree()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}
+}
+
 \keyword{internal}

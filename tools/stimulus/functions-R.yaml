@@ -525,7 +525,6 @@ igraph_hrg_game:
     R:
       GATTR:
         name: Hierarchical random graph model
-      CLASS: igraphHRG
 
 igraph_hrg_create:
     R:

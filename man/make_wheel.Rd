@@ -38,6 +38,10 @@ Note that the two and three-vertex wheel graphs are non-simple: The
 two-vertex wheel graph contains a self-loop, while the three-vertex wheel
 graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_wheel}{\code{wheel()}}
+}
+
 \examples{
 make_wheel(10, mode = "out")
 make_wheel(5, mode = "undirected")
@@ -63,5 +67,3 @@ Other deterministic constructors:
 }
 \concept{Wheel graph}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_wheel}{\code{wheel()}}.}
-

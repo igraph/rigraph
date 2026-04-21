@@ -22,6 +22,10 @@ A vertex sequence containing the neighbors of the input vertex.
 A vertex is a neighbor of another one (in other words, the two
 vertices are adjacent), if they are incident to the same edge.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_neighbors}{\code{neighbors()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)

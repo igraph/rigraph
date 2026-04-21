@@ -1151,7 +1151,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     cli::cli_abort("Invalid indexing.")
   }
   if (is.null(get_vs_graph(x))) {
-    stop("Graph is unknown.")
+    cli::cli_abort("Graph is unknown.", .internal = TRUE)
   }
   value
 }
@@ -1170,10 +1170,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     !"name" %in% names(attributes(value)) ||
       !"value" %in% names(attributes(value))
   ) {
-    stop("Invalid indexing.")
+    cli::cli_abort("Invalid indexing.")
   }
   if (is.null(get_es_graph(x))) {
-    stop("Graph is unknown.")
+    cli::cli_abort("Graph is unknown.", .internal = TRUE)
   }
   value
 }

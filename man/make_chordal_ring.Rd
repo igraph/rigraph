@@ -33,6 +33,10 @@ of rows in \sQuote{\code{W}}: for each row \code{j} an edge
 of total nodes. See also Kotsis, G: Interconnection Topologies for
 Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_extended_chordal_ring}{\code{extended_chordal_ring()}}
+}
+
 \examples{
 chord <- make_chordal_ring(
   15,

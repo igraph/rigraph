@@ -38,6 +38,10 @@ Calculating the cocitation or bibliographic coupling for only one vertex
 costs the same amount of computation as for all vertices. This might change
 in the future.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_cocitation}{\code{cocitation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bibcoupling}{\code{bibcoupling()}}
+}
+
 \examples{
 
 g <- make_kautz_graph(2, 3)

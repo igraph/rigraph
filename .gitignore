@@ -5,6 +5,7 @@
 /config.status
 /igraph_*.tar.gz
 /igraph_*.tgz
+/igraph/
 /object_files
 /version_number
 igraph.Rcheck/

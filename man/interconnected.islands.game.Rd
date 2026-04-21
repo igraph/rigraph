@@ -22,4 +22,8 @@ island.}
 \code{interconnected.islands.game()} was renamed to \code{\link[=sample_islands]{sample_islands()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game}{\code{simple_interconnected_islands_game()}}
+}
+
 \keyword{internal}

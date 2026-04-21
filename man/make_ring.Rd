@@ -28,6 +28,10 @@ An igraph graph.
 A ring is a one-dimensional lattice and this function is a special case
 of \code{\link[=make_lattice]{make_lattice()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_ring}{\code{ring()}}
+}
+
 \examples{
 print_all(make_ring(10))
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
