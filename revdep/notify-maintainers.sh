@@ -1,9 +1,14 @@
 #!/bin/bash
-# Script to notify package maintainers about reverse dependency issues
-# This script creates GitHub issues for packages hosted on GitHub
-# or creates Gmail draft emails for packages not on GitHub
+# Script to notify package maintainers about reverse dependency issues.
+# For packages hosted on GitHub: creates a GitHub issue via the `gh` CLI.
+# For packages not on GitHub: creates an email draft with pre-filled To/Cc fields.
+#
+# Issues are opened on behalf of the currently authenticated `gh` user.
+# All filed issue URLs are recorded in notifications/issue-log.txt.
 
 set -e
+
+IGRAPH_CC_EMAIL="igraph-help@igraph.discourse.group"
 
 # Check if gh CLI is available
 if ! command -v gh &> /dev/null; then
@@ -13,17 +18,18 @@ else
     GH_AVAILABLE=1
 fi
 
-# Function to check if a GitHub repo exists and is accessible
+# Function to check if a GitHub repo exists and is accessible.
+# Prints "owner/repo" on success; returns non-zero on failure.
 check_github_repo() {
     local repo=$1
     if [ $GH_AVAILABLE -eq 0 ]; then
         return 1
     fi
-    
+
     # Extract owner/repo from URL
-    local owner_repo=$(echo "$repo" | sed 's|https://github.com/||' | sed 's|\.git$||')
-    
-    # Check if repo is accessible
+    local owner_repo
+    owner_repo=$(echo "$repo" | sed 's|https://github.com/||' | sed 's|\.git$||')
+
     if gh repo view "$owner_repo" &> /dev/null; then
         echo "$owner_repo"
         return 0
@@ -32,55 +38,80 @@ check_github_repo() {
     fi
 }
 
-# Function to create a GitHub issue
+# Create a GitHub issue and log the resulting URL.
 create_github_issue() {
     local package=$1
     local owner_repo=$2
     local title=$3
     local body=$4
-    
+
     echo "  Creating GitHub issue..."
-    
-    # Create temporary file for issue body
-    local temp_file=$(mktemp)
+
+    local temp_file
+    temp_file=$(mktemp)
     echo "$body" > "$temp_file"
-    
-    # Create the issue
-    if gh issue create \
+
+    local issue_url
+    if issue_url=$(gh issue create \
         --repo "$owner_repo" \
         --title "$title" \
         --body-file "$temp_file" \
-        --label "bug" 2>/dev/null; then
-        echo "  ✓ Issue created successfully"
+        --label "bug" 2>/dev/null); then
+        echo "  ✓ Issue created: $issue_url"
+        echo "$package: $issue_url" >> "$OUTPUT_DIR/issue-log.txt"
     else
-        echo "  ⚠ Failed to create issue (may need authentication or permissions)"
+        echo "  ⚠ Failed to create issue (check authentication / permissions)"
     fi
-    
+
     rm -f "$temp_file"
 }
 
-# Function to create an email draft
+# Create an email draft with To/Cc pre-filled from CRAN metadata.
 create_email_draft() {
     local package=$1
-    local subject=$2
-    local body=$3
-    local email_file=$4
-    
+    local maintainer_email=$2
+    local subject=$3
+    local body=$4
+    local email_file=$5
+
     echo "  Creating email draft..."
-    
+
     cat > "$email_file" << EOF
-To: CRAN maintainer for $package
+To: $maintainer_email
+Cc: $IGRAPH_CC_EMAIL
 Subject: $subject
 
-Dear $package Maintainer,
+Dear $package maintainer,
 
 $body
 
 Best regards,
-igraph Development Team
+The igraph Development Team
 EOF
-    
+
     echo "  ✓ Email draft saved to: $email_file"
+}
+
+# High-level helper: determine the right notification channel and call it.
+notify_package() {
+    local package=$1
+    local github_url=$2
+    local maintainer_email=$3
+    local issue_title=$4
+    local issue_body=$5
+    local email_subject=$6
+
+    echo "Package: $package"
+    local owner_repo
+    if owner_repo=$(check_github_repo "$github_url"); then
+        echo "  ✓ GitHub repository accessible: $owner_repo"
+        create_github_issue "$package" "$owner_repo" "$issue_title" "$issue_body"
+    else
+        echo "  ✗ GitHub repository not accessible"
+        create_email_draft "$package" "$maintainer_email" "$email_subject" "$issue_body" \
+            "$OUTPUT_DIR/${package}-email.txt"
+    fi
+    echo ""
 }
 
 # Directory for output files
@@ -91,154 +122,103 @@ mkdir -p "$OUTPUT_DIR"
 echo "=== Notifying Package Maintainers about Reverse Dependency Issues ==="
 echo ""
 
-# Package 1: Cascade
-PACKAGE="Cascade"
-GITHUB_URL="https://github.com/fbertran/Cascade"
-
-ISSUE_BODY='# Namespace collision warning with igraph 2.2.1.9003+
-
-## Summary
-
-When loading the Cascade package with igraph version 2.2.1.9003 or later, the following warning appears:
+# --------------------------------------------------------------------------
+# Cascade
+# --------------------------------------------------------------------------
+notify_package \
+    "Cascade" \
+    "https://github.com/fbertran/Cascade" \
+    "frederic.bertrand@lecnam.net" \
+    "Namespace collision warning with igraph 2.3.0+" \
+    'When loading the Cascade package with igraph 2.3.0 or later, the following warning appears:
 
 ```
 Warning: replacing previous import '"'"'igraph::circulant'"'"' by '"'"'magic::circulant'"'"' when loading '"'"'Cascade'"'"'
 ```
 
-## Root Cause
+**Root cause**: igraph 2.3.0 added `make_circulant()` and its constructor alias `circulant()`. The `magic` package also exports `circulant()`, creating a namespace collision.
 
-igraph recently added a new function `make_circulant()` and its constructor alias `circulant()` in version 2.2.1.9003. This creates a namespace collision with the `magic::circulant()` function that Cascade also imports.
+**Impact**: Minor – a warning is produced but Cascade continues to work correctly.
 
-## Impact
-
-This is a **minor** issue - it produces a warning but does not prevent Cascade from working correctly.
-
-## Suggested Fix
-
-To resolve this warning, you can explicitly import `magic::circulant` in your NAMESPACE file:
+**Suggested fix**: Explicitly import `magic::circulant` in your NAMESPACE file:
 
 ```r
 importFrom(magic, circulant)
 ```
 
-This will ensure that `magic::circulant` takes precedence and the warning will not appear.
+This ensures `magic::circulant` takes precedence and suppresses the warning.
 
-## Additional Information
+---
+*Discovered during reverse dependency checking for igraph. Details: https://github.com/igraph/rigraph*' \
+    "Namespace collision warning in Cascade with igraph 2.3.0+"
 
-- **igraph version with issue**: 2.2.1.9003+
-- **Cascade version tested**: 2.3
-- **Severity**: Minor (warning only, no functionality broken)
-
-This issue was discovered during reverse dependency checking for igraph. For more details, see the igraph repository.
-
-## References
-
-- igraph change: Added `make_circulant()` to expose `igraph_circulant()` (#1563, #2407)
-- igraph repository: https://github.com/igraph/rigraph'
-
-echo "Package: $PACKAGE"
-if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository accessible: $owner_repo"
-    create_github_issue "$PACKAGE" "$owner_repo" "Namespace collision warning with igraph 2.2.1.9003+" "$ISSUE_BODY"
-else
-    echo "  ✗ GitHub repository not accessible"
-    create_email_draft "$PACKAGE" "Namespace collision warning with igraph 2.2.1.9003+ in Cascade" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
-fi
-echo ""
-
-# Package 2: jewel
-PACKAGE="jewel"
-GITHUB_URL="https://github.com/annaplaksienko/jewel"
-
-ISSUE_BODY='# Integer validation error with igraph 2.2.1.9003+
-
-## Summary
-
-The jewel package fails with igraph version 2.2.1.9003 or later due to strict integer validation:
+# --------------------------------------------------------------------------
+# DiagrammeR
+# --------------------------------------------------------------------------
+notify_package \
+    "DiagrammeR" \
+    "https://github.com/rich-iannone/DiagrammeR" \
+    "riannone@me.com" \
+    "neighbors() now requires a single vertex ID in igraph 2.3.0+" \
+    '`get_leverage_centrality()` fails with igraph 2.3.0 or later:
 
 ```
-Error in rewire_impl(rewire = graph, n = niter, mode = mode) : 
-  At rinterface_extra.c:83 : The value 2.4500000000000002 is not representable as an integer. Invalid value
+Error in `igraph::neighbors()`:
+! `vid` must specify exactly one vertex
 ```
 
-## Root Cause
+**Root cause**: igraph 2.3.0 adds strict validation that `neighbors()` must receive exactly one vertex ID. The call `igraph::neighbors(ig_graph, degree_vals)` passes a vector, which was previously silently reduced to the first element.
 
-The `generateData_rewire()` function (or similar code) passes non-integer values to igraph'"'"'s `rewire()` function for the `niter` parameter. Previous versions of igraph silently truncated these values, but newer versions strictly validate that numeric values are representable as integers.
-
-## Minimal Reproducible Example
+**Suggested fix**: Iterate over vertices individually:
 
 ```r
-library(igraph)
-g <- make_ring(10)
-
-# This now fails
-rewire(g, keeping_degseq(niter = 2.45))
-# Error: The value 2.4500000000000002 is not representable as an integer
+# In get_leverage_centrality(), wrap the body in a per-node loop, e.g.:
+purrr::map(seq_along(degree_vals), function(i) {
+  nb <- igraph::neighbors(ig_graph, i)
+  mean((degree_vals[i] - degree_vals[nb]) / (degree_vals[i] + degree_vals[nb]))
+})
 ```
 
-## Impact
+---
+*Discovered during reverse dependency checking for igraph. Details: https://github.com/igraph/rigraph*' \
+    "neighbors() requires single vertex in DiagrammeR with igraph 2.3.0+"
 
-This is a **high severity** issue - it causes the package to fail completely during examples and likely in actual usage.
+# --------------------------------------------------------------------------
+# jewel
+# --------------------------------------------------------------------------
+notify_package \
+    "jewel" \
+    "https://github.com/annaplaksienko/jewel" \
+    "anna@plaxienko.com" \
+    "Non-integer niter value passed to rewire() in igraph 2.3.0+" \
+    'The jewel package fails with igraph 2.3.0 or later:
 
-## Suggested Fix
+```
+Error in rewire_impl(rewire = graph, n = niter, mode = mode) :
+  The value 2.4500000000000002 is not representable as an integer. Invalid value
+```
 
-Ensure that `niter` values are integers before passing to `rewire()`:
+**Root cause**: igraph 2.3.0 strictly validates that `niter` is representable as an integer. The value `p * 0.05` (e.g., `49 * 0.05 = 2.45`) is not an integer.
+
+**Suggested fix**: Wrap the computed value with `ceiling()` or `round()`:
 
 ```r
-# Instead of:
-niter <- p * 0.05
-
-# Use:
-niter <- ceiling(p * 0.05)  # or floor() or round(), depending on desired behavior
+niter <- ceiling(p * 0.05)   # was: niter <- p * 0.05
 ```
 
-## Example from jewel code
+---
+*Discovered during reverse dependency checking for igraph. Details: https://github.com/igraph/rigraph*' \
+    "Non-integer niter in jewel causes error with igraph 2.3.0+"
 
-Looking at the error message, this likely occurs in code like:
-
-```r
-# Problematic:
-n <- 49
-niter <- n * 0.05  # = 2.45
-rewire(graph, keeping_degseq(niter = niter))
-
-# Fixed:
-niter <- ceiling(n * 0.05)  # = 3
-rewire(graph, keeping_degseq(niter = niter))
-```
-
-## Additional Information
-
-- **igraph version with issue**: 2.2.1.9003+
-- **jewel version tested**: 2.0.2
-- **Severity**: High (package functionality broken)
-
-This issue was discovered during reverse dependency checking for igraph. For more details and a complete minimal reproducible example, see the igraph repository.
-
-## References
-
-- igraph repository: https://github.com/igraph/rigraph
-- Related to stricter integer validation in igraph C code'
-
-echo "Package: $PACKAGE"
-if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository accessible: $owner_repo"
-    create_github_issue "$PACKAGE" "$owner_repo" "Integer validation error with igraph 2.2.1.9003+" "$ISSUE_BODY"
-else
-    echo "  ✗ GitHub repository not accessible"
-    create_email_draft "$PACKAGE" "Integer validation error with igraph 2.2.1.9003+ in jewel" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
-fi
-echo ""
-
-# Package 3: rSpectral
-PACKAGE="rSpectral"
-GITHUB_URL="https://github.com/cmclean5/rSpectral"
-
-ISSUE_BODY='# Modularity test failures with igraph 2.2.1.9004+
-
-## Summary
-
-rSpectral tests fail with igraph version 2.2.1.9004 or later due to changes in modularity calculation behavior:
+# --------------------------------------------------------------------------
+# rSpectral
+# --------------------------------------------------------------------------
+notify_package \
+    "rSpectral" \
+    "https://github.com/cmclean5/rSpectral" \
+    "lptolik@gmail.com" \
+    "Modularity test failures due to automatic weight usage in igraph 2.3.0+" \
+    'rSpectral tests fail with igraph 2.3.0 or later:
 
 ```
 Expected `c$modularity` to equal `exp_mod10`.
@@ -247,83 +227,67 @@ Differences:
 `expected`: 0.408
 ```
 
-## Root Cause
+**Root cause**: igraph 2.3.0 changed `modularity()` to automatically use the `"weight"` edge attribute when present. The test graphs have a `"weight"` attribute, so modularity is now computed with weights, giving different values.
 
-igraph v2.2.1.9004 changed `modularity()` to automatically use the `"weight"` edge attribute if present:
+**Options**:
 
-```r
-if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-  weights <- E(graph)$weight
-}
-```
-
-This means graphs with a "weight" attribute now compute weighted modularity by default, even when `weights = NULL` is explicitly passed.
-
-## Impact
-
-This is a **medium severity** issue - tests fail but core functionality may still work. The modularity values are close but not exact.
-
-## Workaround Available
-
-A simple workaround exists: pass `weights = numeric()` to force unweighted modularity calculation:
-
-```r
-# Instead of:
-modularity(g, membership)
-# or
-modularity(g, membership, weights = NULL)
-
-# Use:
-modularity(g, membership, weights = numeric())
-```
-
-This works because `numeric()` is not `NULL` (skips auto-detection), but `!all(is.na(numeric()))` evaluates to `FALSE`, causing the code to set `weights <- NULL` internally.
-
-## Suggested Fixes
-
-Choose one of the following approaches:
-
-1. **Quick fix**: Use the workaround above in places where unweighted modularity is needed
-2. **Update graph objects**: Call `igraph::upgrade_graph()` on saved graph objects
-3. **Remove unintended weights**: If graphs shouldn'"'"'t have weights, remove them:
+1. Remove the unintended weight attribute:
    ```r
-   g <- delete_edge_attr(g, "weight")
+   g <- igraph::delete_edge_attr(g, "weight")
    ```
-4. **Update test expectations**: If weighted modularity is correct, update expected values in tests
 
-## Additional Information
+2. Update test graphs with `igraph::upgrade_graph()` and check whether weights are intentional.
 
-- **igraph version with issue**: 2.2.1.9004+
-- **rSpectral version tested**: 1.0.0.10
-- **Severity**: Medium (tests fail, but workaround available)
-- **Test message**: "This graph was created by an old(er) igraph version"
+3. Update expected test values if weighted modularity is the correct behavior.
 
-This issue was discovered during reverse dependency checking for igraph. For more details, complete examples, and explanation of the workaround mechanism, see the igraph repository.
+---
+*Discovered during reverse dependency checking for igraph. Details: https://github.com/igraph/rigraph*' \
+    "Modularity test failures in rSpectral with igraph 2.3.0+"
 
-## References
+# --------------------------------------------------------------------------
+# sfnetworks
+# --------------------------------------------------------------------------
+notify_package \
+    "sfnetworks" \
+    "https://github.com/luukvdmeer/sfnetworks" \
+    "luukvandermeer@live.nl" \
+    "all_shortest_paths() from argument requires single vertex in igraph 2.3.0+" \
+    '`st_network_paths()` fails with igraph 2.3.0 or later:
 
-- igraph repository: https://github.com/igraph/rigraph
-- igraph change: "Use '"'"'weights'"'"' edge attribute in modularity() if available"'
+```
+Error in `all_shortest_paths(x, from, to, weights = weights, ...)`:
+! `from` must specify exactly one vertex
+```
 
-echo "Package: $PACKAGE"
-if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository accessible: $owner_repo"
-    create_github_issue "$PACKAGE" "$owner_repo" "Modularity test failures with igraph 2.2.1.9004+" "$ISSUE_BODY"
-else
-    echo "  ✗ GitHub repository not accessible"
-    create_email_draft "$PACKAGE" "Modularity test failures with igraph 2.2.1.9004+ in rSpectral" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
-fi
-echo ""
+**Root cause**: igraph 2.3.0 adds strict validation that `all_shortest_paths(from = ...)` must receive exactly one vertex. sfnetworks passes a vector of "from" vertices.
 
+**Suggested fix**: Iterate over each `from` vertex:
+
+```r
+lapply(from_vertices, function(f) {
+  igraph::all_shortest_paths(x, from = f, to = to, weights = weights, ...)
+})
+```
+
+---
+*Discovered during reverse dependency checking for igraph. Details: https://github.com/igraph/rigraph*' \
+    "all_shortest_paths() from must be single vertex in sfnetworks with igraph 2.3.0+"
+
+# --------------------------------------------------------------------------
+# Summary
+# --------------------------------------------------------------------------
 echo "=== Summary ==="
 echo "Output directory: $OUTPUT_DIR"
 echo ""
-if [ -n "$(ls -A $OUTPUT_DIR 2>/dev/null)" ]; then
-    echo "Files created:"
-    ls -1 "$OUTPUT_DIR"
-else
-    echo "All notifications sent via GitHub issues (no local files created)"
+if [ -f "$OUTPUT_DIR/issue-log.txt" ]; then
+    echo "GitHub issues filed:"
+    cat "$OUTPUT_DIR/issue-log.txt"
+    echo ""
 fi
-echo ""
-echo "Note: For GitHub issues created, check the repository issue trackers."
-echo "For email drafts, review and send the files in $OUTPUT_DIR"
+if ls "$OUTPUT_DIR"/*.txt &> /dev/null 2>&1; then
+    email_files=$(ls "$OUTPUT_DIR"/*-email.txt 2>/dev/null || true)
+    if [ -n "$email_files" ]; then
+        echo "Email drafts created (review and send):"
+        echo "$email_files"
+    fi
+fi

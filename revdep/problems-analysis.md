@@ -2,17 +2,19 @@
 
 This document provides minimal reproducible examples and analysis for packages that now fail their checks compared to the most recent CRAN version.
 
-**Note**: Runnable R scripts and markdown outputs demonstrating each issue can be found in the `examples/` directory.
+**Note**: Runnable R scripts and markdown outputs demonstrating each issue can be found in the `examples/` directory. A draft response to the CRAN review email is in `cran-response-draft.md`.
 
 ## Summary
 
-Six packages have newly broken checks:
+Six packages have newly broken checks in our revdepcheck run; two additional packages (rgph, tmap.networks) appeared in the CRAN win-builder check:
 1. **Cascade** (v2.3): Namespace collision warning
 2. **DiagrammeR** (v1.0.11): `neighbors()` requires exactly one vertex
 3. **jewel** (v2.0.2): Error due to strict integer validation
 4. **manynet** (v1.7.0): Scalar integer validation in `sample_last_cit()`
 5. **rSpectral** (v1.0.0.14): Test failures due to modularity calculation changes
 6. **sfnetworks** (v0.6.5): `from` parameter requires exactly one vertex
+7. **rgph** (v0.1.0): Under investigation (igraph is `Suggests` only; win-builder failure)
+8. **tmap.networks** (v0.1): Cascading failure from sfnetworks
 
 ## 1. Cascade - Namespace Collision Warning
 
@@ -149,29 +151,31 @@ if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
 }
 ```
 
-### Workaround
-**A workaround exists**: Passing `weights = numeric()` effectively disables auto-detection:
+### Hacky workaround (do not recommend to revdep maintainers)
+Passing `weights = numeric()` happens to disable auto-detection due to implementation details:
 
 ```r
-modularity(g, membership, weights = numeric())  # Forces unweighted calculation
+modularity(g, membership, weights = numeric())
 ```
 
-This works because `numeric()` is not `NULL` (skips auto-detection), but `!all(is.na(numeric()))` is `FALSE`, causing the code to set `weights <- NULL` internally.
+This is **not** a robust solution and should **not** be recommended to rSpectral or other downstream maintainers, as it relies on internal behavior that may change.
 
 ### Assessment
-**Inadvertent breaking change in igraph, but workaround available.**
+**Inadvertent breaking change in igraph. igraph needs to provide a clean fix.**
 
 ### Recommendation
-**For rSpectral**:
-1. Update saved graph objects using `upgrade_graph()`
-2. Review whether graphs should have weights
-3. Use `weights = numeric()` for unweighted modularity
-4. Or remove weights: `g <- delete_edge_attr(g, 'weight')`
-5. Update test expectations if weighted behavior is correct
+**For igraph** (action required before notifying revdep maintainers):
+- Add a proper `weights = NA` mechanism to explicitly disable weight auto-detection, with a documented user-facing contract.
+- Document this as a breaking change in NEWS.md.
+- Until a clean solution exists, the recommendation to rSpectral maintainers should be to remove unintended weight attributes: `g <- delete_edge_attr(g, "weight")`
 
-**For igraph**: Document `weights = numeric()` as the official workaround or fix so `weights = NULL` explicitly disables auto-detection.
+**For rSpectral** (once root cause is understood):
+1. Determine whether graphs are *intended* to have a `"weight"` attribute
+2. If not: `g <- igraph::delete_edge_attr(g, "weight")` before calling `modularity()`
+3. If yes: update expected test values to the weighted modularity
+4. Call `igraph::upgrade_graph()` on stored graph objects
 
-**Severity**: Medium - Tests fail but workaround available
+**Severity**: Medium - Tests fail; igraph behavior change needs a clean fix
 
 ---
 
@@ -205,22 +209,67 @@ lapply(from, function(f) all_shortest_paths(g, from = f, to = to))
 
 ---
 
+## 7. rgph (0.1.0) – Under Investigation
+
+### Issue
+Reported as failing in the CRAN win-builder check for igraph 2.3.0. Not reproduced in our Linux-based `revdepcheck` run.
+
+### Root Cause (preliminary)
+rgph lists igraph only as a `Suggests` dependency. Failures likely occur in tests or examples that optionally use igraph. The most probable cause, given the other patterns in this release, is either the `neighbors()` scalar validation or another strict type-checking change.
+
+### Assessment
+Preliminary assessment: likely a downstream issue (using undocumented behavior of igraph). Investigation ongoing.
+
+### Recommendation
+Run targeted checks to reproduce:
+```r
+install.packages("rgph")
+tools::testInstalledPackage("rgph")  # or devtools::check()
+```
+Once the error is reproduced, contact the rgph maintainer with a targeted fix.
+
+**Severity**: Unknown – under investigation
+
+---
+
+## 8. tmap.networks (0.1) – Cascading Failure from sfnetworks
+
+### Issue
+tmap.networks imports sfnetworks directly. Since sfnetworks fails due to the `all_shortest_paths()` `from` validation change, tmap.networks fails as a cascade.
+
+### Root Cause
+Not a direct bug in tmap.networks; it inherits the sfnetworks breakage.
+
+### Assessment
+**Cascading failure**: tmap.networks will pass once sfnetworks is fixed.
+
+### Recommendation
+No action needed for tmap.networks directly. Once sfnetworks is updated, inform the tmap.networks maintainer that a new sfnetworks release is available.
+
+**Severity**: High (package broken), but resolved automatically when sfnetworks is fixed
+
+---
+
 ## Conclusion
 
-| Package | Issue Type | Root Cause | Severity | Recommendation |
-|---------|-----------|------------|----------|----------------|
-| Cascade | Namespace collision | New `circulant()` export | Low | Fix in Cascade NAMESPACE |
-| DiagrammeR | API tightening | `neighbors()` requires scalar | High | Iterate over vertices |
-| jewel | Type validation | Stricter integer checking | High | Round niter values |
-| manynet | Type validation | Scalar parameter checking | High | Ensure scalar inputs |
-| rSpectral | Behavior change | Automatic weight usage | Medium | Use `weights = numeric()` |
-| sfnetworks | API tightening | `from` requires scalar | High | Handle single/multiple vertices |
+| Package | Issue Type | Root Cause | Severity | Action |
+|---------|-----------|------------|----------|--------|
+| Cascade | Namespace collision | New `circulant()` export | Low | Fix in Cascade NAMESPACE; igraph to reconsider export |
+| DiagrammeR | API tightening | `neighbors()` requires scalar | High | DiagrammeR to iterate vertices |
+| jewel | Type validation | Stricter integer checking | High | jewel to use `ceiling()` on computed niter |
+| manynet | Type validation | Scalar parameter checking | High | manynet to ensure scalar inputs |
+| rSpectral | Behavior change | Automatic weight usage | Medium | igraph needs clean fix; rSpectral to check weight intent |
+| sfnetworks | API tightening | `from` requires scalar | High | sfnetworks to iterate vertices |
+| rgph | Under investigation | Likely API tightening | Unknown | Reproduce and contact maintainer |
+| tmap.networks | Cascading | sfnetworks failure | High | Wait for sfnetworks fix |
 
 ### Overall Assessment
 
-- **1 namespace collision** (Cascade) - Minor impact
-- **3 API tightening changes** (DiagrammeR, manynet, sfnetworks) - Intentional safety improvements
-- **1 uncovered downstream bug** (jewel) - Should use integer values
-- **1 behavior change** (rSpectral) - Automatic weights with workaround available
+- **1 namespace collision** (Cascade) – Minor impact; inadvertent igraph export
+- **3 API tightening changes** (DiagrammeR, manynet, sfnetworks) – Intentional safety improvements; downstream bugs exposed
+- **1 uncovered downstream bug** (jewel) – Should use integer values
+- **1 behavior change needing igraph fix** (rSpectral) – Automatic weights; igraph must provide a clean `NA` mechanism
+- **1 cascading failure** (tmap.networks) – Resolved when sfnetworks is fixed
+- **1 under investigation** (rgph) – Likely API tightening
 
-Most issues stem from igraph's improved type safety and parameter validation. These are generally positive changes that make the API more explicit and catch errors earlier. Downstream packages need updates to handle the stricter requirements.
+Most issues stem from igraph's improved type safety and parameter validation. These are generally positive changes. However, the modularity weight auto-detection change (rSpectral) requires a proper igraph-side fix before we can issue clear guidance to downstream maintainers.
