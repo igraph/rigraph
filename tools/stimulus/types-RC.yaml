@@ -701,7 +701,7 @@ ISOMORPHISM_FUNC:
 ASTAR_HEURISTIC_FUNC:
     CALL: '0'
     CTYPE: ~
-    HEADER: {}
+    HEADER: '%I%'
 
 ATTRIBUTES:
     CALL: '0'
@@ -723,7 +723,7 @@ ARPACKSTORAGE:
 ARPACKFUNC:
     CALL: '0'
     CTYPE: ~
-    HEADER: {}
+    HEADER: '%I%'
 
 DRL_OPTIONS:
     CALL: '&%C%'

@@ -3959,7 +3959,7 @@ SEXP R_igraph_get_shortest_path_dijkstra(SEXP graph, SEXP from, SEXP to, SEXP we
 /*-------------------------------------------/
 / igraph_get_shortest_path_astar             /
 /-------------------------------------------*/
-SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode) {
+SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode, SEXP heuristic) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_vertices;
@@ -17724,7 +17724,7 @@ SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
 /*-------------------------------------------/
 / igraph_eigen_matrix                        /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
@@ -17787,7 +17787,7 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, 
 /*-------------------------------------------/
 / igraph_eigen_matrix_symmetric              /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
