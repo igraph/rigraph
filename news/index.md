@@ -1,6 +1,12 @@
 # Changelog
 
+## igraph 2.3.0.9000
+
+- Switching to development version.
+
 ## igraph 2.3.0
+
+CRAN release: 2026-04-21
 
 ### New features
 
