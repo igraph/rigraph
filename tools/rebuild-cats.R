@@ -21,9 +21,12 @@ CATS <- file.path(REPO, "tools", "aaa-categories.yaml")
 # Canonical source of `.Call(R_igraph_*)` symbols: either the original
 # monolithic R/aaa-auto.R (transitional / pre-split) or the set of per-category
 # R/aaa-<cat>.R files produced by tools/split-aaa-auto.R.
-AUTO_MONO  <- file.path(REPO, "R", "aaa-auto.R")
-AUTO_SPLIT <- list.files(file.path(REPO, "R"),
-                         pattern = "^aaa-.*\\.R$", full.names = TRUE)
+AUTO_MONO <- file.path(REPO, "R", "aaa-auto.R")
+AUTO_SPLIT <- list.files(
+  file.path(REPO, "R"),
+  pattern = "^aaa-.*\\.R$",
+  full.names = TRUE
+)
 # Exclude aaa-auto.R from the split list so we never double-count during a
 # transitional state where both exist.
 AUTO_SPLIT <- AUTO_SPLIT[basename(AUTO_SPLIT) != "aaa-auto.R"]
@@ -52,7 +55,10 @@ closure_map <- c(
 )
 
 auto_lines <- unlist(lapply(AUTO, readLines))
-raw <- unique(regmatches(auto_lines, regexpr("R_igraph_[a-z0-9_]+", auto_lines)))
+raw <- unique(regmatches(
+  auto_lines,
+  regexpr("R_igraph_[a-z0-9_]+", auto_lines)
+))
 raw <- raw[nzchar(raw)]
 raw <- sub("^R_", "", raw)
 
@@ -191,13 +197,23 @@ placements <- as.data.frame(placements, stringsAsFactors = FALSE)
 # redistributed via the placements table; this just preserves ordering).
 
 subcategory_renames <- list(
-  list(category = "generators", old = "regular-structre-generators",    new = "regular-structure-generators"),
-  list(category = "structural", old = "Sparsifiers",                    new = "sparsifiers"),
-  list(category = "motifs",     old = "uncategorized",                  new = "graph-census"),
-  list(category = "structural", old = "shortest-path-related-functions",
-       new = c("distances-and-metrics", "shortest-paths")),
-  list(category = "structural", old = "other-operations",
-       new = c("matrix-representations", "mutual-edges", "summary-statistics"))
+  list(
+    category = "generators",
+    old = "regular-structre-generators",
+    new = "regular-structure-generators"
+  ),
+  list(category = "structural", old = "Sparsifiers", new = "sparsifiers"),
+  list(category = "motifs", old = "uncategorized", new = "graph-census"),
+  list(
+    category = "structural",
+    old = "shortest-path-related-functions",
+    new = c("distances-and-metrics", "shortest-paths")
+  ),
+  list(
+    category = "structural",
+    old = "other-operations",
+    new = c("matrix-representations", "mutual-edges", "summary-statistics")
+  )
 )
 
 # ---- 2c. Explicit subcategory ordering for categories whose natural order
@@ -272,14 +288,20 @@ flatten_cats <- function(d) {
   rows <- list()
   for (cat in names(d)) {
     node <- d[[cat]]
-    if (is.null(node)) next
+    if (is.null(node)) {
+      next
+    }
     if (is.character(node)) {
       # direct list under category
-      for (fn in node) rows[[length(rows)+1]] <- c(cat, NA_character_, fn)
+      for (fn in node) {
+        rows[[length(rows) + 1]] <- c(cat, NA_character_, fn)
+      }
     } else if (is.list(node)) {
       for (sub in names(node)) {
         fns <- node[[sub]]
-        for (fn in fns) rows[[length(rows)+1]] <- c(cat, sub, fn)
+        for (fn in fns) {
+          rows[[length(rows) + 1]] <- c(cat, sub, fn)
+        }
       }
     }
   }
@@ -296,8 +318,12 @@ tbl <- tbl[!tbl$fn %in% stale_to_remove, ]
 # Apply 1:1 subcategory renames on the flattened table. Splits (length>1) are
 # handled entirely by placements, which reassign each function explicitly.
 for (r in subcategory_renames) {
-  if (length(r$new) != 1) next
-  m <- tbl$category == r$category & !is.na(tbl$subcategory) & tbl$subcategory == r$old
+  if (length(r$new) != 1) {
+    next
+  }
+  m <- tbl$category == r$category &
+    !is.na(tbl$subcategory) &
+    tbl$subcategory == r$old
   tbl$subcategory[m] <- r$new
 }
 
@@ -311,14 +337,16 @@ tbl <- rbind(tbl, placements)
 
 have <- sort(unique(tbl$fn))
 missing <- setdiff(canonical, have)
-extra   <- setdiff(have, canonical)
+extra <- setdiff(have, canonical)
 
 if (length(missing) || length(extra)) {
   cat("MISSING from cats.yml after rebuild:\n")
   cat(paste0("  ", missing, collapse = "\n"), "\n")
   cat("EXTRA in cats.yml after rebuild:\n")
   cat(paste0("  ", extra, collapse = "\n"), "\n")
-  stop("Validation failed: cats.yml does not match canonical list from aaa-auto.R")
+  stop(
+    "Validation failed: cats.yml does not match canonical list from aaa-auto.R"
+  )
 }
 
 # ---- 7. Emit YAML -----------------------------------------------------------
@@ -338,11 +366,17 @@ names(orig_sub_order) <- orig_cat_order
 # position (splits expand into their new names at the same slot)
 for (r in subcategory_renames) {
   prev <- orig_sub_order[[r$category]]
-  if (is.null(prev)) next
+  if (is.null(prev)) {
+    next
+  }
   idx <- which(prev == r$old)
-  if (length(idx) == 0) next
+  if (length(idx) == 0) {
+    next
+  }
   orig_sub_order[[r$category]] <- append(
-    prev[-idx], r$new, after = idx - 1
+    prev[-idx],
+    r$new,
+    after = idx - 1
   )
 }
 
@@ -358,22 +392,40 @@ for (cat in cat_order) {
   subs_present <- unique(sub_tbl$subcategory)
   override <- subcategory_order_overrides[[cat]]
   prev <- if (!is.null(override)) override else orig_sub_order[[cat]]
-  if (is.null(prev)) prev <- character()
+  if (is.null(prev)) {
+    prev <- character()
+  }
   sub_order <- c(intersect(prev, subs_present), setdiff(subs_present, prev))
 
   # Handle direct-list entries (NA subcategory) -- emit them first, at category level
   direct <- sub_tbl$fn[is.na(sub_tbl$subcategory)]
   if (length(direct)) {
-    for (fn in sort(direct)) lines <- c(lines, paste0("  - ", fn))
+    for (fn in sort(direct)) {
+      lines <- c(lines, paste0("  - ", fn))
+    }
   }
   for (sub in sub_order) {
-    if (is.na(sub)) next
-    fns <- sort(sub_tbl$fn[!is.na(sub_tbl$subcategory) & sub_tbl$subcategory == sub])
+    if (is.na(sub)) {
+      next
+    }
+    fns <- sort(sub_tbl$fn[
+      !is.na(sub_tbl$subcategory) & sub_tbl$subcategory == sub
+    ])
     lines <- c(lines, paste0("  ", sub, ":"))
-    for (fn in fns) lines <- c(lines, paste0("    - ", fn))
+    for (fn in fns) {
+      lines <- c(lines, paste0("    - ", fn))
+    }
   }
   lines <- c(lines, "")
 }
 
 writeLines(lines, CATS)
-message("wrote ", CATS, " with ", nrow(tbl), " entries across ", length(cat_order), " categories")
+message(
+  "wrote ",
+  CATS,
+  " with ",
+  nrow(tbl),
+  " entries across ",
+  length(cat_order),
+  " categories"
+)

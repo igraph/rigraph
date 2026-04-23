@@ -36,8 +36,12 @@ if (!file.exists(candidate)) {
   if (file.exists(fallback)) {
     candidate <- fallback
   } else {
-    stop("split-aaa-auto.R: no source file found at ", candidate,
-         " or ", fallback)
+    stop(
+      "split-aaa-auto.R: no source file found at ",
+      candidate,
+      " or ",
+      fallback
+    )
   }
 }
 SRC <- normalizePath(candidate)
@@ -66,10 +70,14 @@ cat_lookup <- new.env(hash = TRUE, parent = emptyenv())
 for (cat in names(cats)) {
   node <- cats[[cat]]
   if (is.character(node)) {
-    for (fn in node) cat_lookup[[fn]] <- list(category = cat, subcategory = NA_character_)
+    for (fn in node) {
+      cat_lookup[[fn]] <- list(category = cat, subcategory = NA_character_)
+    }
   } else if (is.list(node)) {
     for (sub in names(node)) {
-      for (fn in node[[sub]]) cat_lookup[[fn]] <- list(category = cat, subcategory = sub)
+      for (fn in node[[sub]]) {
+        cat_lookup[[fn]] <- list(category = cat, subcategory = sub)
+      }
     }
   }
 }
@@ -78,7 +86,7 @@ for (cat in names(cats)) {
 
 src_lines <- readLines(SRC, warn = FALSE)
 parsed <- parse(text = src_lines, keep.source = TRUE)
-pdata <- utils::getParseData(parsed)  # AST + line positions
+pdata <- utils::getParseData(parsed) # AST + line positions
 
 extract_call_sym <- function(expr) {
   # First non-finalizer `.Call(...)` symbol found in the expression tree.
@@ -105,25 +113,41 @@ extract_call_sym <- function(expr) {
 impls <- list()
 for (i in seq_along(parsed)) {
   expr <- parsed[[i]]
-  if (!is.call(expr) || length(expr) < 3) next
+  if (!is.call(expr) || length(expr) < 3) {
+    next
+  }
   op <- as.character(expr[[1]])
-  if (!op %in% c("<-", "=", "assign")) next
+  if (!op %in% c("<-", "=", "assign")) {
+    next
+  }
   lhs <- expr[[2]]
-  if (!is.name(lhs)) next
+  if (!is.name(lhs)) {
+    next
+  }
   impl_name <- as.character(lhs)
-  if (!grepl("_impl$", impl_name)) next
+  if (!grepl("_impl$", impl_name)) {
+    next
+  }
   rhs <- expr[[3]]
-  if (!(is.call(rhs) && identical(rhs[[1]], as.name("function")))) next
+  if (!(is.call(rhs) && identical(rhs[[1]], as.name("function")))) {
+    next
+  }
 
   sym <- extract_call_sym(rhs)
   if (is.null(sym)) {
     stop("impl ", impl_name, " has no non-finalizer .Call() target; aborting.")
   }
   c_literal <- sub("^R_", "", sym)
-  c_fn <- if (c_literal %in% names(closure_map)) closure_map[[c_literal]] else c_literal
+  c_fn <- if (c_literal %in% names(closure_map)) {
+    closure_map[[c_literal]]
+  } else {
+    c_literal
+  }
 
   sref <- attr(expr, "srcref")
-  if (is.null(sref)) sref <- getSrcref(parsed)[[i]]
+  if (is.null(sref)) {
+    sref <- getSrcref(parsed)[[i]]
+  }
   line1 <- sref[1L]
   line2 <- sref[3L]
   src_text <- paste(src_lines[line1:line2], collapse = "\n")
@@ -150,9 +174,13 @@ for (i in seq_along(impls)) {
   }
 }
 if (length(unassigned)) {
-  stop("impls without a category in ", CATS, ":\n  ",
-       paste(unassigned, collapse = "\n  "),
-       "\nAdd placements in tools/rebuild-cats.R and rerun it.")
+  stop(
+    "impls without a category in ",
+    CATS,
+    ":\n  ",
+    paste(unassigned, collapse = "\n  "),
+    "\nAdd placements in tools/rebuild-cats.R and rerun it."
+  )
 }
 
 # ---- Subcategory ordering (mirrors tools/rebuild-cats.R override) -------
@@ -212,16 +240,19 @@ if (length(stale)) {
 
 # ---- emit per-category files --------------------------------------------
 
-impl_tbl <- do.call(rbind, lapply(impls, function(x) {
-  data.frame(
-    impl_name   = x$impl_name,
-    c_function  = x$c_function,
-    category    = x$category,
-    subcategory = x$subcategory,
-    src_text    = x$src_text,
-    stringsAsFactors = FALSE
-  )
-}))
+impl_tbl <- do.call(
+  rbind,
+  lapply(impls, function(x) {
+    data.frame(
+      impl_name = x$impl_name,
+      c_function = x$c_function,
+      category = x$category,
+      subcategory = x$subcategory,
+      src_text = x$src_text,
+      stringsAsFactors = FALSE
+    )
+  })
+)
 
 src_basename <- basename(SRC)
 categories <- sort(unique(impl_tbl$category))
@@ -237,8 +268,14 @@ for (cat in categories) {
   sub_tbl <- impl_tbl[impl_tbl$category == cat, ]
 
   override <- subcategory_order_overrides[[cat]]
-  natural  <- yaml_sub_order[[cat]]
-  prev <- if (!is.null(override)) override else if (!is.null(natural)) natural else character()
+  natural <- yaml_sub_order[[cat]]
+  prev <- if (!is.null(override)) {
+    override
+  } else if (!is.null(natural)) {
+    natural
+  } else {
+    character()
+  }
   subs_present <- unique(sub_tbl$subcategory)
   sub_order <- c(intersect(prev, subs_present), setdiff(subs_present, prev))
 
@@ -256,10 +293,14 @@ for (cat in categories) {
   }
 
   for (sub in sub_order) {
-    if (is.na(sub)) next
+    if (is.na(sub)) {
+      next
+    }
     rows <- sub_tbl[!is.na(sub_tbl$subcategory) & sub_tbl$subcategory == sub, ]
     rows <- rows[order(rows$impl_name), ]
-    if (nrow(rows) == 0) next
+    if (nrow(rows) == 0) {
+      next
+    }
     banner <- paste0("# ==== ", sub, " ====")
     out_lines <- c(out_lines, banner, "", with_blanks(rows$src_text))
   }
@@ -273,5 +314,10 @@ for (cat in categories) {
   writeLines(out_lines, out_path)
 }
 
-message("wrote ", length(categories), " R/aaa-<cat>.R files (",
-        nrow(impl_tbl), " impls total)")
+message(
+  "wrote ",
+  length(categories),
+  " R/aaa-<cat>.R files (",
+  nrow(impl_tbl),
+  " impls total)"
+)
