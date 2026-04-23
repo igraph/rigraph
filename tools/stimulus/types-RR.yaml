@@ -487,6 +487,12 @@ EDGESET_LIST:
     CALL: {}
     HEADER: ~
 
+ARPACKFUNC:
+    CALL: {}
+
+ASTAR_HEURISTIC_FUNC:
+    CALL: {}
+
 ARPACKOPT:
     DEFAULT:
         ARPACK_DEFAULTS: arpack_defaults()
