@@ -34,11 +34,11 @@ graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #> Warning: `graph_()` was deprecated in igraph 2.1.0.
 #> ℹ Please use constructors directly, for instance graph_from_edgelist().
 #> ℹ graph_() will be removed in a future version of igraph.
-#> IGRAPH 181d922 U--- 6 5 -- 
-#> + edges from 181d922:
+#> IGRAPH c3c6279 U--- 6 5 -- 
+#> + edges from c3c6279:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
-#> IGRAPH b4334e2 U--- 6 5 -- 
-#> + edges from b4334e2:
+#> IGRAPH b38919d U--- 6 5 -- 
+#> + edges from b38919d:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 ```

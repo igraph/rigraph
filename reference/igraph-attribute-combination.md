@@ -158,33 +158,33 @@ igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
 simplify(g, edge.attr.comb = "sum")
-#> IGRAPH edd424f D-W- 4 3 -- 
+#> IGRAPH 4615313 D-W- 4 3 -- 
 #> + attr: weight (e/n)
-#> + edges from edd424f:
+#> + edges from 4615313:
 #> [1] 1->2 2->3 3->4
 
 ## collect attributes into a string
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH 8e09b6f D-W- 4 3 -- 
+#> IGRAPH 9bcab0e D-W- 4 3 -- 
 #> + attr: weight (e/c)
-#> + edges from 8e09b6f:
+#> + edges from 9bcab0e:
 #> [1] 1->2 2->3 3->4
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
 simplify(g, edge.attr.comb = "concat")
-#> IGRAPH fec8832 D-W- 4 3 -- 
+#> IGRAPH 1dd6a76 D-W- 4 3 -- 
 #> + attr: weight (e/x)
-#> + edges from fec8832:
+#> + edges from 1dd6a76:
 #> [1] 1->2 2->3 3->4
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH fb63cc2 D-W- 4 3 -- 
+#> IGRAPH c2fd708 D-W- 4 3 -- 
 #> + attr: weight (e/c), name (e/c)
-#> + edges from fb63cc2:
+#> + edges from c2fd708:
 #> [1] 1->2 2->3 3->4
 
 ## harmonic average of weights, names are dropped
@@ -192,8 +192,8 @@ simplify(g, edge.attr.comb = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
-#> IGRAPH f8be436 D-W- 4 3 -- 
+#> IGRAPH cc0648f D-W- 4 3 -- 
 #> + attr: weight (e/n)
-#> + edges from f8be436:
+#> + edges from cc0648f:
 #> [1] 1->2 2->3 3->4
 ```

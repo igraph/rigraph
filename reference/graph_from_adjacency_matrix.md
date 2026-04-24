@@ -297,6 +297,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH 08f4626 DNW- 10 57 -- 
+#> IGRAPH c72bff6 DNW- 10 57 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```
