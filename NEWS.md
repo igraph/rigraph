@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.0.9001
+
+## Bug fixes
+
+- Correct LTO type mismatch warnings in `cpp11.cpp` declarations (#2620).
+
+
 # igraph 2.3.0.9000
 
 - Switching to development version.
