@@ -93,6 +93,7 @@ and Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnp(20, 5 / 20)
 constraint(g)
 #>  [1] 0.2000000 0.3644141 0.2176519 0.4253472 0.3258333 0.3333333 0.3203125

@@ -40,6 +40,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 is_named(g)
 #> [1] FALSE
@@ -47,6 +48,6 @@ V(g)$name <- letters[1:10]
 is_named(g)
 #> [1] TRUE
 neighbors(g, "a")
-#> + 2/10 vertices, named, from 53c549f:
+#> + 2/10 vertices, named, from 91d993d:
 #> [1] b j
 ```

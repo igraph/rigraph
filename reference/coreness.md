@@ -85,6 +85,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 g <- add_edges(g, c(1, 2, 2, 3, 1, 3))
 coreness(g) # small core triangle in a ring

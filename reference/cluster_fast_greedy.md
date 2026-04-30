@@ -117,6 +117,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 fc <- cluster_fast_greedy(g)

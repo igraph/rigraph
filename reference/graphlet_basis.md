@@ -98,6 +98,7 @@ perform them individually: `graphlet_basis()` and `graphlet_proj()`.
 ## Examples
 
 ``` r
+
 ## Create an example graph first
 D1 <- matrix(0, 5, 5)
 D2 <- matrix(0, 5, 5)

@@ -160,6 +160,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
 #>  [1] 0.06265024 0.04420947 0.05577015 0.05330769 0.02519847 0.05104152

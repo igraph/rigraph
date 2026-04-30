@@ -87,6 +87,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_star(10)
 E(g)$weight <- seq(ecount(g))
 strength(g)

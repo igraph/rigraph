@@ -100,6 +100,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- erdos.renyi.game(1000, 1 / 1000)
 #> Warning: `erdos.renyi.game()` was deprecated in igraph 0.8.0.
 #> ℹ Please use `sample_gnp()` instead.

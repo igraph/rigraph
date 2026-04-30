@@ -118,6 +118,7 @@ Tom Gregorovic, Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 # This is so simple that we will have only one level
 g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 g <- add_edges(g, c(1, 6, 1, 11, 6, 11))

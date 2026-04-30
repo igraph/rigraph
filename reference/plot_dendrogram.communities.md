@@ -67,6 +67,7 @@ values:
 The different plotting functions take different sets of arguments. When
 using `plot.phylo` (`mode="phylo"`), we have the following syntax:
 
+
         plot_dendrogram(x, mode="phylo", colbar = palette(),
                 edge.color = NULL, use.edge.length = FALSE, \dots)
 
@@ -82,6 +83,7 @@ The extra arguments not documented above:
 - `dots` Attitional arguments to pass to `plot.phylo`.
 
 The syntax for `plot.hclust` (`mode="hclust"`):
+
 
         plot_dendrogram(x, mode="hclust", rect = 0, colbar = palette(),
                 hang = 0.01, ann = FALSE, main = "", sub = "", xlab = "",
@@ -115,6 +117,7 @@ The extra arguments not documented above:
 - `dots` Attitional arguments to pass to `plot.hclust`.
 
 The syntax for `plot.dendrogram` (`mode="dendrogram"`):
+
 
         plot_dendrogram(x, \dots)
 
@@ -151,6 +154,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 karate <- make_graph("Zachary")
 fc <- cluster_fast_greedy(karate)
 plot_dendrogram(fc)

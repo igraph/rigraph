@@ -4,6 +4,7 @@ A printer callback function is a function can performs the actual
 printing. It has a number of subcommands, that are called by the
 `printer` package, in a form
 
+
         printer_callback("subcommand", argument1, argument2, ...)
 
 See the examples below.

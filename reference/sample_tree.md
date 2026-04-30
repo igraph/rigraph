@@ -75,5 +75,6 @@ Random graph models (games)
 ## Examples
 
 ``` r
+
 g <- sample_tree(100, method = "lerw")
 ```

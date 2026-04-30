@@ -139,6 +139,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
 ```

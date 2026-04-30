@@ -207,6 +207,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 file <- tempfile(fileext = ".txt")
 write_graph(g, file, "edgelist")

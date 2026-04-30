@@ -136,6 +136,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # random network, close to zero
 assortativity_degree(sample_gnp(10000, 3 / 10000))
 #> [1] 0.0002666471

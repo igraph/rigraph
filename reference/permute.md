@@ -75,6 +75,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Random permutation of a random graph
 g <- sample_gnm(20, 50)
 g2 <- permute(g, sample(vcount(g)))

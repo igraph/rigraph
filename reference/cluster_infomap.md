@@ -117,6 +117,7 @@ done by Gabor Csardi <csardi.gabor@gmail.com>.
 ## Examples
 
 ``` r
+
 ## Zachary's karate club
 g <- make_graph("Zachary")
 

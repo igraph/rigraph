@@ -53,6 +53,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # This is the Franklin graph:
 g1 <- graph_from_lcf(shifts = c(5L, -5L), n = 12L, repeats = 6L)
 g2 <- make_graph("Franklin")

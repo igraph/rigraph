@@ -138,6 +138,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## The simple generator
 undirected_graph <- sample_degseq(rep(2, 100))
 degree(undirected_graph)

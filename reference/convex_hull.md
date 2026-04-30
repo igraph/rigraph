@@ -51,6 +51,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 M <- cbind(runif(100), runif(100))
 convex_hull(M)
 #> $resverts

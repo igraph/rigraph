@@ -63,6 +63,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 library(Matrix)
 ## g is a large sparse graph
 g <- sample_pa(n = 10^5, power = 2, directed = FALSE)

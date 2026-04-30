@@ -98,6 +98,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_graph("Zachary")
 sg <- cluster_spinglass(g)
 le <- cluster_leading_eigen(g)

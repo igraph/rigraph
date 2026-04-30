@@ -113,6 +113,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Loops
 g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 any_loop(g)

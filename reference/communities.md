@@ -316,6 +316,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 karate <- make_graph("Zachary")
 wc <- cluster_walktrap(karate)
 modularity(wc)

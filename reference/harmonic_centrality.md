@@ -105,6 +105,7 @@ Centrality measures
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 g2 <- make_star(10)
 harmonic_centrality(g)

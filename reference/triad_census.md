@@ -120,6 +120,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnm(15, 45, directed = TRUE)
 triad_census(g)
 #>  [1]  90 198  21  20  21  57  11  15  12   5   0   2   1   2   0   0

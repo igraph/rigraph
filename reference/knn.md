@@ -132,6 +132,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Some trivial ones
 g <- make_ring(10)
 knn(g)

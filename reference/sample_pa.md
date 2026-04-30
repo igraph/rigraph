@@ -191,6 +191,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_pa(10000)
 degree_distribution(g)
 #>   [1] 0.0000 0.6648 0.1678 0.0648 0.0339 0.0214 0.0125 0.0071 0.0055 0.0028

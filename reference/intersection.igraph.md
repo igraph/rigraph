@@ -98,6 +98,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Common part of two social networks
 net1 <- graph_from_literal(
   D - A:B:F:G, A - C - F - A, B - E - G - B, A - B, F - G,
@@ -105,7 +106,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> IGRAPH 8849d53 UN-- 13 4 -- 
+#> IGRAPH e3814ee UN-- 13 4 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -122,6 +123,6 @@ print_all(net1 %s% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from 8849d53 (vertex names):
+#> + edges from e3814ee (vertex names):
 #> [1] F--H A--B D--F D--A
 ```

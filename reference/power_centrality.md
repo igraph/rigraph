@@ -165,6 +165,7 @@ igraph by Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Generate some test data from Bonacich, 1987:
 g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
 g.d <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)

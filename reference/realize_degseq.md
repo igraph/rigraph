@@ -102,6 +102,7 @@ sequence.
 ## Examples
 
 ``` r
+
 g <- realize_degseq(rep(2, 100))
 degree(g)
 #>   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2

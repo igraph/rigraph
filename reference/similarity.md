@@ -92,6 +92,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- make_ring(5)
 similarity(g, method = "dice")
 #>      [,1] [,2] [,3] [,4] [,5]

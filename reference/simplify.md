@@ -119,6 +119,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_graph(c(1, 2, 1, 2, 3, 3))
 is_simple(g)
 #> [1] FALSE

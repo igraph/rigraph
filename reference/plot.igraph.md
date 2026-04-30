@@ -146,6 +146,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 plot(g, layout = layout_with_kk, vertex.color = "green")
 

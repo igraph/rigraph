@@ -62,6 +62,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_pa(100)
 dyad_census(g)
 #> $mut

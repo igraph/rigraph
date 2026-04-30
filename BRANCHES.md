@@ -83,9 +83,9 @@ There is a single active mainline tracking `krlmlr/igraph@main-dev` (the
 replay of the changes from 0.10.17 to 1.0.1 using a series of
 self-contained commits).
 
-| Branch     | Repo             | Purpose                                                            |
-|------------|------------------|--------------------------------------------------------------------|
-| `main-dev` | `krlmlr/rigraph` | Source of truth for R code, tests, CI/CD; stable baseline          |
+| Branch | Repo | Purpose |
+|----|----|----|
+| `main-dev` | `krlmlr/rigraph` | Source of truth for R code, tests, CI/CD; stable baseline |
 | `main-dev` | `krlmlr/rigraph` | Vendored dev (upstream `main-dev`); published as development build |
 
 ### Branch structure
@@ -217,8 +217,8 @@ it can be retired eventually.
 
 ## Tooling
 
-| Script / Workflow               | Purpose                                                          |
-|---------------------------------|------------------------------------------------------------------|
-| `vendor.sh`                     | Local manual vendoring from a cloned upstream repo               |
-| `vendor-one.sh`                 | CI commit-by-commit vendoring (called by `vendor.yaml`)          |
+| Script / Workflow | Purpose |
+|----|----|
+| `vendor.sh` | Local manual vendoring from a cloned upstream repo |
+| `vendor-one.sh` | CI commit-by-commit vendoring (called by `vendor.yaml`) |
 | `.github/workflows/vendor.yaml` | Hourly vendoring for `main-dev` (restricted to `krlmlr/rigraph`) |

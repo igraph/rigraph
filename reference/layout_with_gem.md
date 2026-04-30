@@ -112,6 +112,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 set.seed(42)
 g <- make_ring(10)
 plot(g, layout = layout_with_gem)

@@ -150,6 +150,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 set.seed(42)
 ## Figures from the paper
 g_1b <- make_star(19, mode = "undirected") + path(c(2:19, 2)) +

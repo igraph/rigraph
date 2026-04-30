@@ -21,6 +21,7 @@ y `red` como sinónimos, y también `vértice` o `nodo` como sinónimos.
 Para instalar la librería desde CRAN, usa:
 
 ``` r
+
 install.packages("igraph")
 ```
 
@@ -34,6 +35,7 @@ Para utilizar `igraph` en tu código de R, primero debes cargar la
 biblioteca:
 
 ``` r
+
 library("igraph")
 ```
 
@@ -57,6 +59,7 @@ la función
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md):
 
 ``` r
+
 g <- make_empty_graph()
 ```
 
@@ -67,6 +70,7 @@ hacer un grafo con 10 nodos (numerados `1` a `10`) y dos aristas que
 conecten los nodos `1-2` y `1-5`:
 
 ``` r
+
 g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
 ```
 
@@ -84,6 +88,7 @@ un único carácter `+` implica un grafo dirigido. Por ejemplo, para crear
 el mismo grafo que antes:
 
 ``` r
+
 g <- make_graph(~ 1--2, 1--5, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
@@ -91,12 +96,13 @@ Podemos imprimir el grafo para obtener un resumen de sus nodos y
 aristas:
 
 ``` r
+
 g
 ```
 
-    ## IGRAPH 95f1e4e UN-- 10 2 -- 
+    ## IGRAPH b20c296 UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from 95f1e4e (vertex names):
+    ## + edges from b20c296 (vertex names):
     ## [1] 1--2 1--5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
@@ -112,10 +118,11 @@ aristas:
 ------------------------------------------------------------------------
 
 ``` r
+
 summary(g)
 ```
 
-    ## IGRAPH 95f1e4e UN-- 10 2 -- 
+    ## IGRAPH b20c296 UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -125,6 +132,7 @@ de kárate de Zachary, que refleja la amistad entre los 34 miembros del
 club de una universidad de los Estados Unidos en la década de los 70s:
 
 ``` r
+
 g <- make_graph("Zachary")
 ```
 
@@ -132,6 +140,7 @@ Para observar un grafo puedes utilizar
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html):
 
 ``` r
+
 plot(g)
 ```
 
@@ -176,6 +185,7 @@ más vértices a un grafo existente, utiliza
 [`add_vertices()`](https://r.igraph.org/reference/add_vertices.md):
 
 ``` r
+
 g <- add_vertices(g, 3)
 ```
 
@@ -183,6 +193,7 @@ Del mismo modo, para añadir aristas puedes utilizar
 [`add_edges()`](https://r.igraph.org/reference/add_edges.md):
 
 ``` r
+
 g <- add_edges(g, edges = c(1,35, 1,36, 34,37))
 ```
 
@@ -200,6 +211,7 @@ operación que se realice dependerá del tipo de argumento del lado
 derecho:
 
 ``` r
+
 g <- g + edges(c(1,35, 1,36, 34,37))
 ```
 
@@ -217,6 +229,7 @@ intentas añadir una arista al vértice `38` cuando el grafo sólo tiene 37
 vértices), `igraph` muestra un error:
 
 ``` r
+
 g <- add_edges(g, edges = c(38, 37))
 ```
 
@@ -229,6 +242,7 @@ utilizar el paquete `magrittr`, que proporciona un mecanismo para
 encadenar comandos con el operador `%>%`:
 
 ``` r
+
 g <- g %>%
   add_edges(edges = c(1, 34)) %>%
   add_vertices(3) %>%
@@ -236,9 +250,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH 4d903ba U--- 40 86 -- Zachary
+    ## IGRAPH 2bf8039 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from 4d903ba:
+    ## + edges from 2bf8039:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -260,6 +274,7 @@ para realizar estas operaciones. Por ejemplo, para borrar la arista que
 conecta los vértices `1-34`, obtén su ID y luego bórrala:
 
 ``` r
+
 edge_id_para_borrar <- get_edge_ids(g, c(1,34))
 edge_id_para_borrar
 ```
@@ -267,12 +282,14 @@ edge_id_para_borrar
     ## [1] 82
 
 ``` r
+
 g <- delete_edges(g, edge_id_para_borrar)
 ```
 
 Por ejemplo, para crear un grafo con forma de anillo y para partirlo:
 
 ``` r
+
 g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
@@ -287,6 +304,7 @@ IDs de las aristas directamente, o recuperarlos con la función
 [`get_edge_ids()`](https://r.igraph.org/reference/get_edge_ids.md):
 
 ``` r
+
 g <- make_ring(5)
 g <- delete_edges(g, get_edge_ids(g, c(1,5, 4,5)))
 plot(g)
@@ -302,6 +320,7 @@ utilizando
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md):
 
 ``` r
+
 g1 <- graph_from_literal(
   A-B:C:I,
   B-A:C:D,
@@ -327,6 +346,7 @@ evaluar si nuestro grafo es cordal y buscar qué aristas faltan para
 rellenar el grafo:
 
 ``` r
+
 is_chordal(g1, fillin=TRUE)
 ```
 
@@ -343,6 +363,7 @@ Luego, en una sola línea podemos añadir las aristas necesarias para que
 el grafo inicial sea cordal:
 
 ``` r
+
 chordal_graph <- add_edges(g1, is_chordal(g1, fillin=TRUE)$fillin)
 plot(chordal_graph)
 ```
@@ -360,11 +381,12 @@ el mismo grafo cada vez, por ejemplo
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md):
 
 ``` r
+
 graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH 25021c9 U--- 5 3 -- Ring graph
+    ## IGRAPH c558cd5 U--- 5 3 -- Ring graph
     ## + attr: name (g/c), mutual (g/l), circular (g/l)
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
@@ -373,10 +395,12 @@ vértice con dos hijos. No importa cuántas veces llames a
 generado será siempre el mismo si utilizas los mismos parámetros:
 
 ``` r
+
 graph2 <- make_tree(127, 2, mode = "undirected")
 ```
 
 ``` r
+
 identical_graphs(graph1, graph2)
 ```
 
@@ -387,11 +411,12 @@ grafo diferente cada vez; por ejemplo,
 [`sample_grg()`](https://r.igraph.org/reference/sample_grg.md):
 
 ``` r
+
 graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH 6cb510f U--- 100 499 -- Geometric random graph
+    ## IGRAPH 7667685 U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
@@ -401,6 +426,7 @@ conectan mediante una arista. Si se generan GRGs con los mismos
 parámetros, serán diferentes:
 
 ``` r
+
 graph2 <- sample_grg(100, 0.2)
 identical_graphs(graph1, graph2)
 ```
@@ -415,6 +441,7 @@ que dos grafos son isomorfos si tienen el mismo número de componentes
 vértices y aristas, es decir, están conectados de la misma manera:
 
 ``` r
+
 isomorphic(graph1, graph2)
 ```
 
@@ -441,6 +468,7 @@ recuperar estos atributos.
 Para demostrar el uso de los atributos, creemos una red social sencilla:
 
 ``` r
+
 g <- make_graph(
   ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
@@ -458,13 +486,14 @@ como [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md) y
 [`set_graph_attr()`](https://r.igraph.org/reference/set_graph_attr.md).
 
 ``` r
+
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
 V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
 E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH b118257 UN-- 7 9 -- 
+    ## IGRAPH 76cf9fc UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
@@ -476,6 +505,7 @@ y [`set_edge_attr()`](https://r.igraph.org/reference/set_edge_attr.md) y
 el operador `%>%`:
 
 ``` r
+
 g <- make_graph(
   ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
@@ -491,12 +521,14 @@ summary(g)
 Para asignar o modificar un atributo a un único vértice/arista:
 
 ``` r
+
 E(g)$is_formal
 ```
 
     ## [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE
 
 ``` r
+
 E(g)$is_formal[1] <- TRUE
 E(g)$is_formal
 ```
@@ -510,6 +542,7 @@ aristas y el propio grafo pueden utilizarse para establecer atributos,
 por ejemplo, para añadir una fecha al grafo:
 
 ``` r
+
 g$date <- c("2022-02-11")
 graph_attr(g, "date")
 ```
@@ -524,6 +557,7 @@ encontrar el ID de un vértice puedes utilizar la función
 [`match()`](https://rdrr.io/r/base/match.html):
 
 ``` r
+
 match(c("Ibrahim"), V(g)$name)
 ```
 
@@ -533,16 +567,18 @@ Para asignar atributos a un subconjunto de vértices o aristas, puedes
 utilizar:
 
 ``` r
+
 V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from b118257:
+    ## + 7/7 vertices, named, from 76cf9fc:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
 
 ``` r
+
 g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
@@ -571,6 +607,7 @@ originan en el vértice). igraph es capaz de calcularlos todos utilizando
 una sintaxis sencilla:
 
 ``` r
+
 degree(g)
 ```
 
@@ -585,6 +622,7 @@ una lista de IDs de los vértices a
 calcular los grados sólo para un subconjunto de vértices:
 
 ``` r
+
 degree(g, 7)
 ```
 
@@ -592,6 +630,7 @@ degree(g, 7)
     ##       2
 
 ``` r
+
 degree(g, v = c(3,4,5))
 ```
 
@@ -603,6 +642,7 @@ aceptan los “nombres” de los vértices (es decir, los valores del
 atributo `name` del vértice) siempre que los nombres sean únicos:
 
 ``` r
+
 degree(g, v = c("Carmina", "Moshe", "Nang"))
 ```
 
@@ -612,6 +652,7 @@ degree(g, v = c("Carmina", "Moshe", "Nang"))
 También funciona para vértices individuales:
 
 ``` r
+
 degree(g, "Bruno")
 ```
 
@@ -646,6 +687,7 @@ o el PageRank de Google
 nombrar algunas. Aquí sólo ilustraremos la intermediación de aristas:
 
 ``` r
+
 edge_betweenness(g)
 ```
 
@@ -655,6 +697,7 @@ De este modo, ahora también podemos averiguar qué conexiones tienen la
 mayor centralidad de intermediación:
 
 ``` r
+
 ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
 ```
@@ -673,6 +716,7 @@ herramientas presentadas hasta ahora y con la función
 [`which.max()`](https://rdrr.io/r/base/which.min.html):
 
 ``` r
+
 which.max(degree(g))
 ```
 
@@ -683,6 +727,7 @@ Otro ejemplo sería seleccionar sólo los vértices que tienen IDs impares,
 utilizando la función [`V()`](https://r.igraph.org/reference/V.md):
 
 ``` r
+
 graph <- graph.full(n=10)
 ```
 
@@ -693,6 +738,7 @@ graph <- graph.full(n=10)
     ## generated.
 
 ``` r
+
 only_odd_vertices <- which(V(graph)%%2==1)
 length(only_odd_vertices)
 ```
@@ -703,28 +749,31 @@ Por supuesto, es posible seleccionar vértices o aristas mediante índices
 posicionales:
 
 ``` r
+
 seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from 47df196:
+    ## + 3/10 vertices, from c00998f:
     ## [1] 2 3 7
 
 ``` r
+
 seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from 47df196:
+    ## + 2/10 vertices, from c00998f:
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
 
 ``` r
+
 seq <- V(graph)[2, 3, 7, "foo", 3.5]
 ```
 
-    ## Error in `simple_vs_index()` at rigraph/R/iterators.R:736:7:
+    ## Error in `simple_vs_index()` at igraph/R/iterators.R:736:7:
     ## ! Unknown vertex selected.
 
 Los nombres de los atributos también pueden utilizarse tal cual dentro
@@ -738,6 +787,7 @@ nos da los nombres de los individuos menores de 30 años de nuestra red
 social:
 
 ``` r
+
 V(g)[age < 30]$name
 ```
 
@@ -760,6 +810,7 @@ También puede crear un operador “no incluido en” a partir de `%in%`
 utilizando el operador `Negate`:
 
 ``` r
+
 `%notin%` <- Negate(`%in%`)
 ```
 
@@ -770,6 +821,7 @@ un examen para cada persona, no debe confundirse con la función de
 igraph que calcula los grados de los vértices de una red:
 
 ``` r
+
 V(g)$degree <- c("A", "B", "B+", "A+", "C", "A", "B")
 V(g)$degree[degree(g) == 3]
 ```
@@ -777,6 +829,7 @@ V(g)$degree[degree(g) == 3]
     ## [1] "A"  "A+" "C"
 
 ``` r
+
 V(g)$name[degree(g) == 3]
 ```
 
@@ -796,19 +849,21 @@ proceden. Por ejemplo, para seleccionar todas las aristas procedentes de
 Carmina (cuyo ID de vértice es el 3):
 
 ``` r
+
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from b118257 (vertex names):
+    ## + 4/9 edges from 76cf9fc (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Por supuesto, también funciona con nombres de vértices:
 
 ``` r
+
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from b118257 (vertex names):
+    ## + 4/9 edges from 76cf9fc (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Al usar
@@ -830,10 +885,11 @@ vértice es el 3), Nang (su ID de vértice es el 5) y Samira (su ID de
 vértice es el 6):
 
 ``` r
+
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from b118257 (vertex names):
+    ## + 3/9 edges from 76cf9fc (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -844,10 +900,12 @@ luego de volver a añadir el atributo de género que hemos eliminado
 anteriormente:
 
 ``` r
+
 V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
 ```
 
 ``` r
+
 men <- V(g)[gender == "m"]$name
 men
 ```
@@ -855,6 +913,7 @@ men
     ## [1] "Bruno"   "Moshe"   "Nang"    "Ibrahim"
 
 ``` r
+
 women <- V(g)[gender == "f"]$name
 women
 ```
@@ -862,10 +921,11 @@ women
     ## [1] "Alejandra" "Carmina"   "Samira"
 
 ``` r
+
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from b118257 (vertex names):
+    ## + 5/9 edges from 76cf9fc (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
@@ -878,6 +938,7 @@ aristas entre los vértices *i* y *j*. La matriz de adyacencia del grafo
 de nuestra red social imaginaria es:
 
 ``` r
+
 as_adjacency_matrix(g)
 ```
 
@@ -914,17 +975,17 @@ en cualquier formato de salida que soporte el propio R.
 Las funciones de diseño en igraph siempre empiezan por `layout`. La
 siguiente tabla las resume:
 
-| Nombre del método  | Descripción del algoritmo                                                                                                  |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------|
-| `layout_randomly`  | Coloca los vértices de forma totalmente aleatoria                                                                          |
-| `layout_in_circle` | Disposición determinista que coloca los vértices en un círculo                                                             |
-| `layout_on_sphere` | Disposición determinista que coloca los vértices de manera uniforme en la superficie de una esfera                         |
-| `layout_with_drl`  | El algoritmo DRL (*Distributed Recursive Layout*) para grafos grandes                                                      |
-| `layout_with_fr`   | El algoritmo dirigido Fruchterman-Reingold                                                                                 |
-| `layout_with_kk`   | El algoritmo dirigido Kamada-Kawai                                                                                         |
-| `layout_with_lgl`  | El algoritmo LGL (*Large Graph Layout*) para grafos grandes                                                                |
-| `layout_as_tree`   | Diseño de árbol de Reingold-Tilford, útil para grafos (casi) arbóreos                                                      |
-| `layout_nicely`    | Algoritmo de diseño que elige automáticamente uno de los otros algoritmos en función de determinadas propiedades del grafo |
+| Nombre del método | Descripción del algoritmo |
+|----|----|
+| `layout_randomly` | Coloca los vértices de forma totalmente aleatoria |
+| `layout_in_circle` | Disposición determinista que coloca los vértices en un círculo |
+| `layout_on_sphere` | Disposición determinista que coloca los vértices de manera uniforme en la superficie de una esfera |
+| `layout_with_drl` | El algoritmo DRL (*Distributed Recursive Layout*) para grafos grandes |
+| `layout_with_fr` | El algoritmo dirigido Fruchterman-Reingold |
+| `layout_with_kk` | El algoritmo dirigido Kamada-Kawai |
+| `layout_with_lgl` | El algoritmo LGL (*Large Graph Layout*) para grafos grandes |
+| `layout_as_tree` | Diseño de árbol de Reingold-Tilford, útil para grafos (casi) arbóreos |
+| `layout_nicely` | Algoritmo de diseño que elige automáticamente uno de los otros algoritmos en función de determinadas propiedades del grafo |
 
 Los algoritmos de diseño pueden ejecutarse directamente con un grafo
 como primer argumento. Devolverán una matriz con dos columnas y tantas
@@ -934,6 +995,7 @@ algoritmos tienen una variante 3D; en este caso devuelven tres columnas
 en lugar de 2.
 
 ``` r
+
 layout <- layout_with_kk(g)
 ```
 
@@ -942,6 +1004,7 @@ cuando se diseña un grafo con la forma de un árbol, puede tener sentido
 especificar qué vértice debe colocarse en la raíz del diseño:
 
 ``` r
+
 layout <- layout_as_tree(g, root = 2)
 ```
 
@@ -951,10 +1014,12 @@ Podemos trazar nuestra red social imaginaria con el algoritmo de diseño
 Kamada-Kawai de la siguiente manera:
 
 ``` r
+
 layout <- layout_with_kk(g)
 ```
 
 ``` r
+
 plot(g, layout = layout, main = "Red social con el algoritmo de diseño Kamada-Kawai")
 ```
 
@@ -970,6 +1035,7 @@ ingresar directamente el nombre de una función de diseño, sin tener que
 crear una variable de diseño, como en el ejemplo anterior:
 
 ``` r
+
 plot(
   g,
   layout = layout_with_fr,
@@ -984,6 +1050,7 @@ vértices según el género. También deberíamos intentar colocar los
 nombres ligeramente fuera de los vértices para mejorar la legibilidad:
 
 ``` r
+
 V(g)$color <- ifelse(V(g)$gender == "m", "yellow", "red")
 plot(
   g,
@@ -1002,6 +1069,7 @@ prioridad sobre el atributo `color` que se asigna de manera estándar a
 los vértices. Los colores se asignan automáticamente:
 
 ``` r
+
 plot(
   g,
   layout = layout,
@@ -1018,6 +1086,7 @@ muestra las relaciones formales con líneas gruesas y las informales con
 líneas finas:
 
 ``` r
+
 plot(
   g,
   layout = layout,
@@ -1043,43 +1112,43 @@ respectivamente:
 
 ### Atributos de los vértices para graficar
 
-| Nombre del atributo | Argumento             | Propósito                                                                                                                                                                                                                                                              |
-|---------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `color`             | `vertex.color`        | Color del vértice                                                                                                                                                                                                                                                      |
-| `label`             | `vertex.label`        | Etiqueta del vértice. Se convertirán en caracteres. Especifique NA para omitir las etiquetas de los vértices. Las etiquetas de vértices por defecto son los IDs de los vértices.                                                                                       |
-| `label.cex`         | `vertex.label.cex`    | Tamaño de fuente de la etiqueta del vértice, interpretado como un factor multiplicativo, de forma similar a la función `text` de R                                                                                                                                     |
-| `label.color`       | `vertex.label.color`  | Color de la etiqueta del vértice                                                                                                                                                                                                                                       |
-| `label.degree`      | `vertex.label.degree` | Define la posición de las etiquetas de los vértices, en relación con el centro de los mismos. Se interpreta como un ángulo en radianes, cero significa ‘a la derecha’, y ‘pi’ significa a la izquierda, arriba es -pi/2 y abajo es pi/2. El valor por defecto es -pi/4 |
-| `label.dist`        | `vertex.label.dist`   | Distancia de la etiqueta del vértice desde el propio vértice, en relación con el tamaño del vértice                                                                                                                                                                    |
-| `label.family`      | `vertex.label.family` | Familia tipográfica del vértice, de forma similar a la función `text` de R                                                                                                                                                                                             |
-| `label.font`        | `vertex.label.font`   | Fuente dentro de la familia de fuentes del vértice, de forma similar a la función `text` de R                                                                                                                                                                          |
-| `shape`             | `vertex.shape`        | La forma del vértice, actualmente “circle”, “square”, “csquare”, “rectangle”, “crectangle”, “vrectangle”, “pie” (consultar `vertex.shape.pie`), ‘sphere’ y “none” son admitidos, y sólo por el comando `plot.igraph`                                                   |
-| `size`              | `vertex.size`         | El tamaño del vértice, un escalar numérico o vector, en este último caso el tamaño de cada vértice puede ser diferente                                                                                                                                                 |
+| Nombre del atributo | Argumento | Propósito |
+|----|----|----|
+| `color` | `vertex.color` | Color del vértice |
+| `label` | `vertex.label` | Etiqueta del vértice. Se convertirán en caracteres. Especifique NA para omitir las etiquetas de los vértices. Las etiquetas de vértices por defecto son los IDs de los vértices. |
+| `label.cex` | `vertex.label.cex` | Tamaño de fuente de la etiqueta del vértice, interpretado como un factor multiplicativo, de forma similar a la función `text` de R |
+| `label.color` | `vertex.label.color` | Color de la etiqueta del vértice |
+| `label.degree` | `vertex.label.degree` | Define la posición de las etiquetas de los vértices, en relación con el centro de los mismos. Se interpreta como un ángulo en radianes, cero significa ‘a la derecha’, y ‘pi’ significa a la izquierda, arriba es -pi/2 y abajo es pi/2. El valor por defecto es -pi/4 |
+| `label.dist` | `vertex.label.dist` | Distancia de la etiqueta del vértice desde el propio vértice, en relación con el tamaño del vértice |
+| `label.family` | `vertex.label.family` | Familia tipográfica del vértice, de forma similar a la función `text` de R |
+| `label.font` | `vertex.label.font` | Fuente dentro de la familia de fuentes del vértice, de forma similar a la función `text` de R |
+| `shape` | `vertex.shape` | La forma del vértice, actualmente “circle”, “square”, “csquare”, “rectangle”, “crectangle”, “vrectangle”, “pie” (consultar `vertex.shape.pie`), ‘sphere’ y “none” son admitidos, y sólo por el comando `plot.igraph` |
+| `size` | `vertex.size` | El tamaño del vértice, un escalar numérico o vector, en este último caso el tamaño de cada vértice puede ser diferente |
 
 ### Atributos de las aristas para graficar
 
-| Nombre del atributo | Argumento           | Propósito                                                                                                                                                                                                                                                                                    |
-|---------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `color`             | `edge.color`        | Color de la arista                                                                                                                                                                                                                                                                           |
-| `curved`            | `edge.curved`       | Un valor numérico especifica la curvatura de la arista; una curvatura cero significa aristas rectas, valores negativos significan que la arista se curva en el sentido de las agujas del reloj, valores positivos lo contrario. TRUE significa curvatura 0.5, FALSE significa curvatura cero |
-| `arrow.size`        | `edge.arrow.size`   | Actualmente es una constante, por lo que es la misma para todas las aristas. Si se presenta un vector, sólo se utiliza el primer elemento, es decir, si se toma de un atributo de aristas, sólo se utiliza el atributo de la primera arista para todas las flechas                           |
-| `arrow.width`       | `edge.arrow.width`  | El ancho de las flechas. Actualmente es una constante, por lo que es la misma para todas las aristas                                                                                                                                                                                         |
-| `width`             | `edge.width`        | Anchura del borde en píxeles                                                                                                                                                                                                                                                                 |
-| `label`             | `edge.label`        | Si se especifica, añade una etiqueta al borde                                                                                                                                                                                                                                                |
-| `label.cex`         | `edge.label.cex`    | Tamaño de fuente de la etiqueta de la arista, interpretado como un factor multiplicativo, de forma similar a la función `text` de R                                                                                                                                                          |
-| `label.color`       | `edge.label.color`  | Color de la etiqueta de la arista                                                                                                                                                                                                                                                            |
-| `label.family`      | `edge.label.family` | Familia tipográfica de la arista, de forma similar a la función `text` de R                                                                                                                                                                                                                  |
-| `label.font`        | `edge.label.font`   | Fuente dentro de la familia de fuentes de la arista, de forma similar a la función `text` de R                                                                                                                                                                                               |
+| Nombre del atributo | Argumento | Propósito |
+|----|----|----|
+| `color` | `edge.color` | Color de la arista |
+| `curved` | `edge.curved` | Un valor numérico especifica la curvatura de la arista; una curvatura cero significa aristas rectas, valores negativos significan que la arista se curva en el sentido de las agujas del reloj, valores positivos lo contrario. TRUE significa curvatura 0.5, FALSE significa curvatura cero |
+| `arrow.size` | `edge.arrow.size` | Actualmente es una constante, por lo que es la misma para todas las aristas. Si se presenta un vector, sólo se utiliza el primer elemento, es decir, si se toma de un atributo de aristas, sólo se utiliza el atributo de la primera arista para todas las flechas |
+| `arrow.width` | `edge.arrow.width` | El ancho de las flechas. Actualmente es una constante, por lo que es la misma para todas las aristas |
+| `width` | `edge.width` | Anchura del borde en píxeles |
+| `label` | `edge.label` | Si se especifica, añade una etiqueta al borde |
+| `label.cex` | `edge.label.cex` | Tamaño de fuente de la etiqueta de la arista, interpretado como un factor multiplicativo, de forma similar a la función `text` de R |
+| `label.color` | `edge.label.color` | Color de la etiqueta de la arista |
+| `label.family` | `edge.label.family` | Familia tipográfica de la arista, de forma similar a la función `text` de R |
+| `label.font` | `edge.label.font` | Fuente dentro de la familia de fuentes de la arista, de forma similar a la función `text` de R |
 
 ### Argumentos más comunes de `plot()`
 
 Estos parámetros pueden especificarse como argumentos de la función
 `plot` para ajustar el aspecto general del gráfico.
 
-| Argumento | Propósito                                                                                                                                                                                                                                                                                             |
-|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `layout`  | El diseño que se va a utilizar. Puede ser una instancia de `layout`, una lista de tuplas que contengan coordenadas X-Y, o el nombre de un algoritmo de diseño. El valor por defecto es `auto`, que selecciona un algoritmo de diseño automáticamente basado en el tamaño y la conectividad del grafo. |
-| `margin`  | La cantidad de espacio vacío debajo, encima, a la izquierda y a la derecha del gráfico, es un vector numérico de longitud cuatro                                                                                                                                                                      |
+| Argumento | Propósito |
+|----|----|
+| `layout` | El diseño que se va a utilizar. Puede ser una instancia de `layout`, una lista de tuplas que contengan coordenadas X-Y, o el nombre de un algoritmo de diseño. El valor por defecto es `auto`, que selecciona un algoritmo de diseño automáticamente basado en el tamaño y la conectividad del grafo. |
+| `margin` | La cantidad de espacio vacío debajo, encima, a la izquierda y a la derecha del gráfico, es un vector numérico de longitud cuatro |
 
 ## igraph y el mundo exterior
 
@@ -1094,18 +1163,18 @@ son [`read_graph()`](https://r.igraph.org/reference/read_graph.md) y
 respectivamente. La siguiente tabla resume los formatos que igraph puede
 leer o escribir:
 
-| Formato                                                                     | Nombre corto | Método de lectura                                                                                                                                                                         | Método de escritura                                |
-|-----------------------------------------------------------------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| Lista de adyacencia (a.k.a. [LGL](https://lgl.sourceforge.net/#FileFormat)) | `lgl`        | `read_graph(file, format = c("lgl"))`                                                                                                                                                     | `write_graph(graph, file, format = c("lgl"))`      |
-| Matriz de adyacencia                                                        | `adjacency`  | `graph_from_adjacency_matrix(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper","lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA)` | `as.matrix(graph, "adjacency")`                    |
-| DIMACS                                                                      | `dimacs`     | `read_graph(file, format = c("dimacs"))`                                                                                                                                                  | `write_graph(graph, file, format = c("dimacs"))`   |
-| Edge list                                                                   | `edgelist`   | `read_graph(file, format = c("edgelist"))`                                                                                                                                                | `write_graph(graph, file, format = c("edgelist"))` |
-| [GraphViz](https://www.graphviz.org)                                        | `dot`        | not supported yet                                                                                                                                                                         | `write_graph(graph, file, format = c("dot"))`      |
-| GML                                                                         | `gml`        | `read_graph(file, format = c("gml"))`                                                                                                                                                     | `write_graph(graph, file, format = c("gml"))`      |
-| GraphML                                                                     | `graphml`    | `read_graph(file, format = c("graphml"))`                                                                                                                                                 | `write_graph(graph, file, format = c("graphml"))`  |
-| LEDA                                                                        | `leda`       | not supported yet                                                                                                                                                                         | `write_graph(graph, file, format = c("leda"))`     |
-| Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat))   | `ncol`       | `read_graph(file, format = c("ncol"))`                                                                                                                                                    | `write_graph(graph, file, format = c("ncol"))`     |
-| [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format                           | `pajek`      | `read_graph(file, format = c("pajek"))`                                                                                                                                                   | `write_graph(graph, file, format = c("pajek"))`    |
+| Formato | Nombre corto | Método de lectura | Método de escritura |
+|----|----|----|----|
+| Lista de adyacencia (a.k.a. [LGL](https://lgl.sourceforge.net/#FileFormat)) | `lgl` | `read_graph(file, format = c("lgl"))` | `write_graph(graph, file, format = c("lgl"))` |
+| Matriz de adyacencia | `adjacency` | `graph_from_adjacency_matrix(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper","lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA)` | `as.matrix(graph, "adjacency")` |
+| DIMACS | `dimacs` | `read_graph(file, format = c("dimacs"))` | `write_graph(graph, file, format = c("dimacs"))` |
+| Edge list | `edgelist` | `read_graph(file, format = c("edgelist"))` | `write_graph(graph, file, format = c("edgelist"))` |
+| [GraphViz](https://www.graphviz.org) | `dot` | not supported yet | `write_graph(graph, file, format = c("dot"))` |
+| GML | `gml` | `read_graph(file, format = c("gml"))` | `write_graph(graph, file, format = c("gml"))` |
+| GraphML | `graphml` | `read_graph(file, format = c("graphml"))` | `write_graph(graph, file, format = c("graphml"))` |
+| LEDA | `leda` | not supported yet | `write_graph(graph, file, format = c("leda"))` |
+| Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat)) | `ncol` | `read_graph(file, format = c("ncol"))` | `write_graph(graph, file, format = c("ncol"))` |
+| [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format | `pajek` | `read_graph(file, format = c("pajek"))` | `write_graph(graph, file, format = c("pajek"))` |
 
 ------------------------------------------------------------------------
 
@@ -1139,6 +1208,7 @@ En favor de la reproducibilidad, la información de la sesión para el
 código anterior es la siguiente:
 
 ``` r
+
 sessionInfo()
 ```
 
@@ -1163,7 +1233,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.3.0.9000
+    ## [1] igraph_2.3.1
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] vctrs_0.7.3        cli_3.6.6          knitr_1.51         rlang_1.2.0       

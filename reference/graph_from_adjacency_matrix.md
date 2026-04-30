@@ -188,6 +188,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g1 <- sample(
   x = 0:1, size = 100, replace = TRUE,
   prob = c(0.9, 0.1)
@@ -297,6 +298,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH ec41ac3 DNW- 10 57 -- 
+#> IGRAPH 099c287 DNW- 10 57 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

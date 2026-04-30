@@ -155,6 +155,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnp(10, 3 / 10)
 betweenness(g)
 #>  [1]  0  0  0 14  0  6  6  0  0  0

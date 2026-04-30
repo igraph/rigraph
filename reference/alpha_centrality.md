@@ -130,6 +130,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # The examples from Bonacich's paper
 g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
 g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))

@@ -15,6 +15,7 @@ igraph graphs have a class ‘`igraph`’. They are printed to the screen in
 a special format, here is an example, a ring graph created using
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md):
 
+
         IGRAPH U--- 10 10 -- Ring graph
         + attr: name (g/c), mutual (g/x), circular (g/x)  
 

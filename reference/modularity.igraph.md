@@ -146,6 +146,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 wtc <- cluster_walktrap(g)

@@ -340,6 +340,7 @@ Gabor Csardi <csardi.gabor@gmail.com> for the R interface.
 ## Examples
 
 ``` r
+
 # Identity matrix
 f <- function(x, extra = NULL) x
 arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)

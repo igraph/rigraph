@@ -150,6 +150,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 pf <- matrix(c(1, 0, 0, 1), nrow = 2)
 g <- sample_pref(20, 2, pref.matrix = pf)
 if (FALSE) { # rlang::is_installed("tcltk") && rlang::is_interactive()

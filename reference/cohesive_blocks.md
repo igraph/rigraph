@@ -293,6 +293,7 @@ wrote the first version in R.
 ## Examples
 
 ``` r
+
 ## The graph from the Moody-White paper
 mw <- graph_from_literal(
   1 - 2:3:4:5:6, 2 - 3:4:5:7, 3 - 4:6:7, 4 - 5:6:7,
@@ -314,23 +315,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> + 23/23 vertices, named, from 176bf6d:
+#> + 23/23 vertices, named, from 50e8e05:
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> + 14/23 vertices, named, from 176bf6d:
+#> + 14/23 vertices, named, from 50e8e05:
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> + 10/23 vertices, named, from 176bf6d:
+#> + 10/23 vertices, named, from 50e8e05:
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> + 7/23 vertices, named, from 176bf6d:
+#> + 7/23 vertices, named, from 50e8e05:
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> + 4/23 vertices, named, from 176bf6d:
+#> + 4/23 vertices, named, from 50e8e05:
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)

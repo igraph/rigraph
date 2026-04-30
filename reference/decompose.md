@@ -62,6 +62,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # the diameter of each component in a random graph
 g <- sample_gnp(1000, 1 / 1000)
 components <- decompose(g, min.vertices = 2)

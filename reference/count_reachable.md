@@ -61,6 +61,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # In a directed path graph, the reachability depends on direction
 g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
 count_reachable(g, mode = "out")

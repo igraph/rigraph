@@ -85,6 +85,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 ## A simple ring
 ring <- sample_k_regular(10, 2)
 plot(ring)

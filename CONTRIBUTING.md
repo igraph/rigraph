@@ -28,6 +28,7 @@ To install all dependencies of igraph, including dependencies needed for
 development, call, from the root of the rigraph Git repository:
 
 ``` r
+
 # All Imports and Suggests dependencies
 pak::pak()
 # Then install packages like roxygen2 add-ons
@@ -43,9 +44,8 @@ pak::pak(dependencies = "Config/Needs/build")
 - Install all development dependencies with
   [`pak::pak()`](https://pak.r-lib.org/reference/pak.html), and then
   make sure the package passes R CMD check by running
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html).
-  If R CMD check doesn’t pass cleanly, it’s a good idea to ask for help
-  before continuing.
+  `devtools::check()`. If R CMD check doesn’t pass cleanly, it’s a good
+  idea to ask for help before continuing.
 
 - Create a Git branch for your pull request (PR). You can use
   [usethis](https://usethis.r-lib.org/articles/pr-functions.html),

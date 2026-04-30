@@ -93,6 +93,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 laplacian_matrix(g)
 #> 10 x 10 sparse Matrix of class "dgCMatrix"

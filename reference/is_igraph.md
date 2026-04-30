@@ -25,6 +25,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 is_igraph(g)
 #> [1] TRUE

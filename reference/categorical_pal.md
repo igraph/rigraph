@@ -27,6 +27,7 @@ mark categories, e.g. community membership.
 
 ## Examples
 
+
     library(igraphdata)
     data(karate)
     karate <- karate 

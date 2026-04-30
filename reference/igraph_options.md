@@ -150,6 +150,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 oldval <- igraph_opt("verbose")
 igraph_options(verbose = TRUE)
 layout_with_kk(make_ring(10))

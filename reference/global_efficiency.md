@@ -114,6 +114,7 @@ transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 ## Examples
 
 ``` r
+
 g <- make_graph("zachary")
 global_efficiency(g)
 #> [1] 0.4920083

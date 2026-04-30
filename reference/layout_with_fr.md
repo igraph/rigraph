@@ -175,6 +175,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Fixing ego
 g <- sample_pa(20, m = 2)
 minC <- rep(-Inf, vcount(g))

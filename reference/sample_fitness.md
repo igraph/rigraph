@@ -126,6 +126,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 N <- 10000
 g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 degree_distribution(g)

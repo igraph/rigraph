@@ -131,6 +131,7 @@ Other embedding:
 ## Examples
 
 ``` r
+
 ## A small graph
 lpvs <- matrix(rnorm(200), 20, 10)
 lpvs <- apply(lpvs, 2, function(x) {

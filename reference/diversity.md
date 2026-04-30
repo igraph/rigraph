@@ -75,6 +75,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g1 <- sample_gnp(20, 2 / 20)
 g2 <- sample_gnp(20, 2 / 20)
 g3 <- sample_gnp(20, 5 / 20)

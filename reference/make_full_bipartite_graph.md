@@ -64,6 +64,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_full_bipartite_graph(2, 3)
 g2 <- make_full_bipartite_graph(2, 3, directed = TRUE)
 g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")

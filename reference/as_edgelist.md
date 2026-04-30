@@ -53,6 +53,7 @@ Other conversion:
 ## Examples
 
 ``` r
+
 g <- sample_gnp(10, 2 / 10)
 as_edgelist(g)
 #>       [,1] [,2]

@@ -172,6 +172,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 # This should approximately yield the correct exponent 3
 g <- sample_pa(1000) # increase this number to have a better estimate
 d <- degree(g, mode = "in")

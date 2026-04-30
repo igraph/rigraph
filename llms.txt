@@ -7,12 +7,14 @@ R/igraph is an R package of the igraph network analysis library.
 You can install the stable version of R/igraph from CRAN:
 
 ``` r
+
 install.packages("igraph")
 ```
 
 For the development version, you can use R-universe
 
 ``` r
+
 options(
   repos = c(
     igraph = 'https://igraph.r-universe.dev',
@@ -25,6 +27,7 @@ install.packages('igraph')
 or Github, with the [pak package](https://pak.r-lib.org/):
 
 ``` r
+
 pak::pak("igraph/rigraph")
 ```
 

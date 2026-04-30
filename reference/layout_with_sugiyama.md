@@ -156,6 +156,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 ## Data taken from http://tehnick-8.narod.ru/dc_clients/
 DC <- graph_from_literal(
   "DC++" -+ "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",

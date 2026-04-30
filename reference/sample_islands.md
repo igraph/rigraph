@@ -33,6 +33,7 @@ An igraph graph.
 
 ## Examples
 
+
     g <- sample_islands(3, 10, 5/10, 1)
     oc <- cluster_optimal(g)
     oc

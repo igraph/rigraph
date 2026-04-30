@@ -108,6 +108,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- sample_gnp(100, 2 / 100)
 l <- layout_with_mds(g)
 plot(g, layout = l, vertex.label = NA, vertex.size = 3)

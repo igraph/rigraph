@@ -81,6 +81,7 @@ Vince Lyzinski <https://www.ams.jhu.edu/~lyzinski/>
 ## Examples
 
 ``` r
+
 # require(Matrix)
 g1 <- sample_gnp(10, 0.1)
 randperm <- c(1:3, 3 + sample(7))

@@ -85,6 +85,7 @@ Keith Briggs (<https://keithbriggs.info/>).
 ## Examples
 
 ``` r
+
 g <- sample_grg(1000, 0.05, torus = FALSE)
 g2 <- sample_grg(1000, 0.05, torus = TRUE)
 ```

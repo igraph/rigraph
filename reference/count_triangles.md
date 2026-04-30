@@ -57,6 +57,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## A small graph
 kite <- make_graph("Krackhardt_Kite")
 plot(kite)

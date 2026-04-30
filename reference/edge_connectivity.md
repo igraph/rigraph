@@ -120,6 +120,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_pa(100, m = 1)
 g2 <- sample_pa(100, m = 5)
 edge_connectivity(g, 100, 1)

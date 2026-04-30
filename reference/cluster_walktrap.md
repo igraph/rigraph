@@ -125,6 +125,7 @@ Pascal Pons (<http://psl.pons.free.fr/>) and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 cluster_walktrap(g)

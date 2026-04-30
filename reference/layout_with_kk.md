@@ -174,6 +174,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 E(g)$weight <- rep(1:2, length.out = ecount(g))
 plot(g, layout = layout_with_kk, edge.label = E(g)$weight)

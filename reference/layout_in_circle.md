@@ -72,6 +72,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Place vertices on a circle, order them according to their
 ## community
 library(igraphdata)

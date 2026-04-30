@@ -46,6 +46,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 values <- lapply(1:10, function(x) sample(1:10, 3))
 

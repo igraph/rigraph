@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="logo.png" class="logo" alt=""><h1>Branching Strategy</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/BRANCHES.md" class="external-link"><code>BRANCHES.md</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.1/BRANCHES.md" class="external-link"><code>BRANCHES.md</code></a></small>
     </div>
 
 <div id="branching-strategy" class="section level1">
@@ -102,13 +102,13 @@
 <div class="section level2">
 <h2 id="branch-overview">Branch Overview<a class="anchor" aria-label="anchor" href="#branch-overview"></a></h2>
 <p>There is a single active mainline tracking <code>krlmlr/igraph@main-dev</code> (the replay of the changes from 0.10.17 to 1.0.1 using a series of self-contained commits).</p>
-<table class="table"><colgroup><col width="12%"><col width="18%"><col width="69%"></colgroup><thead><tr class="header"><th>Branch</th>
+<table class="table"><colgroup><col width="12%"><col width="18%"><col width="69%"></colgroup><thead><tr><th>Branch</th>
 <th>Repo</th>
 <th>Purpose</th>
-</tr></thead><tbody><tr class="odd"><td><code>main-dev</code></td>
+</tr></thead><tbody><tr><td><code>main-dev</code></td>
 <td><code>krlmlr/rigraph</code></td>
 <td>Source of truth for R code, tests, CI/CD; stable baseline</td>
-</tr><tr class="even"><td><code>main-dev</code></td>
+</tr><tr><td><code>main-dev</code></td>
 <td><code>krlmlr/rigraph</code></td>
 <td>Vendored dev (upstream <code>main-dev</code>); published as development build</td>
 </tr></tbody></table><div class="section level3">
@@ -213,13 +213,13 @@ Date: &lt;upstream_commit_date&gt;
 </div>
 <div class="section level2">
 <h2 id="tooling">Tooling<a class="anchor" aria-label="anchor" href="#tooling"></a></h2>
-<table class="table"><colgroup><col width="33%"><col width="66%"></colgroup><thead><tr class="header"><th>Script / Workflow</th>
+<table class="table"><colgroup><col width="33%"><col width="66%"></colgroup><thead><tr><th>Script / Workflow</th>
 <th>Purpose</th>
-</tr></thead><tbody><tr class="odd"><td><code>vendor.sh</code></td>
+</tr></thead><tbody><tr><td><code>vendor.sh</code></td>
 <td>Local manual vendoring from a cloned upstream repo</td>
-</tr><tr class="even"><td><code>vendor-one.sh</code></td>
+</tr><tr><td><code>vendor-one.sh</code></td>
 <td>CI commit-by-commit vendoring (called by <code>vendor.yaml</code>)</td>
-</tr><tr class="odd"><td><code>.github/workflows/vendor.yaml</code></td>
+</tr><tr><td><code>.github/workflows/vendor.yaml</code></td>
 <td>Hourly vendoring for <code>main-dev</code> (restricted to <code>krlmlr/rigraph</code>)</td>
 </tr></tbody></table></div>
 </div>

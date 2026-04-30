@@ -153,6 +153,7 @@ manual page.
 ## Examples
 
 ``` r
+
 # Generate some test data
 g <- make_ring(10, directed = FALSE)
 # Compute eigenvector centrality scores

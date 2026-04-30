@@ -153,6 +153,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_pa(100, m = 2, directed = FALSE)
 eb <- cluster_edge_betweenness(g)
 

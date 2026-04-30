@@ -110,6 +110,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 g2 <- induced_subgraph(g, 1:7)
 g3 <- subgraph_from_edges(g, 1:5)

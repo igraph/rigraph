@@ -150,6 +150,7 @@ igraph and R interfaces.
 ## Examples
 
 ``` r
+
 ## Calculate the canonical form of a random graph
 g1 <- sample_gnm(10, 20)
 cp1 <- canonical_permutation(g1)

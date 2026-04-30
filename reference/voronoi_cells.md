@@ -106,6 +106,7 @@ Community detection
 ## Examples
 
 ``` r
+
 g <- make_lattice(c(10, 10))
 clu <- voronoi_cells(g, c(25, 43, 67))
 groups(clu)

@@ -56,6 +56,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # Some random shortcuts shorten the distances on a lattice
 g <- make_lattice(length = 100, dim = 1, nei = 5)
 mean_distance(g)

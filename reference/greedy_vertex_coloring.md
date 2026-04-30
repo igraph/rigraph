@@ -47,6 +47,7 @@ it can be calculated in linear time.
 ## Examples
 
 ``` r
+
 g <- make_graph("petersen")
 col <- greedy_vertex_coloring(g)
 plot(g, vertex.color = col)

@@ -104,6 +104,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 # create 20 scale-free graphs and place them in a common layout
 graphs <- lapply(sample(5:20, 20, replace = TRUE),
   barabasi.game,

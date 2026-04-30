@@ -53,6 +53,7 @@ Other trees:
 ## Examples
 
 ``` r
+
 g <- make_full_graph(10) %du% make_full_graph(5)
 edges <- sample_spanning_tree(g)
 forest <- subgraph_from_edges(g, edges)

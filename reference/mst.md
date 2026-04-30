@@ -75,6 +75,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnp(100, 3 / 100)
 g_mst <- mst(g)
 ```

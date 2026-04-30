@@ -65,6 +65,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Rings with an even number of vertices are bipartite
 g <- make_ring(10)
 bipartite_mapping(g)

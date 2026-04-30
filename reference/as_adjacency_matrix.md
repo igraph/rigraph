@@ -100,6 +100,7 @@ Other conversion:
 ## Examples
 
 ``` r
+
 g <- sample_gnp(10, 2 / 10)
 as_adjacency_matrix(g)
 #> 10 x 10 sparse Matrix of class "dgCMatrix"

@@ -66,6 +66,7 @@ Other trees: [`is_tree()`](https://r.igraph.org/reference/is_tree.md),
 ## Examples
 
 ``` r
+
 g <- make_tree(3) + make_tree(5, 3)
 is_forest(g)
 #> [1] TRUE
@@ -74,7 +75,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> + 2/8 vertices, from 54c0aac:
+#> + 2/8 vertices, from 7c4059c:
 #> [1] 1 4
 #> 
 ```

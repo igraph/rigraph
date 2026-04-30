@@ -94,6 +94,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Create a wheel graph
 wheel <- union(
   make_ring(10),
@@ -106,7 +107,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH 2156aac UN-- 11 15 -- 
+#> IGRAPH 808aba5 UN-- 11 15 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n), name (v/c)
 #> + edges (vertex names):

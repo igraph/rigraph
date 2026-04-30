@@ -96,6 +96,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## The example from the paper
 g <- graph_from_literal(
   R -+ A:B:C, A -+ D, B -+ A:D:E, C -+ F:G, D -+ L,

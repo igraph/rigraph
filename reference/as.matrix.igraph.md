@@ -78,6 +78,7 @@ Michal Bojanowski, originally from the `intergraph` package
 ## Examples
 
 ``` r
+
 g <- make_graph("zachary")
 as.matrix(g, "adjacency")
 #> 34 x 34 sparse Matrix of class "dgCMatrix"

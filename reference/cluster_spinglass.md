@@ -222,6 +222,7 @@ negative ties were implemented by Vincent Traag
 ## Examples
 
 ``` r
+
 g <- sample_gnp(10, 5 / 10) %du% sample_gnp(9, 5 / 9)
 g <- add_edges(g, c(1, 12))
 g <- induced_subgraph(g, subcomponent(g, 1))

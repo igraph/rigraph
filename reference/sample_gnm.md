@@ -84,6 +84,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnm(1000, 1000)
 degree_distribution(g)
 #> [1] 0.133 0.255 0.291 0.183 0.093 0.033 0.007 0.005

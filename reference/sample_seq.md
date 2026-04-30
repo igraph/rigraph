@@ -55,6 +55,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 rs <- sample_seq(1, 100000000, 10)
 rs
 #>  [1]  3994648 11729865 35248785 39391834 54301715 55920899 60334504 74838715

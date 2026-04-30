@@ -76,17 +76,18 @@ Graph cycles
 ## Examples
 
 ``` r
+
 g <- make_graph(~ A - B - C - D - E - A - F - D - B - F - E)
 
 has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 71edb78 (vertex names):
+#> + 10/10 edges from 8104479 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 71edb78:
+#> + 11/6 vertices, named, from 8104479:
 #>  [1] A B C D B F A E D F E
 #> 
 

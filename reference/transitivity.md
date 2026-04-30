@@ -175,6 +175,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 transitivity(g)
 #> [1] 0

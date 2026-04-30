@@ -103,16 +103,17 @@ Nepusz <ntamas@gmail.com> for this manual page.
 ## Examples
 
 ``` r
+
 ## A ring has n*2 automorphisms, and a possible generating set is one that
 ## "turns" the ring by one vertex to the left or right
 g <- make_ring(10)
 automorphism_group(g)
 #> [[1]]
-#> + 10/10 vertices, from 68ae416:
+#> + 10/10 vertices, from 258c054:
 #>  [1]  1 10  9  8  7  6  5  4  3  2
 #> 
 #> [[2]]
-#> + 10/10 vertices, from 68ae416:
+#> + 10/10 vertices, from 258c054:
 #>  [1]  2  3  4  5  6  7  8  9 10  1
 #> 
 ```

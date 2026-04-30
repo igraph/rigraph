@@ -112,6 +112,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
 #> [1] 2.705859

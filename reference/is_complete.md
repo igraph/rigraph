@@ -35,6 +35,7 @@ Other cliques: [`cliques()`](https://r.igraph.org/reference/cliques.md),
 ## Examples
 
 ``` r
+
 g <- make_full_graph(6, directed = TRUE)
 is_complete(g)
 #> [1] TRUE

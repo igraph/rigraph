@@ -46,6 +46,7 @@ Other trees:
 ## Examples
 
 ``` r
+
 g <- make_tree(13, 3)
 to_prufer(g)
 #>  [1] 2 2 2 1 3 3 3 1 4 4 4

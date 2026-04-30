@@ -83,6 +83,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 edge_density(make_empty_graph(n = 10)) # empty graphs have density 0
 #> [1] 0
 edge_density(make_full_graph(n = 10)) # complete graphs have density 1

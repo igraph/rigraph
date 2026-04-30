@@ -59,6 +59,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_lattice(c(5, 5, 5))
 coords <- layout_with_fr(g, dim = 3)
 

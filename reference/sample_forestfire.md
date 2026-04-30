@@ -126,6 +126,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
 plot(fire)
 

@@ -88,6 +88,7 @@ Tamas Nepusz <ntamas@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_lattice(c(3, 3))
 layout_on_grid(g)
 #>       [,1] [,2]

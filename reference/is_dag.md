@@ -74,6 +74,7 @@ Tamas Nepusz <ntamas@gmail.com> for the C code, Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- make_tree(10)
 is_dag(g)
 #> [1] TRUE

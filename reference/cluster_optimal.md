@@ -51,6 +51,7 @@ hundred vertices might be possible.
 ## Examples
 
 
+
     ## Zachary's karate club
     g <- make_graph("Zachary")
 

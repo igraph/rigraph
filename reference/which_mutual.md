@@ -85,6 +85,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_gnm(10, 50, directed = TRUE)
 reciprocity(g)
 #> [1] 0.52

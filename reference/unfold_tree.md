@@ -87,6 +87,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_tree(10) %du% make_tree(10)
 V(g)$id <- seq_len(vcount(g)) - 1
 roots <- sapply(decompose(g), function(x) {

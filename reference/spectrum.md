@@ -114,6 +114,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Small example graph, leading eigenvector by default
 kite <- make_graph("Krackhardt_kite")
 spectrum(kite)[c("values", "vectors")]

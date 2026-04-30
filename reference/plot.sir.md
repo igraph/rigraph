@@ -126,6 +126,7 @@ Eric Kolaczyk (<https://kolaczyk.github.io/>) and Gabor Csardi
 ## Examples
 
 ``` r
+
 g <- sample_gnm(100, 100)
 sm <- sir(g, beta = 5, gamma = 1)
 plot(sm)

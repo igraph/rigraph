@@ -119,6 +119,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- make_ring(10)
 degree(g)
 #>  [1] 2 2 2 2 2 2 2 2 2 2

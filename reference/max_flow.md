@@ -114,6 +114,7 @@ Other flow:
 ## Examples
 
 ``` r
+
 E <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
 colnames(E) <- c("from", "to", "capacity")
 g1 <- graph_from_data_frame(as.data.frame(E))
@@ -125,15 +126,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> + 2/6 edges from 52014f9 (vertex names):
+#> + 2/6 edges from 3ea1258 (vertex names):
 #> [1] 3->4 1->5
 #> 
 #> $partition1
-#> + 2/6 vertices, named, from 52014f9:
+#> + 2/6 vertices, named, from 3ea1258:
 #> [1] 1 3
 #> 
 #> $partition2
-#> + 4/6 vertices, named, from 52014f9:
+#> + 4/6 vertices, named, from 3ea1258:
 #> [1] 4 5 6 2
 #> 
 #> $stats

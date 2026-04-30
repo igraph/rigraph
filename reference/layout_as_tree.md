@@ -120,6 +120,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 ## Examples
 
 ``` r
+
 tree <- make_tree(20, 3)
 plot(tree, layout = layout_as_tree)
 

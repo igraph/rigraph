@@ -87,6 +87,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 g <- sample_growing(500, citation = FALSE)
 g2 <- sample_growing(500, citation = TRUE)
 ```

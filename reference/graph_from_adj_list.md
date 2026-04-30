@@ -81,6 +81,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Examples
 
 ``` r
+
 ## Directed
 g <- make_ring(10, directed = TRUE)
 al <- as_adj_list(g, mode = "out")

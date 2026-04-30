@@ -167,6 +167,7 @@ tkplot.center tkplot.rotate
 
 ## Examples
 
+
     g <- make_ring(10)
     tkplot(g)
 
