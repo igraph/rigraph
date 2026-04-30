@@ -125,15 +125,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> + 2/6 edges from 77d31ed (vertex names):
+#> + 2/6 edges from 52014f9 (vertex names):
 #> [1] 3->4 1->5
 #> 
 #> $partition1
-#> + 2/6 vertices, named, from 77d31ed:
+#> + 2/6 vertices, named, from 52014f9:
 #> [1] 1 3
 #> 
 #> $partition2
-#> + 4/6 vertices, named, from 77d31ed:
+#> + 4/6 vertices, named, from 52014f9:
 #> [1] 4 5 6 2
 #> 
 #> $stats

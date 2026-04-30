@@ -25,13 +25,13 @@ Constructor modifiers (and related functions)
 ``` r
 # An artificial example
 make_(full_graph(5, loops = TRUE))
-#> IGRAPH e69914c U--- 5 15 -- Full graph
+#> IGRAPH 44faeb6 U--- 5 15 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from e69914c:
+#> + edges from 44faeb6:
 #>  [1] 1--1 1--2 1--3 1--4 1--5 2--2 2--3 2--4 2--5 3--3 3--4 3--5 4--4 4--5 5--5
 make_(full_graph(5, loops = TRUE), without_loops())
-#> IGRAPH 1c5ff8f U--- 5 10 -- Full graph
+#> IGRAPH 0412fbb U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 1c5ff8f:
+#> + edges from 0412fbb:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 ```
