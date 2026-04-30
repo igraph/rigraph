@@ -4,11 +4,7 @@
 
 ## Bug fixes
 
-- Correct LTO type mismatch warnings in `cpp11.cpp` declarations (#2620).
-
-## Uncategorized
-
-- Switching to development version.
+- Fix mismatches between C function signatures and function calls. This only affects private functions that are defined but not yet used (#2620).
 
 
 # igraph 2.3.0
