@@ -110,10 +110,10 @@ placements <- rbind(
 
   # --- Centrality / trees / basic-properties additions ---------------------
 
-  c("structural", "centrality-measures", "igraph_authority_score"),
-  c("structural", "centrality-measures", "igraph_hub_score"),
-  c("structural", "trees", "igraph_minimum_spanning_tree_prim"),
-  c("structural", "trees", "igraph_minimum_spanning_tree_unweighted"),
+  c("centrality", "centrality-measures", "igraph_authority_score"),
+  c("centrality", "centrality-measures", "igraph_hub_score"),
+  c("trees", "spanning-trees-and-forests", "igraph_minimum_spanning_tree_prim"),
+  c("trees", "spanning-trees-and-forests", "igraph_minimum_spanning_tree_unweighted"),
   c("structural", "basic-properties", "igraph_are_connected"),
 
   # --- Tier 1: retire `undocumented` into real subcategories ---------------
@@ -132,45 +132,46 @@ placements <- rbind(
   c("operators", "miscellaneous-operators", "igraph_transitive_closure"),
   c("operators", "miscellaneous-operators", "igraph_transitive_closure_dag"),
 
-  # --- Tier 4a: split structural/shortest-path-related-functions -----------
+  # --- Tier 4a: split structural/shortest-path-related-functions, then
+  #     promote the resulting subs into a new top-level `paths` category. -----
 
-  # distances-and-metrics: scalar/vector metrics over the graph
-  c("structural", "distances-and-metrics", "igraph_average_path_length"),
-  c("structural", "distances-and-metrics", "igraph_average_path_length_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_diameter"),
-  c("structural", "distances-and-metrics", "igraph_diameter_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_distances"),
-  c("structural", "distances-and-metrics", "igraph_distances_bellman_ford"),
-  c("structural", "distances-and-metrics", "igraph_distances_cutoff"),
-  c("structural", "distances-and-metrics", "igraph_distances_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_distances_dijkstra_cutoff"),
-  c("structural", "distances-and-metrics", "igraph_distances_floyd_warshall"),
-  c("structural", "distances-and-metrics", "igraph_distances_johnson"),
-  c("structural", "distances-and-metrics", "igraph_eccentricity"),
-  c("structural", "distances-and-metrics", "igraph_eccentricity_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_girth"),
-  c("structural", "distances-and-metrics", "igraph_graph_center"),
-  c("structural", "distances-and-metrics", "igraph_graph_center_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_path_length_hist"),
-  c("structural", "distances-and-metrics", "igraph_pseudo_diameter"),
-  c("structural", "distances-and-metrics", "igraph_pseudo_diameter_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_radius"),
-  c("structural", "distances-and-metrics", "igraph_radius_dijkstra"),
-  c("structural", "distances-and-metrics", "igraph_voronoi"),
+  # paths/distances-and-metrics: scalar/vector metrics over the graph
+  c("paths", "distances-and-metrics", "igraph_average_path_length"),
+  c("paths", "distances-and-metrics", "igraph_average_path_length_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_diameter"),
+  c("paths", "distances-and-metrics", "igraph_diameter_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_distances"),
+  c("paths", "distances-and-metrics", "igraph_distances_bellman_ford"),
+  c("paths", "distances-and-metrics", "igraph_distances_cutoff"),
+  c("paths", "distances-and-metrics", "igraph_distances_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_distances_dijkstra_cutoff"),
+  c("paths", "distances-and-metrics", "igraph_distances_floyd_warshall"),
+  c("paths", "distances-and-metrics", "igraph_distances_johnson"),
+  c("paths", "distances-and-metrics", "igraph_eccentricity"),
+  c("paths", "distances-and-metrics", "igraph_eccentricity_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_girth"),
+  c("paths", "distances-and-metrics", "igraph_graph_center"),
+  c("paths", "distances-and-metrics", "igraph_graph_center_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_path_length_hist"),
+  c("paths", "distances-and-metrics", "igraph_pseudo_diameter"),
+  c("paths", "distances-and-metrics", "igraph_pseudo_diameter_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_radius"),
+  c("paths", "distances-and-metrics", "igraph_radius_dijkstra"),
+  c("paths", "distances-and-metrics", "igraph_voronoi"),
 
-  # shortest-paths: functions returning actual path sequences
-  c("structural", "shortest-paths", "igraph_get_all_shortest_paths"),
-  c("structural", "shortest-paths", "igraph_get_all_shortest_paths_dijkstra"),
-  c("structural", "shortest-paths", "igraph_get_all_simple_paths"),
-  c("structural", "shortest-paths", "igraph_get_k_shortest_paths"),
-  c("structural", "shortest-paths", "igraph_get_shortest_path"),
-  c("structural", "shortest-paths", "igraph_get_shortest_path_astar"),
-  c("structural", "shortest-paths", "igraph_get_shortest_path_bellman_ford"),
-  c("structural", "shortest-paths", "igraph_get_shortest_path_dijkstra"),
-  c("structural", "shortest-paths", "igraph_get_shortest_paths"),
-  c("structural", "shortest-paths", "igraph_get_shortest_paths_bellman_ford"),
-  c("structural", "shortest-paths", "igraph_get_shortest_paths_dijkstra"),
-  c("structural", "shortest-paths", "igraph_vertex_path_from_edge_path"),
+  # paths/shortest-paths: functions returning actual path sequences
+  c("paths", "shortest-paths", "igraph_get_all_shortest_paths"),
+  c("paths", "shortest-paths", "igraph_get_all_shortest_paths_dijkstra"),
+  c("paths", "shortest-paths", "igraph_get_all_simple_paths"),
+  c("paths", "shortest-paths", "igraph_get_k_shortest_paths"),
+  c("paths", "shortest-paths", "igraph_get_shortest_path"),
+  c("paths", "shortest-paths", "igraph_get_shortest_path_astar"),
+  c("paths", "shortest-paths", "igraph_get_shortest_path_bellman_ford"),
+  c("paths", "shortest-paths", "igraph_get_shortest_path_dijkstra"),
+  c("paths", "shortest-paths", "igraph_get_shortest_paths"),
+  c("paths", "shortest-paths", "igraph_get_shortest_paths_bellman_ford"),
+  c("paths", "shortest-paths", "igraph_get_shortest_paths_dijkstra"),
+  c("paths", "shortest-paths", "igraph_vertex_path_from_edge_path"),
 
   # --- Tier 4b: split structural/other-operations --------------------------
 
@@ -213,6 +214,43 @@ subcategory_renames <- list(
     category = "structural",
     old = "other-operations",
     new = c("matrix-representations", "mutual-edges", "summary-statistics")
+  ),
+  # Cosmetic rename ahead of moving into the new top-level `trees` category
+  list(
+    category = "structural",
+    old = "trees",
+    new = "spanning-trees-and-forests"
+  )
+)
+
+# ---- 2bb. Top-level category moves: relocate whole (cat, sub) groups
+#         into a new top-level category. Applied AFTER subcategory_renames
+#         on the flattened table; subcategory names are preserved unless
+#         a rename above already changed them.
+category_moves <- list(
+  list(
+    from = "structural",
+    subs = c(
+      "centrality-measures",
+      "centralization",
+      "range-limited-centrality-measures",
+      "subset-limited-centrality-measures"
+    ),
+    to = "centrality"
+  ),
+  list(
+    from = "structural",
+    subs = c(
+      "distances-and-metrics",
+      "shortest-paths",
+      "widest-path-related-functions"
+    ),
+    to = "paths"
+  ),
+  list(
+    from = "structural",
+    subs = c("spanning-trees-and-forests", "unfolding-a-graph-into-a-tree"),
+    to = "trees"
   )
 )
 
@@ -223,8 +261,6 @@ subcategory_renames <- list(
 subcategory_order_overrides <- list(
   structural = c(
     "basic-properties",
-    "centrality-measures",
-    "centralization",
     "degree-sequences",
     "directedness-conversion",
     "efficiency-measures",
@@ -239,20 +275,28 @@ subcategory_order_overrides <- list(
     "non-simple-graphs-multiple-and-loop-edges",
     "percolation",
     "pre-calculated-subsets",
-    "range-limited-centrality-measures",
-    "distances-and-metrics",
-    "shortest-paths",
     "similarity-measures",
     "sparsifiers",
     "spectral-properties",
-    "subset-limited-centrality-measures",
     "summary-statistics",
     "them-statistics",
     "transitivity-or-clustering-coefficient",
-    "trees",
-    "unfolding-a-graph-into-a-tree",
-    "us-statistics",
+    "us-statistics"
+  ),
+  centrality = c(
+    "centrality-measures",
+    "centralization",
+    "range-limited-centrality-measures",
+    "subset-limited-centrality-measures"
+  ),
+  paths = c(
+    "distances-and-metrics",
+    "shortest-paths",
     "widest-path-related-functions"
+  ),
+  trees = c(
+    "spanning-trees-and-forests",
+    "unfolding-a-graph-into-a-tree"
   )
 )
 
@@ -325,6 +369,12 @@ for (r in subcategory_renames) {
     !is.na(tbl$subcategory) &
     tbl$subcategory == r$old
   tbl$subcategory[m] <- r$new
+}
+
+# Apply category_moves: relocate (cat, sub) groups to a new top-level category.
+for (mv in category_moves) {
+  m <- tbl$category == mv$from & !is.na(tbl$subcategory) & tbl$subcategory %in% mv$subs
+  tbl$category[m] <- mv$to
 }
 
 # Drop rows whose fn is being moved/added — placements will reintroduce them

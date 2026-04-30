@@ -188,8 +188,6 @@ if (length(unassigned)) {
 subcategory_order_overrides <- list(
   structural = c(
     "basic-properties",
-    "centrality-measures",
-    "centralization",
     "degree-sequences",
     "directedness-conversion",
     "efficiency-measures",
@@ -204,20 +202,28 @@ subcategory_order_overrides <- list(
     "non-simple-graphs-multiple-and-loop-edges",
     "percolation",
     "pre-calculated-subsets",
-    "range-limited-centrality-measures",
-    "distances-and-metrics",
-    "shortest-paths",
     "similarity-measures",
     "sparsifiers",
     "spectral-properties",
-    "subset-limited-centrality-measures",
     "summary-statistics",
     "them-statistics",
     "transitivity-or-clustering-coefficient",
-    "trees",
-    "unfolding-a-graph-into-a-tree",
-    "us-statistics",
+    "us-statistics"
+  ),
+  centrality = c(
+    "centrality-measures",
+    "centralization",
+    "range-limited-centrality-measures",
+    "subset-limited-centrality-measures"
+  ),
+  paths = c(
+    "distances-and-metrics",
+    "shortest-paths",
     "widest-path-related-functions"
+  ),
+  trees = c(
+    "spanning-trees-and-forests",
+    "unfolding-a-graph-into-a-tree"
   )
 )
 

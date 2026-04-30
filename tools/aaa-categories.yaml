@@ -468,32 +468,6 @@ structural:
   basic-properties:
     - igraph_are_adjacent
     - igraph_are_connected
-  centrality-measures:
-    - igraph_authority_score
-    - igraph_betweenness
-    - igraph_closeness
-    - igraph_constraint
-    - igraph_convergence_degree
-    - igraph_edge_betweenness
-    - igraph_eigenvector_centrality
-    - igraph_harmonic_centrality
-    - igraph_hub_and_authority_scores
-    - igraph_hub_score
-    - igraph_maxdegree
-    - igraph_pagerank
-    - igraph_personalized_pagerank
-    - igraph_personalized_pagerank_vs
-    - igraph_strength
-  centralization:
-    - igraph_centralization
-    - igraph_centralization_betweenness
-    - igraph_centralization_betweenness_tmax
-    - igraph_centralization_closeness
-    - igraph_centralization_closeness_tmax
-    - igraph_centralization_degree
-    - igraph_centralization_degree_tmax
-    - igraph_centralization_eigenvector_centrality
-    - igraph_centralization_eigenvector_centrality_tmax
   degree-sequences:
     - igraph_is_bigraphical
     - igraph_is_graphical
@@ -563,11 +537,100 @@ structural:
   pre-calculated-subsets:
     - igraph_local_scan_neighborhood_ecount
     - igraph_local_scan_subset_ecount
+  similarity-measures:
+    - igraph_bibcoupling
+    - igraph_cocitation
+    - igraph_similarity_dice
+    - igraph_similarity_dice_es
+    - igraph_similarity_dice_pairs
+    - igraph_similarity_inverse_log_weighted
+    - igraph_similarity_jaccard
+    - igraph_similarity_jaccard_es
+    - igraph_similarity_jaccard_pairs
+  sparsifiers:
+    - igraph_spanner
+  spectral-properties:
+    - igraph_eigen_adjacency
+    - igraph_get_laplacian
+    - igraph_get_laplacian_sparse
+  summary-statistics:
+    - igraph_density
+    - igraph_diversity
+    - igraph_mean_degree
+  them-statistics:
+    - igraph_local_scan_0_them
+    - igraph_local_scan_1_ecount_them
+    - igraph_local_scan_k_ecount_them
+  transitivity-or-clustering-coefficient:
+    - igraph_ecc
+    - igraph_transitivity_avglocal_undirected
+    - igraph_transitivity_barrat
+    - igraph_transitivity_local_undirected
+    - igraph_transitivity_undirected
+  us-statistics:
+    - igraph_local_scan_0
+    - igraph_local_scan_1_ecount
+    - igraph_local_scan_k_ecount
+
+visitors:
+  breadth-first-search:
+    - igraph_bfs
+    - igraph_bfs_simple
+  depth-first-search:
+    - igraph_dfs
+  random-walks:
+    - igraph_random_edge_walk
+    - igraph_random_walk
+
+centrality:
+  centrality-measures:
+    - igraph_authority_score
+    - igraph_betweenness
+    - igraph_closeness
+    - igraph_constraint
+    - igraph_convergence_degree
+    - igraph_edge_betweenness
+    - igraph_eigenvector_centrality
+    - igraph_harmonic_centrality
+    - igraph_hub_and_authority_scores
+    - igraph_hub_score
+    - igraph_maxdegree
+    - igraph_pagerank
+    - igraph_personalized_pagerank
+    - igraph_personalized_pagerank_vs
+    - igraph_strength
+  centralization:
+    - igraph_centralization
+    - igraph_centralization_betweenness
+    - igraph_centralization_betweenness_tmax
+    - igraph_centralization_closeness
+    - igraph_centralization_closeness_tmax
+    - igraph_centralization_degree
+    - igraph_centralization_degree_tmax
+    - igraph_centralization_eigenvector_centrality
+    - igraph_centralization_eigenvector_centrality_tmax
   range-limited-centrality-measures:
     - igraph_betweenness_cutoff
     - igraph_closeness_cutoff
     - igraph_edge_betweenness_cutoff
     - igraph_harmonic_centrality_cutoff
+  subset-limited-centrality-measures:
+    - igraph_betweenness_subset
+    - igraph_edge_betweenness_subset
+
+trees:
+  spanning-trees-and-forests:
+    - igraph_is_forest
+    - igraph_is_tree
+    - igraph_minimum_spanning_tree
+    - igraph_minimum_spanning_tree_prim
+    - igraph_minimum_spanning_tree_unweighted
+    - igraph_random_spanning_tree
+    - igraph_to_prufer
+  unfolding-a-graph-into-a-tree:
+    - igraph_unfold_tree
+
+paths:
   distances-and-metrics:
     - igraph_average_path_length
     - igraph_average_path_length_dijkstra
@@ -604,66 +667,9 @@ structural:
     - igraph_get_shortest_paths_bellman_ford
     - igraph_get_shortest_paths_dijkstra
     - igraph_vertex_path_from_edge_path
-  similarity-measures:
-    - igraph_bibcoupling
-    - igraph_cocitation
-    - igraph_similarity_dice
-    - igraph_similarity_dice_es
-    - igraph_similarity_dice_pairs
-    - igraph_similarity_inverse_log_weighted
-    - igraph_similarity_jaccard
-    - igraph_similarity_jaccard_es
-    - igraph_similarity_jaccard_pairs
-  sparsifiers:
-    - igraph_spanner
-  spectral-properties:
-    - igraph_eigen_adjacency
-    - igraph_get_laplacian
-    - igraph_get_laplacian_sparse
-  subset-limited-centrality-measures:
-    - igraph_betweenness_subset
-    - igraph_edge_betweenness_subset
-  summary-statistics:
-    - igraph_density
-    - igraph_diversity
-    - igraph_mean_degree
-  them-statistics:
-    - igraph_local_scan_0_them
-    - igraph_local_scan_1_ecount_them
-    - igraph_local_scan_k_ecount_them
-  transitivity-or-clustering-coefficient:
-    - igraph_ecc
-    - igraph_transitivity_avglocal_undirected
-    - igraph_transitivity_barrat
-    - igraph_transitivity_local_undirected
-    - igraph_transitivity_undirected
-  trees:
-    - igraph_is_forest
-    - igraph_is_tree
-    - igraph_minimum_spanning_tree
-    - igraph_minimum_spanning_tree_prim
-    - igraph_minimum_spanning_tree_unweighted
-    - igraph_random_spanning_tree
-    - igraph_to_prufer
-  unfolding-a-graph-into-a-tree:
-    - igraph_unfold_tree
-  us-statistics:
-    - igraph_local_scan_0
-    - igraph_local_scan_1_ecount
-    - igraph_local_scan_k_ecount
   widest-path-related-functions:
     - igraph_get_widest_path
     - igraph_get_widest_paths
     - igraph_widest_path_widths_dijkstra
     - igraph_widest_path_widths_floyd_warshall
-
-visitors:
-  breadth-first-search:
-    - igraph_bfs
-    - igraph_bfs_simple
-  depth-first-search:
-    - igraph_dfs
-  random-walks:
-    - igraph_random_edge_walk
-    - igraph_random_walk
 
