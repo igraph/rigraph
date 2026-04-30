@@ -1,13 +1,13 @@
 # Changelog
 
-## igraph 2.3.1
+## igraph 2.3.0.9001
 
 ### Bug fixes
 
 - Correct LTO type mismatch warnings in `cpp11.cpp` declarations
   ([\#2620](https://github.com/igraph/rigraph/issues/2620)).
 
-### Uncategorized
+## igraph 2.3.0.9000
 
 - Switching to development version.
 
