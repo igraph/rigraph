@@ -1,15 +1,12 @@
 # Changelog
 
-## igraph 2.3.0.9001
+## igraph 2.3.1
 
 ### Bug fixes
 
-- Correct LTO type mismatch warnings in `cpp11.cpp` declarations
+- Fix mismatches between C function signatures and function calls. This
+  only affects private functions that are defined but not yet used
   ([\#2620](https://github.com/igraph/rigraph/issues/2620)).
-
-## igraph 2.3.0.9000
-
-- Switching to development version.
 
 ## igraph 2.3.0
 
