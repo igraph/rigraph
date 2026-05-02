@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9000
+
+- Switching to development version.
+
+
 # igraph 2.3.1
 
 ## Bug fixes
