@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9001
+
+## Chore
+
+- Auto-update from GitHub Actions (#2624).
+
+
 # igraph 2.3.1.9000
 
 - Switching to development version.
