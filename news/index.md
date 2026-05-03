@@ -1,5 +1,16 @@
 # Changelog
 
+## igraph 2.3.1.9001
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#2624](https://github.com/igraph/rigraph/issues/2624)).
+
+## igraph 2.3.1.9000
+
+- Switching to development version.
+
 ## igraph 2.3.1
 
 ### Bug fixes
