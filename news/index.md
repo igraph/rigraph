@@ -13,6 +13,8 @@
 
 ## igraph 2.3.1
 
+CRAN release: 2026-05-04
+
 ### Bug fixes
 
 - Fix mismatches between C function signatures and function calls. This
