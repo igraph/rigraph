@@ -494,8 +494,9 @@ graph.adjacency.sparse <- function(
   }
 
   vc <- nrow(adjmatrix)
-  # Exit early for empty graphs
-  if (vc == 1 || Matrix::nnzero(adjmatrix) == 0) {
+  # Exit early for empty graphs. Use na.counted = TRUE so that NA entries
+  # (which are stored explicitly) do not cause nnzero() to return NA.
+  if (vc == 1 || Matrix::nnzero(adjmatrix, na.counted = TRUE) == 0) {
     return(make_empty_graph(n = vc, directed = (mode == "directed")))
   }
 
