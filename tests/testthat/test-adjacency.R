@@ -880,7 +880,7 @@ test_that("graph_from_adjacency Na check for upper/lower", {
   )
 })
 
-test_that("graph_from_adjacency Na check for upper/lower with sparse matrices", {
+test_that("graph_from_adjacency NA check for upper/lower with sparse matrices", {
   # Sparse matrix with NA only in upper triangle: mode="upper" should error,
   # mode="lower" should succeed
   sp <- Matrix::sparseMatrix(
