@@ -49,20 +49,20 @@ was written by Vincent Matossian.
 # generate the first De-Bruijn graphs
 g <- make_full_graph(2, directed = TRUE, loops = TRUE)
 make_line_graph(g)
-#> IGRAPH 53605a2 D--- 4 8 -- Line graph
+#> IGRAPH 0ff46f4 D--- 4 8 -- Line graph
 #> + attr: name (g/c)
-#> + edges from 53605a2:
+#> + edges from 0ff46f4:
 #> [1] 1->1 3->1 1->2 3->2 2->3 4->3 2->4 4->4
 make_line_graph(make_line_graph(g))
-#> IGRAPH 1e2441b D--- 8 16 -- Line graph
+#> IGRAPH 6b07472 D--- 8 16 -- Line graph
 #> + attr: name (g/c)
-#> + edges from 1e2441b:
+#> + edges from 6b07472:
 #>  [1] 1->1 2->1 5->2 6->2 1->3 2->3 5->4 6->4 3->5 4->5 7->6 8->6 3->7 4->7 7->8
 #> [16] 8->8
 make_line_graph(make_line_graph(make_line_graph(g)))
-#> IGRAPH 79d5974 D--- 16 32 -- Line graph
+#> IGRAPH 0824e96 D--- 16 32 -- Line graph
 #> + attr: name (g/c)
-#> + edges from 79d5974:
+#> + edges from 0824e96:
 #>  [1]  1-> 1  2-> 1  3-> 2  4-> 2  9-> 3 10-> 3 11-> 4 12-> 4  1-> 5  2-> 5
 #> [11]  3-> 6  4-> 6  9-> 7 10-> 7 11-> 8 12-> 8  5-> 9  6-> 9  7->10  8->10
 #> [21] 13->11 14->11 15->12 16->12  5->13  6->13  7->14  8->14 13->15 14->15
