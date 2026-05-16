@@ -60,6 +60,7 @@ Other conversion:
 \code{\link{as_directed}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_long_data_frame}()},
+\code{\link{as_veincidence_matrix}()},
 \code{\link{graph_from_adj_list}()},
 \code{\link{graph_from_graphnel}()}
 }
