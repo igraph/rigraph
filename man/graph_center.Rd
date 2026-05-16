@@ -58,6 +58,7 @@ Other paths:
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
-\code{\link{radius}()}
+\code{\link{radius}()},
+\code{\link{widest_path_widths}()}
 }
 \concept{paths}
