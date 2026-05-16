@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9003
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+
 # igraph 2.3.1.9002
 
 ## Chore
