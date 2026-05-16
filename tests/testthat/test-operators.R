@@ -1307,3 +1307,54 @@ test_that("unique on detached vs, names", {
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
 })
+
+test_that("mycielskian() works", {
+  # Test basic Mycielski transformation of a triangle
+  g <- make_full_graph(3)
+  mg <- mycielskian(g, k = 1)
+
+  # Check vertex and edge counts
+  # For triangle: n=3, m=3
+  # Mycielskian should have 2n+1 = 7 vertices and 3m+n = 12 edges
+  expect_vcount(mg, 7)
+  expect_ecount(mg, 12)
+
+  # Test with k=0 (identity operation)
+  g2 <- make_ring(5)
+  mg2 <- mycielskian(g2, k = 0)
+  expect_isomorphic(g2, mg2)
+
+  # Test multiple iterations
+  g3 <- make_ring(5)
+  mg3 <- mycielskian(g3, k = 2)
+  # After 2 iterations: vertices = (5+1)*2^2 - 1 = 23
+  expect_vcount(mg3, 23)
+})
+
+test_that("make_mycielski_graph() works", {
+  # M_0 is null graph
+  g0 <- make_mycielski_graph(0)
+  expect_vcount(g0, 0)
+  expect_ecount(g0, 0)
+
+  # M_1 is single vertex
+  g1 <- make_mycielski_graph(1)
+  expect_vcount(g1, 1)
+  expect_ecount(g1, 0)
+
+  # M_2 is path with 2 vertices
+  g2 <- make_mycielski_graph(2)
+  expect_vcount(g2, 2)
+  expect_ecount(g2, 1)
+
+  # M_3 is cycle with 5 vertices (pentagon)
+  g3 <- make_mycielski_graph(3)
+  expect_vcount(g3, 5)
+  expect_ecount(g3, 5)
+  expect_isomorphic(g3, make_ring(5))
+
+  # M_4 is Grötzsch graph
+  g4 <- make_mycielski_graph(4)
+  expect_vcount(g4, 11)
+  expect_ecount(g4, 20)
+})
