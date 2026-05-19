@@ -166,7 +166,7 @@ matrices, Physical Review E 74 036104, 2006.
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),
 [`as.dendrogram()`](https://rdrr.io/r/stats/dendrogram.html)
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

@@ -134,7 +134,7 @@ of Mathematical Sociology* 25(2):163-177, 2001.
 [`degree()`](https://r.igraph.org/reference/degree.md),
 [`harmonic_centrality()`](https://r.igraph.org/reference/harmonic_centrality.md)
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`closeness()`](https://r.igraph.org/reference/closeness.md),

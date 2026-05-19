@@ -44,7 +44,7 @@ See the examples and the various constructor modifiers below.
 
 ## See also
 
-Random graph models (games)
+Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_bipartite()`](https://r.igraph.org/reference/sample_bipartite.md),
@@ -72,7 +72,7 @@ Random graph models (games)
 [`sample_traits_callaway()`](https://r.igraph.org/reference/sample_traits_callaway.md),
 [`sample_tree()`](https://r.igraph.org/reference/sample_tree.md)
 
-Constructor modifiers (and related functions)
+Constructor modifiers (and related functions):
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
 [`with_edge_()`](https://r.igraph.org/reference/with_edge_.md),

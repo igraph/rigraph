@@ -70,7 +70,7 @@ Hubert L and Arabie P: Comparing partitions. *Journal of Classification*
 
 ## See also
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

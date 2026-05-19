@@ -91,7 +91,7 @@ second.
 
 ## See also
 
-Bipartite graphs
+Bipartite graphs:
 [`bipartite_mapping()`](https://r.igraph.org/reference/bipartite_mapping.md),
 [`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md),
 [`make_bipartite_graph()`](https://r.igraph.org/reference/make_bipartite_graph.md)
@@ -128,14 +128,14 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH f04602e UNW- 5 6 -- Event network
+#> IGRAPH 357e303 UNW- 5 6 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from f04602e (vertex names):
+#> + edges from 357e303 (vertex names):
 #> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  
 #> [6] Cecil--Dan  
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH 00881e9 UNW- 3 2 -- Event network
+#> IGRAPH 4bd5374 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 00881e9 (vertex names):
+#> + edges from 4bd5374 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

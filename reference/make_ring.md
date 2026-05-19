@@ -62,7 +62,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> IGRAPH bd1befe U--- 10 10 -- Ring graph
+#> IGRAPH f9a5d43 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -71,10 +71,10 @@ print_all(make_ring(10))
 #> |   [1] FALSE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from bd1befe:
+#> + edges from f9a5d43:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> IGRAPH b1c464e D--- 10 20 -- Ring graph
+#> IGRAPH 1f1f269 D--- 10 20 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -83,7 +83,7 @@ print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 #> |   [1] TRUE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from b1c464e:
+#> + edges from 1f1f269:
 #>  [1]  1-> 2  2-> 1  2-> 3  3-> 2  3-> 4  4-> 3  4-> 5  5-> 4  5-> 6  6-> 5
 #> [11]  6-> 7  7-> 6  7-> 8  8-> 7  8-> 9  9-> 8  9->10 10-> 9 10-> 1  1->10
 ```

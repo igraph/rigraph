@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Helper function to add or delete edges along a path — path"><meta name="description" content="This function can be used to add or delete edges that form a path."><meta property="og:description" content="This function can be used to add or delete edges that form a path."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Helper function to add or delete edges along a path — path"><meta name="description" content="This function can be used to add or delete edges that form a path."><meta property="og:description" content="This function can be used to add or delete edges that form a path."><meta property="og:image" content="https://r.igraph.org/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +127,7 @@ to <code><a href="delete_edges.html">delete_edges()</a></code>.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="va">g2</span> <span class="op">+</span> <span class="fu">path</span><span class="op">(</span><span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>, weight <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 edges from ed1159b (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 edges from a664eee (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tail head tid hid weight color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    a    b   1   2     NA  &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    b    c   2   3     NA  &lt;NA&gt;</span>
@@ -137,7 +137,7 @@ to <code><a href="delete_edges.html">delete_edges()</a></code>.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="va">g3</span> <span class="op">+</span> <span class="fu">path</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"c"</span>, <span class="st">"j"</span>, <span class="st">"d"</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, color <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/8 edges from 1c00ac8 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/8 edges from 66a3f02 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tail head tid hid weight color width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    a    b   1   2     NA  &lt;NA&gt;    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    b    c   2   3     NA  &lt;NA&gt;    NA</span>

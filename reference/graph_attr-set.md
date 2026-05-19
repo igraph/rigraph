@@ -29,12 +29,12 @@ The graph, with the attribute(s) added.
 
 ## See also
 
-Vertex, edge and graph attributes
+Vertex, edge and graph attributes:
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-`edge_attr<-()`,
+[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
@@ -46,7 +46,7 @@ Vertex, edge and graph attributes
 [`set_vertex_attr()`](https://r.igraph.org/reference/set_vertex_attr.md),
 [`set_vertex_attrs()`](https://r.igraph.org/reference/set_vertex_attrs.md),
 [`vertex_attr()`](https://r.igraph.org/reference/vertex_attr.md),
-`vertex_attr<-()`,
+[`vertex_attr<-()`](https://r.igraph.org/reference/vertex_attr-set.md),
 [`vertex_attr_names()`](https://r.igraph.org/reference/vertex_attr_names.md)
 
 ## Examples
@@ -55,9 +55,9 @@ Vertex, edge and graph attributes
 g <- make_graph(~ A - B:C:D)
 graph_attr(g, "name") <- "4-star"
 g
-#> IGRAPH a5e10c9 UN-- 4 3 -- 4-star
+#> IGRAPH b654002 UN-- 4 3 -- 4-star
 #> + attr: name (g/c), name (v/c)
-#> + edges from a5e10c9 (vertex names):
+#> + edges from b654002 (vertex names):
 #> [1] A--B A--C A--D
 
 graph_attr(g) <- list(

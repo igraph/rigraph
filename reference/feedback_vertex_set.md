@@ -70,7 +70,7 @@ Other structural.properties:
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
 
-Graph cycles
+Graph cycles:
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),
 [`girth()`](https://r.igraph.org/reference/girth.md),
@@ -85,6 +85,6 @@ Graph cycles
 
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> + 2/9 vertices, from 4c40735:
+#> + 2/9 vertices, from f2686ab:
 #> [1] 2 8
 ```

@@ -53,7 +53,7 @@ can be mapped independently.
 
 ## See also
 
-Bipartite graphs
+Bipartite graphs:
 [`bipartite_projection()`](https://r.igraph.org/reference/bipartite_projection.md),
 [`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md),
 [`make_bipartite_graph()`](https://r.igraph.org/reference/make_bipartite_graph.md)

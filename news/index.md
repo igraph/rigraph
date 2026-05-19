@@ -1,5 +1,10 @@
 # Changelog
 
+## igraph 2.3.1.9003
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge
+  ([\#86](https://github.com/igraph/rigraph/issues/86)).
+
 ## igraph 2.3.1.9002
 
 ### Chore

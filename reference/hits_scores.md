@@ -99,7 +99,7 @@ for eigenvector centrality,
 Page Rank scores. [`arpack()`](https://r.igraph.org/reference/arpack.md)
 for the underlining machinery of the computation.
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),

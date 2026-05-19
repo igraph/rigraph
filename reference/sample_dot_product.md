@@ -51,7 +51,7 @@ and
 [`sample_sphere_volume()`](https://r.igraph.org/reference/sample_sphere_volume.md)
 for sampling position vectors.
 
-Random graph models (games)
+Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
@@ -94,8 +94,8 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> IGRAPH b8a8506 U--- 10 27 -- 
-#> + edges from b8a8506:
+#> IGRAPH 763bbbf U--- 10 27 -- 
+#> + edges from 763bbbf:
 #>  [1] 1-- 2 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 5 2-- 6 2-- 9 2--10
 #> [13] 3-- 4 3-- 6 3-- 7 3-- 9 4-- 7 4-- 8 4-- 9 4--10 5-- 7 5-- 8 6-- 9 6--10
 #> [25] 7--10 8-- 9 8--10
@@ -104,8 +104,8 @@ g
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> IGRAPH d9d3685 U--- 20 145 -- 
-#> + edges from d9d3685:
+#> IGRAPH 50d9f8f U--- 20 145 -- 
+#> + edges from 50d9f8f:
 #>   [1] 1-- 3 1-- 4 1-- 6 1-- 7 1-- 8 1--10 1--11 1--12 1--13 1--14 1--15 1--16
 #>  [13] 1--18 1--19 1--20 2-- 3 2-- 5 2-- 6 2-- 7 2-- 8 2-- 9 2--10 2--11 2--12
 #>  [25] 2--13 2--14 2--15 2--16 2--17 2--18 2--19 2--20 3-- 4 3-- 5 3-- 6 3-- 8

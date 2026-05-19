@@ -65,7 +65,7 @@ type for each vertex name that occurs in `edges`.
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md) to create
 one-mode networks
 
-Bipartite graphs
+Bipartite graphs:
 [`bipartite_mapping()`](https://r.igraph.org/reference/bipartite_mapping.md),
 [`bipartite_projection()`](https://r.igraph.org/reference/bipartite_projection.md),
 [`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)
@@ -80,8 +80,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> IGRAPH 91e32e7 U--B 10 5 -- 
+#> IGRAPH d8b57f7 U--B 10 5 -- 
 #> + attr: type (v/l)
-#> + edges from 91e32e7:
+#> + edges from d8b57f7:
 #> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```
