@@ -4,6 +4,7 @@
 
 ## Deprecated and defunct
 
+- `get.stochastic(()` is now deprecated with a warning instead of a message.
 - `is.simple(()` is now deprecated with a warning instead of a message.
 - `igraph.shape.noplot(()` is now deprecated with a warning instead of a message.
 - `igraph.shape.noclip(()` is now deprecated with a warning instead of a message.
