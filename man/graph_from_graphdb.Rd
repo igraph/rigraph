@@ -83,9 +83,9 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
 \seealso{
 \code{\link[=read_graph]{read_graph()}}, \code{\link[=isomorphic]{isomorphic()}}
 
-Foreign format readers
-\code{\link{read_graph}()},
-\code{\link{write_graph}()}
+Foreign format readers:
+\code{\link[=read_graph]{read_graph()}},
+\code{\link[=write_graph]{write_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

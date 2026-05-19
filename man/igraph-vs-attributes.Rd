@@ -76,37 +76,37 @@ V(g)[giant_v]$color <- "orange"
 plot(g)
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{V}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=V]{V()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.es}()},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.es]{print.igraph.es()}},
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 
-Vertex, edge and graph attributes
-\code{\link{delete_edge_attr}()},
-\code{\link{delete_graph_attr}()},
-\code{\link{delete_vertex_attr}()},
-\code{\link{edge_attr}()},
-\code{\link{edge_attr<-}()},
-\code{\link{edge_attr_names}()},
-\code{\link{graph_attr}()},
-\code{\link{graph_attr<-}()},
-\code{\link{graph_attr_names}()},
+Vertex, edge and graph attributes:
+\code{\link[=delete_edge_attr]{delete_edge_attr()}},
+\code{\link[=delete_graph_attr]{delete_graph_attr()}},
+\code{\link[=delete_vertex_attr]{delete_vertex_attr()}},
+\code{\link[=edge_attr]{edge_attr()}},
+\code{\link[=edge_attr<-]{edge_attr<-()}},
+\code{\link[=edge_attr_names]{edge_attr_names()}},
+\code{\link[=graph_attr]{graph_attr()}},
+\code{\link[=graph_attr<-]{graph_attr<-()}},
+\code{\link[=graph_attr_names]{graph_attr_names()}},
 \code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
-\code{\link{set_edge_attr}()},
-\code{\link{set_graph_attr}()},
-\code{\link{set_vertex_attr}()},
-\code{\link{set_vertex_attrs}()},
-\code{\link{vertex_attr}()},
-\code{\link{vertex_attr<-}()},
-\code{\link{vertex_attr_names}()}
+\code{\link[=set_edge_attr]{set_edge_attr()}},
+\code{\link[=set_graph_attr]{set_graph_attr()}},
+\code{\link[=set_vertex_attr]{set_vertex_attr()}},
+\code{\link[=set_vertex_attrs]{set_vertex_attrs()}},
+\code{\link[=vertex_attr]{vertex_attr()}},
+\code{\link[=vertex_attr<-]{vertex_attr<-()}},
+\code{\link[=vertex_attr_names]{vertex_attr_names()}}
 }
 \concept{attributes}
 \concept{vertex and edge sequences}
