@@ -4,6 +4,8 @@
 
 ## Deprecated and defunct
 
+- `permute.vertices(()` is now deprecated with a warning instead of a message.
+- `automorphisms(()` is now deprecated with a warning instead of a message.
 - `tkplot.setcoords(()` is now deprecated with a warning instead of a message.
 - `tkplot.rotate(()` is now deprecated with a warning instead of a message.
 - `tkplot.reshape(()` is now deprecated with a warning instead of a message.
