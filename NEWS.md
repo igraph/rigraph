@@ -4,6 +4,7 @@
 
 ## Deprecated and defunct
 
+- `are.connected(()` is now deprecated with a warning instead of a message.
 - `get.shortest.paths(()` is now deprecated with a warning instead of a message.
 - `get.diameter(()` is now deprecated with a warning instead of a message.
 - `unfold.tree(()` is now deprecated with a warning instead of a message.
