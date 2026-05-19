@@ -4,6 +4,7 @@
 
 ## Deprecated and defunct
 
+- `is.simple(()` is now deprecated with a warning instead of a message.
 - `igraph.shape.noplot(()` is now deprecated with a warning instead of a message.
 - `igraph.shape.noclip(()` is now deprecated with a warning instead of a message.
 - `vertex.shapes(()` is now deprecated with a warning instead of a message.
