@@ -64,9 +64,13 @@ is_referenced_elsewhere <- function(fn_name, current_path) {
   escaped <- gsub("([.^$|*+?(){}\\[\\]])", "\\\\\\1", fn_name)
   pattern <- paste0("(?<![A-Za-z0-9._])", escaped, "(?![A-Za-z0-9._])")
   other_files <- setdiff(r_files, current_path)
-  any(vapply(other_files, function(f) {
-    any(grepl(pattern, readLines(f, warn = FALSE), perl = TRUE))
-  }, logical(1)))
+  any(vapply(
+    other_files,
+    function(f) {
+      any(grepl(pattern, readLines(f, warn = FALSE), perl = TRUE))
+    },
+    logical(1)
+  ))
 }
 
 # Scan backwards from first_fn_line (1-indexed) past blank lines and roxygen #' lines.
@@ -139,14 +143,22 @@ add_error_true <- function(test_file, row_1indexed) {
 fix_lifecycle_snapshot_failures <- function(failures, root) {
   fixed <- FALSE
   for (f in failures) {
-    if (!grepl("lifecycle_error_deprecated|defunctError|defunct", f$msg)) next
+    if (!grepl("lifecycle_error_deprecated|defunctError|defunct", f$msg)) {
+      next
+    }
     src_file <- f$src_file
-    line     <- f$line
-    if (is.null(src_file) || is.null(line) || is.na(line)) next
-    file_path <- if (file.exists(src_file)) src_file else {
+    line <- f$line
+    if (is.null(src_file) || is.null(line) || is.na(line)) {
+      next
+    }
+    file_path <- if (file.exists(src_file)) {
+      src_file
+    } else {
       file.path(root, "tests", "testthat", basename(src_file))
     }
-    if (!file.exists(file_path)) next
+    if (!file.exists(file_path)) {
+      next
+    }
     if (add_error_true(file_path, line)) fixed <- TRUE
   }
   fixed
@@ -160,9 +172,11 @@ n_commits <- 0L
 
 # Returns character vector of still-failing test names (empty if all pass).
 run_tests <- function(path) {
-  src_name  <- fs::path_ext_remove(fs::path_file(path))
+  src_name <- fs::path_ext_remove(fs::path_file(path))
   test_file <- here::here("tests", "testthat", paste0("test-", src_name, ".R"))
-  if (!file.exists(test_file)) return(character(0))
+  if (!file.exists(test_file)) {
+    return(character(0))
+  }
 
   root <- here::here()
 
@@ -170,29 +184,49 @@ run_tests <- function(path) {
   run_one <- function(update_snapshots = FALSE) {
     callr::r(
       function(root, src_name, update_snapshots) {
-        if (update_snapshots) options(testthat.snapshot.update = TRUE)
+        if (update_snapshots) {
+          options(testthat.snapshot.update = TRUE)
+        }
         result <- testthat::test_local(
-          root, filter = src_name, stop_on_failure = FALSE, reporter = "minimal"
+          root,
+          filter = src_name,
+          stop_on_failure = FALSE,
+          reporter = "minimal"
         )
         df <- as.data.frame(result)
         failures <- list()
         for (fr in result) {
           for (exp in fr) {
-            if (!inherits(exp, c("expectation_failure", "expectation_error"))) next
-            msg      <- tryCatch(conditionMessage(exp), error = function(e) "")
-            srcref   <- tryCatch(exp$srcref, error = function(e) NULL)
-            src_file <- tryCatch(attr(srcref, "srcfile")$filename, error = function(e) NULL)
-            line     <- tryCatch(as.integer(srcref)[1L], error = function(e) NA_integer_)
-            failures[[length(failures) + 1L]] <- list(msg = msg, src_file = src_file, line = line)
+            if (!inherits(exp, c("expectation_failure", "expectation_error"))) {
+              next
+            }
+            msg <- tryCatch(conditionMessage(exp), error = function(e) "")
+            srcref <- tryCatch(exp$srcref, error = function(e) NULL)
+            src_file <- tryCatch(
+              attr(srcref, "srcfile")$filename,
+              error = function(e) NULL
+            )
+            line <- tryCatch(as.integer(srcref)[1L], error = function(e) {
+              NA_integer_
+            })
+            failures[[length(failures) + 1L]] <- list(
+              msg = msg,
+              src_file = src_file,
+              line = line
+            )
           }
         }
         list(
-          n_fail    = sum(df$failed, na.rm = TRUE) + sum(df$error, na.rm = TRUE),
+          n_fail = sum(df$failed, na.rm = TRUE) + sum(df$error, na.rm = TRUE),
           bad_tests = df$test[df$failed + df$error > 0L],
-          failures  = failures
+          failures = failures
         )
       },
-      args = list(root = root, src_name = src_name, update_snapshots = update_snapshots)
+      args = list(
+        root = root,
+        src_name = src_name,
+        update_snapshots = update_snapshots
+      )
     )
   }
 
@@ -221,7 +255,7 @@ commit_change <- function(path, msg) {
   if (length(bad) > 0L) {
     unresolved_failures[[length(unresolved_failures) + 1L]] <<- list(
       commit = msg,
-      tests  = bad
+      tests = bad
     )
   }
   gert::git_add(fs::path_rel(path, here::here()))
@@ -236,7 +270,9 @@ commit_change <- function(path, msg) {
 }
 
 write_unresolved_report <- function() {
-  if (length(unresolved_failures) == 0L) return(invisible(NULL))
+  if (length(unresolved_failures) == 0L) {
+    return(invisible(NULL))
+  }
   out <- here::here("lifecycle-TODO.md")
   lines <- c(
     "# lifecycle bump — unresolved test failures",
@@ -257,7 +293,9 @@ write_unresolved_report <- function() {
     )
   }
   writeLines(lines, out)
-  cli::cli_alert_warning("Wrote {length(unresolved_failures)} unresolved item(s) to lifecycle-TODO.md")
+  cli::cli_alert_warning(
+    "Wrote {length(unresolved_failures)} unresolved item(s) to lifecycle-TODO.md"
+  )
 }
 
 # --- queries ---
@@ -295,7 +333,6 @@ stop_query <- query(
 # --- per-file processing ---
 
 process_file <- function(path) {
-
   # ---- 1. BUMP: deprecate_soft -> deprecate_warn, deprecate_warn -> deprecate_stop ----
 
   lines <- readLines(path, warn = FALSE)
@@ -395,8 +432,11 @@ process_file <- function(path) {
         "Skipping removal of {fn_name}(): still referenced in other R files (fix iterators manually)"
       )
       unresolved_failures[[length(unresolved_failures) + 1L]] <<- list(
-        commit = sprintf("feat!: remove deprecated %s (lifecycle::deprecate_stop)", whats[j]),
-        tests  = paste0(fn_name, "() skipped: still referenced in other R files")
+        commit = sprintf(
+          "feat!: remove deprecated %s (lifecycle::deprecate_stop)",
+          whats[j]
+        ),
+        tests = paste0(fn_name, "() skipped: still referenced in other R files")
       )
       next
     }
@@ -426,7 +466,7 @@ r_files <- fs::dir_ls(here::here("R"), glob = "*.R")
 
 cli::cli_progress_bar(
   total = length(r_files),
-  format      = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} | {n_commits} commits | ETA {cli::pb_eta} | {cli::pb_status}",
+  format = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} | {n_commits} commits | ETA {cli::pb_eta} | {cli::pb_status}",
   format_done = "{cli::pb_total} files done | {n_commits} commits in {cli::pb_elapsed}",
   clear = FALSE
 )
