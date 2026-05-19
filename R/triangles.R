@@ -10,7 +10,7 @@
 #' @export
 adjacent.triangles <- function(graph, vids = V(graph)) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "adjacent.triangles()",
     "count_triangles()"
