@@ -4,6 +4,7 @@
 
 ## Deprecated and defunct
 
+- `igraph.version(()` is now deprecated with a warning instead of a message.
 - `permute.vertices(()` is now deprecated with a warning instead of a message.
 - `automorphisms(()` is now deprecated with a warning instead of a message.
 - `tkplot.setcoords(()` is now deprecated with a warning instead of a message.
