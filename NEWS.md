@@ -4,6 +4,8 @@
 
 ## Deprecated and defunct
 
+- `path.length.hist(()` is now deprecated with a warning instead of a message.
+- `is.dag(()` is now deprecated with a warning instead of a message.
 - `igraph.options(()` is now deprecated with a warning instead of a message.
 - `getIgraphOpt(()` is now deprecated with a warning instead of a message.
 - `running.mean(()` is now deprecated with a warning instead of a message.

@@ -10,7 +10,7 @@
 #' @export
 path.length.hist <- function(graph, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
+  lifecycle::deprecate_warn("2.0.0", "path.length.hist()", "distance_table()")
   distance_table(graph = graph, directed = directed)
 } # nocov end
 
@@ -26,7 +26,7 @@ path.length.hist <- function(graph, directed = TRUE) {
 #' @export
 maximum.cardinality.search <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "maximum.cardinality.search()",
     "max_cardinality()"
@@ -46,7 +46,7 @@ maximum.cardinality.search <- function(graph) {
 #' @export
 is.dag <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
+  lifecycle::deprecate_warn("2.0.0", "is.dag()", "is_dag()")
   is_dag(graph = graph)
 } # nocov end
 ## -----------------------------------------------------------------------
@@ -287,7 +287,7 @@ eccentricity <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "eccentricity(... =)",
       details = "The argument `mode` must be named."
@@ -345,7 +345,7 @@ radius <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "radius(... =)",
       details = "The argument `mode` must be named."
