@@ -4,6 +4,7 @@
 
 ## Deprecated and defunct
 
+- `minimum.spanning.tree(()` is now deprecated with a warning instead of a message.
 - `graph()` is now deprecated with a warning instead of a message.
 - `graph.famous()` is now deprecated with a warning instead of a message.
 - `line.graph()` is now deprecated with a warning instead of a message.
