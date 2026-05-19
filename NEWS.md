@@ -4,6 +4,11 @@
 
 ## Deprecated and defunct
 
+- `triad.census(()` is now deprecated with a warning instead of a message.
+- `graph.motifs.no(()` is now deprecated with a warning instead of a message.
+- `graph.motifs.est(()` is now deprecated with a warning instead of a message.
+- `graph.motifs(()` is now deprecated with a warning instead of a message.
+- `dyad.census(()` is now deprecated with a warning instead of a message.
 - `minimum.spanning.tree(()` is now deprecated with a warning instead of a message.
 - `graph()` is now deprecated with a warning instead of a message.
 - `graph.famous()` is now deprecated with a warning instead of a message.
