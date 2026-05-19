@@ -4,6 +4,8 @@
 
 ## Deprecated and defunct
 
+- `igraph.options(()` is now deprecated with a warning instead of a message.
+- `getIgraphOpt(()` is now deprecated with a warning instead of a message.
 - `running.mean(()` is now deprecated with a warning instead of a message.
 - `igraph.sample(()` is now deprecated with a warning instead of a message.
 - `convex.hull(()` is now deprecated with a warning instead of a message.
