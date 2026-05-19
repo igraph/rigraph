@@ -4,6 +4,15 @@
 
 ## Deprecated and defunct
 
+- `tkplot.setcoords(()` is now deprecated with a warning instead of a message.
+- `tkplot.rotate(()` is now deprecated with a warning instead of a message.
+- `tkplot.reshape(()` is now deprecated with a warning instead of a message.
+- `tkplot.off(()` is now deprecated with a warning instead of a message.
+- `tkplot.getcoords(()` is now deprecated with a warning instead of a message.
+- `tkplot.fit.to.screen(()` is now deprecated with a warning instead of a message.
+- `tkplot.close(()` is now deprecated with a warning instead of a message.
+- `tkplot.center(()` is now deprecated with a warning instead of a message.
+- `tkplot.canvas(()` is now deprecated with a warning instead of a message.
 - `are.connected(()` is now deprecated with a warning instead of a message.
 - `get.shortest.paths(()` is now deprecated with a warning instead of a message.
 - `get.diameter(()` is now deprecated with a warning instead of a message.
