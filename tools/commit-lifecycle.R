@@ -37,13 +37,20 @@
 # gert::git_pull(repo = here::here(), remote = "origin", refspec = "main")
 # cli::cli_alert_success("Pulled and fast-forwarded to main")
 
-gert::git_fetch("origin", refspec = "refs/heads/main:refs/heads/main", repo = here::here())
+gert::git_fetch(
+  "origin",
+  refspec = "refs/heads/main:refs/heads/main",
+  repo = here::here()
+)
 gert::git_reset_mixed("main", repo = here::here())
 
 usethis::use_build_ignore("lifecycle")
 usethis::use_git_ignore("lifecycle")
 
-gert::git_add(c("tools/commit-lifecycle.R", ".gitignore", ".Rbuildignore"), repo = here::here())
+gert::git_add(
+  c("tools/commit-lifecycle.R", ".gitignore", ".Rbuildignore"),
+  repo = here::here()
+)
 gert::git_commit("chore: add commit-lifecycle.R script", repo = here::here())
 cli::cli_alert_success("Committed tools/commit-lifecycle.R")
 
@@ -58,15 +65,31 @@ for (stem in tools::file_path_sans_ext(r_files)) {
   file.copy(lifecycle_r, here::here(r_file), overwrite = TRUE)
   files_to_stage <- r_file
 
-  lifecycle_test <- here::here("lifecycle", "tests", "testthat", paste0("test-", stem, ".R"))
+  lifecycle_test <- here::here(
+    "lifecycle",
+    "tests",
+    "testthat",
+    paste0("test-", stem, ".R")
+  )
   if (file.exists(lifecycle_test)) {
     dest_test <- here::here("tests", "testthat", paste0("test-", stem, ".R"))
     file.copy(lifecycle_test, dest_test, overwrite = TRUE)
     files_to_stage <- c(files_to_stage, paste0("tests/testthat/test-", stem, ".R"))
 
-    lifecycle_snap <- here::here("lifecycle", "tests", "testthat", "_snaps", paste0(stem, ".md"))
+    lifecycle_snap <- here::here(
+      "lifecycle",
+      "tests",
+      "testthat",
+      "_snaps",
+      paste0(stem, ".md")
+    )
     if (file.exists(lifecycle_snap)) {
-      dest_snap <- here::here("tests", "testthat", "_snaps", paste0(stem, ".md"))
+      dest_snap <- here::here(
+        "tests",
+        "testthat",
+        "_snaps",
+        paste0(stem, ".md")
+      )
       file.copy(lifecycle_snap, dest_snap, overwrite = TRUE)
       files_to_stage <- c(files_to_stage, paste0("tests/testthat/_snaps/", stem, ".md"))
     }
@@ -75,20 +98,34 @@ for (stem in tools::file_path_sans_ext(r_files)) {
   devtools::document(quiet = TRUE)
   tryCatch(
     callr::r(
-      function(pkg, filter) devtools::test(pkg = pkg, filter = filter, stop_on_failure = FALSE),
+      function(pkg, filter) {
+        devtools::test(pkg = pkg, filter = filter, stop_on_failure = FALSE)
+      },
       args = list(pkg = here::here(), filter = stem)
     ),
-    error = function(e) cli::cli_alert_warning("Tests errored for {stem}: {conditionMessage(e)}")
+    error = function(e) {
+      cli::cli_alert_warning("Tests errored for {stem}: {conditionMessage(e)}")
+    }
   )
 
   gert::git_add(c(files_to_stage, "man", "NAMESPACE"), repo = here::here())
-  gert::git_commit(paste0("feat!: bump deprecated functions in R/", stem, ".R"), repo = here::here())
+  gert::git_commit(
+    paste0("feat!: bump deprecated functions in R/", stem, ".R"),
+    repo = here::here()
+  )
   cli::cli_alert_success("Committed {r_file}")
 }
 
-file.copy(here::here("lifecycle", "NEWS.md"), here::here("NEWS.md"), overwrite = TRUE)
+file.copy(
+  here::here("lifecycle", "NEWS.md"),
+  here::here("NEWS.md"),
+  overwrite = TRUE
+)
 gert::git_add("NEWS.md", repo = here::here())
-gert::git_commit("chore: update NEWS.md for lifecycle bumps\n\n!NEWS", repo = here::here())
+gert::git_commit(
+  "chore: update NEWS.md for lifecycle bumps\n\n!NEWS",
+  repo = here::here()
+)
 cli::cli_alert_success("Committed NEWS.md")
 
 # R CMD check after all the commits
