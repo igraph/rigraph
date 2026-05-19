@@ -4,6 +4,32 @@
 
 ## Deprecated and defunct
 
+- `get.shortest.paths(()` is now deprecated with a warning instead of a message.
+- `get.diameter(()` is now deprecated with a warning instead of a message.
+- `unfold.tree(()` is now deprecated with a warning instead of a message.
+- `topological.sort(()` is now deprecated with a warning instead of a message.
+- `shortest.paths(()` is now deprecated with a warning instead of a message.
+- `neighborhood.size(()` is now deprecated with a warning instead of a message.
+- `is.mutual(()` is now deprecated with a warning instead of a message.
+- `is.multiple(()` is now deprecated with a warning instead of a message.
+- `is.matching(()` is now deprecated with a warning instead of a message.
+- `is.loop(()` is now deprecated with a warning instead of a message.
+- `is.connected(()` is now deprecated with a warning instead of a message.
+- `induced.subgraph(()` is now deprecated with a warning instead of a message.
+- `has.multiple(()` is now deprecated with a warning instead of a message.
+- `graph.neighborhood(()` is now deprecated with a warning instead of a message.
+- `graph.laplacian(()` is now deprecated with a warning instead of a message.
+- `graph.knn(()` is now deprecated with a warning instead of a message.
+- `graph.dfs(()` is now deprecated with a warning instead of a message.
+- `graph.density(()` is now deprecated with a warning instead of a message.
+- `graph.coreness(()` is now deprecated with a warning instead of a message.
+- `graph.bfs(()` is now deprecated with a warning instead of a message.
+- `farthest.nodes(()` is now deprecated with a warning instead of a message.
+- `count.multiple(()` is now deprecated with a warning instead of a message.
+- `clusters(()` is now deprecated with a warning instead of a message.
+- `average.path.length(()` is now deprecated with a warning instead of a message.
+- `bfs(()` is now defunct (errors instead of warning).
+- `dfs(()` is now defunct (errors instead of warning).
 - `get.stochastic(()` is now deprecated with a warning instead of a message.
 - `is.simple(()` is now deprecated with a warning instead of a message.
 - `igraph.shape.noplot(()` is now deprecated with a warning instead of a message.
