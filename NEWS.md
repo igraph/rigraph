@@ -4,6 +4,11 @@
 
 ## Deprecated and defunct
 
+- `graph.intersection(()` is now deprecated with a warning instead of a message.
+- `graph.union(()` is now deprecated with a warning instead of a message.
+- `graph.difference(()` is now deprecated with a warning instead of a message.
+- `graph.compose(()` is now deprecated with a warning instead of a message.
+- `graph.complementer(()` is now deprecated with a warning instead of a message.
 - `triad.census(()` is now deprecated with a warning instead of a message.
 - `graph.motifs.no(()` is now deprecated with a warning instead of a message.
 - `graph.motifs.est(()` is now deprecated with a warning instead of a message.
