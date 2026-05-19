@@ -37,20 +37,18 @@
 # gert::git_pull(repo = here::here(), remote = "origin", refspec = "main")
 # cli::cli_alert_success("Pulled and fast-forwarded to main")
 
-gert::git_fetch(
-  "origin",
-  refspec = "refs/heads/main:refs/heads/main",
-  repo = here::here()
-)
-gert::git_reset_mixed("main", repo = here::here())
+if (gert::git_ahead_behind("main", repo = here::here())$ahead == 0) {
+  gert::git_fetch("origin", refspec = "refs/heads/main:refs/heads/main", repo = here::here())
+  gert::git_reset_mixed("main", repo = here::here())
+} else {
+  cli::cli_alert_info("Commits already ahead of main — skipping reset, resuming")
+}
 
-usethis::use_build_ignore("lifecycle")
-usethis::use_git_ignore("lifecycle")
+if (gert::git_ahead_behind("main", repo = here::here())$ahead == 0) {
+  usethis::use_build_ignore("lifecycle")
+  usethis::use_git_ignore("lifecycle")
 
-gert::git_add(
-  c("tools/commit-lifecycle.R", ".gitignore", ".Rbuildignore"),
-  repo = here::here()
-)
+gert::git_add(c("tools/commit-lifecycle.R", ".gitignore", ".Rbuildignore"), repo = here::here())
 gert::git_commit("chore: add commit-lifecycle.R script", repo = here::here())
 cli::cli_alert_success("Committed tools/commit-lifecycle.R")
 
@@ -98,14 +96,10 @@ for (stem in tools::file_path_sans_ext(r_files)) {
   devtools::document(quiet = TRUE)
   tryCatch(
     callr::r(
-      function(pkg, filter) {
-        devtools::test(pkg = pkg, filter = filter, stop_on_failure = FALSE)
-      },
+      function(pkg, filter) devtools::test(pkg = pkg, filter = filter, stop_on_failure = FALSE),
       args = list(pkg = here::here(), filter = stem)
     ),
-    error = function(e) {
-      cli::cli_alert_warning("Tests errored for {stem}: {conditionMessage(e)}")
-    }
+    error = function(e) cli::cli_alert_warning("Tests errored for {stem}: {conditionMessage(e)}")
   )
 
   gert::git_add(c(files_to_stage, "man", "NAMESPACE"), repo = here::here())
