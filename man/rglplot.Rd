@@ -43,8 +43,8 @@ rglplot(g, layout = coords)
 \link{igraph.plotting}, \code{\link[=plot.igraph]{plot.igraph()}} for the 2D
 version, \code{\link[=tkplot]{tkplot()}} for interactive graph drawing in 2D.
 
-Other plot: 
-\code{\link{plot.igraph}()}
+Other plot:
+\code{\link[=plot.igraph]{plot.igraph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

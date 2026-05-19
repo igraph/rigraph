@@ -53,14 +53,14 @@ It lists the two subgroups of each internal node, in
 as many columns as the screen width allows.
 }
 \seealso{
-Other hierarchical random graph functions: 
-\code{\link{consensus_tree}()},
-\code{\link{fit_hrg}()},
-\code{\link{hrg}()},
+Other hierarchical random graph functions:
+\code{\link[=consensus_tree]{consensus_tree()}},
+\code{\link[=fit_hrg]{fit_hrg()}},
+\code{\link[=hrg]{hrg()}},
 \code{\link{hrg-methods}},
-\code{\link{hrg_tree}()},
-\code{\link{predict_edges}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{sample_hrg}()}
+\code{\link[=hrg_tree]{hrg_tree()}},
+\code{\link[=predict_edges]{predict_edges()}},
+\code{\link[=print.igraphHRGConsensus]{print.igraphHRGConsensus()}},
+\code{\link[=sample_hrg]{sample_hrg()}}
 }
 \concept{hierarchical random graph functions}

@@ -43,8 +43,8 @@ vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
 vec.norm
 }
 \seealso{
-Other latent position vector samplers: 
-\code{\link{sample_dirichlet}()},
-\code{\link{sample_sphere_surface}()}
+Other latent position vector samplers:
+\code{\link[=sample_dirichlet]{sample_dirichlet()}},
+\code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
 }
 \concept{latent position vector samplers}
