@@ -4,6 +4,9 @@
 
 ## Deprecated and defunct
 
+- `running.mean(()` is now deprecated with a warning instead of a message.
+- `igraph.sample(()` is now deprecated with a warning instead of a message.
+- `convex.hull(()` is now deprecated with a warning instead of a message.
 - `graph.intersection(()` is now deprecated with a warning instead of a message.
 - `graph.union(()` is now deprecated with a warning instead of a message.
 - `graph.difference(()` is now deprecated with a warning instead of a message.
