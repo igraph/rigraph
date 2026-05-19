@@ -4,6 +4,10 @@
 
 ## Deprecated and defunct
 
+- `igraph.shape.noplot(()` is now deprecated with a warning instead of a message.
+- `igraph.shape.noclip(()` is now deprecated with a warning instead of a message.
+- `vertex.shapes(()` is now deprecated with a warning instead of a message.
+- `add.vertex.shape(()` is now deprecated with a warning instead of a message.
 - `path.length.hist(()` is now deprecated with a warning instead of a message.
 - `is.dag(()` is now deprecated with a warning instead of a message.
 - `igraph.options(()` is now deprecated with a warning instead of a message.
