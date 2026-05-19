@@ -1,48 +1,264 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.3.1.9003
-
-- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
-
-
-# igraph 2.3.1.9002
-
-## Chore
-
-- Add ccache to `.gitignore` and `.Rbuildignore`.
-
-## Continuous integration
-
-- Create snapshot update PR against correct branch.
-
-- Add reference to `/apply-patch` workflow in commit message.
-
-- Clarify rationale for not deploying on schedule.
-
-- Really deploy pkgdown only on push.
-
-- Disable vendoring workflow to avoid noise.
-
-- Only run fledge on pushes to main.
-
-- Tweak fledge workflow and ccache action.
-
-- Cosmetics.
-
-- Bump action versions.
-
-- Install clang-format-21.
-
-- Align fledge workflow.
-
-- Harmonize.
-
-## Uncategorized
-
-- Merge branch 'krlmlr-main'.
-
-
 # igraph 2.3.1.9001
+
+## Deprecated and defunct
+
+- `graph()` is now deprecated with a warning instead of a message.
+- `graph.famous()` is now deprecated with a warning instead of a message.
+- `line.graph()` is now deprecated with a warning instead of a message.
+- `graph.ring()` is now deprecated with a warning instead of a message.
+- `graph.tree()` is now deprecated with a warning instead of a message.
+- `graph.star()` is now deprecated with a warning instead of a message.
+- `graph.lcf()` is now deprecated with a warning instead of a message.
+- `graph.lattice()` is now deprecated with a warning instead of a message.
+- `graph.lattice()` is now deprecated with a warning instead of a message.
+- `graph.kautz()` is now deprecated with a warning instead of a message.
+- `graph.full.citation()` is now deprecated with a warning instead of a message.
+- `graph.full.bipartite()` is now deprecated with a warning instead of a message.
+- `graph.full()` is now deprecated with a warning instead of a message.
+- `graph.formula()` is now deprecated with a warning instead of a message.
+- `graph.extended.chordal.ring()` is now deprecated with a warning instead of a message.
+- `graph.empty()` is now deprecated with a warning instead of a message.
+- `graph.de.bruijn()` is now deprecated with a warning instead of a message.
+- `graph.bipartite()` is now deprecated with a warning instead of a message.
+- `graph.atlas()` is now deprecated with a warning instead of a message.
+- `graph_()` is now deprecated with a warning instead of a message.
+- `make_lattice()` is now deprecated with a warning instead of a message.
+- `layout.grid.3d()` has been removed.
+- `piecewise.layout()` is now deprecated with a warning instead of a message.
+- `layout.sugiyama()` is now deprecated with a warning instead of a message.
+- `layout.star()` is now deprecated with a warning instead of a message.
+- `layout.norm()` is now deprecated with a warning instead of a message.
+- `layout.merge()` is now deprecated with a warning instead of a message.
+- `layout.mds()` is now deprecated with a warning instead of a message.
+- `layout.grid()` is now deprecated with a warning instead of a message.
+- `layout.graphopt()` is now deprecated with a warning instead of a message.
+- `layout.gem()` is now deprecated with a warning instead of a message.
+- `layout.davidson.harel()` is now deprecated with a warning instead of a message.
+- `layout.bipartite()` is now deprecated with a warning instead of a message.
+- `layout.auto()` is now deprecated with a warning instead of a message.
+- `layout.reingold.tilford()` is now deprecated with a warning instead of a message.
+- `layout.circle()` is now deprecated with a warning instead of a message.
+- `layout.sphere()` is now deprecated with a warning instead of a message.
+- `layout.random()` is now deprecated with a warning instead of a message.
+- `layout.fruchterman.reingold()` is now deprecated with a warning instead of a message.
+- `layout.kamada.kawai()` is now deprecated with a warning instead of a message.
+- `layout.lgl()` is now deprecated with a warning instead of a message.
+- `layout_with_mds()` is now deprecated with a warning instead of a message.
+- `layout.spring()` is now defunct (errors instead of warning).
+- `layout.svd()` is now defunct (errors instead of warning).
+- `layout.fruchterman.reingold.grid()` is now defunct (errors instead of warning).
+- `layout.drl()` is now deprecated with a warning instead of a message.
+- `nei()` has been removed.
+- `innei()` has been removed.
+- `outnei()` has been removed.
+- `inc()` has been removed.
+- `adj()` has been removed.
+- `from()` has been removed.
+- `to()` has been removed.
+- `adj()` has been removed.
+- `inc()` has been removed.
+- `from()` has been removed.
+- `to()` has been removed.
+- `is.directed()` is now deprecated with a warning instead of a message.
+- `delete.vertices()` is now deprecated with a warning instead of a message.
+- `delete.edges()` is now deprecated with a warning instead of a message.
+- `add.vertices()` is now deprecated with a warning instead of a message.
+- `add.edges()` is now deprecated with a warning instead of a message.
+- `get_edge_ids()` is now defunct (errors instead of warning).
+- `get.edge.ids()` is now deprecated with a warning instead of a message.
+- `get.edge.ids()` is now deprecated with a warning instead of a message.
+- `graph.incidence()` is now deprecated with a warning instead of a message.
+- `graph_from_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `graph_from_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `hrg.predict()` is now deprecated with a warning instead of a message.
+- `hrg.fit()` is now deprecated with a warning instead of a message.
+- `hrg.game()` is now deprecated with a warning instead of a message.
+- `hrg.dendrogram()` is now deprecated with a warning instead of a message.
+- `hrg.create()` is now deprecated with a warning instead of a message.
+- `hrg.consensus()` is now deprecated with a warning instead of a message.
+- `graphlets.project()` is now deprecated with a warning instead of a message.
+- `graphlets.candidate.basis()` is now deprecated with a warning instead of a message.
+- `watts.strogatz.game()` is now deprecated with a warning instead of a message.
+- `static.power.law.game()` is now deprecated with a warning instead of a message.
+- `static.fitness.game()` is now deprecated with a warning instead of a message.
+- `sbm.game()` is now deprecated with a warning instead of a message.
+- `preference.game()` is now deprecated with a warning instead of a message.
+- `lastcit.game()` is now deprecated with a warning instead of a message.
+- `k.regular.game()` is now deprecated with a warning instead of a message.
+- `interconnected.islands.game()` is now deprecated with a warning instead of a message.
+- `grg.game()` is now deprecated with a warning instead of a message.
+- `growing.random.game()` is now deprecated with a warning instead of a message.
+- `forest.fire.game()` is now deprecated with a warning instead of a message.
+- `establishment.game()` is now deprecated with a warning instead of a message.
+- `degree.sequence.game()` is now deprecated with a warning instead of a message.
+- `connect.neighborhood()` is now deprecated with a warning instead of a message.
+- `citing.cited.type.game()` is now deprecated with a warning instead of a message.
+- `cited.type.game()` is now deprecated with a warning instead of a message.
+- `callaway.traits.game()` is now deprecated with a warning instead of a message.
+- `bipartite.random.game()` is now defunct (errors instead of warning).
+- `barabasi.game()` is now deprecated with a warning instead of a message.
+- `ba.game()` is now deprecated with a warning instead of a message.
+- `asymmetric.preference.game()` is now deprecated with a warning instead of a message.
+- `aging.barabasi.game()` is now deprecated with a warning instead of a message.
+- `aging.ba.game()` is now deprecated with a warning instead of a message.
+- `aging.prefatt.game()` is now deprecated with a warning instead of a message.
+- `erdos.renyi.game()` is now deprecated with a warning instead of a message.
+- `erdos.renyi.game()` is now deprecated with a warning instead of a message.
+- `random.graph.game()` is now deprecated with a warning instead of a message.
+- `random.graph.game()` is now deprecated with a warning instead of a message.
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_degseq()` is now defunct (errors instead of warning).
+- `sample_bipartite()` is now deprecated with a warning instead of a message.
+- `sample_bipartite()` is now deprecated with a warning instead of a message.
+- `bipartite()` is now deprecated with a warning instead of a message.
+- `bipartite()` is now deprecated with a warning instead of a message.
+- `write.graph()` is now deprecated with a warning instead of a message.
+- `read.graph()` is now deprecated with a warning instead of a message.
+- `graph.graphdb()` is now deprecated with a warning instead of a message.
+- `vertex.disjoint.paths()` is now deprecated with a warning instead of a message.
+- `vertex.connectivity()` is now deprecated with a warning instead of a message.
+- `stMincuts()` is now deprecated with a warning instead of a message.
+- `stCuts()` is now deprecated with a warning instead of a message.
+- `minimum.size.separators()` is now deprecated with a warning instead of a message.
+- `minimal.st.separators()` is now deprecated with a warning instead of a message.
+- `is.separator()` is now deprecated with a warning instead of a message.
+- `is.minimal.separator()` is now deprecated with a warning instead of a message.
+- `graph.mincut()` is now deprecated with a warning instead of a message.
+- `graph.maxflow()` is now deprecated with a warning instead of a message.
+- `graph.adhesion()` is now deprecated with a warning instead of a message.
+- `edge.disjoint.paths()` is now deprecated with a warning instead of a message.
+- `edge.connectivity()` is now deprecated with a warning instead of a message.
+- `dominator.tree()` is now deprecated with a warning instead of a message.
+- `power.law.fit()` is now deprecated with a warning instead of a message.
+- `is.graphical.degree.sequence()` is now deprecated with a warning instead of a message.
+- `is.degree.sequence()` is now deprecated with a warning instead of a message.
+- `is.chordal()` is now deprecated with a warning instead of a message.
+- `igraph.to.graphNEL()` is now deprecated with a warning instead of a message.
+- `igraph.from.graphNEL()` is now deprecated with a warning instead of a message.
+- `graph.adjlist()` is now deprecated with a warning instead of a message.
+- `get.incidence()` is now deprecated with a warning instead of a message.
+- `get.edgelist()` is now deprecated with a warning instead of a message.
+- `get.data.frame()` is now deprecated with a warning instead of a message.
+- `get.adjacency()` is now deprecated with a warning instead of a message.
+- `get.adjlist()` is now deprecated with a warning instead of a message.
+- `get.adjedgelist()` is now deprecated with a warning instead of a message.
+- `get.adjacency.dense()` is now deprecated with a warning instead of a message.
+- `as_adj()` is now deprecated with a warning instead of a message.
+- `as_incidence_matrix()` is now deprecated with a warning instead of a message.
+- `as.directed()` is now deprecated with a warning instead of a message.
+- `as.undirected()` is now deprecated with a warning instead of a message.
+- `graph.edgelist()` is now deprecated with a warning instead of a message.
+- `graph.data.frame()` is now deprecated with a warning instead of a message.
+- `igraph.console()` is now deprecated with a warning instead of a message.
+- `no.clusters()` is now deprecated with a warning instead of a message.
+- `decompose.graph()` is now deprecated with a warning instead of a message.
+- `cluster.distribution()` is now deprecated with a warning instead of a message.
+- `biconnected.components()` is now deprecated with a warning instead of a message.
+- `articulation.points()` is now deprecated with a warning instead of a message.
+- `create.communities()` is now deprecated with a warning instead of a message.
+- `walktrap.community()` is now deprecated with a warning instead of a message.
+- `spinglass.community()` is now deprecated with a warning instead of a message.
+- `showtrace()` is now deprecated with a warning instead of a message.
+- `optimal.community()` is now deprecated with a warning instead of a message.
+- `multilevel.community()` is now deprecated with a warning instead of a message.
+- `mod.matrix()` is now deprecated with a warning instead of a message.
+- `leading.eigenvector.community()` is now deprecated with a warning instead of a message.
+- `label.propagation.community()` is now deprecated with a warning instead of a message.
+- `is.hierarchical()` is now deprecated with a warning instead of a message.
+- `infomap.community()` is now deprecated with a warning instead of a message.
+- `fastgreedy.community()` is now deprecated with a warning instead of a message.
+- `edge.betweenness.community()` is now deprecated with a warning instead of a message.
+- `dendPlot()` is now deprecated with a warning instead of a message.
+- `cutat()` is now deprecated with a warning instead of a message.
+- `contract.vertices()` is now deprecated with a warning instead of a message.
+- `code.length()` is now deprecated with a warning instead of a message.
+- `modularity_matrix()` is now defunct (errors instead of warning).
+- `cluster_leiden()` is now deprecated with a warning instead of a message.
+- `cluster_leading_eigen()` is now deprecated with a warning instead of a message.
+- `cluster_label_prop()` is now deprecated with a warning instead of a message.
+- `exportPajek()` is now deprecated with a warning instead of a message.
+- `plotHierarchy()` is now deprecated with a warning instead of a message.
+- `maxcohesion()` is now deprecated with a warning instead of a message.
+- `graph.cohesion()` is now deprecated with a warning instead of a message.
+- `cohesive.blocks()` is now deprecated with a warning instead of a message.
+- `blockGraphs()` is now deprecated with a warning instead of a message.
+- `maximal.independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `maximal.cliques.count()` is now deprecated with a warning instead of a message.
+- `maximal.cliques()` is now deprecated with a warning instead of a message.
+- `largest.independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `largest.cliques()` is now deprecated with a warning instead of a message.
+- `independent.vertex.sets()` is now deprecated with a warning instead of a message.
+- `independence.number()` is now deprecated with a warning instead of a message.
+- `clique.number()` is now deprecated with a warning instead of a message.
+- `maximal_ivs()` is now deprecated with a warning instead of a message.
+- `centralize.scores()` is now deprecated with a warning instead of a message.
+- `centralization.evcent.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.evcent()` is now deprecated with a warning instead of a message.
+- `centralization.degree.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.degree()` is now deprecated with a warning instead of a message.
+- `centralization.closeness.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.closeness()` is now deprecated with a warning instead of a message.
+- `centralization.betweenness.tmax()` is now deprecated with a warning instead of a message.
+- `centralization.betweenness()` is now deprecated with a warning instead of a message.
+- `centr_degree_tmax()` is now defunct (errors instead of warning).
+- `centr_eigen()` is now deprecated with a warning instead of a message.
+- `centr_eigen_tmax()` is now deprecated with a warning instead of a message.
+- `subgraph.centrality()` is now deprecated with a warning instead of a message.
+- `page.rank()` is now deprecated with a warning instead of a message.
+- `hub.score()` is now defunct (errors instead of warning).
+- `authority.score()` is now defunct (errors instead of warning).
+- `graph.strength()` is now deprecated with a warning instead of a message.
+- `graph.eigen()` is now deprecated with a warning instead of a message.
+- `graph.diversity()` is now deprecated with a warning instead of a message.
+- `evcent()` is now deprecated with a warning instead of a message.
+- `edge.betweenness()` is now deprecated with a warning instead of a message.
+- `bonpow()` is now deprecated with a warning instead of a message.
+- `alpha.centrality()` is now deprecated with a warning instead of a message.
+- `estimate_betweenness()` is now deprecated with a warning instead of a message.
+- `estimate_edge_betweenness()` is now deprecated with a warning instead of a message.
+- `estimate_closeness()` is now deprecated with a warning instead of a message.
+- `arpack()` is now deprecated with a warning instead of a message.
+- `spectrum()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now deprecated with a warning instead of a message.
+- `eigen_centrality()` is now defunct (errors instead of warning).
+- `authority_score()` is now deprecated with a warning instead of a message.
+- `arpack_defaults()` is now deprecated with a warning instead of a message.
+- `hub_score()` is now deprecated with a warning instead of a message.
+- `arpack_defaults()` is now deprecated with a warning instead of a message.
+- `bipartite.projection.size()` is now deprecated with a warning instead of a message.
+- `bipartite.projection()` is now deprecated with a warning instead of a message.
+- `bipartite.mapping()` is now deprecated with a warning instead of a message.
+- `get.edge()` has been removed.
+- `is.igraph()` is now deprecated with a warning instead of a message.
+- `set.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `set.graph.attribute()` is now deprecated with a warning instead of a message.
+- `set.edge.attribute()` is now deprecated with a warning instead of a message.
+- `remove.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `remove.graph.attribute()` is now deprecated with a warning instead of a message.
+- `remove.edge.attribute()` is now deprecated with a warning instead of a message.
+- `list.vertex.attributes()` is now deprecated with a warning instead of a message.
+- `list.graph.attributes()` is now deprecated with a warning instead of a message.
+- `list.edge.attributes()` is now deprecated with a warning instead of a message.
+- `is.weighted()` is now deprecated with a warning instead of a message.
+- `is.named()` is now deprecated with a warning instead of a message.
+- `is.bipartite()` is now deprecated with a warning instead of a message.
+- `get.vertex.attribute()` is now deprecated with a warning instead of a message.
+- `get.graph.attribute()` is now deprecated with a warning instead of a message.
+- `get.edge.attribute()` is now deprecated with a warning instead of a message.
+- `assortativity.nominal()` is now deprecated with a warning instead of a message.
+- `assortativity.degree()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `assortativity()` is now deprecated with a warning instead of a message.
+- `ape::as.phylo()` is now deprecated with a warning instead of a message.
+- `graph.adjacency()` is now deprecated with a warning instead of a message.
+- `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
+- `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
+
 
 ## Chore
 
