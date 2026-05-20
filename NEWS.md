@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9004
+
+## Documentation
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+
 # igraph 2.3.1.9003
 
 - Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
