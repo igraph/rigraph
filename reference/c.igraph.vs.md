@@ -48,6 +48,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 c(V(g)[1], V(g)["A"], V(g)[1:4])
-#> + 6/10 vertices, named, from 16e825d:
+#> + 6/10 vertices, named, from 0b6c80f:
 #> [1] A A A B C D
 ```
