@@ -16,7 +16,7 @@ graphlets.project <- function(
   Mu = rep(1, length(cliques))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
+  lifecycle::deprecate_warn("2.0.0", "graphlets.project()", "graphlet_proj()")
   graphlet_proj(
     graph = graph,
     weights = weights,
@@ -38,7 +38,7 @@ graphlets.project <- function(
 #' @export
 graphlets.candidate.basis <- function(graph, weights = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graphlets.candidate.basis()",
     "graphlet_basis()"

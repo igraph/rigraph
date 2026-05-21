@@ -17,7 +17,7 @@ graph.adjacency <- function(
   add.rownames = NA
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.adjacency()",
     "graph_from_adjacency_matrix()"
@@ -293,7 +293,7 @@ graph_from_adjacency_matrix <- function(
   ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
     )
@@ -302,7 +302,7 @@ graph_from_adjacency_matrix <- function(
 
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
-      lifecycle::deprecate_soft(
+      lifecycle::deprecate_warn(
         "1.6.0",
         "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
         details = 'Use mode = "max" to achieve the original behavior.'

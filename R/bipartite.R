@@ -10,7 +10,7 @@
 #' @export
 bipartite.projection.size <- function(graph, types = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "bipartite.projection.size()",
     "bipartite_projection_size()"
@@ -37,7 +37,7 @@ bipartite.projection <- function(
   remove.type = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "bipartite.projection()",
     "bipartite_projection()"
@@ -64,7 +64,7 @@ bipartite.projection <- function(
 #' @export
 bipartite.mapping <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "bipartite.mapping()",
     "bipartite_mapping()"
