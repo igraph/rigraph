@@ -879,3 +879,37 @@ test_that("graph_from_adjacency Na check for upper/lower", {
     )
   )
 })
+
+test_that("graph_from_adjacency NA check for upper/lower with sparse matrices", {
+  # Sparse matrix with NA only in upper triangle: mode="upper" should error,
+  # mode="lower" should succeed
+  sp <- Matrix::sparseMatrix(
+    i = c(1, 2, 1),
+    j = c(2, 1, 1),
+    x = c(NA_real_, 1, 1),
+    dims = c(3, 3)
+  )
+  expect_error(
+    graph_from_adjacency_matrix(sp, mode = "upper", weighted = TRUE),
+    "contains NAs"
+  )
+  expect_no_error(
+    graph_from_adjacency_matrix(sp, mode = "lower", weighted = TRUE)
+  )
+
+  # Sparse matrix with NA only in lower triangle: mode="lower" should error,
+  # mode="upper" should succeed
+  sp2 <- Matrix::sparseMatrix(
+    i = c(2, 1, 1),
+    j = c(1, 2, 1),
+    x = c(NA_real_, 1, 1),
+    dims = c(3, 3)
+  )
+  expect_error(
+    graph_from_adjacency_matrix(sp2, mode = "lower", weighted = TRUE),
+    "contains NAs"
+  )
+  expect_no_error(
+    graph_from_adjacency_matrix(sp2, mode = "upper", weighted = TRUE)
+  )
+})

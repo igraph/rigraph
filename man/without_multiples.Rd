@@ -14,14 +14,14 @@ sample_(pa(10, m = 3, algorithm = "bag"))
 sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
 }
 \seealso{
-Constructor modifiers (and related functions)
-\code{\link{make_}()},
-\code{\link{sample_}()},
-\code{\link{simplified}()},
-\code{\link{with_edge_}()},
-\code{\link{with_graph_}()},
-\code{\link{with_vertex_}()},
-\code{\link{without_attr}()},
-\code{\link{without_loops}()}
+Constructor modifiers (and related functions):
+\code{\link[=make_]{make_()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=simplified]{simplified()}},
+\code{\link[=with_edge_]{with_edge_()}},
+\code{\link[=with_graph_]{with_graph_()}},
+\code{\link[=with_vertex_]{with_vertex_()}},
+\code{\link[=without_attr]{without_attr()}},
+\code{\link[=without_loops]{without_loops()}}
 }
 \concept{constructor modifiers}

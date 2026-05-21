@@ -169,8 +169,8 @@ extern SEXP R_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edgelist_percolation(SEXP);
 extern SEXP R_igraph_edges(SEXP, SEXP);
 extern SEXP R_igraph_eigen_adjacency(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_eigen_matrix(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_eigen_matrix_symmetric(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_eigen_matrix(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_eigen_matrix_symmetric(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
 extern SEXP R_igraph_empty_attrs(SEXP, SEXP);
@@ -212,7 +212,7 @@ extern SEXP R_igraph_get_k_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian_sparse(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_shortest_path(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_get_shortest_path_astar(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_shortest_path_astar(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_shortest_path_bellman_ford(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_shortest_path_dijkstra(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_shortest_paths(SEXP, SEXP, SEXP, SEXP);
@@ -751,8 +751,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edgelist_percolation",                           (DL_FUNC) &R_igraph_edgelist_percolation,                            1},
     {"R_igraph_edges",                                          (DL_FUNC) &R_igraph_edges,                                           2},
     {"R_igraph_eigen_adjacency",                                (DL_FUNC) &R_igraph_eigen_adjacency,                                 4},
-    {"R_igraph_eigen_matrix",                                   (DL_FUNC) &R_igraph_eigen_matrix,                                    7},
-    {"R_igraph_eigen_matrix_symmetric",                         (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                          7},
+    {"R_igraph_eigen_matrix",                                   (DL_FUNC) &R_igraph_eigen_matrix,                                    6},
+    {"R_igraph_eigen_matrix_symmetric",                         (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                          6},
     {"R_igraph_eigenvector_centrality",                         (DL_FUNC) &R_igraph_eigenvector_centrality,                          5},
     {"R_igraph_empty",                                          (DL_FUNC) &R_igraph_empty,                                           2},
     {"R_igraph_empty_attrs",                                    (DL_FUNC) &R_igraph_empty_attrs,                                     2},
@@ -794,7 +794,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_laplacian",                                  (DL_FUNC) &R_igraph_get_laplacian,                                   4},
     {"R_igraph_get_laplacian_sparse",                           (DL_FUNC) &R_igraph_get_laplacian_sparse,                            4},
     {"R_igraph_get_shortest_path",                              (DL_FUNC) &R_igraph_get_shortest_path,                               4},
-    {"R_igraph_get_shortest_path_astar",                        (DL_FUNC) &R_igraph_get_shortest_path_astar,                         6},
+    {"R_igraph_get_shortest_path_astar",                        (DL_FUNC) &R_igraph_get_shortest_path_astar,                         5},
     {"R_igraph_get_shortest_path_bellman_ford",                 (DL_FUNC) &R_igraph_get_shortest_path_bellman_ford,                  5},
     {"R_igraph_get_shortest_path_dijkstra",                     (DL_FUNC) &R_igraph_get_shortest_path_dijkstra,                      5},
     {"R_igraph_get_shortest_paths",                             (DL_FUNC) &R_igraph_get_shortest_paths,                              4},

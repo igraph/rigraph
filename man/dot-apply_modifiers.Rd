@@ -4,7 +4,7 @@
 \alias{.apply_modifiers}
 \title{Applies a set of constructor modifiers to an already constructed graph.}
 \usage{
-.apply_modifiers(graph, mods)
+.apply_modifiers(graph, mods, call = rlang::caller_env())
 }
 \arguments{
 \item{graph}{The graph to apply the modifiers to}
