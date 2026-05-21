@@ -1,3 +1,80 @@
+# Boptbd (1.0.7)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/Boptbd>
+
+Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptBbd
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     alpha <- 0.1 #alpha value 
+     >     beta  <- 0.1 #beta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #Bayesian A-optimal block design (loop design)
+     > 
+     >     graphoptBbd(trt.N = 10, blk.N = 10, alpha = 0.1, beta = 0.1, OptdesF, Optcrit = "A")
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─Boptbd::graphoptBbd(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+# c3net (1.1.1.1)
+
+* Email: <mailto:altayscience@gmail.com>
+* GitHub mirror: <https://github.com/cran/c3net>
+
+Run `revdepcheck::cloud_details(, "c3net")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘c3net-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > ### Name: c3net
+     > ### Title: All in one function to infer network with C3NET
+     > ### Aliases: c3net
+     > ### Keywords: misc
+     > 
+     > ### ** Examples
+     > 
+     > data(expdata)
+     > data(truenet)
+     > 
+     > net <- c3net(expdata, network=TRUE)
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─c3net::c3net(expdata, network = TRUE)
+      2.   └─c3net::netplot(net)
+      3.     └─igraph::tkplot(z)
+      4.       └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
 # Cascade (2.3)
 
 * GitHub: <https://github.com/fbertran/Cascade>
@@ -85,6 +162,45 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
        Execution halted
      ```
 
+# ggm (2.5.2)
+
+* Email: <mailto:giovanni.marchetti@unifi.it>
+* GitHub mirror: <https://github.com/cran/ggm>
+
+Run `revdepcheck::cloud_details(, "ggm")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     +              0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,
+     +              1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0),16,16,byrow=TRUE)
+     > M <- c(3,5,6,15,16)
+     > C <- c(4,7)
+     > AG(ex, M, C, plot = TRUE)
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─ggm::AG(ex, M, C, plot = TRUE)
+      2.   └─ggm (local) plotfun(fr, ...)
+      3.     └─igraph::tkplot(...)
+      4.       └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
 # jewel (2.0.2)
 
 * GitHub: <https://github.com/annaplaksienko/jewel>
@@ -125,44 +241,82 @@ Run `revdepcheck::cloud_details(, "jewel")` for more info
      Execution halted
      ```
 
-# manynet (1.7.0)
+# optbdmaeAT (1.0.2)
 
-* GitHub: <https://github.com/stocnet/manynet>
-* Email: <mailto:james.hollway@graduateinstitute.ch>
-* GitHub mirror: <https://github.com/cran/manynet>
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/optbdmaeAT>
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
+Run `revdepcheck::cloud_details(, "optbdmaeAT")` for more info
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
      ```
      ...
-       > test-member_community.R: v `node_in_walktrap()` returns the highest modularity (0.826).
-       > test-member_community.R: ========>----------------------   25% | ETA: 37s
-       [ FAIL 1 | WARN 0 | SKIP 5 | PASS 695 ]
-       
-       ══ Skipped tests (5) ═══════════════════════════════════════════════════════════
-       • On CRAN (5): 'test-manip_as.R:93:3', 'test-manip_split.R:49:3',
-         'test-mark_nodes.R:85:3', 'test-mark_ties.R:41:3', 'test-mark_ties.R:50:3'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test-make_generate.R:45:3'): generate_citations works ───────────────
-       Error in `lastcit_game_impl(nodes = n, edges_per_node = edges, agebins = agebins, preference = pref, directed = directed)`: Expecting a scalar integer but received a vector of length 2. Invalid value
-       Source: rinterface_extra.c:79
-       Backtrace:
-           ▆
-        1. ├─testthat::expect_s3_class(...) at test-make_generate.R:45:3
-        2. │ └─testthat::quasi_label(enquo(object))
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─manynet::generate_citations(ison_southern_women)
-        5.   └─igraph::sample_last_cit(n, edges = ties, agebins = agebins, directed = directed)
-        6.     └─igraph:::lastcit_game_impl(...)
-       
-       [ FAIL 1 | WARN 0 | SKIP 5 | PASS 695 ]
-       Error:
-       ! Test failures.
-       Execution halted
+     > ### Name: graphoptbd.mae
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptbd.mae
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     theta <- 0.2 #theta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #D-optimal design (loop design)
+     > 
+     >     graphoptbd.mae(trt.N = 10, blk.N = 10, theta = 0.2, OptdesF, Optcrit = "D", cbVal2 = 0)
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─optbdmaeAT::graphoptbd.mae(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+# optrcdmaeAT (1.0.1)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/optrcdmaeAT>
+
+Run `revdepcheck::cloud_details(, "optrcdmaeAT")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal row-column design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     
+     >     trt.N <- 10  #Number of treatments
+     >     
+     >     col.N <- 10  #Number of arrays
+     >     
+     >     theta <- 0.2 #theta value 
+     >     
+     >     OptdesF <- rbind(1:10, c(2:10, 1)) #D-optimal design (loop design)
+     > 
+     >     graphoptrcd.mae(trt.N = 10, col.N = 10, theta = 0.2, OptdesF, Optcrit = "D", cbVal2 = 0)
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─optrcdmaeAT::graphoptrcd.mae(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
      ```
 
 # rSpectral (1.0.0.14)
