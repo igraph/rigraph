@@ -178,10 +178,14 @@ jobs:
           results: ${{ runner.os }}-smoke-test
 
       - uses: ./.github/workflows/pkgdown-build
-        if: github.event_name != 'push' && github.event_name != 'schedule'
+        if: github.event_name != 'push'
 
+      # Deliberately deploy only on push
+      # Deployment on schedule adds too much noise.
+      # Deployment on pull_request is not possible because it requires a token with write permissions, which is not available in pull_request workflows for security reasons.
+      # Deployment on workflow_dispatch is available via the pkgdown workflow
       - uses: ./.github/workflows/pkgdown-deploy
-        if: github.event_name == 'push' || github.event_name == 'schedule'
+        if: github.event_name == 'push'
 
       # Upload sha as artifact
       - run: |
@@ -333,6 +337,8 @@ jobs:
 
       - uses: ./.github/workflows/update-snapshots
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          base: ${{ github.head_ref }}
 
       - uses: ./.github/workflows/check
         if: ${{ ! matrix.covr }}

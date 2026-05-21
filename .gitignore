@@ -29,3 +29,4 @@ cran
 /Rplots.pdf
 /_codeql_detected_source_root
 /tests/testthat/_problems/
+.ccache/

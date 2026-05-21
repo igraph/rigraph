@@ -35,9 +35,9 @@ running_mean(1:100, 10)
 
 }
 \seealso{
-Other other: 
-\code{\link{convex_hull}()},
-\code{\link{sample_seq}()}
+Other other:
+\code{\link[=convex_hull]{convex_hull()}},
+\code{\link[=sample_seq]{sample_seq()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

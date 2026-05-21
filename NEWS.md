@@ -1,5 +1,54 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9004
+
+## Documentation
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+
+# igraph 2.3.1.9003
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+
+# igraph 2.3.1.9002
+
+## Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+## Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+## Uncategorized
+
+- Merge branch 'krlmlr-main'.
+
+
 # igraph 2.3.1.9001
 
 ## Chore
