@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.3.1.9004
+
+### Documentation
+
+- `document()` with latest roxygen2 – for clean diffs
+  ([\#2642](https://github.com/igraph/rigraph/issues/2642)).
+
 ## igraph 2.3.1.9003
 
 - Ci: Unify fledge.yaml across cynkratemplate and fledge
