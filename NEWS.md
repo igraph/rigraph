@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph dev version
+# igraph 2.3.1.9004
 
 ## Deprecated and defunct
 
@@ -322,6 +322,10 @@
 - `graph.adjacency()` is now deprecated with a warning instead of a message.
 - `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
 - `graph_from_adjacency_matrix()` is now deprecated with a warning instead of a message.
+
+## Documentation
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
 
 # igraph 2.3.1.9003
 
