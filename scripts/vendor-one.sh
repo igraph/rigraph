@@ -106,6 +106,8 @@ while [ $commits_vendored -lt $num_commits ]; do
     for f in patch/*.patch; do
       if patch -i "$f" -p1 --forward --dry-run; then
         patch -i "$f" -p1 --forward --no-backup-if-mismatch
+      elif patch -i "$f" -p1 --reverse --dry-run >/dev/null 2>&1; then
+        echo "Patch $f already applied, skipping."
       else
         echo "Removing patch $f"
         rm "$f"
