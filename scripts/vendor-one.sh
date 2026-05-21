@@ -103,11 +103,12 @@ while [ $commits_vendored -lt $num_commits ]; do
 
     rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
+    # Apply patches in patch/*.patch.  See scripts/vendor.sh for the
+    # rationale on why patches that no longer apply forward are removed
+    # rather than kept around.
     for f in patch/*.patch; do
       if patch -i "$f" -p1 --forward --dry-run; then
         patch -i "$f" -p1 --forward --no-backup-if-mismatch
-      elif patch -i "$f" -p1 --reverse --dry-run >/dev/null 2>&1; then
-        echo "Patch $f already applied, skipping."
       else
         echo "Removing patch $f"
         rm "$f"
