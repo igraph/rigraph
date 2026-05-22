@@ -62,12 +62,6 @@ console <- function() {
     "3.0.0",
     "console()",
   )
-  oldverb <- igraph_opt("verbose")
-  igraph_options(verbose = "tkconsole")
-  pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  .igraph.progress.tkconsole.message("Console started.\n")
-  invisible()
 }
 
 .igraph.pb <- NULL

@@ -409,7 +409,6 @@ centr_degree_tmax <- function(
       what = "centr_degree_tmax(loops = 'must be explicit')",
       details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
-    loops <- FALSE
   }
 
   # Argument checks

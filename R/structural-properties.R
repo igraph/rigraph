@@ -2726,9 +2726,6 @@ bfs <- function(
 
   if (lifecycle::is_present(father)) {
     lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
-    if (missing(parent)) {
-      parent <- father
-    }
   }
 
   if (length(root) == 1) {
@@ -2988,9 +2985,6 @@ dfs <- function(
 
   if (lifecycle::is_present(father)) {
     lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
-    if (missing(parent)) {
-      parent <- father
-    }
   }
 
   root <- as_igraph_vs(graph, root) - 1

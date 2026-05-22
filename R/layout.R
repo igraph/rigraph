@@ -2645,7 +2645,6 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 #' @keywords internal
 layout.spring <- function(graph, ...) {
   lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()")
-  layout_with_fr(graph)
 }
 
 #' SVD layout, this was removed from igraph
@@ -2663,7 +2662,6 @@ layout.spring <- function(graph, ...) {
 #' @export
 layout.svd <- function(graph, ...) {
   lifecycle::deprecate_stop("2.1.0", "layout.svd()", "layout_with_fr()")
-  layout_with_fr(graph)
 }
 
 #' Grid Fruchterman-Reingold layout, this was removed from igraph
@@ -2686,7 +2684,6 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
     "layout.fruchterman.reingold.grid()",
     "layout_with_fr()"
   )
-  layout_with_fr(graph)
 }
 
 #' The DrL graph layout generator
