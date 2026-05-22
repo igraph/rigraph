@@ -32,6 +32,13 @@ Each issue has two files:
 #### Group E — Indirect path through a defunct fallback
 12. **degreenet-reedmolloy-issue** — defunct `sample_degseq(method = "simple.no.multiple")` fallback inside `reedmolloy()`'s retry loop
 
+#### Group F — `tkplot()` defunct (igraph 3.0.0)
+13. **tkplot-defunct-issue** — shared reproducer for Boptbd, c3net, ggm, optbdmaeAT, optrcdmaeAT (all direct callers of `igraph::tkplot()`)
+
+#### Group G — API tightening / behavioural changes
+14. **jewel-integer-issue** — strict integer validation in `rewire_impl()`
+15. **rspectral-modularity-issue** — `modularity()` auto-uses `"weight"` edge attribute
+
 Three packages from the failure set (dci, ggraph, scistreer) are pure cascades through tidygraph and have no separate reproducer — see `tidygraph-bfs-father-issue` for the root cause.
 
 ## Running the Examples
@@ -77,5 +84,12 @@ The examples follow a simplified format:
 | R6causal | Install-time deprecation warnings | Medium | Pre-emptive rename needed |
 | migraph | `create_ring(width=)` warning → test failure | Low | Deprecated argument |
 | degreenet | Defunct fallback `sample_degseq(method=)` value | High | Defunct argument value (indirect) |
+| Boptbd | `tkplot()` defunct | High | Removed function (PR #2615) |
+| c3net | `tkplot()` defunct | High | Removed function (PR #2615) |
+| ggm | `tkplot()` defunct | High | Removed function (PR #2615) |
+| optbdmaeAT | `tkplot()` defunct | High | Removed function (PR #2615) |
+| optrcdmaeAT | `tkplot()` defunct | High | Removed function (PR #2615) |
+| jewel | Strict integer validation in `rewire_impl()` | High | API tightening |
+| rSpectral | `modularity()` auto-uses `"weight"` | Medium | Behavioural change (needs igraph opt-out) |
 
 See [`../problems-analysis.md`](../problems-analysis.md) for detailed analysis and recommendations.
