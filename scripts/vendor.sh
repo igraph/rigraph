@@ -59,6 +59,15 @@ for commit in $original; do
 
   rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
+  # Apply patches in patch/*.patch.
+  #
+  # If a patch no longer applies forward, it is removed:
+  # vendoring fetches fresh upstream sources that do not yet carry our
+  # changes, so a clean forward apply is the expected case.  A patch that
+  # fails to apply forward is either (a) already integrated upstream and
+  # no longer needed, or (b) broken by an upstream change that we must
+  # address explicitly.  Removing the stale patch surfaces case (b) via
+  # CI/CD instead of letting it rot silently.
   for f in patch/*.patch; do
     if patch -i "$f" -p1 --forward --dry-run; then
       patch -i "$f" -p1 --forward --no-backup-if-mismatch
