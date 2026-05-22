@@ -2,13 +2,22 @@
 
 We checked 2283 reverse dependencies (2281 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 15 new problems
- * We failed to check 8 packages
+ * We saw 25 new problems
+ * We failed to check 9 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
+
+* Boptbd
+  checking examples ... ERROR
+
+* c3net
+  checking examples ... ERROR
+
+* Cascade
+  checking whether package ‘Cascade’ can be installed ... WARNING
 
 * comato
   checking examples ... ERROR
@@ -24,6 +33,10 @@ Issues with CRAN packages are summarised below.
 * degreenet
   checking examples ... ERROR
 
+* DiagrammeR
+  checking examples ... ERROR
+  checking tests ... ERROR
+
 * ECoL
   checking examples ... ERROR
   checking tests ... ERROR
@@ -31,11 +44,17 @@ Issues with CRAN packages are summarised below.
 * FrF2
   checking tests ... NOTE
 
+* ggm
+  checking examples ... ERROR
+
 * ggraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
 * GoodFitSBM
+  checking examples ... ERROR
+
+* jewel
   checking examples ... ERROR
 
 * migraph
@@ -46,14 +65,26 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
 * qgraph
   checking examples ... ERROR
 
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
 
+* rSpectral
+  checking tests ... ERROR
+
 * scistreer
   checking examples ... ERROR
+
+* sfnetworks
+  checking tests ... ERROR
 
 * tidygraph
   checking examples ... ERROR
@@ -64,11 +95,12 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* blavaan    (NA)
-* caugi      (NA)
-* deepSTRAPP (NA)
-* ggpicrust2 (NA)
-* rsat       (NA)
-* scAnnotate (NA)
-* spopt      (NA)
-* streamDAG  (NA)
+* blavaan     (NA)
+* caugi       (NA)
+* ClustAssess (NA)
+* deepSTRAPP  (NA)
+* ggpicrust2  (NA)
+* rsat        (NA)
+* scAnnotate  (NA)
+* spopt       (NA)
+* streamDAG   (NA)

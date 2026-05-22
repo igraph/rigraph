@@ -58,12 +58,10 @@ igraph.console <- function() {
 #' @family console
 #' @export
 console <- function() {
-  oldverb <- igraph_opt("verbose")
-  igraph_options(verbose = "tkconsole")
-  pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  .igraph.progress.tkconsole.message("Console started.\n")
-  invisible()
+  lifecycle::deprecate_stop(
+    "3.0.0",
+    "console()",
+  )
 }
 
 .igraph.pb <- NULL
