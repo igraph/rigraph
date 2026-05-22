@@ -166,7 +166,7 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> IGRAPH bc9d198 UN-B 6 5 -- 
+#> IGRAPH 7f4974b UN-B 6 5 -- 
 #> + attr: name (v/c), type (v/l)
 #> + vertex attributes:
 #> |     name  type
@@ -176,7 +176,7 @@ print_all(g, v = TRUE)
 #> | [4]    d  TRUE
 #> | [5]    e FALSE
 #> | [6]    f  TRUE
-#> + edges from bc9d198 (vertex names):
+#> + edges from 7f4974b (vertex names):
 #> [1] a--b b--c c--d d--e e--f
 max_bipartite_match(g)
 #> $matching_size
@@ -193,7 +193,7 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> IGRAPH 81d209f UN-B 7 6 -- 
+#> IGRAPH 6efb91e UN-B 7 6 -- 
 #> + attr: name (v/c), type (v/l)
 #> + vertex attributes:
 #> |     name  type
@@ -204,7 +204,7 @@ print_all(g2, v = TRUE)
 #> | [5]    e FALSE
 #> | [6]    f  TRUE
 #> | [7]    g FALSE
-#> + edges from 81d209f (vertex names):
+#> + edges from 6efb91e (vertex names):
 #> [1] a--b b--c c--d d--e e--f f--g
 max_bipartite_match(g2)
 #> $matching_size

@@ -143,11 +143,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> IGRAPH 5c13223 U--- 10 10 -- Ring graph
+#> IGRAPH 2166754 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 5c13223:
+#> + edges from 2166754:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH 5c13223 U--- 10 10 -- Ring graph
+#> IGRAPH 2166754 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```

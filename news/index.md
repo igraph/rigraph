@@ -1,5 +1,30 @@
 # Changelog
 
+## igraph 2.3.1.9005
+
+### Bug fixes
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK
+  ([\#2644](https://github.com/igraph/rigraph/issues/2644)).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices
+  with `mode="lower"` or `mode="upper"`
+  ([\#2626](https://github.com/igraph/rigraph/issues/2626),
+  [\#2627](https://github.com/igraph/rigraph/issues/2627)).
+
+### Chore
+
+- Advance lifecycle stage for many functions
+  ([\#2634](https://github.com/igraph/rigraph/issues/2634)).
+
+### Documentation
+
+#### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0
+  ([\#2499](https://github.com/igraph/rigraph/issues/2499),
+  [\#2500](https://github.com/igraph/rigraph/issues/2500)).
+
 ## igraph 2.3.1.9004
 
 ### Deprecated and defunct
