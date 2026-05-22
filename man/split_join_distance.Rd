@@ -46,25 +46,25 @@ Institute for Mathematics and Computer Science in the Netherlands,
 Amsterdam, May 2000.
 }
 \seealso{
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_infomap]{cluster_infomap()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=modularity.igraph]{modularity.igraph()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \concept{community}

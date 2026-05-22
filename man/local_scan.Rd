@@ -114,7 +114,7 @@ Y. (2005).  Scan Statistics on Enron Graphs. \emph{Computational and
 Mathematical Organization Theory}.
 }
 \seealso{
-Other scan statistics: 
-\code{\link{scan_stat}()}
+Other scan statistics:
+\code{\link[=scan_stat]{scan_stat()}}
 }
 \concept{scan statistics}

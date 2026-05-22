@@ -69,10 +69,10 @@ largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-Other cliques: 
-\code{\link{cliques}()},
-\code{\link{is_complete}()},
-\code{\link{ivs}()}
+Other cliques:
+\code{\link[=cliques]{cliques()}},
+\code{\link[=is_complete]{is_complete()}},
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

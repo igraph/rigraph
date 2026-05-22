@@ -40,9 +40,9 @@ McGraw-Hill, 2001. ISBN 0262032937. Pages 949-955 of section 33.3: Finding
 the convex hull.
 }
 \seealso{
-Other other: 
-\code{\link{running_mean}()},
-\code{\link{sample_seq}()}
+Other other:
+\code{\link[=running_mean]{running_mean()}},
+\code{\link[=sample_seq]{sample_seq()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
