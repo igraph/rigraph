@@ -322,7 +322,7 @@ Deprecated alias names still being called at package load / `.onLoad` time.
 
 ---
 
-### 14. migraph (1.6.2)
+### 14. migraph (1.6.2) — failure surface; **upstream owner is [manynet](https://github.com/stocnet/manynet)**
 
 #### Issue
 ```
@@ -331,18 +331,30 @@ Expected `w` to be NULL.
 ...
 Warning in expression 17 : rg <- create_ring(32, width = 2)
 ```
-A migraph tutorial test asserts that none of its code expressions emit warnings; `igraph::create_ring(32, width = 2)` now emits a deprecation warning about the `width` argument.
+A migraph tutorial test asserts that none of its code expressions emit warnings; the tutorial line `rg <- create_ring(32, width = 2)` emits a deprecation warning that bubbles up through migraph's no-warning assertion.
 
-#### Root cause
-The `width` argument of `create_ring()` is deprecated (most likely in favour of using `make_lattice()` or another constructor — verify against `?create_ring`).
+#### Where the call actually lives
+`create_ring()` is **not** a migraph function — it's defined in [`manynet`](https://github.com/stocnet/manynet/blob/main/R/make_create.R) (which migraph `Depends` on). The `width = 2` branch goes:
+```
+manynet::create_ring(32, width = 2)
+  └─ igraph::make_ring(32, directed = FALSE)
+  └─ manynet::as_matrix(...)        # uses igraph::as_adjacency_matrix()
+  └─ igraph::graph_from_adjacency_matrix(out, "undirected")
+```
+The deprecation warning originates somewhere inside this chain on dev igraph; the revdep backtrace stops at testthat's `quasi_label()` so the exact igraph function is not surfaced in the log.
+
+#### Status (preliminary)
+Against the latest CRAN versions (manynet 2.0.1 + igraph 2.3.1) the call runs cleanly with no warning. **Cannot be reproduced against dev igraph from this environment** (we'd need to build dev locally to confirm), so it's unclear whether the warning still fires. manynet had a major 2.0.0 release that reworked `as_matrix.igraph()` for multiplex networks; it's plausible the relevant deprecated call has already been removed there.
 
 #### Assessment
-**Bug in migraph** — depends on a deprecated argument, exposed by a strict no-warning assertion.
+**Bug in manynet** if the warning still fires against dev igraph. migraph is just the failure surface — its tutorial's strict no-warning assertion happens to expose whatever manynet emits.
 
 #### Recommendation
-**For migraph**: stop passing `width = 2` to `create_ring()`. If the original intent was a "thicker" ring (each vertex connected to multiple neighbours on each side), use the documented replacement (likely `connect(create_ring(32), order = 2)` or `make_lattice(length = 32, dim = 1, circular = TRUE, nei = 2)` — check `?create_ring` for the precise migration path).
+**For us**: re-confirm against dev igraph on the next revdep run. If the warning still fires, identify the specific call from manynet's `as_matrix.igraph()` / `graph_from_adjacency_matrix()` path that triggers it.
 
-**Severity**: Low — one test failure.
+**For manynet**: address whichever specific igraph call is producing the deprecation. No action needed in migraph itself — the tutorial line is canonical usage.
+
+**Severity**: Low — one test failure, possibly already resolved in manynet 2.0.1.
 
 ---
 
@@ -503,7 +515,7 @@ igraph's `modularity()` was changed (around 2.2.1.9004) to automatically use the
 | GoodFitSBM | Defunct call form | `get_edge_ids(vp=)` matrix orientation | High | GoodFitSBM to transpose matrix |
 | FrF2 | Deprecation warnings → NOTE | Multiple deprecated names | Low | FrF2 to rename pre-emptively |
 | R6causal | Install-time WARNING | Deprecated attribute getters/setters | Medium | R6causal to rename pre-emptively |
-| migraph | Strict no-warning test | `create_ring(width=)` deprecated | Low | migraph to stop using the argument |
+| migraph | Strict no-warning test | manynet's `create_ring(width = 2)` chain triggers an igraph deprecation | Low | manynet to clean up the offending call (possibly already done in 2.0.1) |
 | degreenet | Defunct argument value | `sample_degseq(method = "simple.no.multiple")` defunct in fallback path | High | degreenet to switch the fallback method value |
 | Boptbd | Defunct function | `tkplot()` removed | High | Boptbd to switch to `plot()` |
 | c3net | Defunct function | `tkplot()` removed | High | c3net to switch to `plot()` |

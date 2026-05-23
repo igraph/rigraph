@@ -1,8 +1,9 @@
-# migraph create_ring(width = ) deprecation surfacing as test failure
+# migraph `create_ring(32, width = 2)` deprecation surfacing as test failure
+
+> **Failure surface:** migraph (tutorial test asserts no warning).
+> **Upstream owner:** [manynet](https://github.com/stocnet/manynet) — `create_ring()` is defined in manynet, which migraph `Depends` on. The deprecation originates inside manynet's implementation, not in migraph code.
 
 ## Issue
-A migraph tutorial test asserts that no code expression in the tutorial emits a warning. `migraph::create_ring(32, width = 2)` now emits an igraph deprecation warning, breaking the assertion:
-
 ```
 ── Failure ('test-tutorials_migraph.R:12:5'): migraph tutorial code runs without warnings or errors ──
 Expected `w` to be NULL.
@@ -10,13 +11,23 @@ Expected `w` to be NULL.
 Warning in expression 17 : rg <- create_ring(32, width = 2)
 ```
 
-`create_ring()` is migraph's own wrapper; it internally calls into igraph and the deprecation originates from there. Without reading the migraph source the exact igraph function involved cannot be pinned down.
+## Where the call actually lives
 
-## Reproducible Example
+`manynet::create_ring(32, width = 2)` ([source](https://github.com/stocnet/manynet/blob/main/R/make_create.R)) internally:
+
+```
+igraph::make_ring(32, directed = FALSE)
+manynet::as_matrix(...)                       # uses igraph::as_adjacency_matrix()
+igraph::graph_from_adjacency_matrix(out, "undirected")
+```
+
+The deprecation warning is emitted somewhere inside this chain on dev igraph; the revdep backtrace stops at testthat's `quasi_label()` so the exact igraph function isn't surfaced.
+
+## Reproducer
 
 ```r
-# install.packages("migraph")
-library(migraph)
+# install.packages("manynet")
+library(manynet)
 
 w <- NULL
 withCallingHandlers(
@@ -24,17 +35,15 @@ withCallingHandlers(
   warning = function(c) { w <<- c; invokeRestart("muffleWarning") }
 )
 w
-# On dev igraph: a <lifecycle_warning_deprecated/...> condition
-# On CRAN igraph 2.3.1: NULL
+# manynet 2.0.1 + CRAN igraph 2.3.1: NULL (no warning)
+# dev igraph: unknown — not yet verified locally
 ```
 
-## Root Cause
-A function or argument called inside `migraph:::create_ring(width = ...)` was deprecated in a recent igraph release. The migraph tutorial does not catch this warning, and its strict no-warning assertion fails.
-
-## Assessment
-Bug in migraph — its `create_ring()` passes an argument or calls an igraph function whose argument is deprecated.
+## Status
+- Against the latest CRAN manynet (2.0.1) + CRAN igraph 2.3.1 the call runs cleanly.
+- manynet 2.0.0 reworked `as_matrix.igraph()` and other internals; the warning path may already have been removed.
+- Cannot reproduce against dev igraph from this environment without building dev locally.
 
 ## Recommendation
-**For migraph**:
-1. Run `create_ring(32, width = 2)` against dev igraph and read the warning message to identify the deprecated function/argument being relayed.
-2. Switch the internal implementation to the current API. If the deprecation is about a "thicker ring" / `width`-style argument on an igraph constructor, the canonical replacement is typically `make_lattice(length = N, dim = 1, circular = TRUE, nei = W)`.
+- Re-confirm on the next revdep run.
+- If the warning still fires against dev igraph, identify the specific call in manynet's `create_ring` → `as_matrix` → `graph_from_adjacency_matrix` chain that is deprecated, and fix it in **manynet** (not migraph).

@@ -27,7 +27,7 @@ Each issue has two files:
 #### Group D — Deprecation warnings surfacing as NOTE/WARNING
 9. **frf2-deprecation-warnings-issue** — multiple deprecation warnings → NOTE
 10. **r6causal-attribute-deprecations-issue** — install-time attribute getter/setter warnings
-11. **migraph-create-ring-width-issue** — `create_ring(width = )` deprecation warning → test failure
+11. **migraph-create-ring-width-issue** — `manynet::create_ring(32, width = 2)` chain triggers an igraph deprecation; migraph's no-warning tutorial test surfaces it. Upstream owner is [manynet](https://github.com/stocnet/manynet), not migraph.
 
 #### Group E — Indirect path through a defunct fallback
 12. **degreenet-reedmolloy-issue** — defunct `sample_degseq(method = "simple.no.multiple")` fallback inside `reedmolloy()`'s retry loop
@@ -82,7 +82,7 @@ The examples follow a simplified format:
 | GoodFitSBM | `get_edge_ids()` matrix orientation defunct | High | Defunct call form |
 | FrF2 | Deprecation warnings → NOTE | Low | Pre-emptive rename needed |
 | R6causal | Install-time deprecation warnings | Medium | Pre-emptive rename needed |
-| migraph | `create_ring(width=)` warning → test failure | Low | Deprecated argument |
+| migraph | `manynet::create_ring(width=)` warning → test failure | Low | Upstream owner is manynet, not migraph |
 | degreenet | Defunct fallback `sample_degseq(method=)` value | High | Defunct argument value (indirect) |
 | Boptbd | `tkplot()` defunct | High | Removed function (PR #2615) |
 | c3net | `tkplot()` defunct | High | Removed function (PR #2615) |
