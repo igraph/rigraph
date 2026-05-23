@@ -479,7 +479,6 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
         "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
         details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
-      c(x)
     } else if (ncol == 2) {
       c(t(x))
     } else {

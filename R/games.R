@@ -498,22 +498,12 @@ bipartite.random.game <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  # nocov start
   lifecycle::deprecate_stop(
     "2.0.0",
     "bipartite.random.game()",
     details = "Use sample_bipartite_gnp() or sample_bipartite_gnm()"
   )
-  sample_bipartite(
-    n1 = n1,
-    n2 = n2,
-    type = type,
-    p = p,
-    m = m,
-    directed = directed,
-    mode = mode
-  )
-} # nocov end
+}
 
 #' Generate random graphs using preferential attachment
 #'
@@ -1392,7 +1382,6 @@ sample_degseq <- function(
       "2.1.0",
       "sample_degseq(method = 'must be configuration instead of simple')"
     )
-    method <- "configuration"
   }
 
   if (method == "simple.no.multiple") {
@@ -1400,7 +1389,6 @@ sample_degseq <- function(
       "2.1.0",
       "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')"
     )
-    method <- "fast.heur.simple"
   }
 
   if (method == "simple.no.multiple.uniform") {
@@ -1408,7 +1396,6 @@ sample_degseq <- function(
       "2.1.0",
       "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')"
     )
-    method <- "configuration.simple"
   }
 
   # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94

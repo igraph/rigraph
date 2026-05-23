@@ -68,10 +68,8 @@ hub.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
   lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()")
-  hub_score(graph = graph, scale = scale, weights = weights, options = options)
-} # nocov end
+}
 
 #' Kleinberg's hub and authority centrality scores.
 #'
@@ -89,15 +87,8 @@ authority.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
   lifecycle::deprecate_stop("2.0.0", "authority.score()", "hits_scores()")
-  authority_score(
-    graph = graph,
-    scale = scale,
-    weights = weights,
-    options = options
-  )
-} # nocov end
+}
 
 #' Strength or weighted vertex degree
 #'
