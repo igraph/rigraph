@@ -1,5 +1,19 @@
 # Changelog
 
+## igraph 2.3.1.9006
+
+### Chore
+
+- Remove [`console()`](https://r.igraph.org/reference/console.md) and
+  [`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+  ([\#2615](https://github.com/igraph/rigraph/issues/2615)).
+
+### Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
 ## igraph 2.3.1.9005
 
 ### Bug fixes
