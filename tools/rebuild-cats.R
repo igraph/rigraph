@@ -373,7 +373,9 @@ for (r in subcategory_renames) {
 
 # Apply category_moves: relocate (cat, sub) groups to a new top-level category.
 for (mv in category_moves) {
-  m <- tbl$category == mv$from & !is.na(tbl$subcategory) & tbl$subcategory %in% mv$subs
+  m <- tbl$category == mv$from &
+    !is.na(tbl$subcategory) &
+    tbl$subcategory %in% mv$subs
   tbl$category[m] <- mv$to
 }
 
