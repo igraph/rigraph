@@ -163,23 +163,32 @@ message("parsed ", length(impls), " _impl wrappers from source")
 
 # ---- map each impl to (category, subcategory); validate no gaps ---------
 
+# Functions not listed in aaa-categories.yaml are emitted into
+# R/aaa-uncategorized.R with a warning, so a new wrapper landing upstream
+# never breaks the build. The warning lists exactly what needs a home.
 unassigned <- character()
 for (i in seq_along(impls)) {
   lookup <- cat_lookup[[impls[[i]]$c_function]]
   if (is.null(lookup)) {
-    unassigned <- c(unassigned, paste0(impls[[i]]$impl_name, " -> ", impls[[i]]$c_function))
+    unassigned <- c(
+      unassigned,
+      paste0(impls[[i]]$impl_name, " -> ", impls[[i]]$c_function)
+    )
+    impls[[i]]$category <- "uncategorized"
+    impls[[i]]$subcategory <- NA_character_
   } else {
     impls[[i]]$category <- lookup$category
     impls[[i]]$subcategory <- lookup$subcategory
   }
 }
 if (length(unassigned)) {
-  stop(
+  warning(
     "impls without a category in ",
     CATS,
-    ":\n  ",
+    " — written to R/aaa-uncategorized.R:\n  ",
     paste(unassigned, collapse = "\n  "),
-    "\nAdd placements in tools/rebuild-cats.R and rerun it."
+    "\nAdd placements in tools/rebuild-cats.R and rerun it to clear this.",
+    call. = FALSE
   )
 }
 

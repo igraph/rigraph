@@ -386,18 +386,39 @@ tbl <- tbl[!tbl$fn %in% placements$fn, ]
 tbl <- rbind(tbl, placements)
 
 # ---- 6. Validate ------------------------------------------------------------
+# Missing fns (in the generated wrappers but not in cats.yml) are appended to a
+# top-level `uncategorized:` flat list and warned about — this keeps the YAML in
+# sync with upstream Stimulus additions without erroring. Extra fns (in cats.yml
+# but not in the wrappers) are warned about too, but left in place so a human
+# can decide whether to move them into `stale_to_remove`.
 
 have <- sort(unique(tbl$fn))
 missing <- setdiff(canonical, have)
 extra <- setdiff(have, canonical)
 
-if (length(missing) || length(extra)) {
-  cat("MISSING from cats.yml after rebuild:\n")
-  cat(paste0("  ", missing, collapse = "\n"), "\n")
-  cat("EXTRA in cats.yml after rebuild:\n")
-  cat(paste0("  ", extra, collapse = "\n"), "\n")
-  stop(
-    "Validation failed: cats.yml does not match canonical list from aaa-auto.R"
+if (length(missing)) {
+  warning(
+    "Missing from cats.yml — added under top-level `uncategorized:` flat list:\n  ",
+    paste(missing, collapse = "\n  "),
+    "\nMove these to a real (category, subcategory) in tools/rebuild-cats.R.",
+    call. = FALSE
+  )
+  tbl <- rbind(
+    tbl,
+    data.frame(
+      category = "uncategorized",
+      subcategory = NA_character_,
+      fn = missing,
+      stringsAsFactors = FALSE
+    )
+  )
+}
+if (length(extra)) {
+  warning(
+    "Extra entries in cats.yml with no matching wrapper:\n  ",
+    paste(extra, collapse = "\n  "),
+    "\nRemove them from tools/aaa-categories.yaml or add to `stale_to_remove`.",
+    call. = FALSE
   )
 }
 
