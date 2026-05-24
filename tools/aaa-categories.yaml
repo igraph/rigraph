@@ -1,5 +1,5 @@
 # Functions ordered by category
-basicigraph:
+basic-igraph:
   adding-and-deleting-vertices-and-edges:
     - igraph_add_edge
     - igraph_add_edges
@@ -71,11 +71,13 @@ cliques:
     - igraph_weighted_cliques
 
 coloring:
-  - igraph_is_bipartite_coloring
-  - igraph_is_edge_coloring
-  - igraph_is_perfect
-  - igraph_is_vertex_coloring
-  - igraph_vertex_coloring_greedy
+  detect:
+    - igraph_is_bipartite_coloring
+    - igraph_is_edge_coloring
+    - igraph_is_perfect
+    - igraph_is_vertex_coloring
+  compute:
+    - igraph_vertex_coloring_greedy
 
 community:
   common-functions-related-to-community-detection:
@@ -448,6 +450,8 @@ processes:
 progress:
   invoking-the-progress-handler:
     - igraph_progress
+  invoking-the-status-handler:
+    - igraph_status
 
 separators:
   - igraph_all_minimal_st_separators
@@ -459,10 +463,6 @@ separators:
 spatial:
   nongraph-spatial:
     - igraph_convex_hull_2d
-
-status:
-  invoking-the-status-handler:
-    - igraph_status
 
 structural:
   basic-properties:

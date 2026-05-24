@@ -20,3 +20,21 @@ progress_impl <- function(
 
   res
 }
+
+# ==== invoking-the-status-handler ====
+
+status_impl <- function(
+  message
+) {
+  # Argument checks
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_status,
+    message
+  )
+
+  res
+}

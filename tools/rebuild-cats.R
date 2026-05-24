@@ -76,8 +76,8 @@ message("canonical function count: ", length(canonical))
 placements <- rbind(
   # --- Previously-new additions (from initial reconciliation) ---------------
 
-  # basicigraph / adding-and-deleting-vertices-and-edges
-  c("basicigraph", "adding-and-deleting-vertices-and-edges", "igraph_delete_vertices_idx"),
+  # basic-igraph / adding-and-deleting-vertices-and-edges
+  c("basic-igraph", "adding-and-deleting-vertices-and-edges", "igraph_delete_vertices_idx"),
 
   # bipartite / create-two-mode-networks
   c("bipartite", "create-two-mode-networks", "igraph_bipartite_game"),
