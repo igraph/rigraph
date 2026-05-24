@@ -6,8 +6,8 @@ on:
       - ".github/workflows/vendor.yaml"
       - "scripts/vendor-one.sh"
   workflow_dispatch:
-  schedule:
-    - cron: "0 * * * *"
+  # schedule:
+  #   - cron: "0 * * * *"
 
 concurrency:
   group: ${{ github.workflow }}

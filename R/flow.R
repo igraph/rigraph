@@ -10,7 +10,7 @@
 #' @export
 vertex.disjoint.paths <- function(graph, source = NULL, target = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "vertex.disjoint.paths()",
     "vertex_disjoint_paths()"
@@ -35,7 +35,7 @@ vertex.connectivity <- function(
   checks = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "vertex.connectivity()",
     "vertex_connectivity()"
@@ -60,7 +60,7 @@ vertex.connectivity <- function(
 #' @export
 stMincuts <- function(graph, source, target, capacity = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "stMincuts()", "st_min_cuts()")
+  lifecycle::deprecate_warn("2.0.0", "stMincuts()", "st_min_cuts()")
   st_min_cuts(
     graph = graph,
     source = source,
@@ -81,7 +81,7 @@ stMincuts <- function(graph, source, target, capacity = NULL) {
 #' @export
 stCuts <- function(graph, source, target) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "stCuts()", "st_cuts()")
+  lifecycle::deprecate_warn("2.0.0", "stCuts()", "st_cuts()")
   st_cuts(graph = graph, source = source, target = target)
 } # nocov end
 
@@ -97,7 +97,7 @@ stCuts <- function(graph, source, target) {
 #' @export
 minimum.size.separators <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "minimum.size.separators()",
     "min_separators()"
@@ -117,7 +117,7 @@ minimum.size.separators <- function(graph) {
 #' @export
 minimal.st.separators <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "minimal.st.separators()",
     "min_st_separators()"
@@ -137,7 +137,7 @@ minimal.st.separators <- function(graph) {
 #' @export
 is.separator <- function(graph, candidate) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.separator()", "is_separator()")
+  lifecycle::deprecate_warn("2.0.0", "is.separator()", "is_separator()")
   is_separator(graph = graph, candidate = candidate)
 } # nocov end
 
@@ -153,7 +153,7 @@ is.separator <- function(graph, candidate) {
 #' @export
 is.minimal.separator <- function(graph, candidate) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "is.minimal.separator()",
     "is_min_separator()"
@@ -179,7 +179,7 @@ graph.mincut <- function(
   value.only = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.mincut()", "min_cut()")
+  lifecycle::deprecate_warn("2.0.0", "graph.mincut()", "min_cut()")
   min_cut(
     graph = graph,
     source = source,
@@ -201,7 +201,7 @@ graph.mincut <- function(
 #' @export
 graph.maxflow <- function(graph, source, target, capacity = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.maxflow()", "max_flow()")
+  lifecycle::deprecate_warn("2.0.0", "graph.maxflow()", "max_flow()")
   max_flow(graph = graph, source = source, target = target, capacity = capacity)
 } # nocov end
 
@@ -217,7 +217,7 @@ graph.maxflow <- function(graph, source, target, capacity = NULL) {
 #' @export
 graph.adhesion <- function(graph, checks = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.adhesion()", "adhesion()")
+  lifecycle::deprecate_warn("2.0.0", "graph.adhesion()", "adhesion()")
   adhesion(graph = graph, checks = checks)
 } # nocov end
 
@@ -238,7 +238,7 @@ edge.disjoint.paths <- function(
   checks = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "edge.disjoint.paths()",
     "edge_connectivity()"
@@ -268,7 +268,7 @@ edge.connectivity <- function(
   checks = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "edge.connectivity()",
     "edge_connectivity()"
@@ -293,7 +293,7 @@ edge.connectivity <- function(
 #' @export
 dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "dominator.tree()", "dominator_tree()")
+  lifecycle::deprecate_warn("2.0.0", "dominator.tree()", "dominator_tree()")
   dominator_tree(graph = graph, root = root, mode = mode)
 } # nocov end
 #   IGraph R package

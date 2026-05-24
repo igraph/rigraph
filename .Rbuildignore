@@ -72,3 +72,4 @@
 ^scripts$
 ^\.claude$
 ^\.build$
+^lifecycle$

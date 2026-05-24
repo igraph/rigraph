@@ -986,8 +986,7 @@ get_shortest_path_astar_impl <- function(
     from - 1,
     to - 1,
     weights,
-    mode,
-    heuristic
+    mode
   )
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
