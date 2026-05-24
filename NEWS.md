@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9006
+
+## Chore
+
+- Remove `console()` and `tkplot()` (#2615).
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
 # igraph 2.3.1.9005
 
 ## Bug fixes
