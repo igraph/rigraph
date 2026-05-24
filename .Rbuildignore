@@ -71,4 +71,5 @@
 ^BRANCHES\.md$
 ^scripts$
 ^\.claude$
+^\.build$
 ^lifecycle$
