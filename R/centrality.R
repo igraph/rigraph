@@ -1007,7 +1007,7 @@ arpack <- function(
       }
       res$values <- res$values[, 1]
     }
-    res$vectors <- res$vectors[, 1:length(res$values)]
+    res$vectors <- res$vectors[, seq_along(res$values)]
   }
 
   res
