@@ -531,10 +531,10 @@ i.parse.plot.params <- function(graph, params) {
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())
   for (n in names(params)) {
-    if (substr(n, 1, 7) == "vertex.") {
+    if (startsWith(n, "vertex.")) {
       nn <- substring(n, 8)
       p[["vertex"]][[nn]] <- params[[n]]
-    } else if (substr(n, 1, 5) == "edge.") {
+    } else if (startsWith(n, "edge.")) {
       nn <- substring(n, 6)
       p[["edge"]][[nn]] <- params[[n]]
     } else {
@@ -632,7 +632,7 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   if (
     is.character(arrow.mode) &&
       length(arrow.mode) == 1 &&
-      substr(arrow.mode, 1, 2) == "a:"
+      startsWith(arrow.mode, "a:")
   ) {
     arrow.mode <- vertex_attr(graph, substring(arrow.mode, 3))
   }

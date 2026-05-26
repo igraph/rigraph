@@ -1872,10 +1872,10 @@ tk_canvas <- function(tkp.id) {
     col[col == 0] <- length(p)
     col <- palette()[col]
   } else if (
-    is.character(col) && any(substr(col, 1, 1) == "#" & nchar(col) == 9)
+    is.character(col) && any(startsWith(col, "#") & nchar(col) == 9)
   ) {
     ## drop alpha channel, tcltk doesn't support it
-    idx <- substr(col, 1, 1) == "#" & nchar(col) == 9
+    idx <- startsWith(col, "#") & nchar(col) == 9
     col[idx] <- substr(col[idx], 1, 7)
   }
 
