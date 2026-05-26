@@ -6,12 +6,10 @@ Source data: [`problems.md`](problems.md), [`failures.md`](failures.md), [`cran.
 
 ## Summary
 
-22 CRAN packages have live issues against the dev version of igraph. Two igraph changes account for almost all of them:
+20 CRAN packages have live issues against the dev version of igraph. Two igraph changes account for all of them:
 
 - [#2634](https://github.com/igraph/rigraph/pull/2634) — **lifecycle advancement** of many already-deprecated functions/arguments from `deprecate_warn` to `deprecate_stop` (a hard error). Accounts for groups A–E.
 - [#2615](https://github.com/igraph/rigraph/pull/2615) — **`tkplot()` removal**: the interactive plotter advanced to `deprecate_stop("3.0.0", "tkplot()")`. Accounts for group F.
-
-A small group G collects two pre-existing API-tightening / behavioural changes that surfaced again in this revdep run independently of the two PRs above.
 
 | # | Group | Packages |
 |---|---|---|
@@ -21,9 +19,8 @@ A small group G collects two pre-existing API-tightening / behavioural changes t
 | D | Deprecation warnings surfacing as NOTE/WARNING | FrF2, R6causal, migraph |
 | E | Indirect path through a defunct fallback | degreenet |
 | F | `tkplot()` defunct (igraph 3.0.0) | Boptbd, c3net, ggm, optbdmaeAT, optrcdmaeAT |
-| G | API tightening / behavioural changes | jewel, rSpectral |
 
-(9 additional packages are listed under "failed to check" in [`README.md`](README.md); these are install-time failures unrelated to igraph and are out of scope for this analysis.)
+(8 additional packages are listed under "failed to check" in [`README.md`](README.md); these are install-time failures unrelated to igraph and are out of scope for this analysis.)
 
 ---
 
@@ -154,14 +151,14 @@ Triggered from `comato:::plot.conceptmaps()` which passes `layout = "spring"` to
 
 ---
 
-### 7. ECoL (0.3.0)
+### 7. ECoL (0.4.4)
 
 #### Issue
 ```
 ! `hub.score()` was deprecated in igraph 2.0.0 and is now defunct.
 ℹ Please use `hits_scores()` instead.
 ```
-Triggered from `ECoL:::c.Hubs()` → `igraph::hub.score(graph)`. Breaks examples and 3 tests.
+Triggered from `ECoL:::class.G3()` → `igraph::hub.score(graph)` (in ECoL 0.4.4; the caller was renamed from `c.Hubs()` in 0.3.0, same underlying issue). Breaks examples and 3 tests.
 
 #### Root cause
 `hub.score()` and `authority.score()` both advanced from deprecated to defunct; both replaced by `hits_scores()`.
@@ -434,70 +431,6 @@ Triggered from:
 
 ---
 
-## Group G — API tightening / behavioural changes
-
-These two packages were broken by earlier-than-#2634 changes in igraph that resurfaced in this revdep run: stricter argument validation and a behavioural change in `modularity()`.
-
-### 21. jewel (2.0.2)
-
-#### Issue
-```
-Error in rewire_impl(rewire = graph, n = niter, mode = mode) :
-  The value 2.4500000000000002 is not representable as an integer. Invalid value
-Source: rinterface_extra.c:83
-```
-
-#### Root cause
-igraph's C interface now strictly validates that numeric arguments are exactly representable as integers; previously, fractional values were silently truncated. `jewel`'s `constructWeights()` example flows through `generateData_rewire()` → `igraph::rewire()`, where `niter` is computed as `p * 0.05` (e.g. `49 * 0.05 = 2.45`) and is no longer accepted as-is.
-
-#### Assessment
-**Bug in jewel** — `niter` should always be an integer (it's a number of iterations).
-
-#### Recommendation
-**For jewel**: integer-round the value before the `rewire()` call:
-```r
-niter <- as.integer(ceiling(p * 0.05))   # or floor(), or round()
-```
-
-**For igraph** (optional defensive measure): consider adding `as.integer()` on the R side in `rewire_keeping_degseq()` before passing to `rewire_impl()` — but the strict C-side check is the correct contract.
-
-**Severity**: High — example error.
-
----
-
-### 22. rSpectral (1.0.0.14)
-
-#### Issue
-Two test failures: modularity values diverge from the expected baselines.
-```
-── Failure ('test-igraph.R:19:3'): membership fix_neig=0 is correct ────────────
-Expected `c$modularity` to equal `exp_mod10`.
-  `actual`: 0.432
-`expected`: 0.408
-
-── Failure ('test-igraph.R:26:3'): membership fix_neig=1 is correct ────────────
-  `actual`: 0.3758
-`expected`: 0.3776
-```
-
-#### Root cause
-igraph's `modularity()` was changed (around 2.2.1.9004) to automatically use the `"weight"` edge attribute when present, instead of requiring the caller to pass `weights = E(g)$weight`. rSpectral's stored test graphs do carry a `"weight"` attribute, so the computed modularity now differs from the un-weighted baseline that the test expected. The fly-conversion message in the log (`This graph was created by an old(er) igraph version. i Call igraph::upgrade_graph()...`) is incidental.
-
-#### Assessment
-**Behavioural change in igraph.** Inadvertent semantics shift for callers that did not intend to use weights. We are reconsidering the auto-detection of `weight`; in the meantime there is no clean `weights = NA` opt-out.
-
-#### Recommendation
-**For igraph** (action required before notifying rSpectral): provide a clean opt-out for the auto-`weight` mechanism — for example accept `weights = NA` to explicitly disable weight detection — and document the contract change in `NEWS.md`.
-
-**For rSpectral** (once a clean opt-out exists or after igraph adjusts):
-1. Decide whether the stored graphs were *intended* to carry a `weight` attribute.
-2. If not: `g <- igraph::delete_edge_attr(g, "weight")` before calling `modularity()`, then run `igraph::upgrade_graph()` on the stored graph objects.
-3. If yes: update the expected modularity baselines to reflect the weighted computation.
-
-**Severity**: Medium — tests fail; awaiting igraph-side clarification.
-
----
-
 ## Conclusion
 
 | Package | Issue type | Root cause | Severity | Action |
@@ -522,15 +455,6 @@ igraph's `modularity()` was changed (around 2.2.1.9004) to automatically use the
 | ggm | Defunct function | `tkplot()` removed | High | ggm to switch to `plot()` |
 | optbdmaeAT | Defunct function | `tkplot()` removed | High | optbdmaeAT to switch to `plot()` |
 | optrcdmaeAT | Defunct function | `tkplot()` removed | High | optrcdmaeAT to switch to `plot()` |
-| jewel | API tightening | Stricter integer validation in `rewire_impl()` | High | jewel to integer-round `niter` |
-| rSpectral | Behavioural change | `modularity()` auto-uses `"weight"` attribute | Medium | igraph to provide clean opt-out; rSpectral to update tests |
-
 ### Overall assessment
 
-The 22 live failures partition cleanly into three causes:
-
-- **Twenty failures (groups A–F)** are direct consequences of two lifecycle PRs that landed in this dev cycle: [#2634](https://github.com/igraph/rigraph/pull/2634) (15 packages: deprecation → defunct for many functions/arguments) and [#2615](https://github.com/igraph/rigraph/pull/2615) (5 packages: `tkplot()` removal). Every one of these has a straightforward downstream fix; three of the five Group A packages are pure cascades through tidygraph. The degreenet case is unusual only in that the defunct call is wrapped in `tryCatch`-style logic that converted a clear lifecycle error into a generic "failed to form a valid network" message — the underlying cause is the same.
-
-- **One failure (jewel)** is a pre-existing API-tightening change (stricter integer validation) from earlier in the 2.x series. Clean downstream fix: integer-round `niter` before the `rewire()` call.
-
-- **One failure (rSpectral)** is a behavioural change in `modularity()` (auto-use of the `"weight"` attribute) that needs an igraph-side opt-out before clear guidance can be given to the downstream maintainer.
+All 20 live failures are direct consequences of two lifecycle PRs that landed in this dev cycle: [#2634](https://github.com/igraph/rigraph/pull/2634) (15 packages: deprecation → defunct for many functions/arguments) and [#2615](https://github.com/igraph/rigraph/pull/2615) (5 packages: `tkplot()` removal). Every one has a straightforward downstream fix; three of the five Group A packages are pure cascades through tidygraph. The degreenet case is unusual only in that the defunct call is wrapped in `tryCatch`-style logic that converted a clear lifecycle error into a generic "failed to form a valid network" message — the underlying cause is the same.
