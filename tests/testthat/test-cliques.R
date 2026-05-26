@@ -257,14 +257,14 @@ test_that("ivs() works, cliques of complement", {
     },
     cliques = cliques
   )
-  expect_equal(sum(ivs_with_equivalent), length(ivs))
+  expect_length(ivs, sum(ivs_with_equivalent))
 
   cliques_with_equivalent <- map_lgl(
     cliques,
     function(element, ivs) any(map_lgl(ivs, function(x) identical(x, element))),
     ivs = ivs
   )
-  expect_equal(sum(cliques_with_equivalent), length(cliques))
+  expect_length(cliques, sum(cliques_with_equivalent))
 })
 
 test_that("largest_cliques() works", {
@@ -386,7 +386,7 @@ test_that("cliques_callback receives correct arguments", {
 
   # Check argument types
   cliques(g, min = 3, max = 4, callback = function(clique) {
-    expect_true(is.integer(clique))
+    expect_type(clique, "integer")
     expect_true(length(clique) >= 3)
     expect_true(length(clique) <= 4)
     FALSE # stop after first clique

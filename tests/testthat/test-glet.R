@@ -9,8 +9,8 @@ test_that("Graphlets work for some simple graphs", {
   E(full)$weight <- 1
   full_glet <- graphlet_basis(full)
 
-  expect_equal(names(full_glet), c("cliques", "thresholds"))
-  expect_equal(length(full_glet$cliques), 1)
+  expect_named(full_glet, c("cliques", "thresholds"))
+  expect_length(full_glet$cliques, 1)
   expect_equal(sort(full_glet$cliques[[1]]), V(full)[seq_len(vcount(full))])
   expect_equal(full_glet$thresholds, 1)
 
