@@ -458,10 +458,10 @@ plot.igraph <- function(
         c(
           x0,
           y0,
-          x0 + .4 * loopSize,
-          y0 + narrowing * .2 * loopSize,
-          x0 + .4 * loopSize,
-          y0 - narrowing * .2 * loopSize,
+          x0 + 0.4 * loopSize,
+          y0 + narrowing * 0.2 * loopSize,
+          x0 + 0.4 * loopSize,
+          y0 - narrowing * 0.2 * loopSize,
           x0,
           y0
         ),

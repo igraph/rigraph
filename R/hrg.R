@@ -785,7 +785,7 @@ hrgPlotHclust <- function(
   x,
   rect = 0,
   colbar = rainbow(rect),
-  hang = .01,
+  hang = 0.01,
   ann = FALSE,
   main = "",
   sub = "",
@@ -819,7 +819,7 @@ hrgPlotDendrogram <- function(x, ...) {
 #' @importFrom grDevices rainbow
 hrgPlotPhylo <- function(
   x,
-  colbar = rainbow(11, start = .7, end = .1),
+  colbar = rainbow(11, start = 0.7, end = 0.1),
   edge.color = NULL,
   use.edge.length = FALSE,
   ...
