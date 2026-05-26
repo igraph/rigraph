@@ -87,8 +87,8 @@
   cat(title, "\n", sep = "")
 
   atxt <- .get.attr.codes(object)
-  atxt <- paste(atxt[atxt != ""], collapse = ", ")
-  if (atxt != "") {
+  atxt <- paste(atxt[nzchar(atxt)], collapse = ", ")
+  if (nzchar(atxt)) {
     atxt <- strwrap(
       paste(sep = "", "+ attr: ", atxt),
       prefix = "| ",
@@ -96,7 +96,7 @@
     )
     cat(atxt, sep = "\n")
   }
-  1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
+  1 + if (length(atxt) == 1 && !nzchar(atxt)) 0 else length(atxt)
 }
 
 #' @importFrom utils capture.output

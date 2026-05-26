@@ -1567,7 +1567,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   ## Handle if some elements are 'NA' (first two columns are interpreted as from/to)
   ensure_no_na(d[, 1:2], "edge data frame")
 
-  if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
+  if (!is.null(vertices) && anyNA(vertices[, 1])) {
     cli::cli_warn(
       "In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}."
     )
@@ -1582,7 +1582,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
       cli::cli_abort("{.arg vertices} contains no rows")
     }
     names <- as.character(vertices[, 1])
-    if (any(duplicated(names))) {
+    if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
     if (any(!names2 %in% names)) {

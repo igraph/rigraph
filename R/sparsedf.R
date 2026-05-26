@@ -28,8 +28,8 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 
   if (
     is.null(names(cols)) ||
-      any(names(cols) == "") ||
-      any(duplicated(names(cols)))
+      any(!nzchar(names(cols))) ||
+      anyDuplicated(names(cols)) > 0
   ) {
     cli::cli_abort("Columns must be have (unique) names.")
   }
