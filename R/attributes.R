@@ -1290,8 +1290,8 @@ igraph.i.attribute.combination <- function(comb) {
   comb <- as.list(comb)
   if (
     !all(sapply(comb, function(x) {
-        is.function(x) || (is.character(x) && length(x) == 1)
-      }))
+      is.function(x) || (is.character(x) && length(x) == 1)
+    }))
   ) {
     cli::cli_abort(
       "Attribute combination element must be a function or character scalar."
