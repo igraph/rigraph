@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.3.1.9007
+
+### Chore
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files
+  ([\#2621](https://github.com/igraph/rigraph/issues/2621)).
+
 ## igraph 2.3.1.9006
 
 ### Chore
