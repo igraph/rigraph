@@ -1,2 +1,2 @@
 [lint]
-exclude = ["tools/"]
+exclude = ["tools/", "inst/"]
