@@ -1,3 +1,4 @@
+# jarl-ignore-file implicit_assignment: just the way it works
 test_that("writing Pajek files works", {
   # FIXME: Does the Pajek format allow for \r\n line endings on Windows?
   # Adapt test depending on that.

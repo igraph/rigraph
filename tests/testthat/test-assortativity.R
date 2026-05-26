@@ -1,3 +1,5 @@
+# jarl-ignore-file implicit_assignment: just the way it works
+
 test_that("assortativity works", {
   g <- read_graph(f <- gzfile("celegansneural.gml.gz"), format = "gml")
 

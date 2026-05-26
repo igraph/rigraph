@@ -1095,7 +1095,8 @@ as.dendrogram.communities <- function(
     object$height <- object$modularity[-1]
     object$height <- cumsum(object$height - min(object$height))
   }
-  nMerge <- length(oHgt <- object$height)
+  oHgt <- object$height
+  nMerge <- length(oHgt)
   if (nMerge != nrow(merges)) {
     cli::cli_abort("'merge' and 'height' do not fit!")
   }
@@ -1105,7 +1106,8 @@ as.dendrogram.communities <- function(
   leafs <- nrow(merges) + 1
   for (k in 1:nMerge) {
     x <- merges[k, ] # no sort() anymore!
-    if (any(neg <- x < leafs + 1)) {
+    neg <- (x < (leafs + 1))
+    if (any(neg)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
     if (all(neg)) {
@@ -1154,7 +1156,8 @@ as.dendrogram.communities <- function(
         2
     }
     attr(zk, "height") <- oHgt[k]
-    z[[k <- format(k + leafs, scientific = FALSE)]] <- zk
+    k <- format(k + leafs, scientific = FALSE)
+    z[[k]] <- zk
   }
   z <- z[[k]]
   class(z) <- "dendrogram"
