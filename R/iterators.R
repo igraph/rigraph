@@ -1637,7 +1637,7 @@ is_igraph_es <- function(x) {
 parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
   args <- list(...)
 
-  if (any(!sapply(args, is_fun))) {
+  if (!all(sapply(args, is_fun))) {
     cli::cli_abort("Not {what} sequence")
   }
 

@@ -960,7 +960,7 @@ modularity_matrix <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1464,7 +1464,7 @@ cluster_spinglass <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1979,7 +1979,7 @@ cluster_edge_betweenness <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2071,7 +2071,7 @@ cluster_fast_greedy <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2246,7 +2246,7 @@ cluster_leading_eigen <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2491,7 +2491,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2583,7 +2583,7 @@ cluster_optimal <- function(graph, weights = NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL

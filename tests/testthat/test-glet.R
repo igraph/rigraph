@@ -62,7 +62,7 @@ graphlets.old <- function(graph) {
   if (!is_weighted(graph)) {
     cli::cli_abort("Graph not weighted")
   }
-  if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
+  if (min(E(graph)$weight) <= 0 || !all(is.finite(E(graph)$weight))) {
     cli::cli_abort("Edge weights must be non-negative and finite")
   }
 
@@ -104,7 +104,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   if (!is_weighted(graph)) {
     cli::cli_abort("Graph not weighted")
   }
-  if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
+  if (min(E(graph)$weight) <= 0 || !all(is.finite(E(graph)$weight))) {
     cli::cli_abort("Edge weights must be non-negative and finite")
   }
   if (
