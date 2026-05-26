@@ -1,2 +1,3 @@
 [lint]
 exclude = ["tools/"]
+ignore = ["true_false_symbol"]
