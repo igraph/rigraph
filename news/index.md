@@ -1,5 +1,17 @@
 # Changelog
 
+## igraph 2.3.1.9008
+
+### Chore
+
+- Add jarl config
+  ([\#2654](https://github.com/igraph/rigraph/issues/2654)).
+
+### Documentation
+
+- Updated revdep issues
+  ([\#2647](https://github.com/igraph/rigraph/issues/2647)).
+
 ## igraph 2.3.1.9007
 
 ### Chore
