@@ -97,14 +97,14 @@ If you want to ignore these attributes, then supply \code{NULL} for both of thes
 }
 
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}}
 }
 \concept{graph isomorphism}

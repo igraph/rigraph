@@ -838,7 +838,7 @@ test_that("eigen_centrality() deprecated scale argument", {
     invisible(eigen_centrality(g, scale = TRUE))
   })
   # For some reason, this produces different outputs on Windows and macOS
-  expect_snapshot({
+  expect_snapshot(error = TRUE, {
     invisible(eigen_centrality(g, scale = FALSE))
   })
 })

@@ -182,6 +182,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
   \item Gábor Csárdi \email{csardi.gabor@gmail.com} (\href{https://orcid.org/0000-0001-7098-9676}{ORCID})
   \item Tamás Nepusz \email{ntamas@gmail.com} (\href{https://orcid.org/0000-0002-1451-338X}{ORCID})
   \item Vincent Traag (\href{https://orcid.org/0000-0003-3170-3879}{ORCID})

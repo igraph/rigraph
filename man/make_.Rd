@@ -46,33 +46,33 @@ degree(ran)
 is_simple(ran)
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 
-Constructor modifiers (and related functions)
-\code{\link{sample_}()},
-\code{\link{simplified}()},
-\code{\link{with_edge_}()},
-\code{\link{with_graph_}()},
-\code{\link{with_vertex_}()},
-\code{\link{without_attr}()},
-\code{\link{without_loops}()},
-\code{\link{without_multiples}()}
+Constructor modifiers (and related functions):
+\code{\link[=sample_]{sample_()}},
+\code{\link[=simplified]{simplified()}},
+\code{\link[=with_edge_]{with_edge_()}},
+\code{\link[=with_graph_]{with_graph_()}},
+\code{\link[=with_vertex_]{with_vertex_()}},
+\code{\link[=without_attr]{without_attr()}},
+\code{\link[=without_loops]{without_loops()}},
+\code{\link[=without_multiples]{without_multiples()}}
 }
 \concept{constructor modifiers}
 \concept{deterministic constructors}

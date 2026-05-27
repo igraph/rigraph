@@ -45,43 +45,43 @@ blocky2 <- pref_matrix \%>\%
   sample_sbm(n = 20, block.sizes = c(10, 10))
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 
-Constructor modifiers (and related functions)
-\code{\link{make_}()},
-\code{\link{simplified}()},
-\code{\link{with_edge_}()},
-\code{\link{with_graph_}()},
-\code{\link{with_vertex_}()},
-\code{\link{without_attr}()},
-\code{\link{without_loops}()},
-\code{\link{without_multiples}()}
+Constructor modifiers (and related functions):
+\code{\link[=make_]{make_()}},
+\code{\link[=simplified]{simplified()}},
+\code{\link[=with_edge_]{with_edge_()}},
+\code{\link[=with_graph_]{with_graph_()}},
+\code{\link[=with_vertex_]{with_vertex_()}},
+\code{\link[=without_attr]{without_attr()}},
+\code{\link[=without_loops]{without_loops()}},
+\code{\link[=without_multiples]{without_multiples()}}
 }
 \concept{constructor modifiers}
 \concept{games}

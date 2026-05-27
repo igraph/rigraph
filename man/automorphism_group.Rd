@@ -92,8 +92,8 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
 \code{\link[=count_automorphisms]{count_automorphisms()}}
 
-Other graph automorphism: 
-\code{\link{count_automorphisms}()}
+Other graph automorphism:
+\code{\link[=count_automorphisms]{count_automorphisms()}}
 }
 \author{
 Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS,

@@ -173,31 +173,31 @@ bfs(make_ring(10) \%du\% make_ring(10), root = 1, callback = f)
 \seealso{
 \code{\link[=dfs]{dfs()}} for depth-first search.
 
-Other structural.properties: 
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

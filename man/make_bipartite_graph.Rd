@@ -59,10 +59,10 @@ print(g, v = TRUE)
 \seealso{
 \code{\link[=make_graph]{make_graph()}} to create one-mode networks
 
-Bipartite graphs
-\code{\link{bipartite_mapping}()},
-\code{\link{bipartite_projection}()},
-\code{\link{is_bipartite}()}
+Bipartite graphs:
+\code{\link[=bipartite_mapping]{bipartite_mapping()}},
+\code{\link[=bipartite_projection]{bipartite_projection()}},
+\code{\link[=is_bipartite]{is_bipartite()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

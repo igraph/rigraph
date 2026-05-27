@@ -5,7 +5,7 @@
 In the shell:
 
 ```sh
-./vendor.sh <path-to-cigraph-working-copy>
+scripts/vendor.sh <path-to-cigraph-working-copy>
 ```
 
 By default, `cigraph` is assumed to be in `../../../igraph`.

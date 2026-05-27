@@ -17,7 +17,7 @@ graph.incidence <- function(
   add.names = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.incidence()",
     "graph_from_biadjacency_matrix()"
@@ -271,7 +271,7 @@ graph_from_biadjacency_matrix <- function(
 #' @export
 from_incidence_matrix <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "graph_from_incidence_matrix()",
     "graph_from_biadjacency_matrix()"
@@ -294,7 +294,7 @@ from_incidence_matrix <- function(...) {
 #' @export
 graph_from_incidence_matrix <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "graph_from_incidence_matrix()",
     "graph_from_biadjacency_matrix()"

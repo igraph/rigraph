@@ -155,17 +155,17 @@ test_that("sample_degseq supports the sample_(...) syntax", {
 test_that("sample_degseq works() -- old method names", {
   withr::local_options("lifecycle_verbosity" = "warning")
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple"),
     "must be"
   )
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple"),
     "must be"
   )
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple.uniform"),
     "must be"
   )

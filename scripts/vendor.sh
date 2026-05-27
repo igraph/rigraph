@@ -1,4 +1,5 @@
 #!/bin/bash
+# Vendors igraph sources from upstream repository (manual vendoring)
 # https://unix.stackexchange.com/a/654932/19205
 # Using bash for -o pipefail
 
@@ -6,7 +7,8 @@ set -e
 set -x
 set -o pipefail
 
-cd `dirname $0`
+# Change to root of repository
+cd "$(dirname "$0")"/..
 
 project=igraph
 vendor_base_dir=src/vendor
@@ -21,7 +23,7 @@ else
   upstream_basedir="$1"
 fi
 
-upstream_dir=.git/${project}
+upstream_dir=${project}
 
 if [ "$upstream_basedir" != "$upstream_dir" ]; then
   git clone "$upstream_basedir" "$upstream_dir"
@@ -38,15 +40,13 @@ fi
 
 base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
 
-original=$(git -C "$upstream_dir" log --first-parent --reverse --format="%H" ${base}..HEAD)
+original=$(git -C "$upstream_dir" rev-parse --verify HEAD)
 
 message=
 is_tag=
 
 for commit in $original; do
   echo "Importing commit $commit"
-
-  git -C "$upstream_dir" checkout "$commit"
 
   rm -rf ${vendor_dir}
   mkdir -p ${vendor_dir}
@@ -59,28 +59,38 @@ for commit in $original; do
 
   rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
-  if [ -d "patch" ]; then
-    for f in patch/*.patch; do
-      if patch -i $f -p1 --forward --dry-run; then
-        patch -i $f -p1 --forward --no-backup-if-mismatch
-      else
-        echo "Patch $f does not apply"
-      fi
-    done
-  fi
+  # Apply patches in patch/*.patch.
+  #
+  # If a patch no longer applies forward, it is removed:
+  # vendoring fetches fresh upstream sources that do not yet carry our
+  # changes, so a clean forward apply is the expected case.  A patch that
+  # fails to apply forward is either (a) already integrated upstream and
+  # no longer needed, or (b) broken by an upstream change that we must
+  # address explicitly.  Removing the stale patch surfaces case (b) via
+  # CI/CD instead of letting it rot silently.
+  for f in patch/*.patch; do
+    if patch -i "$f" -p1 --forward --dry-run; then
+      patch -i "$f" -p1 --forward --no-backup-if-mismatch
+    else
+      echo "Removing patch $f"
+      rm "$f"
+    fi
+  done
 
   make -f Makefile-cigraph
 
   R -q -e 'cpp11::cpp_register()'
 
   # Always vendor tags
-  if [ $(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -) -eq 0 ]; then
+  if [ "$(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -)" -eq 0 ]; then
     message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
     is_tag=true
     break
   fi
 
-  if [ $(git status --porcelain -- ${vendor_base_dir} | wc -l) -gt 1 ]; then
+  # Expecting one change under ${vendor_base_dir} (and other changes) even if nothing else changed.
+  # Need at least three changed files to consider it a real update.
+  if [ "$(git status --porcelain -- ${vendor_base_dir} | wc -l)" -gt 1 ]; then
     message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
     break
   fi
@@ -98,7 +108,15 @@ git add .
 (
   echo "$message"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%'${repo_org}/${repo_name}'\1%g'
+  git -C "$upstream_dir" log -1 --format="Date: %ai" "${commit}"
+  echo
+  git -C "$upstream_dir" log --first-parent --format="%s" "${base}".."${commit}" |
+    tee /dev/stderr |
+    sed -r 's%#([0-9]+)%https://redirect.github.com/'${repo_org}/${repo_name}'/pull/\1%g'
 ) | git commit --file /dev/stdin
 
 rm -rf "$upstream_dir"
+
+# Remove "unused" warnings
+# Keep the variable for consistency between vendor.sh and vendor-one.sh
+true "${is_tag}"

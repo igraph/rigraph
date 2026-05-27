@@ -84,14 +84,14 @@ C. Solnon: AllDifferent-based Filtering for Subgraph Isomorphism,
 \emph{Artificial Intelligence} 174(12-13):850--864, 2010.
 }
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \concept{graph isomorphism}
