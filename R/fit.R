@@ -17,7 +17,7 @@ power.law.fit <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "power.law.fit()", "fit_power_law()")
+  lifecycle::deprecate_warn("2.0.0", "power.law.fit()", "fit_power_law()")
   fit_power_law(
     x = x,
     xmin = xmin,

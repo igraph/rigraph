@@ -162,10 +162,10 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-Other cliques: 
-\code{\link{is_complete}()},
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
+Other cliques:
+\code{\link[=is_complete]{is_complete()}},
+\code{\link[=ivs]{ivs()}},
+\code{\link[=weighted_cliques]{weighted_cliques()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

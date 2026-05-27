@@ -32,9 +32,9 @@ print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 \seealso{
 \code{\link[=sample_degseq]{sample_degseq()}}
 
-Other rewiring functions: 
-\code{\link{each_edge}()},
-\code{\link{rewire}()}
+Other rewiring functions:
+\code{\link[=each_edge]{each_edge()}},
+\code{\link[=rewire]{rewire()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

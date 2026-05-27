@@ -100,8 +100,8 @@ plot(g, layout = layout_with_kk, vertex.color = "green")
 parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other
 graph plotting functions.
 
-Other plot: 
-\code{\link{rglplot}()}
+Other plot:
+\code{\link[=rglplot]{rglplot()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
