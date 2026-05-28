@@ -527,17 +527,17 @@ test_that("local transitivity() produces named vectors", {
   g <- make_graph(~ a - b - c - a - d)
   E(g)$weight <- 1:4
   t1 <- transitivity(g, type = "local")
-  expect_equal(names(t1), V(g)$name)
+  expect_named(t1, V(g)$name)
 
   t2 <- transitivity(g, type = "barrat")
-  expect_equal(names(t2), V(g)$name)
+  expect_named(t2, V(g)$name)
 
   vs <- c("a", "c")
   t3 <- transitivity(g, type = "local", vids = vs)
-  expect_equal(names(t3), vs)
+  expect_named(t3, vs)
 
   t4 <- transitivity(g, type = "barrat", vids = vs)
-  expect_equal(names(t4), vs)
+  expect_named(t4, vs)
 })
 
 test_that("constraint() works", {
@@ -612,7 +612,7 @@ test_that("ego() works", {
   #########
 
   s <- ego_size(g, 2, v)[[1]]
-  expect_equal(s, length(v1))
+  expect_length(v1, s)
 })
 
 test_that("mindist works", {
@@ -1021,13 +1021,13 @@ test_that("knn works", {
   expect_equal(r3$knn[43], 46)
   expect_equal(r3$knn[1000], 192.4)
   expect_equal(r3$knnk[100], 18.78)
-  expect_equal(length(r3$knnk), 359)
+  expect_length(r3$knnk, 359)
 
   ## A random graph
   g4 <- sample_gnp(1000, p = 5 / 1000)
   r4 <- knn(g4)
   expect_equal(r4$knn[1000], 20 / 3)
-  expect_equal(length(r4$knnk), 15)
+  expect_length(r4$knnk, 15)
   expect_equal(r4$knnk[12], 19 / 3)
 
   ## A weighted graph

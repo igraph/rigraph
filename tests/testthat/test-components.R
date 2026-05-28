@@ -15,7 +15,7 @@ test_that("components works", {
 
   expect_equal(as.numeric(table(clu$membership)), clu$csize)
   expect_equal(sort(clu$csize), sort(lg_size))
-  expect_equal(clu$no, length(random_lg_list))
+  expect_length(random_lg_list, clu$no)
 })
 
 test_that("components names results", {

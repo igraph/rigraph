@@ -225,7 +225,7 @@ test_that("[[ indexing works with filtering on both ends", {
 
 test_that("[[ indexing is consistent with length()", {
   g <- make_test_named_tree()
-  expect_equal(length(g), vcount(g))
+  expect_length(g, vcount(g))
 })
 
 test_that("[[ can query incident edges", {
