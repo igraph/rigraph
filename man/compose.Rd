@@ -5,7 +5,14 @@
 \alias{\%c\%}
 \title{Compose two graphs as binary relations}
 \usage{
-compose(g1, g2, byname = "auto")
+compose(
+  g1,
+  g2,
+  byname = "auto",
+  graph.attr.comb = "rename",
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
+)
 }
 \arguments{
 \item{g1}{The first input graph.}
@@ -17,6 +24,11 @@ to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if both graphs are named and
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
 but not both graphs are named.}
+
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. Each defaults to
+\code{"rename"}. See \link{igraph-attribute-combination} for the available
+combiners.}
 }
 \value{
 A new graph object.
@@ -38,9 +50,11 @@ are all named), then the operation is performed based on symbolic vertex
 names. Otherwise numeric vertex ids are used.
 
 \code{compose()} keeps the attributes of both graphs. All graph, vertex
-and edge attributes are copied to the result. If an attribute is present in
-multiple graphs and would result a name clash, then this attribute is
-renamed by adding suffixes: _1, _2, etc.
+and edge attributes are copied to the result. By default, if an attribute
+is present in both graphs and would result in a name clash, that attribute
+is renamed by adding suffixes: \verb{_1}, \verb{_2}. Pass \code{graph.attr.comb},
+\code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes
+instead; see \link{igraph-attribute-combination} for the available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case \code{name} must be

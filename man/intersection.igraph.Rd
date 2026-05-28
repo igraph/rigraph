@@ -5,7 +5,14 @@
 \alias{\%s\%}
 \title{Intersection of graphs}
 \usage{
-\method{intersection}{igraph}(..., byname = "auto", keep.all.vertices = TRUE)
+\method{intersection}{igraph}(
+  ...,
+  byname = "auto",
+  keep.all.vertices = TRUE,
+  graph.attr.comb = "rename",
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
+)
 }
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
@@ -18,6 +25,11 @@ graphs are named.}
 
 \item{keep.all.vertices}{Logical scalar, whether to keep vertices that only
 appear in a subset of the input graphs.}
+
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. Each defaults to
+\code{"rename"}. See \link{igraph-attribute-combination} for the available
+combiners.}
 }
 \value{
 A new graph object.
@@ -36,9 +48,12 @@ are named), then the operation is performed on symbolic vertex names instead
 of the internal numeric vertex ids.
 
 \code{intersection()} keeps the attributes of all graphs. All graph,
-vertex and edge attributes are copied to the result. If an attribute is
-present in multiple graphs and would result a name clash, then this
-attribute is renamed by adding suffixes: _1, _2, etc.
+vertex and edge attributes are copied to the result. By default, if an
+attribute is present in multiple graphs and would result in a name clash,
+that attribute is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass
+\code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine
+clashing attributes instead; see \link{igraph-attribute-combination} for the
+available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case \code{name} must be
