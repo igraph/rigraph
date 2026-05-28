@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.3.1
+version: 2.3.2
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.igraph
@@ -135,7 +135,7 @@ references:
   - family-names: Salmon
     given-names: Maëlle
   year: '2026'
-  notes: R package version 2.3.1
+  notes: R package version 2.3.2
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -144,8 +144,10 @@ references:
   notes: Depends
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -155,8 +157,10 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -179,8 +183,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -190,8 +196,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -279,8 +287,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -290,8 +300,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -568,8 +580,10 @@ references:
   notes: Suggests
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
@@ -579,8 +593,10 @@ references:
   notes: Suggests
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
-    name: 'R Foundation for Statistical Computing (ROR: <https://ror.org/05qewa988>)'
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
   doi: 10.32614/R.manuals
