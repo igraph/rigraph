@@ -1,3 +1,45 @@
+# handle_vertex_type_arg validates and converts the type attribute
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Warning:
+      The `type` vertex attribute is not logical; converting to logical.
+    Output
+      [1]  TRUE FALSE  TRUE FALSE
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute contains "NA" values, which are not allowed.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, make_ring(4), required = TRUE)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! Not a bipartite graph, supply `types` argument or add a vertex attribute named `type`.
+
 # with_vertex_
 
     Code
