@@ -85,6 +85,6 @@ Graph cycles:
 
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> + 2/9 vertices, from e2dca98:
+#> + 2/9 vertices, from cc7cf98:
 #> [1] 2 8
 ```
