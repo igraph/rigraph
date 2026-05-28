@@ -174,9 +174,9 @@ eigen_matrix_impl <- function(
     "comp_lapack" = 4L,
     "comp_arpack" = 5L
   )
-  which.tmp <- eigen_defaults()
-  which.tmp[names(which)] <- which
-  which <- which.tmp
+  which_options <- eigen_defaults()
+  which_options[names(which)] <- which
+  which <- which_options
   options <- modify_list(arpack_defaults(), options)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -217,9 +217,9 @@ eigen_matrix_symmetric_impl <- function(
     "comp_lapack" = 4L,
     "comp_arpack" = 5L
   )
-  which.tmp <- eigen_defaults()
-  which.tmp[names(which)] <- which
-  which <- which.tmp
+  which_options <- eigen_defaults()
+  which_options[names(which)] <- which
+  which <- which_options
   options <- modify_list(arpack_defaults(), options)
 
   on.exit(.Call(R_igraph_finalizer))

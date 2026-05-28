@@ -338,10 +338,10 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     assign(".layouts", list(), .tkplot.env)
   }
 
-  assign("tmp", layout.data, .tkplot.env)
-  cmd <- paste(sep = "", ".layouts[[\"", name, "\"]]", " <- tmp")
+  assign("layout_data", layout.data, .tkplot.env)
+  cmd <- paste(sep = "", ".layouts[[\"", name, "\"]]", " <- layout_data")
   eval(parse(text = cmd), .tkplot.env)
-  rm("tmp", envir = .tkplot.env)
+  rm("layout_data", envir = .tkplot.env)
 }
 
 .tkplot.getlayout <- function(name) {
@@ -350,7 +350,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 }
 
 .tkplot.layouts.newdefaults <- function(name, defaults) {
-  assign("tmp", defaults, .tkplot.env)
+  assign("layout_defaults", defaults, .tkplot.env)
   for (i in seq(along.with = defaults)) {
     cmd <- paste(
       sep = "",
@@ -358,7 +358,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
       name,
       '"]]$params[[',
       i,
-      "]]$default <- tmp[[",
+      "]]$default <- layout_defaults[[",
       i,
       "]]"
     )
@@ -718,10 +718,10 @@ tk_canvas <- function(tkp.id) {
   # nocov start
   id <- get(".next", .tkplot.env)
   assign(".next", id + 1, .tkplot.env)
-  assign("tmp", tkp, .tkplot.env)
-  cmd <- paste("tkp.", id, "<- tmp", sep = "")
+  assign("tkplot_state", tkp, .tkplot.env)
+  cmd <- paste("tkp.", id, "<- tkplot_state", sep = "")
   eval(parse(text = cmd), .tkplot.env)
-  rm("tmp", envir = .tkplot.env)
+  rm("tkplot_state", envir = .tkplot.env)
   id
   # nocov end
 }
@@ -739,20 +739,20 @@ tk_canvas <- function(tkp.id) {
 
 .tkplot.set <- function(tkp.id, what, value) {
   # nocov start
-  assign("tmp", value, .tkplot.env)
-  cmd <- paste(sep = "", "tkp.", tkp.id, "$", what, "<-tmp")
+  assign("attribute_value", value, .tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id, "$", what, "<-attribute_value")
   eval(parse(text = cmd), .tkplot.env)
-  rm("tmp", envir = .tkplot.env)
+  rm("attribute_value", envir = .tkplot.env)
   TRUE
   # nocov end
 }
 
 .tkplot.set.params <- function(tkp.id, what, value) {
   # nocov start
-  assign("tmp", value, .tkplot.env)
-  cmd <- paste(sep = "", "tkp.", tkp.id, "$params$", what, "<-tmp")
+  assign("parameter_value", value, .tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id, "$params$", what, "<-parameter_value")
   eval(parse(text = cmd), .tkplot.env)
-  rm("tmp", envir = .tkplot.env)
+  rm("parameter_value", envir = .tkplot.env)
   TRUE
   # nocov end
 }
@@ -783,10 +783,10 @@ tk_canvas <- function(tkp.id) {
   if (length(tkp$params$label.degree) == 1) {
     label.degree <- rep(tkp$params$label.degree, times = vcount(tkp$graph))
     label.degree[id] <- phi
-    assign("tmp", label.degree, .tkplot.env)
-    cmd <- paste(sep = "", "tkp.", tkp.id, "$params$label.degree <- tmp")
+    assign("label_degree_values", label.degree, .tkplot.env)
+    cmd <- paste(sep = "", "tkp.", tkp.id, "$params$label.degree <- label_degree_values")
     eval(parse(text = cmd), .tkplot.env)
-    rm("tmp", envir = .tkplot.env)
+    rm("label_degree_values", envir = .tkplot.env)
   } else {
     cmd <- paste(
       sep = "",
@@ -1323,9 +1323,9 @@ tk_canvas <- function(tkp.id) {
   OK.but <- tcltk::tkbutton(dialog, text = "   OK   ", command = OnOK)
   for (i in seq(along.with = labels)) {
     tcltk::tkgrid(tcltk::tklabel(dialog, text = labels[[i]]))
-    tmp <- tcltk::tkentry(dialog, width = "40", textvariable = vars[[i]])
-    tcltk::tkgrid(tmp)
-    tcltk::tkbind(tmp, "<Return>", OnOK)
+    entry_field <- tcltk::tkentry(dialog, width = "40", textvariable = vars[[i]])
+    tcltk::tkgrid(entry_field)
+    tcltk::tkbind(entry_field, "<Return>", OnOK)
   }
   tcltk::tkgrid(OK.but)
   tcltk::tkwait.window(dialog)
@@ -1741,14 +1741,14 @@ tk_canvas <- function(tkp.id) {
       )
     } else if (layout$params[[i]]$type == "logical") {
       values[[i]] <- tcltk::tclVar(as.character(layout$params[[i]]$default))
-      tmp <- tcltk::tkcheckbutton(
+      logical_button <- tcltk::tkcheckbutton(
         dialog,
         onvalue = "TRUE",
         offvalue = "FALSE",
         variable = values[[i]]
       )
       tcltk::tkgrid(
-        tmp,
+        logical_button,
         row = row,
         column = 1,
         sticky = "nw",
@@ -1756,9 +1756,9 @@ tk_canvas <- function(tkp.id) {
         pady = 5
       )
     } else if (layout$params[[i]]$type == "choice") {
-      tmp.frame <- tcltk::tkframe(dialog)
+      choice_frame <- tcltk::tkframe(dialog)
       tcltk::tkgrid(
-        tmp.frame,
+        choice_frame,
         row = row,
         column = 1,
         sticky = "nw",
@@ -1767,13 +1767,13 @@ tk_canvas <- function(tkp.id) {
       )
       values[[i]] <- tcltk::tclVar(layout$params[[i]]$default)
       for (j in seq_along(layout$params[[i]]$values)) {
-        tmp <- tcltk::tkradiobutton(
-          tmp.frame,
+        choice_button <- tcltk::tkradiobutton(
+          choice_frame,
           variable = values[[i]],
           value = layout$params[[i]]$values[j],
           text = layout$params[[i]]$values[j]
         )
-        tcltk::tkpack(tmp, anchor = "nw")
+        tcltk::tkpack(choice_button, anchor = "nw")
       }
     } else if (layout$params[[i]]$type == "initial") {
       values[[i]] <- tcltk::tclVar(as.character(layout$params[[i]]$default))

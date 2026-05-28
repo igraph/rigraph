@@ -582,8 +582,8 @@ void Rx_igraph_attribute_add_vertices_append(SEXP val, igraph_integer_t nv,
     igraph_bool_t l=0;
     igraph_integer_t j;
     for (j=0; !l && j<nattrno; j++) {
-      igraph_attribute_record_t *tmp=VECTOR(*nattr)[j];
-      l=!strcmp(sexpname, tmp->name);
+      igraph_attribute_record_t *attribute_record = VECTOR(*nattr)[j];
+      l=!strcmp(sexpname, attribute_record->name);
     }
     if (l) {
       /* This attribute is present in nattr */
@@ -664,9 +664,9 @@ igraph_error_t Rx_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_
     SEXP l4 = PROTECT(Rf_lang3(l1, l2, l3));
     PROTECT(rep = Rf_eval(l4, R_GlobalEnv));
     for (igraph_integer_t i=0; i<newattrs; i++) {
-      igraph_attribute_record_t *tmp = VECTOR(*nattr)[VECTOR(news)[i]];
+      igraph_attribute_record_t *new_attribute_record = VECTOR(*nattr)[VECTOR(news)[i]];
       SET_VECTOR_ELT(app, i, rep);
-      SET_STRING_ELT(newnames, i, Rf_mkChar(tmp->name));
+      SET_STRING_ELT(newnames, i, Rf_mkChar(new_attribute_record->name));
     }
     PROTECT(newval=Rx_igraph_c2(val, app));
     PROTECT(newnames=Rx_igraph_c2(names, newnames));
@@ -924,8 +924,8 @@ void Rx_igraph_attribute_add_edges_append(SEXP eal,
     igraph_bool_t l=0;
     igraph_integer_t j;
     for (j=0; !l && j<nattrno; j++) {
-      igraph_attribute_record_t *tmp=VECTOR(*nattr)[j];
-      l=!strcmp(sexpname, tmp->name);
+      igraph_attribute_record_t *attribute_record = VECTOR(*nattr)[j];
+      l=!strcmp(sexpname, attribute_record->name);
     }
     if (l) {
       /* This attribute is present in nattr */
@@ -1000,10 +1000,10 @@ igraph_error_t Rx_igraph_attribute_add_edges(igraph_t *graph, const igraph_vecto
     SEXP l4 = PROTECT(Rf_lang3(l1, l2, l3));
     SEXP rep = PROTECT(Rf_eval(l4, R_GlobalEnv));
     for (igraph_integer_t i=0; i<newattrs; i++) {
-      igraph_attribute_record_t *tmp=
+      igraph_attribute_record_t *new_attribute_record =
         VECTOR(*nattr)[VECTOR(news)[i]];
       SET_VECTOR_ELT(app, i, rep);
-      SET_STRING_ELT(newnames, i, Rf_mkChar(tmp->name));
+      SET_STRING_ELT(newnames, i, Rf_mkChar(new_attribute_record->name));
     }
     PROTECT(neweal=Rx_igraph_c2(eal, app));
     PROTECT(newnames=Rx_igraph_c2(names, newnames));
@@ -1776,20 +1776,20 @@ SEXP Rx_igraph_ac_median_numeric(SEXP attr,
   for (igraph_integer_t i=0; i<len; i++) {
     igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
     igraph_integer_t n=igraph_vector_int_size(v);
-    SEXP tmp, call, tmp2;
+    SEXP values, call, median_result;
     if (n==0) {
       REAL(res)[i] = NA_REAL;
     } else if (n==1) {
       REAL(res)[i] = REAL(attr2)[VECTOR(*v)[0] ];
     } else {
-      PROTECT(tmp=NEW_NUMERIC(n));
+      PROTECT(values=NEW_NUMERIC(n));
       for (igraph_integer_t j=0; j<n; j++) {
         igraph_integer_t src = VECTOR(*v)[j];
-        REAL(tmp)[j] = REAL(attr2)[src];
+        REAL(values)[j] = REAL(attr2)[src];
       }
-      PROTECT(call=Rf_lang2(Rf_install("median"), tmp));
-      PROTECT(tmp2=Rf_eval(call, R_GlobalEnv));
-      REAL(res)[i] = REAL(tmp2)[0];
+      PROTECT(call=Rf_lang2(Rf_install("median"), values));
+      PROTECT(median_result=Rf_eval(call, R_GlobalEnv));
+      REAL(res)[i] = REAL(median_result)[0];
       UNPROTECT(3);
     }
   }
@@ -1810,15 +1810,15 @@ SEXP Rx_igraph_ac_all_other(SEXP attr,
   for (igraph_integer_t i=0; i<len; i++) {
     igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
     igraph_integer_t n=igraph_vector_int_size(v);
-    SEXP tmp;
-    PROTECT(tmp=NEW_NUMERIC(n));
+    SEXP merge_indices;
+    PROTECT(merge_indices=NEW_NUMERIC(n));
     for (igraph_integer_t j=0; j<n; j++) {
       igraph_integer_t src=VECTOR(*v)[j];
-      REAL(tmp)[j] = src+1;
+      REAL(merge_indices)[j] = src+1;
     }
     SEXP l1 = PROTECT(Rf_install(function_name));
     SEXP l2 = PROTECT(Rf_install("["));
-    SEXP l3 = PROTECT(Rf_lang3(l2, attr, tmp));
+    SEXP l3 = PROTECT(Rf_lang3(l2, attr, merge_indices));
     SEXP l4 = PROTECT(Rf_eval(l3, R_GlobalEnv));
     SEXP l5 = PROTECT(arg ? Rf_lang3(l1, l4, arg) : Rf_lang2(l1, l4));
     SEXP l6 = PROTECT(Rx_igraph_safe_eval(l5, NULL));
@@ -1862,14 +1862,14 @@ SEXP Rx_igraph_ac_func(SEXP attr,
   for (igraph_integer_t i=0; i<len; i++) {
     igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
     igraph_integer_t n=igraph_vector_int_size(v);
-    SEXP tmp;
-    PROTECT(tmp=NEW_NUMERIC(n));
+    SEXP merge_indices;
+    PROTECT(merge_indices=NEW_NUMERIC(n));
     for (igraph_integer_t j=0; j<n; j++) {
       igraph_integer_t src=VECTOR(*v)[j];
-      REAL(tmp)[j] = src+1;
+      REAL(merge_indices)[j] = src+1;
     }
     SEXP l1 = PROTECT(Rf_install("["));
-    SEXP l2 = PROTECT(Rf_lang3(l1, attr, tmp));
+    SEXP l2 = PROTECT(Rf_lang3(l1, attr, merge_indices));
     SEXP l3 = PROTECT(Rf_eval(l2, R_GlobalEnv));
     SEXP l4 = PROTECT(Rf_lang2(func, l3));
     SEXP l5 = PROTECT(Rx_igraph_safe_eval(l4, NULL));
@@ -3268,15 +3268,15 @@ SEXP Ry_igraph_sirlist_to_SEXP(const igraph_vector_ptr_t *sl) {
   SET_STRING_ELT(names, 3, Rf_mkChar("NR"));
 
   for (igraph_integer_t i=0; i<n; i++) {
-    SEXP tmp;
+    SEXP sir_entry;
     const igraph_sir_t *sir=VECTOR(*sl)[i];
-    PROTECT(tmp=NEW_LIST(4));
-    SET_VECTOR_ELT(tmp, 0, Ry_igraph_vector_to_SEXP(&sir->times));
-    SET_VECTOR_ELT(tmp, 1, Ry_igraph_vector_int_to_SEXP(&sir->no_s));
-    SET_VECTOR_ELT(tmp, 2, Ry_igraph_vector_int_to_SEXP(&sir->no_i));
-    SET_VECTOR_ELT(tmp, 3, Ry_igraph_vector_int_to_SEXP(&sir->no_r));
-    SET_VECTOR_ELT(result, i, tmp);
-    SET_NAMES(tmp, names);
+    PROTECT(sir_entry=NEW_LIST(4));
+    SET_VECTOR_ELT(sir_entry, 0, Ry_igraph_vector_to_SEXP(&sir->times));
+    SET_VECTOR_ELT(sir_entry, 1, Ry_igraph_vector_int_to_SEXP(&sir->no_s));
+    SET_VECTOR_ELT(sir_entry, 2, Ry_igraph_vector_int_to_SEXP(&sir->no_i));
+    SET_VECTOR_ELT(sir_entry, 3, Ry_igraph_vector_int_to_SEXP(&sir->no_r));
+    SET_VECTOR_ELT(result, i, sir_entry);
+    SET_NAMES(sir_entry, names);
     UNPROTECT(1);
   }
 
@@ -3439,10 +3439,10 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
   }
 
   /* Compress the sparse matrix to column-compressed format */
-  igraph_sparsemat_t tmp;
-  igraph_sparsemat_compress(sp, &tmp);
+  igraph_sparsemat_t compressed_sparsemat;
+  igraph_sparsemat_compress(sp, &compressed_sparsemat);
   igraph_sparsemat_destroy(sp);
-  *sp = tmp;
+  *sp = compressed_sparsemat;
 }
 
 igraph_error_t Rz_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
