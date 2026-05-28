@@ -217,8 +217,7 @@ test_that("bfs() works", {
   local_igraph_options(print.id = FALSE)
 
   expect_snapshot({
-    el <- structure(c("a", "b", "z", "b", "c", "a"), dim = 3:2)
-    g <- graph_from_edgelist(el) + vertex("d")
+    g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(
       g,
       root = 2,

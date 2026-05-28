@@ -18,8 +18,7 @@ test_that("as_directed works", {
 })
 
 test_that("as_directed keeps attributes", {
-  el <- structure(c("A", "A", "B", "B", "D", "C"), dim = 3:2)
-  g <- graph_from_edgelist(el, directed = FALSE) + vertex("E")
+  g <- graph_from_literal(A - B - C, D - A, E)
   g$name <- "Small graph"
   g_mutual <- as_directed(g, mode = "mutual")
   expect_equal(g_mutual$name, g$name)
@@ -34,14 +33,14 @@ test_that("as_directed keeps attributes", {
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(1, 2, 1, 3, 3, 2)
+    c(1, 3, 1, 2, 2, 3)
   )
 
   g_arbitrary <- as_directed(g, "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
   expect_equal(
     df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
-    1:3
+    c(1, 3, 2)
   )
 })
 
@@ -60,25 +59,21 @@ test_that("as.undirected() deprecation", {
 })
 
 test_that("as_undirected() keeps attributes", {
-  el <- structure(
-    c("A", "A", "B", "C", "D", "B", "C", "A", "D", "C"),
-    dim = c(5L, 2L)
-  )
-  g <- graph_from_edgelist(el, directed = TRUE)
+  g <- graph_from_literal(A +-+ B, A --+ C, C +-+ D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
   g_tiny <- as_undirected(g, mode = "collapse")
   df_tiny <- as_data_frame(g_tiny)
   expect_equal(g_tiny$name, g$name)
-  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(4, 2, 9))
+  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(3, 3, 9))
 
   g_each <- as_undirected(g, mode = "each")
   df_each <- as_data_frame(g_each)
   expect_equal(g_each$name, g$name)
   expect_equal(
     df_each[order(df_each[, 1], df_each[, 2]), ]$weight,
-    c(1, 3, 2, 4, 5)
+    c(1, 2, 3, 4, 5)
   )
 
   g_mutual <- as_undirected(g, mode = "mutual")
@@ -86,7 +81,7 @@ test_that("as_undirected() keeps attributes", {
   expect_equal(g_mutual$name, g$name)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(4, 9)
+    c(3, 9)
   )
 })
 

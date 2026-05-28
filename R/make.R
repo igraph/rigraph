@@ -1681,7 +1681,11 @@ empty_graph <- function(n = 0, directed = TRUE) {
 #'   all arguments are passed to `graph_from_literal()`.
 #' @param simplify Logical scalar, whether to call [simplify()]
 #'   on the created graph. By default the graph is simplified, loop and
-#'   multiple edges are removed.
+#'   multiple edges are removed. [simplify()] is only called when the
+#'   created graph is not already simple, so the edge order from the
+#'   formula is preserved whenever no loops or multi-edges are present.
+#'   When the graph does contain loops or multi-edges (and `simplify =
+#'   TRUE`), [simplify()] reorders the edges into its canonical order.
 #' @return An igraph graph
 #'
 #' @family deterministic constructors

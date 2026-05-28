@@ -10,8 +10,7 @@
 # bfs() works
 
     Code
-      el <- structure(c("a", "b", "z", "b", "c", "a"), dim = 3:2)
-      g <- graph_from_edgelist(el) + vertex("d")
+      g <- graph_from_literal(a - +b - +c, z - +a, d)
       bfs(g, root = 2, mode = "out", unreachable = FALSE, order = TRUE, rank = TRUE,
         parent = TRUE, pred = TRUE, succ = TRUE, dist = TRUE)
     Output
