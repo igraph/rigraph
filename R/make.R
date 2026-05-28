@@ -860,6 +860,10 @@ graph.atlas <- function(n) {
       n <- vcount(graph)
       for (nm in names(m$args)) {
         v <- m$args[[nm]]
+        if (is.null(v)) next
+        if (inherits(v, c("igraph.vs", "igraph.es"))) {
+          v <- as.numeric(v)
+        }
         if (length(v) == 1) {
           vattrs[[nm]] <- rep(unname(v), n)
         } else if (length(v) == n) {
@@ -879,6 +883,10 @@ graph.atlas <- function(n) {
       n <- ecount(graph)
       for (nm in names(m$args)) {
         v <- m$args[[nm]]
+        if (is.null(v)) next
+        if (inherits(v, c("igraph.vs", "igraph.es"))) {
+          v <- as.numeric(v)
+        }
         if (length(v) == 1) {
           eattrs[[nm]] <- rep(unname(v), n)
         } else if (length(v) == n) {
