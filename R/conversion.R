@@ -230,20 +230,25 @@ get.adjedgelist <- function(
 #
 # Returns: numeric() (empty) for unweighted, or a numeric vector of length
 # ecount(graph) otherwise.
-resolve_edge_weights <- function(graph, weights, call = rlang::caller_env()) {
+resolve_edge_weights <- function(
+  graph,
+  weights,
+  attr = deprecated(),
+  fn = "function",
+  call = rlang::caller_env()
+) {
+  if (lifecycle::is_present(attr)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      sprintf("%s(attr = )", fn),
+      sprintf("%s(weights = )", fn)
+    )
+    weights <- attr
+  }
+
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
-      value <- edge_attr(graph, "weight")
-      if (!is.numeric(value) && !is.logical(value)) {
-        cli::cli_abort(
-          c(
-            "Matrices must be either numeric or logical, and the edge attribute is not",
-            i = "Pass {.code weights = NA} to ignore the {.val weight} attribute."
-          ),
-          call = call
-        )
-      }
-      return(as.numeric(value))
+      return(edge_attr_as_weights(graph, "weight", call))
     }
     return(numeric())
   }
@@ -262,14 +267,7 @@ resolve_edge_weights <- function(graph, weights, call = rlang::caller_env()) {
     if (!weights %in% edge_attr_names(graph)) {
       cli::cli_abort("No such edge attribute", call = call)
     }
-    value <- edge_attr(graph, weights)
-    if (!is.numeric(value) && !is.logical(value)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-    return(as.numeric(value))
+    return(edge_attr_as_weights(graph, weights, call))
   }
 
   if (!is.numeric(weights) && !is.logical(weights)) {
@@ -288,6 +286,20 @@ resolve_edge_weights <- function(graph, weights, call = rlang::caller_env()) {
     )
   }
   as.numeric(weights)
+}
+
+edge_attr_as_weights <- function(graph, name, call) {
+  value <- edge_attr(graph, name)
+  if (!is.numeric(value) && !is.logical(value)) {
+    cli::cli_abort(
+      c(
+        "The {.val {name}} edge attribute must be numeric or logical.",
+        i = "Pass {.code weights = NA} to ignore it."
+      ),
+      call = call
+    )
+  }
+  as.numeric(value)
 }
 
 get.adjacency.dense <- function(
@@ -385,6 +397,7 @@ get.adjacency.sparse <- function(
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
+#' @param ... These dots are for future extensions and must be empty.
 #' @param weights One of the following:
 #'   \itemize{
 #'     \item `NULL` (default): use the `weight` edge attribute if the graph has
@@ -426,6 +439,7 @@ get.adjacency.sparse <- function(
 as_adjacency_matrix <- function(
   graph,
   type = c("both", "upper", "lower"),
+  ...,
   weights = NULL,
   attr = deprecated(),
   edges = deprecated(),
@@ -433,21 +447,18 @@ as_adjacency_matrix <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   ensure_igraph(graph)
+  rlang::check_dots_empty()
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
-  if (lifecycle::is_present(attr)) {
-    lifecycle::deprecate_warn(
-      "3.0.0",
-      "as_adjacency_matrix(attr = )",
-      "as_adjacency_matrix(weights = )"
-    )
-    weights <- attr
-  }
-
-  weights <- resolve_edge_weights(graph, weights)
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_adjacency_matrix"
+  )
 
   if (sparse) {
     get.adjacency.sparse(graph, type = type, weights = weights, names = names)
@@ -1103,6 +1114,7 @@ get.incidence.sparse <- function(
 #' @param types An optional vertex type vector to use instead of the
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
+#' @param ... These dots are for future extensions and must be empty.
 #' @param weights One of the following:
 #'   \itemize{
 #'     \item `NULL` (default): use the `weight` edge attribute if the graph has
@@ -1143,6 +1155,7 @@ get.incidence.sparse <- function(
 as_biadjacency_matrix <- function(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   attr = deprecated(),
   names = TRUE,
@@ -1150,20 +1163,17 @@ as_biadjacency_matrix <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-
-  if (lifecycle::is_present(attr)) {
-    lifecycle::deprecate_warn(
-      "3.0.0",
-      "as_biadjacency_matrix(attr = )",
-      "as_biadjacency_matrix(weights = )"
-    )
-    weights <- attr
-  }
+  rlang::check_dots_empty()
 
   names <- as.logical(names)
   sparse <- as.logical(sparse)
 
-  weights <- resolve_edge_weights(graph, weights)
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_biadjacency_matrix"
+  )
 
   if (sparse) {
     get.incidence.sparse(
