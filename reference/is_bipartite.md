@@ -19,7 +19,7 @@ is_bipartite(graph)
 
 ## See also
 
-Bipartite graphs:
+Bipartite graphs
 [`bipartite_mapping()`](https://r.igraph.org/reference/bipartite_mapping.md),
 [`bipartite_projection()`](https://r.igraph.org/reference/bipartite_projection.md),
 [`make_bipartite_graph()`](https://r.igraph.org/reference/make_bipartite_graph.md)

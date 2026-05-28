@@ -34,15 +34,15 @@ The graph, with the vertex attribute(s) added or set.
 
 ## See also
 
-Vertex, edge and graph attributes:
+Vertex, edge and graph attributes
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
+`edge_attr<-()`,
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
-[`graph_attr<-()`](https://r.igraph.org/reference/graph_attr-set.md),
+`graph_attr<-()`,
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
 [`igraph-attribute-combination`](https://r.igraph.org/reference/igraph-attribute-combination.md),
 [`igraph-dollar`](https://r.igraph.org/reference/igraph-dollar.md),
@@ -64,10 +64,10 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> IGRAPH 8256265 UN-- 10 10 -- Ring graph
+#> IGRAPH 7221db1 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), color
 #> | (v/c), label (v/c)
-#> + edges from 8256265 (vertex names):
+#> + edges from 7221db1 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 plot(g)
 ```

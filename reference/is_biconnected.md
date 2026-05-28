@@ -41,7 +41,7 @@ connected vertices as biconnected, however, igraph does.
 [`is_connected()`](https://r.igraph.org/reference/components.md),
 [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
 
-Connected components:
+Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),

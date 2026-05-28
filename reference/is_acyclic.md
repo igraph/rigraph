@@ -35,7 +35,7 @@ a specific cycle.
 [`is_dag()`](https://r.igraph.org/reference/is_dag.md) for functions
 specific to undirected and directed graphs.
 
-Graph cycles:
+Graph cycles
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),

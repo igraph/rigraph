@@ -65,7 +65,7 @@ Erdős, P. and Rényi, A., On random graphs, *Publicationes Mathematicae*
 
 ## See also
 
-Random graph models (games):
+Random graph models (games)
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`sample_bipartite()`](https://r.igraph.org/reference/sample_bipartite.md),

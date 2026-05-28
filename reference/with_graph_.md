@@ -16,7 +16,7 @@ with_graph_(...)
 
 ## See also
 
-Constructor modifiers (and related functions):
+Constructor modifiers (and related functions)
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
@@ -30,8 +30,8 @@ Constructor modifiers (and related functions):
 
 ``` r
 make_(ring(10), with_graph_(name = "10-ring"))
-#> IGRAPH 2ca0fbf U--- 10 10 -- 10-ring
+#> IGRAPH 9e3f4b4 U--- 10 10 -- 10-ring
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 2ca0fbf:
+#> + edges from 9e3f4b4:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 ```

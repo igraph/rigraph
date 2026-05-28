@@ -64,7 +64,7 @@ such cycle exists.
 
 ## See also
 
-Graph cycles:
+Graph cycles
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),
@@ -83,11 +83,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 35ac312 (vertex names):
+#> + 10/10 edges from 60409b8 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 35ac312:
+#> + 11/6 vertices, named, from 60409b8:
 #>  [1] A B C D B F A E D F E
 #> 
 

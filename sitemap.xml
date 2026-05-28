@@ -221,6 +221,7 @@
 <url><loc>https://r.igraph.org/reference/get.data.frame.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.diameter.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edge.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.edge.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edge.ids.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.edgelist.html</loc></url>
 <url><loc>https://r.igraph.org/reference/get.graph.attribute.html</loc></url>
@@ -419,6 +420,7 @@
 <url><loc>https://r.igraph.org/reference/layout.fruchterman.reingold.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.gem.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.graphopt.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.grid.3d.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.grid.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.kamada.kawai.html</loc></url>
 <url><loc>https://r.igraph.org/reference/layout.lgl.html</loc></url>

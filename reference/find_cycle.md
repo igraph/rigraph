@@ -42,7 +42,7 @@ vertex to one of the target vertices. A path is given by its vertex ids.
 
 ## See also
 
-Graph cycles:
+Graph cycles
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`girth()`](https://r.igraph.org/reference/girth.md),
@@ -58,20 +58,20 @@ Graph cycles:
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> + 4/9 vertices, from 542da4b:
+#> + 4/9 vertices, from 14bbd54:
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> + 4/12 edges from 542da4b:
+#> + 4/12 edges from 14bbd54:
 #> [1] 8--9 6--9 5--6 5--8
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> + 0/5 vertices, from 54ec20f:
+#> + 0/5 vertices, from d36a532:
 #> 
 #> $edges
-#> + 0/4 edges from 54ec20f:
+#> + 0/4 edges from d36a532:
 #> 
 ```

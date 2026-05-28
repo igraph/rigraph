@@ -92,7 +92,7 @@ Clarification. *Social Networks*, 1, 215-239.
 
 ## See also
 
-Centrality measures:
+Centrality measures
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),

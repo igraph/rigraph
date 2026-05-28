@@ -109,7 +109,7 @@ centrality for asymmetric relations” *Social Networks*, 23, 191-201.
 and
 [`power_centrality()`](https://r.igraph.org/reference/power_centrality.md)
 
-Centrality measures:
+Centrality measures
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),
 [`closeness()`](https://r.igraph.org/reference/closeness.md),

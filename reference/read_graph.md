@@ -207,7 +207,7 @@ testing. For more information, see
 
 [`write_graph()`](https://r.igraph.org/reference/write_graph.md)
 
-Foreign format readers:
+Foreign format readers
 [`graph_from_graphdb()`](https://r.igraph.org/reference/graph_from_graphdb.md),
 [`write_graph()`](https://r.igraph.org/reference/write_graph.md)
 

@@ -48,7 +48,7 @@ decide whether a graph is connected,
 [`components()`](https://r.igraph.org/reference/components.md) to
 calculate the connected components of a graph.
 
-Connected components:
+Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),

@@ -87,7 +87,7 @@ Other structural.properties:
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
 
-Graph cycles:
+Graph cycles
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),
 [`girth()`](https://r.igraph.org/reference/girth.md),
@@ -102,9 +102,9 @@ Graph cycles:
 
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 6/40 edges from 9e79c01:
+#> + 6/40 edges from b08be36:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 feedback_arc_set(g, algo = "approx_eades")
-#> + 6/40 edges from 9e79c01:
+#> + 6/40 edges from b08be36:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 ```

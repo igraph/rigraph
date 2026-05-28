@@ -7,7 +7,7 @@ This is a helper function for the common parts of
 ## Usage
 
 ``` r
-.apply_modifiers(graph, mods, call = rlang::caller_env())
+.apply_modifiers(graph, mods)
 ```
 
 ## Arguments

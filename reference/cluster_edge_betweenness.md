@@ -125,7 +125,7 @@ for other community detection methods.
 See [`communities()`](https://r.igraph.org/reference/communities.md) for
 extracting the results of the community detection.
 
-Community detection:
+Community detection
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),
 [`cluster_fluid_communities()`](https://r.igraph.org/reference/cluster_fluid_communities.md),

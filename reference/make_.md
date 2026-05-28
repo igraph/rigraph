@@ -62,7 +62,7 @@ Other deterministic constructors:
 [`make_turan()`](https://r.igraph.org/reference/make_turan.md),
 [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
-Constructor modifiers (and related functions):
+Constructor modifiers (and related functions)
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
 [`with_edge_()`](https://r.igraph.org/reference/with_edge_.md),

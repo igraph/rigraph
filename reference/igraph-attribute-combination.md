@@ -121,15 +121,15 @@ use graph/vertex/edge attributes in general.
 [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)
 on igraph parameters.
 
-Vertex, edge and graph attributes:
+Vertex, edge and graph attributes
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
+`edge_attr<-()`,
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
-[`graph_attr<-()`](https://r.igraph.org/reference/graph_attr-set.md),
+`graph_attr<-()`,
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
 [`igraph-dollar`](https://r.igraph.org/reference/igraph-dollar.md),
 [`igraph-vs-attributes`](https://r.igraph.org/reference/igraph-vs-attributes.md),
@@ -138,7 +138,7 @@ Vertex, edge and graph attributes:
 [`set_vertex_attr()`](https://r.igraph.org/reference/set_vertex_attr.md),
 [`set_vertex_attrs()`](https://r.igraph.org/reference/set_vertex_attrs.md),
 [`vertex_attr()`](https://r.igraph.org/reference/vertex_attr.md),
-[`vertex_attr<-()`](https://r.igraph.org/reference/vertex_attr-set.md),
+`vertex_attr<-()`,
 [`vertex_attr_names()`](https://r.igraph.org/reference/vertex_attr_names.md)
 
 ## Author
@@ -159,33 +159,33 @@ igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
 simplify(g, edge.attr.comb = "sum")
-#> IGRAPH 9a80b79 D-W- 4 3 -- 
+#> IGRAPH c7b4845 D-W- 4 3 -- 
 #> + attr: weight (e/n)
-#> + edges from 9a80b79:
+#> + edges from c7b4845:
 #> [1] 1->2 2->3 3->4
 
 ## collect attributes into a string
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH 2a627de D-W- 4 3 -- 
+#> IGRAPH 886f931 D-W- 4 3 -- 
 #> + attr: weight (e/c)
-#> + edges from 2a627de:
+#> + edges from 886f931:
 #> [1] 1->2 2->3 3->4
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
 simplify(g, edge.attr.comb = "concat")
-#> IGRAPH 8d76dce D-W- 4 3 -- 
+#> IGRAPH 1c74edb D-W- 4 3 -- 
 #> + attr: weight (e/x)
-#> + edges from 8d76dce:
+#> + edges from 1c74edb:
 #> [1] 1->2 2->3 3->4
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH 48ae2d0 D-W- 4 3 -- 
+#> IGRAPH 65b25d6 D-W- 4 3 -- 
 #> + attr: weight (e/c), name (e/c)
-#> + edges from 48ae2d0:
+#> + edges from 65b25d6:
 #> [1] 1->2 2->3 3->4
 
 ## harmonic average of weights, names are dropped
@@ -193,8 +193,8 @@ simplify(g, edge.attr.comb = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
-#> IGRAPH df0f2cb D-W- 4 3 -- 
+#> IGRAPH feaad99 D-W- 4 3 -- 
 #> + attr: weight (e/n)
-#> + edges from df0f2cb:
+#> + edges from feaad99:
 #> [1] 1->2 2->3 3->4
 ```

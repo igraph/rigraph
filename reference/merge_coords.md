@@ -110,10 +110,6 @@ graphs <- lapply(sample(5:20, 20, replace = TRUE),
   barabasi.game,
   directed = FALSE
 )
-#> Warning: `barabasi.game()` was deprecated in igraph 2.0.0.
-#> ℹ Please use `sample_pa()` instead.
-#> ℹ The deprecated feature was likely used in the base package.
-#>   Please report the issue to the authors.
 layouts <- lapply(graphs, layout_with_kk)
 lay <- merge_coords(graphs, layouts)
 g <- disjoint_union(graphs)

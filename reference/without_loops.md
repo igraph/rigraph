@@ -10,7 +10,7 @@ without_loops()
 
 ## See also
 
-Constructor modifiers (and related functions):
+Constructor modifiers (and related functions)
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
@@ -25,13 +25,13 @@ Constructor modifiers (and related functions):
 ``` r
 # An artificial example
 make_(full_graph(5, loops = TRUE))
-#> IGRAPH 407c0e3 U--- 5 15 -- Full graph
+#> IGRAPH b6d6fab U--- 5 15 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 407c0e3:
+#> + edges from b6d6fab:
 #>  [1] 1--1 1--2 1--3 1--4 1--5 2--2 2--3 2--4 2--5 3--3 3--4 3--5 4--4 4--5 5--5
 make_(full_graph(5, loops = TRUE), without_loops())
-#> IGRAPH 1b2e983 U--- 5 10 -- Full graph
+#> IGRAPH c6c2138 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 1b2e983:
+#> + edges from c6c2138:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 ```

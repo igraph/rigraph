@@ -288,7 +288,7 @@ for plotting community structure dendrograms.
 See [`compare()`](https://r.igraph.org/reference/compare.md) for
 comparing two community structures on the same graph.
 
-Community detection:
+Community detection
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),
