@@ -1290,7 +1290,7 @@ is_bipartite <- function(graph) {
 
 #############
 
-igraph.i.attribute.combination <- function(comb) {
+igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   if (is.function(comb)) {
     comb <- list(comb)
   }
@@ -1310,34 +1310,40 @@ igraph.i.attribute.combination <- function(comb) {
   if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
+  known_names <- c(
+    "ignore",
+    "sum",
+    "prod",
+    "min",
+    "max",
+    "random",
+    "first",
+    "last",
+    "mean",
+    "median",
+    "concat"
+  )
+  known_codes <- c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+  if (allow_rename) {
+    known_names <- c(known_names, "rename")
+    known_codes <- c(known_codes, NA_integer_)
+  }
   comb <- lapply(comb, function(x) {
     if (!is.character(x)) {
       x
     } else {
-      known <- data.frame(
-        n = c(
-          "ignore",
-          "sum",
-          "prod",
-          "min",
-          "max",
-          "random",
-          "first",
-          "last",
-          "mean",
-          "median",
-          "concat"
-        ),
-        i = c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-        stringsAsFactors = FALSE
-      )
-      x <- pmatch(tolower(x), known[, 1])
-      if (is.na(x)) {
+      idx <- pmatch(tolower(x), known_names)
+      if (is.na(idx)) {
+        if (!allow_rename && identical(tolower(x), "rename")) {
+          cli::cli_abort(
+            "{.val rename} is only supported by graph operators ({.fn union}, {.fn intersection}, {.fn compose}, {.fn disjoint_union}), not by this function."
+          )
+        }
         cli::cli_abort(
           "Unknown/unambigous attribute combination specification."
         )
       }
-      known[, 2][x]
+      if (is.na(known_codes[idx])) "rename" else known_codes[idx]
     }
   })
 
@@ -1434,6 +1440,15 @@ igraph.i.attribute.combination <- function(comb) {
 #'     \item{"concat"}{
 #'       Concatenate the attributes, using the [c()] function.
 #'       This results almost always a complex attribute.
+#'     }
+#'     \item{"rename"}{
+#'       Keep clashing attributes side-by-side under disambiguated names by
+#'       appending `_1`, `_2`, ... suffixes. This is the default for the
+#'       graph operators [union()], [intersection()], [compose()] and
+#'       [disjoint_union()] and preserves their historical behaviour.
+#'       Only those operators accept `"rename"`; [simplify()] and
+#'       [contract()] will reject it because the rename strategy has no
+#'       per-element interpretation when many input values collapse into one.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
