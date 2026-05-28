@@ -458,6 +458,31 @@ test_that("with_edge_", {
 })
 
 
+test_that("with_vertex_() / with_edge_() silently skip NULL values", {
+  # NULL attribute values are a no-op, matching i_set_vertex_attr / i_set_edge_attr.
+  g <- make_(from_literal(A - B - C), with_vertex_(foo = NULL))
+  expect_false("foo" %in% vertex_attr_names(g))
+
+  g <- make_(from_literal(A - B - C), with_edge_(foo = NULL))
+  expect_false("foo" %in% edge_attr_names(g))
+})
+
+
+test_that("with_vertex_() / with_edge_() coerce igraph.vs / igraph.es to numeric", {
+  # Storing a vertex/edge iterator as an attribute would retain a stale ref to
+  # the source graph; coerce to numeric to match i_set_vertex_attr behavior.
+  # Note: with_vertex_() captures args lazily and evaluates them in a context
+  # that only sees package-level names, so build the iterator inline.
+  g <- make_(ring(3), with_vertex_(foo = V(make_ring(5))[1:3]))
+  expect_type(V(g)$foo, "double")
+  expect_equal(V(g)$foo, c(1, 2, 3))
+
+  g <- make_(ring(3), with_edge_(foo = E(make_ring(5))[1:3]))
+  expect_type(E(g)$foo, "double")
+  expect_equal(E(g)$foo, c(1, 2, 3))
+})
+
+
 test_that("with_graph_", {
   g1 <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_graph_attr("color", value = "red") %>%
