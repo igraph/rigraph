@@ -150,11 +150,9 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   edges.orig <- ecount(graph)
-  on.exit(.Call(Rx_igraph_finalizer))
-  graph <- .Call(
-    Rx_igraph_add_edges_manual,
-    graph,
-    as_igraph_vs(graph, edges) - 1
+  graph <- add_edges_impl(
+    graph = graph,
+    edges = edges
   )
   edges.new <- ecount(graph)
 
