@@ -30,7 +30,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(Rx_igraph_copy_env, graph)
+    .Call(Rx_igraph_copy_env, graph) # internal, no _impl
   } else {
     NULL
   }
@@ -84,7 +84,14 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @export
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
+  on.exit(.Call(Rx_igraph_finalizer))
+  .Call(
+    # R_compute_identical(); is_same_graph_impl lacks attrs param
+    Rx_igraph_identical_graphs,
+    g1,
+    g2,
+    as.logical(attrs)
+  )
 }
 
 add_vses_graph_ref <- function(vses, graph) {
@@ -363,6 +370,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else if (!is.null(P)) {
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
+      # internal, no _impl
       Rx_igraph_es_pairs,
       graph,
       as_igraph_vs(graph, P) - 1,
@@ -372,6 +380,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else {
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
+      # internal, no _impl
       Rx_igraph_es_path,
       graph,
       as_igraph_vs(graph, path) - 1,
@@ -591,6 +600,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_vs_nei,
       graph,
       x,
@@ -622,6 +632,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_vs_adj,
       graph,
       x,
@@ -643,6 +654,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_vs_adj,
       graph,
       x,
@@ -661,6 +673,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_vs_adj,
       graph,
       x,
@@ -984,6 +997,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_es_adj,
       graph,
       x,
@@ -1002,6 +1016,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_es_adj,
       graph,
       x,
@@ -1017,6 +1032,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
+      # internal, no _impl
       Rx_igraph_es_adj,
       graph,
       x,
@@ -1057,12 +1073,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ))
 
     # Data objects (visible by default)
+    from_copy <- .Call(Rx_igraph_copy_from, graph) # internal, no _impl
+    to_copy <- .Call(Rx_igraph_copy_to, graph) # internal, no _impl
     bottom <- rlang::new_environment(
       parent = top,
       c(
         attrs,
-        .igraph.from = list(.Call(Rx_igraph_copy_from, graph)[as.numeric(x)]),
-        .igraph.to = list(.Call(Rx_igraph_copy_to, graph)[as.numeric(x)]),
+        .igraph.from = list(from_copy[as.numeric(x)]),
+        .igraph.to = list(to_copy[as.numeric(x)]),
         .igraph.graph = list(graph),
         .env = env,
         .data = list(attrs)

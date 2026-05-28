@@ -72,7 +72,7 @@ capitalize <- function(x) {
 }
 
 address <- function(x) {
-  .Call(Rx_igraph_address, x)
+  .Call(Rx_igraph_address, x) # internal, no _impl
 }
 
 `%+%` <- function(x, y) {
@@ -112,5 +112,5 @@ modify_list <- function(x, y) {
 #' test_error_with_source()
 #' }
 test_error_with_source <- function() {
-  .Call(Rx_igraph_test_error_with_source)
+  .Call(Rx_igraph_test_error_with_source) # test utility, no _impl
 }
