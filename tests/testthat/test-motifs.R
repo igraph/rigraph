@@ -226,10 +226,10 @@ test_that("motifs with callback receives correct arguments", {
 
   # Check argument types
   motifs(g, 3, callback = function(vids, isoclass) {
-    expect_true(is.integer(vids))
-    expect_equal(length(vids), 3)
-    expect_true(is.integer(isoclass))
-    expect_equal(length(isoclass), 1)
+    expect_type(vids, "integer")
+    expect_length(vids, 3)
+    expect_type(isoclass, "integer")
+    expect_length(isoclass, 1)
     TRUE # stop after first motif
   })
 })

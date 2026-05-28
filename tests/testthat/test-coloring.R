@@ -19,7 +19,7 @@ test_that("greedy_vertex_coloring works on named graphs", {
   V(g)$name <- LETTERS[1:vcount(g)]
   vc <- greedy_vertex_coloring(g)
   expect_equal(as.vector(vc), c(1, rep(2, vcount(g) - 1)))
-  expect_equal(names(vc), V(g)$name)
+  expect_named(vc, V(g)$name)
 })
 
 test_that("simplify_and_colorize works", {

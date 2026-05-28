@@ -217,7 +217,7 @@ test_that("cluster_leading_eigen works", {
     multiplier,
     extra
   ) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)
@@ -268,7 +268,7 @@ test_that("cluster_leading_eigen works", {
     multiplier,
     extra
   ) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)

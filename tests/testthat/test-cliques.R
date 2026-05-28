@@ -81,7 +81,7 @@ test_that("max_cliques() work", {
   gnp <- simplify(gnp)
 
   mysort <- function(x) {
-    xl <- sapply(x, length)
+    xl <- lengths(x)
     x <- lapply(x, sort)
     xc <- sapply(x, paste, collapse = "-")
     x[order(xl, xc)]
@@ -158,7 +158,7 @@ test_that("max_cliques() work", {
           } else {
             numeric()
           }
-          if (any(duplicated(PX$PX))) {
+          if (anyDuplicated(PX$PX) > 0) {
             cli::cli_abort("foo2")
           }
         }
@@ -202,7 +202,7 @@ test_that("max_cliques() work for subsets", {
   gnp <- sample_gnp(100, 0.5)
 
   mysort <- function(x) {
-    xl <- sapply(x, length)
+    xl <- lengths(x)
     x <- lapply(x, sort)
     xc <- sapply(x, paste, collapse = "-")
     x[order(xl, xc)]
@@ -257,14 +257,14 @@ test_that("ivs() works, cliques of complement", {
     },
     cliques = cliques
   )
-  expect_equal(sum(ivs_with_equivalent), length(ivs))
+  expect_length(ivs, sum(ivs_with_equivalent))
 
   cliques_with_equivalent <- map_lgl(
     cliques,
     function(element, ivs) any(map_lgl(ivs, function(x) identical(x, element))),
     ivs = ivs
   )
-  expect_equal(sum(cliques_with_equivalent), length(cliques))
+  expect_length(cliques, sum(cliques_with_equivalent))
 })
 
 test_that("largest_cliques() works", {
@@ -281,7 +281,7 @@ test_that("largest_ivs() works", {
   g <- sample_gnp(50, 0.8)
   livs <- largest_ivs(g)
   expect_equal(
-    unique(sapply(livs, length)),
+    unique(lengths(livs)),
     ivs_size(g)
   )
 
@@ -299,7 +299,7 @@ test_that("largest_cliques works", {
   expect_length(cliques(g, min = length(lc[[1]]) + 1), 0)
 
   lc_ring <- largest_cliques(make_ring(10))
-  expect_equal(max(sapply(lc_ring, length)), 2)
+  expect_equal(max(lengths(lc_ring)), 2)
 })
 
 test_that("is_clique works", {
@@ -386,7 +386,7 @@ test_that("cliques_callback receives correct arguments", {
 
   # Check argument types
   cliques(g, min = 3, max = 4, callback = function(clique) {
-    expect_true(is.integer(clique))
+    expect_type(clique, "integer")
     expect_true(length(clique) >= 3)
     expect_true(length(clique) <= 4)
     FALSE # stop after first clique

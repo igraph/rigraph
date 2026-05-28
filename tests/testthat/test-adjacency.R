@@ -37,6 +37,42 @@ test_that("is_symmetric() works for amat", {
   expect_false(is_symmetric(asym))
 })
 
+test_that("is_symmetric() ignores dimnames metadata when values are symmetric", {
+  # names(dimnames()) differ but values are symmetric.
+  m <- matrix(c(0, 1, 1, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_true(is_symmetric(m))
+
+  # rownames vs colnames differ but values are symmetric.
+  m2 <- matrix(c(0, 1, 1, 0), 2, 2,
+               dimnames = list(c("a", "b"), c("x", "y")))
+  expect_true(is_symmetric(m2))
+
+  # Sparse equivalents of the above.
+  skip_if_not_installed("Matrix")
+  expect_true(is_symmetric(as(m, "TsparseMatrix")))
+  expect_true(is_symmetric(as(m2, "TsparseMatrix")))
+})
+
+test_that("is_symmetric() still detects value asymmetry regardless of dimnames", {
+  asym <- matrix(c(0, 1, 0, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_false(is_symmetric(asym))
+
+  skip_if_not_installed("Matrix")
+  expect_false(is_symmetric(as(asym, "TsparseMatrix")))
+})
+
+test_that("graph_from_adjacency_matrix(undirected) does not warn for value-symmetric matrix with mismatched dimnames metadata", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  m <- matrix(c(0, 1, 1, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_no_warning(
+    g <- graph_from_adjacency_matrix(m, mode = "undirected")
+  )
+  expect_false(is_directed(g))
+  expect_equal(vcount(g), 2)
+  expect_equal(ecount(g), 1)
+})
+
 test_that("graph_from_adjacency_matrix() works", {
   M1 <- rbind(
     c(0, 0, 1, 1),

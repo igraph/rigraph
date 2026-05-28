@@ -184,7 +184,7 @@ test_that("sample_spanning_tree works for connected graphs", {
   g <- make_full_graph(8)
 
   edges <- sample_spanning_tree(g)
-  expect_equal(length(edges), 7)
+  expect_length(edges, 7)
 
   sg <- subgraph_from_edges(g, edges)
   expect_vcount(sg, 8)

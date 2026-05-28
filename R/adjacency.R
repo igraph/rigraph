@@ -377,14 +377,14 @@ graph_from_adjacency_matrix <- function(
 
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
-    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0))
+    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
   if (is.matrix(x)) {
-    return(isSymmetric.matrix(x, tol = 0, tol1 = 0))
+    return(isSymmetric.matrix(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
-  return(isSymmetric(x, tol = 0, tol1 = 0))
+  return(isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
 }
 
 #' @rdname graph_from_adjacency_matrix

@@ -87,8 +87,8 @@
   cat(title, "\n", sep = "")
 
   atxt <- .get.attr.codes(object)
-  atxt <- paste(atxt[atxt != ""], collapse = ", ")
-  if (atxt != "") {
+  atxt <- paste(atxt[nzchar(atxt)], collapse = ", ")
+  if (nzchar(atxt)) {
     atxt <- strwrap(
       paste(sep = "", "+ attr: ", atxt),
       prefix = "| ",
@@ -96,7 +96,7 @@
     )
     cat(atxt, sep = "\n")
   }
-  1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
+  1 + if (length(atxt) == 1 && !nzchar(atxt)) 0 else length(atxt)
 }
 
 #' @importFrom utils capture.output
@@ -413,7 +413,7 @@
   al <- as_adj_list(x, mode = "out")
   w <- nchar(max(which(degree(x, mode = "in") != 0)))
   mpl <- trunc((getOption("width") - nchar(arrow) - nchar(vc)) / (w + 1))
-  if (any(sapply(al, length) > mpl)) {
+  if (any(lengths(al) > mpl)) {
     ## Wrapping needed
     mw <- nchar(vcount(x))
     sm <- paste(collapse = "", rep(" ", mw + 4))

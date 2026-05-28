@@ -1522,7 +1522,7 @@ layout_with_fr <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1875,7 +1875,7 @@ layout_with_kk <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2867,7 +2867,7 @@ layout_with_drl <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
