@@ -303,6 +303,53 @@ test_that("is_bipartite works", {
   )
 })
 
+test_that("is_bipartite checks that type attribute is logical or convertible", {
+  g <- make_ring(4)
+
+  # No type attribute
+  expect_false(is_bipartite(g))
+
+  # Logical type
+  V(g)$type <- c(FALSE, TRUE, FALSE, TRUE)
+  expect_true(is_bipartite(g))
+
+  # Numeric 0/1 is convertible to logical
+  V(g)$type <- c(0, 1, 0, 1)
+  expect_true(is_bipartite(g))
+
+  # Character not convertible via as.logical (produces NAs)
+  V(g)$type <- c("a", "b", "a", "b")
+  expect_false(is_bipartite(g))
+
+  # NA-producing conversion
+  V(g)$type <- c(1L, 2L, 1L, NA_integer_)
+  expect_false(is_bipartite(g))
+
+  # Logical with NA
+  V(g)$type <- c(TRUE, FALSE, TRUE, NA)
+  expect_false(is_bipartite(g))
+})
+
+test_that("handle_vertex_type_arg validates and converts the type attribute", {
+  g <- make_ring(4)
+
+  V(g)$type <- c(1, 0, 1, 0)
+  expect_snapshot(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c("a", "b", "a", "b")
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c(TRUE, FALSE, TRUE, NA)
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c(1L, 2L, 1L, NA_integer_)
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  expect_snapshot_igraph_error(
+    handle_vertex_type_arg(NULL, make_ring(4), required = TRUE)
+  )
+})
+
 test_that("without_attr", {
   withr::local_seed(42)
   g_stripped <- sample_gnp(10, 2 / 10) %>%
@@ -408,6 +455,31 @@ test_that("with_edge_", {
     make_(from_literal(A - A:B:C, B - A:B:C), with_edge_(color = 1:2)),
     error = TRUE
   )
+})
+
+
+test_that("with_vertex_() / with_edge_() silently skip NULL values", {
+  # NULL attribute values are a no-op, matching i_set_vertex_attr / i_set_edge_attr.
+  g <- make_(from_literal(A - B - C), with_vertex_(foo = NULL))
+  expect_false("foo" %in% vertex_attr_names(g))
+
+  g <- make_(from_literal(A - B - C), with_edge_(foo = NULL))
+  expect_false("foo" %in% edge_attr_names(g))
+})
+
+
+test_that("with_vertex_() / with_edge_() coerce igraph.vs / igraph.es to numeric", {
+  # Storing a vertex/edge iterator as an attribute would retain a stale ref to
+  # the source graph; coerce to numeric to match i_set_vertex_attr behavior.
+  # Note: with_vertex_() captures args lazily and evaluates them in a context
+  # that only sees package-level names, so build the iterator inline.
+  g <- make_(ring(3), with_vertex_(foo = V(make_ring(5))[1:3]))
+  expect_type(V(g)$foo, "double")
+  expect_equal(V(g)$foo, c(1, 2, 3))
+
+  g <- make_(ring(3), with_edge_(foo = E(make_ring(5))[1:3]))
+  expect_type(E(g)$foo, "double")
+  expect_equal(E(g)$foo, c(1, 2, 3))
 })
 
 

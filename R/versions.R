@@ -162,17 +162,6 @@ warn_version <- function(graph) {
   )
 }
 
-oldpredecessors <- function() {
-  c(
-    "1.5.0" = "1.4.3",
-    "1.0.0" = "0.7.1",
-    "0.6" = "0.5.5-4",
-    "0.5" = "0.4.5",
-    "0.2" = "0.1.2",
-    "0.1.1" = NA
-  )
-}
-
 oldsamples <- function() {
   list(
     "1.5.0" = oldsample_1_5_0(),

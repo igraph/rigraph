@@ -844,19 +844,9 @@ graph.atlas <- function(n) {
 .apply_modifiers <- function(graph, mods, call = rlang::caller_env()) {
   for (m in mods) {
     if (m$id == "without_attr") {
-      ## TODO: speed this up
-      ga <- graph_attr_names(graph)
-      va <- vertex_attr_names(graph)
-      ea <- edge_attr_names(graph)
-      for (g in ga) {
-        graph <- delete_graph_attr(graph, g)
-      }
-      for (v in va) {
-        graph <- delete_vertex_attr(graph, v)
-      }
-      for (e in ea) {
-        graph <- delete_edge_attr(graph, e)
-      }
+      graph.attributes(graph) <- structure(list(), names = character(0))
+      vertex.attributes(graph) <- structure(list(), names = character(0))
+      edge.attributes(graph) <- structure(list(), names = character(0))
     } else if (m$id == "without_loops") {
       graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
     } else if (m$id == "without_multiples") {
@@ -865,31 +855,58 @@ graph.atlas <- function(n) {
       graph <- simplify(graph)
     } else if (m$id == "with_vertex_") {
       m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(!is.null(n))
-        graph <- i_set_vertex_attr(graph, n, value = v, call = call)
+      stopifnot(!is.null(names(m$args)))
+      vattrs <- vertex.attributes(graph)
+      n <- vcount(graph)
+      for (nm in names(m$args)) {
+        v <- m$args[[nm]]
+        if (is.null(v)) {
+          next
+        }
+        if (inherits(v, c("igraph.vs", "igraph.es"))) {
+          v <- as.numeric(v)
+        }
+        if (length(v) == 1) {
+          vattrs[[nm]] <- rep(unname(v), n)
+        } else if (length(v) == n) {
+          vattrs[[nm]] <- unname(v)
+        } else {
+          cli::cli_abort(
+            "Length of new attribute value must be 1 or {n}, the number of target vertices, not {length(v)}.",
+            call = call
+          )
+        }
       }
+      vertex.attributes(graph) <- vattrs
     } else if (m$id == "with_edge_") {
       m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(!is.null(n))
-        graph <- i_set_edge_attr(graph, n, value = v, call = call)
+      stopifnot(!is.null(names(m$args)))
+      eattrs <- edge.attributes(graph)
+      n <- ecount(graph)
+      for (nm in names(m$args)) {
+        v <- m$args[[nm]]
+        if (is.null(v)) {
+          next
+        }
+        if (inherits(v, c("igraph.vs", "igraph.es"))) {
+          v <- as.numeric(v)
+        }
+        if (length(v) == 1) {
+          eattrs[[nm]] <- rep(unname(v), n)
+        } else if (length(v) == n) {
+          eattrs[[nm]] <- unname(v)
+        } else {
+          cli::cli_abort(
+            "Length of new attribute value must be 1 or {n}, the number of target edges, not {length(v)}.",
+            call = call
+          )
+        }
       }
+      edge.attributes(graph) <- eattrs
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(!is.null(n))
-        graph <- set_graph_attr(graph, n, value = v)
-      }
+      stopifnot(!is.null(names(m$args)))
+      graph.attributes(graph) <- modify_list(graph.attributes(graph), m$args)
     }
   }
 

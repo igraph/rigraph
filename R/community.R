@@ -1241,15 +1241,44 @@ cut_at <- function(communities, no, steps) {
     cli::cli_abort("Please use either {.arg no} or {.arg steps} (but not both)")
   }
 
+  mm <- merges(communities)
+
+  # The leading eigenvector algorithm uses a different merges format:
+  # merges operate on communities rather than vertices, so we need the
+  # dedicated igraph_le_community_to_membership function.
+  if (isTRUE(communities$algorithm == "leading eigenvector")) {
+    n_initial <- max(communities$membership)
+    if (!missing(steps)) {
+      if (steps > nrow(mm)) {
+        cli::cli_warn("Cannot make that many steps.")
+        steps <- nrow(mm)
+      }
+    } else {
+      min_communities <- n_initial - nrow(mm) # minimum number of communities after all merges
+      if (no > n_initial) {
+        cli::cli_warn("Cannot have that many communities.")
+        no <- n_initial
+      } else if (no < min_communities) {
+        cli::cli_warn("Cannot have that few communities.")
+        no <- min_communities
+      }
+      steps <- n_initial - no
+    }
+    res <- le_community_to_membership_impl(
+      merges = mm - 1L,
+      steps = steps,
+      membership = communities$membership - 1L
+    )
+    return(res$membership + 1L)
+  }
+
   if (!missing(steps)) {
-    mm <- merges(communities)
     if (steps > nrow(mm)) {
       cli::cli_warn("Cannot make that many steps.")
       steps <- nrow(mm)
     }
     community.to.membership2(mm, communities$vcount, steps)
   } else {
-    mm <- merges(communities)
     noc <- communities$vcount - nrow(mm) # final number of communities
     if (no < noc) {
       cli::cli_warn("Cannot have that few communities.")
