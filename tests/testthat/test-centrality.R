@@ -468,7 +468,7 @@ test_that("power_centrality() works", {
   )
 
   g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-  bp.c <- lapply(seq(-.5, .5, by = 0.1), function(x) {
+  bp.c <- lapply(seq(-0.5, 0.5, by = 0.1), function(x) {
     round(power_centrality(g.c, exponent = x), 2)[c(1, 2, 4)]
   })
 
@@ -490,7 +490,7 @@ test_that("power_centrality() works", {
   )
 
   g.d <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
-  bp.d <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.d <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.d, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(
@@ -509,7 +509,7 @@ test_that("power_centrality() works", {
   )
 
   g.e <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
-  bp.e <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.e <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.e, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(
@@ -530,7 +530,7 @@ test_that("power_centrality() works", {
   g.f <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13),
     dir = FALSE
   )
-  bp.f <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.f <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.f, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(

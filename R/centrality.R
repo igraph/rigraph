@@ -1913,19 +1913,19 @@ bonpow.sparse <- function(
 #'   dir = FALSE
 #' )
 #' # Compute power centrality scores
-#' for (e in seq(-0.5, .5, by = 0.1)) {
+#' for (e in seq(-0.5, 0.5, by = 0.1)) {
 #'   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'

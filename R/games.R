@@ -2443,7 +2443,7 @@ cit_cit_types <- function(
 #' sample_bipartite(10, 5, p = 1)
 #'
 #' ## random bipartite graph
-#' sample_bipartite(10, 5, p = .1)
+#' sample_bipartite(10, 5, p = 0.1)
 #'
 #' ## directed bipartite graph, G(n,m)
 #' sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
@@ -2581,7 +2581,7 @@ bipartite_gnp <- function(
 #' sample_bipartite_gnp(10, 5, p = 1)
 #'
 #' ## random bipartite graph
-#' sample_bipartite_gnp(10, 5, p = .1)
+#' sample_bipartite_gnp(10, 5, p = 0.1)
 #'
 #' ## directed bipartite graph, G(n,m)
 #' sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
@@ -2673,7 +2673,7 @@ sample_bipartite_gnp <- function(
 #' @examples
 #'
 #' ## Two groups with not only few connection between groups
-#' pm <- cbind(c(.1, .001), c(.001, .05))
+#' pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
 #' g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 #' g
 #' @family games
@@ -3412,7 +3412,7 @@ sample_forestfire <- function(
 #' @family games
 #' @export
 #' @examples
-#' g <- sample_gnp(1000, .1)
+#' g <- sample_gnp(1000, 0.1)
 #' g2 <- sample_correlated_gnp(g, corr = 0.5)
 #' cor(as.vector(g[]), as.vector(g2[]))
 #' g
@@ -3461,7 +3461,7 @@ sample_correlated_gnp <- function(
 #' @export
 #' @examples
 #' gg <- sample_correlated_gnp_pair(
-#'   n = 10, corr = .8, p = .5,
+#'   n = 10, corr = 0.8, p = 0.5,
 #'   directed = FALSE
 #' )
 #' gg
