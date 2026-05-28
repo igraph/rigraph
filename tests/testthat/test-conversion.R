@@ -183,7 +183,11 @@ test_that("as_adjacency_matrix() works -- dense", {
   expect_equal(basic_adj_matrix, unname(letter_adj_matrix))
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  weight_adj_matrix <- as_adjacency_matrix(
+    g,
+    weights = "weight",
+    sparse = FALSE
+  )
   expect_equal(
     weight_adj_matrix,
     matrix(
@@ -222,7 +226,11 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
   )
 
   E(ug)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE, weights = "weight")
+  weight_adj_matrix <- as_adjacency_matrix(
+    ug,
+    sparse = FALSE,
+    weights = "weight"
+  )
   dimnames(weight_adj_matrix) <- NULL
   expect_equal(
     weight_adj_matrix,
@@ -859,7 +867,11 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   # Directed, weighted, sparse
   g_dir_wt <- g_dir_unwt
   E(g_dir_wt)$weight <- c(1.5, 2.3, 3.7, 0.5)
-  expect_snapshot(as_adjacency_matrix(g_dir_wt, weights = "weight", sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    sparse = TRUE
+  ))
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
     weights = "weight",

@@ -1949,11 +1949,23 @@ power_centrality <- function(
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- bonpow.sparse(
-      graph, nodes, loops, exponent, rescale, tol, weights = weights
+      graph,
+      nodes,
+      loops,
+      exponent,
+      rescale,
+      tol,
+      weights = weights
     )
   } else {
     res <- bonpow.dense(
-      graph, nodes, loops, exponent, rescale, tol, weights = weights
+      graph,
+      nodes,
+      loops,
+      exponent,
+      rescale,
+      tol,
+      weights = weights
     )
   }
 
