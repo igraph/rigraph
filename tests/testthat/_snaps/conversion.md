@@ -34,7 +34,8 @@
       as_adjacency_matrix(g, weights = "bla")
     Condition
       Error in `as_adjacency_matrix()`:
-      ! Matrices must be either numeric or logical, and the edge attribute is not
+      ! The "bla" edge attribute must be numeric or logical.
+      i Pass `weights = NA` to ignore it.
 
 # as_adjacency_matrix() errors well -- dense
 
@@ -50,7 +51,8 @@
       as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
     Condition
       Error in `as_adjacency_matrix()`:
-      ! Matrices must be either numeric or logical, and the edge attribute is not
+      ! The "bla" edge attribute must be numeric or logical.
+      i Pass `weights = NA` to ignore it.
 
 # as_adjacency_matrix() errors on wrong-length weights vector
 
