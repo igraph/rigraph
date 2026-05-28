@@ -324,6 +324,30 @@ test_that("is_bipartite checks that type attribute is logical or convertible", {
   # NA-producing conversion
   V(g)$type <- c(1L, 2L, 1L, NA_integer_)
   expect_false(is_bipartite(g))
+
+  # Logical with NA
+  V(g)$type <- c(TRUE, FALSE, TRUE, NA)
+  expect_false(is_bipartite(g))
+})
+
+test_that("handle_vertex_type_arg validates and converts the type attribute", {
+  g <- make_ring(4)
+
+  V(g)$type <- c(1, 0, 1, 0)
+  expect_snapshot(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c("a", "b", "a", "b")
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c(TRUE, FALSE, TRUE, NA)
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  V(g)$type <- c(1L, 2L, 1L, NA_integer_)
+  expect_snapshot_igraph_error(handle_vertex_type_arg(NULL, g))
+
+  expect_snapshot_igraph_error(
+    handle_vertex_type_arg(NULL, make_ring(4), required = TRUE)
+  )
 })
 
 test_that("without_attr", {

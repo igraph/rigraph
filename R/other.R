@@ -153,7 +153,7 @@ sample_seq <- function(low, high, length) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @dev
 #'
-handle_vertex_type_arg <- function(types, graph, required = T) {
+handle_vertex_type_arg <- function(types, graph, required = TRUE) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
     types <- V(graph)$type
   }
@@ -162,8 +162,7 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
       converted <- suppressWarnings(as.logical(types))
       if (anyNA(converted)) {
         cli::cli_abort(
-          "The {.arg type} vertex attribute is not logical and could not be \\
-           converted to logical. Please set it to a logical vector."
+          "The {.arg type} vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector."
         )
       }
       cli::cli_warn(

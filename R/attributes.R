@@ -1282,7 +1282,10 @@ is_bipartite <- function(graph) {
     return(FALSE)
   }
   type_vals <- vertex_attr(graph, "type")
-  is.logical(type_vals) || !anyNA(as.logical(type_vals))
+  if (is.logical(type_vals)) {
+    return(!anyNA(type_vals))
+  }
+  !anyNA(suppressWarnings(as.logical(type_vals)))
 }
 
 #############
