@@ -1,6 +1,6 @@
 sortgl <- function(x) {
   cl <- lapply(x$cliques, sort)
-  n <- sapply(cl, length)
+  n <- lengths(cl)
   list(cliques = cl[order(n)], thresholds = x$thresholds[order(n)])
 }
 
@@ -55,7 +55,7 @@ threshold.net <- function(graph, level) {
 
   clqt <- unvs(max_cliques(graph.t))
   clqt <- lapply(clqt, sort)
-  clqt[order(sapply(clqt, length), decreasing = TRUE)]
+  clqt[order(lengths(clqt), decreasing = TRUE)]
 }
 
 graphlets.old <- function(graph) {
@@ -81,7 +81,7 @@ graphlets.old <- function(graph) {
   clu <- unique(cls)
 
   ## Delete cliques that consist of single vertices
-  clf <- clu[sapply(clu, length) != 1]
+  clf <- clu[lengths(clu) != 1]
 
   clf
 }
