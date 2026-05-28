@@ -11,7 +11,8 @@ power_centrality(
   exponent = 1,
   rescale = FALSE,
   tol = 1e-07,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 )
 }
 \arguments{
@@ -36,6 +37,12 @@ score; can be negative}
 \item{sparse}{Logical scalar, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
+
+\item{weights}{Edge weights to use, following the standard rigraph weight
+convention. \code{NULL} (default) uses the graph's \code{weight} edge attribute if
+present; \code{NA} forces an unweighted calculation; a numeric vector of length
+\code{\link[=ecount]{ecount()}} is used directly; a character scalar names an edge attribute to
+use.}
 }
 \value{
 A vector, containing the centrality scores.
@@ -103,7 +110,7 @@ fixed when we get a better algorithm.
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
@@ -117,19 +124,19 @@ g.f <- make_graph(
   dir = FALSE
 )
 # Compute power centrality scores
-for (e in seq(-0.5, .5, by = 0.1)) {
+for (e in seq(-0.5, 0.5, by = 0.1)) {
   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 }
 
