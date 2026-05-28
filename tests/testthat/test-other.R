@@ -167,6 +167,6 @@ test_that("VS/ES work with old data type", {
   karate2 <- upgrade_graph(karate)
   vs2 <- V(karate2)
 
-  expect_equal(length(vs2), 34)
+  expect_length(vs2, 34)
   expect_equal(vs2$name, names)
 })

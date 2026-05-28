@@ -458,10 +458,10 @@ plot.igraph <- function(
         c(
           x0,
           y0,
-          x0 + .4 * loopSize,
-          y0 + narrowing * .2 * loopSize,
-          x0 + .4 * loopSize,
-          y0 - narrowing * .2 * loopSize,
+          x0 + 0.4 * loopSize,
+          y0 + narrowing * 0.2 * loopSize,
+          x0 + 0.4 * loopSize,
+          y0 - narrowing * 0.2 * loopSize,
           x0,
           y0
         ),
@@ -1700,7 +1700,7 @@ rglplot.igraph <- function(x, ...) {
   rgl::text3d(x, y, z, labels, col = label.color, adj = 0)
 
   edge.labels[is.na(edge.labels)] <- ""
-  if (any(edge.labels != "")) {
+  if (any(nzchar(edge.labels))) {
     x0 <- layout[, 1][el[, 1]]
     x1 <- layout[, 1][el[, 2]]
     y0 <- layout[, 2][el[, 1]]

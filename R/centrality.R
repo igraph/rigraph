@@ -967,7 +967,7 @@ arpack <- function(
   }
 
   defaults <- arpack_defaults()
-  if (any(!names(options) %in% names(defaults))) {
+  if (!all(names(options) %in% names(defaults))) {
     unknown_options <- setdiff(names(options), names(defaults))
     cli::cli_abort(
       "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}:
@@ -1007,7 +1007,7 @@ arpack <- function(
       }
       res$values <- res$values[, 1]
     }
-    res$vectors <- res$vectors[, 1:length(res$values)]
+    res$vectors <- res$vectors[, seq_along(res$values)]
   }
 
   res
@@ -1773,7 +1773,7 @@ bonpow.dense <- function(
   diag(id) <- 1
 
   #  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
-  ev <- solve(id - exponent * d, tol = tol) %*% apply(d, 1, sum)
+  ev <- solve(id - exponent * d, tol = tol) %*% rowSums(d)
   if (rescale) {
     ev <- ev / sum(ev)
   } else {
@@ -1913,19 +1913,19 @@ bonpow.sparse <- function(
 #'   dir = FALSE
 #' )
 #' # Compute power centrality scores
-#' for (e in seq(-0.5, .5, by = 0.1)) {
+#' for (e in seq(-0.5, 0.5, by = 0.1)) {
 #'   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
@@ -1975,7 +1975,7 @@ alpha.centrality.dense <- function(
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- weights
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
@@ -2022,7 +2022,7 @@ alpha.centrality.sparse <- function(
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- weights
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"

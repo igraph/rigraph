@@ -345,23 +345,23 @@ test_that("layout normalization handles all-NaN coordinates correctly", {
 
   # Test normal case
   normal_coords <- c(1, 2, 3, 4, 5)
-  normalized <- igraph:::.layout.norm.col(normal_coords, 0, 1)
+  normalized <- .layout.norm.col(normal_coords, 0, 1)
   expect_equal(range(normalized), c(0, 1))
 
   # Test all-NaN case (this was the bug that was fixed)
   nan_coords <- rep(NaN, 5)
-  normalized_nan <- igraph:::.layout.norm.col(nan_coords, 0, 1)
+  normalized_nan <- .layout.norm.col(nan_coords, 0, 1)
   expected_middle <- rep(0.5, 5) # Should return middle value (0+1)/2 = 0.5
   expect_equal(normalized_nan, expected_middle)
 
   # Test all-NaN case with different range
-  normalized_nan_range <- igraph:::.layout.norm.col(nan_coords, -10, 10)
+  normalized_nan_range <- .layout.norm.col(nan_coords, -10, 10)
   expected_middle_range <- rep(0, 5) # Should return middle value (-10+10)/2 = 0
   expect_equal(normalized_nan_range, expected_middle_range)
 
   # Test constant values (difference is zero)
   constant_coords <- rep(5, 5)
-  normalized_constant <- igraph:::.layout.norm.col(constant_coords, 0, 1)
+  normalized_constant <- .layout.norm.col(constant_coords, 0, 1)
   expected_constant_middle <- rep(0.5, 5)
   expect_equal(normalized_constant, expected_constant_middle)
 

@@ -428,7 +428,7 @@ print.cohesiveBlocks <- function(x, ...) {
   myb <- blocks(x)
   ch <- cohesion(x)
   pp <- parent(x)
-  si <- sapply(myb, length)
+  si <- lengths(myb)
 
   cs <- 3 +
     2 +
