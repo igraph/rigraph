@@ -1,5 +1,6 @@
 # https://usethis.r-lib.org/reference/use_release_issue.html#customization
 # https://github.com/igraph/rigraph/issues/1976
+# jarl-ignore unused_function: used for releases
 release_bullets <- function() {
   c(
     "`allcontributors::add_contributors()` to update allcontributors' data in the README.",
