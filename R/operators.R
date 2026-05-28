@@ -261,7 +261,7 @@ disjoint_union <- function(...) {
   }
   vertex.attributes(res) <- attr
 
-  if ("name" %in% names(attr) && any(duplicated(attr$name))) {
+  if ("name" %in% names(attr) && anyDuplicated(attr$name) > 0) {
     cli::cli_warn("Duplicate vertex names in disjoint union.")
   }
 
@@ -690,7 +690,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
       snames <- V(small)$name
     }
     perm <- match(bnames, snames)
-    if (any(is.na(perm))) {
+    if (anyNA(perm)) {
       perm[is.na(perm)] <- seq(from = vcount(small) + 1, to = vcount(big))
     }
     big <- permute(big, perm)
@@ -969,7 +969,7 @@ vertex <- function(...) {
 
   # Check for duplicate named arguments
   if (!is.null(arg_names)) {
-    named_args <- arg_names[arg_names != ""]
+    named_args <- arg_names[nzchar(arg_names)]
     if (anyDuplicated(named_args)) {
       duplicates <- unique(named_args[duplicated(named_args)])
       cli::cli_abort(
@@ -1142,8 +1142,8 @@ path <- function(...) {
       toadd <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2) == ""])
-      attr <- e2[names(e2) != ""]
+      toadd <- unlist(e2[!nzchar(names(e2))])
+      attr <- e2[nzchar(names(e2))]
     }
     res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
   } else if ("igraph.vertex" %in% class(e2)) {
@@ -1167,8 +1167,8 @@ path <- function(...) {
       to_add <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      to_add <- unlist(e2[names(e2) == ""])
-      attr <- e2[names(e2) != ""]
+      to_add <- unlist(e2[!nzchar(names(e2))])
+      attr <- e2[nzchar(names(e2))]
     }
     to_add <- as_igraph_vs(e1, to_add)
     lt <- length(to_add)

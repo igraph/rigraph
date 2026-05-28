@@ -158,7 +158,7 @@ test_that("max_cliques() work", {
           } else {
             numeric()
           }
-          if (any(duplicated(PX$PX))) {
+          if (anyDuplicated(PX$PX) > 0) {
             cli::cli_abort("foo2")
           }
         }
