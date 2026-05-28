@@ -16,7 +16,7 @@ with_vertex_(...)
 
 ## See also
 
-Constructor modifiers (and related functions)
+Constructor modifiers (and related functions):
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),

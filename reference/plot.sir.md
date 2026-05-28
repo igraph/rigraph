@@ -115,7 +115,7 @@ diseases and its applications (2nd ed.). London: Griffin.
 [`sir()`](https://r.igraph.org/reference/sir.md) for running the actual
 simulation.
 
-Processes on graphs
+Processes on graphs:
 [`time_bins()`](https://r.igraph.org/reference/sir.md)
 
 ## Author

@@ -10,7 +10,7 @@ simplified()
 
 ## See also
 
-Constructor modifiers (and related functions)
+Constructor modifiers (and related functions):
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`with_edge_()`](https://r.igraph.org/reference/with_edge_.md),
@@ -24,18 +24,18 @@ Constructor modifiers (and related functions)
 
 ``` r
 sample_(pa(10, m = 3, algorithm = "bag"))
-#> IGRAPH 7f58445 D--- 10 27 -- Barabasi graph
+#> IGRAPH 3bea743 D--- 10 27 -- Barabasi graph
 #> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
 #> | (g/c)
-#> + edges from 7f58445:
+#> + edges from 3bea743:
 #>  [1]  2->1  2->1  2->1  3->1  3->1  3->2  4->1  4->1  4->1  5->1  5->1  5->1
 #> [13]  6->1  6->1  6->2  7->1  7->1  7->1  8->2  8->1  8->1  9->1  9->6  9->2
 #> [25] 10->2 10->8 10->1
 sample_(pa(10, m = 3, algorithm = "bag"), simplified())
-#> IGRAPH 3bc934b D--- 10 13 -- Barabasi graph
+#> IGRAPH 1e3d87f D--- 10 13 -- Barabasi graph
 #> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm
 #> | (g/c)
-#> + edges from 3bc934b:
+#> + edges from 1e3d87f:
 #>  [1]  2->1  3->1  3->2  4->1  4->2  5->1  5->4  6->1  7->1  8->1  8->2  9->1
 #> [13] 10->1
 ```

@@ -99,7 +99,7 @@ for eigenvector centrality,
 Page Rank scores. [`arpack()`](https://r.igraph.org/reference/arpack.md)
 for the underlining machinery of the computation.
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),
@@ -120,7 +120,7 @@ Centrality measures
 g <- make_star(10)
 hits_scores(g)
 #> $hub
-#>  [1] 2.602085e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
+#>  [1] 3.118782e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #>  [6] 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #> 
 #> $authority
@@ -265,7 +265,7 @@ hits_scores(g2)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 6
+#> [1] 4
 #> 
 #> 
 ```

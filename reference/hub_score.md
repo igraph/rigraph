@@ -52,7 +52,7 @@ hub_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 
 ## See also
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),
 [`closeness()`](https://r.igraph.org/reference/closeness.md),

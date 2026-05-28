@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Set all or some graph attributes</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.2/R/attributes.R" class="external-link"><code>R/attributes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/attributes.R" class="external-link"><code>R/attributes.R</code></a></small>
       <div class="d-none name"><code>graph_attr-set.Rd</code></div>
     </div>
 
@@ -82,12 +82,12 @@ are set as attributes.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Vertex, edge and graph attributes
+    <div class="dont-index"><p>Vertex, edge and graph attributes:
 <code><a href="delete_edge_attr.html">delete_edge_attr()</a></code>,
 <code><a href="delete_graph_attr.html">delete_graph_attr()</a></code>,
 <code><a href="delete_vertex_attr.html">delete_vertex_attr()</a></code>,
 <code><a href="edge_attr.html">edge_attr()</a></code>,
-<code>edge_attr&lt;-()</code>,
+<code><a href="edge_attr-set.html">edge_attr&lt;-()</a></code>,
 <code><a href="edge_attr_names.html">edge_attr_names()</a></code>,
 <code><a href="graph_attr.html">graph_attr()</a></code>,
 <code><a href="graph_attr_names.html">graph_attr_names()</a></code>,
@@ -99,7 +99,7 @@ are set as attributes.</p></dd>
 <code><a href="set_vertex_attr.html">set_vertex_attr()</a></code>,
 <code><a href="set_vertex_attrs.html">set_vertex_attrs()</a></code>,
 <code><a href="vertex_attr.html">vertex_attr()</a></code>,
-<code>vertex_attr&lt;-()</code>,
+<code><a href="vertex_attr-set.html">vertex_attr&lt;-()</a></code>,
 <code><a href="vertex_attr_names.html">vertex_attr_names()</a></code></p></div>
     </div>
 
@@ -108,9 +108,9 @@ are set as attributes.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="va">A</span> <span class="op">-</span> <span class="va">B</span><span class="op">:</span><span class="va">C</span><span class="op">:</span><span class="va">D</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"name"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"4-star"</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a9ff6fe UN-- 4 3 -- 4-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f2a4a79 UN-- 4 3 -- 4-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a9ff6fe (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f2a4a79 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A--B A--C A--D</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>

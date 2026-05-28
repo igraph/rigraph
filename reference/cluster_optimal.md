@@ -93,7 +93,7 @@ See also
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md)
 for a fast greedy optimizer.
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

@@ -10,7 +10,7 @@ without_attr()
 
 ## See also
 
-Constructor modifiers (and related functions)
+Constructor modifiers (and related functions):
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
@@ -25,14 +25,14 @@ Constructor modifiers (and related functions)
 ``` r
 g1 <- make_ring(10)
 g1
-#> IGRAPH c53b87a U--- 10 10 -- Ring graph
+#> IGRAPH fde1d80 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from c53b87a:
+#> + edges from fde1d80:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 g2 <- make_(ring(10), without_attr())
 g2
-#> IGRAPH add7eb4 U--- 10 10 -- 
-#> + edges from add7eb4:
+#> IGRAPH 6d271ac U--- 10 10 -- 
+#> + edges from 6d271ac:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 ```

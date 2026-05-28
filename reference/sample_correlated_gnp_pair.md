@@ -57,7 +57,7 @@ matching for correlated Erdős-Rényi graphs.
 
 ## See also
 
-Random graph models (games)
+Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
@@ -94,14 +94,14 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> IGRAPH 2b816fe U--- 10 22 -- 
-#> + edges from 2b816fe:
+#> IGRAPH 8974d7b U--- 10 22 -- 
+#> + edges from 8974d7b:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 4-- 5 1-- 6 3-- 6 5-- 6 1-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 3-- 8 1-- 9 2-- 9 5-- 9 7-- 9 8-- 9 2--10 3--10 8--10 9--10
 #> 
 #> $graph2
-#> IGRAPH 5ebcdb2 U--- 10 20 -- 
-#> + edges from 5ebcdb2:
+#> IGRAPH 2254c7e U--- 10 20 -- 
+#> + edges from 2254c7e:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 3-- 6 4-- 6 5-- 6 3-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 6-- 8 1-- 9 2-- 9 5-- 9 8-- 9 3--10 8--10 9--10
 #> 
