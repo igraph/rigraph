@@ -11,8 +11,7 @@ power_centrality(
   exponent = 1,
   rescale = FALSE,
   tol = 1e-07,
-  sparse = TRUE,
-  weights = NULL
+  sparse = TRUE
 )
 }
 \arguments{
@@ -37,12 +36,6 @@ score; can be negative}
 \item{sparse}{Logical scalar, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
-
-\item{weights}{Edge weights to use, following the standard rigraph weight
-convention. \code{NULL} (default) uses the graph's \code{weight} edge attribute if
-present; \code{NA} forces an unweighted calculation; a numeric vector of length
-\code{\link[=ecount]{ecount()}} is used directly; a character scalar names an edge attribute to
-use.}
 }
 \value{
 A vector, containing the centrality scores.

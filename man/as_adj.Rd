@@ -7,8 +7,7 @@
 as_adj(
   graph,
   type = c("both", "upper", "lower"),
-  weights = NULL,
-  attr = deprecated(),
+  attr = NULL,
   edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
@@ -23,22 +22,18 @@ right triangle of the matrix is used, \code{lower}: the lower left triangle
 of the matrix is used. \code{both}: the whole matrix is used, a symmetric
 matrix is returned.}
 
-\item{weights}{One of the following:
-\itemize{
-\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
-one, otherwise return a traditional (unweighted) adjacency matrix.
-\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
-\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
-directly as edge weights.
-\item A character scalar: the name of an edge attribute whose values are
-used as weights. The attribute must be numeric or logical.
-}
-If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.}
+\item{attr}{Either \code{NULL} or a character string giving an edge
+attribute name. If \code{NULL} a traditional adjacency matrix is returned.
+If not \code{NULL} then the values of the given edge attribute are included
+in the adjacency matrix. If the graph has multiple edges, the edge attribute
+of an arbitrarily chosen edge (for the multiple edges) is included. This
+argument is ignored if \code{edges} is \code{TRUE}.
 
-\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
-supplied, the value is forwarded to \code{weights} as a character edge
-attribute name.}
+Note that this works only for certain attribute types. If the \code{sparse}
+argumen is \code{TRUE}, then the attribute must be either logical or
+numeric. If the \code{sparse} argument is \code{FALSE}, then character is
+also allowed. The reason for the difference is that the \code{Matrix}
+package does not support character sparse matrices yet.}
 
 \item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
 For non-existant edges zero is returned.}
