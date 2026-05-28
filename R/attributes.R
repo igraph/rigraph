@@ -529,6 +529,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
   call <- rlang::current_env()
   check_string(name)
+
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(
       graph = graph,
@@ -537,16 +538,15 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
       check = FALSE,
       call = call
     ))
-  } else {
-    return(i_set_vertex_attr(
-      graph = graph,
-      name = name,
-      index = index,
-      value = value,
-      call = call
-    ))
   }
-  graph
+
+  i_set_vertex_attr(
+    graph = graph,
+    name = name,
+    index = index,
+    value = value,
+    call = call
+  )
 }
 
 #' Set multiple vertex attributes
@@ -962,13 +962,13 @@ edge.attributes <- function(graph, index = E(graph)) {
     value <- as.list(value)
   }
 
-  if (any(sapply(value, length) != length(index))) {
+  if (any(lengths(value) != length(index))) {
     cli::cli_abort("Invalid attribute value length, must match number of edges")
   }
 
   if (!missing(index)) {
     index <- as_igraph_es(graph, index)
-    if (any(duplicated(index)) || any(is.na(index))) {
+    if (anyDuplicated(index) > 0 || anyNA(index)) {
       cli::cli_abort("{.arg index} contains duplicated edges or NAs.")
     }
   }
@@ -1293,11 +1293,9 @@ igraph.i.attribute.combination <- function(comb) {
   }
   comb <- as.list(comb)
   if (
-    any(
-      !sapply(comb, function(x) {
-        is.function(x) || (is.character(x) && length(x) == 1)
-      })
-    )
+    !all(sapply(comb, function(x) {
+      is.function(x) || (is.character(x) && length(x) == 1)
+    }))
   ) {
     cli::cli_abort(
       "Attribute combination element must be a function or character scalar."
@@ -1306,7 +1304,7 @@ igraph.i.attribute.combination <- function(comb) {
   if (is.null(names(comb))) {
     names(comb) <- rep("", length(comb))
   }
-  if (any(duplicated(names(comb)))) {
+  if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
   comb <- lapply(comb, function(x) {

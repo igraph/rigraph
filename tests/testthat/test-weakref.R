@@ -4,7 +4,7 @@ test_that("we can create weak references", {
   value <- "foobar"
   vs <- make_weak_ref(key = g, value = value)
 
-  expect_identical(typeof(vs), "weakref")
+  expect_type(vs, "weakref")
   expect_identical(weak_ref_key(vs), g)
   expect_identical(weak_ref_value(vs), value)
 })
@@ -85,8 +85,8 @@ test_that("embed myself, and weak ref as attribute", {
 test_that("weak refs work for vs", {
   g <- make_ring(10)
   vs <- V(g)
-  expect_true(!is.null(get_vs_ref(g)))
-  expect_true(!is.null(weak_ref_key(attr(vs, "env"))))
+  expect_false(is.null(get_vs_ref(g)))
+  expect_false(is.null(weak_ref_key(attr(vs, "env"))))
 
   rm(g)
   gc()

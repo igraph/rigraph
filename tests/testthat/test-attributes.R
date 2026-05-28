@@ -354,7 +354,7 @@ test_that("without_loops", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_loop(g2)))
+  expect_all_false(which_loop(g2))
 })
 
 
@@ -368,7 +368,7 @@ test_that("without_multiple", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_multiple(g2)))
+  expect_all_false(which_multiple(g2))
 })
 
 
@@ -381,8 +381,8 @@ test_that("simplified", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_multiple(g2)))
-  expect_true(all(!which_loop(g2)))
+  expect_true(!any(which_multiple(g2)))
+  expect_true(!any(which_loop(g2)))
 })
 
 

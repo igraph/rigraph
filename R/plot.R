@@ -1700,7 +1700,7 @@ rglplot.igraph <- function(x, ...) {
   rgl::text3d(x, y, z, labels, col = label.color, adj = 0)
 
   edge.labels[is.na(edge.labels)] <- ""
-  if (any(edge.labels != "")) {
+  if (any(nzchar(edge.labels))) {
     x0 <- layout[, 1][el[, 1]]
     x1 <- layout[, 1][el[, 2]]
     y0 <- layout[, 2][el[, 1]]

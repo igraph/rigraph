@@ -17,9 +17,9 @@ test_that("is_chordal works", {
   )
 
   ic <- is_chordal(g1, fillin = TRUE)
-  expect_equal(ic$chordal, FALSE)
+  expect_false(ic$chordal)
   expect_equal(unique(sort(ic$fillin)), c(1, 2, 5, 6, 7, 8))
-  expect_equal(ic$newgraph, NULL)
+  expect_null(ic$newgraph)
 
   g2 <- graph_from_literal(
     A - B:E, B - A:E:F:D, C - E:D:G, D - B:F:E:C:G,

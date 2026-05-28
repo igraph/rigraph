@@ -1096,7 +1096,7 @@ tk_canvas <- function(tkp.id) {
     function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
     edgematrix[, 1],
     edgematrix[, 2],
-    1:nrow(edgematrix)
+    seq_len(nrow(edgematrix))
   )
 }
 
@@ -1765,7 +1765,7 @@ tk_canvas <- function(tkp.id) {
         pady = 5
       )
       values[[i]] <- tcltk::tclVar(layout$params[[i]]$default)
-      for (j in 1:length(layout$params[[i]]$values)) {
+      for (j in seq_along(layout$params[[i]]$values)) {
         tmp <- tcltk::tkradiobutton(
           tmp.frame,
           variable = values[[i]],
@@ -1871,11 +1871,9 @@ tk_canvas <- function(tkp.id) {
     col <- col %% length(p)
     col[col == 0] <- length(p)
     col <- palette()[col]
-  } else if (
-    is.character(col) && any(substr(col, 1, 1) == "#" & nchar(col) == 9)
-  ) {
+  } else if (is.character(col) && any(startsWith(col, "#") & nchar(col) == 9)) {
     ## drop alpha channel, tcltk doesn't support it
-    idx <- substr(col, 1, 1) == "#" & nchar(col) == 9
+    idx <- startsWith(col, "#") & nchar(col) == 9
     col[idx] <- substr(col[idx], 1, 7)
   }
 
