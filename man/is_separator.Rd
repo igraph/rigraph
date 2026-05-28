@@ -39,16 +39,16 @@ is_separator(ring, c(2, 3))
 
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}

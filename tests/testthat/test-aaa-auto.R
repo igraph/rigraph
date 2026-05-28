@@ -10890,11 +10890,11 @@ test_that("community_leading_eigenvector_callback_closure_impl basic", {
 
   # Structured tests
   expect_s3_class(result, "igraph.eigenc")
-  expect_true(is.list(result))
+  expect_type(result, "list")
   expect_true("membership" %in% names(result))
   expect_true("modularity" %in% names(result))
   expect_true("merges" %in% names(result))
-  expect_equal(length(result$membership), vcount(g))
+  expect_length(result$membership, vcount(g))
   expect_true(is.numeric(result$modularity))
 })
 
@@ -10921,7 +10921,7 @@ test_that("community_leading_eigenvector_callback_closure_impl with start", {
   })
 
   expect_s3_class(result, "igraph.eigenc")
-  expect_equal(length(result$membership), vcount(g))
+  expect_length(result$membership, vcount(g))
 })
 
 test_that("community_leading_eigenvector_callback_closure_impl errors", {
@@ -11322,8 +11322,8 @@ test_that("dfs_closure_impl works", {
   })
 
   # Structured tests
-  expect_equal(length(dfs_in_visits), 10)
-  expect_equal(length(dfs_out_visits), 10)
+  expect_length(dfs_in_visits, 10)
+  expect_length(dfs_out_visits, 10)
 })
 
 # motifs_randesu_callback_closure_impl
@@ -11360,10 +11360,10 @@ test_that("motifs_randesu_callback_closure_impl basic", {
   # Structured tests
   expect_null(result)
   expect_true(length(motif_data) > 0)
-  expect_true(is.integer(motif_data[[1]]$vids))
-  expect_equal(length(motif_data[[1]]$vids), 3)
-  expect_true(is.integer(motif_data[[1]]$isoclass))
-  expect_equal(length(motif_data[[1]]$isoclass), 1)
+  expect_type(motif_data[[1]]$vids, "integer")
+  expect_length(motif_data[[1]]$vids, 3)
+  expect_type(motif_data[[1]]$isoclass, "integer")
+  expect_length(motif_data[[1]]$isoclass, 1)
 })
 
 test_that("motifs_randesu_callback_closure_impl errors", {
@@ -11414,7 +11414,7 @@ test_that("cliques_callback_closure_impl basic", {
   # Structured tests
   expect_null(result)
   expect_true(length(clique_data) > 0)
-  expect_true(is.integer(clique_data[[1]]))
+  expect_type(clique_data[[1]], "integer")
   expect_true(length(clique_data[[1]]) >= 3)
   expect_true(length(clique_data[[1]]) <= 4)
 })
@@ -11471,7 +11471,7 @@ test_that("maximal_cliques_callback_closure_impl basic", {
 
   # Structured tests
   expect_null(result)
-  expect_true(is.integer(clique_data[[1]]))
+  expect_type(clique_data[[1]], "integer")
   expect_true(length(clique_data[[1]]) >= 3)
 })
 
@@ -11527,8 +11527,8 @@ test_that("simple_cycles_callback_closure_impl basic", {
   # Structured tests
   expect_null(result)
   expect_true(length(cycle_data) > 0)
-  expect_true(is.integer(cycle_data[[1]]$vertices))
-  expect_true(is.integer(cycle_data[[1]]$edges))
+  expect_type(cycle_data[[1]]$vertices, "integer")
+  expect_type(cycle_data[[1]]$edges, "integer")
   expect_equal(length(cycle_data[[1]]$vertices), length(cycle_data[[1]]$edges))
 })
 
@@ -11591,10 +11591,10 @@ test_that("get_isomorphisms_vf2_callback_closure_impl basic", {
   # Structured tests
   expect_null(result)
   expect_true(length(iso_data) > 0)
-  expect_true(is.integer(iso_data[[1]]$map12))
-  expect_true(is.integer(iso_data[[1]]$map21))
-  expect_equal(length(iso_data[[1]]$map12), vcount(g1))
-  expect_equal(length(iso_data[[1]]$map21), vcount(g2))
+  expect_type(iso_data[[1]]$map12, "integer")
+  expect_type(iso_data[[1]]$map21, "integer")
+  expect_length(iso_data[[1]]$map12, vcount(g1))
+  expect_length(iso_data[[1]]$map21, vcount(g2))
 })
 
 test_that("get_isomorphisms_vf2_callback_closure_impl errors", {
@@ -11659,10 +11659,10 @@ test_that("get_subisomorphisms_vf2_callback_closure_impl basic", {
   # Structured tests
   expect_null(result)
   expect_true(length(subiso_data) > 0)
-  expect_true(is.integer(subiso_data[[1]]$map12))
-  expect_true(is.integer(subiso_data[[1]]$map21))
-  expect_equal(length(subiso_data[[1]]$map12), vcount(g1))
-  expect_equal(length(subiso_data[[1]]$map21), vcount(g2))
+  expect_type(subiso_data[[1]]$map12, "integer")
+  expect_type(subiso_data[[1]]$map21, "integer")
+  expect_length(subiso_data[[1]]$map12, vcount(g1))
+  expect_length(subiso_data[[1]]$map21, vcount(g2))
 })
 
 test_that("get_subisomorphisms_vf2_callback_closure_impl errors", {
@@ -11783,7 +11783,7 @@ test_that("sparse_weighted_adjacency_impl basic", {
   expect_equal(vcount(g1), 4)
   expect_equal(ecount(g1), 4)
   expect_true(is_directed(g1))
-  expect_equal(length(weights), 4)
+  expect_length(weights, 4)
 })
 
 test_that("sparse_weighted_adjacency_impl errors", {
@@ -12038,8 +12038,8 @@ test_that("subisomorphic_lad_impl basic", {
   # The function requires complex setup with pattern/target graphs and domains
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(subisomorphic_lad_impl))
-  expect_equal(
-    names(formals(subisomorphic_lad_impl)),
+  expect_named(
+    formals(subisomorphic_lad_impl),
     c("pattern", "target", "domains", "induced", "time_limit")
   )
 })
@@ -12076,8 +12076,8 @@ test_that("eigen_matrix_impl basic", {
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_impl))
-  expect_equal(
-    names(formals(eigen_matrix_impl)),
+  expect_named(
+    formals(eigen_matrix_impl),
     c("A", "sA", "fun", "n", "algorithm", "which", "options")
   )
 })
@@ -12106,8 +12106,8 @@ test_that("eigen_matrix_symmetric_impl basic", {
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_symmetric_impl))
-  expect_equal(
-    names(formals(eigen_matrix_symmetric_impl)),
+  expect_named(
+    formals(eigen_matrix_symmetric_impl),
     c("A", "sA", "fun", "n", "algorithm", "which", "options")
   )
 })

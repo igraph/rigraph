@@ -16,7 +16,7 @@ graphlets.project <- function(
   Mu = rep(1, length(cliques))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
+  lifecycle::deprecate_warn("2.0.0", "graphlets.project()", "graphlet_proj()")
   graphlet_proj(
     graph = graph,
     weights = weights,
@@ -38,7 +38,7 @@ graphlets.project <- function(
 #' @export
 graphlets.candidate.basis <- function(graph, weights = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graphlets.candidate.basis()",
     "graphlet_basis()"
@@ -156,7 +156,7 @@ graphlet_proj <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -190,7 +190,7 @@ function() {
     co <- layout_with_kk(g)
     par(mar = c(1, 1, 1, 1))
     plot(g, layout = co)
-    for (i in 1:length(gl$Bc)) {
+    for (i in seq_along(gl$Bc)) {
       sel <- gl$Bc[[i]]
       V(g)$color <- "white"
       V(g)[sel]$color <- "#E495A5"

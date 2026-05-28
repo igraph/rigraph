@@ -71,17 +71,17 @@ Stephan Eidenbenz (editors): \emph{Graph-theoretic concepts in computer
 science}, 1665, 167--172, 1999. Springer.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

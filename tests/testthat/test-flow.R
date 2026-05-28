@@ -280,7 +280,7 @@ test_that("min_st_separators works", {
   g_zachary <- make_graph("Zachary")
   msts <- min_st_separators(g_zachary)
   is <- sapply(msts, is_separator, graph = g_zachary)
-  expect_equal(unique(is), TRUE)
+  expect_true(unique(is))
 
   ## TODO: check that it is minimal
 })

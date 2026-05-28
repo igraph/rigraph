@@ -49,31 +49,31 @@ print(g2, g = TRUE, v = TRUE, e = TRUE)
 
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

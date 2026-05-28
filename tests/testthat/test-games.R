@@ -155,17 +155,17 @@ test_that("sample_degseq supports the sample_(...) syntax", {
 test_that("sample_degseq works() -- old method names", {
   withr::local_options("lifecycle_verbosity" = "warning")
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple"),
     "must be"
   )
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple"),
     "must be"
   )
 
-  expect_warning(
+  expect_error(
     sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple.uniform"),
     "must be"
   )
@@ -384,7 +384,7 @@ test_that("sample_pa can start from a graph", {
 test_that("sample_bipartite works -- undirected gnp", {
   withr::local_seed(42)
 
-  g_rand_bip <- sample_bipartite_gnp(10, 5, p = .1)
+  g_rand_bip <- sample_bipartite_gnp(10, 5, p = 0.1)
   expect_equal(g_rand_bip$name, "Bipartite Gnp random graph")
   expect_vcount(g_rand_bip, 15)
   expect_ecount(g_rand_bip, 7)
@@ -393,7 +393,7 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
-  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE)
+  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
   expect_ecount(g_rand_bip_dir, 6)
   expect_true(bipartite_mapping(g_rand_bip_dir)$res)
@@ -403,7 +403,7 @@ test_that("sample_bipartite works -- directed gnp", {
   g_rand_bip_in <- sample_bipartite_gnp(
     10,
     5,
-    p = .1,
+    p = 0.1,
     directed = TRUE,
     mode = "in"
   )
@@ -461,7 +461,7 @@ test_that("sample_bipartite works -- directed gnm", {
 test_that("sample_correlated_gnp works", {
   withr::local_seed(42)
 
-  gnp_graph <- sample_gnp(10, .1)
+  gnp_graph <- sample_gnp(10, 0.1)
   cor_gnp_graph_1 <- sample_correlated_gnp(
     gnp_graph,
     corr = 1,
@@ -477,14 +477,14 @@ test_that("sample_correlated_gnp works", {
     permutation = NULL
   )
   graph_cor_1 <- cor(as.vector(gnp_graph[]), as.vector(cor_gnp_graph_0[]))
-  expect_true(abs(graph_cor_1) < .3)
+  expect_true(abs(graph_cor_1) < 0.3)
 
   cor_gnp_no_p_1 <- sample_correlated_gnp(gnp_graph, corr = 1)
   expect_equal(gnp_graph[], cor_gnp_no_p_1[])
 
   cor_gnp_no_p_0 <- sample_correlated_gnp(gnp_graph, corr = 0)
   graph_cor_2 <- cor(as.vector(gnp_graph[]), as.vector(cor_gnp_no_p_0[]))
-  expect_true(abs(graph_cor_2) < .3)
+  expect_true(abs(graph_cor_2) < 0.3)
 })
 
 
@@ -497,7 +497,7 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 
   cor_gnp_graph_0 <- sample_correlated_gnp(grg_graph, corr = 0)
   graph_cor <- cor(as.vector(grg_graph[]), as.vector(cor_gnp_graph_0[]))
-  expect_true(abs(graph_cor) < .3)
+  expect_true(abs(graph_cor) < 0.3)
 })
 
 test_that("sample_correlated_gnp_pair works", {
@@ -505,8 +505,8 @@ test_that("sample_correlated_gnp_pair works", {
 
   cor_gnp_pair <- sample_correlated_gnp_pair(
     10,
-    corr = .95,
-    p = .1,
+    corr = 0.95,
+    p = 0.1,
     permutation = NULL
   )
   expect_true(abs(ecount(cor_gnp_pair[[1]]) - ecount(cor_gnp_pair[[2]])) < 3)
@@ -522,11 +522,11 @@ test_that("sample_correlated_gnp corner cases work", {
     isomorphic(g, g_full)
   }
 
-  gnp_graph <- sample_gnp(10, .3)
+  gnp_graph <- sample_gnp(10, 0.3)
   cor_gnp_full <- sample_correlated_gnp(
     gnp_graph,
     corr = 0.000001,
-    p = .99999999
+    p = 0.99999999
   )
   expect_true(is_full(cor_gnp_full))
 
@@ -538,11 +538,11 @@ test_that("sample_correlated_gnp corner cases work", {
   expect_ecount(cor_gnp_empty, 0)
   expect_vcount(cor_gnp_empty, 10)
 
-  gnp_graph_directed <- sample_gnp(10, .3, directed = TRUE)
+  gnp_graph_directed <- sample_gnp(10, 0.3, directed = TRUE)
   cor_gnp_directed <- sample_correlated_gnp(
     gnp_graph_directed,
     corr = 0.000001,
-    p = .99999999
+    p = 0.99999999
   )
   expect_true(is_full(cor_gnp_directed))
 
@@ -558,12 +558,12 @@ test_that("sample_correlated_gnp corner cases work", {
 test_that("permutation works for sample_correlated_gnp", {
   withr::local_seed(42)
 
-  gnp_graph <- sample_gnp(10, .3)
+  gnp_graph <- sample_gnp(10, 0.3)
   perm <- sample(vcount(gnp_graph))
   cor_gnp_graph <- sample_correlated_gnp(
     gnp_graph,
-    corr = .99999,
-    p = .3,
+    corr = 0.99999,
+    p = 0.3,
     permutation = perm
   )
   gnp_graph <- permute(gnp_graph, perm)
@@ -573,7 +573,7 @@ test_that("permutation works for sample_correlated_gnp", {
   cor_gnp_graph <- sample_correlated_gnp(
     gnp_graph,
     corr = 1,
-    p = .3,
+    p = 0.3,
     permutation = perm
   )
   gnp_graph <- permute(gnp_graph, perm)

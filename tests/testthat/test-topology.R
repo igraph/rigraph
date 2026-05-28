@@ -79,7 +79,7 @@ test_that("graph.get.subisomorphisms.vf2() works even if the graph has a vertex 
   g <- make_full_graph(4)
   V(g)$x <- 1:4
   subs <- graph.get.subisomorphisms.vf2(g, make_ring(4))
-  expect_equal(length(subs), 24)
+  expect_length(subs, 24)
 })
 
 test_that("VF2 isomorphism considers colors", {
@@ -165,7 +165,7 @@ test_that("LAD stress test", {
   N <- 100
 
   for (i in 1:N) {
-    target <- sample_gnp(20, .5)
+    target <- sample_gnp(20, 0.5)
     pn <- sample(4:18, 1)
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
     iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
@@ -177,7 +177,7 @@ test_that("LAD stress test", {
   for (i in 1:N) {
     target <- sample_gnp(20, 1 / 20)
     pn <- sample(5:18, 1)
-    pattern <- sample_gnp(pn, .6)
+    pattern <- sample_gnp(pn, 0.6)
     iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
     expect_false(iso)
   }
@@ -482,10 +482,10 @@ test_that("isomorphisms receives correct arguments", {
 
   # Check argument types
   isomorphisms(g1, g2, method = "vf2", callback = function(map12, map21) {
-    expect_true(is.integer(map12))
-    expect_true(is.integer(map21))
-    expect_equal(length(map12), n1)
-    expect_equal(length(map21), n2)
+    expect_type(map12, "integer")
+    expect_type(map21, "integer")
+    expect_length(map12, n1)
+    expect_length(map21, n2)
     FALSE # stop after first isomorphism
   })
 })
@@ -570,10 +570,10 @@ test_that("subisomorphisms works with callback receives correct arguments", {
     g2,
     method = "vf2",
     callback = function(map12, map21) {
-      expect_true(is.integer(map12))
-      expect_true(is.integer(map21))
-      expect_equal(length(map12), n1)
-      expect_equal(length(map21), n2)
+      expect_type(map12, "integer")
+      expect_type(map21, "integer")
+      expect_length(map12, n1)
+      expect_length(map21, n2)
       FALSE # stop after first subisomorphism
     }
   )

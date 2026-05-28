@@ -36,14 +36,14 @@ centr_clo(g, normalized = FALSE)$centralization \%>\%
 centr_clo(g, normalized = TRUE)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}
