@@ -106,7 +106,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
     mode = "out",
     weighted = TRUE
   )
-  expect_equal(inc_frac, as_biadjacency_matrix(frac_g, attr = "weight"))
+  expect_equal(inc_frac, as_biadjacency_matrix(frac_g, weights = "weight"))
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse", {

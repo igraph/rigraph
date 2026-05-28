@@ -542,10 +542,10 @@ test_that("local transitivity() produces named vectors", {
 })
 
 test_that("constraint() works", {
-  constraint.orig <- function(graph, nodes = V(graph), attr = NULL) {
+  constraint.orig <- function(graph, nodes = V(graph), weights = NA) {
     ensure_igraph(graph)
     idx <- degree(graph) != 0
-    A <- as_adjacency_matrix(graph, attr = attr, sparse = FALSE)
+    A <- as_adjacency_matrix(graph, weights = weights, sparse = FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
 
@@ -576,7 +576,7 @@ test_that("constraint() works", {
   withr::local_seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
-  wc2 <- constraint.orig(karate, attr = "weight")
+  wc2 <- constraint.orig(karate, weights = "weight")
   expect_equal(wc1, wc2)
 })
 

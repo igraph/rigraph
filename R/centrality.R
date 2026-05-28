@@ -1760,11 +1760,12 @@ bonpow.dense <- function(
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
-  tol = 1e-7
+  tol = 1e-7,
+  weights = NULL
 ) {
   ensure_igraph(graph)
 
-  d <- as_adjacency_matrix(graph)
+  d <- as_adjacency_matrix(graph, weights = weights, sparse = FALSE)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1788,7 +1789,8 @@ bonpow.sparse <- function(
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
-  tol = 1e-07
+  tol = 1e-07,
+  weights = NULL
 ) {
   ## remove loops if requested
   if (!loops) {
@@ -1798,13 +1800,13 @@ bonpow.sparse <- function(
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adjacency_matrix(graph, sparse = TRUE)
+  d <- as_adjacency_matrix(graph, weights = weights, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
 
   ## solve it
-  ev <- Matrix::solve(id - exponent * d, degree(graph, mode = "out"), tol = tol)
+  ev <- Matrix::solve(id - exponent * d, Matrix::rowSums(d), tol = tol)
 
   if (rescale) {
     ev <- ev / sum(ev)
@@ -1884,6 +1886,11 @@ bonpow.sparse <- function(
 #' @param sparse Logical scalar, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
+#' @param weights Edge weights to use, following the standard rigraph weight
+#'   convention. `NULL` (default) uses the graph's `weight` edge attribute if
+#'   present; `NA` forces an unweighted calculation; a numeric vector of length
+#'   [ecount()] is used directly; a character scalar names an edge attribute to
+#'   use.
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
@@ -1936,13 +1943,18 @@ power_centrality <- function(
   exponent = 1,
   rescale = FALSE,
   tol = 1e-7,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 ) {
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
-    res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.sparse(
+      graph, nodes, loops, exponent, rescale, tol, weights = weights
+    )
   } else {
-    res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.dense(
+      graph, nodes, loops, exponent, rescale, tol, weights = weights
+    )
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -1966,25 +1978,7 @@ alpha.centrality.dense <- function(
   exo <- rep(exo, length.out = vcount(graph))
   exo <- matrix(exo, ncol = 1)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
-  } else if (is.character(weights) && length(weights) == 1) {
-    ## name of an edge attribute, nothing to do
-    attr <- weights
-  } else if (!all(is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
-  }
-
-  d <- t(as_adjacency_matrix(graph, attr = attr, sparse = FALSE))
+  d <- t(as_adjacency_matrix(graph, weights = weights, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
@@ -2013,25 +2007,7 @@ alpha.centrality.sparse <- function(
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
   }
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
-  } else if (is.character(weights) && length(weights) == 1) {
-    ## name of an edge attribute, nothing to do
-    attr <- weights
-  } else if (!all(is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
-  }
-
-  M <- Matrix::t(as_adjacency_matrix(graph, attr = attr, sparse = TRUE))
+  M <- Matrix::t(as_adjacency_matrix(graph, weights = weights, sparse = TRUE))
 
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(

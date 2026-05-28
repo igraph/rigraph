@@ -674,6 +674,69 @@ test_that("alpha_centrality() works with custom weight attribute names", {
   expect_equal(ac_sparse, ac_dense)
 })
 
+test_that("alpha_centrality() accepts a numeric weights vector", {
+  star <- make_star(10)
+  w <- sample(ecount(star))
+  E(star)$weight <- w
+
+  ac_attr <- alpha_centrality(star, weights = "weight", sparse = FALSE)
+  ac_vec <- alpha_centrality(star, weights = w, sparse = FALSE)
+  expect_equal(ac_vec, ac_attr)
+
+  ac_attr_sp <- alpha_centrality(star, weights = "weight", sparse = TRUE)
+  ac_vec_sp <- alpha_centrality(star, weights = w, sparse = TRUE)
+  expect_equal(ac_vec_sp, ac_attr_sp)
+})
+
+test_that("alpha_centrality() does not mutate the input graph", {
+  star <- make_star(10)
+  w <- sample(ecount(star))
+  alpha_centrality(star, weights = w, sparse = FALSE)
+  expect_false("weight" %in% edge_attr_names(star))
+  alpha_centrality(star, weights = w, sparse = TRUE)
+  expect_false("weight" %in% edge_attr_names(star))
+})
+
+test_that("power_centrality() supports edge weights, #903", {
+  # A weighted graph and an equivalent graph with parallel edges in place of
+  # weights should give the same power_centrality result when the unweighted
+  # variant has the equivalent multi-edge structure.
+  incidence <- matrix(c(1, 0, 1, 0, 1, 1, 1, 1, 1), nrow = 3, ncol = 3)
+  bipartite <- graph_from_biadjacency_matrix(incidence)
+  gph_weighted <- bipartite_projection(bipartite, which = TRUE)
+  adj_weighted <- as_adjacency_matrix(gph_weighted, weights = "weight")
+  gph_unweighted <- graph_from_adjacency_matrix(adj_weighted)
+
+  expect_equal(
+    power_centrality(gph_weighted, sparse = FALSE),
+    power_centrality(gph_unweighted, sparse = FALSE)
+  )
+  expect_equal(
+    power_centrality(gph_weighted, sparse = TRUE),
+    power_centrality(gph_unweighted, sparse = TRUE)
+  )
+})
+
+test_that("power_centrality(weights = NA) ignores `weight` attribute", {
+  g <- make_ring(5, directed = FALSE)
+  E(g)$weight <- c(1, 2, 3, 4, 5)
+  unwt <- make_ring(5, directed = FALSE)
+  expect_equal(
+    power_centrality(g, weights = NA, sparse = FALSE),
+    power_centrality(unwt, sparse = FALSE)
+  )
+})
+
+test_that("power_centrality() accepts a numeric weights vector", {
+  g <- make_ring(5, directed = FALSE)
+  w <- c(1.5, 2.5, 3.5, 4.5, 5.5)
+  E(g)$weight <- w
+  expect_equal(
+    power_centrality(g, weights = w, sparse = FALSE),
+    power_centrality(g, sparse = FALSE)
+  )
+})
+
 test_that("undirected alpha_centrality() works, #653", {
   g <- make_ring(10)
 
