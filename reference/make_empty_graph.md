@@ -52,9 +52,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH bdb259e D--- 10 0 -- 
-#> + edges from bdb259e:
+#> IGRAPH 928b6d5 D--- 10 0 -- 
+#> + edges from 928b6d5:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH cf24500 U--- 5 0 -- 
-#> + edges from cf24500:
+#> IGRAPH b4fdb7d U--- 5 0 -- 
+#> + edges from b4fdb7d:
 ```
