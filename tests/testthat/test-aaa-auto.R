@@ -12038,7 +12038,10 @@ test_that("subisomorphic_lad_impl basic", {
   # The function requires complex setup with pattern/target graphs and domains
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(subisomorphic_lad_impl))
-  expect_named(formals(subisomorphic_lad_impl), c("pattern", "target", "domains", "induced", "time_limit"))
+  expect_named(
+    formals(subisomorphic_lad_impl),
+    c("pattern", "target", "domains", "induced", "time_limit")
+  )
 })
 
 test_that("subisomorphic_lad_impl errors", {
@@ -12073,7 +12076,10 @@ test_that("eigen_matrix_impl basic", {
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_impl))
-  expect_named(formals(eigen_matrix_impl), c("A", "sA", "fun", "n", "algorithm", "which", "options"))
+  expect_named(
+    formals(eigen_matrix_impl),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
 })
 
 test_that("eigen_matrix_impl errors", {
@@ -12100,7 +12106,10 @@ test_that("eigen_matrix_symmetric_impl basic", {
   # The function requires complex matrix setup and understanding of eigenvalue computation
   # For now, just verify the function exists and has correct signature
   expect_true(is.function(eigen_matrix_symmetric_impl))
-  expect_named(formals(eigen_matrix_symmetric_impl), c("A", "sA", "fun", "n", "algorithm", "which", "options"))
+  expect_named(
+    formals(eigen_matrix_symmetric_impl),
+    c("A", "sA", "fun", "n", "algorithm", "which", "options")
+  )
 })
 
 test_that("eigen_matrix_symmetric_impl errors", {
