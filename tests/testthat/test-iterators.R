@@ -289,15 +289,15 @@ test_that("vs/es keeps names after graph is deleted", {
   rm(g)
   gc()
 
-  expect_equal(names(vs), letters[1:10])
+  expect_named(vs, letters[1:10])
 
   vs2 <- vs[4:7]
-  expect_equal(names(vs2), letters[4:7])
+  expect_named(vs2, letters[4:7])
 
-  expect_equal(names(es), LETTERS[1:10])
+  expect_named(es, LETTERS[1:10])
 
   es2 <- es[4:7]
-  expect_equal(names(es2), LETTERS[4:7])
+  expect_named(es2, LETTERS[4:7])
 })
 
 test_that("both edge and vertex names", {
@@ -307,7 +307,7 @@ test_that("both edge and vertex names", {
 
   es <- E(g)
   expect_equal(as.vector(es), 1:10)
-  expect_equal(names(es), LETTERS[1:10])
+  expect_named(es, LETTERS[1:10])
   el <- as_edgelist(g)
   expect_equal(attr(es, "vnames"), paste(el[, 1], el[, 2], sep = "|"))
 

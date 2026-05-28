@@ -77,14 +77,14 @@ Wasserman, S., and Faust, K.  (1994).  \emph{Social Network Analysis:
 Methods and Applications.} Cambridge University Press.
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}}
 }
 \concept{centralization related}

@@ -17,7 +17,7 @@ graph.adjacency <- function(
   add.rownames = NA
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.adjacency()",
     "graph_from_adjacency_matrix()"
@@ -264,7 +264,7 @@ graph.adjacency <- function(
 #'
 #' ## row/column names
 #' rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-#' colnames(adj_matrix) <- seq(ncol(adj_matrix))
+#' colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 #' g10 <- graph_from_adjacency_matrix(
 #'   adj_matrix,
 #'   weighted = TRUE,
@@ -289,11 +289,11 @@ graph_from_adjacency_matrix <- function(
   add.colnames = NULL,
   add.rownames = NA
 ) {
-  ensure_no_na(adjmatrix, "adjacency matrix")
   mode <- igraph_match_arg(mode)
+  ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
     )
@@ -302,7 +302,7 @@ graph_from_adjacency_matrix <- function(
 
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
-      lifecycle::deprecate_soft(
+      lifecycle::deprecate_warn(
         "1.6.0",
         "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
         details = 'Use mode = "max" to achieve the original behavior.'
@@ -377,14 +377,14 @@ graph_from_adjacency_matrix <- function(
 
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
-    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0))
+    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
   if (is.matrix(x)) {
-    return(isSymmetric.matrix(x, tol = 0, tol1 = 0))
+    return(isSymmetric.matrix(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
-  return(isSymmetric(x, tol = 0, tol1 = 0))
+  return(isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
 }
 
 #' @rdname graph_from_adjacency_matrix
@@ -494,8 +494,9 @@ graph.adjacency.sparse <- function(
   }
 
   vc <- nrow(adjmatrix)
-  # Exit early for empty graphs
-  if (vc == 1 || Matrix::nnzero(adjmatrix) == 0) {
+  # Exit early for empty graphs. Use na.counted = TRUE so that NA entries
+  # (which are stored explicitly) do not cause nnzero() to return NA.
+  if (vc == 1 || Matrix::nnzero(adjmatrix, na.counted = TRUE) == 0) {
     return(make_empty_graph(n = vc, directed = (mode == "directed")))
   }
 

@@ -67,14 +67,14 @@ try(eulerian_cycle(g))
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{find_cycle}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{simple_cycles}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=find_cycle]{find_cycle()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=simple_cycles]{simple_cycles()}}
 }
 \concept{cycles}
 \keyword{graphs}

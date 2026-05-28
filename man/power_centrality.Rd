@@ -145,19 +145,19 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Carter T. Butts

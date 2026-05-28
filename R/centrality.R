@@ -10,7 +10,7 @@
 #' @export
 subgraph.centrality <- function(graph, diag = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "subgraph.centrality()",
     "subgraph_centrality()"
@@ -39,7 +39,7 @@ page.rank <- function(
   options = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+  lifecycle::deprecate_warn("2.0.0", "page.rank()", "page_rank()")
   page_rank(
     graph = graph,
     algo = algo,
@@ -68,10 +68,8 @@ hub.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
-  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_scores()")
-  hub_score(graph = graph, scale = scale, weights = weights, options = options)
-} # nocov end
+  lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()")
+}
 
 #' Kleinberg's hub and authority centrality scores.
 #'
@@ -89,15 +87,8 @@ authority.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
-  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_scores()")
-  authority_score(
-    graph = graph,
-    scale = scale,
-    weights = weights,
-    options = options
-  )
-} # nocov end
+  lifecycle::deprecate_stop("2.0.0", "authority.score()", "hits_scores()")
+}
 
 #' Strength or weighted vertex degree
 #'
@@ -117,7 +108,7 @@ graph.strength <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
+  lifecycle::deprecate_warn("2.0.0", "graph.strength()", "strength()")
   strength(
     graph = graph,
     vids = vids,
@@ -151,7 +142,7 @@ graph.eigen <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.eigen()", "spectrum()")
+  lifecycle::deprecate_warn("2.0.0", "graph.eigen()", "spectrum()")
   spectrum(
     graph = graph,
     algorithm = algorithm,
@@ -172,7 +163,7 @@ graph.eigen <- function(
 #' @export
 graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.diversity()", "diversity()")
+  lifecycle::deprecate_warn("2.0.0", "graph.diversity()", "diversity()")
   diversity(graph = graph, weights = weights, vids = vids)
 } # nocov end
 
@@ -194,7 +185,7 @@ evcent <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "evcent()", "eigen_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "evcent()", "eigen_centrality()")
   eigen_centrality(
     graph = graph,
     directed = directed,
@@ -222,7 +213,7 @@ edge.betweenness <- function(
   cutoff = -1
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "edge.betweenness()", "edge_betweenness()")
+  lifecycle::deprecate_warn("2.0.0", "edge.betweenness()", "edge_betweenness()")
   edge_betweenness(
     graph = graph,
     e = e,
@@ -252,7 +243,7 @@ bonpow <- function(
   sparse = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(
     graph = graph,
     nodes = nodes,
@@ -285,7 +276,7 @@ alpha.centrality <- function(
   sparse = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "alpha.centrality()", "alpha_centrality()")
   alpha_centrality(
     graph = graph,
     nodes = nodes,
@@ -336,7 +327,7 @@ estimate_betweenness <- function(
   cutoff,
   weights = NULL
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_betweenness()",
     "betweenness()",
@@ -498,7 +489,7 @@ estimate_edge_betweenness <- function(
   cutoff,
   weights = NULL
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
@@ -611,7 +602,7 @@ estimate_closeness <- function(
   weights = NULL,
   normalized = FALSE
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_closeness()",
     "closeness()",
@@ -961,7 +952,7 @@ arpack <- function(
   complex = !sym
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "arpack(options = 'must be a list')",
       details = c(
@@ -976,7 +967,7 @@ arpack <- function(
   }
 
   defaults <- arpack_defaults()
-  if (any(!names(options) %in% names(defaults))) {
+  if (!all(names(options) %in% names(defaults))) {
     unknown_options <- setdiff(names(options), names(defaults))
     cli::cli_abort(
       "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}:
@@ -1016,7 +1007,7 @@ arpack <- function(
       }
       res$values <- res$values[, 1]
     }
-    res$vectors <- res$vectors[, 1:length(res$values)]
+    res$vectors <- res$vectors[, seq_along(res$values)]
   }
 
   res
@@ -1170,7 +1161,7 @@ spectrum <- function(
   options = arpack_defaults()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "spectrum(options = 'must be a list')",
       details = c(
@@ -1299,7 +1290,7 @@ eigen_centrality <- function(
   options = arpack_defaults()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "eigen_centrality(options = 'must be a list')",
       details = c(
@@ -1311,13 +1302,13 @@ eigen_centrality <- function(
 
   if (lifecycle::is_present(scale)) {
     if (isTRUE(scale)) {
-      lifecycle::deprecate_soft(
+      lifecycle::deprecate_warn(
         "2.1.1",
         "eigen_centrality(scale)",
         details = "eigen_centrality() will always behave as if scale=TRUE were used."
       )
     } else {
-      lifecycle::deprecate_warn(
+      lifecycle::deprecate_stop(
         "2.1.1",
         "eigen_centrality(scale = 'always as if TRUE')",
         details = "Normalization is always performed"
@@ -1522,9 +1513,9 @@ authority_score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
+  lifecycle::deprecate_warn("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
@@ -1567,9 +1558,9 @@ hub_score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  lifecycle::deprecate_warn("2.0.3", "hub_score()", "hits_scores()")
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
@@ -1782,7 +1773,7 @@ bonpow.dense <- function(
   diag(id) <- 1
 
   #  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
-  ev <- solve(id - exponent * d, tol = tol) %*% apply(d, 1, sum)
+  ev <- solve(id - exponent * d, tol = tol) %*% rowSums(d)
   if (rescale) {
     ev <- ev / sum(ev)
   } else {
@@ -1984,7 +1975,7 @@ alpha.centrality.dense <- function(
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- weights
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
@@ -2031,7 +2022,7 @@ alpha.centrality.sparse <- function(
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- weights
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"

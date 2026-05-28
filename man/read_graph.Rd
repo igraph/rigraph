@@ -190,9 +190,9 @@ This is a binary format, used in the ARG Graph Database for isomorphism testing.
 \seealso{
 \code{\link[=write_graph]{write_graph()}}
 
-Foreign format readers
-\code{\link{graph_from_graphdb}()},
-\code{\link{write_graph}()}
+Foreign format readers:
+\code{\link[=graph_from_graphdb]{graph_from_graphdb()}},
+\code{\link[=write_graph]{write_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

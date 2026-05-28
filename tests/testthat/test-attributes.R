@@ -331,7 +331,7 @@ test_that("without_loops", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_loop(g2)))
+  expect_all_false(which_loop(g2))
 })
 
 
@@ -345,7 +345,7 @@ test_that("without_multiple", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_multiple(g2)))
+  expect_all_false(which_multiple(g2))
 })
 
 
@@ -358,8 +358,8 @@ test_that("simplified", {
   )
 
   expect_identical_graphs(g1, g2)
-  expect_true(all(!which_multiple(g2)))
-  expect_true(all(!which_loop(g2)))
+  expect_true(!any(which_multiple(g2)))
+  expect_true(!any(which_loop(g2)))
 })
 
 
@@ -379,6 +379,11 @@ test_that("with_vertex_", {
   expect_identical_graphs(g1, g2)
   expect_equal(V(g2)$color, rep("red", gorder(g2)))
   expect_equal(V(g2)$foo, paste0("xx", 1:3))
+
+  expect_snapshot(
+    make_(from_literal(A - A:B:C, B - A:B:C), with_vertex_(color = 1:2)),
+    error = TRUE
+  )
 })
 
 
@@ -398,6 +403,11 @@ test_that("with_edge_", {
   expect_identical_graphs(g1, g2)
   expect_equal(E(g1)$color, E(g2)$color)
   expect_equal(E(g1)$foo, E(g2)$foo)
+
+  expect_snapshot(
+    make_(from_literal(A - A:B:C, B - A:B:C), with_edge_(color = 1:2)),
+    error = TRUE
+  )
 })
 
 

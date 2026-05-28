@@ -26,21 +26,21 @@ E(g)[1, 1:5, 1:10, 5:10]
 E(g)[1, 1:5, 1:10, 5:10] \%>\% unique()
 }
 \seealso{
-Other vertex and edge sequence operations: 
-\code{\link{c.igraph.es}()},
-\code{\link{c.igraph.vs}()},
-\code{\link{difference.igraph.es}()},
-\code{\link{difference.igraph.vs}()},
+Other vertex and edge sequence operations:
+\code{\link[=c.igraph.es]{c.igraph.es()}},
+\code{\link[=c.igraph.vs]{c.igraph.vs()}},
+\code{\link[=difference.igraph.es]{difference.igraph.es()}},
+\code{\link[=difference.igraph.vs]{difference.igraph.vs()}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{intersection.igraph.es}()},
-\code{\link{intersection.igraph.vs}()},
-\code{\link{rev.igraph.es}()},
-\code{\link{rev.igraph.vs}()},
-\code{\link{union.igraph.es}()},
-\code{\link{union.igraph.vs}()},
-\code{\link{unique.igraph.vs}()}
+\code{\link[=intersection.igraph.es]{intersection.igraph.es()}},
+\code{\link[=intersection.igraph.vs]{intersection.igraph.vs()}},
+\code{\link[=rev.igraph.es]{rev.igraph.es()}},
+\code{\link[=rev.igraph.vs]{rev.igraph.vs()}},
+\code{\link[=union.igraph.es]{union.igraph.es()}},
+\code{\link[=union.igraph.vs]{union.igraph.vs()}},
+\code{\link[=unique.igraph.vs]{unique.igraph.vs()}}
 }
 \concept{vertex and edge sequence operations}

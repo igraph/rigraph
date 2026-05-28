@@ -116,19 +116,19 @@ Conference, Brisbane, Australia, April 1998.
 Other centrality scores: \code{\link[=closeness]{closeness()}},
 \code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

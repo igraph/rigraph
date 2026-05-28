@@ -68,8 +68,8 @@ of Computation} 13, 566--579.
 \seealso{
 \code{\link[=is_chordal]{is_chordal()}}
 
-Other chordal: 
-\code{\link{is_chordal}()}
+Other chordal:
+\code{\link[=is_chordal]{is_chordal()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

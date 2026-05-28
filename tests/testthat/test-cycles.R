@@ -2,13 +2,13 @@ test_that("find_cycle() works", {
   g <- make_graph(c(1, 2, 2, 3, 1, 3, 1, 1), directed = TRUE)
 
   cycle <- find_cycle(g)
-  expect_equal(length(cycle$vertices), 1)
-  expect_equal(length(cycle$edges), 1)
+  expect_length(cycle$vertices, 1)
+  expect_length(cycle$edges, 1)
 
   # Finding a cycle of length 1 or 3 are both valid here
   cycle <- find_cycle(g, mode = "all")
-  expect_equal(length(cycle$vertices), 3)
-  expect_equal(length(cycle$edges), 3)
+  expect_length(cycle$vertices, 3)
+  expect_length(cycle$edges, 3)
 })
 
 test_that("simple_cycle() works directed", {
@@ -89,8 +89,8 @@ test_that("simple_cycles_callback receives correct arguments", {
 
   # Check argument types
   simple_cycles(g, callback = function(vertices, edges) {
-    expect_true(is.integer(vertices))
-    expect_true(is.integer(edges))
+    expect_type(vertices, "integer")
+    expect_type(edges, "integer")
     expect_equal(length(vertices), length(edges))
     expect_true(length(vertices) >= 1)
     FALSE # stop after first cycle
