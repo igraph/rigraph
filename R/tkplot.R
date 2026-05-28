@@ -1,3 +1,4 @@
+# jarl-ignore-file unused_function: file to be removed
 #' Interactive plotting of graphs
 #'
 #' @description
