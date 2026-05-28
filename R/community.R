@@ -1090,7 +1090,7 @@ as.dendrogram.communities <- function(
   }
   z <- list()
   if (!use.modularity || is.null(object$modularity)) {
-    object$height <- 1:nrow(merges)
+    object$height <- seq_len(nrow(merges))
   } else {
     object$height <- object$modularity[-1]
     object$height <- cumsum(object$height - min(object$height))
@@ -1178,7 +1178,7 @@ as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   merges <- complete.dend(x, use.modularity)
 
   if (!use.modularity || is.null(x$modularity)) {
-    height <- 1:nrow(merges)
+    height <- seq_len(nrow(merges))
   } else {
     height <- x$modularity[-1]
     height <- cumsum(height - min(height))

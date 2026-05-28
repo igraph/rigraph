@@ -120,7 +120,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 
   ## Create vertex-clique list first
   vcl <- vector(length = vcount(graph), mode = "list")
-  for (i in 1:length(clf)) {
+  for (i in seq_along(clf)) {
     for (j in clf[[i]]) {
       vcl[[j]] <- c(vcl[[j]], i)
     }
@@ -138,7 +138,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   ## We will also need a clique-edge list, the edges in the cliques
   system.time({
     cel <- vector(length = length(clf), mode = "list")
-    for (i in 1:length(ecl)) {
+    for (i in seq_along(ecl)) {
       for (j in ecl[[i]]) {
         cel[[j]] <- c(cel[[j]], i)
       }
@@ -153,10 +153,10 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   w <- numeric(length(ecl))
   a <- sapply(clf, function(x) length(x) * (length(x) + 1) / 2)
   for (i in 1:iter) {
-    for (j in 1:length(ecl)) {
+    for (j in seq_along(ecl)) {
       w[j] <- sum(Mu[ecl[[j]]])
     }
-    for (j in 1:length(clf)) {
+    for (j in seq_along(clf)) {
       Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + .0001)) / a[j]
     }
   }
