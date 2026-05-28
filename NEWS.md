@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.1.9008
+
+## Chore
+
+- Add jarl config (#2654).
+
+## Documentation
+
+- Updated revdep issues (#2647).
+
+
 # igraph 2.3.1.9007
 
 ## Chore
