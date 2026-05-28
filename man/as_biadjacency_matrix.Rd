@@ -7,6 +7,7 @@
 as_biadjacency_matrix(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   attr = deprecated(),
   names = TRUE,
@@ -20,6 +21,8 @@ directed graphs.}
 \item{types}{An optional vertex type vector to use instead of the
 \code{type} vertex attribute. You must supply this argument if the graph has
 no \code{type} vertex attribute.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{One of the following:
 \itemize{

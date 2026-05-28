@@ -7,6 +7,7 @@
 as_adjacency_matrix(
   graph,
   type = c("both", "upper", "lower"),
+  ...,
   weights = NULL,
   attr = deprecated(),
   edges = deprecated(),
@@ -22,6 +23,8 @@ It is ignored for directed graphs. Possible values: \code{upper}: the upper
 right triangle of the matrix is used, \code{lower}: the lower left triangle
 of the matrix is used. \code{both}: the whole matrix is used, a symmetric
 matrix is returned.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{One of the following:
 \itemize{
