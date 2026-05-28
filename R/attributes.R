@@ -529,6 +529,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
   call <- rlang::current_env()
   check_string(name)
+
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(
       graph = graph,
@@ -537,16 +538,15 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
       check = FALSE,
       call = call
     ))
-  } else {
-    return(i_set_vertex_attr(
-      graph = graph,
-      name = name,
-      index = index,
-      value = value,
-      call = call
-    ))
   }
-  graph
+
+  i_set_vertex_attr(
+    graph = graph,
+    name = name,
+    index = index,
+    value = value,
+    call = call
+  )
 }
 
 #' Set multiple vertex attributes
