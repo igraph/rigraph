@@ -255,21 +255,25 @@ test_that("vertices() works", {
 test_that("vertices() errors on duplicate attribute names", {
   # Test case from issue: vertices("a", name = "c")
   expect_snapshot_error(
+    # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", name = "c", name = "d")
   )
 
   # Test case from issue: vertices("a", blop = "c", blop = 1)
   expect_snapshot_error(
+    # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", blop = "c", blop = 1)
   )
 
   # Test with graph addition
   expect_snapshot_error(
+    # jarl-ignore duplicated_arguments: this is the test's point
     make_empty_graph(1) + vertices("a", "b", name = "c", name = "d")
   )
 
   # Test multiple duplicates
   expect_snapshot_error(
+    # jarl-ignore duplicated_arguments: this is the test's point
     vertices(foo = 1, foo = 2, bar = 3, bar = 4)
   )
 })
