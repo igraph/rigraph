@@ -345,6 +345,56 @@ test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
     "Cannot make that many steps"
   )
   expect_equal(m_excess_steps, cut_at(lec, no = 1))
+
+  # Asking for too few communities should warn and clamp to the dendrogram floor
+  expect_warning(
+    m_too_few <- cut_at(lec, no = 0),
+    "Cannot have that few communities"
+  )
+  expect_equal(m_too_few, cut_at(lec, no = 1))
+
+  # Boundary values (no == n_initial, no == min_communities) must not warn
+  expect_no_warning(cut_at(lec, no = 3))
+  expect_no_warning(cut_at(lec, no = 1))
+  expect_no_warning(cut_at(lec, steps = 0))
+  expect_no_warning(cut_at(lec, steps = nrow(lec$merges)))
+})
+
+test_that("cut_at handles cluster_leading_eigen with no merges", {
+  # Single-community result: nrow(merges) == 0, so no cuts are possible
+  lec <- cluster_leading_eigen(make_full_graph(5))
+  expect_equal(max(membership(lec)), 1L)
+  expect_equal(nrow(lec$merges), 0L)
+
+  expect_equal(cut_at(lec, no = 1), rep(1, 5))
+  expect_equal(cut_at(lec, steps = 0), rep(1, 5))
+
+  # Anything beyond the trivial cut must clamp with a warning
+  expect_warning(cut_at(lec, no = 2), "Cannot have that many communities")
+  expect_warning(cut_at(lec, steps = 1), "Cannot make that many steps")
+})
+
+test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
+  # Ring of 6 cliques: leading eigen finds 6 communities with 5 merges,
+  # exercising more than the trivial 3->2->1 chain.
+  g <- Reduce(`%du%`, replicate(6, make_full_graph(4), simplify = FALSE))
+  bridges <- as.vector(rbind(
+    seq(1, by = 4, length.out = 6),
+    c(seq(5, by = 4, length.out = 5), 1)
+  ))
+  g <- add_edges(g, bridges)
+  lec <- cluster_leading_eigen(g)
+  expect_equal(max(membership(lec)), 6L)
+  expect_equal(nrow(lec$merges), 5L)
+
+  # Each step should reduce the community count by exactly one
+  for (k in seq_len(6)) {
+    expect_equal(length(unique(cut_at(lec, no = k))), k)
+  }
+  for (s in seq(0, 5)) {
+    expect_equal(length(unique(cut_at(lec, steps = s))), 6L - s)
+    expect_equal(cut_at(lec, steps = s), cut_at(lec, no = 6L - s))
+  }
 })
 
 test_that("cluster_leiden works", {
