@@ -77,7 +77,10 @@ test_that("print.igraph() respects max.print for adjacency list formats", {
 
   g <- make_full_graph(6)
   joined <- paste(capture.output(print(g)), collapse = "\n")
-  expect_match(joined, 'reached getOption\\("max.print"\\) -- omitted 3 vertices')
+  expect_match(
+    joined,
+    'reached getOption\\("max.print"\\) -- omitted 3 vertices'
+  )
   # First three source vertices shown, fourth onwards omitted
   expect_match(joined, "1 -- ")
   expect_match(joined, "3 -- ")
@@ -85,7 +88,10 @@ test_that("print.igraph() respects max.print for adjacency list formats", {
 
   V(g)$name <- letters[1:vcount(g)]
   joined <- paste(capture.output(print(g)), collapse = "\n")
-  expect_match(joined, 'reached getOption\\("max.print"\\) -- omitted 3 vertices')
+  expect_match(
+    joined,
+    'reached getOption\\("max.print"\\) -- omitted 3 vertices'
+  )
   expect_match(joined, "a -- ")
   expect_match(joined, "c -- ")
   expect_false(grepl("d -- ", joined))
@@ -111,7 +117,10 @@ test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
   g <- make_full_graph(20)
   out <- capture.output(print(g))
   joined <- paste(out, collapse = "\n")
-  expect_match(joined, 'reached getOption\\("max.print"\\) -- omitted 18 vertices')
+  expect_match(
+    joined,
+    'reached getOption\\("max.print"\\) -- omitted 18 vertices'
+  )
   # Wrapped continuation lines should appear (lines starting with spaces before a number)
   expect_true(any(grepl("^ +[0-9]+ ", out)))
   expect_true(any(grepl("^1 -- ", out)))

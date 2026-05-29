@@ -458,7 +458,11 @@
     ncol <- trunc((getOption("width") - 1 + nchar(sep)) / (maxw + nchar(sep)))
     if (ncol > 1) {
       alstr <- format(alstr, width = maxw, justify = "left")
-      fac <- rep(1:(length(ind) / ncol + 1), each = ncol, length.out = length(ind))
+      fac <- rep(
+        1:(length(ind) / ncol + 1),
+        each = ncol,
+        length.out = length(ind)
+      )
       alstr <- tapply(alstr, fac, paste, collapse = sep)
     }
     cat(alstr, sep = "\n")
