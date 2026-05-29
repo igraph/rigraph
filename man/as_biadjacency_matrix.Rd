@@ -27,8 +27,7 @@ no \code{type} vertex attribute.}
 \item{weights}{One of the following:
 \itemize{
 \item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
-one, otherwise return a traditional (unweighted) bipartite adjacency
-matrix.
+one, otherwise return a traditional (unweighted) adjacency matrix.
 \item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
 \item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
 directly as edge weights.

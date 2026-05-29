@@ -1114,23 +1114,7 @@ get.incidence.sparse <- function(
 #' @param types An optional vertex type vector to use instead of the
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
-#' @param ... These dots are for future extensions and must be empty.
-#' @param weights One of the following:
-#'   \itemize{
-#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
-#'       one, otherwise return a traditional (unweighted) bipartite adjacency
-#'       matrix.
-#'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
-#'     \item A numeric or logical vector of length [ecount()]: use these values
-#'       directly as edge weights.
-#'     \item A character scalar: the name of an edge attribute whose values are
-#'       used as weights. The attribute must be numeric or logical.
-#'   }
-#'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
-#'   is included in the matrix.
-#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
-#'   supplied, the value is forwarded to `weights` as a character edge
-#'   attribute name.
+#' @inheritParams as_adjacency_matrix
 #' @param names Logical scalar, if `TRUE` and the vertices in the graph
 #'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise

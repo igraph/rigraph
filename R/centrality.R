@@ -1886,11 +1886,7 @@ bonpow.sparse <- function(
 #' @param sparse Logical scalar, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
-#' @param weights Edge weights to use, following the standard rigraph weight
-#'   convention. `NULL` (default) uses the graph's `weight` edge attribute if
-#'   present; `NA` forces an unweighted calculation; a numeric vector of length
-#'   [ecount()] is used directly; a character scalar names an edge attribute to
-#'   use.
+#' @inheritParams as_adjacency_matrix
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
@@ -2070,11 +2066,7 @@ alpha.centrality.sparse <- function(
 #'   the same factor for every node, or a vector giving the factor for every
 #'   vertex. Note that too long vectors will be truncated and too short vectors
 #'   will be replicated to match the number of vertices.
-#' @param weights A character scalar that gives the name of the edge attribute
-#'   to use in the adjacency matrix. If it is `NULL`, then the
-#'   \sQuote{weight} edge attribute of the graph is used, if there is one.
-#'   Otherwise, or if it is `NA`, then the calculation uses the standard
-#'   adjacency matrix.
+#' @inheritParams as_adjacency_matrix
 #' @param tol Tolerance for near-singularities during matrix inversion, see
 #'   [solve()].
 #' @param sparse Logical scalar, whether to use sparse matrices for the
