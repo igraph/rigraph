@@ -1422,6 +1422,10 @@ print.igraph.vs <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (identical(igraph_opt("print.style"), "modern")) {
+    return(print_igraph_vs_modern(x, full = full, id = id, ...))
+  }
+
   graph <- get_vs_graph(x)
   if (!is.null(graph)) {
     vertices <- V(graph)
@@ -1539,6 +1543,10 @@ print.igraph.es <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (identical(igraph_opt("print.style"), "modern")) {
+    return(print_igraph_es_modern(x, full = full, id = id, ...))
+  }
+
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(
@@ -1549,6 +1557,130 @@ print.igraph.es <- function(
     num = TRUE,
     id = id
   )
+  invisible(x)
+}
+
+# Modern (cli-styled) printing for vertex/edge sequences -----------------
+
+print_igraph_vs_modern <- function(x, full = igraph_opt("print.full"),
+                                    id = igraph_opt("print.id"), ...) {
+  graph <- get_vs_graph(x)
+  vertices <- if (!is.null(graph)) V(graph) else NULL
+  len <- length(x)
+  total <- if (is.null(vertices)) "?" else as.character(length(vertices))
+  gid <- graph_id(x)
+
+  dot <- modern_middot()
+  flags <- character()
+  if (!is.null(vertices) && !is.null(names(vertices))) flags <- c(flags, "named")
+  if (isTRUE(id) && !is.na(gid)) flags <- c(flags, paste("from", substr(gid, 1, 7)))
+  if (is.null(graph)) flags <- c(flags, "deleted")
+  flag_str <- if (length(flags)) paste0(" ", dot, " ", paste(flags, collapse = paste0(" ", dot, " "))) else ""
+
+  title <- paste0("<vertex sequence> ", len, "/", total, flag_str)
+  cat(cli::rule(left = title), "\n", sep = "")
+
+  if (is_single_index(x) && !is.null(graph) &&
+      length(vertex_attr_names(graph)) > 0) {
+    va <- vertex_attr(graph)
+    if (all(sapply(va, is.atomic))) {
+      print(as.data.frame(va, stringsAsFactors = FALSE)[
+        as.vector(x), , drop = FALSE
+      ])
+    } else {
+      print(lapply(va, "[", as.vector(x)))
+    }
+  } else {
+    if (!is.null(names(vertices))) {
+      x2 <- names(vertices)[as.vector(x)]
+      if (!is.null(names(x)) && !identical(names(x), x2)) {
+        names(x2) <- names(x)
+      }
+    } else {
+      x2 <- as.vector(x)
+    }
+    if (length(x2)) {
+      if (is.logical(full) && full) {
+        print(x2, quote = FALSE)
+      } else {
+        head_print(
+          x2,
+          omitted_footer = "+ ... omitted several vertices\n",
+          quote = FALSE,
+          max_lines = igraph_opt("auto.print.lines")
+        )
+      }
+    }
+  }
+
+  invisible(x)
+}
+
+print_igraph_es_modern <- function(x, full = igraph_opt("print.full"),
+                                    id = igraph_opt("print.id"), ...) {
+  graph <- get_es_graph(x)
+  len <- length(x)
+  total <- if (is.null(graph)) "?" else as.character(gsize(graph))
+  gid <- graph_id(x)
+  has_vnames <- !is.null(attr(x, "vnames"))
+
+  dot <- modern_middot()
+  flags <- character()
+  if (has_vnames) flags <- c(flags, "vertex names")
+  if (isTRUE(id) && !is.na(gid)) flags <- c(flags, paste("from", substr(gid, 1, 7)))
+  if (is.null(graph)) flags <- c(flags, "deleted")
+  flag_str <- if (length(flags)) paste0(" ", dot, " ", paste(flags, collapse = paste0(" ", dot, " "))) else ""
+
+  title <- paste0("<edge sequence> ", len, "/", total, flag_str)
+  cat(cli::rule(left = title), "\n", sep = "")
+
+  if (len == 0) return(invisible(x))
+
+  if (is_single_index(x) && !is.null(graph)) {
+    ea <- edge_attr(graph)
+    if (all(sapply(ea, is.atomic))) {
+      etail <- tail_of(graph, x)
+      ehead <- head_of(graph, x)
+      df <- data.frame(
+        stringsAsFactors = FALSE,
+        tail = as_ids(etail),
+        head = as_ids(ehead),
+        tid = as.vector(etail),
+        hid = as.vector(ehead)
+      )
+      if (length(ea)) {
+        ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
+        df <- cbind(df, ea[as.vector(x), , drop = FALSE])
+      }
+      print(df)
+    } else {
+      print(lapply(ea, "[", as.vector(x)))
+    }
+    return(invisible(x))
+  }
+
+  ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
+
+  if (!is.null(graph)) {
+    arrow <- modern_edge_arrow(is_directed(graph))
+    el <- ends(graph, x, names = has_vnames || is_named(graph))
+    formatted <- paste0(format(el[, 1]), " ", arrow, " ", format(el[, 2]))
+    if (is.null(ml)) {
+      print(formatted, quote = FALSE)
+    } else {
+      head_print(formatted,
+        omitted_footer = "+ ... omitted several edges\n",
+        quote = FALSE, max_lines = ml
+      )
+    }
+  } else {
+    body <- if (!is.null(attr(x, "vnames"))) as.vector(attr(x, "vnames"))
+            else if (!is.null(names(x))) names(x)
+            else as.vector(x)
+    if (is.null(ml)) print(body, quote = FALSE)
+    else head_print(body, omitted_footer = "+ ... omitted several edges\n",
+                    quote = FALSE, max_lines = ml)
+  }
   invisible(x)
 }
 
