@@ -71,6 +71,23 @@ test_that("print.igraph() works", {
   expect_output(print(kite), "A -- ")
 })
 
+test_that("print.igraph() respects max.print for adjacency list formats", {
+  local_igraph_options(print.full = TRUE)
+  withr::local_options(width = 76, max.print = 3)
+
+  g <- make_full_graph(6)
+  expect_output(
+    print(g),
+    'reached getOption\\("max.print"\\) -- omitted 3 vertices'
+  )
+
+  V(g)$name <- letters[1:vcount(g)]
+  expect_output(
+    print(g),
+    'reached getOption\\("max.print"\\) -- omitted 3 vertices'
+  )
+})
+
 test_that("print.igraph.es() uses vertex names", {
   local_igraph_options(print.id = FALSE)
 
