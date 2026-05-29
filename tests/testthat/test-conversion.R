@@ -378,6 +378,26 @@ test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
   expect_equal(A, expected)
 })
 
+test_that("as_adjacency_matrix() recovers legacy positional `attr`", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- 1:6
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_adjacency_matrix(g, "both", "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_adjacency_matrix() keeps hard errors for unrecoverable dots", {
+  g <- make_full_graph(4, directed = FALSE)
+  # Numeric in `...` is not a legacy `attr` value (always character) -> error.
+  expect_error(as_adjacency_matrix(g, "both", 1:6))
+  # Multiple unnamed positionals -> error.
+  expect_error(as_adjacency_matrix(g, "both", "weight", "extra"))
+  # Unknown named extra -> error.
+  expect_error(as_adjacency_matrix(g, "both", foo = "weight"))
+})
+
 test_that("as_adjacency_matrix() dense/sparse parity for arbitrary weights", {
   g <- make_ring(6, directed = TRUE)
   w <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5)
@@ -426,6 +446,23 @@ test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
     A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
   )
   expect_equal(A, expected)
+})
+
+test_that("as_biadjacency_matrix() recovers legacy positional `attr`", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_biadjacency_matrix(g, NULL, "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_biadjacency_matrix() keeps hard errors for unrecoverable dots", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  expect_error(as_biadjacency_matrix(g, NULL, 1:3))
+  expect_error(as_biadjacency_matrix(g, NULL, "weight", "extra"))
+  expect_error(as_biadjacency_matrix(g, NULL, foo = "weight"))
 })
 
 test_that("as_adj works", {

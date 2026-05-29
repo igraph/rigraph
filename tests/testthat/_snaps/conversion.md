@@ -89,6 +89,16 @@
       The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
       i Please use the `weights` argument instead.
 
+# as_adjacency_matrix() recovers legacy positional `attr`
+
+    Code
+      A <- as_adjacency_matrix(g, "both", "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+      i Pass the edge-attribute name by name (e.g. `weights = "weight"`).
+
 # as_biadjacency_matrix(attr =) is deprecated but still works
 
     Code
@@ -97,6 +107,16 @@
       Warning:
       The `attr` argument of `as_biadjacency_matrix()` is deprecated as of igraph 3.0.0.
       i Please use the `weights` argument instead.
+
+# as_biadjacency_matrix() recovers legacy positional `attr`
+
+    Code
+      A <- as_biadjacency_matrix(g, NULL, "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_biadjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+      i Pass the edge-attribute name by name (e.g. `weights = "weight"`).
 
 # as_long_data_frame() works correctly with and without names
 

@@ -235,13 +235,15 @@ resolve_edge_weights <- function(
   weights,
   attr = deprecated(),
   fn = "function",
-  call = rlang::caller_env()
+  call = rlang::caller_env(),
+  user_env = rlang::caller_env(2)
 ) {
   if (lifecycle::is_present(attr)) {
     lifecycle::deprecate_soft(
       "3.0.0",
       sprintf("%s(attr = )", fn),
-      sprintf("%s(weights = )", fn)
+      sprintf("%s(weights = )", fn),
+      user_env = user_env
     )
     weights <- attr
   }
@@ -300,6 +302,56 @@ edge_attr_as_weights <- function(graph, name, call) {
     )
   }
   as.numeric(value)
+}
+
+# Recover a legacy positional `attr` argument passed via `...`.
+#
+# Before 3.0.0, `attr` was the 3rd positional slot of as_adjacency_matrix()
+# and as_biadjacency_matrix(). The new signatures insert `...` in that slot
+# and move `weights`/`attr` after the dots, so calls like
+#   as_adjacency_matrix(g, "both", "weight")
+# would otherwise hard-fail via rlang::check_dots_empty().
+#
+# Dispatcher is dm-style: discriminate on whether dots are named or not
+# (cynkra/dm R/filter-dm.R, dm_filter_api1()). Named extras stay an error
+# (dots are reserved for future extension); a single unnamed character
+# scalar is the legacy `attr` value and gets a soft deprecation.
+#
+# `user_env` is threaded through so `lifecycle::deprecate_soft()` recognises
+# the caller's frame as user-facing (otherwise its is_direct() check sees
+# the igraph namespace and silently swallows the warning).
+recover_positional_attr <- function(
+  ...,
+  fn,
+  env = rlang::caller_env(),
+  user_env = rlang::caller_env()
+) {
+  dots <- list(...)
+  if (length(dots) == 0L) {
+    return(NULL)
+  }
+
+  nms <- rlang::names2(dots)
+  unnamed <- dots[!nzchar(nms)]
+
+  if (
+    length(dots) == 1L &&
+      length(unnamed) == 1L &&
+      is.character(unnamed[[1L]]) &&
+      length(unnamed[[1L]]) == 1L
+  ) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      sprintf("%s(attr = )", fn),
+      sprintf("%s(weights = )", fn),
+      details = "Pass the edge-attribute name by name (e.g. `weights = \"weight\"`).",
+      user_env = user_env
+    )
+    return(unnamed[[1L]])
+  }
+
+  rlang::check_dots_empty(env = env)
+  NULL
 }
 
 get.adjacency.dense <- function(
@@ -447,7 +499,22 @@ as_adjacency_matrix <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   ensure_igraph(graph)
-  rlang::check_dots_empty()
+
+  user_env <- rlang::caller_env()
+  recovered_attr <- recover_positional_attr(
+    ...,
+    fn = "as_adjacency_matrix",
+    user_env = user_env
+  )
+  # Route into `weights` (not `attr`) so resolve_edge_weights() does not
+  # emit its own deprecation on top of the one we already issued.
+  if (
+    !is.null(recovered_attr) &&
+      !lifecycle::is_present(attr) &&
+      is.null(weights)
+  ) {
+    weights <- recovered_attr
+  }
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
@@ -457,7 +524,8 @@ as_adjacency_matrix <- function(
     graph,
     weights,
     attr,
-    fn = "as_adjacency_matrix"
+    fn = "as_adjacency_matrix",
+    user_env = user_env
   )
 
   if (sparse) {
@@ -1147,7 +1215,20 @@ as_biadjacency_matrix <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  rlang::check_dots_empty()
+
+  user_env <- rlang::caller_env()
+  recovered_attr <- recover_positional_attr(
+    ...,
+    fn = "as_biadjacency_matrix",
+    user_env = user_env
+  )
+  if (
+    !is.null(recovered_attr) &&
+      !lifecycle::is_present(attr) &&
+      is.null(weights)
+  ) {
+    weights <- recovered_attr
+  }
 
   names <- as.logical(names)
   sparse <- as.logical(sparse)
@@ -1156,7 +1237,8 @@ as_biadjacency_matrix <- function(
     graph,
     weights,
     attr,
-    fn = "as_biadjacency_matrix"
+    fn = "as_biadjacency_matrix",
+    user_env = user_env
   )
 
   if (sparse) {
