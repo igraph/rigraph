@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.3.1.9008
+# igraph 2.3.2.9008
 
 ## Chore
 
@@ -428,6 +428,13 @@
 # igraph 2.3.1.9000
 
 - Switching to development version.
+
+
+# igraph 2.3.2
+
+## Bug fixes
+
+- Fix obsolete Fortran syntax (#2644).
 
 
 # igraph 2.3.1
