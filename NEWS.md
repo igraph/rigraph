@@ -430,6 +430,13 @@
 - Switching to development version.
 
 
+# igraph 2.3.2
+
+## Bug fixes
+
+- Fix obsolete Fortran syntax (#2644).
+
+
 # igraph 2.3.1
 
 ## Bug fixes
