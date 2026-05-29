@@ -666,7 +666,8 @@ modern_middot <- function() {
 }
 
 modern_attr_label <- function(code) {
-  switch(code,
+  switch(
+    code,
     c = "<chr>",
     n = "<dbl>",
     l = "<lgl>",
@@ -676,9 +677,13 @@ modern_attr_label <- function(code) {
 }
 
 modern_attr_codes <- function(x, kind) {
-  if (kind == "graph") .Call(Rx_igraph_get_attr_mode, x, 2L)
-  else if (kind == "vertex") .Call(Rx_igraph_get_attr_mode, x, 3L)
-  else .Call(Rx_igraph_get_attr_mode, x, 4L)
+  if (kind == "graph") {
+    .Call(Rx_igraph_get_attr_mode, x, 2L)
+  } else if (kind == "vertex") {
+    .Call(Rx_igraph_get_attr_mode, x, 3L)
+  } else {
+    .Call(Rx_igraph_get_attr_mode, x, 4L)
+  }
 }
 
 print_igraph_header_modern <- function(x, id) {
@@ -697,16 +702,31 @@ print_igraph_header_modern <- function(x, id) {
   }
 
   props <- if (is_directed(x)) "directed" else "undirected"
-  if (is_named(x))     props <- c(props, "named")
-  if (is_weighted(x))  props <- c(props, "weighted")
-  if (is_bipartite(x)) props <- c(props, "bipartite")
+  if (is_named(x)) {
+    props <- c(props, "named")
+  }
+  if (is_weighted(x)) {
+    props <- c(props, "weighted")
+  }
+  if (is_bipartite(x)) {
+    props <- c(props, "bipartite")
+  }
 
   dot <- modern_middot()
   info <- cli::col_cyan(cli::symbol$info)
 
   cat(info, " ", paste(props, collapse = paste0(" ", dot, " ")), "\n", sep = "")
-  cat(info, " ", vcount(x), " vertices ", dot, " ",
-      ecount(x), " edges\n", sep = "")
+  cat(
+    info,
+    " ",
+    vcount(x),
+    " vertices ",
+    dot,
+    " ",
+    ecount(x),
+    " edges\n",
+    sep = ""
+  )
 }
 
 print_igraph_attr_summary_modern <- function(x) {
@@ -730,16 +750,24 @@ print_igraph_attr_summary_modern <- function(x) {
   }
 
   lines <- character()
-  if (length(ga)) lines <- c(lines, format_line("graph:  ", ga, modern_attr_codes(x, "graph")))
-  if (length(va)) lines <- c(lines, format_line("vertex: ", va, modern_attr_codes(x, "vertex")))
-  if (length(ea)) lines <- c(lines, format_line("edge:   ", ea, modern_attr_codes(x, "edge")))
+  if (length(ga)) {
+    lines <- c(lines, format_line("graph:  ", ga, modern_attr_codes(x, "graph")))
+  }
+  if (length(va)) {
+    lines <- c(lines, format_line("vertex: ", va, modern_attr_codes(x, "vertex")))
+  }
+  if (length(ea)) {
+    lines <- c(lines, format_line("edge:   ", ea, modern_attr_codes(x, "edge")))
+  }
   cat(lines, sep = "\n")
   cat("\n")
 }
 
 print_igraph_graph_attrs_modern <- function(x) {
   list <- graph_attr_names(x)
-  if (length(list) == 0) return(invisible(NULL))
+  if (length(list) == 0) {
+    return(invisible(NULL))
+  }
   cat("\n", cli::rule(left = "Graph attributes"), "\n", sep = "")
   for (n in list) {
     cat(cli::format_inline("{.field {n}}:"), "\n", sep = "")
@@ -748,25 +776,39 @@ print_igraph_graph_attrs_modern <- function(x) {
 }
 
 print_igraph_vertex_attrs_modern <- function(x) {
-  if (length(vertex_attr_names(x)) == 0) return(invisible(NULL))
+  if (length(vertex_attr_names(x)) == 0) {
+    return(invisible(NULL))
+  }
   cat("\n", cli::rule(left = "Vertex attributes"), "\n", sep = "")
   # reuse classic tabular renderer
   .print.vertex.attributes.old(x, full = TRUE, max.lines = NULL)
 }
 
-print_igraph_edges_modern <- function(x, edges = E(x), names = TRUE,
-                                       max.lines = NULL, with_attrs = FALSE) {
+print_igraph_edges_modern <- function(
+  x,
+  edges = E(x),
+  names = TRUE,
+  max.lines = NULL,
+  with_attrs = FALSE
+) {
   is_named_g <- isTRUE(names) && is_named(x)
-  if (is_named_g && "name" %in% vertex_attr_names(x) &&
+  if (
+    is_named_g &&
+      "name" %in% vertex_attr_names(x) &&
       !is.numeric(vertex_attr(x, "name")) &&
       !is.character(vertex_attr(x, "name")) &&
-      !is.logical(vertex_attr(x, "name"))) {
-    cli::cli_warn("Can't print vertex names, complex {.val name} vertex attribute.")
+      !is.logical(vertex_attr(x, "name"))
+  ) {
+    cli::cli_warn(
+      "Can't print vertex names, complex {.val name} vertex attribute."
+    )
     is_named_g <- FALSE
   }
 
   ec <- length(edges)
-  if (ec == 0) return(invisible(NULL))
+  if (ec == 0) {
+    return(invisible(NULL))
+  }
 
   title_suffix <- if (is_named_g) " (vertex names)" else ""
   show_attrs <- with_attrs && length(edge_attr_names(x)) != 0
@@ -793,9 +835,16 @@ print_igraph_edges_modern <- function(x, edges = E(x), names = TRUE,
       seq_len(nrow(el))
     }
     tab <- data.frame(row.names = paste0("[", ename, "]"))
-    tab[["edge"]] <- paste0(format(el[, 1], width = w), " ", arrow, " ",
-                            format(el[, 2], width = w))
-    for (i in eattrs) tab[[i]] <- edge_attr(x, i)
+    tab[["edge"]] <- paste0(
+      format(el[, 1], width = w),
+      " ",
+      arrow,
+      " ",
+      format(el[, 2], width = w)
+    )
+    for (i in eattrs) {
+      tab[[i]] <- edge_attr(x, i)
+    }
     print(tab)
   } else {
     el <- ends(x, edges, names = is_named_g)
@@ -803,7 +852,8 @@ print_igraph_edges_modern <- function(x, edges = E(x), names = TRUE,
     if (is.null(max.lines)) {
       print(formatted, quote = FALSE)
     } else {
-      head_print(formatted,
+      head_print(
+        formatted,
         omitted_footer = "+ ... omitted several edges\n",
         quote = FALSE,
         max_lines = max.lines
@@ -812,25 +862,35 @@ print_igraph_edges_modern <- function(x, edges = E(x), names = TRUE,
   }
 }
 
-print_igraph_modern <- function(x,
-                                 full = igraph_opt("print.full"),
-                                 graph.attributes = igraph_opt("print.graph.attributes"),
-                                 vertex.attributes = igraph_opt("print.vertex.attributes"),
-                                 edge.attributes = igraph_opt("print.edge.attributes"),
-                                 names = TRUE,
-                                 max.lines = igraph_opt("auto.print.lines"),
-                                 id = igraph_opt("print.id"),
-                                 ...) {
+print_igraph_modern <- function(
+  x,
+  full = igraph_opt("print.full"),
+  graph.attributes = igraph_opt("print.graph.attributes"),
+  vertex.attributes = igraph_opt("print.vertex.attributes"),
+  edge.attributes = igraph_opt("print.edge.attributes"),
+  names = TRUE,
+  max.lines = igraph_opt("auto.print.lines"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   print_igraph_header_modern(x, id)
   print_igraph_attr_summary_modern(x)
 
   if (is.logical(full) && isTRUE(full)) {
-    if (graph.attributes)  print_igraph_graph_attrs_modern(x)
-    if (vertex.attributes) print_igraph_vertex_attrs_modern(x)
+    if (graph.attributes) {
+      print_igraph_graph_attrs_modern(x)
+    }
+    if (vertex.attributes) {
+      print_igraph_vertex_attrs_modern(x)
+    }
     if (ecount(x) > 0) {
       if (edge.attributes && length(edge_attr_names(x)) != 0) {
-        print_igraph_edges_modern(x, names = names, max.lines = NULL,
-                                  with_attrs = TRUE)
+        print_igraph_edges_modern(
+          x,
+          names = names,
+          max.lines = NULL,
+          with_attrs = TRUE
+        )
       } else {
         print_igraph_edges_modern(x, names = names, max.lines = NULL)
       }
