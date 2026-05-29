@@ -2430,59 +2430,59 @@ Status: OK
 
 
 ```
-# rsat (0.1.21)
+# primer (NA)
 
-* GitHub: <https://github.com/ropensci/rsat>
-* Email: <mailto:unai.perez@unavarra.es>
-* GitHub mirror: <https://github.com/cran/rsat>
+* : <UNKNOWN>
 
-Run `revdepcheck::cloud_details(, "rsat")` for more info
+Run `revdepcheck::cloud_details(, "primer")` for more info
 
-## In both
-
-*   checking whether package ‘rsat’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘/tmp/workdir/rsat/new/rsat.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘rsat’ ...
-** this is package ‘rsat’ version ‘0.1.21’
-** package ‘rsat’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error: object ‘tm_scale_bar’ is not exported by 'namespace:tmap'
-Execution halted
-ERROR: lazy loading failed for package ‘rsat’
-* removing ‘/tmp/workdir/rsat/new/rsat.Rcheck/rsat’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘rsat’ ...
-** this is package ‘rsat’ version ‘0.1.21’
-** package ‘rsat’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error: object ‘tm_scale_bar’ is not exported by 'namespace:tmap'
-Execution halted
-ERROR: lazy loading failed for package ‘rsat’
-* removing ‘/tmp/workdir/rsat/old/rsat.Rcheck/rsat’
+
+
+
+
+
+
+```
+# rsat (NA)
+
+* : <UNKNOWN>
+
+Run `revdepcheck::cloud_details(, "rsat")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
@@ -2588,10 +2588,10 @@ fi
 export CARGO_HOME=/tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.cargo/bin" && \
 RUSTFLAGS=" --print=native-static-libs" cargo build -j 2 --offline --lib --release --manifest-path=./rust/Cargo.toml --target-dir ./rust/target 
-error: package `rayon-core v1.13.0` cannot be built because it requires rustc 1.80 or newer, while the currently active rustc version is 1.75.0
-Either upgrade to rustc 1.80 or newer, or use
-cargo update rayon-core@1.13.0 --precise ver
-where `ver` is the latest version of `rayon-core` supporting rustc 1.75.0
+error: package `indexmap v2.12.1` cannot be built because it requires rustc 1.82 or newer, while the currently active rustc version is 1.75.0
+Either upgrade to rustc 1.82 or newer, or use
+cargo update indexmap@2.12.1 --precise ver
+where `ver` is the latest version of `indexmap` supporting rustc 1.75.0
 make: *** [Makevars:27: rust/target/release/libspopt.a] Error 101
 ERROR: compilation failed for package ‘spopt’
 * removing ‘/tmp/workdir/spopt/new/spopt.Rcheck/spopt’
@@ -2627,10 +2627,10 @@ fi
 export CARGO_HOME=/tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.cargo/bin" && \
 RUSTFLAGS=" --print=native-static-libs" cargo build -j 2 --offline --lib --release --manifest-path=./rust/Cargo.toml --target-dir ./rust/target 
-error: package `sprs v0.11.4` cannot be built because it requires rustc 1.85.0 or newer, while the currently active rustc version is 1.75.0
-Either upgrade to rustc 1.85.0 or newer, or use
-cargo update sprs@0.11.4 --precise ver
-where `ver` is the latest version of `sprs` supporting rustc 1.75.0
+error: package `rayon-core v1.13.0` cannot be built because it requires rustc 1.80 or newer, while the currently active rustc version is 1.75.0
+Either upgrade to rustc 1.80 or newer, or use
+cargo update rayon-core@1.13.0 --precise ver
+where `ver` is the latest version of `rayon-core` supporting rustc 1.75.0
 make: *** [Makevars:27: rust/target/release/libspopt.a] Error 101
 ERROR: compilation failed for package ‘spopt’
 * removing ‘/tmp/workdir/spopt/old/spopt.Rcheck/spopt’

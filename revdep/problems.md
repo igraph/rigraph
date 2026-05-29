@@ -76,6 +76,46 @@ Run `revdepcheck::cloud_details(, "c3net")` for more info
      Execution halted
      ```
 
+# cfid (0.1.8)
+
+* GitHub: <https://github.com/santikka/cfid>
+* Email: <mailto:santtuth@gmail.com>
+* GitHub mirror: <https://github.com/cran/cfid>
+
+Run `revdepcheck::cloud_details(, "cfid")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       Expected `import_graph(ig)` to be identical to `dag("X -> Z -> Y X <-> Y")`.
+       Differences:
+         `dim(actual)`: 5 5
+       `dim(expected)`: 4 4
+       
+       `attr(actual, 'labels')[2:5]`:   "Z" "Y" "U[X,Y]" "U[Z,Y]"
+       `attr(expected, 'labels')[2:4]`: "Z" "Y" "U[X,Y]"         
+       
+       `attr(actual, 'latent')[2:5]`:   FALSE FALSE TRUE TRUE
+       `attr(expected, 'latent')[2:4]`: FALSE FALSE TRUE     
+       
+         `attr(actual, 'order')`: 4 5 3 1 2
+       `attr(expected, 'order')`: 4 1 2 3  
+       
+       `attr(actual, 'text')`:   "X; Z; Y; X -> Z; Y -> X; X <-> Y; Z <-> Y"
+       `attr(expected, 'text')`: "X; Z; Y; X -> Z; Z -> Y; X <-> Y"         
+       
+               `actual`: 0 0 1 1 0 1 0 0 0 1 and 15 more...
+       `expected[2:16]`: 0 0 1 1 0 0 0 0 1 0            ...
+       
+       
+       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 204 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
 # comato (1.1)
 
 * Email: <mailto:andreas.muehling@tum.de>
@@ -255,7 +295,7 @@ Run `revdepcheck::cloud_details(, "dci")` for more info
      Execution halted
      ```
 
-# degreenet (1.3-6)
+# degreenet (1.3-7)
 
 * Email: <mailto:handcock@stat.ucla.edu>
 * GitHub mirror: <https://github.com/cran/degreenet>
@@ -360,45 +400,6 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
        Error:
        ! Test failures.
        Execution halted
-     ```
-
-# FrF2 (2.3-4)
-
-* Email: <mailto:ulrike.groemping@bht-berlin.de>
-* GitHub mirror: <https://github.com/cran/FrF2>
-
-Run `revdepcheck::cloud_details(, "FrF2")` for more info
-
-## Newly broken
-
-*   checking tests ... NOTE
-     ```
-     ...
-     < 4: `clique.number()` was deprecated in igraph 2.0.0.
-     < ℹ Please use `clique_num()` instead.
-     < ℹ The deprecated feature was likely used in the FrF2 package.
-     <   Please report the issue to the authors. 
-       Running ‘godolphintest.R’
-       Comparing ‘godolphintest.Rout’ to ‘godolphintest.Rout.save’ ...49,65d48
-     < Warning messages:
-     < 1: `graph.empty()` was deprecated in igraph 2.1.0.
-     < ℹ Please use `make_empty_graph()` instead.
-     < ℹ The deprecated feature was likely used in the FrF2 package.
-     <   Please report the issue to the authors. 
-     < 2: `add.edges()` was deprecated in igraph 2.0.0.
-     < ℹ Please use `add_edges()` instead.
-     < ℹ The deprecated feature was likely used in the FrF2 package.
-     <   Please report the issue to the authors. 
-     < 3: `independence.number()` was deprecated in igraph 2.0.0.
-     < ℹ Please use `ivs_size()` instead.
-     < ℹ The deprecated feature was likely used in the FrF2 package.
-     <   Please report the issue to the authors. 
-     < 4: `clique.number()` was deprecated in igraph 2.0.0.
-     < ℹ Please use `clique_num()` instead.
-     < ℹ The deprecated feature was likely used in the FrF2 package.
-     <   Please report the issue to the authors. 
-       Running ‘pbtest.R’
-       Comparing ‘pbtest.Rout’ to ‘pbtest.Rout.save’ ... OK
      ```
 
 # ggm (2.5.2)
@@ -510,6 +511,46 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
      Execution halted
      ```
 
+# glyrepr (0.12.0)
+
+* GitHub: <https://github.com/glycoverse/glyrepr>
+* Email: <mailto:23110220018@m.fudan.edu.cn>
+* GitHub mirror: <https://github.com/cran/glyrepr>
+
+Run `revdepcheck::cloud_details(, "glyrepr")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       > library(glyrepr)
+       > 
+       > test_check("glyrepr")
+       Saving _problems/test-structure-to-iupac-95.R
+       [ FAIL 1 | WARN 0 | SKIP 12 | PASS 1180 ]
+       
+       ══ Skipped tests (12) ══════════════════════════════════════════════════════════
+       • On CRAN (12): 'test-composition.R:270:1', 'test-composition.R:297:1',
+         'test-example-glycans.R:1:1', 'test-example-glycans.R:9:1',
+         'test-example-glycans.R:16:1', 'test-example-glycans.R:23:1',
+         'test-example-glycans.R:30:1', 'test-structure-level.R:66:1',
+         'test-structure-level.R:147:1', 'test-structure.R:530:1',
+         'test-structure.R:537:1', 'test-structure.R:545:1'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test-structure-to-iupac.R:95:3'): structure_to_iupac handles complex branched structures ──
+       <purrr_error_indexed/rlang_error/error/condition>
+       Error in `purrr::map(valid_graphs, function(graph) {     checkmate::assert_class(graph, "igraph")     graph %>% validate_single_glycan_structure() %>% ensure_name_vertex_attr() })`: i In index: 1.
+       Caused by error in `validate_single_glycan_structure()`:
+       ! Duplicated linkage positions.
+       
+       [ FAIL 1 | WARN 0 | SKIP 12 | PASS 1180 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
 # GoodFitSBM (0.0.1)
 
 * GitHub: <https://github.com/Roy-SR-007/GoodFitSBM>
@@ -548,6 +589,46 @@ Run `revdepcheck::cloud_details(, "GoodFitSBM")` for more info
       10.                   └─lifecycle:::deprecate_stop0(msg)
       11.                     └─rlang::cnd_signal(...)
      Execution halted
+     ```
+
+# manynet (2.0.1)
+
+* GitHub: <https://github.com/stocnet/manynet>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/manynet>
+
+Run `revdepcheck::cloud_details(, "manynet")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+         'test-manip_transform.R:10:5', 'test-manip_transform.R:10:5'
+       • Some functions need more input (4): 'test-manip_transform.R:8:5',
+         'test-manip_transform.R:8:5', 'test-manip_transform.R:8:5',
+         'test-manip_transform.R:8:5'
+       • nodelist and pajek read/write not tested yet (2): 'test-make_read.R:12:5',
+         'test-make_read.R:12:5'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-manip_format.R:129:3'): to_twomode works ─────────────────────
+       Expected `is_twomode(to_twomode(ison_algebra, "type"))` to be TRUE.
+       Differences:
+       `actual`:   FALSE
+       `expected`: TRUE 
+       
+       ── Failure ('test-manip_format.R:130:3'): to_twomode works ─────────────────────
+       Expected `is_twomode(to_twomode(as_igraph(ison_algebra), "type"))` to be TRUE.
+       Differences:
+       `actual`:   FALSE
+       `expected`: TRUE 
+       
+       
+       [ FAIL 2 | WARN 0 | SKIP 18 | PASS 399 ]
+       Error:
+       ! Test failures.
+       Execution halted
      ```
 
 # migraph (1.6.2)
@@ -938,7 +1019,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 5 | WARN 12 | SKIP 1 | PASS 424 ]
+       [ FAIL 6 | WARN 13 | SKIP 1 | PASS 423 ]
        Error:
        ! Test failures.
        Execution halted
