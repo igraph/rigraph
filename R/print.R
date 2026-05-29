@@ -405,17 +405,29 @@
   }
 }
 
-.print.edges.adjlist <- function(x) {
-  cat("+ edges:\n")
-  vc <- vcount(x)
+.truncate.vertices <- function(vc) {
   mp <- getOption("max.print")
   if (vc <= mp) {
-    omitted.vertices <- 0
-    ind <- seq_len(vc)
+    list(ind = seq_len(vc), omitted = 0)
   } else {
-    omitted.vertices <- vc - mp
-    ind <- seq_len(mp)
+    list(ind = seq_len(mp), omitted = vc - mp)
   }
+}
+
+.print.omitted.vertices <- function(omitted) {
+  if (omitted != 0) {
+    cat(paste(
+      '[ reached getOption("max.print") -- omitted',
+      omitted,
+      "vertices ]\n\n"
+    ))
+  }
+}
+
+.print.edges.adjlist <- function(x) {
+  cat("+ edges:\n")
+  tr <- .truncate.vertices(vcount(x))
+  ind <- tr$ind
 
   arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
   al <- as_adj_list(x, mode = "out")[ind]
@@ -451,13 +463,7 @@
     }
     cat(alstr, sep = "\n")
   }
-  if (omitted.vertices != 0) {
-    cat(paste(
-      '[ reached getOption("max.print") -- omitted',
-      omitted.vertices,
-      "vertices ]\n\n"
-    ))
-  }
+  .print.omitted.vertices(tr$omitted)
 }
 
 .print.edges.adjlist.named <- function(x, edges = E(x)) {
@@ -466,15 +472,8 @@
   arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
   vn <- V(x)$name
 
-  vc <- vcount(x)
-  mp <- getOption("max.print")
-  if (vc <= mp) {
-    omitted.vertices <- 0
-    ind <- seq_len(vc)
-  } else {
-    omitted.vertices <- vc - mp
-    ind <- seq_len(mp)
-  }
+  tr <- .truncate.vertices(vcount(x))
+  ind <- tr$ind
 
   al <- as_adj_list(x, mode = "out")[ind]
   alstr <- sapply(al, function(x) {
@@ -483,13 +482,7 @@
   alstr <- paste(sep = "", format(vn[ind]), arrow, alstr)
   alstr <- strwrap(alstr, exdent = max(nchar(vn[ind])) + nchar(arrow))
   cat(alstr, sep = "\n")
-  if (omitted.vertices != 0) {
-    cat(paste(
-      '[ reached getOption("max.print") -- omitted',
-      omitted.vertices,
-      "vertices ]\n\n"
-    ))
-  }
+  .print.omitted.vertices(tr$omitted)
 }
 
 #' @family print
