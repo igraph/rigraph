@@ -416,24 +416,15 @@
     omitted.vertices <- vc - mp
     ind <- seq_len(mp)
   }
-  if (!length(ind)) {
-    if (omitted.vertices != 0) {
-      cat(paste(
-        '[ reached getOption("max.print") -- omitted',
-        omitted.vertices,
-        "vertices ]\n\n"
-      ))
-    }
-    return(invisible(NULL))
-  }
 
   arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
   al <- as_adj_list(x, mode = "out")[ind]
-  w <- nchar(max(which(degree(x, mode = "in") != 0)))
-  mpl <- trunc((getOption("width") - nchar(arrow) - nchar(length(ind))) / (w + 1))
+  max.ind.width <- nchar(max(ind))
+  w <- nchar(vcount(x))
+  mpl <- trunc((getOption("width") - nchar(arrow) - max.ind.width) / (w + 1))
   if (any(lengths(al) > mpl)) {
     ## Wrapping needed
-    mw <- nchar(max(ind))
+    mw <- max.ind.width
     sm <- paste(collapse = "", rep(" ", mw + 4))
     alstr <- lapply(seq_along(al), function(x) {
       len <- length(al[[x]])
@@ -484,23 +475,13 @@
     omitted.vertices <- vc - mp
     ind <- seq_len(mp)
   }
-  if (!length(ind)) {
-    if (omitted.vertices != 0) {
-      cat(paste(
-        '[ reached getOption("max.print") -- omitted',
-        omitted.vertices,
-        "vertices ]\n\n"
-      ))
-    }
-    return(invisible(NULL))
-  }
 
   al <- as_adj_list(x, mode = "out")[ind]
   alstr <- sapply(al, function(x) {
     paste(collapse = ", ", vn[x])
   })
   alstr <- paste(sep = "", format(vn[ind]), arrow, alstr)
-  alstr <- strwrap(alstr, exdent = max(nchar(vn)) + nchar(arrow))
+  alstr <- strwrap(alstr, exdent = max(nchar(vn[ind])) + nchar(arrow))
   cat(alstr, sep = "\n")
   if (omitted.vertices != 0) {
     cat(paste(
