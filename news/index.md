@@ -743,6 +743,15 @@
 
 - Switching to development version.
 
+## igraph 2.3.2
+
+CRAN release: 2026-05-29
+
+### Bug fixes
+
+- Fix obsolete Fortran syntax
+  ([\#2644](https://github.com/igraph/rigraph/issues/2644)).
+
 ## igraph 2.3.1
 
 CRAN release: 2026-05-04
