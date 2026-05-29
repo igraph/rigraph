@@ -590,14 +590,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       v <- which(v)
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    neighbor_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_vs_nei,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
       as.numeric(mode)
     )
-    neighbor_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   nei <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "nei()", ".nei()")
@@ -621,14 +621,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    incident_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
       as.numeric(3)
     )
-    incident_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   inc <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "inc()", ".inc()")
@@ -642,14 +642,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    source_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
       as.numeric(1)
     )
-    source_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   from <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
@@ -660,14 +660,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    target_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
       as.numeric(2)
     )
-    target_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   to <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
@@ -983,14 +983,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .inc <- function(v) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
-    incident_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
       as.numeric(3)
     )
-    incident_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   adj <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "adj()", ".inc()")
@@ -1001,14 +1001,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
-    source_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
       as.numeric(1)
     )
-    source_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   from <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
@@ -1016,14 +1016,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
-    target_matches <- .Call(
+    tmp <- .Call(
       Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
       as.numeric(2)
     )
-    target_matches[as.numeric(x)]
+    tmp[as.numeric(x)]
   }
   to <- function(...) {
     lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
