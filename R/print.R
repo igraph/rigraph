@@ -655,14 +655,14 @@ summary.igraph <- function(object, ...) {
 
 modern_edge_arrow <- function(directed) {
   if (cli::is_utf8_output()) {
-    if (directed) "→" else "─"
+    if (directed) "\u2192" else "\u2500"
   } else {
     if (directed) "->" else "--"
   }
 }
 
 modern_middot <- function() {
-  if (cli::is_utf8_output()) "·" else "*"
+  if (cli::is_utf8_output()) "\u00b7" else "*"
 }
 
 modern_attr_label <- function(code) {
@@ -738,7 +738,7 @@ print_igraph_attr_summary_modern <- function(x) {
   }
 
   cat("\n", cli::rule(left = "Attributes"), "\n", sep = "")
-  arrow <- if (cli::is_utf8_output()) "→" else "->"
+  arrow <- if (cli::is_utf8_output()) "\u2192" else "->"
 
   format_line <- function(label, names, codes) {
     parts <- paste0(
