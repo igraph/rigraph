@@ -145,6 +145,72 @@ git subrepo status tools/py-stimulus
 This shows the remote URL, branch, and commit hashes.
 
 
+## Argument-migration helpers
+
+When a public function's signature is migrated by inserting `...` and renaming
+or repositioning arguments, pre-existing **positional** calls would otherwise
+break (the old positional values land in `...` and hit `check_dots_empty()`).
+To soften that, each migrated function gets an internal `handle_args_<fn>()`
+helper that recovers a legacy positional call, soft-deprecates the positional
+form, and returns the new-API bindings as a named list.
+
+These helpers are **generated**, not written by hand:
+
+- **`tools/migrations.R`** is the single source of truth. It declares one entry
+  per migrated function (old/new signatures, renames, defaults, lifecycle
+  `when`). The entry schema is documented at the top of that file.
+- **`tools/generate-migrations.R`** reads the registry and emits one
+  `R/handle-args-<fn>.R` per entry. Output is deterministic (entries sorted by
+  function name) and idempotent (running twice produces no diff).
+
+Regenerate after editing the registry:
+
+```sh
+Rscript tools/generate-migrations.R
+```
+
+Do **not** edit `R/handle-args-*.R` by hand — `.github/workflows/check-migrations.yaml`
+regenerates them in CI and fails on drift.
+
+### Call-site usage
+
+A migrated public function delegates argument resolution to its generated
+helper, passing `.user_env = rlang::caller_env()`:
+
+```r
+as_biadjacency_matrix <- function(graph, types, ..., weights = NULL,
+                                  attr = lifecycle::deprecated(),
+                                  names = TRUE, sparse = FALSE) {
+  args <- handle_args_as_biadjacency_matrix(
+    graph, types, ..., weights = weights, attr = attr,
+    names = names, sparse = sparse,
+    .user_env = rlang::caller_env()
+  )
+  graph <- args$graph; types <- args$types; weights <- args$weights
+  # ... rest of the body
+}
+```
+
+The `.user_env` argument is essential. `lifecycle::deprecate_soft()` only signals
+when `is_direct(user_env)` is `TRUE`; a package-internal `user_env` is swallowed
+**even under** `lifecycle_verbosity = "warning"`. Threading the *caller's* env
+through `.user_env` is what keeps the deprecation visible to users.
+
+### Known limitations
+
+The generator handles **pure renames and insertions** only:
+
+- **Removed args** — deleting an old positional slot (rather than renaming it)
+  makes a legacy positional call silently rebind to the wrong new slot. Not
+  detected.
+- **Reordered args** — the new signature must preserve the relative order of
+  surviving old args. Reordering breaks the position math.
+- **Partial matching** — pre-`...` R allowed `f(g, att = "x")` to partial-match
+  `attrs`. Post-insertion, partial names fall into `...` and are treated as
+  unknown keywords (the strict `check_dots_empty()` path), never recovered.
+
+These are acceptable because the migrations planned for 3.0.0 are pure renames.
+
 ## Additional Documentation
 
 For detailed information on implementing R wrappers for callback functions, see [`AGENTS.md`](AGENTS.md) in this directory.
