@@ -2,10 +2,10 @@
 # Regenerate with: Rscript tools/generate-migrations.R
 # (Excluded from `air` formatting via air.toml so this layout stays canonical.)
 #
-# `migration_fixture()`'s pre-3.0.0 signature took its arguments
-# positionally. After `...` was inserted, a legacy positional call lands the
-# old arguments in `...`. This helper recovers them, soft-deprecates the
-# positional form, and returns the new-API bindings as a named list.
+# `migration_fixture()` gained a `...` in its signature. A call written
+# against the old signature lands its arguments in `...`; this helper
+# recovers them by position or by (partial) name, soft-deprecates the old
+# form, and returns the new-API bindings as a named list.
 #
 # `.user_env` is threaded into `lifecycle::deprecate_soft()` so the warning is
 # attributed to the user's call instead of being suppressed as
@@ -27,52 +27,96 @@ handle_args_migration_fixture <- function(
     return(bindings)
   }
 
-  # Any *named* dot is an unknown keyword (future extension or a typo); enforce
-  # the strict contract. Only a purely positional `...` is treated as a legacy
-  # call and recovered below.
-  if (any(nzchar(rlang::names2(dots)))) {
-    rlang::check_dots_empty(call = .user_env)
-  }
-
+  # Maps derived from the old/new signatures.
   recover_new <- c("c_renamed", "d")
   recover_old <- c("c", "d")
+  match_names <- c("c", "c_renamed", "d")
+  match_to <- c("c_renamed", "c_renamed", "d")
   defaults <- list(c_renamed = NULL, d = NULL)
+  head_args <- c("a", "b")
+  fn_name <- "migration_fixture"
 
-  if (length(dots) > length(recover_new)) {
-    cli::cli_abort("Too many arguments passed to {.fn migration_fixture}.", call = .user_env)
-  }
+  dot_names <- rlang::names2(dots)
+  rebound_old <- character() # old labels, in the order encountered
+  rebound_new <- character() # resolved new names, same order
+  unknown <- character()
+  pos <- 0L
 
-  for (i in seq_along(dots)) {
-    new_name <- recover_new[[i]]
-    # Conflict: the same logical slot was supplied positionally *and* by its
-    # new keyword (i.e. the keyword differs from its formal default).
-    if (!identical(bindings[[new_name]], defaults[[new_name]])) {
+  for (k in seq_along(dots)) {
+    nm <- dot_names[[k]]
+    if (nzchar(nm)) {
+      # Named (possibly abbreviated): partial-match against recoverable names.
+      j <- charmatch(nm, match_names)
+      if (is.na(j)) {
+        unknown <- c(unknown, nm)
+        next
+      }
+      if (j == 0L) {
+        cli::cli_abort(
+          "Argument {.arg {nm}} matches multiple arguments of {.fn {fn_name}}.",
+          call = .user_env
+        )
+      }
+      new_name <- match_to[[j]]
+      old_label <- match_names[[j]]
+    } else {
+      # Unnamed: recover by position into the next old slot beyond the head.
+      pos <- pos + 1L
+      if (pos > length(recover_new)) {
+        cli::cli_abort(
+          "Too many arguments passed to {.fn {fn_name}}.",
+          call = .user_env
+        )
+      }
+      new_name <- recover_new[[pos]]
+      old_label <- recover_old[[pos]]
+    }
+
+    # Conflict: the same new arg was already rebound, or was also supplied by
+    # its new keyword (i.e. differs from its formal default).
+    if (new_name %in% rebound_new ||
+      (new_name %in% names(defaults) &&
+        !identical(bindings[[new_name]], defaults[[new_name]]))) {
       cli::cli_abort(
         c(
-          "Can't supply {.arg {recover_old[[i]]}} both positionally and as {.arg {new_name}}.",
-          i = "Drop the positional value and keep {.code {new_name} = }."
+          "Argument {.arg {new_name}} of {.fn {fn_name}} was supplied more than once.",
+          i = "Pass it exactly once, by its new name {.arg {new_name}}."
         ),
         call = .user_env
       )
     }
-    bindings[[new_name]] <- dots[[i]]
+
+    bindings[[new_name]] <- dots[[k]]
+    rebound_old <- c(rebound_old, old_label)
+    rebound_new <- c(rebound_new, new_name)
   }
 
-  # One consolidated soft-deprecation per call. Key the message on the first
-  # renamed slot if there is one, else the first recovered slot.
-  rebound <- seq_along(dots)
-  renamed <- rebound[recover_old[rebound] != recover_new[rebound]]
-  primary <- if (length(renamed)) renamed[[1L]] else 1L
+  if (length(unknown)) {
+    cli::cli_abort(
+      c(
+        "Unexpected argument(s) passed to {.fn {fn_name}}: {.arg {unknown}}.",
+        i = "Arguments after {.arg ...} must be spelled out in full."
+      ),
+      call = .user_env
+    )
+  }
+
+  # One consolidated soft-deprecation per call, showing the detected legacy
+  # call next to the recommended keyword form.
+  detected <- paste0(
+    fn_name, "(", paste(c(head_args, rebound_old), collapse = ", "), ")"
+  )
+  requested <- paste0(
+    fn_name, "(",
+    paste(c(head_args, paste0(rebound_new, " = ")), collapse = ", "),
+    ")"
+  )
   lifecycle::deprecate_soft(
     when = "3.0.0",
-    what = sprintf("migration_fixture(%s)", recover_old[[primary]]),
-    with = if (recover_old[[primary]] != recover_new[[primary]]) sprintf("migration_fixture(%s)", recover_new[[primary]]),
+    what = I(paste0("Calling `", fn_name, "()` with positional or abbreviated arguments")),
     details = c(
-      "Positional use of the pre-3.0.0 signature of `migration_fixture()` is deprecated.",
-      i = paste0(
-        "Name the argument(s) instead: ",
-        toString(sprintf("`%s = `", recover_new[rebound])), "."
-      )
+      i = paste0("Detected call:  ", detected),
+      i = paste0("Use instead:    ", requested)
     ),
     user_env = .user_env
   )

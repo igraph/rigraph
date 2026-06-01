@@ -18,13 +18,6 @@ test_that("empty dots fall back to the formal defaults", {
   )
 })
 
-test_that("a named extension in `...` errors via check_dots_empty()", {
-  expect_error(
-    handle_args_migration_fixture(1, 2, c_renamed = 3, d = 4, foo = 5),
-    class = "rlib_error_dots_nonempty"
-  )
-})
-
 test_that("a legacy positional call is recovered with one soft-deprecation", {
   rlang::local_options(lifecycle_verbosity = "warning")
 
@@ -44,7 +37,25 @@ test_that("a legacy positional call recovering a single slot still works", {
   expect_equal(res, list(a = 1, b = 2, c_renamed = 99, d = NULL))
 })
 
-test_that("recovery only fires one deprecation warning, not one per slot", {
+test_that("a renamed-away old name is recovered by name", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  lifecycle::expect_deprecated(
+    res <- handle_args_migration_fixture(1, 2, c = 99)
+  )
+  expect_equal(res, list(a = 1, b = 2, c_renamed = 99, d = NULL))
+})
+
+test_that("an abbreviation of a new arg is recovered by partial match", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  lifecycle::expect_deprecated(
+    res <- handle_args_migration_fixture(1, 2, c_r = 42)
+  )
+  expect_equal(res, list(a = 1, b = 2, c_renamed = 42, d = NULL))
+})
+
+test_that("recovery emits a single deprecation warning, not one per slot", {
   rlang::local_options(lifecycle_verbosity = "warning")
 
   warnings <- character()
@@ -58,10 +69,24 @@ test_that("recovery only fires one deprecation warning, not one per slot", {
   expect_length(warnings, 1L)
 })
 
+test_that("an unknown named argument errors", {
+  expect_error(
+    handle_args_migration_fixture(1, 2, foo = 5),
+    "Unexpected argument"
+  )
+})
+
 test_that("supplying a slot both positionally and by its new keyword errors", {
   expect_error(
     handle_args_migration_fixture(1, 2, 3, c_renamed = "kw"),
-    "both positionally and as"
+    "supplied more than once"
+  )
+})
+
+test_that("supplying a slot by two different names errors", {
+  expect_error(
+    handle_args_migration_fixture(1, 2, c = 1, c_renamed = 2),
+    "supplied more than once"
   )
 })
 
@@ -100,10 +125,12 @@ test_that(".user_env controls whether the soft-deprecation surfaces", {
   expect_equal(res, list(a = 1, b = 2, c_renamed = 3, d = 4))
 })
 
+# ---- generator-level tests (source checkout only) --------------------------
+
 test_that("the generated helper is in sync with the registry", {
   # tools/ is excluded from the built package (.Rbuildignore), so this only runs
-  # from a source checkout (local dev + CI). CI also guards drift via
-  # .github/workflows/check-migrations.yaml.
+  # from a source checkout (local dev + CI). The rcc workflow guards drift with
+  # its own `git diff` step.
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator))
 
@@ -118,4 +145,35 @@ test_that("the generated helper is in sync with the registry", {
     testthat::test_path("..", "..", "R", "handle-args-migration_fixture.R")
   )
   expect_identical(committed, expected)
+})
+
+test_that("an abbreviation matching multiple arguments errors", {
+  # Built from an ad-hoc registry so we don't ship a second fixture helper.
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  tmp_reg <- withr::local_tempfile(fileext = ".R")
+  writeLines(
+    c(
+      "migrations <- list(",
+      "  amb_fixture = list(",
+      "    old = function(x, alpha, alphabet) {},",
+      "    new = function(x, ..., alpha = NULL, alphabet = NULL) {},",
+      "    when = \"3.0.0\"",
+      "  )",
+      ")"
+    ),
+    tmp_reg
+  )
+  out <- withr::local_tempdir()
+  suppressMessages(gen_env$generate_migrations(tmp_reg, out))
+  sys.source(file.path(out, "handle-args-amb_fixture.R"), envir = environment())
+
+  expect_error(
+    handle_args_amb_fixture(1, alph = 2),
+    "matches multiple"
+  )
 })
