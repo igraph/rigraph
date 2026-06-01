@@ -148,17 +148,19 @@ This shows the remote URL, branch, and commit hashes.
 ## Argument-migration helpers
 
 When a public function's signature is migrated by inserting `...` and renaming
-or repositioning arguments, pre-existing **positional** calls would otherwise
-break (the old positional values land in `...` and hit `check_dots_empty()`).
-To soften that, each migrated function gets an internal `handle_args_<fn>()`
-helper that recovers a legacy positional call, soft-deprecates the positional
-form, and returns the new-API bindings as a named list.
+arguments, pre-existing calls would otherwise break: the old positional (or
+partially-named) values land in `...` and hit `check_dots_empty()`. To soften
+that, each migrated function gets an internal `handle_args_<fn>()` helper that
+recovers the legacy call — by position **or by (partial) name** — soft-deprecates
+the old form, and returns the new-API bindings as a named list.
 
 These helpers are **generated**, not written by hand:
 
-- **`tools/migrations.R`** is the single source of truth. It declares one entry
-  per migrated function (old/new signatures, renames, defaults, lifecycle
-  `when`). The entry schema is documented at the top of that file.
+- **`tools/migrations.R`** is the single source of truth. Each entry declares the
+  function's `old` and `new` signatures as literal R functions; renames and
+  defaults are read straight off their formals (a bare-symbol default in `old`,
+  e.g. `c = c_renamed`, means a rename). The schema is documented at the top of
+  that file.
 - **`tools/generate-migrations.R`** reads the registry and emits one
   `R/handle-args-<fn>.R` per entry. Output is deterministic (entries sorted by
   function name) and idempotent (running twice produces no diff).
@@ -169,8 +171,11 @@ Regenerate after editing the registry:
 Rscript tools/generate-migrations.R
 ```
 
-Do **not** edit `R/handle-args-*.R` by hand — `.github/workflows/check-migrations.yaml`
-regenerates them in CI and fails on drift.
+This usually happens for you: a testthat helper
+([`tests/testthat/helper-migrations.R`](../tests/testthat/helper-migrations.R))
+regenerates the helpers whenever the registry is newer, and the `rcc` CI
+workflow runs the generator and fails if the committed files have drifted. Do
+**not** edit `R/handle-args-*.R` by hand.
 
 ### Call-site usage
 
@@ -191,25 +196,29 @@ as_biadjacency_matrix <- function(graph, types, ..., weights = NULL,
 }
 ```
 
-The `.user_env` argument is essential. `lifecycle::deprecate_soft()` only signals
-when `is_direct(user_env)` is `TRUE`; a package-internal `user_env` is swallowed
-**even under** `lifecycle_verbosity = "warning"`. Threading the *caller's* env
-through `.user_env` is what keeps the deprecation visible to users.
+The `.user_env` argument matters because the helper interposes an extra call
+frame. `lifecycle::deprecate_soft()` only signals when `is_direct(user_env)` is
+`TRUE` — that is, when `topenv(user_env)` is the global env (or under testthat).
+Its auto-detected `user_env` would resolve to the helper's caller, the **igraph
+namespace**, so the warning is swallowed (this gate runs *before* the
+`lifecycle_verbosity = "warning"` override, so forcing verbosity does not bring
+it back). Threading the public function's `rlang::caller_env()` through
+`.user_env` makes the *user's* frame the reference: real user calls warn, while
+genuinely internal igraph callers stay correctly silent — the point of a *soft*
+deprecation.
 
-### Known limitations
+### Reordering or removing an argument
 
-The generator handles **pure renames and insertions** only:
+Positional recovery only covers old slots whose order is preserved. To reorder
+an argument, or to drop a positional slot without breaking old calls, **place
+the affected argument after `...`** in the `new` signature. Arguments past the
+ellipsis are keyword-only and are recovered by (partial) name rather than by
+position, so they side-step the position math entirely.
 
-- **Removed args** — deleting an old positional slot (rather than renaming it)
-  makes a legacy positional call silently rebind to the wrong new slot. Not
-  detected.
-- **Reordered args** — the new signature must preserve the relative order of
-  surviving old args. Reordering breaks the position math.
-- **Partial matching** — pre-`...` R allowed `f(g, att = "x")` to partial-match
-  `attrs`. Post-insertion, partial names fall into `...` and are treated as
-  unknown keywords (the strict `check_dots_empty()` path), never recovered.
-
-These are acceptable because the migrations planned for 3.0.0 are pure renames.
+The one case the generator cannot rescue is a positional slot that is removed
+*and* whose old position is reused by a different surviving argument — a legacy
+positional call would then rebind to the wrong slot. No migration planned for
+3.0.0 does this (they are pure renames).
 
 ## Additional Documentation
 
