@@ -89,7 +89,13 @@ test_that(".user_env controls whether the soft-deprecation surfaces", {
 
   # A package namespace user env -> suppressed, but recovery still happens.
   expect_no_warning(
-    res <- handle_args_migration_fixture(1, 2, 3, 4, .user_env = asNamespace("igraph"))
+    res <- handle_args_migration_fixture(
+      1,
+      2,
+      3,
+      4,
+      .user_env = asNamespace("igraph")
+    )
   )
   expect_equal(res, list(a = 1, b = 2, c_renamed = 3, d = 4))
 })

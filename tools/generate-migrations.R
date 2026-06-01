@@ -24,7 +24,7 @@ migration_paths <- function() {
   root <- getwd()
   list(
     registry = file.path(root, "tools", "migrations.R"),
-    out_dir  = file.path(root, "R")
+    out_dir = file.path(root, "R")
   )
 }
 
@@ -34,7 +34,12 @@ load_migrations <- function(registry_path) {
   env <- new.env(parent = baseenv())
   sys.source(registry_path, envir = env, keep.source = FALSE)
   if (!exists("migrations", envir = env, inherits = FALSE)) {
-    stop("`", registry_path, "` must define a `migrations` list.", call. = FALSE)
+    stop(
+      "`",
+      registry_path,
+      "` must define a `migrations` list.",
+      call. = FALSE
+    )
   }
   migrations <- get("migrations", envir = env)
   lapply(migrations, validate_migration)
@@ -44,16 +49,23 @@ validate_migration <- function(entry) {
   req <- c("fn", "old", "new")
   missing <- setdiff(req, names(entry))
   if (length(missing)) {
-    stop("Migration entry is missing field(s): ",
-         paste(missing, collapse = ", "), call. = FALSE)
+    stop(
+      "Migration entry is missing field(s): ",
+      paste(missing, collapse = ", "),
+      call. = FALSE
+    )
   }
-  entry$renames  <- entry$renames  %||% character(0)
+  entry$renames <- entry$renames %||% character(0)
   entry$defaults <- entry$defaults %||% list()
-  entry$when     <- entry$when     %||% "3.0.0"
+  entry$when <- entry$when %||% "3.0.0"
 
   if (sum(entry$new == "...") != 1L) {
-    stop("Migration `", entry$fn,
-         "`: `new` must contain exactly one \"...\" marker.", call. = FALSE)
+    stop(
+      "Migration `",
+      entry$fn,
+      "`: `new` must contain exactly one \"...\" marker.",
+      call. = FALSE
+    )
   }
 
   dots_idx <- which(entry$new == "...")
@@ -66,8 +78,12 @@ validate_migration <- function(entry) {
   entry$new_args <- c(entry$head, entry$tail)
 
   if (length(entry$old) < length(entry$head)) {
-    stop("Migration `", entry$fn,
-         "`: `old` is shorter than the head args of `new`.", call. = FALSE)
+    stop(
+      "Migration `",
+      entry$fn,
+      "`: `old` is shorter than the head args of `new`.",
+      call. = FALSE
+    )
   }
   # Old positional slots beyond the head are the recoverable ones.
   entry$recover_old <- if (length(entry$old) > length(entry$head)) {
@@ -75,15 +91,24 @@ validate_migration <- function(entry) {
   } else {
     character(0)
   }
-  entry$recover_new <- vapply(entry$recover_old, function(nm) {
-    if (nm %in% names(entry$renames)) unname(entry$renames[[nm]]) else nm
-  }, character(1))
+  entry$recover_new <- vapply(
+    entry$recover_old,
+    function(nm) {
+      if (nm %in% names(entry$renames)) unname(entry$renames[[nm]]) else nm
+    },
+    character(1)
+  )
 
   bad <- setdiff(entry$recover_new, entry$tail)
   if (length(bad)) {
-    stop("Migration `", entry$fn, "`: recovered slot(s) ",
-         paste(bad, collapse = ", "),
-         " do not appear after `...` in `new`.", call. = FALSE)
+    stop(
+      "Migration `",
+      entry$fn,
+      "`: recovered slot(s) ",
+      paste(bad, collapse = ", "),
+      " do not appear after `...` in `new`.",
+      call. = FALSE
+    )
   }
   entry
 }
@@ -95,19 +120,25 @@ validate_migration <- function(entry) {
 # Build the formals list of the generated helper as a single string.
 render_formals <- function(entry) {
   head_fmls <- entry$head
-  tail_fmls <- vapply(entry$tail, function(nm) {
-    if (nm %in% names(entry$defaults)) {
-      paste0(nm, " = ", entry$defaults[[nm]])
-    } else {
-      nm
-    }
-  }, character(1))
+  tail_fmls <- vapply(
+    entry$tail,
+    function(nm) {
+      if (nm %in% names(entry$defaults)) {
+        paste0(nm, " = ", entry$defaults[[nm]])
+      } else {
+        nm
+      }
+    },
+    character(1)
+  )
   c(head_fmls, "...", tail_fmls, ".user_env = rlang::caller_env()")
 }
 
 # Render a character vector literal, e.g. c("a", "b").
 render_chr_vec <- function(x) {
-  if (length(x) == 0L) return("character(0)")
+  if (length(x) == 0L) {
+    return("character(0)")
+  }
   paste0("c(", paste0('"', x, '"', collapse = ", "), ")")
 }
 
@@ -115,11 +146,21 @@ render_chr_vec <- function(x) {
 # the registry's default *expressions* so the runtime identity check compares
 # against the true formal default.
 render_defaults_list <- function(entry) {
-  if (length(entry$recover_new) == 0L) return("list()")
-  items <- vapply(entry$recover_new, function(nm) {
-    expr <- if (nm %in% names(entry$defaults)) entry$defaults[[nm]] else "NULL"
-    paste0(nm, " = ", expr)
-  }, character(1))
+  if (length(entry$recover_new) == 0L) {
+    return("list()")
+  }
+  items <- vapply(
+    entry$recover_new,
+    function(nm) {
+      expr <- if (nm %in% names(entry$defaults)) {
+        entry$defaults[[nm]]
+      } else {
+        "NULL"
+      }
+      paste0(nm, " = ", expr)
+    },
+    character(1)
+  )
   paste0("list(", paste(items, collapse = ", "), ")")
 }
 
@@ -146,7 +187,10 @@ render_migration <- function(entry) {
   # excluded from `air` (see air.toml) so this layout is canonical.
   fmls <- render_formals(entry)
   fmls_lines <- paste0("  ", fmls)
-  fmls_lines[-length(fmls_lines)] <- paste0(fmls_lines[-length(fmls_lines)], ",")
+  fmls_lines[-length(fmls_lines)] <- paste0(
+    fmls_lines[-length(fmls_lines)],
+    ","
+  )
   signature <- c(
     paste0("handle_args_", fn, " <- function("),
     fmls_lines,
@@ -225,8 +269,14 @@ generate_migrations <- function(registry_path, out_dir) {
 
   # Remove stale generated files first so deleted registry entries don't leave
   # orphaned helpers behind.
-  stale <- list.files(out_dir, pattern = "^handle-args-.*\\.R$", full.names = TRUE)
-  if (length(stale)) file.remove(stale)
+  stale <- list.files(
+    out_dir,
+    pattern = "^handle-args-.*\\.R$",
+    full.names = TRUE
+  )
+  if (length(stale)) {
+    file.remove(stale)
+  }
 
   fns <- vapply(migrations, function(e) e$fn, character(1))
   migrations <- migrations[order(fns)]

@@ -78,11 +78,11 @@ migrations <- list(
   # Old signature: f(a, b, c, d); new: f(a, b, ..., c_renamed, d) with c renamed
   # to c_renamed. Consumed by tests/testthat/test-handle-args.R.
   list(
-    fn       = "migration_fixture",
-    old      = c("a", "b", "c", "d"),
-    new      = c("a", "b", "...", "c_renamed", "d"),
-    renames  = c(c = "c_renamed"),
+    fn = "migration_fixture",
+    old = c("a", "b", "c", "d"),
+    new = c("a", "b", "...", "c_renamed", "d"),
+    renames = c(c = "c_renamed"),
     defaults = list(c_renamed = "NULL", d = "NULL"),
-    when     = "3.0.0"
+    when = "3.0.0"
   )
 )
