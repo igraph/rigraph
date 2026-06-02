@@ -24,18 +24,25 @@
 #     when = "<lifecycle version>"
 #   )
 #
-#   old   The pre-migration signature. The *order* of its formals is the old
-#         positional order. A formal whose default is a **bare symbol** declares
-#         a rename to that name, e.g. `c = c_renamed` means the old `c` argument
-#         is the new `c_renamed`. Formals without a symbol default keep their
-#         name.
+#   old   The pre-migration signature. Only its formal *names* and *order* are
+#         read -- old default *values* are ignored. A formal whose default is a
+#         **bare symbol** is the one exception: it declares a rename to that
+#         name, e.g. `c = c_renamed` means the old `c` argument is the new
+#         `c_renamed`. Formals without a symbol default keep their name.
 #
 #   new   The post-migration signature. Must contain exactly one `...`. The
 #         non-`...` formals are the new-API arguments, in order; their defaults
-#         become the generated helper's defaults (and the values the conflict
-#         check compares against).
+#         become the function's defaults and the values the conflict check
+#         compares against.
 #
 #   when  The version string passed to `lifecycle::deprecate_soft(when = )`.
+#
+#   Changing a default as part of a migration is fine: the new default lives in
+#   `new` and is what the recovery uses; the old default is never consulted. The
+#   only caveat is the bare-symbol convention above -- an old argument whose
+#   genuine default is itself a bare symbol would be misread as a rename (rare;
+#   wrap it, e.g. `(sym)`, or reintroduce an explicit rename field if it ever
+#   bites).
 #
 # ---------------------------------------------------------------------------
 # How recovery maps old calls onto the new signature
