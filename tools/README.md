@@ -199,9 +199,12 @@ The recovery runs inline, so there is no handler function and no `.user_env`
 plumbing. The generated `lifecycle::deprecate_soft()` sits directly in the
 function body, so its default `user_env` (`caller_env(2)`) already resolves to
 the *user's* frame: real user calls warn, while genuinely internal igraph callers
-stay correctly silent — the point of a *soft* deprecation. (The pure matching is
-done by an immediately-invoked function whose temporaries stay scoped and never
-touch an environment, so nothing leaks into the host frame.)
+stay correctly silent — the point of a *soft* deprecation. The matching itself is
+delegated to a small hand-written helper, `migrate_recover_args()`
+([`R/migrate-args.R`](../R/migrate-args.R)) — a plain, debuggable function that
+takes the per-function maps and returns the recovered values plus message parts
+(or `NULL`); the generated block just supplies the configuration and assigns the
+results.
 
 ### Reordering or removing an argument
 

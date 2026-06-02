@@ -217,103 +217,26 @@ render_current_list <- function(entry) {
 # markers. It is laid out exactly as `air` formats it so regeneration leaves no
 # drift in the (hand-written) host file.
 #
-# Shape: an immediately-invoked function does the pure matching (its temporaries
-# stay scoped, never leaking into the host frame and never touching environments)
-# and returns either NULL or the recovered values plus message parts. The host
-# frame then assigns the recovered values over its own locals and emits a single
+# Shape: the per-function configuration is passed to `migrate_recover_args()`
+# (a hand-written, debuggable helper) which returns either NULL or the recovered
+# values plus the deprecation message parts. The host frame then assigns the
+# recovered values over its own locals and emits a single
 # `lifecycle::deprecate_soft()`. Because that call sits directly in the host
 # function, its default `user_env` (caller_env(2)) resolves to the user's frame
 # -- no `.user_env` threading needed.
 render_arg_handle <- function(entry) {
-  fn <- entry$fn
   c(
-    paste0(
-      "# Generated from tools/migrations.R by tools/generate-migrations.R -- do not edit."
-    ),
-    "# Recovers a legacy call to the pre-migration signature; regenerate with",
-    "# `Rscript tools/generate-migrations.R`.",
-    ".arg_handle <- (function(dots, current) {",
-    "  if (length(dots) == 0L) {",
-    "    return(NULL)",
-    "  }",
-    paste0("  recover_new <- ", render_chr_vec(entry$recover_new)),
-    paste0("  recover_old <- ", render_chr_vec(entry$recover_old)),
-    paste0("  match_names <- ", render_chr_vec(entry$match_names)),
-    paste0("  match_to <- ", render_chr_vec(entry$match_to)),
-    paste0("  defaults <- ", render_defaults_list(entry)),
-    paste0("  head_args <- ", render_chr_vec(entry$head)),
-    paste0("  fn_name <- \"", fn, "\""),
-    "  dot_names <- rlang::names2(dots)",
-    "  values <- list()",
-    "  rebound_old <- character()",
-    "  rebound_new <- character()",
-    "  pos <- 0L",
-    "  for (k in seq_along(dots)) {",
-    "    nm <- dot_names[[k]]",
-    "    if (nzchar(nm)) {",
-    "      # Named (possibly abbreviated): partial-match recoverable names.",
-    "      j <- charmatch(nm, match_names)",
-    "      if (is.na(j)) {",
-    "        cli::cli_abort(c(",
-    "          \"Unexpected argument passed to {.fn {fn_name}}: {.arg {nm}}.\",",
-    "          i = \"Arguments after {.arg ...} must be spelled out in full.\"",
-    "        ))",
-    "      }",
-    "      if (j == 0L) {",
-    "        cli::cli_abort(",
-    "          \"Argument {.arg {nm}} matches multiple arguments of {.fn {fn_name}}.\"",
-    "        )",
-    "      }",
-    "      new_name <- match_to[[j]]",
-    "      old_label <- match_names[[j]]",
-    "    } else {",
-    "      # Unnamed: recover by position into the next old slot past the head.",
-    "      pos <- pos + 1L",
-    "      if (pos > length(recover_new)) {",
-    "        cli::cli_abort(\"Too many arguments passed to {.fn {fn_name}}.\")",
-    "      }",
-    "      new_name <- recover_new[[pos]]",
-    "      old_label <- recover_old[[pos]]",
-    "    }",
-    "    duplicated <- new_name %in% rebound_new",
-    "    has_default <- new_name %in% names(defaults)",
-    "    reassigned <- has_default &&",
-    "      !identical(current[[new_name]], defaults[[new_name]])",
-    "    if (duplicated || reassigned) {",
-    "      cli::cli_abort(c(",
-    "        \"Argument {.arg {new_name}} of {.fn {fn_name}} was supplied more than once.\",",
-    "        i = \"Pass it exactly once, by its new name {.arg {new_name}}.\"",
-    "      ))",
-    "    }",
-    "    values[[new_name]] <- dots[[k]]",
-    "    rebound_old <- c(rebound_old, old_label)",
-    "    rebound_new <- c(rebound_new, new_name)",
-    "  }",
-    "  detected <- paste0(",
-    "    fn_name,",
-    "    \"(\",",
-    "    paste(c(head_args, rebound_old), collapse = \", \"),",
-    "    \")\"",
-    "  )",
-    "  requested <- paste0(",
-    "    fn_name,",
-    "    \"(\",",
-    "    paste(c(head_args, paste0(rebound_new, \" = \")), collapse = \", \"),",
-    "    \")\"",
-    "  )",
-    "  list(",
-    "    values = values,",
-    "    what = paste0(",
-    "      \"Calling `\",",
-    "      fn_name,",
-    "      \"()` with positional or abbreviated arguments\"",
-    "    ),",
-    "    details = c(",
-    "      i = paste0(\"Detected call:  \", detected),",
-    "      i = paste0(\"Use instead:    \", requested)",
-    "    )",
-    "  )",
-    paste0("})(list(...), ", render_current_list(entry), ")"),
+    ".arg_handle <- migrate_recover_args(",
+    "  list(...),",
+    paste0("  current = ", render_current_list(entry), ","),
+    paste0("  recover_new = ", render_chr_vec(entry$recover_new), ","),
+    paste0("  recover_old = ", render_chr_vec(entry$recover_old), ","),
+    paste0("  match_names = ", render_chr_vec(entry$match_names), ","),
+    paste0("  match_to = ", render_chr_vec(entry$match_to), ","),
+    paste0("  defaults = ", render_defaults_list(entry), ","),
+    paste0("  head_args = ", render_chr_vec(entry$head), ","),
+    paste0("  fn_name = \"", entry$fn, "\""),
+    ")",
     "if (!is.null(.arg_handle)) {",
     "  list2env(.arg_handle$values, environment())",
     "  lifecycle::deprecate_soft(",
@@ -327,7 +250,10 @@ render_arg_handle <- function(entry) {
 
 # ---- splicing into source files --------------------------------------------
 
-begin_re <- "^([\t ]*)#\\s*BEGIN GENERATED ARG_HANDLE:\\s*([A-Za-z0-9._]+)\\s*$"
+# The function name is captured up to the first non-identifier char, so the
+# BEGIN marker may carry a trailing note, e.g.
+#   # BEGIN GENERATED ARG_HANDLE: foo, do not edit, see tools/generate-migrations.R
+begin_re <- "^([\t ]*)#\\s*BEGIN GENERATED ARG_HANDLE:\\s*([A-Za-z0-9._]+)"
 end_re <- "^[\t ]*#\\s*END GENERATED ARG_HANDLE\\s*$"
 
 # Replace the content between each ARG_HANDLE marker pair with freshly rendered

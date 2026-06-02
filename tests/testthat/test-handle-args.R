@@ -129,45 +129,73 @@ test_that("the spliced block is in sync with the registry", {
   expect_identical(spliced$lines, lines)
 })
 
-test_that("an abbreviation matching multiple arguments errors", {
-  # Built from an ad-hoc registry + source file so we don't ship a second
-  # fixture.
+# ---- migrate_recover_args() helper (the engine behind the blocks) ----------
+
+# Config equivalent to the fixture, for exercising the helper directly.
+fixture_args <- function(dots, current = list(c_renamed = NULL, d = NULL)) {
+  migrate_recover_args(
+    dots,
+    current = current,
+    recover_new = c("c_renamed", "d"),
+    recover_old = c("c", "d"),
+    match_names = c("c", "c_renamed", "d"),
+    match_to = c("c_renamed", "c_renamed", "d"),
+    defaults = list(c_renamed = NULL, d = NULL),
+    head_args = c("a", "b"),
+    fn_name = "migration_fixture"
+  )
+}
+
+test_that("migrate_recover_args() returns NULL when there is nothing to recover", {
+  expect_null(fixture_args(list()))
+})
+
+test_that("migrate_recover_args() returns recovered values and message parts", {
+  res <- fixture_args(list(3, 4))
+  expect_equal(res$values, list(c_renamed = 3, d = 4))
+  expect_match(res$what, "positional or abbreviated")
+  expect_match(res$details[[1]], "migration_fixture\\(a, b, c, d\\)")
+  expect_match(res$details[[2]], "c_renamed = , d = ")
+})
+
+test_that("migrate_recover_args() errors on an ambiguous abbreviation", {
+  expect_error(
+    migrate_recover_args(
+      list(alph = 2),
+      current = list(alpha = NULL, alphabet = NULL),
+      recover_new = c("alpha", "alphabet"),
+      recover_old = c("alpha", "alphabet"),
+      match_names = c("alpha", "alphabet"),
+      match_to = c("alpha", "alphabet"),
+      defaults = list(alpha = NULL, alphabet = NULL),
+      head_args = "x",
+      fn_name = "amb_fixture"
+    ),
+    "matches multiple"
+  )
+})
+
+test_that("migrate_recover_args() errors on unknown, conflict, and overflow", {
+  expect_error(fixture_args(list(foo = 5)), "Unexpected argument")
+  expect_error(
+    fixture_args(list(3), current = list(c_renamed = "kw", d = NULL)),
+    "supplied more than once"
+  )
+  expect_error(fixture_args(list(1, 2, 3)), "Too many arguments")
+})
+
+test_that("the BEGIN marker may carry a trailing note", {
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator))
-
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
 
-  dir <- withr::local_tempdir()
-  writeLines(
-    c(
-      "migrations <- list(",
-      "  amb_fixture = list(",
-      "    old = function(x, alpha, alphabet) {},",
-      "    new = function(x, ..., alpha = NULL, alphabet = NULL) {},",
-      "    when = \"3.0.0\"",
-      "  )",
-      ")"
-    ),
-    file.path(dir, "migrations.R")
-  )
-  writeLines(
-    c(
-      "amb_fixture <- function(x, ..., alpha = NULL, alphabet = NULL) {",
-      "  # BEGIN GENERATED ARG_HANDLE: amb_fixture",
-      "  # END GENERATED ARG_HANDLE",
-      "  list(x = x, alpha = alpha, alphabet = alphabet)",
-      "}"
-    ),
-    file.path(dir, "amb.R")
-  )
-  suppressMessages(
-    gen_env$generate_migrations(file.path(dir, "migrations.R"), dir)
-  )
-  sys.source(file.path(dir, "amb.R"), envir = environment())
-
-  expect_error(
-    amb_fixture(1, alph = 2),
-    "matches multiple"
-  )
+  m <- regmatches(
+    "  # BEGIN GENERATED ARG_HANDLE: foo, do not edit, see x",
+    regexec(
+      gen_env$begin_re,
+      "  # BEGIN GENERATED ARG_HANDLE: foo, do not edit, see x"
+    )
+  )[[1]]
+  expect_identical(m[[3]], "foo")
 })
