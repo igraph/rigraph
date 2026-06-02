@@ -145,25 +145,26 @@ git subrepo status tools/py-stimulus
 This shows the remote URL, branch, and commit hashes.
 
 
-## Argument-migration helpers
+## Argument-migration blocks
 
 When a public function's signature is migrated by inserting `...` and renaming
 arguments, pre-existing calls would otherwise break: the old positional (or
 partially-named) values land in `...` and hit `check_dots_empty()`. To soften
-that, each migrated function gets an internal `handle_args_<fn>()` helper that
-recovers the legacy call — by position **or by (partial) name** — soft-deprecates
-the old form, and returns the new-API bindings as a named list.
+that, the migrated function carries a small **generated block** in its body that
+recovers the legacy call — by position **or by (partial) name** — and emits one
+soft-deprecation.
 
-These helpers are **generated**, not written by hand:
+The block is **generated in place**, not written by hand:
 
 - **`tools/migrations.R`** is the single source of truth. Each entry declares the
   function's `old` and `new` signatures as literal R functions; renames and
   defaults are read straight off their formals (a bare-symbol default in `old`,
   e.g. `c = c_renamed`, means a rename). The schema is documented at the top of
   that file.
-- **`tools/generate-migrations.R`** reads the registry and emits one
-  `R/handle-args-<fn>.R` per entry. Output is deterministic (entries sorted by
-  function name) and idempotent (running twice produces no diff).
+- **`tools/generate-migrations.R`** reads the registry and rewrites the code
+  between the `# BEGIN GENERATED ARG_HANDLE: <fn>` / `# END GENERATED ARG_HANDLE`
+  markers inside each function. Output is idempotent (running twice produces no
+  diff) and laid out exactly as `air` formats it, so the host files stay clean.
 
 Regenerate after editing the registry:
 
@@ -173,39 +174,34 @@ Rscript tools/generate-migrations.R
 
 This usually happens for you: a testthat helper
 ([`tests/testthat/helper-migrations.R`](../tests/testthat/helper-migrations.R))
-regenerates the helpers whenever the registry is newer, and the `rcc` CI
-workflow runs the generator and fails if the committed files have drifted. Do
-**not** edit `R/handle-args-*.R` by hand.
+regenerates the blocks whenever the registry is newer, and CI re-runs the
+generator (in `custom/after-install`) and fails if the committed code has
+drifted. Do **not** edit between the markers by hand.
 
 ### Call-site usage
 
-A migrated public function delegates argument resolution to its generated
-helper, passing `.user_env = rlang::caller_env()`:
+A migrated function gets the marker pair at the top of its body; the generator
+fills it in:
 
 ```r
 as_biadjacency_matrix <- function(graph, types, ..., weights = NULL,
                                   attr = lifecycle::deprecated(),
                                   names = TRUE, sparse = FALSE) {
-  args <- handle_args_as_biadjacency_matrix(
-    graph, types, ..., weights = weights, attr = attr,
-    names = names, sparse = sparse,
-    .user_env = rlang::caller_env()
-  )
-  graph <- args$graph; types <- args$types; weights <- args$weights
-  # ... rest of the body
+  # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix
+  # ... generated: recover dots, reassign weights/attr/..., deprecate_soft() ...
+  # END GENERATED ARG_HANDLE
+
+  # ... rest of the body, using the (possibly reassigned) locals
 }
 ```
 
-The `.user_env` argument matters because the helper interposes an extra call
-frame. `lifecycle::deprecate_soft()` only signals when `is_direct(user_env)` is
-`TRUE` — that is, when `topenv(user_env)` is the global env (or under testthat).
-Its auto-detected `user_env` would resolve to the helper's caller, the **igraph
-namespace**, so the warning is swallowed (this gate runs *before* the
-`lifecycle_verbosity = "warning"` override, so forcing verbosity does not bring
-it back). Threading the public function's `rlang::caller_env()` through
-`.user_env` makes the *user's* frame the reference: real user calls warn, while
-genuinely internal igraph callers stay correctly silent — the point of a *soft*
-deprecation.
+The recovery runs inline, so there is no handler function and no `.user_env`
+plumbing. The generated `lifecycle::deprecate_soft()` sits directly in the
+function body, so its default `user_env` (`caller_env(2)`) already resolves to
+the *user's* frame: real user calls warn, while genuinely internal igraph callers
+stay correctly silent — the point of a *soft* deprecation. (The pure matching is
+done by an immediately-invoked function whose temporaries stay scoped and never
+touch an environment, so nothing leaks into the host frame.)
 
 ### Reordering or removing an argument
 
