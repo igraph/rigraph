@@ -1,32 +1,21 @@
-# Keep the generated argument-migration helpers (R/handle-args-*.R) in sync with
-# the registry during development: when tools/migrations.R or the generator is
-# newer than the generated files, regenerate them before the tests run.
+# Keep the in-place ARG_HANDLE blocks in sync with the registry during
+# development: regenerate them before the tests run so editing tools/migrations.R
+# and re-running the tests refreshes the spliced code.
 #
 # tools/ is excluded from the built package (.Rbuildignore), so this is a no-op
 # under `R CMD check` of the tarball; it only fires from a source checkout
-# (devtools::test(), covr). CI additionally guards against committed drift with
-# a `git diff` step in the rcc workflow.
+# (devtools::test(), covr). The generator only rewrites a file when its block
+# actually changes, so a clean tree stays clean. CI additionally guards against
+# committed drift (see .github/workflows/custom/before-install).
 local({
   registry <- testthat::test_path("..", "..", "tools", "migrations.R")
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   if (!file.exists(registry) || !file.exists(generator)) {
     return(invisible())
   }
-
-  out_dir <- testthat::test_path("..", "..", "R")
-  generated <- list.files(
-    out_dir,
-    pattern = "^handle-args-.*\\.R$",
-    full.names = TRUE
-  )
-
-  sources_mtime <- max(file.mtime(c(registry, generator)))
-  fresh <- length(generated) > 0 && all(file.mtime(generated) >= sources_mtime)
-  if (fresh) {
-    return(invisible())
-  }
+  src_dir <- testthat::test_path("..", "..", "R")
 
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
-  suppressMessages(gen_env$generate_migrations(registry, out_dir))
+  suppressMessages(gen_env$generate_migrations(registry, src_dir))
 })
