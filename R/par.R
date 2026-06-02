@@ -162,7 +162,7 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       [print.igraph()], [summary.igraph()], [print.igraph.vs()] and
 #'       [print.igraph.es()]. Possible values are `"classic"` (default,
 #'       the historical `IGRAPH ... DNW-` header relied on by tutorials and
-#'       parsers) and `"modern"` (a cli-styled output with section rules,
+#'       parsers) and `"cli"` (a cli-styled output with section rules,
 #'       Unicode arrows for edges and typed attribute listings).
 #'     }
 #'     \item{return.vs.es}{
@@ -233,8 +233,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   temp <- list(...)
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
-    switch(
-      mode(arg),
+    switch(mode(arg),
       list = temp <- arg,
       character = return(.igraph.pars[arg]),
       cli::cli_abort("invalid argument: {arg}.")

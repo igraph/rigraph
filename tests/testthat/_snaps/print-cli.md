@@ -1,4 +1,4 @@
-# modern print.igraph: undirected unnamed ring
+# cli print.igraph: undirected unnamed ring
 
     Code
       print(g)
@@ -12,7 +12,7 @@
       
       
       ── Edges ───────────────────────────────────────────────────────────────────────
-      [1] 1 ─ 2 2 ─ 3 3 ─ 4 4 ─ 5 1 ─ 5
+      [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  1 ─ 5 
 
 ---
 
@@ -27,7 +27,7 @@
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
       
 
-# modern print.igraph: directed named weighted
+# cli print.igraph: directed named weighted
 
     Code
       print(g)
@@ -43,7 +43,7 @@
       
       
       ── Edges (vertex names) ────────────────────────────────────────────────────────
-      [1] A → B B → C C → A
+      [1] A → B  B → C  C → A 
 
 ---
 
@@ -60,7 +60,7 @@
       → edge:   weight <dbl>
       
 
-# modern print.igraph: bipartite
+# cli print.igraph: bipartite
 
     Code
       print(g)
@@ -74,9 +74,9 @@
       
       
       ── Edges ───────────────────────────────────────────────────────────────────────
-      [1] 1 ─ 3 2 ─ 4
+      [1] 1 ─ 3  2 ─ 4 
 
-# modern print.igraph: empty graph has no edges section
+# cli print.igraph: empty graph has no edges section
 
     Code
       print(make_empty_graph(0))
@@ -94,7 +94,7 @@
       ℹ undirected
       ℹ 3 vertices · 0 edges
 
-# modern print.igraph: full mode with all attribute sections
+# cli print.igraph: full mode with all attribute sections
 
     Code
       print(g)
@@ -129,7 +129,7 @@
       [2] B → C      2
       [3] C → A      3
 
-# modern print.igraph.vs: single and double bracket
+# cli print.igraph.vs: single and double bracket
 
     Code
       V(g)
@@ -155,18 +155,18 @@
       2    B     11
       3    C     12
 
-# modern print.igraph.es: single and double bracket
+# cli print.igraph.es: single and double bracket
 
     Code
       E(g)
     Output
       ── <edge sequence> 3/3 · vertex names ──────────────────────────────────────────
-      [1] A → B B → C C → A
+      [1] A → B  B → C  C → A 
     Code
       E(g)[1:2]
     Output
       ── <edge sequence> 2/3 · vertex names ──────────────────────────────────────────
-      [1] A → B B → C
+      [1] A → B  B → C 
     Code
       E(g)[[1]]
     Output
@@ -181,7 +181,7 @@
       2    B    C   2   3      2
       3    C    A   3   1      3
 
-# modern print.igraph: ASCII fallback when cli.unicode = FALSE
+# cli print.igraph: ASCII fallback when cli.unicode = FALSE
 
     Code
       print(g)
@@ -196,7 +196,7 @@
       
       
       -- Edges (vertex names) --------------------------------------------------------
-      [1] A -> B B -> C C -> A
+      [1] A -> B  B -> C  C -> A 
 
 ---
 
@@ -212,9 +212,9 @@
       E(g)
     Output
       -- <edge sequence> 3/3 * vertex names ------------------------------------------
-      [1] A -> B B -> C C -> A
+      [1] A -> B  B -> C  C -> A 
 
-# modern print.igraph: truncation in auto mode
+# cli print.igraph: truncation in auto mode
 
     Code
       print(g)
@@ -228,8 +228,8 @@
       
       
       ── Edges ───────────────────────────────────────────────────────────────────────
-        [1]   1 ─   2   2 ─   3   3 ─   4   4 ─   5   5 ─   6   6 ─   7   7 ─   8
-        [8]   8 ─   9   9 ─  10  10 ─  11  11 ─  12  12 ─  13  13 ─  14  14 ─  15
-       [15]  15 ─  16  16 ─  17  17 ─  18  18 ─  19  19 ─  20  20 ─  21  21 ─  22
+        [1]   1 ─   2    2 ─   3    3 ─   4    4 ─   5    5 ─   6    6 ─   7 
+        [7]   7 ─   8    8 ─   9    9 ─  10   10 ─  11   11 ─  12   12 ─  13 
+       [13]  13 ─  14   14 ─  15   15 ─  16   16 ─  17   17 ─  18   18 ─  19 
       + ... omitted several edges
 
