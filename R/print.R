@@ -677,7 +677,8 @@ middot_cli <- function() {
 }
 
 attr_label_cli <- function(code) {
-  switch(code,
+  switch(
+    code,
     c = "<chr>",
     n = "<dbl>",
     l = "<lgl>",

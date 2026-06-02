@@ -233,7 +233,8 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   temp <- list(...)
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
-    switch(mode(arg),
+    switch(
+      mode(arg),
       list = temp <- arg,
       character = return(.igraph.pars[arg]),
       cli::cli_abort("invalid argument: {arg}.")

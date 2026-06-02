@@ -584,12 +584,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the vertex is a neighbor (any type)
     ## of at least one vertex in v
     mode <- igraph_match_arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
     if (is.logical(v)) {
       v <- which(v)
@@ -1464,7 +1459,8 @@ print.igraph.vs <- function(
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
       print(as.data.frame(va, stringsAsFactors = FALSE)[
-        as.vector(x), ,
+        as.vector(x),
+        ,
         drop = FALSE
       ])
     } else {
@@ -1605,7 +1601,8 @@ print_igraph_vs_cli <- function(
     vertex_attrs <- vertex_attr(graph)
     if (all(sapply(vertex_attrs, is.atomic))) {
       print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
-        as.vector(x), ,
+        as.vector(x),
+        ,
         drop = FALSE
       ])
     } else {
