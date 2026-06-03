@@ -48,6 +48,16 @@
       i Detected call: migration_fixture(graph, n, directed)
       i Use instead: migration_fixture(graph, n, directed = )
 
+---
+
+    Code
+      x <- migration_fixture("g", 5, 1:3, dir = TRUE)
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, weight, directed)
+      i Use instead: migration_fixture(graph, n, weights = , directed = )
+
 # error message snapshots
 
     Code

@@ -50,6 +50,16 @@ test_that("a renamed-away old name and abbreviations are recovered by name", {
   expect_true(res$directed)
 })
 
+test_that("positional and named recovery can be mixed in one call", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture("g", 5, 1:3, dir = TRUE)
+  )
+  expect_equal(res$weights, 1:3)
+  expect_true(res$directed)
+  expect_equal(res$type, "out")
+})
+
 test_that("recovery emits a single deprecation warning, not one per slot", {
   rlang::local_options(lifecycle_verbosity = "warning")
   warnings <- character()
@@ -72,6 +82,8 @@ test_that("recovery deprecation messages", {
   expect_snapshot(x <- migration_fixture("g", 5, weight = 1:3))
   expect_snapshot(x <- migration_fixture("g", 5, ty = "in"))
   expect_snapshot(x <- migration_fixture("g", 5, dir = TRUE))
+  # mixed: a positional value and a named abbreviation in the same call
+  expect_snapshot(x <- migration_fixture("g", 5, 1:3, dir = TRUE))
 })
 
 test_that("error message snapshots", {
