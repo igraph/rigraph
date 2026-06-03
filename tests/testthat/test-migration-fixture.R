@@ -201,3 +201,52 @@ test_that("the BEGIN marker may carry a trailing note", {
   m <- regmatches(marker, regexec(gen_env$begin_re, marker))[[1]]
   expect_identical(m[[3]], "foo")
 })
+
+test_that("render_call_arg() wraps long arguments the way air formats them", {
+  # The fixture's args stay under the 80-col width, but a real migration with
+  # more arguments overflows; the renderer must wrap exactly as `air` would so
+  # the after-install drift check (generator output vs air-formatted source)
+  # stays clean. `splice_blocks()` prepends 2 spaces to every block line, which
+  # the fit test accounts for.
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  # Short -> single line.
+  short <- gen_env$render_call_arg(
+    "head_args",
+    "c",
+    c('"graph"', '"n"'),
+    "character(0)"
+  )
+  expect_identical(short, '    head_args = c("graph", "n"),')
+
+  # Empty -> the supplied literal, on a single line (never `c()`/`list()`).
+  empty <- gen_env$render_call_arg(
+    "recover_old",
+    "c",
+    character(0),
+    "character(0)"
+  )
+  expect_identical(empty, "    recover_old = character(0),")
+
+  # Long -> one item per line, opening/closing on their own lines, and every
+  # emitted line (plus the 2-space splice indent) stays within 80 cols.
+  items <- c(
+    "weights = weights",
+    "attr = attr",
+    "edges = edges",
+    "names = names",
+    "sparse = sparse"
+  )
+  wrapped <- gen_env$render_call_arg("current", "list", items, "list()")
+  expect_gt(length(wrapped), 1L)
+  expect_identical(wrapped[[1]], "    current = list(")
+  expect_identical(wrapped[[length(wrapped)]], "    ),")
+  expect_identical(
+    wrapped[2:6],
+    paste0("      ", items, c(",", ",", ",", ",", ""))
+  )
+  expect_true(all(nchar(wrapped) + 2L <= 80L))
+})
