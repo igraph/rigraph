@@ -416,7 +416,7 @@ get.adjacency.sparse <- function(
   type <- igraph_match_arg(type)
 
   # Use the library implementation
-  tmp <- get_adjacency_sparse_impl(
+  sparse_adjacency <- get_adjacency_sparse_impl(
     graph,
     type,
     weights,
@@ -424,7 +424,7 @@ get.adjacency.sparse <- function(
   )
 
   # Convert to proper Matrix object
-  res <- igraph.i.spMatrix(tmp)
+  res <- igraph.i.spMatrix(sparse_adjacency)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
