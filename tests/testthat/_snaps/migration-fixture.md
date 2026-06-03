@@ -5,7 +5,7 @@
     Condition
       Warning:
       Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
-      i Detected call: migration_fixture(graph, n, weight, type, directed)
+      i Detected call: migration_fixture(graph, n, weight, kind, directed)
       i Use instead: migration_fixture(graph, n, weights = , type = , directed = )
 
 ---
@@ -31,11 +31,21 @@
 ---
 
     Code
-      x <- migration_fixture("g", 5, ty = "in")
+      x <- migration_fixture("g", 5, kind = "in")
     Condition
       Warning:
       Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
-      i Detected call: migration_fixture(graph, n, type)
+      i Detected call: migration_fixture(graph, n, kind)
+      i Use instead: migration_fixture(graph, n, type = )
+
+---
+
+    Code
+      x <- migration_fixture("g", 5, kin = "in")
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, kind)
       i Use instead: migration_fixture(graph, n, type = )
 
 ---
@@ -57,6 +67,16 @@
       Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
       i Detected call: migration_fixture(graph, n, weight, directed)
       i Use instead: migration_fixture(graph, n, weights = , directed = )
+
+---
+
+    Code
+      x <- migration_fixture(g = "G", 5, kind = "in")
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, kind)
+      i Use instead: migration_fixture(graph, n, type = )
 
 # error message snapshots
 

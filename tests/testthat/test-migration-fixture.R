@@ -1,7 +1,8 @@
 # Tests for the in-place argument-migration generator (tools/generate-migrations.R)
 # via the fixture `migration_fixture()` (R/migration-fixture.R). Old signature
-# f(graph, n, weight, type, directed); new f(graph, n, ..., weights, type,
-# directed) with weight -> weights.
+# f(graph, n, weight, kind, directed); new f(graph, n, ..., weights, type,
+# directed) with weight -> weights and kind -> type (directed survives). The
+# head args (graph, n) stay before `...` and are matched by base R.
 
 # ---- behaviour --------------------------------------------------------------
 
@@ -40,11 +41,17 @@ test_that("a legacy positional call is recovered", {
   )
 })
 
-test_that("a renamed-away old name and abbreviations are recovered by name", {
+test_that("renamed-away old names are recovered by name", {
   rlang::local_options(lifecycle_verbosity = "warning")
   lifecycle::expect_deprecated(res <- migration_fixture("g", 5, weight = 1:3))
   expect_equal(res$weights, 1:3)
-  lifecycle::expect_deprecated(res <- migration_fixture("g", 5, ty = "in"))
+  lifecycle::expect_deprecated(res <- migration_fixture("g", 5, kind = "in"))
+  expect_equal(res$type, "in")
+})
+
+test_that("abbreviations are recovered by partial match", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(res <- migration_fixture("g", 5, kin = "in"))
   expect_equal(res$type, "in")
   lifecycle::expect_deprecated(res <- migration_fixture("g", 5, dir = TRUE))
   expect_true(res$directed)
@@ -58,6 +65,22 @@ test_that("positional and named recovery can be mixed in one call", {
   expect_equal(res$weights, 1:3)
   expect_true(res$directed)
   expect_equal(res$type, "out")
+})
+
+test_that("head args are matched by base R, including abbreviations", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # Abbreviating a head arg (before `...`) is plain R partial matching: it is
+  # resolved silently and is *not* deprecated.
+  expect_no_warning(res <- migration_fixture(gr = "G", n = 5))
+  expect_equal(res$graph, "G")
+
+  # A head abbreviation alongside a recovered tail arg: head stays silent, the
+  # tail arg is recovered with a single deprecation.
+  lifecycle::expect_deprecated(
+    res <- migration_fixture(g = "G", 5, kind = "in")
+  )
+  expect_equal(res$graph, "G")
+  expect_equal(res$type, "in")
 })
 
 test_that("recovery emits a single deprecation warning, not one per slot", {
@@ -80,10 +103,13 @@ test_that("recovery deprecation messages", {
   expect_snapshot(x <- migration_fixture("g", 5, 1:3, "in", TRUE))
   expect_snapshot(x <- migration_fixture("g", 5, 1:3))
   expect_snapshot(x <- migration_fixture("g", 5, weight = 1:3))
-  expect_snapshot(x <- migration_fixture("g", 5, ty = "in"))
+  expect_snapshot(x <- migration_fixture("g", 5, kind = "in"))
+  expect_snapshot(x <- migration_fixture("g", 5, kin = "in"))
   expect_snapshot(x <- migration_fixture("g", 5, dir = TRUE))
   # mixed: a positional value and a named abbreviation in the same call
   expect_snapshot(x <- migration_fixture("g", 5, 1:3, dir = TRUE))
+  # head abbreviation (g -> graph, by base R) does not appear in the message
+  expect_snapshot(x <- migration_fixture(g = "G", 5, kind = "in"))
 })
 
 test_that("error message snapshots", {
@@ -104,9 +130,9 @@ fixture_args <- function(
     dots,
     current = current,
     recover_new = c("weights", "type", "directed"),
-    recover_old = c("weight", "type", "directed"),
-    match_names = c("weight", "weights", "type", "directed"),
-    match_to = c("weights", "weights", "type", "directed"),
+    recover_old = c("weight", "kind", "directed"),
+    match_names = c("weight", "kind", "weights", "type", "directed"),
+    match_to = c("weights", "type", "weights", "type", "directed"),
     defaults = list(weights = NULL, type = "out", directed = FALSE),
     head_args = c("graph", "n"),
     fn_name = "migration_fixture"
@@ -123,7 +149,7 @@ test_that("migrate_recover_args() returns recovered values and message parts", {
   expect_match(res$what, "positional or abbreviated")
   expect_match(
     res$details[[1]],
-    "migration_fixture\\(graph, n, weight, type, directed\\)"
+    "migration_fixture\\(graph, n, weight, kind, directed\\)"
   )
   expect_match(res$details[[2]], "weights = , type = , directed = ")
 })
