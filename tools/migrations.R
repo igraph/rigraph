@@ -73,12 +73,21 @@ migrations <- list(
   # ),
 
   # --- test fixture --------------------------------------------------------
-  # Exercises the generator end-to-end without migrating a real function.
-  # Old signature f(a, b, c, d); new f(a, b, ..., c_renamed, d) with c renamed
-  # to c_renamed. Consumed by tests/testthat/test-handle-args.R.
+  # Exercises the generator end-to-end without migrating a real function. The
+  # arg names are chosen to cover every recovery path: a rename (`weight ->
+  # weights`), unique abbreviations (`ty`, `dir`) and an ambiguous one (`weig`
+  # matches both `weight` and `weights`). Consumed by
+  # tests/testthat/test-migration-fixture.R.
   migration_fixture = list(
-    old = function(a, b, c = c_renamed, d) {},
-    new = function(a, b, ..., c_renamed = NULL, d = NULL) {},
+    old = function(graph, n, weight = weights, type, directed) {},
+    new = function(
+      graph,
+      n,
+      ...,
+      weights = NULL,
+      type = "out",
+      directed = FALSE
+    ) {},
     when = "3.0.0"
   )
 )

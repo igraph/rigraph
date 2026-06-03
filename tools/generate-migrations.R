@@ -218,26 +218,28 @@ render_current_list <- function(entry) {
 # drift in the (hand-written) host file.
 #
 # Shape: the per-function configuration is passed to `migrate_recover_args()`
-# (a hand-written, debuggable helper) which returns either NULL or the recovered
-# values plus the deprecation message parts. The host frame then assigns the
-# recovered values over its own locals and emits a single
-# `lifecycle::deprecate_soft()`. Because that call sits directly in the host
-# function, its default `user_env` (caller_env(2)) resolves to the user's frame
-# -- no `.user_env` threading needed.
+# (a hand-written, debuggable helper) which returns the recovered values plus the
+# deprecation message parts. The host frame then assigns the recovered values
+# over its own locals and emits a single `lifecycle::deprecate_soft()`. Because
+# that call sits directly in the host function, its default `user_env`
+# (caller_env(2)) resolves to the user's frame -- no `.user_env` threading needed.
+#
+# The whole thing is guarded by `...length() > 0L` so the common path (a correct
+# new-API call with nothing in `...`) skips the helper call entirely.
 render_arg_handle <- function(entry) {
   c(
-    ".arg_handle <- migrate_recover_args(",
-    "  list(...),",
-    paste0("  current = ", render_current_list(entry), ","),
-    paste0("  recover_new = ", render_chr_vec(entry$recover_new), ","),
-    paste0("  recover_old = ", render_chr_vec(entry$recover_old), ","),
-    paste0("  match_names = ", render_chr_vec(entry$match_names), ","),
-    paste0("  match_to = ", render_chr_vec(entry$match_to), ","),
-    paste0("  defaults = ", render_defaults_list(entry), ","),
-    paste0("  head_args = ", render_chr_vec(entry$head), ","),
-    paste0("  fn_name = \"", entry$fn, "\""),
-    ")",
-    "if (!is.null(.arg_handle)) {",
+    "if (...length() > 0L) {",
+    "  .arg_handle <- migrate_recover_args(",
+    "    list(...),",
+    paste0("    current = ", render_current_list(entry), ","),
+    paste0("    recover_new = ", render_chr_vec(entry$recover_new), ","),
+    paste0("    recover_old = ", render_chr_vec(entry$recover_old), ","),
+    paste0("    match_names = ", render_chr_vec(entry$match_names), ","),
+    paste0("    match_to = ", render_chr_vec(entry$match_to), ","),
+    paste0("    defaults = ", render_defaults_list(entry), ","),
+    paste0("    head_args = ", render_chr_vec(entry$head), ","),
+    paste0("    fn_name = \"", entry$fn, "\""),
+    "  )",
     "  list2env(.arg_handle$values, environment())",
     "  lifecycle::deprecate_soft(",
     paste0("    \"", entry$when, "\","),
