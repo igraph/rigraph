@@ -67,20 +67,17 @@ test_that("positional and named recovery can be mixed in one call", {
   expect_equal(res$type, "out")
 })
 
-test_that("head args are matched by base R, including abbreviations", {
-  rlang::local_options(lifecycle_verbosity = "warning")
-  # Abbreviating a head arg (before `...`) is plain R partial matching: it is
-  # resolved silently and is *not* deprecated.
-  expect_no_warning(res <- migration_fixture(gr = "G", n = 5))
-  expect_equal(res$graph, "G")
-
-  # A head abbreviation alongside a recovered tail arg: head stays silent, the
-  # tail arg is recovered with a single deprecation.
-  lifecycle::expect_deprecated(
-    res <- migration_fixture(g = "G", 5, kind = "in")
+test_that("head args go through base R partial matching, not our recovery", {
+  # Abbreviating a head arg (before `...`) is plain R partial matching, not our
+  # recovery. With `warnPartialMatchArgs` on, R emits its own partial-match
+  # warning and our deprecation does not fire; when a tail arg is abbreviated
+  # too, both warnings appear -- R's for the head, ours for the tail.
+  rlang::local_options(
+    lifecycle_verbosity = "warning",
+    warnPartialMatchArgs = TRUE
   )
-  expect_equal(res$graph, "G")
-  expect_equal(res$type, "in")
+  expect_snapshot(migration_fixture(gr = "G", n = 5))
+  expect_snapshot(migration_fixture(g = "G", 5, kind = "in"))
 })
 
 test_that("recovery emits a single deprecation warning, not one per slot", {
@@ -99,17 +96,17 @@ test_that("recovery emits a single deprecation warning, not one per slot", {
 # ---- deprecation message snapshots -----------------------------------------
 
 test_that("recovery deprecation messages", {
+  # No assignment, so the snapshot also shows the recovered values the call
+  # resolved to.
   rlang::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(x <- migration_fixture("g", 5, 1:3, "in", TRUE))
-  expect_snapshot(x <- migration_fixture("g", 5, 1:3))
-  expect_snapshot(x <- migration_fixture("g", 5, weight = 1:3))
-  expect_snapshot(x <- migration_fixture("g", 5, kind = "in"))
-  expect_snapshot(x <- migration_fixture("g", 5, kin = "in"))
-  expect_snapshot(x <- migration_fixture("g", 5, dir = TRUE))
+  expect_snapshot(migration_fixture("g", 5, 1:3, "in", TRUE))
+  expect_snapshot(migration_fixture("g", 5, 1:3))
+  expect_snapshot(migration_fixture("g", 5, weight = 1:3))
+  expect_snapshot(migration_fixture("g", 5, kind = "in"))
+  expect_snapshot(migration_fixture("g", 5, kin = "in"))
+  expect_snapshot(migration_fixture("g", 5, dir = TRUE))
   # mixed: a positional value and a named abbreviation in the same call
-  expect_snapshot(x <- migration_fixture("g", 5, 1:3, dir = TRUE))
-  # head abbreviation (g -> graph, by base R) does not appear in the message
-  expect_snapshot(x <- migration_fixture(g = "G", 5, kind = "in"))
+  expect_snapshot(migration_fixture("g", 5, 1:3, dir = TRUE))
 })
 
 test_that("error message snapshots", {
