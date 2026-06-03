@@ -102,9 +102,9 @@ Graph cycles:
 
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> + 6/40 edges from fa8806a:
+#> + 6/40 edges from 758703c:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 feedback_arc_set(g, algo = "approx_eades")
-#> + 6/40 edges from fa8806a:
+#> + 6/40 edges from 758703c:
 #> [1]  6->15  6->19  9->15 11-> 3 16->10 17-> 5
 ```

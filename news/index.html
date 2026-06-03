@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,87 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9009" id="igraph-2329009">igraph 2.3.2.9009<a class="anchor" aria-label="anchor" href="#igraph-2329009"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9009"></a></h3>
+<ul><li><p><code><a href="../reference/communities.html">cut_at()</a></code> handles partial dendrograms from <code><a href="../reference/cluster_leading_eigen.html">cluster_leading_eigen()</a></code> (<a href="https://github.com/igraph/rigraph/issues/58" class="external-link">#58</a>, <a href="https://github.com/igraph/rigraph/issues/2599" class="external-link">#2599</a>).</p></li>
+<li><p>Stricter bipartite type checking (<a href="https://github.com/igraph/rigraph/issues/710" class="external-link">#710</a>, <a href="https://github.com/igraph/rigraph/issues/2598" class="external-link">#2598</a>).</p></li>
+<li><p>Vector logic (<a href="https://github.com/igraph/rigraph/issues/2653" class="external-link">#2653</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len()</a></code> rather than <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2655" class="external-link">#2655</a>).</p></li>
+<li><p>Unreachable code (<a href="https://github.com/igraph/rigraph/issues/2656" class="external-link">#2656</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans()</a></code> and <code><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowSums()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2657" class="external-link">#2657</a>).</p></li>
+<li><p>Add <code>check.attributes=FALSE</code> to <code>is_symmetric()</code> to ignore dimnames mismatch (<a href="https://github.com/igraph/rigraph/issues/2671" class="external-link">#2671</a>, <a href="https://github.com/igraph/rigraph/issues/2672" class="external-link">#2672</a>).</p></li>
+<li><p>Resolve CRAN Fortran obsolescent character length warning in ARPACK (<a href="https://github.com/igraph/rigraph/issues/2644" class="external-link">#2644</a>).</p></li>
+<li><p>Avoid memory overflow in <code>ensure_no_na()</code> for large sparse matrices with <code>mode="lower"</code> or <code>mode="upper"</code> (<a href="https://github.com/igraph/rigraph/issues/2626" class="external-link">#2626</a>, <a href="https://github.com/igraph/rigraph/issues/2627" class="external-link">#2627</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-2-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9009"></a></h3>
+<ul><li><p>Use <code>max.print</code> consistently in adjacency-list graph printing (<a href="https://github.com/igraph/rigraph/issues/1462" class="external-link">#1462</a>, <a href="https://github.com/igraph/rigraph/issues/2680" class="external-link">#2680</a>).</p></li>
+<li><p>Refactor internal <code>tmp</code> locals to descriptive names (<a href="https://github.com/igraph/rigraph/issues/1328" class="external-link">#1328</a>, <a href="https://github.com/igraph/rigraph/issues/2678" class="external-link">#2678</a>).</p></li>
+<li><p>Unused functions (<a href="https://github.com/igraph/rigraph/issues/2669" class="external-link">#2669</a>).</p></li>
+<li><p>Ignore true_false_symbol for now (<a href="https://github.com/igraph/rigraph/issues/2668" class="external-link">#2668</a>).</p></li>
+<li><p>Numeric_leading_zero (<a href="https://github.com/igraph/rigraph/issues/2667" class="external-link">#2667</a>).</p></li>
+<li><p>Exception comments for jarl’s duplicated arguments check (<a href="https://github.com/igraph/rigraph/issues/2658" class="external-link">#2658</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2659" class="external-link">#2659</a>).</p></li>
+<li><p>Outer negation (<a href="https://github.com/igraph/rigraph/issues/2666" class="external-link">#2666</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code>, <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2665" class="external-link">#2665</a>).</p></li>
+<li><p>Do not namespace internal functions (<a href="https://github.com/igraph/rigraph/issues/2662" class="external-link">#2662</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2661" class="external-link">#2661</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">anyDuplicated()</a></code> (jarl), <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">anyNA()</a></code> (jarl), <code><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nzchar()</a></code>(me) (<a href="https://github.com/igraph/rigraph/issues/2660" class="external-link">#2660</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2663" class="external-link">#2663</a>).</p></li>
+<li><p>Add jarl config (<a href="https://github.com/igraph/rigraph/issues/2654" class="external-link">#2654</a>).</p></li>
+<li><p>Split generated <code>R/aaa-auto.R</code> into per-category <code>R/aaa-&lt;cat&gt;.R</code> files (<a href="https://github.com/igraph/rigraph/issues/2621" class="external-link">#2621</a>).</p></li>
+<li><p>Remove <code><a href="../reference/console.html">console()</a></code> and <code><a href="../reference/tkplot.html">tkplot()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2615" class="external-link">#2615</a>).</p></li>
+<li><p>Advance lifecycle stage for many functions (<a href="https://github.com/igraph/rigraph/issues/2634" class="external-link">#2634</a>).</p></li>
+<li><p>Add ccache to <code>.gitignore</code> and <code>.Rbuildignore</code>.</p></li>
+<li><p>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2624" class="external-link">#2624</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-3-2-9009">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-3-2-9009"></a></h3>
+<ul><li><p>Update ccache-action reference.</p></li>
+<li><p>Bump action version.</p></li>
+<li><p>Create snapshot update PR against correct branch.</p></li>
+<li><p>Add reference to <code>/apply-patch</code> workflow in commit message.</p></li>
+<li><p>Clarify rationale for not deploying on schedule.</p></li>
+<li><p>Really deploy pkgdown only on push.</p></li>
+<li><p>Disable vendoring workflow to avoid noise.</p></li>
+<li><p>Only run fledge on pushes to main.</p></li>
+<li><p>Tweak fledge workflow and ccache action.</p></li>
+<li><p>Cosmetics.</p></li>
+<li><p>Bump action versions.</p></li>
+<li><p>Install clang-format-21.</p></li>
+<li><p>Align fledge workflow.</p></li>
+<li><p>Harmonize.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-2-9009">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-2-9009"></a></h3>
+<ul><li>Updated revdep issues (<a href="https://github.com/igraph/rigraph/issues/2647" class="external-link">#2647</a>).</li>
+</ul><div class="section level4">
+<h4 id="revdep-2-3-2-9009">revdep<a class="anchor" aria-label="anchor" href="#revdep-2-3-2-9009"></a></h4>
+<ul><li><p>Analyze and document reverse dependency problems for igraph 2.3.0 (<a href="https://github.com/igraph/rigraph/issues/2499" class="external-link">#2499</a>, <a href="https://github.com/igraph/rigraph/issues/2500" class="external-link">#2500</a>).</p></li>
+<li><p><code>document()</code> with latest roxygen2 – for clean diffs (<a href="https://github.com/igraph/rigraph/issues/2642" class="external-link">#2642</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="performance-2-3-2-9009">Performance<a class="anchor" aria-label="anchor" href="#performance-2-3-2-9009"></a></h3>
+<ul><li>Speed up <code><a href="../reference/dot-apply_modifiers.html">.apply_modifiers()</a></code> in <code>make.R</code> (<a href="https://github.com/igraph/rigraph/issues/1468" class="external-link">#1468</a>, <a href="https://github.com/igraph/rigraph/issues/2600" class="external-link">#2600</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-3-2-9009">Testing<a class="anchor" aria-label="anchor" href="#testing-2-3-2-9009"></a></h3>
+<ul><li>Jarl fixes (<a href="https://github.com/igraph/rigraph/issues/2670" class="external-link">#2670</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-3-2-9009">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-3-2-9009"></a></h3>
+<ul><li>
+<p>Merge tag ‘v2.3.2’.</p>
+<p>Place the 2.3.2 release section directly above 2.3.1 in NEWS, below the development entries, and bump the development version to 2.3.2.9008.</p>
+<p><a href="https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2" class="external-link uri">https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2</a></p>
+</li>
+<li><p>Ci: Unify fledge.yaml across cynkratemplate and fledge (<a href="https://github.com/igraph/rigraph/issues/86" class="external-link">#86</a>).</p></li>
+<li><p>Merge branch ‘krlmlr-main’.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.1.9008" id="igraph-2319008">igraph 2.3.1.9008<a class="anchor" aria-label="anchor" href="#igraph-2319008"></a></h2>
 <div class="section level3">

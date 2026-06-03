@@ -1,5 +1,179 @@
 # Changelog
 
+## igraph 2.3.2.9009
+
+### Bug fixes
+
+- [`cut_at()`](https://r.igraph.org/reference/communities.md) handles
+  partial dendrograms from
+  [`cluster_leading_eigen()`](https://r.igraph.org/reference/cluster_leading_eigen.md)
+  ([\#58](https://github.com/igraph/rigraph/issues/58),
+  [\#2599](https://github.com/igraph/rigraph/issues/2599)).
+
+- Stricter bipartite type checking
+  ([\#710](https://github.com/igraph/rigraph/issues/710),
+  [\#2598](https://github.com/igraph/rigraph/issues/2598)).
+
+- Vector logic
+  ([\#2653](https://github.com/igraph/rigraph/issues/2653)).
+
+- [`seq_len()`](https://rdrr.io/r/base/seq.html) rather than
+  [`seq()`](https://rdrr.io/r/base/seq.html)
+  ([\#2655](https://github.com/igraph/rigraph/issues/2655)).
+
+- Unreachable code
+  ([\#2656](https://github.com/igraph/rigraph/issues/2656)).
+
+- [`rowMeans()`](https://rdrr.io/pkg/Matrix/man/colSums-methods.html)
+  and [`rowSums()`](https://rdrr.io/pkg/Matrix/man/colSums-methods.html)
+  ([\#2657](https://github.com/igraph/rigraph/issues/2657)).
+
+- Add `check.attributes=FALSE` to `is_symmetric()` to ignore dimnames
+  mismatch ([\#2671](https://github.com/igraph/rigraph/issues/2671),
+  [\#2672](https://github.com/igraph/rigraph/issues/2672)).
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK
+  ([\#2644](https://github.com/igraph/rigraph/issues/2644)).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices
+  with `mode="lower"` or `mode="upper"`
+  ([\#2626](https://github.com/igraph/rigraph/issues/2626),
+  [\#2627](https://github.com/igraph/rigraph/issues/2627)).
+
+### Chore
+
+- Use `max.print` consistently in adjacency-list graph printing
+  ([\#1462](https://github.com/igraph/rigraph/issues/1462),
+  [\#2680](https://github.com/igraph/rigraph/issues/2680)).
+
+- Refactor internal `tmp` locals to descriptive names
+  ([\#1328](https://github.com/igraph/rigraph/issues/1328),
+  [\#2678](https://github.com/igraph/rigraph/issues/2678)).
+
+- Unused functions
+  ([\#2669](https://github.com/igraph/rigraph/issues/2669)).
+
+- Ignore true_false_symbol for now
+  ([\#2668](https://github.com/igraph/rigraph/issues/2668)).
+
+- Numeric_leading_zero
+  ([\#2667](https://github.com/igraph/rigraph/issues/2667)).
+
+- Exception comments for jarl’s duplicated arguments check
+  ([\#2658](https://github.com/igraph/rigraph/issues/2658)).
+
+- [`startsWith()`](https://rdrr.io/r/base/startsWith.html)
+  ([\#2659](https://github.com/igraph/rigraph/issues/2659)).
+
+- Outer negation
+  ([\#2666](https://github.com/igraph/rigraph/issues/2666)).
+
+- [`seq_along()`](https://rdrr.io/r/base/seq.html),
+  [`seq_len()`](https://rdrr.io/r/base/seq.html)
+  ([\#2665](https://github.com/igraph/rigraph/issues/2665)).
+
+- Do not namespace internal functions
+  ([\#2662](https://github.com/igraph/rigraph/issues/2662)).
+
+- [`inherits()`](https://rdrr.io/r/base/class.html)
+  ([\#2661](https://github.com/igraph/rigraph/issues/2661)).
+
+- [`anyDuplicated()`](https://rdrr.io/r/base/duplicated.html) (jarl),
+  [`anyNA()`](https://rdrr.io/r/base/NA.html) (jarl),
+  [`nzchar()`](https://rdrr.io/r/base/nchar.html)(me)
+  ([\#2660](https://github.com/igraph/rigraph/issues/2660)).
+
+- [`lengths()`](https://rdrr.io/r/base/lengths.html)
+  ([\#2663](https://github.com/igraph/rigraph/issues/2663)).
+
+- Add jarl config
+  ([\#2654](https://github.com/igraph/rigraph/issues/2654)).
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files
+  ([\#2621](https://github.com/igraph/rigraph/issues/2621)).
+
+- Remove [`console()`](https://r.igraph.org/reference/console.md) and
+  [`tkplot()`](https://r.igraph.org/reference/tkplot.md)
+  ([\#2615](https://github.com/igraph/rigraph/issues/2615)).
+
+- Advance lifecycle stage for many functions
+  ([\#2634](https://github.com/igraph/rigraph/issues/2634)).
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+- Auto-update from GitHub Actions
+  ([\#2624](https://github.com/igraph/rigraph/issues/2624)).
+
+### Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+### Documentation
+
+- Updated revdep issues
+  ([\#2647](https://github.com/igraph/rigraph/issues/2647)).
+
+#### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0
+  ([\#2499](https://github.com/igraph/rigraph/issues/2499),
+  [\#2500](https://github.com/igraph/rigraph/issues/2500)).
+
+- `document()` with latest roxygen2 – for clean diffs
+  ([\#2642](https://github.com/igraph/rigraph/issues/2642)).
+
+### Performance
+
+- Speed up
+  [`.apply_modifiers()`](https://r.igraph.org/reference/dot-apply_modifiers.md)
+  in `make.R` ([\#1468](https://github.com/igraph/rigraph/issues/1468),
+  [\#2600](https://github.com/igraph/rigraph/issues/2600)).
+
+### Testing
+
+- Jarl fixes ([\#2670](https://github.com/igraph/rigraph/issues/2670)).
+
+### Uncategorized
+
+- Merge tag ‘v2.3.2’.
+
+  Place the 2.3.2 release section directly above 2.3.1 in NEWS, below
+  the development entries, and bump the development version to
+  2.3.2.9008.
+
+  <https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2>
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge
+  ([\#86](https://github.com/igraph/rigraph/issues/86)).
+
+- Merge branch ‘krlmlr-main’.
+
 ## igraph 2.3.1.9008
 
 ### Chore

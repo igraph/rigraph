@@ -294,6 +294,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.1.0 | graph.atlas() | [graph_from_atlas()](https://r.igraph.org/reference/graph_from_atlas.html) |
 | 2 – warn | 2.1.0 | [graph\_()](https://r.igraph.org/reference/graph_.html) | c(“Please use constructors directly, for instance graph_from_edgelist().”,“graph\_() will be removed in a future version of igraph.”) |
 | 2 – warn | 2.0.3 | [make_lattice(circular = ‘use periodic argument instead’)](https://r.igraph.org/reference/make_lattice.html) | c(“`circular` is now deprecated, use `periodic` instead.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | minimum.spanning.tree() | [mst()](https://r.igraph.org/reference/mst.html) |
 | 2 – warn | 2.0.0 | triad.census() | [triad_census()](https://r.igraph.org/reference/triad_census.html) |
 | 2 – warn | 2.0.0 | graph.motifs.no() | [count_motifs()](https://r.igraph.org/reference/count_motifs.html) |
