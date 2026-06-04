@@ -75,8 +75,8 @@ Other functions for manipulating graph structure:
 
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH 798a136 DN-- 4 3 -- 
+#> IGRAPH 92322f7 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 798a136 (vertex names):
+#> + edges from 92322f7 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```
