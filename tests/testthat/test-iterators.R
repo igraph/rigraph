@@ -325,7 +325,6 @@ test_that("both edge and vertex names", {
 })
 
 test_that("printing connected vs/es works", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -344,7 +343,6 @@ test_that("printing connected vs/es works", {
 })
 
 test_that("printing named connected vs/es works", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -364,7 +362,6 @@ test_that("printing named connected vs/es works", {
 })
 
 test_that("printing unconnected vs/es works", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)

@@ -214,7 +214,6 @@ test_that("BFS callback does not blow up when another igraph function is raised 
 })
 
 test_that("bfs() works", {
-
   expect_snapshot({
     g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(

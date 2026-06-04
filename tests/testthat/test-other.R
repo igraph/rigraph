@@ -49,7 +49,6 @@ test_that("R help contains guarantee on number of RNG bits", {
 })
 
 test_that("serialization works", {
-
   g <- make_ring(3, directed = TRUE)
   gs <- unserialize(serialize(g, NULL))
 

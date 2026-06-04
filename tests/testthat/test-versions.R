@@ -67,7 +67,6 @@ test_that("we can upgrade from 0.6 to 1.5.0, explicitly", {
 })
 
 test_that("we can upgrade from 1.0.0 to 1.5.0, on the fly", {
-
   expect_snapshot({
     g <- oldsample_1_0_0()
     graph_version(g)
@@ -91,7 +90,6 @@ test_that("we can upgrade from 1.0.0 to 1.5.0, explicitly", {
 })
 
 test_that("reading of old igraph formats", {
-
   s <- oldsamples()
   expect_snapshot_igraph_error({
     s[["0.1.1"]]

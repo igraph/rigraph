@@ -129,7 +129,6 @@ test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
 })
 
 test_that("print.igraph.es() uses vertex names", {
-
   g <- make_directed_graph(c("A", "B"))
   expect_snapshot({
     E(g)
@@ -138,7 +137,6 @@ test_that("print.igraph.es() uses vertex names", {
 
 
 test_that("vs printing", {
-
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -154,7 +152,6 @@ test_that("vs printing", {
 })
 
 test_that("vs printing, complex attributes", {
-
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -169,7 +166,6 @@ test_that("vs printing, complex attributes", {
 })
 
 test_that("es printing", {
-
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -183,7 +179,6 @@ test_that("es printing", {
 })
 
 test_that("es printing, complex attributes", {
-
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%

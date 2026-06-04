@@ -27,7 +27,6 @@ test_that("reading GraphML file works", {
 })
 
 test_that("reading graph in NCOL format", {
-
   ncol_path <- withr::local_tempfile(pattern = "testfile", fileext = ".ncol")
   g <- make_graph(c(1, 2, 2, 3))
   write_graph(g, ncol_path, "ncol")
@@ -35,7 +34,6 @@ test_that("reading graph in NCOL format", {
 })
 
 test_that("reading graph in LGL format", {
-
   lgl_path <- withr::local_tempfile(pattern = "testfile", fileext = ".lgl")
   g <- make_graph(c(1, 2, 2, 3))
   write_graph(g, lgl_path, "lgl")
@@ -43,7 +41,6 @@ test_that("reading graph in LGL format", {
 })
 
 test_that("reading graph, unused argument", {
-
   lgl_path <- withr::local_tempfile(pattern = "testfile", fileext = ".lgl")
   g <- make_graph(c(1, 2, 2, 3))
   write_graph(g, lgl_path, "lgl")
