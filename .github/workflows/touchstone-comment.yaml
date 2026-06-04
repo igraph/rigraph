@@ -18,8 +18,13 @@ permissions:
 jobs:
   upload:
     runs-on: ubuntu-latest
+    # Require the receive run to have actually succeeded. Without the
+    # conclusion check this job also runs when receive was skipped/failed, then
+    # crashes downloading the missing "pr" artifact ("Cannot read properties of
+    # undefined (reading 'id')").
     if: >
-      ${{ github.event.workflow_run.event == 'pull_request' }}
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: lorenzwalthert/touchstone/actions/comment@v1
         with: 

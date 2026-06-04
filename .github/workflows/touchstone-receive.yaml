@@ -21,14 +21,14 @@ permissions:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest 
-    if:
-      true &&
-      (
-        github.event.pull_request.author_association == 'OWNER' ||
-        github.event.pull_request.author_association == 'MEMBER' ||
-        github.event.pull_request.author_association == 'COLLABORATOR' 
-      )
+    runs-on: ubuntu-latest
+    # Only run for PRs from branches in this repo (not forks). Creating a
+    # same-repo branch requires push access, so this is the safety gate that
+    # keeps untrusted fork code from running with the workflow token. We do
+    # *not* gate on author_association: it is derived from the webhook payload,
+    # which reports CONTRIBUTOR/NONE (never MEMBER) for users whose org
+    # membership is private, silently skipping legitimate maintainer PRs.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     outputs:
       config: ${{ steps.read_touchstone_config.outputs.config }}
     steps:
@@ -38,14 +38,9 @@ jobs:
           fetch-depth: 0
 
       - id: read_touchstone_config
-        run: |
-          content=`cat ./touchstone/config.json`
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "::set-output name=config::$content"
+        # Compact the (possibly pretty-printed) config to a single line so it
+        # can be passed through $GITHUB_OUTPUT without multi-line escaping.
+        run: echo "config=$(jq -c . ./touchstone/config.json)" >> "$GITHUB_OUTPUT"
   build:
     needs: prepare
     runs-on: ${{ matrix.config.os }}
