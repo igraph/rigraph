@@ -18,9 +18,18 @@ permissions:
 jobs:
   upload:
     runs-on: ubuntu-latest
+    # Require the receive run to have actually succeeded. Without the
+    # conclusion check this job also runs when receive was skipped/failed, then
+    # crashes downloading the missing "pr" artifact ("Cannot read properties of
+    # undefined (reading 'id')").
     if: >
-      ${{ github.event.workflow_run.event == 'pull_request' }}
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
     steps:
-      - uses: lorenzwalthert/touchstone/actions/comment@v1
+      # Pinned to a default-branch SHA: the released tags (v1, v1.0.1) still
+      # use actions/{upload,download}-artifact@v2, which GitHub now auto-fails.
+      # This commit uses artifact@v4/v5 and github-script@v7. Bump to a tag once
+      # upstream cuts a release that includes the fix.
+      - uses: lorenzwalthert/touchstone/actions/comment@7e6072a25d1f8d72649188bc711113039ef94b75
         with: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
