@@ -1708,12 +1708,15 @@ print_igraph_es_cli <- function(
     # spaces between edges once print() adds its own single-space separator.
     arrow <- edge_arrow_cli(is_directed(graph))
     endpoints <- ends(graph, x, names = has_vnames || is_named(graph))
+    # Endpoints are not padded to a common width, so each edge reads as
+    # "tail ─ head" with a single space around the delimiter. The trailing
+    # space puts two spaces between edges once print() adds its own separator.
     formatted <- paste0(
-      format(endpoints[, 1]),
+      endpoints[, 1],
       " ",
       arrow,
       " ",
-      format(endpoints[, 2]),
+      endpoints[, 2],
       " "
     )
     if (is.null(max_lines)) {

@@ -393,6 +393,7 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
+  local_igraph_options(print.style = "classic")
   g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
   expect_ecount(g_rand_bip_dir, 6)
@@ -418,6 +419,7 @@ test_that("sample_bipartite works -- undirected gnm", {
   expect_false(is_directed(g_rand_bip_gnm))
 })
 test_that("sample_bipartite works -- directed gnm", {
+  local_igraph_options(print.style = "classic")
   g_rand_bip_gnm_dir <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE)
   expect_vcount(g_rand_bip_gnm_dir, 15)
   expect_ecount(g_rand_bip_gnm_dir, 8)

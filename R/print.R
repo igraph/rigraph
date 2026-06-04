@@ -774,8 +774,9 @@ print_igraph_attr_summary_cli <- function(x) {
       format_line("edge:   ", edge_attrs, attr_codes_cli(x, "edge"))
     }
   )
-  cat(lines, sep = "\n")
-  cat("\n")
+  # One newline per line, no trailing blank: each section starts with its own
+  # leading blank, so emitting one here would double the gap to the next one.
+  cat(paste0(lines, "\n"), sep = "")
 }
 
 print_igraph_graph_attrs_cli <- function(x) {

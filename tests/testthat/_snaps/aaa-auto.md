@@ -3,16 +3,18 @@
     Code
       empty_impl()
     Output
-      IGRAPH D--- 0 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 0 vertices * 0 edges
 
 ---
 
     Code
       empty_impl(n = 5, directed = FALSE)
     Output
-      IGRAPH U--- 5 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 0 edges
 
 # empty_impl errors
 
@@ -28,9 +30,12 @@
     Code
       add_edges_impl(graph = g, edges = c(1, 2, 2, 3))
     Output
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 1->2 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3 
 
 # add_edges_impl errors
 
@@ -45,8 +50,9 @@
     Code
       copy_impl(from = g)
     Output
-      IGRAPH D--- 2 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 2 vertices * 0 edges
 
 # copy_impl errors
 
@@ -62,8 +68,9 @@
       delete_vertices_idx_impl(graph = g, vertices = 1)
     Output
       $graph
-      IGRAPH D--- 2 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 2 vertices * 0 edges
       
       $idx
       [1] 0 1 2
@@ -122,7 +129,7 @@
     Code
       get_all_eids_between_impl(graph = g, from = 1, to = 2)
     Output
-      + 0/0 edges:
+      -- <edge sequence> 0/0 ---------------------------------------------------------
 
 # get_all_eids_between_impl errors
 
@@ -137,18 +144,24 @@
     Code
       wheel_impl(n = 5)
     Output
-      IGRAPH D--- 5 8 -- 
-      + edges:
-      [1] 1->2 1->3 1->4 1->5 2->3 3->4 4->5 5->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 8 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  1 -> 4  1 -> 5  2 -> 3  3 -> 4  4 -> 5  5 -> 2 
 
 ---
 
     Code
       wheel_impl(n = 5, mode = "in", center = 2)
     Output
-      IGRAPH D--- 5 8 -- 
-      + edges:
-      [1] 1->3 2->3 4->3 5->3 1->2 2->4 4->5 5->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 8 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 3  2 -> 3  4 -> 3  5 -> 3  1 -> 2  2 -> 4  4 -> 5  5 -> 1 
 
 # wheel_impl errors
 
@@ -164,18 +177,26 @@
     Code
       hypercube_impl(n = 3)
     Output
-      IGRAPH U--- 8 12 -- 
-      + edges:
-       [1] 1--2 1--3 1--5 2--4 2--6 3--4 3--7 4--8 5--6 5--7 6--8 7--8
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 8 vertices * 12 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2  1 -- 3  1 -- 5  2 -- 4  2 -- 6  3 -- 4  3 -- 7  4 -- 8  5 -- 6 
+      [10] 5 -- 7  6 -- 8  7 -- 8 
 
 ---
 
     Code
       hypercube_impl(n = 3, directed = TRUE)
     Output
-      IGRAPH D--- 8 12 -- 
-      + edges:
-       [1] 1->2 1->3 1->5 2->4 2->6 3->4 3->7 4->8 5->6 5->7 6->8 7->8
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 8 vertices * 12 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  1 -> 3  1 -> 5  2 -> 4  2 -> 6  3 -> 4  3 -> 7  4 -> 8  5 -> 6 
+      [10] 5 -> 7  6 -> 8  7 -> 8 
 
 # hypercube_impl errors
 
@@ -191,9 +212,12 @@
     Code
       square_lattice_impl(dimvector = c(2, 2))
     Output
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--2 1--3 2--4 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 4  3 -- 4 
 
 ---
 
@@ -201,9 +225,13 @@
       square_lattice_impl(dimvector = c(2, 2), nei = 2, directed = TRUE, mutual = TRUE,
       periodic = c(TRUE, TRUE))
     Output
-      IGRAPH D--- 4 10 -- 
-      + edges:
-       [1] 1->2 1->3 2->1 2->4 3->4 3->1 4->3 4->2 1->4 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  1 -> 3  2 -> 1  2 -> 4  3 -> 4  3 -> 1  4 -> 3  4 -> 2  1 -> 4 
+      [10] 2 -> 3 
 
 # square_lattice_impl errors
 
@@ -219,18 +247,25 @@
     Code
       triangular_lattice_impl(dimvector = c(2, 2))
     Output
-      IGRAPH U--- 4 5 -- 
-      + edges:
-      [1] 1--2 1--4 1--3 2--4 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 5 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 4  1 -- 3  2 -- 4  3 -- 4 
 
 ---
 
     Code
       triangular_lattice_impl(dimvector = c(2, 2), directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 4 10 -- 
-      + edges:
-       [1] 1->2 2->1 1->4 4->1 1->3 3->1 2->4 4->2 3->4 4->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  2 -> 1  1 -> 4  4 -> 1  1 -> 3  3 -> 1  2 -> 4  4 -> 2  3 -> 4 
+      [10] 4 -> 3 
 
 # triangular_lattice_impl errors
 
@@ -246,18 +281,24 @@
     Code
       path_graph_impl(n = 5)
     Output
-      IGRAPH U--- 5 4 -- 
-      + edges:
-      [1] 1--2 2--3 3--4 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5 
 
 ---
 
     Code
       path_graph_impl(n = 5, directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 5 8 -- 
-      + edges:
-      [1] 1->2 2->1 2->3 3->2 3->4 4->3 4->5 5->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 8 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 1  2 -> 3  3 -> 2  3 -> 4  4 -> 3  4 -> 5  5 -> 4 
 
 # path_graph_impl errors
 
@@ -273,18 +314,25 @@
     Code
       cycle_graph_impl(n = 5)
     Output
-      IGRAPH U--- 5 5 -- 
-      + edges:
-      [1] 1--2 2--3 3--4 4--5 1--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 5 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5 
 
 ---
 
     Code
       cycle_graph_impl(n = 5, directed = TRUE, mutual = TRUE)
     Output
-      IGRAPH D--- 5 10 -- 
-      + edges:
-       [1] 1->2 2->1 2->3 3->2 3->4 4->3 4->5 5->4 5->1 1->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  2 -> 1  2 -> 3  3 -> 2  3 -> 4  4 -> 3  4 -> 5  5 -> 4  5 -> 1 
+      [10] 1 -> 5 
 
 # cycle_graph_impl errors
 
@@ -300,18 +348,24 @@
     Code
       symmetric_tree_impl(branches = 3)
     Output
-      IGRAPH D--- 4 3 -- 
-      + edges:
-      [1] 1->2 1->3 1->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  1 -> 4 
 
 ---
 
     Code
       symmetric_tree_impl(branches = 3, type = "in")
     Output
-      IGRAPH D--- 4 3 -- 
-      + edges:
-      [1] 2->1 3->1 4->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1  3 -> 1  4 -> 1 
 
 # symmetric_tree_impl errors
 
@@ -327,19 +381,26 @@
     Code
       regular_tree_impl(h = 2)
     Output
-      IGRAPH U--- 10 9 -- 
-      + edges:
-      [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 3-- 7 3-- 8 4-- 9 4--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 9 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2   1 -- 3   1 -- 4   2 -- 5   2 -- 6   3 -- 7   3 -- 8   4 -- 9  
+      [9] 4 -- 10 
 
 ---
 
     Code
       regular_tree_impl(h = 2, k = 4, type = "in")
     Output
-      IGRAPH D--- 17 16 -- 
-      + edges:
-       [1]  2->1  3->1  4->1  5->1  6->2  7->2  8->2  9->3 10->3 11->3 12->4 13->4
-      [13] 14->4 15->5 16->5 17->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 17 vertices * 16 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 2 -> 1   3 -> 1   4 -> 1   5 -> 1   6 -> 2   7 -> 2   8 -> 2   9 -> 3  
+       [9] 10 -> 3  11 -> 3  12 -> 4  13 -> 4  14 -> 4  15 -> 5  16 -> 5  17 -> 5 
 
 # regular_tree_impl errors
 
@@ -355,18 +416,26 @@
     Code
       full_citation_impl(n = 5)
     Output
-      IGRAPH D--- 5 10 -- 
-      + edges:
-       [1] 2->1 3->1 3->2 4->1 4->2 4->3 5->1 5->2 5->3 5->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 2 -> 1  3 -> 1  3 -> 2  4 -> 1  4 -> 2  4 -> 3  5 -> 1  5 -> 2  5 -> 3 
+      [10] 5 -> 4 
 
 ---
 
     Code
       full_citation_impl(n = 5, directed = FALSE)
     Output
-      IGRAPH U--- 5 10 -- 
-      + edges:
-       [1] 1--2 1--3 2--3 1--4 2--4 3--4 1--5 2--5 3--5 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2  1 -- 3  2 -- 3  1 -- 4  2 -- 4  3 -- 4  1 -- 5  2 -- 5  3 -- 5 
+      [10] 4 -- 5 
 
 # full_citation_impl errors
 
@@ -382,17 +451,21 @@
     Code
       atlas_impl(number = 0)
     Output
-      IGRAPH U--- 0 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 0 vertices * 0 edges
 
 ---
 
     Code
       atlas_impl(number = 5)
     Output
-      IGRAPH U--- 3 1 -- 
-      + edge:
-      [1] 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 3 
 
 # atlas_impl errors
 
@@ -408,18 +481,26 @@
     Code
       extended_chordal_ring_impl(nodes = 5, W = matrix(c(1, 2)))
     Output
-      IGRAPH U--- 5 15 -- 
-      + edges:
-       [1] 1--2 2--3 3--4 4--5 1--5 1--2 1--3 2--3 2--4 3--4 3--5 4--5 1--4 1--5 2--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 15 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5  1 -- 2  1 -- 3  2 -- 3  2 -- 4 
+      [10] 3 -- 4  3 -- 5  4 -- 5  1 -- 4  1 -- 5  2 -- 5 
 
 ---
 
     Code
       extended_chordal_ring_impl(nodes = 5, W = matrix(c(1, 2)), directed = TRUE)
     Output
-      IGRAPH D--- 5 15 -- 
-      + edges:
-       [1] 1->2 2->3 3->4 4->5 5->1 1->2 1->3 2->3 2->4 3->4 3->5 4->5 4->1 5->1 5->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 15 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  2 -> 3  3 -> 4  4 -> 5  5 -> 1  1 -> 2  1 -> 3  2 -> 3  2 -> 4 
+      [10] 3 -> 4  3 -> 5  4 -> 5  4 -> 1  5 -> 1  5 -> 2 
 
 # extended_chordal_ring_impl errors
 
@@ -435,18 +516,24 @@
     Code
       graph_power_impl(graph = g, order = 2)
     Output
-      IGRAPH U--- 5 7 -- 
-      + edges:
-      [1] 1--2 2--3 3--4 4--5 1--3 2--4 3--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 3  2 -- 4  3 -- 5 
 
 ---
 
     Code
       graph_power_impl(graph = g, order = 2, directed = TRUE)
     Output
-      IGRAPH U--- 5 7 -- 
-      + edges:
-      [1] 1--2 2--3 3--4 4--5 1--3 2--4 3--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 3  2 -- 4  3 -- 5 
 
 # graph_power_impl errors
 
@@ -461,9 +548,12 @@
     Code
       linegraph_impl(graph = g)
     Output
-      IGRAPH U--- 4 3 -- 
-      + edges:
-      [1] 1--2 2--3 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4 
 
 # linegraph_impl errors
 
@@ -478,10 +568,13 @@
     Code
       de_bruijn_impl(m = 2, n = 3)
     Output
-      IGRAPH D--- 8 16 -- 
-      + edges:
-       [1] 1->1 1->2 2->3 2->4 3->5 3->6 4->7 4->8 5->1 5->2 6->3 6->4 7->5 7->6 8->7
-      [16] 8->8
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 8 vertices * 16 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 1  1 -> 2  2 -> 3  2 -> 4  3 -> 5  3 -> 6  4 -> 7  4 -> 8  5 -> 1 
+      [10] 5 -> 2  6 -> 3  6 -> 4  7 -> 5  7 -> 6  8 -> 7  8 -> 8 
 
 # de_bruijn_impl errors
 
@@ -497,13 +590,18 @@
     Code
       kautz_impl(m = 2, n = 3)
     Output
-      IGRAPH D--- 24 48 -- 
-      + edges:
-       [1]  1-> 9  1->10  2->11  2->12  3->13  3->14  4->15  4->16  5->17  5->18
-      [11]  6->19  6->20  7->21  7->22  8->23  8->24  9-> 1  9-> 2 10-> 3 10-> 4
-      [21] 11-> 5 11-> 6 12-> 7 12-> 8 13->17 13->18 14->19 14->20 15->21 15->22
-      [31] 16->23 16->24 17-> 1 17-> 2 18-> 3 18-> 4 19-> 5 19-> 6 20-> 7 20-> 8
-      [41] 21-> 9 21->10 22->11 22->12 23->13 23->14 24->15 24->16
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 24 vertices * 48 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 9    1 -> 10   2 -> 11   2 -> 12   3 -> 13   3 -> 14   4 -> 15  
+       [8] 4 -> 16   5 -> 17   5 -> 18   6 -> 19   6 -> 20   7 -> 21   7 -> 22  
+      [15] 8 -> 23   8 -> 24   9 -> 1    9 -> 2    10 -> 3   10 -> 4   11 -> 5  
+      [22] 11 -> 6   12 -> 7   12 -> 8   13 -> 17  13 -> 18  14 -> 19  14 -> 20 
+      [29] 15 -> 21  15 -> 22  16 -> 23  16 -> 24  17 -> 1   17 -> 2   18 -> 3  
+      [36] 18 -> 4   19 -> 5   19 -> 6   20 -> 7   20 -> 8   21 -> 9   21 -> 10 
+      [43] 22 -> 11  22 -> 12  23 -> 13  23 -> 14  24 -> 15  24 -> 16 
 
 # kautz_impl errors
 
@@ -519,11 +617,16 @@
     Code
       lcf_vector_impl(n = 10, shifts = c(3, -3, 4), repeats = 2)
     Output
-      IGRAPH U--- 10 16 -- LCF graph
-      + attr: name (g/c)
-      + edges:
-       [1] 1-- 2 1-- 4 1--10 2-- 3 2-- 5 2-- 9 3-- 4 3-- 7 4-- 5 4-- 7 5-- 6 6-- 7
-      [13] 6--10 7-- 8 8-- 9 9--10
+      -- <igraph> LCF graph ----------------------------------------------------------
+      i undirected
+      i 10 vertices * 16 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 4   1 -- 10  2 -- 3   2 -- 5   2 -- 9   3 -- 4   3 -- 7  
+       [9] 4 -- 5   4 -- 7   5 -- 6   6 -- 7   6 -- 10  7 -- 8   8 -- 9   9 -- 10 
 
 # lcf_vector_impl errors
 
@@ -539,9 +642,12 @@
     Code
       mycielski_graph_impl(k = 3)
     Output
-      IGRAPH U--- 5 5 -- 
-      + edges:
-      [1] 1--2 1--4 2--3 3--5 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 5 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 4  2 -- 3  3 -- 5  4 -- 5 
 
 # mycielski_graph_impl errors
 
@@ -557,9 +663,12 @@
     Code
       adjlist_impl(adjlist = list(c(2, 3), c(1), c(1)), mode = "out")
     Output
-      IGRAPH D--- 3 4 -- 
-      + edges:
-      [1] 1->2 1->3 2->1 3->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  2 -> 1  3 -> 1 
 
 # adjlist_impl errors
 
@@ -576,9 +685,12 @@
       full_bipartite_impl(n1 = 2, n2 = 3)
     Output
       $graph
-      IGRAPH U--- 5 6 -- 
-      + edges:
-      [1] 1--3 1--4 1--5 2--3 2--4 2--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 4  1 -- 5  2 -- 3  2 -- 4  2 -- 5 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
@@ -590,9 +702,12 @@
       full_bipartite_impl(n1 = 2, n2 = 3, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 5 6 -- 
-      + edges:
-      [1] 3->1 4->1 5->1 3->2 4->2 5->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 1  4 -> 1  5 -> 1  3 -> 2  4 -> 2  5 -> 2 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
@@ -613,10 +728,14 @@
       full_multipartite_impl(n = c(2, 3, 4))
     Output
       $graph
-      IGRAPH U--- 9 26 -- 
-      + edges:
-       [1] 1--3 1--4 1--5 1--6 1--7 1--8 1--9 2--3 2--4 2--5 2--6 2--7 2--8 2--9 3--6
-      [16] 3--7 3--8 3--9 4--6 4--7 4--8 4--9 5--6 5--7 5--8 5--9
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 9 vertices * 26 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 3  1 -- 4  1 -- 5  1 -- 6  1 -- 7  1 -- 8  1 -- 9  2 -- 3  2 -- 4 
+      [10] 2 -- 5  2 -- 6  2 -- 7  2 -- 8  2 -- 9  3 -- 6  3 -- 7  3 -- 8  3 -- 9 
+      [19] 4 -- 6  4 -- 7  4 -- 8  4 -- 9  5 -- 6  5 -- 7  5 -- 8  5 -- 9 
       
       $types
       [1] 1 1 2 2 2 3 3 3 3
@@ -637,10 +756,14 @@
       full_multipartite_impl(n = c(2, 3, 4), directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 9 26 -- 
-      + edges:
-       [1] 3->1 4->1 5->1 6->1 7->1 8->1 9->1 3->2 4->2 5->2 6->2 7->2 8->2 9->2 6->3
-      [16] 7->3 8->3 9->3 6->4 7->4 8->4 9->4 6->5 7->5 8->5 9->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 9 vertices * 26 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 3 -> 1  4 -> 1  5 -> 1  6 -> 1  7 -> 1  8 -> 1  9 -> 1  3 -> 2  4 -> 2 
+      [10] 5 -> 2  6 -> 2  7 -> 2  8 -> 2  9 -> 2  6 -> 3  7 -> 3  8 -> 3  9 -> 3 
+      [19] 6 -> 4  7 -> 4  8 -> 4  9 -> 4  6 -> 5  7 -> 5  8 -> 5  9 -> 5 
       
       $types
       [1] 1 1 2 2 2 3 3 3 3
@@ -669,11 +792,15 @@
     Code
       realize_degree_sequence_impl(out_deg = c(2, 2, 2))
     Output
-      IGRAPH U--- 3 3 -- Graph from degree sequence
-      + attr: name (g/c), out_deg (g/n), in_deg (g/x), allowed_edge_types
-      | (g/n), method (g/n)
-      + edges:
-      [1] 2--3 1--3 1--2
+      -- <igraph> Graph from degree sequence -----------------------------------------
+      i undirected
+      i 3 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, out_deg <dbl>, in_deg <list>, allowed_edge_types <dbl>, method <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 3  1 -- 3  1 -- 2 
 
 ---
 
@@ -681,11 +808,15 @@
       realize_degree_sequence_impl(out_deg = c(2, 2, 2), in_deg = c(2, 2, 2),
       allowed_edge_types = "simple", method = "largest")
     Output
-      IGRAPH D--- 3 6 -- Graph from degree sequence
-      + attr: name (g/c), out_deg (g/n), in_deg (g/n), allowed_edge_types
-      | (g/n), method (g/n)
-      + edges:
-      [1] 1->2 1->3 2->1 2->3 3->1 3->2
+      -- <igraph> Graph from degree sequence -----------------------------------------
+      i directed
+      i 3 vertices * 6 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, out_deg <dbl>, in_deg <dbl>, allowed_edge_types <dbl>, method <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  2 -> 1  2 -> 3  3 -> 1  3 -> 2 
 
 # realize_degree_sequence_impl errors
 
@@ -701,11 +832,15 @@
     Code
       realize_bipartite_degree_sequence_impl(degrees1 = c(2, 2), degrees2 = c(2, 2))
     Output
-      IGRAPH U--- 4 4 -- Bipartite graph from degree sequence
-      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed_edge_types
-      | (g/n), method (g/n)
-      + edges:
-      [1] 2--3 2--4 1--4 1--3
+      -- <igraph> Bipartite graph from degree sequence -------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, degrees1 <dbl>, degrees2 <dbl>, allowed_edge_types <dbl>, method <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 3  2 -- 4  1 -- 4  1 -- 3 
 
 ---
 
@@ -713,11 +848,15 @@
       realize_bipartite_degree_sequence_impl(degrees1 = c(2, 2), degrees2 = c(2, 2),
       allowed_edge_types = "loops", method = "largest")
     Output
-      IGRAPH U--- 4 4 -- Bipartite graph from degree sequence
-      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed_edge_types
-      | (g/n), method (g/n)
-      + edges:
-      [1] 1--3 1--4 2--3 2--4
+      -- <igraph> Bipartite graph from degree sequence -------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, degrees1 <dbl>, degrees2 <dbl>, allowed_edge_types <dbl>, method <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 4  2 -- 3  2 -- 4 
 
 # realize_bipartite_degree_sequence_impl errors
 
@@ -733,20 +872,32 @@
     Code
       circulant_impl(n = 5, shifts = c(1, 2))
     Output
-      IGRAPH U--- 5 10 -- Circulant graph
-      + attr: name (g/c), shifts (g/n)
-      + edges:
-       [1] 1--2 2--3 3--4 4--5 1--5 1--3 2--4 3--5 1--4 2--5
+      -- <igraph> Circulant graph ----------------------------------------------------
+      i undirected
+      i 5 vertices * 10 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, shifts <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5  1 -- 3  2 -- 4  3 -- 5  1 -- 4 
+      [10] 2 -- 5 
 
 ---
 
     Code
       circulant_impl(n = 5, shifts = c(1, 2), directed = TRUE)
     Output
-      IGRAPH D--- 5 10 -- Circulant graph
-      + attr: name (g/c), shifts (g/n)
-      + edges:
-       [1] 1->2 2->3 3->4 4->5 5->1 1->3 2->4 3->5 4->1 5->2
+      -- <igraph> Circulant graph ----------------------------------------------------
+      i directed
+      i 5 vertices * 10 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, shifts <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 2  2 -> 3  3 -> 4  4 -> 5  5 -> 1  1 -> 3  2 -> 4  3 -> 5  4 -> 1 
+      [10] 5 -> 2 
 
 # circulant_impl errors
 
@@ -762,10 +913,13 @@
     Code
       generalized_petersen_impl(n = 5, k = 2)
     Output
-      IGRAPH U--- 10 15 -- 
-      + edges:
-       [1] 1-- 2 1-- 6 6-- 8 2-- 3 2-- 7 7-- 9 3-- 4 3-- 8 8--10 4-- 5 4-- 9 6-- 9
-      [13] 1-- 5 5--10 7--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 15 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 6   6 -- 8   2 -- 3   2 -- 7   7 -- 9   3 -- 4   3 -- 8  
+       [9] 8 -- 10  4 -- 5   4 -- 9   6 -- 9   1 -- 5   5 -- 10  7 -- 10 
 
 # generalized_petersen_impl errors
 
@@ -782,9 +936,12 @@
       turan_impl(n = 5, r = 2)
     Output
       $graph
-      IGRAPH U--- 5 6 -- 
-      + edges:
-      [1] 1--4 1--5 2--4 2--5 3--4 3--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 4  1 -- 5  2 -- 4  2 -- 5  3 -- 4  3 -- 5 
       
       $types
       [1] 1 1 1 2 2
@@ -813,18 +970,25 @@
     Code
       erdos_renyi_game_gnp_impl(n = 5, p = 0.5)
     Output
-      IGRAPH U--- 5 7 -- 
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3  1 -- 4  2 -- 4  1 -- 5  4 -- 5 
 
 ---
 
     Code
       erdos_renyi_game_gnp_impl(n = 5, p = 0.5, directed = TRUE, loops = TRUE)
     Output
-      IGRAPH D--- 5 12 -- 
-      + edges:
-       [1] 2->1 3->1 4->1 2->2 1->3 2->3 4->3 1->4 2->4 5->4 3->5 4->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 12 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 2 -> 1  3 -> 1  4 -> 1  2 -> 2  1 -> 3  2 -> 3  4 -> 3  1 -> 4  2 -> 4 
+      [10] 5 -> 4  3 -> 5  4 -> 5 
 
 # erdos_renyi_game_gnp_impl errors
 
@@ -840,18 +1004,24 @@
     Code
       erdos_renyi_game_gnm_impl(n = 5, m = 3)
     Output
-      IGRAPH U--- 5 3 -- 
-      + edges:
-      [1] 3--4 2--5 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -- 4  2 -- 5  4 -- 5 
 
 ---
 
     Code
       erdos_renyi_game_gnm_impl(n = 5, m = 3, directed = TRUE, loops = TRUE)
     Output
-      IGRAPH D--- 5 3 -- 
-      + edges:
-      [1] 4->3 5->3 3->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 4 -> 3  5 -> 3  3 -> 5 
 
 # erdos_renyi_game_gnm_impl errors
 
@@ -867,30 +1037,45 @@
     Code
       growing_random_game_impl(n = 5, m = 2)
     Output
-      IGRAPH D--- 5 8 -- Growing random graph
-      + attr: name (g/c), m (g/n), citation (g/l)
-      + edges:
-      [1] 2->2 1->2 3->3 3->3 3->3 1->2 2->2 5->4
+      -- <igraph> Growing random graph -----------------------------------------------
+      i directed
+      i 5 vertices * 8 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, m <dbl>, citation <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 2  1 -> 2  3 -> 3  3 -> 3  3 -> 3  1 -> 2  2 -> 2  5 -> 4 
 
 ---
 
     Code
       growing_random_game_impl(n = 5, m = 2, directed = FALSE, citation = TRUE)
     Output
-      IGRAPH U--- 5 8 -- Growing random graph
-      + attr: name (g/c), m (g/n), citation (g/l)
-      + edges:
-      [1] 1--2 1--2 2--3 1--3 1--4 2--4 1--5 4--5
+      -- <igraph> Growing random graph -----------------------------------------------
+      i undirected
+      i 5 vertices * 8 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, m <dbl>, citation <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 2  2 -- 3  1 -- 3  1 -- 4  2 -- 4  1 -- 5  4 -- 5 
 
 ---
 
     Code
       growing_random_game_impl(n = 10, m = 1, directed = TRUE, citation = FALSE)
     Output
-      IGRAPH D--- 10 9 -- Growing random graph
-      + attr: name (g/c), m (g/n), citation (g/l)
-      + edges:
-      [1] 2->2 2->3 4->4 4->4 3->2 1->3 1->8 5->6 5->4
+      -- <igraph> Growing random graph -----------------------------------------------
+      i directed
+      i 10 vertices * 9 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, m <dbl>, citation <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 2  2 -> 3  4 -> 4  4 -> 4  3 -> 2  1 -> 3  1 -> 8  5 -> 6  5 -> 4 
 
 # growing_random_game_impl errors
 
@@ -908,9 +1093,12 @@
       fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Output
       $graph
-      IGRAPH U--- 5 4 -- 
-      + edges:
-      [1] 1--3 3--4 1--4 1--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  3 -- 4  1 -- 4  1 -- 5 
       
       $node_type_vec
       [1] 1 0 0 1 1
@@ -934,9 +1122,12 @@
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Output
       $graph
-      IGRAPH D--- 5 9 -- 
-      + edges:
-      [1] 2->4 4->2 5->2 1->3 4->3 4->5 3->1 1->4 1->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 9 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 4  4 -> 2  5 -> 2  1 -> 3  4 -> 3  4 -> 5  3 -> 1  1 -> 4  1 -> 5 
       
       $node_type_out_vec
       [1] 1 0 1 1 1
@@ -961,9 +1152,12 @@
     Code
       rewire_edges_impl(graph = g, prob = 0.5)
     Output
-      IGRAPH U--- 5 4 -- 
-      + edges:
-      [1] 2--4 3--4 1--3 2--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 4  3 -- 4  1 -- 3  2 -- 5 
 
 # rewire_edges_impl errors
 
@@ -978,9 +1172,12 @@
     Code
       rewire_directed_edges_impl(graph = g, prob = 0.5)
     Output
-      IGRAPH D--- 5 4 -- 
-      + edges:
-      [1] 1->4 2->3 3->2 4->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 4  2 -> 3  3 -> 2  4 -> 5 
 
 # rewire_directed_edges_impl errors
 
@@ -995,10 +1192,15 @@
     Code
       forest_fire_game_impl(nodes = 5, fw_prob = 0.5)
     Output
-      IGRAPH D--- 5 9 -- Forest fire model
-      + attr: name (g/c), fw_prob (g/n), bw_factor (g/n), ambs (g/n)
-      + edges:
-      [1] 2->1 3->2 4->2 4->1 4->3 5->1 5->2 5->4 5->3
+      -- <igraph> Forest fire model --------------------------------------------------
+      i directed
+      i 5 vertices * 9 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, fw_prob <dbl>, bw_factor <dbl>, ambs <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1  3 -> 2  4 -> 2  4 -> 1  4 -> 3  5 -> 1  5 -> 2  5 -> 4  5 -> 3 
 
 ---
 
@@ -1006,10 +1208,15 @@
       forest_fire_game_impl(nodes = 5, fw_prob = 0.5, bw_factor = 0.2, ambs = 2,
         directed = FALSE)
     Output
-      IGRAPH U--- 5 4 -- Forest fire model
-      + attr: name (g/c), fw_prob (g/n), bw_factor (g/n), ambs (g/n)
-      + edges:
-      [1] 1--2 1--3 1--4 4--5
+      -- <igraph> Forest fire model --------------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, fw_prob <dbl>, bw_factor <dbl>, ambs <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  1 -- 4  4 -- 5 
 
 # forest_fire_game_impl errors
 
@@ -1026,11 +1233,15 @@
       simple_interconnected_islands_game_impl(islands_n = 2, islands_size = 3,
         islands_pin = 0.5, n_inter = 1)
     Output
-      IGRAPH U--- 6 5 -- Interconnected islands model
-      + attr: name (g/c), islands_n (g/n), islands_size (g/n), islands_pin
-      | (g/n), n_inter (g/n)
-      + edges:
-      [1] 1--2 1--3 2--3 3--6 5--6
+      -- <igraph> Interconnected islands model ---------------------------------------
+      i undirected
+      i 6 vertices * 5 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, islands_n <dbl>, islands_size <dbl>, islands_pin <dbl>, n_inter <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3  3 -- 6  5 -- 6 
 
 # simple_interconnected_islands_game_impl errors
 
@@ -1047,10 +1258,15 @@
     Code
       chung_lu_game_impl(out_weights = c(2, 2, 2))
     Output
-      IGRAPH U--- 3 5 -- Chung-Lu model
-      + attr: name (g/c), variant (g/n)
-      + edges:
-      [1] 1--2 1--3 2--2 2--3 3--3
+      -- <igraph> Chung-Lu model -----------------------------------------------------
+      i undirected
+      i 3 vertices * 5 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, variant <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 2  2 -- 3  3 -- 3 
 
 ---
 
@@ -1058,10 +1274,15 @@
       chung_lu_game_impl(out_weights = c(1, 2, 3), in_weights = c(1, 2, 3), loops = FALSE,
       variant = "maxent")
     Output
-      IGRAPH D--- 3 1 -- Chung-Lu model
-      + attr: name (g/c), variant (g/n)
-      + edge:
-      [1] 3->1
+      -- <igraph> Chung-Lu model -----------------------------------------------------
+      i directed
+      i 3 vertices * 1 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, variant <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 1 
 
 # chung_lu_game_impl errors
 
@@ -1077,10 +1298,15 @@
     Code
       static_fitness_game_impl(no_of_edges = 3, fitness_out = c(1, 2, 3))
     Output
-      IGRAPH U--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3
+      -- <igraph> Static fitness model -----------------------------------------------
+      i undirected
+      i 3 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, loops <lgl>, multiple <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3 
 
 ---
 
@@ -1088,10 +1314,15 @@
       static_fitness_game_impl(no_of_edges = 3, fitness_out = c(1, 2, 3), fitness_in = c(
         1, 2, 3), loops = TRUE, multiple = TRUE)
     Output
-      IGRAPH D--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1->2 2->3 1->3
+      -- <igraph> Static fitness model -----------------------------------------------
+      i directed
+      i 3 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, loops <lgl>, multiple <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  1 -> 3 
 
 # static_fitness_game_impl errors
 
@@ -1107,11 +1338,15 @@
     Code
       static_power_law_game_impl(no_of_nodes = 5, no_of_edges = 4, exponent_out = 2.5)
     Output
-      IGRAPH U--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent_out (g/n), exponent_in (g/n), loops (g/l),
-      | multiple (g/l), finite_size_correction (g/l)
-      + edges:
-      [1] 1--5 2--4 3--5 4--5
+      -- <igraph> Static power law model ---------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, exponent_out <dbl>, exponent_in <dbl>, loops <lgl>, multiple <lgl>, finite_size_correction <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 5  2 -- 4  3 -- 5  4 -- 5 
 
 ---
 
@@ -1119,11 +1354,15 @@
       static_power_law_game_impl(no_of_nodes = 5, no_of_edges = 4, exponent_out = 2.5,
         exponent_in = 2, loops = TRUE, multiple = TRUE, finite_size_correction = FALSE)
     Output
-      IGRAPH D--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent_out (g/n), exponent_in (g/n), loops (g/l),
-      | multiple (g/l), finite_size_correction (g/l)
-      + edges:
-      [1] 1->1 3->5 1->4 5->1
+      -- <igraph> Static power law model ---------------------------------------------
+      i directed
+      i 5 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, exponent_out <dbl>, exponent_in <dbl>, loops <lgl>, multiple <lgl>, finite_size_correction <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 1  3 -> 5  1 -> 4  5 -> 1 
 
 # static_power_law_game_impl errors
 
@@ -1139,20 +1378,31 @@
     Code
       k_regular_game_impl(no_of_nodes = 5, k = 2)
     Output
-      IGRAPH U--- 5 5 -- k-regular graph
-      + attr: name (g/c), k (g/n)
-      + edges:
-      [1] 1--3 1--5 2--3 2--4 4--5
+      -- <igraph> k-regular graph ----------------------------------------------------
+      i undirected
+      i 5 vertices * 5 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, k <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 5  2 -- 3  2 -- 4  4 -- 5 
 
 ---
 
     Code
       k_regular_game_impl(no_of_nodes = 5, k = 2, directed = TRUE, multiple = TRUE)
     Output
-      IGRAPH D--- 5 10 -- k-regular graph
-      + attr: name (g/c), k (g/n)
-      + edges:
-       [1] 3->4 3->3 2->1 5->5 1->5 4->3 5->2 4->1 1->2 2->4
+      -- <igraph> k-regular graph ----------------------------------------------------
+      i directed
+      i 5 vertices * 10 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, k <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 3 -> 4  3 -> 3  2 -> 1  5 -> 5  1 -> 5  4 -> 3  5 -> 2  4 -> 1  1 -> 2 
+      [10] 2 -> 4 
 
 # k_regular_game_impl errors
 
@@ -1168,10 +1418,15 @@
     Code
       sbm_game_impl(n = 5, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Output
-      IGRAPH U--- 5 6 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 1--5 3--5
+      -- <igraph> Stochastic block model ---------------------------------------------
+      i undirected
+      i 5 vertices * 6 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, loops <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3  1 -- 4  1 -- 5  3 -- 5 
 
 ---
 
@@ -1179,10 +1434,16 @@
       sbm_game_impl(n = 5, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3),
       directed = TRUE, loops = TRUE)
     Output
-      IGRAPH D--- 5 14 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-       [1] 1->1 2->1 2->4 1->5 4->1 5->1 5->2 3->3 5->3 3->4 4->4 5->4 3->5 5->5
+      -- <igraph> Stochastic block model ---------------------------------------------
+      i directed
+      i 5 vertices * 14 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, loops <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -> 1  2 -> 1  2 -> 4  1 -> 5  4 -> 1  5 -> 1  5 -> 2  3 -> 3  5 -> 3 
+      [10] 3 -> 4  4 -> 4  5 -> 4  3 -> 5  5 -> 5 
 
 # sbm_game_impl errors
 
@@ -1198,10 +1459,15 @@
     Code
       hsbm_game_impl(n = 6, m = 2, rho = c(0.5, 0.5), C = matrix(1, 2, 2), p = 0.5)
     Output
-      IGRAPH U--- 6 9 -- Hierarchical stochastic block model
-      + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
-      + edges:
-      [1] 1--2 3--4 5--6 1--4 1--5 2--5 1--6 4--5 3--6
+      -- <igraph> Hierarchical stochastic block model --------------------------------
+      i undirected
+      i 6 vertices * 9 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, m <dbl>, rho <dbl>, C <dbl>, p <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  3 -- 4  5 -- 6  1 -- 4  1 -- 5  2 -- 5  1 -- 6  4 -- 5  3 -- 6 
 
 # hsbm_game_impl errors
 
@@ -1218,17 +1484,24 @@
       hsbm_list_game_impl(n = 100, mlist = list(50, 50), rholist = list(c(3, 3, 4) /
         10), Clist = list(C), p = 1 / 20)
     Output
-      IGRAPH U--- 100 783 -- Hierarchical stochastic block model
-      + attr: name (g/c), p (g/n)
-      + edges:
-       [1]  1-- 2  1-- 3  2-- 3  1-- 4  2-- 4  3-- 4  1-- 5  2-- 5  3-- 5  4-- 5
-      [11]  1-- 6  2-- 6  3-- 6  4-- 6  5-- 6  1-- 7  2-- 7  3-- 7  4-- 7  5-- 7
-      [21]  6-- 7  1-- 8  2-- 8  3-- 8  4-- 8  5-- 8  6-- 8  7-- 8  1-- 9  2-- 9
-      [31]  3-- 9  4-- 9  5-- 9  6-- 9  7-- 9  8-- 9  1--10  2--10  3--10  4--10
-      [41]  5--10  6--10  7--10  8--10  9--10  1--11  2--11  3--11  4--11  5--11
-      [51]  6--11  7--11  8--11  9--11 10--11  1--12  2--12  3--12  4--12  5--12
-      [61]  6--12  7--12  8--12  9--12 10--12 11--12  1--13  2--13  3--13  4--13
-      [71]  5--13  6--13  7--13  8--13  9--13 10--13 11--13 12--13  1--14  2--14
+      -- <igraph> Hierarchical stochastic block model --------------------------------
+      i undirected
+      i 100 vertices * 783 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, p <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+        [1] 1 -- 2     1 -- 3     2 -- 3     1 -- 4     2 -- 4     3 -- 4    
+        [7] 1 -- 5     2 -- 5     3 -- 5     4 -- 5     1 -- 6     2 -- 6    
+       [13] 3 -- 6     4 -- 6     5 -- 6     1 -- 7     2 -- 7     3 -- 7    
+       [19] 4 -- 7     5 -- 7     6 -- 7     1 -- 8     2 -- 8     3 -- 8    
+       [25] 4 -- 8     5 -- 8     6 -- 8     7 -- 8     1 -- 9     2 -- 9    
+       [31] 3 -- 9     4 -- 9     5 -- 9     6 -- 9     7 -- 9     8 -- 9    
+       [37] 1 -- 10    2 -- 10    3 -- 10    4 -- 10    5 -- 10    6 -- 10   
+       [43] 7 -- 10    8 -- 10    9 -- 10    1 -- 11    2 -- 11    3 -- 11   
+       [49] 4 -- 11    5 -- 11    6 -- 11    7 -- 11    8 -- 11    9 -- 11   
+       [55] 10 -- 11   1 -- 12    2 -- 12    3 -- 12    4 -- 12    5 -- 12   
       + ... omitted several edges
 
 # hsbm_list_game_impl errors
@@ -1246,10 +1519,15 @@
     Code
       correlated_game_impl(old_graph = g, corr = 0.5)
     Output
-      IGRAPH U--- 5 3 -- Correlated random graph
-      + attr: name (g/c), corr (g/n), p (g/n)
-      + edges:
-      [1] 1--3 3--4 2--5
+      -- <igraph> Correlated random graph --------------------------------------------
+      i undirected
+      i 5 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, corr <dbl>, p <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  3 -- 4  2 -- 5 
 
 # correlated_game_impl errors
 
@@ -1265,14 +1543,20 @@
       correlated_pair_game_impl(n = 5, corr = 0.5, p = 0.5)
     Output
       $graph1
-      IGRAPH U--- 5 7 -- 
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3  1 -- 4  2 -- 4  1 -- 5  4 -- 5 
       
       $graph2
-      IGRAPH U--- 5 7 -- 
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 2--4 1--5 3--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3  1 -- 4  2 -- 4  1 -- 5  3 -- 5 
       
 
 ---
@@ -1281,14 +1565,21 @@
       correlated_pair_game_impl(n = 5, corr = 0.5, p = 0.5, directed = TRUE)
     Output
       $graph1
-      IGRAPH D--- 5 10 -- 
-      + edges:
-       [1] 4->1 5->1 2->5 4->2 5->2 3->5 1->4 2->4 4->5 5->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 4 -> 1  5 -> 1  2 -> 5  4 -> 2  5 -> 2  3 -> 5  1 -> 4  2 -> 4  4 -> 5 
+      [10] 5 -> 4 
       
       $graph2
-      IGRAPH D--- 5 9 -- 
-      + edges:
-      [1] 1->5 2->1 2->5 4->2 4->3 1->4 2->4 4->5 5->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 9 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 5  2 -> 1  2 -> 5  4 -> 2  4 -> 3  1 -> 4  2 -> 4  4 -> 5  5 -> 4 
       
 
 # correlated_pair_game_impl errors
@@ -1309,9 +1600,12 @@
       Greater than 1 connection probability in dot-product graph.
       Source: games/dotproduct.c:90
     Output
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
 
 ---
 
@@ -1322,9 +1616,12 @@
       Greater than 1 connection probability in dot-product graph.
       Source: games/dotproduct.c:90
     Output
-      IGRAPH D--- 2 2 -- 
-      + edges:
-      [1] 1->2 2->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 2 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 1 
 
 # dot_product_game_impl errors
 
@@ -1523,12 +1820,12 @@
       get_shortest_path_impl(graph = g, from = 1, to = 3)
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
 
 # get_shortest_path_impl errors
@@ -1545,12 +1842,12 @@
       get_shortest_path_bellman_ford_impl(graph = g, from = 1, to = 3)
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
 
 # get_shortest_path_bellman_ford_impl errors
@@ -1567,12 +1864,12 @@
       get_shortest_path_dijkstra_impl(graph = g, from = 1, to = 3)
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
 
 # get_shortest_path_dijkstra_impl errors
@@ -1590,14 +1887,14 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       
       $nrgeo
@@ -1619,14 +1916,14 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       
       $nrgeo
@@ -1690,7 +1987,7 @@
     Code
       get_all_simple_paths_impl(graph = g, from = 1, to = 3)
     Output
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
 
 # get_all_simple_paths_impl errors
@@ -1708,14 +2005,14 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       
 
@@ -1733,12 +2030,12 @@
       get_widest_path_impl(graph = g, from = 1, to = 3, weights = c(1, 2))
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
 
 # get_widest_path_impl errors
@@ -1756,14 +2053,14 @@
     Output
       $vertices
       $vertices[[1]]
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       
       $edges
       $edges[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       
       $parents
@@ -1786,16 +2083,16 @@
     Code
       spanner_impl(graph = g, stretch = 2)
     Output
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 ---
 
     Code
       spanner_impl(graph = g, stretch = 2)
     Output
-      + 5/5 edges:
-      [1] 1--2 2--3 3--4 4--5 1--5
+      -- <edge sequence> 5/5 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5 
 
 # spanner_impl errors
 
@@ -2094,9 +2391,12 @@
     Code
       induced_subgraph_impl(graph = g, vids = 1:2)
     Output
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
 
 # induced_subgraph_impl errors
 
@@ -2111,9 +2411,12 @@
     Code
       subgraph_from_edges_impl(graph = g, eids = 1)
     Output
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
 
 # subgraph_from_edges_impl errors
 
@@ -2128,9 +2431,12 @@
     Code
       reverse_edges_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 # reverse_edges_impl errors
 
@@ -2177,18 +2483,24 @@
     Code
       simplify_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 ---
 
     Code
       simplify_impl(graph = g, remove_multiple = FALSE, remove_loops = FALSE)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 # simplify_impl errors
 
@@ -2409,14 +2721,14 @@
     Code
       feedback_arc_set_impl(graph = g)
     Output
-      + 0/2 edges:
+      -- <edge sequence> 0/2 ---------------------------------------------------------
 
 ---
 
     Code
       feedback_arc_set_impl(graph = g, algo = "exact_ip")
     Output
-      + 0/2 edges:
+      -- <edge sequence> 0/2 ---------------------------------------------------------
 
 # feedback_arc_set_impl errors
 
@@ -2431,7 +2743,7 @@
     Code
       feedback_vertex_set_impl(graph = g)
     Output
-      + 0/3 vertices:
+      -- <vertex sequence> 0/3 -------------------------------------------------------
 
 # feedback_vertex_set_impl errors
 
@@ -2915,9 +3227,12 @@
       unfold_tree_impl(graph = g, roots = 1)
     Output
       $tree
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $vertex_index
       [1] 1 2 3
@@ -2929,9 +3244,12 @@
       unfold_tree_impl(graph = g, mode = "in", roots = 1)
     Output
       $tree
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $vertex_index
       [1] 1 2 3
@@ -2998,7 +3316,7 @@
       [1] 3 2 1
       
       $alpham1
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 3 2 1
       
 
@@ -3663,9 +3981,12 @@
     Code
       contract_vertices_impl(graph = g, mapping = c(1, 1, 2))
     Output
-      IGRAPH U--- 2 2 -- 
-      + edges:
-      [1] 1--1 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 1  1 -- 2 
 
 # contract_vertices_impl errors
 
@@ -3702,7 +4023,7 @@
     Code
       graph_center_dijkstra_impl(graph = g)
     Output
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
 
 ---
@@ -3710,7 +4031,7 @@
     Code
       graph_center_dijkstra_impl(graph = g, mode = "in")
     Output
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
 
 # graph_center_dijkstra_impl errors
@@ -3841,12 +4162,12 @@
       random_walk_impl(graph = g, start = 1, steps = 2)
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
 
 ---
@@ -3855,12 +4176,12 @@
       random_walk_impl(graph = g, start = 1, steps = 2, mode = "in", stuck = "error")
     Output
       $vertices
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 1
       
       $edges
-      + 2/2 edges:
-      [1] 1--2 1--2
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  1 -- 2 
       
 
 # random_walk_impl errors
@@ -3942,9 +4263,12 @@
     Code
       transitive_closure_dag_impl(graph = g)
     Output
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 1->3 1->2 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 3  1 -> 2  2 -> 3 
 
 # transitive_closure_dag_impl errors
 
@@ -3959,9 +4283,12 @@
     Code
       transitive_closure_impl(graph = g)
     Output
-      IGRAPH U--- 3 3 -- 
-      + edges:
-      [1] 1--2 1--3 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  2 -- 3 
 
 # transitive_closure_impl errors
 
@@ -4018,7 +4345,7 @@
       bfs_simple_impl(graph = g, root = 1)
     Output
       $order
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $layers
@@ -4034,7 +4361,7 @@
       bfs_simple_impl(graph = g, root = 1, mode = "in")
     Output
       $order
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
       $layers
@@ -4084,9 +4411,12 @@
       biadjacency_impl(incidence = m)
     Output
       $graph
-      IGRAPH U--- 5 4 -- 
-      + edges:
-      [1] 1--3 1--4 1--5 2--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 4  1 -- 5  2 -- 5 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
@@ -4098,9 +4428,12 @@
       biadjacency_impl(incidence = m, directed = TRUE, mode = "in", multiple = TRUE)
     Output
       $graph
-      IGRAPH D--- 5 4 -- 
-      + edges:
-      [1] 3->1 4->1 5->1 5->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 1  4 -> 1  5 -> 1  5 -> 2 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE  TRUE
@@ -4166,9 +4499,12 @@
       bipartite_game_gnp_impl(n1 = 2, n2 = 2, p = 0.5)
     Output
       $graph
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--3 2--3 1--4 2--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  2 -- 3  1 -- 4  2 -- 4 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE
@@ -4180,9 +4516,12 @@
       bipartite_game_gnp_impl(n1 = 2, n2 = 2, p = 0.5, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 4 1 -- 
-      + edge:
-      [1] 3->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 2 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE
@@ -4203,9 +4542,12 @@
       bipartite_game_gnm_impl(n1 = 2, n2 = 2, m = 1)
     Output
       $graph
-      IGRAPH U--- 4 1 -- 
-      + edge:
-      [1] 2--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 4 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE
@@ -4217,9 +4559,12 @@
       bipartite_game_gnm_impl(n1 = 2, n2 = 2, m = 1, directed = TRUE, mode = "in")
     Output
       $graph
-      IGRAPH D--- 4 1 -- 
-      + edge:
-      [1] 3->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 1 
       
       $types
       [1] FALSE FALSE  TRUE  TRUE
@@ -4375,7 +4720,7 @@
     Code
       articulation_points_impl(graph = g)
     Output
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
 
 # articulation_points_impl errors
@@ -4396,36 +4741,36 @@
       
       $tree_edges
       $tree_edges[[1]]
-      + 1/2 edge:
-      [1] 2--3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -- 3 
       
       $tree_edges[[2]]
-      + 1/2 edge:
-      [1] 1--2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -- 2 
       
       
       $component_edges
       $component_edges[[1]]
-      + 1/2 edge:
-      [1] 2--3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -- 3 
       
       $component_edges[[2]]
-      + 1/2 edge:
-      [1] 1--2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -- 2 
       
       
       $components
       $components[[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 3 2
       
       $components[[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 1
       
       
       $articulation_points
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
       
 
@@ -4442,8 +4787,8 @@
     Code
       bridges_impl(graph = g)
     Output
-      + 2/2 edges:
-      [1] 2--3 1--2
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 2 -- 3  1 -- 2 
 
 # bridges_impl errors
 
@@ -4578,23 +4923,23 @@
       cliques_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
       
       [[2]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 3
       
       [[3]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       [[4]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       [[5]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
 
@@ -4604,11 +4949,11 @@
       cliques_impl(graph = g, min = 2, max = 2)
     Output
       [[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       [[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
 
@@ -4648,11 +4993,11 @@
       largest_cliques_impl(graph = g)
     Output
       [[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
 
@@ -4707,23 +5052,23 @@
       weighted_cliques_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
       
       [[2]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 3
       
       [[3]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       [[4]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       [[5]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
 
@@ -4734,7 +5079,7 @@
       max_weight = 3, maximal = TRUE)
     Output
       [[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
 
@@ -4752,11 +5097,11 @@
       largest_weighted_cliques_impl(graph = g)
     Output
       [[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
 
@@ -4766,7 +5111,7 @@
       largest_weighted_cliques_impl(graph = g, vertex_weights = c(1, 2, 3))
     Output
       [[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
 
@@ -4950,7 +5295,7 @@
     Code
       roots_for_tree_layout_impl(graph = g, mode = "out", heuristic = 1)
     Output
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
 
 # roots_for_tree_layout_impl errors
@@ -5021,9 +5366,12 @@
       [3,]  1.0    1
       
       $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $extd_to_orig_eids
       [1] 1 2
@@ -5042,9 +5390,12 @@
       [3,]    0    4
       
       $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $extd_to_orig_eids
       [1] 1 2
@@ -5718,11 +6069,11 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       
@@ -5737,11 +6088,11 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       
@@ -5791,12 +6142,17 @@
     Code
       hrg_sample_impl(hrg = hrg_model)
     Output
-      IGRAPH U--- 10 45 -- 
-      + edges:
-       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
-      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
-      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
-      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 45 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 3   1 -- 4   1 -- 5   1 -- 6   1 -- 7   1 -- 8   1 -- 9  
+       [9] 1 -- 10  2 -- 3   2 -- 4   2 -- 5   2 -- 6   2 -- 7   2 -- 8   2 -- 9  
+      [17] 2 -- 10  3 -- 4   3 -- 5   3 -- 6   3 -- 7   3 -- 8   3 -- 9   3 -- 10 
+      [25] 4 -- 5   4 -- 6   4 -- 7   4 -- 8   4 -- 9   4 -- 10  5 -- 6   5 -- 7  
+      [33] 5 -- 8   5 -- 9   5 -- 10  6 -- 7   6 -- 8   6 -- 9   6 -- 10  7 -- 8  
+      [41] 7 -- 9   7 -- 10  8 -- 9   8 -- 10  9 -- 10 
 
 # hrg_sample_impl errors
 
@@ -5813,20 +6169,30 @@
       hrg_sample_many_impl(hrg = hrg_model, num_samples = 2)
     Output
       [[1]]
-      IGRAPH U--- 10 45 -- 
-      + edges:
-       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
-      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
-      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
-      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 45 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 3   1 -- 4   1 -- 5   1 -- 6   1 -- 7   1 -- 8   1 -- 9  
+       [9] 1 -- 10  2 -- 3   2 -- 4   2 -- 5   2 -- 6   2 -- 7   2 -- 8   2 -- 9  
+      [17] 2 -- 10  3 -- 4   3 -- 5   3 -- 6   3 -- 7   3 -- 8   3 -- 9   3 -- 10 
+      [25] 4 -- 5   4 -- 6   4 -- 7   4 -- 8   4 -- 9   4 -- 10  5 -- 6   5 -- 7  
+      [33] 5 -- 8   5 -- 9   5 -- 10  6 -- 7   6 -- 8   6 -- 9   6 -- 10  7 -- 8  
+      [41] 7 -- 9   7 -- 10  8 -- 9   8 -- 10  9 -- 10 
       
       [[2]]
-      IGRAPH U--- 10 45 -- 
-      + edges:
-       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
-      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
-      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
-      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 45 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 3   1 -- 4   1 -- 5   1 -- 6   1 -- 7   1 -- 8   1 -- 9  
+       [9] 1 -- 10  2 -- 3   2 -- 4   2 -- 5   2 -- 6   2 -- 7   2 -- 8   2 -- 9  
+      [17] 2 -- 10  3 -- 4   3 -- 5   3 -- 6   3 -- 7   3 -- 8   3 -- 9   3 -- 10 
+      [25] 4 -- 5   4 -- 6   4 -- 7   4 -- 8   4 -- 9   4 -- 10  5 -- 6   5 -- 7  
+      [33] 5 -- 8   5 -- 9   5 -- 10  6 -- 7   6 -- 8   6 -- 9   6 -- 10  7 -- 8  
+      [41] 7 -- 9   7 -- 10  8 -- 9   8 -- 10  9 -- 10 
       
 
 # hrg_sample_many_impl errors
@@ -5843,13 +6209,20 @@
     Code
       hrg_game_impl(hrg = hrg_model)
     Output
-      IGRAPH U--- 10 45 -- Hierarchical random graph model
-      + attr: name (g/c)
-      + edges:
-       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
-      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
-      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
-      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      -- <igraph> Hierarchical random graph model ------------------------------------
+      i undirected
+      i 10 vertices * 45 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 3   1 -- 4   1 -- 5   1 -- 6   1 -- 7   1 -- 8   1 -- 9  
+       [9] 1 -- 10  2 -- 3   2 -- 4   2 -- 5   2 -- 6   2 -- 7   2 -- 8   2 -- 9  
+      [17] 2 -- 10  3 -- 4   3 -- 5   3 -- 6   3 -- 7   3 -- 8   3 -- 9   3 -- 10 
+      [25] 4 -- 5   4 -- 6   4 -- 7   4 -- 8   4 -- 9   4 -- 10  5 -- 6   5 -- 7  
+      [33] 5 -- 8   5 -- 9   5 -- 10  6 -- 7   6 -- 8   6 -- 9   6 -- 10  7 -- 8  
+      [41] 7 -- 9   7 -- 10  8 -- 9   8 -- 10  9 -- 10 
 
 # hrg_game_impl errors
 
@@ -5946,10 +6319,14 @@
       from_hrg_dendrogram_impl(hrg = hrg_model)
     Output
       $graph
-      IGRAPH D--- 19 18 -- 
-      + edges:
-       [1] 11-> 1 11->14 12->19 12-> 5 13->16 13-> 8 14->12 14->18 15-> 3 15-> 6
-      [11] 16->15 16->10 17->13 17-> 4 18-> 7 18-> 9 19-> 2 19->17
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 19 vertices * 18 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 11 -> 1   11 -> 14  12 -> 19  12 -> 5   13 -> 16  13 -> 8   14 -> 12 
+       [8] 14 -> 18  15 -> 3   15 -> 6   16 -> 15  16 -> 10  17 -> 13  17 -> 4  
+      [15] 18 -> 7   18 -> 9   19 -> 2   19 -> 17 
       
       $prob
        [1] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN   1   1   1   1   1   1   1   1   1
@@ -6105,18 +6482,24 @@
     Code
       to_directed_impl(graph = g)
     Output
-      IGRAPH D--- 3 4 -- 
-      + edges:
-      [1] 1->2 2->3 2->1 3->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  2 -> 1  3 -> 2 
 
 ---
 
     Code
       to_directed_impl(graph = g, mode = "acyclic")
     Output
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 1->2 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3 
 
 # to_directed_impl errors
 
@@ -6131,18 +6514,24 @@
     Code
       to_undirected_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 ---
 
     Code
       to_undirected_impl(graph = g, mode = "mutual", edge_attr_comb = "sum")
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 # to_undirected_impl errors
 
@@ -6484,7 +6873,7 @@
     Code
       list_triangles_impl(graph = g)
     Output
-      + 0/3 vertices:
+      -- <vertex sequence> 0/3 -------------------------------------------------------
 
 # list_triangles_impl errors
 
@@ -6499,9 +6888,13 @@
     Code
       join_impl(left = g1, right = g2)
     Output
-      IGRAPH U--- 6 13 -- 
-      + edges:
-       [1] 1--2 2--3 4--5 5--6 1--4 1--5 1--6 2--4 2--5 2--6 3--4 3--5 3--6
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 6 vertices * 13 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2  2 -- 3  4 -- 5  5 -- 6  1 -- 4  1 -- 5  1 -- 6  2 -- 4  2 -- 5 
+      [10] 2 -- 6  3 -- 4  3 -- 5  3 -- 6 
 
 # join_impl errors
 
@@ -6517,9 +6910,12 @@
       induced_subgraph_map_impl(graph = g, vids = 1:2, impl = "auto")
     Output
       $res
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
       
       $map
       [1] 2 3 1
@@ -6534,9 +6930,12 @@
       induced_subgraph_map_impl(graph = g, vids = 1:2, impl = "copy_and_delete")
     Output
       $res
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 2 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
       
       $map
       [1] 2 3 1
@@ -6558,21 +6957,28 @@
     Code
       mycielskian_impl(graph = g)
     Output
-      IGRAPH U--- 7 9 -- 
-      + edges:
-      [1] 1--2 2--3 1--5 2--4 2--6 3--5 4--7 5--7 6--7
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 7 vertices * 9 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  1 -- 5  2 -- 4  2 -- 6  3 -- 5  4 -- 7  5 -- 7  6 -- 7 
 
 ---
 
     Code
       mycielskian_impl(graph = g, k = 2)
     Output
-      IGRAPH U--- 15 34 -- 
-      + edges:
-       [1]  1-- 2  2-- 3  1-- 5  2-- 4  2-- 6  3-- 5  4-- 7  5-- 7  6-- 7  1-- 9
-      [11]  2-- 8  2--10  3-- 9  1--12  5-- 8  2--11  4-- 9  2--13  6-- 9  3--12
-      [21]  5--10  4--14  7--11  5--14  7--12  6--14  7--13  8--15  9--15 10--15
-      [31] 11--15 12--15 13--15 14--15
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 15 vertices * 34 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2    2 -- 3    1 -- 5    2 -- 4    2 -- 6    3 -- 5    4 -- 7   
+       [8] 5 -- 7    6 -- 7    1 -- 9    2 -- 8    2 -- 10   3 -- 9    1 -- 12  
+      [15] 5 -- 8    2 -- 11   4 -- 9    2 -- 13   6 -- 9    3 -- 12   5 -- 10  
+      [22] 4 -- 14   7 -- 11   5 -- 14   7 -- 12   6 -- 14   7 -- 13   8 -- 15  
+      [29] 9 -- 15   10 -- 15  11 -- 15  12 -- 15  13 -- 15  14 -- 15 
 
 # mycielskian_impl errors
 
@@ -6587,18 +6993,25 @@
     Code
       product_impl(g1 = g1, g2 = g2)
     Output
-      IGRAPH U--- 9 12 -- 
-      + edges:
-       [1] 1--4 2--5 3--6 4--7 5--8 6--9 1--2 4--5 7--8 2--3 5--6 8--9
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 9 vertices * 12 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 4  2 -- 5  3 -- 6  4 -- 7  5 -- 8  6 -- 9  1 -- 2  4 -- 5  7 -- 8 
+      [10] 2 -- 3  5 -- 6  8 -- 9 
 
 ---
 
     Code
       product_impl(g1 = g1, g2 = g2, type = "tensor")
     Output
-      IGRAPH U--- 9 8 -- 
-      + edges:
-      [1] 1--5 2--4 2--6 3--5 4--8 5--7 5--9 6--8
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 9 vertices * 8 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 5  2 -- 4  2 -- 6  3 -- 5  4 -- 8  5 -- 7  5 -- 9  6 -- 8 
 
 # product_impl errors
 
@@ -6613,9 +7026,12 @@
     Code
       rooted_product_impl(g1 = g1, g2 = g2, root = 1)
     Output
-      IGRAPH U--- 9 8 -- 
-      + edges:
-      [1] 1--4 4--7 1--2 4--5 7--8 2--3 5--6 8--9
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 9 vertices * 8 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 4  4 -- 7  1 -- 2  4 -- 5  7 -- 8  2 -- 3  5 -- 6  8 -- 9 
 
 # rooted_product_impl errors
 
@@ -6631,9 +7047,12 @@
       gomory_hu_tree_impl(graph = g)
     Output
       $tree
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $flows
       [1] 1 1
@@ -6645,9 +7064,12 @@
       gomory_hu_tree_impl(graph = g, capacity = c(1, 2))
     Output
       $tree
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $flows
       [1] 1 2
@@ -6673,15 +7095,15 @@
       [1] 1 1
       
       $cut
-      + 1/2 edge:
-      [1] 2--3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -- 3 
       
       $partition1
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       $partition2
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 3
       
       $stats
@@ -6714,15 +7136,15 @@
       [1] 1 1
       
       $cut
-      + 1/2 edge:
-      [1] 1--2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -- 2 
       
       $partition1
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       $partition2
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
       $stats
@@ -6757,8 +7179,9 @@
       residual_graph_impl(graph = g, capacity = c(1, 2), flow = c(1, 2))
     Output
       $residual
-      IGRAPH D--- 3 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 0 edges
       
       $residual_capacity
       numeric(0)
@@ -6777,9 +7200,12 @@
     Code
       reverse_residual_graph_impl(graph = g, capacity = c(1, 2), flow = c(1, 2))
     Output
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 2->1 3->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1  3 -> 2 
 
 # reverse_residual_graph_impl errors
 
@@ -6798,15 +7224,15 @@
       [1] 1
       
       $cut
-      + 1/2 edge:
-      [1] 2--3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -- 3 
       
       $partition1
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       $partition2
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 3
       
 
@@ -6819,15 +7245,15 @@
       [1] 1
       
       $cut
-      + 1/2 edge:
-      [1] 1--2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -- 2 
       
       $partition1
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       $partition2
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
 
@@ -6848,12 +7274,15 @@
       [1] 0 1 2
       
       $domtree
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 1->2 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3 
       
       $leftout
-      + 0/3 vertices:
+      -- <vertex sequence> 0/3 -------------------------------------------------------
       
 
 ---
@@ -6865,11 +7294,12 @@
       [1]  0 -1 -1
       
       $domtree
-      IGRAPH D--- 3 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 0 edges
       
       $leftout
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 2 3
       
 
@@ -6888,21 +7318,21 @@
     Output
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -> 2 
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -> 3 
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       
@@ -6925,21 +7355,21 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -> 2 
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 2 -> 3 
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
       
       
@@ -6954,13 +7384,13 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      -- <edge sequence> 1/2 ---------------------------------------------------------
+      [1] 1 -> 2 
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
       
@@ -6979,9 +7409,12 @@
       even_tarjan_reduction_impl(graph = g)
     Output
       $graphbar
-      IGRAPH D--- 6 7 -- 
-      + edges:
-      [1] 1->4 2->5 3->6 5->1 4->2 6->2 5->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 6 vertices * 7 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 4  2 -> 5  3 -> 6  5 -> 1  4 -> 2  6 -> 2  5 -> 3 
       
       $capacity
       [1] 1 1 1 3 3 3 3
@@ -7031,7 +7464,7 @@
       all_minimal_st_separators_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
       
 
@@ -7049,7 +7482,7 @@
       minimum_size_separators_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 2
       
 
@@ -7111,18 +7544,24 @@
     Code
       isoclass_create_impl(size = 3, number = 1)
     Output
-      IGRAPH D--- 3 1 -- 
-      + edge:
-      [1] 2->1
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1 
 
 ---
 
     Code
       isoclass_create_impl(size = 3, number = 1, directed = FALSE)
     Output
-      IGRAPH U--- 3 1 -- 
-      + edge:
-      [1] 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2 
 
 # isoclass_create_impl errors
 
@@ -7405,9 +7844,12 @@
     Code
       permute_vertices_impl(graph = g, permutation = 3:1)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 2--3 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 3  1 -- 2 
 
 # permute_vertices_impl errors
 
@@ -7598,7 +8040,7 @@
       automorphism_group_impl(graph = g)
     Output
       [[1]]
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 3 2 1
       
 
@@ -7645,9 +8087,12 @@
       simplify_and_colorize_impl(graph = g)
     Output
       $res
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $vertex_color
       [1] 0 0 0
@@ -9708,10 +10153,10 @@
       find_cycle_impl(graph = g)
     Output
       $vertices
-      + 0/3 vertices:
+      -- <vertex sequence> 0/3 -------------------------------------------------------
       
       $edges
-      + 0/2 edges:
+      -- <edge sequence> 0/2 ---------------------------------------------------------
       
 
 ---
@@ -9720,10 +10165,10 @@
       find_cycle_impl(graph = g, mode = "in")
     Output
       $vertices
-      + 0/3 vertices:
+      -- <vertex sequence> 0/3 -------------------------------------------------------
       
       $edges
-      + 0/2 edges:
+      -- <edge sequence> 0/2 ---------------------------------------------------------
       
 
 # find_cycle_impl errors
@@ -9793,11 +10238,11 @@
       eulerian_path_impl(graph = g)
     Output
       $epath
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       $vpath
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
       
 
@@ -9824,11 +10269,11 @@
       eulerian_cycle_impl(graph = g2)
     Output
       $epath
-      + 4/4 edges:
-      [1] 1--2 2--3 3--4 1--4
+      -- <edge sequence> 4/4 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  1 -- 4 
       
       $vpath
-      + 5/4 vertices:
+      -- <vertex sequence> 5/4 -------------------------------------------------------
       [1] 1 2 3 4 1
       
 
@@ -9901,7 +10346,7 @@
       [1] TRUE
       
       $root
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
 
@@ -9929,7 +10374,7 @@
       [1] TRUE
       
       $roots
-      + 1/3 vertex:
+      -- <vertex sequence> 1/3 -------------------------------------------------------
       [1] 1
       
 
@@ -9946,10 +10391,15 @@
     Code
       from_prufer_impl(prufer = 1:2)
     Output
-      IGRAPH U--- 4 3 -- Tree from Prufer sequence
-      + attr: name (g/c), prufer (g/n)
-      + edges:
-      [1] 1--3 1--2 2--4
+      -- <igraph> Tree from Prufer sequence ------------------------------------------
+      i undirected
+      i 4 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, prufer <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 2  2 -- 4 
 
 # from_prufer_impl errors
 
@@ -9982,18 +10432,24 @@
     Code
       tree_from_parent_vector_impl(parents = c(-1, 1, 2, 3))
     Output
-      IGRAPH D--- 4 3 -- 
-      + edges:
-      [1] 1->2 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  3 -> 4 
 
 ---
 
     Code
       tree_from_parent_vector_impl(parents = c(-1, 1, 2, 3), type = "in")
     Output
-      IGRAPH D--- 4 3 -- 
-      + edges:
-      [1] 2->1 3->2 4->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1  3 -> 2  4 -> 3 
 
 # tree_from_parent_vector_impl errors
 
@@ -10026,8 +10482,8 @@
     Code
       random_spanning_tree_impl(graph = g, vid = 1)
     Output
-      + 2/2 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/2 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 # random_spanning_tree_impl errors
 
@@ -10042,18 +10498,24 @@
     Code
       tree_game_impl(n = 3)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 2--3 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 3  1 -- 2 
 
 ---
 
     Code
       tree_game_impl(n = 3, directed = TRUE, method = "lerw")
     Output
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 3->1 1->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 3 -> 1  1 -> 2 
 
 # tree_game_impl errors
 
@@ -10242,9 +10704,12 @@
     Code
       invalidate_cache_impl(graph = g)
     Output
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
 
 # invalidate_cache_impl errors
 
@@ -10259,7 +10724,7 @@
     Code
       vertex_path_from_edge_path_impl(graph = g, start = 1, edge_path = c(1, 2))
     Output
-      + 3/3 vertices:
+      -- <vertex sequence> 3/3 -------------------------------------------------------
       [1] 1 2 3
 
 ---
@@ -10267,7 +10732,7 @@
     Code
       vertex_path_from_edge_path_impl(graph = g, start = 1, edge_path = c(1), mode = "in")
     Output
-      + 2/3 vertices:
+      -- <vertex sequence> 2/3 -------------------------------------------------------
       [1] 1 2
 
 # vertex_path_from_edge_path_impl errors
@@ -10342,7 +10807,7 @@
     Code
       edges_impl(graph = g, eids = E(g))
     Output
-      + 6/4 vertices:
+      -- <vertex sequence> 6/4 -------------------------------------------------------
       [1] 1 2 2 3 3 4
 
 ---
@@ -10350,7 +10815,7 @@
     Code
       edges_impl(graph = g, eids = c(1, 3))
     Output
-      + 4/4 vertices:
+      -- <vertex sequence> 4/4 -------------------------------------------------------
       [1] 1 2 3 4
 
 # edges_impl errors
@@ -10411,24 +10876,24 @@
     Code
       incident_impl(graph = g, vid = 2, mode = "out")
     Output
-      + 1/3 edge:
-      [1] 2->3
+      -- <edge sequence> 1/3 ---------------------------------------------------------
+      [1] 2 -> 3 
 
 ---
 
     Code
       incident_impl(graph = g, vid = 2, mode = "in")
     Output
-      + 1/3 edge:
-      [1] 1->2
+      -- <edge sequence> 1/3 ---------------------------------------------------------
+      [1] 1 -> 2 
 
 ---
 
     Code
       incident_impl(graph = g, vid = 2, mode = "all")
     Output
-      + 2/3 edges:
-      [1] 1->2 2->3
+      -- <edge sequence> 2/3 ---------------------------------------------------------
+      [1] 1 -> 2  2 -> 3 
 
 # incident_impl errors
 
@@ -10443,16 +10908,22 @@
     Code
       famous_impl(name = "Zachary")
     Output
-      IGRAPH U--- 34 78 -- 
-      + edges:
-       [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
-      [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
-      [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
-      [31]  3-- 9  3--14  4-- 8  4--13  4--14  5-- 7  5--11  6-- 7  6--11  6--17
-      [41]  7--17  9--31  9--33  9--34 10--34 14--34 15--33 15--34 16--33 16--34
-      [51] 19--33 19--34 20--34 21--33 21--34 23--33 23--34 24--26 24--28 24--33
-      [61] 24--34 24--30 25--26 25--28 25--32 26--32 27--30 27--34 28--34 29--32
-      [71] 29--34 30--33 30--34 31--33 31--34 32--33 32--34 33--34
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 34 vertices * 78 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2    1 -- 3    1 -- 4    1 -- 5    1 -- 6    1 -- 7    1 -- 8   
+       [8] 1 -- 9    1 -- 11   1 -- 12   1 -- 13   1 -- 14   1 -- 18   1 -- 20  
+      [15] 1 -- 22   1 -- 32   2 -- 3    2 -- 4    2 -- 8    2 -- 14   2 -- 18  
+      [22] 2 -- 20   2 -- 22   2 -- 31   3 -- 4    3 -- 8    3 -- 28   3 -- 29  
+      [29] 3 -- 33   3 -- 10   3 -- 9    3 -- 14   4 -- 8    4 -- 13   4 -- 14  
+      [36] 5 -- 7    5 -- 11   6 -- 7    6 -- 11   6 -- 17   7 -- 17   9 -- 31  
+      [43] 9 -- 33   9 -- 34   10 -- 34  14 -- 34  15 -- 33  15 -- 34  16 -- 33 
+      [50] 16 -- 34  19 -- 33  19 -- 34  20 -- 34  21 -- 33  21 -- 34  23 -- 33 
+      [57] 23 -- 34  24 -- 26  24 -- 28  24 -- 33  24 -- 34  24 -- 30  25 -- 26 
+      [64] 25 -- 28  25 -- 32  26 -- 32  27 -- 30  27 -- 34  28 -- 34  29 -- 32 
+      + ... omitted several edges
 
 # famous_impl errors
 
@@ -10523,9 +10994,12 @@
       union_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH D--- 4 4 -- 
-      + edges:
-      [1] 1->2 1->3 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  2 -> 3  3 -> 4 
       
       $edge_map_left
       [1] 1 3
@@ -10548,9 +11022,12 @@
       intersection_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH D--- 3 2 -- 
-      + edges:
-      [1] 1->2 2->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 2 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3 
       
       $edge_map_left
       [1] 1 2
@@ -10572,101 +11049,137 @@
     Code
       star_impl(n = 5, mode = "out", center = 0)
     Output
-      IGRAPH D--- 5 4 -- 
-      + edges:
-      [1] 1->2 1->3 1->4 1->5
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 5 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  1 -> 4  1 -> 5 
 
 ---
 
     Code
       star_impl(n = 6, mode = "in", center = 1)
     Output
-      IGRAPH D--- 6 5 -- 
-      + edges:
-      [1] 1->2 3->2 4->2 5->2 6->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 6 vertices * 5 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  3 -> 2  4 -> 2  5 -> 2  6 -> 2 
 
 ---
 
     Code
       star_impl(n = 4, mode = "undirected", center = 0)
     Output
-      IGRAPH U--- 4 3 -- 
-      + edges:
-      [1] 1--2 1--3 1--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  1 -- 4 
 
 # ring_impl basic
 
     Code
       ring_impl(n = 5, directed = FALSE, mutual = FALSE, circular = TRUE)
     Output
-      IGRAPH U--- 5 5 -- 
-      + edges:
-      [1] 1--2 2--3 3--4 4--5 1--5
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 5 vertices * 5 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5 
 
 ---
 
     Code
       ring_impl(n = 4, directed = TRUE, mutual = FALSE, circular = FALSE)
     Output
-      IGRAPH D--- 4 3 -- 
-      + edges:
-      [1] 1->2 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  3 -> 4 
 
 # full_impl basic
 
     Code
       full_impl(n = 4, directed = FALSE, loops = FALSE)
     Output
-      IGRAPH U--- 4 6 -- 
-      + edges:
-      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  1 -- 4  2 -- 3  2 -- 4  3 -- 4 
 
 ---
 
     Code
       full_impl(n = 3, directed = TRUE, loops = FALSE)
     Output
-      IGRAPH D--- 3 6 -- 
-      + edges:
-      [1] 1->2 1->3 2->1 2->3 3->1 3->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  2 -> 1  2 -> 3  3 -> 1  3 -> 2 
 
 # kary_tree_impl basic
 
     Code
       kary_tree_impl(n = 7, children = 2, type = c("out", "in", "undirected"))
     Output
-      IGRAPH D--- 7 6 -- 
-      + edges:
-      [1] 1->2 1->3 2->4 2->5 3->6 3->7
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 7 vertices * 6 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  1 -> 3  2 -> 4  2 -> 5  3 -> 6  3 -> 7 
 
 ---
 
     Code
       kary_tree_impl(n = 10, children = 3, type = c("in", "out", "undirected"))
     Output
-      IGRAPH D--- 10 9 -- 
-      + edges:
-      [1]  2->1  3->1  4->1  5->2  6->2  7->2  8->3  9->3 10->3
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 10 vertices * 9 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 1   3 -> 1   4 -> 1   5 -> 2   6 -> 2   7 -> 2   8 -> 3   9 -> 3  
+      [9] 10 -> 3 
 
 # barabasi_game_impl basic
 
     Code
       barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag")
     Output
-      IGRAPH U--- 10 18 -- 
-      + edges:
-       [1] 1-- 2 1-- 2 2-- 3 1-- 3 2-- 4 2-- 4 2-- 5 2-- 5 4-- 6 2-- 6 2-- 7 1-- 7
-      [13] 3-- 8 2-- 8 8-- 9 5-- 9 6--10 5--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 18 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 2   2 -- 3   1 -- 3   2 -- 4   2 -- 4   2 -- 5   2 -- 5  
+       [9] 4 -- 6   2 -- 6   2 -- 7   1 -- 7   3 -- 8   2 -- 8   8 -- 9   5 -- 9  
+      [17] 6 -- 10  5 -- 10 
 
 ---
 
     Code
       barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree")
     Output
-      IGRAPH U--- 10 17 -- 
-      + edges:
-       [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 4-- 5 1-- 6 3-- 6 6-- 7 3-- 7 6-- 8
-      [13] 2-- 8 3-- 9 5-- 9 2--10 6--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 17 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   1 -- 3   2 -- 3   1 -- 4   2 -- 4   2 -- 5   4 -- 5   1 -- 6  
+       [9] 3 -- 6   6 -- 7   3 -- 7   6 -- 8   2 -- 8   3 -- 9   5 -- 9   2 -- 10 
+      [17] 6 -- 10 
 
 # grg_game_impl basic
 
@@ -10674,9 +11187,13 @@
       grg_game_impl(nodes = 10, radius = 0.3, torus = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 12 -- 
-      + edges:
-       [1] 3-- 5 3-- 6 5-- 6 5-- 7 5-- 8 6-- 8 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 12 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 3 -- 5   3 -- 6   5 -- 6   5 -- 7   5 -- 8   6 -- 8   7 -- 8   7 -- 9  
+       [9] 7 -- 10  8 -- 9   8 -- 10  9 -- 10 
       
       $x
        [1] 0.08565451 0.15145413 0.45222514 0.45939554 0.55956278 0.61872370
@@ -10692,10 +11209,14 @@
     Code
       watts_strogatz_game_impl(dim = 1, size = 10, nei = 2, p = 0.1)
     Output
-      IGRAPH U--- 10 20 -- 
-      + edges:
-       [1] 1-- 2 2-- 6 2-- 3 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10 1-- 8 1-- 9
-      [13] 2--10 2-- 4 3-- 5 4-- 6 5-- 7 6-- 8 7-- 9 8--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 20 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 2   2 -- 6   2 -- 3   4 -- 5   5 -- 6   6 -- 7   7 -- 8   8 -- 9  
+       [9] 9 -- 10  1 -- 10  1 -- 8   1 -- 9   2 -- 10  2 -- 4   3 -- 5   4 -- 6  
+      [17] 5 -- 7   6 -- 8   7 -- 9   8 -- 10 
 
 # distances_impl basic
 
@@ -10739,14 +11260,14 @@
     Output
       $vertices
       $vertices[[1]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 1 2 3
       
       
       $edges
       $edges[[1]]
-      + 2/5 edges:
-      [1] 1--2 2--3
+      -- <edge sequence> 2/5 ---------------------------------------------------------
+      [1] 1 -- 2  2 -- 3 
       
       
       $parents
@@ -10761,7 +11282,7 @@
     Code
       subcomponent_impl(graph = g, v = 1, mode = c("all", "out", "in"))
     Output
-      + 3/6 vertices, named:
+      -- <vertex sequence> 3/6 * named -----------------------------------------------
       [1] A B C
 
 # betweenness_impl basic
@@ -11097,9 +11618,12 @@
       create_bipartite_impl(types = c(FALSE, FALSE, TRUE, TRUE), edges = c(0, 2, 0, 3,
         1, 2, 1, 3), directed = FALSE)
     Output
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--3 1--4 2--3 2--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 3  1 -- 4  2 -- 3  2 -- 4 
 
 # bipartite_game_impl basic
 
@@ -11107,9 +11631,13 @@
       bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 6   2 -- 6   4 -- 6   5 -- 6   1 -- 7   4 -- 7   4 -- 8   3 -- 9  
+       [9] 3 -- 10  4 -- 10 
       
       $types
        [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
@@ -11121,9 +11649,13 @@
       bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
     Output
       $graph
-      IGRAPH U--- 10 10 -- 
-      + edges:
-       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 10 vertices * 10 edges
+      
+      -- Edges -----------------------------------------------------------------------
+       [1] 1 -- 6   3 -- 7   5 -- 7   1 -- 8   3 -- 8   4 -- 8   2 -- 9   5 -- 9  
+       [9] 2 -- 10  3 -- 10 
       
       $types
        [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
@@ -11135,16 +11667,26 @@
       decompose_impl(graph = g, mode = c("weak", "strong"))
     Output
       [[1]]
-      IGRAPH UN-- 3 2 -- 
-      + attr: name (v/c)
-      + edges (vertex names):
-      [1] A--B B--C
+      -- <igraph> --------------------------------------------------------------------
+      i undirected * named
+      i 3 vertices * 2 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> vertex: name <chr>
+      
+      -- Edges (vertex names) --------------------------------------------------------
+      [1] A -- B  B -- C 
       
       [[2]]
-      IGRAPH UN-- 2 1 -- 
-      + attr: name (v/c)
-      + edge (vertex names):
-      [1] D--E
+      -- <igraph> --------------------------------------------------------------------
+      i undirected * named
+      i 2 vertices * 1 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> vertex: name <chr>
+      
+      -- Edges (vertex names) --------------------------------------------------------
+      [1] D -- E 
       
 
 # neighborhood_impl basic
@@ -11154,23 +11696,23 @@
         "in"))
     Output
       [[1]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 1 2 5
       
       [[2]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 2 1 3
       
       [[3]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 3 2 4
       
       [[4]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 4 3 5
       
       [[5]]
-      + 3/5 vertices:
+      -- <vertex sequence> 3/5 -------------------------------------------------------
       [1] 5 1 4
       
 
@@ -11194,10 +11736,15 @@
       numeric(0)
       
       $newgraph
-      IGRAPH U--- 4 6 -- Full graph
-      + attr: name (g/c), loops (g/l)
-      + edges:
-      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+      -- <igraph> Full graph ---------------------------------------------------------
+      i undirected
+      i 4 vertices * 6 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, loops <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 3  1 -- 4  2 -- 3  2 -- 4  3 -- 4 
       
 
 ---
@@ -11212,10 +11759,15 @@
       [1] 1 3
       
       $newgraph
-      IGRAPH U--- 4 5 -- Ring graph
-      + attr: name (g/c), mutual (g/l), circular (g/l)
-      + edges:
-      [1] 1--2 2--3 3--4 1--4 2--4
+      -- <igraph> Ring graph ---------------------------------------------------------
+      i undirected
+      i 4 vertices * 5 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  1 -- 4  2 -- 4 
       
 
 # get_adjacency_impl basic
@@ -11240,27 +11792,36 @@
     Code
       read_graph_edgelist_impl(instream = tmp, n = 3, directed = FALSE)
     Output
-      IGRAPH U--- 3 3 -- 
-      + edges:
-      [1] 1--2 2--3 1--3
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 3 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  1 -- 3 
 
 # degree_sequence_game_impl basic
 
     Code
       degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration")
     Output
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 2--4 3--3 1--4 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -- 4  3 -- 3  1 -- 4  1 -- 2 
 
 ---
 
     Code
       degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl")
     Output
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--2 1--4 2--3 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  1 -- 4  2 -- 3  3 -- 4 
 
 # connect_neighborhood_impl basic
 
@@ -11271,10 +11832,15 @@
       Order smaller than two, graph will be unchanged.
       Source: <file>:<line>
     Output
-      IGRAPH U--- 5 5 -- Ring graph
-      + attr: name (g/c), mutual (g/l), circular (g/l)
-      + edges:
-      [1] 1--2 2--3 3--4 4--5 1--5
+      -- <igraph> Ring graph ---------------------------------------------------------
+      i undirected
+      i 5 vertices * 5 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  3 -- 4  4 -- 5  1 -- 5 
 
 # eccentricity_impl basic
 
@@ -11295,7 +11861,7 @@
     Code
       graph_center_impl(graph = g, mode = c("out", "in", "all"))
     Output
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 1
 
 # maximal_cliques_impl basic
@@ -11304,7 +11870,7 @@
       maximal_cliques_impl(graph = g, min_size = 1, max_size = 0)
     Output
       [[1]]
-      + 4/4 vertices:
+      -- <vertex sequence> 4/4 -------------------------------------------------------
       [1] 1 2 4 3
       
 
@@ -11314,43 +11880,43 @@
       independent_vertex_sets_impl(graph = g, min_size = 1, max_size = 0)
     Output
       [[1]]
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 1
       
       [[2]]
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 2
       
       [[3]]
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 3
       
       [[4]]
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 4
       
       [[5]]
-      + 1/5 vertex:
+      -- <vertex sequence> 1/5 -------------------------------------------------------
       [1] 5
       
       [[6]]
-      + 2/5 vertices:
+      -- <vertex sequence> 2/5 -------------------------------------------------------
       [1] 1 3
       
       [[7]]
-      + 2/5 vertices:
+      -- <vertex sequence> 2/5 -------------------------------------------------------
       [1] 1 4
       
       [[8]]
-      + 2/5 vertices:
+      -- <vertex sequence> 2/5 -------------------------------------------------------
       [1] 2 4
       
       [[9]]
-      + 2/5 vertices:
+      -- <vertex sequence> 2/5 -------------------------------------------------------
       [1] 2 5
       
       [[10]]
-      + 2/5 vertices:
+      -- <vertex sequence> 2/5 -------------------------------------------------------
       [1] 3 5
       
 
@@ -11364,7 +11930,7 @@
       print(result)
     Output
       $order
-      + 10/10 vertices:
+      -- <vertex sequence> 10/10 -----------------------------------------------------
        [1]  1  2 10  3  9  4  8  5  7  6
       
       $rank
@@ -11431,11 +11997,11 @@
       print(result)
     Output
       $order
-      + 10/10 vertices:
+      -- <vertex sequence> 10/10 -----------------------------------------------------
        [1]  1  2  3  4  5  6  7  8  9 10
       
       $order_out
-      + 10/10 vertices:
+      -- <vertex sequence> 10/10 -----------------------------------------------------
        [1] 10  9  8  7  6  5  4  3  2  1
       
       $father
@@ -11687,18 +12253,24 @@
     Code
       sparse_adjacency_impl(adjmatrix = M)
     Output
-      IGRAPH D--- 4 4 -- 
-      + edges:
-      [1] 4->1 1->2 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 4 -> 1  1 -> 2  2 -> 3  3 -> 4 
 
 ---
 
     Code
       sparse_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
     Output
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--2 2--3 1--4 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  1 -- 4  3 -- 4 
 
 # sparse_weighted_adjacency_impl basic
 
@@ -11706,9 +12278,12 @@
       sparse_weighted_adjacency_impl(adjmatrix = M)
     Output
       $graph
-      IGRAPH D--- 4 4 -- 
-      + edges:
-      [1] 4->1 1->2 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 4 -> 1  1 -> 2  2 -> 3  3 -> 4 
       
       $weights
       [1] 0.5 2.5 1.0 3.0
@@ -11720,9 +12295,12 @@
       sparse_weighted_adjacency_impl(adjmatrix = M_sym, mode = "undirected", loops = "once")
     Output
       $graph
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--2 2--3 1--4 3--4
+      -- <igraph> --------------------------------------------------------------------
+      i undirected
+      i 4 vertices * 4 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -- 2  2 -- 3  1 -- 4  3 -- 4 
       
       $weights
       [1] 2.5 1.0 0.5 3.0
@@ -11733,18 +12311,24 @@
     Code
       weighted_sparsemat_impl(A = M, directed = TRUE, attr = "weight", loops = FALSE)
     Output
-      IGRAPH D-W- 4 4 -- 
-      + attr: weight (e/n)
-      + edges:
-      [1] 4->1 1->2 2->3 3->4
+      -- <igraph> --------------------------------------------------------------------
+      i directed * weighted
+      i 4 vertices * 4 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> edge:   weight <dbl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 4 -> 1  1 -> 2  2 -> 3  3 -> 4 
 
 # disjoint_union_many_impl basic
 
     Code
       disjoint_union_many_impl(graphs = list(g1, g2, g3))
     Output
-      IGRAPH D--- 6 0 -- 
-      + edges:
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 6 vertices * 0 edges
 
 # union_many_impl basic
 
@@ -11752,9 +12336,12 @@
       union_many_impl(graphs = list(g1, g2, g3))
     Output
       $res
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 2->3 1->3 1->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 3 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 2 -> 3  1 -> 3  1 -> 2 
       
       $edgemaps
       $edgemaps[[1]]
@@ -11774,9 +12361,12 @@
       intersection_many_impl(graphs = list(g1, g2, g3))
     Output
       $res
-      IGRAPH D--- 3 1 -- 
-      + edge:
-      [1] 1->2
+      -- <igraph> --------------------------------------------------------------------
+      i directed
+      i 3 vertices * 1 edges
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2 
       
       $edgemaps
       $edgemaps[[1]]
@@ -11808,8 +12398,8 @@
     Code
       get_eid_impl(graph = g, from = 1, to = 2)
     Output
-      + 1/4 edge:
-      [1] 1->2
+      -- <edge sequence> 1/4 ---------------------------------------------------------
+      [1] 1 -> 2 
 
 # get_eid_impl errors
 
@@ -11844,7 +12434,7 @@
        [1] 3 3 3 3 0 3 2 2 1 1
       
       $generators
-      + 4/10 vertices:
+      -- <vertex sequence> 4/10 ------------------------------------------------------
       [1] 2 9 7 1
       
       $modularity

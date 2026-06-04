@@ -3,20 +3,30 @@
     Code
       read_graph(ncol_path, "ncol")
     Output
-      IGRAPH UN-- 3 2 -- 
-      + attr: name (v/c)
-      + edges (vertex names):
-      [1] 0--1 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected * named
+      i 3 vertices * 2 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> vertex: name <chr>
+      
+      -- Edges (vertex names) --------------------------------------------------------
+      [1] 0 -- 1  1 -- 2 
 
 # reading graph in LGL format
 
     Code
       read_graph(lgl_path, "lgl")
     Output
-      IGRAPH UN-- 3 2 -- 
-      + attr: name (v/c)
-      + edges (vertex names):
-      [1] 0--1 1--2
+      -- <igraph> --------------------------------------------------------------------
+      i undirected * named
+      i 3 vertices * 2 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> vertex: name <chr>
+      
+      -- Edges (vertex names) --------------------------------------------------------
+      [1] 0 -- 1  1 -- 2 
 
 # reading graph, unused argument
 

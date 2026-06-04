@@ -11,17 +11,27 @@
     Code
       g
     Output
-      IGRAPH D--- 3 3 -- Ring graph
-      + attr: name (g/c), mutual (g/l), circular (g/l)
-      + edges:
-      [1] 1->2 2->3 3->1
+      -- <igraph> Ring graph ---------------------------------------------------------
+      i directed
+      i 3 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  3 -> 1 
     Code
       gs
     Output
-      IGRAPH D--- 3 3 -- Ring graph
-      + attr: name (g/c), mutual (g/l), circular (g/l)
-      + edges:
-      [1] 1->2 2->3 3->1
+      -- <igraph> Ring graph ---------------------------------------------------------
+      i directed
+      i 3 vertices * 3 edges
+      
+      -- Attributes ------------------------------------------------------------------
+      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
+      
+      -- Edges -----------------------------------------------------------------------
+      [1] 1 -> 2  2 -> 3  3 -> 1 
 
 # VS/ES require explicit conversion
 

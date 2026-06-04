@@ -72,7 +72,7 @@ getIgraphOpt <- function(x, default = NULL) {
   "auto.print.lines" = 10,
   "return.vs.es" = TRUE,
   "print.id" = TRUE,
-  "print.style" = "classic"
+  "print.style" = "cli"
 )
 
 igraph.pars.set.verbose <- function(verbose) {
@@ -160,10 +160,10 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     \item{print.style}{
 #'       Character string controlling the visual style used by
 #'       [print.igraph()], [summary.igraph()], [print.igraph.vs()] and
-#'       [print.igraph.es()]. Possible values are `"classic"` (default,
-#'       the historical `IGRAPH ... DNW-` header relied on by tutorials and
-#'       parsers) and `"cli"` (a cli-styled output with section rules,
-#'       Unicode arrows for edges and typed attribute listings).
+#'       [print.igraph.es()]. Possible values are `"cli"` (default, a
+#'       cli-styled output with section rules, Unicode arrows for edges and
+#'       typed attribute listings) and `"classic"` (the historical
+#'       `IGRAPH ... DNW-` header relied on by tutorials and parsers).
 #'     }
 #'     \item{return.vs.es}{
 #'       Whether functions that return a set or sequence of vertices/edges

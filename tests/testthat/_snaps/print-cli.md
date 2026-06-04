@@ -10,7 +10,6 @@
       ── Attributes ──────────────────────────────────────────────────────────────────
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
       
-      
       ── Edges ───────────────────────────────────────────────────────────────────────
       [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  1 ─ 5 
 
@@ -25,7 +24,6 @@
       
       ── Attributes ──────────────────────────────────────────────────────────────────
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
-      
 
 # cli print.igraph: directed named weighted
 
@@ -40,7 +38,6 @@
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
       → vertex: name <chr>
       → edge:   weight <dbl>
-      
       
       ── Edges (vertex names) ────────────────────────────────────────────────────────
       [1] A → B  B → C  C → A 
@@ -58,7 +55,6 @@
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
       → vertex: name <chr>
       → edge:   weight <dbl>
-      
 
 # cli print.igraph: bipartite
 
@@ -71,7 +67,6 @@
       
       ── Attributes ──────────────────────────────────────────────────────────────────
       → vertex: type <lgl>
-      
       
       ── Edges ───────────────────────────────────────────────────────────────────────
       [1] 1 ─ 3  2 ─ 4 
@@ -107,7 +102,6 @@
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
       → vertex: name <chr>
       → edge:   weight <dbl>
-      
       
       ── Graph attributes ────────────────────────────────────────────────────────────
       name:
@@ -194,7 +188,6 @@
       -> graph:  name <chr>, mutual <lgl>, circular <lgl>
       -> vertex: name <chr>
       
-      
       -- Edges (vertex names) --------------------------------------------------------
       [1] A -> B  B -> C  C -> A 
 
@@ -225,7 +218,6 @@
       
       ── Attributes ──────────────────────────────────────────────────────────────────
       → graph:  name <chr>, mutual <lgl>, circular <lgl>
-      
       
       ── Edges ───────────────────────────────────────────────────────────────────────
         [1] 1 ─ 2      2 ─ 3      3 ─ 4      4 ─ 5      5 ─ 6      6 ─ 7     
