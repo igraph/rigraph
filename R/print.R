@@ -698,7 +698,11 @@ attr_codes_cli <- function(x, kind) {
 }
 
 print_igraph_header_cli <- function(x, id) {
-  name <- if ("name" %in% graph_attr_names(x)) as.character(x$name)[1] else NULL
+  name <- if ("name" %in% graph_attr_names(x)) {
+    as.character(x$name)[1]
+  } else {
+    NULL
+  }
   title <- if (!is.null(name) && !is.na(name) && nzchar(name)) {
     paste0("<igraph> ", name)
   } else {
