@@ -676,14 +676,16 @@ middot_cli <- function() {
   if (cli::is_utf8_output()) "\u00b7" else "*"
 }
 
+# Bare type label for an attribute mode code; the surrounding `<...>` is added
+# by cli's `{.cls}` inline class at the call site.
 attr_label_cli <- function(code) {
   switch(
     code,
-    c = "<chr>",
-    n = "<dbl>",
-    l = "<lgl>",
-    x = "<list>",
-    paste0("<", code, ">")
+    c = "chr",
+    n = "dbl",
+    l = "lgl",
+    x = "list",
+    code
   )
 }
 
@@ -758,11 +760,19 @@ print_igraph_attr_summary_cli <- function(x) {
   cat("\n", cli::rule(left = "Attributes"), "\n", sep = "")
   arrow <- if (cli::is_utf8_output()) "\u2192" else "->"
 
+  # Style names and type codes via cli's semantic classes (`.field`, `.cls`)
+  # rather than hand-picked colors, so cli's theme owns the palette and it
+  # respects NO_COLOR / non-tty output. `.cls` also supplies the `<...>`.
   format_line <- function(label, names, codes) {
-    parts <- paste0(
-      cli::col_yellow(names),
-      " ",
-      cli::col_silver(vapply(codes, attr_label_cli, character(1)))
+    labels <- vapply(codes, attr_label_cli, character(1))
+    parts <- vapply(
+      seq_along(names),
+      function(i) {
+        nm <- names[i]
+        lbl <- labels[i]
+        cli::format_inline("{.field {nm}} {.cls {lbl}}")
+      },
+      character(1)
     )
     paste0(arrow, " ", label, paste(parts, collapse = ", "))
   }
