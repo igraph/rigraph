@@ -1422,10 +1422,19 @@ print.igraph.vs <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
-  if (is_cli_style()) {
-    return(print_igraph_vs_cli(x, full = full, id = id, ...))
+  if (!is_cli_style()) {
+    return(print_igraph_vs_legacy(x, full = full, id = id, ...))
   }
 
+  print_igraph_vs_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_vs_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_vs_graph(x)
   if (!is.null(graph)) {
     vertices <- V(graph)
@@ -1543,10 +1552,19 @@ print.igraph.es <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
-  if (is_cli_style()) {
-    return(print_igraph_es_cli(x, full = full, id = id, ...))
+  if (!is_cli_style()) {
+    return(print_igraph_es_legacy(x, full = full, id = id, ...))
   }
 
+  print_igraph_es_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_es_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(
