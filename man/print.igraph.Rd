@@ -100,6 +100,11 @@ As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
 
 As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
 \code{print_all()}.
+
+Set \code{igraph_options(print.style = "cli")} to switch to a cli-styled
+output with section rules, typed attribute listings and Unicode arrows
+for edges. The default \code{"classic"} keeps the historical
+\verb{IGRAPH ... DNW-} header relied on by parsers and tutorials.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
