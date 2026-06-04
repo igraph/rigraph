@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.3.2.9010
+
+### Features
+
+- Add tooling for parameter migration
+  ([\#2684](https://github.com/igraph/rigraph/issues/2684)).
+
 ## igraph 2.3.2.9009
 
 ### Bug fixes
