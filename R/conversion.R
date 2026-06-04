@@ -304,56 +304,6 @@ edge_attr_as_weights <- function(graph, name, call) {
   as.numeric(value)
 }
 
-# Recover a legacy positional `attr` argument passed via `...`.
-#
-# Before 3.0.0, `attr` was the 3rd positional slot of as_adjacency_matrix()
-# and as_biadjacency_matrix(). The new signatures insert `...` in that slot
-# and move `weights`/`attr` after the dots, so calls like
-#   as_adjacency_matrix(g, "both", "weight")
-# would otherwise hard-fail via rlang::check_dots_empty().
-#
-# Dispatcher is dm-style: discriminate on whether dots are named or not
-# (cynkra/dm R/filter-dm.R, dm_filter_api1()). Named extras stay an error
-# (dots are reserved for future extension); a single unnamed character
-# scalar is the legacy `attr` value and gets a soft deprecation.
-#
-# `user_env` is threaded through so `lifecycle::deprecate_soft()` recognises
-# the caller's frame as user-facing (otherwise its is_direct() check sees
-# the igraph namespace and silently swallows the warning).
-recover_positional_attr <- function(
-  ...,
-  fn,
-  env = rlang::caller_env(),
-  user_env = rlang::caller_env()
-) {
-  dots <- list(...)
-  if (length(dots) == 0L) {
-    return(NULL)
-  }
-
-  nms <- rlang::names2(dots)
-  unnamed <- dots[!nzchar(nms)]
-
-  if (
-    length(dots) == 1L &&
-      length(unnamed) == 1L &&
-      is.character(unnamed[[1L]]) &&
-      length(unnamed[[1L]]) == 1L
-  ) {
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      sprintf("%s(attr = )", fn),
-      sprintf("%s(weights = )", fn),
-      details = "Pass the edge-attribute name by name (e.g. `weights = \"weight\"`).",
-      user_env = user_env
-    )
-    return(unnamed[[1L]])
-  }
-
-  rlang::check_dots_empty(env = env)
-  NULL
-}
-
 get.adjacency.dense <- function(
   graph,
   type = c("both", "upper", "lower"),
@@ -500,21 +450,39 @@ as_adjacency_matrix <- function(
 ) {
   ensure_igraph(graph)
 
-  user_env <- rlang::caller_env()
-  recovered_attr <- recover_positional_attr(
-    ...,
-    fn = "as_adjacency_matrix",
-    user_env = user_env
-  )
-  # Route into `weights` (not `attr`) so resolve_edge_weights() does not
-  # emit its own deprecation on top of the one we already issued.
-  if (
-    !is.null(recovered_attr) &&
-      !lifecycle::is_present(attr) &&
-      is.null(weights)
-  ) {
-    weights <- recovered_attr
+  # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        attr = attr,
+        edges = edges,
+        names = names,
+        sparse = sparse
+      ),
+      recover_new = c("weights", "edges", "names", "sparse"),
+      recover_old = c("attr", "edges", "names", "sparse"),
+      match_names = c("attr", "weights", "attr", "edges", "names", "sparse"),
+      match_to = c("weights", "weights", "attr", "edges", "names", "sparse"),
+      defaults = list(
+        weights = NULL,
+        attr = deprecated(),
+        edges = deprecated(),
+        names = TRUE,
+        sparse = igraph_opt("sparsematrices")
+      ),
+      head_args = c("graph", "type"),
+      fn_name = "as_adjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
   }
+  # END GENERATED ARG_HANDLE
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
@@ -524,8 +492,7 @@ as_adjacency_matrix <- function(
     graph,
     weights,
     attr,
-    fn = "as_adjacency_matrix",
-    user_env = user_env
+    fn = "as_adjacency_matrix"
   )
 
   if (sparse) {
@@ -1216,19 +1183,37 @@ as_biadjacency_matrix <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  user_env <- rlang::caller_env()
-  recovered_attr <- recover_positional_attr(
-    ...,
-    fn = "as_biadjacency_matrix",
-    user_env = user_env
-  )
-  if (
-    !is.null(recovered_attr) &&
-      !lifecycle::is_present(attr) &&
-      is.null(weights)
-  ) {
-    weights <- recovered_attr
+  # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        attr = attr,
+        names = names,
+        sparse = sparse
+      ),
+      recover_new = c("weights", "names", "sparse"),
+      recover_old = c("attr", "names", "sparse"),
+      match_names = c("attr", "weights", "attr", "names", "sparse"),
+      match_to = c("weights", "weights", "attr", "names", "sparse"),
+      defaults = list(
+        weights = NULL,
+        attr = deprecated(),
+        names = TRUE,
+        sparse = FALSE
+      ),
+      head_args = c("graph", "types"),
+      fn_name = "as_biadjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
   }
+  # END GENERATED ARG_HANDLE
 
   names <- as.logical(names)
   sparse <- as.logical(sparse)
@@ -1237,8 +1222,7 @@ as_biadjacency_matrix <- function(
     graph,
     weights,
     attr,
-    fn = "as_biadjacency_matrix",
-    user_env = user_env
+    fn = "as_biadjacency_matrix"
   )
 
   if (sparse) {

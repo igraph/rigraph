@@ -390,12 +390,13 @@ test_that("as_adjacency_matrix() recovers legacy positional `attr`", {
 
 test_that("as_adjacency_matrix() keeps hard errors for unrecoverable dots", {
   g <- make_full_graph(4, directed = FALSE)
-  # Numeric in `...` is not a legacy `attr` value (always character) -> error.
-  expect_error(as_adjacency_matrix(g, "both", 1:6))
-  # Multiple unnamed positionals -> error.
-  expect_error(as_adjacency_matrix(g, "both", "weight", "extra"))
-  # Unknown named extra -> error.
+  # Unknown named argument in `...` -> error.
   expect_error(as_adjacency_matrix(g, "both", foo = "weight"))
+  # More positionals than the pre-3.0.0 signature
+  # `(graph, type, attr, edges, names, sparse)` can absorb -> error.
+  expect_error(
+    as_adjacency_matrix(g, "both", "weight", FALSE, TRUE, FALSE, "too many")
+  )
 })
 
 test_that("as_adjacency_matrix() dense/sparse parity for arbitrary weights", {
@@ -460,9 +461,13 @@ test_that("as_biadjacency_matrix() recovers legacy positional `attr`", {
 
 test_that("as_biadjacency_matrix() keeps hard errors for unrecoverable dots", {
   g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
-  expect_error(as_biadjacency_matrix(g, NULL, 1:3))
-  expect_error(as_biadjacency_matrix(g, NULL, "weight", "extra"))
+  # Unknown named argument in `...` -> error.
   expect_error(as_biadjacency_matrix(g, NULL, foo = "weight"))
+  # More positionals than the pre-3.0.0 signature
+  # `(graph, types, attr, names, sparse)` can absorb -> error.
+  expect_error(
+    as_biadjacency_matrix(g, NULL, "weight", TRUE, FALSE, "too many")
+  )
 })
 
 test_that("as_adj works", {
