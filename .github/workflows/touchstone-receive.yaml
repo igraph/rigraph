@@ -54,7 +54,11 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: lorenzwalthert/touchstone/actions/receive@v1
+      # Pinned to a default-branch SHA: the released tags (v1, v1.0.1) still
+      # use actions/{upload,download}-artifact@v2, which GitHub now auto-fails.
+      # This commit uses artifact@v4/v5 and github-script@v7. Bump to a tag once
+      # upstream cuts a release that includes the fix.
+      - uses: lorenzwalthert/touchstone/actions/receive@7e6072a25d1f8d72649188bc711113039ef94b75
         with:
           cache-version: 1
           benchmarking_repo: ${{ matrix.config.benchmarking_repo }}
