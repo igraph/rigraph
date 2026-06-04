@@ -165,26 +165,26 @@ plot(g)
 # nei() special function
 g <- make_graph(c(1, 2, 2, 3, 2, 4, 4, 2))
 V(g)[.nei(c(2, 4))]
-#> + 4/4 vertices, from 5cb400b:
+#> + 4/4 vertices, from 53f187a:
 #> [1] 1 2 3 4
 V(g)[.nei(c(2, 4), "in")]
-#> + 3/4 vertices, from 5cb400b:
+#> + 3/4 vertices, from 53f187a:
 #> [1] 1 2 4
 V(g)[.nei(c(2, 4), "out")]
-#> + 3/4 vertices, from 5cb400b:
+#> + 3/4 vertices, from 53f187a:
 #> [1] 2 3 4
 
 # -----------------------------------------------------------------
 # The same with vertex names
 g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)[.nei(c("B", "D"))]
-#> + 4/4 vertices, named, from f8d0eba:
+#> + 4/4 vertices, named, from 90410bd:
 #> [1] A B C D
 V(g)[.nei(c("B", "D"), "in")]
-#> + 3/4 vertices, named, from f8d0eba:
+#> + 3/4 vertices, named, from 90410bd:
 #> [1] A B D
 V(g)[.nei(c("B", "D"), "out")]
-#> + 3/4 vertices, named, from f8d0eba:
+#> + 3/4 vertices, named, from 90410bd:
 #> [1] B C D
 
 # -----------------------------------------------------------------
@@ -192,7 +192,7 @@ V(g)[.nei(c("B", "D"), "out")]
 g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)$color <- c("red", "red", "green", "green")
 V(g)[color == "red"]
-#> + 2/4 vertices, named, from 1166a10:
+#> + 2/4 vertices, named, from c240f03:
 #> [1] A B
 
 # Indexing with a variable whose name matches the name of an attribute
@@ -200,6 +200,6 @@ V(g)[color == "red"]
 V(g)$x <- 10:13
 x <- 2
 V(g)[.env$x]
-#> + 1/4 vertex, named, from 1166a10:
+#> + 1/4 vertex, named, from c240f03:
 #> [1] B
 ```
