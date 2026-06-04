@@ -21,7 +21,7 @@
       [1] "out"
       
       $order
-      -- <vertex sequence> 2/5 * named -----------------------------------------------
+      + 2/5 vertices, named:
       [1] b c
       
       $rank
@@ -29,17 +29,17 @@
       0 1 2 0 0 
       
       $parent
-      -- <vertex sequence> 5/5 * named -----------------------------------------------
+      + 5/5 vertices, named:
          a    b    c    z    d 
       <NA> <NA>    b <NA> <NA> 
       
       $pred
-      -- <vertex sequence> 5/5 * named -----------------------------------------------
+      + 5/5 vertices, named:
          a    b    c    z    d 
       <NA> <NA>    b <NA> <NA> 
       
       $succ
-      -- <vertex sequence> 5/5 * named -----------------------------------------------
+      + 5/5 vertices, named:
          a    b    c    z    d 
       <NA>    c <NA> <NA> <NA> 
       
@@ -51,7 +51,7 @@
       [1] "out"
       
       $father
-      -- <vertex sequence> 5/5 * named -----------------------------------------------
+      + 5/5 vertices, named:
          a    b    c    z    d 
       <NA> <NA>    b <NA> <NA> 
       

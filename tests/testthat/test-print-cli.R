@@ -1,5 +1,5 @@
 test_that("cli print.igraph: undirected unnamed ring", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   g <- make_ring(5)
   expect_snapshot(print(g))
@@ -7,7 +7,7 @@ test_that("cli print.igraph: undirected unnamed ring", {
 })
 
 test_that("cli print.igraph: directed named weighted", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   g <- make_ring(3, directed = TRUE) |>
     set_vertex_attr("name", value = c("A", "B", "C")) |>
@@ -18,7 +18,7 @@ test_that("cli print.igraph: directed named weighted", {
 })
 
 test_that("cli print.igraph: bipartite", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   g <- make_bipartite_graph(
     types = c(FALSE, FALSE, TRUE, TRUE),
@@ -28,7 +28,7 @@ test_that("cli print.igraph: bipartite", {
 })
 
 test_that("cli print.igraph: empty graph has no edges section", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   expect_snapshot(print(make_empty_graph(0)))
   expect_snapshot(print(make_empty_graph(3, directed = FALSE)))
@@ -37,7 +37,6 @@ test_that("cli print.igraph: empty graph has no edges section", {
 test_that("cli print.igraph: full mode with all attribute sections", {
   local_igraph_options(
     print.style = "cli",
-    print.id = FALSE,
     print.full = TRUE,
     print.graph.attributes = TRUE,
     print.vertex.attributes = TRUE,
@@ -52,7 +51,7 @@ test_that("cli print.igraph: full mode with all attribute sections", {
 })
 
 test_that("cli print.igraph.vs: single and double bracket", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   g <- make_ring(3) |>
     set_vertex_attr("name", value = c("A", "B", "C")) |>
@@ -66,7 +65,7 @@ test_that("cli print.igraph.vs: single and double bracket", {
 })
 
 test_that("cli print.igraph.es: single and double bracket", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)
   g <- make_ring(3, directed = TRUE) |>
     set_vertex_attr("name", value = c("A", "B", "C")) |>
@@ -80,7 +79,7 @@ test_that("cli print.igraph.es: single and double bracket", {
 })
 
 test_that("cli print.igraph: ASCII fallback when cli.unicode = FALSE", {
-  local_igraph_options(print.style = "cli", print.id = FALSE)
+  local_igraph_options(print.style = "cli")
   withr::local_options(cli.num_colors = 1, cli.unicode = FALSE, cli.width = 80)
   g <- make_ring(3, directed = TRUE) |>
     set_vertex_attr("name", value = c("A", "B", "C"))
@@ -92,7 +91,6 @@ test_that("cli print.igraph: ASCII fallback when cli.unicode = FALSE", {
 test_that("cli print.igraph: truncation in auto mode", {
   local_igraph_options(
     print.style = "cli",
-    print.id = FALSE,
     auto.print.lines = 3
   )
   withr::local_options(cli.num_colors = 1, cli.unicode = TRUE, cli.width = 80)

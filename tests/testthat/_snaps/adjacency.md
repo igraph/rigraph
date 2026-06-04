@@ -14,12 +14,9 @@
     Code
       graph_from_adjacency_matrix(m)
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1  2 -> 1 
+      IGRAPH D--- 2 2 -- 
+      + edges:
+      [1] 2->1 2->1
     Code
       graph_from_adjacency_matrix(m, mode = "undirected")
     Condition
@@ -27,45 +24,29 @@
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric with mode = "undirected" as of igraph 1.6.0.
       i Use mode = "max" to achieve the original behavior.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -- 2  1 -- 2 
+      IGRAPH U--- 2 2 -- 
+      + edges:
+      [1] 1--2 1--2
     Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -- 2  1 -- 2 
+      IGRAPH U--- 2 2 -- 
+      + edges:
+      [1] 1--2 1--2
     Code
       graph_from_adjacency_matrix(m, weighted = TRUE)
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed * weighted
-      i 2 vertices * 1 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> edge:   weight <dbl>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1 
+      IGRAPH D-W- 2 1 -- 
+      + attr: weight (e/n)
+      + edge:
+      [1] 2->1
     Code
       graph_from_adjacency_matrix(m, weighted = "w")
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed
-      i 2 vertices * 1 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> edge:   w <dbl>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1 
+      IGRAPH D--- 2 1 -- 
+      + attr: w (e/n)
+      + edge:
+      [1] 2->1
     Code
       m2 <- structure(c(0, 0.00211360121966095, 0.00211360121966098, 0), dim = c(2L,
         2L))
@@ -75,33 +56,26 @@
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric with mode = "undirected" as of igraph 1.6.0.
       i Use mode = "max" to achieve the original behavior.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 0 edges
+      IGRAPH U--- 2 0 -- 
+      + edges:
     Code
       graph_from_adjacency_matrix(1)
     Condition
       Warning:
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be a matrix as of igraph 1.6.0.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed
-      i 1 vertices * 1 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -> 1 
+      IGRAPH D--- 1 1 -- 
+      + edge:
+      [1] 1->1
     Code
       graph_from_adjacency_matrix(1, mode = "undirected")
     Condition
       Warning:
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be a matrix as of igraph 1.6.0.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 1 vertices * 1 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -- 1 
+      IGRAPH U--- 1 1 -- 
+      + edge:
+      [1] 1--1
 
 # graph_from_adjacency_matrix() snapshot for sparse matrices
 
@@ -120,12 +94,9 @@
     Code
       graph_from_adjacency_matrix(m)
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1  2 -> 1 
+      IGRAPH D--- 2 2 -- 
+      + edges:
+      [1] 2->1 2->1
     Code
       graph_from_adjacency_matrix(m, mode = "undirected")
     Condition
@@ -133,45 +104,29 @@
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric with mode = "undirected" as of igraph 1.6.0.
       i Use mode = "max" to achieve the original behavior.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -- 2  1 -- 2 
+      IGRAPH U--- 2 2 -- 
+      + edges:
+      [1] 1--2 1--2
     Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 2 edges
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -- 2  1 -- 2 
+      IGRAPH U--- 2 2 -- 
+      + edges:
+      [1] 1--2 1--2
     Code
       graph_from_adjacency_matrix(m, weighted = TRUE)
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed * weighted
-      i 2 vertices * 1 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> edge:   weight <dbl>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1 
+      IGRAPH D-W- 2 1 -- 
+      + attr: weight (e/n)
+      + edge:
+      [1] 2->1
     Code
       graph_from_adjacency_matrix(m, weighted = "w")
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i directed
-      i 2 vertices * 1 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> edge:   w <dbl>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 2 -> 1 
+      IGRAPH D--- 2 1 -- 
+      + attr: w (e/n)
+      + edge:
+      [1] 2->1
     Code
       m2 <- Matrix::sparseMatrix(2:1, 1:2, x = c(0.00211360121966095,
         0.00211360121966098))
@@ -181,9 +136,8 @@
       The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric with mode = "undirected" as of igraph 1.6.0.
       i Use mode = "max" to achieve the original behavior.
     Output
-      -- <igraph> --------------------------------------------------------------------
-      i undirected
-      i 2 vertices * 0 edges
+      IGRAPH U--- 2 0 -- 
+      + edges:
 
 # graph_from_adjacency_matrix errors for NAs
 

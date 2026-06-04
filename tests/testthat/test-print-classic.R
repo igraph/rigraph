@@ -1,5 +1,5 @@
 test_that("print.igraph() works", {
-  local_igraph_options(print.full = TRUE, print.style = "classic")
+  local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76)
 
   g <- make_ring(5)
@@ -72,7 +72,7 @@ test_that("print.igraph() works", {
 })
 
 test_that("print.igraph() respects max.print for adjacency list formats", {
-  local_igraph_options(print.full = TRUE, print.style = "classic")
+  local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76, max.print = 3)
 
   g <- make_full_graph(6)
@@ -98,7 +98,7 @@ test_that("print.igraph() respects max.print for adjacency list formats", {
 })
 
 test_that("print.igraph() omits no message when vcount <= max.print", {
-  local_igraph_options(print.full = TRUE, print.style = "classic")
+  local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76, max.print = 10)
 
   g <- make_full_graph(6)
@@ -111,7 +111,7 @@ test_that("print.igraph() omits no message when vcount <= max.print", {
 })
 
 test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
-  local_igraph_options(print.full = TRUE, print.style = "classic")
+  local_igraph_options(print.full = TRUE)
   withr::local_options(width = 40, max.print = 2)
 
   g <- make_full_graph(20)
@@ -129,7 +129,6 @@ test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
 })
 
 test_that("print.igraph.es() uses vertex names", {
-  local_igraph_options(print.id = FALSE, print.style = "classic")
 
   g <- make_directed_graph(c("A", "B"))
   expect_snapshot({
@@ -139,7 +138,6 @@ test_that("print.igraph.es() uses vertex names", {
 
 
 test_that("vs printing", {
-  local_igraph_options(print.id = FALSE, print.style = "classic")
 
   local_rng_version("3.5.0")
   withr::local_seed(42)
@@ -156,7 +154,6 @@ test_that("vs printing", {
 })
 
 test_that("vs printing, complex attributes", {
-  local_igraph_options(print.id = FALSE, print.style = "classic")
 
   local_rng_version("3.5.0")
   withr::local_seed(42)
@@ -172,7 +169,6 @@ test_that("vs printing, complex attributes", {
 })
 
 test_that("es printing", {
-  local_igraph_options(print.id = FALSE, print.style = "classic")
 
   local_rng_version("3.5.0")
   withr::local_seed(42)
@@ -187,7 +183,6 @@ test_that("es printing", {
 })
 
 test_that("es printing, complex attributes", {
-  local_igraph_options(print.id = FALSE, print.style = "classic")
 
   local_rng_version("3.5.0")
   withr::local_seed(42)

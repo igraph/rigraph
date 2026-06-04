@@ -56,17 +56,10 @@
       i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
       For now we convert it on the fly...
     Output
-      -- <igraph> Ring graph ---------------------------------------------------------
-      i directed
-      i 3 vertices * 3 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
-      -> vertex: bar <chr>
-      -> edge:   foo <chr>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -> 2  2 -> 3  3 -> 1 
+      IGRAPH D--- 3 3 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
+      + edges:
+      [1] 1->2 2->3 3->1
     Code
       graph_version(g)
     Output
@@ -117,32 +110,18 @@
       i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
       For now we convert it on the fly...
     Output
-      -- <igraph> Ring graph ---------------------------------------------------------
-      i directed
-      i 3 vertices * 3 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
-      -> vertex: bar <chr>
-      -> edge:   foo <chr>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -> 2  2 -> 3  3 -> 1 
+      IGRAPH D--- 3 3 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
+      + edges:
+      [1] 1->2 2->3 3->1
 
 ---
 
     Code
       s[["1.5.0"]]
     Output
-      -- <igraph> Ring graph ---------------------------------------------------------
-      i directed
-      i 3 vertices * 3 edges
-      
-      -- Attributes ------------------------------------------------------------------
-      -> graph:  name <chr>, mutual <lgl>, circular <lgl>
-      -> vertex: bar <chr>
-      -> edge:   foo <chr>
-      
-      -- Edges -----------------------------------------------------------------------
-      [1] 1 -> 2  2 -> 3  3 -> 1 
+      IGRAPH D--- 3 3 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
+      + edges:
+      [1] 1->2 2->3 3->1
 
