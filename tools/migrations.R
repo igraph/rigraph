@@ -74,12 +74,14 @@ migrations <- list(
 
   # --- test fixture --------------------------------------------------------
   # Exercises the generator end-to-end without migrating a real function. The
-  # arg names are chosen to cover every recovery path: a rename (`weight ->
-  # weights`), unique abbreviations (`ty`, `dir`) and an ambiguous one (`weig`
-  # matches both `weight` and `weights`). Consumed by
+  # arg names are chosen to cover every recovery path: two renames (`weight ->
+  # weights`, `kind -> type`), a surviving arg (`directed`), unique
+  # abbreviations (`kin`, `dir`) and an ambiguous one (`weig` matches both
+  # `weight` and `weights`). Head args (`graph`, `n`) stay before `...` and are
+  # matched by base R, including abbreviations like `gr =`. Consumed by
   # tests/testthat/test-migration-fixture.R.
   migration_fixture = list(
-    old = function(graph, n, weight = weights, type, directed) {},
+    old = function(graph, n, weight = weights, kind = type, directed) {},
     new = function(
       graph,
       n,

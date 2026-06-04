@@ -1,4 +1,4 @@
-# Test shapes() function
+# jarl-ignore-file implicit_assignment: just the way it works
 test_that("shapes() lists all available shapes", {
   all_shapes <- shapes()
   expect_type(all_shapes, "character")
