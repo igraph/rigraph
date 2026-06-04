@@ -286,6 +286,32 @@
   }
 }
 
+# Print the "single index" (`[[`) edge detail view: one row per edge with
+# tail/head names, their raw numeric ids (tid/hid) and one column per atomic
+# edge attribute. If any attribute is list-valued, the frame can't hold it, so
+# fall back to a per-attribute named list sliced to the selected edges.
+print_edge_detail <- function(graph, edges) {
+  ea <- edge_attr(graph)
+  if (all(vapply(ea, is.atomic, logical(1)))) {
+    etail <- tail_of(graph, edges)
+    ehead <- head_of(graph, edges)
+    df <- data.frame(
+      stringsAsFactors = FALSE,
+      tail = as_ids(etail),
+      head = as_ids(ehead),
+      tid = as.vector(etail),
+      hid = as.vector(ehead)
+    )
+    if (length(ea)) {
+      ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
+      df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
+    }
+    print(df)
+  } else {
+    print(lapply(ea, "[", as.vector(edges)))
+  }
+}
+
 .print.edges.compressed <- function(
   x,
   edges = E(x),
@@ -316,25 +342,7 @@
 
   if (is_single_index(edges) && !is.null(x)) {
     ## Double bracket
-    ea <- edge_attr(x)
-    if (all(sapply(ea, is.atomic))) {
-      etail <- tail_of(x, edges)
-      ehead <- head_of(x, edges)
-      df <- data.frame(
-        stringsAsFactors = FALSE,
-        tail = as_ids(etail),
-        head = as_ids(ehead),
-        tid = as.vector(etail),
-        hid = as.vector(ehead)
-      )
-      if (length(ea)) {
-        ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
-        df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
-      }
-      print(df)
-    } else {
-      print(lapply(ea, "[", as.vector(edges)))
-    }
+    print_edge_detail(x, edges)
   } else if (is.null(max.lines)) {
     .print.edges.compressed.all(x, edges, names)
   } else {
@@ -548,9 +556,10 @@ print_all <- function(object, ...) {
 #' As of igraph 1.1.1, the `str.igraph` function is defunct, use
 #' `print_all()`.
 #'
-#' Set `igraph_options(print.style = "cli")` to switch to a cli-styled
-#' output with section rules, typed attribute listings and Unicode arrows
-#' for edges. The default `"classic"` keeps the historical
+#' Output style is controlled by the `print.style` igraph option. The default
+#' `"cli"` produces cli-styled output with section rules, typed attribute
+#' listings and Unicode arrows for edges. Set
+#' `igraph_options(print.style = "classic")` for the historical
 #' `IGRAPH ... DNW-` header relied on by parsers and tutorials.
 #'
 #' @aliases print.igraph print_all summary.igraph str.igraph
@@ -658,6 +667,40 @@ is_cli_style <- function() {
   identical(igraph_opt("print.style"), "cli")
 }
 
+# Emit a cli section rule. The leading blank line separates this section from
+# the previous one; `blank = FALSE` omits it for the first (header) rule.
+cli_section <- function(title, right = NULL, blank = TRUE) {
+  rule <- if (is.null(right)) {
+    cli::rule(left = title)
+  } else {
+    cli::rule(left = title, right = right)
+  }
+  cat(if (blank) "\n", rule, "\n", sep = "")
+}
+
+# Print a character vector either in full (`max.lines = NULL`) or truncated to
+# `max.lines` with cli's omission footer.
+print_cli_lines <- function(x, max.lines, omitted_footer) {
+  if (is.null(max.lines)) {
+    print(x, quote = FALSE)
+  } else {
+    head_print(
+      x,
+      omitted_footer = omitted_footer,
+      quote = FALSE,
+      max_lines = max.lines
+    )
+  }
+}
+
+# Format edge endpoints as "tail <arrow> head " strings. Endpoints are not
+# padded to a common width, so each edge reads with a single space around the
+# delimiter; the trailing space yields two spaces between edges once print()
+# adds its own single-space separator.
+format_cli_edge_endpoints <- function(endpoints, arrow) {
+  paste0(endpoints[, 1], " ", arrow, " ", endpoints[, 2], " ")
+}
+
 # Leading + interleaved middot separators for a vector of flag labels;
 # returns "" when there are no flags (avoids an if/else at the call site).
 flag_suffix_cli <- function(flags, middot) {
@@ -714,11 +757,8 @@ print_igraph_header_cli <- function(x, id) {
   graph_id_short <- if (isTRUE(id)) substr(graph_id(x), 1, 7) else NA_character_
 
   # Show the graph id on the right of the rule only when we have one.
-  if (!is.na(graph_id_short) && nzchar(graph_id_short)) {
-    cat(cli::rule(left = title, right = graph_id_short), "\n", sep = "")
-  } else {
-    cat(cli::rule(left = title), "\n", sep = "")
-  }
+  has_id <- !is.na(graph_id_short) && nzchar(graph_id_short)
+  cli_section(title, right = if (has_id) graph_id_short, blank = FALSE)
 
   properties <- c(
     if (is_directed(x)) "directed" else "undirected",
@@ -757,7 +797,7 @@ print_igraph_attr_summary_cli <- function(x) {
     return(invisible(NULL))
   }
 
-  cat("\n", cli::rule(left = "Attributes"), "\n", sep = "")
+  cli_section("Attributes")
   arrow <- if (cli::is_utf8_output()) "\u2192" else "->"
 
   # Style names and type codes via cli's semantic classes (`.field`, `.cls`)
@@ -798,7 +838,7 @@ print_igraph_graph_attrs_cli <- function(x) {
   if (length(attr_names) == 0) {
     return(invisible(NULL))
   }
-  cat("\n", cli::rule(left = "Graph attributes"), "\n", sep = "")
+  cli_section("Graph attributes")
   for (attr_name in attr_names) {
     cat(cli::format_inline("{.field {attr_name}}:"), "\n", sep = "")
     indent_print(graph_attr(x, attr_name), .indent = "  ")
@@ -809,7 +849,7 @@ print_igraph_vertex_attrs_cli <- function(x) {
   if (length(vertex_attr_names(x)) == 0) {
     return(invisible(NULL))
   }
-  cat("\n", cli::rule(left = "Vertex attributes"), "\n", sep = "")
+  cli_section("Vertex attributes")
   # reuse classic tabular renderer
   .print.vertex.attributes.old(x, full = TRUE, max.lines = NULL)
 }
@@ -847,7 +887,7 @@ print_igraph_edges_cli <- function(
   } else {
     paste0("Edges", title_suffix)
   }
-  cat("\n", cli::rule(left = title), "\n", sep = "")
+  cli_section(title)
 
   arrow <- edge_arrow_cli(is_directed(x))
   endpoints <- ends(x, edges, names = is_named_g)
@@ -879,28 +919,8 @@ print_igraph_edges_cli <- function(
     }
     print(tab)
   } else {
-    # Plain edge list. Endpoints are not padded to a common width, so each
-    # edge reads as "tail ─ head" with a single space around the delimiter.
-    # The trailing space puts two spaces between edges once print() adds its
-    # own single-space separator.
-    formatted <- paste0(
-      endpoints[, 1],
-      " ",
-      arrow,
-      " ",
-      endpoints[, 2],
-      " "
-    )
-    if (is.null(max.lines)) {
-      print(formatted, quote = FALSE)
-    } else {
-      head_print(
-        formatted,
-        omitted_footer = "+ ... omitted several edges\n",
-        quote = FALSE,
-        max_lines = max.lines
-      )
-    }
+    formatted <- format_cli_edge_endpoints(endpoints, arrow)
+    print_cli_lines(formatted, max.lines, "+ ... omitted several edges\n")
   }
 }
 

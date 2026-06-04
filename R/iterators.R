@@ -1590,7 +1590,7 @@ print_igraph_vs_cli <- function(
     total,
     flag_suffix_cli(flags, middot)
   )
-  cat(cli::rule(left = title), "\n", sep = "")
+  cli_section(title, blank = FALSE)
 
   # A vertex sequence prints in one of two layouts:
   #
@@ -1614,7 +1614,7 @@ print_igraph_vs_cli <- function(
     # A data.frame needs flat columns, so it works only when every attribute is
     # atomic. If any attribute is list-valued, drop to a named list sliced to
     # the selected vertices instead of forcing it into a table.
-    if (all(sapply(vertex_attrs, is.atomic))) {
+    if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
       print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
         as.vector(x),
         ,
@@ -1634,16 +1634,8 @@ print_igraph_vs_cli <- function(
       x2 <- as.vector(x)
     }
     if (length(x2)) {
-      if (isTRUE(full)) {
-        print(x2, quote = FALSE)
-      } else {
-        head_print(
-          x2,
-          omitted_footer = "+ ... omitted several vertices\n",
-          quote = FALSE,
-          max_lines = igraph_opt("auto.print.lines")
-        )
-      }
+      max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
+      print_cli_lines(x2, max_lines, "+ ... omitted several vertices\n")
     }
   }
 
@@ -1678,7 +1670,7 @@ print_igraph_es_cli <- function(
     total,
     flag_suffix_cli(flags, middot)
   )
-  cat(cli::rule(left = title), "\n", sep = "")
+  cli_section(title, blank = FALSE)
 
   if (length(x) == 0) {
     return(invisible(x))
@@ -1698,67 +1690,17 @@ print_igraph_es_cli <- function(
   # an edge always has endpoints to tabulate (the tail/head names plus their
   # raw numeric ids in tid/hid), so the table is never empty.
   if (is_single_index(x) && !is.null(graph)) {
-    edge_attrs <- edge_attr(graph)
-    # A data.frame needs flat columns, so the endpoint table is built only when
-    # every attribute is atomic; a list-valued attribute drops to a named list
-    # slice instead (and loses the endpoint columns, as there is no frame).
-    if (all(sapply(edge_attrs, is.atomic))) {
-      etail <- tail_of(graph, x)
-      ehead <- head_of(graph, x)
-      df <- data.frame(
-        stringsAsFactors = FALSE,
-        tail = as_ids(etail),
-        head = as_ids(ehead),
-        tid = as.vector(etail),
-        hid = as.vector(ehead)
-      )
-      if (length(edge_attrs)) {
-        edge_attrs <- do_call(
-          data.frame,
-          .args = edge_attrs,
-          stringsAsFactors = FALSE
-        )
-        df <- cbind(df, edge_attrs[as.vector(x), , drop = FALSE])
-      }
-      print(df)
-    } else {
-      print(lapply(edge_attrs, "[", as.vector(x)))
-    }
+    print_edge_detail(graph, x)
     return(invisible(x))
   }
 
-  max_lines <- if (isTRUE(full)) {
-    NULL
-  } else {
-    igraph_opt("auto.print.lines")
-  }
+  max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
 
   if (!is.null(graph)) {
-    # Live graph: render endpoints with arrows. The trailing space puts two
-    # spaces between edges once print() adds its own single-space separator.
+    # Live graph: render endpoints with arrows.
     arrow <- edge_arrow_cli(is_directed(graph))
     endpoints <- ends(graph, x, names = has_vnames || is_named(graph))
-    # Endpoints are not padded to a common width, so each edge reads as
-    # "tail ─ head" with a single space around the delimiter. The trailing
-    # space puts two spaces between edges once print() adds its own separator.
-    formatted <- paste0(
-      endpoints[, 1],
-      " ",
-      arrow,
-      " ",
-      endpoints[, 2],
-      " "
-    )
-    if (is.null(max_lines)) {
-      print(formatted, quote = FALSE)
-    } else {
-      head_print(
-        formatted,
-        omitted_footer = "+ ... omitted several edges\n",
-        quote = FALSE,
-        max_lines = max_lines
-      )
-    }
+    body <- format_cli_edge_endpoints(endpoints, arrow)
   } else {
     # Graph was deleted: fall back to stored vertex names / ids.
     body <- if (!is.null(attr(x, "vnames"))) {
@@ -1768,17 +1710,8 @@ print_igraph_es_cli <- function(
     } else {
       as.vector(x)
     }
-    if (is.null(max_lines)) {
-      print(body, quote = FALSE)
-    } else {
-      head_print(
-        body,
-        omitted_footer = "+ ... omitted several edges\n",
-        quote = FALSE,
-        max_lines = max_lines
-      )
-    }
   }
+  print_cli_lines(body, max_lines, "+ ... omitted several edges\n")
   invisible(x)
 }
 
