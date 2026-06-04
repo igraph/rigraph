@@ -1592,13 +1592,28 @@ print_igraph_vs_cli <- function(
   )
   cat(cli::rule(left = title), "\n", sep = "")
 
-  # Single index into a graph with attributes: show the attribute table.
+  # A vertex sequence prints in one of two layouts:
+  #
+  #   * detailed -- one row per selected vertex with every vertex attribute as
+  #     a column (a metadata table); produced by `V(g)[[...]]`.
+  #   * compact  -- a bare list of vertex ids, or names when present; produced
+  #     by `V(g)[...]`.
+  #
+  # `[[` and `[` build the *same* underlying sequence: `[[.igraph.vs` merely
+  # tags its result with a "single" attribute, which is_single_index() reads
+  # here. So the only signal asking for the detailed view is that flag. We use
+  # the table only when it is set AND the graph is still alive (a sequence can
+  # outlive its graph) AND the graph actually has attributes to tabulate;
+  # anything else falls through to the compact list below.
   if (
     is_single_index(x) &&
       !is.null(graph) &&
       length(vertex_attr_names(graph)) > 0
   ) {
     vertex_attrs <- vertex_attr(graph)
+    # A data.frame needs flat columns, so it works only when every attribute is
+    # atomic. If any attribute is list-valued, drop to a named list sliced to
+    # the selected vertices instead of forcing it into a table.
     if (all(sapply(vertex_attrs, is.atomic))) {
       print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
         as.vector(x),
@@ -1619,7 +1634,7 @@ print_igraph_vs_cli <- function(
       x2 <- as.vector(x)
     }
     if (length(x2)) {
-      if (is.logical(full) && full) {
+      if (isTRUE(full)) {
         print(x2, quote = FALSE)
       } else {
         head_print(
@@ -1669,9 +1684,24 @@ print_igraph_es_cli <- function(
     return(invisible(x))
   }
 
-  # Single index into a graph: show endpoints plus the attribute table.
+  # An edge sequence prints in one of two layouts, mirroring vertex sequences:
+  #
+  #   * detailed -- one row per selected edge with its endpoints and every edge
+  #     attribute as columns (a metadata table); produced by `E(g)[[...]]`.
+  #   * compact  -- a list of "tail <arrow> head" strings; produced by
+  #     `E(g)[...]`. Handled further below.
+  #
+  # As with vertex sequences, `[[` and `[` build the same underlying sequence;
+  # `[[.igraph.es` only tags its result with the "single" attribute that
+  # is_single_index() reads here. The table needs only that flag and a live
+  # graph -- unlike the vertex case there is no attribute-count check, because
+  # an edge always has endpoints to tabulate (the tail/head names plus their
+  # raw numeric ids in tid/hid), so the table is never empty.
   if (is_single_index(x) && !is.null(graph)) {
     edge_attrs <- edge_attr(graph)
+    # A data.frame needs flat columns, so the endpoint table is built only when
+    # every attribute is atomic; a list-valued attribute drops to a named list
+    # slice instead (and loses the endpoint columns, as there is no frame).
     if (all(sapply(edge_attrs, is.atomic))) {
       etail <- tail_of(graph, x)
       ehead <- head_of(graph, x)
@@ -1697,7 +1727,7 @@ print_igraph_es_cli <- function(
     return(invisible(x))
   }
 
-  max_lines <- if (identical(full, TRUE)) {
+  max_lines <- if (isTRUE(full)) {
     NULL
   } else {
     igraph_opt("auto.print.lines")
