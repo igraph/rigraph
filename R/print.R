@@ -603,8 +603,8 @@ print.igraph <- function(
 ) {
   ensure_igraph(x)
 
-  if (is_cli_style()) {
-    return(print_igraph_cli(
+  if (!is_cli_style()) {
+    return(print_igraph_legacy(
       x,
       full = full,
       graph.attributes = graph.attributes,
@@ -617,6 +617,30 @@ print.igraph <- function(
     ))
   }
 
+  print_igraph_cli(
+    x,
+    full = full,
+    graph.attributes = graph.attributes,
+    vertex.attributes = vertex.attributes,
+    edge.attributes = edge.attributes,
+    names = names,
+    max.lines = max.lines,
+    id = id,
+    ...
+  )
+}
+
+print_igraph_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  graph.attributes = igraph_opt("print.graph.attributes"),
+  vertex.attributes = igraph_opt("print.vertex.attributes"),
+  edge.attributes = igraph_opt("print.edge.attributes"),
+  names = TRUE,
+  max.lines = igraph_opt("auto.print.lines"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
     if (graph.attributes) {
@@ -653,9 +677,13 @@ print.igraph <- function(
 #' @family print
 #' @export
 summary.igraph <- function(object, ...) {
-  if (is_cli_style()) {
-    return(summary_igraph_cli(object))
+  if (!is_cli_style()) {
+    return(summary_igraph_legacy(object))
   }
+  summary_igraph_cli(object)
+}
+
+summary_igraph_legacy <- function(object, ...) {
   .print.header(object)
   invisible(object)
 }
