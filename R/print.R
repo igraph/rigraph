@@ -864,14 +864,16 @@ print_igraph_edges_cli <- function(
     }
     print(tab)
   } else {
-    # Plain edge list. The trailing space puts two spaces between edges
-    # once print() adds its own single-space separator.
+    # Plain edge list. Endpoints are not padded to a common width, so each
+    # edge reads as "tail ─ head" with a single space around the delimiter.
+    # The trailing space puts two spaces between edges once print() adds its
+    # own single-space separator.
     formatted <- paste0(
-      format(endpoints[, 1]),
+      endpoints[, 1],
       " ",
       arrow,
       " ",
-      format(endpoints[, 2]),
+      endpoints[, 2],
       " "
     )
     if (is.null(max.lines)) {
