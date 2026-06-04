@@ -8,3 +8,18 @@ runs:
       run: |
         echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee ~/.R/Makevars
       shell: bash
+
+    # Regenerate the in-place ARG_HANDLE blocks from tools/migrations.R and fail
+    # if they have drifted. Runs from the source checkout (R is available after
+    # install; tools/ is excluded from the built package) so a contributor who
+    # forgot to regenerate gets a hard failure. Local dev refreshes them
+    # automatically via tests/testthat/helper-migrations.R.
+    - name: Regenerate argument-migration blocks and check for drift
+      run: |
+        Rscript tools/generate-migrations.R
+        if ! git diff --exit-code -- R; then
+          echo "::error::Generated ARG_HANDLE blocks are out of sync with tools/migrations.R."
+          echo "Run 'Rscript tools/generate-migrations.R' and commit the result."
+          exit 1
+        fi
+      shell: bash

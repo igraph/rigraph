@@ -569,9 +569,12 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
 
   for (k in 1:nMerge) {
     x <- merges[k, 1:2]
-    if (any(neg <- x >= 0)) {
+    neg <- (x >= 0)
+
+    if (any(neg)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
+
     if (all(neg)) {
       # two leaves
       zk <- as.list(x + 1)
@@ -607,7 +610,8 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
         2
     }
     attr(zk, "height") <- oHgt[k]
-    z[[k <- paste0("g", -merges[k, 3])]] <- zk
+    k <- paste0("g", -merges[k, 3])
+    z[[k]] <- zk
   }
   z <- z[[k]]
   class(z) <- "dendrogram"

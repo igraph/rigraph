@@ -405,23 +405,44 @@
   }
 }
 
+.truncate.vertices <- function(vc) {
+  mp <- getOption("max.print")
+  if (vc <= mp) {
+    list(ind = seq_len(vc), omitted = 0)
+  } else {
+    list(ind = seq_len(mp), omitted = vc - mp)
+  }
+}
+
+.print.omitted.vertices <- function(omitted) {
+  if (omitted != 0) {
+    cat(paste(
+      '[ reached getOption("max.print") -- omitted',
+      omitted,
+      "vertices ]\n\n"
+    ))
+  }
+}
+
 .print.edges.adjlist <- function(x) {
-  ## TODO: getOption("max.print")
   cat("+ edges:\n")
-  vc <- vcount(x)
+  tr <- .truncate.vertices(vcount(x))
+  ind <- tr$ind
+
   arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
-  al <- as_adj_list(x, mode = "out")
-  w <- nchar(max(which(degree(x, mode = "in") != 0)))
-  mpl <- trunc((getOption("width") - nchar(arrow) - nchar(vc)) / (w + 1))
+  al <- as_adj_list(x, mode = "out")[ind]
+  max.ind.width <- nchar(max(ind))
+  w <- nchar(vcount(x))
+  mpl <- trunc((getOption("width") - nchar(arrow) - max.ind.width) / (w + 1))
   if (any(lengths(al) > mpl)) {
     ## Wrapping needed
-    mw <- nchar(vcount(x))
+    mw <- max.ind.width
     sm <- paste(collapse = "", rep(" ", mw + 4))
     alstr <- lapply(seq_along(al), function(x) {
       len <- length(al[[x]])
       fac <- rep(1:(len / mpl + 1), each = mpl, length.out = len)
       nei <- tapply(format(al[[x]], width = mw), fac, paste, collapse = " ")
-      mark <- paste(sep = "", format(x, width = mw), arrow)
+      mark <- paste(sep = "", format(ind[x], width = mw), arrow)
       mark <- c(mark, rep(sm, max(0, length(nei) - 1)))
       paste(sep = "", mark, nei)
     })
@@ -430,34 +451,42 @@
     alstr <- sapply(al, function(x) {
       paste(format(x, width = w), collapse = " ")
     })
-    mark <- paste(sep = "", format(seq_len(vc)), arrow)
+    mark <- paste(sep = "", format(ind), arrow)
     alstr <- paste(sep = "", mark, alstr)
     maxw <- max(nchar(alstr))
     sep <- "   "
     ncol <- trunc((getOption("width") - 1 + nchar(sep)) / (maxw + nchar(sep)))
     if (ncol > 1) {
       alstr <- format(alstr, width = maxw, justify = "left")
-      fac <- rep(1:(vc / ncol + 1), each = ncol, length.out = vc)
+      fac <- rep(
+        1:(length(ind) / ncol + 1),
+        each = ncol,
+        length.out = length(ind)
+      )
       alstr <- tapply(alstr, fac, paste, collapse = sep)
     }
     cat(alstr, sep = "\n")
   }
+  .print.omitted.vertices(tr$omitted)
 }
 
 .print.edges.adjlist.named <- function(x, edges = E(x)) {
-  ## TODO getOption("max.print")
   cat("+ edges (vertex names):\n")
 
   arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
   vn <- V(x)$name
 
-  al <- as_adj_list(x, mode = "out")
+  tr <- .truncate.vertices(vcount(x))
+  ind <- tr$ind
+
+  al <- as_adj_list(x, mode = "out")[ind]
   alstr <- sapply(al, function(x) {
     paste(collapse = ", ", vn[x])
   })
-  alstr <- paste(sep = "", format(vn), arrow, alstr)
-  alstr <- strwrap(alstr, exdent = max(nchar(vn)) + nchar(arrow))
+  alstr <- paste(sep = "", format(vn[ind]), arrow, alstr)
+  alstr <- strwrap(alstr, exdent = max(nchar(vn[ind])) + nchar(arrow))
   cat(alstr, sep = "\n")
+  .print.omitted.vertices(tr$omitted)
 }
 
 #' @family print

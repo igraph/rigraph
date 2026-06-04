@@ -1125,9 +1125,9 @@ path <- function(...) {
 #' plot(g)
 `+.igraph` <- function(e1, e2) {
   if (!is_igraph(e1) && is_igraph(e2)) {
-    tmp <- e1
+    left_operand <- e1
     e1 <- e2
-    e2 <- tmp
+    e2 <- left_operand
   }
   if (is_igraph(e2) && is_named(e1) && is_named(e2)) {
     ## Union of graphs
@@ -1312,9 +1312,9 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @export
 `*.igraph` <- function(x, n) {
   if (!is_igraph(x) && is_igraph(n)) {
-    tmp <- x
+    graph_candidate <- x
     x <- n
-    n <- tmp
+    n <- graph_candidate
   }
 
   if (is.numeric(n) && length(n) == 1) {
