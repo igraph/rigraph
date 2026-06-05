@@ -2596,7 +2596,10 @@ count_loops <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
-#'   vertices to start the search from.
+#'   vertices to start the search from. When several roots are given, they are
+#'   considered in the order they appear. If a root vertex was already reached
+#'   while searching from an earlier root, no separate search is started from
+#'   it, so it keeps the distance it was first found at rather than `0`.
 #' @param mode For directed graphs specifies the type of edges to follow.
 #'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #'   ignores edge directions completely. \sQuote{total} is a synonym for
@@ -2629,29 +2632,38 @@ count_loops <- function(graph) {
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric scalar. The root vertex that was used as the starting point of the search.
+#'       Numeric vector. The root vertex (or vertices) that was used as the
+#'       starting point of the search, as supplied in the `root` argument.
 #'     }
 #'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
 #'     \item{order}{
-#'       Numeric vector. The vertex ids, in the order in which they were visited by the search.
+#'       The vertex ids, in the order in which they were visited by the search.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option (see [igraph_options()]) is `FALSE`.
 #'     }
 #'     \item{rank}{
 #'       Numeric vector. The rank for each vertex, zero for unreachable vertices.
 #'     }
 #'     \item{parent}{
-#'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+#'       The parent of each vertex, i.e. the vertex it was discovered from.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{father}{
 #'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{pred}{
-#'       Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
+#'       The previously visited vertex for each vertex, or 0 if there was no such vertex.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{succ}{
-#'       Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
+#'       The next vertex that was visited after the current one, or 0 if there was no such vertex.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{dist}{
 #'       Numeric vector, for each vertex its distance from the root of the search tree.
@@ -2735,6 +2747,10 @@ bfs <- function(
     roots <- as_igraph_vs(graph, root) - 1
     root <- 0 # ignored anyway
   }
+  # Keep a copy of the requested root vertices (1-based) so that the result
+  # can report all of them; the C code only returns the scalar `root`, which
+  # is meaningless when multiple roots are supplied.
+  requested_roots <- if (is.null(roots)) root + 1 else roots + 1
   mode <- switch(
     igraph_match_arg(mode),
     "out" = 1,
@@ -2769,6 +2785,12 @@ bfs <- function(
     extra,
     rho
   )
+
+  # The C implementation only returns the scalar `root` it was passed, which is
+  # always 0 (reported as 1) when multiple roots are supplied. Report all of the
+  # requested root vertices instead. See
+  # https://github.com/igraph/rigraph/issues/1639
+  res$root <- requested_roots
 
   # Remove in 1.4.0
   res$neimode <- res$mode
