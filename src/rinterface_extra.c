@@ -2547,8 +2547,12 @@ static SEXP Rx_igraph_lazy_names_materialize(SEXP vec) {
   return data;
 }
 
+/* DATAPTR_RO / DATAPTR_OR_NULL are used here rather than DATAPTR: the latter
+ * is non-API as of R 4.5. The materialized cache is a standard read-only name
+ * vector, so a read-only data pointer is all callers (as.vector(), coercion)
+ * need. */
 static void *Rx_igraph_lazy_names_dataptr(SEXP vec, Rboolean writeable) {
-  return DATAPTR(Rx_igraph_lazy_names_materialize(vec));
+  return (void *) DATAPTR_RO(Rx_igraph_lazy_names_materialize(vec));
 }
 
 static const void *Rx_igraph_lazy_names_dataptr_or_null(SEXP vec) {
