@@ -27,7 +27,7 @@ create.communities(
 - membership:
 
   The membership vector of the community structure, a numeric vector
-  denoting the id of the community for each vertex. It might be `NULL`
+  denoting the ID of the community for each vertex. It might be `NULL`
   for hierarchical community structures.
 
 - algorithm:

@@ -193,11 +193,11 @@ The `length` generic function call be called on `communities` and
 returns the number of communities.
 
 The `sizes()` function returns the community sizes, in the order of
-their ids.
+their IDs.
 
 `membership()` gives the division of the vertices, into communities. It
-returns a numeric vector, one value for each vertex, the id of its
-community. Community ids start from one. Note that some algorithms
+returns a numeric vector, one value for each vertex, the ID of its
+community. Community IDs start from one. Note that some algorithms
 calculate the complete (or incomplete) hierarchical structure of the
 communities, and not just a single partitioning. For these algorithms
 typically the membership for the highest modularity value is returned,
@@ -206,7 +206,7 @@ but see also the manual pages of the individual algorithms.
 `communities()` is also the name of a function, that returns a list of
 communities, each identified by their vertices. The vertices will have
 symbolic names if the `add.vertex.names` igraph option is set, and the
-graph itself was named. Otherwise numeric vertex ids are used.
+graph itself was named. Otherwise numeric vertex IDs are used.
 
 [`modularity()`](https://r.igraph.org/reference/modularity.igraph.md)
 gives the modularity score of the partitioning. (See
@@ -218,7 +218,7 @@ the highest modularity value is returned.
 the community structure.
 
 `crossing()` returns a logical vector, with one value for each edge,
-ordered according to the edge ids. The value is `TRUE` iff the edge
+ordered according to the edge IDs. The value is `TRUE` iff the edge
 connects two different communities, according to the (best) membership
 vector, as returned by `membership()`.
 

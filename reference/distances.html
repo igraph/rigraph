@@ -51,7 +51,7 @@ given vertex."><meta property="og:image" content="https://r.igraph.org/logo.png"
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Shortest (directed or undirected) paths between vertices</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/paths.R" class="external-link"><code>R/paths.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/paths.R" class="external-link"><code>R/paths.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>distances.Rd</code></div>
     </div>
 
@@ -177,7 +177,7 @@ used, regardless of this argument.</p></dd>
 
 <dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
 <dd><p>Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex ids, but
+be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.</p></dd>
 
 
@@ -216,7 +216,7 @@ itself is always zero. For unreachable vertices <code>Inf</code> is included.</p
 <p>For <code>shortest_paths()</code> a named list with four entries is returned:</p>
 <dl><dt>vpath</dt>
 <dd><p>This itself is a list, of length <code>length(to)</code>; list
-element <code>i</code> contains the vertex ids on the path from vertex <code>from</code>
+element <code>i</code> contains the vertex IDs on the path from vertex <code>from</code>
 to vertex <code>to[i]</code> (or the other way for directed graphs depending on
 the <code>mode</code> argument). The vector also contains <code>from</code> and <code>i</code>
 as the first and last elements. If <code>from</code> is the same as <code>i</code> then
@@ -226,8 +226,8 @@ output is not requested in the <code>output</code> argument, then it will be
 <code>NULL</code>.</p></dd>
  <dt>epath</dt>
 <dd><p>This is a list similar to <code>vpath</code>, but the
-vectors of the list contain the edge ids along the shortest paths, instead
-of the vertex ids. This entry is set to <code>NULL</code> if it is not requested
+vectors of the list contain the edge IDs along the shortest paths, instead
+of the vertex IDs. This entry is set to <code>NULL</code> if it is not requested
 in the <code>output</code> argument.</p></dd>
  <dt>predecessors</dt>
 <dd><p>Numeric vector, the
@@ -245,7 +245,7 @@ The shortest paths to the same vertex are collected into consecutive elements of
 
 <dt>epaths</dt>
 <dd><p>This is a list similar to vpaths, but the vectors of the list
-contain the edge ids along the shortest paths, instead of the vertex ids.</p></dd>
+contain the edge IDs along the shortest paths, instead of the vertex IDs.</p></dd>
 
 <dt>nrgeo</dt>
 <dd><p>A vector in which each element is the number of shortest paths (geodesics)
@@ -389,43 +389,43 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5  4  3  2  1 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -441,37 +441,37 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">all_shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 edges from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 edges from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--10 9--10 8-- 9 7-- 8 6-- 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 edges from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 edges from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 2--3 3--4 4--5 5--6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 edges from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 edges from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--10 9--10 8-- 9 7-- 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 edges from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 edges from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--10 9--10 8-- 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -480,19 +480,19 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from f68a24b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 5178b18:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

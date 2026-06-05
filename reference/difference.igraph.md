@@ -45,7 +45,7 @@ corresponding operator is `%m%`.
 
 If the `byname` argument is `TRUE` (or `auto` and the graphs are all
 named), then the operation is performed based on symbolic vertex names.
-Otherwise numeric vertex ids are used.
+Otherwise numeric vertex IDs are used.
 
 [`difference()`](https://r.igraph.org/reference/difference.md) keeps all
 attributes (graph, vertex and edge) of the first graph.
@@ -107,7 +107,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH 0d442fd UN-- 11 15 -- 
+#> IGRAPH 1d92e81 UN-- 11 15 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
 #> | (g/c), center (g/n), name (v/c)
 #> + edges (vertex names):

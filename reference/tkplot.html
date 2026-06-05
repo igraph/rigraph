@@ -51,7 +51,7 @@ others have to be pre-defined."><meta property="og:image" content="https://r.igr
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Interactive plotting of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/tkplot.R" class="external-link"><code>R/tkplot.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/tkplot.R" class="external-link"><code>R/tkplot.R</code></a></small>
       <div class="d-none name"><code>tkplot.Rd</code></div>
     </div>
 
@@ -105,7 +105,7 @@ the complete list.</p></dd>
 
 
 <dt id="arg-tkp-id">tkp.id<a class="anchor" aria-label="anchor" href="#arg-tkp-id"></a></dt>
-<dd><p>The id of the tkplot window to close/reshape/etc.</p></dd>
+<dd><p>The ID of the tkplot window to close/reshape/etc.</p></dd>
 
 
 <dt id="arg-window-close">window.close<a class="anchor" aria-label="anchor" href="#arg-window-close"></a></dt>
@@ -147,7 +147,7 @@ vertices, in absolute coordinates.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>tkplot()</code> returns an integer, the id of the plot, this can be
+    <p><code>tkplot()</code> returns an integer, the ID of the plot, this can be
 used to manipulate it from the command line.</p>
 <p><code>tk_canvas()</code> returns <code>tkwin</code> object, the Tk canvas.</p>
 <p><code>tk_coords()</code> returns a matrix with the coordinates.</p>
@@ -179,9 +179,9 @@ in the first list to one in the second list will be selected.</p>
 used.</p>
 <p>The <code>tkplot()</code> command creates a new Tk window with the graphical
 representation of <code>graph</code>. The command returns an integer number, the
-tkplot id. The other commands utilize this id to be able to query or
+tkplot ID. The other commands utilize this ID to be able to query or
 manipulate the plot.</p>
-<p><code>tk_close()</code> closes the Tk plot with id <code>tkp.id</code>.</p>
+<p><code>tk_close()</code> closes the Tk plot with ID <code>tkp.id</code>.</p>
 <p><code>tk_off()</code> closes all Tk plots.</p>
 <p><code>tk_fit()</code> fits the plot to the given rectangle
 (<code>width</code> and <code>height</code>), if some of these are <code>NULL</code> the

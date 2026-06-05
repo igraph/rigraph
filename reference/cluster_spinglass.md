@@ -123,7 +123,7 @@ named list is returned with the following components:
 
 - community:
 
-  Numeric vector giving the ids of the vertices in the same community as
+  Numeric vector giving the IDs of the vertices in the same community as
   `vertex`.
 
 - cohesion:
@@ -162,7 +162,7 @@ community detection. If the `vertex` argument is not given (or it is
 optimizing the an energy function.
 
 If the `vertex` argument is given and it is not `NULL`, then it must be
-a vertex id, and the same energy function is used to find the community
+a vertex ID, and the same energy function is used to find the community
 of the the given vertex. See also the examples below.
 
 ## Related documentation in the C library

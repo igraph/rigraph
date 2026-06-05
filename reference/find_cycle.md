@@ -30,7 +30,7 @@ find_cycle(graph, mode = c("out", "in", "all", "total"))
 ## Value
 
 A list of integer vectors, each integer vector is a path from the source
-vertex to one of the target vertices. A path is given by its vertex ids.
+vertex to one of the target vertices. A path is given by its vertex IDs.
 
 ## Related documentation in the C library
 
@@ -58,20 +58,20 @@ Graph cycles:
 g <- make_lattice(c(3, 3))
 find_cycle(g)
 #> $vertices
-#> + 4/9 vertices, from 75e1a19:
+#> + 4/9 vertices, from d14b484:
 #> [1] 9 6 5 8
 #> 
 #> $edges
-#> + 4/12 edges from 75e1a19:
+#> + 4/12 edges from d14b484:
 #> [1] 8--9 6--9 5--6 5--8
 #> 
 
 # Empty results are returned for acyclic graphs
 find_cycle(sample_tree(5))
 #> $vertices
-#> + 0/5 vertices, from d680549:
+#> + 0/5 vertices, from 1b8ea94:
 #> 
 #> $edges
-#> + 0/4 edges from d680549:
+#> + 0/4 edges from 1b8ea94:
 #> 
 ```

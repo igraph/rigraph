@@ -16,7 +16,7 @@ graph.atlas(n)
 
 - n:
 
-  The id of the graph to create.
+  The ID of the graph to create.
 
 ## Related documentation in the C library
 

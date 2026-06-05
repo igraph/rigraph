@@ -43,7 +43,7 @@ is_ivs(graph, candidate)
 ## Value
 
 `ivs()`, `largest_ivs()` and `max_ivs()` return a list containing
-numeric vertex ids, each list element is an independent vertex set.
+numeric vertex IDs, each list element is an independent vertex set.
 
 `ivs_size()` returns an integer constant.
 
@@ -113,83 +113,83 @@ ivs_size(g)
 #> [1] 4
 ivs(g, min = ivs_size(g))
 #> [[1]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 37 55 56
 #> 
 #> [[2]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 55 56 69
 #> 
 #> [[3]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 56 69 74
 #> 
 #> [[4]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  8 15 73 80
 #> 
 #> [[5]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  8 15 73 84
 #> 
 #> [[6]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 13 16 37 40
 #> 
 #> [[7]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 21 32 45 61
 #> 
 #> [[8]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 22 55 56 64
 #> 
 #> [[9]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 23 69 75 90
 #> 
 largest_ivs(g)
 #> [[1]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 21 32 45 61
 #> 
 #> [[2]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 37 55 56
 #> 
 #> [[3]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 55 56 69
 #> 
 #> [[4]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  7 56 69 74
 #> 
 #> [[5]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  8 15 73 80
 #> 
 #> [[6]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1]  8 15 73 84
 #> 
 #> [[7]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 22 55 56 64
 #> 
 #> [[8]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 23 69 75 90
 #> 
 #> [[9]]
-#> + 4/100 vertices, from cf00f6b:
+#> + 4/100 vertices, from 28023c2:
 #> [1] 13 16 37 40
 #> 
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
-#> IGRAPH c1e2654 U--- 4 0 -- Erdos-Renyi (gnp) graph
+#> IGRAPH a917ada U--- 4 0 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from c1e2654:
+#> + edges from a917ada:
 
 length(max_ivs(g))
 #> [1] 326

@@ -48,7 +48,7 @@ summary(object, ...)
 - names:
 
   Logical constant, whether to print symbolic vertex names (i.e. the
-  `name` vertex attribute) or vertex ids.
+  `name` vertex attribute) or vertex IDs.
 
 - max.lines:
 
@@ -96,7 +96,7 @@ named vertices:
 
 The first line always starts with `IGRAPH`, showing you that the object
 is an igraph graph. Then a seven character code is printed, this the
-first seven characters of the unique id of the graph. See
+first seven characters of the unique ID of the graph. See
 [`graph_id()`](https://r.igraph.org/reference/graph_id.md) for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (‘`D`’) and undirected (‘`U`’) graphs.
@@ -143,11 +143,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> IGRAPH 1378f97 U--- 10 10 -- Ring graph
+#> IGRAPH 72b6837 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 1378f97:
+#> + edges from 72b6837:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 summary(g)
-#> IGRAPH 1378f97 U--- 10 10 -- Ring graph
+#> IGRAPH 72b6837 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 ```

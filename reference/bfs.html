@@ -47,7 +47,7 @@ root vertex and spread along every edge &amp;#8220;simultaneously&amp;#8221;."><
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Breadth-first search</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>bfs.Rd</code></div>
     </div>
 
@@ -115,7 +115,7 @@ visited.</p></dd>
 
 <dt id="arg-restricted">restricted<a class="anchor" aria-label="anchor" href="#arg-restricted"></a></dt>
 <dd><p><code>NULL</code> (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.</p></dd>
 
 
@@ -180,7 +180,7 @@ starting point of the search, as supplied in the <code>root</code> argument.</p>
 Note that for undirected graphs this is always ‘all’, irrespectively of the supplied value.</p></dd>
 
 <dt>order</dt>
-<dd><p>The vertex ids, in the order in which they were visited by the search.
+<dd><p>The vertex IDs, in the order in which they were visited by the search.
 A vertex sequence (<code>igraph.vs</code>), or a numeric vector if the
 <code>return.vs.es</code> option (see <code><a href="igraph_options.html">igraph_options()</a></code>) is <code>FALSE</code>.</p></dd>
 
@@ -289,22 +289,22 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 171907f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from f9deb2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 171907f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from f9deb2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $pred</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 171907f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from f9deb2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $succ</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 171907f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from f9deb2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -314,7 +314,7 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 171907f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from f9deb2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -381,7 +381,7 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 119776b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 648c61d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>

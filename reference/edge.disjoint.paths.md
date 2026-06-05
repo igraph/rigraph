@@ -20,13 +20,13 @@ edge.disjoint.paths(graph, source = NULL, target = NULL, checks = TRUE)
 
 - source:
 
-  The id of the source vertex, for
+  The ID of the source vertex, for
   [`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)
   it can be `NULL`, see details below.
 
 - target:
 
-  The id of the target vertex, for
+  The ID of the target vertex, for
   [`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)
   it can be `NULL`, see details below.
 

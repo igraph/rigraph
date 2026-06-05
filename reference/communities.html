@@ -49,7 +49,7 @@ this class."><meta property="og:image" content="https://r.igraph.org/logo.png"><
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Functions to deal with the result of network community detection</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>communities.Rd</code></div>
     </div>
 
@@ -230,10 +230,10 @@ prints a short summary.</p>
 <p>The <code>length</code> generic function call be called on <code>communities</code> and
 returns the number of communities.</p>
 <p>The <code>sizes()</code> function returns the community sizes, in the order of their
-ids.</p>
+IDs.</p>
 <p><code>membership()</code> gives the division of the vertices, into communities. It
-returns a numeric vector, one value for each vertex, the id of its
-community. Community ids start from one. Note that some algorithms calculate
+returns a numeric vector, one value for each vertex, the ID of its
+community. Community IDs start from one. Note that some algorithms calculate
 the complete (or incomplete) hierarchical structure of the communities, and
 not just a single partitioning. For these algorithms typically the
 membership for the highest modularity value is returned, but see also the
@@ -241,14 +241,14 @@ manual pages of the individual algorithms.</p>
 <p><code>communities()</code> is also the name of a function, that returns a list of
 communities, each identified by their vertices. The vertices will have
 symbolic names if the <code>add.vertex.names</code> igraph option is set, and the
-graph itself was named. Otherwise numeric vertex ids are used.</p>
+graph itself was named. Otherwise numeric vertex IDs are used.</p>
 <p><code><a href="modularity.igraph.html">modularity()</a></code> gives the modularity score of the partitioning. (See
 <code><a href="modularity.igraph.html">modularity.igraph()</a></code> for details. For algorithms that do not
 result a single partitioning, the highest modularity value is returned.</p>
 <p><code>algorithm()</code> gives the name of the algorithm that was used to calculate
 the community structure.</p>
 <p><code>crossing()</code> returns a logical vector, with one value for each edge,
-ordered according to the edge ids. The value is <code>TRUE</code> iff the edge
+ordered according to the edge IDs. The value is <code>TRUE</code> iff the edge
 connects two different communities, according to the (best) membership
 vector, as returned by <code>membership()</code>.</p>
 <p><code>is_hierarchical()</code> checks whether a hierarchical algorithm was used to

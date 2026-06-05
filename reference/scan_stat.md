@@ -50,7 +50,7 @@ A list with entries:
 
 - arg_max_v:
 
-  The (numeric) vertex ids for the vertex with the largest locality
+  The (numeric) vertex IDs for the vertex with the largest locality
   statistics, at each time step. It is `NA` for the initial `tau + ell`
   time steps.
 

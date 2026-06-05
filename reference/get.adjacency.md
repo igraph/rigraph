@@ -50,7 +50,7 @@ get.adjacency(
 
 - edges:
 
-  **\[deprecated\]** Logical scalar, whether to return the edge ids in
+  **\[deprecated\]** Logical scalar, whether to return the edge IDs in
   the matrix. For non-existant edges zero is returned.
 
 - names:

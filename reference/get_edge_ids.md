@@ -1,4 +1,4 @@
-# Find the edge ids based on the incident vertices of the edges
+# Find the edge IDs based on the incident vertices of the edges
 
 Find the edges in an igraph graph that have the specified end points.
 This function handles multi-graph (graphs with multiple edges) and can
@@ -19,7 +19,7 @@ get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
 - vp:
 
   The incident vertices, given as a two-column data frame, two-column
-  matrix, or vector of vertex ids or symbolic vertex names. For a
+  matrix, or vector of vertex IDs or symbolic vertex names. For a
   vector, the values are interpreted pairwise, i.e. the first and second
   are used for the first edge, the third and fourth for the second, etc.
 
@@ -36,13 +36,13 @@ get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
 
 ## Value
 
-A numeric vector of edge ids, one for each pair of input vertices. If
+A numeric vector of edge IDs, one for each pair of input vertices. If
 there is no edge in the input graph for a given pair of vertices, then
 zero is reported. (If the `error` argument is `FALSE`.)
 
 ## Details
 
-igraph vertex ids are natural numbers, starting from one, up to the
+igraph vertex IDs are natural numbers, starting from one, up to the
 number of vertices in the graph. Similarly, edges are also numbered from
 one, up to the number of edges.
 
@@ -84,7 +84,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> + 2/10 edges from 6073766:
+#> + 2/10 edges from f9883a0:
 #> [1] 1--2 4--5
 
 ## non-existant edge
@@ -98,6 +98,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> + 2/5 edges from 24fbecc:
+#> + 2/5 edges from deb76f8:
 #> [1] 1->2 1->2
 ```

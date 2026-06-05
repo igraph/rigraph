@@ -16,7 +16,7 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - newlayout:
 

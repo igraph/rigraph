@@ -20,7 +20,7 @@ groups(x)
 
 A named list of numeric or character vectors. The names are just numbers
 that refer to the groups. The vectors themselves are numeric or symbolic
-vertex ids.
+vertex IDs.
 
 ## Details
 

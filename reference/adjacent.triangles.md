@@ -22,7 +22,7 @@ adjacent.triangles(graph, vids = V(graph))
 - vids:
 
   The vertices to query, all of them by default. This might be a vector
-  of numeric ids, or a character vector of symbolic vertex names for
+  of numeric IDs, or a character vector of symbolic vertex names for
   named graphs.
 
 ## Related documentation in the C library

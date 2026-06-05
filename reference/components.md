@@ -52,7 +52,7 @@ For `components()` a named list with three components:
 
 - membership:
 
-  numeric vector giving the cluster id to which each vertex belongs.
+  numeric vector giving the cluster ID to which each vertex belongs.
 
 - csize:
 
@@ -179,8 +179,8 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> IGRAPH bcedee4 U--- 8 7 -- Erdos-Renyi (gnp) graph
+#> IGRAPH 4c79985 U--- 8 7 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from bcedee4:
+#> + edges from 4c79985:
 #> [1] 2--3 1--4 4--5 2--6 5--6 6--7 6--8
 ```

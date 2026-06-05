@@ -81,7 +81,7 @@ Additional arguments:
   given here then vertex IDs will be assigned to vertex names in the
   order of their appearance in the .ncol file. If it is not
   `character(0)` and some unknown vertex names are found in the .ncol
-  file then new vertex ids will be assigned to them.
+  file then new vertex IDs will be assigned to them.
 
 - names:
 

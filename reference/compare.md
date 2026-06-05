@@ -19,7 +19,7 @@ compare(
   A [`communities()`](https://r.igraph.org/reference/communities.md)
   object containing a community structure; or a numeric vector, the
   membership vector of the first community structure. The membership
-  vector should contain the community id of each vertex, the numbering
+  vector should contain the community ID of each vertex, the numbering
   of the communities starts with one.
 
 - comm2:

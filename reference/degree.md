@@ -35,7 +35,7 @@ degree_distribution(graph, cumulative = FALSE, ...)
 
 - v:
 
-  The ids of vertices of which the degree will be calculated.
+  The IDs of vertices of which the degree will be calculated.
 
 - mode:
 

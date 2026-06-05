@@ -26,7 +26,7 @@ graph.diversity(graph, weights = NULL, vids = V(graph))
 
 - vids:
 
-  The vertex ids for which to calculate the measure.
+  The vertex IDs for which to calculate the measure.
 
 ## Related documentation in the C library
 

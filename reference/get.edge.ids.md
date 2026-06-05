@@ -1,4 +1,4 @@
-# Find the edge ids based on the incident vertices of the edges
+# Find the edge IDs based on the incident vertices of the edges
 
 **\[deprecated\]**
 
@@ -21,7 +21,7 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 - vp:
 
   The incident vertices, given as a two-column data frame, two-column
-  matrix, or vector of vertex ids or symbolic vertex names. For a
+  matrix, or vector of vertex IDs or symbolic vertex names. For a
   vector, the values are interpreted pairwise, i.e. the first and second
   are used for the first edge, the third and fourth for the second, etc.
 

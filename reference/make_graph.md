@@ -31,7 +31,7 @@ undirected_graph(...)
   A vector defining the edges, the first edge points from the first
   element to the second, the second edge from the third to the fourth,
   etc. For a numeric vector, these are interpreted as internal vertex
-  ids. For character vectors, they are interpreted as vertex names.
+  IDs. For character vectors, they are interpreted as vertex names.
 
   Alternatively, this can be a character scalar, the name of a notable
   graph. See Notable graphs below. The name is case insensitive.
@@ -54,9 +54,9 @@ undirected_graph(...)
 
   The number of vertices in the graph. This argument is ignored (with a
   warning) if `edges` are symbolic vertex names. It is also ignored if
-  there is a bigger vertex id in `edges`. This means that for this
+  there is a bigger vertex ID in `edges`. This means that for this
   function it is safe to supply zero here if the vertex with the largest
-  id is not an isolate.
+  ID is not an isolate.
 
 - isolates:
 
@@ -293,13 +293,13 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 7d71e11 U--- 6 4 -- 
-#> + edges from 7d71e11:
+#> IGRAPH 23262a2 U--- 6 4 -- 
+#> + edges from 23262a2:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 0155878 UN-- 4 3 -- 
+#> IGRAPH 65a2819 UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 0155878 (vertex names):
+#> + edges from 65a2819 (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

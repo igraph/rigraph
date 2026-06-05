@@ -20,7 +20,7 @@ mst(graph, weights = NULL, algorithm = NULL, ...)
 - weights:
 
   Numeric vector giving the weights of the edges in the graph. The order
-  is determined by the edge ids. This is ignored if the `unweighted`
+  is determined by the edge IDs. This is ignored if the `unweighted`
   algorithm is chosen. Edge weights are interpreted as distances.
 
 - algorithm:

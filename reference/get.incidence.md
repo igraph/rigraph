@@ -39,7 +39,7 @@ get.incidence(graph, types = NULL, attr = NULL, names = TRUE, sparse = FALSE)
   Logical scalar, if `TRUE` and the vertices in the graph are named
   (i.e. the graph has a vertex attribute called `name`), then vertex
   names will be added to the result as row and column names. Otherwise
-  the ids of the vertices are used as row and column names.
+  the IDs of the vertices are used as row and column names.
 
 - sparse:
 

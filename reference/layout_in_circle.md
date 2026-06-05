@@ -1,6 +1,6 @@
 # Graph layout with vertices on a circle.
 
-Place vertices on a circle, in the order of their vertex ids.
+Place vertices on a circle, in the order of their vertex IDs.
 
 ## Usage
 

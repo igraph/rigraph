@@ -27,7 +27,7 @@ A numeric vector of length `length(v)-binwidth+1`
 ## Details
 
 The running mean of `v` is a `w` vector of length
-`length(v)-binwidth+1`. The first element of `w` id the average of the
+`length(v)-binwidth+1`. The first element of `w` ID the average of the
 first `binwidth` elements of `v`, the second element of `w` is the
 average of elements `2:(binwidth+1)`, etc.
 

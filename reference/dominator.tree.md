@@ -22,7 +22,7 @@ dominator.tree(graph, root, mode = c("out", "in", "all", "total"))
 
 - root:
 
-  The id of the root (or source) vertex, this will be the root of the
+  The ID of the root (or source) vertex, this will be the root of the
   tree.
 
 - mode:

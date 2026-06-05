@@ -24,11 +24,11 @@ min_cut(
 
 - source:
 
-  The id of the source vertex.
+  The ID of the source vertex.
 
 - target:
 
-  The id of the target vertex (sometimes also called sink).
+  The ID of the target vertex (sometimes also called sink).
 
 - capacity:
 
@@ -131,11 +131,11 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> [1] 2
 #> 
 #> $partition1
-#> + 1/100 vertex, from 92c5b35:
+#> + 1/100 vertex, from a852cb7:
 #> [1] 2
 #> 
 #> $partition2
-#> + 99/100 vertices, from 92c5b35:
+#> + 99/100 vertices, from a852cb7:
 #>  [1]   1   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
 #> [20]  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39
 #> [39]  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58
@@ -144,7 +144,7 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> [96]  97  98  99 100
 #> 
 #> $cut
-#> + 2/100 edges from 92c5b35:
+#> + 2/100 edges from a852cb7:
 #> [1] 1--2 2--3
 #> 
 
@@ -155,15 +155,15 @@ min_cut(g2, value.only = FALSE)
 #> [1] 1
 #> 
 #> $partition1
-#> + 1/6 vertex, from e77561d:
+#> + 1/6 vertex, from 6f4a4b0:
 #> [1] 2
 #> 
 #> $partition2
-#> + 5/6 vertices, from e77561d:
+#> + 5/6 vertices, from 6f4a4b0:
 #> [1] 1 3 4 5 6
 #> 
 #> $cut
-#> + 1/7 edge from e77561d:
+#> + 1/7 edge from 6f4a4b0:
 #> [1] 2->3
 #> 
 ```

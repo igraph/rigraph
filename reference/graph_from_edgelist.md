@@ -2,9 +2,9 @@
 
 `graph_from_edgelist()` creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is a numeric
-matrix then its elements are interpreted as vertex ids. If it is a
+matrix then its elements are interpreted as vertex IDs. If it is a
 character matrix then it is interpreted as symbolic vertex names and a
-vertex id will be assigned to each name, and also a `name` vertex
+vertex ID will be assigned to each name, and also a `name` vertex
 attribute will be added.
 
 ## Usage
@@ -66,14 +66,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH 9604389 DN-- 3 2 -- 
+#> IGRAPH 5877dcf DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 9604389 (vertex names):
+#> + edges from 5877dcf (vertex names):
 #> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH ada6d4b D--- 10 10 -- 
-#> + edges from ada6d4b:
+#> IGRAPH 92f7646 D--- 10 10 -- 
+#> + edges from 92f7646:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

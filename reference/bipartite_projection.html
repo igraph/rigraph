@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Project a bipartite graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-id-casing-convention/R/bipartite.R" class="external-link"><code>R/bipartite.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/bipartite.R" class="external-link"><code>R/bipartite.R</code></a></small>
       <div class="d-none name"><code>bipartite_projection.Rd</code></div>
     </div>
 
@@ -93,7 +93,7 @@ graph), then the multiplicity of the A-B edge in the projection will be 2.</p></
 <dt id="arg-probe-">probe1<a class="anchor" aria-label="anchor" href="#arg-probe-"></a></dt>
 <dd><p>This argument can be used to specify the order of the
 projections in the resulting list. If given, then it is considered as a
-vertex id (or a symbolic vertex name); the projection containing this vertex
+vertex ID (or a symbolic vertex name); the projection containing this vertex
 will be the first one in the result list.  This argument is ignored if only
 one projection is requested in argument <code>which</code>.</p></dd>
 
@@ -173,15 +173,15 @@ the second.</p>
 <span class="r-in"><span><span class="va">g2</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Event network"</span></span></span>
 <span class="r-in"><span><span class="va">proj2</span> <span class="op">&lt;-</span> <span class="fu">bipartite_projection</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d0a8b69 UNW- 5 6 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9d2f664 UNW- 5 6 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d0a8b69 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9d2f664 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Cecil--Dan  </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 12b0b2e UNW- 3 2 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f2650b0 UNW- 3 2 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 12b0b2e (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f2650b0 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Party --Skiing    Skiing--Badminton</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

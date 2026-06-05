@@ -76,7 +76,7 @@ ba.game(
   version igraph used this algorithm if `power` was not one, or
   `zero.appeal` was not one. `bag` is the algorithm that was previously
   (before version 0.6) used if `power` was one and `zero.appeal` was one
-  as well. It works by putting the ids of the vertices into a bag
+  as well. It works by putting the IDs of the vertices into a bag
   (multiset, really), exactly as many times as their (in-)degree, plus
   once more. Then the required number of cited vertices are drawn from
   the bag, with replacement. This method might generate multiple edges.

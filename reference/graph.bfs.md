@@ -58,7 +58,7 @@ graph.bfs(
 
 - restricted:
 
-  `NULL` (=no restriction), or a vector of vertices (ids or symbolic
+  `NULL` (=no restriction), or a vector of vertices (IDs or symbolic
   names). In the latter case, the search is restricted to the given
   vertices.
 

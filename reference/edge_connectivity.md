@@ -21,12 +21,12 @@ adhesion(graph, checks = TRUE)
 
 - source:
 
-  The id of the source vertex, for `edge_connectivity()` it can be
+  The ID of the source vertex, for `edge_connectivity()` it can be
   `NULL`, see details below.
 
 - target:
 
-  The id of the target vertex, for `edge_connectivity()` it can be
+  The ID of the target vertex, for `edge_connectivity()` it can be
   `NULL`, see details below.
 
 - checks:

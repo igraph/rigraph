@@ -31,11 +31,11 @@ that indicates whether the graph contains an Eulerian path or cycle. For
 
 - epath:
 
-  A vector containing the edge ids along the Eulerian path or cycle.
+  A vector containing the edge IDs along the Eulerian path or cycle.
 
 - vpath:
 
-  A vector containing the vertex ids along the Eulerian path or cycle.
+  A vector containing the vertex IDs along the Eulerian path or cycle.
 
 ## Details
 
@@ -83,11 +83,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from edae018 (vertex names):
+#> + 10/10 edges from d96bbe6 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from edae018:
+#> + 11/6 vertices, named, from d96bbe6:
 #>  [1] A B C D B F A E D F E
 #> 
 

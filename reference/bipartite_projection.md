@@ -41,7 +41,7 @@ bipartite_projection_size(graph, types = NULL)
 - probe1:
 
   This argument can be used to specify the order of the projections in
-  the resulting list. If given, then it is considered as a vertex id (or
+  the resulting list. If given, then it is considered as a vertex ID (or
   a symbolic vertex name); the projection containing this vertex will be
   the first one in the result list. This argument is ignored if only one
   projection is requested in argument `which`.
@@ -128,14 +128,14 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH d0a8b69 UNW- 5 6 -- Event network
+#> IGRAPH 9d2f664 UNW- 5 6 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from d0a8b69 (vertex names):
+#> + edges from 9d2f664 (vertex names):
 #> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  
 #> [6] Cecil--Dan  
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH 12b0b2e UNW- 3 2 -- Event network
+#> IGRAPH f2650b0 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 12b0b2e (vertex names):
+#> + edges from f2650b0 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

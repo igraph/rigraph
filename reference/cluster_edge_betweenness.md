@@ -53,7 +53,7 @@ cluster_edge_betweenness(
   divisive and not agglomerative: it builds the tree from top to bottom.
   There is one line for each merge (i.e. split) in matrix, the first
   line is the first merge (last split). The communities are identified
-  by integer number starting from one. Community ids smaller than or
+  by integer number starting from one. Community IDs smaller than or
   equal to \\N\\, the number of vertices in the graph, belong to
   singleton communities, i.e. individual vertices. Before the first
   merge we have \\N\\ communities numbered from one to \\N\\. The first

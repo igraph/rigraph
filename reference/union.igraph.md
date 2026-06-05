@@ -36,7 +36,7 @@ will be part of the new graph. This function can be also used via the
 
 If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 then the operation is performed on symbolic vertex names instead of the
-internal numeric vertex ids.
+internal numeric vertex IDs.
 
 [`union()`](https://r.igraph.org/reference/union.md) keeps the
 attributes of all graphs. All graph, vertex and edge attributes are
@@ -102,7 +102,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %u% net2)
-#> IGRAPH aedf41c UN-- 13 21 -- 
+#> IGRAPH 94a24ee UN-- 13 21 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -119,7 +119,7 @@ print_all(net1 %u% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from aedf41c (vertex names):
+#> + edges from 94a24ee (vertex names):
 #>  [1] I--J H--Z H--I G--H G--E F--X F--Y F--H F--C F--G B--E B--G A--X A--C A--F
 #> [16] A--B D--Y D--G D--F D--B D--A
 ```

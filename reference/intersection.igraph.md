@@ -40,7 +40,7 @@ all graphs will be included. The corresponding operator is `%s%`.
 
 If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 then the operation is performed on symbolic vertex names instead of the
-internal numeric vertex ids.
+internal numeric vertex IDs.
 
 [`intersection()`](https://r.igraph.org/reference/intersection.md) keeps
 the attributes of all graphs. All graph, vertex and edge attributes are
@@ -106,7 +106,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> IGRAPH d63dc7b UN-- 13 4 -- 
+#> IGRAPH f82c7b3 UN-- 13 4 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -123,6 +123,6 @@ print_all(net1 %s% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from d63dc7b (vertex names):
+#> + edges from f82c7b3 (vertex names):
 #> [1] F--H A--B D--F D--A
 ```

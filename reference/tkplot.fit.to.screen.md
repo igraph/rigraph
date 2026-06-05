@@ -16,7 +16,7 @@ tkplot.fit.to.screen(tkp.id, width = NULL, height = NULL)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - width:
 
