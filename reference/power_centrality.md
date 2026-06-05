@@ -175,7 +175,7 @@ g.f <- make_graph(
   dir = FALSE
 )
 # Compute power centrality scores
-for (e in seq(-0.5, .5, by = 0.1)) {
+for (e in seq(-0.5, 0.5, by = 0.1)) {
   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 }
 #> [1] 0.00 1.58 0.00
@@ -190,7 +190,7 @@ for (e in seq(-0.5, .5, by = 0.1)) {
 #> [1] 1.27 1.13 0.64
 #> [1] 1.28 1.12 0.64
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] 1.62 1.08 0.54
@@ -203,7 +203,7 @@ for (e in seq(-0.4, .4, by = 0.1)) {
 #> [1] 1.62 1.08 0.54
 #> [1] 1.62 1.08 0.54
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] -1.00  1.67 -0.33
@@ -216,7 +216,7 @@ for (e in seq(-0.4, .4, by = 0.1)) {
 #> [1] 1.68 1.33 0.56
 #> [1] 1.72 1.30 0.57
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] -1.72  1.53 -0.57

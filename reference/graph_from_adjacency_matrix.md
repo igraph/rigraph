@@ -291,13 +291,13 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq(ncol(adj_matrix))
+colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH 2d06839 DNW- 10 57 -- 
+#> IGRAPH 0f8912c DNW- 10 57 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

@@ -277,7 +277,8 @@ to change the plot.
 ## Related documentation in the C library
 
 [`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`le_community_to_membership()`](https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership)
 
 ## See also
 

@@ -89,19 +89,19 @@ Random graph models (games):
 
 ``` r
 gg <- sample_correlated_gnp_pair(
-  n = 10, corr = .8, p = .5,
+  n = 10, corr = 0.8, p = 0.5,
   directed = FALSE
 )
 gg
 #> $graph1
-#> IGRAPH 08c4b20 U--- 10 22 -- 
-#> + edges from 08c4b20:
+#> IGRAPH f25b9e1 U--- 10 22 -- 
+#> + edges from f25b9e1:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 4-- 5 1-- 6 3-- 6 5-- 6 1-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 3-- 8 1-- 9 2-- 9 5-- 9 7-- 9 8-- 9 2--10 3--10 8--10 9--10
 #> 
 #> $graph2
-#> IGRAPH 0d539e7 U--- 10 20 -- 
-#> + edges from 0d539e7:
+#> IGRAPH bb956f4 U--- 10 20 -- 
+#> + edges from bb956f4:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 3-- 6 4-- 6 5-- 6 3-- 7 4-- 7 6-- 7 1-- 8
 #> [13] 6-- 8 1-- 9 2-- 9 5-- 9 8-- 9 3--10 8--10 9--10
 #> 
