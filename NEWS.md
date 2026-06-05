@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9011
+
+## Bug fixes
+
+- Touchstone empty results table for branches with a slash (#2689).
+
+- Harden air support and broaden migration fixture to the full arg-matching matrix (#2686).
+
+- Repair touchstone benchmark CI (#2688).
+
+## Features
+
+- Add touchstone benchmarks (#1338, #2685).
+
+## Chore
+
+- Implicit assignments (#2664).
+
+
 # igraph 2.3.2.9010
 
 ## Features

@@ -74,7 +74,7 @@ sample_bipartite_gnp(10, 5, p = 0)
 sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
-sample_bipartite_gnp(10, 5, p = .1)
+sample_bipartite_gnp(10, 5, p = 0.1)
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
