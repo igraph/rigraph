@@ -177,5 +177,58 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #5 - vertex/edge sequence construction on named graphs
+# Functions that return (many) vertex/edge sequences pay for building the
+# `names`/`vnames` attribute and attaching a graph reference to every object.
+# These benchmarks exercise that construction path on *named* graphs, where
+# the cost is highest. `max_cliques()` is the canonical case: it returns tens
+# of thousands of vertex sequences, one per clique.
+# ---------------------------------------------------------------------------
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnp(200L, 0.16, directed = FALSE)
+    V(g)$name <- paste0("v", seq_len(gorder(g)))
+  },
+  max_cliques_named = max_cliques(g),
+  n = 20
+)
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(1000L, 5000L)
+    V(g)$name <- paste0("v", seq_len(1000L))
+    es <- E(g)
+  },
+  head_of_named = head_of(g, es),
+  n = 20
+)
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(20000L, 50000L)
+    V(g)$name <- paste0("v", seq_len(20000L))
+  },
+  V_named = V(g),
+  n = 20
+)
+
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(20000L, 50000L)
+    V(g)$name <- paste0("v", seq_len(20000L))
+  },
+  E_named = E(g),
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
