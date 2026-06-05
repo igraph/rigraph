@@ -292,9 +292,22 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   if (is.null(verts)) {
     verts <- V(graph)
   }
-  # `simple_vs_index()` carries the graph reference over from `verts`, so the
-  # weak reference built once by `V(graph)` is shared across every call here.
-  simple_vs_index(verts, idx, na_ok = TRUE)
+  # `idx` are vertex IDs straight from C, and `verts` is the full `V(graph)`,
+  # so `verts[idx]` would just be `idx` again -- skip that copy and use the
+  # IDs directly as the payload. Names are taken lazily from `verts` (an
+  # ALTREP that composes in O(1) under subsetting), and the graph reference is
+  # shared from `verts`. All attributes are set in one `attributes<-` call to
+  # avoid the per-object shallow copies that dominate when many sequences are
+  # built (e.g. `max_cliques()`).
+  nms <- attr(verts, "names")
+  res <- as.integer(idx)
+  attributes(res) <- list(
+    names = if (is.null(nms)) NULL else nms[idx],
+    class = "igraph.vs",
+    env = attr(verts, "env"),
+    graph = attr(verts, "graph")
+  )
+  res
 }
 
 # Internal function to quickly convert integer vectors to igraph.es
@@ -422,13 +435,19 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown vertex selected.")
   }
-  # Carry the graph reference over from `x`, mirroring `simple_es_index()`.
-  # All sequences derived from the same `x` (e.g. a single `V(graph)` reused
-  # across an lapply()) then share its weak reference instead of each minting
-  # a fresh one, which is the dominant cost when constructing many sequences.
-  attr(res, "env") <- attr(x, "env")
-  attr(res, "graph") <- attr(x, "graph")
-  class(res) <- "igraph.vs"
+  # Set every attribute in a single `attributes<-` call rather than one
+  # `attr<-`/`class<-` at a time: each incremental assignment shallow-copies
+  # the vector, and that copying dominates when many sequences are built
+  # (e.g. `max_cliques()`). `names` is carried over from the subset above (a
+  # lazy ALTREP, or NULL); env/graph are carried from `x`, mirroring
+  # `simple_es_index()`, so sequences derived from one `V(graph)` share its
+  # weak reference instead of each minting a fresh one.
+  attributes(res) <- list(
+    names = attr(res, "names"),
+    class = "igraph.vs",
+    env = attr(x, "env"),
+    graph = attr(x, "graph")
+  )
   res
 }
 
