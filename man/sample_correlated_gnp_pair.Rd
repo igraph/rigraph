@@ -40,7 +40,7 @@ Please see the reference given below.
 
 \examples{
 gg <- sample_correlated_gnp_pair(
-  n = 10, corr = .8, p = .5,
+  n = 10, corr = 0.8, p = 0.5,
   directed = FALSE
 )
 gg
