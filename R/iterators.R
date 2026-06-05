@@ -292,8 +292,9 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   if (is.null(verts)) {
     verts <- V(graph)
   }
-  res <- simple_vs_index(verts, idx, na_ok = TRUE)
-  add_vses_graph_ref(res, graph)
+  # `simple_vs_index()` carries the graph reference over from `verts`, so the
+  # weak reference built once by `V(graph)` is shared across every call here.
+  simple_vs_index(verts, idx, na_ok = TRUE)
 }
 
 # Internal function to quickly convert integer vectors to igraph.es
@@ -304,8 +305,9 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
   if (is.null(es)) {
     es <- E(graph)
   }
-  res <- simple_es_index(es, idx, na_ok = TRUE)
-  add_vses_graph_ref(res, graph)
+  # `simple_es_index()` already carries the graph reference over from `es`,
+  # so the weak reference built once by `E(graph)` is shared across calls.
+  simple_es_index(es, idx, na_ok = TRUE)
 }
 
 
@@ -420,6 +422,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown vertex selected.")
   }
+  # Carry the graph reference over from `x`, mirroring `simple_es_index()`.
+  # All sequences derived from the same `x` (e.g. a single `V(graph)` reused
+  # across an lapply()) then share its weak reference instead of each minting
+  # a fresh one, which is the dominant cost when constructing many sequences.
+  attr(res, "env") <- attr(x, "env")
+  attr(res, "graph") <- attr(x, "graph")
   class(res) <- "igraph.vs"
   res
 }
