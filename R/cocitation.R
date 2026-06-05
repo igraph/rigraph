@@ -37,7 +37,7 @@
 #' in the future.
 #'
 #' @param graph The graph object to analyze
-#' @param v Vertex sequence or numeric vector, the vertex ids for which the
+#' @param v Vertex sequence or numeric vector, the vertex IDs for which the
 #'   cocitation or bibliographic coupling values we want to calculate. The
 #'   default is all vertices.
 #' @return A numeric matrix with `length(v)` lines and

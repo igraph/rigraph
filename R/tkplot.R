@@ -230,10 +230,10 @@ assign(".next", 1, .tkplot.env)
 #'
 #' The `tkplot()` command creates a new Tk window with the graphical
 #' representation of `graph`. The command returns an integer number, the
-#' tkplot id. The other commands utilize this id to be able to query or
+#' tkplot ID. The other commands utilize this ID to be able to query or
 #' manipulate the plot.
 #'
-#' `tk_close()` closes the Tk plot with id `tkp.id`.
+#' `tk_close()` closes the Tk plot with ID `tkp.id`.
 #'
 #' `tk_off()` closes all Tk plots.
 #'
@@ -266,7 +266,7 @@ assign(".next", 1, .tkplot.env)
 #' tkplot.center tkplot.rotate
 #' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
-#' @param tkp.id The id of the tkplot window to close/reshape/etc.
+#' @param tkp.id The ID of the tkplot window to close/reshape/etc.
 #' @param window.close Leave this on the default value.
 #' @param width The width of the rectangle for generating new coordinates.
 #' @param height The height of the rectangle for generating new coordinates.
@@ -278,7 +278,7 @@ assign(".next", 1, .tkplot.env)
 #' @param rad The degree to rotate the plot, in radian.
 #' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
-#' @return `tkplot()` returns an integer, the id of the plot, this can be
+#' @return `tkplot()` returns an integer, the ID of the plot, this can be
 #'   used to manipulate it from the command line.
 #'
 #'   `tk_canvas()` returns `tkwin` object, the Tk canvas.

@@ -26,7 +26,7 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex ids for which the similarity is calculated.
+#' @param vids The vertex IDs for which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
 #'   \sQuote{`all`}.

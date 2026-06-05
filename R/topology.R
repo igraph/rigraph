@@ -468,7 +468,7 @@ is_isomorphic_to <- isomorphic
 #' \describe{
 #'     \item{domains}{
 #'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -657,7 +657,7 @@ graph.count.isomorphisms.vf2 <- function(
 #' \describe{
 #'     \item{domains}{
 #'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -844,7 +844,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' \describe{
 #'     \item{domains}{
 #'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -1158,7 +1158,7 @@ canonical_permutation <- function(
 
 #' Permute the vertices of a graph
 #'
-#' Create a new graph, by permuting vertex ids.
+#' Create a new graph, by permuting vertex IDs.
 #'
 #' This function creates a new graph from the input graph by permuting its
 #' vertices according to the specified mapping. Call this function with the
@@ -1169,7 +1169,7 @@ canonical_permutation <- function(
 #'
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
-#'   first element is the new id of vertex 1, etc. Every number between one and
+#'   first element is the new ID of vertex 1, etc. Every number between one and
 #'   `vcount(graph)` must appear exactly once.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
