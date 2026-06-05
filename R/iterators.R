@@ -320,28 +320,18 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
 # brings construction of many sequences (e.g. `max_cliques()`) down close to
 # the cost of returning bare numeric indices.
 create_vs_list <- function(graph, idx_list) {
+  # `verts <- V(graph)` is what mints the single shared weak reference and graph
+  # id; build it once and hand the pieces to C, which runs the per-element
+  # construction loop (payload coercion, lazy-names ALTREP, attribute setting)
+  # without any per-object R overhead.
   verts <- V(graph)
-  envv <- attr(verts, "env")
-  gidd <- attr(verts, "graph")
-  src <- if (is_named(graph)) vertex_attr(graph)$name else NULL
-  if (is.null(src)) {
-    lapply(idx_list, function(idx) {
-      res <- as.integer(idx)
-      attributes(res) <- list(class = "igraph.vs", env = envv, graph = gidd)
-      res
-    })
-  } else {
-    lapply(idx_list, function(idx) {
-      res <- as.integer(idx)
-      attributes(res) <- list(
-        names = .Call(Rx_igraph_lazy_names, src, res),
-        class = "igraph.vs",
-        env = envv,
-        graph = gidd
-      )
-      res
-    })
-  }
+  .Call(
+    Rx_igraph_vs_list,
+    idx_list,
+    if (is_named(graph)) vertex_attr(graph)$name else NULL,
+    attr(verts, "env"),
+    attr(verts, "graph")
+  )
 }
 
 # Internal function to quickly convert integer vectors to igraph.es

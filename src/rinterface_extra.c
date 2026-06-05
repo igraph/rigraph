@@ -2617,6 +2617,62 @@ SEXP Rx_igraph_lazy_names(SEXP source, SEXP idx) {
   return res;
 }
 
+/* Batch constructor for a list of vertex sequences.
+ *
+ * Builds the whole `lapply(idx_list, unsafe_create_vs, ...)` result in one C
+ * pass: for each vertex-ID vector it produces a fresh integer payload, attaches
+ * a lazy-names ALTREP (when the graph is named), and sets the shared `env`
+ * weak reference, the `graph` id and the `igraph.vs` class. This keeps the
+ * per-object R overhead (closure call, `as.integer`, `.Call`, `attributes<-`)
+ * out of the loop entirely.
+ *
+ *   idx_list  : VECSXP of vertex-ID vectors (integer or double)
+ *   names_src : graph's full vertex-name STRSXP, or NULL for unnamed graphs
+ *   env       : the shared weak reference (or env) to set as the "env" attr
+ *   graph_id  : graph id (character scalar), or NULL to skip the "graph" attr
+ */
+SEXP Rx_igraph_vs_list(SEXP idx_list, SEXP names_src, SEXP env, SEXP graph_id) {
+  R_xlen_t n=XLENGTH(idx_list);
+  int named=(TYPEOF(names_src) == STRSXP);
+  SEXP env_sym=Rf_install("env");
+  SEXP graph_sym=Rf_install("graph");
+  SEXP out=PROTECT(Rf_allocVector(VECSXP, n));
+  SEXP cls=PROTECT(Rf_mkString("igraph.vs"));
+
+  for (R_xlen_t i=0; i < n; i++) {
+    SEXP elt=VECTOR_ELT(idx_list, i);
+    /* Fresh, unshared integer payload: coerceVector returns its argument
+     * unchanged when the type already matches, so duplicate in that case to
+     * avoid mutating a caller-owned vector. */
+    SEXP payload=PROTECT(Rf_coerceVector(elt, INTSXP));
+    if (payload == elt) {
+      UNPROTECT(1);
+      payload=PROTECT(Rf_duplicate(elt));
+    }
+
+    if (named) {
+      SEXP d1=PROTECT(Rf_allocVector(VECSXP, 2));
+      SET_VECTOR_ELT(d1, 0, names_src);
+      SET_VECTOR_ELT(d1, 1, payload);
+      SEXP nm=PROTECT(R_new_altrep(Rx_igraph_lazy_names_class, d1, R_NilValue));
+      Rf_setAttrib(payload, R_NamesSymbol, nm);
+      UNPROTECT(2);
+    }
+
+    Rf_setAttrib(payload, env_sym, env);
+    if (graph_id != R_NilValue) {
+      Rf_setAttrib(payload, graph_sym, graph_id);
+    }
+    Rf_setAttrib(payload, R_ClassSymbol, cls);
+
+    SET_VECTOR_ELT(out, i, payload);
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(2);
+  return out;
+}
+
 void Rx_igraph_init_vector_class(DllInfo *dll) {
   Rx_igraph_altrep_from_class=R_make_altreal_class("igraph_from", "base", dll);
   Rx_igraph_altrep_to_class=R_make_altreal_class("igraph_to", "base", dll);

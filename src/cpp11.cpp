@@ -594,6 +594,7 @@ extern SEXP Rx_igraph_transitivity_local_undirected_all(SEXP, SEXP);
 extern SEXP Rx_igraph_union(SEXP, SEXP);
 extern SEXP Rx_igraph_vcount(SEXP);
 extern SEXP Rx_igraph_vs_adj(SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_vs_list(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_vs_nei(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_walktrap_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
@@ -1175,6 +1176,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_union",                                         (DL_FUNC) &Rx_igraph_union,                                          2},
     {"Rx_igraph_vcount",                                        (DL_FUNC) &Rx_igraph_vcount,                                         1},
     {"Rx_igraph_vs_adj",                                        (DL_FUNC) &Rx_igraph_vs_adj,                                         4},
+    {"Rx_igraph_vs_list",                                       (DL_FUNC) &Rx_igraph_vs_list,                                        4},
     {"Rx_igraph_vs_nei",                                        (DL_FUNC) &Rx_igraph_vs_nei,                                         4},
     {"Rx_igraph_walktrap_community",                            (DL_FUNC) &Rx_igraph_walktrap_community,                             6},
     {"Rx_igraph_weak_ref_key",                                  (DL_FUNC) &Rx_igraph_weak_ref_key,                                   1},
