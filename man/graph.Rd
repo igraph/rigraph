@@ -18,7 +18,7 @@ graph(
 \item{edges}{A vector defining the edges, the first edge points
 from the first element to the second, the second edge from the third
 to the fourth, etc. For a numeric vector, these are interpreted
-as internal vertex ids. For character vectors, they are interpreted
+as internal vertex IDs. For character vectors, they are interpreted
 as vertex names.
 
 Alternatively, this can be a character scalar, the name of a
@@ -38,9 +38,9 @@ Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 
 \item{n}{The number of vertices in the graph. This argument is
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
-is also ignored if there is a bigger vertex id in \code{edges}. This
+is also ignored if there is a bigger vertex ID in \code{edges}. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest id is not an isolate.}
+vertex with the largest ID is not an isolate.}
 
 \item{isolates}{Character vector, names of isolate vertices,
 for symbolic edge lists. It is ignored for numeric edge lists.}

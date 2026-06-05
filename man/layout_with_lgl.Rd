@@ -39,7 +39,7 @@ repulsion forces between vertices only vertices in the same or neighboring
 grid cells are taken into account (the fourth root of the number of
 \code{area}.}
 
-\item{root}{The id of the vertex to place at the middle of the layout. The
+\item{root}{The ID of the vertex to place at the middle of the layout. The
 default value is -1 which means that a random vertex is selected.}
 
 \item{...}{Passed to \code{layout_with_lgl()}.}

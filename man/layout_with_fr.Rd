@@ -84,7 +84,7 @@ arguments are not supported from igraph version 0.8.0 and are ignored
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the ids of the vertex ids.
+vertex, according to the IDs of the vertex IDs.
 }
 \description{
 Place vertices on the plane using the force-directed layout algorithm by

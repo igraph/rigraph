@@ -9,10 +9,10 @@ edge.disjoint.paths(graph, source = NULL, target = NULL, checks = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex, for \code{edge_connectivity()} it
+\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{edge_connectivity()} it
+\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
 \item{checks}{Logical constant. Whether to check that the graph is connected

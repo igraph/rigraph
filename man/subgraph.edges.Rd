@@ -9,7 +9,7 @@ subgraph.edges(graph, eids, delete.vertices = TRUE)
 \arguments{
 \item{graph}{The original graph.}
 
-\item{eids}{The edge ids of the edges that will be kept in the result graph.}
+\item{eids}{The edge IDs of the edges that will be kept in the result graph.}
 
 \item{delete.vertices}{Logical scalar, whether to remove vertices that do
 not have any adjacent edges in \code{eids}.}

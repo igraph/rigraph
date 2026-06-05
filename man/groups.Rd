@@ -15,7 +15,7 @@ below.}
 \value{
 A named list of numeric or character vectors. The names are just
 numbers that refer to the groups. The vectors themselves are numeric or
-symbolic vertex ids.
+symbolic vertex IDs.
 }
 \description{
 Create a list of vertex groups from some graph clustering or community

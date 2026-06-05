@@ -32,7 +32,7 @@ no cutoff is used.}
 \value{
 A list of integer vectors, each integer vector is a path from
 the source vertex to one of the target vertices. A path is given by its
-vertex ids.
+vertex IDs.
 }
 \description{
 This function lists all simple paths from one source vertex to another

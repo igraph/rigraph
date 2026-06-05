@@ -52,7 +52,9 @@ strip_code <- function(x) {
     collapse = "|"
   )
   x <- gsub(
-    sprintf("\\\\(%s)\\{[^}]*\\}", code_cmds), " ", x,
+    sprintf("\\\\(%s)\\{[^}]*\\}", code_cmds),
+    " ",
+    x,
     perl = TRUE
   )
   x
@@ -188,7 +190,10 @@ for (path in r_files) {
     total <- total + length(f$words)
     cat(sprintf(
       "  %s:%d  [%s]  %s\n",
-      path, f$line, paste(f$words, collapse = ", "), f$src
+      path,
+      f$line,
+      paste(f$words, collapse = ", "),
+      f$src
     ))
   }
 }

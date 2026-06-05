@@ -44,7 +44,7 @@ tk_canvas(tkp.id)
 \item{\dots}{Additional plotting parameters. See \link{igraph.plotting} for
 the complete list.}
 
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{window.close}{Leave this on the default value.}
 
@@ -66,7 +66,7 @@ vertices, in absolute coordinates.}
 \item{rad}{The degree to rotate the plot, in radian.}
 }
 \value{
-\code{tkplot()} returns an integer, the id of the plot, this can be
+\code{tkplot()} returns an integer, the ID of the plot, this can be
 used to manipulate it from the command line.
 
 \code{tk_canvas()} returns \code{tkwin} object, the Tk canvas.
@@ -112,10 +112,10 @@ used.
 
 The \code{tkplot()} command creates a new Tk window with the graphical
 representation of \code{graph}. The command returns an integer number, the
-tkplot id. The other commands utilize this id to be able to query or
+tkplot ID. The other commands utilize this ID to be able to query or
 manipulate the plot.
 
-\code{tk_close()} closes the Tk plot with id \code{tkp.id}.
+\code{tk_close()} closes the Tk plot with ID \code{tkp.id}.
 
 \code{tk_off()} closes all Tk plots.
 

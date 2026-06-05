@@ -40,7 +40,7 @@ and \code{"last"} takes the last one.}
 A named list with two components:
 \describe{
 \item{membership}{
-numeric vector giving the cluster id to which each vertex belongs.
+numeric vector giving the cluster ID to which each vertex belongs.
 }
 \item{distances}{
 numeric vector giving the distance of each vertex from its generator

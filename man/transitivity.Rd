@@ -47,7 +47,7 @@ The same as \code{barrat}.
 }
 }}
 
-\item{vids}{The vertex ids for the local transitivity will be calculated.
+\item{vids}{The vertex IDs for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is
 \code{NULL}, in this case all vertices are considered. It is slightly faster
 to supply \code{NULL} here than \code{V(graph)}.}

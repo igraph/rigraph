@@ -20,7 +20,7 @@ get.shortest.paths(
 \item{graph}{The graph to work on.}
 
 \item{from}{Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex ids, but
+be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be

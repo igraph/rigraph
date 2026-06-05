@@ -19,7 +19,7 @@ A named list with two components:
 Integer constant, the girth of the graph, or \code{Inf} if the graph is acyclic.
 }
 \item{circle}{
-Numeric vector with the vertex ids in the shortest circle.
+Numeric vector with the vertex IDs in the shortest circle.
 }
 }
 }

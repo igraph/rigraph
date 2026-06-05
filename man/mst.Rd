@@ -10,7 +10,7 @@ mst(graph, weights = NULL, algorithm = NULL, ...)
 \item{graph}{The graph object to analyze.}
 
 \item{weights}{Numeric vector giving the weights of the edges in the
-graph. The order is determined by the edge ids. This is ignored if the
+graph. The order is determined by the edge IDs. This is ignored if the
 \code{unweighted} algorithm is chosen. Edge weights are interpreted as
 distances.}
 

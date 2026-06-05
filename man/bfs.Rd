@@ -46,7 +46,7 @@ vertices that are unreachable from the given root vertex (or vertices). If
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
 \item{order}{Logical scalar, whether to return the ordering of the vertices.}
@@ -89,7 +89,7 @@ Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
 \item{order}{
-The vertex ids, in the order in which they were visited by the search.
+The vertex IDs, in the order in which they were visited by the search.
 A vertex sequence (\code{igraph.vs}), or a numeric vector if the
 \code{return.vs.es} option (see \code{\link[=igraph_options]{igraph_options()}}) is \code{FALSE}.
 }
