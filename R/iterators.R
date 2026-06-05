@@ -310,6 +310,40 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   res
 }
 
+# Build a list of vertex sequences from a list of vertex-ID vectors.
+#
+# This is the batch form of `unsafe_create_vs()` and replaces the
+# `lapply(idx_list, unsafe_create_vs, graph = graph, verts = V(graph))`
+# pattern. The per-graph work -- `V(graph)`, the shared weak reference, the
+# graph id and the lazy name source -- is hoisted out of the loop, so each
+# sequence only costs one `as.integer()` and one `attributes<-`. This is what
+# brings construction of many sequences (e.g. `max_cliques()`) down close to
+# the cost of returning bare numeric indices.
+create_vs_list <- function(graph, idx_list) {
+  verts <- V(graph)
+  envv <- attr(verts, "env")
+  gidd <- attr(verts, "graph")
+  src <- if (is_named(graph)) vertex_attr(graph)$name else NULL
+  if (is.null(src)) {
+    lapply(idx_list, function(idx) {
+      res <- as.integer(idx)
+      attributes(res) <- list(class = "igraph.vs", env = envv, graph = gidd)
+      res
+    })
+  } else {
+    lapply(idx_list, function(idx) {
+      res <- as.integer(idx)
+      attributes(res) <- list(
+        names = .Call(Rx_igraph_lazy_names, src, res),
+        class = "igraph.vs",
+        env = envv,
+        graph = gidd
+      )
+      res
+    })
+  }
+}
+
 # Internal function to quickly convert integer vectors to igraph.es
 # for use after C code, when NA and bounds checking is unnecessary
 # Also allows us to construct V(graph) outside the function call in

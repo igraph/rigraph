@@ -343,12 +343,7 @@ biconnected_components <- function(graph) {
     res$component.edges <- res$component_edges
   }
   if (igraph_opt("return.vs.es")) {
-    res$components <- lapply(
-      res$components,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$components <- create_vs_list(graph, res$components)
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)
