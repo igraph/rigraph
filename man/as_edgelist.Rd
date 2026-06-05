@@ -11,7 +11,7 @@ as_edgelist(graph, names = TRUE)
 
 \item{names}{Whether to return a character matrix containing vertex
 names (i.e. the \code{name} vertex attribute) if they exist or numeric
-vertex ids.}
+vertex IDs.}
 }
 \value{
 A \code{ecount(graph)} by 2 numeric matrix.

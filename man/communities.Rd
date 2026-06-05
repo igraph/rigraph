@@ -168,11 +168,11 @@ The \code{length} generic function call be called on \code{communities} and
 returns the number of communities.
 
 The \code{sizes()} function returns the community sizes, in the order of their
-ids.
+IDs.
 
 \code{membership()} gives the division of the vertices, into communities. It
-returns a numeric vector, one value for each vertex, the id of its
-community. Community ids start from one. Note that some algorithms calculate
+returns a numeric vector, one value for each vertex, the ID of its
+community. Community IDs start from one. Note that some algorithms calculate
 the complete (or incomplete) hierarchical structure of the communities, and
 not just a single partitioning. For these algorithms typically the
 membership for the highest modularity value is returned, but see also the
@@ -181,7 +181,7 @@ manual pages of the individual algorithms.
 \code{communities()} is also the name of a function, that returns a list of
 communities, each identified by their vertices. The vertices will have
 symbolic names if the \code{add.vertex.names} igraph option is set, and the
-graph itself was named. Otherwise numeric vertex ids are used.
+graph itself was named. Otherwise numeric vertex IDs are used.
 
 \code{modularity()} gives the modularity score of the partitioning. (See
 \code{\link[=modularity.igraph]{modularity.igraph()}} for details. For algorithms that do not
@@ -191,7 +191,7 @@ result a single partitioning, the highest modularity value is returned.
 the community structure.
 
 \code{crossing()} returns a logical vector, with one value for each edge,
-ordered according to the edge ids. The value is \code{TRUE} iff the edge
+ordered according to the edge IDs. The value is \code{TRUE} iff the edge
 connects two different communities, according to the (best) membership
 vector, as returned by \code{membership()}.
 

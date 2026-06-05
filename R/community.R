@@ -491,11 +491,11 @@ code.length <- function(communities) {
 #' returns the number of communities.
 #'
 #' The `sizes()` function returns the community sizes, in the order of their
-#' ids.
+#' IDs.
 #'
 #' `membership()` gives the division of the vertices, into communities. It
-#' returns a numeric vector, one value for each vertex, the id of its
-#' community. Community ids start from one. Note that some algorithms calculate
+#' returns a numeric vector, one value for each vertex, the ID of its
+#' community. Community IDs start from one. Note that some algorithms calculate
 #' the complete (or incomplete) hierarchical structure of the communities, and
 #' not just a single partitioning. For these algorithms typically the
 #' membership for the highest modularity value is returned, but see also the
@@ -504,7 +504,7 @@ code.length <- function(communities) {
 #' `communities()` is also the name of a function, that returns a list of
 #' communities, each identified by their vertices. The vertices will have
 #' symbolic names if the `add.vertex.names` igraph option is set, and the
-#' graph itself was named. Otherwise numeric vertex ids are used.
+#' graph itself was named. Otherwise numeric vertex IDs are used.
 #'
 #' `modularity()` gives the modularity score of the partitioning. (See
 #' [modularity.igraph()] for details. For algorithms that do not
@@ -514,7 +514,7 @@ code.length <- function(communities) {
 #' the community structure.
 #'
 #' `crossing()` returns a logical vector, with one value for each edge,
-#' ordered according to the edge ids. The value is `TRUE` iff the edge
+#' ordered according to the edge IDs. The value is `TRUE` iff the edge
 #' connects two different communities, according to the (best) membership
 #' vector, as returned by `membership()`.
 #'
@@ -744,7 +744,7 @@ print.communities <- function(x, ...) {
 #'
 #' @param graph The graph of the community structure.
 #' @param membership The membership vector of the community structure, a
-#'   numeric vector denoting the id of the community for each vertex. It
+#'   numeric vector denoting the ID of the community for each vertex. It
 #'   might be `NULL` for hierarchical community structures.
 #' @param algorithm Character string, the algorithm that generated
 #'   the community structure, it can be arbitrary.
@@ -756,7 +756,7 @@ print.communities <- function(x, ...) {
 #' @return A `communities` object.
 #'   \describe{
 #'     \item{membership}{
-#'       A numeric vector giving the community id for each vertex.
+#'       A numeric vector giving the community ID for each vertex.
 #'     }
 #'     \item{modularity}{
 #'       The modularity score of the partition.
@@ -1373,7 +1373,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' optimizing the an energy function.
 #'
 #' If the `vertex` argument is given and it is not `NULL`, then it
-#' must be a vertex id, and the same energy function is used to find the
+#' must be a vertex ID, and the same energy function is used to find the
 #' community of the the given vertex. See also the examples below.
 #'
 #' @param graph The input graph. Edge directions are ignored in directed graphs.
@@ -1436,7 +1436,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   named list is returned with the following components:
 #'   \describe{
 #'     \item{community}{
-#'       Numeric vector giving the ids of the vertices in the same community as `vertex`.
+#'       Numeric vector giving the IDs of the vertices in the same community as `vertex`.
 #'     }
 #'     \item{cohesion}{
 #'       The cohesion score of the result, see references.
@@ -1956,7 +1956,7 @@ cluster_walktrap <- function(
 #'   itself is divisive and not agglomerative: it builds the tree from top to
 #'   bottom. There is one line for each merge (i.e. split) in matrix, the first
 #'   line is the first merge (last split). The communities are identified by
-#'   integer number starting from one. Community ids smaller than or equal to
+#'   integer number starting from one. Community IDs smaller than or equal to
 #'   \eqn{N}, the number of vertices in the graph, belong to singleton
 #'   communities, i.e. individual vertices. Before the first merge we have \eqn{N}
 #'   communities numbered from one to \eqn{N}. The first merge, the first line of
@@ -2947,7 +2947,7 @@ dendPlotPhylo <- function(
 #' @aliases compare.communities compare.membership
 #' @param comm1 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the first community
-#'   structure. The membership vector should contain the community id of each
+#'   structure. The membership vector should contain the community ID of each
 #'   vertex, the numbering of the communities starts with one.
 #' @param comm2 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the second
@@ -3140,7 +3140,7 @@ split_join_distance <- function(comm1, comm2) {
 #'   below.
 #' @return A named list of numeric or character vectors. The names are just
 #'   numbers that refer to the groups. The vectors themselves are numeric or
-#'   symbolic vertex ids.
+#'   symbolic vertex IDs.
 #' @seealso [components()] and the various community finding
 #' functions.
 #' @examples
@@ -3205,7 +3205,7 @@ communities <- groups.communities
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
-#'   correspond to the vertices, and for each element the id in the new graph is
+#'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
 #'   the new graph. Please see [attribute.combination()] for details.
@@ -3268,7 +3268,7 @@ contract <- function(
 #' @return A named list with two components:
 #'   \describe{
 #'     \item{membership}{
-#'       numeric vector giving the cluster id to which each vertex belongs.
+#'       numeric vector giving the cluster ID to which each vertex belongs.
 #'     }
 #'     \item{distances}{
 #'       numeric vector giving the distance of each vertex from its generator

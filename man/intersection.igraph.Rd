@@ -33,7 +33,7 @@ operator is \verb{\%s\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead
-of the internal numeric vertex ids.
+of the internal numeric vertex IDs.
 
 \code{intersection()} keeps the attributes of all graphs. All graph,
 vertex and edge attributes are copied to the result. If an attribute is

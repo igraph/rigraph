@@ -101,17 +101,17 @@ add_vses_graph_ref <- function(vses, graph) {
   vses
 }
 
-#' Get the id of a graph
+#' Get the ID of a graph
 #'
-#' Graph ids are used to check that a vertex or edge sequence
+#' Graph IDs are used to check that a vertex or edge sequence
 #' belongs to a graph. If you create a new graph by changing the
-#' structure of a graph, the new graph will have a new id.
-#' Changing the attributes will not change the id.
+#' structure of a graph, the new graph will have a new ID.
+#' Changing the attributes will not change the ID.
 #'
 #' @param x A graph or a vertex sequence or an edge sequence.
 #' @param ... Not used currently.
-#' @return The id of the graph, a character scalar. For
-#'   vertex and edge sequences the id of the graph they were created from.
+#' @return The ID of the graph, a character scalar. For
+#'   vertex and edge sequences the ID of the graph they were created from.
 #'
 #' @export
 #' @examples
@@ -210,13 +210,13 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #' another graph.
 #'
 #' At the implementation level, a vertex sequence is simply a vector
-#' containing numeric vertex ids, but it has a special class attribute
+#' containing numeric vertex IDs, but it has a special class attribute
 #' which makes it possible to perform graph specific operations on it, like
 #' selecting a subset of the vertices based on graph structure, or vertex
 #' attributes.
 #'
 #' A vertex sequence is most often created by the `V()` function. The
-#' result of this includes all vertices in increasing vertex id order. A
+#' result of this includes all vertices in increasing vertex ID order. A
 #' vertex sequence can be indexed by a numeric vector, just like a regular
 #' R vector. See \code{\link{[.igraph.vs}} and additional links to other
 #' vertex sequence operations below.
@@ -233,7 +233,7 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #'
 #' @param graph The graph
 #' @return A vertex sequence containing all vertices, in the order
-#'   of their numeric vertex ids.
+#'   of their numeric vertex IDs.
 #'
 #' @family vertex and edge sequences
 #' @export
@@ -295,7 +295,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 
 #' Edges of a graph
 #'
-#' An edge sequence is a vector containing numeric edge ids, with a special
+#' An edge sequence is a vector containing numeric edge IDs, with a special
 #' class attribute that allows custom operations: selecting subsets of
 #' edges based on attributes, or graph structure, creating the
 #' intersection, union of edges, etc.
@@ -309,7 +309,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' another graph.
 #'
 #' An edge sequence is most often created by the `E()` function. The
-#' result includes edges in increasing edge id order by default (if. none
+#' result includes edges in increasing edge ID order by default (if. none
 #' of the `P` and `path` arguments are used). An edge
 #' sequence can be indexed by a numeric vector, just like a regular R
 #' vector. See links to other edge sequence operations below.
@@ -879,7 +879,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'     to select edges with the given names. Note that a graph may
 #'     have edge names and vertex names, and both can be used to select
 #'     edges. Edge names are simply used as names of the numeric
-#'     edge id vector. Vertex names effectively only work in graphs without
+#'     edge ID vector. Vertex names effectively only work in graphs without
 #'     multiple edges, and must be separated with a `|` bar character
 #'     to select an edges that incident to the two given vertices. See
 #'     examples below.
@@ -1966,7 +1966,7 @@ rev.igraph.es <- rev.igraph.vs
 #'
 #' @details
 #' For graphs without names, a numeric vector is returned, containing the
-#' internal numeric vertex or edge ids.
+#' internal numeric vertex or edge IDs.
 #'
 #' For graphs with names, and vertex sequences, the vertex names are
 #' returned in a character vector.

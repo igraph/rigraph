@@ -20,22 +20,22 @@
 \arguments{
 \item{x}{The graph.}
 
-\item{i}{Index. Vertex ids or names or logical vectors. See details
+\item{i}{Index. Vertex IDs or names or logical vectors. See details
 below.}
 
-\item{j}{Index. Vertex ids or names or logical vectors. See details
+\item{j}{Index. Vertex IDs or names or logical vectors. See details
 below.}
 
 \item{...}{Currently ignored.}
 
-\item{from}{A numeric or character vector giving vertex ids or
+\item{from}{A numeric or character vector giving vertex IDs or
 names. Together with the \code{to} argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the \code{i} and \code{j} arguments
 and if it is present, then the \code{to} argument must be present as
 well.}
 
-\item{to}{A numeric or character vector giving vertex ids or
+\item{to}{A numeric or character vector giving vertex IDs or
 names. Together with the \code{from} argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the \code{i} and \code{j} arguments
@@ -44,7 +44,7 @@ well.}
 
 \item{sparse}{Logical scalar, whether to return sparse matrices.}
 
-\item{edges}{Logical scalar, whether to return edge ids.}
+\item{edges}{Logical scalar, whether to return edge IDs.}
 
 \item{drop}{Ignored.}
 
@@ -75,7 +75,7 @@ two return part of it.
 \item The \code{from} and \code{to} arguments can be used to check
 the existence of many edges. In this case, both \code{from} and
 \code{to} must be present and they must have the same length. They
-must contain vertex ids or names. A numeric vector is returned, of
+must contain vertex IDs or names. A numeric vector is returned, of
 the same length as \code{from} and \code{to}, it contains ones
 for existing edges edges and zeros for non-existing ones.
 Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
@@ -83,9 +83,9 @@ Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
 weights. For non-esistent edges zero weights are returned. Other
 edge attributes can be queried as well, by giving the \code{attr}
 argument.
-\item Querying edge ids instead of the existance of edges or edge
+\item Querying edge IDs instead of the existance of edges or edge
 attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
-returns the id of the edge between vertices 1 and 2, or zero if
+returns the ID of the edge between vertices 1 and 2, or zero if
 there is no such edge.
 \item Adding one or more edges to a graph. For this the element(s) of
 the imaginary adjacency matrix must be set to a non-zero numeric
@@ -109,7 +109,7 @@ removes the edge from vertex \eqn{v} to vertex \eqn{w}.
 As this can be used to delete edges between two sets of vertices,
 either pairwise: \preformatted{  graph[from=v, to=w] <- FALSE}
 or not: \preformatted{  graph[v, w] <- FALSE }
-if \eqn{v} and \eqn{w} are vectors of edge ids or names.
+if \eqn{v} and \eqn{w} are vectors of edge IDs or names.
 }
 
 \sQuote{\code{[}} allows logical indices and negative indices as well,
@@ -120,7 +120,7 @@ G[-1,1] <- TRUE}
 creates a star graph.
 
 Of course, the indexing operators support vertex names,
-so instead of a numeric vertex id a vertex can also be given to
+so instead of a numeric vertex ID a vertex can also be given to
 \sQuote{\code{[}} and \sQuote{\code{[[}}.
 }
 \seealso{

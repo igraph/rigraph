@@ -78,6 +78,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Document all arguments and return values
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag: `#' @cdocs igraph_function_name`
+- Write "ID"/"IDs" (not "id"/"ids") when referring to vertex/edge IDs in documentation *prose*. Lowercase stays only where the token is code: argument names, runnable `@examples`, and spans in `` `...` `` or `\code{}`. Run `Rscript tools/check-id-casing.R` to find violations in roxygen prose.
 - Always run `devtools::document()` after updating documentation
 
 ### Naming Conventions

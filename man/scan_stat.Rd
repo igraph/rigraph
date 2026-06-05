@@ -33,7 +33,7 @@ The scan statistics in each time step.
 It is \code{NA} for the initial \code{tau + ell} time steps.
 }
 \item{arg_max_v}{
-The (numeric) vertex ids for the vertex with the largest locality statistics, at each time step.
+The (numeric) vertex IDs for the vertex with the largest locality statistics, at each time step.
 It is \code{NA} for the initial \code{tau + ell} time steps.
 }
 }

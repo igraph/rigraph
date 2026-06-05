@@ -93,7 +93,7 @@ If the \code{vertex} argument is present, i.e. the second form is used then a
 named list is returned with the following components:
 \describe{
 \item{community}{
-Numeric vector giving the ids of the vertices in the same community as \code{vertex}.
+Numeric vector giving the IDs of the vertices in the same community as \code{vertex}.
 }
 \item{cohesion}{
 The cohesion score of the result, see references.
@@ -129,7 +129,7 @@ community detection. If the \code{vertex} argument is not given (or it is
 optimizing the an energy function.
 
 If the \code{vertex} argument is given and it is not \code{NULL}, then it
-must be a vertex id, and the same energy function is used to find the
+must be a vertex ID, and the same energy function is used to find the
 community of the the given vertex. See also the examples below.
 }
 \section{Related documentation in the C library}{

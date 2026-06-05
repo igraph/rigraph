@@ -9,9 +9,9 @@ max_flow(graph, source, target, capacity = NULL)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.
@@ -28,17 +28,17 @@ A numeric vector, the flow itself, one entry for each edge.
 For undirected graphs this entry is bit trickier,
 since for these the flow direction is not predetermined by the edge direction.
 For these graphs the elements of the this vector can be negative,
-this means that the flow goes from the bigger vertex id to the smaller one.
-Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+this means that the flow goes from the bigger vertex ID to the smaller one.
+Positive values mean that the flow goes from the smaller vertex ID to the bigger one.
 }
 \item{cut}{
-A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+A numeric vector of edge IDs, the minimum cut corresponding to the maximum flow.
 }
 \item{partition1}{
-A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+A numeric vector of vertex IDs, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
 }
 \item{partition2}{
-A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+A numeric vector of vertex IDs, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
 }
 \item{stats}{
 A list with some statistics from the push-relabel algorithm.

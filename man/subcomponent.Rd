@@ -18,7 +18,7 @@ returned. If \dQuote{all} returns the union of these. It is ignored for
 undirected graphs.}
 }
 \value{
-Numeric vector, the ids of the vertices in the same component as
+Numeric vector, the IDs of the vertices in the same component as
 \code{v}.
 }
 \description{

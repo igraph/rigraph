@@ -35,7 +35,7 @@ to modify this.}
 \item{ylim}{The limits for the vertical axis, it is unlikely that you want
 to modify this.}
 
-\item{mark.groups}{A list of vertex id vectors. It is interpreted as a set
+\item{mark.groups}{A list of vertex ID vectors. It is interpreted as a set
 of vertex groups. Each vertex group is highlighted, by plotting a colored
 smoothed polygon around and \dQuote{under} it. See the arguments below to
 control the look of the polygons.}
@@ -48,7 +48,7 @@ used for the different vertex groups.}
 
 \item{mark.col}{A scalar or vector giving the colors of marking the
 polygons, in any format accepted by \code{\link[graphics:xspline]{graphics::xspline()}}; e.g.
-numeric color ids, symbolic color names, or colors in RGB.}
+numeric color IDs, symbolic color names, or colors in RGB.}
 
 \item{mark.border}{A scalar or vector giving the colors of the borders of
 the vertex group marking polygons. If it is \code{NA}, then no border is

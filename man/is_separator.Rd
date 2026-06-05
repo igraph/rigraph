@@ -10,7 +10,7 @@ is_separator(graph, candidate)
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored.}
 
-\item{candidate}{A numeric vector giving the vertex ids of the candidate
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate
 separator.}
 }
 \value{

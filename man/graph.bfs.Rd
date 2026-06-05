@@ -42,7 +42,7 @@ vertices that are unreachable from the given root vertex (or vertices). If
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
 \item{order}{Logical scalar, whether to return the ordering of the vertices.}

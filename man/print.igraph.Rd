@@ -35,7 +35,7 @@ attributes.}
 \item{edge.attributes}{Logical constant, whether to print edge attributes.}
 
 \item{names}{Logical constant, whether to print symbolic vertex names (i.e.
-the \code{name} vertex attribute) or vertex ids.}
+the \code{name} vertex attribute) or vertex IDs.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the
 output will be truncated.}
@@ -74,7 +74,7 @@ vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 The first line always
 starts with \code{IGRAPH}, showing you that the object is an igraph graph.
 Then a seven character code is printed, this the first seven characters
-of the unique id of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
+of the unique ID of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (\sQuote{\code{D}}) and undirected
 (\sQuote{\code{U}}) graphs. The second letter is \sQuote{\code{N}} for named

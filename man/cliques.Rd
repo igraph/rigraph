@@ -61,7 +61,7 @@ so will cause R to crash due to reentrancy issues. Extract
 any needed graph information before calling the function with a callback, or
 use collector mode (the default) and process results afterward.}
 
-\item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
+\item{subset}{If not \code{NULL}, then it must be a vector of vertex IDs,
 numeric or symbolic if the graph is named. The algorithm is run from these
 vertices only, so only a subset of all maximal cliques is returned. See the
 Eppstein paper for details. This argument makes it possible to easily
@@ -70,7 +70,7 @@ parallelize the finding of maximal cliques.}
 \item{file}{If not \code{NULL}, then it must be a file name, i.e. a
 character scalar. The output of the algorithm is written to this file. (If
 it exists, then it will be overwritten.) Each clique will be a separate line
-in the file, given with the numeric ids of its vertices, separated by
+in the file, given with the numeric IDs of its vertices, separated by
 whitespace.}
 
 \item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
@@ -87,12 +87,12 @@ or only the maximal ones (\code{TRUE}).}
 \item{directed}{Whether to consider edge directions.}
 }
 \value{
-\code{cliques()} returns a list containing numeric vectors of vertex ids if
+\code{cliques()} returns a list containing numeric vectors of vertex IDs if
 \code{callback} is \code{NULL}. Each list element is a clique, i.e. a vertex sequence
 of class \link[=V]{igraph.vs}. If \code{callback} is provided, returns \code{NULL} invisibly.
 
 \code{largest_cliques()} and \code{clique_num()} return a list containing numeric
-vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+vectors of vertex IDs. Each list element is a clique, i.e. a vertex sequence
 of class \link[=V]{igraph.vs}.
 
 \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}

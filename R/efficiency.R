@@ -40,7 +40,7 @@
 #' @param weights The edge weights. All edge weights must be non-negative;
 #'   additionally, no edge weight may be NaN. If it is `NULL` (the default)
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
-#' @param vids The vertex ids of the vertices for which the calculation will be done.
+#' @param vids The vertex IDs of the vertices for which the calculation will be done.
 #'   Applies to the local efficiency calculation only.
 #' @param directed Logical scalar, whether to consider directed paths. Ignored
 #'   for undirected graphs.

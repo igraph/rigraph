@@ -10,7 +10,7 @@ contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
 \item{graph}{The input graph, it can be directed or undirected.}
 
 \item{mapping}{A numeric vector that specifies the mapping. Its elements
-correspond to the vertices, and for each element the id in the new graph is
+correspond to the vertices, and for each element the ID in the new graph is
 given.}
 
 \item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
