@@ -47,7 +47,7 @@ Please see the reference given below.
 }
 
 \examples{
-g <- sample_gnp(1000, .1)
+g <- sample_gnp(1000, 0.1)
 g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
 g
