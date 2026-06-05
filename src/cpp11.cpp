@@ -564,6 +564,7 @@ extern SEXP Rx_igraph_layout_kamada_kawai_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP,
 extern SEXP Rx_igraph_layout_lgl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_layout_merge_dla(SEXP, SEXP);
 extern SEXP Rx_igraph_layout_reingold_tilford(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_lazy_names(SEXP, SEXP);
 extern SEXP Rx_igraph_make_weak_ref(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques_count(SEXP, SEXP, SEXP, SEXP);
@@ -596,12 +597,10 @@ extern SEXP Rx_igraph_vs_adj(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_vs_nei(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_walktrap_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
-extern SEXP Rx_igraph_weak_ref_run_finalizer(SEXP);
 extern SEXP Rx_igraph_weak_ref_value(SEXP);
 extern SEXP Rx_igraph_write_graph_dimacs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_lgl(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_ncol(SEXP, SEXP, SEXP, SEXP);
-extern SEXP UUID_gen(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edge",                                       (DL_FUNC) &R_igraph_add_edge,                                        3},
@@ -1146,6 +1145,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_layout_lgl",                                    (DL_FUNC) &Rx_igraph_layout_lgl,                                     8},
     {"Rx_igraph_layout_merge_dla",                              (DL_FUNC) &Rx_igraph_layout_merge_dla,                               2},
     {"Rx_igraph_layout_reingold_tilford",                       (DL_FUNC) &Rx_igraph_layout_reingold_tilford,                        5},
+    {"Rx_igraph_lazy_names",                                    (DL_FUNC) &Rx_igraph_lazy_names,                                     2},
     {"Rx_igraph_make_weak_ref",                                 (DL_FUNC) &Rx_igraph_make_weak_ref,                                  3},
     {"Rx_igraph_maximal_cliques",                               (DL_FUNC) &Rx_igraph_maximal_cliques,                                4},
     {"Rx_igraph_maximal_cliques_count",                         (DL_FUNC) &Rx_igraph_maximal_cliques_count,                          4},
@@ -1178,12 +1178,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_vs_nei",                                        (DL_FUNC) &Rx_igraph_vs_nei,                                         4},
     {"Rx_igraph_walktrap_community",                            (DL_FUNC) &Rx_igraph_walktrap_community,                             6},
     {"Rx_igraph_weak_ref_key",                                  (DL_FUNC) &Rx_igraph_weak_ref_key,                                   1},
-    {"Rx_igraph_weak_ref_run_finalizer",                        (DL_FUNC) &Rx_igraph_weak_ref_run_finalizer,                         1},
     {"Rx_igraph_weak_ref_value",                                (DL_FUNC) &Rx_igraph_weak_ref_value,                                 1},
     {"Rx_igraph_write_graph_dimacs",                            (DL_FUNC) &Rx_igraph_write_graph_dimacs,                             5},
     {"Rx_igraph_write_graph_lgl",                               (DL_FUNC) &Rx_igraph_write_graph_lgl,                                5},
     {"Rx_igraph_write_graph_ncol",                              (DL_FUNC) &Rx_igraph_write_graph_ncol,                               4},
-    {"UUID_gen",                                                (DL_FUNC) &UUID_gen,                                                 1},
     {"_igraph_getsphere",                                       (DL_FUNC) &_igraph_getsphere,                                        7},
     {"_igraph_igraph_hcass2",                                   (DL_FUNC) &_igraph_igraph_hcass2,                                    3},
     {NULL, NULL, 0}

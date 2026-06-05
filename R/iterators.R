@@ -87,6 +87,22 @@ identical_graphs <- function(g1, g2, attrs = TRUE) {
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 
+# Build the `names` attribute of a vertex/edge sequence lazily.
+#
+# `source` is the graph's full vertex/edge name vector (shared by reference
+# across all sequences of the graph) and `idx` is a 1-based index into it.
+# The result is an ALTREP string vector that only materializes the actual
+# names when they are first accessed (printing, named indexing, `as_ids()`),
+# so constructing a sequence stays cheap even when many of them are returned
+# at once (e.g. `max_cliques()`). Subsetting it stays lazy too, via the
+# class's `Extract_subset` method. Returns `NULL` when there is no source.
+lazy_index_names <- function(source, idx) {
+  if (is.null(source)) {
+    return(NULL)
+  }
+  .Call(Rx_igraph_lazy_names, source, idx)
+}
+
 add_vses_graph_ref <- function(vses, graph) {
   ref <- get_vs_ref(graph)
   if (!is.null(ref)) {
@@ -253,7 +269,7 @@ V <- function(graph) {
 
   res <- seq_len(vcount(graph))
   if (is_named(graph)) {
-    names(res) <- vertex_attr(graph)$name
+    names(res) <- lazy_index_names(vertex_attr(graph)$name, res)
   }
   class(res) <- "igraph.vs"
   res <- set_complete_iterator(res)
@@ -381,7 +397,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   }
 
   if ("name" %in% edge_attr_names(graph)) {
-    names(res) <- edge_attr(graph)$name[res]
+    names(res) <- lazy_index_names(edge_attr(graph)$name, res)
   }
   if (is_named(graph)) {
     el <- ends(graph, es = res)
