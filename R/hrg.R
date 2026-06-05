@@ -549,6 +549,7 @@ buildMerges <- function(object) {
 }
 
 #' @method as.dendrogram igraphHRG
+#' @export
 as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
   nMerge <- length(object$left)
   merges <- buildMerges(object)

@@ -2809,8 +2809,7 @@ layout.drl <- function(
 #' `drl_defaults$final`.
 #'
 #' @aliases drl_defaults igraph.drl.coarsen
-#' @aliases  igraph.drl.coarsest igraph.drl.default igraph.drl.final
-#'  igraph.drl.refine
+#' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.
