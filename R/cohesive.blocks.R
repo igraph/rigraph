@@ -216,8 +216,7 @@ blockGraphs <- function(blocks, graph) {
 #' cohesive blocks in it.
 #'
 #' @aliases cohesiveBlocks blocks
-#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
-#' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
+#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
