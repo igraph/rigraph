@@ -230,5 +230,69 @@ benchmark_run(
   n = 20
 )
 
+# ---------------------------------------------------------------------------
+# Group #6 - what lazy names + batch construction buy
+# These illustrate the three distinct wins on named graphs:
+#   * batch construction of many vertex sequences (one shared graph reference
+#     and one hoisted name source instead of per-object work);
+#   * lazy names that are never paid for when only the IDs/sizes are used;
+#   * O(1) lazy subsetting of a vertex sequence (ALTREP Extract_subset).
+# ---------------------------------------------------------------------------
+
+# ego() returns one vertex sequence per node -- a few thousand sequences built
+# in one call. Exercises create_vs_list() through neighborhood().
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(2000L, 10000L)
+    V(g)$name <- paste0("v", seq_len(2000L))
+  },
+  ego_order2_named = ego(g, order = 2, nodes = V(g)),
+  n = 20
+)
+
+# Construct many cliques but only read their sizes: with lazy names the name
+# vectors are never materialized at all, so this is close to the numeric path.
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnp(200L, 0.16, directed = FALSE)
+    V(g)$name <- paste0("v", seq_len(gorder(g)))
+  },
+  max_cliques_sizes_named = lengths(max_cliques(g)),
+  n = 20
+)
+
+# Enumerate simple paths between hubs on a named graph: another high-volume
+# vertex-sequence-list path (create_vs_list via all_simple_paths()).
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(500L, 2500L)
+    V(g)$name <- paste0("v", seq_len(500L))
+  },
+  all_simple_paths_named = all_simple_paths(g, 1, 2:6, cutoff = 5),
+  n = 20
+)
+
+# Positional subset of a large named vertex sequence. Subsetting a lazy-names
+# sequence composes indices in O(1) (ALTREP Extract_subset) instead of copying
+# a subset of the name vector.
+benchmark_run(
+  expr_before_benchmark = {
+    library(igraph)
+    set.seed(42)
+    g <- sample_gnm(50000L, 100000L)
+    V(g)$name <- paste0("v", seq_len(50000L))
+    v <- V(g)
+    pick <- sample(50000L, 10000L)
+  },
+  vs_subset_positional = v[pick],
+  n = 20
+)
+
 # Create the artifacts consumed by the GitHub Action.
 benchmark_analyze()
