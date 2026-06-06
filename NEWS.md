@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9012
+
+## Bug fixes
+
+- BFS reports all requested root vertices instead of only the first (#1639, #2693).
+
+- Resolve roxygen2 warnings (#2641, #2692).
+
+## Documentation
+
+- Use "ID"/"IDs" consistently in documentation prose (#1683, #2694).
+
+## Uncategorized
+
+- Fix: do not wrap roxygenize in try() (#2679) (#2690) (#2679).
+
+
 # igraph 2.3.2.9011
 
 ## Bug fixes
