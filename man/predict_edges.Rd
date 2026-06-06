@@ -34,7 +34,7 @@ number for a more accurate prediction.}
 A list with entries:
 \describe{
 \item{edges}{
-The predicted edges, in a two-column matrix of vertex ids.
+The predicted edges, in a two-column matrix of vertex IDs.
 }
 \item{prob}{
 Probabilities of these edges, according to the fitted model.

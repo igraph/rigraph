@@ -526,7 +526,7 @@ print.igraph_layout_spec <- function(x, ...) {
 #'
 #' @param ... Named arguments that define the modifier. Must include:
 #'   \describe{
-#'     \item{id}{A unique identifier string for the modifier}
+#'     \item{ID}{A unique identifier string for the modifier}
 #'     \item{type}{Either `"pre"` for pre-layout or `"post"` for post-layout}
 #'     \item{args}{A list of arguments to pass to the apply function}
 #'     \item{apply}{A function with signature
@@ -735,10 +735,10 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' order of the vertices can be also given.
 #'
 #' @param graph The graph to layout.
-#' @param center The id of the vertex to put in the center. By default it is
+#' @param center The ID of the vertex to put in the center. By default it is
 #'   the first vertex.
 #' @param order Numeric vector, the order of the vertices along the perimeter.
-#'   The default ordering is given by the vertex ids.
+#'   The default ordering is given by the vertex IDs.
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -794,7 +794,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'
 #' @param graph The input graph.
 #' @param root The index of the root vertex or root vertices.  If this is a
-#'   non-empty vector then the supplied vertex ids are used as the roots of the
+#'   non-empty vector then the supplied vertex IDs are used as the roots of the
 #'   trees (or a single tree if the graph is connected).  If it is an empty
 #'   vector, then the root vertices are automatically calculated based on
 #'   topological sorting, performed with the opposite mode than the `mode`
@@ -902,7 +902,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 
 #' Graph layout with vertices on a circle.
 #'
-#' Place vertices on a circle, in the order of their vertex ids.
+#' Place vertices on a circle, in the order of their vertex IDs.
 #'
 #' If you want to order the vertices differently, then permute them using the
 #' [permute()] function.
@@ -1149,7 +1149,7 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 #' Graph layout with vertices on the surface of a sphere
 #'
 #' Place vertices on a sphere, approximately uniformly, in the order of their
-#' vertex ids.
+#' vertex IDs.
 #'
 #' `layout_on_sphere()` places the vertices (approximately) uniformly on the
 #' surface of a sphere, this is thus a 3d layout. It is not clear however what
@@ -1449,7 +1449,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'  (with a warning).
 #' @param maxiter A deprecated synonym of `niter`, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
-#'   vertex, according to the ids of the vertex ids.
+#'   vertex, according to the IDs of the vertex IDs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_drl()], [layout_with_kk()] for
 #' other layout algorithms.
@@ -1998,7 +1998,7 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'   repulsion forces between vertices only vertices in the same or neighboring
 #'   grid cells are taken into account (the fourth root of the number of
 #'   `area`.
-#' @param root The id of the vertex to place at the middle of the layout. The
+#' @param root The ID of the vertex to place at the middle of the layout. The
 #'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2809,8 +2809,7 @@ layout.drl <- function(
 #' `drl_defaults$final`.
 #'
 #' @aliases drl_defaults igraph.drl.coarsen
-#' @aliases  igraph.drl.coarsest igraph.drl.default igraph.drl.final
-#'  igraph.drl.refine
+#' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.

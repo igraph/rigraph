@@ -30,7 +30,7 @@ degree_distribution(graph, cumulative = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The ids of vertices of which the degree will be calculated.}
+\item{v}{The IDs of vertices of which the degree will be calculated.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{total} for the sum of the two. For undirected graphs

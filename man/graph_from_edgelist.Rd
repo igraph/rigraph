@@ -22,9 +22,9 @@ An igraph graph.
 \description{
 \code{graph_from_edgelist()} creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is
-a numeric matrix then its elements are interpreted as vertex ids. If
+a numeric matrix then its elements are interpreted as vertex IDs. If
 it is a character matrix then it is interpreted as symbolic vertex
-names and a vertex id will be assigned to each name, and also a
+names and a vertex ID will be assigned to each name, and also a
 \code{name} vertex attribute will be added.
 }
 \section{Related documentation in the C library}{

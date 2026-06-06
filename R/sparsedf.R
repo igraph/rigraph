@@ -60,11 +60,13 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 }
 
 #' @method as.data.frame igraphSDF
+#' @export
 as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
   as.data.frame(lapply(x, rep, length.out = attr(x, "NROW")))
 }
 
 #' @method "[" igraphSDF
+#' @export
 `[.igraphSDF` <- function(x, i, j, ..., drop = TRUE) {
   if (!is.character(j)) {
     cli::cli_abort("The column index must be character.")
@@ -84,6 +86,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
 }
 
 #' @method "[<-" igraphSDF
+#' @export
 `[<-.igraphSDF` <- function(x, i, j, value) {
   if (!is.character(j)) {
     cli::cli_abort("The column index must be character.")
@@ -100,12 +103,12 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     if (length(value) != length(i) && length(value) != 1) {
       cli::cli_abort("Replacement value has the wrong length.")
     }
-    tmp <- rep(x[[j]], length.out = attr(x, "NROW"))
-    tmp[i] <- value
-    if (length(unique(tmp)) == 1) {
-      tmp <- tmp[1]
+    column_values <- rep(x[[j]], length.out = attr(x, "NROW"))
+    column_values[i] <- value
+    if (length(unique(column_values)) == 1) {
+      column_values <- column_values[1]
     }
-    x[[j]] <- tmp
+    x[[j]] <- column_values
   }
 
   x

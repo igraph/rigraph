@@ -156,6 +156,15 @@ igraph` to update the `.Rd` files.
 
 - Links to C docs are added automatically thanks to the igraph.r2cdocs's roclet.
 
+- Write "ID"/"IDs" (not "id"/"ids") when referring to vertex or edge IDs in
+documentation prose. Lowercase stays only where the token is code: argument
+names, runnable `@examples`, and spans wrapped in `` `...` `` or `\code{}`. You
+can check roxygen prose for stray lowercase forms with:
+
+```sh
+Rscript tools/check-id-casing.R
+```
+
 ### Maintaining igraph.r2cdocs
 
 To update the data (when the C docs index has changed after a release) in https://github.com/igraph/igraph.r2cdocs/, run the script that is `data-raw`, commit the csv file and push.

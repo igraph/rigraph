@@ -47,7 +47,7 @@ other is undirected.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
-names. Otherwise numeric vertex ids are used.
+names. Otherwise numeric vertex IDs are used.
 
 \code{compose()} keeps the attributes of both graphs. All graph, vertex
 and edge attributes are copied to the result. By default, if an attribute

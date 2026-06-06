@@ -25,7 +25,7 @@ argument, for directed graphs.}
 An edge sequence of the graph.
 }
 \description{
-An edge sequence is a vector containing numeric edge ids, with a special
+An edge sequence is a vector containing numeric edge IDs, with a special
 class attribute that allows custom operations: selecting subsets of
 edges based on attributes, or graph structure, creating the
 intersection, union of edges, etc.
@@ -39,7 +39,7 @@ the specific edges of that graph, and cannot be used together with
 another graph.
 
 An edge sequence is most often created by the \code{E()} function. The
-result includes edges in increasing edge id order by default (if. none
+result includes edges in increasing edge ID order by default (if. none
 of the \code{P} and \code{path} arguments are used). An edge
 sequence can be indexed by a numeric vector, just like a regular R
 vector. See links to other edge sequence operations below.

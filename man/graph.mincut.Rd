@@ -15,9 +15,9 @@ graph.mincut(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}

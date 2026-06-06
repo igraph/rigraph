@@ -77,10 +77,10 @@ Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
 \item{order}{
-Numeric vector. The vertex ids, in the order in which they were visited by the search.
+Numeric vector. The vertex IDs, in the order in which they were visited by the search.
 }
 \item{order.out}{
-Numeric vector, the vertex ids, in the order of the completion of their subtree.
+Numeric vector, the vertex IDs, in the order of the completion of their subtree.
 }
 \item{parent}{
 Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.

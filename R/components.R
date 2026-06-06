@@ -290,7 +290,7 @@ bridges <- function(graph) {
 #'     }
 #'     \item{tree_edges}{
 #'       The components themselves, a list of numeric vectors.
-#'       Each vector is a set of edge ids giving the edges in a biconnected component.
+#'       Each vector is a set of edge IDs giving the edges in a biconnected component.
 #'       These edges define a spanning tree of the component.
 #'     }
 #'     \item{component_edges}{

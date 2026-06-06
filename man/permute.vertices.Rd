@@ -10,7 +10,7 @@ permute.vertices(graph, permutation)
 \item{graph}{The input graph, it can directed or undirected.}
 
 \item{permutation}{A numeric vector giving the permutation to apply. The
-first element is the new id of vertex 1, etc. Every number between one and
+first element is the new ID of vertex 1, etc. Every number between one and
 \code{vcount(graph)} must appear exactly once.}
 }
 \description{

@@ -704,7 +704,7 @@ average.path.length <- function(
 #' many shortest paths of the length of the diameter, then it returns the first
 #' one found.
 #'
-#' `farthest_vertices()` returns two vertex ids, the vertices which are
+#' `farthest_vertices()` returns two vertex IDs, the vertices which are
 #' connected by the diameter path.
 #'
 #' @param graph The graph to analyze.
@@ -874,7 +874,7 @@ mean_distance <- function(
 #'
 #'
 #' @param graph The graph to analyze.
-#' @param v The ids of vertices of which the degree will be calculated.
+#' @param v The IDs of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
@@ -1084,7 +1084,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #'   For `shortest_paths()` a named list with four entries is returned:
 #'   \item{vpath}{This itself is a list, of length `length(to)`; list
-#'   element `i` contains the vertex ids on the path from vertex `from`
+#'   element `i` contains the vertex IDs on the path from vertex `from`
 #'   to vertex `to[i]` (or the other way for directed graphs depending on
 #'   the `mode` argument). The vector also contains `from` and `i`
 #'   as the first and last elements. If `from` is the same as `i` then
@@ -1092,8 +1092,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   numeric vector of length zero is returned as the list element. If this
 #'   output is not requested in the `output` argument, then it will be
 #'   `NULL`.} \item{epath}{This is a list similar to `vpath`, but the
-#'   vectors of the list contain the edge ids along the shortest paths, instead
-#'   of the vertex ids. This entry is set to `NULL` if it is not requested
+#'   vectors of the list contain the edge IDs along the shortest paths, instead
+#'   of the vertex IDs. This entry is set to `NULL` if it is not requested
 #'   in the `output` argument.} \item{predecessors}{Numeric vector, the
 #'   predecessor of each vertex in the `to` argument, or `NULL` if it
 #'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
@@ -1108,7 +1108,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'     }
 #'     \item{epaths}{
 #'       This is a list similar to vpaths, but the vectors of the list
-#'       contain the edge ids along the shortest paths, instead of the vertex ids.
+#'       contain the edge IDs along the shortest paths, instead of the vertex IDs.
 #'     }
 #'     \item{nrgeo}{
 #'       A vector in which each element is the number of shortest paths (geodesics)
@@ -1261,7 +1261,7 @@ distances <- function(
 
 #' @rdname distances
 #' @param from Numeric constant, the vertex from or to the shortest paths will
-#'   be calculated. Note that right now this is not a vector of vertex ids, but
+#'   be calculated. Note that right now this is not a vector of vertex IDs, but
 #'   only a single vertex.
 #' @param output Character scalar, defines how to report the shortest paths.
 #'   \dQuote{vpath} means that the vertices along the paths are reported, this
@@ -1504,7 +1504,7 @@ k_shortest_paths <- function(
 #'   are listed. If \dQuote{out} all vertices reachable from `v` are
 #'   returned. If \dQuote{all} returns the union of these. It is ignored for
 #'   undirected graphs.
-#' @return Numeric vector, the ids of the vertices in the same component as
+#' @return Numeric vector, the IDs of the vertices in the same component as
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()]
@@ -1606,7 +1606,7 @@ induced_subgraph <- function(
 }
 
 #' @rdname subgraph
-#' @param eids The edge ids of the edges that will be kept in the result graph.
+#' @param eids The edge IDs of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
 #' @export
@@ -1710,7 +1710,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'       The same as `barrat`.
 #'     }
 #'   }
-#' @param vids The vertex ids for the local transitivity will be calculated.
+#' @param vids The vertex IDs for the local transitivity will be calculated.
 #'   This will be ignored for global transitivity types.  The default value is
 #'   `NULL`, in this case all vertices are considered. It is slightly faster
 #'   to supply `NULL` here than `V(graph)`.
@@ -2415,7 +2415,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #'       Integer constant, the girth of the graph, or `Inf` if the graph is acyclic.
 #'     }
 #'     \item{circle}{
-#'       Numeric vector with the vertex ids in the shortest circle.
+#'       Numeric vector with the vertex IDs in the shortest circle.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2596,7 +2596,10 @@ count_loops <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
-#'   vertices to start the search from.
+#'   vertices to start the search from. When several roots are given, they are
+#'   considered in the order they appear. If a root vertex was already reached
+#'   while searching from an earlier root, no separate search is started from
+#'   it, so it keeps the distance it was first found at rather than `0`.
 #' @param mode For directed graphs specifies the type of edges to follow.
 #'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #'   ignores edge directions completely. \sQuote{total} is a synonym for
@@ -2606,7 +2609,7 @@ count_loops <- function(graph) {
 #'   `TRUE`, then additional searches are performed until all vertices are
 #'   visited.
 #' @param restricted `NULL` (=no restriction), or a vector of vertices
-#'   (ids or symbolic names). In the latter case, the search is restricted to the
+#'   (IDs or symbolic names). In the latter case, the search is restricted to the
 #'   given vertices.
 #' @param order Logical scalar, whether to return the ordering of the vertices.
 #' @param rank Logical scalar, whether to return the rank of the vertices.
@@ -2629,29 +2632,38 @@ count_loops <- function(graph) {
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric scalar. The root vertex that was used as the starting point of the search.
+#'       Numeric vector. The root vertex (or vertices) that was used as the
+#'       starting point of the search, as supplied in the `root` argument.
 #'     }
 #'     \item{neimode}{
 #'       Character scalar. The `mode` argument of the function call.
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
 #'     \item{order}{
-#'       Numeric vector. The vertex ids, in the order in which they were visited by the search.
+#'       The vertex IDs, in the order in which they were visited by the search.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option (see [igraph_options()]) is `FALSE`.
 #'     }
 #'     \item{rank}{
 #'       Numeric vector. The rank for each vertex, zero for unreachable vertices.
 #'     }
 #'     \item{parent}{
-#'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+#'       The parent of each vertex, i.e. the vertex it was discovered from.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{father}{
 #'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{pred}{
-#'       Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
+#'       The previously visited vertex for each vertex, or 0 if there was no such vertex.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{succ}{
-#'       Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
+#'       The next vertex that was visited after the current one, or 0 if there was no such vertex.
+#'       A vertex sequence (`igraph.vs`), or a numeric vector if the
+#'       `return.vs.es` option is `FALSE`.
 #'     }
 #'     \item{dist}{
 #'       Numeric vector, for each vertex its distance from the root of the search tree.
@@ -2735,6 +2747,10 @@ bfs <- function(
     roots <- as_igraph_vs(graph, root) - 1
     root <- 0 # ignored anyway
   }
+  # Keep a copy of the requested root vertices (1-based) so that the result
+  # can report all of them; the C code only returns the scalar `root`, which
+  # is meaningless when multiple roots are supplied.
+  requested_roots <- if (is.null(roots)) root + 1 else roots + 1
   mode <- switch(
     igraph_match_arg(mode),
     "out" = 1,
@@ -2769,6 +2785,12 @@ bfs <- function(
     extra,
     rho
   )
+
+  # The C implementation only returns the scalar `root` it was passed, which is
+  # always 0 (reported as 1) when multiple roots are supplied. Report all of the
+  # requested root vertices instead. See
+  # https://github.com/igraph/rigraph/issues/1639
+  res$root <- requested_roots
 
   # Remove in 1.4.0
   res$neimode <- res$mode
@@ -2894,10 +2916,10 @@ bfs <- function(
 #'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
 #'     \item{order}{
-#'       Numeric vector. The vertex ids, in the order in which they were visited by the search.
+#'       Numeric vector. The vertex IDs, in the order in which they were visited by the search.
 #'     }
 #'     \item{order.out}{
-#'       Numeric vector, the vertex ids, in the order of the completion of their subtree.
+#'       Numeric vector, the vertex IDs, in the order of the completion of their subtree.
 #'     }
 #'     \item{parent}{
 #'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
@@ -3097,7 +3119,7 @@ dfs <- function(
 #'   For `components()` a named list with three components:
 #'   \describe{
 #'     \item{membership}{
-#'       numeric vector giving the cluster id to which each vertex belongs.
+#'       numeric vector giving the cluster ID to which each vertex belongs.
 #'     }
 #'     \item{csize}{
 #'       numeric vector giving the sizes of the clusters.
@@ -3451,7 +3473,7 @@ laplacian_matrix <- function(
 #'     }
 #'     \item{matching}{
 #'       The matching itself.
-#'       Numeric vertex id, or vertex names if the graph was named.
+#'       Numeric vertex ID, or vertex names if the graph was named.
 #'       Non-matched vertices are denoted by `NA`.
 #'     }
 #'   }
@@ -3554,7 +3576,7 @@ max_bipartite_match <- function(
 #'
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
-#'   includes all edges in the order of their ids.
+#'   includes all edges in the order of their IDs.
 #' @param loops Logical, whether to consider directed self-loops to be mutual.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

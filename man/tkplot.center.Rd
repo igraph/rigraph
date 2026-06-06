@@ -7,7 +7,7 @@
 tkplot.center(tkp.id)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

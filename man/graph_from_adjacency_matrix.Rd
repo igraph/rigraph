@@ -241,7 +241,7 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq(ncol(adj_matrix))
+colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,

@@ -1380,7 +1380,7 @@ with_graph_ <- function(...) {
 #' @param edges A vector defining the edges, the first edge points
 #'   from the first element to the second, the second edge from the third
 #'   to the fourth, etc. For a numeric vector, these are interpreted
-#'   as internal vertex ids. For character vectors, they are interpreted
+#'   as internal vertex IDs. For character vectors, they are interpreted
 #'   as vertex names.
 #'
 #'   Alternatively, this can be a character scalar, the name of a
@@ -1398,9 +1398,9 @@ with_graph_ <- function(...) {
 #'   Passed to `make_directed_graph()` or `make_undirected_graph()`.
 #' @param n The number of vertices in the graph. This argument is
 #'   ignored (with a warning) if `edges` are symbolic vertex names. It
-#'   is also ignored if there is a bigger vertex id in `edges`. This
+#'   is also ignored if there is a bigger vertex ID in `edges`. This
 #'   means that for this function it is safe to supply zero here if the
-#'   vertex with the largest id is not an isolate.
+#'   vertex with the largest ID is not an isolate.
 #' @param isolates Character vector, names of isolate vertices,
 #'   for symbolic edge lists. It is ignored for numeric edge lists.
 #' @param directed Whether to create a directed graph.
@@ -2293,7 +2293,7 @@ from_prufer <- function(prufer) {
 #' }
 #'
 #' @concept Graph Atlas.
-#' @param n The id of the graph to create.
+#' @param n The ID of the graph to create.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors

@@ -95,7 +95,7 @@ The plotting function has the following arguments:
 The coordinates of the vertices, a matrix with two columns.
 }
 \item{v}{
-The ids of the vertices to plot. It should match the number of rows in the \code{coords} argument.
+The IDs of the vertices to plot. It should match the number of rows in the \code{coords} argument.
 }
 \item{params}{
 The same as for the clipping function, see above.

@@ -55,7 +55,7 @@ graph. The new edges and possibly their attributes can be specified as
 the arguments of the \code{edges()} function.
 
 The unnamed arguments of \code{edges()} are concatenated and used
-as vertex ids of the end points of the new edges. The named
+as vertex IDs of the end points of the new edges. The named
 arguments will be added as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() +
@@ -73,7 +73,7 @@ the graph.
 new edges that form a path are added. The edges and possibly their
 attributes are specified as the arguments to the \code{path()}
 function. The non-named arguments are concatenated and interpreted
-as the vertex ids along the path. The remaining arguments are added
+as the vertex IDs along the path. The remaining arguments are added
 as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])

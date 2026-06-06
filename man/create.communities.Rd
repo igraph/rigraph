@@ -16,7 +16,7 @@ create.communities(
 \item{graph}{The graph of the community structure.}
 
 \item{membership}{The membership vector of the community structure, a
-numeric vector denoting the id of the community for each vertex. It
+numeric vector denoting the ID of the community for each vertex. It
 might be \code{NULL} for hierarchical community structures.}
 
 \item{algorithm}{Character string, the algorithm that generated

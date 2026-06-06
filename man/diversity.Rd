@@ -13,7 +13,7 @@ diversity(graph, weights = NULL, vids = V(graph))
 computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
 that this measure is not defined for unweighted graphs.}
 
-\item{vids}{The vertex ids for which to calculate the measure.}
+\item{vids}{The vertex IDs for which to calculate the measure.}
 }
 \value{
 A numeric vector, its length is the number of vertices.

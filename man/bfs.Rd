@@ -28,7 +28,10 @@ bfs(
 \item{graph}{The input graph.}
 
 \item{root}{Numeric vector, usually of length one. The root vertex, or root
-vertices to start the search from.}
+vertices to start the search from. When several roots are given, they are
+considered in the order they appear. If a root vertex was already reached
+while searching from an earlier root, no separate search is started from
+it, so it keeps the distance it was first found at rather than \code{0}.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
@@ -43,7 +46,7 @@ vertices that are unreachable from the given root vertex (or vertices). If
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
 \item{order}{Logical scalar, whether to return the ordering of the vertices.}
@@ -78,29 +81,38 @@ from igraph 1.3.0; use \code{mode} instead.}
 A named list with the following entries:
 \describe{
 \item{root}{
-Numeric scalar. The root vertex that was used as the starting point of the search.
+Numeric vector. The root vertex (or vertices) that was used as the
+starting point of the search, as supplied in the \code{root} argument.
 }
 \item{neimode}{
 Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
 \item{order}{
-Numeric vector. The vertex ids, in the order in which they were visited by the search.
+The vertex IDs, in the order in which they were visited by the search.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option (see \code{\link[=igraph_options]{igraph_options()}}) is \code{FALSE}.
 }
 \item{rank}{
 Numeric vector. The rank for each vertex, zero for unreachable vertices.
 }
 \item{parent}{
-Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+The parent of each vertex, i.e. the vertex it was discovered from.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{father}{
 Like parent, kept for compatibility for now.
 }
 \item{pred}{
-Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
+The previously visited vertex for each vertex, or 0 if there was no such vertex.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{succ}{
-Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
+The next vertex that was visited after the current one, or 0 if there was no such vertex.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{dist}{
 Numeric vector, for each vertex its distance from the root of the search tree.

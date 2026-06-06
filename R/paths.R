@@ -96,7 +96,7 @@ is.dag <- function(graph) {
 #'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
