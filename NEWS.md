@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9013
+
+## Features
+
+- Modern cli-styled print output (#1959, #2682).
+
+- Added simple check to `graph_from_literal()` (#824, #1981).
+
+
 # igraph 2.3.2.9012
 
 ## Bug fixes
