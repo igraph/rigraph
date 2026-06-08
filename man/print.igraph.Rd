@@ -101,9 +101,10 @@ As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
 As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
 \code{print_all()}.
 
-Set \code{igraph_options(print.style = "cli")} to switch to a cli-styled
-output with section rules, typed attribute listings and Unicode arrows
-for edges. The default \code{"classic"} keeps the historical
+Output style is controlled by the \code{print.style} igraph option. The default
+\code{"cli"} produces cli-styled output with section rules, typed attribute
+listings and Unicode arrows for edges. Set
+\code{igraph_options(print.style = "classic")} for the historical
 \verb{IGRAPH ... DNW-} header relied on by parsers and tutorials.
 }
 \section{Related documentation in the C library}{

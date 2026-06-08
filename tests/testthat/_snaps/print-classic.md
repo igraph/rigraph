@@ -39,39 +39,39 @@
       + 1/3 vertex, named:
       $name
       [1] "A"
-
+      
       $color
       [1] "red"
-
+      
       $weight
       [1] 10
-
+      
       $cplx
       $cplx[[1]]
       [1] 1 2 3 4
-
-
+      
+      
     Code
       V(g)[[2:3]]
     Output
       + 2/3 vertices, named:
       $name
       [1] "B" "C"
-
+      
       $color
       [1] "red" "red"
-
+      
       $weight
       [1] 9 3
-
+      
       $cplx
       $cplx[[1]]
       [1] 1 2 3 4
-
+      
       $cplx[[2]]
       [1] 1 2 3 4
-
-
+      
+      
 
 # classic: es printing
 
@@ -97,31 +97,31 @@
       + 1/3 edge (vertex names):
       $color
       [1] "red"
-
+      
       $weight
       [1] 10
-
+      
       $cmpx
       $cmpx[[1]]
       [1] 1 2 3 4
-
-
+      
+      
     Code
       E(g)[[2:3]]
     Output
       + 2/3 edges (vertex names):
       $color
       [1] "red" "red"
-
+      
       $weight
       [1] 9 3
-
+      
       $cmpx
       $cmpx[[1]]
       [1] 1 2 3 4
-
+      
       $cmpx[[2]]
       [1] 1 2 3 4
-
-
+      
+      
 

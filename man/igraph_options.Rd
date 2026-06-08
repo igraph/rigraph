@@ -84,6 +84,14 @@ Logical constant, whether to print graph attributes when printing graphs. Defaul
 \item{print.vertex.attributes}{
 Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
 }
+\item{print.style}{
+Character string controlling the visual style used by
+\code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}} and
+\code{\link[=print.igraph.es]{print.igraph.es()}}. Possible values are \code{"cli"} (default, a
+cli-styled output with section rules, Unicode arrows for edges and
+typed attribute listings) and \code{"classic"} (the historical
+\verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
+}
 \item{return.vs.es}{
 Whether functions that return a set or sequence of vertices/edges
 should return formal vertex/edge sequence objects.
