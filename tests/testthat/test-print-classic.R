@@ -1,4 +1,4 @@
-test_that("print.igraph() works", {
+test_that("classic: print.igraph() works", {
   local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76)
 
@@ -71,7 +71,7 @@ test_that("print.igraph() works", {
   expect_output(print(kite), "A -- ")
 })
 
-test_that("print.igraph() respects max.print for adjacency list formats", {
+test_that("classic: print.igraph() respects max.print for adjacency list formats", {
   local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76, max.print = 3)
 
@@ -97,7 +97,7 @@ test_that("print.igraph() respects max.print for adjacency list formats", {
   expect_false(grepl("d -- ", joined))
 })
 
-test_that("print.igraph() omits no message when vcount <= max.print", {
+test_that("classic: print.igraph() omits no message when vcount <= max.print", {
   local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76, max.print = 10)
 
@@ -110,7 +110,7 @@ test_that("print.igraph() omits no message when vcount <= max.print", {
   expect_false(grepl("reached getOption", joined))
 })
 
-test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
+test_that("classic: print.igraph() respects max.print in the adjlist wrapping branch", {
   local_igraph_options(print.full = TRUE)
   withr::local_options(width = 40, max.print = 2)
 
@@ -128,7 +128,7 @@ test_that("print.igraph() respects max.print in the adjlist wrapping branch", {
   expect_false(any(grepl("^3 -- ", out)))
 })
 
-test_that("print.igraph.es() uses vertex names", {
+test_that("classic: print.igraph.es() uses vertex names", {
   g <- make_directed_graph(c("A", "B"))
   expect_snapshot({
     E(g)
@@ -136,7 +136,7 @@ test_that("print.igraph.es() uses vertex names", {
 })
 
 
-test_that("vs printing", {
+test_that("classic: vs printing", {
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -151,7 +151,7 @@ test_that("vs printing", {
   })
 })
 
-test_that("vs printing, complex attributes", {
+test_that("classic: vs printing, complex attributes", {
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -165,7 +165,7 @@ test_that("vs printing, complex attributes", {
   })
 })
 
-test_that("es printing", {
+test_that("classic: es printing", {
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
@@ -178,7 +178,7 @@ test_that("es printing", {
   })
 })
 
-test_that("es printing, complex attributes", {
+test_that("classic: es printing, complex attributes", {
   local_rng_version("3.5.0")
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
