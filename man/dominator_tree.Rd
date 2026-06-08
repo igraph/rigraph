@@ -11,7 +11,7 @@ dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
 some vertices not reachable from the root vertex, then these vertices will
 be collected and returned as part of the result.}
 
-\item{root}{The id of the root (or source) vertex, this will be the root of
+\item{root}{The ID of the root (or source) vertex, this will be the root of
 the tree.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If
@@ -28,11 +28,11 @@ For the root vertex itself it contains minus one.
 }
 \item{domtree}{
 A graph object, the dominator tree.
-Its vertex ids are the as the vertex ids of the input graph.
+Its vertex IDs are the as the vertex IDs of the input graph.
 Isolate vertices are the ones that are unreachable from the root.
 }
 \item{leftout}{
-A numeric vector containing the vertex ids that are unreachable from the root.
+A numeric vector containing the vertex IDs that are unreachable from the root.
 }
 }
 }

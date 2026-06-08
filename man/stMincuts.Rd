@@ -9,9 +9,9 @@ stMincuts(graph, source, target, capacity = NULL)
 \arguments{
 \item{graph}{The input graph. It must be directed.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex.}
+\item{target}{The ID of the target vertex.}
 
 \item{capacity}{Numeric vector giving the edge capacities. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then this

@@ -152,7 +152,7 @@ blockGraphs <- function(blocks, graph) {
 #'
 #' The function `blocks()` returns the actual blocks stored in the
 #' `cohesiveBlocks` object. They are returned in a list of numeric
-#' vectors, each containing vertex ids.
+#' vectors, each containing vertex IDs.
 #'
 #' The function `graphs_from_cohesive_blocks()` is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
@@ -163,7 +163,7 @@ blockGraphs <- function(blocks, graph) {
 #' `blocks()` and `graphs_from_cohesive_blocks()` functions.
 #'
 #' The block hierarchy can be queried using the `hierarchy()` function. It
-#' returns an igraph graph, its vertex ids are ordered according the order of
+#' returns an igraph graph, its vertex IDs are ordered according the order of
 #' the blocks in the `blocks()` and `graphs_from_cohesive_blocks()`, `cohesion()`,
 #' etc. functions.
 #'
@@ -208,7 +208,7 @@ blockGraphs <- function(blocks, graph) {
 #' blocks. The first block always corresponds to the whole graph, even if its
 #' cohesion is zero. Then cohesion of the block and the number of vertices in
 #' the block are shown. The last part is only printed if the display is wide
-#' enough and shows the vertices in the blocks, ordered by vertex ids.
+#' enough and shows the vertices in the blocks, ordered by vertex IDs.
 #' \sQuote{o} means that the vertex is included, a dot means that it is not,
 #' and the vertices are shown in groups of ten.
 #'
@@ -216,8 +216,7 @@ blockGraphs <- function(blocks, graph) {
 #' cohesive blocks in it.
 #'
 #' @aliases cohesiveBlocks blocks
-#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
-#' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
+#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
@@ -265,7 +264,7 @@ blockGraphs <- function(blocks, graph) {
 #'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
 #'
-#'   `blocks()` returns a list of numeric vectors, containing vertex ids.
+#'   `blocks()` returns a list of numeric vectors, containing vertex IDs.
 #'
 #'   `graphs_from_cohesive_blocks()` returns a list of igraph graphs, corresponding to the
 #'   cohesive blocks.

@@ -16,7 +16,7 @@ make_clusters(
 \item{graph}{The graph of the community structure.}
 
 \item{membership}{The membership vector of the community structure, a
-numeric vector denoting the id of the community for each vertex. It
+numeric vector denoting the ID of the community for each vertex. It
 might be \code{NULL} for hierarchical community structures.}
 
 \item{algorithm}{Character string, the algorithm that generated
@@ -33,7 +33,7 @@ modularity values is calculated automatically.}
 A \code{communities} object.
 \describe{
 \item{membership}{
-A numeric vector giving the community id for each vertex.
+A numeric vector giving the community ID for each vertex.
 }
 \item{modularity}{
 The modularity score of the partition.

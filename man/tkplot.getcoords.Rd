@@ -7,7 +7,7 @@
 tkplot.getcoords(tkp.id, norm = FALSE)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{norm}{Logical, should we norm the coordinates.}
 }

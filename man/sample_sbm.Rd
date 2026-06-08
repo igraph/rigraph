@@ -45,7 +45,7 @@ The order of the vertices in the generated graph corresponds to the
 \examples{
 
 ## Two groups with not only few connection between groups
-pm <- cbind(c(.1, .001), c(.001, .05))
+pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
 }

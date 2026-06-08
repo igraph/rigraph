@@ -105,7 +105,7 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #' Add edges to a graph
 #'
 #' The new edges are given as a vertex sequence, e.g. internal
-#' numeric vertex ids, or vertex names. The first edge points from
+#' numeric vertex IDs, or vertex names. The first edge points from
 #' `edges[1]` to `edges[2]`, the second from `edges[3]`
 #' to `edges[4]`, etc.
 #'
@@ -419,8 +419,8 @@ is_directed <- function(graph) {
 #' @param graph The input graph
 #' @param es The sequence of edges to query
 #' @param names Whether to return vertex names or
-#'   numeric vertex ids. By default vertex names are used.
-#' @return A two column matrix of vertex names or vertex ids.
+#'   numeric vertex IDs. By default vertex names are used.
+#' @return A two column matrix of vertex names or vertex IDs.
 #'
 #' @aliases get.edges
 #' @family structural queries
@@ -497,13 +497,13 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 }
 
 
-#' Find the edge ids based on the incident vertices of the edges
+#' Find the edge IDs based on the incident vertices of the edges
 #'
 #' Find the edges in an igraph graph that have the specified end points. This
 #' function handles multi-graph (graphs with multiple edges) and can consider
 #' or ignore the edge directions in directed graphs.
 #'
-#' igraph vertex ids are natural numbers, starting from one, up to the number
+#' igraph vertex IDs are natural numbers, starting from one, up to the number
 #' of vertices in the graph. Similarly, edges are also numbered from one, up to
 #' the number of edges.
 #'
@@ -512,7 +512,7 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #'
 #' @param graph The input graph.
 #' @param vp The incident vertices, given as a two-column data frame, two-column matrix,
-#'   or vector of vertex ids or symbolic vertex names.
+#'   or vector of vertex IDs or symbolic vertex names.
 #'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 #'   the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in
@@ -520,7 +520,7 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #' @param error Logical scalar, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
-#' @return A numeric vector of edge ids, one for each pair of input vertices.
+#' @return A numeric vector of edge IDs, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
 #'   zero is reported. (If the `error` argument is `FALSE`.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -559,7 +559,7 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
   )
 }
 
-#' Find the edge ids based on the incident vertices of the edges
+#' Find the edge IDs based on the incident vertices of the edges
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`

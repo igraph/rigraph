@@ -181,36 +181,46 @@ normalise_migration <- function(fn, entry) {
 
 # ---- rendering -------------------------------------------------------------
 
-render_chr_vec <- function(x) {
+# Quote each element of a character vector for emission as a literal `c(...)`.
+quote_items <- function(x) {
   if (length(x) == 0L) {
-    return("character(0)")
+    return(character(0))
   }
-  paste0("c(", paste0('"', x, '"', collapse = ", "), ")")
+  paste0('"', x, '"')
 }
 
-render_defaults_list <- function(entry) {
-  keep <- intersect(entry$tail, names(entry$defaults))
-  if (length(keep) == 0L) {
-    return("list()")
+# Render one `name = ctor(items)` argument of the migrate_recover_args() call,
+# laid out exactly as `air` (line-width 80) formats it: kept on one line when it
+# fits, otherwise wrapped one item per line. `splice_blocks()` prepends 2 spaces
+# of indentation to every block line, so the fit test accounts for that; the
+# call's own args sit at 4 spaces (final 6) and wrapped items at 6 (final 8).
+# `empty` is the literal emitted for zero items (e.g. "character(0)", "list()").
+render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
+  arg_indent <- strrep(" ", 4L)
+  if (length(items) == 0L) {
+    return(paste0(arg_indent, name, " = ", empty, trailing))
   }
-  items <- vapply(
-    keep,
-    function(nm) {
-      paste0(nm, " = ", entry$defaults[[nm]])
-    },
-    character(1)
+  one_line <- paste0(
+    arg_indent,
+    name,
+    " = ",
+    ctor,
+    "(",
+    paste(items, collapse = ", "),
+    ")",
+    trailing
   )
-  paste0("list(", paste(items, collapse = ", "), ")")
-}
-
-# The new-API args (with defaults) whose current value we pass to the matcher for
-# conflict detection -- i.e. the recoverable args that have a formal default.
-render_current_list <- function(entry) {
-  keep <- intersect(entry$tail, names(entry$defaults))
-  if (length(keep) == 0L) {
-    return("list()")
+  if (nchar(one_line) + 2L <= 80L) {
+    return(one_line)
   }
-  paste0("list(", paste0(keep, " = ", keep, collapse = ", "), ")")
+  item_indent <- strrep(" ", 6L)
+  n <- length(items)
+  c(
+    paste0(arg_indent, name, " = ", ctor, "("),
+    paste0(item_indent, items[-n], ","),
+    paste0(item_indent, items[[n]]),
+    paste0(arg_indent, ")", trailing)
+  )
 }
 
 # Render the inline ARG_HANDLE block spliced into a function body between the
@@ -227,17 +237,24 @@ render_current_list <- function(entry) {
 # The whole thing is guarded by `...length() > 0L` so the common path (a correct
 # new-API call with nothing in `...`) skips the helper call entirely.
 render_arg_handle <- function(entry) {
+  keep <- intersect(entry$tail, names(entry$defaults))
+  default_items <- vapply(
+    keep,
+    function(nm) paste0(nm, " = ", entry$defaults[[nm]]),
+    character(1),
+    USE.NAMES = FALSE
+  )
   c(
     "if (...length() > 0L) {",
     "  .arg_handle <- migrate_recover_args(",
     "    list(...),",
-    paste0("    current = ", render_current_list(entry), ","),
-    paste0("    recover_new = ", render_chr_vec(entry$recover_new), ","),
-    paste0("    recover_old = ", render_chr_vec(entry$recover_old), ","),
-    paste0("    match_names = ", render_chr_vec(entry$match_names), ","),
-    paste0("    match_to = ", render_chr_vec(entry$match_to), ","),
-    paste0("    defaults = ", render_defaults_list(entry), ","),
-    paste0("    head_args = ", render_chr_vec(entry$head), ","),
+    render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
+    render_call_arg("recover_new", "c", quote_items(entry$recover_new), "character(0)"),
+    render_call_arg("recover_old", "c", quote_items(entry$recover_old), "character(0)"),
+    render_call_arg("match_names", "c", quote_items(entry$match_names), "character(0)"),
+    render_call_arg("match_to", "c", quote_items(entry$match_to), "character(0)"),
+    render_call_arg("defaults", "list", default_items, "list()"),
+    render_call_arg("head_args", "c", quote_items(entry$head), "character(0)"),
     paste0("    fn_name = \"", entry$fn, "\""),
     "  )",
     "  list2env(.arg_handle$values, environment())",

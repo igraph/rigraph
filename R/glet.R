@@ -68,14 +68,14 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'   and this argument is `NULL` (the default), then the `weight` edge
 #'   attribute is used.
 #' @param niter Integer scalar, the number of iterations to perform.
-#' @param cliques A list of vertex ids, the graphlet basis to use for the
+#' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{Mu}{
 #'       The weights of the subgraphs in graphlet basis.
@@ -86,7 +86,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{thresholds}{
 #'       The weight thresholds used for finding the subgraphs.

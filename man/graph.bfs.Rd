@@ -26,7 +26,10 @@ graph.bfs(
 \item{graph}{The input graph.}
 
 \item{root}{Numeric vector, usually of length one. The root vertex, or root
-vertices to start the search from.}
+vertices to start the search from. When several roots are given, they are
+considered in the order they appear. If a root vertex was already reached
+while searching from an earlier root, no separate search is started from
+it, so it keeps the distance it was first found at rather than \code{0}.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
@@ -39,7 +42,7 @@ vertices that are unreachable from the given root vertex (or vertices). If
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
 \item{order}{Logical scalar, whether to return the ordering of the vertices.}

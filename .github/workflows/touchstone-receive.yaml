@@ -63,6 +63,13 @@ jobs:
           cache-version: 1
           benchmarking_repo: ${{ matrix.config.benchmarking_repo }}
           benchmarking_ref: ${{ matrix.config.benchmarking_ref }}
-          benchmarking_path: ${{ matrix.config.benchmarking_path }} 
+          benchmarking_path: ${{ matrix.config.benchmarking_path }}
           force_upstream: true
           r-version: ${{ matrix.config.r }}
+          # Install the {touchstone} R package from the same commit as the
+          # action above. The default ('@v1') predates the fix that encodes
+          # filesystem-unsafe characters in branch names, so head branches with
+          # a "/" (e.g. feat/foo) get stored as a nested records/<bench>/feat/foo
+          # directory; benchmark_analyze() then can't match base+head and
+          # silently drops every benchmark, producing an empty results table.
+          touchstone_ref: "@7e6072a25d1f8d72649188bc711113039ef94b75"

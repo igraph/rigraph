@@ -35,7 +35,7 @@ new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
-names. Otherwise numeric vertex ids are used.
+names. Otherwise numeric vertex IDs are used.
 
 \code{difference()} keeps all attributes (graph, vertex and edge) of the
 first graph.

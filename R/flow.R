@@ -341,8 +341,8 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' used to calculate the minimum cut.
 #'
 #' @param graph The input graph.
-#' @param source The id of the source vertex.
-#' @param target The id of the target vertex (sometimes also called sink).
+#' @param source The ID of the source vertex.
+#' @param target The ID of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
 #' @param value.only Logical scalar, if `TRUE` only the minimum cut value
@@ -478,9 +478,9 @@ min_cut <- function(
 #'
 #' @aliases cohesion
 #' @param graph,x The input graph.
-#' @param source The id of the source vertex, for `vertex_connectivity()` it
+#' @param source The ID of the source vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param target The id of the target vertex, for `vertex_connectivity()` it
+#' @param target The ID of the target vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
@@ -585,9 +585,9 @@ vertex_connectivity <- function(
 #'
 
 #' @param graph The input graph.
-#' @param source The id of the source vertex, for `edge_connectivity()` it
+#' @param source The ID of the source vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param target The id of the target vertex, for `edge_connectivity()` it
+#' @param target The ID of the target vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
@@ -704,11 +704,11 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @return A list with entries:
 #'   \describe{
 #'     \item{cuts}{
-#'       A list of numeric vectors containing edge ids.
+#'       A list of numeric vectors containing edge IDs.
 #'       Each vector is an \eqn{(s,t)}-cut.
 #'     }
 #'     \item{partition1s}{
-#'       A list of numeric vectors containing vertex ids, they correspond to the edge cuts.
+#'       A list of numeric vectors containing vertex IDs, they correspond to the edge cuts.
 #'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 #'       the vertex set \eqn{X} and its complementer \eqn{V-X},
 #'       generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
@@ -758,8 +758,8 @@ st_cuts <- function(graph, source, target) {
 #' An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 #'
 #' @param graph The input graph. It must be directed.
-#' @param source The id of the source vertex.
-#' @param target The id of the target vertex.
+#' @param source The ID of the source vertex.
+#' @param target The ID of the target vertex.
 #' @param capacity Numeric vector giving the edge capacities. If this is
 #'   `NULL` and the graph has a `weight` edge attribute, then this
 #'   attribute defines the edge capacities. For forcing unit edge capacities,
@@ -771,10 +771,10 @@ st_cuts <- function(graph, source, target) {
 #'       Numeric scalar, the size of the minimum cut(s).
 #'     }
 #'     \item{cuts}{
-#'       A list of numeric vectors containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.
+#'       A list of numeric vectors containing edge IDs. Each vector is a minimum \eqn{(s,t)}-cut.
 #'     }
 #'     \item{partition1s}{
-#'       A list of numeric vectors containing vertex ids,
+#'       A list of numeric vectors containing vertex IDs,
 #'       they correspond to the edge cuts.
 #'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 #'       the vertex set \eqn{X} and its complementer \eqn{V-X},
@@ -827,7 +827,7 @@ st_min_cuts <- function(graph, source, target, capacity = NULL) {
 #' @param graph A directed graph. If it is not a flowgraph, and it contains
 #'   some vertices not reachable from the root vertex, then these vertices will
 #'   be collected and returned as part of the result.
-#' @param root The id of the root (or source) vertex, this will be the root of
+#' @param root The ID of the root (or source) vertex, this will be the root of
 #'   the tree.
 #' @param mode Constant, must be \sQuote{`in`} or \sQuote{`out`}. If
 #'   it is \sQuote{`in`}, then all directions are considered as opposite to
@@ -841,11 +841,11 @@ st_min_cuts <- function(graph, source, target, capacity = NULL) {
 #'     }
 #'     \item{domtree}{
 #'       A graph object, the dominator tree.
-#'       Its vertex ids are the as the vertex ids of the input graph.
+#'       Its vertex IDs are the as the vertex IDs of the input graph.
 #'       Isolate vertices are the ones that are unreachable from the root.
 #'     }
 #'     \item{leftout}{
-#'       A numeric vector containing the vertex ids that are unreachable from the root.
+#'       A numeric vector containing the vertex IDs that are unreachable from the root.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -910,7 +910,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @return A list of numeric vectors. Each vector contains a vertex set
-#'   (defined by vertex ids), each vector is an (s,t) separator of the input
+#'   (defined by vertex IDs), each vector is an (s,t) separator of the input
 #'   graph, for some \eqn{s} and \eqn{t}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Anne Berry, Jean-Paul Bordat and Olivier Cogis: Generating All
@@ -966,8 +966,8 @@ min_st_separators <- function(graph) {
 #' is the flow of maximum value.
 #'
 #' @param graph The input graph.
-#' @param source The id of the source vertex.
-#' @param target The id of the target vertex (sometimes also called sink).
+#' @param source The ID of the source vertex.
+#' @param target The ID of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
 #'   Note that the `weight` edge attribute is not used by this function.
@@ -981,17 +981,17 @@ min_st_separators <- function(graph) {
 #'       For undirected graphs this entry is bit trickier,
 #'       since for these the flow direction is not predetermined by the edge direction.
 #'       For these graphs the elements of the this vector can be negative,
-#'       this means that the flow goes from the bigger vertex id to the smaller one.
-#'       Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+#'       this means that the flow goes from the bigger vertex ID to the smaller one.
+#'       Positive values mean that the flow goes from the smaller vertex ID to the bigger one.
 #'     }
 #'     \item{cut}{
-#'       A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+#'       A numeric vector of edge IDs, the minimum cut corresponding to the maximum flow.
 #'     }
 #'     \item{partition1}{
-#'       A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+#'       A numeric vector of vertex IDs, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
 #'     }
 #'     \item{partition2}{
-#'       A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+#'       A numeric vector of vertex IDs, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
 #'     }
 #'     \item{stats}{
 #'       A list with some statistics from the push-relabel algorithm.
@@ -1034,7 +1034,7 @@ max_flow <- function(graph, source, target, capacity = NULL) {
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
-#' @param candidate A numeric vector giving the vertex ids of the candidate
+#' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
@@ -1067,7 +1067,7 @@ is_separator <- function(graph, candidate) {
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
-#' @param candidate A numeric vector giving the vertex ids of the candidate
+#' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.

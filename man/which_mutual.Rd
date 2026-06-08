@@ -10,7 +10,7 @@ which_mutual(graph, eids = E(graph), loops = TRUE)
 \item{graph}{The input graph.}
 
 \item{eids}{Edge sequence, the edges that will be probed. By default is
-includes all edges in the order of their ids.}
+includes all edges in the order of their IDs.}
 
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }

@@ -529,7 +529,7 @@ print_all <- function(object, ...) {
 #' The first line always
 #' starts with `IGRAPH`, showing you that the object is an igraph graph.
 #' Then a seven character code is printed, this the first seven characters
-#' of the unique id of the graph. See [graph_id()] for more.
+#' of the unique ID of the graph. See [graph_id()] for more.
 #' Then a four letter long code string is printed. The first letter
 #' distinguishes between directed (\sQuote{`D`}) and undirected
 #' (\sQuote{`U`}) graphs. The second letter is \sQuote{`N`} for named
@@ -571,7 +571,7 @@ print_all <- function(object, ...) {
 #'   attributes.
 #' @param edge.attributes Logical constant, whether to print edge attributes.
 #' @param names Logical constant, whether to print symbolic vertex names (i.e.
-#'   the `name` vertex attribute) or vertex ids.
+#'   the `name` vertex attribute) or vertex IDs.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.
 #' @param id Whether to print the graph ID.

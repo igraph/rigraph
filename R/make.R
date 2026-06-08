@@ -1380,7 +1380,7 @@ with_graph_ <- function(...) {
 #' @param edges A vector defining the edges, the first edge points
 #'   from the first element to the second, the second edge from the third
 #'   to the fourth, etc. For a numeric vector, these are interpreted
-#'   as internal vertex ids. For character vectors, they are interpreted
+#'   as internal vertex IDs. For character vectors, they are interpreted
 #'   as vertex names.
 #'
 #'   Alternatively, this can be a character scalar, the name of a
@@ -1398,9 +1398,9 @@ with_graph_ <- function(...) {
 #'   Passed to `make_directed_graph()` or `make_undirected_graph()`.
 #' @param n The number of vertices in the graph. This argument is
 #'   ignored (with a warning) if `edges` are symbolic vertex names. It
-#'   is also ignored if there is a bigger vertex id in `edges`. This
+#'   is also ignored if there is a bigger vertex ID in `edges`. This
 #'   means that for this function it is safe to supply zero here if the
-#'   vertex with the largest id is not an isolate.
+#'   vertex with the largest ID is not an isolate.
 #' @param isolates Character vector, names of isolate vertices,
 #'   for symbolic edge lists. It is ignored for numeric edge lists.
 #' @param directed Whether to create a directed graph.
@@ -1698,7 +1698,11 @@ empty_graph <- function(n = 0, directed = TRUE) {
 #'   all arguments are passed to `graph_from_literal()`.
 #' @param simplify Logical scalar, whether to call [simplify()]
 #'   on the created graph. By default the graph is simplified, loop and
-#'   multiple edges are removed.
+#'   multiple edges are removed. [simplify()] is only called when the
+#'   created graph is not already simple, so the edge order from the
+#'   formula is preserved whenever no loops or multi-edges are present.
+#'   When the graph does contain loops or multi-edges (and `simplify =
+#'   TRUE`), [simplify()] reorders the edges into its canonical order.
 #' @return An igraph graph
 #'
 #' @family deterministic constructors
@@ -2293,7 +2297,7 @@ from_prufer <- function(prufer) {
 #' }
 #'
 #' @concept Graph Atlas.
-#' @param n The id of the graph to create.
+#' @param n The ID of the graph to create.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors

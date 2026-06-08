@@ -456,7 +456,7 @@ union.default <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex ids.
+#' of the internal numeric vertex IDs.
 #'
 #' `union()` keeps the attributes of all graphs. All graph, vertex and
 #' edge attributes are copied to the result. If an attribute is present in
@@ -537,7 +537,7 @@ intersection <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
-#' of the internal numeric vertex ids.
+#' of the internal numeric vertex IDs.
 #'
 #' `intersection()` keeps the attributes of all graphs. All graph,
 #' vertex and edge attributes are copied to the result. If an attribute is
@@ -624,7 +624,7 @@ difference <- function(...) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex ids are used.
+#' names. Otherwise numeric vertex IDs are used.
 #'
 #' `difference()` keeps all attributes (graph, vertex and edge) of the
 #' first graph.
@@ -762,7 +762,7 @@ complementer <- function(graph, loops = FALSE) {
 #'
 #' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
-#' names. Otherwise numeric vertex ids are used.
+#' names. Otherwise numeric vertex IDs are used.
 #'
 #' `compose()` keeps the attributes of both graphs. All graph, vertex
 #' and edge attributes are copied to the result. If an attribute is present in
@@ -896,7 +896,7 @@ compose <- function(g1, g2, byname = "auto") {
 #' @details
 #' When adding edges via `+`, all unnamed arguments of
 #' `edge()` (or `edges()`) are concatenated, and then passed to
-#' [add_edges()]. They are interpreted as pairs of vertex ids,
+#' [add_edges()]. They are interpreted as pairs of vertex IDs,
 #' and an edge will added between each pair. Named arguments will be
 #' used as edge attributes for the new edges.
 #'
@@ -1070,7 +1070,7 @@ path <- function(...) {
 #'     the arguments of the `edges()` function.
 #'
 #'     The unnamed arguments of `edges()` are concatenated and used
-#'     as vertex ids of the end points of the new edges. The named
+#'     as vertex IDs of the end points of the new edges. The named
 #'     arguments will be added as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() +
@@ -1089,7 +1089,7 @@ path <- function(...) {
 #'     new edges that form a path are added. The edges and possibly their
 #'     attributes are specified as the arguments to the `path()`
 #'     function. The non-named arguments are concatenated and interpreted
-#'     as the vertex ids along the path. The remaining arguments are added
+#'     as the vertex IDs along the path. The remaining arguments are added
 #'     as edge attributes.
 #'
 #'     Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
@@ -1202,7 +1202,7 @@ path <- function(...) {
 #' \item If it is an igraph graph object, then the difference of the
 #'   two graphs is calculated, see [difference()].
 #' \item If it is a numeric or character vector, then it is interpreted
-#'   as a vector of vertex ids and the specified vertices will be
+#'   as a vector of vertex IDs and the specified vertices will be
 #'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' g <- g - c("a", "b")}
@@ -1214,7 +1214,7 @@ path <- function(...) {
 #' \item If it is an object created with the [vertex()] (or the
 #'   [vertices()]) function, then all arguments of [vertices()] are
 #'   concatenated and the result is interpreted as a vector of vertex
-#'   ids. These vertices will be removed from the graph.
+#'   IDs. These vertices will be removed from the graph.
 #' \item If it is an object created with the [edge()] (or the
 #'   [edges()]) function, then all arguments of [edges()] are
 #'   concatenated and then interpreted as edges to be removed from the

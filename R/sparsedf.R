@@ -60,11 +60,13 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 }
 
 #' @method as.data.frame igraphSDF
+#' @export
 as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
   as.data.frame(lapply(x, rep, length.out = attr(x, "NROW")))
 }
 
 #' @method "[" igraphSDF
+#' @export
 `[.igraphSDF` <- function(x, i, j, ..., drop = TRUE) {
   if (!is.character(j)) {
     cli::cli_abort("The column index must be character.")
@@ -84,6 +86,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
 }
 
 #' @method "[<-" igraphSDF
+#' @export
 `[<-.igraphSDF` <- function(x, i, j, value) {
   if (!is.character(j)) {
     cli::cli_abort("The column index must be character.")
