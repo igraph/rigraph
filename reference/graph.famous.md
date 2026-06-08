@@ -84,4 +84,5 @@ graph.famous(
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)

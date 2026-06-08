@@ -1,5 +1,30 @@
 # Changelog
 
+## igraph 2.3.2.9012
+
+### Bug fixes
+
+- BFS reports all requested root vertices instead of only the first
+  ([\#1639](https://github.com/igraph/rigraph/issues/1639),
+  [\#2693](https://github.com/igraph/rigraph/issues/2693)).
+
+- Resolve roxygen2 warnings
+  ([\#2641](https://github.com/igraph/rigraph/issues/2641),
+  [\#2692](https://github.com/igraph/rigraph/issues/2692)).
+
+### Documentation
+
+- Use “ID”/“IDs” consistently in documentation prose
+  ([\#1683](https://github.com/igraph/rigraph/issues/1683),
+  [\#2694](https://github.com/igraph/rigraph/issues/2694)).
+
+### Uncategorized
+
+- Fix: do not wrap roxygenize in try()
+  ([\#2679](https://github.com/igraph/rigraph/issues/2679))
+  ([\#2690](https://github.com/igraph/rigraph/issues/2690))
+  ([\#2679](https://github.com/igraph/rigraph/issues/2679)).
+
 ## igraph 2.3.2.9011
 
 ### Bug fixes

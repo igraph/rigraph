@@ -173,6 +173,7 @@ on the value of the `mode` argument:
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
@@ -298,6 +299,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH d7bb2c0 DNW- 10 57 -- 
+#> IGRAPH c09e533 DNW- 10 57 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

@@ -41,7 +41,8 @@ simplify_and_colorize(graph)
 
 ## Value
 
-a new graph object with the edges deleted.
+a graph object with the loop and/or multiple edges removed; the input
+graph is returned unchanged if it is already simple.
 
 ## Details
 
@@ -54,7 +55,8 @@ not contain loop edges and multiple edges.
 
 `simplify()` removes the loop and/or multiple edges from a graph. If
 both `remove.loops` and `remove.multiple` are `TRUE` the function
-returns a simple graph.
+returns a simple graph. If the graph is already simple, it is returned
+unchanged.
 
 `simplify_and_colorize()` constructs a new, simple graph from a graph
 and also sets a `color` attribute on both the vertices and the edges.

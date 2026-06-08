@@ -94,6 +94,7 @@ avoid confusion with the edge-vertex incidence matrix.
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
@@ -117,8 +118,8 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> IGRAPH f7008d9 UN-B 8 5 -- 
+#> IGRAPH f9de4a6 UN-B 8 5 -- 
 #> + attr: type (v/l), name (v/c)
-#> + edges from f7008d9 (vertex names):
+#> + edges from f9de4a6 (vertex names):
 #> [1] A--d A--e B--a C--a C--d
 ```

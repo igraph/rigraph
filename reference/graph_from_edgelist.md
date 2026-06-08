@@ -39,7 +39,8 @@ An igraph graph.
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
 
 ## See also
 
@@ -66,14 +67,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH 5877dcf DN-- 3 2 -- 
+#> IGRAPH e29c8ef DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 5877dcf (vertex names):
+#> + edges from e29c8ef (vertex names):
 #> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH 92f7646 D--- 10 10 -- 
-#> + edges from 92f7646:
+#> IGRAPH 975fd55 D--- 10 10 -- 
+#> + edges from 975fd55:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

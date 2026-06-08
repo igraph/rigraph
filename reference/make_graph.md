@@ -267,7 +267,8 @@ are specified.)
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
 
 ## See also
 
@@ -293,13 +294,13 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 23262a2 U--- 6 4 -- 
-#> + edges from 23262a2:
+#> IGRAPH 1baed4c U--- 6 4 -- 
+#> + edges from 1baed4c:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 65a2819 UN-- 4 3 -- 
+#> IGRAPH 8d04b92 UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 65a2819 (vertex names):
+#> + edges from 8d04b92 (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

@@ -94,6 +94,7 @@ routine may fail is certain cases.
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`get_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency),
 [`get_adjacency_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
