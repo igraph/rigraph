@@ -71,7 +71,8 @@ getIgraphOpt <- function(x, default = NULL) {
   "annotate.plot" = FALSE,
   "auto.print.lines" = 10,
   "return.vs.es" = TRUE,
-  "print.id" = TRUE
+  "print.id" = TRUE,
+  "print.style" = "cli"
 )
 
 igraph.pars.set.verbose <- function(verbose) {
@@ -155,6 +156,14 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     }
 #'     \item{print.vertex.attributes}{
 #'       Logical constant, whether to print vertex attributes when printing graphs. Defaults to `FALSE`.
+#'     }
+#'     \item{print.style}{
+#'       Character string controlling the visual style used by
+#'       [print.igraph()], [summary.igraph()], [print.igraph.vs()] and
+#'       [print.igraph.es()]. Possible values are `"cli"` (default, a
+#'       cli-styled output with section rules, Unicode arrows for edges and
+#'       typed attribute listings) and `"classic"` (the historical
+#'       `IGRAPH ... DNW-` header relied on by tutorials and parsers).
 #'     }
 #'     \item{return.vs.es}{
 #'       Whether functions that return a set or sequence of vertices/edges

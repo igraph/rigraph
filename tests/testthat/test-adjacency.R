@@ -646,7 +646,6 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
 test_that("graph_from_adjacency_matrix() snapshot", {
   rlang::local_options(lifecycle_verbosity = "warning")
 
-  local_igraph_options(print.id = FALSE)
   expect_false(igraph_opt("print.id"))
 
   expect_snapshot({
@@ -677,7 +676,6 @@ test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
 
   rlang::local_options(lifecycle_verbosity = "warning")
 
-  local_igraph_options(print.id = FALSE)
   expect_false(igraph_opt("print.id"))
 
   expect_snapshot({

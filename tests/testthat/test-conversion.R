@@ -45,15 +45,11 @@ test_that("as_directed keeps attributes", {
 })
 
 test_that("as.directed() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
 })
 
 test_that("as.undirected() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
 })
