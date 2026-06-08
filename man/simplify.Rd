@@ -31,7 +31,8 @@ single one in the new graph, and their attributes are combined. Please see
 \code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
 }
 \value{
-a new graph object with the edges deleted.
+a graph object with the loop and/or multiple edges removed; the
+input graph is returned unchanged if it is already simple.
 }
 \description{
 Simple graphs are graphs which do not contain loop and multiple edges.
@@ -46,7 +47,8 @@ it does not contain loop edges and multiple edges.
 
 \code{simplify()} removes the loop and/or multiple edges from a graph.  If
 both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
-function returns a simple graph.
+function returns a simple graph. If the graph is already simple, it is
+returned unchanged.
 
 \code{simplify_and_colorize()} constructs a new, simple graph from a graph and
 also sets a \code{color} attribute on both the vertices and the edges.
