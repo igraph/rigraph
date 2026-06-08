@@ -142,12 +142,18 @@ unchanged, vertex attributes are combined, according to the
 <span class="r-in"><span><span class="co">## graph and edge attributes are kept, vertex attributes are</span></span></span>
 <span class="r-in"><span><span class="co">## combined using the 'toString' function.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g2</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 588d073 UNW- 5 10 -- Ring</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 588d073 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring ──────────────────────────────────────────────────── 77edff8 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · weighted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 10 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → edge:   <span style="color: #00BB00;">weight</span> <span style="color: #0000BB;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b ─ a, b  a, b ─ c, d  c, d ─ c, d  c, d ─ e, f  e, f ─ e, f </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] e, f ─ g, h  g, h ─ g, h  g, h ─ i, j  i, j ─ i, j  a, b ─ i, j </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

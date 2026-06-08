@@ -56,18 +56,30 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> IGRAPH b9cee92 U--- 5 10 -- Full graph
-#> + attr: name (g/c), loops (g/l)
-#> + edges from b9cee92:
-#>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
+#> ── <igraph> Full graph ────────────────────────────────────────────── a167541 ──
+#> ℹ undirected
+#> ℹ 5 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, loops <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2  1 ─ 3  1 ─ 4  1 ─ 5  2 ─ 3  2 ─ 4  2 ─ 5  3 ─ 4  3 ─ 5  4 ─ 5 
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH 2d78a4e D--- 4 12 -- Full graph
-#> + attr: name (g/c), loops (g/l)
-#> + graph attributes:
-#> | + name:
-#> |   [1] "Full graph"
-#> | + loops:
-#> |   [1] FALSE
-#> + edges:
-#> 1 -> 2 3 4   2 -> 1 3 4   3 -> 1 2 4   4 -> 1 2 3
+#> ── <igraph> Full graph ────────────────────────────────────────────── 682a5fb ──
+#> ℹ directed
+#> ℹ 4 vertices · 12 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, loops <lgl>
+#> 
+#> ── Graph attributes ────────────────────────────────────────────────────────────
+#> name:
+#>   [1] "Full graph"
+#> loops:
+#>   [1] FALSE
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 → 2  1 → 3  1 → 4  2 → 1  2 → 3  2 → 4  3 → 1  3 → 2  3 → 4  4 → 1 
+#> [11] 4 → 2  4 → 3 
 ```

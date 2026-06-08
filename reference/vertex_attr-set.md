@@ -64,10 +64,15 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> IGRAPH facaf87 UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), color
-#> | (v/c), label (v/c)
-#> + edges from facaf87 (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 5165ed2 ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>, color <chr>, label <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 plot(g)
 ```

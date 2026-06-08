@@ -147,26 +147,33 @@ undirected.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">D</span> <span class="op">-</span> <span class="va">A</span><span class="op">:</span><span class="cn">F</span><span class="op">:</span><span class="va">Y</span>, <span class="va">B</span> <span class="op">-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">X</span> <span class="op">-</span> <span class="cn">F</span> <span class="op">-</span> <span class="va">H</span> <span class="op">-</span> <span class="va">Z</span>, <span class="cn">F</span> <span class="op">-</span> <span class="va">Y</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">net1</span> <span class="op">%u%</span> <span class="va">net2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 840dbdd UN-- 13 21 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + vertex attributes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [1]     D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [2]     A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [3]     B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [4]     F</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [5]     G</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [6]     C</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [7]     E</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [8]     H</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [9]     I</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [10]    J</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [11]    Y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [12]    X</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [13]    Z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 840dbdd (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] I--J H--Z H--I G--H G--E F--X F--Y F--H F--C F--G B--E B--G A--X A--C A--F</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] A--B D--Y D--G D--F D--B D--A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── b0e313a ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 13 vertices · 21 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Vertex attributes ───────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]     D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2]     A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3]     B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4]     F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5]     G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6]     C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7]     E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8]     H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [9]     I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10]    J</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]    Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12]    X</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]    Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] I ─ J  H ─ Z  H ─ I  G ─ H  G ─ E  F ─ X  F ─ Y  F ─ H  F ─ C  F ─ G </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] B ─ E  B ─ G  A ─ X  A ─ C  A ─ F  A ─ B  D ─ Y  D ─ G  D ─ F  D ─ B </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] D ─ A </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

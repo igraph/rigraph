@@ -164,30 +164,44 @@ be extended to boolean vector with dimvector length.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 777bc2d U--- 125 300 -- Lattice graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 777bc2d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 11--36 12--13 12--17 12--37 13--14 13--18 13--38 14--15 14--19 14--39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 15--20 15--40 16--17 16--21 16--41 17--18 17--22 17--42 18--19 18--23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 18--43 19--20 19--24 19--44 20--25 20--45 21--22 21--46 22--23 22--47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Lattice graph ─────────────────────────────────────────── 0203c79 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 125 vertices · 300 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">dimvector</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">nei</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 1 ─ 2      1 ─ 6      1 ─ 26     2 ─ 3      2 ─ 7      2 ─ 27    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] 3 ─ 4      3 ─ 8      3 ─ 28     4 ─ 5      4 ─ 9      4 ─ 29    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] 5 ─ 10     5 ─ 30     6 ─ 7      6 ─ 11     6 ─ 31     7 ─ 8     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] 7 ─ 12     7 ─ 32     8 ─ 9      8 ─ 13     8 ─ 33     9 ─ 10    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] 9 ─ 14     9 ─ 34     10 ─ 15    10 ─ 35    11 ─ 12    11 ─ 16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 11 ─ 36    12 ─ 13    12 ─ 17    12 ─ 37    13 ─ 14    13 ─ 18   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] 13 ─ 38    14 ─ 15    14 ─ 19    14 ─ 39    15 ─ 20    15 ─ 40   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] 16 ─ 17    16 ─ 21    16 ─ 41    17 ─ 18    17 ─ 22    17 ─ 42   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] 18 ─ 19    18 ─ 23    18 ─ 43    19 ─ 20    19 ─ 24    19 ─ 44   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] 20 ─ 25    20 ─ 45    21 ─ 22    21 ─ 46    22 ─ 23    22 ─ 47   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span>length <span class="op">=</span> <span class="fl">5</span>, dim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dd85392 U--- 125 300 -- Lattice graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dd85392:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 11--36 12--13 12--17 12--37 13--14 13--18 13--38 14--15 14--19 14--39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 15--20 15--40 16--17 16--21 16--41 17--18 17--22 17--42 18--19 18--23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 18--43 19--20 19--24 19--44 20--25 20--45 21--22 21--46 22--23 22--47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Lattice graph ─────────────────────────────────────────── 6f8029c ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 125 vertices · 300 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">dimvector</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">nei</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 1 ─ 2      1 ─ 6      1 ─ 26     2 ─ 3      2 ─ 7      2 ─ 27    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] 3 ─ 4      3 ─ 8      3 ─ 28     4 ─ 5      4 ─ 9      4 ─ 29    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] 5 ─ 10     5 ─ 30     6 ─ 7      6 ─ 11     6 ─ 31     7 ─ 8     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] 7 ─ 12     7 ─ 32     8 ─ 9      8 ─ 13     8 ─ 33     9 ─ 10    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] 9 ─ 14     9 ─ 34     10 ─ 15    10 ─ 35    11 ─ 12    11 ─ 16   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 11 ─ 36    12 ─ 13    12 ─ 17    12 ─ 37    13 ─ 14    13 ─ 18   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] 13 ─ 38    14 ─ 15    14 ─ 19    14 ─ 39    15 ─ 20    15 ─ 40   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] 16 ─ 17    16 ─ 21    16 ─ 41    17 ─ 18    17 ─ 22    17 ─ 42   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] 18 ─ 19    18 ─ 23    18 ─ 43    19 ─ 20    19 ─ 24    19 ─ 44   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] 20 ─ 25    20 ─ 45    21 ─ 22    21 ─ 46    22 ─ 23    22 ─ 47   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>

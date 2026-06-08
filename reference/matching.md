@@ -166,18 +166,24 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> IGRAPH 477fe5a UN-B 6 5 -- 
-#> + attr: name (v/c), type (v/l)
-#> + vertex attributes:
-#> |     name  type
-#> | [1]    a FALSE
-#> | [2]    b  TRUE
-#> | [3]    c FALSE
-#> | [4]    d  TRUE
-#> | [5]    e FALSE
-#> | [6]    f  TRUE
-#> + edges from 477fe5a (vertex names):
-#> [1] a--b b--c c--d d--e e--f
+#> ── <igraph> ───────────────────────────────────────────────────────── 377bf48 ──
+#> ℹ undirected · named · bipartite
+#> ℹ 6 vertices · 5 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>, type <lgl>
+#> 
+#> ── Vertex attributes ───────────────────────────────────────────────────────────
+#>     name  type
+#> [1]    a FALSE
+#> [2]    b  TRUE
+#> [3]    c FALSE
+#> [4]    d  TRUE
+#> [5]    e FALSE
+#> [6]    f  TRUE
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f 
 max_bipartite_match(g)
 #> $matching_size
 #> [1] 3
@@ -193,19 +199,25 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> IGRAPH b8320c8 UN-B 7 6 -- 
-#> + attr: name (v/c), type (v/l)
-#> + vertex attributes:
-#> |     name  type
-#> | [1]    a FALSE
-#> | [2]    b  TRUE
-#> | [3]    c FALSE
-#> | [4]    d  TRUE
-#> | [5]    e FALSE
-#> | [6]    f  TRUE
-#> | [7]    g FALSE
-#> + edges from b8320c8 (vertex names):
-#> [1] a--b b--c c--d d--e e--f f--g
+#> ── <igraph> ───────────────────────────────────────────────────────── ee0623b ──
+#> ℹ undirected · named · bipartite
+#> ℹ 7 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>, type <lgl>
+#> 
+#> ── Vertex attributes ───────────────────────────────────────────────────────────
+#>     name  type
+#> [1]    a FALSE
+#> [2]    b  TRUE
+#> [3]    c FALSE
+#> [4]    d  TRUE
+#> [5]    e FALSE
+#> [6]    f  TRUE
+#> [7]    g FALSE
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g 
 max_bipartite_match(g2)
 #> $matching_size
 #> [1] 3

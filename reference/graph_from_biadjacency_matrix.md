@@ -118,8 +118,13 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> IGRAPH f9de4a6 UN-B 8 5 -- 
-#> + attr: type (v/l), name (v/c)
-#> + edges from f9de4a6 (vertex names):
-#> [1] A--d A--e B--a C--a C--d
+#> ── <igraph> ───────────────────────────────────────────────────────── 93121b6 ──
+#> ℹ undirected · named · bipartite
+#> ℹ 8 vertices · 5 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: type <lgl>, name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] A ─ d  A ─ e  B ─ a  C ─ a  C ─ d 
 ```

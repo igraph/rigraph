@@ -128,14 +128,28 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH b3275ad UNW- 5 6 -- Event network
-#> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from b3275ad (vertex names):
-#> [1] Alice--Bob   Alice--Cecil Alice--Dan   Bob  --Cecil Bob  --Dan  
-#> [6] Cecil--Dan  
+#> ── <igraph> Event network ─────────────────────────────────────────── d8cdb3a ──
+#> ℹ undirected · named · weighted
+#> ℹ 5 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>
+#> → vertex: name <chr>
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     
+#> [6] Cecil ─ Dan   
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH 22ff1e4 UNW- 3 2 -- Event network
-#> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 22ff1e4 (vertex names):
-#> [1] Party --Skiing    Skiing--Badminton
+#> ── <igraph> Event network ─────────────────────────────────────────── 349959f ──
+#> ℹ undirected · named · weighted
+#> ℹ 3 vertices · 2 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>
+#> → vertex: name <chr>
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Party ─ Skiing      Skiing ─ Badminton 
 ```

@@ -62,13 +62,23 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH a32eced U--- 7 9 -- Graph from the Atlas #464
-#> + attr: name (g/c), n (g/n)
-#> + edges from a32eced:
-#> [1] 2--4 2--3 1--3 1--6 5--6 4--5 3--4 1--4 1--5
+#> ── <igraph> Graph from the Atlas #464 ─────────────────────────────── 707633b ──
+#> ℹ undirected
+#> ℹ 7 vertices · 9 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, n <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 2 ─ 4  2 ─ 3  1 ─ 3  1 ─ 6  5 ─ 6  4 ─ 5  3 ─ 4  1 ─ 4  1 ─ 5 
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH 4982c75 U--- 6 8 -- Graph from the Atlas #139
-#> + attr: name (g/c), n (g/n)
-#> + edges from 4982c75:
-#> [1] 1--2 2--3 3--4 4--5 1--5 2--4 2--5 1--6
+#> ── <igraph> Graph from the Atlas #139 ─────────────────────────────── 296e2e1 ──
+#> ℹ undirected
+#> ℹ 6 vertices · 8 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, n <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  1 ─ 5  2 ─ 4  2 ─ 5  1 ─ 6 
 ```

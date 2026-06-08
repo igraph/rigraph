@@ -159,42 +159,67 @@ igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
 simplify(g, edge.attr.comb = "sum")
-#> IGRAPH 80208be D-W- 4 3 -- 
-#> + attr: weight (e/n)
-#> + edges from 80208be:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 32d282b ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## collect attributes into a string
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH be9e7d2 D-W- 4 3 -- 
-#> + attr: weight (e/c)
-#> + edges from be9e7d2:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 2e63506 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <chr>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
 simplify(g, edge.attr.comb = "concat")
-#> IGRAPH a33845e D-W- 4 3 -- 
-#> + attr: weight (e/x)
-#> + edges from a33845e:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 221836d ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <list>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH 9a92f62 D-W- 4 3 -- 
-#> + attr: weight (e/c), name (e/c)
-#> + edges from 9a92f62:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── d49849a ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <chr>, name <chr>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## harmonic average of weights, names are dropped
 simplify(g, edge.attr.comb = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
-#> IGRAPH 5a1e383 D-W- 4 3 -- 
-#> + attr: weight (e/n)
-#> + edges from 5a1e383:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 13c00c9 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 ```

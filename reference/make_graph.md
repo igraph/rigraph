@@ -294,14 +294,22 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 1baed4c U--- 6 4 -- 
-#> + edges from 1baed4c:
-#> [1] 1--2 2--3 3--4 5--6
+#> ── <igraph> ───────────────────────────────────────────────────────── b0a601d ──
+#> ℹ undirected
+#> ℹ 6 vertices · 4 edges
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  5 ─ 6 
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 8d04b92 UN-- 4 3 -- 
-#> + attr: name (v/c)
-#> + edges from 8d04b92 (vertex names):
-#> [1] A--B B--C C--D
+#> ── <igraph> ───────────────────────────────────────────────────────── 7fb1dd2 ──
+#> ℹ undirected · named
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] A ─ B  B ─ C  C ─ D 
 
 solids <- list(
   make_graph("Tetrahedron"),

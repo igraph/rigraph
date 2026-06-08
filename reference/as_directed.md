@@ -126,27 +126,46 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> IGRAPH c5e93b7 D--- 10 20 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from c5e93b7:
-#>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10  1->10
-#> [11]  2-> 1  3-> 2  4-> 3  5-> 4  6-> 5  7-> 6  8-> 7  9-> 8 10-> 9 10-> 1
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 8ec488b ──
+#> ℹ directed
+#> ℹ 10 vertices · 20 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 → 2   2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10 
+#> [10] 1 → 10  2 → 1   3 → 2   4 → 3   5 → 4   6 → 5   7 → 6   8 → 7   9 → 8  
+#> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> IGRAPH b9945a5 U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from b9945a5:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 4cfc33c ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 
 # Combining edge attributes
 g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> IGRAPH 8093919 U-W- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n)
-#> + edges from 8093919:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 1--10 9--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 707d052 ──
+#> ℹ undirected · weighted
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   1 ─ 10 
+#> [10] 9 ─ 10 
 if (FALSE) { # rlang::is_interactive()
 x11(width = 10, height = 5)
 layout(rbind(1:2))
@@ -165,8 +184,13 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> IGRAPH 6bead6d U-W- 10 7 -- 
-#> + attr: weight (e/n)
-#> + edges from 6bead6d:
-#> [1]  6-- 7  7-- 8  8-- 9  8-- 9  9-- 9 10--10 10--10
+#> ── <igraph> ───────────────────────────────────────────────────────── af4721c ──
+#> ℹ undirected · weighted
+#> ℹ 10 vertices · 7 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 6 ─ 7    7 ─ 8    8 ─ 9    8 ─ 9    9 ─ 9    10 ─ 10  10 ─ 10 
 ```

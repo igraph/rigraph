@@ -167,12 +167,17 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> IGRAPH 4f815c0 DN-- 5 6 -- 
-#> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),
-#> | friendship (e/n), advice (e/n)
-#> + edges from 4f815c0 (vertex names):
-#> [1] Bob      ->Alice Cecil    ->Bob   Cecil    ->Alice David    ->Alice
-#> [5] David    ->Bob   Esmeralda->Alice
+#> ── <igraph> ───────────────────────────────────────────────────────── d65b3f9 ──
+#> ℹ directed · named
+#> ℹ 5 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>, age <dbl>, gender <chr>
+#> → edge:   same.dept <lgl>, friendship <dbl>, advice <dbl>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Bob → Alice        Cecil → Bob        Cecil → Alice      David → Alice     
+#> [5] David → Bob        Esmeralda → Alice 
 
 ## The opposite operation
 as_data_frame(g, what = "vertices")

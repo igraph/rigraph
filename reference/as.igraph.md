@@ -52,9 +52,16 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> IGRAPH 5bf4399 DN-- 19 18 -- Fitted HRG
-#> + attr: name (g/c), name (v/c), prob (v/n)
-#> + edges from 5bf4399 (vertex names):
-#>  [1] g1->g6 g2->8  g3->g4 g4->6  g5->g3 g6->g7 g7->1  g8->2  g9->4  g1->g5
-#> [11] g2->9  g3->7  g4->10 g5->g2 g6->3  g7->g8 g8->g9 g9->5 
+#> ── <igraph> Fitted HRG ────────────────────────────────────────────── d8037c2 ──
+#> ℹ directed · named
+#> ℹ 19 vertices · 18 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>
+#> → vertex: name <chr>, prob <dbl>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] g1 → g6  g2 → 8   g3 → g4  g4 → 6   g5 → g3  g6 → g7  g7 → 1   g8 → 2  
+#>  [9] g9 → 4   g1 → g5  g2 → 9   g3 → 7   g4 → 10  g5 → g2  g6 → 3   g7 → g8 
+#> [17] g8 → g9  g9 → 5  
 ```

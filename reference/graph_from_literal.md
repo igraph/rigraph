@@ -144,20 +144,30 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> IGRAPH 4f38b0b UN-- 6 6 -- 
-#> + attr: name (v/c)
-#> + edges from 4f38b0b (vertex names):
-#> [1] Alice--Bob    Bob  --Cecil  Alice--Cecil  Cecil--Daniel Cecil--Eugene
-#> [6] Cecil--Gordon
+#> ── <igraph> ───────────────────────────────────────────────────────── 0f93448 ──
+#> ℹ undirected · named
+#> ℹ 6 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Alice ─ Bob     Bob ─ Cecil     Alice ─ Cecil   Cecil ─ Daniel 
+#> [5] Cecil ─ Eugene  Cecil ─ Gordon 
 
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> IGRAPH 8dd50b5 UN-- 6 7 -- 
-#> + attr: name (v/c)
-#> + edges from 8dd50b5 (vertex names):
-#> [1] Alice --Bob    Alice --Cecil  Alice --Daniel Cecil --Eugene Cecil --Gordon
-#> [6] Daniel--Eugene Daniel--Gordon
+#> ── <igraph> ───────────────────────────────────────────────────────── e488ddb ──
+#> ℹ undirected · named
+#> ℹ 6 vertices · 7 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Alice ─ Bob      Alice ─ Cecil    Alice ─ Daniel   Cecil ─ Eugene  
+#> [5] Cecil ─ Gordon   Daniel ─ Eugene  Daniel ─ Gordon 
 
 # A directed graph
 g3 <- graph_from_literal(
@@ -165,35 +175,55 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> IGRAPH bd3e98d DN-- 7 6 -- 
-#> + attr: name (v/c)
-#> + edges from bd3e98d (vertex names):
-#> [1] Bob   ->Alice  Alice ->Bob    Bob   ->Cecil  Daniel->Cecil  Eugene->Gordon
-#> [6] Eugene->Helen 
+#> ── <igraph> ───────────────────────────────────────────────────────── e44cdaa ──
+#> ℹ directed · named
+#> ℹ 7 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Bob → Alice      Alice → Bob      Bob → Cecil      Daniel → Cecil  
+#> [5] Eugene → Gordon  Eugene → Helen  
 
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> IGRAPH 63883a7 UN-- 6 2 -- 
-#> + attr: name (v/c)
-#> + edges from 63883a7 (vertex names):
-#> [1] Alice--Bob    Bob  --Daniel
+#> ── <igraph> ───────────────────────────────────────────────────────── 18c0f6e ──
+#> ℹ undirected · named
+#> ℹ 6 vertices · 2 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Alice ─ Bob   Bob ─ Daniel 
 V(g4)$name
 #> [1] "Alice"  "Bob"    "Daniel" "Cecil"  "Gordon" "Helen" 
 
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> IGRAPH 0c348df DN-- 2 2 -- 
-#> + attr: name (v/c)
-#> + edges from 0c348df (vertex names):
-#> [1] Bob  ->Alice Alice->Bob  
+#> ── <igraph> ───────────────────────────────────────────────────────── 0de4a44 ──
+#> ℹ directed · named
+#> ℹ 2 vertices · 2 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Bob → Alice  Alice → Bob 
 
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> IGRAPH a7442bb UN-- 6 3 -- 
-#> + attr: name (v/c)
-#> + edges from a7442bb (vertex names):
-#> [1] + ---   * --/   %%--%/%
+#> ── <igraph> ───────────────────────────────────────────────────────── 86ddb5b ──
+#> ℹ undirected · named
+#> ℹ 6 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] + ─ -     * ─ /     %% ─ %/% 
 ```

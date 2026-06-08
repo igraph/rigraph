@@ -100,10 +100,15 @@ aristas:
 g
 ```
 
-    ## IGRAPH 82bc02a UN-- 10 2 -- 
-    ## + attr: name (v/c)
-    ## + edges from 82bc02a (vertex names):
-    ## [1] 1--2 1--5
+    ## ── <igraph> ───────────────────────────────────────────────────────── 235c987 ──
+    ## ℹ undirected · named
+    ## ℹ 10 vertices · 2 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → vertex: name <chr>
+    ## 
+    ## ── Edges (vertex names) ────────────────────────────────────────────────────────
+    ## [1] 1 ─ 2  1 ─ 5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
 **2** aristas, que se enlistan en la última parte. Si el grafo tiene un
@@ -122,8 +127,12 @@ aristas:
 summary(g)
 ```
 
-    ## IGRAPH 82bc02a UN-- 10 2 -- 
-    ## + attr: name (v/c)
+    ## ── <igraph> ───────────────────────────────────────────────────────── 235c987 ──
+    ## ℹ undirected · named
+    ## ℹ 10 vertices · 2 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → vertex: name <chr>
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
 puede crear algunos grafos destacados con sólo especificar su nombre.
@@ -250,17 +259,24 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH 0b5a2e8 U--- 40 86 -- Zachary
-    ## + attr: name (g/c)
-    ## + edges from 0b5a2e8:
-    ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
-    ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
-    ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
-    ## [31]  3-- 9  3--14  4-- 8  4--13  4--14  5-- 7  5--11  6-- 7  6--11  6--17
-    ## [41]  7--17  9--31  9--33  9--34 10--34 14--34 15--33 15--34 16--33 16--34
-    ## [51] 19--33 19--34 20--34 21--33 21--34 23--33 23--34 24--26 24--28 24--33
-    ## [61] 24--34 24--30 25--26 25--28 25--32 26--32 27--30 27--34 28--34 29--32
-    ## [71] 29--34 30--33 30--34 31--33 31--34 32--33 32--34 33--34  1--35  1--36
+    ## ── <igraph> Zachary ───────────────────────────────────────────────── 408b8f2 ──
+    ## ℹ undirected
+    ## ℹ 40 vertices · 86 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → graph:  name <chr>
+    ## 
+    ## ── Edges ───────────────────────────────────────────────────────────────────────
+    ##  [1] 1 ─ 2    1 ─ 3    1 ─ 4    1 ─ 5    1 ─ 6    1 ─ 7    1 ─ 8    1 ─ 9   
+    ##  [9] 1 ─ 11   1 ─ 12   1 ─ 13   1 ─ 14   1 ─ 18   1 ─ 20   1 ─ 22   1 ─ 32  
+    ## [17] 2 ─ 3    2 ─ 4    2 ─ 8    2 ─ 14   2 ─ 18   2 ─ 20   2 ─ 22   2 ─ 31  
+    ## [25] 3 ─ 4    3 ─ 8    3 ─ 28   3 ─ 29   3 ─ 33   3 ─ 10   3 ─ 9    3 ─ 14  
+    ## [33] 4 ─ 8    4 ─ 13   4 ─ 14   5 ─ 7    5 ─ 11   6 ─ 7    6 ─ 11   6 ─ 17  
+    ## [41] 7 ─ 17   9 ─ 31   9 ─ 33   9 ─ 34   10 ─ 34  14 ─ 34  15 ─ 33  15 ─ 34 
+    ## [49] 16 ─ 33  16 ─ 34  19 ─ 33  19 ─ 34  20 ─ 34  21 ─ 33  21 ─ 34  23 ─ 33 
+    ## [57] 23 ─ 34  24 ─ 26  24 ─ 28  24 ─ 33  24 ─ 34  24 ─ 30  25 ─ 26  25 ─ 28 
+    ## [65] 25 ─ 32  26 ─ 32  27 ─ 30  27 ─ 34  28 ─ 34  29 ─ 32  29 ─ 34  30 ─ 33 
+    ## [73] 30 ─ 34  31 ─ 33  31 ─ 34  32 ─ 33  32 ─ 34  33 ─ 34  1 ─ 35   1 ─ 36  
     ## + ... omitted several edges
 
 Ahora tenemos un grafo no dirigido con 40 vértices y 89 aristas. Los IDs
@@ -386,8 +402,12 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH 0e3e4f3 U--- 5 3 -- Ring graph
-    ## + attr: name (g/c), mutual (g/l), circular (g/l)
+    ## ── <igraph> Ring graph ────────────────────────────────────────────── d82fe3f ──
+    ## ℹ undirected
+    ## ℹ 5 vertices · 3 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → graph:  name <chr>, mutual <lgl>, circular <lgl>
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
 vértice con dos hijos. No importa cuántas veces llames a
@@ -416,8 +436,12 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH c3d2e14 U--- 100 499 -- Geometric random graph
-    ## + attr: name (g/c), radius (g/n), torus (g/l)
+    ## ── <igraph> Geometric random graph ────────────────────────────────── 82d76f5 ──
+    ## ℹ undirected
+    ## ℹ 100 vertices · 499 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → graph:  name <chr>, radius <dbl>, torus <lgl>
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
 aleatoria y uniforme dentro del espacio métrico, y los pares de puntos
@@ -493,8 +517,13 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH 014bf36 UN-- 7 9 -- 
-    ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
+    ## ── <igraph> ───────────────────────────────────────────────────────── 828c8ca ──
+    ## ℹ undirected · named
+    ## ℹ 7 vertices · 9 edges
+    ## 
+    ## ── Attributes ──────────────────────────────────────────────────────────────────
+    ## → vertex: name <chr>, age <dbl>, gender <chr>
+    ## → edge:   is_formal <lgl>
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
 vértices y aristas respectivamente. Esto asigna un atributo a *todos*
@@ -572,7 +601,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from 014bf36:
+    ## ── <vertex sequence> 7/7 · named · from 828c8ca ────────────────────────────────
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -754,7 +783,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from c05a1a8:
+    ## ── <vertex sequence> 3/10 · from 4a8f217 ───────────────────────────────────────
     ## [1] 2 3 7
 
 ``` r
@@ -763,7 +792,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from c05a1a8:
+    ## ── <vertex sequence> 2/10 · from 4a8f217 ───────────────────────────────────────
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -853,8 +882,9 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from 014bf36 (vertex names):
-    ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
+    ## ── <edge sequence> 4/9 · vertex names · from 828c8ca ───────────────────────────
+    ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
+    ## [4] Carmina ─ Samira
 
 Por supuesto, también funciona con nombres de vértices:
 
@@ -863,8 +893,9 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from 014bf36 (vertex names):
-    ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
+    ## ── <edge sequence> 4/9 · vertex names · from 828c8ca ───────────────────────────
+    ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
+    ## [4] Carmina ─ Samira
 
 Al usar
 [`.to()`](https://r.igraph.org/reference/inside-square-error.md), se
@@ -889,8 +920,8 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from 014bf36 (vertex names):
-    ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
+    ## ── <edge sequence> 3/9 · vertex names · from 828c8ca ───────────────────────────
+    ## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
 vectores de caracteres que contengan los nombres y luego utilizar estos
@@ -925,9 +956,9 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from 014bf36 (vertex names):
-    ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
-    ## [5] Nang     --Samira
+    ## ── <edge sequence> 5/9 · vertex names · from 828c8ca ───────────────────────────
+    ## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    
+    ## [5] Nang ─ Samira
 
 ## Tratar un grafo como una matriz de adyacencia
 

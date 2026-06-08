@@ -107,20 +107,16 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> IGRAPH 3cfeb8b UN-- 11 15 -- 
-#> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
-#> | (g/c), center (g/n), name (v/c)
-#> + edges (vertex names):
-#> a -- b, j
-#> b -- a, c, k
-#> c -- b, d
-#> d -- c, e, k
-#> e -- d, f
-#> f -- e, g, k
-#> g -- f, h
-#> h -- g, i, k
-#> i -- h, j
-#> j -- a, i, k
-#> k -- b, d, f, h, j
+#> ── <igraph> ───────────────────────────────────────────────────────── 783e6e3 ──
+#> ℹ undirected · named
+#> ℹ 11 vertices · 15 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name_1 <chr>, name_2 <chr>, mutual <lgl>, circular <lgl>, mode <chr>, center <dbl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] a ─ j  a ─ b  c ─ d  b ─ c  e ─ f  d ─ e  g ─ h  f ─ g  i ─ j  h ─ i 
+#> [11] j ─ k  h ─ k  f ─ k  d ─ k  b ─ k 
 plot(G, layout = layout_nicely(wheel))
 ```

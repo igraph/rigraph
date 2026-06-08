@@ -62,28 +62,42 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> IGRAPH cc4fa9b U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + graph attributes:
-#> | + name:
-#> |   [1] "Ring graph"
-#> | + mutual:
-#> |   [1] FALSE
-#> | + circular:
-#> |   [1] TRUE
-#> + edges from cc4fa9b:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── eaf5974 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Graph attributes ────────────────────────────────────────────────────────────
+#> name:
+#>   [1] "Ring graph"
+#> mutual:
+#>   [1] FALSE
+#> circular:
+#>   [1] TRUE
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> IGRAPH 8f16360 D--- 10 20 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + graph attributes:
-#> | + name:
-#> |   [1] "Ring graph"
-#> | + mutual:
-#> |   [1] TRUE
-#> | + circular:
-#> |   [1] TRUE
-#> + edges from 8f16360:
-#>  [1]  1-> 2  2-> 1  2-> 3  3-> 2  3-> 4  4-> 3  4-> 5  5-> 4  5-> 6  6-> 5
-#> [11]  6-> 7  7-> 6  7-> 8  8-> 7  8-> 9  9-> 8  9->10 10-> 9 10-> 1  1->10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── d1f8798 ──
+#> ℹ directed
+#> ℹ 10 vertices · 20 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Graph attributes ────────────────────────────────────────────────────────────
+#> name:
+#>   [1] "Ring graph"
+#> mutual:
+#>   [1] TRUE
+#> circular:
+#>   [1] TRUE
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 → 2   2 → 1   2 → 3   3 → 2   3 → 4   4 → 3   4 → 5   5 → 4   5 → 6  
+#> [10] 6 → 5   6 → 7   7 → 6   7 → 8   8 → 7   8 → 9   9 → 8   9 → 10  10 → 9 
+#> [19] 10 → 1  1 → 10 
 ```

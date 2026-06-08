@@ -67,14 +67,23 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH e29c8ef DN-- 3 2 -- 
-#> + attr: name (v/c)
-#> + edges from e29c8ef (vertex names):
-#> [1] foo->bar    bar->foobar
+#> ── <igraph> ───────────────────────────────────────────────────────── b3b0552 ──
+#> ℹ directed · named
+#> ℹ 3 vertices · 2 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] foo → bar     bar → foobar 
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH 975fd55 D--- 10 10 -- 
-#> + edges from 975fd55:
-#>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
+#> ── <igraph> ───────────────────────────────────────────────────────── 1eeb47a ──
+#> ℹ directed
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 → 2   2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10 
+#> [10] 10 → 1 
 ```
