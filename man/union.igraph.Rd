@@ -8,9 +8,9 @@
 \method{union}{igraph}(
   ...,
   byname = "auto",
-  graph.attr.comb = "rename",
-  vertex.attr.comb = "rename",
-  edge.attr.comb = "rename"
+  graph_attr_comb = "rename",
+  vertex_attr_comb = "rename",
+  edge_attr_comb = "rename"
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ to perform the operation based on symbolic vertex names. If it is
 otherwise. A warning is generated if \code{auto} and some (but not all)
 graphs are named.}
 
-\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+\item{graph_attr_comb, vertex_attr_comb, edge_attr_comb}{Specification for
 combining clashing graph, vertex and edge attributes. Each defaults to
 \code{"rename"}, which preserves the historical behaviour of appending
 \verb{_1}, \verb{_2}, ... suffixes. See \link{igraph-attribute-combination} for the
@@ -47,8 +47,8 @@ of the internal numeric vertex IDs.
 \code{union()} keeps the attributes of all graphs. All graph, vertex and
 edge attributes are copied to the result. By default, if an attribute is
 present in multiple graphs and would result in a name clash, that attribute
-is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass \code{graph.attr.comb},
-\code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes
+is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass \code{graph_attr_comb},
+\code{vertex_attr_comb} or \code{edge_attr_comb} to combine clashing attributes
 instead, e.g. by summing or by taking the first non-\code{NA} value. See
 \link{igraph-attribute-combination} for the available combiners.
 
