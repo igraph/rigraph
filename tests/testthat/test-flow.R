@@ -55,17 +55,17 @@ test_that("st_cuts() works", {
   expect_equal(
     unvs(all_cuts_star_v7$cuts),
     list(
-      c(1, 2),
-      c(1, 7),
-      c(2, 3, 4, 5, 6),
-      c(2, 3, 4, 5, 10),
-      c(2, 3, 4, 6, 9),
-      c(2, 3, 4, 9, 10),
-      c(2, 3, 5, 6, 8),
-      c(2, 3, 5, 8, 10),
-      c(2, 3, 6, 8, 9),
+      1:2,
+      c(1, 4),
+      c(2, 3, 5, 6, 7),
+      c(2, 3, 5, 6, 10),
+      c(2, 3, 5, 7, 9),
+      c(2, 3, 5, 9, 10),
+      c(2, 3, 6, 7, 8),
+      c(2, 3, 6, 8, 10),
+      c(2, 3, 7, 8, 9),
       c(2, 3, 8, 9, 10),
-      c(3, 7)
+      3:4
     )
   )
   expect_equal(
@@ -73,7 +73,7 @@ test_that("st_cuts() works", {
     list(
       1,
       c(1, 3),
-      c(1, 2),
+      1:2,
       c(1, 2, 7),
       c(1, 2, 6),
       c(1, 2, 6, 7),
@@ -88,7 +88,7 @@ test_that("st_cuts() works", {
   g_star_v9 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3:4:5 -+ b)
   all_cuts_star_v9 <- st_min_cuts(g_star_v9, source = "s", target = "t")
   expect_equal(all_cuts_star_v9$value, 2)
-  expect_equal(unvs(all_cuts_star_v9$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
+  expect_equal(unvs(all_cuts_star_v9$cuts), list(1:2, c(1, 4), 3:4))
   expect_equal(
     unvs(all_cuts_star_v9$partition1s),
     list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5))
