@@ -62,3 +62,15 @@ expect_snapshot_igraph <- function(x, ...) {
     ...
   ))
 }
+
+# Two identically-shaped named triangles sharing a `weight` vertex/edge
+# attribute, used by the attribute-combination tests for graph operators.
+make_named_pair <- function() {
+  g1 <- graph_from_literal(A - B, B - C, C - A)
+  g2 <- graph_from_literal(A - B, B - C, C - A)
+  V(g1)$weight <- c(1, 2, 3)
+  V(g2)$weight <- c(10, 20, 30)
+  E(g1)$weight <- c(1, 2, 3)
+  E(g2)$weight <- c(10, 20, 30)
+  list(g1 = g1, g2 = g2)
+}
