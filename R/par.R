@@ -61,8 +61,8 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
-  "vertex.attr.comb" = list(name = "concat", "ignore"),
-  "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
+  "vertex_attr_comb" = list(name = "concat", "ignore"),
+  "edge_attr_comb" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
   "add.params" = TRUE,
   "add.vertex.names" = TRUE,
@@ -74,6 +74,31 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.id" = TRUE,
   "print.style" = "cli"
 )
+
+# Option keys that were renamed to snake_case. Reading or setting an option by
+# its old dotted name still works, but maps to the canonical key and emits a
+# soft-deprecation.
+.igraph.pars.aliases <- c(
+  "vertex.attr.comb" = "vertex_attr_comb",
+  "edge.attr.comb" = "edge_attr_comb"
+)
+
+# Map any deprecated option names in `x` to their canonical keys, warning once
+# per deprecated name encountered.
+igraph_normalize_par_name <- function(x) {
+  for (i in seq_along(x)) {
+    new <- unname(.igraph.pars.aliases[x[i]])
+    if (!is.na(new)) {
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        I(paste0("The igraph option `", x[i], "`")),
+        I(paste0("the `", new, "` option"))
+      )
+      x[i] <- new
+    }
+  }
+  x
+}
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
@@ -138,10 +163,11 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 #'       See [plot_dendrogram()] for details.
 #'     }
-#'     \item{edge.attr.comb}{
+#'     \item{edge_attr_comb}{
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this.
+#'       See [attribute.combination()] for details on this. The former dotted
+#'       name `edge.attr.comb` still works but is soft-deprecated.
 #'     }
 #'     \item{print.edge.attributes}{
 #'       Logical constant, whether to print edge attributes when printing graphs.
@@ -180,10 +206,11 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Logical constant, whether igraph functions should talk more than minimal.
 #'       E.g. if `TRUE` then some functions will use progress bars while computing. Defaults to `FALSE`.
 #'     }
-#'     \item{vertex.attr.comb}{
+#'     \item{vertex_attr_comb}{
 #'       Specifies what to do with the vertex attributes if the graph is modified.
 #'       The default value is `list(name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this.
+#'       See [attribute.combination()] for details on this. The former dotted
+#'       name `vertex.attr.comb` still works but is soft-deprecated.
 #'     }
 #'   }
 #'
@@ -235,7 +262,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     arg <- temp[[1]]
 
     if (mode(arg) == "character") {
-      return(.igraph.pars[arg])
+      return(.igraph.pars[igraph_normalize_par_name(arg)])
     }
 
     if (mode(arg) != "list") {
@@ -254,6 +281,8 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   if (is.null(n)) {
     cli::cli_abort("options must be given by name.")
   }
+  names(temp) <- igraph_normalize_par_name(n)
+  n <- names(temp)
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])
@@ -289,6 +318,7 @@ get_all_options <- function() {
 #' @rdname igraph_options
 #' @export
 igraph_opt <- function(x, default = NULL) {
+  x <- igraph_normalize_par_name(x)
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {
