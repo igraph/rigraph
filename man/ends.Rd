@@ -13,10 +13,10 @@ ends(graph, es, names = TRUE)
 \item{es}{The sequence of edges to query}
 
 \item{names}{Whether to return vertex names or
-numeric vertex ids. By default vertex names are used.}
+numeric vertex IDs. By default vertex names are used.}
 }
 \value{
-A two column matrix of vertex names or vertex ids.
+A two column matrix of vertex names or vertex IDs.
 }
 \description{
 Incident vertices of some graph edges

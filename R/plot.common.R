@@ -148,7 +148,7 @@
 #' }
 #' \item{label}{
 #'   The vertex labels. They will be converted to character.
-#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex ids.
+#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
 #'   The

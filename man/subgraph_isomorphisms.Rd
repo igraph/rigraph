@@ -56,7 +56,7 @@ the following extra arguments:
 \describe{
 \item{domains}{
 If not \code{NULL}, then it specifies matching restrictions.
-It must be a list of \code{target} vertex sets, given as numeric vertex ids or symbolic vertex names.
+It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
 The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
 it gives the allowed matching vertices in \code{target}.
 Defaults to \code{NULL}.

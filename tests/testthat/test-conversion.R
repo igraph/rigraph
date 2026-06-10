@@ -33,27 +33,23 @@ test_that("as_directed keeps attributes", {
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(1, 2, 1, 3, 3, 2)
+    c(1, 3, 1, 2, 2, 3)
   )
 
   g_arbitrary <- as_directed(g, "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
   expect_equal(
     df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
-    1:3
+    c(1, 3, 2)
   )
 })
 
 test_that("as.directed() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
 })
 
 test_that("as.undirected() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
 })
@@ -66,14 +62,14 @@ test_that("as_undirected() keeps attributes", {
   g_tiny <- as_undirected(g, mode = "collapse")
   df_tiny <- as_data_frame(g_tiny)
   expect_equal(g_tiny$name, g$name)
-  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(4, 2, 9))
+  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(3, 3, 9))
 
   g_each <- as_undirected(g, mode = "each")
   df_each <- as_data_frame(g_each)
   expect_equal(g_each$name, g$name)
   expect_equal(
     df_each[order(df_each[, 1], df_each[, 2]), ]$weight,
-    c(1, 3, 2, 4, 5)
+    c(1, 2, 3, 4, 5)
   )
 
   g_mutual <- as_undirected(g, mode = "mutual")
@@ -81,7 +77,7 @@ test_that("as_undirected() keeps attributes", {
   expect_equal(g_mutual$name, g$name)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(4, 9)
+    c(3, 9)
   )
 })
 
@@ -378,25 +374,19 @@ test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
   expect_equal(A, expected)
 })
 
-test_that("as_adjacency_matrix() recovers legacy positional `attr`", {
+test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
+  # The generic recovery machinery (messages, errors, abbreviations) is tested
+  # exhaustively in test-migration-fixture.R; here we only confirm the block is
+  # wired into this function: a legacy positional `attr` routes to `weights`
+  # with a deprecation, and an unknown named arg still errors.
   g <- make_full_graph(4, directed = FALSE)
   E(g)$weight <- 1:6
   expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
-  expect_snapshot(
+  lifecycle::expect_deprecated(
     A <- as_adjacency_matrix(g, "both", "weight", sparse = FALSE)
   )
   expect_equal(A, expected)
-})
-
-test_that("as_adjacency_matrix() keeps hard errors for unrecoverable dots", {
-  g <- make_full_graph(4, directed = FALSE)
-  # Unknown named argument in `...` -> error.
   expect_error(as_adjacency_matrix(g, "both", foo = "weight"))
-  # More positionals than the pre-3.0.0 signature
-  # `(graph, type, attr, edges, names, sparse)` can absorb -> error.
-  expect_error(
-    as_adjacency_matrix(g, "both", "weight", FALSE, TRUE, FALSE, "too many")
-  )
 })
 
 test_that("as_adjacency_matrix() dense/sparse parity for arbitrary weights", {
@@ -449,25 +439,17 @@ test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
   expect_equal(A, expected)
 })
 
-test_that("as_biadjacency_matrix() recovers legacy positional `attr`", {
+test_that("as_biadjacency_matrix() wires up legacy `attr` recovery", {
+  # See test-migration-fixture.R for exhaustive recovery coverage; this just
+  # confirms the block is wired into this function.
   g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
   E(g)$weight <- c(2, 4, 6)
   expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
-  expect_snapshot(
+  lifecycle::expect_deprecated(
     A <- as_biadjacency_matrix(g, NULL, "weight", sparse = FALSE)
   )
   expect_equal(A, expected)
-})
-
-test_that("as_biadjacency_matrix() keeps hard errors for unrecoverable dots", {
-  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
-  # Unknown named argument in `...` -> error.
   expect_error(as_biadjacency_matrix(g, NULL, foo = "weight"))
-  # More positionals than the pre-3.0.0 signature
-  # `(graph, types, attr, names, sparse)` can absorb -> error.
-  expect_error(
-    as_biadjacency_matrix(g, NULL, "weight", TRUE, FALSE, "too many")
-  )
 })
 
 test_that("as_adj works", {

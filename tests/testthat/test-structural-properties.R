@@ -129,6 +129,14 @@ test_that("BFS works from multiple root vertices", {
   )
 })
 
+test_that("BFS reports all requested root vertices", {
+  # https://github.com/igraph/rigraph/issues/1639
+  g <- make_ring(10) %du% make_ring(10)
+  roots <- c(1, 5, 15)
+  out <- bfs(g, root = roots, unreachable = FALSE)
+  expect_equal(as.vector(out$root), roots)
+})
+
 test_that("BFS the restricted set is one indexed", {
   # https://github.com/igraph/rigraph/issues/133
   g <- graph_from_edgelist(matrix(c(1, 2, 2, 3), ncol = 2, byrow = TRUE))
@@ -214,8 +222,6 @@ test_that("BFS callback does not blow up when another igraph function is raised 
 })
 
 test_that("bfs() works", {
-  local_igraph_options(print.id = FALSE)
-
   expect_snapshot({
     g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(

@@ -144,22 +144,22 @@ C    5     e    NA   NA    C
     textConnection(
       "
    from to bar1 foo_1 foo_2 bar2
-1     A  B    3     c     c    3
-2     A  A    3     c     b    2
-3     A  E    1     a     c    3
+1     A  B    3     c     b    2
+2     A  A    3     c     c    3
+3     A  E    1     a     b    2
 4     A  A    1     a     a    1
-5     B  E    1     a     b    2
+5     B  E    1     a     c    3
 6     B  B    1     a     a    1
-7     B  D    6     f     c    3
-8     A  D    6     f     b    2
-9     D  E    4     d     c    3
-10    A  D    4     d     a    1
-11    D  E    2     b     b    2
+7     B  D    7     g     b    2
+8     A  D    7     g     c    3
+9     D  E    5     e     b    2
+10    A  D    5     e     a    1
+11    D  E    2     b     c    3
 12    B  D    2     b     a    1
-13    E  E    3     c     b    2
+13    E  E    3     c     c    3
 14    B  E    3     c     a    1
-15    E  C    5     e     c    3
-16    A  C    5     e     a    1
+15    E  C    4     d     b    2
+16    A  C    4     d     a    1
 "
     )
   )

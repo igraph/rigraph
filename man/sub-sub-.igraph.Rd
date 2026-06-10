@@ -13,14 +13,14 @@
 
 \item{j}{Index, integer, character or logical, see details below.}
 
-\item{from}{A numeric or character vector giving vertex ids or
+\item{from}{A numeric or character vector giving vertex IDs or
 names. Together with the \code{to} argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the \code{i} and \code{j} arguments
 and if it is present, then the \code{to} argument must be present as
 well.}
 
-\item{to}{A numeric or character vector giving vertex ids or
+\item{to}{A numeric or character vector giving vertex IDs or
 names. Together with the \code{from} argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the \code{i} and \code{j} arguments
@@ -32,7 +32,7 @@ well.}
 \item{directed}{Logical scalar, whether to consider edge directions
 in directed graphs. It is ignored for undirected graphs.}
 
-\item{edges}{Logical scalar, whether to return edge ids.}
+\item{edges}{Logical scalar, whether to return edge IDs.}
 
 \item{exact}{Ignored.}
 }
@@ -52,9 +52,9 @@ or the 1:3 vertices. (For undirected graphs they are equivalent.)
 if the \code{edges} argument is set to
 \code{TRUE}: \preformatted{  graph[[1:3, , edges=TRUE]]
 graph[[, 1:3, edges=TRUE]]}
-\item Querying the edge ids between two sets or vertices,
+\item Querying the edge IDs between two sets or vertices,
 if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
-gives the edge ids of all the edges that exist from vertices
+gives the edge IDs of all the edges that exist from vertices
 \eqn{v} to vertices \eqn{w}.
 }
 
@@ -66,7 +66,7 @@ graph[[from = v, to = w, edges = TRUE]]}
 \sQuote{\code{[[}} operators allows logical indices and negative indices
 as well, with the usual R semantics.
 
-Vertex names are also supported, so instead of a numeric vertex id a
+Vertex names are also supported, so instead of a numeric vertex ID a
 vertex can also be given to \sQuote{\code{[}} and \sQuote{\code{[[}}.
 }
 \seealso{

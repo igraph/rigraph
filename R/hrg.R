@@ -291,10 +291,10 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'   following members:
 #'   \describe{
 #'     \item{parents}{
-#'       For each vertex, the id of its parent vertex is stored,
+#'       For each vertex, the ID of its parent vertex is stored,
 #'       or zero, if the vertex is the root vertex in the tree.
-#'       The first n vertex ids (from 0) refer to the original vertices of the graph,
-#'       the other ids refer to vertex groups.
+#'       The first n vertex IDs (from 0) refer to the original vertices of the graph,
+#'       the other IDs refer to vertex groups.
 #'     }
 #'     \item{weights}{
 #'       Numeric vector, counts the number of times a given tree split
@@ -328,7 +328,7 @@ consensus_tree <- function(
 #'
 #' @param graph The igraph graph to create the HRG from.
 #' @param prob A vector of probabilities, one for each vertex, in the order of
-#'   vertex ids.
+#'   vertex IDs.
 #' @return `hrg()` returns an `igraphHRG` object.
 #'
 #' @family hierarchical random graph functions
@@ -412,7 +412,7 @@ sample_hrg <- function(hrg) {
 #' @return A list with entries:
 #'   \describe{
 #'     \item{edges}{
-#'       The predicted edges, in a two-column matrix of vertex ids.
+#'       The predicted edges, in a two-column matrix of vertex IDs.
 #'     }
 #'     \item{prob}{
 #'       Probabilities of these edges, according to the fitted model.
@@ -549,6 +549,7 @@ buildMerges <- function(object) {
 }
 
 #' @method as.dendrogram igraphHRG
+#' @export
 as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
   nMerge <- length(object$left)
   merges <- buildMerges(object)

@@ -4,7 +4,7 @@
 \alias{handle_vertex_type_arg}
 \title{Common handler for vertex type arguments in igraph functions}
 \usage{
-handle_vertex_type_arg(types, graph, required = T)
+handle_vertex_type_arg(types, graph, required = TRUE)
 }
 \arguments{
 \item{types}{the vertex types}

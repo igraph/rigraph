@@ -10,7 +10,7 @@ hrg(graph, prob)
 \item{graph}{The igraph graph to create the HRG from.}
 
 \item{prob}{A vector of probabilities, one for each vertex, in the order of
-vertex ids.}
+vertex IDs.}
 }
 \value{
 \code{hrg()} returns an \code{igraphHRG} object.

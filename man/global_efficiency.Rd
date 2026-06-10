@@ -33,7 +33,7 @@ and the graph has a \code{weight} edge attribute, then it is used automatically.
 \item{directed}{Logical scalar, whether to consider directed paths. Ignored
 for undirected graphs.}
 
-\item{vids}{The vertex ids of the vertices for which the calculation will be done.
+\item{vids}{The vertex IDs of the vertices for which the calculation will be done.
 Applies to the local efficiency calculation only.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in

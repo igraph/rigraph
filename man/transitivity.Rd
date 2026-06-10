@@ -47,7 +47,7 @@ The same as \code{barrat}.
 }
 }}
 
-\item{vids}{The vertex ids for the local transitivity will be calculated.
+\item{vids}{The vertex IDs for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is
 \code{NULL}, in this case all vertices are considered. It is slightly faster
 to supply \code{NULL} here than \code{V(graph)}.}
@@ -103,7 +103,7 @@ multiple and/or loop edges. If you want to calculate it for a directed
 graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

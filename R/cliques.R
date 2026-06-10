@@ -213,12 +213,12 @@ clique.number <- function(graph) {
 #'   so will cause R to crash due to reentrancy issues. Extract
 #'   any needed graph information before calling the function with a callback, or
 #'   use collector mode (the default) and process results afterward.
-#' @return `cliques()` returns a list containing numeric vectors of vertex ids if
+#' @return `cliques()` returns a list containing numeric vectors of vertex IDs if
 #'   `callback` is `NULL`. Each list element is a clique, i.e. a vertex sequence
 #'   of class [igraph.vs][V]. If `callback` is provided, returns `NULL` invisibly.
 #'
 #'   `largest_cliques()` and `clique_num()` return a list containing numeric
-#'   vectors of vertex ids. Each list element is a clique, i.e. a vertex sequence
+#'   vectors of vertex IDs. Each list element is a clique, i.e. a vertex sequence
 #'   of class [igraph.vs][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
@@ -286,7 +286,7 @@ largest_cliques <- function(graph) {
 }
 
 #' @rdname cliques
-#' @param subset If not `NULL`, then it must be a vector of vertex ids,
+#' @param subset If not `NULL`, then it must be a vector of vertex IDs,
 #'   numeric or symbolic if the graph is named. The algorithm is run from these
 #'   vertices only, so only a subset of all maximal cliques is returned. See the
 #'   Eppstein paper for details. This argument makes it possible to easily
@@ -294,7 +294,7 @@ largest_cliques <- function(graph) {
 #' @param file If not `NULL`, then it must be a file name, i.e. a
 #'   character scalar. The output of the algorithm is written to this file. (If
 #'   it exists, then it will be overwritten.) Each clique will be a separate line
-#'   in the file, given with the numeric ids of its vertices, separated by
+#'   in the file, given with the numeric IDs of its vertices, separated by
 #'   whitespace.
 #' @export
 max_cliques <- function(
@@ -534,7 +534,7 @@ weighted_clique_num <- function(graph, vertex.weights = NULL) {
 #' @return `ivs()`,
 #'   `largest_ivs()` and
 #'   `max_ivs()` return a list containing numeric
-#'   vertex ids, each list element is an independent vertex set.
+#'   vertex IDs, each list element is an independent vertex set.
 #'
 #'   `ivs_size()` returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty

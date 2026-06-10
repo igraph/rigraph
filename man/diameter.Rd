@@ -51,7 +51,7 @@ The diameter is calculated by using a breadth-first search like method.
 many shortest paths of the length of the diameter, then it returns the first
 one found.
 
-\code{farthest_vertices()} returns two vertex ids, the vertices which are
+\code{farthest_vertices()} returns two vertex IDs, the vertices which are
 connected by the diameter path.
 }
 \section{Related documentation in the C library}{

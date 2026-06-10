@@ -1,5 +1,50 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9013
+
+## Features
+
+- Modern cli-styled print output (#1959, #2682).
+
+- Added simple check to `graph_from_literal()` (#824, #1981).
+
+
+# igraph 2.3.2.9012
+
+## Bug fixes
+
+- BFS reports all requested root vertices instead of only the first (#1639, #2693).
+
+- Resolve roxygen2 warnings (#2641, #2692).
+
+## Documentation
+
+- Use "ID"/"IDs" consistently in documentation prose (#1683, #2694).
+
+## Uncategorized
+
+- Fix: do not wrap roxygenize in try() (#2679) (#2690) (#2679).
+
+
+# igraph 2.3.2.9011
+
+## Bug fixes
+
+- Touchstone empty results table for branches with a slash (#2689).
+
+- Harden air support and broaden migration fixture to the full arg-matching matrix (#2686).
+
+- Repair touchstone benchmark CI (#2688).
+
+## Features
+
+- Add touchstone benchmarks (#1338, #2685).
+
+## Chore
+
+- Implicit assignments (#2664).
+
+
 # igraph 2.3.2.9010
 
 ## Features

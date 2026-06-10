@@ -399,7 +399,7 @@ get.adjacency.sparse <- function(
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param ... These dots are for future extensions and must be empty.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights One of the following:
 #'   \itemize{
 #'     \item `NULL` (default): use the `weight` edge attribute if the graph has
@@ -415,7 +415,7 @@ get.adjacency.sparse <- function(
 #' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
 #'   supplied, the value is forwarded to `weights` as a character edge
 #'   attribute name.
-#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
+#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
 #'   to the matrix. These are only assigned if the `name` vertex attribute
@@ -443,10 +443,10 @@ as_adjacency_matrix <- function(
   type = c("both", "upper", "lower"),
   ...,
   weights = NULL,
-  attr = deprecated(),
-  edges = deprecated(),
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  edges = deprecated(),
+  attr = deprecated()
 ) {
   ensure_igraph(graph)
 
@@ -456,21 +456,21 @@ as_adjacency_matrix <- function(
       list(...),
       current = list(
         weights = weights,
-        attr = attr,
-        edges = edges,
         names = names,
-        sparse = sparse
+        sparse = sparse,
+        edges = edges,
+        attr = attr
       ),
       recover_new = c("weights", "edges", "names", "sparse"),
       recover_old = c("attr", "edges", "names", "sparse"),
-      match_names = c("attr", "weights", "attr", "edges", "names", "sparse"),
-      match_to = c("weights", "weights", "attr", "edges", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
       defaults = list(
         weights = NULL,
-        attr = deprecated(),
-        edges = deprecated(),
         names = TRUE,
-        sparse = igraph_opt("sparsematrices")
+        sparse = igraph_opt("sparsematrices"),
+        edges = deprecated(),
+        attr = deprecated()
       ),
       head_args = c("graph", "type"),
       fn_name = "as_adjacency_matrix"
@@ -548,7 +548,7 @@ as_adj <- function(
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
-#'   vertex ids.
+#'   vertex IDs.
 #' @return A `ecount(graph)` by 2 numeric matrix.
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @keywords graphs
@@ -716,12 +716,12 @@ as_undirected <- function(
 #' Create adjacency lists from a graph, either for adjacent edges or for
 #' neighboring vertices
 #'
-#' `as_adj_list()` returns a list of numeric vectors, which include the ids
+#' `as_adj_list()` returns a list of numeric vectors, which include the IDs
 #' of neighbor vertices (according to the `mode` argument) of all
 #' vertices.
 #'
 #' `as_adj_edge_list()` returns a list of numeric vectors, which include the
-#' ids of adjacent edges (according to the `mode` argument) of all
+#' IDs of adjacent edges (according to the `mode` argument) of all
 #' vertices.
 #'
 #' @param graph The input graph.
@@ -923,7 +923,7 @@ graph_from_graphnel <- function(
 #' `as_graphnel()` converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{`name`}, then it will be used to assign
-#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
+#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex IDs
 #' will be used for this purpose.
 #'
 #' @param graph An igraph graph object.
@@ -1153,7 +1153,7 @@ get.incidence.sparse <- function(
 #' @param names Logical scalar, if `TRUE` and the vertices in the graph
 #'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise
-#'   the ids of the vertices are used as row and column names.
+#'   the IDs of the vertices are used as row and column names.
 #' @param sparse Logical scalar, if it is `TRUE` then a sparse matrix is
 #'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
@@ -1176,9 +1176,9 @@ as_biadjacency_matrix <- function(
   types = NULL,
   ...,
   weights = NULL,
-  attr = deprecated(),
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -1189,19 +1189,19 @@ as_biadjacency_matrix <- function(
       list(...),
       current = list(
         weights = weights,
-        attr = attr,
         names = names,
-        sparse = sparse
+        sparse = sparse,
+        attr = attr
       ),
       recover_new = c("weights", "names", "sparse"),
       recover_old = c("attr", "names", "sparse"),
-      match_names = c("attr", "weights", "attr", "names", "sparse"),
-      match_to = c("weights", "weights", "attr", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "attr"),
       defaults = list(
         weights = NULL,
-        attr = deprecated(),
         names = TRUE,
-        sparse = FALSE
+        sparse = FALSE,
+        attr = deprecated()
       ),
       head_args = c("graph", "types"),
       fn_name = "as_biadjacency_matrix"
@@ -1378,8 +1378,8 @@ graph_from_adj_list <- function(
 #' in that row. The names of the columns that contain the metadata
 #' of the incident vertices are prefixed with `from_` and `to_`.
 #' The first two columns are always named `from` and `to` and
-#' they contain the numeric ids of the incident vertices. The rows are
-#' listed in the order of numeric vertex ids.
+#' they contain the numeric IDs of the incident vertices. The rows are
+#' listed in the order of numeric vertex IDs.
 #'
 #' @param graph Input graph
 #' @return A long data frame.
@@ -1612,14 +1612,14 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' the graph and also the edge attributes are returned. The edges will be in
 #' the first two columns, named `from` and `to`. (This also denotes
 #' edge direction for directed graphs.)  For named graphs, the vertex names
-#' will be included in these columns, for other graphs, the numeric vertex ids.
+#' will be included in these columns, for other graphs, the numeric vertex IDs.
 #' The edge attributes will be in the other columns. It is not a good idea to
 #' have an edge attribute named `from` or `to`, because then the
 #' column named in the data frame will not be unique. The edges are listed in
-#' the order of their numeric ids.
+#' the order of their numeric IDs.
 #'
 #' If the `what` argument is `vertices`, then vertex attributes are
-#' returned. Vertices are listed in the order of their numeric vertex ids.
+#' returned. Vertices are listed in the order of their numeric vertex IDs.
 #'
 #' If the `what` argument is `both`, then both vertex and edge data
 #' is returned, in a list with named entries `vertices` and `edges`.
@@ -1763,9 +1763,9 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' `graph_from_edgelist()` creates a graph from an edge list. Its argument
 #' is a two-column matrix, each row defines one edge. If it is
-#' a numeric matrix then its elements are interpreted as vertex ids. If
+#' a numeric matrix then its elements are interpreted as vertex IDs. If
 #' it is a character matrix then it is interpreted as symbolic vertex
-#' names and a vertex id will be assigned to each name, and also a
+#' names and a vertex ID will be assigned to each name, and also a
 #' `name` vertex attribute will be added.
 #'
 #' @concept Edge list

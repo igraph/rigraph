@@ -286,6 +286,32 @@
   }
 }
 
+# Print the "single index" (`[[`) edge detail view: one row per edge with
+# tail/head names, their raw numeric ids (tid/hid) and one column per atomic
+# edge attribute. If any attribute is list-valued, the frame can't hold it, so
+# fall back to a per-attribute named list sliced to the selected edges.
+print_edge_detail <- function(graph, edges) {
+  ea <- edge_attr(graph)
+  if (all(vapply(ea, is.atomic, logical(1)))) {
+    etail <- tail_of(graph, edges)
+    ehead <- head_of(graph, edges)
+    df <- data.frame(
+      stringsAsFactors = FALSE,
+      tail = as_ids(etail),
+      head = as_ids(ehead),
+      tid = as.vector(etail),
+      hid = as.vector(ehead)
+    )
+    if (length(ea)) {
+      ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
+      df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
+    }
+    print(df)
+  } else {
+    print(lapply(ea, "[", as.vector(edges)))
+  }
+}
+
 .print.edges.compressed <- function(
   x,
   edges = E(x),
@@ -316,25 +342,7 @@
 
   if (is_single_index(edges) && !is.null(x)) {
     ## Double bracket
-    ea <- edge_attr(x)
-    if (all(sapply(ea, is.atomic))) {
-      etail <- tail_of(x, edges)
-      ehead <- head_of(x, edges)
-      df <- data.frame(
-        stringsAsFactors = FALSE,
-        tail = as_ids(etail),
-        head = as_ids(ehead),
-        tid = as.vector(etail),
-        hid = as.vector(ehead)
-      )
-      if (length(ea)) {
-        ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
-        df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
-      }
-      print(df)
-    } else {
-      print(lapply(ea, "[", as.vector(edges)))
-    }
+    print_edge_detail(x, edges)
   } else if (is.null(max.lines)) {
     .print.edges.compressed.all(x, edges, names)
   } else {
@@ -521,7 +529,7 @@ print_all <- function(object, ...) {
 #' The first line always
 #' starts with `IGRAPH`, showing you that the object is an igraph graph.
 #' Then a seven character code is printed, this the first seven characters
-#' of the unique id of the graph. See [graph_id()] for more.
+#' of the unique ID of the graph. See [graph_id()] for more.
 #' Then a four letter long code string is printed. The first letter
 #' distinguishes between directed (\sQuote{`D`}) and undirected
 #' (\sQuote{`U`}) graphs. The second letter is \sQuote{`N`} for named
@@ -548,6 +556,12 @@ print_all <- function(object, ...) {
 #' As of igraph 1.1.1, the `str.igraph` function is defunct, use
 #' `print_all()`.
 #'
+#' Output style is controlled by the `print.style` igraph option. The default
+#' `"cli"` produces cli-styled output with section rules, typed attribute
+#' listings and Unicode arrows for edges. Set
+#' `igraph_options(print.style = "classic")` for the historical
+#' `IGRAPH ... DNW-` header relied on by parsers and tutorials.
+#'
 #' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
 #' @param full Logical scalar, whether to print the graph structure itself as
@@ -557,7 +571,7 @@ print_all <- function(object, ...) {
 #'   attributes.
 #' @param edge.attributes Logical constant, whether to print edge attributes.
 #' @param names Logical constant, whether to print symbolic vertex names (i.e.
-#'   the `name` vertex attribute) or vertex ids.
+#'   the `name` vertex attribute) or vertex IDs.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.
 #' @param id Whether to print the graph ID.
@@ -589,6 +603,44 @@ print.igraph <- function(
 ) {
   ensure_igraph(x)
 
+  if (!is_cli_style()) {
+    return(print_igraph_legacy(
+      x,
+      full = full,
+      graph.attributes = graph.attributes,
+      vertex.attributes = vertex.attributes,
+      edge.attributes = edge.attributes,
+      names = names,
+      max.lines = max.lines,
+      id = id,
+      ...
+    ))
+  }
+
+  print_igraph_cli(
+    x,
+    full = full,
+    graph.attributes = graph.attributes,
+    vertex.attributes = vertex.attributes,
+    edge.attributes = edge.attributes,
+    names = names,
+    max.lines = max.lines,
+    id = id,
+    ...
+  )
+}
+
+print_igraph_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  graph.attributes = igraph_opt("print.graph.attributes"),
+  vertex.attributes = igraph_opt("print.vertex.attributes"),
+  edge.attributes = igraph_opt("print.edge.attributes"),
+  names = TRUE,
+  max.lines = igraph_opt("auto.print.lines"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
     if (graph.attributes) {
@@ -625,7 +677,323 @@ print.igraph <- function(
 #' @family print
 #' @export
 summary.igraph <- function(object, ...) {
+  if (!is_cli_style()) {
+    return(summary_igraph_legacy(object))
+  }
+  summary_igraph_cli(object)
+}
+
+summary_igraph_legacy <- function(object, ...) {
   .print.header(object)
+  invisible(object)
+}
+
+# cli-styled printing ----------------------------------------------------
+
+# igraph_opt() may return NULL; NULL == "cli" breaks if(), so use identical()
+is_cli_style <- function() {
+  identical(igraph_opt("print.style"), "cli")
+}
+
+# Emit a cli section rule. The leading blank line separates this section from
+# the previous one; `blank = FALSE` omits it for the first (header) rule.
+cli_section <- function(title, right = NULL, blank = TRUE) {
+  rule <- if (is.null(right)) {
+    cli::rule(left = title)
+  } else {
+    cli::rule(left = title, right = right)
+  }
+  cat(if (blank) "\n", rule, "\n", sep = "")
+}
+
+# Print a character vector either in full (`max.lines = NULL`) or truncated to
+# `max.lines` with cli's omission footer.
+print_cli_lines <- function(x, max.lines, omitted_footer) {
+  if (is.null(max.lines)) {
+    print(x, quote = FALSE)
+  } else {
+    head_print(
+      x,
+      omitted_footer = omitted_footer,
+      quote = FALSE,
+      max_lines = max.lines
+    )
+  }
+}
+
+# Format edge endpoints as "tail <arrow> head " strings. Endpoints are not
+# padded to a common width, so each edge reads with a single space around the
+# delimiter; the trailing space yields two spaces between edges once print()
+# adds its own single-space separator.
+format_cli_edge_endpoints <- function(endpoints, arrow) {
+  paste0(endpoints[, 1], " ", arrow, " ", endpoints[, 2], " ")
+}
+
+# Leading + interleaved middot separators for a vector of flag labels;
+# returns "" when there are no flags (avoids an if/else at the call site).
+flag_suffix_cli <- function(flags, middot) {
+  paste(c("", flags), collapse = paste0(" ", middot, " "))
+}
+
+edge_arrow_cli <- function(directed) {
+  if (cli::is_utf8_output()) {
+    if (directed) "\u2192" else "\u2500"
+  } else {
+    if (directed) "->" else "--"
+  }
+}
+
+middot_cli <- function() {
+  if (cli::is_utf8_output()) "\u00b7" else "*"
+}
+
+# Bare type label for an attribute mode code; the surrounding `<...>` is added
+# by cli's `{.cls}` inline class at the call site.
+attr_label_cli <- function(code) {
+  switch(
+    code,
+    c = "chr",
+    n = "dbl",
+    l = "lgl",
+    x = "list",
+    code
+  )
+}
+
+attr_codes_cli <- function(x, kind) {
+  if (kind == "graph") {
+    .Call(Rx_igraph_get_attr_mode, x, 2L)
+  } else if (kind == "vertex") {
+    .Call(Rx_igraph_get_attr_mode, x, 3L)
+  } else {
+    .Call(Rx_igraph_get_attr_mode, x, 4L)
+  }
+}
+
+print_igraph_header_cli <- function(x, id) {
+  name <- if ("name" %in% graph_attr_names(x)) {
+    as.character(x$name)[1]
+  } else {
+    NULL
+  }
+  title <- if (!is.null(name) && !is.na(name) && nzchar(name)) {
+    paste0("<igraph> ", name)
+  } else {
+    "<igraph>"
+  }
+  # `id` comes from an option and may be NULL/NA, so guard with isTRUE().
+  graph_id_short <- if (isTRUE(id)) substr(graph_id(x), 1, 7) else NA_character_
+
+  # Show the graph id on the right of the rule only when we have one.
+  has_id <- !is.na(graph_id_short) && nzchar(graph_id_short)
+  cli_section(title, right = if (has_id) graph_id_short, blank = FALSE)
+
+  properties <- c(
+    if (is_directed(x)) "directed" else "undirected",
+    if (is_named(x)) "named",
+    if (is_weighted(x)) "weighted",
+    if (is_bipartite(x)) "bipartite"
+  )
+
+  middot <- middot_cli()
+  sep <- paste0(" ", middot, " ")
+  info_symbol <- cli::col_cyan(cli::symbol$info)
+
+  cat(info_symbol, " ", paste(properties, collapse = sep), "\n", sep = "")
+  cat(
+    info_symbol,
+    " ",
+    vcount(x),
+    " vertices ",
+    middot,
+    " ",
+    ecount(x),
+    " edges\n",
+    sep = ""
+  )
+}
+
+print_igraph_attr_summary_cli <- function(x) {
+  graph_attrs <- graph_attr_names(x)
+  vertex_attrs <- vertex_attr_names(x)
+  edge_attrs <- edge_attr_names(x)
+  if (
+    length(graph_attrs) == 0 &&
+      length(vertex_attrs) == 0 &&
+      length(edge_attrs) == 0
+  ) {
+    return(invisible(NULL))
+  }
+
+  cli_section("Attributes")
+  arrow <- if (cli::is_utf8_output()) "\u2192" else "->"
+
+  # Style names and type codes via cli's semantic classes (`.field`, `.cls`)
+  # rather than hand-picked colors, so cli's theme owns the palette and it
+  # respects NO_COLOR / non-tty output. `.cls` also supplies the `<...>`.
+  format_line <- function(label, names, codes) {
+    labels <- vapply(codes, attr_label_cli, character(1))
+    parts <- vapply(
+      seq_along(names),
+      function(i) {
+        nm <- names[i]
+        lbl <- labels[i]
+        cli::format_inline("{.field {nm}} {.cls {lbl}}")
+      },
+      character(1)
+    )
+    paste0(arrow, " ", label, paste(parts, collapse = ", "))
+  }
+
+  lines <- c(
+    if (length(graph_attrs)) {
+      format_line("graph:  ", graph_attrs, attr_codes_cli(x, "graph"))
+    },
+    if (length(vertex_attrs)) {
+      format_line("vertex: ", vertex_attrs, attr_codes_cli(x, "vertex"))
+    },
+    if (length(edge_attrs)) {
+      format_line("edge:   ", edge_attrs, attr_codes_cli(x, "edge"))
+    }
+  )
+  # One newline per line, no trailing blank: each section starts with its own
+  # leading blank, so emitting one here would double the gap to the next one.
+  cat(paste0(lines, "\n"), sep = "")
+}
+
+print_igraph_graph_attrs_cli <- function(x) {
+  attr_names <- graph_attr_names(x)
+  if (length(attr_names) == 0) {
+    return(invisible(NULL))
+  }
+  cli_section("Graph attributes")
+  for (attr_name in attr_names) {
+    cat(cli::format_inline("{.field {attr_name}}:"), "\n", sep = "")
+    indent_print(graph_attr(x, attr_name), .indent = "  ")
+  }
+}
+
+print_igraph_vertex_attrs_cli <- function(x) {
+  if (length(vertex_attr_names(x)) == 0) {
+    return(invisible(NULL))
+  }
+  cli_section("Vertex attributes")
+  # reuse classic tabular renderer
+  .print.vertex.attributes.old(x, full = TRUE, max.lines = NULL)
+}
+
+print_igraph_edges_cli <- function(
+  x,
+  edges = E(x),
+  names = TRUE,
+  max.lines = NULL,
+  with_attrs = FALSE
+) {
+  is_named_g <- isTRUE(names) && is_named(x)
+  if (
+    is_named_g &&
+      "name" %in% vertex_attr_names(x) &&
+      !is.numeric(vertex_attr(x, "name")) &&
+      !is.character(vertex_attr(x, "name")) &&
+      !is.logical(vertex_attr(x, "name"))
+  ) {
+    cli::cli_warn(
+      "Can't print vertex names, complex {.val name} vertex attribute."
+    )
+    is_named_g <- FALSE
+  }
+
+  n_edges <- length(edges)
+  if (n_edges == 0) {
+    return(invisible(NULL))
+  }
+
+  title_suffix <- if (is_named_g) " (vertex names)" else ""
+  show_attrs <- with_attrs && length(edge_attr_names(x)) != 0
+  title <- if (show_attrs) {
+    paste0("Edges with attributes", title_suffix)
+  } else {
+    paste0("Edges", title_suffix)
+  }
+  cli_section(title)
+
+  arrow <- edge_arrow_cli(is_directed(x))
+  endpoints <- ends(x, edges, names = is_named_g)
+
+  if (show_attrs) {
+    # Tabular layout: one row per edge, endpoints in an "edge" column
+    # followed by one column per (non-name) edge attribute.
+    other_attrs <- setdiff(edge_attr_names(x), "name")
+    width <- if (is.numeric(endpoints)) {
+      nchar(max(endpoints))
+    } else {
+      max(nchar(endpoints))
+    }
+    edge_names <- if ("name" %in% edge_attr_names(x)) {
+      paste0("'", edge_attr(x, "name"), "'")
+    } else {
+      seq_len(nrow(endpoints))
+    }
+    tab <- data.frame(row.names = paste0("[", edge_names, "]"))
+    tab[["edge"]] <- paste0(
+      format(endpoints[, 1], width = width),
+      " ",
+      arrow,
+      " ",
+      format(endpoints[, 2], width = width)
+    )
+    for (attr_name in other_attrs) {
+      tab[[attr_name]] <- edge_attr(x, attr_name)
+    }
+    print(tab)
+  } else {
+    formatted <- format_cli_edge_endpoints(endpoints, arrow)
+    print_cli_lines(formatted, max.lines, "+ ... omitted several edges\n")
+  }
+}
+
+print_igraph_cli <- function(
+  x,
+  full = igraph_opt("print.full"),
+  graph.attributes = igraph_opt("print.graph.attributes"),
+  vertex.attributes = igraph_opt("print.vertex.attributes"),
+  edge.attributes = igraph_opt("print.edge.attributes"),
+  names = TRUE,
+  max.lines = igraph_opt("auto.print.lines"),
+  id = igraph_opt("print.id"),
+  ...
+) {
+  print_igraph_header_cli(x, id)
+  print_igraph_attr_summary_cli(x)
+
+  if (isTRUE(full)) {
+    if (graph.attributes) {
+      print_igraph_graph_attrs_cli(x)
+    }
+    if (vertex.attributes) {
+      print_igraph_vertex_attrs_cli(x)
+    }
+    if (ecount(x) > 0) {
+      if (edge.attributes && length(edge_attr_names(x)) != 0) {
+        print_igraph_edges_cli(
+          x,
+          names = names,
+          max.lines = NULL,
+          with_attrs = TRUE
+        )
+      } else {
+        print_igraph_edges_cli(x, names = names, max.lines = NULL)
+      }
+    }
+  } else if (identical(full, "auto")) {
+    print_igraph_edges_cli(x, names = names, max.lines = max.lines)
+  }
+  invisible(x)
+}
+
+summary_igraph_cli <- function(object) {
+  print_igraph_header_cli(object, id = igraph_opt("print.id"))
+  print_igraph_attr_summary_cli(object)
   invisible(object)
 }
 

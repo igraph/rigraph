@@ -11,7 +11,7 @@ get.edgelist(graph, names = TRUE)
 
 \item{names}{Whether to return a character matrix containing vertex
 names (i.e. the \code{name} vertex attribute) if they exist or numeric
-vertex ids.}
+vertex IDs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

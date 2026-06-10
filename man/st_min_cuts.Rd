@@ -9,9 +9,9 @@ st_min_cuts(graph, source, target, capacity = NULL)
 \arguments{
 \item{graph}{The input graph. It must be directed.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex.}
+\item{target}{The ID of the target vertex.}
 
 \item{capacity}{Numeric vector giving the edge capacities. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then this
@@ -26,10 +26,10 @@ A list with entries:
 Numeric scalar, the size of the minimum cut(s).
 }
 \item{cuts}{
-A list of numeric vectors containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.
+A list of numeric vectors containing edge IDs. Each vector is a minimum \eqn{(s,t)}-cut.
 }
 \item{partition1s}{
-A list of numeric vectors containing vertex ids,
+A list of numeric vectors containing vertex IDs,
 they correspond to the edge cuts.
 Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 the vertex set \eqn{X} and its complementer \eqn{V-X},

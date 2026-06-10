@@ -57,7 +57,7 @@ For unweighted graphs this is the same as the size of the matching.
 }
 \item{matching}{
 The matching itself.
-Numeric vertex id, or vertex names if the graph was named.
+Numeric vertex ID, or vertex names if the graph was named.
 Non-matched vertices are denoted by \code{NA}.
 }
 }

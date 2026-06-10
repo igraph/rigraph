@@ -72,7 +72,7 @@ convex.hull <- function(data) {
 #' bin width.
 #'
 #' The running mean of `v` is a `w` vector of length
-#' `length(v)-binwidth+1`. The first element of `w` id the average of
+#' `length(v)-binwidth+1`. The first element of `w` ID the average of
 #' the first `binwidth` elements of `v`, the second element of
 #' `w` is the average of elements `2:(binwidth+1)`, etc.
 #'

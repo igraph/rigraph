@@ -43,7 +43,7 @@ is included in the matrix.}
 supplied, the value is forwarded to \code{weights} as a character edge
 attribute name.}
 
-\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.}
 
 \item{names}{Logical constant, whether to assign row and column names

@@ -73,10 +73,10 @@ migrations <- list(
       type = c("both", "upper", "lower"),
       ...,
       weights = NULL,
-      attr = deprecated(),
-      edges = deprecated(),
       names = TRUE,
-      sparse = igraph_opt("sparsematrices")
+      sparse = igraph_opt("sparsematrices"),
+      edges = deprecated(),
+      attr = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -88,9 +88,9 @@ migrations <- list(
       types = NULL,
       ...,
       weights = NULL,
-      attr = deprecated(),
       names = TRUE,
-      sparse = FALSE
+      sparse = FALSE,
+      attr = deprecated()
     ) {},
     when = "3.0.0"
   ),
