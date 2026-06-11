@@ -7,9 +7,11 @@
 as_biadjacency_matrix(
   graph,
   types = NULL,
-  attr = NULL,
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 )
 }
 \arguments{
@@ -20,12 +22,20 @@ directed graphs.}
 \code{type} vertex attribute. You must supply this argument if the graph has
 no \code{type} vertex attribute.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
-attribute name. If \code{NULL}, then a traditional bipartite adjacency matrix is
-returned. If not \code{NULL} then the values of the given edge attribute are
-included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-attribute of an arbitrarily chosen edge (for the multiple edges) is
-included.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 
 \item{names}{Logical scalar, if \code{TRUE} and the vertices in the graph
 are named (i.e. the graph has a vertex attribute called \code{name}), then
@@ -34,6 +44,10 @@ the IDs of the vertices are used as row and column names.}
 
 \item{sparse}{Logical scalar, if it is \code{TRUE} then a sparse matrix is
 created, you will need the \code{Matrix} package for this.}
+
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
+supplied, the value is forwarded to \code{weights} as a character edge
+attribute name.}
 }
 \value{
 A sparse or dense matrix.

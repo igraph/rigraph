@@ -100,7 +100,7 @@ test_that("as_adjacency_matrix() works -- sparse", {
   expect_equal(basic_adj_matrix_dense, letter_adj_matrix_dense)
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
+  weight_adj_matrix <- as_adjacency_matrix(g, weights = "weight")
   expect_s4_class(weight_adj_matrix, "dgCMatrix")
   expect_equal(
     as.matrix(weight_adj_matrix),
@@ -138,10 +138,10 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
-  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, weights = "bla"))
 
   E(g)$bla <- letters[1:ecount(g)]
-  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, weights = "bla"))
 })
 
 test_that("as_adjacency_matrix() works -- sparse undirected", {
@@ -179,7 +179,11 @@ test_that("as_adjacency_matrix() works -- dense", {
   expect_equal(basic_adj_matrix, unname(letter_adj_matrix))
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  weight_adj_matrix <- as_adjacency_matrix(
+    g,
+    weights = "weight",
+    sparse = FALSE
+  )
   expect_equal(
     weight_adj_matrix,
     matrix(
@@ -194,12 +198,12 @@ test_that("as_adjacency_matrix() works -- dense", {
 test_that("as_adjacency_matrix() errors well -- dense", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   expect_snapshot_igraph_error(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+    as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
   )
 
   E(g)$bla <- letters[1:ecount(g)]
   expect_snapshot_igraph_error(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+    as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
   )
 })
 
@@ -218,7 +222,11 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
   )
 
   E(ug)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE, attr = "weight")
+  weight_adj_matrix <- as_adjacency_matrix(
+    ug,
+    sparse = FALSE,
+    weights = "weight"
+  )
   dimnames(weight_adj_matrix) <- NULL
   expect_equal(
     weight_adj_matrix,
@@ -239,7 +247,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     g,
     type = "lower",
     sparse = FALSE,
-    attr = "attribute"
+    weights = "attribute"
   )
   dimnames(lower_adj_matrix) <- NULL
 
@@ -256,7 +264,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     g,
     type = "upper",
     sparse = FALSE,
-    attr = "attribute"
+    weights = "attribute"
   )
   dimnames(upper_adj_matrix) <- NULL
   expect_equal(
@@ -275,14 +283,14 @@ test_that("as_adjacency_matrix() works -- dense + weights", {
   mat <- matrix(0, 5, 5)
   mat[lower.tri(mat)] <- 1:10
   mat <- mat + t(mat)
-  A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
   expect_equal(as_unnamed_dense_matrix(A), mat)
 })
 
 test_that("as_biadjacency_matrix() works -- dense + weights", {
   g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
   E(g)$weight <- c(2, 4, 6)
-  A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+  A <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
   mat <- matrix(
     c(2, 4, 0, 0, 0, 6, 0, 0),
     nrow = 4L,
@@ -290,6 +298,158 @@ test_that("as_biadjacency_matrix() works -- dense + weights", {
     dimnames = list(c("1", "3", "5", "6"), c("2", "4"))
   )
   expect_equal(as_unnamed_dense_matrix(A), as_unnamed_dense_matrix(mat))
+})
+
+# --- weights parameter: the four input modes -------------------------------
+
+test_that("as_adjacency_matrix() picks up `weight` attribute by default", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- c(1, 2, 3, 4, 5, 6)
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_equal(as_adjacency_matrix(g, sparse = FALSE), expected)
+  expect_equal(
+    as.matrix(as_adjacency_matrix(g, sparse = TRUE)),
+    as.matrix(expected)
+  )
+})
+
+test_that("as_adjacency_matrix() weights = NA returns unweighted matrix", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- c(1, 2, 3, 4, 5, 6)
+  plain <- matrix(1, 4, 4)
+  diag(plain) <- 0
+  expect_equal(
+    as_adjacency_matrix(g, weights = NA, sparse = FALSE),
+    plain
+  )
+  expect_equal(
+    as.matrix(as_adjacency_matrix(g, weights = NA, sparse = TRUE)),
+    plain
+  )
+})
+
+test_that("as_adjacency_matrix() accepts a numeric weights vector", {
+  g <- make_full_graph(4, directed = FALSE)
+  w <- c(10, 20, 30, 40, 50, 60)
+  A_dense <- as_adjacency_matrix(g, weights = w, sparse = FALSE)
+  A_sparse <- as_adjacency_matrix(g, weights = w, sparse = TRUE)
+  expect_equal(A_dense, as.matrix(A_sparse))
+  # the weights should appear somewhere in the matrix
+  expect_setequal(setdiff(unique(as.vector(A_dense)), 0), w)
+})
+
+test_that("as_adjacency_matrix() weights = character names an edge attribute", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$myweight <- c(7, 8, 9, 10, 11, 12)
+  expect_equal(
+    as_adjacency_matrix(g, weights = "myweight", sparse = FALSE),
+    as_adjacency_matrix(g, weights = c(7, 8, 9, 10, 11, 12), sparse = FALSE)
+  )
+})
+
+test_that("as_adjacency_matrix() errors on wrong-length weights vector", {
+  g <- make_full_graph(4, directed = FALSE)
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = FALSE)
+  )
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = TRUE)
+  )
+})
+
+test_that("as_adjacency_matrix() errors on non-numeric weights", {
+  g <- make_full_graph(4, directed = FALSE)
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = list(1, 2, 3, 4, 5, 6))
+  )
+})
+
+test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- 1:6
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
+  # The generic recovery machinery (messages, errors, abbreviations) is tested
+  # exhaustively in test-migration-fixture.R; here we only confirm the block is
+  # wired into this function: a legacy positional `attr` routes to `weights`
+  # with a deprecation, and an unknown named arg still errors.
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- 1:6
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  lifecycle::expect_deprecated(
+    A <- as_adjacency_matrix(g, "both", "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+  expect_error(as_adjacency_matrix(g, "both", foo = "weight"))
+})
+
+test_that("as_adjacency_matrix() dense/sparse parity for arbitrary weights", {
+  g <- make_ring(6, directed = TRUE)
+  w <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5)
+  for (type in c("both", "upper", "lower")) {
+    A_dense <- as_adjacency_matrix(g, weights = w, type = type, sparse = FALSE)
+    A_sparse <- as_adjacency_matrix(g, weights = w, type = type, sparse = TRUE)
+    expect_equal(A_dense, as.matrix(A_sparse), info = type)
+  }
+})
+
+# --- as_biadjacency_matrix() weights modes ---------------------------------
+
+test_that("as_biadjacency_matrix() picks up `weight` attribute by default", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_equal(as_biadjacency_matrix(g, sparse = FALSE), expected)
+  expect_equal(
+    as.matrix(as_biadjacency_matrix(g, sparse = TRUE)),
+    as.matrix(expected)
+  )
+})
+
+test_that("as_biadjacency_matrix() weights = NA returns unweighted matrix", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  unwt <- as_biadjacency_matrix(g, weights = NA, sparse = FALSE)
+  # plain biadjacency contains only 0 and 1
+  expect_true(all(unwt %in% c(0, 1)))
+})
+
+test_that("as_biadjacency_matrix() accepts a numeric weights vector", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  w <- c(9, 99, 999)
+  A_dense <- as_biadjacency_matrix(g, weights = w, sparse = FALSE)
+  A_sparse <- as_biadjacency_matrix(g, weights = w, sparse = TRUE)
+  expect_equal(A_dense, as.matrix(A_sparse))
+  expect_setequal(setdiff(unique(as.vector(A_dense)), 0), w)
+})
+
+test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_biadjacency_matrix() wires up legacy `attr` recovery", {
+  # See test-migration-fixture.R for exhaustive recovery coverage; this just
+  # confirms the block is wired into this function.
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  lifecycle::expect_deprecated(
+    A <- as_biadjacency_matrix(g, NULL, "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+  expect_error(as_biadjacency_matrix(g, NULL, foo = "weight"))
 })
 
 test_that("as_adj works", {
@@ -539,8 +699,8 @@ test_that("graphNEL conversion works", {
   expect_isomorphic(g, g2)
   expect_equal(V(g)$name, V(g2)$name)
 
-  A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
-  A2 <- as_adjacency_matrix(g2, attr = "weight", sparse = FALSE)
+  A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  A2 <- as_adjacency_matrix(g2, weights = "weight", sparse = FALSE)
   expect_equal(A, A)
   expect_equal(g$name, g2$name)
 })
@@ -731,16 +891,20 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   # Directed, weighted, sparse
   g_dir_wt <- g_dir_unwt
   E(g_dir_wt)$weight <- c(1.5, 2.3, 3.7, 0.5)
-  expect_snapshot(as_adjacency_matrix(g_dir_wt, attr = "weight", sparse = TRUE))
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
-    attr = "weight",
+    weights = "weight",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
     type = "upper",
     sparse = TRUE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "lower",
     sparse = TRUE
   ))
@@ -748,18 +912,18 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   # Directed, weighted, dense
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
-    attr = "weight",
+    weights = "weight",
     sparse = FALSE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "upper",
     sparse = FALSE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_dir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "lower",
     sparse = FALSE
   ))
@@ -809,24 +973,24 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   E(g_undir_wt)$weight <- c(2.1, 3.2, 4.3)
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     sparse = TRUE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "upper",
     sparse = TRUE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "lower",
     sparse = TRUE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "both",
     sparse = TRUE
   ))
@@ -834,24 +998,24 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   # Undirected, weighted, dense
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     sparse = FALSE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "upper",
     sparse = FALSE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "lower",
     sparse = FALSE
   ))
   expect_snapshot(as_adjacency_matrix(
     g_undir_wt,
-    attr = "weight",
+    weights = "weight",
     type = "both",
     sparse = FALSE
   ))
