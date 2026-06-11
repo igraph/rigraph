@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,11 +107,15 @@ will be replicated to match the number of vertices.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>A character scalar that gives the name of the edge attribute
-to use in the adjacency matrix. If it is <code>NULL</code>, then the
-‘weight’ edge attribute of the graph is used, if there is one.
-Otherwise, or if it is <code>NA</code>, then the calculation uses the standard
-adjacency matrix.</p></dd>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (default): use the <code>weight</code> edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.</p></li>
+<li><p><code>NA</code>: explicitly unweighted, ignoring any <code>weight</code> edge attribute.</p></li>
+<li><p>A numeric or logical vector of length <code><a href="gsize.html">ecount()</a></code>: use these values
+directly as edge weights.</p></li>
+<li><p>A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.</p></li>
+</ul><p>If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.</p></dd>
 
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>

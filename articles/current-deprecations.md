@@ -144,9 +144,12 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | get.adjacency() | [as_adjacency_matrix()](https://r.igraph.org/reference/as_adjacency_matrix.html) |
 | 2 – warn | 2.0.0 | get.adjlist() | [as_adj_list()](https://r.igraph.org/reference/as_adj_list.html) |
 | 2 – warn | 2.0.0 | get.adjedgelist() | [as_adj_edge_list()](https://r.igraph.org/reference/as_adj_list.html) |
+| 1 – soft | 3.0.0 | sprintf(“%s(attr = )”,fn) | sprintf(“%s(weights = )”,fn) |
 | 2 – warn | 2.1.0 | get.adjacency.dense(loops = ‘must be a character’) | sprintf(“Converting to get.adjacency.dense (loops = ‘%s’)”,loops) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.0.0 | [as_adjacency_matrix(edges = )](https://r.igraph.org/reference/as_adjacency_matrix.html) |  |
 | 2 – warn | 2.1.0 | as_adj() | [as_adjacency_matrix()](https://r.igraph.org/reference/as_adjacency_matrix.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | as_incidence_matrix() | [as_biadjacency_matrix()](https://r.igraph.org/reference/as_biadjacency_matrix.html) |
 | 2 – warn | 2.1.0 | as.directed() | [as_directed()](https://r.igraph.org/reference/as_directed.html) |
 | 2 – warn | 2.1.0 | as.undirected() | [as_undirected()](https://r.igraph.org/reference/as_directed.html) |

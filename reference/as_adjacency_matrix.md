@@ -9,10 +9,12 @@ graph, like an adjacency matrix.
 as_adjacency_matrix(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  edges = deprecated(),
+  attr = deprecated()
 )
 ```
 
@@ -30,25 +32,28 @@ as_adjacency_matrix(
   the matrix is used. `both`: the whole matrix is used, a symmetric
   matrix is returned.
 
-- attr:
+- ...:
 
-  Either `NULL` or a character string giving an edge attribute name. If
-  `NULL` a traditional adjacency matrix is returned. If not `NULL` then
-  the values of the given edge attribute are included in the adjacency
-  matrix. If the graph has multiple edges, the edge attribute of an
-  arbitrarily chosen edge (for the multiple edges) is included. This
-  argument is ignored if `edges` is `TRUE`.
+  These dots are for future extensions and must be empty.
 
-  Note that this works only for certain attribute types. If the `sparse`
-  argumen is `TRUE`, then the attribute must be either logical or
-  numeric. If the `sparse` argument is `FALSE`, then character is also
-  allowed. The reason for the difference is that the `Matrix` package
-  does not support character sparse matrices yet.
+- weights:
 
-- edges:
+  One of the following:
 
-  **\[deprecated\]** Logical scalar, whether to return the edge IDs in
-  the matrix. For non-existant edges zero is returned.
+  - `NULL` (default): use the `weight` edge attribute if the graph has
+    one, otherwise return a traditional (unweighted) adjacency matrix.
+
+  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+
+  - A numeric or logical vector of length
+    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
+    values directly as edge weights.
+
+  - A character scalar: the name of an edge attribute whose values are
+    used as weights. The attribute must be numeric or logical.
+
+  If multiple edges share endpoints, the value of an arbitrarily chosen
+  edge is included in the matrix.
 
 - names:
 
@@ -60,6 +65,16 @@ as_adjacency_matrix(
 
   Logical scalar, whether to create a sparse matrix. The ‘`Matrix`’
   package must be installed for creating sparse matrices.
+
+- edges:
+
+  **\[deprecated\]** Logical scalar, whether to return the edge IDs in
+  the matrix. For non-existant edges zero is returned.
+
+- attr:
+
+  **\[deprecated\]** Use `weights` instead. If supplied, the value is
+  forwarded to `weights` as a character edge attribute name.
 
 ## Value
 
@@ -131,7 +146,7 @@ as_adjacency_matrix(g)
 #> i . . . . . . . . . 1
 #> j . . . 1 1 1 1 1 1 .
 E(g)$weight <- runif(ecount(g))
-as_adjacency_matrix(g, attr = "weight")
+as_adjacency_matrix(g)
 #> 10 x 10 sparse Matrix of class "dgCMatrix"
 #>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]
 #>                                                                                
@@ -156,4 +171,18 @@ as_adjacency_matrix(g, attr = "weight")
 #> h .         0.8823195
 #> i .         0.3621016
 #> j 0.3621016 .        
+as_adjacency_matrix(g, weights = NA)
+#> 10 x 10 sparse Matrix of class "dgCMatrix"
+#>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]
+#>                      
+#> a . . . . . . . . . .
+#> b . . . . . 1 . 1 . .
+#> c . . . . . . 1 . . .
+#> d . . . . . . 1 . . 1
+#> e . . . . . 1 . 1 . 1
+#> f . 1 . . 1 . 1 . . 1
+#> g . . 1 1 . 1 . . . 1
+#> h . 1 . . 1 . . . . 1
+#> i . . . . . . . . . 1
+#> j . . . 1 1 1 1 1 1 .
 ```

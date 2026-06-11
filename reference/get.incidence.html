@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,12 +80,9 @@ no <code>type</code> vertex attribute.</p></dd>
 
 
 <dt id="arg-attr">attr<a class="anchor" aria-label="anchor" href="#arg-attr"></a></dt>
-<dd><p>Either <code>NULL</code> or a character string giving an edge
-attribute name. If <code>NULL</code>, then a traditional bipartite adjacency matrix is
-returned. If not <code>NULL</code> then the values of the given edge attribute are
-included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-attribute of an arbitrarily chosen edge (for the multiple edges) is
-included.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>weights</code> instead. If
+supplied, the value is forwarded to <code>weights</code> as a character edge
+attribute name.</p></dd>
 
 
 <dt id="arg-names">names<a class="anchor" aria-label="anchor" href="#arg-names"></a></dt>

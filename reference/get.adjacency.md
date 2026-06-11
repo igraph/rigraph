@@ -35,18 +35,8 @@ get.adjacency(
 
 - attr:
 
-  Either `NULL` or a character string giving an edge attribute name. If
-  `NULL` a traditional adjacency matrix is returned. If not `NULL` then
-  the values of the given edge attribute are included in the adjacency
-  matrix. If the graph has multiple edges, the edge attribute of an
-  arbitrarily chosen edge (for the multiple edges) is included. This
-  argument is ignored if `edges` is `TRUE`.
-
-  Note that this works only for certain attribute types. If the `sparse`
-  argumen is `TRUE`, then the attribute must be either logical or
-  numeric. If the `sparse` argument is `FALSE`, then character is also
-  allowed. The reason for the difference is that the `Matrix` package
-  does not support character sparse matrices yet.
+  **\[deprecated\]** Use `weights` instead. If supplied, the value is
+  forwarded to `weights` as a character edge attribute name.
 
 - edges:
 

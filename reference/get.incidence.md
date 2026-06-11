@@ -27,12 +27,8 @@ get.incidence(graph, types = NULL, attr = NULL, names = TRUE, sparse = FALSE)
 
 - attr:
 
-  Either `NULL` or a character string giving an edge attribute name. If
-  `NULL`, then a traditional bipartite adjacency matrix is returned. If
-  not `NULL` then the values of the given edge attribute are included in
-  the bipartite adjacency matrix. If the graph has multiple edges, the
-  edge attribute of an arbitrarily chosen edge (for the multiple edges)
-  is included.
+  **\[deprecated\]** Use `weights` instead. If supplied, the value is
+  forwarded to `weights` as a character edge attribute name.
 
 - names:
 

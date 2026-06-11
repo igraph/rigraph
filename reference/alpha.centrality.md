@@ -53,10 +53,22 @@ alpha.centrality(
 
 - weights:
 
-  A character scalar that gives the name of the edge attribute to use in
-  the adjacency matrix. If it is `NULL`, then the ‘weight’ edge
-  attribute of the graph is used, if there is one. Otherwise, or if it
-  is `NA`, then the calculation uses the standard adjacency matrix.
+  One of the following:
+
+  - `NULL` (default): use the `weight` edge attribute if the graph has
+    one, otherwise return a traditional (unweighted) adjacency matrix.
+
+  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+
+  - A numeric or logical vector of length
+    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
+    values directly as edge weights.
+
+  - A character scalar: the name of an edge attribute whose values are
+    used as weights. The attribute must be numeric or logical.
+
+  If multiple edges share endpoints, the value of an arbitrarily chosen
+  edge is included in the matrix.
 
 - tol:
 

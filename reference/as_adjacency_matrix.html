@@ -15,7 +15,7 @@ graph, like an adjacency matrix."><meta property="og:image" content="https://r.i
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,10 +61,12 @@ graph, like an adjacency matrix.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"upper"</span>, <span class="st">"lower"</span><span class="op">)</span>,</span>
-<span>  attr <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  edges <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  sparse <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"sparsematrices"</span><span class="op">)</span></span>
+<span>  sparse <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"sparsematrices"</span><span class="op">)</span>,</span>
+<span>  edges <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  attr <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -84,23 +86,20 @@ of the matrix is used. <code>both</code>: the whole matrix is used, a symmetric
 matrix is returned.</p></dd>
 
 
-<dt id="arg-attr">attr<a class="anchor" aria-label="anchor" href="#arg-attr"></a></dt>
-<dd><p>Either <code>NULL</code> or a character string giving an edge
-attribute name. If <code>NULL</code> a traditional adjacency matrix is returned.
-If not <code>NULL</code> then the values of the given edge attribute are included
-in the adjacency matrix. If the graph has multiple edges, the edge attribute
-of an arbitrarily chosen edge (for the multiple edges) is included. This
-argument is ignored if <code>edges</code> is <code>TRUE</code>.</p>
-<p>Note that this works only for certain attribute types. If the <code>sparse</code>
-argumen is <code>TRUE</code>, then the attribute must be either logical or
-numeric. If the <code>sparse</code> argument is <code>FALSE</code>, then character is
-also allowed. The reason for the difference is that the <code>Matrix</code>
-package does not support character sparse matrices yet.</p></dd>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
-<dt id="arg-edges">edges<a class="anchor" aria-label="anchor" href="#arg-edges"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical scalar, whether to return the edge IDs in the matrix.
-For non-existant edges zero is returned.</p></dd>
+<dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (default): use the <code>weight</code> edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.</p></li>
+<li><p><code>NA</code>: explicitly unweighted, ignoring any <code>weight</code> edge attribute.</p></li>
+<li><p>A numeric or logical vector of length <code><a href="gsize.html">ecount()</a></code>: use these values
+directly as edge weights.</p></li>
+<li><p>A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.</p></li>
+</ul><p>If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.</p></dd>
 
 
 <dt id="arg-names">names<a class="anchor" aria-label="anchor" href="#arg-names"></a></dt>
@@ -113,6 +112,17 @@ is present in the graph.</p></dd>
 <dd><p>Logical scalar, whether to create a sparse matrix. The
 ‘<code>Matrix</code>’ package must be installed for creating sparse
 matrices.</p></dd>
+
+
+<dt id="arg-edges">edges<a class="anchor" aria-label="anchor" href="#arg-edges"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical scalar, whether to return the edge IDs in the matrix.
+For non-existant edges zero is returned.</p></dd>
+
+
+<dt id="arg-attr">attr<a class="anchor" aria-label="anchor" href="#arg-attr"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>weights</code> instead. If
+supplied, the value is forwarded to <code>weights</code> as a character edge
+attribute name.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -180,7 +190,7 @@ defined in the ‘<code>Matrix</code>’ package, if <code>sparse</code> if
 <span class="r-out co"><span class="r-pr">#&gt;</span> i . . . . . . . . . 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> j . . . 1 1 1 1 1 1 .</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span>, attr <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                </span>
@@ -205,6 +215,20 @@ defined in the ‘<code>Matrix</code>’ package, if <code>sparse</code> if
 <span class="r-out co"><span class="r-pr">#&gt;</span> h .         0.8823195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> i .         0.3621016</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> j 0.3621016 .        </span>
+<span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span>, weights <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a . . . . . . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b . . . . . 1 . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c . . . . . . 1 . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d . . . . . . 1 . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e . . . . . 1 . 1 . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f . 1 . . 1 . 1 . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g . . 1 1 . 1 . . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h . 1 . . 1 . . . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i . . . . . . . . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j . . . 1 1 1 1 1 1 .</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

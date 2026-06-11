@@ -43,9 +43,9 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 E(g)
-#> ── <edge sequence> 10/10 · vertex names · from 1b9ced9 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from ac57b7a ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 E(g) %>% rev()
-#> ── <edge sequence> 10/10 · vertex names · from 1b9ced9 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from ac57b7a ─────────────────────────
 #>  [1] A ─ J  I ─ J  H ─ I  G ─ H  F ─ G  E ─ F  D ─ E  C ─ D  B ─ C  A ─ B 
 ```

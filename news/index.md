@@ -1,5 +1,18 @@
 # Changelog
 
+## igraph 2.3.2.9013
+
+### Features
+
+- Modern cli-styled print output
+  ([\#1959](https://github.com/igraph/rigraph/issues/1959),
+  [\#2682](https://github.com/igraph/rigraph/issues/2682)).
+
+- Added simple check to
+  [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md)
+  ([\#824](https://github.com/igraph/rigraph/issues/824),
+  [\#1981](https://github.com/igraph/rigraph/issues/1981)).
+
 ## igraph 2.3.2.9012
 
 ### Bug fixes
