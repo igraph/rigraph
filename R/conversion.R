@@ -670,7 +670,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' E(g4)$weight <- seq_len(ecount(g4))
 #' ug4 <- as_undirected(g4,
 #'   mode = "mutual",
-#'   edge.attr.comb = list(weight = length)
+#'   edge_attr_comb = list(weight = length)
 #' )
 #' print(ug4, e = TRUE)
 #'
@@ -685,7 +685,8 @@ as_directed <- function(
 }
 
 #' @rdname as_directed
-#' @param edge.attr.comb Specifies what to do with edge attributes, if
+#' @inheritParams rlang::args_dots_empty
+#' @param edge_attr_comb Specifies what to do with edge attributes, if
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
@@ -694,8 +695,31 @@ as_directed <- function(
 as_undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  ...,
+  edge_attr_comb = igraph_opt("edge_attr_comb")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_undirected, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(edge_attr_comb = edge_attr_comb),
+      recover_new = c("edge_attr_comb"),
+      recover_old = c("edge.attr.comb"),
+      match_names = c("edge.attr.comb", "edge_attr_comb"),
+      match_to = c("edge_attr_comb", "edge_attr_comb"),
+      defaults = list(edge_attr_comb = igraph_opt("edge_attr_comb")),
+      head_args = c("graph", "mode"),
+      fn_name = "as_undirected"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
@@ -704,7 +728,7 @@ as_undirected <- function(
   res <- to_undirected_impl(
     graph = graph,
     mode = mode,
-    edge_attr_comb = edge.attr.comb
+    edge_attr_comb = edge_attr_comb
   )
 
   res
