@@ -784,7 +784,7 @@ get_all_shortest_paths_dijkstra_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- create_vs_list(graph, res$vpaths)
   }
   if (igraph_opt("return.vs.es")) {
     res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
@@ -826,7 +826,7 @@ get_all_shortest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- create_vs_list(graph, res$vpaths)
   }
   if (igraph_opt("return.vs.es")) {
     res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
@@ -931,7 +931,7 @@ get_k_shortest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- create_vs_list(graph, res$vpaths)
   }
   if (igraph_opt("return.vs.es")) {
     res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
@@ -1206,7 +1206,7 @@ get_shortest_paths_bellman_ford_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- create_vs_list(graph, res$vertices)
   }
   if (igraph_opt("return.vs.es")) {
     res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
@@ -1258,7 +1258,7 @@ get_shortest_paths_dijkstra_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- create_vs_list(graph, res$vertices)
   }
   if (igraph_opt("return.vs.es")) {
     res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
@@ -1300,7 +1300,7 @@ get_shortest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- create_vs_list(graph, res$vertices)
   }
   if (igraph_opt("return.vs.es")) {
     res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
@@ -1453,7 +1453,7 @@ get_widest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- create_vs_list(graph, res$vertices)
   }
   if (igraph_opt("return.vs.es")) {
     res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))

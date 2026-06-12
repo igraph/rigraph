@@ -336,7 +336,7 @@ biconnected_components_impl <- function(
     res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$components <- create_vs_list(graph, res$components)
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)
@@ -1290,7 +1290,7 @@ neighborhood_impl <- function(
     mindist
   )
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
