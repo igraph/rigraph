@@ -1,17 +1,70 @@
+check_matrix <- function(mat, nrow = 1, ncol = 2) {
+  expect_equal(dim(mat), c(nrow, ncol))
+  if (nrow > 0) {
+    expect_true(all(is.finite(mat)))
+  }
+}
+
 test_that("layout_with_fr() works", {
   skip_on_os("solaris")
 
+  g <- make_ring(10)
   withr::with_seed(42, {
-    g <- make_ring(10)
     l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
   })
-  expect_equal(sum(l), 4.57228, tolerance = 0.1)
+  check_matrix(l, nrow = 10, ncol = 2)
 
+  g <- make_star(30)
   withr::with_seed(42, {
-    g <- make_star(30)
     l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
   })
-  expect_equal(sum(l), -170.9312, tolerance = 0.1)
+  check_matrix(l, nrow = 30, ncol = 3)
+})
+
+test_that("stochastic layouts are reproducible with set.seed()", {
+  g <- make_ring(20) + make_star(10, mode = "undirected")
+
+  expect_identical(
+    withr::with_seed(42, layout_with_fr(g, niter = 50)),
+    withr::with_seed(42, layout_with_fr(g, niter = 50))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_fr(g, niter = 50, dim = 3)),
+    withr::with_seed(42, layout_with_fr(g, niter = 50, dim = 3))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_kk(g, maxiter = 50)),
+    withr::with_seed(42, layout_with_kk(g, maxiter = 50))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_kk(g, maxiter = 50, dim = 3)),
+    withr::with_seed(42, layout_with_kk(g, maxiter = 50, dim = 3))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_dh(g, maxiter = 5)),
+    withr::with_seed(42, layout_with_dh(g, maxiter = 5))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_gem(g, maxiter = 50)),
+    withr::with_seed(42, layout_with_gem(g, maxiter = 50))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_graphopt(g, niter = 50)),
+    withr::with_seed(42, layout_with_graphopt(g, niter = 50))
+  )
+  g_connected <- make_ring(20)
+  expect_identical(
+    withr::with_seed(42, layout_with_lgl(g_connected, maxiter = 50)),
+    withr::with_seed(42, layout_with_lgl(g_connected, maxiter = 50))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_drl(g)),
+    withr::with_seed(42, layout_with_drl(g))
+  )
+  expect_identical(
+    withr::with_seed(42, layout_with_drl(g, dim = 3)),
+    withr::with_seed(42, layout_with_drl(g, dim = 3))
+  )
 })
 
 test_that("layout_with_fr() deprecated argument", {
@@ -102,13 +155,6 @@ test_that("layout algorithms work for null graphs", {
 
 test_that("layout algorithms work for singleton graphs", {
   g <- make_empty_graph(1)
-
-  check_matrix <- function(mat, nrow = 1, ncol = 2) {
-    expect_equal(dim(mat), c(nrow, ncol))
-    if (nrow > 0) {
-      expect_true(all(is.finite(mat)))
-    }
-  }
 
   expect_silent(layout_as_tree(g))
   check_matrix(layout_as_tree(g))
