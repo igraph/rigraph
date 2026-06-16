@@ -290,7 +290,8 @@ apply_one_combiner <- function(comb, x) {
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
 #' @param graph_attr_comb Specification for combining shared graph attributes.
-#'   Defaults to `"rename"`, which preserves the historical behaviour of
+#'   Defaults to the `graph_attr_comb` igraph option (`"rename"` unless changed
+#'   via [igraph_options()]), which preserves the historical behaviour of
 #'   appending `_1`, `_2`, ... suffixes to clashing attribute names. See
 #'   [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
@@ -306,7 +307,7 @@ apply_one_combiner <- function(comb, x) {
 #' V(g2)$name <- letters[11:20]
 #' print_all(g1 %du% g2)
 #' @export
-disjoint_union <- function(..., graph_attr_comb = "rename") {
+disjoint_union <- function(..., graph_attr_comb = igraph_opt("graph_attr_comb")) {
   graphs <- unlist(
     recursive = FALSE,
     lapply(list(...), function(l) {
@@ -598,10 +599,12 @@ union.default <- function(...) {
 #'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
 #' @param graph_attr_comb,vertex_attr_comb,edge_attr_comb Specification for
-#'   combining clashing graph, vertex and edge attributes. Each defaults to
-#'   `"rename"`, which preserves the historical behaviour of appending
-#'   `_1`, `_2`, ... suffixes. See [igraph-attribute-combination] for the
-#'   available combiners.
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_comb`
+#'   and `edge_attr_comb` default to `"rename"`; `graph_attr_comb` defaults to
+#'   the `graph_attr_comb` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). `"rename"` preserves the historical behaviour of
+#'   appending `_1`, `_2`, ... suffixes. See [igraph-attribute-combination] for
+#'   the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method union igraph
@@ -620,7 +623,7 @@ union.default <- function(...) {
 union.igraph <- function(
   ...,
   byname = "auto",
-  graph_attr_comb = "rename",
+  graph_attr_comb = igraph_opt("graph_attr_comb"),
   vertex_attr_comb = "rename",
   edge_attr_comb = "rename"
 ) {
@@ -698,8 +701,10 @@ intersection <- function(...) {
 #' @param keep.all.vertices Logical scalar, whether to keep vertices that only
 #'   appear in a subset of the input graphs.
 #' @param graph_attr_comb,vertex_attr_comb,edge_attr_comb Specification for
-#'   combining clashing graph, vertex and edge attributes. Each defaults to
-#'   `"rename"`. See [igraph-attribute-combination] for the available
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_comb`
+#'   and `edge_attr_comb` default to `"rename"`; `graph_attr_comb` defaults to
+#'   the `graph_attr_comb` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). See [igraph-attribute-combination] for the available
 #'   combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -720,7 +725,7 @@ intersection.igraph <- function(
   ...,
   byname = "auto",
   keep.all.vertices = TRUE,
-  graph_attr_comb = "rename",
+  graph_attr_comb = igraph_opt("graph_attr_comb"),
   vertex_attr_comb = "rename",
   edge_attr_comb = "rename"
 ) {
@@ -946,8 +951,10 @@ complementer <- function(graph, loops = FALSE) {
 #'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
 #'   but not both graphs are named.
 #' @param graph_attr_comb,vertex_attr_comb,edge_attr_comb Specification for
-#'   combining clashing graph, vertex and edge attributes. Each defaults to
-#'   `"rename"`. See [igraph-attribute-combination] for the available
+#'   combining clashing graph, vertex and edge attributes. `vertex_attr_comb`
+#'   and `edge_attr_comb` default to `"rename"`; `graph_attr_comb` defaults to
+#'   the `graph_attr_comb` igraph option (`"rename"` unless changed via
+#'   [igraph_options()]). See [igraph-attribute-combination] for the available
 #'   combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -966,7 +973,7 @@ compose <- function(
   g1,
   g2,
   byname = "auto",
-  graph_attr_comb = "rename",
+  graph_attr_comb = igraph_opt("graph_attr_comb"),
   vertex_attr_comb = "rename",
   edge_attr_comb = "rename"
 ) {

@@ -1402,6 +1402,26 @@ test_that("disjoint_union() combines graph attrs via comb", {
   expect_equal(u$label, c("first", "second"))
 })
 
+test_that("graph_attr_comb defaults to the graph_attr_comb igraph option", {
+  expect_equal(igraph_opt("graph_attr_comb"), "rename")
+
+  g1 <- make_ring(3)
+  g2 <- make_ring(3)
+  g1$label <- "first"
+  g2$label <- "second"
+
+  # Default option ("rename") preserves the historical suffixing behaviour.
+  u <- union(g1, g2)
+  expect_true(all(c("label_1", "label_2") %in% graph_attr_names(u)))
+
+  # Setting the option changes the default for the graph operators.
+  local_igraph_options(graph_attr_comb = "ignore")
+  expect_length(graph_attr_names(union(g1, g2)), 0)
+  expect_length(graph_attr_names(intersection(g1, g2)), 0)
+  expect_length(graph_attr_names(disjoint_union(g1, g2)), 0)
+  expect_length(graph_attr_names(compose(g1, g2)), 0)
+})
+
 test_that("simplify() rejects 'rename' combiner", {
   g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
   E(g)$weight <- 1:5

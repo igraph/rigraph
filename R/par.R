@@ -61,6 +61,7 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
+  "graph_attr_comb" = "rename",
   "vertex_attr_comb" = list(name = "concat", "ignore"),
   "edge_attr_comb" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
@@ -168,6 +169,13 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
 #'       See [attribute.combination()] for details on this. The former dotted
 #'       name `edge.attr.comb` still works but is soft-deprecated.
+#'     }
+#'     \item{graph_attr_comb}{
+#'       Specifies what to do with the graph attributes when graphs are
+#'       combined, e.g. via [union()], [intersection()], [disjoint_union()]
+#'       or [compose()]. The default value is `"rename"`, which resolves any
+#'       name clash by appending `_1`, `_2`, ... suffixes.
+#'       See [attribute.combination()] for details on this.
 #'     }
 #'     \item{print.edge.attributes}{
 #'       Logical constant, whether to print edge attributes when printing graphs.
