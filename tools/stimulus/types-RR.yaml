@@ -531,12 +531,12 @@ SUBGRAPH_IMPL:
 
 EDGE_ATTRIBUTE_COMBINATION:
     DEFAULT:
-        Default: igraph_opt("edge_attr_comb")
+        Default: igraph_opt("edge_attr_combine")
     INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
 
 VERTEX_ATTRIBUTE_COMBINATION:
     DEFAULT:
-        Default: igraph_opt("vertex_attr_comb")
+        Default: igraph_opt("vertex_attr_combine")
     INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
 
 ADD_WEIGHTS:

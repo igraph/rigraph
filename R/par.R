@@ -61,9 +61,9 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
-  "graph_attr_comb" = "rename",
-  "vertex_attr_comb" = list(name = "concat", "ignore"),
-  "edge_attr_comb" = list(weight = "sum", name = "concat", "ignore"),
+  "graph_attr_combine" = "rename",
+  "vertex_attr_combine" = list(name = "concat", "ignore"),
+  "edge_attr_combine" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
   "add.params" = TRUE,
   "add.vertex.names" = TRUE,
@@ -80,8 +80,8 @@ getIgraphOpt <- function(x, default = NULL) {
 # its old dotted name still works, but maps to the canonical key and emits a
 # soft-deprecation.
 .igraph.pars.aliases <- c(
-  "vertex.attr.comb" = "vertex_attr_comb",
-  "edge.attr.comb" = "edge_attr_comb"
+  "vertex.attr.comb" = "vertex_attr_combine",
+  "edge.attr.comb" = "edge_attr_combine"
 )
 
 # Map any deprecated option names in `x` to their canonical keys, warning once
@@ -164,13 +164,13 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 #'       See [plot_dendrogram()] for details.
 #'     }
-#'     \item{edge_attr_comb}{
+#'     \item{edge_attr_combine}{
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
 #'       See [attribute.combination()] for details on this. The former dotted
 #'       name `edge.attr.comb` still works but is soft-deprecated.
 #'     }
-#'     \item{graph_attr_comb}{
+#'     \item{graph_attr_combine}{
 #'       Specifies what to do with the graph attributes when graphs are
 #'       combined, e.g. via [union()], [intersection()], [disjoint_union()]
 #'       or [compose()]. The default value is `"rename"`, which resolves any
@@ -214,7 +214,7 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Logical constant, whether igraph functions should talk more than minimal.
 #'       E.g. if `TRUE` then some functions will use progress bars while computing. Defaults to `FALSE`.
 #'     }
-#'     \item{vertex_attr_comb}{
+#'     \item{vertex_attr_combine}{
 #'       Specifies what to do with the vertex attributes if the graph is modified.
 #'       The default value is `list(name="concat", "ignore")`.
 #'       See [attribute.combination()] for details on this. The former dotted

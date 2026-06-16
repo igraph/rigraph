@@ -19,11 +19,11 @@
       i Please use `as_undirected()` instead.
       Warning:
       The igraph option `edge.attr.comb` was deprecated in igraph 3.0.0.
-      i Please use the `edge_attr_comb` option instead.
+      i Please use the `edge_attr_combine` option instead.
       Warning:
       Calling `as_undirected()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
       i Detected call: as_undirected(graph, mode, edge.attr.comb)
-      i Use instead: as_undirected(graph, mode, edge_attr_comb = )
+      i Use instead: as_undirected(graph, mode, edge_attr_combine = )
     Output
       [1] FALSE
 

@@ -103,34 +103,34 @@ migrations <- list(
       graph,
       remove.multiple,
       remove.loops,
-      edge.attr.comb = edge_attr_comb
+      edge.attr.comb = edge_attr_combine
     ) {},
     new = function(
       graph,
       remove.multiple = TRUE,
       remove.loops = TRUE,
       ...,
-      edge_attr_comb = igraph_opt("edge_attr_comb")
+      edge_attr_combine = igraph_opt("edge_attr_combine")
     ) {},
     when = "3.0.0"
   ),
   as_undirected = list(
-    old = function(graph, mode, edge.attr.comb = edge_attr_comb) {},
+    old = function(graph, mode, edge.attr.comb = edge_attr_combine) {},
     new = function(
       graph,
       mode = c("collapse", "each", "mutual"),
       ...,
-      edge_attr_comb = igraph_opt("edge_attr_comb")
+      edge_attr_combine = igraph_opt("edge_attr_combine")
     ) {},
     when = "3.0.0"
   ),
   contract = list(
-    old = function(graph, mapping, vertex.attr.comb = vertex_attr_comb) {},
+    old = function(graph, mapping, vertex.attr.comb = vertex_attr_combine) {},
     new = function(
       graph,
       mapping,
       ...,
-      vertex_attr_comb = igraph_opt("vertex_attr_comb")
+      vertex_attr_combine = igraph_opt("vertex_attr_combine")
     ) {},
     when = "3.0.0"
   ),
