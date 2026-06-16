@@ -219,10 +219,95 @@ get.adjedgelist <- function(
 #
 ###################################################################
 
+# Resolve the user-facing `weights` argument into a numeric vector
+# suitable for downstream consumers.
+#
+# Conventions (match the rest of rigraph, e.g. shortest_paths()):
+#   weights = NULL    -> auto-pickup of "weight" edge attribute, else unweighted
+#   weights = NA      -> explicitly unweighted (ignores any "weight" attribute)
+#   weights = <char>  -> length-1 edge attribute name
+#   weights = <num>   -> numeric/logical vector of length ecount(graph)
+#
+# Returns: numeric() (empty) for unweighted, or a numeric vector of length
+# ecount(graph) otherwise.
+resolve_edge_weights <- function(
+  graph,
+  weights,
+  attr = deprecated(),
+  fn = "function",
+  call = rlang::caller_env(),
+  user_env = rlang::caller_env(2)
+) {
+  if (lifecycle::is_present(attr)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      sprintf("%s(attr = )", fn),
+      sprintf("%s(weights = )", fn),
+      user_env = user_env
+    )
+    weights <- attr
+  }
+
+  if (is.null(weights)) {
+    if ("weight" %in% edge_attr_names(graph)) {
+      return(edge_attr_as_weights(graph, "weight", call))
+    }
+    return(numeric())
+  }
+
+  if (all(is.na(weights))) {
+    return(numeric())
+  }
+
+  if (is.character(weights)) {
+    if (length(weights) != 1) {
+      cli::cli_abort(
+        "{.arg weights} as character must be a single edge attribute name.",
+        call = call
+      )
+    }
+    if (!weights %in% edge_attr_names(graph)) {
+      cli::cli_abort("No such edge attribute", call = call)
+    }
+    return(edge_attr_as_weights(graph, weights, call))
+  }
+
+  if (!is.numeric(weights) && !is.logical(weights)) {
+    cli::cli_abort(
+      "{.arg weights} must be {.code NULL}, {.code NA}, a numeric vector, or an edge attribute name.",
+      call = call
+    )
+  }
+  if (length(weights) != ecount(graph)) {
+    cli::cli_abort(
+      c(
+        "{.arg weights} must have length equal to the number of edges in the graph.",
+        i = "Expected length {ecount(graph)}, got {length(weights)}."
+      ),
+      call = call
+    )
+  }
+  as.numeric(weights)
+}
+
+edge_attr_as_weights <- function(graph, name, call) {
+  value <- edge_attr(graph, name)
+  if (!is.numeric(value) && !is.logical(value)) {
+    cli::cli_abort(
+      c(
+        "The {.val {name}} edge attribute must be numeric or logical.",
+        i = "Pass {.code weights = NA} to ignore it."
+      ),
+      call = call
+    )
+  }
+  as.numeric(value)
+}
+
 get.adjacency.dense <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
+  weights = numeric(),
   loops = c("once", "twice", "ignore"),
   names = TRUE
 ) {
@@ -247,8 +332,7 @@ get.adjacency.dense <- function(
     loops <- "none"
   }
 
-  if (is.null(attr)) {
-    # FIXME: Use get_adjacency_impl() also for non-NULL attr
+  if (length(weights) == 0) {
     res <- get_adjacency_impl(
       graph,
       type,
@@ -260,9 +344,8 @@ get.adjacency.dense <- function(
     res <- as.matrix(get.adjacency.sparse(
       graph,
       type = type,
-      attr = attr,
-      names = names,
-      call = rlang::caller_env()
+      weights = weights,
+      names = names
     ))
   }
 
@@ -275,30 +358,12 @@ get.adjacency.dense <- function(
 get.adjacency.sparse <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  names = TRUE,
-  call = rlang::caller_env()
+  weights = numeric(),
+  names = TRUE
 ) {
   ensure_igraph(graph)
 
   type <- igraph_match_arg(type)
-
-  # Prepare weights parameter
-  if (is.null(attr)) {
-    weights <- numeric()
-  } else {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = call)
-    }
-    weights <- edge_attr(graph, name = attr)
-    if (!is.numeric(weights) && !is.logical(weights)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-  }
 
   # Use the library implementation
   sparse_adjacency <- get_adjacency_sparse_impl(
@@ -334,18 +399,22 @@ get.adjacency.sparse <- function(
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param attr Either `NULL` or a character string giving an edge
-#'   attribute name. If `NULL` a traditional adjacency matrix is returned.
-#'   If not `NULL` then the values of the given edge attribute are included
-#'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
-#'   of an arbitrarily chosen edge (for the multiple edges) is included. This
-#'   argument is ignored if `edges` is `TRUE`.
-#'
-#'   Note that this works only for certain attribute types. If the `sparse`
-#'   argumen is `TRUE`, then the attribute must be either logical or
-#'   numeric. If the `sparse` argument is `FALSE`, then character is
-#'   also allowed. The reason for the difference is that the `Matrix`
-#'   package does not support character sparse matrices yet.
+#' @inheritParams rlang::args_dots_empty
+#' @param weights One of the following:
+#'   \itemize{
+#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
+#'       one, otherwise return a traditional (unweighted) adjacency matrix.
+#'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+#'     \item A numeric or logical vector of length [ecount()]: use these values
+#'       directly as edge weights.
+#'     \item A character scalar: the name of an edge attribute whose values are
+#'       used as weights. The attribute must be numeric or logical.
+#'   }
+#'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
+#'   is included in the matrix.
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
+#'   supplied, the value is forwarded to `weights` as a character edge
+#'   attribute name.
 #' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
@@ -365,30 +434,74 @@ get.adjacency.sparse <- function(
 #' V(g)$name <- letters[1:vcount(g)]
 #' as_adjacency_matrix(g)
 #' E(g)$weight <- runif(ecount(g))
-#' as_adjacency_matrix(g, attr = "weight")
+#' as_adjacency_matrix(g)
+#' as_adjacency_matrix(g, weights = NA)
 #' @family conversion
 #' @export
 as_adjacency_matrix <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  edges = deprecated(),
+  attr = deprecated()
 ) {
   ensure_igraph(graph)
+
+  # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        names = names,
+        sparse = sparse,
+        edges = edges,
+        attr = attr
+      ),
+      recover_new = c("weights", "edges", "names", "sparse"),
+      recover_old = c("attr", "edges", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
+      defaults = list(
+        weights = NULL,
+        names = TRUE,
+        sparse = igraph_opt("sparsematrices"),
+        edges = deprecated(),
+        attr = deprecated()
+      ),
+      head_args = c("graph", "type"),
+      fn_name = "as_adjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_adjacency_matrix"
+  )
+
   if (sparse) {
-    get.adjacency.sparse(graph, type = type, attr = attr, names = names)
+    get.adjacency.sparse(graph, type = type, weights = weights, names = names)
   } else {
     get.adjacency.dense(
       graph,
       type = type,
-      attr = attr,
+      weights = weights,
       names = names,
       loops = "once"
     )
@@ -407,7 +520,8 @@ as_adjacency_matrix <- function(
 as_adj <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
+  weights = NULL,
+  attr = deprecated(),
   edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
@@ -417,6 +531,7 @@ as_adj <- function(
   as_adjacency_matrix(
     graph = graph,
     type = type,
+    weights = weights,
     attr = attr,
     edges = edges,
     names = names,
@@ -940,10 +1055,9 @@ get.incidence.dense <- function(
   graph,
   types,
   names,
-  attr,
-  call = rlang::caller_env()
+  weights = numeric()
 ) {
-  if (is.null(attr)) {
+  if (length(weights) == 0) {
     ## Function call
     res <- get_biadjacency_impl(
       graph = graph,
@@ -961,11 +1075,6 @@ get.incidence.dense <- function(
   }
 
   types <- handle_vertex_type_arg(types, graph)
-
-  attr <- as.character(attr)
-  if (!attr %in% edge_attr_names(graph)) {
-    cli::cli_abort("No such edge attribute", call = call)
-  }
 
   vc <- vcount(graph)
   n1 <- sum(!types)
@@ -988,14 +1097,7 @@ get.incidence.dense <- function(
   el[idx, ] <- el[idx, 2:1]
   # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
   # and we can populate the matrix
-  value <- edge_attr(graph, attr)
-  if (!is.numeric(value) && !is.logical(value)) {
-    cli::cli_abort(
-      "Matrices must be either numeric or logical, and the edge attribute is not",
-      call = call
-    )
-  }
-  res[el] <- value
+  res[el] <- weights
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     rownames(res) <- V(graph)$name[which(!types)]
@@ -1012,7 +1114,7 @@ get.incidence.sparse <- function(
   graph,
   types,
   names,
-  attr,
+  weights = numeric(),
   call = rlang::caller_env()
 ) {
   types <- handle_vertex_type_arg(types, graph)
@@ -1041,21 +1143,7 @@ get.incidence.sparse <- function(
   el[change, ] <- el[change, 2:1]
   el[, 2] <- el[, 2] - n1
 
-  if (!is.null(attr)) {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = call)
-    }
-    value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-  } else {
-    value <- rep(1, nrow(el))
-  }
+  value <- if (length(weights) == 0) rep(1, nrow(el)) else weights
 
   res <- Matrix::spMatrix(n1, n2, i = el[, 1], j = el[, 2], x = value)
 
@@ -1085,12 +1173,7 @@ get.incidence.sparse <- function(
 #' @param types An optional vertex type vector to use instead of the
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
-#' @param attr Either `NULL` or a character string giving an edge
-#'   attribute name. If `NULL`, then a traditional bipartite adjacency matrix is
-#'   returned. If not `NULL` then the values of the given edge attribute are
-#'   included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-#'   attribute of an arbitrarily chosen edge (for the multiple edges) is
-#'   included.
+#' @inheritParams as_adjacency_matrix
 #' @param names Logical scalar, if `TRUE` and the vertices in the graph
 #'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise
@@ -1115,26 +1198,67 @@ get.incidence.sparse <- function(
 as_biadjacency_matrix <- function(
   graph,
   types = NULL,
-  attr = NULL,
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 ) {
   # Argument checks
   ensure_igraph(graph)
 
+  # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        names = names,
+        sparse = sparse,
+        attr = attr
+      ),
+      recover_new = c("weights", "names", "sparse"),
+      recover_old = c("attr", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "attr"),
+      defaults = list(
+        weights = NULL,
+        names = TRUE,
+        sparse = FALSE,
+        attr = deprecated()
+      ),
+      head_args = c("graph", "types"),
+      fn_name = "as_biadjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   names <- as.logical(names)
   sparse <- as.logical(sparse)
+
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_biadjacency_matrix"
+  )
 
   if (sparse) {
     get.incidence.sparse(
       graph,
       types = types,
       names = names,
-      attr = attr,
+      weights = weights,
       call = rlang::caller_env()
     )
   } else {
-    get.incidence.dense(graph, types = types, names = names, attr = attr)
+    get.incidence.dense(graph, types = types, names = names, weights = weights)
   }
 }
 #' As incidence matrix
