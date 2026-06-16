@@ -71,6 +71,13 @@ The default value is \code{list(weight="sum", name="concat", "ignore")}.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The former dotted
 name \code{edge.attr.comb} still works but is soft-deprecated.
 }
+\item{graph_attr_comb}{
+Specifies what to do with the graph attributes when graphs are
+combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
+or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
+name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+}
 \item{print.edge.attributes}{
 Logical constant, whether to print edge attributes when printing graphs.
 Defaults to \code{FALSE}.

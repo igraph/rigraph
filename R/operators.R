@@ -307,7 +307,10 @@ apply_one_combiner <- function(comb, x) {
 #' V(g2)$name <- letters[11:20]
 #' print_all(g1 %du% g2)
 #' @export
-disjoint_union <- function(..., graph_attr_comb = igraph_opt("graph_attr_comb")) {
+disjoint_union <- function(
+  ...,
+  graph_attr_comb = igraph_opt("graph_attr_comb")
+) {
   graphs <- unlist(
     recursive = FALSE,
     lapply(list(...), function(l) {

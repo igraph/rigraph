@@ -5,7 +5,7 @@
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{
-disjoint_union(..., graph_attr_comb = "rename")
+disjoint_union(..., graph_attr_comb = igraph_opt("graph_attr_comb"))
 
 x \%du\% y
 }
@@ -13,7 +13,8 @@ x \%du\% y
 \item{\dots}{Graph objects or lists of graph objects.}
 
 \item{graph_attr_comb}{Specification for combining shared graph attributes.
-Defaults to \code{"rename"}, which preserves the historical behaviour of
+Defaults to the \code{graph_attr_comb} igraph option (\code{"rename"} unless changed
+via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical behaviour of
 appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute names. See
 \link{igraph-attribute-combination} for the available combiners.}
 

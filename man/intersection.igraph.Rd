@@ -9,7 +9,7 @@
   ...,
   byname = "auto",
   keep.all.vertices = TRUE,
-  graph_attr_comb = "rename",
+  graph_attr_comb = igraph_opt("graph_attr_comb"),
   vertex_attr_comb = "rename",
   edge_attr_comb = "rename"
 )
@@ -27,8 +27,10 @@ graphs are named.}
 appear in a subset of the input graphs.}
 
 \item{graph_attr_comb, vertex_attr_comb, edge_attr_comb}{Specification for
-combining clashing graph, vertex and edge attributes. Each defaults to
-\code{"rename"}. See \link{igraph-attribute-combination} for the available
+combining clashing graph, vertex and edge attributes. \code{vertex_attr_comb}
+and \code{edge_attr_comb} default to \code{"rename"}; \code{graph_attr_comb} defaults to
+the \code{graph_attr_comb} igraph option (\code{"rename"} unless changed via
+\code{\link[=igraph_options]{igraph_options()}}). See \link{igraph-attribute-combination} for the available
 combiners.}
 }
 \value{
