@@ -8,7 +8,7 @@ contract(
   graph,
   mapping,
   ...,
-  vertex_attr_comb = igraph_opt("vertex_attr_comb")
+  vertex_attr_combine = igraph_opt("vertex_attr_combine")
 )
 }
 \arguments{
@@ -20,7 +20,7 @@ given.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vertex_attr_comb}{Specifies how to combine the vertex attributes in
+\item{vertex_attr_combine}{Specifies how to combine the vertex attributes in
 the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.}
 }
 \value{
@@ -33,7 +33,7 @@ vertices in the new graph correspond to sets of vertices in the input graph.
 \details{
 The attributes of the graph are kept. Graph and edge attributes are
 unchanged, vertex attributes are combined, according to the
-\code{vertex_attr_comb} parameter.
+\code{vertex_attr_combine} parameter.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}
@@ -47,7 +47,7 @@ V(g)$name <- letters[1:vcount(g)]
 E(g)$weight <- runif(ecount(g))
 
 g2 <- contract(g, rep(1:5, each = 2),
-  vertex_attr_comb = toString
+  vertex_attr_combine = toString
 )
 
 ## graph and edge attributes are kept, vertex attributes are

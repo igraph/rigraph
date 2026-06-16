@@ -11,7 +11,7 @@ as_undirected(
   graph,
   mode = c("collapse", "each", "mutual"),
   ...,
-  edge_attr_comb = igraph_opt("edge_attr_comb")
+  edge_attr_combine = igraph_opt("edge_attr_combine")
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ as_undirected(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{edge_attr_comb}{Specifies what to do with edge attributes, if
+\item{edge_attr_combine}{Specifies what to do with edge attributes, if
 \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
 might be mapped to a single one in the new graph, and their attributes are
 combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
@@ -118,7 +118,7 @@ g4 <- make_graph(c(
 E(g4)$weight <- seq_len(ecount(g4))
 ug4 <- as_undirected(g4,
   mode = "mutual",
-  edge_attr_comb = list(weight = length)
+  edge_attr_combine = list(weight = length)
 )
 print(ug4, e = TRUE)
 
