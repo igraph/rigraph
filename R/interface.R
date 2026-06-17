@@ -466,7 +466,12 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
-el_to_vec <- function(x, arg = "vp", fn = "get_edge_ids", call = rlang::caller_env()) {
+el_to_vec <- function(
+  x,
+  arg = "vp",
+  fn = "get_edge_ids",
+  call = rlang::caller_env()
+) {
   if (is.data.frame(x)) {
     if (typeof(x[[1]]) == typeof(x[[2]])) {
       c(rbind(x[[1]], x[[2]]))
@@ -487,7 +492,12 @@ el_to_vec <- function(x, arg = "vp", fn = "get_edge_ids", call = rlang::caller_e
     } else if (nrow == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
-        paste0(fn, "(", arg, " = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"),
+        paste0(
+          fn,
+          "(",
+          arg,
+          " = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"
+        ),
         details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
     } else if (ncol == 2) {

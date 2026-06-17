@@ -12,7 +12,8 @@ delete.edges(graph, edges)
 \item{edges}{The edges to remove, specified as an edge sequence. Typically
 this is either a numeric vector containing edge IDs, or a character vector
 containing the IDs or names of the source and target vertices, separated by
-\code{|}}
+\code{|}. A two-column matrix or data frame is also accepted, each row giving the
+two endpoints of an edge to remove.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

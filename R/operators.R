@@ -1148,8 +1148,10 @@ path <- function(...) {
       unnamed <- e2[!nzchar(names(e2))]
       attr <- e2[nzchar(names(e2))]
     }
-    if (length(unnamed) == 1 &&
-      (is.data.frame(unnamed[[1]]) || inherits(unnamed[[1]], "matrix"))) {
+    if (
+      length(unnamed) == 1 &&
+        (is.data.frame(unnamed[[1]]) || inherits(unnamed[[1]], "matrix"))
+    ) {
       ## A single two-column matrix or data frame of edge endpoints;
       ## let add_edges() normalize it via el_to_vec().
       res <- add_edges(e1, unnamed[[1]], attr = attr)
@@ -1265,7 +1267,9 @@ path <- function(...) {
   } else if (inherits(e2, "igraph.vertex")) {
     res <- delete_vertices(e1, unlist(e2, recursive = FALSE))
   } else if (inherits(e2, "igraph.edge")) {
-    if (length(e2) == 1 && (is.data.frame(e2[[1]]) || inherits(e2[[1]], "matrix"))) {
+    if (
+      length(e2) == 1 && (is.data.frame(e2[[1]]) || inherits(e2[[1]], "matrix"))
+    ) {
       todel <- e2[[1]]
     } else {
       todel <- unlist(e2, recursive = FALSE)
