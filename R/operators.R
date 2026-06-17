@@ -898,11 +898,14 @@ compose <- function(g1, g2, byname = "auto") {
 #' `edge()` (or `edges()`) are concatenated, and then passed to
 #' [add_edges()]. They are interpreted as pairs of vertex IDs,
 #' and an edge will added between each pair. Named arguments will be
-#' used as edge attributes for the new edges.
+#' used as edge attributes for the new edges. Alternatively, a single
+#' two-column matrix or data frame of edge endpoints can be passed as the
+#' only unnamed argument.
 #'
 #' When deleting edges via `-`, all arguments of `edge()` (or
 #' `edges()`) are concatenated via `c()` and passed to
-#' [delete_edges()].
+#' [delete_edges()]. A single two-column matrix or data frame of edge
+#' endpoints can also be passed as the only argument.
 #'
 #' @param ... See details below.
 #' @return A special object that can be used with together with
@@ -1139,13 +1142,25 @@ path <- function(...) {
     ## Adding edges, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
-      toadd <- unlist(e2, recursive = FALSE)
+      unnamed <- e2
       attr <- list()
     } else {
-      toadd <- unlist(e2[!nzchar(names(e2))])
+      unnamed <- e2[!nzchar(names(e2))]
       attr <- e2[nzchar(names(e2))]
     }
-    res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
+    if (length(unnamed) == 1 &&
+      (is.data.frame(unnamed[[1]]) || inherits(unnamed[[1]], "matrix"))) {
+      ## A single two-column matrix or data frame of edge endpoints;
+      ## let add_edges() normalize it via el_to_vec().
+      res <- add_edges(e1, unnamed[[1]], attr = attr)
+    } else {
+      if (is.null(names(e2))) {
+        toadd <- unlist(unnamed, recursive = FALSE)
+      } else {
+        toadd <- unlist(unnamed)
+      }
+      res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
+    }
   } else if (inherits(e2, "igraph.vertex")) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
@@ -1250,7 +1265,12 @@ path <- function(...) {
   } else if (inherits(e2, "igraph.vertex")) {
     res <- delete_vertices(e1, unlist(e2, recursive = FALSE))
   } else if (inherits(e2, "igraph.edge")) {
-    res <- delete_edges(e1, unlist(e2, recursive = FALSE))
+    if (length(e2) == 1 && (is.data.frame(e2[[1]]) || inherits(e2[[1]], "matrix"))) {
+      todel <- e2[[1]]
+    } else {
+      todel <- unlist(e2, recursive = FALSE)
+    }
+    res <- delete_edges(e1, todel)
   } else if (inherits(e2, "igraph.path")) {
     todel <- unlist(e2, recursive = FALSE)
     lt <- length(todel)

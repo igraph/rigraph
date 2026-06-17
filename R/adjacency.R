@@ -542,7 +542,7 @@ graph.adjacency.sparse <- function(
     res <- make_empty_graph(n = vc, directed = (mode == "directed"))
     weight <- list(el[, 3])
     names(weight) <- weighted
-    res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
+    res <- add_edges(res, edges = c(t(as.matrix(el[, 1:2]))), attr = weight)
   } else {
     if (max(el[, 3]) == 1) {
       edges <- as.vector(t(el[, 1:2]))
