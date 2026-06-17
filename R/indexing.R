@@ -266,7 +266,11 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   }
 
   if (missing(i) && missing(j)) {
-    return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
+    return(as_adjacency_matrix(
+      x,
+      sparse = sparse,
+      weights = if (is.null(attr)) NA else attr
+    ))
   }
 
   # convert logical, character or negative i/j to proper vertex ids

@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9014
+
+## Features
+
+- Retire `attr` in favor of `weights` for adjacency matrix functions (#906, #1137, #2677).
+
+
 # igraph 2.3.2.9013
 
 ## Features

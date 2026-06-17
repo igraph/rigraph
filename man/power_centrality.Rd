@@ -11,7 +11,8 @@ power_centrality(
   exponent = 1,
   rescale = FALSE,
   tol = 1e-07,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 )
 }
 \arguments{
@@ -36,6 +37,19 @@ score; can be negative}
 \item{sparse}{Logical scalar, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
+
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 }
 \value{
 A vector, containing the centrality scores.
@@ -103,7 +117,7 @@ fixed when we get a better algorithm.
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
