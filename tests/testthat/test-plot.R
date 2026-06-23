@@ -234,6 +234,21 @@ test_that("mark border linewidth", {
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
 
+test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
+  # Pure geometry helper extracted from igraph.Arrows (Stage 2); device-free.
+  head <- i.arrowhead_shape(cin = 0.2, w = 1.5, delta = 0.01)
+  expect_named(head, c("deg.arr", "r.arr"))
+  expect_equal(length(head$deg.arr), length(head$r.arr))
+  # both arrays terminate in NA (the pen-up marker for the outline)
+  expect_true(is.na(tail(head$deg.arr, 1)))
+  expect_true(is.na(tail(head$r.arr, 1)))
+  # radii are non-negative where defined
+  expect_true(all(head$r.arr >= 0, na.rm = TRUE))
+  # larger arrows (bigger cin) produce more outline points
+  bigger <- i.arrowhead_shape(cin = 0.4, w = 1.5, delta = 0.01)
+  expect_gt(length(bigger$r.arr), length(head$r.arr))
+})
+
 test_that("vector edge params are subset correctly across loops and non-loops", {
   # Guards the per-edge subsetting of loop vs non-loop edges in plot.igraph().
   skip_if_not_installed("vdiffr")

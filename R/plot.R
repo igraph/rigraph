@@ -1732,6 +1732,23 @@ rglplot.igraph <- function(x, ...) {
 # This is taken from the IDPmisc package,
 # slightly modified: code argument added
 
+# Pure geometry (Stage 2): the outline of an arrowhead in polar coordinates
+# (angle + radius from the tip), used by igraph.Arrows() to draw or outline the
+# head. Depends only on scalar inputs, so it is testable without a device.
+#   cin   arrow length, already scaled by the character size (par("cin"))
+#   w     arrow width factor
+#   delta line-width-dependent padding
+i.arrowhead_shape <- function(cin, w, delta) {
+  x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
+  x.arr <- c(-rev(x), -x)
+  wx2 <- w * x^2
+  y.arr <- c(-rev(wx2 + delta), wx2 + delta)
+  list(
+    deg.arr = c(atan2(y.arr, x.arr), NA),
+    r.arr = c(sqrt(x.arr^2 + y.arr^2), NA)
+  )
+}
+
 #' @importFrom graphics par xyinch segments xspline lines polygon
 # Vectorized and modular igraph.Arrows refactor
 igraph.Arrows <- function(
@@ -1782,13 +1799,10 @@ igraph.Arrows <- function(
     w <- width[i] * (ARROW_WIDTH_FACTOR / cin)
     delta <- sqrt(h.lwd[i]) * par("cin")[2] * 0.005
 
-    # Arrowhead shape
-    x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
-    x.arr <- c(-rev(x), -x)
-    wx2 <- w * x^2
-    y.arr <- c(-rev(wx2 + delta), wx2 + delta)
-    deg.arr <- c(atan2(y.arr, x.arr), NA)
-    r.arr <- c(sqrt(x.arr^2 + y.arr^2), NA)
+    # Arrowhead shape (pure geometry, see i.arrowhead_shape)
+    head <- i.arrowhead_shape(cin, w, delta)
+    deg.arr <- head$deg.arr
+    r.arr <- head$r.arr
 
     theta1 <- atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
     theta2 <- atan2((y2[i] - y1[i]) * uin[2], (x2[i] - x1[i]) * uin[1])
