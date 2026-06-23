@@ -19,6 +19,15 @@
 #
 ###################################################################
 
+# Vertex sizes and edge widths are specified on a 0-200 scale (a `vertex.size`
+# of 15 is the default); this factor converts them to user coordinates, where
+# the plotting region spans [-1, 1] after rescaling.
+VERTEX_SIZE_SCALE <- 1 / 200
+
+# Arrowhead width scaling factor used by igraph.Arrows(); combined with the
+# character size from par("cin") to size arrowheads relative to the device.
+ARROW_WIDTH_FACTOR <- 1.2 / 4
+
 #' Plotting of graphs
 #'
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
@@ -178,7 +187,7 @@ plot.igraph <- function(
     }
     layout <- norm_coords(layout, -1, 1, -1, 1)
     fact <- (1 - vertex.size.scaling)
-    maxv <- 1 / 200 * max(vertex.size)
+    maxv <- VERTEX_SIZE_SCALE * max(vertex.size)
 
     xlim <- c(
       xlim[1] - margin[2] - fact * maxv,
@@ -257,12 +266,12 @@ plot.igraph <- function(
     params <- i.parse.plot.params(
       graph,
       list(
-        vertex.size = 1 / 200 * vertex.size,
-        vertex.size2 = 1 / 200 * params("vertex", "size2"),
+        vertex.size = VERTEX_SIZE_SCALE * vertex.size,
+        vertex.size2 = VERTEX_SIZE_SCALE * params("vertex", "size2"),
         ...
       )
     )
-    vertex.size <- 1 / 200 * vertex.size
+    vertex.size <- VERTEX_SIZE_SCALE * vertex.size
   }
   ################################################################
   ## Mark vertex groups
@@ -826,9 +835,15 @@ plot.igraph <- function(
   old_xpd <- par(xpd = TRUE)
   on.exit(par(old_xpd), add = TRUE)
   x <- layout[, 1] +
-    label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
+    label.dist *
+      cos(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
   y <- layout[, 2] +
-    label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
+    label.dist *
+      sin(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
   if (vc > 0) {
     label.col <- rep(label.color, length.out = vc)
     label.fam <- rep(label.family, length.out = vc)
@@ -1734,7 +1749,7 @@ igraph.Arrows <- function(
   y2,
   code = 2,
   size = 1,
-  width = 1.2 / 4 / par("cin")[2],
+  width = ARROW_WIDTH_FACTOR / par("cin")[2],
   open = TRUE,
   sh.adj = 0.1,
   sh.lwd = 1,
@@ -1772,7 +1787,7 @@ igraph.Arrows <- function(
 
   for (i in seq_len(n)) {
     cin <- size[i] * par("cin")[2]
-    w <- width[i] * (1.2 / 4 / cin)
+    w <- width[i] * (ARROW_WIDTH_FACTOR / cin)
     delta <- sqrt(h.lwd[i]) * par("cin")[2] * 0.005
 
     # Arrowhead shape

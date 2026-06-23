@@ -4946,9 +4946,6 @@ i.rescale.vertex <- function(
   return(size)
 }
 
-i.default.values[["edge"]] <- i.edge.default
-i.default.values[["plot"]] <- i.plot.default
-
 #' Using pie charts as vertices in graph plots
 #'
 #' More complex vertex images can be used to express addtional information
