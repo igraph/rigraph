@@ -234,6 +234,118 @@ test_that("mark border linewidth", {
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
 
+test_that("vector edge params are subset correctly across loops and non-loops", {
+  # Guards the per-edge subsetting of loop vs non-loop edges in plot.igraph().
+  skip_if_not_installed("vdiffr")
+
+  vector_edge_params <- function() {
+    # edges: 1->2, 2->3, 1->1 (loop), 3->3 (loop), 2->1
+    g <- make_graph(c(1, 2, 2, 3, 1, 1, 3, 3, 2, 1), directed = TRUE)
+    V(g)$x <- c(0, 1, 2)
+    V(g)$y <- c(0, 1, 0)
+    ne <- ecount(g)
+    plot(
+      g,
+      edge.color = c("red", "green", "blue", "orange", "purple"),
+      edge.width = c(1, 2, 3, 4, 5),
+      edge.lty = c(1, 2, 1, 2, 1),
+      edge.arrow.mode = c(1, 2, 3, 2, 1),
+      edge.arrow.size = c(1, 1.5, 2, 1.5, 1),
+      edge.label = letters[seq_len(ne)],
+      edge.label.color = c("red", "green", "blue", "orange", "purple"),
+      margin = 0.3
+    )
+  }
+  vdiffr::expect_doppelganger("vector-edge-params-loops", vector_edge_params)
+})
+
+test_that("multi-edges are auto-curved", {
+  skip_if_not_installed("vdiffr")
+
+  multi_edge_curve <- function() {
+    g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3), directed = TRUE)
+    V(g)$x <- c(0, 2, 4)
+    V(g)$y <- c(0, 0, 0)
+    plot(g, edge.curved = TRUE, margin = 0.3)
+  }
+  vdiffr::expect_doppelganger("multi-edge-curve", multi_edge_curve)
+})
+
+test_that("NA in a vertex attribute warns and still plots", {
+  g <- make_ring(3)
+  V(g)$color <- c("red", NA, "blue")
+  g$layout <- cbind(1:3, rep(0, 3))
+
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+  expect_warning(plot(g), "contains NAs")
+})
+
+test_that("mark.groups draws multiple overlapping groups", {
+  skip_if_not_installed("vdiffr")
+
+  mark_groups_multi <- function() {
+    g <- make_full_graph(5)
+    V(g)$x <- c(0, 1, 2, 1, 0)
+    V(g)$y <- c(0, 0, 1, 2, 2)
+    plot(
+      g,
+      mark.groups = list(c(1, 2, 3), c(3, 4, 5)),
+      mark.col = c("#ffcccc", "#ccccff"),
+      mark.border = c("red", "blue"),
+      margin = 0.5
+    )
+  }
+  vdiffr::expect_doppelganger("mark-groups-multi", mark_groups_multi)
+})
+
+test_that("label.dist and label.degree position labels", {
+  skip_if_not_installed("vdiffr")
+
+  label_dist_degree <- function() {
+    g <- make_ring(4)
+    g$layout <- layout_in_circle(g)
+    plot(
+      g,
+      vertex.label = c("N", "E", "S", "W"),
+      vertex.label.dist = 2,
+      vertex.label.degree = c(pi / 2, 0, -pi / 2, pi),
+      margin = 0.4
+    )
+  }
+  vdiffr::expect_doppelganger("label-dist-degree", label_dist_degree)
+})
+
+test_that("add = TRUE overlays a second graph on the same device", {
+  skip_if_not_installed("vdiffr")
+
+  overlay <- function() {
+    g1 <- make_ring(3)
+    g1$layout <- cbind(c(0, 1, 2), c(0, 0, 0))
+    g2 <- make_ring(3)
+    g2$layout <- cbind(c(0, 1, 2), c(1, 1, 1))
+    plot(g1, rescale = FALSE, xlim = c(-1, 3), ylim = c(-1, 2), vertex.color = "red")
+    plot(g2, rescale = FALSE, add = TRUE, vertex.color = "blue")
+  }
+  vdiffr::expect_doppelganger("add-overlay", overlay)
+})
+
+test_that("numeric vertex.color indexes into a custom palette", {
+  skip_if_not_installed("vdiffr")
+
+  palette_index <- function() {
+    g <- make_ring(4)
+    g$layout <- layout_in_circle(g)
+    plot(
+      g,
+      vertex.color = c(1, 2, 3, 4),
+      palette = categorical_pal(4),
+      vertex.size = 30
+    )
+  }
+  vdiffr::expect_doppelganger("palette-index", palette_index)
+})
+
 test_that("plot rescales correctly", {
   skip_if_not_installed("vdiffr")
   rescale_coords <- function() {

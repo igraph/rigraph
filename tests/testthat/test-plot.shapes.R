@@ -119,11 +119,75 @@ test_that("clipping handles empty coordinates", {
   el <- matrix(numeric(0), nrow = 0, ncol = 2)
   params <- function(type, param) 1
 
-  for (shape_name in c("circle", "square", "rectangle")) {
+  built_in <- c(
+    "circle", "square", "csquare", "rectangle", "crectangle",
+    "vrectangle", "pie"
+  )
+  for (shape_name in built_in) {
     clip_func <- shapes(shape_name)$clip
     result <- clip_func(empty_coords, el, params, "both")
     expect_equal(nrow(result), 0)
   }
+})
+
+test_that("non-circle clip functions return the right column structure", {
+  # diagonal edge from (0,0) to (10,10)
+  coords <- matrix(c(0, 0, 10, 10), nrow = 1)
+  el <- matrix(c(1, 2), nrow = 1)
+  params <- function(type, param) {
+    switch(param, "size" = 2, "size2" = 2, 1)
+  }
+
+  all_clip <- c("square", "csquare", "rectangle", "crectangle", "vrectangle", "pie")
+  for (shape_name in all_clip) {
+    clip_func <- shapes(shape_name)$clip
+    expect_equal(ncol(clip_func(coords, el, params, "from")), 2, info = shape_name)
+    expect_equal(ncol(clip_func(coords, el, params, "to")), 2, info = shape_name)
+    expect_equal(ncol(clip_func(coords, el, params, "both")), 4, info = shape_name)
+  }
+})
+
+test_that("non-centered clip functions clip endpoints inward", {
+  # diagonal edge from (0,0) to (10,10)
+  coords <- matrix(c(0, 0, 10, 10), nrow = 1)
+  el <- matrix(c(1, 2), nrow = 1)
+  params <- function(type, param) {
+    switch(param, "size" = 2, "size2" = 2, 1)
+  }
+
+  # csquare/crectangle clip to a face-center (can sit on an axis for a 45 deg
+  # edge), so the inward check applies only to the non-centered shapes.
+  for (shape_name in c("square", "rectangle", "vrectangle", "pie")) {
+    clip_func <- shapes(shape_name)$clip
+    expect_true(clip_func(coords, el, params, "from")[1, 1] > 0, info = shape_name)
+    expect_true(clip_func(coords, el, params, "to")[1, 1] < 10, info = shape_name)
+  }
+})
+
+test_that("clip functions select vertex.size per endpoint from a vector", {
+  # Two identical diagonal edges, distinct from/to vertex indices, so that a
+  # per-vertex size vector must be indexed by el[, 1] (from) and el[, 2] (to).
+  # This pins the exact per-endpoint selection that the planned refactor
+  # deduplicates across shapes.
+  coords <- rbind(c(0, 0, 10, 10), c(0, 0, 10, 10))
+  el <- rbind(c(1, 2), c(3, 4))
+  sizes <- c(2, 2, 8, 8) # vertices 3 and 4 are larger
+  params <- function(type, param) {
+    if (param == "size") return(sizes)
+    1
+  }
+
+  clip_func <- shapes("circle")$clip
+
+  # "from" uses size[el[, 1]] = c(2, 8): the larger from-vertex (row 2) is
+  # clipped further along the edge, so its x is greater.
+  res_from <- clip_func(coords, el, params, "from")
+  expect_gt(res_from[2, 1], res_from[1, 1])
+
+  # "to" uses size[el[, 2]] = c(2, 8): the larger to-vertex (row 2) clips the
+  # endpoint back more, so its x is smaller.
+  res_to <- clip_func(coords, el, params, "to")
+  expect_lt(res_to[2, 1], res_to[1, 1])
 })
 
 test_that("all built-in shapes render correctly", {
