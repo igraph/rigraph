@@ -28,6 +28,169 @@ VERTEX_SIZE_SCALE <- 1 / 200
 # character size from par("cin") to size arrowheads relative to the device.
 ARROW_WIDTH_FACTOR <- 1.2 / 4
 
+# --- Self-loop / Bézier drawing helpers --------------------------------------
+# Hoisted out of plot.igraph()'s body (they capture no enclosing state). Named
+# with an `i.` prefix; `i.plot.bezier` in particular must NOT be called
+# `plot.bezier`, which R would treat as an S3 plot() method for class "bezier".
+
+# A single point on a cubic Bézier curve defined by control points `cp` (a 4x2
+# matrix) at parameter `t` in [0, 1].
+i.point.on.cubic.bezier <- function(cp, t) {
+  c <- 3 * (cp[2, ] - cp[1, ])
+  b <- 3 * (cp[3, ] - cp[2, ]) - c
+  a <- cp[4, ] - cp[1, ] - c - b
+
+  t2 <- t * t
+  t3 <- t * t * t
+
+  a * t3 + b * t2 + c * t + cp[1, ]
+}
+
+# `points` evenly spaced points along the cubic Bézier curve `cp`.
+i.compute.bezier <- function(cp, points) {
+  dt <- seq(0, 1, by = 1 / (points - 1))
+  sapply(dt, function(t) i.point.on.cubic.bezier(cp, t))
+}
+
+# Draw a Bézier curve with optional arrowheads at its ends.
+i.plot.bezier <- function(
+  cp,
+  points,
+  color,
+  width,
+  arr,
+  lty,
+  arrow.size,
+  arr.w
+) {
+  p <- i.compute.bezier(cp, points)
+  polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
+  if (arr == 1 || arr == 3) {
+    igraph.Arrows(
+      p[1, ncol(p) - 1],
+      p[2, ncol(p) - 1],
+      p[1, ncol(p)],
+      p[2, ncol(p)],
+      sh.col = color,
+      h.col = color,
+      size = arrow.size,
+      sh.lwd = width,
+      h.lwd = width,
+      open = FALSE,
+      code = 2,
+      width = arr.w
+    )
+  }
+  if (arr == 2 || arr == 3) {
+    igraph.Arrows(
+      p[1, 2],
+      p[2, 2],
+      p[1, 1],
+      p[2, 1],
+      sh.col = color,
+      h.col = color,
+      size = arrow.size,
+      sh.lwd = width,
+      h.lwd = width,
+      open = FALSE,
+      code = 2,
+      width = arr.w
+    )
+  }
+}
+
+# Draw one self-loop as a rotated Bézier curve, plus its optional label.
+# arrow.size/arr.w/loopSize defaults are placeholders only: every call site
+# (the mapply() in plot.igraph) supplies them explicitly.
+i.draw.loop <- function(
+  x0,
+  y0,
+  cx = x0,
+  cy = y0,
+  color,
+  angle = 0,
+  label = NA,
+  label.color,
+  label.font,
+  label.family,
+  label.cex,
+  width = 1,
+  arr = 2,
+  lty = 1,
+  arrow.size = 1,
+  arr.w = 1,
+  lab.x,
+  lab.y,
+  loopSize = 1,
+  narrowing = 1
+) {
+  rad <- angle
+  center <- c(cx, cy)
+  cp <- matrix(
+    c(
+      x0,
+      y0,
+      x0 + 0.4 * loopSize,
+      y0 + narrowing * 0.2 * loopSize,
+      x0 + 0.4 * loopSize,
+      y0 - narrowing * 0.2 * loopSize,
+      x0,
+      y0
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )
+  cp_centered <- cp -
+    matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
+
+  rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
+  cp_rotated <- t(rotation_matrix %*% t(cp_centered))
+
+  cp <- cp_rotated +
+    matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
+
+  if (is.na(width)) {
+    width <- 1
+  }
+
+  i.plot.bezier(
+    cp,
+    50,
+    color,
+    width,
+    arr = arr,
+    lty = lty,
+    arrow.size = arrow.size,
+    arr.w = arr.w
+  )
+
+  if (is.language(label) || !is.na(label)) {
+    # Get midpoint of the Bezier curve for label placement
+    p <- i.compute.bezier(cp, 50)
+    mid_index <- floor(ncol(p) / 2)
+    lx <- p[1, mid_index]
+    ly <- p[2, mid_index]
+
+    # Override if label position explicitly given
+    if (!is.na(lab.x)) {
+      lx <- lab.x
+    }
+    if (!is.na(lab.y)) {
+      ly <- lab.y
+    }
+
+    text(
+      lx,
+      ly,
+      label,
+      col = label.color,
+      font = label.font,
+      family = label.family,
+      cex = label.cex
+    )
+  }
+}
+
 #' Plotting of graphs
 #'
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
@@ -372,162 +535,6 @@ plot.igraph <- function(
   ################################################################
   ## add the loop edges
   if (length(loops.e) > 0) {
-    ec <- edge.color
-    if (length(ec) > 1) {
-      ec <- ec[loops.e]
-    }
-
-    point.on.cubic.bezier <- function(cp, t) {
-      c <- 3 * (cp[2, ] - cp[1, ])
-      b <- 3 * (cp[3, ] - cp[2, ]) - c
-      a <- cp[4, ] - cp[1, ] - c - b
-
-      t2 <- t * t
-      t3 <- t * t * t
-
-      a * t3 + b * t2 + c * t + cp[1, ]
-    }
-
-    compute.bezier <- function(cp, points) {
-      dt <- seq(0, 1, by = 1 / (points - 1))
-      sapply(dt, function(t) point.on.cubic.bezier(cp, t))
-    }
-
-    plot.bezier <- function(
-      cp,
-      points,
-      color,
-      width,
-      arr,
-      lty,
-      arrow.size,
-      arr.w
-    ) {
-      p <- compute.bezier(cp, points)
-      polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
-      if (arr == 1 || arr == 3) {
-        igraph.Arrows(
-          p[1, ncol(p) - 1],
-          p[2, ncol(p) - 1],
-          p[1, ncol(p)],
-          p[2, ncol(p)],
-          sh.col = color,
-          h.col = color,
-          size = arrow.size,
-          sh.lwd = width,
-          h.lwd = width,
-          open = FALSE,
-          code = 2,
-          width = arr.w
-        )
-      }
-      if (arr == 2 || arr == 3) {
-        igraph.Arrows(
-          p[1, 2],
-          p[2, 2],
-          p[1, 1],
-          p[2, 1],
-          sh.col = color,
-          h.col = color,
-          size = arrow.size,
-          sh.lwd = width,
-          h.lwd = width,
-          open = FALSE,
-          code = 2,
-          width = arr.w
-        )
-      }
-    }
-
-    loop <- function(
-      x0,
-      y0,
-      cx = x0,
-      cy = y0,
-      color,
-      angle = 0,
-      label = NA,
-      label.color,
-      label.font,
-      label.family,
-      label.cex,
-      width = 1,
-      arr = 2,
-      lty = 1,
-      arrow.size = arrow.size,
-      arr.w = arr.w,
-      lab.x,
-      lab.y,
-      loopSize = loop.size,
-      narrowing = 1
-    ) {
-      rad <- angle
-      center <- c(cx, cy)
-      cp <- matrix(
-        c(
-          x0,
-          y0,
-          x0 + 0.4 * loopSize,
-          y0 + narrowing * 0.2 * loopSize,
-          x0 + 0.4 * loopSize,
-          y0 - narrowing * 0.2 * loopSize,
-          x0,
-          y0
-        ),
-        ncol = 2,
-        byrow = TRUE
-      )
-      cp_centered <- cp -
-        matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
-
-      rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
-      cp_rotated <- t(rotation_matrix %*% t(cp_centered))
-
-      cp <- cp_rotated +
-        matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
-
-      if (is.na(width)) {
-        width <- 1
-      }
-
-      plot.bezier(
-        cp,
-        50,
-        color,
-        width,
-        arr = arr,
-        lty = lty,
-        arrow.size = arrow.size,
-        arr.w = arr.w
-      )
-
-      if (is.language(label) || !is.na(label)) {
-        # Get midpoint of the Bezier curve for label placement
-        p <- compute.bezier(cp, 50)
-        mid_index <- floor(ncol(p) / 2)
-        lx <- p[1, mid_index]
-        ly <- p[2, mid_index]
-
-        # Override if label position explicitly given
-        if (!is.na(lab.x)) {
-          lx <- lab.x
-        }
-        if (!is.na(lab.y)) {
-          ly <- lab.y
-        }
-
-        text(
-          lx,
-          ly,
-          label,
-          col = label.color,
-          font = label.font,
-          family = label.family,
-          cex = label.cex
-        )
-      }
-    }
-
     # vertex.size is vertex-scoped (indexed by the loop's vertex) and loop.angle
     # is nullable, so both are handled outside the edge aesthetic table.
     vs <- vertex.size
@@ -646,7 +653,7 @@ plot.igraph <- function(
     yy0 <- layout[loops.v, 2] + sin(la) * r_offset
 
     mapply(
-      loop,
+      i.draw.loop,
       xx0,
       yy0,
       color = ec,
