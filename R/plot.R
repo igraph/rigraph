@@ -191,6 +191,37 @@ i.draw.loop <- function(
   }
 }
 
+# Initialize the plotting canvas (Stage 4 device setup): an empty plot region
+# with the requested limits, axes, aspect ratio and titles. Isolated from the
+# drawing orchestration in plot.igraph() so the latter reads as
+# setup -> edges -> vertices -> labels.
+i.init_plot_canvas <- function(
+  xlim,
+  ylim,
+  xlab,
+  ylab,
+  axes,
+  frame.plot,
+  asp,
+  main,
+  sub
+) {
+  plot(
+    0,
+    0,
+    type = "n",
+    xlab = xlab,
+    ylab = ylab,
+    xlim = xlim,
+    ylim = ylim,
+    axes = axes,
+    frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
+    asp = asp,
+    main = main,
+    sub = sub
+  )
+}
+
 #' Plotting of graphs
 #'
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
@@ -369,19 +400,16 @@ plot.igraph <- function(
     }
   }
   if (!add) {
-    plot(
-      0,
-      0,
-      type = "n",
-      xlab = xlab,
-      ylab = ylab,
-      xlim = xlim,
-      ylim = ylim,
-      axes = axes,
-      frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
-      asp = asp,
-      main = main,
-      sub = sub
+    i.init_plot_canvas(
+      xlim,
+      ylim,
+      xlab,
+      ylab,
+      axes,
+      frame.plot,
+      asp,
+      main,
+      sub
     )
   }
 

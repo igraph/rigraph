@@ -414,6 +414,16 @@ add_shape <- function(
 
 ## These are the predefined shapes
 #nocov start
+
+# A non-positive frame width means "draw no border": blank the frame colour and
+# reset the width to a drawable value. Shared by the vertex shape plot functions
+# so the rule lives in one place.
+i.hide_zero_frame <- function(color, width) {
+  color[width <= 0] <- NA
+  width[width <= 0] <- 1
+  list(color = color, width = width)
+}
+
 .igraph.shape.circle.clip <- function(
   coords,
   el,
@@ -495,9 +505,9 @@ add_shape <- function(
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
     symbols(
@@ -650,9 +660,9 @@ add_shape <- function(
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
     symbols(
@@ -899,9 +909,9 @@ add_shape <- function(
   }
   vertex.size <- cbind(vertex.size, vertex.size2)
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
     symbols(
