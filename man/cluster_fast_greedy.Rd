@@ -16,12 +16,12 @@ cluster_fast_greedy(
 \item{graph}{The input graph. It must be undirected and must not have
 multi-edges.}
 
-\item{merges}{Logical scalar, whether to return the merge matrix.}
+\item{merges}{Logical, whether to return the merge matrix.}
 
-\item{modularity}{Logical scalar, whether to return a vector containing the
+\item{modularity}{Logical, whether to return a vector containing the
 modularity after each merge.}
 
-\item{membership}{Logical scalar, whether to calculate the membership vector
+\item{membership}{Logical, whether to calculate the membership vector
 corresponding to the maximum modularity score, considering all possible
 community structures along the merges.}
 

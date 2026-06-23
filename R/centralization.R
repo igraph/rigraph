@@ -282,7 +282,7 @@ NULL
 #'   the most centralized graph with the same number of vertices as the graph
 #'   under study. This is only used if the `normalized` argument is set
 #'   to `TRUE`.
-#' @param normalized Logical scalar. Whether to normalize the graph level
+#' @param normalized Logical. Whether to normalize the graph level
 #'   centrality score by dividing by the supplied theoretical maximum.
 #' @return A real scalar, the centralization of the graph from which
 #'   `scores` were derived.
@@ -329,9 +329,9 @@ centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
 #'   `degree()`.
-#' @param loops Logical scalar, whether to consider loops edges when
+#' @param loops Logical, whether to consider loops edges when
 #'   calculating the degree.
-#' @param normalized Logical scalar. Whether to normalize the graph level
+#' @param normalized Logical. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
@@ -435,7 +435,7 @@ centr_degree_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
+#' @param directed Logical, whether to use directed shortest paths for
 #'   calculating betweenness.
 #' @inheritParams centr_degree
 #' @return A named list with the following components:
@@ -491,7 +491,7 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'   `nodes` and `directed` are both given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed Logical scalar, whether to use directed shortest paths
+#' @param directed Logical, whether to use directed shortest paths
 #'   for calculating betweenness. Ignored if an undirected graph was
 #'   given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
@@ -605,7 +605,7 @@ centr_clo_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
+#' @param directed Logical, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.
@@ -682,7 +682,7 @@ centr_eigen <- function(
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed logical scalar, whether to consider edge directions
+#' @param directed Logical, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.

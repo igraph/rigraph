@@ -194,8 +194,8 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'   be present together with any of the `i` and `j` arguments
 #'   and if it is present, then the `from` argument must be present as
 #'   well.
-#' @param sparse Logical scalar, whether to return sparse matrices.
-#' @param edges Logical scalar, whether to return edge IDs.
+#' @param sparse Logical, whether to return sparse matrices.
+#' @param edges Logical, whether to return edge IDs.
 #' @param drop Ignored.
 #' @param attr If not `NULL`, then it should be the name of an edge
 #'   attribute. This attribute is queried and returned.
@@ -360,9 +360,9 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #'   and if it is present, then the `from` argument must be present as
 #'   well.
 #' @param ... Additional arguments are not used currently.
-#' @param directed Logical scalar, whether to consider edge directions
+#' @param directed Logical, whether to consider edge directions
 #'   in directed graphs. It is ignored for undirected graphs.
-#' @param edges Logical scalar, whether to return edge IDs.
+#' @param edges Logical, whether to return edge IDs.
 #' @param exact Ignored.
 #'
 #' @family structural queries

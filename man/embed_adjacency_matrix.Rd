@@ -34,7 +34,7 @@ eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 are used for the ordering.}
 
-\item{scaled}{Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
+\item{scaled}{Logical, if \code{FALSE}, then \eqn{U} and \eqn{V} are
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{cvec}{A numeric vector, its length is the number vertices in the

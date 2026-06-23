@@ -564,13 +564,13 @@ print_all <- function(object, ...) {
 #'
 #' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
-#' @param full Logical scalar, whether to print the graph structure itself as
+#' @param full Logical, whether to print the graph structure itself as
 #'   well.
-#' @param graph.attributes Logical constant, whether to print graph attributes.
-#' @param vertex.attributes Logical constant, whether to print vertex
+#' @param graph.attributes Logical, whether to print graph attributes.
+#' @param vertex.attributes Logical, whether to print vertex
 #'   attributes.
-#' @param edge.attributes Logical constant, whether to print edge attributes.
-#' @param names Logical constant, whether to print symbolic vertex names (i.e.
+#' @param edge.attributes Logical, whether to print edge attributes.
+#' @param names Logical, whether to print symbolic vertex names (i.e.
 #'   the `name` vertex attribute) or vertex IDs.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.

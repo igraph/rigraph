@@ -129,7 +129,7 @@ bipartite.mapping <- function(graph) {
 #'   one projection is requested in argument `which`.
 #' @param which A character scalar to specify which projection(s) to calculate.
 #'   The default is to calculate both.
-#' @param remove.type Logical scalar, whether to remove the `type` vertex
+#' @param remove.type Logical, whether to remove the `type` vertex
 #'   attribute from the projections. This makes sense because these graphs are
 #'   not bipartite any more. However if you want to combine them with each other
 #'   (or other bipartite graphs), then it is worth keeping this attribute. By

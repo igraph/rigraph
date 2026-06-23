@@ -40,14 +40,14 @@ is included in the matrix.}
 supplied, the value is forwarded to \code{weights} as a character edge
 attribute name.}
 
-\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge IDs in the matrix.
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.}
 
-\item{names}{Logical constant, whether to assign row and column names
+\item{names}{Logical, whether to assign row and column names
 to the matrix. These are only assigned if the \code{name} vertex attribute
 is present in the graph.}
 
-\item{sparse}{Logical scalar, whether to create a sparse matrix. The
+\item{sparse}{Logical, whether to create a sparse matrix. The
 \sQuote{\code{Matrix}} package must be installed for creating sparse
 matrices.}
 }

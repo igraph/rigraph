@@ -27,7 +27,7 @@ second argument is \code{extra}.}
 
 \item{extra}{Extra argument to supply to \code{func}.}
 
-\item{sym}{Logical scalar, whether the input matrix is symmetric. Always
+\item{sym}{Logical, whether the input matrix is symmetric. Always
 supply \code{TRUE} here if it is, since it can speed up the computation.}
 
 \item{options}{Options to ARPACK, a named list to overwrite some of the

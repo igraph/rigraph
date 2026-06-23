@@ -27,7 +27,7 @@ topological sorting, performed with the opposite mode than the \code{mode}
 argument. After the vertices have been sorted, one is selected from each
 component.}
 
-\item{circular}{Logical scalar, whether to plot the tree in a circular
+\item{circular}{Logical, whether to plot the tree in a circular
 fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
 (or top-down, see the \code{flip.y} argument.}
 
@@ -43,7 +43,7 @@ edges are used (this was the behavior in igraph 0.5 and before). This
 parameter also influences how the root vertices are calculated, if they are
 not given. See the \code{roots} parameter.}
 
-\item{flip.y}{Logical scalar, whether to flip the \sQuote{y} coordinates.
+\item{flip.y}{Logical, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
 
 \item{...}{Passed to \code{layout_as_tree()}.}

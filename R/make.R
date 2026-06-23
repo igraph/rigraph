@@ -1696,7 +1696,7 @@ empty_graph <- function(n = 0, directed = TRUE) {
 #' @param ... For `graph_from_literal()` the formulae giving the
 #'   structure of the graph, see details below. For `from_literal()`
 #'   all arguments are passed to `graph_from_literal()`.
-#' @param simplify Logical scalar, whether to call [simplify()]
+#' @param simplify Logical, whether to call [simplify()]
 #'   on the created graph. By default the graph is simplified, loop and
 #'   multiple edges are removed. [simplify()] is only called when the
 #'   created graph is not already simple, so the edge order from the
@@ -1956,9 +1956,9 @@ full_graph <- function(n, directed = FALSE, loops = FALSE) {
 #' @param directed Whether to create a directed lattice.
 #' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
-#' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
-#'   periodic along each dimension. This parameter may also be scalar boolen value which will
-#'   be extended to boolean vector with dimvector length.
+#' @param periodic Logical vector, defines whether the generated lattice is
+#'   periodic along each dimension. This parameter may also be a single logical which will
+#'   be extended to a logical vector of `dimvector`` length.
 #' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
 #'
@@ -2342,7 +2342,7 @@ atlas <- function(n) {
 #' @param n The number of vertices.
 #' @param w A matrix which specifies the extended chordal ring. See
 #'   details below.
-#' @param directed Logical scalar, whether or not to create a directed graph.
+#' @param directed Logical, whether or not to create a directed graph.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
@@ -2384,7 +2384,7 @@ chordal_ring <- function(n, w, directed = FALSE) {
 #'
 #' @param n Integer, the number of vertices in the circulant graph.
 #' @param shifts Integer vector, a list of the offsets within the circulant graph.
-#' @param directed Boolean, whether to create a directed graph.
+#' @param directed Logical, whether to create a directed graph.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
@@ -2573,7 +2573,7 @@ kautz_graph <- function(m, n) {
 #'
 #' @param n1 The number of vertices of the first kind.
 #' @param n2 The number of vertices of the second kind.
-#' @param directed Logical scalar, whether the graphs is directed.
+#' @param directed Logical, whether the graphs is directed.
 #' @param mode Scalar giving the kind of edges to create for directed graphs.
 #'   If this is \sQuote{`out`} then all vertices of the first kind are
 #'   connected to the others; \sQuote{`in`} specifies the opposite
@@ -2666,13 +2666,13 @@ full_bipartite_graph <- function(
 #'   regular [make_graph()] function. It is checked that the edges indeed
 #'   connect vertices of different kind, according to the supplied `types`
 #'   vector. The vector may be a string vector if `types` is a named vector.
-#' @param directed Whether to create a directed graph, boolean constant. Note
+#' @param directed Logical, whether to create a directed graph. Note
 #'   that by default undirected graphs are created, as this is more common for
 #'   bipartite graphs.
 #' @return `make_bipartite_graph()` returns a bipartite igraph graph. In other
 #'   words, an igraph graph that has a vertex attribute named `type`.
 #'
-#'   `is_bipartite()` returns a logical scalar.
+#'   `is_bipartite()` returns a Logical.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [make_graph()] to create one-mode networks
 #' @keywords graphs
@@ -2739,7 +2739,7 @@ bipartite_graph <- function(types, edges, directed = FALSE) {
 #' different partitions are present.
 #'
 #' @param n A numeric vector giving the number of vertices in each partition.
-#' @param directed Logical scalar, whether to create a directed graph.
+#' @param directed Logical, whether to create a directed graph.
 #' @param mode Character scalar, the type of connections for directed graphs.
 #'   If `"out"`, then edges point from vertices of partitions with lower
 #'   indices to partitions with higher indices; if `"in"`, then the opposite
