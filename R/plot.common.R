@@ -527,6 +527,17 @@ autocurve.edges <- function(graph, start = 0.5) {
 # Common functions for plot and tkplot
 ###################################################################
 
+# Resolve plotting parameters on demand. The returned closure `func(type, name)`
+# looks a parameter up with the following precedence, highest first:
+#   1. an explicit argument passed to plot() (vertex./edge./plain prefix)
+#   2. a matching graph attribute (vertex_attr / edge_attr / graph_attr)
+#   3. the corresponding igraph option (igraph_opt("<type>.<name>"))
+#   4. the hard-coded default in i.default.values
+# Function-valued defaults are evaluated with the graph; NAs in a resolved
+# attribute are replaced with the default (or "" for labels).
+#
+# This closure is part of the public contract: user shapes registered via
+# add_shape() receive it as their `params` argument and call params("vertex", .).
 i.parse.plot.params <- function(graph, params) {
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())

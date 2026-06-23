@@ -87,6 +87,41 @@ test_that("i.parse.plot.params() silently replaces NA labels with empty string",
 })
 
 # ---------------------------------------------------------------------------
+# Stage 1 aesthetic tables (i.aes_table / i.edge_aes_table)
+# ---------------------------------------------------------------------------
+
+test_that("i.aes_table recycles columns to n rows", {
+  tbl <- i.aes_table(list(a = 1, b = c("x", "y")), n = 4)
+  expect_s3_class(tbl, "data.frame")
+  expect_equal(nrow(tbl), 4)
+  expect_equal(tbl$a, rep(1, 4))
+  expect_equal(tbl$b, c("x", "y", "x", "y"))
+})
+
+test_that("i.edge_aes_table expands scalars and is sliceable by edge index", {
+  tbl <- i.edge_aes_table(
+    color = "red",
+    width = c(1, 2, 3),
+    lty = 1,
+    arrow.mode = 2,
+    arrow.size = 1,
+    curved = 0,
+    label.color = "blue",
+    label.family = "serif",
+    label.font = 1,
+    label.cex = 1,
+    n = 3
+  )
+  expect_equal(nrow(tbl), 3)
+  expect_equal(tbl$color, rep("red", 3)) # scalar expanded
+  expect_equal(tbl$width, c(1, 2, 3)) # vector preserved
+
+  sliced <- vctrs::vec_slice(tbl, c(1, 3))
+  expect_equal(nrow(sliced), 2)
+  expect_equal(sliced$width, c(1, 3))
+})
+
+# ---------------------------------------------------------------------------
 # i.get.arrow.mode()
 # ---------------------------------------------------------------------------
 

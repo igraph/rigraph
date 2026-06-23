@@ -528,50 +528,42 @@ plot.igraph <- function(
       }
     }
 
-    ec <- edge.color
-    if (length(ec) > 1) {
-      ec <- ec[loops.e]
-    }
+    # vertex.size is vertex-scoped (indexed by the loop's vertex) and loop.angle
+    # is nullable, so both are handled outside the edge aesthetic table.
     vs <- vertex.size
     if (length(vertex.size) > 1) {
       vs <- vs[loops.v]
-    }
-    ew <- edge.width
-    if (length(edge.width) > 1) {
-      ew <- ew[loops.e]
     }
     la <- loop.angle
     if (length(loop.angle) > 1) {
       la <- la[loops.e]
     }
-    lty <- edge.lty
-    if (length(edge.lty) > 1) {
-      lty <- lty[loops.e]
-    }
-    arr <- arrow.mode
-    if (length(arrow.mode) > 1) {
-      arr <- arrow.mode[loops.e]
-    }
-    asize <- arrow.size
-    if (length(arrow.size) > 1) {
-      asize <- arrow.size[loops.e]
-    }
-    lcol <- edge.label.color
-    if (length(lcol) > 1) {
-      lcol <- lcol[loops.e]
-    }
-    lfam <- edge.label.family
-    if (length(lfam) > 1) {
-      lfam <- lfam[loops.e]
-    }
-    lfon <- edge.label.font
-    if (length(lfon) > 1) {
-      lfon <- lfon[loops.e]
-    }
-    lcex <- edge.label.cex
-    if (length(lcex) > 1) {
-      lcex <- lcex[loops.e]
-    }
+
+    # Stage 1: resolve the per-edge aesthetics into a table once, then slice it
+    # by loop-edge index instead of repeating `if (length(x) > 1) x[loops.e]`.
+    edge_aes <- i.edge_aes_table(
+      color = edge.color,
+      width = edge.width,
+      lty = edge.lty,
+      arrow.mode = arrow.mode,
+      arrow.size = arrow.size,
+      curved = curved,
+      label.color = edge.label.color,
+      label.family = edge.label.family,
+      label.font = edge.label.font,
+      label.cex = edge.label.cex,
+      n = ecount(graph)
+    )
+    loop_aes <- vctrs::vec_slice(edge_aes, loops.e)
+    ec <- loop_aes$color
+    ew <- loop_aes$width
+    lty <- loop_aes$lty
+    arr <- loop_aes$arrow.mode
+    asize <- loop_aes$arrow.size
+    lcol <- loop_aes$label.color
+    lfam <- loop_aes$label.family
+    lfon <- loop_aes$label.font
+    lcex <- loop_aes$label.cex
 
     # For each loop, assign unique angle within largest gap (flower petal style)
     # depending on the number of loops and the available angular space
