@@ -406,10 +406,11 @@ i.draw_vertex_labels <- function(
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
 #' @param legend Controls drawing of legends/colorbars for any aesthetics
-#'   supplied via [scale_color()] / [scale_size()]. `TRUE` (default) draws them
-#'   in the top-right corner; a position keyword such as `"bottomleft"` places
-#'   them elsewhere; `FALSE` suppresses them. Has no effect when no scale is
-#'   used.
+#'   supplied via [scale_color()] / [scale_size()]. The guide is drawn in the
+#'   reserved outer margin on one side of the plot: `TRUE` (default) or
+#'   `"right"` places it to the right, `"left"`/`"top"`/`"bottom"` on the
+#'   corresponding side (`"top"`/`"bottom"` arrange entries horizontally);
+#'   `FALSE` suppresses it. Has no effect when no scale is used.
 #' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
 #' @return Returns `NULL`, invisibly.
@@ -459,6 +460,7 @@ plot.igraph <- function(
   # i.parse.plot.params(), whose recycling strips the scale class.
   scaled <- i.apply_scales(list(...))
   guides <- scaled$guides
+  legend_side <- i.legend_side(legend, guides)
   params <- i.parse.plot.params(graph, scaled$dots)
 
   vertex.size <- params("vertex", "size")
@@ -582,6 +584,14 @@ plot.igraph <- function(
     if (is.null(ylim)) {
       ylim <- range(layout[, 2]) + c(-margin[1], margin[3])
     }
+  }
+  # Reserve outer-margin space for any legends/colorbars so they sit outside the
+  # plotting box rather than over the graph. Must happen before the canvas is
+  # set up; restored on exit.
+  if (!add && !is.null(legend_side)) {
+    old_mar <- graphics::par("mar")
+    graphics::par(mar = i.legend_reserve_mar(old_mar, legend_side, guides))
+    on.exit(graphics::par(mar = old_mar), add = TRUE)
   }
   if (!add) {
     i.init_plot_canvas(
@@ -965,8 +975,8 @@ plot.igraph <- function(
 
   ################################################################
   # draw legends / colorbars for any scale_*() aesthetics
-  if (!isFALSE(legend) && length(guides) > 0) {
-    i.draw_guides(guides, legend)
+  if (!is.null(legend_side)) {
+    i.draw_guides(guides, legend_side)
   }
 
   invisible(NULL)

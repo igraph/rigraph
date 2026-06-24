@@ -318,10 +318,15 @@ test_that("scales draw matching legends and colorbars", {
     )
   })
 
-  vdiffr::expect_doppelganger("scale-legend-bottomleft", function() {
+  vdiffr::expect_doppelganger("scale-legend-bottom-horizontal", function() {
     g <- ring10()
     V(g)$grp <- rep(c("alpha", "beta"), 5)
-    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = "bottomleft")
+    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = "bottom")
+  })
+
+  vdiffr::expect_doppelganger("scale-continuous-colorbar-top", function() {
+    g <- ring10()
+    plot(g, vertex.color = scale_color(1:10), vertex.size = 20, legend = "top")
   })
 
   vdiffr::expect_doppelganger("scale-edge-color", function() {

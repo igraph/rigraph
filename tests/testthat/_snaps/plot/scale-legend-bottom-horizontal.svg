@@ -57,10 +57,10 @@
 <text x='316.72' y='471.60' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>8</text>
 <text x='432.08' y='471.60' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>9</text>
 <text x='525.42' y='400.30' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>10</text>
-<circle cx='75.38' cy='473.76' r='4.86' style='stroke-width: 0.75; fill: #E69F00;' />
-<circle cx='75.38' cy='488.16' r='4.86' style='stroke-width: 0.75; fill: #56B4E9;' />
-<text x='92.76' y='459.36' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='62.04px' lengthAdjust='spacingAndGlyphs'>vertex.color</text>
-<text x='86.18' y='477.89' style='font-size: 12.00px; font-family: sans;' textLength='29.36px' lengthAdjust='spacingAndGlyphs'>alpha</text>
-<text x='86.18' y='492.29' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>beta</text>
+<circle cx='69.84' cy='557.97' r='4.86' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='120.80' cy='557.97' r='4.86' style='stroke-width: 0.75; fill: #56B4E9;' />
+<text x='112.70' y='543.57' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='62.04px' lengthAdjust='spacingAndGlyphs'>vertex.color</text>
+<text x='80.64' y='562.10' style='font-size: 12.00px; font-family: sans;' textLength='29.36px' lengthAdjust='spacingAndGlyphs'>alpha</text>
+<text x='131.60' y='562.10' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>beta</text>
 </g>
 </svg>
