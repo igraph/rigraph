@@ -283,6 +283,66 @@ test_that("i.edge_label_pos is two thirds from the target toward the source", {
   expect_equal(unname(pos["y"]), 0)
 })
 
+test_that("scales draw matching legends and colorbars", {
+  skip_if_not_installed("vdiffr")
+
+  ring10 <- function() {
+    g <- make_ring(10)
+    g$layout <- layout_in_circle(g)
+    g
+  }
+
+  vdiffr::expect_doppelganger("scale-discrete-color", function() {
+    g <- ring10()
+    V(g)$grp <- rep(c("alpha", "beta"), 5)
+    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20)
+  })
+
+  vdiffr::expect_doppelganger("scale-continuous-colorbar", function() {
+    g <- ring10()
+    plot(g, vertex.color = scale_color(1:10), vertex.size = 20)
+  })
+
+  vdiffr::expect_doppelganger("scale-size-legend", function() {
+    g <- ring10()
+    plot(g, vertex.size = scale_size(1:10, range = c(5, 25)))
+  })
+
+  vdiffr::expect_doppelganger("scale-color-and-size", function() {
+    g <- ring10()
+    V(g)$grp <- rep(c("alpha", "beta"), 5)
+    plot(
+      g,
+      vertex.color = scale_color(V(g)$grp),
+      vertex.size = scale_size(1:10, range = c(5, 25))
+    )
+  })
+
+  vdiffr::expect_doppelganger("scale-legend-bottomleft", function() {
+    g <- ring10()
+    V(g)$grp <- rep(c("alpha", "beta"), 5)
+    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = "bottomleft")
+  })
+
+  vdiffr::expect_doppelganger("scale-edge-color", function() {
+    g <- ring10()
+    E(g)$type <- rep(c("x", "y"), length.out = ecount(g))
+    plot(g, edge.color = scale_color(E(g)$type), edge.width = 2, vertex.size = 15)
+  })
+})
+
+test_that("legend = FALSE suppresses the guide", {
+  skip_if_not_installed("vdiffr")
+  # Same graph as scale-discrete-color but with the legend turned off; should
+  # render identically to a plain coloured plot (no guide box).
+  vdiffr::expect_doppelganger("scale-legend-false", function() {
+    g <- make_ring(10)
+    g$layout <- layout_in_circle(g)
+    V(g)$grp <- rep(c("alpha", "beta"), 5)
+    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = FALSE)
+  })
+})
+
 test_that("vector edge params are subset correctly across loops and non-loops", {
   # Guards the per-edge subsetting of loop vs non-loop edges in plot.igraph().
   skip_if_not_installed("vdiffr")

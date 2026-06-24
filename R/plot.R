@@ -405,6 +405,11 @@ i.draw_vertex_labels <- function(
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
+#' @param legend Controls drawing of legends/colorbars for any aesthetics
+#'   supplied via [scale_color()] / [scale_size()]. `TRUE` (default) draws them
+#'   in the top-right corner; a position keyword such as `"bottomleft"` places
+#'   them elsewhere; `FALSE` suppresses them. Has no effect when no scale is
+#'   used.
 #' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
 #' @return Returns `NULL`, invisibly.
@@ -439,6 +444,7 @@ plot.igraph <- function(
   mark.expand = 15,
   mark.lwd = 1,
   loop.size = 1,
+  legend = TRUE,
   ...
 ) {
   graph <- x
@@ -448,7 +454,12 @@ plot.igraph <- function(
 
   ################################################################
   ## Visual parameters
-  params <- i.parse.plot.params(graph, list(...))
+  # Resolve any scale_*() arguments to plain aesthetic vectors and collect their
+  # guides (legends/colorbars) to draw at the end. Must happen before
+  # i.parse.plot.params(), whose recycling strips the scale class.
+  scaled <- i.apply_scales(list(...))
+  guides <- scaled$guides
+  params <- i.parse.plot.params(graph, scaled$dots)
 
   vertex.size <- params("vertex", "size")
   vertex.size.scaling <- params("vertex", "size.scaling")
@@ -589,7 +600,7 @@ plot.igraph <- function(
   ################################################################
   ## Rescaling vertices and updating params
   if (vertex.size.scaling) {
-    newdots <- list(...)
+    newdots <- scaled$dots
 
     # vertex.size
     vertex.size <- i.rescale.vertex(
@@ -627,14 +638,10 @@ plot.igraph <- function(
 
     params <- i.parse.plot.params(graph, newdots)
   } else {
-    params <- i.parse.plot.params(
-      graph,
-      list(
-        vertex.size = VERTEX_SIZE_SCALE * vertex.size,
-        vertex.size2 = VERTEX_SIZE_SCALE * params("vertex", "size2"),
-        ...
-      )
-    )
+    newdots <- scaled$dots
+    newdots$vertex.size <- VERTEX_SIZE_SCALE * vertex.size
+    newdots$vertex.size2 <- VERTEX_SIZE_SCALE * params("vertex", "size2")
+    params <- i.parse.plot.params(graph, newdots)
     vertex.size <- VERTEX_SIZE_SCALE * vertex.size
   }
   ################################################################
@@ -955,6 +962,13 @@ plot.igraph <- function(
     label.angle,
     label.adj
   )
+
+  ################################################################
+  # draw legends / colorbars for any scale_*() aesthetics
+  if (!isFALSE(legend) && length(guides) > 0) {
+    i.draw_guides(guides, legend)
+  }
+
   invisible(NULL)
 }
 
