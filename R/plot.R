@@ -291,9 +291,58 @@ i.loop_angles <- function(graph, layout, loops.v) {
   list(angles = la_dyn, narrowing = narrowing)
 }
 
+# Iteratively nudge overlapping text labels apart (ggrepel / Gephi "label
+# adjust" style). Each label is repelled by other labels whose boxes overlap and
+# gently sprung back toward its original anchor. Pure geometry given the label
+# box half-sizes; deterministic (no randomness), so snapshots are stable.
+# `hw`/`hh` are per-label half-width/height in user coordinates.
+i.repel_labels <- function(x, y, hw, hh, iter = 200, spring = 0.04) {
+  n <- length(x)
+  if (n < 2) {
+    return(list(x = x, y = y))
+  }
+  px <- x
+  py <- y
+  for (it in seq_len(iter)) {
+    fx <- numeric(n)
+    fy <- numeric(n)
+    for (i in seq_len(n - 1)) {
+      for (j in (i + 1):n) {
+        dx <- px[i] - px[j]
+        dy <- py[i] - py[j]
+        ox <- (hw[i] + hw[j]) - abs(dx) # overlap along x
+        oy <- (hh[i] + hh[j]) - abs(dy) # overlap along y
+        if (ox > 0 && oy > 0) {
+          # separate along the axis of smaller overlap (cheaper move)
+          if (ox <= oy) {
+            s <- if (dx >= 0) 1 else -1
+            fx[i] <- fx[i] + s * ox * 0.5
+            fx[j] <- fx[j] - s * ox * 0.5
+          } else {
+            s <- if (dy >= 0) 1 else -1
+            fy[i] <- fy[i] + s * oy * 0.5
+            fy[j] <- fy[j] - s * oy * 0.5
+          }
+        }
+      }
+    }
+    # spring back toward the original anchor
+    fx <- fx + (x - px) * spring
+    fy <- fy + (y - py) * spring
+    if (max(abs(c(fx, fy))) < 1e-4) {
+      break
+    }
+    px <- px + fx
+    py <- py + fy
+  }
+  list(x = px, y = py)
+}
+
 # Draw vertex labels (Stage 4), offset from each vertex by label.dist along
 # label.degree. xpd = TRUE is scoped to this call so labels may spill outside
-# the plot region. No-op for an empty graph.
+# the plot region. With `repel = TRUE`, overlapping labels are nudged apart and
+# a leader line connects each moved label to its anchor. No-op for an empty
+# graph.
 i.draw_vertex_labels <- function(
   layout,
   labels,
@@ -305,7 +354,8 @@ i.draw_vertex_labels <- function(
   label.font,
   label.cex,
   label.angle,
-  label.adj
+  label.adj,
+  repel = FALSE
 ) {
   vc <- nrow(layout)
   if (vc == 0) {
@@ -333,6 +383,29 @@ i.draw_vertex_labels <- function(
   label.ang <- rep(label.angle, length.out = vc)
   label.adj <- rep(list(label.adj), length.out = vc)
   label.text <- rep(labels, length.out = vc)
+
+  if (isTRUE(any(repel)) && vc > 1) {
+    drawn <- !is.na(label.text) & nzchar(as.character(label.text))
+    if (sum(drawn) > 1) {
+      hw <- rep(0, vc)
+      hh <- rep(0, vc)
+      hw[drawn] <- strwidth(label.text[drawn], cex = label.cex[drawn]) / 2 * 1.15
+      hh[drawn] <- strheight(label.text[drawn], cex = label.cex[drawn]) / 2 * 1.6
+      moved <- i.repel_labels(x[drawn], y[drawn], hw[drawn], hh[drawn])
+      nx <- x
+      ny <- y
+      nx[drawn] <- moved$x
+      ny[drawn] <- moved$y
+      # leader lines from the original anchor to labels that actually moved
+      shift <- sqrt((nx - x)^2 + (ny - y)^2)
+      lead <- drawn & shift > pmax(hh, 1e-6)
+      if (any(lead)) {
+        segments(x[lead], y[lead], nx[lead], ny[lead], col = "grey60", lwd = 0.5)
+      }
+      x <- nx
+      y <- ny
+    }
+  }
 
   invisible(mapply(
     function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
@@ -473,6 +546,7 @@ plot.igraph <- function(
   label.dist <- params("vertex", "label.dist")
   label.angle <- params("vertex", "label.angle")
   label.adj <- params("vertex", "label.adj")
+  label.repel <- params("vertex", "label.repel")
   labels <- params("vertex", "label")
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
@@ -972,7 +1046,8 @@ plot.igraph <- function(
     label.font,
     label.cex,
     label.angle,
-    label.adj
+    label.adj,
+    repel = label.repel
   )
 
   ################################################################

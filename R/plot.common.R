@@ -231,6 +231,11 @@
 #' \item{label.adj}{
 #'   one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also `adj` in [graphics::text()].
 #' }
+#' \item{label.repel}{
+#'   Logical scalar. If `TRUE`, overlapping vertex labels are iteratively nudged
+#'   apart (in the spirit of \pkg{ggrepel}) and a thin leader line connects each
+#'   moved label to its original position. The default is `FALSE`.
+#' }
 
 #' \item{size.scaling}{
 #'   Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
@@ -4870,6 +4875,7 @@ i.vertex.default <- list(
   label.cex = 1,
   label.angle = 0,
   label.adj = NULL,
+  label.repel = FALSE,
   frame.color = "black",
   frame.width = 1,
   shape = "circle",

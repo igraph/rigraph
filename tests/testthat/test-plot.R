@@ -234,6 +234,26 @@ test_that("mark border linewidth", {
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
 
+test_that("i.repel_labels separates overlapping labels and is deterministic", {
+  # two boxes stacked at the same point should be pushed apart (here along y,
+  # the smaller-overlap axis)
+  r <- i.repel_labels(x = c(0, 0), y = c(0, 0), hw = c(0.2, 0.2), hh = c(0.1, 0.1))
+  sep <- max(abs(r$x[1] - r$x[2]), abs(r$y[1] - r$y[2]))
+  expect_gt(sep, 0.15) # was 0; now nearly the box height sum (0.2)
+
+  # deterministic
+  r2 <- i.repel_labels(x = c(0, 0), y = c(0, 0), hw = c(0.2, 0.2), hh = c(0.1, 0.1))
+  expect_equal(r, r2)
+
+  # a single label is returned unchanged
+  expect_equal(i.repel_labels(5, 7, 1, 1), list(x = 5, y = 7))
+
+  # non-overlapping labels are left where they are
+  far <- i.repel_labels(c(0, 10), c(0, 0), c(0.2, 0.2), c(0.1, 0.1))
+  expect_equal(far$x, c(0, 10))
+  expect_equal(far$y, c(0, 0))
+})
+
 test_that("i.loop_angles distributes loops and returns aligned vectors", {
   # Two vertices, vertex 1 has 2 loops, plus a 1-2 edge.
   g <- make_graph(c(1, 2, 1, 1, 1, 1), directed = FALSE)
@@ -333,6 +353,22 @@ test_that("scales draw matching legends and colorbars", {
     g <- ring10()
     E(g)$type <- rep(c("x", "y"), length.out = ecount(g))
     plot(g, edge.color = scale_color(E(g)$type), edge.width = 2, vertex.size = 15)
+  })
+})
+
+test_that("vertex.label.repel separates clustered labels", {
+  skip_if_not_installed("vdiffr")
+
+  vdiffr::expect_doppelganger("label-repel", function() {
+    g <- make_empty_graph(8)
+    layout <- cbind(
+      c(0, 0.05, 0.1, -0.05, 1, 1.05, 0.95, 1.1),
+      c(0, 0.05, -0.05, 0.02, 1, 0.95, 1.05, 1.02)
+    )
+    V(g)$label <- c(
+      "Alice", "Bob", "Carol", "Dave", "Eve", "Frank", "Grace", "Heidi"
+    )
+    plot(g, layout = layout, vertex.size = 12, vertex.label.repel = TRUE)
   })
 })
 
