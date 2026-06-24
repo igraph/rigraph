@@ -328,9 +328,18 @@ plot(dg, edge.color = "navy", edge.alpha = 0.3, edge.width = 6)
 Loops are drawn as small arcs. `edge.loop.angle` sets the direction of a loop
 (in radians) and the plot-level `loop.size` scales them:
 
-```{r}
-loops <- make_graph(~ A -+ A, A -+ B, B -+ B)
-plot(loops, edge.loop.angle = pi / 4, loop.size = 1.2, edge.arrow.size = 0.6)
+```{r fig.width = 6, fig.height = 4}
+# the formula interface drops self-loops, so build the edge list directly
+loops <- make_graph(c("A", "A", "A", "B", "B", "B"), directed = TRUE)
+plot(
+  loops,
+  layout = matrix(c(-0.5, 0.5, 0, 0), ncol = 2),
+  vertex.size = 36,
+  edge.loop.angle = pi / 2,
+  loop.size = 1.5,
+  edge.arrow.size = 0.6,
+  margin = 0.25
+)
 ```
 
 ## Edge labels
@@ -517,6 +526,9 @@ mytriangle <- function(coords, v = NULL, params) {
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
+  # When all vertices share a shape, the plot function is called once for the
+  # whole layout (with v = NULL), so recycle scalars to one value per row.
+  vertex.size <- rep(vertex.size, length.out = nrow(coords))
   symbols(
     x = coords[, 1], y = coords[, 2], bg = vertex.color,
     stars = cbind(vertex.size, vertex.size, vertex.size),
