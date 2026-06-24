@@ -222,6 +222,144 @@ i.init_plot_canvas <- function(
   )
 }
 
+# Distribute self-loops around each vertex (Stage 2 geometry). For a vertex with
+# k loops, place them evenly inside the largest angular gap between its incident
+# (non-loop) edges, and compute a narrowing factor that compresses the loops
+# when that gap is tight. Returns per-loop `angles` and `narrowing` vectors
+# aligned to `loops.v`.
+i.loop_angles <- function(graph, layout, loops.v) {
+  la_dyn <- numeric(length(loops.v))
+  narrowing <- numeric(length(loops.v))
+
+  for (v in unique(loops.v)) {
+    idx <- which(loops.v == v)
+    n_loops <- length(idx)
+
+    incident_edges <- incident(graph, v, mode = "all")
+    incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
+
+    if (length(incident_edges) == 0) {
+      # Full circle available if no edges
+      loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
+      gap_span <- 2 * pi
+    } else {
+      angles <- sapply(incident_edges, function(e) {
+        ends_e <- ends(graph, e, names = FALSE)
+        other <- if (as.numeric(ends_e[1]) == v) {
+          as.numeric(ends_e[2])
+        } else {
+          as.numeric(ends_e[1])
+        }
+        dx <- layout[other, 1] - layout[v, 1]
+        dy <- layout[other, 2] - layout[v, 2]
+        atan2(dy, dx)
+      })
+
+      angles <- (angles + 2 * pi) %% (2 * pi)
+      angles <- sort(angles)
+      gaps <- diff(c(angles, angles[1] + 2 * pi))
+      max_gap_index <- which.max(gaps)
+
+      gap_start <- angles[max_gap_index]
+      gap_span <- gaps[max_gap_index]
+      gap_end <- (gap_start + gap_span) %% (2 * pi)
+
+      # Generate loop angles spaced inside the gap
+      if (gap_end > gap_start) {
+        loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+          -c(1, n_loops + 2)
+        ]
+      } else {
+        # wrap around
+        gap_end <- gap_end + 2 * pi
+        loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+          -c(1, n_loops + 2)
+        ] %%
+          (2 * pi)
+      }
+    }
+
+    la_dyn[idx] <- loop_angles
+
+    # Compute narrowing factor based on angular space
+    angle_per_loop <- gap_span / n_loops
+    # Scale narrowing between 1 (wide) and ~0.2 (tight)
+    narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
+    narrowing[idx] <- narrowing_factor
+  }
+
+  list(angles = la_dyn, narrowing = narrowing)
+}
+
+# Draw vertex labels (Stage 4), offset from each vertex by label.dist along
+# label.degree. xpd = TRUE is scoped to this call so labels may spill outside
+# the plot region. No-op for an empty graph.
+i.draw_vertex_labels <- function(
+  layout,
+  labels,
+  vertex.size,
+  label.dist,
+  label.degree,
+  label.color,
+  label.family,
+  label.font,
+  label.cex,
+  label.angle,
+  label.adj
+) {
+  vc <- nrow(layout)
+  if (vc == 0) {
+    return(invisible(NULL))
+  }
+
+  old_xpd <- par(xpd = TRUE)
+  on.exit(par(old_xpd), add = TRUE)
+
+  x <- layout[, 1] +
+    label.dist *
+      cos(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
+  y <- layout[, 2] +
+    label.dist *
+      sin(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
+
+  label.col <- rep(label.color, length.out = vc)
+  label.fam <- rep(label.family, length.out = vc)
+  label.fnt <- rep(label.font, length.out = vc)
+  label.cex <- rep(label.cex, length.out = vc)
+  label.ang <- rep(label.angle, length.out = vc)
+  label.adj <- rep(list(label.adj), length.out = vc)
+  label.text <- rep(labels, length.out = vc)
+
+  invisible(mapply(
+    function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
+      text(
+        x0,
+        y0,
+        labels = lbl,
+        col = col,
+        family = fam,
+        font = fnt,
+        cex = cex,
+        srt = srt,
+        adj = adj
+      )
+    },
+    x,
+    y,
+    label.text,
+    label.col,
+    label.fam,
+    label.fnt,
+    label.cex,
+    label.ang,
+    label.adj
+  ))
+}
+
 #' Plotting of graphs
 #'
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
@@ -639,70 +777,10 @@ plot.igraph <- function(
     lfon <- loop_aes$label.font
     lcex <- loop_aes$label.cex
 
-    # For each loop, assign unique angle within largest gap (flower petal style)
-    # depending on the number of loops and the available angular space
-    la_dyn <- numeric(length(loops.v))
-    narrowing <- numeric(length(loops.v))
-
-    loop_table <- table(loops.v)
-    loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
-
-    for (v in unique(loops.v)) {
-      idx <- which(loops.v == v)
-      n_loops <- length(idx)
-
-      incident_edges <- incident(graph, v, mode = "all")
-      incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
-
-      if (length(incident_edges) == 0) {
-        # Full circle available if no edges
-        loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
-        gap_span <- 2 * pi
-      } else {
-        angles <- sapply(incident_edges, function(e) {
-          ends_e <- ends(graph, e, names = FALSE)
-          other <- if (as.numeric(ends_e[1]) == v) {
-            as.numeric(ends_e[2])
-          } else {
-            as.numeric(ends_e[1])
-          }
-          dx <- layout[other, 1] - layout[v, 1]
-          dy <- layout[other, 2] - layout[v, 2]
-          atan2(dy, dx)
-        })
-
-        angles <- (angles + 2 * pi) %% (2 * pi)
-        angles <- sort(angles)
-        gaps <- diff(c(angles, angles[1] + 2 * pi))
-        max_gap_index <- which.max(gaps)
-
-        gap_start <- angles[max_gap_index]
-        gap_span <- gaps[max_gap_index]
-        gap_end <- (gap_start + gap_span) %% (2 * pi)
-
-        # Generate loop angles spaced inside the gap
-        if (gap_end > gap_start) {
-          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
-            -c(1, n_loops + 2)
-          ]
-        } else {
-          # wrap around
-          gap_end <- gap_end + 2 * pi
-          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
-            -c(1, n_loops + 2)
-          ] %%
-            (2 * pi)
-        }
-      }
-
-      la_dyn[idx] <- loop_angles
-
-      # Compute narrowing factor based on angular space
-      angle_per_loop <- gap_span / n_loops
-      # Scale narrowing between 1 (wide) and ~0.2 (tight)
-      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
-      narrowing[idx] <- narrowing_factor
-    }
+    # Place loops in the largest angular gap at each vertex (flower-petal style).
+    loop_geo <- i.loop_angles(graph, layout, loops.v)
+    la_dyn <- loop_geo$angles
+    narrowing <- loop_geo$narrowing
     if (is.null(la)) {
       la <- rep(NA, length(loops.v))
     }
@@ -864,54 +942,19 @@ plot.igraph <- function(
 
   ################################################################
   # add the labels
-  old_xpd <- par(xpd = TRUE)
-  on.exit(par(old_xpd), add = TRUE)
-  x <- layout[, 1] +
-    label.dist *
-      cos(-label.degree) *
-      (vertex.size + 6 * 8 * log10(2)) *
-      VERTEX_SIZE_SCALE
-  y <- layout[, 2] +
-    label.dist *
-      sin(-label.degree) *
-      (vertex.size + 6 * 8 * log10(2)) *
-      VERTEX_SIZE_SCALE
-  if (vc > 0) {
-    label.col <- rep(label.color, length.out = vc)
-    label.fam <- rep(label.family, length.out = vc)
-    label.fnt <- rep(label.font, length.out = vc)
-    label.cex <- rep(label.cex, length.out = vc)
-    label.ang <- rep(label.angle, length.out = vc)
-    label.adj <- rep(list(label.adj), length.out = vc)
-    label.text <- rep(labels, length.out = vc)
-
-    # Draw vertex labels
-    invisible(mapply(
-      function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
-        text(
-          x0,
-          y0,
-          labels = lbl,
-          col = col,
-          family = fam,
-          font = fnt,
-          cex = cex,
-          srt = srt,
-          adj = adj
-        )
-      },
-      x,
-      y,
-      label.text,
-      label.col,
-      label.fam,
-      label.fnt,
-      label.cex,
-      label.ang,
-      label.adj
-    ))
-  }
-  rm(x, y)
+  i.draw_vertex_labels(
+    layout,
+    labels,
+    vertex.size,
+    label.dist,
+    label.degree,
+    label.color,
+    label.family,
+    label.font,
+    label.cex,
+    label.angle,
+    label.adj
+  )
   invisible(NULL)
 }
 

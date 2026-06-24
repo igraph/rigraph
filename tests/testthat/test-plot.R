@@ -234,6 +234,22 @@ test_that("mark border linewidth", {
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
 
+test_that("i.loop_angles distributes loops and returns aligned vectors", {
+  # Two vertices, vertex 1 has 2 loops, plus a 1-2 edge.
+  g <- make_graph(c(1, 2, 1, 1, 1, 1), directed = FALSE)
+  layout <- cbind(c(0, 1), c(0, 0))
+  loops.v <- c(1, 1) # the two loop edges are both at vertex 1
+
+  res <- i.loop_angles(g, layout, loops.v)
+  expect_named(res, c("angles", "narrowing"))
+  expect_length(res$angles, 2)
+  expect_length(res$narrowing, 2)
+  # narrowing is bounded to [0.2, 1]
+  expect_true(all(res$narrowing >= 0.2 & res$narrowing <= 1))
+  # the two loops get distinct angles
+  expect_false(res$angles[1] == res$angles[2])
+})
+
 test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
   # Pure geometry helper extracted from igraph.Arrows (Stage 2); device-free.
   head <- i.arrowhead_shape(cin = 0.2, w = 1.5, delta = 0.01)
