@@ -585,13 +585,15 @@ plot.igraph <- function(
       ylim <- range(layout[, 2]) + c(-margin[1], margin[3])
     }
   }
-  # Reserve outer-margin space for any legends/colorbars so they sit outside the
-  # plotting box rather than over the graph. Must happen before the canvas is
-  # set up; restored on exit.
+  # When a scale legend is drawn, split the device into a plot region and a
+  # guide region (device-relative, so it survives resizing). The graph is drawn
+  # in the plot region; the guides are drawn into the guide region at the end.
+  legend_fig <- NULL
   if (!add && !is.null(legend_side)) {
-    old_mar <- graphics::par("mar")
-    graphics::par(mar = i.legend_reserve_mar(old_mar, legend_side, guides))
-    on.exit(graphics::par(mar = old_mar), add = TRUE)
+    legend_fig <- i.legend_fig(legend_side)
+    old_par <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(old_par), add = TRUE)
+    graphics::par(fig = legend_fig$plot)
   }
   if (!add) {
     i.init_plot_canvas(
@@ -974,9 +976,10 @@ plot.igraph <- function(
   )
 
   ################################################################
-  # draw legends / colorbars for any scale_*() aesthetics
-  if (!is.null(legend_side)) {
-    i.draw_guides(guides, legend_side)
+  # draw legends / colorbars for any scale_*() aesthetics, in the guide region
+  if (!is.null(legend_fig)) {
+    graphics::par(fig = legend_fig$guide, new = TRUE)
+    i.draw_guides_region(guides, legend_side)
   }
 
   invisible(NULL)

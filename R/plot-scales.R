@@ -200,82 +200,75 @@ i.legend_side <- function(legend, guides) {
   "right"
 }
 
-# Reserve outer-margin space (par("mar"), in text lines) on the legend side, so
-# guides are drawn outside the plotting box rather than over the graph. Width
-# (left/right) scales with the longest label/title; height (top/bottom) is a
-# fixed allowance for one horizontal row plus a title.
-i.legend_reserve_mar <- function(mar, side, guides) {
-  idx <- switch(side, bottom = 1L, left = 2L, top = 3L, right = 4L)
-  if (side %in% c("right", "left")) {
-    maxchar <- max(vapply(
-      guides,
-      function(g) {
-        labs <- if (g$type == "continuous") {
-          format(g$limits, digits = 3)
-        } else {
-          g$labels
-        }
-        max(nchar(c(labs, if (is.null(g$name)) "" else g$name)), 0L)
-      },
-      numeric(1)
-    ))
-    mar[idx] <- max(mar[idx], 3 + 0.65 * maxchar)
-  } else {
-    mar[idx] <- max(mar[idx], 5)
-  }
-  mar
+# Split the device into a plot region and a guide region, as device-relative
+# (NDC) fractions for par("fig"). Using fig regions (rather than data-coordinate
+# offsets) keeps the guide put and correctly sized when the device is resized.
+i.legend_fig <- function(side) {
+  frac_v <- 0.22 # width fraction for a left/right guide
+  frac_h <- 0.18 # height fraction for a top/bottom guide
+  switch(
+    side,
+    right = list(plot = c(0, 1 - frac_v, 0, 1), guide = c(1 - frac_v, 1, 0, 1)),
+    left = list(plot = c(frac_v, 1, 0, 1), guide = c(0, frac_v, 0, 1)),
+    top = list(plot = c(0, 1, 0, 1 - frac_h), guide = c(0, 1, 1 - frac_h, 1)),
+    bottom = list(plot = c(0, 1, frac_h, 1), guide = c(0, 1, 0, frac_h))
+  )
 }
 
-# Draw all guides in the reserved margin on `side`. left/right stack vertically;
-# top/bottom lay each guide's entries out in a row (horiz = TRUE) and stack
-# guides left-to-right.
-i.draw_guides <- function(guides, side) {
-  usr <- graphics::par("usr")
-  old <- graphics::par(xpd = NA)
-  on.exit(graphics::par(old), add = TRUE)
+# Draw the guides in the current figure region (set by the caller via par(fig)).
+# A fresh [0, 1] x [0, 1] window is set up and the guides are centred in it:
+# stacked vertically for left/right, laid out in a row for top/bottom (with each
+# guide's own entries arranged horizontally).
+i.draw_guides_region <- function(guides, side) {
+  graphics::par(mar = c(0.4, 0.4, 0.4, 0.4))
+  graphics::plot.new()
+  graphics::plot.window(xlim = c(0, 1), ylim = c(0, 1))
+  graphics::par(xpd = NA)
 
   horiz <- side %in% c("top", "bottom")
-  xr <- diff(usr[1:2])
-  yr <- diff(usr[3:4])
-  offx <- 0.04 * xr
-  offy <- 0.06 * yr
+  # Measure each guide first so the whole stack can be centred.
+  rects <- lapply(guides, function(g) {
+    i.guide_draw(g, 0.5, 0.5, 0.5, 0.5, horiz, plot = FALSE)
+  })
+  gap <- 0.04
 
-  spec <- switch(
-    side,
-    right = list(x = usr[2] + offx, y = usr[4], xjust = 0, yjust = 1),
-    left = list(x = usr[1] - offx, y = usr[4], xjust = 1, yjust = 1),
-    top = list(x = usr[1], y = usr[4] + offy, xjust = 0, yjust = 0),
-    bottom = list(x = usr[1], y = usr[3] - offy, xjust = 0, yjust = 1)
-  )
-  gap <- 0.03 * (if (horiz) xr else yr)
-
-  for (g in guides) {
-    rect <- i.draw_one_guide(g, spec, horiz)
-    if (horiz) {
-      spec$x <- rect$left + rect$w + gap
-    } else {
-      spec$y <- rect$top - rect$h - gap
+  if (horiz) {
+    ws <- vapply(rects, function(r) r$w, numeric(1))
+    total <- sum(ws) + gap * max(0, length(guides) - 1)
+    x <- 0.5 - total / 2
+    for (i in seq_along(guides)) {
+      i.guide_draw(guides[[i]], x, 0.5, 0, 0.5, horiz = TRUE, plot = TRUE)
+      x <- x + ws[i] + gap
+    }
+  } else {
+    hs <- vapply(rects, function(r) r$h, numeric(1))
+    total <- sum(hs) + gap * max(0, length(guides) - 1)
+    y <- 0.5 + total / 2
+    for (i in seq_along(guides)) {
+      i.guide_draw(guides[[i]], 0.5, y, 0.5, 1, horiz = FALSE, plot = TRUE)
+      y <- y - hs[i] - gap
     }
   }
   invisible(NULL)
 }
 
-# Draw one guide at the anchor/justification in `spec`; return list(left, top,
-# w, h) for stacking.
-i.draw_one_guide <- function(g, spec, horiz) {
+# Draw (or, with plot = FALSE, just measure) one guide at the given anchor and
+# justification. Returns list(left, top, w, h) in the current user coordinates.
+i.guide_draw <- function(g, x, y, xjust, yjust, horiz, plot) {
   if (g$type == "continuous") {
-    return(i.draw_colorbar(g, spec, horiz))
+    return(i.colorbar(g, x, y, xjust, yjust, horiz, plot))
   }
   args <- list(
-    x = spec$x,
-    y = spec$y,
-    xjust = spec$xjust,
-    yjust = spec$yjust,
+    x = x,
+    y = y,
+    xjust = xjust,
+    yjust = yjust,
     legend = g$labels,
     title = g$name,
     pch = 21,
     bty = "n",
-    horiz = horiz
+    horiz = horiz,
+    plot = plot
   )
   if (g$aesthetic == "color") {
     args$pt.bg <- g$colors
@@ -301,59 +294,59 @@ i.size_to_cex <- function(sizes) {
   0.8 + 2.2 * (sizes / mx)
 }
 
-# Continuous colour guide. Vertical bar for left/right, horizontal bar for
-# top/bottom. `spec` gives the anchor (x, y) and justification (matching
-# graphics::legend); returns the box rect for stacking.
-i.draw_colorbar <- function(g, spec, horiz) {
-  usr <- graphics::par("usr")
-  xr <- diff(usr[1:2])
-  yr <- diff(usr[3:4])
+# Continuous colour guide (colorbar), in the current [0, 1] guide window.
+# Vertical bar for left/right, horizontal bar for top/bottom. `plot = FALSE`
+# measures only. Returns list(left, top, w, h).
+i.colorbar <- function(g, x, y, xjust, yjust, horiz, plot) {
   labs <- format(g$limits, digits = 3)
   fill <- grDevices::rgb(
     grDevices::colorRamp(g$ramp)(seq(0, 1, length.out = 50)),
     maxColorValue = 255
   )
-  line_h <- 1.4 * graphics::strheight("M")
-  title_h <- if (is.null(g$name)) 0 else line_h
+  lh <- 1.2 * graphics::strheight("M")
+  title_h <- if (is.null(g$name)) 0 else lh
 
   if (horiz) {
-    barw <- 0.25 * xr
-    barh <- 0.04 * yr
+    barw <- 0.5
+    barh <- 0.12
     w <- barw
-    h <- barh + line_h + title_h
-    left <- spec$x - spec$xjust * w
-    top <- spec$y + (1 - spec$yjust) * h
-    bar_top <- top - title_h
-    xs <- seq(left, left + barw, length.out = 51)
-    graphics::rect(xs[-51], bar_top - barh, xs[-1], bar_top, col = fill, border = NA)
-    graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
-    ylab <- bar_top - barh - 0.2 * line_h
-    graphics::text(left, ylab, labs[1], adj = c(0, 1), cex = 0.8)
-    graphics::text(left + barw, ylab, labs[2], adj = c(1, 1), cex = 0.8)
-    if (!is.null(g$name)) {
-      graphics::text(left, top, labels = g$name, adj = c(0, 1))
-    }
+    h <- barh + lh + title_h
   } else {
-    barw <- 0.03 * xr
-    barh <- 0.25 * yr
-    label_w <- max(graphics::strwidth(labs, cex = 0.8)) + 0.01 * xr
+    barw <- 0.12
+    label_w <- max(graphics::strwidth(labs, cex = 0.8)) + 0.02
+    barh <- 0.5
     w <- barw + label_w
     h <- barh + title_h
-    left <- spec$x - spec$xjust * w
-    top <- spec$y + (1 - spec$yjust) * h
+  }
+  left <- x - xjust * w
+  top <- y + (1 - yjust) * h
+
+  if (plot) {
     bar_top <- top - title_h
-    ys <- seq(bar_top - barh, bar_top, length.out = 51)
-    graphics::rect(left, ys[-51], left + barw, ys[-1], col = fill, border = NA)
-    graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
-    graphics::text(
-      left + barw + 0.01 * xr,
-      c(bar_top - barh, bar_top),
-      labels = labs,
-      adj = c(0, 0.5),
-      cex = 0.8
-    )
-    if (!is.null(g$name)) {
-      graphics::text(left, top, labels = g$name, adj = c(0, 1))
+    if (horiz) {
+      xs <- seq(left, left + barw, length.out = 51)
+      graphics::rect(xs[-51], bar_top - barh, xs[-1], bar_top, col = fill, border = NA)
+      graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
+      ylab <- bar_top - barh - 0.2 * lh
+      graphics::text(left, ylab, labs[1], adj = c(0, 1), cex = 0.8)
+      graphics::text(left + barw, ylab, labs[2], adj = c(1, 1), cex = 0.8)
+      if (!is.null(g$name)) {
+        graphics::text(left + barw / 2, top, g$name, adj = c(0.5, 1))
+      }
+    } else {
+      ys <- seq(bar_top - barh, bar_top, length.out = 51)
+      graphics::rect(left, ys[-51], left + barw, ys[-1], col = fill, border = NA)
+      graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
+      graphics::text(
+        left + barw + 0.02,
+        c(bar_top - barh, bar_top),
+        labels = labs,
+        adj = c(0, 0.5),
+        cex = 0.8
+      )
+      if (!is.null(g$name)) {
+        graphics::text(left, top, g$name, adj = c(0, 1))
+      }
     }
   }
   list(left = left, top = top, w = w, h = h)
