@@ -114,6 +114,8 @@ i.draw.loop <- function(
   label.font,
   label.family,
   label.cex,
+  label.halo = NA,
+  label.halo.width = 0.15,
   width = 1,
   arr = 2,
   lty = 1,
@@ -179,14 +181,16 @@ i.draw.loop <- function(
       ly <- lab.y
     }
 
-    i.r_text(
+    i.r_text_halo(
       lx,
       ly,
       label,
       col = label.color,
       font = label.font,
       family = label.family,
-      cex = label.cex
+      cex = label.cex,
+      halo = label.halo,
+      halo.width = label.halo.width
     )
   }
 }
@@ -352,7 +356,9 @@ i.draw_vertex_labels <- function(
   label.cex,
   label.angle,
   label.adj,
-  repel = FALSE
+  repel = FALSE,
+  label.halo = NA,
+  label.halo.width = 0.15
 ) {
   vc <- nrow(layout)
   if (vc == 0) {
@@ -380,6 +386,8 @@ i.draw_vertex_labels <- function(
   label.ang <- rep(label.angle, length.out = vc)
   label.adj <- rep(list(label.adj), length.out = vc)
   label.text <- rep(labels, length.out = vc)
+  label.halo <- rep(label.halo, length.out = vc)
+  label.halo.w <- rep(label.halo.width, length.out = vc)
 
   if (isTRUE(any(repel)) && vc > 1) {
     drawn <- !is.na(label.text) & nzchar(as.character(label.text))
@@ -405,8 +413,8 @@ i.draw_vertex_labels <- function(
   }
 
   invisible(mapply(
-    function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
-      i.r_text(
+    function(x0, y0, lbl, col, fam, fnt, cex, srt, adj, halo, halo.w) {
+      i.r_text_halo(
         x0,
         y0,
         labels = lbl,
@@ -415,7 +423,9 @@ i.draw_vertex_labels <- function(
         font = fnt,
         cex = cex,
         srt = srt,
-        adj = adj
+        adj = adj,
+        halo = halo,
+        halo.width = halo.w
       )
     },
     x,
@@ -426,8 +436,63 @@ i.draw_vertex_labels <- function(
     label.fnt,
     label.cex,
     label.ang,
-    label.adj
+    label.adj,
+    label.halo,
+    label.halo.w
   ))
+}
+
+# Draw one label with an optional shadowtext halo for legibility (Stage 4).
+# `halo = NA` (the default) is exactly `i.r_text()` -> byte-identical to before.
+# Otherwise the glyphs are drawn `halo.steps` times offset on a circle of radius
+# (halo.width * strheight) in the `halo` colour, then the real text on top, which
+# produces a tight outline that reads over edges. Operates on a single label.
+i.r_text_halo <- function(
+  x,
+  y,
+  labels,
+  col,
+  family = "",
+  font = 1,
+  cex = 1,
+  srt = 0,
+  adj = NULL,
+  halo = NA,
+  halo.width = 0.15,
+  halo.steps = 16
+) {
+  if (
+    !is.na(halo) &&
+      !is.na(labels) &&
+      nzchar(as.character(labels))
+  ) {
+    r <- halo.width * strheight(labels, cex = cex)
+    th <- seq(0, 2 * pi, length.out = halo.steps + 1)[-1]
+    for (a in th) {
+      i.r_text(
+        x + r * cos(a),
+        y + r * sin(a),
+        labels = labels,
+        col = halo,
+        family = family,
+        font = font,
+        cex = cex,
+        srt = srt,
+        adj = adj
+      )
+    }
+  }
+  i.r_text(
+    x,
+    y,
+    labels = labels,
+    col = col,
+    family = family,
+    font = font,
+    cex = cex,
+    srt = srt,
+    adj = adj
+  )
 }
 
 #' Plotting of graphs
@@ -545,6 +610,8 @@ plot.igraph <- function(
   label.angle <- params("vertex", "label.angle")
   label.adj <- params("vertex", "label.adj")
   label.repel <- params("vertex", "label.repel")
+  label.halo <- params("vertex", "label.halo")
+  label.halo.width <- params("vertex", "label.halo.width")
   labels <- params("vertex", "label")
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
@@ -567,6 +634,8 @@ plot.igraph <- function(
   edge.label.family <- params("edge", "label.family")
   edge.label.cex <- params("edge", "label.cex")
   edge.label.color <- params("edge", "label.color")
+  edge.label.halo <- params("edge", "label.halo")
+  edge.label.halo.width <- params("edge", "label.halo.width")
   elab.x <- params("edge", "label.x")
   elab.y <- params("edge", "label.y")
   arrow.size <- params("edge", "arrow.size")
@@ -628,7 +697,9 @@ plot.igraph <- function(
       label.degree = label.degree,
       label.angle = label.angle,
       label.font = label.font,
-      label.family = label.family
+      label.family = label.family,
+      label.halo = label.halo,
+      label.halo.width = label.halo.width
     ),
     edge = list(
       color = edge.color,
@@ -640,7 +711,9 @@ plot.igraph <- function(
       label.color = edge.label.color,
       label.cex = edge.label.cex,
       label.font = edge.label.font,
-      label.family = edge.label.family
+      label.family = edge.label.family,
+      label.halo = edge.label.halo,
+      label.halo.width = edge.label.halo.width
     ),
     vc = vc,
     ec = ecount(graph)
@@ -865,6 +938,8 @@ plot.igraph <- function(
     label.family = edge.label.family,
     label.font = edge.label.font,
     label.cex = edge.label.cex,
+    label.halo = edge.label.halo,
+    label.halo.width = edge.label.halo.width,
     style = edge.style,
     alpha = edge.alpha,
     gradient = edge.gradient,
@@ -896,6 +971,8 @@ plot.igraph <- function(
     lfam <- loop_aes$label.family
     lfon <- loop_aes$label.font
     lcex <- loop_aes$label.cex
+    lhalo <- loop_aes$label.halo
+    lhalo.w <- loop_aes$label.halo.width
 
     # Place loops in the largest angular gap at each vertex (flower-petal style).
     loop_geo <- i.loop_angles(graph, layout, loops.v)
@@ -928,6 +1005,8 @@ plot.igraph <- function(
       label.family = lfam,
       label.font = lfon,
       label.cex = lcex,
+      label.halo = lhalo,
+      label.halo.width = lhalo.w,
       lty = lty,
       width = ew,
       arr = arr,
@@ -1052,17 +1131,21 @@ plot.igraph <- function(
     efam <- nl_aes$label.family
     efon <- nl_aes$label.font
     ecex <- nl_aes$label.cex
+    ehalo <- nl_aes$label.halo
+    ehalo.w <- nl_aes$label.halo.width
 
     invisible(mapply(
-      function(x, y, label, col, family, font, cex) {
-        i.r_text(
+      function(x, y, label, col, family, font, cex, halo, halo.w) {
+        i.r_text_halo(
           x,
           y,
           labels = label,
           col = col,
           family = family,
           font = font,
-          cex = cex
+          cex = cex,
+          halo = halo,
+          halo.width = halo.w
         )
       },
       lc.x,
@@ -1071,7 +1154,9 @@ plot.igraph <- function(
       ecol,
       efam,
       efon,
-      ecex
+      ecex,
+      ehalo,
+      ehalo.w
     ))
   }
 
@@ -1116,7 +1201,9 @@ plot.igraph <- function(
     label.cex,
     label.angle,
     label.adj,
-    repel = label.repel
+    repel = label.repel,
+    label.halo = label.halo,
+    label.halo.width = label.halo.width
   )
 
   ################################################################

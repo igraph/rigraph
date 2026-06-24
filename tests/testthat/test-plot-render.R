@@ -111,3 +111,20 @@ test_that("as_svg writes to a file and honours the tooltips argument", {
   expect_match(paste(readLines(f), collapse = ""), "<svg", fixed = TRUE)
   expect_match(out, "<title>p</title>", fixed = TRUE)
 })
+
+test_that("a label halo emits the offset copies plus the real label in SVG (F6)", {
+  skip_if_not_installed("xml2")
+  g <- make_ring(3)
+  V(g)$name <- c("aa", "bb", "cc")
+
+  plain <- as_svg(g)
+  haloed <- as_svg(g, vertex.label.halo = "white", vertex.label.halo.width = 0.2)
+
+  expect_s3_class(xml2::read_xml(haloed), "xml_document")
+  # the halo adds offset copies of every glyph, so there are strictly more
+  # <text> elements than without it, and the real labels are still present.
+  n_plain <- length(gregexpr("<text", plain, fixed = TRUE)[[1]])
+  n_halo <- length(gregexpr("<text", haloed, fixed = TRUE)[[1]])
+  expect_gt(n_halo, n_plain)
+  expect_match(haloed, ">aa<", fixed = TRUE)
+})

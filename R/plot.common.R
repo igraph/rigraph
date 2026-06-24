@@ -241,6 +241,16 @@
 #'   apart (in the spirit of \pkg{ggrepel}) and a thin leader line connects each
 #'   moved label to its original position. The default is `FALSE`.
 #' }
+#' \item{label.halo}{
+#'   The colour of a legibility halo (outline) drawn behind the vertex label
+#'   text, so labels remain readable over edges and other vertices. The halo is
+#'   drawn shadowtext-style: the glyphs are repeated, offset in a ring, in this
+#'   colour, with the real label on top. `NA` (the default) draws no halo.
+#' }
+#' \item{label.halo.width}{
+#'   The width of the label halo, as a fraction of the label height. Only has an
+#'   effect when `label.halo` is not `NA`. The default is `0.15`.
+#' }
 
 #' \item{size.scaling}{
 #'   Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
@@ -307,6 +317,15 @@
 #' }
 #' \item{label.color}{
 #'   The color of the edge labels, see the `color` vertex parameters on how to specify colors.
+#' }
+#' \item{label.halo}{
+#'   The colour of a legibility halo (outline) drawn behind the edge label text.
+#'   See the vertex parameter with the same name for details. `NA` (the default)
+#'   draws no halo.
+#' }
+#' \item{label.halo.width}{
+#'   The width of the edge label halo, as a fraction of the label height. Only
+#'   has an effect when `label.halo` is not `NA`. The default is `0.15`.
 #' }
 #' \item{label.x}{
 #'   The horizontal `NA` elements will be replaced by automatically calculated coordinates.
@@ -4907,6 +4926,8 @@ i.vertex.default <- list(
   label.angle = 0,
   label.adj = NULL,
   label.repel = FALSE,
+  label.halo = NA,
+  label.halo.width = 0.15,
   alpha = 1,
   frame.color = "black",
   frame.width = 1,
@@ -4939,6 +4960,8 @@ i.edge.default <- list(
   label.font = 1,
   label.cex = 1,
   label.color = "darkblue",
+  label.halo = NA,
+  label.halo.width = 0.15,
   label.x = NULL,
   label.y = NULL,
   arrow.size = 1,

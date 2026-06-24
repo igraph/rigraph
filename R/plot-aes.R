@@ -75,6 +75,8 @@ i.edge_aes_table <- function(
   label.family,
   label.font,
   label.cex,
+  label.halo,
+  label.halo.width,
   style,
   alpha,
   gradient,
@@ -93,6 +95,8 @@ i.edge_aes_table <- function(
       label.family = label.family,
       label.font = label.font,
       label.cex = label.cex,
+      label.halo = label.halo,
+      label.halo.width = label.halo.width,
       style = style,
       alpha = alpha,
       gradient = gradient

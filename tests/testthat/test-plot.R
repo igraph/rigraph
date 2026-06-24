@@ -677,3 +677,44 @@ test_that("plot rescales correctly", {
   }
   vdiffr::expect_doppelganger("rescale-coords", rescale_coords)
 })
+
+test_that("vertex label halo draws an outline (F6)", {
+  skip_if_not_installed("vdiffr")
+
+  g <- make_ring(5)
+  V(g)$name <- c("alpha", "beta", "gamma", "delta", "epsilon")
+  g$layout <- layout_in_circle(g)
+
+  vdiffr::expect_doppelganger(
+    "vertex-label-halo",
+    function() {
+      plot(
+        g,
+        vertex.size = 30,
+        vertex.label.color = "black",
+        vertex.label.halo = "white",
+        vertex.label.halo.width = 0.25
+      )
+    }
+  )
+})
+
+test_that("edge label halo draws an outline (F6)", {
+  skip_if_not_installed("vdiffr")
+
+  g <- make_ring(4, directed = TRUE)
+  E(g)$label <- c("e1", "e2", "e3", "e4")
+  g$layout <- layout_in_circle(g)
+
+  vdiffr::expect_doppelganger(
+    "edge-label-halo",
+    function() {
+      plot(
+        g,
+        edge.label.color = "black",
+        edge.label.halo = "yellow",
+        edge.label.cex = 1.5
+      )
+    }
+  )
+})
