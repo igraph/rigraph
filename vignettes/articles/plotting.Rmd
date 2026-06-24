@@ -1,0 +1,605 @@
+---
+title: "Plotting graphs"
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 6,
+  fig.align = "center",
+  dev = "png"
+)
+set.seed(42) # stable force-directed layouts across rebuilds
+```
+
+```{r setup}
+library(igraph)
+```
+
+`igraph` ships a native, dependency-light plotting engine built on base R
+graphics. A single call to `plot()` "just works", and every visual detail —
+vertex shapes, edge routing, colours, labels, legends — is controllable through
+arguments to `plot()` or through vertex/edge/graph attributes.
+
+This article is a complete tour of that engine: it walks through both the
+long-standing features and the more recent additions (scales and legends,
+label repelling and halos, richer edge styles, colour gradients and
+transparency, and SVG export). Everything is shown at least once.
+
+```{r}
+# A small attributed social network used throughout this article.
+g <- make_graph(
+  ~ Alice - Boris:Himari:Moshe, Himari - Alice:Nang:Moshe:Samira,
+  Ibrahim - Nang:Moshe, Nang - Samira
+)
+V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
+E(g)$kind <- rep(c("friend", "colleague"), length.out = ecount(g))
+```
+
+## Quick start
+
+The simplest possible call lays the graph out automatically and draws it:
+
+```{r}
+plot(g)
+```
+
+There are two ways to control appearance:
+
+* **As an argument to `plot()`**, prefixed with `vertex.` / `edge.` /
+  (none for plot-level), e.g. `vertex.color = "tomato"`.
+* **As a graph attribute**, e.g. `V(g)$color <- "tomato"`.
+
+Arguments to `plot()` take precedence over attributes, which in turn take
+precedence over options and built-in defaults (see
+[Setting defaults](#setting-defaults)). Keeping the styling in the `plot()`
+call keeps the visual representation separate from the graph data:
+
+```{r}
+plot(
+  g,
+  vertex.color = ifelse(V(g)$gender == "m", "skyblue", "pink"),
+  vertex.size = 30,
+  edge.width = ifelse(E(g)$kind == "colleague", 3, 1)
+)
+```
+
+## Layouts
+
+A graph is an abstract object; to draw it we first map vertices to coordinates
+with a *layout algorithm*. All layout functions start with `layout_`:
+
+| Method name        | Algorithm description                                          |
+|--------------------|---------------------------------------------------------------|
+| `layout_randomly`  | Places vertices completely randomly                           |
+| `layout_in_circle` | Deterministic; places vertices on a circle                    |
+| `layout_on_sphere` | Deterministic; places vertices evenly on a sphere surface     |
+| `layout_with_drl`  | DrL (Distributed Recursive Layout), for large graphs          |
+| `layout_with_fr`   | Fruchterman–Reingold force-directed algorithm                 |
+| `layout_with_kk`   | Kamada–Kawai force-directed algorithm                         |
+| `layout_with_lgl`  | LGL (Large Graph Layout), for large graphs                    |
+| `layout_as_tree`   | Reingold–Tilford tree layout                                  |
+| `layout_nicely`    | Picks a sensible algorithm automatically (the default)        |
+
+A layout function returns a matrix with one row per vertex. You can pass either
+a precomputed matrix or the function itself:
+
+```{r}
+lay <- layout_with_kk(g)
+plot(g, layout = lay, main = "Kamada-Kawai layout")
+```
+
+```{r}
+plot(g, layout = layout_in_circle, main = "Circular layout")
+```
+
+By default coordinates are rescaled to fit a `[-1, 1]` square with aspect ratio
+1. Disable rescaling and set the limits/aspect/margins yourself when you need
+the layout's own coordinates:
+
+```{r}
+plot(
+  g,
+  layout = lay,
+  rescale = FALSE,
+  xlim = range(lay[, 1]),
+  ylim = range(lay[, 2]),
+  asp = 1,
+  margin = 0.1
+)
+```
+
+## Vertices
+
+Vertex colour, size and frame are the basic knobs. `vertex.size2` sets the
+second dimension for non-square shapes (e.g. rectangles).
+
+```{r}
+plot(
+  g,
+  vertex.color = "gold",
+  vertex.size = 35,
+  vertex.frame.color = "grey30",
+  vertex.frame.width = 2
+)
+```
+
+### Transparency
+
+`vertex.alpha` (and `edge.alpha`, later) set opacity in `[0, 1]`, folded into
+the fill colour:
+
+```{r}
+plot(g, vertex.color = "purple", vertex.alpha = 0.4, vertex.size = 40)
+```
+
+### Shape gallery
+
+The built-in shapes are `circle`, `square`, `csquare` (centred square),
+`rectangle`, `crectangle` (centred rectangle), `vrectangle` (vertical
+rectangle), `none` (labels only), `pie`, `sphere`, and `raster`. Use `shapes()`
+to list everything currently registered:
+
+```{r}
+shapes()
+```
+
+```{r fig.width = 7, fig.height = 7}
+shp <- c(
+  "circle", "square", "csquare", "rectangle",
+  "crectangle", "vrectangle", "none", "pie", "sphere", "raster"
+)
+ring <- make_ring(length(shp))
+plot(
+  ring,
+  vertex.shape = shp,
+  vertex.label = shp,
+  vertex.label.dist = 1.4,
+  vertex.size = 26,
+  vertex.size2 = 18,
+  # pie data is only used by the "pie" shape
+  vertex.pie = lapply(shp, function(s) if (s == "pie") c(2, 3, 1) else 0),
+  vertex.pie.color = list(c("tomato", "gold", "skyblue"))
+)
+```
+
+The `pie` shape draws a small pie chart per vertex; its slices, colours, shading
+angle, shading density and line type are controlled by `vertex.pie`,
+`vertex.pie.color`, `vertex.pie.angle`, `vertex.pie.density` and
+`vertex.pie.lty`. The `raster` shape draws an image (defaulting to the igraph
+logo); supply your own with `vertex.raster`.
+
+### Relative sizing
+
+By default `vertex.size` is in absolute units. Set `vertex.size.scaling = TRUE`
+to size vertices relative to the plot region, controlled by `relative.size`:
+
+```{r}
+plot(
+  make_star(8),
+  vertex.size.scaling = TRUE,
+  vertex.relative.size = c(0.02, 0.06)
+)
+```
+
+## Vertex labels
+
+Labels default to vertex names (or IDs). They are positioned at a distance
+`label.dist` from the vertex, in the direction `label.degree` (an angle in
+radians), and styled with the usual font controls. `label.angle` rotates the
+text and `label.adj` fine-tunes its anchor.
+
+```{r}
+plot(
+  g,
+  vertex.size = 30,
+  vertex.label.color = "black",
+  vertex.label.family = "sans",
+  vertex.label.font = 2, # bold
+  vertex.label.cex = 1.1,
+  vertex.label.dist = 2.2,
+  vertex.label.degree = -pi / 2 # place labels above the vertices
+)
+```
+
+`vertex.label.angle` rotates the label text (in degrees) and `vertex.label.adj`
+adjusts its anchor, exactly like `srt` and `adj` in `graphics::text()`:
+
+```{r}
+plot(
+  g,
+  vertex.size = 36,
+  vertex.label.angle = 30,
+  vertex.label.adj = c(0.5, 0.5)
+)
+```
+
+### Avoiding overlaps with `label.repel`
+
+On dense graphs labels collide. Set `vertex.label.repel = TRUE` to iteratively
+nudge overlapping labels apart, drawing a thin leader line from each moved label
+back to its vertex:
+
+```{r}
+gr <- make_ring(12)
+V(gr)$name <- paste0("node-", seq_len(vcount(gr)))
+plot(gr, layout = layout_in_circle, vertex.size = 8, vertex.label.repel = TRUE)
+```
+
+### Legibility with `label.halo`
+
+`vertex.label.halo` draws a halo (outline) behind the label text so it stays
+readable over edges and other vertices. `vertex.label.halo.width` controls the
+outline thickness as a fraction of the label height. The default `NA` draws no
+halo.
+
+```{r}
+plot(
+  g,
+  vertex.size = 30,
+  vertex.color = "steelblue",
+  vertex.label.color = "white",
+  vertex.label.halo = "black",
+  vertex.label.halo.width = 0.3
+)
+```
+
+## Edges
+
+Edges are styled with colour, width and line type, and (for directed graphs)
+arrowheads. `edge.arrow.mode` chooses the arrow direction (`0` none, `1`
+backward, `2` forward, `3` both, or the symbolic `"<"`, `">"`, `"<>"`); it also
+accepts `"a:attr"` to read the mode from a vertex attribute.
+
+```{r}
+dg <- make_graph(~ A -+ B, B -+ C, C -+ A, A -+ D)
+plot(
+  dg,
+  edge.color = "grey40",
+  edge.width = 2,
+  edge.lty = "dashed",
+  edge.arrow.size = 0.8,
+  edge.arrow.width = 1.2
+)
+```
+
+### Curved edges and multi-edge fans
+
+`edge.curved` bends edges: `TRUE` means curvature 0.5, numeric values set the
+amount (negative bends the other way). For graphs with parallel edges,
+`curve_multiple()` fans them apart so they don't overlap:
+
+```{r}
+multi <- graph_from_edgelist(
+  matrix(c(1, 2, 1, 2, 1, 2, 2, 3), ncol = 2, byrow = TRUE)
+)
+plot(multi, edge.curved = curve_multiple(multi), edge.arrow.size = 0.6)
+```
+
+### Edge styles
+
+The `edge.style` argument selects an edge-routing style:
+
+* `"auto"` (default) — straight, or an arc when `edge.curved` is non-zero
+* `"straight"` — always straight
+* `"arc"` — a curved arc whose height comes from `edge.curved`
+* `"elbow"` — a two-corner orthogonal (right-angle) connector
+* `"diagonal"` — a smooth S-curve with axis-aligned ends
+
+The orthogonal and diagonal styles are well suited to tree- and grid-like
+layouts:
+
+```{r fig.width = 7, fig.height = 3.2}
+tree <- make_tree(7, children = 2)
+op <- par(mfrow = c(1, 3), mar = c(1, 1, 2, 1))
+plot(tree, layout = layout_as_tree, edge.style = "arc", main = "arc")
+plot(tree, layout = layout_as_tree, edge.style = "elbow", main = "elbow")
+plot(tree, layout = layout_as_tree, edge.style = "diagonal", main = "diagonal")
+par(op)
+```
+
+### Transparency and colour gradients
+
+`edge.alpha` sets edge opacity. `edge.gradient = TRUE` colours each edge with a
+gradient running from the source vertex's colour to the target's — a way to show
+direction without arrowheads:
+
+```{r}
+ring_d <- make_ring(8, directed = TRUE)
+V(ring_d)$color <- rainbow(vcount(ring_d))
+plot(
+  ring_d,
+  layout = layout_in_circle,
+  vertex.size = 18,
+  edge.gradient = TRUE,
+  edge.width = 4,
+  edge.arrow.mode = 0
+)
+```
+
+```{r}
+plot(dg, edge.color = "navy", edge.alpha = 0.3, edge.width = 6)
+```
+
+### Self-loops
+
+Loops are drawn as small arcs. `edge.loop.angle` sets the direction of a loop
+(in radians) and the plot-level `loop.size` scales them:
+
+```{r}
+loops <- make_graph(~ A -+ A, A -+ B, B -+ B)
+plot(loops, edge.loop.angle = pi / 4, loop.size = 1.2, edge.arrow.size = 0.6)
+```
+
+## Edge labels
+
+Edge labels are added with `edge.label` and styled with the matching
+`edge.label.*` controls, including a halo (`edge.label.halo`) just like vertex
+labels. `edge.label.x` / `edge.label.y` override the automatic placement.
+
+```{r}
+plot(
+  dg,
+  edge.label = c("a", "b", "c", "d"),
+  edge.label.color = "black",
+  edge.label.cex = 1.2,
+  edge.label.family = "sans",
+  edge.label.halo = "yellow",
+  edge.label.halo.width = 0.4,
+  edge.arrow.size = 0.6
+)
+```
+
+## Colours and palettes
+
+igraph provides perceptually sensible palettes:
+`categorical_pal()` for unordered categories, `sequential_pal()` for ordered
+magnitudes, `diverging_pal()` for signed data, and `r_pal()` for R's classic
+palette.
+
+```{r fig.width = 8, fig.height = 2.4}
+op <- par(mfrow = c(1, 4), mar = c(0, 1, 2, 1))
+pie(rep(1, 8), col = categorical_pal(8), main = "categorical_pal(8)")
+pie(rep(1, 9), col = sequential_pal(9), main = "sequential_pal(9)")
+pie(rep(1, 9), col = diverging_pal(9), main = "diverging_pal(9)")
+pie(rep(1, 8), col = r_pal(8), main = "r_pal(8)")
+par(op)
+```
+
+When a vertex/edge colour is given as a factor or integer, it indexes into the
+active `palette`:
+
+```{r}
+plot(
+  g,
+  vertex.color = as.factor(V(g)$gender),
+  palette = categorical_pal(8),
+  vertex.size = 30
+)
+```
+
+## Scales and legends
+
+Passing a raw colour vector means igraph never learns what the colours *mean*,
+so it cannot explain them. The `scale_*()` helpers fix this: they map a data
+column to an aesthetic **and record the mapping**, so `plot()` can draw a
+matching guide automatically.
+
+`scale_color()` on a discrete variable produces a categorical legend:
+
+```{r}
+plot(
+  g,
+  vertex.color = scale_color(V(g)$gender, name = "Gender"),
+  vertex.size = 30
+)
+```
+
+On a numeric variable it produces a continuous **colourbar**:
+
+```{r}
+plot(
+  g,
+  vertex.color = scale_color(degree(g), name = "Degree"),
+  vertex.size = 30
+)
+```
+
+`scale_size()` maps a numeric variable to a size range and draws a size legend:
+
+```{r}
+plot(
+  g,
+  vertex.size = scale_size(degree(g), range = c(10, 35), name = "Degree"),
+  vertex.color = "lightgrey"
+)
+```
+
+The `legend` argument controls placement: `TRUE` (default, right side),
+`"left"`, `"top"`, `"bottom"`, or `FALSE` to suppress the guide. Multiple scales
+combine into one guide region:
+
+```{r}
+plot(
+  g,
+  vertex.color = scale_color(V(g)$gender, name = "Gender"),
+  vertex.size = scale_size(degree(g), range = c(12, 34), name = "Degree"),
+  legend = "bottom"
+)
+```
+
+## Decluttering with `label_top()`
+
+On large graphs, labelling every vertex is unreadable. `label_top()` keeps only
+the highest-ranking labels by some metric and blanks the rest with `NA` (which
+`plot()` omits):
+
+```{r}
+big <- sample_gnp(40, 0.08)
+plot(
+  big,
+  vertex.size = 6,
+  vertex.label = label_top(degree(big), n = 5),
+  vertex.label.dist = 1,
+  vertex.label.color = "black"
+)
+```
+
+Use `prop` to keep a fraction instead of a count, and `decreasing = FALSE` to
+keep the lowest:
+
+```{r}
+plot(
+  big,
+  vertex.size = 6,
+  vertex.label = label_top(degree(big), prop = 0.1, decreasing = FALSE),
+  vertex.label.dist = 1,
+  vertex.label.color = "black"
+)
+```
+
+To label everything above a fixed cutoff you don't need the helper —
+`ifelse(metric > cutoff, labels, NA)` works directly.
+
+## Highlighting groups
+
+`mark.groups` draws a smoothed, filled polygon "under" a set of vertices. The
+fill, border, smoothness, padding and border width are set by `mark.col`,
+`mark.border`, `mark.shape`, `mark.expand` and `mark.lwd`:
+
+```{r}
+plot(
+  g,
+  vertex.size = 25,
+  mark.groups = list(c("Alice", "Himari", "Moshe"), c("Nang", "Samira")),
+  mark.col = c("#ffd9d9", "#d9ecff"),
+  mark.border = c("tomato", "steelblue"),
+  mark.shape = 1 / 2,
+  mark.expand = 20,
+  mark.lwd = 2
+)
+```
+
+## Annotations and frame
+
+Plot-level titles and axes follow base graphics conventions: `main`, `sub`,
+`xlab`, `ylab`, `axes` and `frame.plot`.
+
+```{r}
+plot(
+  g,
+  vertex.size = 25,
+  main = "Friendship network",
+  sub = "an igraph example",
+  xlab = "x",
+  ylab = "y",
+  axes = TRUE,
+  frame.plot = TRUE
+)
+```
+
+## Custom vertex shapes
+
+You can register your own shape with `add_shape()`. A shape is defined by a
+*clip* function (where edges stop) and a *plot* function (how the vertex is
+drawn); `shape_noclip` and `shape_noplot` are no-op building blocks, and
+`shapes("circle")$clip` reuses an existing clipper.
+
+```{r}
+mytriangle <- function(coords, v = NULL, params) {
+  vertex.color <- params("vertex", "color")
+  if (length(vertex.color) != 1 && !is.null(v)) {
+    vertex.color <- vertex.color[v]
+  }
+  vertex.size <- params("vertex", "size")
+  if (length(vertex.size) != 1 && !is.null(v)) {
+    vertex.size <- vertex.size[v]
+  }
+  symbols(
+    x = coords[, 1], y = coords[, 2], bg = vertex.color,
+    stars = cbind(vertex.size, vertex.size, vertex.size),
+    add = TRUE, inches = FALSE
+  )
+}
+
+add_shape("triangle", clip = shapes("circle")$clip, plot = mytriangle)
+
+plot(
+  g,
+  vertex.shape = "triangle",
+  vertex.color = "seagreen",
+  vertex.size = 40
+)
+```
+
+`shape_noclip` (edges run all the way to the centre) and `shape_noplot` (draw
+nothing) are the no-op building blocks; registering a shape from them gives an
+"invisible" vertex that still carries a label:
+
+```{r}
+add_shape("blank", clip = shape_noclip, plot = shape_noplot)
+plot(g, vertex.shape = "blank", vertex.label.dist = 0)
+```
+
+## Setting defaults {#setting-defaults}
+
+`igraph_options()` sets defaults for every subsequent plot, and `igraph_opt()`
+reads one back. Plotting options use the same `vertex.` / `edge.` prefixes:
+
+```{r}
+old <- igraph_options(
+  vertex.color = "orange",
+  vertex.size = 30,
+  edge.color = "grey70"
+)
+plot(g)
+igraph_opt("vertex.color") # read one option back
+igraph_options(old) # restore
+```
+
+The full precedence order, from highest to lowest, is:
+
+1. an explicit argument to `plot()`,
+2. a vertex/edge/graph attribute,
+3. an `igraph_options()` setting,
+4. the built-in default.
+
+Setting `igraph_options(annotate.plot = TRUE)` makes `plot()` annotate the
+figure with the graph's name and its vertex/edge counts by default.
+
+## SVG export with tooltips
+
+`as_svg()` renders a graph to a standalone SVG. Beyond crisp vector output, it
+tags each vertex and edge with element IDs and a `<title>`, so the SVG has
+hover tooltips with **no JavaScript dependency**. The `tooltips` argument picks
+which vertex attribute to use for the titles (defaulting to the vertex name).
+
+```{r}
+svg <- as_svg(g, width = 6, height = 6, tooltips = "gender")
+# write to a file ...
+tmp <- tempfile(fileext = ".svg")
+cat(svg, file = tmp)
+substr(svg, 1, 60)
+```
+
+Each vertex becomes `<g id="vertex-N"><title>...</title>...</g>` and each edge a
+matching group, so downstream tools (or a browser) can offer hover and click
+interactions. Embedded directly into this page, hovering a vertex shows its
+tooltip:
+
+```{r results = "asis", echo = TRUE}
+cat(as_svg(g, width = 6, height = 6, tooltips = "gender", vertex.size = 30))
+```
+
+## Where to go next
+
+* The per-function reference: <https://r.igraph.org/reference/>, in particular
+  `?plot.igraph` and `?igraph.plotting` for the full list of parameters.
+* The main [igraph](igraph.html) introduction for graph construction and
+  analysis.
+
+```{r}
+sessionInfo()
+```

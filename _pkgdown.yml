@@ -19,6 +19,8 @@ navbar:
     articles:
       text: Articles
       menu:
+      - text: Plotting graphs
+        href: articles/plotting.html
       - text: Installation FAQs
         href: articles/installation-troubleshooting.html
       - text: -------
