@@ -534,15 +534,14 @@ i.hide_zero_frame <- function(color, width) {
   vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "circles",
       x = coords[, 1],
       y = coords[, 2],
+      dim = vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      circles = vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -553,15 +552,14 @@ i.hide_zero_frame <- function(color, width) {
       vertex.size,
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
-        symbols(
+        i.r_symbols(
+          "circles",
           x = x,
           y = y,
+          dim = size,
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          circles = size,
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -689,15 +687,14 @@ i.hide_zero_frame <- function(color, width) {
   vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "squares",
       x = coords[, 1],
       y = coords[, 2],
+      dim = 2 * vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      squares = 2 * vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -708,15 +705,14 @@ i.hide_zero_frame <- function(color, width) {
       vertex.size,
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
-        symbols(
+        i.r_symbols(
+          "squares",
           x = x,
           y = y,
+          dim = 2 * size,
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          squares = 2 * size,
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -938,15 +934,14 @@ i.hide_zero_frame <- function(color, width) {
   vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "rectangles",
       x = coords[, 1],
       y = coords[, 2],
+      dim = 2 * vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      rectangles = 2 * vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -958,15 +953,14 @@ i.hide_zero_frame <- function(color, width) {
       vertex.size[, 2],
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, size2, lwd) {
-        symbols(
+        i.r_symbols(
+          "rectangles",
           x = x,
           y = y,
+          dim = 2 * cbind(size, size2),
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          rectangles = 2 * cbind(size, size2),
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -1192,7 +1186,7 @@ mypie <- function(
   for (i in 1:nx) {
     n <- max(2, floor(edges * dx[i]))
     P <- t2xy(seq.int(values[i], values[i + 1], length.out = n))
-    polygon(
+    i.r_polygon(
       x + c(P$x, 0),
       y + c(P$y, 0),
       density = density[i],
@@ -1348,7 +1342,7 @@ mypie <- function(
 
   for (i in seq_len(nrow(coords))) {
     vsp2 <- vertex.size[i]
-    rasterImage(
+    i.r_raster(
       images[[whichImage[i]]],
       coords[i, 1] - vsp2,
       coords[i, 2] - vsp2,
@@ -1376,7 +1370,7 @@ mypie <- function(
 
   for (i in seq_len(nrow(coords))) {
     ras <- if (!is.list(raster) || length(raster) == 1) raster else raster[[i]]
-    rasterImage(
+    i.r_raster(
       ras,
       coords[i, 1] - size[i],
       coords[i, 2] - size2[i],

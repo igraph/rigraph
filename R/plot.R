@@ -64,7 +64,7 @@ i.plot.bezier <- function(
   arr.w
 ) {
   p <- i.compute.bezier(cp, points)
-  polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
+  i.r_polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
   if (arr == 1 || arr == 3) {
     igraph.Arrows(
       p[1, ncol(p) - 1],
@@ -179,7 +179,7 @@ i.draw.loop <- function(
       ly <- lab.y
     }
 
-    text(
+    i.r_text(
       lx,
       ly,
       label,
@@ -206,16 +206,13 @@ i.init_plot_canvas <- function(
   main,
   sub
 ) {
-  plot(
-    0,
-    0,
-    type = "n",
-    xlab = xlab,
-    ylab = ylab,
+  i.r_init_canvas(
     xlim = xlim,
     ylim = ylim,
+    xlab = xlab,
+    ylab = ylab,
     axes = axes,
-    frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
+    frame.plot = frame.plot,
     asp = asp,
     main = main,
     sub = sub
@@ -400,7 +397,7 @@ i.draw_vertex_labels <- function(
       shift <- sqrt((nx - x)^2 + (ny - y)^2)
       lead <- drawn & shift > pmax(hh, 1e-6)
       if (any(lead)) {
-        segments(x[lead], y[lead], nx[lead], ny[lead], col = "grey60", lwd = 0.5)
+        i.r_segments(x[lead], y[lead], nx[lead], ny[lead], col = "grey60", lwd = 0.5)
       }
       x <- nx
       y <- ny
@@ -409,7 +406,7 @@ i.draw_vertex_labels <- function(
 
   invisible(mapply(
     function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
-      text(
+      i.r_text(
         x0,
         y0,
         labels = lbl,
@@ -1056,7 +1053,7 @@ plot.igraph <- function(
 
     invisible(mapply(
       function(x, y, label, col, family, font, cex) {
-        text(
+        i.r_text(
           x,
           y,
           labels = label,
@@ -2093,7 +2090,7 @@ i.draw_gradient_path <- function(px, py, col_from, col_to, lwd, lty, n = 40) {
   ramp <- grDevices::colorRamp(c(col_from, col_to), alpha = TRUE)
   m <- ramp(seq(0, 1, length.out = n - 1)) # one RGBA row per segment
   cols <- grDevices::rgb(m[, 1], m[, 2], m[, 3], alpha = m[, 4], maxColorValue = 255)
-  segments(rx[-n], ry[-n], rx[-1], ry[-1], col = cols, lwd = lwd, lty = lty)
+  i.r_segments(rx[-n], ry[-n], rx[-1], ry[-1], col = cols, lwd = lwd, lty = lty)
   invisible(NULL)
 }
 
@@ -2181,7 +2178,7 @@ igraph.Arrows <- function(
           sh.lty[i]
         )
       } else {
-        segments(
+        i.r_segments(
           sx1,
           sy1,
           sx2,
@@ -2221,7 +2218,7 @@ igraph.Arrows <- function(
           sh.lty[i]
         )
       } else {
-        lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+        i.r_polyline(spl, col = sh.col[i], lwd = sh.lwd[i], lty = sh.lty[i])
       }
       label_x[i] <- spl$x[round(2 / 3 * length(spl$x))]
       label_y[i] <- spl$y[round(2 / 3 * length(spl$y))]
@@ -2251,7 +2248,7 @@ igraph.Arrows <- function(
           sh.lty[i]
         )
       } else {
-        lines(path$x, path$y, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+        i.r_polyline(path$x, path$y, col = sh.col[i], lwd = sh.lwd[i], lty = sh.lty[i])
       }
       np <- length(path$x)
       mid <- max(1L, round(np / 2))
@@ -2279,9 +2276,9 @@ igraph.Arrows <- function(
       yhead <- py2 + r.arr * sin(ttheta) / uin[2]
 
       if (open) {
-        lines(xhead, yhead, lwd = h.lwd[i], col = h.col.bo[i], lty = h.lty[i])
+        i.r_polyline(xhead, yhead, col = h.col.bo[i], lwd = h.lwd[i], lty = h.lty[i])
       } else {
-        polygon(
+        i.r_polygon(
           xhead,
           yhead,
           col = h.col[i],
@@ -2332,7 +2329,7 @@ igraph.polygon <- function(
 
   cl <- convex_hull(pp)
 
-  xspline(
+  i.r_xspline(
     cl$rescoords,
     shape = shape,
     open = FALSE,
