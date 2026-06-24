@@ -595,6 +595,24 @@ plot.igraph <- function(
   x1 <- ec[, 3]
   y1 <- ec[, 4]
 
+  # Stage 1: resolve the per-edge aesthetics into one table (length ecount),
+  # then slice it by loop-edge / non-loop-edge index instead of repeating the
+  # `if (length(x) > 1) x[idx]` idiom for every parameter.
+  edge_aes <- i.edge_aes_table(
+    color = edge.color,
+    width = edge.width,
+    lty = edge.lty,
+    arrow.mode = arrow.mode,
+    arrow.size = arrow.size,
+    arrow.width = arrow.width,
+    curved = curved,
+    label.color = edge.label.color,
+    label.family = edge.label.family,
+    label.font = edge.label.font,
+    label.cex = edge.label.cex,
+    n = ecount(graph)
+  )
+
   ################################################################
   ## add the loop edges
   if (length(loops.e) > 0) {
@@ -609,27 +627,13 @@ plot.igraph <- function(
       la <- la[loops.e]
     }
 
-    # Stage 1: resolve the per-edge aesthetics into a table once, then slice it
-    # by loop-edge index instead of repeating `if (length(x) > 1) x[loops.e]`.
-    edge_aes <- i.edge_aes_table(
-      color = edge.color,
-      width = edge.width,
-      lty = edge.lty,
-      arrow.mode = arrow.mode,
-      arrow.size = arrow.size,
-      curved = curved,
-      label.color = edge.label.color,
-      label.family = edge.label.family,
-      label.font = edge.label.font,
-      label.cex = edge.label.cex,
-      n = ecount(graph)
-    )
     loop_aes <- vctrs::vec_slice(edge_aes, loops.e)
     ec <- loop_aes$color
     ew <- loop_aes$width
     lty <- loop_aes$lty
     arr <- loop_aes$arrow.mode
     asize <- loop_aes$arrow.size
+    aw <- loop_aes$arrow.width
     lcol <- loop_aes$label.color
     lfam <- loop_aes$label.family
     lfon <- loop_aes$label.font
@@ -730,7 +734,7 @@ plot.igraph <- function(
       width = ew,
       arr = arr,
       arrow.size = asize,
-      arr.w = arrow.width,
+      arr.w = aw,
       lab.x = loop.labx,
       lab.y = loop.laby,
       loopSize = adjusted_loop_size,
@@ -741,24 +745,18 @@ plot.igraph <- function(
   ################################################################
   ## non-loop edges
   if (length(x0) != 0) {
-    if (length(edge.color) > 1) {
-      edge.color <- edge.color[nonloops.e]
-    }
-    if (length(edge.width) > 1) {
-      edge.width <- edge.width[nonloops.e]
-    }
-    if (length(edge.lty) > 1) {
-      edge.lty <- edge.lty[nonloops.e]
-    }
-    if (length(arrow.mode) > 1) {
-      arrow.mode <- arrow.mode[nonloops.e]
-    }
-    if (length(arrow.size) > 1) {
-      arrow.size <- arrow.size[nonloops.e]
-    }
-    if (length(curved) > 1) {
-      curved <- curved[nonloops.e]
-    }
+    # Slice the edge aesthetic table to the non-loop edges; every column is now
+    # length(nonloops.e), so the per-arrow-code branch can index by `valid`
+    # directly. (This also fixes a former double-slice of `curved`.)
+    nl_aes <- vctrs::vec_slice(edge_aes, nonloops.e)
+    edge.color <- nl_aes$color
+    edge.width <- nl_aes$width
+    edge.lty <- nl_aes$lty
+    arrow.mode <- nl_aes$arrow.mode
+    arrow.size <- nl_aes$arrow.size
+    arrow.width <- nl_aes$arrow.width
+    curved <- nl_aes$curved
+
     if (length(unique(arrow.mode)) == 1) {
       lc <- igraph.Arrows(
         x0,
@@ -781,25 +779,13 @@ plot.igraph <- function(
       lc.y <- lc$lab.y
     } else {
       ## different kinds of arrows drawn separately as 'arrows' cannot
-      ## handle a vector as the 'code' argument
-      curved <- rep(curved, length.out = ecount(graph))[nonloops.e]
-      lc.x <- lc.y <- numeric(length(curved))
+      ## handle a vector as the 'code' argument. Every aesthetic is already
+      ## length(nonloops.e), so subset each by `valid` consistently.
+      lc.x <- lc.y <- numeric(length(nonloops.e))
       for (code in 0:3) {
         valid <- arrow.mode == code
         if (!any(valid)) {
           next
-        }
-        ec <- edge.color
-        if (length(ec) > 1) {
-          ec <- ec[valid]
-        }
-        ew <- edge.width
-        if (length(ew) > 1) {
-          ew <- ew[valid]
-        }
-        el <- edge.lty
-        if (length(el) > 1) {
-          el <- el[valid]
         }
         lc <- igraph.Arrows(
           x0[valid],
@@ -807,15 +793,15 @@ plot.igraph <- function(
           x1[valid],
           y1[valid],
           code = code,
-          sh.col = ec,
-          h.col = ec,
-          sh.lwd = ew,
+          sh.col = edge.color[valid],
+          h.col = edge.color[valid],
+          sh.lwd = edge.width[valid],
           h.lwd = 1,
           h.lty = 1,
-          sh.lty = el,
+          sh.lty = edge.lty[valid],
           open = FALSE,
-          size = arrow.size,
-          width = arrow.width,
+          size = arrow.size[valid],
+          width = arrow.width[valid],
           curved = curved[valid]
         )
         lc.x[valid] <- lc$lab.x
@@ -829,28 +815,12 @@ plot.igraph <- function(
       lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
     }
 
-    ecol <- edge.label.color
-    if (length(ecol) > 1) {
-      ecol <- ecol[nonloops.e]
-    }
-    efam <- edge.label.family
-    if (length(efam) > 1) {
-      efam <- efam[nonloops.e]
-    }
-
-    efon <- edge.label.font
-    if (length(efon) > 1) {
-      efon <- efon[nonloops.e]
-    }
-    ecex <- edge.label.cex
-    if (length(ecex) > 1) {
-      ecex <- ecex[nonloops.e]
-    }
-    en <- length(nonloops.e)
-    ecol <- rep(ecol, length.out = en)
-    efam <- rep(efam, length.out = en)
-    efon <- rep(efon, length.out = en)
-    ecex <- rep(ecex, length.out = en)
+    # Edge-label aesthetics come from the same non-loop slice (already recycled
+    # to length(nonloops.e)).
+    ecol <- nl_aes$label.color
+    efam <- nl_aes$label.family
+    efon <- nl_aes$label.font
+    ecex <- nl_aes$label.cex
 
     invisible(mapply(
       function(x, y, label, col, family, font, cex) {

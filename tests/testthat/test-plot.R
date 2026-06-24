@@ -274,6 +274,31 @@ test_that("vector edge params are subset correctly across loops and non-loops", 
   vdiffr::expect_doppelganger("vector-edge-params-loops", vector_edge_params)
 })
 
+test_that("mixed arrow modes with per-edge curved/size and loops render correctly", {
+  # Regression guard for B2: the per-arrow-code branch used to double-slice
+  # `curved` and ignored per-edge arrow.size/width. Exercise that path with a
+  # graph that has loops, non-loop edges, mixed arrow modes, and per-edge
+  # curved + arrow.size vectors.
+  skip_if_not_installed("vdiffr")
+
+  mixed_modes_curved <- function() {
+    # edges: 1->2, 2->3, 3->1, 1->1 (loop), 2->2 (loop)
+    g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 1, 2, 2), directed = TRUE)
+    V(g)$x <- c(0, 2, 1)
+    V(g)$y <- c(0, 0, 2)
+    ne <- ecount(g)
+    plot(
+      g,
+      edge.arrow.mode = c(0, 1, 2, 2, 3),
+      edge.curved = c(0.3, -0.3, 0.5, 0, 0),
+      edge.arrow.size = c(0.5, 1, 1.5, 1, 1),
+      edge.width = c(1, 2, 3, 1, 2),
+      margin = 0.3
+    )
+  }
+  vdiffr::expect_doppelganger("mixed-modes-curved", mixed_modes_curved)
+})
+
 test_that("multi-edges are auto-curved", {
   skip_if_not_installed("vdiffr")
 

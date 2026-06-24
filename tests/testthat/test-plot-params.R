@@ -105,6 +105,7 @@ test_that("i.edge_aes_table expands scalars and is sliceable by edge index", {
     lty = 1,
     arrow.mode = 2,
     arrow.size = 1,
+    arrow.width = 1,
     curved = 0,
     label.color = "blue",
     label.family = "serif",
