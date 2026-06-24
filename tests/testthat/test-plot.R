@@ -265,6 +265,24 @@ test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
   expect_gt(length(bigger$r.arr), length(head$r.arr))
 })
 
+test_that("i.arrow_shaft_endpoints adjusts only the arrowed end", {
+  uin <- c(1, 1) # square device units for a clean check
+  # horizontal edge (0,0) -> (10,0). code 2 adjusts the from-end (x1d), leaving
+  # the to-end at 10; the shift is r.seg along theta1 (= -1 here).
+  s2 <- i.arrow_shaft_endpoints(0, 0, 10, 0, code = 2, r.seg = 1, uin = uin)
+  expect_equal(s2$sx2, 10) # to-end unchanged for code 2
+  expect_equal(s2$sx1, -1) # from-end shifted by r.seg
+  # code 0 (no arrows): both ends unchanged
+  s0 <- i.arrow_shaft_endpoints(0, 0, 10, 0, code = 0, r.seg = 1, uin = uin)
+  expect_equal(c(s0$sx1, s0$sx2), c(0, 10))
+})
+
+test_that("i.edge_label_pos is two thirds from the target toward the source", {
+  pos <- i.edge_label_pos(0, 0, 9, 0)
+  expect_equal(unname(pos["x"]), 3) # 9 - 2/3*9, i.e. 2/3 from (9,0) toward (0,0)
+  expect_equal(unname(pos["y"]), 0)
+})
+
 test_that("vector edge params are subset correctly across loops and non-loops", {
   # Guards the per-edge subsetting of loop vs non-loop edges in plot.igraph().
   skip_if_not_installed("vdiffr")

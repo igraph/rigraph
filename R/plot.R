@@ -1832,6 +1832,49 @@ i.arrowhead_shape <- function(cin, w, delta) {
   )
 }
 
+# Pure geometry (Stage 2): shaft segment endpoints for a single edge, pulled
+# back from the vertices by `r.seg` at whichever end carries an arrowhead (per
+# `code`) so the shaft does not poke through the head. `uin` is the
+# inches-per-user-unit scale from 1/xyinch(). Returns sx1/sy1/sx2/sy2.
+i.arrow_shaft_endpoints <- function(x1, y1, x2, y2, code, r.seg, uin) {
+  theta1 <- atan2((y1 - y2) * uin[2], (x1 - x2) * uin[1])
+  theta2 <- atan2((y2 - y1) * uin[2], (x2 - x1) * uin[1])
+  x1d <- y1d <- x2d <- y2d <- 0
+  if (code %in% c(1, 3)) {
+    x2d <- r.seg * cos(theta2) / uin[1]
+    y2d <- r.seg * sin(theta2) / uin[2]
+  }
+  if (code %in% c(2, 3)) {
+    x1d <- r.seg * cos(theta1) / uin[1]
+    y1d <- r.seg * sin(theta1) / uin[2]
+  }
+  list(sx1 = x1 + x1d, sy1 = y1 + y1d, sx2 = x2 + x2d, sy2 = y2 + y2d)
+}
+
+# Pure geometry (Stage 2): label anchor two thirds of the way along a straight
+# edge from (x2, y2) toward (x1, y1).
+i.edge_label_pos <- function(x1, y1, x2, y2) {
+  phi <- atan2(y1 - y2, x1 - x2)
+  r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
+  c(x = x2 + 2 / 3 * r * cos(phi), y = y2 + 2 / 3 * r * sin(phi))
+}
+
+# Geometry (Stage 2): the X-spline of a curved edge. The control point is offset
+# from the edge midpoint perpendicular to the shaft by `lambda`. Returns the
+# xspline() coordinate list (draw = FALSE; needs an active device).
+i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
+  midx <- (x1 + x2) / 2
+  midy <- (y1 + y2) / 2
+  spx <- midx - lambda * 1 / 2 * (sy2 - sy1)
+  spy <- midy + lambda * 1 / 2 * (sx2 - sx1)
+  xspline(
+    x = c(sx1, spx, sx2),
+    y = c(sy1, spy, sy2),
+    shape = 1,
+    draw = FALSE
+  )
+}
+
 #' @importFrom graphics par xyinch segments xspline lines polygon
 # Vectorized and modular igraph.Arrows refactor
 igraph.Arrows <- function(
@@ -1887,24 +1930,12 @@ igraph.Arrows <- function(
     deg.arr <- head$deg.arr
     r.arr <- head$r.arr
 
-    theta1 <- atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
-    theta2 <- atan2((y2[i] - y1[i]) * uin[2], (x2[i] - x1[i]) * uin[1])
     r.seg <- cin * sh.adj
-
-    x1d <- y1d <- x2d <- y2d <- 0
-    if (code %in% c(1, 3)) {
-      x2d <- r.seg * cos(theta2) / uin[1]
-      y2d <- r.seg * sin(theta2) / uin[2]
-    }
-    if (code %in% c(2, 3)) {
-      x1d <- r.seg * cos(theta1) / uin[1]
-      y1d <- r.seg * sin(theta1) / uin[2]
-    }
-
-    sx1 <- x1[i] + x1d
-    sy1 <- y1[i] + y1d
-    sx2 <- x2[i] + x2d
-    sy2 <- y2[i] + y2d
+    sh <- i.arrow_shaft_endpoints(x1[i], y1[i], x2[i], y2[i], code, r.seg, uin)
+    sx1 <- sh$sx1
+    sy1 <- sh$sy1
+    sx2 <- sh$sx2
+    sy2 <- sh$sy2
 
     if (!curved[i]) {
       segments(
@@ -1916,22 +1947,21 @@ igraph.Arrows <- function(
         col = sh.col[i],
         lty = sh.lty[i]
       )
-      phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
-      r <- sqrt((x1[i] - x2[i])^2 + (y1[i] - y2[i])^2)
-      label_x[i] <- x2[i] + 2 / 3 * r * cos(phi)
-      label_y[i] <- y2[i] + 2 / 3 * r * sin(phi)
+      lab <- i.edge_label_pos(x1[i], y1[i], x2[i], y2[i])
+      label_x[i] <- lab[["x"]]
+      label_y[i] <- lab[["y"]]
     } else {
       lambda <- if (is.numeric(curved)) curved[i] else 0.5
-      midx <- (x1[i] + x2[i]) / 2
-      midy <- (y1[i] + y2[i]) / 2
-      spx <- midx - lambda * 1 / 2 * (sy2 - sy1)
-      spy <- midy + lambda * 1 / 2 * (sx2 - sx1)
-
-      spl <- xspline(
-        x = c(sx1, spx, sx2),
-        y = c(sy1, spy, sy2),
-        shape = 1,
-        draw = FALSE
+      spl <- i.curved_spline(
+        x1[i],
+        y1[i],
+        x2[i],
+        y2[i],
+        sx1,
+        sy1,
+        sx2,
+        sy2,
+        lambda
       )
       lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
       label_x[i] <- spl$x[round(2 / 3 * length(spl$x))]
