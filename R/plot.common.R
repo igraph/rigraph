@@ -4909,13 +4909,16 @@ i.edge.default <- list(
   arrow.width = 1
 )
 
+# Note: there is intentionally no `frame` default. plot.igraph() reads
+# `frame.plot`, which falls back to `axes` when unset
+# (ifelse(is.null(frame.plot), axes, frame.plot)); a `frame = FALSE` entry here
+# was dead config that was never read.
 i.plot.default <- list(
   palette = categorical_pal(8),
   layout = layout_nicely,
   margin = c(0, 0, 0, 0),
   rescale = TRUE,
   asp = 1,
-  frame = FALSE,
   main = i.get.main,
   sub = "",
   xlab = i.get.xlab,
