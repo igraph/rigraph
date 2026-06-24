@@ -568,6 +568,15 @@ plot.igraph <- function(
   if (is.function(curved)) {
     curved <- curved(graph)
   }
+  edge.style <- as.character(params("edge", "style"))
+  i.valid_edge_styles <- c("auto", "straight", "arc", "elbow", "diagonal")
+  bad.style <- setdiff(unique(edge.style), i.valid_edge_styles)
+  if (length(bad.style) > 0) {
+    cli::cli_abort(c(
+      "Invalid {.arg edge.style} value{?s}: {.val {bad.style}}.",
+      "i" = "Valid styles are {.val {i.valid_edge_styles}}."
+    ))
+  }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
   if (nrow(layout) != vc) {
@@ -841,6 +850,7 @@ plot.igraph <- function(
     label.family = edge.label.family,
     label.font = edge.label.font,
     label.cex = edge.label.cex,
+    style = edge.style,
     n = ecount(graph)
   )
 
@@ -927,6 +937,7 @@ plot.igraph <- function(
     arrow.size <- nl_aes$arrow.size
     arrow.width <- nl_aes$arrow.width
     curved <- nl_aes$curved
+    edge.style <- nl_aes$style
 
     if (length(unique(arrow.mode)) == 1) {
       lc <- igraph.Arrows(
@@ -944,7 +955,8 @@ plot.igraph <- function(
         h.lty = 1,
         size = arrow.size,
         width = arrow.width,
-        curved = curved
+        curved = curved,
+        style = edge.style
       )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
@@ -973,7 +985,8 @@ plot.igraph <- function(
           open = FALSE,
           size = arrow.size[valid],
           width = arrow.width[valid],
-          curved = curved[valid]
+          curved = curved[valid],
+          style = edge.style[valid]
         )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
@@ -1977,6 +1990,35 @@ i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
   )
 }
 
+# Geometry (Stage 2): two-corner orthogonal ("elbow") path between two points.
+# Leaves along the dominant axis (larger absolute delta), turns at the midpoint
+# of that axis, crosses, then turns into the target. Returns list(x, y) of the
+# four polyline vertices.
+i.elbow_path <- function(x0, y0, x1, y1) {
+  if (abs(x1 - x0) >= abs(y1 - y0)) {
+    mid <- (x0 + x1) / 2
+    list(x = c(x0, mid, mid, x1), y = c(y0, y0, y1, y1))
+  } else {
+    mid <- (y0 + y1) / 2
+    list(x = c(x0, x0, x1, x1), y = c(y0, mid, mid, y1))
+  }
+}
+
+# Geometry (Stage 2): smooth "diagonal" S-curve between two points, a cubic
+# Bezier whose control points sit on the dominant axis so the curve leaves and
+# enters along that axis. Returns list(x, y) sampled at `n` points.
+i.diagonal_path <- function(x0, y0, x1, y1, n = 30) {
+  if (abs(x1 - x0) >= abs(y1 - y0)) {
+    mid <- (x0 + x1) / 2
+    cp <- rbind(c(x0, y0), c(mid, y0), c(mid, y1), c(x1, y1))
+  } else {
+    mid <- (y0 + y1) / 2
+    cp <- rbind(c(x0, y0), c(x0, mid), c(x1, mid), c(x1, y1))
+  }
+  p <- i.compute.bezier(cp, n)
+  list(x = p[1, ], y = p[2, ])
+}
+
 #' @importFrom graphics par xyinch segments xspline lines polygon
 # Vectorized and modular igraph.Arrows refactor
 igraph.Arrows <- function(
@@ -1996,7 +2038,8 @@ igraph.Arrows <- function(
   h.col.bo = sh.col,
   h.lwd = sh.lwd,
   h.lty = sh.lty,
-  curved = FALSE
+  curved = FALSE,
+  style = "auto"
 ) {
   n <- length(x1)
 
@@ -2009,6 +2052,7 @@ igraph.Arrows <- function(
   size <- recycle(size)
   width <- recycle(width)
   curved <- recycle(curved)
+  style <- recycle(as.character(style))
   sh.lwd <- recycle(sh.lwd)
   sh.col <- recycle(sh.col)
   sh.lty <- recycle(sh.lty)
@@ -2039,7 +2083,12 @@ igraph.Arrows <- function(
     sx2 <- sh$sx2
     sy2 <- sh$sy2
 
-    if (!curved[i]) {
+    eff_style <- style[i]
+    if (eff_style == "auto") {
+      eff_style <- if (!curved[i]) "straight" else "arc"
+    }
+
+    if (eff_style == "straight") {
       segments(
         sx1,
         sy1,
@@ -2052,8 +2101,12 @@ igraph.Arrows <- function(
       lab <- i.edge_label_pos(x1[i], y1[i], x2[i], y2[i])
       label_x[i] <- lab[["x"]]
       label_y[i] <- lab[["y"]]
-    } else {
+    } else if (eff_style == "arc") {
       lambda <- if (is.numeric(curved)) curved[i] else 0.5
+      if (style[i] == "arc" && lambda == 0) {
+        # an explicit arc on an otherwise-straight edge needs a strength
+        lambda <- 0.3
+      }
       spl <- i.curved_spline(
         x1[i],
         y1[i],
@@ -2076,6 +2129,29 @@ igraph.Arrows <- function(
       if (code %in% c(1, 3)) {
         x2[i] <- spl$x[round(1 / 4 * length(spl$x))]
         y2[i] <- spl$y[round(1 / 4 * length(spl$y))]
+      }
+    } else {
+      # elbow or diagonal: a polyline between the shaft endpoints
+      path <- if (eff_style == "elbow") {
+        i.elbow_path(sx1, sy1, sx2, sy2)
+      } else {
+        i.diagonal_path(sx1, sy1, sx2, sy2)
+      }
+      lines(path$x, path$y, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      np <- length(path$x)
+      mid <- max(1L, round(np / 2))
+      label_x[i] <- path$x[mid]
+      label_y[i] <- path$y[mid]
+
+      # arrowhead end-tangents: align the head with the path's final/first
+      # segment (mirrors the arc branch's near-end reassignment)
+      if (code %in% c(2, 3)) {
+        x1[i] <- path$x[np - 1]
+        y1[i] <- path$y[np - 1]
+      }
+      if (code %in% c(1, 3)) {
+        x2[i] <- path$x[2]
+        y2[i] <- path$y[2]
       }
     }
 

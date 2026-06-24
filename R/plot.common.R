@@ -329,6 +329,20 @@
 #'
 #'   This parameter is currently ignored by [rglplot()].
 #' }
+#' \item{style}{
+#'   The routing style for (non-loop) edges, a character scalar or vector,
+#'   replicated to the number of edges. One of:
+#'   \describe{
+#'     \item{`"auto"`}{(default) straight, unless `curved` is non-zero (in which
+#'       case an arc), reproducing the historical behaviour.}
+#'     \item{`"straight"`}{a straight segment.}
+#'     \item{`"arc"`}{a curved arc; the strength is taken from `curved` if it is
+#'       non-zero, otherwise a default is used.}
+#'     \item{`"elbow"`}{a two-corner orthogonal (right-angle) connector.}
+#'     \item{`"diagonal"`}{a smooth S-curve with axis-aligned ends.}
+#'   }
+#'   This parameter is ignored for loop edges and by [rglplot()].
+#' }
 #' \item{arrow.mode}{
 #'   This parameter can be used to specify for which edges should arrows be drawn.
 #'   If this parameter is given by the user (in either of the three ways)
@@ -4912,7 +4926,8 @@ i.edge.default <- list(
   arrow.size = 1,
   arrow.mode = i.get.arrow.mode,
   curved = curve_multiple,
-  arrow.width = 1
+  arrow.width = 1,
+  style = "auto"
 )
 
 # Note: there is intentionally no `frame` default. plot.igraph() reads

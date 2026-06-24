@@ -270,6 +270,30 @@ test_that("i.loop_angles distributes loops and returns aligned vectors", {
   expect_false(res$angles[1] == res$angles[2])
 })
 
+test_that("i.elbow_path is a two-corner route along the dominant axis", {
+  # horizontal dominant: leave horizontally, turn at mid-x
+  e <- i.elbow_path(0, 0, 10, 4)
+  expect_equal(e$x, c(0, 5, 5, 10))
+  expect_equal(e$y, c(0, 0, 4, 4))
+  # vertical dominant: leave vertically, turn at mid-y
+  v <- i.elbow_path(0, 0, 4, 10)
+  expect_equal(v$x, c(0, 0, 4, 4))
+  expect_equal(v$y, c(0, 5, 5, 10))
+  # endpoints preserved
+  expect_equal(c(e$x[1], e$y[1]), c(0, 0))
+  expect_equal(c(e$x[4], e$y[4]), c(10, 4))
+})
+
+test_that("i.diagonal_path is a smooth path between the endpoints", {
+  d <- i.diagonal_path(0, 0, 10, 4, n = 30)
+  expect_length(d$x, 30)
+  expect_equal(c(d$x[1], d$y[1]), c(0, 0))
+  expect_equal(c(d$x[30], d$y[30]), c(10, 4))
+  expect_true(all(is.finite(d$x)) && all(is.finite(d$y)))
+  # deterministic
+  expect_equal(d, i.diagonal_path(0, 0, 10, 4, n = 30))
+})
+
 test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
   # Pure geometry helper extracted from igraph.Arrows (Stage 2); device-free.
   head <- i.arrowhead_shape(cin = 0.2, w = 1.5, delta = 0.01)
@@ -407,6 +431,44 @@ test_that("vector edge params are subset correctly across loops and non-loops", 
     )
   }
   vdiffr::expect_doppelganger("vector-edge-params-loops", vector_edge_params)
+})
+
+test_that("edge.style routes edges (elbow / diagonal / mixed / arc)", {
+  skip_if_not_installed("vdiffr")
+
+  tree <- function() {
+    g <- make_tree(15, children = 2)
+    g$layout <- layout_as_tree(g)
+    g
+  }
+
+  vdiffr::expect_doppelganger("edge-style-elbow", function() {
+    plot(tree(), edge.style = "elbow", vertex.size = 12, edge.arrow.size = 0.4)
+  })
+
+  vdiffr::expect_doppelganger("edge-style-diagonal", function() {
+    plot(tree(), edge.style = "diagonal", vertex.size = 12, edge.arrow.size = 0.4)
+  })
+
+  vdiffr::expect_doppelganger("edge-style-mixed", function() {
+    g <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1), directed = TRUE)
+    # deliberately non-axis-aligned so elbow/diagonal visibly bend
+    g$layout <- cbind(c(0, 2, 1.6, 0.3), c(1, 1.4, 0, -0.2))
+    plot(
+      g,
+      edge.style = c("straight", "arc", "elbow", "diagonal"),
+      vertex.size = 20,
+      edge.arrow.size = 0.5,
+      margin = 0.2
+    )
+  })
+
+  vdiffr::expect_doppelganger("edge-style-arc-single", function() {
+    # "arc" forces a curve on single (otherwise straight) edges
+    g <- make_ring(5, directed = TRUE)
+    g$layout <- layout_in_circle(g)
+    plot(g, edge.style = "arc", vertex.size = 20, edge.arrow.size = 0.5)
+  })
 })
 
 test_that("mixed arrow modes with per-edge curved/size and loops render correctly", {

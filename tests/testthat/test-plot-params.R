@@ -111,11 +111,13 @@ test_that("i.edge_aes_table expands scalars and is sliceable by edge index", {
     label.family = "serif",
     label.font = 1,
     label.cex = 1,
+    style = "auto",
     n = 3
   )
   expect_equal(nrow(tbl), 3)
   expect_equal(tbl$color, rep("red", 3)) # scalar expanded
   expect_equal(tbl$width, c(1, 2, 3)) # vector preserved
+  expect_equal(tbl$style, rep("auto", 3))
 
   sliced <- vctrs::vec_slice(tbl, c(1, 3))
   expect_equal(nrow(sliced), 2)
