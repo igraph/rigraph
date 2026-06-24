@@ -60,3 +60,54 @@ test_that("plot.igraph still works (drawing through the base renderer)", {
   withr::defer(grDevices::dev.off())
   expect_silent(plot(make_ring(5)))
 })
+
+test_that("the record renderer captures a backend-neutral draw list", {
+  g <- make_ring(3)
+  V(g)$name <- c("x", "y", "z")
+  rec <- i.renderer_record()
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+  i.with_renderer(rec, plot(g, vertex.size = 20))
+
+  prims <- rec$.state$prims
+  expect_gt(length(prims), 0)
+  types <- vapply(prims, function(p) p$type, character(1))
+  expect_true("symbols" %in% types) # vertices
+  expect_true(any(types %in% c("segments", "polyline"))) # edges
+  grp <- vapply(
+    prims,
+    function(p) if (is.null(p$group)) "" else p$group$type,
+    character(1)
+  )
+  expect_true("vertices" %in% grp)
+  expect_true("edge" %in% grp)
+  # colours are canonicalised to hex
+  sym <- prims[[which(types == "symbols")[1]]]
+  expect_match(sym$bg[1], "^#")
+})
+
+test_that("as_svg produces well-formed SVG with per-vertex/edge ids and titles", {
+  skip_if_not_installed("xml2")
+  g <- make_ring(4, directed = TRUE)
+  V(g)$name <- c("a", "b", "c", "d")
+  svg <- as_svg(g)
+
+  # well-formed
+  expect_s3_class(xml2::read_xml(svg), "xml_document")
+  # one group per vertex and per edge
+  expect_length(gregexpr("id='vertex-", svg, fixed = TRUE)[[1]], 4)
+  expect_length(gregexpr("id='edge-", svg, fixed = TRUE)[[1]], 4)
+  # tooltip from the vertex name
+  expect_match(svg, "<title>a</title>", fixed = TRUE)
+})
+
+test_that("as_svg writes to a file and honours the tooltips argument", {
+  g <- make_ring(3)
+  V(g)$kind <- c("p", "q", "r")
+
+  f <- withr::local_tempfile(fileext = ".svg")
+  out <- as_svg(g, file = f, tooltips = "kind")
+  expect_true(file.exists(f))
+  expect_match(paste(readLines(f), collapse = ""), "<svg", fixed = TRUE)
+  expect_match(out, "<title>p</title>", fixed = TRUE)
+})

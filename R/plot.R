@@ -999,7 +999,8 @@ plot.igraph <- function(
         curved = curved,
         style = edge.style,
         gradient = edge.gradient,
-        col.to = col.to.e
+        col.to = col.to.e,
+        ids = nonloops.e
       )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
@@ -1031,7 +1032,8 @@ plot.igraph <- function(
           curved = curved[valid],
           style = edge.style[valid],
           gradient = edge.gradient[valid],
-          col.to = col.to.e[valid]
+          col.to = col.to.e[valid],
+          ids = nonloops.e[valid]
         )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
@@ -1078,6 +1080,14 @@ plot.igraph <- function(
   ################################################################
   # add the vertices
   if (vc > 0) {
+    vtitles <- if (!is.null(i.render_state$vertex_titles)) {
+      i.render_state$vertex_titles
+    } else if ("name" %in% vertex_attr_names(graph)) {
+      as.character(V(graph)$name)
+    } else {
+      as.character(seq_len(vc))
+    }
+    i.r_group_begin("vertices", title = vtitles)
     if (length(unique(shape)) == 1) {
       .igraph.shapes[[shape[1]]]$plot(layout, params = params)
     } else {
@@ -1089,6 +1099,7 @@ plot.igraph <- function(
         )
       })
     }
+    i.r_group_end()
   }
 
   ################################################################
@@ -2116,7 +2127,8 @@ igraph.Arrows <- function(
   curved = FALSE,
   style = "auto",
   gradient = FALSE,
-  col.to = sh.col
+  col.to = sh.col,
+  ids = NULL
 ) {
   n <- length(x1)
 
@@ -2146,6 +2158,9 @@ igraph.Arrows <- function(
   label_y <- numeric(n)
 
   for (i in seq_len(n)) {
+    if (!is.null(ids)) {
+      i.r_group_begin("edge", id = ids[i])
+    }
     cin <- size[i] * par("cin")[2]
     w <- width[i] * (ARROW_WIDTH_FACTOR / cin)
     delta <- sqrt(h.lwd[i]) * par("cin")[2] * 0.005
@@ -2302,6 +2317,9 @@ igraph.Arrows <- function(
         y1[i],
         atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
       )
+    }
+    if (!is.null(ids)) {
+      i.r_group_end()
     }
   }
 
