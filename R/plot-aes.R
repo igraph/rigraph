@@ -38,7 +38,13 @@ i.aes_table <- function(cols, n) {
 # aesthetics with special length semantics (vertex `label.adj`, list-valued
 # `pie`/`raster`, the vertex-attribute `arrow.mode` "a:" form) are intentionally
 # excluded by the caller.
-i.check_aes_lengths <- function(vertex, edge, vc, ec, call = rlang::caller_env()) {
+i.check_aes_lengths <- function(
+  vertex,
+  edge,
+  vc,
+  ec,
+  call = rlang::caller_env()
+) {
   one_scope <- function(lst, n, scope, plural) {
     for (nm in names(lst)) {
       len <- length(lst[[nm]])

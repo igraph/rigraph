@@ -179,9 +179,21 @@ test_that("non-circle clip functions return the right column structure", {
   all_clip <- c("square", "csquare", "rectangle", "crectangle", "vrectangle", "pie")
   for (shape_name in all_clip) {
     clip_func <- shapes(shape_name)$clip
-    expect_equal(ncol(clip_func(coords, el, params, "from")), 2, info = shape_name)
-    expect_equal(ncol(clip_func(coords, el, params, "to")), 2, info = shape_name)
-    expect_equal(ncol(clip_func(coords, el, params, "both")), 4, info = shape_name)
+    expect_equal(
+      ncol(clip_func(coords, el, params, "from")),
+      2,
+      info = shape_name
+    )
+    expect_equal(
+      ncol(clip_func(coords, el, params, "to")),
+      2,
+      info = shape_name
+    )
+    expect_equal(
+      ncol(clip_func(coords, el, params, "both")),
+      4,
+      info = shape_name
+    )
   }
 })
 
@@ -197,8 +209,14 @@ test_that("non-centered clip functions clip endpoints inward", {
   # edge), so the inward check applies only to the non-centered shapes.
   for (shape_name in c("square", "rectangle", "vrectangle", "pie")) {
     clip_func <- shapes(shape_name)$clip
-    expect_true(clip_func(coords, el, params, "from")[1, 1] > 0, info = shape_name)
-    expect_true(clip_func(coords, el, params, "to")[1, 1] < 10, info = shape_name)
+    expect_true(
+      clip_func(coords, el, params, "from")[1, 1] > 0,
+      info = shape_name
+    )
+    expect_true(
+      clip_func(coords, el, params, "to")[1, 1] < 10,
+      info = shape_name
+    )
   }
 })
 
@@ -211,7 +229,9 @@ test_that("clip functions select vertex.size per endpoint from a vector", {
   el <- rbind(c(1, 2), c(3, 4))
   sizes <- c(2, 2, 8, 8) # vertices 3 and 4 are larger
   params <- function(type, param) {
-    if (param == "size") return(sizes)
+    if (param == "size") {
+      return(sizes)
+    }
     1
   }
 

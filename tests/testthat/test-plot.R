@@ -237,12 +237,22 @@ test_that("mark border linewidth", {
 test_that("i.repel_labels separates overlapping labels and is deterministic", {
   # two boxes stacked at the same point should be pushed apart (here along y,
   # the smaller-overlap axis)
-  r <- i.repel_labels(x = c(0, 0), y = c(0, 0), hw = c(0.2, 0.2), hh = c(0.1, 0.1))
+  r <- i.repel_labels(
+    x = c(0, 0),
+    y = c(0, 0),
+    hw = c(0.2, 0.2),
+    hh = c(0.1, 0.1)
+  )
   sep <- max(abs(r$x[1] - r$x[2]), abs(r$y[1] - r$y[2]))
   expect_gt(sep, 0.15) # was 0; now nearly the box height sum (0.2)
 
   # deterministic
-  r2 <- i.repel_labels(x = c(0, 0), y = c(0, 0), hw = c(0.2, 0.2), hh = c(0.1, 0.1))
+  r2 <- i.repel_labels(
+    x = c(0, 0),
+    y = c(0, 0),
+    hw = c(0.2, 0.2),
+    hh = c(0.1, 0.1)
+  )
   expect_equal(r, r2)
 
   # a single label is returned unchanged
@@ -386,7 +396,12 @@ test_that("scales draw matching legends and colorbars", {
   vdiffr::expect_doppelganger("scale-legend-bottom-horizontal", function() {
     g <- ring10()
     V(g)$grp <- rep(c("alpha", "beta"), 5)
-    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = "bottom")
+    plot(
+      g,
+      vertex.color = scale_color(V(g)$grp),
+      vertex.size = 20,
+      legend = "bottom"
+    )
   })
 
   vdiffr::expect_doppelganger("scale-continuous-colorbar-top", function() {
@@ -397,7 +412,12 @@ test_that("scales draw matching legends and colorbars", {
   vdiffr::expect_doppelganger("scale-edge-color", function() {
     g <- ring10()
     E(g)$type <- rep(c("x", "y"), length.out = ecount(g))
-    plot(g, edge.color = scale_color(E(g)$type), edge.width = 2, vertex.size = 15)
+    plot(
+      g,
+      edge.color = scale_color(E(g)$type),
+      edge.width = 2,
+      vertex.size = 15
+    )
   })
 })
 
@@ -425,7 +445,12 @@ test_that("legend = FALSE suppresses the guide", {
     g <- make_ring(10)
     g$layout <- layout_in_circle(g)
     V(g)$grp <- rep(c("alpha", "beta"), 5)
-    plot(g, vertex.color = scale_color(V(g)$grp), vertex.size = 20, legend = FALSE)
+    plot(
+      g,
+      vertex.color = scale_color(V(g)$grp),
+      vertex.size = 20,
+      legend = FALSE
+    )
   })
 })
 
@@ -474,7 +499,13 @@ test_that("edge.gradient blends source to target vertex colours", {
     g <- make_graph(c(1, 2, 2, 3, 3, 1), directed = TRUE)
     g$layout <- layout_in_circle(g)
     V(g)$color <- c("red", "green", "blue")
-    plot(g, edge.gradient = TRUE, edge.style = "arc", vertex.size = 24, edge.width = 3)
+    plot(
+      g,
+      edge.gradient = TRUE,
+      edge.style = "arc",
+      vertex.size = 24,
+      edge.width = 3
+    )
   })
 })
 
@@ -510,7 +541,12 @@ test_that("edge.style routes edges (elbow / diagonal / mixed / arc)", {
   })
 
   vdiffr::expect_doppelganger("edge-style-diagonal", function() {
-    plot(tree(), edge.style = "diagonal", vertex.size = 12, edge.arrow.size = 0.4)
+    plot(
+      tree(),
+      edge.style = "diagonal",
+      vertex.size = 12,
+      edge.arrow.size = 0.4
+    )
   })
 
   vdiffr::expect_doppelganger("edge-style-mixed", function() {
@@ -624,7 +660,13 @@ test_that("add = TRUE overlays a second graph on the same device", {
     g1$layout <- cbind(c(0, 1, 2), c(0, 0, 0))
     g2 <- make_ring(3)
     g2$layout <- cbind(c(0, 1, 2), c(1, 1, 1))
-    plot(g1, rescale = FALSE, xlim = c(-1, 3), ylim = c(-1, 2), vertex.color = "red")
+    plot(
+      g1,
+      rescale = FALSE,
+      xlim = c(-1, 3),
+      ylim = c(-1, 2),
+      vertex.color = "red"
+    )
     plot(g2, rescale = FALSE, add = TRUE, vertex.color = "blue")
   }
   vdiffr::expect_doppelganger("add-overlay", overlay)

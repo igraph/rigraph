@@ -138,7 +138,9 @@ scale_size <- function(
   vals[na] <- na.value
 
   breaks <- pretty(x[!na], n = 3)
-  breaks <- breaks[breaks >= min(x, na.rm = TRUE) & breaks <= max(x, na.rm = TRUE)]
+  breaks <- breaks[
+    breaks >= min(x, na.rm = TRUE) & breaks <= max(x, na.rm = TRUE)
+  ]
   guide <- list(
     aesthetic = "size",
     type = "discrete",
@@ -325,8 +327,21 @@ i.colorbar <- function(g, x, y, xjust, yjust, horiz, plot) {
     bar_top <- top - title_h
     if (horiz) {
       xs <- seq(left, left + barw, length.out = 51)
-      graphics::rect(xs[-51], bar_top - barh, xs[-1], bar_top, col = fill, border = NA)
-      graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
+      graphics::rect(
+        xs[-51],
+        bar_top - barh,
+        xs[-1],
+        bar_top,
+        col = fill,
+        border = NA
+      )
+      graphics::rect(
+        left,
+        bar_top - barh,
+        left + barw,
+        bar_top,
+        border = "grey40"
+      )
       ylab <- bar_top - barh - 0.2 * lh
       graphics::text(left, ylab, labs[1], adj = c(0, 1), cex = 0.8)
       graphics::text(left + barw, ylab, labs[2], adj = c(1, 1), cex = 0.8)
@@ -335,8 +350,21 @@ i.colorbar <- function(g, x, y, xjust, yjust, horiz, plot) {
       }
     } else {
       ys <- seq(bar_top - barh, bar_top, length.out = 51)
-      graphics::rect(left, ys[-51], left + barw, ys[-1], col = fill, border = NA)
-      graphics::rect(left, bar_top - barh, left + barw, bar_top, border = "grey40")
+      graphics::rect(
+        left,
+        ys[-51],
+        left + barw,
+        ys[-1],
+        col = fill,
+        border = NA
+      )
+      graphics::rect(
+        left,
+        bar_top - barh,
+        left + barw,
+        bar_top,
+        border = "grey40"
+      )
       graphics::text(
         left + barw + 0.02,
         c(bar_top - barh, bar_top),

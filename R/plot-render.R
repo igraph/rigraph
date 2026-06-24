@@ -48,10 +48,24 @@ i.renderer_base <- function() {
         sub = sub
       )
     },
-    segments = function(x0, y0, x1, y1, col = graphics::par("fg"), lwd = 1, lty = 1) {
+    segments = function(
+      x0,
+      y0,
+      x1,
+      y1,
+      col = graphics::par("fg"),
+      lwd = 1,
+      lty = 1
+    ) {
       graphics::segments(x0, y0, x1, y1, col = col, lwd = lwd, lty = lty)
     },
-    polyline = function(x, y = NULL, col = graphics::par("fg"), lwd = 1, lty = 1) {
+    polyline = function(
+      x,
+      y = NULL,
+      col = graphics::par("fg"),
+      lwd = 1,
+      lty = 1
+    ) {
       graphics::lines(x, y, col = col, lwd = lwd, lty = lty)
     },
     polygon = function(
@@ -168,7 +182,13 @@ i.col_to_hex <- function(col) {
   ok <- !is.na(col)
   if (any(ok)) {
     m <- grDevices::col2rgb(col[ok], alpha = TRUE)
-    out[ok] <- grDevices::rgb(m[1, ], m[2, ], m[3, ], m[4, ], maxColorValue = 255)
+    out[ok] <- grDevices::rgb(
+      m[1, ],
+      m[2, ],
+      m[3, ],
+      m[4, ],
+      maxColorValue = 255
+    )
   }
   out
 }
@@ -190,42 +210,124 @@ i.renderer_record <- function() {
   base <- i.renderer_base()
   list(
     .state = st,
-    init_canvas = function(xlim, ylim, xlab, ylab, axes, frame.plot, asp, main, sub) {
+    init_canvas = function(
+      xlim,
+      ylim,
+      xlab,
+      ylab,
+      axes,
+      frame.plot,
+      asp,
+      main,
+      sub
+    ) {
       # establish the coordinate system (discarded device); record the range
       base$init_canvas(xlim, ylim, "", "", FALSE, FALSE, asp, "", "")
       st$canvas <- list(usr = graphics::par("usr"))
     },
     segments = function(x0, y0, x1, y1, col = NA, lwd = 1, lty = 1) {
-      add(list(type = "segments", x0 = x0, y0 = y0, x1 = x1, y1 = y1,
-               col = i.col_to_hex(col), lwd = lwd))
+      add(list(
+        type = "segments",
+        x0 = x0,
+        y0 = y0,
+        x1 = x1,
+        y1 = y1,
+        col = i.col_to_hex(col),
+        lwd = lwd
+      ))
     },
     polyline = function(x, y = NULL, col = NA, lwd = 1, lty = 1) {
       xy <- grDevices::xy.coords(x, y)
-      add(list(type = "polyline", x = xy$x, y = xy$y, col = i.col_to_hex(col), lwd = lwd))
+      add(list(
+        type = "polyline",
+        x = xy$x,
+        y = xy$y,
+        col = i.col_to_hex(col),
+        lwd = lwd
+      ))
     },
-    polygon = function(x, y = NULL, col = NA, border = NULL, lwd = 1, lty = 1,
-                       density = NULL, angle = 45, ...) {
+    polygon = function(
+      x,
+      y = NULL,
+      col = NA,
+      border = NULL,
+      lwd = 1,
+      lty = 1,
+      density = NULL,
+      angle = 45,
+      ...
+    ) {
       xy <- grDevices::xy.coords(x, y)
-      add(list(type = "polygon", x = xy$x, y = xy$y, col = i.col_to_hex(col),
-               border = i.col_to_hex(border), lwd = lwd))
+      add(list(
+        type = "polygon",
+        x = xy$x,
+        y = xy$y,
+        col = i.col_to_hex(col),
+        border = i.col_to_hex(border),
+        lwd = lwd
+      ))
     },
-    xspline = function(x, y = NULL, shape, open, col = NA, border = NA, lwd = 1) {
+    xspline = function(
+      x,
+      y = NULL,
+      shape,
+      open,
+      col = NA,
+      border = NA,
+      lwd = 1
+    ) {
       pts <- grDevices::xspline(x, y, shape = shape, open = open, draw = FALSE)
-      add(list(type = "polygon", x = pts$x, y = pts$y, col = i.col_to_hex(col),
-               border = i.col_to_hex(border), lwd = lwd))
+      add(list(
+        type = "polygon",
+        x = pts$x,
+        y = pts$y,
+        col = i.col_to_hex(col),
+        border = i.col_to_hex(border),
+        lwd = lwd
+      ))
     },
-    text = function(x, y, labels, col = NA, family = "", font = 1, cex = 1,
-                    srt = 0, adj = NULL) {
-      add(list(type = "text", x = x, y = y, labels = labels,
-               col = i.col_to_hex(col), cex = cex, srt = srt, adj = adj))
+    text = function(
+      x,
+      y,
+      labels,
+      col = NA,
+      family = "",
+      font = 1,
+      cex = 1,
+      srt = 0,
+      adj = NULL
+    ) {
+      add(list(
+        type = "text",
+        x = x,
+        y = y,
+        labels = labels,
+        col = i.col_to_hex(col),
+        cex = cex,
+        srt = srt,
+        adj = adj
+      ))
     },
     symbols = function(kind, x, y, dim, bg = NA, fg = NA, lwd = 1) {
-      add(list(type = "symbols", kind = kind, x = x, y = y, dim = dim,
-               bg = i.col_to_hex(bg), fg = i.col_to_hex(fg), lwd = lwd))
+      add(list(
+        type = "symbols",
+        kind = kind,
+        x = x,
+        y = y,
+        dim = dim,
+        bg = i.col_to_hex(bg),
+        fg = i.col_to_hex(fg),
+        lwd = lwd
+      ))
     },
     raster = function(image, xleft, ybottom, xright, ytop) {
-      add(list(type = "raster", xleft = xleft, ybottom = ybottom,
-               xright = xright, ytop = ytop))
+      add(list(
+        type = "raster",
+        xleft = xleft,
+        ybottom = ybottom,
+        xright = xright,
+        ytop = ytop
+      ))
     },
     group_begin = function(type, id = NULL, title = NULL) {
       st$group <- list(type = type, id = id, title = title)
@@ -273,10 +375,17 @@ i.svg_from_record <- function(state, wpx, hpx) {
   Y <- function(y) hpx - (y - usr[3]) * syr
   S <- function(s) s * sxr # user-length -> px (asp == 1)
 
-  pts_str <- function(x, y) paste(sprintf("%.2f,%.2f", X(x), Y(y)), collapse = " ")
+  pts_str <- function(x, y) {
+    paste(sprintf("%.2f,%.2f", X(x), Y(y)), collapse = " ")
+  }
   stroke <- function(hex, lwd) {
     sc <- i.svg_col(hex)
-    sprintf("stroke='%s' stroke-opacity='%s' stroke-width='%.2f'", sc[1], sc[2], max(lwd, 0.1))
+    sprintf(
+      "stroke='%s' stroke-opacity='%s' stroke-width='%.2f'",
+      sc[1],
+      sc[2],
+      max(lwd, 0.1)
+    )
   }
   fillattr <- function(hex) {
     fc <- i.svg_col(hex)
@@ -290,38 +399,70 @@ i.svg_from_record <- function(state, wpx, hpx) {
       segments = {
         n <- length(p$x0)
         col <- rep(p$col, length.out = n)
-        vapply(seq_len(n), function(k) {
-          sprintf(
-            "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' %s fill='none'/>",
-            X(p$x0[k]), Y(p$y0[k]), X(p$x1[k]), Y(p$y1[k]),
-            stroke(col[k], p$lwd)
-          )
-        }, character(1))
+        vapply(
+          seq_len(n),
+          function(k) {
+            sprintf(
+              "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' %s fill='none'/>",
+              X(p$x0[k]),
+              Y(p$y0[k]),
+              X(p$x1[k]),
+              Y(p$y1[k]),
+              stroke(col[k], p$lwd)
+            )
+          },
+          character(1)
+        )
       },
       polyline = sprintf(
         "<polyline points='%s' fill='none' %s/>",
-        pts_str(p$x, p$y), stroke(p$col, p$lwd)
+        pts_str(p$x, p$y),
+        stroke(p$col, p$lwd)
       ),
       polygon = sprintf(
         "<polygon points='%s' %s %s/>",
-        pts_str(p$x, p$y), fillattr(p$col), stroke(p$border, p$lwd)
+        pts_str(p$x, p$y),
+        fillattr(p$col),
+        stroke(p$border, p$lwd)
       ),
       text = {
         n <- length(p$x)
         col <- rep(p$col, length.out = n)
         adj <- if (is.null(p$adj)) 0.5 else p$adj[1]
-        anchor <- c("start", "middle", "end")[findInterval(adj, c(-Inf, 0.25, 0.75, Inf))]
+        anchor <- c("start", "middle", "end")[findInterval(
+          adj,
+          c(-Inf, 0.25, 0.75, Inf)
+        )]
         fc <- i.svg_col(col[1])
         lab <- as.character(p$labels)
         keep <- which(!is.na(lab) & nzchar(lab)) # base skips NA/empty labels
-        vapply(keep, function(k) {
-          rot <- if (p$srt != 0) sprintf(" transform='rotate(%.2f %.2f %.2f)'", -p$srt, X(p$x[k]), Y(p$y[k])) else ""
-          sprintf(
-            "<text x='%.2f' y='%.2f' font-size='%.1f' text-anchor='%s' dominant-baseline='central' fill='%s' fill-opacity='%s'%s>%s</text>",
-            X(p$x[k]), Y(p$y[k]), p$cex * 12, anchor, fc[1], fc[2], rot,
-            i.svg_attr_esc(lab[k])
-          )
-        }, character(1))
+        vapply(
+          keep,
+          function(k) {
+            rot <- if (p$srt != 0) {
+              sprintf(
+                " transform='rotate(%.2f %.2f %.2f)'",
+                -p$srt,
+                X(p$x[k]),
+                Y(p$y[k])
+              )
+            } else {
+              ""
+            }
+            sprintf(
+              "<text x='%.2f' y='%.2f' font-size='%.1f' text-anchor='%s' dominant-baseline='central' fill='%s' fill-opacity='%s'%s>%s</text>",
+              X(p$x[k]),
+              Y(p$y[k]),
+              p$cex * 12,
+              anchor,
+              fc[1],
+              fc[2],
+              rot,
+              i.svg_attr_esc(lab[k])
+            )
+          },
+          character(1)
+        )
       },
       symbols = {
         n <- length(p$x)
@@ -333,33 +474,66 @@ i.svg_from_record <- function(state, wpx, hpx) {
           if (!is.null(vtitle)) {
             kk <- vtitle$counter
             idattr <- sprintf(" id='vertex-%d'", kk)
-            ttl <- if (!is.null(vtitle$titles)) sprintf("<title>%s</title>", i.svg_attr_esc(vtitle$titles[kk])) else ""
+            ttl <- if (!is.null(vtitle$titles)) {
+              sprintf("<title>%s</title>", i.svg_attr_esc(vtitle$titles[kk]))
+            } else {
+              ""
+            }
             vtitle$counter <- kk + 1L
           } else {
             ttl <- ""
           }
           shp <- if (p$kind == "circles") {
-            sprintf("<circle cx='%.2f' cy='%.2f' r='%.2f' %s %s/>",
-                    X(p$x[k]), Y(p$y[k]), S(p$dim[k]), fillattr(bg[k]), stroke(fg[k], p$lwd))
+            sprintf(
+              "<circle cx='%.2f' cy='%.2f' r='%.2f' %s %s/>",
+              X(p$x[k]),
+              Y(p$y[k]),
+              S(p$dim[k]),
+              fillattr(bg[k]),
+              stroke(fg[k], p$lwd)
+            )
           } else if (p$kind == "squares") {
             h <- p$dim[k] / 2
-            sprintf("<rect x='%.2f' y='%.2f' width='%.2f' height='%.2f' %s %s/>",
-                    X(p$x[k] - h), Y(p$y[k] + h), S(p$dim[k]), S(p$dim[k]), fillattr(bg[k]), stroke(fg[k], p$lwd))
+            sprintf(
+              "<rect x='%.2f' y='%.2f' width='%.2f' height='%.2f' %s %s/>",
+              X(p$x[k] - h),
+              Y(p$y[k] + h),
+              S(p$dim[k]),
+              S(p$dim[k]),
+              fillattr(bg[k]),
+              stroke(fg[k], p$lwd)
+            )
           } else {
             # rectangles: dim is n x 2 (full width, height)
             w <- if (is.matrix(p$dim)) p$dim[k, 1] else p$dim[1]
             hh <- if (is.matrix(p$dim)) p$dim[k, 2] else p$dim[2]
-            sprintf("<rect x='%.2f' y='%.2f' width='%.2f' height='%.2f' %s %s/>",
-                    X(p$x[k] - w / 2), Y(p$y[k] + hh / 2), S(w), S(hh), fillattr(bg[k]), stroke(fg[k], p$lwd))
+            sprintf(
+              "<rect x='%.2f' y='%.2f' width='%.2f' height='%.2f' %s %s/>",
+              X(p$x[k] - w / 2),
+              Y(p$y[k] + hh / 2),
+              S(w),
+              S(hh),
+              fillattr(bg[k]),
+              stroke(fg[k], p$lwd)
+            )
           }
-          out[k] <- paste0(if (nzchar(idattr)) sprintf("<g%s>%s%s</g>", idattr, ttl, shp) else shp)
+          out[k] <- paste0(
+            if (nzchar(idattr)) {
+              sprintf("<g%s>%s%s</g>", idattr, ttl, shp)
+            } else {
+              shp
+            }
+          )
         }
         out
       },
       raster = sprintf(
         # v1 placeholder for sphere/raster shapes
         "<rect x='%.2f' y='%.2f' width='%.2f' height='%.2f' fill='#cccccc' stroke='#888888'/>",
-        X(p$xleft), Y(p$ytop), S(p$xright - p$xleft), S(p$ytop - p$ybottom)
+        X(p$xleft),
+        Y(p$ytop),
+        S(p$xright - p$xleft),
+        S(p$ytop - p$ybottom)
       ),
       character(0)
     )
@@ -371,7 +545,9 @@ i.svg_from_record <- function(state, wpx, hpx) {
   open_g <- FALSE
   vtitle <- NULL # environment-like tracker for vertex ids within a vertices group
 
-  group_key <- function(g) if (is.null(g)) "" else paste0(g$type, ":", if (is.null(g$id)) "" else g$id)
+  group_key <- function(g) {
+    if (is.null(g)) "" else paste0(g$type, ":", if (is.null(g$id)) "" else g$id)
+  }
 
   for (p in prims) {
     g <- p$group
@@ -389,7 +565,11 @@ i.svg_from_record <- function(state, wpx, hpx) {
           vtitle$counter <- 1L
           vtitle$titles <- g$title
         } else if (identical(g$type, "edge")) {
-          ttl <- if (!is.null(g$title)) sprintf("<title>%s</title>", i.svg_attr_esc(as.character(g$title))) else ""
+          ttl <- if (!is.null(g$title)) {
+            sprintf("<title>%s</title>", i.svg_attr_esc(as.character(g$title)))
+          } else {
+            ""
+          }
           body <- c(body, sprintf("<g id='edge-%s' class='igraph-edge'>%s", as.character(g$id), ttl))
         } else {
           body <- c(body, sprintf("<g class='igraph-%s'>", g$type))
@@ -433,7 +613,14 @@ i.svg_from_record <- function(state, wpx, hpx) {
 #' @param ... Further plotting parameters passed to [plot.igraph()].
 #' @return The SVG string, invisibly (also written to `file` if given).
 #' @export
-as_svg <- function(graph, file = NULL, width = 7, height = 7, tooltips = NULL, ...) {
+as_svg <- function(
+  graph,
+  file = NULL,
+  width = 7,
+  height = 7,
+  tooltips = NULL,
+  ...
+) {
   ensure_igraph(graph)
 
   titles <- if (!is.null(tooltips)) {
@@ -454,7 +641,11 @@ as_svg <- function(graph, file = NULL, width = 7, height = 7, tooltips = NULL, .
   on.exit(i.render_state$vertex_titles <- NULL, add = TRUE)
   i.with_renderer(rec, plot(graph, ...))
 
-  svg <- i.svg_from_record(rec$.state, wpx = round(width * 72), hpx = round(height * 72))
+  svg <- i.svg_from_record(
+    rec$.state,
+    wpx = round(width * 72),
+    hpx = round(height * 72)
+  )
   svg <- paste(svg, collapse = "\n")
   if (!is.null(file)) {
     writeLines(svg, file)

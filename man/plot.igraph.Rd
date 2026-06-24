@@ -18,6 +18,7 @@
   mark.expand = 15,
   mark.lwd = 1,
   loop.size = 1,
+  legend = TRUE,
   ...
 )
 }
@@ -68,6 +69,13 @@ groups.}
 of the network. The default loop size is 1. Larger values will produce larger
 loops.}
 
+\item{legend}{Controls drawing of legends/colorbars for any aesthetics
+supplied via \code{\link[=scale_color]{scale_color()}} / \code{\link[=scale_size]{scale_size()}}. The guide is drawn in the
+reserved outer margin on one side of the plot: \code{TRUE} (default) or
+\code{"right"} places it to the right, \code{"left"}/\code{"top"}/\code{"bottom"} on the
+corresponding side (\code{"top"}/\code{"bottom"} arrange entries horizontally);
+\code{FALSE} suppresses it. Has no effect when no scale is used.}
+
 \item{\dots}{Additional plotting parameters. See \link{igraph.plotting} for
 the complete list.}
 }
@@ -85,7 +93,7 @@ first, handtune the placement of the vertices, query the coordinates by the
 plot the graph to any R device.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident}{\code{incident()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident}{\code{incident()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

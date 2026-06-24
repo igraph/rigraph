@@ -394,8 +394,12 @@ i.draw_vertex_labels <- function(
     if (sum(drawn) > 1) {
       hw <- rep(0, vc)
       hh <- rep(0, vc)
-      hw[drawn] <- strwidth(label.text[drawn], cex = label.cex[drawn]) / 2 * 1.15
-      hh[drawn] <- strheight(label.text[drawn], cex = label.cex[drawn]) / 2 * 1.6
+      hw[drawn] <- strwidth(label.text[drawn], cex = label.cex[drawn]) /
+        2 *
+        1.15
+      hh[drawn] <- strheight(label.text[drawn], cex = label.cex[drawn]) /
+        2 *
+        1.6
       moved <- i.repel_labels(x[drawn], y[drawn], hw[drawn], hh[drawn])
       nx <- x
       ny <- y
@@ -405,7 +409,14 @@ i.draw_vertex_labels <- function(
       shift <- sqrt((nx - x)^2 + (ny - y)^2)
       lead <- drawn & shift > pmax(hh, 1e-6)
       if (any(lead)) {
-        i.r_segments(x[lead], y[lead], nx[lead], ny[lead], col = "grey60", lwd = 0.5)
+        i.r_segments(
+          x[lead],
+          y[lead],
+          nx[lead],
+          ny[lead],
+          col = "grey60",
+          lwd = 0.5
+        )
       }
       x <- nx
       y <- ny
@@ -1045,7 +1056,10 @@ plot.igraph <- function(
     col.to.e <- edge.color
     if (any(edge.gradient)) {
       to_hex <- function(x) {
-        grDevices::rgb(t(grDevices::col2rgb(x, alpha = TRUE)), maxColorValue = 255)
+        grDevices::rgb(
+          t(grDevices::col2rgb(x, alpha = TRUE)),
+          maxColorValue = 255
+        )
       }
       ealpha <- nl_aes$alpha
       grad_from <- i.apply_alpha(to_hex(vcol_base[el[, 1]]), ealpha)
@@ -2194,7 +2208,13 @@ i.draw_gradient_path <- function(px, py, col_from, col_to, lwd, lty, n = 40) {
   ry <- stats::approx(d, py, at)$y
   ramp <- grDevices::colorRamp(c(col_from, col_to), alpha = TRUE)
   m <- ramp(seq(0, 1, length.out = n - 1)) # one RGBA row per segment
-  cols <- grDevices::rgb(m[, 1], m[, 2], m[, 3], alpha = m[, 4], maxColorValue = 255)
+  cols <- grDevices::rgb(
+    m[, 1],
+    m[, 2],
+    m[, 3],
+    alpha = m[, 4],
+    maxColorValue = 255
+  )
   i.r_segments(rx[-n], ry[-n], rx[-1], ry[-1], col = cols, lwd = lwd, lty = lty)
   invisible(NULL)
 }
@@ -2357,7 +2377,13 @@ igraph.Arrows <- function(
           sh.lty[i]
         )
       } else {
-        i.r_polyline(path$x, path$y, col = sh.col[i], lwd = sh.lwd[i], lty = sh.lty[i])
+        i.r_polyline(
+          path$x,
+          path$y,
+          col = sh.col[i],
+          lwd = sh.lwd[i],
+          lty = sh.lty[i]
+        )
       }
       np <- length(path$x)
       mid <- max(1L, round(np / 2))
@@ -2385,7 +2411,13 @@ igraph.Arrows <- function(
       yhead <- py2 + r.arr * sin(ttheta) / uin[2]
 
       if (open) {
-        i.r_polyline(xhead, yhead, col = h.col.bo[i], lwd = h.lwd[i], lty = h.lty[i])
+        i.r_polyline(
+          xhead,
+          yhead,
+          col = h.col.bo[i],
+          lwd = h.lwd[i],
+          lty = h.lty[i]
+        )
       } else {
         i.r_polygon(
           xhead,

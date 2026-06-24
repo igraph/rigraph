@@ -118,7 +118,11 @@ test_that("a label halo emits the offset copies plus the real label in SVG", {
   V(g)$name <- c("aa", "bb", "cc")
 
   plain <- as_svg(g)
-  haloed <- as_svg(g, vertex.label.halo = "white", vertex.label.halo.width = 0.2)
+  haloed <- as_svg(
+    g,
+    vertex.label.halo = "white",
+    vertex.label.halo.width = 0.2
+  )
 
   expect_s3_class(xml2::read_xml(haloed), "xml_document")
   # the halo adds offset copies of every glyph, so there are strictly more

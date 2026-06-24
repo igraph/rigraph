@@ -77,7 +77,9 @@ test_that("i.apply_scales replaces scale args and collects guides", {
 })
 
 test_that("a scale's explicit name overrides the argument-name default", {
-  res <- i.apply_scales(list(vertex.color = scale_color(c("a", "b"), name = "Group")))
+  res <- i.apply_scales(list(
+    vertex.color = scale_color(c("a", "b"), name = "Group")
+  ))
   expect_equal(res$guides[[1]]$name, "Group")
 })
 
