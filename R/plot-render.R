@@ -42,7 +42,7 @@ i.renderer_base <- function() {
         xlim = xlim,
         ylim = ylim,
         axes = axes,
-        frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
+        frame.plot = if (is.null(frame.plot)) axes else frame.plot,
         asp = asp,
         main = main,
         sub = sub
@@ -447,11 +447,12 @@ as_svg <- function(graph, file = NULL, width = 7, height = 7, tooltips = NULL, .
   rec <- i.renderer_record()
   grDevices::pdf(NULL, width = width, height = height)
   on.exit(grDevices::dev.off(), add = TRUE)
-  i.with_renderer(rec, {
-    i.render_state$vertex_titles <- titles
-    on.exit(i.render_state$vertex_titles <- NULL, add = TRUE)
-    plot(graph, ...)
-  })
+
+  # plot.igraph() reads i.render_state$vertex_titles to title the per-vertex SVG
+  # groups; set it here (and reset on exit) rather than inside i.with_renderer().
+  i.render_state$vertex_titles <- titles
+  on.exit(i.render_state$vertex_titles <- NULL, add = TRUE)
+  i.with_renderer(rec, plot(graph, ...))
 
   svg <- i.svg_from_record(rec$.state, wpx = round(width * 72), hpx = round(height * 72))
   svg <- paste(svg, collapse = "\n")

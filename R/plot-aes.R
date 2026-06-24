@@ -7,10 +7,9 @@
 #   (at your option) any later version.
 ###################################################################
 
-# Turn resolved plotting parameters into a typed, rectangular aesthetic table
-# so that downstream code can slice it by
-# vertex/edge index instead of re-implementing the
-# `if (length(x) > 1) x[idx]` idiom for every parameter.
+# Turn resolved plotting parameters into a typed, rectangular aesthetic table so
+# that downstream code can slice it by vertex/edge index instead of
+# re-implementing the `if (length(x) > 1) x[idx]` idiom for every parameter.
 #
 # Aesthetic resolution itself (the precedence chain
 # argument > graph attribute > igraph option > default) still lives in
