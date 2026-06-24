@@ -316,7 +316,7 @@ test_that("i.diagonal_path is a smooth path between the endpoints", {
 })
 
 test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
-  # Pure geometry helper extracted from igraph.Arrows (Stage 2); device-free.
+  # Pure geometry helper extracted from igraph.Arrows; device-free.
   head <- i.arrowhead_shape(cin = 0.2, w = 1.5, delta = 0.01)
   expect_named(head, c("deg.arr", "r.arr"))
   expect_equal(length(head$deg.arr), length(head$r.arr))
@@ -535,7 +535,7 @@ test_that("edge.style routes edges (elbow / diagonal / mixed / arc)", {
 })
 
 test_that("mixed arrow modes with per-edge curved/size and loops render correctly", {
-  # Regression guard for B2: the per-arrow-code branch used to double-slice
+  # Regression guard: the per-arrow-code branch used to double-slice
   # `curved` and ignored per-edge arrow.size/width. Exercise that path with a
   # graph that has loops, non-loop edges, mixed arrow modes, and per-edge
   # curved + arrow.size vectors.
@@ -678,7 +678,7 @@ test_that("plot rescales correctly", {
   vdiffr::expect_doppelganger("rescale-coords", rescale_coords)
 })
 
-test_that("vertex label halo draws an outline (F6)", {
+test_that("vertex label halo draws an outline", {
   skip_if_not_installed("vdiffr")
 
   g <- make_ring(5)
@@ -699,7 +699,7 @@ test_that("vertex label halo draws an outline (F6)", {
   )
 })
 
-test_that("edge label halo draws an outline (F6)", {
+test_that("edge label halo draws an outline", {
   skip_if_not_installed("vdiffr")
 
   g <- make_ring(4, directed = TRUE)

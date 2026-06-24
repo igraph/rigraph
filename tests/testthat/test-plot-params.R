@@ -87,7 +87,7 @@ test_that("i.parse.plot.params() silently replaces NA labels with empty string",
 })
 
 # ---------------------------------------------------------------------------
-# Stage 1 aesthetic tables (i.aes_table / i.edge_aes_table)
+# Aesthetic tables (i.aes_table / i.edge_aes_table)
 # ---------------------------------------------------------------------------
 
 test_that("i.aes_table recycles columns to n rows", {

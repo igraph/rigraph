@@ -7,7 +7,7 @@
 #   (at your option) any later version.
 ###################################################################
 
-# Stage-3 rendering indirection (feature F5).
+# Rendering indirection.
 #
 # Drawing code emits primitives through the i.r_*() dispatchers instead of
 # calling base graphics directly. The dispatchers forward to the "current"
@@ -155,7 +155,7 @@ i.r_group_begin <- function(...) i.cur_renderer()$group_begin(...)
 i.r_group_end <- function(...) i.cur_renderer()$group_end(...)
 
 ###################################################################
-# Recording renderer + SVG writer (feature F5, phase 2)
+# Recording renderer + SVG writer
 ###################################################################
 
 # Canonicalise a colour vector to "#RRGGBBAA" hex (resolving palette indices and

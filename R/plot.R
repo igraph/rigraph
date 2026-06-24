@@ -195,7 +195,7 @@ i.draw.loop <- function(
   }
 }
 
-# Initialize the plotting canvas (Stage 4 device setup): an empty plot region
+# Initialize the plotting canvas: an empty plot region
 # with the requested limits, axes, aspect ratio and titles. Isolated from the
 # drawing orchestration in plot.igraph() so the latter reads as
 # setup -> edges -> vertices -> labels.
@@ -223,7 +223,7 @@ i.init_plot_canvas <- function(
   )
 }
 
-# Distribute self-loops around each vertex (Stage 2 geometry). For a vertex with
+# Distribute self-loops around each vertex. For a vertex with
 # k loops, place them evenly inside the largest angular gap between its incident
 # (non-loop) edges, and compute a narrowing factor that compresses the loops
 # when that gap is tight. Returns per-loop `angles` and `narrowing` vectors
@@ -339,7 +339,7 @@ i.repel_labels <- function(x, y, hw, hh, iter = 200, spring = 0.04) {
   list(x = px, y = py)
 }
 
-# Draw vertex labels (Stage 4), offset from each vertex by label.dist along
+# Draw vertex labels, offset from each vertex by label.dist along
 # label.degree. xpd = TRUE is scoped to this call so labels may spill outside
 # the plot region. With `repel = TRUE`, overlapping labels are nudged apart and
 # a leader line connects each moved label to its anchor. No-op for an empty
@@ -442,7 +442,7 @@ i.draw_vertex_labels <- function(
   ))
 }
 
-# Draw one label with an optional shadowtext halo for legibility (Stage 4).
+# Draw one label with an optional shadowtext halo for legibility.
 # `halo = NA` (the default) is exactly `i.r_text()` -> byte-identical to before.
 # Otherwise the glyphs are drawn `halo.steps` times offset on a circle of radius
 # (halo.width * strheight) in the `halo` colour, then the real text on top, which
@@ -923,7 +923,7 @@ plot.igraph <- function(
   x1 <- ec[, 3]
   y1 <- ec[, 4]
 
-  # Stage 1: resolve the per-edge aesthetics into one table (length ecount),
+  # Resolve the per-edge aesthetics into one table (length ecount),
   # then slice it by loop-edge / non-loop-edge index instead of repeating the
   # `if (length(x) > 1) x[idx]` idiom for every parameter.
   edge_aes <- i.edge_aes_table(
@@ -2073,7 +2073,7 @@ rglplot.igraph <- function(x, ...) {
 # This is taken from the IDPmisc package,
 # slightly modified: code argument added
 
-# Pure geometry (Stage 2): the outline of an arrowhead in polar coordinates
+# Pure geometry: the outline of an arrowhead in polar coordinates
 # (angle + radius from the tip), used by igraph.Arrows() to draw or outline the
 # head. Depends only on scalar inputs, so it is testable without a device.
 #   cin   arrow length, already scaled by the character size (par("cin"))
@@ -2090,7 +2090,7 @@ i.arrowhead_shape <- function(cin, w, delta) {
   )
 }
 
-# Pure geometry (Stage 2): shaft segment endpoints for a single edge, pulled
+# Pure geometry: shaft segment endpoints for a single edge, pulled
 # back from the vertices by `r.seg` at whichever end carries an arrowhead (per
 # `code`) so the shaft does not poke through the head. `uin` is the
 # inches-per-user-unit scale from 1/xyinch(). Returns sx1/sy1/sx2/sy2.
@@ -2109,7 +2109,7 @@ i.arrow_shaft_endpoints <- function(x1, y1, x2, y2, code, r.seg, uin) {
   list(sx1 = x1 + x1d, sy1 = y1 + y1d, sx2 = x2 + x2d, sy2 = y2 + y2d)
 }
 
-# Pure geometry (Stage 2): label anchor two thirds of the way along a straight
+# Pure geometry: label anchor two thirds of the way along a straight
 # edge from (x2, y2) toward (x1, y1).
 i.edge_label_pos <- function(x1, y1, x2, y2) {
   phi <- atan2(y1 - y2, x1 - x2)
@@ -2124,7 +2124,7 @@ i.edge_label_pos <- function(x1, y1, x2, y2) {
   )
 }
 
-# Geometry (Stage 2): the X-spline of a curved edge. The control point is offset
+# Geometry: the X-spline of a curved edge. The control point is offset
 # from the edge midpoint perpendicular to the shaft by `lambda`. Returns the
 # xspline() coordinate list (draw = FALSE; needs an active device).
 i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
@@ -2140,7 +2140,7 @@ i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
   )
 }
 
-# Geometry (Stage 2): two-corner orthogonal ("elbow") path between two points.
+# Geometry: two-corner orthogonal ("elbow") path between two points.
 # Leaves along the dominant axis (larger absolute delta), turns at the midpoint
 # of that axis, crosses, then turns into the target. Returns list(x, y) of the
 # four polyline vertices.
@@ -2154,7 +2154,7 @@ i.elbow_path <- function(x0, y0, x1, y1) {
   }
 }
 
-# Geometry (Stage 2): smooth "diagonal" S-curve between two points, a cubic
+# Geometry: smooth "diagonal" S-curve between two points, a cubic
 # Bezier whose control points sit on the dominant axis so the curve leaves and
 # enters along that axis. Returns list(x, y) sampled at `n` points.
 i.diagonal_path <- function(x0, y0, x1, y1, n = 30) {

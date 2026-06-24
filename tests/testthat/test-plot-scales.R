@@ -1,5 +1,5 @@
-# Unit tests for the scale layer (feature F1): scale_color() / scale_size()
-# and the internal i.apply_scales() that feeds plot.igraph().
+# Unit tests for the scale layer: scale_color() / scale_size() and the internal
+# i.apply_scales() that feeds plot.igraph().
 
 test_that("scale_color() maps a discrete vector to categorical colours", {
   s <- scale_color(c("a", "b", "a", "c"))

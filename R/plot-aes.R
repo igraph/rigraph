@@ -7,8 +7,8 @@
 #   (at your option) any later version.
 ###################################################################
 
-# Stage 1 of the plotting pipeline: turn resolved plotting parameters into a
-# typed, rectangular aesthetic table so that downstream code can slice it by
+# Turn resolved plotting parameters into a typed, rectangular aesthetic table
+# so that downstream code can slice it by
 # vertex/edge index instead of re-implementing the
 # `if (length(x) > 1) x[idx]` idiom for every parameter.
 #

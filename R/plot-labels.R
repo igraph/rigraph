@@ -7,8 +7,8 @@
 #   (at your option) any later version.
 ###################################################################
 
-# Label decluttering (feature F6): a helper that keeps only the most prominent
-# labels and blanks the rest with NA. Because plot.igraph() omits NA labels,
+# Label decluttering: a helper that keeps only the most prominent labels and
+# blanks the rest with NA. Because plot.igraph() omits NA labels,
 # the result can be passed straight to a label argument, e.g.
 # plot(g, vertex.label = label_top(degree(g), n = 10)).
 

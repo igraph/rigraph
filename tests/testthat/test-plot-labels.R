@@ -1,5 +1,5 @@
-# Label decluttering helper (F6): label_top() keeps the highest-ranked labels
-# and blanks the rest with NA so plot.igraph() omits them.
+# Label decluttering helper: label_top() keeps the highest-ranked labels and
+# blanks the rest with NA so plot.igraph() omits them.
 
 test_that("label_top keeps exactly n labels, the highest by `by`", {
   by <- c(5, 1, 9, 3, 7)

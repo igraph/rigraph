@@ -1,5 +1,5 @@
-# Stage-3 rendering indirection (F5, phase 1): drawing is emitted through the
-# i.r_*() dispatchers, which forward to the current renderer.
+# Rendering indirection: drawing is emitted through the i.r_*() dispatchers,
+# which forward to the current renderer.
 
 test_that("the default renderer is the base renderer", {
   r <- i.cur_renderer()
@@ -112,7 +112,7 @@ test_that("as_svg writes to a file and honours the tooltips argument", {
   expect_match(out, "<title>p</title>", fixed = TRUE)
 })
 
-test_that("a label halo emits the offset copies plus the real label in SVG (F6)", {
+test_that("a label halo emits the offset copies plus the real label in SVG", {
   skip_if_not_installed("xml2")
   g <- make_ring(3)
   V(g)$name <- c("aa", "bb", "cc")

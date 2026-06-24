@@ -7,8 +7,8 @@
 #   (at your option) any later version.
 ###################################################################
 
-# Scales (feature F1): map a data vector to a plotting aesthetic (colour or
-# size) AND record a "guide" describing the mapping, so that plot.igraph() can
+# Scales: map a data vector to a plotting aesthetic (colour or size) AND record
+# a "guide" describing the mapping, so that plot.igraph() can
 # draw a matching legend or colorbar. A scale is passed to an existing argument,
 # e.g. plot(g, vertex.color = scale_color(V(g)$type)).
 
