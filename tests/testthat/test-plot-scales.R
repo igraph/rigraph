@@ -91,3 +91,31 @@ test_that("a wrong-length scale is rejected by strict recycling at plot time", {
     "length 3"
   )
 })
+
+test_that("named per-vertex aesthetics don't break edge drawing (#regression)", {
+  # A named vertex.size (e.g. scale_size(degree(g)) carries degree()'s names)
+  # used to propagate names into the clipped edge coordinates, where
+  # i.edge_label_pos()'s c(x = ..., y = ...) produced names like "x.Alice"
+  # instead of "x"/"y", crashing with "subscript out of bounds".
+  g <- make_graph(~ A - B, B - C, C - A, A - D)
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+
+  expect_silent(plot(g, vertex.size = scale_size(degree(g), range = c(10, 30))))
+  expect_silent(plot(
+    g,
+    vertex.size = stats::setNames(c(10, 20, 30, 15), V(g)$name)
+  ))
+})
+
+test_that("i.edge_label_pos returns x/y names even for named inputs", {
+  pos <- i.edge_label_pos(
+    stats::setNames(0, "a"),
+    stats::setNames(0, "a"),
+    stats::setNames(1, "b"),
+    stats::setNames(1, "b")
+  )
+  expect_named(pos, c("x", "y"))
+  expect_equal(pos[["x"]], 1 / 3)
+  expect_equal(pos[["y"]], 1 / 3)
+})

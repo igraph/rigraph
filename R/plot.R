@@ -2114,7 +2114,14 @@ i.arrow_shaft_endpoints <- function(x1, y1, x2, y2, code, r.seg, uin) {
 i.edge_label_pos <- function(x1, y1, x2, y2) {
   phi <- atan2(y1 - y2, x1 - x2)
   r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
-  c(x = x2 + 2 / 3 * r * cos(phi), y = y2 + 2 / 3 * r * sin(phi))
+  # unname() the components: when the coordinates carry names (e.g. a named
+  # vertex.size such as scale_size(degree(g)) propagates names through edge
+  # clipping), `c(x = <named>, y = <named>)` would yield names like "x.Alice"
+  # instead of "x"/"y", breaking the lab[["x"]] / lab[["y"]] lookups downstream.
+  c(
+    x = unname(x2 + 2 / 3 * r * cos(phi)),
+    y = unname(y2 + 2 / 3 * r * sin(phi))
+  )
 }
 
 # Geometry (Stage 2): the X-spline of a curved edge. The control point is offset
