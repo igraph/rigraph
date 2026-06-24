@@ -122,6 +122,59 @@ test_that("i.edge_aes_table expands scalars and is sliceable by edge index", {
 })
 
 # ---------------------------------------------------------------------------
+# i.check_aes_lengths() — strict recycling (igraph 3.0.0)
+# ---------------------------------------------------------------------------
+
+test_that("i.check_aes_lengths accepts length 1 and length n", {
+  expect_silent(
+    i.check_aes_lengths(
+      vertex = list(color = "red", size = c(1, 2, 3)),
+      edge = list(width = 1),
+      vc = 3,
+      ec = 2
+    )
+  )
+})
+
+test_that("i.check_aes_lengths rejects mismatched vertex lengths", {
+  expect_snapshot_igraph_error(
+    i.check_aes_lengths(
+      vertex = list(color = c("red", "green")),
+      edge = list(),
+      vc = 5,
+      ec = 4
+    )
+  )
+})
+
+test_that("i.check_aes_lengths rejects mismatched edge lengths", {
+  expect_snapshot_igraph_error(
+    i.check_aes_lengths(
+      vertex = list(),
+      edge = list(width = c(1, 2, 3)),
+      vc = 5,
+      ec = 5
+    )
+  )
+})
+
+test_that("plot() errors on a wrong-length vertex aesthetic (strict recycling)", {
+  g <- make_ring(5)
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+  # 3 colors for 5 vertices: previously silently recycled, now an error
+  expect_error(plot(g, vertex.color = c("red", "green", "blue")), "length 3")
+})
+
+test_that("plot() still accepts length-1 and length-n aesthetics", {
+  g <- make_ring(5)
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+  expect_no_error(plot(g, vertex.color = "red"))
+  expect_no_error(plot(g, vertex.color = rep("red", 5)))
+})
+
+# ---------------------------------------------------------------------------
 # i.get.arrow.mode()
 # ---------------------------------------------------------------------------
 

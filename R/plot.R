@@ -370,6 +370,41 @@ plot.igraph <- function(
   # the new style parameters can't do this yet
   arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
 
+  # igraph 3.0.0: per-element aesthetics must be length 1 or vcount()/ecount().
+  # arrow.mode is excluded (its "a:" form reads a vertex attribute, so it can be
+  # vcount-long); label.adj / pie / raster have non-per-element length semantics.
+  i.check_aes_lengths(
+    vertex = list(
+      size = vertex.size,
+      color = params("vertex", "color"),
+      frame.color = params("vertex", "frame.color"),
+      frame.width = params("vertex", "frame.width"),
+      shape = shape,
+      label = labels,
+      label.color = label.color,
+      label.cex = label.cex,
+      label.dist = label.dist,
+      label.degree = label.degree,
+      label.angle = label.angle,
+      label.font = label.font,
+      label.family = label.family
+    ),
+    edge = list(
+      color = edge.color,
+      width = edge.width,
+      lty = edge.lty,
+      arrow.size = arrow.size,
+      arrow.width = arrow.width,
+      label = edge.labels,
+      label.color = edge.label.color,
+      label.cex = edge.label.cex,
+      label.font = edge.label.font,
+      label.family = edge.label.family
+    ),
+    vc = vc,
+    ec = ecount(graph)
+  )
+
   ################################################################
   ## create the plot
   if (rescale) {

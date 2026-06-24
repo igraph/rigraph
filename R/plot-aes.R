@@ -29,6 +29,37 @@ i.aes_table <- function(cols, n) {
   vctrs::new_data_frame(cols, n = as.integer(n))
 }
 
+# igraph 3.0.0 breaking change: a per-element plotting aesthetic must have
+# length 1 or exactly the number of vertices/edges. Previously a wrong-length
+# vector (e.g. 3 colors for 5 vertices) was silently recycled, masking user
+# mistakes; now it is an error.
+#
+# `vertex` and `edge` are named lists of resolved aesthetic vectors to check
+# against `vc` / `ec`. Only unambiguous per-element aesthetics should be passed:
+# aesthetics with special length semantics (vertex `label.adj`, list-valued
+# `pie`/`raster`, the vertex-attribute `arrow.mode` "a:" form) are intentionally
+# excluded by the caller.
+i.check_aes_lengths <- function(vertex, edge, vc, ec, call = rlang::caller_env()) {
+  one_scope <- function(lst, n, scope, plural) {
+    for (nm in names(lst)) {
+      len <- length(lst[[nm]])
+      if (len != 1L && len != n) {
+        cli::cli_abort(
+          c(
+            "Invalid length for {scope} aesthetic {.field {nm}}.",
+            "x" = "It has length {len}, but must be length 1 or {n}.",
+            "i" = "The graph has {n} {plural}."
+          ),
+          call = call
+        )
+      }
+    }
+  }
+  one_scope(vertex, vc, "vertex", "vertices")
+  one_scope(edge, ec, "edge", "edges")
+  invisible(NULL)
+}
+
 # Edge aesthetic table for the per-edge visual properties that are subset by
 # edge index when drawing loop vs. non-loop edges. `loop.angle` (nullable) and
 # vertex-scoped properties are handled separately by the caller.
