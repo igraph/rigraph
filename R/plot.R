@@ -538,6 +538,7 @@ plot.igraph <- function(
 
   vertex.size <- params("vertex", "size")
   vertex.size.scaling <- params("vertex", "size.scaling")
+  vertex.alpha <- params("vertex", "alpha")
   label.family <- params("vertex", "label.family")
   label.font <- params("vertex", "label.font")
   label.cex <- params("vertex", "label.cex")
@@ -551,6 +552,15 @@ plot.igraph <- function(
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
   edge.color <- params("edge", "color")
+  edge.alpha <- params("edge", "alpha")
+  edge.color <- i.apply_alpha(edge.color, edge.alpha)
+  edge.gradient <- as.logical(params("edge", "gradient"))
+  # Base per-vertex fill colour (before vertex.alpha), only needed for gradients.
+  vcol_base <- if (any(edge.gradient)) {
+    rep(params("vertex", "color"), length.out = vc)
+  } else {
+    NULL
+  }
   edge.width <- params("edge", "width")
   edge.lty <- params("edge", "lty")
   arrow.mode <- params("edge", "arrow.mode")
@@ -694,6 +704,14 @@ plot.igraph <- function(
 
   ################################################################
   ## Rescaling vertices and updating params
+  # Fold vertex.alpha into the vertex fill colour so the shapes pick it up via
+  # the rebuilt params below (no-op when fully opaque).
+  if (!all(vertex.alpha == 1)) {
+    scaled$dots$vertex.color <- i.apply_alpha(
+      rep(params("vertex", "color"), length.out = vc),
+      vertex.alpha
+    )
+  }
   if (vertex.size.scaling) {
     newdots <- scaled$dots
 
@@ -851,6 +869,8 @@ plot.igraph <- function(
     label.font = edge.label.font,
     label.cex = edge.label.cex,
     style = edge.style,
+    alpha = edge.alpha,
+    gradient = edge.gradient,
     n = ecount(graph)
   )
 
@@ -938,6 +958,30 @@ plot.igraph <- function(
     arrow.width <- nl_aes$arrow.width
     curved <- nl_aes$curved
     edge.style <- nl_aes$style
+    edge.gradient <- as.logical(nl_aes$gradient)
+
+    # Gradient edges: shaft colour runs from the source vertex colour to the
+    # target vertex colour; the arrowhead uses the target colour. Only touch the
+    # colour vectors when a gradient is actually requested, so plain plots are
+    # byte-identical.
+    sh.col.e <- edge.color
+    h.col.e <- edge.color
+    col.to.e <- edge.color
+    if (any(edge.gradient)) {
+      to_hex <- function(x) {
+        grDevices::rgb(t(grDevices::col2rgb(x, alpha = TRUE)), maxColorValue = 255)
+      }
+      ealpha <- nl_aes$alpha
+      grad_from <- i.apply_alpha(to_hex(vcol_base[el[, 1]]), ealpha)
+      grad_to <- i.apply_alpha(to_hex(vcol_base[el[, 2]]), ealpha)
+      base_hex <- to_hex(edge.color)
+      sh.col.e <- base_hex
+      h.col.e <- base_hex
+      col.to.e <- base_hex
+      sh.col.e[edge.gradient] <- grad_from[edge.gradient]
+      h.col.e[edge.gradient] <- grad_to[edge.gradient]
+      col.to.e[edge.gradient] <- grad_to[edge.gradient]
+    }
 
     if (length(unique(arrow.mode)) == 1) {
       lc <- igraph.Arrows(
@@ -945,8 +989,8 @@ plot.igraph <- function(
         y0,
         x1,
         y1,
-        h.col = edge.color,
-        sh.col = edge.color,
+        h.col = h.col.e,
+        sh.col = sh.col.e,
         sh.lwd = edge.width,
         h.lwd = 1,
         open = FALSE,
@@ -956,7 +1000,9 @@ plot.igraph <- function(
         size = arrow.size,
         width = arrow.width,
         curved = curved,
-        style = edge.style
+        style = edge.style,
+        gradient = edge.gradient,
+        col.to = col.to.e
       )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
@@ -976,8 +1022,8 @@ plot.igraph <- function(
           x1[valid],
           y1[valid],
           code = code,
-          sh.col = edge.color[valid],
-          h.col = edge.color[valid],
+          sh.col = sh.col.e[valid],
+          h.col = h.col.e[valid],
           sh.lwd = edge.width[valid],
           h.lwd = 1,
           h.lty = 1,
@@ -986,7 +1032,9 @@ plot.igraph <- function(
           size = arrow.size[valid],
           width = arrow.width[valid],
           curved = curved[valid],
-          style = edge.style[valid]
+          style = edge.style[valid],
+          gradient = edge.gradient[valid],
+          col.to = col.to.e[valid]
         )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
@@ -2019,6 +2067,36 @@ i.diagonal_path <- function(x0, y0, x1, y1, n = 30) {
   list(x = p[1, ], y = p[2, ])
 }
 
+# Apply a per-element alpha (transparency, in [0, 1]) to a colour vector by
+# multiplying any existing alpha. A no-op when every alpha is 1, so the default
+# leaves colours — and snapshots — byte-identical.
+i.apply_alpha <- function(col, alpha) {
+  if (length(col) == 0 || all(alpha == 1)) {
+    return(col)
+  }
+  rgba <- grDevices::col2rgb(col, alpha = TRUE) / 255
+  a <- rep(alpha, length.out = ncol(rgba))
+  grDevices::rgb(rgba[1, ], rgba[2, ], rgba[3, ], alpha = rgba[4, ] * a)
+}
+
+# Draw a polyline (px, py) as a colour gradient from `col_from` to `col_to`:
+# resample to `n` points by cumulative arc length, then draw the n-1 pieces with
+# interpolated colours. Used for source->target edge gradients.
+i.draw_gradient_path <- function(px, py, col_from, col_to, lwd, lty, n = 40) {
+  d <- c(0, cumsum(sqrt(diff(px)^2 + diff(py)^2)))
+  if (length(d) < 2 || max(d) == 0) {
+    return(invisible(NULL))
+  }
+  at <- seq(0, max(d), length.out = n)
+  rx <- stats::approx(d, px, at)$y
+  ry <- stats::approx(d, py, at)$y
+  ramp <- grDevices::colorRamp(c(col_from, col_to), alpha = TRUE)
+  m <- ramp(seq(0, 1, length.out = n - 1)) # one RGBA row per segment
+  cols <- grDevices::rgb(m[, 1], m[, 2], m[, 3], alpha = m[, 4], maxColorValue = 255)
+  segments(rx[-n], ry[-n], rx[-1], ry[-1], col = cols, lwd = lwd, lty = lty)
+  invisible(NULL)
+}
+
 #' @importFrom graphics par xyinch segments xspline lines polygon
 # Vectorized and modular igraph.Arrows refactor
 igraph.Arrows <- function(
@@ -2039,7 +2117,9 @@ igraph.Arrows <- function(
   h.lwd = sh.lwd,
   h.lty = sh.lty,
   curved = FALSE,
-  style = "auto"
+  style = "auto",
+  gradient = FALSE,
+  col.to = sh.col
 ) {
   n <- length(x1)
 
@@ -2053,6 +2133,8 @@ igraph.Arrows <- function(
   width <- recycle(width)
   curved <- recycle(curved)
   style <- recycle(as.character(style))
+  gradient <- recycle(gradient)
+  col.to <- recycle(col.to)
   sh.lwd <- recycle(sh.lwd)
   sh.col <- recycle(sh.col)
   sh.lty <- recycle(sh.lty)
@@ -2089,15 +2171,26 @@ igraph.Arrows <- function(
     }
 
     if (eff_style == "straight") {
-      segments(
-        sx1,
-        sy1,
-        sx2,
-        sy2,
-        lwd = sh.lwd[i],
-        col = sh.col[i],
-        lty = sh.lty[i]
-      )
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          c(sx1, sx2),
+          c(sy1, sy2),
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        segments(
+          sx1,
+          sy1,
+          sx2,
+          sy2,
+          lwd = sh.lwd[i],
+          col = sh.col[i],
+          lty = sh.lty[i]
+        )
+      }
       lab <- i.edge_label_pos(x1[i], y1[i], x2[i], y2[i])
       label_x[i] <- lab[["x"]]
       label_y[i] <- lab[["y"]]
@@ -2118,7 +2211,18 @@ igraph.Arrows <- function(
         sy2,
         lambda
       )
-      lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          spl$x,
+          spl$y,
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      }
       label_x[i] <- spl$x[round(2 / 3 * length(spl$x))]
       label_y[i] <- spl$y[round(2 / 3 * length(spl$y))]
 
@@ -2137,7 +2241,18 @@ igraph.Arrows <- function(
       } else {
         i.diagonal_path(sx1, sy1, sx2, sy2)
       }
-      lines(path$x, path$y, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          path$x,
+          path$y,
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        lines(path$x, path$y, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      }
       np <- length(path$x)
       mid <- max(1L, round(np / 2))
       label_x[i] <- path$x[mid]

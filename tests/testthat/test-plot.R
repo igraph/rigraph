@@ -270,6 +270,27 @@ test_that("i.loop_angles distributes loops and returns aligned vectors", {
   expect_false(res$angles[1] == res$angles[2])
 })
 
+test_that("i.apply_alpha multiplies alpha and is a no-op at 1", {
+  # no-op: fully opaque returns the input unchanged (keeps snapshots stable)
+  expect_identical(i.apply_alpha(c("red", "blue"), 1), c("red", "blue"))
+  expect_identical(i.apply_alpha(c("red", "blue"), c(1, 1)), c("red", "blue"))
+
+  # fractional alpha reduces the alpha channel
+  a <- i.apply_alpha("red", 0.5)
+  expect_equal(unname(grDevices::col2rgb(a, alpha = TRUE)["alpha", ]), 128)
+
+  # vectorised over colour and alpha (recycled)
+  v <- i.apply_alpha(c("red", "green", "blue"), c(0.5, 1, 0.25))
+  av <- grDevices::col2rgb(v, alpha = TRUE)["alpha", ]
+  expect_equal(unname(av), c(128, 255, 64))
+
+  # already-translucent input is further reduced (multiplicative)
+  half <- i.apply_alpha(grDevices::rgb(1, 0, 0, 0.5), 0.5)
+  expect_equal(unname(grDevices::col2rgb(half, alpha = TRUE)["alpha", ]), 64)
+
+  expect_identical(i.apply_alpha(character(0), 0.5), character(0))
+})
+
 test_that("i.elbow_path is a two-corner route along the dominant axis", {
   # horizontal dominant: leave horizontally, turn at mid-x
   e <- i.elbow_path(0, 0, 10, 4)
@@ -431,6 +452,48 @@ test_that("vector edge params are subset correctly across loops and non-loops", 
     )
   }
   vdiffr::expect_doppelganger("vector-edge-params-loops", vector_edge_params)
+})
+
+test_that("edge.gradient blends source to target vertex colours", {
+  skip_if_not_installed("vdiffr")
+
+  vdiffr::expect_doppelganger("edge-gradient", function() {
+    g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 4), directed = TRUE)
+    g$layout <- layout_in_circle(g)
+    V(g)$color <- c("red", "green", "blue", "orange")
+    plot(
+      g,
+      edge.gradient = TRUE,
+      vertex.size = 24,
+      edge.width = 3,
+      edge.arrow.size = 0.6
+    )
+  })
+
+  vdiffr::expect_doppelganger("edge-gradient-arc", function() {
+    g <- make_graph(c(1, 2, 2, 3, 3, 1), directed = TRUE)
+    g$layout <- layout_in_circle(g)
+    V(g)$color <- c("red", "green", "blue")
+    plot(g, edge.gradient = TRUE, edge.style = "arc", vertex.size = 24, edge.width = 3)
+  })
+})
+
+test_that("vertex.alpha and edge.alpha render translucently", {
+  skip_if_not_installed("vdiffr")
+
+  vdiffr::expect_doppelganger("vertex-edge-alpha", function() {
+    g <- make_full_graph(6)
+    g$layout <- layout_in_circle(g)
+    plot(
+      g,
+      vertex.alpha = 0.4,
+      edge.alpha = 0.4,
+      vertex.size = 30,
+      vertex.color = "steelblue",
+      edge.width = 3,
+      edge.color = "firebrick"
+    )
+  })
 })
 
 test_that("edge.style routes edges (elbow / diagonal / mixed / arc)", {

@@ -76,6 +76,8 @@ i.edge_aes_table <- function(
   label.font,
   label.cex,
   style,
+  alpha,
+  gradient,
   n
 ) {
   i.aes_table(
@@ -91,7 +93,9 @@ i.edge_aes_table <- function(
       label.family = label.family,
       label.font = label.font,
       label.cex = label.cex,
-      style = style
+      style = style,
+      alpha = alpha,
+      gradient = gradient
     ),
     n = n
   )

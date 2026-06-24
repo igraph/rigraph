@@ -115,6 +115,11 @@
 #'
 #'   The default value is \dQuote{\code{SkyBlue2}}.
 #' }
+#' \item{alpha}{
+#'   Opacity of the vertex fill, a number (or vector) in `[0, 1]`, multiplied
+#'   into any alpha already present in `color`. `1` (the default) means fully
+#'   opaque. Frame colour, pie slices and labels are not affected.
+#' }
 #' \item{frame.color}{
 #'   The color of the frame of the vertices, the same formats are allowed as for the fill color.
 #'
@@ -342,6 +347,18 @@
 #'     \item{`"diagonal"`}{a smooth S-curve with axis-aligned ends.}
 #'   }
 #'   This parameter is ignored for loop edges and by [rglplot()].
+#' }
+#' \item{alpha}{
+#'   Opacity of the edge, a number (or vector) in `[0, 1]`, multiplied into any
+#'   alpha already present in `color` (and in the gradient endpoint colours).
+#'   `1` (the default) means fully opaque.
+#' }
+#' \item{gradient}{
+#'   Logical scalar or vector. If `TRUE`, the edge is drawn as a colour gradient
+#'   running from its source vertex's colour to its target vertex's colour (a
+#'   direction cue), and the arrowhead takes the target colour; `color` is then
+#'   ignored for that edge's shaft. The default is `FALSE`. Ignored for loop
+#'   edges and by [rglplot()].
 #' }
 #' \item{arrow.mode}{
 #'   This parameter can be used to specify for which edges should arrows be drawn.
@@ -4890,6 +4907,7 @@ i.vertex.default <- list(
   label.angle = 0,
   label.adj = NULL,
   label.repel = FALSE,
+  alpha = 1,
   frame.color = "black",
   frame.width = 1,
   shape = "circle",
@@ -4927,7 +4945,9 @@ i.edge.default <- list(
   arrow.mode = i.get.arrow.mode,
   curved = curve_multiple,
   arrow.width = 1,
-  style = "auto"
+  style = "auto",
+  alpha = 1,
+  gradient = FALSE
 )
 
 # Note: there is intentionally no `frame` default. plot.igraph() reads
