@@ -223,9 +223,9 @@ nudge overlapping labels apart, drawing a thin leader line from each moved label
 back to its vertex:
 
 ```{r}
-gr <- make_ring(12)
+gr <- make_full_graph(25)
 V(gr)$name <- paste0("node-", seq_len(vcount(gr)))
-plot(gr, layout = layout_in_circle, vertex.size = 8, vertex.label.repel = TRUE)
+plot(gr, vertex.size = 25, vertex.label.cex = 2, vertex.label.repel = TRUE)
 ```
 
 ### Legibility with `label.halo`
@@ -340,6 +340,15 @@ plot(
   edge.arrow.size = 0.6,
   margin = 0.25
 )
+```
+
+When a single vertex carries *several* loops, igraph spreads them around the
+vertex in a "flower-petal" arrangement so they don't overlap:
+
+```{r fig.width = 5, fig.height = 5}
+# six self-loops on a single vertex
+many <- make_graph(rep(1, 12), n = 1, directed = TRUE)
+plot(many, vertex.size = 30, edge.arrow.size = 0.5, margin = 0.2)
 ```
 
 ## Edge labels
@@ -611,7 +620,3 @@ cat(as_svg(g, width = 6, height = 6, tooltips = "gender", vertex.size = 30))
   `?plot.igraph` and `?igraph.plotting` for the full list of parameters.
 * The main [igraph](igraph.html) introduction for graph construction and
   analysis.
-
-```{r}
-sessionInfo()
-```
