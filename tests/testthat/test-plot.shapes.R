@@ -49,6 +49,44 @@ test_that("add_shape() validates inputs correctly", {
   )
 })
 
+test_that("add_shape() validates clip/plot signatures", {
+  # Remove the shapes registered below so they don't leak into other tests
+  # (e.g. the "render all shapes" snapshot test).
+  withr::defer({
+    for (s in c("dots_shape", "good_shape")) {
+      if (exists(s, envir = .igraph.shapes)) {
+        rm(list = s, envir = .igraph.shapes)
+      }
+    }
+  })
+  # clip missing `end`
+  expect_error(
+    add_shape("bad_clip", clip = function(coords, el, params) coords),
+    "missing required argument"
+  )
+  # plot missing `params`
+  expect_error(
+    add_shape("bad_plot", plot = function(coords, v) invisible()),
+    "missing required argument"
+  )
+  # functions taking ... are accepted
+  expect_true(
+    add_shape(
+      "dots_shape",
+      clip = function(...) NULL,
+      plot = function(...) invisible()
+    )
+  )
+  # a correctly-shaped custom shape is accepted
+  expect_true(
+    add_shape(
+      "good_shape",
+      clip = function(coords, el, params, end) coords,
+      plot = function(coords, v = NULL, params) invisible()
+    )
+  )
+})
+
 test_that("add_shape() can override existing shapes", {
   original_circle <- shapes("circle")
   dummy_plot <- function(coords, v = NULL, params) invisible(NULL)

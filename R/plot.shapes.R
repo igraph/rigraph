@@ -368,6 +368,23 @@ shape_noplot <- function(coords, v = NULL, params) {
   invisible(NULL)
 }
 
+# Check that a shape clip/plot function accepts the arguments igraph calls it
+# with. Functions that take `...` are assumed to forward everything and pass.
+i.check_shape_fun <- function(fn, arg, required) {
+  fmls <- names(formals(fn))
+  if ("..." %in% fmls) {
+    return(invisible())
+  }
+  missing <- setdiff(required, fmls)
+  if (length(missing) > 0) {
+    cli::cli_abort(c(
+      "Shape {.arg {arg}} function is missing required argument{?s} {.arg {missing}}.",
+      i = "It is called as {.code {arg}(coords, {if (arg == 'clip') 'el, ' else ''}...)} with {.arg {required}}; see {.help add_shape}."
+    ))
+  }
+  invisible()
+}
+
 #' @rdname shapes
 #' @export
 add_shape <- function(
@@ -406,6 +423,13 @@ add_shape <- function(
       i = "See {.help add_shape} for details."
     ))
   }
+
+  # Validate the clip/plot signatures up front so a malformed shape fails here
+  # rather than cryptically at plot time. A clip function is called as
+  # clip(coords, el, params =, end =) and a plot function as
+  # plot(coords, v =, params =); functions taking `...` are exempt.
+  i.check_shape_fun(clip, "clip", c("params", "end"))
+  i.check_shape_fun(plot, "plot", c("params", "v"))
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph_options, parameters)
