@@ -18,30 +18,30 @@ set.seed(42)
 # `igraph_local_seed()` (and its `restore_rng_state()` helper) live in helper.R
 # so they are visible both to test code and to helper functions that call them.
 
-# if (Sys.getenv("IGRAPH_CHECK_RNG_STATE") == "true") {
-# Check that tests don't change the random seed
-test_that <- function(name, code) {
-  # Forward the block to testthat as a literal language object. Do NOT use
-  # rlang::inject(testthat::test_that(name, !!code)) here: inject() walks the
-  # whole expression and eagerly processes every injection operator, including
-  # any !!/!!!/{{ the test body uses (e.g. `set_vertex_attrs(g, !!!attr_list)`),
-  # evaluating them in this frame where their locals don't exist. Embedding the
-  # captured code in the call hands it to testthat verbatim, so those operators
-  # are processed at test runtime instead.
-  code <- substitute(code)
-  before_state <- get0(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
-  eval(
-    as.call(list(quote(testthat::test_that), name, code)),
-    envir = parent.frame()
-  )
-  after_state <- get0(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
-  expect_identical(
-    before_state,
-    after_state,
-    info = paste0("Test '", name, "' changed the random seed")
-  )
+if (Sys.getenv("IGRAPH_CHECK_RNG_STATE") == "true") {
+  # Check that tests don't change the random seed
+  test_that <- function(name, code) {
+    # Forward the block to testthat as a literal language object. Do NOT use
+    # rlang::inject(testthat::test_that(name, !!code)) here: inject() walks the
+    # whole expression and eagerly processes every injection operator, including
+    # any !!/!!!/{{ the test body uses (e.g. `set_vertex_attrs(g, !!!attr_list)`),
+    # evaluating them in this frame where their locals don't exist. Embedding the
+    # captured code in the call hands it to testthat verbatim, so those operators
+    # are processed at test runtime instead.
+    code <- substitute(code)
+    before_state <- get0(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+    eval(
+      as.call(list(quote(testthat::test_that), name, code)),
+      envir = parent.frame()
+    )
+    after_state <- get0(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+    expect_identical(
+      before_state,
+      after_state,
+      info = paste0("Test '", name, "' changed the random seed")
+    )
+  }
 }
-# }
 
 # NOTE (why the override forwards `code` via substitute()/eval() instead of
 # rlang::inject): the earlier version used
