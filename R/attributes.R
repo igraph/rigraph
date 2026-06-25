@@ -1310,6 +1310,11 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
+  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t`
+  # enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
+  # Each code must stay aligned with its name in `known_names`. The DEFAULT (1) and
+  # FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the
+  # `!is.character(x)` branch below, and DEFAULT is not selectable by name.
   known_names <- c(
     "concat",
     "first",
@@ -1323,7 +1328,7 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
     "random",
     "sum"
   )
-  known_codes <- c(12, 8, 0, 9, 6, 10, 11, 5, 4, 7, 3)
+  known_codes <- c(12L, 8L, 0L, 9L, 6L, 10L, 11L, 5L, 4L, 7L, 3L)
   if (allow_rename) {
     known_names <- c(known_names, "rename")
     known_codes <- c(known_codes, NA_integer_)
