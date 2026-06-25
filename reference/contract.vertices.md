@@ -25,7 +25,7 @@ contract.vertices(
 - mapping:
 
   A numeric vector that specifies the mapping. Its elements correspond
-  to the vertices, and for each element the ID in the new graph is
+  to the vertices, and for each element the id in the new graph is
   given.
 
 - vertex.attr.comb:

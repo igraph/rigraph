@@ -22,12 +22,12 @@ cohesion(x, checks = TRUE, ...)
 
 - source:
 
-  The ID of the source vertex, for `vertex_connectivity()` it can be
+  The id of the source vertex, for `vertex_connectivity()` it can be
   `NULL`, see details below.
 
 - target:
 
-  The ID of the target vertex, for `vertex_connectivity()` it can be
+  The id of the target vertex, for `vertex_connectivity()` it can be
   `NULL`, see details below.
 
 - checks:

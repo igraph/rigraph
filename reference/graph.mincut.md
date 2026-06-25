@@ -26,11 +26,11 @@ graph.mincut(
 
 - source:
 
-  The ID of the source vertex.
+  The id of the source vertex.
 
 - target:
 
-  The ID of the target vertex (sometimes also called sink).
+  The id of the target vertex (sometimes also called sink).
 
 - capacity:
 

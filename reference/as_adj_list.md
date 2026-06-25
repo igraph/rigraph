@@ -53,11 +53,11 @@ characteristics.
 
 ## Details
 
-`as_adj_list()` returns a list of numeric vectors, which include the IDs
+`as_adj_list()` returns a list of numeric vectors, which include the ids
 of neighbor vertices (according to the `mode` argument) of all vertices.
 
 `as_adj_edge_list()` returns a list of numeric vectors, which include
-the IDs of adjacent edges (according to the `mode` argument) of all
+the ids of adjacent edges (according to the `mode` argument) of all
 vertices.
 
 If `igraph_opt("return.vs.es")` is true (default), the numeric vectors
@@ -100,84 +100,84 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 as_adj_list(g)
 #> [[1]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1]  2 10
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 1 3
 #> 
 #> [[3]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 2 4
 #> 
 #> [[4]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 3 5
 #> 
 #> [[5]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 4 6
 #> 
 #> [[6]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 5 7
 #> 
 #> [[7]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 6 8
 #> 
 #> [[8]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 7 9
 #> 
 #> [[9]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1]  8 10
 #> 
 #> [[10]]
-#> ── <vertex sequence> 2/10 · from 63e6aeb ───────────────────────────────────────
+#> + 2/10 vertices, from 217513d:
 #> [1] 1 9
 #> 
 as_adj_edge_list(g)
 #> [[1]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 1 ─ 2   1 ─ 10 
+#> + 2/10 edges from 217513d:
+#> [1] 1-- 2 1--10
 #> 
 #> [[2]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 1 ─ 2  2 ─ 3 
+#> + 2/10 edges from 217513d:
+#> [1] 1--2 2--3
 #> 
 #> [[3]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 2 ─ 3  3 ─ 4 
+#> + 2/10 edges from 217513d:
+#> [1] 2--3 3--4
 #> 
 #> [[4]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 3 ─ 4  4 ─ 5 
+#> + 2/10 edges from 217513d:
+#> [1] 3--4 4--5
 #> 
 #> [[5]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 4 ─ 5  5 ─ 6 
+#> + 2/10 edges from 217513d:
+#> [1] 4--5 5--6
 #> 
 #> [[6]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 5 ─ 6  6 ─ 7 
+#> + 2/10 edges from 217513d:
+#> [1] 5--6 6--7
 #> 
 #> [[7]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 6 ─ 7  7 ─ 8 
+#> + 2/10 edges from 217513d:
+#> [1] 6--7 7--8
 #> 
 #> [[8]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 7 ─ 8  8 ─ 9 
+#> + 2/10 edges from 217513d:
+#> [1] 7--8 8--9
 #> 
 #> [[9]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 8 ─ 9   9 ─ 10 
+#> + 2/10 edges from 217513d:
+#> [1] 8-- 9 9--10
 #> 
 #> [[10]]
-#> ── <edge sequence> 2/10 · from 63e6aeb ─────────────────────────────────────────
-#> [1] 1 ─ 10  9 ─ 10 
+#> + 2/10 edges from 217513d:
+#> [1] 1--10 9--10
 #> 
 ```

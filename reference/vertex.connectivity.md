@@ -16,13 +16,13 @@ vertex.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 - source:
 
-  The ID of the source vertex, for
+  The id of the source vertex, for
   [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
   it can be `NULL`, see details below.
 
 - target:
 
-  The ID of the target vertex, for
+  The id of the target vertex, for
   [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
   it can be `NULL`, see details below.
 

@@ -25,7 +25,7 @@ as_graphnel(graph)
 `as_graphnel()` converts an igraph graph to a graphNEL graph. It
 converts all graph/vertex/edge attributes. If the igraph graph has a
 vertex attribute ‘`name`’, then it will be used to assign vertex names
-in the graphNEL graph. Otherwise numeric igraph vertex IDs will be used
+in the graphNEL graph. Otherwise numeric igraph vertex ids will be used
 for this purpose.
 
 ## Related documentation in the C library
@@ -69,17 +69,11 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 5dd6e03 ──
-#> ℹ undirected · named · weighted
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#>  [1] a ─ b  a ─ j  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g  g ─ h  h ─ i  i ─ j 
+#> IGRAPH 73fd343 UNW- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
+#> | (e/n)
+#> + edges from 73fd343 (vertex names):
+#>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j
 
 ## Directed
 g3 <- make_star(10, mode = "in")
@@ -87,15 +81,8 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> ── <igraph> In-star ───────────────────────────────────────────────── 8a9290c ──
-#> ℹ directed · named · weighted
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> → vertex: name <chr>
-#> → edge:   weight <dbl>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] b → a  c → a  d → a  e → a  f → a  g → a  h → a  i → a  j → a 
+#> IGRAPH 3cdd9a2 DNW- 10 9 -- In-star
+#> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)
+#> + edges from 3cdd9a2 (vertex names):
+#> [1] b->a c->a d->a e->a f->a g->a h->a i->a j->a
 ```

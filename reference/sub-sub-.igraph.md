@@ -25,7 +25,7 @@ x[[i, j, from, to, ..., directed = TRUE, edges = FALSE, exact = TRUE]]
 
 - from:
 
-  A numeric or character vector giving vertex IDs or names. Together
+  A numeric or character vector giving vertex ids or names. Together
   with the `to` argument, it can be used to query/set a sequence of
   edges. See details below. This argument cannot be present together
   with any of the `i` and `j` arguments and if it is present, then the
@@ -33,7 +33,7 @@ x[[i, j, from, to, ..., directed = TRUE, edges = FALSE, exact = TRUE]]
 
 - to:
 
-  A numeric or character vector giving vertex IDs or names. Together
+  A numeric or character vector giving vertex ids or names. Together
   with the `from` argument, it can be used to query/set a sequence of
   edges. See details below. This argument cannot be present together
   with any of the `i` and `j` arguments and if it is present, then the
@@ -50,7 +50,7 @@ x[[i, j, from, to, ..., directed = TRUE, edges = FALSE, exact = TRUE]]
 
 - edges:
 
-  Logical scalar, whether to return edge IDs.
+  Logical scalar, whether to return edge ids.
 
 - exact:
 
@@ -75,12 +75,12 @@ the graph. This can used for the following operations:
           graph[[1:3, , edges=TRUE]]
         graph[[, 1:3, edges=TRUE]]
 
-3.  Querying the edge IDs between two sets or vertices, if both indices
+3.  Querying the edge ids between two sets or vertices, if both indices
     are used. E.g.
 
           graph[[v, w, edges=TRUE]]
 
-    gives the edge IDs of all the edges that exist from vertices \\v\\
+    gives the edge ids of all the edges that exist from vertices \\v\\
     to vertices \\w\\.
 
 The alternative argument names `from` and `to` can be used instead of
@@ -92,7 +92,7 @@ the usual `i` and `j`, to make the code more readable:
 ‘`[[`’ operators allows logical indices and negative indices as well,
 with the usual R semantics.
 
-Vertex names are also supported, so instead of a numeric vertex ID a
+Vertex names are also supported, so instead of a numeric vertex id a
 vertex can also be given to ‘`[`’ and ‘`[[`’.
 
 ## See also

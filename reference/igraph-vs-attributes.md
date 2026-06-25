@@ -71,15 +71,15 @@ Other vertex and edge sequences:
 [`print.igraph.es()`](https://r.igraph.org/reference/print.igraph.es.md),
 [`print.igraph.vs()`](https://r.igraph.org/reference/print.igraph.vs.md)
 
-Vertex, edge and graph attributes:
+Vertex, edge and graph attributes
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
+`edge_attr<-()`,
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
-[`graph_attr<-()`](https://r.igraph.org/reference/graph_attr-set.md),
+`graph_attr<-()`,
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
 [`igraph-attribute-combination`](https://r.igraph.org/reference/igraph-attribute-combination.md),
 [`igraph-dollar`](https://r.igraph.org/reference/igraph-dollar.md),
@@ -88,7 +88,7 @@ Vertex, edge and graph attributes:
 [`set_vertex_attr()`](https://r.igraph.org/reference/set_vertex_attr.md),
 [`set_vertex_attrs()`](https://r.igraph.org/reference/set_vertex_attrs.md),
 [`vertex_attr()`](https://r.igraph.org/reference/vertex_attr.md),
-[`vertex_attr<-()`](https://r.igraph.org/reference/vertex_attr-set.md),
+`vertex_attr<-()`,
 [`vertex_attr_names()`](https://r.igraph.org/reference/vertex_attr_names.md)
 
 ## Examples

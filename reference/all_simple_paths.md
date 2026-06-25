@@ -46,7 +46,7 @@ all_simple_paths(
 ## Value
 
 A list of integer vectors, each integer vector is a path from the source
-vertex to one of the target vertices. A path is given by its vertex IDs.
+vertex to one of the target vertices. A path is given by its vertex ids.
 
 ## Details
 
@@ -76,28 +76,28 @@ Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
 #> [[1]]
-#> ── <vertex sequence> 5/10 · from 82c3345 ───────────────────────────────────────
+#> + 5/10 vertices, from c348ee7:
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> ── <vertex sequence> 7/10 · from 82c3345 ───────────────────────────────────────
+#> + 7/10 vertices, from c348ee7:
 #> [1]  1 10  9  8  7  6  5
 #> 
 all_simple_paths(g, 1, c(3, 5))
 #> [[1]]
-#> ── <vertex sequence> 3/10 · from 82c3345 ───────────────────────────────────────
+#> + 3/10 vertices, from c348ee7:
 #> [1] 1 2 3
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/10 · from 82c3345 ───────────────────────────────────────
+#> + 5/10 vertices, from c348ee7:
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> ── <vertex sequence> 7/10 · from 82c3345 ───────────────────────────────────────
+#> + 7/10 vertices, from c348ee7:
 #> [1]  1 10  9  8  7  6  5
 #> 
 #> [[4]]
-#> ── <vertex sequence> 9/10 · from 82c3345 ───────────────────────────────────────
+#> + 9/10 vertices, from c348ee7:
 #> [1]  1 10  9  8  7  6  5  4  3
 #> 
 ```

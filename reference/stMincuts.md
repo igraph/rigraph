@@ -20,11 +20,11 @@ stMincuts(graph, source, target, capacity = NULL)
 
 - source:
 
-  The ID of the source vertex.
+  The id of the source vertex.
 
 - target:
 
-  The ID of the target vertex.
+  The id of the target vertex.
 
 - capacity:
 

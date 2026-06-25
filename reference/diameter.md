@@ -57,7 +57,7 @@ The diameter is calculated by using a breadth-first search like method.
 many shortest paths of the length of the diameter, then it returns the
 first one found.
 
-`farthest_vertices()` returns two vertex IDs, the vertices which are
+`farthest_vertices()` returns two vertex ids, the vertices which are
 connected by the diameter path.
 
 ## Related documentation in the C library
@@ -100,11 +100,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> ── <vertex sequence> 5/10 · from a7d2bed ───────────────────────────────────────
+#> + 5/10 vertices, from 04c3169:
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> ── <vertex sequence> 6/10 · from a7d2bed ───────────────────────────────────────
+#> + 6/10 vertices, from 04c3169:
 #> [1] 1 2 3 4 5 6
 ```

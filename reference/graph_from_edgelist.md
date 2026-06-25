@@ -2,9 +2,9 @@
 
 `graph_from_edgelist()` creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is a numeric
-matrix then its elements are interpreted as vertex IDs. If it is a
+matrix then its elements are interpreted as vertex ids. If it is a
 character matrix then it is interpreted as symbolic vertex names and a
-vertex ID will be assigned to each name, and also a `name` vertex
+vertex id will be assigned to each name, and also a `name` vertex
 attribute will be added.
 
 ## Usage
@@ -39,8 +39,7 @@ An igraph graph.
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
+[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify)
 
 ## See also
 
@@ -67,23 +66,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> ── <igraph> ───────────────────────────────────────────────────────── aa1db99 ──
-#> ℹ directed · named
-#> ℹ 3 vertices · 2 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] foo → bar     bar → foobar 
+#> IGRAPH 7f165e9 DN-- 3 2 -- 
+#> + attr: name (v/c)
+#> + edges from 7f165e9 (vertex names):
+#> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> ── <igraph> ───────────────────────────────────────────────────────── cf8c8f6 ──
-#> ℹ directed
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 → 2   2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10 
-#> [10] 10 → 1 
+#> IGRAPH 630eea4 D--- 10 10 -- 
+#> + edges from 630eea4:
+#>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

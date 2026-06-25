@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Conversion to igraph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/hrg.R" class="external-link"><code>R/hrg.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/hrg.R" class="external-link"><code>R/hrg.R</code></a></small>
       <div class="d-none name"><code>as.igraph.Rd</code></div>
     </div>
 
@@ -83,7 +83,7 @@ These objects are created by the <code><a href="fit_hrg.html">fit_hrg()</a></cod
 </ul></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple" class="external-link"><code>is_simple()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -96,18 +96,11 @@ These objects are created by the <code><a href="fit_hrg.html">fit_hrg()</a></cod
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hrg</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_hrg.html">fit_hrg</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as.igraph</span><span class="op">(</span><span class="va">hrg</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Fitted HRG ────────────────────────────────────────────── d528475 ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · named</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 19 vertices · 18 edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">prob</span> <span style="color: #0000BB;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] g1 → g6  g2 → 8   g3 → g4  g4 → 6   g5 → g3  g6 → g7  g7 → 1   g8 → 2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] g9 → 4   g1 → g5  g2 → 9   g3 → 7   g4 → 10  g5 → g2  g6 → 3   g7 → g8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] g8 → g9  g9 → 5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5751844 DN-- 19 18 -- Fitted HRG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), prob (v/n)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5751844 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] g1-&gt;g6 g2-&gt;8  g3-&gt;g4 g4-&gt;6  g5-&gt;g3 g6-&gt;g7 g7-&gt;1  g8-&gt;2  g9-&gt;4  g1-&gt;g5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] g2-&gt;9  g3-&gt;7  g4-&gt;10 g5-&gt;g2 g6-&gt;3  g7-&gt;g8 g8-&gt;g9 g9-&gt;5 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

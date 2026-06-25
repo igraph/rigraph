@@ -87,7 +87,7 @@ invisibly.
 
 ## See also
 
-Graph cycles:
+Graph cycles
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),
@@ -104,96 +104,96 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 44d78a7 ────────────────────────────────
+#> + 3/6 vertices, named, from c8bc81e:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 2/6 · named · from 44d78a7 ────────────────────────────────
+#> + 2/6 vertices, named, from c8bc81e:
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> ── <vertex sequence> 1/6 · named · from 44d78a7 ────────────────────────────────
+#> + 1/6 vertex, named, from c8bc81e:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → B  B → C  C → A 
+#> + 3/9 edges from c8bc81e (vertex names):
+#> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 2/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → F  F → A 
+#> + 2/9 edges from c8bc81e (vertex names):
+#> [1] A->F F->A
 #> 
 #> $edges[[3]]
-#> ── <edge sequence> 1/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] E → E 
+#> + 1/9 edge from c8bc81e (vertex names):
+#> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 44d78a7 ────────────────────────────────
+#> + 3/6 vertices, named, from c8bc81e:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 4/6 · named · from 44d78a7 ────────────────────────────────
+#> + 4/6 vertices, named, from c8bc81e:
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> ── <vertex sequence> 4/6 · named · from 44d78a7 ────────────────────────────────
+#> + 4/6 vertices, named, from c8bc81e:
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> ── <vertex sequence> 2/6 · named · from 44d78a7 ────────────────────────────────
+#> + 2/6 vertices, named, from c8bc81e:
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> ── <vertex sequence> 1/6 · named · from 44d78a7 ────────────────────────────────
+#> + 1/6 vertex, named, from c8bc81e:
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → B  B → C  C → A 
+#> + 3/9 edges from c8bc81e (vertex names):
+#> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 4/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → D  D → E  F → E  F → A 
+#> + 4/9 edges from c8bc81e (vertex names):
+#> [1] A->D D->E F->E F->A
 #> 
 #> $edges[[3]]
-#> ── <edge sequence> 4/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → D  D → E  F → E  A → F 
+#> + 4/9 edges from c8bc81e (vertex names):
+#> [1] A->D D->E F->E A->F
 #> 
 #> $edges[[4]]
-#> ── <edge sequence> 2/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] F → A  A → F 
+#> + 2/9 edges from c8bc81e (vertex names):
+#> [1] F->A A->F
 #> 
 #> $edges[[5]]
-#> ── <edge sequence> 1/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] E → E 
+#> + 1/9 edge from c8bc81e (vertex names):
+#> [1] E->E
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 44d78a7 ────────────────────────────────
+#> + 3/6 vertices, named, from c8bc81e:
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 2/6 · named · from 44d78a7 ────────────────────────────────
+#> + 2/6 vertices, named, from c8bc81e:
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] A → B  B → C  C → A 
+#> + 3/9 edges from c8bc81e (vertex names):
+#> [1] A->B B->C C->A
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 2/9 · vertex names · from 44d78a7 ───────────────────────────
-#> [1] F → A  A → F 
+#> + 2/9 edges from c8bc81e (vertex names):
+#> [1] F->A A->F
 #> 
 #> 
 ```

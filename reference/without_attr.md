@@ -10,7 +10,7 @@ without_attr()
 
 ## See also
 
-Constructor modifiers (and related functions):
+Constructor modifiers (and related functions)
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
 [`simplified()`](https://r.igraph.org/reference/simplified.md),
@@ -25,24 +25,14 @@ Constructor modifiers (and related functions):
 ``` r
 g1 <- make_ring(10)
 g1
-#> ── <igraph> Ring graph ────────────────────────────────────────────── ee13c54 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH cd56077 U--- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> + edges from cd56077:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 g2 <- make_(ring(10), without_attr())
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── c9a3d6b ──
-#> ℹ undirected
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH 673d4d6 U--- 10 10 -- 
+#> + edges from 673d4d6:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 ```

@@ -17,7 +17,7 @@ power contributions is specified by exponent (1 by default)."><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ power contributions is specified by exponent (1 by default)."><meta property="og
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Find Bonacich Power Centrality Scores of Network Positions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
       <div class="d-none name"><code>power_centrality.Rd</code></div>
     </div>
 
@@ -68,8 +68,7 @@ power contributions is specified by <code>exponent</code> (1 by default).</p>
 <span>  exponent <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tol <span class="op">=</span> <span class="fl">1e-07</span>,</span>
-<span>  sparse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  weights <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  sparse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -111,18 +110,6 @@ score; can be negative</p></dd>
 <dd><p>Logical scalar, whether to use sparse matrices for the
 calculation. The ‘Matrix’ package is required for sparse matrix
 support</p></dd>
-
-
-<dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (default): use the <code>weight</code> edge attribute if the graph has
-one, otherwise return a traditional (unweighted) adjacency matrix.</p></li>
-<li><p><code>NA</code>: explicitly unweighted, ignoring any <code>weight</code> edge attribute.</p></li>
-<li><p>A numeric or logical vector of length <code><a href="gsize.html">ecount()</a></code>: use these values
-directly as edge weights.</p></li>
-<li><p>A character scalar: the name of an edge attribute whose values are
-used as weights. The attribute must be numeric or logical.</p></li>
-</ul><p>If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -186,7 +173,7 @@ fixed when we get a better algorithm.</p>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple" class="external-link"><code>is_simple()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree" class="external-link"><code>degree()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -199,7 +186,7 @@ Sociology</em>, 2, 113-120.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="eigen_centrality.html">eigen_centrality()</a></code> and <code><a href="alpha_centrality.html">alpha_centrality()</a></code></p>
-<p>Centrality measures:
+<p>Centrality measures
 <code><a href="alpha_centrality.html">alpha_centrality()</a></code>,
 <code><a href="hub_score.html">authority_score()</a></code>,
 <code><a href="betweenness.html">betweenness()</a></code>,
@@ -232,7 +219,7 @@ igraph by Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmai
 <span class="r-in"><span>  dir <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Compute power centrality scores</span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">.5</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">power_centrality</span><span class="op">(</span><span class="va">g.c</span>, exp <span class="op">=</span> <span class="va">e</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.00 1.58 0.00</span>
@@ -247,7 +234,7 @@ igraph by Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmai
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.27 1.13 0.64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.28 1.12 0.64</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">power_centrality</span><span class="op">(</span><span class="va">g.d</span>, exp <span class="op">=</span> <span class="va">e</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.62 1.08 0.54</span>
@@ -260,7 +247,7 @@ igraph by Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmai
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.62 1.08 0.54</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.62 1.08 0.54</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">power_centrality</span><span class="op">(</span><span class="va">g.e</span>, exp <span class="op">=</span> <span class="va">e</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1.00  1.67 -0.33</span>
@@ -273,7 +260,7 @@ igraph by Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmai
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.68 1.33 0.56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.72 1.30 0.57</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="fl">.4</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">power_centrality</span><span class="op">(</span><span class="va">g.f</span>, exp <span class="op">=</span> <span class="va">e</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1.72  1.53 -0.57</span>

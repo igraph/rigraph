@@ -62,42 +62,28 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 8af6724 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 10 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> 
-#> ── Graph attributes ────────────────────────────────────────────────────────────
-#> name:
-#>   [1] "Ring graph"
-#> mutual:
-#>   [1] FALSE
-#> circular:
-#>   [1] TRUE
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
-#> [10] 1 ─ 10 
+#> IGRAPH ff3a78a U--- 10 10 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> + graph attributes:
+#> | + name:
+#> |   [1] "Ring graph"
+#> | + mutual:
+#> |   [1] FALSE
+#> | + circular:
+#> |   [1] TRUE
+#> + edges from ff3a78a:
+#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 7483f25 ──
-#> ℹ directed
-#> ℹ 10 vertices · 20 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
-#> 
-#> ── Graph attributes ────────────────────────────────────────────────────────────
-#> name:
-#>   [1] "Ring graph"
-#> mutual:
-#>   [1] TRUE
-#> circular:
-#>   [1] TRUE
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 → 2   2 → 1   2 → 3   3 → 2   3 → 4   4 → 3   4 → 5   5 → 4   5 → 6  
-#> [10] 6 → 5   6 → 7   7 → 6   7 → 8   8 → 7   8 → 9   9 → 8   9 → 10  10 → 9 
-#> [19] 10 → 1  1 → 10 
+#> IGRAPH 9594cbd D--- 10 20 -- Ring graph
+#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> + graph attributes:
+#> | + name:
+#> |   [1] "Ring graph"
+#> | + mutual:
+#> |   [1] TRUE
+#> | + circular:
+#> |   [1] TRUE
+#> + edges from 9594cbd:
+#>  [1]  1-> 2  2-> 1  2-> 3  3-> 2  3-> 4  4-> 3  4-> 5  5-> 4  5-> 6  6-> 5
+#> [11]  6-> 7  7-> 6  7-> 8  8-> 7  8-> 9  9-> 8  9->10 10-> 9 10-> 1  1->10
 ```

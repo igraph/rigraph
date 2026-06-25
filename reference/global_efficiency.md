@@ -44,7 +44,7 @@ average_local_efficiency(
 
 - vids:
 
-  The vertex IDs of the vertices for which the calculation will be done.
+  The vertex ids of the vertices for which the calculation will be done.
   Applies to the local efficiency calculation only.
 
 - mode:

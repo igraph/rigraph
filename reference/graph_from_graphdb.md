@@ -104,7 +104,7 @@ Recognition Letters*, Volume 24, Issue 8 (May 2003)
 [`read_graph()`](https://r.igraph.org/reference/read_graph.md),
 [`isomorphic()`](https://r.igraph.org/reference/isomorphic.md)
 
-Foreign format readers:
+Foreign format readers
 [`read_graph()`](https://r.igraph.org/reference/read_graph.md),
 [`write_graph()`](https://r.igraph.org/reference/write_graph.md)
 

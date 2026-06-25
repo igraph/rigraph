@@ -20,12 +20,12 @@ ends(graph, es, names = TRUE)
 
 - names:
 
-  Whether to return vertex names or numeric vertex IDs. By default
+  Whether to return vertex names or numeric vertex ids. By default
   vertex names are used.
 
 ## Value
 
-A two column matrix of vertex names or vertex IDs.
+A two column matrix of vertex names or vertex ids.
 
 ## Related documentation in the C library
 

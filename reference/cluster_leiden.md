@@ -165,7 +165,7 @@ Other community detection algorithms:
 [`cluster_optimal()`](https://r.igraph.org/reference/cluster_optimal.md)
 [`cluster_walktrap()`](https://r.igraph.org/reference/cluster_walktrap.md)
 
-Community detection:
+Community detection
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

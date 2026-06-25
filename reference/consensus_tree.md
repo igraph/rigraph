@@ -43,9 +43,9 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 
 - parents:
 
-  For each vertex, the ID of its parent vertex is stored, or zero, if
-  the vertex is the root vertex in the tree. The first n vertex IDs
-  (from 0) refer to the original vertices of the graph, the other IDs
+  For each vertex, the id of its parent vertex is stored, or zero, if
+  the vertex is the root vertex in the tree. The first n vertex ids
+  (from 0) refer to the original vertices of the graph, the other ids
   refer to vertex groups.
 
 - weights:

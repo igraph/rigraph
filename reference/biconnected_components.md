@@ -27,7 +27,7 @@ A named list with three components:
 - tree_edges:
 
   The components themselves, a list of numeric vectors. Each vector is a
-  set of edge IDs giving the edges in a biconnected component. These
+  set of edge ids giving the edges in a biconnected component. These
   edges define a spanning tree of the component.
 
 - component_edges:
@@ -69,7 +69,7 @@ be part of many biconnected components.
 [`is_connected()`](https://r.igraph.org/reference/components.md),
 [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
 
-Connected components:
+Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
 [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),

@@ -15,7 +15,7 @@ minimized edge crossings."><meta property="og:image" content="https://r.igraph.o
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ minimized edge crossings."><meta property="og:image" content="https://r.igraph.o
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The Sugiyama graph layout generator</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/layout.R" class="external-link"><code>R/layout.R</code></a></small>
       <div class="d-none name"><code>layout_with_sugiyama.Rd</code></div>
     </div>
 
@@ -264,7 +264,7 @@ and Cybernetics 11(2):109-125, 1981.</p>
 <span class="r-in"><span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">which</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Simple plot, not very nice</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">DC</span>, layout <span class="op">=</span> <span class="va">lay1</span><span class="op">$</span><span class="va">layout</span>, vertex.label.cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="layout_with_sugiyama-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
@@ -335,7 +335,7 @@ and Cybernetics 11(2):109-125, 1981.</p>
 <span class="r-in"><span><span class="va">realedge</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_edgelist.html">as_edgelist</a></span><span class="op">(</span><span class="va">layex</span><span class="op">$</span><span class="va">extd_graph</span><span class="op">)</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">layex</span><span class="op">$</span><span class="va">extd_graph</span>,</span></span>
 <span class="r-in"><span>  vertex.label.cex <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
-<span class="r-in"><span>  edge.arrow.size <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  edge.arrow.size <span class="op">=</span> <span class="fl">.5</span>,</span></span>
 <span class="r-in"><span>  vertex.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">origvert</span>, <span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vertex.shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">origvert</span>, <span class="st">"square"</span>, <span class="st">"none"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vertex.label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">origvert</span>, <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span><span class="op">$</span><span class="va">name</span>, <span class="st">""</span><span class="op">)</span>,</span></span>

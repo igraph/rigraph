@@ -18,7 +18,7 @@ dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
 
 - root:
 
-  The ID of the root (or source) vertex, this will be the root of the
+  The id of the root (or source) vertex, this will be the root of the
   tree.
 
 - mode:
@@ -39,13 +39,13 @@ A list with components:
 
 - domtree:
 
-  A graph object, the dominator tree. Its vertex IDs are the as the
-  vertex IDs of the input graph. Isolate vertices are the ones that are
+  A graph object, the dominator tree. Its vertex ids are the as the
+  vertex ids of the input graph. Isolate vertices are the ones that are
   unreachable from the root.
 
 - leftout:
 
-  A numeric vector containing the vertex IDs that are unreachable from
+  A numeric vector containing the vertex ids that are unreachable from
   the root.
 
 ## Details

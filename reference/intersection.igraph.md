@@ -40,7 +40,7 @@ all graphs will be included. The corresponding operator is `%s%`.
 
 If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 then the operation is performed on symbolic vertex names instead of the
-internal numeric vertex IDs.
+internal numeric vertex ids.
 
 [`intersection()`](https://r.igraph.org/reference/intersection.md) keeps
 the attributes of all graphs. All graph, vertex and edge attributes are
@@ -106,29 +106,23 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> ── <igraph> ───────────────────────────────────────────────────────── 258536e ──
-#> ℹ undirected · named
-#> ℹ 13 vertices · 4 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → vertex: name <chr>
-#> 
-#> ── Vertex attributes ───────────────────────────────────────────────────────────
-#>      name
-#> [1]     D
-#> [2]     A
-#> [3]     B
-#> [4]     F
-#> [5]     G
-#> [6]     C
-#> [7]     E
-#> [8]     H
-#> [9]     I
-#> [10]    J
-#> [11]    Y
-#> [12]    X
-#> [13]    Z
-#> 
-#> ── Edges (vertex names) ────────────────────────────────────────────────────────
-#> [1] F ─ H  A ─ B  D ─ F  D ─ A 
+#> IGRAPH 58beb77 UN-- 13 4 -- 
+#> + attr: name (v/c)
+#> + vertex attributes:
+#> |      name
+#> | [1]     D
+#> | [2]     A
+#> | [3]     B
+#> | [4]     F
+#> | [5]     G
+#> | [6]     C
+#> | [7]     E
+#> | [8]     H
+#> | [9]     I
+#> | [10]    J
+#> | [11]    Y
+#> | [12]    X
+#> | [13]    Z
+#> + edges from 58beb77 (vertex names):
+#> [1] F--H A--B D--F D--A
 ```

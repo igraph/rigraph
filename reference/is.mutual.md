@@ -21,7 +21,7 @@ is.mutual(graph, eids = E(graph), loops = TRUE)
 - eids:
 
   Edge sequence, the edges that will be probed. By default is includes
-  all edges in the order of their IDs.
+  all edges in the order of their ids.
 
 - loops:
 

@@ -57,7 +57,7 @@ matching for correlated Erdős-Rényi graphs.
 
 ## See also
 
-Random graph models (games):
+Random graph models (games)
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
@@ -89,29 +89,21 @@ Random graph models (games):
 
 ``` r
 gg <- sample_correlated_gnp_pair(
-  n = 10, corr = 0.8, p = 0.5,
+  n = 10, corr = .8, p = .5,
   directed = FALSE
 )
 gg
 #> $graph1
-#> ── <igraph> ───────────────────────────────────────────────────────── 01bba42 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 22 edges
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   1 ─ 5   4 ─ 5   1 ─ 6   3 ─ 6   5 ─ 6   1 ─ 7  
-#> [10] 4 ─ 7   6 ─ 7   1 ─ 8   3 ─ 8   1 ─ 9   2 ─ 9   5 ─ 9   7 ─ 9   8 ─ 9  
-#> [19] 2 ─ 10  3 ─ 10  8 ─ 10  9 ─ 10 
+#> IGRAPH 404a139 U--- 10 22 -- 
+#> + edges from 404a139:
+#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 4-- 5 1-- 6 3-- 6 5-- 6 1-- 7 4-- 7 6-- 7 1-- 8
+#> [13] 3-- 8 1-- 9 2-- 9 5-- 9 7-- 9 8-- 9 2--10 3--10 8--10 9--10
 #> 
 #> $graph2
-#> ── <igraph> ───────────────────────────────────────────────────────── cf9afc1 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 20 edges
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   1 ─ 5   1 ─ 6   3 ─ 6   4 ─ 6   5 ─ 6   3 ─ 7  
-#> [10] 4 ─ 7   6 ─ 7   1 ─ 8   6 ─ 8   1 ─ 9   2 ─ 9   5 ─ 9   8 ─ 9   3 ─ 10 
-#> [19] 8 ─ 10  9 ─ 10 
+#> IGRAPH 8e9c998 U--- 10 20 -- 
+#> + edges from 8e9c998:
+#>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 3-- 6 4-- 6 5-- 6 3-- 7 4-- 7 6-- 7 1-- 8
+#> [13] 6-- 8 1-- 9 2-- 9 5-- 9 8-- 9 3--10 8--10 9--10
 #> 
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 #> [1] 0.6744005

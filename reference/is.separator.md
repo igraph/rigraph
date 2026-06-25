@@ -20,7 +20,7 @@ is.separator(graph, candidate)
 
 - candidate:
 
-  A numeric vector giving the vertex IDs of the candidate separator.
+  A numeric vector giving the vertex ids of the candidate separator.
 
 ## Related documentation in the C library
 

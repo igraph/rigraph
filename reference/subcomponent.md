@@ -28,7 +28,7 @@ subcomponent(graph, v, mode = c("all", "out", "in"))
 
 ## Value
 
-Numeric vector, the IDs of the vertices in the same component as `v`.
+Numeric vector, the ids of the vertices in the same component as `v`.
 
 ## Details
 
@@ -78,12 +78,12 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
-#> ── <vertex sequence> 1/100 · from 08cd4f8 ──────────────────────────────────────
+#> + 1/100 vertex, from 29c6644:
 #> [1] 1
 subcomponent(g, 1, "out")
-#> ── <vertex sequence> 1/100 · from 08cd4f8 ──────────────────────────────────────
+#> + 1/100 vertex, from 29c6644:
 #> [1] 1
 subcomponent(g, 1, "all")
-#> ── <vertex sequence> 1/100 · from 08cd4f8 ──────────────────────────────────────
+#> + 1/100 vertex, from 29c6644:
 #> [1] 1
 ```

@@ -15,7 +15,7 @@ and \(t\)."><meta property="og:image" content="https://r.igraph.org/logo.png"></
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ and \(t\)."><meta property="og:image" content="https://r.igraph.org/logo.png"></
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>List all minimum \((s,t)\)-cuts of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/flow.R" class="external-link"><code>R/flow.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/flow.R" class="external-link"><code>R/flow.R</code></a></small>
       <div class="d-none name"><code>st_min_cuts.Rd</code></div>
     </div>
 
@@ -70,11 +70,11 @@ and \(t\).</p>
 
 
 <dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
-<dd><p>The ID of the source vertex.</p></dd>
+<dd><p>The id of the source vertex.</p></dd>
 
 
 <dt id="arg-target">target<a class="anchor" aria-label="anchor" href="#arg-target"></a></dt>
-<dd><p>The ID of the target vertex.</p></dd>
+<dd><p>The id of the target vertex.</p></dd>
 
 
 <dt id="arg-capacity">capacity<a class="anchor" aria-label="anchor" href="#arg-capacity"></a></dt>
@@ -91,10 +91,10 @@ here.</p></dd>
 <dd><p>Numeric scalar, the size of the minimum cut(s).</p></dd>
 
 <dt>cuts</dt>
-<dd><p>A list of numeric vectors containing edge IDs. Each vector is a minimum \((s,t)\)-cut.</p></dd>
+<dd><p>A list of numeric vectors containing edge ids. Each vector is a minimum \((s,t)\)-cut.</p></dd>
 
 <dt>partition1s</dt>
-<dd><p>A list of numeric vectors containing vertex IDs,
+<dd><p>A list of numeric vectors containing vertex ids,
 they correspond to the edge cuts.
 Each vertex set is a generator of the corresponding cut, i.e. in the graph \(G=(V,E)\),
 the vertex set \(X\) and its complementer \(V-X\),
@@ -155,29 +155,29 @@ graphs, <em>Algorithmica</em> 15, 351–372, 1996.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 2982544 ──────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] s → a  s → b </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from b46b4db (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] s-&gt;a s-&gt;b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 2982544 ──────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] s → a  b → t </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from b46b4db (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] s-&gt;a b-&gt;t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 2982544 ──────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a → t  b → t </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from b46b4db (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a-&gt;t b-&gt;t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/9 · named · from 2982544 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 vertex, named, from b46b4db:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/9 · named · from 2982544 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 vertices, named, from b46b4db:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 8/9 · named · from 2982544 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/9 vertices, named, from b46b4db:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b a 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

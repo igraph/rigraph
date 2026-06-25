@@ -22,7 +22,7 @@ The input vector, with the `membership` class added.
 
 ## See also
 
-Community detection:
+Community detection
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),
 [`cluster_fluid_communities()`](https://r.igraph.org/reference/cluster_fluid_communities.md),

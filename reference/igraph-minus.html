@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Delete vertices or edges from a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>igraph-minus.Rd</code></div>
     </div>
 
@@ -82,7 +82,7 @@ or edges from the graph. The operation performed is selected based on
 the type of the right hand side argument:</p><ul><li><p>If it is an igraph graph object, then the difference of the
 two graphs is calculated, see <code><a href="difference.html">difference()</a></code>.</p></li>
 <li><p>If it is a numeric or character vector, then it is interpreted
-as a vector of vertex IDs and the specified vertices will be
+as a vector of vertex ids and the specified vertices will be
 deleted from the graph. Example:</p><div class="sourceCode"><pre><code><span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span></span></code></pre></div></li>
@@ -94,7 +94,7 @@ function), then these edges will be deleted from the graph.</p></li>
 <li><p>If it is an object created with the <code><a href="vertex.html">vertex()</a></code> (or the
 <code><a href="vertex.html">vertices()</a></code>) function, then all arguments of <code><a href="vertex.html">vertices()</a></code> are
 concatenated and the result is interpreted as a vector of vertex
-IDs. These vertices will be removed from the graph.</p></li>
+ids. These vertices will be removed from the graph.</p></li>
 <li><p>If it is an object created with the <code><a href="edge.html">edge()</a></code> (or the
 <code><a href="edge.html">edges()</a></code>) function, then all arguments of <code><a href="edge.html">edges()</a></code> are
 concatenated and then interpreted as edges to be removed from the

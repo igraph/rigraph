@@ -65,23 +65,13 @@ Other deterministic constructors:
 
 ``` r
 make_tree(10, 2)
-#> ── <igraph> Tree ──────────────────────────────────────────────────── 12b12ac ──
-#> ℹ directed
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, children <dbl>, mode <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2   1 → 3   2 → 4   2 → 5   3 → 6   3 → 7   4 → 8   4 → 9   5 → 10 
+#> IGRAPH d9f6a28 D--- 10 9 -- Tree
+#> + attr: name (g/c), children (g/n), mode (g/c)
+#> + edges from d9f6a28:
+#> [1] 1-> 2 1-> 3 2-> 4 2-> 5 3-> 6 3-> 7 4-> 8 4-> 9 5->10
 make_tree(10, 3, mode = "undirected")
-#> ── <igraph> Tree ──────────────────────────────────────────────────── 21ad07f ──
-#> ℹ undirected
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, children <dbl>, mode <chr>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 ─ 2   1 ─ 3   1 ─ 4   2 ─ 5   2 ─ 6   2 ─ 7   3 ─ 8   3 ─ 9   3 ─ 10 
+#> IGRAPH d5bd93e U--- 10 9 -- Tree
+#> + attr: name (g/c), children (g/n), mode (g/c)
+#> + edges from d5bd93e:
+#> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10
 ```

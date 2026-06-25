@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Find Bonacich alpha centrality scores of network positions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/centrality.R" class="external-link"><code>R/centrality.R</code></a></small>
       <div class="d-none name"><code>alpha.centrality.Rd</code></div>
     </div>
 
@@ -107,15 +107,11 @@ will be replicated to match the number of vertices.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (default): use the <code>weight</code> edge attribute if the graph has
-one, otherwise return a traditional (unweighted) adjacency matrix.</p></li>
-<li><p><code>NA</code>: explicitly unweighted, ignoring any <code>weight</code> edge attribute.</p></li>
-<li><p>A numeric or logical vector of length <code><a href="gsize.html">ecount()</a></code>: use these values
-directly as edge weights.</p></li>
-<li><p>A character scalar: the name of an edge attribute whose values are
-used as weights. The attribute must be numeric or logical.</p></li>
-</ul><p>If multiple edges share endpoints, the value of an arbitrarily chosen edge
-is included in the matrix.</p></dd>
+<dd><p>A character scalar that gives the name of the edge attribute
+to use in the adjacency matrix. If it is <code>NULL</code>, then the
+‘weight’ edge attribute of the graph is used, if there is one.
+Otherwise, or if it is <code>NA</code>, then the calculation uses the standard
+adjacency matrix.</p></dd>
 
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
@@ -131,7 +127,7 @@ support</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple" class="external-link"><code>is_simple()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency" class="external-link"><code>get_adjacency()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse" class="external-link"><code>get_adjacency_sparse()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges" class="external-link"><code>edges()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids" class="external-link"><code>get_eids()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount" class="external-link"><code>ecount()</code></a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

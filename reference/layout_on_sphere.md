@@ -1,7 +1,7 @@
 # Graph layout with vertices on the surface of a sphere
 
 Place vertices on a sphere, approximately uniformly, in the order of
-their vertex IDs.
+their vertex ids.
 
 ## Usage
 

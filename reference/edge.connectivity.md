@@ -20,13 +20,13 @@ edge.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 - source:
 
-  The ID of the source vertex, for
+  The id of the source vertex, for
   [`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)
   it can be `NULL`, see details below.
 
 - target:
 
-  The ID of the target vertex, for
+  The id of the target vertex, for
   [`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)
   it can be `NULL`, see details below.
 
@@ -42,6 +42,6 @@ edge.connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
 ## Related documentation in the C library
 
-[`edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
 [`st_edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity),
+[`edge_connectivity()`](https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

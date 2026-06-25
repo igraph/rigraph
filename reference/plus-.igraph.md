@@ -73,7 +73,7 @@ side argument.
 
   The unnamed arguments of
   [`edges()`](https://r.igraph.org/reference/edge.md) are concatenated
-  and used as vertex IDs of the end points of the new edges. The named
+  and used as vertex ids of the end points of the new edges. The named
   arguments will be added as edge attributes.
 
   Examples:
@@ -97,7 +97,7 @@ side argument.
   edges that form a path are added. The edges and possibly their
   attributes are specified as the arguments to the
   [`path()`](https://r.igraph.org/reference/path.md) function. The
-  non-named arguments are concatenated and interpreted as the vertex IDs
+  non-named arguments are concatenated and interpreted as the vertex ids
   along the path. The remaining arguments are added as edge attributes.
 
   Examples:

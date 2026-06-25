@@ -31,7 +31,7 @@ get.shortest.paths(
 - from:
 
   Numeric constant, the vertex from or to the shortest paths will be
-  calculated. Note that right now this is not a vector of vertex IDs,
+  calculated. Note that right now this is not a vector of vertex ids,
   but only a single vertex.
 
 - to:

@@ -52,7 +52,7 @@ For `components()` a named list with three components:
 
 - membership:
 
-  numeric vector giving the cluster ID to which each vertex belongs.
+  numeric vector giving the cluster id to which each vertex belongs.
 
 - csize:
 
@@ -110,7 +110,7 @@ consecutive depth-first searches.
 [`subcomponent()`](https://r.igraph.org/reference/subcomponent.md),
 [`groups()`](https://r.igraph.org/reference/groups.md)
 
-Connected components:
+Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
@@ -179,13 +179,8 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── cd0c30f ──
-#> ℹ undirected
-#> ℹ 8 vertices · 7 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, type <chr>, loops <lgl>, p <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 2 ─ 3  1 ─ 4  4 ─ 5  2 ─ 6  5 ─ 6  6 ─ 7  6 ─ 8 
+#> IGRAPH b92e753 U--- 8 7 -- Erdos-Renyi (gnp) graph
+#> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
+#> + edges from b92e753:
+#> [1] 2--3 1--4 4--5 2--6 5--6 6--7 6--8
 ```

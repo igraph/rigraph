@@ -19,13 +19,13 @@ as_star(...)
 
 - center:
 
-  The ID of the vertex to put in the center. By default it is the first
+  The id of the vertex to put in the center. By default it is the first
   vertex.
 
 - order:
 
   Numeric vector, the order of the vertices along the perimeter. The
-  default ordering is given by the vertex IDs.
+  default ordering is given by the vertex ids.
 
 - ...:
 

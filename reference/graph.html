@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create an igraph graph from a list of edges, or a notable graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>graph.Rd</code></div>
     </div>
 
@@ -80,7 +80,7 @@ consistent API.</p>
 <dd><p>A vector defining the edges, the first edge points
 from the first element to the second, the second edge from the third
 to the fourth, etc. For a numeric vector, these are interpreted
-as internal vertex IDs. For character vectors, they are interpreted
+as internal vertex ids. For character vectors, they are interpreted
 as vertex names.</p>
 <p>Alternatively, this can be a character scalar, the name of a
 notable graph. See Notable graphs below. The name is case
@@ -102,9 +102,9 @@ Passed to <code><a href="make_graph.html">make_directed_graph()</a></code> or <c
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>The number of vertices in the graph. This argument is
 ignored (with a warning) if <code>edges</code> are symbolic vertex names. It
-is also ignored if there is a bigger vertex ID in <code>edges</code>. This
+is also ignored if there is a bigger vertex id in <code>edges</code>. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate.</p></dd>
+vertex with the largest id is not an isolate.</p></dd>
 
 
 <dt id="arg-isolates">isolates<a class="anchor" aria-label="anchor" href="#arg-isolates"></a></dt>
@@ -127,7 +127,7 @@ Do not give both of them.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple" class="external-link"><code>is_simple()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

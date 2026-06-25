@@ -40,7 +40,7 @@ subgraph_from_edges(graph, eids, delete.vertices = TRUE)
 
 - eids:
 
-  The edge IDs of the edges that will be kept in the result graph.
+  The edge ids of the edges that will be kept in the result graph.
 
 - delete.vertices:
 

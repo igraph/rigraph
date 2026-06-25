@@ -28,12 +28,12 @@ A list with entries:
 
 - cuts:
 
-  A list of numeric vectors containing edge IDs. Each vector is an
+  A list of numeric vectors containing edge ids. Each vector is an
   \\(s,t)\\-cut.
 
 - partition1s:
 
-  A list of numeric vectors containing vertex IDs, they correspond to
+  A list of numeric vectors containing vertex ids, they correspond to
   the edge cuts. Each vertex set is a generator of the corresponding
   cut, i.e. in the graph \\G=(V,E)\\, the vertex set \\X\\ and its
   complementer \\V-X\\, generates the cut that contains exactly the
@@ -86,37 +86,37 @@ g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 st_cuts(g, source = "a", target = "e")
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 1/4 · vertex names · from 3b40d5a ───────────────────────────
-#> [1] a → b 
+#> + 1/4 edge from 23f8515 (vertex names):
+#> [1] a->b
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 1/4 · vertex names · from 3b40d5a ───────────────────────────
-#> [1] b → c 
+#> + 1/4 edge from 23f8515 (vertex names):
+#> [1] b->c
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 1/4 · vertex names · from 3b40d5a ───────────────────────────
-#> [1] c → d 
+#> + 1/4 edge from 23f8515 (vertex names):
+#> [1] c->d
 #> 
 #> $cuts[[4]]
-#> ── <edge sequence> 1/4 · vertex names · from 3b40d5a ───────────────────────────
-#> [1] d → e 
+#> + 1/4 edge from 23f8515 (vertex names):
+#> [1] d->e
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/5 · named · from 3b40d5a ────────────────────────────────
+#> + 1/5 vertex, named, from 23f8515:
 #> [1] a
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/5 · named · from 3b40d5a ────────────────────────────────
+#> + 2/5 vertices, named, from 23f8515:
 #> [1] a b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 3/5 · named · from 3b40d5a ────────────────────────────────
+#> + 3/5 vertices, named, from 23f8515:
 #> [1] a b c
 #> 
 #> $partition1s[[4]]
-#> ── <vertex sequence> 4/5 · named · from 3b40d5a ────────────────────────────────
+#> + 4/5 vertices, named, from 23f8515:
 #> [1] a b c d
 #> 
 #> 
@@ -129,93 +129,93 @@ g2 <- graph_from_literal(
 st_cuts(g2, source = "s", target = "t")
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → a  s → b 
+#> + 2/10 edges from 43f6e55 (vertex names):
+#> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → a  b → t 
+#> + 2/10 edges from 43f6e55 (vertex names):
+#> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 1  a → 2  a → 3 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->1 a->2 a->3
 #> 
 #> $cuts[[4]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 1  a → 2  3 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->1 a->2 3->b
 #> 
 #> $cuts[[5]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 1  a → 3  2 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->1 a->3 2->b
 #> 
 #> $cuts[[6]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 1  2 → b  3 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->1 2->b 3->b
 #> 
 #> $cuts[[7]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 2  a → 3  1 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->2 a->3 1->b
 #> 
 #> $cuts[[8]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 2  1 → b  3 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->2 1->b 3->b
 #> 
 #> $cuts[[9]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  a → 3  1 → b  2 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t a->3 1->b 2->b
 #> 
 #> $cuts[[10]]
-#> ── <edge sequence> 5/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] s → b  a → t  1 → b  2 → b  3 → b 
+#> + 5/10 edges from 43f6e55 (vertex names):
+#> [1] s->b a->t 1->b 2->b 3->b
 #> 
 #> $cuts[[11]]
-#> ── <edge sequence> 2/10 · vertex names · from 6cc2b90 ──────────────────────────
-#> [1] a → t  b → t 
+#> + 2/10 edges from 43f6e55 (vertex names):
+#> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 1/7 vertex, named, from 43f6e55:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 2/7 vertices, named, from 43f6e55:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 2/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 2/7 vertices, named, from 43f6e55:
 #> [1] s a
 #> 
 #> $partition1s[[4]]
-#> ── <vertex sequence> 3/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 3/7 vertices, named, from 43f6e55:
 #> [1] s a 3
 #> 
 #> $partition1s[[5]]
-#> ── <vertex sequence> 3/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 3/7 vertices, named, from 43f6e55:
 #> [1] s a 2
 #> 
 #> $partition1s[[6]]
-#> ── <vertex sequence> 4/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 4/7 vertices, named, from 43f6e55:
 #> [1] s a 2 3
 #> 
 #> $partition1s[[7]]
-#> ── <vertex sequence> 3/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 3/7 vertices, named, from 43f6e55:
 #> [1] s a 1
 #> 
 #> $partition1s[[8]]
-#> ── <vertex sequence> 4/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 4/7 vertices, named, from 43f6e55:
 #> [1] s a 1 3
 #> 
 #> $partition1s[[9]]
-#> ── <vertex sequence> 4/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 4/7 vertices, named, from 43f6e55:
 #> [1] s a 1 2
 #> 
 #> $partition1s[[10]]
-#> ── <vertex sequence> 5/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 5/7 vertices, named, from 43f6e55:
 #> [1] s a 1 2 3
 #> 
 #> $partition1s[[11]]
-#> ── <vertex sequence> 6/7 · named · from 6cc2b90 ────────────────────────────────
+#> + 6/7 vertices, named, from 43f6e55:
 #> [1] s a 1 2 3 b
 #> 
 #> 

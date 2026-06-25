@@ -15,7 +15,7 @@ of make_lattice()."><meta property="og:image" content="https://r.igraph.org/logo
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ of make_lattice()."><meta property="og:image" content="https://r.igraph.org/logo
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create a ring graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_ring.Rd</code></div>
     </div>
 
@@ -118,44 +118,30 @@ vertex has one child.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 8af6724 ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Graph attributes ────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">name</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Ring graph"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">mutual</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">circular</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] 1 ─ 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ff3a78a U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] "Ring graph"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + mutual:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ff3a78a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mutual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 7483f25 ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 20 edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Graph attributes ────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">name</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Ring graph"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">mutual</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">circular</span>:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 → 2   2 → 1   2 → 3   3 → 2   3 → 4   4 → 3   4 → 5   5 → 4   5 → 6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] 6 → 5   6 → 7   7 → 6   7 → 8   8 → 7   8 → 9   9 → 8   9 → 10  10 → 9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 10 → 1  1 → 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9594cbd D--- 10 20 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] "Ring graph"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + mutual:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9594cbd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 2  2-&gt; 1  2-&gt; 3  3-&gt; 2  3-&gt; 4  4-&gt; 3  4-&gt; 5  5-&gt; 4  5-&gt; 6  6-&gt; 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  6-&gt; 7  7-&gt; 6  7-&gt; 8  8-&gt; 7  8-&gt; 9  9-&gt; 8  9-&gt;10 10-&gt; 9 10-&gt; 1  1-&gt;10</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -50,7 +50,7 @@ with appropriately constructed degree sequences.
 [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md) for
 a generator with prescribed degree sequence.
 
-Random graph models (games):
+Random graph models (games)
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Add vertices, edges or another graph to a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>plus-.igraph.Rd</code></div>
     </div>
 
@@ -109,7 +109,7 @@ is added to the graph.</p></li>
 graph. The new edges and possibly their attributes can be specified as
 the arguments of the <code><a href="edge.html">edges()</a></code> function.</p>
 <p>The unnamed arguments of <code><a href="edge.html">edges()</a></code> are concatenated and used
-as vertex IDs of the end points of the new edges. The named
+as vertex ids of the end points of the new edges. The named
 arguments will be added as edge attributes.</p>
 <p>Examples:</p><div class="sourceCode"><pre><code><span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_empty_graph.html">make_empty_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="../reference/vertex.html">vertices</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -124,7 +124,7 @@ the graph.</p></li>
 new edges that form a path are added. The edges and possibly their
 attributes are specified as the arguments to the <code><a href="path.html">path()</a></code>
 function. The non-named arguments are concatenated and interpreted
-as the vertex IDs along the path. The remaining arguments are added
+as the vertex ids along the path. The remaining arguments are added
 as edge attributes.</p>
 <p>Examples:</p><div class="sourceCode"><pre><code><span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_empty_graph.html">make_empty_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/vertex.html">vertices</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="../reference/path.html">path</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span></span>

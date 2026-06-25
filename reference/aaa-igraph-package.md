@@ -58,7 +58,7 @@ To create small graphs with a given structure probably the
 function is easiest. It uses R's formula interface, its manual page
 contains many examples. Another option is
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md), which
-takes numeric vertex IDs directly.
+takes numeric vertex ids directly.
 [`graph_from_atlas()`](https://r.igraph.org/reference/graph_from_atlas.md)
 creates graph from the Graph Atlas,
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md) can
@@ -82,18 +82,18 @@ small-world model
 
 ## Vertex and edge IDs
 
-Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are
+Vertices and edges have numerical vertex ids in igraph. Vertex ids are
 always consecutive and they start with one. I.e. for a graph with \\n\\
-vertices the vertex IDs are between \\1\\ and \\n\\. If some operation
+vertices the vertex ids are between \\1\\ and \\n\\. If some operation
 changes the number of vertices in the graphs, e.g. a subgraph is created
 via [`induced_subgraph()`](https://r.igraph.org/reference/subgraph.md),
 then the vertices are renumbered to satisfy this criteria.
 
-The same is true for the edges as well, edge IDs are always between one
+The same is true for the edges as well, edge ids are always between one
 and \\m\\, the total number of edges in the graph.
 
 It is often desirable to follow vertices along a number of graph
-operations, and vertex IDs don't allow this because of the renumbering.
+operations, and vertex ids don't allow this because of the renumbering.
 The solution is to assign attributes to the vertices. These are kept by
 all operations, if possible. See more about attributes in the next
 section.
@@ -110,7 +110,7 @@ values, see
 
 Some vertex/edge/graph attributes are treated specially. One of them is
 the ‘name’ attribute. This is used for printing the graph instead of the
-numerical IDs, if it exists. Vertex names can also be used to specify a
+numerical ids, if it exists. Vertex names can also be used to specify a
 vector or set of vertices, in all igraph functions. E.g.
 [`degree()`](https://r.igraph.org/reference/degree.md) has a `v`
 argument that gives the vertices for which the degree is calculated.
@@ -194,9 +194,6 @@ Useful links:
 ([ORCID](https://orcid.org/0000-0002-1416-3412))
 
 Authors:
-
-- Kirill Müller <kirill@cynkra.com>
-  ([ORCID](https://orcid.org/0000-0002-1416-3412))
 
 - Gábor Csárdi <csardi.gabor@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-7098-9676))

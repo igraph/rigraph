@@ -60,23 +60,13 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> ── <igraph> Out-star ──────────────────────────────────────────────── 96973d6 ──
-#> ℹ directed
-#> ℹ 10 vertices · 9 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 → 2   1 → 3   1 → 4   1 → 5   1 → 6   1 → 7   1 → 8   1 → 9   1 → 10 
+#> IGRAPH f9a12bf D--- 10 9 -- Out-star
+#> + attr: name (g/c), mode (g/c), center (g/n)
+#> + edges from f9a12bf:
+#> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
 make_star(5, mode = "undirected")
-#> ── <igraph> Star ──────────────────────────────────────────────────── 6b197cd ──
-#> ℹ undirected
-#> ℹ 5 vertices · 4 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name <chr>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 1 ─ 2  1 ─ 3  1 ─ 4  1 ─ 5 
+#> IGRAPH bfab02f U--- 5 4 -- Star
+#> + attr: name (g/c), mode (g/c), center (g/n)
+#> + edges from bfab02f:
+#> [1] 1--2 1--3 1--4 1--5
 ```

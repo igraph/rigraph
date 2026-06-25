@@ -118,7 +118,7 @@ with_fr(...)
 ## Value
 
 A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the IDs of the vertex IDs.
+vertex, according to the ids of the vertex ids.
 
 ## Details
 

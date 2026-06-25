@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Simple graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/simple.R" class="external-link"><code>R/simple.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/simple.R" class="external-link"><code>R/simple.R</code></a></small>
       <div class="d-none name"><code>simplify.Rd</code></div>
     </div>
 
@@ -93,8 +93,7 @@ single one in the new graph, and their attributes are combined. Please see
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a graph object with the loop and/or multiple edges removed; the
-input graph is returned unchanged if it is already simple.</p>
+    <p>a new graph object with the edges deleted.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -105,8 +104,7 @@ it does not contain loop edges and multiple edges.</p>
 <p><code>is_simple()</code> checks whether a graph is simple.</p>
 <p><code>simplify()</code> removes the loop and/or multiple edges from a graph.  If
 both <code>remove.loops</code> and <code>remove.multiple</code> are <code>TRUE</code> the
-function returns a simple graph. If the graph is already simple, it is
-returned unchanged.</p>
+function returns a simple graph.</p>
 <p><code>simplify_and_colorize()</code> constructs a new, simple graph from a graph and
 also sets a <code>color</code> attribute on both the vertices and the edges.
 The colors of the vertices represent the number of self-loops that were

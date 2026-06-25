@@ -28,11 +28,11 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - i:
 
-  Index. Vertex IDs or names or logical vectors. See details below.
+  Index. Vertex ids or names or logical vectors. See details below.
 
 - j:
 
-  Index. Vertex IDs or names or logical vectors. See details below.
+  Index. Vertex ids or names or logical vectors. See details below.
 
 - ...:
 
@@ -40,7 +40,7 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - from:
 
-  A numeric or character vector giving vertex IDs or names. Together
+  A numeric or character vector giving vertex ids or names. Together
   with the `to` argument, it can be used to query/set a sequence of
   edges. See details below. This argument cannot be present together
   with any of the `i` and `j` arguments and if it is present, then the
@@ -48,7 +48,7 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - to:
 
-  A numeric or character vector giving vertex IDs or names. Together
+  A numeric or character vector giving vertex ids or names. Together
   with the `from` argument, it can be used to query/set a sequence of
   edges. See details below. This argument cannot be present together
   with any of the `i` and `j` arguments and if it is present, then the
@@ -60,7 +60,7 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - edges:
 
-  Logical scalar, whether to return edge IDs.
+  Logical scalar, whether to return edge ids.
 
 - drop:
 
@@ -99,7 +99,7 @@ the graph. Here is what you can do with it:
 
 3.  The `from` and `to` arguments can be used to check the existence of
     many edges. In this case, both `from` and `to` must be present and
-    they must have the same length. They must contain vertex IDs or
+    they must have the same length. They must contain vertex ids or
     names. A numeric vector is returned, of the same length as `from`
     and `to`, it contains ones for existing edges edges and zeros for
     non-existing ones. Example:
@@ -112,12 +112,12 @@ the graph. Here is what you can do with it:
     non-esistent edges zero weights are returned. Other edge attributes
     can be queried as well, by giving the `attr` argument.
 
-5.  Querying edge IDs instead of the existance of edges or edge
+5.  Querying edge ids instead of the existance of edges or edge
     attributes. E.g.
 
           graph[1, 2, edges=TRUE]
 
-    returns the ID of the edge between vertices 1 and 2, or zero if
+    returns the id of the edge between vertices 1 and 2, or zero if
     there is no such edge.
 
 6.  Adding one or more edges to a graph. For this the element(s) of the
@@ -157,7 +157,7 @@ the graph. Here is what you can do with it:
 
           graph[v, w] <- FALSE 
 
-    if \\v\\ and \\w\\ are vectors of edge IDs or names.
+    if \\v\\ and \\w\\ are vectors of edge ids or names.
 
 ‘`[`’ allows logical indices and negative indices as well, with the
 usual R semantics. E.g.
@@ -172,7 +172,7 @@ adds an edge from every isolate vertex to vertex one, and
 creates a star graph.
 
 Of course, the indexing operators support vertex names, so instead of a
-numeric vertex ID a vertex can also be given to ‘`[`’ and ‘`[[`’.
+numeric vertex id a vertex can also be given to ‘`[`’ and ‘`[[`’.
 
 ## See also
 

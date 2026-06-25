@@ -39,7 +39,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 
 - cliques:
 
-  A list of vertex IDs, the graphlet basis to use for the projection.
+  A list of vertex ids, the graphlet basis to use for the projection.
 
 - niter:
 
@@ -56,7 +56,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 - cliques:
 
   A list of subgraphs, the candidate graphlet basis. Each subgraph is
-  give by a vector of vertex IDs.
+  give by a vector of vertex ids.
 
 - Mu:
 
@@ -67,7 +67,7 @@ graphlets(graph, weights = NULL, niter = 1000)
 - cliques:
 
   A list of subgraphs, the candidate graphlet basis. Each subgraph is
-  give by a vector of vertex IDs.
+  give by a vector of vertex ids.
 
 - thresholds:
 

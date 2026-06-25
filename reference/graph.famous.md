@@ -27,7 +27,7 @@ graph.famous(
   A vector defining the edges, the first edge points from the first
   element to the second, the second edge from the third to the fourth,
   etc. For a numeric vector, these are interpreted as internal vertex
-  IDs. For character vectors, they are interpreted as vertex names.
+  ids. For character vectors, they are interpreted as vertex names.
 
   Alternatively, this can be a character scalar, the name of a notable
   graph. See Notable graphs below. The name is case insensitive.
@@ -56,9 +56,9 @@ graph.famous(
 
   The number of vertices in the graph. This argument is ignored (with a
   warning) if `edges` are symbolic vertex names. It is also ignored if
-  there is a bigger vertex ID in `edges`. This means that for this
+  there is a bigger vertex id in `edges`. This means that for this
   function it is safe to supply zero here if the vertex with the largest
-  ID is not an isolate.
+  id is not an isolate.
 
 - isolates:
 
@@ -84,5 +84,4 @@ graph.famous(
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)

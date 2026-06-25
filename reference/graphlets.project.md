@@ -33,7 +33,7 @@ graphlets.project(
 
 - cliques:
 
-  A list of vertex IDs, the graphlet basis to use for the projection.
+  A list of vertex ids, the graphlet basis to use for the projection.
 
 - niter:
 

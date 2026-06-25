@@ -54,7 +54,7 @@ A list with entries:
 
 - edges:
 
-  The predicted edges, in a two-column matrix of vertex IDs.
+  The predicted edges, in a two-column matrix of vertex ids.
 
 - prob:
 

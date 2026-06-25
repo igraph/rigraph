@@ -52,7 +52,7 @@ plot(
 
 - mark.groups:
 
-  A list of vertex ID vectors. It is interpreted as a set of vertex
+  A list of vertex id vectors. It is interpreted as a set of vertex
   groups. Each vertex group is highlighted, by plotting a colored
   smoothed polygon around and “under” it. See the arguments below to
   control the look of the polygons.
@@ -70,7 +70,7 @@ plot(
   A scalar or vector giving the colors of marking the polygons, in any
   format accepted by
   [`graphics::xspline()`](https://rdrr.io/r/graphics/xspline.html); e.g.
-  numeric color IDs, symbolic color names, or colors in RGB.
+  numeric color ids, symbolic color names, or colors in RGB.
 
 - mark.border:
 

@@ -27,7 +27,7 @@ get.all.shortest.paths(
 - from:
 
   Numeric constant, the vertex from or to the shortest paths will be
-  calculated. Note that right now this is not a vector of vertex IDs,
+  calculated. Note that right now this is not a vector of vertex ids,
   but only a single vertex.
 
 - to:
@@ -57,8 +57,8 @@ get.all.shortest.paths(
 
 ## Related documentation in the C library
 
-[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra),
 [`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths),
+[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),

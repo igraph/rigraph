@@ -87,7 +87,7 @@ pa(
   version igraph used this algorithm if `power` was not one, or
   `zero.appeal` was not one. `bag` is the algorithm that was previously
   (before version 0.6) used if `power` was one and `zero.appeal` was one
-  as well. It works by putting the IDs of the vertices into a bag
+  as well. It works by putting the ids of the vertices into a bag
   (multiset, really), exactly as many times as their (in-)degree, plus
   once more. Then the required number of cited vertices are drawn from
   the bag, with replacement. This method might generate multiple edges.
@@ -156,7 +156,7 @@ de Solla Price, D. J. 1965. Networks of Scientific Papers *Science*, 149
 
 ## See also
 
-Random graph models (games):
+Random graph models (games)
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),

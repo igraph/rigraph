@@ -30,7 +30,7 @@ maximal.cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 
 - subset:
 
-  If not `NULL`, then it must be a vector of vertex IDs, numeric or
+  If not `NULL`, then it must be a vector of vertex ids, numeric or
   symbolic if the graph is named. The algorithm is run from these
   vertices only, so only a subset of all maximal cliques is returned.
   See the Eppstein paper for details. This argument makes it possible to
@@ -41,7 +41,7 @@ maximal.cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
   If not `NULL`, then it must be a file name, i.e. a character scalar.
   The output of the algorithm is written to this file. (If it exists,
   then it will be overwritten.) Each clique will be a separate line in
-  the file, given with the numeric IDs of its vertices, separated by
+  the file, given with the numeric ids of its vertices, separated by
   whitespace.
 
 ## Related documentation in the C library

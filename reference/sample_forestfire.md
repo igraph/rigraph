@@ -91,7 +91,7 @@ Knowledge discovery in data mining*, 177–187, 2005.
 [`sample_pa()`](https://r.igraph.org/reference/sample_pa.md) for the
 basic preferential attachment model.
 
-Random graph models (games):
+Random graph models (games)
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),

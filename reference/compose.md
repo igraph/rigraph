@@ -41,7 +41,7 @@ the other is undirected.
 
 If the `byname` argument is `TRUE` (or `auto` and the graphs are all
 named), then the operation is performed based on symbolic vertex names.
-Otherwise numeric vertex IDs are used.
+Otherwise numeric vertex ids are used.
 
 `compose()` keeps the attributes of both graphs. All graph, vertex and
 edge attributes are copied to the result. If an attribute is present in
@@ -117,29 +117,28 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> ── <igraph> ───────────────────────────────────────────────────────── e19a8eb ──
-#> ℹ undirected
-#> ℹ 10 vertices · 36 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name_1 <chr>, name_2 <chr>, mutual <lgl>, circular <lgl>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 1    1 ─ 1    1 ─ 2    2 ─ 10   2 ─ 9    2 ─ 8    2 ─ 7    2 ─ 6   
-#>  [9] 2 ─ 5    2 ─ 4    2 ─ 3    2 ─ 2    1 ─ 3    1 ─ 3    1 ─ 4    1 ─ 4   
-#> [17] 1 ─ 5    1 ─ 5    1 ─ 6    1 ─ 6    1 ─ 7    1 ─ 7    1 ─ 8    1 ─ 8   
-#> [25] 1 ─ 9    1 ─ 9    1 ─ 10   10 ─ 10  9 ─ 10   8 ─ 10   7 ─ 10   6 ─ 10  
-#> [33] 5 ─ 10   4 ─ 10   3 ─ 10   2 ─ 10  
+#> IGRAPH 2d073d9 U--- 10 36 -- 
+#> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
+#> | (g/c), center (g/n)
+#> + edges:
+#>  1 --  1  1  1  1  2  3  3  4  4  5  5  6  6  7  7  8  8  9  9 10
+#>  2 --  1  2  2  3  4  5  6  7  8  9 10 10
+#>  3 --  1  1  2 10
+#>  4 --  1  1  2 10
+#>  5 --  1  1  2 10
+#>  6 --  1  1  2 10
+#>  7 --  1  1  2 10
+#>  8 --  1  1  2 10
+#>  9 --  1  1  2 10
+#> 10 --  1  2  2  3  4  5  6  7  8  9 10 10
 print_all(simplify(gc))
-#> ── <igraph> ───────────────────────────────────────────────────────── 82501a9 ──
-#> ℹ undirected
-#> ℹ 10 vertices · 24 edges
-#> 
-#> ── Attributes ──────────────────────────────────────────────────────────────────
-#> → graph:  name_1 <chr>, name_2 <chr>, mutual <lgl>, circular <lgl>, mode <chr>, center <dbl>
-#> 
-#> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 1 ─ 2   1 ─ 3   1 ─ 4   1 ─ 5   1 ─ 6   1 ─ 7   1 ─ 8   1 ─ 9   1 ─ 10 
-#> [10] 2 ─ 3   2 ─ 4   2 ─ 5   2 ─ 6   2 ─ 7   2 ─ 8   2 ─ 9   2 ─ 10  3 ─ 10 
-#> [19] 4 ─ 10  5 ─ 10  6 ─ 10  7 ─ 10  8 ─ 10  9 ─ 10 
+#> IGRAPH f13fa64 U--- 10 24 -- 
+#> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
+#> | (g/c), center (g/n)
+#> + edges:
+#>  1 --  2  3  4  5  6  7  8  9 10    2 --  1  3  4  5  6  7  8  9 10
+#>  3 --  1  2 10                      4 --  1  2 10                  
+#>  5 --  1  2 10                      6 --  1  2 10                  
+#>  7 --  1  2 10                      8 --  1  2 10                  
+#>  9 --  1  2 10                     10 --  1  2  3  4  5  6  7  8  9
 ```

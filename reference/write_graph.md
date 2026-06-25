@@ -125,7 +125,7 @@ is specified as an edge line (e).
 
 GML is a quite general textual format.
 
-- ID:
+- id:
 
   Optional numeric vertex IDs to use.
 
@@ -196,7 +196,7 @@ networks. *J Mol Biol.* 2004 Jun 25;340(1):179-90.
 
 [`read_graph()`](https://r.igraph.org/reference/read_graph.md)
 
-Foreign format readers:
+Foreign format readers
 [`graph_from_graphdb()`](https://r.igraph.org/reference/graph_from_graphdb.md),
 [`read_graph()`](https://r.igraph.org/reference/read_graph.md)
 

@@ -29,7 +29,7 @@ the plus and minus operators.
 When adding edges via `+`, all unnamed arguments of `edge()` (or
 `edges()`) are concatenated, and then passed to
 [`add_edges()`](https://r.igraph.org/reference/add_edges.md). They are
-interpreted as pairs of vertex IDs, and an edge will added between each
+interpreted as pairs of vertex ids, and an edge will added between each
 pair. Named arguments will be used as edge attributes for the new edges.
 
 When deleting edges via `-`, all arguments of `edge()` (or `edges()`)
@@ -75,7 +75,7 @@ g <- g + edge(1, 5, color = "green") +
   edge("8|9")
 
 E(g)[[]]
-#> ── <edge sequence> 11/11 · from 3fd28ff ────────────────────────────────────────
+#> + 11/11 edges from 4d91ab9:
 #>    tail head tid hid color
 #> 1     1    2   1   2   red
 #> 2     2    3   2   3   red
