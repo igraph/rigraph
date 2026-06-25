@@ -1412,7 +1412,7 @@ test_that("graph_attr_combine defaults to the graph_attr_combine igraph option",
 
   # Default option ("rename") preserves the historical suffixing behaviour.
   u <- union(g1, g2)
-  expect_true(all(c("label_1", "label_2") %in% graph_attr_names(u)))
+  expect_all_true(c("label_1", "label_2") %in% graph_attr_names(u))
 
   # Setting the option changes the default for the graph operators.
   local_igraph_options(graph_attr_combine = "ignore")
