@@ -4,6 +4,13 @@
 
 ## Bug fixes
 
+- Compatibility fix for withr update (#2705).
+
+
+# igraph 2.3.2
+
+## Bug fixes
+
 - Fix obsolete Fortran syntax (#2644).
 
 
