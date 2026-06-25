@@ -1,5 +1,14 @@
 # Changelog
 
+## igraph 2.3.2.9014
+
+### Features
+
+- Retire `attr` in favor of `weights` for adjacency matrix functions
+  ([\#906](https://github.com/igraph/rigraph/issues/906),
+  [\#1137](https://github.com/igraph/rigraph/issues/1137),
+  [\#2677](https://github.com/igraph/rigraph/issues/2677)).
+
 ## igraph 2.3.2.9013
 
 ### Features

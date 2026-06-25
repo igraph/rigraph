@@ -73,7 +73,7 @@ Other deterministic constructors:
 
 ``` r
 make_wheel(10, mode = "out")
-#> ── <igraph> Out-wheel ─────────────────────────────────────────────── a202db8 ──
+#> ── <igraph> Out-wheel ─────────────────────────────────────────────── a45222c ──
 #> ℹ directed
 #> ℹ 10 vertices · 18 edges
 #> 
@@ -84,7 +84,7 @@ make_wheel(10, mode = "out")
 #>  [1] 1 → 2   1 → 3   1 → 4   1 → 5   1 → 6   1 → 7   1 → 8   1 → 9   1 → 10 
 #> [10] 2 → 3   3 → 4   4 → 5   5 → 6   6 → 7   7 → 8   8 → 9   9 → 10  10 → 2 
 make_wheel(5, mode = "undirected")
-#> ── <igraph> Wheel ─────────────────────────────────────────────────── b02176a ──
+#> ── <igraph> Wheel ─────────────────────────────────────────────────── 64b9758 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 8 edges
 #> 
