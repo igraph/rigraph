@@ -7,7 +7,7 @@ time_that(
     library(igraph)
     set.seed(42)
     vc <- 200
-    nos = 10
+    nos <- 10
   },
   reinit = {
     g1 <- erdos.renyi.game(vc, 0.01)
