@@ -35,11 +35,18 @@ the same factor for every node, or a vector giving the factor for every
 vertex. Note that too long vectors will be truncated and too short vectors
 will be replicated to match the number of vertices.}
 
-\item{weights}{A character scalar that gives the name of the edge attribute
-to use in the adjacency matrix. If it is \code{NULL}, then the
-\sQuote{weight} edge attribute of the graph is used, if there is one.
-Otherwise, or if it is \code{NA}, then the calculation uses the standard
-adjacency matrix.}
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 
 \item{tol}{Tolerance for near-singularities during matrix inversion, see
 \code{\link[=solve]{solve()}}.}
@@ -55,7 +62,7 @@ support}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \keyword{internal}

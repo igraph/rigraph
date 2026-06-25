@@ -1,5 +1,4 @@
 test_that("graph_from_biadjacency_matrix() works -- dense", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
@@ -17,7 +16,6 @@ test_that("graph_from_biadjacency_matrix() works -- dense", {
 
 
 test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
@@ -30,7 +28,6 @@ test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
 
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
@@ -57,7 +54,6 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
@@ -106,11 +102,10 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
     mode = "out",
     weighted = TRUE
   )
-  expect_equal(inc_frac, as_biadjacency_matrix(frac_g, attr = "weight"))
+  expect_equal(inc_frac, as_biadjacency_matrix(frac_g, weights = "weight"))
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
@@ -128,7 +123,6 @@ test_that("graph_from_biadjacency_matrix() works -- sparse", {
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
@@ -141,7 +135,6 @@ test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
@@ -169,7 +162,6 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
-  local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)

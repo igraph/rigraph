@@ -1489,6 +1489,19 @@ print.igraph.vs <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (!is_cli_style()) {
+    return(print_igraph_vs_legacy(x, full = full, id = id, ...))
+  }
+
+  print_igraph_vs_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_vs_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_vs_graph(x)
   if (!is.null(graph)) {
     vertices <- V(graph)
@@ -1606,6 +1619,19 @@ print.igraph.es <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (!is_cli_style()) {
+    return(print_igraph_es_legacy(x, full = full, id = id, ...))
+  }
+
+  print_igraph_es_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_es_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(
@@ -1616,6 +1642,161 @@ print.igraph.es <- function(
     num = TRUE,
     id = id
   )
+  invisible(x)
+}
+
+# cli-styled printing for vertex/edge sequences -----------------
+
+print_igraph_vs_cli <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
+  graph <- get_vs_graph(x)
+  vertices <- if (!is.null(graph)) V(graph) else NULL
+  total <- if (is.null(vertices)) "?" else as.character(length(vertices))
+  graph_id_short <- graph_id(x)
+
+  middot <- middot_cli()
+  # `id` comes from an option and may be NULL/NA, so guard with isTRUE().
+  flags <- c(
+    if (!is.null(vertices) && !is.null(names(vertices))) "named",
+    if (isTRUE(id) && !is.na(graph_id_short)) {
+      paste("from", substr(graph_id_short, 1, 7))
+    },
+    if (is.null(graph)) "deleted"
+  )
+
+  title <- paste0(
+    "<vertex sequence> ",
+    length(x),
+    "/",
+    total,
+    flag_suffix_cli(flags, middot)
+  )
+  cli_section(title, blank = FALSE)
+
+  # A vertex sequence prints in one of two layouts:
+  #
+  #   * detailed -- one row per selected vertex with every vertex attribute as
+  #     a column (a metadata table); produced by `V(g)[[...]]`.
+  #   * compact  -- a bare list of vertex ids, or names when present; produced
+  #     by `V(g)[...]`.
+  #
+  # `[[` and `[` build the *same* underlying sequence: `[[.igraph.vs` merely
+  # tags its result with a "single" attribute, which is_single_index() reads
+  # here. So the only signal asking for the detailed view is that flag. We use
+  # the table only when it is set AND the graph is still alive (a sequence can
+  # outlive its graph) AND the graph actually has attributes to tabulate;
+  # anything else falls through to the compact list below.
+  if (
+    is_single_index(x) &&
+      !is.null(graph) &&
+      length(vertex_attr_names(graph)) > 0
+  ) {
+    vertex_attrs <- vertex_attr(graph)
+    # A data.frame needs flat columns, so it works only when every attribute is
+    # atomic. If any attribute is list-valued, drop to a named list sliced to
+    # the selected vertices instead of forcing it into a table.
+    if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
+      print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
+        as.vector(x),
+        ,
+        drop = FALSE
+      ])
+    } else {
+      print(lapply(vertex_attrs, "[", as.vector(x)))
+    }
+  } else {
+    # Otherwise just list the vertices (by name when available).
+    if (!is.null(names(vertices))) {
+      x2 <- names(vertices)[as.vector(x)]
+      if (!is.null(names(x)) && !identical(names(x), x2)) {
+        names(x2) <- names(x)
+      }
+    } else {
+      x2 <- as.vector(x)
+    }
+    if (length(x2)) {
+      max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
+      print_cli_lines(x2, max_lines, "+ ... omitted several vertices\n")
+    }
+  }
+
+  invisible(x)
+}
+
+print_igraph_es_cli <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
+  graph <- get_es_graph(x)
+  total <- if (is.null(graph)) "?" else as.character(gsize(graph))
+  graph_id_short <- graph_id(x)
+  has_vnames <- !is.null(attr(x, "vnames"))
+
+  middot <- middot_cli()
+  # `id` comes from an option and may be NULL/NA, so guard with isTRUE().
+  flags <- c(
+    if (has_vnames) "vertex names",
+    if (isTRUE(id) && !is.na(graph_id_short)) {
+      paste("from", substr(graph_id_short, 1, 7))
+    },
+    if (is.null(graph)) "deleted"
+  )
+
+  title <- paste0(
+    "<edge sequence> ",
+    length(x),
+    "/",
+    total,
+    flag_suffix_cli(flags, middot)
+  )
+  cli_section(title, blank = FALSE)
+
+  if (length(x) == 0) {
+    return(invisible(x))
+  }
+
+  # An edge sequence prints in one of two layouts, mirroring vertex sequences:
+  #
+  #   * detailed -- one row per selected edge with its endpoints and every edge
+  #     attribute as columns (a metadata table); produced by `E(g)[[...]]`.
+  #   * compact  -- a list of "tail <arrow> head" strings; produced by
+  #     `E(g)[...]`. Handled further below.
+  #
+  # As with vertex sequences, `[[` and `[` build the same underlying sequence;
+  # `[[.igraph.es` only tags its result with the "single" attribute that
+  # is_single_index() reads here. The table needs only that flag and a live
+  # graph -- unlike the vertex case there is no attribute-count check, because
+  # an edge always has endpoints to tabulate (the tail/head names plus their
+  # raw numeric ids in tid/hid), so the table is never empty.
+  if (is_single_index(x) && !is.null(graph)) {
+    print_edge_detail(graph, x)
+    return(invisible(x))
+  }
+
+  max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
+
+  if (!is.null(graph)) {
+    # Live graph: render endpoints with arrows.
+    arrow <- edge_arrow_cli(is_directed(graph))
+    endpoints <- ends(graph, x, names = has_vnames || is_named(graph))
+    body <- format_cli_edge_endpoints(endpoints, arrow)
+  } else {
+    # Graph was deleted: fall back to stored vertex names / ids.
+    body <- if (!is.null(attr(x, "vnames"))) {
+      as.vector(attr(x, "vnames"))
+    } else if (!is.null(names(x))) {
+      names(x)
+    } else {
+      as.vector(x)
+    }
+  }
+  print_cli_lines(body, max_lines, "+ ... omitted several edges\n")
   invisible(x)
 }
 
