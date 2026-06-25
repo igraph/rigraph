@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9015
+
+## Chore
+
+- Auto-update from GitHub Actions (#2702).
+
+
 # igraph 2.3.2.9014
 
 ## Features
