@@ -187,6 +187,7 @@ test_that("identical_graphs works", {
 })
 
 test_that("identical_graphs considers attributes", {
+  igraph_local_seed(42)
   g <- sample_pa(10)
   g2 <- g
 

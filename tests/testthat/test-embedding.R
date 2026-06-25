@@ -1,21 +1,4 @@
-standardize_eigen_signs <- function(x) {
-  x <- zapsmall(x)
-  apply(x, 2, function(col) {
-    if (any(col < 0) && col[which(col != 0)[1]] < 0) {
-      -col
-    } else {
-      col
-    }
-  })
-}
-
-order_by_magnitude <- function(x) {
-  order(abs(x), sign(x), decreasing = TRUE)
-}
-
-sort_by_magnitude <- function(x) {
-  x[order_by_magnitude(x)]
-}
+# Helper functions used here live in helper-test-functions.R.
 
 test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
   withr::local_seed(42)

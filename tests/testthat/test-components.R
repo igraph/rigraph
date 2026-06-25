@@ -40,6 +40,7 @@ test_that("is_connected returns FALSE for the null graph", {
 })
 
 test_that("decompose works", {
+  igraph_local_seed(42)
   gnp <- sample_gnp(1000, 1 / 1500)
   gnp_decomposed <- decompose(gnp)
   gnp_comps <- components(gnp)

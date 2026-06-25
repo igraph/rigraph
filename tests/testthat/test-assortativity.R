@@ -56,7 +56,7 @@ test_that("nominal assortativity works", {
 })
 
 test_that("nominal assortativity works with character types", {
-  set.seed(2)
+  withr::local_seed(2)
   g <- sample_gnm(10, 20)
 
   # Test with numeric types

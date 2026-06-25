@@ -30,6 +30,7 @@ test_that("subgraph_centrality() ignored edge directions", {
 })
 
 test_that("`authority_score()` works", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
@@ -86,6 +87,7 @@ test_that("`authority_score()` works", {
 })
 
 test_that("`hub_score()` works", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
@@ -172,6 +174,7 @@ test_that("authority_score survives stress test", {
 })
 
 test_that("`hits_score()` works -- authority", {
+  igraph_local_seed(42)
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -220,6 +223,7 @@ test_that("`hits_score()` works -- authority", {
 })
 
 test_that("`hits_scores()` works -- hub", {
+  igraph_local_seed(42)
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -366,6 +370,7 @@ test_that("betweenness() -- shortest paths are compared with tolerance when calc
 })
 
 test_that("edge_betweenness() works", {
+  igraph_local_seed(42)
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
@@ -550,6 +555,7 @@ test_that("power_centrality() works", {
 })
 
 test_that("eigen_centrality() works", {
+  igraph_local_seed(42)
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
@@ -631,6 +637,7 @@ test_that("sparse alpha_centrality() works", {
 ## weighted version
 
 test_that("weighted dense alpha_centrality() works", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$weight <- sample(ecount(star))
 
@@ -645,6 +652,7 @@ test_that("weighted dense alpha_centrality() works", {
 })
 
 test_that("weighted sparse alpha_centrality() works", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$weight <- sample(ecount(star))
 
@@ -659,6 +667,7 @@ test_that("weighted sparse alpha_centrality() works", {
 })
 
 test_that("alpha_centrality() works with custom weight attribute names", {
+  igraph_local_seed(42)
   star <- make_star(10)
   E(star)$myweight <- sample(ecount(star))
 
@@ -675,6 +684,7 @@ test_that("alpha_centrality() works with custom weight attribute names", {
 })
 
 test_that("alpha_centrality() accepts a numeric weights vector", {
+  igraph_local_seed(42)
   star <- make_star(10)
   w <- sample(ecount(star))
   E(star)$weight <- w
@@ -689,6 +699,7 @@ test_that("alpha_centrality() accepts a numeric weights vector", {
 })
 
 test_that("alpha_centrality() does not mutate the input graph", {
+  igraph_local_seed(42)
   star <- make_star(10)
   w <- sample(ecount(star))
   alpha_centrality(star, weights = w, sparse = FALSE)
@@ -785,6 +796,7 @@ test_that("spectrum() works for symmetric matrices", {
 })
 
 test_that("arpack lifecycle warning", {
+  igraph_local_seed(42)
   rlang::local_options(lifecycle_verbosity = "warning")
 
   f <- function(x, extra = NULL) x
@@ -799,12 +811,14 @@ test_that("arpack lifecycle warning", {
 })
 
 test_that("arpack works for identity matrix", {
+  igraph_local_seed(42)
   f <- function(x, extra = NULL) x
   res <- arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
   expect_equal(res$values, c(1, 1))
 })
 
 test_that("arpack works on the Laplacian of a star", {
+  igraph_local_seed(42)
   f <- function(x, extra = NULL) {
     y <- x
     y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
@@ -832,6 +846,7 @@ test_that("arpack works on the Laplacian of a star", {
 # Complex case
 
 test_that("arpack works for non-symmetric matrices", {
+  igraph_local_seed(42)
   A <- structure(
     c(
       -6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8,
@@ -896,6 +911,7 @@ test_that("arpack works for non-symmetric matrices", {
 # TODO: further tests for typically hard cases
 
 test_that("eigen_centrality() deprecated scale argument", {
+  igraph_local_seed(42)
   g <- make_ring(10, directed = FALSE)
   expect_snapshot({
     invisible(eigen_centrality(g, scale = TRUE))

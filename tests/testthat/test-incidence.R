@@ -204,6 +204,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
 })
 
 test_that("graph_from_biadjacency_matrix() errors well", {
+  igraph_local_seed(42)
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]

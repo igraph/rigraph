@@ -284,6 +284,7 @@ test_that("assert_named_list() works", {
 })
 
 test_that("is_bipartite works", {
+  withr::local_seed(42)
   biadj_mat1 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -291,7 +292,6 @@ test_that("is_bipartite works", {
   g1 <- graph_from_biadjacency_matrix(biadj_mat1)
   expect_true(bipartite_mapping(g1)$res)
 
-  withr::local_seed(42)
   biadj_mat2 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -553,6 +553,7 @@ test_that("good error message when not using character", {
 })
 
 test_that("set_vertex_attrs() works", {
+  withr::local_seed(42)
   g <- make_ring(10)
   g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
   expect_equal(V(g)$color, rep("blue", vcount(g)))

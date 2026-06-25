@@ -1,6 +1,5 @@
 test_that("SGM works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   vc <- 10
   nos <- 3

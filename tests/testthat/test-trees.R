@@ -1,4 +1,5 @@
 test_that("is_tree works for non-trees", {
+  igraph_local_seed(42)
   g <- make_graph("zachary")
   expect_false(is_tree(g))
   expect_equal(
@@ -120,6 +121,7 @@ test_that("to_prufer prints an error for non-trees", {
 })
 
 test_that("sample_tree works", {
+  igraph_local_seed(42)
   g <- sample_tree(100)
   expect_false(is_directed(g))
   expect_ecount(g, 99)
@@ -146,6 +148,7 @@ test_that("sample_tree works", {
 })
 
 test_that("sample_(tree(...)) works", {
+  igraph_local_seed(42)
   g <- sample_(tree(200, method = "prufer"))
   expect_false(is_directed(g))
   expect_ecount(g, 199)
@@ -181,6 +184,7 @@ test_that("sample_tree throws an error for the Prufer method with directed graph
 })
 
 test_that("sample_spanning_tree works for connected graphs", {
+  igraph_local_seed(42)
   g <- make_full_graph(8)
 
   edges <- sample_spanning_tree(g)
@@ -193,6 +197,7 @@ test_that("sample_spanning_tree works for connected graphs", {
 })
 
 test_that("sample_spanning_tree works for disconnected graphs", {
+  igraph_local_seed(42)
   g <- make_full_graph(8) %du% make_full_graph(5)
 
   edges <- sample_spanning_tree(g, vid = 8)

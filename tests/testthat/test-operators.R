@@ -1,6 +1,4 @@
 test_that("union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -16,8 +14,6 @@ test_that("union() works", {
 })
 
 test_that("disjoint_union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gdu <- disjoint_union(g1, g2)
@@ -75,6 +71,7 @@ test_that("intersection() works", {
 })
 
 test_that("complementer() works", {
+  igraph_local_seed(42)
   g2 <- make_star(11, center = 11, mode = "undirected")
 
   x <- complementer(complementer(g2))
@@ -88,6 +85,7 @@ test_that("complementer() works", {
 
 
 test_that("compose() works", {
+  igraph_local_seed(42)
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -664,11 +662,6 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 
   gi <- intersection(g, g2)
 
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
-
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
   dfi <- rn(as_data_frame(gi))
@@ -686,11 +679,6 @@ test_that("union of non-named graphs keeps attributes properly", {
   E(g2)$weight <- sample(ecount(g2))
 
   gu <- union.igraph(g, g2)
-
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
 
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
@@ -1258,15 +1246,8 @@ test_that("rev on detached vs, names", {
   }
 })
 
-unique_tests <- list(
-  list(1:5, 1:5),
-  list(c(1, 1, 2:5), 1:5),
-  list(c(1, 1, 1, 1), 1),
-  list(c(1, 2, 2, 2), 1:2),
-  list(c(2, 2, 1, 1), 2:1),
-  list(c(1, 2, 1, 2), 1:2),
-  list(c(), c())
-)
+# `unique_tests` (the input/expected pairs used below) lives in
+# helper-test-functions.R.
 
 test_that("unique on attached vs", {
   sapply(unique_tests, function(d) {

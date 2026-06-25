@@ -307,6 +307,7 @@ test_that("cluster_leading_eigen is deterministic", {
 })
 
 test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
+  igraph_local_seed(42)
   g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
   g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
   lec <- cluster_leading_eigen(g)
@@ -363,6 +364,7 @@ test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
 })
 
 test_that("cut_at handles cluster_leading_eigen with no merges", {
+  igraph_local_seed(42)
   # Single-community result: nrow(merges) == 0, so no cuts are possible
   lec <- cluster_leading_eigen(make_full_graph(5))
   expect_equal(max(membership(lec)), 1L)
@@ -377,6 +379,7 @@ test_that("cut_at handles cluster_leading_eigen with no merges", {
 })
 
 test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
+  igraph_local_seed(42)
   # Ring of 6 cliques: leading eigen finds 6 communities with 5 merges,
   # exercising more than the trivial 3->2->1 chain.
   g <- Reduce(`%du%`, replicate(6, make_full_graph(4), simplify = FALSE))
@@ -534,8 +537,7 @@ test_that("cluster_optimal works", {
 
 test_that("weighted cluster_optimal works", {
   skip_if_no_glpk()
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   graph_full_ring <- make_full_graph(5) + make_ring(5)
   E(graph_full_ring)$weight <- sample(
@@ -637,8 +639,7 @@ test_that("voronoi works with weights", {
 })
 
 test_that("contract works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   g <- make_ring(10)
   g$name <- "Ring"
@@ -662,6 +663,7 @@ test_that("contract works", {
 })
 
 test_that("modularity() handles NA weights correctly", {
+  igraph_local_seed(42)
   # Create a simple graph for testing
   g <- make_graph("Zachary")
 

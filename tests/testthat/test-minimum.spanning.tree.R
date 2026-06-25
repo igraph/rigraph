@@ -33,6 +33,7 @@ test_that("mst works", {
 })
 
 test_that("mst error works", {
+  igraph_local_seed(42)
   g <- sample_gnp(10, 0.4)
   expect_snapshot_igraph_error(
     mst(g, algorithm = "undefined")

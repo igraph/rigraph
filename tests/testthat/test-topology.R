@@ -92,6 +92,7 @@ test_that("VF2 isomorphism considers colors", {
 })
 
 test_that("canonical_permutation works", {
+  igraph_local_seed(42)
   g1 <- sample_gnm(10, 20)
   cp1 <- canonical_permutation(g1)
   cf1 <- permute(g1, cp1$labeling)
@@ -160,8 +161,7 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 })
 
 test_that("LAD stress test", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   N <- 100
 
   for (i in 1:N) {
@@ -453,6 +453,7 @@ test_that("isomorphisms works with callback", {
 })
 
 test_that("isomorphisms can stop early", {
+  igraph_local_seed(42)
   # Create two isomorphic graphs
   g1 <- make_ring(6)
   g2 <- permute(g1, sample(vcount(g1)))
@@ -473,6 +474,7 @@ test_that("isomorphisms can stop early", {
 })
 
 test_that("isomorphisms receives correct arguments", {
+  igraph_local_seed(42)
   g1 <- make_ring(5)
   g2 <- permute(g1, sample(vcount(g1)))
 
