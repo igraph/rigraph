@@ -299,10 +299,10 @@ unsafe_create_vs <- function(graph, idx, verts = NULL) {
   # shared from `verts`. All attributes are set in one `attributes<-` call to
   # avoid the per-object shallow copies that dominate when many sequences are
   # built (e.g. `max_cliques()`).
-  nms <- attr(verts, "names")
+  vertex_names <- attr(verts, "names")
   res <- as.integer(idx)
   attributes(res) <- list(
-    names = if (is.null(nms)) NULL else nms[idx],
+    names = if (is.null(vertex_names)) NULL else vertex_names[idx],
     class = "igraph.vs",
     env = attr(verts, "env"),
     graph = attr(verts, "graph")
