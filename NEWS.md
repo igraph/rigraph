@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.3.2
+# igraph 2.3.3
 
 ## Bug fixes
 
