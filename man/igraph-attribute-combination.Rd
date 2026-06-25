@@ -95,7 +95,10 @@ This results almost always a complex attribute.
 }
 \item{"rename"}{
 Keep clashing attributes side-by-side under disambiguated names by
-appending \verb{_1}, \verb{_2}, ... suffixes. This is the default for the
+appending \verb{_1}, \verb{_2}, ... suffixes. For example, if two graphs each
+have an attribute called \code{group}, the resulting graph will have
+attributes \code{group_1} and \code{group_2}, corresponding to the first and
+second input graph, respectively. This is the default for the
 graph operators \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=compose]{compose()}} and
 \code{\link[=disjoint_union]{disjoint_union()}} and preserves their historical behaviour.
 Only those operators accept \code{"rename"}; \code{\link[=simplify]{simplify()}} and
