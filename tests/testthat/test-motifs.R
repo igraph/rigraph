@@ -1,5 +1,5 @@
 test_that("count_motifs works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   gnp <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
@@ -23,7 +23,7 @@ test_that("count_motifs works", {
 })
 
 test_that("motifs works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
   gnp <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
   m <- motifs(gnp)
@@ -132,7 +132,7 @@ test_that("motifs works", {
 })
 
 test_that("sample_motifs works", {
-  withr::local_seed(20041103)
+  igraph_local_seed(20041103)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
   n <- vcount(g)
@@ -179,7 +179,7 @@ test_that("dyad_census works with celegansneural", {
 })
 
 test_that("motifs with callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 
@@ -199,7 +199,7 @@ test_that("motifs with callback works", {
 })
 
 test_that("motifs with callback can stop early", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 
@@ -220,7 +220,7 @@ test_that("motifs with callback can stop early", {
 
 
 test_that("motifs with callback receives correct arguments", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- make_graph(~ A - B - C - A)
 
@@ -235,7 +235,7 @@ test_that("motifs with callback receives correct arguments", {
 })
 
 test_that("motifs with callback handles errors in callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 
@@ -249,7 +249,7 @@ test_that("motifs with callback handles errors in callback", {
 })
 
 test_that("motifs with callback output matches expected", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
 

@@ -500,7 +500,7 @@ test_that("k_shortest_paths() works with weights", {
 })
 
 test_that("transitivity() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(100, p = 10 / 100)
 
   t1 <- transitivity(g, type = "global")
@@ -528,7 +528,7 @@ test_that("transitivity() works", {
 })
 
 test_that("no integer overflow", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_star(80000, mode = "undirected") + edges(sample(2:1000), 100)
   mtr <- min(transitivity(g, type = "local"), na.rm = TRUE)
   expect_true(mtr > 0)
@@ -585,7 +585,7 @@ test_that("constraint() works", {
   c2 <- constraint.orig(karate)
   expect_equal(c1, c2)
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
   wc2 <- constraint.orig(karate, weights = "weight")
@@ -1020,7 +1020,7 @@ test_that("edge_density works", {
 })
 
 test_that("knn works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   ## Some trivial ones
   g <- make_ring(10)

@@ -21,7 +21,7 @@ test_that("subgraph_centrality() works", {
 })
 
 test_that("subgraph_centrality() ignored edge directions", {
-  withr::local_seed(137)
+  igraph_local_seed(137)
   g <- sample_gnm(10, 20, directed = TRUE)
   expect_equal(
     subgraph_centrality((g)),
@@ -146,7 +146,7 @@ test_that("`hub_score()` works", {
 test_that("authority_score survives stress test", {
   skip_on_cran()
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   expect_principal <- function(M, lambda) {
     expect_equal(eigen(M)$values[1], lambda)
@@ -761,7 +761,7 @@ test_that("undirected alpha_centrality() works, #653", {
 })
 
 test_that("spectrum() works for symmetric matrices", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   std <- function(x) {
     x <- zapsmall(x)

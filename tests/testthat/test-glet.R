@@ -46,7 +46,7 @@ test_that("Graphlets filtering works", {
 })
 
 test_that("Graphlets work for a bigger graph", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_graph("zachary")
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 

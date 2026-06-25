@@ -23,7 +23,7 @@ test_that("SGM works", {
   )
 
   ## Slightly bigger
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   vc <- 100
   nos <- 10

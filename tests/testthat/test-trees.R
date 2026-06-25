@@ -221,7 +221,7 @@ test_that("sample_spanning_tree works for disconnected graphs", {
 })
 
 test_that("subgraph.edges deprecation", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_full_graph(8) %du% make_full_graph(5)
   edges <- sample_spanning_tree(g)

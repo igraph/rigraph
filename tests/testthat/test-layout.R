@@ -160,7 +160,7 @@ test_that("layout algorithms work for singleton graphs", {
 
 test_that("Kamada-Kawai layout generator works", {
   skip_on_cran()
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   center_layout <- function(layout) {
     t(t(layout) - colMeans(layout))
@@ -236,7 +236,7 @@ test_that("layout_with_sugiyama() does not demote matrices to vectors in res$lay
 })
 
 test_that("merge_coords() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- list(make_ring(10), make_ring(5))
   l <- lapply(g, layout_with_mds)
@@ -277,7 +277,7 @@ test_that("`layout_with_mds()` works", {
 })
 
 test_that("`layout_with_mds()` stress test, graph with multiple components", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_equal(ncol(layout_with_mds(g)), 2)
 

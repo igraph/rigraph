@@ -1,5 +1,5 @@
 test_that("community detection functions work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   cluster_algos <- list(
     "cluster_edge_betweenness",
@@ -69,7 +69,7 @@ test_that("community detection functions work", {
 })
 
 test_that("creating communities objects works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
 
@@ -159,7 +159,7 @@ test_that("cluster_edge_betweenness works", {
 })
 
 test_that("cluster_fast_greedy works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_fc <- cluster_fast_greedy(karate)
@@ -192,7 +192,7 @@ test_that("cluster_fast_greedy works", {
 
 test_that("label.propagation.community works", {
   karate <- make_graph("Zachary")
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
   karate_lpc <- cluster_label_prop(karate)
   expect_equal(karate_lpc$modularity, modularity(karate, karate_lpc$membership))
 
@@ -207,7 +207,7 @@ test_that("label.propagation.community works", {
 })
 
 test_that("cluster_leading_eigen works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   check_eigen_value <- function(
     membership,
@@ -293,7 +293,7 @@ test_that("cluster_leading_eigen is deterministic", {
 
   skip_if(getRversion() < "3.6")
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   for (i in 1:100) {
     g_rand <- sample_gnm(20, sample(5:40, 1))
@@ -403,7 +403,7 @@ test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
 })
 
 test_that("cluster_leiden works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_leiden <- cluster_leiden(karate, resolution = 0.06)
@@ -482,7 +482,7 @@ test_that("modularity_matrix no longer accepts a membership argument for compati
 })
 
 test_that("cluster_louvain works", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   karate <- make_graph("Zachary")
   karate_mc <- cluster_louvain(karate)
@@ -551,7 +551,7 @@ test_that("weighted cluster_optimal works", {
 })
 
 test_that("cluster_walktrap works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_walktrap <- cluster_walktrap(karate)

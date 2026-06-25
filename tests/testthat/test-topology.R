@@ -172,7 +172,7 @@ test_that("LAD stress test", {
     expect_true(iso)
   }
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   for (i in 1:N) {
     target <- sample_gnp(20, 1 / 20)
@@ -184,7 +184,7 @@ test_that("LAD stress test", {
 })
 
 test_that("graph.subisomorphic.vf2 works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   gnp1 <- sample_gnp(20, 6 / 20)
   gnp2 <- sample_gnp(20, 6 / 20)
@@ -431,7 +431,7 @@ test_that("transitive_closure preserves isolated vertices", {
 
 # Tests for isomorphism callback functions
 test_that("isomorphisms works with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   # Create two isomorphic graphs
   g1 <- make_ring(8)
@@ -506,7 +506,7 @@ test_that("isomorphisms handles errors in callback", {
 })
 
 test_that("subisomorphisms works with callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   # Find triangles in a larger graph
   g1 <- make_ring(3) # triangle

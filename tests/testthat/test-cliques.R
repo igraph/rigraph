@@ -1,5 +1,5 @@
 test_that("cliques() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   is_clique <- function(graph, vids) {
     s <- induced_subgraph(graph, vids)
@@ -71,7 +71,7 @@ test_that("weighted_cliques works", {
 })
 
 test_that("max_cliques() work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnm(1000, 1000)
   full10 <- make_full_graph(10)
   for (i in 1:10) {
@@ -198,7 +198,7 @@ test_that("max_cliques() work", {
 })
 
 test_that("max_cliques() work for subsets", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnp(100, 0.5)
 
   mysort <- function(x) {
@@ -218,7 +218,7 @@ test_that("max_cliques() work for subsets", {
 })
 
 test_that("count_max_cliques works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnp(100, 0.5)
 
   cl1 <- count_max_cliques(gnp, min = 8)
@@ -307,7 +307,7 @@ test_that("largest_cliques works", {
 })
 
 test_that("is_clique works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_full_graph(5)
   expect_true(is_clique(g, V(g)))
@@ -319,7 +319,7 @@ test_that("is_clique works", {
 })
 
 test_that("is_ivs works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_full_bipartite_graph(5, 5)
   expect_true(is_ivs(g, V(g)[V(g)$type]))
@@ -346,7 +346,7 @@ test_that("is_complete works", {
 
 # Tests for callback functions
 test_that("cliques_callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(20, 0.3)
 
@@ -366,7 +366,7 @@ test_that("cliques_callback works", {
 })
 
 test_that("cliques_callback can stop early", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(20, 0.3)
 
@@ -410,7 +410,7 @@ test_that("cliques_callback handles errors in callback", {
 })
 
 test_that("max_cliques works with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(15, 0.3)
 
@@ -429,7 +429,7 @@ test_that("max_cliques works with callback", {
 })
 
 test_that("max_cliques can stop early with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(15, 0.3)
 

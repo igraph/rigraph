@@ -653,7 +653,7 @@ test_that("difference of named graphs works", {
 
 
 test_that("intersection of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -671,7 +671,7 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)

@@ -1,5 +1,5 @@
 test_that("components works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   random_largest_component <- function(n) {
     largest_component(sample_gnp(n, 1 / n))

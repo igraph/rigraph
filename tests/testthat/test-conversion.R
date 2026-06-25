@@ -662,7 +662,7 @@ test_that("graph_from_adj_list works", {
 })
 
 test_that("graph_from_edgelist works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   g <- sample_gnp(50, 5 / 50)
   el <- as_edgelist(g)

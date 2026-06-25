@@ -9,7 +9,7 @@ test_that("convex_hull works", {
 })
 
 test_that("convex_hull uses 1-based indexing, #613", {
-  withr::local_seed(45)
+  igraph_local_seed(45)
   n <- 10
   xy <- cbind(runif(n), runif(n))
   vp <- convex_hull(xy)

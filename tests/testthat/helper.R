@@ -19,7 +19,11 @@ local_rng_version <- function(version, .local_envir = parent.frame()) {
 # first -- changing the RNG kind discards .Random.seed -- so that the seed
 # assignment is the final word and the state round-trips exactly.
 restore_rng_state <- function(kind, state) {
-  do.call(RNGkind, as.list(kind))
+  # suppressWarnings: restoring an older sampler (e.g. the "Rounding"
+  # sample.kind that RNGversion("3.5.0") selects) otherwise emits R's
+  # "non-uniform 'Rounding' sampler used" note. We're only putting back a state
+  # that was already in effect, so the note is noise.
+  suppressWarnings(do.call(RNGkind, as.list(kind)))
   if (is.null(state)) {
     if (exists(".Random.seed", envir = globalenv(), inherits = FALSE)) {
       rm(".Random.seed", envir = globalenv())
