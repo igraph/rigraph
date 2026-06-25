@@ -6,13 +6,6 @@ skip_if_no_graphml <- function() {
   if (!has_graphml()) skip("No GraphML support")
 }
 
-local_rng_version <- function(version, .local_envir = parent.frame()) {
-  orig <- RNGkind()
-  withr::defer(do.call(RNGkind, as.list(orig)), envir = .local_envir)
-  suppressWarnings(RNGversion(version))
-  orig
-}
-
 # Restore the global RNG state (kind + .Random.seed) to a previously captured
 # snapshot. `kind` is the result of RNGkind() and `state` is .Random.seed before
 # the seed was set (or NULL if no RNG had been used yet). The kind is restored
