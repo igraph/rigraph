@@ -1448,7 +1448,10 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #'     }
 #'     \item{"rename"}{
 #'       Keep clashing attributes side-by-side under disambiguated names by
-#'       appending `_1`, `_2`, ... suffixes. This is the default for the
+#'       appending `_1`, `_2`, ... suffixes. For example, if two graphs each
+#'       have an attribute called `group`, the resulting graph will have
+#'       attributes `group_1` and `group_2`, corresponding to the first and
+#'       second input graph, respectively. This is the default for the
 #'       graph operators [union()], [intersection()], [compose()] and
 #'       [disjoint_union()] and preserves their historical behaviour.
 #'       Only those operators accept `"rename"`; [simplify()] and
