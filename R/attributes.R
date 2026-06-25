@@ -1339,7 +1339,7 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
     } else {
       idx <- pmatch(tolower(x), known_names)
       if (is.na(idx)) {
-        if (!allow_rename && identical(tolower(x), "rename")) {
+        if (identical(tolower(x), "rename") && !allow_rename) {
           cli::cli_abort(
             "{.val rename} is only supported by graph operators ({.fn union}, {.fn intersection}, {.fn compose}, {.fn disjoint_union}), not by this function."
           )
