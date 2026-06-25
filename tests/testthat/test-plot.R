@@ -325,6 +325,62 @@ test_that("i.diagonal_path is a smooth path between the endpoints", {
   expect_equal(d, i.diagonal_path(0, 0, 10, 4, n = 30))
 })
 
+test_that("an explicit `vertical` overrides the inferred dominant axis", {
+  # horizontal-dominant deltas, but vertical = TRUE forces a vertical leave
+  e <- i.elbow_path(0, 0, 10, 4, vertical = TRUE)
+  expect_equal(e$x, c(0, 0, 10, 10))
+  expect_equal(e$y, c(0, 2, 2, 4))
+  # and vertical = FALSE forces a horizontal leave on vertical-dominant deltas
+  h <- i.elbow_path(0, 0, 4, 10, vertical = FALSE)
+  expect_equal(h$x, c(0, 2, 2, 4))
+  expect_equal(h$y, c(0, 0, 10, 10))
+})
+
+test_that("elbow/diagonal edges attach on the vertex centre axis", {
+  # vertical-dominant edge whose endpoints have different x: a centre-to-centre
+  # clip would attach off the parent/child x; the axis-aware clip must keep the
+  # first/last shaft point on each vertex's centre x.
+  g <- make_graph(c(1, 2), directed = TRUE)
+  lay <- matrix(c(0, 1, 0.3, -1), ncol = 2, byrow = TRUE)
+
+  grDevices::pdf(NULL)
+  withr::defer(grDevices::dev.off())
+
+  shaft_x <- function(style) {
+    rec <- i.renderer_record()
+    i.with_renderer(
+      rec,
+      plot(
+        g,
+        layout = lay,
+        rescale = FALSE,
+        xlim = c(-1, 1),
+        ylim = c(-1, 1),
+        edge.style = style,
+        vertex.size = 20,
+        # no arrowhead: avoids the shaft pull-back so the path starts/ends
+        # exactly at the clipped attachment points
+        edge.arrow.mode = 0
+      )
+    )
+    prims <- rec$.state$prims
+    pl <- Filter(
+      function(p) {
+        identical(p$type, "polyline") &&
+          !is.null(p$group) && identical(p$group$type, "edge")
+      },
+      prims
+    )[[1]]
+    c(first = pl$x[1], last = pl$x[length(pl$x)])
+  }
+
+  for (style in c("elbow", "diagonal")) {
+    xs <- shaft_x(style)
+    expect_equal(unname(xs["first"]), 0, tolerance = 1e-6) # parent centre x
+    expect_equal(unname(xs["last"]), 0.3, tolerance = 1e-6) # child centre x
+  }
+})
+
 test_that("i.arrowhead_shape returns matched polar arrays ending in NA", {
   # Pure geometry helper extracted from igraph.Arrows; device-free.
   head <- i.arrowhead_shape(cin = 0.2, w = 1.5, delta = 0.01)

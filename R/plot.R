@@ -1047,6 +1047,30 @@ plot.igraph <- function(
     edge.style <- nl_aes$style
     edge.gradient <- as.logical(nl_aes$gradient)
 
+    # Axis-aware attachment for elbow/diagonal edges: re-clip their endpoints to
+    # the dominant-axis boundary (top/bottom- or left/right-centre) instead of
+    # the centre-to-centre diagonal point, so the orthogonal/diagonal routing
+    # meets each vertex on its centre axis. The chosen axis is passed to
+    # igraph.Arrows so the path builders route to match. Other styles keep the
+    # centre-to-centre clip from above.
+    eff.style <- ifelse(
+      edge.style == "auto",
+      ifelse(curved != 0, "arc", "straight"),
+      edge.style
+    )
+    is.ed <- eff.style %in% c("elbow", "diagonal")
+    edge.axis <- rep(NA, length(x0))
+    if (any(is.ed)) {
+      vert <- abs(edge.coords[, 4] - edge.coords[, 2]) >=
+        abs(edge.coords[, 3] - edge.coords[, 1])
+      adj <- i.axis_clip_endpoints(edge.coords, el, shape, params, vert)
+      x0[is.ed] <- adj[is.ed, 1]
+      y0[is.ed] <- adj[is.ed, 2]
+      x1[is.ed] <- adj[is.ed, 3]
+      y1[is.ed] <- adj[is.ed, 4]
+      edge.axis[is.ed] <- vert[is.ed]
+    }
+
     # Gradient edges: shaft colour runs from the source vertex colour to the
     # target vertex colour; the arrowhead uses the target colour. Only touch the
     # colour vectors when a gradient is actually requested, so plain plots are
@@ -1093,7 +1117,8 @@ plot.igraph <- function(
         style = edge.style,
         gradient = edge.gradient,
         col.to = col.to.e,
-        ids = nonloops.e
+        ids = nonloops.e,
+        axis = edge.axis
       )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
@@ -1126,7 +1151,8 @@ plot.igraph <- function(
           style = edge.style[valid],
           gradient = edge.gradient[valid],
           col.to = col.to.e[valid],
-          ids = nonloops.e[valid]
+          ids = nonloops.e[valid],
+          axis = edge.axis[valid]
         )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
@@ -2155,11 +2181,14 @@ i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
 }
 
 # Geometry: two-corner orthogonal ("elbow") path between two points.
-# Leaves along the dominant axis (larger absolute delta), turns at the midpoint
-# of that axis, crosses, then turns into the target. Returns list(x, y) of the
-# four polyline vertices.
-i.elbow_path <- function(x0, y0, x1, y1) {
-  if (abs(x1 - x0) >= abs(y1 - y0)) {
+# Leaves along the dominant axis, turns at the midpoint of that axis, crosses,
+# then turns into the target. `vertical` forces the leaving axis (TRUE = leave
+# vertically); when NULL the dominant axis is inferred from the endpoints. The
+# caller passes it explicitly so it matches the axis used to attach the
+# endpoints. Returns list(x, y) of the four polyline vertices.
+i.elbow_path <- function(x0, y0, x1, y1, vertical = NULL) {
+  vert <- if (is.null(vertical)) abs(y1 - y0) > abs(x1 - x0) else vertical
+  if (!vert) {
     mid <- (x0 + x1) / 2
     list(x = c(x0, mid, mid, x1), y = c(y0, y0, y1, y1))
   } else {
@@ -2168,11 +2197,13 @@ i.elbow_path <- function(x0, y0, x1, y1) {
   }
 }
 
-# Geometry: smooth "diagonal" S-curve between two points, a cubic
-# Bezier whose control points sit on the dominant axis so the curve leaves and
-# enters along that axis. Returns list(x, y) sampled at `n` points.
-i.diagonal_path <- function(x0, y0, x1, y1, n = 30) {
-  if (abs(x1 - x0) >= abs(y1 - y0)) {
+# Geometry: smooth "diagonal" S-curve between two points, a cubic Bezier whose
+# control points sit on the dominant axis so the curve leaves and enters along
+# that axis. `vertical` forces the leaving axis (see i.elbow_path); when NULL it
+# is inferred from the endpoints. Returns list(x, y) sampled at `n` points.
+i.diagonal_path <- function(x0, y0, x1, y1, n = 30, vertical = NULL) {
+  vert <- if (is.null(vertical)) abs(y1 - y0) > abs(x1 - x0) else vertical
+  if (!vert) {
     mid <- (x0 + x1) / 2
     cp <- rbind(c(x0, y0), c(mid, y0), c(mid, y1), c(x1, y1))
   } else {
@@ -2181,6 +2212,57 @@ i.diagonal_path <- function(x0, y0, x1, y1, n = 30) {
   }
   p <- i.compute.bezier(cp, n)
   list(x = p[1, ], y = p[2, ])
+}
+
+# Re-clip edge endpoints along the dominant axis instead of the centre-to-centre
+# line, for elbow/diagonal edges. `edge.coords` holds the centre-to-centre
+# coordinates (columns from.x, from.y, to.x, to.y); `el` is the edge list,
+# `shape` the per-vertex shape vector, `params` the resolved plotting params, and
+# `vertical` a per-edge flag (TRUE = leave/enter vertically). Returns a 4-column
+# matrix of axis-aligned boundary points. It reuses the shape clip functions by
+# feeding them axis-aligned synthetic segments, so the boundary is correct for
+# every shape (circle/square/rectangle).
+i.axis_clip_endpoints <- function(edge.coords, el, shape, params, vertical) {
+  cx1 <- edge.coords[, 1]
+  cy1 <- edge.coords[, 2]
+  cx2 <- edge.coords[, 3]
+  cy2 <- edge.coords[, 4]
+
+  # Synthetic segments whose direction at each end is axis-aligned: the "from"
+  # end leaves toward the target along the axis, the "to" end enters from the
+  # source side along the axis.
+  synth_from <- cbind(
+    cx1,
+    cy1,
+    ifelse(vertical, cx1, cx2),
+    ifelse(vertical, cy2, cy1)
+  )
+  synth_to <- cbind(
+    ifelse(vertical, cx2, cx1),
+    ifelse(vertical, cy1, cy2),
+    cx2,
+    cy2
+  )
+
+  clip_end <- function(coords, end) {
+    if (length(unique(shape)) == 1) {
+      .igraph.shapes[[shape[1]]]$clip(coords, el, params = params, end = end)
+    } else {
+      idx <- if (end == "from") el[, 1] else el[, 2]
+      t(sapply(seq_len(nrow(coords)), function(x) {
+        .igraph.shapes[[shape[idx[x]]]]$clip(
+          coords[x, , drop = FALSE],
+          el[x, , drop = FALSE],
+          params = params,
+          end = end
+        )
+      }))
+    }
+  }
+
+  from <- clip_end(synth_from, "from")
+  to <- clip_end(synth_to, "to")
+  cbind(from[, 1], from[, 2], to[, 1], to[, 2])
 }
 
 # Apply a per-element alpha (transparency, in [0, 1]) to a colour vector by
@@ -2242,11 +2324,17 @@ igraph.Arrows <- function(
   style = "auto",
   gradient = FALSE,
   col.to = sh.col,
-  ids = NULL
+  ids = NULL,
+  axis = NULL
 ) {
   n <- length(x1)
 
   recycle <- function(x) rep(x, length.out = n)
+
+  # Per-edge leaving axis for elbow/diagonal styles (TRUE = vertical). When the
+  # caller supplies it (from the vertex centres) the path builders route to match
+  # the axis-aligned endpoint attachment; NULL leaves the auto inference.
+  axis <- if (is.null(axis)) rep(NA, n) else recycle(axis)
 
   x1 <- recycle(x1)
   y1 <- recycle(y1)
@@ -2362,10 +2450,11 @@ igraph.Arrows <- function(
       }
     } else {
       # elbow or diagonal: a polyline between the shaft endpoints
+      vert <- if (is.na(axis[i])) NULL else axis[i]
       path <- if (eff_style == "elbow") {
-        i.elbow_path(sx1, sy1, sx2, sy2)
+        i.elbow_path(sx1, sy1, sx2, sy2, vertical = vert)
       } else {
-        i.diagonal_path(sx1, sy1, sx2, sy2)
+        i.diagonal_path(sx1, sy1, sx2, sy2, vertical = vert)
       }
       if (gradient[i]) {
         i.draw_gradient_path(
