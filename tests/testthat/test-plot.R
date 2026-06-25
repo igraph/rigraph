@@ -367,7 +367,8 @@ test_that("elbow/diagonal edges attach on the vertex centre axis", {
     pl <- Filter(
       function(p) {
         identical(p$type, "polyline") &&
-          !is.null(p$group) && identical(p$group$type, "edge")
+          !is.null(p$group) &&
+          identical(p$group$type, "edge")
       },
       prims
     )[[1]]
