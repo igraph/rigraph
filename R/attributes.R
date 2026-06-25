@@ -1311,19 +1311,19 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
     cli::cli_warn("Some attributes are duplicated")
   }
   known_names <- c(
-    "ignore",
-    "sum",
-    "prod",
-    "min",
-    "max",
-    "random",
+    "concat",
     "first",
+    "ignore",
     "last",
+    "max",
     "mean",
     "median",
-    "concat"
+    "min",
+    "prod",
+    "random",
+    "sum"
   )
-  known_codes <- c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+  known_codes <- c(12, 8, 0, 9, 6, 10, 11, 5, 4, 7, 3)
   if (allow_rename) {
     known_names <- c(known_names, "rename")
     known_codes <- c(known_codes, NA_integer_)
