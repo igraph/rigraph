@@ -293,6 +293,8 @@ test_that("cluster_leading_eigen is deterministic", {
 
   skip_if(getRversion() < "3.6")
 
+  withr::local_seed(42)
+
   for (i in 1:100) {
     g_rand <- sample_gnm(20, sample(5:40, 1))
     lec1 <- cluster_leading_eigen(g_rand)

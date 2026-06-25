@@ -1,4 +1,5 @@
 test_that("sample_degseq() works -- 'configuration' generator", {
+  withr::local_seed(42)
   degrees <- rep(2, 100)
   undirected_graph <- sample_degseq(degrees, method = "configuration")
   expect_equal(degree(undirected_graph), degrees)
@@ -9,6 +10,7 @@ test_that("sample_degseq() works -- 'configuration' generator", {
 })
 
 test_that("sample_degseq() works -- sample_gnp()", {
+  withr::local_seed(42)
   erdos_renyi <- sample_gnp(1000, 1 / 1000)
   new_graph <- sample_degseq(degree(erdos_renyi), method = "configuration")
   expect_equal(degree(new_graph), degree(erdos_renyi))
@@ -30,6 +32,7 @@ test_that("sample_degseq() works -- sample_gnp()", {
 })
 
 test_that("sample_degseq() works -- 'configuration' generator, connected", {
+  withr::local_seed(42)
   original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
   simple_graph <- sample_degseq(
@@ -45,6 +48,7 @@ test_that("sample_degseq() works -- 'configuration' generator, connected", {
 })
 
 test_that("sample_degseq() works -- vl generator", {
+  withr::local_seed(42)
   degrees <- rep(2, 100)
   vl_graph <- sample_degseq(degrees, method = "vl")
   expect_equal(degree(vl_graph), degrees)
@@ -93,6 +97,7 @@ test_that("sample_degseq() works -- Power-law degree error", {
 })
 
 test_that("sample_degseq() works -- fast.heur.simple", {
+  withr::local_seed(42)
   g <- sample_gnp(1000, 1 / 1000)
 
   simple_nm_graph <- sample_degseq(
@@ -105,6 +110,7 @@ test_that("sample_degseq() works -- fast.heur.simple", {
 })
 
 test_that("sample_degseq() works -- configuration.simple", {
+  withr::local_seed(42)
   g <- sample_gnp(1000, 1 / 1000)
   simple_nmu_graph <- sample_degseq(
     degree(g, mode = "out"),
@@ -116,6 +122,7 @@ test_that("sample_degseq() works -- configuration.simple", {
 })
 
 test_that("sample_degseq() works -- edge.switching.simple directed", {
+  withr::local_seed(42)
   g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "out"),
@@ -130,6 +137,7 @@ test_that("sample_degseq() works -- edge.switching.simple directed", {
 })
 
 test_that("sample_degseq() works -- edge.switching.simple undirected", {
+  withr::local_seed(42)
   g <- sample_gnp(1000, 1 / 1000, directed = FALSE)
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "all"),
@@ -142,6 +150,7 @@ test_that("sample_degseq() works -- edge.switching.simple undirected", {
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {
+  withr::local_seed(42)
   degs <- rep(4, 20)
   g1 <- sample_(degseq(degs))
   g2 <- sample_(degseq(degs))
@@ -172,6 +181,7 @@ test_that("sample_degseq works() -- old method names", {
 })
 
 test_that("sample_chung_lu works", {
+  withr::local_seed(42)
   chung_lu_small <- sample_chung_lu(c(3, 3, 2, 2, 1, 1))
   expect_false(any_multiple(chung_lu_small))
 
@@ -233,6 +243,7 @@ test_that("sample_forestfire() works -- dense", {
 })
 
 test_that("Generating stochastic block models works", {
+  withr::local_seed(42)
   pm <- matrix(1, nrow = 2, ncol = 2)
   bs <- c(4, 6)
   sbm_small <- sample_sbm(
@@ -285,6 +296,7 @@ test_that("Generating stochastic block models works", {
 })
 
 test_that("sample_smallworld works", {
+  withr::local_seed(42)
   for (i in 1:50) {
     p <- runif(1)
     d <- sample(1:3, 1)
@@ -393,12 +405,14 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
-  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE)
+  withr::local_seed(42)
+
+  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
-  expect_ecount(g_rand_bip_dir, 6)
+  expect_ecount(g_rand_bip_dir, 7)
   expect_true(bipartite_mapping(g_rand_bip_dir)$res)
   expect_true(is_directed(g_rand_bip_dir))
-  expect_output(print_all(g_rand_bip_dir), "5->11")
+  expect_output(print_all(g_rand_bip_dir), "5->12")
 
   g_rand_bip_in <- sample_bipartite_gnp(
     10,
@@ -407,10 +421,11 @@ test_that("sample_bipartite works -- directed gnp", {
     directed = TRUE,
     mode = "in"
   )
-  expect_output(print_all(g_rand_bip_in), "11->3")
+  expect_output(print_all(g_rand_bip_in), "15->10")
 })
 
 test_that("sample_bipartite works -- undirected gnm", {
+  withr::local_seed(42)
   g_rand_bip_gnm <- sample_bipartite_gnm(10, 5, m = 8)
   expect_vcount(g_rand_bip_gnm, 15)
   expect_ecount(g_rand_bip_gnm, 8)
@@ -418,6 +433,7 @@ test_that("sample_bipartite works -- undirected gnm", {
   expect_false(is_directed(g_rand_bip_gnm))
 })
 test_that("sample_bipartite works -- directed gnm", {
+  withr::local_seed(42)
   g_rand_bip_gnm_dir <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE)
   expect_vcount(g_rand_bip_gnm_dir, 15)
   expect_ecount(g_rand_bip_gnm_dir, 8)
@@ -436,7 +452,7 @@ test_that("sample_bipartite works -- directed gnm", {
   expect_ecount(g_rand_bip_gnm_in, 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_in)$res)
   expect_true(is_directed(g_rand_bip_gnm_in))
-  expect_output(print_all(g_rand_bip_gnm_in), "12->10")
+  expect_output(print_all(g_rand_bip_gnm_in), "12->8")
 
   g_rand_bip_full <- sample_bipartite_gnp(
     10,
@@ -819,6 +835,7 @@ test_that("sample_dot_product generates edges with correct probabilities", {
 })
 
 test_that("Dot product rng gives warnings", {
+  withr::local_seed(42)
   vecs <- cbind(c(1, 1, 1) / 3, -c(1, 1, 1) / 3)
   expect_warning(
     g <- sample_dot_product(vecs),
