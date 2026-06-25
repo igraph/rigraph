@@ -68,6 +68,17 @@ igraph_local_seed <- function(
   invisible(old_seed)
 }
 
+# Block form of igraph_local_seed(), mirroring withr::with_seed(): set the seed,
+# evaluate `code`, then restore the previous global RNG state. `code` is a
+# promise forced here -- after the seed is set -- and the seed is restored when
+# this function returns, so the seeding is scoped to exactly the block. Use this
+# (rather than igraph_local_seed) when a single test needs several independently
+# seeded blocks with other code between them.
+igraph_with_seed <- function(seed, code, rng_version = NULL, ...) {
+  igraph_local_seed(seed, rng_version = rng_version, ...)
+  code
+}
+
 expect_isomorphic <- function(g1, g2, ...) {
   expect_true(isomorphic(g1, g2, ...))
 }

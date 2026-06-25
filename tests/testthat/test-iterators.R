@@ -5,7 +5,7 @@ test_that("iterators work", {
   expect_equal(sort(E(ring)[weight < 4]$weight), 1:3)
   expect_equal(V(ring)[c("A", "C")]$name, c("A", "C"))
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g_pa <- sample_pa(100, power = 0.3)
   })
 
