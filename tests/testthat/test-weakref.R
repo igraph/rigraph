@@ -27,6 +27,7 @@ test_that("weak reference finalizer is called", {
   value <- "foobar"
   hello <- ""
   fin <- function(env) hello <<- "world"
+  # jarl-ignore unused_object: test design
   vs <- make_weak_ref(key = g, value = value, finalizer = fin)
 
   rm(g)
