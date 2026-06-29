@@ -316,30 +316,21 @@ max_cliques <- function(
 
   # Handle file and subset modes (original functionality)
   if (!is.null(file)) {
-    if (
-      !is.character(file) ||
-        length(grep("://", file, fixed = TRUE)) > 0 ||
-        length(grep("~", file, fixed = TRUE)) > 0
-    ) {
-      tmpfile <- TRUE
-      origfile <- file
-      file <- tempfile()
-    } else {
-      tmpfile <- FALSE
+    if (!is.character(file)) {
+      cli::cli_abort("{.arg file} must be a file path, not a connection.")
+    }
+    if (grepl("://", file, fixed = TRUE)) {
+      cli::cli_abort("{.arg file} must be a file path, not a URL.")
     }
     on.exit(.Call(Rx_igraph_finalizer))
     .Call(
       Rx_igraph_maximal_cliques_file,
       graph,
       subset,
-      file,
+      path.expand(file),
       as.numeric(min %||% 0),
       as.numeric(max %||% 0)
     )
-    if (tmpfile) {
-      buffer <- read.graph.toraw(file)
-      write.graph.fromraw(buffer, origfile)
-    }
     return(invisible(NULL))
   }
 
