@@ -209,13 +209,13 @@ test_that("graph_from_biadjacency_matrix() errors well", {
   rownames(inc) <- LETTERS[1:3]
 
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
+    (graph_from_biadjacency_matrix(inc, weight = FALSE))
   })
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, weight = 42))
+    (graph_from_biadjacency_matrix(inc, weight = 42))
   })
   expect_snapshot_igraph_error({
-    (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
+    (graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
   })
 })
 
