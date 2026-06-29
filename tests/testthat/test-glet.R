@@ -50,7 +50,6 @@ test_that("Graphlets filtering works", {
 })
 
 threshold.net <- function(graph, level) {
-  N <- vcount(graph)
   graph.t <- delete_edges(graph, which(E(graph)$weight < level))
 
   clqt <- unvs(max_cliques(graph.t))
