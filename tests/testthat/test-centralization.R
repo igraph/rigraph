@@ -21,6 +21,9 @@ test_that("centr_clo works", {
 
 
 test_that("centr_eigen works", {
+  # centr_eigen() runs the ARPACK eigensolver, which draws from the RNG to seed
+  # its starting vector; pin the seed so the global RNG state isn't disturbed.
+  igraph_local_seed(42)
   g <- make_star(2, "undirected")
   g_centr <- centr_eigen(g, normalized = FALSE)
   g_centr_tmax <- centr_eigen_tmax(g)

@@ -284,6 +284,7 @@ test_that("assert_named_list() works", {
 })
 
 test_that("is_bipartite works", {
+  igraph_local_seed(42)
   biadj_mat1 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -291,7 +292,6 @@ test_that("is_bipartite works", {
   g1 <- graph_from_biadjacency_matrix(biadj_mat1)
   expect_true(bipartite_mapping(g1)$res)
 
-  withr::local_seed(42)
   biadj_mat2 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -351,14 +351,14 @@ test_that("handle_vertex_type_arg validates and converts the type attribute", {
 })
 
 test_that("without_attr", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_stripped <- sample_gnp(10, 2 / 10) %>%
     delete_graph_attr("name") %>%
     delete_graph_attr("type") %>%
     delete_graph_attr("loops") %>%
     delete_graph_attr("p")
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_no_attr <- sample_(gnp(10, 2 / 10), without_attr())
 
   expect_identical_graphs(g_stripped, g_no_attr)
@@ -553,6 +553,7 @@ test_that("good error message when not using character", {
 })
 
 test_that("set_vertex_attrs() works", {
+  igraph_local_seed(42)
   g <- make_ring(10)
   g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
   expect_equal(V(g)$color, rep("blue", vcount(g)))
