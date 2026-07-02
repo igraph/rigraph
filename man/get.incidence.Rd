@@ -18,12 +18,12 @@ no \code{type} vertex attribute.}
 supplied, the value is forwarded to \code{weights} as a character edge
 attribute name.}
 
-\item{names}{Logical scalar, if \code{TRUE} and the vertices in the graph
+\item{names}{Logical, if \code{TRUE} and the vertices in the graph
 are named (i.e. the graph has a vertex attribute called \code{name}), then
 vertex names will be added to the result as row and column names. Otherwise
 the IDs of the vertices are used as row and column names.}
 
-\item{sparse}{Logical scalar, if it is \code{TRUE} then a sparse matrix is
+\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is
 created, you will need the \code{Matrix} package for this.}
 }
 \description{

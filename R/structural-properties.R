@@ -445,7 +445,7 @@ graph.knn <- function(
 #'
 #' `graph.dfs()` was renamed to [dfs()] to create a more
 #' consistent API.
-#' @param father Logical scalar, whether to return the father of the vertices.
+#' @param father Logical, whether to return the father of the vertices.
 #' @inheritParams dfs
 #' @keywords internal
 #' @export
@@ -523,7 +523,7 @@ graph.coreness <- function(graph, mode = c("all", "out", "in")) {
 #' `graph.bfs()` was renamed to [bfs()] to create a more
 #' consistent API.
 #' @inheritParams bfs
-#' @param father Logical scalar, whether to return the father of the vertices.
+#' @param father Logical, whether to return the father of the vertices.
 #' @keywords internal
 #' @export
 graph.bfs <- function(
@@ -879,7 +879,7 @@ mean_distance <- function(
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
 #' @param loops Logical; whether the loop edges are also counted.
-#' @param normalized Logical scalar, whether to normalize the degree.  If
+#' @param normalized Logical, whether to normalize the degree.  If
 #'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
 #' @inheritParams rlang::args_dots_empty
@@ -1268,14 +1268,14 @@ distances <- function(
 #'   form was used prior to igraph version 0.6. \dQuote{epath} means that the
 #'   edges along the paths are reported. \dQuote{both} means that both forms are
 #'   returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.
-#' @param predecessors Logical scalar, whether to return the predecessor vertex
+#' @param predecessors Logical, whether to return the predecessor vertex
 #'   for each vertex. The predecessor of vertex `i` in the tree is the
 #'   vertex from which vertex `i` was reached. The predecessor of the start
 #'   vertex (in the `from` argument) is itself by definition. If the
 #'   predecessor is zero, it means that the given vertex was not reached from the
 #'   source during the search. Note that the search terminates if all the
 #'   vertices in `to` are reached.
-#' @param inbound.edges Logical scalar, whether to return the inbound edge for
+#' @param inbound.edges Logical, whether to return the inbound edge for
 #'   each vertex. The inbound edge of vertex `i` in the tree is the edge via
 #'   which vertex `i` was reached. The start vertex and vertices that were
 #'   not reached during the search will have zero in the corresponding entry of
@@ -1607,7 +1607,7 @@ induced_subgraph <- function(
 
 #' @rdname subgraph
 #' @param eids The edge IDs of the edges that will be kept in the result graph.
-#' @param delete.vertices Logical scalar, whether to remove vertices that do
+#' @param delete.vertices Logical, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
 #' @export
 subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
@@ -1971,7 +1971,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' (2)+(3). This measure is calculated if `mode` is `ratio`.
 #'
 #' @param graph The graph object.
-#' @param ignore.loops Logical constant, whether to ignore loop edges.
+#' @param ignore.loops Logical, whether to ignore loop edges.
 #' @param mode See below.
 #' @return A numeric scalar between zero and one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -2008,7 +2008,7 @@ reciprocity <- function(
 #' results for such graphs.
 #'
 #' @param graph The input graph.
-#' @param loops Logical constant, whether loop edges may exist in the graph.
+#' @param loops Logical, whether loop edges may exist in the graph.
 #'   This affects the calculation of the largest possible number of edges in the
 #'   graph. If this parameter is set to FALSE yet the graph contains self-loops,
 #'   the result will not be meaningful.
@@ -2408,7 +2408,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #'
 #' @param graph The input graph. It may be directed, but the algorithm searches
 #'   for undirected circles anyway.
-#' @param circle Logical scalar, whether to return the shortest circle itself.
+#' @param circle Logical, whether to return the shortest circle itself.
 #' @return A named list with two components:
 #'   \describe{
 #'     \item{girth}{
@@ -2485,7 +2485,7 @@ girth <- function(graph, circle = TRUE) {
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
-#' @return `any_loop()` and `any_multiple()` return a logical scalar.
+#' @return `any_loop()` and `any_multiple()` return a Logical.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
 #'   `count_loops()` returns a numeric scalar with the total number of loop edges.
 #'   `count_multiple()` returns a numeric vector.
@@ -2604,22 +2604,22 @@ count_loops <- function(graph) {
 #'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #'   ignores edge directions completely. \sQuote{total} is a synonym for
 #'   \sQuote{all}. This argument is ignored for undirected graphs.
-#' @param unreachable Logical scalar, whether the search should visit the
+#' @param unreachable Logical, whether the search should visit the
 #'   vertices that are unreachable from the given root vertex (or vertices). If
 #'   `TRUE`, then additional searches are performed until all vertices are
 #'   visited.
 #' @param restricted `NULL` (=no restriction), or a vector of vertices
 #'   (IDs or symbolic names). In the latter case, the search is restricted to the
 #'   given vertices.
-#' @param order Logical scalar, whether to return the ordering of the vertices.
-#' @param rank Logical scalar, whether to return the rank of the vertices.
+#' @param order Logical, whether to return the ordering of the vertices.
+#' @param rank Logical, whether to return the rank of the vertices.
 #' @param father `r lifecycle::badge("deprecated")` Use `parent` instead.
-#' @param parent Logical scalar, whether to return the parent of the vertices.
-#' @param pred Logical scalar, whether to return the predecessors of the
+#' @param parent Logical, whether to return the parent of the vertices.
+#' @param pred Logical, whether to return the predecessors of the
 #'   vertices.
-#' @param succ Logical scalar, whether to return the successors of the
+#' @param succ Logical, whether to return the successors of the
 #'   vertices.
-#' @param dist Logical scalar, whether to return the distance from the root of
+#' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
 #' @param callback If not `NULL`, then it must be callback function. This
 #'   is called whenever a vertex is visited. The callback function should
@@ -2884,17 +2884,17 @@ bfs <- function(
 #'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #'   ignores edge directions completely. \sQuote{total} is a synonym for
 #'   \sQuote{all}. This argument is ignored for undirected graphs.
-#' @param unreachable Logical scalar, whether the search should visit the
+#' @param unreachable Logical, whether the search should visit the
 #'   vertices that are unreachable from the given root vertex (or vertices). If
 #'   `TRUE`, then additional searches are performed until all vertices are
 #'   visited.
-#' @param order Logical scalar, whether to return the DFS ordering of the
+#' @param order Logical, whether to return the DFS ordering of the
 #'   vertices.
-#' @param order.out Logical scalar, whether to return the ordering based on
+#' @param order.out Logical, whether to return the ordering based on
 #'   leaving the subtree of the vertex.
 #' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
-#' @param parent Logical scalar, whether to return the parent of the vertices.
-#' @param dist Logical scalar, whether to return the distance from the root of
+#' @param parent Logical, whether to return the parent of the vertices.
+#' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
 #' @param in.callback If not `NULL`, then it must be callback function.
 #'   This is called whenever a vertex is visited. See details below.
@@ -3114,7 +3114,7 @@ dfs <- function(
 #'   connected components to search. It is ignored for undirected graphs.
 #' @param \dots Additional attributes to pass to `cluster`, right now only
 #'   `mode` makes sense.
-#' @return For `is_connected()` a logical constant.
+#' @return For `is_connected()` a Logical.
 #'
 #'   For `components()` a named list with three components:
 #'   \describe{
@@ -3319,7 +3319,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'   `weight`, then it will be used automatically. Set this to `NA` if
 #'   you want the unweighted Laplacian on a graph that has a `weight` edge
 #'   attribute.
-#' @param sparse Logical scalar, whether to return the result as a sparse
+#' @param sparse Logical, whether to return the result as a sparse
 #'   matrix. The `Matrix` package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

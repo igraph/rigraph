@@ -26,7 +26,7 @@ stationary in time.}
 \item{pref.matrix}{A matrix giving the preferences of the given vertex
 types. These should be probabilities, i.e. numbers between zero and one.}
 
-\item{directed}{Logical constant, whether to generate directed graphs.}
+\item{directed}{Logical, whether to generate directed graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

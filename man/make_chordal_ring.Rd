@@ -15,7 +15,7 @@ chordal_ring(n, w, directed = FALSE)
 \item{w}{A matrix which specifies the extended chordal ring. See
 details below.}
 
-\item{directed}{Logical scalar, whether or not to create a directed graph.}
+\item{directed}{Logical, whether or not to create a directed graph.}
 }
 \value{
 An igraph graph.

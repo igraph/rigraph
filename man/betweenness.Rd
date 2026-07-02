@@ -37,7 +37,7 @@ betweenness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to normalize the betweenness
+\item{normalized}{Logical, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
 or unordered vertex pairs in directed and undirected graphs, respectively.
 In an undirected graph,

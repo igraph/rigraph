@@ -100,7 +100,7 @@ power.law.fit <- function(
 #' @param start Numeric scalar. The initial value of the exponent for the
 #'   minimizing function, for the \sQuote{`R.mle`} implementation. Usually
 #'   it is safe to leave this untouched.
-#' @param force.continuous Logical scalar. Whether to force a continuous
+#' @param force.continuous Logical. Whether to force a continuous
 #'   distribution for the \sQuote{`plfit`} implementation, even if the
 #'   sample vector contains integer values only (by chance). If this argument is
 #'   false, igraph will assume a continuous distribution if at least one sample
@@ -130,7 +130,7 @@ power.law.fit <- function(
 #'   named list with entries:
 #'   \describe{
 #'     \item{continuous}{
-#'       Logical scalar, whether the
+#'       Logical, whether the
 #'       fitted power-law distribution was continuous or discrete.
 #'     }
 #'     \item{alpha}{

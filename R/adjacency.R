@@ -149,7 +149,7 @@ graph.adjacency <- function(
 #'   edge attribute named by the `weighted` argument. If it is `TRUE`
 #'   then a weighted graph is created and the name of the edge attribute will be
 #'   `weight`. See also details below.
-#' @param diag Logical scalar, whether to include the diagonal of the matrix in
+#' @param diag Logical, whether to include the diagonal of the matrix in
 #'   the calculation. If this is `FALSE` then the diagonal is zerod out
 #'   first.
 #' @param add.colnames Character scalar, whether to add the column names as

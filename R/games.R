@@ -1552,9 +1552,9 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #'   add in each time step if `out.seq` is NULL. See details below.
 #' @param out.seq The number of edges to add in each time step, a vector
 #'   containing as many elements as the number of vertices. See details below.
-#' @param out.pref Logical constant, whether to include edges not initiated by
+#' @param out.pref Logical, whether to include edges not initiated by
 #'   the vertex as a basis of preferential attachment. See details below.
-#' @param directed Logical constant, whether to generate a directed graph. See
+#' @param directed Logical, whether to generate a directed graph. See
 #'   details below.
 #' @param zero.deg.appeal The degree-dependent part of the
 #'   \sQuote{attractiveness} of the vertices with no adjacent edges. See also
@@ -1774,7 +1774,7 @@ pa_age <- function(
 #'   stationary in time.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
 #'   types. These should be probabilities, i.e. numbers between zero and one.
-#' @param directed Logical constant, whether to generate directed graphs.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1902,8 +1902,8 @@ traits <- function(
 #' @param nodes The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
-#' @param torus Logical constant, whether to use a torus instead of a square.
-#' @param coords Logical scalar, whether to add the positions of the vertices
+#' @param torus Logical, whether to use a torus instead of a square.
+#' @param coords Logical, whether to add the positions of the vertices
 #'   as vertex attributes called \sQuote{`x`} and \sQuote{`y`}.
 #' @return A graph object. If `coords` is `TRUE` then with vertex
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
@@ -1987,8 +1987,8 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @param directed Logical, whether to create a directed graph.
+#' @param loops Logical, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -2176,9 +2176,9 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' @param nei Integer constant, the neighborhood within which the vertices of
 #'   the lattice will be connected.
 #' @param p Real constant between zero and one, the rewiring probability.
-#' @param loops Logical scalar, whether loops edges are allowed in the
+#' @param loops Logical, whether loops edges are allowed in the
 #'   generated graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed int the
+#' @param multiple Logical, whether multiple edges are allowed int the
 #'   generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2257,10 +2257,10 @@ smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
 #'   probabilities for the different vertex types.
-#' @param directed Logical scalar, whether to generate directed networks.
+#' @param directed Logical, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
 #'   Types are numbered from zero.
-#' @param attr Logical scalar, whether to add the vertex types to the generated
+#' @param attr Logical, whether to add the vertex types to the generated
 #'   graph as a vertex attribute called \sQuote{`type`}.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2420,7 +2420,7 @@ cit_cit_types <- function(
 #'   be given for \eqn{G(n,m)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 #'   be given for \eqn{G(n,p)} graphs.
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2563,7 +2563,7 @@ bipartite_gnp <- function(
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2817,7 +2817,7 @@ hierarchical_sbm <- function(n, m, rho, C, p) {
 #'
 #' @param vecs A numeric matrix in which each latent position vector is a
 #'   column.
-#' @param directed A logical scalar, TRUE if the generated graph should be
+#' @param directed A Logical, TRUE if the generated graph should be
 #'   directed.
 #' @return An igraph graph object which is the generated random dot product
 #'   graph.
@@ -2916,8 +2916,8 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #'   graph.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
 #'   out-degree and in-degree in a directed graph.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed.
+#' @param directed Logical, whether to create a directed graph.
+#' @param multiple Logical, whether multiple edges are allowed.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso [sample_degseq()] for a generator with prescribed degree
@@ -3173,8 +3173,8 @@ chung_lu <- function(
 #'
 #'   If this argument is not `NULL`, then a directed graph is generated,
 #'   otherwise an undirected one.
-#' @param loops Logical scalar, whether to allow loop edges in the graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
+#' @param loops Logical, whether to allow loop edges in the graph.
+#' @param multiple Logical, whether to allow multiple edges in the
 #'   graph.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -3246,7 +3246,7 @@ sample_fitness <- function(
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
 #' @inheritParams sample_fitness
-#' @param finite.size.correction Logical scalar, whether to use the proposed
+#' @param finite.size.correction Logical, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -3445,7 +3445,7 @@ sample_correlated_gnp <- function(
 #'   adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two vertices,
 #'   it must in the open (0,1) interval.
-#' @param directed Logical scalar, whether to generate directed graphs.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param permutation A numeric vector, a permutation vector that is applied on
 #'   the vertices of the first graph, to get the second graph.  If `NULL`,
 #'   the vertices are not permuted.

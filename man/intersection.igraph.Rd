@@ -10,13 +10,13 @@
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
 otherwise. A warning is generated if \code{auto} and some (but not all)
 graphs are named.}
 
-\item{keep.all.vertices}{Logical scalar, whether to keep vertices that only
+\item{keep.all.vertices}{Logical, whether to keep vertices that only
 appear in a subset of the input graphs.}
 }
 \value{

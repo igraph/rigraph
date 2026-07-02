@@ -397,7 +397,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' Check whether a graph is directed
 #'
 #' @param graph The input graph
-#' @return Logical scalar, whether the graph is directed.
+#' @return Logical, whether the graph is directed.
 #'
 #' @family structural queries
 #'
@@ -515,9 +515,9 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #'   or vector of vertex IDs or symbolic vertex names.
 #'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 #'   the first edge, the third and fourth for the second, etc.
-#' @param directed Logical scalar, whether to consider edge directions in
+#' @param directed Logical, whether to consider edge directions in
 #'   directed graphs. This argument is ignored for undirected graphs.
-#' @param error Logical scalar, whether to report an error if an edge is not
+#' @param error Logical, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
 #' @return A numeric vector of edge IDs, one for each pair of input vertices.

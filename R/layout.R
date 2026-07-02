@@ -800,7 +800,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   topological sorting, performed with the opposite mode than the `mode`
 #'   argument. After the vertices have been sorted, one is selected from each
 #'   component.
-#' @param circular Logical scalar, whether to plot the tree in a circular
+#' @param circular Logical, whether to plot the tree in a circular
 #'   fashion. Defaults to `FALSE`, so the tree branches are going bottom-up
 #'   (or top-down, see the `flip.y` argument.
 #' @param rootlevel This argument can be useful when drawing forests which are
@@ -813,7 +813,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   edges are used (this was the behavior in igraph 0.5 and before). This
 #'   parameter also influences how the root vertices are calculated, if they are
 #'   not given. See the `roots` parameter.
-#' @param flip.y Logical scalar, whether to flip the \sQuote{y} coordinates.
+#' @param flip.y Logical, whether to flip the \sQuote{y} coordinates.
 #'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -2811,7 +2811,7 @@ layout.drl <- function(
 #' @aliases drl_defaults igraph.drl.coarsen
 #' @aliases igraph.drl.coarsest igraph.drl.default igraph.drl.final igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
-#' @param use.seed Logical scalar, whether to use the coordinates given in the
+#' @param use.seed Logical, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
 #'   vertices is `use.seed` is `TRUE`. It is ignored otherwise.

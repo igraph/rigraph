@@ -13,7 +13,7 @@ sample_sphere_surface(dim, n = 1, radius = 1, positive = TRUE)
 
 \item{radius}{Numeric scalar, the radius of the sphere to sample.}
 
-\item{positive}{Logical scalar, whether to sample from the positive orthant
+\item{positive}{Logical, whether to sample from the positive orthant
 of the sphere.}
 }
 \value{

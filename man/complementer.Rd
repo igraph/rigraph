@@ -9,7 +9,7 @@ complementer(graph, loops = FALSE)
 \arguments{
 \item{graph}{The input graph, can be directed or undirected.}
 
-\item{loops}{Logical constant, whether to generate loop edges.}
+\item{loops}{Logical, whether to generate loop edges.}
 }
 \value{
 A new graph object.

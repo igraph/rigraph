@@ -17,7 +17,7 @@ graph.incidence(
 \item{incidence}{The input bipartite adjacency matrix. It can also be a sparse matrix
 from the \code{Matrix} package.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
 \item{mode}{A character constant, defines the direction of the edges in
 directed graphs, ignored for undirected graphs. If \sQuote{\code{out}}, then
@@ -26,7 +26,7 @@ bipartite adjacency matrix) to vertices of the second kind (columns in the incid
 matrix). If \sQuote{\verb{in}}, then the opposite direction is used. If
 \sQuote{\code{all}} or \sQuote{\code{total}}, then mutual edges are created.}
 
-\item{multiple}{Logical scalar, specifies how to interpret the matrix
+\item{multiple}{Logical, specifies how to interpret the matrix
 elements. See details below.}
 
 \item{weighted}{This argument specifies whether to create a weighted graph
