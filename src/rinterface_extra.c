@@ -5682,15 +5682,10 @@ SEXP Rx_igraph_maximal_cliques(SEXP graph, SEXP psubset,
 SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                    SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
-  igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
-  igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
+  igraph_integer_t minsize = (igraph_integer_t) REAL(pminsize)[0];
+  igraph_integer_t maxsize = (igraph_integer_t) REAL(pmaxsize)[0];
   igraph_vector_int_t subset;
-  SEXP result;
   FILE *stream;
-#if HAVE_OPEN_MEMSTREAM == 1
-  char *bp;
-  size_t size;
-#endif
 
   Rz_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(psubset)) {
@@ -5699,29 +5694,17 @@ SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
   }
   IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &subset);
-#if HAVE_OPEN_MEMSTREAM == 1
-  stream=open_memstream(&bp, &size);
-#else
-  stream=fopen(CHAR(STRING_ELT(file, 0)), "w");
-#endif
-  if (stream==0) { igraph_error("Cannot write cliques", __FILE__,
-                                __LINE__, IGRAPH_EFILE); }
+  stream = fopen(CHAR(STRING_ELT(file, 0)), "w");
+  if (stream == 0) {
+    igraph_error("Cannot write cliques", __FILE__, __LINE__, IGRAPH_EFILE);
+  }
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
                                 minsize, maxsize);
   fclose(stream);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
-#if HAVE_OPEN_MEMSTREAM == 1
-  PROTECT(result=Rf_allocVector(RAWSXP, size));
-  memcpy(RAW(result), bp, sizeof(char)*size);
-  free(bp);
-#else
-  PROTECT(result=NEW_NUMERIC(0));
-#endif
-
-  UNPROTECT(1);
-  return result;
+  return R_NilValue;
 }
 
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
