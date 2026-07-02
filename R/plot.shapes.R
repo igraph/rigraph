@@ -368,6 +368,23 @@ shape_noplot <- function(coords, v = NULL, params) {
   invisible(NULL)
 }
 
+# Check that a shape clip/plot function accepts the arguments igraph calls it
+# with. Functions that take `...` are assumed to forward everything and pass.
+i.check_shape_fun <- function(fn, arg, required) {
+  fmls <- names(formals(fn))
+  if ("..." %in% fmls) {
+    return(invisible())
+  }
+  missing <- setdiff(required, fmls)
+  if (length(missing) > 0) {
+    cli::cli_abort(c(
+      "Shape {.arg {arg}} function is missing required argument{?s} {.arg {missing}}.",
+      i = "It is called as {.code {arg}(coords, {if (arg == 'clip') 'el, ' else ''}...)} with {.arg {required}}; see {.help add_shape}."
+    ))
+  }
+  invisible()
+}
+
 #' @rdname shapes
 #' @export
 add_shape <- function(
@@ -407,6 +424,13 @@ add_shape <- function(
     ))
   }
 
+  # Validate the clip/plot signatures up front so a malformed shape fails here
+  # rather than cryptically at plot time. A clip function is called as
+  # clip(coords, el, params =, end =) and a plot function as
+  # plot(coords, v =, params =); functions taking `...` are exempt.
+  i.check_shape_fun(clip, "clip", c("params", "end"))
+  i.check_shape_fun(plot, "plot", c("params", "v"))
+
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph_options, parameters)
   invisible(TRUE)
@@ -414,6 +438,16 @@ add_shape <- function(
 
 ## These are the predefined shapes
 #nocov start
+
+# A non-positive frame width means "draw no border": blank the frame colour and
+# reset the width to a drawable value. Shared by the vertex shape plot functions
+# so the rule lives in one place.
+i.hide_zero_frame <- function(color, width) {
+  color[width <= 0] <- NA
+  width[width <= 0] <- 1
+  list(color = color, width = width)
+}
+
 .igraph.shape.circle.clip <- function(
   coords,
   el,
@@ -495,20 +529,19 @@ add_shape <- function(
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "circles",
       x = coords[, 1],
       y = coords[, 2],
+      dim = vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      circles = vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -519,15 +552,14 @@ add_shape <- function(
       vertex.size,
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
-        symbols(
+        i.r_symbols(
+          "circles",
           x = x,
           y = y,
+          dim = size,
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          circles = size,
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -650,20 +682,19 @@ add_shape <- function(
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "squares",
       x = coords[, 1],
       y = coords[, 2],
+      dim = 2 * vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      squares = 2 * vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -674,15 +705,14 @@ add_shape <- function(
       vertex.size,
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, lwd) {
-        symbols(
+        i.r_symbols(
+          "squares",
           x = x,
           y = y,
+          dim = 2 * size,
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          squares = 2 * size,
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -899,20 +929,19 @@ add_shape <- function(
   }
   vertex.size <- cbind(vertex.size, vertex.size2)
 
-  # Handle vertex.frame.width <= 0 by hiding the border
-  vertex.frame.color[vertex.frame.width <= 0] <- NA
-  vertex.frame.width[vertex.frame.width <= 0] <- 1
+  frame <- i.hide_zero_frame(vertex.frame.color, vertex.frame.width)
+  vertex.frame.color <- frame$color
+  vertex.frame.width <- frame$width
 
   if (length(vertex.frame.width) == 1) {
-    symbols(
+    i.r_symbols(
+      "rectangles",
       x = coords[, 1],
       y = coords[, 2],
+      dim = 2 * vertex.size,
       bg = vertex.color,
       fg = vertex.frame.color,
-      rectangles = 2 * vertex.size,
-      lwd = vertex.frame.width,
-      add = TRUE,
-      inches = FALSE
+      lwd = vertex.frame.width
     )
   } else {
     mapply(
@@ -924,15 +953,14 @@ add_shape <- function(
       vertex.size[, 2],
       vertex.frame.width,
       FUN = function(x, y, bg, fg, size, size2, lwd) {
-        symbols(
+        i.r_symbols(
+          "rectangles",
           x = x,
           y = y,
+          dim = 2 * cbind(size, size2),
           bg = bg,
           fg = fg,
-          lwd = lwd,
-          rectangles = 2 * cbind(size, size2),
-          add = TRUE,
-          inches = FALSE
+          lwd = lwd
         )
       }
     )
@@ -1158,7 +1186,7 @@ mypie <- function(
   for (i in 1:nx) {
     n <- max(2, floor(edges * dx[i]))
     P <- t2xy(seq.int(values[i], values[i + 1], length.out = n))
-    polygon(
+    i.r_polygon(
       x + c(P$x, 0),
       y + c(P$y, 0),
       density = density[i],
@@ -1314,7 +1342,7 @@ mypie <- function(
 
   for (i in seq_len(nrow(coords))) {
     vsp2 <- vertex.size[i]
-    rasterImage(
+    i.r_raster(
       images[[whichImage[i]]],
       coords[i, 1] - vsp2,
       coords[i, 2] - vsp2,
@@ -1342,7 +1370,7 @@ mypie <- function(
 
   for (i in seq_len(nrow(coords))) {
     ras <- if (!is.list(raster) || length(raster) == 1) raster else raster[[i]]
-    rasterImage(
+    i.r_raster(
       ras,
       coords[i, 1] - size[i],
       coords[i, 2] - size2[i],

@@ -19,6 +19,493 @@
 #
 ###################################################################
 
+# Vertex sizes and edge widths are specified on a 0-200 scale (a `vertex.size`
+# of 15 is the default); this factor converts them to user coordinates, where
+# the plotting region spans [-1, 1] after rescaling.
+VERTEX_SIZE_SCALE <- 1 / 200
+
+# Arrowhead width scaling factor used by igraph.Arrows(); combined with the
+# character size from par("cin") to size arrowheads relative to the device.
+ARROW_WIDTH_FACTOR <- 1.2 / 4
+
+# --- Self-loop / Bézier drawing helpers --------------------------------------
+# Hoisted out of plot.igraph()'s body (they capture no enclosing state). Named
+# with an `i.` prefix; `i.plot.bezier` in particular must NOT be called
+# `plot.bezier`, which R would treat as an S3 plot() method for class "bezier".
+
+# A single point on a cubic Bézier curve defined by control points `cp` (a 4x2
+# matrix) at parameter `t` in [0, 1].
+i.point.on.cubic.bezier <- function(cp, t) {
+  c <- 3 * (cp[2, ] - cp[1, ])
+  b <- 3 * (cp[3, ] - cp[2, ]) - c
+  a <- cp[4, ] - cp[1, ] - c - b
+
+  t2 <- t * t
+  t3 <- t * t * t
+
+  a * t3 + b * t2 + c * t + cp[1, ]
+}
+
+# `points` evenly spaced points along the cubic Bézier curve `cp`.
+i.compute.bezier <- function(cp, points) {
+  dt <- seq(0, 1, by = 1 / (points - 1))
+  sapply(dt, function(t) i.point.on.cubic.bezier(cp, t))
+}
+
+# Draw a Bézier curve with optional arrowheads at its ends.
+i.plot.bezier <- function(
+  cp,
+  points,
+  color,
+  width,
+  arr,
+  lty,
+  arrow.size,
+  arr.w
+) {
+  p <- i.compute.bezier(cp, points)
+  i.r_polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
+  if (arr == 1 || arr == 3) {
+    igraph.Arrows(
+      p[1, ncol(p) - 1],
+      p[2, ncol(p) - 1],
+      p[1, ncol(p)],
+      p[2, ncol(p)],
+      sh.col = color,
+      h.col = color,
+      size = arrow.size,
+      sh.lwd = width,
+      h.lwd = width,
+      open = FALSE,
+      code = 2,
+      width = arr.w
+    )
+  }
+  if (arr == 2 || arr == 3) {
+    igraph.Arrows(
+      p[1, 2],
+      p[2, 2],
+      p[1, 1],
+      p[2, 1],
+      sh.col = color,
+      h.col = color,
+      size = arrow.size,
+      sh.lwd = width,
+      h.lwd = width,
+      open = FALSE,
+      code = 2,
+      width = arr.w
+    )
+  }
+}
+
+# Draw one self-loop as a rotated Bézier curve, plus its optional label.
+# arrow.size/arr.w/loopSize defaults are placeholders only: every call site
+# (the mapply() in plot.igraph) supplies them explicitly.
+i.draw.loop <- function(
+  x0,
+  y0,
+  cx = x0,
+  cy = y0,
+  color,
+  angle = 0,
+  label = NA,
+  label.color,
+  label.font,
+  label.family,
+  label.cex,
+  label.halo = NA,
+  label.halo.width = 0.15,
+  width = 1,
+  arr = 2,
+  lty = 1,
+  arrow.size = 1,
+  arr.w = 1,
+  lab.x,
+  lab.y,
+  loopSize = 1,
+  narrowing = 1
+) {
+  rad <- angle
+  center <- c(cx, cy)
+  cp <- matrix(
+    c(
+      x0,
+      y0,
+      x0 + 0.4 * loopSize,
+      y0 + narrowing * 0.2 * loopSize,
+      x0 + 0.4 * loopSize,
+      y0 - narrowing * 0.2 * loopSize,
+      x0,
+      y0
+    ),
+    ncol = 2,
+    byrow = TRUE
+  )
+  cp_centered <- cp -
+    matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
+
+  rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
+  cp_rotated <- t(rotation_matrix %*% t(cp_centered))
+
+  cp <- cp_rotated +
+    matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
+
+  if (is.na(width)) {
+    width <- 1
+  }
+
+  i.plot.bezier(
+    cp,
+    50,
+    color,
+    width,
+    arr = arr,
+    lty = lty,
+    arrow.size = arrow.size,
+    arr.w = arr.w
+  )
+
+  if (is.language(label) || !is.na(label)) {
+    # Get midpoint of the Bezier curve for label placement
+    p <- i.compute.bezier(cp, 50)
+    mid_index <- floor(ncol(p) / 2)
+    lx <- p[1, mid_index]
+    ly <- p[2, mid_index]
+
+    # Override if label position explicitly given
+    if (!is.na(lab.x)) {
+      lx <- lab.x
+    }
+    if (!is.na(lab.y)) {
+      ly <- lab.y
+    }
+
+    i.r_text_halo(
+      lx,
+      ly,
+      label,
+      col = label.color,
+      font = label.font,
+      family = label.family,
+      cex = label.cex,
+      halo = label.halo,
+      halo.width = label.halo.width
+    )
+  }
+}
+
+# Initialize the plotting canvas: an empty plot region
+# with the requested limits, axes, aspect ratio and titles. Isolated from the
+# drawing orchestration in plot.igraph() so the latter reads as
+# setup -> edges -> vertices -> labels.
+i.init_plot_canvas <- function(
+  xlim,
+  ylim,
+  xlab,
+  ylab,
+  axes,
+  frame.plot,
+  asp,
+  main,
+  sub
+) {
+  i.r_init_canvas(
+    xlim = xlim,
+    ylim = ylim,
+    xlab = xlab,
+    ylab = ylab,
+    axes = axes,
+    frame.plot = frame.plot,
+    asp = asp,
+    main = main,
+    sub = sub
+  )
+}
+
+# Distribute self-loops around each vertex. For a vertex with
+# k loops, place them evenly inside the largest angular gap between its incident
+# (non-loop) edges, and compute a narrowing factor that compresses the loops
+# when that gap is tight. Returns per-loop `angles` and `narrowing` vectors
+# aligned to `loops.v`.
+i.loop_angles <- function(graph, layout, loops.v) {
+  la_dyn <- numeric(length(loops.v))
+  narrowing <- numeric(length(loops.v))
+
+  for (v in unique(loops.v)) {
+    idx <- which(loops.v == v)
+    n_loops <- length(idx)
+
+    incident_edges <- incident(graph, v, mode = "all")
+    incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
+
+    if (length(incident_edges) == 0) {
+      # Full circle available if no edges
+      loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
+      gap_span <- 2 * pi
+    } else {
+      angles <- sapply(incident_edges, function(e) {
+        ends_e <- ends(graph, e, names = FALSE)
+        other <- if (as.numeric(ends_e[1]) == v) {
+          as.numeric(ends_e[2])
+        } else {
+          as.numeric(ends_e[1])
+        }
+        dx <- layout[other, 1] - layout[v, 1]
+        dy <- layout[other, 2] - layout[v, 2]
+        atan2(dy, dx)
+      })
+
+      angles <- (angles + 2 * pi) %% (2 * pi)
+      angles <- sort(angles)
+      gaps <- diff(c(angles, angles[1] + 2 * pi))
+      max_gap_index <- which.max(gaps)
+
+      gap_start <- angles[max_gap_index]
+      gap_span <- gaps[max_gap_index]
+      gap_end <- (gap_start + gap_span) %% (2 * pi)
+
+      # Generate loop angles spaced inside the gap
+      if (gap_end > gap_start) {
+        loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+          -c(1, n_loops + 2)
+        ]
+      } else {
+        # wrap around
+        gap_end <- gap_end + 2 * pi
+        loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+          -c(1, n_loops + 2)
+        ] %%
+          (2 * pi)
+      }
+    }
+
+    la_dyn[idx] <- loop_angles
+
+    # Compute narrowing factor based on angular space
+    angle_per_loop <- gap_span / n_loops
+    # Scale narrowing between 1 (wide) and ~0.2 (tight)
+    narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
+    narrowing[idx] <- narrowing_factor
+  }
+
+  list(angles = la_dyn, narrowing = narrowing)
+}
+
+# Iteratively nudge overlapping text labels apart (ggrepel / Gephi "label
+# adjust" style). Each label is repelled by other labels whose boxes overlap and
+# gently sprung back toward its original anchor. Pure geometry given the label
+# box half-sizes; deterministic (no randomness), so snapshots are stable.
+# `hw`/`hh` are per-label half-width/height in user coordinates.
+i.repel_labels <- function(x, y, hw, hh, iter = 200, spring = 0.04) {
+  n <- length(x)
+  if (n < 2) {
+    return(list(x = x, y = y))
+  }
+  px <- x
+  py <- y
+  for (it in seq_len(iter)) {
+    fx <- numeric(n)
+    fy <- numeric(n)
+    for (i in seq_len(n - 1)) {
+      for (j in (i + 1):n) {
+        dx <- px[i] - px[j]
+        dy <- py[i] - py[j]
+        ox <- (hw[i] + hw[j]) - abs(dx) # overlap along x
+        oy <- (hh[i] + hh[j]) - abs(dy) # overlap along y
+        if (ox > 0 && oy > 0) {
+          # separate along the axis of smaller overlap (cheaper move)
+          if (ox <= oy) {
+            s <- if (dx >= 0) 1 else -1
+            fx[i] <- fx[i] + s * ox * 0.5
+            fx[j] <- fx[j] - s * ox * 0.5
+          } else {
+            s <- if (dy >= 0) 1 else -1
+            fy[i] <- fy[i] + s * oy * 0.5
+            fy[j] <- fy[j] - s * oy * 0.5
+          }
+        }
+      }
+    }
+    # spring back toward the original anchor
+    fx <- fx + (x - px) * spring
+    fy <- fy + (y - py) * spring
+    if (max(abs(c(fx, fy))) < 1e-4) {
+      break
+    }
+    px <- px + fx
+    py <- py + fy
+  }
+  list(x = px, y = py)
+}
+
+# Draw vertex labels, offset from each vertex by label.dist along
+# label.degree. xpd = TRUE is scoped to this call so labels may spill outside
+# the plot region. With `repel = TRUE`, overlapping labels are nudged apart and
+# a leader line connects each moved label to its anchor. No-op for an empty
+# graph.
+i.draw_vertex_labels <- function(
+  layout,
+  labels,
+  vertex.size,
+  label.dist,
+  label.degree,
+  label.color,
+  label.family,
+  label.font,
+  label.cex,
+  label.angle,
+  label.adj,
+  repel = FALSE,
+  label.halo = NA,
+  label.halo.width = 0.15
+) {
+  vc <- nrow(layout)
+  if (vc == 0) {
+    return(invisible(NULL))
+  }
+
+  old_xpd <- par(xpd = TRUE)
+  on.exit(par(old_xpd), add = TRUE)
+
+  x <- layout[, 1] +
+    label.dist *
+      cos(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
+  y <- layout[, 2] +
+    label.dist *
+      sin(-label.degree) *
+      (vertex.size + 6 * 8 * log10(2)) *
+      VERTEX_SIZE_SCALE
+
+  label.col <- rep(label.color, length.out = vc)
+  label.fam <- rep(label.family, length.out = vc)
+  label.fnt <- rep(label.font, length.out = vc)
+  label.cex <- rep(label.cex, length.out = vc)
+  label.ang <- rep(label.angle, length.out = vc)
+  label.adj <- rep(list(label.adj), length.out = vc)
+  label.text <- rep(labels, length.out = vc)
+  label.halo <- rep(label.halo, length.out = vc)
+  label.halo.w <- rep(label.halo.width, length.out = vc)
+
+  if (isTRUE(any(repel)) && vc > 1) {
+    drawn <- !is.na(label.text) & nzchar(as.character(label.text))
+    if (sum(drawn) > 1) {
+      hw <- rep(0, vc)
+      hh <- rep(0, vc)
+      hw[drawn] <- strwidth(label.text[drawn], cex = label.cex[drawn]) /
+        2 *
+        1.15
+      hh[drawn] <- strheight(label.text[drawn], cex = label.cex[drawn]) /
+        2 *
+        1.6
+      moved <- i.repel_labels(x[drawn], y[drawn], hw[drawn], hh[drawn])
+      nx <- x
+      ny <- y
+      nx[drawn] <- moved$x
+      ny[drawn] <- moved$y
+      # leader lines from the original anchor to labels that actually moved
+      shift <- sqrt((nx - x)^2 + (ny - y)^2)
+      lead <- drawn & shift > pmax(hh, 1e-6)
+      if (any(lead)) {
+        i.r_segments(
+          x[lead],
+          y[lead],
+          nx[lead],
+          ny[lead],
+          col = "grey60",
+          lwd = 0.5
+        )
+      }
+      x <- nx
+      y <- ny
+    }
+  }
+
+  invisible(mapply(
+    function(x0, y0, lbl, col, fam, fnt, cex, srt, adj, halo, halo.w) {
+      i.r_text_halo(
+        x0,
+        y0,
+        labels = lbl,
+        col = col,
+        family = fam,
+        font = fnt,
+        cex = cex,
+        srt = srt,
+        adj = adj,
+        halo = halo,
+        halo.width = halo.w
+      )
+    },
+    x,
+    y,
+    label.text,
+    label.col,
+    label.fam,
+    label.fnt,
+    label.cex,
+    label.ang,
+    label.adj,
+    label.halo,
+    label.halo.w
+  ))
+}
+
+# Draw one label with an optional shadowtext halo for legibility.
+# `halo = NA` (the default) is exactly `i.r_text()` -> byte-identical to before.
+# Otherwise the glyphs are drawn `halo.steps` times offset on a circle of radius
+# (halo.width * strheight) in the `halo` colour, then the real text on top, which
+# produces a tight outline that reads over edges. Operates on a single label.
+i.r_text_halo <- function(
+  x,
+  y,
+  labels,
+  col,
+  family = "",
+  font = 1,
+  cex = 1,
+  srt = 0,
+  adj = NULL,
+  halo = NA,
+  halo.width = 0.15,
+  halo.steps = 16
+) {
+  if (
+    !is.na(halo) &&
+      !is.na(labels) &&
+      nzchar(as.character(labels))
+  ) {
+    r <- halo.width * strheight(labels, cex = cex)
+    th <- seq(0, 2 * pi, length.out = halo.steps + 1)[-1]
+    for (a in th) {
+      i.r_text(
+        x + r * cos(a),
+        y + r * sin(a),
+        labels = labels,
+        col = halo,
+        family = family,
+        font = font,
+        cex = cex,
+        srt = srt,
+        adj = adj
+      )
+    }
+  }
+  i.r_text(
+    x,
+    y,
+    labels = labels,
+    col = col,
+    family = family,
+    font = font,
+    cex = cex,
+    srt = srt,
+    adj = adj
+  )
+}
+
 #' Plotting of graphs
 #'
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
@@ -64,6 +551,12 @@
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
+#' @param legend Controls drawing of legends/colorbars for any aesthetics
+#'   supplied via [scale_color()] / [scale_size()]. The guide is drawn in the
+#'   reserved outer margin on one side of the plot: `TRUE` (default) or
+#'   `"right"` places it to the right, `"left"`/`"top"`/`"bottom"` on the
+#'   corresponding side (`"top"`/`"bottom"` arrange entries horizontally);
+#'   `FALSE` suppresses it. Has no effect when no scale is used.
 #' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
 #' @return Returns `NULL`, invisibly.
@@ -98,6 +591,7 @@ plot.igraph <- function(
   mark.expand = 15,
   mark.lwd = 1,
   loop.size = 1,
+  legend = TRUE,
   ...
 ) {
   graph <- x
@@ -107,10 +601,17 @@ plot.igraph <- function(
 
   ################################################################
   ## Visual parameters
-  params <- i.parse.plot.params(graph, list(...))
+  # Resolve any scale_*() arguments to plain aesthetic vectors and collect their
+  # guides (legends/colorbars) to draw at the end. Must happen before
+  # i.parse.plot.params(), whose recycling strips the scale class.
+  scaled <- i.apply_scales(list(...))
+  guides <- scaled$guides
+  legend_side <- i.legend_side(legend, guides)
+  params <- i.parse.plot.params(graph, scaled$dots)
 
   vertex.size <- params("vertex", "size")
   vertex.size.scaling <- params("vertex", "size.scaling")
+  vertex.alpha <- params("vertex", "alpha")
   label.family <- params("vertex", "label.family")
   label.font <- params("vertex", "label.font")
   label.cex <- params("vertex", "label.cex")
@@ -119,10 +620,22 @@ plot.igraph <- function(
   label.dist <- params("vertex", "label.dist")
   label.angle <- params("vertex", "label.angle")
   label.adj <- params("vertex", "label.adj")
+  label.repel <- params("vertex", "label.repel")
+  label.halo <- params("vertex", "label.halo")
+  label.halo.width <- params("vertex", "label.halo.width")
   labels <- params("vertex", "label")
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
   edge.color <- params("edge", "color")
+  edge.alpha <- params("edge", "alpha")
+  edge.color <- i.apply_alpha(edge.color, edge.alpha)
+  edge.gradient <- as.logical(params("edge", "gradient"))
+  # Base per-vertex fill colour (before vertex.alpha), only needed for gradients.
+  vcol_base <- if (any(edge.gradient)) {
+    rep(params("vertex", "color"), length.out = vc)
+  } else {
+    NULL
+  }
   edge.width <- params("edge", "width")
   edge.lty <- params("edge", "lty")
   arrow.mode <- params("edge", "arrow.mode")
@@ -132,6 +645,8 @@ plot.igraph <- function(
   edge.label.family <- params("edge", "label.family")
   edge.label.cex <- params("edge", "label.cex")
   edge.label.color <- params("edge", "label.color")
+  edge.label.halo <- params("edge", "label.halo")
+  edge.label.halo.width <- params("edge", "label.halo.width")
   elab.x <- params("edge", "label.x")
   elab.y <- params("edge", "label.y")
   arrow.size <- params("edge", "arrow.size")
@@ -139,6 +654,15 @@ plot.igraph <- function(
   curved <- params("edge", "curved")
   if (is.function(curved)) {
     curved <- curved(graph)
+  }
+  edge.style <- as.character(params("edge", "style"))
+  i.valid_edge_styles <- c("auto", "straight", "arc", "elbow", "diagonal")
+  bad.style <- setdiff(unique(edge.style), i.valid_edge_styles)
+  if (length(bad.style) > 0) {
+    cli::cli_abort(c(
+      "Invalid {.arg edge.style} value{?s}: {.val {bad.style}}.",
+      "i" = "Valid styles are {.val {i.valid_edge_styles}}."
+    ))
   }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
@@ -167,6 +691,45 @@ plot.igraph <- function(
   # the new style parameters can't do this yet
   arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
 
+  # igraph 3.0.0: per-element aesthetics must be length 1 or vcount()/ecount().
+  # arrow.mode is excluded (its "a:" form reads a vertex attribute, so it can be
+  # vcount-long); label.adj / pie / raster have non-per-element length semantics.
+  i.check_aes_lengths(
+    vertex = list(
+      size = vertex.size,
+      color = params("vertex", "color"),
+      frame.color = params("vertex", "frame.color"),
+      frame.width = params("vertex", "frame.width"),
+      shape = shape,
+      label = labels,
+      label.color = label.color,
+      label.cex = label.cex,
+      label.dist = label.dist,
+      label.degree = label.degree,
+      label.angle = label.angle,
+      label.font = label.font,
+      label.family = label.family,
+      label.halo = label.halo,
+      label.halo.width = label.halo.width
+    ),
+    edge = list(
+      color = edge.color,
+      width = edge.width,
+      lty = edge.lty,
+      arrow.size = arrow.size,
+      arrow.width = arrow.width,
+      label = edge.labels,
+      label.color = edge.label.color,
+      label.cex = edge.label.cex,
+      label.font = edge.label.font,
+      label.family = edge.label.family,
+      label.halo = edge.label.halo,
+      label.halo.width = edge.label.halo.width
+    ),
+    vc = vc,
+    ec = ecount(graph)
+  )
+
   ################################################################
   ## create the plot
   if (rescale) {
@@ -178,7 +741,7 @@ plot.igraph <- function(
     }
     layout <- norm_coords(layout, -1, 1, -1, 1)
     fact <- (1 - vertex.size.scaling)
-    maxv <- 1 / 200 * max(vertex.size)
+    maxv <- VERTEX_SIZE_SCALE * max(vertex.size)
 
     xlim <- c(
       xlim[1] - margin[2] - fact * maxv,
@@ -196,27 +759,42 @@ plot.igraph <- function(
       ylim <- range(layout[, 2]) + c(-margin[1], margin[3])
     }
   }
+  # When a scale legend is drawn, split the device into a plot region and a
+  # guide region (device-relative, so it survives resizing). The graph is drawn
+  # in the plot region; the guides are drawn into the guide region at the end.
+  legend_fig <- NULL
+  if (!add && !is.null(legend_side)) {
+    legend_fig <- i.legend_fig(legend_side)
+    old_par <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(old_par), add = TRUE)
+    graphics::par(fig = legend_fig$plot)
+  }
   if (!add) {
-    plot(
-      0,
-      0,
-      type = "n",
-      xlab = xlab,
-      ylab = ylab,
-      xlim = xlim,
-      ylim = ylim,
-      axes = axes,
-      frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
-      asp = asp,
-      main = main,
-      sub = sub
+    i.init_plot_canvas(
+      xlim,
+      ylim,
+      xlab,
+      ylab,
+      axes,
+      frame.plot,
+      asp,
+      main,
+      sub
     )
   }
 
   ################################################################
   ## Rescaling vertices and updating params
+  # Fold vertex.alpha into the vertex fill colour so the shapes pick it up via
+  # the rebuilt params below (no-op when fully opaque).
+  if (!all(vertex.alpha == 1)) {
+    scaled$dots$vertex.color <- i.apply_alpha(
+      rep(params("vertex", "color"), length.out = vc),
+      vertex.alpha
+    )
+  }
   if (vertex.size.scaling) {
-    newdots <- list(...)
+    newdots <- scaled$dots
 
     # vertex.size
     vertex.size <- i.rescale.vertex(
@@ -254,15 +832,11 @@ plot.igraph <- function(
 
     params <- i.parse.plot.params(graph, newdots)
   } else {
-    params <- i.parse.plot.params(
-      graph,
-      list(
-        vertex.size = 1 / 200 * vertex.size,
-        vertex.size2 = 1 / 200 * params("vertex", "size2"),
-        ...
-      )
-    )
-    vertex.size <- 1 / 200 * vertex.size
+    newdots <- scaled$dots
+    newdots$vertex.size <- VERTEX_SIZE_SCALE * vertex.size
+    newdots$vertex.size2 <- VERTEX_SIZE_SCALE * params("vertex", "size2")
+    params <- i.parse.plot.params(graph, newdots)
+    vertex.size <- VERTEX_SIZE_SCALE * vertex.size
   }
   ################################################################
   ## Mark vertex groups
@@ -360,274 +934,61 @@ plot.igraph <- function(
   x1 <- ec[, 3]
   y1 <- ec[, 4]
 
+  # Resolve the per-edge aesthetics into one table (length ecount),
+  # then slice it by loop-edge / non-loop-edge index instead of repeating the
+  # `if (length(x) > 1) x[idx]` idiom for every parameter.
+  edge_aes <- i.edge_aes_table(
+    color = edge.color,
+    width = edge.width,
+    lty = edge.lty,
+    arrow.mode = arrow.mode,
+    arrow.size = arrow.size,
+    arrow.width = arrow.width,
+    curved = curved,
+    label.color = edge.label.color,
+    label.family = edge.label.family,
+    label.font = edge.label.font,
+    label.cex = edge.label.cex,
+    label.halo = edge.label.halo,
+    label.halo.width = edge.label.halo.width,
+    style = edge.style,
+    alpha = edge.alpha,
+    gradient = edge.gradient,
+    n = ecount(graph)
+  )
+
   ################################################################
   ## add the loop edges
   if (length(loops.e) > 0) {
-    ec <- edge.color
-    if (length(ec) > 1) {
-      ec <- ec[loops.e]
-    }
-
-    point.on.cubic.bezier <- function(cp, t) {
-      c <- 3 * (cp[2, ] - cp[1, ])
-      b <- 3 * (cp[3, ] - cp[2, ]) - c
-      a <- cp[4, ] - cp[1, ] - c - b
-
-      t2 <- t * t
-      t3 <- t * t * t
-
-      a * t3 + b * t2 + c * t + cp[1, ]
-    }
-
-    compute.bezier <- function(cp, points) {
-      dt <- seq(0, 1, by = 1 / (points - 1))
-      sapply(dt, function(t) point.on.cubic.bezier(cp, t))
-    }
-
-    plot.bezier <- function(
-      cp,
-      points,
-      color,
-      width,
-      arr,
-      lty,
-      arrow.size,
-      arr.w
-    ) {
-      p <- compute.bezier(cp, points)
-      polygon(p[1, ], p[2, ], border = color, lwd = width, lty = lty)
-      if (arr == 1 || arr == 3) {
-        igraph.Arrows(
-          p[1, ncol(p) - 1],
-          p[2, ncol(p) - 1],
-          p[1, ncol(p)],
-          p[2, ncol(p)],
-          sh.col = color,
-          h.col = color,
-          size = arrow.size,
-          sh.lwd = width,
-          h.lwd = width,
-          open = FALSE,
-          code = 2,
-          width = arr.w
-        )
-      }
-      if (arr == 2 || arr == 3) {
-        igraph.Arrows(
-          p[1, 2],
-          p[2, 2],
-          p[1, 1],
-          p[2, 1],
-          sh.col = color,
-          h.col = color,
-          size = arrow.size,
-          sh.lwd = width,
-          h.lwd = width,
-          open = FALSE,
-          code = 2,
-          width = arr.w
-        )
-      }
-    }
-
-    loop <- function(
-      x0,
-      y0,
-      cx = x0,
-      cy = y0,
-      color,
-      angle = 0,
-      label = NA,
-      label.color,
-      label.font,
-      label.family,
-      label.cex,
-      width = 1,
-      arr = 2,
-      lty = 1,
-      arrow.size = arrow.size,
-      arr.w = arr.w,
-      lab.x,
-      lab.y,
-      loopSize = loop.size,
-      narrowing = 1
-    ) {
-      rad <- angle
-      center <- c(cx, cy)
-      cp <- matrix(
-        c(
-          x0,
-          y0,
-          x0 + 0.4 * loopSize,
-          y0 + narrowing * 0.2 * loopSize,
-          x0 + 0.4 * loopSize,
-          y0 - narrowing * 0.2 * loopSize,
-          x0,
-          y0
-        ),
-        ncol = 2,
-        byrow = TRUE
-      )
-      cp_centered <- cp -
-        matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
-
-      rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
-      cp_rotated <- t(rotation_matrix %*% t(cp_centered))
-
-      cp <- cp_rotated +
-        matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
-
-      if (is.na(width)) {
-        width <- 1
-      }
-
-      plot.bezier(
-        cp,
-        50,
-        color,
-        width,
-        arr = arr,
-        lty = lty,
-        arrow.size = arrow.size,
-        arr.w = arr.w
-      )
-
-      if (is.language(label) || !is.na(label)) {
-        # Get midpoint of the Bezier curve for label placement
-        p <- compute.bezier(cp, 50)
-        mid_index <- floor(ncol(p) / 2)
-        lx <- p[1, mid_index]
-        ly <- p[2, mid_index]
-
-        # Override if label position explicitly given
-        if (!is.na(lab.x)) {
-          lx <- lab.x
-        }
-        if (!is.na(lab.y)) {
-          ly <- lab.y
-        }
-
-        text(
-          lx,
-          ly,
-          label,
-          col = label.color,
-          font = label.font,
-          family = label.family,
-          cex = label.cex
-        )
-      }
-    }
-
-    ec <- edge.color
-    if (length(ec) > 1) {
-      ec <- ec[loops.e]
-    }
+    # vertex.size is vertex-scoped (indexed by the loop's vertex) and loop.angle
+    # is nullable, so both are handled outside the edge aesthetic table.
     vs <- vertex.size
     if (length(vertex.size) > 1) {
       vs <- vs[loops.v]
-    }
-    ew <- edge.width
-    if (length(edge.width) > 1) {
-      ew <- ew[loops.e]
     }
     la <- loop.angle
     if (length(loop.angle) > 1) {
       la <- la[loops.e]
     }
-    lty <- edge.lty
-    if (length(edge.lty) > 1) {
-      lty <- lty[loops.e]
-    }
-    arr <- arrow.mode
-    if (length(arrow.mode) > 1) {
-      arr <- arrow.mode[loops.e]
-    }
-    asize <- arrow.size
-    if (length(arrow.size) > 1) {
-      asize <- arrow.size[loops.e]
-    }
-    lcol <- edge.label.color
-    if (length(lcol) > 1) {
-      lcol <- lcol[loops.e]
-    }
-    lfam <- edge.label.family
-    if (length(lfam) > 1) {
-      lfam <- lfam[loops.e]
-    }
-    lfon <- edge.label.font
-    if (length(lfon) > 1) {
-      lfon <- lfon[loops.e]
-    }
-    lcex <- edge.label.cex
-    if (length(lcex) > 1) {
-      lcex <- lcex[loops.e]
-    }
 
-    # For each loop, assign unique angle within largest gap (flower petal style)
-    # depending on the number of loops and the available angular space
-    la_dyn <- numeric(length(loops.v))
-    narrowing <- numeric(length(loops.v))
+    loop_aes <- vctrs::vec_slice(edge_aes, loops.e)
+    ec <- loop_aes$color
+    ew <- loop_aes$width
+    lty <- loop_aes$lty
+    arr <- loop_aes$arrow.mode
+    asize <- loop_aes$arrow.size
+    aw <- loop_aes$arrow.width
+    lcol <- loop_aes$label.color
+    lfam <- loop_aes$label.family
+    lfon <- loop_aes$label.font
+    lcex <- loop_aes$label.cex
+    lhalo <- loop_aes$label.halo
+    lhalo.w <- loop_aes$label.halo.width
 
-    loop_table <- table(loops.v)
-    loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
-
-    for (v in unique(loops.v)) {
-      idx <- which(loops.v == v)
-      n_loops <- length(idx)
-
-      incident_edges <- incident(graph, v, mode = "all")
-      incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
-
-      if (length(incident_edges) == 0) {
-        # Full circle available if no edges
-        loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
-        gap_span <- 2 * pi
-      } else {
-        angles <- sapply(incident_edges, function(e) {
-          ends_e <- ends(graph, e, names = FALSE)
-          other <- if (as.numeric(ends_e[1]) == v) {
-            as.numeric(ends_e[2])
-          } else {
-            as.numeric(ends_e[1])
-          }
-          dx <- layout[other, 1] - layout[v, 1]
-          dy <- layout[other, 2] - layout[v, 2]
-          atan2(dy, dx)
-        })
-
-        angles <- (angles + 2 * pi) %% (2 * pi)
-        angles <- sort(angles)
-        gaps <- diff(c(angles, angles[1] + 2 * pi))
-        max_gap_index <- which.max(gaps)
-
-        gap_start <- angles[max_gap_index]
-        gap_span <- gaps[max_gap_index]
-        gap_end <- (gap_start + gap_span) %% (2 * pi)
-
-        # Generate loop angles spaced inside the gap
-        if (gap_end > gap_start) {
-          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
-            -c(1, n_loops + 2)
-          ]
-        } else {
-          # wrap around
-          gap_end <- gap_end + 2 * pi
-          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
-            -c(1, n_loops + 2)
-          ] %%
-            (2 * pi)
-        }
-      }
-
-      la_dyn[idx] <- loop_angles
-
-      # Compute narrowing factor based on angular space
-      angle_per_loop <- gap_span / n_loops
-      # Scale narrowing between 1 (wide) and ~0.2 (tight)
-      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
-      narrowing[idx] <- narrowing_factor
-    }
+    # Place loops in the largest angular gap at each vertex (flower-petal style).
+    loop_geo <- i.loop_angles(graph, layout, loops.v)
+    la_dyn <- loop_geo$angles
+    narrowing <- loop_geo$narrowing
     if (is.null(la)) {
       la <- rep(NA, length(loops.v))
     }
@@ -645,7 +1006,7 @@ plot.igraph <- function(
     yy0 <- layout[loops.v, 2] + sin(la) * r_offset
 
     mapply(
-      loop,
+      i.draw.loop,
       xx0,
       yy0,
       color = ec,
@@ -655,11 +1016,13 @@ plot.igraph <- function(
       label.family = lfam,
       label.font = lfon,
       label.cex = lcex,
+      label.halo = lhalo,
+      label.halo.width = lhalo.w,
       lty = lty,
       width = ew,
       arr = arr,
       arrow.size = asize,
-      arr.w = arrow.width,
+      arr.w = aw,
       lab.x = loop.labx,
       lab.y = loop.laby,
       loopSize = adjusted_loop_size,
@@ -670,32 +1033,78 @@ plot.igraph <- function(
   ################################################################
   ## non-loop edges
   if (length(x0) != 0) {
-    if (length(edge.color) > 1) {
-      edge.color <- edge.color[nonloops.e]
+    # Slice the edge aesthetic table to the non-loop edges; every column is now
+    # length(nonloops.e), so the per-arrow-code branch can index by `valid`
+    # directly. (This also fixes a former double-slice of `curved`.)
+    nl_aes <- vctrs::vec_slice(edge_aes, nonloops.e)
+    edge.color <- nl_aes$color
+    edge.width <- nl_aes$width
+    edge.lty <- nl_aes$lty
+    arrow.mode <- nl_aes$arrow.mode
+    arrow.size <- nl_aes$arrow.size
+    arrow.width <- nl_aes$arrow.width
+    curved <- nl_aes$curved
+    edge.style <- nl_aes$style
+    edge.gradient <- as.logical(nl_aes$gradient)
+
+    # Axis-aware attachment for elbow/diagonal edges: re-clip their endpoints to
+    # the dominant-axis boundary (top/bottom- or left/right-centre) instead of
+    # the centre-to-centre diagonal point, so the orthogonal/diagonal routing
+    # meets each vertex on its centre axis. The chosen axis is passed to
+    # igraph.Arrows so the path builders route to match. Other styles keep the
+    # centre-to-centre clip from above.
+    eff.style <- ifelse(
+      edge.style == "auto",
+      ifelse(curved != 0, "arc", "straight"),
+      edge.style
+    )
+    is.ed <- eff.style %in% c("elbow", "diagonal")
+    edge.axis <- rep(NA, length(x0))
+    if (any(is.ed)) {
+      vert <- abs(edge.coords[, 4] - edge.coords[, 2]) >=
+        abs(edge.coords[, 3] - edge.coords[, 1])
+      adj <- i.axis_clip_endpoints(edge.coords, el, shape, params, vert)
+      x0[is.ed] <- adj[is.ed, 1]
+      y0[is.ed] <- adj[is.ed, 2]
+      x1[is.ed] <- adj[is.ed, 3]
+      y1[is.ed] <- adj[is.ed, 4]
+      edge.axis[is.ed] <- vert[is.ed]
     }
-    if (length(edge.width) > 1) {
-      edge.width <- edge.width[nonloops.e]
+
+    # Gradient edges: shaft colour runs from the source vertex colour to the
+    # target vertex colour; the arrowhead uses the target colour. Only touch the
+    # colour vectors when a gradient is actually requested, so plain plots are
+    # byte-identical.
+    sh.col.e <- edge.color
+    h.col.e <- edge.color
+    col.to.e <- edge.color
+    if (any(edge.gradient)) {
+      to_hex <- function(x) {
+        grDevices::rgb(
+          t(grDevices::col2rgb(x, alpha = TRUE)),
+          maxColorValue = 255
+        )
+      }
+      ealpha <- nl_aes$alpha
+      grad_from <- i.apply_alpha(to_hex(vcol_base[el[, 1]]), ealpha)
+      grad_to <- i.apply_alpha(to_hex(vcol_base[el[, 2]]), ealpha)
+      base_hex <- to_hex(edge.color)
+      sh.col.e <- base_hex
+      h.col.e <- base_hex
+      col.to.e <- base_hex
+      sh.col.e[edge.gradient] <- grad_from[edge.gradient]
+      h.col.e[edge.gradient] <- grad_to[edge.gradient]
+      col.to.e[edge.gradient] <- grad_to[edge.gradient]
     }
-    if (length(edge.lty) > 1) {
-      edge.lty <- edge.lty[nonloops.e]
-    }
-    if (length(arrow.mode) > 1) {
-      arrow.mode <- arrow.mode[nonloops.e]
-    }
-    if (length(arrow.size) > 1) {
-      arrow.size <- arrow.size[nonloops.e]
-    }
-    if (length(curved) > 1) {
-      curved <- curved[nonloops.e]
-    }
+
     if (length(unique(arrow.mode)) == 1) {
       lc <- igraph.Arrows(
         x0,
         y0,
         x1,
         y1,
-        h.col = edge.color,
-        sh.col = edge.color,
+        h.col = h.col.e,
+        sh.col = sh.col.e,
         sh.lwd = edge.width,
         h.lwd = 1,
         open = FALSE,
@@ -704,31 +1113,24 @@ plot.igraph <- function(
         h.lty = 1,
         size = arrow.size,
         width = arrow.width,
-        curved = curved
+        curved = curved,
+        style = edge.style,
+        gradient = edge.gradient,
+        col.to = col.to.e,
+        ids = nonloops.e,
+        axis = edge.axis
       )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
     } else {
       ## different kinds of arrows drawn separately as 'arrows' cannot
-      ## handle a vector as the 'code' argument
-      curved <- rep(curved, length.out = ecount(graph))[nonloops.e]
-      lc.x <- lc.y <- numeric(length(curved))
+      ## handle a vector as the 'code' argument. Every aesthetic is already
+      ## length(nonloops.e), so subset each by `valid` consistently.
+      lc.x <- lc.y <- numeric(length(nonloops.e))
       for (code in 0:3) {
         valid <- arrow.mode == code
         if (!any(valid)) {
           next
-        }
-        ec <- edge.color
-        if (length(ec) > 1) {
-          ec <- ec[valid]
-        }
-        ew <- edge.width
-        if (length(ew) > 1) {
-          ew <- ew[valid]
-        }
-        el <- edge.lty
-        if (length(el) > 1) {
-          el <- el[valid]
         }
         lc <- igraph.Arrows(
           x0[valid],
@@ -736,16 +1138,21 @@ plot.igraph <- function(
           x1[valid],
           y1[valid],
           code = code,
-          sh.col = ec,
-          h.col = ec,
-          sh.lwd = ew,
+          sh.col = sh.col.e[valid],
+          h.col = h.col.e[valid],
+          sh.lwd = edge.width[valid],
           h.lwd = 1,
           h.lty = 1,
-          sh.lty = el,
+          sh.lty = edge.lty[valid],
           open = FALSE,
-          size = arrow.size,
-          width = arrow.width,
-          curved = curved[valid]
+          size = arrow.size[valid],
+          width = arrow.width[valid],
+          curved = curved[valid],
+          style = edge.style[valid],
+          gradient = edge.gradient[valid],
+          col.to = col.to.e[valid],
+          ids = nonloops.e[valid],
+          axis = edge.axis[valid]
         )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
@@ -758,39 +1165,27 @@ plot.igraph <- function(
       lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
     }
 
-    ecol <- edge.label.color
-    if (length(ecol) > 1) {
-      ecol <- ecol[nonloops.e]
-    }
-    efam <- edge.label.family
-    if (length(efam) > 1) {
-      efam <- efam[nonloops.e]
-    }
-
-    efon <- edge.label.font
-    if (length(efon) > 1) {
-      efon <- efon[nonloops.e]
-    }
-    ecex <- edge.label.cex
-    if (length(ecex) > 1) {
-      ecex <- ecex[nonloops.e]
-    }
-    en <- length(nonloops.e)
-    ecol <- rep(ecol, length.out = en)
-    efam <- rep(efam, length.out = en)
-    efon <- rep(efon, length.out = en)
-    ecex <- rep(ecex, length.out = en)
+    # Edge-label aesthetics come from the same non-loop slice (already recycled
+    # to length(nonloops.e)).
+    ecol <- nl_aes$label.color
+    efam <- nl_aes$label.family
+    efon <- nl_aes$label.font
+    ecex <- nl_aes$label.cex
+    ehalo <- nl_aes$label.halo
+    ehalo.w <- nl_aes$label.halo.width
 
     invisible(mapply(
-      function(x, y, label, col, family, font, cex) {
-        text(
+      function(x, y, label, col, family, font, cex, halo, halo.w) {
+        i.r_text_halo(
           x,
           y,
           labels = label,
           col = col,
           family = family,
           font = font,
-          cex = cex
+          cex = cex,
+          halo = halo,
+          halo.width = halo.w
         )
       },
       lc.x,
@@ -799,7 +1194,9 @@ plot.igraph <- function(
       ecol,
       efam,
       efon,
-      ecex
+      ecex,
+      ehalo,
+      ehalo.w
     ))
   }
 
@@ -808,6 +1205,14 @@ plot.igraph <- function(
   ################################################################
   # add the vertices
   if (vc > 0) {
+    vtitles <- if (!is.null(i.render_state$vertex_titles)) {
+      i.render_state$vertex_titles
+    } else if ("name" %in% vertex_attr_names(graph)) {
+      as.character(V(graph)$name)
+    } else {
+      as.character(seq_len(vc))
+    }
+    i.r_group_begin("vertices", title = vtitles)
     if (length(unique(shape)) == 1) {
       .igraph.shapes[[shape[1]]]$plot(layout, params = params)
     } else {
@@ -819,52 +1224,35 @@ plot.igraph <- function(
         )
       })
     }
+    i.r_group_end()
   }
 
   ################################################################
   # add the labels
-  old_xpd <- par(xpd = TRUE)
-  on.exit(par(old_xpd), add = TRUE)
-  x <- layout[, 1] +
-    label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
-  y <- layout[, 2] +
-    label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
-  if (vc > 0) {
-    label.col <- rep(label.color, length.out = vc)
-    label.fam <- rep(label.family, length.out = vc)
-    label.fnt <- rep(label.font, length.out = vc)
-    label.cex <- rep(label.cex, length.out = vc)
-    label.ang <- rep(label.angle, length.out = vc)
-    label.adj <- rep(list(label.adj), length.out = vc)
-    label.text <- rep(labels, length.out = vc)
+  i.draw_vertex_labels(
+    layout,
+    labels,
+    vertex.size,
+    label.dist,
+    label.degree,
+    label.color,
+    label.family,
+    label.font,
+    label.cex,
+    label.angle,
+    label.adj,
+    repel = label.repel,
+    label.halo = label.halo,
+    label.halo.width = label.halo.width
+  )
 
-    # Draw vertex labels
-    invisible(mapply(
-      function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
-        text(
-          x0,
-          y0,
-          labels = lbl,
-          col = col,
-          family = fam,
-          font = fnt,
-          cex = cex,
-          srt = srt,
-          adj = adj
-        )
-      },
-      x,
-      y,
-      label.text,
-      label.col,
-      label.fam,
-      label.fnt,
-      label.cex,
-      label.ang,
-      label.adj
-    ))
+  ################################################################
+  # draw legends / colorbars for any scale_*() aesthetics, in the guide region
+  if (!is.null(legend_fig)) {
+    graphics::par(fig = legend_fig$guide, new = TRUE)
+    i.draw_guides_region(guides, legend_side)
   }
-  rm(x, y)
+
   invisible(NULL)
 }
 
@@ -1725,6 +2113,194 @@ rglplot.igraph <- function(x, ...) {
 # This is taken from the IDPmisc package,
 # slightly modified: code argument added
 
+# Pure geometry: the outline of an arrowhead in polar coordinates
+# (angle + radius from the tip), used by igraph.Arrows() to draw or outline the
+# head. Depends only on scalar inputs, so it is testable without a device.
+#   cin   arrow length, already scaled by the character size (par("cin"))
+#   w     arrow width factor
+#   delta line-width-dependent padding
+i.arrowhead_shape <- function(cin, w, delta) {
+  x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
+  x.arr <- c(-rev(x), -x)
+  wx2 <- w * x^2
+  y.arr <- c(-rev(wx2 + delta), wx2 + delta)
+  list(
+    deg.arr = c(atan2(y.arr, x.arr), NA),
+    r.arr = c(sqrt(x.arr^2 + y.arr^2), NA)
+  )
+}
+
+# Pure geometry: shaft segment endpoints for a single edge, pulled
+# back from the vertices by `r.seg` at whichever end carries an arrowhead (per
+# `code`) so the shaft does not poke through the head. `uin` is the
+# inches-per-user-unit scale from 1/xyinch(). Returns sx1/sy1/sx2/sy2.
+i.arrow_shaft_endpoints <- function(x1, y1, x2, y2, code, r.seg, uin) {
+  theta1 <- atan2((y1 - y2) * uin[2], (x1 - x2) * uin[1])
+  theta2 <- atan2((y2 - y1) * uin[2], (x2 - x1) * uin[1])
+  x1d <- y1d <- x2d <- y2d <- 0
+  if (code %in% c(1, 3)) {
+    x2d <- r.seg * cos(theta2) / uin[1]
+    y2d <- r.seg * sin(theta2) / uin[2]
+  }
+  if (code %in% c(2, 3)) {
+    x1d <- r.seg * cos(theta1) / uin[1]
+    y1d <- r.seg * sin(theta1) / uin[2]
+  }
+  list(sx1 = x1 + x1d, sy1 = y1 + y1d, sx2 = x2 + x2d, sy2 = y2 + y2d)
+}
+
+# Pure geometry: label anchor two thirds of the way along a straight
+# edge from (x2, y2) toward (x1, y1).
+i.edge_label_pos <- function(x1, y1, x2, y2) {
+  phi <- atan2(y1 - y2, x1 - x2)
+  r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
+  # unname() the components: when the coordinates carry names (e.g. a named
+  # vertex.size such as scale_size(degree(g)) propagates names through edge
+  # clipping), `c(x = <named>, y = <named>)` would yield names like "x.Alice"
+  # instead of "x"/"y", breaking the lab[["x"]] / lab[["y"]] lookups downstream.
+  c(
+    x = unname(x2 + 2 / 3 * r * cos(phi)),
+    y = unname(y2 + 2 / 3 * r * sin(phi))
+  )
+}
+
+# Geometry: the X-spline of a curved edge. The control point is offset
+# from the edge midpoint perpendicular to the shaft by `lambda`. Returns the
+# xspline() coordinate list (draw = FALSE; needs an active device).
+i.curved_spline <- function(x1, y1, x2, y2, sx1, sy1, sx2, sy2, lambda) {
+  midx <- (x1 + x2) / 2
+  midy <- (y1 + y2) / 2
+  spx <- midx - lambda * 1 / 2 * (sy2 - sy1)
+  spy <- midy + lambda * 1 / 2 * (sx2 - sx1)
+  xspline(
+    x = c(sx1, spx, sx2),
+    y = c(sy1, spy, sy2),
+    shape = 1,
+    draw = FALSE
+  )
+}
+
+# Geometry: two-corner orthogonal ("elbow") path between two points.
+# Leaves along the dominant axis, turns at the midpoint of that axis, crosses,
+# then turns into the target. `vertical` forces the leaving axis (TRUE = leave
+# vertically); when NULL the dominant axis is inferred from the endpoints. The
+# caller passes it explicitly so it matches the axis used to attach the
+# endpoints. Returns list(x, y) of the four polyline vertices.
+i.elbow_path <- function(x0, y0, x1, y1, vertical = NULL) {
+  vert <- if (is.null(vertical)) abs(y1 - y0) > abs(x1 - x0) else vertical
+  if (!vert) {
+    mid <- (x0 + x1) / 2
+    list(x = c(x0, mid, mid, x1), y = c(y0, y0, y1, y1))
+  } else {
+    mid <- (y0 + y1) / 2
+    list(x = c(x0, x0, x1, x1), y = c(y0, mid, mid, y1))
+  }
+}
+
+# Geometry: smooth "diagonal" S-curve between two points, a cubic Bezier whose
+# control points sit on the dominant axis so the curve leaves and enters along
+# that axis. `vertical` forces the leaving axis (see i.elbow_path); when NULL it
+# is inferred from the endpoints. Returns list(x, y) sampled at `n` points.
+i.diagonal_path <- function(x0, y0, x1, y1, n = 30, vertical = NULL) {
+  vert <- if (is.null(vertical)) abs(y1 - y0) > abs(x1 - x0) else vertical
+  if (!vert) {
+    mid <- (x0 + x1) / 2
+    cp <- rbind(c(x0, y0), c(mid, y0), c(mid, y1), c(x1, y1))
+  } else {
+    mid <- (y0 + y1) / 2
+    cp <- rbind(c(x0, y0), c(x0, mid), c(x1, mid), c(x1, y1))
+  }
+  p <- i.compute.bezier(cp, n)
+  list(x = p[1, ], y = p[2, ])
+}
+
+# Re-clip edge endpoints along the dominant axis instead of the centre-to-centre
+# line, for elbow/diagonal edges. `edge.coords` holds the centre-to-centre
+# coordinates (columns from.x, from.y, to.x, to.y); `el` is the edge list,
+# `shape` the per-vertex shape vector, `params` the resolved plotting params, and
+# `vertical` a per-edge flag (TRUE = leave/enter vertically). Returns a 4-column
+# matrix of axis-aligned boundary points. It reuses the shape clip functions by
+# feeding them axis-aligned synthetic segments, so the boundary is correct for
+# every shape (circle/square/rectangle).
+i.axis_clip_endpoints <- function(edge.coords, el, shape, params, vertical) {
+  cx1 <- edge.coords[, 1]
+  cy1 <- edge.coords[, 2]
+  cx2 <- edge.coords[, 3]
+  cy2 <- edge.coords[, 4]
+
+  # Synthetic segments whose direction at each end is axis-aligned: the "from"
+  # end leaves toward the target along the axis, the "to" end enters from the
+  # source side along the axis.
+  synth_from <- cbind(
+    cx1,
+    cy1,
+    ifelse(vertical, cx1, cx2),
+    ifelse(vertical, cy2, cy1)
+  )
+  synth_to <- cbind(
+    ifelse(vertical, cx2, cx1),
+    ifelse(vertical, cy1, cy2),
+    cx2,
+    cy2
+  )
+
+  clip_end <- function(coords, end) {
+    if (length(unique(shape)) == 1) {
+      .igraph.shapes[[shape[1]]]$clip(coords, el, params = params, end = end)
+    } else {
+      idx <- if (end == "from") el[, 1] else el[, 2]
+      t(sapply(seq_len(nrow(coords)), function(x) {
+        .igraph.shapes[[shape[idx[x]]]]$clip(
+          coords[x, , drop = FALSE],
+          el[x, , drop = FALSE],
+          params = params,
+          end = end
+        )
+      }))
+    }
+  }
+
+  from <- clip_end(synth_from, "from")
+  to <- clip_end(synth_to, "to")
+  cbind(from[, 1], from[, 2], to[, 1], to[, 2])
+}
+
+# Apply a per-element alpha (transparency, in [0, 1]) to a colour vector by
+# multiplying any existing alpha. A no-op when every alpha is 1, so the default
+# leaves colours — and snapshots — byte-identical.
+i.apply_alpha <- function(col, alpha) {
+  if (length(col) == 0 || all(alpha == 1)) {
+    return(col)
+  }
+  rgba <- grDevices::col2rgb(col, alpha = TRUE) / 255
+  a <- rep(alpha, length.out = ncol(rgba))
+  grDevices::rgb(rgba[1, ], rgba[2, ], rgba[3, ], alpha = rgba[4, ] * a)
+}
+
+# Draw a polyline (px, py) as a colour gradient from `col_from` to `col_to`:
+# resample to `n` points by cumulative arc length, then draw the n-1 pieces with
+# interpolated colours. Used for source->target edge gradients.
+i.draw_gradient_path <- function(px, py, col_from, col_to, lwd, lty, n = 40) {
+  d <- c(0, cumsum(sqrt(diff(px)^2 + diff(py)^2)))
+  if (length(d) < 2 || max(d) == 0) {
+    return(invisible(NULL))
+  }
+  at <- seq(0, max(d), length.out = n)
+  rx <- stats::approx(d, px, at)$y
+  ry <- stats::approx(d, py, at)$y
+  ramp <- grDevices::colorRamp(c(col_from, col_to), alpha = TRUE)
+  m <- ramp(seq(0, 1, length.out = n - 1)) # one RGBA row per segment
+  cols <- grDevices::rgb(
+    m[, 1],
+    m[, 2],
+    m[, 3],
+    alpha = m[, 4],
+    maxColorValue = 255
+  )
+  i.r_segments(rx[-n], ry[-n], rx[-1], ry[-1], col = cols, lwd = lwd, lty = lty)
+  invisible(NULL)
+}
+
 #' @importFrom graphics par xyinch segments xspline lines polygon
 # Vectorized and modular igraph.Arrows refactor
 igraph.Arrows <- function(
@@ -1734,7 +2310,7 @@ igraph.Arrows <- function(
   y2,
   code = 2,
   size = 1,
-  width = 1.2 / 4 / par("cin")[2],
+  width = ARROW_WIDTH_FACTOR / par("cin")[2],
   open = TRUE,
   sh.adj = 0.1,
   sh.lwd = 1,
@@ -1744,11 +2320,21 @@ igraph.Arrows <- function(
   h.col.bo = sh.col,
   h.lwd = sh.lwd,
   h.lty = sh.lty,
-  curved = FALSE
+  curved = FALSE,
+  style = "auto",
+  gradient = FALSE,
+  col.to = sh.col,
+  ids = NULL,
+  axis = NULL
 ) {
   n <- length(x1)
 
   recycle <- function(x) rep(x, length.out = n)
+
+  # Per-edge leaving axis for elbow/diagonal styles (TRUE = vertical). When the
+  # caller supplies it (from the vertex centres) the path builders route to match
+  # the axis-aligned endpoint attachment; NULL leaves the auto inference.
+  axis <- if (is.null(axis)) rep(NA, n) else recycle(axis)
 
   x1 <- recycle(x1)
   y1 <- recycle(y1)
@@ -1757,6 +2343,9 @@ igraph.Arrows <- function(
   size <- recycle(size)
   width <- recycle(width)
   curved <- recycle(curved)
+  style <- recycle(as.character(style))
+  gradient <- recycle(gradient)
+  col.to <- recycle(col.to)
   sh.lwd <- recycle(sh.lwd)
   sh.col <- recycle(sh.col)
   sh.lty <- recycle(sh.lty)
@@ -1771,65 +2360,83 @@ igraph.Arrows <- function(
   label_y <- numeric(n)
 
   for (i in seq_len(n)) {
+    if (!is.null(ids)) {
+      i.r_group_begin("edge", id = ids[i])
+    }
     cin <- size[i] * par("cin")[2]
-    w <- width[i] * (1.2 / 4 / cin)
+    w <- width[i] * (ARROW_WIDTH_FACTOR / cin)
     delta <- sqrt(h.lwd[i]) * par("cin")[2] * 0.005
 
-    # Arrowhead shape
-    x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
-    x.arr <- c(-rev(x), -x)
-    wx2 <- w * x^2
-    y.arr <- c(-rev(wx2 + delta), wx2 + delta)
-    deg.arr <- c(atan2(y.arr, x.arr), NA)
-    r.arr <- c(sqrt(x.arr^2 + y.arr^2), NA)
+    # Arrowhead shape (pure geometry, see i.arrowhead_shape)
+    head <- i.arrowhead_shape(cin, w, delta)
+    deg.arr <- head$deg.arr
+    r.arr <- head$r.arr
 
-    theta1 <- atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
-    theta2 <- atan2((y2[i] - y1[i]) * uin[2], (x2[i] - x1[i]) * uin[1])
     r.seg <- cin * sh.adj
+    sh <- i.arrow_shaft_endpoints(x1[i], y1[i], x2[i], y2[i], code, r.seg, uin)
+    sx1 <- sh$sx1
+    sy1 <- sh$sy1
+    sx2 <- sh$sx2
+    sy2 <- sh$sy2
 
-    x1d <- y1d <- x2d <- y2d <- 0
-    if (code %in% c(1, 3)) {
-      x2d <- r.seg * cos(theta2) / uin[1]
-      y2d <- r.seg * sin(theta2) / uin[2]
+    eff_style <- style[i]
+    if (eff_style == "auto") {
+      eff_style <- if (!curved[i]) "straight" else "arc"
     }
-    if (code %in% c(2, 3)) {
-      x1d <- r.seg * cos(theta1) / uin[1]
-      y1d <- r.seg * sin(theta1) / uin[2]
-    }
 
-    sx1 <- x1[i] + x1d
-    sy1 <- y1[i] + y1d
-    sx2 <- x2[i] + x2d
-    sy2 <- y2[i] + y2d
-
-    if (!curved[i]) {
-      segments(
+    if (eff_style == "straight") {
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          c(sx1, sx2),
+          c(sy1, sy2),
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        i.r_segments(
+          sx1,
+          sy1,
+          sx2,
+          sy2,
+          lwd = sh.lwd[i],
+          col = sh.col[i],
+          lty = sh.lty[i]
+        )
+      }
+      lab <- i.edge_label_pos(x1[i], y1[i], x2[i], y2[i])
+      label_x[i] <- lab[["x"]]
+      label_y[i] <- lab[["y"]]
+    } else if (eff_style == "arc") {
+      lambda <- if (is.numeric(curved)) curved[i] else 0.5
+      if (style[i] == "arc" && lambda == 0) {
+        # an explicit arc on an otherwise-straight edge needs a strength
+        lambda <- 0.3
+      }
+      spl <- i.curved_spline(
+        x1[i],
+        y1[i],
+        x2[i],
+        y2[i],
         sx1,
         sy1,
         sx2,
         sy2,
-        lwd = sh.lwd[i],
-        col = sh.col[i],
-        lty = sh.lty[i]
+        lambda
       )
-      phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
-      r <- sqrt((x1[i] - x2[i])^2 + (y1[i] - y2[i])^2)
-      label_x[i] <- x2[i] + 2 / 3 * r * cos(phi)
-      label_y[i] <- y2[i] + 2 / 3 * r * sin(phi)
-    } else {
-      lambda <- if (is.numeric(curved)) curved[i] else 0.5
-      midx <- (x1[i] + x2[i]) / 2
-      midy <- (y1[i] + y2[i]) / 2
-      spx <- midx - lambda * 1 / 2 * (sy2 - sy1)
-      spy <- midy + lambda * 1 / 2 * (sx2 - sx1)
-
-      spl <- xspline(
-        x = c(sx1, spx, sx2),
-        y = c(sy1, spy, sy2),
-        shape = 1,
-        draw = FALSE
-      )
-      lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          spl$x,
+          spl$y,
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        i.r_polyline(spl, col = sh.col[i], lwd = sh.lwd[i], lty = sh.lty[i])
+      }
       label_x[i] <- spl$x[round(2 / 3 * length(spl$x))]
       label_y[i] <- spl$y[round(2 / 3 * length(spl$y))]
 
@@ -1840,6 +2447,47 @@ igraph.Arrows <- function(
       if (code %in% c(1, 3)) {
         x2[i] <- spl$x[round(1 / 4 * length(spl$x))]
         y2[i] <- spl$y[round(1 / 4 * length(spl$y))]
+      }
+    } else {
+      # elbow or diagonal: a polyline between the shaft endpoints
+      vert <- if (is.na(axis[i])) NULL else axis[i]
+      path <- if (eff_style == "elbow") {
+        i.elbow_path(sx1, sy1, sx2, sy2, vertical = vert)
+      } else {
+        i.diagonal_path(sx1, sy1, sx2, sy2, vertical = vert)
+      }
+      if (gradient[i]) {
+        i.draw_gradient_path(
+          path$x,
+          path$y,
+          sh.col[i],
+          col.to[i],
+          sh.lwd[i],
+          sh.lty[i]
+        )
+      } else {
+        i.r_polyline(
+          path$x,
+          path$y,
+          col = sh.col[i],
+          lwd = sh.lwd[i],
+          lty = sh.lty[i]
+        )
+      }
+      np <- length(path$x)
+      mid <- max(1L, round(np / 2))
+      label_x[i] <- path$x[mid]
+      label_y[i] <- path$y[mid]
+
+      # arrowhead end-tangents: align the head with the path's final/first
+      # segment (mirrors the arc branch's near-end reassignment)
+      if (code %in% c(2, 3)) {
+        x1[i] <- path$x[np - 1]
+        y1[i] <- path$y[np - 1]
+      }
+      if (code %in% c(1, 3)) {
+        x2[i] <- path$x[2]
+        y2[i] <- path$y[2]
       }
     }
 
@@ -1852,9 +2500,15 @@ igraph.Arrows <- function(
       yhead <- py2 + r.arr * sin(ttheta) / uin[2]
 
       if (open) {
-        lines(xhead, yhead, lwd = h.lwd[i], col = h.col.bo[i], lty = h.lty[i])
+        i.r_polyline(
+          xhead,
+          yhead,
+          col = h.col.bo[i],
+          lwd = h.lwd[i],
+          lty = h.lty[i]
+        )
       } else {
-        polygon(
+        i.r_polygon(
           xhead,
           yhead,
           col = h.col[i],
@@ -1878,6 +2532,9 @@ igraph.Arrows <- function(
         y1[i],
         atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
       )
+    }
+    if (!is.null(ids)) {
+      i.r_group_end()
     }
   }
 
@@ -1905,7 +2562,7 @@ igraph.polygon <- function(
 
   cl <- convex_hull(pp)
 
-  xspline(
+  i.r_xspline(
     cl$rescoords,
     shape = shape,
     open = FALSE,
