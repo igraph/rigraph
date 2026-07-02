@@ -44,6 +44,29 @@ test_that("add_edges signals error for zero vertex ids", {
   expect_error(add_edges(g, c(0, 5, 0, 10, 5, 10)), "Invalid vertex")
 })
 
+test_that("add_edges accepts a two-column matrix or data frame (#1827)", {
+  g <- make_empty_graph(5)
+  mat <- matrix(c(1, 2, 2, 3, 3, 4), ncol = 2, byrow = TRUE)
+  g_mat <- add_edges(g, mat)
+  expect_equal(as_edgelist(g_mat), mat)
+
+  df <- data.frame(from = c(1, 2, 3), to = c(2, 3, 4))
+  g_df <- add_edges(g, df)
+  expect_equal(as_edgelist(g_df), mat)
+})
+
+test_that("add_edges still accepts vectors and vertex sequences", {
+  g <- make_empty_graph(5)
+  expect_ecount(add_edges(g, c(1, 2, 2, 3)), 2)
+  expect_ecount(add_edges(g, V(g)[c(1, 2, 3, 4)]), 2)
+})
+
+test_that("add_edges rejects 2xn and 2x2 matrices (#1827)", {
+  g <- make_empty_graph(5)
+  lifecycle::expect_defunct(add_edges(g, matrix(c(1, 2, 3, 4), nrow = 2)))
+  lifecycle::expect_defunct(add_edges(g, matrix(c(1, 2, 1, 3, 1, 4), nrow = 2)))
+})
+
 test_that("add_vertices works", {
   g <- graph_from_literal(A - B - C - D - E)
   nv <- 4
@@ -169,6 +192,31 @@ test_that("delete_edges works", {
   )
 
   expect_equal(as.matrix(g2[]), expected_matrix)
+})
+
+test_that("delete_edges accepts a two-column matrix or data frame (#1827)", {
+  g <- make_ring(5)
+  mat <- matrix(c(1, 2, 2, 3, 3, 4), ncol = 2, byrow = TRUE)
+  expect_ecount(delete_edges(g, mat), 2)
+
+  df <- data.frame(from = c(1, 2, 3), to = c(2, 3, 4))
+  expect_ecount(delete_edges(g, df), 2)
+})
+
+test_that("delete_edges preserves vector semantics (edge ids and a|b)", {
+  g <- make_ring(5)
+  expect_ecount(delete_edges(g, c(1, 2)), 3)
+  expect_ecount(delete_edges(g, "1|2"), 4)
+})
+
+test_that("delete_edges round-trips with as_edgelist (#550)", {
+  g <- make_ring(5)
+  expect_ecount(delete_edges(g, as_edgelist(g)), 0)
+})
+
+test_that("delete_edges errors on a vertex pair with no edge (#1827)", {
+  g <- make_ring(5)
+  expect_error(delete_edges(g, matrix(c(1, 3), ncol = 2)))
 })
 
 test_that("ends works", {

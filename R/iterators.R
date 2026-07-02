@@ -327,7 +327,9 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' @param graph The graph.
 #' @param P A list of vertices to select edges via pairs of vertices.
 #'   The first and second vertices select the first edge, the third
-#'   and fourth the second, etc.
+#'   and fourth the second, etc. Alternatively, a two-column matrix or
+#'   data frame can be given, each row defining the two endpoints of an
+#'   edge to select.
 #' @param path A list of vertices, to select edges along a path.
 #'   Note that this only works reliable for simple graphs. If the graph
 #'   has multiple edges, one of them will be chosen arbitrarily to
@@ -361,6 +363,9 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
     res <- seq_len(ec)
     res <- set_complete_iterator(res)
   } else if (!is.null(P)) {
+    if (is.data.frame(P) || inherits(P, "matrix")) {
+      P <- el_to_vec(P, arg = "P", fn = "E")
+    }
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
       Rx_igraph_es_pairs,

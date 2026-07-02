@@ -521,7 +521,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
       ## Addition or update of an attribute (or both)
       ids <- get_edge_ids(x, c(rbind(from, to)))
       if (any(ids == 0)) {
-        x <- add_edges(x, rbind(from[ids == 0], to[ids == 0]))
+        x <- add_edges(x, c(rbind(from[ids == 0], to[ids == 0])))
       }
       if (!is.null(attr)) {
         ids <- get_edge_ids(x, c(rbind(from, to)))
