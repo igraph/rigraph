@@ -1290,7 +1290,7 @@ is_bipartite <- function(graph) {
 
 #############
 
-igraph.i.attribute.combination <- function(comb) {
+igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
   if (is.function(comb)) {
     comb <- list(comb)
   }
@@ -1310,34 +1310,45 @@ igraph.i.attribute.combination <- function(comb) {
   if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
+  # `known_codes` are the numeric values of the `igraph_attribute_combination_type_t`
+  # enum in the C library (see src/vendor/cigraph/include/igraph_attributes.h).
+  # Each code must stay aligned with its name in `known_names`. The DEFAULT (1) and
+  # FUNCTION (2) enum values are intentionally absent: FUNCTION is handled by the
+  # `!is.character(x)` branch below, and DEFAULT is not selectable by name.
+  known_names <- c(
+    "concat",
+    "first",
+    "ignore",
+    "last",
+    "max",
+    "mean",
+    "median",
+    "min",
+    "prod",
+    "random",
+    "sum"
+  )
+  known_codes <- c(12L, 8L, 0L, 9L, 6L, 10L, 11L, 5L, 4L, 7L, 3L)
+  if (allow_rename) {
+    known_names <- c(known_names, "rename")
+    known_codes <- c(known_codes, NA_integer_)
+  }
   comb <- lapply(comb, function(x) {
     if (!is.character(x)) {
       x
     } else {
-      known <- data.frame(
-        n = c(
-          "ignore",
-          "sum",
-          "prod",
-          "min",
-          "max",
-          "random",
-          "first",
-          "last",
-          "mean",
-          "median",
-          "concat"
-        ),
-        i = c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-        stringsAsFactors = FALSE
-      )
-      x <- pmatch(tolower(x), known[, 1])
-      if (is.na(x)) {
+      idx <- pmatch(tolower(x), known_names)
+      if (is.na(idx)) {
+        if (identical(tolower(x), "rename") && !allow_rename) {
+          cli::cli_abort(
+            "{.val rename} is only supported by graph operators ({.fn union}, {.fn intersection}, {.fn compose}, {.fn disjoint_union}), not by this function."
+          )
+        }
         cli::cli_abort(
           "Unknown/unambigous attribute combination specification."
         )
       }
-      known[, 2][x]
+      if (is.na(known_codes[idx])) "rename" else known_codes[idx]
     }
   })
 
@@ -1353,7 +1364,7 @@ igraph.i.attribute.combination <- function(comb) {
 #' vertex/edge attributes in these cases.
 #'
 #' The functions that support the combination of attributes have one or two
-#' extra arguments called `vertex.attr.comb` and/or `edge.attr.comb`
+#' extra arguments called `vertex_attr_combine` and/or `edge_attr_combine`
 #' that specify how to perform the mapping of the attributes. E.g.
 #' [contract()] contracts many vertices into a single one, the
 #' attributes of the vertices can be combined and stores as the vertex
@@ -1435,6 +1446,18 @@ igraph.i.attribute.combination <- function(comb) {
 #'       Concatenate the attributes, using the [c()] function.
 #'       This results almost always a complex attribute.
 #'     }
+#'     \item{"rename"}{
+#'       Keep clashing attributes side-by-side under disambiguated names by
+#'       appending `_1`, `_2`, ... suffixes. For example, if two graphs each
+#'       have an attribute called `group`, the resulting graph will have
+#'       attributes `group_1` and `group_2`, corresponding to the first and
+#'       second input graph, respectively. This is the default for the
+#'       graph operators [union()], [intersection()], [compose()] and
+#'       [disjoint_union()] and preserves their historical behaviour.
+#'       Only those operators accept `"rename"`; [simplify()] and
+#'       [contract()] will reject it because the rename strategy has no
+#'       per-element interpretation when many input values collapse into one.
+#'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph_attr()], [vertex_attr()],
@@ -1452,22 +1475,22 @@ igraph.i.attribute.combination <- function(comb) {
 #' igraph_options(print.edge.attributes = TRUE)
 #'
 #' ## new attribute is the sum of the old ones
-#' simplify(g, edge.attr.comb = "sum")
+#' simplify(g, edge_attr_combine = "sum")
 #'
 #' ## collect attributes into a string
-#' simplify(g, edge.attr.comb = toString)
+#' simplify(g, edge_attr_combine = toString)
 #'
 #' ## concatenate them into a vector, this creates a complex
 #' ## attribute
-#' simplify(g, edge.attr.comb = "concat")
+#' simplify(g, edge_attr_combine = "concat")
 #'
 #' E(g)$name <- letters[seq_len(ecount(g))]
 #'
 #' ## both attributes are collected into strings
-#' simplify(g, edge.attr.comb = toString)
+#' simplify(g, edge_attr_combine = toString)
 #'
 #' ## harmonic average of weights, names are dropped
-#' simplify(g, edge.attr.comb = list(
+#' simplify(g, edge_attr_combine = list(
 #'   weight = function(x) length(x) / sum(1 / x),
 #'   name = "ignore"
 #' ))

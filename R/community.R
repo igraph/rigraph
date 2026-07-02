@@ -3201,13 +3201,14 @@ communities <- groups.communities
 #'
 #' The attributes of the graph are kept. Graph and edge attributes are
 #' unchanged, vertex attributes are combined, according to the
-#' `vertex.attr.comb` parameter.
+#' `vertex_attr_combine` parameter.
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
 #'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
-#' @param vertex.attr.comb Specifies how to combine the vertex attributes in
+#' @inheritParams rlang::args_dots_empty
+#' @param vertex_attr_combine Specifies how to combine the vertex attributes in
 #'   the new graph. Please see [attribute.combination()] for details.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -3220,7 +3221,7 @@ communities <- groups.communities
 #' E(g)$weight <- runif(ecount(g))
 #'
 #' g2 <- contract(g, rep(1:5, each = 2),
-#'   vertex.attr.comb = toString
+#'   vertex_attr_combine = toString
 #' )
 #'
 #' ## graph and edge attributes are kept, vertex attributes are
@@ -3232,12 +3233,35 @@ communities <- groups.communities
 contract <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  ...,
+  vertex_attr_combine = igraph_opt("vertex_attr_combine")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: contract, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vertex_attr_combine = vertex_attr_combine),
+      recover_new = c("vertex_attr_combine"),
+      recover_old = c("vertex.attr.comb"),
+      match_names = c("vertex.attr.comb", "vertex_attr_combine"),
+      match_to = c("vertex_attr_combine", "vertex_attr_combine"),
+      defaults = list(vertex_attr_combine = igraph_opt("vertex_attr_combine")),
+      head_args = c("graph", "mapping"),
+      fn_name = "contract"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
-    vertex_attr_comb = vertex.attr.comb
+    vertex_attr_comb = vertex_attr_combine
   )
 }
 

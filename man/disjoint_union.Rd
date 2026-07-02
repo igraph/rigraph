@@ -5,12 +5,18 @@
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{
-disjoint_union(...)
+disjoint_union(..., graph_attr_combine = igraph_opt("graph_attr_combine"))
 
 x \%du\% y
 }
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
+
+\item{graph_attr_combine}{Specification for combining shared graph attributes.
+Defaults to the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed
+via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical behaviour of
+appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute names. See
+\link{igraph-attribute-combination} for the available combiners.}
 
 \item{x, y}{Graph objects.}
 }
@@ -31,9 +37,10 @@ function can also be used via the \verb{\%du\%} operator.
 particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}}
 function. For graphs that lack some vertex/edge attribute, the corresponding
 values in the new graph are set to a missing value (\code{NA} for scalar attributes,
-\code{NULL} for list attributes). Graph attributes are simply
-copied to the result. If this would result a name clash, then they are
-renamed by adding suffixes: _1, _2, etc.
+\code{NULL} for list attributes). Graph attributes are combined according to
+\code{graph_attr_combine}; by default any name clash is resolved by adding
+suffixes (\verb{_1}, \verb{_2}, ...). See \link{igraph-attribute-combination} for the
+available combiners.
 
 Note that if both graphs have vertex names (i.e. a \code{name} vertex
 attribute), then the concatenated vertex names might be non-unique in the

@@ -13,7 +13,7 @@ vertex/edge attributes in these cases.
 }
 \details{
 The functions that support the combination of attributes have one or two
-extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
+extra arguments called \code{vertex_attr_combine} and/or \code{edge_attr_combine}
 that specify how to perform the mapping of the attributes. E.g.
 \code{\link[=contract]{contract()}} contracts many vertices into a single one, the
 attributes of the vertices can be combined and stores as the vertex
@@ -93,6 +93,18 @@ Calls the R \code{\link[=median]{median()}} function for all attribute types.
 Concatenate the attributes, using the \code{\link[=c]{c()}} function.
 This results almost always a complex attribute.
 }
+\item{"rename"}{
+Keep clashing attributes side-by-side under disambiguated names by
+appending \verb{_1}, \verb{_2}, ... suffixes. For example, if two graphs each
+have an attribute called \code{group}, the resulting graph will have
+attributes \code{group_1} and \code{group_2}, corresponding to the first and
+second input graph, respectively. This is the default for the
+graph operators \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=compose]{compose()}} and
+\code{\link[=disjoint_union]{disjoint_union()}} and preserves their historical behaviour.
+Only those operators accept \code{"rename"}; \code{\link[=simplify]{simplify()}} and
+\code{\link[=contract]{contract()}} will reject it because the rename strategy has no
+per-element interpretation when many input values collapse into one.
+}
 }
 }
 
@@ -107,22 +119,22 @@ igraph_options(print.vertex.attributes = TRUE)
 igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
-simplify(g, edge.attr.comb = "sum")
+simplify(g, edge_attr_combine = "sum")
 
 ## collect attributes into a string
-simplify(g, edge.attr.comb = toString)
+simplify(g, edge_attr_combine = toString)
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
-simplify(g, edge.attr.comb = "concat")
+simplify(g, edge_attr_combine = "concat")
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
-simplify(g, edge.attr.comb = toString)
+simplify(g, edge_attr_combine = toString)
 
 ## harmonic average of weights, names are dropped
-simplify(g, edge.attr.comb = list(
+simplify(g, edge_attr_combine = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
