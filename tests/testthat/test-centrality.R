@@ -776,11 +776,12 @@ test_that("spectrum() works for symmetric matrices", {
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
-    e3 <- spectrum(
+    spectrum(
       g,
       which = list(howmany = 4, pos = "SA"),
       options = arpack_defaults
-    )
+    ),
+    "must be a list"
   )
 })
 
