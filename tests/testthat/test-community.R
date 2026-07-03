@@ -474,7 +474,7 @@ test_that("modularity_matrix works", {
 test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
   expect_snapshot(error = TRUE, {
-    x <- modularity_matrix(karate, membership = rep(1, vcount(karate)))
+    modularity_matrix(karate, membership = rep(1, vcount(karate)))
   })
 })
 
