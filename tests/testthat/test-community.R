@@ -284,7 +284,7 @@ test_that("cluster_leading_eigen works", {
   A <- as_adjacency_matrix(karate, sparse = FALSE)
   ec <- ecount(karate)
   deg <- degree(karate)
-  karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
+  cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
 
 test_that("cluster_leading_eigen is deterministic", {
