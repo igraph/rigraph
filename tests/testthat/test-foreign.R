@@ -66,12 +66,12 @@ test_that("graph_from_graphdb works", {
   # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/docker-images/rigraph-san:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
   skip_if(Sys.getenv("R_SANITIZER") == "true")
 
-  expect_snapshot(g <- graph_from_graphdb(nodes = 1000))
-  expect_snapshot_igraph_error(g <- graph_from_graphdb())
+  expect_silent(graph_from_graphdb(nodes = 1000))
+  expect_snapshot_igraph_error(graph_from_graphdb())
   expect_snapshot_igraph_error(
-    g <- graph_from_graphdb(nodes = 10, prefix = "not_existing")
+    graph_from_graphdb(nodes = 10, prefix = "not_existing")
   )
   expect_snapshot_igraph_error(
-    g <- graph_from_graphdb(nodes = 10, type = "not_existing")
+    graph_from_graphdb(nodes = 10, type = "not_existing")
   )
 })
