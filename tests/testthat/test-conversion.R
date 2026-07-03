@@ -701,7 +701,7 @@ test_that("graphNEL conversion works", {
 
   A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
   A2 <- as_adjacency_matrix(g2, weights = "weight", sparse = FALSE)
-  expect_equal(A, A)
+  expect_equal(A, A2)
   expect_equal(g$name, g2$name)
 })
 
