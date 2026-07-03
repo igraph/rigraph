@@ -223,7 +223,7 @@ test_that("cluster_leading_eigen works", {
       multiplier(v)
     })
     ev <- eigen(M)
-    ret <- 0
+
     expect_equal(ev$values[1], value)
     if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
       ev$vectors <- -ev$vectors
