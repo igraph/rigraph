@@ -223,7 +223,7 @@ clique.number <- function(graph) {
 #'
 #'   `max_cliques()` returns:
 #'   - When `file` is `NULL` and `callback` is `NULL`, a list of vertex sequences.
-#'   - When `callback` is not `NULL`, the callback function is called for each click,
+#'   - When `callback` is not `NULL`, the callback function is called for each clique,
 #'    then `max_cliques()` returns `NULL` invisibly.
 #'   - When `file` is not `NULL`, the output is written to the specified file in
 #'   this case.

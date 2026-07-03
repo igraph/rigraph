@@ -100,7 +100,7 @@ of class \link[=V]{igraph.vs}.
 \code{max_cliques()} returns:
 \itemize{
 \item When \code{file} is \code{NULL} and \code{callback} is \code{NULL}, a list of vertex sequences.
-\item When \code{callback} is not \code{NULL}, the callback function is called for each click,
+\item When \code{callback} is not \code{NULL}, the callback function is called for each clique,
 then \code{max_cliques()} returns \code{NULL} invisibly.
 \item When \code{file} is not \code{NULL}, the output is written to the specified file in
 this case.
