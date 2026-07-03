@@ -643,12 +643,6 @@ print_igraph_legacy <- function(
 ) {
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
-    if (graph.attributes) {
-      head_lines <- head_lines + .print.graph.attributes(x, full, max.lines)
-    }
-    if (vertex.attributes) {
-      head_lines <- head_lines + .print.vertex.attributes(x, full, max.lines)
-    }
     if (ecount(x) == 0) {
       ## Do nothing
     } else if (edge.attributes && length(edge_attr_names(x)) != 0) {
