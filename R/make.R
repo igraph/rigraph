@@ -524,13 +524,6 @@ graph.full.bipartite <- function(
   n1 <- as.numeric(n1)
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
-  mode1 <- switch(
-    igraph_match_arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
 
   res <- full_bipartite_impl(
     n1 = n1,
@@ -2600,13 +2593,6 @@ make_full_bipartite_graph <- function(
   n1 <- as.numeric(n1)
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
-  mode1 <- switch(
-    igraph_match_arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
 
   res <- full_bipartite_impl(
     n1 = n1,
