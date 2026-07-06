@@ -249,33 +249,35 @@ test_that("vertices() works", {
   expect_s3_class(V(g_none), "igraph.vs")
   expect_null(V(g_none)$name)
 
-  expect_snapshot_error(make_empty_graph(1) + vertices("a", "b", foo = 5:7))
+  expect_snapshot(error = TRUE, {
+    make_empty_graph(1) + vertices("a", "b", foo = 5:7)
+  })
 })
 
 test_that("vertices() errors on duplicate attribute names", {
   # Test case from issue: vertices("a", name = "c")
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", name = "c", name = "d")
-  )
+  })
 
   # Test case from issue: vertices("a", blop = "c", blop = 1)
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices("a", blop = "c", blop = 1)
-  )
+  })
 
   # Test with graph addition
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     make_empty_graph(1) + vertices("a", "b", name = "c", name = "d")
-  )
+  })
 
   # Test multiple duplicates
-  expect_snapshot_error(
+  expect_snapshot(error = TRUE, {
     # jarl-ignore duplicated_arguments: this is the test's point
     vertices(foo = 1, foo = 2, bar = 3, bar = 4)
-  )
+  })
 })
 
 test_that("infix operators work", {
