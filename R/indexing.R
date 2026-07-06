@@ -395,39 +395,40 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     j <- to
   }
 
-  if (missing(i) && missing(j)) {
-    mode <- if (directed) "out" else "all"
-    getfun(x, mode = mode)
-  } else if (missing(j)) {
-    mode <- if (directed) "out" else "all"
-    if (!edges) {
-      adjacent_vertices(x, i, mode = if (directed) "out" else "all")
+  directed_mode_in <-
+    if (missing(i) && missing(j)) {
+      getfun(x, mode = if (directed) "out" else "all")
+    } else if (missing(j)) {
+      if (!edges) {
+        adjacent_vertices(x, i, mode = if (directed) "out" else "all")
+      } else {
+        incident_edges(x, i, mode = if (directed) "out" else "all")
+      }
+    } else if (missing(i)) {
+      if (!edges) {
+        adjacent_vertices(x, j, mode = if (directed) "in" else "all")
+      } else {
+        incident_edges(x, j, mode = if (directed) "in" else "all")
+      }
     } else {
-      incident_edges(x, i, mode = if (directed) "out" else "all")
+      if (!edges) {
+        lapply(
+          adjacent_vertices(x, i, mode = if (directed) "out" else "all"),
+          intersection,
+          V(x)[.env$j]
+        )
+      } else {
+        i <- as_igraph_vs(x, i)
+        j <- as_igraph_vs(x, j)
+        ee <- incident_edges(x, i, mode = if (directed) "out" else "all")
+        lapply(seq_along(i), function(yy) {
+          from <- i[yy]
+          el <- ends(x, ee[[yy]], names = FALSE)
+          other <- ifelse(el[, 1] == from, el[, 2], el[, 1])
+          ee[[yy]][other %in% j]
+        })
+      }
     }
-  } else if (missing(i)) {
-    if (!edges) {
-      adjacent_vertices(x, j, mode = if (directed) "in" else "all")
-    } else {
-      incident_edges(x, j, mode = if (directed) "in" else "all")
-    }
-  } else {
-    if (!edges) {
-      mode <- if (directed) "out" else "all"
-      lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[.env$j])
-    } else {
-      i <- as_igraph_vs(x, i)
-      j <- as_igraph_vs(x, j)
-      mode <- if (directed) "out" else "all"
-      ee <- incident_edges(x, i, mode = mode)
-      lapply(seq_along(i), function(yy) {
-        from <- i[yy]
-        el <- ends(x, ee[[yy]], names = FALSE)
-        other <- ifelse(el[, 1] == from, el[, 2], el[, 1])
-        ee[[yy]][other %in% j]
-      })
-    }
-  }
 }
 
 #' @method length igraph
