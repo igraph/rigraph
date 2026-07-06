@@ -145,7 +145,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(!nzchar(nam)))) {
+  if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
   }
 
@@ -212,7 +212,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(!nzchar(nam)))) {
+  if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
   }
 
