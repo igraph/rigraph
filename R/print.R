@@ -373,6 +373,8 @@ print_edge_detail <- function(graph, edges) {
   if (!is.null(x)) {
     arrow <- c("--", "->")[is_directed(x) + 1]
 
+    # jarl-ignore unused_object: then assigned to with <<-
+    can_max <- NA
     el <- NA
 
     fun <- function(q, no) {
