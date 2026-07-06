@@ -42,9 +42,9 @@
 #'
 #' @param graph.us,graph An igraph object, the graph for which the scan
 #'   statistics will be computed
-#' @param graph.them An igraph object or `NULL`, if not `NULL`,
-#'   then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-#'   calculated from `graph.us` are evaluated on `graph.them`.
+#' @param graph.them An igraph object on which the \sQuote{them} statistics is computed,
+#'   i.e. the neighborhoods calculated from `graph.us` are evaluated on `graph.them`.
+#'   Default: `NULL`.
 #' @param k An integer scalar, the size of the local neighborhood for each
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for

@@ -255,8 +255,8 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' @param sample.size The number of vertices to use as a starting point for
 #'   finding motifs. Only used if the `sample` argument is `NULL`.
 #'   The default is `ceiling(vcount(graph) / 10)` .
-#' @param sample If not `NULL` then it specifies the vertices to use as a
-#'   starting point for finding motifs.
+#' @param sample Vertices to use as a starting point for finding motifs.
+#'   Default: `NULL`.
 #' @return A numeric scalar, an estimate for the total number of motifs in
 #'   the graph.
 #' @seealso [isomorphism_class()]

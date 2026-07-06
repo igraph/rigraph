@@ -19,9 +19,9 @@ with_gem(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform. Updating a
 single vertex counts as an iteration.  A reasonable default is 40 * n * n,

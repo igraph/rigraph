@@ -18,12 +18,9 @@ sample_fitness(
 \item{fitness.out}{A numeric vector containing the fitness of each vertex.
 For directed graphs, this specifies the out-fitness of each vertex.}
 
-\item{fitness.in}{If \code{NULL} (the default), the generated graph will be
-undirected. If not \code{NULL}, then it should be a numeric vector and it
-specifies the in-fitness of each vertex.
-
-If this argument is not \code{NULL}, then a directed graph is generated,
-otherwise an undirected one.}
+\item{fitness.in}{Numeric vector that specifies the in-fitness of each vertex.
+The generated graph will be directed.
+Default: \code{NULL}, the generated graph will be undirected.}
 
 \item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 

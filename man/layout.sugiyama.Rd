@@ -17,9 +17,9 @@ layout.sugiyama(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layers}{A numeric vector or \code{NULL}. If not \code{NULL}, then it
-should specify the layer index of the vertices. Layers are numbered from
-one. If \code{NULL}, then igraph calculates the layers automatically.}
+\item{layers}{A numeric vector of the layer indices of the vertices.
+Layers are numbered from one.
+Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}

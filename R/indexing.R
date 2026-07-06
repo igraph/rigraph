@@ -197,8 +197,8 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 #' @param sparse Logical scalar, whether to return sparse matrices.
 #' @param edges Logical scalar, whether to return edge IDs.
 #' @param drop Ignored.
-#' @param attr If not `NULL`, then it should be the name of an edge
-#'   attribute. This attribute is queried and returned.
+#' @param attr Name of an edge attribute. This attribute is queried and returned.
+#'   Default: `NULL`.
 #' @return A scalar or matrix. See details below.
 #'
 #' @family structural queries

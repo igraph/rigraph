@@ -1432,9 +1432,10 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   attraction along the edges will be multiplied by the given edge weights.
 #'   This places vertices connected with a highly weighted edge closer to
 #'   each other. Weights must be positive.
-#' @param minx If not `NULL`, then it must be a numeric vector that gives
-#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#'   of the vector must match the number of vertices in the graph.
+#' @param minx Numeric vector that gives lower boundaries
+#'   for the \sQuote{x} coordinates of the vertices.
+#'   The length of the vector must match the number of vertices in the graph.
+#'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
 #' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
@@ -1626,9 +1627,9 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' See the referenced paper below for the details of the algorithm.
 #'
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not `NULL`, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the `dim`
-#'   argument.
+#' @param coords Starting coordinates in a two or three column matrix,
+#'   depending on the `dim` argument.
+#'   Default: `NULL`.
 #' @param maxiter The maximum number of iterations to perform. Updating a
 #'   single vertex counts as an iteration.  A reasonable default is 40 * n * n,
 #'   where n is the number of vertices. The original paper suggests 4 * n * n,
@@ -1785,9 +1786,9 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' follows truthfully the original publication by Kamada and Kawai now.
 #'
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not `NULL`, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the `dim`
-#'   argument.
+#' @param coords Starting coordinates in a two or three column matrix,
+#'   depending on the `dim` argument.
+#'   Default: `NULL`.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
 #'   space.
@@ -1802,9 +1803,10 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param weights Edge weights, larger values will result in longer edges.
 #'   Note that this is the opposite of [layout_with_fr()], which produces
 #'   shorter edges for larger weights. Weights must be positive.
-#' @param minx If not `NULL`, then it must be a numeric vector that gives
-#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#'   of the vector must match the number of vertices in the graph.
+#' @param minx Numeric vector that gives lower boundaries
+#'   for the \sQuote{x} coordinates of the vertices.
+#'   The length of the vector must match the number of vertices in the graph.
+#'   Default: `NULL`.
 #' @param maxx Similar to `minx`, but gives the upper boundaries.
 #' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
@@ -2167,9 +2169,9 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' For more details, see the reference below.
 #'
 #' @param graph The input graph.
-#' @param layers A numeric vector or `NULL`. If not `NULL`, then it
-#'   should specify the layer index of the vertices. Layers are numbered from
-#'   one. If `NULL`, then igraph calculates the layers automatically.
+#' @param layers A numeric vector of the layer indices of the vertices.
+#'   Layers are numbered from one.
+#'   Default: `NULL`, igraph calculates the layers automatically.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
 #'   same layer.
 #' @param vgap Real scalar, the distance between layers.

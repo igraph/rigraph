@@ -1629,7 +1629,7 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'   version 0.7 this argument is coerced to a data frame with
 #'   `as.data.frame`.
 #' @param directed Logical scalar, whether or not to create a directed graph.
-#' @param vertices A data frame with vertex metadata, or `NULL`. See
+#' @param vertices A data frame with vertex metadata. Default: `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with `as.data.frame`, if not `NULL`.
 #' @return An igraph graph object for `graph_from_data_frame()`, and either a

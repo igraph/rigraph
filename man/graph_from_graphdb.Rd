@@ -17,7 +17,7 @@ graph_from_graphdb(
 )
 }
 \arguments{
-\item{url}{If not \code{NULL} it is a complete URL with the file to import.}
+\item{url}{Complete URL with the file to import. Default: \code{NULL}.}
 
 \item{prefix}{Gives the prefix. See details below. Possible values:
 \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
