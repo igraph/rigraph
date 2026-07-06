@@ -147,20 +147,20 @@ test_that("write_graph auto-detects Pajek format from .net extension", {
   expect_equal(ecount(g), ecount(karate))
 })
 
-test_that("write_graph auto-detects Pajek format for lesmis from .net extension", {
+test_that("read_graph auto-detects Pajek format for lesmis from .net extension", {
   skip_if_not_installed("igraphdata")
 
   g_orig <- read_graph(igraphdata::lesmis_pajek(), format = "pajek")
   net_path <- withr::local_tempfile(fileext = ".net")
-  write_graph(g_orig, net_path)
-  g <- read_graph(net_path, format = "pajek")
+  write_graph(g_orig, net_path, format = "pajek")
+  g <- read_graph(net_path)
 
   expect_equal(vcount(g), vcount(g_orig))
   expect_equal(ecount(g), ecount(g_orig))
   expect_false(is_directed(g))
 })
 
-test_that("write_graph auto-detects GraphML format for lesmis from .graphml extension", {
+test_that("read_graph auto-detects GraphML format for lesmis from .graphml extension", {
   skip_if_no_graphml()
   skip_if_not_installed("igraphdata")
 
@@ -170,8 +170,8 @@ test_that("write_graph auto-detects GraphML format for lesmis from .graphml exte
     format = "graphml"
   ))
   graphml_path <- withr::local_tempfile(fileext = ".graphml")
-  write_graph(g_orig, graphml_path)
-  g <- suppressWarnings(read_graph(graphml_path, format = "graphml"))
+  write_graph(g_orig, graphml_path, format = "graphml")
+  g <- suppressWarnings(read_graph(graphml_path))
 
   expect_equal(vcount(g), vcount(g_orig))
   expect_equal(ecount(g), ecount(g_orig))
