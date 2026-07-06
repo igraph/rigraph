@@ -40,6 +40,7 @@ Imports:
     cli,
     graphics,
     grDevices,
+    igraphdata (>= 1.0.1.9003),
     lifecycle,
     magrittr,
     Matrix,
@@ -53,7 +54,6 @@ Suggests:
     callr,
     decor,
     digest,
-    igraphdata,
     knitr,
     rgl (>= 1.3.14),
     rmarkdown,
@@ -87,3 +87,5 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace",
     "igraph.r2cdocs::docs_rd", "devtag::dev_roclet"))
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)
 Config/roxygen2/version: 8.0.0.9000
+Remotes:  
+    igraph/igraphdata
