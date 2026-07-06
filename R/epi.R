@@ -175,7 +175,6 @@ plot.sir <- function(
   }
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
-  ns <- length(sir)
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
   ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
 
