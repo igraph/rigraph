@@ -35,9 +35,9 @@ configuration of the algorithm.}
 
 \item{options}{A named list to override some ARPACK options.}
 
-\item{callback}{If not \code{NULL}, then it must be callback function. This
+\item{callback}{Callback function. This
 is called after each iteration, after calculating the leading eigenvector of
-the modularity matrix. See details below.}
+the modularity matrix. See details below. Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

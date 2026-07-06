@@ -592,12 +592,11 @@ code.length <- function(communities) {
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure. Might also be `NULL` if the
 #'   community structure is given in another way, e.g. by a merge matrix.
-#' @param algorithm If not `NULL` (meaning an unknown algorithm), then a
-#'   character scalar, the name of the algorithm that produced the community
-#'   structure.
-#' @param merges If not `NULL`, then the merge matrix of the hierarchical
+#' @param algorithm Name of the algorithm that produced the community
+#'   structure (character scalar). Default: `NULL`, meaning an unknown algorithm.
+#' @param merges Merge matrix of the hierarchical
 #'   community structure. See `merges()` below for more information on its
-#'   format.
+#'   format. Default: `NULL`.
 #' @param modularity Numeric scalar or vector, the modularity value of the
 #'   community structure. It can also be `NULL`, if the modularity of the
 #'   (best) split is not available.
@@ -872,7 +871,7 @@ modularity <- function(x, ...) {
 #' @param x,graph The input graph.
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure.
-#' @param weights If not `NULL` then a numeric vector giving edge weights.
+#' @param weights Numeric vector giving edge weights. Default: `NULL`.
 #' @param resolution The resolution parameter. Must be greater than or equal to
 #'   0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
@@ -2178,9 +2177,9 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @param start `NULL`, or a numeric membership vector, giving the start
 #'   configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
-#' @param callback If not `NULL`, then it must be callback function. This
+#' @param callback Callback function. This
 #'   is called after each iteration, after calculating the leading eigenvector of
-#'   the modularity matrix. See details below.
+#'   the modularity matrix. See details below. Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
 #' @return `cluster_leading_eigen()` returns a named list with the
@@ -2647,14 +2646,14 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' Please see the details of this method in the references given below.
 #'
 #' @param graph The input graph. Edge directions will be taken into account.
-#' @param e.weights If not `NULL`, then a numeric vector of edge weights.
-#'   The length must match the number of edges in the graph.  By default the
+#' @param e.weights Numeric vector of edge weights.
+#'   The length must match the number of edges in the graph.  By default (`NULL`) the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
 #'   present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
-#' @param v.weights If not `NULL`, then a numeric vector of vertex
+#' @param v.weights Numeric vector of vertex
 #'   weights. The length must match the number of vertices in the graph.  By
-#'   default the \sQuote{`weight`} vertex attribute is used as weights. If
+#'   default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights. If
 #'   it is not present, then all vertices are considered to have the same weight.
 #'   A larger vertex weight means a larger probability that the random surfer
 #'   jumps to that vertex.
