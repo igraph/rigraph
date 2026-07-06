@@ -165,7 +165,10 @@ test_that("write_graph auto-detects GraphML format for lesmis from .graphml exte
   skip_if_not_installed("igraphdata")
 
   # lesmis GraphML has an 'id' vertex attribute; igraph warns it cannot add its own
-  g_orig <- suppressWarnings(read_graph(igraphdata::lesmis_graphml(), format = "graphml"))
+  g_orig <- suppressWarnings(read_graph(
+    igraphdata::lesmis_graphml(),
+    format = "graphml"
+  ))
   graphml_path <- withr::local_tempfile(fileext = ".graphml")
   write_graph(g_orig, graphml_path)
   g <- suppressWarnings(read_graph(graphml_path, format = "graphml"))

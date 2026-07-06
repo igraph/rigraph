@@ -4,13 +4,7 @@
 \alias{write_graph}
 \title{Writing the graph to a file in some format}
 \usage{
-write_graph(
-  graph,
-  file,
-  format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot",
-    "leda"),
-  ...
-)
+write_graph(graph, file, format = NULL, ...)
 }
 \arguments{
 \item{graph}{The graph to export.}
