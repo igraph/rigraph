@@ -516,7 +516,6 @@ buildMerges <- function(object) {
 
   S <- numeric()
   vcount <- length(object$left) + 1
-  nMerge <- vcount - 1
   merges <- matrix(0, nrow = vcount - 1, ncol = 3)
   mptr <- 1
   S[length(S) + 1] <- -1
@@ -959,35 +958,27 @@ print1.igraphHRG <- function(x, level = 3, ...) {
     gol <- x$left[b] < 0 && l < level
     gor <- x$right[b] < 0 && l < level
 
-    ## the children to print
-    ch1 <- character()
-    if (!gol && x$left[b] < 0) {
-      ch1 <- c(ch1, paste(sep = "", "g", -x$left[b]))
-    }
-    if (!gor && x$right[b] < 0) {
-      ch1 <- c(ch1, paste(sep = "", "g", -x$right[b]))
-    }
-    ch2 <- numeric()
+    children <- numeric()
     if (!gol) {
       if (x$left[b] < 0) {
-        ch2 <- c(ch2, .children(-x$left[b]))
+        children <- c(children, .children(-x$left[b]))
       }
       if (x$left[b] >= 0) {
-        ch2 <- c(ch2, x$left[b] + 1)
+        children <- c(children, x$left[b] + 1)
       }
     }
     if (!gor) {
       if (x$right[b] < 0) {
-        ch2 <- c(ch2, .children(-x$right[b]))
+        children <- c(children, .children(-x$right[b]))
       }
       if (x$right[b] >= 0) {
-        ch2 <- c(ch2, x$right[b] + 1)
+        children <- c(children, x$right[b] + 1)
       }
     }
 
     ## print this line
-    ch2 <- as.character(nn[ch2])
-    lf <- gsub(" ", "x", format(ch2, width = vw), fixed = TRUE)
+    children <- as.character(nn[children])
+    lf <- gsub(" ", "x", format(children, width = vw), fixed = TRUE)
     lf <- paste(collapse = " ", lf)
     lf <- strwrap(lf, width = getOption("width") - cs - pw - 3 - 2)
     lf <- gsub("x", " ", lf, fixed = TRUE)
