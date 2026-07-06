@@ -726,7 +726,7 @@ print.communities <- function(x, ...) {
       head_print(
         o,
         max_lines = igraph_opt("auto.print.lines"),
-        omitted_footer = "+ ... omitted several groups/vertices\n",
+        omitted_footer = "+ ... omitted several groups/vertices\n"
       )
     }
     indent_print(grp, .printer = hp, .indent = "  ")
