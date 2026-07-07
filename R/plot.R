@@ -394,10 +394,16 @@ i.draw_vertex_labels <- function(
     if (sum(drawn) > 1) {
       hw <- rep(0, vc)
       hh <- rep(0, vc)
-      hw[drawn] <- graphics::strwidth(label.text[drawn], cex = label.cex[drawn]) /
+      hw[drawn] <- graphics::strwidth(
+        label.text[drawn],
+        cex = label.cex[drawn]
+      ) /
         2 *
         1.15
-      hh[drawn] <- graphics::strheight(label.text[drawn], cex = label.cex[drawn]) /
+      hh[drawn] <- graphics::strheight(
+        label.text[drawn],
+        cex = label.cex[drawn]
+      ) /
         2 *
         1.6
       moved <- i.repel_labels(x[drawn], y[drawn], hw[drawn], hh[drawn])
