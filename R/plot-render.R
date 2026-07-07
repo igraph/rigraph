@@ -276,7 +276,7 @@ i.renderer_record <- function() {
       border = NA,
       lwd = 1
     ) {
-      pts <- grDevices::xspline(x, y, shape = shape, open = open, draw = FALSE)
+      pts <- graphics::xspline(x, y, shape = shape, open = open, draw = FALSE)
       add(list(
         type = "polygon",
         x = pts$x,

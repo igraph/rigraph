@@ -62,7 +62,8 @@ Suggests:
     tcltk,
     testthat,
     vdiffr,
-    withr
+    withr,
+    xml2
 Enhances: 
     graph
 LinkingTo: 

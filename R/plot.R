@@ -394,10 +394,10 @@ i.draw_vertex_labels <- function(
     if (sum(drawn) > 1) {
       hw <- rep(0, vc)
       hh <- rep(0, vc)
-      hw[drawn] <- strwidth(label.text[drawn], cex = label.cex[drawn]) /
+      hw[drawn] <- graphics::strwidth(label.text[drawn], cex = label.cex[drawn]) /
         2 *
         1.15
-      hh[drawn] <- strheight(label.text[drawn], cex = label.cex[drawn]) /
+      hh[drawn] <- graphics::strheight(label.text[drawn], cex = label.cex[drawn]) /
         2 *
         1.6
       moved <- i.repel_labels(x[drawn], y[drawn], hw[drawn], hh[drawn])
@@ -477,7 +477,7 @@ i.r_text_halo <- function(
       !is.na(labels) &&
       nzchar(as.character(labels))
   ) {
-    r <- halo.width * strheight(labels, cex = cex)
+    r <- halo.width * graphics::strheight(labels, cex = cex)
     th <- seq(0, 2 * pi, length.out = halo.steps + 1)[-1]
     for (a in th) {
       i.r_text(
