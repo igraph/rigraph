@@ -18,16 +18,21 @@ set.seed(42)
 # `igraph_local_seed()` (and its `restore_rng_state()` helper) live in helper.R
 # so they are visible both to test code and to helper functions that call them.
 
+# The seed-leak check is opt-in: only a dedicated CI runner sets
+# IGRAPH_CHECK_RNG_STATE=true (see #2713). Keeping it gated (rather than
+# always-on) means a stray leak doesn't block unrelated local test runs, while
+# the dedicated runner still catches regressions.
 if (Sys.getenv("IGRAPH_CHECK_RNG_STATE") == "true") {
-  # Check that tests don't change the random seed
+  # Check that tests don't change the random seed.
   test_that <- function(name, code) {
     # Forward the block to testthat as a literal language object. Do NOT use
     # rlang::inject(testthat::test_that(name, !!code)) here: inject() walks the
-    # whole expression and eagerly processes every injection operator, including
-    # any !!/!!!/{{ the test body uses (e.g. `set_vertex_attrs(g, !!!attr_list)`),
-    # evaluating them in this frame where their locals don't exist. Embedding the
-    # captured code in the call hands it to testthat verbatim, so those operators
-    # are processed at test runtime instead.
+    # whole expression and eagerly processes every injection operator (!!, !!!,
+    # {{) in the test body. A test line like `set_vertex_attrs(g, !!!attr_list)`
+    # would then be spliced in *this* frame -- where `attr_list` doesn't exist
+    # yet -- giving "object 'attr_list' not found". Building the call with the
+    # captured block embedded as a literal hands it to testthat untouched, so
+    # those operators run at test time in the test's own scope.
     code <- substitute(code)
     before_state <- get0(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
     eval(
@@ -42,15 +47,3 @@ if (Sys.getenv("IGRAPH_CHECK_RNG_STATE") == "true") {
     )
   }
 }
-
-# NOTE (why the override forwards `code` via substitute()/eval() instead of
-# rlang::inject): the earlier version used
-#   code <- rlang::enexpr(code)
-#   rlang::inject(testthat::test_that(name, !!code))
-# which broke any test whose body contains an injection operator (!!, !!!, {{).
-# inject() processes ALL such operators in one pass, so a test line like
-# `set_vertex_attrs(g, !!!attr_list)` was spliced in this frame -- where
-# `attr_list` does not exist yet -- giving "object 'attr_list' not found".
-# Building the call with the captured block embedded as a literal hands it to
-# testthat untouched, so those operators run at test time in the test's own
-# scope. Don't reintroduce rlang::inject here.
