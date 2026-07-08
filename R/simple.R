@@ -68,7 +68,8 @@ is.simple <- function(graph) {
 #' @param remove.loops Logical, whether the loop edges are to be removed.
 #' @param remove.multiple Logical, whether the multiple edges are to be
 #'   removed.
-#' @param edge.attr.comb Specifies what to do with edge attributes, if
+#' @inheritParams rlang::args_dots_empty
+#' @param edge_attr_combine Specifies what to do with edge attributes, if
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
 #'   [attribute.combination()] for details on this.
@@ -94,11 +95,34 @@ simplify <- function(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  ...,
+  edge_attr_combine = igraph_opt("edge_attr_combine")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: simplify, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(edge_attr_combine = edge_attr_combine),
+      recover_new = c("edge_attr_combine"),
+      recover_old = c("edge.attr.comb"),
+      match_names = c("edge.attr.comb", "edge_attr_combine"),
+      match_to = c("edge_attr_combine", "edge_attr_combine"),
+      defaults = list(edge_attr_combine = igraph_opt("edge_attr_combine")),
+      head_args = c("graph", "remove.multiple", "remove.loops"),
+      fn_name = "simplify"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # A graph that is already simple has no loops and no multiple edges, so
   # simplify_impl() would not change its structure regardless of the
-  # remove.* / edge.attr.comb arguments. Short-circuiting here avoids the
+  # remove.* / edge_attr_combine arguments. Short-circuiting here avoids the
   # cost of rebuilding the graph in the (common) already-simple case;
   # is_simple() is orders of magnitude cheaper than simplify().
   if (is_simple(graph)) {
@@ -108,7 +132,7 @@ simplify <- function(
     graph = graph,
     remove_multiple = remove.multiple,
     remove_loops = remove.loops,
-    edge_attr_comb = edge.attr.comb
+    edge_attr_comb = edge_attr_combine
   )
 }
 

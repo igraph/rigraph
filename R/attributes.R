@@ -1364,7 +1364,7 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #' vertex/edge attributes in these cases.
 #'
 #' The functions that support the combination of attributes have one or two
-#' extra arguments called `vertex.attr.comb` and/or `edge.attr.comb`
+#' extra arguments called `vertex_attr_combine` and/or `edge_attr_combine`
 #' that specify how to perform the mapping of the attributes. E.g.
 #' [contract()] contracts many vertices into a single one, the
 #' attributes of the vertices can be combined and stores as the vertex
@@ -1475,22 +1475,22 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
 #' igraph_options(print.edge.attributes = TRUE)
 #'
 #' ## new attribute is the sum of the old ones
-#' simplify(g, edge.attr.comb = "sum")
+#' simplify(g, edge_attr_combine = "sum")
 #'
 #' ## collect attributes into a string
-#' simplify(g, edge.attr.comb = toString)
+#' simplify(g, edge_attr_combine = toString)
 #'
 #' ## concatenate them into a vector, this creates a complex
 #' ## attribute
-#' simplify(g, edge.attr.comb = "concat")
+#' simplify(g, edge_attr_combine = "concat")
 #'
 #' E(g)$name <- letters[seq_len(ecount(g))]
 #'
 #' ## both attributes are collected into strings
-#' simplify(g, edge.attr.comb = toString)
+#' simplify(g, edge_attr_combine = toString)
 #'
 #' ## harmonic average of weights, names are dropped
-#' simplify(g, edge.attr.comb = list(
+#' simplify(g, edge_attr_combine = list(
 #'   weight = function(x) length(x) / sum(1 / x),
 #'   name = "ignore"
 #' ))
