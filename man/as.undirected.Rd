@@ -17,6 +17,12 @@ as.undirected(
 \code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
 \code{as_undirected()} it can be \code{each}, \code{collapse} or
 \code{mutual}. See details below.}
+
+\item{edge.attr.comb}{Specifies what to do with edge attributes, if
+\code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
+might be mapped to a single one in the new graph, and their attributes are
+combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
+this.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

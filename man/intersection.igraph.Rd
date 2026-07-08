@@ -9,9 +9,9 @@
   ...,
   byname = "auto",
   keep.all.vertices = TRUE,
-  graph_attr_combine = igraph_opt("graph_attr_combine"),
-  vertex_attr_combine = "rename",
-  edge_attr_combine = "rename"
+  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
 )
 }
 \arguments{
@@ -26,10 +26,10 @@ graphs are named.}
 \item{keep.all.vertices}{Logical scalar, whether to keep vertices that only
 appear in a subset of the input graphs.}
 
-\item{graph_attr_combine, vertex_attr_combine, edge_attr_combine}{Specification for
-combining clashing graph, vertex and edge attributes. \code{vertex_attr_combine}
-and \code{edge_attr_combine} default to \code{"rename"}; \code{graph_attr_combine} defaults to
-the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed via
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. \code{vertex.attr.comb}
+and \code{edge.attr.comb} default to \code{"rename"}; \code{graph.attr.comb} defaults to
+the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via
 \code{\link[=igraph_options]{igraph_options()}}). See \link{igraph-attribute-combination} for the available
 combiners.}
 }
@@ -53,7 +53,7 @@ of the internal numeric vertex IDs.
 vertex and edge attributes are copied to the result. By default, if an
 attribute is present in multiple graphs and would result in a name clash,
 that attribute is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass
-\code{graph_attr_combine}, \code{vertex_attr_combine} or \code{edge_attr_combine} to combine
+\code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine
 clashing attributes instead; see \link{igraph-attribute-combination} for the
 available combiners.
 

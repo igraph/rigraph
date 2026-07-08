@@ -65,13 +65,12 @@ The plotting function to use when plotting community structure dendrograms via \
 Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
 }
-\item{edge_attr_combine}{
+\item{edge.attr.comb}{
 Specifies what to do with the edge attributes if the graph is modified.
 The default value is \code{list(weight="sum", name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The former dotted
-name \code{edge.attr.comb} still works but is soft-deprecated.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
-\item{graph_attr_combine}{
+\item{graph.attr.comb}{
 Specifies what to do with the graph attributes when graphs are
 combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
 or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
@@ -115,11 +114,10 @@ It is recommended, if the user works with larger graphs.
 Logical constant, whether igraph functions should talk more than minimal.
 E.g. if \code{TRUE} then some functions will use progress bars while computing. Defaults to \code{FALSE}.
 }
-\item{vertex_attr_combine}{
+\item{vertex.attr.comb}{
 Specifies what to do with the vertex attributes if the graph is modified.
 The default value is \code{list(name="concat", "ignore")}.
-See \code{\link[=attribute.combination]{attribute.combination()}} for details on this. The former dotted
-name \code{vertex.attr.comb} still works but is soft-deprecated.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
 }
 }

@@ -8,9 +8,9 @@
 \method{union}{igraph}(
   ...,
   byname = "auto",
-  graph_attr_combine = igraph_opt("graph_attr_combine"),
-  vertex_attr_combine = "rename",
-  edge_attr_combine = "rename"
+  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
 )
 }
 \arguments{
@@ -22,10 +22,10 @@ to perform the operation based on symbolic vertex names. If it is
 otherwise. A warning is generated if \code{auto} and some (but not all)
 graphs are named.}
 
-\item{graph_attr_combine, vertex_attr_combine, edge_attr_combine}{Specification for
-combining clashing graph, vertex and edge attributes. \code{vertex_attr_combine}
-and \code{edge_attr_combine} default to \code{"rename"}; \code{graph_attr_combine} defaults to
-the \code{graph_attr_combine} igraph option (\code{"rename"} unless changed via
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. \code{vertex.attr.comb}
+and \code{edge.attr.comb} default to \code{"rename"}; \code{graph.attr.comb} defaults to
+the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via
 \code{\link[=igraph_options]{igraph_options()}}). \code{"rename"} preserves the historical behaviour of
 appending \verb{_1}, \verb{_2}, ... suffixes. See \link{igraph-attribute-combination} for
 the available combiners.}
@@ -49,8 +49,8 @@ of the internal numeric vertex IDs.
 \code{union()} keeps the attributes of all graphs. All graph, vertex and
 edge attributes are copied to the result. By default, if an attribute is
 present in multiple graphs and would result in a name clash, that attribute
-is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass \code{graph_attr_combine},
-\code{vertex_attr_combine} or \code{edge_attr_combine} to combine clashing attributes
+is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass \code{graph.attr.comb},
+\code{vertex.attr.comb} or \code{edge.attr.comb} to combine clashing attributes
 instead, e.g. by summing or by taking the first non-\code{NA} value. See
 \link{igraph-attribute-combination} for the available combiners.
 
