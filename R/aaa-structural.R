@@ -166,7 +166,7 @@ to_directed_impl <- function(
 to_undirected_impl <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge_attr_comb = igraph_opt("edge_attr_combine")
+  edge_attr_comb = igraph_opt("edge.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)

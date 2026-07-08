@@ -35,7 +35,7 @@ connect_neighborhood_impl <- function(
 contract_vertices_impl <- function(
   graph,
   mapping,
-  vertex_attr_comb = igraph_opt("vertex_attr_combine")
+  vertex_attr_comb = igraph_opt("vertex.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -245,7 +245,7 @@ simplify_impl <- function(
   graph,
   remove_multiple = TRUE,
   remove_loops = TRUE,
-  edge_attr_comb = igraph_opt("edge_attr_combine")
+  edge_attr_comb = igraph_opt("edge.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)

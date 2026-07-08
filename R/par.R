@@ -61,9 +61,9 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
-  "graph_attr_combine" = "rename",
-  "vertex_attr_combine" = list(name = "concat", "ignore"),
-  "edge_attr_combine" = list(weight = "sum", name = "concat", "ignore"),
+  "graph.attr.comb" = "rename",
+  "vertex.attr.comb" = list(name = "concat", "ignore"),
+  "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
   "add.params" = TRUE,
   "add.vertex.names" = TRUE,
@@ -75,31 +75,6 @@ getIgraphOpt <- function(x, default = NULL) {
   "print.id" = TRUE,
   "print.style" = "cli"
 )
-
-# Option keys that were renamed to snake_case. Reading or setting an option by
-# its old dotted name still works, but maps to the canonical key and emits a
-# soft-deprecation.
-.igraph.pars.aliases <- c(
-  "vertex.attr.comb" = "vertex_attr_combine",
-  "edge.attr.comb" = "edge_attr_combine"
-)
-
-# Map any deprecated option names in `x` to their canonical keys, warning once
-# per deprecated name encountered.
-igraph_normalize_par_name <- function(x) {
-  for (i in seq_along(x)) {
-    new <- unname(.igraph.pars.aliases[x[i]])
-    if (!is.na(new)) {
-      lifecycle::deprecate_soft(
-        "3.0.0",
-        I(paste0("The igraph option `", x[i], "`")),
-        I(paste0("the `", new, "` option"))
-      )
-      x[i] <- new
-    }
-  }
-  x
-}
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
@@ -164,13 +139,12 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
 #'       See [plot_dendrogram()] for details.
 #'     }
-#'     \item{edge_attr_combine}{
+#'     \item{edge.attr.comb}{
 #'       Specifies what to do with the edge attributes if the graph is modified.
 #'       The default value is `list(weight="sum", name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this. The former dotted
-#'       name `edge.attr.comb` still works but is soft-deprecated.
+#'       See [attribute.combination()] for details on this.
 #'     }
-#'     \item{graph_attr_combine}{
+#'     \item{graph.attr.comb}{
 #'       Specifies what to do with the graph attributes when graphs are
 #'       combined, e.g. via [union()], [intersection()], [disjoint_union()]
 #'       or [compose()]. The default value is `"rename"`, which resolves any
@@ -214,11 +188,10 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'       Logical constant, whether igraph functions should talk more than minimal.
 #'       E.g. if `TRUE` then some functions will use progress bars while computing. Defaults to `FALSE`.
 #'     }
-#'     \item{vertex_attr_combine}{
+#'     \item{vertex.attr.comb}{
 #'       Specifies what to do with the vertex attributes if the graph is modified.
 #'       The default value is `list(name="concat", "ignore")`.
-#'       See [attribute.combination()] for details on this. The former dotted
-#'       name `vertex.attr.comb` still works but is soft-deprecated.
+#'       See [attribute.combination()] for details on this.
 #'     }
 #'   }
 #'
@@ -260,7 +233,7 @@ igraph_options <- function(...) {
 }
 
 igraph_i_options <- function(..., .in = parent.frame()) {
-  if (nargs() == 0) {
+  if (...length() == 0) {
     return(get_all_options())
   }
 
@@ -270,7 +243,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     arg <- temp[[1]]
 
     if (mode(arg) == "character") {
-      return(.igraph.pars[igraph_normalize_par_name(arg)])
+      return(.igraph.pars[arg])
     }
 
     if (mode(arg) != "list") {
@@ -289,8 +262,6 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   if (is.null(n)) {
     cli::cli_abort("options must be given by name.")
   }
-  names(temp) <- igraph_normalize_par_name(n)
-  n <- names(temp)
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])
@@ -326,7 +297,6 @@ get_all_options <- function() {
 #' @rdname igraph_options
 #' @export
 igraph_opt <- function(x, default = NULL) {
-  x <- igraph_normalize_par_name(x)
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
   } else {
