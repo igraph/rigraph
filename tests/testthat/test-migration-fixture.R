@@ -173,6 +173,54 @@ test_that("the generated block is in sync with the registry", {
   expect_identical(spliced$lines, lines)
 })
 
+test_that("normalise_migration() rejects head/recoverable prefix clashes", {
+  # Head args are matched by base R (with partial matching) before `...`, so a
+  # head arg in a prefix relationship with a recoverable name would silently
+  # capture it before the recovery layer runs. The generator must reject this.
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  # Head arg `type` is a prefix of the recoverable `typeof`.
+  expect_error(
+    gen_env$normalise_migration(
+      "bad_head_prefix",
+      list(
+        old = function(graph, typeof) {},
+        new = function(graph, type = "x", ..., typeof = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "prefix relationship"
+  )
+
+  # Recoverable `type` is a prefix of the head arg `typeof`.
+  expect_error(
+    gen_env$normalise_migration(
+      "bad_recover_prefix",
+      list(
+        old = function(graph, type) {},
+        new = function(graph, typeof = "x", ..., type = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "prefix relationship"
+  )
+
+  # Merely sharing a leading letter (`graph` vs `groups`) is allowed.
+  expect_no_error(
+    gen_env$normalise_migration(
+      "ok_shared_letter",
+      list(
+        old = function(graph, groups) {},
+        new = function(graph, ..., groups = NULL) {},
+        when = "3.0.0"
+      )
+    )
+  )
+})
+
 test_that("the BEGIN marker may carry a trailing note", {
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator))
