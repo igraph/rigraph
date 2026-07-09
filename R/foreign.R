@@ -810,10 +810,10 @@ write.graph.dot <- function(graph, file) {
 #'   there are a number of actual graphs in the database. This argument specifies
 #'   which one to read.
 #' @param base The base address of the database. See details below.
-#' @param compressed Logical constant, if TRUE than the file is expected to be
+#' @param compressed Logical, if TRUE than the file is expected to be
 #'   compressed by gzip. If `url` is `NULL` then a \sQuote{`.gz`}
 #'   suffix is added to the filename.
-#' @param directed Logical constant, whether to create a directed graph.
+#' @param directed Logical, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [read_graph()], [isomorphic()]

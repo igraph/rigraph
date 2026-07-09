@@ -32,7 +32,7 @@
 #' @aliases plot.graph
 #' @param x The graph to plot.
 #' @param axes Logical, whether to plot axes, defaults to FALSE.
-#' @param add Logical scalar, whether to add the plot to the current device, or
+#' @param add Logical, whether to add the plot to the current device, or
 #'   delete the device's current contents first.
 #' @param xlim The limits for the horizontal axis, it is unlikely that you want
 #'   to modify this.
@@ -229,7 +229,7 @@ plot.igraph <- function(
     # in two ways: (1) On the relative size of the axes, and (2) on the
     # relative size of vertex.size/vertex.size2
 
-    scalefactor <- parusr <- par("usr")
+    parusr <- par("usr")
     scalefactor <- (parusr[2] - parusr[1]) / (parusr[4] - parusr[3])
     if ("vertex.size2" %in% names(newdots)) {
       # If the user provided -vertex.size2-
@@ -568,9 +568,6 @@ plot.igraph <- function(
     # depending on the number of loops and the available angular space
     la_dyn <- numeric(length(loops.v))
     narrowing <- numeric(length(loops.v))
-
-    loop_table <- table(loops.v)
-    loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
 
     for (v in unique(loops.v)) {
       idx <- which(loops.v == v)
@@ -1588,7 +1585,6 @@ rglplot.igraph <- function(x, ...) {
   params <- i.parse.plot.params(graph, list(...))
   labels <- params("vertex", "label")
   label.color <- params("vertex", "label.color")
-  label.font <- params("vertex", "label.font")
   label.degree <- params("vertex", "label.degree")
   label.dist <- params("vertex", "label.dist")
   vertex.color <- params("vertex", "color")

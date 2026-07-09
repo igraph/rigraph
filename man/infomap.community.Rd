@@ -31,7 +31,7 @@ jumps to that vertex.}
 \item{nb.trials}{The number of attempts to partition the network (can be any
 integer value equal or larger than 1).}
 
-\item{modularity}{Logical scalar, whether to calculate the modularity score
+\item{modularity}{Logical, whether to calculate the modularity score
 of the detected community structure.}
 }
 \description{

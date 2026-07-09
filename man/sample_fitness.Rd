@@ -22,9 +22,9 @@ For directed graphs, this specifies the out-fitness of each vertex.}
 The generated graph will be directed.
 Default: \code{NULL}, the generated graph will be undirected.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+\item{loops}{Logical, whether to allow loop edges in the graph.}
 
-\item{multiple}{Logical scalar, whether to allow multiple edges in the
+\item{multiple}{Logical, whether to allow multiple edges in the
 graph.}
 }
 \value{

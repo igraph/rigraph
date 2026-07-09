@@ -345,7 +345,7 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @param target The ID of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
 #'   `NULL` (the default) then the `capacity` edge attribute is used.
-#' @param value.only Logical scalar, if `TRUE` only the minimum cut value
+#' @param value.only Logical, if `TRUE` only the minimum cut value
 #'   is returned, if `FALSE` the edges in the cut and a the two (or more)
 #'   partitions are also returned.
 #' @return For `min_cut()` a nuieric constant, the value of the minimum
@@ -482,7 +482,7 @@ min_cut <- function(
 #'   can be `NULL`, see details below.
 #' @param target The ID of the target vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param checks Logical constant. Whether to check that the graph is connected
+#' @param checks Logical. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
 #'   connected then the connectivity is obviously zero. Otherwise if the minimum
 #'   degree is one then the vertex connectivity is also one. It is a good idea to
@@ -589,7 +589,7 @@ vertex_connectivity <- function(
 #'   can be `NULL`, see details below.
 #' @param target The ID of the target vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
-#' @param checks Logical constant. Whether to check that the graph is connected
+#' @param checks Logical. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
 #'   connected then the connectivity is obviously zero. Otherwise if the minimum
 #'   degree is one then the edge connectivity is also one. It is a good idea to
@@ -1036,7 +1036,7 @@ max_flow <- function(graph, source, target, capacity = NULL) {
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
-#' @return A logical scalar, whether the supplied vertex set is a (minimal)
+#' @return A Logical, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
 #'   lists all vertex separator of minimum size.
 #' @family flow
@@ -1069,7 +1069,7 @@ is_separator <- function(graph, candidate) {
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex IDs of the candidate
 #'   separator.
-#' @return A logical scalar, whether the supplied vertex set is a (minimal)
+#' @return A Logical, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
 #' @examples
 #' # The graph from the Moody-White paper

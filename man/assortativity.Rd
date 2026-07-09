@@ -36,7 +36,7 @@ This
 argument is ignored (with a warning) if it is not \code{NULL} and undirected
 assortativity coefficient is being calculated.}
 
-\item{directed}{Logical scalar, whether to consider edge directions for
+\item{directed}{Logical, whether to consider edge directions for
 directed graphs.
 This argument is ignored for undirected graphs.
 Supply
@@ -44,7 +44,7 @@ Supply
 measure for directed graphs and the undirected version for undirected
 graphs.}
 
-\item{normalized}{Boolean, whether to compute the normalized assortativity.
+\item{normalized}{Logical, whether to compute the normalized assortativity.
 The non-normalized nominal assortativity is identical to modularity.
 The non-normalized value-based assortativity is simply the covariance of the
 values at the two ends of edges.}

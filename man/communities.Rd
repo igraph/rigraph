@@ -71,7 +71,7 @@ them.}
 \item{hang}{Numeric scalar indicating how the height of leaves should be
 computed from the heights of their parents; see \code{\link[=plot.hclust]{plot.hclust()}}.}
 
-\item{use.modularity}{Logical scalar, whether to use the modularity values
+\item{use.modularity}{Logical, whether to use the modularity values
 to define the height of the branches.}
 
 \item{no}{Integer scalar, the desired number of communities. If too low or
@@ -128,7 +128,7 @@ the graph that was the input of the community detection.
 
 \code{crossing()} returns a logical vector.
 
-\code{is_hierarchical()} returns a logical scalar.
+\code{is_hierarchical()} returns a Logical.
 
 \code{merges()} returns a two-column numeric matrix.
 

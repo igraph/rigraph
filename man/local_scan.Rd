@@ -34,7 +34,7 @@ default value), \code{ecount()} is used for unweighted graphs (if
 weights is used for weighted graphs (if \code{weighted=TRUE}). This
 argument is ignored if \code{k} is zero.}
 
-\item{weighted}{Logical scalar, TRUE if the edge weights should be used
+\item{weighted}{Logical, TRUE if the edge weights should be used
 for computation of the scan statistic. If TRUE, the graph should be
 weighted.  Note that this argument is ignored if \code{FUN} is not
 \code{NULL}, \code{"ecount"} and \code{"sumweights"}.}

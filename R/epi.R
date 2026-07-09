@@ -105,7 +105,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #'   function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
 #'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
-#' @param median Logical scalar, whether to plot the (binned) median.
+#' @param median Logical, whether to plot the (binned) median.
 #' @param quantiles A vector of (binned) quantiles to plot.
 #' @param color Color of the individual simulation curves.
 #' @param median_color Color of the median curve.
@@ -175,7 +175,6 @@ plot.sir <- function(
   }
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
-  ns <- length(sir)
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
   ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
 

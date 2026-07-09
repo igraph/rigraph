@@ -32,6 +32,7 @@ test_that("dfs() deprecated arguments", {
 })
 
 test_that("degree() works", {
+  igraph_local_seed(42)
   gnp1 <- sample_gnp(100, 1 / 100)
   gnp1_deg <- degree(gnp1)
   el <- as_edgelist(gnp1)
@@ -73,6 +74,7 @@ test_that("max_degree() works", {
 })
 
 test_that("mean_degree() works", {
+  igraph_local_seed(42)
   # Undirected graph: formula is 2 * edges / vertices
   g_undirected <- make_ring(10)
   expect_equal(mean_degree(g_undirected), 2)
@@ -267,6 +269,7 @@ test_that("bfs() does not pad order", {
 })
 
 test_that("diameter() works -- undirected", {
+  igraph_local_seed(42)
   g <- largest_component(sample_gnp(30, 3 / 30))
   sp <- distances(g)
   expect_equal(max(sp), diameter(g))
@@ -278,6 +281,7 @@ test_that("diameter() works -- undirected", {
 })
 
 test_that("diameter() works -- directed", {
+  igraph_local_seed(42)
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
@@ -285,6 +289,7 @@ test_that("diameter() works -- directed", {
 })
 
 test_that("diameter() works -- weighted", {
+  igraph_local_seed(42)
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
   sp <- distances(g, mode = "out")
@@ -308,6 +313,7 @@ test_that("diameter() correctly handles disconnected graphs", {
 })
 
 test_that("get_diameter() works", {
+  igraph_local_seed(42)
   g <- make_ring(10)
   E(g)$weight <- sample(seq_len(ecount(g)))
   d <- diameter(g)
@@ -494,7 +500,7 @@ test_that("k_shortest_paths() works with weights", {
 })
 
 test_that("transitivity() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(100, p = 10 / 100)
 
   t1 <- transitivity(g, type = "global")
@@ -522,7 +528,7 @@ test_that("transitivity() works", {
 })
 
 test_that("no integer overflow", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_star(80000, mode = "undirected") + edges(sample(2:1000), 100)
   mtr <- min(transitivity(g, type = "local"), na.rm = TRUE)
   expect_true(mtr > 0)
@@ -579,7 +585,7 @@ test_that("constraint() works", {
   c2 <- constraint.orig(karate)
   expect_equal(c1, c2)
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
   wc2 <- constraint.orig(karate, weights = "weight")
@@ -587,6 +593,7 @@ test_that("constraint() works", {
 })
 
 test_that("ego() works", {
+  igraph_local_seed(42)
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
@@ -848,6 +855,7 @@ test_that("laplacian_matrix() works", {
 })
 
 test_that("mean_distance works", {
+  igraph_local_seed(42)
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -889,6 +897,7 @@ test_that("mean_distance works correctly for disconnected graphs", {
 })
 
 test_that("mean_distance can provide details", {
+  igraph_local_seed(42)
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -996,6 +1005,7 @@ test_that("any_loop(), which_loop(), count_loops() works", {
 })
 
 test_that("edge_density works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 4 / 50)
   gd <- edge_density(g)
   gd2 <- ecount(g) / vcount(g) / (vcount(g) - 1) * 2
@@ -1010,7 +1020,7 @@ test_that("edge_density works", {
 })
 
 test_that("knn works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   ## Some trivial ones
   g <- make_ring(10)

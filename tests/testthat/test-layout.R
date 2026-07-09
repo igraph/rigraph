@@ -1,13 +1,13 @@
 test_that("layout_with_fr() works", {
   skip_on_os("solaris")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g <- make_ring(10)
     l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
   })
   expect_equal(sum(l), 4.57228, tolerance = 0.1)
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g <- make_star(30)
     l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
   })
@@ -31,18 +31,21 @@ test_that("layout_with_fr() deprecated argument", {
 })
 
 test_that("layout_nicely() works with proper weights and small trees", {
+  igraph_local_seed(42)
   g <- make_star(12, mode = "out")
   E(g)$weight <- 5:15
   expect_warning(layout_nicely(g), NA)
 })
 
 test_that("layout_nicely() works with negative weights", {
+  igraph_local_seed(42)
   g <- make_graph("petersen")
   E(g)$weight <- -5:9
   expect_warning(layout_nicely(g), regexp = "ignoring all weights")
 })
 
 test_that("layout_nicely() does not recurse into itself", {
+  igraph_local_seed(42)
   g <- make_graph("petersen")
   g$layout <- layout_nicely
   expect_silent(layout_nicely(g)) # should not recurse infinitely
@@ -101,6 +104,7 @@ test_that("layout algorithms work for null graphs", {
 })
 
 test_that("layout algorithms work for singleton graphs", {
+  igraph_local_seed(42)
   g <- make_empty_graph(1)
 
   check_matrix <- function(mat, nrow = 1, ncol = 2) {
@@ -156,7 +160,7 @@ test_that("layout algorithms work for singleton graphs", {
 
 test_that("Kamada-Kawai layout generator works", {
   skip_on_cran()
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   center_layout <- function(layout) {
     t(t(layout) - colMeans(layout))
@@ -232,7 +236,7 @@ test_that("layout_with_sugiyama() does not demote matrices to vectors in res$lay
 })
 
 test_that("merge_coords() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- list(make_ring(10), make_ring(5))
   l <- lapply(g, layout_with_mds)
@@ -273,7 +277,7 @@ test_that("`layout_with_mds()` works", {
 })
 
 test_that("`layout_with_mds()` stress test, graph with multiple components", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_equal(ncol(layout_with_mds(g)), 2)
 
@@ -377,6 +381,7 @@ test_that("layout normalization handles all-NaN coordinates correctly", {
 })
 
 test_that("generic modifier mechanism works with existing modifiers", {
+  igraph_local_seed(42)
   # Test that component_wise modifier still works
   g <- make_ring(10) + make_ring(5)
   l1 <- layout_(g, in_circle(), component_wise())

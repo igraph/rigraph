@@ -53,7 +53,7 @@ get.stochastic <- function(
 #' @param graph The input graph. Must be of class `igraph`.
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
-#' @param sparse Logical scalar, whether to return a sparse matrix. The
+#' @param sparse Logical, whether to return a sparse matrix. The
 #'   `Matrix` package is needed for sparse matrices.
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
@@ -84,14 +84,14 @@ stochastic_matrix <- function(
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {
     cli::cli_abort(
-      "{.arg column.wise} must be a logical scalar, not {.obj_type_friendly {column.wise}}."
+      "{.arg column.wise} must be a Logical, not {.obj_type_friendly {column.wise}}."
     )
   }
 
   sparse <- as.logical(sparse)
   if (length(sparse) != 1) {
     cli::cli_abort(
-      "{.arg sparse} must be a logical scalar, not {.obj_type_friendly {sparse}}."
+      "{.arg sparse} must be a Logical, not {.obj_type_friendly {sparse}}."
     )
   }
 

@@ -388,7 +388,7 @@ betweenness.estimate <- estimate_betweenness
 #'   betweenness. If the graph has a `weight` edge attribute, then this is
 #'   used by default. Weights are used to calculate weighted shortest paths,
 #'   so they are interpreted as distances.
-#' @param normalized Logical scalar, whether to normalize the betweenness
+#' @param normalized Logical, whether to normalize the betweenness
 #'   scores. If `TRUE`, then the results are normalized by the number of ordered
 #'   or unordered vertex pairs in directed and undirected graphs, respectively.
 #'   In an undirected graph,
@@ -540,7 +540,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'   *to* a vertex, \dQuote{out} measures paths *from* a vertex,
 #'   *all* uses undirected paths. This argument is ignored for undirected
 #'   graphs.
-#' @param normalized Logical scalar, whether to calculate the normalized
+#' @param normalized Logical, whether to calculate the normalized
 #'   closeness, i.e. the inverse average distance to all reachable vertices.
 #'   The non-normalized closeness is the inverse of the sum of distances to
 #'   all reachable vertices.
@@ -854,7 +854,7 @@ arpack_defaults <- function() {
 #'   \dQuote{input matrix}. (The input matrix is never given explicitly.) The
 #'   second argument is `extra`.
 #' @param extra Extra argument to supply to `func`.
-#' @param sym Logical scalar, whether the input matrix is symmetric. Always
+#' @param sym Logical, whether the input matrix is symmetric. Always
 #'   supply `TRUE` here if it is, since it can speed up the computation.
 #' @param options Options to ARPACK, a named list to overwrite some of the
 #'   default option values. See details below.
@@ -1041,7 +1041,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' effectively means that the measure can only be calculated for small graphs.
 #'
 #' @param graph The input graph. It will be treated as undirected.
-#' @param diag Boolean scalar, whether to include the diagonal of the adjacency
+#' @param diag Logical, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
@@ -1239,7 +1239,7 @@ eigen_defaults <- function() {
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
 #' @param graph Graph to be analyzed.
-#' @param directed Logical scalar, whether to consider direction of the edges
+#' @param directed Logical, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Normalization will always take
 #' place.
@@ -1441,7 +1441,7 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
+#' @param scale Logical, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
 #'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -1539,7 +1539,7 @@ authority_score <- function(
 #' @title Kleinberg's hub centrality scores.
 #' @rdname hub_score
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
+#' @param scale Logical, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
 #'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -1707,7 +1707,7 @@ page_rank <- function(
 #'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
 #'   \dQuote{all} ignores edge directions. This argument is ignored for undirected
 #'   graphs.
-#' @param normalized Logical scalar, whether to calculate the normalized
+#' @param normalized Logical, whether to calculate the normalized
 #'   harmonic centrality. If true, the result is the mean inverse path length to
 #'   other vertices, i.e. it is normalized by the number of vertices minus one.
 #'   If false, the result is the sum of inverse path lengths to other vertices.
@@ -1874,7 +1874,7 @@ bonpow.sparse <- function(
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
-#' @param loops boolean indicating whether or not the diagonal should be
+#' @param loops Logical indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
 #'   loops.  `loops` is `FALSE` by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality
@@ -1883,7 +1883,7 @@ bonpow.sparse <- function(
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
 #'   [solve()])
-#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
 #' @inheritParams as_adjacency_matrix
@@ -2069,7 +2069,7 @@ alpha.centrality.sparse <- function(
 #' @inheritParams as_adjacency_matrix
 #' @param tol Tolerance for near-singularities during matrix inversion, see
 #'   [solve()].
-#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
 #' @return A numeric vector contaning the centrality scores for the selected

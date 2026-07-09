@@ -24,7 +24,7 @@ plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
 \item{\dots}{Additional arguments to supply to the dendrogram plotting
 function.}
 
-\item{use.modularity}{Logical scalar, whether to use the modularity values
+\item{use.modularity}{Logical, whether to use the modularity values
 to define the height of the branches.}
 
 \item{palette}{The color palette to use for colored plots.}

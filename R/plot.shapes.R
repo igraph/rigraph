@@ -1241,7 +1241,6 @@ mypie <- function(
     }
     p
   }
-  vertex.color <- getparam("color")
 
   vertex.frame.color <- rep(
     getparam("frame.color"),

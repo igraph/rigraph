@@ -42,9 +42,9 @@ be present together with any of the \code{i} and \code{j} arguments
 and if it is present, then the \code{from} argument must be present as
 well.}
 
-\item{sparse}{Logical scalar, whether to return sparse matrices.}
+\item{sparse}{Logical, whether to return sparse matrices.}
 
-\item{edges}{Logical scalar, whether to return edge IDs.}
+\item{edges}{Logical, whether to return edge IDs.}
 
 \item{drop}{Ignored.}
 

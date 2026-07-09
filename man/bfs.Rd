@@ -40,7 +40,7 @@ ignores edge directions completely. \sQuote{total} is a synonym for
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{unreachable}{Logical scalar, whether the search should visit the
+\item{unreachable}{Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 \code{TRUE}, then additional searches are performed until all vertices are
 visited.}
@@ -49,19 +49,19 @@ visited.}
 (IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
-\item{order}{Logical scalar, whether to return the ordering of the vertices.}
+\item{order}{Logical, whether to return the ordering of the vertices.}
 
-\item{rank}{Logical scalar, whether to return the rank of the vertices.}
+\item{rank}{Logical, whether to return the rank of the vertices.}
 
-\item{parent}{Logical scalar, whether to return the parent of the vertices.}
+\item{parent}{Logical, whether to return the parent of the vertices.}
 
-\item{pred}{Logical scalar, whether to return the predecessors of the
+\item{pred}{Logical, whether to return the predecessors of the
 vertices.}
 
-\item{succ}{Logical scalar, whether to return the successors of the
+\item{succ}{Logical, whether to return the successors of the
 vertices.}
 
-\item{dist}{Logical scalar, whether to return the distance from the root of
+\item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
 \item{callback}{Callback function. This is called whenever a vertex is visited.

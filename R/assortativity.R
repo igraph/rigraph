@@ -130,14 +130,14 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'   This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
-#' @param directed Logical scalar, whether to consider edge directions for
+#' @param directed Logical, whether to consider edge directions for
 #'   directed graphs.
 #'   This argument is ignored for undirected graphs.
 #'   Supply
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
-#' @param normalized Boolean, whether to compute the normalized assortativity.
+#' @param normalized Logical, whether to compute the normalized assortativity.
 #' The non-normalized nominal assortativity is identical to modularity.
 #' The non-normalized value-based assortativity is simply the covariance of the
 #' values at the two ends of edges.

@@ -54,7 +54,7 @@ for directed graphs.
 The default (i.e. type \code{default}) is to use \code{D-A} for undirected
 graphs and \code{OAP} for directed graphs.}
 
-\item{scaled}{Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
+\item{scaled}{Logical, if \code{FALSE}, then \eqn{U} and \eqn{V} are
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{options}{A named list containing the parameters for the SVD

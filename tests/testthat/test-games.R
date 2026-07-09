@@ -1,5 +1,5 @@
 test_that("sample_degseq() works -- 'configuration' generator", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   degrees <- rep(2, 100)
   undirected_graph <- sample_degseq(degrees, method = "configuration")
   expect_equal(degree(undirected_graph), degrees)
@@ -10,7 +10,7 @@ test_that("sample_degseq() works -- 'configuration' generator", {
 })
 
 test_that("sample_degseq() works -- sample_gnp()", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   erdos_renyi <- sample_gnp(1000, 1 / 1000)
   new_graph <- sample_degseq(degree(erdos_renyi), method = "configuration")
   expect_equal(degree(new_graph), degree(erdos_renyi))
@@ -32,7 +32,7 @@ test_that("sample_degseq() works -- sample_gnp()", {
 })
 
 test_that("sample_degseq() works -- 'configuration' generator, connected", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
   simple_graph <- sample_degseq(
@@ -48,7 +48,7 @@ test_that("sample_degseq() works -- 'configuration' generator, connected", {
 })
 
 test_that("sample_degseq() works -- vl generator", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   degrees <- rep(2, 100)
   vl_graph <- sample_degseq(degrees, method = "vl")
   expect_equal(degree(vl_graph), degrees)
@@ -56,7 +56,7 @@ test_that("sample_degseq() works -- vl generator", {
 })
 
 test_that("sample_degseq() works -- exponential degree ok", {
-  withr::local_seed(1)
+  igraph_local_seed(1)
   exponential_degrees <- sample(
     1:100,
     100,
@@ -68,7 +68,7 @@ test_that("sample_degseq() works -- exponential degree ok", {
 })
 
 test_that("sample_degseq() works -- exponential degree error", {
-  withr::local_seed(11)
+  igraph_local_seed(11)
   exponential_degrees <- sample(
     1:100,
     100,
@@ -81,14 +81,14 @@ test_that("sample_degseq() works -- exponential degree error", {
 })
 
 test_that("sample_degseq() works -- Power-law degree ok", {
-  withr::local_seed(3)
+  igraph_local_seed(3)
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
   powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
   expect_equal(degree(powerlaw_vl_graph), powerlaw_degrees)
 })
 
 test_that("sample_degseq() works -- Power-law degree error", {
-  withr::local_seed(7)
+  igraph_local_seed(7)
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 
   expect_snapshot_igraph_error({
@@ -97,7 +97,7 @@ test_that("sample_degseq() works -- Power-law degree error", {
 })
 
 test_that("sample_degseq() works -- fast.heur.simple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(1000, 1 / 1000)
 
   simple_nm_graph <- sample_degseq(
@@ -110,7 +110,7 @@ test_that("sample_degseq() works -- fast.heur.simple", {
 })
 
 test_that("sample_degseq() works -- configuration.simple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(1000, 1 / 1000)
   simple_nmu_graph <- sample_degseq(
     degree(g, mode = "out"),
@@ -122,7 +122,7 @@ test_that("sample_degseq() works -- configuration.simple", {
 })
 
 test_that("sample_degseq() works -- edge.switching.simple directed", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "out"),
@@ -137,7 +137,7 @@ test_that("sample_degseq() works -- edge.switching.simple directed", {
 })
 
 test_that("sample_degseq() works -- edge.switching.simple undirected", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- sample_gnp(1000, 1 / 1000, directed = FALSE)
   simple_switch_graph <- sample_degseq(
     degree(g, mode = "all"),
@@ -150,7 +150,7 @@ test_that("sample_degseq() works -- edge.switching.simple undirected", {
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   degs <- rep(4, 20)
   g1 <- sample_(degseq(degs))
   g2 <- sample_(degseq(degs))
@@ -181,7 +181,7 @@ test_that("sample_degseq works() -- old method names", {
 })
 
 test_that("sample_chung_lu works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   chung_lu_small <- sample_chung_lu(c(3, 3, 2, 2, 1, 1))
   expect_false(any_multiple(chung_lu_small))
 
@@ -208,7 +208,7 @@ test_that("sample_chung_lu works", {
 })
 
 test_that("sample_forestfire() works -- sparse", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
   N <- 5000
   xv <- log(2:N)
 
@@ -219,7 +219,7 @@ test_that("sample_forestfire() works -- sparse", {
 })
 
 test_that("sample_forestfire() works -- densifying", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   N <- 5000
   xv <- log(2:N)
@@ -231,7 +231,7 @@ test_that("sample_forestfire() works -- densifying", {
 })
 
 test_that("sample_forestfire() works -- dense", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   N <- 5000
   xv <- log(2:N)
@@ -243,7 +243,7 @@ test_that("sample_forestfire() works -- dense", {
 })
 
 test_that("Generating stochastic block models works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   pm <- matrix(1, nrow = 2, ncol = 2)
   bs <- c(4, 6)
   sbm_small <- sample_sbm(
@@ -296,7 +296,7 @@ test_that("Generating stochastic block models works", {
 })
 
 test_that("sample_smallworld works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   for (i in 1:50) {
     p <- runif(1)
     d <- sample(1:3, 1)
@@ -307,7 +307,7 @@ test_that("sample_smallworld works", {
 })
 
 test_that("sample_pa() works", {
-  withr::local_seed(20240209)
+  igraph_local_seed(20240209)
 
   g_pa <- sample_pa(100, m = 2)
   expect_ecount(g_pa, 197)
@@ -332,7 +332,7 @@ test_that("sample_pa() works", {
 })
 
 test_that("sample_pa can start from a graph", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   g_pa1 <- sample_pa(
     10,
@@ -394,7 +394,7 @@ test_that("sample_pa can start from a graph", {
 })
 
 test_that("sample_bipartite works -- undirected gnp", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g_rand_bip <- sample_bipartite_gnp(10, 5, p = 0.1)
   expect_equal(g_rand_bip$name, "Bipartite Gnp random graph")
@@ -405,7 +405,7 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
@@ -425,7 +425,7 @@ test_that("sample_bipartite works -- directed gnp", {
 })
 
 test_that("sample_bipartite works -- undirected gnm", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_rand_bip_gnm <- sample_bipartite_gnm(10, 5, m = 8)
   expect_vcount(g_rand_bip_gnm, 15)
   expect_ecount(g_rand_bip_gnm, 8)
@@ -433,7 +433,7 @@ test_that("sample_bipartite works -- undirected gnm", {
   expect_false(is_directed(g_rand_bip_gnm))
 })
 test_that("sample_bipartite works -- directed gnm", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_rand_bip_gnm_dir <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE)
   expect_vcount(g_rand_bip_gnm_dir, 15)
   expect_ecount(g_rand_bip_gnm_dir, 8)
@@ -475,7 +475,7 @@ test_that("sample_bipartite works -- directed gnm", {
 
 
 test_that("sample_correlated_gnp works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   gnp_graph <- sample_gnp(10, 0.1)
   cor_gnp_graph_1 <- sample_correlated_gnp(
@@ -505,7 +505,7 @@ test_that("sample_correlated_gnp works", {
 
 
 test_that("sample_correlated_gnp works even for non-ER graphs", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   grg_graph <- sample_grg(100, 0.2)
   cor_gnp_graph_1 <- sample_correlated_gnp(grg_graph, corr = 1)
@@ -517,7 +517,7 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 })
 
 test_that("sample_correlated_gnp_pair works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   cor_gnp_pair <- sample_correlated_gnp_pair(
     10,
@@ -531,7 +531,7 @@ test_that("sample_correlated_gnp_pair works", {
 ## Some corner cases
 
 test_that("sample_correlated_gnp corner cases work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   is_full <- function(g) {
     g_full <- make_full_graph(vcount(g), directed = is_directed(g))
@@ -572,7 +572,7 @@ test_that("sample_correlated_gnp corner cases work", {
 })
 
 test_that("permutation works for sample_correlated_gnp", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   gnp_graph <- sample_gnp(10, 0.3)
   perm <- sample(vcount(gnp_graph))
@@ -597,7 +597,7 @@ test_that("permutation works for sample_correlated_gnp", {
 })
 
 test_that("HSBM works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   C <- matrix(c(
     1, 1 / 2, 0,
@@ -616,7 +616,7 @@ test_that("HSBM works", {
   expect_vcount(g_hsbm1, 100)
   expect_false(is_directed(g_hsbm1))
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g_hsbm2 <- sample_hierarchical_sbm(
     100,
@@ -629,7 +629,7 @@ test_that("HSBM works", {
   expect_vcount(g_hsbm2, 100)
   expect_true(is_simple(g_hsbm2))
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g_hsbm3 <- sample_hierarchical_sbm(
     100,
@@ -642,7 +642,7 @@ test_that("HSBM works", {
   expect_vcount(g_hsbm3, 100)
   expect_true(is_simple(g_hsbm3))
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g_hsbm4 <- sample_hierarchical_sbm(
     100,
@@ -673,7 +673,7 @@ test_that("HSBM with list arguments works", {
   vertices_per_block <- 10
   rho <- c(3, 3, 4) / 10
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_hsbm1 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
@@ -682,7 +682,7 @@ test_that("HSBM with list arguments works", {
     p = 0
   )
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_hsbm2 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     rep(vertices_per_block, blocks),
@@ -692,7 +692,7 @@ test_that("HSBM with list arguments works", {
   )
   expect_equal(g_hsbm1[], g_hsbm2[])
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_hsbm3 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
@@ -702,7 +702,7 @@ test_that("HSBM with list arguments works", {
   )
   expect_equal(g_hsbm1[], g_hsbm3[])
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_hsbm4 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
@@ -745,7 +745,7 @@ test_that("HSBM with list arguments works", {
   )
   expect_true(is_simple(g_hsbm5))
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_hsbm6 <- sample_hierarchical_sbm(
     21,
     m = c(3, 10, 5, 3),
@@ -783,7 +783,7 @@ test_that("HSBM with list arguments works", {
 })
 
 test_that("Dot product rng works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   vecs <- cbind(
     c(0, 1, 1, 1, 0) / 3,
     c(0, 1, 1, 0, 1) / 3,
@@ -811,7 +811,7 @@ test_that("Dot product rng works", {
 })
 
 test_that("sample_dot_product generates edges with correct probabilities", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   latent_features <- cbind(
     c(0, 1, 1, 1, 0) / 3,
     c(0, 1, 1, 0, 1) / 3,
@@ -835,7 +835,7 @@ test_that("sample_dot_product generates edges with correct probabilities", {
 })
 
 test_that("Dot product rng gives warnings", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   vecs <- cbind(c(1, 1, 1) / 3, -c(1, 1, 1) / 3)
   expect_warning(
     g <- sample_dot_product(vecs),
