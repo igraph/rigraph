@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Calculate Cohesive Blocks</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/cohesive.blocks.R" class="external-link"><code>R/cohesive.blocks.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/cohesive.blocks.R" class="external-link"><code>R/cohesive.blocks.R</code></a></small>
       <div class="d-none name"><code>cohesive_blocks.Rd</code></div>
     </div>
 
@@ -179,7 +179,7 @@ See details below.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>cohesive_blocks()</code> returns a <code>cohesiveBlocks</code> object.</p>
-<p><code>blocks()</code> returns a list of numeric vectors, containing vertex ids.</p>
+<p><code>blocks()</code> returns a list of numeric vectors, containing vertex IDs.</p>
 <p><code>graphs_from_cohesive_blocks()</code> returns a list of igraph graphs, corresponding to the
 cohesive blocks.</p>
 <p><code><a href="vertex_connectivity.html">cohesion()</a></code> returns a numeric vector, the cohesion of each block.</p>
@@ -215,7 +215,7 @@ accessed directly, but through the functions listed here.</p>
 it gives the number of blocks.</p>
 <p>The function <code>blocks()</code> returns the actual blocks stored in the
 <code>cohesiveBlocks</code> object. They are returned in a list of numeric
-vectors, each containing vertex ids.</p>
+vectors, each containing vertex IDs.</p>
 <p>The function <code>graphs_from_cohesive_blocks()</code> is similar, but returns the blocks as
 (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 attributes are kept in the subgraph.</p>
@@ -223,7 +223,7 @@ attributes are kept in the subgraph.</p>
 different blocks. The order of the blocks is the same as for the
 <code>blocks()</code> and <code>graphs_from_cohesive_blocks()</code> functions.</p>
 <p>The block hierarchy can be queried using the <code>hierarchy()</code> function. It
-returns an igraph graph, its vertex ids are ordered according the order of
+returns an igraph graph, its vertex IDs are ordered according the order of
 the blocks in the <code>blocks()</code> and <code>graphs_from_cohesive_blocks()</code>, <code><a href="vertex_connectivity.html">cohesion()</a></code>,
 etc. functions.</p>
 <p><code>parent()</code> gives the parent vertex of each block, in the block hierarchy,
@@ -260,7 +260,7 @@ B-1 c 1, n 23
 blocks. The first block always corresponds to the whole graph, even if its
 cohesion is zero. Then cohesion of the block and the number of vertices in
 the block are shown. The last part is only printed if the display is wide
-enough and shows the vertices in the blocks, ordered by vertex ids.
+enough and shows the vertices in the blocks, ordered by vertex IDs.
 ‘o’ means that the vertex is included, a dot means that it is not,
 and the vertices are shown in groups of ten.</p>
 <p>The generic function <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> plots the graph, showing one or more
@@ -312,23 +312,23 @@ wrote the first version in R.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    '- B-5   c 3, n  4   ......o.oo o......... ... </span>
 <span class="r-in"><span><span class="fu">blocks</span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 23/23 vertices, named, from fbeebb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 23/23 · named · from ccd8beb ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 14/23 vertices, named, from fbeebb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 14/23 · named · from ccd8beb ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/23 vertices, named, from fbeebb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/23 · named · from ccd8beb ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 7  8  11 14 9  10 12 13 16 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/23 vertices, named, from fbeebb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/23 · named · from ccd8beb ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/23 vertices, named, from fbeebb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/23 · named · from ccd8beb ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  8  11 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="vertex_connectivity.html">cohesion</a></span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>
@@ -386,7 +386,7 @@ wrote the first version in R.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

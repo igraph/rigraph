@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,16 +45,901 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.3.3" id="igraph-233">igraph 2.3.3<a class="anchor" aria-label="anchor" href="#igraph-233"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.3.2.9016" id="igraph-2329016">igraph 2.3.2.9016<a class="anchor" aria-label="anchor" href="#igraph-2329016"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-2-3-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-3"></a></h3>
-<ul><li>Compatibility fix for withr update (<a href="https://github.com/igraph/rigraph/issues/2705" class="external-link">#2705</a>).</li>
+<h3 id="chore-2-3-2-9016">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9016"></a></h3>
+<ul><li>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2718" class="external-link">#2718</a>).</li>
 </ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9015" id="igraph-2329015">igraph 2.3.2.9015<a class="anchor" aria-label="anchor" href="#igraph-2329015"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9015">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9015"></a></h3>
+<ul><li>Fix test issues with new withr version (<a href="https://github.com/igraph/rigraph/issues/2701" class="external-link">#2701</a>, <a href="https://github.com/igraph/rigraph/issues/2705" class="external-link">#2705</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-2-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9015"></a></h3>
+<ul><li><p>Separate and annotate top-level vs helper functions in <code>rinterface_extra.c</code> (<a href="https://github.com/igraph/rigraph/issues/2105" class="external-link">#2105</a>, <a href="https://github.com/igraph/rigraph/issues/2708" class="external-link">#2708</a>).</p></li>
+<li><p>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2702" class="external-link">#2702</a>).</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9014" id="igraph-2329014">igraph 2.3.2.9014<a class="anchor" aria-label="anchor" href="#igraph-2329014"></a></h2>
+<div class="section level3">
+<h3 id="features-2-3-2-9014">Features<a class="anchor" aria-label="anchor" href="#features-2-3-2-9014"></a></h3>
+<ul><li>Retire <code>attr</code> in favor of <code>weights</code> for adjacency matrix functions (<a href="https://github.com/igraph/rigraph/issues/906" class="external-link">#906</a>, <a href="https://github.com/igraph/rigraph/issues/1137" class="external-link">#1137</a>, <a href="https://github.com/igraph/rigraph/issues/2677" class="external-link">#2677</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9013" id="igraph-2329013">igraph 2.3.2.9013<a class="anchor" aria-label="anchor" href="#igraph-2329013"></a></h2>
+<div class="section level3">
+<h3 id="features-2-3-2-9013">Features<a class="anchor" aria-label="anchor" href="#features-2-3-2-9013"></a></h3>
+<ul><li><p>Modern cli-styled print output (<a href="https://github.com/igraph/rigraph/issues/1959" class="external-link">#1959</a>, <a href="https://github.com/igraph/rigraph/issues/2682" class="external-link">#2682</a>).</p></li>
+<li><p>Added simple check to <code><a href="../reference/graph_from_literal.html">graph_from_literal()</a></code> (<a href="https://github.com/igraph/rigraph/issues/824" class="external-link">#824</a>, <a href="https://github.com/igraph/rigraph/issues/1981" class="external-link">#1981</a>).</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9012" id="igraph-2329012">igraph 2.3.2.9012<a class="anchor" aria-label="anchor" href="#igraph-2329012"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9012">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9012"></a></h3>
+<ul><li><p>BFS reports all requested root vertices instead of only the first (<a href="https://github.com/igraph/rigraph/issues/1639" class="external-link">#1639</a>, <a href="https://github.com/igraph/rigraph/issues/2693" class="external-link">#2693</a>).</p></li>
+<li><p>Resolve roxygen2 warnings (<a href="https://github.com/igraph/rigraph/issues/2641" class="external-link">#2641</a>, <a href="https://github.com/igraph/rigraph/issues/2692" class="external-link">#2692</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-2-9012">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-2-9012"></a></h3>
+<ul><li>Use “ID”/“IDs” consistently in documentation prose (<a href="https://github.com/igraph/rigraph/issues/1683" class="external-link">#1683</a>, <a href="https://github.com/igraph/rigraph/issues/2694" class="external-link">#2694</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-3-2-9012">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-3-2-9012"></a></h3>
+<ul><li>Fix: do not wrap roxygenize in try() (<a href="https://github.com/igraph/rigraph/issues/2679" class="external-link">#2679</a>) (<a href="https://github.com/igraph/rigraph/issues/2690" class="external-link">#2690</a>) (<a href="https://github.com/igraph/rigraph/issues/2679" class="external-link">#2679</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9011" id="igraph-2329011">igraph 2.3.2.9011<a class="anchor" aria-label="anchor" href="#igraph-2329011"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9011">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9011"></a></h3>
+<ul><li><p>Touchstone empty results table for branches with a slash (<a href="https://github.com/igraph/rigraph/issues/2689" class="external-link">#2689</a>).</p></li>
+<li><p>Harden air support and broaden migration fixture to the full arg-matching matrix (<a href="https://github.com/igraph/rigraph/issues/2686" class="external-link">#2686</a>).</p></li>
+<li><p>Repair touchstone benchmark CI (<a href="https://github.com/igraph/rigraph/issues/2688" class="external-link">#2688</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-3-2-9011">Features<a class="anchor" aria-label="anchor" href="#features-2-3-2-9011"></a></h3>
+<ul><li>Add touchstone benchmarks (<a href="https://github.com/igraph/rigraph/issues/1338" class="external-link">#1338</a>, <a href="https://github.com/igraph/rigraph/issues/2685" class="external-link">#2685</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-2-9011">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9011"></a></h3>
+<ul><li>Implicit assignments (<a href="https://github.com/igraph/rigraph/issues/2664" class="external-link">#2664</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9010" id="igraph-2329010">igraph 2.3.2.9010<a class="anchor" aria-label="anchor" href="#igraph-2329010"></a></h2>
+<div class="section level3">
+<h3 id="features-2-3-2-9010">Features<a class="anchor" aria-label="anchor" href="#features-2-3-2-9010"></a></h3>
+<ul><li>Add tooling for parameter migration (<a href="https://github.com/igraph/rigraph/issues/2684" class="external-link">#2684</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9009" id="igraph-2329009">igraph 2.3.2.9009<a class="anchor" aria-label="anchor" href="#igraph-2329009"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9009"></a></h3>
+<ul><li><p><code><a href="../reference/communities.html">cut_at()</a></code> handles partial dendrograms from <code><a href="../reference/cluster_leading_eigen.html">cluster_leading_eigen()</a></code> (<a href="https://github.com/igraph/rigraph/issues/58" class="external-link">#58</a>, <a href="https://github.com/igraph/rigraph/issues/2599" class="external-link">#2599</a>).</p></li>
+<li><p>Stricter bipartite type checking (<a href="https://github.com/igraph/rigraph/issues/710" class="external-link">#710</a>, <a href="https://github.com/igraph/rigraph/issues/2598" class="external-link">#2598</a>).</p></li>
+<li><p>Vector logic (<a href="https://github.com/igraph/rigraph/issues/2653" class="external-link">#2653</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len()</a></code> rather than <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2655" class="external-link">#2655</a>).</p></li>
+<li><p>Unreachable code (<a href="https://github.com/igraph/rigraph/issues/2656" class="external-link">#2656</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans()</a></code> and <code><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowSums()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2657" class="external-link">#2657</a>).</p></li>
+<li><p>Add <code>check.attributes=FALSE</code> to <code>is_symmetric()</code> to ignore dimnames mismatch (<a href="https://github.com/igraph/rigraph/issues/2671" class="external-link">#2671</a>, <a href="https://github.com/igraph/rigraph/issues/2672" class="external-link">#2672</a>).</p></li>
+<li><p>Resolve CRAN Fortran obsolescent character length warning in ARPACK (<a href="https://github.com/igraph/rigraph/issues/2644" class="external-link">#2644</a>).</p></li>
+<li><p>Avoid memory overflow in <code>ensure_no_na()</code> for large sparse matrices with <code>mode="lower"</code> or <code>mode="upper"</code> (<a href="https://github.com/igraph/rigraph/issues/2626" class="external-link">#2626</a>, <a href="https://github.com/igraph/rigraph/issues/2627" class="external-link">#2627</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-2-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9009"></a></h3>
+<ul><li><p>Use <code>max.print</code> consistently in adjacency-list graph printing (<a href="https://github.com/igraph/rigraph/issues/1462" class="external-link">#1462</a>, <a href="https://github.com/igraph/rigraph/issues/2680" class="external-link">#2680</a>).</p></li>
+<li><p>Refactor internal <code>tmp</code> locals to descriptive names (<a href="https://github.com/igraph/rigraph/issues/1328" class="external-link">#1328</a>, <a href="https://github.com/igraph/rigraph/issues/2678" class="external-link">#2678</a>).</p></li>
+<li><p>Unused functions (<a href="https://github.com/igraph/rigraph/issues/2669" class="external-link">#2669</a>).</p></li>
+<li><p>Ignore true_false_symbol for now (<a href="https://github.com/igraph/rigraph/issues/2668" class="external-link">#2668</a>).</p></li>
+<li><p>Numeric_leading_zero (<a href="https://github.com/igraph/rigraph/issues/2667" class="external-link">#2667</a>).</p></li>
+<li><p>Exception comments for jarl’s duplicated arguments check (<a href="https://github.com/igraph/rigraph/issues/2658" class="external-link">#2658</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2659" class="external-link">#2659</a>).</p></li>
+<li><p>Outer negation (<a href="https://github.com/igraph/rigraph/issues/2666" class="external-link">#2666</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code>, <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2665" class="external-link">#2665</a>).</p></li>
+<li><p>Do not namespace internal functions (<a href="https://github.com/igraph/rigraph/issues/2662" class="external-link">#2662</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2661" class="external-link">#2661</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">anyDuplicated()</a></code> (jarl), <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">anyNA()</a></code> (jarl), <code><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nzchar()</a></code>(me) (<a href="https://github.com/igraph/rigraph/issues/2660" class="external-link">#2660</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2663" class="external-link">#2663</a>).</p></li>
+<li><p>Add jarl config (<a href="https://github.com/igraph/rigraph/issues/2654" class="external-link">#2654</a>).</p></li>
+<li><p>Split generated <code>R/aaa-auto.R</code> into per-category <code>R/aaa-&lt;cat&gt;.R</code> files (<a href="https://github.com/igraph/rigraph/issues/2621" class="external-link">#2621</a>).</p></li>
+<li><p>Remove <code><a href="../reference/console.html">console()</a></code> and <code><a href="../reference/tkplot.html">tkplot()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2615" class="external-link">#2615</a>).</p></li>
+<li><p>Advance lifecycle stage for many functions (<a href="https://github.com/igraph/rigraph/issues/2634" class="external-link">#2634</a>).</p></li>
+<li><p>Add ccache to <code>.gitignore</code> and <code>.Rbuildignore</code>.</p></li>
+<li><p>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2624" class="external-link">#2624</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-3-2-9009">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-3-2-9009"></a></h3>
+<ul><li><p>Update ccache-action reference.</p></li>
+<li><p>Bump action version.</p></li>
+<li><p>Create snapshot update PR against correct branch.</p></li>
+<li><p>Add reference to <code>/apply-patch</code> workflow in commit message.</p></li>
+<li><p>Clarify rationale for not deploying on schedule.</p></li>
+<li><p>Really deploy pkgdown only on push.</p></li>
+<li><p>Disable vendoring workflow to avoid noise.</p></li>
+<li><p>Only run fledge on pushes to main.</p></li>
+<li><p>Tweak fledge workflow and ccache action.</p></li>
+<li><p>Cosmetics.</p></li>
+<li><p>Bump action versions.</p></li>
+<li><p>Install clang-format-21.</p></li>
+<li><p>Align fledge workflow.</p></li>
+<li><p>Harmonize.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-2-9009">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-2-9009"></a></h3>
+<ul><li>Updated revdep issues (<a href="https://github.com/igraph/rigraph/issues/2647" class="external-link">#2647</a>).</li>
+</ul><div class="section level4">
+<h4 id="revdep-2-3-2-9009">revdep<a class="anchor" aria-label="anchor" href="#revdep-2-3-2-9009"></a></h4>
+<ul><li><p>Analyze and document reverse dependency problems for igraph 2.3.0 (<a href="https://github.com/igraph/rigraph/issues/2499" class="external-link">#2499</a>, <a href="https://github.com/igraph/rigraph/issues/2500" class="external-link">#2500</a>).</p></li>
+<li><p><code>document()</code> with latest roxygen2 – for clean diffs (<a href="https://github.com/igraph/rigraph/issues/2642" class="external-link">#2642</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="performance-2-3-2-9009">Performance<a class="anchor" aria-label="anchor" href="#performance-2-3-2-9009"></a></h3>
+<ul><li>Speed up <code><a href="../reference/dot-apply_modifiers.html">.apply_modifiers()</a></code> in <code>make.R</code> (<a href="https://github.com/igraph/rigraph/issues/1468" class="external-link">#1468</a>, <a href="https://github.com/igraph/rigraph/issues/2600" class="external-link">#2600</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-3-2-9009">Testing<a class="anchor" aria-label="anchor" href="#testing-2-3-2-9009"></a></h3>
+<ul><li>Jarl fixes (<a href="https://github.com/igraph/rigraph/issues/2670" class="external-link">#2670</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-3-2-9009">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-3-2-9009"></a></h3>
+<ul><li>
+<p>Merge tag ‘v2.3.2’.</p>
+<p>Place the 2.3.2 release section directly above 2.3.1 in NEWS, below the development entries, and bump the development version to 2.3.2.9008.</p>
+<p><a href="https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2" class="external-link uri">https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2</a></p>
+</li>
+<li><p>Ci: Unify fledge.yaml across cynkratemplate and fledge (<a href="https://github.com/igraph/rigraph/issues/86" class="external-link">#86</a>).</p></li>
+<li><p>Merge branch ‘krlmlr-main’.</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9008" id="igraph-2319008">igraph 2.3.1.9008<a class="anchor" aria-label="anchor" href="#igraph-2319008"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-3-1-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9008"></a></h3>
+<ul><li>Add jarl config (<a href="https://github.com/igraph/rigraph/issues/2654" class="external-link">#2654</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-1-9008">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-1-9008"></a></h3>
+<ul><li>Updated revdep issues (<a href="https://github.com/igraph/rigraph/issues/2647" class="external-link">#2647</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9007" id="igraph-2319007">igraph 2.3.1.9007<a class="anchor" aria-label="anchor" href="#igraph-2319007"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-3-1-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9007"></a></h3>
+<ul><li>Split generated <code>R/aaa-auto.R</code> into per-category <code>R/aaa-&lt;cat&gt;.R</code> files (<a href="https://github.com/igraph/rigraph/issues/2621" class="external-link">#2621</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9006" id="igraph-2319006">igraph 2.3.1.9006<a class="anchor" aria-label="anchor" href="#igraph-2319006"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-3-1-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9006"></a></h3>
+<ul><li>Remove <code><a href="../reference/console.html">console()</a></code> and <code><a href="../reference/tkplot.html">tkplot()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2615" class="external-link">#2615</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-3-1-9006">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-3-1-9006"></a></h3>
+<ul><li><p>Update ccache-action reference.</p></li>
+<li><p>Bump action version.</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9005" id="igraph-2319005">igraph 2.3.1.9005<a class="anchor" aria-label="anchor" href="#igraph-2319005"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-1-9005">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-1-9005"></a></h3>
+<ul><li><p>Resolve CRAN Fortran obsolescent character length warning in ARPACK (<a href="https://github.com/igraph/rigraph/issues/2644" class="external-link">#2644</a>).</p></li>
+<li><p>Avoid memory overflow in <code>ensure_no_na()</code> for large sparse matrices with <code>mode="lower"</code> or <code>mode="upper"</code> (<a href="https://github.com/igraph/rigraph/issues/2626" class="external-link">#2626</a>, <a href="https://github.com/igraph/rigraph/issues/2627" class="external-link">#2627</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-1-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9005"></a></h3>
+<ul><li>Advance lifecycle stage for many functions (<a href="https://github.com/igraph/rigraph/issues/2634" class="external-link">#2634</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-1-9005">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-1-9005"></a></h3>
+<div class="section level4">
+<h4 id="revdep-2-3-1-9005">revdep<a class="anchor" aria-label="anchor" href="#revdep-2-3-1-9005"></a></h4>
+<ul><li>Analyze and document reverse dependency problems for igraph 2.3.0 (<a href="https://github.com/igraph/rigraph/issues/2499" class="external-link">#2499</a>, <a href="https://github.com/igraph/rigraph/issues/2500" class="external-link">#2500</a>).</li>
+</ul></div>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9004" id="igraph-2319004">igraph 2.3.1.9004<a class="anchor" aria-label="anchor" href="#igraph-2319004"></a></h2>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-2-3-1-9004">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-2-3-1-9004"></a></h3>
+<ul><li>
+<code><a href="../reference/autocurve.edges.html">autocurve.edges()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.version.html">igraph.version()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/permute.vertices.html">permute.vertices()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/automorphisms.html">automorphisms()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.setcoords.html">tkplot.setcoords()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.rotate.html">tkplot.rotate()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.reshape.html">tkplot.reshape()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.off.html">tkplot.off()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.getcoords.html">tkplot.getcoords()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.fit.to.screen.html">tkplot.fit.to.screen()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.close.html">tkplot.close()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.center.html">tkplot.center()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/tkplot.canvas.html">tkplot.canvas()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/are.connected.html">are.connected()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.shortest.paths.html">get.shortest.paths()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.diameter.html">get.diameter()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/unfold.tree.html">unfold.tree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/topological.sort.html">topological.sort()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/shortest.paths.html">shortest.paths()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/neighborhood.size.html">neighborhood.size()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.mutual.html">is.mutual()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.multiple.html">is.multiple()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.matching.html">is.matching()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.loop.html">is.loop()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.connected.html">is.connected()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/induced.subgraph.html">induced.subgraph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/has.multiple.html">has.multiple()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.neighborhood.html">graph.neighborhood()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.laplacian.html">graph.laplacian()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.knn.html">graph.knn()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.dfs.html">graph.dfs()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.density.html">graph.density()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.coreness.html">graph.coreness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.bfs.html">graph.bfs()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/farthest.nodes.html">farthest.nodes()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/count.multiple.html">count.multiple()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/clusters.html">clusters()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/average.path.length.html">average.path.length()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bfs.html">bfs()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/dfs.html">dfs()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/get.stochastic.html">get.stochastic()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.simple.html">is.simple()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.shape.noplot.html">igraph.shape.noplot()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.shape.noclip.html">igraph.shape.noclip()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/vertex.shapes.html">vertex.shapes()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/add.vertex.shape.html">add.vertex.shape()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/path.length.hist.html">path.length.hist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.dag.html">is.dag()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.options.html">igraph.options()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/getIgraphOpt.html">getIgraphOpt()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/running.mean.html">running.mean()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.sample.html">igraph.sample()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/convex.hull.html">convex.hull()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.intersection.html">graph.intersection()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.union.html">graph.union()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.difference.html">graph.difference()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.compose.html">graph.compose()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.complementer.html">graph.complementer()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/triad.census.html">triad.census()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.motifs.no.html">graph.motifs.no()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.motifs.est.html">graph.motifs.est()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.motifs.html">graph.motifs()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/dyad.census.html">dyad.census()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/minimum.spanning.tree.html">minimum.spanning.tree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.html">graph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.famous.html">graph.famous()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/line.graph.html">line.graph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.ring.html">graph.ring()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.tree.html">graph.tree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.star.html">graph.star()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.lcf.html">graph.lcf()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.lattice.html">graph.lattice()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.lattice.html">graph.lattice()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.kautz.html">graph.kautz()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.full.citation.html">graph.full.citation()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.full.bipartite.html">graph.full.bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.full.html">graph.full()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.formula.html">graph.formula()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.extended.chordal.ring.html">graph.extended.chordal.ring()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.empty.html">graph.empty()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.de.bruijn.html">graph.de.bruijn()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.bipartite.html">graph.bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.atlas.html">graph.atlas()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph_.html">graph_()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/make_lattice.html">make_lattice()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code>layout.grid.3d()</code> has been removed.</li>
+<li>
+<code><a href="../reference/piecewise.layout.html">piecewise.layout()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.sugiyama.html">layout.sugiyama()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.star.html">layout.star()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.norm.html">layout.norm()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.merge.html">layout.merge()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.mds.html">layout.mds()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.grid.html">layout.grid()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.graphopt.html">layout.graphopt()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.gem.html">layout.gem()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.davidson.harel.html">layout.davidson.harel()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.bipartite.html">layout.bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.auto.html">layout.auto()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.reingold.tilford.html">layout.reingold.tilford()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.circle.html">layout.circle()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.sphere.html">layout.sphere()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.random.html">layout.random()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.fruchterman.reingold.html">layout.fruchterman.reingold()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.kamada.kawai.html">layout.kamada.kawai()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.lgl.html">layout.lgl()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout_with_mds.html">layout_with_mds()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/layout.spring.html">layout.spring()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/layout.svd.html">layout.svd()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/layout.fruchterman.reingold.grid.html">layout.fruchterman.reingold.grid()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/layout.drl.html">layout.drl()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code>nei()</code> has been removed.</li>
+<li>
+<code>innei()</code> has been removed.</li>
+<li>
+<code>outnei()</code> has been removed.</li>
+<li>
+<code>inc()</code> has been removed.</li>
+<li>
+<code>adj()</code> has been removed.</li>
+<li>
+<code>from()</code> has been removed.</li>
+<li>
+<code>to()</code> has been removed.</li>
+<li>
+<code>adj()</code> has been removed.</li>
+<li>
+<code>inc()</code> has been removed.</li>
+<li>
+<code>from()</code> has been removed.</li>
+<li>
+<code>to()</code> has been removed.</li>
+<li>
+<code><a href="../reference/is.directed.html">is.directed()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/delete.vertices.html">delete.vertices()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/delete.edges.html">delete.edges()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/add.vertices.html">add.vertices()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/add.edges.html">add.edges()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get_edge_ids.html">get_edge_ids()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/get.edge.ids.html">get.edge.ids()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.edge.ids.html">get.edge.ids()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.incidence.html">graph.incidence()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph_from_incidence_matrix.html">graph_from_incidence_matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph_from_incidence_matrix.html">graph_from_incidence_matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.predict.html">hrg.predict()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.fit.html">hrg.fit()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.game.html">hrg.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.dendrogram.html">hrg.dendrogram()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.create.html">hrg.create()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hrg.consensus.html">hrg.consensus()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graphlets.project.html">graphlets.project()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graphlets.candidate.basis.html">graphlets.candidate.basis()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/watts.strogatz.game.html">watts.strogatz.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/static.power.law.game.html">static.power.law.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/static.fitness.game.html">static.fitness.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/sbm.game.html">sbm.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/preference.game.html">preference.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/lastcit.game.html">lastcit.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/k.regular.game.html">k.regular.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/interconnected.islands.game.html">interconnected.islands.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/grg.game.html">grg.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/growing.random.game.html">growing.random.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/forest.fire.game.html">forest.fire.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/establishment.game.html">establishment.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/degree.sequence.game.html">degree.sequence.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/connect.neighborhood.html">connect.neighborhood()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/citing.cited.type.game.html">citing.cited.type.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cited.type.game.html">cited.type.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/callaway.traits.game.html">callaway.traits.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bipartite.random.game.html">bipartite.random.game()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/barabasi.game.html">barabasi.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/ba.game.html">ba.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/asymmetric.preference.game.html">asymmetric.preference.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/aging.barabasi.game.html">aging.barabasi.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/aging.ba.game.html">aging.ba.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/aging.prefatt.game.html">aging.prefatt.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/erdos.renyi.game.html">erdos.renyi.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/erdos.renyi.game.html">erdos.renyi.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/erdos.renyi.game.html">random.graph.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/erdos.renyi.game.html">random.graph.game()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/sample_bipartite.html">sample_bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/sample_bipartite.html">sample_bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/sample_bipartite.html">bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/sample_bipartite.html">bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/write.graph.html">write.graph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/read.graph.html">read.graph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.graphdb.html">graph.graphdb()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/vertex.disjoint.paths.html">vertex.disjoint.paths()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/vertex.connectivity.html">vertex.connectivity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/stMincuts.html">stMincuts()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/stCuts.html">stCuts()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/minimum.size.separators.html">minimum.size.separators()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/minimal.st.separators.html">minimal.st.separators()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.separator.html">is.separator()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.minimal.separator.html">is.minimal.separator()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.mincut.html">graph.mincut()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.maxflow.html">graph.maxflow()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.adhesion.html">graph.adhesion()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/edge.disjoint.paths.html">edge.disjoint.paths()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/edge.connectivity.html">edge.connectivity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/dominator.tree.html">dominator.tree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/power.law.fit.html">power.law.fit()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.graphical.degree.sequence.html">is.graphical.degree.sequence()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.degree.sequence.html">is.degree.sequence()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.chordal.html">is.chordal()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.to.graphNEL.html">igraph.to.graphNEL()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.from.graphNEL.html">igraph.from.graphNEL()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.adjlist.html">graph.adjlist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.incidence.html">get.incidence()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.edgelist.html">get.edgelist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.data.frame.html">get.data.frame()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.adjacency.html">get.adjacency()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.adjlist.html">get.adjlist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.adjedgelist.html">get.adjedgelist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code>get.adjacency.dense()</code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/as_adj.html">as_adj()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/as_incidence_matrix.html">as_incidence_matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/as.directed.html">as.directed()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/as.undirected.html">as.undirected()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.edgelist.html">graph.edgelist()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.data.frame.html">graph.data.frame()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/igraph.console.html">igraph.console()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/no.clusters.html">no.clusters()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/decompose.graph.html">decompose.graph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cluster.distribution.html">cluster.distribution()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/biconnected.components.html">biconnected.components()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/articulation.points.html">articulation.points()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/create.communities.html">create.communities()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/walktrap.community.html">walktrap.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/spinglass.community.html">spinglass.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/showtrace.html">showtrace()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/optimal.community.html">optimal.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/multilevel.community.html">multilevel.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/mod.matrix.html">mod.matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/leading.eigenvector.community.html">leading.eigenvector.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/label.propagation.community.html">label.propagation.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.hierarchical.html">is.hierarchical()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/infomap.community.html">infomap.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/fastgreedy.community.html">fastgreedy.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/edge.betweenness.community.html">edge.betweenness.community()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/dendPlot.html">dendPlot()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cutat.html">cutat()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/contract.vertices.html">contract.vertices()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/code.length.html">code.length()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/modularity.igraph.html">modularity_matrix()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/cluster_leiden.html">cluster_leiden()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cluster_leading_eigen.html">cluster_leading_eigen()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cluster_label_prop.html">cluster_label_prop()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/exportPajek.html">exportPajek()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/plotHierarchy.html">plotHierarchy()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/maxcohesion.html">maxcohesion()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.cohesion.html">graph.cohesion()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/cohesive.blocks.html">cohesive.blocks()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/blockGraphs.html">blockGraphs()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/maximal.independent.vertex.sets.html">maximal.independent.vertex.sets()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/maximal.cliques.count.html">maximal.cliques.count()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/maximal.cliques.html">maximal.cliques()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/largest.independent.vertex.sets.html">largest.independent.vertex.sets()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/largest.cliques.html">largest.cliques()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/independent.vertex.sets.html">independent.vertex.sets()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/independence.number.html">independence.number()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/clique.number.html">clique.number()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/maximal_ivs.html">maximal_ivs()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralize.scores.html">centralize.scores()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.evcent.tmax.html">centralization.evcent.tmax()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.evcent.html">centralization.evcent()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.degree.tmax.html">centralization.degree.tmax()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.degree.html">centralization.degree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.closeness.tmax.html">centralization.closeness.tmax()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.closeness.html">centralization.closeness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.betweenness.tmax.html">centralization.betweenness.tmax()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centralization.betweenness.html">centralization.betweenness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centr_degree_tmax.html">centr_degree_tmax()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/centr_eigen.html">centr_eigen()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/centr_eigen_tmax.html">centr_eigen_tmax()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/subgraph.centrality.html">subgraph.centrality()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/page.rank.html">page.rank()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hub.score.html">hub.score()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/authority.score.html">authority.score()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/graph.strength.html">graph.strength()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.eigen.html">graph.eigen()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.diversity.html">graph.diversity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/evcent.html">evcent()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/edge.betweenness.html">edge.betweenness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bonpow.html">bonpow()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/alpha.centrality.html">alpha.centrality()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/estimate_betweenness.html">estimate_betweenness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/estimate_edge_betweenness.html">estimate_edge_betweenness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/estimate_closeness.html">estimate_closeness()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/arpack.html">arpack()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/spectrum.html">spectrum()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> is now defunct (errors instead of warning).</li>
+<li>
+<code><a href="../reference/hub_score.html">authority_score()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/arpack.html">arpack_defaults()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/hub_score.html">hub_score()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/arpack.html">arpack_defaults()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bipartite.projection.size.html">bipartite.projection.size()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bipartite.projection.html">bipartite.projection()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/bipartite.mapping.html">bipartite.mapping()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code>get.edge()</code> has been removed.</li>
+<li>
+<code><a href="../reference/is.igraph.html">is.igraph()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/set.vertex.attribute.html">set.vertex.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/set.graph.attribute.html">set.graph.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/set.edge.attribute.html">set.edge.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/remove.vertex.attribute.html">remove.vertex.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/remove.graph.attribute.html">remove.graph.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/remove.edge.attribute.html">remove.edge.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/list.vertex.attributes.html">list.vertex.attributes()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/list.graph.attributes.html">list.graph.attributes()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/list.edge.attributes.html">list.edge.attributes()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.weighted.html">is.weighted()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.named.html">is.named()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/is.bipartite.html">is.bipartite()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.vertex.attribute.html">get.vertex.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.graph.attribute.html">get.graph.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/get.edge.attribute.html">get.edge.attribute()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/assortativity.nominal.html">assortativity.nominal()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/assortativity.degree.html">assortativity.degree()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/assortativity.html">assortativity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/assortativity.html">assortativity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/assortativity.html">assortativity()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph.adjacency.html">graph.adjacency()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+<li>
+<code><a href="../reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix()</a></code> is now deprecated with a warning instead of a message.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-1-9004">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-1-9004"></a></h3>
+<ul><li>
+<code>document()</code> with latest roxygen2 – for clean diffs (<a href="https://github.com/igraph/rigraph/issues/2642" class="external-link">#2642</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9003" id="igraph-2319003">igraph 2.3.1.9003<a class="anchor" aria-label="anchor" href="#igraph-2319003"></a></h2>
+<ul><li>Ci: Unify fledge.yaml across cynkratemplate and fledge (<a href="https://github.com/igraph/rigraph/issues/86" class="external-link">#86</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9002" id="igraph-2319002">igraph 2.3.1.9002<a class="anchor" aria-label="anchor" href="#igraph-2319002"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-3-1-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9002"></a></h3>
+<ul><li>Add ccache to <code>.gitignore</code> and <code>.Rbuildignore</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-3-1-9002">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-3-1-9002"></a></h3>
+<ul><li><p>Create snapshot update PR against correct branch.</p></li>
+<li><p>Add reference to <code>/apply-patch</code> workflow in commit message.</p></li>
+<li><p>Clarify rationale for not deploying on schedule.</p></li>
+<li><p>Really deploy pkgdown only on push.</p></li>
+<li><p>Disable vendoring workflow to avoid noise.</p></li>
+<li><p>Only run fledge on pushes to main.</p></li>
+<li><p>Tweak fledge workflow and ccache action.</p></li>
+<li><p>Cosmetics.</p></li>
+<li><p>Bump action versions.</p></li>
+<li><p>Install clang-format-21.</p></li>
+<li><p>Align fledge workflow.</p></li>
+<li><p>Harmonize.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-3-1-9002">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-3-1-9002"></a></h3>
+<ul><li>Merge branch ‘krlmlr-main’.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9001" id="igraph-2319001">igraph 2.3.1.9001<a class="anchor" aria-label="anchor" href="#igraph-2319001"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-3-1-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-1-9001"></a></h3>
+<ul><li>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2624" class="external-link">#2624</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1.9000" id="igraph-2319000">igraph 2.3.1.9000<a class="anchor" aria-label="anchor" href="#igraph-2319000"></a></h2>
+<ul><li>Switching to development version.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.2" id="igraph-232">igraph 2.3.2<a class="anchor" aria-label="anchor" href="#igraph-232"></a></h2><p class="text-muted">CRAN release: 2026-05-29</p>
 <div class="section level3">
@@ -311,7 +1196,7 @@
 <div class="section level4">
 <h4 id="breaking-changes-2-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-1-0"></a></h4>
 <ul><li>Breaking change: remove tkigraph from {igraph} proper (<a href="https://github.com/igraph/rigraph/issues/1474" class="external-link">#1474</a>).</li>
-<li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
+<li>Breaking change: Hard-deprecate <code>get.edge()</code> and <code>layout.grid.3d()</code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
 <li>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</li>
 </ul></div>
 <div class="section level4">
@@ -1102,7 +1987,7 @@ Error in is_directed(object) :
 <li>
 <code><a href="../reference/with_igraph_opt.html">with_igraph_opt()</a></code> function to temporarily change values of igraph options.</li>
 <li>
-<code><a href="../reference/get.edge.html">get.edge()</a></code> is deprecated, use <code><a href="../reference/ends.html">ends()</a></code> instead. (This was already the case for igraph 1.0.0, but we forgot to add a NEWS point for it.)</li>
+<code>get.edge()</code> is deprecated, use <code><a href="../reference/ends.html">ends()</a></code> instead. (This was already the case for igraph 1.0.0, but we forgot to add a NEWS point for it.)</li>
 <li>Do not redefine <code><a href="https://rdrr.io/r/base/CallExternal.html" class="external-link">.Call()</a></code>, to make native calls faster.</li>
 <li>Speed up special cases of indexing vertex sequences.</li>
 <li>Removed an <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">anyNA()</a></code> call, to be compatible with older R versions.</li>
@@ -1806,7 +2691,7 @@ Error in is_directed(object) :
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

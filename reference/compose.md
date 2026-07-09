@@ -5,7 +5,14 @@ Relational composition of two graph.
 ## Usage
 
 ``` r
-compose(g1, g2, byname = "auto")
+compose(
+  g1,
+  g2,
+  byname = "auto",
+  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
+)
 ```
 
 ## Arguments
@@ -25,6 +32,17 @@ compose(g1, g2, byname = "auto")
   means `TRUE` if both graphs are named and `FALSE` otherwise. A warning
   is generated if `auto` and one graph, but not both graphs are named.
 
+- graph.attr.comb, vertex.attr.comb, edge.attr.comb:
+
+  Specification for combining clashing graph, vertex and edge
+  attributes. `vertex.attr.comb` and `edge.attr.comb` default to
+  `"rename"`; `graph.attr.comb` defaults to the `graph.attr.comb` igraph
+  option (`"rename"` unless changed via
+  [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)).
+  See
+  [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+  for the available combiners.
+
 ## Value
 
 A new graph object.
@@ -41,12 +59,16 @@ the other is undirected.
 
 If the `byname` argument is `TRUE` (or `auto` and the graphs are all
 named), then the operation is performed based on symbolic vertex names.
-Otherwise numeric vertex ids are used.
+Otherwise numeric vertex IDs are used.
 
 `compose()` keeps the attributes of both graphs. All graph, vertex and
-edge attributes are copied to the result. If an attribute is present in
-multiple graphs and would result a name clash, then this attribute is
-renamed by adding suffixes: \_1, \_2, etc.
+edge attributes are copied to the result. By default, if an attribute is
+present in both graphs and would result in a name clash, that attribute
+is renamed by adding suffixes: `_1`, `_2`. Pass `graph.attr.comb`,
+`vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes
+instead; see
+[igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+for the available combiners.
 
 The `name` vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case `name` must be
@@ -117,28 +139,29 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> IGRAPH 2d073d9 U--- 10 36 -- 
-#> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
-#> | (g/c), center (g/n)
-#> + edges:
-#>  1 --  1  1  1  1  2  3  3  4  4  5  5  6  6  7  7  8  8  9  9 10
-#>  2 --  1  2  2  3  4  5  6  7  8  9 10 10
-#>  3 --  1  1  2 10
-#>  4 --  1  1  2 10
-#>  5 --  1  1  2 10
-#>  6 --  1  1  2 10
-#>  7 --  1  1  2 10
-#>  8 --  1  1  2 10
-#>  9 --  1  1  2 10
-#> 10 --  1  2  2  3  4  5  6  7  8  9 10 10
+#> ── <igraph> ───────────────────────────────────────────────────────── 7632b22 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 36 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name_1 <chr>, name_2 <chr>, mutual <lgl>, circular <lgl>, mode <chr>, center <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 1    1 ─ 1    1 ─ 2    2 ─ 10   2 ─ 9    2 ─ 8    2 ─ 7    2 ─ 6   
+#>  [9] 2 ─ 5    2 ─ 4    2 ─ 3    2 ─ 2    1 ─ 3    1 ─ 3    1 ─ 4    1 ─ 4   
+#> [17] 1 ─ 5    1 ─ 5    1 ─ 6    1 ─ 6    1 ─ 7    1 ─ 7    1 ─ 8    1 ─ 8   
+#> [25] 1 ─ 9    1 ─ 9    1 ─ 10   10 ─ 10  9 ─ 10   8 ─ 10   7 ─ 10   6 ─ 10  
+#> [33] 5 ─ 10   4 ─ 10   3 ─ 10   2 ─ 10  
 print_all(simplify(gc))
-#> IGRAPH f13fa64 U--- 10 24 -- 
-#> + attr: name_1 (g/c), name_2 (g/c), mutual (g/l), circular (g/l), mode
-#> | (g/c), center (g/n)
-#> + edges:
-#>  1 --  2  3  4  5  6  7  8  9 10    2 --  1  3  4  5  6  7  8  9 10
-#>  3 --  1  2 10                      4 --  1  2 10                  
-#>  5 --  1  2 10                      6 --  1  2 10                  
-#>  7 --  1  2 10                      8 --  1  2 10                  
-#>  9 --  1  2 10                     10 --  1  2  3  4  5  6  7  8  9
+#> ── <igraph> ───────────────────────────────────────────────────────── 5a1a663 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 24 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name_1 <chr>, name_2 <chr>, mutual <lgl>, circular <lgl>, mode <chr>, center <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   1 ─ 3   1 ─ 4   1 ─ 5   1 ─ 6   1 ─ 7   1 ─ 8   1 ─ 9   1 ─ 10 
+#> [10] 2 ─ 3   2 ─ 4   2 ─ 5   2 ─ 6   2 ─ 7   2 ─ 8   2 ─ 9   2 ─ 10  3 ─ 10 
+#> [19] 4 ─ 10  5 ─ 10  6 ─ 10  7 ─ 10  8 ─ 10  9 ─ 10 
 ```

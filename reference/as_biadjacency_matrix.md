@@ -11,9 +11,11 @@ kinds.
 as_biadjacency_matrix(
   graph,
   types = NULL,
-  attr = NULL,
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 )
 ```
 
@@ -30,26 +32,45 @@ as_biadjacency_matrix(
   attribute. You must supply this argument if the graph has no `type`
   vertex attribute.
 
-- attr:
+- ...:
 
-  Either `NULL` or a character string giving an edge attribute name. If
-  `NULL`, then a traditional bipartite adjacency matrix is returned. If
-  not `NULL` then the values of the given edge attribute are included in
-  the bipartite adjacency matrix. If the graph has multiple edges, the
-  edge attribute of an arbitrarily chosen edge (for the multiple edges)
-  is included.
+  These dots are for future extensions and must be empty.
+
+- weights:
+
+  One of the following:
+
+  - `NULL` (default): use the `weight` edge attribute if the graph has
+    one, otherwise return a traditional (unweighted) adjacency matrix.
+
+  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+
+  - A numeric or logical vector of length
+    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
+    values directly as edge weights.
+
+  - A character scalar: the name of an edge attribute whose values are
+    used as weights. The attribute must be numeric or logical.
+
+  If multiple edges share endpoints, the value of an arbitrarily chosen
+  edge is included in the matrix.
 
 - names:
 
   Logical scalar, if `TRUE` and the vertices in the graph are named
   (i.e. the graph has a vertex attribute called `name`), then vertex
   names will be added to the result as row and column names. Otherwise
-  the ids of the vertices are used as row and column names.
+  the IDs of the vertices are used as row and column names.
 
 - sparse:
 
   Logical scalar, if it is `TRUE` then a sparse matrix is created, you
   will need the `Matrix` package for this.
+
+- attr:
+
+  **\[deprecated\]** Use `weights` instead. If supplied, the value is
+  forwarded to `weights` as a character edge attribute name.
 
 ## Value
 

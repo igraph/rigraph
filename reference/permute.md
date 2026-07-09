@@ -1,6 +1,6 @@
 # Permute the vertices of a graph
 
-Create a new graph, by permuting vertex ids.
+Create a new graph, by permuting vertex IDs.
 
 ## Usage
 
@@ -17,7 +17,7 @@ permute(graph, permutation)
 - permutation:
 
   A numeric vector giving the permutation to apply. The first element is
-  the new id of vertex 1, etc. Every number between one and
+  the new ID of vertex 1, etc. Every number between one and
   `vcount(graph)` must appear exactly once.
 
 ## Value

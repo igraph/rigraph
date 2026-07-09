@@ -20,7 +20,7 @@ mst(graph, weights = NULL, algorithm = NULL, ...)
 - weights:
 
   Numeric vector giving the weights of the edges in the graph. The order
-  is determined by the edge ids. This is ignored if the `unweighted`
+  is determined by the edge IDs. This is ignored if the `unweighted`
   algorithm is chosen. Edge weights are interpreted as distances.
 
 - algorithm:
@@ -52,8 +52,8 @@ If the graph is not connected a minimum spanning forest is returned.
 
 ## Related documentation in the C library
 
-[`minimum_spanning_tree_unweighted()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted),
 [`minimum_spanning_tree_prim()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_prim),
+[`minimum_spanning_tree_unweighted()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),

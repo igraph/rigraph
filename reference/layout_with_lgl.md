@@ -56,7 +56,7 @@ with_lgl(...)
 
 - root:
 
-  The id of the vertex to place at the middle of the layout. The default
+  The ID of the vertex to place at the middle of the layout. The default
   value is -1 which means that a random vertex is selected.
 
 - ...:

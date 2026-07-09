@@ -1,6 +1,6 @@
 # Edges of a graph
 
-An edge sequence is a vector containing numeric edge ids, with a special
+An edge sequence is a vector containing numeric edge IDs, with a special
 class attribute that allows custom operations: selecting subsets of
 edges based on attributes, or graph structure, creating the
 intersection, union of edges, etc.
@@ -49,7 +49,7 @@ the specific edges of that graph, and cannot be used together with
 another graph.
 
 An edge sequence is most often created by the `E()` function. The result
-includes edges in increasing edge id order by default (if. none of the
+includes edges in increasing edge ID order by default (if. none of the
 `P` and `path` arguments are used). An edge sequence can be indexed by a
 numeric vector, just like a regular R vector. See links to other edge
 sequence operations below.
@@ -97,13 +97,14 @@ Other vertex and edge sequences:
 # Edges of an unnamed graph
 g <- make_ring(10)
 E(g)
-#> + 10/10 edges from 89272c4:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <edge sequence> 10/10 · from 9128a6a ────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 
 # Edges of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 E(g2)
-#> + 10/10 edges from edf5969 (vertex names):
-#>  [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
+#> ── <edge sequence> 10/10 · vertex names · from 5288aa8 ─────────────────────────
+#>  [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g  g ─ h  h ─ i  i ─ j  a ─ j 
 ```

@@ -64,7 +64,7 @@ transitivity(
 
 - vids:
 
-  The vertex ids for the local transitivity will be calculated. This
+  The vertex IDs for the local transitivity will be calculated. This
   will be ignored for global transitivity types. The default value is
   `NULL`, in this case all vertices are considered. It is slightly
   faster to supply `NULL` here than `V(graph)`.
@@ -122,10 +122,10 @@ with the `collapse` mode first.
 
 ## Related documentation in the C library
 
-[`transitivity_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected),
-[`transitivity_local_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected),
 [`transitivity_avglocal_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected),
 [`transitivity_barrat()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat),
+[`transitivity_local_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected),
+[`transitivity_undirected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),

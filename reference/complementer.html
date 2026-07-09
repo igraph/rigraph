@@ -15,7 +15,7 @@ graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Complementer of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>complementer.Rd</code></div>
     </div>
 
@@ -128,26 +128,37 @@ attributes are lost.</p>
 <span class="r-in"><span><span class="co">## Complementer of a ring</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 11a7c85 U--- 10 35 -- Ring graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 11a7c85:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 2--10 2-- 9 2-- 8 2-- 7 2-- 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 2-- 5 2-- 4 3--10 3-- 9 3-- 8 3-- 7 3-- 6 3-- 5 4--10 4-- 9 4-- 8 4-- 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] 4-- 6 5--10 5-- 9 5-- 8 5-- 7 6--10 6-- 9 6-- 8 7--10 7-- 9 8--10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 6cfd41c ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 35 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 ─ 9   1 ─ 8   1 ─ 7   1 ─ 6   1 ─ 5   1 ─ 4   1 ─ 3   2 ─ 10  2 ─ 9  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] 2 ─ 8   2 ─ 7   2 ─ 6   2 ─ 5   2 ─ 4   3 ─ 10  3 ─ 9   3 ─ 8   3 ─ 7  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 3 ─ 6   3 ─ 5   4 ─ 10  4 ─ 9   4 ─ 8   4 ─ 7   4 ─ 6   5 ─ 10  5 ─ 9  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] 5 ─ 8   5 ─ 7   6 ─ 10  6 ─ 9   6 ─ 8   7 ─ 10  7 ─ 9   8 ─ 10 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## A graph and its complementer give together the full graph</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">&lt;-</span> <span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span> <span class="op">&lt;-</span> <span class="fu"><a href="union.html">union</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">gc</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4ea216d U--- 10 45 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mutual_1 (g/l), mutual_2 (g/l),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | circular_1 (g/l), circular_2 (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4ea216d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 9--10 8--10 8-- 9 7--10 7-- 9 7-- 8 6--10 6-- 9 6-- 8 6-- 7 5--10 5-- 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 5-- 8 5-- 7 5-- 6 4--10 4-- 9 4-- 8 4-- 7 4-- 6 4-- 5 3--10 3-- 9 3-- 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] 3-- 7 3-- 6 3-- 5 3-- 4 2--10 2-- 9 2-- 8 2-- 7 2-- 6 2-- 5 2-- 4 2-- 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] 1--10 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 1-- 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── ca7cc0f ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 45 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name_1</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">name_2</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual_1</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">mutual_2</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular_1</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular_2</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 9 ─ 10  8 ─ 10  8 ─ 9   7 ─ 10  7 ─ 9   7 ─ 8   6 ─ 10  6 ─ 9   6 ─ 8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] 6 ─ 7   5 ─ 10  5 ─ 9   5 ─ 8   5 ─ 7   5 ─ 6   4 ─ 10  4 ─ 9   4 ─ 8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] 4 ─ 7   4 ─ 6   4 ─ 5   3 ─ 10  3 ─ 9   3 ─ 8   3 ─ 7   3 ─ 6   3 ─ 5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] 3 ─ 4   2 ─ 10  2 ─ 9   2 ─ 8   2 ─ 7   2 ─ 6   2 ─ 5   2 ─ 4   2 ─ 3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] 1 ─ 10  1 ─ 9   1 ─ 8   1 ─ 7   1 ─ 6   1 ─ 5   1 ─ 4   1 ─ 3   1 ─ 2  </span>
 <span class="r-in"><span><span class="fu"><a href="isomorphic.html">isomorphic</a></span><span class="op">(</span><span class="va">gu</span>, <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -162,7 +173,7 @@ attributes are lost.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

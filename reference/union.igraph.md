@@ -7,7 +7,13 @@ identical or overlapping vertex sets.
 
 ``` r
 # S3 method for class 'igraph'
-union(..., byname = "auto")
+union(
+  ...,
+  byname = "auto",
+  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
+)
 ```
 
 ## Arguments
@@ -23,6 +29,18 @@ union(..., byname = "auto")
   means `TRUE` if all graphs are named and `FALSE` otherwise. A warning
   is generated if `auto` and some (but not all) graphs are named.
 
+- graph.attr.comb, vertex.attr.comb, edge.attr.comb:
+
+  Specification for combining clashing graph, vertex and edge
+  attributes. `vertex.attr.comb` and `edge.attr.comb` default to
+  `"rename"`; `graph.attr.comb` defaults to the `graph.attr.comb` igraph
+  option (`"rename"` unless changed via
+  [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)).
+  `"rename"` preserves the historical behaviour of appending `_1`, `_2`,
+  ... suffixes. See
+  [igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+  for the available combiners.
+
 ## Value
 
 A new graph object.
@@ -36,13 +54,17 @@ will be part of the new graph. This function can be also used via the
 
 If the `byname` argument is `TRUE` (or `auto` and all graphs are named),
 then the operation is performed on symbolic vertex names instead of the
-internal numeric vertex ids.
+internal numeric vertex IDs.
 
 [`union()`](https://r.igraph.org/reference/union.md) keeps the
 attributes of all graphs. All graph, vertex and edge attributes are
-copied to the result. If an attribute is present in multiple graphs and
-would result a name clash, then this attribute is renamed by adding
-suffixes: \_1, \_2, etc.
+copied to the result. By default, if an attribute is present in multiple
+graphs and would result in a name clash, that attribute is renamed by
+adding suffixes: `_1`, `_2`, etc. Pass `graph.attr.comb`,
+`vertex.attr.comb` or `edge.attr.comb` to combine clashing attributes
+instead, e.g. by summing or by taking the first non-`NA` value. See
+[igraph-attribute-combination](https://r.igraph.org/reference/igraph-attribute-combination.md)
+for the available combiners.
 
 The `name` vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case `name` must be
@@ -102,24 +124,31 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %u% net2)
-#> IGRAPH 69925ae UN-- 13 21 -- 
-#> + attr: name (v/c)
-#> + vertex attributes:
-#> |      name
-#> | [1]     D
-#> | [2]     A
-#> | [3]     B
-#> | [4]     F
-#> | [5]     G
-#> | [6]     C
-#> | [7]     E
-#> | [8]     H
-#> | [9]     I
-#> | [10]    J
-#> | [11]    Y
-#> | [12]    X
-#> | [13]    Z
-#> + edges from 69925ae (vertex names):
-#>  [1] I--J H--Z H--I G--H G--E F--X F--Y F--H F--C F--G B--E B--G A--X A--C A--F
-#> [16] A--B D--Y D--G D--F D--B D--A
+#> ── <igraph> ───────────────────────────────────────────────────────── e167f1b ──
+#> ℹ undirected · named
+#> ℹ 13 vertices · 21 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Vertex attributes ───────────────────────────────────────────────────────────
+#>      name
+#> [1]     D
+#> [2]     A
+#> [3]     B
+#> [4]     F
+#> [5]     G
+#> [6]     C
+#> [7]     E
+#> [8]     H
+#> [9]     I
+#> [10]    J
+#> [11]    Y
+#> [12]    X
+#> [13]    Z
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] I ─ J  H ─ Z  H ─ I  G ─ H  G ─ E  F ─ X  F ─ Y  F ─ H  F ─ C  F ─ G 
+#> [11] B ─ E  B ─ G  A ─ X  A ─ C  A ─ F  A ─ B  D ─ Y  D ─ G  D ─ F  D ─ B 
+#> [21] D ─ A 
 ```

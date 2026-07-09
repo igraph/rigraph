@@ -34,7 +34,7 @@ right hand side argument:
   [`difference()`](https://r.igraph.org/reference/difference.md).
 
 - If it is a numeric or character vector, then it is interpreted as a
-  vector of vertex ids and the specified vertices will be deleted from
+  vector of vertex IDs and the specified vertices will be deleted from
   the graph. Example:
 
         g <- make_ring(10)
@@ -54,7 +54,7 @@ right hand side argument:
   [`vertices()`](https://r.igraph.org/reference/vertex.md)) function,
   then all arguments of
   [`vertices()`](https://r.igraph.org/reference/vertex.md) are
-  concatenated and the result is interpreted as a vector of vertex ids.
+  concatenated and the result is interpreted as a vector of vertex IDs.
   These vertices will be removed from the graph.
 
 - If it is an object created with the

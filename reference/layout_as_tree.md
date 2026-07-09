@@ -27,7 +27,7 @@ as_tree(...)
 - root:
 
   The index of the root vertex or root vertices. If this is a non-empty
-  vector then the supplied vertex ids are used as the roots of the trees
+  vector then the supplied vertex IDs are used as the roots of the trees
   (or a single tree if the graph is connected). If it is an empty
   vector, then the root vertices are automatically calculated based on
   topological sorting, performed with the opposite mode than the `mode`

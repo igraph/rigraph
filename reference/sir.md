@@ -140,7 +140,7 @@ diseases and its applications (2nd ed.). London: Griffin.
 [`plot.sir()`](https://r.igraph.org/reference/plot.sir.md) to
 conveniently plot the results
 
-Processes on graphs
+Processes on graphs:
 [`plot.sir()`](https://r.igraph.org/reference/plot.sir.md)
 
 ## Author

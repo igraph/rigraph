@@ -33,19 +33,26 @@ Other rewiring functions:
 ``` r
 g <- make_ring(10)
 g %>%
-  rewire(each_edge(p = .1, loops = FALSE)) %>%
+  rewire(each_edge(p = 0.1, loops = FALSE)) %>%
   plot(layout = layout_in_circle)
 
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-#> IGRAPH 45456b7 U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + graph attributes:
-#> | + name:
-#> |   [1] "Ring graph"
-#> | + mutual:
-#> |   [1] FALSE
-#> | + circular:
-#> |   [1] TRUE
-#> + edges from 45456b7:
-#>  [1] 1-- 6 2-- 9 4-- 8 3-- 4 3-- 9 5-- 8 1--10 7--10 2-- 6 5-- 7
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9d013e8 ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Graph attributes ────────────────────────────────────────────────────────────
+#> name:
+#>   [1] "Ring graph"
+#> mutual:
+#>   [1] FALSE
+#> circular:
+#>   [1] TRUE
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 6   2 ─ 9   4 ─ 8   3 ─ 4   3 ─ 9   5 ─ 8   1 ─ 10  7 ─ 10  2 ─ 6  
+#> [10] 5 ─ 7  
 ```

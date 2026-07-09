@@ -17,7 +17,7 @@ layout_modifier(...)
 
   Named arguments that define the modifier. Must include:
 
-  id
+  ID
 
   :   A unique identifier string for the modifier
 

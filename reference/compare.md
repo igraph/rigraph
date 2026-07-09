@@ -19,7 +19,7 @@ compare(
   A [`communities()`](https://r.igraph.org/reference/communities.md)
   object containing a community structure; or a numeric vector, the
   membership vector of the first community structure. The membership
-  vector should contain the community id of each vertex, the numbering
+  vector should contain the community ID of each vertex, the numbering
   of the communities starts with one.
 
 - comm2:
@@ -70,7 +70,7 @@ Hubert L and Arabie P: Comparing partitions. *Journal of Classification*
 
 ## See also
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

@@ -24,7 +24,7 @@ make_clusters(
 - membership:
 
   The membership vector of the community structure, a numeric vector
-  denoting the id of the community for each vertex. It might be `NULL`
+  denoting the ID of the community for each vertex. It might be `NULL`
   for hierarchical community structures.
 
 - algorithm:
@@ -49,7 +49,7 @@ A `communities` object.
 
 - membership:
 
-  A numeric vector giving the community id for each vertex.
+  A numeric vector giving the community ID for each vertex.
 
 - modularity:
 
@@ -65,7 +65,7 @@ A `communities` object.
 
 ## See also
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

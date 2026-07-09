@@ -61,22 +61,34 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 g
-#> IGRAPH 928f336 UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 928f336 (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 03dd3ae ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 V(g)
-#> + 10/10 vertices, named, from 928f336:
+#> ── <vertex sequence> 10/10 · named · from 03dd3ae ──────────────────────────────
 #>  [1] A B C D E F G H I J
 
 g2 <- delete_vertices(g, c(1, 5)) %>%
   delete_vertices("B")
 g2
-#> IGRAPH 44b31b2 UN-- 7 5 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 44b31b2 (vertex names):
-#> [1] C--D F--G G--H H--I I--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── b757309 ──
+#> ℹ undirected · named
+#> ℹ 7 vertices · 5 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] C ─ D  F ─ G  G ─ H  H ─ I  I ─ J 
 V(g2)
-#> + 7/7 vertices, named, from 44b31b2:
+#> ── <vertex sequence> 7/7 · named · from b757309 ────────────────────────────────
 #> [1] C D F G H I J
 ```

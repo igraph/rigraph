@@ -15,7 +15,7 @@ identical or overlapping vertex sets."><meta property="og:image" content="https:
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ identical or overlapping vertex sets."><meta property="og:image" content="https:
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Intersection of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>intersection.igraph.Rd</code></div>
     </div>
 
@@ -59,7 +59,14 @@ identical or overlapping vertex sets.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'igraph'</span></span>
-<span><span class="fu"><a href="intersection.html">intersection</a></span><span class="op">(</span><span class="va">...</span>, byname <span class="op">=</span> <span class="st">"auto"</span>, keep.all.vertices <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="intersection.html">intersection</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  byname <span class="op">=</span> <span class="st">"auto"</span>,</span>
+<span>  keep.all.vertices <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  graph.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"graph.attr.comb"</span><span class="op">)</span>,</span>
+<span>  vertex.attr.comb <span class="op">=</span> <span class="st">"rename"</span>,</span>
+<span>  edge.attr.comb <span class="op">=</span> <span class="st">"rename"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -82,6 +89,15 @@ graphs are named.</p></dd>
 <dd><p>Logical scalar, whether to keep vertices that only
 appear in a subset of the input graphs.</p></dd>
 
+
+<dt id="arg-graph-attr-comb-vertex-attr-comb-edge-attr-comb">graph.attr.comb, vertex.attr.comb, edge.attr.comb<a class="anchor" aria-label="anchor" href="#arg-graph-attr-comb-vertex-attr-comb-edge-attr-comb"></a></dt>
+<dd><p>Specification for
+combining clashing graph, vertex and edge attributes. <code>vertex.attr.comb</code>
+and <code>edge.attr.comb</code> default to <code>"rename"</code>; <code>graph.attr.comb</code> defaults to
+the <code>graph.attr.comb</code> igraph option (<code>"rename"</code> unless changed via
+<code><a href="igraph_options.html">igraph_options()</a></code>). See <a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for the available
+combiners.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -94,11 +110,14 @@ only edges present in all graphs will be included.  The corresponding
 operator is <code>%s%</code>.</p>
 <p>If the <code>byname</code> argument is <code>TRUE</code> (or <code>auto</code> and all graphs
 are named), then the operation is performed on symbolic vertex names instead
-of the internal numeric vertex ids.</p>
+of the internal numeric vertex IDs.</p>
 <p><code><a href="intersection.html">intersection()</a></code> keeps the attributes of all graphs. All graph,
-vertex and edge attributes are copied to the result. If an attribute is
-present in multiple graphs and would result a name clash, then this
-attribute is renamed by adding suffixes: _1, _2, etc.</p>
+vertex and edge attributes are copied to the result. By default, if an
+attribute is present in multiple graphs and would result in a name clash,
+that attribute is renamed by adding suffixes: <code>_1</code>, <code>_2</code>, etc. Pass
+<code>graph.attr.comb</code>, <code>vertex.attr.comb</code> or <code>edge.attr.comb</code> to combine
+clashing attributes instead; see <a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for the
+available combiners.</p>
 <p>The <code>name</code> vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case <code>name</code> must be
 present in all graphs, and it is not renamed in the result graph.</p>
@@ -152,25 +171,31 @@ undirected.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">D</span> <span class="op">-</span> <span class="va">A</span><span class="op">:</span><span class="cn">F</span><span class="op">:</span><span class="va">Y</span>, <span class="va">B</span> <span class="op">-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">X</span> <span class="op">-</span> <span class="cn">F</span> <span class="op">-</span> <span class="va">H</span> <span class="op">-</span> <span class="va">Z</span>, <span class="cn">F</span> <span class="op">-</span> <span class="va">Y</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">net1</span> <span class="op">%s%</span> <span class="va">net2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 58beb77 UN-- 13 4 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + vertex attributes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [1]     D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [2]     A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [3]     B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [4]     F</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [5]     G</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [6]     C</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [7]     E</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [8]     H</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [9]     I</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [10]    J</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [11]    Y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [12]    X</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | [13]    Z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 58beb77 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] F--H A--B D--F D--A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── f1a0685 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 13 vertices · 4 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Vertex attributes ───────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]     D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2]     A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3]     B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4]     F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5]     G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6]     C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7]     E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8]     H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [9]     I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10]    J</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]    Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12]    X</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]    Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] F ─ H  A ─ B  D ─ F  D ─ A </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -182,7 +207,7 @@ undirected.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

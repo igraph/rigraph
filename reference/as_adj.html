@@ -17,7 +17,7 @@ as_adjacency_matrix() so please use as_adjacency_matrix() instead."><meta proper
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ as_adjacency_matrix() so please use as_adjacency_matrix() instead."><meta proper
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Convert a graph to an adjacency matrix</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
       <div class="d-none name"><code>as_adj.Rd</code></div>
     </div>
 
@@ -64,7 +64,8 @@ We plan to remove <code>as_adj()</code> in favor of the more explicitly named
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_adj</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"upper"</span>, <span class="st">"lower"</span><span class="op">)</span>,</span>
-<span>  attr <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  attr <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  sparse <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"sparsematrices"</span><span class="op">)</span></span>
@@ -87,22 +88,26 @@ of the matrix is used. <code>both</code>: the whole matrix is used, a symmetric
 matrix is returned.</p></dd>
 
 
+<dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
+<dd><p>One of the following:</p><ul><li><p><code>NULL</code> (default): use the <code>weight</code> edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.</p></li>
+<li><p><code>NA</code>: explicitly unweighted, ignoring any <code>weight</code> edge attribute.</p></li>
+<li><p>A numeric or logical vector of length <code><a href="gsize.html">ecount()</a></code>: use these values
+directly as edge weights.</p></li>
+<li><p>A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.</p></li>
+</ul><p>If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.</p></dd>
+
+
 <dt id="arg-attr">attr<a class="anchor" aria-label="anchor" href="#arg-attr"></a></dt>
-<dd><p>Either <code>NULL</code> or a character string giving an edge
-attribute name. If <code>NULL</code> a traditional adjacency matrix is returned.
-If not <code>NULL</code> then the values of the given edge attribute are included
-in the adjacency matrix. If the graph has multiple edges, the edge attribute
-of an arbitrarily chosen edge (for the multiple edges) is included. This
-argument is ignored if <code>edges</code> is <code>TRUE</code>.</p>
-<p>Note that this works only for certain attribute types. If the <code>sparse</code>
-argumen is <code>TRUE</code>, then the attribute must be either logical or
-numeric. If the <code>sparse</code> argument is <code>FALSE</code>, then character is
-also allowed. The reason for the difference is that the <code>Matrix</code>
-package does not support character sparse matrices yet.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>weights</code> instead. If
+supplied, the value is forwarded to <code>weights</code> as a character edge
+attribute name.</p></dd>
 
 
 <dt id="arg-edges">edges<a class="anchor" aria-label="anchor" href="#arg-edges"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical scalar, whether to return the edge ids in the matrix.
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Logical scalar, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.</p></dd>
 
 
@@ -132,7 +137,7 @@ matrices.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

@@ -173,6 +173,7 @@ on the value of the `mode` argument:
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
@@ -291,13 +292,18 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq(ncol(adj_matrix))
+colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH dfc5396 DNW- 10 57 -- 
-#> + attr: name (v/c), code (v/c), weight (e/n)
+#> ── <igraph> ───────────────────────────────────────────────────────── bd9b4cf ──
+#> ℹ directed · named · weighted
+#> ℹ 10 vertices · 57 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>, code <chr>
+#> → edge:   weight <dbl>
 ```

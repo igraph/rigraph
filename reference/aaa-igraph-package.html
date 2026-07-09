@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The igraph package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/igraph-package.R" class="external-link"><code>R/igraph-package.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/igraph-package.R" class="external-link"><code>R/igraph-package.R</code></a></small>
       <div class="d-none name"><code>aaa-igraph-package.Rd</code></div>
     </div>
 
@@ -108,7 +108,7 @@ deterministic and stochastic; stochastic graph constructors are called
 <p>To create small graphs with a given structure probably the
 <code><a href="graph_from_literal.html">graph_from_literal()</a></code> function is easiest. It uses R's formula
 interface, its manual page contains many examples. Another option is
-<code><a href="make_graph.html">make_graph()</a></code>, which takes numeric vertex ids directly.
+<code><a href="make_graph.html">make_graph()</a></code>, which takes numeric vertex IDs directly.
 <code><a href="graph_from_atlas.html">graph_from_atlas()</a></code> creates graph from the Graph Atlas,
 <code><a href="make_graph.html">make_graph()</a></code> can create some special graphs.</p>
 <p>To create graphs from field data, <code><a href="graph_from_edgelist.html">graph_from_edgelist()</a></code>,
@@ -124,16 +124,16 @@ some recent  popular models, like preferential attachment
     <h2 id="vertex-and-edge-ids">Vertex and edge IDs<a class="anchor" aria-label="anchor" href="#vertex-and-edge-ids"></a></h2>
 
 
-<p>Vertices and edges have numerical vertex ids in igraph. Vertex ids are
+<p>Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are
 always consecutive and they start with one. I.e. for a graph with
-\(n\) vertices the vertex ids are between \(1\) and
+\(n\) vertices the vertex IDs are between \(1\) and
 \(n\). If some operation changes the number of vertices in the
 graphs, e.g. a subgraph is created via <code><a href="subgraph.html">induced_subgraph()</a></code>, then
 the vertices are renumbered to satisfy this criteria.</p>
-<p>The same is true for the edges as well, edge ids are always between
+<p>The same is true for the edges as well, edge IDs are always between
 one and \(m\), the total number of edges in the graph.</p>
 <p>It is often desirable to follow vertices along a number of graph
-operations, and vertex ids don't allow this because of the
+operations, and vertex IDs don't allow this because of the
 renumbering. The solution is to assign attributes to the
 vertices. These are kept by all operations, if possible. See more
 about attributes in the next section.</p>
@@ -149,7 +149,7 @@ attribute values, see <code><a href="vertex_attr.html">vertex_attr()</a></code>,
 <code><a href="V.html">V()</a></code> and <code><a href="E.html">E()</a></code> for details.</p>
 <p>Some vertex/edge/graph attributes are treated specially. One of them
 is the ‘name’ attribute. This is used for printing the graph
-instead of the numerical ids, if it exists. Vertex names can also be
+instead of the numerical IDs, if it exists. Vertex names can also be
 used to specify a vector or set of vertices, in all igraph
 functions. E.g. <code><a href="degree.html">degree()</a></code> has a <code>v</code> argument
 that gives the vertices for which the degree is calculated. This
@@ -217,7 +217,8 @@ See especially the documentation section. Join the discussion forum at
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p><strong>Maintainer</strong>: Kirill Müller <a href="mailto:kirill@cynkra.com">kirill@cynkra.com</a> (<a href="https://orcid.org/0000-0002-1416-3412" class="external-link">ORCID</a>)</p>
-<p>Authors:</p><ul><li><p>Gábor Csárdi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a> (<a href="https://orcid.org/0000-0001-7098-9676" class="external-link">ORCID</a>)</p></li>
+<p>Authors:</p><ul><li><p>Kirill Müller <a href="mailto:kirill@cynkra.com">kirill@cynkra.com</a> (<a href="https://orcid.org/0000-0002-1416-3412" class="external-link">ORCID</a>)</p></li>
+<li><p>Gábor Csárdi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a> (<a href="https://orcid.org/0000-0001-7098-9676" class="external-link">ORCID</a>)</p></li>
 <li><p>Tamás Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> (<a href="https://orcid.org/0000-0002-1451-338X" class="external-link">ORCID</a>)</p></li>
 <li><p>Vincent Traag (<a href="https://orcid.org/0000-0003-3170-3879" class="external-link">ORCID</a>)</p></li>
 <li><p>Szabolcs Horvát <a href="mailto:szhorvat@gmail.com">szhorvat@gmail.com</a> (<a href="https://orcid.org/0000-0002-3100-523X" class="external-link">ORCID</a>)</p></li>
@@ -239,7 +240,7 @@ See especially the documentation section. Join the discussion forum at
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

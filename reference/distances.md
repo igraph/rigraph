@@ -120,7 +120,7 @@ all_shortest_paths(
 - from:
 
   Numeric constant, the vertex from or to the shortest paths will be
-  calculated. Note that right now this is not a vector of vertex ids,
+  calculated. Note that right now this is not a vector of vertex IDs,
   but only a single vertex.
 
 - output:
@@ -161,7 +161,7 @@ For `shortest_paths()` a named list with four entries is returned:
 - vpath:
 
   This itself is a list, of length `length(to)`; list element `i`
-  contains the vertex ids on the path from vertex `from` to vertex
+  contains the vertex IDs on the path from vertex `from` to vertex
   `to[i]` (or the other way for directed graphs depending on the `mode`
   argument). The vector also contains `from` and `i` as the first and
   last elements. If `from` is the same as `i` then it is only included
@@ -172,7 +172,7 @@ For `shortest_paths()` a named list with four entries is returned:
 - epath:
 
   This is a list similar to `vpath`, but the vectors of the list contain
-  the edge ids along the shortest paths, instead of the vertex ids. This
+  the edge IDs along the shortest paths, instead of the vertex IDs. This
   entry is set to `NULL` if it is not requested in the `output`
   argument.
 
@@ -197,7 +197,7 @@ For `all_shortest_paths()` a list is returned:
 - epaths:
 
   This is a list similar to vpaths, but the vectors of the list contain
-  the edge ids along the shortest paths, instead of the vertex ids.
+  the edge IDs along the shortest paths, instead of the vertex IDs.
 
 - nrgeo:
 
@@ -296,8 +296,8 @@ the histogram.
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount),
 [`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths),
-[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra)
+[`get_all_shortest_paths_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra),
+[`get_all_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths)
 
 ## References
 
@@ -363,43 +363,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> + 5/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 5/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> + 4/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 4/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> + 3/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 3/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> + 2/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 2/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> + 1/10 vertex, from e34dd5c:
+#> ── <vertex sequence> 1/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> + 2/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 2/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> + 3/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 3/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> + 4/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 4/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> + 5/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 5/10 · from af69f5a ───────────────────────────────────────
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> + 6/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 6/10 · from af69f5a ───────────────────────────────────────
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -415,38 +415,38 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> + 6/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 6/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> + 6/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 6/10 · from af69f5a ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> + 5/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 5/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> + 4/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 4/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> + 5/10 edges from e34dd5c:
-#> [1] 1--10 9--10 8-- 9 7-- 8 6-- 7
+#> ── <edge sequence> 5/10 · from af69f5a ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8   6 ─ 7  
 #> 
 #> $epaths[[2]]
-#> + 5/10 edges from e34dd5c:
-#> [1] 1--2 2--3 3--4 4--5 5--6
+#> ── <edge sequence> 5/10 · from af69f5a ─────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 #> 
 #> $epaths[[3]]
-#> + 4/10 edges from e34dd5c:
-#> [1] 1--10 9--10 8-- 9 7-- 8
+#> ── <edge sequence> 4/10 · from af69f5a ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8  
 #> 
 #> $epaths[[4]]
-#> + 3/10 edges from e34dd5c:
-#> [1] 1--10 9--10 8-- 9
+#> ── <edge sequence> 3/10 · from af69f5a ─────────────────────────────────────────
+#> [1] 1 ─ 10  9 ─ 10  8 ─ 9  
 #> 
 #> 
 #> $nrgeo
@@ -454,19 +454,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> + 6/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 6/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> + 6/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 6/10 · from af69f5a ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> + 5/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 5/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> + 4/10 vertices, from e34dd5c:
+#> ── <vertex sequence> 4/10 · from af69f5a ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 

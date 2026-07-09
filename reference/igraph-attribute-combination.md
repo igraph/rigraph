@@ -112,6 +112,23 @@ The following combination behaviors are predefined:
   [`c()`](https://rdrr.io/r/base/c.html) function. This results almost
   always a complex attribute.
 
+- "rename":
+
+  Keep clashing attributes side-by-side under disambiguated names by
+  appending `_1`, `_2`, ... suffixes. For example, if two graphs each
+  have an attribute called `group`, the resulting graph will have
+  attributes `group_1` and `group_2`, corresponding to the first and
+  second input graph, respectively. This is the default for the graph
+  operators [`union()`](https://r.igraph.org/reference/union.md),
+  [`intersection()`](https://r.igraph.org/reference/intersection.md),
+  [`compose()`](https://r.igraph.org/reference/compose.md) and
+  [`disjoint_union()`](https://r.igraph.org/reference/disjoint_union.md)
+  and preserves their historical behaviour. Only those operators accept
+  `"rename"`; [`simplify()`](https://r.igraph.org/reference/simplify.md)
+  and [`contract()`](https://r.igraph.org/reference/contract.md) will
+  reject it because the rename strategy has no per-element
+  interpretation when many input values collapse into one.
+
 ## See also
 
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
@@ -121,15 +138,15 @@ use graph/vertex/edge attributes in general.
 [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)
 on igraph parameters.
 
-Vertex, edge and graph attributes
+Vertex, edge and graph attributes:
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-`edge_attr<-()`,
+[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
-`graph_attr<-()`,
+[`graph_attr<-()`](https://r.igraph.org/reference/graph_attr-set.md),
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
 [`igraph-dollar`](https://r.igraph.org/reference/igraph-dollar.md),
 [`igraph-vs-attributes`](https://r.igraph.org/reference/igraph-vs-attributes.md),
@@ -138,7 +155,7 @@ Vertex, edge and graph attributes
 [`set_vertex_attr()`](https://r.igraph.org/reference/set_vertex_attr.md),
 [`set_vertex_attrs()`](https://r.igraph.org/reference/set_vertex_attrs.md),
 [`vertex_attr()`](https://r.igraph.org/reference/vertex_attr.md),
-`vertex_attr<-()`,
+[`vertex_attr<-()`](https://r.igraph.org/reference/vertex_attr-set.md),
 [`vertex_attr_names()`](https://r.igraph.org/reference/vertex_attr_names.md)
 
 ## Author
@@ -159,42 +176,67 @@ igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
 simplify(g, edge.attr.comb = "sum")
-#> IGRAPH 1dc6502 D-W- 4 3 -- 
-#> + attr: weight (e/n)
-#> + edges from 1dc6502:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 2d2a8bd ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## collect attributes into a string
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH 61e7187 D-W- 4 3 -- 
-#> + attr: weight (e/c)
-#> + edges from 61e7187:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 3f5bf00 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <chr>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
 simplify(g, edge.attr.comb = "concat")
-#> IGRAPH 2e285c8 D-W- 4 3 -- 
-#> + attr: weight (e/x)
-#> + edges from 2e285c8:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 572fea3 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <list>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
 simplify(g, edge.attr.comb = toString)
-#> IGRAPH f14b475 D-W- 4 3 -- 
-#> + attr: weight (e/c), name (e/c)
-#> + edges from f14b475:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── af05bf3 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <chr>, name <chr>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 
 ## harmonic average of weights, names are dropped
 simplify(g, edge.attr.comb = list(
   weight = function(x) length(x) / sum(1 / x),
   name = "ignore"
 ))
-#> IGRAPH c4c9e8f D-W- 4 3 -- 
-#> + attr: weight (e/n)
-#> + edges from c4c9e8f:
-#> [1] 1->2 2->3 3->4
+#> ── <igraph> ───────────────────────────────────────────────────────── 059f9b9 ──
+#> ℹ directed · weighted
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → edge:   weight <dbl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 → 2  2 → 3  3 → 4 
 ```

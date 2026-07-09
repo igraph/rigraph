@@ -15,7 +15,7 @@ the (symbolic) edge list and edge/vertex attributes."><meta property="og:image" 
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ the (symbolic) edge list and edge/vertex attributes."><meta property="og:image" 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Creating igraph graphs from data frames or vice-versa</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
       <div class="d-none name"><code>graph_from_data_frame.Rd</code></div>
     </div>
 
@@ -131,13 +131,13 @@ frames, depending on the <code>what</code> argument.</p>
 the graph and also the edge attributes are returned. The edges will be in
 the first two columns, named <code>from</code> and <code>to</code>. (This also denotes
 edge direction for directed graphs.)  For named graphs, the vertex names
-will be included in these columns, for other graphs, the numeric vertex ids.
+will be included in these columns, for other graphs, the numeric vertex IDs.
 The edge attributes will be in the other columns. It is not a good idea to
 have an edge attribute named <code>from</code> or <code>to</code>, because then the
 column named in the data frame will not be unique. The edges are listed in
-the order of their numeric ids.</p>
+the order of their numeric IDs.</p>
 <p>If the <code>what</code> argument is <code>vertices</code>, then vertex attributes are
-returned. Vertices are listed in the order of their numeric vertex ids.</p>
+returned. Vertices are listed in the order of their numeric vertex IDs.</p>
 <p>If the <code>what</code> argument is <code>both</code>, then both vertex and edge data
 is returned, in a list with named entries <code>vertices</code> and <code>edges</code>.</p>
     </div>
@@ -204,12 +204,17 @@ from files.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">graph_from_data_frame</span><span class="op">(</span><span class="va">relations</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, vertices <span class="op">=</span> <span class="va">actors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span>, e <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1c75d3f DN-- 5 6 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | friendship (e/n), advice (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1c75d3f (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] Bob      -&gt;Alice Cecil    -&gt;Bob   Cecil    -&gt;Alice David    -&gt;Alice</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] David    -&gt;Bob   Esmeralda-&gt;Alice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 9850a1c ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 6 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">age</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">gender</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → edge:   <span style="color: #00BB00;">same.dept</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">friendship</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">advice</span> <span style="color: #0000BB;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] Bob → Alice        Cecil → Bob        Cecil → Alice      David → Alice     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] David → Bob        Esmeralda → Alice </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## The opposite operation</span></span></span>
 <span class="r-in"><span><span class="fu">as_data_frame</span><span class="op">(</span><span class="va">g</span>, what <span class="op">=</span> <span class="st">"vertices"</span><span class="op">)</span></span></span>
@@ -239,7 +244,7 @@ from files.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

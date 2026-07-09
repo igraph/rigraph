@@ -34,15 +34,15 @@ The graph, with the vertex attributes added or set.
 
 ## See also
 
-Vertex, edge and graph attributes
+Vertex, edge and graph attributes:
 [`delete_edge_attr()`](https://r.igraph.org/reference/delete_edge_attr.md),
 [`delete_graph_attr()`](https://r.igraph.org/reference/delete_graph_attr.md),
 [`delete_vertex_attr()`](https://r.igraph.org/reference/delete_vertex_attr.md),
 [`edge_attr()`](https://r.igraph.org/reference/edge_attr.md),
-`edge_attr<-()`,
+[`edge_attr<-()`](https://r.igraph.org/reference/edge_attr-set.md),
 [`edge_attr_names()`](https://r.igraph.org/reference/edge_attr_names.md),
 [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md),
-`graph_attr<-()`,
+[`graph_attr<-()`](https://r.igraph.org/reference/graph_attr-set.md),
 [`graph_attr_names()`](https://r.igraph.org/reference/graph_attr_names.md),
 [`igraph-attribute-combination`](https://r.igraph.org/reference/igraph-attribute-combination.md),
 [`igraph-dollar`](https://r.igraph.org/reference/igraph-dollar.md),
@@ -51,7 +51,7 @@ Vertex, edge and graph attributes
 [`set_graph_attr()`](https://r.igraph.org/reference/set_graph_attr.md),
 [`set_vertex_attr()`](https://r.igraph.org/reference/set_vertex_attr.md),
 [`vertex_attr()`](https://r.igraph.org/reference/vertex_attr.md),
-`vertex_attr<-()`,
+[`vertex_attr<-()`](https://r.igraph.org/reference/vertex_attr-set.md),
 [`vertex_attr_names()`](https://r.igraph.org/reference/vertex_attr_names.md)
 
 ## Examples
@@ -59,24 +59,39 @@ Vertex, edge and graph attributes
 ``` r
 g <- make_ring(10)
 set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-#> IGRAPH 6c3bc5e UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), size
-#> | (v/n), name (v/c)
-#> + edges from 6c3bc5e (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f34198a ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: color <chr>, size <dbl>, name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 # use splicing if suplying a list
 x <- list(color = "red", name = LETTERS[1:10])
 set_vertex_attrs(g, !!!x)
-#> IGRAPH 6c3bc5e UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), name
-#> | (v/c)
-#> + edges from 6c3bc5e (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f34198a ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: color <chr>, name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 # to set an attribute named "index" use `:=`
 set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-#> IGRAPH 6c3bc5e UN-- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l), color (v/c), index
-#> | (v/n), name (v/c)
-#> + edges from 6c3bc5e (vertex names):
-#>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f34198a ──
+#> ℹ undirected · named
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> → vertex: color <chr>, index <dbl>, name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 ```

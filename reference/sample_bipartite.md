@@ -79,7 +79,7 @@ A bipartite igraph graph.
 
 ## See also
 
-Random graph models (games)
+Random graph models (games):
 [`bipartite_gnm()`](https://r.igraph.org/reference/sample_bipartite_gnm.md),
 [`erdos.renyi.game()`](https://r.igraph.org/reference/erdos.renyi.game.md),
 [`sample_()`](https://r.igraph.org/reference/sample_.md),
@@ -119,35 +119,60 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sample_bipartite(10, 5, p = 0)
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnp()` instead.
-#> IGRAPH b161979 U--B 15 0 -- Bipartite Gnp random graph
-#> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from b161979:
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 0721f97 ──
+#> ℹ undirected · bipartite
+#> ℹ 15 vertices · 0 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, p <dbl>
+#> → vertex: type <lgl>
 
 ## full graph
 sample_bipartite(10, 5, p = 1)
-#> IGRAPH 7662686 U--B 15 50 -- Bipartite Gnp random graph
-#> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 7662686:
-#>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15
-#> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15
-#> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15
-#> [31]  7--11  7--12  7--13  7--14  7--15  8--11  8--12  8--13  8--14  8--15
-#> [41]  9--11  9--12  9--13  9--14  9--15 10--11 10--12 10--13 10--14 10--15
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 1027cff ──
+#> ℹ undirected · bipartite
+#> ℹ 15 vertices · 50 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, p <dbl>
+#> → vertex: type <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 11   1 ─ 12   1 ─ 13   1 ─ 14   1 ─ 15   2 ─ 11   2 ─ 12   2 ─ 13  
+#>  [9] 2 ─ 14   2 ─ 15   3 ─ 11   3 ─ 12   3 ─ 13   3 ─ 14   3 ─ 15   4 ─ 11  
+#> [17] 4 ─ 12   4 ─ 13   4 ─ 14   4 ─ 15   5 ─ 11   5 ─ 12   5 ─ 13   5 ─ 14  
+#> [25] 5 ─ 15   6 ─ 11   6 ─ 12   6 ─ 13   6 ─ 14   6 ─ 15   7 ─ 11   7 ─ 12  
+#> [33] 7 ─ 13   7 ─ 14   7 ─ 15   8 ─ 11   8 ─ 12   8 ─ 13   8 ─ 14   8 ─ 15  
+#> [41] 9 ─ 11   9 ─ 12   9 ─ 13   9 ─ 14   9 ─ 15   10 ─ 11  10 ─ 12  10 ─ 13 
+#> [49] 10 ─ 14  10 ─ 15 
 
 ## random bipartite graph
-sample_bipartite(10, 5, p = .1)
-#> IGRAPH 250a097 U--B 15 4 -- Bipartite Gnp random graph
-#> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 250a097:
-#> [1] 4--11 6--12 7--15 8--15
+sample_bipartite(10, 5, p = 0.1)
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 4928aef ──
+#> ℹ undirected · bipartite
+#> ℹ 15 vertices · 4 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, p <dbl>
+#> → vertex: type <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 4 ─ 11  6 ─ 12  7 ─ 15  8 ─ 15 
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnm()` instead.
-#> IGRAPH 827a88c D--B 15 20 -- Bipartite Gnm random graph
-#> + attr: name (g/c), m (g/n), type (v/l)
-#> + edges from 827a88c:
-#>  [1]  4->11  7->11  9->12  6->13  1->14  2->14  6->14 13-> 1 13-> 2 14-> 2
-#> [11] 15-> 2 11-> 4 13-> 4 15-> 5 15-> 6 12-> 7 15-> 7 14-> 8 15-> 8 12->10
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── c31ab08 ──
+#> ℹ directed · bipartite
+#> ℹ 15 vertices · 20 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, m <dbl>
+#> → vertex: type <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 4 → 11   7 → 11   9 → 12   6 → 13   1 → 14   2 → 14   6 → 14   13 → 1  
+#>  [9] 13 → 2   14 → 2   15 → 2   11 → 4   13 → 4   15 → 5   15 → 6   12 → 7  
+#> [17] 15 → 7   14 → 8   15 → 8   12 → 10 
 ```

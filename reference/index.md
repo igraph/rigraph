@@ -551,7 +551,7 @@
 ### Graph ID, comparison, name, weight
 
 - [`graph_id()`](https://r.igraph.org/reference/graph_id.md) : Get the
-  id of a graph
+  ID of a graph
 - [`identical_graphs()`](https://r.igraph.org/reference/identical_graphs.md)
   : Decide if two graphs are identical
 - [`is_igraph()`](https://r.igraph.org/reference/is_igraph.md) : Is this
@@ -853,7 +853,7 @@
 - [`ends()`](https://r.igraph.org/reference/ends.md) : Incident vertices
   of some graph edges
 - [`get_edge_ids()`](https://r.igraph.org/reference/get_edge_ids.md) :
-  Find the edge ids based on the incident vertices of the edges
+  Find the edge IDs based on the incident vertices of the edges
 - [`vcount()`](https://r.igraph.org/reference/gorder.md)
   [`gorder()`](https://r.igraph.org/reference/gorder.md) : Order (number
   of vertices) of a graph

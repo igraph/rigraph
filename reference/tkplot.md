@@ -49,7 +49,7 @@ tk_canvas(tkp.id)
 
 - tkp.id:
 
-  The id of the tkplot window to close/reshape/etc.
+  The ID of the tkplot window to close/reshape/etc.
 
 - window.close:
 
@@ -90,7 +90,7 @@ tk_canvas(tkp.id)
 
 ## Value
 
-`tkplot()` returns an integer, the id of the plot, this can be used to
+`tkplot()` returns an integer, the ID of the plot, this can be used to
 manipulate it from the command line.
 
 `tk_canvas()` returns `tkwin` object, the Tk canvas.
@@ -130,10 +130,10 @@ be used.
 
 The `tkplot()` command creates a new Tk window with the graphical
 representation of `graph`. The command returns an integer number, the
-tkplot id. The other commands utilize this id to be able to query or
+tkplot ID. The other commands utilize this ID to be able to query or
 manipulate the plot.
 
-`tk_close()` closes the Tk plot with id `tkp.id`.
+`tk_close()` closes the Tk plot with ID `tkp.id`.
 
 `tk_off()` closes all Tk plots.
 
@@ -199,12 +199,7 @@ tkplot.center tkplot.rotate
 
 ## Related documentation in the C library
 
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`is_directed()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed),
-[`get_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
-[`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
-[`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 

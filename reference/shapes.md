@@ -101,7 +101,7 @@ The plotting function has the following arguments:
 
 - v:
 
-  The ids of the vertices to plot. It should match the number of rows in
+  The IDs of the vertices to plot. It should match the number of rows in
   the `coords` argument.
 
 - params:

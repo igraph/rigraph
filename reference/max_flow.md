@@ -17,11 +17,11 @@ max_flow(graph, source, target, capacity = NULL)
 
 - source:
 
-  The id of the source vertex.
+  The ID of the source vertex.
 
 - target:
 
-  The id of the target vertex (sometimes also called sink).
+  The ID of the target vertex (sometimes also called sink).
 
 - capacity:
 
@@ -43,23 +43,23 @@ A named list with components:
   undirected graphs this entry is bit trickier, since for these the flow
   direction is not predetermined by the edge direction. For these graphs
   the elements of the this vector can be negative, this means that the
-  flow goes from the bigger vertex id to the smaller one. Positive
-  values mean that the flow goes from the smaller vertex id to the
+  flow goes from the bigger vertex ID to the smaller one. Positive
+  values mean that the flow goes from the smaller vertex ID to the
   bigger one.
 
 - cut:
 
-  A numeric vector of edge ids, the minimum cut corresponding to the
+  A numeric vector of edge IDs, the minimum cut corresponding to the
   maximum flow.
 
 - partition1:
 
-  A numeric vector of vertex ids, the vertices in the first partition of
+  A numeric vector of vertex IDs, the vertices in the first partition of
   the minimum cut corresponding to the maximum flow.
 
 - partition2:
 
-  A numeric vector of vertex ids, the vertices in the second partition
+  A numeric vector of vertex IDs, the vertices in the second partition
   of the minimum cut corresponding to the maximum flow.
 
 - stats:
@@ -126,15 +126,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> + 2/6 edges from 05c2660 (vertex names):
-#> [1] 3->4 1->5
+#> ── <edge sequence> 2/6 · vertex names · from 784846a ───────────────────────────
+#> [1] 3 → 4  1 → 5 
 #> 
 #> $partition1
-#> + 2/6 vertices, named, from 05c2660:
+#> ── <vertex sequence> 2/6 · named · from 784846a ────────────────────────────────
 #> [1] 1 3
 #> 
 #> $partition2
-#> + 4/6 vertices, named, from 05c2660:
+#> ── <vertex sequence> 4/6 · named · from 784846a ────────────────────────────────
 #> [1] 4 5 6 2
 #> 
 #> $stats

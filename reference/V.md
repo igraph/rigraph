@@ -17,7 +17,7 @@ V(graph)
 ## Value
 
 A vertex sequence containing all vertices, in the order of their numeric
-vertex ids.
+vertex IDs.
 
 ## Details
 
@@ -30,13 +30,13 @@ the specific vertices of that graph, and cannot be used together with
 another graph.
 
 At the implementation level, a vertex sequence is simply a vector
-containing numeric vertex ids, but it has a special class attribute
+containing numeric vertex IDs, but it has a special class attribute
 which makes it possible to perform graph specific operations on it, like
 selecting a subset of the vertices based on graph structure, or vertex
 attributes.
 
 A vertex sequence is most often created by the `V()` function. The
-result of this includes all vertices in increasing vertex id order. A
+result of this includes all vertices in increasing vertex ID order. A
 vertex sequence can be indexed by a numeric vector, just like a regular
 R vector. See
 [`[.igraph.vs`](https://r.igraph.org/reference/igraph-vs-indexing.md)
@@ -82,13 +82,13 @@ Other vertex and edge sequences:
 # Vertex ids of an unnamed graph
 g <- make_ring(10)
 V(g)
-#> + 10/10 vertices, from 884cc35:
+#> ── <vertex sequence> 10/10 · from c12339f ──────────────────────────────────────
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Vertex ids of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 V(g2)
-#> + 10/10 vertices, named, from a7d2d01:
+#> ── <vertex sequence> 10/10 · named · from cf87175 ──────────────────────────────
 #>  [1] a b c d e f g h i j
 ```

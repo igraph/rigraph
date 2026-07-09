@@ -30,7 +30,7 @@ A named list with two components:
 
 - circle:
 
-  Numeric vector with the vertex ids in the shortest circle.
+  Numeric vector with the vertex IDs in the shortest circle.
 
 ## Details
 
@@ -82,7 +82,7 @@ Other structural.properties:
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
 
-Graph cycles
+Graph cycles:
 [`feedback_arc_set()`](https://r.igraph.org/reference/feedback_arc_set.md),
 [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md),
 [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md),
@@ -106,7 +106,7 @@ girth(g)
 #> [1] Inf
 #> 
 #> $circle
-#> + 0/1000 vertices, from ab7c6c1:
+#> ── <vertex sequence> 0/1000 · from c71de5d ─────────────────────────────────────
 #> 
 
 # The worst case running time is for a ring
@@ -116,7 +116,7 @@ girth(g)
 #> [1] 100
 #> 
 #> $circle
-#> + 100/100 vertices, from c439eff:
+#> ── <vertex sequence> 100/100 · from 73bbbae ────────────────────────────────────
 #>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
 #>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86
 #>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4
@@ -132,7 +132,7 @@ girth(g)
 #> [1] 10
 #> 
 #> $circle
-#> + 10/1000 vertices, from 942b85a:
+#> ── <vertex sequence> 10/1000 · from c5dfb48 ────────────────────────────────────
 #>  [1] 819 813 578 477 824 199  53 759 280 787
 #> 
 ```

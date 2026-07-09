@@ -22,7 +22,7 @@ diversity(graph, weights = NULL, vids = V(graph))
 
 - vids:
 
-  The vertex ids for which to calculate the measure.
+  The vertex IDs for which to calculate the measure.
 
 ## Value
 
@@ -54,7 +54,7 @@ Economic Development, *Science* **328**, 1029–1031, 2010.
 
 ## See also
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),

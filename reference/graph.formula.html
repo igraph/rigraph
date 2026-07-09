@@ -17,7 +17,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Creating (small) graphs via a simple interface</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>graph.formula.Rd</code></div>
     </div>
 
@@ -77,12 +77,15 @@ all arguments are passed to <code><a href="graph_from_literal.html">graph_from_l
 <dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
 <dd><p>Logical scalar, whether to call <code><a href="simplify.html">simplify()</a></code>
 on the created graph. By default the graph is simplified, loop and
-multiple edges are removed.</p></dd>
+multiple edges are removed. <code><a href="simplify.html">simplify()</a></code> is only called when the
+created graph is not already simple, so the edge order from the
+formula is preserved whenever no loops or multi-edges are present.
+When the graph does contain loops or multi-edges (and <code>simplify = TRUE</code>), <code><a href="simplify.html">simplify()</a></code> reorders the edges into its canonical order.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a></p>
+    <p><a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create" class="external-link"><code>create()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify" class="external-link"><code>simplify()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous" class="external-link"><code>famous()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple" class="external-link"><code>is_simple()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount" class="external-link"><code>vcount()</code></a>, <a href="https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -94,7 +97,7 @@ multiple edges are removed.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

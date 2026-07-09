@@ -48,7 +48,7 @@ summary(object, ...)
 - names:
 
   Logical constant, whether to print symbolic vertex names (i.e. the
-  `name` vertex attribute) or vertex ids.
+  `name` vertex attribute) or vertex IDs.
 
 - max.lines:
 
@@ -96,7 +96,7 @@ named vertices:
 
 The first line always starts with `IGRAPH`, showing you that the object
 is an igraph graph. Then a seven character code is printed, this the
-first seven characters of the unique id of the graph. See
+first seven characters of the unique ID of the graph. See
 [`graph_id()`](https://r.igraph.org/reference/graph_id.md) for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (‘`D`’) and undirected (‘`U`’) graphs.
@@ -124,6 +124,12 @@ details.
 As of igraph 1.1.1, the `str.igraph` function is defunct, use
 `print_all()`.
 
+Output style is controlled by the `print.style` igraph option. The
+default `"cli"` produces cli-styled output with section rules, typed
+attribute listings and Unicode arrows for edges. Set
+`igraph_options(print.style = "classic")` for the historical
+`IGRAPH ... DNW-` header relied on by parsers and tutorials.
+
 ## Related documentation in the C library
 
 [`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
@@ -143,11 +149,21 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> IGRAPH ceec3d4 U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from ceec3d4:
-#>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f2974cc ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
+#> [10] 1 ─ 10 
 summary(g)
-#> IGRAPH ceec3d4 U--- 10 10 -- Ring graph
-#> + attr: name (g/c), mutual (g/l), circular (g/l)
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f2974cc ──
+#> ℹ undirected
+#> ℹ 10 vertices · 10 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → graph:  name <chr>, mutual <lgl>, circular <lgl>
 ```

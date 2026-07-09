@@ -83,14 +83,14 @@ If the `what` argument is `edges` (the default), then the edges of the
 graph and also the edge attributes are returned. The edges will be in
 the first two columns, named `from` and `to`. (This also denotes edge
 direction for directed graphs.) For named graphs, the vertex names will
-be included in these columns, for other graphs, the numeric vertex ids.
+be included in these columns, for other graphs, the numeric vertex IDs.
 The edge attributes will be in the other columns. It is not a good idea
 to have an edge attribute named `from` or `to`, because then the column
 named in the data frame will not be unique. The edges are listed in the
-order of their numeric ids.
+order of their numeric IDs.
 
 If the `what` argument is `vertices`, then vertex attributes are
-returned. Vertices are listed in the order of their numeric vertex ids.
+returned. Vertices are listed in the order of their numeric vertex IDs.
 
 If the `what` argument is `both`, then both vertex and edge data is
 returned, in a list with named entries `vertices` and `edges`.
@@ -167,12 +167,17 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> IGRAPH 1c75d3f DN-- 5 6 -- 
-#> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),
-#> | friendship (e/n), advice (e/n)
-#> + edges from 1c75d3f (vertex names):
-#> [1] Bob      ->Alice Cecil    ->Bob   Cecil    ->Alice David    ->Alice
-#> [5] David    ->Bob   Esmeralda->Alice
+#> ── <igraph> ───────────────────────────────────────────────────────── 9850a1c ──
+#> ℹ directed · named
+#> ℹ 5 vertices · 6 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>, age <dbl>, gender <chr>
+#> → edge:   same.dept <lgl>, friendship <dbl>, advice <dbl>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] Bob → Alice        Cecil → Bob        Cecil → Alice      David → Alice     
+#> [5] David → Bob        Esmeralda → Alice 
 
 ## The opposite operation
 as_data_frame(g, what = "vertices")

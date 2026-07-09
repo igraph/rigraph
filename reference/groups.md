@@ -20,7 +20,7 @@ groups(x)
 
 A named list of numeric or character vectors. The names are just numbers
 that refer to the groups. The vectors themselves are numeric or symbolic
-vertex ids.
+vertex IDs.
 
 ## Details
 
@@ -39,7 +39,7 @@ objects.
 [`components()`](https://r.igraph.org/reference/components.md) and the
 various community finding functions.
 
-Community detection
+Community detection:
 [`as_membership()`](https://r.igraph.org/reference/as_membership.md),
 [`cluster_edge_betweenness()`](https://r.igraph.org/reference/cluster_edge_betweenness.md),
 [`cluster_fast_greedy()`](https://r.igraph.org/reference/cluster_fast_greedy.md),

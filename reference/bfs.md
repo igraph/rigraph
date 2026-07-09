@@ -36,7 +36,11 @@ bfs(
 - root:
 
   Numeric vector, usually of length one. The root vertex, or root
-  vertices to start the search from.
+  vertices to start the search from. When several roots are given, they
+  are considered in the order they appear. If a root vertex was already
+  reached while searching from an earlier root, no separate search is
+  started from it, so it keeps the distance it was first found at rather
+  than `0`.
 
 - mode:
 
@@ -57,7 +61,7 @@ bfs(
 
 - restricted:
 
-  `NULL` (=no restriction), or a vector of vertices (ids or symbolic
+  `NULL` (=no restriction), or a vector of vertices (IDs or symbolic
   names). In the latter case, the search is restricted to the given
   vertices.
 
@@ -116,8 +120,8 @@ A named list with the following entries:
 
 - root:
 
-  Numeric scalar. The root vertex that was used as the starting point of
-  the search.
+  Numeric vector. The root vertex (or vertices) that was used as the
+  starting point of the search, as supplied in the `root` argument.
 
 - neimode:
 
@@ -127,8 +131,11 @@ A named list with the following entries:
 
 - order:
 
-  Numeric vector. The vertex ids, in the order in which they were
-  visited by the search.
+  The vertex IDs, in the order in which they were visited by the search.
+  A vertex sequence (`igraph.vs`), or a numeric vector if the
+  `return.vs.es` option (see
+  [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md))
+  is `FALSE`.
 
 - rank:
 
@@ -137,8 +144,9 @@ A named list with the following entries:
 
 - parent:
 
-  Numeric vector. The parent of each vertex, i.e. the vertex it was
-  discovered from.
+  The parent of each vertex, i.e. the vertex it was discovered from. A
+  vertex sequence (`igraph.vs`), or a numeric vector if the
+  `return.vs.es` option is `FALSE`.
 
 - father:
 
@@ -146,13 +154,15 @@ A named list with the following entries:
 
 - pred:
 
-  Numeric vector. The previously visited vertex for each vertex, or 0 if
-  there was no such vertex.
+  The previously visited vertex for each vertex, or 0 if there was no
+  such vertex. A vertex sequence (`igraph.vs`), or a numeric vector if
+  the `return.vs.es` option is `FALSE`.
 
 - succ:
 
-  Numeric vector. The next vertex that was visited after the current
-  one, or 0 if there was no such vertex.
+  The next vertex that was visited after the current one, or 0 if there
+  was no such vertex. A vertex sequence (`igraph.vs`), or a numeric
+  vector if the `return.vs.es` option is `FALSE`.
 
 - dist:
 
@@ -242,22 +252,22 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $order
-#> + 20/20 vertices, from c1bbee1:
+#> ── <vertex sequence> 20/20 · from 4e5bd82 ──────────────────────────────────────
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank
 #>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13
 #> 
 #> $parent
-#> + 20/20 vertices, from c1bbee1:
+#> ── <vertex sequence> 20/20 · from 4e5bd82 ──────────────────────────────────────
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 #> $pred
-#> + 20/20 vertices, from c1bbee1:
+#> ── <vertex sequence> 20/20 · from 4e5bd82 ──────────────────────────────────────
 #>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12
 #> 
 #> $succ
-#> + 20/20 vertices, from c1bbee1:
+#> ── <vertex sequence> 20/20 · from 4e5bd82 ──────────────────────────────────────
 #>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13
 #> 
 #> $dist
@@ -267,7 +277,7 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $father
-#> + 20/20 vertices, from c1bbee1:
+#> ── <vertex sequence> 20/20 · from 4e5bd82 ──────────────────────────────────────
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 
@@ -334,7 +344,7 @@ bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #> [1] "out"
 #> 
 #> $order
-#> + 20/20 vertices, from e6c65ed:
+#> ── <vertex sequence> 20/20 · from c06b97b ──────────────────────────────────────
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank

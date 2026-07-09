@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Query and manipulate a graph as it were an adjacency matrix</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/indexing.R" class="external-link"><code>R/indexing.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/indexing.R" class="external-link"><code>R/indexing.R</code></a></small>
       <div class="d-none name"><code>sub-.igraph.Rd</code></div>
     </div>
 
@@ -79,12 +79,12 @@
 
 
 <dt id="arg-i">i<a class="anchor" aria-label="anchor" href="#arg-i"></a></dt>
-<dd><p>Index. Vertex ids or names or logical vectors. See details
+<dd><p>Index. Vertex IDs or names or logical vectors. See details
 below.</p></dd>
 
 
 <dt id="arg-j">j<a class="anchor" aria-label="anchor" href="#arg-j"></a></dt>
-<dd><p>Index. Vertex ids or names or logical vectors. See details
+<dd><p>Index. Vertex IDs or names or logical vectors. See details
 below.</p></dd>
 
 
@@ -93,7 +93,7 @@ below.</p></dd>
 
 
 <dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
-<dd><p>A numeric or character vector giving vertex ids or
+<dd><p>A numeric or character vector giving vertex IDs or
 names. Together with the <code>to</code> argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the <code>i</code> and <code>j</code> arguments
@@ -102,7 +102,7 @@ well.</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
-<dd><p>A numeric or character vector giving vertex ids or
+<dd><p>A numeric or character vector giving vertex IDs or
 names. Together with the <code>from</code> argument, it can be used to
 query/set a sequence of edges. See details below. This argument cannot
 be present together with any of the <code>i</code> and <code>j</code> arguments
@@ -115,7 +115,7 @@ well.</p></dd>
 
 
 <dt id="arg-edges">edges<a class="anchor" aria-label="anchor" href="#arg-edges"></a></dt>
-<dd><p>Logical scalar, whether to return edge ids.</p></dd>
+<dd><p>Logical scalar, whether to return edge IDs.</p></dd>
 
 
 <dt id="arg-drop">drop<a class="anchor" aria-label="anchor" href="#arg-drop"></a></dt>
@@ -146,7 +146,7 @@ two return part of it.</p></li>
 <li><p>The <code>from</code> and <code>to</code> arguments can be used to check
 the existence of many edges. In this case, both <code>from</code> and
 <code>to</code> must be present and they must have the same length. They
-must contain vertex ids or names. A numeric vector is returned, of
+must contain vertex IDs or names. A numeric vector is returned, of
 the same length as <code>from</code> and <code>to</code>, it contains ones
 for existing edges edges and zeros for non-existing ones.
 Example:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span>from<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">]</span></span></code></pre></div><p>.</p></li>
@@ -154,8 +154,8 @@ Example:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</s
 weights. For non-esistent edges zero weights are returned. Other
 edge attributes can be queried as well, by giving the <code>attr</code>
 argument.</p></li>
-<li><p>Querying edge ids instead of the existance of edges or edge
-attributes. E.g.</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span>, edges<span class="op">=</span><span class="cn">TRUE</span><span class="op">]</span></span></code></pre></div><p>returns the id of the edge between vertices 1 and 2, or zero if
+<li><p>Querying edge IDs instead of the existance of edges or edge
+attributes. E.g.</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span>, edges<span class="op">=</span><span class="cn">TRUE</span><span class="op">]</span></span></code></pre></div><p>returns the ID of the edge between vertices 1 and 2, or zero if
 there is no such edge.</p></li>
 <li><p>Adding one or more edges to a graph. For this the element(s) of
 the imaginary adjacency matrix must be set to a non-zero numeric
@@ -174,13 +174,13 @@ one does not need to give it explicitly.</p></li>
 edges, by specifying <code>FALSE</code> or <code>NULL</code> as the
 replacement value:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="va">v</span>, <span class="va">w</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><p>removes the edge from vertex \(v\) to vertex \(w\).
 As this can be used to delete edges between two sets of vertices,
-either pairwise:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span>from<span class="op">=</span><span class="va">v</span>, to<span class="op">=</span><span class="va">w</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><p>or not:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="va">v</span>, <span class="va">w</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span> </span></code></pre></div><p>if \(v\) and \(w\) are vectors of edge ids or names.</p></li>
+either pairwise:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span>from<span class="op">=</span><span class="va">v</span>, to<span class="op">=</span><span class="va">w</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><p>or not:</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="va">v</span>, <span class="va">w</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span> </span></code></pre></div><p>if \(v\) and \(w\) are vectors of edge IDs or names.</p></li>
 </ol><p>‘<code>[</code>’ allows logical indices and negative indices as well,
 with the usual R semantics. E.g.</p><div class="sourceCode"><pre><code><span>  <span class="va">graph</span><span class="op">[</span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div><p>adds an edge from every isolate vertex to vertex one,
 and</p><div class="sourceCode"><pre><code><span>  <span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_empty_graph.html">make_empty_graph</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">G</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><p>creates a star graph.</p>
 <p>Of course, the indexing operators support vertex names,
-so instead of a numeric vertex id a vertex can also be given to
+so instead of a numeric vertex ID a vertex can also be given to
 ‘<code>[</code>’ and ‘<code>[[</code>’.</p>
     </div>
     <div class="section level2">
@@ -210,7 +210,7 @@ so instead of a numeric vertex id a vertex can also be given to
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

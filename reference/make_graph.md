@@ -31,7 +31,7 @@ undirected_graph(...)
   A vector defining the edges, the first edge points from the first
   element to the second, the second edge from the third to the fourth,
   etc. For a numeric vector, these are interpreted as internal vertex
-  ids. For character vectors, they are interpreted as vertex names.
+  IDs. For character vectors, they are interpreted as vertex names.
 
   Alternatively, this can be a character scalar, the name of a notable
   graph. See Notable graphs below. The name is case insensitive.
@@ -54,9 +54,9 @@ undirected_graph(...)
 
   The number of vertices in the graph. This argument is ignored (with a
   warning) if `edges` are symbolic vertex names. It is also ignored if
-  there is a bigger vertex id in `edges`. This means that for this
+  there is a bigger vertex ID in `edges`. This means that for this
   function it is safe to supply zero here if the vertex with the largest
-  id is not an isolate.
+  ID is not an isolate.
 
 - isolates:
 
@@ -267,7 +267,8 @@ are specified.)
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
 
 ## See also
 
@@ -293,14 +294,22 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH d5754cf U--- 6 4 -- 
-#> + edges from d5754cf:
-#> [1] 1--2 2--3 3--4 5--6
+#> ── <igraph> ───────────────────────────────────────────────────────── 32fea44 ──
+#> ℹ undirected
+#> ℹ 6 vertices · 4 edges
+#> 
+#> ── Edges ───────────────────────────────────────────────────────────────────────
+#> [1] 1 ─ 2  2 ─ 3  3 ─ 4  5 ─ 6 
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH cb6bc5c UN-- 4 3 -- 
-#> + attr: name (v/c)
-#> + edges from cb6bc5c (vertex names):
-#> [1] A--B B--C C--D
+#> ── <igraph> ───────────────────────────────────────────────────────── d7bc477 ──
+#> ℹ undirected · named
+#> ℹ 4 vertices · 3 edges
+#> 
+#> ── Attributes ──────────────────────────────────────────────────────────────────
+#> → vertex: name <chr>
+#> 
+#> ── Edges (vertex names) ────────────────────────────────────────────────────────
+#> [1] A ─ B  B ─ C  C ─ D 
 
 solids <- list(
   make_graph("Tetrahedron"),

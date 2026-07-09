@@ -15,7 +15,7 @@ disjoint vertex sets."><meta property="og:image" content="https://r.igraph.org/l
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ disjoint vertex sets."><meta property="og:image" content="https://r.igraph.org/l
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Disjoint union of graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>disjoint_union.Rd</code></div>
     </div>
 
@@ -58,7 +58,7 @@ disjoint vertex sets.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">disjoint_union</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">disjoint_union</span><span class="op">(</span><span class="va">...</span>, graph.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"graph.attr.comb"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">%du%</span> <span class="va">y</span></span></code></pre></div>
     </div>
@@ -69,6 +69,14 @@ disjoint vertex sets.</p>
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Graph objects or lists of graph objects.</p></dd>
+
+
+<dt id="arg-graph-attr-comb">graph.attr.comb<a class="anchor" aria-label="anchor" href="#arg-graph-attr-comb"></a></dt>
+<dd><p>Specification for combining shared graph attributes.
+Defaults to the <code>graph.attr.comb</code> igraph option (<code>"rename"</code> unless changed
+via <code><a href="igraph_options.html">igraph_options()</a></code>), which preserves the historical behaviour of
+appending <code>_1</code>, <code>_2</code>, ... suffixes to clashing attribute names. See
+<a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for the available combiners.</p></dd>
 
 
 <dt id="arg-x-y">x, y<a class="anchor" aria-label="anchor" href="#arg-x-y"></a></dt>
@@ -89,9 +97,10 @@ function can also be used via the <code>%du%</code> operator.</p>
 particular, it merges vertex and edge attributes using the <code><a href="https://vctrs.r-lib.org/reference/vec_c.html" class="external-link">vctrs::vec_c()</a></code>
 function. For graphs that lack some vertex/edge attribute, the corresponding
 values in the new graph are set to a missing value (<code>NA</code> for scalar attributes,
-<code>NULL</code> for list attributes). Graph attributes are simply
-copied to the result. If this would result a name clash, then they are
-renamed by adding suffixes: _1, _2, etc.</p>
+<code>NULL</code> for list attributes). Graph attributes are combined according to
+<code>graph.attr.comb</code>; by default any name clash is resolved by adding
+suffixes (<code>_1</code>, <code>_2</code>, ...). See <a href="igraph-attribute-combination.html">igraph-attribute-combination</a> for the
+available combiners.</p>
 <p>Note that if both graphs have vertex names (i.e. a <code>name</code> vertex
 attribute), then the concatenated vertex names might be non-unique in the
 result. A warning is given if this happens.</p>
@@ -144,12 +153,17 @@ undirected.</p>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g1</span> <span class="op">%du%</span> <span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 90fc2e6 UN-- 20 19 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mode (g/c), center (g/n), mutual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 90fc2e6 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a--b a--c a--d a--e a--f a--g a--h a--i a--j k--l l--m m--n n--o o--p p--q</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] q--r r--s s--t k--t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 287a670 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 20 vertices · 19 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name_1</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">name_2</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mode</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">center</span> <span style="color: #0000BB;">&lt;dbl&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a ─ b  a ─ c  a ─ d  a ─ e  a ─ f  a ─ g  a ─ h  a ─ i  a ─ j  k ─ l </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] l ─ m  m ─ n  n ─ o  o ─ p  p ─ q  q ─ r  r ─ s  s ─ t  k ─ t </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -161,7 +175,7 @@ undirected.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

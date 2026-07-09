@@ -15,7 +15,7 @@ neighboring vertices"><meta property="og:image" content="https://r.igraph.org/lo
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ neighboring vertices"><meta property="og:image" content="https://r.igraph.org/lo
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Adjacency lists</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
       <div class="d-none name"><code>as_adj_list.Rd</code></div>
     </div>
 
@@ -106,11 +106,11 @@ characteristics.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>as_adj_list()</code> returns a list of numeric vectors, which include the ids
+    <p><code>as_adj_list()</code> returns a list of numeric vectors, which include the IDs
 of neighbor vertices (according to the <code>mode</code> argument) of all
 vertices.</p>
 <p><code>as_adj_edge_list()</code> returns a list of numeric vectors, which include the
-ids of adjacent edges (according to the <code>mode</code> argument) of all
+IDs of adjacent edges (according to the <code>mode</code> argument) of all
 vertices.</p>
 <p>If <code>igraph_opt("return.vs.es")</code> is true (default), the numeric
 vectors of the adjacency lists are coerced to <code>igraph.vs</code>, this can be
@@ -146,85 +146,85 @@ a very expensive operation on large graphs.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as_adj_list</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 217513d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 5e6c6b1 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">as_adj_edge_list</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 1--10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2   1 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 2--3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2  2 ─ 3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2--3 3--4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 ─ 3  3 ─ 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3--4 4--5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 ─ 4  4 ─ 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4--5 5--6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 ─ 5  5 ─ 6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5--6 6--7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 ─ 6  6 ─ 7 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6--7 7--8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 ─ 7  7 ─ 8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7--8 8--9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 ─ 8  8 ─ 9 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8-- 9 9--10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 ─ 9   9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from 217513d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--10 9--10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 5e6c6b1 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 10  9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -238,7 +238,7 @@ a very expensive operation on large graphs.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

@@ -25,7 +25,7 @@ similarity.jaccard(
 
 - vids:
 
-  The vertex ids for which the similarity is calculated.
+  The vertex IDs for which the similarity is calculated.
 
 - mode:
 

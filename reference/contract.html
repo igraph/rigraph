@@ -15,7 +15,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Contract several vertices into a single one</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.3.3/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>contract.Rd</code></div>
     </div>
 
@@ -71,7 +71,7 @@ vertices in the new graph correspond to sets of vertices in the input graph.</p>
 
 <dt id="arg-mapping">mapping<a class="anchor" aria-label="anchor" href="#arg-mapping"></a></dt>
 <dd><p>A numeric vector that specifies the mapping. Its elements
-correspond to the vertices, and for each element the id in the new graph is
+correspond to the vertices, and for each element the ID in the new graph is
 given.</p></dd>
 
 
@@ -142,12 +142,18 @@ unchanged, vertex attributes are combined, according to the
 <span class="r-in"><span><span class="co">## graph and edge attributes are kept, vertex attributes are</span></span></span>
 <span class="r-in"><span><span class="co">## combined using the 'toString' function.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g2</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 58073d7 UNW- 5 10 -- Ring</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 58073d7 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring ──────────────────────────────────────────────────── 8efca52 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · weighted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 10 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Attributes ──────────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → graph:  <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span>, <span style="color: #00BB00;">mutual</span> <span style="color: #0000BB;">&lt;lgl&gt;</span>, <span style="color: #00BB00;">circular</span> <span style="color: #0000BB;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → vertex: <span style="color: #00BB00;">name</span> <span style="color: #0000BB;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> → edge:   <span style="color: #00BB00;">weight</span> <span style="color: #0000BB;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges (vertex names) ────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b ─ a, b  a, b ─ c, d  c, d ─ c, d  c, d ─ e, f  e, f ─ e, f </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] e, f ─ g, h  g, h ─ g, h  g, h ─ i, j  i, j ─ i, j  a, b ─ i, j </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -160,7 +166,7 @@ unchanged, vertex attributes are combined, according to the
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.9000.</p>
 </div>
 
     </footer></div>

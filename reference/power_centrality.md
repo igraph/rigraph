@@ -14,7 +14,8 @@ power_centrality(
   exponent = 1,
   rescale = FALSE,
   tol = 1e-07,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 )
 ```
 
@@ -53,6 +54,25 @@ power_centrality(
 
   Logical scalar, whether to use sparse matrices for the calculation.
   The ‘Matrix’ package is required for sparse matrix support
+
+- weights:
+
+  One of the following:
+
+  - `NULL` (default): use the `weight` edge attribute if the graph has
+    one, otherwise return a traditional (unweighted) adjacency matrix.
+
+  - `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+
+  - A numeric or logical vector of length
+    [`ecount()`](https://r.igraph.org/reference/gsize.md): use these
+    values directly as edge weights.
+
+  - A character scalar: the name of an edge attribute whose values are
+    used as weights. The attribute must be numeric or logical.
+
+  If multiple edges share endpoints, the value of an arbitrarily chosen
+  edge is included in the matrix.
 
 ## Value
 
@@ -120,9 +140,9 @@ fixed when we get a better algorithm.
 
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`degree()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree),
 [`get_adjacency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency),
 [`get_adjacency_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse),
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
 [`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
@@ -142,7 +162,7 @@ Bonacich, P. (1987). “Power and Centrality: A Family of Measures.”
 and
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md)
 
-Centrality measures
+Centrality measures:
 [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md),
 [`authority_score()`](https://r.igraph.org/reference/hub_score.md),
 [`betweenness()`](https://r.igraph.org/reference/betweenness.md),
@@ -175,7 +195,7 @@ g.f <- make_graph(
   dir = FALSE
 )
 # Compute power centrality scores
-for (e in seq(-0.5, .5, by = 0.1)) {
+for (e in seq(-0.5, 0.5, by = 0.1)) {
   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 }
 #> [1] 0.00 1.58 0.00
@@ -190,7 +210,7 @@ for (e in seq(-0.5, .5, by = 0.1)) {
 #> [1] 1.27 1.13 0.64
 #> [1] 1.28 1.12 0.64
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] 1.62 1.08 0.54
@@ -203,7 +223,7 @@ for (e in seq(-0.4, .4, by = 0.1)) {
 #> [1] 1.62 1.08 0.54
 #> [1] 1.62 1.08 0.54
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] -1.00  1.67 -0.33
@@ -216,7 +236,7 @@ for (e in seq(-0.4, .4, by = 0.1)) {
 #> [1] 1.68 1.33 0.56
 #> [1] 1.72 1.30 0.57
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 }
 #> [1] -1.72  1.53 -0.57

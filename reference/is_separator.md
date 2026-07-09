@@ -19,7 +19,7 @@ is_separator(graph, candidate)
 
 - candidate:
 
-  A numeric vector giving the vertex ids of the candidate separator.
+  A numeric vector giving the vertex IDs of the candidate separator.
 
 ## Value
 
@@ -51,11 +51,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from c351a39:
+#> ── <vertex sequence> 2/4 · from 90273fa ────────────────────────────────────────
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from c351a39:
+#> ── <vertex sequence> 2/4 · from 90273fa ────────────────────────────────────────
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

@@ -20,7 +20,7 @@ hrg(graph, prob)
 - prob:
 
   A vector of probabilities, one for each vertex, in the order of vertex
-  ids.
+  IDs.
 
 ## Value
 
