@@ -16,7 +16,7 @@ reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
 
 - ignore.loops:
 
-  Logical constant, whether to ignore loop edges.
+  Logical, whether to ignore loop edges.
 
 - mode:
 

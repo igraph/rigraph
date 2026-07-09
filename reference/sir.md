@@ -28,14 +28,13 @@ sir(graph, beta, gamma, no.sim = 100)
 
 - middle:
 
-  Logical scalar, whether to return the middle of the time bins, or the
+  Logical, whether to return the middle of the time bins, or the
   boundaries.
 
 - na.rm:
 
-  Logical scalar, whether to ignore `NA` values. `sir` objects do not
-  contain any `NA` values currently, so this argument is effectively
-  ignored.
+  Logical, whether to ignore `NA` values. `sir` objects do not contain
+  any `NA` values currently, so this argument is effectively ignored.
 
 - ...:
 

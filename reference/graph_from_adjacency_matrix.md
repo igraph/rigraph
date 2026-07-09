@@ -52,7 +52,7 @@ from_adjacency(
 
 - diag:
 
-  Logical scalar, whether to include the diagonal of the matrix in the
+  Logical, whether to include the diagonal of the matrix in the
   calculation. If this is `FALSE` then the diagonal is zerod out first.
 
 - add.colnames:
@@ -299,7 +299,7 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> ── <igraph> ───────────────────────────────────────────────────────── 88e7deb ──
+#> ── <igraph> ───────────────────────────────────────────────────────── d1d34eb ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 57 edges
 #> 

@@ -56,11 +56,11 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - sparse:
 
-  Logical scalar, whether to return sparse matrices.
+  Logical, whether to return sparse matrices.
 
 - edges:
 
-  Logical scalar, whether to return edge IDs.
+  Logical, whether to return edge IDs.
 
 - drop:
 

@@ -48,16 +48,15 @@ edge_betweenness(
 
 - normalized:
 
-  Logical scalar, whether to normalize the betweenness scores. If
-  `TRUE`, then the results are normalized by the number of ordered or
-  unordered vertex pairs in directed and undirected graphs,
-  respectively. In an undirected graph,
-  \$\$B^n=\frac{2B}{(n-1)(n-2)},\$\$ where \\B^n\\ is the normalized,
-  \\B\\ the raw betweenness, and \\n\\ is the number of vertices in the
-  graph. Note that the same normalization factor is used even when
-  setting a `cutoff` on the considered shortest path lengths, even
-  though the number of vertex pairs reachable from each other may be
-  less than \\(n-1)(n-2)/2\\.
+  Logical, whether to normalize the betweenness scores. If `TRUE`, then
+  the results are normalized by the number of ordered or unordered
+  vertex pairs in directed and undirected graphs, respectively. In an
+  undirected graph, \$\$B^n=\frac{2B}{(n-1)(n-2)},\$\$ where \\B^n\\ is
+  the normalized, \\B\\ the raw betweenness, and \\n\\ is the number of
+  vertices in the graph. Note that the same normalization factor is used
+  even when setting a `cutoff` on the considered shortest path lengths,
+  even though the number of vertex pairs reachable from each other may
+  be less than \\(n-1)(n-2)/2\\.
 
 - cutoff:
 

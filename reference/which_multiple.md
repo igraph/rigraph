@@ -33,10 +33,10 @@ count_loops(graph)
 
 ## Value
 
-`any_loop()` and `any_multiple()` return a logical scalar.
-`which_loop()` and `which_multiple()` return a logical vector.
-`count_loops()` returns a numeric scalar with the total number of loop
-edges. `count_multiple()` returns a numeric vector.
+`any_loop()` and `any_multiple()` return a Logical. `which_loop()` and
+`which_multiple()` return a logical vector. `count_loops()` returns a
+numeric scalar with the total number of loop edges. `count_multiple()`
+returns a numeric vector.
 
 ## Details
 

@@ -69,7 +69,7 @@ traits(
 
 - directed:
 
-  Logical constant, whether to generate directed graphs.
+  Logical, whether to generate directed graphs.
 
 - k:
 

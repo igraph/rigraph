@@ -53,7 +53,7 @@ bipartite_projection_size(graph, types = NULL)
 
 - remove.type:
 
-  Logical scalar, whether to remove the `type` vertex attribute from the
+  Logical, whether to remove the `type` vertex attribute from the
   projections. This makes sense because these graphs are not bipartite
   any more. However if you want to combine them with each other (or
   other bipartite graphs), then it is worth keeping this attribute. By
@@ -128,7 +128,7 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── 686a351 ──
+#> ── <igraph> Event network ─────────────────────────────────────────── 4b38d46 ──
 #> ℹ undirected · named · weighted
 #> ℹ 5 vertices · 6 edges
 #> 
@@ -141,7 +141,7 @@ print(proj2[[1]], g = TRUE, e = TRUE)
 #> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     
 #> [6] Cecil ─ Dan   
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── 8014e45 ──
+#> ── <igraph> Event network ─────────────────────────────────────────── 71dc664 ──
 #> ℹ undirected · named · weighted
 #> ℹ 3 vertices · 2 edges
 #> 

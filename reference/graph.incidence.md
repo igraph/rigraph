@@ -28,7 +28,7 @@ graph.incidence(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - mode:
 
@@ -41,8 +41,8 @@ graph.incidence(
 
 - multiple:
 
-  Logical scalar, specifies how to interpret the matrix elements. See
-  details below.
+  Logical, specifies how to interpret the matrix elements. See details
+  below.
 
 - weighted:
 

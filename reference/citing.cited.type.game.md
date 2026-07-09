@@ -47,12 +47,12 @@ citing.cited.type.game(
 
 - directed:
 
-  Logical scalar, whether to generate directed networks.
+  Logical, whether to generate directed networks.
 
 - attr:
 
-  Logical scalar, whether to add the vertex types to the generated graph
-  as a vertex attribute called ‘`type`’.
+  Logical, whether to add the vertex types to the generated graph as a
+  vertex attribute called ‘`type`’.
 
 ## Related documentation in the C library
 

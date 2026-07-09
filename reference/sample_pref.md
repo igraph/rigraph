@@ -72,11 +72,11 @@ asym_pref(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - loops:
 
-  Logical scalar, whether self-loops are allowed in the graph.
+  Logical, whether self-loops are allowed in the graph.
 
 - type.dist.matrix:
 

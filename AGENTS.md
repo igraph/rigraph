@@ -119,6 +119,8 @@ pak::pak(dependencies = "Config/Needs/build")
 - Use `max` for maximal (graph theory term: a vertex is maximal if no
   other vertex dominates it) and `largest` for maximum (the biggest
   value in a set)
+- Use `make_xxx()` for functions creating graphs in a deterministic way,
+  and `sample_xxx()` for functions sampling graphs from some ensemble
 
 ### New functions
 

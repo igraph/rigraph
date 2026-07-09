@@ -21,20 +21,20 @@ graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
 
 - name:
 
-  Logical scalar, whether to add graphNEL vertex names as an igraph
-  vertex attribute called ‘`name`’.
+  Logical, whether to add graphNEL vertex names as an igraph vertex
+  attribute called ‘`name`’.
 
 - weight:
 
-  Logical scalar, whether to add graphNEL edge weights as an igraph edge
+  Logical, whether to add graphNEL edge weights as an igraph edge
   attribute called ‘`weight`’. (graphNEL graphs are always weighted.)
 
 - unlist.attrs:
 
-  Logical scalar. graphNEL attribute query functions return the values
-  of the attributes in R lists, if this argument is `TRUE` (the default)
-  these will be converted to atomic vectors, whenever possible, before
-  adding them to the igraph graph.
+  Logical. graphNEL attribute query functions return the values of the
+  attributes in R lists, if this argument is `TRUE` (the default) these
+  will be converted to atomic vectors, whenever possible, before adding
+  them to the igraph graph.
 
 ## Value
 
@@ -86,7 +86,7 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3937a76 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 6dc3716 ──
 #> ℹ undirected · named · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -104,7 +104,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> ── <igraph> In-star ───────────────────────────────────────────────── 26ba492 ──
+#> ── <igraph> In-star ───────────────────────────────────────────────── daccb2e ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 9 edges
 #> 

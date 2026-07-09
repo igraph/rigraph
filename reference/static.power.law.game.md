@@ -46,16 +46,16 @@ static.power.law.game(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the graph.
+  Logical, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the graph.
+  Logical, whether to allow multiple edges in the graph.
 
 - finite.size.correction:
 
-  Logical scalar, whether to use the proposed finite size correction of
-  Cho et al., see references below.
+  Logical, whether to use the proposed finite size correction of Cho et
+  al., see references below.
 
 ## Related documentation in the C library
 

@@ -49,9 +49,9 @@ degree_distribution(graph, cumulative = FALSE, ...)
 
 - normalized:
 
-  Logical scalar, whether to normalize the degree. If `TRUE` then the
-  result is divided by \\n-1\\, where \\n\\ is the number of vertices in
-  the graph.
+  Logical, whether to normalize the degree. If `TRUE` then the result is
+  divided by \\n-1\\, where \\n\\ is the number of vertices in the
+  graph.
 
 - ...:
 

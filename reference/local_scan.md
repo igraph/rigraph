@@ -50,10 +50,10 @@ local_scan(
 
 - weighted:
 
-  Logical scalar, TRUE if the edge weights should be used for
-  computation of the scan statistic. If TRUE, the graph should be
-  weighted. Note that this argument is ignored if `FUN` is not `NULL`,
-  `"ecount"` and `"sumweights"`.
+  Logical, TRUE if the edge weights should be used for computation of
+  the scan statistic. If TRUE, the graph should be weighted. Note that
+  this argument is ignored if `FUN` is not `NULL`, `"ecount"` and
+  `"sumweights"`.
 
 - mode:
 

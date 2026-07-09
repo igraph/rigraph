@@ -25,7 +25,7 @@ circulant(n, shifts, directed = FALSE)
 
 - directed:
 
-  Boolean, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 ## Value
 

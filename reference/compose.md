@@ -27,10 +27,10 @@ compose(
 
 - byname:
 
-  A logical scalar, or the character scalar `auto`. Whether to perform
-  the operation based on symbolic vertex names. If it is `auto`, that
-  means `TRUE` if both graphs are named and `FALSE` otherwise. A warning
-  is generated if `auto` and one graph, but not both graphs are named.
+  A Logical, or the character scalar `auto`. Whether to perform the
+  operation based on symbolic vertex names. If it is `auto`, that means
+  `TRUE` if both graphs are named and `FALSE` otherwise. A warning is
+  generated if `auto` and one graph, but not both graphs are named.
 
 - graph.attr.comb, vertex.attr.comb, edge.attr.comb:
 
@@ -139,7 +139,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> ── <igraph> ───────────────────────────────────────────────────────── 656bcb7 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── d7045a9 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 36 edges
 #> 
@@ -153,7 +153,7 @@ print_all(gc)
 #> [25] 1 ─ 9    1 ─ 9    1 ─ 10   10 ─ 10  9 ─ 10   8 ─ 10   7 ─ 10   6 ─ 10  
 #> [33] 5 ─ 10   4 ─ 10   3 ─ 10   2 ─ 10  
 print_all(simplify(gc))
-#> ── <igraph> ───────────────────────────────────────────────────────── 633c9d9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 7a6b81a ──
 #> ℹ undirected
 #> ℹ 10 vertices · 24 edges
 #> 

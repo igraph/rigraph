@@ -37,8 +37,8 @@ plot(
 
 - add:
 
-  Logical scalar, whether to add the plot to the current device, or
-  delete the device's current contents first.
+  Logical, whether to add the plot to the current device, or delete the
+  device's current contents first.
 
 - xlim:
 

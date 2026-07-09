@@ -104,95 +104,95 @@ g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, si
 simple_cycles(g)
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 3/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 2/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 2/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A F
 #> 
 #> $vertices[[3]]
-#> ── <vertex sequence> 1/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 1/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 3/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 2/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 2/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → F  F → A 
 #> 
 #> $edges[[3]]
-#> ── <edge sequence> 1/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 1/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] E → E 
 #> 
 #> 
 simple_cycles(g, mode = "all") # ignore edge directions
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 3/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 4/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 4/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A D E F
 #> 
 #> $vertices[[3]]
-#> ── <vertex sequence> 4/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 4/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A D E F
 #> 
 #> $vertices[[4]]
-#> ── <vertex sequence> 2/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 2/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A F
 #> 
 #> $vertices[[5]]
-#> ── <vertex sequence> 1/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 1/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] E
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 3/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 4/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 4/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → D  D → E  F → E  F → A 
 #> 
 #> $edges[[3]]
-#> ── <edge sequence> 4/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 4/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → D  D → E  F → E  A → F 
 #> 
 #> $edges[[4]]
-#> ── <edge sequence> 2/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 2/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] F → A  A → F 
 #> 
 #> $edges[[5]]
-#> ── <edge sequence> 1/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 1/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] E → E 
 #> 
 #> 
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #> $vertices
 #> $vertices[[1]]
-#> ── <vertex sequence> 3/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 3/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A B C
 #> 
 #> $vertices[[2]]
-#> ── <vertex sequence> 2/6 · named · from 5bcf37b ────────────────────────────────
+#> ── <vertex sequence> 2/6 · named · from 2f5db40 ────────────────────────────────
 #> [1] A F
 #> 
 #> 
 #> $edges
 #> $edges[[1]]
-#> ── <edge sequence> 3/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 3/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] A → B  B → C  C → A 
 #> 
 #> $edges[[2]]
-#> ── <edge sequence> 2/9 · vertex names · from 5bcf37b ───────────────────────────
+#> ── <edge sequence> 2/9 · vertex names · from 2f5db40 ───────────────────────────
 #> [1] F → A  A → F 
 #> 
 #> 

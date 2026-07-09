@@ -27,8 +27,8 @@ layout.drl(
 
 - use.seed:
 
-  Logical scalar, whether to use the coordinates given in the `seed`
-  argument as a starting point.
+  Logical, whether to use the coordinates given in the `seed` argument
+  as a starting point.
 
 - seed:
 

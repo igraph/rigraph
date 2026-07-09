@@ -32,8 +32,8 @@ cohesive.blocks(graph, labels = TRUE)
 
 - labels:
 
-  Logical scalar, whether to add the vertex labels to the result object.
-  These labels can be then used when reporting and plotting the cohesive
+  Logical, whether to add the vertex labels to the result object. These
+  labels can be then used when reporting and plotting the cohesive
   blocks.
 
 ## Related documentation in the C library

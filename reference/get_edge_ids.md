@@ -25,14 +25,14 @@ get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
 
 - directed:
 
-  Logical scalar, whether to consider edge directions in directed
-  graphs. This argument is ignored for undirected graphs.
+  Logical, whether to consider edge directions in directed graphs. This
+  argument is ignored for undirected graphs.
 
 - error:
 
-  Logical scalar, whether to report an error if an edge is not found in
-  the graph. If `FALSE`, then no error is reported, and zero is returned
-  for the non-existant edge(s).
+  Logical, whether to report an error if an edge is not found in the
+  graph. If `FALSE`, then no error is reported, and zero is returned for
+  the non-existant edge(s).
 
 ## Value
 
@@ -84,7 +84,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> ── <edge sequence> 2/10 · from 0741e2f ─────────────────────────────────────────
+#> ── <edge sequence> 2/10 · from cb8e26c ─────────────────────────────────────────
 #> [1] 1 ─ 2  4 ─ 5 
 
 ## non-existant edge
@@ -98,6 +98,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> ── <edge sequence> 2/5 · from 51978f3 ──────────────────────────────────────────
+#> ── <edge sequence> 2/5 · from 8e3cb61 ──────────────────────────────────────────
 #> [1] 1 → 2  1 → 2 
 ```

@@ -28,7 +28,7 @@ full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
 
 - directed:
 
-  Logical scalar, whether the graphs is directed.
+  Logical, whether the graphs is directed.
 
 - mode:
 
