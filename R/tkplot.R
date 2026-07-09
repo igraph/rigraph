@@ -594,7 +594,6 @@ tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
-  coords <- .tkplot.get(tkp.id, "coords")
   canvas.center.x <- width / 2
   canvas.center.y <- height / 2
   coords <- .tkplot.get(tkp.id, "coords")
@@ -1091,7 +1090,6 @@ tk_canvas <- function(tkp.id) {
 # Creates all edges
 .tkplot.create.edges <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
-  n <- ecount(tkp$graph)
   edgematrix <- as_edgelist(tkp$graph, names = FALSE)
   mapply(
     function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
