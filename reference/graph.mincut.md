@@ -39,9 +39,9 @@ graph.mincut(
 
 - value.only:
 
-  Logical, if `TRUE` only the minimum cut value is returned, if `FALSE`
-  the edges in the cut and a the two (or more) partitions are also
-  returned.
+  Logical scalar, if `TRUE` only the minimum cut value is returned, if
+  `FALSE` the edges in the cut and a the two (or more) partitions are
+  also returned.
 
 ## Related documentation in the C library
 

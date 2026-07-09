@@ -54,7 +54,7 @@ Other structural queries:
 ``` r
 ug <- make_ring(10)
 ug
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 6e4894f ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── d48346c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -71,7 +71,7 @@ are_adjacent(ug, 2, 1)
 
 dg <- make_ring(10, directed = TRUE)
 dg
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 7dfd3c4 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── bea2211 ──
 #> ℹ directed
 #> ℹ 10 vertices · 10 edges
 #> 

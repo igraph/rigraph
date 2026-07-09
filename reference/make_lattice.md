@@ -61,9 +61,10 @@ lattice(
 
 - periodic:
 
-  Logical vector, defines whether the generated lattice is periodic
-  along each dimension. This parameter may also be a single logical
-  which will be extended to a logical vector of \`dimvector“ length.
+  Logical vector, Boolean vector, defines whether the generated lattice
+  is periodic along each dimension. This parameter may also be scalar
+  boolen value which will be extended to boolean vector with dimvector
+  length.
 
 - circular:
 
@@ -101,7 +102,7 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> ── <igraph> Lattice graph ─────────────────────────────────────────── c82ba44 ──
+#> ── <igraph> Lattice graph ─────────────────────────────────────────── 0454866 ──
 #> ℹ undirected
 #> ℹ 125 vertices · 300 edges
 #> 
@@ -121,7 +122,7 @@ make_lattice(c(5, 5, 5))
 #>  [55] 20 ─ 25    20 ─ 45    21 ─ 22    21 ─ 46    22 ─ 23    22 ─ 47   
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> ── <igraph> Lattice graph ─────────────────────────────────────────── 8c30065 ──
+#> ── <igraph> Lattice graph ─────────────────────────────────────────── d24f0a0 ──
 #> ℹ undirected
 #> ℹ 125 vertices · 300 edges
 #> 

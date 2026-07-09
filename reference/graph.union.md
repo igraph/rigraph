@@ -20,10 +20,10 @@ graph.union(..., byname = "auto")
 
 - byname:
 
-  A Logical, or the character scalar `auto`. Whether to perform the
-  operation based on symbolic vertex names. If it is `auto`, that means
-  `TRUE` if all graphs are named and `FALSE` otherwise. A warning is
-  generated if `auto` and some (but not all) graphs are named.
+  A logical scalar, or the character scalar `auto`. Whether to perform
+  the operation based on symbolic vertex names. If it is `auto`, that
+  means `TRUE` if all graphs are named and `FALSE` otherwise. A warning
+  is generated if `auto` and some (but not all) graphs are named.
 
 ## Related documentation in the C library
 

@@ -52,7 +52,7 @@ graph.bfs(
 
 - unreachable:
 
-  Logical, whether the search should visit the vertices that are
+  Logical scalar, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
@@ -64,28 +64,28 @@ graph.bfs(
 
 - order:
 
-  Logical, whether to return the ordering of the vertices.
+  Logical scalar, whether to return the ordering of the vertices.
 
 - rank:
 
-  Logical, whether to return the rank of the vertices.
+  Logical scalar, whether to return the rank of the vertices.
 
 - father:
 
-  Logical, whether to return the father of the vertices.
+  Logical scalar, whether to return the father of the vertices.
 
 - pred:
 
-  Logical, whether to return the predecessors of the vertices.
+  Logical scalar, whether to return the predecessors of the vertices.
 
 - succ:
 
-  Logical, whether to return the successors of the vertices.
+  Logical scalar, whether to return the successors of the vertices.
 
 - dist:
 
-  Logical, whether to return the distance from the root of the search
-  tree.
+  Logical scalar, whether to return the distance from the root of the
+  search tree.
 
 - callback:
 

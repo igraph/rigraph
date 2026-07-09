@@ -27,14 +27,14 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 
 - directed:
 
-  Logical, whether to consider edge directions in directed graphs. This
-  argument is ignored for undirected graphs.
+  Logical scalar, whether to consider edge directions in directed
+  graphs. This argument is ignored for undirected graphs.
 
 - error:
 
-  Logical, whether to report an error if an edge is not found in the
-  graph. If `FALSE`, then no error is reported, and zero is returned for
-  the non-existant edge(s).
+  Logical scalar, whether to report an error if an edge is not found in
+  the graph. If `FALSE`, then no error is reported, and zero is returned
+  for the non-existant edge(s).
 
 - multi:
 

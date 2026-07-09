@@ -21,7 +21,7 @@ from_literal(...)
 
 - simplify:
 
-  Logical, whether to call
+  Logical scalar, whether to call
   [`simplify()`](https://r.igraph.org/reference/simplify.md) on the
   created graph. By default the graph is simplified, loop and multiple
   edges are removed.
@@ -144,7 +144,7 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── 2b39054 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 525faea ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 6 edges
 #> 
@@ -158,7 +158,7 @@ g
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── 2b01f3d ──
+#> ── <igraph> ───────────────────────────────────────────────────────── b6af36e ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 7 edges
 #> 
@@ -175,7 +175,7 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> ── <igraph> ───────────────────────────────────────────────────────── 23e80e9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 69b0dcf ──
 #> ℹ directed · named
 #> ℹ 7 vertices · 6 edges
 #> 
@@ -189,7 +189,7 @@ g3
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> ── <igraph> ───────────────────────────────────────────────────────── 987b514 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── eb6544f ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 2 edges
 #> 
@@ -204,7 +204,7 @@ V(g4)$name
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> ── <igraph> ───────────────────────────────────────────────────────── e1bce14 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── cbb3a9c ──
 #> ℹ directed · named
 #> ℹ 2 vertices · 2 edges
 #> 
@@ -217,7 +217,7 @@ g5
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> ── <igraph> ───────────────────────────────────────────────────────── e5d7a50 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 98662af ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 3 edges
 #> 

@@ -53,10 +53,10 @@ cluster_spinglass(
 
 - parupdate:
 
-  Logical, whether to update the spins of the vertices in parallel
-  (synchronously) or not. This argument is ignored if the second form of
-  the function is used (i.e. the ‘`vertex`’ argument is present). It is
-  also not implemented in the “neg” implementation.
+  Logical constant, whether to update the spins of the vertices in
+  parallel (synchronously) or not. This argument is ignored if the
+  second form of the function is used (i.e. the ‘`vertex`’ argument is
+  present). It is also not implemented in the “neg” implementation.
 
 - start.temp:
 

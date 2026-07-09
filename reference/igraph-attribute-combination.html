@@ -198,7 +198,7 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## new attribute is the sum of the old ones</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 5b602d6 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── bce2500 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -210,7 +210,7 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## collect attributes into a string</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── b32b975 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── beb2192 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -223,7 +223,7 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span><span class="co">## concatenate them into a vector, this creates a complex</span></span></span>
 <span class="r-in"><span><span class="co">## attribute</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"concat"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 7a97214 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 6b8a8be ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -237,7 +237,7 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## both attributes are collected into strings</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 9fa4b68 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 69472cd ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -252,7 +252,7 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">x</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"ignore"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 1a288c4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 21eb43b ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

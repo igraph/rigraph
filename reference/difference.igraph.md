@@ -23,10 +23,10 @@ difference(big, small, byname = "auto", ...)
 
 - byname:
 
-  A Logical, or the character scalar `auto`. Whether to perform the
-  operation based on symbolic vertex names. If it is `auto`, that means
-  `TRUE` if both graphs are named and `FALSE` otherwise. A warning is
-  generated if `auto` and one graph, but not both graphs are named.
+  A logical scalar, or the character scalar `auto`. Whether to perform
+  the operation based on symbolic vertex names. If it is `auto`, that
+  means `TRUE` if both graphs are named and `FALSE` otherwise. A warning
+  is generated if `auto` and one graph, but not both graphs are named.
 
 - ...:
 
@@ -107,7 +107,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> ── <igraph> ───────────────────────────────────────────────────────── cc5ad2a ──
+#> ── <igraph> ───────────────────────────────────────────────────────── cf53f65 ──
 #> ℹ undirected · named
 #> ℹ 11 vertices · 15 edges
 #> 

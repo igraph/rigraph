@@ -17,7 +17,7 @@ complementer(graph, loops = FALSE)
 
 - loops:
 
-  Logical, whether to generate loop edges.
+  Logical constant, whether to generate loop edges.
 
 ## Value
 
@@ -75,7 +75,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Complementer of a ring
 g <- make_ring(10)
 complementer(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 9a8bf8d ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 390aaa0 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 35 edges
 #> 
@@ -93,7 +93,7 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-#> ── <igraph> ───────────────────────────────────────────────────────── 3627539 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 81bcd8e ──
 #> ℹ undirected
 #> ℹ 10 vertices · 45 edges
 #> 

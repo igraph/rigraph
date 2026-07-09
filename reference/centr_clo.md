@@ -22,8 +22,8 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 
 - normalized:
 
-  Logical. Whether to normalize the graph level centrality score by
-  dividing by the theoretical maximum.
+  Logical scalar. Whether to normalize the graph level centrality score
+  by dividing by the theoretical maximum.
 
 ## Value
 

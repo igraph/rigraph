@@ -28,7 +28,7 @@ sample_correlated_gnp_pair(n, corr, p, directed = FALSE, permutation = NULL)
 
 - directed:
 
-  Logical, whether to generate directed graphs.
+  Logical scalar, whether to generate directed graphs.
 
 - permutation:
 
@@ -94,7 +94,7 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> ── <igraph> ───────────────────────────────────────────────────────── b2642e9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 44db473 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 22 edges
 #> 
@@ -104,7 +104,7 @@ gg
 #> [19] 2 ─ 10  3 ─ 10  8 ─ 10  9 ─ 10 
 #> 
 #> $graph2
-#> ── <igraph> ───────────────────────────────────────────────────────── d9147bb ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 76f3a28 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 20 edges
 #> 

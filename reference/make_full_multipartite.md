@@ -21,7 +21,7 @@ full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - mode:
 

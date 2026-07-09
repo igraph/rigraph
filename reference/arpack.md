@@ -34,8 +34,8 @@ arpack(
 
 - sym:
 
-  Logical, whether the input matrix is symmetric. Always supply `TRUE`
-  here if it is, since it can speed up the computation.
+  Logical scalar, whether the input matrix is symmetric. Always supply
+  `TRUE` here if it is, since it can speed up the computation.
 
 - options:
 

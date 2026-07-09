@@ -77,8 +77,8 @@ alpha.centrality(
 
 - sparse:
 
-  Logical, whether to use sparse matrices for the calculation. The
-  ‘Matrix’ package is required for sparse matrix support
+  Logical scalar, whether to use sparse matrices for the calculation.
+  The ‘Matrix’ package is required for sparse matrix support
 
 ## Related documentation in the C library
 

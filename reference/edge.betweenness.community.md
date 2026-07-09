@@ -40,17 +40,17 @@ edge.betweenness.community(
 
 - directed:
 
-  Logical, whether to calculate directed edge betweenness for directed
-  graphs. It is ignored for undirected graphs.
+  Logical constant, whether to calculate directed edge betweenness for
+  directed graphs. It is ignored for undirected graphs.
 
 - edge.betweenness:
 
-  Logical, whether to return the edge betweenness of the edges at the
-  time of their removal.
+  Logical constant, whether to return the edge betweenness of the edges
+  at the time of their removal.
 
 - merges:
 
-  Logical, whether to return the merge matrix representing the
+  Logical constant, whether to return the merge matrix representing the
   hierarchical community structure of the network. This argument is
   called `merges`, even if the community structure algorithm itself is
   divisive and not agglomerative: it builds the tree from top to bottom.
@@ -65,19 +65,19 @@ edge.betweenness.community(
 
 - bridges:
 
-  Logical, whether to return a list the edge removals which actually
-  splitted a component of the graph.
+  Logical constant, whether to return a list the edge removals which
+  actually splitted a component of the graph.
 
 - modularity:
 
-  Logical, whether to calculate the maximum modularity score,
+  Logical constant, whether to calculate the maximum modularity score,
   considering all possibly community structures along the
   edge-betweenness based edge removals.
 
 - membership:
 
-  Logical, whether to calculate the membership vector corresponding to
-  the highest possible modularity score.
+  Logical constant, whether to calculate the membership vector
+  corresponding to the highest possible modularity score.
 
 ## Related documentation in the C library
 

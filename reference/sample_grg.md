@@ -23,11 +23,11 @@ grg(nodes, radius, torus = FALSE, coords = FALSE)
 
 - torus:
 
-  Logical, whether to use a torus instead of a square.
+  Logical constant, whether to use a torus instead of a square.
 
 - coords:
 
-  Logical, whether to add the positions of the vertices as vertex
+  Logical scalar, whether to add the positions of the vertices as vertex
   attributes called ‘`x`’ and ‘`y`’.
 
 ## Value

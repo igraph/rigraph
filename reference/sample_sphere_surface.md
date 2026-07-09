@@ -25,7 +25,8 @@ sample_sphere_surface(dim, n = 1, radius = 1, positive = TRUE)
 
 - positive:
 
-  Logical, whether to sample from the positive orthant of the sphere.
+  Logical scalar, whether to sample from the positive orthant of the
+  sphere.
 
 ## Value
 

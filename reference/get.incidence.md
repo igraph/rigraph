@@ -32,15 +32,15 @@ get.incidence(graph, types = NULL, attr = NULL, names = TRUE, sparse = FALSE)
 
 - names:
 
-  Logical, if `TRUE` and the vertices in the graph are named (i.e. the
-  graph has a vertex attribute called `name`), then vertex names will be
-  added to the result as row and column names. Otherwise the IDs of the
-  vertices are used as row and column names.
+  Logical scalar, if `TRUE` and the vertices in the graph are named
+  (i.e. the graph has a vertex attribute called `name`), then vertex
+  names will be added to the result as row and column names. Otherwise
+  the IDs of the vertices are used as row and column names.
 
 - sparse:
 
-  Logical, if it is `TRUE` then a sparse matrix is created, you will
-  need the `Matrix` package for this.
+  Logical scalar, if it is `TRUE` then a sparse matrix is created, you
+  will need the `Matrix` package for this.
 
 ## Related documentation in the C library
 

@@ -39,8 +39,8 @@ average_local_efficiency(
 
 - directed:
 
-  Logical, whether to consider directed paths. Ignored for undirected
-  graphs.
+  Logical scalar, whether to consider directed paths. Ignored for
+  undirected graphs.
 
 - vids:
 

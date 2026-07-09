@@ -24,10 +24,10 @@ union(
 
 - byname:
 
-  A Logical, or the character scalar `auto`. Whether to perform the
-  operation based on symbolic vertex names. If it is `auto`, that means
-  `TRUE` if all graphs are named and `FALSE` otherwise. A warning is
-  generated if `auto` and some (but not all) graphs are named.
+  A logical scalar, or the character scalar `auto`. Whether to perform
+  the operation based on symbolic vertex names. If it is `auto`, that
+  means `TRUE` if all graphs are named and `FALSE` otherwise. A warning
+  is generated if `auto` and some (but not all) graphs are named.
 
 - graph.attr.comb, vertex.attr.comb, edge.attr.comb:
 
@@ -124,7 +124,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %u% net2)
-#> ── <igraph> ───────────────────────────────────────────────────────── d295349 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 7620e30 ──
 #> ℹ undirected · named
 #> ℹ 13 vertices · 21 edges
 #> 

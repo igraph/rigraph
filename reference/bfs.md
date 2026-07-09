@@ -55,7 +55,7 @@ bfs(
 
 - unreachable:
 
-  Logical, whether the search should visit the vertices that are
+  Logical scalar, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
@@ -67,28 +67,28 @@ bfs(
 
 - order:
 
-  Logical, whether to return the ordering of the vertices.
+  Logical scalar, whether to return the ordering of the vertices.
 
 - rank:
 
-  Logical, whether to return the rank of the vertices.
+  Logical scalar, whether to return the rank of the vertices.
 
 - parent:
 
-  Logical, whether to return the parent of the vertices.
+  Logical scalar, whether to return the parent of the vertices.
 
 - pred:
 
-  Logical, whether to return the predecessors of the vertices.
+  Logical scalar, whether to return the predecessors of the vertices.
 
 - succ:
 
-  Logical, whether to return the successors of the vertices.
+  Logical scalar, whether to return the successors of the vertices.
 
 - dist:
 
-  Logical, whether to return the distance from the root of the search
-  tree.
+  Logical scalar, whether to return the distance from the root of the
+  search tree.
 
 - callback:
 
@@ -252,22 +252,22 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $order
-#> ── <vertex sequence> 20/20 · from cb45072 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from 5f2c276 ──────────────────────────────────────
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank
 #>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13
 #> 
 #> $parent
-#> ── <vertex sequence> 20/20 · from cb45072 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from 5f2c276 ──────────────────────────────────────
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 #> $pred
-#> ── <vertex sequence> 20/20 · from cb45072 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from 5f2c276 ──────────────────────────────────────
 #>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12
 #> 
 #> $succ
-#> ── <vertex sequence> 20/20 · from cb45072 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from 5f2c276 ──────────────────────────────────────
 #>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13
 #> 
 #> $dist
@@ -277,7 +277,7 @@ bfs(make_ring(10) %du% make_ring(10),
 #> [1] "out"
 #> 
 #> $father
-#> ── <vertex sequence> 20/20 · from cb45072 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from 5f2c276 ──────────────────────────────────────
 #>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11
 #> 
 
@@ -344,7 +344,7 @@ bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #> [1] "out"
 #> 
 #> $order
-#> ── <vertex sequence> 20/20 · from 0786523 ──────────────────────────────────────
+#> ── <vertex sequence> 20/20 · from a9e5135 ──────────────────────────────────────
 #>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16
 #> 
 #> $rank

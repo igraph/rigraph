@@ -25,9 +25,9 @@ authority.score(
 
 - scale:
 
-  Logical, whether to scale the result to have a maximum score of one.
-  If no scaling is used then the result vector has unit length in the
-  Euclidean norm.
+  Logical scalar, whether to scale the result to have a maximum score of
+  one. If no scaling is used then the result vector has unit length in
+  the Euclidean norm.
 
 - weights:
 
