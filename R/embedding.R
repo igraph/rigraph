@@ -58,7 +58,7 @@
 #'   eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 #'   \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 #'   are used for the ordering.
-#' @param scaled Logical scalar, if `FALSE`, then \eqn{U} and \eqn{V} are
+#' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param cvec A numeric vector, its length is the number vertices in the
 #'   graph. This vector is added to the diagonal of the adjacency matrix.
@@ -232,7 +232,7 @@ dim_select <- function(sv) {
 #'
 #'   The default (i.e. type `default`) is to use `D-A` for undirected
 #'   graphs and `OAP` for directed graphs.
-#' @param scaled Logical scalar, if `FALSE`, then \eqn{U} and \eqn{V} are
+#' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
@@ -308,7 +308,7 @@ embed_laplacian_matrix <- function(
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
 #' @param radius Numeric scalar, the radius of the sphere to sample.
-#' @param positive Logical scalar, whether to sample from the positive orthant
+#' @param positive Logical, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A `dim` (length of the `alpha` vector for
 #'   `sample_dirichlet()`) times `n` matrix, whose columns are the sample
@@ -346,7 +346,7 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
 #' @param radius Numeric scalar, the radius of the sphere to sample.
-#' @param positive Logical scalar, whether to sample from the positive orthant
+#' @param positive Logical, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A `dim` (length of the `alpha` vector for
 #'   `sample_dirichlet()`) times `n` matrix, whose columns are the sample

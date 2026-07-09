@@ -53,7 +53,7 @@
 #'   `weighted=FALSE`) and a function that computes the sum of edge
 #'   weights is used for weighted graphs (if `weighted=TRUE`). This
 #'   argument is ignored if `k` is zero.
-#' @param weighted Logical scalar, TRUE if the edge weights should be used
+#' @param weighted Logical, TRUE if the edge weights should be used
 #'   for computation of the scan statistic. If TRUE, the graph should be
 #'   weighted.  Note that this argument is ignored if `FUN` is not
 #'   `NULL`, `"ecount"` and `"sumweights"`.
@@ -131,7 +131,7 @@ local_scan <- function(
     is.null(FUN) || is.function(FUN) || (is.character(FUN) && length(FUN) == 1)
   )
 
-  ## Logical scalar
+  ## Logical
   stopifnot(is.logical(weighted), length(weighted) == 1)
 
   ## If weighted, then the graph(s) must be weighted

@@ -16,7 +16,7 @@ stochastic_matrix(
 \item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
 sum up to one; otherwise it is the columns.}
 
-\item{sparse}{Logical scalar, whether to return a sparse matrix. The
+\item{sparse}{Logical, whether to return a sparse matrix. The
 \code{Matrix} package is needed for sparse matrices.}
 }
 \value{

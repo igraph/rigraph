@@ -30,7 +30,7 @@ average_local_efficiency(
 additionally, no edge weight may be NaN. If it is \code{NULL} (the default)
 and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{directed}{Logical scalar, whether to consider directed paths. Ignored
+\item{directed}{Logical, whether to consider directed paths. Ignored
 for undirected graphs.}
 
 \item{vids}{The vertex IDs of the vertices for which the calculation will be done.

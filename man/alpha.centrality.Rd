@@ -51,7 +51,7 @@ is included in the matrix.}
 \item{tol}{Tolerance for near-singularities during matrix inversion, see
 \code{\link[=solve]{solve()}}.}
 
-\item{sparse}{Logical scalar, whether to use sparse matrices for the
+\item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
 }

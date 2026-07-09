@@ -14,7 +14,7 @@ undirected graph.}
 \item{small}{The right hand side argument of the minus operator. A directed
 ot undirected graph.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if both graphs are named and
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,

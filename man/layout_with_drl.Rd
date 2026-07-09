@@ -25,7 +25,7 @@ with_drl(...)
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical scalar, whether to use the coordinates given in the
+\item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
 
 \item{seed}{A matrix with two columns, the starting coordinates for the

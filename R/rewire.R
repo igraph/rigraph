@@ -102,9 +102,9 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' Note that this method might create graphs with multiple and/or loop edges.
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
-#' @param loops Logical scalar, whether loop edges are allowed in the rewired
+#' @param loops Logical, whether loop edges are allowed in the rewired
 #'   graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed in the
+#' @param multiple Logical, whether multiple edges are allowed in the
 #'   generated graph.
 #' @param mode Character string, specifies which endpoint of the edges to rewire
 #'   in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires

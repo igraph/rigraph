@@ -596,7 +596,7 @@ union.default <- function(...) {
 #'
 #' @aliases %u%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
 #'   otherwise. A warning is generated if `auto` and some (but not all)
@@ -696,12 +696,12 @@ intersection <- function(...) {
 #'
 #' @aliases %s%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
 #'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
-#' @param keep.all.vertices Logical scalar, whether to keep vertices that only
+#' @param keep.all.vertices Logical, whether to keep vertices that only
 #'   appear in a subset of the input graphs.
 #' @param graph.attr.comb,vertex.attr.comb,edge.attr.comb Specification for
 #'   combining clashing graph, vertex and edge attributes. `vertex.attr.comb`
@@ -792,7 +792,7 @@ difference <- function(...) {
 #'   undirected graph.
 #' @param small The right hand side argument of the minus operator. A directed
 #'   ot undirected graph.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if both graphs are named and
 #'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
@@ -877,7 +877,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' attributes are lost.
 #'
 #' @param graph The input graph, can be directed or undirected.
-#' @param loops Logical constant, whether to generate loop edges.
+#' @param loops Logical, whether to generate loop edges.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family functions for manipulating graph structure
@@ -948,7 +948,7 @@ complementer <- function(graph, loops = FALSE) {
 #' @aliases %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
-#' @param byname A logical scalar, or the character scalar `auto`. Whether
+#' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if both graphs are named and
 #'   `FALSE` otherwise. A warning is generated if `auto` and one graph,

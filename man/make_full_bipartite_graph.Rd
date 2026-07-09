@@ -19,7 +19,7 @@ full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
 
 \item{n2}{The number of vertices of the second kind.}
 
-\item{directed}{Logical scalar, whether the graphs is directed.}
+\item{directed}{Logical, whether the graphs is directed.}
 
 \item{mode}{Scalar giving the kind of edges to create for directed graphs.
 If this is \sQuote{\code{out}} then all vertices of the first kind are

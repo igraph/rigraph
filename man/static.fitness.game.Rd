@@ -25,9 +25,9 @@ specifies the in-fitness of each vertex.
 If this argument is not \code{NULL}, then a directed graph is generated,
 otherwise an undirected one.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+\item{loops}{Logical, whether to allow loop edges in the graph.}
 
-\item{multiple}{Logical scalar, whether to allow multiple edges in the
+\item{multiple}{Logical, whether to allow multiple edges in the
 graph.}
 }
 \description{

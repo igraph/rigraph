@@ -13,9 +13,9 @@ graph.}
 \item{k}{Integer scalar, the degree of each vertex in the graph, or the
 out-degree and in-degree in a directed graph.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed.}
+\item{multiple}{Logical, whether multiple edges are allowed.}
 }
 \value{
 An igraph graph.

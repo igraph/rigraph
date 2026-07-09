@@ -12,7 +12,7 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{

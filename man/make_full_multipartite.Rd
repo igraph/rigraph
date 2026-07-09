@@ -12,7 +12,7 @@ full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 \arguments{
 \item{n}{A numeric vector giving the number of vertices in each partition.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
 \item{mode}{Character scalar, the type of connections for directed graphs.
 If \code{"out"}, then edges point from vertices of partitions with lower

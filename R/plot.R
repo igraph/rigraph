@@ -32,7 +32,7 @@
 #' @aliases plot.graph
 #' @param x The graph to plot.
 #' @param axes Logical, whether to plot axes, defaults to FALSE.
-#' @param add Logical scalar, whether to add the plot to the current device, or
+#' @param add Logical, whether to add the plot to the current device, or
 #'   delete the device's current contents first.
 #' @param xlim The limits for the horizontal axis, it is unlikely that you want
 #'   to modify this.

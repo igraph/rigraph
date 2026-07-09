@@ -74,12 +74,12 @@ is.chordal <- function(
 #' @param alpham1 Numeric vector, the inverse of `alpha`. If it is
 #'   `NULL`, then it is automatically calculated by calling
 #'   [max_cardinality()], or from `alpha`.
-#' @param fillin Logical scalar, whether to calculate the fill-in edges.
-#' @param newgraph Logical scalar, whether to calculate the triangulated graph.
+#' @param fillin Logical, whether to calculate the fill-in edges.
+#' @param newgraph Logical, whether to calculate the triangulated graph.
 #' @return A list with three members:
 #'   \describe{
 #'     \item{chordal}{
-#'       Logical scalar, it is `TRUE` iff the input graph is chordal.
+#'       Logical, it is `TRUE` iff the input graph is chordal.
 #'     }
 #'     \item{fillin}{
 #'       If requested, then a numeric vector giving the fill-in edges. `NULL` otherwise.

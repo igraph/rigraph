@@ -41,11 +41,11 @@ which one to read.}
 
 \item{base}{The base address of the database. See details below.}
 
-\item{compressed}{Logical constant, if TRUE than the file is expected to be
+\item{compressed}{Logical, if TRUE than the file is expected to be
 compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
 suffix is added to the filename.}
 
-\item{directed}{Logical constant, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

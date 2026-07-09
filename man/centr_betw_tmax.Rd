@@ -13,7 +13,7 @@ centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{Logical scalar, whether to use directed shortest paths
+\item{directed}{Logical, whether to use directed shortest paths
 for calculating betweenness. Ignored if an undirected graph was
 given.}
 }

@@ -12,9 +12,9 @@ grg.game(nodes, radius, torus = FALSE, coords = FALSE)
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
 
-\item{torus}{Logical constant, whether to use a torus instead of a square.}
+\item{torus}{Logical, whether to use a torus instead of a square.}
 
-\item{coords}{Logical scalar, whether to add the positions of the vertices
+\item{coords}{Logical, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 }
 \description{
