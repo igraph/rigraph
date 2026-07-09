@@ -20,7 +20,7 @@ is_min_separator(graph, candidate)
 
 ## Value
 
-A logical scalar, whether the supplied vertex set is a (minimal) vertex
+A Logical, whether the supplied vertex set is a (minimal) vertex
 separator or not.
 
 ## Details

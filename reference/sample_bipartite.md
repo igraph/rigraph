@@ -50,8 +50,8 @@ bipartite(..., type = NULL)
 
 - directed:
 
-  Logical scalar, whether to create a directed graph. See also the
-  `mode` argument.
+  Logical, whether to create a directed graph. See also the `mode`
+  argument.
 
 - mode:
 
@@ -119,7 +119,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sample_bipartite(10, 5, p = 0)
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnp()` instead.
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── f9bd06c ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── aa3839d ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 0 edges
 #> 
@@ -129,7 +129,7 @@ sample_bipartite(10, 5, p = 0)
 
 ## full graph
 sample_bipartite(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 3e03874 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 3eeac35 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 50 edges
 #> 
@@ -148,7 +148,7 @@ sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── ffb1ed8 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── cbf87b6 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 4 edges
 #> 
@@ -163,7 +163,7 @@ sample_bipartite(10, 5, p = 0.1)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnm()` instead.
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── b188aa8 ──
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── a01aa29 ──
 #> ℹ directed · bipartite
 #> ℹ 15 vertices · 20 edges
 #> 

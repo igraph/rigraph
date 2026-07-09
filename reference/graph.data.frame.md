@@ -22,7 +22,7 @@ graph.data.frame(d, directed = TRUE, vertices = NULL)
 
 - directed:
 
-  Logical scalar, whether or not to create a directed graph.
+  Logical, whether or not to create a directed graph.
 
 - vertices:
 

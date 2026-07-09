@@ -27,13 +27,12 @@ centr_degree(
 
 - loops:
 
-  Logical scalar, whether to consider loops edges when calculating the
-  degree.
+  Logical, whether to consider loops edges when calculating the degree.
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Value
 

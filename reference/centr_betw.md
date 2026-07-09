@@ -17,13 +17,13 @@ centr_betw(graph, directed = TRUE, normalized = TRUE)
 
 - directed:
 
-  logical scalar, whether to use directed shortest paths for calculating
+  Logical, whether to use directed shortest paths for calculating
   betweenness.
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Value
 

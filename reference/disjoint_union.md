@@ -109,7 +109,7 @@ V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
 print_all(g1 %du% g2)
-#> ── <igraph> ───────────────────────────────────────────────────────── c3948e4 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── d93e6a3 ──
 #> ℹ undirected · named
 #> ℹ 20 vertices · 19 edges
 #> 

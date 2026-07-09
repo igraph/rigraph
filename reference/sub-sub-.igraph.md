@@ -45,12 +45,12 @@ x[[i, j, from, to, ..., directed = TRUE, edges = FALSE, exact = TRUE]]
 
 - directed:
 
-  Logical scalar, whether to consider edge directions in directed
-  graphs. It is ignored for undirected graphs.
+  Logical, whether to consider edge directions in directed graphs. It is
+  ignored for undirected graphs.
 
 - edges:
 
-  Logical scalar, whether to return edge IDs.
+  Logical, whether to return edge IDs.
 
 - exact:
 

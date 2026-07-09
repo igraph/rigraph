@@ -47,8 +47,8 @@ bipartite.random.game(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph. See also the
-  `mode` argument.
+  Logical, whether to create a directed graph. See also the `mode`
+  argument.
 
 - mode:
 

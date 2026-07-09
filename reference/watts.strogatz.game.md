@@ -33,13 +33,11 @@ watts.strogatz.game(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
 - loops:
 
-  Logical scalar, whether loops edges are allowed in the generated
-  graph.
+  Logical, whether loops edges are allowed in the generated graph.
 
 - multiple:
 
-  Logical scalar, whether multiple edges are allowed int the generated
-  graph.
+  Logical, whether multiple edges are allowed int the generated graph.
 
 ## Related documentation in the C library
 

@@ -30,9 +30,9 @@ bipartite_graph(types, edges, directed = FALSE)
 
 - directed:
 
-  Whether to create a directed graph, boolean constant. Note that by
-  default undirected graphs are created, as this is more common for
-  bipartite graphs.
+  Logical, whether to create a directed graph. Note that by default
+  undirected graphs are created, as this is more common for bipartite
+  graphs.
 
 ## Value
 
@@ -40,7 +40,7 @@ bipartite_graph(types, edges, directed = FALSE)
 words, an igraph graph that has a vertex attribute named `type`.
 
 [`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)
-returns a logical scalar.
+returns a Logical.
 
 ## Details
 
@@ -80,7 +80,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 30a7ed2 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f8f89c7 ──
 #> ℹ undirected · bipartite
 #> ℹ 10 vertices · 5 edges
 #> 

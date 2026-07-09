@@ -25,8 +25,7 @@ sample_sphere_volume(dim, n = 1, radius = 1, positive = TRUE)
 
 - positive:
 
-  Logical scalar, whether to sample from the positive orthant of the
-  sphere.
+  Logical, whether to sample from the positive orthant of the sphere.
 
 ## Value
 

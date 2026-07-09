@@ -22,7 +22,7 @@ centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 
 - directed:
 
-  Logical scalar, whether to use directed shortest paths for calculating
+  Logical, whether to use directed shortest paths for calculating
   betweenness. Ignored if an undirected graph was given.
 
 ## Value

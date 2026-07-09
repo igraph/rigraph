@@ -48,8 +48,8 @@ infomap.community(
 
 - modularity:
 
-  Logical scalar, whether to calculate the modularity score of the
-  detected community structure.
+  Logical, whether to calculate the modularity score of the detected
+  community structure.
 
 ## Related documentation in the C library
 

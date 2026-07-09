@@ -35,8 +35,8 @@ plot_dendrogram(
 
 - use.modularity:
 
-  Logical scalar, whether to use the modularity values to define the
-  height of the branches.
+  Logical, whether to use the modularity values to define the height of
+  the branches.
 
 - palette:
 

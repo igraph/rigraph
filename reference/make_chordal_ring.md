@@ -30,7 +30,7 @@ chordal_ring(n, w, directed = FALSE)
 
 - directed:
 
-  Logical scalar, whether or not to create a directed graph.
+  Logical, whether or not to create a directed graph.
 
 ## Value
 

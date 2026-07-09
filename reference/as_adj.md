@@ -61,19 +61,19 @@ as_adj(
 
 - edges:
 
-  **\[deprecated\]** Logical scalar, whether to return the edge IDs in
-  the matrix. For non-existant edges zero is returned.
+  **\[deprecated\]** Logical, whether to return the edge IDs in the
+  matrix. For non-existant edges zero is returned.
 
 - names:
 
-  Logical constant, whether to assign row and column names to the
-  matrix. These are only assigned if the `name` vertex attribute is
-  present in the graph.
+  Logical, whether to assign row and column names to the matrix. These
+  are only assigned if the `name` vertex attribute is present in the
+  graph.
 
 - sparse:
 
-  Logical scalar, whether to create a sparse matrix. The ‘`Matrix`’
-  package must be installed for creating sparse matrices.
+  Logical, whether to create a sparse matrix. The ‘`Matrix`’ package
+  must be installed for creating sparse matrices.
 
 ## Related documentation in the C library
 

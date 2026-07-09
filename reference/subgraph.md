@@ -44,8 +44,8 @@ subgraph_from_edges(graph, eids, delete.vertices = TRUE)
 
 - delete.vertices:
 
-  Logical scalar, whether to remove vertices that do not have any
-  adjacent edges in `eids`.
+  Logical, whether to remove vertices that do not have any adjacent
+  edges in `eids`.
 
 ## Value
 

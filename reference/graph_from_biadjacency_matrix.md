@@ -25,7 +25,7 @@ graph_from_biadjacency_matrix(
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - mode:
 
@@ -38,8 +38,8 @@ graph_from_biadjacency_matrix(
 
 - multiple:
 
-  Logical scalar, specifies how to interpret the matrix elements. See
-  details below.
+  Logical, specifies how to interpret the matrix elements. See details
+  below.
 
 - weighted:
 
@@ -118,7 +118,7 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> ── <igraph> ───────────────────────────────────────────────────────── 9f6b7ef ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 99ca751 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 8 vertices · 5 edges
 #> 
