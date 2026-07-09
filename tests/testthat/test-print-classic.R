@@ -11,7 +11,7 @@ test_that("classic: print.igraph() works", {
   expect_output(summary(g), "name[ ]*[(]v/c[)]")
   expect_output(print(g), "a--b")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     E(g)$weight <- sample(ecount(g))
   })
   expect_output(summary(g), "weight[\n |]*[(]e/n[)]")
@@ -21,27 +21,27 @@ test_that("classic: print.igraph() works", {
   expect_output(print(g, v = T), "vertex attributes")
   expect_output(print(g, e = T), "edges [(]vertex names[)] and")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g2 <- sample_gnp(13, p = 0.6, directed = TRUE)
   })
   expect_output(print(g2), "1 ->")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g3 <- sample_gnp(20, p = 0.8)
   })
   expect_output(print(g3), "1 --")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g4 <- make_star(100)
   })
   expect_output(print(g4), "2->1")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g5 <- make_star(100, mode = "out")
   })
   expect_output(print(g5), "1->")
 
-  withr::with_seed(42, {
+  igraph_with_seed(42, {
     g6 <- sample_pa(100, m = 6, directed = FALSE)
   })
   expect_output(print(g6), "     ")
@@ -137,8 +137,7 @@ test_that("classic: print.igraph.es() uses vertex names", {
 
 
 test_that("classic: vs printing", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
     set_vertex_attr("weight", value = sample(1:10, 3))
@@ -152,8 +151,7 @@ test_that("classic: vs printing", {
 })
 
 test_that("classic: vs printing, complex attributes", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
     set_vertex_attr("weight", value = sample(1:10, 3)) %>%
@@ -166,8 +164,7 @@ test_that("classic: vs printing, complex attributes", {
 })
 
 test_that("classic: es printing", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%
     set_edge_attr("weight", value = sample(1:10, 3))
@@ -179,8 +176,7 @@ test_that("classic: es printing", {
 })
 
 test_that("classic: es printing, complex attributes", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%
     set_edge_attr("weight", value = sample(1:10, 3)) %>%

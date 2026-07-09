@@ -1,4 +1,5 @@
 test_that("rewire(each_edge(mode='in')) keeps the in-degree distribution", {
+  igraph_local_seed(42)
   g <- sample_pa(1000)
 
   g2 <- g %>% rewire(each_edge(mode = "in", multiple = T, prob = 0.2))
@@ -7,6 +8,7 @@ test_that("rewire(each_edge(mode='in')) keeps the in-degree distribution", {
 })
 
 test_that("rewire(each_edge(mode='out')) keeps the out-degree distribution", {
+  igraph_local_seed(42)
   g <- sample_pa(1000)
 
   g2 <- g %>% rewire(each_edge(mode = "out", multiple = T, prob = 0.2))
@@ -15,6 +17,7 @@ test_that("rewire(each_edge(mode='out')) keeps the out-degree distribution", {
 })
 
 test_that("rewire() with zero probability does not do anything", {
+  igraph_local_seed(42)
   g <- sample_pa(100)
   g2 <- g %>% rewire(each_edge(prob = 0))
   expect_identical_graphs(g, g2)

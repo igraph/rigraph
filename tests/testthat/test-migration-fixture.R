@@ -118,23 +118,8 @@ test_that("error message snapshots", {
 
 # ---- migrate_recover_args() helper (the engine behind the blocks) ----------
 
-# Config equivalent to the fixture, for exercising the helper directly.
-fixture_args <- function(
-  dots,
-  current = list(weights = NULL, type = "out", directed = FALSE)
-) {
-  migrate_recover_args(
-    dots,
-    current = current,
-    recover_new = c("weights", "type", "directed"),
-    recover_old = c("weight", "kind", "directed"),
-    match_names = c("weight", "kind", "weights", "type", "directed"),
-    match_to = c("weights", "type", "weights", "type", "directed"),
-    defaults = list(weights = NULL, type = "out", directed = FALSE),
-    head_args = c("graph", "n"),
-    fn_name = "migration_fixture"
-  )
-}
+# `fixture_args()` (the config-equivalent wrapper) lives in
+# helper-test-functions.R.
 
 test_that("migrate_recover_args() returns NULL when there is nothing to recover", {
   expect_null(fixture_args(list()))
