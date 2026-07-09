@@ -24,7 +24,7 @@ Constructor modifiers (and related functions):
 
 ``` r
 sample_(pa(10, m = 3, algorithm = "bag"))
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── 447ef38 ──
+#> ── <igraph> Barabasi graph ────────────────────────────────────────── e89a71b ──
 #> ℹ directed
 #> ℹ 10 vertices · 27 edges
 #> 
@@ -36,7 +36,7 @@ sample_(pa(10, m = 3, algorithm = "bag"))
 #> [10] 5 → 3   5 → 1   5 → 3   6 → 1   6 → 3   6 → 1   7 → 1   7 → 3   7 → 3  
 #> [19] 8 → 1   8 → 1   8 → 3   9 → 1   9 → 3   9 → 1   10 → 1  10 → 1  10 → 2 
 sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
-#> ── <igraph> Barabasi graph ────────────────────────────────────────── d59c54b ──
+#> ── <igraph> Barabasi graph ────────────────────────────────────────── ef797e0 ──
 #> ℹ directed
 #> ℹ 10 vertices · 16 edges
 #> 

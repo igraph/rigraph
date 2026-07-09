@@ -86,37 +86,37 @@ g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 st_cuts(g, source = "a", target = "e")
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 1/4 · vertex names · from 174f2ef ───────────────────────────
+#> ── <edge sequence> 1/4 · vertex names · from c04b699 ───────────────────────────
 #> [1] a → b 
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 1/4 · vertex names · from 174f2ef ───────────────────────────
+#> ── <edge sequence> 1/4 · vertex names · from c04b699 ───────────────────────────
 #> [1] b → c 
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 1/4 · vertex names · from 174f2ef ───────────────────────────
+#> ── <edge sequence> 1/4 · vertex names · from c04b699 ───────────────────────────
 #> [1] c → d 
 #> 
 #> $cuts[[4]]
-#> ── <edge sequence> 1/4 · vertex names · from 174f2ef ───────────────────────────
+#> ── <edge sequence> 1/4 · vertex names · from c04b699 ───────────────────────────
 #> [1] d → e 
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/5 · named · from 174f2ef ────────────────────────────────
+#> ── <vertex sequence> 1/5 · named · from c04b699 ────────────────────────────────
 #> [1] a
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/5 · named · from 174f2ef ────────────────────────────────
+#> ── <vertex sequence> 2/5 · named · from c04b699 ────────────────────────────────
 #> [1] a b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 3/5 · named · from 174f2ef ────────────────────────────────
+#> ── <vertex sequence> 3/5 · named · from c04b699 ────────────────────────────────
 #> [1] a b c
 #> 
 #> $partition1s[[4]]
-#> ── <vertex sequence> 4/5 · named · from 174f2ef ────────────────────────────────
+#> ── <vertex sequence> 4/5 · named · from c04b699 ────────────────────────────────
 #> [1] a b c d
 #> 
 #> 
@@ -129,93 +129,93 @@ g2 <- graph_from_literal(
 st_cuts(g2, source = "s", target = "t")
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 2/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → a  s → b 
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 2/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → a  b → t 
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 1  a → 2  a → 3 
 #> 
 #> $cuts[[4]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 1  a → 2  3 → b 
 #> 
 #> $cuts[[5]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 1  a → 3  2 → b 
 #> 
 #> $cuts[[6]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 1  2 → b  3 → b 
 #> 
 #> $cuts[[7]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 2  a → 3  1 → b 
 #> 
 #> $cuts[[8]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 2  1 → b  3 → b 
 #> 
 #> $cuts[[9]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  a → 3  1 → b  2 → b 
 #> 
 #> $cuts[[10]]
-#> ── <edge sequence> 5/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] s → b  a → t  1 → b  2 → b  3 → b 
 #> 
 #> $cuts[[11]]
-#> ── <edge sequence> 2/10 · vertex names · from 77fa583 ──────────────────────────
+#> ── <edge sequence> 2/10 · vertex names · from 39e1259 ──────────────────────────
 #> [1] a → t  b → t 
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 1/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 2/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 2/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 2/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a
 #> 
 #> $partition1s[[4]]
-#> ── <vertex sequence> 3/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 3/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 3
 #> 
 #> $partition1s[[5]]
-#> ── <vertex sequence> 3/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 3/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 2
 #> 
 #> $partition1s[[6]]
-#> ── <vertex sequence> 4/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 4/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 2 3
 #> 
 #> $partition1s[[7]]
-#> ── <vertex sequence> 3/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 3/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 1
 #> 
 #> $partition1s[[8]]
-#> ── <vertex sequence> 4/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 4/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 1 3
 #> 
 #> $partition1s[[9]]
-#> ── <vertex sequence> 4/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 4/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 1 2
 #> 
 #> $partition1s[[10]]
-#> ── <vertex sequence> 5/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 5/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 1 2 3
 #> 
 #> $partition1s[[11]]
-#> ── <vertex sequence> 6/7 · named · from 77fa583 ────────────────────────────────
+#> ── <vertex sequence> 6/7 · named · from 39e1259 ────────────────────────────────
 #> [1] s a 1 2 3 b
 #> 
 #> 

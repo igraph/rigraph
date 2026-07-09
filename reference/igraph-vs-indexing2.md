@@ -74,10 +74,10 @@ g <- make_ring(10) %>%
   set_vertex_attr("color", value = "red") %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g)
-#> ── <vertex sequence> 10/10 · named · from d0a5e97 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from 6e6ce8e ──────────────────────────────
 #>  [1] A B C D E F G H I J
 V(g)[[]]
-#> ── <vertex sequence> 10/10 · named · from d0a5e97 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from 6e6ce8e ──────────────────────────────
 #>    color name
 #> 1    red    A
 #> 2    red    B
@@ -90,10 +90,10 @@ V(g)[[]]
 #> 9    red    I
 #> 10   red    J
 V(g)[1:5]
-#> ── <vertex sequence> 5/10 · named · from d0a5e97 ───────────────────────────────
+#> ── <vertex sequence> 5/10 · named · from 6e6ce8e ───────────────────────────────
 #> [1] A B C D E
 V(g)[[1:5]]
-#> ── <vertex sequence> 5/10 · named · from d0a5e97 ───────────────────────────────
+#> ── <vertex sequence> 5/10 · named · from 6e6ce8e ───────────────────────────────
 #>   color name
 #> 1   red    A
 #> 2   red    B
