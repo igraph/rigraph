@@ -21,8 +21,8 @@ max_cliques(
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL,
   ...,
+  file = NULL,
   callback = NULL
 )
 

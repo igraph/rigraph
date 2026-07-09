@@ -307,8 +307,8 @@ max_cliques <- function(
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL,
   ...,
+  file = NULL,
   callback = NULL
 ) {
   ensure_igraph(graph)
