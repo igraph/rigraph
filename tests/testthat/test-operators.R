@@ -1,6 +1,4 @@
 test_that("union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -16,8 +14,6 @@ test_that("union() works", {
 })
 
 test_that("disjoint_union() works", {
-  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gdu <- disjoint_union(g1, g2)
@@ -75,6 +71,7 @@ test_that("intersection() works", {
 })
 
 test_that("complementer() works", {
+  igraph_local_seed(42)
   g2 <- make_star(11, center = 11, mode = "undirected")
 
   x <- complementer(complementer(g2))
@@ -88,6 +85,7 @@ test_that("complementer() works", {
 
 
 test_that("compose() works", {
+  igraph_local_seed(42)
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -655,7 +653,7 @@ test_that("difference of named graphs works", {
 
 
 test_that("intersection of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -663,11 +661,6 @@ test_that("intersection of non-named graphs keeps attributes properly", {
   E(g2)$weight <- sample(ecount(g2))
 
   gi <- intersection(g, g2)
-
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
 
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
@@ -678,7 +671,7 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -686,11 +679,6 @@ test_that("union of non-named graphs keeps attributes properly", {
   E(g2)$weight <- sample(ecount(g2))
 
   gu <- union.igraph(g, g2)
-
-  rn <- function(D) {
-    rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
-    D
-  }
 
   df <- rn(as_data_frame(g))
   df2 <- rn(as_data_frame(g2))
@@ -1258,15 +1246,8 @@ test_that("rev on detached vs, names", {
   }
 })
 
-unique_tests <- list(
-  list(1:5, 1:5),
-  list(c(1, 1, 2:5), 1:5),
-  list(c(1, 1, 1, 1), 1),
-  list(c(1, 2, 2, 2), 1:2),
-  list(c(2, 2, 1, 1), 2:1),
-  list(c(1, 2, 1, 2), 1:2),
-  list(c(), c())
-)
+# `unique_tests` (the input/expected pairs used below) lives in
+# helper-test-functions.R.
 
 test_that("unique on attached vs", {
   sapply(unique_tests, function(d) {
@@ -1310,4 +1291,123 @@ test_that("unique on detached vs, names", {
     vg <- unique(vg)
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
+})
+
+# attribute combination on graph operators -------------------------------------
+
+test_that("union() defaults to rename behaviour", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2)
+  expect_setequal(vertex_attr_names(u), c("name", "weight_1", "weight_2"))
+  expect_setequal(edge_attr_names(u), c("weight_1", "weight_2"))
+})
+
+test_that("union() combines vertex attributes with sum", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, vertex.attr.comb = "sum")
+  expect_setequal(vertex_attr_names(u), c("name", "weight"))
+  expect_equal(sort(V(u)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("union() combines edge attributes with sum", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, edge.attr.comb = "sum")
+  expect_setequal(edge_attr_names(u), c("weight"))
+  expect_equal(sort(E(u)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("union() honours per-attribute list spec with rename fallback", {
+  gs <- make_named_pair()
+  V(gs$g1)$color <- letters[1:3]
+  V(gs$g2)$color <- LETTERS[1:3]
+  u <- union(
+    gs$g1,
+    gs$g2,
+    vertex.attr.comb = list(weight = "sum", "rename")
+  )
+  expect_setequal(
+    vertex_attr_names(u),
+    c("name", "weight", "color_1", "color_2")
+  )
+})
+
+test_that("union() can drop clashing attributes with ignore", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, edge.attr.comb = "ignore")
+  expect_length(edge_attr_names(u), 0)
+})
+
+test_that("union() supports custom function combiner", {
+  gs <- make_named_pair()
+  u <- union(
+    gs$g1,
+    gs$g2,
+    vertex.attr.comb = list(weight = function(x) mean(x))
+  )
+  expect_equal(sort(V(u)$weight), sort(c(5.5, 11, 16.5)))
+})
+
+test_that("union() picks first non-NA when only one input has the attr", {
+  gs <- make_named_pair()
+  u <- union(gs$g1, gs$g2, vertex.attr.comb = "first", byname = TRUE)
+  expect_setequal(vertex_attr_names(u), c("name", "weight"))
+  expect_equal(
+    V(u)$weight[match(c("A", "B", "C"), V(u)$name)],
+    c(1, 2, 3)
+  )
+})
+
+test_that("intersection() takes attr.comb args", {
+  gs <- make_named_pair()
+  i <- intersection(gs$g1, gs$g2, edge.attr.comb = "sum")
+  expect_setequal(edge_attr_names(i), c("weight"))
+  expect_equal(sort(E(i)$weight), sort(c(11, 22, 33)))
+})
+
+test_that("compose() takes attr.comb args", {
+  g1 <- graph_from_literal(A - B:D:E, B - C:D, C - D, D - E)
+  g2 <- graph_from_literal(A - B - E - A)
+  V(g1)$foo <- seq_len(vcount(g1))
+  V(g2)$foo <- 10 * seq_len(vcount(g2))
+  g <- compose(g1, g2, vertex.attr.comb = "sum")
+  expect_true("foo" %in% vertex_attr_names(g))
+  expect_false("foo_1" %in% vertex_attr_names(g))
+})
+
+test_that("disjoint_union() combines graph attrs via comb", {
+  g1 <- make_ring(3)
+  g2 <- make_ring(3)
+  g1$label <- "first"
+  g2$label <- "second"
+  u <- disjoint_union(g1, g2, graph.attr.comb = "concat")
+  expect_equal(u$label, c("first", "second"))
+})
+
+test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
+  expect_equal(igraph_opt("graph.attr.comb"), "rename")
+
+  g1 <- make_ring(3)
+  g2 <- make_ring(3)
+  g1$label <- "first"
+  g2$label <- "second"
+
+  # Default option ("rename") preserves the historical suffixing behaviour.
+  u <- union(g1, g2)
+  expect_all_true(c("label_1", "label_2") %in% graph_attr_names(u))
+
+  # Setting the option changes the default for the graph operators.
+  local_igraph_options(graph.attr.comb = "ignore")
+  expect_length(graph_attr_names(union(g1, g2)), 0)
+  expect_length(graph_attr_names(intersection(g1, g2)), 0)
+  expect_length(graph_attr_names(disjoint_union(g1, g2)), 0)
+  expect_length(graph_attr_names(compose(g1, g2)), 0)
+})
+
+test_that("simplify() rejects 'rename' combiner", {
+  g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
+  E(g)$weight <- 1:5
+  expect_error(
+    simplify(g, edge.attr.comb = "rename"),
+    "rename"
+  )
 })

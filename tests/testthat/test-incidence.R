@@ -1,5 +1,5 @@
 test_that("graph_from_biadjacency_matrix() works -- dense", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -16,7 +16,7 @@ test_that("graph_from_biadjacency_matrix() works -- dense", {
 
 
 test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -28,7 +28,7 @@ test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
 
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -54,7 +54,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
@@ -106,7 +106,7 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -123,7 +123,7 @@ test_that("graph_from_biadjacency_matrix() works -- sparse", {
 })
 
 test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -135,7 +135,7 @@ test_that("graph_from_biadjacency_matrix() works -- sparse + multiple", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -162,7 +162,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
   inc <- Matrix::Matrix(inc, sparse = TRUE)
@@ -204,6 +204,7 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
 })
 
 test_that("graph_from_biadjacency_matrix() errors well", {
+  igraph_local_seed(42)
   inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]

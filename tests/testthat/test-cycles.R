@@ -49,7 +49,7 @@ test_that("simple_cycle() works undirected", {
 
 # Tests for callback function
 test_that("simple_cycles_callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A)
 
@@ -68,7 +68,7 @@ test_that("simple_cycles_callback works", {
 })
 
 test_that("simple_cycles_callback can stop early", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E -+ D)
 

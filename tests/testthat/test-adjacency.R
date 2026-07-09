@@ -891,6 +891,7 @@ test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = F
 })
 
 test_that("graph_from_adjacency Na check for upper/lower", {
+  igraph_local_seed(42)
   x <- matrix(runif(100), ncol=10, nrow=10)
   x[lower.tri(x)] <- NA
   expect_no_error(

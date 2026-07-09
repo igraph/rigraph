@@ -366,6 +366,7 @@ test_that("make_de_bruijn_graph works", {
 })
 
 test_that("make_bipartite_graph works", {
+  igraph_local_seed(42)
   inc_mat_rand <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
 
   edges <- unlist(sapply(seq_len(nrow(inc_mat_rand)), function(x) {

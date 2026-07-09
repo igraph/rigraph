@@ -1,5 +1,5 @@
 test_that("components works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   random_largest_component <- function(n) {
     largest_component(sample_gnp(n, 1 / n))
@@ -40,6 +40,7 @@ test_that("is_connected returns FALSE for the null graph", {
 })
 
 test_that("decompose works", {
+  igraph_local_seed(42)
   gnp <- sample_gnp(1000, 1 / 1500)
   gnp_decomposed <- decompose(gnp)
   gnp_comps <- components(gnp)
