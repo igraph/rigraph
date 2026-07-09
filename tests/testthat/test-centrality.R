@@ -756,7 +756,7 @@ test_that("undirected alpha_centrality() works, #653", {
   expect_equal(ac1, ac2)
 
   g2 <- as_directed(g, mode = "mutual")
-  ac3 <- alpha_centrality(g, sparse = FALSE)
+  ac3 <- alpha_centrality(g2, sparse = FALSE)
   expect_equal(ac1, ac3)
 })
 
@@ -787,11 +787,12 @@ test_that("spectrum() works for symmetric matrices", {
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
-    e3 <- spectrum(
+    spectrum(
       g,
       which = list(howmany = 4, pos = "SA"),
       options = arpack_defaults
-    )
+    ),
+    "must be a list"
   )
 })
 

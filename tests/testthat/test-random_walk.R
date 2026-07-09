@@ -16,8 +16,8 @@ test_that("directed random_walk works", {
   expect_equal(w2, c(4:1, 10:9))
 
   w3 <- as_ids(random_walk(g, start = 1, steps = 5, mode = "all"))
-  expect_length(w, 6)
-  expect_true(all(abs(diff(as.numeric(w))) %in% c(1, 9)))
+  expect_length(w3, 6)
+  expect_true(all(abs(diff(as.numeric(w3))) %in% c(1, 9)))
 })
 
 test_that("directed random_walk can return wtih an error when stuck", {

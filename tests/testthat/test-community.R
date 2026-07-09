@@ -223,7 +223,7 @@ test_that("cluster_leading_eigen works", {
       multiplier(v)
     })
     ev <- eigen(M)
-    ret <- 0
+
     expect_equal(ev$values[1], value)
     if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
       ev$vectors <- -ev$vectors
@@ -284,7 +284,7 @@ test_that("cluster_leading_eigen works", {
   A <- as_adjacency_matrix(karate, sparse = FALSE)
   ec <- ecount(karate)
   deg <- degree(karate)
-  karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
+  cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
 
 test_that("cluster_leading_eigen is deterministic", {
@@ -477,7 +477,7 @@ test_that("modularity_matrix works", {
 test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
   expect_snapshot(error = TRUE, {
-    x <- modularity_matrix(karate, membership = rep(1, vcount(karate)))
+    modularity_matrix(karate, membership = rep(1, vcount(karate)))
   })
 })
 

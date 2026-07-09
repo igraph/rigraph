@@ -311,7 +311,6 @@ test_that("parameters are evaluated early", {
 
   cc <- 5
   spec <- as_star(center = cc)
-  cc <- 10
   l2 <- layout_(g, spec)
   expect_identical(l1, l2)
 })

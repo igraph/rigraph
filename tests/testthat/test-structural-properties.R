@@ -597,7 +597,7 @@ test_that("ego() works", {
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
-      w <- which(sp[x, ] <= order)
+      which(sp[x, ] <= order)
     })))
     induced_subgraph(graph, c(v, vertices))
   }
@@ -614,7 +614,7 @@ test_that("ego() works", {
   nei <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
-      w <- which(sp[x, ] <= order)
+      which(sp[x, ] <= order)
     })))
     v
   }

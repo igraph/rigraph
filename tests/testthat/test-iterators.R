@@ -244,6 +244,7 @@ test_that("vs/es refers to the original graph", {
   vs <- V(ring1)
   es <- E(ring1)
 
+  # jarl-ignore unused_object: test design
   ring1 <- ring1 + 4
 
   expect_identical(get_vs_graph(vs), ring2)
