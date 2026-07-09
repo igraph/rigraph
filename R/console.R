@@ -60,7 +60,7 @@ igraph.console <- function() {
 console <- function() {
   lifecycle::deprecate_stop(
     "3.0.0",
-    "console()",
+    "console()"
   )
 }
 
