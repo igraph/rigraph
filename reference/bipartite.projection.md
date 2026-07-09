@@ -55,7 +55,7 @@ bipartite.projection(
 
 - remove.type:
 
-  Logical, whether to remove the `type` vertex attribute from the
+  Logical scalar, whether to remove the `type` vertex attribute from the
   projections. This makes sense because these graphs are not bipartite
   any more. However if you want to combine them with each other (or
   other bipartite graphs), then it is worth keeping this attribute. By

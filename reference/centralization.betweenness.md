@@ -20,13 +20,13 @@ centralization.betweenness(graph, directed = TRUE, normalized = TRUE)
 
 - directed:
 
-  Logical, whether to use directed shortest paths for calculating
+  logical scalar, whether to use directed shortest paths for calculating
   betweenness.
 
 - normalized:
 
-  Logical. Whether to normalize the graph level centrality score by
-  dividing by the theoretical maximum.
+  Logical scalar. Whether to normalize the graph level centrality score
+  by dividing by the theoretical maximum.
 
 ## Related documentation in the C library
 

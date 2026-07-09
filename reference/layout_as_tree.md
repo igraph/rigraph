@@ -36,9 +36,9 @@ as_tree(...)
 
 - circular:
 
-  Logical, whether to plot the tree in a circular fashion. Defaults to
-  `FALSE`, so the tree branches are going bottom-up (or top-down, see
-  the `flip.y` argument.
+  Logical scalar, whether to plot the tree in a circular fashion.
+  Defaults to `FALSE`, so the tree branches are going bottom-up (or
+  top-down, see the `flip.y` argument.
 
 - rootlevel:
 
@@ -58,8 +58,8 @@ as_tree(...)
 
 - flip.y:
 
-  Logical, whether to flip the ‘y’ coordinates. The default is flipping
-  because that puts the root vertex on the top.
+  Logical scalar, whether to flip the ‘y’ coordinates. The default is
+  flipping because that puts the root vertex on the top.
 
 - ...:
 

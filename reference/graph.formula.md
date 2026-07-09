@@ -25,7 +25,7 @@ graph.formula(..., simplify = TRUE)
 
 - simplify:
 
-  Logical, whether to call
+  Logical scalar, whether to call
   [`simplify()`](https://r.igraph.org/reference/simplify.md) on the
   created graph. By default the graph is simplified, loop and multiple
   edges are removed.

@@ -63,7 +63,7 @@ edge_attr(g) <- list(
 )
 edge_attr(g, "label") <- E(g)$name
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3ade67b ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── f46ec60 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

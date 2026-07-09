@@ -45,7 +45,7 @@ lastcit.game(
 
 - directed:
 
-  Logical, whether to generate directed networks.
+  Logical scalar, whether to generate directed networks.
 
 ## Related documentation in the C library
 

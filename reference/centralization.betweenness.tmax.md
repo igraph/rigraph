@@ -25,7 +25,7 @@ centralization.betweenness.tmax(graph = NULL, nodes = 0, directed = TRUE)
 
 - directed:
 
-  Logical, whether to use directed shortest paths for calculating
+  Logical scalar, whether to use directed shortest paths for calculating
   betweenness. Ignored if an undirected graph was given.
 
 ## Related documentation in the C library

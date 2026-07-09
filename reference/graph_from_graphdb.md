@@ -58,12 +58,13 @@ graph_from_graphdb(
 
 - compressed:
 
-  Logical, if TRUE than the file is expected to be compressed by gzip.
-  If `url` is `NULL` then a ‘`.gz`’ suffix is added to the filename.
+  Logical constant, if TRUE than the file is expected to be compressed
+  by gzip. If `url` is `NULL` then a ‘`.gz`’ suffix is added to the
+  filename.
 
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical constant, whether to create a directed graph.
 
 ## Value
 

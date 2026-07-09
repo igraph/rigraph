@@ -32,11 +32,11 @@ sbm.game(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 - directed:
 
-  Logical, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
-  Logical, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
 
 ## Related documentation in the C library
 

@@ -40,11 +40,11 @@ is_chordal(
 
 - fillin:
 
-  Logical, whether to calculate the fill-in edges.
+  Logical scalar, whether to calculate the fill-in edges.
 
 - newgraph:
 
-  Logical, whether to calculate the triangulated graph.
+  Logical scalar, whether to calculate the triangulated graph.
 
 ## Value
 
@@ -52,7 +52,7 @@ A list with three members:
 
 - chordal:
 
-  Logical, it is `TRUE` iff the input graph is chordal.
+  Logical scalar, it is `TRUE` iff the input graph is chordal.
 
 - fillin:
 
@@ -108,7 +108,7 @@ max_cardinality(g1)
 #> [1] 9 4 6 8 3 5 7 2 1
 #> 
 #> $alpham1
-#> ── <vertex sequence> 9/9 · named · from d1e1514 ────────────────────────────────
+#> ── <vertex sequence> 9/9 · named · from 7c829cb ────────────────────────────────
 #> [1] G F D B E C H I A
 #> 
 is_chordal(g1, fillin = TRUE)
@@ -132,7 +132,7 @@ max_cardinality(g2)
 #>  [1] 10  8  9  6  7  5  4  2  3  1
 #> 
 #> $alpham1
-#> ── <vertex sequence> 10/10 · named · from a913e8d ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from 8f8ed04 ──────────────────────────────
 #>  [1] J H I G C F D B E A
 #> 
 is_chordal(g2, fillin = TRUE)

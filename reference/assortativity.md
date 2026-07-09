@@ -46,14 +46,14 @@ assortativity_degree(graph, directed = TRUE)
 
 - directed:
 
-  Logical, whether to consider edge directions for directed graphs. This
-  argument is ignored for undirected graphs. Supply `TRUE` here to do
-  the natural thing, i.e. use directed version of the measure for
-  directed graphs and the undirected version for undirected graphs.
+  Logical scalar, whether to consider edge directions for directed
+  graphs. This argument is ignored for undirected graphs. Supply `TRUE`
+  here to do the natural thing, i.e. use directed version of the measure
+  for directed graphs and the undirected version for undirected graphs.
 
 - normalized:
 
-  Logical, whether to compute the normalized assortativity. The
+  Boolean, whether to compute the normalized assortativity. The
   non-normalized nominal assortativity is identical to modularity. The
   non-normalized value-based assortativity is simply the covariance of
   the values at the two ends of edges.

@@ -20,7 +20,7 @@ dot_product(vecs, directed = FALSE)
 
 - directed:
 
-  A Logical, TRUE if the generated graph should be directed.
+  A logical scalar, TRUE if the generated graph should be directed.
 
 ## Value
 
@@ -94,7 +94,7 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── f231d29 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 73428c1 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 27 edges
 #> 
@@ -107,7 +107,7 @@ g
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── d988a05 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f732ce7 ──
 #> ℹ undirected
 #> ℹ 20 vertices · 145 edges
 #> 

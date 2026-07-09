@@ -40,7 +40,7 @@ asymmetric.preference.game(
 
 - loops:
 
-  Logical, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.
 
 ## Related documentation in the C library
 

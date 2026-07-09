@@ -44,10 +44,10 @@ power.law.fit(
 
 - force.continuous:
 
-  Logical. Whether to force a continuous distribution for the ‘`plfit`’
-  implementation, even if the sample vector contains integer values only
-  (by chance). If this argument is false, igraph will assume a
-  continuous distribution if at least one sample is non-integer and
+  Logical scalar. Whether to force a continuous distribution for the
+  ‘`plfit`’ implementation, even if the sample vector contains integer
+  values only (by chance). If this argument is false, igraph will assume
+  a continuous distribution if at least one sample is non-integer and
   assume a discrete distribution otherwise.
 
 - implementation:

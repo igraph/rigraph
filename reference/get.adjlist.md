@@ -39,8 +39,8 @@ get.adjlist(
 
 - multiple:
 
-  Logical, set to `FALSE` to use only one representative of each set of
-  parallel edges.
+  Logical scalar, set to `FALSE` to use only one representative of each
+  set of parallel edges.
 
 ## Related documentation in the C library
 

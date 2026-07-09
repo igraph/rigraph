@@ -81,7 +81,7 @@ cit_cit_types(
 
 - directed:
 
-  Logical, whether to generate directed networks.
+  Logical scalar, whether to generate directed networks.
 
 - types:
 
@@ -90,8 +90,8 @@ cit_cit_types(
 
 - attr:
 
-  Logical, whether to add the vertex types to the generated graph as a
-  vertex attribute called ‘`type`’.
+  Logical scalar, whether to add the vertex types to the generated graph
+  as a vertex attribute called ‘`type`’.
 
 ## Value
 

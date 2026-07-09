@@ -32,7 +32,7 @@ power_centrality(
 
 - loops:
 
-  Logical indicating whether or not the diagonal should be treated as
+  boolean indicating whether or not the diagonal should be treated as
   valid data. Set this true if and only if the data can contain loops.
   `loops` is `FALSE` by default.
 
@@ -52,8 +52,8 @@ power_centrality(
 
 - sparse:
 
-  Logical, whether to use sparse matrices for the calculation. The
-  ‘Matrix’ package is required for sparse matrix support
+  Logical scalar, whether to use sparse matrices for the calculation.
+  The ‘Matrix’ package is required for sparse matrix support
 
 - weights:
 

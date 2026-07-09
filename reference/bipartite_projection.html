@@ -104,7 +104,7 @@ The default is to calculate both.</p></dd>
 
 
 <dt id="arg-remove-type">remove.type<a class="anchor" aria-label="anchor" href="#arg-remove-type"></a></dt>
-<dd><p>Logical, whether to remove the <code>type</code> vertex
+<dd><p>Logical scalar, whether to remove the <code>type</code> vertex
 attribute from the projections. This makes sense because these graphs are
 not bipartite any more. However if you want to combine them with each other
 (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -173,7 +173,7 @@ the second.</p>
 <span class="r-in"><span><span class="va">g2</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Event network"</span></span></span>
 <span class="r-in"><span><span class="va">proj2</span> <span class="op">&lt;-</span> <span class="fu">bipartite_projection</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Event network ─────────────────────────────────────────── c1c4a6b ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Event network ─────────────────────────────────────────── 749b2ea ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 vertices · 6 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -186,7 +186,7 @@ the second.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Cecil ─ Dan   </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Event network ─────────────────────────────────────────── bbcb18c ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Event network ─────────────────────────────────────────── a4d286b ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 3 vertices · 2 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

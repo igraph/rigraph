@@ -45,7 +45,7 @@ establishment.game(
 
 - directed:
 
-  Logical, whether to generate directed graphs.
+  Logical constant, whether to generate directed graphs.
 
 ## Related documentation in the C library
 

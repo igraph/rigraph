@@ -24,8 +24,8 @@ centralize(scores, theoretical.max = 0, normalized = TRUE)
 
 - normalized:
 
-  Logical. Whether to normalize the graph level centrality score by
-  dividing by the supplied theoretical maximum.
+  Logical scalar. Whether to normalize the graph level centrality score
+  by dividing by the supplied theoretical maximum.
 
 ## Value
 

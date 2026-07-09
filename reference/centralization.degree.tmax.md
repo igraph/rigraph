@@ -35,7 +35,8 @@ centralization.degree.tmax(
 
 - loops:
 
-  Logical, whether to consider loops edges when calculating the degree.
+  Logical scalar, whether to consider loops edges when calculating the
+  degree.
 
 ## Related documentation in the C library
 

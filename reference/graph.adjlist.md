@@ -29,9 +29,9 @@ graph.adjlist(adjlist, mode = c("out", "in", "all", "total"), duplicate = TRUE)
 
 - duplicate:
 
-  Logical. For undirected graphs it gives whether edges are included in
-  the list twice. E.g. if it is `TRUE` then for an undirected `{A,B}`
-  edge
+  Logical scalar. For undirected graphs it gives whether edges are
+  included in the list twice. E.g. if it is `TRUE` then for an
+  undirected `{A,B}` edge
   [`graph_from_adj_list()`](https://r.igraph.org/reference/graph_from_adj_list.md)
   expects `A` included in the neighbors of `B` and `B` to be included in
   the neighbors of `A`.

@@ -46,7 +46,7 @@ count_components(graph, mode = c("weak", "strong"))
 
 ## Value
 
-For `is_connected()` a Logical.
+For `is_connected()` a logical constant.
 
 For `components()` a named list with three components:
 
@@ -179,7 +179,7 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 9179349 ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── f8bd1fb ──
 #> ℹ undirected
 #> ℹ 8 vertices · 7 edges
 #> 

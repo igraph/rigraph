@@ -31,10 +31,11 @@ graph_from_adj_list(
 
 - duplicate:
 
-  Logical. For undirected graphs it gives whether edges are included in
-  the list twice. E.g. if it is `TRUE` then for an undirected `{A,B}`
-  edge `graph_from_adj_list()` expects `A` included in the neighbors of
-  `B` and `B` to be included in the neighbors of `A`.
+  Logical scalar. For undirected graphs it gives whether edges are
+  included in the list twice. E.g. if it is `TRUE` then for an
+  undirected `{A,B}` edge `graph_from_adj_list()` expects `A` included
+  in the neighbors of `B` and `B` to be included in the neighbors of
+  `A`.
 
   This argument is ignored if `mode` is `out` or `in`.
 

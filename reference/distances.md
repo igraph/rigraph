@@ -133,22 +133,22 @@ all_shortest_paths(
 
 - predecessors:
 
-  Logical, whether to return the predecessor vertex for each vertex. The
-  predecessor of vertex `i` in the tree is the vertex from which vertex
-  `i` was reached. The predecessor of the start vertex (in the `from`
-  argument) is itself by definition. If the predecessor is zero, it
-  means that the given vertex was not reached from the source during the
-  search. Note that the search terminates if all the vertices in `to`
-  are reached.
+  Logical scalar, whether to return the predecessor vertex for each
+  vertex. The predecessor of vertex `i` in the tree is the vertex from
+  which vertex `i` was reached. The predecessor of the start vertex (in
+  the `from` argument) is itself by definition. If the predecessor is
+  zero, it means that the given vertex was not reached from the source
+  during the search. Note that the search terminates if all the vertices
+  in `to` are reached.
 
 - inbound.edges:
 
-  Logical, whether to return the inbound edge for each vertex. The
-  inbound edge of vertex `i` in the tree is the edge via which vertex
-  `i` was reached. The start vertex and vertices that were not reached
-  during the search will have zero in the corresponding entry of the
-  vector. Note that the search terminates if all the vertices in `to`
-  are reached.
+  Logical scalar, whether to return the inbound edge for each vertex.
+  The inbound edge of vertex `i` in the tree is the edge via which
+  vertex `i` was reached. The start vertex and vertices that were not
+  reached during the search will have zero in the corresponding entry of
+  the vector. Note that the search terminates if all the vertices in
+  `to` are reached.
 
 ## Value
 
@@ -363,43 +363,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> ── <vertex sequence> 5/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> ── <vertex sequence> 4/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> ── <vertex sequence> 3/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> ── <vertex sequence> 2/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 2/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> ── <vertex sequence> 1/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> ── <vertex sequence> 2/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 2/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> ── <vertex sequence> 3/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> ── <vertex sequence> 4/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> ── <vertex sequence> 5/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> ── <vertex sequence> 6/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -415,37 +415,37 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> ── <vertex sequence> 6/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> ── <vertex sequence> 6/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> ── <vertex sequence> 5/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> ── <vertex sequence> 4/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> ── <edge sequence> 5/10 · from dd9e833 ─────────────────────────────────────────
+#> ── <edge sequence> 5/10 · from 711a7a3 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8   6 ─ 7  
 #> 
 #> $epaths[[2]]
-#> ── <edge sequence> 5/10 · from dd9e833 ─────────────────────────────────────────
+#> ── <edge sequence> 5/10 · from 711a7a3 ─────────────────────────────────────────
 #> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 #> 
 #> $epaths[[3]]
-#> ── <edge sequence> 4/10 · from dd9e833 ─────────────────────────────────────────
+#> ── <edge sequence> 4/10 · from 711a7a3 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8  
 #> 
 #> $epaths[[4]]
-#> ── <edge sequence> 3/10 · from dd9e833 ─────────────────────────────────────────
+#> ── <edge sequence> 3/10 · from 711a7a3 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9  
 #> 
 #> 
@@ -454,19 +454,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> ── <vertex sequence> 6/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> ── <vertex sequence> 6/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 711a7a3 ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> ── <vertex sequence> 5/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> ── <vertex sequence> 4/10 · from dd9e833 ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 711a7a3 ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 

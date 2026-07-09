@@ -81,12 +81,13 @@ pa_age(
 
 - out.pref:
 
-  Logical, whether to include edges not initiated by the vertex as a
-  basis of preferential attachment. See details below.
+  Logical constant, whether to include edges not initiated by the vertex
+  as a basis of preferential attachment. See details below.
 
 - directed:
 
-  Logical, whether to generate a directed graph. See details below.
+  Logical constant, whether to generate a directed graph. See details
+  below.
 
 - zero.deg.appeal:
 

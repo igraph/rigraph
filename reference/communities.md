@@ -78,8 +78,8 @@ communities(x)
 
 - use.modularity:
 
-  Logical, whether to use the modularity values to define the height of
-  the branches.
+  Logical scalar, whether to use the modularity values to define the
+  height of the branches.
 
 - no:
 
@@ -155,7 +155,7 @@ returns a numeric scalar.
 
 `crossing()` returns a logical vector.
 
-`is_hierarchical()` returns a Logical.
+`is_hierarchical()` returns a logical scalar.
 
 `merges()` returns a two-column numeric matrix.
 
