@@ -155,7 +155,7 @@ crear el mismo grafo que antes:</p>
 aristas:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── b335d06 ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 556505f ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected · named</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 10 vertices · 2 edges</span></span>
 <span><span class="co">## </span></span>
@@ -174,7 +174,7 @@ lo cual es conveniente para grafos grandes con millones de aristas:</p>
 <hr>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── b335d06 ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 556505f ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected · named</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 10 vertices · 2 edges</span></span>
 <span><span class="co">## </span></span>
@@ -267,7 +267,7 @@ que proporciona un mecanismo para encadenar comandos con el operador
 <span>  <span class="fu"><a href="../reference/add_vertices.html">add_vertices</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_edges.html">add_edges</a></span><span class="op">(</span>edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">39</span>, <span class="fl">39</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">38</span>, <span class="fl">40</span>, <span class="fl">37</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; Zachary ───────────────────────────────────────────────── abd0169 ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; Zachary ───────────────────────────────────────────────── 32aaa08 ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 40 vertices · 86 edges</span></span>
 <span><span class="co">## </span></span>
@@ -372,7 +372,7 @@ ejemplo <code><a href="../reference/make_tree.html">make_tree()</a></code>:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">127</span>, <span class="fl">2</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 49280c7 ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── c7710c1 ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 5 vertices · 3 edges</span></span>
 <span><span class="co">## </span></span>
@@ -393,7 +393,7 @@ producen un grafo diferente cada vez; por ejemplo,
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_grg.html">sample_grg</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">graph1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; Geometric random graph ────────────────────────────────── 31f396a ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; Geometric random graph ────────────────────────────────── 9ac5807 ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 100 vertices · 499 edges</span></span>
 <span><span class="co">## </span></span>
@@ -455,7 +455,7 @@ grafo. Es más corto y tan legible como <code><a href="../reference/graph_attr.h
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">is_formal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── b973066 ──</span></span>
+<pre><code><span><span class="co">## ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 27e8c75 ──</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> undirected · named</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> 7 vertices · 9 edges</span></span>
 <span><span class="co">## </span></span>
@@ -508,7 +508,7 @@ utilizar:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Alejandra"</span>, <span class="st">"Bruno"</span>, <span class="st">"Carmina"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 7/7 · named · from b973066 ────────────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 7/7 · named · from 27e8c75 ────────────────────────────────</span></span>
 <span><span class="co">## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim</span></span></code></pre>
 <p>Para eliminar atributos:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -628,17 +628,17 @@ impares, utilizando la función <code><a href="../reference/V.html">V()</a></cod
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">]</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 3/10 · from 93f5a79 ───────────────────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 3/10 · from c0ba6b2 ───────────────────────────────────────</span></span>
 <span><span class="co">## [1] 2 3 7</span></span></code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="va">seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span>    <span class="co"># filtrar un conjunto de vértices existente</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 2/10 · from 93f5a79 ───────────────────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;vertex sequence&gt; 2/10 · from c0ba6b2 ───────────────────────────────────────</span></span>
 <span><span class="co">## [1] 2 7</span></span></code></pre>
 <p>Al seleccionar un vértice que no existe se produce un error:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="st">"foo"</span>, <span class="fl">3.5</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `simple_vs_index()` at rigraph/R/iterators.R:736:7:</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `simple_vs_index()` at rigraph/R/iterators.R:732:7:</span></span></span>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> Unknown vertex selected.</span></span></code></pre>
 <p>Los nombres de los atributos también pueden utilizarse tal cual
 dentro de los operadores de indexación (“[]”) de <code><a href="../reference/V.html">V()</a></code> y
@@ -728,13 +728,13 @@ todas las aristas procedentes de Carmina (cuyo ID de vértice es el
 3):</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="../reference/inside-square-error.html">.from</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 4/9 · vertex names · from b973066 ───────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 4/9 · vertex names · from 27e8c75 ───────────────────────────</span></span>
 <span><span class="co">## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      </span></span>
 <span><span class="co">## [4] Carmina ─ Samira</span></span></code></pre>
 <p>Por supuesto, también funciona con nombres de vértices:</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="../reference/inside-square-error.html">.from</a></span><span class="op">(</span><span class="st">"Carmina"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 4/9 · vertex names · from b973066 ───────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 4/9 · vertex names · from 27e8c75 ───────────────────────────</span></span>
 <span><span class="co">## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      </span></span>
 <span><span class="co">## [4] Carmina ─ Samira</span></span></code></pre>
 <p>Al usar <code><a href="../reference/inside-square-error.html">.to()</a></code>, se filtran la serie de aristas en función
@@ -752,7 +752,7 @@ Carmina (su ID de vértice es el 3), Nang (su ID de vértice es el 5) y
 Samira (su ID de vértice es el 6):</p>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">[</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span> <span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 3/9 · vertex names · from b973066 ───────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 3/9 · vertex names · from 27e8c75 ───────────────────────────</span></span>
 <span><span class="co">## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira</span></span></code></pre>
 <p>Para que el operador <code>%--%</code> funcione con nombres, puedes
 construir vectores de caracteres que contengan los nombres y luego
@@ -772,7 +772,7 @@ hemos eliminado anteriormente:</p>
 <pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Samira"</span></span></code></pre>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">men</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="va">women</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 5/9 · vertex names · from b973066 ───────────────────────────</span></span>
+<pre><code><span><span class="co">## ── &lt;edge sequence&gt; 5/9 · vertex names · from 27e8c75 ───────────────────────────</span></span>
 <span><span class="co">## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    </span></span>
 <span><span class="co">## [5] Nang ─ Samira</span></span></code></pre>
 </div>

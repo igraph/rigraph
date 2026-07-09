@@ -29,8 +29,8 @@ centralization.closeness(
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Related documentation in the C library
 

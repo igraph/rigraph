@@ -74,8 +74,8 @@ alpha_centrality(
 
 - sparse:
 
-  Logical scalar, whether to use sparse matrices for the calculation.
-  The ‘Matrix’ package is required for sparse matrix support
+  Logical, whether to use sparse matrices for the calculation. The
+  ‘Matrix’ package is required for sparse matrix support
 
 ## Value
 

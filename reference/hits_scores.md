@@ -27,9 +27,9 @@ hits_scores(
 
 - scale:
 
-  Logical scalar, whether to scale the result to have a maximum score of
-  one. If no scaling is used then the result vector has unit length in
-  the Euclidean norm.
+  Logical, whether to scale the result to have a maximum score of one.
+  If no scaling is used then the result vector has unit length in the
+  Euclidean norm.
 
 - weights:
 
@@ -120,7 +120,7 @@ Centrality measures:
 g <- make_star(10)
 hits_scores(g)
 #> $hub
-#>  [1] 2.602085e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
+#>  [1] 3.118782e-18 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #>  [6] 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00
 #> 
 #> $authority
@@ -265,7 +265,7 @@ hits_scores(g2)
 #> [1] 0
 #> 
 #> $options$numreo
-#> [1] 6
+#> [1] 4
 #> 
 #> 
 ```

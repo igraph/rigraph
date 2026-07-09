@@ -37,11 +37,11 @@ sample_fitness(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the graph.
+  Logical, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the graph.
+  Logical, whether to allow multiple edges in the graph.
 
 ## Value
 

@@ -45,27 +45,27 @@ graph.dfs(
 
 - unreachable:
 
-  Logical scalar, whether the search should visit the vertices that are
+  Logical, whether the search should visit the vertices that are
   unreachable from the given root vertex (or vertices). If `TRUE`, then
   additional searches are performed until all vertices are visited.
 
 - order:
 
-  Logical scalar, whether to return the DFS ordering of the vertices.
+  Logical, whether to return the DFS ordering of the vertices.
 
 - order.out:
 
-  Logical scalar, whether to return the ordering based on leaving the
-  subtree of the vertex.
+  Logical, whether to return the ordering based on leaving the subtree
+  of the vertex.
 
 - father:
 
-  Logical scalar, whether to return the father of the vertices.
+  Logical, whether to return the father of the vertices.
 
 - dist:
 
-  Logical scalar, whether to return the distance from the root of the
-  search tree.
+  Logical, whether to return the distance from the root of the search
+  tree.
 
 - in.callback:
 

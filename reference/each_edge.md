@@ -24,12 +24,11 @@ each_edge(
 
 - loops:
 
-  Logical scalar, whether loop edges are allowed in the rewired graph.
+  Logical, whether loop edges are allowed in the rewired graph.
 
 - multiple:
 
-  Logical scalar, whether multiple edges are allowed in the generated
-  graph.
+  Logical, whether multiple edges are allowed in the generated graph.
 
 - mode:
 

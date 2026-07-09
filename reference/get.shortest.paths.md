@@ -69,22 +69,22 @@ get.shortest.paths(
 
 - predecessors:
 
-  Logical scalar, whether to return the predecessor vertex for each
-  vertex. The predecessor of vertex `i` in the tree is the vertex from
-  which vertex `i` was reached. The predecessor of the start vertex (in
-  the `from` argument) is itself by definition. If the predecessor is
-  zero, it means that the given vertex was not reached from the source
-  during the search. Note that the search terminates if all the vertices
-  in `to` are reached.
+  Logical, whether to return the predecessor vertex for each vertex. The
+  predecessor of vertex `i` in the tree is the vertex from which vertex
+  `i` was reached. The predecessor of the start vertex (in the `from`
+  argument) is itself by definition. If the predecessor is zero, it
+  means that the given vertex was not reached from the source during the
+  search. Note that the search terminates if all the vertices in `to`
+  are reached.
 
 - inbound.edges:
 
-  Logical scalar, whether to return the inbound edge for each vertex.
-  The inbound edge of vertex `i` in the tree is the edge via which
-  vertex `i` was reached. The start vertex and vertices that were not
-  reached during the search will have zero in the corresponding entry of
-  the vector. Note that the search terminates if all the vertices in
-  `to` are reached.
+  Logical, whether to return the inbound edge for each vertex. The
+  inbound edge of vertex `i` in the tree is the edge via which vertex
+  `i` was reached. The start vertex and vertices that were not reached
+  during the search will have zero in the corresponding entry of the
+  vector. Note that the search terminates if all the vertices in `to`
+  are reached.
 
 - algorithm:
 

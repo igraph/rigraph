@@ -23,7 +23,7 @@ centr_eigen(
 
 - directed:
 
-  logical scalar, whether to use directed shortest paths for calculating
+  Logical, whether to use directed shortest paths for calculating
   eigenvector centrality.
 
 - scale:
@@ -39,8 +39,8 @@ centr_eigen(
 
 - normalized:
 
-  Logical scalar. Whether to normalize the graph level centrality score
-  by dividing by the theoretical maximum.
+  Logical. Whether to normalize the graph level centrality score by
+  dividing by the theoretical maximum.
 
 ## Value
 

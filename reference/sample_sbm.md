@@ -30,11 +30,11 @@ sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - loops:
 
-  Logical scalar, whether self-loops are allowed in the graph.
+  Logical, whether self-loops are allowed in the graph.
 
 ## Value
 
@@ -99,7 +99,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> ── <igraph> Stochastic block model ────────────────────────────────── 530f726 ──
+#> ── <igraph> Stochastic block model ────────────────────────────────── 7ccf623 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 16856 edges
 #> 

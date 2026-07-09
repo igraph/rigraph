@@ -23,7 +23,7 @@ is_separator(graph, candidate)
 
 ## Value
 
-A logical scalar, whether the supplied vertex set is a (minimal) vertex
+A Logical, whether the supplied vertex set is a (minimal) vertex
 separator or not. lists all vertex separator of minimum size.
 
 ## Related documentation in the C library
@@ -51,11 +51,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> ── <vertex sequence> 2/4 · from 8b22137 ────────────────────────────────────────
+#> ── <vertex sequence> 2/4 · from 4cef531 ────────────────────────────────────────
 #> [1] 2 4
 #> 
 #> [[2]]
-#> ── <vertex sequence> 2/4 · from 8b22137 ────────────────────────────────────────
+#> ── <vertex sequence> 2/4 · from 4cef531 ────────────────────────────────────────
 #> [1] 1 3
 #> 
 is_separator(ring, 1)

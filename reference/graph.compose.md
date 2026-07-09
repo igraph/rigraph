@@ -24,10 +24,10 @@ graph.compose(g1, g2, byname = "auto")
 
 - byname:
 
-  A logical scalar, or the character scalar `auto`. Whether to perform
-  the operation based on symbolic vertex names. If it is `auto`, that
-  means `TRUE` if both graphs are named and `FALSE` otherwise. A warning
-  is generated if `auto` and one graph, but not both graphs are named.
+  A Logical, or the character scalar `auto`. Whether to perform the
+  operation based on symbolic vertex names. If it is `auto`, that means
+  `TRUE` if both graphs are named and `FALSE` otherwise. A warning is
+  generated if `auto` and one graph, but not both graphs are named.
 
 ## Related documentation in the C library
 

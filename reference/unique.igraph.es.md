@@ -53,11 +53,11 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 E(g)[1, 1:5, 1:10, 5:10]
-#> ── <edge sequence> 22/10 · vertex names · from ad57b26 ─────────────────────────
+#> ── <edge sequence> 22/10 · vertex names · from 8bfeb70 ─────────────────────────
 #>  [1] A ─ B  A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  A ─ B  B ─ C  C ─ D  D ─ E 
 #> [11] E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J  E ─ F  F ─ G  G ─ H  H ─ I 
 #> [21] I ─ J  A ─ J 
 E(g)[1, 1:5, 1:10, 5:10] %>% unique()
-#> ── <edge sequence> 10/10 · vertex names · from ad57b26 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 8bfeb70 ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 ```

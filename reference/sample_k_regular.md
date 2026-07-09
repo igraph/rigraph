@@ -21,11 +21,11 @@ sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)
 
 - directed:
 
-  Logical scalar, whether to create a directed graph.
+  Logical, whether to create a directed graph.
 
 - multiple:
 
-  Logical scalar, whether multiple edges are allowed.
+  Logical, whether multiple edges are allowed.
 
 ## Value
 

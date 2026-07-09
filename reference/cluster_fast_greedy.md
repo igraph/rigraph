@@ -23,18 +23,18 @@ cluster_fast_greedy(
 
 - merges:
 
-  Logical scalar, whether to return the merge matrix.
+  Logical, whether to return the merge matrix.
 
 - modularity:
 
-  Logical scalar, whether to return a vector containing the modularity
-  after each merge.
+  Logical, whether to return a vector containing the modularity after
+  each merge.
 
 - membership:
 
-  Logical scalar, whether to calculate the membership vector
-  corresponding to the maximum modularity score, considering all
-  possible community structures along the merges.
+  Logical, whether to calculate the membership vector corresponding to
+  the maximum modularity score, considering all possible community
+  structures along the merges.
 
 - weights:
 

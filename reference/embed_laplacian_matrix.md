@@ -68,8 +68,8 @@ embed_laplacian_matrix(
 
 - scaled:
 
-  Logical scalar, if `FALSE`, then \\U\\ and \\V\\ are returned instead
-  of \\X\\ and \\Y\\.
+  Logical, if `FALSE`, then \\U\\ and \\V\\ are returned instead of
+  \\X\\ and \\Y\\.
 
 - options:
 

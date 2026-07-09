@@ -40,11 +40,11 @@ static.fitness.game(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the graph.
+  Logical, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the graph.
+  Logical, whether to allow multiple edges in the graph.
 
 ## Related documentation in the C library
 

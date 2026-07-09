@@ -190,7 +190,7 @@ returned, in a named list with components “vpath” and “epath”.</p></dd>
 
 
 <dt id="arg-predecessors">predecessors<a class="anchor" aria-label="anchor" href="#arg-predecessors"></a></dt>
-<dd><p>Logical scalar, whether to return the predecessor vertex
+<dd><p>Logical, whether to return the predecessor vertex
 for each vertex. The predecessor of vertex <code>i</code> in the tree is the
 vertex from which vertex <code>i</code> was reached. The predecessor of the start
 vertex (in the <code>from</code> argument) is itself by definition. If the
@@ -200,7 +200,7 @@ vertices in <code>to</code> are reached.</p></dd>
 
 
 <dt id="arg-inbound-edges">inbound.edges<a class="anchor" aria-label="anchor" href="#arg-inbound-edges"></a></dt>
-<dd><p>Logical scalar, whether to return the inbound edge for
+<dd><p>Logical, whether to return the inbound edge for
 each vertex. The inbound edge of vertex <code>i</code> in the tree is the edge via
 which vertex <code>i</code> was reached. The start vertex and vertices that were
 not reached during the search will have zero in the corresponding entry of
@@ -389,43 +389,43 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 3/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5  4  3  2  1 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -441,37 +441,37 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">all_shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpaths[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · from 2c2cb32 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · from dd9e833 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8   6 ─ 7  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · from 2c2cb32 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · from dd9e833 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 4/10 · from 2c2cb32 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 4/10 · from dd9e833 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epaths[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 3/10 · from 2c2cb32 ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 3/10 · from dd9e833 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 10  9 ─ 10  8 ─ 9  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -480,19 +480,19 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 6/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 5/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from 2c2cb32 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/10 · from dd9e833 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

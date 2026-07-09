@@ -20,20 +20,20 @@ igraph.from.graphNEL(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
 
 - name:
 
-  Logical scalar, whether to add graphNEL vertex names as an igraph
-  vertex attribute called ‘`name`’.
+  Logical, whether to add graphNEL vertex names as an igraph vertex
+  attribute called ‘`name`’.
 
 - weight:
 
-  Logical scalar, whether to add graphNEL edge weights as an igraph edge
+  Logical, whether to add graphNEL edge weights as an igraph edge
   attribute called ‘`weight`’. (graphNEL graphs are always weighted.)
 
 - unlist.attrs:
 
-  Logical scalar. graphNEL attribute query functions return the values
-  of the attributes in R lists, if this argument is `TRUE` (the default)
-  these will be converted to atomic vectors, whenever possible, before
-  adding them to the igraph graph.
+  Logical. graphNEL attribute query functions return the values of the
+  attributes in R lists, if this argument is `TRUE` (the default) these
+  will be converted to atomic vectors, whenever possible, before adding
+  them to the igraph graph.
 
 ## Related documentation in the C library
 
