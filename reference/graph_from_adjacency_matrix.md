@@ -299,7 +299,7 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> ── <igraph> ───────────────────────────────────────────────────────── b838ae4 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 9c7f376 ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 57 edges
 #> 

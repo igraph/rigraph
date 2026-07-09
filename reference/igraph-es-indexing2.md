@@ -76,10 +76,10 @@ g <- make_(
   with_edge_(weight = 1:10, color = "green")
 )
 E(g)
-#> ── <edge sequence> 10/10 · vertex names · from 3f6929e ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 8161010 ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 E(g)[[]]
-#> ── <edge sequence> 10/10 · vertex names · from 3f6929e ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 8161010 ─────────────────────────
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 2     B    C   2   3      2 green
@@ -92,7 +92,7 @@ E(g)[[]]
 #> 9     I    J   9  10      9 green
 #> 10    A    J   1  10     10 green
 E(g)[[.inc("A")]]
-#> ── <edge sequence> 2/10 · vertex names · from 3f6929e ──────────────────────────
+#> ── <edge sequence> 2/10 · vertex names · from 8161010 ──────────────────────────
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 10    A    J   1  10     10 green

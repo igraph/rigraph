@@ -107,7 +107,7 @@ sstar <- make_star(6, center = 6, mode = "undirected")
 V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel %m% sstar
 print_all(G)
-#> ── <igraph> ───────────────────────────────────────────────────────── f4661ab ──
+#> ── <igraph> ───────────────────────────────────────────────────────── b669eaa ──
 #> ℹ undirected · named
 #> ℹ 11 vertices · 15 edges
 #> 
