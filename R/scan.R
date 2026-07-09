@@ -164,7 +164,6 @@ local_scan <- function(
 
   ## Check mode argument
   mode <- igraph_match_arg(mode)
-  cmode <- switch(mode, out = 1, `in` = 2, all = 3, total = 3)
 
   sumweights <- function(g) sum(E(g)$weight)
 
