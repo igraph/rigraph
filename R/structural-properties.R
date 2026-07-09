@@ -2621,9 +2621,10 @@ count_loops <- function(graph) {
 #'   vertices.
 #' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
-#' @param callback If not `NULL`, then it must be callback function. This
-#'   is called whenever a vertex is visited. The callback function should
-#'   return `FALSE` to continue the search or `TRUE` to stop it. See details below.
+#' @param callback Callback function. This is called whenever a vertex is visited.
+#'   The callback function should return `FALSE` to continue the search
+#'   or `TRUE` to stop it. See details below.
+#'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
@@ -2896,11 +2897,13 @@ bfs <- function(
 #' @param parent Logical, whether to return the parent of the vertices.
 #' @param dist Logical, whether to return the distance from the root of
 #'   the search tree.
-#' @param in.callback If not `NULL`, then it must be callback function.
+#' @param in.callback Callback function.
 #'   This is called whenever a vertex is visited. See details below.
-#' @param out.callback If not `NULL`, then it must be callback function.
+#'   Default: `NULL`.
+#' @param out.callback Callback function.
 #'   This is called whenever the subtree of a vertex is completed by the
 #'   algorithm. See details below.
+#'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use

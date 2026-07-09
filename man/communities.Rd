@@ -100,13 +100,12 @@ communities are colored green and other edges are red.}
 vector of the community structure. Might also be \code{NULL} if the
 community structure is given in another way, e.g. by a merge matrix.}
 
-\item{algorithm}{If not \code{NULL} (meaning an unknown algorithm), then a
-character scalar, the name of the algorithm that produced the community
-structure.}
+\item{algorithm}{Name of the algorithm that produced the community
+structure (character scalar). Default: \code{NULL}, meaning an unknown algorithm.}
 
-\item{merges}{If not \code{NULL}, then the merge matrix of the hierarchical
+\item{merges}{Merge matrix of the hierarchical
 community structure. See \code{merges()} below for more information on its
-format.}
+format. Default: \code{NULL}.}
 
 \item{modularity}{Numeric scalar or vector, the modularity value of the
 community structure. It can also be \code{NULL}, if the modularity of the

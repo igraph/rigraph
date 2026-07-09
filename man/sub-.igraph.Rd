@@ -48,8 +48,8 @@ well.}
 
 \item{drop}{Ignored.}
 
-\item{attr}{If not \code{NULL}, then it should be the name of an edge
-attribute. This attribute is queried and returned.}
+\item{attr}{Name of an edge attribute. This attribute is queried and returned.
+Default: \code{NULL}.}
 }
 \value{
 A scalar or matrix. See details below.

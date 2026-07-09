@@ -60,9 +60,10 @@ vertices.}
 \item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{callback}{If not \code{NULL}, then it must be callback function. This
-is called whenever a vertex is visited. The callback function should
-return \code{FALSE} to continue the search or \code{TRUE} to stop it. See details below.}
+\item{callback}{Callback function. This is called whenever a vertex is visited.
+The callback function should return \code{FALSE} to continue the search
+or \code{TRUE} to stop it. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

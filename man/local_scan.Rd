@@ -20,9 +20,9 @@ local_scan(
 \item{graph.us, graph}{An igraph object, the graph for which the scan
 statistics will be computed}
 
-\item{graph.them}{An igraph object or \code{NULL}, if not \code{NULL},
-then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-calculated from \code{graph.us} are evaluated on \code{graph.them}.}
+\item{graph.them}{An igraph object on which the \sQuote{them} statistics is computed,
+i.e. the neighborhoods calculated from \code{graph.us} are evaluated on \code{graph.them}.
+Default: \code{NULL}.}
 
 \item{k}{An integer scalar, the size of the local neighborhood for each
 vertex. Should be non-negative.}

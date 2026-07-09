@@ -3167,12 +3167,9 @@ chung_lu <- function(
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param fitness.out A numeric vector containing the fitness of each vertex.
 #'   For directed graphs, this specifies the out-fitness of each vertex.
-#' @param fitness.in If `NULL` (the default), the generated graph will be
-#'   undirected. If not `NULL`, then it should be a numeric vector and it
-#'   specifies the in-fitness of each vertex.
-#'
-#'   If this argument is not `NULL`, then a directed graph is generated,
-#'   otherwise an undirected one.
+#' @param fitness.in Numeric vector that specifies the in-fitness of each vertex.
+#'   The generated graph will be directed.
+#'   Default: `NULL`, the generated graph will be undirected.
 #' @param loops Logical, whether to allow loop edges in the graph.
 #' @param multiple Logical, whether to allow multiple edges in the
 #'   graph.

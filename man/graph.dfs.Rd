@@ -46,12 +46,14 @@ leaving the subtree of the vertex.}
 \item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{in.callback}{If not \code{NULL}, then it must be callback function.
-This is called whenever a vertex is visited. See details below.}
+\item{in.callback}{Callback function.
+This is called whenever a vertex is visited. See details below.
+Default: \code{NULL}.}
 
-\item{out.callback}{If not \code{NULL}, then it must be callback function.
+\item{out.callback}{Callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.}
+algorithm. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

@@ -793,7 +793,7 @@ write.graph.dot <- function(graph, file) {
 #' <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 #' for the actual format of a graph database file and other information.
 #'
-#' @param url If not `NULL` it is a complete URL with the file to import.
+#' @param url Complete URL with the file to import. Default: `NULL`.
 #' @param prefix Gives the prefix. See details below. Possible values:
 #'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
 #'   `mcs50`, `mcs70`, `mcs90`.

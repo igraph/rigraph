@@ -467,7 +467,7 @@ is_isomorphic_to <- isomorphic
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
@@ -656,7 +656,7 @@ graph.count.isomorphisms.vf2 <- function(
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
@@ -843,7 +843,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
+#'       Matching restrictions.
 #'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
