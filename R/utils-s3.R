@@ -75,11 +75,6 @@ s3_register <- function(generic, class, method = NULL) {
 }
 
 .rlang_s3_register_compat <- function(fn, try_rlang = TRUE) {
-  # Compats that behave the same independently of rlang's presence
-  out <- switch(fn,
-    is_installed = return(function(pkg) requireNamespace(pkg, quietly = TRUE))
-  )
-
   # Only use rlang if it is fully loaded (#1482)
   if (try_rlang &&
     requireNamespace("rlang", quietly = TRUE) &&
