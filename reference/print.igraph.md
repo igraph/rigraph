@@ -149,7 +149,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 503085d ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── fba2214 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -160,7 +160,7 @@ g
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 summary(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 503085d ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── fba2214 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
