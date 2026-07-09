@@ -1,5 +1,25 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.2.9016
+
+## Chore
+
+- Auto-update from GitHub Actions (#2718).
+
+
+# igraph 2.3.2.9015
+
+## Bug fixes
+
+- Fix test issues with new withr version (#2701, #2705).
+
+## Chore
+
+- Separate and annotate top-level vs helper functions in `rinterface_extra.c` (#2105, #2708).
+
+- Auto-update from GitHub Actions (#2702).
+
+
 # igraph 2.3.2.9014
 
 ## Features
