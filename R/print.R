@@ -373,6 +373,7 @@ print_edge_detail <- function(graph, edges) {
   if (!is.null(x)) {
     arrow <- c("--", "->")[is_directed(x) + 1]
 
+    # jarl-ignore unused_object: then assigned to with <<-
     can_max <- NA
     el <- NA
 
@@ -644,10 +645,10 @@ print_igraph_legacy <- function(
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
     if (graph.attributes) {
-      head_lines <- head_lines + .print.graph.attributes(x, full, max.lines)
+      .print.graph.attributes(x, full, max.lines)
     }
     if (vertex.attributes) {
-      head_lines <- head_lines + .print.vertex.attributes(x, full, max.lines)
+      .print.vertex.attributes(x, full, max.lines)
     }
     if (ecount(x) == 0) {
       ## Do nothing
