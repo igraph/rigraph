@@ -25,7 +25,7 @@ Constructor modifiers (and related functions):
 ``` r
 # An artificial example
 make_(full_graph(5, loops = TRUE))
-#> ── <igraph> Full graph ────────────────────────────────────────────── f545b22 ──
+#> ── <igraph> Full graph ────────────────────────────────────────────── 30be83e ──
 #> ℹ undirected
 #> ℹ 5 vertices · 15 edges
 #> 
@@ -36,7 +36,7 @@ make_(full_graph(5, loops = TRUE))
 #>  [1] 1 ─ 1  1 ─ 2  1 ─ 3  1 ─ 4  1 ─ 5  2 ─ 2  2 ─ 3  2 ─ 4  2 ─ 5  3 ─ 3 
 #> [11] 3 ─ 4  3 ─ 5  4 ─ 4  4 ─ 5  5 ─ 5 
 make_(full_graph(5, loops = TRUE), without_loops())
-#> ── <igraph> Full graph ────────────────────────────────────────────── 8492848 ──
+#> ── <igraph> Full graph ────────────────────────────────────────────── cead887 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 10 edges
 #> 
