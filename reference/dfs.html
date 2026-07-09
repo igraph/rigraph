@@ -127,14 +127,16 @@ the search tree.</p></dd>
 
 
 <dt id="arg-in-callback">in.callback<a class="anchor" aria-label="anchor" href="#arg-in-callback"></a></dt>
-<dd><p>If not <code>NULL</code>, then it must be callback function.
-This is called whenever a vertex is visited. See details below.</p></dd>
+<dd><p>Callback function.
+This is called whenever a vertex is visited. See details below.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-out-callback">out.callback<a class="anchor" aria-label="anchor" href="#arg-out-callback"></a></dt>
-<dd><p>If not <code>NULL</code>, then it must be callback function.
+<dd><p>Callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.</p></dd>
+algorithm. See details below.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-extra">extra<a class="anchor" aria-label="anchor" href="#arg-extra"></a></dt>
@@ -257,15 +259,15 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 86f9cd3 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from dcbf947 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order.out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 86f9cd3 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from dcbf947 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 86f9cd3 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from dcbf947 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -275,7 +277,7 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from 86f9cd3 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 20/20 · from dcbf947 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

@@ -79,17 +79,17 @@ consistent API.</p>
 
 
 <dt id="arg-e-weights">e.weights<a class="anchor" aria-label="anchor" href="#arg-e-weights"></a></dt>
-<dd><p>If not <code>NULL</code>, then a numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default the
+<dd><p>Numeric vector of edge weights.
+The length must match the number of edges in the graph.  By default (<code>NULL</code>) the
 ‘<code>weight</code>’ edge attribute is used as weights. If it is not
 present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.</p></dd>
 
 
 <dt id="arg-v-weights">v.weights<a class="anchor" aria-label="anchor" href="#arg-v-weights"></a></dt>
-<dd><p>If not <code>NULL</code>, then a numeric vector of vertex
+<dd><p>Numeric vector of vertex
 weights. The length must match the number of vertices in the graph.  By
-default the ‘<code>weight</code>’ vertex attribute is used as weights. If
+default (<code>NULL</code>) the ‘<code>weight</code>’ vertex attribute is used as weights. If
 it is not present, then all vertices are considered to have the same weight.
 A larger vertex weight means a larger probability that the random surfer
 jumps to that vertex.</p></dd>

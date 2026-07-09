@@ -69,14 +69,13 @@ graph.dfs(
 
 - in.callback:
 
-  If not `NULL`, then it must be callback function. This is called
-  whenever a vertex is visited. See details below.
+  Callback function. This is called whenever a vertex is visited. See
+  details below. Default: `NULL`.
 
 - out.callback:
 
-  If not `NULL`, then it must be callback function. This is called
-  whenever the subtree of a vertex is completed by the algorithm. See
-  details below.
+  Callback function. This is called whenever the subtree of a vertex is
+  completed by the algorithm. See details below. Default: `NULL`.
 
 - extra:
 

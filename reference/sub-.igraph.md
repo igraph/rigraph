@@ -68,8 +68,8 @@ Query and manipulate a graph as it were an adjacency matrix
 
 - attr:
 
-  If not `NULL`, then it should be the name of an edge attribute. This
-  attribute is queried and returned.
+  Name of an edge attribute. This attribute is queried and returned.
+  Default: `NULL`.
 
 ## Value
 

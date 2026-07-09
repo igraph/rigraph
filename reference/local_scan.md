@@ -30,9 +30,9 @@ local_scan(
 
 - graph.them:
 
-  An igraph object or `NULL`, if not `NULL`, then the ‘them’ statistics
-  is computed, i.e. the neighborhoods calculated from `graph.us` are
-  evaluated on `graph.them`.
+  An igraph object on which the ‘them’ statistics is computed, i.e. the
+  neighborhoods calculated from `graph.us` are evaluated on
+  `graph.them`. Default: `NULL`.
 
 - k:
 

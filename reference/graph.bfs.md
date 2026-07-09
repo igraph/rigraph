@@ -89,10 +89,9 @@ graph.bfs(
 
 - callback:
 
-  If not `NULL`, then it must be callback function. This is called
-  whenever a vertex is visited. The callback function should return
-  `FALSE` to continue the search or `TRUE` to stop it. See details
-  below.
+  Callback function. This is called whenever a vertex is visited. The
+  callback function should return `FALSE` to continue the search or
+  `TRUE` to stop it. See details below. Default: `NULL`.
 
 - extra:
 

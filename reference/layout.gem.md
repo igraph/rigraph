@@ -27,8 +27,8 @@ layout.gem(
 
 - coords:
 
-  If not `NULL`, then the starting coordinates should be given here, in
-  a two or three column matrix, depending on the `dim` argument.
+  Starting coordinates in a two or three column matrix, depending on the
+  `dim` argument. Default: `NULL`.
 
 - maxiter:
 

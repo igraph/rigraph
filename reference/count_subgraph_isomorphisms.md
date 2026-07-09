@@ -42,11 +42,10 @@ following extra arguments:
 
 - domains:
 
-  If not `NULL`, then it specifies matching restrictions. It must be a
-  list of `target` vertex sets, given as numeric vertex IDs or symbolic
-  vertex names. The length of the list must be `vcount(pattern)` and for
-  each vertex in `pattern` it gives the allowed matching vertices in
-  `target`. Defaults to `NULL`.
+  Matching restrictions. It must be a list of `target` vertex sets,
+  given as numeric vertex IDs or symbolic vertex names. The length of
+  the list must be `vcount(pattern)` and for each vertex in `pattern` it
+  gives the allowed matching vertices in `target`. Defaults to `NULL`.
 
 - induced:
 

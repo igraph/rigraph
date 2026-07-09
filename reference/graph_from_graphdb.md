@@ -23,7 +23,7 @@ graph_from_graphdb(
 
 - url:
 
-  If not `NULL` it is a complete URL with the file to import.
+  Complete URL with the file to import. Default: `NULL`.
 
 - prefix:
 

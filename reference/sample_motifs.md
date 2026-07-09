@@ -40,8 +40,8 @@ sample_motifs(
 
 - sample:
 
-  If not `NULL` then it specifies the vertices to use as a starting
-  point for finding motifs.
+  Vertices to use as a starting point for finding motifs. Default:
+  `NULL`.
 
 ## Value
 

@@ -27,9 +27,9 @@ with_sugiyama(...)
 
 - layers:
 
-  A numeric vector or `NULL`. If not `NULL`, then it should specify the
-  layer index of the vertices. Layers are numbered from one. If `NULL`,
-  then igraph calculates the layers automatically.
+  A numeric vector of the layer indices of the vertices. Layers are
+  numbered from one. Default: `NULL`, igraph calculates the layers
+  automatically.
 
 - hgap:
 

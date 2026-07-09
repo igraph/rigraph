@@ -122,13 +122,13 @@ communities(x)
 
 - algorithm:
 
-  If not `NULL` (meaning an unknown algorithm), then a character scalar,
-  the name of the algorithm that produced the community structure.
+  Name of the algorithm that produced the community structure (character
+  scalar). Default: `NULL`, meaning an unknown algorithm.
 
 - merges:
 
-  If not `NULL`, then the merge matrix of the hierarchical community
-  structure. See `merges()` below for more information on its format.
+  Merge matrix of the hierarchical community structure. See `merges()`
+  below for more information on its format. Default: `NULL`.
 
 - modularity:
 

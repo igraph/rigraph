@@ -74,9 +74,9 @@ with_fr(...)
 
 - minx:
 
-  If not `NULL`, then it must be a numeric vector that gives lower
-  boundaries for the ‘x’ coordinates of the vertices. The length of the
-  vector must match the number of vertices in the graph.
+  Numeric vector that gives lower boundaries for the ‘x’ coordinates of
+  the vertices. The length of the vector must match the number of
+  vertices in the graph. Default: `NULL`.
 
 - maxx:
 

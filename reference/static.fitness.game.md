@@ -31,12 +31,9 @@ static.fitness.game(
 
 - fitness.in:
 
-  If `NULL` (the default), the generated graph will be undirected. If
-  not `NULL`, then it should be a numeric vector and it specifies the
-  in-fitness of each vertex.
-
-  If this argument is not `NULL`, then a directed graph is generated,
-  otherwise an undirected one.
+  Numeric vector that specifies the in-fitness of each vertex. The
+  generated graph will be directed. Default: `NULL`, the generated graph
+  will be undirected.
 
 - loops:
 

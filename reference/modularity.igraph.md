@@ -31,7 +31,7 @@ modularity_matrix(
 
 - weights:
 
-  If not `NULL` then a numeric vector giving edge weights.
+  Numeric vector giving edge weights. Default: `NULL`.
 
 - resolution:
 
