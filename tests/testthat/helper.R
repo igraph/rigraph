@@ -53,7 +53,9 @@ igraph_local_seed <- function(
     sample.kind = sample.kind
   )
 
-  # Return the previous seed invisibly, mirroring withr::local_seed()'s contract.
+  # Return the previous seed invisibly, mirroring withr::local_dir()'s
+  # and withr::local_locale()'s contract.
+  # Interestingly, withr::local_seed() returns the new seed.
   invisible(initial_seed)
 }
 
