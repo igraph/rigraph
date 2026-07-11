@@ -14005,12 +14005,14 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP outstream, SEXP options, SEXP id,
   c_outstream = Ry_igraph_fopen_write(outstream);
   IGRAPH_FINALLY(fclose, c_outstream);
   c_options = (igraph_write_gml_sw_t) Rf_asInteger(options);
-  Rz_SEXP_to_vector(id, &c_id);
+  if (!Rf_isNull(id)) {
+    Rz_SEXP_to_vector(id, &c_id);
+  }
   if (!Rf_isNull(creator)) {
     c_creator = Rf_translateCharUTF8(STRING_ELT(creator, 0));
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_write_graph_gml(&c_graph, c_outstream, c_options, &c_id, (Rf_isNull(creator) ? 0 : c_creator)));
+  IGRAPH_R_CHECK(igraph_write_graph_gml(&c_graph, c_outstream, c_options, (Rf_isNull(id) ? 0 : &c_id), (Rf_isNull(creator) ? 0 : c_creator)));
 
                                         /* Convert output */
 
