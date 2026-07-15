@@ -1304,6 +1304,12 @@ rglplot.igraph <- function(x, ...) {
   graph <- x
   ensure_igraph(graph)
 
+  lifecycle::deprecate_warn(
+    "3.0.0",
+    "rglplot()",
+    details = "For 3D graph visualisation, consider `threejs::graphjs()`, which renders force-directed graphs in the browser and defaults to igraph's `layout_with_fr()` layout."
+  )
+
   create.edge <- function(v1, v2, r1, r2, ec, ew, am, as) {
     ## these could also be parameters:
     aw <- 0.005 * 3 * as # arrow width
@@ -2012,7 +2018,10 @@ rglplot.igraph <- function(x, ...) {
   layout <- params("plot", "layout")
   rescale <- params("plot", "rescale")
 
-  # the new style parameters can't do this yet
+  # Resolve arrow.mode to numeric codes: params() returns it in whatever form the
+  # user supplied (a string like ">"/"<>", an "a:<attr>" vertex-attribute
+  # reference, or NULL), which i.get.arrow.mode() maps to 0/1/2/3, defaulting to
+  # directedness when NULL.
   arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
 
   # norm layout to (-1, 1)
