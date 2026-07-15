@@ -29,7 +29,7 @@ harmonic centrality. If the graph has a \code{weight} edge attribute, then
 this is used by default. Weights are used for calculating weighted shortest
 paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to calculate the normalized
+\item{normalized}{Logical, whether to calculate the normalized
 harmonic centrality. If true, the result is the mean inverse path length to
 other vertices, i.e. it is normalized by the number of vertices minus one.
 If false, the result is the sum of inverse path lengths to other vertices.}

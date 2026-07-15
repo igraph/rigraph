@@ -24,17 +24,17 @@
 \arguments{
 \item{x}{The graph to print.}
 
-\item{full}{Logical scalar, whether to print the graph structure itself as
+\item{full}{Logical, whether to print the graph structure itself as
 well.}
 
-\item{graph.attributes}{Logical constant, whether to print graph attributes.}
+\item{graph.attributes}{Logical, whether to print graph attributes.}
 
-\item{vertex.attributes}{Logical constant, whether to print vertex
+\item{vertex.attributes}{Logical, whether to print vertex
 attributes.}
 
-\item{edge.attributes}{Logical constant, whether to print edge attributes.}
+\item{edge.attributes}{Logical, whether to print edge attributes.}
 
-\item{names}{Logical constant, whether to print symbolic vertex names (i.e.
+\item{names}{Logical, whether to print symbolic vertex names (i.e.
 the \code{name} vertex attribute) or vertex IDs.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the

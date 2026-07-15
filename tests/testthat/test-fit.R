@@ -1,4 +1,5 @@
 test_that("fit_power_law() works", {
+  igraph_local_seed(42)
   # g <- sample_pa(100) # increase this number to have a better estimate
   # d <- degree(g, mode = "in")
   d <- c(

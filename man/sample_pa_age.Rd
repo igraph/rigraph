@@ -60,10 +60,10 @@ add in each time step if \code{out.seq} is NULL. See details below.}
 \item{out.seq}{The number of edges to add in each time step, a vector
 containing as many elements as the number of vertices. See details below.}
 
-\item{out.pref}{Logical constant, whether to include edges not initiated by
+\item{out.pref}{Logical, whether to include edges not initiated by
 the vertex as a basis of preferential attachment. See details below.}
 
-\item{directed}{Logical constant, whether to generate a directed graph. See
+\item{directed}{Logical, whether to generate a directed graph. See
 details below.}
 
 \item{zero.deg.appeal}{The degree-dependent part of the

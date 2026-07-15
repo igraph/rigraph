@@ -16,7 +16,7 @@ probability is calculated as \code{bw.factor*fw.prob}.}
 
 \item{ambs}{The number of ambassador vertices.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 }
 \value{
 A simple graph, possibly directed if the \code{directed} argument is

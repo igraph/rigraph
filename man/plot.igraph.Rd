@@ -26,7 +26,7 @@
 
 \item{axes}{Logical, whether to plot axes, defaults to FALSE.}
 
-\item{add}{Logical scalar, whether to add the plot to the current device, or
+\item{add}{Logical, whether to add the plot to the current device, or
 delete the device's current contents first.}
 
 \item{xlim}{The limits for the horizontal axis, it is unlikely that you want

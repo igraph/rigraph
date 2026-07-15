@@ -584,7 +584,7 @@ code.length <- function(communities) {
 #'   communities are colored green and other edges are red.
 #' @param hang Numeric scalar indicating how the height of leaves should be
 #'   computed from the heights of their parents; see [plot.hclust()].
-#' @param use.modularity Logical scalar, whether to use the modularity values
+#' @param use.modularity Logical, whether to use the modularity values
 #'   to define the height of the branches.
 #' @param \dots Additional arguments. `plot.communities` passes these to
 #'   [plot.igraph()]. The other functions silently ignore
@@ -592,12 +592,11 @@ code.length <- function(communities) {
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure. Might also be `NULL` if the
 #'   community structure is given in another way, e.g. by a merge matrix.
-#' @param algorithm If not `NULL` (meaning an unknown algorithm), then a
-#'   character scalar, the name of the algorithm that produced the community
-#'   structure.
-#' @param merges If not `NULL`, then the merge matrix of the hierarchical
+#' @param algorithm Name of the algorithm that produced the community
+#'   structure (character scalar). Default: `NULL`, meaning an unknown algorithm.
+#' @param merges Merge matrix of the hierarchical
 #'   community structure. See `merges()` below for more information on its
-#'   format.
+#'   format. Default: `NULL`.
 #' @param modularity Numeric scalar or vector, the modularity value of the
 #'   community structure. It can also be `NULL`, if the modularity of the
 #'   (best) split is not available.
@@ -617,7 +616,7 @@ code.length <- function(communities) {
 #'
 #'   `crossing()` returns a logical vector.
 #'
-#'   `is_hierarchical()` returns a logical scalar.
+#'   `is_hierarchical()` returns a Logical.
 #'
 #'   `merges()` returns a two-column numeric matrix.
 #'
@@ -726,7 +725,7 @@ print.communities <- function(x, ...) {
       head_print(
         o,
         max_lines = igraph_opt("auto.print.lines"),
-        omitted_footer = "+ ... omitted several groups/vertices\n",
+        omitted_footer = "+ ... omitted several groups/vertices\n"
       )
     }
     indent_print(grp, .printer = hp, .indent = "  ")
@@ -872,7 +871,7 @@ modularity <- function(x, ...) {
 #' @param x,graph The input graph.
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure.
-#' @param weights If not `NULL` then a numeric vector giving edge weights.
+#' @param weights Numeric vector giving edge weights. Default: `NULL`.
 #' @param resolution The resolution parameter. Must be greater than or equal to
 #'   0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
@@ -1391,7 +1390,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   limit for the number of communities. It is not a problem to supply a
 #'   (reasonably) big number here, in which case some spin states will be
 #'   unpopulated.
-#' @param parupdate Logical constant, whether to update the spins of the
+#' @param parupdate Logical, whether to update the spins of the
 #'   vertices in parallel (synchronously) or not. This argument is ignored if the
 #'   second form of the function is used (i.e. the \sQuote{`vertex`} argument
 #'   is present). It is also not implemented in the \dQuote{neg} implementation.
@@ -1835,12 +1834,12 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'   weights increase the probability that an edge is selected by the random
 #'   walker. In other words, larger edge weights correspond to stronger connections.
 #' @param steps The length of the random walks to perform.
-#' @param merges Logical scalar, whether to include the merge matrix in the
+#' @param merges Logical, whether to include the merge matrix in the
 #'   result.
-#' @param modularity Logical scalar, whether to include the vector of the
+#' @param modularity Logical, whether to include the vector of the
 #'   modularity scores in the result. If the `membership` argument is true,
 #'   then it will always be calculated.
-#' @param membership Logical scalar, whether to calculate the membership vector
+#' @param membership Logical, whether to calculate the membership vector
 #'   for the split corresponding to the highest modularity value.
 #' @return `cluster_walktrap()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
@@ -1946,11 +1945,11 @@ cluster_walktrap <- function(
 #'   attribute, but you don't want to use it for community detection. Edge weights
 #'   are used to calculate weighted edge betweenness. This means that edges are
 #'   interpreted as distances, not as connection strengths.
-#' @param directed Logical constant, whether to calculate directed edge
+#' @param directed Logical, whether to calculate directed edge
 #'   betweenness for directed graphs. It is ignored for undirected graphs.
-#' @param edge.betweenness Logical constant, whether to return the edge
+#' @param edge.betweenness Logical, whether to return the edge
 #'   betweenness of the edges at the time of their removal.
-#' @param merges Logical constant, whether to return the merge matrix
+#' @param merges Logical, whether to return the merge matrix
 #'   representing the hierarchical community structure of the network.  This
 #'   argument is called `merges`, even if the community structure algorithm
 #'   itself is divisive and not agglomerative: it builds the tree from top to
@@ -1962,12 +1961,12 @@ cluster_walktrap <- function(
 #'   communities numbered from one to \eqn{N}. The first merge, the first line of
 #'   the matrix creates community \eqn{N+1}, the second merge creates community
 #'   \eqn{N+2}, etc.
-#' @param bridges Logical constant, whether to return a list the edge removals
+#' @param bridges Logical, whether to return a list the edge removals
 #'   which actually splitted a component of the graph.
-#' @param modularity Logical constant, whether to calculate the maximum
+#' @param modularity Logical, whether to calculate the maximum
 #'   modularity score, considering all possibly community structures along the
 #'   edge-betweenness based edge removals.
-#' @param membership Logical constant, whether to calculate the membership
+#' @param membership Logical, whether to calculate the membership
 #'   vector corresponding to the highest possible modularity score.
 #' @return `cluster_edge_betweenness()` returns a
 #'   [communities()] object, please see the [communities()]
@@ -2054,10 +2053,10 @@ cluster_edge_betweenness <- function(
 #'
 #' @param graph The input graph. It must be undirected and must not have
 #'   multi-edges.
-#' @param merges Logical scalar, whether to return the merge matrix.
-#' @param modularity Logical scalar, whether to return a vector containing the
+#' @param merges Logical, whether to return the merge matrix.
+#' @param modularity Logical, whether to return a vector containing the
 #'   modularity after each merge.
-#' @param membership Logical scalar, whether to calculate the membership vector
+#' @param membership Logical, whether to calculate the membership vector
 #'   corresponding to the maximum modularity score, considering all possible
 #'   community structures along the merges.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
@@ -2178,9 +2177,9 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' @param start `NULL`, or a numeric membership vector, giving the start
 #'   configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
-#' @param callback If not `NULL`, then it must be callback function. This
+#' @param callback Callback function. This
 #'   is called after each iteration, after calculating the leading eigenvector of
-#'   the modularity matrix. See details below.
+#'   the modularity matrix. See details below. Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
 #' @return `cluster_leading_eigen()` returns a named list with the
@@ -2647,20 +2646,20 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' Please see the details of this method in the references given below.
 #'
 #' @param graph The input graph. Edge directions will be taken into account.
-#' @param e.weights If not `NULL`, then a numeric vector of edge weights.
-#'   The length must match the number of edges in the graph.  By default the
+#' @param e.weights Numeric vector of edge weights.
+#'   The length must match the number of edges in the graph.  By default (`NULL`) the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
 #'   present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
-#' @param v.weights If not `NULL`, then a numeric vector of vertex
+#' @param v.weights Numeric vector of vertex
 #'   weights. The length must match the number of vertices in the graph.  By
-#'   default the \sQuote{`weight`} vertex attribute is used as weights. If
+#'   default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights. If
 #'   it is not present, then all vertices are considered to have the same weight.
 #'   A larger vertex weight means a larger probability that the random surfer
 #'   jumps to that vertex.
 #' @param nb.trials The number of attempts to partition the network (can be any
 #'   integer value equal or larger than 1).
-#' @param modularity Logical scalar, whether to calculate the modularity score
+#' @param modularity Logical, whether to calculate the modularity score
 #'   of the detected community structure.
 #' @return `cluster_infomap()` returns a [communities()] object,
 #'   please see the [communities()] manual page for details.
@@ -2807,7 +2806,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
-#' @param use.modularity Logical scalar, whether to use the modularity values
+#' @param use.modularity Logical, whether to use the modularity values
 #'   to define the height of the branches.
 #' @param palette The color palette to use for colored plots.
 #' @return Returns whatever the return value was from the plotting function,

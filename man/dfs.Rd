@@ -34,28 +34,30 @@ ignores edge directions completely. \sQuote{total} is a synonym for
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{unreachable}{Logical scalar, whether the search should visit the
+\item{unreachable}{Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 \code{TRUE}, then additional searches are performed until all vertices are
 visited.}
 
-\item{order}{Logical scalar, whether to return the DFS ordering of the
+\item{order}{Logical, whether to return the DFS ordering of the
 vertices.}
 
-\item{order.out}{Logical scalar, whether to return the ordering based on
+\item{order.out}{Logical, whether to return the ordering based on
 leaving the subtree of the vertex.}
 
-\item{parent}{Logical scalar, whether to return the parent of the vertices.}
+\item{parent}{Logical, whether to return the parent of the vertices.}
 
-\item{dist}{Logical scalar, whether to return the distance from the root of
+\item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{in.callback}{If not \code{NULL}, then it must be callback function.
-This is called whenever a vertex is visited. See details below.}
+\item{in.callback}{Callback function.
+This is called whenever a vertex is visited. See details below.
+Default: \code{NULL}.}
 
-\item{out.callback}{If not \code{NULL}, then it must be callback function.
+\item{out.callback}{Callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.}
+algorithm. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 

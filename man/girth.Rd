@@ -10,7 +10,7 @@ girth(graph, circle = TRUE)
 \item{graph}{The input graph. It may be directed, but the algorithm searches
 for undirected circles anyway.}
 
-\item{circle}{Logical scalar, whether to return the shortest circle itself.}
+\item{circle}{Logical, whether to return the shortest circle itself.}
 }
 \value{
 A named list with two components:

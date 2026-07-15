@@ -60,7 +60,7 @@ igraph.console <- function() {
 console <- function() {
   lifecycle::deprecate_stop(
     "3.0.0",
-    "console()",
+    "console()"
   )
 }
 
@@ -218,7 +218,6 @@ console <- function() {
     tcltk::tkdelete(txt, "0.0", "end")
     tcltk::tkconfigure(txt, state = "disabled")
   })
-  bstop <- tcltk::tkbutton(lfr, text = "Stop", command = function() {})
   bclose <- tcltk::tkbutton(lfr, text = "Close", command = function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)

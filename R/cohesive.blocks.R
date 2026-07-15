@@ -224,7 +224,7 @@ blockGraphs <- function(blocks, graph) {
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
-#' @param labels Logical scalar, whether to add the vertex labels to the result
+#' @param labels Logical, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
 #' @param blocks,x,object A `cohesiveBlocks` object, created with the
@@ -240,7 +240,7 @@ blockGraphs <- function(blocks, graph) {
 #'   of the files, without extension. (But it can contain the path to the files.)
 #'
 #'   See also details below.
-#' @param project.file Logical scalar, whether to create a single Pajek project
+#' @param project.file Logical, whether to create a single Pajek project
 #'   file containing all the data, or to create separated files for each item.
 #'   See details below.
 #' @param y The graph whose cohesive blocks are supplied in the `x`

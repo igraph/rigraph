@@ -11,7 +11,7 @@ graph.formula(..., simplify = TRUE)
 structure of the graph, see details below. For \code{from_literal()}
 all arguments are passed to \code{graph_from_literal()}.}
 
-\item{simplify}{Logical scalar, whether to call \code{\link[=simplify]{simplify()}}
+\item{simplify}{Logical, whether to call \code{\link[=simplify]{simplify()}}
 on the created graph. By default the graph is simplified, loop and
 multiple edges are removed. \code{\link[=simplify]{simplify()}} is only called when the
 created graph is not already simple, so the edge order from the

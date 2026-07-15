@@ -25,15 +25,15 @@ that is given..}
 \code{NULL}, then it is automatically calculated by calling
 \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
 
-\item{fillin}{Logical scalar, whether to calculate the fill-in edges.}
+\item{fillin}{Logical, whether to calculate the fill-in edges.}
 
-\item{newgraph}{Logical scalar, whether to calculate the triangulated graph.}
+\item{newgraph}{Logical, whether to calculate the triangulated graph.}
 }
 \value{
 A list with three members:
 \describe{
 \item{chordal}{
-Logical scalar, it is \code{TRUE} iff the input graph is chordal.
+Logical, it is \code{TRUE} iff the input graph is chordal.
 }
 \item{fillin}{
 If requested, then a numeric vector giving the fill-in edges. \code{NULL} otherwise.

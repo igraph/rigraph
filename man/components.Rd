@@ -35,7 +35,7 @@ directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
 connected components to search. It is ignored for undirected graphs.}
 }
 \value{
-For \code{is_connected()} a logical constant.
+For \code{is_connected()} a Logical.
 
 For \code{components()} a named list with three components:
 \describe{

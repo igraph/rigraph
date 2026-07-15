@@ -118,23 +118,8 @@ test_that("error message snapshots", {
 
 # ---- migrate_recover_args() helper (the engine behind the blocks) ----------
 
-# Config equivalent to the fixture, for exercising the helper directly.
-fixture_args <- function(
-  dots,
-  current = list(weights = NULL, type = "out", directed = FALSE)
-) {
-  migrate_recover_args(
-    dots,
-    current = current,
-    recover_new = c("weights", "type", "directed"),
-    recover_old = c("weight", "kind", "directed"),
-    match_names = c("weight", "kind", "weights", "type", "directed"),
-    match_to = c("weights", "type", "weights", "type", "directed"),
-    defaults = list(weights = NULL, type = "out", directed = FALSE),
-    head_args = c("graph", "n"),
-    fn_name = "migration_fixture"
-  )
-}
+# `fixture_args()` (the config-equivalent wrapper) lives in
+# helper-test-functions.R.
 
 test_that("migrate_recover_args() returns NULL when there is nothing to recover", {
   expect_null(fixture_args(list()))
@@ -186,6 +171,54 @@ test_that("the generated block is in sync with the registry", {
   lines <- readLines(fixture, warn = FALSE)
   spliced <- gen_env$splice_blocks(lines, by_fn)
   expect_identical(spliced$lines, lines)
+})
+
+test_that("normalise_migration() rejects head/recoverable prefix clashes", {
+  # Head args are matched by base R (with partial matching) before `...`, so a
+  # head arg in a prefix relationship with a recoverable name would silently
+  # capture it before the recovery layer runs. The generator must reject this.
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  # Head arg `type` is a prefix of the recoverable `typeof`.
+  expect_error(
+    gen_env$normalise_migration(
+      "bad_head_prefix",
+      list(
+        old = function(graph, typeof) {},
+        new = function(graph, type = "x", ..., typeof = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "prefix relationship"
+  )
+
+  # Recoverable `type` is a prefix of the head arg `typeof`.
+  expect_error(
+    gen_env$normalise_migration(
+      "bad_recover_prefix",
+      list(
+        old = function(graph, type) {},
+        new = function(graph, typeof = "x", ..., type = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "prefix relationship"
+  )
+
+  # Merely sharing a leading letter (`graph` vs `groups`) is allowed.
+  expect_no_error(
+    gen_env$normalise_migration(
+      "ok_shared_letter",
+      list(
+        old = function(graph, groups) {},
+        new = function(graph, ..., groups = NULL) {},
+        when = "3.0.0"
+      )
+    )
+  )
 })
 
 test_that("the BEGIN marker may carry a trailing note", {

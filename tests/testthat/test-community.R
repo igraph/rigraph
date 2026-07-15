@@ -1,5 +1,5 @@
 test_that("community detection functions work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   cluster_algos <- list(
     "cluster_edge_betweenness",
@@ -69,7 +69,7 @@ test_that("community detection functions work", {
 })
 
 test_that("creating communities objects works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
 
@@ -159,7 +159,7 @@ test_that("cluster_edge_betweenness works", {
 })
 
 test_that("cluster_fast_greedy works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_fc <- cluster_fast_greedy(karate)
@@ -192,7 +192,7 @@ test_that("cluster_fast_greedy works", {
 
 test_that("label.propagation.community works", {
   karate <- make_graph("Zachary")
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
   karate_lpc <- cluster_label_prop(karate)
   expect_equal(karate_lpc$modularity, modularity(karate, karate_lpc$membership))
 
@@ -207,7 +207,7 @@ test_that("label.propagation.community works", {
 })
 
 test_that("cluster_leading_eigen works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   check_eigen_value <- function(
     membership,
@@ -223,7 +223,7 @@ test_that("cluster_leading_eigen works", {
       multiplier(v)
     })
     ev <- eigen(M)
-    ret <- 0
+
     expect_equal(ev$values[1], value)
     if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
       ev$vectors <- -ev$vectors
@@ -284,7 +284,7 @@ test_that("cluster_leading_eigen works", {
   A <- as_adjacency_matrix(karate, sparse = FALSE)
   ec <- ecount(karate)
   deg <- degree(karate)
-  karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
+  cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
 
 test_that("cluster_leading_eigen is deterministic", {
@@ -293,7 +293,7 @@ test_that("cluster_leading_eigen is deterministic", {
 
   skip_if(getRversion() < "3.6")
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   for (i in 1:100) {
     g_rand <- sample_gnm(20, sample(5:40, 1))
@@ -307,6 +307,7 @@ test_that("cluster_leading_eigen is deterministic", {
 })
 
 test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
+  igraph_local_seed(42)
   g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
   g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
   lec <- cluster_leading_eigen(g)
@@ -363,6 +364,7 @@ test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
 })
 
 test_that("cut_at handles cluster_leading_eigen with no merges", {
+  igraph_local_seed(42)
   # Single-community result: nrow(merges) == 0, so no cuts are possible
   lec <- cluster_leading_eigen(make_full_graph(5))
   expect_equal(max(membership(lec)), 1L)
@@ -377,6 +379,7 @@ test_that("cut_at handles cluster_leading_eigen with no merges", {
 })
 
 test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
+  igraph_local_seed(42)
   # Ring of 6 cliques: leading eigen finds 6 communities with 5 merges,
   # exercising more than the trivial 3->2->1 chain.
   g <- Reduce(`%du%`, replicate(6, make_full_graph(4), simplify = FALSE))
@@ -400,7 +403,7 @@ test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
 })
 
 test_that("cluster_leiden works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_leiden <- cluster_leiden(karate, resolution = 0.06)
@@ -474,12 +477,12 @@ test_that("modularity_matrix works", {
 test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
   expect_snapshot(error = TRUE, {
-    x <- modularity_matrix(karate, membership = rep(1, vcount(karate)))
+    modularity_matrix(karate, membership = rep(1, vcount(karate)))
   })
 })
 
 test_that("cluster_louvain works", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   karate <- make_graph("Zachary")
   karate_mc <- cluster_louvain(karate)
@@ -534,8 +537,7 @@ test_that("cluster_optimal works", {
 
 test_that("weighted cluster_optimal works", {
   skip_if_no_glpk()
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   graph_full_ring <- make_full_graph(5) + make_ring(5)
   E(graph_full_ring)$weight <- sample(
@@ -549,7 +551,7 @@ test_that("weighted cluster_optimal works", {
 })
 
 test_that("cluster_walktrap works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_walktrap <- cluster_walktrap(karate)
@@ -637,8 +639,7 @@ test_that("voronoi works with weights", {
 })
 
 test_that("contract works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   g <- make_ring(10)
   g$name <- "Ring"
@@ -662,6 +663,7 @@ test_that("contract works", {
 })
 
 test_that("modularity() handles NA weights correctly", {
+  igraph_local_seed(42)
   # Create a simple graph for testing
   g <- make_graph("Zachary")
 

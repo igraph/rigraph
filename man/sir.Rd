@@ -21,10 +21,10 @@ sir(graph, beta, gamma, no.sim = 100)
 \arguments{
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 
-\item{middle}{Logical scalar, whether to return the middle of the time bins,
+\item{middle}{Logical, whether to return the middle of the time bins,
 or the boundaries.}
 
-\item{na.rm}{Logical scalar, whether to ignore \code{NA} values.  \code{sir}
+\item{na.rm}{Logical, whether to ignore \code{NA} values.  \code{sir}
 objects do not contain any \code{NA} values currently, so this argument is
 effectively ignored.}
 

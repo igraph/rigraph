@@ -9,7 +9,7 @@ reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
 \arguments{
 \item{graph}{The graph object.}
 
-\item{ignore.loops}{Logical constant, whether to ignore loop edges.}
+\item{ignore.loops}{Logical, whether to ignore loop edges.}
 
 \item{mode}{See below.}
 }

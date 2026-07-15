@@ -174,6 +174,36 @@ normalise_migration <- function(fn, entry) {
   entry$match_names <- c(entry$recover_old[renamed], entry$tail)
   entry$match_to <- c(entry$recover_new[renamed], entry$tail)
 
+  # Head args are matched by base R *before* `...`, with base R partial matching,
+  # so they are resolved before the recovery layer ever runs. If a head arg name
+  # and a recoverable name are in a prefix relationship, base R silently captures
+  # the abbreviation (or even the full name) for the head arg and it never
+  # reaches `...`: e.g. head `type` swallows `ty=` meant for a recoverable
+  # `typeof`, and a recoverable `type` is swallowed whole by a head `typeof`. The
+  # recovery layer cannot see or defend against this, so reject it here rather
+  # than ship a silent hole. (Merely sharing a leading letter -- `graph` vs a
+  # recoverable `groups` -- is a weaker base-R hazard the two-layer scheme can't
+  # fully eliminate and is left unguarded.)
+  clashes <- character(0)
+  for (h in entry$head) {
+    for (r in entry$match_names) {
+      if (startsWith(h, r) || startsWith(r, h)) {
+        clashes <- c(clashes, paste0(h, " <-> ", r))
+      }
+    }
+  }
+  if (length(clashes)) {
+    stop(
+      "Migration `",
+      fn,
+      "`: head arg(s) and recoverable name(s) are in a prefix relationship, ",
+      "so base R partial matching would capture them before recovery runs: ",
+      paste(unique(clashes), collapse = ", "),
+      ". Rename to remove the prefix overlap.",
+      call. = FALSE
+    )
+  }
+
   entry
 }
 

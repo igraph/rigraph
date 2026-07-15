@@ -56,9 +56,10 @@ attraction along the edges will be multiplied by the given edge weights.
 This places vertices connected with a highly weighted edge closer to
 each other. Weights must be positive.}
 
-\item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
-lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-of the vector must match the number of vertices in the graph.}
+\item{minx}{Numeric vector that gives lower boundaries
+for the \sQuote{x} coordinates of the vertices.
+The length of the vector must match the number of vertices in the graph.
+Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 

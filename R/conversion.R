@@ -415,12 +415,12 @@ get.adjacency.sparse <- function(
 #' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
 #'   supplied, the value is forwarded to `weights` as a character edge
 #'   attribute name.
-#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge IDs in the matrix.
+#' @param edges `r lifecycle::badge("deprecated")` Logical, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
-#' @param names Logical constant, whether to assign row and column names
+#' @param names Logical, whether to assign row and column names
 #'   to the matrix. These are only assigned if the `name` vertex attribute
 #'   is present in the graph.
-#' @param sparse Logical scalar, whether to create a sparse matrix. The
+#' @param sparse Logical, whether to create a sparse matrix. The
 #'   \sQuote{`Matrix`} package must be installed for creating sparse
 #'   matrices.
 #' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
@@ -732,7 +732,7 @@ as_undirected <- function(
 #' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
 #'   (to include loop edges twice) and `"once"` (to include them once). `"twice"`
 #'   is not allowed for directed graphs and will be replaced with `"once"`.
-#' @param multiple Logical scalar, set to `FALSE` to use only one representative
+#' @param multiple Logical, set to `FALSE` to use only one representative
 #'   of each set of parallel edges.
 #' @return A list of `igraph.vs` or a list of numeric vectors depending on
 #'   the value of `igraph_opt("return.vs.es")`, see details for performance
@@ -823,12 +823,12 @@ as_adj_edge_list <- function(
 #' attributes of the first of the multiple edges.
 #'
 #' @param graphNEL The graphNEL graph.
-#' @param name Logical scalar, whether to add graphNEL vertex names as an
+#' @param name Logical, whether to add graphNEL vertex names as an
 #'   igraph vertex attribute called \sQuote{`name`}.
-#' @param weight Logical scalar, whether to add graphNEL edge weights as an
+#' @param weight Logical, whether to add graphNEL edge weights as an
 #'   igraph edge attribute called \sQuote{`weight`}. (graphNEL graphs are
 #'   always weighted.)
-#' @param unlist.attrs Logical scalar. graphNEL attribute query functions
+#' @param unlist.attrs Logical. graphNEL attribute query functions
 #'   return the values of the attributes in R lists, if this argument is
 #'   `TRUE` (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
@@ -1150,11 +1150,11 @@ get.incidence.sparse <- function(
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
 #' @inheritParams as_adjacency_matrix
-#' @param names Logical scalar, if `TRUE` and the vertices in the graph
+#' @param names Logical, if `TRUE` and the vertices in the graph
 #'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise
 #'   the IDs of the vertices are used as row and column names.
-#' @param sparse Logical scalar, if it is `TRUE` then a sparse matrix is
+#' @param sparse Logical, if it is `TRUE` then a sparse matrix is
 #'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1327,7 +1327,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'   undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 #'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
 #'   (\sQuote{in}) neighbors of the vertices.
-#' @param duplicate Logical scalar. For undirected graphs it gives whether
+#' @param duplicate Logical. For undirected graphs it gives whether
 #'   edges are included in the list twice. E.g. if it is `TRUE` then for an
 #'   undirected \code{{A,B}} edge `graph_from_adj_list()` expects `A`
 #'   included in the neighbors of `B` and `B` to be included in the
@@ -1628,7 +1628,7 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'   columns. Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with
 #'   `as.data.frame`.
-#' @param directed Logical scalar, whether or not to create a directed graph.
+#' @param directed Logical, whether or not to create a directed graph.
 #' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with `as.data.frame`, if not `NULL`.

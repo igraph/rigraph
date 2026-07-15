@@ -107,7 +107,7 @@ form was used prior to igraph version 0.6. \dQuote{epath} means that the
 edges along the paths are reported. \dQuote{both} means that both forms are
 returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.}
 
-\item{predecessors}{Logical scalar, whether to return the predecessor vertex
+\item{predecessors}{Logical, whether to return the predecessor vertex
 for each vertex. The predecessor of vertex \code{i} in the tree is the
 vertex from which vertex \code{i} was reached. The predecessor of the start
 vertex (in the \code{from} argument) is itself by definition. If the
@@ -115,7 +115,7 @@ predecessor is zero, it means that the given vertex was not reached from the
 source during the search. Note that the search terminates if all the
 vertices in \code{to} are reached.}
 
-\item{inbound.edges}{Logical scalar, whether to return the inbound edge for
+\item{inbound.edges}{Logical, whether to return the inbound edge for
 each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
 which vertex \code{i} was reached. The start vertex and vertices that were
 not reached during the search will have zero in the corresponding entry of

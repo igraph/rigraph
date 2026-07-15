@@ -32,9 +32,9 @@ lattice will be connected. This parameter is not used right now.}
 \item{mutual}{Logical, if \code{TRUE} directed lattices will be
 mutually connected.}
 
-\item{periodic}{Logical vector, Boolean vector, defines whether the generated lattice is
-periodic along each dimension. This parameter may also be scalar boolen value which will
-be extended to boolean vector with dimvector length.}
+\item{periodic}{Logical vector, defines whether the generated lattice is
+periodic along each dimension. This parameter may also be a single logical which will
+be extended to a logical vector of `dimvector`` length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
 }
