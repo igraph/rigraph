@@ -42,7 +42,7 @@
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
 #' @param vids The vertex IDs of the vertices for which the calculation will be done.
 #'   Applies to the local efficiency calculation only.
-#' @param directed Logical scalar, whether to consider directed paths. Ignored
+#' @param directed Logical, whether to consider directed paths. Ignored
 #'   for undirected graphs.
 #' @param mode Specifies how to define the local neighborhood of a vertex in
 #'   directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}

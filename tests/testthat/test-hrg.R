@@ -1,5 +1,5 @@
 test_that("Starting from state works (#225)", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   hrg <- fit_hrg(g)
@@ -8,7 +8,7 @@ test_that("Starting from state works (#225)", {
 })
 
 test_that("as.hclust.igraphHRG() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_graph("zachary")
   hrg <- fit_hrg(g)
@@ -31,7 +31,7 @@ test_that("hrg_tree() checks its argument", {
 })
 
 test_that("print.igrapHRG() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   small_g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   small_g <- fit_hrg(small_g)

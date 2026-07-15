@@ -1,4 +1,5 @@
 test_that("as_directed works", {
+  igraph_local_seed(42)
   gnp_undirected <- sample_gnp(100, 2 / 100)
   gnp_mutual <- as_directed(gnp_undirected, mode = "mutual")
   expect_equal(degree(gnp_undirected), degree(gnp_mutual) / 2)
@@ -45,11 +46,13 @@ test_that("as_directed keeps attributes", {
 })
 
 test_that("as.directed() deprecation", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
 })
 
 test_that("as.undirected() deprecation", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
 })
@@ -453,6 +456,7 @@ test_that("as_biadjacency_matrix() wires up legacy `attr` recovery", {
 })
 
 test_that("as_adj works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 1 / 50)
   A <- as_adjacency_matrix(g, sparse = FALSE)
   g2 <- graph_from_adjacency_matrix(A, mode = "undirected")
@@ -473,6 +477,7 @@ test_that("as_adj works", {
 })
 
 test_that("as_adj_list works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 2 / 50)
   adj_list <- as_adj_list(g)
   expect_s3_class(adj_list[[1]], "igraph.vs")
@@ -535,6 +540,7 @@ test_that("as_adj_list works", {
 })
 
 test_that("as_adj_list works when return.vs.es is FALSE", {
+  igraph_local_seed(42)
   on.exit(try(igraph_options(old)), add = TRUE)
   old <- igraph_options(return.vs.es = FALSE)
 
@@ -599,6 +605,7 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
 })
 
 test_that("as_edgelist works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   el <- as_edgelist(g)
   g2 <- make_graph(t(el), n = vcount(g), dir = FALSE)
@@ -606,6 +613,7 @@ test_that("as_edgelist works", {
 })
 
 test_that("as_biadjacency_matrix() works -- dense", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
   biadj_mat2 <- as_biadjacency_matrix(g)
@@ -615,6 +623,7 @@ test_that("as_biadjacency_matrix() works -- dense", {
 })
 
 test_that("as_biadjacency_matrix() works -- dense named", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
   V(g)$name <- letters[seq_along(V(g))]
@@ -628,6 +637,7 @@ test_that("as_biadjacency_matrix() works -- dense named", {
 })
 
 test_that("as_biadjacency_matrix() works -- sparse", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
   biadj_mat2 <- as_biadjacency_matrix(g, sparse = TRUE)
@@ -637,6 +647,7 @@ test_that("as_biadjacency_matrix() works -- sparse", {
 })
 
 test_that("graph_from_adj_list works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   adj_list <- as_adj_list(g)
   g2 <- graph_from_adj_list(adj_list, mode = "all")
@@ -651,7 +662,7 @@ test_that("graph_from_adj_list works", {
 })
 
 test_that("graph_from_edgelist works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   g <- sample_gnp(50, 5 / 50)
   el <- as_edgelist(g)
@@ -701,7 +712,7 @@ test_that("graphNEL conversion works", {
 
   A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
   A2 <- as_adjacency_matrix(g2, weights = "weight", sparse = FALSE)
-  expect_equal(A, A)
+  expect_equal(A, A2)
   expect_equal(g$name, g2$name)
 })
 

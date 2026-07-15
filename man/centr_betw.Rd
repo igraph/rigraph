@@ -9,10 +9,10 @@ centr_betw(graph, directed = TRUE, normalized = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths for
+\item{directed}{Logical, whether to use directed shortest paths for
 calculating betweenness.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{

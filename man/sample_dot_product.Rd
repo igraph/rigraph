@@ -13,7 +13,7 @@ dot_product(vecs, directed = FALSE)
 \item{vecs}{A numeric matrix in which each latent position vector is a
 column.}
 
-\item{directed}{A logical scalar, TRUE if the generated graph should be
+\item{directed}{A Logical, TRUE if the generated graph should be
 directed.}
 }
 \value{

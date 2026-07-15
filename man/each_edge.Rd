@@ -14,10 +14,10 @@ each_edge(
 \arguments{
 \item{prob}{The rewiring probability, a real number between zero and one.}
 
-\item{loops}{Logical scalar, whether loop edges are allowed in the rewired
+\item{loops}{Logical, whether loop edges are allowed in the rewired
 graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed in the
+\item{multiple}{Logical, whether multiple edges are allowed in the
 generated graph.}
 
 \item{mode}{Character string, specifies which endpoint of the edges to rewire

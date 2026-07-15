@@ -31,9 +31,9 @@ with_kk(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{dim}{Integer scalar, 2 or 3, the dimension of the layout.  Two
 dimensional layouts are places on a plane, three dimensional ones in the 3d
@@ -54,9 +54,10 @@ Typical (and default) value is the number of vertices.}
 Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces
 shorter edges for larger weights. Weights must be positive.}
 
-\item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
-lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-of the vector must match the number of vertices in the graph.}
+\item{minx}{Numeric vector that gives lower boundaries
+for the \sQuote{x} coordinates of the vertices.
+The length of the vector must match the number of vertices in the graph.
+Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 

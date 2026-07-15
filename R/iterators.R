@@ -47,10 +47,6 @@ get_es_graph <- get_vs_graph <- function(seq) {
   }
 }
 
-has_es_graph <- has_vs_graph <- function(seq) {
-  !is.null(weak_ref_key(attr(seq, "env")))
-}
-
 get_es_graph_id <- get_vs_graph_id <- function(seq) {
   new_g <- attr(seq, "graph")
   if (!is.null(new_g)) {

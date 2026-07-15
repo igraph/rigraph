@@ -14,7 +14,7 @@ circulant(n, shifts, directed = FALSE)
 
 \item{shifts}{Integer vector, a list of the offsets within the circulant graph.}
 
-\item{directed}{Boolean, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 }
 \value{
 An igraph graph.

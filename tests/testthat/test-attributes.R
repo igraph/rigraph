@@ -11,14 +11,17 @@ test_that("bracketing works (not changing attribute of similar graphs)", {
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
 
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
+  # jarl-ignore unused_object: test design
   graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
   expect_equal(vertex_attr(g, name = "weight"), 1:4)
 
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
+  # jarl-ignore unused_object: test design
   graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
   expect_equal(edge_attr(g, name = "weight"), 1:3)
 
   g <- set_graph_attr(g, name = "name", "foo")
+  # jarl-ignore unused_object: test design
   graph2 <- set_graph_attr(g, name = "name", "foobar")
   expect_equal(graph_attr(g, name = "name"), "foo")
 })
@@ -33,10 +36,12 @@ test_that("bracketing works with a function (not changing attribute of similar g
 
   copy_test <- function(g) {
     graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
-    graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
-    graph2 <- set_graph_attr(g, name = "name", "foobar")
+    graph2 <- set_edge_attr(graph2, name = "weight", value = rep(1, ecount(g)))
+    graph2 <- set_graph_attr(graph2, name = "name", "foobar")
+    graph2
   }
 
+  # jarl-ignore unused_object: test design
   g2 <- copy_test(g)
   expect_equal(vertex_attr(g, name = "weight"), 1:4)
   expect_equal(edge_attr(g, name = "weight"), 1:3)
@@ -56,6 +61,7 @@ test_that("bracketing works with shortcuts (not changing attribute of similar gr
     graph$name <- "foobar"
   }
 
+  # jarl-ignore unused_object: test design
   g_copy <- copy_test(g)
   expect_equal(vertex_attr(g, name = "weight"), 1:4)
   expect_equal(edge_attr(g, name = "weight"), 1:3)
@@ -284,6 +290,7 @@ test_that("assert_named_list() works", {
 })
 
 test_that("is_bipartite works", {
+  igraph_local_seed(42)
   biadj_mat1 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -291,7 +298,6 @@ test_that("is_bipartite works", {
   g1 <- graph_from_biadjacency_matrix(biadj_mat1)
   expect_true(bipartite_mapping(g1)$res)
 
-  withr::local_seed(42)
   biadj_mat2 <- matrix(
     sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
     ncol = 5
@@ -351,14 +357,14 @@ test_that("handle_vertex_type_arg validates and converts the type attribute", {
 })
 
 test_that("without_attr", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_stripped <- sample_gnp(10, 2 / 10) %>%
     delete_graph_attr("name") %>%
     delete_graph_attr("type") %>%
     delete_graph_attr("loops") %>%
     delete_graph_attr("p")
 
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g_no_attr <- sample_(gnp(10, 2 / 10), without_attr())
 
   expect_identical_graphs(g_stripped, g_no_attr)
@@ -553,6 +559,7 @@ test_that("good error message when not using character", {
 })
 
 test_that("set_vertex_attrs() works", {
+  igraph_local_seed(42)
   g <- make_ring(10)
   g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
   expect_equal(V(g)$color, rep("blue", vcount(g)))

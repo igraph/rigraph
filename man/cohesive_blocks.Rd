@@ -63,7 +63,7 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
-\item{labels}{Logical scalar, whether to add the vertex labels to the result
+\item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 
@@ -107,7 +107,7 @@ of the files, without extension. (But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical scalar, whether to create a single Pajek project
+\item{project.file}{Logical, whether to create a single Pajek project
 file containing all the data, or to create separated files for each item.
 See details below.}
 }

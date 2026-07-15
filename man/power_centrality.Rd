@@ -21,7 +21,7 @@ power_centrality(
 \item{nodes}{vertex sequence indicating which vertices are to be included in
 the calculation.  By default, all vertices are included.}
 
-\item{loops}{boolean indicating whether or not the diagonal should be
+\item{loops}{Logical indicating whether or not the diagonal should be
 treated as valid data.  Set this true if and only if the data can contain
 loops.  \code{loops} is \code{FALSE} by default.}
 
@@ -34,7 +34,7 @@ score; can be negative}
 \item{tol}{tolerance for near-singularities during matrix inversion (see
 \code{\link[=solve]{solve()}})}
 
-\item{sparse}{Logical scalar, whether to use sparse matrices for the
+\item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
 

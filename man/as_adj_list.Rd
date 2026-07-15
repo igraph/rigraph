@@ -30,7 +30,7 @@ for both. This argument is ignored for undirected graphs.}
 (to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
 is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical scalar, set to \code{FALSE} to use only one representative
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative
 of each set of parallel edges.}
 }
 \value{

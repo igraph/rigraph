@@ -27,13 +27,13 @@ attribute, but you don't want to use it for community detection. Edge weights
 are used to calculate weighted edge betweenness. This means that edges are
 interpreted as distances, not as connection strengths.}
 
-\item{directed}{Logical constant, whether to calculate directed edge
+\item{directed}{Logical, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}
 
-\item{edge.betweenness}{Logical constant, whether to return the edge
+\item{edge.betweenness}{Logical, whether to return the edge
 betweenness of the edges at the time of their removal.}
 
-\item{merges}{Logical constant, whether to return the merge matrix
+\item{merges}{Logical, whether to return the merge matrix
 representing the hierarchical community structure of the network.  This
 argument is called \code{merges}, even if the community structure algorithm
 itself is divisive and not agglomerative: it builds the tree from top to
@@ -46,14 +46,14 @@ communities numbered from one to \eqn{N}. The first merge, the first line of
 the matrix creates community \eqn{N+1}, the second merge creates community
 \eqn{N+2}, etc.}
 
-\item{bridges}{Logical constant, whether to return a list the edge removals
+\item{bridges}{Logical, whether to return a list the edge removals
 which actually splitted a component of the graph.}
 
-\item{modularity}{Logical constant, whether to calculate the maximum
+\item{modularity}{Logical, whether to calculate the maximum
 modularity score, considering all possibly community structures along the
 edge-betweenness based edge removals.}
 
-\item{membership}{Logical constant, whether to calculate the membership
+\item{membership}{Logical, whether to calculate the membership
 vector corresponding to the highest possible modularity score.}
 }
 \value{

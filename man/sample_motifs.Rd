@@ -27,8 +27,8 @@ If \code{NULL}, the default, no cuts are made.}
 finding motifs. Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 
-\item{sample}{If not \code{NULL} then it specifies the vertices to use as a
-starting point for finding motifs.}
+\item{sample}{Vertices to use as a starting point for finding motifs.
+Default: \code{NULL}.}
 }
 \value{
 A numeric scalar, an estimate for the total number of motifs in

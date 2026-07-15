@@ -140,14 +140,14 @@ graph_incidence_build <- function(
 #'
 #' @param incidence The input bipartite adjacency matrix. It can also be a sparse matrix
 #'   from the `Matrix` package.
-#' @param directed Logical scalar, whether to create a directed graph.
+#' @param directed Logical, whether to create a directed graph.
 #' @param mode A character constant, defines the direction of the edges in
 #'   directed graphs, ignored for undirected graphs. If \sQuote{`out`}, then
 #'   edges go from vertices of the first kind (corresponding to rows in the
 #'   bipartite adjacency matrix) to vertices of the second kind (columns in the incidence
 #'   matrix). If \sQuote{`in`}, then the opposite direction is used. If
 #'   \sQuote{`all`} or \sQuote{`total`}, then mutual edges are created.
-#' @param multiple Logical scalar, specifies how to interpret the matrix
+#' @param multiple Logical, specifies how to interpret the matrix
 #'   elements. See details below.
 #' @param weighted This argument specifies whether to create a weighted graph
 #'   from the bipartite adjacency matrix. If it is `NULL` then an unweighted graph is

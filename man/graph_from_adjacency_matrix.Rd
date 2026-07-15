@@ -42,7 +42,7 @@ edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
 then a weighted graph is created and the name of the edge attribute will be
 \code{weight}. See also details below.}
 
-\item{diag}{Logical scalar, whether to include the diagonal of the matrix in
+\item{diag}{Logical, whether to include the diagonal of the matrix in
 the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 

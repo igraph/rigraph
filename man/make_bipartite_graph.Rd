@@ -20,7 +20,7 @@ regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
 
-\item{directed}{Whether to create a directed graph, boolean constant. Note
+\item{directed}{Logical, whether to create a directed graph. Note
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
 }
@@ -28,7 +28,7 @@ bipartite graphs.}
 \code{make_bipartite_graph()} returns a bipartite igraph graph. In other
 words, an igraph graph that has a vertex attribute named \code{type}.
 
-\code{is_bipartite()} returns a logical scalar.
+\code{is_bipartite()} returns a Logical.
 }
 \description{
 A bipartite graph has two kinds of vertices and connections are only allowed
