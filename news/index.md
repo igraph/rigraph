@@ -1,5 +1,87 @@
 # Changelog
 
+## igraph 2.3.2.9017
+
+### Bug fixes
+
+#### migrations
+
+- Guard against head/recoverable prefix clashes
+  ([\#2743](https://github.com/igraph/rigraph/issues/2743)).
+
+### Features
+
+- Add attribute combination support to graph operators
+  ([\#57](https://github.com/igraph/rigraph/issues/57),
+  [\#2676](https://github.com/igraph/rigraph/issues/2676)).
+
+### Chore
+
+- Rm unused lines
+  ([\#2728](https://github.com/igraph/rigraph/issues/2728)).
+
+- Rm empty arguments
+  ([\#2740](https://github.com/igraph/rigraph/issues/2740)).
+
+- Rm a few outer negations with Jarl
+  ([\#2739](https://github.com/igraph/rigraph/issues/2739)).
+
+- Rm two more unused vars
+  ([\#2735](https://github.com/igraph/rigraph/issues/2735)).
+
+- Unused object + rename in hrg.R
+  ([\#2734](https://github.com/igraph/rigraph/issues/2734)).
+
+- Rm unused variable from idx.R
+  ([\#2733](https://github.com/igraph/rigraph/issues/2733)).
+
+- Stop naming mode in indexing.R
+  ([\#2732](https://github.com/igraph/rigraph/issues/2732)).
+
+- Rm modifs of variable not used in logic branch
+  ([\#2726](https://github.com/igraph/rigraph/issues/2726)).
+
+- Rm unused code from iterators.R
+  ([\#2731](https://github.com/igraph/rigraph/issues/2731)).
+
+- Rm two unused lines
+  ([\#2729](https://github.com/igraph/rigraph/issues/2729)).
+
+- Rm unused variable
+  ([\#2725](https://github.com/igraph/rigraph/issues/2725)).
+
+- Rm unused code
+  ([\#2724](https://github.com/igraph/rigraph/issues/2724)).
+
+- Rm unused object
+  ([\#2723](https://github.com/igraph/rigraph/issues/2723)).
+
+- Rm unused objects in plot scripts
+  ([\#2727](https://github.com/igraph/rigraph/issues/2727)).
+
+### Documentation
+
+- More common location for default value in community.R
+  ([\#2716](https://github.com/igraph/rigraph/issues/2716),
+  [\#2737](https://github.com/igraph/rigraph/issues/2737)).
+
+- Clarify make\_ vs sample\_
+  ([\#801](https://github.com/igraph/rigraph/issues/801),
+  [\#2738](https://github.com/igraph/rigraph/issues/2738)).
+
+- Describe logical params more consistently
+  ([\#2487](https://github.com/igraph/rigraph/issues/2487),
+  [\#2707](https://github.com/igraph/rigraph/issues/2707)).
+
+### Testing
+
+- Replace `expect_snapshot_error(` with
+  `expect_snapshot(error = … (`\#2721`{=html},`\#2736\`{=html}).
+
+- Withr-free local seed and RNG-state leak fixes
+  ([\#2713](https://github.com/igraph/rigraph/issues/2713),
+  [\#2714](https://github.com/igraph/rigraph/issues/2714)).
+
 ## igraph 2.3.2.9016
 
 ### Chore
@@ -1020,6 +1102,15 @@
 ## igraph 2.3.1.9000
 
 - Switching to development version.
+
+## igraph 2.3.3
+
+CRAN release: 2026-06-26
+
+### Bug fixes
+
+- Compatibility fix for withr update
+  ([\#2705](https://github.com/igraph/rigraph/issues/2705)).
 
 ## igraph 2.3.2
 

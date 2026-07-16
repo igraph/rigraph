@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.2.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,48 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.2.9017" id="igraph-2329017">igraph 2.3.2.9017<a class="anchor" aria-label="anchor" href="#igraph-2329017"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-2-9017">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-2-9017"></a></h3>
+<div class="section level4">
+<h4 id="migrations-2-3-2-9017">migrations<a class="anchor" aria-label="anchor" href="#migrations-2-3-2-9017"></a></h4>
+<ul><li>Guard against head/recoverable prefix clashes (<a href="https://github.com/igraph/rigraph/issues/2743" class="external-link">#2743</a>).</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="features-2-3-2-9017">Features<a class="anchor" aria-label="anchor" href="#features-2-3-2-9017"></a></h3>
+<ul><li>Add attribute combination support to graph operators (<a href="https://github.com/igraph/rigraph/issues/57" class="external-link">#57</a>, <a href="https://github.com/igraph/rigraph/issues/2676" class="external-link">#2676</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-3-2-9017">Chore<a class="anchor" aria-label="anchor" href="#chore-2-3-2-9017"></a></h3>
+<ul><li><p>Rm unused lines (<a href="https://github.com/igraph/rigraph/issues/2728" class="external-link">#2728</a>).</p></li>
+<li><p>Rm empty arguments (<a href="https://github.com/igraph/rigraph/issues/2740" class="external-link">#2740</a>).</p></li>
+<li><p>Rm a few outer negations with Jarl (<a href="https://github.com/igraph/rigraph/issues/2739" class="external-link">#2739</a>).</p></li>
+<li><p>Rm two more unused vars (<a href="https://github.com/igraph/rigraph/issues/2735" class="external-link">#2735</a>).</p></li>
+<li><p>Unused object + rename in hrg.R (<a href="https://github.com/igraph/rigraph/issues/2734" class="external-link">#2734</a>).</p></li>
+<li><p>Rm unused variable from idx.R (<a href="https://github.com/igraph/rigraph/issues/2733" class="external-link">#2733</a>).</p></li>
+<li><p>Stop naming mode in indexing.R (<a href="https://github.com/igraph/rigraph/issues/2732" class="external-link">#2732</a>).</p></li>
+<li><p>Rm modifs of variable not used in logic branch (<a href="https://github.com/igraph/rigraph/issues/2726" class="external-link">#2726</a>).</p></li>
+<li><p>Rm unused code from iterators.R (<a href="https://github.com/igraph/rigraph/issues/2731" class="external-link">#2731</a>).</p></li>
+<li><p>Rm two unused lines (<a href="https://github.com/igraph/rigraph/issues/2729" class="external-link">#2729</a>).</p></li>
+<li><p>Rm unused variable (<a href="https://github.com/igraph/rigraph/issues/2725" class="external-link">#2725</a>).</p></li>
+<li><p>Rm unused code (<a href="https://github.com/igraph/rigraph/issues/2724" class="external-link">#2724</a>).</p></li>
+<li><p>Rm unused object (<a href="https://github.com/igraph/rigraph/issues/2723" class="external-link">#2723</a>).</p></li>
+<li><p>Rm unused objects in plot scripts (<a href="https://github.com/igraph/rigraph/issues/2727" class="external-link">#2727</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-3-2-9017">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-3-2-9017"></a></h3>
+<ul><li><p>More common location for default value in community.R (<a href="https://github.com/igraph/rigraph/issues/2716" class="external-link">#2716</a>, <a href="https://github.com/igraph/rigraph/issues/2737" class="external-link">#2737</a>).</p></li>
+<li><p>Clarify make_ vs sample_ (<a href="https://github.com/igraph/rigraph/issues/801" class="external-link">#801</a>, <a href="https://github.com/igraph/rigraph/issues/2738" class="external-link">#2738</a>).</p></li>
+<li><p>Describe logical params more consistently (<a href="https://github.com/igraph/rigraph/issues/2487" class="external-link">#2487</a>, <a href="https://github.com/igraph/rigraph/issues/2707" class="external-link">#2707</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-3-2-9017">Testing<a class="anchor" aria-label="anchor" href="#testing-2-3-2-9017"></a></h3>
+<ul><li><p>Replace <code>expect_snapshot_error(</code> with <code>expect_snapshot(error = … (</code>#2721<code>{=html},</code>#2736`{=html}).</p></li>
+<li><p>Withr-free local seed and RNG-state leak fixes (<a href="https://github.com/igraph/rigraph/issues/2713" class="external-link">#2713</a>, <a href="https://github.com/igraph/rigraph/issues/2714" class="external-link">#2714</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.2.9016" id="igraph-2329016">igraph 2.3.2.9016<a class="anchor" aria-label="anchor" href="#igraph-2329016"></a></h2>
 <div class="section level3">
@@ -940,6 +982,13 @@
 <h2 class="pkg-version" data-toc-text="2.3.1.9000" id="igraph-2319000">igraph 2.3.1.9000<a class="anchor" aria-label="anchor" href="#igraph-2319000"></a></h2>
 <ul><li>Switching to development version.</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.3" id="igraph-233">igraph 2.3.3<a class="anchor" aria-label="anchor" href="#igraph-233"></a></h2><p class="text-muted">CRAN release: 2026-06-26</p>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-3"></a></h3>
+<ul><li>Compatibility fix for withr update (<a href="https://github.com/igraph/rigraph/issues/2705" class="external-link">#2705</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.2" id="igraph-232">igraph 2.3.2<a class="anchor" aria-label="anchor" href="#igraph-232"></a></h2><p class="text-muted">CRAN release: 2026-05-29</p>
 <div class="section level3">

@@ -118,7 +118,7 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> ── <igraph> ───────────────────────────────────────────────────────── b97f21a ──
+#> ── <igraph> ───────────────────────────────────────────────────────── e24515e ──
 #> ℹ undirected · named · bipartite
 #> ℹ 8 vertices · 5 edges
 #> 
