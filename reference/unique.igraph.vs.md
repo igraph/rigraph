@@ -53,9 +53,9 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 V(g)[1, 1:5, 1:10, 5:10]
-#> ── <vertex sequence> 22/10 · named · from 4899017 ──────────────────────────────
+#> ── <vertex sequence> 22/10 · named · from c43c209 ──────────────────────────────
 #>  [1] A A B C D E A B C D E F G H I J E F G H I J
 V(g)[1, 1:5, 1:10, 5:10] %>% unique()
-#> ── <vertex sequence> 10/10 · named · from 4899017 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from c43c209 ──────────────────────────────
 #>  [1] A B C D E F G H I J
 ```

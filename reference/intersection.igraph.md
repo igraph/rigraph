@@ -128,7 +128,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> ── <igraph> ───────────────────────────────────────────────────────── f7ec0e2 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 0bacc6b ──
 #> ℹ undirected · named
 #> ℹ 13 vertices · 4 edges
 #> 
