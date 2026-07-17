@@ -1,5 +1,213 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9018
+
+## Bug fixes
+
+- Remove generated `src/Makevars` in cleanup scripts (#2746).
+
+- Fix test issues with new withr version (#2701, #2705).
+
+### migrations
+
+- Guard against head/recoverable prefix clashes (#2743).
+
+- Fix test issues with new withr version (#2701, #2705).
+
+- BFS reports all requested root vertices instead of only the first (#1639, #2693).
+
+- Resolve roxygen2 warnings (#2641, #2692).
+
+- Touchstone empty results table for branches with a slash (#2689).
+
+- Harden air support and broaden migration fixture to the full arg-matching matrix (#2686).
+
+- Repair touchstone benchmark CI (#2688).
+
+- `cut_at()` handles partial dendrograms from `cluster_leading_eigen()` (#58, #2599).
+
+- Stricter bipartite type checking (#710, #2598).
+
+- Vector logic (#2653).
+
+- `seq_len()` rather than `seq()` (#2655).
+
+- Unreachable code (#2656).
+
+- `rowMeans()` and `rowSums()` (#2657).
+
+- Add `check.attributes=FALSE` to `is_symmetric()` to ignore dimnames mismatch (#2671, #2672).
+
+- Resolve CRAN Fortran obsolescent character length warning in ARPACK (#2644).
+
+- Avoid memory overflow in `ensure_no_na()` for large sparse matrices with `mode="lower"` or `mode="upper"` (#2626, #2627).
+
+## Features
+
+- Add attribute combination support to graph operators (#57, #2676).
+
+- Retire `attr` in favor of `weights` for adjacency matrix functions (#906, #1137, #2677).
+
+- Modern cli-styled print output (#1959, #2682).
+
+- Added simple check to `graph_from_literal()` (#824, #1981).
+
+- Add touchstone benchmarks (#1338, #2685).
+
+- Add tooling for parameter migration (#2684).
+
+## Chore
+
+- Rm unused lines (#2728).
+
+- Rm empty arguments (#2740).
+
+- Rm a few outer negations with Jarl (#2739).
+
+- Rm two more unused vars (#2735).
+
+- Unused object + rename in hrg.R (#2734).
+
+- Rm unused variable from idx.R (#2733).
+
+- Stop naming mode in indexing.R (#2732).
+
+- Rm modifs of variable not used in logic branch (#2726).
+
+- Rm unused code from iterators.R (#2731).
+
+- Rm two unused lines (#2729).
+
+- Rm unused variable (#2725).
+
+- Rm unused code (#2724).
+
+- Rm unused object (#2723).
+
+- Rm unused objects in plot scripts (#2727).
+
+- Auto-update from GitHub Actions (#2718).
+
+- Separate and annotate top-level vs helper functions in `rinterface_extra.c` (#2105, #2708).
+
+- Auto-update from GitHub Actions (#2702).
+
+- Implicit assignments (#2664).
+
+- Use `max.print` consistently in adjacency-list graph printing (#1462, #2680).
+
+- Refactor internal `tmp` locals to descriptive names (#1328, #2678).
+
+- Unused functions (#2669).
+
+- Ignore true_false_symbol for now (#2668).
+
+- Numeric_leading_zero (#2667).
+
+- Exception comments for jarl's duplicated arguments check (#2658).
+
+- `startsWith()` (#2659).
+
+- Outer negation (#2666).
+
+- `seq_along()`, `seq_len()` (#2665).
+
+- Do not namespace internal functions (#2662).
+
+- `inherits()` (#2661).
+
+- `anyDuplicated()` (jarl), `anyNA()` (jarl), `nzchar()`(me) (#2660).
+
+- `lengths()` (#2663).
+
+- Add jarl config (#2654).
+
+- Split generated `R/aaa-auto.R` into per-category `R/aaa-<cat>.R` files (#2621).
+
+- Remove `console()` and `tkplot()` (#2615).
+
+- Advance lifecycle stage for many functions (#2634).
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+- Auto-update from GitHub Actions (#2624).
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Really deploy pkgdown only on push.
+
+- Disable vendoring workflow to avoid noise.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+## Documentation
+
+- More common location for default value in community.R (#2716, #2737).
+
+- Clarify make\_ vs sample\_ (#801, #2738).
+
+- Describe logical params more consistently (#2487, #2707).
+
+- Use "ID"/"IDs" consistently in documentation prose (#1683, #2694).
+
+- Updated revdep issues (#2647).
+
+### revdep
+
+- Analyze and document reverse dependency problems for igraph 2.3.0 (#2499, #2500).
+
+- `document()` with latest roxygen2 -- for clean diffs (#2642).
+
+## Performance
+
+- Speed up `.apply_modifiers()` in `make.R` (#1468, #2600).
+
+## Testing
+
+- Replace `expect_snapshot_error(` with `expect_snapshot(error = … (`\#2721`{=html}, `\#2736\`{=html}).
+
+- Withr-free local seed and RNG-state leak fixes (#2713, #2714).
+
+- Jarl fixes (#2670).
+
+## Uncategorized
+
+- Fix: do not wrap roxygenize in try() (#2679) (#2690) (#2679).
+
+- Merge tag 'v2.3.2'.
+
+  Place the 2.3.2 release section directly above 2.3.1 in NEWS, below the
+  development entries, and bump the development version to 2.3.2.9008.
+
+  https://claude.ai/code/session_01QRKAaBDSAQTfysLRc1C3W2
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+- Merge branch 'krlmlr-main'.
+
+
 # igraph 2.3.2.9017
 
 ## Bug fixes
