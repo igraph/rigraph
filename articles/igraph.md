@@ -96,7 +96,7 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 7d25942 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 982a7cb ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -123,7 +123,7 @@ edges:
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 7d25942 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 982a7cb ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -252,7 +252,7 @@ g <- g %>%
 g
 ```
 
-    ## ── <igraph> Zachary ───────────────────────────────────────────────── d7466a9 ──
+    ## ── <igraph> Zachary ───────────────────────────────────────────────── 7aa4209 ──
     ## ℹ undirected
     ## ℹ 40 vertices · 86 edges
     ## 
@@ -393,7 +393,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(graph1)
 ```
 
-    ## ── <igraph> Tree ──────────────────────────────────────────────────── b377a86 ──
+    ## ── <igraph> Tree ──────────────────────────────────────────────────── 1ec8621 ──
     ## ℹ undirected
     ## ℹ 127 vertices · 126 edges
     ## 
@@ -427,7 +427,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## ── <igraph> Geometric random graph ────────────────────────────────── 66c7407 ──
+    ## ── <igraph> Geometric random graph ────────────────────────────────── 8e1f590 ──
     ## ℹ undirected
     ## ℹ 100 vertices · 499 edges
     ## 
@@ -504,7 +504,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── db45ad2 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── f32b17c ──
     ## ℹ undirected · named
     ## ℹ 7 vertices · 9 edges
     ## 
@@ -585,7 +585,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## ── <vertex sequence> 7/7 · named · from db45ad2 ────────────────────────────────
+    ## ── <vertex sequence> 7/7 · named · from f32b17c ────────────────────────────────
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 To delete attributes:
@@ -760,7 +760,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## ── <vertex sequence> 3/10 · from 723e5e4 ───────────────────────────────────────
+    ## ── <vertex sequence> 3/10 · from a537f08 ───────────────────────────────────────
     ## [1] 2 3 7
 
 ``` r
@@ -769,7 +769,7 @@ seq <- seq[1, 3] # filtering an existing vertex set
 seq
 ```
 
-    ## ── <vertex sequence> 2/10 · from 723e5e4 ───────────────────────────────────────
+    ## ── <vertex sequence> 2/10 · from a537f08 ───────────────────────────────────────
     ## [1] 2 7
 
 Selecting a vertex that does not exist results in an error:
@@ -853,7 +853,7 @@ Carmina (who has vertex index 3):
 E(g)[.from(3)]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from db45ad2 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from f32b17c ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -864,7 +864,7 @@ Of course it also works with vertex names:
 E(g)[.from("Carmina")]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from db45ad2 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from f32b17c ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -887,7 +887,7 @@ index 3), Nang (vertex index 5) and Samira (vertex index 6):
 E(g)[3:5 %--% 5:6]
 ```
 
-    ## ── <edge sequence> 3/9 · vertex names · from db45ad2 ───────────────────────────
+    ## ── <edge sequence> 3/9 · vertex names · from f32b17c ───────────────────────────
     ## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira
 
 To make the `%--%` operator work with names, you can build string
@@ -922,7 +922,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## ── <edge sequence> 5/9 · vertex names · from db45ad2 ───────────────────────────
+    ## ── <edge sequence> 5/9 · vertex names · from f32b17c ───────────────────────────
     ## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    
     ## [5] Nang ─ Samira
 
@@ -1194,11 +1194,11 @@ sessionInfo()
 
     ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.4 LTS
+    ## Running under: Ubuntu 26.04 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-    ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+    ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.32.so;  LAPACK version 3.12.0
     ## 
     ## locale:
     ##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -1213,7 +1213,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.3.3.9017
+    ## [1] igraph_2.3.3.9018
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] vctrs_0.7.3        cli_3.6.6          knitr_1.51         rlang_1.3.0       

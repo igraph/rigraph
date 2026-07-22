@@ -126,7 +126,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 6b9dd95 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9c93d9f ──
 #> ℹ directed
 #> ℹ 10 vertices · 20 edges
 #> 
@@ -139,7 +139,7 @@ as_directed(g, "mutual")
 #> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── a4d8c7b ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── ba2f8dc ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -155,7 +155,7 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 1594e4a ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── b0d7760 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -184,7 +184,7 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 2fde607 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 6a45e06 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 7 edges
 #> 

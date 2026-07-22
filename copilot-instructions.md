@@ -2,7 +2,8 @@
 
 > **Note**: For general development guidelines, code style conventions,
 > and AI agent instructions, see
-> [`AGENTS.md`](https://r.igraph.org/AGENTS.md) in the repository root.
+> [`AGENTS.md`](https://r.igraph.org/../AGENTS.md) in the repository
+> root.
 
 ## Project Overview
 

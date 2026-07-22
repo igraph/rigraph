@@ -165,26 +165,26 @@ plot(g)
 # nei() special function
 g <- make_graph(c(1, 2, 2, 3, 2, 4, 4, 2))
 V(g)[.nei(c(2, 4))]
-#> ── <vertex sequence> 4/4 · from d75369c ────────────────────────────────────────
+#> ── <vertex sequence> 4/4 · from a4e27e3 ────────────────────────────────────────
 #> [1] 1 2 3 4
 V(g)[.nei(c(2, 4), "in")]
-#> ── <vertex sequence> 3/4 · from d75369c ────────────────────────────────────────
+#> ── <vertex sequence> 3/4 · from a4e27e3 ────────────────────────────────────────
 #> [1] 1 2 4
 V(g)[.nei(c(2, 4), "out")]
-#> ── <vertex sequence> 3/4 · from d75369c ────────────────────────────────────────
+#> ── <vertex sequence> 3/4 · from a4e27e3 ────────────────────────────────────────
 #> [1] 2 3 4
 
 # -----------------------------------------------------------------
 # The same with vertex names
 g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)[.nei(c("B", "D"))]
-#> ── <vertex sequence> 4/4 · named · from 398603b ────────────────────────────────
+#> ── <vertex sequence> 4/4 · named · from 1427c5e ────────────────────────────────
 #> [1] A B C D
 V(g)[.nei(c("B", "D"), "in")]
-#> ── <vertex sequence> 3/4 · named · from 398603b ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from 1427c5e ────────────────────────────────
 #> [1] A B D
 V(g)[.nei(c("B", "D"), "out")]
-#> ── <vertex sequence> 3/4 · named · from 398603b ────────────────────────────────
+#> ── <vertex sequence> 3/4 · named · from 1427c5e ────────────────────────────────
 #> [1] B C D
 
 # -----------------------------------------------------------------
@@ -192,7 +192,7 @@ V(g)[.nei(c("B", "D"), "out")]
 g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)$color <- c("red", "red", "green", "green")
 V(g)[color == "red"]
-#> ── <vertex sequence> 2/4 · named · from 27d3665 ────────────────────────────────
+#> ── <vertex sequence> 2/4 · named · from 4608190 ────────────────────────────────
 #> [1] A B
 
 # Indexing with a variable whose name matches the name of an attribute
@@ -200,6 +200,6 @@ V(g)[color == "red"]
 V(g)$x <- 10:13
 x <- 2
 V(g)[.env$x]
-#> ── <vertex sequence> 1/4 · named · from 27d3665 ────────────────────────────────
+#> ── <vertex sequence> 1/4 · named · from 4608190 ────────────────────────────────
 #> [1] B
 ```
