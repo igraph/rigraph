@@ -1,5 +1,13 @@
 # Changelog
 
+## igraph 2.3.3.9019
+
+### Continuous integration
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
 ## igraph 2.3.3.9018
 
 ### Bug fixes
