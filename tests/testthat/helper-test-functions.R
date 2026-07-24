@@ -243,7 +243,7 @@ karate_oldstyle <- structure(
           Citation = "Wayne W. Zachary. An Information Flow Model for Conflict and Fission in Small Groups. Journal of Anthropological Research Vol. 33, No. 4 452-473",
           Author = "Wayne W. Zachary"
         ),
-        .Names = c("name", "Citation", "Author")
+        names = c("name", "Citation", "Author")
       ),
       structure(
         list(
@@ -254,7 +254,7 @@ karate_oldstyle <- structure(
           ),
           name = karate_oldstyle_names
         ),
-        .Names = c("Faction", "name")
+        names = c("Faction", "name")
       ),
       structure(
         list(
@@ -266,7 +266,7 @@ karate_oldstyle <- structure(
             2, 7, 4, 2, 4, 2, 2, 4, 2, 3, 3, 4, 4, 5
           )
         ),
-        .Names = "weight"
+        names = "weight"
       )
     )
   ),

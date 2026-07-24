@@ -271,7 +271,7 @@ test_that("dominator_tree works -- legacy", {
     as_edgelist(dtree$domtree),
     structure(
       c("R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R", "A", "B", "C", "D", "E", "F", "G", "L", "H", "I", "J", "K"),
-      .Dim = c(12L, 2L)
+      dim = c(12L, 2L)
     )
   )
 })
