@@ -71,7 +71,7 @@ test_that("bracketing works with shortcuts (not changing attribute of similar gr
 test_that("we can query all attributes at once", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
-  expect_equal(graph_attr(g), structure(list(), .Names = character(0)))
+  expect_equal(graph_attr(g), structure(list(), names = character(0)))
   expect_equal(unname(vertex_attr(g)), list())
   expect_equal(unname(edge_attr(g)), list())
 
