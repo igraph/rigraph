@@ -278,6 +278,20 @@ test_that("vertices() errors on duplicate attribute names", {
   })
 })
 
+test_that("edge()/edges() accept a two-column matrix or data frame (#1827)", {
+  mat <- matrix(c(1, 2, 2, 3, 3, 4), ncol = 2, byrow = TRUE)
+  g <- make_empty_graph(5) + edges(mat)
+  expect_ecount(g, 3)
+  expect_equal(as_edgelist(g), mat)
+
+  df <- data.frame(from = c(1, 2, 3), to = c(2, 3, 4))
+  g <- make_empty_graph(5) + edges(df)
+  expect_equal(as_edgelist(g), mat)
+
+  g <- make_ring(5) - edges(mat)
+  expect_ecount(g, 2)
+})
+
 test_that("infix operators work", {
   g <- make_ring(10)
   V(g)$name <- letters[1:10]

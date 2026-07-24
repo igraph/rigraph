@@ -608,7 +608,7 @@ test_that("as_edgelist works", {
   igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   el <- as_edgelist(g)
-  g2 <- make_graph(t(el), n = vcount(g), dir = FALSE)
+  g2 <- make_graph(el, n = vcount(g), dir = FALSE)
   expect_isomorphic(g, g2)
 })
 

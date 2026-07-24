@@ -10,6 +10,25 @@ test_that("make_ works, order of arguments does not matter", {
   expect_identical_graphs(g0, g3)
 })
 
+test_that("make_graph() accepts a two-column matrix or data frame (#1827)", {
+  mat <- matrix(c(1, 2, 2, 3, 3, 4), ncol = 2, byrow = TRUE)
+  g_mat <- make_graph(mat, directed = FALSE)
+  expect_equal(as_edgelist(g_mat), mat)
+
+  df <- data.frame(from = c(1, 2, 3), to = c(2, 3, 4))
+  g_df <- make_graph(df, directed = FALSE)
+  expect_equal(as_edgelist(g_df), mat)
+
+  # round-trips an edge list without manual transposition (#550)
+  g <- make_ring(6)
+  expect_isomorphic(make_graph(as_edgelist(g), directed = FALSE), g)
+})
+
+test_that("make_graph() rejects 2xn and 2x2 matrices (#1827)", {
+  lifecycle::expect_defunct(make_graph(matrix(c(1, 2, 3, 4), nrow = 2)))
+  lifecycle::expect_defunct(make_graph(matrix(c(1, 2, 1, 3, 1, 4), nrow = 2)))
+})
+
 test_that("make_ works with n parameter", {
   g0 <- make_undirected_graph(1:10, n = 15)
   expect_vcount(g0, 15)

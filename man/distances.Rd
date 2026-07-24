@@ -284,7 +284,7 @@ el <- matrix(
     9, 10, 4
   )
 )
-g2 <- add_edges(make_empty_graph(10), t(el[, 1:2]), weight = el[, 3])
+g2 <- add_edges(make_empty_graph(10), el[, 1:2], weight = el[, 3])
 distances(g2, mode = "out")
 
 }

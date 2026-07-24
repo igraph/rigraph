@@ -111,6 +111,15 @@ test_that("E(g) returns complete iterator, completeness is lost with next subset
   expect_false(is_complete_iterator(E(g, path = 1:4)))
 })
 
+test_that("E(g, P=) accepts a two-column matrix or data frame (#1827)", {
+  g <- make_ring(10)
+  vec <- E(g, P = c(1, 2, 4, 5, 6, 7))
+  mat <- E(g, P = matrix(c(1, 2, 4, 5, 6, 7), ncol = 2, byrow = TRUE))
+  df <- E(g, P = data.frame(from = c(1, 4, 6), to = c(2, 5, 7)))
+  expect_equal(as.vector(mat), as.vector(vec))
+  expect_equal(as.vector(df), as.vector(vec))
+})
+
 test_that("ids change when updating the graph", {
   g <- make_ring(10)
 

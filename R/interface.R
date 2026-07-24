@@ -113,8 +113,10 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #' their values for the original edges of the graph are set to `NA`.
 #'
 #' @param graph The input graph
-#' @param edges The edges to add, a vertex sequence with even number
-#'   of vertices.
+#' @param edges The edges to add. Either a two-column matrix or data frame, each
+#'   row giving the two endpoints of an edge, or a vertex sequence with an even
+#'   number of vertices, interpreted pairwise (the first and second vertices
+#'   form the first edge, the third and fourth the second edge, etc.).
 #' @param ... Additional arguments, they must be named,
 #'   and they will be added as edge attributes, for the newly added
 #'   edges. See also details below.
@@ -147,6 +149,10 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   nam <- names(attrs)
   if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
+  }
+
+  if (is.data.frame(edges) || inherits(edges, "matrix")) {
+    edges <- el_to_vec(edges, arg = "edges", fn = "add_edges")
   }
 
   edges.orig <- ecount(graph)
@@ -245,7 +251,8 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' @param edges The edges to remove, specified as an edge sequence. Typically
 #'   this is either a numeric vector containing edge IDs, or a character vector
 #'   containing the IDs or names of the source and target vertices, separated by
-#'   `|`
+#'   `|`. A two-column matrix or data frame is also accepted, each row giving the
+#'   two endpoints of an edge to remove.
 #' @return The graph, with the edges removed.
 #'
 #' @family functions for manipulating graph structure
@@ -264,6 +271,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
+  ensure_igraph(graph)
+  if (is.data.frame(edges) || inherits(edges, "matrix")) {
+    edges <- get_edge_ids(graph, edges, error = TRUE)
+  }
   delete_edges_impl(
     graph = graph,
     edges = edges
@@ -455,7 +466,12 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
-el_to_vec <- function(x, call = rlang::caller_env()) {
+el_to_vec <- function(
+  x,
+  arg = "vp",
+  fn = "get_edge_ids",
+  call = rlang::caller_env()
+) {
   if (is.data.frame(x)) {
     if (typeof(x[[1]]) == typeof(x[[2]])) {
       c(rbind(x[[1]], x[[2]]))
@@ -471,26 +487,31 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     if (nrow == 2 && ncol == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
-        "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
+        paste0(fn, "(", arg, " = 'is not allowed to be a 2 times 2 matrix')")
       )
     } else if (nrow == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
-        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
+        paste0(
+          fn,
+          "(",
+          arg,
+          " = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"
+        ),
         details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
     } else if (ncol == 2) {
       c(t(x))
     } else {
       cli::cli_abort(
-        "{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed"
+        "{.args {arg}} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed"
       )
     }
   } else if (is.vector(x)) {
     x
   } else {
     cli::cli_abort(
-      "Only two-column data.frames and matrices, and vectors are allowed for {.args vp}",
+      "Only two-column data.frames and matrices, and vectors are allowed for {.args {arg}}",
       call = call
     )
   }

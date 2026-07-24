@@ -11,7 +11,9 @@ E(graph, P = NULL, path = NULL, directed = TRUE)
 
 \item{P}{A list of vertices to select edges via pairs of vertices.
 The first and second vertices select the first edge, the third
-and fourth the second, etc.}
+and fourth the second, etc. Alternatively, a two-column matrix or
+data frame can be given, each row defining the two endpoints of an
+edge to select.}
 
 \item{path}{A list of vertices, to select edges along a path.
 Note that this only works reliable for simple graphs. If the graph

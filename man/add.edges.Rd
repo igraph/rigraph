@@ -9,8 +9,10 @@ add.edges(graph, edges, ..., attr = list())
 \arguments{
 \item{graph}{The input graph}
 
-\item{edges}{The edges to add, a vertex sequence with even number
-of vertices.}
+\item{edges}{The edges to add. Either a two-column matrix or data frame, each
+row giving the two endpoints of an edge, or a vertex sequence with an even
+number of vertices, interpreted pairwise (the first and second vertices
+form the first edge, the third and fourth the second edge, etc.).}
 
 \item{...}{Additional arguments, they must be named,
 and they will be added as edge attributes, for the newly added
