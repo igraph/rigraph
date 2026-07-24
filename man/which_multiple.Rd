@@ -88,7 +88,7 @@ which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE))
 # Remove multiple edges but keep multiplicity
 g <- sample_pa(10, m = 3, algorithm = "bag")
 E(g)$weight <- count_multiple(g)
-g <- simplify(g, edge.attr.comb = list(weight = "min"))
+g <- simplify(g, edge_attr_combine = list(weight = "min"))
 any(which_multiple(g))
 E(g)$weight
 

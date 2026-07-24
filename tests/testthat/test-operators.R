@@ -1306,14 +1306,14 @@ test_that("union() defaults to rename behaviour", {
 
 test_that("union() combines vertex attributes with sum", {
   gs <- make_named_pair()
-  u <- union(gs$g1, gs$g2, vertex.attr.comb = "sum")
+  u <- union(gs$g1, gs$g2, vertex_attr_combine = "sum")
   expect_setequal(vertex_attr_names(u), c("name", "weight"))
   expect_equal(sort(V(u)$weight), sort(c(11, 22, 33)))
 })
 
 test_that("union() combines edge attributes with sum", {
   gs <- make_named_pair()
-  u <- union(gs$g1, gs$g2, edge.attr.comb = "sum")
+  u <- union(gs$g1, gs$g2, edge_attr_combine = "sum")
   expect_setequal(edge_attr_names(u), c("weight"))
   expect_equal(sort(E(u)$weight), sort(c(11, 22, 33)))
 })
@@ -1325,7 +1325,7 @@ test_that("union() honours per-attribute list spec with rename fallback", {
   u <- union(
     gs$g1,
     gs$g2,
-    vertex.attr.comb = list(weight = "sum", "rename")
+    vertex_attr_combine = list(weight = "sum", "rename")
   )
   expect_setequal(
     vertex_attr_names(u),
@@ -1335,7 +1335,7 @@ test_that("union() honours per-attribute list spec with rename fallback", {
 
 test_that("union() can drop clashing attributes with ignore", {
   gs <- make_named_pair()
-  u <- union(gs$g1, gs$g2, edge.attr.comb = "ignore")
+  u <- union(gs$g1, gs$g2, edge_attr_combine = "ignore")
   expect_length(edge_attr_names(u), 0)
 })
 
@@ -1344,14 +1344,14 @@ test_that("union() supports custom function combiner", {
   u <- union(
     gs$g1,
     gs$g2,
-    vertex.attr.comb = list(weight = function(x) mean(x))
+    vertex_attr_combine = list(weight = function(x) mean(x))
   )
   expect_equal(sort(V(u)$weight), sort(c(5.5, 11, 16.5)))
 })
 
 test_that("union() picks first non-NA when only one input has the attr", {
   gs <- make_named_pair()
-  u <- union(gs$g1, gs$g2, vertex.attr.comb = "first", byname = TRUE)
+  u <- union(gs$g1, gs$g2, vertex_attr_combine = "first", byname = TRUE)
   expect_setequal(vertex_attr_names(u), c("name", "weight"))
   expect_equal(
     V(u)$weight[match(c("A", "B", "C"), V(u)$name)],
@@ -1361,7 +1361,7 @@ test_that("union() picks first non-NA when only one input has the attr", {
 
 test_that("intersection() takes attr.comb args", {
   gs <- make_named_pair()
-  i <- intersection(gs$g1, gs$g2, edge.attr.comb = "sum")
+  i <- intersection(gs$g1, gs$g2, edge_attr_combine = "sum")
   expect_setequal(edge_attr_names(i), c("weight"))
   expect_equal(sort(E(i)$weight), sort(c(11, 22, 33)))
 })
@@ -1371,7 +1371,7 @@ test_that("compose() takes attr.comb args", {
   g2 <- graph_from_literal(A - B - E - A)
   V(g1)$foo <- seq_len(vcount(g1))
   V(g2)$foo <- 10 * seq_len(vcount(g2))
-  g <- compose(g1, g2, vertex.attr.comb = "sum")
+  g <- compose(g1, g2, vertex_attr_combine = "sum")
   expect_true("foo" %in% vertex_attr_names(g))
   expect_false("foo_1" %in% vertex_attr_names(g))
 })
@@ -1381,12 +1381,12 @@ test_that("disjoint_union() combines graph attrs via comb", {
   g2 <- make_ring(3)
   g1$label <- "first"
   g2$label <- "second"
-  u <- disjoint_union(g1, g2, graph.attr.comb = "concat")
+  u <- disjoint_union(g1, g2, graph_attr_combine = "concat")
   expect_equal(u$label, c("first", "second"))
 })
 
-test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
-  expect_equal(igraph_opt("graph.attr.comb"), "rename")
+test_that("graph_attr_combine defaults to the graph_attr_combine igraph option", {
+  expect_equal(igraph_opt("graph_attr_combine"), "rename")
 
   g1 <- make_ring(3)
   g2 <- make_ring(3)
@@ -1398,7 +1398,7 @@ test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
   expect_all_true(c("label_1", "label_2") %in% graph_attr_names(u))
 
   # Setting the option changes the default for the graph operators.
-  local_igraph_options(graph.attr.comb = "ignore")
+  local_igraph_options(graph_attr_combine = "ignore")
   expect_length(graph_attr_names(union(g1, g2)), 0)
   expect_length(graph_attr_names(intersection(g1, g2)), 0)
   expect_length(graph_attr_names(disjoint_union(g1, g2)), 0)
@@ -1409,7 +1409,7 @@ test_that("simplify() rejects 'rename' combiner", {
   g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
   E(g)$weight <- 1:5
   expect_error(
-    simplify(g, edge.attr.comb = "rename"),
+    simplify(g, edge_attr_combine = "rename"),
     "rename"
   )
 })
