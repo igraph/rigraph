@@ -19,6 +19,8 @@ navbar:
     articles:
       text: Articles
       menu:
+      - text: Plotting graphs
+        href: articles/plotting.html
       - text: Installation FAQs
         href: articles/installation-troubleshooting.html
       - text: -------
@@ -67,6 +69,9 @@ reference:
   - has_concept("plot.shapes")
   - vertex.shape.pie
   - align_layout
+  - has_concept("scales")
+  - label_top
+  - as_svg
 - subtitle: Graph coloring
 - contents:
   - has_concept("coloring")

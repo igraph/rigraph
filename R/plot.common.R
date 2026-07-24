@@ -115,6 +115,11 @@
 #'
 #'   The default value is \dQuote{\code{SkyBlue2}}.
 #' }
+#' \item{alpha}{
+#'   Opacity of the vertex fill, a number (or vector) in `[0, 1]`, multiplied
+#'   into any alpha already present in `color`. `1` (the default) means fully
+#'   opaque. Frame colour, pie slices and labels are not affected.
+#' }
 #' \item{frame.color}{
 #'   The color of the frame of the vertices, the same formats are allowed as for the fill color.
 #'
@@ -231,6 +236,21 @@
 #' \item{label.adj}{
 #'   one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also `adj` in [graphics::text()].
 #' }
+#' \item{label.repel}{
+#'   Logical scalar. If `TRUE`, overlapping vertex labels are iteratively nudged
+#'   apart (in the spirit of \pkg{ggrepel}) and a thin leader line connects each
+#'   moved label to its original position. The default is `FALSE`.
+#' }
+#' \item{label.halo}{
+#'   The colour of a legibility halo (outline) drawn behind the vertex label
+#'   text, so labels remain readable over edges and other vertices. The halo is
+#'   drawn shadowtext-style: the glyphs are repeated, offset in a ring, in this
+#'   colour, with the real label on top. `NA` (the default) draws no halo.
+#' }
+#' \item{label.halo.width}{
+#'   The width of the label halo, as a fraction of the label height. Only has an
+#'   effect when `label.halo` is not `NA`. The default is `0.15`.
+#' }
 
 #' \item{size.scaling}{
 #'   Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
@@ -298,6 +318,15 @@
 #' \item{label.color}{
 #'   The color of the edge labels, see the `color` vertex parameters on how to specify colors.
 #' }
+#' \item{label.halo}{
+#'   The colour of a legibility halo (outline) drawn behind the edge label text.
+#'   See the vertex parameter with the same name for details. `NA` (the default)
+#'   draws no halo.
+#' }
+#' \item{label.halo.width}{
+#'   The width of the edge label halo, as a fraction of the label height. Only
+#'   has an effect when `label.halo` is not `NA`. The default is `0.15`.
+#' }
 #' \item{label.x}{
 #'   The horizontal `NA` elements will be replaced by automatically calculated coordinates.
 #'   If `NULL`, then all edge horizontal coordinates are calculated automatically.
@@ -323,6 +352,32 @@
 #'   The default value is `FALSE`.
 #'
 #'   This parameter is currently ignored by [rglplot()].
+#' }
+#' \item{style}{
+#'   The routing style for (non-loop) edges, a character scalar or vector,
+#'   replicated to the number of edges. One of:
+#'   \describe{
+#'     \item{`"auto"`}{(default) straight, unless `curved` is non-zero (in which
+#'       case an arc), reproducing the historical behaviour.}
+#'     \item{`"straight"`}{a straight segment.}
+#'     \item{`"arc"`}{a curved arc; the strength is taken from `curved` if it is
+#'       non-zero, otherwise a default is used.}
+#'     \item{`"elbow"`}{a two-corner orthogonal (right-angle) connector.}
+#'     \item{`"diagonal"`}{a smooth S-curve with axis-aligned ends.}
+#'   }
+#'   This parameter is ignored for loop edges and by [rglplot()].
+#' }
+#' \item{alpha}{
+#'   Opacity of the edge, a number (or vector) in `[0, 1]`, multiplied into any
+#'   alpha already present in `color` (and in the gradient endpoint colours).
+#'   `1` (the default) means fully opaque.
+#' }
+#' \item{gradient}{
+#'   Logical scalar or vector. If `TRUE`, the edge is drawn as a colour gradient
+#'   running from its source vertex's colour to its target vertex's colour (a
+#'   direction cue), and the arrowhead takes the target colour; `color` is then
+#'   ignored for that edge's shaft. The default is `FALSE`. Ignored for loop
+#'   edges and by [rglplot()].
 #' }
 #' \item{arrow.mode}{
 #'   This parameter can be used to specify for which edges should arrows be drawn.
@@ -527,6 +582,17 @@ autocurve.edges <- function(graph, start = 0.5) {
 # Common functions for plot and tkplot
 ###################################################################
 
+# Resolve plotting parameters on demand. The returned closure `func(type, name)`
+# looks a parameter up with the following precedence, highest first:
+#   1. an explicit argument passed to plot() (vertex./edge./plain prefix)
+#   2. a matching graph attribute (vertex_attr / edge_attr / graph_attr)
+#   3. the corresponding igraph option (igraph_opt("<type>.<name>"))
+#   4. the hard-coded default in i.default.values
+# Function-valued defaults are evaluated with the graph; NAs in a resolved
+# attribute are replaced with the default (or "" for labels).
+#
+# This closure is part of the public contract: user shapes registered via
+# add_shape() receive it as their `params` argument and call params("vertex", .).
 i.parse.plot.params <- function(graph, params) {
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())
@@ -4859,6 +4925,10 @@ i.vertex.default <- list(
   label.cex = 1,
   label.angle = 0,
   label.adj = NULL,
+  label.repel = FALSE,
+  label.halo = NA,
+  label.halo.width = 0.15,
+  alpha = 1,
   frame.color = "black",
   frame.width = 1,
   shape = "circle",
@@ -4890,21 +4960,29 @@ i.edge.default <- list(
   label.font = 1,
   label.cex = 1,
   label.color = "darkblue",
+  label.halo = NA,
+  label.halo.width = 0.15,
   label.x = NULL,
   label.y = NULL,
   arrow.size = 1,
   arrow.mode = i.get.arrow.mode,
   curved = curve_multiple,
-  arrow.width = 1
+  arrow.width = 1,
+  style = "auto",
+  alpha = 1,
+  gradient = FALSE
 )
 
+# Note: there is intentionally no `frame` default. plot.igraph() reads
+# `frame.plot`, which falls back to `axes` when unset
+# (ifelse(is.null(frame.plot), axes, frame.plot)); a `frame = FALSE` entry here
+# was dead config that was never read.
 i.plot.default <- list(
   palette = categorical_pal(8),
   layout = layout_nicely,
   margin = c(0, 0, 0, 0),
   rescale = TRUE,
   asp = 1,
-  frame = FALSE,
   main = i.get.main,
   sub = "",
   xlab = i.get.xlab,
@@ -4945,9 +5023,6 @@ i.rescale.vertex <- function(
 
   return(size)
 }
-
-i.default.values[["edge"]] <- i.edge.default
-i.default.values[["plot"]] <- i.plot.default
 
 #' Using pie charts as vertices in graph plots
 #'
