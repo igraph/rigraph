@@ -130,6 +130,26 @@ runs:
         sudo chmod 0440 /etc/sudoers.d/r-lib-pak
       shell: bash
 
+    - name: Disable Bioconductor on older R
+      # 'graph' is an optional Enhances dependency published only on
+      # Bioconductor. The Bioconductor releases matching R 4.2 / 4.3 (graph
+      # 3.16 / 3.18) are archived and now 404 on the mirror, which aborts pak
+      # dependency resolution on those jobs. Rather than patching DESCRIPTION,
+      # flip pak's own switch: turn Bioconductor off via PKG_USE_BIOCONDUCTOR on
+      # old R. 'graph' then has no install candidate, and because it is a soft
+      # (Enhances) dependency pak's solver simply drops it -- no error. Newer R
+      # (>= 4.4) keeps Bioconductor and exercises graph as before.
+      run: |
+        Rscript -e '
+          if (getRversion() < "4.4") {
+            cat("PKG_USE_BIOCONDUCTOR=false\n", file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+            cat("R < 4.4: disabled Bioconductor (optional graph is dropped)\n")
+          } else {
+            cat("R >= 4.4: Bioconductor enabled (graph available)\n")
+          }
+        '
+      shell: bash
+
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}

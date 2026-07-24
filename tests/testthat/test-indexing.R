@@ -54,8 +54,8 @@ test_that("[ indexing works with logical vectors", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 20L),
-    .Dimnames = list(
+    dim = c(2L, 20L),
+    dimnames = list(
       c("b", "c"),
       c(
       "a", "b", "c",
@@ -77,8 +77,8 @@ test_that("[ indexing works with negative indices", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 19L),
-    .Dimnames = list(
+    dim = c(2L, 19L),
+    dimnames = list(
       c("b", "c"),
       c(
         "b", "c", "d", "e", "f", "g", "h", "i", "j",
