@@ -49,7 +49,7 @@ see the full sequence."><meta property="og:image" content="https://r.igraph.org/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Print an edge sequence to the screen</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/claude/ci-full-matrix/R/iterators.R" class="external-link"><code>R/iterators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/iterators.R" class="external-link"><code>R/iterators.R</code></a></small>
       <div class="d-none name"><code>print.igraph.es.Rd</code></div>
     </div>
 
@@ -120,7 +120,7 @@ as a table.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Unnamed graphs</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · from 86679fb ────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · from 5991da5 ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] 1 ─ 10 </span>
 <span class="r-in"><span></span></span>
@@ -128,13 +128,13 @@ as a table.</p>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"name"</span>, value <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from ece1cd8 ─────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from 3cfe2e2 ─────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># All edges in a long sequence</span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 200/200 · from 96bc318 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 200/200 · from 053c6e7 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 1 ─ 2      2 ─ 3      3 ─ 4      4 ─ 5      5 ─ 6      6 ─ 7     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [7] 7 ─ 8      8 ─ 9      9 ─ 10     10 ─ 11    11 ─ 12    12 ─ 13   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [13] 13 ─ 14    14 ─ 15    15 ─ 16    16 ─ 17    17 ─ 18    18 ─ 19   </span>
@@ -147,7 +147,7 @@ as a table.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [55] 55 ─ 56    56 ─ 57    57 ─ 58    58 ─ 59    59 ─ 60    60 ─ 61   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 200/200 · from 96bc318 ──────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 200/200 · from 053c6e7 ──────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 1 ─ 2      2 ─ 3      3 ─ 4      4 ─ 5      5 ─ 6      6 ─ 7     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [7] 7 ─ 8      8 ─ 9      9 ─ 10     10 ─ 11    11 ─ 12    12 ─ 13   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [13] 13 ─ 14    14 ─ 15    15 ─ 16    16 ─ 17    17 ─ 18    18 ─ 19   </span>
@@ -189,10 +189,10 @@ as a table.</p>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"weight"</span>, value <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"color"</span>, value <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from 3d789bb ─────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from a733864 ─────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J </span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from 3d789bb ─────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 10/10 · vertex names · from a733864 ─────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tail head tid hid weight color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     A    B   1   2      1 green</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     B    C   2   3      2 green</span>
@@ -205,7 +205,7 @@ as a table.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9     I    J   9  10      9 green</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10    A    J   1  10     10 green</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · vertex names · from 3d789bb ──────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 5/10 · vertex names · from a733864 ──────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tail head tid hid weight color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    A    B   1   2      1 green</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    B    C   2   3      2 green</span>

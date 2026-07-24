@@ -97,7 +97,7 @@ Other vertex and edge sequences:
 # Edges of an unnamed graph
 g <- make_ring(10)
 E(g)
-#> ── <edge sequence> 10/10 · from 7ce4b5e ────────────────────────────────────────
+#> ── <edge sequence> 10/10 · from d34a36d ────────────────────────────────────────
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 
@@ -105,6 +105,6 @@ E(g)
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 E(g2)
-#> ── <edge sequence> 10/10 · vertex names · from b96ea15 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 603d836 ─────────────────────────
 #>  [1] a ─ b  b ─ c  c ─ d  d ─ e  e ─ f  f ─ g  g ─ h  h ─ i  i ─ j  a ─ j 
 ```

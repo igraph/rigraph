@@ -110,29 +110,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/14 · vertex names · from 2bec481 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from df4b650 ──────────────────────────
 #> [1] s → a  s → b 
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/14 · vertex names · from 2bec481 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from df4b650 ──────────────────────────
 #> [1] s → a  b → t 
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 2/14 · vertex names · from 2bec481 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from df4b650 ──────────────────────────
 #> [1] a → t  b → t 
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/9 · named · from 2bec481 ────────────────────────────────
+#> ── <vertex sequence> 1/9 · named · from df4b650 ────────────────────────────────
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/9 · named · from 2bec481 ────────────────────────────────
+#> ── <vertex sequence> 2/9 · named · from df4b650 ────────────────────────────────
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 8/9 · named · from 2bec481 ────────────────────────────────
+#> ── <vertex sequence> 8/9 · named · from df4b650 ────────────────────────────────
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 
