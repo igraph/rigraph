@@ -5323,7 +5323,7 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
   igraph_real_t c_damping;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
@@ -5396,7 +5396,7 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   igraph_vector_t c_personalized;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
@@ -5472,7 +5472,7 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   igraph_vs_t c_reset_vids;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
