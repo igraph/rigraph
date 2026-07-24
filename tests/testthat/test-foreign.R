@@ -57,6 +57,143 @@ test_that("writing graph in unsupported format", {
   expect_snapshot_igraph_error(write_graph(g, file, format = "blop"))
 })
 
+test_that("reading GML file works with lesmis", {
+  skip_if_not_installed("igraphdata")
+
+  expect_snapshot(read_graph(igraphdata::lesmis_gml(), format = "gml"))
+})
+
+test_that("reading GraphML file works with lesmis", {
+  skip_if_no_graphml()
+  skip_if_not_installed("igraphdata")
+
+  expect_snapshot(read_graph(igraphdata::lesmis_graphml(), format = "graphml"))
+})
+
+test_that("reading Pajek file works with lesmis", {
+  skip_if_not_installed("igraphdata")
+
+  expect_snapshot(read_graph(igraphdata::lesmis_pajek(), format = "pajek"))
+})
+
+test_that("write/read Pajek round-trip preserves karate graph structure", {
+  skip_if_not_installed("igraphdata")
+
+  data("karate", package = "igraphdata")
+  net_path <- withr::local_tempfile(fileext = ".net")
+  write_graph(karate, net_path, format = "pajek")
+  g <- read_graph(net_path, format = "pajek")
+
+  expect_equal(vcount(g), vcount(karate))
+  expect_equal(ecount(g), ecount(karate))
+  expect_false(is_directed(g))
+})
+
+test_that("write/read GraphML round-trip preserves UKfaculty graph structure", {
+  skip_if_no_graphml()
+  skip_if_not_installed("igraphdata")
+
+  data("UKfaculty", package = "igraphdata")
+  graphml_path <- withr::local_tempfile(fileext = ".graphml")
+  write_graph(UKfaculty, graphml_path, format = "graphml")
+  g <- read_graph(graphml_path, format = "graphml")
+
+  expect_equal(vcount(g), vcount(UKfaculty))
+  expect_equal(ecount(g), ecount(UKfaculty))
+  expect_true(is_directed(g))
+  expect_true("Group" %in% vertex_attr_names(g))
+  expect_true("weight" %in% edge_attr_names(g))
+})
+
+test_that("write/read NCOL round-trip preserves karate edge weights", {
+  skip_if_not_installed("igraphdata")
+
+  data("karate", package = "igraphdata")
+  # NCOL rejects spaces in vertex names; replace with underscores
+  V(karate)$name <- gsub(" ", "_", V(karate)$name)
+  ncol_path <- withr::local_tempfile(fileext = ".ncol")
+  write_graph(karate, ncol_path, format = "ncol")
+  g <- read_graph(ncol_path, format = "ncol")
+
+  expect_equal(vcount(g), vcount(karate))
+  expect_equal(ecount(g), ecount(karate))
+  expect_false(is_directed(g))
+  expect_true("name" %in% vertex_attr_names(g))
+  expect_true("weight" %in% edge_attr_names(g))
+})
+
+test_that("write_graph auto-detects GraphML format from .graphml extension", {
+  skip_if_no_graphml()
+  skip_if_not_installed("igraphdata")
+
+  data("UKfaculty", package = "igraphdata")
+  graphml_path <- withr::local_tempfile(fileext = ".graphml")
+  write_graph(UKfaculty, graphml_path)
+  g <- read_graph(graphml_path, format = "graphml")
+
+  expect_equal(vcount(g), vcount(UKfaculty))
+  expect_equal(ecount(g), ecount(UKfaculty))
+})
+
+test_that("write_graph auto-detects Pajek format from .net extension", {
+  skip_if_not_installed("igraphdata")
+
+  data("karate", package = "igraphdata")
+  net_path <- withr::local_tempfile(fileext = ".net")
+  write_graph(karate, net_path)
+  g <- read_graph(net_path, format = "pajek")
+
+  expect_equal(vcount(g), vcount(karate))
+  expect_equal(ecount(g), ecount(karate))
+})
+
+test_that("read_graph auto-detects Pajek format for lesmis from .net extension", {
+  skip_if_not_installed("igraphdata")
+
+  g_orig <- read_graph(igraphdata::lesmis_pajek(), format = "pajek")
+  net_path <- withr::local_tempfile(fileext = ".net")
+  write_graph(g_orig, net_path, format = "pajek")
+  g <- read_graph(net_path)
+
+  expect_equal(vcount(g), vcount(g_orig))
+  expect_equal(ecount(g), ecount(g_orig))
+  expect_false(is_directed(g))
+})
+
+test_that("read_graph auto-detects GraphML format for lesmis from .graphml extension", {
+  skip_if_no_graphml()
+  skip_if_not_installed("igraphdata")
+
+  # lesmis GraphML has an 'id' vertex attribute; igraph warns it cannot add its own
+  g_orig <- suppressWarnings(read_graph(
+    igraphdata::lesmis_graphml(),
+    format = "graphml"
+  ))
+  graphml_path <- withr::local_tempfile(fileext = ".graphml")
+  write_graph(g_orig, graphml_path, format = "graphml")
+  g <- suppressWarnings(read_graph(graphml_path))
+
+  expect_equal(vcount(g), vcount(g_orig))
+  expect_equal(ecount(g), ecount(g_orig))
+  expect_false(is_directed(g))
+})
+
+test_that("write_graph defaults to edgelist with deprecation for unknown extension", {
+  skip_if_not_installed("igraphdata")
+
+  data("karate", package = "igraphdata")
+  txt_path <- withr::local_tempfile(fileext = ".txt")
+  withr::local_options(lifecycle_verbosity = "warning")
+  expect_warning(
+    write_graph(karate, txt_path),
+    "Defaulting to `edgelist`"
+  )
+  g <- read_graph(txt_path, format = "edgelist", directed = FALSE)
+
+  expect_equal(vcount(g), vcount(karate))
+  expect_equal(ecount(g), ecount(karate))
+})
+
 test_that("graph_from_graphdb works", {
   # FIXME: Need to fix ingestion code on Windows
   skip_on_os("windows")
