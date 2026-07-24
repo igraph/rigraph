@@ -4787,7 +4787,9 @@ SEXP Rx_igraph_read_graph_edgelist(SEXP pvfile, SEXP pn, SEXP pdirected) {
 #endif
   if (file==0) { igraph_error("Cannot read edgelist", __FILE__, __LINE__,
                               IGRAPH_EFILE); }
+  IGRAPH_FINALLY(fclose, file);
   IGRAPH_R_CHECK(igraph_read_graph_edgelist(&g, file, n, directed));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(file);
   PROTECT(result=Ry_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
@@ -4815,11 +4817,13 @@ SEXP Rx_igraph_read_graph_ncol(SEXP pvfile, SEXP ppredef,
 #endif
   if (file==0) { igraph_error("Cannot read edgelist", __FILE__, __LINE__,
                               IGRAPH_EFILE); }
+  IGRAPH_FINALLY(fclose, file);
   if (Rf_xlength(ppredef)>0) {
     Rx_igraph_SEXP_to_strvector(ppredef, &predef);
     predefptr=&predef;
   }
   IGRAPH_R_CHECK(igraph_read_graph_ncol(&g, file, predefptr, names, weights, directed));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(file);
   PROTECT(result=Ry_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
@@ -4859,7 +4863,9 @@ SEXP Rx_igraph_write_graph_ncol(SEXP graph, SEXP file, SEXP pnames,
 #endif
   if (stream==0) { igraph_error("Cannot write .ncol file", __FILE__, __LINE__,
                                 IGRAPH_EFILE); }
+  IGRAPH_FINALLY(fclose, stream);
   IGRAPH_R_CHECK(igraph_write_graph_ncol(&g, stream, names, weights));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
@@ -4889,7 +4895,9 @@ SEXP Rx_igraph_read_graph_lgl(SEXP pvfile, SEXP pnames, SEXP pweights, SEXP pdir
 #endif
   if (file==0) { igraph_error("Cannot read edgelist", __FILE__, __LINE__,
                               IGRAPH_EFILE); }
+  IGRAPH_FINALLY(fclose, file);
   IGRAPH_R_CHECK(igraph_read_graph_lgl(&g, file, names, weights, directed));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(file);
   PROTECT(result=Ry_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
@@ -4928,7 +4936,11 @@ SEXP Rx_igraph_write_graph_lgl(SEXP graph, SEXP file, SEXP pnames,
 #else
   stream=fopen(CHAR(STRING_ELT(file, 0)), "w");
 #endif
+  if (stream==0) { igraph_error("Cannot write LGL file", __FILE__, __LINE__,
+                                IGRAPH_EFILE); }
+  IGRAPH_FINALLY(fclose, stream);
   IGRAPH_R_CHECK(igraph_write_graph_lgl(&g, stream, names, weights, isolates));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
@@ -5375,10 +5387,12 @@ SEXP Rx_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   if (file==0) { igraph_error("Cannot read edgelist", __FILE__, __LINE__,
                               IGRAPH_EFILE);
   }
+  IGRAPH_FINALLY(fclose, file);
   igraph_vector_int_init(&label, 0);
   igraph_strvector_init(&problem, 0);
   igraph_vector_init(&cap, 0);
   IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&g, file, &problem, &label, &source, &target, &cap, directed));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(file);
   if (!strcmp(igraph_strvector_get(&problem, 0), "max")) {
     PROTECT(result=NEW_LIST(5)); px++;
@@ -5437,7 +5451,9 @@ SEXP Rx_igraph_write_graph_dimacs(SEXP graph, SEXP file,
   if (stream==0) { igraph_error("Cannot write edgelist", __FILE__, __LINE__,
                                 IGRAPH_EFILE);
   }
+  IGRAPH_FINALLY(fclose, stream);
   IGRAPH_R_CHECK(igraph_write_graph_dimacs_flow(&g, stream, source, target, &cap));
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
@@ -5682,15 +5698,10 @@ SEXP Rx_igraph_maximal_cliques(SEXP graph, SEXP psubset,
 SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                    SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
-  igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
-  igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
+  igraph_integer_t minsize = (igraph_integer_t) REAL(pminsize)[0];
+  igraph_integer_t maxsize = (igraph_integer_t) REAL(pmaxsize)[0];
   igraph_vector_int_t subset;
-  SEXP result;
   FILE *stream;
-#if HAVE_OPEN_MEMSTREAM == 1
-  char *bp;
-  size_t size;
-#endif
 
   Rz_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(psubset)) {
@@ -5699,29 +5710,19 @@ SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
   }
   IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &subset);
-#if HAVE_OPEN_MEMSTREAM == 1
-  stream=open_memstream(&bp, &size);
-#else
-  stream=fopen(CHAR(STRING_ELT(file, 0)), "w");
-#endif
-  if (stream==0) { igraph_error("Cannot write cliques", __FILE__,
-                                __LINE__, IGRAPH_EFILE); }
+  stream = fopen(CHAR(STRING_ELT(file, 0)), "w");
+  if (stream == 0) {
+    igraph_error("Cannot write cliques", __FILE__, __LINE__, IGRAPH_EFILE);
+  }
+  IGRAPH_FINALLY(fclose, stream);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
                                 minsize, maxsize);
+  IGRAPH_FINALLY_CLEAN(1);
   fclose(stream);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
-#if HAVE_OPEN_MEMSTREAM == 1
-  PROTECT(result=Rf_allocVector(RAWSXP, size));
-  memcpy(RAW(result), bp, sizeof(char)*size);
-  free(bp);
-#else
-  PROTECT(result=NEW_NUMERIC(0));
-#endif
-
-  UNPROTECT(1);
-  return result;
+  return R_NilValue;
 }
 
 /* TOP-LEVEL: called from R via .Call; must use IGRAPH_R_CHECK */
