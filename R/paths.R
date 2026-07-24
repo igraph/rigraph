@@ -130,7 +130,7 @@ all_simple_paths <- function(
   res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res <- create_vs_list(graph, res)
   }
   res
 }
