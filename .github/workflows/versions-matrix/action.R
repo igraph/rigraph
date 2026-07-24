@@ -20,8 +20,11 @@ if (length(r_crit) == 1) {
 
 r_versions <- c("devel", as.character(r_release))
 
-macos <- data.frame(os = "macos-latest", r = r_versions[2:3])
-windows <- data.frame(os = "windows-latest", r = r_versions[1:3])
+# Full matrix: every platform tests the complete R range (R-devel plus every
+# supported release), not just the newest few. This maximises coverage at the
+# cost of CI minutes; see the PR discussion for the trade-off.
+macos <- data.frame(os = "macos-latest", r = r_versions)
+windows <- data.frame(os = "windows-latest", r = r_versions)
 
 # Linux amd64 (ubuntu-26.04) carries the full historical sweep: R-devel plus
 # every supported release down to the oldest. amd64 has the most mature
@@ -31,18 +34,14 @@ linux_devel <- data.frame(os = "ubuntu-26.04", r = r_versions[1], `http-user-age
 linux <- data.frame(os = "ubuntu-26.04", r = r_versions[-1])
 covr <- data.frame(os = "ubuntu-26.04", r = r_versions[2], covr = "true", desc = "with covr")
 
-# Linux arm64 (ubuntu-26.04-arm) is intentionally ragged: only the two newest R
-# versions, R-devel and R-release. These are the versions actually deployed to
-# arm64 today (Apple Silicon, AWS Graviton, ...) and the ones with dependable
-# arm64 R builds; re-running the full historical range on a second architecture
-# would add cost without adding meaningful coverage. R-release (and R-devel)
-# overlap with amd64, so at least one R version is exercised on both arches.
-# PPM note: r-lib/actions/setup-r historically disabled Posit Package Manager on
-# aarch64 Linux (r-lib/actions NEWS v2.11.2, 2025-02-19) because PPM shipped no
-# arm64 binaries and would have served x86_64 ones. setup-r v2.12.0 (2026-04-29)
-# re-enabled it, and PPM has published resolute (26.04) aarch64 CRAN binaries
-# since PPM 2026.05.0, so arm64 jobs on @v2 now install binaries, not source.
-linux_arm64 <- data.frame(os = "ubuntu-26.04-arm", r = r_versions[1:2])
+# Linux arm64 (ubuntu-26.04-arm) also runs the full R range under the full-matrix
+# policy above. PPM note: r-lib/actions/setup-r historically disabled Posit
+# Package Manager on aarch64 Linux (r-lib/actions NEWS v2.11.2, 2025-02-19)
+# because PPM shipped no arm64 binaries and would have served x86_64 ones.
+# setup-r v2.12.0 (2026-04-29) re-enabled it, and PPM has published resolute
+# (26.04) aarch64 CRAN binaries since PPM 2026.05.0, so arm64 jobs on @v2 now
+# install binaries, not source.
+linux_arm64 <- data.frame(os = "ubuntu-26.04-arm", r = r_versions)
 
 include_list <- list(macos, windows, linux_devel, linux, covr, linux_arm64)
 
