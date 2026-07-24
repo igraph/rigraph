@@ -99,7 +99,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> ── <igraph> Stochastic block model ────────────────────────────────── 3d65f73 ──
+#> ── <igraph> Stochastic block model ────────────────────────────────── 3e26f72 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 16856 edges
 #> 

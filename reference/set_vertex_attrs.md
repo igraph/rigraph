@@ -59,7 +59,7 @@ Vertex, edge and graph attributes:
 ``` r
 g <- make_ring(10)
 set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 29c0b4e ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9f3c42f ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -72,7 +72,7 @@ set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
 # use splicing if suplying a list
 x <- list(color = "red", name = LETTERS[1:10])
 set_vertex_attrs(g, !!!x)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 29c0b4e ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9f3c42f ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -84,7 +84,7 @@ set_vertex_attrs(g, !!!x)
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 # to set an attribute named "index" use `:=`
 set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 29c0b4e ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9f3c42f ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 
