@@ -49,7 +49,7 @@ was written by Vincent Matossian.
 # generate the first De-Bruijn graphs
 g <- make_full_graph(2, directed = TRUE, loops = TRUE)
 make_line_graph(g)
-#> ── <igraph> Line graph ────────────────────────────────────────────── 8d76171 ──
+#> ── <igraph> Line graph ────────────────────────────────────────────── 959ae6a ──
 #> ℹ directed
 #> ℹ 4 vertices · 8 edges
 #> 
@@ -59,7 +59,7 @@ make_line_graph(g)
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 1 → 1  3 → 1  1 → 2  3 → 2  2 → 3  4 → 3  2 → 4  4 → 4 
 make_line_graph(make_line_graph(g))
-#> ── <igraph> Line graph ────────────────────────────────────────────── e25974a ──
+#> ── <igraph> Line graph ────────────────────────────────────────────── cec61a0 ──
 #> ℹ directed
 #> ℹ 8 vertices · 16 edges
 #> 
@@ -70,7 +70,7 @@ make_line_graph(make_line_graph(g))
 #>  [1] 1 → 1  2 → 1  5 → 2  6 → 2  1 → 3  2 → 3  5 → 4  6 → 4  3 → 5  4 → 5 
 #> [11] 7 → 6  8 → 6  3 → 7  4 → 7  7 → 8  8 → 8 
 make_line_graph(make_line_graph(make_line_graph(g)))
-#> ── <igraph> Line graph ────────────────────────────────────────────── 1d33fde ──
+#> ── <igraph> Line graph ────────────────────────────────────────────── 8ea7eb5 ──
 #> ℹ directed
 #> ℹ 16 vertices · 32 edges
 #> 
