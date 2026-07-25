@@ -8,7 +8,7 @@ name: revdep
 
 jobs:
   matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -16,7 +16,7 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
@@ -38,17 +38,28 @@ jobs:
         run: |
           package <- read.dcf("DESCRIPTION")[, "Package"][[1]]
           deps <- tools:::package_dependencies(package, reverse = TRUE, which = c("Depends", "Imports", "LinkingTo", "Suggests"))[[1]]
-          json <- paste0(
-            '{"package":[',
-            paste0('"', deps, '"', collapse = ","),
-            ']}'
-          )
+          # Build the matrix JSON explicitly for the empty case: for a package with
+          # no (rev)dependencies, paste0('"', character(0), '"') collapses to the
+          # two-character string '""', so the naive construction emits
+          # {"package":[""]} (one empty-string entry) instead of an empty array.
+          # That spawns a spurious matrix job that runs install_runiverse("") and
+          # fails. Emit an empty array so the dependent matrix job is skipped when
+          # there are none.
+          if (length(deps) == 0) {
+            json <- '{"package":[]}'
+          } else {
+            json <- paste0(
+              '{"package":[',
+              paste0('"', deps, '"', collapse = ","),
+              ']}'
+            )
+          }
           writeLines(json)
           writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
 
   check-matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     needs: matrix
     steps:
       - name: Install json2yaml
@@ -65,7 +76,7 @@ jobs:
   R-CMD-check:
     needs: matrix
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
 
     name: 'revdep: ${{ matrix.package }}'
 
@@ -78,7 +89,7 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      RSPM: https://packagemanager.posit.co/cran/__linux__/resolute/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
@@ -99,7 +110,7 @@ jobs:
       - name: Use RSPM
         run: |
           mkdir -p /home/runner/work/_temp/Library
-          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
+          echo 'local({release <- system2("lsb_release", "-sc", stdout = TRUE); options(repos=c(CRAN = paste0("https://packagemanager.posit.co/all/__linux__/", release, "/latest")), HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))}); .libPaths("/home/runner/work/_temp/Library")' | sudo tee /etc/R/Rprofile.site
 
       - name: Install remotes
         run: |
@@ -111,9 +122,14 @@ jobs:
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
+        # The runner is ubuntu-26.04, but remotes::system_requirements() hardcodes
+        # its supported list up to ubuntu-24.04 (r-lib/remotes, R/system_requirements.R;
+        # no tracking issue yet -- one should be filed). The rstudio/r-system-requirements
+        # catalog itself already covers 26.04, and apt package names are stable across
+        # LTS releases, so the 24.04 mappings install correctly on 26.04.
         run: |
           sudo apt-get update -y
-          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "22.04", package = x)) })' | sort | uniq > .github/deps.sh
+          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "24.04", package = x)) })' | sort | uniq > .github/deps.sh
           cat .github/deps.sh
           sudo sh < .github/deps.sh
 
