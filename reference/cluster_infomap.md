@@ -9,6 +9,7 @@ will be taken into account.
 ``` r
 cluster_infomap(
   graph,
+  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
@@ -21,6 +22,10 @@ cluster_infomap(
 - graph:
 
   The input graph. Edge directions will be taken into account.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - e.weights:
 

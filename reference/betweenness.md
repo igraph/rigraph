@@ -9,6 +9,7 @@ geodesics (shortest paths) going through a vertex or an edge.
 betweenness(
   graph,
   v = V(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -18,6 +19,7 @@ betweenness(
 edge_betweenness(
   graph,
   e = E(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
@@ -33,6 +35,10 @@ edge_betweenness(
 - v:
 
   The vertices for which the vertex betweenness will be calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

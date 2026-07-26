@@ -6,7 +6,7 @@ vertex participates in, weighting them according to their size.
 ## Usage
 
 ``` r
-subgraph_centrality(graph, diag = FALSE)
+subgraph_centrality(graph, ..., diag = FALSE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ subgraph_centrality(graph, diag = FALSE)
 - graph:
 
   The input graph. It will be treated as undirected.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - diag:
 

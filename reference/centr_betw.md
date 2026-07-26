@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_betw(graph, directed = TRUE, normalized = TRUE)
+centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ centr_betw(graph, directed = TRUE, normalized = TRUE)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

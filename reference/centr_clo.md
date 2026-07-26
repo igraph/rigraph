@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
+centr_clo(graph, ..., mode = c("out", "in", "all", "total"), normalized = TRUE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

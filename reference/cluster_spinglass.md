@@ -8,6 +8,7 @@ and simulated annealing.
 ``` r
 cluster_spinglass(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -27,6 +28,10 @@ cluster_spinglass(
 - graph:
 
   The input graph. Edge directions are ignored in directed graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

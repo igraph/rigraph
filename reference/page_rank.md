@@ -7,6 +7,7 @@ Calculates the Google PageRank for the specified vertices.
 ``` r
 page_rank(
   graph,
+  ...,
   algo = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
@@ -22,6 +23,10 @@ page_rank(
 - graph:
 
   The graph object.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - algo:
 

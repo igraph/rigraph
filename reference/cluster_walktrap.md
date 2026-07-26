@@ -9,6 +9,7 @@ walks tend to stay in the same community.
 ``` r
 cluster_walktrap(
   graph,
+  ...,
   weights = NULL,
   steps = 4,
   merges = TRUE,
@@ -22,6 +23,10 @@ cluster_walktrap(
 - graph:
 
   The input graph. Edge directions are ignored in directed graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

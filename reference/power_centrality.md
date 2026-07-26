@@ -10,6 +10,7 @@ power contributions is specified by `exponent` (1 by default).
 power_centrality(
   graph,
   nodes = V(graph),
+  ...,
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
@@ -29,6 +30,10 @@ power_centrality(
 
   vertex sequence indicating which vertices are to be included in the
   calculation. By default, all vertices are included.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 
@@ -198,6 +203,10 @@ g.f <- make_graph(
 for (e in seq(-0.5, 0.5, by = 0.1)) {
   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 }
+#> Warning: Calling `power_centrality()` with positional or abbreviated arguments was
+#> deprecated in igraph 3.0.0.
+#> ℹ Detected call: power_centrality(graph, nodes, exponent)
+#> ℹ Use instead: power_centrality(graph, nodes, exponent = )
 #> [1] 0.00 1.58 0.00
 #> [1] 0.73 1.45 0.36
 #> [1] 0.97 1.34 0.49

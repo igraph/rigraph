@@ -9,6 +9,7 @@ every other vertex from a given vertex.
 closeness(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -25,6 +26,10 @@ closeness(
 - vids:
 
   The vertices for which closeness will be calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

@@ -8,6 +8,7 @@ summary of graph centralization.
 ``` r
 centr_degree(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
@@ -19,6 +20,10 @@ centr_degree(
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

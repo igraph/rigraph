@@ -8,6 +8,7 @@ Summing up the edge weights of the adjacent edges for each vertex.
 strength(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
@@ -23,6 +24,10 @@ strength(
 - vids:
 
   The vertices for which the strength will be calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

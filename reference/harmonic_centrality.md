@@ -10,6 +10,7 @@ considered to be zero.
 harmonic_centrality(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -26,6 +27,10 @@ harmonic_centrality(
 - vids:
 
   The vertices for which harmonic centrality will be calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

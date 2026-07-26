@@ -61,6 +61,7 @@ that are not included in igraph.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_clusters</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  membership <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  algorithm <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  merges <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  modularity <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -79,6 +80,10 @@ that are not included in igraph.</p>
 <dd><p>The membership vector of the community structure, a
 numeric vector denoting the ID of the community for each vertex. It
 might be <code>NULL</code> for hierarchical community structures.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-algorithm">algorithm<a class="anchor" aria-label="anchor" href="#arg-algorithm"></a></dt>

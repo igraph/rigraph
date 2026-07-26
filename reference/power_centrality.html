@@ -64,6 +64,7 @@ power contributions is specified by <code>exponent</code> (1 by default).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">power_centrality</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  exponent <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -84,6 +85,10 @@ power contributions is specified by <code>exponent</code> (1 by default).</p>
 <dt id="arg-nodes">nodes<a class="anchor" aria-label="anchor" href="#arg-nodes"></a></dt>
 <dd><p>vertex sequence indicating which vertices are to be included in
 the calculation.  By default, all vertices are included.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>
@@ -235,6 +240,10 @@ igraph by Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmai
 <span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">power_centrality</span><span class="op">(</span><span class="va">g.c</span>, exp <span class="op">=</span> <span class="va">e</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Calling `power_centrality()` with positional or abbreviated arguments was</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> deprecated in igraph 3.0.0.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Detected call: power_centrality(graph, nodes, exponent)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use instead: power_centrality(graph, nodes, exponent = )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.00 1.58 0.00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.73 1.45 0.36</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.97 1.34 0.49</span>

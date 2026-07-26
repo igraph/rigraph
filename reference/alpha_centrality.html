@@ -61,6 +61,7 @@ vertices in a graph.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">alpha_centrality</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  nodes <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  exo <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -83,6 +84,10 @@ graphs, edges are treated as if they were reciprocal directed ones.</p></dd>
 <dd><p>Vertex sequence, the vertices for which the alpha centrality
 values are returned. (For technical reasons they will be calculated for all
 vertices, anyway.)</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>

@@ -5,7 +5,7 @@ Calculates a measure of diversity for all vertices.
 ## Usage
 
 ``` r
-diversity(graph, weights = NULL, vids = V(graph))
+diversity(graph, ..., weights = NULL, vids = V(graph))
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ diversity(graph, weights = NULL, vids = V(graph))
 - graph:
 
   The input graph. Edge directions are ignored.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

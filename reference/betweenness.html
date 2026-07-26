@@ -61,6 +61,7 @@ geodesics (shortest paths) going through a vertex or an edge.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">betweenness</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  normalized <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -70,6 +71,7 @@ geodesics (shortest paths) going through a vertex or an edge.</p>
 <span><span class="fu">edge_betweenness</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  e <span class="op">=</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cutoff <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
@@ -86,6 +88,10 @@ geodesics (shortest paths) going through a vertex or an edge.</p>
 
 <dt id="arg-v">v<a class="anchor" aria-label="anchor" href="#arg-v"></a></dt>
 <dd><p>The vertices for which the vertex betweenness will be calculated.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>

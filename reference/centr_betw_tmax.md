@@ -6,7 +6,7 @@ summary of graph centralization.
 ## Usage
 
 ``` r
-centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
+centr_betw_tmax(graph = NULL, nodes = 0, ..., directed = TRUE)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 - nodes:
 
   The number of vertices. This is ignored if the graph is given.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

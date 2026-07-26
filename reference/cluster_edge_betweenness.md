@@ -8,6 +8,7 @@ the network. This method is also known as the Girvan-Newman algorithm.
 ``` r
 cluster_edge_betweenness(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -23,6 +24,10 @@ cluster_edge_betweenness(
 - graph:
 
   The graph to analyze.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

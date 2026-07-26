@@ -67,17 +67,27 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | bonpow() | [power_centrality()](https://r.igraph.org/reference/power_centrality.html) |
 | 2 – warn | 2.0.0 | alpha.centrality() | [alpha_centrality()](https://r.igraph.org/reference/alpha_centrality.html) |
 | 2 – warn | 1.6.0 | estimate_betweenness() | [betweenness()](https://r.igraph.org/reference/betweenness.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | estimate_edge_betweenness() | [edge_betweenness()](https://r.igraph.org/reference/betweenness.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | estimate_closeness() | [closeness()](https://r.igraph.org/reference/closeness.html) |
 | 2 – warn | 1.6.0 | [arpack(options = ‘must be a list’)](https://r.igraph.org/reference/arpack.html) | c(“[`arpack_defaults()`](https://r.igraph.org/reference/arpack.md) is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | [spectrum(options = ‘must be a list’)](https://r.igraph.org/reference/spectrum.html) | c(“[`arpack_defaults()`](https://r.igraph.org/reference/arpack.md) is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.”) |
 | 2 – warn | 1.6.0 | [eigen_centrality(options = ‘must be a list’)](https://r.igraph.org/reference/eigen_centrality.html) | c(“[`arpack_defaults()`](https://r.igraph.org/reference/arpack.md) is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.”) |
 | 2 – warn | 2.1.1 | eigen_centrality(scale) | [eigen_centrality() will always behave as if scale=TRUE were used.](https://r.igraph.org/reference/eigen_centrality.html) |
 | 3 – stop | 2.1.1 | [eigen_centrality(scale = ‘always as if TRUE’)](https://r.igraph.org/reference/eigen_centrality.html) | Normalization is always performed |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | authority_score() | [hits_scores()](https://r.igraph.org/reference/hits_scores.html) |
 | 2 – warn | 1.6.0 | I(“arpack_defaults”) | [arpack_defaults()](https://r.igraph.org/reference/arpack.html) |
 | 2 – warn | 2.0.3 | hub_score() | [hits_scores()](https://r.igraph.org/reference/hits_scores.html) |
 | 2 – warn | 1.6.0 | I(“arpack_defaults”) | [arpack_defaults()](https://r.igraph.org/reference/arpack.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | centralize.scores() | [centralize()](https://r.igraph.org/reference/centralize.html) |
 | 2 – warn | 2.0.0 | centralization.evcent.tmax() | [centr_eigen_tmax()](https://r.igraph.org/reference/centr_eigen_tmax.html) |
 | 2 – warn | 2.0.0 | centralization.evcent() | [centr_eigen()](https://r.igraph.org/reference/centr_eigen.html) |
@@ -87,7 +97,13 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | centralization.closeness() | [centr_clo()](https://r.igraph.org/reference/centr_clo.html) |
 | 2 – warn | 2.0.0 | centralization.betweenness.tmax() | [centr_betw_tmax()](https://r.igraph.org/reference/centr_betw_tmax.html) |
 | 2 – warn | 2.0.0 | centralization.betweenness() | [centr_betw()](https://r.igraph.org/reference/centr_betw.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.0.0 | [centr_degree_tmax(loops = ‘must be explicit’)](https://r.igraph.org/reference/centr_degree_tmax.html) | The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument. |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.2.0 | [centr_eigen(scale = )](https://r.igraph.org/reference/centr_eigen.html) | The function always behaves as if `scale = TRUE`. |
 | The argument will be removed in the future. |  |  |  |
 | 2 – warn | 2.2.0 | [centr_eigen_tmax(scale = )](https://r.igraph.org/reference/centr_eigen_tmax.html) | The function always behaves as if `scale = TRUE`. |
@@ -124,10 +140,19 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | cutat() | [cut_at()](https://r.igraph.org/reference/communities.html) |
 | 2 – warn | 2.0.0 | contract.vertices() | [contract()](https://r.igraph.org/reference/contract.html) |
 | 2 – warn | 2.0.0 | code.length() | [code_len()](https://r.igraph.org/reference/communities.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.1.0 | [modularity_matrix(membership = ‘is no longer used’)](https://r.igraph.org/reference/modularity.igraph.html) |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | cluster_leiden(resolution_parameter) | [cluster_leiden(resolution)](https://r.igraph.org/reference/cluster_leiden.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | [cluster_leading_eigen(options = ‘must be a list’)](https://r.igraph.org/reference/cluster_leading_eigen.html) | c(“[`arpack_defaults()`](https://r.igraph.org/reference/arpack.md) is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.”) |
 | 2 – warn | 1.6.0 | [cluster_label_prop(… = )](https://r.igraph.org/reference/cluster_label_prop.html) | Arguments `initial` and `fixed` must be named. |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | no.clusters() | [count_components()](https://r.igraph.org/reference/components.html) |
 | 2 – warn | 2.0.0 | decompose.graph() | [decompose()](https://r.igraph.org/reference/decompose.html) |
 | 2 – warn | 2.0.0 | cluster.distribution() | [component_distribution()](https://r.igraph.org/reference/components.html) |

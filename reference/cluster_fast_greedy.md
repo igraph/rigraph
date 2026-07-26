@@ -8,6 +8,7 @@ graphs via directly optimizing a modularity score.
 ``` r
 cluster_fast_greedy(
   graph,
+  ...,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE,
@@ -20,6 +21,10 @@ cluster_fast_greedy(
 - graph:
 
   The input graph. It must be undirected and must not have multi-edges.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - merges:
 
