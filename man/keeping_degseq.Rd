@@ -7,6 +7,8 @@
 keeping_degseq(loops = FALSE, niter = 100)
 }
 \arguments{
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{loops}{Whether to allow destroying and creating loop edges.}
 
 \item{niter}{Number of rewiring trials to perform.}
