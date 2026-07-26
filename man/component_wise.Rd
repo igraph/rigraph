@@ -7,8 +7,6 @@
 component_wise(merge_method = "dla")
 }
 \arguments{
-\item{...}{These dots are for future extensions and must be empty.}
-
 \item{merge_method}{Merging algorithm, the \code{method}
 argument of \code{\link[=merge_coords]{merge_coords()}}.}
 }
