@@ -78,7 +78,7 @@ g <- make_graph(c(1, 2, 2, 3, 3, 4))
 tc <- transitive_closure(g)
 # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
 print_all(tc)
-#> ── <igraph> ───────────────────────────────────────────────────────── b2b7296 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 4de6ce2 ──
 #> ℹ directed
 #> ℹ 4 vertices · 6 edges
 #> 
@@ -90,7 +90,7 @@ g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
 tc2 <- transitive_closure(g2)
 # Full graph on vertices 1, 2 and full graph on vertices 3, 4
 print_all(tc2)
-#> ── <igraph> ───────────────────────────────────────────────────────── e9d5af0 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 9d5118e ──
 #> ℹ undirected
 #> ℹ 4 vertices · 2 edges
 #> 
