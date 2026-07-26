@@ -12,10 +12,10 @@ randomly(...)
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Parameters to pass to \code{layout_randomly()}.}
+
 \item{dim}{Integer scalar, the dimension of the space to use. It must be 2
 or 3.}
-
-\item{...}{Parameters to pass to \code{layout_randomly()}.}
 }
 \value{
 A numeric matrix with two or three columns.

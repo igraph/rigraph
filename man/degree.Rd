@@ -33,6 +33,8 @@ degree_distribution(graph, cumulative = FALSE, ...)
 
 \item{v}{The IDs of vertices of which the degree will be calculated.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
@@ -42,8 +44,6 @@ this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
 \item{normalized}{Logical, whether to normalize the degree.  If
 \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 number of vertices in the graph.}
-
-\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}

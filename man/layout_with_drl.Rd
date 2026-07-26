@@ -26,6 +26,8 @@ with_drl(...)
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
+\item{...}{Passed to \code{layout_with_drl()}.}
+
 \item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
 
@@ -47,8 +49,6 @@ correspond to stronger connections.}
 two dimensional or a three dimensional layout. Note that because of the
 nature of the DrL algorithm, the three dimensional layout takes
 significantly longer to compute.}
-
-\item{...}{Passed to \code{layout_with_drl()}.}
 }
 \value{
 A numeric matrix with two columns.

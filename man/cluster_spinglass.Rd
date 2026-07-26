@@ -15,9 +15,9 @@ cluster_spinglass(
   stop.temp = 0.01,
   cool.fact = 0.99,
   update.rule = c("config", "random", "simple"),
-  gamma = 1.0,
+  gamma = 1,
   implementation = c("orig", "neg"),
-  gamma.minus = 1.0
+  gamma.minus = 1
 )
 }
 \arguments{

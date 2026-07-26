@@ -25,11 +25,11 @@ version 0.7 this argument is coerced to a data frame with
 
 \item{directed}{Logical, whether or not to create a directed graph.}
 
+\item{...}{Passed to \code{graph_from_data_frame()}.}
+
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
-
-\item{...}{Passed to \code{graph_from_data_frame()}.}
 }
 \value{
 An igraph graph object for \code{graph_from_data_frame()}, and either a

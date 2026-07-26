@@ -11,7 +11,7 @@ power_centrality(
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
-  tol = 1e-7,
+  tol = 1e-07,
   sparse = TRUE,
   weights = NULL
 )

@@ -12,9 +12,9 @@ from_edgelist(...)
 \arguments{
 \item{el}{The edge list, a two column matrix, character or numeric.}
 
-\item{directed}{Whether to create a directed graph.}
-
 \item{...}{Passed to \code{graph_from_edgelist()}.}
+
+\item{directed}{Whether to create a directed graph.}
 }
 \value{
 An igraph graph.

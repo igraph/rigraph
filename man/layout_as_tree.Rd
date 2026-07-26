@@ -20,6 +20,8 @@ as_tree(...)
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Passed to \code{layout_as_tree()}.}
+
 \item{root}{The index of the root vertex or root vertices.  If this is a
 non-empty vector then the supplied vertex IDs are used as the roots of the
 trees (or a single tree if the graph is connected).  If it is an empty
@@ -46,8 +48,6 @@ not given. See the \code{roots} parameter.}
 
 \item{flip.y}{Logical, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
-
-\item{...}{Passed to \code{layout_as_tree()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.

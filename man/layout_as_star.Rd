@@ -12,13 +12,13 @@ as_star(...)
 \arguments{
 \item{graph}{The graph to layout.}
 
+\item{...}{Arguments to pass to \code{layout_as_star()}.}
+
 \item{center}{The ID of the vertex to put in the center. By default it is
 the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex IDs.}
-
-\item{...}{Arguments to pass to \code{layout_as_star()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices

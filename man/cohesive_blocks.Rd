@@ -63,15 +63,15 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
+\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
+them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
+
 \item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 
 \item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
 \code{cohesive_blocks()} function.}
-
-\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
 
 \item{y}{The graph whose cohesive blocks are supplied in the \code{x}
 argument.}

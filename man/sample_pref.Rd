@@ -52,6 +52,8 @@ asym_pref(
 
 \item{types}{The number of different vertex types.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{type.dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
 normed to obtain probabilities.}
@@ -67,8 +69,6 @@ an undirected graph, it must be symmetric.}
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{loops}{Logical, whether self-loops are allowed in the graph.}
-
-\item{...}{These dots are for future extensions and must be empty.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}

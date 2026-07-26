@@ -24,10 +24,10 @@ should be even. For directed graphs its sum should be the same as the sum of
 \item{in.deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
-\item{method}{Character, the method for generating the graph. See Details.}
-
 \item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
 or to \code{sample_degseq()} otherwise.}
+
+\item{method}{Character, the method for generating the graph. See Details.}
 
 \item{deterministic}{Whether the construction should be deterministic}
 }

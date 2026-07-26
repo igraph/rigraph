@@ -12,7 +12,7 @@ alpha_centrality(
   loops = FALSE,
   exo = 1,
   weights = NULL,
-  tol = 1e-7,
+  tol = 1e-07,
   sparse = TRUE
 )
 }

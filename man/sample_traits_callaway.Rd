@@ -52,9 +52,9 @@ traits(
 
 \item{types}{The number of different vertex types.}
 
-\item{edge.per.step}{The number of edges to add to the graph per time step.}
-
 \item{...}{These dots are for future extensions and must be empty.}
+
+\item{edge.per.step}{The number of edges to add to the graph per time step.}
 
 \item{type.dist}{The distribution of the vertex types. This is assumed to be
 stationary in time.}

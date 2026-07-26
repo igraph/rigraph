@@ -12,6 +12,8 @@ on_grid(...)
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Passed to \code{layout_on_grid()}.}
+
 \item{width}{The number of vertices in a single row of the grid. If this is
 zero or negative, then for 2d layouts the width of the grid will be the
 square root of the number of vertices in the graph, rounded up to the next
@@ -22,8 +24,6 @@ three dimensional layouts. If this is zero or negative, then it is
 determinted automatically.}
 
 \item{dim}{Two or three. Whether to make 2d or a 3d layout.}
-
-\item{...}{Passed to \code{layout_on_grid()}.}
 }
 \value{
 A two-column or three-column matrix.

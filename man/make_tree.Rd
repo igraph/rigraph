@@ -15,13 +15,13 @@ tree(...)
 \item{children}{Integer scalar, the number of children of a vertex
 (except for leafs)}
 
+\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
+
 \item{mode}{Defines the direction of the
 edges. \code{out} indicates that the edges point from the parent to
 the children, \verb{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
-
-\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
 }
 \value{
 An igraph graph
