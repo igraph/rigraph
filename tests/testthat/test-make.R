@@ -503,6 +503,65 @@ test_that("graph_from_lcf() works", {
   expect_isomorphic(g1, g2)
 })
 
+test_that("make_hex_lattice() works", {
+  # Triangular boundary (dims of length 1)
+  g1 <- make_hex_lattice(3)
+  expect_vcount(g1, 22)
+  expect_ecount(g1, 27)
+  expect_false(is_directed(g1))
+
+  # Rectangular boundary (dims of length 2)
+  g2 <- make_hex_lattice(c(3, 4))
+  expect_vcount(g2, 38)
+  expect_ecount(g2, 49)
+
+  # Hexagonal boundary (dims of length 3)
+  g3 <- make_hex_lattice(c(2, 2, 2))
+  expect_vcount(g3, 24)
+  expect_ecount(g3, 30)
+
+  # Graph attributes
+  expect_equal(g1$name, "Hexagonal lattice")
+  expect_equal(g1$dimvector, 3)
+  expect_false(g1$directed)
+  expect_false(g1$mutual)
+
+  # Directed graph
+  g4 <- make_hex_lattice(3, directed = TRUE, mutual = FALSE)
+  expect_true(is_directed(g4))
+  expect_ecount(g4, 27)
+
+  # Mutual edges double the edge count
+  g5 <- make_hex_lattice(3, directed = TRUE, mutual = TRUE)
+  expect_true(is_directed(g5))
+  expect_ecount(g5, 54)
+})
+
+test_that("make_hex_lattice() prints as expected", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot(make_hex_lattice(c(2, 2)))
+})
+
+test_that("make_hex_lattice() errors", {
+  expect_snapshot_igraph_error(make_hex_lattice(-1))
+  expect_snapshot_igraph_error(make_hex_lattice(c(2, 2, 2, 2)))
+  expect_snapshot_igraph_error(make_hex_lattice(3, TRUE))
+})
+
+test_that("hex_lattice() works with make_()", {
+  g1 <- make_(hex_lattice(3))
+  expect_vcount(g1, 22)
+  expect_ecount(g1, 27)
+
+  g2 <- make_(hex_lattice(c(3, 4)))
+  expect_vcount(g2, 38)
+
+  g3 <- make_(hex_lattice(c(2, 2, 2)))
+  expect_vcount(g3, 24)
+
+  expect_identical_graphs(make_(hex_lattice(3)), make_hex_lattice(3))
+})
+
 test_that("make_full_multipartite() works", {
   # Test basic multipartite graph
   g <- make_full_multipartite(c(2, 3, 4))
