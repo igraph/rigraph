@@ -75,7 +75,7 @@ Other functions for manipulating graph structure:
 
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> ── <igraph> ───────────────────────────────────────────────────────── ef81a73 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 033ab39 ──
 #> ℹ directed · named
 #> ℹ 4 vertices · 3 edges
 #> 
