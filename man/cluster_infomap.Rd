@@ -6,6 +6,7 @@
 \usage{
 cluster_infomap(
   graph,
+  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
@@ -14,6 +15,8 @@ cluster_infomap(
 }
 \arguments{
 \item{graph}{The input graph. Edge directions will be taken into account.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{e.weights}{Numeric vector of edge weights.
 The length must match the number of edges in the graph.  By default (\code{NULL}) the
