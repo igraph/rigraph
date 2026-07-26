@@ -2037,6 +2037,77 @@ lattice <- function(
 
 ## -----------------------------------------------------------------
 
+#' Create a triangular lattice
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `make_tri_lattice()` creates a triangular lattice whose shape is
+#' determined by the length of `dims`:
+#' triangular (length 1), quasi-rectangular (length 2),
+#' or hexagonal (length 3).
+#'
+#' The vertices are ordered lexicographically by their (i, j) coordinates,
+#' with the second coordinate being more significant.
+#'
+#' @concept Triangular lattice
+#' @param dims Integer vector, defines the shape of the lattice.
+#'   - If `dims` is of length 1, the resulting lattice has a triangular
+#'     shape where each side of the triangle contains `dims[1]` vertices.
+#'   - If `dims` is of length 2, the resulting lattice has a
+#'     \dQuote{quasi rectangular} shape with the sides containing
+#'     `dims[1]` and `dims[2]` vertices, respectively.
+#'   - If `dims` is of length 3, the resulting lattice has a hexagonal
+#'     shape where the sides of the hexagon contain `dims[1]`, `dims[2]`,
+#'     and `dims[3]` vertices.
+#'
+#'   All components of `dims` must be positive.
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Whether to create a directed graph.
+#'   If the `mutual` argument is not set to `TRUE`,
+#'   edges will be directed from lower-index vertices towards
+#'   higher-index ones.
+#' @param mutual Whether directed edges are mutual.
+#'   It is ignored in undirected graphs.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Triangular shape, each side of the triangle contains 3 vertices
+#' make_tri_lattice(3)
+#'
+#' # Quasi-rectangular shape
+#' make_tri_lattice(c(3, 4))
+#'
+#' # Hexagonal shape
+#' make_tri_lattice(c(2, 3, 4))
+#'
+#' # Directed lattice with mutual edges
+#' make_tri_lattice(c(3, 3), directed = TRUE, mutual = TRUE)
+make_tri_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  triangular_lattice_impl(
+    dimvector = dims,
+    directed = directed,
+    mutual = mutual
+  )
+}
+
+#' @rdname make_tri_lattice
+#' @export
+tri_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  constructor_spec(
+    make_tri_lattice,
+    dims,
+    directed = directed,
+    mutual = mutual
+  )
+}
+
+## -----------------------------------------------------------------
+
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
