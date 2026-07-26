@@ -392,7 +392,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) {
     idx <- ifelse(idx < 1 | idx > gsize(graph), NA, idx)
   }
-  simple_es_index(E(graph), idx)
+  simple_es_index(E(graph), idx, na_ok = na_ok)
 }
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
@@ -1710,8 +1710,11 @@ print_igraph_es_cli <- function(
 
   max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
 
-  if (!is.null(graph)) {
+  if (!is.null(graph) && !anyNA(x)) {
     # Live graph: render endpoints with arrows.
+    # NA edge IDs (e.g. the inbound edges of unreached vertices in
+    # shortest_paths() or widest_paths()) have no endpoints,
+    # so sequences containing them use the fallback below.
     arrow <- edge_arrow_cli(is_directed(graph))
     endpoints <- ends(graph, x, names = has_vnames || is_named(graph))
     body <- format_cli_edge_endpoints(endpoints, arrow)

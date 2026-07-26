@@ -324,7 +324,8 @@ Other paths:
 \code{\link[=diameter]{diameter()}},
 \code{\link[=eccentricity]{eccentricity()}},
 \code{\link[=graph_center]{graph_center()}},
-\code{\link[=radius]{radius()}}
+\code{\link[=radius]{radius()}},
+\code{\link[=widest_path_widths]{widest_path_widths()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
