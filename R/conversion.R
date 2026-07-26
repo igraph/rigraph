@@ -1095,7 +1095,10 @@ as_graphnel <- function(graph) {
   edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
   if ("weight" %in% edge_attr_names(graph) && is.numeric(E(graph)$weight)) {
-    al <- lapply(as_adj_edge_list(graph, "out", loops = "once"), as.vector)
+    al <- lapply(
+      as_adj_edge_list(graph, mode = "out", loops = "once"),
+      as.vector
+    )
     for (i in seq(along.with = al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse(edges[, 2] == i, edges[, 1], edges[, 2])
@@ -1103,7 +1106,7 @@ as_graphnel <- function(graph) {
       al[[i]] <- list(edges = edges, weights = weights)
     }
   } else {
-    al <- as_adj_list(graph, "out", loops = "once")
+    al <- as_adj_list(graph, mode = "out", loops = "once")
     al <- lapply(al, function(x) list(edges = as.vector(x)))
   }
 
