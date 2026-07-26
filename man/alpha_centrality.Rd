@@ -7,6 +7,7 @@
 alpha_centrality(
   graph,
   nodes = V(graph),
+  ...,
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -22,6 +23,8 @@ graphs, edges are treated as if they were reciprocal directed ones.}
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality
 values are returned. (For technical reasons they will be calculated for all
 vertices, anyway.)}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{alpha}{Parameter specifying the relative importance of endogenous
 versus exogenous factors in the determination of centrality. See details
