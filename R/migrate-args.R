@@ -112,3 +112,30 @@ migrate_recover_args <- function(
     )
   )
 }
+
+# Runtime guard for head/recoverable prefix overlaps. A supplied tag that is
+# a strict prefix of a head arg *and* of a recoverable name was ambiguous --
+# an error -- under the old signature, but base R partial matching would now
+# silently bind it to the head arg before the recovery layer can see it. The
+# generator enumerates those tags per function (`ambiguous_tags`) and the
+# ARG_HANDLE block calls this first, restoring the old error.
+
+#' @noRd
+migrate_check_call_tags <- function(
+  call,
+  tags,
+  fn_name,
+  env = rlang::caller_env()
+) {
+  bad <- intersect(names(call), tags)
+  if (length(bad) == 0L) {
+    return(invisible(NULL))
+  }
+  cli::cli_abort(
+    c(
+      "Argument {.arg {bad}} matches multiple formal arguments of {.fn {fn_name}}.",
+      i = "Spell out the full argument name."
+    ),
+    call = env
+  )
+}

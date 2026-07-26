@@ -93,6 +93,68 @@ test_that("recovery emits a single deprecation warning, not one per slot", {
   expect_length(warnings, 1L)
 })
 
+# ---- prefix-overlap fixture -------------------------------------------------
+
+# migration_fixture_prefix(dimvector, p, ..., dim = NULL, permutation = NULL):
+# `dim` is a strict prefix of the head arg `dimvector`, `p` is a strict prefix
+# of the recoverable `permutation`. Previously the generator rejected such
+# signatures outright; now it allows them and guards the tags that were
+# ambiguity errors under the old signature (`d`, `di`).
+
+test_that("full tail names bind exactly despite the head prefix overlap", {
+  expect_no_condition(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, dim = 2)
+  )
+  expect_equal(
+    res,
+    list(dimvector = c(2, 2), p = 0.5, dim = 2, permutation = NULL)
+  )
+})
+
+test_that("legacy positional calls are recovered across the overlap", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, 2, "perm")
+  )
+  expect_equal(
+    res,
+    migration_fixture_prefix(c(2, 2), 0.5, dim = 2, permutation = "perm")
+  )
+})
+
+test_that("abbreviations longer than the head arg are recovered", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # `perm` is no prefix of the head `p`, so it reaches `...` and recovery.
+  lifecycle::expect_deprecated(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, perm = "x")
+  )
+  expect_identical(res$permutation, "x")
+})
+
+test_that("tags that were ambiguous under the old signature error again", {
+  # Base R partial matching would silently bind `di =` to `dimvector`; the
+  # generated guard restores the old ambiguity error.
+  expect_snapshot(
+    migration_fixture_prefix(c(2, 2), 0.5, di = 2),
+    error = TRUE
+  )
+  expect_snapshot(
+    migration_fixture_prefix(d = c(2, 2), p = 0.5),
+    error = TRUE
+  )
+})
+
+test_that("the guard ignores calls without hazardous tags", {
+  # Unnamed / fully named calls never trip the guard, including do.call().
+  expect_no_condition(
+    res <- do.call(migration_fixture_prefix, list(c(2, 2), 0.5))
+  )
+  expect_null(res$dim)
+  expect_no_condition(
+    migration_fixture_prefix(dimvector = c(2, 2), p = 0.5, dim = 1)
+  )
+})
+
 # ---- deprecation message snapshots -----------------------------------------
 
 test_that("recovery deprecation messages", {
@@ -175,51 +237,90 @@ test_that("the generated block is in sync with the registry", {
   expect_identical(spliced$lines, lines)
 })
 
-test_that("normalise_migration() rejects head/recoverable prefix clashes", {
-  # Head args are matched by base R (with partial matching) before `...`, so a
-  # head arg in a prefix relationship with a recoverable name would silently
-  # capture it before the recovery layer runs. The generator must reject this.
+test_that("normalise_migration() handles head/recoverable prefix overlaps", {
+  # Head args are matched by base R (with partial matching) before `...`.
+  # Exact matching protects full names, so prefix overlaps are allowed; the
+  # generator enumerates the tags that were ambiguity errors under the old
+  # signature (strict prefixes of a head arg that also prefix a recoverable
+  # name) for the runtime guard.
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator))
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
 
-  # Head arg `type` is a prefix of the recoverable `typeof`.
-  expect_error(
-    gen_env$normalise_migration(
-      "bad_head_prefix",
-      list(
-        old = function(graph, typeof) {},
-        new = function(graph, type = "x", ..., typeof = NULL) {},
-        when = "3.0.0"
-      )
-    ),
-    "prefix relationship"
-  )
-
-  # Recoverable `type` is a prefix of the head arg `typeof`.
-  expect_error(
-    gen_env$normalise_migration(
-      "bad_recover_prefix",
-      list(
-        old = function(graph, type) {},
-        new = function(graph, typeof = "x", ..., type = NULL) {},
-        when = "3.0.0"
-      )
-    ),
-    "prefix relationship"
-  )
-
-  # Merely sharing a leading letter (`graph` vs `groups`) is allowed.
-  expect_no_error(
-    gen_env$normalise_migration(
-      "ok_shared_letter",
-      list(
-        old = function(graph, groups) {},
-        new = function(graph, ..., groups = NULL) {},
-        when = "3.0.0"
-      )
+  # Head arg `type` is a prefix of the recoverable `typeof`: allowed. The
+  # strict prefixes of `type` all prefix `typeof` too, so they are guarded.
+  norm <- gen_env$normalise_migration(
+    "head_prefix",
+    list(
+      old = function(graph, type, typeof) {},
+      new = function(graph, type = "x", ..., typeof = NULL) {},
+      when = "3.0.0"
     )
+  )
+  expect_identical(norm$ambiguous_tags, c("t", "ty", "typ"))
+
+  # Recoverable `type` is a prefix of the head arg `typeof`: allowed. A
+  # supplied `type =` binds the post-`...` formal exactly; only the shorter
+  # tags (which were ambiguous before) are guarded.
+  norm <- gen_env$normalise_migration(
+    "recover_prefix",
+    list(
+      old = function(graph, typeof, type) {},
+      new = function(graph, typeof = "x", ..., type = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$ambiguous_tags, c("t", "ty", "typ"))
+
+  # Sharing a leading letter (`graph` vs `groups`) now guards the shared
+  # prefixes too -- `f(g = )` was an ambiguity error before the migration.
+  norm <- gen_env$normalise_migration(
+    "ok_shared_letter",
+    list(
+      old = function(graph, groups) {},
+      new = function(graph, ..., groups = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$ambiguous_tags, c("g", "gr"))
+
+  # A tag that abbreviates two head args stays out of the guard list: base R
+  # errors on it by itself before the body ever runs.
+  norm <- gen_env$normalise_migration(
+    "two_heads",
+    list(
+      old = function(g1, g2, graph.attr.comb) {},
+      new = function(g1, g2, ..., graph.attr.comb = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$ambiguous_tags, character(0))
+
+  # No overlap at all: no tags, no guard.
+  norm <- gen_env$normalise_migration(
+    "no_overlap",
+    list(
+      old = function(graph, n, weights) {},
+      new = function(graph, n, ..., weights = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$ambiguous_tags, character(0))
+
+  # A renamed-away old name that is a prefix of a head arg stays fatal: the
+  # old name is no longer a formal, so a valid legacy `f(weight = )` would
+  # silently bind the head arg -- no runtime guard can restore it.
+  expect_error(
+    gen_env$normalise_migration(
+      "renamed_prefix",
+      list(
+        old = function(graph, weightx, weight = weights) {},
+        new = function(graph, weightx = 1, ..., weights = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "renamed-away"
   )
 })
 

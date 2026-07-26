@@ -50,6 +50,24 @@
       [1] FALSE
       
 
+# tags that were ambiguous under the old signature error again
+
+    Code
+      migration_fixture_prefix(c(2, 2), 0.5, di = 2)
+    Condition
+      Error in `migration_fixture_prefix()`:
+      ! Argument `di` matches multiple formal arguments of `migration_fixture_prefix()`.
+      i Spell out the full argument name.
+
+---
+
+    Code
+      migration_fixture_prefix(d = c(2, 2), p = 0.5)
+    Condition
+      Error in `migration_fixture_prefix()`:
+      ! Argument `d` matches multiple formal arguments of `migration_fixture_prefix()`.
+      i Spell out the full argument name.
+
 # recovery deprecation messages
 
     Code
