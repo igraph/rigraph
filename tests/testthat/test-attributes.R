@@ -214,11 +214,11 @@ test_that("attribute combinations handle errors correctly", {
   g <- make_graph(c(1, 2, 2, 1))
   E(g)$weight <- c("a", "b")
   expect_error(
-    as_undirected(g, edge.attr.comb = list(weight = "sum")),
+    as_undirected(g, edge_attr_combine = list(weight = "sum")),
     "invalid 'type'"
   )
   expect_error(
-    as_undirected(g, edge.attr.comb = list(weight = sum)),
+    as_undirected(g, edge_attr_combine = list(weight = sum)),
     "invalid 'type'"
   )
 })

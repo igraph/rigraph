@@ -1,5 +1,5 @@
 # Argument-signature migrations: structural-properties
-# Schema: see tools/migrations.R. Regenerate with:
+# Schema: see tools/migrations/README.md. Regenerate with:
 #   Rscript tools/generate-migrations.R
 
 migrations <- list(
