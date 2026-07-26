@@ -149,6 +149,35 @@
       + edges (vertex names):
       [1] 1--1 1--2 1--2
 
+# make_hypercube errors
+
+    Code
+      make_hypercube(-1)
+    Condition
+      Error in `hypercube_impl()`:
+      ! Hypercube dimension must not be negative. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_hypercube(58)
+    Condition
+      Error in `hypercube_impl()`:
+      ! The requested hypercube graph dimension (58) is too high. It must be no greater than 57. Invalid value
+      Source: <file>:<line>
+
+---
+
+    Code
+      make_hypercube(3, TRUE)
+    Condition
+      Error in `make_hypercube()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = TRUE
+      i Did you forget to name an argument?
+
 # make_empty_graph gives an error for invalid arguments
 
     Code
