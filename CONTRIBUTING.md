@@ -141,6 +141,75 @@ style to the code (see also the [lintr package](https://lintr.r-lib.org/)).
 Look at the style (indentation, braces, etc.) of some recently committed bigger
 change, and try to mimic that.
 
+### Argument Order and the Ellipsis
+
+Every exported function separates its arguments into two zones
+with an ellipsis (`...`):
+arguments *before* the ellipsis may be passed by position,
+arguments *after* it are keyword-only.
+This lets us add, reorder, and rename keyword-only arguments
+in later releases without breaking user code,
+and it keeps user code readable
+because rarely-used options must be spelled out.
+
+Which arguments go before the ellipsis (the "head")?
+
+1. **All required arguments** (arguments without a default),
+   with the graph or other primary data first.
+   This holds even when a function has three or more required arguments:
+   a required argument after `...` could still only be passed by name,
+   which hides it from the signature-reading eye
+   and produces worse error messages when it is forgotten.
+2. **Defining optional arguments** may follow —
+   but only when they answer *what* is computed rather than *how*:
+   - the vertices, edges, or other objects the function operates on,
+     such as `v` in `degree()` or `nodes` in `ego()`;
+   - the parameters of a model or generator,
+     such as `power` and `m` in `sample_pa()`;
+   - an enum that selects the essential variant of the operation,
+     such as `type` in `as_adjacency_matrix()`.
+
+   As a rule of thumb, the head should not exceed three or four arguments;
+   when in doubt, put an argument after the ellipsis.
+
+Everything else goes after the ellipsis (the "tail"),
+roughly in this order:
+
+1. interpretation modifiers, such as `mode`, `directed`, `weights`, `loops`;
+2. output shape and format, such as `normalized`, `names`, `sparse`;
+3. algorithm selection and tuning, such as `algorithm`, `options`, callbacks;
+4. deprecated arguments, always last.
+
+This follows the tidyverse design guide
+([required args before `...`, optional after](https://design.tidyverse.org/dots-after-required.html),
+[important args first](https://design.tidyverse.org/important-args-first.html),
+[required args have no defaults](https://design.tidyverse.org/required-no-defaults.html))
+with one deliberate deviation:
+the tidyverse places `...` directly after the *required* arguments,
+whereas we allow a small number of *defining optional* arguments
+to stay ahead of it (rule 2 above).
+igraph's API predates these conventions by two decades,
+and idiomatic calls like `degree(g, 1:3)` or `sample_pa(100, 1.5)`
+are pervasive in scripts, books, and teaching material.
+Deprecating the idiomatic form of a function
+would generate warning noise without a safety benefit;
+the value of keyword-only arguments lies in the long tail of options,
+not in the one or two arguments everyone knows by heart.
+
+New functions follow the same zoning,
+with `rlang::check_dots_empty()` guarding the ellipsis
+(no migration machinery needed);
+document the ellipsis with `@inheritParams rlang::args_dots_empty`.
+
+For existing functions, the signature change is *migrated*:
+a generated block recovers legacy positional or abbreviated calls
+and emits a single soft deprecation,
+so old code keeps working during a transition period.
+See [Argument-migration blocks](tools/README.md#argument-migration-blocks)
+for the mechanics,
+and declare migrations in a per-topic registry file
+under `tools/migrations/`.
+
 ### Documentation
 
 - Install roxygen2 but also [igraph.r2cdocs](https://github.com/igraph/igraph.r2cdocs).

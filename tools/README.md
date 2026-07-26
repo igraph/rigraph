@@ -154,6 +154,10 @@ that, the migrated function carries a small **generated block** in its body that
 recovers the legacy call — by position **or by (partial) name** — and emits one
 soft-deprecation.
 
+Which arguments belong before and after the `...` is a design decision,
+documented in
+[CONTRIBUTING.md](../CONTRIBUTING.md#argument-order-and-the-ellipsis).
+
 The block is **generated in place**, not written by hand:
 
 - **`tools/migrations/<topic>.R`** are the source of truth: one registry file

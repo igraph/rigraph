@@ -96,7 +96,7 @@ All new functions must include:
 - A concept so that it exists in the pkgdown reference index
 - An "experimental" badge via `r lifecycle::badge("experimental")`
 - All arguments in `snake_case`, with documentation and suitable defaults
-- An ellipsis guarded with `check_dots_empty()` separating mandatory and optional arguments
+- An ellipsis guarded with `check_dots_empty()` separating the head (required and defining arguments) from keyword-only options, following the zoning rules in [CONTRIBUTING.md](CONTRIBUTING.md#argument-order-and-the-ellipsis)
 - Argument validation using built-in `check_*()` functions or `igraph_arg_match()`
 
 **For callback functions:**

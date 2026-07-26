@@ -11,6 +11,10 @@ for the mechanics.
 A function may be declared in only one registry file;
 the generator stops with an error on duplicates.
 
+The design rules for choosing which arguments go before and after `...`
+are documented in
+[CONTRIBUTING.md](../../CONTRIBUTING.md#argument-order-and-the-ellipsis).
+
 Regenerate the spliced blocks after editing any registry file:
 
 ```sh
