@@ -255,7 +255,7 @@ test_that("merge_coords() works", {
 })
 
 test_that("`layout_with_mds()` works", {
-  g <- make_tree(10, 2, "undirected")
+  g <- make_tree(10, 2, mode = "undirected")
 
   mymds <- function(g) {
     sp <- distances(g)

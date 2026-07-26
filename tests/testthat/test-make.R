@@ -113,15 +113,15 @@ test_that("make_star works", {
   adj_mat <- matrix(0, 3, 3)
   adj_mat[2:3, 1] <- 1
   expect_isomorphic(
-    make_star(3, "in"),
+    make_star(3, mode = "in"),
     graph_from_adjacency_matrix(adj_mat)
   )
   expect_isomorphic(
-    make_star(3, "out"),
+    make_star(3, mode = "out"),
     graph_from_adjacency_matrix(t(adj_mat))
   )
   expect_isomorphic(
-    make_star(3, "undirected"),
+    make_star(3, mode = "undirected"),
     graph_from_adjacency_matrix(adj_mat, mode = "max")
   )
 })
@@ -288,7 +288,7 @@ test_that("compatibility when arguments are not named", {
 test_that("make_empty_graph gives an error for invalid arguments", {
   expect_snapshot_igraph_error(make_empty_graph(NULL))
   expect_snapshot_igraph_error(make_empty_graph("spam"))
-  expect_snapshot_igraph_error(make_empty_graph(10, "spam"))
+  expect_snapshot_igraph_error(make_empty_graph(10, directed = "spam"))
 })
 
 test_that("make_graph_atlas works", {
@@ -411,7 +411,7 @@ test_that("make_bipartite_graph works with vertex names", {
 
 test_that("make_full_bipartite_graph works", {
   full_bip_star <- make_full_bipartite_graph(5, 1)
-  expect_isomorphic(full_bip_star, make_star(6, "undirected"))
+  expect_isomorphic(full_bip_star, make_star(6, mode = "undirected"))
 
   full_bip <- make_full_bipartite_graph(5, 5)
   expect_vcount(full_bip, 10)
