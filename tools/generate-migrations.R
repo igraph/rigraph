@@ -2,8 +2,10 @@
 #
 # Generator for in-place argument-migration code.
 #
-# Reads the declarative registry in tools/migrations.R and splices recovery code
-# directly into each migrated function body, between the markers
+# Reads the declarative registry entries from the per-topic files in
+# tools/migrations/ (a legacy single-file tools/migrations.R is still honoured
+# if present, easing older branches over the transition) and splices recovery
+# code directly into each migrated function body, between the markers
 #
 #   # BEGIN GENERATED ARG_HANDLE: <fn>
 #   # END GENERATED ARG_HANDLE
@@ -31,30 +33,67 @@ migration_paths <- function() {
   # the package root.
   root <- getwd()
   list(
-    registry = file.path(root, "tools", "migrations.R"),
+    registry = migration_registry_files(root),
     out_dir = file.path(root, "R")
   )
+}
+
+# All registry sources: the legacy single file plus every file in
+# tools/migrations/, one per topic. Sorted for a deterministic load order.
+migration_registry_files <- function(root = getwd()) {
+  legacy <- file.path(root, "tools", "migrations.R")
+  topical <- sort(list.files(
+    file.path(root, "tools", "migrations"),
+    pattern = "\\.[rR]$",
+    full.names = TRUE
+  ))
+  c(if (file.exists(legacy)) legacy, topical)
 }
 
 # ---- registry loading + normalisation --------------------------------------
 
 load_migrations <- function(registry_path) {
+  loaded <- lapply(registry_path, load_migration_file)
+  migrations <- do.call(c, c(loaded, list(list())))
+  fns <- names(migrations)
+  dup <- unique(fns[duplicated(fns)])
+  if (length(dup)) {
+    stop(
+      "Duplicate migration entr",
+      if (length(dup) == 1L) "y" else "ies",
+      " across registry files: ",
+      paste(dup, collapse = ", "),
+      call. = FALSE
+    )
+  }
+  Map(normalise_migration, fns, migrations)
+}
+
+load_migration_file <- function(path) {
   env <- new.env(parent = baseenv())
-  sys.source(registry_path, envir = env, keep.source = FALSE)
+  sys.source(path, envir = env, keep.source = FALSE)
   if (!exists("migrations", envir = env, inherits = FALSE)) {
     stop(
       "`",
-      registry_path,
+      path,
       "` must define a `migrations` list.",
       call. = FALSE
     )
   }
   migrations <- get("migrations", envir = env)
+  if (length(migrations) == 0L) {
+    return(list())
+  }
   fns <- names(migrations)
   if (is.null(fns) || any(!nzchar(fns))) {
-    stop("`migrations` must be a list named by function.", call. = FALSE)
+    stop(
+      "`",
+      path,
+      "`: `migrations` must be a list named by function.",
+      call. = FALSE
+    )
   }
-  Map(normalise_migration, fns, migrations)
+  migrations
 }
 
 # Deparse a formal's default, force-safely. A formal with no default holds R's
@@ -62,7 +101,33 @@ load_migrations <- function(registry_path) {
 # `is.symbol()`); `deparse()` tolerates it and yields "". So we deparse first to
 # detect missingness, and only inspect the value once we know it is present.
 default_expr <- function(fmls, nm) {
-  paste(deparse(fmls[[nm]], width.cutoff = 500L), collapse = " ")
+  space_binary_slash(
+    paste(deparse(fmls[[nm]], width.cutoff = 500L), collapse = " ")
+  )
+}
+
+# air formats binary `/` with surrounding spaces, but deparse() emits `x/y`,
+# which would make the spliced blocks fail the idempotency check against the
+# air-formatted sources. Reinsert the spaces token-aware, so slashes inside
+# string literals (e.g. URLs) stay untouched.
+space_binary_slash <- function(text) {
+  if (!grepl("/", text, fixed = TRUE)) {
+    return(text)
+  }
+  pd <- tryCatch(
+    utils::getParseData(parse(text = text, keep.source = TRUE)),
+    error = function(e) NULL
+  )
+  if (is.null(pd)) {
+    return(text)
+  }
+  cols <- pd$col1[pd$terminal & pd$token == "'/'"]
+  if (length(cols) == 0L) {
+    return(text)
+  }
+  chars <- strsplit(text, "", fixed = TRUE)[[1]]
+  chars[cols] <- " / "
+  gsub("[ ]+/[ ]+", " / ", paste(chars, collapse = ""))
 }
 
 # Turn one registry entry (with `old`/`new` as function objects) into the flat
@@ -247,7 +312,8 @@ render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
   n <- length(items)
   c(
     paste0(arg_indent, name, " = ", ctor, "("),
-    paste0(item_indent, items[-n], ","),
+    # paste0() would turn character(0) into "," for a single item
+    if (n > 1L) paste0(item_indent, items[-n], ","),
     paste0(item_indent, items[[n]]),
     paste0(arg_indent, ")", trailing)
   )
