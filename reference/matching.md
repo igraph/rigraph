@@ -171,7 +171,7 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 2f25cf9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 1c7d460 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 6 vertices · 5 edges
 #> 
@@ -204,7 +204,7 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 5a66372 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── d0ef7c9 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 7 vertices · 6 edges
 #> 
