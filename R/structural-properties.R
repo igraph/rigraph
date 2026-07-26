@@ -993,6 +993,7 @@ mean_distance <- function(
 #'
 #' @param graph The graph to analyze.
 #' @param v The IDs of vertices of which the degree will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
@@ -1030,7 +1031,7 @@ mean_distance <- function(
 #'
 degree <- function(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
@@ -1063,6 +1064,9 @@ degree <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(v)) {
+    v <- V(graph)
+  }
   v <- as_igraph_vs(graph, v)
   mode <- igraph_match_arg(mode)
 
@@ -1215,9 +1219,9 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
-#'   calculated.
+#'   calculated. The default `NULL` selects all vertices.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
-#'   calculated. By default it includes all vertices. Note that for
+#'   calculated. The default `NULL` includes all vertices. Note that for
 #'   `distances()` every vertex must be included here at most once. (This
 #'   is not required for `shortest_paths()`.
 #' @inheritParams rlang::args_dots_empty
@@ -1360,8 +1364,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 distances <- function(
   graph,
-  v = V(graph),
-  to = V(graph),
+  v = NULL,
+  to = NULL,
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -1401,6 +1405,12 @@ distances <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(v)) {
+    v <- V(graph)
+  }
+  if (is.null(to)) {
+    to <- V(graph)
+  }
 
   # make sure that the lower-level function in C gets mode == "out"
   # unconditionally when the graph is undirected; this is used for
@@ -1486,7 +1496,7 @@ distances <- function(
 shortest_paths <- function(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL,
@@ -1560,6 +1570,9 @@ shortest_paths <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(to)) {
+    to <- V(graph)
+  }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   output <- igraph_match_arg(output)
@@ -1661,7 +1674,7 @@ shortest_paths <- function(
 all_shortest_paths <- function(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL
@@ -1689,6 +1702,9 @@ all_shortest_paths <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(to)) {
+    to <- V(graph)
+  }
 
   mode <- igraph_match_arg(mode)
 
@@ -2307,7 +2323,7 @@ transitivity <- function(
 #'
 #' @param graph A graph object, the input graph.
 #' @param nodes The vertices for which the constraint will be calculated.
-#'   Defaults to all vertices.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. If this is `NULL` and there is
 #'   a `weight` edge attribute this is used. If there is no such edge
@@ -2328,7 +2344,7 @@ transitivity <- function(
 #'
 constraint <- function(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   weights = NULL
 ) {
@@ -2355,6 +2371,9 @@ constraint <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
   nodes <- as_igraph_vs(graph, nodes)
 
   if (is.null(weights)) {
@@ -2522,7 +2541,7 @@ edge_density <- function(
 ego_size <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   mode = c("all", "out", "in"),
   mindist = 0
@@ -2550,6 +2569,9 @@ ego_size <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
@@ -2602,6 +2624,7 @@ neighborhood_size <- ego_size
 #' @param order Integer giving the order of the neighborhood. Negative values
 #'   indicate an infinite order.
 #' @param nodes The vertices for which the calculation is performed.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
@@ -2660,7 +2683,7 @@ neighborhood_size <- ego_size
 ego <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   mode = c("all", "out", "in"),
   mindist = 0
@@ -2688,6 +2711,9 @@ ego <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
@@ -2719,7 +2745,7 @@ neighborhood <- ego
 make_ego_graph <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   mode = c("all", "out", "in"),
   mindist = 0
@@ -2747,6 +2773,9 @@ make_ego_graph <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
@@ -4274,9 +4303,9 @@ laplacian_matrix <- function(
 #' @param eps A small real number used in equality tests in the weighted
 #'   bipartite matching algorithm. Two real numbers are considered equal in
 #'   the algorithm if their difference is smaller than `eps`. This is
-#'   required to avoid the accumulation of numerical errors. By default it is
-#'   set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
-#'   holds. If you are running the algorithm with no weights, this argument
+#'   required to avoid the accumulation of numerical errors. The default
+#'   `NULL` stands for the smallest \eqn{x}, such that
+#'   \eqn{1+x \ne 1}{1+x != 1} holds (`.Machine$double.eps`). If you are running the algorithm with no weights, this argument
 #'   is ignored.
 #' @return `is_matching()` and `is_max_matching()` return a logical
 #'   scalar.
@@ -4364,7 +4393,7 @@ max_bipartite_match <- function(
   types = NULL,
   ...,
   weights = NULL,
-  eps = .Machine$double.eps
+  eps = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: max_bipartite_match, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -4375,7 +4404,7 @@ max_bipartite_match <- function(
       recover_old = c("weights", "eps"),
       match_names = c("weights", "eps"),
       match_to = c("weights", "eps"),
-      defaults = list(weights = NULL, eps = .Machine$double.eps),
+      defaults = list(weights = NULL, eps = NULL),
       head_args = c("graph", "types"),
       fn_name = "max_bipartite_match"
     )
@@ -4387,6 +4416,10 @@ max_bipartite_match <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(eps)) {
+    eps <- .Machine$double.eps
+  }
 
   res <- maximum_bipartite_matching_impl(
     graph = graph,
@@ -4418,8 +4451,8 @@ max_bipartite_match <- function(
 #' Undirected graphs contain only mutual edges by definition.
 #'
 #' @param graph The input graph.
-#' @param eids Edge sequence, the edges that will be probed. By default is
-#'   includes all edges in the order of their IDs.
+#' @param eids Edge sequence, the edges that will be probed. The default
+#'   `NULL` includes all edges in the order of their IDs.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to consider directed self-loops to be mutual.
 #' @return A logical vector of the same length as the number of edges supplied.
@@ -4438,7 +4471,7 @@ max_bipartite_match <- function(
 #' @export
 which_mutual <- function(
   graph,
-  eids = E(graph),
+  eids = NULL,
   ...,
   loops = TRUE
 ) {
@@ -4463,6 +4496,10 @@ which_mutual <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
 
   is_mutual_impl(
     graph = graph,
@@ -4492,8 +4529,8 @@ which_mutual <- function(
 #' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
 #' @param graph The input graph. It may be directed.
-#' @param vids The vertices for which the calculation is performed. Normally it
-#'   includes all vertices. Note, that if not all vertices are given here, then
+#' @param vids The vertices for which the calculation is performed.
+#'   The default `NULL` includes all vertices. Note, that if not all vertices are given here, then
 #'   both \sQuote{`knn`} and \sQuote{`knnk`} will be calculated based
 #'   on the given vertices only.
 #' @inheritParams rlang::args_dots_empty
@@ -4549,7 +4586,7 @@ which_mutual <- function(
 #' @export
 knn <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
@@ -4584,6 +4621,10 @@ knn <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   avg_nearest_neighbor_degree_impl(
     graph = graph,

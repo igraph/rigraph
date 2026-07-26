@@ -6,7 +6,7 @@
 \usage{
 alpha_centrality(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   alpha = 1,
   loops = FALSE,
@@ -21,8 +21,8 @@ alpha_centrality(
 graphs, edges are treated as if they were reciprocal directed ones.}
 
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. (For technical reasons they will be calculated for all
-vertices, anyway.)}
+values are returned. The default \code{NULL} selects all vertices.
+(For technical reasons they will be calculated for all vertices, anyway.)}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

@@ -382,6 +382,7 @@ betweenness.estimate <- estimate_betweenness
 #' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether directed paths should be considered while
 #'   determining the shortest paths.
@@ -430,7 +431,7 @@ betweenness.estimate <- estimate_betweenness
 #'
 betweenness <- function(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -469,6 +470,10 @@ betweenness <- function(
   }
   # END GENERATED ARG_HANDLE
 
+  if (is.null(v)) {
+    v <- V(graph)
+  }
+
   res <- betweenness_cutoff_impl(
     graph = graph,
     vids = v,
@@ -489,11 +494,12 @@ betweenness <- function(
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
+#'   The default `NULL` selects all edges.
 #' @inheritParams rlang::args_dots_empty
 #' @export
 edge_betweenness <- function(
   graph,
-  e = E(graph),
+  e = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -520,6 +526,10 @@ edge_betweenness <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(e)) {
+    e <- E(graph)
+  }
 
   e <- as_igraph_es(graph, e)
   res <- edge_betweenness_cutoff_impl(
@@ -593,6 +603,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
@@ -628,7 +639,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 closeness <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -666,6 +677,10 @@ closeness <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   closeness_cutoff_impl(
     graph = graph,
@@ -1451,6 +1466,7 @@ eigen_centrality <- function(
 #'
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
@@ -1483,7 +1499,7 @@ eigen_centrality <- function(
 #' @export
 strength <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
@@ -1514,6 +1530,10 @@ strength <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   strength_impl(
     graph = graph,
@@ -1548,6 +1568,7 @@ strength <- function(
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
 #' @param vids The vertex IDs for which to calculate the measure.
+#'   The default `NULL` selects all vertices.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
@@ -1570,7 +1591,7 @@ diversity <- function(
   graph,
   ...,
   weights = NULL,
-  vids = V(graph)
+  vids = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -1581,7 +1602,7 @@ diversity <- function(
       recover_old = c("weights", "vids"),
       match_names = c("weights", "vids"),
       match_to = c("weights", "vids"),
-      defaults = list(weights = NULL, vids = V(graph)),
+      defaults = list(weights = NULL, vids = NULL),
       head_args = c("graph"),
       fn_name = "diversity"
     )
@@ -1593,6 +1614,10 @@ diversity <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   diversity_impl(
     graph = graph,
@@ -1788,6 +1813,7 @@ hub_score <- function(
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
+#'   The default `NULL` selects all vertices.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
@@ -1848,7 +1874,7 @@ page_rank <- function(
   graph,
   ...,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vids = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -1906,7 +1932,7 @@ page_rank <- function(
       ),
       defaults = list(
         algo = c("prpack", "arpack"),
-        vids = V(graph),
+        vids = NULL,
         directed = TRUE,
         damping = 0.85,
         personalized = NULL,
@@ -1924,6 +1950,10 @@ page_rank <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   personalized_pagerank_impl(
     graph = graph,
@@ -1949,6 +1979,7 @@ page_rank <- function(
 #'
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
+#'   The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
@@ -1985,7 +2016,7 @@ page_rank <- function(
 #'
 harmonic_centrality <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -2023,6 +2054,10 @@ harmonic_centrality <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   harmonic_centrality_cutoff_impl(
     graph = graph,
@@ -2154,7 +2189,7 @@ bonpow.sparse <- function(
 #'
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
-#'   the calculation.  By default, all vertices are included.
+#'   the calculation. The default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param loops Logical indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -2216,7 +2251,7 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
@@ -2281,6 +2316,10 @@ power_centrality <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
 
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
@@ -2395,8 +2434,8 @@ alpha.centrality.sparse <- function(
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
-#'   values are returned. (For technical reasons they will be calculated for all
-#'   vertices, anyway.)
+#'   values are returned. The default `NULL` selects all vertices.
+#'   (For technical reasons they will be calculated for all vertices, anyway.)
 #' @inheritParams rlang::args_dots_empty
 #' @param alpha Parameter specifying the relative importance of endogenous
 #'   versus exogenous factors in the determination of centrality. See details
@@ -2437,7 +2476,7 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   alpha = 1,
   loops = FALSE,
@@ -2481,6 +2520,10 @@ alpha_centrality <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(nodes)) {
+    nodes <- V(graph)
+  }
 
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {

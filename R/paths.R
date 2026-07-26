@@ -85,7 +85,8 @@ is.dag <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param from The source vertex.
-#' @param to The target vertex of vertices. Defaults to all vertices.
+#' @param to The target vertex of vertices. The default `NULL` selects all
+#'   vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
@@ -110,7 +111,7 @@ is.dag <- function(graph) {
 all_simple_paths <- function(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
@@ -139,6 +140,9 @@ all_simple_paths <- function(
 
   ## Argument checks
   ensure_igraph(graph)
+  if (is.null(to)) {
+    to <- V(graph)
+  }
 
   ## Function call
   res <- with_igraph_opt(

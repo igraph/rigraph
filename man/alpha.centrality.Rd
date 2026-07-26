@@ -20,8 +20,8 @@ alpha.centrality(
 graphs, edges are treated as if they were reciprocal directed ones.}
 
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality
-values are returned. (For technical reasons they will be calculated for all
-vertices, anyway.)}
+values are returned. The default \code{NULL} selects all vertices.
+(For technical reasons they will be calculated for all vertices, anyway.)}
 
 \item{alpha}{Parameter specifying the relative importance of endogenous
 versus exogenous factors in the determination of centrality. See details

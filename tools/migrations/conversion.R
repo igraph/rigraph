@@ -16,7 +16,7 @@ migrations <- list(
       ...,
       weights = NULL,
       names = TRUE,
-      sparse = igraph_opt("sparsematrices"),
+      sparse = NULL,
       edges = deprecated(),
       attr = deprecated()
     ) {},

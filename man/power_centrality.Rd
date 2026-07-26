@@ -6,7 +6,7 @@
 \usage{
 power_centrality(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
@@ -20,7 +20,7 @@ power_centrality(
 \item{graph}{the input graph.}
 
 \item{nodes}{vertex sequence indicating which vertices are to be included in
-the calculation.  By default, all vertices are included.}
+the calculation. The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
