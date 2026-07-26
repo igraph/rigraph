@@ -171,6 +171,10 @@ Which arguments go before the ellipsis (the "head")?
 
    As a rule of thumb, the head should not exceed three or four arguments;
    when in doubt, put an argument after the ellipsis.
+   The head must never be empty, though:
+   at least the function's primary argument stays positional,
+   and a signature whose arguments *all* sit behind the ellipsis
+   is a sign that the function should not carry an ellipsis at all.
 
 Everything else goes after the ellipsis (the "tail"),
 roughly in this order:
