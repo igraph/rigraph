@@ -1365,7 +1365,14 @@ distances <- function(
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
-  algorithm = c( "automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall" )
+  algorithm = c(
+    "automatic",
+    "unweighted",
+    "dijkstra",
+    "bellman-ford",
+    "johnson",
+    "floyd-warshall"
+  )
 ) {
   # BEGIN GENERATED ARG_HANDLE: distances, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -2133,7 +2140,18 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'
 transitivity <- function(
   graph,
-  type = c( "undirected", "global", "globalundirected", "localundirected", "local", "average", "localaverage", "localaverageundirected", "barrat", "weighted" ),
+  type = c(
+    "undirected",
+    "global",
+    "globalundirected",
+    "localundirected",
+    "local",
+    "average",
+    "localaverage",
+    "localaverageundirected",
+    "barrat",
+    "weighted"
+  ),
   ...,
   vids = NULL,
   weights = NULL,
