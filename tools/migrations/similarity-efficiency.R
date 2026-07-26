@@ -67,9 +67,18 @@ migrations <- list(
       graph,
       vids = V(graph),
       ...,
-      mode = c( "all", "out", "in", "total" ),
+      mode = c(
+        "all",
+        "out",
+        "in",
+        "total"
+      ),
       loops = FALSE,
-      method = c( "jaccard", "dice", "invlogweighted" )
+      method = c(
+        "jaccard",
+        "dice",
+        "invlogweighted"
+      )
     ) {},
     when = "3.0.0"
   )
