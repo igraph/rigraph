@@ -17,6 +17,33 @@ Regenerate the spliced blocks after editing any registry file:
 Rscript tools/generate-migrations.R
 ```
 
+## Constant defaults
+
+Defaults in migrated (`new`) signatures must be **constant expressions**:
+literals, `NULL`/`TRUE`/`FALSE`/`NA*`/`Inf`/`NaN`,
+`c()`/`list()` of constants, a unary sign,
+or the `deprecated()` sentinel.
+Anything else -- option lookups, `V(graph)`,
+references to other arguments, RNG draws --
+is evaluated lazily at an unpredictable time,
+invites forcing hazards in the recovery machinery,
+and hides the real default from the signature.
+The generator stops with an error on any non-constant default;
+there is no escape hatch.
+Express a complex default as `NULL`
+and resolve it in the body
+after all arguments are available:
+
+```r
+some_fun <- function(graph, ..., vids = NULL) {
+  # (generated ARG_HANDLE block)
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
+  ...
+}
+```
+
 ## Entry schema
 
 Every registry file defines a `migrations` list named by function.
