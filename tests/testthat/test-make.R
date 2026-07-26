@@ -559,3 +559,198 @@ test_that("make_turan() works", {
   g5 <- make_(turan(10, 2))
   expect_vcount(g5, 10)
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("make_empty_graph() tail arguments and positional recovery", {
+  g <- make_empty_graph(3, directed = FALSE)
+  expect_false(is_directed(g))
+  expect_vcount(g, 3)
+  expect_ecount(g, 0)
+
+  lifecycle::expect_deprecated(res <- make_empty_graph(3, FALSE))
+  expect_identical_graphs(res, g)
+})
+
+test_that("empty_graph() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(empty_graph(4, directed = FALSE)),
+    make_empty_graph(4, directed = FALSE)
+  )
+})
+
+test_that("make_star() tail arguments and positional recovery", {
+  g <- make_star(5, mode = "out", center = 3)
+  expect_equal(degree(g, mode = "out"), c(0, 0, 4, 0, 0))
+
+  lifecycle::expect_deprecated(res <- make_star(4, "undirected"))
+  expect_identical_graphs(res, make_star(4, mode = "undirected"))
+})
+
+test_that("star() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(star(5, mode = "out", center = 3)),
+    make_star(5, mode = "out", center = 3)
+  )
+})
+
+test_that("make_full_graph() tail arguments and positional recovery", {
+  # directed is exercised above, loops is the remaining tail argument.
+  g <- make_full_graph(3, directed = TRUE, loops = TRUE)
+  expect_ecount(g, 9)
+  expect_equal(sum(which_loop(g)), 3)
+
+  lifecycle::expect_deprecated(res <- make_full_graph(3, TRUE))
+  expect_identical_graphs(res, make_full_graph(3, directed = TRUE))
+})
+
+test_that("full_graph() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(full_graph(4, directed = TRUE, loops = TRUE)),
+    make_full_graph(4, directed = TRUE, loops = TRUE)
+  )
+})
+
+test_that("make_ring() tail arguments and positional recovery", {
+  g <- make_ring(5, directed = TRUE, mutual = TRUE, circular = FALSE)
+  expect_true(is_directed(g))
+  expect_ecount(g, 8)
+  expect_true(all(which_mutual(g)))
+
+  lifecycle::expect_deprecated(res <- make_ring(5, TRUE))
+  expect_identical_graphs(res, make_ring(5, directed = TRUE))
+})
+
+test_that("ring() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(ring(5, directed = TRUE, mutual = TRUE, circular = FALSE)),
+    make_ring(5, directed = TRUE, mutual = TRUE, circular = FALSE)
+  )
+})
+
+test_that("make_tree() recovers the positional mode argument", {
+  # The mode values are exercised in test-trees.R, only recovery is needed here.
+  lifecycle::expect_deprecated(res <- make_tree(7, 2, "in"))
+  expect_identical_graphs(res, make_tree(7, 2, mode = "in"))
+})
+
+test_that("sample_tree() recovers positional tail arguments", {
+  # directed and method are exercised in test-trees.R, only recovery is needed here.
+  igraph_with_seed(42, {
+    lifecycle::expect_deprecated(res <- sample_tree(20, TRUE))
+  })
+  igraph_with_seed(42, {
+    expected <- sample_tree(20, directed = TRUE)
+  })
+  expect_identical_graphs(res, expected)
+})
+
+test_that("make_chordal_ring() tail arguments and positional recovery", {
+  w <- matrix(c(3, 12, 4, 7, 8, 11), nrow = 2)
+  g <- make_chordal_ring(15, w, directed = TRUE)
+  expect_true(is_directed(g))
+  expect_vcount(g, 15)
+
+  lifecycle::expect_deprecated(res <- make_chordal_ring(15, w, TRUE))
+  expect_identical_graphs(res, g)
+})
+
+test_that("chordal_ring() twin forwards tail arguments", {
+  w <- matrix(c(3, 12, 4, 7, 8, 11), nrow = 2)
+  expect_identical_graphs(
+    make_(chordal_ring(15, w, directed = TRUE)),
+    make_chordal_ring(15, w, directed = TRUE)
+  )
+})
+
+test_that("make_circulant() recovers the positional directed argument", {
+  # directed is exercised above, only recovery is needed here.
+  lifecycle::expect_deprecated(res <- make_circulant(5, c(1, 2), TRUE))
+  expect_identical_graphs(res, make_circulant(5, c(1, 2), directed = TRUE))
+})
+
+test_that("circulant() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(circulant(6, c(1, 2), directed = TRUE)),
+    make_circulant(6, c(1, 2), directed = TRUE)
+  )
+})
+
+test_that("make_full_bipartite_graph() tail arguments and positional recovery", {
+  g <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
+  expect_true(is_directed(g))
+  expect_ecount(g, 6)
+  # With mode = "in" all edges point from the second partition to the first.
+  expect_equal(degree(g, mode = "in"), c(3, 3, 0, 0, 0))
+
+  lifecycle::expect_deprecated(res <- make_full_bipartite_graph(2, 3, TRUE))
+  expect_identical_graphs(res, make_full_bipartite_graph(2, 3, directed = TRUE))
+})
+
+test_that("full_bipartite_graph() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(full_bipartite_graph(2, 3, directed = TRUE, mode = "in")),
+    make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
+  )
+})
+
+test_that("make_bipartite_graph() tail arguments and positional recovery", {
+  types <- c(FALSE, FALSE, TRUE)
+  edges <- c(1, 3, 2, 3)
+  g <- make_bipartite_graph(types, edges, directed = TRUE)
+  expect_true(is_directed(g))
+  expect_ecount(g, 2)
+
+  lifecycle::expect_deprecated(res <- make_bipartite_graph(types, edges, TRUE))
+  expect_identical_graphs(res, g)
+})
+
+test_that("bipartite_graph() twin forwards tail arguments", {
+  types <- c(FALSE, FALSE, TRUE)
+  edges <- c(1, 3, 2, 3)
+  expect_identical_graphs(
+    make_(bipartite_graph(types, edges, directed = TRUE)),
+    make_bipartite_graph(types, edges, directed = TRUE)
+  )
+})
+
+test_that("make_full_multipartite() recovers the positional directed argument", {
+  # directed and mode are exercised above, only recovery is needed here.
+  lifecycle::expect_deprecated(res <- make_full_multipartite(c(2, 2), TRUE))
+  expect_identical_graphs(res, make_full_multipartite(c(2, 2), directed = TRUE))
+})
+
+test_that("full_multipartite() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(full_multipartite(c(2, 3), directed = TRUE, mode = "out")),
+    make_full_multipartite(c(2, 3), directed = TRUE, mode = "out")
+  )
+})
+
+test_that("make_full_citation_graph() tail arguments and positional recovery", {
+  g <- make_full_citation_graph(4, directed = FALSE)
+  expect_false(is_directed(g))
+  expect_ecount(g, 6)
+
+  lifecycle::expect_deprecated(res <- make_full_citation_graph(4, FALSE))
+  expect_identical_graphs(res, g)
+})
+
+test_that("full_citation_graph() twin forwards tail arguments", {
+  expect_identical_graphs(
+    make_(full_citation_graph(4, directed = FALSE)),
+    make_full_citation_graph(4, directed = FALSE)
+  )
+})
+
+test_that("realize_degseq() recovers positional tail arguments", {
+  # allowed.edge.types and method are exercised in test-degseq.R,
+  # only recovery is needed here.
+  # The degree sequence c(4, 2) is only realizable with loops and multi-edges,
+  # so the recovered value has a visible effect.
+  lifecycle::expect_deprecated(res <- realize_degseq(c(4, 2), NULL, "all"))
+  expect_identical_graphs(
+    res,
+    realize_degseq(c(4, 2), allowed.edge.types = "all")
+  )
+})
