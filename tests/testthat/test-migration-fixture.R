@@ -282,3 +282,16 @@ test_that("render_call_arg() wraps long arguments the way air formats them", {
   )
   expect_true(all(nchar(wrapped) + 2L <= 80L))
 })
+
+test_that("tests force lifecycle verbosity so soft deprecations warn", {
+  # setup-lifecycle.R turns every deprecation into a warning during tests,
+  # including *indirect* calls that deprecate_soft() would otherwise keep
+  # silent. This is the baseline that keeps internal callers of migrated
+  # signatures honest.
+  expect_identical(getOption("lifecycle_verbosity"), "warning")
+
+  indirect <- function() {
+    migration_fixture(make_ring(3), 1, weights = NULL, type = "out", 2)
+  }
+  expect_warning(indirect(), "positional or abbreviated")
+})
