@@ -876,7 +876,11 @@ sample_pa <- function(
   out.pref = FALSE,
   zero.appeal = 1,
   directed = TRUE,
-  algorithm = c( "psumtree", "psumtree-multiple", "bag" ),
+  algorithm = c(
+    "psumtree",
+    "psumtree-multiple",
+    "bag"
+  ),
   start.graph = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
@@ -1610,7 +1614,13 @@ sample_degseq <- function(
   out.deg,
   in.deg = NULL,
   ...,
-  method = c( "configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple" )
+  method = c(
+    "configuration",
+    "vl",
+    "fast.heur.simple",
+    "configuration.simple",
+    "edge.switching.simple"
+  )
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_degseq, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {

@@ -251,7 +251,13 @@ migrations <- list(
       out.deg,
       in.deg = NULL,
       ...,
-      method = c( "configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple" )
+      method = c(
+        "configuration",
+        "vl",
+        "fast.heur.simple",
+        "configuration.simple",
+        "edge.switching.simple"
+      )
     ) {},
     when = "3.0.0"
   ),
@@ -399,7 +405,11 @@ migrations <- list(
       out.pref = FALSE,
       zero.appeal = 1,
       directed = TRUE,
-      algorithm = c( "psumtree", "psumtree-multiple", "bag" ),
+      algorithm = c(
+        "psumtree",
+        "psumtree-multiple",
+        "bag"
+      ),
       start.graph = NULL
     ) {},
     when = "3.0.0"
