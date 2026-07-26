@@ -126,15 +126,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> ── <edge sequence> 2/6 · vertex names · from 45f9999 ───────────────────────────
+#> ── <edge sequence> 2/6 · vertex names · from bd20832 ───────────────────────────
 #> [1] 3 → 4  1 → 5 
 #> 
 #> $partition1
-#> ── <vertex sequence> 2/6 · named · from 45f9999 ────────────────────────────────
+#> ── <vertex sequence> 2/6 · named · from bd20832 ────────────────────────────────
 #> [1] 1 3
 #> 
 #> $partition2
-#> ── <vertex sequence> 4/6 · named · from 45f9999 ────────────────────────────────
+#> ── <vertex sequence> 4/6 · named · from bd20832 ────────────────────────────────
 #> [1] 4 5 6 2
 #> 
 #> $stats
