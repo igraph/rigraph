@@ -70,7 +70,15 @@ migrations <- list(
     new = function(
       adjmatrix,
       ...,
-      mode = c( "directed", "undirected", "max", "min", "upper", "lower", "plus" ),
+      mode = c(
+        "directed",
+        "undirected",
+        "max",
+        "min",
+        "upper",
+        "lower",
+        "plus"
+      ),
       weighted = NULL,
       diag = TRUE,
       add.colnames = NULL,
