@@ -31,6 +31,7 @@
 #' a specific cycle.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant specifying how to handle directed graphs.
 #'   `out` follows edge directions, `in` follows edges in the reverse direction,
 #'   and `all` ignores edge directions. Ignored in undirected graphs.
