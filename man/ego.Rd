@@ -26,6 +26,7 @@ neighborhood_size(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -43,6 +44,7 @@ neighborhood(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -60,6 +62,7 @@ make_neighborhood_graph(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
