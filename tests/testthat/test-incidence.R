@@ -224,3 +224,30 @@ test_that("graph_from_biadjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
   expect_snapshot_igraph_error(graph_from_biadjacency_matrix(A))
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("graph_from_biadjacency_matrix() covers add.names by name and recovers positional calls", {
+  # The other tail arguments are already exercised by name elsewhere
+  # in this file, so only add.names and the legacy positional path
+  # are covered here.
+  inc <- matrix(c(1, 0, 0, 1, 1, 1), nrow = 2)
+  rownames(inc) <- c("r1", "r2")
+  colnames(inc) <- c("c1", "c2", "c3")
+
+  g_label <- graph_from_biadjacency_matrix(inc, add.names = "label")
+  expect_identical(V(g_label)$label, c("r1", "r2", "c1", "c2", "c3"))
+  expect_false("name" %in% vertex_attr_names(g_label))
+
+  g_anon <- graph_from_biadjacency_matrix(inc, add.names = NA)
+  expect_identical(vertex_attr_names(g_anon), "type")
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_biadjacency_matrix(inc, TRUE)
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_biadjacency_matrix(inc, directed = TRUE)
+  )
+  expect_true(is_directed(res))
+})
