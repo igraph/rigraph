@@ -11,10 +11,11 @@ subgraph(graph, vids)
 induced_subgraph(
   graph,
   vids,
+  ...,
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 )
 
-subgraph_from_edges(graph, eids, delete.vertices = TRUE)
+subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
 ```
 
 ## Arguments
@@ -27,6 +28,10 @@ subgraph_from_edges(graph, eids, delete.vertices = TRUE)
 
   Numeric vector, the vertices of the original graph which will form the
   subgraph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - impl:
 

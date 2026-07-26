@@ -158,6 +158,8 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | cluster.distribution() | [component_distribution()](https://r.igraph.org/reference/components.html) |
 | 2 – warn | 2.0.0 | biconnected.components() | [biconnected_components()](https://r.igraph.org/reference/biconnected_components.html) |
 | 2 – warn | 2.0.0 | articulation.points() | [articulation_points()](https://r.igraph.org/reference/articulation_points.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | igraph.console() | [console()](https://r.igraph.org/reference/console.html) |
 | 3 – stop | 3.0.0 | [console()](https://r.igraph.org/reference/console.html) |  |
 | 2 – warn | 2.0.0 | igraph.to.graphNEL() | [as_graphnel()](https://r.igraph.org/reference/as_graphnel.html) |
@@ -233,6 +235,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be configuration instead of simple’)](https://r.igraph.org/reference/sample_degseq.html) |  |
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be fast.heur.simple instead of simple.no.multiple’)](https://r.igraph.org/reference/sample_degseq.html) |  |
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be configuration.simple instead of simple.no.multiple.uniform’)](https://r.igraph.org/reference/sample_degseq.html) |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.2.0 | sample_bipartite() | [sample_bipartite_gnp()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
 | 2 – warn | 2.2.0 | sample_bipartite() | [sample_bipartite_gnm()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
 | 2 – warn | 2.1.3 | bipartite() | [bipartite_gnp()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
@@ -343,8 +346,10 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | path.length.hist() | [distance_table()](https://r.igraph.org/reference/distances.html) |
 | 2 – warn | 2.0.0 | maximum.cardinality.search() | [max_cardinality()](https://r.igraph.org/reference/max_cardinality.html) |
 | 2 – warn | 2.0.0 | is.dag() | [is_dag()](https://r.igraph.org/reference/is_dag.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | [eccentricity(… =)](https://r.igraph.org/reference/eccentricity.html) | The argument `mode` must be named. |
 | 2 – warn | 2.1.0 | [radius(… =)](https://r.igraph.org/reference/radius.html) | The argument `mode` must be named. |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | autocurve.edges() | [curve_multiple()](https://r.igraph.org/reference/curve_multiple.html) |
 | 2 – warn | 2.0.0 | igraph.shape.noplot() | [shape_noplot()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | igraph.shape.noclip() | [shape_noclip()](https://r.igraph.org/reference/shapes.html) |
@@ -383,12 +388,44 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | count.multiple() | [count_multiple()](https://r.igraph.org/reference/which_multiple.html) |
 | 2 – warn | 2.0.0 | clusters() | [components()](https://r.igraph.org/reference/components.html) |
 | 2 – warn | 2.0.0 | average.path.length() | [mean_distance()](https://r.igraph.org/reference/distances.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | subgraph.edges() | [subgraph_from_edges()](https://r.igraph.org/reference/subgraph.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 1.3.0 | bfs(neimode = ) | [bfs(mode = )](https://r.igraph.org/reference/bfs.html) |
 | 3 – stop | 2.2.0 | bfs(father = ) | [bfs(parent = )](https://r.igraph.org/reference/bfs.html) |
 | 3 – stop | 1.3.0 | dfs(neimode = ) | [dfs(mode = )](https://r.igraph.org/reference/dfs.html) |
 | 3 – stop | 2.2.0 | dfs(father = ) | [dfs(parent = )](https://r.igraph.org/reference/dfs.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.3 | [make_lattice(normalized = ‘provide normalization instead’)](https://r.igraph.org/reference/make_lattice.html) | c(“`normalized` is now deprecated, use `normalization` instead.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | are.connected() | [are_adjacent()](https://r.igraph.org/reference/are_adjacent.html) |
 | 2 – warn | 2.0.0 | tkplot.setcoords() | [tk_set_coords()](https://r.igraph.org/reference/tkplot.html) |
 | 2 – warn | 2.0.0 | tkplot.rotate() | [tk_rotate()](https://r.igraph.org/reference/tkplot.html) |

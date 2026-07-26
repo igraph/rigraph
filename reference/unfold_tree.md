@@ -6,7 +6,7 @@ forest by replicating vertices that were found more than once.
 ## Usage
 
 ``` r
-unfold_tree(graph, mode = c("all", "out", "in", "total"), roots)
+unfold_tree(graph, ..., mode = c("all", "out", "in", "total"), roots)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ unfold_tree(graph, mode = c("all", "out", "in", "total"), roots)
 - graph:
 
   The input graph, it can be either directed or undirected.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

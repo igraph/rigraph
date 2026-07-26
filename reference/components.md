@@ -8,13 +8,13 @@ graph
 ``` r
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
-largest_component(graph, mode = c("weak", "strong"))
+largest_component(graph, ..., mode = c("weak", "strong"))
 
-components(graph, mode = c("weak", "strong"))
+components(graph, ..., mode = c("weak", "strong"))
 
-is_connected(graph, mode = c("weak", "strong"))
+is_connected(graph, ..., mode = c("weak", "strong"))
 
-count_components(graph, mode = c("weak", "strong"))
+count_components(graph, ..., mode = c("weak", "strong"))
 ```
 
 ## Arguments
@@ -179,7 +179,7 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── f1a73ce ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── dff1514 ──
 #> ℹ undirected
 #> ℹ 8 vertices · 7 edges
 #> 

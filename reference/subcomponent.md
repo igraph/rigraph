@@ -6,7 +6,7 @@ vertices from which a given vertex is reachable via a directed path.
 ## Usage
 
 ``` r
-subcomponent(graph, v, mode = c("all", "out", "in"))
+subcomponent(graph, v, ..., mode = c("all", "out", "in"))
 ```
 
 ## Arguments
@@ -18,6 +18,10 @@ subcomponent(graph, v, mode = c("all", "out", "in"))
 - v:
 
   The vertex to start the search from.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -78,12 +82,16 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
-#> ── <vertex sequence> 1/100 · from a7c71fc ──────────────────────────────────────
+#> Warning: Calling `subcomponent()` with positional or abbreviated arguments was
+#> deprecated in igraph 3.0.0.
+#> ℹ Detected call: subcomponent(graph, v, mode)
+#> ℹ Use instead: subcomponent(graph, v, mode = )
+#> ── <vertex sequence> 1/100 · from eb1d7f2 ──────────────────────────────────────
 #> [1] 1
 subcomponent(g, 1, "out")
-#> ── <vertex sequence> 1/100 · from a7c71fc ──────────────────────────────────────
+#> ── <vertex sequence> 1/100 · from eb1d7f2 ──────────────────────────────────────
 #> [1] 1
 subcomponent(g, 1, "all")
-#> ── <vertex sequence> 1/100 · from a7c71fc ──────────────────────────────────────
+#> ── <vertex sequence> 1/100 · from eb1d7f2 ──────────────────────────────────────
 #> [1] 1
 ```

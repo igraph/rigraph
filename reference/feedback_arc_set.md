@@ -6,7 +6,12 @@ all cycles in the graph.
 ## Usage
 
 ``` r
-feedback_arc_set(graph, weights = NULL, algo = c("approx_eades", "exact_ip"))
+feedback_arc_set(
+  graph,
+  ...,
+  weights = NULL,
+  algo = c("approx_eades", "exact_ip")
+)
 ```
 
 ## Arguments
@@ -14,6 +19,10 @@ feedback_arc_set(graph, weights = NULL, algo = c("approx_eades", "exact_ip"))
 - graph:
 
   The input graph
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -102,9 +111,9 @@ Graph cycles:
 
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-#> ── <edge sequence> 6/40 · from 241c74f ─────────────────────────────────────────
+#> ── <edge sequence> 6/40 · from 6fed785 ─────────────────────────────────────────
 #> [1] 6 → 15   6 → 19   9 → 15   11 → 3   16 → 10  17 → 5  
 feedback_arc_set(g, algo = "approx_eades")
-#> ── <edge sequence> 6/40 · from 241c74f ─────────────────────────────────────────
+#> ── <edge sequence> 6/40 · from 6fed785 ─────────────────────────────────────────
 #> [1] 6 → 15   6 → 19   9 → 15   11 → 3   16 → 10  17 → 5  
 ```

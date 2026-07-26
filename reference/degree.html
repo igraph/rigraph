@@ -61,6 +61,7 @@ its adjacent edges.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">degree</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  normalized <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -74,7 +75,7 @@ its adjacent edges.</p>
 <span>  loops <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">mean_degree</span><span class="op">(</span><span class="va">graph</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">mean_degree</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">degree_distribution</span><span class="op">(</span><span class="va">graph</span>, cumulative <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -91,6 +92,10 @@ its adjacent edges.</p>
 <dd><p>The IDs of vertices of which the degree will be calculated.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
 <dd><p>Character string, “out” for out-degree, “in” for
 in-degree or “total” for the sum of the two. For undirected graphs
@@ -105,10 +110,6 @@ this argument is ignored. “all” is a synonym of “total”.</p></dd>
 <dd><p>Logical, whether to normalize the degree.  If
 <code>TRUE</code> then the result is divided by \(n-1\), where \(n\) is the
 number of vertices in the graph.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-cumulative">cumulative<a class="anchor" aria-label="anchor" href="#arg-cumulative"></a></dt>

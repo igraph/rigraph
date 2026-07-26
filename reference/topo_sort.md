@@ -7,7 +7,7 @@ edges.
 ## Usage
 
 ``` r
-topo_sort(graph, mode = c("out", "all", "in"))
+topo_sort(graph, ..., mode = c("out", "all", "in"))
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ topo_sort(graph, mode = c("out", "all", "in"))
 - graph:
 
   The input graph, should be directed
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -81,7 +85,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 g <- sample_pa(100)
 topo_sort(g)
-#> ── <vertex sequence> 100/100 · from d08cf5d ────────────────────────────────────
+#> ── <vertex sequence> 100/100 · from 8b4b009 ────────────────────────────────────
 #>   [1]   6   9  12  13  18  19  20  22  23  24  30  31  32  34  35  36  37  38
 #>  [19]  39  40  41  44  46  47  50  51  52  53  54  55  56  60  61  62  63  64
 #>  [37]  66  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84

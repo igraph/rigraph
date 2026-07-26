@@ -10,6 +10,7 @@ all_simple_paths(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 )
@@ -28,6 +29,10 @@ all_simple_paths(
 - to:
 
   The target vertex of vertices. Defaults to all vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -76,28 +81,28 @@ Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
 #> [[1]]
-#> ── <vertex sequence> 5/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> ── <vertex sequence> 7/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 7/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5
 #> 
 all_simple_paths(g, 1, c(3, 5))
 #> [[1]]
-#> ── <vertex sequence> 3/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1] 1 2 3
 #> 
 #> [[2]]
-#> ── <vertex sequence> 5/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> ── <vertex sequence> 7/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 7/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5
 #> 
 #> [[4]]
-#> ── <vertex sequence> 9/10 · from d268a7f ───────────────────────────────────────
+#> ── <vertex sequence> 9/10 · from dcf0ad6 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6  5  4  3
 #> 
 ```

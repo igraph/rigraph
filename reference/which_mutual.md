@@ -5,7 +5,7 @@ This function checks the reciprocal pair of the supplied edges.
 ## Usage
 
 ``` r
-which_mutual(graph, eids = E(graph), loops = TRUE)
+which_mutual(graph, eids = E(graph), ..., loops = TRUE)
 ```
 
 ## Arguments
@@ -18,6 +18,10 @@ which_mutual(graph, eids = E(graph), loops = TRUE)
 
   Edge sequence, the edges that will be probed. By default is includes
   all edges in the order of their IDs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 

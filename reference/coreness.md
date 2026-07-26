@@ -7,7 +7,7 @@ k-core but not to the (k+1)-core.
 ## Usage
 
 ``` r
-coreness(graph, mode = c("all", "out", "in"))
+coreness(graph, ..., mode = c("all", "out", "in"))
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ coreness(graph, mode = c("all", "out", "in"))
 - graph:
 
   The input graph, it can be directed or undirected
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

@@ -5,7 +5,7 @@
 ## Usage
 
 ``` r
-count_reachable(graph, mode = c("out", "in", "all", "total"))
+count_reachable(graph, ..., mode = c("out", "in", "all", "total"))
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ count_reachable(graph, mode = c("out", "in", "all", "total"))
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

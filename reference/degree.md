@@ -9,6 +9,7 @@ of its adjacent edges.
 degree(
   graph,
   v = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
@@ -22,7 +23,7 @@ max_degree(
   loops = TRUE
 )
 
-mean_degree(graph, loops = TRUE)
+mean_degree(graph, ..., loops = TRUE)
 
 degree_distribution(graph, cumulative = FALSE, ...)
 ```
@@ -36,6 +37,10 @@ degree_distribution(graph, cumulative = FALSE, ...)
 - v:
 
   The IDs of vertices of which the degree will be calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -52,10 +57,6 @@ degree_distribution(graph, cumulative = FALSE, ...)
   Logical, whether to normalize the degree. If `TRUE` then the result is
   divided by \\n-1\\, where \\n\\ is the number of vertices in the
   graph.
-
-- ...:
-
-  These dots are for future extensions and must be empty.
 
 - cumulative:
 

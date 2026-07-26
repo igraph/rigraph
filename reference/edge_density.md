@@ -7,7 +7,7 @@ multi-edges are present.
 ## Usage
 
 ``` r
-edge_density(graph, loops = FALSE)
+edge_density(graph, ..., loops = FALSE)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ edge_density(graph, loops = FALSE)
 - graph:
 
   The input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 

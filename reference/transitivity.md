@@ -11,6 +11,7 @@ transitivity(
   graph,
   type = c("undirected", "global", "globalundirected", "localundirected", "local",
     "average", "localaverage", "localaverageundirected", "barrat", "weighted"),
+  ...,
   vids = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
@@ -61,6 +62,10 @@ transitivity(
   "weighted"
 
   :   The same as `barrat`.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - vids:
 

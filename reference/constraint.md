@@ -6,7 +6,7 @@ vertex.
 ## Usage
 
 ``` r
-constraint(graph, nodes = V(graph), weights = NULL)
+constraint(graph, nodes = V(graph), ..., weights = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ constraint(graph, nodes = V(graph), weights = NULL)
 
   The vertices for which the constraint will be calculated. Defaults to
   all vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

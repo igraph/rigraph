@@ -5,7 +5,7 @@ Calculates the reciprocity of a directed graph.
 ## Usage
 
 ``` r
-reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
+reciprocity(graph, ..., ignore.loops = TRUE, mode = c("default", "ratio"))
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
 - graph:
 
   The graph object.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - ignore.loops:
 

@@ -14,6 +14,7 @@ is_max_matching(graph, matching, types = NULL)
 max_bipartite_match(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   eps = .Machine$double.eps
 )
@@ -36,6 +37,10 @@ max_bipartite_match(
 
   Vertex types, if the graph is bipartite. By default they are taken
   from the ‘`type`’ vertex attribute, if present.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
@@ -166,7 +171,7 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── dace8e1 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 40867c2 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 6 vertices · 5 edges
 #> 
@@ -199,7 +204,7 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── e60ea08 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 8eae7c3 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 7 vertices · 6 edges
 #> 

@@ -61,6 +61,7 @@ same quantity in the function of vertex degree</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">knn</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  vids <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  neighbor.degree.mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -80,6 +81,10 @@ same quantity in the function of vertex degree</p>
 includes all vertices. Note, that if not all vertices are given here, then
 both ‘<code>knn</code>’ and ‘<code>knnk</code>’ will be calculated based
 on the given vertices only.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>

@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">girth</span><span class="op">(</span><span class="va">graph</span>, circle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">girth</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, circle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,6 +65,10 @@
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph. It may be directed, but the algorithm searches
 for undirected circles anyway.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-circle">circle<a class="anchor" aria-label="anchor" href="#arg-circle"></a></dt>
@@ -152,7 +156,7 @@ computing</em>, 1-10, 1977</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 0/1000 · from 4be3d5b ─────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 0/1000 · from d0f4e6c ─────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The worst case running time is for a ring</span></span></span>
@@ -162,7 +166,7 @@ computing</em>, 1-10, 1977</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 100/100 · from f85ff2e ────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 100/100 · from afae8cf ────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4</span>
@@ -178,7 +182,7 @@ computing</em>, 1-10, 1977</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/1000 · from 2b0bf2a ────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/1000 · from 3d94a96 ────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 819 813 578 477 824 199  53 759 280 787</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

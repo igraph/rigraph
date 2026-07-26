@@ -5,7 +5,13 @@ Creates a separate graph for each connected component of a graph.
 ## Usage
 
 ``` r
-decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
+decompose(
+  graph,
+  ...,
+  mode = c("weak", "strong"),
+  max.comps = NA,
+  min.vertices = 0
+)
 ```
 
 ## Arguments
@@ -13,6 +19,10 @@ decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
 - graph:
 
   The original graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

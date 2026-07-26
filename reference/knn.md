@@ -9,6 +9,7 @@ the same quantity in the function of vertex degree
 knn(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL
@@ -27,6 +28,10 @@ knn(
   includes all vertices. Note, that if not all vertices are given here,
   then both ‘`knn`’ and ‘`knnk`’ will be calculated based on the given
   vertices only.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

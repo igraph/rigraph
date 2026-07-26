@@ -63,10 +63,11 @@ vertices and all the edges among them.</p>
 <span><span class="fu">induced_subgraph</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">vids</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  impl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"copy_and_delete"</span>, <span class="st">"create_from_scratch"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">subgraph_from_edges</span><span class="op">(</span><span class="va">graph</span>, <span class="va">eids</span>, delete.vertices <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">subgraph_from_edges</span><span class="op">(</span><span class="va">graph</span>, <span class="va">eids</span>, <span class="va">...</span>, delete.vertices <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,6 +81,10 @@ vertices and all the edges among them.</p>
 <dt id="arg-vids">vids<a class="anchor" aria-label="anchor" href="#arg-vids"></a></dt>
 <dd><p>Numeric vector, the vertices of the original graph which will
 form the subgraph.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-impl">impl<a class="anchor" aria-label="anchor" href="#arg-impl"></a></dt>
