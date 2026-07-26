@@ -44,7 +44,7 @@ g <- make_ring(10)
 shortest_paths(g, 8, 2)
 #> $vpath
 #> $vpath[[1]]
-#> ── <vertex sequence> 5/10 · from bea3e6a ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 537b0a6 ───────────────────────────────────────
 #> [1]  8  9 10  1  2
 #> 
 #> 
@@ -61,7 +61,7 @@ E(g)$weight <- seq_len(ecount(g))
 shortest_paths(g, 8, 2)
 #> $vpath
 #> $vpath[[1]]
-#> ── <vertex sequence> 7/10 · from bea3e6a ───────────────────────────────────────
+#> ── <vertex sequence> 7/10 · from 537b0a6 ───────────────────────────────────────
 #> [1] 8 7 6 5 4 3 2
 #> 
 #> 

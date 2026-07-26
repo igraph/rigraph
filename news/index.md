@@ -1,5 +1,11 @@
 # Changelog
 
+## igraph 2.3.3.9021
+
+### Continuous integration
+
+- Lock down `format-suggest` egress (audit → block).
+
 ## igraph 2.3.3.9020
 
 ### Bug fixes
