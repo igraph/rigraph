@@ -106,6 +106,7 @@ Connected components:
 \code{\link[=is_biconnected]{is_biconnected()}}
 
 Other structural.properties:
+\code{\link[=any_mutual]{any_mutual()}},
 \code{\link[=bfs]{bfs()}},
 \code{\link[=connect]{connect()}},
 \code{\link[=constraint]{constraint()}},

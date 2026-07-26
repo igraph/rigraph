@@ -559,3 +559,127 @@ test_that("make_turan() works", {
   g5 <- make_(turan(10, 2))
   expect_vcount(g5, 10)
 })
+
+test_that("make_generalized_petersen works", {
+  # GP(5, 2) is the well-known Petersen graph
+  g <- make_generalized_petersen(5, 2)
+  expect_vcount(g, 10)
+  expect_ecount(g, 15)
+  expect_false(is_directed(g))
+  expect_isomorphic(g, make_graph("Petersen"))
+  expect_equal(g$name, "Generalized Petersen graph")
+  expect_equal(g$n, 5)
+  expect_equal(g$k, 2)
+
+  # Generalized Petersen graphs are cubic
+  g2 <- make_generalized_petersen(7, 3)
+  expect_vcount(g2, 14)
+  expect_ecount(g2, 21)
+  expect_equal(degree(g2), rep(3, 14))
+
+  # GP(n, 1) is the n-prism
+  prism <- make_generalized_petersen(4, 1)
+  expect_isomorphic(prism, make_graph("Cubical"))
+})
+
+test_that("make_generalized_petersen prints as expected", {
+  expect_snapshot(make_generalized_petersen(5, 2))
+})
+
+test_that("make_generalized_petersen rejects invalid arguments", {
+  expect_snapshot_igraph_error(make_generalized_petersen(2, 1))
+  expect_snapshot_igraph_error(make_generalized_petersen(5, 3))
+})
+
+test_that("generalized_petersen constructor spec works with make_()", {
+  g1 <- make_generalized_petersen(6, 2)
+  g2 <- make_(generalized_petersen(6, 2))
+  expect_identical_graphs(g1, g2)
+})
+
+test_that("make_regular_tree works", {
+  # In a regular tree all internal vertices have the same degree,
+  # the root included
+  g <- make_regular_tree(2)
+  expect_vcount(g, 10)
+  expect_ecount(g, 9)
+  expect_false(is_directed(g))
+  expect_equal(sort(unique(degree(g))), c(1, 3))
+  expect_equal(degree(g, 1), 3)
+  expect_equal(g$name, "Regular tree")
+  expect_equal(g$h, 2)
+  expect_equal(g$k, 3)
+
+  # This differs from a k-ary tree, whose root has one fewer neighbor
+  kary <- make_tree(10, 3, mode = "undirected")
+  expect_equal(degree(kary, 1), 3)
+  expect_equal(max(degree(kary)), 4)
+
+  # Directed variants
+  g_out <- make_regular_tree(2, k = 2, mode = "out")
+  expect_true(is_directed(g_out))
+  expect_equal(degree(g_out, 1, mode = "out"), 2)
+
+  g_in <- make_regular_tree(2, k = 2, mode = "in")
+  expect_true(is_directed(g_in))
+  expect_equal(degree(g_in, 1, mode = "in"), 2)
+})
+
+test_that("make_regular_tree prints as expected", {
+  expect_snapshot(make_regular_tree(2))
+})
+
+test_that("make_regular_tree rejects invalid arguments", {
+  expect_snapshot_igraph_error(make_regular_tree(-1))
+  expect_snapshot_igraph_error(make_regular_tree(2, k = 1))
+  expect_snapshot_igraph_error(make_regular_tree(2, 3, "out"))
+})
+
+test_that("regular_tree constructor spec works with make_()", {
+  g1 <- make_regular_tree(3, k = 2)
+  g2 <- make_(regular_tree(3, k = 2))
+  expect_identical_graphs(g1, g2)
+})
+
+test_that("make_symmetric_tree works", {
+  # The root has three children, each of which has two children
+  g <- make_symmetric_tree(c(3, 2))
+  expect_vcount(g, 10)
+  expect_ecount(g, 9)
+  expect_true(is_directed(g))
+  expect_equal(degree(g, 1, mode = "out"), 3)
+  expect_equal(sort(unique(degree(g, mode = "out"))), c(0, 2, 3))
+  expect_equal(g$name, "Symmetric tree")
+  expect_equal(g$branches, c(3, 2))
+
+  # Directed variant with edges pointing towards the root
+  g_in <- make_symmetric_tree(c(2, 2), mode = "in")
+  expect_true(is_directed(g_in))
+  expect_equal(degree(g_in, 1, mode = "in"), 2)
+
+  # Undirected variant
+  g_undirected <- make_symmetric_tree(c(2, 2), mode = "undirected")
+  expect_false(is_directed(g_undirected))
+  expect_vcount(g_undirected, 7)
+
+  # A symmetric tree with constant branching is a k-ary tree
+  expect_isomorphic(
+    make_symmetric_tree(c(2, 2), mode = "out"),
+    make_tree(7, 2, mode = "out")
+  )
+})
+
+test_that("make_symmetric_tree prints as expected", {
+  expect_snapshot(make_symmetric_tree(c(3, 2)))
+})
+
+test_that("make_symmetric_tree rejects invalid arguments", {
+  expect_snapshot_igraph_error(make_symmetric_tree(c(2, -2)))
+  expect_snapshot_igraph_error(make_symmetric_tree(c(2, 2), "out"))
+})
+
+test_that("symmetric_tree constructor spec works with make_()", {
+  g1 <- make_symmetric_tree(c(2, 3))
+  g2 <- make_(symmetric_tree(c(2, 3)))
+  expect_identical_graphs(g1, g2)
+})

@@ -1069,6 +1069,34 @@ test_that("reciprocity works", {
   expect_equal(reciprocity(g, ignore.loops = FALSE), 0.6)
 })
 
+test_that("any_mutual works", {
+  g <- make_ring(10, directed = TRUE)
+  expect_false(any_mutual(g))
+
+  g2 <- add_edges(g, c(2, 1))
+  expect_true(any_mutual(g2))
+
+  # Undirected graphs contain only mutual edges
+  expect_true(any_mutual(make_ring(10)))
+
+  # Graphs without edges have no mutual edges
+  expect_false(any_mutual(make_empty_graph(3, directed = TRUE)))
+
+  # Directed self-loops are considered mutual by default
+  g3 <- make_graph(c(1, 1), directed = TRUE)
+  expect_true(any_mutual(g3))
+  expect_false(any_mutual(g3, loops = FALSE))
+
+  # Consistency with which_mutual()
+  g4 <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
+  expect_identical(any_mutual(g4), any(which_mutual(g4)))
+})
+
+test_that("any_mutual rejects invalid arguments", {
+  g <- make_ring(10, directed = TRUE)
+  expect_snapshot_igraph_error(any_mutual(g, FALSE))
+})
+
 test_that("feedback_arc_set works", {
   skip_if_no_glpk()
 

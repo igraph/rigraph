@@ -41,6 +41,7 @@ feedback_vertex_set(g)
 }
 \seealso{
 Other structural.properties:
+\code{\link[=any_mutual]{any_mutual()}},
 \code{\link[=bfs]{bfs()}},
 \code{\link[=component_distribution]{component_distribution()}},
 \code{\link[=connect]{connect()}},
