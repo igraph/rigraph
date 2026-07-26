@@ -1413,3 +1413,39 @@ test_that("simplify() rejects 'rename' combiner", {
     "rename"
   )
 })
+
+# Mycielski transformation ------------------------------------------------
+
+test_that("mycielskian() works", {
+  # The Mycielskian of a triangle: n = 3, m = 3,
+  # so 2 * n + 1 = 7 vertices and 3 * m + n = 12 edges
+  g <- make_full_graph(3)
+  mg <- mycielskian(g)
+  expect_vcount(mg, 7)
+  expect_ecount(mg, 12)
+  expect_false(is_directed(mg))
+
+  # k = 0 returns the graph unchanged
+  g2 <- make_ring(5)
+  mg2 <- mycielskian(g2, k = 0)
+  expect_isomorphic(g2, mg2)
+
+  # The Mycielskian of the pentagon is the Groetzsch graph
+  mg3 <- mycielskian(make_ring(5), k = 1)
+  expect_isomorphic(mg3, make_mycielski_graph(4))
+
+  # Multiple iterations: (n + 1) * 2^k - 1 vertices
+  mg4 <- mycielskian(make_ring(5), k = 2)
+  expect_vcount(mg4, 23)
+  expect_ecount(mg4, 71)
+
+  # The transformation preserves the triangle-free property
+  expect_equal(sum(count_triangles(mg4)), 0)
+})
+
+test_that("mycielskian() errors", {
+  expect_snapshot_igraph_error(mycielskian(make_ring(3), k = -1))
+  expect_snapshot(error = TRUE, {
+    mycielskian(make_ring(3), 2, TRUE)
+  })
+})

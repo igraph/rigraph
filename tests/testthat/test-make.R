@@ -559,3 +559,42 @@ test_that("make_turan() works", {
   g5 <- make_(turan(10, 2))
   expect_vcount(g5, 10)
 })
+
+test_that("make_mycielski_graph() works", {
+  # M_0 is the null graph
+  g0 <- make_mycielski_graph(0)
+  expect_vcount(g0, 0)
+  expect_ecount(g0, 0)
+
+  # M_1 is the singleton graph
+  g1 <- make_mycielski_graph(1)
+  expect_vcount(g1, 1)
+  expect_ecount(g1, 0)
+
+  # M_2 is the path graph with two vertices
+  g2 <- make_mycielski_graph(2)
+  expect_vcount(g2, 2)
+  expect_ecount(g2, 1)
+
+  # M_3 is the cycle graph with five vertices
+  g3 <- make_mycielski_graph(3)
+  expect_isomorphic(g3, make_ring(5))
+
+  # M_4 is the Groetzsch graph: triangle-free with chromatic number 4
+  g4 <- make_mycielski_graph(4)
+  expect_vcount(g4, 11)
+  expect_ecount(g4, 20)
+  expect_false(is_directed(g4))
+  expect_equal(sum(count_triangles(g4)), 0)
+
+  # Test constructor spec form
+  g5 <- make_(mycielski_graph(4))
+  expect_isomorphic(g5, g4)
+})
+
+test_that("make_mycielski_graph() errors", {
+  expect_snapshot_igraph_error(make_mycielski_graph(-1))
+  expect_snapshot(error = TRUE, {
+    make_mycielski_graph(3, directed = TRUE)
+  })
+})
