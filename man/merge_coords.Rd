@@ -5,7 +5,7 @@
 \alias{layout_components}
 \title{Merging graph layouts}
 \usage{
-merge_coords(graphs, layouts, method = "dla")
+merge_coords(graphs, layouts, ..., method = "dla")
 
 layout_components(graph, layout = layout_with_kk, ...)
 }

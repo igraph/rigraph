@@ -7,6 +7,7 @@
 \usage{
 layout_as_tree(
   graph,
+  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),

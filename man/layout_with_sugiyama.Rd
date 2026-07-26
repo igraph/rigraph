@@ -7,6 +7,7 @@
 \usage{
 layout_with_sugiyama(
   graph,
+  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,

@@ -5,12 +5,14 @@
 \alias{ring}
 \title{Create a ring graph}
 \usage{
-make_ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
+make_ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
 
-ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
+ring(n, ..., directed = FALSE, mutual = FALSE, circular = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether the graph is directed.}
 

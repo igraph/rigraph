@@ -59,6 +59,7 @@ rewire <- function(graph, with) {
 #' already exists in the graph. The algorithm does not create multiple
 #' edges.
 #'
+#' @inheritParams rlang::args_dots_empty
 #' @param loops Whether to allow destroying and creating loop edges.
 #' @param niter Number of rewiring trials to perform.
 #'
@@ -74,7 +75,33 @@ rewire <- function(graph, with) {
 #'   rewire(keeping_degseq(niter = 20)) %>%
 #'   degree()
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-keeping_degseq <- function(loops = FALSE, niter = 100) {
+keeping_degseq <- function(
+  ...,
+  loops = FALSE,
+  niter = 100
+) {
+  # BEGIN GENERATED ARG_HANDLE: keeping_degseq, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, niter = niter),
+      recover_new = c("loops", "niter"),
+      recover_old = c("loops", "niter"),
+      match_names = c("loops", "niter"),
+      match_to = c("loops", "niter"),
+      defaults = list(loops = FALSE, niter = 100),
+      head_args = character(0),
+      fn_name = "keeping_degseq"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   method <- list(
     fun = rewire_keeping_degseq,
     args = list(loops = loops, niter = niter)
@@ -102,6 +129,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' Note that this method might create graphs with multiple and/or loop edges.
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
+#' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether loop edges are allowed in the rewired
 #'   graph.
 #' @param multiple Logical, whether multiple edges are allowed in the
@@ -130,10 +158,37 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: each_edge, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, multiple = multiple, mode = mode),
+      recover_new = c("loops", "multiple", "mode"),
+      recover_old = c("loops", "multiple", "mode"),
+      match_names = c("loops", "multiple", "mode"),
+      match_to = c("loops", "multiple", "mode"),
+      defaults = list(
+        loops = FALSE,
+        multiple = FALSE,
+        mode = c("all", "out", "in", "total")
+      ),
+      head_args = c("prob"),
+      fn_name = "each_edge"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
   multiple <- as.logical(multiple)
   if (mode != "all" && mode != "total") {

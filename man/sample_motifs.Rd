@@ -7,6 +7,7 @@
 sample_motifs(
   graph,
   size = 3,
+  ...,
   cut.prob = rep(0, size),
   sample.size = NULL,
   sample = NULL
@@ -17,6 +18,8 @@ sample_motifs(
 
 \item{size}{The size of the motif, currently size 3 and 4 are supported
 in directed graphs and sizes 3-6 in undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size

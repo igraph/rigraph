@@ -7,6 +7,7 @@
 \usage{
 layout_with_fr(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,

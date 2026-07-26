@@ -10,6 +10,7 @@
 degree(
   graph,
   v = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
@@ -23,7 +24,7 @@ max_degree(
   loops = TRUE
 )
 
-mean_degree(graph, loops = TRUE)
+mean_degree(graph, ..., loops = TRUE)
 
 degree_distribution(graph, cumulative = FALSE, ...)
 }

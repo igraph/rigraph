@@ -5,7 +5,7 @@
 \alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{
-layout_as_star(graph, center = V(graph)[1], order = NULL)
+layout_as_star(graph, ..., center = V(graph)[1], order = NULL)
 
 as_star(...)
 }

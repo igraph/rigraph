@@ -8,6 +8,7 @@
 bipartite_projection(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
@@ -23,6 +24,8 @@ ignored during the computation.}
 \item{types}{An optional vertex type vector to use instead of the
 \sQuote{\code{type}} vertex attribute. You must supply this argument if the
 graph has no \sQuote{\code{type}} vertex attribute.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of
 the edges as an edge attribute called \sQuote{weight}.

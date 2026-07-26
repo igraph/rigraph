@@ -8,7 +8,7 @@
 \usage{
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
-graph_from_data_frame(d, directed = TRUE, vertices = NULL)
+graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
 
 from_data_frame(...)
 }

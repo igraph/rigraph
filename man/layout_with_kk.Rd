@@ -7,10 +7,11 @@
 \usage{
 layout_with_kk(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   maxiter = 50 * vcount(graph),
-  epsilon = 0,
+  epsilon = 0.0,
   kkconst = max(vcount(graph), 1),
   weights = NULL,
   minx = NULL,

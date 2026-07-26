@@ -5,7 +5,7 @@
 \alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{
-layout_as_bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
+layout_as_bipartite(graph, types = NULL, ..., hgap = 1, vgap = 1, maxiter = 100)
 
 as_bipartite(...)
 }

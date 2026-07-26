@@ -8,15 +8,15 @@
 \alias{sir}
 \title{SIR model on graphs}
 \usage{
-time_bins(x, middle = TRUE)
+time_bins(x, ..., middle = TRUE)
 
-\method{time_bins}{sir}(x, middle = TRUE)
+\method{time_bins}{sir}(x, ..., middle = TRUE)
 
 \method{median}{sir}(x, na.rm = FALSE, ...)
 
 \method{quantile}{sir}(x, comp = c("NI", "NS", "NR"), prob, ...)
 
-sir(graph, beta, gamma, no.sim = 100)
+sir(graph, beta, gamma, ..., no.sim = 100)
 }
 \arguments{
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}

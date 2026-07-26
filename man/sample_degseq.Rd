@@ -8,6 +8,7 @@
 sample_degseq(
   out.deg,
   in.deg = NULL,
+  ...,
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
     "edge.switching.simple")
 )

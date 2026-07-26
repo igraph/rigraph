@@ -5,7 +5,7 @@
 \alias{from_edgelist}
 \title{Create a graph from an edge list matrix}
 \usage{
-graph_from_edgelist(el, directed = TRUE)
+graph_from_edgelist(el, ..., directed = TRUE)
 
 from_edgelist(...)
 }

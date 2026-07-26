@@ -5,7 +5,7 @@
 \alias{on_grid}
 \title{Simple grid layout}
 \usage{
-layout_on_grid(graph, width = 0, height = 0, dim = 2)
+layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 
 on_grid(...)
 }

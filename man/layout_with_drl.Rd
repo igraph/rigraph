@@ -13,6 +13,7 @@
 \usage{
 layout_with_drl(
   graph,
+  ...,
   use.seed = FALSE,
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,

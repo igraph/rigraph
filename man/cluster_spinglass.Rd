@@ -6,6 +6,7 @@
 \usage{
 cluster_spinglass(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -14,13 +15,15 @@ cluster_spinglass(
   stop.temp = 0.01,
   cool.fact = 0.99,
   update.rule = c("config", "random", "simple"),
-  gamma = 1,
+  gamma = 1.0,
   implementation = c("orig", "neg"),
-  gamma.minus = 1
+  gamma.minus = 1.0
 )
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored in directed graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

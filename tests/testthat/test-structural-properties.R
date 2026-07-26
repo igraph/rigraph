@@ -758,7 +758,7 @@ test_that("unfold_tree() works", {
 })
 
 test_that("count_components() counts correctly", {
-  g <- make_star(20, "undirected")
+  g <- make_star(20, mode = "undirected")
   h <- make_ring(10)
 
   G <- disjoint_union(g, h)

@@ -7,10 +7,11 @@
 embed_adjacency_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
+  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
   options = arpack_defaults()
 )
 }
@@ -21,6 +22,8 @@ embed_adjacency_matrix(
 spectral embedding. Should be smaller than the number of vertices. The
 largest \code{no}-dimensional non-zero singular values are used for the
 spectral embedding.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Optional positive weight vector for calculating a weighted
 embedding. If the graph has a \code{weight} edge attribute, then this is

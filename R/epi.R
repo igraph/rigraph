@@ -20,8 +20,13 @@
 ###################################################################
 
 #' @rdname sir
+#' @inheritParams rlang::args_dots_empty
 #' @export
-time_bins <- function(x, middle = TRUE) {
+time_bins <- function(
+  x,
+  ...,
+  middle = TRUE
+) {
   UseMethod("time_bins")
 }
 
@@ -29,7 +34,29 @@ time_bins <- function(x, middle = TRUE) {
 #' @rdname sir
 #' @export
 #' @importFrom stats IQR
-time_bins.sir <- function(x, middle = TRUE) {
+time_bins.sir <- function(x, ..., middle = TRUE) {
+  # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(middle = middle),
+      recover_new = c("middle"),
+      recover_old = c("middle"),
+      match_names = c("middle"),
+      match_to = c("middle"),
+      defaults = list(middle = TRUE),
+      head_args = c("x"),
+      fn_name = "time_bins"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   sir <- x
 
   big.time <- unlist(sapply(sir, "[[", "times"))

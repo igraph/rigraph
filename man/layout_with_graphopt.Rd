@@ -7,6 +7,7 @@
 \usage{
 layout_with_graphopt(
   graph,
+  ...,
   start = NULL,
   niter = 500,
   charge = 0.001,

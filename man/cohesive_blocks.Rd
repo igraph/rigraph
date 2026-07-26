@@ -17,7 +17,7 @@
 \alias{max_cohesion}
 \title{Calculate Cohesive Blocks}
 \usage{
-cohesive_blocks(graph, labels = TRUE)
+cohesive_blocks(graph, ..., labels = TRUE)
 
 \method{length}{cohesiveBlocks}(x)
 
@@ -50,7 +50,7 @@ plot_hierarchy(
   ...
 )
 
-export_pajek(blocks, graph, file, project.file = TRUE)
+export_pajek(blocks, graph, file, ..., project.file = TRUE)
 
 max_cohesion(blocks)
 }

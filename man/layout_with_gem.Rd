@@ -7,10 +7,11 @@
 \usage{
 layout_with_gem(
   graph,
+  ...,
   coords = NULL,
   maxiter = 40 * vcount(graph)^2,
   temp.max = max(vcount(graph), 1),
-  temp.min = 1/10,
+  temp.min = 1 / 10,
   temp.init = sqrt(max(vcount(graph), 1))
 )
 

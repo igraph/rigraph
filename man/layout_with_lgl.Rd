@@ -7,6 +7,7 @@
 \usage{
 layout_with_lgl(
   graph,
+  ...,
   maxiter = 150,
   maxdelta = vcount(graph),
   area = vcount(graph)^2,

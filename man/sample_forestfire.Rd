@@ -4,12 +4,14 @@
 \alias{sample_forestfire}
 \title{Forest Fire Network Model}
 \usage{
-sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
+sample_forestfire(nodes, fw.prob, ..., bw.factor = 1, ambs = 1, directed = TRUE)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
 
 \item{fw.prob}{The forward burning probability, see details below.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{bw.factor}{The backward burning ratio. The backward burning
 probability is calculated as \code{bw.factor*fw.prob}.}

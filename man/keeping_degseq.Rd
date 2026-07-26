@@ -4,9 +4,11 @@
 \alias{keeping_degseq}
 \title{Graph rewiring while preserving the degree distribution}
 \usage{
-keeping_degseq(loops = FALSE, niter = 100)
+keeping_degseq(..., loops = FALSE, niter = 100)
 }
 \arguments{
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{loops}{Whether to allow destroying and creating loop edges.}
 
 \item{niter}{Number of rewiring trials to perform.}
