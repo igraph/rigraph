@@ -114,7 +114,7 @@ test_that("largest strongly and weakly components are correct", {
     B -+ C,
     C -+ A
   )
-  expect_isomorphic(largest_component(g, "strong"), strongly)
+  expect_isomorphic(largest_component(g, mode = "strong"), strongly)
 
   weakly <- graph_from_literal(
     A -+ B,
@@ -122,7 +122,7 @@ test_that("largest strongly and weakly components are correct", {
     C -+ A,
     C -+ D
   )
-  expect_isomorphic(largest_component(g, "weak"), weakly)
+  expect_isomorphic(largest_component(g, mode = "weak"), weakly)
 })
 
 test_that("the largest component of a null graph is a valid null graph", {
