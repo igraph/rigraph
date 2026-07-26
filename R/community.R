@@ -782,16 +782,15 @@ make_clusters <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        algorithm = algorithm,
-        merges = merges,
-        modularity = modularity
+      supplied = c(
+        algorithm = !missing(algorithm),
+        merges = !missing(merges),
+        modularity = !missing(modularity)
       ),
       recover_new = c("algorithm", "merges", "modularity"),
       recover_old = c("algorithm", "merges", "modularity"),
       match_names = c("algorithm", "merges", "modularity"),
       match_to = c("algorithm", "merges", "modularity"),
-      defaults = list(algorithm = NULL, merges = NULL, modularity = TRUE),
       head_args = c("graph", "membership"),
       fn_name = "make_clusters"
     )
@@ -980,16 +979,15 @@ modularity_matrix <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        resolution = resolution,
-        directed = directed
+      supplied = c(
+        weights = !missing(weights),
+        resolution = !missing(resolution),
+        directed = !missing(directed)
       ),
       recover_new = c("weights", "resolution", "directed"),
       recover_old = c("weights", "resolution", "directed"),
       match_names = c("weights", "resolution", "directed"),
       match_to = c("weights", "resolution", "directed"),
-      defaults = list(weights = NULL, resolution = 1, directed = TRUE),
       head_args = c("graph", "membership"),
       fn_name = "modularity_matrix"
     )
@@ -1552,18 +1550,18 @@ cluster_spinglass <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        vertex = vertex,
-        spins = spins,
-        parupdate = parupdate,
-        start.temp = start.temp,
-        stop.temp = stop.temp,
-        cool.fact = cool.fact,
-        update.rule = update.rule,
-        gamma = gamma,
-        implementation = implementation,
-        gamma.minus = gamma.minus
+      supplied = c(
+        weights = !missing(weights),
+        vertex = !missing(vertex),
+        spins = !missing(spins),
+        parupdate = !missing(parupdate),
+        start.temp = !missing(start.temp),
+        stop.temp = !missing(stop.temp),
+        cool.fact = !missing(cool.fact),
+        update.rule = !missing(update.rule),
+        gamma = !missing(gamma),
+        implementation = !missing(implementation),
+        gamma.minus = !missing(gamma.minus)
       ),
       recover_new = c(
         "weights",
@@ -1616,19 +1614,6 @@ cluster_spinglass <- function(
         "gamma",
         "implementation",
         "gamma.minus"
-      ),
-      defaults = list(
-        weights = NULL,
-        vertex = NULL,
-        spins = 25,
-        parupdate = FALSE,
-        start.temp = 1,
-        stop.temp = 0.01,
-        cool.fact = 0.99,
-        update.rule = c("config", "random", "simple"),
-        gamma = 1,
-        implementation = c("orig", "neg"),
-        gamma.minus = 1
       ),
       head_args = c("graph"),
       fn_name = "cluster_spinglass"
@@ -2031,24 +2016,17 @@ cluster_walktrap <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        steps = steps,
-        merges = merges,
-        modularity = modularity,
-        membership = membership
+      supplied = c(
+        weights = !missing(weights),
+        steps = !missing(steps),
+        merges = !missing(merges),
+        modularity = !missing(modularity),
+        membership = !missing(membership)
       ),
       recover_new = c("weights", "steps", "merges", "modularity", "membership"),
       recover_old = c("weights", "steps", "merges", "modularity", "membership"),
       match_names = c("weights", "steps", "merges", "modularity", "membership"),
       match_to = c("weights", "steps", "merges", "modularity", "membership"),
-      defaults = list(
-        weights = NULL,
-        steps = 4,
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
-      ),
       head_args = c("graph"),
       fn_name = "cluster_walktrap"
     )
@@ -2199,14 +2177,14 @@ cluster_edge_betweenness <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        directed = directed,
-        edge.betweenness = edge.betweenness,
-        merges = merges,
-        bridges = bridges,
-        modularity = modularity,
-        membership = membership
+      supplied = c(
+        weights = !missing(weights),
+        directed = !missing(directed),
+        edge.betweenness = !missing(edge.betweenness),
+        merges = !missing(merges),
+        bridges = !missing(bridges),
+        modularity = !missing(modularity),
+        membership = !missing(membership)
       ),
       recover_new = c(
         "weights",
@@ -2243,15 +2221,6 @@ cluster_edge_betweenness <- function(
         "bridges",
         "modularity",
         "membership"
-      ),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        edge.betweenness = TRUE,
-        merges = TRUE,
-        bridges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
       ),
       head_args = c("graph"),
       fn_name = "cluster_edge_betweenness"
@@ -2363,22 +2332,16 @@ cluster_fast_greedy <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        merges = merges,
-        modularity = modularity,
-        membership = membership,
-        weights = weights
+      supplied = c(
+        merges = !missing(merges),
+        modularity = !missing(modularity),
+        membership = !missing(membership),
+        weights = !missing(weights)
       ),
       recover_new = c("merges", "modularity", "membership", "weights"),
       recover_old = c("merges", "modularity", "membership", "weights"),
       match_names = c("merges", "modularity", "membership", "weights"),
       match_to = c("merges", "modularity", "membership", "weights"),
-      defaults = list(
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE,
-        weights = NULL
-      ),
       head_args = c("graph"),
       fn_name = "cluster_fast_greedy"
     )
@@ -2820,12 +2783,14 @@ cluster_louvain <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights, resolution = resolution),
+      supplied = c(
+        weights = !missing(weights),
+        resolution = !missing(resolution)
+      ),
       recover_new = c("weights", "resolution"),
       recover_old = c("weights", "resolution"),
       match_names = c("weights", "resolution"),
       match_to = c("weights", "resolution"),
-      defaults = list(weights = NULL, resolution = 1),
       head_args = c("graph"),
       fn_name = "cluster_louvain"
     )
@@ -2939,12 +2904,11 @@ cluster_optimal <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights),
+      supplied = c(weights = !missing(weights)),
       recover_new = c("weights"),
       recover_old = c("weights"),
       match_names = c("weights"),
       match_to = c("weights"),
-      defaults = list(weights = NULL),
       head_args = c("graph"),
       fn_name = "cluster_optimal"
     )
@@ -3048,22 +3012,16 @@ cluster_infomap <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        e.weights = e.weights,
-        v.weights = v.weights,
-        nb.trials = nb.trials,
-        modularity = modularity
+      supplied = c(
+        e.weights = !missing(e.weights),
+        v.weights = !missing(v.weights),
+        nb.trials = !missing(nb.trials),
+        modularity = !missing(modularity)
       ),
       recover_new = c("e.weights", "v.weights", "nb.trials", "modularity"),
       recover_old = c("e.weights", "v.weights", "nb.trials", "modularity"),
       match_names = c("e.weights", "v.weights", "nb.trials", "modularity"),
       match_to = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      defaults = list(
-        e.weights = NULL,
-        v.weights = NULL,
-        nb.trials = 10,
-        modularity = TRUE
-      ),
       head_args = c("graph"),
       fn_name = "cluster_infomap"
     )

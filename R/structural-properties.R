@@ -762,16 +762,15 @@ diameter <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        directed = directed,
-        unconnected = unconnected,
-        weights = weights
+      supplied = c(
+        directed = !missing(directed),
+        unconnected = !missing(unconnected),
+        weights = !missing(weights)
       ),
       recover_new = c("directed", "unconnected", "weights"),
       recover_old = c("directed", "unconnected", "weights"),
       match_names = c("directed", "unconnected", "weights"),
       match_to = c("directed", "unconnected", "weights"),
-      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
       head_args = c("graph"),
       fn_name = "diameter"
     )
@@ -819,16 +818,15 @@ get_diameter <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        directed = directed,
-        unconnected = unconnected,
-        weights = weights
+      supplied = c(
+        directed = !missing(directed),
+        unconnected = !missing(unconnected),
+        weights = !missing(weights)
       ),
       recover_new = c("directed", "unconnected", "weights"),
       recover_old = c("directed", "unconnected", "weights"),
       match_names = c("directed", "unconnected", "weights"),
       match_to = c("directed", "unconnected", "weights"),
-      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
       head_args = c("graph"),
       fn_name = "get_diameter"
     )
@@ -883,16 +881,15 @@ farthest_vertices <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        directed = directed,
-        unconnected = unconnected,
-        weights = weights
+      supplied = c(
+        directed = !missing(directed),
+        unconnected = !missing(unconnected),
+        weights = !missing(weights)
       ),
       recover_new = c("directed", "unconnected", "weights"),
       recover_old = c("directed", "unconnected", "weights"),
       match_names = c("directed", "unconnected", "weights"),
       match_to = c("directed", "unconnected", "weights"),
-      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
       head_args = c("graph"),
       fn_name = "farthest_vertices"
     )
@@ -948,22 +945,16 @@ mean_distance <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        directed = directed,
-        unconnected = unconnected,
-        details = details
+      supplied = c(
+        weights = !missing(weights),
+        directed = !missing(directed),
+        unconnected = !missing(unconnected),
+        details = !missing(details)
       ),
       recover_new = c("weights", "directed", "unconnected", "details"),
       recover_old = c("weights", "directed", "unconnected", "details"),
       match_names = c("weights", "directed", "unconnected", "details"),
       match_to = c("weights", "directed", "unconnected", "details"),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        unconnected = TRUE,
-        details = FALSE
-      ),
       head_args = c("graph"),
       fn_name = "mean_distance"
     )
@@ -1040,16 +1031,15 @@ degree <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, loops = loops, normalized = normalized),
+      supplied = c(
+        mode = !missing(mode),
+        loops = !missing(loops),
+        normalized = !missing(normalized)
+      ),
       recover_new = c("mode", "loops", "normalized"),
       recover_old = c("mode", "loops", "normalized"),
       match_names = c("mode", "loops", "normalized"),
       match_to = c("mode", "loops", "normalized"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = TRUE,
-        normalized = FALSE
-      ),
       head_args = c("graph", "v"),
       fn_name = "degree"
     )
@@ -1111,12 +1101,11 @@ mean_degree <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(loops = loops),
+      supplied = c(loops = !missing(loops)),
       recover_new = c("loops"),
       recover_old = c("loops"),
       match_names = c("loops"),
       match_to = c("loops"),
-      defaults = list(loops = TRUE),
       head_args = c("graph"),
       fn_name = "mean_degree"
     )
@@ -1378,16 +1367,15 @@ distances <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, weights = weights, algorithm = algorithm),
+      supplied = c(
+        mode = !missing(mode),
+        weights = !missing(weights),
+        algorithm = !missing(algorithm)
+      ),
       recover_new = c("mode", "weights", "algorithm"),
       recover_old = c("mode", "weights", "algorithm"),
       match_names = c("mode", "weights", "algorithm"),
       match_to = c("mode", "weights", "algorithm"),
-      defaults = list(
-        mode = c("all", "out", "in"),
-        weights = NULL,
-        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall")
-      ),
       head_args = c("graph", "v", "to"),
       fn_name = "distances"
     )
@@ -1499,13 +1487,13 @@ shortest_paths <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        mode = mode,
-        weights = weights,
-        output = output,
-        predecessors = predecessors,
-        inbound.edges = inbound.edges,
-        algorithm = algorithm
+      supplied = c(
+        mode = !missing(mode),
+        weights = !missing(weights),
+        output = !missing(output),
+        predecessors = !missing(predecessors),
+        inbound.edges = !missing(inbound.edges),
+        algorithm = !missing(algorithm)
       ),
       recover_new = c(
         "mode",
@@ -1538,14 +1526,6 @@ shortest_paths <- function(
         "predecessors",
         "inbound.edges",
         "algorithm"
-      ),
-      defaults = list(
-        mode = c("out", "all", "in"),
-        weights = NULL,
-        output = c("vpath", "epath", "both"),
-        predecessors = FALSE,
-        inbound.edges = FALSE,
-        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
       ),
       head_args = c("graph", "from", "to"),
       fn_name = "shortest_paths"
@@ -1670,12 +1650,11 @@ all_shortest_paths <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, weights = weights),
+      supplied = c(mode = !missing(mode), weights = !missing(weights)),
       recover_new = c("mode", "weights"),
       recover_old = c("mode", "weights"),
       match_names = c("mode", "weights"),
       match_to = c("mode", "weights"),
-      defaults = list(mode = c("out", "all", "in"), weights = NULL),
       head_args = c("graph", "from", "to"),
       fn_name = "all_shortest_paths"
     )
@@ -1818,12 +1797,11 @@ subcomponent <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("all", "out", "in")),
       head_args = c("graph", "v"),
       fn_name = "subcomponent"
     )
@@ -1914,14 +1892,11 @@ induced_subgraph <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(impl = impl),
+      supplied = c(impl = !missing(impl)),
       recover_new = c("impl"),
       recover_old = c("impl"),
       match_names = c("impl"),
       match_to = c("impl"),
-      defaults = list(
-        impl = c("auto", "copy_and_delete", "create_from_scratch")
-      ),
       head_args = c("graph", "vids"),
       fn_name = "induced_subgraph"
     )
@@ -1965,12 +1940,11 @@ subgraph_from_edges <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(delete.vertices = delete.vertices),
+      supplied = c(delete.vertices = !missing(delete.vertices)),
       recover_new = c("delete.vertices"),
       recover_old = c("delete.vertices"),
       match_names = c("delete.vertices"),
       match_to = c("delete.vertices"),
-      defaults = list(delete.vertices = TRUE),
       head_args = c("graph", "eids"),
       fn_name = "subgraph_from_edges"
     )
@@ -2161,12 +2135,15 @@ transitivity <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(vids = vids, weights = weights, isolates = isolates),
+      supplied = c(
+        vids = !missing(vids),
+        weights = !missing(weights),
+        isolates = !missing(isolates)
+      ),
       recover_new = c("vids", "weights", "isolates"),
       recover_old = c("vids", "weights", "isolates"),
       match_names = c("vids", "weights", "isolates"),
       match_to = c("vids", "weights", "isolates"),
-      defaults = list(vids = NULL, weights = NULL, isolates = c("NaN", "zero")),
       head_args = c("graph", "type"),
       fn_name = "transitivity"
     )
@@ -2336,12 +2313,11 @@ constraint <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights),
+      supplied = c(weights = !missing(weights)),
       recover_new = c("weights"),
       recover_old = c("weights"),
       match_names = c("weights"),
       match_to = c("weights"),
-      defaults = list(weights = NULL),
       head_args = c("graph", "nodes"),
       fn_name = "constraint"
     )
@@ -2419,12 +2395,14 @@ reciprocity <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(ignore.loops = ignore.loops, mode = mode),
+      supplied = c(
+        ignore.loops = !missing(ignore.loops),
+        mode = !missing(mode)
+      ),
       recover_new = c("ignore.loops", "mode"),
       recover_old = c("ignore.loops", "mode"),
       match_names = c("ignore.loops", "mode"),
       match_to = c("ignore.loops", "mode"),
-      defaults = list(ignore.loops = TRUE, mode = c("default", "ratio")),
       head_args = c("graph"),
       fn_name = "reciprocity"
     )
@@ -2492,12 +2470,11 @@ edge_density <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(loops = loops),
+      supplied = c(loops = !missing(loops)),
       recover_new = c("loops"),
       recover_old = c("loops"),
       match_names = c("loops"),
       match_to = c("loops"),
-      defaults = list(loops = FALSE),
       head_args = c("graph"),
       fn_name = "edge_density"
     )
@@ -2531,12 +2508,11 @@ ego_size <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, mindist = mindist),
+      supplied = c(mode = !missing(mode), mindist = !missing(mindist)),
       recover_new = c("mode", "mindist"),
       recover_old = c("mode", "mindist"),
       match_names = c("mode", "mindist"),
       match_to = c("mode", "mindist"),
-      defaults = list(mode = c("all", "out", "in"), mindist = 0),
       head_args = c("graph", "order", "nodes"),
       fn_name = "ego_size"
     )
@@ -2669,12 +2645,11 @@ ego <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, mindist = mindist),
+      supplied = c(mode = !missing(mode), mindist = !missing(mindist)),
       recover_new = c("mode", "mindist"),
       recover_old = c("mode", "mindist"),
       match_names = c("mode", "mindist"),
       match_to = c("mode", "mindist"),
-      defaults = list(mode = c("all", "out", "in"), mindist = 0),
       head_args = c("graph", "order", "nodes"),
       fn_name = "ego"
     )
@@ -2728,12 +2703,11 @@ make_ego_graph <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, mindist = mindist),
+      supplied = c(mode = !missing(mode), mindist = !missing(mindist)),
       recover_new = c("mode", "mindist"),
       recover_old = c("mode", "mindist"),
       match_names = c("mode", "mindist"),
       match_to = c("mode", "mindist"),
-      defaults = list(mode = c("all", "out", "in"), mindist = 0),
       head_args = c("graph", "order", "nodes"),
       fn_name = "make_ego_graph"
     )
@@ -2812,12 +2786,11 @@ coreness <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("all", "out", "in")),
       head_args = c("graph"),
       fn_name = "coreness"
     )
@@ -2882,12 +2855,11 @@ topo_sort <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("out", "all", "in")),
       head_args = c("graph"),
       fn_name = "topo_sort"
     )
@@ -2957,12 +2929,11 @@ feedback_arc_set <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights, algo = algo),
+      supplied = c(weights = !missing(weights), algo = !missing(algo)),
       recover_new = c("weights", "algo"),
       recover_old = c("weights", "algo"),
       match_names = c("weights", "algo"),
       match_to = c("weights", "algo"),
-      defaults = list(weights = NULL, algo = c("approx_eades", "exact_ip")),
       head_args = c("graph"),
       fn_name = "feedback_arc_set"
     )
@@ -3021,12 +2992,11 @@ feedback_vertex_set <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights, algo = algo),
+      supplied = c(weights = !missing(weights), algo = !missing(algo)),
       recover_new = c("weights", "algo"),
       recover_old = c("weights", "algo"),
       match_names = c("weights", "algo"),
       match_to = c("weights", "algo"),
-      defaults = list(weights = NULL, algo = c("exact_ip")),
       head_args = c("graph"),
       fn_name = "feedback_vertex_set"
     )
@@ -3103,12 +3073,11 @@ girth <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(circle = circle),
+      supplied = c(circle = !missing(circle)),
       recover_new = c("circle"),
       recover_old = c("circle"),
       match_names = c("circle"),
       match_to = c("circle"),
-      defaults = list(circle = TRUE),
       head_args = c("graph"),
       fn_name = "girth"
     )
@@ -3841,12 +3810,11 @@ components <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("weak", "strong")),
       head_args = c("graph"),
       fn_name = "components"
     )
@@ -3889,12 +3857,11 @@ is_connected <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("weak", "strong")),
       head_args = c("graph"),
       fn_name = "is_connected"
     )
@@ -3925,12 +3892,11 @@ count_components <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("weak", "strong")),
       head_args = c("graph"),
       fn_name = "count_components"
     )
@@ -4004,12 +3970,11 @@ count_reachable <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("out", "in", "all", "total")),
       head_args = c("graph"),
       fn_name = "count_reachable"
     )
@@ -4078,12 +4043,11 @@ unfold_tree <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode), roots = !missing(roots)),
       recover_new = c("mode", "roots"),
       recover_old = c("mode", "roots"),
       match_names = c("mode", "roots"),
       match_to = c("mode", "roots"),
-      defaults = list(mode = c("all", "out", "in", "total")),
       head_args = c("graph"),
       fn_name = "unfold_tree"
     )
@@ -4370,12 +4334,11 @@ max_bipartite_match <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights, eps = eps),
+      supplied = c(weights = !missing(weights), eps = !missing(eps)),
       recover_new = c("weights", "eps"),
       recover_old = c("weights", "eps"),
       match_names = c("weights", "eps"),
       match_to = c("weights", "eps"),
-      defaults = list(weights = NULL, eps = .Machine$double.eps),
       head_args = c("graph", "types"),
       fn_name = "max_bipartite_match"
     )
@@ -4446,12 +4409,11 @@ which_mutual <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(loops = loops),
+      supplied = c(loops = !missing(loops)),
       recover_new = c("loops"),
       recover_old = c("loops"),
       match_names = c("loops"),
       match_to = c("loops"),
-      defaults = list(loops = TRUE),
       head_args = c("graph", "eids"),
       fn_name = "which_mutual"
     )
@@ -4559,20 +4521,15 @@ knn <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        mode = mode,
-        neighbor.degree.mode = neighbor.degree.mode,
-        weights = weights
+      supplied = c(
+        mode = !missing(mode),
+        neighbor.degree.mode = !missing(neighbor.degree.mode),
+        weights = !missing(weights)
       ),
       recover_new = c("mode", "neighbor.degree.mode", "weights"),
       recover_old = c("mode", "neighbor.degree.mode", "weights"),
       match_names = c("mode", "neighbor.degree.mode", "weights"),
       match_to = c("mode", "neighbor.degree.mode", "weights"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        neighbor.degree.mode = c("all", "out", "in", "total"),
-        weights = NULL
-      ),
       head_args = c("graph", "vids"),
       fn_name = "knn"
     )

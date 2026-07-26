@@ -160,16 +160,15 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 # Config equivalent to the fixture, for exercising the helper directly.
 fixture_args <- function(
   dots,
-  current = list(weights = NULL, type = "out", directed = FALSE)
+  supplied = c(weights = FALSE, type = FALSE, directed = FALSE)
 ) {
   migrate_recover_args(
     dots,
-    current = current,
+    supplied = supplied,
     recover_new = c("weights", "type", "directed"),
     recover_old = c("weight", "kind", "directed"),
     match_names = c("weight", "kind", "weights", "type", "directed"),
     match_to = c("weights", "type", "weights", "type", "directed"),
-    defaults = list(weights = NULL, type = "out", directed = FALSE),
     head_args = c("graph", "n"),
     fn_name = "migration_fixture"
   )

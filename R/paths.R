@@ -119,12 +119,11 @@ all_simple_paths <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, cutoff = cutoff),
+      supplied = c(mode = !missing(mode), cutoff = !missing(cutoff)),
       recover_new = c("mode", "cutoff"),
       recover_old = c("mode", "cutoff"),
       match_names = c("mode", "cutoff"),
       match_to = c("mode", "cutoff"),
-      defaults = list(mode = c("out", "in", "all", "total"), cutoff = -1),
       head_args = c("graph", "from", "to"),
       fn_name = "all_simple_paths"
     )
@@ -444,12 +443,11 @@ distance_table <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(directed = directed),
+      supplied = c(directed = !missing(directed)),
       recover_new = c("directed"),
       recover_old = c("directed"),
       match_names = c("directed"),
       match_to = c("directed"),
-      defaults = list(directed = TRUE),
       head_args = c("graph"),
       fn_name = "distance_table"
     )

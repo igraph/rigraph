@@ -325,7 +325,10 @@ render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
 #
 # Shape: the per-function configuration is passed to `migrate_recover_args()`
 # (a hand-written, debuggable helper) which returns the recovered values plus the
-# deprecation message parts. The host frame then assigns the recovered values
+# deprecation message parts. Supplied-ness of the tail formals is captured with
+# `missing()` in the host frame -- promises are never forced, so tail defaults
+# that reference other arguments or draw random numbers stay untouched. The
+# host frame then assigns the recovered values
 # over its own locals and emits a single `lifecycle::deprecate_soft()`. Because
 # that call sits directly in the host function, its default `user_env`
 # (caller_env(2)) resolves to the user's frame -- no `.user_env` threading needed.
@@ -333,23 +336,16 @@ render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
 # The whole thing is guarded by `...length() > 0L` so the common path (a correct
 # new-API call with nothing in `...`) skips the helper call entirely.
 render_arg_handle <- function(entry) {
-  keep <- intersect(entry$tail, names(entry$defaults))
-  default_items <- vapply(
-    keep,
-    function(nm) paste0(nm, " = ", entry$defaults[[nm]]),
-    character(1),
-    USE.NAMES = FALSE
-  )
+  supplied_items <- paste0(entry$tail, " = !missing(", entry$tail, ")")
   c(
     "if (...length() > 0L) {",
     "  .arg_handle <- migrate_recover_args(",
     "    list(...),",
-    render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
+    render_call_arg("supplied", "c", supplied_items, "logical(0)"),
     render_call_arg("recover_new", "c", quote_items(entry$recover_new), "character(0)"),
     render_call_arg("recover_old", "c", quote_items(entry$recover_old), "character(0)"),
     render_call_arg("match_names", "c", quote_items(entry$match_names), "character(0)"),
     render_call_arg("match_to", "c", quote_items(entry$match_to), "character(0)"),
-    render_call_arg("defaults", "list", default_items, "list()"),
     render_call_arg("head_args", "c", quote_items(entry$head), "character(0)"),
     paste0("    fn_name = \"", entry$fn, "\""),
     "  )",

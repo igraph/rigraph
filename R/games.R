@@ -2148,12 +2148,11 @@ connect <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("all", "out", "in", "total")),
       head_args = c("graph", "order"),
       fn_name = "connect"
     )

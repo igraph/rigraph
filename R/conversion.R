@@ -454,24 +454,17 @@ as_adjacency_matrix <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        edges = edges,
-        attr = attr
+      supplied = c(
+        weights = !missing(weights),
+        names = !missing(names),
+        sparse = !missing(sparse),
+        edges = !missing(edges),
+        attr = !missing(attr)
       ),
       recover_new = c("weights", "edges", "names", "sparse"),
       recover_old = c("attr", "edges", "names", "sparse"),
       match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
       match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = igraph_opt("sparsematrices"),
-        edges = deprecated(),
-        attr = deprecated()
-      ),
       head_args = c("graph", "type"),
       fn_name = "as_adjacency_matrix"
     )
@@ -1187,22 +1180,16 @@ as_biadjacency_matrix <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        attr = attr
+      supplied = c(
+        weights = !missing(weights),
+        names = !missing(names),
+        sparse = !missing(sparse),
+        attr = !missing(attr)
       ),
       recover_new = c("weights", "names", "sparse"),
       recover_old = c("attr", "names", "sparse"),
       match_names = c("attr", "weights", "names", "sparse", "attr"),
       match_to = c("weights", "weights", "names", "sparse", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = FALSE,
-        attr = deprecated()
-      ),
       head_args = c("graph", "types"),
       fn_name = "as_biadjacency_matrix"
     )

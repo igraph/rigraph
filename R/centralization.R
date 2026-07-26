@@ -325,15 +325,14 @@ centralize <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        theoretical.max = theoretical.max,
-        normalized = normalized
+      supplied = c(
+        theoretical.max = !missing(theoretical.max),
+        normalized = !missing(normalized)
       ),
       recover_new = c("theoretical.max", "normalized"),
       recover_old = c("theoretical.max", "normalized"),
       match_names = c("theoretical.max", "normalized"),
       match_to = c("theoretical.max", "normalized"),
-      defaults = list(theoretical.max = 0, normalized = TRUE),
       head_args = c("scores"),
       fn_name = "centralize"
     )
@@ -404,16 +403,15 @@ centr_degree <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, loops = loops, normalized = normalized),
+      supplied = c(
+        mode = !missing(mode),
+        loops = !missing(loops),
+        normalized = !missing(normalized)
+      ),
       recover_new = c("mode", "loops", "normalized"),
       recover_old = c("mode", "loops", "normalized"),
       match_names = c("mode", "loops", "normalized"),
       match_to = c("mode", "loops", "normalized"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = TRUE,
-        normalized = TRUE
-      ),
       head_args = c("graph"),
       fn_name = "centr_degree"
     )
@@ -536,12 +534,14 @@ centr_betw <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(directed = directed, normalized = normalized),
+      supplied = c(
+        directed = !missing(directed),
+        normalized = !missing(normalized)
+      ),
       recover_new = c("directed", "normalized"),
       recover_old = c("directed", "normalized"),
       match_names = c("directed", "normalized"),
       match_to = c("directed", "normalized"),
-      defaults = list(directed = TRUE, normalized = TRUE),
       head_args = c("graph"),
       fn_name = "centr_betw"
     )
@@ -606,12 +606,11 @@ centr_betw_tmax <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(directed = directed),
+      supplied = c(directed = !missing(directed)),
       recover_new = c("directed"),
       recover_old = c("directed"),
       match_names = c("directed"),
       match_to = c("directed"),
-      defaults = list(directed = TRUE),
       head_args = c("graph", "nodes"),
       fn_name = "centr_betw_tmax"
     )
@@ -678,12 +677,11 @@ centr_clo <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, normalized = normalized),
+      supplied = c(mode = !missing(mode), normalized = !missing(normalized)),
       recover_new = c("mode", "normalized"),
       recover_old = c("mode", "normalized"),
       match_names = c("mode", "normalized"),
       match_to = c("mode", "normalized"),
-      defaults = list(mode = c("out", "in", "all", "total"), normalized = TRUE),
       head_args = c("graph"),
       fn_name = "centr_clo"
     )
@@ -738,12 +736,11 @@ centr_clo_tmax <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode),
+      supplied = c(mode = !missing(mode)),
       recover_new = c("mode"),
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("out", "in", "all", "total")),
       head_args = c("graph", "nodes"),
       fn_name = "centr_clo_tmax"
     )

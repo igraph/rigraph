@@ -441,22 +441,16 @@ betweenness <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        directed = directed,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
+      supplied = c(
+        directed = !missing(directed),
+        weights = !missing(weights),
+        normalized = !missing(normalized),
+        cutoff = !missing(cutoff)
       ),
       recover_new = c("directed", "weights", "normalized", "cutoff"),
       recover_old = c("directed", "weights", "normalized", "cutoff"),
       match_names = c("directed", "weights", "normalized", "cutoff"),
       match_to = c("directed", "weights", "normalized", "cutoff"),
-      defaults = list(
-        directed = TRUE,
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
       head_args = c("graph", "v"),
       fn_name = "betweenness"
     )
@@ -503,12 +497,15 @@ edge_betweenness <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(directed = directed, weights = weights, cutoff = cutoff),
+      supplied = c(
+        directed = !missing(directed),
+        weights = !missing(weights),
+        cutoff = !missing(cutoff)
+      ),
       recover_new = c("directed", "weights", "cutoff"),
       recover_old = c("directed", "weights", "cutoff"),
       match_names = c("directed", "weights", "cutoff"),
       match_to = c("directed", "weights", "cutoff"),
-      defaults = list(directed = TRUE, weights = NULL, cutoff = -1),
       head_args = c("graph", "e"),
       fn_name = "edge_betweenness"
     )
@@ -639,22 +636,16 @@ closeness <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        mode = mode,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
+      supplied = c(
+        mode = !missing(mode),
+        weights = !missing(weights),
+        normalized = !missing(normalized),
+        cutoff = !missing(cutoff)
       ),
       recover_new = c("mode", "weights", "normalized", "cutoff"),
       recover_old = c("mode", "weights", "normalized", "cutoff"),
       match_names = c("mode", "weights", "normalized", "cutoff"),
       match_to = c("mode", "weights", "normalized", "cutoff"),
-      defaults = list(
-        mode = c("out", "in", "all", "total"),
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
       head_args = c("graph", "vids"),
       fn_name = "closeness"
     )
@@ -1161,12 +1152,11 @@ subgraph_centrality <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(diag = diag),
+      supplied = c(diag = !missing(diag)),
       recover_new = c("diag"),
       recover_old = c("diag"),
       match_names = c("diag"),
       match_to = c("diag"),
-      defaults = list(diag = FALSE),
       head_args = c("graph"),
       fn_name = "subgraph_centrality"
     )
@@ -1493,16 +1483,15 @@ strength <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(mode = mode, loops = loops, weights = weights),
+      supplied = c(
+        mode = !missing(mode),
+        loops = !missing(loops),
+        weights = !missing(weights)
+      ),
       recover_new = c("mode", "loops", "weights"),
       recover_old = c("mode", "loops", "weights"),
       match_names = c("mode", "loops", "weights"),
       match_to = c("mode", "loops", "weights"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = TRUE,
-        weights = NULL
-      ),
       head_args = c("graph", "vids"),
       fn_name = "strength"
     )
@@ -1576,12 +1565,11 @@ diversity <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(weights = weights, vids = vids),
+      supplied = c(weights = !missing(weights), vids = !missing(vids)),
       recover_new = c("weights", "vids"),
       recover_old = c("weights", "vids"),
       match_names = c("weights", "vids"),
       match_to = c("weights", "vids"),
-      defaults = list(weights = NULL, vids = V(graph)),
       head_args = c("graph"),
       fn_name = "diversity"
     )
@@ -1859,14 +1847,14 @@ page_rank <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        algo = algo,
-        vids = vids,
-        directed = directed,
-        damping = damping,
-        personalized = personalized,
-        weights = weights,
-        options = options
+      supplied = c(
+        algo = !missing(algo),
+        vids = !missing(vids),
+        directed = !missing(directed),
+        damping = !missing(damping),
+        personalized = !missing(personalized),
+        weights = !missing(weights),
+        options = !missing(options)
       ),
       recover_new = c(
         "algo",
@@ -1903,15 +1891,6 @@ page_rank <- function(
         "personalized",
         "weights",
         "options"
-      ),
-      defaults = list(
-        algo = c("prpack", "arpack"),
-        vids = V(graph),
-        directed = TRUE,
-        damping = 0.85,
-        personalized = NULL,
-        weights = NULL,
-        options = NULL
       ),
       head_args = c("graph"),
       fn_name = "page_rank"
@@ -1996,22 +1975,16 @@ harmonic_centrality <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        mode = mode,
-        weights = weights,
-        normalized = normalized,
-        cutoff = cutoff
+      supplied = c(
+        mode = !missing(mode),
+        weights = !missing(weights),
+        normalized = !missing(normalized),
+        cutoff = !missing(cutoff)
       ),
       recover_new = c("mode", "weights", "normalized", "cutoff"),
       recover_old = c("mode", "weights", "normalized", "cutoff"),
       match_names = c("mode", "weights", "normalized", "cutoff"),
       match_to = c("mode", "weights", "normalized", "cutoff"),
-      defaults = list(
-        mode = c("out", "in", "all", "total"),
-        weights = NULL,
-        normalized = FALSE,
-        cutoff = -1
-      ),
       head_args = c("graph", "vids"),
       fn_name = "harmonic_centrality"
     )
@@ -2229,13 +2202,13 @@ power_centrality <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        loops = loops,
-        exponent = exponent,
-        rescale = rescale,
-        tol = tol,
-        sparse = sparse,
-        weights = weights
+      supplied = c(
+        loops = !missing(loops),
+        exponent = !missing(exponent),
+        rescale = !missing(rescale),
+        tol = !missing(tol),
+        sparse = !missing(sparse),
+        weights = !missing(weights)
       ),
       recover_new = c(
         "loops",
@@ -2262,14 +2235,6 @@ power_centrality <- function(
         "weights"
       ),
       match_to = c("loops", "exponent", "rescale", "tol", "sparse", "weights"),
-      defaults = list(
-        loops = FALSE,
-        exponent = 1,
-        rescale = FALSE,
-        tol = 1e-07,
-        sparse = TRUE,
-        weights = NULL
-      ),
       head_args = c("graph", "nodes"),
       fn_name = "power_centrality"
     )
@@ -2450,26 +2415,18 @@ alpha_centrality <- function(
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(
-        alpha = alpha,
-        loops = loops,
-        exo = exo,
-        weights = weights,
-        tol = tol,
-        sparse = sparse
+      supplied = c(
+        alpha = !missing(alpha),
+        loops = !missing(loops),
+        exo = !missing(exo),
+        weights = !missing(weights),
+        tol = !missing(tol),
+        sparse = !missing(sparse)
       ),
       recover_new = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
       recover_old = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
       match_names = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
       match_to = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-      defaults = list(
-        alpha = 1,
-        loops = FALSE,
-        exo = 1,
-        weights = NULL,
-        tol = 1e-07,
-        sparse = TRUE
-      ),
       head_args = c("graph", "nodes"),
       fn_name = "alpha_centrality"
     )

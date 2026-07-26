@@ -21,5 +21,20 @@ migrations <- list(
       directed = FALSE
     ) {},
     when = "3.0.0"
+  ),
+
+  # Second fixture: hazardous tail defaults (cross-reference, fresh
+  # environment, RNG draw) -- recovery must not force any of them.
+  migration_fixture2 = list(
+    old = function(graph, bins, breaks, anchor, noise) {},
+    new = function(
+      graph,
+      ...,
+      bins = 7,
+      breaks = bins * 2,
+      anchor = new.env(),
+      noise = stats::runif(1)
+    ) {},
+    when = "3.0.0"
   )
 )

@@ -142,7 +142,7 @@ test_that("migrate_recover_args() errors on unknown, ambiguous, conflict, overfl
   expect_error(
     fixture_args(
       list(1:3),
-      current = list(weights = 9, type = "out", directed = FALSE)
+      supplied = c(weights = TRUE, type = FALSE, directed = FALSE)
     ),
     "supplied more than once"
   )
@@ -281,4 +281,41 @@ test_that("render_call_arg() wraps long arguments the way air formats them", {
     paste0("      ", items, c(",", ",", ",", ",", ""))
   )
   expect_true(all(nchar(wrapped) + 2L <= 80L))
+})
+
+# ---- fixture2: recovery must never force tail promises ----------------------
+
+test_that("a tail default referencing another tail arg sees the recovered value", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(res <- migration_fixture2("g", 3))
+  expect_identical(res$bins, 3)
+  # breaks = bins * 2 must evaluate against the *recovered* bins, not the
+  # default it had before recovery
+  expect_identical(res$breaks, 6)
+})
+
+test_that("recovering an arg with an irreproducible default is not a conflict", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  e <- new.env()
+  # anchor = new.env() evaluates to a fresh environment on every call; the
+  # old value-comparison check misread that as "supplied more than once"
+  lifecycle::expect_deprecated(res <- migration_fixture2("g", 3, 8, e))
+  expect_identical(res$anchor, e)
+  expect_identical(res$breaks, 8)
+})
+
+test_that("recovery does not consume RNG draws from unused tail defaults", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  set.seed(20260726)
+  before <- .Random.seed
+  lifecycle::expect_deprecated(migration_fixture2("g", 3))
+  expect_identical(.Random.seed, before)
+})
+
+test_that("an explicitly supplied tail arg still conflicts with recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_error(
+    migration_fixture2("g", 3, bins = 5),
+    "supplied more than once"
+  )
 })

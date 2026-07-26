@@ -10,16 +10,22 @@
 # itself -- the caller assigns the values into its own frame and calls
 # `lifecycle::deprecate_soft()` inline, so the warning is attributed correctly
 # without any caller-env plumbing.
+#
+# `supplied` is a named logical built from `missing()` in the host frame: it
+# marks the tail formals the caller passed explicitly, so a value recovered
+# from `...` for the same formal is a hard conflict. missing() never forces a
+# promise, so tail defaults are not evaluated here -- defaults that reference
+# other (possibly recovered) arguments, allocate environments, or draw random
+# numbers stay untouched until the function body first uses them.
 
 #' @noRd
 migrate_recover_args <- function(
   dots,
-  current,
+  supplied,
   recover_new,
   recover_old,
   match_names,
   match_to,
-  defaults,
   head_args,
   fn_name,
   call = rlang::caller_env()
@@ -69,10 +75,7 @@ migrate_recover_args <- function(
     }
 
     duplicated <- new_name %in% rebound_new
-    has_default <- new_name %in% names(defaults)
-    reassigned <- has_default &&
-      !identical(current[[new_name]], defaults[[new_name]])
-    if (duplicated || reassigned) {
+    if (duplicated || isTRUE(supplied[[new_name]])) {
       cli::cli_abort(
         c(
           "Argument {.arg {new_name}} of {.fn {fn_name}} was supplied more than once.",
