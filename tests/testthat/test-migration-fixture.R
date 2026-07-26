@@ -160,7 +160,9 @@ test_that("the generated block is in sync with the registry", {
 
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
-  registry <- testthat::test_path("..", "..", "tools", "migrations.R")
+  registry <- gen_env$migration_registry_files(
+    testthat::test_path("..", "..")
+  )
   migrations <- gen_env$load_migrations(registry)
   by_fn <- stats::setNames(
     migrations,
