@@ -62,6 +62,61 @@ test_that("disjoint_union() does not convert vertex types", {
   expect_s3_class(vertex_attr(u, "date"), c("POSIXct", "POSIXt"))
 })
 
+test_that("graph_join() works", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(3)
+  gj <- graph_join(g1, g2)
+
+  expect_vcount(gj, 8) # 5 + 3
+  expect_ecount(gj, 23) # 5 + 3 + 5 * 3
+  expect_false(is_directed(gj))
+
+  # The %j% operator gives the same result
+  expect_identical_graphs(g1 %j% g2, gj)
+
+  # Directed graphs: original edges + 2 * |V1| * |V2| cross edges
+  g1_dir <- make_ring(4, directed = TRUE)
+  g2_dir <- make_ring(3, directed = TRUE)
+  gj_dir <- graph_join(g1_dir, g2_dir)
+
+  expect_vcount(gj_dir, 7) # 4 + 3
+  expect_ecount(gj_dir, 31) # 4 + 3 + 2 * 4 * 3
+  expect_true(is_directed(gj_dir))
+})
+
+test_that("graph_join() preserves vertex ordering", {
+  g1 <- make_ring(3)
+  g2 <- make_ring(2)
+
+  el_joined <- as_edgelist(graph_join(g1, g2))
+  joined_edges <- paste(el_joined[, 1], el_joined[, 2])
+
+  # Edges of the first graph keep their vertex IDs
+  el1 <- as_edgelist(g1)
+  expect_in(paste(el1[, 1], el1[, 2]), joined_edges)
+
+  # Edges of the second graph are shifted by vcount(g1)
+  el2_shifted <- as_edgelist(g2) + vcount(g1)
+  expect_in(paste(el2_shifted[, 1], el2_shifted[, 2]), joined_edges)
+})
+
+test_that("graph_join() prints as expected", {
+  expect_snapshot_igraph(print_all(graph_join(make_ring(3), make_ring(2))))
+})
+
+test_that("graph_join() errors", {
+  g_undir <- make_ring(5)
+  g_dir <- make_ring(4, directed = TRUE)
+
+  # Mixing directed and undirected graphs
+  expect_snapshot_igraph_error(graph_join(g_undir, g_dir))
+
+  # Extra arguments are rejected
+  expect_snapshot(error = TRUE, {
+    graph_join(g_undir, g_undir, byname = TRUE)
+  })
+})
+
 test_that("intersection() works", {
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
