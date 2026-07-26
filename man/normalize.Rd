@@ -14,6 +14,8 @@ normalize(
 )
 }
 \arguments{
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{xmin, xmax}{Minimum and maximum for x coordinates.}
 
 \item{ymin, ymax}{Minimum and maximum for y coordinates.}

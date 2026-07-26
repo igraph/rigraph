@@ -370,12 +370,26 @@ test_that("layout normalization handles all-NaN coordinates correctly", {
 
   # Test that norm_coords works with all-NaN layouts
   layout_all_nan <- matrix(NaN, nrow = 5, ncol = 2)
-  normalized_layout <- norm_coords(layout_all_nan, 0, 1, 0, 1)
+  normalized_layout <- norm_coords(
+    layout_all_nan,
+    xmin = 0,
+    xmax = 1,
+    ymin = 0,
+    ymax = 1
+  )
   expect_equal(normalized_layout, matrix(c(rep(0.5, 5), rep(0.5, 5)), ncol = 2))
 
   # Test 3D layout normalization with all-NaN coordinates
   layout_3d_nan <- matrix(NaN, nrow = 3, ncol = 3)
-  normalized_3d <- norm_coords(layout_3d_nan, 0, 1, 0, 1, 0, 1)
+  normalized_3d <- norm_coords(
+    layout_3d_nan,
+    xmin = 0,
+    xmax = 1,
+    ymin = 0,
+    ymax = 1,
+    zmin = 0,
+    zmax = 1
+  )
   expect_equal(normalized_3d, matrix(rep(0.5, 9), ncol = 3))
 })
 
