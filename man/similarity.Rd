@@ -7,6 +7,7 @@
 similarity(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
   method = c("jaccard", "dice", "invlogweighted")
@@ -16,6 +17,8 @@ similarity(
 \item{graph}{The input graph.}
 
 \item{vids}{The vertex IDs for which the similarity is calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
