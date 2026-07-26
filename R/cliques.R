@@ -381,8 +381,37 @@ max_cliques <- function(
 }
 
 #' @rdname cliques
+#' @inheritParams rlang::args_dots_empty
 #' @export
-count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
+count_max_cliques <- function(
+  graph,
+  min = NULL,
+  max = NULL,
+  ...,
+  subset = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: count_max_cliques, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(subset = subset),
+      recover_new = c("subset"),
+      recover_old = c("subset"),
+      match_names = c("subset"),
+      match_to = c("subset"),
+      defaults = list(subset = NULL),
+      head_args = c("graph", "min", "max"),
+      fn_name = "count_max_cliques"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -437,6 +466,7 @@ clique_num <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
+#' @inheritParams rlang::args_dots_empty
 #' @param vertex.weights Vertex weight vector. If the graph has a `weight`
 #'   vertex attribute, then this is used by default. If the graph does not have a
 #'   `weight` vertex attribute and this argument is `NULL`, then every
@@ -466,11 +496,44 @@ clique_num <- function(graph) {
 #' weighted_clique_num(g)
 weighted_cliques <- function(
   graph,
+  ...,
   vertex.weights = NULL,
   min.weight = 0,
   max.weight = 0,
   maximal = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        vertex.weights = vertex.weights,
+        min.weight = min.weight,
+        max.weight = max.weight,
+        maximal = maximal
+      ),
+      recover_new = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+      recover_old = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+      match_names = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+      match_to = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+      defaults = list(
+        vertex.weights = NULL,
+        min.weight = 0,
+        max.weight = 0,
+        maximal = FALSE
+      ),
+      head_args = c("graph"),
+      fn_name = "weighted_cliques"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   weighted_cliques_impl(
     graph = graph,
     vertex_weights = vertex.weights,
@@ -479,17 +542,71 @@ weighted_cliques <- function(
     maximal = maximal
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
-largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
+largest_weighted_cliques <- function(
+  graph,
+  ...,
+  vertex.weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: largest_weighted_cliques, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vertex.weights = vertex.weights),
+      recover_new = c("vertex.weights"),
+      recover_old = c("vertex.weights"),
+      match_names = c("vertex.weights"),
+      match_to = c("vertex.weights"),
+      defaults = list(vertex.weights = NULL),
+      head_args = c("graph"),
+      fn_name = "largest_weighted_cliques"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   largest_weighted_cliques_impl(
     graph = graph,
     vertex_weights = vertex.weights
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname cliques
-weighted_clique_num <- function(graph, vertex.weights = NULL) {
+weighted_clique_num <- function(
+  graph,
+  ...,
+  vertex.weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: weighted_clique_num, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vertex.weights = vertex.weights),
+      recover_new = c("vertex.weights"),
+      recover_old = c("vertex.weights"),
+      match_names = c("vertex.weights"),
+      match_to = c("vertex.weights"),
+      defaults = list(vertex.weights = NULL),
+      head_args = c("graph"),
+      fn_name = "weighted_clique_num"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   weighted_clique_number_impl(
     graph = graph,
     vertex_weights = vertex.weights
@@ -632,8 +749,37 @@ ivs_size <- function(graph) {
 independence_number <- ivs_size
 
 #' @rdname cliques
+#' @inheritParams rlang::args_dots_empty
 #' @export
-clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
+clique_size_counts <- function(
+  graph,
+  ...,
+  min = 0,
+  max = 0,
+  maximal = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: clique_size_counts, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(min = min, max = max, maximal = maximal),
+      recover_new = c("min", "max", "maximal"),
+      recover_old = c("min", "max", "maximal"),
+      match_names = c("min", "max", "maximal"),
+      match_to = c("min", "max", "maximal"),
+      defaults = list(min = 0, max = 0, maximal = FALSE),
+      head_args = c("graph"),
+      fn_name = "clique_size_counts"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (maximal) {
     maximal_cliques_hist_impl(
       graph = graph,
@@ -683,12 +829,40 @@ is_complete <- function(graph) {
 #'
 #' @param graph The input graph.
 #' @param candidate The vertex set to test for being a clique.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider edge directions.
 #' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
 #'   a clique.
 #' @keywords graphs
 #' @export
-is_clique <- function(graph, candidate, directed = FALSE) {
+is_clique <- function(
+  graph,
+  candidate,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: is_clique, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = FALSE),
+      head_args = c("graph", "candidate"),
+      fn_name = "is_clique"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   is_clique_impl(
     graph = graph,
     candidate = candidate,
