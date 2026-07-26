@@ -87,6 +87,7 @@ Other structural.properties:
 \code{\link[=is_matching]{is_matching()}},
 \code{\link[=k_shortest_paths]{k_shortest_paths()}},
 \code{\link[=knn]{knn()}},
+\code{\link[=knnk]{knnk()}},
 \code{\link[=reciprocity]{reciprocity()}},
 \code{\link[=subcomponent]{subcomponent()}},
 \code{\link[=topo_sort]{topo_sort()}},
