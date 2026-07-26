@@ -30,14 +30,14 @@ test_that("as_directed keeps attributes", {
   expect_equal(V(g_arbitrary)$name, V(g)$name)
 
   E(g)$weight <- seq_len(ecount(g))
-  g_mutual <- as_directed(g, "mutual")
+  g_mutual <- as_directed(g, mode = "mutual")
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
     c(1, 3, 1, 2, 2, 3)
   )
 
-  g_arbitrary <- as_directed(g, "arbitrary")
+  g_arbitrary <- as_directed(g, mode = "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
   expect_equal(
     df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
