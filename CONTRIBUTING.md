@@ -200,6 +200,20 @@ would generate warning noise without a safety benefit;
 the value of keyword-only arguments lies in the long tail of options,
 not in the one or two arguments everyone knows by heart.
 
+Defaults on either side of the ellipsis
+must be *constant expressions* --
+literals, `NULL`/`TRUE`/`FALSE`/`NA`,
+`c()` or `list()` of constants,
+or the `deprecated()` sentinel.
+A complex default -- an option lookup, `V(graph)`,
+a reference to another argument, a random draw --
+is evaluated lazily at an unpredictable time
+and hides the real behavior from the signature:
+declare the formal as `NULL`
+and resolve it in the body
+after all arguments are available.
+The migration generator enforces this rule for migrated signatures.
+
 New functions follow the same zoning,
 with `rlang::check_dots_empty()` guarding the ellipsis
 (no migration machinery needed);
