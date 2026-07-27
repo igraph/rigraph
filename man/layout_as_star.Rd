@@ -5,20 +5,20 @@
 \alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{
-layout_as_star(graph, center = V(graph)[1], order = NULL)
+layout_as_star(graph, ..., center = V(graph)[1], order = NULL)
 
 as_star(...)
 }
 \arguments{
 \item{graph}{The graph to layout.}
 
-\item{center}{The id of the vertex to put in the center. By default it is
+\item{...}{Arguments to pass to \code{layout_as_star()}.}
+
+\item{center}{The ID of the vertex to put in the center. By default it is
 the first vertex.}
 
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
-The default ordering is given by the vertex ids.}
-
-\item{...}{Arguments to pass to \code{layout_as_star()}.}
+The default ordering is given by the vertex IDs.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices
@@ -49,28 +49,28 @@ layout_(g, as_star())
 algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
 plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

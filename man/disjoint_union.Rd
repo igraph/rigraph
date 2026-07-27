@@ -5,12 +5,18 @@
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{
-disjoint_union(...)
+disjoint_union(..., graph.attr.comb = igraph_opt("graph.attr.comb"))
 
 x \%du\% y
 }
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
+
+\item{graph.attr.comb}{Specification for combining shared graph attributes.
+Defaults to the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed
+via \code{\link[=igraph_options]{igraph_options()}}), which preserves the historical behaviour of
+appending \verb{_1}, \verb{_2}, ... suffixes to clashing attribute names. See
+\link{igraph-attribute-combination} for the available combiners.}
 
 \item{x, y}{Graph objects.}
 }
@@ -31,9 +37,10 @@ function can also be used via the \verb{\%du\%} operator.
 particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}}
 function. For graphs that lack some vertex/edge attribute, the corresponding
 values in the new graph are set to a missing value (\code{NA} for scalar attributes,
-\code{NULL} for list attributes). Graph attributes are simply
-copied to the result. If this would result a name clash, then they are
-renamed by adding suffixes: _1, _2, etc.
+\code{NULL} for list attributes). Graph attributes are combined according to
+\code{graph.attr.comb}; by default any name clash is resolved by adding
+suffixes (\verb{_1}, \verb{_2}, ...). See \link{igraph-attribute-combination} for the
+available combiners.
 
 Note that if both graphs have vertex names (i.e. a \code{name} vertex
 attribute), then the concatenated vertex names might be non-unique in the
@@ -56,31 +63,31 @@ V(g2)$name <- letters[11:20]
 print_all(g1 \%du\% g2)
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

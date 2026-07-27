@@ -30,7 +30,7 @@ differently, together with all attributes of the edges in the sequence,
 as a table.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
 }
 
 \examples{
@@ -58,16 +58,16 @@ E(g4)[[]]
 E(g4)[[1:5]]
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{V}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=V]{V()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 }
 \concept{vertex and edge sequences}

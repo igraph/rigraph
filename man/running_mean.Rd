@@ -21,7 +21,7 @@ bin width.
 }
 \details{
 The running mean of \code{v} is a \code{w} vector of length
-\code{length(v)-binwidth+1}. The first element of \code{w} id the average of
+\code{length(v)-binwidth+1}. The first element of \code{w} ID the average of
 the first \code{binwidth} elements of \code{v}, the second element of
 \code{w} is the average of elements \code{2:(binwidth+1)}, etc.
 }
@@ -35,9 +35,9 @@ running_mean(1:100, 10)
 
 }
 \seealso{
-Other other: 
-\code{\link{convex_hull}()},
-\code{\link{sample_seq}()}
+Other other:
+\code{\link[=convex_hull]{convex_hull()}},
+\code{\link[=sample_seq]{sample_seq()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -6,6 +6,7 @@
 \usage{
 weighted_cliques(
   graph,
+  ...,
   vertex.weights = NULL,
   min.weight = 0,
   max.weight = 0,
@@ -15,6 +16,8 @@ weighted_cliques(
 \arguments{
 \item{graph}{The input graph, directed graphs will be considered as
 undirected ones, multiple edges and loops are ignored.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
 vertex attribute, then this is used by default. If the graph does not have a
@@ -69,10 +72,10 @@ largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-Other cliques: 
-\code{\link{cliques}()},
-\code{\link{is_complete}()},
-\code{\link{ivs}()}
+Other cliques:
+\code{\link[=cliques]{cliques()}},
+\code{\link[=is_complete]{is_complete()}},
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

@@ -47,10 +47,6 @@ get_es_graph <- get_vs_graph <- function(seq) {
   }
 }
 
-has_es_graph <- has_vs_graph <- function(seq) {
-  !is.null(weak_ref_key(attr(seq, "env")))
-}
-
 get_es_graph_id <- get_vs_graph_id <- function(seq) {
   new_g <- attr(seq, "graph")
   if (!is.null(new_g)) {
@@ -79,10 +75,38 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' the attributes of the two graphs are allowed to be different.
 #'
 #' @param g1,g2 The two graphs
+#' @inheritParams rlang::args_dots_empty
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
-identical_graphs <- function(g1, g2, attrs = TRUE) {
+identical_graphs <- function(
+  g1,
+  g2,
+  ...,
+  attrs = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: identical_graphs, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(attrs = attrs),
+      recover_new = c("attrs"),
+      recover_old = c("attrs"),
+      match_names = c("attrs"),
+      match_to = c("attrs"),
+      defaults = list(attrs = TRUE),
+      head_args = c("g1", "g2"),
+      fn_name = "identical_graphs"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   stopifnot(is_igraph(g1), is_igraph(g2))
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
@@ -102,17 +126,17 @@ add_vses_graph_ref <- function(vses, graph) {
   vses
 }
 
-#' Get the id of a graph
+#' Get the ID of a graph
 #'
-#' Graph ids are used to check that a vertex or edge sequence
+#' Graph IDs are used to check that a vertex or edge sequence
 #' belongs to a graph. If you create a new graph by changing the
-#' structure of a graph, the new graph will have a new id.
-#' Changing the attributes will not change the id.
+#' structure of a graph, the new graph will have a new ID.
+#' Changing the attributes will not change the ID.
 #'
 #' @param x A graph or a vertex sequence or an edge sequence.
 #' @param ... Not used currently.
-#' @return The id of the graph, a character scalar. For
-#'   vertex and edge sequences the id of the graph they were created from.
+#' @return The ID of the graph, a character scalar. For
+#'   vertex and edge sequences the ID of the graph they were created from.
 #'
 #' @export
 #' @examples
@@ -211,13 +235,13 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #' another graph.
 #'
 #' At the implementation level, a vertex sequence is simply a vector
-#' containing numeric vertex ids, but it has a special class attribute
+#' containing numeric vertex IDs, but it has a special class attribute
 #' which makes it possible to perform graph specific operations on it, like
 #' selecting a subset of the vertices based on graph structure, or vertex
 #' attributes.
 #'
 #' A vertex sequence is most often created by the `V()` function. The
-#' result of this includes all vertices in increasing vertex id order. A
+#' result of this includes all vertices in increasing vertex ID order. A
 #' vertex sequence can be indexed by a numeric vector, just like a regular
 #' R vector. See \code{\link{[.igraph.vs}} and additional links to other
 #' vertex sequence operations below.
@@ -234,7 +258,7 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #'
 #' @param graph The graph
 #' @return A vertex sequence containing all vertices, in the order
-#'   of their numeric vertex ids.
+#'   of their numeric vertex IDs.
 #'
 #' @family vertex and edge sequences
 #' @export
@@ -296,7 +320,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 
 #' Edges of a graph
 #'
-#' An edge sequence is a vector containing numeric edge ids, with a special
+#' An edge sequence is a vector containing numeric edge IDs, with a special
 #' class attribute that allows custom operations: selecting subsets of
 #' edges based on attributes, or graph structure, creating the
 #' intersection, union of edges, etc.
@@ -310,7 +334,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' another graph.
 #'
 #' An edge sequence is most often created by the `E()` function. The
-#' result includes edges in increasing edge id order by default (if. none
+#' result includes edges in increasing edge ID order by default (if. none
 #' of the `P` and `path` arguments are used). An edge
 #' sequence can be indexed by a numeric vector, just like a regular R
 #' vector. See links to other edge sequence operations below.
@@ -326,6 +350,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' edges in the sequence. See [$.igraph.es()] for details.
 #'
 #' @param graph The graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param P A list of vertices to select edges via pairs of vertices.
 #'   The first and second vertices select the first edge, the third
 #'   and fourth the second, etc.
@@ -348,7 +373,35 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
-E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
+E <- function(
+  graph,
+  ...,
+  P = NULL,
+  path = NULL,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: E, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(P = P, path = path, directed = directed),
+      recover_new = c("P", "path", "directed"),
+      recover_old = c("P", "path", "directed"),
+      match_names = c("P", "path", "directed"),
+      match_to = c("P", "path", "directed"),
+      defaults = list(P = NULL, path = NULL, directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "E"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   update_es_ref(graph)
@@ -402,7 +455,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
-  if (!na_ok && any(is.na(res))) {
+  if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown vertex selected.")
   }
   class(res) <- "igraph.vs"
@@ -843,7 +896,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   } else {
     res <- unclass(x)[i]
   }
-  if (!na_ok && any(is.na(res))) {
+  if (!na_ok && anyNA(res)) {
     cli::cli_abort("Unknown edge selected")
   }
   attr(res, "env") <- attr(x, "env")
@@ -880,7 +933,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'     to select edges with the given names. Note that a graph may
 #'     have edge names and vertex names, and both can be used to select
 #'     edges. Edge names are simply used as names of the numeric
-#'     edge id vector. Vertex names effectively only work in graphs without
+#'     edge ID vector. Vertex names effectively only work in graphs without
 #'     multiple edges, and must be separated with a `|` bar character
 #'     to select an edges that incident to the two given vertices. See
 #'     examples below.
@@ -1423,6 +1476,19 @@ print.igraph.vs <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (!is_cli_style()) {
+    return(print_igraph_vs_legacy(x, full = full, id = id, ...))
+  }
+
+  print_igraph_vs_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_vs_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_vs_graph(x)
   if (!is.null(graph)) {
     vertices <- V(graph)
@@ -1540,6 +1606,19 @@ print.igraph.es <- function(
   id = igraph_opt("print.id"),
   ...
 ) {
+  if (!is_cli_style()) {
+    return(print_igraph_es_legacy(x, full = full, id = id, ...))
+  }
+
+  print_igraph_es_cli(x, full = full, id = id, ...)
+}
+
+print_igraph_es_legacy <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(
@@ -1553,6 +1632,161 @@ print.igraph.es <- function(
   invisible(x)
 }
 
+# cli-styled printing for vertex/edge sequences -----------------
+
+print_igraph_vs_cli <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
+  graph <- get_vs_graph(x)
+  vertices <- if (!is.null(graph)) V(graph) else NULL
+  total <- if (is.null(vertices)) "?" else as.character(length(vertices))
+  graph_id_short <- graph_id(x)
+
+  middot <- middot_cli()
+  # `id` comes from an option and may be NULL/NA, so guard with isTRUE().
+  flags <- c(
+    if (!is.null(vertices) && !is.null(names(vertices))) "named",
+    if (isTRUE(id) && !is.na(graph_id_short)) {
+      paste("from", substr(graph_id_short, 1, 7))
+    },
+    if (is.null(graph)) "deleted"
+  )
+
+  title <- paste0(
+    "<vertex sequence> ",
+    length(x),
+    "/",
+    total,
+    flag_suffix_cli(flags, middot)
+  )
+  cli_section(title, blank = FALSE)
+
+  # A vertex sequence prints in one of two layouts:
+  #
+  #   * detailed -- one row per selected vertex with every vertex attribute as
+  #     a column (a metadata table); produced by `V(g)[[...]]`.
+  #   * compact  -- a bare list of vertex ids, or names when present; produced
+  #     by `V(g)[...]`.
+  #
+  # `[[` and `[` build the *same* underlying sequence: `[[.igraph.vs` merely
+  # tags its result with a "single" attribute, which is_single_index() reads
+  # here. So the only signal asking for the detailed view is that flag. We use
+  # the table only when it is set AND the graph is still alive (a sequence can
+  # outlive its graph) AND the graph actually has attributes to tabulate;
+  # anything else falls through to the compact list below.
+  if (
+    is_single_index(x) &&
+      !is.null(graph) &&
+      length(vertex_attr_names(graph)) > 0
+  ) {
+    vertex_attrs <- vertex_attr(graph)
+    # A data.frame needs flat columns, so it works only when every attribute is
+    # atomic. If any attribute is list-valued, drop to a named list sliced to
+    # the selected vertices instead of forcing it into a table.
+    if (all(vapply(vertex_attrs, is.atomic, logical(1)))) {
+      print(as.data.frame(vertex_attrs, stringsAsFactors = FALSE)[
+        as.vector(x),
+        ,
+        drop = FALSE
+      ])
+    } else {
+      print(lapply(vertex_attrs, "[", as.vector(x)))
+    }
+  } else {
+    # Otherwise just list the vertices (by name when available).
+    if (!is.null(names(vertices))) {
+      x2 <- names(vertices)[as.vector(x)]
+      if (!is.null(names(x)) && !identical(names(x), x2)) {
+        names(x2) <- names(x)
+      }
+    } else {
+      x2 <- as.vector(x)
+    }
+    if (length(x2)) {
+      max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
+      print_cli_lines(x2, max_lines, "+ ... omitted several vertices\n")
+    }
+  }
+
+  invisible(x)
+}
+
+print_igraph_es_cli <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
+  graph <- get_es_graph(x)
+  total <- if (is.null(graph)) "?" else as.character(gsize(graph))
+  graph_id_short <- graph_id(x)
+  has_vnames <- !is.null(attr(x, "vnames"))
+
+  middot <- middot_cli()
+  # `id` comes from an option and may be NULL/NA, so guard with isTRUE().
+  flags <- c(
+    if (has_vnames) "vertex names",
+    if (isTRUE(id) && !is.na(graph_id_short)) {
+      paste("from", substr(graph_id_short, 1, 7))
+    },
+    if (is.null(graph)) "deleted"
+  )
+
+  title <- paste0(
+    "<edge sequence> ",
+    length(x),
+    "/",
+    total,
+    flag_suffix_cli(flags, middot)
+  )
+  cli_section(title, blank = FALSE)
+
+  if (length(x) == 0) {
+    return(invisible(x))
+  }
+
+  # An edge sequence prints in one of two layouts, mirroring vertex sequences:
+  #
+  #   * detailed -- one row per selected edge with its endpoints and every edge
+  #     attribute as columns (a metadata table); produced by `E(g)[[...]]`.
+  #   * compact  -- a list of "tail <arrow> head" strings; produced by
+  #     `E(g)[...]`. Handled further below.
+  #
+  # As with vertex sequences, `[[` and `[` build the same underlying sequence;
+  # `[[.igraph.es` only tags its result with the "single" attribute that
+  # is_single_index() reads here. The table needs only that flag and a live
+  # graph -- unlike the vertex case there is no attribute-count check, because
+  # an edge always has endpoints to tabulate (the tail/head names plus their
+  # raw numeric ids in tid/hid), so the table is never empty.
+  if (is_single_index(x) && !is.null(graph)) {
+    print_edge_detail(graph, x)
+    return(invisible(x))
+  }
+
+  max_lines <- if (isTRUE(full)) NULL else igraph_opt("auto.print.lines")
+
+  if (!is.null(graph)) {
+    # Live graph: render endpoints with arrows.
+    arrow <- edge_arrow_cli(is_directed(graph))
+    endpoints <- ends(graph, x, names = has_vnames || is_named(graph))
+    body <- format_cli_edge_endpoints(endpoints, arrow)
+  } else {
+    # Graph was deleted: fall back to stored vertex names / ids.
+    body <- if (!is.null(attr(x, "vnames"))) {
+      as.vector(attr(x, "vnames"))
+    } else if (!is.null(names(x))) {
+      names(x)
+    } else {
+      as.vector(x)
+    }
+  }
+  print_cli_lines(body, max_lines, "+ ... omitted several edges\n")
+  invisible(x)
+}
+
 # these are internal
 
 as_igraph_vs <- function(graph, v, na.ok = FALSE) {
@@ -1563,7 +1797,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   }
   if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
-    if (!na.ok && any(is.na(v))) {
+    if (!na.ok && anyNA(v)) {
       cli::cli_abort("Invalid vertex names")
     }
     v
@@ -1575,7 +1809,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
     } else {
       res <- as.numeric(v)
     }
-    if (!na.ok && any(is.na(res))) {
+    if (!na.ok && anyNA(res)) {
       cli::cli_abort("Invalid vertex name(s)")
     }
     res
@@ -1596,7 +1830,7 @@ as_igraph_es <- function(graph, e) {
     ## Based on vertex ids/names
     if (length(Pairs) != 0) {
       vv <- strsplit(e[Pairs], "|", fixed = TRUE)
-      vl <- sapply(vv, length)
+      vl <- lengths(vv)
       if (any(vl != 2)) {
         cli::cli_abort("Invalid edge name: ", e[Pairs][vl != 2][1])
       }
@@ -1618,7 +1852,7 @@ as_igraph_es <- function(graph, e) {
   } else {
     res <- as.numeric(e)
   }
-  if (any(is.na(res))) {
+  if (anyNA(res)) {
     cli::cli_abort("Invalid edge names")
   }
   res
@@ -1638,7 +1872,7 @@ is_igraph_es <- function(x) {
 parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
   args <- list(...)
 
-  if (any(!sapply(args, is_fun))) {
+  if (!all(sapply(args, is_fun))) {
     cli::cli_abort("Not {what} sequence")
   }
 
@@ -1967,7 +2201,7 @@ rev.igraph.es <- rev.igraph.vs
 #'
 #' @details
 #' For graphs without names, a numeric vector is returned, containing the
-#' internal numeric vertex or edge ids.
+#' internal numeric vertex or edge IDs.
 #'
 #' For graphs with names, and vertex sequences, the vertex names are
 #' returned in a character vector.

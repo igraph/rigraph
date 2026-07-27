@@ -6,6 +6,7 @@
 \usage{
 graph_from_adj_list(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 )
@@ -15,12 +16,14 @@ graph_from_adj_list(
 throughout all vectors in the list must be less than the number of vectors
 (=the number of vertices in the graph).}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{Character scalar, it specifies whether the graph to create is
 undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 case, whether it contains the outgoing (\sQuote{out}) or the incoming
 (\sQuote{in}) neighbors of the vertices.}
 
-\item{duplicate}{Logical scalar. For undirected graphs it gives whether
+\item{duplicate}{Logical. For undirected graphs it gives whether
 edges are included in the list twice. E.g. if it is \code{TRUE} then for an
 undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
 included in the neighbors of \code{B} and \code{B} to be included in the
@@ -69,17 +72,17 @@ which_multiple(g3)
 \seealso{
 \code{\link[=as_edgelist]{as_edgelist()}}
 
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adj_list]{as_adj_list()}},
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}},
+\code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_graphnel]{as_graphnel()}},
+\code{\link[=as_long_data_frame]{as_long_data_frame()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

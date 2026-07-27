@@ -4,14 +4,16 @@
 \alias{st_min_cuts}
 \title{List all minimum \eqn{(s,t)}-cuts of a graph}
 \usage{
-st_min_cuts(graph, source, target, capacity = NULL)
+st_min_cuts(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It must be directed.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex.}
+\item{target}{The ID of the target vertex.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Numeric vector giving the edge capacities. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then this
@@ -26,10 +28,10 @@ A list with entries:
 Numeric scalar, the size of the minimum cut(s).
 }
 \item{cuts}{
-A list of numeric vectors containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.
+A list of numeric vectors containing edge IDs. Each vector is a minimum \eqn{(s,t)}-cut.
 }
 \item{partition1s}{
-A list of numeric vectors containing vertex ids,
+A list of numeric vectors containing vertex IDs,
 they correspond to the edge cuts.
 Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 the vertex set \eqn{X} and its complementer \eqn{V-X},
@@ -71,17 +73,17 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

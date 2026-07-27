@@ -9,7 +9,7 @@ hub.score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 \arguments{
 \item{graph}{The input graph.}
 
-\item{scale}{Logical scalar, whether to scale the result to have a maximum
+\item{scale}{Logical, whether to scale the result to have a maximum
 score of one. If no scaling is used then the result vector has unit length
 in the Euclidean norm.}
 
@@ -29,8 +29,4 @@ selected by the surfer.}
 \code{hub.score()} was renamed to \code{\link[=hub_score]{hub_score()}} to create a more
 consistent API.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{hub_and_authority_scores()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
-}
-
 \keyword{internal}

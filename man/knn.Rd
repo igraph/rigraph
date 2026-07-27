@@ -7,6 +7,7 @@
 knn(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL
@@ -19,6 +20,8 @@ knn(
 includes all vertices. Note, that if not all vertices are given here, then
 both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
 on the given vertices only.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant to indicate the type of neighbors to consider
 in directed graphs. \code{out} considers out-neighbors, \verb{in} considers
@@ -98,31 +101,31 @@ Alessandro Vespignani: The architecture of complex weighted networks, Proc.
 Natl. Acad. Sci. USA 101, 3747 (2004)
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

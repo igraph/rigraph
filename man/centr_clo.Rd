@@ -4,15 +4,17 @@
 \alias{centr_clo}
 \title{Centralize a graph according to the closeness of vertices}
 \usage{
-centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
+centr_clo(graph, ..., mode = c("out", "in", "all", "total"), normalized = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{
@@ -49,14 +51,14 @@ centr_betw(g, directed = FALSE)$centralization
 centr_eigen(g, directed = FALSE)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}

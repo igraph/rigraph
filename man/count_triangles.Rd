@@ -14,11 +14,11 @@ count_triangles(graph, vids = V(graph))
 ignored.}
 
 \item{vids}{The vertices to query, all of them by default. This might be a
-vector of numeric ids, or a character vector of symbolic vertex names for
+vector of numeric IDs, or a character vector of symbolic vertex names for
 named graphs.}
 }
 \value{
-For \code{triangles()} a numeric vector of vertex ids, the first three
+For \code{triangles()} a numeric vector of vertex IDs, the first three
 vertices belong to the first triangle found, etc.
 
 For \code{count_triangles()} a numeric vector, the number of triangles for all

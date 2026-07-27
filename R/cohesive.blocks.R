@@ -10,7 +10,7 @@
 #' @export
 exportPajek <- function(blocks, graph, file, project.file = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "exportPajek()", "export_pajek()")
+  lifecycle::deprecate_warn("2.0.0", "exportPajek()", "export_pajek()")
   export_pajek(
     blocks = blocks,
     graph = graph,
@@ -35,7 +35,7 @@ plotHierarchy <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "plotHierarchy()", "plot_hierarchy()")
+  lifecycle::deprecate_warn("2.0.0", "plotHierarchy()", "plot_hierarchy()")
   plot_hierarchy(blocks = blocks, layout = layout, ...)
 } # nocov end
 
@@ -51,7 +51,7 @@ plotHierarchy <- function(
 #' @export
 maxcohesion <- function(blocks) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maxcohesion()", "max_cohesion()")
+  lifecycle::deprecate_warn("2.0.0", "maxcohesion()", "max_cohesion()")
   max_cohesion(blocks = blocks)
 } # nocov end
 
@@ -68,7 +68,7 @@ maxcohesion <- function(blocks) {
 #' @export
 graph.cohesion <- function(x, ...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.cohesion()", "cohesion()")
+  lifecycle::deprecate_warn("2.0.0", "graph.cohesion()", "cohesion()")
   cohesion(x = x, ...)
 } # nocov end
 
@@ -84,7 +84,7 @@ graph.cohesion <- function(x, ...) {
 #' @export
 cohesive.blocks <- function(graph, labels = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "cohesive.blocks()", "cohesive_blocks()")
+  lifecycle::deprecate_warn("2.0.0", "cohesive.blocks()", "cohesive_blocks()")
   cohesive_blocks(graph = graph, labels = labels)
 } # nocov end
 
@@ -100,7 +100,7 @@ cohesive.blocks <- function(graph, labels = TRUE) {
 #' @export
 blockGraphs <- function(blocks, graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "blockGraphs()",
     "graphs_from_cohesive_blocks()"
@@ -152,7 +152,7 @@ blockGraphs <- function(blocks, graph) {
 #'
 #' The function `blocks()` returns the actual blocks stored in the
 #' `cohesiveBlocks` object. They are returned in a list of numeric
-#' vectors, each containing vertex ids.
+#' vectors, each containing vertex IDs.
 #'
 #' The function `graphs_from_cohesive_blocks()` is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
@@ -163,7 +163,7 @@ blockGraphs <- function(blocks, graph) {
 #' `blocks()` and `graphs_from_cohesive_blocks()` functions.
 #'
 #' The block hierarchy can be queried using the `hierarchy()` function. It
-#' returns an igraph graph, its vertex ids are ordered according the order of
+#' returns an igraph graph, its vertex IDs are ordered according the order of
 #' the blocks in the `blocks()` and `graphs_from_cohesive_blocks()`, `cohesion()`,
 #' etc. functions.
 #'
@@ -208,7 +208,7 @@ blockGraphs <- function(blocks, graph) {
 #' blocks. The first block always corresponds to the whole graph, even if its
 #' cohesion is zero. Then cohesion of the block and the number of vertices in
 #' the block are shown. The last part is only printed if the display is wide
-#' enough and shows the vertices in the blocks, ordered by vertex ids.
+#' enough and shows the vertices in the blocks, ordered by vertex IDs.
 #' \sQuote{o} means that the vertex is included, a dot means that it is not,
 #' and the vertices are shown in groups of ten.
 #'
@@ -216,8 +216,7 @@ blockGraphs <- function(blocks, graph) {
 #' cohesive blocks in it.
 #'
 #' @aliases cohesiveBlocks blocks
-#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
-#' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
+#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
@@ -225,7 +224,8 @@ blockGraphs <- function(blocks, graph) {
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
-#' @param labels Logical scalar, whether to add the vertex labels to the result
+#' @inheritParams rlang::args_dots_empty
+#' @param labels Logical, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
 #' @param blocks,x,object A `cohesiveBlocks` object, created with the
@@ -241,7 +241,7 @@ blockGraphs <- function(blocks, graph) {
 #'   of the files, without extension. (But it can contain the path to the files.)
 #'
 #'   See also details below.
-#' @param project.file Logical scalar, whether to create a single Pajek project
+#' @param project.file Logical, whether to create a single Pajek project
 #'   file containing all the data, or to create separated files for each item.
 #'   See details below.
 #' @param y The graph whose cohesive blocks are supplied in the `x`
@@ -265,7 +265,7 @@ blockGraphs <- function(blocks, graph) {
 #'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
 #'
-#'   `blocks()` returns a list of numeric vectors, containing vertex ids.
+#'   `blocks()` returns a list of numeric vectors, containing vertex IDs.
 #'
 #'   `graphs_from_cohesive_blocks()` returns a list of igraph graphs, corresponding to the
 #'   cohesive blocks.
@@ -351,7 +351,33 @@ blockGraphs <- function(blocks, graph) {
 #'   mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
 #' )
 #'
-cohesive_blocks <- function(graph, labels = TRUE) {
+cohesive_blocks <- function(
+  graph,
+  ...,
+  labels = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: cohesive_blocks, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(labels = labels),
+      recover_new = c("labels"),
+      recover_old = c("labels"),
+      match_names = c("labels"),
+      match_to = c("labels"),
+      defaults = list(labels = TRUE),
+      head_args = c("graph"),
+      fn_name = "cohesive_blocks"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -428,7 +454,7 @@ print.cohesiveBlocks <- function(x, ...) {
   myb <- blocks(x)
   ch <- cohesion(x)
   pp <- parent(x)
-  si <- sapply(myb, length)
+  si <- lengths(myb)
 
   cs <- 3 +
     2 +
@@ -589,8 +615,37 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
+#' @inheritParams rlang::args_dots_empty
 #' @export
-export_pajek <- function(blocks, graph, file, project.file = TRUE) {
+export_pajek <- function(
+  blocks,
+  graph,
+  file,
+  ...,
+  project.file = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(project.file = project.file),
+      recover_new = c("project.file"),
+      recover_old = c("project.file"),
+      match_names = c("project.file"),
+      match_to = c("project.file"),
+      defaults = list(project.file = TRUE),
+      head_args = c("blocks", "graph", "file"),
+      fn_name = "export_pajek"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!project.file && (!is.character(file) || !nzchar(file))) {
     cli::cli_abort(
       "{.arg file} must be a filename (without extension) when writing

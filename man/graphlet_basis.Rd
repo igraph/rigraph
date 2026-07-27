@@ -6,27 +6,30 @@
 \alias{graphlets}
 \title{Graphlet decomposition of a graph}
 \usage{
-graphlet_basis(graph, weights = NULL)
+graphlet_basis(graph, ..., weights = NULL)
 
 graphlet_proj(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
   Mu = rep(1, length(cliques))
 )
 
-graphlets(graph, weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, niter = 1000)
 }
 \arguments{
 \item{graph}{The input graph, edge directions are ignored. Only simple graph
 (i.e. graphs without self-loops and multiple edges) are supported.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
 and this argument is \code{NULL} (the default), then the \code{weight} edge
 attribute is used.}
 
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
@@ -38,7 +41,7 @@ projection.}
 \describe{
 \item{cliques}{
 A list of subgraphs, the candidate graphlet basis.
-Each subgraph is give by a vector of vertex ids.
+Each subgraph is give by a vector of vertex IDs.
 }
 \item{Mu}{
 The weights of the subgraphs in graphlet basis.
@@ -49,7 +52,7 @@ The weights of the subgraphs in graphlet basis.
 \describe{
 \item{cliques}{
 A list of subgraphs, the candidate graphlet basis.
-Each subgraph is give by a vector of vertex ids.
+Each subgraph is give by a vector of vertex IDs.
 }
 \item{thresholds}{
 The weight thresholds used for finding the subgraphs.

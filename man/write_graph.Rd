@@ -102,7 +102,7 @@ or NULL to use the "capacity" attribute if it exists.}
 
 GML is a quite general textual format.
 \describe{
-\item{id}{Optional numeric vertex IDs to use.}
+\item{ID}{Optional numeric vertex IDs to use.}
 \item{creator}{Optional string specifying the creator of the file.}
 }
 }
@@ -162,9 +162,9 @@ networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
 \seealso{
 \code{\link[=read_graph]{read_graph()}}
 
-Foreign format readers
-\code{\link{graph_from_graphdb}()},
-\code{\link{read_graph}()}
+Foreign format readers:
+\code{\link[=graph_from_graphdb]{graph_from_graphdb()}},
+\code{\link[=read_graph]{read_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

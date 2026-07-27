@@ -31,7 +31,8 @@ single one in the new graph, and their attributes are combined. Please see
 \code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
 }
 \value{
-a new graph object with the edges deleted.
+a graph object with the loop and/or multiple edges removed; the
+input graph is returned unchanged if it is already simple.
 }
 \description{
 Simple graphs are graphs which do not contain loop and multiple edges.
@@ -46,7 +47,8 @@ it does not contain loop edges and multiple edges.
 
 \code{simplify()} removes the loop and/or multiple edges from a graph.  If
 both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
-function returns a simple graph.
+function returns a simple graph. If the graph is already simple, it is
+returned unchanged.
 
 \code{simplify_and_colorize()} constructs a new, simple graph from a graph and
 also sets a \code{color} attribute on both the vertices and the edges.
@@ -75,31 +77,31 @@ is_simple(simplify(g))
 \code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}},
 \code{\link[=delete_vertices]{delete_vertices()}}
 
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

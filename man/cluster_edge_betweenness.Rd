@@ -6,6 +6,7 @@
 \usage{
 cluster_edge_betweenness(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -18,6 +19,8 @@ cluster_edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
 \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -27,33 +30,33 @@ attribute, but you don't want to use it for community detection. Edge weights
 are used to calculate weighted edge betweenness. This means that edges are
 interpreted as distances, not as connection strengths.}
 
-\item{directed}{Logical constant, whether to calculate directed edge
+\item{directed}{Logical, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}
 
-\item{edge.betweenness}{Logical constant, whether to return the edge
+\item{edge.betweenness}{Logical, whether to return the edge
 betweenness of the edges at the time of their removal.}
 
-\item{merges}{Logical constant, whether to return the merge matrix
+\item{merges}{Logical, whether to return the merge matrix
 representing the hierarchical community structure of the network.  This
 argument is called \code{merges}, even if the community structure algorithm
 itself is divisive and not agglomerative: it builds the tree from top to
 bottom. There is one line for each merge (i.e. split) in matrix, the first
 line is the first merge (last split). The communities are identified by
-integer number starting from one. Community ids smaller than or equal to
+integer number starting from one. Community IDs smaller than or equal to
 \eqn{N}, the number of vertices in the graph, belong to singleton
 communities, i.e. individual vertices. Before the first merge we have \eqn{N}
 communities numbered from one to \eqn{N}. The first merge, the first line of
 the matrix creates community \eqn{N+1}, the second merge creates community
 \eqn{N+2}, etc.}
 
-\item{bridges}{Logical constant, whether to return a list the edge removals
+\item{bridges}{Logical, whether to return a list the edge removals
 which actually splitted a component of the graph.}
 
-\item{modularity}{Logical constant, whether to calculate the maximum
+\item{modularity}{Logical, whether to calculate the maximum
 modularity score, considering all possibly community structures along the
 edge-betweenness based edge removals.}
 
-\item{membership}{Logical constant, whether to calculate the membership
+\item{membership}{Logical, whether to calculate the membership
 vector corresponding to the highest possible modularity score.}
 }
 \value{
@@ -111,26 +114,26 @@ methods.
 See \code{\link[=communities]{communities()}} for extracting the results of the community
 detection.
 
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_infomap]{cluster_infomap()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=modularity.igraph]{modularity.igraph()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=split_join_distance]{split_join_distance()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

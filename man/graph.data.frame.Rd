@@ -12,7 +12,7 @@ columns. Additional columns are considered as edge attributes.  Since
 version 0.7 this argument is coerced to a data frame with
 \code{as.data.frame}.}
 
-\item{directed}{Logical scalar, whether or not to create a directed graph.}
+\item{directed}{Logical, whether or not to create a directed graph.}
 
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame

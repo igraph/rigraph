@@ -55,7 +55,7 @@ graph. The new edges and possibly their attributes can be specified as
 the arguments of the \code{edges()} function.
 
 The unnamed arguments of \code{edges()} are concatenated and used
-as vertex ids of the end points of the new edges. The named
+as vertex IDs of the end points of the new edges. The named
 arguments will be added as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() +
@@ -73,7 +73,7 @@ the graph.
 new edges that form a path are added. The edges and possibly their
 attributes are specified as the arguments to the \code{path()}
 function. The non-named arguments are concatenated and interpreted
-as the vertex ids along the path. The remaining arguments are added
+as the vertex IDs along the path. The remaining arguments are added
 as edge attributes.
 
 Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
@@ -102,30 +102,30 @@ g$layout <- layout_in_circle
 plot(g)
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \concept{functions for manipulating graph structure}

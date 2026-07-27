@@ -10,7 +10,7 @@
 #' @export
 running.mean <- function(v, binwidth) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "running.mean()", "running_mean()")
+  lifecycle::deprecate_warn("2.0.0", "running.mean()", "running_mean()")
   running_mean(v = v, binwidth = binwidth)
 } # nocov end
 
@@ -26,7 +26,7 @@ running.mean <- function(v, binwidth) {
 #' @export
 igraph.sample <- function(low, high, length) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.sample()", "sample_seq()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.sample()", "sample_seq()")
   sample_seq(low = low, high = high, length = length)
 } # nocov end
 
@@ -42,7 +42,7 @@ igraph.sample <- function(low, high, length) {
 #' @export
 convex.hull <- function(data) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "convex.hull()", "convex_hull()")
+  lifecycle::deprecate_warn("2.0.0", "convex.hull()", "convex_hull()")
   convex_hull(data = data)
 } # nocov end
 #   IGraph R package
@@ -72,7 +72,7 @@ convex.hull <- function(data) {
 #' bin width.
 #'
 #' The running mean of `v` is a `w` vector of length
-#' `length(v)-binwidth+1`. The first element of `w` id the average of
+#' `length(v)-binwidth+1`. The first element of `w` ID the average of
 #' the first `binwidth` elements of `v`, the second element of
 #' `w` is the average of elements `2:(binwidth+1)`, etc.
 #'
@@ -153,17 +153,26 @@ sample_seq <- function(low, high, length) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @dev
 #'
-handle_vertex_type_arg <- function(types, graph, required = T) {
+handle_vertex_type_arg <- function(types, graph, required = TRUE) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
     types <- V(graph)$type
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
-      cli::cli_warn("vertex types converted to logical.")
-    }
-    types <- as.logical(types)
-    if (any(is.na(types))) {
-      cli::cli_abort("`NA' is not allowed in vertex types")
+      converted <- suppressWarnings(as.logical(types))
+      if (anyNA(converted)) {
+        cli::cli_abort(
+          "The {.arg type} vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector."
+        )
+      }
+      cli::cli_warn(
+        "The {.arg type} vertex attribute is not logical; converting to logical."
+      )
+      types <- converted
+    } else if (anyNA(types)) {
+      cli::cli_abort(
+        "The {.arg type} vertex attribute contains {.val NA} values, which are not allowed."
+      )
     }
   }
   if (is.null(types) && required) {

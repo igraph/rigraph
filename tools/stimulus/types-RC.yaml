@@ -995,16 +995,20 @@ SIR_LIST:
             IGRAPH_FINALLY_CLEAN(1);
 
 PAGERANKOPT:
-    CTYPE: |-
+    CTYPE: void*
+    # The argument is optional,
+    # so the code generator wraps the input conversion into `if (!Rf_isNull(...))`.
+    # The pointer is passed on to igraph unconditionally,
+    # therefore it must be initialized here
+    # to stay well-defined on the path where the conversion is skipped.
+    CDECL: |-
       igraph_arpack_options_t %C%1;
-      void*
+      void* %C% = NULL;
     INCONV:
         INOUT: |-
           if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK) {
             Rz_SEXP_to_igraph_arpack_options(%I%, &%C%1);
             %C% = &%C%1;
-          } else {
-            %C% = NULL;
           }
     OUTCONV:
         INOUT: |-

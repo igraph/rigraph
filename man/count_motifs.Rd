@@ -4,12 +4,14 @@
 \alias{count_motifs}
 \title{Graph motifs}
 \usage{
-count_motifs(graph, size = 3, cut.prob = NULL)
+count_motifs(graph, size = 3, ..., cut.prob = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -40,9 +42,9 @@ sample_motifs(g, 3)
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{dyad_census}()},
-\code{\link{motifs}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=motifs]{motifs()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}

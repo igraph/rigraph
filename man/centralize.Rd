@@ -5,17 +5,19 @@
 \alias{centralization}
 \title{Centralization of a graph}
 \usage{
-centralize(scores, theoretical.max = 0, normalized = TRUE)
+centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 }
 \arguments{
 \item{scores}{The vertex level centrality scores.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{theoretical.max}{Real scalar. The graph-level centralization measure of
 the most centralized graph with the same number of vertices as the graph
 under study. This is only used if the \code{normalized} argument is set
 to \code{TRUE}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the supplied theoretical maximum.}
 }
 \value{
@@ -77,14 +79,14 @@ Wasserman, S., and Faust, K.  (1994).  \emph{Social Network Analysis:
 Methods and Applications.} Cambridge University Press.
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}}
 }
 \concept{centralization related}

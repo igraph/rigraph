@@ -10,6 +10,7 @@
 sample_traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -19,6 +20,7 @@ sample_traits_callaway(
 traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -29,6 +31,7 @@ sample_traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -38,6 +41,7 @@ traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -48,6 +52,8 @@ traits(
 
 \item{types}{The number of different vertex types.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{edge.per.step}{The number of edges to add to the graph per time step.}
 
 \item{type.dist}{The distribution of the vertex types. This is assumed to be
@@ -56,7 +62,7 @@ stationary in time.}
 \item{pref.matrix}{A matrix giving the preferences of the given vertex
 types. These should be probabilities, i.e. numbers between zero and one.}
 
-\item{directed}{Logical constant, whether to generate directed graphs.}
+\item{directed}{Logical, whether to generate directed graphs.}
 
 \item{k}{The number of trials per time step, see details below.}
 }
@@ -93,33 +99,33 @@ g1 <- sample_traits_callaway(1000, 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol =
 g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

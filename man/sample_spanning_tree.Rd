@@ -4,11 +4,13 @@
 \alias{sample_spanning_tree}
 \title{Samples from the spanning trees of a graph randomly and uniformly}
 \usage{
-sample_spanning_tree(graph, vid = 0)
+sample_spanning_tree(graph, ..., vid = 0)
 }
 \arguments{
 \item{graph}{The input graph to sample from. Edge directions are ignored if
 the graph is directed.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vid}{When the graph is disconnected, this argument specifies how to
 handle the situation. When the argument is zero (the default), the sampling
@@ -39,11 +41,11 @@ forest <- subgraph_from_edges(g, edges)
 \seealso{
 \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the tree itself
 
-Other trees: 
-\code{\link{is_forest}()},
-\code{\link{is_tree}()},
-\code{\link{make_from_prufer}()},
-\code{\link{to_prufer}()}
+Other trees:
+\code{\link[=is_forest]{is_forest()}},
+\code{\link[=is_tree]{is_tree()}},
+\code{\link[=make_from_prufer]{make_from_prufer()}},
+\code{\link[=to_prufer]{to_prufer()}}
 }
 \concept{trees}
 \keyword{graph}

@@ -10,11 +10,11 @@ is_min_separator(graph, candidate)
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored.}
 
-\item{candidate}{A numeric vector giving the vertex ids of the candidate
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate
 separator.}
 }
 \value{
-A logical scalar, whether the supplied vertex set is a (minimal)
+A Logical, whether the supplied vertex set is a (minimal)
 vertex separator or not.
 }
 \description{
@@ -60,16 +60,16 @@ check.sep(mw5)
 
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}

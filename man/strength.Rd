@@ -7,6 +7,7 @@
 strength(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
@@ -16,6 +17,8 @@ strength(
 \item{graph}{The input graph.}
 
 \item{vids}{The vertices for which the strength will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
@@ -59,19 +62,19 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 \seealso{
 \code{\link[=degree]{degree()}} for the unweighted version.
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

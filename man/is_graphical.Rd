@@ -7,6 +7,7 @@
 is_graphical(
   out.deg,
   in.deg = NULL,
+  ...,
   allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 }
@@ -16,6 +17,8 @@ the out-degree sequence for directed graphs.}
 
 \item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
 should be \code{NULL}. For directed graphs it specifies the in-degrees.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{The allowed edge types in the graph. \sQuote{simple}
 means that neither loop nor multiple edges are allowed (i.e. the graph must be
@@ -54,8 +57,8 @@ realize graphical degree sequences of directed graphs.  \emph{The Electronic
 Journal of Combinatorics} 17(1):R66, 2010.
 }
 \seealso{
-Other graphical degree sequences: 
-\code{\link{is_degseq}()}
+Other graphical degree sequences:
+\code{\link[=is_degseq]{is_degseq()}}
 }
 \author{
 Tamás Nepusz \email{ntamas@gmail.com}

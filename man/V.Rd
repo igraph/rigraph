@@ -11,7 +11,7 @@ V(graph)
 }
 \value{
 A vertex sequence containing all vertices, in the order
-of their numeric vertex ids.
+of their numeric vertex IDs.
 }
 \description{
 Create a vertex sequence (vs) containing all vertices of a graph.
@@ -26,13 +26,13 @@ the specific vertices of that graph, and cannot be used together with
 another graph.
 
 At the implementation level, a vertex sequence is simply a vector
-containing numeric vertex ids, but it has a special class attribute
+containing numeric vertex IDs, but it has a special class attribute
 which makes it possible to perform graph specific operations on it, like
 selecting a subset of the vertices based on graph structure, or vertex
 attributes.
 
 A vertex sequence is most often created by the \code{V()} function. The
-result of this includes all vertices in increasing vertex id order. A
+result of this includes all vertices in increasing vertex ID order. A
 vertex sequence can be indexed by a numeric vector, just like a regular
 R vector. See \code{\link{[.igraph.vs}} and additional links to other
 vertex sequence operations below.
@@ -66,16 +66,16 @@ g2 <- make_ring(10) \%>\%
 V(g2)
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.es}()},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.es]{print.igraph.es()}},
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 }
 \concept{vertex and edge sequences}

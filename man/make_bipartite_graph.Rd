@@ -5,9 +5,9 @@
 \alias{bipartite_graph}
 \title{Create a bipartite graph}
 \usage{
-make_bipartite_graph(types, edges, directed = FALSE)
+make_bipartite_graph(types, edges, ..., directed = FALSE)
 
-bipartite_graph(types, edges, directed = FALSE)
+bipartite_graph(types, edges, ..., directed = FALSE)
 }
 \arguments{
 \item{types}{A vector giving the vertex types. It will be coerced into
@@ -20,7 +20,9 @@ regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
 
-\item{directed}{Whether to create a directed graph, boolean constant. Note
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether to create a directed graph. Note
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
 }
@@ -28,7 +30,7 @@ bipartite graphs.}
 \code{make_bipartite_graph()} returns a bipartite igraph graph. In other
 words, an igraph graph that has a vertex attribute named \code{type}.
 
-\code{is_bipartite()} returns a logical scalar.
+\code{is_bipartite()} returns a Logical.
 }
 \description{
 A bipartite graph has two kinds of vertices and connections are only allowed
@@ -59,10 +61,10 @@ print(g, v = TRUE)
 \seealso{
 \code{\link[=make_graph]{make_graph()}} to create one-mode networks
 
-Bipartite graphs
-\code{\link{bipartite_mapping}()},
-\code{\link{bipartite_projection}()},
-\code{\link{is_bipartite}()}
+Bipartite graphs:
+\code{\link[=bipartite_mapping]{bipartite_mapping()}},
+\code{\link[=bipartite_projection]{bipartite_projection()}},
+\code{\link[=is_bipartite]{is_bipartite()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

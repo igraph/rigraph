@@ -9,7 +9,7 @@ layout_modifier(...)
 \arguments{
 \item{...}{Named arguments that define the modifier. Must include:
 \describe{
-\item{id}{A unique identifier string for the modifier}
+\item{ID}{A unique identifier string for the modifier}
 \item{type}{Either \code{"pre"} for pre-layout or \code{"post"} for post-layout}
 \item{args}{A list of arguments to pass to the apply function}
 \item{apply}{A function with signature
@@ -46,8 +46,8 @@ plot(g, layout = coords)
 \code{\link[=layout_]{layout_()}} for using modifiers, \code{\link[=component_wise]{component_wise()}}, \code{\link[=normalize]{normalize()}}
 for examples of built-in modifiers.
 
-Other layout modifiers: 
-\code{\link{component_wise}()},
-\code{\link{normalize}()}
+Other layout modifiers:
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=normalize]{normalize()}}
 }
 \concept{layout modifiers}

@@ -4,12 +4,14 @@
 \alias{adjacent_vertices}
 \title{Adjacent vertices of multiple vertices in a graph}
 \usage{
-adjacent_vertices(graph, v, mode = c("out", "in", "all", "total"))
+adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{Input graph.}
 
 \item{v}{The vertices to query.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
@@ -31,19 +33,19 @@ g <- make_graph("Zachary")
 adjacent_vertices(g, c(1, 34))
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{are_adjacent}()},
-\code{\link{ends}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{incident_edges}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=are_adjacent]{are_adjacent()}},
+\code{\link[=ends]{ends()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident]{incident()}},
+\code{\link[=incident_edges]{incident_edges()}},
+\code{\link[=is_directed]{is_directed()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}

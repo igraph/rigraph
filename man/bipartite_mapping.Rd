@@ -61,10 +61,10 @@ g3 <- add_edges(g3, c(1, 3))
 bipartite_mapping(g3)
 }
 \seealso{
-Bipartite graphs
-\code{\link{bipartite_projection}()},
-\code{\link{is_bipartite}()},
-\code{\link{make_bipartite_graph}()}
+Bipartite graphs:
+\code{\link[=bipartite_projection]{bipartite_projection()}},
+\code{\link[=is_bipartite]{is_bipartite()}},
+\code{\link[=make_bipartite_graph]{make_bipartite_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

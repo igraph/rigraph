@@ -4,10 +4,12 @@
 \alias{E}
 \title{Edges of a graph}
 \usage{
-E(graph, P = NULL, path = NULL, directed = TRUE)
+E(graph, ..., P = NULL, path = NULL, directed = TRUE)
 }
 \arguments{
 \item{graph}{The graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{P}{A list of vertices to select edges via pairs of vertices.
 The first and second vertices select the first edge, the third
@@ -25,7 +27,7 @@ argument, for directed graphs.}
 An edge sequence of the graph.
 }
 \description{
-An edge sequence is a vector containing numeric edge ids, with a special
+An edge sequence is a vector containing numeric edge IDs, with a special
 class attribute that allows custom operations: selecting subsets of
 edges based on attributes, or graph structure, creating the
 intersection, union of edges, etc.
@@ -39,7 +41,7 @@ the specific edges of that graph, and cannot be used together with
 another graph.
 
 An edge sequence is most often created by the \code{E()} function. The
-result includes edges in increasing edge id order by default (if. none
+result includes edges in increasing edge ID order by default (if. none
 of the \code{P} and \code{path} arguments are used). An edge
 sequence can be indexed by a numeric vector, just like a regular R
 vector. See links to other edge sequence operations below.
@@ -73,16 +75,16 @@ g2 <- make_ring(10) \%>\%
 E(g2)
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{V}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=V]{V()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.es}()},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.es]{print.igraph.es()}},
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 }
 \concept{vertex and edge sequences}

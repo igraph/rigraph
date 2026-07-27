@@ -6,6 +6,7 @@
 \usage{
 cluster_walktrap(
   graph,
+  ...,
   weights = NULL,
   steps = 4,
   merges = TRUE,
@@ -16,6 +17,8 @@ cluster_walktrap(
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored in directed
 graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -28,14 +31,14 @@ walker. In other words, larger edge weights correspond to stronger connections.}
 
 \item{steps}{The length of the random walks to perform.}
 
-\item{merges}{Logical scalar, whether to include the merge matrix in the
+\item{merges}{Logical, whether to include the merge matrix in the
 result.}
 
-\item{modularity}{Logical scalar, whether to include the vector of the
+\item{modularity}{Logical, whether to include the vector of the
 modularity scores in the result. If the \code{membership} argument is true,
 then it will always be calculated.}
 
-\item{membership}{Logical scalar, whether to calculate the membership vector
+\item{membership}{Logical, whether to calculate the membership vector
 for the split corresponding to the highest modularity value.}
 }
 \value{
@@ -78,26 +81,26 @@ vector, merge matrix, modularity score, etc.
 and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection
 methods.
 
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_infomap]{cluster_infomap()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=modularity.igraph]{modularity.igraph()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=split_join_distance]{split_join_distance()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \author{
 Pascal Pons (\url{http://psl.pons.free.fr/}) and Gabor Csardi

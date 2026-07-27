@@ -7,6 +7,7 @@
 similarity(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
   method = c("jaccard", "dice", "invlogweighted")
@@ -15,7 +16,9 @@ similarity(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex ids for which the similarity is calculated.}
+\item{vids}{The vertex IDs for which the similarity is calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
@@ -72,8 +75,8 @@ Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 \emph{Social Networks}, 25(3):211-230, 2003.
 }
 \seealso{
-Other cocitation: 
-\code{\link{cocitation}()}
+Other cocitation:
+\code{\link[=cocitation]{cocitation()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

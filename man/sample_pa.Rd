@@ -9,6 +9,7 @@ sample_pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -22,6 +23,7 @@ pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -41,6 +43,8 @@ i.e. linear preferential attachment.}
 defaults to 1.
 This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
 or NULL.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{out.dist}{Numeric vector, the distribution of the number of edges to
 add in each time step. This argument is only used if the \code{out.seq}
@@ -66,7 +70,7 @@ partial prefix-sum tree, but the generation of multiple edges is allowed.
 Before the 0.6 version igraph used this algorithm if \code{power} was not
 one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
 was previously (before version 0.6) used if \code{power} was one and
-\code{zero.appeal} was one as well. It works by putting the ids of the
+\code{zero.appeal} was one as well. It works by putting the IDs of the
 vertices into a bag (multiset, really), exactly as many times as their
 (in-)degree, plus once more. Then the required number of cited vertices are
 drawn from the bag, with replacement. This method might generate multiple
@@ -140,33 +144,33 @@ de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
 149 510--515.
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

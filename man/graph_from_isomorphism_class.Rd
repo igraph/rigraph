@@ -4,12 +4,14 @@
 \alias{graph_from_isomorphism_class}
 \title{Create a graph from an isomorphism class}
 \usage{
-graph_from_isomorphism_class(size, number, directed = TRUE)
+graph_from_isomorphism_class(size, number, ..., directed = TRUE)
 }
 \arguments{
 \item{size}{The number of vertices in the graph.}
 
 \item{number}{The isomorphism class.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph (the default).}
 }
@@ -29,14 +31,14 @@ vertices and undirected graphd with 3 to 6 vertices.
 }
 
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \concept{graph isomorphism}

@@ -25,7 +25,7 @@ write.graph <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "write.graph()", "write_graph()")
+  lifecycle::deprecate_warn("2.0.0", "write.graph()", "write_graph()")
   write_graph(graph = graph, file = file, format = format, ...)
 } # nocov end
 
@@ -55,7 +55,7 @@ read.graph <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "read.graph()", "read_graph()")
+  lifecycle::deprecate_warn("2.0.0", "read.graph()", "read_graph()")
   read_graph(file = file, format = format, ...)
 } # nocov end
 
@@ -81,7 +81,7 @@ graph.graphdb <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.graphdb()", "graph_from_graphdb()")
+  lifecycle::deprecate_warn("2.0.0", "graph.graphdb()", "graph_from_graphdb()")
   graph_from_graphdb(
     url = url,
     prefix = prefix,
@@ -214,7 +214,7 @@ write.graph.fromraw <- function(buffer, file) {
 #'       then vertex IDs will be assigned to vertex names in the order of
 #'       their appearance in the .ncol file.
 #'       If it is not `character(0)` and some unknown vertex names are found
-#'       in the .ncol file then new vertex ids will be assigned to them.
+#'       in the .ncol file then new vertex IDs will be assigned to them.
 #'     }
 #'     \item{names}{
 #'       Logical value, if `TRUE` (the default)
@@ -415,7 +415,7 @@ read_graph <- function(
 #' @section GML format:
 #' GML is a quite general textual format.
 #' \describe{
-#'   \item{id}{Optional numeric vertex IDs to use.}
+#'   \item{ID}{Optional numeric vertex IDs to use.}
 #'   \item{creator}{Optional string specifying the creator of the file.}
 #' }
 #'
@@ -783,7 +783,8 @@ write.graph.dot <- function(graph, file) {
 #' <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 #' for the actual format of a graph database file and other information.
 #'
-#' @param url If not `NULL` it is a complete URL with the file to import.
+#' @param url Complete URL with the file to import. Default: `NULL`.
+#' @inheritParams rlang::args_dots_empty
 #' @param prefix Gives the prefix. See details below. Possible values:
 #'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
 #'   `mcs50`, `mcs70`, `mcs90`.
@@ -800,10 +801,10 @@ write.graph.dot <- function(graph, file) {
 #'   there are a number of actual graphs in the database. This argument specifies
 #'   which one to read.
 #' @param base The base address of the database. See details below.
-#' @param compressed Logical constant, if TRUE than the file is expected to be
+#' @param compressed Logical, if TRUE than the file is expected to be
 #'   compressed by gzip. If `url` is `NULL` then a \sQuote{`.gz`}
 #'   suffix is added to the filename.
-#' @param directed Logical constant, whether to create a directed graph.
+#' @param directed Logical, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [read_graph()], [isomorphic()]
@@ -815,6 +816,7 @@ write.graph.dot <- function(graph, file) {
 #' @keywords graphs
 graph_from_graphdb <- function(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -824,6 +826,82 @@ graph_from_graphdb <- function(
   compressed = TRUE,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_graphdb, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        prefix = prefix,
+        type = type,
+        nodes = nodes,
+        pair = pair,
+        which = which,
+        base = base,
+        compressed = compressed,
+        directed = directed
+      ),
+      recover_new = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      recover_old = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      match_names = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      match_to = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      defaults = list(
+        prefix = "iso",
+        type = "r001",
+        nodes = NULL,
+        pair = "A",
+        which = 0,
+        base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+        compressed = TRUE,
+        directed = TRUE
+      ),
+      head_args = c("url"),
+      fn_name = "graph_from_graphdb"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (is.null(nodes) && is.null(url)) {
     cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
   }

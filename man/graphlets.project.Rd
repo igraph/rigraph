@@ -20,7 +20,7 @@ graphlets.project(
 and this argument is \code{NULL} (the default), then the \code{weight} edge
 attribute is used.}
 
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}

@@ -31,12 +31,13 @@
 #' a specific cycle.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant specifying how to handle directed graphs.
 #'   `out` follows edge directions, `in` follows edges in the reverse direction,
 #'   and `all` ignores edge directions. Ignored in undirected graphs.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -49,7 +50,33 @@
 #' @family cycles
 #' @export
 
-find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
+find_cycle <- function(
+  graph,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: find_cycle, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph"),
+      fn_name = "find_cycle"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   find_cycle_impl(
     graph = graph,
     mode = mode

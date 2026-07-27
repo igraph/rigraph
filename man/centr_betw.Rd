@@ -4,15 +4,17 @@
 \alias{centr_betw}
 \title{Centralize a graph according to the betweenness of vertices}
 \usage{
-centr_betw(graph, directed = TRUE, normalized = TRUE)
+centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths for
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether to use directed shortest paths for
 calculating betweenness.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{
@@ -49,14 +51,14 @@ centr_betw(g, directed = FALSE)$centralization
 centr_eigen(g, directed = FALSE)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}
