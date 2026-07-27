@@ -9,6 +9,7 @@ from such a list.
 ``` r
 graph_from_adj_list(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 )
@@ -21,6 +22,10 @@ graph_from_adj_list(
   The adjacency list. It should be consistent, i.e. the maximum
   throughout all vectors in the list must be less than the number of
   vectors (=the number of vertices in the graph).
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

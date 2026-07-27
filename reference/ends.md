@@ -5,7 +5,7 @@ Incident vertices of some graph edges
 ## Usage
 
 ``` r
-ends(graph, es, names = TRUE)
+ends(graph, es, ..., names = TRUE)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ ends(graph, es, names = TRUE)
 - es:
 
   The sequence of edges to query
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - names:
 

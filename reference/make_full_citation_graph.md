@@ -7,9 +7,9 @@ directed graph, where every `i->j` edge is present if and only if
 ## Usage
 
 ``` r
-make_full_citation_graph(n, directed = TRUE)
+make_full_citation_graph(n, ..., directed = TRUE)
 
-full_citation_graph(n, directed = TRUE)
+full_citation_graph(n, ..., directed = TRUE)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ full_citation_graph(n, directed = TRUE)
 - n:
 
   The number of vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -54,7 +58,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> ── <igraph> Full citation graph ───────────────────────────────────── c0b2eba ──
+#> ── <igraph> Full citation graph ───────────────────────────────────── 76b6966 ──
 #> ℹ directed
 #> ℹ 10 vertices · 45 edges
 #> 

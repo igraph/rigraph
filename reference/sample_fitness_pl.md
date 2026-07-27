@@ -11,6 +11,7 @@ sample_fitness_pl(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
@@ -40,6 +41,10 @@ sample_fitness_pl(
   If greater than or equal to 2, this argument specifies the exponent of
   the in-degree distribution. If non-negative but less than 2, an error
   will be generated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 

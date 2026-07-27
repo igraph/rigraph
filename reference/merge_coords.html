@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_coords</span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layouts</span>, method <span class="op">=</span> <span class="st">"dla"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_coords</span><span class="op">(</span><span class="va">graphs</span>, <span class="va">layouts</span>, <span class="va">...</span>, method <span class="op">=</span> <span class="st">"dla"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">layout_components</span><span class="op">(</span><span class="va">graph</span>, layout <span class="op">=</span> <span class="va">layout_with_kk</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -72,6 +72,11 @@
 <dd><p>A list of two-column matrices.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments to pass to the <code>layout</code> layout
+function.</p></dd>
+
+
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Character constant giving the method to use. Right now only
 <code>dla</code> is implemented.</p></dd>
@@ -83,11 +88,6 @@
 
 <dt id="arg-layout">layout<a class="anchor" aria-label="anchor" href="#arg-layout"></a></dt>
 <dd><p>A function object, the layout function to use.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments to pass to the <code>layout</code> layout
-function.</p></dd>
 
 </dl></div>
     <div class="section level2">

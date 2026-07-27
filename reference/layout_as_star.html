@@ -58,7 +58,7 @@ and the rest of the vertices equidistantly on the perimeter.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_as_star</span><span class="op">(</span><span class="va">graph</span>, center <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, order <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_as_star</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, center <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, order <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">as_star</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -71,6 +71,10 @@ and the rest of the vertices equidistantly on the perimeter.</p>
 <dd><p>The graph to layout.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Arguments to pass to <code>layout_as_star()</code>.</p></dd>
+
+
 <dt id="arg-center">center<a class="anchor" aria-label="anchor" href="#arg-center"></a></dt>
 <dd><p>The ID of the vertex to put in the center. By default it is
 the first vertex.</p></dd>
@@ -79,10 +83,6 @@ the first vertex.</p></dd>
 <dt id="arg-order">order<a class="anchor" aria-label="anchor" href="#arg-order"></a></dt>
 <dd><p>Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex IDs.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments to pass to <code>layout_as_star()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

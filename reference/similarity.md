@@ -9,6 +9,7 @@ connection patterns.
 similarity(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
   method = c("jaccard", "dice", "invlogweighted")
@@ -24,6 +25,10 @@ similarity(
 - vids:
 
   The vertex IDs for which the similarity is calculated.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

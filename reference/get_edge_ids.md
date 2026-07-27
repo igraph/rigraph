@@ -7,7 +7,7 @@ consider or ignore the edge directions in directed graphs.
 ## Usage
 
 ``` r
-get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
+get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
 ```
 
 ## Arguments
@@ -22,6 +22,10 @@ get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
   matrix, or vector of vertex IDs or symbolic vertex names. For a
   vector, the values are interpreted pairwise, i.e. the first and second
   are used for the first edge, the third and fourth for the second, etc.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -84,7 +88,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> ── <edge sequence> 2/10 · from 76adf75 ─────────────────────────────────────────
+#> ── <edge sequence> 2/10 · from 4db4194 ─────────────────────────────────────────
 #> [1] 1 ─ 2  4 ─ 5 
 
 ## non-existant edge
@@ -98,6 +102,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> ── <edge sequence> 2/5 · from 1c5726b ──────────────────────────────────────────
+#> ── <edge sequence> 2/5 · from 026a2dd ──────────────────────────────────────────
 #> [1] 1 → 2  1 → 2 
 ```

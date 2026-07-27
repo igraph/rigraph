@@ -60,6 +60,7 @@ algorithm by Davidson and Harel.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_dh</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  fineiter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -80,6 +81,10 @@ algorithm by Davidson and Harel.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The graph to lay out. Edge directions are ignored.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_dh()</code>.</p></dd>
 
 
 <dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
@@ -124,10 +129,6 @@ energy function.</p></dd>
 <dt id="arg-weight-node-edge-dist">weight.node.edge.dist<a class="anchor" aria-label="anchor" href="#arg-weight-node-edge-dist"></a></dt>
 <dd><p>Weight for the node-edge distance component of
 the energy function.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_dh()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

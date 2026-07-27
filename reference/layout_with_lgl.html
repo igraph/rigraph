@@ -57,6 +57,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_lgl</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">150</span>,</span>
 <span>  maxdelta <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
 <span>  area <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span>
@@ -75,6 +76,10 @@
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_lgl()</code>.</p></dd>
 
 
 <dt id="arg-maxiter">maxiter<a class="anchor" aria-label="anchor" href="#arg-maxiter"></a></dt>
@@ -110,10 +115,6 @@ grid cells are taken into account (the fourth root of the number of
 <dt id="arg-root">root<a class="anchor" aria-label="anchor" href="#arg-root"></a></dt>
 <dd><p>The ID of the vertex to place at the middle of the layout. The
 default value is -1 which means that a random vertex is selected.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_lgl()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

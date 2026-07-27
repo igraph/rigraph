@@ -8,6 +8,7 @@ algorithm.
 ``` r
 layout_with_gem(
   graph,
+  ...,
   coords = NULL,
   maxiter = 40 * vcount(graph)^2,
   temp.max = max(vcount(graph), 1),
@@ -23,6 +24,10 @@ with_gem(...)
 - graph:
 
   The input graph. Edge directions are ignored.
+
+- ...:
+
+  Passed to `layout_with_gem()`.
 
 - coords:
 
@@ -51,10 +56,6 @@ with_gem(...)
 
   Initial local temperature of all vertices. A reasonable default is the
   square root of the number of vertices.
-
-- ...:
-
-  Passed to `layout_with_gem()`.
 
 ## Value
 

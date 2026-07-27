@@ -7,7 +7,7 @@ queries the adjacent vertices for multiple vertices at once.
 ## Usage
 
 ``` r
-adjacent_vertices(graph, v, mode = c("out", "in", "all", "total"))
+adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ adjacent_vertices(graph, v, mode = c("out", "in", "all", "total"))
 - v:
 
   The vertices to query.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -56,11 +60,11 @@ Other structural queries:
 g <- make_graph("Zachary")
 adjacent_vertices(g, c(1, 34))
 #> [[1]]
-#> ── <vertex sequence> 16/34 · from 83b4b63 ──────────────────────────────────────
+#> ── <vertex sequence> 16/34 · from 85050e6 ──────────────────────────────────────
 #>  [1]  2  3  4  5  6  7  8  9 11 12 13 14 18 20 22 32
 #> 
 #> [[2]]
-#> ── <vertex sequence> 17/34 · from 83b4b63 ──────────────────────────────────────
+#> ── <vertex sequence> 17/34 · from 85050e6 ──────────────────────────────────────
 #>  [1]  9 10 14 15 16 19 20 21 23 24 27 28 29 30 31 32 33
 #> 
 ```

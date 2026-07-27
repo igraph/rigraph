@@ -5,9 +5,9 @@ Sampling from the stochastic block model of networks
 ## Usage
 
 ``` r
-sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sample_sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 
-sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -27,6 +27,10 @@ sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
   Numeric vector giving the number of vertices in each group. The sum of
   the vector must match the number of vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -99,7 +103,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(0.1, 0.001), c(0.001, 0.05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> ── <igraph> Stochastic block model ────────────────────────────────── 2734fe7 ──
+#> ── <igraph> Stochastic block model ────────────────────────────────── f1cd098 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 16856 edges
 #> 

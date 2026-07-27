@@ -13,6 +13,7 @@ sample_pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -30,6 +31,7 @@ pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -63,6 +65,10 @@ pa_age(
   The number of edges each new vertex creates (except the very first
   vertex). This argument is used only if both the `out.dist` and
   `out.seq` arguments are NULL.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - aging.bin:
 

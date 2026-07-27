@@ -7,11 +7,12 @@ below for definitions.
 ## Usage
 
 ``` r
-global_efficiency(graph, weights = NULL, directed = TRUE)
+global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
   vids = V(graph),
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -19,6 +20,7 @@ local_efficiency(
 
 average_local_efficiency(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -30,6 +32,10 @@ average_local_efficiency(
 - graph:
 
   The graph to analyze.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

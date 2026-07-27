@@ -62,6 +62,7 @@ proportional to node fitness scores.</p>
 <span>  <span class="va">no.of.edges</span>,</span>
 <span>  <span class="va">fitness.out</span>,</span>
 <span>  fitness.in <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  multiple <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -84,6 +85,10 @@ For directed graphs, this specifies the out-fitness of each vertex.</p></dd>
 <dd><p>Numeric vector that specifies the in-fitness of each vertex.
 The generated graph will be directed.
 Default: <code>NULL</code>, the generated graph will be undirected.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>

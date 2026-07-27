@@ -8,6 +8,7 @@ algorithm minimized edge crossings.
 ``` r
 layout_with_sugiyama(
   graph,
+  ...,
   layers = NULL,
   hgap = 1,
   vgap = 1,
@@ -24,6 +25,10 @@ with_sugiyama(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  Passed to `layout_with_sugiyama()`.
 
 - layers:
 
@@ -61,10 +66,6 @@ with_sugiyama(...)
   vertex attributes and the ‘arrow.mode’ and ‘arrow.size’ edge
   attributes. ‘all’ keep all graph, vertex and edge attributes, ‘none’
   keeps none of them.
-
-- ...:
-
-  Passed to `layout_with_sugiyama()`.
 
 ## Value
 

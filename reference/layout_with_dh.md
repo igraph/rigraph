@@ -8,6 +8,7 @@ annealing algorithm by Davidson and Harel.
 ``` r
 layout_with_dh(
   graph,
+  ...,
   coords = NULL,
   maxiter = 10,
   fineiter = max(10, log2(vcount(graph))),
@@ -27,6 +28,10 @@ with_dh(...)
 - graph:
 
   The graph to lay out. Edge directions are ignored.
+
+- ...:
+
+  Passed to `layout_with_dh()`.
 
 - coords:
 
@@ -67,10 +72,6 @@ with_dh(...)
 - weight.node.edge.dist:
 
   Weight for the node-edge distance component of the energy function.
-
-- ...:
-
-  Passed to `layout_with_dh()`.
 
 ## Value
 

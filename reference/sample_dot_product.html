@@ -61,9 +61,9 @@ their latent position vectors.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">vecs</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">vecs</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">dot_product</span><span class="op">(</span><span class="va">vecs</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">dot_product</span><span class="op">(</span><span class="va">vecs</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,6 +73,10 @@ their latent position vectors.</p>
 <dl><dt id="arg-vecs">vecs<a class="anchor" aria-label="anchor" href="#arg-vecs"></a></dt>
 <dd><p>A numeric matrix in which each latent position vector is a
 column.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
@@ -148,7 +152,7 @@ and <code><a href="sample_sphere_volume.html">sample_sphere_volume()</a></code> 
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">lpvs</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 7d176b9 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 053a9a7 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 27 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -161,7 +165,7 @@ and <code><a href="sample_sphere_volume.html">sample_sphere_volume()</a></code> 
 <span class="r-in"><span><span class="va">lpvs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_sphere_surface.html">sample_sphere_surface</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">5</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">lpvs2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 58815a9 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── f676710 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 20 vertices · 145 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

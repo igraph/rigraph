@@ -6,7 +6,7 @@ at random from the set of labelled trees.
 ## Usage
 
 ``` r
-sample_tree(n, directed = FALSE, method = c("lerw", "prufer"))
+sample_tree(n, ..., directed = FALSE, method = c("lerw", "prufer"))
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ sample_tree(n, directed = FALSE, method = c("lerw", "prufer"))
 - n:
 
   The number of nodes in the tree
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

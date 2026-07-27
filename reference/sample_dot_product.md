@@ -7,9 +7,9 @@ of their latent position vectors.
 ## Usage
 
 ``` r
-sample_dot_product(vecs, directed = FALSE)
+sample_dot_product(vecs, ..., directed = FALSE)
 
-dot_product(vecs, directed = FALSE)
+dot_product(vecs, ..., directed = FALSE)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ dot_product(vecs, directed = FALSE)
 - vecs:
 
   A numeric matrix in which each latent position vector is a column.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -94,7 +98,7 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── 7d176b9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 053a9a7 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 27 edges
 #> 
@@ -107,7 +111,7 @@ g
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── 58815a9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f676710 ──
 #> ℹ undirected
 #> ℹ 20 vertices · 145 edges
 #> 

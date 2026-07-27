@@ -58,7 +58,7 @@ have the same number of children.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_tree</span><span class="op">(</span><span class="va">n</span>, children <span class="op">=</span> <span class="fl">2</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"undirected"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_tree</span><span class="op">(</span><span class="va">n</span>, children <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"undirected"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tree</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -76,16 +76,16 @@ have the same number of children.</p>
 (except for leafs)</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>make_tree()</code> or <code><a href="sample_tree.html">sample_tree()</a></code>.</p></dd>
+
+
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
 <dd><p>Defines the direction of the
 edges. <code>out</code> indicates that the edges point from the parent to
 the children, <code>in</code> indicates that they point from the children
 to their parents, while <code>undirected</code> creates an undirected
 graph.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_tree()</code> or <code><a href="sample_tree.html">sample_tree()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -120,7 +120,7 @@ graph.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Tree ──────────────────────────────────────────────────── 3d47d4b ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Tree ──────────────────────────────────────────────────── af8946b ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 9 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -130,7 +130,7 @@ graph.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 → 2   1 → 3   2 → 4   2 → 5   3 → 6   3 → 7   4 → 8   4 → 9   5 → 10 </span>
 <span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Tree ──────────────────────────────────────────────────── 81666a2 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Tree ──────────────────────────────────────────────────── ad3e382 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 9 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

@@ -5,7 +5,7 @@ Dominator tree of a directed graph.
 ## Usage
 
 ``` r
-dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
+dominator_tree(graph, root, ..., mode = c("out", "in", "all", "total"))
 ```
 
 ## Arguments
@@ -20,6 +20,10 @@ dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
 
   The ID of the root (or source) vertex, this will be the root of the
   tree.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 

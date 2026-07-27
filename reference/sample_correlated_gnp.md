@@ -9,6 +9,7 @@ and shuffling its vertices.
 sample_correlated_gnp(
   old.graph,
   corr,
+  ...,
   p = edge_density(old.graph),
   permutation = NULL
 )
@@ -25,6 +26,10 @@ sample_correlated_gnp(
   A scalar in the unit interval, the target Pearson correlation between
   the adjacency matrices of the original and the generated graph (the
   adjacency matrix being used as a vector).
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - p:
 
@@ -100,7 +105,7 @@ g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
 #> [1] 0.5027749
 g
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 975c9cc ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 036f864 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 49901 edges
 #> 
@@ -120,7 +125,7 @@ g
 #>    [55] 13 ─ 33     18 ─ 33     27 ─ 33     9 ─ 34      10 ─ 34     24 ─ 34    
 #> + ... omitted several edges
 g2
-#> ── <igraph> Correlated random graph ───────────────────────────────── faecf55 ──
+#> ── <igraph> Correlated random graph ───────────────────────────────── b186450 ──
 #> ℹ undirected
 #> ℹ 1000 vertices · 50083 edges
 #> 

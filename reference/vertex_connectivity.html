@@ -58,7 +58,7 @@ called group cohesion.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vertex_connectivity</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span>, checks <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vertex_connectivity</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, checks <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">vertex_disjoint_paths</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
@@ -84,6 +84,11 @@ can be <code>NULL</code>, see details below.</p></dd>
 can be <code>NULL</code>, see details below.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to methods. Not used by <code>vertex_connectivity()</code>
+directly but may be used by other methods that implement <code>cohesion()</code>.</p></dd>
+
+
 <dt id="arg-checks">checks<a class="anchor" aria-label="anchor" href="#arg-checks"></a></dt>
 <dd><p>Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
@@ -92,11 +97,6 @@ degree is one then the vertex connectivity is also one. It is a good idea to
 perform these checks, as they can be done quickly compared to the
 connectivity calculation itself.  They were suggested by Peter McMahan,
 thanks Peter.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to methods. Not used by <code>vertex_connectivity()</code>
-directly but may be used by other methods that implement <code>cohesion()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

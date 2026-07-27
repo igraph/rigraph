@@ -6,11 +6,11 @@ called group adhesion.
 ## Usage
 
 ``` r
-edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+edge_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 edge_disjoint_paths(graph, source = NULL, target = NULL)
 
-adhesion(graph, checks = TRUE)
+adhesion(graph, ..., checks = TRUE)
 ```
 
 ## Arguments
@@ -28,6 +28,10 @@ adhesion(graph, checks = TRUE)
 
   The ID of the target vertex, for `edge_connectivity()` it can be
   `NULL`, see details below.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - checks:
 

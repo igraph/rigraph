@@ -61,6 +61,7 @@ creates such a graph in a randomized manner.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_degseq</span><span class="op">(</span></span>
 <span>  <span class="va">out.deg</span>,</span>
 <span>  in.deg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"configuration"</span>, <span class="st">"vl"</span>, <span class="st">"fast.heur.simple"</span>, <span class="st">"configuration.simple"</span>,</span>
 <span>    <span class="st">"edge.switching.simple"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -84,13 +85,13 @@ should be even. For directed graphs its sum should be the same as the sum of
 <code>NULL</code> and an undirected graph is created.</p></dd>
 
 
-<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>Character, the method for generating the graph. See Details.</p></dd>
-
-
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Passed to <code><a href="realize_degseq.html">realize_degseq()</a></code> if ‘deterministic’ is true,
 or to <code>sample_degseq()</code> otherwise.</p></dd>
+
+
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
+<dd><p>Character, the method for generating the graph. See Details.</p></dd>
 
 
 <dt id="arg-deterministic">deterministic<a class="anchor" aria-label="anchor" href="#arg-deterministic"></a></dt>

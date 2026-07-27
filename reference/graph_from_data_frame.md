@@ -8,7 +8,7 @@ containing the (symbolic) edge list and edge/vertex attributes.
 ``` r
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
-graph_from_data_frame(d, directed = TRUE, vertices = NULL)
+graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
 
 from_data_frame(...)
 ```
@@ -34,15 +34,15 @@ from_data_frame(...)
 
   Logical, whether or not to create a directed graph.
 
+- ...:
+
+  Passed to `graph_from_data_frame()`.
+
 - vertices:
 
   A data frame with vertex metadata, or `NULL`. See details below. Since
   version 0.7 this argument is coerced to a data frame with
   `as.data.frame`, if not `NULL`.
-
-- ...:
-
-  Passed to `graph_from_data_frame()`.
 
 ## Value
 
@@ -167,7 +167,7 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── a3f316e ──
+#> ── <igraph> ───────────────────────────────────────────────────────── c997cce ──
 #> ℹ directed · named
 #> ℹ 5 vertices · 6 edges
 #> 

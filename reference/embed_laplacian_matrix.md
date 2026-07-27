@@ -8,6 +8,7 @@ Spectral decomposition of Laplacian matrices of graphs.
 embed_laplacian_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
@@ -28,6 +29,10 @@ embed_laplacian_matrix(
   spectral embedding. Should be smaller than the number of vertices. The
   largest `no`-dimensional non-zero singular values are used for the
   spectral embedding.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

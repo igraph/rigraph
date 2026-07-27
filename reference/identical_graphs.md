@@ -10,7 +10,7 @@ and edge attributes.
 ## Usage
 
 ``` r
-identical_graphs(g1, g2, attrs = TRUE)
+identical_graphs(g1, g2, ..., attrs = TRUE)
 ```
 
 ## Arguments
@@ -18,6 +18,10 @@ identical_graphs(g1, g2, attrs = TRUE)
 - g1, g2:
 
   The two graphs
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - attrs:
 

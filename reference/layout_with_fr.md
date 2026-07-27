@@ -8,6 +8,7 @@ Fruchterman and Reingold.
 ``` r
 layout_with_fr(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
@@ -35,6 +36,10 @@ with_fr(...)
 - graph:
 
   The graph to lay out. Edge directions are ignored.
+
+- ...:
+
+  Passed to `layout_with_fr()`.
 
 - coords:
 
@@ -110,10 +115,6 @@ with_fr(...)
 - maxiter:
 
   A deprecated synonym of `niter`, for compatibility.
-
-- ...:
-
-  Passed to `layout_with_fr()`.
 
 ## Value
 

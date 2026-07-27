@@ -6,7 +6,7 @@ structure. These functions search a graph for various motifs.
 ## Usage
 
 ``` r
-count_motifs(graph, size = 3, cut.prob = NULL)
+count_motifs(graph, size = 3, ..., cut.prob = NULL)
 ```
 
 ## Arguments
@@ -18,6 +18,10 @@ count_motifs(graph, size = 3, cut.prob = NULL)
 - size:
 
   The size of the motif.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - cut.prob:
 

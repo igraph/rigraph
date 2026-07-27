@@ -61,6 +61,7 @@ creates such a graph in a deterministic manner.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">realize_degseq</span><span class="op">(</span></span>
 <span>  <span class="va">out.deg</span>,</span>
 <span>  in.deg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  allowed.edge.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"loops"</span>, <span class="st">"multi"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smallest"</span>, <span class="st">"largest"</span>, <span class="st">"index"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -80,6 +81,10 @@ should be even. For directed graphs its sum should be the same as the sum of
 <dt id="arg-in-deg">in.deg<a class="anchor" aria-label="anchor" href="#arg-in-deg"></a></dt>
 <dd><p>For directed graph, the in-degree sequence. By default this is
 <code>NULL</code> and an undirected graph is created.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-allowed-edge-types">allowed.edge.types<a class="anchor" aria-label="anchor" href="#arg-allowed-edge-types"></a></dt>

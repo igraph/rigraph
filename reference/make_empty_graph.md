@@ -5,9 +5,9 @@ A graph with no edges
 ## Usage
 
 ``` r
-make_empty_graph(n = 0, directed = TRUE)
+make_empty_graph(n = 0, ..., directed = TRUE)
 
-empty_graph(n = 0, directed = TRUE)
+empty_graph(n = 0, ..., directed = TRUE)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ empty_graph(n = 0, directed = TRUE)
 - n:
 
   Number of vertices.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -52,11 +56,11 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> ── <igraph> ───────────────────────────────────────────────────────── 9b5161b ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f588426 ──
 #> ℹ directed
 #> ℹ 10 vertices · 0 edges
 make_empty_graph(n = 5, directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── c9e807c ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 9fe0688 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 0 edges
 ```

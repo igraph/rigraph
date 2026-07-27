@@ -58,6 +58,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_pref</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  fixed.sizes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
@@ -68,6 +69,7 @@
 <span><span class="fu">pref</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  fixed.sizes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
@@ -78,6 +80,7 @@
 <span><span class="fu">sample_asym_pref</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -86,6 +89,7 @@
 <span><span class="fu">asym_pref</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -102,6 +106,10 @@
 
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>The number of different vertex types.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-type-dist">type.dist<a class="anchor" aria-label="anchor" href="#arg-type-dist"></a></dt>

@@ -17,9 +17,9 @@ assortativity(
   types2 = NULL
 )
 
-assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
+assortativity_nominal(graph, types, ..., directed = TRUE, normalized = TRUE)
 
-assortativity_degree(graph, directed = TRUE)
+assortativity_degree(graph, ..., directed = TRUE)
 ```
 
 ## Arguments

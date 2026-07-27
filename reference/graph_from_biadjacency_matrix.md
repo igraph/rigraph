@@ -8,6 +8,7 @@ an incidence matrix.
 ``` r
 graph_from_biadjacency_matrix(
   incidence,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
@@ -22,6 +23,10 @@ graph_from_biadjacency_matrix(
 
   The input bipartite adjacency matrix. It can also be a sparse matrix
   from the `Matrix` package.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -118,7 +123,7 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> ── <igraph> ───────────────────────────────────────────────────────── bc8f181 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── eb923ce ──
 #> ℹ undirected · named · bipartite
 #> ℹ 8 vertices · 5 edges
 #> 

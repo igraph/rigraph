@@ -73,6 +73,7 @@ first.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_edges</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  hrg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  start <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  num.samples <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  num.bins <span class="op">=</span> <span class="fl">25</span></span>
@@ -93,6 +94,10 @@ directed graphs.</p></dd>
 <code>igraphHRG</code> object. <code>predict_edges()</code> allow this to be
 <code>NULL</code> as well, then a HRG is fitted to the graph first, from a
 random starting point.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-start">start<a class="anchor" aria-label="anchor" href="#arg-start"></a></dt>

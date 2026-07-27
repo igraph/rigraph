@@ -6,7 +6,7 @@ and \\t\\.
 ## Usage
 
 ``` r
-st_min_cuts(graph, source, target, capacity = NULL)
+st_min_cuts(graph, source, target, ..., capacity = NULL)
 ```
 
 ## Arguments
@@ -22,6 +22,10 @@ st_min_cuts(graph, source, target, capacity = NULL)
 - target:
 
   The ID of the target vertex.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - capacity:
 
@@ -110,29 +114,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> ── <edge sequence> 2/14 · vertex names · from 8a20806 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from a1f3f19 ──────────────────────────
 #> [1] s → a  s → b 
 #> 
 #> $cuts[[2]]
-#> ── <edge sequence> 2/14 · vertex names · from 8a20806 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from a1f3f19 ──────────────────────────
 #> [1] s → a  b → t 
 #> 
 #> $cuts[[3]]
-#> ── <edge sequence> 2/14 · vertex names · from 8a20806 ──────────────────────────
+#> ── <edge sequence> 2/14 · vertex names · from a1f3f19 ──────────────────────────
 #> [1] a → t  b → t 
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> ── <vertex sequence> 1/9 · named · from 8a20806 ────────────────────────────────
+#> ── <vertex sequence> 1/9 · named · from a1f3f19 ────────────────────────────────
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> ── <vertex sequence> 2/9 · named · from 8a20806 ────────────────────────────────
+#> ── <vertex sequence> 2/9 · named · from a1f3f19 ────────────────────────────────
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> ── <vertex sequence> 8/9 · named · from 8a20806 ────────────────────────────────
+#> ── <vertex sequence> 8/9 · named · from a1f3f19 ────────────────────────────────
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

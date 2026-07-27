@@ -7,7 +7,7 @@ undirected.
 ## Usage
 
 ``` r
-as_directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
+as_directed(graph, ..., mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 as_undirected(
   graph,
@@ -21,6 +21,10 @@ as_undirected(
 - graph:
 
   The graph to convert.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -126,7 +130,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 97a36ba ──
+#> Warning: Calling `as_directed()` with positional or abbreviated arguments was deprecated
+#> in igraph 3.0.0.
+#> ℹ Detected call: as_directed(graph, mode)
+#> ℹ Use instead: as_directed(graph, mode = )
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 28d4308 ──
 #> ℹ directed
 #> ℹ 10 vertices · 20 edges
 #> 
@@ -139,7 +147,7 @@ as_directed(g, "mutual")
 #> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── d8db1a3 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 198493c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -155,7 +163,7 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 1cbf3d9 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── e4b65fa ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -184,7 +192,7 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── e258cd8 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 7f96aee ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 7 edges
 #> 

@@ -58,7 +58,14 @@ graphs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_as_bipartite</span><span class="op">(</span><span class="va">graph</span>, types <span class="op">=</span> <span class="cn">NULL</span>, hgap <span class="op">=</span> <span class="fl">1</span>, vgap <span class="op">=</span> <span class="fl">1</span>, maxiter <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_as_bipartite</span><span class="op">(</span></span>
+<span>  <span class="va">graph</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  hgap <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  vgap <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  maxiter <span class="op">=</span> <span class="fl">100</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">as_bipartite</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -79,6 +86,10 @@ given.</p></dd>
 used.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Arguments to pass to <code>layout_as_bipartite()</code>.</p></dd>
+
+
 <dt id="arg-hgap">hgap<a class="anchor" aria-label="anchor" href="#arg-hgap"></a></dt>
 <dd><p>Real scalar, the minimum horizontal gap between vertices in the
 same layer.</p></dd>
@@ -92,10 +103,6 @@ same layer.</p></dd>
 <dd><p>Integer scalar, the maximum number of iterations in the
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Arguments to pass to <code>layout_as_bipartite()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

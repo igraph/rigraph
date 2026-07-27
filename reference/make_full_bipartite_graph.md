@@ -9,11 +9,18 @@ a bipartite graph in which every possible edge is present.
 make_full_bipartite_graph(
   n1,
   n2,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in")
 )
 
-full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
+full_bipartite_graph(
+  n1,
+  n2,
+  ...,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+)
 ```
 
 ## Arguments
@@ -25,6 +32,10 @@ full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
 - n2:
 
   The number of vertices of the second kind.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

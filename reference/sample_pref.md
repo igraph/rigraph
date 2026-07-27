@@ -8,6 +8,7 @@ Generation of random graphs based on different vertex types.
 sample_pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -18,6 +19,7 @@ sample_pref(
 pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -28,6 +30,7 @@ pref(
 sample_asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -36,6 +39,7 @@ sample_asym_pref(
 asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -51,6 +55,10 @@ asym_pref(
 - types:
 
   The number of different vertex types.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - type.dist:
 

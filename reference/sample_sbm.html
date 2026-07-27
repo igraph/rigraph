@@ -55,9 +55,9 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -79,6 +79,10 @@ must be symmetric.</p></dd>
 <dt id="arg-block-sizes">block.sizes<a class="anchor" aria-label="anchor" href="#arg-block-sizes"></a></dt>
 <dd><p>Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
@@ -152,7 +156,7 @@ and evaluation. <em>Social Networks</em>, 14, 5–61.</p>
 <span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.001</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_sbm</span><span class="op">(</span><span class="fl">1000</span>, pref.matrix <span class="op">=</span> <span class="va">pm</span>, block.sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Stochastic block model ────────────────────────────────── 2734fe7 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Stochastic block model ────────────────────────────────── f1cd098 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 1000 vertices · 16856 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

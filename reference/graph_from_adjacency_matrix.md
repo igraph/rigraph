@@ -8,6 +8,7 @@
 ``` r
 graph_from_adjacency_matrix(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -17,6 +18,7 @@ graph_from_adjacency_matrix(
 
 from_adjacency(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -31,6 +33,10 @@ from_adjacency(
 
   A square adjacency matrix. From igraph version 0.5.1 this can be a
   sparse matrix created with the `Matrix` package.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -299,7 +305,7 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> ── <igraph> ───────────────────────────────────────────────────────── 056aa5d ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 57b975d ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 57 edges
 #> 

@@ -10,7 +10,13 @@ vertex names will be ignored.
 ## Usage
 
 ``` r
-graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
+graph_from_graphnel(
+  graphNEL,
+  ...,
+  name = TRUE,
+  weight = TRUE,
+  unlist.attrs = TRUE
+)
 ```
 
 ## Arguments
@@ -18,6 +24,10 @@ graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
 - graphNEL:
 
   The graphNEL graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - name:
 
@@ -86,7 +96,7 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── dcb3fc1 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 6f5e0ba ──
 #> ℹ undirected · named · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -104,7 +114,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> ── <igraph> In-star ───────────────────────────────────────────────── 0260aeb ──
+#> ── <igraph> In-star ───────────────────────────────────────────────── c11bec3 ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 9 edges
 #> 

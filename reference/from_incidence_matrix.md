@@ -13,6 +13,12 @@ to create a more consistent API.
 from_incidence_matrix(...)
 ```
 
+## Arguments
+
+- ...:
+
+  These dots are for future extensions and must be empty.
+
 ## Details
 
 Some authors refer to the bipartite adjacency matrix as the "bipartite

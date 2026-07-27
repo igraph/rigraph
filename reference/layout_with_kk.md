@@ -8,6 +8,7 @@ model of springs.
 ``` r
 layout_with_kk(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   maxiter = 50 * vcount(graph),
@@ -35,6 +36,10 @@ with_kk(...)
 - graph:
 
   The input graph. Edge directions are ignored.
+
+- ...:
+
+  Passed to `layout_with_kk()`.
 
 - coords:
 
@@ -108,10 +113,6 @@ with_kk(...)
 - start:
 
   Deprecated synonym for `coords`, for compatibility.
-
-- ...:
-
-  Passed to `layout_with_kk()`.
 
 ## Value
 

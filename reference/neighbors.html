@@ -58,7 +58,7 @@ vertices are adjacent), if they are incident to the same edge.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">neighbors</span><span class="op">(</span><span class="va">graph</span>, <span class="va">v</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">neighbors</span><span class="op">(</span><span class="va">graph</span>, <span class="va">v</span>, <span class="va">...</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,6 +71,10 @@ vertices are adjacent), if they are incident to the same edge.</p>
 
 <dt id="arg-v">v<a class="anchor" aria-label="anchor" href="#arg-v"></a></dt>
 <dd><p>The vertex of which the adjacent vertices are queried.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
@@ -111,7 +115,7 @@ ignored for undirected graphs.</p></dd>
 <span class="r-in"><span><span class="va">n1</span> <span class="op">&lt;-</span> <span class="fu">neighbors</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">n34</span> <span class="op">&lt;-</span> <span class="fu">neighbors</span><span class="op">(</span><span class="va">g</span>, <span class="fl">34</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="intersection.html">intersection</a></span><span class="op">(</span><span class="va">n1</span>, <span class="va">n34</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/34 · from fa7cfb9 ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/34 · from 33ec17e ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  9 14 20 32</span>
 </code></pre></div>
     </div>

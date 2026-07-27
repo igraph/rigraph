@@ -9,6 +9,7 @@ function creates such a graph in a randomized manner.
 sample_degseq(
   out.deg,
   in.deg = NULL,
+  ...,
   method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
     "edge.switching.simple")
 )
@@ -30,15 +31,15 @@ degseq(..., deterministic = FALSE)
   For directed graph, the in-degree sequence. By default this is `NULL`
   and an undirected graph is created.
 
-- method:
-
-  Character, the method for generating the graph. See Details.
-
 - ...:
 
   Passed to
   [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
   if ‘deterministic’ is true, or to `sample_degseq()` otherwise.
+
+- method:
+
+  Character, the method for generating the graph. See Details.
 
 - deterministic:
 

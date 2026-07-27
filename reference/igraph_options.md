@@ -9,7 +9,7 @@ functions. These can be set for the whole session via
 ``` r
 igraph_options(...)
 
-igraph_opt(x, default = NULL)
+igraph_opt(x, ..., default = NULL)
 ```
 
 ## Arguments

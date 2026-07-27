@@ -60,6 +60,7 @@ Fruchterman and Reingold.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_fr</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  niter <span class="op">=</span> <span class="fl">500</span>,</span>
@@ -88,6 +89,10 @@ Fruchterman and Reingold.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The graph to lay out. Edge directions are ignored.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_fr()</code>.</p></dd>
 
 
 <dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
@@ -166,10 +171,6 @@ arguments are not supported from igraph version 0.8.0 and are ignored
 
 <dt id="arg-maxiter">maxiter<a class="anchor" aria-label="anchor" href="#arg-maxiter"></a></dt>
 <dd><p>A deprecated synonym of <code>niter</code>, for compatibility.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_fr()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

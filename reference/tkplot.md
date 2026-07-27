@@ -10,11 +10,11 @@ also others have to be pre-defined.
 ``` r
 tkplot(graph, canvas.width = 450, canvas.height = 450, ...)
 
-tk_close(tkp.id, window.close = TRUE)
+tk_close(tkp.id, ..., window.close = TRUE)
 
 tk_off()
 
-tk_fit(tkp.id, width = NULL, height = NULL)
+tk_fit(tkp.id, ..., width = NULL, height = NULL)
 
 tk_center(tkp.id)
 
@@ -22,11 +22,11 @@ tk_reshape(tkp.id, newlayout, ..., params)
 
 tk_postscript(tkp.id)
 
-tk_coords(tkp.id, norm = FALSE)
+tk_coords(tkp.id, ..., norm = FALSE)
 
 tk_set_coords(tkp.id, coords)
 
-tk_rotate(tkp.id, degree = NULL, rad = NULL)
+tk_rotate(tkp.id, ..., degree = NULL, rad = NULL)
 
 tk_canvas(tkp.id)
 ```

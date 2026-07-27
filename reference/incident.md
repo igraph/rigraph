@@ -5,7 +5,7 @@ Incident edges of a vertex in a graph
 ## Usage
 
 ``` r
-incident(graph, v, mode = c("all", "out", "in", "total"))
+incident(graph, v, ..., mode = c("all", "out", "in", "total"))
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ incident(graph, v, mode = c("all", "out", "in", "total"))
 - v:
 
   The vertex of which the incident edges are queried.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -58,11 +62,11 @@ Other structural queries:
 ``` r
 g <- make_graph("Zachary")
 incident(g, 1)
-#> ── <edge sequence> 16/78 · from a1a25f6 ────────────────────────────────────────
+#> ── <edge sequence> 16/78 · from bf14b72 ────────────────────────────────────────
 #>  [1] 1 ─ 2   1 ─ 3   1 ─ 4   1 ─ 5   1 ─ 6   1 ─ 7   1 ─ 8   1 ─ 9   1 ─ 11 
 #> [10] 1 ─ 12  1 ─ 13  1 ─ 14  1 ─ 18  1 ─ 20  1 ─ 22  1 ─ 32 
 incident(g, 34)
-#> ── <edge sequence> 17/78 · from a1a25f6 ────────────────────────────────────────
+#> ── <edge sequence> 17/78 · from bf14b72 ────────────────────────────────────────
 #>  [1] 9 ─ 34   10 ─ 34  14 ─ 34  15 ─ 34  16 ─ 34  19 ─ 34  20 ─ 34  21 ─ 34 
 #>  [9] 23 ─ 34  24 ─ 34  27 ─ 34  28 ─ 34  29 ─ 34  30 ─ 34  31 ─ 34  32 ─ 34 
 #> [17] 33 ─ 34 

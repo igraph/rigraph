@@ -58,7 +58,14 @@ spreads by igniting trees close by.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_forestfire</span><span class="op">(</span><span class="va">nodes</span>, <span class="va">fw.prob</span>, bw.factor <span class="op">=</span> <span class="fl">1</span>, ambs <span class="op">=</span> <span class="fl">1</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_forestfire</span><span class="op">(</span></span>
+<span>  <span class="va">nodes</span>,</span>
+<span>  <span class="va">fw.prob</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  bw.factor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  ambs <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  directed <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,6 +78,10 @@ spreads by igniting trees close by.</p>
 
 <dt id="arg-fw-prob">fw.prob<a class="anchor" aria-label="anchor" href="#arg-fw-prob"></a></dt>
 <dd><p>The forward burning probability, see details below.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-bw-factor">bw.factor<a class="anchor" aria-label="anchor" href="#arg-bw-factor"></a></dt>

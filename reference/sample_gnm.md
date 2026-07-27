@@ -5,9 +5,9 @@ Random graph with a fixed number of edges and vertices.
 ## Usage
 
 ``` r
-sample_gnm(n, m, directed = FALSE, loops = FALSE)
+sample_gnm(n, m, ..., directed = FALSE, loops = FALSE)
 
-gnm(n, m, directed = FALSE, loops = FALSE)
+gnm(n, m, ..., directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ gnm(n, m, directed = FALSE, loops = FALSE)
 - m:
 
   The number of edges in the graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

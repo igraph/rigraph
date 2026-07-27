@@ -9,6 +9,7 @@ vertex types.
 sample_traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -18,6 +19,7 @@ sample_traits_callaway(
 traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -28,6 +30,7 @@ sample_traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -37,6 +40,7 @@ traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -52,6 +56,10 @@ traits(
 - types:
 
   The number of different vertex types.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - edge.per.step:
 

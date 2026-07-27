@@ -28,14 +28,18 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | level | version | old | new |
 |:---|:---|:---|:---|
 | 2 – warn | 2.0.0 | graph.adjacency() | [graph_from_adjacency_matrix()](https://r.igraph.org/reference/graph_from_adjacency_matrix.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | [graph_from_adjacency_matrix(adjmatrix = ‘must be a matrix’)](https://r.igraph.org/reference/graph_from_adjacency_matrix.html) |  |
 | 2 – warn | 1.6.0 | [graph_from_adjacency_matrix(adjmatrix = ‘must be symmetric with mode = "undirected"’)](https://r.igraph.org/reference/graph_from_adjacency_matrix.html) | Use mode = “max” to achieve the original behavior. |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.5.0 | ape::as.phylo() |  |
 | 2 – warn | 2.0.0 | assortativity.nominal() | [assortativity_nominal()](https://r.igraph.org/reference/assortativity.html) |
 | 2 – warn | 2.0.0 | assortativity.degree() | [assortativity_degree()](https://r.igraph.org/reference/assortativity.html) |
 | 2 – warn | 1.6.0 | [assortativity(… =)](https://r.igraph.org/reference/assortativity.html) | Arguments `values` and `values.in` must be named. |
 | 2 – warn | 1.6.0 | assortativity(types1 =) | [assortativity(values =)](https://r.igraph.org/reference/assortativity.html) |
 | 2 – warn | 1.6.0 | assortativity(types2 =) | [assortativity(values.in =)](https://r.igraph.org/reference/assortativity.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | set.vertex.attribute() | [set_vertex_attr()](https://r.igraph.org/reference/set_vertex_attr.html) |
 | 2 – warn | 2.0.0 | set.graph.attribute() | [set_graph_attr()](https://r.igraph.org/reference/set_graph_attr.html) |
 | 2 – warn | 2.0.0 | set.edge.attribute() | [set_edge_attr()](https://r.igraph.org/reference/set_edge_attr.html) |
@@ -117,13 +121,21 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | independent.vertex.sets() | [ivs()](https://r.igraph.org/reference/ivs.html) |
 | 2 – warn | 2.0.0 | independence.number() | [ivs_size()](https://r.igraph.org/reference/ivs.html) |
 | 2 – warn | 2.0.0 | clique.number() | [clique_num()](https://r.igraph.org/reference/cliques.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | maximal_ivs() | [max_ivs()](https://r.igraph.org/reference/ivs.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | exportPajek() | [export_pajek()](https://r.igraph.org/reference/cohesive_blocks.html) |
 | 2 – warn | 2.0.0 | plotHierarchy() | [plot_hierarchy()](https://r.igraph.org/reference/cohesive_blocks.html) |
 | 2 – warn | 2.0.0 | maxcohesion() | [max_cohesion()](https://r.igraph.org/reference/cohesive_blocks.html) |
 | 2 – warn | 2.0.0 | graph.cohesion() | [cohesion()](https://r.igraph.org/reference/vertex_connectivity.html) |
 | 2 – warn | 2.0.0 | cohesive.blocks() | [cohesive_blocks()](https://r.igraph.org/reference/cohesive_blocks.html) |
 | 2 – warn | 2.0.0 | blockGraphs() | [graphs_from_cohesive_blocks()](https://r.igraph.org/reference/cohesive_blocks.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | create.communities() | [make_clusters()](https://r.igraph.org/reference/make_clusters.html) |
 | 2 – warn | 2.0.0 | walktrap.community() | [cluster_walktrap()](https://r.igraph.org/reference/cluster_walktrap.html) |
@@ -179,16 +191,31 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 3 – stop | 2.0.0 | [as_adjacency_matrix(edges = )](https://r.igraph.org/reference/as_adjacency_matrix.html) |  |
 | 2 – warn | 2.1.0 | as_adj() | [as_adjacency_matrix()](https://r.igraph.org/reference/as_adjacency_matrix.html) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | as_incidence_matrix() | [as_biadjacency_matrix()](https://r.igraph.org/reference/as_biadjacency_matrix.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | as.directed() | [as_directed()](https://r.igraph.org/reference/as_directed.html) |
 | 2 – warn | 2.1.0 | as.undirected() | [as_undirected()](https://r.igraph.org/reference/as_directed.html) |
 | 2 – warn | 2.0.0 | graph.edgelist() | [graph_from_edgelist()](https://r.igraph.org/reference/graph_from_edgelist.html) |
 | 2 – warn | 2.0.0 | graph.data.frame() | [graph_from_data_frame()](https://r.igraph.org/reference/graph_from_data_frame.html) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | is.chordal() | [is_chordal()](https://r.igraph.org/reference/is_chordal.html) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | is.graphical.degree.sequence() | [is_graphical()](https://r.igraph.org/reference/is_graphical.html) |
 | 2 – warn | 2.0.0 | is.degree.sequence() | [is_degseq()](https://r.igraph.org/reference/is_degseq.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | power.law.fit() | [fit_power_law()](https://r.igraph.org/reference/fit_power_law.html) |
@@ -207,6 +234,13 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | edge.disjoint.paths() | [edge_connectivity()](https://r.igraph.org/reference/edge_connectivity.html) |
 | 2 – warn | 2.0.0 | edge.connectivity() | [edge_connectivity()](https://r.igraph.org/reference/edge_connectivity.html) |
 | 2 – warn | 2.0.0 | dominator.tree() | [dominator_tree()](https://r.igraph.org/reference/dominator_tree.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | write.graph() | [write_graph()](https://r.igraph.org/reference/write_graph.html) |
 | 2 – warn | 2.0.0 | read.graph() | [read_graph()](https://r.igraph.org/reference/read_graph.html) |
 | 2 – warn | 2.0.0 | graph.graphdb() | [graph_from_graphdb()](https://r.igraph.org/reference/graph_from_graphdb.html) |
@@ -235,27 +269,70 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | aging.barabasi.game() | [sample_pa_age()](https://r.igraph.org/reference/sample_pa_age.html) |
 | 2 – warn | 2.0.0 | aging.ba.game() | [sample_pa_age()](https://r.igraph.org/reference/sample_pa_age.html) |
 | 2 – warn | 2.0.0 | aging.prefatt.game() | [sample_pa_age()](https://r.igraph.org/reference/sample_pa_age.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 0.8.0 | erdos.renyi.game() | [sample_gnp()](https://r.igraph.org/reference/sample_gnp.html) |
 | 2 – warn | 0.8.0 | erdos.renyi.game() | [sample_gnm()](https://r.igraph.org/reference/sample_gnm.html) |
 | 2 – warn | 0.8.0 | random.graph.game() | [sample_gnp()](https://r.igraph.org/reference/sample_gnp.html) |
 | 2 – warn | 0.8.0 | random.graph.game() | [sample_gnm()](https://r.igraph.org/reference/sample_gnm.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be configuration instead of simple’)](https://r.igraph.org/reference/sample_degseq.html) |  |
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be fast.heur.simple instead of simple.no.multiple’)](https://r.igraph.org/reference/sample_degseq.html) |  |
 | 3 – stop | 2.1.0 | [sample_degseq(method = ‘must be configuration.simple instead of simple.no.multiple.uniform’)](https://r.igraph.org/reference/sample_degseq.html) |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.2.0 | sample_bipartite() | [sample_bipartite_gnp()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
 | 2 – warn | 2.2.0 | sample_bipartite() | [sample_bipartite_gnm()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
 | 2 – warn | 2.1.3 | bipartite() | [bipartite_gnp()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
 | 2 – warn | 2.1.3 | bipartite() | [bipartite_gnm()](https://r.igraph.org/reference/sample_bipartite_gnm.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | graphlets.project() | [graphlet_proj()](https://r.igraph.org/reference/graphlet_basis.html) |
 | 2 – warn | 2.0.0 | graphlets.candidate.basis() | [graphlet_basis()](https://r.igraph.org/reference/graphlet_basis.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | hrg.predict() | [predict_edges()](https://r.igraph.org/reference/predict_edges.html) |
 | 2 – warn | 2.0.0 | hrg.fit() | [fit_hrg()](https://r.igraph.org/reference/fit_hrg.html) |
 | 2 – warn | 2.0.0 | hrg.game() | [sample_hrg()](https://r.igraph.org/reference/sample_hrg.html) |
 | 2 – warn | 2.0.0 | hrg.dendrogram() | [hrg_tree()](https://r.igraph.org/reference/hrg_tree.html) |
 | 2 – warn | 2.0.0 | hrg.create() | [hrg()](https://r.igraph.org/reference/hrg.html) |
 | 2 – warn | 2.0.0 | hrg.consensus() | [consensus_tree()](https://r.igraph.org/reference/consensus_tree.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | graph.incidence() | [graph_from_biadjacency_matrix()](https://r.igraph.org/reference/graph_from_biadjacency_matrix.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 1.6.0 | graph_from_incidence_matrix() | [graph_from_biadjacency_matrix()](https://r.igraph.org/reference/graph_from_biadjacency_matrix.html) |
 | 2 – warn | 1.6.0 | graph_from_incidence_matrix() | [graph_from_biadjacency_matrix()](https://r.igraph.org/reference/graph_from_biadjacency_matrix.html) |
 | 2 – warn | 2.0.0 | is.directed() | [is_directed()](https://r.igraph.org/reference/is_directed.html) |
@@ -263,11 +340,19 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | delete.edges() | [delete_edges()](https://r.igraph.org/reference/delete_edges.html) |
 | 2 – warn | 2.0.0 | add.vertices() | [add_vertices()](https://r.igraph.org/reference/add_vertices.html) |
 | 2 – warn | 2.0.0 | add.edges() | [add_edges()](https://r.igraph.org/reference/add_edges.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.1.5 | [get_edge_ids(vp = ‘is not allowed to be a 2 times 2 matrix’)](https://r.igraph.org/reference/get_edge_ids.html) |  |
 | 3 – stop | 2.1.5 | [get_edge_ids(vp = ‘supplied as a matrix should be a n times 2 matrix, not 2 times n’)](https://r.igraph.org/reference/get_edge_ids.html) | either transpose the matrix with t() or convert it to a data.frame with two columns. |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.0.0 | [get.edge.ids(multi = )](https://r.igraph.org/reference/get.edge.ids.html) |  |
 | 2 – warn | 2.0.0 | [get.edge.ids(multi = )](https://r.igraph.org/reference/get.edge.ids.html) |  |
 | 2 – warn | 2.1.0 | get.edge.ids() | [get_edge_ids()](https://r.igraph.org/reference/get_edge_ids.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.1.0 | nei() | [.nei()](https://r.igraph.org/reference/inside-square-error.html) |
 | 3 – stop | 2.1.0 | innei() | [.innei()](https://r.igraph.org/reference/inside-square-error.html) |
 | 3 – stop | 2.1.0 | outnei() | [.outnei()](https://r.igraph.org/reference/inside-square-error.html) |
@@ -291,26 +376,41 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | layout.davidson.harel() | [layout_with_dh()](https://r.igraph.org/reference/layout_with_dh.html) |
 | 2 – warn | 2.0.0 | layout.bipartite() | [layout_as_bipartite()](https://r.igraph.org/reference/layout_as_bipartite.html) |
 | 2 – warn | 2.0.0 | layout.auto() | [layout_nicely()](https://r.igraph.org/reference/layout_nicely.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | layout.reingold.tilford() | [layout_as_tree()](https://r.igraph.org/reference/layout_as_tree.html) |
 | 2 – warn | 2.1.0 | layout.circle() | [layout_in_circle()](https://r.igraph.org/reference/layout_in_circle.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | layout.sphere() | [layout_on_sphere()](https://r.igraph.org/reference/layout_on_sphere.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | layout.random() | [layout_randomly()](https://r.igraph.org/reference/layout_randomly.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 0.8.0 | [layout_with_fr(coolexp = )](https://r.igraph.org/reference/layout_with_fr.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_fr(maxdelta = )](https://r.igraph.org/reference/layout_with_fr.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_fr(area = )](https://r.igraph.org/reference/layout_with_fr.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_fr(repulserad = )](https://r.igraph.org/reference/layout_with_fr.html) |  |
 | 2 – warn | 2.1.0 | layout.fruchterman.reingold() | [layout_with_fr()](https://r.igraph.org/reference/layout_with_fr.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 0.8.0 | [layout_with_kk(niter = )](https://r.igraph.org/reference/layout_with_kk.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_kk(sigma = )](https://r.igraph.org/reference/layout_with_kk.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_kk(initemp = )](https://r.igraph.org/reference/layout_with_kk.html) |  |
 | 3 – stop | 0.8.0 | [layout_with_kk(coolexp = )](https://r.igraph.org/reference/layout_with_kk.html) |  |
 | 2 – warn | 2.1.0 | layout.kamada.kawai() | [layout_with_kk()](https://r.igraph.org/reference/layout_with_kk.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | layout.lgl() | [layout_with_lgl()](https://r.igraph.org/reference/layout_with_lgl.html) |
 | 2 – warn | 1.6.0 | [layout_with_mds(options = ‘must be a list’)](https://r.igraph.org/reference/layout_with_mds.html) | c(“[`arpack_defaults()`](https://r.igraph.org/reference/arpack.md) is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 3 – stop | 2.1.0 | layout.spring() | [layout_with_fr()](https://r.igraph.org/reference/layout_with_fr.html) |
 | 3 – stop | 2.1.0 | layout.svd() | [layout_with_fr()](https://r.igraph.org/reference/layout_with_fr.html) |
 | 3 – stop | 2.1.0 | layout.fruchterman.reingold.grid() | [layout_with_fr()](https://r.igraph.org/reference/layout_with_fr.html) |
 | 2 – warn | 2.0.0 | layout.drl() | [layout_with_drl()](https://r.igraph.org/reference/layout_with_drl.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | graph() | [make_graph()](https://r.igraph.org/reference/make_graph.html) |
 | 2 – warn | 2.1.0 | graph.famous() | [make_graph()](https://r.igraph.org/reference/make_graph.html) |
 | 2 – warn | 2.1.0 | line.graph() | [make_line_graph()](https://r.igraph.org/reference/make_line_graph.html) |
@@ -331,7 +431,30 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.1.0 | graph.bipartite() | [make_bipartite_graph()](https://r.igraph.org/reference/make_bipartite_graph.html) |
 | 2 – warn | 2.1.0 | graph.atlas() | [graph_from_atlas()](https://r.igraph.org/reference/graph_from_atlas.html) |
 | 2 – warn | 2.1.0 | [graph\_()](https://r.igraph.org/reference/graph_.html) | c(“Please use constructors directly, for instance graph_from_edgelist().”,“graph\_() will be removed in a future version of igraph.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.3 | [make_lattice(circular = ‘use periodic argument instead’)](https://r.igraph.org/reference/make_lattice.html) | c(“`circular` is now deprecated, use `periodic` instead.”) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | minimum.spanning.tree() | [mst()](https://r.igraph.org/reference/mst.html) |
@@ -340,6 +463,9 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | graph.motifs.est() | [sample_motifs()](https://r.igraph.org/reference/sample_motifs.html) |
 | 2 – warn | 2.0.0 | graph.motifs() | [motifs()](https://r.igraph.org/reference/motifs.html) |
 | 2 – warn | 2.0.0 | dyad.census() | [dyad_census()](https://r.igraph.org/reference/dyad_census.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | graph.intersection() | [intersection()](https://r.igraph.org/reference/intersection.html) |
 | 2 – warn | 2.0.0 | graph.union() | [union.igraph()](https://r.igraph.org/reference/union.igraph.html) |
 | 2 – warn | 2.0.0 | graph.difference() | [difference()](https://r.igraph.org/reference/difference.html) |
@@ -353,6 +479,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | convex.hull() | [convex_hull()](https://r.igraph.org/reference/convex_hull.html) |
 | 2 – warn | 2.0.0 | igraph.options() | [igraph_options()](https://r.igraph.org/reference/igraph_options.html) |
 | 2 – warn | 2.0.0 | getIgraphOpt() | [igraph_opt()](https://r.igraph.org/reference/igraph_options.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | path.length.hist() | [distance_table()](https://r.igraph.org/reference/distances.html) |
 | 2 – warn | 2.0.0 | maximum.cardinality.search() | [max_cardinality()](https://r.igraph.org/reference/max_cardinality.html) |
 | 2 – warn | 2.0.0 | is.dag() | [is_dag()](https://r.igraph.org/reference/is_dag.html) |
@@ -361,10 +488,13 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.1.0 | [radius(… =)](https://r.igraph.org/reference/radius.html) | The argument `mode` must be named. |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | autocurve.edges() | [curve_multiple()](https://r.igraph.org/reference/curve_multiple.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | igraph.shape.noplot() | [shape_noplot()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | igraph.shape.noclip() | [shape_noclip()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | vertex.shapes() | [shapes()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | add.vertex.shape() | [add_shape()](https://r.igraph.org/reference/shapes.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
@@ -453,11 +583,25 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | tkplot.center() | [tk_center()](https://r.igraph.org/reference/tkplot.html) |
 | 2 – warn | 2.0.0 | tkplot.canvas() | [tk_canvas()](https://r.igraph.org/reference/tkplot.html) |
 | 3 – stop | 3.0.0 | [tkplot()](https://r.igraph.org/reference/tkplot.html) |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | permute.vertices() | [permute()](https://r.igraph.org/reference/permute.html) |
 | 2 – warn | 2.0.0 | graph.isocreate() | [graph_from_isomorphism_class()](https://r.igraph.org/reference/graph_from_isomorphism_class.html) |
 | 2 – warn | 2.0.0 | graph.automorphisms() | [count_automorphisms()](https://r.igraph.org/reference/count_automorphisms.html) |
 | 2 – warn | 2.0.0 | canonical.permutation() | [canonical_permutation()](https://r.igraph.org/reference/canonical_permutation.html) |
 | 2 – warn | 2.0.0 | automorphisms() | [count_automorphisms()](https://r.igraph.org/reference/count_automorphisms.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |

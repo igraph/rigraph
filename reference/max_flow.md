@@ -6,7 +6,7 @@ between two vertices is calculated.
 ## Usage
 
 ``` r
-max_flow(graph, source, target, capacity = NULL)
+max_flow(graph, source, target, ..., capacity = NULL)
 ```
 
 ## Arguments
@@ -22,6 +22,10 @@ max_flow(graph, source, target, capacity = NULL)
 - target:
 
   The ID of the target vertex (sometimes also called sink).
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - capacity:
 
@@ -126,15 +130,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> ── <edge sequence> 2/6 · vertex names · from 42c67e2 ───────────────────────────
+#> ── <edge sequence> 2/6 · vertex names · from 3b381f5 ───────────────────────────
 #> [1] 3 → 4  1 → 5 
 #> 
 #> $partition1
-#> ── <vertex sequence> 2/6 · named · from 42c67e2 ────────────────────────────────
+#> ── <vertex sequence> 2/6 · named · from 3b381f5 ────────────────────────────────
 #> [1] 1 3
 #> 
 #> $partition2
-#> ── <vertex sequence> 4/6 · named · from 42c67e2 ────────────────────────────────
+#> ── <vertex sequence> 4/6 · named · from 3b381f5 ────────────────────────────────
 #> [1] 4 5 6 2
 #> 
 #> $stats

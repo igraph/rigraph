@@ -6,7 +6,7 @@ also called group cohesion.
 ## Usage
 
 ``` r
-vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+vertex_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 vertex_disjoint_paths(graph, source = NULL, target = NULL)
 
@@ -30,6 +30,12 @@ cohesion(x, checks = TRUE, ...)
   The ID of the target vertex, for `vertex_connectivity()` it can be
   `NULL`, see details below.
 
+- ...:
+
+  Additional arguments passed to methods. Not used by
+  `vertex_connectivity()` directly but may be used by other methods that
+  implement `cohesion()`.
+
 - checks:
 
   Logical. Whether to check that the graph is connected and also the
@@ -39,12 +45,6 @@ cohesion(x, checks = TRUE, ...)
   perform these checks, as they can be done quickly compared to the
   connectivity calculation itself. They were suggested by Peter McMahan,
   thanks Peter.
-
-- ...:
-
-  Additional arguments passed to methods. Not used by
-  `vertex_connectivity()` directly but may be used by other methods that
-  implement `cohesion()`.
 
 ## Value
 

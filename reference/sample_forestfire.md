@@ -6,7 +6,14 @@ spreads by igniting trees close by.
 ## Usage
 
 ``` r
-sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
+sample_forestfire(
+  nodes,
+  fw.prob,
+  ...,
+  bw.factor = 1,
+  ambs = 1,
+  directed = TRUE
+)
 ```
 
 ## Arguments
@@ -18,6 +25,10 @@ sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 - fw.prob:
 
   The forward burning probability, see details below.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - bw.factor:
 

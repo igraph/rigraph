@@ -58,6 +58,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">embed_adjacency_matrix</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">no</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lm"</span>, <span class="st">"la"</span>, <span class="st">"sa"</span><span class="op">)</span>,</span>
 <span>  scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -79,6 +80,10 @@
 spectral embedding. Should be smaller than the number of vertices. The
 largest <code>no</code>-dimensional non-zero singular values are used for the
 spectral embedding.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>

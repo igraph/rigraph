@@ -9,9 +9,9 @@ multi-edges.
 ## Usage
 
 ``` r
-sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+sample_smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 
-smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 ```
 
 ## Arguments
@@ -32,6 +32,10 @@ smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 - p:
 
   Real constant between zero and one, the rewiring probability.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 

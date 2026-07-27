@@ -58,7 +58,7 @@ and \(t\).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">st_min_cuts</span><span class="op">(</span><span class="va">graph</span>, <span class="va">source</span>, <span class="va">target</span>, capacity <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">st_min_cuts</span><span class="op">(</span><span class="va">graph</span>, <span class="va">source</span>, <span class="va">target</span>, <span class="va">...</span>, capacity <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -75,6 +75,10 @@ and \(t\).</p>
 
 <dt id="arg-target">target<a class="anchor" aria-label="anchor" href="#arg-target"></a></dt>
 <dd><p>The ID of the target vertex.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-capacity">capacity<a class="anchor" aria-label="anchor" href="#arg-capacity"></a></dt>
@@ -155,29 +159,29 @@ graphs, <em>Algorithmica</em> 15, 351–372, 1996.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 8a20806 ──────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from a1f3f19 ──────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s → a  s → b </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 8a20806 ──────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from a1f3f19 ──────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s → a  b → t </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from 8a20806 ──────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/14 · vertex names · from a1f3f19 ──────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a → t  b → t </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/9 · named · from 8a20806 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 1/9 · named · from a1f3f19 ────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/9 · named · from 8a20806 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/9 · named · from a1f3f19 ────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 8/9 · named · from 8a20806 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 8/9 · named · from a1f3f19 ────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b a 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

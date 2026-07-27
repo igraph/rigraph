@@ -9,6 +9,7 @@ National Laboratories.
 ``` r
 layout_with_drl(
   graph,
+  ...,
   use.seed = FALSE,
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,
@@ -24,6 +25,10 @@ with_drl(...)
 - graph:
 
   The input graph, in can be directed or undirected.
+
+- ...:
+
+  Passed to `layout_with_drl()`.
 
 - use.seed:
 
@@ -55,10 +60,6 @@ with_drl(...)
   three dimensional layout. Note that because of the nature of the DrL
   algorithm, the three dimensional layout takes significantly longer to
   compute.
-
-- ...:
-
-  Passed to `layout_with_drl()`.
 
 ## Value
 

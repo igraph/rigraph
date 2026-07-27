@@ -8,6 +8,7 @@ Spectral decomposition of the adjacency matrices of graphs.
 embed_adjacency_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
@@ -28,6 +29,10 @@ embed_adjacency_matrix(
   spectral embedding. Should be smaller than the number of vertices. The
   largest `no`-dimensional non-zero singular values are used for the
   spectral embedding.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

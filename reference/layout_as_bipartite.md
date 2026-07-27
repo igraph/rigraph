@@ -6,7 +6,14 @@ bipartite graphs.
 ## Usage
 
 ``` r
-layout_as_bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
+layout_as_bipartite(
+  graph,
+  types = NULL,
+  ...,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+)
 
 as_bipartite(...)
 ```
@@ -23,6 +30,10 @@ as_bipartite(...)
   A logical vector, the vertex types. If this argument is `NULL` (the
   default), then the ‘`type`’ vertex attribute is used.
 
+- ...:
+
+  Arguments to pass to `layout_as_bipartite()`.
+
 - hgap:
 
   Real scalar, the minimum horizontal gap between vertices in the same
@@ -37,10 +48,6 @@ as_bipartite(...)
   Integer scalar, the maximum number of iterations in the crossing
   minimization stage. 100 is a reasonable default; if you feel that you
   have too many edge crossings, increase this.
-
-- ...:
-
-  Arguments to pass to `layout_as_bipartite()`.
 
 ## Value
 

@@ -61,6 +61,7 @@ isomorphisms to itself.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">count_automorphisms</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  sh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fm"</span>, <span class="st">"f"</span>, <span class="st">"fs"</span>, <span class="st">"fl"</span>, <span class="st">"flm"</span>, <span class="st">"fsm"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -80,6 +81,10 @@ automorphism. When omitted, igraph uses the <code>color</code> attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 <code>color</code> vertex attribute but you do not want to use it.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-sh">sh<a class="anchor" aria-label="anchor" href="#arg-sh"></a></dt>

@@ -8,9 +8,9 @@ distribution.
 ## Usage
 
 ``` r
-sample_gnp(n, p, directed = FALSE, loops = FALSE)
+sample_gnp(n, p, ..., directed = FALSE, loops = FALSE)
 
-gnp(n, p, directed = FALSE, loops = FALSE)
+gnp(n, p, ..., directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -23,6 +23,10 @@ gnp(n, p, directed = FALSE, loops = FALSE)
 
   The probability for drawing an edge between two arbitrary vertices
   (\\G(n,p)\\ graph).
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

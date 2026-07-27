@@ -6,7 +6,7 @@ or three dimensions.
 ## Usage
 
 ``` r
-layout_randomly(graph, dim = c(2, 3))
+layout_randomly(graph, ..., dim = c(2, 3))
 
 randomly(...)
 ```
@@ -17,13 +17,13 @@ randomly(...)
 
   The input graph.
 
-- dim:
-
-  Integer scalar, the dimension of the space to use. It must be 2 or 3.
-
 - ...:
 
   Parameters to pass to `layout_randomly()`.
+
+- dim:
+
+  Integer scalar, the dimension of the space to use. It must be 2 or 3.
 
 ## Value
 

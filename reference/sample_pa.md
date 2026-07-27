@@ -11,6 +11,7 @@ sample_pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -24,6 +25,7 @@ pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -50,6 +52,10 @@ pa(
   Numeric constant, the number of edges to add in each time step,
   defaults to 1. This argument is only used if both `out.dist` and
   `out.seq` are omitted or NULL.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - out.dist:
 

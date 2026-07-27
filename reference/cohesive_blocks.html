@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cohesive_blocks</span><span class="op">(</span><span class="va">graph</span>, labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cohesive_blocks</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'cohesiveBlocks'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -93,7 +93,7 @@
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">export_pajek</span><span class="op">(</span><span class="va">blocks</span>, <span class="va">graph</span>, <span class="va">file</span>, project.file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">export_pajek</span><span class="op">(</span><span class="va">blocks</span>, <span class="va">graph</span>, <span class="va">file</span>, <span class="va">...</span>, project.file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">max_cohesion</span><span class="op">(</span><span class="va">blocks</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,6 +111,11 @@ supplied whose cohesive block structure is given in the <code>blocks()</code>
 argument.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments. <code>plot_hierarchy()</code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> pass
+them to <code><a href="plot.igraph.html">plot.igraph()</a></code>.  <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> ignore them.</p></dd>
+
+
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
 <dd><p>Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
@@ -120,11 +125,6 @@ cohesive blocks.</p></dd>
 <dt id="arg-blocks-x-object">blocks, x, object<a class="anchor" aria-label="anchor" href="#arg-blocks-x-object"></a></dt>
 <dd><p>A <code>cohesiveBlocks</code> object, created with the
 <code>cohesive_blocks()</code> function.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments. <code>plot_hierarchy()</code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> pass
-them to <code><a href="plot.igraph.html">plot.igraph()</a></code>.  <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> ignore them.</p></dd>
 
 
 <dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
@@ -312,23 +312,23 @@ wrote the first version in R.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    '- B-5   c 3, n  4   ......o.oo o......... ... </span>
 <span class="r-in"><span><span class="fu">blocks</span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 23/23 · named · from 9beb495 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 23/23 · named · from 61f5f6a ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 14/23 · named · from 9beb495 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 14/23 · named · from 61f5f6a ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/23 · named · from 9beb495 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/23 · named · from 61f5f6a ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 7  8  11 14 9  10 12 13 16 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/23 · named · from 9beb495 ───────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/23 · named · from 61f5f6a ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/23 · named · from 9beb495 ───────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/23 · named · from 61f5f6a ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  8  11 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="vertex_connectivity.html">cohesion</a></span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>

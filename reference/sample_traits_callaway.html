@@ -61,6 +61,7 @@ types.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_traits_callaway</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
@@ -70,6 +71,7 @@ types.</p>
 <span><span class="fu">traits_callaway</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
@@ -80,6 +82,7 @@ types.</p>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -89,6 +92,7 @@ types.</p>
 <span>  <span class="va">nodes</span>,</span>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -105,6 +109,10 @@ types.</p>
 
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>The number of different vertex types.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-edge-per-step">edge.per.step<a class="anchor" aria-label="anchor" href="#arg-edge-per-step"></a></dt>

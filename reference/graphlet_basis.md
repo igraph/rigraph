@@ -11,17 +11,18 @@ basis.
 ## Usage
 
 ``` r
-graphlet_basis(graph, weights = NULL)
+graphlet_basis(graph, ..., weights = NULL)
 
 graphlet_proj(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
   Mu = rep(1, length(cliques))
 )
 
-graphlets(graph, weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, niter = 1000)
 ```
 
 ## Arguments
@@ -30,6 +31,10 @@ graphlets(graph, weights = NULL, niter = 1000)
 
   The input graph, edge directions are ignored. Only simple graph (i.e.
   graphs without self-loops and multiple edges) are supported.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

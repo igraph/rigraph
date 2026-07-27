@@ -60,6 +60,7 @@ minimized edge crossings.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_with_sugiyama</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  layers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hgap <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  vgap <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -77,6 +78,10 @@ minimized edge crossings.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_with_sugiyama()</code>.</p></dd>
 
 
 <dt id="arg-layers">layers<a class="anchor" aria-label="anchor" href="#arg-layers"></a></dt>
@@ -115,10 +120,6 @@ graph. ‘default’ keeps the ‘size’, ‘size2’,
 ‘arrow.mode’ and ‘arrow.size’ edge attributes. ‘all’
 keep all graph, vertex and edge attributes, ‘none’ keeps none of
 them.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_with_sugiyama()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

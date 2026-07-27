@@ -6,7 +6,7 @@ graph, like an edge list.
 ## Usage
 
 ``` r
-as_edgelist(graph, names = TRUE)
+as_edgelist(graph, ..., names = TRUE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ as_edgelist(graph, names = TRUE)
 - graph:
 
   The graph to convert.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - names:
 

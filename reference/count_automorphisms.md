@@ -9,6 +9,7 @@ isomorphisms to itself.
 count_automorphisms(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 )
 ```
@@ -27,6 +28,10 @@ count_automorphisms(
   vertices, or, if there is no such vertex attribute, it simply assumes
   that all vertices have the same color. Pass NULL explicitly if the
   graph has a `color` vertex attribute but you do not want to use it.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - sh:
 

@@ -6,7 +6,7 @@ dimensions.
 ## Usage
 
 ``` r
-layout_on_grid(graph, width = 0, height = 0, dim = 2)
+layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 
 on_grid(...)
 ```
@@ -16,6 +16,10 @@ on_grid(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  Passed to `layout_on_grid()`.
 
 - width:
 
@@ -33,10 +37,6 @@ on_grid(...)
 - dim:
 
   Two or three. Whether to make 2d or a 3d layout.
-
-- ...:
-
-  Passed to `layout_on_grid()`.
 
 ## Value
 

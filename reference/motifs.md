@@ -6,7 +6,7 @@ structure. These functions search a graph for various motifs.
 ## Usage
 
 ``` r
-motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
+motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
 
   The size of the motif, currently sizes 3 and 4 are supported in
   directed graphs and sizes 3 to 6 in undirected graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - cut.prob:
 

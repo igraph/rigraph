@@ -60,6 +60,7 @@ neighboring vertices</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_adj_list</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  loops <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twice"</span>, <span class="st">"once"</span>, <span class="st">"ignore"</span><span class="op">)</span>,</span>
 <span>  multiple <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -67,6 +68,7 @@ neighboring vertices</p>
 <span></span>
 <span><span class="fu">as_adj_edge_list</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  loops <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twice"</span>, <span class="st">"once"</span>, <span class="st">"ignore"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -78,6 +80,10 @@ neighboring vertices</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
@@ -146,84 +152,84 @@ a very expensive operation on large graphs.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as_adj_list</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from 3238ecf ───────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 2/10 · from a8c7110 ───────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">as_adj_edge_list</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2   1 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2  2 ─ 3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 ─ 3  3 ─ 4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 ─ 4  4 ─ 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 ─ 5  5 ─ 6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 ─ 6  6 ─ 7 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 ─ 7  7 ─ 8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 ─ 8  8 ─ 9 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 ─ 9   9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from 3238ecf ─────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;edge sequence&gt; 2/10 · from a8c7110 ─────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 10  9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

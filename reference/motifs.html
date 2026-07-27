@@ -58,7 +58,7 @@ structure.  These functions search a graph for various motifs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, cut.prob <span class="op">=</span> <span class="cn">NULL</span>, callback <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, <span class="va">...</span>, cut.prob <span class="op">=</span> <span class="cn">NULL</span>, callback <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,6 +72,10 @@ structure.  These functions search a graph for various motifs.</p>
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
 <dd><p>The size of the motif, currently sizes 3 and 4 are supported in
 directed graphs and sizes 3 to 6 in undirected graphs.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-cut-prob">cut.prob<a class="anchor" aria-label="anchor" href="#arg-cut-prob"></a></dt>

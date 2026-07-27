@@ -5,7 +5,7 @@ Place several graphs on the same layout
 ## Usage
 
 ``` r
-merge_coords(graphs, layouts, method = "dla")
+merge_coords(graphs, layouts, ..., method = "dla")
 
 layout_components(graph, layout = layout_with_kk, ...)
 ```
@@ -20,6 +20,10 @@ layout_components(graph, layout = layout_with_kk, ...)
 
   A list of two-column matrices.
 
+- ...:
+
+  Additional arguments to pass to the `layout` layout function.
+
 - method:
 
   Character constant giving the method to use. Right now only `dla` is
@@ -32,10 +36,6 @@ layout_components(graph, layout = layout_with_kk, ...)
 - layout:
 
   A function object, the layout function to use.
-
-- ...:
-
-  Additional arguments to pass to the `layout` layout function.
 
 ## Value
 

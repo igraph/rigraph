@@ -12,7 +12,13 @@ shape_noclip(coords, el, params, end = c("both", "from", "to"))
 
 shape_noplot(coords, v = NULL, params)
 
-add_shape(shape, clip = shape_noclip, plot = shape_noplot, parameters = list())
+add_shape(
+  shape,
+  ...,
+  clip = shape_noclip,
+  plot = shape_noplot,
+  parameters = list()
+)
 ```
 
 ## Arguments
@@ -25,6 +31,10 @@ add_shape(shape, clip = shape_noclip, plot = shape_noplot, parameters = list())
 - coords, el, params, end, v:
 
   See parameters of the clipping/plotting functions below.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - clip:
 

@@ -8,6 +8,7 @@ not too many cycles.
 ``` r
 layout_as_tree(
   graph,
+  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),
@@ -23,6 +24,10 @@ as_tree(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  Passed to `layout_as_tree()`.
 
 - root:
 
@@ -60,10 +65,6 @@ as_tree(...)
 
   Logical, whether to flip the ‘y’ coordinates. The default is flipping
   because that puts the root vertex on the top.
-
-- ...:
-
-  Passed to `layout_as_tree()`.
 
 ## Value
 

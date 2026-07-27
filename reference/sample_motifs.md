@@ -9,6 +9,7 @@ structure. These functions search a graph for various motifs.
 sample_motifs(
   graph,
   size = 3,
+  ...,
   cut.prob = rep(0, size),
   sample.size = NULL,
   sample = NULL
@@ -25,6 +26,10 @@ sample_motifs(
 
   The size of the motif, currently size 3 and 4 are supported in
   directed graphs and sizes 3-6 in undirected graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - cut.prob:
 

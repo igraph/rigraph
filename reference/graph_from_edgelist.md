@@ -10,7 +10,7 @@ attribute will be added.
 ## Usage
 
 ``` r
-graph_from_edgelist(el, directed = TRUE)
+graph_from_edgelist(el, ..., directed = TRUE)
 
 from_edgelist(...)
 ```
@@ -21,13 +21,13 @@ from_edgelist(...)
 
   The edge list, a two column matrix, character or numeric.
 
-- directed:
-
-  Whether to create a directed graph.
-
 - ...:
 
   Passed to `graph_from_edgelist()`.
+
+- directed:
+
+  Whether to create a directed graph.
 
 ## Value
 
@@ -67,7 +67,7 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> ── <igraph> ───────────────────────────────────────────────────────── 09b4c75 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 6190e71 ──
 #> ℹ directed · named
 #> ℹ 3 vertices · 2 edges
 #> 
@@ -79,7 +79,7 @@ graph_from_edgelist(el)
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> ── <igraph> ───────────────────────────────────────────────────────── 39a39e0 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── ebf7779 ──
 #> ℹ directed
 #> ℹ 10 vertices · 10 edges
 #> 

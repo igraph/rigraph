@@ -14,6 +14,7 @@ graph first.
 predict_edges(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000,
   num.bins = 25
@@ -32,6 +33,10 @@ predict_edges(
   A hierarchical random graph model, in the form of an `igraphHRG`
   object. `predict_edges()` allow this to be `NULL` as well, then a HRG
   is fitted to the graph first, from a random starting point.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - start:
 

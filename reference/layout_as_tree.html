@@ -60,6 +60,7 @@ too many cycles.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layout_as_tree</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  root <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  circular <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  rootlevel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -76,6 +77,10 @@ too many cycles.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Passed to <code>layout_as_tree()</code>.</p></dd>
 
 
 <dt id="arg-root">root<a class="anchor" aria-label="anchor" href="#arg-root"></a></dt>
@@ -113,10 +118,6 @@ not given. See the <code>roots</code> parameter.</p></dd>
 <dt id="arg-flip-y">flip.y<a class="anchor" aria-label="anchor" href="#arg-flip-y"></a></dt>
 <dd><p>Logical, whether to flip the ‘y’ coordinates.
 The default is flipping because that puts the root vertex on the top.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>layout_as_tree()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

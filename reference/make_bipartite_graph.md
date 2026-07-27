@@ -6,9 +6,9 @@ allowed between different kinds.
 ## Usage
 
 ``` r
-make_bipartite_graph(types, edges, directed = FALSE)
+make_bipartite_graph(types, edges, ..., directed = FALSE)
 
-bipartite_graph(types, edges, directed = FALSE)
+bipartite_graph(types, edges, ..., directed = FALSE)
 ```
 
 ## Arguments
@@ -27,6 +27,10 @@ bipartite_graph(types, edges, directed = FALSE)
   function. It is checked that the edges indeed connect vertices of
   different kind, according to the supplied `types` vector. The vector
   may be a string vector if `types` is a named vector.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -80,7 +84,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── e6729d4 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 365db58 ──
 #> ℹ undirected · bipartite
 #> ℹ 10 vertices · 5 edges
 #> 

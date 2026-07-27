@@ -13,9 +13,9 @@ for Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 ## Usage
 
 ``` r
-make_chordal_ring(n, w, directed = FALSE)
+make_chordal_ring(n, w, ..., directed = FALSE)
 
-chordal_ring(n, w, directed = FALSE)
+chordal_ring(n, w, ..., directed = FALSE)
 ```
 
 ## Arguments
@@ -27,6 +27,10 @@ chordal_ring(n, w, directed = FALSE)
 - w:
 
   A matrix which specifies the extended chordal ring. See details below.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 

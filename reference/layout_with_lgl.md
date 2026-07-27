@@ -7,6 +7,7 @@ A layout generator for larger graphs.
 ``` r
 layout_with_lgl(
   graph,
+  ...,
   maxiter = 150,
   maxdelta = vcount(graph),
   area = vcount(graph)^2,
@@ -24,6 +25,10 @@ with_lgl(...)
 - graph:
 
   The input graph
+
+- ...:
+
+  Passed to `layout_with_lgl()`.
 
 - maxiter:
 
@@ -58,10 +63,6 @@ with_lgl(...)
 
   The ID of the vertex to place at the middle of the layout. The default
   value is -1 which means that a random vertex is selected.
-
-- ...:
-
-  Passed to `layout_with_lgl()`.
 
 ## Value
 

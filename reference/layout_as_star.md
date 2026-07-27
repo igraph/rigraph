@@ -6,7 +6,7 @@ circle and the rest of the vertices equidistantly on the perimeter.
 ## Usage
 
 ``` r
-layout_as_star(graph, center = V(graph)[1], order = NULL)
+layout_as_star(graph, ..., center = V(graph)[1], order = NULL)
 
 as_star(...)
 ```
@@ -17,6 +17,10 @@ as_star(...)
 
   The graph to layout.
 
+- ...:
+
+  Arguments to pass to `layout_as_star()`.
+
 - center:
 
   The ID of the vertex to put in the center. By default it is the first
@@ -26,10 +30,6 @@ as_star(...)
 
   Numeric vector, the order of the vertices along the perimeter. The
   default ordering is given by the vertex IDs.
-
-- ...:
-
-  Arguments to pass to `layout_as_star()`.
 
 ## Value
 

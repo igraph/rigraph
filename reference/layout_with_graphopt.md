@@ -8,6 +8,7 @@ graphs.
 ``` r
 layout_with_graphopt(
   graph,
+  ...,
   start = NULL,
   niter = 500,
   charge = 0.001,
@@ -25,6 +26,10 @@ with_graphopt(...)
 - graph:
 
   The input graph.
+
+- ...:
+
+  Passed to `layout_with_graphopt()`.
 
 - start:
 
@@ -63,10 +68,6 @@ with_graphopt(...)
 
   Real constant, it gives the maximum amount of movement allowed in a
   single step along a single axis. The default value is 5.
-
-- ...:
-
-  Passed to `layout_with_graphopt()`.
 
 ## Value
 
