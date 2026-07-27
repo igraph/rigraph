@@ -51,6 +51,7 @@ get.stochastic <- function(
 #' matrices are defined in a symmetric way.
 #'
 #' @param graph The input graph. Must be of class `igraph`.
+#' @inheritParams rlang::args_dots_empty
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical, whether to return a sparse matrix. The
@@ -76,9 +77,35 @@ get.stochastic <- function(
 #'
 stochastic_matrix <- function(
   graph,
+  ...,
   column.wise = FALSE,
   sparse = igraph_opt("sparsematrices")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: stochastic_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(column.wise = column.wise, sparse = sparse),
+      recover_new = c("column.wise", "sparse"),
+      recover_old = c("column.wise", "sparse"),
+      match_names = c("column.wise", "sparse"),
+      match_to = c("column.wise", "sparse"),
+      defaults = list(
+        column.wise = FALSE,
+        sparse = igraph_opt("sparsematrices")
+      ),
+      head_args = c("graph"),
+      fn_name = "stochastic_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   column.wise <- as.logical(column.wise)
