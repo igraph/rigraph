@@ -30,14 +30,14 @@ test_that("as_directed keeps attributes", {
   expect_equal(V(g_arbitrary)$name, V(g)$name)
 
   E(g)$weight <- seq_len(ecount(g))
-  g_mutual <- as_directed(g, "mutual")
+  g_mutual <- as_directed(g, mode = "mutual")
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
     c(1, 3, 1, 2, 2, 3)
   )
 
-  g_arbitrary <- as_directed(g, "arbitrary")
+  g_arbitrary <- as_directed(g, mode = "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
   expect_equal(
     df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
@@ -1040,4 +1040,165 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   V(g_named)$name <- c("A", "B", "C")
   expect_snapshot(as_adjacency_matrix(g_named, sparse = TRUE))
   expect_snapshot(as_adjacency_matrix(g_named, sparse = FALSE))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("as_adj_list() covers tail args by name and recovers positional calls", {
+  # Parallel 1-2 edges plus a loop on vertex 3 make loops and multiple visible.
+  g <- make_graph(c(1, 2, 1, 2, 2, 3, 3, 3), directed = FALSE)
+
+  al_full <- as_adj_list(g, mode = "all", loops = "twice", multiple = TRUE)
+  expect_identical(
+    lapply(al_full, as.numeric),
+    list(c(2, 2), c(1, 1, 3), c(2, 3, 3))
+  )
+
+  al_slim <- as_adj_list(g, mode = "all", loops = "ignore", multiple = FALSE)
+  expect_identical(
+    lapply(al_slim, as.numeric),
+    list(2, c(1, 3), 2)
+  )
+
+  # The positional mode is visible on a directed path.
+  g_dir <- make_graph(c(1, 2, 2, 3))
+  lifecycle::expect_deprecated(
+    res <- as_adj_list(g_dir, "out")
+  )
+  expect_identical(
+    lapply(res, as.numeric),
+    lapply(as_adj_list(g_dir, mode = "out"), as.numeric)
+  )
+})
+
+test_that("as_adj_edge_list() covers tail args by name and recovers positional calls", {
+  # A triangle with a loop on vertex 1 makes the loops argument visible.
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 1), directed = FALSE)
+
+  # The loop edge is listed twice by default and dropped with "ignore".
+  ael_twice <- as_adj_edge_list(g, mode = "all", loops = "twice")
+  ael_ignore <- as_adj_edge_list(g, mode = "all", loops = "ignore")
+  expect_identical(as.numeric(ael_twice[[1]]), c(4, 4, 1, 3))
+  expect_identical(as.numeric(ael_ignore[[1]]), c(1, 3))
+
+  g_dir <- make_graph(c(1, 2, 2, 3))
+  lifecycle::expect_deprecated(
+    res <- as_adj_edge_list(g_dir, "out")
+  )
+  expect_identical(
+    lapply(res, as.numeric),
+    lapply(as_adj_edge_list(g_dir, mode = "out"), as.numeric)
+  )
+})
+
+test_that("as_directed() recovers positional mode with a deprecation", {
+  g <- make_ring(4)
+
+  lifecycle::expect_deprecated(
+    res <- as_directed(g, "arbitrary")
+  )
+  expect_identical_graphs(res, as_directed(g, mode = "arbitrary"))
+  # "arbitrary" keeps one directed edge per undirected edge.
+  expect_true(is_directed(res))
+  expect_ecount(res, 4)
+})
+
+test_that("as_edgelist() covers names by name and recovers positional calls", {
+  g <- make_ring(3)
+  V(g)$name <- c("a", "b", "c")
+
+  el_names <- as_edgelist(g, names = TRUE)
+  el_ids <- as_edgelist(g, names = FALSE)
+  expect_identical(el_names, rbind(c("a", "b"), c("b", "c"), c("a", "c")))
+  expect_identical(el_ids, rbind(c(1, 2), c(2, 3), c(1, 3)))
+
+  lifecycle::expect_deprecated(
+    res <- as_edgelist(g, FALSE)
+  )
+  expect_identical(res, as_edgelist(g, names = FALSE))
+})
+
+test_that("graph_from_adj_list() covers duplicate by name and recovers positional calls", {
+  g <- make_ring(6)
+  al <- as_adj_list(g, mode = "all")
+
+  # Every ring edge appears twice in the adjacency list,
+  # so duplicate = FALSE keeps both copies as parallel edges.
+  g_dup <- graph_from_adj_list(al, mode = "all", duplicate = TRUE)
+  g_nodup <- graph_from_adj_list(al, mode = "all", duplicate = FALSE)
+  expect_ecount(g_dup, 6)
+  expect_ecount(g_nodup, 12)
+  expect_true(any(which_multiple(g_nodup)))
+  expect_isomorphic(g, g_dup)
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_adj_list(al, "all")
+  )
+  expect_identical_graphs(res, graph_from_adj_list(al, mode = "all"))
+})
+
+test_that("graph_from_data_frame() recovers positional vertices with a deprecation", {
+  edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+  verts <- data.frame(name = c("a", "b", "c"), size = 1:3)
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_data_frame(edges, TRUE, verts)
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_data_frame(edges, directed = TRUE, vertices = verts)
+  )
+  # The vertex metadata from the recovered argument is present.
+  expect_identical(V(res)$size, 1:3)
+})
+
+test_that("graph_from_edgelist() recovers positional directed with a deprecation", {
+  el <- cbind(1:4, c(2:4, 1))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_edgelist(el, FALSE)
+  )
+  expect_identical_graphs(res, graph_from_edgelist(el, directed = FALSE))
+  expect_false(is_directed(res))
+  expect_ecount(res, 4)
+})
+
+test_that("graph_from_graphnel() covers tail args by name and recovers positional calls", {
+  skip_if_not_installed("graph")
+
+  # Round-trip fixture with vertex names, an extra vertex attribute,
+  # and edge weights.
+  g <- make_ring(4)
+  V(g)$name <- letters[1:4]
+  V(g)$score <- 1:4
+  E(g)$weight <- c(1, 2, 3, 4)
+  gnel <- as_graphnel(g)
+
+  g_full <- graph_from_graphnel(
+    gnel,
+    name = TRUE,
+    weight = TRUE,
+    unlist.attrs = TRUE
+  )
+  expect_isomorphic(g_full, g)
+  expect_identical(V(g_full)$name, letters[1:4])
+  expect_true(is_weighted(g_full))
+  expect_equal(sort(E(g_full)$weight), c(1, 2, 3, 4))
+  expect_equal(V(g_full)$score, 1:4, ignore_attr = TRUE)
+
+  g_min <- graph_from_graphnel(
+    gnel,
+    name = FALSE,
+    weight = FALSE,
+    unlist.attrs = FALSE
+  )
+  expect_false("name" %in% vertex_attr_names(g_min))
+  expect_false(is_weighted(g_min))
+  # With unlist.attrs = FALSE the attribute values stay wrapped in a list.
+  expect_true(is.list(V(g_min)$score))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_graphnel(gnel, FALSE)
+  )
+  expect_identical_graphs(res, graph_from_graphnel(gnel, name = FALSE))
 })
