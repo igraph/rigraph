@@ -13,16 +13,20 @@ S3method("[",communities)
 S3method("[",igraph)
 S3method("[",igraph.es)
 S3method("[",igraph.vs)
+S3method("[",igraphSDF)
 S3method("[<-",igraph)
 S3method("[<-",igraph.es)
 S3method("[<-",igraph.vs)
+S3method("[<-",igraphSDF)
 S3method("[[",communities)
 S3method("[[",igraph)
 S3method("[[",igraph.es)
 S3method("[[",igraph.vs)
 S3method("[[<-",igraph.es)
 S3method("[[<-",igraph.vs)
+S3method(as.data.frame,igraphSDF)
 S3method(as.dendrogram,communities)
+S3method(as.dendrogram,igraphHRG)
 S3method(as.hclust,communities)
 S3method(as.hclust,igraphHRG)
 S3method(as.igraph,igraphHRG)
@@ -376,7 +380,6 @@ export(get.adjlist)
 export(get.all.shortest.paths)
 export(get.data.frame)
 export(get.diameter)
-export(get.edge)
 export(get.edge.attribute)
 export(get.edge.ids)
 export(get.edgelist)
@@ -610,7 +613,6 @@ export(layout.fruchterman.reingold.grid)
 export(layout.gem)
 export(layout.graphopt)
 export(layout.grid)
-export(layout.grid.3d)
 export(layout.kamada.kawai)
 export(layout.lgl)
 export(layout.mds)
@@ -629,6 +631,7 @@ export(layout_as_star)
 export(layout_as_tree)
 export(layout_components)
 export(layout_in_circle)
+export(layout_modifier)
 export(layout_nicely)
 export(layout_on_grid)
 export(layout_on_sphere)
@@ -674,6 +677,7 @@ export(make_star)
 export(make_tree)
 export(make_turan)
 export(make_undirected_graph)
+export(make_wheel)
 export(match_vertices)
 export(max_bipartite_match)
 export(max_cardinality)
@@ -874,6 +878,7 @@ export(topo_sort)
 export(topological.sort)
 export(traits)
 export(traits_callaway)
+export(transitive_closure)
 export(transitivity)
 export(tree)
 export(triad.census)
@@ -901,6 +906,7 @@ export(walktrap.community)
 export(watts.strogatz.game)
 export(weighted_clique_num)
 export(weighted_cliques)
+export(wheel)
 export(which_loop)
 export(which_multiple)
 export(which_mutual)
@@ -924,41 +930,51 @@ export(write.graph)
 export(write_graph)
 import(methods)
 import(rlang)
-importFrom(grDevices,as.raster)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,palette)
-importFrom(grDevices,rainbow)
-importFrom(graphics,hist)
-importFrom(graphics,lines)
-importFrom(graphics,par)
-importFrom(graphics,plot)
-importFrom(graphics,polygon)
-importFrom(graphics,rasterImage)
-importFrom(graphics,segments)
-importFrom(graphics,symbols)
-importFrom(graphics,text)
-importFrom(graphics,xspline)
-importFrom(graphics,xyinch)
+importFrom(grDevices,
+  as.raster,
+  col2rgb,
+  palette,
+  rainbow
+)
+importFrom(graphics,
+  hist,
+  lines,
+  par,
+  plot,
+  polygon,
+  rasterImage,
+  segments,
+  symbols,
+  text,
+  xspline,
+  xyinch
+)
 importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
-importFrom(pkgconfig,get_config)
-importFrom(pkgconfig,set_config)
-importFrom(pkgconfig,set_config_in)
+importFrom(pkgconfig,
+  get_config,
+  set_config,
+  set_config_in
+)
 importFrom(rlang,caller_env)
-importFrom(stats,IQR)
-importFrom(stats,as.dendrogram)
-importFrom(stats,as.hclust)
-importFrom(stats,ave)
-importFrom(stats,median)
-importFrom(stats,na.omit)
-importFrom(stats,quantile)
-importFrom(stats,rect.hclust)
-importFrom(stats,reorder)
-importFrom(stats,runif)
-importFrom(stats,sd)
-importFrom(utils,capture.output)
-importFrom(utils,head)
-importFrom(utils,setTxtProgressBar)
-importFrom(utils,tail)
-importFrom(utils,txtProgressBar)
+importFrom(stats,
+  IQR,
+  as.dendrogram,
+  as.hclust,
+  ave,
+  median,
+  na.omit,
+  quantile,
+  rect.hclust,
+  reorder,
+  runif,
+  sd
+)
+importFrom(utils,
+  capture.output,
+  head,
+  setTxtProgressBar,
+  tail,
+  txtProgressBar
+)
 useDynLib(igraph, .registration = TRUE)

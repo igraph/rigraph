@@ -161,7 +161,7 @@ test_that("Issue 18 is really resolved", {
 })
 
 test_that("Issue 20 is resolved", {
-  withr::local_seed(12345)
+  igraph_local_seed(12345)
   g1 <- sample_gnp(n = 20, p = 0.1, directed = TRUE)
   g2 <- sample_gnp(n = 20, p = 0.1, directed = TRUE)
   ls <- local_scan(g2, g1, k = 1, mode = "all")

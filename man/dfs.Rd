@@ -34,28 +34,30 @@ ignores edge directions completely. \sQuote{total} is a synonym for
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{unreachable}{Logical scalar, whether the search should visit the
+\item{unreachable}{Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 \code{TRUE}, then additional searches are performed until all vertices are
 visited.}
 
-\item{order}{Logical scalar, whether to return the DFS ordering of the
+\item{order}{Logical, whether to return the DFS ordering of the
 vertices.}
 
-\item{order.out}{Logical scalar, whether to return the ordering based on
+\item{order.out}{Logical, whether to return the ordering based on
 leaving the subtree of the vertex.}
 
-\item{parent}{Logical scalar, whether to return the parent of the vertices.}
+\item{parent}{Logical, whether to return the parent of the vertices.}
 
-\item{dist}{Logical scalar, whether to return the distance from the root of
+\item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{in.callback}{If not \code{NULL}, then it must be callback function.
-This is called whenever a vertex is visited. See details below.}
+\item{in.callback}{Callback function.
+This is called whenever a vertex is visited. See details below.
+Default: \code{NULL}.}
 
-\item{out.callback}{If not \code{NULL}, then it must be callback function.
+\item{out.callback}{Callback function.
 This is called whenever the subtree of a vertex is completed by the
-algorithm. See details below.}
+algorithm. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
@@ -77,10 +79,10 @@ Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
 \item{order}{
-Numeric vector. The vertex ids, in the order in which they were visited by the search.
+Numeric vector. The vertex IDs, in the order in which they were visited by the search.
 }
 \item{order.out}{
-Numeric vector, the vertex ids, in the order of the completion of their subtree.
+Numeric vector, the vertex IDs, in the order of the completion of their subtree.
 }
 \item{parent}{
 Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
@@ -118,6 +120,10 @@ The extra argument.
 } The callback must return FALSE to continue the search or TRUE
 to terminate it. See examples below on how to use the callback functions.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## A graph with two separate trees
@@ -159,31 +165,31 @@ tmp <- dfs(
 \seealso{
 \code{\link[=bfs]{bfs()}} for breadth-first search.
 
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

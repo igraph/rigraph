@@ -7,6 +7,7 @@
 \usage{
 layout_with_gem(
   graph,
+  ...,
   coords = NULL,
   maxiter = 40 * vcount(graph)^2,
   temp.max = max(vcount(graph), 1),
@@ -19,9 +20,11 @@ with_gem(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{...}{Passed to \code{layout_with_gem()}.}
+
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform. Updating a
 single vertex counts as an iteration.  A reasonable default is 40 * n * n,
@@ -37,8 +40,6 @@ is the number of vertices.}
 
 \item{temp.init}{Initial local temperature of all vertices. A reasonable
 default is the square root of the number of vertices.}
-
-\item{...}{Passed to \code{layout_with_gem()}.}
 }
 \value{
 A numeric matrix with two columns, and as many rows as the number of
@@ -50,6 +51,10 @@ Place vertices on the plane using the GEM force-directed layout algorithm.
 \details{
 See the referenced paper below for the details of the algorithm.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_gem}{\code{layout_gem()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 set.seed(42)
@@ -66,28 +71,28 @@ LNCS 894, pp. 388-403, 1995.
 \code{\link[=layout_with_fr]{layout_with_fr()}},
 \code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

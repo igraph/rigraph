@@ -7,6 +7,7 @@
 \usage{
 layout_with_lgl(
   graph,
+  ...,
   maxiter = 150,
   maxdelta = vcount(graph),
   area = vcount(graph)^2,
@@ -20,6 +21,8 @@ with_lgl(...)
 }
 \arguments{
 \item{graph}{The input graph}
+
+\item{...}{Passed to \code{layout_with_lgl()}.}
 
 \item{maxiter}{The maximum number of iterations to perform (150).}
 
@@ -39,10 +42,8 @@ repulsion forces between vertices only vertices in the same or neighboring
 grid cells are taken into account (the fourth root of the number of
 \code{area}.}
 
-\item{root}{The id of the vertex to place at the middle of the layout. The
+\item{root}{The ID of the vertex to place at the middle of the layout. The
 default value is -1 which means that a random vertex is selected.}
-
-\item{...}{Passed to \code{layout_with_lgl()}.}
 }
 \value{
 A numeric matrix with two columns and as many rows as vertices.
@@ -55,29 +56,33 @@ A layout generator for larger graphs.
 generator of the Large Graph Layout software
 (\url{https://lgl.sourceforge.net/}).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

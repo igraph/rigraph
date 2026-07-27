@@ -1,5 +1,5 @@
 test_that("radius() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_tree(10, 2, mode = "out")
 
   expect_equal(radius(g), 3)
@@ -16,14 +16,15 @@ test_that("radius() works -- weights", {
 })
 
 test_that("radius() works -- lifecycle", {
-  withr::local_seed(42)
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
   g <- make_tree(10, 2, mode = "out")
 
   expect_snapshot(radius(g, "out"))
 })
 
 test_that("eccentricity() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_tree(10, 2, mode = "out")
 
   expect_equal(eccentricity(g), c(3, 3, 4, 4, 4, 5, 5, 5, 5, 5))
@@ -40,14 +41,15 @@ test_that("eccentricity() works -- weights", {
 })
 
 test_that("eccentricity() works -- lifecycle", {
-  withr::local_seed(42)
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
   g <- make_tree(10, 2, mode = "out")
 
   expect_snapshot(eccentricity(g, vids = V(g), "out"))
 })
 
 test_that("graph_center() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   g <- make_tree(100, 7, mode = "out")
   expect_equal(as.numeric(graph_center(g)), c(1, 2))
   expect_equal(as.numeric(graph_center(g, mode = "in")), 1)
@@ -70,4 +72,29 @@ test_that("all_simple_paths() passes on cutoff argument", {
     lengths(all_simple_paths(g, 1)),
     c(2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7)
   )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("all_simple_paths() tail arguments and legacy positional recovery", {
+  g <- make_ring(5, directed = TRUE)
+
+  # mode = "in" walks the ring against the edge directions.
+  res <- all_simple_paths(g, 1, 3, mode = "in")
+  expect_length(res, 1)
+  expect_equal(as.numeric(res[[1]]), c(1, 5, 4, 3))
+
+  lifecycle::expect_deprecated(res2 <- all_simple_paths(g, 1, 3, "in"))
+  expect_equal(res2, all_simple_paths(g, 1, 3, mode = "in"))
+})
+
+test_that("distance_table() tail arguments and legacy positional recovery", {
+  g <- make_ring(4, directed = TRUE)
+
+  res <- distance_table(g, directed = FALSE)
+  expect_equal(res$res, c(4, 2))
+  expect_equal(res$unconnected, 0)
+
+  lifecycle::expect_deprecated(res2 <- distance_table(g, FALSE))
+  expect_identical(res2, distance_table(g, directed = FALSE))
 })

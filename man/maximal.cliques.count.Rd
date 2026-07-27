@@ -15,7 +15,7 @@ maximal.cliques.count(graph, min = NULL, max = NULL, subset = NULL)
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
 
-\item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
+\item{subset}{If not \code{NULL}, then it must be a vector of vertex IDs,
 numeric or symbolic if the graph is named. The algorithm is run from these
 vertices only, so only a subset of all maximal cliques is returned. See the
 Eppstein paper for details. This argument makes it possible to easily
@@ -27,4 +27,8 @@ parallelize the finding of maximal cliques.}
 \code{maximal.cliques.count()} was renamed to \code{\link[=count_max_cliques]{count_max_cliques()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

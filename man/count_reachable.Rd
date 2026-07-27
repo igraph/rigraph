@@ -4,10 +4,12 @@
 \alias{count_reachable}
 \title{Count reachable vertices}
 \usage{
-count_reachable(graph, mode = c("out", "in", "all", "total"))
+count_reachable(graph, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, defines how edge directions are considered
 in directed graphs.
@@ -34,6 +36,10 @@ A vertex is reachable from another if there is a directed path between them.
 For undirected graphs, two vertices are reachable from each other if they
 are in the same connected component.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}
+}
+
 \examples{
 
 # In a directed path graph, the reachability depends on direction
@@ -53,17 +59,15 @@ count_reachable(g3, mode = "all")
 \seealso{
 \code{\link[=components]{components()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=is_connected]{is_connected()}}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{decompose}()},
-\code{\link{is_biconnected}()}
+Connected components:
+\code{\link[=articulation_points]{articulation_points()}},
+\code{\link[=biconnected_components]{biconnected_components()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=decompose]{decompose()}},
+\code{\link[=is_biconnected]{is_biconnected()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{components}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}.}
-

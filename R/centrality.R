@@ -10,7 +10,7 @@
 #' @export
 subgraph.centrality <- function(graph, diag = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "subgraph.centrality()",
     "subgraph_centrality()"
@@ -39,7 +39,7 @@ page.rank <- function(
   options = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+  lifecycle::deprecate_warn("2.0.0", "page.rank()", "page_rank()")
   page_rank(
     graph = graph,
     algo = algo,
@@ -68,10 +68,8 @@ hub.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
-  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_scores()")
-  hub_score(graph = graph, scale = scale, weights = weights, options = options)
-} # nocov end
+  lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()")
+}
 
 #' Kleinberg's hub and authority centrality scores.
 #'
@@ -89,15 +87,8 @@ authority.score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  # nocov start
-  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_scores()")
-  authority_score(
-    graph = graph,
-    scale = scale,
-    weights = weights,
-    options = options
-  )
-} # nocov end
+  lifecycle::deprecate_stop("2.0.0", "authority.score()", "hits_scores()")
+}
 
 #' Strength or weighted vertex degree
 #'
@@ -117,7 +108,7 @@ graph.strength <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
+  lifecycle::deprecate_warn("2.0.0", "graph.strength()", "strength()")
   strength(
     graph = graph,
     vids = vids,
@@ -151,7 +142,7 @@ graph.eigen <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.eigen()", "spectrum()")
+  lifecycle::deprecate_warn("2.0.0", "graph.eigen()", "spectrum()")
   spectrum(
     graph = graph,
     algorithm = algorithm,
@@ -172,7 +163,7 @@ graph.eigen <- function(
 #' @export
 graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.diversity()", "diversity()")
+  lifecycle::deprecate_warn("2.0.0", "graph.diversity()", "diversity()")
   diversity(graph = graph, weights = weights, vids = vids)
 } # nocov end
 
@@ -194,7 +185,7 @@ evcent <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "evcent()", "eigen_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "evcent()", "eigen_centrality()")
   eigen_centrality(
     graph = graph,
     directed = directed,
@@ -222,7 +213,7 @@ edge.betweenness <- function(
   cutoff = -1
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "edge.betweenness()", "edge_betweenness()")
+  lifecycle::deprecate_warn("2.0.0", "edge.betweenness()", "edge_betweenness()")
   edge_betweenness(
     graph = graph,
     e = e,
@@ -252,7 +243,7 @@ bonpow <- function(
   sparse = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(
     graph = graph,
     nodes = nodes,
@@ -285,7 +276,7 @@ alpha.centrality <- function(
   sparse = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
+  lifecycle::deprecate_warn("2.0.0", "alpha.centrality()", "alpha_centrality()")
   alpha_centrality(
     graph = graph,
     nodes = nodes,
@@ -336,7 +327,7 @@ estimate_betweenness <- function(
   cutoff,
   weights = NULL
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_betweenness()",
     "betweenness()",
@@ -391,13 +382,14 @@ betweenness.estimate <- estimate_betweenness
 #' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether directed paths should be considered while
 #'   determining the shortest paths.
 #' @param weights Optional positive weight vector for calculating weighted
 #'   betweenness. If the graph has a `weight` edge attribute, then this is
 #'   used by default. Weights are used to calculate weighted shortest paths,
 #'   so they are interpreted as distances.
-#' @param normalized Logical scalar, whether to normalize the betweenness
+#' @param normalized Logical, whether to normalize the betweenness
 #'   scores. If `TRUE`, then the results are normalized by the number of ordered
 #'   or unordered vertex pairs in directed and undirected graphs, respectively.
 #'   In an undirected graph,
@@ -439,11 +431,44 @@ betweenness.estimate <- estimate_betweenness
 betweenness <- function(
   graph,
   v = V(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: betweenness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        directed = directed,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("directed", "weights", "normalized", "cutoff"),
+      recover_old = c("directed", "weights", "normalized", "cutoff"),
+      match_names = c("directed", "weights", "normalized", "cutoff"),
+      match_to = c("directed", "weights", "normalized", "cutoff"),
+      defaults = list(
+        directed = TRUE,
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "v"),
+      fn_name = "betweenness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- betweenness_cutoff_impl(
     graph = graph,
     vids = v,
@@ -464,14 +489,38 @@ betweenness <- function(
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @export
 edge_betweenness <- function(
   graph,
   e = E(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: edge_betweenness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, weights = weights, cutoff = cutoff),
+      recover_new = c("directed", "weights", "cutoff"),
+      recover_old = c("directed", "weights", "cutoff"),
+      match_names = c("directed", "weights", "cutoff"),
+      match_to = c("directed", "weights", "cutoff"),
+      defaults = list(directed = TRUE, weights = NULL, cutoff = -1),
+      head_args = c("graph", "e"),
+      fn_name = "edge_betweenness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   e <- as_igraph_es(graph, e)
   res <- edge_betweenness_cutoff_impl(
     graph = graph,
@@ -498,7 +547,7 @@ estimate_edge_betweenness <- function(
   cutoff,
   weights = NULL
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
@@ -544,12 +593,13 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
 #'   *to* a vertex, \dQuote{out} measures paths *from* a vertex,
 #'   *all* uses undirected paths. This argument is ignored for undirected
 #'   graphs.
-#' @param normalized Logical scalar, whether to calculate the normalized
+#' @param normalized Logical, whether to calculate the normalized
 #'   closeness, i.e. the inverse average distance to all reachable vertices.
 #'   The non-normalized closeness is the inverse of the sum of distances to
 #'   all reachable vertices.
@@ -579,48 +629,52 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 closeness <- function(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+  # BEGIN GENERATED ARG_HANDLE: closeness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("mode", "weights", "normalized", "cutoff"),
+      recover_old = c("mode", "weights", "normalized", "cutoff"),
+      match_names = c("mode", "weights", "normalized", "cutoff"),
+      match_to = c("mode", "weights", "normalized", "cutoff"),
+      defaults = list(
+        mode = c("out", "in", "all", "total"),
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "closeness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  normalized <- as.logical(normalized)
-  cutoff <- as.numeric(cutoff)
+  # END GENERATED ARG_HANDLE
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_closeness_cutoff,
-    graph,
-    vids - 1,
-    mode,
-    weights,
-    normalized,
-    cutoff
+  closeness_cutoff_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )$res
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[vids]
-  }
-  res
 }
 
 #' Deprecated version of `closeness()`
@@ -640,7 +694,7 @@ estimate_closeness <- function(
   weights = NULL,
   normalized = FALSE
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "estimate_closeness()",
     "closeness()",
@@ -892,7 +946,7 @@ arpack_defaults <- function() {
 #'   \dQuote{input matrix}. (The input matrix is never given explicitly.) The
 #'   second argument is `extra`.
 #' @param extra Extra argument to supply to `func`.
-#' @param sym Logical scalar, whether the input matrix is symmetric. Always
+#' @param sym Logical, whether the input matrix is symmetric. Always
 #'   supply `TRUE` here if it is, since it can speed up the computation.
 #' @param options Options to ARPACK, a named list to overwrite some of the
 #'   default option values. See details below.
@@ -990,7 +1044,7 @@ arpack <- function(
   complex = !sym
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "arpack(options = 'must be a list')",
       details = c(
@@ -1005,7 +1059,7 @@ arpack <- function(
   }
 
   defaults <- arpack_defaults()
-  if (any(!names(options) %in% names(defaults))) {
+  if (!all(names(options) %in% names(defaults))) {
     unknown_options <- setdiff(names(options), names(defaults))
     cli::cli_abort(
       "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}:
@@ -1020,7 +1074,7 @@ arpack <- function(
     cli::cli_warn("Symmetric matrix, setting {.arg complex} to {.code FALSE}.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
@@ -1045,7 +1099,7 @@ arpack <- function(
       }
       res$values <- res$values[, 1]
     }
-    res$vectors <- res$vectors[, 1:length(res$values)]
+    res$vectors <- res$vectors[, seq_along(res$values)]
   }
 
   res
@@ -1057,7 +1111,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   values[] <- as.numeric(values)
   nev <- as.numeric(nev)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
 
@@ -1079,7 +1133,8 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' effectively means that the measure can only be calculated for small graphs.
 #'
 #' @param graph The input graph. It will be treated as undirected.
-#' @param diag Boolean scalar, whether to include the diagonal of the adjacency
+#' @inheritParams rlang::args_dots_empty
+#' @param diag Logical, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
@@ -1097,7 +1152,33 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' sc <- subgraph_centrality(g)
 #' cor(degree(g), sc)
 #'
-subgraph_centrality <- function(graph, diag = FALSE) {
+subgraph_centrality <- function(
+  graph,
+  ...,
+  diag = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: subgraph_centrality, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(diag = diag),
+      recover_new = c("diag"),
+      recover_old = c("diag"),
+      match_names = c("diag"),
+      match_to = c("diag"),
+      defaults = list(diag = FALSE),
+      head_args = c("graph"),
+      fn_name = "subgraph_centrality"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   A <- as_adjacency_matrix(graph)
   if (!diag) {
     diag(A) <- 0
@@ -1199,7 +1280,7 @@ spectrum <- function(
   options = arpack_defaults()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "spectrum(options = 'must be a list')",
       details = c(
@@ -1277,7 +1358,7 @@ eigen_defaults <- function() {
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
 #' @param graph Graph to be analyzed.
-#' @param directed Logical scalar, whether to consider direction of the edges
+#' @param directed Logical, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Normalization will always take
 #' place.
@@ -1320,7 +1401,6 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-#' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(
   graph,
   directed = FALSE,
@@ -1329,7 +1409,7 @@ eigen_centrality <- function(
   options = arpack_defaults()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "eigen_centrality(options = 'must be a list')",
       details = c(
@@ -1341,13 +1421,13 @@ eigen_centrality <- function(
 
   if (lifecycle::is_present(scale)) {
     if (isTRUE(scale)) {
-      lifecycle::deprecate_soft(
+      lifecycle::deprecate_warn(
         "2.1.1",
         "eigen_centrality(scale)",
         details = "eigen_centrality() will always behave as if scale=TRUE were used."
       )
     } else {
-      lifecycle::deprecate_warn(
+      lifecycle::deprecate_stop(
         "2.1.1",
         "eigen_centrality(scale = 'always as if TRUE')",
         details = "Normalization is always performed"
@@ -1371,10 +1451,11 @@ eigen_centrality <- function(
 #'
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
-#' @param loops Logical; whether the loop edges are also counted.
+#' @inheritParams degree
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a
@@ -1400,14 +1481,40 @@ eigen_centrality <- function(
 #' strength(g)
 #' @family centrality
 #' @export
-#' @cdocs igraph_strength
 strength <- function(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: strength, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, weights = weights),
+      recover_new = c("mode", "loops", "weights"),
+      recover_old = c("mode", "loops", "weights"),
+      match_names = c("mode", "loops", "weights"),
+      match_to = c("mode", "loops", "weights"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        weights = NULL
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "strength"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   strength_impl(
     graph = graph,
     vids = vids,
@@ -1436,10 +1543,11 @@ strength <- function(
 #' For vertices with degree less than two the function returns `NaN`.
 #'
 #' @param graph The input graph. Edge directions are ignored.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
-#' @param vids The vertex ids for which to calculate the measure.
+#' @param vids The vertex IDs for which to calculate the measure.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
@@ -1458,8 +1566,34 @@ strength <- function(
 #' diversity(g3)
 #' @family centrality
 #' @export
-#' @cdocs igraph_diversity
-diversity <- function(graph, weights = NULL, vids = V(graph)) {
+diversity <- function(
+  graph,
+  ...,
+  weights = NULL,
+  vids = V(graph)
+) {
+  # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, vids = vids),
+      recover_new = c("weights", "vids"),
+      recover_old = c("weights", "vids"),
+      match_names = c("weights", "vids"),
+      match_to = c("weights", "vids"),
+      defaults = list(weights = NULL, vids = V(graph)),
+      head_args = c("graph"),
+      fn_name = "diversity"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   diversity_impl(
     graph = graph,
     weights = weights,
@@ -1482,7 +1616,7 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
+#' @param scale Logical, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
 #'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -1526,7 +1660,6 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' g2 <- make_ring(10)
 #' hits_scores(g2)
 #' @family centrality
-#' @cdocs igraph_hub_and_authority_scores
 hits_scores <- function(
   graph,
   ...,
@@ -1555,9 +1688,9 @@ authority_score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
+  lifecycle::deprecate_warn("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
@@ -1581,7 +1714,7 @@ authority_score <- function(
 #' @title Kleinberg's hub centrality scores.
 #' @rdname hub_score
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
+#' @param scale Logical, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
 #'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -1600,9 +1733,9 @@ hub_score <- function(
   weights = NULL,
   options = arpack_defaults()
 ) {
-  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  lifecycle::deprecate_warn("2.0.3", "hub_score()", "hits_scores()")
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
@@ -1645,6 +1778,7 @@ hub_score <- function(
 #' increase at all.
 #'
 #' @param graph The graph object.
+#' @inheritParams rlang::args_dots_empty
 #' @param algo Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library
 #'   (<https://github.com/dgleich/prpack>) to calculate PageRank scores
@@ -1710,9 +1844,9 @@ hub_score <- function(
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-#' @cdocs igraph_personalized_pagerank
 page_rank <- function(
   graph,
+  ...,
   algo = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
@@ -1721,6 +1855,76 @@ page_rank <- function(
   weights = NULL,
   options = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        algo = algo,
+        vids = vids,
+        directed = directed,
+        damping = damping,
+        personalized = personalized,
+        weights = weights,
+        options = options
+      ),
+      recover_new = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      recover_old = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      match_names = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      match_to = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      defaults = list(
+        algo = c("prpack", "arpack"),
+        vids = V(graph),
+        directed = TRUE,
+        damping = 0.85,
+        personalized = NULL,
+        weights = NULL,
+        options = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "page_rank"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   personalized_pagerank_impl(
     graph = graph,
     algo = algo,
@@ -1745,12 +1949,13 @@ page_rank <- function(
 #'
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
 #'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
 #'   \dQuote{all} ignores edge directions. This argument is ignored for undirected
 #'   graphs.
-#' @param normalized Logical scalar, whether to calculate the normalized
+#' @param normalized Logical, whether to calculate the normalized
 #'   harmonic centrality. If true, the result is the mean inverse path length to
 #'   other vertices, i.e. it is normalized by the number of vertices minus one.
 #'   If false, the result is the sum of inverse path lengths to other vertices.
@@ -1778,15 +1983,47 @@ page_rank <- function(
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-#' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- function(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: harmonic_centrality, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("mode", "weights", "normalized", "cutoff"),
+      recover_old = c("mode", "weights", "normalized", "cutoff"),
+      match_names = c("mode", "weights", "normalized", "cutoff"),
+      match_to = c("mode", "weights", "normalized", "cutoff"),
+      defaults = list(
+        mode = c("out", "in", "all", "total"),
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "harmonic_centrality"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   harmonic_centrality_cutoff_impl(
     graph = graph,
     vids = vids,
@@ -1804,11 +2041,12 @@ bonpow.dense <- function(
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
-  tol = 1e-7
+  tol = 1e-7,
+  weights = NULL
 ) {
   ensure_igraph(graph)
 
-  d <- as_adjacency_matrix(graph)
+  d <- as_adjacency_matrix(graph, weights = weights, sparse = FALSE)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1817,7 +2055,7 @@ bonpow.dense <- function(
   diag(id) <- 1
 
   #  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
-  ev <- solve(id - exponent * d, tol = tol) %*% apply(d, 1, sum)
+  ev <- solve(id - exponent * d, tol = tol) %*% rowSums(d)
   if (rescale) {
     ev <- ev / sum(ev)
   } else {
@@ -1832,7 +2070,8 @@ bonpow.sparse <- function(
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
-  tol = 1e-07
+  tol = 1e-07,
+  weights = NULL
 ) {
   ## remove loops if requested
   if (!loops) {
@@ -1842,13 +2081,13 @@ bonpow.sparse <- function(
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adjacency_matrix(graph, sparse = TRUE)
+  d <- as_adjacency_matrix(graph, weights = weights, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
 
   ## solve it
-  ev <- Matrix::solve(id - exponent * d, degree(graph, mode = "out"), tol = tol)
+  ev <- Matrix::solve(id - exponent * d, Matrix::rowSums(d), tol = tol)
 
   if (rescale) {
     ev <- ev / sum(ev)
@@ -1916,7 +2155,8 @@ bonpow.sparse <- function(
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
-#' @param loops boolean indicating whether or not the diagonal should be
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
 #'   loops.  `loops` is `FALSE` by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality
@@ -1925,9 +2165,10 @@ bonpow.sparse <- function(
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
 #'   [solve()])
-#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
+#' @inheritParams as_adjacency_matrix
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
@@ -1957,36 +2198,111 @@ bonpow.sparse <- function(
 #'   dir = FALSE
 #' )
 #' # Compute power centrality scores
-#' for (e in seq(-0.5, .5, by = 0.1)) {
+#' for (e in seq(-0.5, 0.5, by = 0.1)) {
 #'   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4, .4, by = 0.1)) {
+#' for (e in seq(-0.4, 0.4, by = 0.1)) {
 #'   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
 power_centrality <- function(
   graph,
   nodes = V(graph),
+  ...,
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
   tol = 1e-7,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: power_centrality, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        loops = loops,
+        exponent = exponent,
+        rescale = rescale,
+        tol = tol,
+        sparse = sparse,
+        weights = weights
+      ),
+      recover_new = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      recover_old = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      match_names = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      match_to = c("loops", "exponent", "rescale", "tol", "sparse", "weights"),
+      defaults = list(
+        loops = FALSE,
+        exponent = 1,
+        rescale = FALSE,
+        tol = 1e-07,
+        sparse = TRUE,
+        weights = NULL
+      ),
+      head_args = c("graph", "nodes"),
+      fn_name = "power_centrality"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
-    res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.sparse(
+      graph,
+      nodes,
+      loops,
+      exponent,
+      rescale,
+      tol,
+      weights = weights
+    )
   } else {
-    res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.dense(
+      graph,
+      nodes,
+      loops,
+      exponent,
+      rescale,
+      tol,
+      weights = weights
+    )
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2010,25 +2326,7 @@ alpha.centrality.dense <- function(
   exo <- rep(exo, length.out = vcount(graph))
   exo <- matrix(exo, ncol = 1)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
-  } else if (is.character(weights) && length(weights) == 1) {
-    ## name of an edge attribute, nothing to do
-    attr <- weights
-  } else if (any(!is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
-  }
-
-  d <- t(as_adjacency_matrix(graph, attr = attr, sparse = FALSE))
+  d <- t(as_adjacency_matrix(graph, weights = weights, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
@@ -2057,25 +2355,7 @@ alpha.centrality.sparse <- function(
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
   }
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
-  } else if (is.character(weights) && length(weights) == 1) {
-    ## name of an edge attribute, nothing to do
-    attr <- weights
-  } else if (any(!is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
-  }
-
-  M <- Matrix::t(as_adjacency_matrix(graph, attr = attr, sparse = TRUE))
+  M <- Matrix::t(as_adjacency_matrix(graph, weights = weights, sparse = TRUE))
 
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(
@@ -2117,6 +2397,7 @@ alpha.centrality.sparse <- function(
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. (For technical reasons they will be calculated for all
 #'   vertices, anyway.)
+#' @inheritParams rlang::args_dots_empty
 #' @param alpha Parameter specifying the relative importance of endogenous
 #'   versus exogenous factors in the determination of centrality. See details
 #'   below.
@@ -2126,14 +2407,10 @@ alpha.centrality.sparse <- function(
 #'   the same factor for every node, or a vector giving the factor for every
 #'   vertex. Note that too long vectors will be truncated and too short vectors
 #'   will be replicated to match the number of vertices.
-#' @param weights A character scalar that gives the name of the edge attribute
-#'   to use in the adjacency matrix. If it is `NULL`, then the
-#'   \sQuote{weight} edge attribute of the graph is used, if there is one.
-#'   Otherwise, or if it is `NA`, then the calculation uses the standard
-#'   adjacency matrix.
+#' @inheritParams as_adjacency_matrix
 #' @param tol Tolerance for near-singularities during matrix inversion, see
 #'   [solve()].
-#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' @param sparse Logical, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
 #' @return A numeric vector contaning the centrality scores for the selected
@@ -2161,6 +2438,7 @@ alpha.centrality.sparse <- function(
 alpha_centrality <- function(
   graph,
   nodes = V(graph),
+  ...,
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2168,6 +2446,42 @@ alpha_centrality <- function(
   tol = 1e-7,
   sparse = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: alpha_centrality, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        alpha = alpha,
+        loops = loops,
+        exo = exo,
+        weights = weights,
+        tol = tol,
+        sparse = sparse
+      ),
+      recover_new = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      recover_old = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      match_names = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      match_to = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      defaults = list(
+        alpha = 1,
+        loops = FALSE,
+        exo = 1,
+        weights = NULL,
+        tol = 1e-07,
+        sparse = TRUE
+      ),
+      head_args = c("graph", "nodes"),
+      fn_name = "alpha_centrality"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- alpha.centrality.sparse(

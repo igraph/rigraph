@@ -36,7 +36,7 @@ vertex sets to find. \code{NULL} means no limit.}
 \code{ivs()},
 \code{largest_ivs()} and
 \code{max_ivs()} return a list containing numeric
-vertex ids, each list element is an independent vertex set.
+vertex IDs, each list element is an independent vertex set.
 
 \code{ivs_size()} returns an integer constant.
 
@@ -72,6 +72,10 @@ reference below.
 
 \code{is_ivs()} tests if no pairs within a vertex set are connected.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_largest_independent_vertex_sets}{\code{largest_independent_vertex_sets()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_maximal_independent_vertex_sets}{\code{maximal_independent_vertex_sets()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_independence_number}{\code{independence_number()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{is_independent_vertex_set()}}
+}
+
 \examples{
 
 # Do not run, takes a couple of seconds
@@ -93,10 +97,10 @@ algorithm for generating all the maximal independent sets. \emph{SIAM J
 Computing}, 6:505--517, 1977.
 }
 \seealso{
-Other cliques: 
-\code{\link{cliques}()},
-\code{\link{is_complete}()},
-\code{\link{weighted_cliques}()}
+Other cliques:
+\code{\link[=cliques]{cliques()}},
+\code{\link[=is_complete]{is_complete()}},
+\code{\link[=weighted_cliques]{weighted_cliques()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty
@@ -106,5 +110,3 @@ page.
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{is_independent_vertex_set()}}.}
-

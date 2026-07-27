@@ -28,7 +28,7 @@ be given for \eqn{G(n,m)} graphs.}
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed

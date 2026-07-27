@@ -7,6 +7,7 @@
 is_graphical(
   out.deg,
   in.deg = NULL,
+  ...,
   allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 }
@@ -16,6 +17,8 @@ the out-degree sequence for directed graphs.}
 
 \item{in.deg}{\code{NULL} or an integer vector. For undirected graphs, it
 should be \code{NULL}. For directed graphs it specifies the in-degrees.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{The allowed edge types in the graph. \sQuote{simple}
 means that neither loop nor multiple edges are allowed (i.e. the graph must be
@@ -36,6 +39,10 @@ The classical concept of graphicality assumes simple graphs. This function
 can perform the check also when self-loops, multi-edges, or both are allowed
 in the graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+}
+
 \examples{
 g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))
@@ -50,13 +57,11 @@ realize graphical degree sequences of directed graphs.  \emph{The Electronic
 Journal of Combinatorics} 17(1):R66, 2010.
 }
 \seealso{
-Other graphical degree sequences: 
-\code{\link{is_degseq}()}
+Other graphical degree sequences:
+\code{\link[=is_degseq]{is_degseq()}}
 }
 \author{
 Tamás Nepusz \email{ntamas@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}.}
-
