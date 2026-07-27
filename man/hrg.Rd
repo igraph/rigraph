@@ -10,7 +10,7 @@ hrg(graph, prob)
 \item{graph}{The igraph graph to create the HRG from.}
 
 \item{prob}{A vector of probabilities, one for each vertex, in the order of
-vertex ids.}
+vertex IDs.}
 }
 \value{
 \code{hrg()} returns an \code{igraphHRG} object.
@@ -21,17 +21,19 @@ a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
 vertices. The \code{prob} argument contains the HRG probability labels
 for each vertex; these are ignored for leaf vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}
+}
+
 \seealso{
-Other hierarchical random graph functions: 
-\code{\link{consensus_tree}()},
-\code{\link{fit_hrg}()},
+Other hierarchical random graph functions:
+\code{\link[=consensus_tree]{consensus_tree()}},
+\code{\link[=fit_hrg]{fit_hrg()}},
 \code{\link{hrg-methods}},
-\code{\link{hrg_tree}()},
-\code{\link{predict_edges}()},
-\code{\link{print.igraphHRG}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{sample_hrg}()}
+\code{\link[=hrg_tree]{hrg_tree()}},
+\code{\link[=predict_edges]{predict_edges()}},
+\code{\link[=print.igraphHRG]{print.igraphHRG()}},
+\code{\link[=print.igraphHRGConsensus]{print.igraphHRGConsensus()}},
+\code{\link[=sample_hrg]{sample_hrg()}}
 }
 \concept{hierarchical random graph functions}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}.}
-

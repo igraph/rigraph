@@ -180,6 +180,7 @@ add_library(
 
   connectivity/cohesive_blocks.c
   connectivity/components.c
+  connectivity/percolation.c
   connectivity/separators.c
   connectivity/reachability.c
 
@@ -279,6 +280,7 @@ add_library(
   properties/multiplicity.c
   properties/neighborhood.c
   properties/perfect.c
+  properties/rich_club.c
   properties/spectral.c
   properties/trees.c
   properties/triangles.c
@@ -335,7 +337,7 @@ add_library(
 add_dependencies(igraph parsersources)
 
 # Set soname for the library
-set_target_properties(igraph PROPERTIES VERSION "3.1.10")
+set_target_properties(igraph PROPERTIES VERSION "3.1.11")
 set_target_properties(igraph PROPERTIES SOVERSION 3)
 
 # Add extra compiler definitions if needed

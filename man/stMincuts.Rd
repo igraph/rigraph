@@ -9,9 +9,9 @@ stMincuts(graph, source, target, capacity = NULL)
 \arguments{
 \item{graph}{The input graph. It must be directed.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex.}
+\item{target}{The ID of the target vertex.}
 
 \item{capacity}{Numeric vector giving the edge capacities. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then this
@@ -25,4 +25,8 @@ here.}
 \code{stMincuts()} was renamed to \code{\link[=st_min_cuts]{st_min_cuts()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

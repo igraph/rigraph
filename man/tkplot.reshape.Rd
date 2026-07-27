@@ -7,7 +7,7 @@
 tkplot.reshape(tkp.id, newlayout, ..., params)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{newlayout}{The new layout, see the \code{layout} parameter of tkplot.}
 
@@ -22,4 +22,8 @@ the complete list.}
 \code{tkplot.reshape()} was renamed to \code{\link[=tk_reshape]{tk_reshape()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

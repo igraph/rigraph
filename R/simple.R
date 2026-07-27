@@ -10,7 +10,7 @@
 #' @export
 is.simple <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.simple()", "is_simple()")
+  lifecycle::deprecate_warn("2.0.0", "is.simple()", "is_simple()")
   is_simple(graph = graph)
 } # nocov end
 
@@ -50,7 +50,8 @@ is.simple <- function(graph) {
 #'
 #' `simplify()` removes the loop and/or multiple edges from a graph.  If
 #' both `remove.loops` and `remove.multiple` are `TRUE` the
-#' function returns a simple graph.
+#' function returns a simple graph. If the graph is already simple, it is
+#' returned unchanged.
 #'
 #' `simplify_and_colorize()` constructs a new, simple graph from a graph and
 #' also sets a `color` attribute on both the vertices and the edges.
@@ -71,7 +72,8 @@ is.simple <- function(graph) {
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
 #'   [attribute.combination()] for details on this.
-#' @return a new graph object with the edges deleted.
+#' @return a graph object with the loop and/or multiple edges removed; the
+#'   input graph is returned unchanged if it is already simple.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [which_loop()], [which_multiple()] and
 #' [count_multiple()], [delete_edges()],
@@ -88,13 +90,35 @@ is.simple <- function(graph) {
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
-#' @cdocs igraph_simplify
-simplify <- simplify_impl
+simplify <- function(
+  graph,
+  remove.multiple = TRUE,
+  remove.loops = TRUE,
+  edge.attr.comb = igraph_opt("edge.attr.comb")
+) {
+  # A graph that is already simple has no loops and no multiple edges, so
+  # simplify_impl() would not change its structure regardless of the
+  # remove.* / edge.attr.comb arguments. Short-circuiting here avoids the
+  # cost of rebuilding the graph in the (common) already-simple case;
+  # is_simple() is orders of magnitude cheaper than simplify().
+  if (is_simple(graph)) {
+    return(graph)
+  }
+  simplify_impl(
+    graph = graph,
+    remove_multiple = remove.multiple,
+    remove_loops = remove.loops,
+    edge_attr_comb = edge.attr.comb
+  )
+}
 
 #' @export
 #' @rdname simplify
-#' @cdocs igraph_is_simple
-is_simple <- is_simple_impl
+is_simple <- function(graph) {
+  is_simple_impl(
+    graph = graph
+  )
+}
 
 #' @export
 #' @rdname simplify
@@ -102,9 +126,10 @@ simplify_and_colorize <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_simplify_and_colorize, graph)
+  res <- simplify_and_colorize_impl(
+    graph = graph
+  )
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

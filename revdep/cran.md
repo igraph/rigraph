@@ -1,109 +1,94 @@
 ## revdepcheck results
 
-We checked 2160 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2289 reverse dependencies (2287 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 25 new problems
- * We failed to check 12 packages
+ * We saw 22 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* AnimalHabitatNetwork
+* Boptbd
   checking examples ... ERROR
 
-* archeofrag
+* c3net
+  checking examples ... ERROR
+
+* cfid
+  checking tests ... ERROR
+
+* comato
+  checking examples ... ERROR
+
+* cranly
+  checking re-building of vignette outputs ... ERROR
+
+* dci
   checking examples ... ERROR
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* CITMIC
-  checking re-building of vignette outputs ... ERROR
+* degreenet
+  checking examples ... ERROR
 
-* dosearch
+* ECoL
+  checking examples ... ERROR
   checking tests ... ERROR
 
-* DrDimont
+* ggm
+  checking examples ... ERROR
+
+* ggraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* EGAnet
-  checking examples ... ERROR
-
-* egor
-  checking re-building of vignette outputs ... ERROR
-
-* FCMapper
-  checking examples ... ERROR
-
-* GephiForR
-  checking examples ... ERROR
-
-* gor
-  checking examples ... ERROR
-
-* handwriterRF
+* glyrepr
   checking tests ... ERROR
 
-* incidentally
-  checking re-building of vignette outputs ... ERROR
-
-* IOHanalyzer
-  checking examples ... ERROR
-
-* klassR
+* GoodFitSBM
   checking examples ... ERROR
 
 * manynet
-  checking examples ... ERROR
   checking tests ... ERROR
 
-* multinet
-  checking examples ... ERROR
-
-* mwcsr
-  checking examples ... ERROR
+* migraph
   checking tests ... ERROR
 
-* pathfindR
-  checking tests ... ERROR
-
-* PopComm
+* nat
   checking examples ... ERROR
-
-* remify
   checking tests ... ERROR
-
-* rsetse
-  checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* SEMID
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
+* qgraph
+  checking examples ... ERROR
+
+* R6causal
+  checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
 
-* sharpshootR
-  checking examples ... ERROR
-
-* tilemaps
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* timeordered
-  checking examples ... ERROR
+* vkR
+  checking dependencies in R code ... WARNING
 
 ### Failed to check
 
-* bnlearn         (NA)
-* dataone         (NA)
-* datapack        (NA)
-* FAfA            (NA)
-* FAIRmaterials   (NA)
-* lavaan.shiny    (NA)
-* multinma        (NA)
-* randomForestSRC (NA)
-* RSP             (NA)
-* sphereML        (NA)
-* streamDAG       (NA)
-* TestAnaAPP      (NA)
+* blavaan    (NA)
+* caugi      (NA)
+* deepSTRAPP (NA)
+* ggpicrust2 (NA)
+* scAnnotate (NA)
+* spopt      (NA)
+* streamDAG  (NA)

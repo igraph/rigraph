@@ -291,9 +291,11 @@ static igraph_error_t simple_cycles_circuit(
         IGRAPH_ALLOW_INTERRUPTION();
     }
 
-    IGRAPH_ASSERT(igraph_stack_int_size(&v_stack) == 0);
-    IGRAPH_ASSERT(igraph_stack_int_size(&e_stack) == 0);
-    IGRAPH_ASSERT(igraph_stack_int_size(&neigh_iteration_progress) == 0);
+    if (! state->stop_search) {
+        IGRAPH_ASSERT(igraph_stack_int_size(&v_stack) == 0);
+        IGRAPH_ASSERT(igraph_stack_int_size(&e_stack) == 0);
+        IGRAPH_ASSERT(igraph_stack_int_size(&neigh_iteration_progress) == 0);
+    }
 
     igraph_stack_int_destroy(&neigh_iteration_progress);
     igraph_stack_int_destroy(&v_stack);
@@ -495,7 +497,7 @@ static igraph_error_t simple_cycles_search_callback_from_one_vertex(
  *   \c IGRAPH_IN, follows the opposite directions; and
  *   \c IGRAPH_ALL, ignores edge directions. This argument is
  *   ignored for undirected graphs.
- * \param max_cycle_length Limit the minimum length of cycles to search for.
+ * \param min_cycle_length Limit the minimum length of cycles to search for.
  *   Pass a negative value to search for all cycles.
  * \param max_cycle_length Limit the maximum length of cycles to search for.
  *   Pass a negative value to search for all cycles.
@@ -592,7 +594,7 @@ igraph_error_t igraph_simple_cycles_callback(
  *   \c IGRAPH_IN, follows the opposite directions; and
  *   \c IGRAPH_ALL, ignores edge directions. This argument is
  *   ignored for undirected graphs.
- * \param max_cycle_length Limit the minimum length of cycles to search for.
+ * \param min_cycle_length Limit the minimum length of cycles to search for.
  *   Pass a negative value to search for all cycles.
  * \param max_cycle_length Limit the maximum length of cycles to search for.
  *   Pass a negative value to search for all cycles.

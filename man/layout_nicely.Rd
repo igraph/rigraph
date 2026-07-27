@@ -58,31 +58,35 @@ end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
 forward the weights to these functions and issue a warning about this. You
 can use \code{weights = NA} to silence the warning.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_align}{\code{layout_align()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \seealso{
 \code{\link[=plot.igraph]{plot.igraph()}}
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

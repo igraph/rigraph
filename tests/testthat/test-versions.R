@@ -6,7 +6,7 @@ test_that("we create graphs of the current version", {
 })
 
 test_that("we can't upgrade from 0.1.1 to 1.5.0, on the fly", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     oldsample_0_1_1()
   })
 })
@@ -16,13 +16,13 @@ test_that("we can't upgrade from 0.1.1 to 1.5.0, explicitly", {
 
   expect_equal(graph_version(g), ver_0_1_1)
 
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     upgrade_graph(g)
   })
 })
 
 test_that("we can't upgrade from 0.2 to 1.5.0, on the fly", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     oldsample_0_2()
   })
 })
@@ -37,7 +37,7 @@ test_that("we can upgrade from 0.2 to 1.5.0, explicitly", {
 })
 
 test_that("we can't upgrade from 0.5 to 1.5.0, on the fly", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     oldsample_0_5()
   })
 })
@@ -52,7 +52,7 @@ test_that("we can upgrade from 0.5 to 1.5.0, explicitly", {
 })
 
 test_that("we can't upgrade from 0.6 to 1.5.0, on the fly", {
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     oldsample_0_6()
   })
 })
@@ -67,8 +67,6 @@ test_that("we can upgrade from 0.6 to 1.5.0, explicitly", {
 })
 
 test_that("we can upgrade from 1.0.0 to 1.5.0, on the fly", {
-  local_igraph_options(print.id = FALSE)
-
   expect_snapshot({
     g <- oldsample_1_0_0()
     graph_version(g)
@@ -92,19 +90,17 @@ test_that("we can upgrade from 1.0.0 to 1.5.0, explicitly", {
 })
 
 test_that("reading of old igraph formats", {
-  local_igraph_options(print.id = FALSE)
-
   s <- oldsamples()
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     s[["0.1.1"]]
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     s[["0.2"]]
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     s[["0.5"]]
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     s[["0.6"]]
   })
   expect_snapshot({
@@ -128,8 +124,9 @@ test_that("igraph_version returns a version string", {
     "\\b"
   )
 
-  expect_match(igraph_version("R"), regex)
-  expect_match(igraph_version(), regex)
+  version <- igraph_version()
+
+  expect_match(version, regex)
 
   c_regex <- paste0(
     "\\b", # word boundary
@@ -139,5 +136,5 @@ test_that("igraph_version returns a version string", {
     "\\b"
   )
 
-  expect_match(igraph_version("C"), c_regex)
+  expect_match(attr(version, "c_version"), c_regex)
 })

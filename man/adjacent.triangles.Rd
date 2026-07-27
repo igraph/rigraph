@@ -11,7 +11,7 @@ adjacent.triangles(graph, vids = V(graph))
 ignored.}
 
 \item{vids}{The vertices to query, all of them by default. This might be a
-vector of numeric ids, or a character vector of symbolic vertex names for
+vector of numeric IDs, or a character vector of symbolic vertex names for
 named graphs.}
 }
 \description{
@@ -20,4 +20,8 @@ named graphs.}
 \code{adjacent.triangles()} was renamed to \code{\link[=count_triangles]{count_triangles()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_count_adjacent_triangles}{\code{count_adjacent_triangles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

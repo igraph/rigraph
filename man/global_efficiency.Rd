@@ -6,11 +6,12 @@
 \alias{average_local_efficiency}
 \title{Efficiency of a graph}
 \usage{
-global_efficiency(graph, weights = NULL, directed = TRUE)
+global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
   vids = V(graph),
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -18,6 +19,7 @@ local_efficiency(
 
 average_local_efficiency(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -26,14 +28,16 @@ average_local_efficiency(
 \arguments{
 \item{graph}{The graph to analyze.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{The edge weights. All edge weights must be non-negative;
 additionally, no edge weight may be NaN. If it is \code{NULL} (the default)
 and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{directed}{Logical scalar, whether to consider directed paths. Ignored
+\item{directed}{Logical, whether to consider directed paths. Ignored
 for undirected graphs.}
 
-\item{vids}{The vertex ids of the vertices for which the calculation will be done.
+\item{vids}{The vertex IDs of the vertices for which the calculation will be done.
 Applies to the local efficiency calculation only.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in
@@ -89,6 +93,10 @@ the local efficiencies of all the vertices; see the definition for local
 efficiency above.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency}{\code{global_efficiency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency}{\code{local_efficiency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency}{\code{average_local_efficiency()}}
+}
+
 \examples{
 
 g <- make_graph("zachary")
@@ -104,5 +112,3 @@ transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 }
 \concept{efficiency}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_global_efficiency}{\code{global_efficiency()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_efficiency}{\code{local_efficiency()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_local_efficiency}{\code{average_local_efficiency()}}.}
-

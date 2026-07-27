@@ -7,6 +7,7 @@
 \usage{
 graph_from_adjacency_matrix(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -14,11 +15,21 @@ graph_from_adjacency_matrix(
   add.rownames = NA
 )
 
-from_adjacency(...)
+from_adjacency(
+  adjmatrix,
+  ...,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+)
 }
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
 can be a sparse matrix created with the \code{Matrix} package.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, specifies how igraph should interpret the
 supplied matrix. See also the \code{weighted} argument, the interpretation
@@ -35,14 +46,14 @@ edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
 then a weighted graph is created and the name of the edge attribute will be
 \code{weight}. See also details below.}
 
-\item{diag}{Logical scalar, whether to include the diagonal of the matrix in
+\item{diag}{Logical, whether to include the diagonal of the matrix in
 the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 
 \item{add.colnames}{Character scalar, whether to add the column names as
-vertex attributes. If it is \sQuote{\code{NULL}} (the default) then, if
+vertex attributes. If it is \code{NULL} (the default) then, if
 present, column names are added as vertex attribute \sQuote{name}. If
-\sQuote{\code{NA}} then they will not be added.  If a character constant,
+\code{NA} or \code{FALSE} then they will not be added.  If a character constant,
 then it gives the name of the vertex attribute to add.}
 
 \item{add.rownames}{Character scalar, whether to add the row names as vertex
@@ -50,8 +61,6 @@ attributes. Possible values the same as the previous argument. By default
 row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
-
-\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.
@@ -135,6 +144,10 @@ gives the edge weights.
 }
 }
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency}{\code{adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency}{\code{weighted_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g1 <- sample(
@@ -232,7 +245,7 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq(ncol(adj_matrix))
+colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,

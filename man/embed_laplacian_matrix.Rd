@@ -7,6 +7,7 @@
 embed_laplacian_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
@@ -21,6 +22,8 @@ embed_laplacian_matrix(
 spectral embedding. Should be smaller than the number of vertices. The
 largest \code{no}-dimensional non-zero singular values are used for the
 spectral embedding.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Optional positive weight vector for calculating a weighted
 embedding. If the graph has a \code{weight} edge attribute, then this is
@@ -54,7 +57,7 @@ for directed graphs.
 The default (i.e. type \code{default}) is to use \code{D-A} for undirected
 graphs and \code{OAP} for directed graphs.}
 
-\item{scaled}{Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
+\item{scaled}{Logical, if \code{FALSE}, then \eqn{U} and \eqn{V} are
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{options}{A named list containing the parameters for the SVD
@@ -94,6 +97,10 @@ computed via the singular value decomposition of the Laplacian matrix.
 They are essentially doing the same as \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
 but work on the Laplacian matrix, instead of the adjacency matrix.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 ## A small graph
@@ -113,14 +120,12 @@ Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
 \code{\link[=sample_dot_product]{sample_dot_product()}}
 
-Other embedding: 
-\code{\link{dim_select}()},
-\code{\link{embed_adjacency_matrix}()}
+Other embedding:
+\code{\link[=dim_select]{dim_select()}},
+\code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{embedding}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}.}
-

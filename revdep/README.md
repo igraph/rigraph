@@ -1,49 +1,43 @@
 # Revdeps
 
-## Failed to check (12)
+## Failed to check (9)
 
-|package         |version |error |warning |note |
-|:---------------|:-------|:-----|:-------|:----|
-|bnlearn         |5.0.2   |1     |        |     |
-|dataone         |2.2.2   |1     |        |     |
-|datapack        |1.4.1   |1     |        |     |
-|FAfA            |0.3     |1     |        |     |
-|FAIRmaterials   |0.4.2.1 |1     |        |     |
-|lavaan.shiny    |1.2     |1     |        |     |
-|multinma        |0.8.1   |1     |        |     |
-|randomForestSRC |?       |      |        |     |
-|RSP             |0.4     |1     |        |     |
-|sphereML        |0.1.1   |1     |        |     |
-|streamDAG       |?       |      |        |     |
-|TestAnaAPP      |1.1.2   |1     |        |     |
+|package    |version |error |warning |note |
+|:----------|:-------|:-----|:-------|:----|
+|blavaan    |0.5-10  |1     |        |     |
+|caugi      |1.2.0   |1     |        |     |
+|deepSTRAPP |?       |      |        |     |
+|ggpicrust2 |?       |      |        |     |
+|primer     |?       |      |        |     |
+|rsat       |?       |      |        |     |
+|scAnnotate |0.3     |1     |        |     |
+|spopt      |0.1.2   |1     |        |     |
+|streamDAG  |?       |      |        |     |
 
-## New problems (25)
+## New problems (22)
 
-|package              |version  |error  |warning |note |
-|:--------------------|:--------|:------|:-------|:----|
-|[AnimalHabitatNetwork](problems.md#animalhabitatnetwork)|0.1.0    |__+1__ |        |     |
-|[archeofrag](problems.md#archeofrag)|1.2.0    |__+3__ |        |1    |
-|[CITMIC](problems.md#citmic)|0.1.2    |__+1__ |        |     |
-|[dosearch](problems.md#dosearch)|1.0.11   |__+1__ |        |1    |
-|[DrDimont](problems.md#drdimont)|0.1.4    |__+2__ |        |1    |
-|[EGAnet](problems.md#eganet)|2.3.0    |__+1__ |        |1    |
-|[egor](problems.md#egor)|1.24.2   |__+1__ |        |     |
-|[FCMapper](problems.md#fcmapper)|1.1      |__+1__ |        |     |
-|[GephiForR](problems.md#gephiforr)|0.1.0    |__+1__ |        |     |
-|[gor](problems.md#gor)|1.0      |__+1__ |        |1    |
-|[handwriterRF](problems.md#handwriterrf)|1.1.1    |__+1__ |        |     |
-|[incidentally](problems.md#incidentally)|1.0.2    |__+1__ |        |     |
-|[IOHanalyzer](problems.md#iohanalyzer)|0.1.8.10 |__+1__ |        |2    |
-|[klassR](problems.md#klassr)|1.0.2    |__+1__ |        |1    |
-|[manynet](problems.md#manynet)|1.5.1    |__+2__ |        |2    |
-|[multinet](problems.md#multinet)|4.2.2    |__+1__ |        |1    |
-|[mwcsr](problems.md#mwcsr)|0.1.9    |__+2__ |        |1    |
-|[pathfindR](problems.md#pathfindr)|2.5.0    |__+1__ |        |     |
-|[PopComm](problems.md#popcomm)|0.1.0.1  |__+1__ |        |     |
-|[remify](problems.md#remify)|3.2.8    |__+1__ |        |1    |
-|[rsetse](problems.md#rsetse)|0.5.0    |__+2__ |        |     |
-|[SEMID](problems.md#semid)|0.4.1    |__+2__ |        |     |
-|[sharpshootR](problems.md#sharpshootr)|2.3.3    |__+1__ |        |     |
-|[tilemaps](problems.md#tilemaps)|0.2.0    |__+2__ |        |1    |
-|[timeordered](problems.md#timeordered)|1.0.1    |__+1__ |        |     |
+|package     |version |error  |warning |note |
+|:-----------|:-------|:------|:-------|:----|
+|[Boptbd](problems.md#boptbd)|1.0.7   |__+1__ |        |     |
+|[c3net](problems.md#c3net)|1.1.1.1 |__+1__ |        |     |
+|[cfid](problems.md#cfid)|0.1.8   |__+1__ |        |     |
+|[comato](problems.md#comato)|1.1     |__+1__ |        |     |
+|[cranly](problems.md#cranly)|0.6.0   |__+1__ |        |     |
+|[dci](problems.md#dci)|1.0.3   |__+3__ |        |     |
+|[degreenet](problems.md#degreenet)|1.3-7   |__+1__ |        |     |
+|[ECoL](problems.md#ecol)|0.4.4   |__+2__ |        |     |
+|[ggm](problems.md#ggm)|2.5.2   |__+1__ |        |     |
+|[ggraph](problems.md#ggraph)|2.2.2   |__+2__ |        |     |
+|[glyrepr](problems.md#glyrepr)|0.12.0  |__+1__ |        |     |
+|[GoodFitSBM](problems.md#goodfitsbm)|0.0.1   |__+1__ |        |     |
+|[manynet](problems.md#manynet)|2.0.1   |__+1__ |        |     |
+|[migraph](problems.md#migraph)|1.6.2   |__+1__ |        |     |
+|[nat](problems.md#nat)|1.8.25  |__+3__ |        |     |
+|[optbdmaeAT](problems.md#optbdmaeat)|1.0.2   |__+1__ |        |     |
+|[optrcdmaeAT](problems.md#optrcdmaeat)|1.0.1   |__+1__ |        |     |
+|[qgraph](problems.md#qgraph)|1.9.8   |__+1__ |        |     |
+|[R6causal](problems.md#r6causal)|0.8.3   |       |__+1__  |     |
+|[scistreer](problems.md#scistreer)|1.2.1   |__+1__ |        |1    |
+|[tidygraph](problems.md#tidygraph)|1.3.1   |__+2__ |        |1    |
+|[vkR](problems.md#vkr)|0.2     |       |__+1__  |     |
 

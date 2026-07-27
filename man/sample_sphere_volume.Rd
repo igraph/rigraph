@@ -4,16 +4,18 @@
 \alias{sample_sphere_volume}
 \title{Sample vectors uniformly from the volume of a sphere}
 \usage{
-sample_sphere_volume(dim, n = 1, radius = 1, positive = TRUE)
+sample_sphere_volume(dim, n = 1, ..., radius = 1, positive = TRUE)
 }
 \arguments{
 \item{dim}{Integer scalar, the dimension of the random vectors.}
 
 \item{n}{Integer scalar, the sample size.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{radius}{Numeric scalar, the radius of the sphere to sample.}
 
-\item{positive}{Logical scalar, whether to sample from the positive orthant
+\item{positive}{Logical, whether to sample from the positive orthant
 of the sphere.}
 }
 \value{
@@ -30,6 +32,10 @@ random dot product graphs
 (the \code{(dim-1)}-sphere) i.e. the Euclidean norm of the samples is
 smaller or equal to \code{radius}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_sphere_volume}{\code{sample_sphere_volume()}}
+}
+
 \examples{
 lpvs.sph.vol <- sample_sphere_volume(dim = 10, n = 20, radius = 1)
 RDP.graph.4 <- sample_dot_product(lpvs.sph.vol)
@@ -39,8 +45,8 @@ vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
 vec.norm
 }
 \seealso{
-Other latent position vector samplers: 
-\code{\link{sample_dirichlet}()},
-\code{\link{sample_sphere_surface}()}
+Other latent position vector samplers:
+\code{\link[=sample_dirichlet]{sample_dirichlet()}},
+\code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
 }
 \concept{latent position vector samplers}

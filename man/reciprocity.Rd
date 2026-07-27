@@ -4,12 +4,14 @@
 \alias{reciprocity}
 \title{Reciprocity of graphs}
 \usage{
-reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
+reciprocity(graph, ..., ignore.loops = TRUE, mode = c("default", "ratio"))
 }
 \arguments{
 \item{graph}{The graph object.}
 
-\item{ignore.loops}{Logical constant, whether to ignore loop edges.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{ignore.loops}{Logical, whether to ignore loop edges.}
 
 \item{mode}{See below.}
 }
@@ -35,6 +37,10 @@ not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
 The result is the size of group (3), divided by the sum of group sizes
 (2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}
+}
+
 \examples{
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
@@ -42,31 +48,31 @@ reciprocity(g)
 
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
@@ -74,5 +80,3 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}.}
-
