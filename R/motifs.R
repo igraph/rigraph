@@ -337,6 +337,11 @@ sample_motifs <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("s"),
+      "sample_motifs"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
