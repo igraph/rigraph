@@ -15,7 +15,7 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
-\item{labels}{Logical scalar, whether to add the vertex labels to the result
+\item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 }
@@ -25,4 +25,8 @@ cohesive blocks.}
 \code{cohesive.blocks()} was renamed to \code{\link[=cohesive_blocks]{cohesive_blocks()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks}{\code{cohesive_blocks()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

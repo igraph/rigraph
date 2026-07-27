@@ -15,7 +15,7 @@ evcent(
 \arguments{
 \item{graph}{Graph to be analyzed.}
 
-\item{directed}{Logical scalar, whether to consider direction of the edges
+\item{directed}{Logical, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
@@ -42,4 +42,8 @@ weights spread the centrality better.}
 \code{evcent()} was renamed to \code{\link[=eigen_centrality]{eigen_centrality()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality}{\code{eigenvector_centrality()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

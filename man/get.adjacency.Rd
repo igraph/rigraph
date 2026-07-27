@@ -22,27 +22,18 @@ right triangle of the matrix is used, \code{lower}: the lower left triangle
 of the matrix is used. \code{both}: the whole matrix is used, a symmetric
 matrix is returned.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
-attribute name. If \code{NULL} a traditional adjacency matrix is returned.
-If not \code{NULL} then the values of the given edge attribute are included
-in the adjacency matrix. If the graph has multiple edges, the edge attribute
-of an arbitrarily chosen edge (for the multiple edges) is included. This
-argument is ignored if \code{edges} is \code{TRUE}.
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
+supplied, the value is forwarded to \code{weights} as a character edge
+attribute name.}
 
-Note that this works only for certain attribute types. If the \code{sparse}
-argumen is \code{TRUE}, then the attribute must be either logical or
-numeric. If the \code{sparse} argument is \code{FALSE}, then character is
-also allowed. The reason for the difference is that the \code{Matrix}
-package does not support character sparse matrices yet.}
-
-\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, whether to return the edge IDs in the matrix.
 For non-existant edges zero is returned.}
 
-\item{names}{Logical constant, whether to assign row and column names
+\item{names}{Logical, whether to assign row and column names
 to the matrix. These are only assigned if the \code{name} vertex attribute
 is present in the graph.}
 
-\item{sparse}{Logical scalar, whether to create a sparse matrix. The
+\item{sparse}{Logical, whether to create a sparse matrix. The
 \sQuote{\code{Matrix}} package must be installed for creating sparse
 matrices.}
 }
@@ -52,4 +43,8 @@ matrices.}
 \code{get.adjacency()} was renamed to \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

@@ -16,7 +16,7 @@ graphlets.project <- function(
   Mu = rep(1, length(cliques))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
+  lifecycle::deprecate_warn("2.0.0", "graphlets.project()", "graphlet_proj()")
   graphlet_proj(
     graph = graph,
     weights = weights,
@@ -38,7 +38,7 @@ graphlets.project <- function(
 #' @export
 graphlets.candidate.basis <- function(graph, weights = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graphlets.candidate.basis()",
     "graphlet_basis()"
@@ -64,18 +64,19 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'
 #' @param graph The input graph, edge directions are ignored. Only simple graph
 #'   (i.e. graphs without self-loops and multiple edges) are supported.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
 #'   and this argument is `NULL` (the default), then the `weight` edge
 #'   attribute is used.
 #' @param niter Integer scalar, the number of iterations to perform.
-#' @param cliques A list of vertex ids, the graphlet basis to use for the
+#' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{Mu}{
 #'       The weights of the subgraphs in graphlet basis.
@@ -86,7 +87,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'   \describe{
 #'     \item{cliques}{
 #'       A list of subgraphs, the candidate graphlet basis.
-#'       Each subgraph is give by a vector of vertex ids.
+#'       Each subgraph is give by a vector of vertex IDs.
 #'     }
 #'     \item{thresholds}{
 #'       The weight thresholds used for finding the subgraphs.
@@ -135,40 +136,82 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' }
 #' @family glet
 #' @export
-graphlet_basis <- function(graph, weights = NULL) {
-  ## Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
+graphlet_basis <- function(
+  graph,
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_basis, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights),
+      recover_new = c("weights"),
+      recover_old = c("weights"),
+      match_names = c("weights"),
+      match_to = c("weights"),
+      defaults = list(weights = NULL),
+      head_args = c("graph"),
+      fn_name = "graphlet_basis"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
+  # END GENERATED ARG_HANDLE
 
-  on.exit(.Call(R_igraph_finalizer))
-  ## Function call
-  res <- .Call(R_igraph_graphlets_candidate_basis, graph, weights)
-
-  res
+  graphlets_candidate_basis_impl(
+    graph = graph,
+    weights = weights
+  )
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graphlet_proj <- function(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
   Mu = rep(1, length(cliques))
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, niter = niter, Mu = Mu),
+      recover_new = c("weights", "cliques", "niter", "Mu"),
+      recover_old = c("weights", "cliques", "niter", "Mu"),
+      match_names = c("weights", "cliques", "niter", "Mu"),
+      match_to = c("weights", "cliques", "niter", "Mu"),
+      defaults = list(
+        weights = NULL,
+        niter = 1000,
+        Mu = rep(1, length(cliques))
+      ),
+      head_args = c("graph"),
+      fn_name = "graphlet_proj"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -176,11 +219,13 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
-
-  res
+  graphlets_project_impl(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    Muc = Mu,
+    niter = niter
+  )
 }
 
 #################
@@ -200,7 +245,7 @@ function() {
     co <- layout_with_kk(g)
     par(mar = c(1, 1, 1, 1))
     plot(g, layout = co)
-    for (i in 1:length(gl$Bc)) {
+    for (i in seq_along(gl$Bc)) {
       sel <- gl$Bc[[i]]
       V(g)$color <- "white"
       V(g)[sel]$color <- "#E495A5"
@@ -238,9 +283,36 @@ function() {
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_graphlets
-graphlets <- function(graph, weights = NULL, niter = 1000) {
+graphlets <- function(
+  graph,
+  ...,
+  weights = NULL,
+  niter = 1000
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, niter = niter),
+      recover_new = c("weights", "niter"),
+      recover_old = c("weights", "niter"),
+      match_names = c("weights", "niter"),
+      match_to = c("weights", "niter"),
+      defaults = list(weights = NULL, niter = 1000),
+      head_args = c("graph"),
+      fn_name = "graphlets"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   graphlets_impl(
     graph = graph,
     weights = weights,

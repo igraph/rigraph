@@ -17,10 +17,10 @@ centralization.degree(
 \item{mode}{This is the same as the \code{mode} argument of
 \code{degree()}.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \description{
@@ -29,4 +29,8 @@ centrality score by dividing by the theoretical maximum.}
 \code{centralization.degree()} was renamed to \code{\link[=centr_degree]{centr_degree()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}
+}
+
 \keyword{internal}

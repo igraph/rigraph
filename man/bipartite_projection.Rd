@@ -8,6 +8,7 @@
 bipartite_projection(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
@@ -24,6 +25,8 @@ ignored during the computation.}
 \sQuote{\code{type}} vertex attribute. You must supply this argument if the
 graph has no \sQuote{\code{type}} vertex attribute.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of
 the edges as an edge attribute called \sQuote{weight}.
 E.g. if there is an A-C-B and also an A-D-B
@@ -32,14 +35,14 @@ graph), then the multiplicity of the A-B edge in the projection will be 2.}
 
 \item{probe1}{This argument can be used to specify the order of the
 projections in the resulting list. If given, then it is considered as a
-vertex id (or a symbolic vertex name); the projection containing this vertex
+vertex ID (or a symbolic vertex name); the projection containing this vertex
 will be the first one in the result list.  This argument is ignored if only
 one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
 
-\item{remove.type}{Logical scalar, whether to remove the \code{type} vertex
+\item{remove.type}{Logical, whether to remove the \code{type} vertex
 attribute from the projections. This makes sense because these graphs are
 not bipartite any more. However if you want to combine them with each other
 (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -68,6 +71,10 @@ the second.
 
 \code{bipartite_projection()} keeps vertex attributes.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}
+}
+
 \examples{
 
 ## Projection of a full bipartite graph is a full graph
@@ -90,15 +97,13 @@ print(proj2[[2]], g = TRUE, e = TRUE)
 
 }
 \seealso{
-Bipartite graphs
-\code{\link{bipartite_mapping}()},
-\code{\link{is_bipartite}()},
-\code{\link{make_bipartite_graph}()}
+Bipartite graphs:
+\code{\link[=bipartite_mapping]{bipartite_mapping()}},
+\code{\link[=is_bipartite]{is_bipartite()}},
+\code{\link[=make_bipartite_graph]{make_bipartite_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{bipartite}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}.}
-

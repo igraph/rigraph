@@ -15,14 +15,14 @@ graph.mincut(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
-\item{value.only}{Logical scalar, if \code{TRUE} only the minimum cut value
+\item{value.only}{Logical, if \code{TRUE} only the minimum cut value
 is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
@@ -32,4 +32,8 @@ partitions are also returned.}
 \code{graph.mincut()} was renamed to \code{\link[=min_cut]{min_cut()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut}{\code{mincut()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut_value}{\code{mincut_value()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut}{\code{st_mincut()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut_value}{\code{st_mincut_value()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \keyword{internal}

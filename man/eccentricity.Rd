@@ -48,6 +48,10 @@ and taking the maximum.
 This implementation ignores vertex pairs that are in different components.
 Isolate vertices have eccentricity zero.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eccentricity_dijkstra}{\code{eccentricity_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 g <- make_star(10, mode = "undirected")
 eccentricity(g)
@@ -60,13 +64,11 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 \code{\link[=radius]{radius()}} for a related concept,
 \code{\link[=distances]{distances()}} for general shortest path calculations.
 
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{diameter}()},
-\code{\link{distance_table}()},
-\code{\link{graph_center}()},
-\code{\link{radius}()}
+Other paths:
+\code{\link[=all_simple_paths]{all_simple_paths()}},
+\code{\link[=diameter]{diameter()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=graph_center]{graph_center()}},
+\code{\link[=radius]{radius()}}
 }
 \concept{paths}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eccentricity_dijkstra}{\code{eccentricity_dijkstra()}}.}
-

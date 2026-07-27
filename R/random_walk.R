@@ -16,6 +16,7 @@
 #' @param graph The input graph, might be undirected or directed.
 #' @param start The start vertex.
 #' @param steps The number of steps to make.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The edge weights. Larger edge weights increase the
 #'   probability that an edge is selected by the random walker. In other
 #'   words, larger edge weights correspond to stronger connections. The
@@ -47,15 +48,41 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
-#' @cdocs igraph_random_walk
 random_walk <- function(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: random_walk, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, mode = mode, stuck = stuck),
+      recover_new = c("weights", "mode", "stuck"),
+      recover_old = c("weights", "mode", "stuck"),
+      match_names = c("weights", "mode", "stuck"),
+      match_to = c("weights", "mode", "stuck"),
+      defaults = list(
+        weights = NULL,
+        mode = c("out", "in", "all", "total"),
+        stuck = c("return", "error")
+      ),
+      head_args = c("graph", "start", "steps"),
+      fn_name = "random_walk"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(
@@ -72,16 +99,43 @@ random_walk <- function(
 }
 
 #' @rdname random_walk
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_random_walk
 random_edge_walk <- function(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: random_edge_walk, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, mode = mode, stuck = stuck),
+      recover_new = c("weights", "mode", "stuck"),
+      recover_old = c("weights", "mode", "stuck"),
+      match_names = c("weights", "mode", "stuck"),
+      match_to = c("weights", "mode", "stuck"),
+      defaults = list(
+        weights = NULL,
+        mode = c("out", "in", "all", "total"),
+        stuck = c("return", "error")
+      ),
+      head_args = c("graph", "start", "steps"),
+      fn_name = "random_edge_walk"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(
