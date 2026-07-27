@@ -5,7 +5,14 @@
 \alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{
-layout_as_bipartite(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100)
+layout_as_bipartite(
+  graph,
+  types = NULL,
+  ...,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+)
 
 as_bipartite(...)
 }
@@ -18,6 +25,8 @@ given.}
 \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
 used.}
 
+\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
+
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
 
@@ -26,8 +35,6 @@ same layer.}
 \item{maxiter}{Integer scalar, the maximum number of iterations in the
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.}
-
-\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices
@@ -43,6 +50,10 @@ to their types. Then the positions within the rows are optimized to minimize
 edge crossings, using the Sugiyama algorithm (see
 \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_bipartite}{\code{layout_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Random bipartite graph
 inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)
@@ -60,28 +71,28 @@ g \%>\%
 \seealso{
 \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

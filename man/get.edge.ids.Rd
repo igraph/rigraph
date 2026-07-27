@@ -2,7 +2,7 @@
 % Please edit documentation in R/interface.R
 \name{get.edge.ids}
 \alias{get.edge.ids}
-\title{Find the edge ids based on the incident vertices of the edges}
+\title{Find the edge IDs based on the incident vertices of the edges}
 \usage{
 get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 }
@@ -10,14 +10,14 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 \item{graph}{The input graph.}
 
 \item{vp}{The incident vertices, given as a two-column data frame, two-column matrix,
-or vector of vertex ids or symbolic vertex names.
+or vector of vertex IDs or symbolic vertex names.
 For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.}
 
-\item{directed}{Logical scalar, whether to consider edge directions in
+\item{directed}{Logical, whether to consider edge directions in
 directed graphs. This argument is ignored for undirected graphs.}
 
-\item{error}{Logical scalar, whether to report an error if an edge is not
+\item{error}{Logical, whether to report an error if an edge is not
 found in the graph. If \code{FALSE}, then no error is reported, and zero is
 returned for the non-existant edge(s).}
 
@@ -29,4 +29,8 @@ returned for the non-existant edge(s).}
 \code{get.edge.ids()} was renamed to \code{\link[=get_edge_ids]{get_edge_ids()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

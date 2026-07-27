@@ -4,12 +4,14 @@
 \alias{count_motifs}
 \title{Graph motifs}
 \usage{
-count_motifs(graph, size = 3, cut.prob = NULL)
+count_motifs(graph, size = 3, ..., cut.prob = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -27,6 +29,10 @@ structure.  These functions search a graph for various motifs.
 \code{count_motifs()} calculates the total number of motifs of a given
 size in graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_no}{\code{motifs_randesu_no()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)
@@ -36,9 +42,9 @@ sample_motifs(g, 3)
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{dyad_census}()},
-\code{\link{motifs}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=motifs]{motifs()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}

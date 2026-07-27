@@ -13,6 +13,7 @@
 #' not to be a tree.
 #'
 #' @param graph An igraph graph object
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Whether to consider edge directions in a directed graph.
 #'   \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
 #'   oriented outwards from the root, \sQuote{in} requires edges to be oriented
@@ -40,13 +41,40 @@
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_is_tree
 is_tree <- function(
   graph,
+  ...,
   mode = c("out", "in", "all", "total"),
   details = FALSE
 ) {
-  out <- is_tree_impl(graph, mode, details)
+  # BEGIN GENERATED ARG_HANDLE: is_tree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, details = details),
+      recover_new = c("mode", "details"),
+      recover_old = c("mode", "details"),
+      match_names = c("mode", "details"),
+      match_to = c("mode", "details"),
+      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
+      head_args = c("graph"),
+      fn_name = "is_tree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  out <- is_tree_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
     out$root <- V(graph)[1]
   }
@@ -68,6 +96,7 @@ is_tree <- function(
 #' to be a forest.
 #'
 #' @param graph An igraph graph object
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Whether to consider edge directions in a directed graph.
 #'   \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
 #'   oriented outwards from the root, \sQuote{in} requires edges to be oriented
@@ -95,8 +124,40 @@ is_tree <- function(
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_is_forest
-is_forest <- is_forest_impl
+is_forest <- function(
+  graph,
+  ...,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: is_forest, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, details = details),
+      recover_new = c("mode", "details"),
+      recover_old = c("mode", "details"),
+      match_names = c("mode", "details"),
+      match_to = c("mode", "details"),
+      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
+      head_args = c("graph"),
+      fn_name = "is_forest"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  is_forest_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+}
 
 #' Convert a tree graph to its Prüfer sequence
 #'
@@ -122,8 +183,11 @@ is_forest <- is_forest_impl
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_to_prufer
-to_prufer <- to_prufer_impl
+to_prufer <- function(graph) {
+  to_prufer_impl(
+    graph = graph
+  )
+}
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
@@ -132,6 +196,7 @@ to_prufer <- to_prufer_impl
 #'
 #' @param graph The input graph to sample from. Edge directions are ignored if
 #'   the graph is directed.
+#' @inheritParams rlang::args_dots_empty
 #' @param vid When the graph is disconnected, this argument specifies how to
 #'   handle the situation. When the argument is zero (the default), the sampling
 #'   will be performed component-wise, and the result will be a spanning forest.
@@ -151,5 +216,35 @@ to_prufer <- to_prufer_impl
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_random_spanning_tree
-sample_spanning_tree <- random_spanning_tree_impl
+sample_spanning_tree <- function(
+  graph,
+  ...,
+  vid = 0
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_spanning_tree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vid = vid),
+      recover_new = c("vid"),
+      recover_old = c("vid"),
+      match_names = c("vid"),
+      match_to = c("vid"),
+      defaults = list(vid = 0),
+      head_args = c("graph"),
+      fn_name = "sample_spanning_tree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  random_spanning_tree_impl(
+    graph = graph,
+    vid = vid
+  )
+}

@@ -4,13 +4,15 @@
 \alias{which_mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = E(graph), loops = TRUE)
+which_mutual(graph, eids = E(graph), ..., loops = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{eids}{Edge sequence, the edges that will be probed. By default is
-includes all edges in the order of their ids.}
+includes all edges in the order of their IDs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }
@@ -30,6 +32,10 @@ considered to be mutual.
 
 Undirected graphs contain only mutual edges by definition.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_mutual}{\code{is_mutual()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- sample_gnm(10, 50, directed = TRUE)
@@ -42,36 +48,34 @@ sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 \code{\link[=reciprocity]{reciprocity()}}, \code{\link[=dyad_census]{dyad_census()}} if you just
 want some statistics about mutual edges.
 
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_mutual}{\code{is_mutual()}}.}
-

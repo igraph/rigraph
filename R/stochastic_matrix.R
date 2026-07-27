@@ -14,7 +14,7 @@ get.stochastic <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.stochastic()", "stochastic_matrix()")
+  lifecycle::deprecate_warn("2.0.0", "get.stochastic()", "stochastic_matrix()")
   stochastic_matrix(graph = graph, column.wise = column.wise, sparse = sparse)
 } # nocov end
 #   IGraph R package
@@ -51,9 +51,10 @@ get.stochastic <- function(
 #' matrices are defined in a symmetric way.
 #'
 #' @param graph The input graph. Must be of class `igraph`.
+#' @inheritParams rlang::args_dots_empty
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
-#' @param sparse Logical scalar, whether to return a sparse matrix. The
+#' @param sparse Logical, whether to return a sparse matrix. The
 #'   `Matrix` package is needed for sparse matrices.
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
@@ -76,31 +77,64 @@ get.stochastic <- function(
 #'
 stochastic_matrix <- function(
   graph,
+  ...,
   column.wise = FALSE,
   sparse = igraph_opt("sparsematrices")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: stochastic_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(column.wise = column.wise, sparse = sparse),
+      recover_new = c("column.wise", "sparse"),
+      recover_old = c("column.wise", "sparse"),
+      match_names = c("column.wise", "sparse"),
+      match_to = c("column.wise", "sparse"),
+      defaults = list(
+        column.wise = FALSE,
+        sparse = igraph_opt("sparsematrices")
+      ),
+      head_args = c("graph"),
+      fn_name = "stochastic_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {
     cli::cli_abort(
-      "{.arg column.wise} must be a logical scalar, not {.obj_type_friendly {column.wise}}."
+      "{.arg column.wise} must be a Logical, not {.obj_type_friendly {column.wise}}."
     )
   }
 
   sparse <- as.logical(sparse)
   if (length(sparse) != 1) {
     cli::cli_abort(
-      "{.arg sparse} must be a logical scalar, not {.obj_type_friendly {sparse}}."
+      "{.arg sparse} must be a Logical, not {.obj_type_friendly {sparse}}."
     )
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   if (sparse) {
-    res <- .Call(R_igraph_get_stochastic_sparse, graph, column.wise, NULL)
+    res <- get_stochastic_sparse_impl(
+      graph = graph,
+      column_wise = column.wise,
+      weights = NULL
+    )
     res <- igraph.i.spMatrix(res)
   } else {
-    res <- .Call(R_igraph_get_stochastic, graph, column.wise, NULL)
+    res <- get_stochastic_impl(
+      graph = graph,
+      column_wise = column.wise,
+      weights = NULL
+    )
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

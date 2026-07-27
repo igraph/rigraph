@@ -14,7 +14,7 @@ is.graphical.degree.sequence <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "is.graphical.degree.sequence()",
     "is_graphical()"
@@ -38,7 +38,7 @@ is.graphical.degree.sequence <- function(
 #' @export
 is.degree.sequence <- function(out.deg, in.deg = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.degree.sequence()", "is_degseq()")
+  lifecycle::deprecate_warn("2.0.0", "is.degree.sequence()", "is_degseq()")
   is_degseq(out.deg = out.deg, in.deg = in.deg)
 } # nocov end
 
@@ -117,6 +117,7 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #'   the out-degree sequence for directed graphs.
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it
 #'   should be `NULL`. For directed graphs it specifies the in-degrees.
+#' @inheritParams rlang::args_dots_empty
 #' @param allowed.edge.types The allowed edge types in the graph. \sQuote{simple}
 #'   means that neither loop nor multiple edges are allowed (i.e. the graph must be
 #'   simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
@@ -139,5 +140,39 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-#' @cdocs igraph_is_graphical
-is_graphical <- is_graphical_impl
+is_graphical <- function(
+  out.deg,
+  in.deg = NULL,
+  ...,
+  allowed.edge.types = c("simple", "loops", "multi", "all")
+) {
+  # BEGIN GENERATED ARG_HANDLE: is_graphical, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(allowed.edge.types = allowed.edge.types),
+      recover_new = c("allowed.edge.types"),
+      recover_old = c("allowed.edge.types"),
+      match_names = c("allowed.edge.types"),
+      match_to = c("allowed.edge.types"),
+      defaults = list(
+        allowed.edge.types = c("simple", "loops", "multi", "all")
+      ),
+      head_args = c("out.deg", "in.deg"),
+      fn_name = "is_graphical"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  is_graphical_impl(
+    out_deg = out.deg,
+    in_deg = in.deg,
+    allowed_edge_types = allowed.edge.types
+  )
+}

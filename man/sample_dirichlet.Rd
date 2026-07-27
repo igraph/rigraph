@@ -26,14 +26,18 @@ random dot product graphs
 with given \eqn{\alpha}{alpha} parameter. The sample is drawn from
 \code{length(alpha)-1}-simplex.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_sample_dirichlet}{\code{sample_dirichlet()}}
+}
+
 \examples{
 lpvs.dir <- sample_dirichlet(n = 20, alpha = rep(1, 10))
 RDP.graph.2 <- sample_dot_product(lpvs.dir)
 colSums(lpvs.dir)
 }
 \seealso{
-Other latent position vector samplers: 
-\code{\link{sample_sphere_surface}()},
-\code{\link{sample_sphere_volume}()}
+Other latent position vector samplers:
+\code{\link[=sample_sphere_surface]{sample_sphere_surface()}},
+\code{\link[=sample_sphere_volume]{sample_sphere_volume()}}
 }
 \concept{latent position vector samplers}

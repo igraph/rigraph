@@ -6,27 +6,30 @@
 \alias{graphlets}
 \title{Graphlet decomposition of a graph}
 \usage{
-graphlet_basis(graph, weights = NULL)
+graphlet_basis(graph, ..., weights = NULL)
 
 graphlet_proj(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
   Mu = rep(1, length(cliques))
 )
 
-graphlets(graph, weights = NULL, niter = 1000)
+graphlets(graph, ..., weights = NULL, niter = 1000)
 }
 \arguments{
 \item{graph}{The input graph, edge directions are ignored. Only simple graph
 (i.e. graphs without self-loops and multiple edges) are supported.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
 and this argument is \code{NULL} (the default), then the \code{weight} edge
 attribute is used.}
 
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
@@ -38,7 +41,7 @@ projection.}
 \describe{
 \item{cliques}{
 A list of subgraphs, the candidate graphlet basis.
-Each subgraph is give by a vector of vertex ids.
+Each subgraph is give by a vector of vertex IDs.
 }
 \item{Mu}{
 The weights of the subgraphs in graphlet basis.
@@ -49,7 +52,7 @@ The weights of the subgraphs in graphlet basis.
 \describe{
 \item{cliques}{
 A list of subgraphs, the candidate graphlet basis.
-Each subgraph is give by a vector of vertex ids.
+Each subgraph is give by a vector of vertex IDs.
 }
 \item{thresholds}{
 The weight thresholds used for finding the subgraphs.
@@ -75,6 +78,10 @@ The second and third functions correspond to the first and second steps of
 the algorithm, and they are useful if the user wishes to perform them
 individually: \code{graphlet_basis()} and \code{graphlet_proj()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_candidate_basis}{\code{graphlets_candidate_basis()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project}{\code{graphlets_project()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets}{\code{graphlets()}}
+}
+
 \examples{
 
 ## Create an example graph first
@@ -115,5 +122,3 @@ for (i in 1:length(gl$cliques)) {
 }
 }
 \concept{glet}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets}{\code{graphlets()}}.}
-
