@@ -25,6 +25,10 @@ The algorithm runs in \code{O(length)} expected time, even if
 \code{high-low} is big. It is much faster (but of course less general) than
 the builtin \code{sample} function of R.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_random_sample}{\code{random_sample()}}
+}
+
 \examples{
 
 rs <- sample_seq(1, 100000000, 10)
@@ -37,9 +41,9 @@ Random Sampling, \emph{ACM Transactions on Mathematical Software}, 13/1,
 58--67.
 }
 \seealso{
-Other other: 
-\code{\link{convex_hull}()},
-\code{\link{running_mean}()}
+Other other:
+\code{\link[=convex_hull]{convex_hull()}},
+\code{\link[=running_mean]{running_mean()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

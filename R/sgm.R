@@ -24,8 +24,11 @@ solve_LSAP <- function(x, maximum = FALSE) {
   if (maximum) {
     x <- max(x) - x
   }
-  storage.mode(x) <- "double"
-  out <- .Call(R_igraph_solve_lsap, x, as.numeric(nc)) + 1L
+  out <- solve_lsap_impl(
+    c = x,
+    n = as.numeric(nc)
+  ) +
+    1L
   out[seq_len(nr)]
 }
 
@@ -111,7 +114,7 @@ match_vertices <- function(A, B, m, start, iteration) {
   P <- start
   toggle <- 1
   iter <- 0
-  while (toggle == 1 & iter < patience) {
+  while (toggle == 1 && iter < patience) {
     iter <- iter + 1
     x <- A21 %*% Matrix::t(B21)
     y <- Matrix::t(A12) %*% B12

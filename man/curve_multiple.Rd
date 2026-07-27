@@ -4,10 +4,12 @@
 \alias{curve_multiple}
 \title{Optimal edge curvature when plotting graphs}
 \usage{
-curve_multiple(graph, start = 0.5)
+curve_multiple(graph, ..., start = 0.5)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{The curvature at the two extreme edges. All edges will have a
 curvature between \code{-start} and \code{start}, spaced equally.}
@@ -25,6 +27,10 @@ are visible.
 \code{curve_multiple()} calculates the optimal \code{edge.curved} vector for
 plotting a graph with multiple edges, so that all edges are visible.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_graph(c(

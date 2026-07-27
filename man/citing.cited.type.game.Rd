@@ -25,9 +25,9 @@ Types are numbered from zero.}
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
 probabilities for the different vertex types.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
+\item{directed}{Logical, whether to generate directed networks.}
 
-\item{attr}{Logical scalar, whether to add the vertex types to the generated
+\item{attr}{Logical, whether to add the vertex types to the generated
 graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \description{
@@ -36,4 +36,8 @@ graph as a vertex attribute called \sQuote{\code{type}}.}
 \code{citing.cited.type.game()} was renamed to \code{\link[=sample_cit_cit_types]{sample_cit_cit_types()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game}{\code{citing_cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

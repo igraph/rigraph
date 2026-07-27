@@ -4,10 +4,16 @@
 \alias{greedy_vertex_coloring}
 \title{Greedy vertex coloring}
 \usage{
-greedy_vertex_coloring(graph, heuristic = c("colored_neighbors", "dsatur"))
+greedy_vertex_coloring(
+  graph,
+  ...,
+  heuristic = c("colored_neighbors", "dsatur")
+)
 }
 \arguments{
 \item{graph}{The graph object to color.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{heuristic}{The selection heuristic for the next vertex to consider.
 Possible values are: \dQuote{colored_neighbors} selects the vertex with the
@@ -33,6 +39,10 @@ color that differs from that of already colored neighbors. The coloring
 obtained this way is not necessarily minimum but it can be calculated in
 linear time.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Coloring.html#igraph_vertex_coloring_greedy}{\code{vertex_coloring_greedy()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_graph("petersen")
@@ -42,5 +52,3 @@ plot(g, vertex.color = col)
 }
 \concept{coloring}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Coloring.html#igraph_vertex_coloring_greedy}{\code{vertex_coloring_greedy()}}.}
-

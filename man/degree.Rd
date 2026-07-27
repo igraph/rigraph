@@ -3,12 +3,14 @@
 \name{degree}
 \alias{degree}
 \alias{max_degree}
+\alias{mean_degree}
 \alias{degree_distribution}
 \title{Degree and degree distribution of the vertices}
 \usage{
 degree(
   graph,
   v = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
@@ -22,12 +24,16 @@ max_degree(
   loops = TRUE
 )
 
+mean_degree(graph, ..., loops = TRUE)
+
 degree_distribution(graph, cumulative = FALSE, ...)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The ids of vertices of which the degree will be calculated.}
+\item{v}{The IDs of vertices of which the degree will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{total} for the sum of the two. For undirected graphs
@@ -35,11 +41,9 @@ this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
 
 \item{loops}{Logical; whether the loop edges are also counted.}
 
-\item{normalized}{Logical scalar, whether to normalize the degree.  If
+\item{normalized}{Logical, whether to normalize the degree.  If
 \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 number of vertices in the graph.}
-
-\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
@@ -55,51 +59,58 @@ degree vertices, the second vertices with degree one, etc.
 For \code{max_degree()}, the largest degree in the graph. When no vertices are
 selected, or when the input is the null graph, zero is returned as this
 is the smallest possible degree.
+
+For \code{mean_degree()}, the average degree in the graph as a single number.
+For graphs with no vertices, \code{NaN} is returned.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \description{
 The degree of a vertex is its most basic structural property, the number of
 its adjacent edges.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_mean_degree}{\code{mean_degree()}}
+}
+
 \examples{
 
 g <- make_ring(10)
 degree(g)
 g2 <- sample_gnp(1000, 10 / 1000)
 max_degree(g2)
+mean_degree(g2)
 degree_distribution(g2)
 
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maxdegree}{\code{maxdegree()}}.}
-

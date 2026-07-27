@@ -7,6 +7,7 @@
 count_automorphisms(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 )
 }
@@ -19,6 +20,8 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
 are:
@@ -75,6 +78,10 @@ BLISS algorithm. See also the BLISS homepage at
 automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain
 a compact representation of the automorphism group.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
@@ -98,8 +105,8 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all
 automorphisms
 
-Other graph automorphism: 
-\code{\link{automorphism_group}()}
+Other graph automorphism:
+\code{\link[=automorphism_group]{automorphism_group()}}
 }
 \author{
 Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS
@@ -108,5 +115,3 @@ and this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}.}
-

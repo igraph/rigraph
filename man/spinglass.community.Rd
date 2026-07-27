@@ -39,7 +39,7 @@ limit for the number of communities. It is not a problem to supply a
 (reasonably) big number here, in which case some spin states will be
 unpopulated.}
 
-\item{parupdate}{Logical constant, whether to update the spins of the
+\item{parupdate}{Logical, whether to update the spins of the
 vertices in parallel (synchronously) or not. This argument is ignored if the
 second form of the function is used (i.e. the \sQuote{\code{vertex}} argument
 is present). It is also not implemented in the \dQuote{neg} implementation.}
@@ -90,4 +90,8 @@ is ignored if the \sQuote{orig} implementation is chosen.}
 \code{spinglass.community()} was renamed to \code{\link[=cluster_spinglass]{cluster_spinglass()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

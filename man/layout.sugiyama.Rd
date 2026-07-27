@@ -17,9 +17,9 @@ layout.sugiyama(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layers}{A numeric vector or \code{NULL}. If not \code{NULL}, then it
-should specify the layer index of the vertices. Layers are numbered from
-one. If \code{NULL}, then igraph calculates the layers automatically.}
+\item{layers}{A numeric vector of the layer indices of the vertices.
+Layers are numbered from one.
+Default: \code{NULL}, igraph calculates the layers automatically.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
@@ -49,4 +49,8 @@ them.}
 \code{layout.sugiyama()} was renamed to \code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_sugiyama}{\code{layout_sugiyama()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

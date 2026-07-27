@@ -7,9 +7,11 @@
 as_biadjacency_matrix(
   graph,
   types = NULL,
-  attr = NULL,
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 )
 }
 \arguments{
@@ -20,20 +22,32 @@ directed graphs.}
 \code{type} vertex attribute. You must supply this argument if the graph has
 no \code{type} vertex attribute.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
-attribute name. If \code{NULL}, then a traditional bipartite adjacency matrix is
-returned. If not \code{NULL} then the values of the given edge attribute are
-included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-attribute of an arbitrarily chosen edge (for the multiple edges) is
-included.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{names}{Logical scalar, if \code{TRUE} and the vertices in the graph
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
+
+\item{names}{Logical, if \code{TRUE} and the vertices in the graph
 are named (i.e. the graph has a vertex attribute called \code{name}), then
 vertex names will be added to the result as row and column names. Otherwise
-the ids of the vertices are used as row and column names.}
+the IDs of the vertices are used as row and column names.}
 
-\item{sparse}{Logical scalar, if it is \code{TRUE} then a sparse matrix is
+\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is
 created, you will need the \code{Matrix} package for this.}
+
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
+supplied, the value is forwarded to \code{weights} as a character edge
+attribute name.}
 }
 \value{
 A sparse or dense matrix.
@@ -52,6 +66,10 @@ Some authors refer to the bipartite adjacency matrix as the
 "bipartite incidence matrix". igraph 1.6.0 and later does not use
 this naming to avoid confusion with the edge-vertex incidence matrix.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
@@ -61,17 +79,17 @@ as_biadjacency_matrix(g)
 \seealso{
 \code{\link[=graph_from_biadjacency_matrix]{graph_from_biadjacency_matrix()}} for the opposite operation.
 
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adj_list]{as_adj_list()}},
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_graphnel]{as_graphnel()}},
+\code{\link[=as_long_data_frame]{as_long_data_frame()}},
+\code{\link[=graph_from_adj_list]{graph_from_adj_list()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

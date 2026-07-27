@@ -20,7 +20,7 @@ bonpow(
 \item{nodes}{vertex sequence indicating which vertices are to be included in
 the calculation.  By default, all vertices are included.}
 
-\item{loops}{boolean indicating whether or not the diagonal should be
+\item{loops}{Logical indicating whether or not the diagonal should be
 treated as valid data.  Set this true if and only if the data can contain
 loops.  \code{loops} is \code{FALSE} by default.}
 
@@ -33,7 +33,7 @@ score; can be negative}
 \item{tol}{tolerance for near-singularities during matrix inversion (see
 \code{\link[=solve]{solve()}})}
 
-\item{sparse}{Logical scalar, whether to use sparse matrices for the
+\item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
 }
@@ -43,4 +43,8 @@ support}
 \code{bonpow()} was renamed to \code{\link[=power_centrality]{power_centrality()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

@@ -77,7 +77,7 @@ test_that("rglplot() works", {
 
   # https://stackoverflow.com/a/46320771/5489251
   withr::local_envvar(RGL_USE_NULL = TRUE)
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   el <- cbind(sample(1:5), sample(1:5))
   g <- graph_from_edgelist(el)
@@ -142,7 +142,7 @@ test_that("Edges stop at outside of rectangle node", {
 test_that("layout as graph attribute error works", {
   g <- make_full_graph(10)
   g$layout <- layout_in_circle(g)[1:5, ]
-  expect_snapshot(error = TRUE, {
+  expect_snapshot_igraph_error({
     plot(g)
   })
 })

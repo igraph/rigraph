@@ -16,9 +16,9 @@ layout.gem(
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform. Updating a
 single vertex counts as an iteration.  A reasonable default is 40 * n * n,
@@ -41,4 +41,8 @@ default is the square root of the number of vertices.}
 \code{layout.gem()} was renamed to \code{\link[=layout_with_gem]{layout_with_gem()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_gem}{\code{layout_gem()}}
+}
+
 \keyword{internal}
