@@ -1888,6 +1888,11 @@ sample_pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "sample_pa_age"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2107,6 +2112,11 @@ pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "pa_age"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2238,9 +2248,10 @@ pa_age <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param edge.per.step The number of edges to add to the graph per time step.
 #' @param type.dist The distribution of the vertex types. This is assumed to be
-#'   stationary in time.
+#'   stationary in time. The default `NULL` gives a uniform distribution.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
 #'   types. These should be probabilities, i.e. numbers between zero and one.
+#'   The default `NULL` sets all preferences to one.
 #' @param directed Logical, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
@@ -2258,12 +2269,17 @@ sample_traits_callaway <- function(
   types,
   ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits_callaway"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2278,8 +2294,8 @@ sample_traits_callaway <- function(
       match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
       defaults = list(
         edge.per.step = 1,
-        type.dist = rep(1, types),
-        pref.matrix = matrix(1, types, types),
+        type.dist = NULL,
+        pref.matrix = NULL,
         directed = FALSE
       ),
       head_args = c("nodes", "types"),
@@ -2293,6 +2309,13 @@ sample_traits_callaway <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   res <- callaway_traits_game_impl(
     nodes = nodes,
@@ -2324,12 +2347,17 @@ traits_callaway <- function(
   types,
   ...,
   edge.per.step = 1,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits_callaway"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2344,8 +2372,8 @@ traits_callaway <- function(
       match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
       defaults = list(
         edge.per.step = 1,
-        type.dist = rep(1, types),
-        pref.matrix = matrix(1, types, types),
+        type.dist = NULL,
+        pref.matrix = NULL,
         directed = FALSE
       ),
       head_args = c("nodes", "types"),
@@ -2359,6 +2387,13 @@ traits_callaway <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   constructor_spec(
     sample_traits_callaway,
@@ -2379,12 +2414,17 @@ sample_traits <- function(
   types,
   k = 1,
   ...,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2396,11 +2436,7 @@ sample_traits <- function(
       recover_old = c("type.dist", "pref.matrix", "directed"),
       match_names = c("type.dist", "pref.matrix", "directed"),
       match_to = c("type.dist", "pref.matrix", "directed"),
-      defaults = list(
-        type.dist = rep(1, types),
-        pref.matrix = matrix(1, types, types),
-        directed = FALSE
-      ),
+      defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
       head_args = c("nodes", "types", "k"),
       fn_name = "sample_traits"
     )
@@ -2412,6 +2448,13 @@ sample_traits <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   res <- establishment_game_impl(
     nodes = nodes,
@@ -2439,12 +2482,17 @@ traits <- function(
   types,
   k = 1,
   ...,
-  type.dist = rep(1, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist = NULL,
+  pref.matrix = NULL,
   directed = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2456,11 +2504,7 @@ traits <- function(
       recover_old = c("type.dist", "pref.matrix", "directed"),
       match_names = c("type.dist", "pref.matrix", "directed"),
       match_to = c("type.dist", "pref.matrix", "directed"),
-      defaults = list(
-        type.dist = rep(1, types),
-        pref.matrix = matrix(1, types, types),
-        directed = FALSE
-      ),
+      defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
       head_args = c("nodes", "types", "k"),
       fn_name = "traits"
     )
@@ -2472,6 +2516,13 @@ traits <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   constructor_spec(
     sample_traits,
@@ -2635,15 +2686,17 @@ grg <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @param type.dist The distribution of the vertex types, a numeric vector of
 #'   length \sQuote{types} containing non-negative numbers. The vector will be
-#'   normed to obtain probabilities.
+#'   normed to obtain probabilities. The default `NULL` gives a uniform
+#'   distribution.
 #' @param fixed.sizes Fix the number of vertices with a given vertex type
 #'   label. The `type.dist` argument gives the group sizes (i.e. number of
 #'   vertices with the different labels) in this case.
 #' @param type.dist.matrix The joint distribution of the in- and out-vertex
-#'   types.
+#'   types. The default `NULL` gives a uniform distribution.
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
-#'   an undirected graph, it must be symmetric.
+#'   an undirected graph, it must be symmetric. The default `NULL` sets all
+#'   preferences to one.
 #' @param directed Logical, whether to create a directed graph.
 #' @param loops Logical, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
@@ -2671,14 +2724,19 @@ sample_pref <- function(
   nodes,
   types,
   ...,
-  type.dist = rep(1, types),
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2717,9 +2775,9 @@ sample_pref <- function(
         "loops"
       ),
       defaults = list(
-        type.dist = rep(1, types),
+        type.dist = NULL,
         fixed.sizes = FALSE,
-        pref.matrix = matrix(1, types, types),
+        pref.matrix = NULL,
         directed = FALSE,
         loops = FALSE
       ),
@@ -2734,6 +2792,13 @@ sample_pref <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
@@ -2770,14 +2835,19 @@ pref <- function(
   nodes,
   types,
   ...,
-  type.dist = rep(1, types),
+  type.dist = NULL,
   fixed.sizes = FALSE,
-  pref.matrix = matrix(1, types, types),
+  pref.matrix = NULL,
   directed = FALSE,
   loops = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2816,9 +2886,9 @@ pref <- function(
         "loops"
       ),
       defaults = list(
-        type.dist = rep(1, types),
+        type.dist = NULL,
         fixed.sizes = FALSE,
-        pref.matrix = matrix(1, types, types),
+        pref.matrix = NULL,
         directed = FALSE,
         loops = FALSE
       ),
@@ -2833,6 +2903,13 @@ pref <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist)) {
+    type.dist <- rep(1, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   constructor_spec(
     sample_pref,
@@ -2853,12 +2930,17 @@ sample_asym_pref <- function(
   nodes,
   types,
   ...,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_asym_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2871,8 +2953,8 @@ sample_asym_pref <- function(
       match_names = c("type.dist.matrix", "pref.matrix", "loops"),
       match_to = c("type.dist.matrix", "pref.matrix", "loops"),
       defaults = list(
-        type.dist.matrix = matrix(1, types, types),
-        pref.matrix = matrix(1, types, types),
+        type.dist.matrix = NULL,
+        pref.matrix = NULL,
         loops = FALSE
       ),
       head_args = c("nodes", "types"),
@@ -2886,6 +2968,13 @@ sample_asym_pref <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist.matrix)) {
+    type.dist.matrix <- matrix(1, types, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
@@ -2928,12 +3017,17 @@ asym_pref <- function(
   nodes,
   types,
   ...,
-  type.dist.matrix = matrix(1, types, types),
-  pref.matrix = matrix(1, types, types),
+  type.dist.matrix = NULL,
+  pref.matrix = NULL,
   loops = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "asym_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2946,8 +3040,8 @@ asym_pref <- function(
       match_names = c("type.dist.matrix", "pref.matrix", "loops"),
       match_to = c("type.dist.matrix", "pref.matrix", "loops"),
       defaults = list(
-        type.dist.matrix = matrix(1, types, types),
-        pref.matrix = matrix(1, types, types),
+        type.dist.matrix = NULL,
+        pref.matrix = NULL,
         loops = FALSE
       ),
       head_args = c("nodes", "types"),
@@ -2961,6 +3055,13 @@ asym_pref <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(type.dist.matrix)) {
+    type.dist.matrix <- matrix(1, types, types)
+  }
+  if (is.null(pref.matrix)) {
+    pref.matrix <- matrix(1, types, types)
+  }
 
   constructor_spec(
     sample_asym_pref,
@@ -3177,13 +3278,16 @@ smallworld <- function(
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
 #' @inheritParams rlang::args_dots_empty
-#' @param agebins Number of aging bins.
+#' @param agebins Number of aging bins. The default `NULL` uses `n / 7100`.
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
-#'   probabilities for the different vertex types.
+#'   probabilities for the different vertex types. The default `NULL` uses
+#'   `(1:(agebins + 1))^-3` for `sample_last_cit()` and all-one probabilities
+#'   for the other two.
 #' @param directed Logical, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
-#'   Types are numbered from zero.
+#'   Types are numbered from zero. The default `NULL` gives all vertices
+#'   type zero.
 #' @param attr Logical, whether to add the vertex types to the generated
 #'   graph as a vertex attribute called \sQuote{`type`}.
 #' @return A new graph.
@@ -3195,8 +3299,8 @@ sample_last_cit <- function(
   n,
   edges = 1,
   ...,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins = NULL,
+  pref = NULL,
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_last_cit, do not edit, see tools/generate-migrations.R
@@ -3208,11 +3312,7 @@ sample_last_cit <- function(
       recover_old = c("agebins", "pref", "directed"),
       match_names = c("agebins", "pref", "directed"),
       match_to = c("agebins", "pref", "directed"),
-      defaults = list(
-        agebins = n / 7100,
-        pref = (1:(agebins + 1))^-3,
-        directed = TRUE
-      ),
+      defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
       head_args = c("n", "edges"),
       fn_name = "sample_last_cit"
     )
@@ -3224,6 +3324,13 @@ sample_last_cit <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(agebins)) {
+    agebins <- n / 7100
+  }
+  if (is.null(pref)) {
+    pref <- (1:(agebins + 1))^-3
+  }
 
   res <- lastcit_game_impl(
     nodes = n,
@@ -3247,8 +3354,8 @@ last_cit <- function(
   n,
   edges = 1,
   ...,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins = NULL,
+  pref = NULL,
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: last_cit, do not edit, see tools/generate-migrations.R
@@ -3260,11 +3367,7 @@ last_cit <- function(
       recover_old = c("agebins", "pref", "directed"),
       match_names = c("agebins", "pref", "directed"),
       match_to = c("agebins", "pref", "directed"),
-      defaults = list(
-        agebins = n / 7100,
-        pref = (1:(agebins + 1))^-3,
-        directed = TRUE
-      ),
+      defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
       head_args = c("n", "edges"),
       fn_name = "last_cit"
     )
@@ -3276,6 +3379,13 @@ last_cit <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(agebins)) {
+    agebins <- n / 7100
+  }
+  if (is.null(pref)) {
+    pref <- (1:(agebins + 1))^-3
+  }
 
   constructor_spec(
     sample_last_cit,
@@ -3293,9 +3403,9 @@ last_cit <- function(
 sample_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = rep(1, length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
@@ -3308,11 +3418,7 @@ sample_cit_types <- function(
       recover_old = c("pref", "directed", "attr"),
       match_names = c("pref", "directed", "attr"),
       match_to = c("pref", "directed", "attr"),
-      defaults = list(
-        pref = rep(1, length(types)),
-        directed = TRUE,
-        attr = TRUE
-      ),
+      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
       head_args = c("n", "edges", "types"),
       fn_name = "sample_cit_types"
     )
@@ -3324,6 +3430,13 @@ sample_cit_types <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- rep(1, length(types))
+  }
 
   res <- cited_type_game_impl(
     nodes = n,
@@ -3348,9 +3461,9 @@ sample_cit_types <- function(
 cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = rep(1, length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
@@ -3363,11 +3476,7 @@ cit_types <- function(
       recover_old = c("pref", "directed", "attr"),
       match_names = c("pref", "directed", "attr"),
       match_to = c("pref", "directed", "attr"),
-      defaults = list(
-        pref = rep(1, length(types)),
-        directed = TRUE,
-        attr = TRUE
-      ),
+      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
       head_args = c("n", "edges", "types"),
       fn_name = "cit_types"
     )
@@ -3379,6 +3488,13 @@ cit_types <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- rep(1, length(types))
+  }
 
   constructor_spec(
     sample_cit_types,
@@ -3397,9 +3513,9 @@ cit_types <- function(
 sample_cit_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
@@ -3412,11 +3528,7 @@ sample_cit_cit_types <- function(
       recover_old = c("pref", "directed", "attr"),
       match_names = c("pref", "directed", "attr"),
       match_to = c("pref", "directed", "attr"),
-      defaults = list(
-        pref = matrix(1, nrow = length(types), ncol = length(types)),
-        directed = TRUE,
-        attr = TRUE
-      ),
+      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
       head_args = c("n", "edges", "types"),
       fn_name = "sample_cit_cit_types"
     )
@@ -3428,6 +3540,13 @@ sample_cit_cit_types <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- matrix(1, nrow = length(types), ncol = length(types))
+  }
 
   pref[] <- as.numeric(pref)
   res <- citing_cited_type_game_impl(
@@ -3453,9 +3572,9 @@ sample_cit_cit_types <- function(
 cit_cit_types <- function(
   n,
   edges = 1,
-  types = rep(0, n),
+  types = NULL,
   ...,
-  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  pref = NULL,
   directed = TRUE,
   attr = TRUE
 ) {
@@ -3468,11 +3587,7 @@ cit_cit_types <- function(
       recover_old = c("pref", "directed", "attr"),
       match_names = c("pref", "directed", "attr"),
       match_to = c("pref", "directed", "attr"),
-      defaults = list(
-        pref = matrix(1, nrow = length(types), ncol = length(types)),
-        directed = TRUE,
-        attr = TRUE
-      ),
+      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
       head_args = c("n", "edges", "types"),
       fn_name = "cit_cit_types"
     )
@@ -3484,6 +3599,13 @@ cit_cit_types <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(types)) {
+    types <- rep(0, n)
+  }
+  if (is.null(pref)) {
+    pref <- matrix(1, nrow = length(types), ncol = length(types))
+  }
 
   constructor_spec(
     sample_cit_cit_types,
@@ -4700,8 +4822,8 @@ sample_forestfire <- function(
 #'   graph (the adjacency matrix being used as a vector).
 #' @inheritParams rlang::args_dots_empty
 #' @param p A numeric scalar, the probability of an edge between two
-#'   vertices, it must in the open (0,1) interval. The default is the empirical
-#'   edge density of the graph. If you are resampling an Erdős-Rényi graph and
+#'   vertices, it must in the open (0,1) interval. The default `NULL` uses the
+#'   empirical edge density of the graph. If you are resampling an Erdős-Rényi graph and
 #'   you know the original edge probability of the Erdős-Rényi model, you should
 #'   supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
@@ -4727,7 +4849,7 @@ sample_correlated_gnp <- function(
   old.graph,
   corr,
   ...,
-  p = edge_density(old.graph),
+  p = NULL,
   permutation = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_correlated_gnp, do not edit, see tools/generate-migrations.R
@@ -4739,7 +4861,7 @@ sample_correlated_gnp <- function(
       recover_old = c("p", "permutation"),
       match_names = c("p", "permutation"),
       match_to = c("p", "permutation"),
-      defaults = list(p = edge_density(old.graph), permutation = NULL),
+      defaults = list(p = NULL, permutation = NULL),
       head_args = c("old.graph", "corr"),
       fn_name = "sample_correlated_gnp"
     )
@@ -4751,6 +4873,10 @@ sample_correlated_gnp <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(p)) {
+    p <- edge_density(old.graph)
+  }
 
   correlated_game_impl(
     old_graph = old.graph,

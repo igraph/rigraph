@@ -166,7 +166,15 @@ test_that("is_constant_default() classifies expressions", {
     list(),
     (2),
     deprecated(),
-    lifecycle::deprecated()
+    lifecycle::deprecated(),
+    # typed empty vectors: the canonical spelling of an empty sequence
+    logical(),
+    integer(),
+    numeric(),
+    double(),
+    complex(),
+    character(),
+    raw()
   )
   for (e in const) {
     expect_true(gen$is_constant_default(e), label = deparse(e))
@@ -182,7 +190,11 @@ test_that("is_constant_default() classifies expressions", {
     .Machine$double.eps,
     x,
     T,
-    c(1, n)
+    c(1, n),
+    # not empty constructors: sized or converting calls stay non-constant
+    numeric(2),
+    integer(n),
+    vector("numeric")
   )
   for (e in nonconst) {
     expect_false(gen$is_constant_default(e), label = deparse(e))

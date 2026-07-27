@@ -4,7 +4,7 @@
 \alias{contract}
 \title{Contract several vertices into a single one}
 \usage{
-contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
+contract(graph, mapping, vertex.attr.comb = NULL)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
@@ -14,7 +14,8 @@ correspond to the vertices, and for each element the ID in the new graph is
 given.}
 
 \item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
-the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.}
+the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details. The
+default \code{NULL} uses the \code{vertex.attr.comb} igraph option.}
 }
 \value{
 A new graph object.

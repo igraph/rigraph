@@ -13,7 +13,7 @@ get.vertex.attribute(graph, name, index = V(graph))
 all vertex attributes are returned in a list.}
 
 \item{index}{An optional vertex sequence to query the attribute only
-for these vertices.}
+for these vertices. The default \code{NULL} selects all vertices.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -55,9 +55,9 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
 #' @aliases triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
-#' @param vids The vertices to query, all of them by default. This might be a
-#'   vector of numeric IDs, or a character vector of symbolic vertex names for
-#'   named graphs.
+#' @param vids The vertices to query. This might be a vector of numeric IDs,
+#'   or a character vector of symbolic vertex names for named graphs. The
+#'   default `NULL` selects all vertices.
 #' @return For `triangles()` a numeric vector of vertex IDs, the first three
 #'   vertices belong to the first triangle found, etc.
 #'
@@ -96,7 +96,11 @@ triangles <- function(graph) {
 
 #' @export
 #' @rdname count_triangles
-count_triangles <- function(graph, vids = V(graph)) {
+count_triangles <- function(graph, vids = NULL) {
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
+
   count_adjacent_triangles_impl(
     graph = graph,
     vids = vids

@@ -12,8 +12,8 @@ plotHierarchy(
 }
 \arguments{
 \item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph()}, see the possible formats there. By default the
-Reingold-Tilford layout generator is used.}
+\code{plot.igraph()}, see the possible formats there. The default \code{NULL} uses
+the Reingold-Tilford layout generator.}
 
 \item{...}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
 them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}

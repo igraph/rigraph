@@ -1091,10 +1091,14 @@ degree <- function(
 max_degree <- function(
   graph,
   ...,
-  v = V(graph),
+  v = NULL,
   mode = c("all", "out", "in", "total"),
   loops = TRUE
 ) {
+  if (is.null(v)) {
+    v <- V(graph)
+  }
+
   maxdegree_impl(
     graph = graph,
     v = v,
@@ -3192,8 +3196,8 @@ girth <- function(
 #' original multiplicity as an edge attribute.
 #'
 #' @param graph The input graph.
-#' @param eids The edges to which the query is restricted. By default this is
-#'   all edges in the graph.
+#' @param eids The edges to which the query is restricted. The default
+#'   `NULL` selects all edges.
 #' @return `any_loop()` and `any_multiple()` return a Logical.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
 #'   `count_loops()` returns a numeric scalar with the total number of loop edges.
@@ -3230,7 +3234,11 @@ girth <- function(
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
-which_multiple <- function(graph, eids = E(graph)) {
+which_multiple <- function(graph, eids = NULL) {
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
+
   is_multiple_impl(
     graph = graph,
     eids = eids
@@ -3245,7 +3253,11 @@ any_multiple <- function(graph) {
 }
 #' @rdname which_multiple
 #' @export
-count_multiple <- function(graph, eids = E(graph)) {
+count_multiple <- function(graph, eids = NULL) {
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
+
   count_multiple_impl(
     graph = graph,
     eids = eids
@@ -3253,7 +3265,11 @@ count_multiple <- function(graph, eids = E(graph)) {
 }
 #' @rdname which_multiple
 #' @export
-which_loop <- function(graph, eids = E(graph)) {
+which_loop <- function(graph, eids = NULL) {
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
+
   is_loop_impl(
     graph = graph,
     eids = eids
@@ -3336,6 +3352,7 @@ count_loops <- function(graph) {
 #'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
+#'   The default `NULL` uses the caller's environment.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
 #'  from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
@@ -3430,13 +3447,17 @@ bfs <- function(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = parent.frame(),
+  rho = NULL,
   neimode = deprecated(),
   father = deprecated()
 ) {
   rlang::check_dots_empty()
 
   ensure_igraph(graph)
+
+  if (is.null(rho)) {
+    rho <- parent.frame()
+  }
 
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_stop(
@@ -3615,6 +3636,7 @@ bfs <- function(
 #'   Default: `NULL`.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
+#'   The default `NULL` uses the caller's environment.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
 #' @inheritParams rlang::args_dots_empty
@@ -3702,13 +3724,17 @@ dfs <- function(
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
-  rho = parent.frame(),
+  rho = NULL,
   neimode = deprecated(),
   father = deprecated()
 ) {
   rlang::check_dots_empty()
 
   ensure_igraph(graph)
+  if (is.null(rho)) {
+    rho <- parent.frame()
+  }
+
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_stop(
       "1.3.0",

@@ -30,6 +30,52 @@ test_that("NULL non-selector defaults resolve in the body", {
   expect_identical(max_bipartite_match(bip)$matching_size, 2)
 })
 
+test_that("NULL selector defaults of round-2 functions select the full set", {
+  g <- make_ring(5)
+
+  expect_identical(max_degree(g, v = NULL), max_degree(g))
+  expect_identical(which_loop(g, eids = NULL), which_loop(g))
+  expect_identical(which_multiple(g, eids = NULL), which_multiple(g))
+  expect_identical(count_multiple(g, eids = NULL), count_multiple(g))
+  expect_identical(count_triangles(g, vids = NULL), count_triangles(g))
+  expect_identical(cocitation(g, v = NULL), cocitation(g))
+  expect_identical(similarity(g, vids = NULL), similarity(g))
+  expect_identical_graphs(reverse_edges(g, eids = NULL), reverse_edges(g))
+
+  V(g)$name <- letters[1:5]
+  expect_identical(vertex_attr(g, "name", index = NULL), vertex_attr(g, "name"))
+  expect_identical(vertex.attributes(g, index = NULL), vertex.attributes(g))
+  g2 <- set_vertex_attr(g, "x", index = NULL, value = 1)
+  expect_identical(vertex_attr(g2, "x"), rep(1, 5))
+})
+
+test_that("NULL non-selector defaults of round-2 functions resolve in the body", {
+  g <- make_ring(4)
+
+  # option-backed defaults fall back to the igraph option
+  expect_identical_graphs(
+    simplify(g + edge(1, 2), edge.attr.comb = NULL),
+    simplify(g + edge(1, 2))
+  )
+  expect_identical_graphs(
+    as_undirected(as_directed(g), edge.attr.comb = NULL),
+    as_undirected(as_directed(g))
+  )
+
+  # cross-referencing defaults resolve after all arguments are available
+  igraph_local_seed(42)
+  g1 <- sample_pref(20, types = 2, pref.matrix = NULL, type.dist = NULL)
+  igraph_local_seed(42)
+  g2 <- sample_pref(20, types = 2)
+  expect_identical_graphs(g1, g2)
+
+  igraph_local_seed(1)
+  l1 <- layout_with_kk(g, kkconst = NULL, maxiter = NULL)
+  igraph_local_seed(1)
+  l2 <- layout_with_kk(g)
+  expect_identical(l1, l2)
+})
+
 test_that("positional recovery of a selector with a NULL default works", {
   # Regression: with `vids = V(graph)` as the default, re-evaluating the
   # default during recovery produced a fresh igraph.vs whose weakref `env`

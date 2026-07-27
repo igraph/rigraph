@@ -331,12 +331,17 @@ sample_motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = rep(0, size),
+  cut.prob = NULL,
   sample.size = NULL,
   sample = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("s"),
+      "sample_motifs"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -348,11 +353,7 @@ sample_motifs <- function(
       recover_old = c("cut.prob", "sample.size", "sample"),
       match_names = c("cut.prob", "sample.size", "sample"),
       match_to = c("cut.prob", "sample.size", "sample"),
-      defaults = list(
-        cut.prob = rep(0, size),
-        sample.size = NULL,
-        sample = NULL
-      ),
+      defaults = list(cut.prob = NULL, sample.size = NULL, sample = NULL),
       head_args = c("graph", "size"),
       fn_name = "sample_motifs"
     )

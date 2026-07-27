@@ -619,8 +619,12 @@ component_wise <- function(merge_method = "dla") {
 #' Scale coordinates of a layout.
 #'
 #' @param xmin,xmax Minimum and maximum for x coordinates.
-#' @param ymin,ymax Minimum and maximum for y coordinates.
-#' @param zmin,zmax Minimum and maximum for z coordinates.
+#' @param ymin,ymax Minimum and maximum for y coordinates. When omitted,
+#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
+#'   this axis.
+#' @param zmin,zmax Minimum and maximum for z coordinates. When omitted,
+#'   they follow `xmin` and `xmax`; `NULL` disables normalization along
+#'   this axis.
 #'
 #' @family layout modifiers
 #' @family graph layouts
@@ -631,11 +635,27 @@ component_wise <- function(merge_method = "dla") {
 normalize <- function(
   xmin = -1,
   xmax = 1,
-  ymin = xmin,
-  ymax = xmax,
-  zmin = xmin,
-  zmax = xmax
+  ymin = NULL,
+  ymax = NULL,
+  zmin = NULL,
+  zmax = NULL
 ) {
+  # NULL is a legal value here (norm_coords() skips normalization along an
+  # axis with a NULL limit), so the fallback to the x limits applies only
+  # when an argument is not supplied at all.
+  if (missing(ymin)) {
+    ymin <- xmin
+  }
+  if (missing(ymax)) {
+    ymax <- xmax
+  }
+  if (missing(zmin)) {
+    zmin <- xmin
+  }
+  if (missing(zmax)) {
+    zmax <- xmax
+  }
+
   args <- grab_args()
 
   layout_modifier(
@@ -760,8 +780,8 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #'
 #' @param graph The graph to layout.
 #' @inheritParams rlang::args_dots_empty
-#' @param center The ID of the vertex to put in the center. By default it is
-#'   the first vertex.
+#' @param center The ID of the vertex to put in the center. The default
+#'   `NULL` uses the first vertex.
 #' @param order Numeric vector, the order of the vertices along the perimeter.
 #'   The default ordering is given by the vertex IDs.
 #' @return A matrix with two columns and as many rows as the number of vertices
@@ -783,7 +803,7 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 layout_as_star <- function(
   graph,
   ...,
-  center = V(graph)[1],
+  center = NULL,
   order = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_star, do not edit, see tools/generate-migrations.R
@@ -795,7 +815,7 @@ layout_as_star <- function(
       recover_old = c("center", "order"),
       match_names = c("center", "order"),
       match_to = c("center", "order"),
-      defaults = list(center = V(graph)[1], order = NULL),
+      defaults = list(center = NULL, order = NULL),
       head_args = c("graph"),
       fn_name = "layout_as_star"
     )
@@ -814,6 +834,9 @@ layout_as_star <- function(
     # Any other layout will do so just pick one that supports graphs with no
     # vertices
     return(layout_in_circle(graph))
+  }
+  if (is.null(center)) {
+    center <- V(graph)[1]
   }
   # Use the _impl function
   layout_star_impl(
@@ -998,7 +1021,8 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @param graph The input graph.
 #' @param order The vertices to place on the circle, in the order of their
 #'   desired placement. Vertices that are not included here will be placed at
-#'   (0,0).
+#'   (0,0). The default `NULL` selects all vertices, in the order of their
+#'   IDs.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -1019,7 +1043,11 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
-layout_in_circle <- function(graph, order = V(graph)) {
+layout_in_circle <- function(graph, order = NULL) {
+  if (is.null(order)) {
+    order <- V(graph)
+  }
+
   # Use the _impl function
   layout_circle_impl(
     graph = graph,
@@ -1421,7 +1449,8 @@ layout.random <- function(..., params = list()) {
 #'   is not `NULL` then it should be an appropriate matrix of starting
 #'   coordinates.
 #' @param maxiter Number of iterations to perform in the first phase.
-#' @param fineiter Number of iterations in the fine tuning phase.
+#' @param fineiter Number of iterations in the fine tuning phase. The
+#'   default `NULL` uses `max(10, log2(vcount(graph)))`.
 #' @param cool.fact Cooling factor.
 #' @param weight.node.dist Weight for the node-node distances component of the
 #'   energy function.
@@ -1429,11 +1458,13 @@ layout.random <- function(..., params = list()) {
 #'   the energy function. It can be set to zero, if vertices are allowed to sit
 #'   on the border.
 #' @param weight.edge.lengths Weight for the edge length component of the
-#'   energy function.
+#'   energy function. The default `NULL` uses `edge_density(graph) / 10`.
 #' @param weight.edge.crossings Weight for the edge crossing component of the
-#'   energy function.
+#'   energy function. The default `NULL` uses
+#'   `1 - sqrt(edge_density(graph))`.
 #' @param weight.node.edge.dist Weight for the node-edge distance component of
-#'   the energy function.
+#'   the energy function. The default `NULL` uses
+#'   `0.2 * (1 - edge_density(graph))`.
 #' @return A matrix with two columns, containing the x and y coordinates
 #'   of the vertices:
 #'   \describe{
@@ -1510,13 +1541,13 @@ layout_with_dh <- function(
   ...,
   coords = NULL,
   maxiter = 10,
-  fineiter = max(10, log2(vcount(graph))),
+  fineiter = NULL,
   cool.fact = 0.75,
   weight.node.dist = 1.0,
   weight.border = 0.0,
-  weight.edge.lengths = edge_density(graph) / 10,
-  weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
-  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+  weight.edge.lengths = NULL,
+  weight.edge.crossings = NULL,
+  weight.node.edge.dist = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -1580,13 +1611,13 @@ layout_with_dh <- function(
       defaults = list(
         coords = NULL,
         maxiter = 10,
-        fineiter = max(10, log2(vcount(graph))),
+        fineiter = NULL,
         cool.fact = 0.75,
         weight.node.dist = 1,
         weight.border = 0,
-        weight.edge.lengths = edge_density(graph) / 10,
-        weight.edge.crossings = 1 - sqrt(edge_density(graph)),
-        weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+        weight.edge.lengths = NULL,
+        weight.edge.crossings = NULL,
+        weight.node.edge.dist = NULL
       ),
       head_args = c("graph"),
       fn_name = "layout_with_dh"
@@ -1599,6 +1630,19 @@ layout_with_dh <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(fineiter)) {
+    fineiter <- max(10, log2(vcount(graph)))
+  }
+  if (is.null(weight.edge.lengths)) {
+    weight.edge.lengths <- edge_density(graph) / 10
+  }
+  if (is.null(weight.edge.crossings)) {
+    weight.edge.crossings <- 1.0 - sqrt(edge_density(graph))
+  }
+  if (is.null(weight.node.edge.dist)) {
+    weight.node.edge.dist <- 0.2 * (1 - edge_density(graph))
+  }
 
   if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
@@ -1651,7 +1695,8 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param start.temp Real scalar, the start temperature. This is the maximum
 #'   amount of movement alloved along one axis, within one step, for a vertex.
-#'   Currently it is decreased linearly to zero during the iteration.
+#'   Currently it is decreased linearly to zero during the iteration. The
+#'   default `NULL` uses `sqrt(vcount(graph))`.
 #' @param grid Character scalar, whether to use the faster, but less accurate
 #'   grid based implementation of the algorithm. By default (\dQuote{auto}), the
 #'   grid-based implementation is used if the graph has more than one thousand
@@ -1716,7 +1761,7 @@ layout_with_fr <- function(
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
-  start.temp = sqrt(vcount(graph)),
+  start.temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -1733,6 +1778,11 @@ layout_with_fr <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("g", "gr"),
+      "layout_with_fr"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -1834,7 +1884,7 @@ layout_with_fr <- function(
         coords = NULL,
         dim = c(2, 3),
         niter = 500,
-        start.temp = sqrt(vcount(graph)),
+        start.temp = NULL,
         grid = c("auto", "grid", "nogrid"),
         weights = NULL,
         minx = NULL,
@@ -1863,6 +1913,10 @@ layout_with_fr <- function(
 
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(start.temp)) {
+    start.temp <- sqrt(vcount(graph))
+  }
+
   coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
   if (!missing(niter) && !missing(maxiter)) {
@@ -1992,16 +2046,16 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'   depending on the `dim` argument.
 #'   Default: `NULL`.
 #' @param maxiter The maximum number of iterations to perform. Updating a
-#'   single vertex counts as an iteration.  A reasonable default is 40 * n * n,
+#'   single vertex counts as an iteration. The default `NULL` uses 40 * n * n,
 #'   where n is the number of vertices. The original paper suggests 4 * n * n,
 #'   but this usually only works if the other parameters are set up carefully.
-#' @param temp.max The maximum allowed local temperature. A reasonable default
-#'   is the number of vertices.
+#' @param temp.max The maximum allowed local temperature. The default `NULL`
+#'   uses the number of vertices.
 #' @param temp.min The global temperature at which the algorithm terminates
 #'   (even before reaching `maxiter` iterations). A reasonable default is
 #'   1/10.
-#' @param temp.init Initial local temperature of all vertices. A reasonable
-#'   default is the square root of the number of vertices.
+#' @param temp.init Initial local temperature of all vertices. The default
+#'   `NULL` uses the square root of the number of vertices.
 #' @return A numeric matrix with two columns, and as many rows as the number of
 #'   vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2023,10 +2077,10 @@ layout_with_gem <- function(
   graph,
   ...,
   coords = NULL,
-  maxiter = 40 * vcount(graph)^2,
-  temp.max = max(vcount(graph), 1),
-  temp.min = 1 / 10,
-  temp.init = sqrt(max(vcount(graph), 1))
+  maxiter = NULL,
+  temp.max = NULL,
+  temp.min = 0.1,
+  temp.init = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -2045,10 +2099,10 @@ layout_with_gem <- function(
       match_to = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
       defaults = list(
         coords = NULL,
-        maxiter = 40 * vcount(graph)^2,
-        temp.max = max(vcount(graph), 1),
-        temp.min = 1 / 10,
-        temp.init = sqrt(max(vcount(graph), 1))
+        maxiter = NULL,
+        temp.max = NULL,
+        temp.min = 0.1,
+        temp.init = NULL
       ),
       head_args = c("graph"),
       fn_name = "layout_with_gem"
@@ -2061,6 +2115,16 @@ layout_with_gem <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(maxiter)) {
+    maxiter <- 40 * vcount(graph)^2
+  }
+  if (is.null(temp.max)) {
+    temp.max <- max(vcount(graph), 1)
+  }
+  if (is.null(temp.init)) {
+    temp.init <- sqrt(max(vcount(graph), 1))
+  }
 
   if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
@@ -2262,13 +2326,14 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
 #'   space.
 #' @param maxiter The maximum number of iterations to perform. The algorithm
-#'   might terminate earlier, see the `epsilon` argument.
+#'   might terminate earlier, see the `epsilon` argument. The default `NULL`
+#'   uses `50 * vcount(graph)`.
 #' @param epsilon Numeric scalar, the algorithm terminates, if the maximal
 #'   delta is less than this. (See the reference below for what delta means.) If
 #'   you set this to zero, then the function always performs `maxiter`
 #'   iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
-#'   Typical (and default) value is the number of vertices.
+#'   The default `NULL` uses the number of vertices.
 #' @param weights Edge weights, larger values will result in longer edges.
 #'   Note that this is the opposite of [layout_with_fr()], which produces
 #'   shorter edges for larger weights. Weights must be positive.
@@ -2310,9 +2375,9 @@ layout_with_kk <- function(
   ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = 50 * vcount(graph),
+  maxiter = NULL,
   epsilon = 0.0,
-  kkconst = max(vcount(graph), 1),
+  kkconst = NULL,
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -2428,9 +2493,9 @@ layout_with_kk <- function(
       defaults = list(
         coords = NULL,
         dim = c(2, 3),
-        maxiter = 50 * vcount(graph),
+        maxiter = NULL,
         epsilon = 0,
-        kkconst = max(vcount(graph), 1),
+        kkconst = NULL,
         weights = NULL,
         minx = NULL,
         maxx = NULL,
@@ -2455,6 +2520,13 @@ layout_with_kk <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(maxiter)) {
+    maxiter <- 50 * vcount(graph)
+  }
+  if (is.null(kkconst)) {
+    kkconst <- max(vcount(graph), 1)
+  }
 
   # Argument checks
   if (!missing(coords) && !missing(start)) {
@@ -2590,17 +2662,17 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @param graph The input graph
 #' @inheritParams rlang::args_dots_empty
 #' @param maxiter The maximum number of iterations to perform (150).
-#' @param maxdelta The maximum change for a vertex during an iteration (the
-#'   number of vertices).
-#' @param area The area of the surface on which the vertices are placed (square
-#'   of the number of vertices).
+#' @param maxdelta The maximum change for a vertex during an iteration. The
+#'   default `NULL` uses the number of vertices.
+#' @param area The area of the surface on which the vertices are placed. The
+#'   default `NULL` uses the square of the number of vertices.
 #' @param coolexp The cooling exponent of the simulated annealing (1.5).
-#' @param repulserad Cancellation radius for the repulsion (the `area`
-#'   times the number of vertices).
+#' @param repulserad Cancellation radius for the repulsion. The default
+#'   `NULL` uses the `area` times the number of vertices.
 #' @param cellsize The size of the cells for the grid. When calculating the
 #'   repulsion forces between vertices only vertices in the same or neighboring
-#'   grid cells are taken into account (the fourth root of the number of
-#'   `area`.
+#'   grid cells are taken into account. The default `NULL` uses the square
+#'   root of the square root of the `area`.
 #' @param root The ID of the vertex to place at the middle of the layout. The
 #'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
@@ -2612,11 +2684,11 @@ layout_with_lgl <- function(
   graph,
   ...,
   maxiter = 150,
-  maxdelta = vcount(graph),
-  area = vcount(graph)^2,
+  maxdelta = NULL,
+  area = NULL,
   coolexp = 1.5,
-  repulserad = area * vcount(graph),
-  cellsize = sqrt(sqrt(area)),
+  repulserad = NULL,
+  cellsize = NULL,
   root = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_lgl, do not edit, see tools/generate-migrations.R
@@ -2670,11 +2742,11 @@ layout_with_lgl <- function(
       ),
       defaults = list(
         maxiter = 150,
-        maxdelta = vcount(graph),
-        area = vcount(graph)^2,
+        maxdelta = NULL,
+        area = NULL,
         coolexp = 1.5,
-        repulserad = area * vcount(graph),
-        cellsize = sqrt(sqrt(area)),
+        repulserad = NULL,
+        cellsize = NULL,
         root = NULL
       ),
       head_args = c("graph"),
@@ -2690,6 +2762,19 @@ layout_with_lgl <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+  if (is.null(maxdelta)) {
+    maxdelta <- vcount(graph)
+  }
+  if (is.null(area)) {
+    area <- vcount(graph)^2
+  }
+  if (is.null(repulserad)) {
+    repulserad <- area * vcount(graph)
+  }
+  if (is.null(cellsize)) {
+    cellsize <- sqrt(sqrt(area))
+  }
+
   if (is.null(root)) {
     root <- -1
   } else {
@@ -3247,7 +3332,8 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @inheritParams rlang::args_dots_empty
 #' @param method Character constant giving the method to use. Right now only
 #'   `dla` is implemented.
-#' @param layout A function object, the layout function to use.
+#' @param layout A function object, the layout function to use. The default
+#'   `NULL` uses `layout_with_kk`.
 #' @param \dots Additional arguments to pass to the `layout` layout
 #'   function.
 #' @return A matrix with two columns and as many lines as the total number of
@@ -3424,8 +3510,12 @@ norm_coords <- function(
 #' @rdname merge_coords
 #' @param graph The input graph.
 #' @export
-layout_components <- function(graph, layout = layout_with_kk, ...) {
+layout_components <- function(graph, layout = NULL, ...) {
   ensure_igraph(graph)
+
+  if (is.null(layout)) {
+    layout <- layout_with_kk
+  }
 
   V(graph)$id <- seq(vcount(graph))
   gl <- decompose(graph)
@@ -3621,9 +3711,10 @@ layout.drl <- function(
 #' @param use.seed Logical, whether to use the coordinates given in the
 #'   `seed` argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
-#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise.
+#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise. The default
+#'   `NULL` draws uniformly random starting coordinates.
 #' @param options Options for the layout generator, a named list. See details
-#'   below.
+#'   below. The default `NULL` uses `drl_defaults$default`.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -3657,8 +3748,8 @@ layout_with_drl <- function(
   graph,
   ...,
   use.seed = FALSE,
-  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-  options = drl_defaults$default,
+  seed = NULL,
+  options = NULL,
   weights = NULL,
   dim = c(2, 3)
 ) {
@@ -3679,8 +3770,8 @@ layout_with_drl <- function(
       match_to = c("use.seed", "seed", "options", "weights", "dim"),
       defaults = list(
         use.seed = FALSE,
-        seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-        options = drl_defaults$default,
+        seed = NULL,
+        options = NULL,
         weights = NULL,
         dim = c(2, 3)
       ),
@@ -3697,6 +3788,13 @@ layout_with_drl <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  if (is.null(seed)) {
+    seed <- matrix(runif(vcount(graph) * 2), ncol = 2)
+  }
+  if (is.null(options)) {
+    options <- drl_defaults$default
+  }
 
   dim <- igraph_match_arg(dim)
 

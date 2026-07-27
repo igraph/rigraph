@@ -62,10 +62,12 @@
 #' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param cvec A numeric vector, its length is the number vertices in the
-#'   graph. This vector is added to the diagonal of the adjacency matrix.
+#'   graph. This vector is added to the diagonal of the adjacency matrix. The
+#'   default `NULL` uses
+#'   `strength(graph, weights = weights) / (vcount(graph) - 1)`.
 #' @param options A named list containing the parameters for the SVD
-#'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [arpack_defaults()].
+#'   computation algorithm in ARPACK. The default `NULL` uses the values given
+#'   by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
 #'     \item{X}{
@@ -109,8 +111,8 @@ embed_adjacency_matrix <- function(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
-  options = arpack_defaults()
+  cvec = NULL,
+  options = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -131,8 +133,8 @@ embed_adjacency_matrix <- function(
         weights = NULL,
         which = c("lm", "la", "sa"),
         scaled = TRUE,
-        cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
-        options = arpack_defaults()
+        cvec = NULL,
+        options = NULL
       ),
       head_args = c("graph", "no"),
       fn_name = "embed_adjacency_matrix"
@@ -145,6 +147,13 @@ embed_adjacency_matrix <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(cvec)) {
+    cvec <- strength(graph, weights = weights) / (vcount(graph) - 1)
+  }
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   adjacency_spectral_embedding_impl(
     graph = graph,
@@ -272,8 +281,8 @@ dim_select <- function(sv) {
 #' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
-#'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [arpack_defaults()].
+#'   computation algorithm in ARPACK. The default `NULL` uses the values given
+#'   by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
 #'     \item{X}{
@@ -320,7 +329,7 @@ embed_laplacian_matrix <- function(
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
-  options = arpack_defaults()
+  options = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_laplacian_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -342,7 +351,7 @@ embed_laplacian_matrix <- function(
         which = c("lm", "la", "sa"),
         type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
         scaled = TRUE,
-        options = arpack_defaults()
+        options = NULL
       ),
       head_args = c("graph", "no"),
       fn_name = "embed_laplacian_matrix"
@@ -355,6 +364,10 @@ embed_laplacian_matrix <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   laplacian_spectral_embedding_impl(
     graph = graph,

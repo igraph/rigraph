@@ -293,6 +293,11 @@ graph_from_adjacency_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ad"),
+      "graph_from_adjacency_matrix"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -456,6 +461,11 @@ from_adjacency <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ad"),
+      "from_adjacency"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(

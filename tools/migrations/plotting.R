@@ -28,8 +28,8 @@ migrations <- list(
     new = function(
       shape,
       ...,
-      clip = shape_noclip,
-      plot = shape_noplot,
+      clip = NULL,
+      plot = NULL,
       parameters = list()
     ) {},
     when = "3.0.0"

@@ -42,7 +42,8 @@
 #'   additionally, no edge weight may be NaN. If it is `NULL` (the default)
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
 #' @param vids The vertex IDs of the vertices for which the calculation will be done.
-#'   Applies to the local efficiency calculation only.
+#'   Applies to the local efficiency calculation only. The default `NULL`
+#'   selects all vertices.
 #' @param directed Logical, whether to consider directed paths. Ignored
 #'   for undirected graphs.
 #' @param mode Specifies how to define the local neighborhood of a vertex in
@@ -107,7 +108,7 @@ global_efficiency <- function(
 #' @export
 local_efficiency <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   weights = NULL,
   directed = TRUE,
@@ -138,6 +139,10 @@ local_efficiency <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   local_efficiency_impl(
     graph = graph,

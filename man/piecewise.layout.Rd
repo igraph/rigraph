@@ -9,7 +9,8 @@ piecewise.layout(graph, layout = layout_with_kk, ...)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{layout}{A function object, the layout function to use.}
+\item{layout}{A function object, the layout function to use. The default
+\code{NULL} uses \code{layout_with_kk}.}
 
 \item{...}{Additional arguments to pass to the \code{layout} layout
 function.}

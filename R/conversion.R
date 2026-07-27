@@ -744,15 +744,19 @@ as_directed <- function(
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
-#'   this.
+#'   this. The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
 as_undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(edge.attr.comb)) {
+    edge.attr.comb <- igraph_opt("edge.attr.comb")
+  }
+
   mode <- igraph_match_arg(mode)
 
   # Function call

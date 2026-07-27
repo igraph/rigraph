@@ -1650,7 +1650,7 @@ diversity <- function(
 #'   interprets edge weights as connection strengths. The weights of parallel
 #'   edges are effectively added up.
 #' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
+#'   [arpack()] for details. The default `NULL` uses [arpack_defaults()].
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \describe{
@@ -1690,9 +1690,13 @@ hits_scores <- function(
   ...,
   scale = TRUE,
   weights = NULL,
-  options = arpack_defaults()
+  options = NULL
 ) {
   rlang::check_dots_empty()
+
+  if (is.null(options)) {
+    options <- arpack_defaults()
+  }
 
   hub_and_authority_scores_impl(
     graph = graph,

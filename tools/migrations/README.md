@@ -21,8 +21,14 @@ Rscript tools/generate-migrations.R
 
 Defaults in migrated (`new`) signatures must be **constant expressions**:
 literals, `NULL`/`TRUE`/`FALSE`/`NA*`/`Inf`/`NaN`,
-`c()`/`list()` of constants, a unary sign,
+`c()`/`list()` of constants,
+a typed empty vector (`integer()`, `numeric()`, ...),
+a unary sign,
 or the `deprecated()` sentinel.
+An empty-sequence default must be spelled as a typed empty vector,
+never as `c()`:
+`c()` evaluates to `NULL`,
+and `NULL` is reserved as the resolve-in-body sentinel.
 Anything else -- option lookups, `V(graph)`,
 references to other arguments, RNG draws --
 is evaluated lazily at an unpredictable time,

@@ -133,13 +133,14 @@ space_binary_slash <- function(text) {
 # ---- constant-default rule --------------------------------------------------
 #
 # Defaults in migrated (`new`) signatures must be *constant expressions*:
-# literals, NULL/TRUE/FALSE/NA*/Inf/NaN, `c()`/`list()` of constants, a unary
-# sign, or the `deprecated()` sentinel. Anything else -- option lookups,
-# `V(graph)`, cross-references to other arguments, RNG draws, `rep()`, ... --
-# is evaluated lazily at an unpredictable time, invites forcing hazards in the
-# recovery machinery, and hides the real default from the signature. There is
-# no escape hatch: express a complex default as `NULL` and resolve it in the
-# body after all arguments are available.
+# literals, NULL/TRUE/FALSE/NA*/Inf/NaN, `c()`/`list()` of constants, a typed
+# empty vector (`integer()`, `numeric()`, ...), a unary sign, or the
+# `deprecated()` sentinel. Anything else -- option lookups, `V(graph)`,
+# cross-references to other arguments, RNG draws, `rep()`, ... -- is evaluated
+# lazily at an unpredictable time, invites forcing hazards in the recovery
+# machinery, and hides the real default from the signature. There is no escape
+# hatch: express a complex default as `NULL` and resolve it in the body after
+# all arguments are available.
 
 is_constant_default <- function(expr) {
   if (is.null(expr)) {
@@ -169,6 +170,20 @@ is_constant_default <- function(expr) {
     if (fn %in% c("c", "list", "(")) {
       args <- as.list(expr)[-1]
       return(all(vapply(args, is_constant_default, logical(1))))
+    }
+    empty_ctors <- c(
+      "logical",
+      "integer",
+      "numeric",
+      "double",
+      "complex",
+      "character",
+      "raw"
+    )
+    if (fn %in% empty_ctors && length(expr) == 1L) {
+      # A typed empty vector is a literal: the canonical spelling of an
+      # empty-sequence default (`c()` would be NULL in disguise).
+      return(TRUE)
     }
     if (fn %in% c("+", "-") && length(expr) == 2L) {
       return(is_constant_default(expr[[2]]))

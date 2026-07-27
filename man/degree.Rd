@@ -19,7 +19,7 @@ degree(
 max_degree(
   graph,
   ...,
-  v = V(graph),
+  v = NULL,
   mode = c("all", "out", "in", "total"),
   loops = TRUE
 )

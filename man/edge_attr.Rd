@@ -5,7 +5,7 @@
 \alias{edge.attributes}
 \title{Query edge attributes of a graph}
 \usage{
-edge_attr(graph, name, index = E(graph))
+edge_attr(graph, name, index = NULL)
 }
 \arguments{
 \item{graph}{The graph}
@@ -14,7 +14,7 @@ edge_attr(graph, name, index = E(graph))
 all edge attributes are returned in a list.}
 
 \item{index}{An optional edge sequence to query edge attributes
-for a subset of edges.}
+for a subset of edges. The default \code{NULL} selects all edges.}
 }
 \value{
 The value of the edge attribute, or the list of all

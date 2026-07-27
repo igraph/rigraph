@@ -830,6 +830,7 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #' @param x An `igraphHRG`, a hierarchical random graph, as returned by
 #'   the [fit_hrg()] function.
 #' @param mode Which dendrogram plotting function to use. See details below.
+#'   The default `NULL` uses the `dend.plot.type` igraph option.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
 #' @return Returns whatever the return value was from the plotting function,
@@ -846,9 +847,12 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'
 plot_dendrogram.igraphHRG <- function(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...
 ) {
+  if (is.null(mode)) {
+    mode <- igraph_opt("dend.plot.type")
+  }
   if (mode == "auto") {
     have_ape <- requireNamespace("ape", quietly = TRUE)
     mode <- if (have_ape) "phylo" else "hclust"

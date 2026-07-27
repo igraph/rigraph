@@ -232,8 +232,10 @@ add.vertex.shape <- function(
 #' @param shape Character scalar, name of a vertex shape. If it is
 #'    `NULL` for `shapes()`, then the names of all defined
 #'    vertex shapes are returned.
-#' @param clip An R function object, the clipping function.
-#' @param plot An R function object, the plotting function.
+#' @param clip An R function object, the clipping function. The default
+#'   `NULL` uses `shape_noclip`.
+#' @param plot An R function object, the plotting function. The default
+#'   `NULL` uses `shape_noplot`.
 #' @param parameters Named list, additional plot/vertex/edge
 #'    parameters. The element named define the new parameters, and the
 #'    elements themselves define their default values.
@@ -374,8 +376,8 @@ shape_noplot <- function(coords, v = NULL, params) {
 add_shape <- function(
   shape,
   ...,
-  clip = shape_noclip,
-  plot = shape_noplot,
+  clip = NULL,
+  plot = NULL,
   parameters = list()
 ) {
   # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
@@ -387,11 +389,7 @@ add_shape <- function(
       recover_old = c("clip", "plot", "parameters"),
       match_names = c("clip", "plot", "parameters"),
       match_to = c("clip", "plot", "parameters"),
-      defaults = list(
-        clip = shape_noclip,
-        plot = shape_noplot,
-        parameters = list()
-      ),
+      defaults = list(clip = NULL, plot = NULL, parameters = list()),
       head_args = c("shape"),
       fn_name = "add_shape"
     )
@@ -403,6 +401,13 @@ add_shape <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(clip)) {
+    clip <- shape_noclip
+  }
+  if (is.null(plot)) {
+    plot <- shape_noplot
+  }
 
   if (!is.character(shape) || length(shape) != 1) {
     cli::cli_abort(c(

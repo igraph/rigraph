@@ -9,8 +9,8 @@ migrations <- list(
       nodes,
       types,
       ...,
-      type.dist.matrix = matrix(1, types, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist.matrix = NULL,
+      pref.matrix = NULL,
       loops = FALSE
     ) {},
     when = "3.0.0"
@@ -21,9 +21,9 @@ migrations <- list(
     new = function(
       n,
       edges = 1,
-      types = rep(0, n),
+      types = NULL,
       ...,
-      pref = matrix(1, nrow = length(types), ncol = length(types)),
+      pref = NULL,
       directed = TRUE,
       attr = TRUE
     ) {},
@@ -35,9 +35,9 @@ migrations <- list(
     new = function(
       n,
       edges = 1,
-      types = rep(0, n),
+      types = NULL,
       ...,
-      pref = rep(1, length(types)),
+      pref = NULL,
       directed = TRUE,
       attr = TRUE
     ) {},
@@ -96,8 +96,8 @@ migrations <- list(
       n,
       edges = 1,
       ...,
-      agebins = n / 7100,
-      pref = (1:(agebins + 1))^-3,
+      agebins = NULL,
+      pref = NULL,
       directed = TRUE
     ) {},
     when = "3.0.0"
@@ -183,9 +183,9 @@ migrations <- list(
       nodes,
       types,
       ...,
-      type.dist = rep(1, types),
+      type.dist = NULL,
       fixed.sizes = FALSE,
-      pref.matrix = matrix(1, types, types),
+      pref.matrix = NULL,
       directed = FALSE,
       loops = FALSE
     ) {},
@@ -198,8 +198,8 @@ migrations <- list(
       nodes,
       types,
       ...,
-      type.dist.matrix = matrix(1, types, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist.matrix = NULL,
+      pref.matrix = NULL,
       loops = FALSE
     ) {},
     when = "3.0.0"
@@ -210,9 +210,9 @@ migrations <- list(
     new = function(
       n,
       edges = 1,
-      types = rep(0, n),
+      types = NULL,
       ...,
-      pref = matrix(1, nrow = length(types), ncol = length(types)),
+      pref = NULL,
       directed = TRUE,
       attr = TRUE
     ) {},
@@ -224,9 +224,9 @@ migrations <- list(
     new = function(
       n,
       edges = 1,
-      types = rep(0, n),
+      types = NULL,
       ...,
-      pref = rep(1, length(types)),
+      pref = NULL,
       directed = TRUE,
       attr = TRUE
     ) {},
@@ -239,7 +239,7 @@ migrations <- list(
       old.graph,
       corr,
       ...,
-      p = edge_density(old.graph),
+      p = NULL,
       permutation = NULL
     ) {},
     when = "3.0.0"
@@ -375,8 +375,8 @@ migrations <- list(
       n,
       edges = 1,
       ...,
-      agebins = n / 7100,
-      pref = (1:(agebins + 1))^-3,
+      agebins = NULL,
+      pref = NULL,
       directed = TRUE
     ) {},
     when = "3.0.0"
@@ -466,9 +466,9 @@ migrations <- list(
       nodes,
       types,
       ...,
-      type.dist = rep(1, types),
+      type.dist = NULL,
       fixed.sizes = FALSE,
-      pref.matrix = matrix(1, types, types),
+      pref.matrix = NULL,
       directed = FALSE,
       loops = FALSE
     ) {},
@@ -509,8 +509,8 @@ migrations <- list(
       types,
       k = 1,
       ...,
-      type.dist = rep(1, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist = NULL,
+      pref.matrix = NULL,
       directed = FALSE
     ) {},
     when = "3.0.0"
@@ -530,8 +530,8 @@ migrations <- list(
       types,
       ...,
       edge.per.step = 1,
-      type.dist = rep(1, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist = NULL,
+      pref.matrix = NULL,
       directed = FALSE
     ) {},
     when = "3.0.0"
@@ -571,8 +571,8 @@ migrations <- list(
       types,
       k = 1,
       ...,
-      type.dist = rep(1, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist = NULL,
+      pref.matrix = NULL,
       directed = FALSE
     ) {},
     when = "3.0.0"
@@ -592,8 +592,8 @@ migrations <- list(
       types,
       ...,
       edge.per.step = 1,
-      type.dist = rep(1, types),
-      pref.matrix = matrix(1, types, types),
+      type.dist = NULL,
+      pref.matrix = NULL,
       directed = FALSE
     ) {},
     when = "3.0.0"
