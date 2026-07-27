@@ -20,8 +20,13 @@
 ###################################################################
 
 #' @rdname sir
+#' @inheritParams rlang::args_dots_empty
 #' @export
-time_bins <- function(x, middle = TRUE) {
+time_bins <- function(
+  x,
+  ...,
+  middle = TRUE
+) {
   UseMethod("time_bins")
 }
 
@@ -29,11 +34,33 @@ time_bins <- function(x, middle = TRUE) {
 #' @rdname sir
 #' @export
 #' @importFrom stats IQR
-time_bins.sir <- function(x, middle = TRUE) {
+time_bins.sir <- function(x, ..., middle = TRUE) {
+  # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(middle = middle),
+      recover_new = c("middle"),
+      recover_old = c("middle"),
+      match_names = c("middle"),
+      match_to = c("middle"),
+      defaults = list(middle = TRUE),
+      head_args = c("x"),
+      fn_name = "time_bins"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   sir <- x
 
   big.time <- unlist(sapply(sir, "[[", "times"))
-  medlen <- median(sapply(lapply(sir, "[[", "times"), length))
+  medlen <- median(lengths(lapply(sir, "[[", "times")))
   ## Adhoc use of Freedman-Diaconis binwidth; rescale time accordingly.
   w <- 2 * IQR(big.time) / (medlen^(1 / 3))
   minbt <- min(big.time)
@@ -105,7 +132,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #'   function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
 #'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
-#' @param median Logical scalar, whether to plot the (binned) median.
+#' @param median Logical, whether to plot the (binned) median.
 #' @param quantiles A vector of (binned) quantiles to plot.
 #' @param color Color of the individual simulation curves.
 #' @param median_color Color of the median curve.
@@ -175,7 +202,6 @@ plot.sir <- function(
   }
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
-  ns <- length(sir)
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
   ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
 

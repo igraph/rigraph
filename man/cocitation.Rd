@@ -12,7 +12,7 @@ bibcoupling(graph, v = V(graph))
 \arguments{
 \item{graph}{The graph object to analyze}
 
-\item{v}{Vertex sequence or numeric vector, the vertex ids for which the
+\item{v}{Vertex sequence or numeric vector, the vertex IDs for which the
 cocitation or bibliographic coupling values we want to calculate. The
 default is all vertices.}
 }
@@ -50,8 +50,8 @@ bibcoupling(g)
 
 }
 \seealso{
-Other cocitation: 
-\code{\link{similarity}()}
+Other cocitation:
+\code{\link[=similarity]{similarity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

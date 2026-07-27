@@ -10,6 +10,7 @@
 betweenness(
   graph,
   v = V(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -19,6 +20,7 @@ betweenness(
 edge_betweenness(
   graph,
   e = E(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
@@ -29,6 +31,8 @@ edge_betweenness(
 
 \item{v}{The vertices for which the vertex betweenness will be calculated.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical, whether directed paths should be considered while
 determining the shortest paths.}
 
@@ -37,7 +41,7 @@ betweenness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to normalize the betweenness
+\item{normalized}{Logical, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
 or unordered vertex pairs in directed and undirected graphs, respectively.
 In an undirected graph,
@@ -119,19 +123,19 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 \seealso{
 \code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

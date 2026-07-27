@@ -10,7 +10,7 @@
 #' @export
 adjacent.triangles <- function(graph, vids = V(graph)) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "adjacent.triangles()",
     "count_triangles()"
@@ -56,9 +56,9 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a
-#'   vector of numeric ids, or a character vector of symbolic vertex names for
+#'   vector of numeric IDs, or a character vector of symbolic vertex names for
 #'   named graphs.
-#' @return For `triangles()` a numeric vector of vertex ids, the first three
+#' @return For `triangles()` a numeric vector of vertex IDs, the first three
 #'   vertices belong to the first triangle found, etc.
 #'
 #'   For `count_triangles()` a numeric vector, the number of triangles for all

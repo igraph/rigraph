@@ -9,6 +9,7 @@ sample_fitness_pl(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
@@ -29,12 +30,14 @@ undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{multiple}{Logical scalar, whether to allow multiple edges in the
+\item{loops}{Logical, whether to allow loop edges in the graph.}
+
+\item{multiple}{Logical, whether to allow multiple edges in the
 graph.}
 
-\item{finite.size.correction}{Logical scalar, whether to use the proposed
+\item{finite.size.correction}{Logical, whether to use the proposed
 finite size correction of Cho et al., see references below.}
 }
 \value{
@@ -90,33 +93,33 @@ scale-free networks under the Achlioptas process. \emph{Phys Rev Lett}
 103:135702, 2009.
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

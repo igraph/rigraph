@@ -12,6 +12,7 @@
 sample_last_cit(
   n,
   edges = 1,
+  ...,
   agebins = n/7100,
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
@@ -20,6 +21,7 @@ sample_last_cit(
 last_cit(
   n,
   edges = 1,
+  ...,
   agebins = n/7100,
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
@@ -29,6 +31,7 @@ sample_cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
@@ -38,6 +41,7 @@ cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
@@ -47,6 +51,7 @@ sample_cit_cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
@@ -56,6 +61,7 @@ cit_cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
@@ -66,18 +72,20 @@ cit_cit_types(
 
 \item{edges}{Number of edges per step.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{agebins}{Number of aging bins.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
 probabilities for the different vertex types.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
+\item{directed}{Logical, whether to generate directed networks.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
 Types are numbered from zero.}
 
-\item{attr}{Logical scalar, whether to add the vertex types to the generated
+\item{attr}{Logical, whether to add the vertex types to the generated
 graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \value{
@@ -101,33 +109,33 @@ vertex only.
 }
 
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

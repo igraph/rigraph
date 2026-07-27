@@ -46,8 +46,8 @@ A. Berger, A note on the characterization of digraphic sequences, \emph{Discrete
 G. Cairns and S. Mendan, Degree Sequence for Graphs with Loops (2013).
 }
 \seealso{
-Other graphical degree sequences: 
-\code{\link{is_graphical}()}
+Other graphical degree sequences:
+\code{\link[=is_graphical]{is_graphical()}}
 }
 \author{
 Tamás Nepusz \email{ntamas@gmail.com} and Szabolcs Horvát \email{szhorvat@gmail.com}

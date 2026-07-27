@@ -4,7 +4,7 @@
 \alias{fit_hrg}
 \title{Fit a hierarchical random graph model}
 \usage{
-fit_hrg(graph, hrg = NULL, start = FALSE, steps = 0)
+fit_hrg(graph, hrg = NULL, ..., start = FALSE, steps = 0)
 }
 \arguments{
 \item{graph}{The graph to fit the model to. Edge directions are ignored in
@@ -13,6 +13,8 @@ directed graphs.}
 \item{hrg}{A hierarchical random graph model, in the form of an
 \code{igraphHRG} object. \code{fit_hrg()} allows this to be \code{NULL}, in
 which case a random starting point is used for the fitting.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
@@ -89,14 +91,14 @@ Notes in Computer Science} 4503, 1--13. Springer-Verlag, Berlin Heidelberg
 (2007).
 }
 \seealso{
-Other hierarchical random graph functions: 
-\code{\link{consensus_tree}()},
-\code{\link{hrg}()},
+Other hierarchical random graph functions:
+\code{\link[=consensus_tree]{consensus_tree()}},
+\code{\link[=hrg]{hrg()}},
 \code{\link{hrg-methods}},
-\code{\link{hrg_tree}()},
-\code{\link{predict_edges}()},
-\code{\link{print.igraphHRG}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{sample_hrg}()}
+\code{\link[=hrg_tree]{hrg_tree()}},
+\code{\link[=predict_edges]{predict_edges()}},
+\code{\link[=print.igraphHRG]{print.igraphHRG()}},
+\code{\link[=print.igraphHRGConsensus]{print.igraphHRGConsensus()}},
+\code{\link[=sample_hrg]{sample_hrg()}}
 }
 \concept{hierarchical random graph functions}

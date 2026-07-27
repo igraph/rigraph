@@ -19,8 +19,8 @@ all metadata about that edge and its incident vertices are included
 in that row. The names of the columns that contain the metadata
 of the incident vertices are prefixed with \code{from_} and \code{to_}.
 The first two columns are always named \code{from} and \code{to} and
-they contain the numeric ids of the incident vertices. The rows are
-listed in the order of numeric vertex ids.
+they contain the numeric IDs of the incident vertices. The rows are
+listed in the order of numeric vertex IDs.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
@@ -35,16 +35,16 @@ g <- make_(
 as_long_data_frame(g)
 }
 \seealso{
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adj_list]{as_adj_list()}},
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}},
+\code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_graphnel]{as_graphnel()}},
+\code{\link[=graph_from_adj_list]{graph_from_adj_list()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \concept{conversion}

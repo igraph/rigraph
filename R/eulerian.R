@@ -46,10 +46,10 @@
 #'   entries:
 #'   \describe{
 #'     \item{epath}{
-#'       A vector containing the edge ids along the Eulerian path or cycle.
+#'       A vector containing the edge IDs along the Eulerian path or cycle.
 #'     }
 #'     \item{vpath}{
-#'       A vector containing the vertex ids along the Eulerian path or cycle.
+#'       A vector containing the vertex IDs along the Eulerian path or cycle.
 #'     }
 #'   }
 #'

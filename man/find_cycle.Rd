@@ -4,10 +4,12 @@
 \alias{find_cycle}
 \title{Finds a cycle in a graph, if there is one}
 \usage{
-find_cycle(graph, mode = c("out", "in", "all", "total"))
+find_cycle(graph, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant specifying how to handle directed graphs.
 \code{out} follows edge directions, \verb{in} follows edges in the reverse direction,
@@ -16,7 +18,7 @@ and \code{all} ignores edge directions. Ignored in undirected graphs.}
 \value{
 A list of integer vectors, each integer vector is a path from
 the source vertex to one of the target vertices. A path is given by its
-vertex ids.
+vertex IDs.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -42,14 +44,14 @@ find_cycle(sample_tree(5))
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{has_eulerian_path}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{simple_cycles}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=has_eulerian_path]{has_eulerian_path()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=simple_cycles]{simple_cycles()}}
 }
 \concept{cycles}
 \keyword{graphs}

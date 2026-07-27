@@ -53,11 +53,12 @@
 #' @param gamma Positive scalar. The rate of recovery of an infected
 #'   individual. Formally, this is the rate parameter of an exponential
 #'   distribution.
+#' @inheritParams rlang::args_dots_empty
 #' @param no.sim Integer scalar, the number simulation runs to perform.
 #' @param x A `sir` object, returned by the `sir()` function.
-#' @param middle Logical scalar, whether to return the middle of the time bins,
+#' @param middle Logical, whether to return the middle of the time bins,
 #'   or the boundaries.
-#' @param na.rm Logical scalar, whether to ignore `NA` values.  `sir`
+#' @param na.rm Logical, whether to ignore `NA` values.  `sir`
 #'   objects do not contain any `NA` values currently, so this argument is
 #'   effectively ignored.
 #' @param comp Character scalar. The component to calculate the quantile of.
@@ -108,7 +109,35 @@
 #' plot(sm)
 #' @family processes
 #' @export
-sir <- function(graph, beta, gamma, no.sim = 100) {
+sir <- function(
+  graph,
+  beta,
+  gamma,
+  ...,
+  no.sim = 100
+) {
+  # BEGIN GENERATED ARG_HANDLE: sir, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(no.sim = no.sim),
+      recover_new = c("no.sim"),
+      recover_old = c("no.sim"),
+      match_names = c("no.sim"),
+      match_to = c("no.sim"),
+      defaults = list(no.sim = 100),
+      head_args = c("graph", "beta", "gamma"),
+      fn_name = "sir"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   sir_impl(
     graph = graph,
     beta = beta,

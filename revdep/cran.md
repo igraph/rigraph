@@ -1,36 +1,94 @@
 ## revdepcheck results
 
-We checked 2210 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2289 reverse dependencies (2287 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 6 new problems
- * We failed to check 3 packages
+ * We saw 22 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* Cascade
-  checking whether package ‘Cascade’ can be installed ... WARNING
+* Boptbd
+  checking examples ... ERROR
 
-* DiagrammeR
+* c3net
+  checking examples ... ERROR
+
+* cfid
+  checking tests ... ERROR
+
+* comato
+  checking examples ... ERROR
+
+* cranly
+  checking re-building of vignette outputs ... ERROR
+
+* dci
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* degreenet
+  checking examples ... ERROR
+
+* ECoL
   checking examples ... ERROR
   checking tests ... ERROR
 
-* jewel
+* ggm
+  checking examples ... ERROR
+
+* ggraph
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* glyrepr
+  checking tests ... ERROR
+
+* GoodFitSBM
   checking examples ... ERROR
 
 * manynet
   checking tests ... ERROR
 
-* rSpectral
+* migraph
   checking tests ... ERROR
 
-* sfnetworks
+* nat
+  checking examples ... ERROR
   checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
+* qgraph
+  checking examples ... ERROR
+
+* R6causal
+  checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* tidygraph
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* vkR
+  checking dependencies in R code ... WARNING
 
 ### Failed to check
 
-* caugi       (NA)
-* ClustAssess (NA)
-* streamDAG   (NA)
+* blavaan    (NA)
+* caugi      (NA)
+* deepSTRAPP (NA)
+* ggpicrust2 (NA)
+* scAnnotate (NA)
+* spopt      (NA)
+* streamDAG  (NA)

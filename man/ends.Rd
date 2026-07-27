@@ -5,18 +5,20 @@
 \alias{get.edges}
 \title{Incident vertices of some graph edges}
 \usage{
-ends(graph, es, names = TRUE)
+ends(graph, es, ..., names = TRUE)
 }
 \arguments{
 \item{graph}{The input graph}
 
 \item{es}{The sequence of edges to query}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{names}{Whether to return vertex names or
-numeric vertex ids. By default vertex names are used.}
+numeric vertex IDs. By default vertex names are used.}
 }
 \value{
-A two column matrix of vertex names or vertex ids.
+A two column matrix of vertex names or vertex IDs.
 }
 \description{
 Incident vertices of some graph edges
@@ -30,19 +32,19 @@ g <- make_ring(5)
 ends(g, E(g))
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{are_adjacent}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{incident_edges}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=adjacent_vertices]{adjacent_vertices()}},
+\code{\link[=are_adjacent]{are_adjacent()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident]{incident()}},
+\code{\link[=incident_edges]{incident_edges()}},
+\code{\link[=is_directed]{is_directed()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}

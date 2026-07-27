@@ -8,6 +8,7 @@
 closeness(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -18,6 +19,8 @@ closeness(
 \item{graph}{The graph to analyze.}
 
 \item{vids}{The vertices for which closeness will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths
@@ -30,7 +33,7 @@ closeness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used for calculating weighted shortest
 paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to calculate the normalized
+\item{normalized}{Logical, whether to calculate the normalized
 closeness, i.e. the inverse average distance to all reachable vertices.
 The non-normalized closeness is the inverse of the sum of distances to
 all reachable vertices.}
@@ -85,19 +88,19 @@ Freeman, L.C. (1979). Centrality in Social Networks I:
 Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 }
 \seealso{
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

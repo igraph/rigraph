@@ -11,7 +11,7 @@ adjacent.triangles(graph, vids = V(graph))
 ignored.}
 
 \item{vids}{The vertices to query, all of them by default. This might be a
-vector of numeric ids, or a character vector of symbolic vertex names for
+vector of numeric IDs, or a character vector of symbolic vertex names for
 named graphs.}
 }
 \description{

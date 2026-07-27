@@ -55,17 +55,17 @@ test_that("st_cuts() works", {
   expect_equal(
     unvs(all_cuts_star_v7$cuts),
     list(
-      c(1, 2),
-      c(1, 7),
-      c(2, 3, 4, 5, 6),
-      c(2, 3, 4, 5, 10),
-      c(2, 3, 4, 6, 9),
-      c(2, 3, 4, 9, 10),
-      c(2, 3, 5, 6, 8),
-      c(2, 3, 5, 8, 10),
-      c(2, 3, 6, 8, 9),
+      1:2,
+      c(1, 4),
+      c(2, 3, 5, 6, 7),
+      c(2, 3, 5, 6, 10),
+      c(2, 3, 5, 7, 9),
+      c(2, 3, 5, 9, 10),
+      c(2, 3, 6, 7, 8),
+      c(2, 3, 6, 8, 10),
+      c(2, 3, 7, 8, 9),
       c(2, 3, 8, 9, 10),
-      c(3, 7)
+      3:4
     )
   )
   expect_equal(
@@ -73,7 +73,7 @@ test_that("st_cuts() works", {
     list(
       1,
       c(1, 3),
-      c(1, 2),
+      1:2,
       c(1, 2, 7),
       c(1, 2, 6),
       c(1, 2, 6, 7),
@@ -88,7 +88,7 @@ test_that("st_cuts() works", {
   g_star_v9 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3:4:5 -+ b)
   all_cuts_star_v9 <- st_min_cuts(g_star_v9, source = "s", target = "t")
   expect_equal(all_cuts_star_v9$value, 2)
-  expect_equal(unvs(all_cuts_star_v9$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
+  expect_equal(unvs(all_cuts_star_v9$cuts), list(1:2, c(1, 4), 3:4))
   expect_equal(
     unvs(all_cuts_star_v9$partition1s),
     list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5))
@@ -271,7 +271,7 @@ test_that("dominator_tree works -- legacy", {
     as_edgelist(dtree$domtree),
     structure(
       c("R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R", "A", "B", "C", "D", "E", "F", "G", "L", "H", "I", "J", "K"),
-      .Dim = c(12L, 2L)
+      dim = c(12L, 2L)
     )
   )
 })
@@ -280,7 +280,7 @@ test_that("min_st_separators works", {
   g_zachary <- make_graph("Zachary")
   msts <- min_st_separators(g_zachary)
   is <- sapply(msts, is_separator, graph = g_zachary)
-  expect_equal(unique(is), TRUE)
+  expect_true(unique(is))
 
   ## TODO: check that it is minimal
 })
@@ -359,4 +359,101 @@ test_that("adhesion works", {
 
   expect_equal(adhesion(camp), 2)
   expect_equal(cohesion(camp), 2)
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("min_cut() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
+  cap <- c(3, 1, 2, 10, 1, 3, 2)
+
+  # The capacity argument is used directly, no capacity edge attribute needed.
+  res <- min_cut(g, source = 1, target = 4, capacity = cap, value.only = FALSE)
+  expect_equal(res$value, 2)
+  expect_equal(as.vector(res$cut), c(2, 5))
+
+  lifecycle::expect_deprecated(res2 <- min_cut(g, 1, 4, cap, FALSE))
+  expect_equal(
+    res2,
+    min_cut(g, source = 1, target = 4, capacity = cap, value.only = FALSE)
+  )
+})
+
+test_that("max_flow() tail arguments and legacy positional recovery", {
+  g <- make_graph(c(1, 2, 2, 3), directed = TRUE)
+
+  # The first explicit capacity is the bottleneck of the single path.
+  res <- max_flow(g, source = 1, target = 3, capacity = c(2, 5))
+  expect_equal(res$value, 2)
+  expect_equal(as.vector(res$flow), c(2, 2))
+
+  lifecycle::expect_deprecated(res2 <- max_flow(g, 1, 3, c(2, 5)))
+  expect_equal(res2, max_flow(g, source = 1, target = 3, capacity = c(2, 5)))
+})
+
+test_that("st_min_cuts() tail arguments and legacy positional recovery", {
+  g <- graph_from_literal(a -+ b -+ c)
+
+  # With these capacities only the cheaper second edge is a minimum cut.
+  res <- st_min_cuts(g, source = "a", target = "c", capacity = c(2, 1))
+  expect_equal(res$value, 1)
+  expect_equal(unvs(res$cuts), list(2))
+
+  lifecycle::expect_deprecated(res2 <- st_min_cuts(g, "a", "c", c(2, 1)))
+  expect_equal(
+    res2,
+    st_min_cuts(g, source = "a", target = "c", capacity = c(2, 1))
+  )
+})
+
+test_that("vertex_connectivity() tail arguments and legacy positional recovery", {
+  g <- make_ring(5)
+
+  # Disabling the quick degree checks must not change the result.
+  expect_equal(vertex_connectivity(g, checks = FALSE), 2)
+
+  lifecycle::expect_deprecated(
+    res <- vertex_connectivity(g, NULL, NULL, FALSE)
+  )
+  expect_identical(res, vertex_connectivity(g, checks = FALSE))
+})
+
+test_that("edge_connectivity() tail arguments and legacy positional recovery", {
+  g <- make_ring(5)
+
+  # Disabling the quick degree checks must not change the result.
+  expect_equal(edge_connectivity(g, checks = FALSE), 2)
+
+  lifecycle::expect_deprecated(
+    res <- edge_connectivity(g, NULL, NULL, FALSE)
+  )
+  expect_identical(res, edge_connectivity(g, checks = FALSE))
+})
+
+test_that("adhesion() tail arguments and legacy positional recovery", {
+  g <- make_full_graph(5)
+
+  # Disabling the quick degree checks must not change the result.
+  expect_equal(adhesion(g, checks = FALSE), 4)
+
+  lifecycle::expect_deprecated(res <- adhesion(g, FALSE))
+  expect_identical(res, adhesion(g, checks = FALSE))
+})
+
+test_that("dominator_tree() tail arguments and legacy positional recovery", {
+  # A directed path 1 -> 2 -> 3 -> 4.
+  g <- make_ring(4, directed = TRUE, circular = FALSE)
+
+  # mode = "in" reverses all edge directions, so vertex 4 dominates the path.
+  res <- dominator_tree(g, root = 4, mode = "in")
+  expect_equal(res$dom, c(2, 3, 4, -1))
+  expect_length(res$leftout, 0)
+
+  # The default mode = "out" follows the original directions from vertex 1.
+  expect_equal(dominator_tree(g, root = 1)$dom, c(-1, 1, 2, 3))
+
+  lifecycle::expect_deprecated(res2 <- dominator_tree(g, 4, "in"))
+  ref <- dominator_tree(g, root = 4, mode = "in")
+  expect_identical(res2$dom, ref$dom)
+  expect_identical_graphs(res2$domtree, ref$domtree)
 })

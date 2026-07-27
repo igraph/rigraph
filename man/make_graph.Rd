@@ -31,7 +31,7 @@ undirected_graph(...)
 \item{edges}{A vector defining the edges, the first edge points
 from the first element to the second, the second edge from the third
 to the fourth, etc. For a numeric vector, these are interpreted
-as internal vertex ids. For character vectors, they are interpreted
+as internal vertex IDs. For character vectors, they are interpreted
 as vertex names.
 
 Alternatively, this can be a character scalar, the name of a
@@ -51,9 +51,9 @@ Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 
 \item{n}{The number of vertices in the graph. This argument is
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
-is also ignored if there is a bigger vertex id in \code{edges}. This
+is also ignored if there is a bigger vertex ID in \code{edges}. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest id is not an isolate.}
+vertex with the largest ID is not an isolate.}
 
 \item{isolates}{Character vector, names of isolate vertices,
 for symbolic edge lists. It is ignored for numeric edge lists.}
@@ -217,7 +217,7 @@ Journal of Anthropological Research 33, 452-473 (1977).
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}
 }
 
 \examples{
@@ -242,22 +242,22 @@ graph <- make_graph(
 )
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{deterministic constructors}

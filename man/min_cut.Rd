@@ -8,6 +8,7 @@ min_cut(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   capacity = NULL,
   value.only = TRUE
 )
@@ -15,14 +16,16 @@ min_cut(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
-\item{value.only}{Logical scalar, if \code{TRUE} only the minimum cut value
+\item{value.only}{Logical, if \code{TRUE} only the minimum cut value
 is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
@@ -92,16 +95,16 @@ M. Stoer and F. Wagner: A simple min-cut algorithm,
 \emph{Journal of the ACM}, 44 585-591, 1997.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}

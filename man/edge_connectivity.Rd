@@ -6,22 +6,24 @@
 \alias{adhesion}
 \title{Edge connectivity}
 \usage{
-edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+edge_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 edge_disjoint_paths(graph, source = NULL, target = NULL)
 
-adhesion(graph, checks = TRUE)
+adhesion(graph, ..., checks = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex, for \code{edge_connectivity()} it
+\item{source}{The ID of the source vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{edge_connectivity()} it
+\item{target}{The ID of the target vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{checks}{Logical constant. Whether to check that the graph is connected
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the edge connectivity is also one. It is a good idea to
@@ -82,7 +84,7 @@ included only for having more descriptive function names.
 }
 
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity}{\code{st_edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_disjoint_paths}{\code{edge_disjoint_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_edge_connectivity}{\code{st_edge_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_edge_disjoint_paths}{\code{edge_disjoint_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
 }
 
 \examples{
@@ -105,17 +107,17 @@ social networks: node connectivity and conditional density,
 Sociological Methodology, vol. 31, 2001, pp. 305–59.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

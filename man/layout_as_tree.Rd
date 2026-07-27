@@ -7,6 +7,7 @@
 \usage{
 layout_as_tree(
   graph,
+  ...,
   root = numeric(),
   circular = FALSE,
   rootlevel = numeric(),
@@ -19,15 +20,17 @@ as_tree(...)
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Passed to \code{layout_as_tree()}.}
+
 \item{root}{The index of the root vertex or root vertices.  If this is a
-non-empty vector then the supplied vertex ids are used as the roots of the
+non-empty vector then the supplied vertex IDs are used as the roots of the
 trees (or a single tree if the graph is connected).  If it is an empty
 vector, then the root vertices are automatically calculated based on
 topological sorting, performed with the opposite mode than the \code{mode}
 argument. After the vertices have been sorted, one is selected from each
 component.}
 
-\item{circular}{Logical scalar, whether to plot the tree in a circular
+\item{circular}{Logical, whether to plot the tree in a circular
 fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
 (or top-down, see the \code{flip.y} argument.}
 
@@ -43,10 +46,8 @@ edges are used (this was the behavior in igraph 0.5 and before). This
 parameter also influences how the root vertices are calculated, if they are
 not given. See the \code{roots} parameter.}
 
-\item{flip.y}{Logical scalar, whether to flip the \sQuote{y} coordinates.
+\item{flip.y}{Logical, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
-
-\item{...}{Passed to \code{layout_as_tree()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -86,28 +87,28 @@ Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 \emph{IEEE Trans. on Softw. Eng.}, SE-7(2):223--228.
 }
 \seealso{
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

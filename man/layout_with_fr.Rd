@@ -7,6 +7,7 @@
 \usage{
 layout_with_fr(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
@@ -30,6 +31,8 @@ with_fr(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
+
+\item{...}{Passed to \code{layout_with_fr()}.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -56,9 +59,10 @@ attraction along the edges will be multiplied by the given edge weights.
 This places vertices connected with a highly weighted edge closer to
 each other. Weights must be positive.}
 
-\item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
-lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-of the vector must match the number of vertices in the graph.}
+\item{minx}{Numeric vector that gives lower boundaries
+for the \sQuote{x} coordinates of the vertices.
+The length of the vector must match the number of vertices in the graph.
+Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
@@ -79,12 +83,10 @@ arguments are not supported from igraph version 0.8.0 and are ignored
 (with a warning).}
 
 \item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
-
-\item{...}{Passed to \code{layout_with_fr()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the ids of the vertex ids.
+vertex, according to the IDs of the vertex IDs.
 }
 \description{
 Place vertices on the plane using the force-directed layout algorithm by
@@ -130,28 +132,28 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 \code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for
 other layout algorithms.
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_grid}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_grid]{layout_on_grid()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

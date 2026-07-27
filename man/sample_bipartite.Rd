@@ -31,7 +31,7 @@ be given for \eqn{G(n,m)} graphs.}
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed
@@ -64,40 +64,40 @@ sample_bipartite(10, 5, p = 0)
 sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
-sample_bipartite(10, 5, p = .1)
+sample_bipartite(10, 5, p = 0.1)
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

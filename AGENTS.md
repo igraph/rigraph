@@ -78,11 +78,13 @@ pak::pak(dependencies = "Config/Needs/build")
 - Document all arguments and return values
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag: `#' @cdocs igraph_function_name`
+- Write "ID"/"IDs" (not "id"/"ids") when referring to vertex/edge IDs in documentation *prose*. Lowercase stays only where the token is code: argument names, runnable `@examples`, and spans in `` `...` `` or `\code{}`. Run `Rscript tools/check-id-casing.R` to find violations in roxygen prose.
 - Always run `devtools::document()` after updating documentation
 
 ### Naming Conventions
 
 - Use `max` for maximal (graph theory term: a vertex is maximal if no other vertex dominates it) and `largest` for maximum (the biggest value in a set)
+- Use `make_xxx()` for functions creating graphs in a deterministic way, and `sample_xxx()` for functions sampling graphs from some ensemble
 
 ### New functions
 

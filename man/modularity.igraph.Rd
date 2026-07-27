@@ -11,6 +11,7 @@
 modularity_matrix(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
@@ -22,7 +23,7 @@ modularity_matrix(
 \item{membership}{Numeric vector, one value for each vertex, the membership
 vector of the community structure.}
 
-\item{weights}{If not \code{NULL} then a numeric vector giving edge weights.}
+\item{weights}{Numeric vector giving edge weights. Default: \code{NULL}.}
 
 \item{resolution}{The resolution parameter. Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
@@ -107,26 +108,26 @@ structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 \code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for
 various community detection methods.
 
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_infomap]{cluster_infomap()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=split_join_distance]{split_join_distance()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

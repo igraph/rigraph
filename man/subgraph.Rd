@@ -11,16 +11,19 @@ subgraph(graph, vids)
 induced_subgraph(
   graph,
   vids,
+  ...,
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 )
 
-subgraph_from_edges(graph, eids, delete.vertices = TRUE)
+subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
 }
 \arguments{
 \item{graph}{The original graph.}
 
 \item{vids}{Numeric vector, the vertices of the original graph which will
 form the subgraph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{impl}{Character scalar, to choose between two implementation of the
 subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
@@ -31,9 +34,9 @@ scratch. \sQuote{\code{auto}} chooses between the two implementations
 automatically, using heuristics based on the size of the original and the
 result graph.}
 
-\item{eids}{The edge ids of the edges that will be kept in the result graph.}
+\item{eids}{The edge IDs of the edges that will be kept in the result graph.}
 
-\item{delete.vertices}{Logical scalar, whether to remove vertices that do
+\item{delete.vertices}{Logical, whether to remove vertices that do
 not have any adjacent edges in \code{eids}.}
 }
 \value{
@@ -69,31 +72,31 @@ g3 <- subgraph_from_edges(g, 1:5)
 
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

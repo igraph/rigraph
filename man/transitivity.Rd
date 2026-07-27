@@ -8,6 +8,7 @@ transitivity(
   graph,
   type = c("undirected", "global", "globalundirected", "localundirected", "local",
     "average", "localaverage", "localaverageundirected", "barrat", "weighted"),
+  ...,
   vids = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
@@ -47,7 +48,9 @@ The same as \code{barrat}.
 }
 }}
 
-\item{vids}{The vertex ids for the local transitivity will be calculated.
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{vids}{The vertex IDs for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is
 \code{NULL}, in this case all vertices are considered. It is slightly faster
 to supply \code{NULL} here than \code{V(graph)}.}
@@ -103,7 +106,7 @@ multiple and/or loop edges. If you want to calculate it for a directed
 graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_avglocal_undirected}{\code{transitivity_avglocal_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_barrat}{\code{transitivity_barrat()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_local_undirected}{\code{transitivity_local_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_transitivity_undirected}{\code{transitivity_undirected()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
@@ -138,31 +141,31 @@ Vespignani: The architecture of complex weighted networks, Proc. Natl. Acad.
 Sci. USA 101, 3747 (2004)
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -17,11 +17,11 @@ st_cuts(graph, source, target)
 A list with entries:
 \describe{
 \item{cuts}{
-A list of numeric vectors containing edge ids.
+A list of numeric vectors containing edge IDs.
 Each vector is an \eqn{(s,t)}-cut.
 }
 \item{partition1s}{
-A list of numeric vectors containing vertex ids, they correspond to the edge cuts.
+A list of numeric vectors containing vertex IDs, they correspond to the edge cuts.
 Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
 the vertex set \eqn{X} and its complementer \eqn{V-X},
 generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
@@ -59,17 +59,17 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

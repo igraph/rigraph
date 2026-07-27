@@ -71,14 +71,14 @@ simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{find_cycle}()},
-\code{\link{girth}()},
-\code{\link{has_eulerian_path}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=find_cycle]{find_cycle()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=has_eulerian_path]{has_eulerian_path()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}}
 }
 \concept{cycles}
 \keyword{graphs}

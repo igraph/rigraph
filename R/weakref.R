@@ -32,7 +32,3 @@ weak_ref_key <- function(ref) {
 weak_ref_value <- function(ref) {
   .Call(Rx_igraph_weak_ref_value, ref) # R_WeakRefValue(); internal R API, no igraph API, no _impl
 }
-
-weak_ref_run_finalizer <- function(ref) {
-  .Call(Rx_igraph_weak_ref_run_finalizer, ref) # R_RunWeakRefFinalizer(); internal R API, no igraph API, no _impl
-}

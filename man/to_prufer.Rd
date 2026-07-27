@@ -37,11 +37,11 @@ to_prufer(g)
 \code{\link[=make_from_prufer]{make_from_prufer()}} to construct a graph from its
 Prüfer sequence
 
-Other trees: 
-\code{\link{is_forest}()},
-\code{\link{is_tree}()},
-\code{\link{make_from_prufer}()},
-\code{\link{sample_spanning_tree}()}
+Other trees:
+\code{\link[=is_forest]{is_forest()}},
+\code{\link[=is_tree]{is_tree()}},
+\code{\link[=make_from_prufer]{make_from_prufer()}},
+\code{\link[=sample_spanning_tree]{sample_spanning_tree()}}
 }
 \concept{trees}
 \keyword{graphs}

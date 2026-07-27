@@ -23,7 +23,7 @@ lastcit.game(
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
 probabilities for the different vertex types.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
+\item{directed}{Logical, whether to generate directed networks.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

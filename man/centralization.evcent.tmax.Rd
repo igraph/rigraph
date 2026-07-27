@@ -18,7 +18,7 @@ centralization.evcent.tmax(
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{logical scalar, whether to consider edge directions
+\item{directed}{Logical, whether to consider edge directions
 during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing

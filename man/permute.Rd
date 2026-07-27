@@ -10,14 +10,14 @@ permute(graph, permutation)
 \item{graph}{The input graph, it can directed or undirected.}
 
 \item{permutation}{A numeric vector giving the permutation to apply. The
-first element is the new id of vertex 1, etc. Every number between one and
+first element is the new ID of vertex 1, etc. Every number between one and
 \code{vcount(graph)} must appear exactly once.}
 }
 \value{
 A new graph object.
 }
 \description{
-Create a new graph, by permuting vertex ids.
+Create a new graph, by permuting vertex IDs.
 }
 \details{
 This function creates a new graph from the input graph by permuting its
@@ -52,31 +52,31 @@ all(sort(E(g2)$weight) == sort(E(g)$weight))
 \seealso{
 \code{\link[=canonical_permutation]{canonical_permutation()}}
 
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

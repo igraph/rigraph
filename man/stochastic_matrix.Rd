@@ -6,6 +6,7 @@
 \usage{
 stochastic_matrix(
   graph,
+  ...,
   column.wise = FALSE,
   sparse = igraph_opt("sparsematrices")
 )
@@ -13,10 +14,12 @@ stochastic_matrix(
 \arguments{
 \item{graph}{The input graph. Must be of class \code{igraph}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{column.wise}{If \code{FALSE}, then the rows of the stochastic matrix
 sum up to one; otherwise it is the columns.}
 
-\item{sparse}{Logical scalar, whether to return a sparse matrix. The
+\item{sparse}{Logical, whether to return a sparse matrix. The
 \code{Matrix} package is needed for sparse matrices.}
 }
 \value{

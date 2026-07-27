@@ -15,7 +15,7 @@ minimum.spanning.tree <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
+  lifecycle::deprecate_warn("2.0.0", "minimum.spanning.tree()", "mst()")
   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
 } # nocov end
 #   IGraph R package
@@ -53,7 +53,7 @@ minimum.spanning.tree <- function(
 #'
 #' @param graph The graph object to analyze.
 #' @param weights Numeric vector giving the weights of the edges in the
-#'   graph. The order is determined by the edge ids. This is ignored if the
+#'   graph. The order is determined by the edge IDs. This is ignored if the
 #'   `unweighted` algorithm is chosen. Edge weights are interpreted as
 #'   distances.
 #' @param algorithm The algorithm to use for calculation. `unweighted` can

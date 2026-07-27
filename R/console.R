@@ -11,7 +11,7 @@
 #' @export
 igraph.console <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.console()", "console()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.console()", "console()")
   console()
 } # nocov end
 
@@ -60,14 +60,8 @@ igraph.console <- function() {
 console <- function() {
   lifecycle::deprecate_stop(
     "3.0.0",
-    "console()",
+    "console()"
   )
-  oldverb <- igraph_opt("verbose")
-  igraph_options(verbose = "tkconsole")
-  pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  .igraph.progress.tkconsole.message("Console started.\n")
-  invisible()
 }
 
 .igraph.pb <- NULL
@@ -224,7 +218,6 @@ console <- function() {
     tcltk::tkdelete(txt, "0.0", "end")
     tcltk::tkconfigure(txt, state = "disabled")
   })
-  bstop <- tcltk::tkbutton(lfr, text = "Stop", command = function() {})
   bclose <- tcltk::tkbutton(lfr, text = "Close", command = function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)

@@ -55,7 +55,7 @@ treat_topic <- function(topic, deprecated_df) {
 
   deprecated_in_there <- deprecated_df[
     purrr::map_lgl(
-      split(deprecated_df, seq(nrow(deprecated_df))),
+      split(deprecated_df, seq_len(nrow(deprecated_df))),
       ~ detect_fun(.x[["old"]], lines)
     ),
   ]

@@ -25,10 +25,10 @@ For \code{eulerian_path()} and \code{eulerian_cycle()}, a named list with two
 entries:
 \describe{
 \item{epath}{
-A vector containing the edge ids along the Eulerian path or cycle.
+A vector containing the edge IDs along the Eulerian path or cycle.
 }
 \item{vpath}{
-A vector containing the vertex ids along the Eulerian path or cycle.
+A vector containing the vertex IDs along the Eulerian path or cycle.
 }
 }
 }
@@ -67,14 +67,14 @@ try(eulerian_cycle(g))
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{find_cycle}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{simple_cycles}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=find_cycle]{find_cycle()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=simple_cycles]{simple_cycles()}}
 }
 \concept{cycles}
 \keyword{graphs}

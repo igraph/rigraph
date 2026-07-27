@@ -4,7 +4,7 @@
 \alias{consensus_tree}
 \title{Create a consensus tree from several hierarchical random graph models}
 \usage{
-consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
+consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 }
 \arguments{
 \item{graph}{The graph the models were fitted to.}
@@ -13,6 +13,8 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 \code{igraphHRG} object. \code{consensus_tree()} allows this to be
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
@@ -27,10 +29,10 @@ is an \code{igraphHRGConsensus} object, the second is an
 following members:
 \describe{
 \item{parents}{
-For each vertex, the id of its parent vertex is stored,
+For each vertex, the ID of its parent vertex is stored,
 or zero, if the vertex is the root vertex in the tree.
-The first n vertex ids (from 0) refer to the original vertices of the graph,
-the other ids refer to vertex groups.
+The first n vertex IDs (from 0) refer to the original vertices of the graph,
+the other IDs refer to vertex groups.
 }
 \item{weights}{
 Numeric vector, counts the number of times a given tree split
@@ -51,14 +53,14 @@ first, and then samples starting from the optimum.
 }
 
 \seealso{
-Other hierarchical random graph functions: 
-\code{\link{fit_hrg}()},
-\code{\link{hrg}()},
+Other hierarchical random graph functions:
+\code{\link[=fit_hrg]{fit_hrg()}},
+\code{\link[=hrg]{hrg()}},
 \code{\link{hrg-methods}},
-\code{\link{hrg_tree}()},
-\code{\link{predict_edges}()},
-\code{\link{print.igraphHRG}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{sample_hrg}()}
+\code{\link[=hrg_tree]{hrg_tree()}},
+\code{\link[=predict_edges]{predict_edges()}},
+\code{\link[=print.igraphHRG]{print.igraphHRG()}},
+\code{\link[=print.igraphHRGConsensus]{print.igraphHRGConsensus()}},
+\code{\link[=sample_hrg]{sample_hrg()}}
 }
 \concept{hierarchical random graph functions}

@@ -4,16 +4,18 @@
 \alias{diversity}
 \title{Graph diversity}
 \usage{
-diversity(graph, weights = NULL, vids = V(graph))
+diversity(graph, ..., weights = NULL, vids = V(graph))
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{\code{NULL}, or the vector of edge weights to use for the
 computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
 that this measure is not defined for unweighted graphs.}
 
-\item{vids}{The vertex ids for which to calculate the measure.}
+\item{vids}{The vertex IDs for which to calculate the measure.}
 }
 \value{
 A numeric vector, its length is the number of vertices.
@@ -56,19 +58,19 @@ Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
 and Economic Development, \emph{Science} \strong{328}, 1029--1031, 2010.
 }
 \seealso{
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

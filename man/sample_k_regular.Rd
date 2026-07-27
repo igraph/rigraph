@@ -4,7 +4,7 @@
 \alias{sample_k_regular}
 \title{Create a random regular graph}
 \usage{
-sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)
+sample_k_regular(no.of.nodes, k, ..., directed = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{no.of.nodes}{Integer scalar, the number of vertices in the generated
@@ -13,9 +13,11 @@ graph.}
 \item{k}{Integer scalar, the degree of each vertex in the graph, or the
 out-degree and in-degree in a directed graph.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed.}
+\item{directed}{Logical, whether to create a directed graph.}
+
+\item{multiple}{Logical, whether multiple edges are allowed.}
 }
 \value{
 An igraph graph.
@@ -51,33 +53,33 @@ sapply(k10, plot, vertex.label = NA)
 \code{\link[=sample_degseq]{sample_degseq()}} for a generator with prescribed degree
 sequence.
 
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

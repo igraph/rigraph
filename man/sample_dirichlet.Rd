@@ -36,8 +36,8 @@ RDP.graph.2 <- sample_dot_product(lpvs.dir)
 colSums(lpvs.dir)
 }
 \seealso{
-Other latent position vector samplers: 
-\code{\link{sample_sphere_surface}()},
-\code{\link{sample_sphere_volume}()}
+Other latent position vector samplers:
+\code{\link[=sample_sphere_surface]{sample_sphere_surface()}},
+\code{\link[=sample_sphere_volume]{sample_sphere_volume()}}
 }
 \concept{latent position vector samplers}

@@ -19,7 +19,7 @@ centr_degree_tmax(
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
 if \code{graph} is given and the graph is undirected.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 }
 \value{
@@ -41,14 +41,14 @@ centr_degree(g, normalized = FALSE)$centralization \%>\%
 centr_degree(g, normalized = TRUE)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}

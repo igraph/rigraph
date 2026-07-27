@@ -10,7 +10,7 @@
 #' @export
 permute.vertices <- function(graph, permutation) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "permute.vertices()", "permute()")
+  lifecycle::deprecate_warn("2.0.0", "permute.vertices()", "permute()")
   permute(graph = graph, permutation = permutation)
 } # nocov end
 
@@ -26,7 +26,7 @@ permute.vertices <- function(graph, permutation) {
 #' @export
 graph.isocreate <- function(size, number, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.isocreate()",
     "graph_from_isomorphism_class()"
@@ -54,7 +54,7 @@ graph.automorphisms <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.automorphisms()",
     "count_automorphisms()"
@@ -78,7 +78,7 @@ canonical.permutation <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "canonical.permutation()",
     "canonical_permutation()"
@@ -102,7 +102,7 @@ automorphisms <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "automorphisms()", "count_automorphisms()")
+  lifecycle::deprecate_warn("2.0.0", "automorphisms()", "count_automorphisms()")
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
 
@@ -183,16 +183,57 @@ graph.isoclass.subgraph <- function(graph, vids) {
   res
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.subisomorphic.lad <- function(
   pattern,
   target,
+  ...,
   domains = NULL,
   induced = FALSE,
   map = TRUE,
   all.maps = FALSE,
   time.limit = Inf
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.lad, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t"),
+      "graph.subisomorphic.lad"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        domains = domains,
+        induced = induced,
+        map = map,
+        all.maps = all.maps,
+        time.limit = time.limit
+      ),
+      recover_new = c("domains", "induced", "map", "all.maps", "time.limit"),
+      recover_old = c("domains", "induced", "map", "all.maps", "time.limit"),
+      match_names = c("domains", "induced", "map", "all.maps", "time.limit"),
+      match_to = c("domains", "induced", "map", "all.maps", "time.limit"),
+      defaults = list(
+        domains = NULL,
+        induced = FALSE,
+        map = TRUE,
+        all.maps = FALSE,
+        time.limit = Inf
+      ),
+      head_args = c("pattern", "target"),
+      fn_name = "graph.subisomorphic.lad"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
@@ -383,14 +424,42 @@ isomorphic <- function(
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.isomorphic.bliss <- function(
   graph1,
   graph2,
+  ...,
   colors1 = NULL,
   colors2 = NULL,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.bliss, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(colors1 = colors1, colors2 = colors2, sh = sh),
+      recover_new = c("colors1", "colors2", "sh"),
+      recover_old = c("colors1", "colors2", "sh"),
+      match_names = c("colors1", "colors2", "sh"),
+      match_to = c("colors1", "colors2", "sh"),
+      defaults = list(
+        colors1 = NULL,
+        colors2 = NULL,
+        sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.isomorphic.bliss"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   isomorphic_bliss_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -399,15 +468,69 @@ graph.isomorphic.bliss <- function(
     sh = sh
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.isomorphic.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.vf2, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.isomorphic.vf2"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -425,15 +548,69 @@ graph.isomorphic.vf2 <- function(
     edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.subisomorphic.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.vf2, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.subisomorphic.vf2"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -468,8 +645,8 @@ is_isomorphic_to <- isomorphic
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       Matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -622,15 +799,69 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.count.isomorphisms.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.count.isomorphisms.vf2, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.count.isomorphisms.vf2"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   count_isomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -657,8 +888,8 @@ graph.count.isomorphisms.vf2 <- function(
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       Matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -728,15 +959,69 @@ count_subgraph_isomorphisms <- function(
   }
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graph.count.subisomorphisms.vf2 <- function(
   graph1,
   graph2,
+  ...,
   vertex.color1 = NULL,
   vertex.color2 = NULL,
   edge.color1 = NULL,
   edge.color2 = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph.count.subisomorphisms.vf2, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.count.subisomorphisms.vf2"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   count_subisomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
@@ -844,8 +1129,8 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching restrictions.
-#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       Matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex IDs or symbolic vertex names.
 #'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
 #'       it gives the allowed matching vertices in `target`.
 #'       Defaults to `NULL`.
@@ -1022,13 +1307,41 @@ graph.isoclass <- function(graph) {
 #'
 #' @param size The number of vertices in the graph.
 #' @param number The isomorphism class.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph (the default).
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
 #' @family graph isomorphism
 #' @export
-graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
+graph_from_isomorphism_class <- function(
+  size,
+  number,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_isomorphism_class, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("size", "number"),
+      fn_name = "graph_from_isomorphism_class"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   isoclass_create_impl(
     size = size,
     number = number,
@@ -1080,6 +1393,7 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #'   for possible values.
 #' @return A list with the following members:
@@ -1147,8 +1461,31 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 canonical_permutation <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: canonical_permutation, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(sh = sh),
+      recover_new = c("sh"),
+      recover_old = c("sh"),
+      match_names = c("sh"),
+      match_to = c("sh"),
+      defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
+      head_args = c("graph", "colors"),
+      fn_name = "canonical_permutation"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   canonical_permutation_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
@@ -1159,7 +1496,7 @@ canonical_permutation <- function(
 
 #' Permute the vertices of a graph
 #'
-#' Create a new graph, by permuting vertex ids.
+#' Create a new graph, by permuting vertex IDs.
 #'
 #' This function creates a new graph from the input graph by permuting its
 #' vertices according to the specified mapping. Call this function with the
@@ -1170,7 +1507,7 @@ canonical_permutation <- function(
 #'
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
-#'   first element is the new id of vertex 1, etc. Every number between one and
+#'   first element is the new ID of vertex 1, etc. Every number between one and
 #'   `vcount(graph)` must appear exactly once.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1231,6 +1568,7 @@ graph.isomorphic <- function(graph1, graph2) {
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
 #'   are:
 #'   \sQuote{`f`}:
@@ -1296,8 +1634,31 @@ graph.isomorphic <- function(graph1, graph2) {
 count_automorphisms <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: count_automorphisms, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(sh = sh),
+      recover_new = c("sh"),
+      recover_old = c("sh"),
+      match_names = c("sh"),
+      match_to = c("sh"),
+      defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
+      head_args = c("graph", "colors"),
+      fn_name = "count_automorphisms"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   count_automorphisms_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
@@ -1329,6 +1690,7 @@ count_automorphisms <- function(
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
+#' @inheritParams rlang::args_dots_empty
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
 #'   are:
 #'   \sQuote{`f`}:
@@ -1380,9 +1742,35 @@ count_automorphisms <- function(
 automorphism_group <- function(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: automorphism_group, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(sh = sh, details = details),
+      recover_new = c("sh", "details"),
+      recover_old = c("sh", "details"),
+      match_names = c("sh", "details"),
+      match_to = c("sh", "details"),
+      defaults = list(
+        sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
+        details = FALSE
+      ),
+      head_args = c("graph", "colors"),
+      fn_name = "automorphism_group"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   automorphism_group_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,

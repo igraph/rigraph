@@ -4,13 +4,15 @@
 \alias{motifs}
 \title{Graph motifs}
 \usage{
-motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
+motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
 directed graphs and sizes 3 to 6 in undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -49,7 +51,7 @@ the motifs is defined by their isomorphism class, see
 \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
 }
 
 \examples{
@@ -68,9 +70,9 @@ motifs(g, 3, callback = function(vids, isoclass) {
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{count_motifs}()},
-\code{\link{dyad_census}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=count_motifs]{count_motifs()}},
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}

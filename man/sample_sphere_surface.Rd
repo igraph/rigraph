@@ -4,16 +4,18 @@
 \alias{sample_sphere_surface}
 \title{Sample vectors uniformly from the surface of a sphere}
 \usage{
-sample_sphere_surface(dim, n = 1, radius = 1, positive = TRUE)
+sample_sphere_surface(dim, n = 1, ..., radius = 1, positive = TRUE)
 }
 \arguments{
 \item{dim}{Integer scalar, the dimension of the random vectors.}
 
 \item{n}{Integer scalar, the sample size.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{radius}{Numeric scalar, the radius of the sphere to sample.}
 
-\item{positive}{Logical scalar, whether to sample from the positive orthant
+\item{positive}{Logical, whether to sample from the positive orthant
 of the sphere.}
 }
 \value{
@@ -43,8 +45,8 @@ vec.norm <- apply(lpvs.sph, 2, function(x) {
 vec.norm
 }
 \seealso{
-Other latent position vector samplers: 
-\code{\link{sample_dirichlet}()},
-\code{\link{sample_sphere_volume}()}
+Other latent position vector samplers:
+\code{\link[=sample_dirichlet]{sample_dirichlet()}},
+\code{\link[=sample_sphere_volume]{sample_sphere_volume()}}
 }
 \concept{latent position vector samplers}
