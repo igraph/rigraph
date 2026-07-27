@@ -19,4 +19,8 @@ connected components to search. It is ignored for undirected graphs.}
 \code{no.clusters()} was renamed to \code{\link[=count_components]{count_components()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_connected_components}{\code{connected_components()}}
+}
+
 \keyword{internal}

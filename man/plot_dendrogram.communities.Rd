@@ -92,6 +92,10 @@ The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
     plot_dendrogram(x, \dots)
 } The extra arguments are simply passed to \code{\link[=as.dendrogram]{as.dendrogram()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_to_membership}{\code{community_to_membership()}}
+}
+
 \examples{
 
 karate <- make_graph("Zachary")

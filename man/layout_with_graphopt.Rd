@@ -67,6 +67,10 @@ forces among the vertices and then the physical system is simulated until it
 reaches an equilibrium. (There is no simulated annealing or anything like
 that, so a stable fixed point is not guaranteed.)
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_graphopt}{\code{layout_graphopt()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
