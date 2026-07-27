@@ -27,8 +27,8 @@ migrations <- list(
   # `dim` is a strict prefix of the head arg `dimvector` (the make_lattice()
   # shape), and the head arg `p` is a strict prefix of the recoverable
   # `permutation` (the sample_correlated_gnp_pair() shape). The generator
-  # computes ambiguous_tags = c("d", "di") -- the tags that were ambiguity
-  # errors under the old signature -- and emits the runtime guard for them.
+  # computes forbidden_tags = c("d", "di") and emits the runtime guard that
+  # rejects those tags when legacy arguments in `...` engage recovery.
   migration_fixture_prefix = list(
     old = function(dimvector, p, dim, permutation) {},
     new = function(dimvector, p, ..., dim = NULL, permutation = NULL) {},

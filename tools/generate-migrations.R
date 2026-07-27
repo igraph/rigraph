@@ -260,11 +260,17 @@ normalise_migration <- function(fn, entry) {
   #    of reaching recovery. No runtime guard can help; reject at generation
   #    time.
   # 2. A *strict prefix* of a head arg that also prefixes a recoverable name
-  #    was ambiguous -- an error -- under the old signature, but would now
-  #    silently bind the head arg. Those tags are enumerable: emit a runtime
-  #    guard (migrate_check_call_tags()) that restores the old error. Tags
-  #    that prefix two head args stay out of the list -- base R still errors
-  #    on those by itself.
+  #    was ambiguous -- an error -- under the old signature, but now binds
+  #    the head arg via ordinary partial matching. On its own that is
+  #    accepted: previously broken code that now works in a well-defined,
+  #    silent way is not a problem. It is hazardous only in combination
+  #    with legacy arguments in `...`: the tag steals the head slot,
+  #    positionals shift into the wrong formals, and the recovery layer
+  #    would rescue a never-valid call behind a soft-deprecation warning.
+  #    Those *forbidden prefixes* are enumerable: emit a runtime guard
+  #    (migrate_check_call_tags()) inside the recovery gate, so the tag is
+  #    rejected only when `...` is non-empty. Tags that prefix two head
+  #    args stay out of the list -- base R still errors on those by itself.
   renamed_old <- entry$recover_old[renamed]
   fatal <- character(0)
   for (h in entry$head) {
@@ -307,7 +313,7 @@ normalise_migration <- function(fn, entry) {
       tags <- c(tags, s)
     }
   }
-  entry$ambiguous_tags <- sort(unique(tags))
+  entry$forbidden_tags <- sort(unique(tags))
 
   entry
 }
@@ -381,23 +387,27 @@ render_arg_handle <- function(entry) {
     USE.NAMES = FALSE
   )
   guard <- character(0)
-  if (length(entry$ambiguous_tags)) {
-    quoted <- quote_items(entry$ambiguous_tags)
-    joined <- paste0("  c(", paste(quoted, collapse = ", "), "),")
+  if (length(entry$forbidden_tags)) {
+    quoted <- quote_items(entry$forbidden_tags)
+    joined <- paste0("    c(", paste(quoted, collapse = ", "), "),")
     if (nchar(joined) + 2L > 80L) {
-      joined <- c("  c(", paste0("    ", quoted, c(rep(",", length(quoted) - 1L), "")), "  ),")
+      joined <- c(
+        "    c(",
+        paste0("      ", quoted, c(rep(",", length(quoted) - 1L), "")),
+        "    ),"
+      )
     }
     guard <- c(
-      "migrate_check_call_tags(",
-      "  sys.call(),",
+      "  migrate_check_call_tags(",
+      "    sys.call(),",
       joined,
-      paste0("  \"", entry$fn, "\""),
-      ")"
+      paste0("    \"", entry$fn, "\""),
+      "  )"
     )
   }
   c(
-    guard,
     "if (...length() > 0L) {",
+    guard,
     "  .arg_handle <- migrate_recover_args(",
     "    list(...),",
     render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
