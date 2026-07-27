@@ -5,14 +5,16 @@
 \alias{gnm}
 \title{Generate random graphs according to the \eqn{G(n,m)} Erdős-Rényi model}
 \usage{
-sample_gnm(n, m, directed = FALSE, loops = FALSE)
+sample_gnm(n, m, ..., directed = FALSE, loops = FALSE)
 
-gnm(n, m, directed = FALSE, loops = FALSE)
+gnm(n, m, ..., directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
 \item{m}{The number of edges in the graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
 \code{FALSE}.}
