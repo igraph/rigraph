@@ -48,6 +48,7 @@
 #'   spectral embedding. Should be smaller than the number of vertices. The
 #'   largest `no`-dimensional non-zero singular values are used for the
 #'   spectral embedding.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Optional positive weight vector for calculating a weighted
 #'   embedding. If the graph has a `weight` edge attribute, then this is
 #'   used by default. In a weighted embedding, the edge weights are used instead
@@ -58,7 +59,7 @@
 #'   eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 #'   \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 #'   are used for the ordering.
-#' @param scaled Logical scalar, if `FALSE`, then \eqn{U} and \eqn{V} are
+#' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param cvec A numeric vector, its length is the number vertices in the
 #'   graph. This vector is added to the diagonal of the adjacency matrix.
@@ -101,8 +102,60 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-#' @cdocs igraph_adjacency_spectral_embedding
-embed_adjacency_matrix <- adjacency_spectral_embedding_impl
+embed_adjacency_matrix <- function(
+  graph,
+  no,
+  ...,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  scaled = TRUE,
+  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
+  options = arpack_defaults()
+) {
+  # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        which = which,
+        scaled = scaled,
+        cvec = cvec,
+        options = options
+      ),
+      recover_new = c("weights", "which", "scaled", "cvec", "options"),
+      recover_old = c("weights", "which", "scaled", "cvec", "options"),
+      match_names = c("weights", "which", "scaled", "cvec", "options"),
+      match_to = c("weights", "which", "scaled", "cvec", "options"),
+      defaults = list(
+        weights = NULL,
+        which = c("lm", "la", "sa"),
+        scaled = TRUE,
+        cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
+        options = arpack_defaults()
+      ),
+      head_args = c("graph", "no"),
+      fn_name = "embed_adjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  adjacency_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    scaled = scaled,
+    cvec = cvec,
+    options = options
+  )
+}
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -163,8 +216,11 @@ embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 #'
 #' @family embedding
 #' @export
-#' @cdocs igraph_dim_select
-dim_select <- dim_select_impl
+dim_select <- function(sv) {
+  dim_select_impl(
+    sv = sv
+  )
+}
 
 
 #' Spectral Embedding of the Laplacian of a Graph
@@ -183,6 +239,7 @@ dim_select <- dim_select_impl
 #'   spectral embedding. Should be smaller than the number of vertices. The
 #'   largest `no`-dimensional non-zero singular values are used for the
 #'   spectral embedding.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Optional positive weight vector for calculating a weighted
 #'   embedding. If the graph has a `weight` edge attribute, then this is
 #'   used by default. For weighted embedding, edge weights are used instead
@@ -212,7 +269,7 @@ dim_select <- dim_select_impl
 #'
 #'   The default (i.e. type `default`) is to use `D-A` for undirected
 #'   graphs and `OAP` for directed graphs.
-#' @param scaled Logical scalar, if `FALSE`, then \eqn{U} and \eqn{V} are
+#' @param scaled Logical, if `FALSE`, then \eqn{U} and \eqn{V} are
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
@@ -255,8 +312,60 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-#' @cdocs igraph_laplacian_spectral_embedding
-embed_laplacian_matrix <- laplacian_spectral_embedding_impl
+embed_laplacian_matrix <- function(
+  graph,
+  no,
+  ...,
+  weights = NULL,
+  which = c("lm", "la", "sa"),
+  type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
+  scaled = TRUE,
+  options = arpack_defaults()
+) {
+  # BEGIN GENERATED ARG_HANDLE: embed_laplacian_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        which = which,
+        type = type,
+        scaled = scaled,
+        options = options
+      ),
+      recover_new = c("weights", "which", "type", "scaled", "options"),
+      recover_old = c("weights", "which", "type", "scaled", "options"),
+      match_names = c("weights", "which", "type", "scaled", "options"),
+      match_to = c("weights", "which", "type", "scaled", "options"),
+      defaults = list(
+        weights = NULL,
+        which = c("lm", "la", "sa"),
+        type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
+        scaled = TRUE,
+        options = arpack_defaults()
+      ),
+      head_args = c("graph", "no"),
+      fn_name = "embed_laplacian_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  laplacian_spectral_embedding_impl(
+    graph = graph,
+    no = no,
+    weights = weights,
+    which = which,
+    type = type,
+    scaled = scaled,
+    options = options
+  )
+}
 
 
 #' Sample vectors uniformly from the surface of a sphere
@@ -270,8 +379,9 @@ embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 #'
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
+#' @inheritParams rlang::args_dots_empty
 #' @param radius Numeric scalar, the radius of the sphere to sample.
-#' @param positive Logical scalar, whether to sample from the positive orthant
+#' @param positive Logical, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A `dim` (length of the `alpha` vector for
 #'   `sample_dirichlet()`) times `n` matrix, whose columns are the sample
@@ -287,18 +397,42 @@ embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 #'   sum(x^2)
 #' })
 #' vec.norm
-sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
+sample_sphere_surface <- function(
+  dim,
+  n = 1,
+  ...,
+  radius = 1,
+  positive = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_sphere_surface, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(radius = radius, positive = positive),
+      recover_new = c("radius", "positive"),
+      recover_old = c("radius", "positive"),
+      match_names = c("radius", "positive"),
+      match_to = c("radius", "positive"),
+      defaults = list(radius = 1, positive = TRUE),
+      head_args = c("dim", "n"),
+      fn_name = "sample_sphere_surface"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_surface, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_surface_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample vectors uniformly from the volume of a sphere
@@ -312,8 +446,9 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #'
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
+#' @inheritParams rlang::args_dots_empty
 #' @param radius Numeric scalar, the radius of the sphere to sample.
-#' @param positive Logical scalar, whether to sample from the positive orthant
+#' @param positive Logical, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A `dim` (length of the `alpha` vector for
 #'   `sample_dirichlet()`) times `n` matrix, whose columns are the sample
@@ -329,18 +464,42 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #'   sum(x^2)
 #' })
 #' vec.norm
-sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
+sample_sphere_volume <- function(
+  dim,
+  n = 1,
+  ...,
+  radius = 1,
+  positive = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_sphere_volume, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(radius = radius, positive = positive),
+      recover_new = c("radius", "positive"),
+      recover_old = c("radius", "positive"),
+      match_names = c("radius", "positive"),
+      match_to = c("radius", "positive"),
+      defaults = list(radius = 1, positive = TRUE),
+      head_args = c("dim", "n"),
+      fn_name = "sample_sphere_volume"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_volume, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_volume_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample from a Dirichlet distribution
@@ -367,13 +526,9 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
-  # Argument checks
-  n <- as.numeric(n)
-  alpha <- as.numeric(alpha)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
-
-  res
+  # Use the _impl function
+  sample_dirichlet_impl(
+    n = n,
+    alpha = alpha
+  )
 }

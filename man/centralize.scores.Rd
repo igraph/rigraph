@@ -14,7 +14,7 @@ the most centralized graph with the same number of vertices as the graph
 under study. This is only used if the \code{normalized} argument is set
 to \code{TRUE}.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the supplied theoretical maximum.}
 }
 \description{
@@ -23,4 +23,8 @@ centrality score by dividing by the supplied theoretical maximum.}
 \code{centralize.scores()} was renamed to \code{\link[=centralize]{centralize()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization}{\code{centralization()}}
+}
+
 \keyword{internal}

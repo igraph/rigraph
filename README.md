@@ -75,6 +75,8 @@ GNU GPL version 2 or later
 
 
 
+
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -870,7 +872,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <tr>
 <td align="center">
 <a href="https://github.com/ngr-t">
-<img src="https://avatars.githubusercontent.com/u/729653?u=26a52e8e2e6d52a48536c21d9181a199e3dae4b6&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/729653?u=86d7972ca3e934af97b38851fae7129d8ee7b322&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Angr-t">ngr-t</a>
 </td>
@@ -1888,7 +1890,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/arcresu">
-<img src="https://avatars.githubusercontent.com/u/322256?v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/322256?u=c13e2cd3e1989963d577b3201e306dec8d4a4944&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aarcresu">arcresu</a>
 </td>
@@ -1998,7 +2000,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/YulongNiu">
-<img src="https://avatars.githubusercontent.com/u/5742772?u=fd9f8e5f37036a6c803a94d66602c48c23ab920c&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/5742772?u=d69dc9c4797f6c4b9629a3faed28b46ca8bfa2f1&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AYulongNiu">YulongNiu</a>
 </td>
@@ -2256,7 +2258,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/Carol-seven">
-<img src="https://avatars.githubusercontent.com/u/52789310?u=dd422897c559dbbad3ccbb73add1b1c48cfba3d7&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/52789310?u=9802d0ce2678b7b326c34f670e5498c16d856482&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ACarol-seven">Carol-seven</a>
 </td>
@@ -2704,7 +2706,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/jldevezas">
-<img src="https://avatars.githubusercontent.com/u/368233?u=84bd658d0ff8c064a07bc652afb596824104b762&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/368233?u=ad77099e9de00224b90c870236e34be272ef830b&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Ajldevezas">jldevezas</a>
 </td>
@@ -2774,7 +2776,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/zhiyzuo">
-<img src="https://avatars.githubusercontent.com/u/7501149?u=04c59c05823e35660be2f6761b4bf4e7732873a5&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/7501149?u=a0f7995d10bf5c4b512899fc37594a41c71b3d7f&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Azhiyzuo">zhiyzuo</a>
 </td>
@@ -3831,15 +3833,21 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aucb">ucb</a>
 </td>
 <td align="center">
-<a href="https://github.com/xiaoying201355">
-<img src="https://avatars.githubusercontent.com/u/13807432?v=4" width="100px;" alt=""/>
+<a href="https://github.com/vagdur">
+<img src="https://avatars.githubusercontent.com/u/29042381?u=eaa1e0c79e8408ad11f525a047befeeb6c970efc&v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Axiaoying201355">xiaoying201355</a>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Avagdur">vagdur</a>
 </td>
 </tr>
 
 
 <tr>
+<td align="center">
+<a href="https://github.com/xiaoying201355">
+<img src="https://avatars.githubusercontent.com/u/13807432?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Axiaoying201355">xiaoying201355</a>
+</td>
 <td align="center">
 <a href="https://github.com/zhpn1024">
 <img src="https://avatars.githubusercontent.com/u/5006162?v=4" width="100px;" alt=""/>
@@ -3876,16 +3884,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Arfsaldanha">rfsaldanha</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/nipnipj">
 <img src="https://avatars.githubusercontent.com/u/36553373?u=9c85f7711bfbe6e6bc8d43b82e71bfff4afea295&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Anipnipj">nipnipj</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/peibana">
 <img src="https://avatars.githubusercontent.com/u/102594752?u=eafb88a9786c6c22eea7d03a6c009a264e16ac72&v=4" width="100px;" alt=""/>
@@ -3929,5 +3937,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
 
 

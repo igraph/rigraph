@@ -4,14 +4,16 @@
 \alias{max_flow}
 \title{Maximum flow in a graph}
 \usage{
-max_flow(graph, source, target, capacity = NULL)
+max_flow(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.
@@ -28,17 +30,17 @@ A numeric vector, the flow itself, one entry for each edge.
 For undirected graphs this entry is bit trickier,
 since for these the flow direction is not predetermined by the edge direction.
 For these graphs the elements of the this vector can be negative,
-this means that the flow goes from the bigger vertex id to the smaller one.
-Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+this means that the flow goes from the bigger vertex ID to the smaller one.
+Positive values mean that the flow goes from the smaller vertex ID to the bigger one.
 }
 \item{cut}{
-A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+A numeric vector of edge IDs, the minimum cut corresponding to the maximum flow.
 }
 \item{partition1}{
-A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+A numeric vector of vertex IDs, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
 }
 \item{partition2}{
-A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+A numeric vector of vertex IDs, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
 }
 \item{stats}{
 A list with some statistics from the push-relabel algorithm.
@@ -67,6 +69,10 @@ the target the incoming flow is the same as the outgoing flow. The value of
 the flow is the incoming flow of the \code{target} vertex. The maximum flow
 is the flow of maximum value.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 
 E <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
@@ -79,18 +85,16 @@ A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 Flow Problem \emph{Journal of the ACM} 35:921-940, 1988.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}.}
-

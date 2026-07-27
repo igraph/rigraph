@@ -15,7 +15,7 @@ centr_eigen(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths for
+\item{directed}{Logical, whether to use directed shortest paths for
 calculating eigenvector centrality.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
@@ -24,7 +24,7 @@ eigenvector centralization requires normalized eigenvector centrality scores.}
 \item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options
 for the ARPACK eigensolver.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{
@@ -51,6 +51,10 @@ for a graph with the same number of vertices.
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}
+}
+
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
@@ -66,16 +70,14 @@ centr_eigen(g0)$centralization
 centr_eigen(g1)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree]{centr_degree()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality}{\code{centralization_eigenvector_centrality()}}.}
-

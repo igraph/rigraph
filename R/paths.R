@@ -10,7 +10,7 @@
 #' @export
 path.length.hist <- function(graph, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
+  lifecycle::deprecate_warn("2.0.0", "path.length.hist()", "distance_table()")
   distance_table(graph = graph, directed = directed)
 } # nocov end
 
@@ -26,7 +26,7 @@ path.length.hist <- function(graph, directed = TRUE) {
 #' @export
 maximum.cardinality.search <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "maximum.cardinality.search()",
     "max_cardinality()"
@@ -46,7 +46,7 @@ maximum.cardinality.search <- function(graph) {
 #' @export
 is.dag <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
+  lifecycle::deprecate_warn("2.0.0", "is.dag()", "is_dag()")
   is_dag(graph = graph)
 } # nocov end
 ## -----------------------------------------------------------------------
@@ -86,6 +86,7 @@ is.dag <- function(graph) {
 #' @param graph The input graph.
 #' @param from The source vertex.
 #' @param to The target vertex of vertices. Defaults to all vertices.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
 #'   `out` then the shortest paths *from* the vertex, if `in`
@@ -96,7 +97,7 @@ is.dag <- function(graph) {
 #'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -110,31 +111,45 @@ all_simple_paths <- function(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: all_simple_paths, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, cutoff = cutoff),
+      recover_new = c("mode", "cutoff"),
+      recover_old = c("mode", "cutoff"),
+      match_names = c("mode", "cutoff"),
+      match_to = c("mode", "cutoff"),
+      defaults = list(mode = c("out", "in", "all", "total"), cutoff = -1),
+      head_args = c("graph", "from", "to"),
+      fn_name = "all_simple_paths"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ## Argument checks
   ensure_igraph(graph)
-  from <- as_igraph_vs(graph, from)
-  to <- as_igraph_vs(graph, to)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(
-    R_igraph_get_all_simple_paths,
-    graph,
-    from - 1,
-    to - 1,
-    as.numeric(cutoff),
-    mode
+  res <- with_igraph_opt(
+    list(return.vs.es = FALSE),
+    get_all_simple_paths_impl(
+      graph = graph,
+      from = from,
+      to = to,
+      cutoff = cutoff,
+      mode = mode
+    )
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -168,8 +183,11 @@ all_simple_paths <- function(
 #' @family cycles
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_is_dag
-is_dag <- is_dag_impl
+is_dag <- function(graph) {
+  is_dag_impl(
+    graph = graph
+  )
+}
 
 #' Acyclic graphs
 #'
@@ -191,8 +209,11 @@ is_dag <- is_dag_impl
 #' @family cycles
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_is_acyclic
-is_acyclic <- is_acyclic_impl
+is_acyclic <- function(graph) {
+  is_acyclic_impl(
+    graph = graph
+  )
+}
 
 #' Maximum cardinality search
 #'
@@ -248,8 +269,11 @@ is_acyclic <- is_acyclic_impl
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
-#' @cdocs igraph_maximum_cardinality_search
-max_cardinality <- maximum_cardinality_search_impl
+max_cardinality <- function(graph) {
+  maximum_cardinality_search_impl(
+    graph = graph
+  )
+}
 
 
 #' Eccentricity of the vertices in a graph
@@ -279,7 +303,6 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(
   graph,
   vids = V(graph),
@@ -288,7 +311,7 @@ eccentricity <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "eccentricity(... =)",
       details = "The argument `mode` must be named."
@@ -303,7 +326,12 @@ eccentricity <- function(
     }
   }
 
-  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+  eccentricity_dijkstra_impl(
+    graph = graph,
+    vids = vids,
+    weights = weights,
+    mode = mode
+  )
 }
 
 
@@ -334,7 +362,6 @@ eccentricity <- function(
 #' radius(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_radius_dijkstra
 radius <- function(
   graph,
   ...,
@@ -342,7 +369,7 @@ radius <- function(
   mode = c("all", "out", "in", "total")
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "radius(... =)",
       details = "The argument `mode` must be named."
@@ -357,7 +384,11 @@ radius <- function(
     }
   }
 
-  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+  radius_dijkstra_impl(
+    graph = graph,
+    weights = weights,
+    mode = mode
+  )
 }
 
 #' Central vertices of a graph
@@ -386,12 +417,53 @@ radius <- function(
 #' graph_center(ring)
 #'
 #' @export
-#' @cdocs igraph_graph_center_dijkstra
-graph_center <- graph_center_dijkstra_impl
+graph_center <- function(
+  graph,
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
+  graph_center_dijkstra_impl(
+    graph = graph,
+    weights = weights,
+    mode = mode
+  )
+}
 
 #' @rdname distances
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-#' @cdocs igraph_path_length_hist
-distance_table <- path_length_hist_impl
+distance_table <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: distance_table, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "distance_table"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  path_length_hist_impl(
+    graph = graph,
+    directed = directed
+  )
+}

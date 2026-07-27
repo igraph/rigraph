@@ -6,6 +6,7 @@
 \usage{
 cluster_spinglass(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -21,6 +22,8 @@ cluster_spinglass(
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored in directed graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -39,7 +42,7 @@ limit for the number of communities. It is not a problem to supply a
 (reasonably) big number here, in which case some spin states will be
 unpopulated.}
 
-\item{parupdate}{Logical constant, whether to update the spins of the
+\item{parupdate}{Logical, whether to update the spins of the
 vertices in parallel (synchronously) or not. This argument is ignored if the
 second form of the function is used (i.e. the \sQuote{\code{vertex}} argument
 is present). It is also not implemented in the \dQuote{neg} implementation.}
@@ -93,7 +96,7 @@ If the \code{vertex} argument is present, i.e. the second form is used then a
 named list is returned with the following components:
 \describe{
 \item{community}{
-Numeric vector giving the ids of the vertices in the same community as \code{vertex}.
+Numeric vector giving the IDs of the vertices in the same community as \code{vertex}.
 }
 \item{cohesion}{
 The cohesion score of the result, see references.
@@ -129,9 +132,13 @@ community detection. If the \code{vertex} argument is not given (or it is
 optimizing the an energy function.
 
 If the \code{vertex} argument is given and it is not \code{NULL}, then it
-must be a vertex id, and the same energy function is used to find the
+must be a vertex ID, and the same energy function is used to find the
 community of the the given vertex. See also the examples below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- sample_gnp(10, 5 / 10) \%du\% sample_gnp(9, 5 / 9)
@@ -155,26 +162,26 @@ positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 \seealso{
 \code{\link[=communities]{communities()}}, \code{\link[=components]{components()}}
 
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_infomap]{cluster_infomap()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=modularity.igraph]{modularity.igraph()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=split_join_distance]{split_join_distance()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \author{
 Jorg Reichardt for the original code and Gabor Csardi

@@ -31,12 +31,13 @@
 #' a specific cycle.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant specifying how to handle directed graphs.
 #'   `out` follows edge directions, `in` follows edges in the reverse direction,
 #'   and `all` ignores edge directions. Ignored in undirected graphs.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -47,10 +48,40 @@
 #' find_cycle(sample_tree(5))
 #'
 #' @family cycles
-#' @cdocs igraph_find_cycle
 #' @export
 
-find_cycle <- find_cycle_impl
+find_cycle <- function(
+  graph,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: find_cycle, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph"),
+      fn_name = "find_cycle"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  find_cycle_impl(
+    graph = graph,
+    mode = mode
+  )
+}
 
 
 #' Finds all simple cycles in a graph.
@@ -68,9 +99,22 @@ find_cycle <- find_cycle_impl
 #' @inheritParams find_cycle
 #' @param min Lower limit on cycle lengths to consider. `NULL` means no limit.
 #' @param max Upper limit on cycle lengths to consider. `NULL` means no limit.
-#' @return A named list, with two entries:
-#' \item{vertices}{The list of cycles in terms of their vertices.}
-#' \item{edges}{The list of cycles in terms of their edges.}
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each cycle found. If provided,
+#'   the function should accept two arguments: `vertices` (integer vector of vertex
+#'   IDs in the cycle) and `edges` (integer vector of edge IDs
+#'   in the cycle). The function should return `FALSE` to continue
+#'   the search or `TRUE` to stop it. If `NULL` (the default), all cycles are
+#'   collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list with two elements: `vertices`
+#'   (list of integer vectors with vertex IDs) and `edges` (list of integer vectors
+#'   with edge IDs). If `callback` is provided, returns `NULL` invisibly.
 #' @keywords graphs
 #' @examples
 #'
@@ -80,17 +124,51 @@ find_cycle <- find_cycle_impl
 #' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #'
 #' @family cycles
-#' @cdocs igraph_simple_cycles
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each cycle found. If provided,
+#'   the function should accept two arguments: `vertices` (integer vector of vertex
+#'   IDs in the cycle) and `edges` (integer vector of edge IDs
+#'   in the cycle). The function should return `FALSE` to continue
+#'   the search or `TRUE` to stop it. If `NULL` (the default), all cycles are
+#'   collected and returned as a list.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to nested `.Call()` state corruption. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
+#' @return If `callback` is `NULL`, returns a list with two elements: `vertices`
+#'   (list of integer vectors with vertex IDs) and `edges` (list of integer vectors
+#'   with edge IDs). If `callback` is provided, returns `NULL` invisibly.
 #' @export
 
 simple_cycles <- function(
   graph,
   mode = c("out", "in", "all", "total"),
   min = NULL,
-  max = NULL
+  max = NULL,
+  ...,
+  callback = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_dots_empty()
 
-  simple_cycles_impl(graph, mode, min %||% -1, max %||% -1)
+  if (is.null(callback)) {
+    simple_cycles_impl(
+      graph = graph,
+      mode = mode,
+      min_cycle_length = min %||% -1,
+      max_cycle_length = max %||% -1
+    )
+  } else {
+    simple_cycles_callback_closure_impl(
+      graph = graph,
+      mode = mode,
+      min_cycle_length = min %||% -1,
+      max_cycle_length = max %||% -1,
+      callback = callback
+    )
+    invisible(NULL)
+  }
 }

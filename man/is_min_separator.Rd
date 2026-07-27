@@ -10,11 +10,11 @@ is_min_separator(graph, candidate)
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored.}
 
-\item{candidate}{A numeric vector giving the vertex ids of the candidate
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate
 separator.}
 }
 \value{
-A logical scalar, whether the supplied vertex set is a (minimal)
+A Logical, whether the supplied vertex set is a (minimal)
 vertex separator or not.
 }
 \description{
@@ -25,6 +25,10 @@ Check whether a given set of vertices is a minimal vertex separator.
 vertex separator. A minimal vertex separator is a vertex separator, such
 that none of its proper subsets are a vertex separator.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_minimal_separator}{\code{is_minimal_separator()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # The graph from the Moody-White paper
 mw <- graph_from_literal(
@@ -56,18 +60,16 @@ check.sep(mw5)
 
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_minimal_separator}{\code{is_minimal_separator()}}.}
-

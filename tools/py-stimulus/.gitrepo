@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:igraph/stimulus
+	branch = 0.21.5
+	commit = f62f215a6d325545b44b59e114c963cf04abb4ce
+	parent = 63943053a43a247f1bf7628bbf481d400ce3e315
+	method = merge
+	cmdver = 0.4.9

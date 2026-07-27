@@ -4,12 +4,14 @@
 \alias{incident}
 \title{Incident edges of a vertex in a graph}
 \usage{
-incident(graph, v, mode = c("all", "out", "in", "total"))
+incident(graph, v, ..., mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{v}{The vertex of which the incident edges are queried.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
@@ -22,25 +24,29 @@ the input vertex.
 \description{
 Incident edges of a vertex in a graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident}{\code{incident()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 incident(g, 1)
 incident(g, 34)
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{are_adjacent}()},
-\code{\link{ends}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident_edges}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=adjacent_vertices]{adjacent_vertices()}},
+\code{\link[=are_adjacent]{are_adjacent()}},
+\code{\link[=ends]{ends()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident_edges]{incident_edges()}},
+\code{\link[=is_directed]{is_directed()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}

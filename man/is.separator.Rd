@@ -10,7 +10,7 @@ is.separator(graph, candidate)
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored.}
 
-\item{candidate}{A numeric vector giving the vertex ids of the candidate
+\item{candidate}{A numeric vector giving the vertex IDs of the candidate
 separator.}
 }
 \description{
@@ -19,4 +19,8 @@ separator.}
 \code{is.separator()} was renamed to \code{\link[=is_separator]{is_separator()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Separators.html#igraph_is_separator}{\code{is_separator()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

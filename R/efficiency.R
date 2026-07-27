@@ -37,12 +37,13 @@
 #' efficiency above.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The edge weights. All edge weights must be non-negative;
 #'   additionally, no edge weight may be NaN. If it is `NULL` (the default)
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
-#' @param vids The vertex ids of the vertices for which the calculation will be done.
+#' @param vids The vertex IDs of the vertices for which the calculation will be done.
 #'   Applies to the local efficiency calculation only.
-#' @param directed Logical scalar, whether to consider directed paths. Ignored
+#' @param directed Logical, whether to consider directed paths. Ignored
 #'   for undirected graphs.
 #' @param mode Specifies how to define the local neighborhood of a vertex in
 #'   directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}
@@ -66,15 +67,127 @@
 #' g <- make_graph("zachary")
 #' global_efficiency(g)
 #' average_local_efficiency(g)
-#' @cdocs igraph_global_efficiency
-global_efficiency <- global_efficiency_impl
+global_efficiency <- function(
+  graph,
+  ...,
+  weights = NULL,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: global_efficiency, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, directed = directed),
+      recover_new = c("weights", "directed"),
+      recover_old = c("weights", "directed"),
+      match_names = c("weights", "directed"),
+      match_to = c("weights", "directed"),
+      defaults = list(weights = NULL, directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "global_efficiency"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  global_efficiency_impl(
+    graph = graph,
+    weights = weights,
+    directed = directed
+  )
+}
 
 #' @rdname global_efficiency
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_local_efficiency
-local_efficiency <- local_efficiency_impl
+local_efficiency <- function(
+  graph,
+  vids = V(graph),
+  ...,
+  weights = NULL,
+  directed = TRUE,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: local_efficiency, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, directed = directed, mode = mode),
+      recover_new = c("weights", "directed", "mode"),
+      recover_old = c("weights", "directed", "mode"),
+      match_names = c("weights", "directed", "mode"),
+      match_to = c("weights", "directed", "mode"),
+      defaults = list(
+        weights = NULL,
+        directed = TRUE,
+        mode = c("all", "out", "in", "total")
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "local_efficiency"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  local_efficiency_impl(
+    graph = graph,
+    vids = vids,
+    weights = weights,
+    directed = directed,
+    mode = mode
+  )
+}
 
 #' @rdname global_efficiency
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_average_local_efficiency
-average_local_efficiency <- average_local_efficiency_impl
+average_local_efficiency <- function(
+  graph,
+  ...,
+  weights = NULL,
+  directed = TRUE,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: average_local_efficiency, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, directed = directed, mode = mode),
+      recover_new = c("weights", "directed", "mode"),
+      recover_old = c("weights", "directed", "mode"),
+      match_names = c("weights", "directed", "mode"),
+      match_to = c("weights", "directed", "mode"),
+      defaults = list(
+        weights = NULL,
+        directed = TRUE,
+        mode = c("all", "out", "in", "total")
+      ),
+      head_args = c("graph"),
+      fn_name = "average_local_efficiency"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  average_local_efficiency_impl(
+    graph = graph,
+    weights = weights,
+    directed = directed,
+    mode = mode
+  )
+}

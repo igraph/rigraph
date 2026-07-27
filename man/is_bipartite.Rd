@@ -13,10 +13,14 @@ is_bipartite(graph)
 It does not check whether the graph is bipartite in the
 mathematical sense.  Use \code{\link[=bipartite_mapping]{bipartite_mapping()}} for that.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
-Bipartite graphs
-\code{\link{bipartite_mapping}()},
-\code{\link{bipartite_projection}()},
-\code{\link{make_bipartite_graph}()}
+Bipartite graphs:
+\code{\link[=bipartite_mapping]{bipartite_mapping()}},
+\code{\link[=bipartite_projection]{bipartite_projection()}},
+\code{\link[=make_bipartite_graph]{make_bipartite_graph()}}
 }
 \concept{bipartite}

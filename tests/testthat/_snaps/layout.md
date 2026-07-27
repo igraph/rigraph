@@ -16,3 +16,11 @@
       Error:
       ! The `niter` argument of `layout_with_kk()` was deprecated in igraph 0.8.0 and is now defunct.
 
+# layout_randomly() errors well
+
+    Code
+      layout_randomly(g, dim = 4)
+    Condition
+      Error in `layout_randomly()`:
+      ! `dim` must be one of "2" or "3", not "4".
+

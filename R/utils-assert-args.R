@@ -16,13 +16,37 @@ ensure_igraph <- function(graph, optional = FALSE) {
   }
 }
 
+switch_igraph_arg <- function(
+  arg,
+  ...,
+  .error_arg = rlang::caller_arg(arg),
+  .error_call = rlang::caller_env()
+) {
+  # Materialize early, before accessing arg
+  force(.error_arg)
 
-igraph.match.arg <- function(
+  values <- tolower(...names())
+  if (length(arg) > 1) {
+    values <- intersect(values, tolower(arg))
+  }
+  match <- igraph_match_arg(
+    arg,
+    values,
+    error_arg = .error_arg,
+    error_call = .error_call
+  )
+  switch(match, ...)
+}
+
+igraph_match_arg <- function(
   arg,
   values,
+  error_arg = rlang::caller_arg(arg),
   error_call = rlang::caller_env()
 ) {
-  error_arg <- rlang::caller_arg(arg)
+  # Materialize early, before accessing arg
+  force(error_arg)
+
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
@@ -40,7 +64,20 @@ igraph.match.arg <- function(
 }
 
 #' @importFrom rlang caller_env
-ensure_no_na <- function(x, what, call = caller_env()) {
+ensure_no_na <- function(x, what, mode = "", call = caller_env()) {
+  if (mode == "upper") {
+    if (inherits(x, "sparseMatrix")) {
+      x <- Matrix::triu(x)@x
+    } else {
+      x <- x[upper.tri(x)]
+    }
+  } else if (mode == "lower") {
+    if (inherits(x, "sparseMatrix")) {
+      x <- Matrix::tril(x)@x
+    } else {
+      x <- x[lower.tri(x)]
+    }
+  }
   if (anyNA(x)) {
     cli::cli_abort(
       "Cannot create a graph object because the {what} contains NAs.",
