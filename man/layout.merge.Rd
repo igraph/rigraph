@@ -20,4 +20,8 @@ layout.merge(graphs, layouts, method = "dla")
 \code{layout.merge()} was renamed to \code{\link[=merge_coords]{merge_coords()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_merge_dla}{\code{layout_merge_dla()}}
+}
+
 \keyword{internal}

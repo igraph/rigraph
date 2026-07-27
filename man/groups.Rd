@@ -28,6 +28,10 @@ object that is a list with an entry called \code{membership}.)
 
 The second method works on \code{\link[=communities]{communities()}} objects.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_to_membership}{\code{community_to_membership()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 fgc <- cluster_fast_greedy(g)
