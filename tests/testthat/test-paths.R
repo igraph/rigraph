@@ -16,6 +16,7 @@ test_that("radius() works -- weights", {
 })
 
 test_that("radius() works -- lifecycle", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- make_tree(10, 2)
 
@@ -40,6 +41,7 @@ test_that("eccentricity() works -- weights", {
 })
 
 test_that("eccentricity() works -- lifecycle", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- make_tree(10, 2)
 

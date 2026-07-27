@@ -912,6 +912,7 @@ test_that("arpack works for non-symmetric matrices", {
 # TODO: further tests for typically hard cases
 
 test_that("eigen_centrality() deprecated scale argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- make_ring(10, directed = FALSE)
   expect_snapshot({

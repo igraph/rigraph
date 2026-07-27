@@ -46,12 +46,14 @@ test_that("as_directed keeps attributes", {
 })
 
 test_that("as.directed() deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
 })
 
 test_that("as.undirected() deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
@@ -368,6 +370,7 @@ test_that("as_adjacency_matrix() errors on non-numeric weights", {
 })
 
 test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_full_graph(4, directed = FALSE)
   E(g)$weight <- 1:6
   expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
@@ -433,6 +436,7 @@ test_that("as_biadjacency_matrix() accepts a numeric weights vector", {
 })
 
 test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
   E(g)$weight <- c(2, 4, 6)
   expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
