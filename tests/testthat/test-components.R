@@ -92,7 +92,7 @@ test_that("component_distribution() finds correct distribution", {
 })
 
 test_that("largest component is actually the largest", {
-  star <- make_star(20, "undirected")
+  star <- make_star(20, mode = "undirected")
   ring <- make_ring(10)
 
   dis_union <- disjoint_union(star, ring)

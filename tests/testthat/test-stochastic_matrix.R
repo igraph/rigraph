@@ -1,5 +1,5 @@
 test_that("stochastic_matrix works", {
-  g <- make_star(5, "undirected")
+  g <- make_star(5, mode = "undirected")
   adj_mat <- as_adjacency_matrix(g)
   stoch_mat_manual <- adj_mat / degree(g)
   stoch_mat_calc <- stochastic_matrix(g)
