@@ -16,7 +16,7 @@ get.all.shortest.paths(
 \item{graph}{The graph to work on.}
 
 \item{from}{Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex ids, but
+be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
@@ -44,7 +44,7 @@ of a path is the sum of the weights of its constituent edges.}
 consistent API.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths}{\code{get_all_shortest_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra}{\code{get_all_shortest_paths_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths_dijkstra}{\code{get_all_shortest_paths_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_shortest_paths}{\code{get_all_shortest_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \keyword{internal}

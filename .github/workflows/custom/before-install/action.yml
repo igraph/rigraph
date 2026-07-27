@@ -1,5 +1,10 @@
 name: 'Custom steps to run before R packages are installed'
 
+# Environment variables from the "env" field of test matrix entries
+# (see .github/versions-matrix.R, e.g. IGRAPH_LIFECYCLE_ERRORS=true)
+# are applied by the rcc-full job in R-CMD-check.yaml before this action runs,
+# so they are already visible here and in all later steps.
+
 runs:
   using: "composite"
   steps:

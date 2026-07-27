@@ -36,7 +36,7 @@ vertex sets to find. \code{NULL} means no limit.}
 \code{ivs()},
 \code{largest_ivs()} and
 \code{max_ivs()} return a list containing numeric
-vertex ids, each list element is an independent vertex set.
+vertex IDs, each list element is an independent vertex set.
 
 \code{ivs_size()} returns an integer constant.
 

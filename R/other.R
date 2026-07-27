@@ -72,7 +72,7 @@ convex.hull <- function(data) {
 #' bin width.
 #'
 #' The running mean of `v` is a `w` vector of length
-#' `length(v)-binwidth+1`. The first element of `w` id the average of
+#' `length(v)-binwidth+1`. The first element of `w` ID the average of
 #' the first `binwidth` elements of `v`, the second element of
 #' `w` is the average of elements `2:(binwidth+1)`, etc.
 #'
@@ -153,17 +153,26 @@ sample_seq <- function(low, high, length) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @dev
 #'
-handle_vertex_type_arg <- function(types, graph, required = T) {
+handle_vertex_type_arg <- function(types, graph, required = TRUE) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
     types <- V(graph)$type
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
-      cli::cli_warn("vertex types converted to logical.")
-    }
-    types <- as.logical(types)
-    if (anyNA(types)) {
-      cli::cli_abort("`NA' is not allowed in vertex types")
+      converted <- suppressWarnings(as.logical(types))
+      if (anyNA(converted)) {
+        cli::cli_abort(
+          "The {.arg type} vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector."
+        )
+      }
+      cli::cli_warn(
+        "The {.arg type} vertex attribute is not logical; converting to logical."
+      )
+      types <- converted
+    } else if (anyNA(types)) {
+      cli::cli_abort(
+        "The {.arg type} vertex attribute contains {.val NA} values, which are not allowed."
+      )
     }
   }
   if (is.null(types) && required) {

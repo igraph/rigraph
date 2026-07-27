@@ -11,7 +11,7 @@ dominator.tree(graph, root, mode = c("out", "in", "all", "total"))
 some vertices not reachable from the root vertex, then these vertices will
 be collected and returned as part of the result.}
 
-\item{root}{The id of the root (or source) vertex, this will be the root of
+\item{root}{The ID of the root (or source) vertex, this will be the root of
 the tree.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If

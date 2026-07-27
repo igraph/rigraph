@@ -50,7 +50,8 @@ is.simple <- function(graph) {
 #'
 #' `simplify()` removes the loop and/or multiple edges from a graph.  If
 #' both `remove.loops` and `remove.multiple` are `TRUE` the
-#' function returns a simple graph.
+#' function returns a simple graph. If the graph is already simple, it is
+#' returned unchanged.
 #'
 #' `simplify_and_colorize()` constructs a new, simple graph from a graph and
 #' also sets a `color` attribute on both the vertices and the edges.
@@ -71,7 +72,8 @@ is.simple <- function(graph) {
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
 #'   [attribute.combination()] for details on this.
-#' @return a new graph object with the edges deleted.
+#' @return a graph object with the loop and/or multiple edges removed; the
+#'   input graph is returned unchanged if it is already simple.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [which_loop()], [which_multiple()] and
 #' [count_multiple()], [delete_edges()],
@@ -94,6 +96,14 @@ simplify <- function(
   remove.loops = TRUE,
   edge.attr.comb = igraph_opt("edge.attr.comb")
 ) {
+  # A graph that is already simple has no loops and no multiple edges, so
+  # simplify_impl() would not change its structure regardless of the
+  # remove.* / edge.attr.comb arguments. Short-circuiting here avoids the
+  # cost of rebuilding the graph in the (common) already-simple case;
+  # is_simple() is orders of magnitude cheaper than simplify().
+  if (is_simple(graph)) {
+    return(graph)
+  }
   simplify_impl(
     graph = graph,
     remove_multiple = remove.multiple,

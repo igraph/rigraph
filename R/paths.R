@@ -86,6 +86,7 @@ is.dag <- function(graph) {
 #' @param graph The input graph.
 #' @param from The source vertex.
 #' @param to The target vertex of vertices. Defaults to all vertices.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
 #'   `out` then the shortest paths *from* the vertex, if `in`
@@ -96,7 +97,7 @@ is.dag <- function(graph) {
 #'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
-#'   vertex ids.
+#'   vertex IDs.
 #' @keywords graphs
 #' @examples
 #'
@@ -110,9 +111,32 @@ all_simple_paths <- function(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 ) {
+  # BEGIN GENERATED ARG_HANDLE: all_simple_paths, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, cutoff = cutoff),
+      recover_new = c("mode", "cutoff"),
+      recover_old = c("mode", "cutoff"),
+      match_names = c("mode", "cutoff"),
+      match_to = c("mode", "cutoff"),
+      defaults = list(mode = c("out", "in", "all", "total"), cutoff = -1),
+      head_args = c("graph", "from", "to"),
+      fn_name = "all_simple_paths"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ## Argument checks
   ensure_igraph(graph)
 
@@ -407,10 +431,37 @@ graph_center <- function(
 }
 
 #' @rdname distances
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-distance_table <- function(graph, directed = TRUE) {
+distance_table <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: distance_table, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "distance_table"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   path_length_hist_impl(
     graph = graph,
     directed = directed

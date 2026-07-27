@@ -1,4 +1,5 @@
 test_that("is_tree works for non-trees", {
+  igraph_local_seed(42)
   g <- make_graph("zachary")
   expect_false(is_tree(g))
   expect_equal(
@@ -120,6 +121,7 @@ test_that("to_prufer prints an error for non-trees", {
 })
 
 test_that("sample_tree works", {
+  igraph_local_seed(42)
   g <- sample_tree(100)
   expect_false(is_directed(g))
   expect_ecount(g, 99)
@@ -146,6 +148,7 @@ test_that("sample_tree works", {
 })
 
 test_that("sample_(tree(...)) works", {
+  igraph_local_seed(42)
   g <- sample_(tree(200, method = "prufer"))
   expect_false(is_directed(g))
   expect_ecount(g, 199)
@@ -181,6 +184,7 @@ test_that("sample_tree throws an error for the Prufer method with directed graph
 })
 
 test_that("sample_spanning_tree works for connected graphs", {
+  igraph_local_seed(42)
   g <- make_full_graph(8)
 
   edges <- sample_spanning_tree(g)
@@ -193,6 +197,7 @@ test_that("sample_spanning_tree works for connected graphs", {
 })
 
 test_that("sample_spanning_tree works for disconnected graphs", {
+  igraph_local_seed(42)
   g <- make_full_graph(8) %du% make_full_graph(5)
 
   edges <- sample_spanning_tree(g, vid = 8)
@@ -216,10 +221,54 @@ test_that("sample_spanning_tree works for disconnected graphs", {
 })
 
 test_that("subgraph.edges deprecation", {
-  local_igraph_options(print.id = FALSE)
-  withr::local_seed(42)
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
 
   g <- make_full_graph(8) %du% make_full_graph(5)
   edges <- sample_spanning_tree(g)
   expect_snapshot(subgraph.edges(g, edges, delete.vertices = FALSE))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("is_tree recovers legacy positional arguments", {
+  g <- make_tree(7, 2, mode = "in")
+  # The default mode "out" rejects an in-tree, so the recovered value is visible.
+  expect_false(is_tree(g))
+  lifecycle::expect_deprecated(res <- is_tree(g, "in"))
+  expect_identical(res, is_tree(g, mode = "in"))
+  expect_true(res)
+})
+
+test_that("is_forest returns component roots for the requested mode", {
+  g <- make_tree(3, mode = "in") + make_tree(5, 3, mode = "in")
+
+  res <- is_forest(g, mode = "in", details = TRUE)
+  expect_named(res, c("res", "roots"))
+  expect_true(res$res)
+  expect_equal(ignore_attr = TRUE, res$roots, V(g)[c(1, 4)])
+
+  # The same forest fails the check against the opposite orientation.
+  res_out <- is_forest(g, mode = "out", details = TRUE)
+  expect_named(res_out, c("res", "roots"))
+  expect_false(res_out$res)
+})
+
+test_that("is_forest recovers legacy positional arguments", {
+  g <- make_graph(c(1, 2, 2, 3, 2, 4, 5, 4), n = 6, directed = TRUE)
+  # The default mode "out" rejects this graph, so the recovered value is visible.
+  expect_false(is_forest(g))
+  lifecycle::expect_deprecated(res <- is_forest(g, "all"))
+  expect_identical(res, is_forest(g, mode = "all"))
+  expect_true(res)
+})
+
+test_that("sample_spanning_tree recovers legacy positional arguments", {
+  g <- make_full_graph(8) %du% make_full_graph(5)
+  lifecycle::expect_deprecated(
+    res <- igraph_with_seed(42, sample_spanning_tree(g, 9))
+  )
+  # vid = 9 selects the 5-vertex component, so its spanning tree has 4 edges.
+  expect_length(res, 4)
+  expect_equal(res, igraph_with_seed(42, sample_spanning_tree(g, vid = 9)))
 })

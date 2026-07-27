@@ -10,13 +10,13 @@
 \usage{
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
-largest_component(graph, mode = c("weak", "strong"))
+largest_component(graph, ..., mode = c("weak", "strong"))
 
-components(graph, mode = c("weak", "strong"))
+components(graph, ..., mode = c("weak", "strong"))
 
-is_connected(graph, mode = c("weak", "strong"))
+is_connected(graph, ..., mode = c("weak", "strong"))
 
-count_components(graph, mode = c("weak", "strong"))
+count_components(graph, ..., mode = c("weak", "strong"))
 }
 \arguments{
 \item{graph}{The graph to analyze.}
@@ -35,12 +35,12 @@ directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
 connected components to search. It is ignored for undirected graphs.}
 }
 \value{
-For \code{is_connected()} a logical constant.
+For \code{is_connected()} a Logical.
 
 For \code{components()} a named list with three components:
 \describe{
 \item{membership}{
-numeric vector giving the cluster id to which each vertex belongs.
+numeric vector giving the cluster ID to which each vertex belongs.
 }
 \item{csize}{
 numeric vector giving the sizes of the clusters.

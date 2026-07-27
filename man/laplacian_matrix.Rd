@@ -21,7 +21,7 @@ matrix. If this is \code{NULL} and the graph has an edge attribute called
 you want the unweighted Laplacian on a graph that has a \code{weight} edge
 attribute.}
 
-\item{sparse}{Logical scalar, whether to return the result as a sparse
+\item{sparse}{Logical, whether to return the result as a sparse
 matrix. The \code{Matrix} package is required for sparse matrices.}
 
 \item{normalization}{The normalization method to use when calculating the

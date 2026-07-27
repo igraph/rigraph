@@ -20,9 +20,9 @@ local_scan(
 \item{graph.us, graph}{An igraph object, the graph for which the scan
 statistics will be computed}
 
-\item{graph.them}{An igraph object or \code{NULL}, if not \code{NULL},
-then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-calculated from \code{graph.us} are evaluated on \code{graph.them}.}
+\item{graph.them}{An igraph object on which the \sQuote{them} statistics is computed,
+i.e. the neighborhoods calculated from \code{graph.us} are evaluated on \code{graph.them}.
+Default: \code{NULL}.}
 
 \item{k}{An integer scalar, the size of the local neighborhood for each
 vertex. Should be non-negative.}
@@ -34,7 +34,7 @@ default value), \code{ecount()} is used for unweighted graphs (if
 weights is used for weighted graphs (if \code{weighted=TRUE}). This
 argument is ignored if \code{k} is zero.}
 
-\item{weighted}{Logical scalar, TRUE if the edge weights should be used
+\item{weighted}{Logical, TRUE if the edge weights should be used
 for computation of the scan statistic. If TRUE, the graph should be
 weighted.  Note that this argument is ignored if \code{FUN} is not
 \code{NULL}, \code{"ecount"} and \code{"sumweights"}.}
@@ -84,7 +84,7 @@ information, and applying \code{FUN} on these neighborhoods in
 \code{graph.them}.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0}{\code{local_scan_0()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them}{\code{local_scan_0_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount}{\code{local_scan_1_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them}{\code{local_scan_1_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount}{\code{local_scan_k_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them}{\code{local_scan_k_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount}{\code{local_scan_neighborhood_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_neighborhood_ecount}{\code{local_scan_neighborhood_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0_them}{\code{local_scan_0_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount_them}{\code{local_scan_1_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount_them}{\code{local_scan_k_ecount_them()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_0}{\code{local_scan_0()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_1_ecount}{\code{local_scan_1_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_scan_k_ecount}{\code{local_scan_k_ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

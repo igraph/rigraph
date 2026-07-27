@@ -7,6 +7,7 @@
 \usage{
 graph_from_adjacency_matrix(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -16,6 +17,7 @@ graph_from_adjacency_matrix(
 
 from_adjacency(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -26,6 +28,8 @@ from_adjacency(
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
 can be a sparse matrix created with the \code{Matrix} package.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, specifies how igraph should interpret the
 supplied matrix. See also the \code{weighted} argument, the interpretation
@@ -42,7 +46,7 @@ edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
 then a weighted graph is created and the name of the edge attribute will be
 \code{weight}. See also details below.}
 
-\item{diag}{Logical scalar, whether to include the diagonal of the matrix in
+\item{diag}{Logical, whether to include the diagonal of the matrix in
 the calculation. If this is \code{FALSE} then the diagonal is zerod out
 first.}
 
@@ -141,7 +145,7 @@ gives the edge weights.
 }
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency}{\code{adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency}{\code{weighted_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_adjacency}{\code{adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_weighted_adjacency}{\code{weighted_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
@@ -241,7 +245,7 @@ all(expected_g9_weights == actual_g9_weights)
 
 ## row/column names
 rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-colnames(adj_matrix) <- seq(ncol(adj_matrix))
+colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 g10 <- graph_from_adjacency_matrix(
   adj_matrix,
   weighted = TRUE,

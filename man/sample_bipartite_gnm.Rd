@@ -38,7 +38,7 @@ sample_bipartite_gnp(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed
@@ -74,7 +74,7 @@ sample_bipartite_gnp(10, 5, p = 0)
 sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
-sample_bipartite_gnp(10, 5, p = .1)
+sample_bipartite_gnp(10, 5, p = 0.1)
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")

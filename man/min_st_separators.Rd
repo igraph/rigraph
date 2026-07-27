@@ -12,7 +12,7 @@ ignored.}
 }
 \value{
 A list of numeric vectors. Each vector contains a vertex set
-(defined by vertex ids), each vector is an (s,t) separator of the input
+(defined by vertex IDs), each vector is an (s,t) separator of the input
 graph, for some \eqn{s} and \eqn{t}.
 }
 \description{
@@ -38,15 +38,15 @@ min_st_separators(g)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [[1]]
-#> + 1/5 vertex, named:
+#> -- <vertex sequence> 1/5 * named -----------------------------------------------
 #> [1] 1
 #> 
 #> [[2]]
-#> + 2/5 vertices, named:
+#> -- <vertex sequence> 2/5 * named -----------------------------------------------
 #> [1] 2 4
 #> 
 #> [[3]]
-#> + 2/5 vertices, named:
+#> -- <vertex sequence> 2/5 * named -----------------------------------------------
 #> [1] 1 3
 }\if{html}{\out{</div>}}
 }

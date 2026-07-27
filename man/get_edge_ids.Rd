@@ -2,27 +2,29 @@
 % Please edit documentation in R/interface.R
 \name{get_edge_ids}
 \alias{get_edge_ids}
-\title{Find the edge ids based on the incident vertices of the edges}
+\title{Find the edge IDs based on the incident vertices of the edges}
 \usage{
-get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
+get_edge_ids(graph, vp, ..., directed = TRUE, error = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{vp}{The incident vertices, given as a two-column data frame, two-column matrix,
-or vector of vertex ids or symbolic vertex names.
+or vector of vertex IDs or symbolic vertex names.
 For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.}
 
-\item{directed}{Logical scalar, whether to consider edge directions in
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{Logical, whether to consider edge directions in
 directed graphs. This argument is ignored for undirected graphs.}
 
-\item{error}{Logical scalar, whether to report an error if an edge is not
+\item{error}{Logical, whether to report an error if an edge is not
 found in the graph. If \code{FALSE}, then no error is reported, and zero is
 returned for the non-existant edge(s).}
 }
 \value{
-A numeric vector of edge ids, one for each pair of input vertices.
+A numeric vector of edge IDs, one for each pair of input vertices.
 If there is no edge in the input graph for a given pair of vertices, then
 zero is reported. (If the \code{error} argument is \code{FALSE}.)
 }
@@ -32,7 +34,7 @@ function handles multi-graph (graphs with multiple edges) and can consider
 or ignore the edge directions in directed graphs.
 }
 \details{
-igraph vertex ids are natural numbers, starting from one, up to the number
+igraph vertex IDs are natural numbers, starting from one, up to the number
 of vertices in the graph. Similarly, edges are also numbered from one, up to
 the number of edges.
 

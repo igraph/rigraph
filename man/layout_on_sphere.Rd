@@ -19,7 +19,7 @@ A numeric matrix with three columns, and one row for each vertex.
 }
 \description{
 Place vertices on a sphere, approximately uniformly, in the order of their
-vertex ids.
+vertex IDs.
 }
 \details{
 \code{layout_on_sphere()} places the vertices (approximately) uniformly on the

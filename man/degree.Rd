@@ -10,6 +10,7 @@
 degree(
   graph,
   v = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
@@ -23,14 +24,16 @@ max_degree(
   loops = TRUE
 )
 
-mean_degree(graph, loops = TRUE)
+mean_degree(graph, ..., loops = TRUE)
 
 degree_distribution(graph, cumulative = FALSE, ...)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The ids of vertices of which the degree will be calculated.}
+\item{v}{The IDs of vertices of which the degree will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{total} for the sum of the two. For undirected graphs
@@ -38,11 +41,9 @@ this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
 
 \item{loops}{Logical; whether the loop edges are also counted.}
 
-\item{normalized}{Logical scalar, whether to normalize the degree.  If
+\item{normalized}{Logical, whether to normalize the degree.  If
 \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 number of vertices in the graph.}
-
-\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}

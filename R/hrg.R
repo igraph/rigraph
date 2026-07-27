@@ -177,6 +177,7 @@ NULL
 #' @param hrg A hierarchical random graph model, in the form of an
 #'   `igraphHRG` object. `fit_hrg()` allows this to be `NULL`, in
 #'   which case a random starting point is used for the fitting.
+#' @inheritParams rlang::args_dots_empty
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied `igraphHRG` object, or from a random starting point.
 #' @param steps The number of MCMC steps to make. If this is zero, then the
@@ -232,7 +233,35 @@ NULL
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
+fit_hrg <- function(
+  graph,
+  hrg = NULL,
+  ...,
+  start = FALSE,
+  steps = 0
+) {
+  # BEGIN GENERATED ARG_HANDLE: fit_hrg, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(start = start, steps = steps),
+      recover_new = c("start", "steps"),
+      recover_old = c("start", "steps"),
+      match_names = c("start", "steps"),
+      match_to = c("start", "steps"),
+      defaults = list(start = FALSE, steps = 0),
+      head_args = c("graph", "hrg"),
+      fn_name = "fit_hrg"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
@@ -281,6 +310,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'   `igraphHRG` object. `consensus_tree()` allows this to be
 #'   `NULL` as well, then a HRG is fitted to the graph first, from a
 #'   random starting point.
+#' @inheritParams rlang::args_dots_empty
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied `igraphHRG` object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or
@@ -291,10 +321,10 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'   following members:
 #'   \describe{
 #'     \item{parents}{
-#'       For each vertex, the id of its parent vertex is stored,
+#'       For each vertex, the ID of its parent vertex is stored,
 #'       or zero, if the vertex is the root vertex in the tree.
-#'       The first n vertex ids (from 0) refer to the original vertices of the graph,
-#'       the other ids refer to vertex groups.
+#'       The first n vertex IDs (from 0) refer to the original vertices of the graph,
+#'       the other IDs refer to vertex groups.
 #'     }
 #'     \item{weights}{
 #'       Numeric vector, counts the number of times a given tree split
@@ -307,9 +337,32 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 consensus_tree <- function(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000
 ) {
+  # BEGIN GENERATED ARG_HANDLE: consensus_tree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(start = start, num.samples = num.samples),
+      recover_new = c("start", "num.samples"),
+      recover_old = c("start", "num.samples"),
+      match_names = c("start", "num.samples"),
+      match_to = c("start", "num.samples"),
+      defaults = list(start = FALSE, num.samples = 10000),
+      head_args = c("graph", "hrg"),
+      fn_name = "consensus_tree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   hrg_consensus_impl(
     graph = graph,
     hrg = hrg,
@@ -328,7 +381,7 @@ consensus_tree <- function(
 #'
 #' @param graph The igraph graph to create the HRG from.
 #' @param prob A vector of probabilities, one for each vertex, in the order of
-#'   vertex ids.
+#'   vertex IDs.
 #' @return `hrg()` returns an `igraphHRG` object.
 #'
 #' @family hierarchical random graph functions
@@ -403,6 +456,7 @@ sample_hrg <- function(hrg) {
 #'   `igraphHRG` object. `predict_edges()` allow this to be
 #'   `NULL` as well, then a HRG is fitted to the graph first, from a
 #'   random starting point.
+#' @inheritParams rlang::args_dots_empty
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied `igraphHRG` object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or
@@ -412,7 +466,7 @@ sample_hrg <- function(hrg) {
 #' @return A list with entries:
 #'   \describe{
 #'     \item{edges}{
-#'       The predicted edges, in a two-column matrix of vertex ids.
+#'       The predicted edges, in a two-column matrix of vertex IDs.
 #'     }
 #'     \item{prob}{
 #'       Probabilities of these edges, according to the fitted model.
@@ -448,10 +502,37 @@ sample_hrg <- function(hrg) {
 predict_edges <- function(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000,
   num.bins = 25
 ) {
+  # BEGIN GENERATED ARG_HANDLE: predict_edges, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        start = start,
+        num.samples = num.samples,
+        num.bins = num.bins
+      ),
+      recover_new = c("start", "num.samples", "num.bins"),
+      recover_old = c("start", "num.samples", "num.bins"),
+      match_names = c("start", "num.samples", "num.bins"),
+      match_to = c("start", "num.samples", "num.bins"),
+      defaults = list(start = FALSE, num.samples = 10000, num.bins = 25),
+      head_args = c("graph", "hrg"),
+      fn_name = "predict_edges"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- hrg_predict_impl(
     graph = graph,
     hrg = hrg,
@@ -516,7 +597,6 @@ buildMerges <- function(object) {
 
   S <- numeric()
   vcount <- length(object$left) + 1
-  nMerge <- vcount - 1
   merges <- matrix(0, nrow = vcount - 1, ncol = 3)
   mptr <- 1
   S[length(S) + 1] <- -1
@@ -549,6 +629,7 @@ buildMerges <- function(object) {
 }
 
 #' @method as.dendrogram igraphHRG
+#' @export
 as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
   nMerge <- length(object$left)
   merges <- buildMerges(object)
@@ -569,9 +650,12 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
 
   for (k in 1:nMerge) {
     x <- merges[k, 1:2]
-    if (any(neg <- x >= 0)) {
+    neg <- (x >= 0)
+
+    if (any(neg)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
+
     if (all(neg)) {
       # two leaves
       zk <- as.list(x + 1)
@@ -607,7 +691,8 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
         2
     }
     attr(zk, "height") <- oHgt[k]
-    z[[k <- paste0("g", -merges[k, 3])]] <- zk
+    k <- paste0("g", -merges[k, 3])
+    z[[k]] <- zk
   }
   z <- z[[k]]
   class(z) <- "dendrogram"
@@ -954,35 +1039,27 @@ print1.igraphHRG <- function(x, level = 3, ...) {
     gol <- x$left[b] < 0 && l < level
     gor <- x$right[b] < 0 && l < level
 
-    ## the children to print
-    ch1 <- character()
-    if (!gol && x$left[b] < 0) {
-      ch1 <- c(ch1, paste(sep = "", "g", -x$left[b]))
-    }
-    if (!gor && x$right[b] < 0) {
-      ch1 <- c(ch1, paste(sep = "", "g", -x$right[b]))
-    }
-    ch2 <- numeric()
+    children <- numeric()
     if (!gol) {
       if (x$left[b] < 0) {
-        ch2 <- c(ch2, .children(-x$left[b]))
+        children <- c(children, .children(-x$left[b]))
       }
       if (x$left[b] >= 0) {
-        ch2 <- c(ch2, x$left[b] + 1)
+        children <- c(children, x$left[b] + 1)
       }
     }
     if (!gor) {
       if (x$right[b] < 0) {
-        ch2 <- c(ch2, .children(-x$right[b]))
+        children <- c(children, .children(-x$right[b]))
       }
       if (x$right[b] >= 0) {
-        ch2 <- c(ch2, x$right[b] + 1)
+        children <- c(children, x$right[b] + 1)
       }
     }
 
     ## print this line
-    ch2 <- as.character(nn[ch2])
-    lf <- gsub(" ", "x", format(ch2, width = vw), fixed = TRUE)
+    children <- as.character(nn[children])
+    lf <- gsub(" ", "x", format(children, width = vw), fixed = TRUE)
     lf <- paste(collapse = " ", lf)
     lf <- strwrap(lf, width = getOption("width") - cs - pw - 3 - 2)
     lf <- gsub("x", " ", lf, fixed = TRUE)

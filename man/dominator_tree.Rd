@@ -4,15 +4,17 @@
 \alias{dominator_tree}
 \title{Dominator tree}
 \usage{
-dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
+dominator_tree(graph, root, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{A directed graph. If it is not a flowgraph, and it contains
 some vertices not reachable from the root vertex, then these vertices will
 be collected and returned as part of the result.}
 
-\item{root}{The id of the root (or source) vertex, this will be the root of
+\item{root}{The ID of the root (or source) vertex, this will be the root of
 the tree.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If
 it is \sQuote{\verb{in}}, then all directions are considered as opposite to
@@ -28,11 +30,11 @@ For the root vertex itself it contains minus one.
 }
 \item{domtree}{
 A graph object, the dominator tree.
-Its vertex ids are the as the vertex ids of the input graph.
+Its vertex IDs are the as the vertex IDs of the input graph.
 Isolate vertices are the ones that are unreachable from the root.
 }
 \item{leftout}{
-A numeric vector containing the vertex ids that are unreachable from the root.
+A numeric vector containing the vertex IDs that are unreachable from the root.
 }
 }
 }

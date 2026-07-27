@@ -22,7 +22,7 @@ desired placement. Vertices that are not included here will be placed at
 A numeric matrix with two columns, and one row for each vertex.
 }
 \description{
-Place vertices on a circle, in the order of their vertex ids.
+Place vertices on a circle, in the order of their vertex IDs.
 }
 \details{
 If you want to order the vertices differently, then permute them using the

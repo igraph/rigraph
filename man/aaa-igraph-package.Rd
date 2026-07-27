@@ -61,7 +61,7 @@ deterministic and stochastic; stochastic graph constructors are called
 To create small graphs with a given structure probably the
 \code{\link[=graph_from_literal]{graph_from_literal()}} function is easiest. It uses R's formula
 interface, its manual page contains many examples. Another option is
-\code{\link[=make_graph]{make_graph()}}, which takes numeric vertex ids directly.
+\code{\link[=make_graph]{make_graph()}}, which takes numeric vertex IDs directly.
 \code{\link[=graph_from_atlas]{graph_from_atlas()}} creates graph from the Graph Atlas,
 \code{\link[=make_graph]{make_graph()}} can create some special graphs.
 
@@ -78,18 +78,18 @@ some recent  popular models, like preferential attachment
 
 \section{Vertex and edge IDs}{
 
-Vertices and edges have numerical vertex ids in igraph. Vertex ids are
+Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are
 always consecutive and they start with one. I.e. for a graph with
-\eqn{n} vertices the vertex ids are between \eqn{1} and
+\eqn{n} vertices the vertex IDs are between \eqn{1} and
 \eqn{n}. If some operation changes the number of vertices in the
 graphs, e.g. a subgraph is created via \code{\link[=induced_subgraph]{induced_subgraph()}}, then
 the vertices are renumbered to satisfy this criteria.
 
-The same is true for the edges as well, edge ids are always between
+The same is true for the edges as well, edge IDs are always between
 one and \eqn{m}, the total number of edges in the graph.
 
 It is often desirable to follow vertices along a number of graph
-operations, and vertex ids don't allow this because of the
+operations, and vertex IDs don't allow this because of the
 renumbering. The solution is to assign attributes to the
 vertices. These are kept by all operations, if possible. See more
 about attributes in the next section.
@@ -105,7 +105,7 @@ attribute values, see \code{\link[=vertex_attr]{vertex_attr()}},
 
 Some vertex/edge/graph attributes are treated specially. One of them
 is the \sQuote{name} attribute. This is used for printing the graph
-instead of the numerical ids, if it exists. Vertex names can also be
+instead of the numerical IDs, if it exists. Vertex names can also be
 used to specify a vector or set of vertices, in all igraph
 functions. E.g. \code{\link[=degree]{degree()}} has a \code{v} argument
 that gives the vertices for which the degree is calculated. This

@@ -10,6 +10,7 @@
 betweenness(
   graph,
   v = V(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -19,6 +20,7 @@ betweenness(
 edge_betweenness(
   graph,
   e = E(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
@@ -29,6 +31,8 @@ edge_betweenness(
 
 \item{v}{The vertices for which the vertex betweenness will be calculated.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical, whether directed paths should be considered while
 determining the shortest paths.}
 
@@ -37,7 +41,7 @@ betweenness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to normalize the betweenness
+\item{normalized}{Logical, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
 or unordered vertex pairs in directed and undirected graphs, respectively.
 In an undirected graph,

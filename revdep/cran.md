@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2287 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2289 reverse dependencies (2287 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 20 new problems
- * We failed to check 8 packages
+ * We saw 22 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -15,6 +15,9 @@ Issues with CRAN packages are summarised below.
 
 * c3net
   checking examples ... ERROR
+
+* cfid
+  checking tests ... ERROR
 
 * comato
   checking examples ... ERROR
@@ -34,9 +37,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* FrF2
-  checking tests ... NOTE
-
 * ggm
   checking examples ... ERROR
 
@@ -44,8 +44,14 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* glyrepr
+  checking tests ... ERROR
+
 * GoodFitSBM
   checking examples ... ERROR
+
+* manynet
+  checking tests ... ERROR
 
 * migraph
   checking tests ... ERROR
@@ -83,7 +89,6 @@ Issues with CRAN packages are summarised below.
 * caugi      (NA)
 * deepSTRAPP (NA)
 * ggpicrust2 (NA)
-* rsat       (NA)
 * scAnnotate (NA)
 * spopt      (NA)
 * streamDAG  (NA)

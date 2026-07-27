@@ -820,6 +820,7 @@ aging.prefatt.game <- function(
 #'   defaults to 1.
 #'   This argument is only used if both `out.dist` and `out.seq` are omitted
 #'   or NULL.
+#' @inheritParams rlang::args_dots_empty
 #' @param out.dist Numeric vector, the distribution of the number of edges to
 #'   add in each time step. This argument is only used if the `out.seq`
 #'   argument is omitted or NULL.
@@ -839,7 +840,7 @@ aging.prefatt.game <- function(
 #'   Before the 0.6 version igraph used this algorithm if `power` was not
 #'   one, or `zero.appeal` was not one.  `bag` is the algorithm that
 #'   was previously (before version 0.6) used if `power` was one and
-#'   `zero.appeal` was one as well. It works by putting the ids of the
+#'   `zero.appeal` was one as well. It works by putting the IDs of the
 #'   vertices into a bag (multiset, really), exactly as many times as their
 #'   (in-)degree, plus once more. Then the required number of cited vertices are
 #'   drawn from the bag, with replacement. This method might generate multiple
@@ -869,6 +870,7 @@ sample_pa <- function(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -881,6 +883,76 @@ sample_pa <- function(
   ),
   start.graph = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        out.dist = out.dist,
+        out.seq = out.seq,
+        out.pref = out.pref,
+        zero.appeal = zero.appeal,
+        directed = directed,
+        algorithm = algorithm,
+        start.graph = start.graph
+      ),
+      recover_new = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      recover_old = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      match_names = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      match_to = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      defaults = list(
+        out.dist = NULL,
+        out.seq = NULL,
+        out.pref = FALSE,
+        zero.appeal = 1,
+        directed = TRUE,
+        algorithm = c("psumtree", "psumtree-multiple", "bag"),
+        start.graph = NULL
+      ),
+      head_args = c("n", "power", "m"),
+      fn_name = "sample_pa"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.null(start.graph) && !is_igraph(start.graph)) {
     cli::cli_abort(
       "{.arg start.graph} must be an {.cls igraph} object, not {.obj_type_friendly {start.graph}}."
@@ -963,11 +1035,13 @@ sample_pa <- function(
 }
 
 #' @rdname sample_pa
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pa <- function(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -976,6 +1050,76 @@ pa <- function(
   algorithm = c("psumtree", "psumtree-multiple", "bag"),
   start.graph = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pa, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        out.dist = out.dist,
+        out.seq = out.seq,
+        out.pref = out.pref,
+        zero.appeal = zero.appeal,
+        directed = directed,
+        algorithm = algorithm,
+        start.graph = start.graph
+      ),
+      recover_new = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      recover_old = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      match_names = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      match_to = c(
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "zero.appeal",
+        "directed",
+        "algorithm",
+        "start.graph"
+      ),
+      defaults = list(
+        out.dist = NULL,
+        out.seq = NULL,
+        out.pref = FALSE,
+        zero.appeal = 1,
+        directed = TRUE,
+        algorithm = c("psumtree", "psumtree-multiple", "bag"),
+        start.graph = NULL
+      ),
+      head_args = c("n", "power", "m"),
+      fn_name = "pa"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_pa,
     n,
@@ -1010,6 +1154,7 @@ pa <- function(
 #' @param n The number of vertices in the graph.
 #' @param p The probability for drawing an edge between two
 #'   arbitrary vertices (\eqn{G(n,p)} graph).
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether the graph will be directed, defaults to
 #'   `FALSE`.
 #' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
@@ -1029,7 +1174,35 @@ pa <- function(
 #'
 #' # Pick a simple graph on 6 vertices uniformly at random
 #' plot(sample_gnp(6, 0.5))
-sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
+sample_gnp <- function(
+  n,
+  p,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_gnp, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "p"),
+      fn_name = "sample_gnp"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   type <- "gnp"
 
   res <- erdos_renyi_game_gnp_impl(
@@ -1049,8 +1222,37 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
+#' @inheritParams rlang::args_dots_empty
 #' @export
-gnp <- function(n, p, directed = FALSE, loops = FALSE) {
+gnp <- function(
+  n,
+  p,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: gnp, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "p"),
+      fn_name = "gnp"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_gnp, n = n, p = p, directed = directed, loops = loops)
 }
 
@@ -1067,6 +1269,7 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
 #' @inheritParams sample_gnp
+#' @inheritParams rlang::args_dots_empty
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1078,7 +1281,35 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #'
 #' g <- sample_gnm(1000, 1000)
 #' degree_distribution(g)
-sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
+sample_gnm <- function(
+  n,
+  m,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_gnm, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "m"),
+      fn_name = "sample_gnm"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   type <- "gnm"
 
   res <- erdos_renyi_game_gnm_impl(
@@ -1098,8 +1329,37 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
+#' @inheritParams rlang::args_dots_empty
 #' @export
-gnm <- function(n, m, directed = FALSE, loops = FALSE) {
+gnm <- function(
+  n,
+  m,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: gnm, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "m"),
+      fn_name = "gnm"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_gnm, n = n, m = m, directed = directed, loops = loops)
 }
 
@@ -1231,6 +1491,7 @@ random.graph.game <- function(
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
+#' @inheritParams rlang::args_dots_empty
 #' @param method Character, the method for generating the graph. See Details.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1352,6 +1613,7 @@ random.graph.game <- function(
 sample_degseq <- function(
   out.deg,
   in.deg = NULL,
+  ...,
   method = c(
     "configuration",
     "vl",
@@ -1360,6 +1622,30 @@ sample_degseq <- function(
     "edge.switching.simple"
   )
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_degseq, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(method = method),
+      recover_new = c("method"),
+      recover_old = c("method"),
+      match_names = c("method"),
+      match_to = c("method"),
+      defaults = list(
+        method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")
+      ),
+      head_args = c("out.deg", "in.deg"),
+      fn_name = "sample_degseq"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (missing(method)) {
     method <- method[1]
   }
@@ -1546,15 +1832,16 @@ growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @param m The number of edges each new vertex creates (except the very first
 #'   vertex). This argument is used only if both the `out.dist` and
 #'   `out.seq` arguments are NULL.
+#' @inheritParams rlang::args_dots_empty
 #' @param aging.bin The number of bins to use for measuring the age of
 #'   vertices, see details below.
 #' @param out.dist The discrete distribution to generate the number of edges to
 #'   add in each time step if `out.seq` is NULL. See details below.
 #' @param out.seq The number of edges to add in each time step, a vector
 #'   containing as many elements as the number of vertices. See details below.
-#' @param out.pref Logical constant, whether to include edges not initiated by
+#' @param out.pref Logical, whether to include edges not initiated by
 #'   the vertex as a basis of preferential attachment. See details below.
-#' @param directed Logical constant, whether to generate a directed graph. See
+#' @param directed Logical, whether to generate a directed graph. See
 #'   details below.
 #' @param zero.deg.appeal The degree-dependent part of the
 #'   \sQuote{attractiveness} of the vertices with no adjacent edges. See also
@@ -1587,6 +1874,7 @@ sample_pa_age <- function(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -1598,6 +1886,99 @@ sample_pa_age <- function(
   age.coef = 1,
   time.window = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "sample_pa_age"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        aging.bin = aging.bin,
+        out.dist = out.dist,
+        out.seq = out.seq,
+        out.pref = out.pref,
+        directed = directed,
+        zero.deg.appeal = zero.deg.appeal,
+        zero.age.appeal = zero.age.appeal,
+        deg.coef = deg.coef,
+        age.coef = age.coef,
+        time.window = time.window
+      ),
+      recover_new = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      recover_old = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      match_names = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      match_to = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      defaults = list(
+        aging.bin = 300,
+        out.dist = NULL,
+        out.seq = NULL,
+        out.pref = FALSE,
+        directed = TRUE,
+        zero.deg.appeal = 1,
+        zero.age.appeal = 0,
+        deg.coef = 1,
+        age.coef = 1,
+        time.window = NULL
+      ),
+      head_args = c("n", "pa.exp", "aging.exp", "m"),
+      fn_name = "sample_pa_age"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Checks
   if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
     cli::cli_warn(
@@ -1710,12 +2091,14 @@ sample_pa_age <- function(
 }
 
 #' @rdname sample_pa_age
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pa_age <- function(
   n,
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -1727,6 +2110,99 @@ pa_age <- function(
   age.coef = 1,
   time.window = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "pa_age"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        aging.bin = aging.bin,
+        out.dist = out.dist,
+        out.seq = out.seq,
+        out.pref = out.pref,
+        directed = directed,
+        zero.deg.appeal = zero.deg.appeal,
+        zero.age.appeal = zero.age.appeal,
+        deg.coef = deg.coef,
+        age.coef = age.coef,
+        time.window = time.window
+      ),
+      recover_new = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      recover_old = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      match_names = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      match_to = c(
+        "aging.bin",
+        "out.dist",
+        "out.seq",
+        "out.pref",
+        "directed",
+        "zero.deg.appeal",
+        "zero.age.appeal",
+        "deg.coef",
+        "age.coef",
+        "time.window"
+      ),
+      defaults = list(
+        aging.bin = 300,
+        out.dist = NULL,
+        out.seq = NULL,
+        out.pref = FALSE,
+        directed = TRUE,
+        zero.deg.appeal = 1,
+        zero.age.appeal = 0,
+        deg.coef = 1,
+        age.coef = 1,
+        time.window = NULL
+      ),
+      head_args = c("n", "pa.exp", "aging.exp", "m"),
+      fn_name = "pa_age"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_pa_age,
     n,
@@ -1769,12 +2245,13 @@ pa_age <- function(
 #'
 #' @param nodes The number of vertices in the graph.
 #' @param types The number of different vertex types.
+#' @inheritParams rlang::args_dots_empty
 #' @param edge.per.step The number of edges to add to the graph per time step.
 #' @param type.dist The distribution of the vertex types. This is assumed to be
 #'   stationary in time.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
 #'   types. These should be probabilities, i.e. numbers between zero and one.
-#' @param directed Logical constant, whether to generate directed graphs.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1789,11 +2266,49 @@ pa_age <- function(
 sample_traits_callaway <- function(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits_callaway"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        edge.per.step = edge.per.step,
+        type.dist = type.dist,
+        pref.matrix = pref.matrix,
+        directed = directed
+      ),
+      recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      defaults = list(
+        edge.per.step = 1,
+        type.dist = rep(1, types),
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "sample_traits_callaway"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- callaway_traits_game_impl(
     nodes = nodes,
     types = types,
@@ -1817,15 +2332,54 @@ sample_traits_callaway <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 traits_callaway <- function(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits_callaway"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        edge.per.step = edge.per.step,
+        type.dist = type.dist,
+        pref.matrix = pref.matrix,
+        directed = directed
+      ),
+      recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+      defaults = list(
+        edge.per.step = 1,
+        type.dist = rep(1, types),
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "traits_callaway"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_traits_callaway,
     nodes,
@@ -1838,15 +2392,52 @@ traits_callaway <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_traits <- function(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist = type.dist,
+        pref.matrix = pref.matrix,
+        directed = directed
+      ),
+      recover_new = c("type.dist", "pref.matrix", "directed"),
+      recover_old = c("type.dist", "pref.matrix", "directed"),
+      match_names = c("type.dist", "pref.matrix", "directed"),
+      match_to = c("type.dist", "pref.matrix", "directed"),
+      defaults = list(
+        type.dist = rep(1, types),
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE
+      ),
+      head_args = c("nodes", "types", "k"),
+      fn_name = "sample_traits"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- establishment_game_impl(
     nodes = nodes,
     types = types,
@@ -1866,15 +2457,52 @@ sample_traits <- function(
 }
 
 #' @rdname sample_traits_callaway
+#' @inheritParams rlang::args_dots_empty
 #' @export
 traits <- function(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist = type.dist,
+        pref.matrix = pref.matrix,
+        directed = directed
+      ),
+      recover_new = c("type.dist", "pref.matrix", "directed"),
+      recover_old = c("type.dist", "pref.matrix", "directed"),
+      match_names = c("type.dist", "pref.matrix", "directed"),
+      match_to = c("type.dist", "pref.matrix", "directed"),
+      defaults = list(
+        type.dist = rep(1, types),
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE
+      ),
+      head_args = c("nodes", "types", "k"),
+      fn_name = "traits"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_traits,
     nodes,
@@ -1902,8 +2530,9 @@ traits <- function(
 #' @param nodes The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
-#' @param torus Logical constant, whether to use a torus instead of a square.
-#' @param coords Logical scalar, whether to add the positions of the vertices
+#' @inheritParams rlang::args_dots_empty
+#' @param torus Logical, whether to use a torus instead of a square.
+#' @param coords Logical, whether to add the positions of the vertices
 #'   as vertex attributes called \sQuote{`x`} and \sQuote{`y`}.
 #' @return A graph object. If `coords` is `TRUE` then with vertex
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
@@ -1917,7 +2546,35 @@ traits <- function(
 #' g <- sample_grg(1000, 0.05, torus = FALSE)
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
-sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+sample_grg <- function(
+  nodes,
+  radius,
+  ...,
+  torus = FALSE,
+  coords = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_grg, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(torus = torus, coords = coords),
+      recover_new = c("torus", "coords"),
+      recover_old = c("torus", "coords"),
+      match_names = c("torus", "coords"),
+      match_to = c("torus", "coords"),
+      defaults = list(torus = FALSE, coords = FALSE),
+      head_args = c("nodes", "radius"),
+      fn_name = "sample_grg"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     Rx_igraph_grg_game,
@@ -1939,8 +2596,37 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 }
 
 #' @rdname sample_grg
+#' @inheritParams rlang::args_dots_empty
 #' @export
-grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+grg <- function(
+  nodes,
+  radius,
+  ...,
+  torus = FALSE,
+  coords = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: grg, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(torus = torus, coords = coords),
+      recover_new = c("torus", "coords"),
+      recover_old = c("torus", "coords"),
+      match_names = c("torus", "coords"),
+      match_to = c("torus", "coords"),
+      defaults = list(torus = FALSE, coords = FALSE),
+      head_args = c("nodes", "radius"),
+      fn_name = "grg"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_grg,
     nodes = nodes,
@@ -1976,6 +2662,7 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #'
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.
+#' @inheritParams rlang::args_dots_empty
 #' @param type.dist The distribution of the vertex types, a numeric vector of
 #'   length \sQuote{types} containing non-negative numbers. The vector will be
 #'   normed to obtain probabilities.
@@ -1987,8 +2674,8 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @param directed Logical, whether to create a directed graph.
+#' @param loops Logical, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -2013,12 +2700,76 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 sample_pref <- function(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_pref"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist = type.dist,
+        fixed.sizes = fixed.sizes,
+        pref.matrix = pref.matrix,
+        directed = directed,
+        loops = loops
+      ),
+      recover_new = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      recover_old = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      match_names = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      match_to = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      defaults = list(
+        type.dist = rep(1, types),
+        fixed.sizes = FALSE,
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE,
+        loops = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "sample_pref"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
@@ -2048,16 +2799,81 @@ sample_pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 pref <- function(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "pref"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist = type.dist,
+        fixed.sizes = fixed.sizes,
+        pref.matrix = pref.matrix,
+        directed = directed,
+        loops = loops
+      ),
+      recover_new = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      recover_old = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      match_names = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      match_to = c(
+        "type.dist",
+        "fixed.sizes",
+        "pref.matrix",
+        "directed",
+        "loops"
+      ),
+      defaults = list(
+        type.dist = rep(1, types),
+        fixed.sizes = FALSE,
+        pref.matrix = matrix(1, types, types),
+        directed = FALSE,
+        loops = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "pref"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_pref,
     nodes,
@@ -2071,14 +2887,51 @@ pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_asym_pref <- function(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_asym_pref"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist.matrix = type.dist.matrix,
+        pref.matrix = pref.matrix,
+        loops = loops
+      ),
+      recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
+      recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
+      match_names = c("type.dist.matrix", "pref.matrix", "loops"),
+      match_to = c("type.dist.matrix", "pref.matrix", "loops"),
+      defaults = list(
+        type.dist.matrix = matrix(1, types, types),
+        pref.matrix = matrix(1, types, types),
+        loops = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "sample_asym_pref"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
@@ -2114,14 +2967,51 @@ sample_asym_pref <- function(
 }
 
 #' @rdname sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @export
 asym_pref <- function(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "asym_pref"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        type.dist.matrix = type.dist.matrix,
+        pref.matrix = pref.matrix,
+        loops = loops
+      ),
+      recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
+      recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
+      match_names = c("type.dist.matrix", "pref.matrix", "loops"),
+      match_to = c("type.dist.matrix", "pref.matrix", "loops"),
+      defaults = list(
+        type.dist.matrix = matrix(1, types, types),
+        pref.matrix = matrix(1, types, types),
+        loops = FALSE
+      ),
+      head_args = c("nodes", "types"),
+      fn_name = "asym_pref"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_asym_pref,
     nodes,
@@ -2135,9 +3025,37 @@ asym_pref <- function(
 ## -----------------------------------------------------------------
 
 #' @rdname ego
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @family functions for manipulating graph structure
-connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
+connect <- function(
+  graph,
+  order,
+  ...,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: connect, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in", "total")),
+      head_args = c("graph", "order"),
+      fn_name = "connect"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
@@ -2176,9 +3094,10 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' @param nei Integer constant, the neighborhood within which the vertices of
 #'   the lattice will be connected.
 #' @param p Real constant between zero and one, the rewiring probability.
-#' @param loops Logical scalar, whether loops edges are allowed in the
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether loops edges are allowed in the
 #'   generated graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed int the
+#' @param multiple Logical, whether multiple edges are allowed int the
 #'   generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2199,9 +3118,32 @@ sample_smallworld <- function(
   size,
   nei,
   p,
+  ...,
   loops = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_smallworld, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, multiple = multiple),
+      recover_new = c("loops", "multiple"),
+      recover_old = c("loops", "multiple"),
+      match_names = c("loops", "multiple"),
+      match_to = c("loops", "multiple"),
+      defaults = list(loops = FALSE, multiple = FALSE),
+      head_args = c("dim", "size", "nei", "p"),
+      fn_name = "sample_smallworld"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- watts_strogatz_game_impl(
     dim = dim,
     size = size,
@@ -2223,8 +3165,39 @@ sample_smallworld <- function(
 }
 
 #' @rdname sample_smallworld
+#' @inheritParams rlang::args_dots_empty
 #' @export
-smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
+smallworld <- function(
+  dim,
+  size,
+  nei,
+  p,
+  ...,
+  loops = FALSE,
+  multiple = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: smallworld, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, multiple = multiple),
+      recover_new = c("loops", "multiple"),
+      recover_old = c("loops", "multiple"),
+      match_names = c("loops", "multiple"),
+      match_to = c("loops", "multiple"),
+      defaults = list(loops = FALSE, multiple = FALSE),
+      head_args = c("dim", "size", "nei", "p"),
+      fn_name = "smallworld"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_smallworld,
     dim = dim,
@@ -2253,14 +3226,15 @@ smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
 #'
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
+#' @inheritParams rlang::args_dots_empty
 #' @param agebins Number of aging bins.
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
 #'   probabilities for the different vertex types.
-#' @param directed Logical scalar, whether to generate directed networks.
+#' @param directed Logical, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
 #'   Types are numbered from zero.
-#' @param attr Logical scalar, whether to add the vertex types to the generated
+#' @param attr Logical, whether to add the vertex types to the generated
 #'   graph as a vertex attribute called \sQuote{`type`}.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2270,10 +3244,37 @@ smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
 sample_last_cit <- function(
   n,
   edges = 1,
+  ...,
   agebins = n / 7100,
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_last_cit, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(agebins = agebins, pref = pref, directed = directed),
+      recover_new = c("agebins", "pref", "directed"),
+      recover_old = c("agebins", "pref", "directed"),
+      match_names = c("agebins", "pref", "directed"),
+      match_to = c("agebins", "pref", "directed"),
+      defaults = list(
+        agebins = n / 7100,
+        pref = (1:(agebins + 1))^-3,
+        directed = TRUE
+      ),
+      head_args = c("n", "edges"),
+      fn_name = "sample_last_cit"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- lastcit_game_impl(
     nodes = n,
     edges_per_node = edges,
@@ -2290,14 +3291,42 @@ sample_last_cit <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 last_cit <- function(
   n,
   edges = 1,
+  ...,
   agebins = n / 7100,
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: last_cit, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(agebins = agebins, pref = pref, directed = directed),
+      recover_new = c("agebins", "pref", "directed"),
+      recover_old = c("agebins", "pref", "directed"),
+      match_names = c("agebins", "pref", "directed"),
+      match_to = c("agebins", "pref", "directed"),
+      defaults = list(
+        agebins = n / 7100,
+        pref = (1:(agebins + 1))^-3,
+        directed = TRUE
+      ),
+      head_args = c("n", "edges"),
+      fn_name = "last_cit"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_last_cit,
     n = n,
@@ -2309,15 +3338,43 @@ last_cit <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_cit_types <- function(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_cit_types, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(pref = pref, directed = directed, attr = attr),
+      recover_new = c("pref", "directed", "attr"),
+      recover_old = c("pref", "directed", "attr"),
+      match_names = c("pref", "directed", "attr"),
+      match_to = c("pref", "directed", "attr"),
+      defaults = list(
+        pref = rep(1, length(types)),
+        directed = TRUE,
+        attr = TRUE
+      ),
+      head_args = c("n", "edges", "types"),
+      fn_name = "sample_cit_types"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- cited_type_game_impl(
     nodes = n,
     types = types,
@@ -2336,15 +3393,43 @@ sample_cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 cit_types <- function(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cit_types, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(pref = pref, directed = directed, attr = attr),
+      recover_new = c("pref", "directed", "attr"),
+      recover_old = c("pref", "directed", "attr"),
+      match_names = c("pref", "directed", "attr"),
+      match_to = c("pref", "directed", "attr"),
+      defaults = list(
+        pref = rep(1, length(types)),
+        directed = TRUE,
+        attr = TRUE
+      ),
+      head_args = c("n", "edges", "types"),
+      fn_name = "cit_types"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_cit_types,
     n = n,
@@ -2357,15 +3442,43 @@ cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 sample_cit_cit_types <- function(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_cit_cit_types, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(pref = pref, directed = directed, attr = attr),
+      recover_new = c("pref", "directed", "attr"),
+      recover_old = c("pref", "directed", "attr"),
+      match_names = c("pref", "directed", "attr"),
+      match_to = c("pref", "directed", "attr"),
+      defaults = list(
+        pref = matrix(1, nrow = length(types), ncol = length(types)),
+        directed = TRUE,
+        attr = TRUE
+      ),
+      head_args = c("n", "edges", "types"),
+      fn_name = "sample_cit_cit_types"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   pref[] <- as.numeric(pref)
   res <- citing_cited_type_game_impl(
     nodes = n,
@@ -2385,15 +3498,43 @@ sample_cit_cit_types <- function(
 }
 
 #' @rdname sample_last_cit
+#' @inheritParams rlang::args_dots_empty
 #' @export
 cit_cit_types <- function(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cit_cit_types, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(pref = pref, directed = directed, attr = attr),
+      recover_new = c("pref", "directed", "attr"),
+      recover_old = c("pref", "directed", "attr"),
+      match_names = c("pref", "directed", "attr"),
+      match_to = c("pref", "directed", "attr"),
+      defaults = list(
+        pref = matrix(1, nrow = length(types), ncol = length(types)),
+        directed = TRUE,
+        attr = TRUE
+      ),
+      head_args = c("n", "edges", "types"),
+      fn_name = "cit_cit_types"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_cit_cit_types,
     n = n,
@@ -2420,7 +3561,7 @@ cit_cit_types <- function(
 #'   be given for \eqn{G(n,m)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 #'   be given for \eqn{G(n,p)} graphs.
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2563,7 +3704,7 @@ bipartite_gnp <- function(
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
 #' @inheritParams rlang::args_dots_empty
-#' @param directed Logical scalar, whether to create a directed graph. See also
+#' @param directed Logical, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
 #'   graphs. If it is \sQuote{out}, then directed edges point from bottom
@@ -2665,6 +3806,7 @@ sample_bipartite_gnp <- function(
 #' @param block.sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
 #' @inheritParams sample_pref
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -2682,9 +3824,32 @@ sample_sbm <- function(
   n,
   pref.matrix,
   block.sizes,
+  ...,
   directed = FALSE,
   loops = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_sbm, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "pref.matrix", "block.sizes"),
+      fn_name = "sample_sbm"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   sbm_game_impl(
     n = n,
     pref_matrix = pref.matrix,
@@ -2695,8 +3860,38 @@ sample_sbm <- function(
 }
 
 #' @rdname sample_sbm
+#' @inheritParams rlang::args_dots_empty
 #' @export
-sbm <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE) {
+sbm <- function(
+  n,
+  pref.matrix,
+  block.sizes,
+  ...,
+  directed = FALSE,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sbm, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, loops = loops),
+      recover_new = c("directed", "loops"),
+      recover_old = c("directed", "loops"),
+      match_names = c("directed", "loops"),
+      match_to = c("directed", "loops"),
+      defaults = list(directed = FALSE, loops = FALSE),
+      head_args = c("n", "pref.matrix", "block.sizes"),
+      fn_name = "sbm"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(
     sample_sbm,
     n,
@@ -2817,7 +4012,8 @@ hierarchical_sbm <- function(n, m, rho, C, p) {
 #'
 #' @param vecs A numeric matrix in which each latent position vector is a
 #'   column.
-#' @param directed A logical scalar, TRUE if the generated graph should be
+#' @inheritParams rlang::args_dots_empty
+#' @param directed A Logical, TRUE if the generated graph should be
 #'   directed.
 #' @return An igraph graph object which is the generated random dot product
 #'   graph.
@@ -2844,7 +4040,33 @@ hierarchical_sbm <- function(n, m, rho, C, p) {
 #' g2
 #' @family games
 #' @export
-sample_dot_product <- function(vecs, directed = FALSE) {
+sample_dot_product <- function(
+  vecs,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: sample_dot_product, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = FALSE),
+      head_args = c("vecs"),
+      fn_name = "sample_dot_product"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   dot_product_game_impl(
     vecs = vecs,
     directed = directed
@@ -2852,8 +4074,35 @@ sample_dot_product <- function(vecs, directed = FALSE) {
 }
 
 #' @rdname sample_dot_product
+#' @inheritParams rlang::args_dots_empty
 #' @export
-dot_product <- function(vecs, directed = FALSE) {
+dot_product <- function(
+  vecs,
+  ...,
+  directed = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: dot_product, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = FALSE),
+      head_args = c("vecs"),
+      fn_name = "dot_product"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   constructor_spec(sample_dot_product, vecs = vecs, directed = directed)
 }
 
@@ -2916,8 +4165,9 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #'   graph.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
 #'   out-degree and in-degree in a directed graph.
-#' @param directed Logical scalar, whether to create a directed graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed.
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical, whether to create a directed graph.
+#' @param multiple Logical, whether multiple edges are allowed.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso [sample_degseq()] for a generator with prescribed degree
@@ -2939,9 +4189,32 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 sample_k_regular <- function(
   no.of.nodes,
   k,
+  ...,
   directed = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_k_regular, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, multiple = multiple),
+      recover_new = c("directed", "multiple"),
+      recover_old = c("directed", "multiple"),
+      match_names = c("directed", "multiple"),
+      match_to = c("directed", "multiple"),
+      defaults = list(directed = FALSE, multiple = FALSE),
+      head_args = c("no.of.nodes", "k"),
+      fn_name = "sample_k_regular"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   k_regular_game_impl(
     no_of_nodes = no.of.nodes,
     k = k,
@@ -3167,14 +4440,12 @@ chung_lu <- function(
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param fitness.out A numeric vector containing the fitness of each vertex.
 #'   For directed graphs, this specifies the out-fitness of each vertex.
-#' @param fitness.in If `NULL` (the default), the generated graph will be
-#'   undirected. If not `NULL`, then it should be a numeric vector and it
-#'   specifies the in-fitness of each vertex.
-#'
-#'   If this argument is not `NULL`, then a directed graph is generated,
-#'   otherwise an undirected one.
-#' @param loops Logical scalar, whether to allow loop edges in the graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
+#' @param fitness.in Numeric vector that specifies the in-fitness of each vertex.
+#'   The generated graph will be directed.
+#'   Default: `NULL`, the generated graph will be undirected.
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether to allow loop edges in the graph.
+#' @param multiple Logical, whether to allow multiple edges in the
 #'   graph.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -3194,9 +4465,32 @@ sample_fitness <- function(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
+  ...,
   loops = FALSE,
   multiple = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_fitness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, multiple = multiple),
+      recover_new = c("loops", "multiple"),
+      recover_old = c("loops", "multiple"),
+      match_names = c("loops", "multiple"),
+      match_to = c("loops", "multiple"),
+      defaults = list(loops = FALSE, multiple = FALSE),
+      head_args = c("no.of.edges", "fitness.out", "fitness.in"),
+      fn_name = "sample_fitness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   static_fitness_game_impl(
     no_of_edges = no.of.edges,
     fitness_out = fitness.out,
@@ -3246,8 +4540,9 @@ sample_fitness <- function(
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
 #' @inheritParams sample_fitness
-#' @param finite.size.correction Logical scalar, whether to use the proposed
+#' @param finite.size.correction Logical, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Goh K-I, Kahng B, Kim D: Universal behaviour of load
@@ -3272,10 +4567,46 @@ sample_fitness_pl <- function(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_fitness_pl, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        loops = loops,
+        multiple = multiple,
+        finite.size.correction = finite.size.correction
+      ),
+      recover_new = c("loops", "multiple", "finite.size.correction"),
+      recover_old = c("loops", "multiple", "finite.size.correction"),
+      match_names = c("loops", "multiple", "finite.size.correction"),
+      match_to = c("loops", "multiple", "finite.size.correction"),
+      defaults = list(
+        loops = FALSE,
+        multiple = FALSE,
+        finite.size.correction = TRUE
+      ),
+      head_args = c(
+        "no.of.nodes",
+        "no.of.edges",
+        "exponent.out",
+        "exponent.in"
+      ),
+      fn_name = "sample_fitness_pl"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- static_power_law_game_impl(
     no_of_nodes = no.of.nodes,
     no_of_edges = no.of.edges,
@@ -3323,6 +4654,7 @@ sample_fitness_pl <- function(
 #'
 #' @param nodes The number of vertices in the graph.
 #' @param fw.prob The forward burning probability, see details below.
+#' @inheritParams rlang::args_dots_empty
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
@@ -3359,10 +4691,33 @@ sample_fitness_pl <- function(
 sample_forestfire <- function(
   nodes,
   fw.prob,
+  ...,
   bw.factor = 1,
   ambs = 1,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_forestfire, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(bw.factor = bw.factor, ambs = ambs, directed = directed),
+      recover_new = c("bw.factor", "ambs", "directed"),
+      recover_old = c("bw.factor", "ambs", "directed"),
+      match_names = c("bw.factor", "ambs", "directed"),
+      match_to = c("bw.factor", "ambs", "directed"),
+      defaults = list(bw.factor = 1, ambs = 1, directed = TRUE),
+      head_args = c("nodes", "fw.prob"),
+      fn_name = "sample_forestfire"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- forest_fire_game_impl(
     nodes = nodes,
     fw_prob = fw.prob,
@@ -3393,6 +4748,7 @@ sample_forestfire <- function(
 #' @param corr A scalar in the unit interval, the target Pearson
 #'   correlation between the adjacency matrices of the original and the generated
 #'   graph (the adjacency matrix being used as a vector).
+#' @inheritParams rlang::args_dots_empty
 #' @param p A numeric scalar, the probability of an edge between two
 #'   vertices, it must in the open (0,1) interval. The default is the empirical
 #'   edge density of the graph. If you are resampling an Erdős-Rényi graph and
@@ -3420,9 +4776,32 @@ sample_forestfire <- function(
 sample_correlated_gnp <- function(
   old.graph,
   corr,
+  ...,
   p = edge_density(old.graph),
   permutation = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_correlated_gnp, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(p = p, permutation = permutation),
+      recover_new = c("p", "permutation"),
+      recover_old = c("p", "permutation"),
+      match_names = c("p", "permutation"),
+      match_to = c("p", "permutation"),
+      defaults = list(p = edge_density(old.graph), permutation = NULL),
+      head_args = c("old.graph", "corr"),
+      fn_name = "sample_correlated_gnp"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   correlated_game_impl(
     old_graph = old.graph,
     corr = corr,
@@ -3445,7 +4824,7 @@ sample_correlated_gnp <- function(
 #'   adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two vertices,
 #'   it must in the open (0,1) interval.
-#' @param directed Logical scalar, whether to generate directed graphs.
+#' @param directed Logical, whether to generate directed graphs.
 #' @param permutation A numeric vector, a permutation vector that is applied on
 #'   the vertices of the first graph, to get the second graph.  If `NULL`,
 #'   the vertices are not permuted.

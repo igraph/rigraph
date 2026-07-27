@@ -23,7 +23,7 @@
 # as_adjacency_matrix() errors well -- sparse
 
     Code
-      as_adjacency_matrix(g, attr = "bla")
+      as_adjacency_matrix(g, weights = "bla")
     Condition
       Error in `as_adjacency_matrix()`:
       ! No such edge attribute
@@ -31,15 +31,16 @@
 ---
 
     Code
-      as_adjacency_matrix(g, attr = "bla")
+      as_adjacency_matrix(g, weights = "bla")
     Condition
       Error in `as_adjacency_matrix()`:
-      ! Matrices must be either numeric or logical, and the edge attribute is not
+      ! The "bla" edge attribute must be numeric or logical.
+      i Pass `weights = NA` to ignore it.
 
 # as_adjacency_matrix() errors well -- dense
 
     Code
-      as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+      as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
     Condition
       Error in `as_adjacency_matrix()`:
       ! No such edge attribute
@@ -47,10 +48,55 @@
 ---
 
     Code
-      as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+      as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
     Condition
       Error in `as_adjacency_matrix()`:
-      ! Matrices must be either numeric or logical, and the edge attribute is not
+      ! The "bla" edge attribute must be numeric or logical.
+      i Pass `weights = NA` to ignore it.
+
+# as_adjacency_matrix() errors on wrong-length weights vector
+
+    Code
+      as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = FALSE)
+    Condition
+      Error in `as_adjacency_matrix()`:
+      ! `weights` must have length equal to the number of edges in the graph.
+      i Expected length 6, got 3.
+
+---
+
+    Code
+      as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = TRUE)
+    Condition
+      Error in `as_adjacency_matrix()`:
+      ! `weights` must have length equal to the number of edges in the graph.
+      i Expected length 6, got 3.
+
+# as_adjacency_matrix() errors on non-numeric weights
+
+    Code
+      as_adjacency_matrix(g, weights = list(1, 2, 3, 4, 5, 6))
+    Condition
+      Error in `as_adjacency_matrix()`:
+      ! `weights` must be `NULL`, `NA`, a numeric vector, or an edge attribute name.
+
+# as_adjacency_matrix(attr =) is deprecated but still works
+
+    Code
+      A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_adjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
+
+# as_biadjacency_matrix(attr =) is deprecated but still works
+
+    Code
+      A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+    Condition
+      Warning:
+      The `attr` argument of `as_biadjacency_matrix()` is deprecated as of igraph 3.0.0.
+      i Please use the `weights` argument instead.
 
 # as_long_data_frame() works correctly with and without names
 
@@ -161,7 +207,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", sparse = TRUE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                       
@@ -172,7 +218,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", type = "upper", sparse = TRUE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", type = "upper", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                       
@@ -183,7 +229,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", type = "lower", sparse = TRUE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", type = "lower", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                       
@@ -194,7 +240,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", sparse = FALSE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  1.5  0.0
@@ -204,7 +250,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", type = "upper", sparse = FALSE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", type = "upper", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  1.5  0.0
@@ -214,7 +260,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_dir_wt, attr = "weight", type = "lower", sparse = FALSE)
+      as_adjacency_matrix(g_dir_wt, weights = "weight", type = "lower", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  1.5  0.0
@@ -308,7 +354,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", sparse = TRUE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                       
@@ -319,7 +365,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "upper", sparse = TRUE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "upper", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                     
@@ -330,7 +376,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "lower", sparse = TRUE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "lower", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                     
@@ -341,7 +387,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "both", sparse = TRUE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "both", sparse = TRUE)
     Output
       3 x 3 sparse Matrix of class "dgCMatrix"
                       
@@ -352,7 +398,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", sparse = FALSE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  2.1  3.2
@@ -362,7 +408,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "upper", sparse = FALSE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "upper", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]    0  2.1  3.2
@@ -372,7 +418,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "lower", sparse = FALSE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "lower", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  0.0    0
@@ -382,7 +428,7 @@
 ---
 
     Code
-      as_adjacency_matrix(g_undir_wt, attr = "weight", type = "both", sparse = FALSE)
+      as_adjacency_matrix(g_undir_wt, weights = "weight", type = "both", sparse = FALSE)
     Output
            [,1] [,2] [,3]
       [1,]  0.0  2.1  3.2

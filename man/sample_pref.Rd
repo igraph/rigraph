@@ -10,6 +10,7 @@
 sample_pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -20,6 +21,7 @@ sample_pref(
 pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -30,6 +32,7 @@ pref(
 sample_asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -38,6 +41,7 @@ sample_asym_pref(
 asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -47,6 +51,8 @@ asym_pref(
 \item{nodes}{The number of vertices in the graphs.}
 
 \item{types}{The number of different vertex types.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{type.dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
@@ -60,9 +66,9 @@ vertices with the different labels) in this case.}
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}

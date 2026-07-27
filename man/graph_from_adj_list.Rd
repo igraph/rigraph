@@ -6,6 +6,7 @@
 \usage{
 graph_from_adj_list(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 )
@@ -15,12 +16,14 @@ graph_from_adj_list(
 throughout all vectors in the list must be less than the number of vectors
 (=the number of vertices in the graph).}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{Character scalar, it specifies whether the graph to create is
 undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 case, whether it contains the outgoing (\sQuote{out}) or the incoming
 (\sQuote{in}) neighbors of the vertices.}
 
-\item{duplicate}{Logical scalar. For undirected graphs it gives whether
+\item{duplicate}{Logical. For undirected graphs it gives whether
 edges are included in the list twice. E.g. if it is \code{TRUE} then for an
 undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
 included in the neighbors of \code{B} and \code{B} to be included in the

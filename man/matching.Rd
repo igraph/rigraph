@@ -13,6 +13,7 @@ is_max_matching(graph, matching, types = NULL)
 max_bipartite_match(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   eps = .Machine$double.eps
 )
@@ -27,6 +28,8 @@ supply \code{NA} here.}
 
 \item{types}{Vertex types, if the graph is bipartite. By default they
 are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Potential edge weights. If the graph has an edge
 attribute called \sQuote{\code{weight}}, and this argument is
@@ -57,7 +60,7 @@ For unweighted graphs this is the same as the size of the matching.
 }
 \item{matching}{
 The matching itself.
-Numeric vertex id, or vertex names if the graph was named.
+Numeric vertex ID, or vertex names if the graph was named.
 Non-matched vertices are denoted by \code{NA}.
 }
 }

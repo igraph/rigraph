@@ -6,11 +6,12 @@
 \alias{average_local_efficiency}
 \title{Efficiency of a graph}
 \usage{
-global_efficiency(graph, weights = NULL, directed = TRUE)
+global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
   vids = V(graph),
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -18,6 +19,7 @@ local_efficiency(
 
 average_local_efficiency(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")
@@ -26,14 +28,16 @@ average_local_efficiency(
 \arguments{
 \item{graph}{The graph to analyze.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{The edge weights. All edge weights must be non-negative;
 additionally, no edge weight may be NaN. If it is \code{NULL} (the default)
 and the graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{directed}{Logical scalar, whether to consider directed paths. Ignored
+\item{directed}{Logical, whether to consider directed paths. Ignored
 for undirected graphs.}
 
-\item{vids}{The vertex ids of the vertices for which the calculation will be done.
+\item{vids}{The vertex IDs of the vertices for which the calculation will be done.
 Applies to the local efficiency calculation only.}
 
 \item{mode}{Specifies how to define the local neighborhood of a vertex in

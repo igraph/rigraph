@@ -6,6 +6,7 @@
 \usage{
 centr_degree(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
@@ -14,13 +15,15 @@ centr_degree(
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{This is the same as the \code{mode} argument of
 \code{degree()}.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{

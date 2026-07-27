@@ -5,17 +5,17 @@
 \alias{randomly}
 \title{Randomly place vertices on a plane or in 3d space}
 \usage{
-layout_randomly(graph, dim = c(2, 3))
+layout_randomly(graph, ..., dim = c(2, 3))
 
 randomly(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Parameters to pass to \code{layout_randomly()}.}
+
 \item{dim}{Integer scalar, the dimension of the space to use. It must be 2
 or 3.}
-
-\item{...}{Parameters to pass to \code{layout_randomly()}.}
 }
 \value{
 A numeric matrix with two or three columns.
@@ -30,7 +30,7 @@ is probably a useless layout, but it can use as a starting point for other
 layout generators.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}
 }
 
 \seealso{

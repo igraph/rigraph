@@ -56,3 +56,23 @@ test_that("with_igraph_opt works", {
   expect_true(igraph_opt("sparsematrices"))
   expect_true(inherits(res, "matrix"))
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("igraph_opt() falls back to `default` for unset options", {
+  # An unset option falls back to the given default.
+  expect_identical(igraph_opt("no.such.option", default = 42), 42)
+
+  # A set option wins over the default.
+  local_igraph_options(annotate.plot = TRUE)
+  expect_true(igraph_opt("annotate.plot", default = FALSE))
+})
+
+test_that("igraph_opt() recovers a positional `default` with a deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  lifecycle::expect_deprecated(
+    res <- igraph_opt("no.such.option", 42)
+  )
+  expect_identical(res, igraph_opt("no.such.option", default = 42))
+})

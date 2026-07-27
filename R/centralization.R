@@ -278,11 +278,12 @@ NULL
 #' a graph-level score from vertex-level scores.
 #'
 #' @param scores The vertex level centrality scores.
+#' @inheritParams rlang::args_dots_empty
 #' @param theoretical.max Real scalar. The graph-level centralization measure of
 #'   the most centralized graph with the same number of vertices as the graph
 #'   under study. This is only used if the `normalized` argument is set
 #'   to `TRUE`.
-#' @param normalized Logical scalar. Whether to normalize the graph level
+#' @param normalized Logical. Whether to normalize the graph level
 #'   centrality score by dividing by the supplied theoretical maximum.
 #' @return A real scalar, the centralization of the graph from which
 #'   `scores` were derived.
@@ -314,7 +315,37 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
+centralize <- function(
+  scores,
+  ...,
+  theoretical.max = 0,
+  normalized = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: centralize, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        theoretical.max = theoretical.max,
+        normalized = normalized
+      ),
+      recover_new = c("theoretical.max", "normalized"),
+      recover_old = c("theoretical.max", "normalized"),
+      match_names = c("theoretical.max", "normalized"),
+      match_to = c("theoretical.max", "normalized"),
+      defaults = list(theoretical.max = 0, normalized = TRUE),
+      head_args = c("scores"),
+      fn_name = "centralize"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   centralization_impl(
     scores = scores,
     theoretical_max = theoretical.max,
@@ -327,11 +358,12 @@ centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode This is the same as the `mode` argument of
 #'   `degree()`.
-#' @param loops Logical scalar, whether to consider loops edges when
+#' @param loops Logical, whether to consider loops edges when
 #'   calculating the degree.
-#' @param normalized Logical scalar. Whether to normalize the graph level
+#' @param normalized Logical. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
@@ -363,10 +395,37 @@ centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' centr_eigen(g, directed = FALSE)$centralization
 centr_degree <- function(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: centr_degree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, normalized = normalized),
+      recover_new = c("mode", "loops", "normalized"),
+      recover_old = c("mode", "loops", "normalized"),
+      match_names = c("mode", "loops", "normalized"),
+      match_to = c("mode", "loops", "normalized"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        normalized = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "centr_degree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   centralization_degree_impl(
     graph = graph,
     mode = mode,
@@ -435,7 +494,8 @@ centr_degree_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical, whether to use directed shortest paths for
 #'   calculating betweenness.
 #' @inheritParams centr_degree
 #' @return A named list with the following components:
@@ -466,7 +526,34 @@ centr_degree_tmax <- function(
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
+centr_betw <- function(
+  graph,
+  ...,
+  directed = TRUE,
+  normalized = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: centr_betw, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, normalized = normalized),
+      recover_new = c("directed", "normalized"),
+      recover_old = c("directed", "normalized"),
+      match_names = c("directed", "normalized"),
+      match_to = c("directed", "normalized"),
+      defaults = list(directed = TRUE, normalized = TRUE),
+      head_args = c("graph"),
+      fn_name = "centr_betw"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -491,7 +578,8 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'   `nodes` and `directed` are both given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed Logical scalar, whether to use directed shortest paths
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical, whether to use directed shortest paths
 #'   for calculating betweenness. Ignored if an undirected graph was
 #'   given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
@@ -508,7 +596,34 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
-centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
+centr_betw_tmax <- function(
+  graph = NULL,
+  nodes = 0,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: centr_betw_tmax, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph", "nodes"),
+      fn_name = "centr_betw_tmax"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   centralization_betweenness_tmax_impl(
     graph = graph,
     nodes = nodes,
@@ -521,6 +636,7 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`.
 #' @inheritParams centr_degree
@@ -554,9 +670,32 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' centr_eigen(g, directed = FALSE)$centralization
 centr_clo <- function(
   graph,
+  ...,
   mode = c("out", "in", "all", "total"),
   normalized = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: centr_clo, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, normalized = normalized),
+      recover_new = c("mode", "normalized"),
+      recover_old = c("mode", "normalized"),
+      match_names = c("mode", "normalized"),
+      match_to = c("mode", "normalized"),
+      defaults = list(mode = c("out", "in", "all", "total"), normalized = TRUE),
+      head_args = c("graph"),
+      fn_name = "centr_clo"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   centralization_closeness_impl(
     graph = graph,
     mode = mode,
@@ -572,6 +711,7 @@ centr_clo <- function(
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`. Ignored if an undirected graph is given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
@@ -591,8 +731,31 @@ centr_clo <- function(
 centr_clo_tmax <- function(
   graph = NULL,
   nodes = 0,
+  ...,
   mode = c("out", "in", "all", "total")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: centr_clo_tmax, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph", "nodes"),
+      fn_name = "centr_clo_tmax"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   centralization_closeness_tmax_impl(
     graph = graph,
     nodes = nodes,
@@ -605,7 +768,7 @@ centr_clo_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
+#' @param directed Logical, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.
@@ -682,7 +845,7 @@ centr_eigen <- function(
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed logical scalar, whether to consider edge directions
+#' @param directed Logical, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.

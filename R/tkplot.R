@@ -1,3 +1,4 @@
+# jarl-ignore-file unused_function: file to be removed
 #' Interactive plotting of graphs
 #'
 #' @description
@@ -229,10 +230,10 @@ assign(".next", 1, .tkplot.env)
 #'
 #' The `tkplot()` command creates a new Tk window with the graphical
 #' representation of `graph`. The command returns an integer number, the
-#' tkplot id. The other commands utilize this id to be able to query or
+#' tkplot ID. The other commands utilize this ID to be able to query or
 #' manipulate the plot.
 #'
-#' `tk_close()` closes the Tk plot with id `tkp.id`.
+#' `tk_close()` closes the Tk plot with ID `tkp.id`.
 #'
 #' `tk_off()` closes all Tk plots.
 #'
@@ -265,7 +266,7 @@ assign(".next", 1, .tkplot.env)
 #' tkplot.center tkplot.rotate
 #' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
-#' @param tkp.id The id of the tkplot window to close/reshape/etc.
+#' @param tkp.id The ID of the tkplot window to close/reshape/etc.
 #' @param window.close Leave this on the default value.
 #' @param width The width of the rectangle for generating new coordinates.
 #' @param height The height of the rectangle for generating new coordinates.
@@ -277,7 +278,7 @@ assign(".next", 1, .tkplot.env)
 #' @param rad The degree to rotate the plot, in radian.
 #' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
-#' @return `tkplot()` returns an integer, the id of the plot, this can be
+#' @return `tkplot()` returns an integer, the ID of the plot, this can be
 #'   used to manipulate it from the command line.
 #'
 #'   `tk_canvas()` returns `tkwin` object, the Tk canvas.
@@ -526,8 +527,35 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_close <- function(tkp.id, window.close = TRUE) {
+tk_close <- function(
+  tkp.id,
+  ...,
+  window.close = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_close, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(window.close = window.close),
+      recover_new = c("window.close"),
+      recover_old = c("window.close"),
+      match_names = c("window.close"),
+      match_to = c("window.close"),
+      defaults = list(window.close = TRUE),
+      head_args = c("tkp.id"),
+      fn_name = "tk_close"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   if (window.close) {
     cmd <- paste(sep = "", "tkp.", tkp.id, "$top")
@@ -554,8 +582,36 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_fit <- function(tkp.id, width = NULL, height = NULL) {
+tk_fit <- function(
+  tkp.id,
+  ...,
+  width = NULL,
+  height = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_fit, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(width = width, height = height),
+      recover_new = c("width", "height"),
+      recover_old = c("width", "height"),
+      match_names = c("width", "height"),
+      match_to = c("width", "height"),
+      defaults = list(width = NULL, height = NULL),
+      head_args = c("tkp.id"),
+      fn_name = "tk_fit"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
@@ -593,7 +649,6 @@ tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
-  coords <- .tkplot.get(tkp.id, "coords")
   canvas.center.x <- width / 2
   canvas.center.y <- height / 2
   coords <- .tkplot.get(tkp.id, "coords")
@@ -646,8 +701,35 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_coords <- function(tkp.id, norm = FALSE) {
+tk_coords <- function(
+  tkp.id,
+  ...,
+  norm = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(norm = norm),
+      recover_new = c("norm"),
+      recover_old = c("norm"),
+      match_names = c("norm"),
+      match_to = c("norm"),
+      defaults = list(norm = FALSE),
+      head_args = c("tkp.id"),
+      fn_name = "tk_coords"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
   coords[, 2] <- max(coords[, 2]) - coords[, 2]
@@ -675,8 +757,36 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
+tk_rotate <- function(
+  tkp.id,
+  ...,
+  degree = NULL,
+  rad = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_rotate, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(degree = degree, rad = rad),
+      recover_new = c("degree", "rad"),
+      recover_old = c("degree", "rad"),
+      match_names = c("degree", "rad"),
+      match_to = c("degree", "rad"),
+      defaults = list(degree = NULL, rad = NULL),
+      head_args = c("tkp.id"),
+      fn_name = "tk_rotate"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
 
@@ -1090,7 +1200,6 @@ tk_canvas <- function(tkp.id) {
 # Creates all edges
 .tkplot.create.edges <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
-  n <- ecount(tkp$graph)
   edgematrix <- as_edgelist(tkp$graph, names = FALSE)
   mapply(
     function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),

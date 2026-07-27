@@ -6,14 +6,22 @@
 \alias{farthest_vertices}
 \title{Diameter of a graph}
 \usage{
-diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
 
-get_diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+get_diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
 
-farthest_vertices(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+farthest_vertices(
+  graph,
+  ...,
+  directed = TRUE,
+  unconnected = TRUE,
+  weights = NULL
+)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether directed or undirected paths are to be
 considered. This is ignored for undirected graphs.}
@@ -51,7 +59,7 @@ The diameter is calculated by using a breadth-first search like method.
 many shortest paths of the length of the diameter, then it returns the first
 one found.
 
-\code{farthest_vertices()} returns two vertex ids, the vertices which are
+\code{farthest_vertices()} returns two vertex IDs, the vertices which are
 connected by the diameter path.
 }
 \section{Related documentation in the C library}{

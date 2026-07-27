@@ -102,7 +102,7 @@ or NULL to use the "capacity" attribute if it exists.}
 
 GML is a quite general textual format.
 \describe{
-\item{id}{Optional numeric vertex IDs to use.}
+\item{ID}{Optional numeric vertex IDs to use.}
 \item{creator}{Optional string specifying the creator of the file.}
 }
 }

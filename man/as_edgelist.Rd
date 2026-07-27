@@ -4,14 +4,16 @@
 \alias{as_edgelist}
 \title{Convert a graph to an edge list}
 \usage{
-as_edgelist(graph, names = TRUE)
+as_edgelist(graph, ..., names = TRUE)
 }
 \arguments{
 \item{graph}{The graph to convert.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{names}{Whether to return a character matrix containing vertex
 names (i.e. the \code{name} vertex attribute) if they exist or numeric
-vertex ids.}
+vertex IDs.}
 }
 \value{
 A \code{ecount(graph)} by 2 numeric matrix.

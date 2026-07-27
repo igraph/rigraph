@@ -4,13 +4,15 @@
 \alias{girth}
 \title{Girth of a graph}
 \usage{
-girth(graph, circle = TRUE)
+girth(graph, ..., circle = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It may be directed, but the algorithm searches
 for undirected circles anyway.}
 
-\item{circle}{Logical scalar, whether to return the shortest circle itself.}
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{circle}{Logical, whether to return the shortest circle itself.}
 }
 \value{
 A named list with two components:
@@ -19,7 +21,7 @@ A named list with two components:
 Integer constant, the girth of the graph, or \code{Inf} if the graph is acyclic.
 }
 \item{circle}{
-Numeric vector with the vertex ids in the shortest circle.
+Numeric vector with the vertex IDs in the shortest circle.
 }
 }
 }

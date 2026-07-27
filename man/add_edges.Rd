@@ -25,7 +25,7 @@ The graph, with the edges (and attributes) added.
 }
 \description{
 The new edges are given as a vertex sequence, e.g. internal
-numeric vertex ids, or vertex names. The first edge points from
+numeric vertex IDs, or vertex names. The first edge points from
 \code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]}
 to \code{edges[4]}, etc.
 }

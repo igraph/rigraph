@@ -9,7 +9,7 @@ assortativity.degree(graph, directed = TRUE)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{directed}{Logical scalar, whether to consider edge directions for
+\item{directed}{Logical, whether to consider edge directions for
 directed graphs.
 This argument is ignored for undirected graphs.
 Supply

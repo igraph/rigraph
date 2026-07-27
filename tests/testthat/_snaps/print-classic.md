@@ -1,4 +1,4 @@
-# print.igraph.es() uses vertex names
+# classic: print.igraph.es() uses vertex names
 
     Code
       E(g)
@@ -6,7 +6,7 @@
       + 1/1 edge (vertex names):
       [1] A->B
 
-# vs printing
+# classic: vs printing
 
     Code
       V(g)[[1]]
@@ -31,7 +31,7 @@
       + 2/3 vertices, named:
       [1] B C
 
-# vs printing, complex attributes
+# classic: vs printing, complex attributes
 
     Code
       V(g)[[1]]
@@ -73,7 +73,7 @@
       
       
 
-# es printing
+# classic: es printing
 
     Code
       E(g)[[1]]
@@ -89,7 +89,7 @@
       2    A    C   1   3   red      9
       3    B    C   2   3   red      3
 
-# es printing, complex attributes
+# classic: es printing, complex attributes
 
     Code
       E(g)[[1]]

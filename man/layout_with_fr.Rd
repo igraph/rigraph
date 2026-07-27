@@ -7,6 +7,7 @@
 \usage{
 layout_with_fr(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
@@ -30,6 +31,8 @@ with_fr(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
+
+\item{...}{Passed to \code{layout_with_fr()}.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -56,9 +59,10 @@ attraction along the edges will be multiplied by the given edge weights.
 This places vertices connected with a highly weighted edge closer to
 each other. Weights must be positive.}
 
-\item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
-lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-of the vector must match the number of vertices in the graph.}
+\item{minx}{Numeric vector that gives lower boundaries
+for the \sQuote{x} coordinates of the vertices.
+The length of the vector must match the number of vertices in the graph.
+Default: \code{NULL}.}
 
 \item{maxx}{Similar to \code{minx}, but gives the upper boundaries.}
 
@@ -79,12 +83,10 @@ arguments are not supported from igraph version 0.8.0 and are ignored
 (with a warning).}
 
 \item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
-
-\item{...}{Passed to \code{layout_with_fr()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the ids of the vertex ids.
+vertex, according to the IDs of the vertex IDs.
 }
 \description{
 Place vertices on the plane using the force-directed layout algorithm by

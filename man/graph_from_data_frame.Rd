@@ -8,7 +8,7 @@
 \usage{
 as_data_frame(x, what = c("edges", "vertices", "both"))
 
-graph_from_data_frame(d, directed = TRUE, vertices = NULL)
+graph_from_data_frame(d, directed = TRUE, ..., vertices = NULL)
 
 from_data_frame(...)
 }
@@ -23,13 +23,13 @@ columns. Additional columns are considered as edge attributes.  Since
 version 0.7 this argument is coerced to a data frame with
 \code{as.data.frame}.}
 
-\item{directed}{Logical scalar, whether or not to create a directed graph.}
+\item{directed}{Logical, whether or not to create a directed graph.}
+
+\item{...}{Passed to \code{graph_from_data_frame()}.}
 
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
-
-\item{...}{Passed to \code{graph_from_data_frame()}.}
 }
 \value{
 An igraph graph object for \code{graph_from_data_frame()}, and either a
@@ -71,14 +71,14 @@ If the \code{what} argument is \code{edges} (the default), then the edges of
 the graph and also the edge attributes are returned. The edges will be in
 the first two columns, named \code{from} and \code{to}. (This also denotes
 edge direction for directed graphs.)  For named graphs, the vertex names
-will be included in these columns, for other graphs, the numeric vertex ids.
+will be included in these columns, for other graphs, the numeric vertex IDs.
 The edge attributes will be in the other columns. It is not a good idea to
 have an edge attribute named \code{from} or \code{to}, because then the
 column named in the data frame will not be unique. The edges are listed in
-the order of their numeric ids.
+the order of their numeric IDs.
 
 If the \code{what} argument is \code{vertices}, then vertex attributes are
-returned. Vertices are listed in the order of their numeric vertex ids.
+returned. Vertices are listed in the order of their numeric vertex IDs.
 
 If the \code{what} argument is \code{both}, then both vertex and edge data
 is returned, in a list with named entries \code{vertices} and \code{edges}.

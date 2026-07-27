@@ -7,6 +7,7 @@
 embed_laplacian_matrix(
   graph,
   no,
+  ...,
   weights = NULL,
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
@@ -21,6 +22,8 @@ embed_laplacian_matrix(
 spectral embedding. Should be smaller than the number of vertices. The
 largest \code{no}-dimensional non-zero singular values are used for the
 spectral embedding.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Optional positive weight vector for calculating a weighted
 embedding. If the graph has a \code{weight} edge attribute, then this is
@@ -54,7 +57,7 @@ for directed graphs.
 The default (i.e. type \code{default}) is to use \code{D-A} for undirected
 graphs and \code{OAP} for directed graphs.}
 
-\item{scaled}{Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
+\item{scaled}{Logical, if \code{FALSE}, then \eqn{U} and \eqn{V} are
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{options}{A named list containing the parameters for the SVD

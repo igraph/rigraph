@@ -5,15 +5,17 @@
 \alias{dot_product}
 \title{Generate random graphs according to the random dot product graph model}
 \usage{
-sample_dot_product(vecs, directed = FALSE)
+sample_dot_product(vecs, ..., directed = FALSE)
 
-dot_product(vecs, directed = FALSE)
+dot_product(vecs, ..., directed = FALSE)
 }
 \arguments{
 \item{vecs}{A numeric matrix in which each latent position vector is a
 column.}
 
-\item{directed}{A logical scalar, TRUE if the generated graph should be
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{directed}{A Logical, TRUE if the generated graph should be
 directed.}
 }
 \value{

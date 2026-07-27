@@ -4,12 +4,14 @@
 \alias{subcomponent}
 \title{In- or out- component of a vertex}
 \usage{
-subcomponent(graph, v, mode = c("all", "out", "in"))
+subcomponent(graph, v, ..., mode = c("all", "out", "in"))
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
 \item{v}{The vertex to start the search from.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, either \dQuote{in}, \dQuote{out} or
 \dQuote{all}. If \dQuote{in} all vertices from which \code{v} is reachable
@@ -18,7 +20,7 @@ returned. If \dQuote{all} returns the union of these. It is ignored for
 undirected graphs.}
 }
 \value{
-Numeric vector, the ids of the vertices in the same component as
+Numeric vector, the IDs of the vertices in the same component as
 \code{v}.
 }
 \description{

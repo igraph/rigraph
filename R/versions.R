@@ -99,7 +99,7 @@ upgrade_graph <- function(graph) {
 
   # g_ver < p_ver
   if (g_ver == ver_0_4) {
-    graph <- .Call(Rx_igraph_add_env, graph)
+    .Call(Rx_igraph_add_env, graph)
   } else if (g_ver == ver_0_7_999) {
     # Not observed in the wild
     .Call(Rx_igraph_add_myid_to_env, graph)
@@ -159,17 +159,6 @@ warn_version <- function(graph) {
   cli::cli_abort(
     "This graph was created by a newer igraph version.
     Please install the latest version of igraph and try again."
-  )
-}
-
-oldpredecessors <- function() {
-  c(
-    "1.5.0" = "1.4.3",
-    "1.0.0" = "0.7.1",
-    "0.6" = "0.5.5-4",
-    "0.5" = "0.4.5",
-    "0.2" = "0.1.2",
-    "0.1.1" = NA
   )
 }
 

@@ -1,5 +1,5 @@
 test_that("cliques() works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   is_clique <- function(graph, vids) {
     s <- induced_subgraph(graph, vids)
@@ -71,7 +71,7 @@ test_that("weighted_cliques works", {
 })
 
 test_that("max_cliques() work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnm(1000, 1000)
   full10 <- make_full_graph(10)
   for (i in 1:10) {
@@ -198,7 +198,7 @@ test_that("max_cliques() work", {
 })
 
 test_that("max_cliques() work for subsets", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnp(100, 0.5)
 
   mysort <- function(x) {
@@ -218,7 +218,7 @@ test_that("max_cliques() work for subsets", {
 })
 
 test_that("count_max_cliques works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
   gnp <- sample_gnp(100, 0.5)
 
   cl1 <- count_max_cliques(gnp, min = 8)
@@ -231,6 +231,7 @@ test_that("count_max_cliques works", {
 })
 
 test_that("ivs() works", {
+  igraph_local_seed(42)
   gnp <- sample_gnp(50, 0.8)
   ivs <- ivs(gnp, min = ivs_size(gnp))
   edges_iv <- sapply(seq_along(ivs), function(x) {
@@ -240,6 +241,7 @@ test_that("ivs() works", {
 })
 
 test_that("ivs() works, cliques of complement", {
+  igraph_local_seed(42)
   # 2385298846 https://github.com/igraph/rigraph/pull/1541#issuecomment-2385298846
   # that the independent vertex sets of G are
   # the same as the cliques of the complement of G (and vice versa)
@@ -278,6 +280,7 @@ test_that("largest_cliques() works", {
 })
 
 test_that("largest_ivs() works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 0.8)
   livs <- largest_ivs(g)
   expect_equal(
@@ -294,6 +297,7 @@ test_that("largest_ivs() works", {
 })
 
 test_that("largest_cliques works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 20 / 50)
   lc <- largest_cliques(g)
   expect_length(cliques(g, min = length(lc[[1]]) + 1), 0)
@@ -303,7 +307,7 @@ test_that("largest_cliques works", {
 })
 
 test_that("is_clique works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_full_graph(5)
   expect_true(is_clique(g, V(g)))
@@ -315,7 +319,7 @@ test_that("is_clique works", {
 })
 
 test_that("is_ivs works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- make_full_bipartite_graph(5, 5)
   expect_true(is_ivs(g, V(g)[V(g)$type]))
@@ -342,7 +346,7 @@ test_that("is_complete works", {
 
 # Tests for callback functions
 test_that("cliques_callback works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(20, 0.3)
 
@@ -362,7 +366,7 @@ test_that("cliques_callback works", {
 })
 
 test_that("cliques_callback can stop early", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(20, 0.3)
 
@@ -406,7 +410,7 @@ test_that("cliques_callback handles errors in callback", {
 })
 
 test_that("max_cliques works with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(15, 0.3)
 
@@ -425,7 +429,7 @@ test_that("max_cliques works with callback", {
 })
 
 test_that("max_cliques can stop early with callback", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   g <- sample_gnp(15, 0.3)
 
@@ -454,4 +458,128 @@ test_that("max_cliques handles errors in callback", {
     }),
     "Error in R callback function"
   )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+# Shared fixture: a triangle plus a disjoint edge.
+# The `weight` vertex attribute favors the edge,
+# an explicit weight vector can flip the result to the triangle.
+make_weighted_clique_graph <- function() {
+  g <- make_full_graph(3) %du% make_full_graph(2)
+  V(g)$weight <- c(1, 1, 1, 4, 4)
+  g
+}
+
+test_that("clique_size_counts() recovers legacy positional arguments", {
+  # `min`, `max` and `maximal` are exercised by name above.
+  g <- make_full_graph(5) %du% make_full_graph(3)
+  lifecycle::expect_deprecated(
+    res <- clique_size_counts(g, 3)
+  )
+  expect_identical(res, clique_size_counts(g, min = 3))
+  expect_equal(res, c(0, 0, 11, 5, 1))
+})
+
+test_that("count_max_cliques() covers max and subset", {
+  g <- make_full_graph(5) %du% make_full_graph(3)
+  # Only the triangle {6, 7, 8} falls within the size bounds.
+  expect_equal(count_max_cliques(g, min = 2, max = 4), 1)
+  # `subset` restricts the starting vertices of the search,
+  # so the counts over a vertex partition sum to the full count.
+  expect_equal(
+    count_max_cliques(g, min = 2, max = 4, subset = 1:5) +
+      count_max_cliques(g, min = 2, max = 4, subset = 6:8),
+    1
+  )
+
+  # Legacy positional `subset` is recovered with a deprecation warning.
+  lifecycle::expect_deprecated(
+    res <- count_max_cliques(g, 2, 4, 1:5)
+  )
+  expect_identical(res, count_max_cliques(g, min = 2, max = 4, subset = 1:5))
+})
+
+test_that("is_clique() covers directed", {
+  # A directed triangle with a single direction per vertex pair.
+  g <- make_graph(c("A", "B", "B", "C", "A", "C"), directed = TRUE)
+  # Ignoring edge directions the three vertices form a clique.
+  expect_true(is_clique(g, c("A", "B", "C"), directed = FALSE))
+  # With directions considered, the reciprocal edges are missing.
+  expect_false(is_clique(g, c("A", "B", "C"), directed = TRUE))
+
+  # Legacy positional `directed` is recovered with a deprecation warning.
+  lifecycle::expect_deprecated(
+    res <- is_clique(g, c("A", "B", "C"), TRUE)
+  )
+  expect_identical(res, is_clique(g, c("A", "B", "C"), directed = TRUE))
+})
+
+test_that("weighted_cliques() covers all tail arguments", {
+  g <- make_weighted_clique_graph()
+  w <- c(3, 3, 3, 1, 1)
+
+  # Under the attribute weights only the edge satisfies the weight bounds.
+  res_attr <- weighted_cliques(
+    g,
+    min.weight = 6,
+    max.weight = 9,
+    maximal = TRUE
+  )
+  expect_identical(lapply(res_attr, as.numeric), list(c(4, 5)))
+
+  # An explicit `vertex.weights` overrides the attribute,
+  # flipping the selection to the triangle.
+  res <- weighted_cliques(
+    g,
+    vertex.weights = w,
+    min.weight = 6,
+    max.weight = 9,
+    maximal = TRUE
+  )
+  expect_identical(lapply(res, as.numeric), list(c(1, 2, 3)))
+
+  # Legacy positional arguments are recovered with a deprecation warning.
+  lifecycle::expect_deprecated(
+    res <- weighted_cliques(g, w, 6)
+  )
+  expect_identical(res, weighted_cliques(g, vertex.weights = w, min.weight = 6))
+})
+
+test_that("largest_weighted_cliques() covers vertex.weights", {
+  g <- make_weighted_clique_graph()
+  w <- c(3, 3, 3, 1, 1)
+
+  # Attribute weights favor the edge,
+  # the explicit `vertex.weights` vector overrides them.
+  expect_identical(
+    lapply(largest_weighted_cliques(g), as.numeric),
+    list(c(4, 5))
+  )
+  expect_identical(
+    lapply(largest_weighted_cliques(g, vertex.weights = w), as.numeric),
+    list(c(1, 2, 3))
+  )
+
+  # Legacy positional `vertex.weights` is recovered with a deprecation warning.
+  lifecycle::expect_deprecated(
+    res <- largest_weighted_cliques(g, w)
+  )
+  expect_identical(res, largest_weighted_cliques(g, vertex.weights = w))
+})
+
+test_that("weighted_clique_num() covers vertex.weights", {
+  g <- make_weighted_clique_graph()
+  w <- c(3, 3, 3, 1, 1)
+
+  # Attribute weights favor the edge,
+  # the explicit `vertex.weights` vector overrides them.
+  expect_equal(weighted_clique_num(g), 8)
+  expect_equal(weighted_clique_num(g, vertex.weights = w), 9)
+
+  # Legacy positional `vertex.weights` is recovered with a deprecation warning.
+  lifecycle::expect_deprecated(
+    res <- weighted_clique_num(g, w)
+  )
+  expect_identical(res, weighted_clique_num(g, vertex.weights = w))
 })

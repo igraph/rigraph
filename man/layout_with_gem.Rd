@@ -7,6 +7,7 @@
 \usage{
 layout_with_gem(
   graph,
+  ...,
   coords = NULL,
   maxiter = 40 * vcount(graph)^2,
   temp.max = max(vcount(graph), 1),
@@ -19,9 +20,11 @@ with_gem(...)
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
 
-\item{coords}{If not \code{NULL}, then the starting coordinates should be
-given here, in a two or three column matrix, depending on the \code{dim}
-argument.}
+\item{...}{Passed to \code{layout_with_gem()}.}
+
+\item{coords}{Starting coordinates in a two or three column matrix,
+depending on the \code{dim} argument.
+Default: \code{NULL}.}
 
 \item{maxiter}{The maximum number of iterations to perform. Updating a
 single vertex counts as an iteration.  A reasonable default is 40 * n * n,
@@ -37,8 +40,6 @@ is the number of vertices.}
 
 \item{temp.init}{Initial local temperature of all vertices. A reasonable
 default is the square root of the number of vertices.}
-
-\item{...}{Passed to \code{layout_with_gem()}.}
 }
 \value{
 A numeric matrix with two columns, and as many rows as the number of

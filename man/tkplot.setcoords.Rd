@@ -7,7 +7,7 @@
 tkplot.setcoords(tkp.id, coords)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{coords}{Two-column numeric matrix, the new coordinates of the
 vertices, in absolute coordinates.}

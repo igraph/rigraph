@@ -7,6 +7,7 @@
 predict_edges(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000,
   num.bins = 25
@@ -21,6 +22,8 @@ directed graphs.}
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
 
@@ -34,7 +37,7 @@ number for a more accurate prediction.}
 A list with entries:
 \describe{
 \item{edges}{
-The predicted edges, in a two-column matrix of vertex ids.
+The predicted edges, in a two-column matrix of vertex IDs.
 }
 \item{prob}{
 Probabilities of these edges, according to the fitted model.

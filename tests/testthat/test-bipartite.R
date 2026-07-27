@@ -1,6 +1,5 @@
 test_that("bipartite_projection works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   g <- make_full_bipartite_graph(10, 5)
   proj <- bipartite_projection(g)
@@ -42,7 +41,7 @@ test_that("bipartite_projection works", {
 })
 
 test_that("bipartite_projection can calculate only one projection", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   g <- sample_bipartite_gnp(5, 10, p = 0.3)
   proj <- bipartite_projection(g)
@@ -97,4 +96,46 @@ test_that("bipartite_projection prints a warning if the type attribute is non-lo
   V(g)$type <- as.numeric(V(g)$type)
   expect_warning(bipartite_projection(g), "logical")
   expect_warning(bipartite_projection_size(g), "logical")
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+
+test_that("bipartite_projection() takes all tail arguments by name", {
+  g <- make_full_bipartite_graph(3, 2)
+
+  # A single projection is returned, without multiplicity weights,
+  # and it keeps the `type` vertex attribute.
+  proj <- bipartite_projection(
+    g,
+    multiplicity = FALSE,
+    which = "false",
+    remove.type = FALSE
+  )
+  expect_true(is_igraph(proj))
+  expect_vcount(proj, 3)
+  expect_false("weight" %in% edge_attr_names(proj))
+  expect_true("type" %in% vertex_attr_names(proj))
+
+  # `probe1` puts the projection containing that vertex first,
+  # reversing the default order (type `FALSE` first).
+  # Current behaviour warns even though both projections are requested.
+  expect_warning(
+    proj_probe <- bipartite_projection(g, probe1 = 4),
+    "probe1"
+  )
+  expect_vcount(proj_probe[[1]], 2)
+  expect_vcount(proj_probe[[2]], 3)
+})
+
+test_that("bipartite_projection() recovers legacy positional arguments", {
+  g <- make_full_bipartite_graph(3, 2)
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- bipartite_projection(g, NULL, FALSE)
+  )
+  ref <- bipartite_projection(g, multiplicity = FALSE)
+  expect_identical_graphs(res[[1]], ref[[1]])
+  expect_identical_graphs(res[[2]], ref[[2]])
+  expect_false("weight" %in% edge_attr_names(res[[1]]))
 })

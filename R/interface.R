@@ -105,7 +105,7 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #' Add edges to a graph
 #'
 #' The new edges are given as a vertex sequence, e.g. internal
-#' numeric vertex ids, or vertex names. The first edge points from
+#' numeric vertex IDs, or vertex names. The first edge points from
 #' `edges[1]` to `edges[2]`, the second from `edges[3]`
 #' to `edges[4]`, etc.
 #'
@@ -145,7 +145,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(!nzchar(nam)))) {
+  if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
   }
 
@@ -212,7 +212,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(!nzchar(nam)))) {
+  if (length(attrs) != 0 && (is.null(nam) || !all(nzchar(nam)))) {
     cli::cli_abort("All attributes must be named.")
   }
 
@@ -335,6 +335,7 @@ ecount <- gsize
 #'
 #' @param graph The input graph.
 #' @param v The vertex of which the adjacent vertices are queried.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Whether to query outgoing (\sQuote{out}), incoming
 #'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 #'   ignored for undirected graphs.
@@ -348,7 +349,34 @@ ecount <- gsize
 #' n1 <- neighbors(g, 1)
 #' n34 <- neighbors(g, 34)
 #' intersection(n1, n34)
-neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
+neighbors <- function(
+  graph,
+  v,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: neighbors, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph", "v"),
+      fn_name = "neighbors"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
@@ -369,6 +397,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' @param graph The input graph.
 #' @param v The vertex of which the incident edges are queried.
 #' @inheritParams neighbors
+#' @inheritParams rlang::args_dots_empty
 #' @return An edge sequence containing the incident edges of
 #'   the input vertex.
 #'
@@ -379,7 +408,34 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' g <- make_graph("Zachary")
 #' incident(g, 1)
 #' incident(g, 34)
-incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
+incident <- function(
+  graph,
+  v,
+  ...,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: incident, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in", "total")),
+      head_args = c("graph", "v"),
+      fn_name = "incident"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # For undirected graphs, mode doesn't matter, use "all"
   if (!is_directed(graph)) {
     mode <- "all"
@@ -397,7 +453,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' Check whether a graph is directed
 #'
 #' @param graph The input graph
-#' @return Logical scalar, whether the graph is directed.
+#' @return Logical, whether the graph is directed.
 #'
 #' @family structural queries
 #'
@@ -418,9 +474,10 @@ is_directed <- function(graph) {
 #'
 #' @param graph The input graph
 #' @param es The sequence of edges to query
+#' @inheritParams rlang::args_dots_empty
 #' @param names Whether to return vertex names or
-#'   numeric vertex ids. By default vertex names are used.
-#' @return A two column matrix of vertex names or vertex ids.
+#'   numeric vertex IDs. By default vertex names are used.
+#' @return A two column matrix of vertex names or vertex IDs.
 #'
 #' @aliases get.edges
 #' @family structural queries
@@ -430,7 +487,34 @@ is_directed <- function(graph) {
 #' @examples
 #' g <- make_ring(5)
 #' ends(g, E(g))
-ends <- function(graph, es, names = TRUE) {
+ends <- function(
+  graph,
+  es,
+  ...,
+  names = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: ends, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(names = names),
+      recover_new = c("names"),
+      recover_old = c("names"),
+      match_names = c("names"),
+      match_to = c("names"),
+      defaults = list(names = TRUE),
+      head_args = c("graph", "es"),
+      fn_name = "ends"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
@@ -497,13 +581,13 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 }
 
 
-#' Find the edge ids based on the incident vertices of the edges
+#' Find the edge IDs based on the incident vertices of the edges
 #'
 #' Find the edges in an igraph graph that have the specified end points. This
 #' function handles multi-graph (graphs with multiple edges) and can consider
 #' or ignore the edge directions in directed graphs.
 #'
-#' igraph vertex ids are natural numbers, starting from one, up to the number
+#' igraph vertex IDs are natural numbers, starting from one, up to the number
 #' of vertices in the graph. Similarly, edges are also numbered from one, up to
 #' the number of edges.
 #'
@@ -512,15 +596,16 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #'
 #' @param graph The input graph.
 #' @param vp The incident vertices, given as a two-column data frame, two-column matrix,
-#'   or vector of vertex ids or symbolic vertex names.
+#'   or vector of vertex IDs or symbolic vertex names.
 #'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 #'   the first edge, the third and fourth for the second, etc.
-#' @param directed Logical scalar, whether to consider edge directions in
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical, whether to consider edge directions in
 #'   directed graphs. This argument is ignored for undirected graphs.
-#' @param error Logical scalar, whether to report an error if an edge is not
+#' @param error Logical, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
-#' @return A numeric vector of edge ids, one for each pair of input vertices.
+#' @return A numeric vector of edge IDs, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
 #'   zero is reported. (If the `error` argument is `FALSE`.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -543,7 +628,35 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #' eis
 #' E(g)[eis]
 #'
-get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
+get_edge_ids <- function(
+  graph,
+  vp,
+  ...,
+  directed = TRUE,
+  error = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: get_edge_ids, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, error = error),
+      recover_new = c("directed", "error"),
+      recover_old = c("directed", "error"),
+      match_names = c("directed", "error"),
+      match_to = c("directed", "error"),
+      defaults = list(directed = TRUE, error = FALSE),
+      head_args = c("graph", "vp"),
+      fn_name = "get_edge_ids"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
@@ -559,7 +672,7 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
   )
 }
 
-#' Find the edge ids based on the incident vertices of the edges
+#' Find the edge IDs based on the incident vertices of the edges
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -622,6 +735,7 @@ gorder <- vcount
 #' @param graph Input graph.
 #' @param v The vertices to query.
 #' @inheritParams neighbors
+#' @inheritParams rlang::args_dots_empty
 #' @return A list of vertex sequences.
 #'
 #' @family structural queries
@@ -629,7 +743,34 @@ gorder <- vcount
 #' @examples
 #' g <- make_graph("Zachary")
 #' adjacent_vertices(g, c(1, 34))
-adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
+adjacent_vertices <- function(
+  graph,
+  v,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: adjacent_vertices, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph", "v"),
+      fn_name = "adjacent_vertices"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   vv <- as_igraph_vs(graph, v) - 1
@@ -659,6 +800,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' @param graph Input graph.
 #' @param v The vertices to query
 #' @inheritParams neighbors
+#' @inheritParams rlang::args_dots_empty
 #' @return A list of edge sequences.
 #'
 #' @family structural queries
@@ -666,7 +808,34 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' @examples
 #' g <- make_graph("Zachary")
 #' incident_edges(g, c(1, 34))
-incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
+incident_edges <- function(
+  graph,
+  v,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: incident_edges, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph", "v"),
+      fn_name = "incident_edges"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   vv <- as_igraph_vs(graph, v) - 1

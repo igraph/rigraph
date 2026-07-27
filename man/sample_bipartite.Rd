@@ -31,7 +31,7 @@ be given for \eqn{G(n,m)} graphs.}
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
-\item{directed}{Logical scalar, whether to create a directed graph. See also
+\item{directed}{Logical, whether to create a directed graph. See also
 the \code{mode} argument.}
 
 \item{mode}{Character scalar, specifies how to direct the edges in directed
@@ -64,7 +64,7 @@ sample_bipartite(10, 5, p = 0)
 sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
-sample_bipartite(10, 5, p = .1)
+sample_bipartite(10, 5, p = 0.1)
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")

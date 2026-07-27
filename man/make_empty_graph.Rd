@@ -5,12 +5,14 @@
 \alias{empty_graph}
 \title{A graph with no edges}
 \usage{
-make_empty_graph(n = 0, directed = TRUE)
+make_empty_graph(n = 0, ..., directed = TRUE)
 
-empty_graph(n = 0, directed = TRUE)
+empty_graph(n = 0, ..., directed = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph.}
 }

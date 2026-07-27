@@ -7,6 +7,7 @@
 \usage{
 as_adj_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
@@ -14,12 +15,15 @@ as_adj_list(
 
 as_adj_edge_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 )
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
 to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
@@ -30,7 +34,7 @@ for both. This argument is ignored for undirected graphs.}
 (to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
 is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical scalar, set to \code{FALSE} to use only one representative
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative
 of each set of parallel edges.}
 }
 \value{
@@ -43,12 +47,12 @@ Create adjacency lists from a graph, either for adjacent edges or for
 neighboring vertices
 }
 \details{
-\code{as_adj_list()} returns a list of numeric vectors, which include the ids
+\code{as_adj_list()} returns a list of numeric vectors, which include the IDs
 of neighbor vertices (according to the \code{mode} argument) of all
 vertices.
 
 \code{as_adj_edge_list()} returns a list of numeric vectors, which include the
-ids of adjacent edges (according to the \code{mode} argument) of all
+IDs of adjacent edges (according to the \code{mode} argument) of all
 vertices.
 
 If \code{igraph_opt("return.vs.es")} is true (default), the numeric

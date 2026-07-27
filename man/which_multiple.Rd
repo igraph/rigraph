@@ -28,7 +28,7 @@ count_loops(graph)
 all edges in the graph.}
 }
 \value{
-\code{any_loop()} and \code{any_multiple()} return a logical scalar.
+\code{any_loop()} and \code{any_multiple()} return a Logical.
 \code{which_loop()} and \code{which_multiple()} return a logical vector.
 \code{count_loops()} returns a numeric scalar with the total number of loop edges.
 \code{count_multiple()} returns a numeric vector.
