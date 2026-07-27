@@ -6,6 +6,7 @@
 \usage{
 graph_from_graphdb(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -18,6 +19,8 @@ graph_from_graphdb(
 }
 \arguments{
 \item{url}{Complete URL with the file to import. Default: \code{NULL}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{prefix}{Gives the prefix. See details below. Possible values:
 \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},

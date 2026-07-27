@@ -4,10 +4,18 @@
 \alias{graph_from_graphnel}
 \title{Convert graphNEL objects from the graph package to igraph}
 \usage{
-graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
+graph_from_graphnel(
+  graphNEL,
+  ...,
+  name = TRUE,
+  weight = TRUE,
+  unlist.attrs = TRUE
+)
 }
 \arguments{
 \item{graphNEL}{The graphNEL graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{name}{Logical, whether to add graphNEL vertex names as an
 igraph vertex attribute called \sQuote{\code{name}}.}

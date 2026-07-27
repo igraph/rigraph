@@ -1,6 +1,6 @@
 Package: igraph
 Title: Network Analysis and Visualization
-Version: 2.3.3.9021
+Version: 2.3.3.9022
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
@@ -73,6 +73,13 @@ Config/build/compilation-database: false
 Config/build/never-clean: true
 Config/comment/compilation-database: Generate manually with
     pkgload:::generate_db() for faster pkgload::load_all()
+Config/gha/extra-packages: graph=?ignore-before-r=4.4.0
+Config/comment/gha/extra-packages: graph is an optional Enhances
+    dependency published only on Bioconductor. The Bioconductor releases
+    matching R 4.2 and R 4.3 (graph 3.16 / 3.18) are archived and return
+    HTTP 404, which aborts pak dependency resolution on those jobs. The
+    ?ignore-before-r pak parameter makes pak ignore graph on R older than
+    4.4.0, where a published release still exists.
 Config/Needs/build: devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
 Config/Needs/roxygen2: r-lib/roxygen2, igraph/igraph.r2cdocs,

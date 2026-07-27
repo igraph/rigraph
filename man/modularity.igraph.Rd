@@ -11,6 +11,7 @@
 modularity_matrix(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
