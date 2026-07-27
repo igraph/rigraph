@@ -1,26 +1,13 @@
 name: 'Custom steps to run before R packages are installed'
 
-inputs:
-  env:
-    description: >
-      Additional environment variables (one KEY=VALUE per line) contributed by
-      the test matrix. Generic hook used by .github/versions-matrix.R to flag
-      special matrix entries (e.g. the lifecycle-errors entry, which sets
-      IGRAPH_LIFECYCLE_ERRORS=true).
-    required: false
-    default: ""
+# Environment variables from the "env" field of test matrix entries
+# (see .github/versions-matrix.R, e.g. IGRAPH_LIFECYCLE_ERRORS=true)
+# are applied by the rcc-full job in R-CMD-check.yaml before this action runs,
+# so they are already visible here and in all later steps.
 
 runs:
   using: "composite"
   steps:
-    - name: Apply environment variables from the test matrix
-      if: inputs.env != ''
-      env:
-        MATRIX_ENV: ${{ inputs.env }}
-      run: |
-        printf '%s\n' "$MATRIX_ENV" | tee -a "$GITHUB_ENV"
-      shell: bash
-
     - name: Define R CMD check error condition
       run: |
         echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
