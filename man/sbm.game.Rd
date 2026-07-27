@@ -18,9 +18,9 @@ must be symmetric.}
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
-\item{directed}{Logical scalar, whether to generate a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
@@ -28,4 +28,8 @@ group. The sum of the vector must match the number of vertices.}
 \code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}
+}
+
 \keyword{internal}

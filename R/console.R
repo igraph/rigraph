@@ -11,7 +11,7 @@
 #' @export
 igraph.console <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.console()", "console()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.console()", "console()")
   console()
 } # nocov end
 
@@ -58,12 +58,10 @@ igraph.console <- function() {
 #' @family console
 #' @export
 console <- function() {
-  oldverb <- igraph_opt("verbose")
-  igraph_options(verbose = "tkconsole")
-  pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  .igraph.progress.tkconsole.message("Console started.\n")
-  invisible()
+  lifecycle::deprecate_stop(
+    "3.0.0",
+    "console()"
+  )
 }
 
 .igraph.pb <- NULL
@@ -86,7 +84,10 @@ console <- function() {
       type,
       "tk" = .igraph.progress.tk(percent, message),
       "tkconsole" = .igraph.progress.tkconsole(percent, message),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
 }
@@ -103,7 +104,10 @@ console <- function() {
       type,
       "tk" = message(message, appendLF = FALSE),
       "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
-      stop("Cannot interpret 'verbose' option, this should not happen")
+      cli::cli_abort(
+        "Unknown value for the {.arg verbose} option.",
+        .internal = TRUE
+      )
     )
   }
   0L
@@ -214,7 +218,6 @@ console <- function() {
     tcltk::tkdelete(txt, "0.0", "end")
     tcltk::tkconfigure(txt, state = "disabled")
   })
-  bstop <- tcltk::tkbutton(lfr, text = "Stop", command = function() {})
   bclose <- tcltk::tkbutton(lfr, text = "Close", command = function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)

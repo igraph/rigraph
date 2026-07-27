@@ -5,7 +5,7 @@
 \alias{tree}
 \title{Create tree graphs}
 \usage{
-make_tree(n, children = 2, mode = c("out", "in", "undirected"))
+make_tree(n, children = 2, ..., mode = c("out", "in", "undirected"))
 
 tree(...)
 }
@@ -15,13 +15,13 @@ tree(...)
 \item{children}{Integer scalar, the number of children of a vertex
 (except for leafs)}
 
+\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
+
 \item{mode}{Defines the direction of the
 edges. \code{out} indicates that the edges point from the parent to
 the children, \verb{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
-
-\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
 }
 \value{
 An igraph graph
@@ -30,27 +30,32 @@ An igraph graph
 Create a k-ary tree graph, where almost all vertices other than the leaves
 have the same number of children.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_kary_tree}{\code{kary_tree()}}
+}
+
 \examples{
 make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_turan}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Trees.}
 \concept{deterministic constructors}

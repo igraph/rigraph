@@ -7,6 +7,6 @@ time_that(
     library(igraph)
   },
   {
-    sample_correlated_gnp_pair(100, corr = .8, p = 5 / 100)
+    sample_correlated_gnp_pair(100, corr = 0.8, p = 5 / 100)
   }
 )

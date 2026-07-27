@@ -23,7 +23,7 @@ Convert a vertex or edge sequence to an ordinary vector
 }
 \details{
 For graphs without names, a numeric vector is returned, containing the
-internal numeric vertex or edge ids.
+internal numeric vertex or edge IDs.
 
 For graphs with names, and vertex sequences, the vertex names are
 returned in a character vector.
@@ -42,16 +42,16 @@ as_ids(V(g))
 as_ids(E(g))
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{V}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=V]{V()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.es}()},
-\code{\link{print.igraph.vs}()}
+\code{\link[=print.igraph.es]{print.igraph.es()}},
+\code{\link[=print.igraph.vs]{print.igraph.vs()}}
 }
 \concept{vertex and edge sequences}

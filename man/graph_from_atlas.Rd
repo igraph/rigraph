@@ -7,12 +7,10 @@
 \usage{
 graph_from_atlas(n)
 
-atlas(...)
+atlas(n)
 }
 \arguments{
-\item{n}{The id of the graph to create.}
-
-\item{...}{Passed to \code{graph_from_atlas()}.}
+\item{n}{The ID of the graph to create.}
 }
 \value{
 An igraph graph.
@@ -33,28 +31,33 @@ the degree sequence, for example 111223 < 112222;
 automorphisms.
 }
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas()}}
+}
+
 \examples{
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
 graph_from_atlas(sample(0:1252, 1))
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()}
+Other deterministic constructors:
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Graph Atlas.}
 \concept{deterministic constructors}

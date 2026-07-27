@@ -32,7 +32,7 @@ closeness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used for calculating weighted shortest
 paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to calculate the normalized
+\item{normalized}{Logical, whether to calculate the normalized
 closeness, i.e. the inverse average distance to all reachable vertices.
 The non-normalized closeness is the inverse of the sum of distances to
 all reachable vertices.}
@@ -42,4 +42,8 @@ all reachable vertices.}
 
 Use \code{\link[=closeness]{closeness()}} with the \code{cutoff} argument instead.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_closeness_cutoff}{\code{closeness_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

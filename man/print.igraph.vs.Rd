@@ -29,6 +29,10 @@ Vertex sequence created with the double bracket operator are
 printed differently, together with all attributes of the vertices
 in the sequence, as a table.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Unnamed graphs
 g <- make_ring(10)
@@ -52,16 +56,16 @@ V(g4)[[]]
 V(g4)[[2:5, 7:8]]
 }
 \seealso{
-Other vertex and edge sequences: 
-\code{\link{E}()},
-\code{\link{V}()},
-\code{\link{as_ids}()},
+Other vertex and edge sequences:
+\code{\link[=E]{E()}},
+\code{\link[=V]{V()}},
+\code{\link[=as_ids]{as_ids()}},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{igraph-vs-indexing}},
 \code{\link{igraph-vs-indexing2}},
-\code{\link{print.igraph.es}()}
+\code{\link[=print.igraph.es]{print.igraph.es()}}
 }
 \concept{vertex and edge sequences}

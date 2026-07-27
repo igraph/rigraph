@@ -7,7 +7,7 @@
 tkplot.fit.to.screen(tkp.id, width = NULL, height = NULL)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{width}{The width of the rectangle for generating new coordinates.}
 
@@ -19,4 +19,8 @@ tkplot.fit.to.screen(tkp.id, width = NULL, height = NULL)
 \code{tkplot.fit.to.screen()} was renamed to \code{\link[=tk_fit]{tk_fit()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}
