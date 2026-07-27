@@ -176,7 +176,7 @@ plot.igraph <- function(
     if (is.null(ylim)) {
       ylim <- c(-1, 1)
     }
-    layout <- norm_coords(layout, -1, 1, -1, 1)
+    layout <- norm_coords(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1)
     fact <- (1 - vertex.size.scaling)
     maxv <- 1 / 200 * max(vertex.size)
 
