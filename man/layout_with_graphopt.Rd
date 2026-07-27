@@ -7,6 +7,7 @@
 \usage{
 layout_with_graphopt(
   graph,
+  ...,
   start = NULL,
   niter = 500,
   charge = 0.001,
@@ -20,6 +21,8 @@ with_graphopt(...)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{Passed to \code{layout_with_graphopt()}.}
 
 \item{start}{If given, then it should be a matrix with two columns and one
 line for each vertex. This matrix will be used as starting positions for the
@@ -45,8 +48,6 @@ default value is zero.}
 \item{max.sa.movement}{Real constant, it gives the maximum amount of
 movement allowed in a single step along a single axis. The default value is
 5.}
-
-\item{...}{Passed to \code{layout_with_graphopt()}.}
 }
 \value{
 A numeric matrix with two columns, and a row for each vertex.
