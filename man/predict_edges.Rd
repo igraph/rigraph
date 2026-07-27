@@ -7,6 +7,7 @@
 predict_edges(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000,
   num.bins = 25
@@ -20,6 +21,8 @@ directed graphs.}
 \code{igraphHRG} object. \code{predict_edges()} allow this to be
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
