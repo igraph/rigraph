@@ -140,6 +140,7 @@ graph_incidence_build <- function(
 #'
 #' @param incidence The input bipartite adjacency matrix. It can also be a sparse matrix
 #'   from the `Matrix` package.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to create a directed graph.
 #' @param mode A character constant, defines the direction of the edges in
 #'   directed graphs, ignored for undirected graphs. If \sQuote{`out`}, then
@@ -186,12 +187,47 @@ graph_incidence_build <- function(
 #' @export
 graph_from_biadjacency_matrix <- function(
   incidence,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
   weighted = NULL,
   add.names = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        directed = directed,
+        mode = mode,
+        multiple = multiple,
+        weighted = weighted,
+        add.names = add.names
+      ),
+      recover_new = c("directed", "mode", "multiple", "weighted", "add.names"),
+      recover_old = c("directed", "mode", "multiple", "weighted", "add.names"),
+      match_names = c("directed", "mode", "multiple", "weighted", "add.names"),
+      match_to = c("directed", "mode", "multiple", "weighted", "add.names"),
+      defaults = list(
+        directed = FALSE,
+        mode = c("all", "out", "in", "total"),
+        multiple = FALSE,
+        weighted = NULL,
+        add.names = NULL
+      ),
+      head_args = c("incidence"),
+      fn_name = "graph_from_biadjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_no_na(incidence, "biadjacency matrix")
   directed <- as.logical(directed)

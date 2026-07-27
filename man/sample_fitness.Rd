@@ -8,6 +8,7 @@ sample_fitness(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
+  ...,
   loops = FALSE,
   multiple = FALSE
 )
@@ -21,6 +22,8 @@ For directed graphs, this specifies the out-fitness of each vertex.}
 \item{fitness.in}{Numeric vector that specifies the in-fitness of each vertex.
 The generated graph will be directed.
 Default: \code{NULL}, the generated graph will be undirected.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether to allow loop edges in the graph.}
 

@@ -117,6 +117,7 @@ bipartite.mapping <- function(graph) {
 #' @param types An optional vertex type vector to use instead of the
 #'   \sQuote{`type`} vertex attribute. You must supply this argument if the
 #'   graph has no \sQuote{`type`} vertex attribute.
+#' @inheritParams rlang::args_dots_empty
 #' @param multiplicity If `TRUE`, then igraph keeps the multiplicity of
 #'   the edges as an edge attribute called \sQuote{weight}.
 #'   E.g. if there is an A-C-B and also an A-D-B
@@ -162,11 +163,44 @@ bipartite.mapping <- function(graph) {
 bipartite_projection <- function(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
   remove.type = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: bipartite_projection, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        multiplicity = multiplicity,
+        probe1 = probe1,
+        which = which,
+        remove.type = remove.type
+      ),
+      recover_new = c("multiplicity", "probe1", "which", "remove.type"),
+      recover_old = c("multiplicity", "probe1", "which", "remove.type"),
+      match_names = c("multiplicity", "probe1", "which", "remove.type"),
+      match_to = c("multiplicity", "probe1", "which", "remove.type"),
+      defaults = list(
+        multiplicity = TRUE,
+        probe1 = NULL,
+        which = c("both", "true", "false"),
+        remove.type = TRUE
+      ),
+      head_args = c("graph", "types"),
+      fn_name = "bipartite_projection"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)

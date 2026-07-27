@@ -6,6 +6,7 @@
 \usage{
 each_edge(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
@@ -13,6 +14,8 @@ each_edge(
 }
 \arguments{
 \item{prob}{The rewiring probability, a real number between zero and one.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether loop edges are allowed in the rewired
 graph.}

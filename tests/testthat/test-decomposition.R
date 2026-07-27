@@ -40,3 +40,41 @@ test_that("is_chordal works", {
   ic2 <- is_chordal(g2, fillin = TRUE)
   expect_equal(ic2, list(chordal = TRUE, fillin = numeric(), newgraph = NULL))
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+# The first example graph from the Tarjan-Yannakakis paper, as in the test above.
+tarjan_yannakakis_graph <- function() {
+  graph_from_literal(
+    A - B:C:I, B - A:C:D, C - A:B:E:H, D - B:E:F,
+    E - C:D:F:H, F - D:E:G, G - F:H, H - C:E:G:I,
+    I - A:H
+  )
+}
+
+test_that("is_chordal accepts alpha, alpham1, fillin, and newgraph by name", {
+  g <- tarjan_yannakakis_graph()
+  mc <- max_cardinality(g)
+
+  ic <- is_chordal(
+    g,
+    alpha = mc$alpha,
+    alpham1 = mc$alpham1,
+    fillin = TRUE,
+    newgraph = TRUE
+  )
+  expect_false(ic$chordal)
+  expect_equal(unique(sort(ic$fillin)), c(1, 2, 5, 6, 7, 8))
+  # The triangulated graph adds exactly the fill-in edges and is chordal.
+  expect_vcount(ic$newgraph, vcount(g))
+  expect_ecount(ic$newgraph, ecount(g) + length(ic$fillin) / 2)
+  expect_true(is_chordal(ic$newgraph)$chordal)
+})
+
+test_that("is_chordal recovers legacy positional arguments", {
+  g <- tarjan_yannakakis_graph()
+  mc <- max_cardinality(g)
+  lifecycle::expect_deprecated(res <- is_chordal(g, mc$alpha))
+  expect_identical(res, is_chordal(g, alpha = mc$alpha))
+  expect_false(res$chordal)
+})

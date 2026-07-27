@@ -5,9 +5,9 @@
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{
-sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sample_sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 
-sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sbm(n, pref.matrix, block.sizes, ..., directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices in the graph.}
@@ -20,6 +20,8 @@ must be symmetric.}
 
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 
