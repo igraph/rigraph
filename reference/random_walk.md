@@ -11,6 +11,7 @@ random_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -20,6 +21,7 @@ random_edge_walk(
   graph,
   start,
   steps,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
@@ -39,6 +41,10 @@ random_edge_walk(
 - steps:
 
   The number of steps to make.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 

@@ -7,6 +7,7 @@ Retrieves the stochastic matrix of a graph of class `igraph`.
 ``` r
 stochastic_matrix(
   graph,
+  ...,
   column.wise = FALSE,
   sparse = igraph_opt("sparsematrices")
 )
@@ -17,6 +18,10 @@ stochastic_matrix(
 - graph:
 
   The input graph. Must be of class `igraph`.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - column.wise:
 

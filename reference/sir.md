@@ -6,10 +6,10 @@ graph
 ## Usage
 
 ``` r
-time_bins(x, middle = TRUE)
+time_bins(x, ..., middle = TRUE)
 
 # S3 method for class 'sir'
-time_bins(x, middle = TRUE)
+time_bins(x, ..., middle = TRUE)
 
 # S3 method for class 'sir'
 median(x, na.rm = FALSE, ...)
@@ -17,7 +17,7 @@ median(x, na.rm = FALSE, ...)
 # S3 method for class 'sir'
 quantile(x, comp = c("NI", "NS", "NR"), prob, ...)
 
-sir(graph, beta, gamma, no.sim = 100)
+sir(graph, beta, gamma, ..., no.sim = 100)
 ```
 
 ## Arguments
@@ -25,6 +25,10 @@ sir(graph, beta, gamma, no.sim = 100)
 - x:
 
   A `sir` object, returned by the `sir()` function.
+
+- ...:
+
+  Additional arguments, ignored currently.
 
 - middle:
 
@@ -35,10 +39,6 @@ sir(graph, beta, gamma, no.sim = 100)
 
   Logical, whether to ignore `NA` values. `sir` objects do not contain
   any `NA` values currently, so this argument is effectively ignored.
-
-- ...:
-
-  Additional arguments, ignored currently.
 
 - comp:
 

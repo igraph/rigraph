@@ -83,11 +83,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> ── <edge sequence> 10/10 · vertex names · from d3423ba ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from bd9e1ab ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  B ─ D  B ─ F  A ─ F  A ─ E  D ─ E  D ─ F  E ─ F 
 #> 
 #> $vpath
-#> ── <vertex sequence> 11/6 · named · from d3423ba ───────────────────────────────
+#> ── <vertex sequence> 11/6 · named · from bd9e1ab ───────────────────────────────
 #>  [1] A B C D B F A E D F E
 #> 
 

@@ -144,7 +144,7 @@ g <- graph_from_literal(
   Cecil - Gordon
 )
 g
-#> ── <igraph> ───────────────────────────────────────────────────────── b60e7a5 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 384d5d0 ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 6 edges
 #> 
@@ -158,7 +158,7 @@ g
 # Another undirected graph, ":" notation
 g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 g2
-#> ── <igraph> ───────────────────────────────────────────────────────── 35b4a7d ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 96a916f ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 7 edges
 #> 
@@ -175,7 +175,7 @@ g3 <- graph_from_literal(
   Eugene --+ Gordon:Helen
 )
 g3
-#> ── <igraph> ───────────────────────────────────────────────────────── bf07771 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 691e6f4 ──
 #> ℹ directed · named
 #> ℹ 7 vertices · 6 edges
 #> 
@@ -189,7 +189,7 @@ g3
 # A graph with isolate vertices
 g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 g4
-#> ── <igraph> ───────────────────────────────────────────────────────── 14fc336 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── a64d168 ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 2 edges
 #> 
@@ -204,7 +204,7 @@ V(g4)$name
 # "Arrows" can be arbitrarily long
 g5 <- graph_from_literal(Alice +---------+ Bob)
 g5
-#> ── <igraph> ───────────────────────────────────────────────────────── 4b3787a ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 28c4b1e ──
 #> ℹ directed · named
 #> ℹ 2 vertices · 2 edges
 #> 
@@ -217,7 +217,7 @@ g5
 # Special vertex names
 g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 g6
-#> ── <igraph> ───────────────────────────────────────────────────────── 0479b3f ──
+#> ── <igraph> ───────────────────────────────────────────────────────── c951da5 ──
 #> ℹ undirected · named
 #> ℹ 6 vertices · 3 edges
 #> 

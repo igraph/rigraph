@@ -61,6 +61,7 @@ directed graphs) can be realized by a graph.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_graphical</span><span class="op">(</span></span>
 <span>  <span class="va">out.deg</span>,</span>
 <span>  in.deg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  allowed.edge.types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"loops"</span>, <span class="st">"multi"</span>, <span class="st">"all"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,6 +78,10 @@ the out-degree sequence for directed graphs.</p></dd>
 <dt id="arg-in-deg">in.deg<a class="anchor" aria-label="anchor" href="#arg-in-deg"></a></dt>
 <dd><p><code>NULL</code> or an integer vector. For undirected graphs, it
 should be <code>NULL</code>. For directed graphs it specifies the in-degrees.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-allowed-edge-types">allowed.edge.types<a class="anchor" aria-label="anchor" href="#arg-allowed-edge-types"></a></dt>

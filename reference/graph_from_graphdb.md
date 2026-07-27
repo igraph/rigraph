@@ -8,6 +8,7 @@ evaluation of graph isomorphism testing algorithms.
 ``` r
 graph_from_graphdb(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -24,6 +25,10 @@ graph_from_graphdb(
 - url:
 
   Complete URL with the file to import. Default: `NULL`.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - prefix:
 

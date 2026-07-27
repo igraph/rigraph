@@ -8,6 +8,7 @@ A bipartite graph is projected into two one-mode networks
 bipartite_projection(
   graph,
   types = NULL,
+  ...,
   multiplicity = TRUE,
   probe1 = NULL,
   which = c("both", "true", "false"),
@@ -29,6 +30,10 @@ bipartite_projection_size(graph, types = NULL)
   An optional vertex type vector to use instead of the ‘`type`’ vertex
   attribute. You must supply this argument if the graph has no ‘`type`’
   vertex attribute.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - multiplicity:
 
@@ -128,7 +133,7 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── f527327 ──
+#> ── <igraph> Event network ─────────────────────────────────────────── 0196403 ──
 #> ℹ undirected · named · weighted
 #> ℹ 5 vertices · 6 edges
 #> 
@@ -141,7 +146,7 @@ print(proj2[[1]], g = TRUE, e = TRUE)
 #> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     
 #> [6] Cecil ─ Dan   
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── 25cb0e9 ──
+#> ── <igraph> Event network ─────────────────────────────────────────── ab4d5d7 ──
 #> ℹ undirected · named · weighted
 #> ℹ 3 vertices · 2 edges
 #> 

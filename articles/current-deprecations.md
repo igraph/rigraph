@@ -55,6 +55,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | bipartite.projection.size() | [bipartite_projection_size()](https://r.igraph.org/reference/bipartite_projection.html) |
 | 2 – warn | 2.0.0 | bipartite.projection() | [bipartite_projection()](https://r.igraph.org/reference/bipartite_projection.html) |
 | 2 – warn | 2.0.0 | bipartite.mapping() | [bipartite_mapping()](https://r.igraph.org/reference/bipartite_mapping.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | subgraph.centrality() | [subgraph_centrality()](https://r.igraph.org/reference/subgraph_centrality.html) |
 | 2 – warn | 2.0.0 | page.rank() | [page_rank()](https://r.igraph.org/reference/page_rank.html) |
 | 3 – stop | 2.0.0 | hub.score() | [hits_scores()](https://r.igraph.org/reference/hits_scores.html) |
@@ -123,6 +124,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | graph.cohesion() | [cohesion()](https://r.igraph.org/reference/vertex_connectivity.html) |
 | 2 – warn | 2.0.0 | cohesive.blocks() | [cohesive_blocks()](https://r.igraph.org/reference/cohesive_blocks.html) |
 | 2 – warn | 2.0.0 | blockGraphs() | [graphs_from_cohesive_blocks()](https://r.igraph.org/reference/cohesive_blocks.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | create.communities() | [make_clusters()](https://r.igraph.org/reference/make_clusters.html) |
 | 2 – warn | 2.0.0 | walktrap.community() | [cluster_walktrap()](https://r.igraph.org/reference/cluster_walktrap.html) |
 | 2 – warn | 2.0.0 | spinglass.community() | [cluster_spinglass()](https://r.igraph.org/reference/cluster_spinglass.html) |
@@ -182,10 +184,13 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.1.0 | as.undirected() | [as_undirected()](https://r.igraph.org/reference/as_directed.html) |
 | 2 – warn | 2.0.0 | graph.edgelist() | [graph_from_edgelist()](https://r.igraph.org/reference/graph_from_edgelist.html) |
 | 2 – warn | 2.0.0 | graph.data.frame() | [graph_from_data_frame()](https://r.igraph.org/reference/graph_from_data_frame.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | is.chordal() | [is_chordal()](https://r.igraph.org/reference/is_chordal.html) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | is.graphical.degree.sequence() | [is_graphical()](https://r.igraph.org/reference/is_graphical.html) |
 | 2 – warn | 2.0.0 | is.degree.sequence() | [is_degseq()](https://r.igraph.org/reference/is_degseq.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | power.law.fit() | [fit_power_law()](https://r.igraph.org/reference/fit_power_law.html) |
 | 3 – stop | 2.1.0 | [fit_power_law(implementation = “cannot be \\plfit.p\\“)](https://r.igraph.org/reference/fit_power_law.html) | I(‘`fit_power_law(implementation = "plfit", p.value = TRUE)`’) |
 | 2 – warn | 2.0.0 | vertex.disjoint.paths() | [vertex_disjoint_paths()](https://r.igraph.org/reference/vertex_connectivity.html) |
@@ -205,6 +210,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | write.graph() | [write_graph()](https://r.igraph.org/reference/write_graph.html) |
 | 2 – warn | 2.0.0 | read.graph() | [read_graph()](https://r.igraph.org/reference/read_graph.html) |
 | 2 – warn | 2.0.0 | graph.graphdb() | [graph_from_graphdb()](https://r.igraph.org/reference/graph_from_graphdb.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | watts.strogatz.game() | [sample_smallworld()](https://r.igraph.org/reference/sample_smallworld.html) |
 | 2 – warn | 2.0.0 | static.power.law.game() | [sample_fitness_pl()](https://r.igraph.org/reference/sample_fitness_pl.html) |
 | 2 – warn | 2.0.0 | static.fitness.game() | [sample_fitness()](https://r.igraph.org/reference/sample_fitness.html) |
@@ -360,11 +366,15 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | vertex.shapes() | [shapes()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | add.vertex.shape() | [add_shape()](https://r.igraph.org/reference/shapes.html) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | similarity.jaccard() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |
 | 2 – warn | 2.1.0 | similarity.dice() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |
 | 2 – warn | 2.1.0 | similarity.invlogweighted() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |
 | 2 – warn | 2.0.0 | is.simple() | [is_simple()](https://r.igraph.org/reference/simplify.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | get.stochastic() | [stochastic_matrix()](https://r.igraph.org/reference/stochastic_matrix.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | get.shortest.paths() | [shortest_paths()](https://r.igraph.org/reference/distances.html) |
 | 2 – warn | 2.0.0 | get.all.shortest.paths() | [all_shortest_paths()](https://r.igraph.org/reference/distances.html) |
 | 2 – warn | 2.0.0 | get.diameter() | [get_diameter()](https://r.igraph.org/reference/diameter.html) |
