@@ -6,7 +6,7 @@ input graph.
 ## Usage
 
 ``` r
-complementer(graph, loops = FALSE)
+complementer(graph, ..., loops = FALSE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ complementer(graph, loops = FALSE)
 - graph:
 
   The input graph, can be directed or undirected.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 
@@ -75,7 +79,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Complementer of a ring
 g <- make_ring(10)
 complementer(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── b410a8b ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 2938b28 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 35 edges
 #> 
@@ -93,7 +97,7 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-#> ── <igraph> ───────────────────────────────────────────────────────── 7d15c37 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── af80dd6 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 45 edges
 #> 

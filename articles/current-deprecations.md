@@ -326,6 +326,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.1.0 | [graph\_()](https://r.igraph.org/reference/graph_.html) | c(“Please use constructors directly, for instance graph_from_edgelist().”,“graph\_() will be removed in a future version of igraph.”) |
 | 2 – warn | 2.0.3 | [make_lattice(circular = ‘use periodic argument instead’)](https://r.igraph.org/reference/make_lattice.html) | c(“`circular` is now deprecated, use `periodic` instead.”) |
 | 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | minimum.spanning.tree() | [mst()](https://r.igraph.org/reference/mst.html) |
 | 2 – warn | 2.0.0 | triad.census() | [triad_census()](https://r.igraph.org/reference/triad_census.html) |
 | 2 – warn | 2.0.0 | graph.motifs.no() | [count_motifs()](https://r.igraph.org/reference/count_motifs.html) |
@@ -338,6 +339,8 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | graph.disjoint.union() | [disjoint_union()](https://r.igraph.org/reference/disjoint_union.html) |
 | 2 – warn | 2.0.0 | graph.compose() | [compose()](https://r.igraph.org/reference/compose.html) |
 | 2 – warn | 2.0.0 | graph.complementer() | [complementer()](https://r.igraph.org/reference/complementer.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | running.mean() | [running_mean()](https://r.igraph.org/reference/running_mean.html) |
 | 2 – warn | 2.0.0 | igraph.sample() | [sample_seq()](https://r.igraph.org/reference/sample_seq.html) |
 | 2 – warn | 2.0.0 | convex.hull() | [convex_hull()](https://r.igraph.org/reference/convex_hull.html) |
@@ -355,6 +358,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | igraph.shape.noclip() | [shape_noclip()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | vertex.shapes() | [shapes()](https://r.igraph.org/reference/shapes.html) |
 | 2 – warn | 2.0.0 | add.vertex.shape() | [add_shape()](https://r.igraph.org/reference/shapes.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.1.0 | similarity.jaccard() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |
 | 2 – warn | 2.1.0 | similarity.dice() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |
 | 2 – warn | 2.1.0 | similarity.invlogweighted() | [similarity(method)](https://r.igraph.org/reference/similarity.html) |

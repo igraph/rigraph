@@ -8,6 +8,7 @@ Relational composition of two graph.
 compose(
   g1,
   g2,
+  ...,
   byname = "auto",
   graph.attr.comb = igraph_opt("graph.attr.comb"),
   vertex.attr.comb = "rename",
@@ -24,6 +25,10 @@ compose(
 - g2:
 
   The second input graph.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - byname:
 
@@ -139,7 +144,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> ── <igraph> ───────────────────────────────────────────────────────── 1516f77 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 67fe9f4 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 36 edges
 #> 
@@ -153,7 +158,7 @@ print_all(gc)
 #> [25] 1 ─ 9    1 ─ 9    1 ─ 10   10 ─ 10  9 ─ 10   8 ─ 10   7 ─ 10   6 ─ 10  
 #> [33] 5 ─ 10   4 ─ 10   3 ─ 10   2 ─ 10  
 print_all(simplify(gc))
-#> ── <igraph> ───────────────────────────────────────────────────────── 4e4c7b5 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 4879117 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 24 edges
 #> 

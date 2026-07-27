@@ -58,7 +58,7 @@ graph.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">complementer</span><span class="op">(</span><span class="va">graph</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">complementer</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,6 +67,10 @@ graph.</p>
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph, can be directed or undirected.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>
@@ -128,7 +132,7 @@ attributes are lost.</p>
 <span class="r-in"><span><span class="co">## Complementer of a ring</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── b410a8b ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 2938b28 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 35 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -146,7 +150,7 @@ attributes are lost.</p>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">&lt;-</span> <span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span> <span class="op">&lt;-</span> <span class="fu"><a href="union.html">union</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">gc</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 7d15c37 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── af80dd6 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 45 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

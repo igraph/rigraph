@@ -10,6 +10,7 @@ randomly to a new vertex in a graph.
 ``` r
 each_edge(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
@@ -21,6 +22,10 @@ each_edge(
 - prob:
 
   The rewiring probability, a real number between zero and one.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - loops:
 
