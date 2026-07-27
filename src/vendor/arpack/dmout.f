@@ -24,7 +24,7 @@
 *     ...
 *     ... SPECIFICATIONS FOR LOCAL VARIABLES
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    IFMT
+      CHARACTER          IFMT*( * )
       INTEGER            IDIGIT, LDA, LOUT, M, N
 *     ..
 *     .. Array Arguments ..

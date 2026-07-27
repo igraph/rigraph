@@ -7,7 +7,7 @@
 graph.atlas(n)
 }
 \arguments{
-\item{n}{The id of the graph to create.}
+\item{n}{The ID of the graph to create.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
@@ -15,4 +15,8 @@ graph.atlas(n)
 \code{graph.atlas()} was renamed to \code{\link[=graph_from_atlas]{graph_from_atlas()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_atlas}{\code{atlas()}}
+}
+
 \keyword{internal}

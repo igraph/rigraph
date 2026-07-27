@@ -8,27 +8,27 @@
 \alias{sir}
 \title{SIR model on graphs}
 \usage{
-time_bins(x, middle = TRUE)
+time_bins(x, ..., middle = TRUE)
 
-\method{time_bins}{sir}(x, middle = TRUE)
+\method{time_bins}{sir}(x, ..., middle = TRUE)
 
 \method{median}{sir}(x, na.rm = FALSE, ...)
 
 \method{quantile}{sir}(x, comp = c("NI", "NS", "NR"), prob, ...)
 
-sir(graph, beta, gamma, no.sim = 100)
+sir(graph, beta, gamma, ..., no.sim = 100)
 }
 \arguments{
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 
-\item{middle}{Logical scalar, whether to return the middle of the time bins,
+\item{\dots}{Additional arguments, ignored currently.}
+
+\item{middle}{Logical, whether to return the middle of the time bins,
 or the boundaries.}
 
-\item{na.rm}{Logical scalar, whether to ignore \code{NA} values.  \code{sir}
+\item{na.rm}{Logical, whether to ignore \code{NA} values.  \code{sir}
 objects do not contain any \code{NA} values currently, so this argument is
 effectively ignored.}
-
-\item{\dots}{Additional arguments, ignored currently.}
 
 \item{comp}{Character scalar. The component to calculate the quantile of.
 \code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands
@@ -104,6 +104,10 @@ Function \code{median} and \code{quantile} calculate the median and
 quantiles of the results, respectively, in bins calculated with
 \code{time_bins()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}
+}
+
 \examples{
 
 g <- sample_gnm(100, 100)
@@ -117,14 +121,12 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=plot.sir]{plot.sir()}} to conveniently plot the results
 
-Processes on graphs
-\code{\link{plot.sir}()}
+Processes on graphs:
+\code{\link[=plot.sir]{plot.sir()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
-(\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
+(\url{https://kolaczyk.github.io/}) wrote the initial version in R.
 }
 \concept{processes}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}.}
-

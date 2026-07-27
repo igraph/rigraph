@@ -1,0 +1,72 @@
+# Introduction
+
+The `igraph` C library supports several interfaces, currently R, Python and Mathematica. Often, much of the glue code between the C library and the interfaces is rather repetitive. In order to automate the code generation of the glue code between the C library and an interface, there is an automated tool available, called Stimulus, available from [Github](https://github.com/igraph/stimulus). Stimulus accepts two types of definition files, one for functions, and one for types, which it both parses, and turns into generated code. In principle, the generated code can be any language, but currently, it is mostly used for the R interface. For that interface, it generates both the C glue code and a large part of the R interface itself, with additional R functionality being supplied in separate R source files.
+
+`stimulus` can be called as follows:
+
+```
+stimulus -f <function-file>
+         -t <type-file>
+         -l language
+         -i <input-file>
+         -o <output-file>
+         -h --help -v
+```
+
+The `<function-file>` and `<type-file>` are the definition files for the functions and the types respectively. Function files may be provided multiple times; files provided later mostly override or extend files provided earlier in the command line. We will explain them in greater detail below. The `language` is an identifier of a code generator specific to a language; currently only `RR`, `RC`, and `RInit`) are used in practice. The `<input-file>` is in principle simply read and output to the `<output-file>`, to which any generated code will also be written.
+
+# Language
+
+In `stimulus`, each language is represented separately by its own `CodeGenerator` class. The language specific `CodeGenerator` *must* derive from the base `CodeGenerator` class provided in `stimulus`, and *must* be prepended with the language identifier. For example, the code generator of the C code for the R interface is named `RCCodeGenerator`. The identifier `language` that is provided as an option to `stimulus` corresponds to its code generator class. For example, specifiying `-l RC` in `stimulus` will use the `RCCodeGenerator` class to generate the code. The key ingredient of a code generator is the `generate_function` method, which is an abstract method in the `CodeGenerator` base class, and which should be implemented for any language specific class.
+
+# Definition files
+
+The definition files contain a list of items (either functions or types) that are the basis for generating code. The basic idea is that each function will be translated in some way, using the specified types. Hence, the function definitions are common to all interfaces, and simply describe the actual C API. The type definition are language specific, and may also contain language specific descriptions.
+
+The format of the definition files is the same for both functions and types, and it is currently based on YAML.
+
+## Function definitions
+
+Each item in the function definition file describes a function, and is included in the `igraph` repository in [`interfaces/functions.yaml`](https://github.com/igraph/igraph/blob/master/interfaces/functions.yaml). The identifier of each item corresponds to an implemented function of the `igraph` C library. As the file format is just general, in principle, it is possible to add all types of custom properties. There are however a number of common properties, which are describe in more detail below. The most important one is the `PARAMS` property, which contains a comma-separated description of the parameters of the C igraph function. This property needs to be specified for any function (assuming a function has parameters, obviously). Secondly, some parameters may depend on other pieces of code (it will become clear what this entails below), which can be specified by the `DEPS` property. A return type can be provided by the `RETURN` property, although for most `igraph` functions this is actually an error code. Since this is the most common type, if no `RETURN` property is specified, it is assumed to return an `ERROR` type. Finally, the `IGNORE` property allows to specify languages for which this function should be ignored, and no code should be hence generated for it using `generate_function`. Typically, the `IGNORE` key is not used in the base function definition file; it is added in the repository of higher-level interfaces from another `functions.yaml` file that is _overlaid_ on top of the base `functions.yaml` file.
+
+As stated, in principle any property can be listed here, and so language specific necessities could also be included here. The most prominent example at the moment is the `NAME` property, which overrides the name `stimulus` will use to represent this function in a higher-level language. Name overrides are also defined in `functions.yaml` files in the repositories of the higher-level interfaces. Additionally, the R code generator also uses the `GATTR` and `GATTR-PARAM` properties, which add graph attributes based on a specified value or an R parameter respectively.
+
+Finally, for some functions the `FLAGS` property is specified. This is parsed and the flags are set for each function, and can be queried from code generators. Currently we use `PROGRESS` for functions that support reporting progress and `DEPRECATED` for deprecated functions. It is up to the code generator class to make use of these flags as appropriate.
+
+### PARAMS
+
+The parameters of each function should be specified using a comma separated list, where each parameter is specified by a parameter type and a parameter identifier. In addition, it can be specified whether a parameter is considered to be an argument to the function, or a result of the function. This is the case for many `igraph` functions, since the actual return type is usually an error code, and hence the actual results of the function are returned through pointer arguments. Finally, a default value can be specified by setting it equal to (`=`) some value. In short, the specification is
+
+```
+PARAMS: [PRIMARY] [IN/OUT] <TYPE> identifier=DEFAULT, [PRIMARY] [IN/OUT] <TYPE> identifier=DEFAULT
+```
+
+The `TYPE` identifiers are in uppercase, and correspond to the types that will be specified in the type definition file. In principle, all type identifiers are allowed here. Under the explanation of the type definition section, the most common types will be described in more detail.
+
+By default, a parameter is considered an input argument (i.e. `IN`), so this will typically not be specified explicitly. If a parameter should be considered a result, it is specified as `OUT`. Finally, if a parameter is considered both as an input argument to the function, and a result, it is specified as `INOUT`. For example, adding a vertex or an edge to a graph, will mean that the `graph` argument will contain the initial graph, but it also contains the modified graph, and hence should be considered as both an incoming argument and an outgoing result.
+
+The default specified by `DEFAULT` can refer to a list of possible defaults specified for the specific `TYPE`. For example, `CONNECTEDNESS mode=WEAK` refers to the default of `WEAK` connectedness, where `WEAK` actually refers to the default specified for the `TYPE` `CONNECTEDNESS`, which for the R code generator generates the code `c("weak", "strong")`.
+
+The `PRIMARY` keyword can be used to designate one or more _output_ arguments of a function as "primary" outputs. Code generators may use this keyword to generate two versions of a function: one that returns only the primary outputs and one that returns all of them. Alternatively, code generators may also generate a _single_ function with an additional `details` argument letting the user decide whether the result should include only the primary results or all of them. Again, it is up to the code generator to support the `PRIMARY` keyword.
+
+## DEPS
+
+Some parameters may require some other code to obtain some results. The different parameters are separated by commas, and the different codes are simply separated by whitespace. In short, the arguments for this dependency are specified as
+```
+DEPS: parameterx ON code1 code2, parametery ON code1 code2
+```
+
+For example, when specifying vertices, `R` ensures that these are correct vertex sequences for the graph (for example, translating vertex names to vertex indices). Many functions contain this dependency, specified as `DEPS: vids ON graph`, where `vids` has the type `VERTEXSET`. The dependencies can be used in the templates for the type definitions as `%I[dependency number]%` (see more detail in the type definitions). For example, `DEPS: res ON graph vids` contains two dependencies, and hence `%I1%` refers to `graph`, and `%I2%` refers to `vids`.
+
+## Type definitions
+
+### Types
+
+The most common types are:
+
+- `GRAPH`
+- `BOOLEAN`
+- `INTEGER`
+- `VECTOR`
+- `REAL`
+- ...

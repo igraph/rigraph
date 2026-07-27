@@ -37,6 +37,42 @@ test_that("is_symmetric() works for amat", {
   expect_false(is_symmetric(asym))
 })
 
+test_that("is_symmetric() ignores dimnames metadata when values are symmetric", {
+  # names(dimnames()) differ but values are symmetric.
+  m <- matrix(c(0, 1, 1, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_true(is_symmetric(m))
+
+  # rownames vs colnames differ but values are symmetric.
+  m2 <- matrix(c(0, 1, 1, 0), 2, 2,
+               dimnames = list(c("a", "b"), c("x", "y")))
+  expect_true(is_symmetric(m2))
+
+  # Sparse equivalents of the above.
+  skip_if_not_installed("Matrix")
+  expect_true(is_symmetric(as(m, "TsparseMatrix")))
+  expect_true(is_symmetric(as(m2, "TsparseMatrix")))
+})
+
+test_that("is_symmetric() still detects value asymmetry regardless of dimnames", {
+  asym <- matrix(c(0, 1, 0, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_false(is_symmetric(asym))
+
+  skip_if_not_installed("Matrix")
+  expect_false(is_symmetric(as(asym, "TsparseMatrix")))
+})
+
+test_that("graph_from_adjacency_matrix(undirected) does not warn for value-symmetric matrix with mismatched dimnames metadata", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  m <- matrix(c(0, 1, 1, 0), 2, 2, dimnames = list(r = 1:2, c = 1:2))
+  expect_no_warning(
+    g <- graph_from_adjacency_matrix(m, mode = "undirected")
+  )
+  expect_false(is_directed(g))
+  expect_equal(vcount(g), 2)
+  expect_equal(ecount(g), 1)
+})
+
 test_that("graph_from_adjacency_matrix() works", {
   M1 <- rbind(
     c(0, 0, 1, 1),
@@ -610,7 +646,6 @@ test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
 test_that("graph_from_adjacency_matrix() snapshot", {
   rlang::local_options(lifecycle_verbosity = "warning")
 
-  local_igraph_options(print.id = FALSE)
   expect_false(igraph_opt("print.id"))
 
   expect_snapshot({
@@ -641,7 +676,6 @@ test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
 
   rlang::local_options(lifecycle_verbosity = "warning")
 
-  local_igraph_options(print.id = FALSE)
   expect_false(igraph_opt("print.id"))
 
   expect_snapshot({
@@ -787,5 +821,184 @@ test_that("sparse/dense matrices min/max/plus", {
 
 test_that("graph_from_adjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
-  expect_snapshot(graph_from_adjacency_matrix(A), error = TRUE)
+  expect_snapshot_igraph_error(graph_from_adjacency_matrix(A))
+})
+
+test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = FALSE correctly", {
+  # Create test matrix with row and column names
+  M <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  rownames(M) <- c("A", "B")
+  colnames(M) <- c("X", "Y")
+
+  # Test default behavior (should add names)
+  g_default <- graph_from_adjacency_matrix(M)
+  expect_equal(V(g_default)$name, c("X", "Y"))
+
+  # Test add.colnames = FALSE (should not add column names)
+  g_no_colnames <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_null(V(g_no_colnames)$name)
+
+  # Test add.rownames = FALSE (should not add row names)
+  g_no_rownames <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = NA,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_rownames)$name)
+
+  # Test both FALSE
+  g_no_names <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names)$name)
+
+  # Test with custom attribute names and FALSE values
+  g_col_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = "vertex_id"
+  )
+  expect_equal(V(g_col_false)$vertex_id, c("A", "B"))
+  expect_null(V(g_col_false)$name)
+
+  g_row_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = "vertex_name",
+    add.rownames = FALSE
+  )
+  expect_equal(V(g_row_false)$vertex_name, c("X", "Y"))
+  expect_null(V(g_row_false)$name)
+
+  # Test matrix without names and FALSE parameters
+  M_no_names <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  g_no_names_matrix <- graph_from_adjacency_matrix(
+    M_no_names,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names_matrix)$name)
+
+  # Test that FALSE is equivalent to NA behavior
+  g_na_col <- graph_from_adjacency_matrix(M, add.colnames = NA)
+  g_false_col <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_equal(vertex_attr_names(g_na_col), vertex_attr_names(g_false_col))
+
+  g_na_row <- graph_from_adjacency_matrix(M, add.rownames = NA)
+  g_false_row <- graph_from_adjacency_matrix(M, add.rownames = FALSE)
+  expect_equal(vertex_attr_names(g_na_row), vertex_attr_names(g_false_row))
+})
+
+test_that("graph_from_adjacency Na check for upper/lower", {
+  igraph_local_seed(42)
+  x <- matrix(runif(100), ncol=10, nrow=10)
+  x[lower.tri(x)] <- NA
+  expect_no_error(
+    graph_from_adjacency_matrix(
+      x,
+      mode = "upper",
+      weighted = TRUE,
+      diag = FALSE
+    )
+  )
+
+  x <- matrix(runif(100), ncol=10, nrow=10)
+  x[upper.tri(x)] <- NA
+  expect_no_error(
+    graph_from_adjacency_matrix(
+      x,
+      mode = "lower",
+      weighted = TRUE,
+      diag = FALSE
+    )
+  )
+})
+
+test_that("graph_from_adjacency NA check for upper/lower with sparse matrices", {
+  # Sparse matrix with NA only in upper triangle: mode="upper" should error,
+  # mode="lower" should succeed
+  sp <- Matrix::sparseMatrix(
+    i = c(1, 2, 1),
+    j = c(2, 1, 1),
+    x = c(NA_real_, 1, 1),
+    dims = c(3, 3)
+  )
+  expect_error(
+    graph_from_adjacency_matrix(sp, mode = "upper", weighted = TRUE),
+    "contains NAs"
+  )
+  expect_no_error(
+    graph_from_adjacency_matrix(sp, mode = "lower", weighted = TRUE)
+  )
+
+  # Sparse matrix with NA only in lower triangle: mode="lower" should error,
+  # mode="upper" should succeed
+  sp2 <- Matrix::sparseMatrix(
+    i = c(2, 1, 1),
+    j = c(1, 2, 1),
+    x = c(NA_real_, 1, 1),
+    dims = c(3, 3)
+  )
+  expect_error(
+    graph_from_adjacency_matrix(sp2, mode = "lower", weighted = TRUE),
+    "contains NAs"
+  )
+  expect_no_error(
+    graph_from_adjacency_matrix(sp2, mode = "upper", weighted = TRUE)
+  )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("graph_from_adjacency_matrix() recovers positional mode with a deprecation", {
+  # All tail arguments are already exercised by name elsewhere in this file,
+  # so only the legacy positional path is covered here.
+  M <- rbind(c(0, 1, 2), c(1, 3, 0), c(2, 0, 0))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_adjacency_matrix(M, "undirected")
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_adjacency_matrix(M, mode = "undirected")
+  )
+  expect_false(is_directed(res))
+})
+
+test_that("from_adjacency() covers tail args by name and recovers positional calls", {
+  M <- rbind(c(0, 1, 2), c(1, 3, 0), c(2, 0, 0))
+  rownames(M) <- c("r1", "r2", "r3")
+  colnames(M) <- c("c1", "c2", "c3")
+
+  g_spec <- make_(from_adjacency(
+    M,
+    mode = "undirected",
+    weighted = TRUE,
+    diag = FALSE,
+    add.colnames = "col_code",
+    add.rownames = "row_code"
+  ))
+  g_direct <- graph_from_adjacency_matrix(
+    M,
+    mode = "undirected",
+    weighted = TRUE,
+    diag = FALSE,
+    add.colnames = "col_code",
+    add.rownames = "row_code"
+  )
+  expect_identical_graphs(g_spec, g_direct)
+  # diag = FALSE drops the loop on vertex 2.
+  expect_ecount(g_spec, 2)
+  expect_identical(sort(E(g_spec)$weight), c(1, 2))
+  expect_identical(V(g_spec)$col_code, c("c1", "c2", "c3"))
+  expect_identical(V(g_spec)$row_code, c("r1", "r2", "r3"))
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- from_adjacency(M, "undirected")
+  )
+  expect_identical_graphs(
+    make_(spec_legacy),
+    make_(from_adjacency(M, mode = "undirected"))
+  )
 })

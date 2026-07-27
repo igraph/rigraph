@@ -42,10 +42,10 @@ add in each time step if \code{out.seq} is NULL. See details below.}
 \item{out.seq}{The number of edges to add in each time step, a vector
 containing as many elements as the number of vertices. See details below.}
 
-\item{out.pref}{Logical constant, whether to include edges not initiated by
+\item{out.pref}{Logical, whether to include edges not initiated by
 the vertex as a basis of preferential attachment. See details below.}
 
-\item{directed}{Logical constant, whether to generate a directed graph. See
+\item{directed}{Logical, whether to generate a directed graph. See
 details below.}
 
 \item{zero.deg.appeal}{The degree-dependent part of the
@@ -71,4 +71,8 @@ attachment. See also details below.}
 \code{aging.prefatt.game()} was renamed to \code{\link[=sample_pa_age]{sample_pa_age()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_aging_game}{\code{barabasi_aging_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_recent_degree_aging_game}{\code{recent_degree_aging_game()}}
+}
+
 \keyword{internal}

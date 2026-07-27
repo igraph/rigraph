@@ -9,7 +9,7 @@ graph.adhesion(graph, checks = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{checks}{Logical constant. Whether to check that the graph is connected
+\item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the edge connectivity is also one. It is a good idea to
@@ -23,4 +23,8 @@ thanks Peter.}
 \code{graph.adhesion()} was renamed to \code{\link[=adhesion]{adhesion()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
+}
+
 \keyword{internal}

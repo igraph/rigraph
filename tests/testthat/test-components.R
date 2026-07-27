@@ -1,5 +1,5 @@
 test_that("components works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   random_largest_component <- function(n) {
     largest_component(sample_gnp(n, 1 / n))
@@ -15,7 +15,7 @@ test_that("components works", {
 
   expect_equal(as.numeric(table(clu$membership)), clu$csize)
   expect_equal(sort(clu$csize), sort(lg_size))
-  expect_equal(clu$no, length(random_lg_list))
+  expect_length(random_lg_list, clu$no)
 })
 
 test_that("components names results", {
@@ -40,6 +40,7 @@ test_that("is_connected returns FALSE for the null graph", {
 })
 
 test_that("decompose works", {
+  igraph_local_seed(42)
   gnp <- sample_gnp(1000, 1 / 1500)
   gnp_decomposed <- decompose(gnp)
   gnp_comps <- components(gnp)
@@ -91,7 +92,7 @@ test_that("component_distribution() finds correct distribution", {
 })
 
 test_that("largest component is actually the largest", {
-  star <- make_star(20, "undirected")
+  star <- make_star(20, mode = "undirected")
   ring <- make_ring(10)
 
   dis_union <- disjoint_union(star, ring)
@@ -113,7 +114,7 @@ test_that("largest strongly and weakly components are correct", {
     B -+ C,
     C -+ A
   )
-  expect_isomorphic(largest_component(g, "strong"), strongly)
+  expect_isomorphic(largest_component(g, mode = "strong"), strongly)
 
   weakly <- graph_from_literal(
     A -+ B,
@@ -121,7 +122,7 @@ test_that("largest strongly and weakly components are correct", {
     C -+ A,
     C -+ D
   )
-  expect_isomorphic(largest_component(g, "weak"), weakly)
+  expect_isomorphic(largest_component(g, mode = "weak"), weakly)
 })
 
 test_that("the largest component of a null graph is a valid null graph", {
@@ -172,10 +173,13 @@ test_that("biconnected_components works", {
   expect_equal(
     sort(names(bc)),
     c(
+    "articulation.points",
     "articulation_points",
+    "component.edges",
     "component_edges",
     "components",
     "no",
+    "tree.edges",
     "tree_edges"
   )
   )
@@ -233,4 +237,33 @@ test_that("is_biconnected works", {
 
   g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 4, 4, 4))
   expect_false(is_biconnected(g))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("decompose() tail arguments and legacy positional recovery", {
+  # A mutual pair, a directed pair, and an isolated vertex.
+  g <- add_vertices(make_graph(c(1, 2, 2, 1, 3, 4), directed = TRUE), 1)
+
+  # Only the mutual pair is a strong component with at least 2 vertices.
+  res <- decompose(g, mode = "strong", max.comps = 2, min.vertices = 2)
+  expect_length(res, 1)
+  expect_equal(vcount(res[[1]]), 2)
+
+  # max.comps caps the 3 weak components at 2.
+  expect_length(decompose(g, max.comps = 2), 2)
+
+  lifecycle::expect_deprecated(res2 <- decompose(g, "strong"))
+  ref <- decompose(g, mode = "strong")
+  expect_length(res2, length(ref))
+  for (i in seq_along(res2)) {
+    expect_identical_graphs(res2[[i]], ref[[i]])
+  }
+})
+
+test_that("largest_component() legacy positional recovery", {
+  g <- graph_from_literal(A -+ B, B -+ C, C -+ A, C -+ D)
+
+  lifecycle::expect_deprecated(res <- largest_component(g, "strong"))
+  expect_identical_graphs(res, largest_component(g, mode = "strong"))
 })

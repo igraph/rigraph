@@ -15,7 +15,7 @@ eigen_centrality(
 \arguments{
 \item{graph}{Graph to be analyzed.}
 
-\item{directed}{Logical scalar, whether to consider direction of the edges
+\item{directed}{Logical, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
@@ -96,6 +96,10 @@ whether the eigenvalue is very close to zero.
 From igraph version 0.5 this function uses ARPACK for the underlying
 computation, see \code{\link[=arpack]{arpack()}} for more about ARPACK in igraph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality}{\code{eigenvector_centrality()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 # Generate some test data
@@ -108,26 +112,24 @@ Bonacich, P.  (1987).  Power and Centrality: A Family of
 Measures. \emph{American Journal of Sociology}, 92, 1170-1182.
 }
 \seealso{
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} and Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
 manual page.
 }
 \concept{centrality}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eigenvector_centrality}{\code{eigenvector_centrality()}}.}
-

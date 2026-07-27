@@ -4,10 +4,18 @@
 \alias{decompose}
 \title{Decompose a graph into components}
 \usage{
-decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
+decompose(
+  graph,
+  ...,
+  mode = c("weak", "strong"),
+  max.comps = NA,
+  min.vertices = 0
+)
 }
 \arguments{
 \item{graph}{The original graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant giving the type of the components, wither
 \code{weak} for weakly connected components or \code{strong} for strongly
@@ -29,6 +37,10 @@ A list of graph objects.
 \description{
 Creates a separate graph for each connected component of a graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_decompose}{\code{decompose()}}
+}
+
 \examples{
 
 # the diameter of each component in a random graph
@@ -41,11 +53,12 @@ sapply(components, diameter)
 \code{\link[=is_connected]{is_connected()}} to decide whether a graph is connected,
 \code{\link[=components]{components()}} to calculate the connected components of a graph.
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{is_biconnected}()}
+Connected components:
+\code{\link[=articulation_points]{articulation_points()}},
+\code{\link[=biconnected_components]{biconnected_components()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=count_reachable]{count_reachable()}},
+\code{\link[=is_biconnected]{is_biconnected()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

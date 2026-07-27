@@ -7,12 +7,12 @@ time_that(
     library(igraph)
     set.seed(42)
     vc <- 200
-    nos = 10
+    nos <- 10
   },
   reinit = {
-    g1 <- erdos.renyi.game(vc, .01)
+    g1 <- erdos.renyi.game(vc, 0.01)
     perm <- c(1:nos, sample(vc-nos)+nos)
-    g2 <- sample_correlated_gnp(g1, corr = .7, p = g1$p, permutation = perm)
+    g2 <- sample_correlated_gnp(g1, corr = 0.7, p = g1$p, permutation = perm)
   },
   {
     match_vertices(

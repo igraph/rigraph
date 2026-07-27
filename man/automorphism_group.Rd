@@ -7,6 +7,7 @@
 automorphism_group(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 )
@@ -20,6 +21,8 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
 are:
@@ -71,6 +74,10 @@ a graph using the BLISS algorithm. See also the BLISS homepage at
 generating set is not necessarily minimal, and it may depend on the splitting
 heuristics used by BLISS.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_automorphism_group}{\code{automorphism_group()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## A ring has n*2 automorphisms, and a possible generating set is one that
@@ -88,15 +95,13 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
 \code{\link[=count_automorphisms]{count_automorphisms()}}
 
-Other graph automorphism: 
-\code{\link{count_automorphisms}()}
+Other graph automorphism:
+\code{\link[=count_automorphisms]{count_automorphisms()}}
 }
 \author{
-Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
+Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS,
 Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code and
 Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group}{\code{automorphism_group()}}.}
-

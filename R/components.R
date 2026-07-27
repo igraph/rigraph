@@ -10,7 +10,7 @@
 #' @export
 no.clusters <- function(graph, mode = c("weak", "strong")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "no.clusters()", "count_components()")
+  lifecycle::deprecate_warn("2.0.0", "no.clusters()", "count_components()")
   count_components(graph = graph, mode = mode)
 } # nocov end
 
@@ -31,7 +31,7 @@ decompose.graph <- function(
   min.vertices = 0
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "decompose.graph()", "decompose()")
+  lifecycle::deprecate_warn("2.0.0", "decompose.graph()", "decompose()")
   decompose(
     graph = graph,
     mode = mode,
@@ -57,7 +57,7 @@ cluster.distribution <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "cluster.distribution()",
     "component_distribution()"
@@ -82,7 +82,7 @@ cluster.distribution <- function(
 #' @export
 biconnected.components <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "biconnected.components()",
     "biconnected_components()"
@@ -102,7 +102,7 @@ biconnected.components <- function(graph) {
 #' @export
 articulation.points <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "articulation.points()",
     "articulation_points()"
@@ -171,6 +171,7 @@ component_distribution <- function(
 #' Creates a separate graph for each connected component of a graph.
 #'
 #' @param graph The original graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant giving the type of the components, wither
 #'   `weak` for weakly connected components or `strong` for strongly
 #'   connected components.
@@ -198,24 +199,52 @@ component_distribution <- function(
 #'
 decompose <- function(
   graph,
+  ...,
   mode = c("weak", "strong"),
   max.comps = NA,
   min.vertices = 0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: decompose, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        max.comps = max.comps,
+        min.vertices = min.vertices
+      ),
+      recover_new = c("mode", "max.comps", "min.vertices"),
+      recover_old = c("mode", "max.comps", "min.vertices"),
+      match_names = c("mode", "max.comps", "min.vertices"),
+      match_to = c("mode", "max.comps", "min.vertices"),
+      defaults = list(
+        mode = c("weak", "strong"),
+        max.comps = NA,
+        min.vertices = 0
+      ),
+      head_args = c("graph"),
+      fn_name = "decompose"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
+  mode <- igraph_match_arg(mode)
 
   if (is.na(max.comps)) {
     max.comps <- -1
   }
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_decompose,
+  decompose_impl(
     graph,
-    as.numeric(mode),
-    as.numeric(max.comps),
-    as.numeric(min.vertices)
+    mode,
+    max.comps,
+    min.vertices
   )
 }
 
@@ -256,13 +285,19 @@ decompose <- function(
 #'
 #' @family components
 #' @export
-#' @cdocs igraph_articulation_points
-articulation_points <- articulation_points_impl
+articulation_points <- function(graph) {
+  articulation_points_impl(
+    graph = graph
+  )
+}
 
 #' @rdname articulation_points
 #' @export
-#' @cdocs igraph_bridges
-bridges <- bridges_impl
+bridges <- function(graph) {
+  bridges_impl(
+    graph = graph
+  )
+}
 
 
 #' Biconnected components
@@ -287,7 +322,7 @@ bridges <- bridges_impl
 #'     }
 #'     \item{tree_edges}{
 #'       The components themselves, a list of numeric vectors.
-#'       Each vector is a set of edge ids giving the edges in a biconnected component.
+#'       Each vector is a set of edge IDs giving the edges in a biconnected component.
 #'       These edges define a spanning tree of the component.
 #'     }
 #'     \item{component_edges}{
@@ -312,13 +347,11 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
-#' @cdocs igraph_biconnected_components
 biconnected_components <- function(graph) {
   # Function call
-  res <- biconnected_components_impl(graph)
-
-  # TODO: Clean up after fixing "." / "_" problem.
-  # See https://github.com/igraph/rigraph/issues/1203
+  res <- biconnected_components_impl(
+    graph = graph
+  )
 
   if (igraph_opt("return.vs.es")) {
     res$tree_edges <- lapply(
@@ -327,7 +360,8 @@ biconnected_components <- function(graph) {
       graph = graph,
       es = E(graph)
     )
-    res$tree.edges <- NULL
+    # Add backward-compatible dotted name
+    res$tree.edges <- res$tree_edges
   }
 
   if (igraph_opt("return.vs.es")) {
@@ -337,7 +371,8 @@ biconnected_components <- function(graph) {
       graph = graph,
       es = E(graph)
     )
-    res$component.edges <- NULL
+    # Add backward-compatible dotted name
+    res$component.edges <- res$component_edges
   }
   if (igraph_opt("return.vs.es")) {
     res$components <- lapply(
@@ -349,7 +384,8 @@ biconnected_components <- function(graph) {
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)
-    res$articulation.points <- NULL
+    # Add backward-compatible dotted name
+    res$articulation.points <- res$articulation_points
   }
   res
 }
@@ -382,13 +418,43 @@ biconnected_components <- function(graph) {
 #' is_biconnected(make_full_graph(2))
 #' @family components
 #' @export
-#' @cdocs igraph_is_biconnected
-is_biconnected <- is_biconnected_impl
+is_biconnected <- function(graph) {
+  is_biconnected_impl(
+    graph = graph
+  )
+}
 
 
 #' @rdname components
+#' @inheritParams rlang::args_dots_empty
 #' @export
-largest_component <- function(graph, mode = c("weak", "strong")) {
+largest_component <- function(
+  graph,
+  ...,
+  mode = c("weak", "strong")
+) {
+  # BEGIN GENERATED ARG_HANDLE: largest_component, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "largest_component"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   comps <- components(graph, mode = mode)

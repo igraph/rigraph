@@ -4,7 +4,7 @@
       st_cuts(g_path, source = "a", target = NULL)
     Condition
       Error in `st_cuts()`:
-      ! No vertex was specified
+      ! `target` must specify exactly one vertex
 
 ---
 
@@ -12,7 +12,7 @@
       st_cuts(g_path, source = NULL, target = "a")
     Condition
       Error in `st_cuts()`:
-      ! No vertex was specified
+      ! `source` must specify exactly one vertex
 
 ---
 
@@ -20,7 +20,7 @@
       st_min_cuts(g_path, source = "a", target = NULL)
     Condition
       Error in `st_min_cuts()`:
-      ! No vertex was specified
+      ! `target` must specify exactly one vertex
 
 ---
 
@@ -28,7 +28,7 @@
       st_min_cuts(g_path, source = NULL, target = "a")
     Condition
       Error in `st_min_cuts()`:
-      ! No vertex was specified
+      ! `source` must specify exactly one vertex
 
 # vertex_connectivity error works
 
@@ -102,15 +102,15 @@
       min_st_separators(g_note)
     Output
       [[1]]
-      + 1/5 vertex, named, from something
+      + 1/5 vertex, named:
       [1] 1
       
       [[2]]
-      + 2/5 vertices, named, from something
+      + 2/5 vertices, named:
       [1] 2 4
       
       [[3]]
-      + 2/5 vertices, named, from something
+      + 2/5 vertices, named:
       [1] 1 3
       
 

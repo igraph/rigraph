@@ -29,14 +29,14 @@ graph), then the multiplicity of the A-B edge in the projection will be 2.}
 
 \item{probe1}{This argument can be used to specify the order of the
 projections in the resulting list. If given, then it is considered as a
-vertex id (or a symbolic vertex name); the projection containing this vertex
+vertex ID (or a symbolic vertex name); the projection containing this vertex
 will be the first one in the result list.  This argument is ignored if only
 one projection is requested in argument \code{which}.}
 
 \item{which}{A character scalar to specify which projection(s) to calculate.
 The default is to calculate both.}
 
-\item{remove.type}{Logical scalar, whether to remove the \code{type} vertex
+\item{remove.type}{Logical, whether to remove the \code{type} vertex
 attribute from the projections. This makes sense because these graphs are
 not bipartite any more. However if you want to combine them with each other
 (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -48,4 +48,8 @@ default it will be removed.}
 \code{bipartite.projection()} was renamed to \code{\link[=bipartite_projection]{bipartite_projection()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

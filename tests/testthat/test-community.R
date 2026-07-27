@@ -1,5 +1,5 @@
 test_that("community detection functions work", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   cluster_algos <- list(
     "cluster_edge_betweenness",
@@ -69,7 +69,7 @@ test_that("community detection functions work", {
 })
 
 test_that("creating communities objects works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
 
@@ -100,8 +100,8 @@ test_that("communities function works", {
         `3` = c(9L, 10L, 15L, 16L, 19L, 21L, 23L, 27L, 30L, 31L, 33L, 34L),
         `4` = c(24L, 25L, 26L, 28L, 29L, 32L)
       ),
-      .Dim = 4L,
-      .Dimnames = list(c("1", "2", "3", "4"))
+      dim = 4L,
+      dimnames = list(c("1", "2", "3", "4"))
     )
   )
 
@@ -116,8 +116,8 @@ test_that("communities function works", {
         `1` = letters[1:5],
         `2` = letters[6:10]
       ),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 })
@@ -159,7 +159,7 @@ test_that("cluster_edge_betweenness works", {
 })
 
 test_that("cluster_fast_greedy works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_fc <- cluster_fast_greedy(karate)
@@ -192,7 +192,7 @@ test_that("cluster_fast_greedy works", {
 
 test_that("label.propagation.community works", {
   karate <- make_graph("Zachary")
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
   karate_lpc <- cluster_label_prop(karate)
   expect_equal(karate_lpc$modularity, modularity(karate, karate_lpc$membership))
 
@@ -207,7 +207,7 @@ test_that("label.propagation.community works", {
 })
 
 test_that("cluster_leading_eigen works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   check_eigen_value <- function(
     membership,
@@ -217,19 +217,19 @@ test_that("cluster_leading_eigen works", {
     multiplier,
     extra
   ) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)
     })
     ev <- eigen(M)
-    ret <- 0
+
     expect_equal(ev$values[1], value)
     if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
       ev$vectors <- -ev$vectors
     }
     expect_equal(ev$vectors[, 1], vector)
-    0
+    FALSE # Continue
   }
 
   karate <- make_graph("Zachary")
@@ -249,10 +249,10 @@ test_that("cluster_leading_eigen works", {
     sizes(karate_lc),
     structure(
       c(7L, 12L, 9L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -268,7 +268,7 @@ test_that("cluster_leading_eigen works", {
     multiplier,
     extra
   ) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)
@@ -278,20 +278,23 @@ test_that("cluster_leading_eigen works", {
     BG <- B - diag(rowSums(B))
 
     expect_equal(M, BG)
-    0
+    FALSE # Continue
   }
 
   A <- as_adjacency_matrix(karate, sparse = FALSE)
   ec <- ecount(karate)
   deg <- degree(karate)
-  karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
+  cluster_leading_eigen(karate, callback = mod_mat_caller)
 })
+
 test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
 
   skip_if(getRversion() < "3.6")
-  skip_if(TRUE) # Temporarily disable this test, remove later
+
+  igraph_local_seed(42)
+
   for (i in 1:100) {
     g_rand <- sample_gnm(20, sample(5:40, 1))
     lec1 <- cluster_leading_eigen(g_rand)
@@ -303,8 +306,104 @@ test_that("cluster_leading_eigen is deterministic", {
   }
 })
 
+test_that("cut_at works with cluster_leading_eigen partial dendrograms", {
+  igraph_local_seed(42)
+  g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
+  g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+  lec <- cluster_leading_eigen(g)
+
+  # The algorithm finds 3 communities, with a partial dendrogram (2 merges)
+  expect_equal(max(membership(lec)), 3L)
+  expect_equal(nrow(lec$merges), 2L)
+
+  # cut_at with no= should return the original 3 communities
+  m3 <- cut_at(lec, no = 3)
+  expect_equal(length(unique(m3)), 3L)
+  expect_equal(m3, membership(lec))
+
+  # cut_at with no=2 should merge 2 of the 3 communities
+  m2 <- cut_at(lec, no = 2)
+  expect_equal(length(unique(m2)), 2L)
+
+  # cut_at with no=1 should put all vertices in one community
+  m1 <- cut_at(lec, no = 1)
+  expect_equal(length(unique(m1)), 1L)
+  expect_true(all(m1 == m1[1]))
+
+  # cut_at with steps= should work equivalently
+  expect_equal(cut_at(lec, steps = 0), cut_at(lec, no = 3))
+  expect_equal(cut_at(lec, steps = 1), cut_at(lec, no = 2))
+  expect_equal(cut_at(lec, steps = 2), cut_at(lec, no = 1))
+
+  # Asking for too many communities should warn and clamp
+  expect_warning(
+    m_excess <- cut_at(lec, no = 10),
+    "Cannot have that many communities"
+  )
+  expect_equal(m_excess, membership(lec))
+
+  # Asking for too many steps should warn and clamp
+  expect_warning(
+    m_excess_steps <- cut_at(lec, steps = 10),
+    "Cannot make that many steps"
+  )
+  expect_equal(m_excess_steps, cut_at(lec, no = 1))
+
+  # Asking for too few communities should warn and clamp to the dendrogram floor
+  expect_warning(
+    m_too_few <- cut_at(lec, no = 0),
+    "Cannot have that few communities"
+  )
+  expect_equal(m_too_few, cut_at(lec, no = 1))
+
+  # Boundary values (no == n_initial, no == min_communities) must not warn
+  expect_no_warning(cut_at(lec, no = 3))
+  expect_no_warning(cut_at(lec, no = 1))
+  expect_no_warning(cut_at(lec, steps = 0))
+  expect_no_warning(cut_at(lec, steps = nrow(lec$merges)))
+})
+
+test_that("cut_at handles cluster_leading_eigen with no merges", {
+  igraph_local_seed(42)
+  # Single-community result: nrow(merges) == 0, so no cuts are possible
+  lec <- cluster_leading_eigen(make_full_graph(5))
+  expect_equal(max(membership(lec)), 1L)
+  expect_equal(nrow(lec$merges), 0L)
+
+  expect_equal(cut_at(lec, no = 1), rep(1, 5))
+  expect_equal(cut_at(lec, steps = 0), rep(1, 5))
+
+  # Anything beyond the trivial cut must clamp with a warning
+  expect_warning(cut_at(lec, no = 2), "Cannot have that many communities")
+  expect_warning(cut_at(lec, steps = 1), "Cannot make that many steps")
+})
+
+test_that("cut_at handles cluster_leading_eigen with deeper dendrograms", {
+  igraph_local_seed(42)
+  # Ring of 6 cliques: leading eigen finds 6 communities with 5 merges,
+  # exercising more than the trivial 3->2->1 chain.
+  g <- Reduce(`%du%`, replicate(6, make_full_graph(4), simplify = FALSE))
+  bridges <- as.vector(rbind(
+    seq(1, by = 4, length.out = 6),
+    c(seq(5, by = 4, length.out = 5), 1)
+  ))
+  g <- add_edges(g, bridges)
+  lec <- cluster_leading_eigen(g)
+  expect_equal(max(membership(lec)), 6L)
+  expect_equal(nrow(lec$merges), 5L)
+
+  # Each step should reduce the community count by exactly one
+  for (k in seq_len(6)) {
+    expect_equal(length(unique(cut_at(lec, no = k))), k)
+  }
+  for (s in seq(0, 5)) {
+    expect_equal(length(unique(cut_at(lec, steps = s))), 6L - s)
+    expect_equal(cut_at(lec, steps = s), cut_at(lec, no = 6L - s))
+  }
+})
+
 test_that("cluster_leiden works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_leiden <- cluster_leiden(karate, resolution = 0.06)
@@ -322,10 +421,10 @@ test_that("cluster_leiden works", {
     sizes(karate_leiden),
     structure(
       c(17L, 17L),
-      .Dim = 2L,
-      .Dimnames = structure(
+      dim = 2L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -346,10 +445,10 @@ test_that("cluster_leiden works", {
     sizes(karate_leiden_mod),
     structure(
       c(11L, 5L, 12L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -375,15 +474,15 @@ test_that("modularity_matrix works", {
   expect_equal(karate_modmat1, karate_modmat2)
 })
 
-test_that("modularity_matrix still accepts a membership argument for compatibility", {
+test_that("modularity_matrix no longer accepts a membership argument for compatibility", {
   karate <- make_graph("zachary")
-  expect_snapshot(
-    x <- modularity_matrix(karate, membership = rep(1, vcount(karate)))
-  )
+  expect_snapshot(error = TRUE, {
+    modularity_matrix(karate, membership = rep(1, vcount(karate)))
+  })
 })
 
 test_that("cluster_louvain works", {
-  withr::local_seed(20231029)
+  igraph_local_seed(20231029)
 
   karate <- make_graph("Zachary")
   karate_mc <- cluster_louvain(karate)
@@ -426,10 +525,10 @@ test_that("cluster_optimal works", {
     sizes(karate_optimal),
     structure(
       c(11L, 5L, 12L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -438,8 +537,7 @@ test_that("cluster_optimal works", {
 
 test_that("weighted cluster_optimal works", {
   skip_if_no_glpk()
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   graph_full_ring <- make_full_graph(5) + make_ring(5)
   E(graph_full_ring)$weight <- sample(
@@ -453,7 +551,7 @@ test_that("weighted cluster_optimal works", {
 })
 
 test_that("cluster_walktrap works", {
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   karate <- make_graph("Zachary")
   karate_walktrap <- cluster_walktrap(karate)
@@ -471,10 +569,10 @@ test_that("cluster_walktrap works", {
     sizes(karate_walktrap),
     structure(
       c(9L, 7L, 9L, 4L, 5L),
-      .Dim = 5L,
-      .Dimnames = structure(
+      dim = 5L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4", "5")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -510,8 +608,8 @@ test_that("groups works", {
     gr,
     structure(
       list(`1` = 1:10, `2` = 11:15),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 
@@ -522,8 +620,8 @@ test_that("groups works", {
     gr,
     structure(
       list(`1` = letters[1:10], `2` = letters[11:15]),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 })
@@ -541,8 +639,7 @@ test_that("voronoi works with weights", {
 })
 
 test_that("contract works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   g <- make_ring(10)
   g$name <- "Ring"
@@ -563,4 +660,324 @@ test_that("contract works", {
       c(7, 0, 0, 1, 2)
     )
   )
+})
+
+test_that("modularity() handles NA weights correctly", {
+  igraph_local_seed(42)
+  # Create a simple graph for testing
+  g <- make_graph("Zachary")
+
+  # Get a community structure for testing
+  comm <- cluster_fast_greedy(g)
+  membership_vec <- membership(comm)
+
+  # Test that modularity works with regular weights
+  gw <- g
+  E(gw)$weight <- runif(ecount(gw))
+  mod_with_weights <- modularity(gw, membership_vec)
+  expect_true(is.numeric(mod_with_weights))
+  expect_length(mod_with_weights, 1)
+
+  mod_with_implicit_weights <- modularity(gw, membership_vec, weights = NULL)
+  expect_equal(mod_with_implicit_weights, mod_with_weights)
+
+  mod_with_explicit_weights <- modularity(
+    g,
+    membership_vec,
+    weights = E(gw)$weight
+  )
+  expect_equal(mod_with_explicit_weights, mod_with_weights)
+
+  # Test that modularity works when all weights are NA
+  mod_with_all_na <- modularity(g, membership_vec, weights = rep(NA, ecount(g)))
+  mod_without_weights <- modularity(g, membership_vec)
+  expect_equal(mod_with_all_na, mod_without_weights)
+
+  # Test that modularity works when some weights are NA and some are not
+  mixed_weights <- E(g)$weight
+  mixed_weights[1:5] <- NA
+  mod_with_mixed_na <- modularity(g, membership_vec, weights = mixed_weights)
+  expect_true(is.numeric(mod_with_mixed_na))
+  expect_length(mod_with_mixed_na, 1)
+
+  # Test edge case: empty weights vector treated as NA
+  mod_with_empty <- modularity(gw, membership_vec, weights = numeric(0))
+  expect_equal(mod_with_empty, mod_without_weights)
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("cluster_edge_betweenness() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  # Weighted runs that return a membership warn
+  # that the split is picked at the maximal modularity.
+  expect_warning(
+    res <- cluster_edge_betweenness(
+      karate,
+      weights = rep(1, ecount(karate)),
+      directed = FALSE
+    ),
+    "highest modularity score"
+  )
+  # Unit weights reproduce the unweighted clustering.
+  expect_identical(
+    membership(res),
+    membership(cluster_edge_betweenness(karate))
+  )
+  expect_length(res, 5)
+
+  # All optional result components can be switched off.
+  bare <- cluster_edge_betweenness(
+    karate,
+    edge.betweenness = FALSE,
+    merges = FALSE,
+    bridges = FALSE,
+    modularity = FALSE,
+    membership = FALSE
+  )
+  expect_null(bare$edge.betweenness)
+  expect_length(bare$merges, 0)
+  expect_length(bare$bridges, 0)
+  expect_null(bare$modularity)
+  expect_length(bare$membership, 0)
+  expect_length(bare$removed.edges, ecount(karate))
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    expect_warning(
+      res_legacy <- cluster_edge_betweenness(karate, w),
+      "highest modularity score"
+    )
+  )
+  expect_warning(
+    res_named <- cluster_edge_betweenness(karate, weights = w),
+    "highest modularity score"
+  )
+  expect_identical(res_legacy, res_named)
+})
+
+test_that("cluster_fast_greedy() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  res <- cluster_fast_greedy(
+    karate,
+    merges = FALSE,
+    modularity = FALSE,
+    membership = TRUE,
+    weights = rep(1, ecount(karate))
+  )
+  # Unit weights reproduce the unweighted membership, without dendrogram parts.
+  expect_identical(membership(res), membership(cluster_fast_greedy(karate)))
+  expect_length(res$merges, 0)
+  expect_null(res$modularity)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_fast_greedy(karate, FALSE)
+  )
+  expect_identical(res_legacy, cluster_fast_greedy(karate, merges = FALSE))
+})
+
+test_that("cluster_infomap() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_infomap(
+    karate,
+    e.weights = rep(1, ecount(karate)),
+    v.weights = rep(1, vcount(karate)),
+    nb.trials = 3,
+    modularity = FALSE
+  )
+  # The stochastic result is still a valid partition of all vertices.
+  expect_s3_class(res, "communities")
+  expect_length(membership(res), vcount(karate))
+  expect_in(membership(res), seq_len(max(membership(res))))
+  expect_null(res$modularity)
+
+  ew <- rep(1, ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_infomap(karate, ew)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_infomap(karate, e.weights = ew))
+})
+
+test_that("cluster_louvain() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_louvain(
+    karate,
+    weights = rep(1, ecount(karate)),
+    resolution = 0.01
+  )
+  # A tiny resolution merges everything into a single community.
+  expect_equal(max(membership(res)), 1)
+  expect_length(membership(res), vcount(karate))
+
+  w <- rep(1:2, length.out = ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_louvain(karate, w)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_louvain(karate, weights = w))
+})
+
+test_that("cluster_optimal() covers migrated tail args and positional recovery", {
+  skip_if_no_glpk()
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  # Uniformly scaled weights leave partition and modularity unchanged.
+  res <- cluster_optimal(karate, weights = rep(2, ecount(karate)))
+  ref <- cluster_optimal(karate)
+  expect_identical(membership(res), membership(ref))
+  expect_identical(res$modularity, ref$modularity)
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_optimal(karate, w)
+  )
+  expect_identical(res_legacy, cluster_optimal(karate, weights = w))
+})
+
+test_that("cluster_spinglass() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_spinglass(
+    karate,
+    weights = rep(1, ecount(karate)),
+    spins = 10,
+    parupdate = TRUE,
+    start.temp = 0.8,
+    stop.temp = 0.05,
+    cool.fact = 0.95,
+    update.rule = "random",
+    gamma = 1.2,
+    implementation = "orig"
+  )
+  # The stochastic result is still a valid partition of all vertices.
+  expect_s3_class(res, "communities")
+  expect_length(membership(res), vcount(karate))
+  expect_in(membership(res), seq_len(max(membership(res))))
+
+  # The negative-weight implementation accepts its own gamma.
+  res_neg <- cluster_spinglass(
+    karate,
+    spins = 5,
+    implementation = "neg",
+    gamma.minus = 0.5
+  )
+  expect_s3_class(res_neg, "communities")
+  expect_length(membership(res_neg), vcount(karate))
+
+  # Restricting to a single vertex returns that vertex's community.
+  res_vertex <- cluster_spinglass(
+    karate,
+    vertex = 1,
+    spins = 10,
+    update.rule = "config",
+    gamma = 1
+  )
+  expect_true(1 %in% res_vertex$community)
+  expect_gte(res_vertex$cohesion, 0)
+
+  w <- rep(1, ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_spinglass(karate, w)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_spinglass(karate, weights = w))
+})
+
+test_that("cluster_walktrap() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  res <- cluster_walktrap(
+    karate,
+    weights = rep(1, ecount(karate)),
+    steps = 6
+  )
+  # Longer walks merge the karate club into three communities.
+  expect_length(res, 3)
+  expect_length(membership(res), vcount(karate))
+
+  # All optional result components can be switched off.
+  bare <- cluster_walktrap(
+    karate,
+    merges = FALSE,
+    modularity = FALSE,
+    membership = FALSE
+  )
+  expect_null(bare$merges)
+  expect_null(bare$modularity)
+  expect_null(bare$membership)
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_walktrap(karate, w)
+  )
+  expect_identical(res_legacy, cluster_walktrap(karate, weights = w))
+})
+
+test_that("make_clusters() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+  memb <- rep(1:2, each = 17)
+  mrg <- matrix(c(1, 2), ncol = 2)
+
+  res <- make_clusters(
+    karate,
+    membership = memb,
+    algorithm = "custom",
+    merges = mrg,
+    modularity = FALSE
+  )
+  expect_s3_class(res, "communities")
+  expect_equal(membership(res), memb, ignore_attr = "class")
+  expect_identical(algorithm(res), "custom")
+  expect_identical(res$merges, mrg)
+  expect_null(res$modularity)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- make_clusters(karate, memb, "custom")
+  )
+  expect_identical(
+    res_legacy,
+    make_clusters(karate, memb, algorithm = "custom")
+  )
+})
+
+test_that("modularity_matrix() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  base <- modularity_matrix(karate)
+  res <- modularity_matrix(
+    karate,
+    weights = rep(1, ecount(karate)),
+    resolution = 2,
+    directed = FALSE
+  )
+  # B(res) = A - res * K, so doubling the resolution gives 2 * B(1) - A.
+  A <- as_adjacency_matrix(karate, sparse = FALSE)
+  expect_equal(res, 2 * base - A)
+
+  # The head argument `membership` is hard-deprecated,
+  # so the legacy positional call first warns about recovering `weights`
+  # and then fails on the supplied membership.
+  expect_snapshot(error = TRUE, {
+    modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
+  })
 })

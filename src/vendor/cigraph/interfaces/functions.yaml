@@ -51,6 +51,7 @@ igraph_ecount:
 
 igraph_neighbors:
     PARAMS: GRAPH graph, OUT VERTEX_INDICES neis, VERTEX vid, NEIMODE mode=ALL
+    DEPS: vid ON graph, neis ON graph
 
 igraph_is_directed:
     PARAMS: GRAPH graph
@@ -66,13 +67,14 @@ igraph_edge:
     PARAMS: GRAPH graph, INTEGER eid, OUT INTEGER from, OUT INTEGER to
 
 igraph_edges:
-    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VECTOR_INT edges
-    DEPS: eids ON graph
+    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VERTEX_INDICES edges
+    DEPS: eids ON graph, edges ON graph
 
 igraph_get_eid:
     PARAMS: |-
         GRAPH graph, OUT EDGE eid, VERTEX from, VERTEX to,
         BOOLEAN directed=True, BOOLEAN error=True
+    DEPS: from ON graph, to ON graph
 
 igraph_get_eids:
     PARAMS: |-
@@ -84,9 +86,11 @@ igraph_get_all_eids_between:
     PARAMS: |-
         GRAPH graph, OUT EDGE_INDICES eids, VERTEX from, VERTEX to,
         BOOLEAN directed=True
+    DEPS: from ON graph, to ON graph
 
 igraph_incident:
     PARAMS: GRAPH graph, OUT EDGE_INDICES eids, VERTEX vid, NEIMODE mode=ALL
+    DEPS: vid ON graph, eids ON graph
 
 igraph_is_same_graph:
     PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEAN res
@@ -398,7 +402,7 @@ igraph_hsbm_list_game:
 igraph_correlated_game:
     PARAMS: |-
         GRAPH old_graph, OUT GRAPH new_graph,
-        REAL corr, REAL p=edge_density(old.graph), OPTIONAL INDEX_VECTOR permutation
+        REAL corr, REAL p=edge_density(old_graph), OPTIONAL INDEX_VECTOR permutation
 
 igraph_correlated_pair_game:
     PARAMS: |-
@@ -843,7 +847,8 @@ igraph_neighborhood_graphs:
     DEPS: vids ON graph
 
 igraph_topological_sorting:
-    PARAMS: GRAPH graph, OUT VECTOR_INT res, NEIMODE mode=OUT
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES res, NEIMODE mode=OUT
+    DEPS: res ON graph
 
 igraph_feedback_arc_set:
     # Default algorithm is the approximate method because it is faster and the
@@ -1115,6 +1120,7 @@ igraph_pseudo_diameter:
         GRAPH graph, OUT REAL diameter, VERTEX start_vid,
         OPTIONAL OUT INTEGER from, OPTIONAL OUT INTEGER to,
         BOOLEAN directed=True, BOOLEAN unconnected=True
+    DEPS: start_vid ON graph
 
 igraph_pseudo_diameter_dijkstra:
     PARAMS: |-
@@ -1122,7 +1128,7 @@ igraph_pseudo_diameter_dijkstra:
         OUT REAL diameter, VERTEX start_vid,
         OPTIONAL OUT INTEGER from, OPTIONAL OUT INTEGER to,
         BOOLEAN directed=True, BOOLEAN unconnected=True
-    DEPS: weights ON graph
+    DEPS: weights ON graph, start_vid ON graph
 
 igraph_diversity:
     PARAMS: |-
@@ -1194,6 +1200,7 @@ igraph_bfs:
         OUT VECTOR_INT parents,
         OUT VECTOR_INT pred, OUT VECTOR_INT succ,
         OUT VECTOR_INT dist, OPTIONAL BFS_FUNC callback, OPTIONAL EXTRA extra
+    DEPS: root ON graph, roots ON graph, restricted ON graph, order ON graph
 
 igraph_bfs_simple:
     PARAMS: |-
@@ -1202,6 +1209,7 @@ igraph_bfs_simple:
         OUT VERTEX_INDICES order,
         OUT VECTOR_INT layers,
         OUT VECTOR_INT parents
+    DEPS: root ON graph, order ON graph
 
 igraph_dfs:
     PARAMS: |-
@@ -1209,6 +1217,7 @@ igraph_dfs:
         OUT VERTEX_INDICES order, OUT VERTEX_INDICES order_out,
         OUT VECTOR_INT father, OUT VECTOR_INT dist,
         OPTIONAL DFS_FUNC in_callback, OPTIONAL DFS_FUNC out_callback, OPTIONAL EXTRA extra
+    DEPS: root ON graph, order ON graph, order_out ON graph
 
 #######################################
 # Bipartite graphs
@@ -1324,7 +1333,7 @@ igraph_is_biconnected:
     PARAMS: GRAPH graph, OUT BOOLEAN res
 
 igraph_count_reachable:
-    PARAMS: GRAPH graph, OUT VECTOR_INT counts, NEIMODE mode
+    PARAMS: GRAPH graph, OUT VECTOR_INT counts, NEIMODE mode=OUT
 
 #######################################
 # Percolation
@@ -1490,11 +1499,13 @@ igraph_layout_reingold_tilford:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, NEIMODE mode=OUT,
         OPTIONAL VERTEX_INDICES roots, OPTIONAL VECTOR_INT rootlevel
+    DEPS: roots ON graph
 
 igraph_layout_reingold_tilford_circular:
     PARAMS: |-
         GRAPH graph, OUT MATRIX res, NEIMODE mode=OUT,
         OPTIONAL VERTEX_INDICES roots, OPTIONAL VECTOR_INT rootlevel
+    DEPS: roots ON graph
 
 igraph_roots_for_tree_layout:
     PARAMS: |-
@@ -1573,9 +1584,9 @@ igraph_layout_gem:
     PARAMS: |-
         GRAPH graph, INOUT MATRIX res=matrix(),
         BOOLEAN use_seed=False,
-        INTEGER maxiter=40*vcount(graph)^2,
+        INTEGER maxiter=40 * vcount(graph)^2,
         REAL temp_max=vcount(graph),
-        REAL temp_min=1/10, REAL temp_init=sqrt(vcount(graph))
+        REAL temp_min=1 / 10, REAL temp_init=sqrt(vcount(graph))
 
 igraph_layout_davidson_harel:
     PARAMS: |-
@@ -1996,6 +2007,11 @@ igraph_write_graph_dot:
 igraph_motifs_randesu:
     PARAMS: GRAPH graph, OUT VECTOR hist, INTEGER size=3, OPTIONAL VECTOR cut_prob
 
+igraph_motifs_randesu_callback:
+    PARAMS: |-
+        GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
+        MOTIFS_HANDLER_FUNC callback, OPTIONAL EXTRA extra
+
 igraph_motifs_randesu_estimate:
     PARAMS: |-
         GRAPH graph, OUT INTEGER est, INTEGER size=3, OPTIONAL VECTOR cut_prob,
@@ -2116,7 +2132,7 @@ igraph_compose:
 
 igraph_induced_subgraph_map:
     PARAMS: |-
-        GRAPH graph, OUT GRAPH res, VERTEX_SELECTOR vids, SUBGRAPH_IMPL impl,
+        GRAPH graph, OUT GRAPH res, VERTEX_SELECTOR vids, SUBGRAPH_IMPL impl=AUTO,
         OPTIONAL OUT INDEX_VECTOR map, OPTIONAL OUT INDEX_VECTOR invmap
     DEPS: vids ON graph
 

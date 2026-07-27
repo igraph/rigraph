@@ -8,6 +8,7 @@ adding/removing edges}
 sample_correlated_gnp(
   old.graph,
   corr,
+  ...,
   p = edge_density(old.graph),
   permutation = NULL
 )
@@ -18,6 +19,8 @@ sample_correlated_gnp(
 \item{corr}{A scalar in the unit interval, the target Pearson
 correlation between the adjacency matrices of the original and the generated
 graph (the adjacency matrix being used as a vector).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{p}{A numeric scalar, the probability of an edge between two
 vertices, it must in the open (0,1) interval. The default is the empirical
@@ -42,8 +45,12 @@ and shuffling its vertices.
 \details{
 Please see the reference given below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_game}{\code{correlated_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density}{\code{density()}}
+}
+
 \examples{
-g <- sample_gnp(1000, .1)
+g <- sample_gnp(1000, 0.1)
 g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
 g
@@ -55,34 +62,32 @@ graph matching for correlated Erdős-Rényi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \concept{games}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_game}{\code{correlated_game()}}.}
-
