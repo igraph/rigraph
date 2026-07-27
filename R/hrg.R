@@ -266,11 +266,11 @@ fit_hrg <- function(
   ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
+      left = numeric(),
+      right = numeric(),
+      prob = numeric(),
+      edges = numeric(),
+      vertices = numeric()
     )
   }
   hrg <- lapply(

@@ -76,6 +76,24 @@ test_that("NULL non-selector defaults of round-2 functions resolve in the body",
   expect_identical(l1, l2)
 })
 
+test_that("empty-sequence defaults are spelled as typed empty vectors", {
+  # `c()` evaluates to NULL, so a `c()` default would collide with the
+  # resolve-in-body sentinel. Typed empties stay constant and disjoint from
+  # NULL: an explicit empty selection keeps meaning "nothing selected",
+  # while NULL now always means "use the default".
+  g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+  expect_equal(max_degree(g, v = integer()), 0)
+  expect_identical(which_loop(g, eids = integer()), logical(0))
+  expect_gt(max_degree(g, v = NULL), 0)
+
+  # layout_as_tree(): the typed empty stays the documented default
+  tree <- make_tree(5)
+  expect_identical(
+    layout_as_tree(tree, root = numeric()),
+    layout_as_tree(tree)
+  )
+})
+
 test_that("positional recovery of a selector with a NULL default works", {
   # Regression: with `vids = V(graph)` as the default, re-evaluating the
   # default during recovery produced a fresh igraph.vs whose weakref `env`
