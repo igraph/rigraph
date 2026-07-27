@@ -183,6 +183,7 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | graph.edgelist() | [graph_from_edgelist()](https://r.igraph.org/reference/graph_from_edgelist.html) |
 | 2 – warn | 2.0.0 | graph.data.frame() | [graph_from_data_frame()](https://r.igraph.org/reference/graph_from_data_frame.html) |
 | 2 – warn | 2.0.0 | is.chordal() | [is_chordal()](https://r.igraph.org/reference/is_chordal.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | is.graphical.degree.sequence() | [is_graphical()](https://r.igraph.org/reference/is_graphical.html) |
 | 2 – warn | 2.0.0 | is.degree.sequence() | [is_degseq()](https://r.igraph.org/reference/is_degseq.html) |
 | 2 – warn | 2.0.0 | power.law.fit() | [fit_power_law()](https://r.igraph.org/reference/fit_power_law.html) |
@@ -447,5 +448,8 @@ issue tracker](https://github.com/igraph/rigraph/issues).
 | 2 – warn | 2.0.0 | graph.automorphisms() | [count_automorphisms()](https://r.igraph.org/reference/count_automorphisms.html) |
 | 2 – warn | 2.0.0 | canonical.permutation() | [canonical_permutation()](https://r.igraph.org/reference/canonical_permutation.html) |
 | 2 – warn | 2.0.0 | automorphisms() | [count_automorphisms()](https://r.igraph.org/reference/count_automorphisms.html) |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
+| 1 – soft | 3.0.0 | I(.arg_handle\\what) \|.arg_handle\\details |  |
 | 2 – warn | 2.0.0 | adjacent.triangles() | [count_triangles()](https://r.igraph.org/reference/count_triangles.html) |
 | 2 – warn | 2.0.0 | igraph.version() | [igraph_version()](https://r.igraph.org/reference/igraph_version.html) |

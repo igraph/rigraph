@@ -6,7 +6,7 @@ possible root vertex if the graph is a tree.
 ## Usage
 
 ``` r
-is_tree(graph, mode = c("out", "in", "all", "total"), details = FALSE)
+is_tree(graph, ..., mode = c("out", "in", "all", "total"), details = FALSE)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ is_tree(graph, mode = c("out", "in", "all", "total"), details = FALSE)
 - graph:
 
   An igraph graph object
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - mode:
 
@@ -76,7 +80,7 @@ is_tree(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $root
-#> ── <vertex sequence> 1/7 · from 181d53a ────────────────────────────────────────
+#> ── <vertex sequence> 1/7 · from 0f46ce3 ────────────────────────────────────────
 #> [1] 1
 #> 
 ```

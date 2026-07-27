@@ -66,6 +66,7 @@ most three nodes.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_chordal</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alpham1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fillin <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -80,6 +81,10 @@ most three nodes.</p>
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
 <dd><p>The input graph. It may be directed, but edge directions are
 ignored, as the algorithm is defined for undirected graphs.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
@@ -156,7 +161,7 @@ of Computation</em> 13, 566–579.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 4 6 8 3 5 7 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpham1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 9/9 · named · from 46e61b5 ────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 9/9 · named · from 5fd3572 ────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] G F D B E C H I A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">is_chordal</span><span class="op">(</span><span class="va">g1</span>, fillin <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -180,7 +185,7 @@ of Computation</em> 13, 566–579.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 10  8  9  6  7  5  4  2  3  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpham1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/10 · named · from f5d650d ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/10 · named · from be2a5ca ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] J H I G C F D B E A</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">is_chordal</span><span class="op">(</span><span class="va">g2</span>, fillin <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

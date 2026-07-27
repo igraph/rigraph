@@ -119,7 +119,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sample_bipartite(10, 5, p = 0)
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnp()` instead.
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 48770aa ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── e461def ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 0 edges
 #> 
@@ -129,7 +129,7 @@ sample_bipartite(10, 5, p = 0)
 
 ## full graph
 sample_bipartite(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── d1d4d89 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── b47f289 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 50 edges
 #> 
@@ -148,7 +148,7 @@ sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── f99f8c8 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 75b1d49 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 4 edges
 #> 
@@ -163,7 +163,7 @@ sample_bipartite(10, 5, p = 0.1)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnm()` instead.
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── b6890c1 ──
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── a37302a ──
 #> ℹ directed · bipartite
 #> ℹ 15 vertices · 20 edges
 #> 

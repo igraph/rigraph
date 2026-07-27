@@ -6,7 +6,7 @@ randomly and uniformly, using loop-erased random walks.
 ## Usage
 
 ``` r
-sample_spanning_tree(graph, vid = 0)
+sample_spanning_tree(graph, ..., vid = 0)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ sample_spanning_tree(graph, vid = 0)
 
   The input graph to sample from. Edge directions are ignored if the
   graph is directed.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - vid:
 
