@@ -72,6 +72,12 @@ test_that("head args go through base R partial matching, not our recovery", {
   # recovery. With `warnPartialMatchArgs` on, R emits its own partial-match
   # warning and our deprecation does not fire; when a tail arg is abbreviated
   # too, both warnings appear -- R's for the head, ours for the tail.
+  #
+  # Pin the option to FALSE before flipping it on: on R < 4.3, restoring
+  # `warnPartialMatchArgs` to NULL (unset) does not switch the warning off
+  # again, so it would leak into every later test and (on R 4.2) add a
+  # partial-match warning to the `migration_fixture_prefix()` snapshots below.
+  options(warnPartialMatchArgs = FALSE)
   rlang::local_options(
     lifecycle_verbosity = "warning",
     warnPartialMatchArgs = TRUE
