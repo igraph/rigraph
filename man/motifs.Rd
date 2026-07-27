@@ -4,13 +4,15 @@
 \alias{motifs}
 \title{Graph motifs}
 \usage{
-motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
+motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
 directed graphs and sizes 3 to 6 in undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
