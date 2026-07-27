@@ -8,6 +8,7 @@ min_cut(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   capacity = NULL,
   value.only = TRUE
 )
@@ -15,14 +16,16 @@ min_cut(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex.}
+\item{source}{The ID of the source vertex.}
 
-\item{target}{The id of the target vertex (sometimes also called sink).}
+\item{target}{The ID of the target vertex (sometimes also called sink).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
-\item{value.only}{Logical scalar, if \code{TRUE} only the minimum cut value
+\item{value.only}{Logical, if \code{TRUE} only the minimum cut value
 is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
@@ -74,6 +77,10 @@ possible minimum cuts is calculated.
 For undirected graphs the Stoer-Wagner algorithm (see reference below) is
 used to calculate the minimum cut.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut}{\code{mincut()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_mincut_value}{\code{mincut_value()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut}{\code{st_mincut()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_mincut_value}{\code{st_mincut_value()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 g <- make_ring(100)
 min_cut(g, capacity = rep(1, vcount(g)))
@@ -88,16 +95,16 @@ M. Stoer and F. Wagner: A simple min-cut algorithm,
 \emph{Journal of the ACM}, 44 585-591, 1997.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()},
-\code{\link{vertex_connectivity}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}},
+\code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \concept{flow}

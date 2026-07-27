@@ -28,8 +28,7 @@ init_functions = {
 
 def get_r_parameter_name(param: ParamSpec) -> str:
     result = param.name_in_higher_level_interface
-    if result == param.name:
-        result = result.replace("_", ".")
+    # Keep snake_case for _impl functions
     return result
 
 
@@ -51,16 +50,16 @@ def optional_wrapper_r(conv: str) -> str:
     if "is.null" in conv:
         return conv
 
-    return f"if (!is.null(%I%)) {conv}"
+    return f"if (!is.null(%I%)) {{\n{indent(conv)}\n}}"
 
 
 def format_switch_statement(code: str) -> str:
     """Format switch statements with proper spacing and line breaks."""
-    # Match switch(...) patterns
-    switch_pattern = r'(switch\([^,]+)(,\s*)([^)]+)(\))'
+    # Match switch(...) or switch_igraph_arg(...) patterns
+    switch_pattern = r'(switch(?:_igraph_arg)?\([^,]+)(,\s*)([^)]+)(\))'
 
     def format_switch_args(match):
-        prefix = match.group(1)  # "switch(igraph.match.arg(mode)"
+        prefix = match.group(1)  # "switch(igraph_match_arg(mode)"
         comma = match.group(2)   # ","
         args = match.group(3)    # the key-value pairs
         suffix = match.group(4)  # ")"
@@ -99,13 +98,15 @@ def format_switch_statement(code: str) -> str:
                 formatted_parts.append(part)
 
             # Create multiline format: put the first argument on its own
-            # line after the opening 'switch(' and indent the remaining
+            # line after the opening 'switch(' or 'switch_igraph_arg(' and indent the remaining
             # key/value parts further.
             indent_str = '    '
-            # prefix currently holds 'switch(some_expr' — we want
-            # to emit 'switch(\n    some_expr,\n' (use indent_str)
-            first_arg = prefix[prefix.find('(') + 1 :].strip()
-            result = 'switch(\n' + indent_str + first_arg + ',\n'
+            # prefix currently holds 'switch(some_expr' or 'switch_igraph_arg(some_expr' — we want
+            # to emit 'switch(\n    some_expr,\n' or 'switch_igraph_arg(\n    some_expr,\n' (use indent_str)
+            paren_pos = prefix.find('(')
+            func_name = prefix[:paren_pos]
+            first_arg = prefix[paren_pos + 1:].strip()
+            result = func_name + '(\n' + indent_str + first_arg + ',\n'
             for i, part in enumerate(formatted_parts):
                 result += indent_str + part
                 if i < len(formatted_parts) - 1:
@@ -287,7 +288,10 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
         out.write("  on.exit(.Call(R_igraph_finalizer))\n")
         out.write("  # Function call\n")
         out.write("  res <- .Call(\n")
-        out.write("    R_" + function)
+        if "RC" in spec.ignored_by:
+            out.write("    Rx_" + function)
+        else:
+            out.write("    R_" + function)
 
         parts = []
         for param in spec.iter_input_parameters():
@@ -418,7 +422,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                 if isinstance(pars, str):
                     pars = pars.split(",")
                 for par in pars:
-                    par = par.strip().replace("_", ".")
+                    par = par.strip()  # Keep snake_case for _impl functions
                     lines.append(f"res${par} <- {par}")
 
             if lines:

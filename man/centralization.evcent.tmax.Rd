@@ -18,7 +18,7 @@ centralization.evcent.tmax(
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{logical scalar, whether to consider edge directions
+\item{directed}{Logical, whether to consider edge directions
 during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
@@ -30,4 +30,8 @@ eigenvector centralization requires normalized eigenvector centrality scores.}
 \code{centralization.evcent.tmax()} was renamed to \code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax}{\code{centralization_eigenvector_centrality_tmax()}}
+}
+
 \keyword{internal}

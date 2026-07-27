@@ -54,8 +54,8 @@ test_that("[ indexing works with logical vectors", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 20L),
-    .Dimnames = list(
+    dim = c(2L, 20L),
+    dimnames = list(
       c("b", "c"),
       c(
       "a", "b", "c",
@@ -77,8 +77,8 @@ test_that("[ indexing works with negative indices", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 19L),
-    .Dimnames = list(
+    dim = c(2L, 19L),
+    dimnames = list(
       c("b", "c"),
       c(
         "b", "c", "d", "e", "f", "g", "h", "i", "j",
@@ -225,7 +225,7 @@ test_that("[[ indexing works with filtering on both ends", {
 
 test_that("[[ indexing is consistent with length()", {
   g <- make_test_named_tree()
-  expect_equal(length(g), vcount(g))
+  expect_length(g, vcount(g))
 })
 
 test_that("[[ can query incident edges", {
@@ -310,8 +310,6 @@ test_that("[[ queries edges with vertex names", {
   )
 })
 test_that("[ handles from and to properly", {
-  g <- make_test_named_tree()
-
   g <- make_tree(20)
   expect_equal(g[from = c(1, 2, 2, 3), to = c(3, 4, 8, 7)], c(1, 1, 0, 1))
 
@@ -382,7 +380,7 @@ test_that("[ handles all combinations of i and/or j", {
     nrow = 10L,
     ncol = 10L
   )
-  g <- graph_from_adjacency_matrix(A, "directed")
+  g <- graph_from_adjacency_matrix(A, mode = "directed")
   expect_equal(as_unnamed_dense_matrix(g[1:3, ]), A[1:3, ])
   expect_equal(as_unnamed_dense_matrix(g[, 4:7]), A[, 4:7])
   expect_equal(as_unnamed_dense_matrix(g[1:3, 4:7]), A[1:3, 4:7])
@@ -400,7 +398,7 @@ test_that("[ handles duplicated i/j well", {
     nrow = 10L,
     ncol = 10L
   )
-  g <- graph_from_adjacency_matrix(A, "directed")
+  g <- graph_from_adjacency_matrix(A, mode = "directed")
   expect_equal(as_unnamed_dense_matrix(g[c(1, 2, 2), ]), A[c(1, 2, 2), ])
   expect_equal(as_unnamed_dense_matrix(g[, c(3, 3, 4, 4)]), A[, c(3, 3, 4, 4)])
   expect_equal(

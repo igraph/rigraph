@@ -26,7 +26,7 @@ the type of the right hand side argument:
 \item If it is an igraph graph object, then the difference of the
 two graphs is calculated, see \code{\link[=difference]{difference()}}.
 \item If it is a numeric or character vector, then it is interpreted
-as a vector of vertex ids and the specified vertices will be
+as a vector of vertex IDs and the specified vertices will be
 deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 V(g)$name <- letters[1:10]
 g <- g - c("a", "b")}
@@ -38,7 +38,7 @@ function), then these edges will be deleted from the graph.
 \item If it is an object created with the \code{\link[=vertex]{vertex()}} (or the
 \code{\link[=vertices]{vertices()}}) function, then all arguments of \code{\link[=vertices]{vertices()}} are
 concatenated and the result is interpreted as a vector of vertex
-ids. These vertices will be removed from the graph.
+IDs. These vertices will be removed from the graph.
 \item If it is an object created with the \code{\link[=edge]{edge()}} (or the
 \code{\link[=edges]{edges()}}) function, then all arguments of \code{\link[=edges]{edges()}} are
 concatenated and then interpreted as edges to be removed from the
@@ -57,30 +57,30 @@ g <- g - path("a", "b", "c", "d")}
 }
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \concept{functions for manipulating graph structure}

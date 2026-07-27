@@ -1,5 +1,5 @@
 test_that("count_motifs works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
 
   gnp <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
@@ -23,7 +23,7 @@ test_that("count_motifs works", {
 })
 
 test_that("motifs works", {
-  withr::local_seed(123)
+  igraph_local_seed(123)
   gnp <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
   m <- motifs(gnp)
@@ -132,7 +132,7 @@ test_that("motifs works", {
 })
 
 test_that("sample_motifs works", {
-  withr::local_seed(20041103)
+  igraph_local_seed(20041103)
 
   g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
   n <- vcount(g)
@@ -276,4 +276,149 @@ test_that("motifs_randesu_callback validates arguments", {
       callback = function(graph, motif, extra) TRUE),
     "must be the same length"
   )
+})
+
+test_that("motifs with callback works", {
+  igraph_local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Count motifs using callback
+  count <- 0
+  isoclasses <- integer(0)
+
+  motifs(g, 3, callback = function(vids, isoclass) {
+    count <<- count + 1
+    isoclasses <<- c(isoclasses, isoclass)
+    FALSE # continue search
+  })
+
+  expect_true(count > 0)
+  expect_true(all(isoclasses >= 1))
+  expect_true(all(isoclasses <= 16)) # max isoclass for size 3
+})
+
+test_that("motifs with callback can stop early", {
+  igraph_local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Stop after finding 3 motifs
+  count <- 0
+
+  motifs(g, 3, callback = function(vids, isoclass) {
+    count <<- count + 1
+    if (count >= 3) {
+      TRUE # stop after 3 motifs
+    } else {
+      FALSE # continue
+    }
+  })
+
+  expect_equal(count, 3)
+})
+
+
+test_that("motifs with callback receives correct arguments", {
+  igraph_local_seed(123)
+
+  g <- make_graph(~ A - B - C - A)
+
+  # Check argument types
+  motifs(g, 3, callback = function(vids, isoclass) {
+    expect_type(vids, "integer")
+    expect_length(vids, 3)
+    expect_type(isoclass, "integer")
+    expect_length(isoclass, 1)
+    TRUE # stop after first motif
+  })
+})
+
+test_that("motifs with callback handles errors in callback", {
+  igraph_local_seed(123)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Callback that throws an error
+  expect_error(
+    motifs(g, 3, callback = function(vids, isoclass) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})
+
+test_that("motifs with callback output matches expected", {
+  igraph_local_seed(42)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Collect motif information
+  motif_data <- list()
+  motifs(g, 3, callback = function(vids, isoclass) {
+    motif_data[[length(motif_data) + 1]] <<- list(
+      vids = vids,
+      isoclass = isoclass
+    )
+    FALSE # Continue
+  })
+
+  # Snapshot test for motif structure
+  expect_snapshot({
+    cat("Number of motifs found:", length(motif_data), "\n")
+    motif_data[1:2]
+  })
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("motifs() recovers legacy positional arguments", {
+  # `cut.prob` and `callback` are exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # An all-zero cut probability vector matches the default of no cuts.
+  lifecycle::expect_deprecated(
+    res <- motifs(g, 3, rep(0, 3))
+  )
+  expect_identical(res, motifs(g, 3, cut.prob = rep(0, 3)))
+  expect_identical(res, motifs(g, 3))
+})
+
+test_that("count_motifs() recovers legacy positional arguments", {
+  # `cut.prob` is exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Cutting the search with probability one at every level
+  # deterministically drops all motifs.
+  lifecycle::expect_deprecated(
+    res <- count_motifs(g, 3, c(1, 1, 1))
+  )
+  expect_identical(res, count_motifs(g, 3, cut.prob = c(1, 1, 1)))
+  expect_equal(res, 0)
+  expect_equal(count_motifs(g, size = 3), 12)
+})
+
+test_that("sample_motifs() covers cut.prob and sample.size", {
+  # `sample` is exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Starting the search from every vertex makes the estimate exact.
+  igraph_with_seed(42, {
+    res <- sample_motifs(
+      g,
+      size = 3,
+      cut.prob = rep(0, 3),
+      sample.size = vcount(g)
+    )
+  })
+  expect_equal(res, count_motifs(g, size = 3))
+
+  # Legacy positional `cut.prob` and `sample.size` are recovered
+  # with a deprecation warning.
+  igraph_with_seed(42, {
+    lifecycle::expect_deprecated(
+      res_legacy <- sample_motifs(g, 3, rep(0, 3), vcount(g))
+    )
+  })
+  expect_identical(res_legacy, res)
 })

@@ -89,13 +89,11 @@ open_triads
 \seealso{
 \code{\link[=motifs]{motifs()}}, \code{\link[=count_motifs]{count_motifs()}}, \code{\link[=sample_motifs]{sample_motifs()}}, \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{count_motifs}()},
-\code{\link{dyad_census}()},
-\code{\link{motifs}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=count_motifs]{count_motifs()}},
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=motifs]{motifs()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}
 \concept{graph_motifs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback()}}.}
-
