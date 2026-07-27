@@ -1888,6 +1888,11 @@ sample_pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "sample_pa_age"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2107,6 +2112,11 @@ pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ag", "agi", "agin", "aging", "aging."),
+      "pa_age"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2264,6 +2274,11 @@ sample_traits_callaway <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits_callaway"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2330,6 +2345,11 @@ traits_callaway <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits_callaway"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2385,6 +2405,11 @@ sample_traits <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_traits"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2445,6 +2470,11 @@ traits <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "traits"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2679,6 +2709,11 @@ sample_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2778,6 +2813,11 @@ pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2859,6 +2899,11 @@ sample_asym_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "sample_asym_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
@@ -2934,6 +2979,11 @@ asym_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("t", "ty", "typ", "type"),
+      "asym_pref"
+    )
     .arg_handle <- migrate_recover_args(
       list(...),
       current = list(
