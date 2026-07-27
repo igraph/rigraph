@@ -112,3 +112,37 @@ migrate_recover_args <- function(
     )
   )
 }
+
+# Runtime guard for head/recoverable prefix overlaps. A supplied tag that is
+# a strict prefix of a head arg *and* of a recoverable name was ambiguous --
+# an error -- under the old signature; base R partial matching now binds it
+# to the head arg before the recovery layer can see it. On its own that is
+# accepted: previously broken code that now works in a well-defined, silent
+# way is not a problem. What must not happen is that same tag combined with
+# legacy arguments in `...`: the tag steals the head slot, positionals shift
+# into the wrong formals, and the recovery layer would rescue a never-valid
+# call behind a soft-deprecation warning. The generator enumerates those
+# tags per function (`forbidden_tags`) and the ARG_HANDLE block calls this
+# as the first statement inside its recovery gate -- i.e. only ever when
+# `...` is non-empty and recovery is about to engage -- so exactly that
+# combination is rejected.
+
+#' @noRd
+migrate_check_call_tags <- function(
+  call,
+  forbidden,
+  fn_name,
+  env = rlang::caller_env()
+) {
+  bad <- intersect(names(call), forbidden)
+  if (length(bad) == 0L) {
+    return(invisible(NULL))
+  }
+  cli::cli_abort(
+    c(
+      "Argument {.arg {bad}} matches multiple formal arguments of {.fn {fn_name}}.",
+      i = "Spell out the full argument name."
+    ),
+    call = env
+  )
+}

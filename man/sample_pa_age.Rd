@@ -10,6 +10,7 @@ sample_pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -27,6 +28,7 @@ pa_age(
   pa.exp,
   aging.exp,
   m = NULL,
+  ...,
   aging.bin = 300,
   out.dist = NULL,
   out.seq = NULL,
@@ -50,6 +52,8 @@ see details below.}
 \item{m}{The number of edges each new vertex creates (except the very first
 vertex). This argument is used only if both the \code{out.dist} and
 \code{out.seq} arguments are NULL.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{aging.bin}{The number of bins to use for measuring the age of
 vertices, see details below.}

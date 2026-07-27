@@ -7,6 +7,7 @@
 \usage{
 layout_with_lgl(
   graph,
+  ...,
   maxiter = 150,
   maxdelta = vcount(graph),
   area = vcount(graph)^2,
@@ -20,6 +21,8 @@ with_lgl(...)
 }
 \arguments{
 \item{graph}{The input graph}
+
+\item{...}{Passed to \code{layout_with_lgl()}.}
 
 \item{maxiter}{The maximum number of iterations to perform (150).}
 
@@ -41,8 +44,6 @@ grid cells are taken into account (the fourth root of the number of
 
 \item{root}{The ID of the vertex to place at the middle of the layout. The
 default value is -1 which means that a random vertex is selected.}
-
-\item{...}{Passed to \code{layout_with_lgl()}.}
 }
 \value{
 A numeric matrix with two columns and as many rows as vertices.

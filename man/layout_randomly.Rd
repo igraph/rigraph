@@ -5,17 +5,17 @@
 \alias{randomly}
 \title{Randomly place vertices on a plane or in 3d space}
 \usage{
-layout_randomly(graph, dim = c(2, 3))
+layout_randomly(graph, ..., dim = c(2, 3))
 
 randomly(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{Parameters to pass to \code{layout_randomly()}.}
+
 \item{dim}{Integer scalar, the dimension of the space to use. It must be 2
 or 3.}
-
-\item{...}{Parameters to pass to \code{layout_randomly()}.}
 }
 \value{
 A numeric matrix with two or three columns.

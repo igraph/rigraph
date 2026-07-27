@@ -7,7 +7,7 @@
 \usage{
 igraph_options(...)
 
-igraph_opt(x, default = NULL)
+igraph_opt(x, ..., default = NULL)
 }
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of

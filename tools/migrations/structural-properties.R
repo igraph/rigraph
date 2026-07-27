@@ -157,7 +157,14 @@ migrations <- list(
       ...,
       mode = c("all", "out", "in"),
       weights = NULL,
-      algorithm = c( "automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall" )
+      algorithm = c(
+        "automatic",
+        "unweighted",
+        "dijkstra",
+        "bellman-ford",
+        "johnson",
+        "floyd-warshall"
+      )
     ) {},
     when = "3.0.0"
   ),
@@ -410,7 +417,18 @@ migrations <- list(
     old = function(graph, type, vids, weights, isolates) {},
     new = function(
       graph,
-      type = c( "undirected", "global", "globalundirected", "localundirected", "local", "average", "localaverage", "localaverageundirected", "barrat", "weighted" ),
+      type = c(
+        "undirected",
+        "global",
+        "globalundirected",
+        "localundirected",
+        "local",
+        "average",
+        "localaverage",
+        "localaverageundirected",
+        "barrat",
+        "weighted"
+      ),
       ...,
       vids = NULL,
       weights = NULL,

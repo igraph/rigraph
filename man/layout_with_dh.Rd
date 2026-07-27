@@ -7,6 +7,7 @@
 \usage{
 layout_with_dh(
   graph,
+  ...,
   coords = NULL,
   maxiter = 10,
   fineiter = max(10, log2(vcount(graph))),
@@ -22,6 +23,8 @@ with_dh(...)
 }
 \arguments{
 \item{graph}{The graph to lay out. Edge directions are ignored.}
+
+\item{...}{Passed to \code{layout_with_dh()}.}
 
 \item{coords}{Optional starting positions for the vertices. If this argument
 is not \code{NULL} then it should be an appropriate matrix of starting
@@ -48,8 +51,6 @@ energy function.}
 
 \item{weight.node.edge.dist}{Weight for the node-edge distance component of
 the energy function.}
-
-\item{...}{Passed to \code{layout_with_dh()}.}
 }
 \value{
 A matrix with two columns, containing the x and y coordinates

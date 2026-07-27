@@ -704,3 +704,280 @@ test_that("modularity() handles NA weights correctly", {
   mod_with_empty <- modularity(gw, membership_vec, weights = numeric(0))
   expect_equal(mod_with_empty, mod_without_weights)
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("cluster_edge_betweenness() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  # Weighted runs that return a membership warn
+  # that the split is picked at the maximal modularity.
+  expect_warning(
+    res <- cluster_edge_betweenness(
+      karate,
+      weights = rep(1, ecount(karate)),
+      directed = FALSE
+    ),
+    "highest modularity score"
+  )
+  # Unit weights reproduce the unweighted clustering.
+  expect_identical(
+    membership(res),
+    membership(cluster_edge_betweenness(karate))
+  )
+  expect_length(res, 5)
+
+  # All optional result components can be switched off.
+  bare <- cluster_edge_betweenness(
+    karate,
+    edge.betweenness = FALSE,
+    merges = FALSE,
+    bridges = FALSE,
+    modularity = FALSE,
+    membership = FALSE
+  )
+  expect_null(bare$edge.betweenness)
+  expect_length(bare$merges, 0)
+  expect_length(bare$bridges, 0)
+  expect_null(bare$modularity)
+  expect_length(bare$membership, 0)
+  expect_length(bare$removed.edges, ecount(karate))
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    expect_warning(
+      res_legacy <- cluster_edge_betweenness(karate, w),
+      "highest modularity score"
+    )
+  )
+  expect_warning(
+    res_named <- cluster_edge_betweenness(karate, weights = w),
+    "highest modularity score"
+  )
+  expect_identical(res_legacy, res_named)
+})
+
+test_that("cluster_fast_greedy() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  res <- cluster_fast_greedy(
+    karate,
+    merges = FALSE,
+    modularity = FALSE,
+    membership = TRUE,
+    weights = rep(1, ecount(karate))
+  )
+  # Unit weights reproduce the unweighted membership, without dendrogram parts.
+  expect_identical(membership(res), membership(cluster_fast_greedy(karate)))
+  expect_length(res$merges, 0)
+  expect_null(res$modularity)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_fast_greedy(karate, FALSE)
+  )
+  expect_identical(res_legacy, cluster_fast_greedy(karate, merges = FALSE))
+})
+
+test_that("cluster_infomap() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_infomap(
+    karate,
+    e.weights = rep(1, ecount(karate)),
+    v.weights = rep(1, vcount(karate)),
+    nb.trials = 3,
+    modularity = FALSE
+  )
+  # The stochastic result is still a valid partition of all vertices.
+  expect_s3_class(res, "communities")
+  expect_length(membership(res), vcount(karate))
+  expect_in(membership(res), seq_len(max(membership(res))))
+  expect_null(res$modularity)
+
+  ew <- rep(1, ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_infomap(karate, ew)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_infomap(karate, e.weights = ew))
+})
+
+test_that("cluster_louvain() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_louvain(
+    karate,
+    weights = rep(1, ecount(karate)),
+    resolution = 0.01
+  )
+  # A tiny resolution merges everything into a single community.
+  expect_equal(max(membership(res)), 1)
+  expect_length(membership(res), vcount(karate))
+
+  w <- rep(1:2, length.out = ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_louvain(karate, w)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_louvain(karate, weights = w))
+})
+
+test_that("cluster_optimal() covers migrated tail args and positional recovery", {
+  skip_if_no_glpk()
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  # Uniformly scaled weights leave partition and modularity unchanged.
+  res <- cluster_optimal(karate, weights = rep(2, ecount(karate)))
+  ref <- cluster_optimal(karate)
+  expect_identical(membership(res), membership(ref))
+  expect_identical(res$modularity, ref$modularity)
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_optimal(karate, w)
+  )
+  expect_identical(res_legacy, cluster_optimal(karate, weights = w))
+})
+
+test_that("cluster_spinglass() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
+  karate <- make_graph("Zachary")
+
+  res <- cluster_spinglass(
+    karate,
+    weights = rep(1, ecount(karate)),
+    spins = 10,
+    parupdate = TRUE,
+    start.temp = 0.8,
+    stop.temp = 0.05,
+    cool.fact = 0.95,
+    update.rule = "random",
+    gamma = 1.2,
+    implementation = "orig"
+  )
+  # The stochastic result is still a valid partition of all vertices.
+  expect_s3_class(res, "communities")
+  expect_length(membership(res), vcount(karate))
+  expect_in(membership(res), seq_len(max(membership(res))))
+
+  # The negative-weight implementation accepts its own gamma.
+  res_neg <- cluster_spinglass(
+    karate,
+    spins = 5,
+    implementation = "neg",
+    gamma.minus = 0.5
+  )
+  expect_s3_class(res_neg, "communities")
+  expect_length(membership(res_neg), vcount(karate))
+
+  # Restricting to a single vertex returns that vertex's community.
+  res_vertex <- cluster_spinglass(
+    karate,
+    vertex = 1,
+    spins = 10,
+    update.rule = "config",
+    gamma = 1
+  )
+  expect_true(1 %in% res_vertex$community)
+  expect_gte(res_vertex$cohesion, 0)
+
+  w <- rep(1, ecount(karate))
+  set.seed(1)
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_spinglass(karate, w)
+  )
+  set.seed(1)
+  expect_identical(res_legacy, cluster_spinglass(karate, weights = w))
+})
+
+test_that("cluster_walktrap() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  res <- cluster_walktrap(
+    karate,
+    weights = rep(1, ecount(karate)),
+    steps = 6
+  )
+  # Longer walks merge the karate club into three communities.
+  expect_length(res, 3)
+  expect_length(membership(res), vcount(karate))
+
+  # All optional result components can be switched off.
+  bare <- cluster_walktrap(
+    karate,
+    merges = FALSE,
+    modularity = FALSE,
+    membership = FALSE
+  )
+  expect_null(bare$merges)
+  expect_null(bare$modularity)
+  expect_null(bare$membership)
+
+  w <- rep(1:2, length.out = ecount(karate))
+  lifecycle::expect_deprecated(
+    res_legacy <- cluster_walktrap(karate, w)
+  )
+  expect_identical(res_legacy, cluster_walktrap(karate, weights = w))
+})
+
+test_that("make_clusters() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+  memb <- rep(1:2, each = 17)
+  mrg <- matrix(c(1, 2), ncol = 2)
+
+  res <- make_clusters(
+    karate,
+    membership = memb,
+    algorithm = "custom",
+    merges = mrg,
+    modularity = FALSE
+  )
+  expect_s3_class(res, "communities")
+  expect_equal(membership(res), memb, ignore_attr = "class")
+  expect_identical(algorithm(res), "custom")
+  expect_identical(res$merges, mrg)
+  expect_null(res$modularity)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- make_clusters(karate, memb, "custom")
+  )
+  expect_identical(
+    res_legacy,
+    make_clusters(karate, memb, algorithm = "custom")
+  )
+})
+
+test_that("modularity_matrix() covers migrated tail args and positional recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  karate <- make_graph("Zachary")
+
+  base <- modularity_matrix(karate)
+  res <- modularity_matrix(
+    karate,
+    weights = rep(1, ecount(karate)),
+    resolution = 2,
+    directed = FALSE
+  )
+  # B(res) = A - res * K, so doubling the resolution gives 2 * B(1) - A.
+  A <- as_adjacency_matrix(karate, sparse = FALSE)
+  expect_equal(res, 2 * base - A)
+
+  # The head argument `membership` is hard-deprecated,
+  # so the legacy positional call first warns about recovering `weights`
+  # and then fails on the supplied membership.
+  expect_snapshot(error = TRUE, {
+    modularity_matrix(karate, rep(1, vcount(karate)), rep(1, ecount(karate)))
+  })
+})

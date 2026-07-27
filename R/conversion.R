@@ -546,6 +546,7 @@ as_adj <- function(
 #' `as_edgelist()` returns the list of edges in a graph.
 #'
 #' @param graph The graph to convert.
+#' @inheritParams rlang::args_dots_empty
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
 #'   vertex IDs.
@@ -562,7 +563,33 @@ as_adj <- function(
 #'
 #' @family conversion
 #' @export
-as_edgelist <- function(graph, names = TRUE) {
+as_edgelist <- function(
+  graph,
+  ...,
+  names = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: as_edgelist, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(names = names),
+      recover_new = c("names"),
+      recover_old = c("names"),
+      match_names = c("names"),
+      match_to = c("names"),
+      defaults = list(names = TRUE),
+      head_args = c("graph"),
+      fn_name = "as_edgelist"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
   res <- res + 1
@@ -660,6 +687,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
 #' plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
 
+#' @inheritParams rlang::args_dots_empty
 #' @examples
 #'
 #' g4 <- make_graph(c(
@@ -676,8 +704,31 @@ as_edgelist <- function(graph, names = TRUE) {
 #'
 as_directed <- function(
   graph,
+  ...,
   mode = c("mutual", "arbitrary", "random", "acyclic")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_directed, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("mutual", "arbitrary", "random", "acyclic")),
+      head_args = c("graph"),
+      fn_name = "as_directed"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   to_directed_impl(
     graph = graph,
     mode = mode
@@ -749,6 +800,7 @@ as_undirected <- function(
 #' vertices.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
 #'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
 #'   \sQuote{`in`} is for incoming edges/vertices, \sQuote{`all`} is
@@ -777,10 +829,37 @@ as_undirected <- function(
 #'
 as_adj_list <- function(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_adj_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, multiple = multiple),
+      recover_new = c("mode", "loops", "multiple"),
+      recover_old = c("mode", "loops", "multiple"),
+      match_names = c("mode", "loops", "multiple"),
+      match_to = c("mode", "loops", "multiple"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = c("twice", "once", "ignore"),
+        multiple = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "as_adj_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   mode <- igraph_match_arg(mode)
@@ -806,12 +885,39 @@ as_adj_list <- function(
 }
 
 #' @rdname as_adj_list
+#' @inheritParams rlang::args_dots_empty
 #' @export
 as_adj_edge_list <- function(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_adj_edge_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops),
+      recover_new = c("mode", "loops"),
+      recover_old = c("mode", "loops"),
+      match_names = c("mode", "loops"),
+      match_to = c("mode", "loops"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = c("twice", "once", "ignore")
+      ),
+      head_args = c("graph"),
+      fn_name = "as_adj_edge_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   mode <- igraph_match_arg(mode)
@@ -847,6 +953,7 @@ as_adj_edge_list <- function(
 #' attributes of the first of the multiple edges.
 #'
 #' @param graphNEL The graphNEL graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param name Logical, whether to add graphNEL vertex names as an
 #'   igraph vertex attribute called \sQuote{`name`}.
 #' @param weight Logical, whether to add graphNEL edge weights as an
@@ -879,10 +986,33 @@ as_adj_edge_list <- function(
 #' @export
 graph_from_graphnel <- function(
   graphNEL,
+  ...,
   name = TRUE,
   weight = TRUE,
   unlist.attrs = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_graphnel, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(name = name, weight = weight, unlist.attrs = unlist.attrs),
+      recover_new = c("name", "weight", "unlist.attrs"),
+      recover_old = c("name", "weight", "unlist.attrs"),
+      match_names = c("name", "weight", "unlist.attrs"),
+      match_to = c("name", "weight", "unlist.attrs"),
+      defaults = list(name = TRUE, weight = TRUE, unlist.attrs = TRUE),
+      head_args = c("graphNEL"),
+      fn_name = "graph_from_graphnel"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!inherits(graphNEL, "graphNEL")) {
     cli::cli_abort(
       "{.arg graphNEL} is {.obj_type_friendly {graphNEL}} and not a graphNEL graph"
@@ -989,7 +1119,10 @@ as_graphnel <- function(graph) {
   edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
   if ("weight" %in% edge_attr_names(graph) && is.numeric(E(graph)$weight)) {
-    al <- lapply(as_adj_edge_list(graph, "out", loops = "once"), as.vector)
+    al <- lapply(
+      as_adj_edge_list(graph, mode = "out", loops = "once"),
+      as.vector
+    )
     for (i in seq(along.with = al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse(edges[, 2] == i, edges[, 1], edges[, 2])
@@ -997,7 +1130,7 @@ as_graphnel <- function(graph) {
       al[[i]] <- list(edges = edges, weights = weights)
     }
   } else {
-    al <- as_adj_list(graph, "out", loops = "once")
+    al <- as_adj_list(graph, mode = "out", loops = "once")
     al <- lapply(al, function(x) list(edges = as.vector(x)))
   }
 
@@ -1347,6 +1480,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #'   throughout all vectors in the list must be less than the number of vectors
 #'   (=the number of vertices in the graph).
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, it specifies whether the graph to create is
 #'   undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 #'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
@@ -1383,9 +1517,32 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' @export
 graph_from_adj_list <- function(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_adj_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, duplicate = duplicate),
+      recover_new = c("mode", "duplicate"),
+      recover_old = c("mode", "duplicate"),
+      match_names = c("mode", "duplicate"),
+      match_to = c("mode", "duplicate"),
+      defaults = list(mode = c("out", "in", "all", "total"), duplicate = TRUE),
+      head_args = c("adjlist"),
+      fn_name = "graph_from_adj_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   adjlist_impl(
     adjlist = adjlist,
     mode = mode,
@@ -1653,6 +1810,7 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'   version 0.7 this argument is coerced to a data frame with
 #'   `as.data.frame`.
 #' @param directed Logical, whether or not to create a directed graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with `as.data.frame`, if not `NULL`.
@@ -1702,7 +1860,34 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' as_data_frame(g, what = "edges")
 #'
 #' @export
-graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
+graph_from_data_frame <- function(
+  d,
+  directed = TRUE,
+  ...,
+  vertices = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vertices = vertices),
+      recover_new = c("vertices"),
+      recover_old = c("vertices"),
+      match_names = c("vertices"),
+      match_to = c("vertices"),
+      defaults = list(vertices = NULL),
+      head_args = c("d", "directed"),
+      fn_name = "graph_from_data_frame"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   d <- as.data.frame(d)
   if (!is.null(vertices)) {
     vertices <- as.data.frame(vertices)
@@ -1794,6 +1979,7 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' @concept Edge list
 #' @param el The edge list, a two column matrix, character or numeric.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
@@ -1805,7 +1991,33 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' # Create a ring by hand
 #' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-graph_from_edgelist <- function(el, directed = TRUE) {
+graph_from_edgelist <- function(
+  el,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_edgelist, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("el"),
+      fn_name = "graph_from_edgelist"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.matrix(el) || ncol(el) != 2) {
     cli::cli_abort("graph_from_edgelist expects a matrix with two columns.")
   }

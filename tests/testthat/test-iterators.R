@@ -443,3 +443,36 @@ test_that("logical indices are not recycled", {
   expect_snapshot_igraph_error(V(g)[c(TRUE, FALSE)])
   expect_snapshot_igraph_error(E(g)[c(TRUE, FALSE)])
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("E() tail arguments and legacy positional recovery", {
+  g <- make_ring(10, directed = TRUE)
+
+  # The reversed pair is only matched when direction is ignored.
+  expect_equal(as.numeric(E(g, P = c(1, 2))), 1)
+  expect_equal(as.numeric(E(g, P = c(2, 1), directed = FALSE)), 1)
+  # Path mode selects the consecutive edges along the given vertex path.
+  expect_equal(as.numeric(E(g, path = c(1, 2, 3))), c(1, 2))
+  expect_equal(as.numeric(E(g, path = c(3, 2, 1), directed = FALSE)), c(2, 1))
+
+  lifecycle::expect_deprecated(
+    res <- E(g, c(1, 2))
+  )
+  expect_equal(res, E(g, P = c(1, 2)))
+})
+
+test_that("identical_graphs() tail arguments and legacy positional recovery", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  g2$foo <- 1
+
+  # The graph attribute only breaks identity when attributes are compared.
+  expect_false(identical_graphs(g1, g2))
+  expect_true(identical_graphs(g1, g2, attrs = FALSE))
+
+  lifecycle::expect_deprecated(
+    res <- identical_graphs(g1, g2, FALSE)
+  )
+  expect_identical(res, identical_graphs(g1, g2, attrs = FALSE))
+})

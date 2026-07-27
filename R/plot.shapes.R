@@ -369,13 +369,41 @@ shape_noplot <- function(coords, v = NULL, params) {
 }
 
 #' @rdname shapes
+#' @inheritParams rlang::args_dots_empty
 #' @export
 add_shape <- function(
   shape,
+  ...,
   clip = shape_noclip,
   plot = shape_noplot,
   parameters = list()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(clip = clip, plot = plot, parameters = parameters),
+      recover_new = c("clip", "plot", "parameters"),
+      recover_old = c("clip", "plot", "parameters"),
+      match_names = c("clip", "plot", "parameters"),
+      match_to = c("clip", "plot", "parameters"),
+      defaults = list(
+        clip = shape_noclip,
+        plot = shape_noplot,
+        parameters = list()
+      ),
+      head_args = c("shape"),
+      fn_name = "add_shape"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.character(shape) || length(shape) != 1) {
     cli::cli_abort(c(
       "{.arg shape} must be a character of length 1.",
