@@ -5,12 +5,14 @@
 \alias{on_grid}
 \title{Simple grid layout}
 \usage{
-layout_on_grid(graph, width = 0, height = 0, dim = 2)
+layout_on_grid(graph, ..., width = 0, height = 0, dim = 2)
 
 on_grid(...)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{Passed to \code{layout_on_grid()}.}
 
 \item{width}{The number of vertices in a single row of the grid. If this is
 zero or negative, then for 2d layouts the width of the grid will be the
@@ -22,8 +24,6 @@ three dimensional layouts. If this is zero or negative, then it is
 determinted automatically.}
 
 \item{dim}{Two or three. Whether to make 2d or a 3d layout.}
-
-\item{...}{Passed to \code{layout_on_grid()}.}
 }
 \value{
 A two-column or three-column matrix.
@@ -37,6 +37,10 @@ The function places the vertices on a simple rectangular grid, one after the
 other. If you want to change the order of the vertices, then see the
 \code{\link[=permute]{permute()}} function.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}
+}
+
 \examples{
 
 g <- make_lattice(c(3, 3))
@@ -53,28 +57,28 @@ if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 \seealso{
 \code{\link[=layout]{layout()}} for other layout generators
 
-Other graph layouts: 
-\code{\link{add_layout_}()},
-\code{\link{component_wise}()},
-\code{\link{layout_}()},
-\code{\link{layout_as_bipartite}()},
-\code{\link{layout_as_star}()},
-\code{\link{layout_as_tree}()},
-\code{\link{layout_in_circle}()},
-\code{\link{layout_nicely}()},
-\code{\link{layout_on_sphere}()},
-\code{\link{layout_randomly}()},
-\code{\link{layout_with_dh}()},
-\code{\link{layout_with_fr}()},
-\code{\link{layout_with_gem}()},
-\code{\link{layout_with_graphopt}()},
-\code{\link{layout_with_kk}()},
-\code{\link{layout_with_lgl}()},
-\code{\link{layout_with_mds}()},
-\code{\link{layout_with_sugiyama}()},
-\code{\link{merge_coords}()},
-\code{\link{norm_coords}()},
-\code{\link{normalize}()}
+Other graph layouts:
+\code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=component_wise]{component_wise()}},
+\code{\link[=layout_]{layout_()}},
+\code{\link[=layout_as_bipartite]{layout_as_bipartite()}},
+\code{\link[=layout_as_star]{layout_as_star()}},
+\code{\link[=layout_as_tree]{layout_as_tree()}},
+\code{\link[=layout_in_circle]{layout_in_circle()}},
+\code{\link[=layout_nicely]{layout_nicely()}},
+\code{\link[=layout_on_sphere]{layout_on_sphere()}},
+\code{\link[=layout_randomly]{layout_randomly()}},
+\code{\link[=layout_with_dh]{layout_with_dh()}},
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_gem]{layout_with_gem()}},
+\code{\link[=layout_with_graphopt]{layout_with_graphopt()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}},
+\code{\link[=layout_with_lgl]{layout_with_lgl()}},
+\code{\link[=layout_with_mds]{layout_with_mds()}},
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}},
+\code{\link[=merge_coords]{merge_coords()}},
+\code{\link[=norm_coords]{norm_coords()}},
+\code{\link[=normalize]{normalize()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

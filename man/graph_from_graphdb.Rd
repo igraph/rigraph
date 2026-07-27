@@ -6,6 +6,7 @@
 \usage{
 graph_from_graphdb(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -17,7 +18,9 @@ graph_from_graphdb(
 )
 }
 \arguments{
-\item{url}{If not \code{NULL} it is a complete URL with the file to import.}
+\item{url}{Complete URL with the file to import. Default: \code{NULL}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{prefix}{Gives the prefix. See details below. Possible values:
 \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
@@ -41,11 +44,11 @@ which one to read.}
 
 \item{base}{The base address of the database. See details below.}
 
-\item{compressed}{Logical constant, if TRUE than the file is expected to be
+\item{compressed}{Logical, if TRUE than the file is expected to be
 compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
 suffix is added to the filename.}
 
-\item{directed}{Logical constant, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 }
 \value{
 A new graph object.
@@ -71,6 +74,10 @@ its old version at
 \url{https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
 for the actual format of a graph database file and other information.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}
+}
+
 \references{
 M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 of graphs and its use for benchmarking graph isomorphism algorithms,
@@ -79,9 +86,9 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
 \seealso{
 \code{\link[=read_graph]{read_graph()}}, \code{\link[=isomorphic]{isomorphic()}}
 
-Foreign format readers
-\code{\link{read_graph}()},
-\code{\link{write_graph}()}
+Foreign format readers:
+\code{\link[=read_graph]{read_graph()}},
+\code{\link[=write_graph]{write_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -14,11 +14,11 @@ count_triangles(graph, vids = V(graph))
 ignored.}
 
 \item{vids}{The vertices to query, all of them by default. This might be a
-vector of numeric ids, or a character vector of symbolic vertex names for
+vector of numeric IDs, or a character vector of symbolic vertex names for
 named graphs.}
 }
 \value{
-For \code{triangles()} a numeric vector of vertex ids, the first three
+For \code{triangles()} a numeric vector of vertex IDs, the first three
 vertices belong to the first triangle found, etc.
 
 For \code{count_triangles()} a numeric vector, the number of triangles for all
@@ -35,6 +35,10 @@ to the first triangle, etc.
 
 \code{count_triangles()} counts how many triangles a vertex is part of.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_list_triangles}{\code{list_triangles()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_count_adjacent_triangles}{\code{count_adjacent_triangles()}}
+}
+
 \examples{
 
 ## A small graph
@@ -63,5 +67,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{triangles}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_list_triangles}{\code{list_triangles()}}, \href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_adjacent_triangles}{\code{adjacent_triangles()}}.}
-

@@ -37,7 +37,7 @@
 #' in the future.
 #'
 #' @param graph The graph object to analyze
-#' @param v Vertex sequence or numeric vector, the vertex ids for which the
+#' @param v Vertex sequence or numeric vector, the vertex IDs for which the
 #'   cocitation or bibliographic coupling values we want to calculate. The
 #'   default is all vertices.
 #' @return A numeric matrix with `length(v)` lines and
@@ -54,12 +54,12 @@
 #' bibcoupling(g)
 #'
 cocitation <- function(graph, v = V(graph)) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_cocitation, graph, v - 1)
+  res <- cocitation_impl(
+    graph = graph,
+    vids = v
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    v <- as_igraph_vs(graph, v)
     rownames(res) <- vertex_attr(graph, "name", v)
     colnames(res) <- vertex_attr(graph, "name")
   }
@@ -69,12 +69,12 @@ cocitation <- function(graph, v = V(graph)) {
 #' @rdname cocitation
 #' @export
 bibcoupling <- function(graph, v = V(graph)) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_bibcoupling, graph, v - 1)
+  res <- bibcoupling_impl(
+    graph = graph,
+    vids = v
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    v <- as_igraph_vs(graph, v)
     rownames(res) <- vertex_attr(graph, "name", v)
     colnames(res) <- vertex_attr(graph, "name")
   }

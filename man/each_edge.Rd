@@ -6,6 +6,7 @@
 \usage{
 each_edge(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
@@ -14,10 +15,12 @@ each_edge(
 \arguments{
 \item{prob}{The rewiring probability, a real number between zero and one.}
 
-\item{loops}{Logical scalar, whether loop edges are allowed in the rewired
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{loops}{Logical, whether loop edges are allowed in the rewired
 graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed in the
+\item{multiple}{Logical, whether multiple edges are allowed in the
 generated graph.}
 
 \item{mode}{Character string, specifies which endpoint of the edges to rewire
@@ -48,9 +51,9 @@ g2 <- g \%>\% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 degree(g, mode = "in") == degree(g2, mode = "in")
 }
 \seealso{
-Other rewiring functions: 
-\code{\link{keeping_degseq}()},
-\code{\link{rewire}()}
+Other rewiring functions:
+\code{\link[=keeping_degseq]{keeping_degseq()}},
+\code{\link[=rewire]{rewire()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

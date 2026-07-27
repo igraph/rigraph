@@ -4,12 +4,14 @@
 \alias{incident_edges}
 \title{Incident edges of multiple vertices in a graph}
 \usage{
-incident_edges(graph, v, mode = c("out", "in", "all", "total"))
+incident_edges(graph, v, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{Input graph.}
 
 \item{v}{The vertices to query}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
@@ -22,24 +24,28 @@ A list of edge sequences.
 This function is similar to \code{\link[=incident]{incident()}}, but it
 queries multiple vertices at once.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 incident_edges(g, c(1, 34))
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{are_adjacent}()},
-\code{\link{ends}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=adjacent_vertices]{adjacent_vertices()}},
+\code{\link[=are_adjacent]{are_adjacent()}},
+\code{\link[=ends]{ends()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident]{incident()}},
+\code{\link[=is_directed]{is_directed()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}

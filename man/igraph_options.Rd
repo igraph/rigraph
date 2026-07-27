@@ -7,7 +7,7 @@
 \usage{
 igraph_options(...)
 
-igraph_opt(x, default = NULL)
+igraph_opt(x, ..., default = NULL)
 }
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of
@@ -70,6 +70,13 @@ Specifies what to do with the edge attributes if the graph is modified.
 The default value is \code{list(weight="sum", name="concat", "ignore")}.
 See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
 }
+\item{graph.attr.comb}{
+Specifies what to do with the graph attributes when graphs are
+combined, e.g. via \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=disjoint_union]{disjoint_union()}}
+or \code{\link[=compose]{compose()}}. The default value is \code{"rename"}, which resolves any
+name clash by appending \verb{_1}, \verb{_2}, ... suffixes.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+}
 \item{print.edge.attributes}{
 Logical constant, whether to print edge attributes when printing graphs.
 Defaults to \code{FALSE}.
@@ -83,6 +90,14 @@ Logical constant, whether to print graph attributes when printing graphs. Defaul
 }
 \item{print.vertex.attributes}{
 Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
+}
+\item{print.style}{
+Character string controlling the visual style used by
+\code{\link[=print.igraph]{print.igraph()}}, \code{\link[=summary.igraph]{summary.igraph()}}, \code{\link[=print.igraph.vs]{print.igraph.vs()}} and
+\code{\link[=print.igraph.es]{print.igraph.es()}}. Possible values are \code{"cli"} (default, a
+cli-styled output with section rules, Unicode arrows for edges and
+typed attribute listings) and \code{"classic"} (the historical
+\verb{IGRAPH ... DNW-} header relied on by tutorials and parsers).
 }
 \item{return.vs.es}{
 Whether functions that return a set or sequence of vertices/edges
@@ -123,8 +138,8 @@ igraph_opt("verbose")
 \code{igraph_options()} is similar to \code{\link[=options]{options()}} and
 \code{igraph_opt()} is similar to \code{\link[=getOption]{getOption()}}.
 
-Other igraph options: 
-\code{\link{with_igraph_opt}()}
+Other igraph options:
+\code{\link[=with_igraph_opt]{with_igraph_opt()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
