@@ -5,14 +5,16 @@
 \alias{circulant}
 \title{Create a circulant graph}
 \usage{
-make_circulant(n, shifts, directed = FALSE)
+make_circulant(n, shifts, ..., directed = FALSE)
 
-circulant(n, shifts, directed = FALSE)
+circulant(n, shifts, ..., directed = FALSE)
 }
 \arguments{
 \item{n}{Integer, the number of vertices in the circulant graph.}
 
 \item{shifts}{Integer vector, a list of the offsets within the circulant graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 }

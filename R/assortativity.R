@@ -239,13 +239,37 @@ assortativity_legacy <- function(
 #'   with [as.integer()]. Character vectors are converted to integers using
 #'   [as.factor()].
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
 assortativity_nominal <- function(
   graph,
   types,
+  ...,
   directed = TRUE,
   normalized = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_nominal, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, normalized = normalized),
+      recover_new = c("directed", "normalized"),
+      recover_old = c("directed", "normalized"),
+      match_names = c("directed", "normalized"),
+      match_to = c("directed", "normalized"),
+      defaults = list(directed = TRUE, normalized = TRUE),
+      head_args = c("graph", "types"),
+      fn_name = "assortativity_nominal"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Convert character types to factor then to integer for categorical data
   if (is.character(types)) {
     types <- as.integer(as.factor(types))
@@ -260,8 +284,35 @@ assortativity_nominal <- function(
 }
 
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
-assortativity_degree <- function(graph, directed = TRUE) {
+assortativity_degree <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_degree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "assortativity_degree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   assortativity_degree_impl(
     graph = graph,
     directed = directed

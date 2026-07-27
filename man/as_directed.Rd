@@ -5,7 +5,7 @@
 \alias{as_undirected}
 \title{Convert between directed and undirected graphs}
 \usage{
-as_directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
+as_directed(graph, ..., mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 as_undirected(
   graph,
@@ -15,6 +15,8 @@ as_undirected(
 }
 \arguments{
 \item{graph}{The graph to convert.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, defines the conversion algorithm. For
 \code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For

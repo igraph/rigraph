@@ -8,6 +8,7 @@
 compose(
   g1,
   g2,
+  ...,
   byname = "auto",
   graph.attr.comb = igraph_opt("graph.attr.comb"),
   vertex.attr.comb = "rename",
@@ -18,6 +19,8 @@ compose(
 \item{g1}{The first input graph.}
 
 \item{g2}{The second input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is

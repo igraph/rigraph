@@ -4,10 +4,12 @@
 \alias{cluster_optimal}
 \title{Optimal community structure}
 \usage{
-cluster_optimal(graph, weights = NULL)
+cluster_optimal(graph, ..., weights = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It may be undirected or directed.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric
 vector, \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

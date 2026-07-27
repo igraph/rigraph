@@ -4,7 +4,7 @@
 \alias{centr_betw_tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
-centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
+centr_betw_tmax(graph = NULL, nodes = 0, ..., directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL} if
@@ -12,6 +12,8 @@ centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to use directed shortest paths
 for calculating betweenness. Ignored if an undirected graph was

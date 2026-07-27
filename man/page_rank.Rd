@@ -6,6 +6,7 @@
 \usage{
 page_rank(
   graph,
+  ...,
   algo = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
@@ -17,6 +18,8 @@ page_rank(
 }
 \arguments{
 \item{graph}{The graph object.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{algo}{Character scalar, which implementation to use to carry out the
 calculation. The default is \code{"prpack"}, which uses the PRPACK library

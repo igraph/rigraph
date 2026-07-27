@@ -4,7 +4,7 @@
 \alias{max_flow}
 \title{Maximum flow in a graph}
 \usage{
-max_flow(graph, source, target, capacity = NULL)
+max_flow(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -12,6 +12,8 @@ max_flow(graph, source, target, capacity = NULL)
 \item{source}{The ID of the source vertex.}
 
 \item{target}{The ID of the target vertex (sometimes also called sink).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.

@@ -5,16 +5,16 @@
 \alias{from_edgelist}
 \title{Create a graph from an edge list matrix}
 \usage{
-graph_from_edgelist(el, directed = TRUE)
+graph_from_edgelist(el, ..., directed = TRUE)
 
 from_edgelist(...)
 }
 \arguments{
 \item{el}{The edge list, a two column matrix, character or numeric.}
 
-\item{directed}{Whether to create a directed graph.}
-
 \item{...}{Passed to \code{graph_from_edgelist()}.}
+
+\item{directed}{Whether to create a directed graph.}
 }
 \value{
 An igraph graph.
