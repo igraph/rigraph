@@ -1,7 +1,9 @@
 # https://usethis.r-lib.org/reference/use_release_issue.html#customization
 # https://github.com/igraph/rigraph/issues/1976
+# jarl-ignore unused_function: used for releases
 release_bullets <- function() {
   c(
+    "Increase lifecycle deprecation levels as relevant.",
     "`allcontributors::add_contributors()` to update allcontributors' data in the README.",
     "Update docs based on the C docs.",
     "Draft a post for the igraph and cynkra blogs.",

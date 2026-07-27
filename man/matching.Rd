@@ -13,6 +13,7 @@ is_max_matching(graph, matching, types = NULL)
 max_bipartite_match(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   eps = .Machine$double.eps
 )
@@ -27,6 +28,8 @@ supply \code{NA} here.}
 
 \item{types}{Vertex types, if the graph is bipartite. By default they
 are taken from the \sQuote{\code{type}} vertex attribute, if present.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Potential edge weights. If the graph has an edge
 attribute called \sQuote{\code{weight}}, and this argument is
@@ -57,7 +60,7 @@ For unweighted graphs this is the same as the size of the matching.
 }
 \item{matching}{
 The matching itself.
-Numeric vertex id, or vertex names if the graph was named.
+Numeric vertex ID, or vertex names if the graph was named.
 Non-matched vertices are denoted by \code{NA}.
 }
 }
@@ -94,6 +97,10 @@ Maximum matchings in bipartite graphs are found by the push-relabel
 algorithm with greedy initialization and a global relabeling after every
 \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching}{\code{is_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_maximum_bipartite_matching}{\code{maximum_bipartite_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_maximal_matching}{\code{is_maximal_matching()}}
+}
+
 \examples{
 g <- graph_from_literal(a - b - c - d - e - f)
 m1 <- c("b", "a", "d", "c", "f", "e") # maximal matching
@@ -117,31 +124,31 @@ max_bipartite_match(g2)
 #' @keywords graphs
 }
 \seealso{
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

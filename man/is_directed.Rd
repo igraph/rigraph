@@ -10,11 +10,15 @@ is_directed(graph)
 \item{graph}{The input graph}
 }
 \value{
-Logical scalar, whether the graph is directed.
+Logical, whether the graph is directed.
 }
 \description{
 Check whether a graph is directed
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
+}
+
 \examples{
 g <- make_ring(10)
 is_directed(g)
@@ -23,19 +27,19 @@ g2 <- make_ring(10, directed = TRUE)
 is_directed(g2)
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{are_adjacent}()},
-\code{\link{ends}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{incident_edges}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=adjacent_vertices]{adjacent_vertices()}},
+\code{\link[=are_adjacent]{are_adjacent()}},
+\code{\link[=ends]{ends()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident]{incident()}},
+\code{\link[=incident_edges]{incident_edges()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}

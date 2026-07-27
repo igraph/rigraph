@@ -27,7 +27,7 @@ probabilities for the different vertex types.
 For \code{sample_last_cit()}, this should be a numeric vector of length \code{agebins + 1}.
 A common choice is a power-law decay, e.g., \code{(1:(agebins + 1))^-3}.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
+\item{directed}{Logical, whether to generate directed networks.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
@@ -35,4 +35,8 @@ A common choice is a power-law decay, e.g., \code{(1:(agebins + 1))^-3}.}
 \code{lastcit.game()} was renamed to \code{\link[=sample_last_cit]{sample_last_cit()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}
+}
+
 \keyword{internal}

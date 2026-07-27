@@ -14,7 +14,7 @@ similarity.jaccard(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex ids for which the similarity is calculated.}
+\item{vids}{The vertex IDs for which the similarity is calculated.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
@@ -28,4 +28,8 @@ sets.}
 
 Please use \code{\link[=similarity]{similarity()}} with \code{method = "jaccard"} instead.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice}{\code{similarity_dice()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{similarity_inverse_log_weighted()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard}{\code{similarity_jaccard()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

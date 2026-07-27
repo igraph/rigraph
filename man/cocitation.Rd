@@ -12,7 +12,7 @@ bibcoupling(graph, v = V(graph))
 \arguments{
 \item{graph}{The graph object to analyze}
 
-\item{v}{Vertex sequence or numeric vector, the vertex ids for which the
+\item{v}{Vertex sequence or numeric vector, the vertex IDs for which the
 cocitation or bibliographic coupling values we want to calculate. The
 default is all vertices.}
 }
@@ -38,6 +38,10 @@ Calculating the cocitation or bibliographic coupling for only one vertex
 costs the same amount of computation as for all vertices. This might change
 in the future.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_cocitation}{\code{cocitation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bibcoupling}{\code{bibcoupling()}}
+}
+
 \examples{
 
 g <- make_kautz_graph(2, 3)
@@ -46,8 +50,8 @@ bibcoupling(g)
 
 }
 \seealso{
-Other cocitation: 
-\code{\link{similarity}()}
+Other cocitation:
+\code{\link[=similarity]{similarity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

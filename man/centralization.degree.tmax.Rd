@@ -19,7 +19,7 @@ centralization.degree.tmax(
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
 if \code{graph} is given and the graph is undirected.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 }
 \description{
@@ -28,4 +28,8 @@ calculating the degree.}
 \code{centralization.degree.tmax()} was renamed to \code{\link[=centr_degree_tmax]{centr_degree_tmax()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree_tmax}{\code{centralization_degree_tmax()}}
+}
+
 \keyword{internal}

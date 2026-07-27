@@ -10,7 +10,7 @@
 #' @export
 igraph.to.graphNEL <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.to.graphNEL()", "as_graphnel()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.to.graphNEL()", "as_graphnel()")
   as_graphnel(graph = graph)
 } # nocov end
 
@@ -31,7 +31,7 @@ igraph.from.graphNEL <- function(
   unlist.attrs = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "igraph.from.graphNEL()",
     "graph_from_graphnel()"
@@ -60,7 +60,7 @@ graph.adjlist <- function(
   duplicate = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.adjlist()", "graph_from_adj_list()")
+  lifecycle::deprecate_warn("2.0.0", "graph.adjlist()", "graph_from_adj_list()")
   graph_from_adj_list(adjlist = adjlist, mode = mode, duplicate = duplicate)
 } # nocov end
 
@@ -82,7 +82,7 @@ get.incidence <- function(
   sparse = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "get.incidence()",
     "as_biadjacency_matrix()"
@@ -108,7 +108,7 @@ get.incidence <- function(
 #' @export
 get.edgelist <- function(graph, names = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.edgelist()", "as_edgelist()")
+  lifecycle::deprecate_warn("2.0.0", "get.edgelist()", "as_edgelist()")
   as_edgelist(graph = graph, names = names)
 } # nocov end
 
@@ -124,7 +124,7 @@ get.edgelist <- function(graph, names = TRUE) {
 #' @export
 get.data.frame <- function(x, what = c("edges", "vertices", "both")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.data.frame()", "as_data_frame()")
+  lifecycle::deprecate_warn("2.0.0", "get.data.frame()", "as_data_frame()")
   as_data_frame(x = x, what = what)
 } # nocov end
 
@@ -147,7 +147,7 @@ get.adjacency <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjacency()", "as_adjacency_matrix()")
+  lifecycle::deprecate_warn("2.0.0", "get.adjacency()", "as_adjacency_matrix()")
   as_adjacency_matrix(
     graph = graph,
     type = type,
@@ -175,7 +175,7 @@ get.adjlist <- function(
   multiple = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjlist()", "as_adj_list()")
+  lifecycle::deprecate_warn("2.0.0", "get.adjlist()", "as_adj_list()")
   as_adj_list(graph = graph, mode = mode, loops = loops, multiple = multiple)
 } # nocov end
 
@@ -195,7 +195,7 @@ get.adjedgelist <- function(
   loops = c("twice", "once", "ignore")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjedgelist()", "as_adj_edge_list()")
+  lifecycle::deprecate_warn("2.0.0", "get.adjedgelist()", "as_adj_edge_list()")
   as_adj_edge_list(graph = graph, mode = mode, loops = loops)
 } # nocov end
 #   IGraph R package
@@ -219,21 +219,105 @@ get.adjedgelist <- function(
 #
 ###################################################################
 
+# Resolve the user-facing `weights` argument into a numeric vector
+# suitable for downstream consumers.
+#
+# Conventions (match the rest of rigraph, e.g. shortest_paths()):
+#   weights = NULL    -> auto-pickup of "weight" edge attribute, else unweighted
+#   weights = NA      -> explicitly unweighted (ignores any "weight" attribute)
+#   weights = <char>  -> length-1 edge attribute name
+#   weights = <num>   -> numeric/logical vector of length ecount(graph)
+#
+# Returns: numeric() (empty) for unweighted, or a numeric vector of length
+# ecount(graph) otherwise.
+resolve_edge_weights <- function(
+  graph,
+  weights,
+  attr = deprecated(),
+  fn = "function",
+  call = rlang::caller_env(),
+  user_env = rlang::caller_env(2)
+) {
+  if (lifecycle::is_present(attr)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      sprintf("%s(attr = )", fn),
+      sprintf("%s(weights = )", fn),
+      user_env = user_env
+    )
+    weights <- attr
+  }
+
+  if (is.null(weights)) {
+    if ("weight" %in% edge_attr_names(graph)) {
+      return(edge_attr_as_weights(graph, "weight", call))
+    }
+    return(numeric())
+  }
+
+  if (all(is.na(weights))) {
+    return(numeric())
+  }
+
+  if (is.character(weights)) {
+    if (length(weights) != 1) {
+      cli::cli_abort(
+        "{.arg weights} as character must be a single edge attribute name.",
+        call = call
+      )
+    }
+    if (!weights %in% edge_attr_names(graph)) {
+      cli::cli_abort("No such edge attribute", call = call)
+    }
+    return(edge_attr_as_weights(graph, weights, call))
+  }
+
+  if (!is.numeric(weights) && !is.logical(weights)) {
+    cli::cli_abort(
+      "{.arg weights} must be {.code NULL}, {.code NA}, a numeric vector, or an edge attribute name.",
+      call = call
+    )
+  }
+  if (length(weights) != ecount(graph)) {
+    cli::cli_abort(
+      c(
+        "{.arg weights} must have length equal to the number of edges in the graph.",
+        i = "Expected length {ecount(graph)}, got {length(weights)}."
+      ),
+      call = call
+    )
+  }
+  as.numeric(weights)
+}
+
+edge_attr_as_weights <- function(graph, name, call) {
+  value <- edge_attr(graph, name)
+  if (!is.numeric(value) && !is.logical(value)) {
+    cli::cli_abort(
+      c(
+        "The {.val {name}} edge attribute must be numeric or logical.",
+        i = "Pass {.code weights = NA} to ignore it."
+      ),
+      call = call
+    )
+  }
+  as.numeric(value)
+}
+
 get.adjacency.dense <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  weights = NULL,
+  weights = numeric(),
   loops = c("once", "twice", "ignore"),
   names = TRUE
 ) {
   ensure_igraph(graph)
 
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.1.0",
       "get.adjacency.dense(loops = 'must be a character')",
       details = sprintf(
@@ -242,21 +326,17 @@ get.adjacency.dense <- function(
       )
     )
   }
-  loops <- igraph.match.arg(loops)
-  loops <- switch(loops, "ignore" = 0L, "twice" = 1L, "once" = 2L)
-
-  if (!is.null(weights)) {
-    weights <- as.numeric(weights)
+  loops <- igraph_match_arg(loops)
+  # Map "ignore" to "none" for get_adjacency_impl
+  if (loops == "ignore") {
+    loops <- "none"
   }
 
-  if (is.null(attr)) {
-    on.exit(.Call(R_igraph_finalizer))
-    type <- switch(type, "upper" = 0, "lower" = 1, "both" = 2)
-    res <- .Call(
-      R_igraph_get_adjacency,
+  if (length(weights) == 0) {
+    res <- get_adjacency_impl(
       graph,
-      as.numeric(type),
-      weights,
+      type,
+      weights = numeric(),
       loops
     )
   } else {
@@ -264,9 +344,8 @@ get.adjacency.dense <- function(
     res <- as.matrix(get.adjacency.sparse(
       graph,
       type = type,
-      attr = attr,
-      names = names,
-      call = rlang::caller_env()
+      weights = weights,
+      names = names
     ))
   }
 
@@ -279,75 +358,23 @@ get.adjacency.dense <- function(
 get.adjacency.sparse <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  names = TRUE,
-  call = rlang::caller_env()
+  weights = numeric(),
+  names = TRUE
 ) {
   ensure_igraph(graph)
 
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
-  vc <- vcount(graph)
+  # Use the library implementation
+  sparse_adjacency <- get_adjacency_sparse_impl(
+    graph,
+    type,
+    weights,
+    loops = "once"
+  )
 
-  el <- as_edgelist(graph, names = FALSE)
-  use.last.ij <- FALSE
-
-  if (!is.null(attr)) {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = call)
-    }
-    value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-  } else {
-    value <- rep(1, nrow(el))
-  }
-
-  if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(
-      dims = c(vc, vc),
-      i = el[, 1],
-      j = el[, 2],
-      x = value,
-      use.last.ij = use.last.ij
-    )
-  } else {
-    if (type == "upper") {
-      ## upper
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "lower") {
-      ## lower
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmax(el[, 1], el[, 2]),
-        j = pmin(el[, 1], el[, 2]),
-        x = value,
-        use.last.ij = use.last.ij
-      )
-    } else if (type == "both") {
-      ## both
-      res <- Matrix::sparseMatrix(
-        dims = c(vc, vc),
-        i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]),
-        x = value,
-        symmetric = TRUE,
-        use.last.ij = use.last.ij
-      )
-      res <- as(res, "generalMatrix")
-    }
-  }
+  # Convert to proper Matrix object
+  res <- igraph.i.spMatrix(sparse_adjacency)
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
@@ -372,24 +399,28 @@ get.adjacency.sparse <- function(
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param attr Either `NULL` or a character string giving an edge
-#'   attribute name. If `NULL` a traditional adjacency matrix is returned.
-#'   If not `NULL` then the values of the given edge attribute are included
-#'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
-#'   of an arbitrarily chosen edge (for the multiple edges) is included. This
-#'   argument is ignored if `edges` is `TRUE`.
-#'
-#'   Note that this works only for certain attribute types. If the `sparse`
-#'   argumen is `TRUE`, then the attribute must be either logical or
-#'   numeric. If the `sparse` argument is `FALSE`, then character is
-#'   also allowed. The reason for the difference is that the `Matrix`
-#'   package does not support character sparse matrices yet.
-#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
+#' @inheritParams rlang::args_dots_empty
+#' @param weights One of the following:
+#'   \itemize{
+#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
+#'       one, otherwise return a traditional (unweighted) adjacency matrix.
+#'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+#'     \item A numeric or logical vector of length [ecount()]: use these values
+#'       directly as edge weights.
+#'     \item A character scalar: the name of an edge attribute whose values are
+#'       used as weights. The attribute must be numeric or logical.
+#'   }
+#'   If multiple edges share endpoints, the value of an arbitrarily chosen edge
+#'   is included in the matrix.
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead. If
+#'   supplied, the value is forwarded to `weights` as a character edge
+#'   attribute name.
+#' @param edges `r lifecycle::badge("deprecated")` Logical, whether to return the edge IDs in the matrix.
 #'   For non-existant edges zero is returned.
-#' @param names Logical constant, whether to assign row and column names
+#' @param names Logical, whether to assign row and column names
 #'   to the matrix. These are only assigned if the `name` vertex attribute
 #'   is present in the graph.
-#' @param sparse Logical scalar, whether to create a sparse matrix. The
+#' @param sparse Logical, whether to create a sparse matrix. The
 #'   \sQuote{`Matrix`} package must be installed for creating sparse
 #'   matrices.
 #' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
@@ -403,31 +434,74 @@ get.adjacency.sparse <- function(
 #' V(g)$name <- letters[1:vcount(g)]
 #' as_adjacency_matrix(g)
 #' E(g)$weight <- runif(ecount(g))
-#' as_adjacency_matrix(g, attr = "weight")
+#' as_adjacency_matrix(g)
+#' as_adjacency_matrix(g, weights = NA)
 #' @family conversion
 #' @export
 as_adjacency_matrix <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  edges = deprecated(),
+  attr = deprecated()
 ) {
   ensure_igraph(graph)
+
+  # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        names = names,
+        sparse = sparse,
+        edges = edges,
+        attr = attr
+      ),
+      recover_new = c("weights", "edges", "names", "sparse"),
+      recover_old = c("attr", "edges", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
+      defaults = list(
+        weights = NULL,
+        names = TRUE,
+        sparse = igraph_opt("sparsematrices"),
+        edges = deprecated(),
+        attr = deprecated()
+      ),
+      head_args = c("graph", "type"),
+      fn_name = "as_adjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_adjacency_matrix"
+  )
+
   if (sparse) {
-    get.adjacency.sparse(graph, type = type, attr = attr, names = names)
+    get.adjacency.sparse(graph, type = type, weights = weights, names = names)
   } else {
     get.adjacency.dense(
       graph,
       type = type,
-      attr = attr,
-      weights = NULL,
+      weights = weights,
       names = names,
       loops = "once"
     )
@@ -446,16 +520,18 @@ as_adjacency_matrix <- function(
 as_adj <- function(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
+  weights = NULL,
+  attr = deprecated(),
   edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as_adj()", "as_adjacency_matrix()")
+  lifecycle::deprecate_warn("2.1.0", "as_adj()", "as_adjacency_matrix()")
 
   as_adjacency_matrix(
     graph = graph,
     type = type,
+    weights = weights,
     attr = attr,
     edges = edges,
     names = names,
@@ -470,9 +546,10 @@ as_adj <- function(
 #' `as_edgelist()` returns the list of edges in a graph.
 #'
 #' @param graph The graph to convert.
+#' @inheritParams rlang::args_dots_empty
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
-#'   vertex ids.
+#'   vertex IDs.
 #' @return A `ecount(graph)` by 2 numeric matrix.
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @keywords graphs
@@ -486,10 +563,35 @@ as_adj <- function(
 #'
 #' @family conversion
 #' @export
-as_edgelist <- function(graph, names = TRUE) {
+as_edgelist <- function(
+  graph,
+  ...,
+  names = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: as_edgelist, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(names = names),
+      recover_new = c("names"),
+      recover_old = c("names"),
+      match_names = c("names"),
+      match_to = c("names"),
+      defaults = list(names = TRUE),
+      head_args = c("graph"),
+      fn_name = "as_edgelist"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- matrix(.Call(Rx_igraph_get_edgelist, graph, TRUE), ncol = 2)
+  res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
     res <- matrix(V(graph)$name[res], ncol = 2)
@@ -585,6 +687,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
 #' plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
 
+#' @inheritParams rlang::args_dots_empty
 #' @examples
 #'
 #' g4 <- make_graph(c(
@@ -599,11 +702,33 @@ as_edgelist <- function(graph, names = TRUE) {
 #' )
 #' print(ug4, e = TRUE)
 #'
-#' @cdocs igraph_to_directed
 as_directed <- function(
   graph,
+  ...,
   mode = c("mutual", "arbitrary", "random", "acyclic")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_directed, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("mutual", "arbitrary", "random", "acyclic")),
+      head_args = c("graph"),
+      fn_name = "as_directed"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   to_directed_impl(
     graph = graph,
     mode = mode
@@ -624,17 +749,14 @@ as_undirected <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "collapse" = 1L,
-    "each" = 0L,
-    "mutual" = 2L
-  )
-  edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
+  mode <- igraph_match_arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_to_undirected, graph, mode, edge.attr.comb)
+  res <- to_undirected_impl(
+    graph = graph,
+    mode = mode,
+    edge_attr_comb = edge.attr.comb
+  )
 
   res
 }
@@ -645,15 +767,16 @@ as_undirected <- function(
 #' Create adjacency lists from a graph, either for adjacent edges or for
 #' neighboring vertices
 #'
-#' `as_adj_list()` returns a list of numeric vectors, which include the ids
+#' `as_adj_list()` returns a list of numeric vectors, which include the IDs
 #' of neighbor vertices (according to the `mode` argument) of all
 #' vertices.
 #'
 #' `as_adj_edge_list()` returns a list of numeric vectors, which include the
-#' ids of adjacent edges (according to the `mode` argument) of all
+#' IDs of adjacent edges (according to the `mode` argument) of all
 #' vertices.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
 #'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
 #'   \sQuote{`in`} is for incoming edges/vertices, \sQuote{`all`} is
@@ -661,7 +784,7 @@ as_undirected <- function(
 #' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
 #'   (to include loop edges twice) and `"once"` (to include them once). `"twice"`
 #'   is not allowed for directed graphs and will be replaced with `"once"`.
-#' @param multiple Logical scalar, set to `FALSE` to use only one representative
+#' @param multiple Logical, set to `FALSE` to use only one representative
 #'   of each set of parallel edges.
 #' @return A list of `igraph.vs` or a list of numeric vectors depending on
 #'   the value of `igraph_opt("return.vs.es")`, see details for performance
@@ -682,15 +805,42 @@ as_undirected <- function(
 #'
 as_adj_list <- function(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_adj_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, multiple = multiple),
+      recover_new = c("mode", "loops", "multiple"),
+      recover_old = c("mode", "loops", "multiple"),
+      match_names = c("mode", "loops", "multiple"),
+      match_to = c("mode", "loops", "multiple"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = c("twice", "once", "ignore"),
+        multiple = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "as_adj_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- as.numeric(switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3))
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
   loops <- as.numeric(switch(loops, "ignore" = 0, "twice" = 1, "once" = 2))
 
   if (is_directed(graph) && loops == 1) {
@@ -698,7 +848,7 @@ as_adj_list <- function(
   }
 
   multiple <- if (multiple) 1 else 0
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
@@ -711,24 +861,51 @@ as_adj_list <- function(
 }
 
 #' @rdname as_adj_list
+#' @inheritParams rlang::args_dots_empty
 #' @export
 as_adj_edge_list <- function(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: as_adj_edge_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops),
+      recover_new = c("mode", "loops"),
+      recover_old = c("mode", "loops"),
+      match_names = c("mode", "loops"),
+      match_to = c("mode", "loops"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = c("twice", "once", "ignore")
+      ),
+      head_args = c("graph"),
+      fn_name = "as_adj_edge_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- as.numeric(switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3))
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
   loops <- as.numeric(switch(loops, "ignore" = 0, "twice" = 1, "once" = 2))
 
   if (is_directed(graph) && loops == 1) {
     loops <- 2
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
@@ -752,12 +929,13 @@ as_adj_edge_list <- function(
 #' attributes of the first of the multiple edges.
 #'
 #' @param graphNEL The graphNEL graph.
-#' @param name Logical scalar, whether to add graphNEL vertex names as an
+#' @inheritParams rlang::args_dots_empty
+#' @param name Logical, whether to add graphNEL vertex names as an
 #'   igraph vertex attribute called \sQuote{`name`}.
-#' @param weight Logical scalar, whether to add graphNEL edge weights as an
+#' @param weight Logical, whether to add graphNEL edge weights as an
 #'   igraph edge attribute called \sQuote{`weight`}. (graphNEL graphs are
 #'   always weighted.)
-#' @param unlist.attrs Logical scalar. graphNEL attribute query functions
+#' @param unlist.attrs Logical. graphNEL attribute query functions
 #'   return the values of the attributes in R lists, if this argument is
 #'   `TRUE` (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
@@ -784,10 +962,33 @@ as_adj_edge_list <- function(
 #' @export
 graph_from_graphnel <- function(
   graphNEL,
+  ...,
   name = TRUE,
   weight = TRUE,
   unlist.attrs = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_graphnel, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(name = name, weight = weight, unlist.attrs = unlist.attrs),
+      recover_new = c("name", "weight", "unlist.attrs"),
+      recover_old = c("name", "weight", "unlist.attrs"),
+      match_names = c("name", "weight", "unlist.attrs"),
+      match_to = c("name", "weight", "unlist.attrs"),
+      defaults = list(name = TRUE, weight = TRUE, unlist.attrs = TRUE),
+      head_args = c("graphNEL"),
+      fn_name = "graph_from_graphnel"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!inherits(graphNEL, "graphNEL")) {
     cli::cli_abort(
       "{.arg graphNEL} is {.obj_type_friendly {graphNEL}} and not a graphNEL graph"
@@ -817,7 +1018,7 @@ graph_from_graphnel <- function(
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
     val <- unname(graph::nodeData(graphNEL, attr = n))
-    if (unlist.attrs && all(sapply(val, length) == 1)) {
+    if (unlist.attrs && all(lengths(val) == 1)) {
       val <- unlist(val)
     }
     g <- set_vertex_attr(g, n, value = val)
@@ -833,7 +1034,7 @@ graph_from_graphnel <- function(
     el <- paste(sep = "|", el[, 1], el[, 2])
     for (n in e.n) {
       val <- unname(graph::edgeData(graphNEL, attr = n)[el])
-      if (unlist.attrs && all(sapply(val, length) == 1)) {
+      if (unlist.attrs && all(lengths(val) == 1)) {
         val <- unlist(val)
       }
       g <- set_edge_attr(g, n, value = val)
@@ -852,7 +1053,7 @@ graph_from_graphnel <- function(
 #' `as_graphnel()` converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{`name`}, then it will be used to assign
-#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
+#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex IDs
 #' will be used for this purpose.
 #'
 #' @param graph An igraph graph object.
@@ -894,7 +1095,10 @@ as_graphnel <- function(graph) {
   edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
   if ("weight" %in% edge_attr_names(graph) && is.numeric(E(graph)$weight)) {
-    al <- lapply(as_adj_edge_list(graph, "out", loops = "once"), as.vector)
+    al <- lapply(
+      as_adj_edge_list(graph, mode = "out", loops = "once"),
+      as.vector
+    )
     for (i in seq(along.with = al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse(edges[, 2] == i, edges[, 1], edges[, 2])
@@ -902,7 +1106,7 @@ as_graphnel <- function(graph) {
       al[[i]] <- list(edges = edges, weights = weights)
     }
   } else {
-    al <- as_adj_list(graph, "out", loops = "once")
+    al <- as_adj_list(graph, mode = "out", loops = "once")
     al <- lapply(al, function(x) list(edges = as.vector(x)))
   }
 
@@ -960,10 +1164,9 @@ get.incidence.dense <- function(
   graph,
   types,
   names,
-  attr,
-  call = rlang::caller_env()
+  weights = numeric()
 ) {
-  if (is.null(attr)) {
+  if (length(weights) == 0) {
     ## Function call
     res <- get_biadjacency_impl(
       graph = graph,
@@ -981,11 +1184,6 @@ get.incidence.dense <- function(
   }
 
   types <- handle_vertex_type_arg(types, graph)
-
-  attr <- as.character(attr)
-  if (!attr %in% edge_attr_names(graph)) {
-    cli::cli_abort("No such edge attribute", call = call)
-  }
 
   vc <- vcount(graph)
   n1 <- sum(!types)
@@ -1008,14 +1206,7 @@ get.incidence.dense <- function(
   el[idx, ] <- el[idx, 2:1]
   # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
   # and we can populate the matrix
-  value <- edge_attr(graph, attr)
-  if (!is.numeric(value) && !is.logical(value)) {
-    cli::cli_abort(
-      "Matrices must be either numeric or logical, and the edge attribute is not",
-      call = call
-    )
-  }
-  res[el] <- value
+  res[el] <- weights
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     rownames(res) <- V(graph)$name[which(!types)]
@@ -1032,7 +1223,7 @@ get.incidence.sparse <- function(
   graph,
   types,
   names,
-  attr,
+  weights = numeric(),
   call = rlang::caller_env()
 ) {
   types <- handle_vertex_type_arg(types, graph)
@@ -1061,21 +1252,7 @@ get.incidence.sparse <- function(
   el[change, ] <- el[change, 2:1]
   el[, 2] <- el[, 2] - n1
 
-  if (!is.null(attr)) {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = call)
-    }
-    value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-  } else {
-    value <- rep(1, nrow(el))
-  }
+  value <- if (length(weights) == 0) rep(1, nrow(el)) else weights
 
   res <- Matrix::spMatrix(n1, n2, i = el[, 1], j = el[, 2], x = value)
 
@@ -1105,17 +1282,12 @@ get.incidence.sparse <- function(
 #' @param types An optional vertex type vector to use instead of the
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
-#' @param attr Either `NULL` or a character string giving an edge
-#'   attribute name. If `NULL`, then a traditional bipartite adjacency matrix is
-#'   returned. If not `NULL` then the values of the given edge attribute are
-#'   included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-#'   attribute of an arbitrarily chosen edge (for the multiple edges) is
-#'   included.
-#' @param names Logical scalar, if `TRUE` and the vertices in the graph
+#' @inheritParams as_adjacency_matrix
+#' @param names Logical, if `TRUE` and the vertices in the graph
 #'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise
-#'   the ids of the vertices are used as row and column names.
-#' @param sparse Logical scalar, if it is `TRUE` then a sparse matrix is
+#'   the IDs of the vertices are used as row and column names.
+#' @param sparse Logical, if it is `TRUE` then a sparse matrix is
 #'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1135,26 +1307,67 @@ get.incidence.sparse <- function(
 as_biadjacency_matrix <- function(
   graph,
   types = NULL,
-  attr = NULL,
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = FALSE
+  sparse = FALSE,
+  attr = deprecated()
 ) {
   # Argument checks
   ensure_igraph(graph)
 
+  # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        names = names,
+        sparse = sparse,
+        attr = attr
+      ),
+      recover_new = c("weights", "names", "sparse"),
+      recover_old = c("attr", "names", "sparse"),
+      match_names = c("attr", "weights", "names", "sparse", "attr"),
+      match_to = c("weights", "weights", "names", "sparse", "attr"),
+      defaults = list(
+        weights = NULL,
+        names = TRUE,
+        sparse = FALSE,
+        attr = deprecated()
+      ),
+      head_args = c("graph", "types"),
+      fn_name = "as_biadjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   names <- as.logical(names)
   sparse <- as.logical(sparse)
+
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    attr,
+    fn = "as_biadjacency_matrix"
+  )
 
   if (sparse) {
     get.incidence.sparse(
       graph,
       types = types,
       names = names,
-      attr = attr,
+      weights = weights,
       call = rlang::caller_env()
     )
   } else {
-    get.incidence.dense(graph, types = types, names = names, attr = attr)
+    get.incidence.dense(graph, types = types, names = names, weights = weights)
   }
 }
 #' As incidence matrix
@@ -1173,7 +1386,7 @@ as_biadjacency_matrix <- function(
 #' @export
 as_incidence_matrix <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.6.0",
     "as_incidence_matrix()",
     "as_biadjacency_matrix()"
@@ -1189,7 +1402,7 @@ as_incidence_matrix <- function(...) {
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   ensure_igraph(x)
-  what <- igraph.match.arg(what)
+  what <- igraph_match_arg(what)
 
   if (what %in% c("vertices", "both")) {
     ver <- .Call(
@@ -1243,11 +1456,12 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #'   throughout all vectors in the list must be less than the number of vectors
 #'   (=the number of vertices in the graph).
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, it specifies whether the graph to create is
 #'   undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 #'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
 #'   (\sQuote{in}) neighbors of the vertices.
-#' @param duplicate Logical scalar. For undirected graphs it gives whether
+#' @param duplicate Logical. For undirected graphs it gives whether
 #'   edges are included in the list twice. E.g. if it is `TRUE` then for an
 #'   undirected \code{{A,B}} edge `graph_from_adj_list()` expects `A`
 #'   included in the neighbors of `B` and `B` to be included in the
@@ -1277,12 +1491,34 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' which_multiple(g3)
 #' @family conversion
 #' @export
-#' @cdocs igraph_adjlist
 graph_from_adj_list <- function(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_adj_list, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, duplicate = duplicate),
+      recover_new = c("mode", "duplicate"),
+      recover_old = c("mode", "duplicate"),
+      match_names = c("mode", "duplicate"),
+      match_to = c("mode", "duplicate"),
+      defaults = list(mode = c("out", "in", "all", "total"), duplicate = TRUE),
+      head_args = c("adjlist"),
+      fn_name = "graph_from_adj_list"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   adjlist_impl(
     adjlist = adjlist,
     mode = mode,
@@ -1299,8 +1535,8 @@ graph_from_adj_list <- function(
 #' in that row. The names of the columns that contain the metadata
 #' of the incident vertices are prefixed with `from_` and `to_`.
 #' The first two columns are always named `from` and `to` and
-#' they contain the numeric ids of the incident vertices. The rows are
-#' listed in the order of numeric vertex ids.
+#' they contain the numeric IDs of the incident vertices. The rows are
+#' listed in the order of numeric vertex IDs.
 #'
 #' @param graph Input graph
 #' @return A long data frame.
@@ -1412,7 +1648,7 @@ as.directed <- function(
   graph,
   mode = c("mutual", "arbitrary", "random", "acyclic")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as.directed()", "as_directed()")
+  lifecycle::deprecate_warn("2.1.0", "as.directed()", "as_directed()")
   as_directed(graph, mode = mode)
 }
 
@@ -1431,7 +1667,7 @@ as.undirected <- function(
   mode = c("collapse", "each", "mutual"),
   edge.attr.comb = igraph_opt("edge.attr.comb")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as.undirected()", "as_undirected()")
+  lifecycle::deprecate_warn("2.1.0", "as.undirected()", "as_undirected()")
   as_undirected(graph = graph, mode = mode, edge.attr.comb = edge.attr.comb)
 }
 
@@ -1447,7 +1683,7 @@ as.undirected <- function(
 #' @export
 graph.edgelist <- function(el, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.edgelist()",
     "graph_from_edgelist()"
@@ -1467,7 +1703,7 @@ graph.edgelist <- function(el, directed = TRUE) {
 #' @export
 graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.data.frame()",
     "graph_from_data_frame()"
@@ -1533,14 +1769,14 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' the graph and also the edge attributes are returned. The edges will be in
 #' the first two columns, named `from` and `to`. (This also denotes
 #' edge direction for directed graphs.)  For named graphs, the vertex names
-#' will be included in these columns, for other graphs, the numeric vertex ids.
+#' will be included in these columns, for other graphs, the numeric vertex IDs.
 #' The edge attributes will be in the other columns. It is not a good idea to
 #' have an edge attribute named `from` or `to`, because then the
 #' column named in the data frame will not be unique. The edges are listed in
-#' the order of their numeric ids.
+#' the order of their numeric IDs.
 #'
 #' If the `what` argument is `vertices`, then vertex attributes are
-#' returned. Vertices are listed in the order of their numeric vertex ids.
+#' returned. Vertices are listed in the order of their numeric vertex IDs.
 #'
 #' If the `what` argument is `both`, then both vertex and edge data
 #' is returned, in a list with named entries `vertices` and `edges`.
@@ -1549,7 +1785,8 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #'   columns. Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with
 #'   `as.data.frame`.
-#' @param directed Logical scalar, whether or not to create a directed graph.
+#' @param directed Logical, whether or not to create a directed graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with `as.data.frame`, if not `NULL`.
@@ -1599,7 +1836,34 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
 #' as_data_frame(g, what = "edges")
 #'
 #' @export
-graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
+graph_from_data_frame <- function(
+  d,
+  directed = TRUE,
+  ...,
+  vertices = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vertices = vertices),
+      recover_new = c("vertices"),
+      recover_old = c("vertices"),
+      match_names = c("vertices"),
+      match_to = c("vertices"),
+      defaults = list(vertices = NULL),
+      head_args = c("d", "directed"),
+      fn_name = "graph_from_data_frame"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   d <- as.data.frame(d)
   if (!is.null(vertices)) {
     vertices <- as.data.frame(vertices)
@@ -1612,7 +1876,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   ## Handle if some elements are 'NA' (first two columns are interpreted as from/to)
   ensure_no_na(d[, 1:2], "edge data frame")
 
-  if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
+  if (!is.null(vertices) && anyNA(vertices[, 1])) {
     cli::cli_warn(
       "In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}."
     )
@@ -1627,10 +1891,10 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
       cli::cli_abort("{.arg vertices} contains no rows")
     }
     names <- as.character(vertices[, 1])
-    if (any(duplicated(names))) {
+    if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
-    if (any(!names2 %in% names)) {
+    if (!all(names2 %in% names)) {
       cli::cli_abort(
         "Some vertex names in {.arg d} are not listed in {.arg vertices}"
       )
@@ -1684,13 +1948,14 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' `graph_from_edgelist()` creates a graph from an edge list. Its argument
 #' is a two-column matrix, each row defines one edge. If it is
-#' a numeric matrix then its elements are interpreted as vertex ids. If
+#' a numeric matrix then its elements are interpreted as vertex IDs. If
 #' it is a character matrix then it is interpreted as symbolic vertex
-#' names and a vertex id will be assigned to each name, and also a
+#' names and a vertex ID will be assigned to each name, and also a
 #' `name` vertex attribute will be added.
 #'
 #' @concept Edge list
 #' @param el The edge list, a two column matrix, character or numeric.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
@@ -1702,7 +1967,33 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' # Create a ring by hand
 #' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-graph_from_edgelist <- function(el, directed = TRUE) {
+graph_from_edgelist <- function(
+  el,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_edgelist, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("el"),
+      fn_name = "graph_from_edgelist"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.matrix(el) || ncol(el) != 2) {
     cli::cli_abort("graph_from_edgelist expects a matrix with two columns.")
   }

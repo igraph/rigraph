@@ -42,9 +42,9 @@
 #'
 #' @param graph.us,graph An igraph object, the graph for which the scan
 #'   statistics will be computed
-#' @param graph.them An igraph object or `NULL`, if not `NULL`,
-#'   then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-#'   calculated from `graph.us` are evaluated on `graph.them`.
+#' @param graph.them An igraph object on which the \sQuote{them} statistics is computed,
+#'   i.e. the neighborhoods calculated from `graph.us` are evaluated on `graph.them`.
+#'   Default: `NULL`.
 #' @param k An integer scalar, the size of the local neighborhood for each
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for
@@ -53,7 +53,7 @@
 #'   `weighted=FALSE`) and a function that computes the sum of edge
 #'   weights is used for weighted graphs (if `weighted=TRUE`). This
 #'   argument is ignored if `k` is zero.
-#' @param weighted Logical scalar, TRUE if the edge weights should be used
+#' @param weighted Logical, TRUE if the edge weights should be used
 #'   for computation of the scan statistic. If TRUE, the graph should be
 #'   weighted.  Note that this argument is ignored if `FUN` is not
 #'   `NULL`, `"ecount"` and `"sumweights"`.
@@ -131,7 +131,7 @@ local_scan <- function(
     is.null(FUN) || is.function(FUN) || (is.character(FUN) && length(FUN) == 1)
   )
 
-  ## Logical scalar
+  ## Logical
   stopifnot(is.logical(weighted), length(weighted) == 1)
 
   ## If weighted, then the graph(s) must be weighted
@@ -163,8 +163,7 @@ local_scan <- function(
   }
 
   ## Check mode argument
-  mode <- igraph.match.arg(mode)
-  cmode <- switch(mode, out = 1, `in` = 2, all = 3, total = 3)
+  mode <- igraph_match_arg(mode)
 
   sumweights <- function(g) sum(E(g)$weight)
 
@@ -182,21 +181,17 @@ local_scan <- function(
       as.numeric(E(graph.us)$weight)
     }
   } else {
-    NULL
+    # Use numeric(0) instead of NULL to prevent _impl from auto-fetching weights
+    numeric(0)
   }
 
   res <- if (is.null(graph.them)) {
     if (!is.null(neighborhoods)) {
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        neighborhoods <- lapply(neighborhoods, function(x) {
-          as.numeric(x) - 1
-        })
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_neighborhood_ecount,
-          graph.us,
-          edge_weights,
-          neighborhoods
+        local_scan_neighborhood_ecount_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          neighborhoods = neighborhoods
         )
       } else {
         sapply(
@@ -208,35 +203,29 @@ local_scan <- function(
     } else {
       ## scan-0
       if (k == 0) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_0,
-          graph.us,
-          edge_weights,
-          cmode
+        local_scan_0_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## scan-1, ecount
       } else if (
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_1_ecount,
-          graph.us,
-          edge_weights,
-          cmode
+        local_scan_1_ecount_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_k_ecount,
-          graph.us,
-          as.numeric(k),
-          edge_weights,
-          cmode
+        local_scan_k_ecount_impl(
+          graph = graph.us,
+          k = k,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## General
@@ -252,15 +241,10 @@ local_scan <- function(
     if (!is.null(neighborhoods)) {
       neighborhoods <- lapply(neighborhoods, as.vector)
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        neighborhoods <- lapply(neighborhoods, function(x) {
-          as.numeric(x) - 1
-        })
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_neighborhood_ecount,
-          graph.them,
-          edge_weights,
-          neighborhoods
+        local_scan_neighborhood_ecount_impl(
+          graph = graph.them,
+          weights = edge_weights,
+          neighborhoods = neighborhoods
         )
       } else {
         sapply(
@@ -272,38 +256,32 @@ local_scan <- function(
     } else {
       ## scan-0
       if (k == 0) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_0_them,
-          graph.us,
-          graph.them,
-          edge_weights,
-          cmode
+        local_scan_0_them_impl(
+          us = graph.us,
+          them = graph.them,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## scan-1, ecount
       } else if (
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_1_ecount_them,
-          graph.us,
-          graph.them,
-          edge_weights,
-          cmode
+        local_scan_1_ecount_them_impl(
+          us = graph.us,
+          them = graph.them,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_k_ecount_them,
-          graph.us,
-          graph.them,
-          as.numeric(k),
-          edge_weights,
-          cmode
+        local_scan_k_ecount_them_impl(
+          us = graph.us,
+          them = graph.them,
+          k = k,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## General
@@ -356,7 +334,7 @@ local_scan <- function(
 #'       It is `NA` for the initial `tau + ell` time steps.
 #'     }
 #'     \item{arg_max_v}{
-#'       The (numeric) vertex ids for the vertex with the largest locality statistics, at each time step.
+#'       The (numeric) vertex IDs for the vertex with the largest locality statistics, at each time step.
 #'       It is `NA` for the initial `tau + ell` time steps.
 #'     }
 #'   }
@@ -404,7 +382,7 @@ scan_stat <- function(
   ## ell must the a non-negative integer
   stopifnot(length(ell) == 1, ell >= 0, trunc(ell) == ell)
 
-  locality <- igraph.match.arg(locality)
+  locality <- igraph_match_arg(locality)
 
   ## number of time steps and number of vertices
   maxTime <- length(graphs)
@@ -458,7 +436,7 @@ scan_vertex_norm <- function(input_stat, tau) {
         if (tau == 0) {
           nstat[, i] <- input_stat[, i]
         } else {
-          muv <- apply(as.matrix(input_stat[, (i - tau):(i - 1)]), 1, mean)
+          muv <- rowMeans(as.matrix(input_stat[, (i - tau):(i - 1)]))
           sdv <- apply(as.matrix(input_stat[, (i - tau):(i - 1)]), 1, sd)
           sdv[is.na(sdv)] <- 1
           nstat[, i] <- (input_stat[, i] - muv) / pmax(sdv, 1)
@@ -475,7 +453,7 @@ scan_vertex_norm <- function(input_stat, tau) {
         if (tau == 0) {
           nstat[, i] <- input_stat[, (tau + 1), i]
         } else {
-          muv <- apply(as.matrix(input_stat[, (1:tau), i]), 1, mean)
+          muv <- rowMeans(as.matrix(input_stat[, (1:tau), i]))
           sdv <- apply(as.matrix(input_stat[, (1:tau), i]), 1, sd)
           sdv[is.na(sdv)] <- 1
           nstat[, i] <- (input_stat[, (tau + 1), i] - muv) / pmax(sdv, 1)

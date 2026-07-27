@@ -7,6 +7,7 @@
 sample_motifs(
   graph,
   size = 3,
+  ...,
   cut.prob = rep(0, size),
   sample.size = NULL,
   sample = NULL
@@ -18,6 +19,8 @@ sample_motifs(
 \item{size}{The size of the motif, currently size 3 and 4 are supported
 in directed graphs and sizes 3-6 in undirected graphs.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
@@ -27,8 +30,8 @@ If \code{NULL}, the default, no cuts are made.}
 finding motifs. Only used if the \code{sample} argument is \code{NULL}.
 The default is \code{ceiling(vcount(graph) / 10)} .}
 
-\item{sample}{If not \code{NULL} then it specifies the vertices to use as a
-starting point for finding motifs.}
+\item{sample}{Vertices to use as a starting point for finding motifs.
+Default: \code{NULL}.}
 }
 \value{
 A numeric scalar, an estimate for the total number of motifs in
@@ -42,6 +45,10 @@ structure.  These functions search a graph for various motifs.
 \code{sample_motifs()} estimates the total number of motifs of a given
 size in a graph based on a sample.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_estimate}{\code{motifs_randesu_estimate()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)
@@ -51,9 +58,9 @@ sample_motifs(g, 3)
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{count_motifs}()},
-\code{\link{dyad_census}()},
-\code{\link{motifs}()}
+Other graph motifs:
+\code{\link[=count_motifs]{count_motifs()}},
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=motifs]{motifs()}}
 }
 \concept{graph motifs}

@@ -9,36 +9,63 @@
 \alias{cit_cit_types}
 \title{Random citation graphs}
 \usage{
-sample_last_cit(n, edges = 1, agebins, pref, directed = TRUE)
+sample_last_cit(n, edges = 1, ..., agebins, pref, directed = TRUE)
 
-last_cit(...)
+last_cit(
+  n,
+  edges = 1,
+  ...,
+  agebins = n/7100,
+  pref = (1:(agebins + 1))^-3,
+  directed = TRUE
+)
 
 sample_cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = rep(1, length(types)),
   directed = TRUE,
   attr = TRUE
 )
 
-cit_types(...)
+cit_types(
+  n,
+  edges = 1,
+  types = rep(0, n),
+  ...,
+  pref = rep(1, length(types)),
+  directed = TRUE,
+  attr = TRUE
+)
 
 sample_cit_cit_types(
   n,
   edges = 1,
   types = rep(0, n),
+  ...,
   pref = matrix(1, nrow = length(types), ncol = length(types)),
   directed = TRUE,
   attr = TRUE
 )
 
-cit_cit_types(...)
+cit_cit_types(
+  n,
+  edges = 1,
+  types = rep(0, n),
+  ...,
+  pref = matrix(1, nrow = length(types), ncol = length(types)),
+  directed = TRUE,
+  attr = TRUE
+)
 }
 \arguments{
 \item{n}{Number of vertices.}
 
 \item{edges}{Number of edges per step.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{agebins}{Number of aging bins.
 Must be at least 1.
@@ -50,14 +77,12 @@ probabilities for the different vertex types.
 For \code{sample_last_cit()}, this should be a numeric vector of length \code{agebins + 1}.
 A common choice is a power-law decay, e.g., \code{(1:(agebins + 1))^-3}.}
 
-\item{directed}{Logical scalar, whether to generate directed networks.}
-
-\item{...}{Passed to the actual constructor.}
+\item{directed}{Logical, whether to generate directed networks.}
 
 \item{types}{Vector of length \sQuote{\code{n}}, the types of the vertices.
 Types are numbered from zero.}
 
-\item{attr}{Logical scalar, whether to add the vertex types to the generated
+\item{attr}{Logical, whether to add the vertex types to the generated
 graph as a vertex attribute called \sQuote{\code{type}}.}
 }
 \value{
@@ -76,6 +101,10 @@ graph is growing.
 but the probability of an edge depends on the (potentially) cited
 vertex only.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game}{\code{cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game}{\code{citing_cited_type_game()}}
+}
+
 \examples{
 # Create a citation graph with 100 vertices, 5 age bins,
 # and preferential attachment following a t^-3 power-law decay
@@ -86,33 +115,33 @@ g <- sample_last_cit(100, edges = 1, agebins = 5, pref = (1:6)^-3)
 g2 <- sample_last_cit(200, edges = 2, agebins = 10, pref = (1:11)^-2)
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

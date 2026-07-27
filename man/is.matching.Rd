@@ -23,4 +23,8 @@ are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 \code{is.matching()} was renamed to \code{\link[=is_matching]{is_matching()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_matching}{\code{is_matching()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

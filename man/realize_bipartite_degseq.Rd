@@ -52,6 +52,10 @@ assortativity, and is often disconnected.
 
 The \dQuote{index} method selects the vertices in order of their index.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence}{\code{realize_bipartite_degree_sequence()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 degree(g)
@@ -60,5 +64,3 @@ degree(g)
 \code{\link[=realize_degseq]{realize_degseq()}} to create a not necessarily bipartite graph.
 }
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_bipartite_degree_sequence}{\code{realize_bipartite_degree_sequence()}}.}
-
