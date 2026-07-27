@@ -11,9 +11,10 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with \code{\link[=as.integer]{as.integer()}}.}
+with \code{\link[=as.integer]{as.integer()}}. Character vectors are converted to integers using
+\code{\link[=as.factor]{as.factor()}}.}
 
-\item{directed}{Logical scalar, whether to consider edge directions for
+\item{directed}{Logical, whether to consider edge directions for
 directed graphs.
 This argument is ignored for undirected graphs.
 Supply
@@ -21,7 +22,7 @@ Supply
 measure for directed graphs and the undirected version for undirected
 graphs.}
 
-\item{normalized}{Boolean, whether to compute the normalized assortativity.
+\item{normalized}{Logical, whether to compute the normalized assortativity.
 The non-normalized nominal assortativity is identical to modularity.
 The non-normalized value-based assortativity is simply the covariance of the
 values at the two ends of edges.}
@@ -32,4 +33,8 @@ values at the two ends of edges.}
 \code{assortativity.nominal()} was renamed to \code{\link[=assortativity_nominal]{assortativity_nominal()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}
+}
+
 \keyword{internal}

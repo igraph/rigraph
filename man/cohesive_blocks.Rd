@@ -17,7 +17,7 @@
 \alias{max_cohesion}
 \title{Calculate Cohesive Blocks}
 \usage{
-cohesive_blocks(graph, labels = TRUE)
+cohesive_blocks(graph, ..., labels = TRUE)
 
 \method{length}{cohesiveBlocks}(x)
 
@@ -50,7 +50,7 @@ plot_hierarchy(
   ...
 )
 
-export_pajek(blocks, graph, file, project.file = TRUE)
+export_pajek(blocks, graph, file, ..., project.file = TRUE)
 
 max_cohesion(blocks)
 }
@@ -63,15 +63,15 @@ For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same grap
 supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
-\item{labels}{Logical scalar, whether to add the vertex labels to the result
+\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
+them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
+
+\item{labels}{Logical, whether to add the vertex labels to the result
 object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 
 \item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
 \code{cohesive_blocks()} function.}
-
-\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
-them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
 
 \item{y}{The graph whose cohesive blocks are supplied in the \code{x}
 argument.}
@@ -107,14 +107,14 @@ of the files, without extension. (But it can contain the path to the files.)
 
 See also details below.}
 
-\item{project.file}{Logical scalar, whether to create a single Pajek project
+\item{project.file}{Logical, whether to create a single Pajek project
 file containing all the data, or to create separated files for each item.
 See details below.}
 }
 \value{
 \code{cohesive_blocks()} returns a \code{cohesiveBlocks} object.
 
-\code{blocks()} returns a list of numeric vectors, containing vertex ids.
+\code{blocks()} returns a list of numeric vectors, containing vertex IDs.
 
 \code{graphs_from_cohesive_blocks()} returns a list of igraph graphs, corresponding to the
 cohesive blocks.
@@ -163,7 +163,7 @@ it gives the number of blocks.
 
 The function \code{blocks()} returns the actual blocks stored in the
 \code{cohesiveBlocks} object. They are returned in a list of numeric
-vectors, each containing vertex ids.
+vectors, each containing vertex IDs.
 
 The function \code{graphs_from_cohesive_blocks()} is similar, but returns the blocks as
 (induced) subgraphs of the input graph. The various (graph, vertex and edge)
@@ -174,7 +174,7 @@ different blocks. The order of the blocks is the same as for the
 \code{blocks()} and \code{graphs_from_cohesive_blocks()} functions.
 
 The block hierarchy can be queried using the \code{hierarchy()} function. It
-returns an igraph graph, its vertex ids are ordered according the order of
+returns an igraph graph, its vertex IDs are ordered according the order of
 the blocks in the \code{blocks()} and \code{graphs_from_cohesive_blocks()}, \code{cohesion()},
 etc. functions.
 
@@ -219,13 +219,17 @@ The left part shows the block structure, in this case for five
 blocks. The first block always corresponds to the whole graph, even if its
 cohesion is zero. Then cohesion of the block and the number of vertices in
 the block are shown. The last part is only printed if the display is wide
-enough and shows the vertices in the blocks, ordered by vertex ids.
+enough and shows the vertices in the blocks, ordered by vertex IDs.
 \sQuote{o} means that the vertex is included, a dot means that it is not,
 and the vertices are shown in groups of ten.
 
 The generic function \code{\link[=plot]{plot()}} plots the graph, showing one or more
 cohesive blocks in it.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesive_blocks}{\code{cohesive_blocks()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
+}
+
 \examples{
 
 ## The graph from the Moody-White paper

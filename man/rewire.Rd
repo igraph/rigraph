@@ -21,13 +21,13 @@ See the links below for the implemented rewiring methods.
 \examples{
 g <- make_ring(10)
 g \%>\%
-  rewire(each_edge(p = .1, loops = FALSE)) \%>\%
+  rewire(each_edge(p = 0.1, loops = FALSE)) \%>\%
   plot(layout = layout_in_circle)
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 }
 \seealso{
-Other rewiring functions: 
-\code{\link{each_edge}()},
-\code{\link{keeping_degseq}()}
+Other rewiring functions:
+\code{\link[=each_edge]{each_edge()}},
+\code{\link[=keeping_degseq]{keeping_degseq()}}
 }
 \concept{rewiring functions}

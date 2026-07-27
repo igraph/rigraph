@@ -20,7 +20,7 @@ graphlets.project(
 and this argument is \code{NULL} (the default), then the \code{weight} edge
 attribute is used.}
 
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
+\item{cliques}{A list of vertex IDs, the graphlet basis to use for the
 projection.}
 
 \item{niter}{Integer scalar, the number of iterations to perform.}
@@ -33,4 +33,8 @@ projection.}
 \code{graphlets.project()} was renamed to \code{\link[=graphlet_proj]{graphlet_proj()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Graphlets.html#igraph_graphlets_project}{\code{graphlets_project()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

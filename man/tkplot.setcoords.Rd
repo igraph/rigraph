@@ -7,7 +7,7 @@
 tkplot.setcoords(tkp.id, coords)
 }
 \arguments{
-\item{tkp.id}{The id of the tkplot window to close/reshape/etc.}
+\item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
 \item{coords}{Two-column numeric matrix, the new coordinates of the
 vertices, in absolute coordinates.}
@@ -18,4 +18,8 @@ vertices, in absolute coordinates.}
 \code{tkplot.setcoords()} was renamed to \code{\link[=tk_set_coords]{tk_set_coords()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

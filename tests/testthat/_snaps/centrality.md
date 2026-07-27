@@ -38,8 +38,8 @@
     Code
       invisible(eigen_centrality(g, scale = FALSE))
     Condition
-      Warning:
-      The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.1.1.
+      Error:
+      ! The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.1.1.
       i Normalization is always performed
 
 # arpack() errors well
@@ -48,7 +48,8 @@
       arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
     Condition
       Error in `arpack()`:
-      ! At vendor/cigraph/src/linalg/arpack.c:1102 : ARPACK error, N must be positive
+      ! ARPACK error. N must be positive
+      Source: <file>:<line>
 
 ---
 

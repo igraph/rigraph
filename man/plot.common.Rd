@@ -13,7 +13,7 @@ There are currently three different functions in the igraph package which
 can draw graph in various ways:
 
 \code{plot.igraph} does simple non-interactive 2D plotting to R devices.
-Actually it is an implementation of the \code{\link[graphics:plot.default]{graphics::plot()}} generic
+Actually it is an implementation of the \code{\link[graphics:plot]{graphics::plot()}} generic
 function, so you can write \code{plot(graph)} instead of
 \code{plot.igraph(graph)}. As it used the standard R devices it supports
 every output format for which R has an output device. The list is quite
@@ -157,7 +157,7 @@ By default vertices are drawn as circles.
 }
 \item{label}{
 The vertex labels. They will be converted to character.
-Specify \code{NA} to omit vertex labels. The default vertex labels are the vertex ids.
+Specify \code{NA} to omit vertex labels. The default vertex labels are the vertex IDs.
 }
 \item{label.family}{
 The
@@ -178,9 +178,9 @@ Courier fonts are used, there are guaranteed to exist on all systems. For
 the \sQuote{symbol} base family we used the symbol font is available,
 otherwise the first font which has \sQuote{symbol} in its name. If the
 parameter is not a name of the base families and it is also not a named Tk
-font then we pass it to \code{\link[tcltk:TkCommands]{tcltk::tkfont.create()}} and hope the user
+font then we pass it to \code{\link[tcltk:tkfont.create]{tcltk::tkfont.create()}} and hope the user
 knows what she is doing. The \code{label.font} and \code{label.cex}
-parameters are also passed to \code{\link[tcltk:TkCommands]{tcltk::tkfont.create()}} in this
+parameters are also passed to \code{\link[tcltk:tkfont.create]{tcltk::tkfont.create()}} in this
 case.
 
 The default value is \sQuote{serif}.
@@ -206,7 +206,7 @@ It is interpreted as a multiplication factor of some device-dependent base font 
 
 For \code{\link[=plot.igraph]{plot.igraph()}} it is simply passed to \code{\link[graphics:text]{graphics::text()}} as argument \code{cex}.
 
-For \code{\link[=tkplot]{tkplot()}} it is multiplied by 12 and then used as the \code{size} argument for \code{\link[tcltk:TkCommands]{tcltk::tkfont.create()}}.
+For \code{\link[=tkplot]{tkplot()}} it is multiplied by 12 and then used as the \code{size} argument for \code{\link[tcltk:tkfont.create]{tcltk::tkfont.create()}}.
 The base font is thus 12 for tkplot.
 
 For \code{\link[=rglplot]{rglplot()}} it is ignored.

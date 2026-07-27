@@ -8,6 +8,7 @@ all_simple_paths(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   cutoff = -1
 )
@@ -18,6 +19,8 @@ all_simple_paths(
 \item{from}{The source vertex.}
 
 \item{to}{The target vertex of vertices. Defaults to all vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, gives whether the shortest paths to or
 from the given vertices should be calculated for directed graphs. If
@@ -32,7 +35,7 @@ no cutoff is used.}
 \value{
 A list of integer vectors, each integer vector is a path from
 the source vertex to one of the target vertices. A path is given by its
-vertex ids.
+vertex IDs.
 }
 \description{
 This function lists all simple paths from one source vertex to another
@@ -45,6 +48,10 @@ function, if your graph is lattice-like.
 
 This function ignores multiple and loop edges.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_all_simple_paths}{\code{get_all_simple_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -53,12 +60,12 @@ all_simple_paths(g, 1, c(3, 5))
 
 }
 \seealso{
-Other paths: 
-\code{\link{diameter}()},
-\code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{graph_center}()},
-\code{\link{radius}()}
+Other paths:
+\code{\link[=diameter]{diameter()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=eccentricity]{eccentricity()}},
+\code{\link[=graph_center]{graph_center()}},
+\code{\link[=radius]{radius()}}
 }
 \concept{paths}
 \keyword{graphs}

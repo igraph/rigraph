@@ -23,6 +23,10 @@ find a vertex with degree one, remove it from the tree and add the label of
 the vertex that it was connected to to the sequence. Repeat until there are
 only two vertices in the remaining graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_prufer}{\code{to_prufer()}}
+}
+
 \examples{
 
 g <- make_tree(13, 3)
@@ -33,13 +37,11 @@ to_prufer(g)
 \code{\link[=make_from_prufer]{make_from_prufer()}} to construct a graph from its
 Prüfer sequence
 
-Other trees: 
-\code{\link{is_forest}()},
-\code{\link{is_tree}()},
-\code{\link{make_from_prufer}()},
-\code{\link{sample_spanning_tree}()}
+Other trees:
+\code{\link[=is_forest]{is_forest()}},
+\code{\link[=is_tree]{is_tree()}},
+\code{\link[=make_from_prufer]{make_from_prufer()}},
+\code{\link[=sample_spanning_tree]{sample_spanning_tree()}}
 }
 \concept{trees}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer}{\code{to_prufer()}}.}
-

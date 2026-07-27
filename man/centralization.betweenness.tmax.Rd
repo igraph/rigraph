@@ -13,7 +13,7 @@ centralization.betweenness.tmax(graph = NULL, nodes = 0, directed = TRUE)
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{Logical scalar, whether to use directed shortest paths
+\item{directed}{Logical, whether to use directed shortest paths
 for calculating betweenness. Ignored if an undirected graph was
 given.}
 }
@@ -23,4 +23,8 @@ given.}
 \code{centralization.betweenness.tmax()} was renamed to \code{\link[=centr_betw_tmax]{centr_betw_tmax()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_betweenness_tmax}{\code{centralization_betweenness_tmax()}}
+}
+
 \keyword{internal}

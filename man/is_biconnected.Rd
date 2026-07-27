@@ -26,6 +26,10 @@ igraph does not consider single-vertex graphs biconnected.
 Note that some authors do not consider the graph consisting of
 two connected vertices as biconnected, however, igraph does.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected()}}
+}
+
 \examples{
 is_biconnected(make_graph("bull"))
 is_biconnected(make_graph("dodecahedron"))
@@ -36,13 +40,12 @@ is_biconnected(make_full_graph(2))
 \code{\link[=articulation_points]{articulation_points()}}, \code{\link[=biconnected_components]{biconnected_components()}},
 \code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{decompose}()}
+Connected components:
+\code{\link[=articulation_points]{articulation_points()}},
+\code{\link[=biconnected_components]{biconnected_components()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=count_reachable]{count_reachable()}},
+\code{\link[=decompose]{decompose()}}
 }
 \concept{components}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_biconnected}{\code{is_biconnected()}}.}
-

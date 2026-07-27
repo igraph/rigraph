@@ -7,6 +7,7 @@
 harmonic_centrality(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -17,6 +18,8 @@ harmonic_centrality(
 \item{graph}{The graph to analyze.}
 
 \item{vids}{The vertices for which harmonic centrality will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defining the types of the paths used for
 measuring the distance in directed graphs. \dQuote{out} follows paths along
@@ -29,7 +32,7 @@ harmonic centrality. If the graph has a \code{weight} edge attribute, then
 this is used by default. Weights are used for calculating weighted shortest
 paths, so they are interpreted as distances.}
 
-\item{normalized}{Logical scalar, whether to calculate the normalized
+\item{normalized}{Logical, whether to calculate the normalized
 harmonic centrality. If true, the result is the mean inverse path length to
 other vertices, i.e. it is normalized by the number of vertices minus one.
 If false, the result is the sum of inverse path lengths to other vertices.}
@@ -52,6 +55,10 @@ of length \code{cutoff} or smaller only; this can be used for larger graphs
 to speed up the calculation. If \code{cutoff} is negative (which is the
 default), then the function calculates the exact harmonic centrality scores.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff}{\code{harmonic_centrality_cutoff()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -69,21 +76,19 @@ M. Marchiori and V. Latora, Harmony in the small-world,
 \seealso{
 \code{\link[=betweenness]{betweenness()}}, \code{\link[=closeness]{closeness()}}
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=power_centrality]{power_centrality()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \concept{centrality}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_harmonic_centrality_cutoff}{\code{harmonic_centrality_cutoff()}}.}
-

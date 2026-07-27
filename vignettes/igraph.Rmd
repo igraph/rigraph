@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`igraph` is a fast and open source library for the analysis of graphs or networks. The library consists of a core written in C and bindings for high-level languages including [R](https://r.igraph.org/), [Python](https://python.igraph.org/en/stable/), and [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). This vignette aims to give you an overview of the functions available in the R interface of `igraph`. For detailed function by function API documentation, check out <https://r.igraph.org/reference/>.
+`igraph` is a fast and open source library for the analysis of graphs or networks. The library consists of a core written in C and bindings for high-level languages including [R](https://r.igraph.org/), [Python](https://python.igraph.org/en/stable/), and [Mathematica](https://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). This vignette aims to give you an overview of the functions available in the R interface of `igraph`. For detailed function by function API documentation, check out <https://r.igraph.org/reference/>.
 
 ***
 **NOTE:** Throughout this tutorial, we will use words `graph` and `network` as synonyms, and also `vertex` or `node` as synonyms.

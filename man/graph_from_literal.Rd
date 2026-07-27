@@ -14,9 +14,12 @@ from_literal(...)
 structure of the graph, see details below. For \code{from_literal()}
 all arguments are passed to \code{graph_from_literal()}.}
 
-\item{simplify}{Logical scalar, whether to call \code{\link[=simplify]{simplify()}}
+\item{simplify}{Logical, whether to call \code{\link[=simplify]{simplify()}}
 on the created graph. By default the graph is simplified, loop and
-multiple edges are removed.}
+multiple edges are removed. \code{\link[=simplify]{simplify()}} is only called when the
+created graph is not already simple, so the edge order from the
+formula is preserved whenever no loops or multi-edges are present.
+When the graph does contain loops or multi-edges (and \code{simplify = TRUE}), \code{\link[=simplify]{simplify()}} reorders the edges into its canonical order.}
 }
 \value{
 An igraph graph
@@ -91,6 +94,10 @@ You can include any character in the vertex names this way, even
 
 See more examples below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}
+}
+
 \examples{
 # A simple undirected graph
 g <- graph_from_literal(
@@ -126,18 +133,22 @@ g6
 
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{deterministic constructors}
