@@ -527,8 +527,35 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_close <- function(tkp.id, window.close = TRUE) {
+tk_close <- function(
+  tkp.id,
+  ...,
+  window.close = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_close, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(window.close = window.close),
+      recover_new = c("window.close"),
+      recover_old = c("window.close"),
+      match_names = c("window.close"),
+      match_to = c("window.close"),
+      defaults = list(window.close = TRUE),
+      head_args = c("tkp.id"),
+      fn_name = "tk_close"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   if (window.close) {
     cmd <- paste(sep = "", "tkp.", tkp.id, "$top")
@@ -555,8 +582,36 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_fit <- function(tkp.id, width = NULL, height = NULL) {
+tk_fit <- function(
+  tkp.id,
+  ...,
+  width = NULL,
+  height = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_fit, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(width = width, height = height),
+      recover_new = c("width", "height"),
+      recover_old = c("width", "height"),
+      match_names = c("width", "height"),
+      match_to = c("width", "height"),
+      defaults = list(width = NULL, height = NULL),
+      head_args = c("tkp.id"),
+      fn_name = "tk_fit"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
@@ -646,8 +701,35 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_coords <- function(tkp.id, norm = FALSE) {
+tk_coords <- function(
+  tkp.id,
+  ...,
+  norm = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(norm = norm),
+      recover_new = c("norm"),
+      recover_old = c("norm"),
+      match_names = c("norm"),
+      match_to = c("norm"),
+      defaults = list(norm = FALSE),
+      head_args = c("tkp.id"),
+      fn_name = "tk_coords"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
   coords[, 2] <- max(coords[, 2]) - coords[, 2]
@@ -675,8 +757,36 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
+#' @inheritParams rlang::args_dots_empty
 #' @export
-tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
+tk_rotate <- function(
+  tkp.id,
+  ...,
+  degree = NULL,
+  rad = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: tk_rotate, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(degree = degree, rad = rad),
+      recover_new = c("degree", "rad"),
+      recover_old = c("degree", "rad"),
+      match_names = c("degree", "rad"),
+      match_to = c("degree", "rad"),
+      defaults = list(degree = NULL, rad = NULL),
+      head_args = c("tkp.id"),
+      fn_name = "tk_rotate"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
 
