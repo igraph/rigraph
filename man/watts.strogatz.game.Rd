@@ -16,10 +16,10 @@ the lattice will be connected.}
 
 \item{p}{Real constant between zero and one, the rewiring probability.}
 
-\item{loops}{Logical scalar, whether loops edges are allowed in the
+\item{loops}{Logical, whether loops edges are allowed in the
 generated graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed int the
+\item{multiple}{Logical, whether multiple edges are allowed int the
 generated graph.}
 }
 \description{
@@ -28,4 +28,8 @@ generated graph.}
 \code{watts.strogatz.game()} was renamed to \code{\link[=sample_smallworld]{sample_smallworld()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}
+}
+
 \keyword{internal}

@@ -20,7 +20,7 @@ get.shortest.paths(
 \item{graph}{The graph to work on.}
 
 \item{from}{Numeric constant, the vertex from or to the shortest paths will
-be calculated. Note that right now this is not a vector of vertex ids, but
+be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
@@ -47,7 +47,7 @@ form was used prior to igraph version 0.6. \dQuote{epath} means that the
 edges along the paths are reported. \dQuote{both} means that both forms are
 returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.}
 
-\item{predecessors}{Logical scalar, whether to return the predecessor vertex
+\item{predecessors}{Logical, whether to return the predecessor vertex
 for each vertex. The predecessor of vertex \code{i} in the tree is the
 vertex from which vertex \code{i} was reached. The predecessor of the start
 vertex (in the \code{from} argument) is itself by definition. If the
@@ -55,7 +55,7 @@ predecessor is zero, it means that the given vertex was not reached from the
 source during the search. Note that the search terminates if all the
 vertices in \code{to} are reached.}
 
-\item{inbound.edges}{Logical scalar, whether to return the inbound edge for
+\item{inbound.edges}{Logical, whether to return the inbound edge for
 each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
 which vertex \code{i} was reached. The start vertex and vertices that were
 not reached during the search will have zero in the corresponding entry of
@@ -79,4 +79,8 @@ used, regardless of this argument.}
 \code{get.shortest.paths()} was renamed to \code{\link[=shortest_paths]{shortest_paths()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \keyword{internal}

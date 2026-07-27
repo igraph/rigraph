@@ -7,10 +7,12 @@
 as_adjacency_matrix(
   graph,
   type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
+  ...,
+  weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  edges = deprecated(),
+  attr = deprecated()
 )
 }
 \arguments{
@@ -22,29 +24,35 @@ right triangle of the matrix is used, \code{lower}: the lower left triangle
 of the matrix is used. \code{both}: the whole matrix is used, a symmetric
 matrix is returned.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
-attribute name. If \code{NULL} a traditional adjacency matrix is returned.
-If not \code{NULL} then the values of the given edge attribute are included
-in the adjacency matrix. If the graph has multiple edges, the edge attribute
-of an arbitrarily chosen edge (for the multiple edges) is included. This
-argument is ignored if \code{edges} is \code{TRUE}.
+\item{...}{These dots are for future extensions and must be empty.}
 
-Note that this works only for certain attribute types. If the \code{sparse}
-argumen is \code{TRUE}, then the attribute must be either logical or
-numeric. If the \code{sparse} argument is \code{FALSE}, then character is
-also allowed. The reason for the difference is that the \code{Matrix}
-package does not support character sparse matrices yet.}
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 
-\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
-For non-existant edges zero is returned.}
-
-\item{names}{Logical constant, whether to assign row and column names
+\item{names}{Logical, whether to assign row and column names
 to the matrix. These are only assigned if the \code{name} vertex attribute
 is present in the graph.}
 
-\item{sparse}{Logical scalar, whether to create a sparse matrix. The
+\item{sparse}{Logical, whether to create a sparse matrix. The
 \sQuote{\code{Matrix}} package must be installed for creating sparse
 matrices.}
+
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical, whether to return the edge IDs in the matrix.
+For non-existant edges zero is returned.}
+
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
+supplied, the value is forwarded to \code{weights} as a character edge
+attribute name.}
 }
 \value{
 A \code{vcount(graph)} by \code{vcount(graph)} (usually) numeric
@@ -60,6 +68,10 @@ regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
 defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 \code{TRUE}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- sample_gnp(10, 2 / 10)
@@ -67,21 +79,22 @@ as_adjacency_matrix(g)
 V(g)$name <- letters[1:vcount(g)]
 as_adjacency_matrix(g)
 E(g)$weight <- runif(ecount(g))
-as_adjacency_matrix(g, attr = "weight")
+as_adjacency_matrix(g)
+as_adjacency_matrix(g, weights = NA)
 }
 \seealso{
 \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
 
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adj_list]{as_adj_list()}},
+\code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_graphnel]{as_graphnel()}},
+\code{\link[=as_long_data_frame]{as_long_data_frame()}},
+\code{\link[=graph_from_adj_list]{graph_from_adj_list()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \concept{conversion}

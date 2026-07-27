@@ -10,7 +10,7 @@
 #' @export
 triad.census <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "triad.census()", "triad_census()")
+  lifecycle::deprecate_warn("2.0.0", "triad.census()", "triad_census()")
   triad_census(graph = graph)
 } # nocov end
 
@@ -26,7 +26,7 @@ triad.census <- function(graph) {
 #' @export
 graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs.no()", "count_motifs()")
+  lifecycle::deprecate_warn("2.0.0", "graph.motifs.no()", "count_motifs()")
   count_motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
 
@@ -52,7 +52,7 @@ graph.motifs.est <- function(
   sample = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
+  lifecycle::deprecate_warn("2.0.0", "graph.motifs.est()", "sample_motifs()")
   sample_motifs(
     graph = graph,
     size = size,
@@ -78,7 +78,7 @@ graph.motifs.est <- function(
 #' @export
 graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
+  lifecycle::deprecate_warn("2.0.0", "graph.motifs()", "motifs()")
   motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
 
@@ -94,7 +94,7 @@ graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @export
 dyad.census <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "dyad.census()", "dyad_census()")
+  lifecycle::deprecate_warn("2.0.0", "dyad.census()", "dyad_census()")
   dyad_census(graph = graph)
 } # nocov end
 
@@ -132,6 +132,7 @@ dyad.census <- function(graph) {
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
 #'   directed graphs and sizes 3 to 6 in undirected graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
@@ -139,8 +140,14 @@ dyad.census <- function(graph) {
 #' @param callback Optional callback function to call for each motif found.
 #'   The function should accept two arguments: `vids` (integer vector of vertex IDs
 #'   in the motif) and `isoclass` (the isomorphism class of the motif).
-#'   The function should return `TRUE` to continue the search or `FALSE` to stop it.
+#'   The function should return `FALSE` to continue the search or `TRUE` to stop it.
 #'   If `NULL` (the default), motif counts are returned as a numeric vector.
+#'
+#'   **Important limitation:** Callback functions must NOT call any igraph
+#'   functions (including simple queries like `vcount()` or `ecount()`). Doing
+#'   so will cause R to crash due to reentrancy issues. Extract
+#'   any needed graph information before calling the function with a callback, or
+#'   use collector mode (the default) and process results afterward.
 #' @return When `callback` is `NULL`, `motifs()` returns a numeric vector,
 #'   the number of occurrences of each motif in the graph. The motifs are ordered
 #'   by their isomorphism classes. Note that for unconnected subgraphs, which are
@@ -165,7 +172,35 @@ dyad.census <- function(graph) {
 #'   count <<- count + 1
 #'   count < 5  # stop after 5 motifs
 #' })
-motifs <- function(graph, size = 3, cut.prob = NULL, callback = NULL) {
+motifs <- function(
+  graph,
+  size = 3,
+  ...,
+  cut.prob = NULL,
+  callback = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: motifs, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(cut.prob = cut.prob, callback = callback),
+      recover_new = c("cut.prob", "callback"),
+      recover_old = c("cut.prob", "callback"),
+      match_names = c("cut.prob", "callback"),
+      match_to = c("cut.prob", "callback"),
+      defaults = list(cut.prob = NULL, callback = NULL),
+      head_args = c("graph", "size"),
+      fn_name = "motifs"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
   }
@@ -202,6 +237,7 @@ motifs <- function(graph, size = 3, cut.prob = NULL, callback = NULL) {
 #'
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif.
+#' @inheritParams rlang::args_dots_empty
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
@@ -217,7 +253,34 @@ motifs <- function(graph, size = 3, cut.prob = NULL, callback = NULL) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-count_motifs <- function(graph, size = 3, cut.prob = NULL) {
+count_motifs <- function(
+  graph,
+  size = 3,
+  ...,
+  cut.prob = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: count_motifs, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(cut.prob = cut.prob),
+      recover_new = c("cut.prob"),
+      recover_old = c("cut.prob"),
+      match_names = c("cut.prob"),
+      match_to = c("cut.prob"),
+      defaults = list(cut.prob = NULL),
+      head_args = c("graph", "size"),
+      fn_name = "count_motifs"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
@@ -242,6 +305,7 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently size 3 and 4 are supported
 #'   in directed graphs and sizes 3-6 in undirected graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the `size` argument).
@@ -249,8 +313,8 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' @param sample.size The number of vertices to use as a starting point for
 #'   finding motifs. Only used if the `sample` argument is `NULL`.
 #'   The default is `ceiling(vcount(graph) / 10)` .
-#' @param sample If not `NULL` then it specifies the vertices to use as a
-#'   starting point for finding motifs.
+#' @param sample Vertices to use as a starting point for finding motifs.
+#'   Default: `NULL`.
 #' @return A numeric scalar, an estimate for the total number of motifs in
 #'   the graph.
 #' @seealso [isomorphism_class()]
@@ -266,10 +330,46 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 sample_motifs <- function(
   graph,
   size = 3,
+  ...,
   cut.prob = rep(0, size),
   sample.size = NULL,
   sample = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("s"),
+      "sample_motifs"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        cut.prob = cut.prob,
+        sample.size = sample.size,
+        sample = sample
+      ),
+      recover_new = c("cut.prob", "sample.size", "sample"),
+      recover_old = c("cut.prob", "sample.size", "sample"),
+      match_names = c("cut.prob", "sample.size", "sample"),
+      match_to = c("cut.prob", "sample.size", "sample"),
+      defaults = list(
+        cut.prob = rep(0, size),
+        sample.size = NULL,
+        sample = NULL
+      ),
+      head_args = c("graph", "size"),
+      fn_name = "sample_motifs"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
@@ -331,7 +431,6 @@ sample_motifs <- function(
 #' dyad_census(g)
 #' @family graph motifs
 #' @export
-#' @cdocs igraph_dyad_census
 dyad_census <- function(graph) {
   if (!is_directed(graph)) {
     warn("`dyad_census()` requires a directed graph.")
@@ -423,7 +522,6 @@ dyad_census <- function(graph) {
 #' triad_census(g)
 #' @family motifs
 #' @export
-#' @cdocs igraph_triad_census
 triad_census <- function(graph) {
   triad_census_impl(
     graph = graph

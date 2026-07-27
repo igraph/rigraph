@@ -5,16 +5,16 @@
 \alias{from_edgelist}
 \title{Create a graph from an edge list matrix}
 \usage{
-graph_from_edgelist(el, directed = TRUE)
+graph_from_edgelist(el, ..., directed = TRUE)
 
 from_edgelist(...)
 }
 \arguments{
 \item{el}{The edge list, a two column matrix, character or numeric.}
 
-\item{directed}{Whether to create a directed graph.}
-
 \item{...}{Passed to \code{graph_from_edgelist()}.}
+
+\item{directed}{Whether to create a directed graph.}
 }
 \value{
 An igraph graph.
@@ -22,11 +22,15 @@ An igraph graph.
 \description{
 \code{graph_from_edgelist()} creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is
-a numeric matrix then its elements are interpreted as vertex ids. If
+a numeric matrix then its elements are interpreted as vertex IDs. If
 it is a character matrix then it is interpreted as symbolic vertex
-names and a vertex id will be assigned to each name, and also a
+names and a vertex ID will be assigned to each name, and also a
 \code{name} vertex attribute will be added.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create}{\code{create()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}
+}
+
 \examples{
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
@@ -35,23 +39,23 @@ graph_from_edgelist(el)
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Edge list}
 \concept{deterministic constructors}

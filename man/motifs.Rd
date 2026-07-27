@@ -4,13 +4,15 @@
 \alias{motifs}
 \title{Graph motifs}
 \usage{
-motifs(graph, size = 3, cut.prob = NULL, callback = NULL)
+motifs(graph, size = 3, ..., cut.prob = NULL, callback = NULL)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
 directed graphs and sizes 3 to 6 in undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -20,8 +22,14 @@ If \code{NULL}, the default, no cuts are made.}
 \item{callback}{Optional callback function to call for each motif found.
 The function should accept two arguments: \code{vids} (integer vector of vertex IDs
 in the motif) and \code{isoclass} (the isomorphism class of the motif).
-The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.
-If \code{NULL} (the default), motif counts are returned as a numeric vector.}
+The function should return \code{FALSE} to continue the search or \code{TRUE} to stop it.
+If \code{NULL} (the default), motif counts are returned as a numeric vector.
+
+\strong{Important limitation:} Callback functions must NOT call any igraph
+functions (including simple queries like \code{vcount()} or \code{ecount()}). Doing
+so will cause R to crash due to reentrancy issues. Extract
+any needed graph information before calling the function with a callback, or
+use collector mode (the default) and process results afterward.}
 }
 \value{
 When \code{callback} is \code{NULL}, \code{motifs()} returns a numeric vector,
@@ -42,6 +50,10 @@ numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
 \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback_closure()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)
@@ -58,9 +70,9 @@ motifs(g, 3, callback = function(vids, isoclass) {
 \seealso{
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
-Other graph motifs: 
-\code{\link{count_motifs}()},
-\code{\link{dyad_census}()},
-\code{\link{sample_motifs}()}
+Other graph motifs:
+\code{\link[=count_motifs]{count_motifs()}},
+\code{\link[=dyad_census]{dyad_census()}},
+\code{\link[=sample_motifs]{sample_motifs()}}
 }
 \concept{graph motifs}

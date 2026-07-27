@@ -26,7 +26,7 @@
 # add_edges_impl basic
 
     Code
-      add_edges_impl(graph = g, edges = c(0, 1, 1, 2))
+      add_edges_impl(graph = g, edges = c(1, 2, 2, 3))
     Output
       IGRAPH D--- 3 2 -- 
       + edges:
@@ -4516,10 +4516,10 @@
       site_percolation_impl(graph = g)
     Output
       $giant_size
-      numeric(0)
+      [1] 1 2 3
       
       $edge_count
-      numeric(0)
+      [1] 0 1 2
       
 
 # site_percolation_impl errors
@@ -4547,9 +4547,8 @@
     Code
       edgelist_percolation_impl(edges = "a")
     Condition
-      Error in `edgelist_percolation_impl()`:
-      ! Expected numeric or integer vector, got type 16. Invalid value
-      Source: <file>:<line>
+      Error in `edges - 1`:
+      ! non-numeric argument to binary operator
 
 # is_clique_impl basic
 
@@ -5329,7 +5328,7 @@
       similarity_dice_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.6666667 0.8000000
+      [1] 0.8000000 0.6666667
 
 # similarity_dice_pairs_impl errors
 
@@ -5428,7 +5427,7 @@
       similarity_jaccard_pairs_impl(graph = g, pairs = matrix(c(1, 2, 2, 3), ncol = 2),
       mode = "in", loops = TRUE)
     Output
-      [1] 0.5000000 0.6666667
+      [1] 0.6666667 0.5000000
 
 # similarity_jaccard_pairs_impl errors
 
@@ -6433,6 +6432,22 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# local_scan_neighborhood_ecount_impl basic
+
+    Code
+      local_scan_neighborhood_ecount_impl(graph = g, neighborhoods = list(1:2, 2:3, 2:
+        4, 2))
+    Output
+      [1] 1 1 2 0
+
+---
+
+    Code
+      local_scan_neighborhood_ecount_impl(graph = g, weights = c(1, 2, 3),
+      neighborhoods = list(1:2, 1:3, 2:4, 1))
+    Output
+      [1] 1 3 5 0
+
 # local_scan_neighborhood_ecount_impl errors
 
     Code
@@ -6440,6 +6455,21 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# local_scan_subset_ecount_impl basic
+
+    Code
+      local_scan_subset_ecount_impl(graph = g, subsets = list(c(1, 2), c(2, 3)))
+    Output
+      [1] 1 1
+
+---
+
+    Code
+      local_scan_subset_ecount_impl(graph = g, weights = c(1, 2, 3), subsets = list(c(
+        1, 2), c(2, 3)))
+    Output
+      [1] 1 2
 
 # local_scan_subset_ecount_impl errors
 
@@ -10953,28 +10983,99 @@
       community_edge_betweenness_impl(graph = g, directed = FALSE)
     Output
       $removed_edges
-      [1] 2 0 1 3 4 5 6
+      [1] 6 0 1 2 3 4 5
       
       $edge_betweenness
       [1] 9 1 2 1 1 2 1
       
       $merges
            [,1] [,2]
-      [1,]    5    4
-      [2,]    6    3
-      [3,]    2    1
-      [4,]    8    0
+      [1,]    5    3
+      [2,]    6    4
+      [3,]    2    0
+      [4,]    8    1
       [5,]    7    9
       
       $bridges
       [1] 7 6 4 3 1
       
       $modularity
-      [1] -0.17346939 -0.07142857  0.09183673  0.19387755  0.35714286  0.00000000
+      [1] -0.17346939 -0.09183673  0.09183673  0.17346939  0.35714286  0.00000000
       
       $membership
       [1] 0 0 0 1 1 1
       
+
+# community_leading_eigenvector_callback_closure_impl basic
+
+    Code
+      cat("Result class:\n")
+    Output
+      Result class:
+    Code
+      print(class(result))
+    Output
+      [1] "igraph.eigenc"
+    Code
+      cat("\nMembership length:\n")
+    Output
+      
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.3934089
+    Code
+      cat("\nMerges dimensions:\n")
+    Output
+      
+      Merges dimensions:
+    Code
+      print(dim(result$merges))
+    Output
+      [1] 3 2
+
+# community_leading_eigenvector_callback_closure_impl with start
+
+    Code
+      cat("Result with start membership:\n")
+    Output
+      Result with start membership:
+    Code
+      cat("Membership length:\n")
+    Output
+      Membership length:
+    Code
+      print(length(result$membership))
+    Output
+      [1] 34
+    Code
+      cat("\nModularity:\n")
+    Output
+      
+      Modularity:
+    Code
+      print(result$modularity)
+    Output
+      [1] 0.2217291
+
+# community_leading_eigenvector_callback_closure_impl errors
+
+    Code
+      community_leading_eigenvector_callback_closure_impl(graph = g, start = TRUE)
+    Condition
+      Error in `community_leading_eigenvector_callback_closure_impl()`:
+      ! Supplied memberhsip vector length does not match number of vertices. Invalid value
+      Source: <file>:<line>
 
 # edge_connectivity_impl basic
 
@@ -11132,7 +11233,7 @@
     Code
       content
     Output
-      character(0)
+      [1] "0 1" "0 2" "1 2"
 
 # read_graph_edgelist_impl basic
 
@@ -11252,6 +11353,334 @@
       + 2/5 vertices:
       [1] 3 5
       
+
+# bfs_closure_impl works
+
+    Code
+      cat("BFS result:\n")
+    Output
+      BFS result:
+    Code
+      print(result)
+    Output
+      $order
+      + 10/10 vertices:
+       [1]  1  2 10  3  9  4  8  5  7  6
+      
+      $rank
+       [1] 0 1 3 5 7 9 8 6 4 2
+      
+      $parents
+       [1] -1  0  1  2  3  4  7  8  9  0
+      
+      $pred
+       [1] -1  0  9  8  7  6  4  3  2  1
+      
+      $succ
+       [1]  1  9  8  7  6 -1  5  4  3  2
+      
+      $dist
+       [1] 0 1 2 3 4 5 4 3 2 1
+      
+    Code
+      cat("\nNumber of BFS visits:", length(bfs_visits), "\n")
+    Output
+      
+      Number of BFS visits: 10 
+    Code
+      if (length(bfs_visits) > 0) {
+        cat("First visit:\n")
+        print(bfs_visits[[1]])
+      }
+    Output
+      First visit:
+       vid pred succ rank dist 
+         1    0    2    1    0 
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
+
+---
+
+    Code
+      bfs_closure_impl(graph = g, root = 1, mode = "out", unreachable = TRUE,
+        restricted = NULL, callback = function(args) {
+          NA
+        })
+    Condition
+      Error in `bfs_closure_impl()`:
+      ! Error in R callback function. Failed
+      Source: <file>:<line>
+
+# dfs_closure_impl works
+
+    Code
+      cat("DFS result:\n")
+    Output
+      DFS result:
+    Code
+      print(result)
+    Output
+      $order
+      + 10/10 vertices:
+       [1]  1  2  3  4  5  6  7  8  9 10
+      
+      $order_out
+      + 10/10 vertices:
+       [1] 10  9  8  7  6  5  4  3  2  1
+      
+      $father
+       [1] -1  0  1  2  3  4  5  6  7  8
+      
+      $dist
+       [1] 0 1 2 3 4 5 6 7 8 9
+      
+    Code
+      cat("\nNumber of DFS IN visits:", length(dfs_in_visits), "\n")
+    Output
+      
+      Number of DFS IN visits: 10 
+    Code
+      cat("Number of DFS OUT visits:", length(dfs_out_visits), "\n")
+    Output
+      Number of DFS OUT visits: 10 
+    Code
+      if (length(dfs_in_visits) > 0) {
+        cat("First IN visit:\n")
+        print(dfs_in_visits[[1]])
+      }
+    Output
+      First IN visit:
+       vid dist 
+         1    0 
+
+# motifs_randesu_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of motifs found:", length(motif_data), "\n")
+    Output
+      
+      Number of motifs found: 1 
+    Code
+      cat("First motif:\n")
+    Output
+      First motif:
+    Code
+      print(motif_data[[1]])
+    Output
+      $vids
+      [1] 1 3 2
+      
+      $isoclass
+      [1] 4
+      
+
+# motifs_randesu_callback_closure_impl errors
+
+    Code
+      motifs_randesu_callback_closure_impl(graph = g, size = 3, cut_prob = NULL,
+        callback = "not a function")
+    Condition
+      Error in `motifs_randesu_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of cliques found: 5 
+    Code
+      cat("First clique:\n")
+    Output
+      First clique:
+    Code
+      print(clique_data[[1]])
+    Output
+      [1] 2 3 4
+
+# cliques_callback_closure_impl errors
+
+    Code
+      cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 4, callback = "not a function")
+    Condition
+      Error in `cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# maximal_cliques_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of maximal cliques found:", length(clique_data), "\n")
+    Output
+      
+      Number of maximal cliques found: 3 
+    Code
+      if (length(clique_data) > 0) {
+        cat("First maximal clique:\n")
+        print(clique_data[[1]])
+      }
+    Output
+      First maximal clique:
+      [1] 2 1 4
+
+# maximal_cliques_callback_closure_impl errors
+
+    Code
+      maximal_cliques_callback_closure_impl(graph = g, min_size = 3, max_size = 0,
+        callback = "not a function")
+    Condition
+      Error in `maximal_cliques_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# simple_cycles_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of cycles found:", length(cycle_data), "\n")
+    Output
+      
+      Number of cycles found: 1 
+    Code
+      cat("First cycle:\n")
+    Output
+      First cycle:
+    Code
+      print(cycle_data[[1]])
+    Output
+      $vertices
+      [1] 1 2 3 4
+      
+      $edges
+      [1] 1 2 3 4
+      
+
+# simple_cycles_callback_closure_impl errors
+
+    Code
+      simple_cycles_callback_closure_impl(graph = g, mode = "out", min_cycle_length = -
+        1, max_cycle_length = -1, callback = "not a function")
+    Condition
+      Error in `simple_cycles_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_isomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of isomorphisms found:", length(iso_data), "\n")
+    Output
+      
+      Number of isomorphisms found: 2 
+    Code
+      cat("First isomorphism:\n")
+    Output
+      First isomorphism:
+    Code
+      print(iso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 4 5
+      
+      $map21
+      [1] 1 2 3 4 5
+      
+
+# get_isomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_isomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_isomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
+
+# get_subisomorphisms_vf2_callback_closure_impl basic
+
+    Code
+      cat("Result:\n")
+    Output
+      Result:
+    Code
+      print(result)
+    Output
+      NULL
+    Code
+      cat("\nNumber of subisomorphisms found:", length(subiso_data), "\n")
+    Output
+      
+      Number of subisomorphisms found: 2 
+    Code
+      cat("First subisomorphism:\n")
+    Output
+      First subisomorphism:
+    Code
+      print(subiso_data[[1]])
+    Output
+      $map12
+      [1] 1 2 3 0 0
+      
+      $map21
+      [1] 1 2 3
+      
+
+# get_subisomorphisms_vf2_callback_closure_impl errors
+
+    Code
+      get_subisomorphisms_vf2_callback_closure_impl(graph1 = g1, graph2 = g2,
+        vertex_color1 = NULL, vertex_color2 = NULL, edge_color1 = NULL, edge_color2 = NULL,
+        callback = "not a function")
+    Condition
+      Error in `get_subisomorphisms_vf2_callback_closure_impl()`:
+      ! `callback` must be a function
 
 # sparse_adjacency_impl basic
 
@@ -11373,4 +11802,78 @@
       [4,] -6.893133 -0.8307751
       [5,] -4.613626 -0.8307751
       [6,] -2.334119 -0.8307751
+
+# get_eid_impl basic
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = 2)
+    Output
+      + 1/4 edge:
+      [1] 1->2
+
+# get_eid_impl errors
+
+    Code
+      get_eid_impl(graph = NULL, from = 1, to = 2)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = c(1, 2), to = 2)
+    Condition
+      Error:
+      ! `from` must specify exactly one vertex
+
+---
+
+    Code
+      get_eid_impl(graph = g, from = 1, to = integer(0))
+    Condition
+      Error:
+      ! `to` must specify exactly one vertex
+
+# community_voronoi_impl basic
+
+    Code
+      community_voronoi_impl(graph = g)
+    Output
+      $membership
+       [1] 3 3 3 3 0 3 2 2 1 1
+      
+      $generators
+      + 4/10 vertices:
+      [1] 2 9 7 1
+      
+      $modularity
+      [1] 0.2222222
+      
+
+# community_voronoi_impl errors
+
+    Code
+      community_voronoi_impl(graph = NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# subisomorphic_lad_impl errors
+
+    Code
+      subisomorphic_lad_impl(pattern = NULL, target = g, domains = list(), induced = FALSE,
+      time_limit = 0)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+---
+
+    Code
+      subisomorphic_lad_impl(pattern = g, target = g, domains = "not a list",
+        induced = FALSE, time_limit = 0)
+    Condition
+      Error:
+      ! `domains` must be a list or NULL
 

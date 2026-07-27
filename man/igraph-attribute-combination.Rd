@@ -93,6 +93,18 @@ Calls the R \code{\link[=median]{median()}} function for all attribute types.
 Concatenate the attributes, using the \code{\link[=c]{c()}} function.
 This results almost always a complex attribute.
 }
+\item{"rename"}{
+Keep clashing attributes side-by-side under disambiguated names by
+appending \verb{_1}, \verb{_2}, ... suffixes. For example, if two graphs each
+have an attribute called \code{group}, the resulting graph will have
+attributes \code{group_1} and \code{group_2}, corresponding to the first and
+second input graph, respectively. This is the default for the
+graph operators \code{\link[=union]{union()}}, \code{\link[=intersection]{intersection()}}, \code{\link[=compose]{compose()}} and
+\code{\link[=disjoint_union]{disjoint_union()}} and preserves their historical behaviour.
+Only those operators accept \code{"rename"}; \code{\link[=simplify]{simplify()}} and
+\code{\link[=contract]{contract()}} will reject it because the rename strategy has no
+per-element interpretation when many input values collapse into one.
+}
 }
 }
 
@@ -132,25 +144,25 @@ simplify(g, edge.attr.comb = list(
 \code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in
 general. \code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
 
-Vertex, edge and graph attributes
-\code{\link{delete_edge_attr}()},
-\code{\link{delete_graph_attr}()},
-\code{\link{delete_vertex_attr}()},
-\code{\link{edge_attr}()},
-\code{\link{edge_attr<-}()},
-\code{\link{edge_attr_names}()},
-\code{\link{graph_attr}()},
-\code{\link{graph_attr<-}()},
-\code{\link{graph_attr_names}()},
+Vertex, edge and graph attributes:
+\code{\link[=delete_edge_attr]{delete_edge_attr()}},
+\code{\link[=delete_graph_attr]{delete_graph_attr()}},
+\code{\link[=delete_vertex_attr]{delete_vertex_attr()}},
+\code{\link[=edge_attr]{edge_attr()}},
+\code{\link[=edge_attr<-]{edge_attr<-()}},
+\code{\link[=edge_attr_names]{edge_attr_names()}},
+\code{\link[=graph_attr]{graph_attr()}},
+\code{\link[=graph_attr<-]{graph_attr<-()}},
+\code{\link[=graph_attr_names]{graph_attr_names()}},
 \code{\link{igraph-dollar}},
 \code{\link{igraph-vs-attributes}},
-\code{\link{set_edge_attr}()},
-\code{\link{set_graph_attr}()},
-\code{\link{set_vertex_attr}()},
-\code{\link{set_vertex_attrs}()},
-\code{\link{vertex_attr}()},
-\code{\link{vertex_attr<-}()},
-\code{\link{vertex_attr_names}()}
+\code{\link[=set_edge_attr]{set_edge_attr()}},
+\code{\link[=set_graph_attr]{set_graph_attr()}},
+\code{\link[=set_vertex_attr]{set_vertex_attr()}},
+\code{\link[=set_vertex_attrs]{set_vertex_attrs()}},
+\code{\link[=vertex_attr]{vertex_attr()}},
+\code{\link[=vertex_attr<-]{vertex_attr<-()}},
+\code{\link[=vertex_attr_names]{vertex_attr_names()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

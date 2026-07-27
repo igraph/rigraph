@@ -4,7 +4,7 @@
 \alias{handle_vertex_type_arg}
 \title{Common handler for vertex type arguments in igraph functions}
 \usage{
-handle_vertex_type_arg(types, graph, required = T)
+handle_vertex_type_arg(types, graph, required = TRUE)
 }
 \arguments{
 \item{types}{the vertex types}
@@ -27,6 +27,10 @@ vertex attribute, then the value of this vertex attribute will be used as
 vertex types. Non-logical vertex type vectors are coerced into logical
 vectors after printing a warning.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
 }

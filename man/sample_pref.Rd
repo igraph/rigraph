@@ -10,6 +10,7 @@
 sample_pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -20,6 +21,7 @@ sample_pref(
 pref(
   nodes,
   types,
+  ...,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
   pref.matrix = matrix(1, types, types),
@@ -30,6 +32,7 @@ pref(
 sample_asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -38,6 +41,7 @@ sample_asym_pref(
 asym_pref(
   nodes,
   types,
+  ...,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
   loops = FALSE
@@ -47,6 +51,8 @@ asym_pref(
 \item{nodes}{The number of vertices in the graphs.}
 
 \item{types}{The number of different vertex types.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{type.dist}{The distribution of the vertex types, a numeric vector of
 length \sQuote{types} containing non-negative numbers. The vector will be
@@ -60,9 +66,9 @@ vertices with the different labels) in this case.}
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric.}
 
-\item{directed}{Logical scalar, whether to create a directed graph.}
+\item{directed}{Logical, whether to create a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+\item{loops}{Logical, whether self-loops are allowed in the graph.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}
@@ -92,6 +98,10 @@ The types of the generated vertices can be retrieved from the
 \code{type} vertex attribute for \code{sample_pref()} and from the
 \code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref()}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_preference_game}{\code{preference_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_asymmetric_preference_game}{\code{asymmetric_preference_game()}}
+}
+
 \examples{
 
 pf <- matrix(c(1, 0, 0, 1), nrow = 2)
@@ -109,33 +119,33 @@ tkplot(g, layout = layout_in_circle)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_smallworld]{sample_smallworld()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

@@ -162,17 +162,6 @@ warn_version <- function(graph) {
   )
 }
 
-oldpredecessors <- function() {
-  c(
-    "1.5.0" = "1.4.3",
-    "1.0.0" = "0.7.1",
-    "0.6" = "0.5.5-4",
-    "0.5" = "0.4.5",
-    "0.2" = "0.1.2",
-    "0.1.1" = NA
-  )
-}
-
 oldsamples <- function() {
   list(
     "1.5.0" = oldsample_1_5_0(),
@@ -202,7 +191,7 @@ clear_native_ptr <- function(g) {
 #' @export
 igraph.version <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.version()", "igraph_version()")
   igraph_version()
 } # nocov end
 

@@ -14,7 +14,7 @@ undirected graph.}
 \item{small}{The right hand side argument of the minus operator. A directed
 ot undirected graph.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if both graphs are named and
 \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
@@ -35,7 +35,7 @@ new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
-names. Otherwise numeric vertex ids are used.
+names. Otherwise numeric vertex IDs are used.
 
 \code{difference()} keeps all attributes (graph, vertex and edge) of the
 first graph.
@@ -43,6 +43,10 @@ first graph.
 Note that \code{big} and \code{small} must both be directed or both be
 undirected, otherwise an error message is given.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_difference}{\code{difference()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}
+}
+
 \examples{
 
 ## Create a wheel graph
@@ -60,31 +64,31 @@ print_all(G)
 plot(G, layout = layout_nicely(wheel))
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -20,6 +20,10 @@ A logical scalar, \code{TRUE} if edge \verb{(v1, v2)} exists in the graph.
 The order of the vertices only matters in directed graphs,
 where the existence of a directed \verb{(v1, v2)} edge is queried.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_are_adjacent}{\code{are_adjacent()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 ug <- make_ring(10)
 ug
@@ -32,21 +36,19 @@ are_adjacent(ug, 1, 2)
 are_adjacent(ug, 2, 1)
 }
 \seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{ends}()},
-\code{\link{get_edge_ids}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{incident_edges}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
+Other structural queries:
+\code{\link[=[.igraph]{[.igraph()}},
+\code{\link[=[[.igraph]{[[.igraph()}},
+\code{\link[=adjacent_vertices]{adjacent_vertices()}},
+\code{\link[=ends]{ends()}},
+\code{\link[=get_edge_ids]{get_edge_ids()}},
+\code{\link[=gorder]{gorder()}},
+\code{\link[=gsize]{gsize()}},
+\code{\link[=head_of]{head_of()}},
+\code{\link[=incident]{incident()}},
+\code{\link[=incident_edges]{incident_edges()}},
+\code{\link[=is_directed]{is_directed()}},
+\code{\link[=neighbors]{neighbors()}},
+\code{\link[=tail_of]{tail_of()}}
 }
 \concept{structural queries}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent}{\code{are_adjacent()}}.}
-

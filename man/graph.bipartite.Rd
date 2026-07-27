@@ -17,7 +17,7 @@ regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
 
-\item{directed}{Whether to create a directed graph, boolean constant. Note
+\item{directed}{Logical, whether to create a directed graph. Note
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
 }
@@ -27,4 +27,8 @@ bipartite graphs.}
 \code{graph.bipartite()} was renamed to \code{\link[=make_bipartite_graph]{make_bipartite_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_create_bipartite}{\code{create_bipartite()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

@@ -11,12 +11,13 @@
 \alias{make_neighborhood_graph}
 \title{Neighborhood of graph vertices}
 \usage{
-connect(graph, order, mode = c("all", "out", "in", "total"))
+connect(graph, order, ..., mode = c("all", "out", "in", "total"))
 
 ego_size(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -25,6 +26,7 @@ neighborhood_size(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -33,6 +35,7 @@ ego(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -41,6 +44,7 @@ neighborhood(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -49,6 +53,7 @@ make_ego_graph(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -57,6 +62,7 @@ make_neighborhood_graph(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -66,6 +72,8 @@ make_neighborhood_graph(
 
 \item{order}{Integer giving the order of the neighborhood. Negative values
 indicate an infinite order.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
@@ -116,6 +124,10 @@ the vertex, edge and graph attributes.
 \code{connect()} creates a new graph by connecting each vertex to
 all other vertices in its neighborhood.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_connect_neighborhood}{\code{connect_neighborhood()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -150,57 +162,57 @@ g <- connect(g, 2)
 
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{intersection.igraph}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=intersection.igraph]{intersection.igraph()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=bfs]{bfs()}},
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}, the first version was

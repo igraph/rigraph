@@ -77,13 +77,22 @@ runs:
       # Fall through if PR, will use reviewdog/action-suggester in the commit action
       if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v8
       with:
         base: ${{ inputs.base }}
         branch: snapshot-${{ inputs.base }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
         delete-branch: true
         title: "test: Snapshot updates for ${{ github.job }} (${{ steps.matrix-desc.outputs.text }})"
-        body: "Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action${{ github.event.number && format(' for #{0}', github.event.number) || '' }}."
+        # Two consecutive blank lines in the folded scalar produce the
+        # paragraph break between the sentence and the run link.
+        body: >-
+          Automated changes by
+          [create-pull-request](https://github.com/peter-evans/create-pull-request)
+          GitHub action${{ github.event.number && format(' for #{0}', github.event.number) || '' }}.
+
+
+          Workflow run:
+          ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         add-paths: |
           tests/testthat/_snaps
 

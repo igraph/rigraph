@@ -20,4 +20,8 @@ communities. Exactly one of \code{no} and \code{steps} must be supplied.}
 \code{cutat()} was renamed to \code{\link[=cut_at]{cut_at()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_le_community_to_membership}{\code{le_community_to_membership()}}
+}
+
 \keyword{internal}

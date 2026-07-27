@@ -5,9 +5,9 @@
 \alias{smallworld}
 \title{The Watts-Strogatz small-world model}
 \usage{
-sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+sample_smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 
-smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
+smallworld(dim, size, nei, p, ..., loops = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{dim}{Integer constant, the dimension of the starting lattice.}
@@ -19,10 +19,12 @@ the lattice will be connected.}
 
 \item{p}{Real constant between zero and one, the rewiring probability.}
 
-\item{loops}{Logical scalar, whether loops edges are allowed in the
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{loops}{Logical, whether loops edges are allowed in the
 generated graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed int the
+\item{multiple}{Logical, whether multiple edges are allowed int the
 generated graph.}
 }
 \value{
@@ -48,6 +50,10 @@ thus the network does not become fully random even for \code{p=1}.
 For appropriate choices of \code{p}, both models exhibit the property of
 simultaneously having short path lengths and high clustering.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_watts_strogatz_game}{\code{watts_strogatz_game()}}
+}
+
 \examples{
 
 g <- sample_smallworld(1, 100, 5, 0.05)
@@ -62,33 +68,33 @@ Duncan J Watts and Steven H Strogatz: Collective dynamics of
 \seealso{
 \code{\link[=make_lattice]{make_lattice()}}, \code{\link[=rewire]{rewire()}}
 
-Random graph models (games)
-\code{\link{bipartite_gnm}()},
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_chung_lu}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()}
+Random graph models (games):
+\code{\link[=bipartite_gnm]{bipartite_gnm()}},
+\code{\link[=erdos.renyi.game]{erdos.renyi.game()}},
+\code{\link[=sample_]{sample_()}},
+\code{\link[=sample_bipartite]{sample_bipartite()}},
+\code{\link[=sample_chung_lu]{sample_chung_lu()}},
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}},
+\code{\link[=sample_degseq]{sample_degseq()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}},
+\code{\link[=sample_fitness]{sample_fitness()}},
+\code{\link[=sample_fitness_pl]{sample_fitness_pl()}},
+\code{\link[=sample_forestfire]{sample_forestfire()}},
+\code{\link[=sample_gnm]{sample_gnm()}},
+\code{\link[=sample_gnp]{sample_gnp()}},
+\code{\link[=sample_grg]{sample_grg()}},
+\code{\link[=sample_growing]{sample_growing()}},
+\code{\link[=sample_hierarchical_sbm]{sample_hierarchical_sbm()}},
+\code{\link[=sample_islands]{sample_islands()}},
+\code{\link[=sample_k_regular]{sample_k_regular()}},
+\code{\link[=sample_last_cit]{sample_last_cit()}},
+\code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=sample_pa_age]{sample_pa_age()}},
+\code{\link[=sample_pref]{sample_pref()}},
+\code{\link[=sample_sbm]{sample_sbm()}},
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}},
+\code{\link[=sample_tree]{sample_tree()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

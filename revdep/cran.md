@@ -1,77 +1,94 @@
 ## revdepcheck results
 
-We checked 58 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2289 reverse dependencies (2287 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 3 new problems
- * We failed to check 54 packages
+ * We saw 22 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* Cascade
-  checking whether package ‘Cascade’ can be installed ... WARNING
-
-* jewel
+* Boptbd
   checking examples ... ERROR
 
-* rSpectral
+* c3net
+  checking examples ... ERROR
+
+* cfid
   checking tests ... ERROR
+
+* comato
+  checking examples ... ERROR
+
+* cranly
+  checking re-building of vignette outputs ... ERROR
+
+* dci
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* degreenet
+  checking examples ... ERROR
+
+* ECoL
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* ggm
+  checking examples ... ERROR
+
+* ggraph
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* glyrepr
+  checking tests ... ERROR
+
+* GoodFitSBM
+  checking examples ... ERROR
+
+* manynet
+  checking tests ... ERROR
+
+* migraph
+  checking tests ... ERROR
+
+* nat
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
+* qgraph
+  checking examples ... ERROR
+
+* R6causal
+  checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* tidygraph
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* vkR
+  checking dependencies in R code ... WARNING
 
 ### Failed to check
 
-* admtools           (NA)
-* amberr             (NA)
-* BGGM               (NA)
-* bnlearn            (NA)
-* bnpa               (NA)
-* cdmTools           (NA)
-* ClusterGVis        (NA)
-* CompositionalClust (NA)
-* depCensoring       (NA)
-* DRviaSPCN          (NA)
-* dySEM              (NA)
-* easybgm            (NA)
-* EGAnet             (NA)
-* FAfA               (NA)
-* fAssets            (NA)
-* fdm2id             (NA)
-* galvanizer         (NA)
-* genekitr           (NA)
-* ggpicrust2         (NA)
-* ggsem              (NA)
-* immcp              (NA)
-* jmv                (NA)
-* kerastuneR         (NA)
-* latentFactoR       (NA)
-* lavaan.shiny       (NA)
-* lcsm               (NA)
-* linkspotter        (NA)
-* lvnet              (NA)
-* manymome           (NA)
-* MLCOPULA           (NA)
-* numbat             (NA)
-* pctax              (NA)
-* phylosem           (NA)
-* psychonetrics      (NA)
-* pwSEM              (NA)
-* randomForestSRC    (NA)
-* ReporterScore      (NA)
-* Revticulate        (NA)
-* scperturbR         (NA)
-* semdrw             (NA)
-* semptools          (NA)
-* sphereML           (NA)
-* stoRy              (NA)
-* streamDAG          (NA)
-* Surrogate          (NA)
-* TDAkit             (NA)
-* TELP               (NA)
-* TestAnaAPP         (NA)
-* tidybins           (NA)
-* tidycomm           (NA)
-* tidyjson           (NA)
-* tidySEM            (NA)
-* TransProR          (NA)
-* tsissm             (NA)
+* blavaan    (NA)
+* caugi      (NA)
+* deepSTRAPP (NA)
+* ggpicrust2 (NA)
+* scAnnotate (NA)
+* spopt      (NA)
+* streamDAG  (NA)

@@ -1,4 +1,5 @@
 test_that("as_directed works", {
+  igraph_local_seed(42)
   gnp_undirected <- sample_gnp(100, 2 / 100)
   gnp_mutual <- as_directed(gnp_undirected, mode = "mutual")
   expect_equal(degree(gnp_undirected), degree(gnp_mutual) / 2)
@@ -29,31 +30,31 @@ test_that("as_directed keeps attributes", {
   expect_equal(V(g_arbitrary)$name, V(g)$name)
 
   E(g)$weight <- seq_len(ecount(g))
-  g_mutual <- as_directed(g, "mutual")
+  g_mutual <- as_directed(g, mode = "mutual")
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(1, 2, 1, 3, 3, 2)
+    c(1, 3, 1, 2, 2, 3)
   )
 
-  g_arbitrary <- as_directed(g, "arbitrary")
+  g_arbitrary <- as_directed(g, mode = "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
   expect_equal(
     df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
-    1:3
+    c(1, 3, 2)
   )
 })
 
 test_that("as.directed() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.directed(g, mode = "mutual")))
 })
 
 test_that("as.undirected() deprecation", {
-  local_igraph_options(print.id = FALSE)
-
+  rlang::local_options(lifecycle_verbosity = "warning")
+  igraph_local_seed(42)
   g <- sample_gnp(100, 2 / 100)
   expect_snapshot(is_directed(as.undirected(g, mode = "collapse")))
 })
@@ -66,14 +67,14 @@ test_that("as_undirected() keeps attributes", {
   g_tiny <- as_undirected(g, mode = "collapse")
   df_tiny <- as_data_frame(g_tiny)
   expect_equal(g_tiny$name, g$name)
-  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(4, 2, 9))
+  expect_equal(df_tiny[order(df_tiny[, 1], df_tiny[, 2]), ]$weight, c(3, 3, 9))
 
   g_each <- as_undirected(g, mode = "each")
   df_each <- as_data_frame(g_each)
   expect_equal(g_each$name, g$name)
   expect_equal(
     df_each[order(df_each[, 1], df_each[, 2]), ]$weight,
-    c(1, 3, 2, 4, 5)
+    c(1, 2, 3, 4, 5)
   )
 
   g_mutual <- as_undirected(g, mode = "mutual")
@@ -81,7 +82,7 @@ test_that("as_undirected() keeps attributes", {
   expect_equal(g_mutual$name, g$name)
   expect_equal(
     df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
-    c(4, 9)
+    c(3, 9)
   )
 })
 
@@ -104,7 +105,7 @@ test_that("as_adjacency_matrix() works -- sparse", {
   expect_equal(basic_adj_matrix_dense, letter_adj_matrix_dense)
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
+  weight_adj_matrix <- as_adjacency_matrix(g, weights = "weight")
   expect_s4_class(weight_adj_matrix, "dgCMatrix")
   expect_equal(
     as.matrix(weight_adj_matrix),
@@ -142,10 +143,10 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
-  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, weights = "bla"))
 
   E(g)$bla <- letters[1:ecount(g)]
-  expect_snapshot_igraph_error(as_adjacency_matrix(g, attr = "bla"))
+  expect_snapshot_igraph_error(as_adjacency_matrix(g, weights = "bla"))
 })
 
 test_that("as_adjacency_matrix() works -- sparse undirected", {
@@ -183,7 +184,11 @@ test_that("as_adjacency_matrix() works -- dense", {
   expect_equal(basic_adj_matrix, unname(letter_adj_matrix))
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  weight_adj_matrix <- as_adjacency_matrix(
+    g,
+    weights = "weight",
+    sparse = FALSE
+  )
   expect_equal(
     weight_adj_matrix,
     matrix(
@@ -198,12 +203,12 @@ test_that("as_adjacency_matrix() works -- dense", {
 test_that("as_adjacency_matrix() errors well -- dense", {
   g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   expect_snapshot_igraph_error(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+    as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
   )
 
   E(g)$bla <- letters[1:ecount(g)]
   expect_snapshot_igraph_error(
-    as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
+    as_adjacency_matrix(g, weights = "bla", sparse = FALSE)
   )
 })
 
@@ -222,7 +227,11 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
   )
 
   E(ug)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
-  weight_adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE, attr = "weight")
+  weight_adj_matrix <- as_adjacency_matrix(
+    ug,
+    sparse = FALSE,
+    weights = "weight"
+  )
   dimnames(weight_adj_matrix) <- NULL
   expect_equal(
     weight_adj_matrix,
@@ -243,7 +252,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     g,
     type = "lower",
     sparse = FALSE,
-    attr = "attribute"
+    weights = "attribute"
   )
   dimnames(lower_adj_matrix) <- NULL
 
@@ -260,7 +269,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     g,
     type = "upper",
     sparse = FALSE,
-    attr = "attribute"
+    weights = "attribute"
   )
   dimnames(upper_adj_matrix) <- NULL
   expect_equal(
@@ -279,14 +288,14 @@ test_that("as_adjacency_matrix() works -- dense + weights", {
   mat <- matrix(0, 5, 5)
   mat[lower.tri(mat)] <- 1:10
   mat <- mat + t(mat)
-  A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
   expect_equal(as_unnamed_dense_matrix(A), mat)
 })
 
 test_that("as_biadjacency_matrix() works -- dense + weights", {
   g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
   E(g)$weight <- c(2, 4, 6)
-  A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+  A <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
   mat <- matrix(
     c(2, 4, 0, 0, 0, 6, 0, 0),
     nrow = 4L,
@@ -296,7 +305,162 @@ test_that("as_biadjacency_matrix() works -- dense + weights", {
   expect_equal(as_unnamed_dense_matrix(A), as_unnamed_dense_matrix(mat))
 })
 
+# --- weights parameter: the four input modes -------------------------------
+
+test_that("as_adjacency_matrix() picks up `weight` attribute by default", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- c(1, 2, 3, 4, 5, 6)
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_equal(as_adjacency_matrix(g, sparse = FALSE), expected)
+  expect_equal(
+    as.matrix(as_adjacency_matrix(g, sparse = TRUE)),
+    as.matrix(expected)
+  )
+})
+
+test_that("as_adjacency_matrix() weights = NA returns unweighted matrix", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- c(1, 2, 3, 4, 5, 6)
+  plain <- matrix(1, 4, 4)
+  diag(plain) <- 0
+  expect_equal(
+    as_adjacency_matrix(g, weights = NA, sparse = FALSE),
+    plain
+  )
+  expect_equal(
+    as.matrix(as_adjacency_matrix(g, weights = NA, sparse = TRUE)),
+    plain
+  )
+})
+
+test_that("as_adjacency_matrix() accepts a numeric weights vector", {
+  g <- make_full_graph(4, directed = FALSE)
+  w <- c(10, 20, 30, 40, 50, 60)
+  A_dense <- as_adjacency_matrix(g, weights = w, sparse = FALSE)
+  A_sparse <- as_adjacency_matrix(g, weights = w, sparse = TRUE)
+  expect_equal(A_dense, as.matrix(A_sparse))
+  # the weights should appear somewhere in the matrix
+  expect_setequal(setdiff(unique(as.vector(A_dense)), 0), w)
+})
+
+test_that("as_adjacency_matrix() weights = character names an edge attribute", {
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$myweight <- c(7, 8, 9, 10, 11, 12)
+  expect_equal(
+    as_adjacency_matrix(g, weights = "myweight", sparse = FALSE),
+    as_adjacency_matrix(g, weights = c(7, 8, 9, 10, 11, 12), sparse = FALSE)
+  )
+})
+
+test_that("as_adjacency_matrix() errors on wrong-length weights vector", {
+  g <- make_full_graph(4, directed = FALSE)
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = FALSE)
+  )
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = c(1, 2, 3), sparse = TRUE)
+  )
+})
+
+test_that("as_adjacency_matrix() errors on non-numeric weights", {
+  g <- make_full_graph(4, directed = FALSE)
+  expect_snapshot_igraph_error(
+    as_adjacency_matrix(g, weights = list(1, 2, 3, 4, 5, 6))
+  )
+})
+
+test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- 1:6
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
+  # The generic recovery machinery (messages, errors, abbreviations) is tested
+  # exhaustively in test-migration-fixture.R; here we only confirm the block is
+  # wired into this function: a legacy positional `attr` routes to `weights`
+  # with a deprecation, and an unknown named arg still errors.
+  g <- make_full_graph(4, directed = FALSE)
+  E(g)$weight <- 1:6
+  expected <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  lifecycle::expect_deprecated(
+    A <- as_adjacency_matrix(g, "both", "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+  expect_error(as_adjacency_matrix(g, "both", foo = "weight"))
+})
+
+test_that("as_adjacency_matrix() dense/sparse parity for arbitrary weights", {
+  g <- make_ring(6, directed = TRUE)
+  w <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5)
+  for (type in c("both", "upper", "lower")) {
+    A_dense <- as_adjacency_matrix(g, weights = w, type = type, sparse = FALSE)
+    A_sparse <- as_adjacency_matrix(g, weights = w, type = type, sparse = TRUE)
+    expect_equal(A_dense, as.matrix(A_sparse), info = type)
+  }
+})
+
+# --- as_biadjacency_matrix() weights modes ---------------------------------
+
+test_that("as_biadjacency_matrix() picks up `weight` attribute by default", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_equal(as_biadjacency_matrix(g, sparse = FALSE), expected)
+  expect_equal(
+    as.matrix(as_biadjacency_matrix(g, sparse = TRUE)),
+    as.matrix(expected)
+  )
+})
+
+test_that("as_biadjacency_matrix() weights = NA returns unweighted matrix", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  unwt <- as_biadjacency_matrix(g, weights = NA, sparse = FALSE)
+  # plain biadjacency contains only 0 and 1
+  expect_true(all(unwt %in% c(0, 1)))
+})
+
+test_that("as_biadjacency_matrix() accepts a numeric weights vector", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  w <- c(9, 99, 999)
+  A_dense <- as_biadjacency_matrix(g, weights = w, sparse = FALSE)
+  A_sparse <- as_biadjacency_matrix(g, weights = w, sparse = TRUE)
+  expect_equal(A_dense, as.matrix(A_sparse))
+  expect_setequal(setdiff(unique(as.vector(A_dense)), 0), w)
+})
+
+test_that("as_biadjacency_matrix(attr =) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  expect_snapshot(
+    A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+})
+
+test_that("as_biadjacency_matrix() wires up legacy `attr` recovery", {
+  # See test-migration-fixture.R for exhaustive recovery coverage; this just
+  # confirms the block is wired into this function.
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  expected <- as_biadjacency_matrix(g, weights = "weight", sparse = FALSE)
+  lifecycle::expect_deprecated(
+    A <- as_biadjacency_matrix(g, NULL, "weight", sparse = FALSE)
+  )
+  expect_equal(A, expected)
+  expect_error(as_biadjacency_matrix(g, NULL, foo = "weight"))
+})
+
 test_that("as_adj works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 1 / 50)
   A <- as_adjacency_matrix(g, sparse = FALSE)
   g2 <- graph_from_adjacency_matrix(A, mode = "undirected")
@@ -317,6 +481,7 @@ test_that("as_adj works", {
 })
 
 test_that("as_adj_list works", {
+  igraph_local_seed(42)
   g <- sample_gnp(50, 2 / 50)
   adj_list <- as_adj_list(g)
   expect_s3_class(adj_list[[1]], "igraph.vs")
@@ -379,6 +544,7 @@ test_that("as_adj_list works", {
 })
 
 test_that("as_adj_list works when return.vs.es is FALSE", {
+  igraph_local_seed(42)
   on.exit(try(igraph_options(old)), add = TRUE)
   old <- igraph_options(return.vs.es = FALSE)
 
@@ -443,6 +609,7 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
 })
 
 test_that("as_edgelist works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   el <- as_edgelist(g)
   g2 <- make_graph(t(el), n = vcount(g), dir = FALSE)
@@ -450,6 +617,7 @@ test_that("as_edgelist works", {
 })
 
 test_that("as_biadjacency_matrix() works -- dense", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
   biadj_mat2 <- as_biadjacency_matrix(g)
@@ -459,9 +627,10 @@ test_that("as_biadjacency_matrix() works -- dense", {
 })
 
 test_that("as_biadjacency_matrix() works -- dense named", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
-  V(g)$name <- letters[1:length(V(g))]
+  V(g)$name <- letters[seq_along(V(g))]
 
   expect_true(is_named(g))
 
@@ -472,6 +641,7 @@ test_that("as_biadjacency_matrix() works -- dense named", {
 })
 
 test_that("as_biadjacency_matrix() works -- sparse", {
+  igraph_local_seed(42)
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
   biadj_mat2 <- as_biadjacency_matrix(g, sparse = TRUE)
@@ -481,6 +651,7 @@ test_that("as_biadjacency_matrix() works -- sparse", {
 })
 
 test_that("graph_from_adj_list works", {
+  igraph_local_seed(42)
   g <- sample_gnp(100, 3 / 100)
   adj_list <- as_adj_list(g)
   g2 <- graph_from_adj_list(adj_list, mode = "all")
@@ -495,7 +666,7 @@ test_that("graph_from_adj_list works", {
 })
 
 test_that("graph_from_edgelist works", {
-  withr::local_seed(20230115)
+  igraph_local_seed(20230115)
 
   g <- sample_gnp(50, 5 / 50)
   el <- as_edgelist(g)
@@ -543,9 +714,9 @@ test_that("graphNEL conversion works", {
   expect_isomorphic(g, g2)
   expect_equal(V(g)$name, V(g2)$name)
 
-  A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
-  A2 <- as_adjacency_matrix(g2, attr = "weight", sparse = FALSE)
-  expect_equal(A, A)
+  A <- as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  A2 <- as_adjacency_matrix(g2, weights = "weight", sparse = FALSE)
+  expect_equal(A, A2)
   expect_equal(g$name, g2$name)
 })
 
@@ -638,7 +809,7 @@ test_that("edge names work", {
   g2 <- delete_edges(g, c("b", "d", "e"))
   expect_equal(
     as_edgelist(g2),
-    structure(c(1, 3, 6, 7, 8, 9, 1, 2, 4, 7, 8, 9, 10, 10), .Dim = c(7L, 2L))
+    structure(c(1, 3, 6, 7, 8, 9, 1, 2, 4, 7, 8, 9, 10, 10), dim = c(7L, 2L))
   )
 
   ## named vertices
@@ -649,7 +820,7 @@ test_that("edge names work", {
     as_edgelist(g3),
     structure(
       c("c", "d", "e", "g", "h", "i", "a", "d", "e", "f", "h", "i", "j", "j"),
-      .Dim = c(7L, 2L)
+      dim = c(7L, 2L)
     )
   )
 
@@ -658,7 +829,7 @@ test_that("edge names work", {
   g4 <- delete_edges(g, c("1|2", "8|7", "1|10"))
   expect_equal(
     as_edgelist(g4),
-    structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7, 9, 10), .Dim = c(7L, 2L))
+    structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7, 9, 10), dim = c(7L, 2L))
   )
 
   ## mix edge names and vertex names
@@ -670,7 +841,7 @@ test_that("edge names work", {
     as_edgelist(g5),
     structure(
       c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"),
-      .Dim = c(7L, 2L)
+      dim = c(7L, 2L)
     )
   )
 })
@@ -702,4 +873,332 @@ test_that("graph_from_data_frame works with factors", {
 
   expect_true(is.factor(V(g)$gender))
   expect_true(is.factor(g_actors$gender))
+})
+
+test_that("as_adjacency_matrix() comprehensive snapshot tests", {
+  # Directed, unweighted, sparse
+  g_dir_unwt <- make_graph(c(1, 2, 2, 3, 3, 1, 2, 2), directed = TRUE)
+  expect_snapshot(as_adjacency_matrix(g_dir_unwt, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "lower",
+    sparse = TRUE
+  ))
+
+  # Directed, unweighted, dense
+  expect_snapshot(as_adjacency_matrix(g_dir_unwt, sparse = FALSE))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_unwt,
+    type = "lower",
+    sparse = FALSE
+  ))
+
+  # Directed, weighted, sparse
+  g_dir_wt <- g_dir_unwt
+  E(g_dir_wt)$weight <- c(1.5, 2.3, 3.7, 0.5)
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    type = "lower",
+    sparse = TRUE
+  ))
+
+  # Directed, weighted, dense
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_dir_wt,
+    weights = "weight",
+    type = "lower",
+    sparse = FALSE
+  ))
+
+  # Undirected, unweighted, sparse
+  g_undir_unwt <- as_undirected(
+    make_graph(c(1, 2, 2, 3, 3, 1)),
+    mode = "collapse"
+  )
+  expect_snapshot(as_adjacency_matrix(g_undir_unwt, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "lower",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "both",
+    sparse = TRUE
+  ))
+
+  # Undirected, unweighted, dense
+  expect_snapshot(as_adjacency_matrix(g_undir_unwt, sparse = FALSE))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "lower",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_unwt,
+    type = "both",
+    sparse = FALSE
+  ))
+
+  # Undirected, weighted, sparse
+  g_undir_wt <- g_undir_unwt
+  E(g_undir_wt)$weight <- c(2.1, 3.2, 4.3)
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "upper",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "lower",
+    sparse = TRUE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "both",
+    sparse = TRUE
+  ))
+
+  # Undirected, weighted, dense
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "upper",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "lower",
+    sparse = FALSE
+  ))
+  expect_snapshot(as_adjacency_matrix(
+    g_undir_wt,
+    weights = "weight",
+    type = "both",
+    sparse = FALSE
+  ))
+
+  # With vertex names
+  g_named <- g_dir_unwt
+  V(g_named)$name <- c("A", "B", "C")
+  expect_snapshot(as_adjacency_matrix(g_named, sparse = TRUE))
+  expect_snapshot(as_adjacency_matrix(g_named, sparse = FALSE))
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("as_adj_list() covers tail args by name and recovers positional calls", {
+  # Parallel 1-2 edges plus a loop on vertex 3 make loops and multiple visible.
+  g <- make_graph(c(1, 2, 1, 2, 2, 3, 3, 3), directed = FALSE)
+
+  al_full <- as_adj_list(g, mode = "all", loops = "twice", multiple = TRUE)
+  expect_identical(
+    lapply(al_full, as.numeric),
+    list(c(2, 2), c(1, 1, 3), c(2, 3, 3))
+  )
+
+  al_slim <- as_adj_list(g, mode = "all", loops = "ignore", multiple = FALSE)
+  expect_identical(
+    lapply(al_slim, as.numeric),
+    list(2, c(1, 3), 2)
+  )
+
+  # The positional mode is visible on a directed path.
+  g_dir <- make_graph(c(1, 2, 2, 3))
+  lifecycle::expect_deprecated(
+    res <- as_adj_list(g_dir, "out")
+  )
+  expect_identical(
+    lapply(res, as.numeric),
+    lapply(as_adj_list(g_dir, mode = "out"), as.numeric)
+  )
+})
+
+test_that("as_adj_edge_list() covers tail args by name and recovers positional calls", {
+  # A triangle with a loop on vertex 1 makes the loops argument visible.
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 1), directed = FALSE)
+
+  # The loop edge is listed twice by default and dropped with "ignore".
+  ael_twice <- as_adj_edge_list(g, mode = "all", loops = "twice")
+  ael_ignore <- as_adj_edge_list(g, mode = "all", loops = "ignore")
+  expect_identical(as.numeric(ael_twice[[1]]), c(4, 4, 1, 3))
+  expect_identical(as.numeric(ael_ignore[[1]]), c(1, 3))
+
+  g_dir <- make_graph(c(1, 2, 2, 3))
+  lifecycle::expect_deprecated(
+    res <- as_adj_edge_list(g_dir, "out")
+  )
+  expect_identical(
+    lapply(res, as.numeric),
+    lapply(as_adj_edge_list(g_dir, mode = "out"), as.numeric)
+  )
+})
+
+test_that("as_directed() recovers positional mode with a deprecation", {
+  g <- make_ring(4)
+
+  lifecycle::expect_deprecated(
+    res <- as_directed(g, "arbitrary")
+  )
+  expect_identical_graphs(res, as_directed(g, mode = "arbitrary"))
+  # "arbitrary" keeps one directed edge per undirected edge.
+  expect_true(is_directed(res))
+  expect_ecount(res, 4)
+})
+
+test_that("as_edgelist() covers names by name and recovers positional calls", {
+  g <- make_ring(3)
+  V(g)$name <- c("a", "b", "c")
+
+  el_names <- as_edgelist(g, names = TRUE)
+  el_ids <- as_edgelist(g, names = FALSE)
+  expect_identical(el_names, rbind(c("a", "b"), c("b", "c"), c("a", "c")))
+  expect_identical(el_ids, rbind(c(1, 2), c(2, 3), c(1, 3)))
+
+  lifecycle::expect_deprecated(
+    res <- as_edgelist(g, FALSE)
+  )
+  expect_identical(res, as_edgelist(g, names = FALSE))
+})
+
+test_that("graph_from_adj_list() covers duplicate by name and recovers positional calls", {
+  g <- make_ring(6)
+  al <- as_adj_list(g, mode = "all")
+
+  # Every ring edge appears twice in the adjacency list,
+  # so duplicate = FALSE keeps both copies as parallel edges.
+  g_dup <- graph_from_adj_list(al, mode = "all", duplicate = TRUE)
+  g_nodup <- graph_from_adj_list(al, mode = "all", duplicate = FALSE)
+  expect_ecount(g_dup, 6)
+  expect_ecount(g_nodup, 12)
+  expect_true(any(which_multiple(g_nodup)))
+  expect_isomorphic(g, g_dup)
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_adj_list(al, "all")
+  )
+  expect_identical_graphs(res, graph_from_adj_list(al, mode = "all"))
+})
+
+test_that("graph_from_data_frame() recovers positional vertices with a deprecation", {
+  edges <- data.frame(from = c("a", "b"), to = c("b", "c"))
+  verts <- data.frame(name = c("a", "b", "c"), size = 1:3)
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_data_frame(edges, TRUE, verts)
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_data_frame(edges, directed = TRUE, vertices = verts)
+  )
+  # The vertex metadata from the recovered argument is present.
+  expect_identical(V(res)$size, 1:3)
+})
+
+test_that("graph_from_edgelist() recovers positional directed with a deprecation", {
+  el <- cbind(1:4, c(2:4, 1))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_edgelist(el, FALSE)
+  )
+  expect_identical_graphs(res, graph_from_edgelist(el, directed = FALSE))
+  expect_false(is_directed(res))
+  expect_ecount(res, 4)
+})
+
+test_that("graph_from_graphnel() covers tail args by name and recovers positional calls", {
+  skip_if_not_installed("graph")
+
+  # Round-trip fixture with vertex names, an extra vertex attribute,
+  # and edge weights.
+  g <- make_ring(4)
+  V(g)$name <- letters[1:4]
+  V(g)$score <- 1:4
+  E(g)$weight <- c(1, 2, 3, 4)
+  gnel <- as_graphnel(g)
+
+  g_full <- graph_from_graphnel(
+    gnel,
+    name = TRUE,
+    weight = TRUE,
+    unlist.attrs = TRUE
+  )
+  expect_isomorphic(g_full, g)
+  expect_identical(V(g_full)$name, letters[1:4])
+  expect_true(is_weighted(g_full))
+  expect_equal(sort(E(g_full)$weight), c(1, 2, 3, 4))
+  expect_equal(V(g_full)$score, 1:4, ignore_attr = TRUE)
+
+  g_min <- graph_from_graphnel(
+    gnel,
+    name = FALSE,
+    weight = FALSE,
+    unlist.attrs = FALSE
+  )
+  expect_false("name" %in% vertex_attr_names(g_min))
+  expect_false(is_weighted(g_min))
+  # With unlist.attrs = FALSE the attribute values stay wrapped in a list.
+  expect_true(is.list(V(g_min)$score))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_graphnel(gnel, FALSE)
+  )
+  expect_identical_graphs(res, graph_from_graphnel(gnel, name = FALSE))
 })

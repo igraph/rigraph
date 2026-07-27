@@ -101,7 +101,7 @@ INFILE:
     INCONV:
         IN: |-
             %C% = Ry_igraph_fopen_read(%I%);
-            IGRAPH_LOCAL_FINALLY(fclose, %C%);
+            IGRAPH_FINALLY(fclose, %C%);
 
 OUTFILE:
     CTYPE: FILE*
@@ -110,7 +110,7 @@ OUTFILE:
     INCONV:
         IN: |-
             %C% = Ry_igraph_fopen_write(%I%);
-            IGRAPH_LOCAL_FINALLY(fclose, %C%);
+            IGRAPH_FINALLY(fclose, %C%);
 
 REAL:
     CTYPE: igraph_real_t
@@ -271,7 +271,7 @@ VECTOR_LIST:
             IGRAPH_LOCAL_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_list_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
             IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
@@ -294,15 +294,19 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_LOCAL_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
-            IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            if (!Rf_isNull(%I%)) {
+              IGRAPH_LOCAL_R_CHECK(Ry_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+              IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
+            }
         OUT: |-
             IGRAPH_LOCAL_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_LOCAL_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
-            igraph_vector_int_list_destroy(&%C%);
-            IGRAPH_LOCAL_FINALLY_CLEAN(1);
+            if (!Rf_isNull(%I%)) {
+              igraph_vector_int_list_destroy(&%C%);
+              IGRAPH_LOCAL_FINALLY_CLEAN(1);
+            }
         OUT: |-
             PROTECT(%I%=Ry_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
@@ -369,6 +373,22 @@ EDGEWEIGHTS:
             PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_LOCAL_FINALLY_CLEAN(1);
+
+EDGE_LENGTHS:
+    # Edge lengths vector - no automatic attribute lookup (unlike EDGEWEIGHTS which checks for "weight" attribute)
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: Rz_SEXP_to_vector(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=Ry_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 VERTEXWEIGHTS:
     CALL: '&%C%'
@@ -440,6 +460,22 @@ MATRIX_INT:
             IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 VERTEX:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+    CTYPE: igraph_integer_t
+    INCONV:
+        IN: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        OUT: '%C% = -1;'
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
+
+EDGE:
+    # A single edge index
     CALL:
         IN: '%C%'
         INOUT: '&%C%'
@@ -591,6 +627,18 @@ VERTEX_INDEX_PAIRS:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
+INDEX_PAIRS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
+    INCONV:
+        IN: |-
+            Rz_SEXP_to_vector_int_copy(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 EDGE_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
@@ -622,7 +670,22 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%'
-    CTYPE: SEXP
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_EXTRA:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV:
+    CALL: '%I%'
+    CTYPE: ~
+    HEADER: '%I%'
+
+CLOSURE_ENV_ARP:
+    CALL: '%I%'
+    CTYPE: ~
     HEADER: '%I%'
 
 ISOCOMPAT_FUNC:
@@ -932,16 +995,20 @@ SIR_LIST:
             IGRAPH_LOCAL_FINALLY_CLEAN(1);
 
 PAGERANKOPT:
-    CTYPE: |-
+    CTYPE: void*
+    # The argument is optional,
+    # so the code generator wraps the input conversion into `if (!Rf_isNull(...))`.
+    # The pointer is passed on to igraph unconditionally,
+    # therefore it must be initialized here
+    # to stay well-defined on the path where the conversion is skipped.
+    CDECL: |-
       igraph_arpack_options_t %C%1;
-      void*
+      void* %C% = NULL;
     INCONV:
         INOUT: |-
           if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK) {
             Rz_SEXP_to_igraph_arpack_options(%I%, &%C%1);
             %C% = &%C%1;
-          } else {
-            %C% = NULL;
           }
     OUTCONV:
         INOUT: |-

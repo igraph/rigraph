@@ -5,12 +5,14 @@
 \alias{star}
 \title{Create a star graph, a tree with n vertices and n - 1 leaves}
 \usage{
-make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{It defines the direction of the
 edges, \verb{in}: the edges point \emph{to} the center, \code{out}:
@@ -27,28 +29,32 @@ An igraph graph.
 \code{star()} creates a star graph, in this every single vertex is
 connected to the center vertex and nobody else.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_star}{\code{star()}}
+}
+
 \examples{
 make_star(10, mode = "out")
 make_star(5, mode = "undirected")
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Star graph}
 \concept{deterministic constructors}

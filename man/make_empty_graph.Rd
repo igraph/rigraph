@@ -5,12 +5,14 @@
 \alias{empty_graph}
 \title{A graph with no edges}
 \usage{
-make_empty_graph(n = 0, directed = TRUE)
+make_empty_graph(n = 0, ..., directed = TRUE)
 
-empty_graph(n = 0, directed = TRUE)
+empty_graph(n = 0, ..., directed = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to create a directed graph.}
 }
@@ -20,30 +22,32 @@ An igraph graph.
 \description{
 A graph with no edges
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty}{\code{empty()}}
+}
+
 \examples{
 make_empty_graph(n = 10)
 make_empty_graph(n = 5, directed = FALSE)
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Empty graph.}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}.}
-
