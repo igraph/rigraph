@@ -6,6 +6,7 @@
 \usage{
 cluster_edge_betweenness(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -17,6 +18,8 @@ cluster_edge_betweenness(
 }
 \arguments{
 \item{graph}{The graph to analyze.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

@@ -156,15 +156,19 @@ soft-deprecation.
 
 The block is **generated in place**, not written by hand:
 
-- **`tools/migrations.R`** is the single source of truth. Each entry declares the
-  function's `old` and `new` signatures as literal R functions; renames and
-  defaults are read straight off their formals (a bare-symbol default in `old`,
-  e.g. `c = c_renamed`, means a rename). The schema is documented at the top of
-  that file.
-- **`tools/generate-migrations.R`** reads the registry and rewrites the code
-  between the `# BEGIN GENERATED ARG_HANDLE: <fn>` / `# END GENERATED ARG_HANDLE`
-  markers inside each function. Output is idempotent (running twice produces no
-  diff) and laid out exactly as `air` formats it, so the host files stay clean.
+- **`tools/migrations/<topic>.R`** are the source of truth: one registry file
+  per topic, mirroring the R source files, so parallel migration efforts do
+  not conflict on a single file. Each entry declares the function's `old` and
+  `new` signatures as literal R functions; renames and defaults are read
+  straight off their formals (a bare-symbol default in `old`, e.g.
+  `c = c_renamed`, means a rename). A function may be declared in only one
+  registry file; the generator stops with an error on duplicates. The schema
+  is documented in [`tools/migrations/README.md`](migrations/README.md).
+- **`tools/generate-migrations.R`** reads all registry files and rewrites the
+  code between the `# BEGIN GENERATED ARG_HANDLE: <fn>` / `# END GENERATED
+  ARG_HANDLE` markers inside each function. Output is idempotent (running
+  twice produces no diff) and laid out exactly as `air` formats it, so the
+  host files stay clean.
 
 Regenerate after editing the registry:
 

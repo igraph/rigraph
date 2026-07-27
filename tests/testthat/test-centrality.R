@@ -573,7 +573,7 @@ test_that("eigen_centrality() works", {
     evc,
     structure(
       c(0.732, 0.732, 0.594, 1, 0.827, 0.594, 0.827, 0.407, 0.1, 0.023),
-      .Names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")
+      names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")
     )
   )
 
@@ -857,7 +857,7 @@ test_that("arpack works for non-symmetric matrices", {
       1, -4, 9, -2, 10, 1, -7, 7, 6, 7, -3, 0, 9, -5, -8, 1, -3,
       -3, -8, -7, -8, 10, 8, 7, 0, 6, -7, -8, 10, 10, 1, 0, -2, 6
     ),
-    .Dim = c(10L, 10L)
+    dim = c(10L, 10L)
   )
 
   f <- function(x, extra = NULL) A %*% x

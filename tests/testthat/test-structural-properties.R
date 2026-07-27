@@ -513,7 +513,7 @@ test_that("transitivity() works", {
   t33 <- transitivity(g, type = "local")
   est3 <- structure(
     c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
-    .Names = c(
+    names = c(
       "Min.",
       "1st Qu.",
       "Median",
@@ -1058,7 +1058,7 @@ test_that("knn works", {
         knn = c(1, rep(9, 9)),
         knnk = c(9, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 1)
       ),
-      .Names = c("knn", "knnk")
+      names = c("knn", "knnk")
     )
   )
 })

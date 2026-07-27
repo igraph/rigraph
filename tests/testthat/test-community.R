@@ -100,8 +100,8 @@ test_that("communities function works", {
         `3` = c(9L, 10L, 15L, 16L, 19L, 21L, 23L, 27L, 30L, 31L, 33L, 34L),
         `4` = c(24L, 25L, 26L, 28L, 29L, 32L)
       ),
-      .Dim = 4L,
-      .Dimnames = list(c("1", "2", "3", "4"))
+      dim = 4L,
+      dimnames = list(c("1", "2", "3", "4"))
     )
   )
 
@@ -116,8 +116,8 @@ test_that("communities function works", {
         `1` = letters[1:5],
         `2` = letters[6:10]
       ),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 })
@@ -249,10 +249,10 @@ test_that("cluster_leading_eigen works", {
     sizes(karate_lc),
     structure(
       c(7L, 12L, 9L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -421,10 +421,10 @@ test_that("cluster_leiden works", {
     sizes(karate_leiden),
     structure(
       c(17L, 17L),
-      .Dim = 2L,
-      .Dimnames = structure(
+      dim = 2L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -445,10 +445,10 @@ test_that("cluster_leiden works", {
     sizes(karate_leiden_mod),
     structure(
       c(11L, 5L, 12L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -525,10 +525,10 @@ test_that("cluster_optimal works", {
     sizes(karate_optimal),
     structure(
       c(11L, 5L, 12L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(
+      dim = 4L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -569,10 +569,10 @@ test_that("cluster_walktrap works", {
     sizes(karate_walktrap),
     structure(
       c(9L, 7L, 9L, 4L, 5L),
-      .Dim = 5L,
-      .Dimnames = structure(
+      dim = 5L,
+      dimnames = structure(
         list(`Community sizes` = c("1", "2", "3", "4", "5")),
-        .Names = "Community sizes"
+        names = "Community sizes"
       ),
       class = "table"
     )
@@ -608,8 +608,8 @@ test_that("groups works", {
     gr,
     structure(
       list(`1` = 1:10, `2` = 11:15),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 
@@ -620,8 +620,8 @@ test_that("groups works", {
     gr,
     structure(
       list(`1` = letters[1:10], `2` = letters[11:15]),
-      .Dim = 2L,
-      .Dimnames = list(c("1", "2"))
+      dim = 2L,
+      dimnames = list(c("1", "2"))
     )
   )
 })

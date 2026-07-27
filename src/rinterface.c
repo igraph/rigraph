@@ -5346,8 +5346,6 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */
@@ -5422,8 +5420,6 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */
@@ -5497,8 +5493,6 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */

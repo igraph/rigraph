@@ -4,10 +4,12 @@
 \alias{centr_clo}
 \title{Centralize a graph according to the closeness of vertices}
 \usage{
-centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
+centr_clo(graph, ..., mode = c("out", "in", "all", "total"), normalized = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{This is the same as the \code{mode} argument of
 \code{closeness()}.}

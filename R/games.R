@@ -2135,9 +2135,37 @@ asym_pref <- function(
 ## -----------------------------------------------------------------
 
 #' @rdname ego
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @family functions for manipulating graph structure
-connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
+connect <- function(
+  graph,
+  order,
+  ...,
+  mode = c("all", "out", "in", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: connect, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in", "total")),
+      head_args = c("graph", "order"),
+      fn_name = "connect"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
 
