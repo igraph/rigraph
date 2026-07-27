@@ -28,14 +28,14 @@ walker. In other words, larger edge weights correspond to stronger connections.}
 
 \item{steps}{The length of the random walks to perform.}
 
-\item{merges}{Logical scalar, whether to include the merge matrix in the
+\item{merges}{Logical, whether to include the merge matrix in the
 result.}
 
-\item{modularity}{Logical scalar, whether to include the vector of the
+\item{modularity}{Logical, whether to include the vector of the
 modularity scores in the result. If the \code{membership} argument is true,
 then it will always be calculated.}
 
-\item{membership}{Logical scalar, whether to calculate the membership vector
+\item{membership}{Logical, whether to calculate the membership vector
 for the split corresponding to the highest modularity value.}
 }
 \description{
@@ -44,4 +44,8 @@ for the split corresponding to the highest modularity value.}
 \code{walktrap.community()} was renamed to \code{\link[=cluster_walktrap]{cluster_walktrap()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

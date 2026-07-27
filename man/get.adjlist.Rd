@@ -23,7 +23,7 @@ for both. This argument is ignored for undirected graphs.}
 (to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
 is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical scalar, set to \code{FALSE} to use only one representative
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative
 of each set of parallel edges.}
 }
 \description{
@@ -32,4 +32,8 @@ of each set of parallel edges.}
 \code{get.adjlist()} was renamed to \code{\link[=as_adj_list]{as_adj_list()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

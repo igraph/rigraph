@@ -7,6 +7,7 @@
 \usage{
 as_adj_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
@@ -14,12 +15,15 @@ as_adj_list(
 
 as_adj_edge_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 )
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
 to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
@@ -30,7 +34,7 @@ for both. This argument is ignored for undirected graphs.}
 (to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
 is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical scalar, set to \code{FALSE} to use only one representative
+\item{multiple}{Logical, set to \code{FALSE} to use only one representative
 of each set of parallel edges.}
 }
 \value{
@@ -44,12 +48,12 @@ Create adjacency lists from a graph, either for adjacent edges or for
 neighboring vertices
 }
 \details{
-\code{as_adj_list()} returns a list of numeric vectors, which include the ids
+\code{as_adj_list()} returns a list of numeric vectors, which include the IDs
 of neighbor vertices (according to the \code{mode} argument) of all
 vertices.
 
 \code{as_adj_edge_list()} returns a list of numeric vectors, which include the
-ids of adjacent edges (according to the \code{mode} argument) of all
+IDs of adjacent edges (according to the \code{mode} argument) of all
 vertices. The return type depends on the \code{return.vs.es} option: if true
 (default), a list of \code{igraph.es} is returned; if false, a list of numeric
 vectors is returned.
@@ -58,6 +62,10 @@ If \code{igraph_opt("return.vs.es")} is true (default), the numeric
 vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
 a very expensive operation on large graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -68,17 +76,17 @@ as_adj_edge_list(g)
 \seealso{
 \code{\link[=as_edgelist]{as_edgelist()}}, \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}
 
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}},
+\code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_graphnel]{as_graphnel()}},
+\code{\link[=as_long_data_frame]{as_long_data_frame()}},
+\code{\link[=graph_from_adj_list]{graph_from_adj_list()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

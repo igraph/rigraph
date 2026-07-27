@@ -25,10 +25,10 @@ For \code{eulerian_path()} and \code{eulerian_cycle()}, a named list with two
 entries:
 \describe{
 \item{epath}{
-A vector containing the edge ids along the Eulerian path or cycle.
+A vector containing the edge IDs along the Eulerian path or cycle.
 }
 \item{vpath}{
-A vector containing the vertex ids along the Eulerian path or cycle.
+A vector containing the vertex IDs along the Eulerian path or cycle.
 }
 }
 }
@@ -51,6 +51,10 @@ once and that returns to its starting point, and returns a logical value as
 a result. \code{eulerian_cycle()} returns a possible Eulerian cycle, described
 with its edge and vertex sequence, or throws an error if no such cycle exists.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian}{\code{is_eulerian()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path}{\code{eulerian_path()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle}{\code{eulerian_cycle()}}
+}
+
 \examples{
 
 g <- make_graph(~ A - B - C - D - E - A - F - D - B - F - E)
@@ -63,16 +67,14 @@ try(eulerian_cycle(g))
 
 }
 \seealso{
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{find_cycle}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{simple_cycles}()}
+Graph cycles:
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=find_cycle]{find_cycle()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=simple_cycles]{simple_cycles()}}
 }
 \concept{cycles}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian}{\code{is_eulerian()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path}{\code{eulerian_path()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle}{\code{eulerian_cycle()}}.}
-

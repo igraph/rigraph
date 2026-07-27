@@ -6,6 +6,7 @@
 \usage{
 centr_degree(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
@@ -14,13 +15,15 @@ centr_degree(
 \arguments{
 \item{graph}{The input graph.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{mode}{This is the same as the \code{mode} argument of
 \code{degree()}.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
+\item{loops}{Logical, whether to consider loops edges when
 calculating the degree.}
 
-\item{normalized}{Logical scalar. Whether to normalize the graph level
+\item{normalized}{Logical. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
 }
 \value{
@@ -44,6 +47,10 @@ then the result was divided by this number.
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}
+}
+
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
@@ -53,16 +60,14 @@ centr_betw(g, directed = FALSE)$centralization
 centr_eigen(g, directed = FALSE)$centralization
 }
 \seealso{
-Other centralization related: 
-\code{\link{centr_betw}()},
-\code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
-\code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
-\code{\link{centr_eigen_tmax}()},
-\code{\link{centralize}()}
+Other centralization related:
+\code{\link[=centr_betw]{centr_betw()}},
+\code{\link[=centr_betw_tmax]{centr_betw_tmax()}},
+\code{\link[=centr_clo]{centr_clo()}},
+\code{\link[=centr_clo_tmax]{centr_clo_tmax()}},
+\code{\link[=centr_degree_tmax]{centr_degree_tmax()}},
+\code{\link[=centr_eigen]{centr_eigen()}},
+\code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}},
+\code{\link[=centralize]{centralize()}}
 }
 \concept{centralization related}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_degree}{\code{centralization_degree()}}.}
-

@@ -15,7 +15,7 @@ minimum.spanning.tree <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
+  lifecycle::deprecate_warn("2.0.0", "minimum.spanning.tree()", "mst()")
   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
 } # nocov end
 #   IGraph R package
@@ -53,7 +53,7 @@ minimum.spanning.tree <- function(
 #'
 #' @param graph The graph object to analyze.
 #' @param weights Numeric vector giving the weights of the edges in the
-#'   graph. The order is determined by the edge ids. This is ignored if the
+#'   graph. The order is determined by the edge IDs. This is ignored if the
 #'   `unweighted` algorithm is chosen. Edge weights are interpreted as
 #'   distances.
 #' @param algorithm The algorithm to use for calculation. `unweighted` can
@@ -91,16 +91,19 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
   }
 
   if (algorithm == "unweighted") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
+    minimum_spanning_tree_unweighted_impl(
+      graph = graph
+    )
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
       cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
+    minimum_spanning_tree_prim_impl(
+      graph = graph,
+      weights = weights
+    )
   } else {
     cli::cli_abort("Invalid {.arg algorithm}.")
   }

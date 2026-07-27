@@ -30,4 +30,8 @@ this.}
 \code{as.undirected()} was renamed to \code{\link[=as_undirected]{as_undirected()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_to_undirected}{\code{to_undirected()}}
+}
+
 \keyword{internal}

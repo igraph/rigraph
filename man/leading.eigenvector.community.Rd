@@ -35,9 +35,9 @@ configuration of the algorithm.}
 
 \item{options}{A named list to override some ARPACK options.}
 
-\item{callback}{If not \code{NULL}, then it must be callback function. This
+\item{callback}{Callback function. This
 is called after each iteration, after calculating the leading eigenvector of
-the modularity matrix. See details below.}
+the modularity matrix. See details below. Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
@@ -49,4 +49,8 @@ the modularity matrix. See details below.}
 \code{leading.eigenvector.community()} was renamed to \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}
