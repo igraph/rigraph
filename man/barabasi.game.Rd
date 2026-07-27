@@ -23,8 +23,9 @@ barabasi.game(
 \item{power}{The power of the preferential attachment, the default is one,
 i.e. linear preferential attachment.}
 
-\item{m}{Numeric constant, the number of edges to add in each time step This
-argument is only used if both \code{out.dist} and \code{out.seq} are omitted
+\item{m}{Numeric constant, the number of edges to add in each time step,
+defaults to 1.
+This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
 or NULL.}
 
 \item{out.dist}{Numeric vector, the distribution of the number of edges to
@@ -51,7 +52,7 @@ partial prefix-sum tree, but the generation of multiple edges is allowed.
 Before the 0.6 version igraph used this algorithm if \code{power} was not
 one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
 was previously (before version 0.6) used if \code{power} was one and
-\code{zero.appeal} was one as well. It works by putting the ids of the
+\code{zero.appeal} was one as well. It works by putting the IDs of the
 vertices into a bag (multiset, really), exactly as many times as their
 (in-)degree, plus once more. Then the required number of cited vertices are
 drawn from the bag, with replacement. This method might generate multiple
@@ -70,4 +71,8 @@ contain the out degrees of the new vertices only, not the ones in the
 \code{barabasi.game()} was renamed to \code{\link[=sample_pa]{sample_pa()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_barabasi_game}{\code{barabasi_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

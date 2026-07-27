@@ -4,11 +4,13 @@
 \alias{sample_spanning_tree}
 \title{Samples from the spanning trees of a graph randomly and uniformly}
 \usage{
-sample_spanning_tree(graph, vid = NULL)
+sample_spanning_tree(graph, ..., vid = NULL)
 }
 \arguments{
 \item{graph}{The input graph to sample from. Edge directions are ignored if
 the graph is directed.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vid}{When the graph is disconnected, this argument specifies how to
 handle the situation. When the argument is \code{NULL} (the default), the sampling
@@ -25,6 +27,10 @@ An edge sequence containing the edges of the spanning tree. Use
 \code{sample_spanning_tree()} picks a spanning tree of an undirected graph
 randomly and uniformly, using loop-erased random walks.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 
 g <- make_full_graph(10) \%du\% make_full_graph(5)
@@ -35,13 +41,11 @@ forest <- subgraph_from_edges(g, edges)
 \seealso{
 \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the tree itself
 
-Other trees: 
-\code{\link{is_forest}()},
-\code{\link{is_tree}()},
-\code{\link{make_from_prufer}()},
-\code{\link{to_prufer}()}
+Other trees:
+\code{\link[=is_forest]{is_forest()}},
+\code{\link[=is_tree]{is_tree()}},
+\code{\link[=make_from_prufer]{make_from_prufer()}},
+\code{\link[=to_prufer]{to_prufer()}}
 }
 \concept{trees}
 \keyword{graph}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}.}
-

@@ -16,7 +16,16 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(...)
+lattice(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+)
 }
 \arguments{
 \item{dimvector}{A vector giving the size of the lattice in each
@@ -35,13 +44,11 @@ lattice will be connected. This parameter is not used right now.}
 \item{mutual}{Logical, if \code{TRUE} directed lattices will be
 mutually connected.}
 
-\item{periodic}{Logical vector, Boolean vector, defines whether the generated lattice is
-periodic along each dimension. This parameter may also be scalar boolen value which will
-be extended to boolean vector with dimvector length.}
+\item{periodic}{Logical vector, defines whether the generated lattice is
+periodic along each dimension. This parameter may also be a single logical which will
+be extended to a logical vector of `dimvector`` length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
-
-\item{...}{Passed to \code{make_lattice()}.}
 }
 \value{
 An igraph graph.
@@ -53,30 +60,32 @@ forms. In the first form you only supply \code{dimvector}, but not
 \code{length} and \code{dim}. In the second form you omit
 \code{dimvector} and supply \code{length} and \code{dim}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}
+}
+
 \examples{
 make_lattice(c(5, 5, 5))
 make_lattice(length = 5, dim = 3)
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{Lattice}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}.}
-

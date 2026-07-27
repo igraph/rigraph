@@ -5,19 +5,33 @@
 \alias{\%s\%}
 \title{Intersection of graphs}
 \usage{
-\method{intersection}{igraph}(..., byname = "auto", keep.all.vertices = TRUE)
+\method{intersection}{igraph}(
+  ...,
+  byname = "auto",
+  keep.all.vertices = TRUE,
+  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  vertex.attr.comb = "rename",
+  edge.attr.comb = "rename"
+)
 }
 \arguments{
 \item{\dots}{Graph objects or lists of graph objects.}
 
-\item{byname}{A logical scalar, or the character scalar \code{auto}. Whether
+\item{byname}{A Logical, or the character scalar \code{auto}. Whether
 to perform the operation based on symbolic vertex names. If it is
 \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
 otherwise. A warning is generated if \code{auto} and some (but not all)
 graphs are named.}
 
-\item{keep.all.vertices}{Logical scalar, whether to keep vertices that only
+\item{keep.all.vertices}{Logical, whether to keep vertices that only
 appear in a subset of the input graphs.}
+
+\item{graph.attr.comb, vertex.attr.comb, edge.attr.comb}{Specification for
+combining clashing graph, vertex and edge attributes. \code{vertex.attr.comb}
+and \code{edge.attr.comb} default to \code{"rename"}; \code{graph.attr.comb} defaults to
+the \code{graph.attr.comb} igraph option (\code{"rename"} unless changed via
+\code{\link[=igraph_options]{igraph_options()}}). See \link{igraph-attribute-combination} for the available
+combiners.}
 }
 \value{
 A new graph object.
@@ -33,12 +47,15 @@ operator is \verb{\%s\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead
-of the internal numeric vertex ids.
+of the internal numeric vertex IDs.
 
 \code{intersection()} keeps the attributes of all graphs. All graph,
-vertex and edge attributes are copied to the result. If an attribute is
-present in multiple graphs and would result a name clash, then this
-attribute is renamed by adding suffixes: _1, _2, etc.
+vertex and edge attributes are copied to the result. By default, if an
+attribute is present in multiple graphs and would result in a name clash,
+that attribute is renamed by adding suffixes: \verb{_1}, \verb{_2}, etc. Pass
+\code{graph.attr.comb}, \code{vertex.attr.comb} or \code{edge.attr.comb} to combine
+clashing attributes instead; see \link{igraph-attribute-combination} for the
+available combiners.
 
 The \code{name} vertex attribute is treated specially if the operation is
 performed based on symbolic vertex names. In this case \code{name} must be
@@ -47,6 +64,10 @@ present in all graphs, and it is not renamed in the result graph.
 An error is generated if some input graphs are directed and others are
 undirected.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 ## Common part of two social networks
@@ -58,31 +79,31 @@ net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 \%s\% net2)
 }
 \seealso{
-Other functions for manipulating graph structure: 
-\code{\link{+.igraph}()},
-\code{\link{add_edges}()},
-\code{\link{add_vertices}()},
-\code{\link{complementer}()},
-\code{\link{compose}()},
-\code{\link{connect}()},
-\code{\link{contract}()},
-\code{\link{delete_edges}()},
-\code{\link{delete_vertices}()},
-\code{\link{difference}()},
-\code{\link{difference.igraph}()},
-\code{\link{disjoint_union}()},
-\code{\link{edge}()},
+Other functions for manipulating graph structure:
+\code{\link[=+.igraph]{+.igraph()}},
+\code{\link[=add_edges]{add_edges()}},
+\code{\link[=add_vertices]{add_vertices()}},
+\code{\link[=complementer]{complementer()}},
+\code{\link[=compose]{compose()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=contract]{contract()}},
+\code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}},
+\code{\link[=difference]{difference()}},
+\code{\link[=difference.igraph]{difference.igraph()}},
+\code{\link[=disjoint_union]{disjoint_union()}},
+\code{\link[=edge]{edge()}},
 \code{\link{igraph-minus}},
-\code{\link{intersection}()},
-\code{\link{path}()},
-\code{\link{permute}()},
-\code{\link{rep.igraph}()},
-\code{\link{reverse_edges}()},
-\code{\link{simplify}()},
-\code{\link{transitive_closure}()},
-\code{\link{union}()},
-\code{\link{union.igraph}()},
-\code{\link{vertex}()}
+\code{\link[=intersection]{intersection()}},
+\code{\link[=path]{path()}},
+\code{\link[=permute]{permute()}},
+\code{\link[=rep.igraph]{rep.igraph()}},
+\code{\link[=reverse_edges]{reverse_edges()}},
+\code{\link[=simplify]{simplify()}},
+\code{\link[=transitive_closure]{transitive_closure()}},
+\code{\link[=union]{union()}},
+\code{\link[=union.igraph]{union.igraph()}},
+\code{\link[=vertex]{vertex()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

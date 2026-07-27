@@ -17,7 +17,7 @@ graph.adjacency <- function(
   add.rownames = NA
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "graph.adjacency()",
     "graph_from_adjacency_matrix()"
@@ -136,6 +136,7 @@ graph.adjacency <- function(
 #'
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
 #'   can be a sparse matrix created with the `Matrix` package.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character scalar, specifies how igraph should interpret the
 #'   supplied matrix. See also the `weighted` argument, the interpretation
 #'   depends on that too. Possible values are: `directed`,
@@ -149,7 +150,7 @@ graph.adjacency <- function(
 #'   edge attribute named by the `weighted` argument. If it is `TRUE`
 #'   then a weighted graph is created and the name of the edge attribute will be
 #'   `weight`. See also details below.
-#' @param diag Logical scalar, whether to include the diagonal of the matrix in
+#' @param diag Logical, whether to include the diagonal of the matrix in
 #'   the calculation. If this is `FALSE` then the diagonal is zerod out
 #'   first.
 #' @param add.colnames Character scalar, whether to add the column names as
@@ -264,7 +265,7 @@ graph.adjacency <- function(
 #'
 #' ## row/column names
 #' rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
-#' colnames(adj_matrix) <- seq(ncol(adj_matrix))
+#' colnames(adj_matrix) <- seq_len(ncol(adj_matrix))
 #' g10 <- graph_from_adjacency_matrix(
 #'   adj_matrix,
 #'   weighted = TRUE,
@@ -275,6 +276,7 @@ graph.adjacency <- function(
 #' @export
 graph_from_adjacency_matrix <- function(
   adjmatrix,
+  ...,
   mode = c(
     "directed",
     "undirected",
@@ -289,11 +291,68 @@ graph_from_adjacency_matrix <- function(
   add.colnames = NULL,
   add.rownames = NA
 ) {
-  ensure_no_na(adjmatrix, "adjacency matrix")
+  # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ad"),
+      "graph_from_adjacency_matrix"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        weighted = weighted,
+        diag = diag,
+        add.colnames = add.colnames,
+        add.rownames = add.rownames
+      ),
+      recover_new = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      recover_old = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      match_names = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
+      defaults = list(
+        mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+        weighted = NULL,
+        diag = TRUE,
+        add.colnames = NULL,
+        add.rownames = NA
+      ),
+      head_args = c("adjmatrix"),
+      fn_name = "graph_from_adjacency_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
+  ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
     )
@@ -302,7 +361,7 @@ graph_from_adjacency_matrix <- function(
 
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
-      lifecycle::deprecate_soft(
+      lifecycle::deprecate_warn(
         "1.6.0",
         "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
         details = 'Use mode = "max" to achieve the original behavior.'
@@ -377,22 +436,95 @@ graph_from_adjacency_matrix <- function(
 
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
-    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0))
+    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
   if (is.matrix(x)) {
-    return(isSymmetric.matrix(x, tol = 0, tol1 = 0))
+    return(isSymmetric.matrix(x, tol = 0, tol1 = 0, check.attributes = FALSE))
   }
 
-  return(isSymmetric(x, tol = 0, tol1 = 0))
+  return(isSymmetric(x, tol = 0, tol1 = 0, check.attributes = FALSE))
 }
 
 #' @rdname graph_from_adjacency_matrix
-#' @param ... Passed to `graph_from_adjacency_matrix()`.
+#' @inheritParams rlang::args_dots_empty
 #' @family adjacency
 #' @export
-from_adjacency <- function(...) {
-  constructor_spec(graph_from_adjacency_matrix, ...)
+from_adjacency <- function(
+  adjmatrix,
+  ...,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+) {
+  # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("a", "ad"),
+      "from_adjacency"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        weighted = weighted,
+        diag = diag,
+        add.colnames = add.colnames,
+        add.rownames = add.rownames
+      ),
+      recover_new = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      recover_old = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      match_names = c(
+        "mode",
+        "weighted",
+        "diag",
+        "add.colnames",
+        "add.rownames"
+      ),
+      match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
+      defaults = list(
+        mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+        weighted = NULL,
+        diag = TRUE,
+        add.colnames = NULL,
+        add.rownames = NA
+      ),
+      head_args = c("adjmatrix"),
+      fn_name = "from_adjacency"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  constructor_spec(
+    graph_from_adjacency_matrix,
+    adjmatrix = adjmatrix,
+    mode = mode,
+    weighted = weighted,
+    diag = diag,
+    add.colnames = add.colnames,
+    add.rownames = add.rownames
+  )
 }
 
 graph.adjacency.dense <- function(
@@ -401,22 +533,11 @@ graph.adjacency.dense <- function(
   weighted = NULL,
   diag = c("once", "twice", "ignore")
 ) {
-  mode <- switch(
-    mode,
-    "directed" = 0L,
-    "undirected" = 1L,
-    "upper" = 2L,
-    "lower" = 3L,
-    "min" = 4L,
-    "plus" = 5L,
-    "max" = 6L
-  )
-
   if (is.logical(diag)) {
     diag <- ifelse(diag, "once", "ignore")
   }
   diag <- igraph_match_arg(diag)
-  diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
+  loops <- switch(diag, "ignore" = "none", "twice" = "twice", "once" = "once")
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
     cli::cli_abort("Adjacency matrices must be square.")
@@ -430,11 +551,14 @@ graph.adjacency.dense <- function(
     weighted <- NULL
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(weighted)) {
-    res <- .Call(Rx_igraph_adjacency, adjmatrix, mode, diag)
+    res <- adjacency_impl(adjmatrix = adjmatrix, mode = mode, loops = loops)
   } else {
-    res <- .Call(Rx_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- weighted_adjacency_impl(
+      adjmatrix = adjmatrix,
+      mode = mode,
+      loops = loops
+    )
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
@@ -488,8 +612,9 @@ graph.adjacency.sparse <- function(
   }
 
   vc <- nrow(adjmatrix)
-  # Exit early for empty graphs
-  if (vc == 1 || Matrix::nnzero(adjmatrix) == 0) {
+  # Exit early for empty graphs. Use na.counted = TRUE so that NA entries
+  # (which are stored explicitly) do not cause nnzero() to return NA.
+  if (vc == 1 || Matrix::nnzero(adjmatrix, na.counted = TRUE) == 0) {
     return(make_empty_graph(n = vc, directed = (mode == "directed")))
   }
 

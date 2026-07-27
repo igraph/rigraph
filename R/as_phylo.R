@@ -10,7 +10,7 @@
 #' @inheritParams ape::as.phylo
 #' @keywords internal
 as_phylo <- function(x, ...) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "1.5.0",
     "ape::as.phylo()"
   )

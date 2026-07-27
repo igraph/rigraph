@@ -15,7 +15,7 @@ assortativity.nominal <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "assortativity.nominal()",
     "assortativity_nominal()"
@@ -40,7 +40,7 @@ assortativity.nominal <- function(
 #' @export
 assortativity.degree <- function(graph, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.0.0",
     "assortativity.degree()",
     "assortativity_degree()"
@@ -130,14 +130,14 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'   This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
-#' @param directed Logical scalar, whether to consider edge directions for
+#' @param directed Logical, whether to consider edge directions for
 #'   directed graphs.
 #'   This argument is ignored for undirected graphs.
 #'   Supply
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
-#' @param normalized Boolean, whether to compute the normalized assortativity.
+#' @param normalized Logical, whether to compute the normalized assortativity.
 #' The non-normalized nominal assortativity is identical to modularity.
 #' The non-normalized value-based assortativity is simply the covariance of the
 #' values at the two ends of edges.
@@ -160,7 +160,6 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-#' @cdocs igraph_assortativity
 assortativity <- function(
   graph,
   values,
@@ -172,7 +171,7 @@ assortativity <- function(
   types2 = NULL
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "assortativity(... =)",
       details = "Arguments `values` and `values.in` must be named."
@@ -194,7 +193,7 @@ assortativity <- function(
   }
 
   if (missing(values)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "assortativity(types1 =)",
       "assortativity(values =)"
@@ -203,7 +202,7 @@ assortativity <- function(
   }
 
   if (!is.null(types2)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "1.6.0",
       "assortativity(types2 =)",
       "assortativity(values.in =)"
@@ -237,16 +236,45 @@ assortativity_legacy <- function(
 
 #' @param types Vector giving the vertex types. They as assumed to be integer
 #'   numbers, starting with one. Non-integer values are converted to integers
-#'   with [as.integer()].
+#'   with [as.integer()]. Character vectors are converted to integers using
+#'   [as.factor()].
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_assortativity_nominal
 assortativity_nominal <- function(
   graph,
   types,
+  ...,
   directed = TRUE,
   normalized = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_nominal, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed, normalized = normalized),
+      recover_new = c("directed", "normalized"),
+      recover_old = c("directed", "normalized"),
+      match_names = c("directed", "normalized"),
+      match_to = c("directed", "normalized"),
+      defaults = list(directed = TRUE, normalized = TRUE),
+      head_args = c("graph", "types"),
+      fn_name = "assortativity_nominal"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  # Convert character types to factor then to integer for categorical data
+  if (is.character(types)) {
+    types <- as.integer(as.factor(types))
+  }
+
   assortativity_nominal_impl(
     graph = graph,
     types = types,
@@ -256,9 +284,35 @@ assortativity_nominal <- function(
 }
 
 #' @rdname assortativity
+#' @inheritParams rlang::args_dots_empty
 #' @export
-#' @cdocs igraph_assortativity_degree
-assortativity_degree <- function(graph, directed = TRUE) {
+assortativity_degree <- function(
+  graph,
+  ...,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: assortativity_degree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "assortativity_degree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   assortativity_degree_impl(
     graph = graph,
     directed = directed

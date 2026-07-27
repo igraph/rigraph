@@ -16,7 +16,7 @@ layout.drl(
 \arguments{
 \item{graph}{The input graph, in can be directed or undirected.}
 
-\item{use.seed}{Logical scalar, whether to use the coordinates given in the
+\item{use.seed}{Logical, whether to use the coordinates given in the
 \code{seed} argument as a starting point.}
 
 \item{seed}{A matrix with two columns, the starting coordinates for the
@@ -44,4 +44,8 @@ significantly longer to compute.}
 \code{layout.drl()} was renamed to \code{\link[=layout_with_drl]{layout_with_drl()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

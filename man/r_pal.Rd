@@ -18,9 +18,9 @@ colors of older igraph versions. Its colors are appropriate
 for categories, but they are not very attractive.
 }
 \seealso{
-Other palettes: 
-\code{\link{categorical_pal}()},
-\code{\link{diverging_pal}()},
-\code{\link{sequential_pal}()}
+Other palettes:
+\code{\link[=categorical_pal]{categorical_pal()}},
+\code{\link[=diverging_pal]{diverging_pal()}},
+\code{\link[=sequential_pal]{sequential_pal()}}
 }
 \concept{palettes}

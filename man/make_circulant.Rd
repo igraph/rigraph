@@ -5,18 +5,18 @@
 \alias{circulant}
 \title{Create a circulant graph}
 \usage{
-make_circulant(n, shifts, directed = FALSE)
+make_circulant(n, shifts, ..., directed = FALSE)
 
-circulant(...)
+circulant(n, shifts, ..., directed = FALSE)
 }
 \arguments{
 \item{n}{Integer, the number of vertices in the circulant graph.}
 
 \item{shifts}{Integer vector, a list of the offsets within the circulant graph.}
 
-\item{directed}{Boolean, whether to create a directed graph.}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{...}{Passed to \code{make_circulant()}.}
+\item{directed}{Logical, whether to create a directed graph.}
 }
 \value{
 An igraph graph.
@@ -30,6 +30,10 @@ A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
 The function can generate either directed or undirected graphs.
 It does not generate multi-edges or self-loops.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_circulant}{\code{circulant()}}
+}
+
 \examples{
 # Create a circulant graph with 10 vertices and shifts 1 and 3
 g <- make_circulant(10, c(1, 3))
@@ -40,22 +44,22 @@ g2 <- make_circulant(10, c(1, 3), directed = TRUE)
 plot(g2, layout = layout_in_circle)
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()},
-\code{\link{make_wheel}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}},
+\code{\link[=make_wheel]{make_wheel()}}
 }
 \concept{deterministic constructors}

@@ -1,5 +1,7 @@
 me <- unname(desc::desc_get("Package"))
 
+# pkgbuild::build(dest_path = ".", args = c("--no-build-vignettes", "--no-manual"))
+
 last <- dir(pattern = paste0("^", me, "_.*[.]tar[.]gz$"))
 stopifnot(length(last) == 1)
 last
@@ -10,7 +12,7 @@ second <- unlist(tools::package_dependencies(strong, reverse = TRUE), use.names 
 bad <- c("streamDAG", "Seurat", "bsts")
 packages <- unique(c(strong, second))
 
-revdepcheck::cloud_check(tarball = last, revdep_packages = packages, r_version = "4.4.0")
+revdepcheck::cloud_check(tarball = last, revdep_packages = packages)
 unlink(last)
 revdepcheck::cloud_status()
 revdepcheck::cloud_report()

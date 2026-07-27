@@ -17,9 +17,9 @@ assortativity(
   types2 = NULL
 )
 
-assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
+assortativity_nominal(graph, types, ..., directed = TRUE, normalized = TRUE)
 
-assortativity_degree(graph, directed = TRUE)
+assortativity_degree(graph, ..., directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
@@ -36,7 +36,7 @@ This
 argument is ignored (with a warning) if it is not \code{NULL} and undirected
 assortativity coefficient is being calculated.}
 
-\item{directed}{Logical scalar, whether to consider edge directions for
+\item{directed}{Logical, whether to consider edge directions for
 directed graphs.
 This argument is ignored for undirected graphs.
 Supply
@@ -44,7 +44,7 @@ Supply
 measure for directed graphs and the undirected version for undirected
 graphs.}
 
-\item{normalized}{Boolean, whether to compute the normalized assortativity.
+\item{normalized}{Logical, whether to compute the normalized assortativity.
 The non-normalized nominal assortativity is identical to modularity.
 The non-normalized value-based assortativity is simply the covariance of the
 values at the two ends of edges.}
@@ -54,7 +54,8 @@ Deprecated aliases for \code{values} and \code{values.in}, respectively.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with \code{\link[=as.integer]{as.integer()}}.}
+with \code{\link[=as.integer]{as.integer()}}. Character vectors are converted to integers using
+\code{\link[=as.factor]{as.factor()}}.}
 }
 \value{
 A single real number.
@@ -107,6 +108,10 @@ and calls \code{assortativity()}.
 Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
 Thus, self-loops are taken into account twice in undirected graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
+}
+
 \examples{
 
 # random network, close to zero
@@ -126,5 +131,3 @@ M. E. J. Newman: Assortative mixing in networks, \emph{Phys. Rev. Lett.} 89,
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}.}
-

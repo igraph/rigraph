@@ -7,6 +7,7 @@
 predict_edges(
   graph,
   hrg = NULL,
+  ...,
   start = FALSE,
   num.samples = 10000,
   num.bins = 25
@@ -21,6 +22,8 @@ directed graphs.}
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}
 
@@ -34,7 +37,7 @@ number for a more accurate prediction.}
 A list with entries:
 \describe{
 \item{edges}{
-The predicted edges, in a two-column matrix of vertex ids.
+The predicted edges, in a two-column matrix of vertex IDs.
 }
 \item{prob}{
 Probabilities of these edges, according to the fitted model.
@@ -52,6 +55,10 @@ sampling is stated from \code{hrg()}, if it is given and the \code{start}
 argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 first.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_predict}{\code{hrg_predict()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 \dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 
@@ -79,14 +86,14 @@ Notes in Computer Science} 4503, 1--13. Springer-Verlag, Berlin Heidelberg
 (2007).
 }
 \seealso{
-Other hierarchical random graph functions: 
-\code{\link{consensus_tree}()},
-\code{\link{fit_hrg}()},
-\code{\link{hrg}()},
+Other hierarchical random graph functions:
+\code{\link[=consensus_tree]{consensus_tree()}},
+\code{\link[=fit_hrg]{fit_hrg()}},
+\code{\link[=hrg]{hrg()}},
 \code{\link{hrg-methods}},
-\code{\link{hrg_tree}()},
-\code{\link{print.igraphHRG}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{sample_hrg}()}
+\code{\link[=hrg_tree]{hrg_tree()}},
+\code{\link[=print.igraphHRG]{print.igraphHRG()}},
+\code{\link[=print.igraphHRGConsensus]{print.igraphHRGConsensus()}},
+\code{\link[=sample_hrg]{sample_hrg()}}
 }
 \concept{hierarchical random graph functions}

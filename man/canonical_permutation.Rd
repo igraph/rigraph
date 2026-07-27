@@ -7,6 +7,7 @@
 canonical_permutation(
   graph,
   colors = NULL,
+  ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 )
 }
@@ -19,6 +20,8 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{sh}{Type of the heuristics to use for the BLISS algorithm. See details
 for possible values.}
@@ -93,6 +96,10 @@ Smallest maximally non-trivially connected non-singleton cell.
 See the paper in references for details
 about these.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{canonical_permutation()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## Calculate the canonical form of a random graph
@@ -123,15 +130,15 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \code{\link[=isomorphic]{isomorphic()}} for deciding graph isomorphism, possibly
 based on canonical labels.
 
-Other graph isomorphism: 
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \author{
 Tommi Junttila for BLISS, Gabor Csardi
@@ -139,5 +146,3 @@ Tommi Junttila for BLISS, Gabor Csardi
 }
 \concept{graph isomorphism}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{canonical_permutation()}}.}
-

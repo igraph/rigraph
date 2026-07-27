@@ -7,12 +7,12 @@
 \usage{
 make_wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-wheel(...)
+wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
 
-\item{...}{Passed to \code{make_wheel()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{It defines the direction of the edges.
 \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the
@@ -38,30 +38,32 @@ Note that the two and three-vertex wheel graphs are non-simple: The
 two-vertex wheel graph contains a self-loop, while the three-vertex wheel
 graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_wheel}{\code{wheel()}}
+}
+
 \examples{
 make_wheel(10, mode = "out")
 make_wheel(5, mode = "undirected")
 }
 \seealso{
-Other deterministic constructors: 
-\code{\link{graph_from_atlas}()},
-\code{\link{graph_from_edgelist}()},
-\code{\link{graph_from_literal}()},
-\code{\link{make_}()},
-\code{\link{make_chordal_ring}()},
-\code{\link{make_circulant}()},
-\code{\link{make_empty_graph}()},
-\code{\link{make_full_citation_graph}()},
-\code{\link{make_full_graph}()},
-\code{\link{make_full_multipartite}()},
-\code{\link{make_graph}()},
-\code{\link{make_lattice}()},
-\code{\link{make_ring}()},
-\code{\link{make_star}()},
-\code{\link{make_tree}()},
-\code{\link{make_turan}()}
+Other deterministic constructors:
+\code{\link[=graph_from_atlas]{graph_from_atlas()}},
+\code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
+\code{\link[=graph_from_literal]{graph_from_literal()}},
+\code{\link[=make_]{make_()}},
+\code{\link[=make_chordal_ring]{make_chordal_ring()}},
+\code{\link[=make_circulant]{make_circulant()}},
+\code{\link[=make_empty_graph]{make_empty_graph()}},
+\code{\link[=make_full_citation_graph]{make_full_citation_graph()}},
+\code{\link[=make_full_graph]{make_full_graph()}},
+\code{\link[=make_full_multipartite]{make_full_multipartite()}},
+\code{\link[=make_graph]{make_graph()}},
+\code{\link[=make_lattice]{make_lattice()}},
+\code{\link[=make_ring]{make_ring()}},
+\code{\link[=make_star]{make_star()}},
+\code{\link[=make_tree]{make_tree()}},
+\code{\link[=make_turan]{make_turan()}}
 }
 \concept{Wheel graph}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_wheel}{\code{wheel()}}.}
-

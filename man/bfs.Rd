@@ -28,7 +28,10 @@ bfs(
 \item{graph}{The input graph.}
 
 \item{root}{Numeric vector, usually of length one. The root vertex, or root
-vertices to start the search from.}
+vertices to start the search from. When several roots are given, they are
+considered in the order they appear. If a root vertex was already reached
+while searching from an earlier root, no separate search is started from
+it, so it keeps the distance it was first found at rather than \code{0}.}
 
 \item{mode}{For directed graphs specifies the type of edges to follow.
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
@@ -37,32 +40,34 @@ ignores edge directions completely. \sQuote{total} is a synonym for
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{unreachable}{Logical scalar, whether the search should visit the
+\item{unreachable}{Logical, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
 \code{TRUE}, then additional searches are performed until all vertices are
 visited.}
 
 \item{restricted}{\code{NULL} (=no restriction), or a vector of vertices
-(ids or symbolic names). In the latter case, the search is restricted to the
+(IDs or symbolic names). In the latter case, the search is restricted to the
 given vertices.}
 
-\item{order}{Logical scalar, whether to return the ordering of the vertices.}
+\item{order}{Logical, whether to return the ordering of the vertices.}
 
-\item{rank}{Logical scalar, whether to return the rank of the vertices.}
+\item{rank}{Logical, whether to return the rank of the vertices.}
 
-\item{parent}{Logical scalar, whether to return the parent of the vertices.}
+\item{parent}{Logical, whether to return the parent of the vertices.}
 
-\item{pred}{Logical scalar, whether to return the predecessors of the
+\item{pred}{Logical, whether to return the predecessors of the
 vertices.}
 
-\item{succ}{Logical scalar, whether to return the successors of the
+\item{succ}{Logical, whether to return the successors of the
 vertices.}
 
-\item{dist}{Logical scalar, whether to return the distance from the root of
+\item{dist}{Logical, whether to return the distance from the root of
 the search tree.}
 
-\item{callback}{If not \code{NULL}, then it must be callback function. This
-is called whenever a vertex is visited. See details below.}
+\item{callback}{Callback function. This is called whenever a vertex is visited.
+The callback function should return \code{FALSE} to continue the search
+or \code{TRUE} to stop it. See details below.
+Default: \code{NULL}.}
 
 \item{extra}{Additional argument to supply to the callback function.}
 
@@ -77,29 +82,38 @@ from igraph 1.3.0; use \code{mode} instead.}
 A named list with the following entries:
 \describe{
 \item{root}{
-Numeric scalar. The root vertex that was used as the starting point of the search.
+Numeric vector. The root vertex (or vertices) that was used as the
+starting point of the search, as supplied in the \code{root} argument.
 }
 \item{neimode}{
 Character scalar. The \code{mode} argument of the function call.
 Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 }
 \item{order}{
-Numeric vector. The vertex ids, in the order in which they were visited by the search.
+The vertex IDs, in the order in which they were visited by the search.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option (see \code{\link[=igraph_options]{igraph_options()}}) is \code{FALSE}.
 }
 \item{rank}{
 Numeric vector. The rank for each vertex, zero for unreachable vertices.
 }
 \item{parent}{
-Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+The parent of each vertex, i.e. the vertex it was discovered from.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{father}{
 Like parent, kept for compatibility for now.
 }
 \item{pred}{
-Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
+The previously visited vertex for each vertex, or 0 if there was no such vertex.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{succ}{
-Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
+The next vertex that was visited after the current one, or 0 if there was no such vertex.
+A vertex sequence (\code{igraph.vs}), or a numeric vector if the
+\code{return.vs.es} option is \code{FALSE}.
 }
 \item{dist}{
 Numeric vector, for each vertex its distance from the root of the search tree.
@@ -138,6 +152,10 @@ The callback must return \code{FALSE}
 to continue the search or \code{TRUE} to terminate it. See examples below on how to
 use the callback function.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## Two rings
@@ -168,31 +186,31 @@ bfs(make_ring(10) \%du\% make_ring(10), root = 1, callback = f)
 \seealso{
 \code{\link[=dfs]{dfs()}} for depth-first search.
 
-Other structural.properties: 
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{feedback_vertex_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{k_shortest_paths}()},
-\code{\link{knn}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+Other structural.properties:
+\code{\link[=component_distribution]{component_distribution()}},
+\code{\link[=connect]{connect()}},
+\code{\link[=constraint]{constraint()}},
+\code{\link[=coreness]{coreness()}},
+\code{\link[=degree]{degree()}},
+\code{\link[=dfs]{dfs()}},
+\code{\link[=distance_table]{distance_table()}},
+\code{\link[=edge_density]{edge_density()}},
+\code{\link[=feedback_arc_set]{feedback_arc_set()}},
+\code{\link[=feedback_vertex_set]{feedback_vertex_set()}},
+\code{\link[=girth]{girth()}},
+\code{\link[=is_acyclic]{is_acyclic()}},
+\code{\link[=is_dag]{is_dag()}},
+\code{\link[=is_matching]{is_matching()}},
+\code{\link[=k_shortest_paths]{k_shortest_paths()}},
+\code{\link[=knn]{knn()}},
+\code{\link[=reciprocity]{reciprocity()}},
+\code{\link[=subcomponent]{subcomponent()}},
+\code{\link[=subgraph]{subgraph()}},
+\code{\link[=topo_sort]{topo_sort()}},
+\code{\link[=transitivity]{transitivity()}},
+\code{\link[=unfold_tree]{unfold_tree()}},
+\code{\link[=which_multiple]{which_multiple()}},
+\code{\link[=which_mutual]{which_mutual()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -148,7 +148,7 @@
 #' }
 #' \item{label}{
 #'   The vertex labels. They will be converted to character.
-#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex ids.
+#'   Specify `NA` to omit vertex labels. The default vertex labels are the vertex IDs.
 #' }
 #' \item{label.family}{
 #'   The
@@ -499,7 +499,7 @@ NULL
 #' @export
 autocurve.edges <- function(graph, start = 0.5) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "autocurve.edges()", "curve_multiple()")
+  lifecycle::deprecate_warn("2.0.0", "autocurve.edges()", "curve_multiple()")
   curve_multiple(graph = graph, start = start)
 } # nocov end
 #   IGraph R package
@@ -531,10 +531,10 @@ i.parse.plot.params <- function(graph, params) {
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())
   for (n in names(params)) {
-    if (substr(n, 1, 7) == "vertex.") {
+    if (startsWith(n, "vertex.")) {
       nn <- substring(n, 8)
       p[["vertex"]][[nn]] <- params[[n]]
-    } else if (substr(n, 1, 5) == "edge.") {
+    } else if (startsWith(n, "edge.")) {
       nn <- substring(n, 6)
       p[["edge"]][[nn]] <- params[[n]]
     } else {
@@ -589,7 +589,7 @@ i.parse.plot.params <- function(graph, params) {
       }
     }
     if (!is.function(p[[type]][[name]])) {
-      if (any(is.na(p[[type]][[name]]))) {
+      if (anyNA(p[[type]][[name]])) {
         if (name != "label") {
           cli::cli_warn(
             "{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
@@ -632,7 +632,7 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   if (
     is.character(arrow.mode) &&
       length(arrow.mode) == 1 &&
-      substr(arrow.mode, 1, 2) == "a:"
+      startsWith(arrow.mode, "a:")
   ) {
     arrow.mode <- vertex_attr(graph, substring(arrow.mode, 3))
   }
@@ -707,6 +707,7 @@ i.postprocess.layout <- function(maybe_layout) {
 #' plotting a graph with multiple edges, so that all edges are visible.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param start The curvature at the two extreme edges. All edges will have a
 #'   curvature between `-start` and `start`, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
@@ -730,7 +731,33 @@ i.postprocess.layout <- function(maybe_layout) {
 #' set.seed(42)
 #' plot(g)
 #'
-curve_multiple <- function(graph, start = 0.5) {
+curve_multiple <- function(
+  graph,
+  ...,
+  start = 0.5
+) {
+  # BEGIN GENERATED ARG_HANDLE: curve_multiple, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(start = start),
+      recover_new = c("start"),
+      recover_old = c("start"),
+      match_names = c("start"),
+      match_to = c("start"),
+      defaults = list(start = 0.5),
+      head_args = c("graph"),
+      fn_name = "curve_multiple"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   el <- apply(as_edgelist(graph, names = FALSE), 1, paste, collapse = ":")
   ave(rep(NA, length(el)), el, FUN = function(x) {
     if (length(x) == 1) {
@@ -4841,7 +4868,7 @@ curve_multiple <- function(graph, start = 0.5) {
       16777215L,
       16777215L
     ),
-    .Dim = c(64L, 64L),
+    dim = c(64L, 64L),
     class = "nativeRaster",
     channels = 4L
   )
