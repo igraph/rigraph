@@ -49,6 +49,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 intersection(E(g)[1:6], E(g)[5:9])
-#> ── <edge sequence> 2/10 · vertex names · from bf382e3 ──────────────────────────
+#> ── <edge sequence> 2/10 · vertex names · from 7814701 ──────────────────────────
 #> [1] E ─ F  F ─ G 
 ```
