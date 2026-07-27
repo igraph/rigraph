@@ -403,3 +403,28 @@ test_that("render_call_arg() wraps long arguments the way air formats them", {
   )
   expect_true(all(nchar(wrapped) + 2L <= 80L))
 })
+
+test_that("unasserted lifecycle deprecations are errors in tests when opted in", {
+  # With IGRAPH_LIFECYCLE_ERRORS=true, setup-lifecycle.R bumps the per-test
+  # lifecycle_verbosity that testthat forces to "warning" up to "error", so a
+  # deprecation no expectation asserts -- even from an *indirect* call that
+  # deprecate_soft() would keep silent for users -- fails its test outright.
+  # This is the baseline that keeps internal callers of migrated signatures
+  # honest; one job in the full rcc matrix runs the suite in this mode.
+  indirect <- function() {
+    migration_fixture(make_ring(3), 1, weights = NULL, type = "out", 2)
+  }
+
+  if (Sys.getenv("IGRAPH_LIFECYCLE_ERRORS") == "true") {
+    expect_identical(getOption("lifecycle_verbosity"), "error")
+    expect_error(indirect(), "positional or abbreviated")
+  } else {
+    # Vanilla testthat edition 3: deprecations signal as plain warnings.
+    expect_identical(getOption("lifecycle_verbosity"), "warning")
+    expect_warning(indirect(), "positional or abbreviated")
+  }
+
+  # Asserted deprecations work in both modes: expect_deprecated() pins the
+  # verbosity back to "warning" internally.
+  lifecycle::expect_deprecated(indirect())
+})

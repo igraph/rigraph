@@ -183,6 +183,7 @@ test_that("ends works", {
 })
 
 test_that("get.edge.ids() deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_empty_graph(10)
   expect_snapshot(get.edge.ids(g, 1:2))
   expect_snapshot_igraph_error(get.edge.ids(g, 1:2, multi = TRUE))
