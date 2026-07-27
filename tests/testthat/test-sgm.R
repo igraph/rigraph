@@ -1,13 +1,12 @@
 test_that("SGM works", {
-  local_rng_version("3.5.0")
-  withr::local_seed(42)
+  igraph_local_seed(42, rng_version = "3.5.0")
 
   vc <- 10
   nos <- 3
 
-  g1 <- sample_gnp(vc, .5)
+  g1 <- sample_gnp(vc, 0.5)
   randperm <- c(1:nos, nos + sample(vc - nos))
-  g2 <- sample_correlated_gnp(g1, corr = .7, p = g1$p, permutation = randperm)
+  g2 <- sample_correlated_gnp(g1, corr = 0.7, p = g1$p, permutation = randperm)
   P <- match_vertices(
     g1[],
     g2[],
@@ -24,12 +23,12 @@ test_that("SGM works", {
   )
 
   ## Slightly bigger
-  withr::local_seed(42)
+  igraph_local_seed(42)
 
   vc <- 100
   nos <- 10
 
-  g1 <- sample_gnp(vc, .1)
+  g1 <- sample_gnp(vc, 0.1)
   perm <- c(1:nos, sample(vc - nos) + nos)
   g2 <- sample_correlated_gnp(g1, corr = 1, p = g1$p, permutation = perm)
 

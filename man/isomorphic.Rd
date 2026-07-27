@@ -93,6 +93,10 @@ Character constant, the heuristics to use in the BLISS algorithm for \code{graph
 \code{sh} defaults to \sQuote{fm}.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic}{\code{isomorphic()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_bliss}{\code{isomorphic_bliss()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isomorphic_vf2}{\code{isomorphic_vf2()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 # create some non-isomorphic graphs
 g1 <- graph_from_isomorphism_class(3, 10)
@@ -133,14 +137,14 @@ for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
 on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
 }
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \concept{graph isomorphism}

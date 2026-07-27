@@ -29,7 +29,7 @@ to the current one.
 \seealso{
 upgrade_graph to convert the data format of a graph.
 
-Other versions: 
-\code{\link{upgrade_graph}()}
+Other versions:
+\code{\link[=upgrade_graph]{upgrade_graph()}}
 }
 \concept{versions}

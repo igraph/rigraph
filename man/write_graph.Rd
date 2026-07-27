@@ -102,7 +102,7 @@ or NULL to use the "capacity" attribute if it exists.}
 
 GML is a quite general textual format.
 \describe{
-\item{id}{Optional numeric vertex IDs to use.}
+\item{ID}{Optional numeric vertex IDs to use.}
 \item{creator}{Optional string specifying the creator of the file.}
 }
 }
@@ -140,6 +140,10 @@ This format is meant solely for interoperability with Graphviz. It is not recomm
 data exchange or archival.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -158,14 +162,12 @@ networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
 \seealso{
 \code{\link[=read_graph]{read_graph()}}
 
-Foreign format readers
-\code{\link{graph_from_graphdb}()},
-\code{\link{read_graph}()}
+Foreign format readers:
+\code{\link[=graph_from_graphdb]{graph_from_graphdb()}},
+\code{\link[=read_graph]{read_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{foreign}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dimacs_flow}{\code{write_graph_dimacs_flow()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_lgl}{\code{write_graph_lgl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_ncol}{\code{write_graph_ncol()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}.}
-

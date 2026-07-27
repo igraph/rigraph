@@ -35,7 +35,7 @@
 #' @examples
 #' g <- make_ring(10)
 #' g %>%
-#'   rewire(each_edge(p = .1, loops = FALSE)) %>%
+#'   rewire(each_edge(p = 0.1, loops = FALSE)) %>%
 #'   plot(layout = layout_in_circle)
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 rewire <- function(graph, with) {
@@ -83,13 +83,14 @@ keeping_degseq <- function(loops = FALSE, niter = 100) {
 }
 
 rewire_keeping_degseq <- function(graph, loops, niter) {
-  ensure_igraph(graph)
-
   loops <- as.logical(loops)
-  mode <- if (loops) 1 else 0
+  mode <- if (loops) "simple_loops" else "simple"
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
+  rewire_impl(
+    rewire = graph,
+    n = niter,
+    mode = mode
+  )
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex
@@ -101,9 +102,10 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' Note that this method might create graphs with multiple and/or loop edges.
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
-#' @param loops Logical scalar, whether loop edges are allowed in the rewired
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether loop edges are allowed in the rewired
 #'   graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed in the
+#' @param multiple Logical, whether multiple edges are allowed in the
 #'   generated graph.
 #' @param mode Character string, specifies which endpoint of the edges to rewire
 #'   in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
@@ -129,19 +131,40 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(
   prob,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
 ) {
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  # BEGIN GENERATED ARG_HANDLE: each_edge, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops, multiple = multiple, mode = mode),
+      recover_new = c("loops", "multiple", "mode"),
+      recover_old = c("loops", "multiple", "mode"),
+      match_names = c("loops", "multiple", "mode"),
+      match_to = c("loops", "multiple", "mode"),
+      defaults = list(
+        loops = FALSE,
+        multiple = FALSE,
+        mode = c("all", "out", "in", "total")
+      ),
+      head_args = c("prob"),
+      fn_name = "each_edge"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  mode <- igraph_match_arg(mode)
   multiple <- as.logical(multiple)
-  if (mode != 3) {
+  if (mode != "all" && mode != "total") {
     if (!multiple) {
       cli::cli_abort(
         '{.code multiple = FALSE} is not supported
@@ -171,14 +194,10 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_rewire_directed_edges,
-    graph,
-    as.numeric(prob),
-    as.logical(loops),
-    as.numeric(mode)
+  rewire_directed_edges_impl(
+    graph = graph,
+    prob = prob,
+    loops = loops,
+    mode = mode
   )
 }

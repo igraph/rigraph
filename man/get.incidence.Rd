@@ -14,19 +14,16 @@ directed graphs.}
 \code{type} vertex attribute. You must supply this argument if the graph has
 no \code{type} vertex attribute.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
-attribute name. If \code{NULL}, then a traditional bipartite adjacency matrix is
-returned. If not \code{NULL} then the values of the given edge attribute are
-included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
-attribute of an arbitrarily chosen edge (for the multiple edges) is
-included.}
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead. If
+supplied, the value is forwarded to \code{weights} as a character edge
+attribute name.}
 
-\item{names}{Logical scalar, if \code{TRUE} and the vertices in the graph
+\item{names}{Logical, if \code{TRUE} and the vertices in the graph
 are named (i.e. the graph has a vertex attribute called \code{name}), then
 vertex names will be added to the result as row and column names. Otherwise
-the ids of the vertices are used as row and column names.}
+the IDs of the vertices are used as row and column names.}
 
-\item{sparse}{Logical scalar, if it is \code{TRUE} then a sparse matrix is
+\item{sparse}{Logical, if it is \code{TRUE} then a sparse matrix is
 created, you will need the \code{Matrix} package for this.}
 }
 \description{
@@ -35,4 +32,8 @@ created, you will need the \code{Matrix} package for this.}
 \code{get.incidence()} was renamed to \code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_get_biadjacency}{\code{get_biadjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

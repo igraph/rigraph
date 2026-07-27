@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Wed, 21 May 2026 00:00:00 +0200
+Subject: [PATCH] arpack: fix obsolescent Fortran character length syntax
+
+CRAN reports "Obsolescent feature: Old-style character length at (1)"
+on r-devel-linux-x86_64-debian-gcc and r-release-linux-x86_64 (gcc-16,
+which adds -pedantic).  The form ``CHARACTER*n name`` is obsolescent
+while ``CHARACTER name*n`` is not -- adopt the latter form, matching
+``ivout.f`` and the local ``LINE*80`` declarations in the same files.
+
+Refs: https://github.com/igraph/rigraph/issues/1533
+---
+ src/vendor/arpack/dmout.f | 2 +-
+ src/vendor/arpack/dvout.f | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/vendor/arpack/dmout.f b/src/vendor/arpack/dmout.f
+index 59a407a..ec4a849 100644
+--- a/src/vendor/arpack/dmout.f
++++ b/src/vendor/arpack/dmout.f
+@@ -24,7 +24,7 @@
+ *     ...
+ *     ... SPECIFICATIONS FOR LOCAL VARIABLES
+ *     .. Scalar Arguments ..
+-      CHARACTER*( * )    IFMT
++      CHARACTER          IFMT*( * )
+       INTEGER            IDIGIT, LDA, LOUT, M, N
+ *     ..
+ *     .. Array Arguments ..
+diff --git a/src/vendor/arpack/dvout.f b/src/vendor/arpack/dvout.f
+index 3e855dd..dc8fe6c 100644
+--- a/src/vendor/arpack/dvout.f
++++ b/src/vendor/arpack/dvout.f
+@@ -21,7 +21,7 @@
+ *     ...
+ *     ... SPECIFICATIONS FOR LOCAL VARIABLES
+ *     .. Scalar Arguments ..
+-      CHARACTER*( * )    IFMT
++      CHARACTER          IFMT*( * )
+       INTEGER            IDIGIT, LOUT, N
+ *     ..
+ *     .. Array Arguments ..
+--
+2.49.0
+

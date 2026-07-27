@@ -10,7 +10,7 @@ mod.matrix(graph, membership, weights = NULL, resolution = 1, directed = TRUE)
 \item{membership}{Numeric vector, one value for each vertex, the membership
 vector of the community structure.}
 
-\item{weights}{If not \code{NULL} then a numeric vector giving edge weights.}
+\item{weights}{Numeric vector giving edge weights. Default: \code{NULL}.}
 
 \item{resolution}{The resolution parameter. Must be greater than or equal to
 0. Set it to 1 to use the classical definition of modularity.}
@@ -24,4 +24,8 @@ modularity. Ignored for undirected graphs.}
 \code{mod.matrix()} was renamed to \code{\link[=modularity_matrix]{modularity_matrix()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_modularity_matrix}{\code{modularity_matrix()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

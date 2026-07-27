@@ -17,6 +17,10 @@ A graph is considered complete if there is an edge between all distinct
 directed pairs of vertices. igraph considers both the singleton graph
 and the null graph complete.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_complete}{\code{is_complete()}}
+}
+
 \examples{
 
 g <- make_full_graph(6, directed = TRUE)
@@ -29,12 +33,10 @@ is_complete(g)
 \seealso{
 \code{\link[=make_full_graph]{make_full_graph()}}
 
-Other cliques: 
-\code{\link{cliques}()},
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
+Other cliques:
+\code{\link[=cliques]{cliques()}},
+\code{\link[=ivs]{ivs()}},
+\code{\link[=weighted_cliques]{weighted_cliques()}}
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_complete}{\code{is_complete()}}.}
-

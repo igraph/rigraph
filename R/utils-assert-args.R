@@ -29,7 +29,7 @@ switch_igraph_arg <- function(
   if (length(arg) > 1) {
     values <- intersect(values, tolower(arg))
   }
-  match <- igraph.match.arg(
+  match <- igraph_match_arg(
     arg,
     values,
     error_arg = .error_arg,
@@ -38,7 +38,7 @@ switch_igraph_arg <- function(
   switch(match, ...)
 }
 
-igraph.match.arg <- function(
+igraph_match_arg <- function(
   arg,
   values,
   error_arg = rlang::caller_arg(arg),
@@ -64,7 +64,20 @@ igraph.match.arg <- function(
 }
 
 #' @importFrom rlang caller_env
-ensure_no_na <- function(x, what, call = caller_env()) {
+ensure_no_na <- function(x, what, mode = "", call = caller_env()) {
+  if (mode == "upper") {
+    if (inherits(x, "sparseMatrix")) {
+      x <- Matrix::triu(x)@x
+    } else {
+      x <- x[upper.tri(x)]
+    }
+  } else if (mode == "lower") {
+    if (inherits(x, "sparseMatrix")) {
+      x <- Matrix::tril(x)@x
+    } else {
+      x <- x[lower.tri(x)]
+    }
+  }
   if (anyNA(x)) {
     cli::cli_abort(
       "Cannot create a graph object because the {what} contains NAs.",

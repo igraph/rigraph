@@ -9,7 +9,7 @@ assortativity.degree(graph, directed = TRUE)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{directed}{Logical scalar, whether to consider edge directions for
+\item{directed}{Logical, whether to consider edge directions for
 directed graphs.
 This argument is ignored for undirected graphs.
 Supply
@@ -23,4 +23,8 @@ graphs.}
 \code{assortativity.degree()} was renamed to \code{\link[=assortativity_degree]{assortativity_degree()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
+}
+
 \keyword{internal}

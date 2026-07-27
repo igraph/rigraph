@@ -10,7 +10,7 @@
 #' @export
 is.igraph <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.igraph()", "is_igraph()")
+  lifecycle::deprecate_warn("2.0.0", "is.igraph()", "is_igraph()")
   is_igraph(graph = graph)
 } # nocov end
 #   IGraph R package
@@ -55,19 +55,6 @@ is_igraph <- function(graph) {
   warn_version(graph)
   TRUE
 }
-
-#' Incident vertices of some graph edges
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' Use [ends()].
-#' @inheritParams ends
-#' @export
-#' @keywords internal
-get.edge <- function(graph, id) {
-  lifecycle::deprecate_stop("2.1.0", "get.edge()", "ends()")
-}
-
 
 #' Head of the edge(s) in a graph
 #'

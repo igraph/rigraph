@@ -21,9 +21,13 @@ the igraph and the graphNEL objects.
 \code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
 converts all graph/vertex/edge attributes. If the igraph graph has a
 vertex attribute \sQuote{\code{name}}, then it will be used to assign
-vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
+vertex names in the graphNEL graph. Otherwise numeric igraph vertex IDs
 will be used for this purpose.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 \dontshow{if (rlang::is_installed("graph")) withAutoprint(\{ # examplesIf}
 ## Undirected
@@ -47,16 +51,16 @@ g4
 \code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} for
 other graph representations.
 
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_directed}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
+Other conversion:
+\code{\link[=as.matrix.igraph]{as.matrix.igraph()}},
+\code{\link[=as_adj_list]{as_adj_list()}},
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}},
+\code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}},
+\code{\link[=as_data_frame]{as_data_frame()}},
+\code{\link[=as_directed]{as_directed()}},
+\code{\link[=as_edgelist]{as_edgelist()}},
+\code{\link[=as_long_data_frame]{as_long_data_frame()}},
+\code{\link[=graph_from_adj_list]{graph_from_adj_list()}},
+\code{\link[=graph_from_graphnel]{graph_from_graphnel()}}
 }
 \concept{conversion}
