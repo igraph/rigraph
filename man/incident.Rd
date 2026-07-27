@@ -4,12 +4,14 @@
 \alias{incident}
 \title{Incident edges of a vertex in a graph}
 \usage{
-incident(graph, v, mode = c("all", "out", "in", "total"))
+incident(graph, v, ..., mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{v}{The vertex of which the incident edges are queried.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
