@@ -708,6 +708,7 @@ average.path.length <- function(
 #' connected by the diameter path.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether directed or undirected paths are to be
 #'   considered. This is ignored for undirected graphs.
 #' @param unconnected Logical, what to do if the graph is unconnected. If
@@ -752,10 +753,37 @@ average.path.length <- function(
 #'
 diameter <- function(
   graph,
+  ...,
   directed = TRUE,
   unconnected = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: diameter, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "diameter"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -778,13 +806,41 @@ diameter <- function(
 }
 
 #' @rdname diameter
+#' @inheritParams rlang::args_dots_empty
 #' @export
 get_diameter <- function(
   graph,
+  ...,
   directed = TRUE,
   unconnected = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: get_diameter, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "get_diameter"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -814,13 +870,41 @@ get_diameter <- function(
 }
 
 #' @rdname diameter
+#' @inheritParams rlang::args_dots_empty
 #' @export
 farthest_vertices <- function(
   graph,
+  ...,
   directed = TRUE,
   unconnected = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: farthest_vertices, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "farthest_vertices"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -849,15 +933,49 @@ farthest_vertices <- function(
   res
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname distances
 mean_distance <- function(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   unconnected = TRUE,
   details = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: mean_distance, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        directed = directed,
+        unconnected = unconnected,
+        details = details
+      ),
+      recover_new = c("weights", "directed", "unconnected", "details"),
+      recover_old = c("weights", "directed", "unconnected", "details"),
+      match_names = c("weights", "directed", "unconnected", "details"),
+      match_to = c("weights", "directed", "unconnected", "details"),
+      defaults = list(
+        weights = NULL,
+        directed = TRUE,
+        unconnected = TRUE,
+        details = FALSE
+      ),
+      head_args = c("graph"),
+      fn_name = "mean_distance"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   average_path_length_dijkstra_impl(
     graph = graph,
     weights = weights,
@@ -913,10 +1031,37 @@ mean_distance <- function(
 degree <- function(
   graph,
   v = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: degree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, normalized = normalized),
+      recover_new = c("mode", "loops", "normalized"),
+      recover_old = c("mode", "loops", "normalized"),
+      match_names = c("mode", "loops", "normalized"),
+      match_to = c("mode", "loops", "normalized"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        normalized = FALSE
+      ),
+      head_args = c("graph", "v"),
+      fn_name = "degree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   v <- as_igraph_vs(graph, v)
   mode <- igraph_match_arg(mode)
@@ -955,8 +1100,35 @@ max_degree <- function(
 }
 
 #' @rdname degree
+#' @inheritParams rlang::args_dots_empty
 #' @export
-mean_degree <- function(graph, loops = TRUE) {
+mean_degree <- function(
+  graph,
+  ...,
+  loops = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: mean_degree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = TRUE),
+      head_args = c("graph"),
+      fn_name = "mean_degree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mean_degree_impl(
     graph = graph,
     loops = loops
@@ -1048,6 +1220,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   calculated. By default it includes all vertices. Note that for
 #'   `distances()` every vertex must be included here at most once. (This
 #'   is not required for `shortest_paths()`.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, gives whether the shortest paths to or from
 #'   the given vertices should be calculated for directed graphs. If `out`
 #'   then the shortest paths *from* the vertex, if `in` then *to*
@@ -1189,6 +1362,7 @@ distances <- function(
   graph,
   v = V(graph),
   to = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   weights = NULL,
   algorithm = c(
@@ -1200,6 +1374,32 @@ distances <- function(
     "floyd-warshall"
   )
 ) {
+  # BEGIN GENERATED ARG_HANDLE: distances, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, weights = weights, algorithm = algorithm),
+      recover_new = c("mode", "weights", "algorithm"),
+      recover_old = c("mode", "weights", "algorithm"),
+      match_names = c("mode", "weights", "algorithm"),
+      match_to = c("mode", "weights", "algorithm"),
+      defaults = list(
+        mode = c("all", "out", "in"),
+        weights = NULL,
+        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall")
+      ),
+      head_args = c("graph", "v", "to"),
+      fn_name = "distances"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   # make sure that the lower-level function in C gets mode == "out"
@@ -1281,11 +1481,13 @@ distances <- function(
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
+#' @inheritParams rlang::args_dots_empty
 #' @export
 shortest_paths <- function(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL,
   output = c("vpath", "epath", "both"),
@@ -1293,6 +1495,70 @@ shortest_paths <- function(
   inbound.edges = FALSE,
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: shortest_paths, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        output = output,
+        predecessors = predecessors,
+        inbound.edges = inbound.edges,
+        algorithm = algorithm
+      ),
+      recover_new = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      recover_old = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      match_names = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      match_to = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      defaults = list(
+        mode = c("out", "all", "in"),
+        weights = NULL,
+        output = c("vpath", "epath", "both"),
+        predecessors = FALSE,
+        inbound.edges = FALSE,
+        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
+      ),
+      head_args = c("graph", "from", "to"),
+      fn_name = "shortest_paths"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -1389,15 +1655,39 @@ shortest_paths <- function(
   res
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: all_shortest_paths, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, weights = weights),
+      recover_new = c("mode", "weights"),
+      recover_old = c("mode", "weights"),
+      match_names = c("mode", "weights"),
+      match_to = c("mode", "weights"),
+      defaults = list(mode = c("out", "all", "in"), weights = NULL),
+      head_args = c("graph", "from", "to"),
+      fn_name = "all_shortest_paths"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   mode <- igraph_match_arg(mode)
@@ -1499,6 +1789,7 @@ k_shortest_paths <- function(
 #'
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
 #'   \dQuote{all}. If \dQuote{in} all vertices from which `v` is reachable
 #'   are listed. If \dQuote{out} all vertices reachable from `v` are
@@ -1517,7 +1808,34 @@ k_shortest_paths <- function(
 #' subcomponent(g, 1, "in")
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
-subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
+subcomponent <- function(
+  graph,
+  v,
+  ...,
+  mode = c("all", "out", "in")
+) {
+  # BEGIN GENERATED ARG_HANDLE: subcomponent, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in")),
+      head_args = c("graph", "v"),
+      fn_name = "subcomponent"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -1576,6 +1894,7 @@ subgraph <- function(graph, vids) {
 #' @rdname subgraph
 #' @param vids Numeric vector, the vertices of the original graph which will
 #'   form the subgraph.
+#' @inheritParams rlang::args_dots_empty
 #' @param impl Character scalar, to choose between two implementation of the
 #'   subgraph calculation. \sQuote{`copy_and_delete`} copies the graph
 #'   first, and then deletes the vertices and edges that are not included in the
@@ -1588,8 +1907,33 @@ subgraph <- function(graph, vids) {
 induced_subgraph <- function(
   graph,
   vids,
+  ...,
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: induced_subgraph, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(impl = impl),
+      recover_new = c("impl"),
+      recover_old = c("impl"),
+      match_names = c("impl"),
+      match_to = c("impl"),
+      defaults = list(
+        impl = c("auto", "copy_and_delete", "create_from_scratch")
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "induced_subgraph"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
@@ -1607,10 +1951,38 @@ induced_subgraph <- function(
 
 #' @rdname subgraph
 #' @param eids The edge IDs of the edges that will be kept in the result graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param delete.vertices Logical, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
 #' @export
-subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
+subgraph_from_edges <- function(
+  graph,
+  eids,
+  ...,
+  delete.vertices = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: subgraph_from_edges, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(delete.vertices = delete.vertices),
+      recover_new = c("delete.vertices"),
+      recover_old = c("delete.vertices"),
+      match_names = c("delete.vertices"),
+      match_to = c("delete.vertices"),
+      defaults = list(delete.vertices = TRUE),
+      head_args = c("graph", "eids"),
+      fn_name = "subgraph_from_edges"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   # Argument checks
   ensure_igraph(graph)
@@ -1710,6 +2082,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'       The same as `barrat`.
 #'     }
 #'   }
+#' @inheritParams rlang::args_dots_empty
 #' @param vids The vertex IDs for the local transitivity will be calculated.
 #'   This will be ignored for global transitivity types.  The default value is
 #'   `NULL`, in this case all vertices are considered. It is slightly faster
@@ -1779,10 +2152,33 @@ transitivity <- function(
     "barrat",
     "weighted"
   ),
+  ...,
   vids = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: transitivity, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(vids = vids, weights = weights, isolates = isolates),
+      recover_new = c("vids", "weights", "isolates"),
+      recover_old = c("vids", "weights", "isolates"),
+      match_names = c("vids", "weights", "isolates"),
+      match_to = c("vids", "weights", "isolates"),
+      defaults = list(vids = NULL, weights = NULL, isolates = c("NaN", "zero")),
+      head_args = c("graph", "type"),
+      fn_name = "transitivity"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   type <- igraph_match_arg(type)
   type <- switch(
@@ -1912,6 +2308,7 @@ transitivity <- function(
 #' @param graph A graph object, the input graph.
 #' @param nodes The vertices for which the constraint will be calculated.
 #'   Defaults to all vertices.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. If this is `NULL` and there is
 #'   a `weight` edge attribute this is used. If there is no such edge
 #'   attribute all edges will have the same weight.
@@ -1929,7 +2326,34 @@ transitivity <- function(
 #' g <- sample_gnp(20, 5 / 20)
 #' constraint(g)
 #'
-constraint <- function(graph, nodes = V(graph), weights = NULL) {
+constraint <- function(
+  graph,
+  nodes = V(graph),
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: constraint, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights),
+      recover_new = c("weights"),
+      recover_old = c("weights"),
+      match_names = c("weights"),
+      match_to = c("weights"),
+      defaults = list(weights = NULL),
+      head_args = c("graph", "nodes"),
+      fn_name = "constraint"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   nodes <- as_igraph_vs(graph, nodes)
 
@@ -1971,6 +2395,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' (2)+(3). This measure is calculated if `mode` is `ratio`.
 #'
 #' @param graph The graph object.
+#' @inheritParams rlang::args_dots_empty
 #' @param ignore.loops Logical, whether to ignore loop edges.
 #' @param mode See below.
 #' @return A numeric scalar between zero and one.
@@ -1986,9 +2411,32 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #'
 reciprocity <- function(
   graph,
+  ...,
   ignore.loops = TRUE,
   mode = c("default", "ratio")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: reciprocity, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(ignore.loops = ignore.loops, mode = mode),
+      recover_new = c("ignore.loops", "mode"),
+      recover_old = c("ignore.loops", "mode"),
+      match_names = c("ignore.loops", "mode"),
+      match_to = c("ignore.loops", "mode"),
+      defaults = list(ignore.loops = TRUE, mode = c("default", "ratio")),
+      head_args = c("graph"),
+      fn_name = "reciprocity"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   reciprocity_impl(
     graph = graph,
     ignore_loops = ignore.loops,
@@ -2008,6 +2456,7 @@ reciprocity <- function(
 #' results for such graphs.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether loop edges may exist in the graph.
 #'   This affects the calculation of the largest possible number of edges in the
 #'   graph. If this parameter is set to FALSE yet the graph contains self-loops,
@@ -2034,7 +2483,33 @@ reciprocity <- function(
 #' edge_density(g, loops = TRUE) # this is right!!!
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
-edge_density <- function(graph, loops = FALSE) {
+edge_density <- function(
+  graph,
+  ...,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: edge_density, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = FALSE),
+      head_args = c("graph"),
+      fn_name = "edge_density"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   density_impl(
     graph = graph,
     loops = loops
@@ -2042,14 +2517,38 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
+#' @inheritParams rlang::args_dots_empty
 #' @export
 ego_size <- function(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: ego_size, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "ego_size"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -2103,6 +2602,7 @@ neighborhood_size <- ego_size
 #' @param order Integer giving the order of the neighborhood. Negative values
 #'   indicate an infinite order.
 #' @param nodes The vertices for which the calculation is performed.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
 #'   outgoing edges are followed, so all vertices reachable from the source
@@ -2161,9 +2661,32 @@ ego <- function(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: ego, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "ego"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -2191,14 +2714,38 @@ ego <- function(
 #' @rdname ego
 neighborhood <- ego
 #' @rdname ego
+#' @inheritParams rlang::args_dots_empty
 #' @export
 make_ego_graph <- function(
   graph,
   order = 1,
   nodes = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: make_ego_graph, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "make_ego_graph"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
@@ -2233,6 +2780,7 @@ make_neighborhood_graph <- make_ego_graph
 #' This function calculates the coreness for each vertex.
 #'
 #' @param graph The input graph, it can be directed or undirected
+#' @inheritParams rlang::args_dots_empty
 #' @param mode The type of the core in directed graphs. Character constant,
 #'   possible values: `in`: in-cores are computed, `out`: out-cores are
 #'   computed, `all`: the corresponding undirected graph is considered. This
@@ -2255,7 +2803,33 @@ make_neighborhood_graph <- make_ego_graph
 #' g <- add_edges(g, c(1, 2, 2, 3, 1, 3))
 #' coreness(g) # small core triangle in a ring
 #'
-coreness <- function(graph, mode = c("all", "out", "in")) {
+coreness <- function(
+  graph,
+  ...,
+  mode = c("all", "out", "in")
+) {
+  # BEGIN GENERATED ARG_HANDLE: coreness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in")),
+      head_args = c("graph"),
+      fn_name = "coreness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
 
   res <- coreness_impl(
@@ -2280,6 +2854,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' and a warning is issued.
 #'
 #' @param graph The input graph, should be directed
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Specifies how to use the direction of the edges.  For
 #'   \dQuote{`out`}, the sorting order ensures that each node comes before
 #'   all nodes to which it has edges, so nodes with no incoming edges go first.
@@ -2298,7 +2873,33 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' g <- sample_pa(100)
 #' topo_sort(g)
 #'
-topo_sort <- function(graph, mode = c("out", "all", "in")) {
+topo_sort <- function(
+  graph,
+  ...,
+  mode = c("out", "all", "in")
+) {
+  # BEGIN GENERATED ARG_HANDLE: topo_sort, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "all", "in")),
+      head_args = c("graph"),
+      fn_name = "topo_sort"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   mode <- igraph_match_arg(mode)
 
   topological_sorting_impl(
@@ -2319,6 +2920,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' component is a tree).
 #'
 #' @param graph The input graph
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Potential edge weights. If the graph has an edge
 #'   attribute called \sQuote{`weight`}, and this argument is
 #'   `NULL`, then the edge attribute is used automatically. The goal of
@@ -2347,9 +2949,32 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' feedback_arc_set(g, algo = "approx_eades")
 feedback_arc_set <- function(
   graph,
+  ...,
   weights = NULL,
   algo = c("approx_eades", "exact_ip")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: feedback_arc_set, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, algo = algo),
+      recover_new = c("weights", "algo"),
+      recover_old = c("weights", "algo"),
+      match_names = c("weights", "algo"),
+      match_to = c("weights", "algo"),
+      defaults = list(weights = NULL, algo = c("approx_eades", "exact_ip")),
+      head_args = c("graph"),
+      fn_name = "feedback_arc_set"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   feedback_arc_set_impl(
     graph = graph,
     weights = weights,
@@ -2367,6 +2992,7 @@ feedback_arc_set <- function(
 #' NP-complete problem, both on directed and undirected graphs.
 #'
 #' @param graph The input graph
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Potential vertex weights. If the graph has a vertex
 #'   attribute called \sQuote{`weight`}, and this argument is
 #'   `NULL`, then the vertex attribute is used automatically. The goal of
@@ -2385,7 +3011,34 @@ feedback_arc_set <- function(
 #'
 #' g <- make_lattice(c(3,3))
 #' feedback_vertex_set(g)
-feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
+feedback_vertex_set <- function(
+  graph,
+  ...,
+  weights = NULL,
+  algo = c("exact_ip")
+) {
+  # BEGIN GENERATED ARG_HANDLE: feedback_vertex_set, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, algo = algo),
+      recover_new = c("weights", "algo"),
+      recover_old = c("weights", "algo"),
+      match_names = c("weights", "algo"),
+      match_to = c("weights", "algo"),
+      defaults = list(weights = NULL, algo = c("exact_ip")),
+      head_args = c("graph"),
+      fn_name = "feedback_vertex_set"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   feedback_vertex_set_impl(
     graph = graph,
     weights = weights,
@@ -2408,6 +3061,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #'
 #' @param graph The input graph. It may be directed, but the algorithm searches
 #'   for undirected circles anyway.
+#' @inheritParams rlang::args_dots_empty
 #' @param circle Logical, whether to return the shortest circle itself.
 #' @return A named list with two components:
 #'   \describe{
@@ -2440,7 +3094,33 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 #' g <- sample_gnp(1000, 1 / 1000)
 #' girth(g)
 #'
-girth <- function(graph, circle = TRUE) {
+girth <- function(
+  graph,
+  ...,
+  circle = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: girth, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(circle = circle),
+      recover_new = c("circle"),
+      recover_old = c("circle"),
+      match_names = c("circle"),
+      match_to = c("circle"),
+      defaults = list(circle = TRUE),
+      head_args = c("graph"),
+      fn_name = "girth"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   on.exit(.Call(Rx_igraph_finalizer))
@@ -3112,6 +3792,7 @@ dfs <- function(
 #' depth-first searches.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
 #'   connected components to search. It is ignored for undirected graphs.
@@ -3151,7 +3832,33 @@ dfs <- function(
 #' clu <- components(g)
 #' groups(clu)
 #' largest_component(g)
-components <- function(graph, mode = c("weak", "strong")) {
+components <- function(
+  graph,
+  ...,
+  mode = c("weak", "strong")
+) {
+  # BEGIN GENERATED ARG_HANDLE: components, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "components"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
@@ -3171,8 +3878,35 @@ components <- function(graph, mode = c("weak", "strong")) {
 }
 
 #' @rdname components
+#' @inheritParams rlang::args_dots_empty
 #' @export
-is_connected <- function(graph, mode = c("weak", "strong")) {
+is_connected <- function(
+  graph,
+  ...,
+  mode = c("weak", "strong")
+) {
+  # BEGIN GENERATED ARG_HANDLE: is_connected, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "is_connected"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   is_connected_impl(
     graph = graph,
     mode = mode
@@ -3180,8 +3914,35 @@ is_connected <- function(graph, mode = c("weak", "strong")) {
 }
 
 #' @rdname components
+#' @inheritParams rlang::args_dots_empty
 #' @export
-count_components <- function(graph, mode = c("weak", "strong")) {
+count_components <- function(
+  graph,
+  ...,
+  mode = c("weak", "strong")
+) {
+  # BEGIN GENERATED ARG_HANDLE: count_components, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "count_components"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
@@ -3203,6 +3964,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' are in the same connected component.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, defines how edge directions are considered
 #'   in directed graphs.
 #'   `"out"` counts vertices reachable via outgoing edges,
@@ -3233,7 +3995,33 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' g3 <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
 #' count_reachable(g3, mode = "all")
 #'
-count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
+count_reachable <- function(
+  graph,
+  ...,
+  mode = c("out", "in", "all", "total")
+) {
+  # BEGIN GENERATED ARG_HANDLE: count_reachable, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph"),
+      fn_name = "count_reachable"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   count_reachable_impl(
     graph = graph,
     mode = mode
@@ -3251,6 +4039,7 @@ count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
 #' in all components of the graph, see the examples below.
 #'
 #' @param graph The input graph, it can be either directed or undirected.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character string, defined the types of the paths used for the
 #'   breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
 #'   incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
@@ -3279,7 +4068,34 @@ count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
 #' })
 #' tree <- unfold_tree(g, roots = roots)
 #'
-unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
+unfold_tree <- function(
+  graph,
+  ...,
+  mode = c("all", "out", "in", "total"),
+  roots
+) {
+  # BEGIN GENERATED ARG_HANDLE: unfold_tree, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode),
+      recover_new = c("mode", "roots"),
+      recover_old = c("mode", "roots"),
+      match_names = c("mode", "roots"),
+      match_to = c("mode", "roots"),
+      defaults = list(mode = c("all", "out", "in", "total")),
+      head_args = c("graph"),
+      fn_name = "unfold_tree"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
@@ -3540,14 +4356,38 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
+#' @inheritParams rlang::args_dots_empty
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(
   graph,
   types = NULL,
+  ...,
   weights = NULL,
   eps = .Machine$double.eps
 ) {
+  # BEGIN GENERATED ARG_HANDLE: max_bipartite_match, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, eps = eps),
+      recover_new = c("weights", "eps"),
+      recover_old = c("weights", "eps"),
+      match_names = c("weights", "eps"),
+      match_to = c("weights", "eps"),
+      defaults = list(weights = NULL, eps = .Machine$double.eps),
+      head_args = c("graph", "types"),
+      fn_name = "max_bipartite_match"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- maximum_bipartite_matching_impl(
     graph = graph,
     types = types,
@@ -3580,6 +4420,7 @@ max_bipartite_match <- function(
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their IDs.
+#' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to consider directed self-loops to be mutual.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -3595,7 +4436,34 @@ max_bipartite_match <- function(
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
-which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
+which_mutual <- function(
+  graph,
+  eids = E(graph),
+  ...,
+  loops = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: which_mutual, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = TRUE),
+      head_args = c("graph", "eids"),
+      fn_name = "which_mutual"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   is_mutual_impl(
     graph = graph,
     eids = eids,
@@ -3665,6 +4533,7 @@ any_mutual <- function(graph, ..., loops = TRUE) {
 #'   includes all vertices. Note, that if not all vertices are given here, then
 #'   both \sQuote{`knn`} and \sQuote{`knnk`} will be calculated based
 #'   on the given vertices only.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant to indicate the type of neighbors to consider
 #'   in directed graphs. `out` considers out-neighbors, `in` considers
 #'   in-neighbors and `all` ignores edge directions.
@@ -3718,10 +4587,41 @@ any_mutual <- function(graph, ..., loops = TRUE) {
 knn <- function(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: knn, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        mode = mode,
+        neighbor.degree.mode = neighbor.degree.mode,
+        weights = weights
+      ),
+      recover_new = c("mode", "neighbor.degree.mode", "weights"),
+      recover_old = c("mode", "neighbor.degree.mode", "weights"),
+      match_names = c("mode", "neighbor.degree.mode", "weights"),
+      match_to = c("mode", "neighbor.degree.mode", "weights"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        neighbor.degree.mode = c("all", "out", "in", "total"),
+        weights = NULL
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "knn"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   avg_nearest_neighbor_degree_impl(
     graph = graph,
     vids = vids,

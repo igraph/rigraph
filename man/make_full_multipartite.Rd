@@ -5,12 +5,14 @@
 \alias{full_multipartite}
 \title{Create a full multipartite graph}
 \usage{
-make_full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
+make_full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
 
-full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
+full_multipartite(n, ..., directed = FALSE, mode = c("all", "out", "in"))
 }
 \arguments{
 \item{n}{A numeric vector giving the number of vertices in each partition.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 

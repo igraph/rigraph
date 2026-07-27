@@ -6,6 +6,7 @@
 \usage{
 graph_from_biadjacency_matrix(
   incidence,
+  ...,
   directed = FALSE,
   mode = c("all", "out", "in", "total"),
   multiple = FALSE,
@@ -16,6 +17,8 @@ graph_from_biadjacency_matrix(
 \arguments{
 \item{incidence}{The input bipartite adjacency matrix. It can also be a sparse matrix
 from the \code{Matrix} package.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph.}
 

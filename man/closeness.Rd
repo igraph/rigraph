@@ -8,6 +8,7 @@
 closeness(
   graph,
   vids = V(graph),
+  ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -18,6 +19,8 @@ closeness(
 \item{graph}{The graph to analyze.}
 
 \item{vids}{The vertices for which closeness will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths

@@ -8,10 +8,11 @@
 \alias{all_shortest_paths}
 \title{Shortest (directed or undirected) paths between vertices}
 \usage{
-distance_table(graph, directed = TRUE)
+distance_table(graph, ..., directed = TRUE)
 
 mean_distance(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   unconnected = TRUE,
@@ -22,6 +23,7 @@ distances(
   graph,
   v = V(graph),
   to = V(graph),
+  ...,
   mode = c("all", "out", "in"),
   weights = NULL,
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
@@ -32,6 +34,7 @@ shortest_paths(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL,
   output = c("vpath", "epath", "both"),
@@ -44,12 +47,15 @@ all_shortest_paths(
   graph,
   from,
   to = V(graph),
+  ...,
   mode = c("out", "all", "in"),
   weights = NULL
 )
 }
 \arguments{
 \item{graph}{The graph to work on.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Whether to consider directed paths in directed graphs,
 this argument is ignored for undirected graphs.}

@@ -4,10 +4,12 @@
 \alias{feedback_vertex_set}
 \title{Finding a feedback vertex set in a graph}
 \usage{
-feedback_vertex_set(graph, weights = NULL, algo = c("exact_ip"))
+feedback_vertex_set(graph, ..., weights = NULL, algo = c("exact_ip"))
 }
 \arguments{
 \item{graph}{The input graph}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Potential vertex weights. If the graph has a vertex
 attribute called \sQuote{\code{weight}}, and this argument is

@@ -4,7 +4,7 @@
 \alias{dominator_tree}
 \title{Dominator tree}
 \usage{
-dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
+dominator_tree(graph, root, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{A directed graph. If it is not a flowgraph, and it contains
@@ -13,6 +13,8 @@ be collected and returned as part of the result.}
 
 \item{root}{The ID of the root (or source) vertex, this will be the root of
 the tree.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If
 it is \sQuote{\verb{in}}, then all directions are considered as opposite to

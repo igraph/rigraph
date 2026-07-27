@@ -239,35 +239,81 @@ normalise_migration <- function(fn, entry) {
   entry$match_names <- c(entry$recover_old[renamed], entry$tail)
   entry$match_to <- c(entry$recover_new[renamed], entry$tail)
 
-  # Head args are matched by base R *before* `...`, with base R partial matching,
-  # so they are resolved before the recovery layer ever runs. If a head arg name
-  # and a recoverable name are in a prefix relationship, base R silently captures
-  # the abbreviation (or even the full name) for the head arg and it never
-  # reaches `...`: e.g. head `type` swallows `ty=` meant for a recoverable
-  # `typeof`, and a recoverable `type` is swallowed whole by a head `typeof`. The
-  # recovery layer cannot see or defend against this, so reject it here rather
-  # than ship a silent hole. (Merely sharing a leading letter -- `graph` vs a
-  # recoverable `groups` -- is a weaker base-R hazard the two-layer scheme can't
-  # fully eliminate and is left unguarded.)
-  clashes <- character(0)
+  # Head args are matched by base R *before* `...`, with base R partial
+  # matching, so they are resolved before the recovery layer ever runs.
+  # Prefix overlaps between head args and recoverable names therefore need
+  # care, but almost all of them are safe for previously-valid calls, because
+  # *exact* matching beats partial matching and runs across all formals:
+  #
+  # - A full tail name binds its post-`...` formal exactly (head `typeof`
+  #   never swallows a supplied `type =` when `type` is a formal).
+  # - An abbreviation longer than the head arg is no prefix of it, falls
+  #   through to `...`, and is recovered with the deprecation.
+  # - The head arg itself keeps its exact-match meaning from the old
+  #   signature.
+  #
+  # Two hazards remain:
+  #
+  # 1. A *renamed-away* old name that is a prefix of (or equal to) a head
+  #    arg is fatal: it is no longer a formal, so a valid legacy call like
+  #    `f(weight = )` would silently partial-match into the head arg instead
+  #    of reaching recovery. No runtime guard can help; reject at generation
+  #    time.
+  # 2. A *strict prefix* of a head arg that also prefixes a recoverable name
+  #    was ambiguous -- an error -- under the old signature, but now binds
+  #    the head arg via ordinary partial matching. On its own that is
+  #    accepted: previously broken code that now works in a well-defined,
+  #    silent way is not a problem. It is hazardous only in combination
+  #    with legacy arguments in `...`: the tag steals the head slot,
+  #    positionals shift into the wrong formals, and the recovery layer
+  #    would rescue a never-valid call behind a soft-deprecation warning.
+  #    Those *forbidden prefixes* are enumerable: emit a runtime guard
+  #    (migrate_check_call_tags()) inside the recovery gate, so the tag is
+  #    rejected only when `...` is non-empty. Tags that prefix two head
+  #    args stay out of the list -- base R still errors on those by itself.
+  renamed_old <- entry$recover_old[renamed]
+  fatal <- character(0)
   for (h in entry$head) {
-    for (r in entry$match_names) {
-      if (startsWith(h, r) || startsWith(r, h)) {
-        clashes <- c(clashes, paste0(h, " <-> ", r))
+    for (r in renamed_old) {
+      if (startsWith(h, r)) {
+        fatal <- c(fatal, paste0("`", r, "` -> `", h, "`"))
       }
     }
   }
-  if (length(clashes)) {
+  if (length(fatal)) {
     stop(
       "Migration `",
       fn,
-      "`: head arg(s) and recoverable name(s) are in a prefix relationship, ",
-      "so base R partial matching would capture them before recovery runs: ",
-      paste(unique(clashes), collapse = ", "),
-      ". Rename to remove the prefix overlap.",
+      "`: renamed-away old name(s) are prefixes of head arg(s): ",
+      paste(unique(fatal), collapse = ", "),
+      ". A legacy call using the old name would silently bind the head ",
+      "arg. Pick a different head split.",
       call. = FALSE
     )
   }
+
+  tags <- character(0)
+  for (h in entry$head) {
+    if (nchar(h) < 2L) {
+      next
+    }
+    for (len in seq_len(nchar(h) - 1L)) {
+      s <- substr(h, 1L, len)
+      if (!any(startsWith(entry$match_names, s))) {
+        next
+      }
+      # exact matching wins: a tag spelling out any formal is never misrouted
+      if (s %in% entry$new) {
+        next
+      }
+      # a tag prefixing two head args is an R error already, not a silent bind
+      if (sum(startsWith(entry$head, s)) > 1L) {
+        next
+      }
+      tags <- c(tags, s)
+    }
+  }
+  entry$forbidden_tags <- sort(unique(tags))
 
   entry
 }
@@ -340,8 +386,28 @@ render_arg_handle <- function(entry) {
     character(1),
     USE.NAMES = FALSE
   )
+  guard <- character(0)
+  if (length(entry$forbidden_tags)) {
+    quoted <- quote_items(entry$forbidden_tags)
+    joined <- paste0("    c(", paste(quoted, collapse = ", "), "),")
+    if (nchar(joined) + 2L > 80L) {
+      joined <- c(
+        "    c(",
+        paste0("      ", quoted, c(rep(",", length(quoted) - 1L), "")),
+        "    ),"
+      )
+    }
+    guard <- c(
+      "  migrate_check_call_tags(",
+      "    sys.call(),",
+      joined,
+      paste0("    \"", entry$fn, "\""),
+      "  )"
+    )
+  }
   c(
     "if (...length() > 0L) {",
+    guard,
     "  .arg_handle <- migrate_recover_args(",
     "    list(...),",
     render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),

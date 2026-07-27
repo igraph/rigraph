@@ -8,6 +8,7 @@ transitivity(
   graph,
   type = c("undirected", "global", "globalundirected", "localundirected", "local",
     "average", "localaverage", "localaverageundirected", "barrat", "weighted"),
+  ...,
   vids = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
@@ -46,6 +47,8 @@ The weighted transitivity as defined by A. Barrat. See details below.
 The same as \code{barrat}.
 }
 }}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{vids}{The vertex IDs for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is
