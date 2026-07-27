@@ -1,0 +1,25 @@
+From 6eb407bbd348403507efaa4dd562031880cf3c88 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Thu, 11 Sep 2025 11:17:49 +0200
+Subject: [PATCH] count_reachable
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index da6f8b3c16..6b46816f1d 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -1332,7 +1332,7 @@ igraph_is_biconnected:
+     PARAMS: GRAPH graph, OUT BOOLEAN res
+ 
+ igraph_count_reachable:
+-    PARAMS: GRAPH graph, OUT VECTOR_INT counts, NEIMODE mode
++    PARAMS: GRAPH graph, OUT VECTOR_INT counts, NEIMODE mode=OUT
+ 
+ #######################################
+ # Percolation
+-- 
+2.50.1
+

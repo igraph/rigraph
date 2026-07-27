@@ -34,6 +34,7 @@ reference:
 - subtitle: Deterministic constructors
 - contents:
   - starts_with("make_")
+  - -make_clusters
   - realize_degseq
   - realize_bipartite_degseq
   - has_concept("deterministic constructors")
@@ -65,6 +66,7 @@ reference:
   - has_concept("plot.common")
   - has_concept("plot.shapes")
   - vertex.shape.pie
+  - align_layout
 - subtitle: Graph coloring
 - contents:
   - has_concept("coloring")
@@ -112,6 +114,9 @@ reference:
   - running_mean
   - sample_seq
   - fit_power_law
+- subtitle: Low-level operations
+- contents:
+  - has_concept("low-level operations")
 # [[[ network analysis start
 - title: Structural properties
 - contents:
@@ -186,7 +191,7 @@ reference:
 - contents:
   - has_concept("cliques")
   - has_concept("glet")
-- title: Community detection
+- title: Community detection (clustering)
 - contents:
   - has_concept("community")
 - title: Graph cycles
@@ -213,9 +218,6 @@ reference:
   - has_concept("processes")
   - has_concept("random_walk")
 # -----
-- title: Demo
-- contents:
-  - has_concept("demo")
 - title: I/O read/write files
 - contents:
   - has_concept("foreign")
@@ -242,7 +244,7 @@ authors:
   Vincent Traag:
     href: "https://www.traag.net/"
   Szabolcs Horvát:
-    href: "http://szhorvat.net/"
+    href: "https://szhorvat.net/"
   Fabio Zanini:
     href: "https://fabilab.org/pages/people.html"
   Daniel Noom:

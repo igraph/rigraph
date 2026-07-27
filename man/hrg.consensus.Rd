@@ -26,4 +26,8 @@ missing edge prediction.}
 \code{hrg.consensus()} was renamed to \code{\link[=consensus_tree]{consensus_tree()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_consensus}{\code{hrg_consensus()}}
+}
+
 \keyword{internal}

@@ -1,9 +1,67 @@
+# handle_vertex_type_arg validates and converts the type attribute
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Warning:
+      The `type` vertex attribute is not logical; converting to logical.
+    Output
+      [1]  TRUE FALSE  TRUE FALSE
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute contains "NA" values, which are not allowed.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, g)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! The `type` vertex attribute is not logical and could not be converted to logical. Please set it to a logical vector.
+
+---
+
+    Code
+      handle_vertex_type_arg(NULL, make_ring(4), required = TRUE)
+    Condition
+      Error in `handle_vertex_type_arg()`:
+      ! Not a bipartite graph, supply `types` argument or add a vertex attribute named `type`.
+
+# with_vertex_
+
+    Code
+      make_(from_literal(A - A:B:C, B - A:B:C), with_vertex_(color = 1:2))
+    Condition
+      Error in `make_()`:
+      ! Length of new attribute value must be 1 or 3, the number of target vertices, not 2.
+
+# with_edge_
+
+    Code
+      make_(from_literal(A - A:B:C, B - A:B:C), with_edge_(color = 1:2))
+    Condition
+      Error in `make_()`:
+      ! Length of new attribute value must be 1 or 3, the number of target edges, not 2.
+
 # error messages work
 
     Code
       set_vertex_attr(g, "test", value = c(1, 2))
     Condition
-      Error in `i_set_vertex_attr()`:
+      Error in `set_vertex_attr()`:
       ! Length of new attribute value must be 1 or 5, the number of target vertices, not 2.
 
 ---
@@ -11,7 +69,7 @@
     Code
       set_edge_attr(g, "test", value = c(1, 2))
     Condition
-      Error in `i_set_edge_attr()`:
+      Error in `set_edge_attr()`:
       ! Length of new attribute value must be 1 or 10, the number of target edges, not 2.
 
 ---
@@ -61,4 +119,12 @@
     Condition
       Error in `set_graph_attr()`:
       ! `name` must be a single string, not the number 1.
+
+# set_vertex_attrs() works
+
+    Code
+      set_vertex_attrs(g)
+    Condition
+      Error in `set_vertex_attrs()`:
+      ! All arguments in `...` must be named.
 

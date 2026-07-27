@@ -154,10 +154,15 @@ pak::pak("igraph/igraph.r2cdocs")
 [roxygen2](https://roxygen2.r-lib.org/), and run `devtools::document()` or `make
 igraph` to update the `.Rd` files.
 
-- Links to C docs are added using the cdocs tag, for instance:
+- Links to C docs are added automatically thanks to the igraph.r2cdocs's roclet.
 
-```
-#' @cdocs igraph_assortativity
+- Write "ID"/"IDs" (not "id"/"ids") when referring to vertex or edge IDs in
+documentation prose. Lowercase stays only where the token is code: argument
+names, runnable `@examples`, and spans wrapped in `` `...` `` or `\code{}`. You
+can check roxygen prose for stray lowercase forms with:
+
+```sh
+Rscript tools/check-id-casing.R
 ```
 
 ### Maintaining igraph.r2cdocs
@@ -175,7 +180,7 @@ some unit testing support functions.
 
 In general, if you are not sure about something, please ask! You can open an
 issue on Github, write to the igraph-help mailing list (see the homepage at
-http://igraph.org), or write to Tamás and Gábor. We prefer the public forums,
+<https://igraph.org>), or write to Tamás and Gábor. We prefer the public forums,
 though, because then others can learn from it, too.
 
 ## Legal Stuff

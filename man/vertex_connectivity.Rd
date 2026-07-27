@@ -7,7 +7,7 @@
 \alias{cohesion.igraph}
 \title{Vertex connectivity}
 \usage{
-vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+vertex_connectivity(graph, source = NULL, target = NULL, ..., checks = TRUE)
 
 vertex_disjoint_paths(graph, source = NULL, target = NULL)
 
@@ -16,21 +16,22 @@ vertex_disjoint_paths(graph, source = NULL, target = NULL)
 \arguments{
 \item{graph, x}{The input graph.}
 
-\item{source}{The id of the source vertex, for \code{vertex_connectivity()} it
+\item{source}{The ID of the source vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{vertex_connectivity()} it
+\item{target}{The ID of the target vertex, for \code{vertex_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{checks}{Logical constant. Whether to check that the graph is connected
+\item{...}{Additional arguments passed to methods. Not used by \code{vertex_connectivity()}
+directly but may be used by other methods that implement \code{cohesion()}.}
+
+\item{checks}{Logical. Whether to check that the graph is connected
 and also the degree of the vertices. If the graph is not (strongly)
 connected then the connectivity is obviously zero. Otherwise if the minimum
 degree is one then the vertex connectivity is also one. It is a good idea to
 perform these checks, as they can be done quickly compared to the
 connectivity calculation itself.  They were suggested by Peter McMahan,
 thanks Peter.}
-
-\item{...}{Ignored.}
 }
 \value{
 A scalar real value.
@@ -74,6 +75,10 @@ These three functions essentially calculate the same measure(s), more
 precisely \code{vertex_connectivity()} is the most general, the other two are
 included only for the ease of using more descriptive function names.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_st_vertex_connectivity}{\code{st_vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_connectivity}{\code{vertex_connectivity()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_vertex_disjoint_paths}{\code{vertex_disjoint_paths()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Flows.html#igraph_cohesion}{\code{cohesion()}}
+}
+
 \examples{
 
 g <- sample_pa(100, m = 1)
@@ -96,17 +101,17 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
 \emph{Sociological Methodology} 31 (1) : 305-359.
 }
 \seealso{
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()}
+Other flow:
+\code{\link[=dominator_tree]{dominator_tree()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}},
+\code{\link[=is_min_separator]{is_min_separator()}},
+\code{\link[=is_separator]{is_separator()}},
+\code{\link[=max_flow]{max_flow()}},
+\code{\link[=min_cut]{min_cut()}},
+\code{\link[=min_separators]{min_separators()}},
+\code{\link[=min_st_separators]{min_st_separators()}},
+\code{\link[=st_cuts]{st_cuts()}},
+\code{\link[=st_min_cuts]{st_min_cuts()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

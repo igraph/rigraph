@@ -7,11 +7,13 @@
 power_centrality(
   graph,
   nodes = V(graph),
+  ...,
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
   tol = 1e-07,
-  sparse = TRUE
+  sparse = TRUE,
+  weights = NULL
 )
 }
 \arguments{
@@ -20,7 +22,9 @@ power_centrality(
 \item{nodes}{vertex sequence indicating which vertices are to be included in
 the calculation.  By default, all vertices are included.}
 
-\item{loops}{boolean indicating whether or not the diagonal should be
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{loops}{Logical indicating whether or not the diagonal should be
 treated as valid data.  Set this true if and only if the data can contain
 loops.  \code{loops} is \code{FALSE} by default.}
 
@@ -33,9 +37,22 @@ score; can be negative}
 \item{tol}{tolerance for near-singularities during matrix inversion (see
 \code{\link[=solve]{solve()}})}
 
-\item{sparse}{Logical scalar, whether to use sparse matrices for the
+\item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
+
+\item{weights}{One of the following:
+\itemize{
+\item \code{NULL} (default): use the \code{weight} edge attribute if the graph has
+one, otherwise return a traditional (unweighted) adjacency matrix.
+\item \code{NA}: explicitly unweighted, ignoring any \code{weight} edge attribute.
+\item A numeric or logical vector of length \code{\link[=ecount]{ecount()}}: use these values
+directly as edge weights.
+\item A character scalar: the name of an edge attribute whose values are
+used as weights. The attribute must be numeric or logical.
+}
+If multiple edges share endpoints, the value of an arbitrarily chosen edge
+is included in the matrix.}
 }
 \value{
 A vector, containing the centrality scores.
@@ -102,6 +119,10 @@ this algorithm; thus, the routine may fail in certain cases.  This will be
 fixed when we get a better algorithm.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency}{\code{get_adjacency()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_adjacency_sparse}{\code{get_adjacency_sparse()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple}{\code{is_simple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 # Generate some test data from Bonacich, 1987:
@@ -113,19 +134,19 @@ g.f <- make_graph(
   dir = FALSE
 )
 # Compute power centrality scores
-for (e in seq(-0.5, .5, by = 0.1)) {
+for (e in seq(-0.5, 0.5, by = 0.1)) {
   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 }
 
-for (e in seq(-0.4, .4, by = 0.1)) {
+for (e in seq(-0.4, 0.4, by = 0.1)) {
   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 }
 
@@ -141,23 +162,23 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
 
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{betweenness}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hits_scores}()},
-\code{\link{page_rank}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
+Centrality measures:
+\code{\link[=alpha_centrality]{alpha_centrality()}},
+\code{\link[=authority_score]{authority_score()}},
+\code{\link[=betweenness]{betweenness()}},
+\code{\link[=closeness]{closeness()}},
+\code{\link[=diversity]{diversity()}},
+\code{\link[=eigen_centrality]{eigen_centrality()}},
+\code{\link[=harmonic_centrality]{harmonic_centrality()}},
+\code{\link[=hits_scores]{hits_scores()}},
+\code{\link[=page_rank]{page_rank()}},
+\code{\link[=spectrum]{spectrum()}},
+\code{\link[=strength]{strength()}},
+\code{\link[=subgraph_centrality]{subgraph_centrality()}}
 }
 \author{
 Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
 igraph by Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{centrality}

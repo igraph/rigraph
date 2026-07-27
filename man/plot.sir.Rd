@@ -29,7 +29,7 @@ function.}
 \item{comp}{Character scalar, which component to plot. Either \sQuote{NI}
 (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).}
 
-\item{median}{Logical scalar, whether to plot the (binned) median.}
+\item{median}{Logical, whether to plot the (binned) median.}
 
 \item{quantiles}{A vector of (binned) quantiles to plot.}
 
@@ -85,11 +85,11 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=sir]{sir()}} for running the actual simulation.
 
-Processes on graphs
-\code{\link{time_bins}()}
+Processes on graphs:
+\code{\link[=time_bins]{time_bins()}}
 }
 \author{
-Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
+Eric Kolaczyk (\url{https://kolaczyk.github.io/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com}.
 }
 \concept{processes}

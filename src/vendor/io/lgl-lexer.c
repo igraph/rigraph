@@ -726,10 +726,10 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 
 */
 
-#include <stdlib.h>
-
 #include "io/lgl-header.h"
 #include "io/parsers/lgl-parser.h"
+
+#include <stdlib.h>
 
 #define YY_EXTRA_TYPE igraph_i_lgl_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;

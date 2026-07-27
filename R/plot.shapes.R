@@ -10,7 +10,7 @@
 #' @export
 igraph.shape.noplot <- function(coords, v = NULL, params) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noplot()", "shape_noplot()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.shape.noplot()", "shape_noplot()")
   shape_noplot(coords = coords, v = v, params = params)
 } # nocov end
 
@@ -31,7 +31,7 @@ igraph.shape.noclip <- function(
   end = c("both", "from", "to")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noclip()", "shape_noclip()")
+  lifecycle::deprecate_warn("2.0.0", "igraph.shape.noclip()", "shape_noclip()")
   shape_noclip(coords = coords, el = el, params = params, end = end)
 } # nocov end
 
@@ -47,7 +47,7 @@ igraph.shape.noclip <- function(
 #' @export
 vertex.shapes <- function(shape = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "vertex.shapes()", "shapes()")
+  lifecycle::deprecate_warn("2.0.0", "vertex.shapes()", "shapes()")
   shapes(shape = shape)
 } # nocov end
 
@@ -68,7 +68,7 @@ add.vertex.shape <- function(
   parameters = list()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "add.vertex.shape()", "add_shape()")
+  lifecycle::deprecate_warn("2.0.0", "add.vertex.shape()", "add_shape()")
   add_shape(shape = shape, clip = clip, plot = plot, parameters = parameters)
 } # nocov end
 
@@ -196,7 +196,7 @@ add.vertex.shape <- function(
 #'       The coordinates of the vertices, a matrix with two columns.
 #'     }
 #'     \item{v}{
-#'       The ids of the vertices to plot. It should match the number of rows in the `coords` argument.
+#'       The IDs of the vertices to plot. It should match the number of rows in the `coords` argument.
 #'     }
 #'     \item{params}{
 #'       The same as for the clipping function, see above.
@@ -351,7 +351,7 @@ shapes <- function(shape = NULL) {
 #' @rdname shapes
 #' @export
 shape_noclip <- function(coords, el, params, end = c("both", "from", "to")) {
-  end <- igraph.match.arg(end)
+  end <- igraph_match_arg(end)
 
   if (end == "both") {
     coords
@@ -369,13 +369,41 @@ shape_noplot <- function(coords, v = NULL, params) {
 }
 
 #' @rdname shapes
+#' @inheritParams rlang::args_dots_empty
 #' @export
 add_shape <- function(
   shape,
+  ...,
   clip = shape_noclip,
   plot = shape_noplot,
   parameters = list()
 ) {
+  # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(clip = clip, plot = plot, parameters = parameters),
+      recover_new = c("clip", "plot", "parameters"),
+      recover_old = c("clip", "plot", "parameters"),
+      match_names = c("clip", "plot", "parameters"),
+      match_to = c("clip", "plot", "parameters"),
+      defaults = list(
+        clip = shape_noclip,
+        plot = shape_noplot,
+        parameters = list()
+      ),
+      head_args = c("shape"),
+      fn_name = "add_shape"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!is.character(shape) || length(shape) != 1) {
     cli::cli_abort(c(
       "{.arg shape} must be a character of length 1.",
@@ -408,12 +436,12 @@ add_shape <- function(
   }
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
-  do.call(igraph.options, parameters)
+  do.call(igraph_options, parameters)
   invisible(TRUE)
 }
 
 ## These are the predefined shapes
-
+#nocov start
 .igraph.shape.circle.clip <- function(
   coords,
   el,
@@ -1112,7 +1140,7 @@ add_shape <- function(
   ## does not plot anything at all
   invisible(NULL)
 }
-
+#nocov end
 #' @importFrom graphics par polygon
 mypie <- function(
   x,
@@ -1170,7 +1198,7 @@ mypie <- function(
     )
   }
 }
-
+#nocov start
 .igraph.shape.pie.clip <- function(
   coords,
   el,
@@ -1241,7 +1269,6 @@ mypie <- function(
     }
     p
   }
-  vertex.color <- getparam("color")
 
   vertex.frame.color <- rep(
     getparam("frame.color"),
@@ -1351,6 +1378,8 @@ mypie <- function(
     )
   }
 }
+
+#nocov end
 
 .igraph.shapes <- new.env()
 .igraph.shapes[["circle"]] <- list(

@@ -6,6 +6,7 @@
 \usage{
 cluster_infomap(
   graph,
+  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
@@ -15,15 +16,17 @@ cluster_infomap(
 \arguments{
 \item{graph}{The input graph. Edge directions will be taken into account.}
 
-\item{e.weights}{If not \code{NULL}, then a numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default the
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{e.weights}{Numeric vector of edge weights.
+The length must match the number of edges in the graph.  By default (\code{NULL}) the
 \sQuote{\code{weight}} edge attribute is used as weights. If it is not
 present, then all edges are considered to have the same weight.
 Larger edge weights correspond to stronger connections.}
 
-\item{v.weights}{If not \code{NULL}, then a numeric vector of vertex
+\item{v.weights}{Numeric vector of vertex
 weights. The length must match the number of vertices in the graph.  By
-default the \sQuote{\code{weight}} vertex attribute is used as weights. If
+default (\code{NULL}) the \sQuote{\code{weight}} vertex attribute is used as weights. If
 it is not present, then all vertices are considered to have the same weight.
 A larger vertex weight means a larger probability that the random surfer
 jumps to that vertex.}
@@ -31,7 +34,7 @@ jumps to that vertex.}
 \item{nb.trials}{The number of attempts to partition the network (can be any
 integer value equal or larger than 1).}
 
-\item{modularity}{Logical scalar, whether to calculate the modularity score
+\item{modularity}{Logical, whether to calculate the modularity score
 of the detected community structure.}
 }
 \value{
@@ -46,6 +49,10 @@ be taken into account.
 \details{
 Please see the details of this method in the references given below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Community.html#igraph_community_infomap}{\code{community_infomap()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \examples{
 
 ## Zachary's karate club
@@ -68,26 +75,26 @@ equation, \emph{Eur. Phys. J. Special Topics} 178, 13 (2009).
 \seealso{
 Other community finding methods and \code{\link[=communities]{communities()}}.
 
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()},
-\code{\link{voronoi_cells}()}
+Community detection:
+\code{\link[=as_membership]{as_membership()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=compare]{compare()}},
+\code{\link[=groups]{groups()}},
+\code{\link[=make_clusters]{make_clusters()}},
+\code{\link[=membership]{membership()}},
+\code{\link[=modularity.igraph]{modularity.igraph()}},
+\code{\link[=plot_dendrogram]{plot_dendrogram()}},
+\code{\link[=split_join_distance]{split_join_distance()}},
+\code{\link[=voronoi_cells]{voronoi_cells()}}
 }
 \author{
 Martin Rosvall wrote the original C++ code. This was ported to

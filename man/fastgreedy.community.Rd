@@ -16,12 +16,12 @@ fastgreedy.community(
 \item{graph}{The input graph. It must be undirected and must not have
 multi-edges.}
 
-\item{merges}{Logical scalar, whether to return the merge matrix.}
+\item{merges}{Logical, whether to return the merge matrix.}
 
-\item{modularity}{Logical scalar, whether to return a vector containing the
+\item{modularity}{Logical, whether to return a vector containing the
 modularity after each merge.}
 
-\item{membership}{Logical scalar, whether to calculate the membership vector
+\item{membership}{Logical, whether to calculate the membership vector
 corresponding to the maximum modularity score, considering all possible
 community structures along the merges.}
 
@@ -39,4 +39,8 @@ edge weight means a stronger connection for this function.}
 \code{fastgreedy.community()} was renamed to \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
+}
+
 \keyword{internal}

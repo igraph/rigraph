@@ -24,6 +24,10 @@ class are isomorphic and isomorphic graphs always have the same
 isomorphism class. Currently it can handle directed graphs with 3 or 4
 vertices and undirected graphs with 3 to 6 vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass_subgraph}{\code{isoclass_subgraph()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_isoclass}{\code{isoclass()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # create some non-isomorphic graphs
 g1 <- graph_from_isomorphism_class(3, 10)
@@ -33,14 +37,14 @@ isomorphism_class(g2)
 isomorphic(g1, g2)
 }
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphic}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphic]{subgraph_isomorphic()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \concept{graph isomorphism}

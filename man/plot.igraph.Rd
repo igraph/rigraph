@@ -9,8 +9,8 @@
   x,
   axes = FALSE,
   add = FALSE,
-  xlim = c(-1, 1),
-  ylim = c(-1, 1),
+  xlim = NULL,
+  ylim = NULL,
   mark.groups = list(),
   mark.shape = 1/2,
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
@@ -26,7 +26,7 @@
 
 \item{axes}{Logical, whether to plot axes, defaults to FALSE.}
 
-\item{add}{Logical scalar, whether to add the plot to the current device, or
+\item{add}{Logical, whether to add the plot to the current device, or
 delete the device's current contents first.}
 
 \item{xlim}{The limits for the horizontal axis, it is unlikely that you want
@@ -35,7 +35,7 @@ to modify this.}
 \item{ylim}{The limits for the vertical axis, it is unlikely that you want
 to modify this.}
 
-\item{mark.groups}{A list of vertex id vectors. It is interpreted as a set
+\item{mark.groups}{A list of vertex ID vectors. It is interpreted as a set
 of vertex groups. Each vertex group is highlighted, by plotting a colored
 smoothed polygon around and \dQuote{under} it. See the arguments below to
 control the look of the polygons.}
@@ -48,7 +48,7 @@ used for the different vertex groups.}
 
 \item{mark.col}{A scalar or vector giving the colors of marking the
 polygons, in any format accepted by \code{\link[graphics:xspline]{graphics::xspline()}}; e.g.
-numeric color ids, symbolic color names, or colors in RGB.}
+numeric color IDs, symbolic color names, or colors in RGB.}
 
 \item{mark.border}{A scalar or vector giving the colors of the borders of
 the vertex group marking polygons. If it is \code{NA}, then no border is
@@ -84,6 +84,10 @@ first, handtune the placement of the vertices, query the coordinates by the
 \code{\link[=tk_coords]{tk_coords()}} function and use them with \code{\link[=plot]{plot()}} to
 plot the graph to any R device.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_edgelist}{\code{get_edgelist()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_incident}{\code{incident()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull_2d}{\code{convex_hull_2d()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -96,8 +100,8 @@ plot(g, layout = layout_with_kk, vertex.color = "green")
 parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other
 graph plotting functions.
 
-Other plot: 
-\code{\link{rglplot}()}
+Other plot:
+\code{\link[=rglplot]{rglplot()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

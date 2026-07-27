@@ -49,8 +49,8 @@ This is the LAD algorithm by Solnon, see the reference below. It has
 the following extra arguments:
 \describe{
 \item{domains}{
-If not \code{NULL}, then it specifies matching restrictions.
-It must be a list of \code{target} vertex sets, given as numeric vertex ids or symbolic vertex names.
+Matching restrictions.
+It must be a list of \code{target} vertex sets, given as numeric vertex IDs or symbolic vertex names.
 The length of the list must be \code{vcount(pattern)} and for each vertex in \code{pattern}
 it gives the allowed matching vertices in \code{target}.
 Defaults to \code{NULL}.
@@ -84,6 +84,10 @@ If they are not given, but the graph has a \dQuote{color} edge attribute, then i
 If you want to ignore these attributes, then supply \code{NULL} for both of these arguments.
 }
 }
+}
+
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_subisomorphic_vf2}{\code{subisomorphic_vf2()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{
@@ -120,14 +124,14 @@ C. Solnon: AllDifferent-based Filtering for Subgraph Isomorphism,
 \emph{Artificial Intelligence} 174(12-13):850--864, 2010.
 }
 \seealso{
-Other graph isomorphism: 
-\code{\link{canonical_permutation}()},
-\code{\link{count_isomorphisms}()},
-\code{\link{count_subgraph_isomorphisms}()},
-\code{\link{graph_from_isomorphism_class}()},
-\code{\link{isomorphic}()},
-\code{\link{isomorphism_class}()},
-\code{\link{isomorphisms}()},
-\code{\link{subgraph_isomorphisms}()}
+Other graph isomorphism:
+\code{\link[=canonical_permutation]{canonical_permutation()}},
+\code{\link[=count_isomorphisms]{count_isomorphisms()}},
+\code{\link[=count_subgraph_isomorphisms]{count_subgraph_isomorphisms()}},
+\code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}},
+\code{\link[=isomorphic]{isomorphic()}},
+\code{\link[=isomorphism_class]{isomorphism_class()}},
+\code{\link[=isomorphisms]{isomorphisms()}},
+\code{\link[=subgraph_isomorphisms]{subgraph_isomorphisms()}}
 }
 \concept{graph isomorphism}

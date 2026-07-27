@@ -26,7 +26,8 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex ids for which the similarity is calculated.
+#' @param vids The vertex IDs for which the similarity is calculated.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
 #'   \sQuote{`all`}.
@@ -43,7 +44,6 @@
 #' @keywords graphs
 #' @family similarity
 #' @family cocitation
-#' @cdocs igraph_similarity_jaccard igraph_similarity_dice igraph_similarity_inverse_log_weighted
 #' @export
 #' @examples
 #'
@@ -53,6 +53,7 @@
 similarity <- function(
   graph,
   vids = V(graph),
+  ...,
   mode = c(
     "all",
     "out",
@@ -66,13 +67,53 @@ similarity <- function(
     "invlogweighted"
   )
 ) {
-  method <- igraph.match.arg(method)
+  # BEGIN GENERATED ARG_HANDLE: similarity, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(mode = mode, loops = loops, method = method),
+      recover_new = c("mode", "loops", "method"),
+      recover_old = c("mode", "loops", "method"),
+      match_names = c("mode", "loops", "method"),
+      match_to = c("mode", "loops", "method"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = FALSE,
+        method = c("jaccard", "dice", "invlogweighted")
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "similarity"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  method <- igraph_match_arg(method)
   if (method == "jaccard") {
-    similarity_jaccard_impl(graph, vids, mode, loops)
+    similarity_jaccard_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode,
+      loops = loops
+    )
   } else if (method == "dice") {
-    similarity_dice_impl(graph, vids, mode, loops)
+    similarity_dice_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode,
+      loops = loops
+    )
   } else if (method == "invlogweighted") {
-    similarity_inverse_log_weighted_impl(graph, vids, mode)
+    similarity_inverse_log_weighted_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode
+    )
   }
 }
 
@@ -91,7 +132,7 @@ similarity.jaccard <- function(
   mode = c("all", "out", "in", "total"),
   loops = FALSE
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "similarity.jaccard()",
     "similarity(method)",
@@ -122,7 +163,7 @@ similarity.dice <- function(
   mode = c("all", "out", "in", "total"),
   loops = FALSE
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "similarity.dice()",
     "similarity(method)",
@@ -152,7 +193,7 @@ similarity.invlogweighted <- function(
   vids = V(graph),
   mode = c("all", "out", "in", "total")
 ) {
-  lifecycle::deprecate_soft(
+  lifecycle::deprecate_warn(
     "2.1.0",
     "similarity.invlogweighted()",
     "similarity(method)",
