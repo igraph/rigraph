@@ -24,8 +24,6 @@ as_undirected(
 \code{as_undirected()} it can be \code{each}, \code{collapse} or
 \code{mutual}. See details below.}
 
-\item{...}{These dots are for future extensions and must be empty.}
-
 \item{edge_attr_combine}{Specifies what to do with edge attributes, if
 \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
 might be mapped to a single one in the new graph, and their attributes are
