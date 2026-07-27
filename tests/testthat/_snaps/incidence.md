@@ -61,7 +61,7 @@
 # graph_from_biadjacency_matrix() errors well
 
     Code
-      (graph_from_biadjacency_matrix(inc, weight = FALSE))
+      (graph_from_biadjacency_matrix(inc, weighted = FALSE))
     Condition
       Error in `graph_from_biadjacency_matrix()`:
       ! `weighted` can't be `FALSE`.
@@ -70,7 +70,7 @@
 ---
 
     Code
-      (graph_from_biadjacency_matrix(inc, weight = 42))
+      (graph_from_biadjacency_matrix(inc, weighted = 42))
     Condition
       Error in `graph_from_biadjacency_matrix()`:
       ! `weighted` can't be a number.

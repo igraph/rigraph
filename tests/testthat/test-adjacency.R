@@ -948,3 +948,57 @@ test_that("graph_from_adjacency NA check for upper/lower with sparse matrices", 
     graph_from_adjacency_matrix(sp2, mode = "upper", weighted = TRUE)
   )
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("graph_from_adjacency_matrix() recovers positional mode with a deprecation", {
+  # All tail arguments are already exercised by name elsewhere in this file,
+  # so only the legacy positional path is covered here.
+  M <- rbind(c(0, 1, 2), c(1, 3, 0), c(2, 0, 0))
+
+  lifecycle::expect_deprecated(
+    res <- graph_from_adjacency_matrix(M, "undirected")
+  )
+  expect_identical_graphs(
+    res,
+    graph_from_adjacency_matrix(M, mode = "undirected")
+  )
+  expect_false(is_directed(res))
+})
+
+test_that("from_adjacency() covers tail args by name and recovers positional calls", {
+  M <- rbind(c(0, 1, 2), c(1, 3, 0), c(2, 0, 0))
+  rownames(M) <- c("r1", "r2", "r3")
+  colnames(M) <- c("c1", "c2", "c3")
+
+  g_spec <- make_(from_adjacency(
+    M,
+    mode = "undirected",
+    weighted = TRUE,
+    diag = FALSE,
+    add.colnames = "col_code",
+    add.rownames = "row_code"
+  ))
+  g_direct <- graph_from_adjacency_matrix(
+    M,
+    mode = "undirected",
+    weighted = TRUE,
+    diag = FALSE,
+    add.colnames = "col_code",
+    add.rownames = "row_code"
+  )
+  expect_identical_graphs(g_spec, g_direct)
+  # diag = FALSE drops the loop on vertex 2.
+  expect_ecount(g_spec, 2)
+  expect_identical(sort(E(g_spec)$weight), c(1, 2))
+  expect_identical(V(g_spec)$col_code, c("c1", "c2", "c3"))
+  expect_identical(V(g_spec)$row_code, c("r1", "r2", "r3"))
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- from_adjacency(M, "undirected")
+  )
+  expect_identical_graphs(
+    make_(spec_legacy),
+    make_(from_adjacency(M, mode = "undirected"))
+  )
+})

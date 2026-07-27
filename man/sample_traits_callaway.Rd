@@ -10,6 +10,7 @@
 sample_traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -19,6 +20,7 @@ sample_traits_callaway(
 traits_callaway(
   nodes,
   types,
+  ...,
   edge.per.step = 1,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
@@ -29,6 +31,7 @@ sample_traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -38,6 +41,7 @@ traits(
   nodes,
   types,
   k = 1,
+  ...,
   type.dist = rep(1, types),
   pref.matrix = matrix(1, types, types),
   directed = FALSE
@@ -47,6 +51,8 @@ traits(
 \item{nodes}{The number of vertices in the graph.}
 
 \item{types}{The number of different vertex types.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{edge.per.step}{The number of edges to add to the graph per time step.}
 

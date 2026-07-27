@@ -64,6 +64,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #'
 #' @param graph The input graph, edge directions are ignored. Only simple graph
 #'   (i.e. graphs without self-loops and multiple edges) are supported.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
 #'   and this argument is `NULL` (the default), then the `weight` edge
 #'   attribute is used.
@@ -135,7 +136,33 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' }
 #' @family glet
 #' @export
-graphlet_basis <- function(graph, weights = NULL) {
+graphlet_basis <- function(
+  graph,
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_basis, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights),
+      recover_new = c("weights"),
+      recover_old = c("weights"),
+      match_names = c("weights"),
+      match_to = c("weights"),
+      defaults = list(weights = NULL),
+      head_args = c("graph"),
+      fn_name = "graphlet_basis"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   graphlets_candidate_basis_impl(
     graph = graph,
     weights = weights
@@ -143,14 +170,42 @@ graphlet_basis <- function(graph, weights = NULL) {
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
 graphlet_proj <- function(
   graph,
+  ...,
   weights = NULL,
   cliques,
   niter = 1000,
   Mu = rep(1, length(cliques))
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, niter = niter, Mu = Mu),
+      recover_new = c("weights", "cliques", "niter", "Mu"),
+      recover_old = c("weights", "cliques", "niter", "Mu"),
+      match_names = c("weights", "cliques", "niter", "Mu"),
+      match_to = c("weights", "cliques", "niter", "Mu"),
+      defaults = list(
+        weights = NULL,
+        niter = 1000,
+        Mu = rep(1, length(cliques))
+      ),
+      head_args = c("graph"),
+      fn_name = "graphlet_proj"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -228,8 +283,36 @@ function() {
 }
 
 #' @rdname graphlet_basis
+#' @inheritParams rlang::args_dots_empty
 #' @export
-graphlets <- function(graph, weights = NULL, niter = 1000) {
+graphlets <- function(
+  graph,
+  ...,
+  weights = NULL,
+  niter = 1000
+) {
+  # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, niter = niter),
+      recover_new = c("weights", "niter"),
+      recover_old = c("weights", "niter"),
+      match_names = c("weights", "niter"),
+      match_to = c("weights", "niter"),
+      defaults = list(weights = NULL, niter = 1000),
+      head_args = c("graph"),
+      fn_name = "graphlets"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   graphlets_impl(
     graph = graph,
     weights = weights,

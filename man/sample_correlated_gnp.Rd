@@ -8,6 +8,7 @@ adding/removing edges}
 sample_correlated_gnp(
   old.graph,
   corr,
+  ...,
   p = edge_density(old.graph),
   permutation = NULL
 )
@@ -18,6 +19,8 @@ sample_correlated_gnp(
 \item{corr}{A scalar in the unit interval, the target Pearson
 correlation between the adjacency matrices of the original and the generated
 graph (the adjacency matrix being used as a vector).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{p}{A numeric scalar, the probability of an edge between two
 vertices, it must in the open (0,1) interval. The default is the empirical

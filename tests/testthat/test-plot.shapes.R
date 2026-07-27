@@ -272,3 +272,43 @@ test_that("shape functions handle edge cases", {
     expect_silent(clip_func(coords, el, params_zero, "both"))
   }
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("add_shape() covers `clip`, `plot` and `parameters`", {
+  clip_cov <- function(coords, el, params, end = c("both", "from", "to")) {
+    coords
+  }
+  plot_cov <- function(coords, v = NULL, params) invisible(NULL)
+
+  expect_true(add_shape(
+    "coverage_shape",
+    clip = clip_cov,
+    plot = plot_cov,
+    parameters = list(vertex.coverage.dummy = 42)
+  ))
+  # The clip/plot functions are registered under the new shape name.
+  expect_identical(
+    shapes("coverage_shape"),
+    list(clip = clip_cov, plot = plot_cov)
+  )
+  # The extra parameter is installed as an igraph option with its default.
+  expect_identical(igraph_opt("vertex.coverage.dummy"), 42)
+})
+
+test_that("add_shape() recovers a positional `clip` with a deprecation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  clip_cov <- function(coords, el, params, end = c("both", "from", "to")) {
+    coords
+  }
+
+  lifecycle::expect_deprecated(
+    res <- add_shape("coverage_shape_pos", clip_cov)
+  )
+  expect_true(res)
+  # The positional value lands on `clip`; `plot` keeps its default.
+  expect_identical(
+    shapes("coverage_shape_pos"),
+    list(clip = clip_cov, plot = shape_noplot)
+  )
+})

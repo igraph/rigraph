@@ -269,3 +269,56 @@ test_that("motifs with callback output matches expected", {
     motif_data[1:2]
   })
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("motifs() recovers legacy positional arguments", {
+  # `cut.prob` and `callback` are exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # An all-zero cut probability vector matches the default of no cuts.
+  lifecycle::expect_deprecated(
+    res <- motifs(g, 3, rep(0, 3))
+  )
+  expect_identical(res, motifs(g, 3, cut.prob = rep(0, 3)))
+  expect_identical(res, motifs(g, 3))
+})
+
+test_that("count_motifs() recovers legacy positional arguments", {
+  # `cut.prob` is exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Cutting the search with probability one at every level
+  # deterministically drops all motifs.
+  lifecycle::expect_deprecated(
+    res <- count_motifs(g, 3, c(1, 1, 1))
+  )
+  expect_identical(res, count_motifs(g, 3, cut.prob = c(1, 1, 1)))
+  expect_equal(res, 0)
+  expect_equal(count_motifs(g, size = 3), 12)
+})
+
+test_that("sample_motifs() covers cut.prob and sample.size", {
+  # `sample` is exercised by name above.
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Starting the search from every vertex makes the estimate exact.
+  igraph_with_seed(42, {
+    res <- sample_motifs(
+      g,
+      size = 3,
+      cut.prob = rep(0, 3),
+      sample.size = vcount(g)
+    )
+  })
+  expect_equal(res, count_motifs(g, size = 3))
+
+  # Legacy positional `cut.prob` and `sample.size` are recovered
+  # with a deprecation warning.
+  igraph_with_seed(42, {
+    lifecycle::expect_deprecated(
+      res_legacy <- sample_motifs(g, 3, rep(0, 3), vcount(g))
+    )
+  })
+  expect_identical(res_legacy, res)
+})

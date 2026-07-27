@@ -47,3 +47,52 @@ migration_fixture <- function(
     directed = directed
   )
 }
+
+# Second fixture: head/recoverable prefix overlaps. `dim` (recoverable) is a
+# strict prefix of the head arg `dimvector`, and the head arg `p` is a strict
+# prefix of the recoverable `permutation` -- the two shapes that
+# make_lattice()- and sample_correlated_gnp_pair()-style signatures hit. The
+# generated block gains a migrate_check_call_tags() guard that rejects the
+# forbidden prefixes (`d`, `di`) when legacy arguments in `...` engage
+# recovery; with empty dots they bind the head arg via plain partial matching.
+migration_fixture_prefix <- function(
+  dimvector,
+  p,
+  ...,
+  dim = NULL,
+  permutation = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: migration_fixture_prefix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("d", "di"),
+      "migration_fixture_prefix"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(dim = dim, permutation = permutation),
+      recover_new = c("dim", "permutation"),
+      recover_old = c("dim", "permutation"),
+      match_names = c("dim", "permutation"),
+      match_to = c("dim", "permutation"),
+      defaults = list(dim = NULL, permutation = NULL),
+      head_args = c("dimvector", "p"),
+      fn_name = "migration_fixture_prefix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
+  list(
+    dimvector = dimvector,
+    p = p,
+    dim = dim,
+    permutation = permutation
+  )
+}
