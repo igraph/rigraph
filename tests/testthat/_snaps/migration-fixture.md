@@ -55,6 +55,8 @@
     Code
       migration_fixture_prefix(c(2, 2), 0.5, di = 2)
     Condition
+      Warning in `migration_fixture_prefix()`:
+      partial argument match of 'di' to 'dimvector'
       Error in `migration_fixture_prefix()`:
       ! Argument `di` matches multiple formal arguments of `migration_fixture_prefix()`.
       i Spell out the full argument name.
