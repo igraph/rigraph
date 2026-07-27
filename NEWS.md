@@ -1,5 +1,34 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9022
+
+## Bug fixes
+
+- Use canonical `structure()` attribute names (#2755).
+
+## Chore
+
+- Restore one-value-per-line layout of long enum defaults (#2781).
+
+## Continuous integration
+
+- Let `pak` ignore Bioconductor `graph` on R \< 4.4 (#2753).
+
+## Refactoring
+
+- Move optional arguments of structural-properties functions behind the ellipsis (#2759).
+
+- Move optional arguments of centrality functions behind the ellipsis (#2763).
+
+- Move optional arguments of community functions behind the ellipsis (#2765).
+
+- Move optional arguments of centralization functions behind the ellipsis (#2764).
+
+### migrations
+
+- Split the registry into per-topic files (#2779).
+
+
 # igraph 2.3.3.9021
 
 ## Continuous integration
