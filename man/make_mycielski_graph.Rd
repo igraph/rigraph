@@ -16,19 +16,19 @@ Must be non-negative.}
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-An igraph graph object.
+An igraph graph.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free
-graph with chromatic number \eqn{k}.
+The Mycielski graph of order \eqn{k}, denoted \eqn{M_k},
+is a triangle-free graph with chromatic number \eqn{k}.
 It is constructed using the Mycielski transformation,
 described in \code{\link[=mycielskian]{mycielskian()}}.
 }
 \details{
-The Mycielski graph \eqn{M_k} is defined for all non-negative integers
-\eqn{k}.
+Some authors define Mycielski graphs only for \eqn{k > 1}.
+igraph extends the definition to all non-negative orders \eqn{k}.
 The first few Mycielski graphs are:
 \itemize{
 \item \eqn{M_0}: null graph (no vertices)
@@ -40,8 +40,8 @@ The first few Mycielski graphs are:
 
 The vertex count of \eqn{M_k} is \eqn{3 \cdot 2^{k-2} - 1} for \eqn{k > 1}
 and \eqn{k} otherwise.
-The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k-2}} for
-\eqn{k > 1} and 0 otherwise.
+The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k-2}}
+for \eqn{k > 1} and 0 otherwise.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_mycielski_graph}{\code{mycielski_graph()}}

@@ -1448,6 +1448,19 @@ test_that("mycielskian() errors", {
   expect_snapshot(error = TRUE, {
     mycielskian(make_ring(3), 2, TRUE)
   })
+  expect_error(mycielskian(42), "Must provide a graph object")
+})
+
+test_that("mycielskian_impl() works", {
+  # Call the impl directly with a full argument set
+  g <- make_ring(5)
+  mg <- mycielskian_impl(graph = g, k = 2)
+  expect_vcount(mg, 23)
+  expect_ecount(mg, 71)
+  expect_false(is_directed(mg))
+
+  # The impl agrees with the exported wrapper
+  expect_identical_graphs(mg, mycielskian(g, k = 2))
 })
 
 # ---- ellipsis migration: argument coverage ----------------------------------

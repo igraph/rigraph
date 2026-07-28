@@ -599,6 +599,17 @@ test_that("make_mycielski_graph() errors", {
   })
 })
 
+test_that("mycielski_graph_impl() works", {
+  # Call the impl directly with a full argument set
+  g4 <- mycielski_graph_impl(k = 4)
+  expect_vcount(g4, 11)
+  expect_ecount(g4, 20)
+  expect_false(is_directed(g4))
+
+  # The impl agrees with the exported wrapper
+  expect_identical_graphs(g4, make_mycielski_graph(4))
+})
+
 # ---- ellipsis migration: argument coverage ----------------------------
 
 test_that("make_empty_graph() tail arguments and positional recovery", {

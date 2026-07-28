@@ -2523,14 +2523,14 @@ tree <- function(...) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free
-#' graph with chromatic number \eqn{k}.
+#' The Mycielski graph of order \eqn{k}, denoted \eqn{M_k},
+#' is a triangle-free graph with chromatic number \eqn{k}.
 #' It is constructed using the Mycielski transformation,
 #' described in [mycielskian()].
 #'
 #' @details
-#' The Mycielski graph \eqn{M_k} is defined for all non-negative integers
-#' \eqn{k}.
+#' Some authors define Mycielski graphs only for \eqn{k > 1}.
+#' igraph extends the definition to all non-negative orders \eqn{k}.
 #' The first few Mycielski graphs are:
 #' * \eqn{M_0}: null graph (no vertices)
 #' * \eqn{M_1}: single vertex
@@ -2540,13 +2540,13 @@ tree <- function(...) {
 #'
 #' The vertex count of \eqn{M_k} is \eqn{3 \cdot 2^{k-2} - 1} for \eqn{k > 1}
 #' and \eqn{k} otherwise.
-#' The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k-2}} for
-#' \eqn{k > 1} and 0 otherwise.
+#' The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k-2}}
+#' for \eqn{k > 1} and 0 otherwise.
 #'
 #' @param k Integer, the order of the Mycielski graph.
 #'   Must be non-negative.
 #' @inheritParams rlang::args_dots_empty
-#' @return An igraph graph object.
+#' @return An igraph graph.
 #'
 #' @concept Mycielski graph
 #' @family deterministic constructors
