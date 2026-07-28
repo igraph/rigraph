@@ -20,7 +20,7 @@ test_that("stochastic_matrix works", {
 # and the legacy positional recovery path.
 
 test_that("stochastic_matrix() returns a sparse matrix when `sparse = TRUE`", {
-  g <- make_star(5, "undirected")
+  g <- make_star(5, mode = "undirected")
   W <- stochastic_matrix(g, sparse = TRUE)
   expect_s4_class(W, "Matrix")
   # The sparse and dense forms describe the same stochastic matrix.
@@ -31,7 +31,7 @@ test_that("stochastic_matrix() returns a sparse matrix when `sparse = TRUE`", {
 })
 
 test_that("stochastic_matrix() recovers a legacy positional `column.wise`", {
-  g <- make_star(5, "undirected")
+  g <- make_star(5, mode = "undirected")
   lifecycle::expect_deprecated(
     W <- stochastic_matrix(g, TRUE)
   )
