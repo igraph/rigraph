@@ -47,15 +47,16 @@ A numeric vector.
 Element \eqn{i} contains the mean degree of neighbors of vertices with
 degree \eqn{i - 1}.
 Note that degree 0 is included at index 1.
-The length of the vector is one more than the maximum degree in the
-graph.
+The length of the vector is one more than the maximum degree,
+as measured by \code{from_mode} in directed graphs;
+for a graph without edges, the result has length 1.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Computes the degree correlation function \eqn{k_{nn}(k)},
 i.e. the mean degree of neighbors of vertices of degree \eqn{k},
-for all degrees \eqn{k} present in the graph.
+for each degree \eqn{k} from 0 up to the maximum degree in the graph.
 }
 \details{
 The \eqn{k_{nn}(k)} function characterizes degree correlations in networks:

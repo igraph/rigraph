@@ -1138,6 +1138,31 @@ test_that("knnk errors", {
   expect_snapshot_igraph_error(knnk(g, from_mode = "foo"))
 })
 
+test_that("degree_correlation_vector_impl agrees with knnk", {
+  # Call the generated impl directly with the full argument set.
+  g <- make_graph(c(1, 2, 1, 3, 2, 3, 3, 4), directed = TRUE)
+  weights <- c(1, 2, 3, 4)
+  impl <- degree_correlation_vector_impl(
+    graph = g,
+    weights = weights,
+    from_mode = "out",
+    to_mode = "in",
+    directed_neighbors = FALSE
+  )
+  # Hand-computed from the reciprocal edge-averaging formula.
+  expect_equal(impl, c(NaN, 4 / 3, 3 / 2))
+
+  # The exported wrapper resolves the weight attribute to the same values.
+  E(g)$weight <- weights
+  wrapper <- knnk(
+    g,
+    from_mode = "out",
+    to_mode = "in",
+    directed_neighbors = FALSE
+  )
+  expect_equal(wrapper, impl)
+})
+
 test_that("reciprocity works", {
   g <- make_graph(c(1, 2, 2, 1, 2, 3, 3, 4, 4, 4), directed = TRUE)
   expect_equal(reciprocity(g), 0.5)
