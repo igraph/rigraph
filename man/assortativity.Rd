@@ -17,9 +17,9 @@ assortativity(
   types2 = NULL
 )
 
-assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
+assortativity_nominal(graph, types, ..., directed = TRUE, normalized = TRUE)
 
-assortativity_degree(graph, directed = TRUE)
+assortativity_degree(graph, ..., directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}

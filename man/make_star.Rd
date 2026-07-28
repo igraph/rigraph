@@ -5,12 +5,14 @@
 \alias{star}
 \title{Create a star graph, a tree with n vertices and n - 1 leaves}
 \usage{
-make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+star(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{It defines the direction of the
 edges, \verb{in}: the edges point \emph{to} the center, \code{out}:

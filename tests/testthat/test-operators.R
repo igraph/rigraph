@@ -1413,3 +1413,60 @@ test_that("simplify() rejects 'rename' combiner", {
     "rename"
   )
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+
+test_that("complementer() takes `loops` by name and recovers it positionally", {
+  g <- make_ring(4)
+
+  # The complement of C4 has the two missing cross edges plus one loop per vertex.
+  gc <- complementer(g, loops = TRUE)
+  expect_ecount(gc, 6)
+  expect_equal(sum(which_loop(gc)), 4)
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- complementer(g, TRUE)
+  )
+  expect_identical_graphs(res, complementer(g, loops = TRUE))
+})
+
+test_that("compose() takes all tail arguments by name", {
+  g1 <- graph_from_literal(A -+ B, B -+ C)
+  g2 <- graph_from_literal(D -+ E, E -+ F)
+  g1$kind <- "one"
+  g2$kind <- "two"
+  V(g1)$score <- 1:3
+  V(g2)$score <- c(10, 20, 30)
+  E(g1)$w <- c(1, 2)
+  E(g2)$w <- c(10, 20)
+
+  res <- compose(
+    g1,
+    g2,
+    byname = FALSE,
+    graph.attr.comb = "first",
+    vertex.attr.comb = "first",
+    edge.attr.comb = "concat"
+  )
+
+  # By vertex ID the graphs overlap; by name they are disjoint (6 vertices, no edge).
+  expect_vcount(res, 3)
+  expect_ecount(res, 1)
+  expect_equal(as_edgelist(res), cbind("A", "C"))
+  # "first" keeps the first graph's attribute, "concat" concatenates both edges'.
+  expect_equal(res$kind, "one")
+  expect_equal(V(res)$score, 1:3)
+  expect_equal(E(res)$w, list(c(1, 20)))
+})
+
+test_that("compose() recovers legacy positional arguments", {
+  g1 <- graph_from_literal(A -+ B, B -+ C)
+  g2 <- graph_from_literal(D -+ E, E -+ F)
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- compose(g1, g2, FALSE)
+  )
+  expect_identical_graphs(res, compose(g1, g2, byname = FALSE))
+})

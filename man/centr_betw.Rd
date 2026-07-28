@@ -4,10 +4,12 @@
 \alias{centr_betw}
 \title{Centralize a graph according to the betweenness of vertices}
 \usage{
-centr_betw(graph, directed = TRUE, normalized = TRUE)
+centr_betw(graph, ..., directed = TRUE, normalized = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to use directed shortest paths for
 calculating betweenness.}

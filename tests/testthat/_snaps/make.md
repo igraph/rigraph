@@ -207,7 +207,7 @@
 ---
 
     Code
-      make_empty_graph(10, "spam")
+      make_empty_graph(10, directed = "spam")
     Condition
       Error in `make_empty_graph()`:
       ! `directed` must be a logical, not a string.

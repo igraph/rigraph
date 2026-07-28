@@ -26,17 +26,17 @@ max_cliques(
   callback = NULL
 )
 
-count_max_cliques(graph, min = NULL, max = NULL, subset = NULL)
+count_max_cliques(graph, min = NULL, max = NULL, ..., subset = NULL)
 
 clique_num(graph)
 
-largest_weighted_cliques(graph, vertex.weights = NULL)
+largest_weighted_cliques(graph, ..., vertex.weights = NULL)
 
-weighted_clique_num(graph, vertex.weights = NULL)
+weighted_clique_num(graph, ..., vertex.weights = NULL)
 
-clique_size_counts(graph, min = 0, max = 0, maximal = FALSE)
+clique_size_counts(graph, ..., min = 0, max = 0, maximal = FALSE)
 
-is_clique(graph, candidate, directed = FALSE)
+is_clique(graph, candidate, ..., directed = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.}

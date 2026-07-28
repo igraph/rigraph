@@ -9,6 +9,7 @@ sample_pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -22,6 +23,7 @@ pa(
   n,
   power = 1,
   m = NULL,
+  ...,
   out.dist = NULL,
   out.seq = NULL,
   out.pref = FALSE,
@@ -41,6 +43,8 @@ i.e. linear preferential attachment.}
 defaults to 1.
 This argument is only used if both \code{out.dist} and \code{out.seq} are omitted
 or NULL.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{out.dist}{Numeric vector, the distribution of the number of edges to
 add in each time step. This argument is only used if the \code{out.seq}
