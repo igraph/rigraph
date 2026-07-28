@@ -100,6 +100,28 @@ test_that("graph_join() preserves vertex ordering", {
   expect_in(paste(el2_shifted[, 1], el2_shifted[, 2]), joined_edges)
 })
 
+test_that("join_impl() returns real values and agrees with graph_join()", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(3)
+
+  impl_result <- join_impl(left = g1, right = g2)
+
+  expect_vcount(impl_result, 8)
+  expect_ecount(impl_result, 23)
+  expect_false(is_directed(impl_result))
+
+  # Every vertex of the first graph is connected
+  # to every vertex of the second graph.
+  cross_edges <- expand.grid(seq_len(5), 5 + seq_len(3))
+  el <- as_edgelist(impl_result)
+  expect_in(
+    paste(cross_edges[, 1], cross_edges[, 2]),
+    paste(el[, 1], el[, 2])
+  )
+
+  expect_identical_graphs(impl_result, graph_join(g1, g2))
+})
+
 test_that("graph_join() prints as expected", {
   expect_snapshot_igraph(print_all(graph_join(make_ring(3), make_ring(2))))
 })

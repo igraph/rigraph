@@ -22,8 +22,9 @@ A new graph object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The join of two graphs is created by connecting all vertices from
-the first graph to all vertices in the second graph.
+The join of two graphs is created
+by connecting all vertices from the first graph
+to all vertices in the second graph.
 This function can also be used via the \verb{\%j\%} operator.
 }
 \details{
@@ -32,24 +33,29 @@ First the vertices of the second graph are relabeled with new vertex IDs,
 then the union of the two graphs is formed.
 Finally, all vertices from the first graph are connected to all vertices
 from the second graph.
-If the two graphs have \eqn{|V_1|} and \eqn{|V_2|} vertices and
-\eqn{|E_1|} and \eqn{|E_2|} edges respectively,
-then the new graph has \eqn{|V_1|+|V_2|} vertices and
-\eqn{|E_1|+|E_2|+|V_1| \times |V_2|} edges.
+If the two graphs have \eqn{|V_1|} and \eqn{|V_2|} vertices
+and \eqn{|E_1|} and \eqn{|E_2|} edges respectively,
+then the new graph has \eqn{|V_1|+|V_2|} vertices
+and \eqn{|E_1|+|E_2|+|V_1| \times |V_2|} edges.
 
 The vertex ordering of the graphs is preserved.
-In other words, the vertex IDs of the first graph map to identical values
-in the new graph, while the vertex IDs of the second graph map to IDs
-incremented by the vertex count of the first graph.
+In other words,
+the vertex IDs of the first graph map to identical values in the new graph,
+while the vertex IDs of the second graph
+map to IDs incremented by the vertex count of the first graph.
 
-Both graphs need to have the same directedness, i.e. either both directed
-or both undirected; an error is generated otherwise.
-If both graphs are directed, then for each pair of vertices \eqn{v},
-\eqn{u} in graphs \eqn{G_1}, \eqn{G_2} both edges \eqn{(v, u)} and
-\eqn{(u, v)} are added to maintain completeness.
+Both graphs need to have the same directedness,
+i.e. either both directed or both undirected;
+an error is generated otherwise.
+If both graphs are directed,
+then for each pair of vertices \eqn{v}, \eqn{u}
+in graphs \eqn{G_1}, \eqn{G_2}
+both edges \eqn{(v, u)} and \eqn{(u, v)} are added
+to maintain completeness.
 
-Note that the current version of this function cannot handle graph,
-vertex and edge attributes; they are lost in the result.
+Note that the current version of this function
+cannot handle graph, vertex and edge attributes;
+they are lost in the result.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_join}{\code{join()}}
