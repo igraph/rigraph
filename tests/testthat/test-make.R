@@ -245,6 +245,10 @@ test_that("make_hypercube works", {
   expect_vcount(hc3, 8)
   expect_ecount(hc3, 12)
 
+  # The standard graph parameters are recorded
+  expect_identical(hc3$name, "Hypercube graph")
+  expect_identical(hc3$dim, 3)
+
   # Verify edges for 3D hypercube
   # Vertices should be connected if their IDs (minus 1) differ in exactly one bit
   # IDs: 1(000), 2(001), 3(010), 4(011), 5(100), 6(101), 7(110), 8(111)
@@ -269,6 +273,25 @@ test_that("make_hypercube works", {
   hc3_directed <- make_hypercube(dim = 3, directed = TRUE)
   expect_true(is_directed(hc3_directed))
   expect_ecount(hc3_directed, 12)
+})
+
+test_that("hypercube_impl() returns real values and agrees with make_hypercube()", {
+  impl_result <- hypercube_impl(n = 3, directed = TRUE)
+
+  expect_vcount(impl_result, 8)
+  expect_ecount(impl_result, 12)
+  expect_true(is_directed(impl_result))
+
+  # Each vertex has one outgoing edge per bit that can be raised,
+  # e.g. vertex 1 (000) points to vertices 2 (001), 3 (010) and 5 (100).
+  expect_equal(as.numeric(neighbors(impl_result, 1, mode = "out")), c(2, 3, 5))
+
+  # The wrapper adds the graph parameters on top of the impl result.
+  wrapper_result <- make_hypercube(3, directed = TRUE)
+  expect_identical_graphs(
+    delete_graph_attr(delete_graph_attr(wrapper_result, "name"), "dim"),
+    impl_result
+  )
 })
 
 test_that("make_hypercube can be used with make_()", {

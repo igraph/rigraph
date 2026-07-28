@@ -16,8 +16,9 @@ Must be non-negative and not greater than 57.}
 \item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical scalar, whether the graph should be directed.
-If \code{TRUE}, edges point from vertices with lower IDs toward vertices
-with higher IDs.}
+If \code{TRUE},
+edges point from vertices with lower IDs
+toward vertices with higher IDs.}
 }
 \value{
 An igraph graph.
@@ -26,15 +27,13 @@ An igraph graph.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-The n-dimensional hypercube graph has \eqn{2^n} vertices and
-\eqn{2^{n-1} n} edges.
-Two vertices are connected if the binary representations of their vertex
-IDs (minus one, to make them zero-based) differ in precisely one bit.
+The n-dimensional hypercube graph has \eqn{2^n} vertices
+and \eqn{2^{n-1} n} edges.
+Two vertices are connected
+if the binary representations of their vertex IDs
+(minus one, to make them zero-based)
+differ in precisely one bit.
 }
-\section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hypercube}{\code{hypercube()}}
-}
-
 \examples{
 # 3-dimensional hypercube (cube)
 print_all(make_hypercube(3))
@@ -61,5 +60,5 @@ Other deterministic constructors:
 \code{\link[=make_turan]{make_turan()}},
 \code{\link[=make_wheel]{make_wheel()}}
 }
+\concept{Hypercube}
 \concept{deterministic constructors}
-\concept{hypercube}
