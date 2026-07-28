@@ -10,6 +10,7 @@
 betweenness(
   graph,
   v = V(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -19,6 +20,7 @@ betweenness(
 edge_betweenness(
   graph,
   e = E(graph),
+  ...,
   directed = TRUE,
   weights = NULL,
   cutoff = -1
@@ -28,6 +30,8 @@ edge_betweenness(
 \item{graph}{The graph to analyze.}
 
 \item{v}{The vertices for which the vertex betweenness will be calculated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether directed paths should be considered while
 determining the shortest paths.}

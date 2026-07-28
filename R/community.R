@@ -745,6 +745,7 @@ print.communities <- function(x, ...) {
 #' @param membership The membership vector of the community structure, a
 #'   numeric vector denoting the ID of the community for each vertex. It
 #'   might be `NULL` for hierarchical community structures.
+#' @inheritParams rlang::args_dots_empty
 #' @param algorithm Character string, the algorithm that generated
 #'   the community structure, it can be arbitrary.
 #' @param merges A merge matrix, for hierarchical community structures (or
@@ -772,10 +773,42 @@ print.communities <- function(x, ...) {
 make_clusters <- function(
   graph,
   membership = NULL,
+  ...,
   algorithm = NULL,
   merges = NULL,
   modularity = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: make_clusters, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("m", "me"),
+      "make_clusters"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        algorithm = algorithm,
+        merges = merges,
+        modularity = modularity
+      ),
+      recover_new = c("algorithm", "merges", "modularity"),
+      recover_old = c("algorithm", "merges", "modularity"),
+      match_names = c("algorithm", "merges", "modularity"),
+      match_to = c("algorithm", "merges", "modularity"),
+      defaults = list(algorithm = NULL, merges = NULL, modularity = TRUE),
+      head_args = c("graph", "membership"),
+      fn_name = "make_clusters"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   stopifnot(is.null(membership) || is.numeric(membership))
   stopifnot(
     is.null(algorithm) ||
@@ -938,14 +971,42 @@ modularity.communities <- function(x, ...) {
 }
 
 #' @rdname modularity.igraph
+#' @inheritParams rlang::args_dots_empty
 #' @export
 modularity_matrix <- function(
   graph,
   membership = lifecycle::deprecated(),
+  ...,
   weights = NULL,
   resolution = 1,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: modularity_matrix, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        resolution = resolution,
+        directed = directed
+      ),
+      recover_new = c("weights", "resolution", "directed"),
+      recover_old = c("weights", "resolution", "directed"),
+      match_names = c("weights", "resolution", "directed"),
+      match_to = c("weights", "resolution", "directed"),
+      defaults = list(weights = NULL, resolution = 1, directed = TRUE),
+      head_args = c("graph", "membership"),
+      fn_name = "modularity_matrix"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -1376,6 +1437,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' community of the the given vertex. See also the examples below.
 #'
 #' @param graph The input graph. Edge directions are ignored in directed graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1478,6 +1540,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'
 cluster_spinglass <- function(
   graph,
+  ...,
   weights = NULL,
   vertex = NULL,
   spins = 25,
@@ -1490,6 +1553,105 @@ cluster_spinglass <- function(
   implementation = c("orig", "neg"),
   gamma.minus = 1.0
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    migrate_check_call_tags(
+      sys.call(),
+      c("g"),
+      "cluster_spinglass"
+    )
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        vertex = vertex,
+        spins = spins,
+        parupdate = parupdate,
+        start.temp = start.temp,
+        stop.temp = stop.temp,
+        cool.fact = cool.fact,
+        update.rule = update.rule,
+        gamma = gamma,
+        implementation = implementation,
+        gamma.minus = gamma.minus
+      ),
+      recover_new = c(
+        "weights",
+        "vertex",
+        "spins",
+        "parupdate",
+        "start.temp",
+        "stop.temp",
+        "cool.fact",
+        "update.rule",
+        "gamma",
+        "implementation",
+        "gamma.minus"
+      ),
+      recover_old = c(
+        "weights",
+        "vertex",
+        "spins",
+        "parupdate",
+        "start.temp",
+        "stop.temp",
+        "cool.fact",
+        "update.rule",
+        "gamma",
+        "implementation",
+        "gamma.minus"
+      ),
+      match_names = c(
+        "weights",
+        "vertex",
+        "spins",
+        "parupdate",
+        "start.temp",
+        "stop.temp",
+        "cool.fact",
+        "update.rule",
+        "gamma",
+        "implementation",
+        "gamma.minus"
+      ),
+      match_to = c(
+        "weights",
+        "vertex",
+        "spins",
+        "parupdate",
+        "start.temp",
+        "stop.temp",
+        "cool.fact",
+        "update.rule",
+        "gamma",
+        "implementation",
+        "gamma.minus"
+      ),
+      defaults = list(
+        weights = NULL,
+        vertex = NULL,
+        spins = 25,
+        parupdate = FALSE,
+        start.temp = 1,
+        stop.temp = 0.01,
+        cool.fact = 0.99,
+        update.rule = c("config", "random", "simple"),
+        gamma = 1,
+        implementation = c("orig", "neg"),
+        gamma.minus = 1
+      ),
+      head_args = c("graph"),
+      fn_name = "cluster_spinglass"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1825,6 +1987,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'
 #' @param graph The input graph. Edge directions are ignored in directed
 #'   graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1867,12 +2030,47 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'
 cluster_walktrap <- function(
   graph,
+  ...,
   weights = NULL,
   steps = 4,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_walktrap, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        steps = steps,
+        merges = merges,
+        modularity = modularity,
+        membership = membership
+      ),
+      recover_new = c("weights", "steps", "merges", "modularity", "membership"),
+      recover_old = c("weights", "steps", "merges", "modularity", "membership"),
+      match_names = c("weights", "steps", "merges", "modularity", "membership"),
+      match_to = c("weights", "steps", "merges", "modularity", "membership"),
+      defaults = list(
+        weights = NULL,
+        steps = 4,
+        merges = TRUE,
+        modularity = TRUE,
+        membership = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "cluster_walktrap"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (membership && !modularity) {
@@ -1937,6 +2135,7 @@ cluster_walktrap <- function(
 #' `bridges` contains the IDs of edges whose removal caused a split.
 #'
 #' @param graph The graph to analyze.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1997,6 +2196,7 @@ cluster_walktrap <- function(
 #'
 cluster_edge_betweenness <- function(
   graph,
+  ...,
   weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
@@ -2005,6 +2205,76 @@ cluster_edge_betweenness <- function(
   modularity = TRUE,
   membership = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_edge_betweenness, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        weights = weights,
+        directed = directed,
+        edge.betweenness = edge.betweenness,
+        merges = merges,
+        bridges = bridges,
+        modularity = modularity,
+        membership = membership
+      ),
+      recover_new = c(
+        "weights",
+        "directed",
+        "edge.betweenness",
+        "merges",
+        "bridges",
+        "modularity",
+        "membership"
+      ),
+      recover_old = c(
+        "weights",
+        "directed",
+        "edge.betweenness",
+        "merges",
+        "bridges",
+        "modularity",
+        "membership"
+      ),
+      match_names = c(
+        "weights",
+        "directed",
+        "edge.betweenness",
+        "merges",
+        "bridges",
+        "modularity",
+        "membership"
+      ),
+      match_to = c(
+        "weights",
+        "directed",
+        "edge.betweenness",
+        "merges",
+        "bridges",
+        "modularity",
+        "membership"
+      ),
+      defaults = list(
+        weights = NULL,
+        directed = TRUE,
+        edge.betweenness = TRUE,
+        merges = TRUE,
+        bridges = TRUE,
+        modularity = TRUE,
+        membership = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "cluster_edge_betweenness"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -2053,6 +2323,7 @@ cluster_edge_betweenness <- function(
 #'
 #' @param graph The input graph. It must be undirected and must not have
 #'   multi-edges.
+#' @inheritParams rlang::args_dots_empty
 #' @param merges Logical, whether to return the merge matrix.
 #' @param modularity Logical, whether to return a vector containing the
 #'   modularity after each merge.
@@ -2092,11 +2363,44 @@ cluster_edge_betweenness <- function(
 #'
 cluster_fast_greedy <- function(
   graph,
+  ...,
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE,
   weights = NULL
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_fast_greedy, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        merges = merges,
+        modularity = modularity,
+        membership = membership,
+        weights = weights
+      ),
+      recover_new = c("merges", "modularity", "membership", "weights"),
+      recover_old = c("merges", "modularity", "membership", "weights"),
+      match_names = c("merges", "modularity", "membership", "weights"),
+      match_to = c("merges", "modularity", "membership", "weights"),
+      defaults = list(
+        merges = TRUE,
+        modularity = TRUE,
+        membership = TRUE,
+        weights = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "cluster_fast_greedy"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -2477,6 +2781,7 @@ cluster_label_prop0 <- function(
 #' This function was contributed by Tom Gregorovic.
 #'
 #' @param graph The input graph. It must be undirected.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2515,7 +2820,34 @@ cluster_label_prop0 <- function(
 #' g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 #' cluster_louvain(g)
 #'
-cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
+cluster_louvain <- function(
+  graph,
+  ...,
+  weights = NULL,
+  resolution = 1
+) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_louvain, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights, resolution = resolution),
+      recover_new = c("weights", "resolution"),
+      recover_old = c("weights", "resolution"),
+      match_names = c("weights", "resolution"),
+      match_to = c("weights", "resolution"),
+      defaults = list(weights = NULL, resolution = 1),
+      head_args = c("graph"),
+      fn_name = "cluster_louvain"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -2587,6 +2919,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' }
 #'
 #' @param graph The input graph. It may be undirected or directed.
+#' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. It must be a positive numeric
 #'   vector, `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2607,7 +2940,33 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' @family community
 #' @export
 #' @keywords graphs
-cluster_optimal <- function(graph, weights = NULL) {
+cluster_optimal <- function(
+  graph,
+  ...,
+  weights = NULL
+) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_optimal, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(weights = weights),
+      recover_new = c("weights"),
+      recover_old = c("weights"),
+      match_names = c("weights"),
+      match_to = c("weights"),
+      defaults = list(weights = NULL),
+      head_args = c("graph"),
+      fn_name = "cluster_optimal"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -2646,6 +3005,7 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' Please see the details of this method in the references given below.
 #'
 #' @param graph The input graph. Edge directions will be taken into account.
+#' @inheritParams rlang::args_dots_empty
 #' @param e.weights Numeric vector of edge weights.
 #'   The length must match the number of edges in the graph.  By default (`NULL`) the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
@@ -2688,11 +3048,44 @@ cluster_optimal <- function(graph, weights = NULL) {
 #'
 cluster_infomap <- function(
   graph,
+  ...,
   e.weights = NULL,
   v.weights = NULL,
   nb.trials = 10,
   modularity = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        e.weights = e.weights,
+        v.weights = v.weights,
+        nb.trials = nb.trials,
+        modularity = modularity
+      ),
+      recover_new = c("e.weights", "v.weights", "nb.trials", "modularity"),
+      recover_old = c("e.weights", "v.weights", "nb.trials", "modularity"),
+      match_names = c("e.weights", "v.weights", "nb.trials", "modularity"),
+      match_to = c("e.weights", "v.weights", "nb.trials", "modularity"),
+      defaults = list(
+        e.weights = NULL,
+        v.weights = NULL,
+        nb.trials = 10,
+        modularity = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "cluster_infomap"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   res <- community_infomap_impl(
     graph = graph,
     e_weights = e.weights,

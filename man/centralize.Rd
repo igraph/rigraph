@@ -5,10 +5,12 @@
 \alias{centralization}
 \title{Centralization of a graph}
 \usage{
-centralize(scores, theoretical.max = 0, normalized = TRUE)
+centralize(scores, ..., theoretical.max = 0, normalized = TRUE)
 }
 \arguments{
 \item{scores}{The vertex level centrality scores.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{theoretical.max}{Real scalar. The graph-level centralization measure of
 the most centralized graph with the same number of vertices as the graph

@@ -5,15 +5,17 @@
 \alias{grg}
 \title{Geometric random graphs}
 \usage{
-sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
+sample_grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 
-grg(nodes, radius, torus = FALSE, coords = FALSE)
+grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graph.}
 
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{torus}{Logical, whether to use a torus instead of a square.}
 

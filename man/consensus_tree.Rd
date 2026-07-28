@@ -4,7 +4,7 @@
 \alias{consensus_tree}
 \title{Create a consensus tree from several hierarchical random graph models}
 \usage{
-consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
+consensus_tree(graph, hrg = NULL, ..., start = FALSE, num.samples = 10000)
 }
 \arguments{
 \item{graph}{The graph the models were fitted to.}
@@ -13,6 +13,8 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
 \code{igraphHRG} object. \code{consensus_tree()} allows this to be
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}

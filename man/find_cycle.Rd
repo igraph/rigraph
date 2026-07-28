@@ -4,10 +4,12 @@
 \alias{find_cycle}
 \title{Finds a cycle in a graph, if there is one}
 \usage{
-find_cycle(graph, mode = c("out", "in", "all", "total"))
+find_cycle(graph, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant specifying how to handle directed graphs.
 \code{out} follows edge directions, \verb{in} follows edges in the reverse direction,

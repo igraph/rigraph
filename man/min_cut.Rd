@@ -8,6 +8,7 @@ min_cut(
   graph,
   source = NULL,
   target = NULL,
+  ...,
   capacity = NULL,
   value.only = TRUE
 )
@@ -18,6 +19,8 @@ min_cut(
 \item{source}{The ID of the source vertex.}
 
 \item{target}{The ID of the target vertex (sometimes also called sink).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}

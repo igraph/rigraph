@@ -21,5 +21,17 @@ migrations <- list(
       directed = FALSE
     ) {},
     when = "3.0.0"
+  ),
+
+  # Exercises the head/recoverable prefix-overlap rules: the recoverable
+  # `dim` is a strict prefix of the head arg `dimvector` (the make_lattice()
+  # shape), and the head arg `p` is a strict prefix of the recoverable
+  # `permutation` (the sample_correlated_gnp_pair() shape). The generator
+  # computes forbidden_tags = c("d", "di") and emits the runtime guard that
+  # rejects those tags when legacy arguments in `...` engage recovery.
+  migration_fixture_prefix = list(
+    old = function(dimvector, p, dim, permutation) {},
+    new = function(dimvector, p, ..., dim = NULL, permutation = NULL) {},
+    when = "3.0.0"
   )
 )
