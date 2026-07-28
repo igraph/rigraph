@@ -61,7 +61,6 @@ sample_motifs(g, 3)
 Other graph motifs:
 \code{\link[=count_motifs]{count_motifs()}},
 \code{\link[=dyad_census]{dyad_census()}},
-\code{\link[=motifs]{motifs()}},
-\code{\link[=motifs_randesu_callback]{motifs_randesu_callback()}}
+\code{\link[=motifs]{motifs()}}
 }
 \concept{graph motifs}

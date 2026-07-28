@@ -52,7 +52,6 @@ triples.
 Other graph motifs:
 \code{\link[=count_motifs]{count_motifs()}},
 \code{\link[=motifs]{motifs()}},
-\code{\link[=motifs_randesu_callback]{motifs_randesu_callback()}},
 \code{\link[=sample_motifs]{sample_motifs()}}
 }
 \author{

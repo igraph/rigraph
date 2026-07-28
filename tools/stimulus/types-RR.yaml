@@ -1,14 +1,3 @@
-# Special type for R callback functions
-MOTIFS_CALLBACK:
-    INCONV:
-        IN: ''
-    OUTCONV: {}
-
-# Extra data for callbacks
-CALLBACK_EXTRA:
-    INCONV:
-        IN: ''
-    OUTCONV: {}
 
 GRAPH:
     INCONV: ensure_igraph(%I%)

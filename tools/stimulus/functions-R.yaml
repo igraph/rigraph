@@ -561,10 +561,6 @@ igraph_write_graph_dimacs_flow:
 # Motifs
 #######################################
 
-# Callback function requires manual implementation
-igraph_motifs_randesu_callback:
-    IGNORE: RR, RC, RInit
-
 #######################################
 # Graph operators
 #######################################
