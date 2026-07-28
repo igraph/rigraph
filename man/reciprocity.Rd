@@ -4,10 +4,12 @@
 \alias{reciprocity}
 \title{Reciprocity of graphs}
 \usage{
-reciprocity(graph, ignore.loops = TRUE, mode = c("default", "ratio"))
+reciprocity(graph, ..., ignore.loops = TRUE, mode = c("default", "ratio"))
 }
 \arguments{
 \item{graph}{The graph object.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{ignore.loops}{Logical, whether to ignore loop edges.}
 

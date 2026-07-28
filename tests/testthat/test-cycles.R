@@ -111,3 +111,24 @@ test_that("simple_cycles_callback handles errors in callback", {
     "Error in R callback function"
   )
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("find_cycle mode variants distinguish edge orientation", {
+  # A directed acyclic triangle is only cyclic when directions are ignored.
+  g <- make_graph(c(1, 2, 1, 3, 2, 3), directed = TRUE)
+
+  expect_length(find_cycle(g)$vertices, 0)
+  expect_length(find_cycle(g, mode = "in")$vertices, 0)
+
+  cyc <- find_cycle(g, mode = "all")
+  expect_length(cyc$vertices, 3)
+  expect_length(cyc$edges, 3)
+})
+
+test_that("find_cycle recovers legacy positional arguments", {
+  g <- make_graph(c(1, 2, 1, 3, 2, 3), directed = TRUE)
+  lifecycle::expect_deprecated(res <- find_cycle(g, "all"))
+  expect_equal(res, find_cycle(g, mode = "all"))
+  expect_length(res$vertices, 3)
+})

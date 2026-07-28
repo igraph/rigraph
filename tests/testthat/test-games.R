@@ -848,3 +848,857 @@ test_that("Dot product rng gives warnings", {
     paste0("Greater than 1 connection probability ", "in dot-product graph")
   )
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------
+
+test_that("sample_pa() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_pa <- sample_pa(30, power = 1, m = 2, out.pref = TRUE, zero.appeal = 3)
+  expect_vcount(g_pa, 30)
+  expect_ecount(g_pa, 57)
+  expect_true(is_simple(g_pa))
+
+  # The first tail argument of the old signature is out.dist.
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_pa(8, 1, NULL, rep(1, 3)))
+  igraph_local_seed(1)
+  expect_identical_graphs(g_legacy, sample_pa(8, 1, NULL, out.dist = rep(1, 3)))
+})
+
+test_that("pa() spec twin matches sample_pa()", {
+  igraph_local_seed(42)
+  g_direct <- sample_pa(
+    20,
+    power = 1.2,
+    m = 2,
+    out.dist = NULL,
+    out.seq = NULL,
+    out.pref = TRUE,
+    zero.appeal = 2,
+    directed = TRUE,
+    algorithm = "psumtree-multiple",
+    start.graph = make_empty_graph(5)
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(pa(
+    20,
+    power = 1.2,
+    m = 2,
+    out.dist = NULL,
+    out.seq = NULL,
+    out.pref = TRUE,
+    zero.appeal = 2,
+    directed = TRUE,
+    algorithm = "psumtree-multiple",
+    start.graph = make_empty_graph(5)
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- pa(8, 1, NULL, rep(1, 3)))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(pa(8, 1, NULL, out.dist = rep(1, 3)))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_gnp() covers loops by name and recovers positional calls", {
+  # p = 1 makes the result deterministic.
+  g_full <- sample_gnp(15, 1, directed = TRUE, loops = TRUE)
+  expect_vcount(g_full, 15)
+  expect_ecount(g_full, 225)
+  expect_equal(sum(which_loop(g_full)), 15)
+
+  lifecycle::expect_deprecated(g_legacy <- sample_gnp(10, 1, TRUE))
+  expect_true(is_directed(g_legacy))
+  expect_identical_graphs(g_legacy, sample_gnp(10, 1, directed = TRUE))
+})
+
+test_that("gnp() spec twin matches sample_gnp()", {
+  g_direct <- sample_gnp(12, 1, directed = TRUE, loops = TRUE)
+  g_spec <- sample_(gnp(12, 1, directed = TRUE, loops = TRUE))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- gnp(10, 1, TRUE))
+  expect_identical_graphs(
+    sample_(spec_legacy),
+    sample_(gnp(10, 1, directed = TRUE))
+  )
+})
+
+test_that("sample_gnm() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_gnm <- sample_gnm(8, 12, directed = TRUE, loops = TRUE)
+  expect_vcount(g_gnm, 8)
+  expect_ecount(g_gnm, 12)
+  expect_true(is_directed(g_gnm))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_gnm(8, 5, TRUE))
+  igraph_local_seed(1)
+  expect_identical_graphs(g_legacy, sample_gnm(8, 5, directed = TRUE))
+})
+
+test_that("gnm() spec twin matches sample_gnm()", {
+  igraph_local_seed(42)
+  g_direct <- sample_gnm(8, 12, directed = TRUE, loops = TRUE)
+  igraph_local_seed(42)
+  g_spec <- sample_(gnm(8, 12, directed = TRUE, loops = TRUE))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- gnm(8, 5, TRUE))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(gnm(8, 5, directed = TRUE))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_degseq() recovers positional method", {
+  igraph_local_seed(42)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_degseq(rep(2, 10), NULL, "vl")
+  )
+  igraph_local_seed(42)
+  expect_identical_graphs(g_legacy, sample_degseq(rep(2, 10), method = "vl"))
+})
+
+test_that("sample_pa_age() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_page <- sample_pa_age(
+    40,
+    pa.exp = 1,
+    aging.exp = -0.5,
+    m = 2,
+    aging.bin = 50,
+    out.pref = TRUE,
+    directed = FALSE,
+    zero.deg.appeal = 2,
+    zero.age.appeal = 1,
+    deg.coef = 1.5,
+    age.coef = 1.5,
+    time.window = 10
+  )
+  expect_vcount(g_page, 40)
+  expect_ecount(g_page, 78)
+  expect_false(is_directed(g_page))
+
+  # out.seq and out.dist currently cannot produce a graph in sample_pa_age():
+  # any non-NULL value ends with `m = NULL` reaching the C implementation,
+  # which rejects it (same failure on main, so not a migration regression).
+  expect_error(
+    suppressWarnings(sample_pa_age(10, 1, 0, out.seq = c(0, rep(2, 9))))
+  )
+  expect_error(
+    suppressWarnings(sample_pa_age(10, 1, 0, m = 1, out.dist = c(0, 1)))
+  )
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_pa_age(20, 1, -1, 1, 200))
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_pa_age(20, 1, -1, 1, aging.bin = 200)
+  )
+})
+
+test_that("pa_age() spec twin matches sample_pa_age()", {
+  igraph_local_seed(42)
+  g_direct <- sample_pa_age(
+    30,
+    pa.exp = 1,
+    aging.exp = -0.5,
+    m = 2,
+    aging.bin = 50,
+    out.dist = NULL,
+    out.seq = NULL,
+    out.pref = TRUE,
+    directed = FALSE,
+    zero.deg.appeal = 2,
+    zero.age.appeal = 1,
+    deg.coef = 1.5,
+    age.coef = 1.5,
+    time.window = 10
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(pa_age(
+    30,
+    pa.exp = 1,
+    aging.exp = -0.5,
+    m = 2,
+    aging.bin = 50,
+    out.dist = NULL,
+    out.seq = NULL,
+    out.pref = TRUE,
+    directed = FALSE,
+    zero.deg.appeal = 2,
+    zero.age.appeal = 1,
+    deg.coef = 1.5,
+    age.coef = 1.5,
+    time.window = 10
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- pa_age(20, 1, -1, 1, 200))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(pa_age(20, 1, -1, 1, aging.bin = 200))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_traits_callaway() covers tail args by name and recovers positional calls", {
+  # sample_traits_callaway() currently returns a list holding the graph and
+  # the node types, so assertions target its components.
+  igraph_local_seed(42)
+  res <- sample_traits_callaway(
+    30,
+    2,
+    edge.per.step = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  )
+  expect_vcount(res$graph, 30)
+  expect_ecount(res$graph, 58)
+  expect_true(is_directed(res$graph))
+  # type.dist = c(1, 0) forces every vertex into the first type.
+  expect_true(all(res$node_type_vec == 0))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(res_legacy <- sample_traits_callaway(30, 2, 2))
+  igraph_local_seed(1)
+  res_named <- sample_traits_callaway(30, 2, edge.per.step = 2)
+  expect_identical_graphs(res_legacy$graph, res_named$graph)
+  expect_identical(res_legacy$node_type_vec, res_named$node_type_vec)
+})
+
+test_that("traits_callaway() spec twin matches sample_traits_callaway()", {
+  igraph_local_seed(42)
+  res_direct <- sample_traits_callaway(
+    30,
+    2,
+    edge.per.step = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  )
+  igraph_local_seed(42)
+  res_spec <- sample_(traits_callaway(
+    30,
+    2,
+    edge.per.step = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  ))
+  expect_identical_graphs(res_spec$graph, res_direct$graph)
+  expect_identical(res_spec$node_type_vec, res_direct$node_type_vec)
+
+  lifecycle::expect_deprecated(spec_legacy <- traits_callaway(30, 2, 2))
+  igraph_local_seed(1)
+  res_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  res_named <- sample_(traits_callaway(30, 2, edge.per.step = 2))
+  expect_identical_graphs(res_legacy$graph, res_named$graph)
+})
+
+test_that("sample_traits() covers tail args by name and recovers positional calls", {
+  # sample_traits() currently returns a list holding the graph and the node
+  # types, so assertions target its components.
+  igraph_local_seed(42)
+  res <- sample_traits(
+    30,
+    2,
+    k = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  )
+  expect_vcount(res$graph, 30)
+  expect_ecount(res$graph, 56)
+  expect_true(is_directed(res$graph))
+  # type.dist = c(1, 0) forces every vertex into the first type.
+  expect_true(all(res$node_type_vec == 0))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(res_legacy <- sample_traits(30, 2, 2, c(1, 0)))
+  igraph_local_seed(1)
+  res_named <- sample_traits(30, 2, 2, type.dist = c(1, 0))
+  expect_identical_graphs(res_legacy$graph, res_named$graph)
+  expect_identical(res_legacy$node_type_vec, res_named$node_type_vec)
+})
+
+test_that("traits() spec twin matches sample_traits()", {
+  igraph_local_seed(42)
+  res_direct <- sample_traits(
+    30,
+    2,
+    k = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  )
+  igraph_local_seed(42)
+  res_spec <- sample_(traits(
+    30,
+    2,
+    k = 2,
+    type.dist = c(1, 0),
+    pref.matrix = matrix(1, 2, 2),
+    directed = TRUE
+  ))
+  expect_identical_graphs(res_spec$graph, res_direct$graph)
+  expect_identical(res_spec$node_type_vec, res_direct$node_type_vec)
+
+  lifecycle::expect_deprecated(spec_legacy <- traits(30, 2, 2, c(1, 0)))
+  igraph_local_seed(1)
+  res_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  res_named <- sample_(traits(30, 2, 2, type.dist = c(1, 0)))
+  expect_identical_graphs(res_legacy$graph, res_named$graph)
+})
+
+test_that("sample_grg() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_grg <- sample_grg(30, 0.2, torus = TRUE, coords = TRUE)
+  expect_vcount(g_grg, 30)
+  expect_false(is_directed(g_grg))
+  # coords = TRUE stores the vertex positions.
+  expect_length(V(g_grg)$x, 30)
+  expect_length(V(g_grg)$y, 30)
+  expect_true(all(V(g_grg)$x >= 0 & V(g_grg)$x <= 1))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_grg(30, 0.2, TRUE))
+  igraph_local_seed(1)
+  expect_identical_graphs(g_legacy, sample_grg(30, 0.2, torus = TRUE))
+})
+
+test_that("grg() spec twin matches sample_grg()", {
+  igraph_local_seed(42)
+  g_direct <- sample_grg(30, 0.2, torus = TRUE, coords = TRUE)
+  igraph_local_seed(42)
+  g_spec <- sample_(grg(30, 0.2, torus = TRUE, coords = TRUE))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- grg(30, 0.2, TRUE))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(grg(30, 0.2, torus = TRUE))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_pref() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_pref <- sample_pref(
+    20,
+    2,
+    type.dist = c(5, 15),
+    fixed.sizes = TRUE,
+    pref.matrix = diag(2),
+    directed = TRUE,
+    loops = FALSE
+  )
+  expect_vcount(g_pref, 20)
+  expect_true(is_directed(g_pref))
+  # fixed.sizes = TRUE uses type.dist as exact group sizes.
+  expect_equal(as.vector(table(V(g_pref)$type)), c(5, 15))
+  # The diagonal preference matrix only allows edges within a type.
+  edge_ends <- as_edgelist(g_pref, names = FALSE)
+  expect_true(
+    all(V(g_pref)$type[edge_ends[, 1]] == V(g_pref)$type[edge_ends[, 2]])
+  )
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_pref(20, 2, c(1, 3)))
+  igraph_local_seed(1)
+  expect_identical_graphs(g_legacy, sample_pref(20, 2, type.dist = c(1, 3)))
+})
+
+test_that("pref() spec twin matches sample_pref()", {
+  igraph_local_seed(42)
+  g_direct <- sample_pref(
+    20,
+    2,
+    type.dist = c(5, 15),
+    fixed.sizes = TRUE,
+    pref.matrix = diag(2),
+    directed = TRUE,
+    loops = FALSE
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(pref(
+    20,
+    2,
+    type.dist = c(5, 15),
+    fixed.sizes = TRUE,
+    pref.matrix = diag(2),
+    directed = TRUE,
+    loops = FALSE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- pref(20, 2, c(1, 3)))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(pref(20, 2, type.dist = c(1, 3)))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_asym_pref() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  type_dist_matrix <- matrix(c(0, 1, 0, 0), 2, 2)
+  g_asym <- sample_asym_pref(
+    20,
+    2,
+    type.dist.matrix = type_dist_matrix,
+    pref.matrix = matrix(1, 2, 2),
+    loops = TRUE
+  )
+  expect_vcount(g_asym, 20)
+  expect_true(is_directed(g_asym))
+  # The type distribution concentrates on out-type 2 / in-type 1.
+  expect_true(all(V(g_asym)$outtype == 2))
+  expect_true(all(V(g_asym)$intype == 1))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_asym_pref(20, 2, type_dist_matrix)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_asym_pref(20, 2, type.dist.matrix = type_dist_matrix)
+  )
+})
+
+test_that("asym_pref() spec twin matches sample_asym_pref()", {
+  type_dist_matrix <- matrix(c(0, 1, 0, 0), 2, 2)
+  igraph_local_seed(42)
+  g_direct <- sample_asym_pref(
+    20,
+    2,
+    type.dist.matrix = type_dist_matrix,
+    pref.matrix = matrix(1, 2, 2),
+    loops = TRUE
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(asym_pref(
+    20,
+    2,
+    type.dist.matrix = type_dist_matrix,
+    pref.matrix = matrix(1, 2, 2),
+    loops = TRUE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- asym_pref(20, 2, type_dist_matrix)
+  )
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(asym_pref(20, 2, type.dist.matrix = type_dist_matrix))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_smallworld() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_sw <- sample_smallworld(1, 20, 2, 1, loops = TRUE, multiple = TRUE)
+  expect_vcount(g_sw, 20)
+  expect_ecount(g_sw, 40)
+  expect_false(is_directed(g_sw))
+
+  # With p = 0 no rewiring happens, so the result is deterministic.
+  lifecycle::expect_deprecated(g_legacy <- sample_smallworld(1, 10, 1, 0, TRUE))
+  expect_identical_graphs(
+    g_legacy,
+    sample_smallworld(1, 10, 1, 0, loops = TRUE)
+  )
+})
+
+test_that("smallworld() spec twin matches sample_smallworld()", {
+  igraph_local_seed(42)
+  g_direct <- sample_smallworld(1, 20, 2, 1, loops = TRUE, multiple = TRUE)
+  igraph_local_seed(42)
+  g_spec <- sample_(smallworld(1, 20, 2, 1, loops = TRUE, multiple = TRUE))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- smallworld(1, 10, 1, 0, TRUE))
+  expect_identical_graphs(
+    sample_(spec_legacy),
+    sample_(smallworld(1, 10, 1, 0, loops = TRUE))
+  )
+})
+
+test_that("sample_last_cit() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_lc <- sample_last_cit(
+    20,
+    edges = 2,
+    agebins = 5,
+    pref = rep(1, 6),
+    directed = FALSE
+  )
+  expect_vcount(g_lc, 20)
+  expect_ecount(g_lc, 38)
+  expect_false(is_directed(g_lc))
+
+  # pref is passed too: recovering only agebins positionally currently fails
+  # because the generated shim forces pref's default before agebins is
+  # recovered, freezing it at the length computed from the default agebins.
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_last_cit(20, 2, 5, rep(1, 6))
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_last_cit(20, 2, agebins = 5, pref = rep(1, 6))
+  )
+})
+
+test_that("last_cit() spec twin matches sample_last_cit()", {
+  igraph_local_seed(42)
+  g_direct <- sample_last_cit(
+    20,
+    edges = 2,
+    agebins = 5,
+    pref = rep(1, 6),
+    directed = FALSE
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(last_cit(
+    20,
+    edges = 2,
+    agebins = 5,
+    pref = rep(1, 6),
+    directed = FALSE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  # pref is passed too, see the sample_last_cit() recovery test.
+  lifecycle::expect_deprecated(spec_legacy <- last_cit(20, 2, 5, rep(1, 6)))
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(last_cit(20, 2, agebins = 5, pref = rep(1, 6)))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_cit_types() covers tail args by name and recovers positional calls", {
+  # Vertex types are 1-based at the R level.
+  vertex_types <- rep(1:2, 10)
+  igraph_local_seed(42)
+  g_ct <- sample_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = c(1, 0),
+    attr = FALSE
+  )
+  expect_vcount(g_ct, 20)
+  expect_ecount(g_ct, 38)
+  # attr = FALSE skips the type vertex attribute.
+  expect_length(vertex_attr_names(g_ct), 0)
+  # pref = c(1, 0) means only type-1 vertices can be cited.
+  edge_ends <- as_edgelist(g_ct, names = FALSE)
+  expect_true(all(vertex_types[edge_ends[, 2]] == 1))
+
+  igraph_local_seed(42)
+  g_ct2 <- sample_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = c(1, 0),
+    directed = FALSE,
+    attr = TRUE
+  )
+  expect_false(is_directed(g_ct2))
+  expect_identical(V(g_ct2)$type, vertex_types)
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_cit_types(20, 2, vertex_types, c(1, 0))
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_cit_types(20, 2, vertex_types, pref = c(1, 0))
+  )
+})
+
+test_that("cit_types() spec twin matches sample_cit_types()", {
+  vertex_types <- rep(1:2, 10)
+  igraph_local_seed(42)
+  g_direct <- sample_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = c(1, 0),
+    directed = FALSE,
+    attr = TRUE
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = c(1, 0),
+    directed = FALSE,
+    attr = TRUE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- cit_types(20, 2, vertex_types, c(1, 0))
+  )
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(cit_types(20, 2, vertex_types, pref = c(1, 0)))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_cit_cit_types() covers tail args by name and recovers positional calls", {
+  # Vertex types are 1-based at the R level.
+  vertex_types <- rep(1:2, 10)
+  # Both types only cite type-1 vertices.
+  pref_matrix <- cbind(c(1, 1), c(0, 0))
+  igraph_local_seed(42)
+  g_cct <- sample_cit_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = pref_matrix,
+    attr = FALSE
+  )
+  expect_vcount(g_cct, 20)
+  expect_ecount(g_cct, 38)
+  expect_length(vertex_attr_names(g_cct), 0)
+  edge_ends <- as_edgelist(g_cct, names = FALSE)
+  expect_true(all(vertex_types[edge_ends[, 2]] == 1))
+
+  igraph_local_seed(42)
+  g_cct2 <- sample_cit_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = pref_matrix,
+    directed = FALSE,
+    attr = TRUE
+  )
+  expect_false(is_directed(g_cct2))
+  expect_identical(V(g_cct2)$type, vertex_types)
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_cit_cit_types(20, 2, vertex_types, pref_matrix)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_cit_cit_types(20, 2, vertex_types, pref = pref_matrix)
+  )
+})
+
+test_that("cit_cit_types() spec twin matches sample_cit_cit_types()", {
+  vertex_types <- rep(1:2, 10)
+  pref_matrix <- cbind(c(1, 1), c(0, 0))
+  igraph_local_seed(42)
+  g_direct <- sample_cit_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = pref_matrix,
+    directed = FALSE,
+    attr = TRUE
+  )
+  igraph_local_seed(42)
+  g_spec <- sample_(cit_cit_types(
+    20,
+    edges = 2,
+    types = vertex_types,
+    pref = pref_matrix,
+    directed = FALSE,
+    attr = TRUE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- cit_cit_types(20, 2, vertex_types, pref_matrix)
+  )
+  igraph_local_seed(1)
+  g_legacy <- sample_(spec_legacy)
+  igraph_local_seed(1)
+  g_named <- sample_(cit_cit_types(20, 2, vertex_types, pref = pref_matrix))
+  expect_identical_graphs(g_legacy, g_named)
+})
+
+test_that("sample_sbm() recovers positional tail args", {
+  # The all-ones preference matrix makes the result deterministic.
+  pref_matrix <- matrix(1, 2, 2)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_sbm(10, pref_matrix, c(4, 6), TRUE)
+  )
+  expect_true(is_directed(g_legacy))
+  expect_identical_graphs(
+    g_legacy,
+    sample_sbm(10, pref_matrix, c(4, 6), directed = TRUE)
+  )
+})
+
+test_that("sbm() spec twin matches sample_sbm()", {
+  pref_matrix <- matrix(1, 2, 2)
+  g_direct <- sample_sbm(
+    10,
+    pref.matrix = pref_matrix,
+    block.sizes = c(4, 6),
+    directed = TRUE,
+    loops = TRUE
+  )
+  g_spec <- sample_(sbm(
+    10,
+    pref.matrix = pref_matrix,
+    block.sizes = c(4, 6),
+    directed = TRUE,
+    loops = TRUE
+  ))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(
+    spec_legacy <- sbm(10, pref_matrix, c(4, 6), TRUE)
+  )
+  expect_identical_graphs(
+    sample_(spec_legacy),
+    sample_(sbm(10, pref_matrix, c(4, 6), directed = TRUE))
+  )
+})
+
+test_that("sample_dot_product() recovers positional directed", {
+  # Unit dot products make the result a deterministic full graph.
+  unit_vecs <- replicate(4, rep(1 / 2, 4))
+  lifecycle::expect_deprecated(g_legacy <- sample_dot_product(unit_vecs, TRUE))
+  expect_true(is_directed(g_legacy))
+  expect_identical_graphs(
+    g_legacy,
+    sample_dot_product(unit_vecs, directed = TRUE)
+  )
+})
+
+test_that("dot_product() spec twin matches sample_dot_product()", {
+  unit_vecs <- replicate(4, rep(1 / 2, 4))
+  g_direct <- sample_dot_product(unit_vecs, directed = TRUE)
+  g_spec <- sample_(dot_product(unit_vecs, directed = TRUE))
+  expect_identical_graphs(g_spec, g_direct)
+
+  lifecycle::expect_deprecated(spec_legacy <- dot_product(unit_vecs, TRUE))
+  expect_identical_graphs(
+    sample_(spec_legacy),
+    sample_(dot_product(unit_vecs, directed = TRUE))
+  )
+})
+
+test_that("sample_k_regular() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_kr <- sample_k_regular(10, 3, directed = TRUE, multiple = TRUE)
+  expect_vcount(g_kr, 10)
+  expect_ecount(g_kr, 30)
+  expect_true(is_directed(g_kr))
+  expect_true(all(degree(g_kr, mode = "out") == 3))
+  expect_true(all(degree(g_kr, mode = "in") == 3))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(g_legacy <- sample_k_regular(10, 2, TRUE))
+  igraph_local_seed(1)
+  expect_identical_graphs(g_legacy, sample_k_regular(10, 2, directed = TRUE))
+})
+
+test_that("sample_fitness() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_fit <- sample_fitness(
+    30,
+    fitness.out = (10:1)^-2,
+    fitness.in = (1:10)^-2,
+    loops = TRUE,
+    multiple = TRUE
+  )
+  expect_vcount(g_fit, 10)
+  expect_ecount(g_fit, 30)
+  expect_true(is_directed(g_fit))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_fitness(20, rep(1, 10), NULL, TRUE)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_fitness(20, rep(1, 10), loops = TRUE)
+  )
+})
+
+test_that("sample_fitness_pl() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  g_fpl <- sample_fitness_pl(
+    50,
+    100,
+    exponent.out = 2.5,
+    exponent.in = 2.2,
+    loops = TRUE,
+    multiple = TRUE,
+    finite.size.correction = FALSE
+  )
+  expect_vcount(g_fpl, 50)
+  expect_ecount(g_fpl, 100)
+  expect_true(is_directed(g_fpl))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_fitness_pl(50, 100, 2.5, -1, TRUE)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_fitness_pl(50, 100, 2.5, -1, loops = TRUE)
+  )
+})
+
+test_that("sample_forestfire() covers tail args by name and recovers positional calls", {
+  igraph_local_seed(42)
+  fire <- sample_forestfire(
+    30,
+    fw.prob = 0.2,
+    bw.factor = 0.5,
+    ambs = 2,
+    directed = FALSE
+  )
+  expect_vcount(fire, 30)
+  expect_ecount(fire, 75)
+  expect_false(is_directed(fire))
+
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(fire_legacy <- sample_forestfire(30, 0.2, 0.5))
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    fire_legacy,
+    sample_forestfire(30, 0.2, bw.factor = 0.5)
+  )
+})
+
+test_that("sample_correlated_gnp() recovers positional p", {
+  igraph_local_seed(42)
+  base_graph <- sample_gnp(10, 0.3)
+  igraph_local_seed(1)
+  lifecycle::expect_deprecated(
+    g_legacy <- sample_correlated_gnp(base_graph, 0.8, 0.3)
+  )
+  igraph_local_seed(1)
+  expect_identical_graphs(
+    g_legacy,
+    sample_correlated_gnp(base_graph, 0.8, p = 0.3)
+  )
+})

@@ -5,9 +5,9 @@
 \alias{bipartite_graph}
 \title{Create a bipartite graph}
 \usage{
-make_bipartite_graph(types, edges, directed = FALSE)
+make_bipartite_graph(types, edges, ..., directed = FALSE)
 
-bipartite_graph(types, edges, directed = FALSE)
+bipartite_graph(types, edges, ..., directed = FALSE)
 }
 \arguments{
 \item{types}{A vector giving the vertex types. It will be coerced into
@@ -19,6 +19,8 @@ as the \code{name} vertex attribute.}
 regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the edges indeed
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to create a directed graph. Note
 that by default undirected graphs are created, as this is more common for

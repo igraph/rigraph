@@ -7,6 +7,7 @@
 \usage{
 graph_from_adjacency_matrix(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -16,6 +17,7 @@ graph_from_adjacency_matrix(
 
 from_adjacency(
   adjmatrix,
+  ...,
   mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
   weighted = NULL,
   diag = TRUE,
@@ -26,6 +28,8 @@ from_adjacency(
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
 can be a sparse matrix created with the \code{Matrix} package.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, specifies how igraph should interpret the
 supplied matrix. See also the \code{weighted} argument, the interpretation
