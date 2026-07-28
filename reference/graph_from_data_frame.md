@@ -167,7 +167,7 @@ relations <- data.frame(
 )
 g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 print(g, e = TRUE, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── fa213fe ──
+#> ── <igraph> ───────────────────────────────────────────────────────── c7d874d ──
 #> ℹ directed · named
 #> ℹ 5 vertices · 6 edges
 #> 
