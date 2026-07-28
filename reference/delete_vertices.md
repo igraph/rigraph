@@ -61,7 +61,7 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── c79c8a3 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── e1b564d ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -72,13 +72,13 @@ g
 #> ── Edges (vertex names) ────────────────────────────────────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 V(g)
-#> ── <vertex sequence> 10/10 · named · from c79c8a3 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from e1b564d ──────────────────────────────
 #>  [1] A B C D E F G H I J
 
 g2 <- delete_vertices(g, c(1, 5)) %>%
   delete_vertices("B")
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 353bd6e ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── ec7fd20 ──
 #> ℹ undirected · named
 #> ℹ 7 vertices · 5 edges
 #> 
@@ -89,6 +89,6 @@ g2
 #> ── Edges (vertex names) ────────────────────────────────────────────────────────
 #> [1] C ─ D  F ─ G  G ─ H  H ─ I  I ─ J 
 V(g2)
-#> ── <vertex sequence> 7/7 · named · from 353bd6e ────────────────────────────────
+#> ── <vertex sequence> 7/7 · named · from ec7fd20 ────────────────────────────────
 #> [1] C D F G H I J
 ```

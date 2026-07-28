@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9023</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,56 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.3.9023" id="igraph-2339023">igraph 2.3.3.9023<a class="anchor" aria-label="anchor" href="#igraph-2339023"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-3-9023">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-3-9023"></a></h3>
+<ul><li><p>Heal <code>main</code> — unleak <code>warnPartialMatchArgs</code> on R 4.2 and name args at <code><a href="../reference/norm_coords.html">norm_coords()</a></code>/<code><a href="../reference/make_star.html">make_star()</a></code> call sites for the lifecycle-errors leg (<a href="https://github.com/igraph/rigraph/issues/2799" class="external-link">#2799</a>).</p></li>
+<li><p>Initialize <code>c_options</code> in the Stimulus type definition (<a href="https://github.com/igraph/rigraph/issues/2792" class="external-link">#2792</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-3-3-9023">Features<a class="anchor" aria-label="anchor" href="#features-2-3-3-9023"></a></h3>
+<div class="section level4">
+<h4 id="migrations-2-3-3-9023">migrations<a class="anchor" aria-label="anchor" href="#migrations-2-3-3-9023"></a></h4>
+<ul><li>Allow head/recoverable prefix overlaps, guarded at run time (<a href="https://github.com/igraph/rigraph/issues/2787" class="external-link">#2787</a>).</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="continuous-integration-2-3-3-9023">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-3-3-9023"></a></h3>
+<ul><li>Sync R-CMD-check workflow; drop matrix-env plumbing from custom action (<a href="https://github.com/igraph/rigraph/issues/2798" class="external-link">#2798</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-2-3-3-9023">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-3-3-9023"></a></h3>
+<ul><li><p>Move optional arguments of games functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2760" class="external-link">#2760</a>).</p></li>
+<li><p>Move optional arguments of layout functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2762" class="external-link">#2762</a>).</p></li>
+<li><p>Move optional arguments of make functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2761" class="external-link">#2761</a>).</p></li>
+<li><p>Move optional arguments of topology functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2768" class="external-link">#2768</a>).</p></li>
+<li><p>Move optional arguments of conversion functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2766" class="external-link">#2766</a>).</p></li>
+<li><p>Move optional arguments of hrg-embedding functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2771" class="external-link">#2771</a>).</p></li>
+<li><p>Move optional arguments of flow functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2767" class="external-link">#2767</a>).</p></li>
+<li><p>Move optional arguments of plotting functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2777" class="external-link">#2777</a>).</p></li>
+<li><p>Move optional arguments of interface functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2770" class="external-link">#2770</a>).</p></li>
+<li><p>Move optional arguments of similarity-efficiency functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2776" class="external-link">#2776</a>).</p></li>
+<li><p>Move optional arguments of cliques functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2769" class="external-link">#2769</a>).</p></li>
+<li><p>Move optional arguments of motifs-graphlets functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2772" class="external-link">#2772</a>).</p></li>
+<li><p>Move optional arguments of misc functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2778" class="external-link">#2778</a>).</p></li>
+<li><p>Move optional arguments of bipartite-degseq functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2774" class="external-link">#2774</a>).</p></li>
+<li><p>Move optional arguments of walks-cycles functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2775" class="external-link">#2775</a>).</p></li>
+<li><p>Move optional arguments of trees functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2758" class="external-link">#2758</a>).</p></li>
+<li><p>Move optional arguments of operators functions behind the ellipsis (<a href="https://github.com/igraph/rigraph/issues/2773" class="external-link">#2773</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-3-3-9023">Testing<a class="anchor" aria-label="anchor" href="#testing-2-3-3-9023"></a></h3>
+<ul><li><p>Cover migrated centrality, community, and centralization signatures (<a href="https://github.com/igraph/rigraph/issues/2786" class="external-link">#2786</a>).</p></li>
+<li><p>Make unasserted lifecycle deprecations fail the test suite (opt-in) (<a href="https://github.com/igraph/rigraph/issues/2782" class="external-link">#2782</a>).</p></li>
+<li><p>Cover migrated structural-properties signatures (<a href="https://github.com/igraph/rigraph/issues/2785" class="external-link">#2785</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-3-3-9023">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-3-3-9023"></a></h3>
+<ul><li><p>Ci: Run all smoke-test checks even when one fails (<a href="https://github.com/igraph/rigraph/issues/97" class="external-link">#97</a>).</p></li>
+<li><p>Ci: Link the responsible workflow run in snapshot update PRs (<a href="https://github.com/igraph/rigraph/issues/96" class="external-link">#96</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.3.9022" id="igraph-2339022">igraph 2.3.3.9022<a class="anchor" aria-label="anchor" href="#igraph-2339022"></a></h2>
 <div class="section level3">
