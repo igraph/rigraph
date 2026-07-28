@@ -6,6 +6,7 @@
 \usage{
 centr_degree(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = TRUE
@@ -13,6 +14,8 @@ centr_degree(
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{This is the same as the \code{mode} argument of
 \code{degree()}.}

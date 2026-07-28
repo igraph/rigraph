@@ -7,6 +7,7 @@
 realize_degseq(
   out.deg,
   in.deg = NULL,
+  ...,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 )
@@ -19,6 +20,8 @@ should be even. For directed graphs its sum should be the same as the sum of
 
 \item{in.deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{allowed.edge.types}{Character, specifies the types of allowed edges.
 \dQuote{simple} allows simple graphs only (no loops, no multiple edges).

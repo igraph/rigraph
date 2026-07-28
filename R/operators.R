@@ -938,6 +938,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' attributes are lost.
 #'
 #' @param graph The input graph, can be directed or undirected.
+#' @inheritParams rlang::args_dots_empty
 #' @param loops Logical, whether to generate loop edges.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -957,7 +958,33 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' gu
 #' isomorphic(gu, make_full_graph(vcount(g)))
 #'
-complementer <- function(graph, loops = FALSE) {
+complementer <- function(
+  graph,
+  ...,
+  loops = FALSE
+) {
+  # BEGIN GENERATED ARG_HANDLE: complementer, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = FALSE),
+      head_args = c("graph"),
+      fn_name = "complementer"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   complementer_impl(graph = graph, loops = as.logical(loops))
@@ -1009,6 +1036,7 @@ complementer <- function(graph, loops = FALSE) {
 #' @aliases %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param byname A Logical, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
 #'   `auto`, that means `TRUE` if both graphs are named and
@@ -1036,11 +1064,64 @@ complementer <- function(graph, loops = FALSE) {
 compose <- function(
   g1,
   g2,
+  ...,
   byname = "auto",
   graph.attr.comb = igraph_opt("graph.attr.comb"),
   vertex.attr.comb = "rename",
   edge.attr.comb = "rename"
 ) {
+  # BEGIN GENERATED ARG_HANDLE: compose, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        byname = byname,
+        graph.attr.comb = graph.attr.comb,
+        vertex.attr.comb = vertex.attr.comb,
+        edge.attr.comb = edge.attr.comb
+      ),
+      recover_new = c(
+        "byname",
+        "graph.attr.comb",
+        "vertex.attr.comb",
+        "edge.attr.comb"
+      ),
+      recover_old = c(
+        "byname",
+        "graph.attr.comb",
+        "vertex.attr.comb",
+        "edge.attr.comb"
+      ),
+      match_names = c(
+        "byname",
+        "graph.attr.comb",
+        "vertex.attr.comb",
+        "edge.attr.comb"
+      ),
+      match_to = c(
+        "byname",
+        "graph.attr.comb",
+        "vertex.attr.comb",
+        "edge.attr.comb"
+      ),
+      defaults = list(
+        byname = "auto",
+        graph.attr.comb = igraph_opt("graph.attr.comb"),
+        vertex.attr.comb = "rename",
+        edge.attr.comb = "rename"
+      ),
+      head_args = c("g1", "g2"),
+      fn_name = "compose"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(g1)
   ensure_igraph(g2)
 

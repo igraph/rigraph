@@ -6,6 +6,7 @@
 \usage{
 graph_from_adj_list(
   adjlist,
+  ...,
   mode = c("out", "in", "all", "total"),
   duplicate = TRUE
 )
@@ -14,6 +15,8 @@ graph_from_adj_list(
 \item{adjlist}{The adjacency list. It should be consistent, i.e. the maximum
 throughout all vectors in the list must be less than the number of vectors
 (=the number of vertices in the graph).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, it specifies whether the graph to create is
 undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter

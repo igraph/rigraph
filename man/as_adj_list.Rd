@@ -7,6 +7,7 @@
 \usage{
 as_adj_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore"),
   multiple = TRUE
@@ -14,12 +15,15 @@ as_adj_list(
 
 as_adj_edge_list(
   graph,
+  ...,
   mode = c("all", "out", "in", "total"),
   loops = c("twice", "once", "ignore")
 )
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
 to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,

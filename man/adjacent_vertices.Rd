@@ -4,12 +4,14 @@
 \alias{adjacent_vertices}
 \title{Adjacent vertices of multiple vertices in a graph}
 \usage{
-adjacent_vertices(graph, v, mode = c("out", "in", "all", "total"))
+adjacent_vertices(graph, v, ..., mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{Input graph.}
 
 \item{v}{The vertices to query.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
