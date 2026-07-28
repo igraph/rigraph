@@ -34,6 +34,10 @@ if the binary representations of their vertex IDs
 (minus one, to make them zero-based)
 differ in precisely one bit.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hypercube}{\code{hypercube()}}
+}
+
 \examples{
 # 3-dimensional hypercube (cube)
 print_all(make_hypercube(3))
