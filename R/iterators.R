@@ -1769,8 +1769,8 @@ print_igraph_es_cli <- function(
 
   if (!is.null(graph) && !anyNA(x)) {
     # Live graph: render endpoints with arrows.
-    # NA edge IDs (e.g. the inbound edges of unreached vertices in
-    # shortest_paths() or widest_paths()) have no endpoints,
+    # NA edge IDs (e.g. the inbound edges of unreached vertices
+    # in shortest_paths() or widest_paths()) have no endpoints,
     # so sequences containing them use the fallback below.
     arrow <- edge_arrow_cli(is_directed(graph))
     endpoints <- ends(graph, x, names = has_vnames || is_named(graph))

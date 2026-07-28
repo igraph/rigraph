@@ -7,8 +7,8 @@
 \usage{
 widest_path_widths(
   graph,
-  from = V(graph),
-  to = V(graph),
+  from = NULL,
+  to = NULL,
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -18,7 +18,7 @@ widest_path_widths(
 widest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL,
@@ -30,82 +30,91 @@ widest_paths(
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{from}{The source vertex for \code{widest_paths()}, or the vertices from
-which the widest paths will be calculated for \code{widest_path_widths()}
-(defaulting to all vertices in the latter).}
+\item{from}{The source vertex for \code{widest_paths()},
+or the vertices from which the widest paths will be calculated
+for \code{widest_path_widths()}.
+In the latter, the default \code{NULL} selects all vertices.}
 
 \item{to}{The vertices to which the widest paths will be calculated.
-By default it includes all vertices.}
+The default \code{NULL} includes all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character constant, gives whether the widest paths to or from
-the given vertices should be calculated for directed graphs.
-If \code{out}, then the widest paths \emph{from} the vertex, if \verb{in}, then \emph{to} it
-will be considered.
-If \code{all}, then the graph is treated as undirected, i.e. edge directions
-are not taken into account.
+\item{mode}{Character constant,
+gives whether the widest paths to or from the given vertices
+should be calculated for directed graphs.
+If \code{out}, then the widest paths \emph{from} the vertex,
+if \verb{in}, then \emph{to} it will be considered.
+If \code{all}, then the graph is treated as undirected,
+i.e. edge directions are not taken into account.
 This argument is ignored for undirected graphs.}
 
 \item{weights}{A numeric vector giving edge weights, interpreted as widths.
 If it is \code{NULL} (the default), then the \code{weight} edge attribute is used.
-Widest path functions require edge weights, so an error is raised if the
-graph has no \code{weight} attribute and \code{weights} is \code{NULL}.
+Widest path functions require edge weights,
+so an error is raised if the graph has no \code{weight} attribute
+and \code{weights} is \code{NULL}.
 \code{weights = NA} is not supported.}
 
 \item{algorithm}{Which algorithm to use for the calculation in
 \code{widest_path_widths()}.
-By default (\sQuote{\code{automatic}}), igraph chooses between
-\sQuote{\code{dijkstra}} and \sQuote{\code{floyd-warshall}} based on the density of
-the graph.}
+By default (\sQuote{\code{automatic}}),
+igraph chooses between \sQuote{\code{dijkstra}} and \sQuote{\code{floyd-warshall}}
+based on the density of the graph.}
 
-\item{output}{Character scalar, defines how to report the widest paths in
-\code{widest_paths()}.
+\item{output}{Character scalar,
+defines how to report the widest paths in \code{widest_paths()}.
 \dQuote{vpath} means that the vertices along the paths are reported,
-\dQuote{epath} means that the edges along the paths are reported, and
-\dQuote{both} requests both of them.}
+\dQuote{epath} means that the edges along the paths are reported,
+and \dQuote{both} requests both of them.}
 
-\item{predecessors}{Logical scalar, whether to return the predecessor
-vertex of each vertex in the widest path tree in \code{widest_paths()}.
-The predecessor of vertex \code{i} is the vertex from which vertex \code{i} was
-reached during the search.
-The start vertex (in the \code{from} argument) and vertices that were not
-reached during the search have \code{NA} as predecessor.
-Note that the search terminates as soon as all vertices in \code{to} are
-reached.}
+\item{predecessors}{Logical scalar,
+whether to return the predecessor vertex of each vertex
+in the widest path tree in \code{widest_paths()}.
+The predecessor of vertex \code{i}
+is the vertex from which vertex \code{i} was reached during the search.
+The start vertex (in the \code{from} argument)
+and vertices that were not reached during the search
+have \code{NA} as predecessor.
+Note that the search terminates
+as soon as all vertices in \code{to} are reached.}
 
-\item{inbound_edges}{Logical scalar, whether to return the inbound edge of
-each vertex in the widest path tree in \code{widest_paths()}.
-The inbound edge of vertex \code{i} is the edge via which vertex \code{i} was
-reached during the search.
-The start vertex (in the \code{from} argument) and vertices that were not
-reached during the search have \code{NA} as inbound edge.
-Note that the search terminates as soon as all vertices in \code{to} are
-reached.}
+\item{inbound_edges}{Logical scalar,
+whether to return the inbound edge of each vertex
+in the widest path tree in \code{widest_paths()}.
+The inbound edge of vertex \code{i}
+is the edge via which vertex \code{i} was reached during the search.
+The start vertex (in the \code{from} argument)
+and vertices that were not reached during the search
+have \code{NA} as inbound edge.
+Note that the search terminates
+as soon as all vertices in \code{to} are reached.}
 }
 \value{
-For \code{widest_path_widths()} a numeric matrix with \code{length(to)}
-columns and \code{length(from)} rows.
-The width of the widest path from a vertex to itself is \code{Inf}, and it is
-\code{-Inf} for vertex pairs that are not connected by any path.
+For \code{widest_path_widths()}
+a numeric matrix with \code{length(to)} columns and \code{length(from)} rows.
+The width of the widest path from a vertex to itself is \code{Inf},
+and it is \code{-Inf} for vertex pairs that are not connected by any path.
 
 For \code{widest_paths()} a named list with four components is returned:
 \describe{
 \item{vpath}{
 A list of length \code{length(to)}.
-List element \code{i} contains the vertex IDs on the widest path from
-vertex \code{from} to vertex \code{to[i]} (or the other way for directed graphs,
+List element \code{i} contains the vertex IDs
+on the widest path from vertex \code{from} to vertex \code{to[i]}
+(or the other way for directed graphs,
 depending on the \code{mode} argument).
-The vector also contains \code{from} and \code{to[i]} as the first and last
-elements.
+The vector also contains \code{from} and \code{to[i]}
+as the first and last elements.
 If \code{from} is the same as \code{to[i]}, then it is only included once.
-If there is no path between two vertices, then a vector of length
-zero is returned as the list element.
+If there is no path between two vertices,
+then a vector of length zero is returned as the list element.
 This entry is \code{NULL} if it is not requested in the \code{output} argument.
 }
 \item{epath}{
-A list similar to \code{vpath}, but the vectors contain the edge IDs along
-the widest paths instead of the vertex IDs.
+A list similar to \code{vpath},
+but the vectors contain the edge IDs along the widest paths
+instead of the vertex IDs.
 This entry is \code{NULL} if it is not requested in the \code{output} argument.
 }
 \item{predecessors}{
@@ -119,35 +128,40 @@ The inbound edge of each vertex, or \code{NULL} if it was not requested.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{widest_path_widths()} calculates the widths of the widest paths between
-pairs of vertices.
-\code{widest_paths()} calculates one widest path (the path itself, and not just
-its width) from a source vertex to one or more target vertices.
+\code{widest_path_widths()} calculates the widths
+of the widest paths between pairs of vertices.
+\code{widest_paths()} calculates one widest path
+(the path itself, and not just its width)
+from a source vertex to one or more target vertices.
 }
 \details{
-The widest path between two vertices is the path with the largest bottleneck
-width, where the bottleneck width of a path is the smallest edge weight
-along the path.
+The widest path between two vertices
+is the path with the largest bottleneck width,
+where the bottleneck width of a path
+is the smallest edge weight along the path.
 Edge weights are interpreted as widths, so both functions require them:
 supply them in \code{weights} or via a \code{weight} edge attribute.
 
-\code{widest_path_widths()} calculates the widths of pairwise widest paths from
-a set of vertices (\code{from}) to another set of vertices (\code{to}).
-Depending on the \code{algorithm} argument, it uses Dijkstra's algorithm
-(\sQuote{\code{dijkstra}}), which is faster for sparse graphs, or the
-Floyd-Warshall algorithm (\sQuote{\code{floyd-warshall}}), which is faster for
-dense graphs.
-With the default \sQuote{\code{automatic}}, igraph chooses between the two
-algorithms based on the density of the graph.
+\code{widest_path_widths()} calculates the widths of pairwise widest paths
+from a set of vertices (\code{from}) to another set of vertices (\code{to}).
+Depending on the \code{algorithm} argument,
+it uses Dijkstra's algorithm (\sQuote{\code{dijkstra}}),
+which is faster for sparse graphs,
+or the Floyd-Warshall algorithm (\sQuote{\code{floyd-warshall}}),
+which is faster for dense graphs.
+With the default \sQuote{\code{automatic}},
+igraph chooses between the two algorithms
+based on the density of the graph.
 
-\code{widest_paths()} calculates a single widest path from the source vertex
-given in \code{from} to each of the target vertices given in \code{to}, using a
-modified Dijkstra's algorithm.
-If there is more than one widest path between two vertices, only one of
-them is returned.
+\code{widest_paths()} calculates a single widest path
+from the source vertex given in \code{from}
+to each of the target vertices given in \code{to},
+using a modified Dijkstra's algorithm.
+If there is more than one widest path between two vertices,
+only one of them is returned.
 }
 \section{Related documentation in the C library}{
-\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_widest_path_widths_dijkstra}{\code{widest_path_widths_dijkstra()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_widest_path_widths_floyd_warshall}{\code{widest_path_widths_floyd_warshall()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_widest_paths}{\code{get_widest_paths()}}
+\href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids}{\code{get_eids()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount}{\code{ecount()}}
 }
 
 \examples{

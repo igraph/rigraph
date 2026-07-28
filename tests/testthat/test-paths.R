@@ -279,6 +279,68 @@ test_that("widest_paths() works with directed graphs", {
   expect_equal(as.numeric(result_in$vpath[[1]]), c(1, 5, 4, 3))
 })
 
+test_that("widest_path_widths_*_impl() functions agree with the wrapper", {
+  g <- make_ring(5, directed = TRUE)
+  weights <- c(1, 2, 3, 4, 5)
+  E(g)$weight <- weights
+
+  impl_dijkstra <- widest_path_widths_dijkstra_impl(
+    graph = g,
+    from = V(g),
+    to = V(g),
+    weights = weights,
+    mode = "out"
+  )
+  impl_floyd <- widest_path_widths_floyd_warshall_impl(
+    graph = g,
+    from = V(g),
+    to = V(g),
+    weights = weights,
+    mode = "out"
+  )
+
+  # In the directed ring the only path from 1 to 3 is 1 -> 2 -> 3,
+  # so its bottleneck width is the weight of the first edge.
+  expect_identical(dim(impl_dijkstra), c(5L, 5L))
+  expect_equal(impl_dijkstra[1, 3], 1)
+  expect_equal(diag(impl_dijkstra), rep(Inf, 5))
+  expect_equal(impl_dijkstra, impl_floyd)
+
+  expect_equal(
+    widest_path_widths(g, mode = "out", algorithm = "dijkstra"),
+    impl_dijkstra
+  )
+})
+
+test_that("get_widest_paths_impl() agrees with widest_paths()", {
+  g <- make_ring(5)
+  weights <- c(1, 2, 3, 4, 5)
+  E(g)$weight <- weights
+
+  impl_result <- get_widest_paths_impl(
+    graph = g,
+    from = 1,
+    to = 3,
+    weights = weights,
+    mode = "out"
+  )
+
+  # The widest path from 1 to 3 goes the wide way around the ring.
+  expect_named(impl_result, c("vertices", "edges", "parents", "inbound_edges"))
+  expect_equal(as.numeric(impl_result$vertices[[1]]), c(1, 5, 4, 3))
+  expect_equal(as.numeric(impl_result$edges[[1]]), c(5, 4, 3))
+
+  wrapper_result <- widest_paths(g, from = 1, to = 3, output = "both")
+  expect_equal(
+    as.numeric(impl_result$vertices[[1]]),
+    as.numeric(wrapper_result$vpath[[1]])
+  )
+  expect_equal(
+    as.numeric(impl_result$edges[[1]]),
+    as.numeric(wrapper_result$epath[[1]])
+  )
+})
+
 # ---- ellipsis migration: argument coverage ----------------------------
 
 test_that("all_simple_paths() tail arguments and legacy positional recovery", {
