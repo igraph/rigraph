@@ -4,13 +4,7 @@
 \alias{as_veincidence_matrix}
 \title{Convert a graph to a vertex-edge incidence matrix}
 \usage{
-as_veincidence_matrix(
-  graph,
-  ...,
-  weights = NULL,
-  names = TRUE,
-  sparse = igraph_opt("sparsematrices")
-)
+as_veincidence_matrix(graph, ..., weights = NULL, names = TRUE, sparse = NULL)
 }
 \arguments{
 \item{graph}{The graph to convert.}
@@ -35,7 +29,8 @@ if present.}
 
 \item{sparse}{Logical, whether to create a sparse matrix.
 The \sQuote{\code{Matrix}} package must be installed
-for creating sparse matrices.}
+for creating sparse matrices.
+The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 }
 \value{
 A \code{vcount(graph)} by \code{ecount(graph)} (usually) numeric matrix.

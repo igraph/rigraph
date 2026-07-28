@@ -645,6 +645,7 @@ as_edgelist <- function(
 #' @param sparse Logical, whether to create a sparse matrix.
 #'   The \sQuote{`Matrix`} package must be installed
 #'   for creating sparse matrices.
+#'   The default `NULL` uses the `sparsematrices` igraph option.
 #' @return A `vcount(graph)` by `ecount(graph)` (usually) numeric matrix.
 #'
 #' @seealso [as_adjacency_matrix()], [as_edgelist()], [laplacian_matrix()]
@@ -677,10 +678,14 @@ as_veincidence_matrix <- function(
   ...,
   weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = NULL
 ) {
   ensure_igraph(graph)
   check_dots_empty()
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
 
   weights <- resolve_edge_weights(
     graph,

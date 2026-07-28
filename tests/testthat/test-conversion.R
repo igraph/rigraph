@@ -1066,6 +1066,14 @@ test_that("as_veincidence_matrix() works -- sparse", {
   )
 })
 
+test_that("as_veincidence_matrix() default sparse follows the igraph option", {
+  g <- make_ring(3, circular = FALSE)
+  local_igraph_options(sparsematrices = TRUE)
+  expect_s4_class(as_veincidence_matrix(g), "sparseMatrix")
+  local_igraph_options(sparsematrices = FALSE)
+  expect_true(is.matrix(as_veincidence_matrix(g)))
+})
+
 test_that("as_veincidence_matrix() handles loops", {
   g_undir <- make_graph(c(1, 1, 1, 2), directed = FALSE)
   expected_undir <- matrix(c(2, 0, 1, 1), nrow = 2)
