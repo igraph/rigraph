@@ -11,7 +11,8 @@ regular_tree(h, k = 3, ..., mode = c("undirected", "out", "in"))
 }
 \arguments{
 \item{h}{Integer scalar, the height of the tree,
-i.e. the distance between the root and the leaves.}
+i.e. the distance between the root and the leaves.
+Must be positive.}
 
 \item{k}{Integer scalar, the degree of the internal vertices.
 Must be at least 2.}
@@ -29,17 +30,17 @@ An igraph graph.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{make_regular_tree()} creates a regular tree of height \code{h} in which all
-internal vertices have the same total degree \code{k}.
+\code{make_regular_tree()} creates a regular tree of height \code{h}
+in which all internal vertices have the same total degree \code{k}.
 }
 \details{
-All vertices of a regular tree, except its leaves, have the same total
-degree \code{k}.
+All vertices of a regular tree, except its leaves,
+have the same total degree \code{k}.
 This is different from \code{\link[=make_tree]{make_tree()}}, which creates a k-ary tree,
-where all internal vertices have the same number of children.
-Regular trees are frequently used as null models of hierarchical
-structures and as approximations of infinite regular trees,
-also called Bethe lattices.
+where all internal vertices have the same number of children,
+and thus the degree of the root is one less
+than the degree of the other internal vertices.
+Regular trees are also referred to as Bethe lattices.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_regular_tree}{\code{regular_tree()}}

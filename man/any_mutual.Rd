@@ -14,18 +14,28 @@ any_mutual(graph, ..., loops = TRUE)
 \item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }
 \value{
-A logical scalar, \code{TRUE} if the graph contains at least one pair of
-mutual edges, \code{FALSE} otherwise.
+A logical scalar,
+\code{TRUE} if the graph contains at least one pair of mutual edges,
+\code{FALSE} otherwise.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{any_mutual()} checks whether a directed graph contains at least one
-pair of mutual edges.
+\code{any_mutual()} checks whether a directed graph
+contains at least one pair of mutual edges.
+}
+\details{
+In a directed graph, a non-loop (A,B) edge is mutual
+if the graph also includes a (B,A) directed edge.
+Whether directed self-loops are considered mutual
+is controlled by the \code{loops} argument.
 
-In a directed graph an (A,B) edge is mutual if the graph also includes a
-(B,A) directed edge.
-Undirected graphs contain only mutual edges by definition.
+In undirected graphs, all edges are considered mutual by definition.
+Thus, for an undirected graph,
+this function returns \code{FALSE} only when the graph has no edges.
+
+To check whether a graph is an oriented graph,
+use this function together with \code{\link[=is_directed]{is_directed()}}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_mutual}{\code{has_mutual()}}
@@ -40,8 +50,8 @@ any_mutual(g2)
 }
 \seealso{
 \code{\link[=which_mutual]{which_mutual()}} to find the mutual edges,
-\code{\link[=reciprocity]{reciprocity()}} and \code{\link[=dyad_census]{dyad_census()}} if you just want some statistics
-about mutual edges.
+\code{\link[=reciprocity]{reciprocity()}} and \code{\link[=dyad_census]{dyad_census()}}
+if you just want some statistics about mutual edges.
 
 Other structural.properties:
 \code{\link[=bfs]{bfs()}},

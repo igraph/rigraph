@@ -202,6 +202,16 @@
       ! k = 3 must be positive and less than n/2 with n = 5. Invalid value
       Source: <file>:<line>
 
+---
+
+    Code
+      make_generalized_petersen(5, 2, directed = TRUE)
+    Condition
+      Error in `make_generalized_petersen()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * directed = TRUE
+
 # make_regular_tree prints as expected
 
     Code

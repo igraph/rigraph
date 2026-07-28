@@ -589,12 +589,26 @@ test_that("make_generalized_petersen prints as expected", {
 test_that("make_generalized_petersen rejects invalid arguments", {
   expect_snapshot_igraph_error(make_generalized_petersen(2, 1))
   expect_snapshot_igraph_error(make_generalized_petersen(5, 3))
+  expect_snapshot(error = TRUE, {
+    make_generalized_petersen(5, 2, directed = TRUE)
+  })
 })
 
 test_that("generalized_petersen constructor spec works with make_()", {
   g1 <- make_generalized_petersen(6, 2)
   g2 <- make_(generalized_petersen(6, 2))
   expect_identical_graphs(g1, g2)
+})
+
+test_that("generalized_petersen_impl() works", {
+  # Call the impl directly with a full argument set
+  g <- generalized_petersen_impl(n = 5, k = 2)
+  expect_vcount(g, 10)
+  expect_ecount(g, 15)
+  expect_false(is_directed(g))
+
+  # The impl agrees with the exported wrapper
+  expect_identical_graphs(g, make_generalized_petersen(5, 2))
 })
 
 test_that("make_regular_tree works", {
@@ -641,6 +655,17 @@ test_that("regular_tree constructor spec works with make_()", {
   expect_identical_graphs(g1, g2)
 })
 
+test_that("regular_tree_impl() works", {
+  # Call the impl directly with a full argument set
+  g <- regular_tree_impl(h = 2, k = 4, type = "in")
+  expect_vcount(g, 17)
+  expect_ecount(g, 16)
+  expect_true(is_directed(g))
+
+  # The impl agrees with the exported wrapper
+  expect_identical_graphs(g, make_regular_tree(2, k = 4, mode = "in"))
+})
+
 test_that("make_symmetric_tree works", {
   # The root has three children, each of which has two children
   g <- make_symmetric_tree(c(3, 2))
@@ -682,6 +707,17 @@ test_that("symmetric_tree constructor spec works with make_()", {
   g1 <- make_symmetric_tree(c(2, 3))
   g2 <- make_(symmetric_tree(c(2, 3)))
   expect_identical_graphs(g1, g2)
+})
+
+test_that("symmetric_tree_impl() works", {
+  # Call the impl directly with a full argument set
+  g <- symmetric_tree_impl(branches = c(3, 2), type = "out")
+  expect_vcount(g, 10)
+  expect_ecount(g, 9)
+  expect_true(is_directed(g))
+
+  # The impl agrees with the exported wrapper
+  expect_identical_graphs(g, make_symmetric_tree(c(3, 2)))
 })
 
 # ---- ellipsis migration: argument coverage ----------------------------

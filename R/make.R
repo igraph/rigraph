@@ -2523,21 +2523,22 @@ tree <- function(...) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' `make_regular_tree()` creates a regular tree of height `h` in which all
-#' internal vertices have the same total degree `k`.
+#' `make_regular_tree()` creates a regular tree of height `h`
+#' in which all internal vertices have the same total degree `k`.
 #'
 #' @details
-#' All vertices of a regular tree, except its leaves, have the same total
-#' degree `k`.
+#' All vertices of a regular tree, except its leaves,
+#' have the same total degree `k`.
 #' This is different from [make_tree()], which creates a k-ary tree,
-#' where all internal vertices have the same number of children.
-#' Regular trees are frequently used as null models of hierarchical
-#' structures and as approximations of infinite regular trees,
-#' also called Bethe lattices.
+#' where all internal vertices have the same number of children,
+#' and thus the degree of the root is one less
+#' than the degree of the other internal vertices.
+#' Regular trees are also referred to as Bethe lattices.
 #'
 #' @concept Regular tree
 #' @param h Integer scalar, the height of the tree,
 #'   i.e. the distance between the root and the leaves.
+#'   Must be positive.
 #' @param k Integer scalar, the degree of the internal vertices.
 #'   Must be at least 2.
 #' @inheritParams rlang::args_dots_empty
@@ -2581,7 +2582,7 @@ regular_tree <- function(
   mode = c("undirected", "out", "in")
 ) {
   check_dots_empty()
-  constructor_spec(make_regular_tree, h, k = k, mode = mode)
+  constructor_spec(make_regular_tree, h = h, k = k, mode = mode)
 }
 
 ## -----------------------------------------------------------------
@@ -2591,12 +2592,15 @@ regular_tree <- function(
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' `make_symmetric_tree()` creates a tree in which all vertices at the same
-#' distance from the root have the same number of children.
+#' `make_symmetric_tree()` creates a tree
+#' in which all vertices at the same distance from the root
+#' have the same number of children.
 #'
 #' @concept Symmetric tree
-#' @param branches Numeric vector, the number of children of the vertices at
-#'   each level, starting from the root.
+#' @param branches Numeric vector,
+#'   the number of children of the vertices at each level,
+#'   starting from the root.
+#'   All elements must be positive.
 #'   The tree will have `length(branches) + 1` levels.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Defines the direction of the edges.
@@ -2633,7 +2637,7 @@ symmetric_tree <- function(
   mode = c("out", "in", "undirected")
 ) {
   check_dots_empty()
-  constructor_spec(make_symmetric_tree, branches, mode = mode)
+  constructor_spec(make_symmetric_tree, branches = branches, mode = mode)
 }
 
 ## -----------------------------------------------------------------
@@ -3511,32 +3515,43 @@ turan <- function(n, r) {
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' The generalized Petersen graph \eqn{GP(n, k)} consists of \eqn{2n} vertices
-#' and \eqn{3n} edges: an outer cycle on \eqn{n} vertices,
-#' an inner star polygon \eqn{\{n / k\}},
-#' and spokes connecting corresponding vertices of the two polygons.
+#' The generalized Petersen graph \eqn{GP(n, k)}
+#' consists of \eqn{2n} vertices and \eqn{3n} edges:
+#' an outer cycle on \eqn{n} vertices,
+#' an inner circulant graph on \eqn{n} vertices
+#' in which vertex \eqn{i} is connected to vertex \eqn{i + k} (modulo \eqn{n}),
+#' and spokes connecting corresponding vertices of the two parts.
 #'
 #' @details
-#' Vertices `1` to `n` form the outer cycle and vertices `n + 1` to `2 * n`
-#' form the inner star polygon.
+#' Vertices `1` to `n` form the outer cycle
+#' and vertices `n + 1` to `2 * n` form the inner circulant graph.
 #' \eqn{GP(n, 1)} is the \eqn{n}-prism,
-#' and \eqn{GP(5, 2)} is the well-known Petersen graph.
+#' and \eqn{GP(5, 2)} is the well-known Petersen graph,
+#' also available as `make_graph("Petersen")`.
 #'
 #' @concept Generalized Petersen graph
-#' @param n Integer scalar, the number of vertices in the inner and outer
-#'   polygons.
+#' @param n Integer scalar,
+#'   the number of vertices in the inner and outer parts.
 #'   Must be at least 3.
-#' @param k Integer scalar, the shift of the inner star polygon.
+#' @param k Integer scalar, the shift of the inner circulant graph.
 #'   Must satisfy \eqn{1 \le k < n / 2}{1 <= k < n / 2}.
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph.
 #'
+#' @references M. E. Watkins,
+#' A Theorem on Tait Colorings with an Application to the Generalized
+#' Petersen Graphs,
+#' Journal of Combinatorial Theory 6, 152-164 (1969).
+#' \doi{10.1016/S0021-9800(69)80116-X}
+#' @seealso [make_graph()] for the original Petersen graph.
 #' @family deterministic constructors
 #' @export
 #' @examples
 #' # The Petersen graph
 #' g <- make_generalized_petersen(5, 2)
 #' plot(g)
-make_generalized_petersen <- function(n, k) {
+make_generalized_petersen <- function(n, k, ...) {
+  check_dots_empty()
   generalized_petersen_impl(
     n = n,
     k = k
@@ -3545,7 +3560,8 @@ make_generalized_petersen <- function(n, k) {
 
 #' @rdname make_generalized_petersen
 #' @export
-generalized_petersen <- function(n, k) {
+generalized_petersen <- function(n, k, ...) {
+  check_dots_empty()
   constructor_spec(make_generalized_petersen, n = n, k = k)
 }
 

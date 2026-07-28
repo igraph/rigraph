@@ -10,8 +10,10 @@ make_symmetric_tree(branches, ..., mode = c("out", "in", "undirected"))
 symmetric_tree(branches, ..., mode = c("out", "in", "undirected"))
 }
 \arguments{
-\item{branches}{Numeric vector, the number of children of the vertices at
-each level, starting from the root.
+\item{branches}{Numeric vector,
+the number of children of the vertices at each level,
+starting from the root.
+All elements must be positive.
 The tree will have \code{length(branches) + 1} levels.}
 
 \item{...}{These dots are for future extensions and must be empty.}
@@ -27,8 +29,9 @@ An igraph graph.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{make_symmetric_tree()} creates a tree in which all vertices at the same
-distance from the root have the same number of children.
+\code{make_symmetric_tree()} creates a tree
+in which all vertices at the same distance from the root
+have the same number of children.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_symmetric_tree}{\code{symmetric_tree()}}

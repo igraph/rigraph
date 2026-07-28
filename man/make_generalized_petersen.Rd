@@ -5,17 +5,19 @@
 \alias{generalized_petersen}
 \title{Create a generalized Petersen graph}
 \usage{
-make_generalized_petersen(n, k)
+make_generalized_petersen(n, k, ...)
 
-generalized_petersen(n, k)
+generalized_petersen(n, k, ...)
 }
 \arguments{
-\item{n}{Integer scalar, the number of vertices in the inner and outer
-polygons.
+\item{n}{Integer scalar,
+the number of vertices in the inner and outer parts.
 Must be at least 3.}
 
-\item{k}{Integer scalar, the shift of the inner star polygon.
+\item{k}{Integer scalar, the shift of the inner circulant graph.
 Must satisfy \eqn{1 \le k < n / 2}{1 <= k < n / 2}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 An igraph graph.
@@ -23,16 +25,19 @@ An igraph graph.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The generalized Petersen graph \eqn{GP(n, k)} consists of \eqn{2n} vertices
-and \eqn{3n} edges: an outer cycle on \eqn{n} vertices,
-an inner star polygon \eqn{\{n / k\}},
-and spokes connecting corresponding vertices of the two polygons.
+The generalized Petersen graph \eqn{GP(n, k)}
+consists of \eqn{2n} vertices and \eqn{3n} edges:
+an outer cycle on \eqn{n} vertices,
+an inner circulant graph on \eqn{n} vertices
+in which vertex \eqn{i} is connected to vertex \eqn{i + k} (modulo \eqn{n}),
+and spokes connecting corresponding vertices of the two parts.
 }
 \details{
-Vertices \code{1} to \code{n} form the outer cycle and vertices \code{n + 1} to \code{2 * n}
-form the inner star polygon.
+Vertices \code{1} to \code{n} form the outer cycle
+and vertices \code{n + 1} to \code{2 * n} form the inner circulant graph.
 \eqn{GP(n, 1)} is the \eqn{n}-prism,
-and \eqn{GP(5, 2)} is the well-known Petersen graph.
+and \eqn{GP(5, 2)} is the well-known Petersen graph,
+also available as \code{make_graph("Petersen")}.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_generalized_petersen}{\code{generalized_petersen()}}
@@ -43,7 +48,16 @@ and \eqn{GP(5, 2)} is the well-known Petersen graph.
 g <- make_generalized_petersen(5, 2)
 plot(g)
 }
+\references{
+M. E. Watkins,
+A Theorem on Tait Colorings with an Application to the Generalized
+Petersen Graphs,
+Journal of Combinatorial Theory 6, 152-164 (1969).
+\doi{10.1016/S0021-9800(69)80116-X}
+}
 \seealso{
+\code{\link[=make_graph]{make_graph()}} for the original Petersen graph.
+
 Other deterministic constructors:
 \code{\link[=graph_from_atlas]{graph_from_atlas()}},
 \code{\link[=graph_from_edgelist]{graph_from_edgelist()}},
