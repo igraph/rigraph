@@ -2214,19 +2214,26 @@ lattice <- function(
 #' where each interior vertex has degree 3.
 #' The hexagonal lattice and the triangular lattice are different structures;
 #' they are planar duals of each other.
-#' See `igraph_triangular_lattice()` in the C library for the triangular
-#' lattice, which is not yet exposed in R.
+#' See `igraph_triangular_lattice()` in the C library
+#' for the triangular lattice,
+#' which is not yet exposed in R.
 #'
 #' @details
 #' The `dims` argument determines the boundary shape of the lattice:
 #'
-#' * If `dims` is a single number, the lattice has a triangular boundary
+#' * If `dims` is a single number,
+#'   the lattice has a triangular boundary
 #'   where each side contains `dims` vertices.
-#' * If `dims` is a vector of length 2, the lattice has a rectangular
-#'   boundary with sides containing `dims[1]` and `dims[2]` vertices.
-#' * If `dims` is a vector of length 3, the lattice has a hexagonal
-#'   boundary where the sides contain `dims[1]`, `dims[2]`, and `dims[3]`
-#'   vertices.
+#' * If `dims` is a vector of length 2,
+#'   the lattice has a quasi-rectangular boundary
+#'   with sides containing `dims[1]` and `dims[2]` vertices.
+#' * If `dims` is a vector of length 3,
+#'   the lattice has a hexagonal boundary
+#'   where the sides contain `dims[1]`, `dims[2]`, and `dims[3]` vertices.
+#'
+#' All coordinates must be non-negative;
+#' if any coordinate is zero,
+#' the graph with zero vertices is returned.
 #'
 #' @param dims Integer vector, defines the shape of the lattice.
 #'   See Details below.

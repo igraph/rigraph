@@ -537,6 +537,31 @@ test_that("make_hex_lattice() works", {
   expect_ecount(g5, 54)
 })
 
+test_that("make_hex_lattice() returns the empty graph for zero coordinates", {
+  g <- make_hex_lattice(c(2, 0))
+  expect_vcount(g, 0)
+  expect_ecount(g, 0)
+})
+
+test_that("hexagonal_lattice_impl() returns real values and agrees with make_hex_lattice()", {
+  impl_result <- hexagonal_lattice_impl(
+    dimvector = c(2, 2),
+    directed = TRUE,
+    mutual = TRUE
+  )
+
+  # The quasi-rectangular 2 by 2 lattice has 16 vertices and 19 edges,
+  # and mutual edges double the edge count.
+  expect_vcount(impl_result, 16)
+  expect_ecount(impl_result, 38)
+  expect_true(is_directed(impl_result))
+
+  expect_identical_graphs(
+    impl_result,
+    make_hex_lattice(c(2, 2), directed = TRUE, mutual = TRUE)
+  )
+})
+
 test_that("make_hex_lattice() prints as expected", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(make_hex_lattice(c(2, 2)))

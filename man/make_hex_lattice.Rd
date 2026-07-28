@@ -32,20 +32,27 @@ An igraph graph.
 where each interior vertex has degree 3.
 The hexagonal lattice and the triangular lattice are different structures;
 they are planar duals of each other.
-See \code{igraph_triangular_lattice()} in the C library for the triangular
-lattice, which is not yet exposed in R.
+See \code{igraph_triangular_lattice()} in the C library
+for the triangular lattice,
+which is not yet exposed in R.
 }
 \details{
 The \code{dims} argument determines the boundary shape of the lattice:
 \itemize{
-\item If \code{dims} is a single number, the lattice has a triangular boundary
+\item If \code{dims} is a single number,
+the lattice has a triangular boundary
 where each side contains \code{dims} vertices.
-\item If \code{dims} is a vector of length 2, the lattice has a rectangular
-boundary with sides containing \code{dims[1]} and \code{dims[2]} vertices.
-\item If \code{dims} is a vector of length 3, the lattice has a hexagonal
-boundary where the sides contain \code{dims[1]}, \code{dims[2]}, and \code{dims[3]}
-vertices.
+\item If \code{dims} is a vector of length 2,
+the lattice has a quasi-rectangular boundary
+with sides containing \code{dims[1]} and \code{dims[2]} vertices.
+\item If \code{dims} is a vector of length 3,
+the lattice has a hexagonal boundary
+where the sides contain \code{dims[1]}, \code{dims[2]}, and \code{dims[3]} vertices.
 }
+
+All coordinates must be non-negative;
+if any coordinate is zero,
+the graph with zero vertices is returned.
 }
 \section{Related documentation in the C library}{
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hexagonal_lattice}{\code{hexagonal_lattice()}}
