@@ -4,10 +4,12 @@
 \alias{topo_sort}
 \title{Topological sorting of vertices in a graph}
 \usage{
-topo_sort(graph, mode = c("out", "all", "in"))
+topo_sort(graph, ..., mode = c("out", "all", "in"))
 }
 \arguments{
 \item{graph}{The input graph, should be directed}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Specifies how to use the direction of the edges.  For
 \dQuote{\code{out}}, the sorting order ensures that each node comes before

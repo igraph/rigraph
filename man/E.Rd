@@ -4,10 +4,12 @@
 \alias{E}
 \title{Edges of a graph}
 \usage{
-E(graph, P = NULL, path = NULL, directed = TRUE)
+E(graph, ..., P = NULL, path = NULL, directed = TRUE)
 }
 \arguments{
 \item{graph}{The graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{P}{A list of vertices to select edges via pairs of vertices.
 The first and second vertices select the first edge, the third

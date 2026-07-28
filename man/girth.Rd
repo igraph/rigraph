@@ -4,11 +4,13 @@
 \alias{girth}
 \title{Girth of a graph}
 \usage{
-girth(graph, circle = TRUE)
+girth(graph, ..., circle = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It may be directed, but the algorithm searches
 for undirected circles anyway.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{circle}{Logical, whether to return the shortest circle itself.}
 }

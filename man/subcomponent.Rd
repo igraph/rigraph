@@ -4,12 +4,14 @@
 \alias{subcomponent}
 \title{In- or out- component of a vertex}
 \usage{
-subcomponent(graph, v, mode = c("all", "out", "in"))
+subcomponent(graph, v, ..., mode = c("all", "out", "in"))
 }
 \arguments{
 \item{graph}{The graph to analyze.}
 
 \item{v}{The vertex to start the search from.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character string, either \dQuote{in}, \dQuote{out} or
 \dQuote{all}. If \dQuote{in} all vertices from which \code{v} is reachable

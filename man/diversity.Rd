@@ -4,10 +4,12 @@
 \alias{diversity}
 \title{Graph diversity}
 \usage{
-diversity(graph, weights = NULL, vids = V(graph))
+diversity(graph, ..., weights = NULL, vids = V(graph))
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{\code{NULL}, or the vector of edge weights to use for the
 computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note

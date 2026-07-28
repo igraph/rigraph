@@ -12,6 +12,7 @@
 #' linear time.
 #'
 #' @param graph The graph object to color.
+#' @inheritParams rlang::args_dots_empty
 #' @param heuristic The selection heuristic for the next vertex to consider.
 #'   Possible values are: \dQuote{colored_neighbors} selects the vertex with the
 #'   largest number of already colored neighbors. \dQuote{dsatur} selects the
@@ -32,8 +33,31 @@
 #'
 greedy_vertex_coloring <- function(
   graph,
+  ...,
   heuristic = c("colored_neighbors", "dsatur")
 ) {
+  # BEGIN GENERATED ARG_HANDLE: greedy_vertex_coloring, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(heuristic = heuristic),
+      recover_new = c("heuristic"),
+      recover_old = c("heuristic"),
+      match_names = c("heuristic"),
+      match_to = c("heuristic"),
+      defaults = list(heuristic = c("colored_neighbors", "dsatur")),
+      head_args = c("graph"),
+      fn_name = "greedy_vertex_coloring"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   vertex_coloring_greedy_impl(
     graph = graph,
     heuristic = heuristic

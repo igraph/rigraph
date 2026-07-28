@@ -8,18 +8,20 @@
 \alias{sir}
 \title{SIR model on graphs}
 \usage{
-time_bins(x, middle = TRUE)
+time_bins(x, ..., middle = TRUE)
 
-\method{time_bins}{sir}(x, middle = TRUE)
+\method{time_bins}{sir}(x, ..., middle = TRUE)
 
 \method{median}{sir}(x, na.rm = FALSE, ...)
 
 \method{quantile}{sir}(x, comp = c("NI", "NS", "NR"), prob, ...)
 
-sir(graph, beta, gamma, no.sim = 100)
+sir(graph, beta, gamma, ..., no.sim = 100)
 }
 \arguments{
 \item{x}{A \code{sir} object, returned by the \code{sir()} function.}
+
+\item{\dots}{Additional arguments, ignored currently.}
 
 \item{middle}{Logical, whether to return the middle of the time bins,
 or the boundaries.}
@@ -27,8 +29,6 @@ or the boundaries.}
 \item{na.rm}{Logical, whether to ignore \code{NA} values.  \code{sir}
 objects do not contain any \code{NA} values currently, so this argument is
 effectively ignored.}
-
-\item{\dots}{Additional arguments, ignored currently.}
 
 \item{comp}{Character scalar. The component to calculate the quantile of.
 \code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands

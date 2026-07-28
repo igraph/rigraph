@@ -4,10 +4,12 @@
 \alias{coreness}
 \title{K-core decomposition of graphs}
 \usage{
-coreness(graph, mode = c("all", "out", "in"))
+coreness(graph, ..., mode = c("all", "out", "in"))
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{The type of the core in directed graphs. Character constant,
 possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are

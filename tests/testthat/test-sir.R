@@ -95,3 +95,31 @@ test_that("SIR works", {
   expect_true(all(diff(res[[10]]$NR) >= 0))
   expect_true(all(res[[10]]$NS + res[[10]]$NI + res[[10]]$NR == 50))
 })
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+
+test_that("sir() covers `no.sim` and the `beta` infection rate", {
+  igraph_local_seed(1)
+  g <- sample_gnm(60, 120)
+  # `no.sim` is the sole tail argument and fixes the number of runs.
+  # `beta = 0` means no susceptible is ever infected, so every run ends with
+  # just the single seed individual recovered and everyone else susceptible.
+  res <- sir(g, beta = 0, gamma = 1, no.sim = 15)
+  expect_s3_class(res, "sir")
+  expect_length(res, 15)
+  final_nr <- vapply(res, function(s) s$NR[length(s$NR)], double(1))
+  final_ns <- vapply(res, function(s) s$NS[length(s$NS)], double(1))
+  expect_true(all(final_nr == 1))
+  expect_true(all(final_ns == vcount(g) - 1))
+})
+
+test_that("sir() recovers a legacy positional `no.sim`", {
+  g <- sample_gnm(50, 50)
+  igraph_local_seed(20231029)
+  lifecycle::expect_deprecated(
+    res_positional <- sir(g, 5, 1, 20)
+  )
+  igraph_local_seed(20231029)
+  res_named <- sir(g, 5, 1, no.sim = 20)
+  expect_identical(res_positional, res_named)
+})
