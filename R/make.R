@@ -2214,6 +2214,8 @@ lattice <- function(
 #' determined by the length of `dims`:
 #' triangular (length 1), quasi-rectangular (length 2),
 #' or hexagonal (length 3).
+#' The triangular lattice is the planar dual of the hexagonal lattice
+#' with the same `dims`.
 #'
 #' The vertices are ordered lexicographically by their (i, j) coordinates,
 #' with the second coordinate being more significant.
@@ -2229,7 +2231,8 @@ lattice <- function(
 #'     shape where the sides of the hexagon contain `dims[1]`, `dims[2]`,
 #'     and `dims[3]` vertices.
 #'
-#'   All components of `dims` must be positive.
+#'   All components of `dims` must be non-negative.
+#'   If any component is zero, the null graph is returned.
 #' @inheritParams rlang::args_dots_empty
 #' @param directed Whether to create a directed graph.
 #'   If the `mutual` argument is not set to `TRUE`,
@@ -2253,6 +2256,7 @@ lattice <- function(
 #'
 #' # Directed lattice with mutual edges
 #' make_tri_lattice(c(3, 3), directed = TRUE, mutual = TRUE)
+#' @cdocs igraph_triangular_lattice
 make_tri_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
   check_dots_empty()
   triangular_lattice_impl(

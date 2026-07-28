@@ -265,6 +265,32 @@ test_that("make_tri_lattice rejects invalid arguments", {
   expect_snapshot_igraph_error(make_tri_lattice(c(2, 2), TRUE))
 })
 
+test_that("make_tri_lattice returns the null graph for zero dimensions", {
+  # A zero component in dims yields the null graph, mirroring the C behavior.
+  null_graph <- make_tri_lattice(0)
+  expect_vcount(null_graph, 0)
+  expect_ecount(null_graph, 0)
+})
+
+test_that("triangular_lattice_impl agrees with make_tri_lattice", {
+  # Call the generated impl directly with the full argument set.
+  impl <- triangular_lattice_impl(
+    dimvector = c(2, 3),
+    directed = TRUE,
+    mutual = TRUE
+  )
+  expect_vcount(impl, 6)
+  expect_ecount(impl, 18)
+  expect_true(is_directed(impl))
+  expect_equal(impl$name, "Triangular lattice")
+  expect_equal(impl$dimvector, c(2, 3))
+  expect_true(impl$mutual)
+
+  # The exported wrapper is a thin shim over the impl.
+  wrapper <- make_tri_lattice(c(2, 3), directed = TRUE, mutual = TRUE)
+  expect_identical_graphs(impl, wrapper)
+})
+
 test_that("tri_lattice constructor spec works with make_()", {
   g1 <- make_tri_lattice(c(3, 3))
   g2 <- make_(tri_lattice(c(3, 3)))

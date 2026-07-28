@@ -22,7 +22,8 @@ shape where the sides of the hexagon contain \code{dims[1]}, \code{dims[2]},
 and \code{dims[3]} vertices.
 }
 
-All components of \code{dims} must be positive.}
+All components of \code{dims} must be non-negative.
+If any component is zero, the null graph is returned.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -44,6 +45,8 @@ An igraph graph.
 determined by the length of \code{dims}:
 triangular (length 1), quasi-rectangular (length 2),
 or hexagonal (length 3).
+The triangular lattice is the planar dual of the hexagonal lattice
+with the same \code{dims}.
 
 The vertices are ordered lexicographically by their (i, j) coordinates,
 with the second coordinate being more significant.
