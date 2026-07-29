@@ -1,5 +1,14 @@
 # Changelog
 
+## igraph 2.3.3.9024
+
+### Bug fixes
+
+- Name [`norm_coords()`](https://r.igraph.org/reference/norm_coords.md)
+  arguments at the
+  [`rglplot.igraph()`](https://r.igraph.org/reference/rglplot.md) call
+  site ([\#2801](https://github.com/igraph/rigraph/issues/2801)).
+
 ## igraph 2.3.3.9023
 
 ### Bug fixes

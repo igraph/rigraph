@@ -133,7 +133,7 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── 3df943e ──
+#> ── <igraph> Event network ─────────────────────────────────────────── 45071c0 ──
 #> ℹ undirected · named · weighted
 #> ℹ 5 vertices · 6 edges
 #> 
@@ -146,7 +146,7 @@ print(proj2[[1]], g = TRUE, e = TRUE)
 #> [1] Alice ─ Bob    Alice ─ Cecil  Alice ─ Dan    Bob ─ Cecil    Bob ─ Dan     
 #> [6] Cecil ─ Dan   
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> ── <igraph> Event network ─────────────────────────────────────────── dff3e5b ──
+#> ── <igraph> Event network ─────────────────────────────────────────── e7d150d ──
 #> ℹ undirected · named · weighted
 #> ℹ 3 vertices · 2 edges
 #> 
