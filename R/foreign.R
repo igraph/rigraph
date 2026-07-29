@@ -794,6 +794,7 @@ write.graph.dot <- function(graph, file) {
 #' for the actual format of a graph database file and other information.
 #'
 #' @param url Complete URL with the file to import. Default: `NULL`.
+#' @inheritParams rlang::args_dots_empty
 #' @param prefix Gives the prefix. See details below. Possible values:
 #'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
 #'   `mcs50`, `mcs70`, `mcs90`.
@@ -825,6 +826,7 @@ write.graph.dot <- function(graph, file) {
 #' @keywords graphs
 graph_from_graphdb <- function(
   url = NULL,
+  ...,
   prefix = "iso",
   type = "r001",
   nodes = NULL,
@@ -834,6 +836,82 @@ graph_from_graphdb <- function(
   compressed = TRUE,
   directed = TRUE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: graph_from_graphdb, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        prefix = prefix,
+        type = type,
+        nodes = nodes,
+        pair = pair,
+        which = which,
+        base = base,
+        compressed = compressed,
+        directed = directed
+      ),
+      recover_new = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      recover_old = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      match_names = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      match_to = c(
+        "prefix",
+        "type",
+        "nodes",
+        "pair",
+        "which",
+        "base",
+        "compressed",
+        "directed"
+      ),
+      defaults = list(
+        prefix = "iso",
+        type = "r001",
+        nodes = NULL,
+        pair = "A",
+        which = 0,
+        base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+        compressed = TRUE,
+        directed = TRUE
+      ),
+      head_args = c("url"),
+      fn_name = "graph_from_graphdb"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (is.null(nodes) && is.null(url)) {
     cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
   }

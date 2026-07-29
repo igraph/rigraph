@@ -224,6 +224,7 @@ blockGraphs <- function(blocks, graph) {
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
+#' @inheritParams rlang::args_dots_empty
 #' @param labels Logical, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
@@ -350,7 +351,33 @@ blockGraphs <- function(blocks, graph) {
 #'   mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
 #' )
 #'
-cohesive_blocks <- function(graph, labels = TRUE) {
+cohesive_blocks <- function(
+  graph,
+  ...,
+  labels = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: cohesive_blocks, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(labels = labels),
+      recover_new = c("labels"),
+      recover_old = c("labels"),
+      match_names = c("labels"),
+      match_to = c("labels"),
+      defaults = list(labels = TRUE),
+      head_args = c("graph"),
+      fn_name = "cohesive_blocks"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -583,8 +610,37 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
+#' @inheritParams rlang::args_dots_empty
 #' @export
-export_pajek <- function(blocks, graph, file, project.file = TRUE) {
+export_pajek <- function(
+  blocks,
+  graph,
+  file,
+  ...,
+  project.file = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(project.file = project.file),
+      recover_new = c("project.file"),
+      recover_old = c("project.file"),
+      match_names = c("project.file"),
+      match_to = c("project.file"),
+      defaults = list(project.file = TRUE),
+      head_args = c("blocks", "graph", "file"),
+      fn_name = "export_pajek"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   if (!project.file && (!is.character(file) || !nzchar(file))) {
     cli::cli_abort(
       "{.arg file} must be a filename (without extension) when writing

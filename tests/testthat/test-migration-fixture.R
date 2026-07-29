@@ -72,6 +72,12 @@ test_that("head args go through base R partial matching, not our recovery", {
   # recovery. With `warnPartialMatchArgs` on, R emits its own partial-match
   # warning and our deprecation does not fire; when a tail arg is abbreviated
   # too, both warnings appear -- R's for the head, ours for the tail.
+  #
+  # Pin the option to FALSE before flipping it on: on R < 4.3, restoring
+  # `warnPartialMatchArgs` to NULL (unset) does not switch the warning off
+  # again, so it would leak into every later test and (on R 4.2) add a
+  # partial-match warning to the `migration_fixture_prefix()` snapshots below.
+  options(warnPartialMatchArgs = FALSE)
   rlang::local_options(
     lifecycle_verbosity = "warning",
     warnPartialMatchArgs = TRUE
@@ -91,6 +97,91 @@ test_that("recovery emits a single deprecation warning, not one per slot", {
     }
   )
   expect_length(warnings, 1L)
+})
+
+# ---- prefix-overlap fixture -------------------------------------------------
+
+# migration_fixture_prefix(dimvector, p, ..., dim = NULL, permutation = NULL):
+# `dim` is a strict prefix of the head arg `dimvector`, `p` is a strict prefix
+# of the recoverable `permutation`. Previously the generator rejected such
+# signatures outright; now it allows them and enumerates the forbidden
+# prefixes (`d`, `di`), which error only when legacy arguments in `...`
+# engage the recovery layer.
+
+test_that("full tail names bind exactly despite the head prefix overlap", {
+  expect_no_condition(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, dim = 2)
+  )
+  expect_equal(
+    res,
+    list(dimvector = c(2, 2), p = 0.5, dim = 2, permutation = NULL)
+  )
+})
+
+test_that("legacy positional calls are recovered across the overlap", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, 2, "perm")
+  )
+  expect_equal(
+    res,
+    migration_fixture_prefix(c(2, 2), 0.5, dim = 2, permutation = "perm")
+  )
+})
+
+test_that("abbreviations longer than the head arg are recovered", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  # `perm` is no prefix of the head `p`, so it reaches `...` and recovery.
+  lifecycle::expect_deprecated(
+    res <- migration_fixture_prefix(c(2, 2), 0.5, perm = "x")
+  )
+  expect_identical(res$permutation, "x")
+})
+
+test_that("forbidden prefixes error only when legacy arguments engage recovery", {
+  ## The snapshot differs on R 4.2: `warnPartialMatchArgs` enabled earlier in
+  ## this file leaks through its scoped restore there (see above), adding a
+  ## partial-match warning to the recorded condition. Skip on older R.
+  skip_if(getRversion() < "4.3")
+
+  # `di =` steals the head slot `dimvector`, `c(2, 2)` shifts into `p`,
+  # and `0.5` lands in `...`:
+  # recovery would rescue this never-valid call behind a deprecation
+  # warning, so the guard errors instead.
+  expect_snapshot(
+    migration_fixture_prefix(c(2, 2), 0.5, di = 2),
+    error = TRUE
+  )
+  # A named legacy argument in `...` engages recovery just the same.
+  expect_error(
+    migration_fixture_prefix(c(2, 2), 0.5, d = 2, perm = "x"),
+    "matches multiple formal arguments"
+  )
+})
+
+test_that("forbidden prefixes with empty dots bind the head arg silently", {
+  # Previously broken calls that now work in a well-defined, silent way
+  # are accepted:
+  # `d =` was an ambiguity error under the old signature and now binds
+  # `dimvector` via ordinary base R partial matching.
+  # Only the warning-rescued combination -- a forbidden prefix plus legacy
+  # arguments in `...` -- stays an error.
+  expect_no_condition(res <- migration_fixture_prefix(d = c(2, 2), p = 0.5))
+  expect_equal(
+    res,
+    list(dimvector = c(2, 2), p = 0.5, dim = NULL, permutation = NULL)
+  )
+})
+
+test_that("the guard ignores calls without hazardous tags", {
+  # Unnamed / fully named calls never trip the guard, including do.call().
+  expect_no_condition(
+    res <- do.call(migration_fixture_prefix, list(c(2, 2), 0.5))
+  )
+  expect_null(res$dim)
+  expect_no_condition(
+    migration_fixture_prefix(dimvector = c(2, 2), p = 0.5, dim = 1)
+  )
 })
 
 # ---- deprecation message snapshots -----------------------------------------
@@ -160,7 +251,9 @@ test_that("the generated block is in sync with the registry", {
 
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
-  registry <- testthat::test_path("..", "..", "tools", "migrations.R")
+  registry <- gen_env$migration_registry_files(
+    testthat::test_path("..", "..")
+  )
   migrations <- gen_env$load_migrations(registry)
   by_fn <- stats::setNames(
     migrations,
@@ -173,51 +266,92 @@ test_that("the generated block is in sync with the registry", {
   expect_identical(spliced$lines, lines)
 })
 
-test_that("normalise_migration() rejects head/recoverable prefix clashes", {
-  # Head args are matched by base R (with partial matching) before `...`, so a
-  # head arg in a prefix relationship with a recoverable name would silently
-  # capture it before the recovery layer runs. The generator must reject this.
+test_that("normalise_migration() handles head/recoverable prefix overlaps", {
+  # Head args are matched by base R (with partial matching) before `...`.
+  # Exact matching protects full names, so prefix overlaps are allowed; the
+  # generator enumerates the forbidden prefixes (strict prefixes of a head
+  # arg that also prefix a recoverable name) for the runtime guard, which
+  # rejects them only when legacy arguments in `...` engage recovery.
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator))
   gen_env <- new.env()
   sys.source(generator, envir = gen_env)
 
-  # Head arg `type` is a prefix of the recoverable `typeof`.
-  expect_error(
-    gen_env$normalise_migration(
-      "bad_head_prefix",
-      list(
-        old = function(graph, typeof) {},
-        new = function(graph, type = "x", ..., typeof = NULL) {},
-        when = "3.0.0"
-      )
-    ),
-    "prefix relationship"
-  )
-
-  # Recoverable `type` is a prefix of the head arg `typeof`.
-  expect_error(
-    gen_env$normalise_migration(
-      "bad_recover_prefix",
-      list(
-        old = function(graph, type) {},
-        new = function(graph, typeof = "x", ..., type = NULL) {},
-        when = "3.0.0"
-      )
-    ),
-    "prefix relationship"
-  )
-
-  # Merely sharing a leading letter (`graph` vs `groups`) is allowed.
-  expect_no_error(
-    gen_env$normalise_migration(
-      "ok_shared_letter",
-      list(
-        old = function(graph, groups) {},
-        new = function(graph, ..., groups = NULL) {},
-        when = "3.0.0"
-      )
+  # Head arg `type` is a prefix of the recoverable `typeof`: allowed. The
+  # strict prefixes of `type` all prefix `typeof` too, so they are forbidden
+  # in combination with legacy arguments in `...`.
+  norm <- gen_env$normalise_migration(
+    "head_prefix",
+    list(
+      old = function(graph, type, typeof) {},
+      new = function(graph, type = "x", ..., typeof = NULL) {},
+      when = "3.0.0"
     )
+  )
+  expect_identical(norm$forbidden_tags, c("t", "ty", "typ"))
+
+  # Recoverable `type` is a prefix of the head arg `typeof`: allowed. A
+  # supplied `type =` binds the post-`...` formal exactly; only the shorter
+  # tags (which were ambiguous before) are enumerated.
+  norm <- gen_env$normalise_migration(
+    "recover_prefix",
+    list(
+      old = function(graph, typeof, type) {},
+      new = function(graph, typeof = "x", ..., type = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$forbidden_tags, c("t", "ty", "typ"))
+
+  # Sharing a leading letter (`graph` vs `groups`) enumerates the shared
+  # prefixes too -- `f(g = )` binding `graph` is fine on its own, but not
+  # when the recovery layer would rescue the rest of the call.
+  norm <- gen_env$normalise_migration(
+    "ok_shared_letter",
+    list(
+      old = function(graph, groups) {},
+      new = function(graph, ..., groups = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$forbidden_tags, c("g", "gr"))
+
+  # A tag that abbreviates two head args stays out of the forbidden list:
+  # base R errors on it by itself before the body ever runs.
+  norm <- gen_env$normalise_migration(
+    "two_heads",
+    list(
+      old = function(g1, g2, graph.attr.comb) {},
+      new = function(g1, g2, ..., graph.attr.comb = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$forbidden_tags, character(0))
+
+  # No overlap at all: no tags, no guard.
+  norm <- gen_env$normalise_migration(
+    "no_overlap",
+    list(
+      old = function(graph, n, weights) {},
+      new = function(graph, n, ..., weights = NULL) {},
+      when = "3.0.0"
+    )
+  )
+  expect_identical(norm$forbidden_tags, character(0))
+
+  # A renamed-away old name that is a prefix of a head arg stays fatal: the
+  # old name is no longer a formal, so a valid legacy `f(weight = )` would
+  # silently bind the head arg -- no runtime guard can restore it.
+  expect_error(
+    gen_env$normalise_migration(
+      "renamed_prefix",
+      list(
+        old = function(graph, weightx, weight = weights) {},
+        new = function(graph, weightx = 1, ..., weights = NULL) {},
+        when = "3.0.0"
+      )
+    ),
+    "renamed-away"
   )
 })
 
@@ -279,4 +413,29 @@ test_that("render_call_arg() wraps long arguments the way air formats them", {
     paste0("      ", items, c(",", ",", ",", ",", ""))
   )
   expect_true(all(nchar(wrapped) + 2L <= 80L))
+})
+
+test_that("unasserted lifecycle deprecations are errors in tests when opted in", {
+  # With IGRAPH_LIFECYCLE_ERRORS=true, setup-lifecycle.R bumps the per-test
+  # lifecycle_verbosity that testthat forces to "warning" up to "error", so a
+  # deprecation no expectation asserts -- even from an *indirect* call that
+  # deprecate_soft() would keep silent for users -- fails its test outright.
+  # This is the baseline that keeps internal callers of migrated signatures
+  # honest; one job in the full rcc matrix runs the suite in this mode.
+  indirect <- function() {
+    migration_fixture(make_ring(3), 1, weights = NULL, type = "out", 2)
+  }
+
+  if (Sys.getenv("IGRAPH_LIFECYCLE_ERRORS") == "true") {
+    expect_identical(getOption("lifecycle_verbosity"), "error")
+    expect_error(indirect(), "positional or abbreviated")
+  } else {
+    # Vanilla testthat edition 3: deprecations signal as plain warnings.
+    expect_identical(getOption("lifecycle_verbosity"), "warning")
+    expect_warning(indirect(), "positional or abbreviated")
+  }
+
+  # Asserted deprecations work in both modes: expect_deprecated() pins the
+  # verbosity back to "warning" internally.
+  lifecycle::expect_deprecated(indirect())
 })

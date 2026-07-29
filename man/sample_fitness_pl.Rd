@@ -9,6 +9,7 @@ sample_fitness_pl(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
+  ...,
   loops = FALSE,
   multiple = FALSE,
   finite.size.correction = TRUE
@@ -28,6 +29,8 @@ out-degree distribution. It must be greater than or equal to 2. If you pass
 undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether to allow loop edges in the graph.}
 

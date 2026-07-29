@@ -7,6 +7,7 @@
 \usage{
 layout_with_kk(
   graph,
+  ...,
   coords = NULL,
   dim = c(2, 3),
   maxiter = 50 * vcount(graph),
@@ -30,6 +31,8 @@ with_kk(...)
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
+
+\item{...}{Passed to \code{layout_with_kk()}.}
 
 \item{coords}{Starting coordinates in a two or three column matrix,
 depending on the \code{dim} argument.
@@ -77,8 +80,6 @@ Default: \code{NULL}.}
 arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{start}{Deprecated synonym for \code{coords}, for compatibility.}
-
-\item{...}{Passed to \code{layout_with_kk()}.}
 }
 \value{
 A numeric matrix with two (dim=2) or three (dim=3) columns, and as

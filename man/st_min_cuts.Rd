@@ -4,7 +4,7 @@
 \alias{st_min_cuts}
 \title{List all minimum \eqn{(s,t)}-cuts of a graph}
 \usage{
-st_min_cuts(graph, source, target, capacity = NULL)
+st_min_cuts(graph, source, target, ..., capacity = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It must be directed.}
@@ -12,6 +12,8 @@ st_min_cuts(graph, source, target, capacity = NULL)
 \item{source}{The ID of the source vertex.}
 
 \item{target}{The ID of the target vertex.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{capacity}{Numeric vector giving the edge capacities. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then this

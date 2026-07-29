@@ -6,6 +6,7 @@
 \usage{
 is_chordal(
   graph,
+  ...,
   alpha = NULL,
   alpham1 = NULL,
   fillin = FALSE,
@@ -15,6 +16,8 @@ is_chordal(
 \arguments{
 \item{graph}{The input graph. It may be directed, but edge directions are
 ignored, as the algorithm is defined for undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{alpha}{Numeric vector, the maximal chardinality ordering of the
 vertices. If it is \code{NULL}, then it is automatically calculated by

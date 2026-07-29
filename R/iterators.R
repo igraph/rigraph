@@ -75,10 +75,38 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' the attributes of the two graphs are allowed to be different.
 #'
 #' @param g1,g2 The two graphs
+#' @inheritParams rlang::args_dots_empty
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
-identical_graphs <- function(g1, g2, attrs = TRUE) {
+identical_graphs <- function(
+  g1,
+  g2,
+  ...,
+  attrs = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: identical_graphs, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(attrs = attrs),
+      recover_new = c("attrs"),
+      recover_old = c("attrs"),
+      match_names = c("attrs"),
+      match_to = c("attrs"),
+      defaults = list(attrs = TRUE),
+      head_args = c("g1", "g2"),
+      fn_name = "identical_graphs"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   stopifnot(is_igraph(g1), is_igraph(g2))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
@@ -376,6 +404,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' edges in the sequence. See [$.igraph.es()] for details.
 #'
 #' @param graph The graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param P A list of vertices to select edges via pairs of vertices.
 #'   The first and second vertices select the first edge, the third
 #'   and fourth the second, etc.
@@ -398,7 +427,35 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
-E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
+E <- function(
+  graph,
+  ...,
+  P = NULL,
+  path = NULL,
+  directed = TRUE
+) {
+  # BEGIN GENERATED ARG_HANDLE: E, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(P = P, path = path, directed = directed),
+      recover_new = c("P", "path", "directed"),
+      recover_old = c("P", "path", "directed"),
+      match_names = c("P", "path", "directed"),
+      match_to = c("P", "path", "directed"),
+      defaults = list(P = NULL, path = NULL, directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "E"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
 
   update_es_ref(graph)
