@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9024
+
+## Bug fixes
+
+- Name `norm_coords()` arguments at the `rglplot.igraph()` call site (#2801).
+
+
 # igraph 2.3.3.9023
 
 ## Bug fixes
