@@ -7,6 +7,7 @@
 knn(
   graph,
   vids = V(graph),
+  ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL
@@ -19,6 +20,8 @@ knn(
 includes all vertices. Note, that if not all vertices are given here, then
 both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
 on the given vertices only.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Character constant to indicate the type of neighbors to consider
 in directed graphs. \code{out} considers out-neighbors, \verb{in} considers

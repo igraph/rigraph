@@ -21,7 +21,7 @@ jobs:
     name: Sanitizer
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -34,7 +34,11 @@ jobs:
       - name: run sanitizer
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/cynkra/docker-images/r-debug-csan-igraph:latest
+          # Built daily from https://github.com/cynkra/r-debug, so R-devel is
+          # at most a day old.
+          # The images under ghcr.io/cynkra/docker-images are no longer
+          # rebuilt; their R-devel is stale.
+          image: ghcr.io/cynkra/r-debug/r-debug-csan-igraph:latest
           options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
           run: |
             set -e

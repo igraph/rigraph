@@ -4,10 +4,12 @@
 \alias{is_tree}
 \title{Decide whether a graph is a tree.}
 \usage{
-is_tree(graph, mode = c("out", "in", "all", "total"), details = FALSE)
+is_tree(graph, ..., mode = c("out", "in", "all", "total"), details = FALSE)
 }
 \arguments{
 \item{graph}{An igraph graph object}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{Whether to consider edge directions in a directed graph.
 \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
