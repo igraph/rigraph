@@ -63,7 +63,7 @@ test_that("graph_from_graphdb works", {
   skip_on_cran()
 
   # Bug in base R? Checked with 2024-11-01 r87285:
-  # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/docker-images/rigraph-san:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
+  # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/r-debug/r-debug-csan-igraph:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
   skip_if(Sys.getenv("R_SANITIZER") == "true")
 
   expect_silent(graph_from_graphdb(nodes = 1000))
