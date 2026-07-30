@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9025
+
+## Continuous integration
+
+- Use the daily-rebuilt `r-debug` sanitizer image, and fix the leak it uncovered (#2802).
+
+
 # igraph 2.3.3.9024
 
 ## Bug fixes
