@@ -54,8 +54,8 @@ test_that("[ indexing works with logical vectors", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 20L),
-    .Dimnames = list(
+    dim = c(2L, 20L),
+    dimnames = list(
       c("b", "c"),
       c(
       "a", "b", "c",
@@ -77,8 +77,8 @@ test_that("[ indexing works with negative indices", {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0
     ),
-    .Dim = c(2L, 19L),
-    .Dimnames = list(
+    dim = c(2L, 19L),
+    dimnames = list(
       c("b", "c"),
       c(
         "b", "c", "d", "e", "f", "g", "h", "i", "j",
@@ -380,7 +380,7 @@ test_that("[ handles all combinations of i and/or j", {
     nrow = 10L,
     ncol = 10L
   )
-  g <- graph_from_adjacency_matrix(A, "directed")
+  g <- graph_from_adjacency_matrix(A, mode = "directed")
   expect_equal(as_unnamed_dense_matrix(g[1:3, ]), A[1:3, ])
   expect_equal(as_unnamed_dense_matrix(g[, 4:7]), A[, 4:7])
   expect_equal(as_unnamed_dense_matrix(g[1:3, 4:7]), A[1:3, 4:7])
@@ -398,7 +398,7 @@ test_that("[ handles duplicated i/j well", {
     nrow = 10L,
     ncol = 10L
   )
-  g <- graph_from_adjacency_matrix(A, "directed")
+  g <- graph_from_adjacency_matrix(A, mode = "directed")
   expect_equal(as_unnamed_dense_matrix(g[c(1, 2, 2), ]), A[c(1, 2, 2), ])
   expect_equal(as_unnamed_dense_matrix(g[, c(3, 3, 4, 4)]), A[, c(3, 3, 4, 4)])
   expect_equal(

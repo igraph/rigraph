@@ -72,7 +72,7 @@ test_that("graph_from_graphdb works", {
   skip_on_cran()
 
   # Bug in base R? Checked with 2024-11-01 r87285:
-  # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/docker-images/rigraph-san:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
+  # docker run --rm -ti -v $PWD:/rigraph -e MAKEFLAGS=-j4 ghcr.io/cynkra/r-debug/r-debug-csan-igraph:latest RDcsan -q -e 'filename <- "/rigraph/DESCRIPTION"; gz_file_con <- file(filename, open = "rb"); file_con <- gzcon(gz_file_con); close(file_con); gc()'
   skip_if(Sys.getenv("R_SANITIZER") == "true")
 
   expect_silent(graph_from_graphdb(nodes = 1000))
@@ -82,5 +82,55 @@ test_that("graph_from_graphdb works", {
   )
   expect_snapshot_igraph_error(
     graph_from_graphdb(nodes = 10, type = "not_existing")
+  )
+})
+
+# ---- ellipsis migration: argument coverage ----------------------------------
+
+test_that("graph_from_graphdb() accepts every tail argument by name", {
+  # A real download is required to build a graph, so this runs on the CI hosts
+  # that can reach the graph database. It mirrors the guards of the
+  # `graph_from_graphdb works` test and additionally skips (rather than fails)
+  # when the database is unreachable, e.g. sandboxed mirrors returning 403.
+  skip_on_os("windows")
+  skip_on_cran()
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
+
+  # suppressWarnings(): an unreachable database makes `file()` emit a "cannot
+  # open URL" warning before the connection error we catch below; muffle it so
+  # the skip is clean. A successful download is silent, so nothing is hidden.
+  g <- tryCatch(
+    suppressWarnings(graph_from_graphdb(
+      url = NULL,
+      prefix = "iso",
+      type = "r001",
+      nodes = 1000,
+      pair = "A",
+      which = 0,
+      base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+      compressed = TRUE,
+      directed = FALSE
+    )),
+    error = function(e) e
+  )
+  if (inherits(g, "condition")) {
+    skip(paste("graph database unreachable:", conditionMessage(g)))
+  }
+  expect_true(is_igraph(g))
+  expect_false(is_directed(g))
+  expect_vcount(g, 1000)
+})
+
+test_that("graph_from_graphdb() wires up legacy positional recovery", {
+  # A successful recovery would need the network, so we exercise the path with an
+  # offline validation error instead: a legacy positional `prefix` routes to the
+  # `prefix` argument, and an invalid value raises the prefix-specific error
+  # *after* the deprecation warning -- proving the value reached `prefix` without
+  # a download.
+  lifecycle::expect_deprecated(
+    expect_error(
+      graph_from_graphdb(NULL, "not_existing", nodes = 10),
+      regexp = "not a valid prefix"
+    )
   )
 })

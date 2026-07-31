@@ -10,13 +10,13 @@
 \usage{
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
-largest_component(graph, mode = c("weak", "strong"))
+largest_component(graph, ..., mode = c("weak", "strong"))
 
-components(graph, mode = c("weak", "strong"))
+components(graph, ..., mode = c("weak", "strong"))
 
-is_connected(graph, mode = c("weak", "strong"))
+is_connected(graph, ..., mode = c("weak", "strong"))
 
-count_components(graph, mode = c("weak", "strong"))
+count_components(graph, ..., mode = c("weak", "strong"))
 }
 \arguments{
 \item{graph}{The graph to analyze.}

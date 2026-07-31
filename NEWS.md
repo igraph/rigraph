@@ -1,5 +1,117 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9025
+
+## Continuous integration
+
+- Use the daily-rebuilt `r-debug` sanitizer image, and fix the leak it uncovered (#2802).
+
+
+# igraph 2.3.3.9024
+
+## Bug fixes
+
+- Name `norm_coords()` arguments at the `rglplot.igraph()` call site (#2801).
+
+
+# igraph 2.3.3.9023
+
+## Bug fixes
+
+- Heal `main` — unleak `warnPartialMatchArgs` on R 4.2 and name args at `norm_coords()`/`make_star()` call sites for the lifecycle-errors leg (#2799).
+
+- Initialize `c_options` in the Stimulus type definition (#2792).
+
+## Features
+
+### migrations
+
+- Allow head/recoverable prefix overlaps, guarded at run time (#2787).
+
+## Continuous integration
+
+- Sync R-CMD-check workflow; drop matrix-env plumbing from custom action (#2798).
+
+## Refactoring
+
+- Move optional arguments of games functions behind the ellipsis (#2760).
+
+- Move optional arguments of layout functions behind the ellipsis (#2762).
+
+- Move optional arguments of make functions behind the ellipsis (#2761).
+
+- Move optional arguments of topology functions behind the ellipsis (#2768).
+
+- Move optional arguments of conversion functions behind the ellipsis (#2766).
+
+- Move optional arguments of hrg-embedding functions behind the ellipsis (#2771).
+
+- Move optional arguments of flow functions behind the ellipsis (#2767).
+
+- Move optional arguments of plotting functions behind the ellipsis (#2777).
+
+- Move optional arguments of interface functions behind the ellipsis (#2770).
+
+- Move optional arguments of similarity-efficiency functions behind the ellipsis (#2776).
+
+- Move optional arguments of cliques functions behind the ellipsis (#2769).
+
+- Move optional arguments of motifs-graphlets functions behind the ellipsis (#2772).
+
+- Move optional arguments of misc functions behind the ellipsis (#2778).
+
+- Move optional arguments of bipartite-degseq functions behind the ellipsis (#2774).
+
+- Move optional arguments of walks-cycles functions behind the ellipsis (#2775).
+
+- Move optional arguments of trees functions behind the ellipsis (#2758).
+
+- Move optional arguments of operators functions behind the ellipsis (#2773).
+
+## Testing
+
+- Cover migrated centrality, community, and centralization signatures (#2786).
+
+- Make unasserted lifecycle deprecations fail the test suite (opt-in) (#2782).
+
+- Cover migrated structural-properties signatures (#2785).
+
+## Uncategorized
+
+- Ci: Run all smoke-test checks even when one fails (#97).
+
+- Ci: Link the responsible workflow run in snapshot update PRs (#96).
+
+
+# igraph 2.3.3.9022
+
+## Bug fixes
+
+- Use canonical `structure()` attribute names (#2755).
+
+## Chore
+
+- Restore one-value-per-line layout of long enum defaults (#2781).
+
+## Continuous integration
+
+- Let `pak` ignore Bioconductor `graph` on R \< 4.4 (#2753).
+
+## Refactoring
+
+- Move optional arguments of structural-properties functions behind the ellipsis (#2759).
+
+- Move optional arguments of centrality functions behind the ellipsis (#2763).
+
+- Move optional arguments of community functions behind the ellipsis (#2765).
+
+- Move optional arguments of centralization functions behind the ellipsis (#2764).
+
+### migrations
+
+- Split the registry into per-topic files (#2779).
+
+
 # igraph 2.3.3.9021
 
 ## Continuous integration

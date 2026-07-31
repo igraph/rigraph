@@ -5323,7 +5323,7 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
   igraph_real_t c_damping;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
@@ -5346,8 +5346,6 @@ SEXP R_igraph_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP dam
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */
@@ -5396,7 +5394,7 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   igraph_vector_t c_personalized;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
@@ -5422,8 +5420,6 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */
@@ -5472,7 +5468,7 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   igraph_vs_t c_reset_vids;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options1;
-  void* c_options;
+  void* c_options = NULL;
   SEXP vector;
   SEXP value;
 
@@ -5497,8 +5493,6 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       Rz_SEXP_to_igraph_arpack_options(options, &c_options1);
       c_options = &c_options1;
-    } else {
-      c_options = NULL;
     }
   }
                                         /* Call igraph */

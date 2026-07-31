@@ -6,14 +6,22 @@
 \alias{farthest_vertices}
 \title{Diameter of a graph}
 \usage{
-diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
 
-get_diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+get_diameter(graph, ..., directed = TRUE, unconnected = TRUE, weights = NULL)
 
-farthest_vertices(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+farthest_vertices(
+  graph,
+  ...,
+  directed = TRUE,
+  unconnected = TRUE,
+  weights = NULL
+)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether directed or undirected paths are to be
 considered. This is ignored for undirected graphs.}

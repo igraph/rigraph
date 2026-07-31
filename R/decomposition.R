@@ -67,6 +67,7 @@ is.chordal <- function(
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
 #'   vertices. If it is `NULL`, then it is automatically calculated by
 #'   calling [max_cardinality()], or from `alpham1` if
@@ -118,11 +119,44 @@ is.chordal <- function(
 #'
 is_chordal <- function(
   graph,
+  ...,
   alpha = NULL,
   alpham1 = NULL,
   fillin = FALSE,
   newgraph = FALSE
 ) {
+  # BEGIN GENERATED ARG_HANDLE: is_chordal, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(
+        alpha = alpha,
+        alpham1 = alpham1,
+        fillin = fillin,
+        newgraph = newgraph
+      ),
+      recover_new = c("alpha", "alpham1", "fillin", "newgraph"),
+      recover_old = c("alpha", "alpham1", "fillin", "newgraph"),
+      match_names = c("alpha", "alpham1", "fillin", "newgraph"),
+      match_to = c("alpha", "alpham1", "fillin", "newgraph"),
+      defaults = list(
+        alpha = NULL,
+        alpham1 = NULL,
+        fillin = FALSE,
+        newgraph = FALSE
+      ),
+      head_args = c("graph"),
+      fn_name = "is_chordal"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
+
   ensure_igraph(graph)
   if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1

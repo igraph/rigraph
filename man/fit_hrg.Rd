@@ -4,7 +4,7 @@
 \alias{fit_hrg}
 \title{Fit a hierarchical random graph model}
 \usage{
-fit_hrg(graph, hrg = NULL, start = FALSE, steps = 0)
+fit_hrg(graph, hrg = NULL, ..., start = FALSE, steps = 0)
 }
 \arguments{
 \item{graph}{The graph to fit the model to. Edge directions are ignored in
@@ -13,6 +13,8 @@ directed graphs.}
 \item{hrg}{A hierarchical random graph model, in the form of an
 \code{igraphHRG} object. \code{fit_hrg()} allows this to be \code{NULL}, in
 which case a random starting point is used for the fitting.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{start}{Logical, whether to start the fitting/sampling from the
 supplied \code{igraphHRG} object, or from a random starting point.}

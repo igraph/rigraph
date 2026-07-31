@@ -6157,8 +6157,14 @@ SEXP Rx_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
   SEXP result, names;
                                         /* Convert input */
   Rz_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(alpha)) { Rz_SEXP_to_vector_int_copy(alpha, &c_alpha); }
-  if (!Rf_isNull(alpham1)) { Rz_SEXP_to_vector_int_copy(alpham1, &c_alpham1); }
+  if (!Rf_isNull(alpha)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(alpha, &c_alpha));
+    IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &c_alpha);
+  }
+  if (!Rf_isNull(alpham1)) {
+    IGRAPH_R_CHECK(Rz_SEXP_to_vector_int_copy(alpham1, &c_alpham1));
+    IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &c_alpham1);
+  }
   if (LOGICAL(pfillin)[0]) {
     if (0 != igraph_vector_int_init(&c_fillin, 0)) {
       igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -6186,6 +6192,16 @@ SEXP Rx_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
     IGRAPH_FINALLY_CLEAN(1);
   } else {
     PROTECT(newgraph=R_NilValue);
+  }
+  /* Unwound in reverse order of registration, so that IGRAPH_FINALLY_CLEAN()
+   * pops the entry that belongs to the vector being destroyed. */
+  if (!Rf_isNull(alpham1)) {
+    igraph_vector_int_destroy(&c_alpham1);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
+  if (!Rf_isNull(alpha)) {
+    igraph_vector_int_destroy(&c_alpha);
+    IGRAPH_FINALLY_CLEAN(1);
   }
   SET_VECTOR_ELT(result, 0, chordal);
   SET_VECTOR_ELT(result, 1, fillin);
