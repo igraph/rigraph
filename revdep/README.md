@@ -1,16 +1,15 @@
 # Revdeps
 
-## Failed to check (8)
+## Failed to check (7)
 
 |package     |version |error |warning |note |
 |:-----------|:-------|:-----|:-------|:----|
 |blavaan     |0.5-10  |1     |        |     |
-|caugi       |1.2.0   |1     |        |     |
 |deepSTRAPP  |?       |      |        |     |
 |ggpicrust2  |?       |      |        |     |
+|invasible   |?       |      |        |     |
 |MiscMetabar |?       |      |        |     |
 |multinma    |0.9.1   |1     |        |     |
-|spopt       |0.1.2   |1     |        |     |
 |streamDAG   |?       |      |        |     |
 
 ## New problems (32)
@@ -33,9 +32,9 @@
 |[glyrepr](problems.md#glyrepr)|0.14.0  |__+1__ |        |     |
 |[GoodFitSBM](problems.md#goodfitsbm)|0.0.1   |__+1__ |        |     |
 |[lagdynamics](problems.md#lagdynamics)|0.32    |__+2__ |        |     |
-|[manynet](problems.md#manynet)|2.2.1   |__+1__ |        |     |
+|[manynet](problems.md#manynet)|2.2.3   |__+1__ |        |     |
 |[MetaNet](problems.md#metanet)|0.3.2   |__+1__ |        |     |
-|[migraph](problems.md#migraph)|1.6.6   |__+1__ |        |     |
+|[migraph](problems.md#migraph)|1.6.8   |__+1__ |        |     |
 |[modelbpp](problems.md#modelbpp)|0.4.0   |__+1__ |        |     |
 |[nat](problems.md#nat)|1.8.25  |__+3__ |        |     |
 |[netrics](problems.md#netrics)|0.4.0   |__+1__ |        |     |

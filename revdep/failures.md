@@ -2030,62 +2030,6 @@ ERROR: compilation failed for package ‘blavaan’
 
 
 ```
-# caugi (1.2.0)
-
-* GitHub: <https://github.com/frederikfabriciusbjerre/caugi>
-* Email: <mailto:frederik@fabriciusbjerre.dk>
-* GitHub mirror: <https://github.com/cran/caugi>
-
-Run `revdepcheck::cloud_details(, "caugi")` for more info
-
-## In both
-
-*   checking whether package ‘caugi’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘/tmp/workdir/caugi/new/caugi.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘caugi’ ...
-** this is package ‘caugi’ version ‘1.2.0’
-** package ‘caugi’ successfully unpacked and MD5 sums checked
-** using staged installation
-Error in eval(ei, envir) : 
------------------- [UNSUPPORTED RUST VERSION]------------------
-- Minimum supported Rust version is 1.80.0.
-- Installed Rust version is 1.75.0.
----------------------------------------------------------------
-Calls: source -> withVisible -> eval -> eval
-Execution halted
-ERROR: configuration failed for package ‘caugi’
-* removing ‘/tmp/workdir/caugi/new/caugi.Rcheck/caugi’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘caugi’ ...
-** this is package ‘caugi’ version ‘1.2.0’
-** package ‘caugi’ successfully unpacked and MD5 sums checked
-** using staged installation
-Error in eval(ei, envir) : 
------------------- [UNSUPPORTED RUST VERSION]------------------
-- Minimum supported Rust version is 1.80.0.
-- Installed Rust version is 1.75.0.
----------------------------------------------------------------
-Calls: source -> withVisible -> eval -> eval
-Execution halted
-ERROR: configuration failed for package ‘caugi’
-* removing ‘/tmp/workdir/caugi/old/caugi.Rcheck/caugi’
-
-
-```
 # deepSTRAPP (1.0.0)
 
 * GitHub: <https://github.com/MaelDore/deepSTRAPP>
@@ -2424,6 +2368,34 @@ Package suggested but not available for checking: ‘lefser’
 * checking re-building of vignette outputs ... OK
 * DONE
 Status: OK
+
+
+
+
+
+```
+# invasible (NA)
+
+* : <UNKNOWN>
+
+Run `revdepcheck::cloud_details(, "invasible")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
 
 
 
@@ -4637,102 +4609,6 @@ compilation terminated.
 make: *** [/opt/R/4.5.1/lib/R/etc/Makeconf:209: stanExports_survival_param.o] Error 1
 ERROR: compilation failed for package ‘multinma’
 * removing ‘/tmp/workdir/multinma/old/multinma.Rcheck/multinma’
-
-
-```
-# spopt (0.1.2)
-
-* GitHub: <https://github.com/walkerke/spopt-r>
-* Email: <mailto:kyle@walker-data.com>
-* GitHub mirror: <https://github.com/cran/spopt>
-
-Run `revdepcheck::cloud_details(, "spopt")` for more info
-
-## In both
-
-*   checking whether package ‘spopt’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘/tmp/workdir/spopt/new/spopt.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘spopt’ ...
-** this is package ‘spopt’ version ‘0.1.2’
-** package ‘spopt’ successfully unpacked and MD5 sums checked
-** using staged installation
-Using cargo 1.75.0
-Using rustc 1.75.0 (82e1608df 2023-12-21) (built from a source tarball)
-Building for CRAN.
-Writing `src/Makevars`.
-`tools/config.R` has finished.
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.5.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c entrypoint.c -o entrypoint.o
-if [ -d ./vendor ]; then \
-	echo "=== Using offline vendor directory ==="; \
-	mkdir -p /tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-	cp rust/vendor-config.toml /tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo/config.toml; \
-elif [ -f ./rust/vendor.tar.xz ]; then \
-	echo "=== Using offline vendor tarball ==="; \
-	tar xf rust/vendor.tar.xz && \
-	mkdir -p /tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-	cp rust/vendor-config.toml /tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo/config.toml; \
-fi
-=== Using offline vendor tarball ===
-export CARGO_HOME=/tmp/workdir/spopt/new/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/tmp/home/.cargo/bin" && \
-RUSTFLAGS=" --print=native-static-libs" cargo build -j 2 --offline --lib --release --manifest-path=./rust/Cargo.toml --target-dir ./rust/target 
-error: package `indexmap v2.12.1` cannot be built because it requires rustc 1.82 or newer, while the currently active rustc version is 1.75.0
-Either upgrade to rustc 1.82 or newer, or use
-cargo update indexmap@2.12.1 --precise ver
-where `ver` is the latest version of `indexmap` supporting rustc 1.75.0
-make: *** [Makevars:27: rust/target/release/libspopt.a] Error 101
-ERROR: compilation failed for package ‘spopt’
-* removing ‘/tmp/workdir/spopt/new/spopt.Rcheck/spopt’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘spopt’ ...
-** this is package ‘spopt’ version ‘0.1.2’
-** package ‘spopt’ successfully unpacked and MD5 sums checked
-** using staged installation
-Using cargo 1.75.0
-Using rustc 1.75.0 (82e1608df 2023-12-21) (built from a source tarball)
-Building for CRAN.
-Writing `src/Makevars`.
-`tools/config.R` has finished.
-** libs
-using C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0’
-gcc -std=gnu2x -I"/opt/R/4.5.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c entrypoint.c -o entrypoint.o
-if [ -d ./vendor ]; then \
-	echo "=== Using offline vendor directory ==="; \
-	mkdir -p /tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-	cp rust/vendor-config.toml /tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo/config.toml; \
-elif [ -f ./rust/vendor.tar.xz ]; then \
-	echo "=== Using offline vendor tarball ==="; \
-	tar xf rust/vendor.tar.xz && \
-	mkdir -p /tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-	cp rust/vendor-config.toml /tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo/config.toml; \
-fi
-=== Using offline vendor tarball ===
-export CARGO_HOME=/tmp/workdir/spopt/old/spopt.Rcheck/00_pkg_src/spopt/src/.cargo && \
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/tmp/home/.cargo/bin" && \
-RUSTFLAGS=" --print=native-static-libs" cargo build -j 2 --offline --lib --release --manifest-path=./rust/Cargo.toml --target-dir ./rust/target 
-error: package `rayon-core v1.13.0` cannot be built because it requires rustc 1.80 or newer, while the currently active rustc version is 1.75.0
-Either upgrade to rustc 1.80 or newer, or use
-cargo update rayon-core@1.13.0 --precise ver
-where `ver` is the latest version of `rayon-core` supporting rustc 1.75.0
-make: *** [Makevars:27: rust/target/release/libspopt.a] Error 101
-ERROR: compilation failed for package ‘spopt’
-* removing ‘/tmp/workdir/spopt/old/spopt.Rcheck/spopt’
 
 
 ```

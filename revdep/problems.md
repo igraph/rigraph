@@ -808,7 +808,7 @@ Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
      Execution halted
      ```
 
-# manynet (2.2.1)
+# manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -822,12 +822,12 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
      ```
      ...
            ▆
-        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:10:5
+        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:228:5
-       ── Failure ('test-tutorials_manynet.R:10:5'): manynet tutorial code runs without warnings or errors ──
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
+       ── Failure ('test-tutorials_manynet.R:4:5'): manynet tutorial code runs without warnings or errors ──
        Expected `w` to be NULL.
        Differences:
        `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
@@ -836,13 +836,13 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
        Warning in expression 46 : mean(as_matrix(s_women))
        Backtrace:
            ▆
-        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:10:5
+        1. ├─testthat::expect_null(...) at test-tutorials_manynet.R:4:5
         2. │ └─testthat::quasi_label(enquo(object), label)
         3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
         4. └─manynet:::check_tute_functions(tute)
-        5.   └─testthat::expect_null(...) at ./helper-manynet.R:228:5
+        5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 639 | SKIP 178 | PASS 3060 ]
+       [ FAIL 2 | WARN 644 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted
@@ -877,7 +877,7 @@ Run `revdepcheck::cloud_details(, "MetaNet")` for more info
      Execution halted
      ```
 
-# migraph (1.6.6)
+# migraph (1.6.8)
 
 * GitHub: <https://github.com/stocnet/migraph>
 * Email: <mailto:james.hollway@graduateinstitute.ch>
@@ -911,7 +911,7 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
         4. └─migraph:::check_tute_functions(tute, skip = "ergm\\(|play_diffusions\\(")
         5.   └─testthat::expect_null(...) at ./helper-functions.R:126:5
        
-       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 538 ]
+       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 260 ]
        Error:
        ! Test failures.
        Execution halted
@@ -936,7 +936,7 @@ Run `revdepcheck::cloud_details(, "modelbpp")` for more info
        test_cross_add.R..............    9 tests OK 
        test_cross_add.R..............   10 tests OK 
        test_cross_add.R..............   10 tests OK 
-       test_cross_add.R..............   11 tests OK 8.7s
+       test_cross_add.R..............   11 tests OK 6.6s
        
        test_cross_drop.R.............    0 tests    
        test_cross_drop.R.............    0 tests    
@@ -947,7 +947,7 @@ Run `revdepcheck::cloud_details(, "modelbpp")` for more info
        test_cross_drop.R.............    2 tests OK 
        test_cross_drop.R.............    3 tests OK 
        test_cross_drop.R.............    3 tests OK 
-       test_cross_drop.R.............    4 tests OK 2.6s
+       test_cross_drop.R.............    4 tests OK 2.0s
        
        test_exclude_xy_indicators.R..    0 tests    
        test_exclude_xy_indicators.R..    0 tests    
