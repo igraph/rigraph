@@ -108,6 +108,7 @@ identical_graphs <- function(
   # END GENERATED ARG_HANDLE
 
   stopifnot(is_igraph(g1), is_igraph(g2))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 

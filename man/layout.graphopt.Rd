@@ -49,4 +49,8 @@ movement allowed in a single step along a single axis. The default value is
 \code{layout.graphopt()} was renamed to \code{\link[=layout_with_graphopt]{layout_with_graphopt()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/0.10.17/igraph-Layout.html#igraph_layout_graphopt}{\code{layout_graphopt()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}
