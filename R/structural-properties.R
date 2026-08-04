@@ -1063,6 +1063,19 @@ degree <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "degree(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   v <- as_igraph_vs(graph, v)
   mode <- igraph_match_arg(mode)
 
@@ -1401,6 +1414,18 @@ distances <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "distances(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
 
   # make sure that the lower-level function in C gets mode == "out"
   # unconditionally when the graph is undirected; this is used for
@@ -2550,6 +2575,19 @@ ego_size <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "ego_size(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
@@ -2688,6 +2726,19 @@ ego <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "ego(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
@@ -2747,6 +2798,19 @@ make_ego_graph <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "make_ego_graph(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)

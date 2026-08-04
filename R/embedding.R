@@ -109,7 +109,7 @@ embed_adjacency_matrix <- function(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
+  cvec = strength(graph, weights = weights, mode = "all") / (vcount(graph) - 1),
   options = arpack_defaults()
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R

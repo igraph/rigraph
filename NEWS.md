@@ -85,6 +85,13 @@
 
 # igraph 2.3.3.9022
 
+## Breaking changes (future)
+
+- The default value of the `mode` parameter will change from `"all"` to `"out"` in a future version for the following functions: `distances()`, `degree()`, `strength()`, `eccentricity()`, `radius()`, `graph_center()`, `ego()`, `ego_size()`, and `make_ego_graph()`.
+  This change makes the default behavior more intuitive by respecting edge directions in directed graphs instead of ignoring them.
+  A deprecation warning is now issued when these functions are called on directed graphs without explicitly specifying the `mode` parameter.
+  To prepare for this change and avoid warnings, please specify `mode` explicitly in your code.
+
 ## Bug fixes
 
 - Use canonical `structure()` attribute names (#2755).
