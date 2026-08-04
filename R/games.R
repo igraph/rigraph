@@ -2577,6 +2577,7 @@ sample_grg <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_grg_game(); grg_game_impl lacks coords param
     Rx_igraph_grg_game,
     as.double(nodes),
     as.double(radius),

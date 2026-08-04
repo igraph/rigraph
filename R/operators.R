@@ -319,8 +319,7 @@ disjoint_union <- function(
   )
   lapply(graphs, ensure_igraph)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_disjoint_union, graphs)
+  res <- disjoint_union_many_impl(graphs = graphs)
 
   ## Graph attributes
   graph.attr.comb <- igraph.i.attribute.combination(
@@ -461,8 +460,10 @@ disjoint_union <- function(
 
     on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
+      # igraph_union_many(); _impl doesn't return edgemaps needed for attribute merging
       res <- .Call(Rx_igraph_union, newgraphs, edgemaps)
     } else {
+      # igraph_intersection_many(); _impl doesn't return edgemaps needed for attribute merging
       res <- .Call(Rx_igraph_intersection, newgraphs, edgemaps)
     }
     maps <- res$edgemaps
@@ -506,8 +507,10 @@ disjoint_union <- function(
 
     on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
+      # igraph_union_many(); _impl doesn't return edgemaps needed for attribute merging
       res <- .Call(Rx_igraph_union, graphs, edgemaps)
     } else {
+      # igraph_intersection_many(); _impl doesn't return edgemaps needed for attribute merging
       res <- .Call(Rx_igraph_intersection, graphs, edgemaps)
     }
     maps <- res$edgemaps
@@ -1112,6 +1115,7 @@ compose <- function(
     length(edge_attr_names(g2)) != 0)
 
   on.exit(.Call(Rx_igraph_finalizer))
+  # igraph_compose(); _impl doesn't return edgemaps needed for attribute merging
   res <- .Call(Rx_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph

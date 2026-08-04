@@ -797,6 +797,7 @@ diameter <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
+    # igraph_diameter_dijkstra(); diameter_impl returns path info too
     Rx_igraph_diameter,
     graph,
     as.logical(directed),
@@ -854,6 +855,7 @@ get_diameter <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_diameter_dijkstra(); diameter_impl returns path info too
     Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
@@ -918,6 +920,7 @@ farthest_vertices <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_diameter_dijkstra(); no farthest_vertices_impl available
     Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
@@ -1443,6 +1446,7 @@ distances <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_distances*(); distances_impl doesn't support algorithm selection
     Rx_igraph_shortest_paths,
     graph,
     v - 1,
@@ -1593,6 +1597,7 @@ shortest_paths <- function(
   to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_get_shortest_paths*(); _impl doesn't support algorithm selection
     Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
@@ -1836,24 +1841,11 @@ subcomponent <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_subcomponent,
-    graph,
-    as_igraph_vs(graph, v) - 1,
-    as.numeric(mode)
-  ) +
-    1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-
-  res
+  subcomponent_impl(
+    graph = graph,
+    vid = v,
+    mode = mode
+  )
 }
 
 #' Subgraph of a graph
@@ -2215,6 +2207,7 @@ transitivity <- function(
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
       res <- .Call(
+        # igraph_transitivity_local_undirected(); _impl requires vids
         Rx_igraph_transitivity_local_undirected_all,
         graph,
         isolates_num
@@ -2549,19 +2542,12 @@ ego_size <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_neighborhood_size,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.numeric(mode),
-    mindist
+  neighborhood_size_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
 }
 
@@ -2687,27 +2673,13 @@ ego <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_neighborhood,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.numeric(mode),
-    mindist
+  neighborhood_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
-  res <- lapply(res, function(x) x + 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
 }
 
 #' @export
@@ -2746,21 +2718,13 @@ make_ego_graph <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
-  mindist <- as.numeric(mindist)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(
-    Rx_igraph_neighborhood_graphs,
-    graph,
-    as_igraph_vs(graph, nodes) - 1,
-    as.numeric(order),
-    as.integer(mode),
-    mindist
+  neighborhood_graphs_impl(
+    graph = graph,
+    vids = nodes,
+    order = order,
+    mode = mode,
+    mindist = mindist
   )
-  res
 }
 
 #' @export
@@ -3121,15 +3085,13 @@ girth <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
+  # girth_impl always computes circle; slightly less efficient when circle=FALSE
+  res <- girth_impl(graph = graph)
   if (res$girth == 0) {
     res$girth <- Inf
   }
-  if (igraph_opt("return.vs.es") && circle) {
-    res$circle <- create_vs(graph, res$circle)
+  if (!circle) {
+    res$circle <- NULL
   }
   res
 }
@@ -3449,6 +3411,7 @@ bfs <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_bfs(); bfs_closure_impl returns only order, not rank/parent/pred/succ/dist
     Rx_igraph_bfs,
     graph,
     root,
@@ -3710,6 +3673,7 @@ dfs <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
+    # igraph_dfs(); dfs_closure_impl returns only order/order_out, not parent/dist
     Rx_igraph_dfs,
     graph,
     root,
@@ -3945,10 +3909,8 @@ count_components <- function(
 
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_no_components, graph, mode)
+  connected_components_impl(graph, mode = mode, details = TRUE)$no
 }
 
 #' Count reachable vertices
