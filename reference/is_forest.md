@@ -79,7 +79,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> ── <vertex sequence> 2/8 · from 129ecd6 ────────────────────────────────────────
+#> ── <vertex sequence> 2/8 · from 4c0e922 ────────────────────────────────────────
 #> [1] 1 4
 #> 
 ```

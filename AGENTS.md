@@ -133,8 +133,10 @@ All new functions must include:
 - An “experimental” badge via `r lifecycle::badge("experimental")`
 - All arguments in `snake_case`, with documentation and suitable
   defaults
-- An ellipsis guarded with `check_dots_empty()` separating mandatory and
-  optional arguments
+- An ellipsis guarded with `check_dots_empty()` separating the head
+  (required and defining arguments) from keyword-only options, following
+  the zoning rules in
+  [CONTRIBUTING.md](https://r.igraph.org/CONTRIBUTING.html#argument-order-and-the-ellipsis)
 - Argument validation using built-in `check_*()` functions or
   `igraph_arg_match()`
 

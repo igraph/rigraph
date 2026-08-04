@@ -164,7 +164,8 @@
 <li>An “experimental” badge via <code>r lifecycle::badge("experimental")</code>
 </li>
 <li>All arguments in <code>snake_case</code>, with documentation and suitable defaults</li>
-<li>An ellipsis guarded with <code>check_dots_empty()</code> separating mandatory and optional arguments</li>
+<li>An ellipsis guarded with <code>check_dots_empty()</code> separating the head (required and defining arguments) from keyword-only options, following the zoning rules in <a href="CONTRIBUTING.html#argument-order-and-the-ellipsis">CONTRIBUTING.md</a>
+</li>
 <li>Argument validation using built-in <code>check_*()</code> functions or <code>igraph_arg_match()</code>
 </li>
 </ul><p><strong>For callback functions:</strong></p>
