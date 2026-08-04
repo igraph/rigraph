@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2637 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2641 reverse dependencies (2640 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 32 new problems
- * We failed to check 8 packages
+ * We failed to check 6 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -119,10 +119,8 @@ Issues with CRAN packages are summarised below.
 ### Failed to check
 
 * blavaan     (NA)
-* caugi       (NA)
 * deepSTRAPP  (NA)
 * ggpicrust2  (NA)
 * MiscMetabar (NA)
 * multinma    (NA)
-* spopt       (NA)
 * streamDAG   (NA)
