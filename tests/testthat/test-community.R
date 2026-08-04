@@ -646,7 +646,7 @@ test_that("contract works", {
   V(g)$name <- letters[1:vcount(g)]
   E(g)$weight <- sample(ecount(g))
 
-  g2 <- contract(g, rep(1:5, each = 2), vertex.attr.comb = toString)
+  g2 <- contract(g, rep(1:5, each = 2), vertex_attr_combine = toString)
 
   expect_equal(g2$name, g$name)
   expect_equal(V(g2)$name, c("a, b", "c, d", "e, f", "g, h", "i, j"))

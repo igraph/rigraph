@@ -1,8 +1,8 @@
 # Runtime helper behind the generated `# ... ARG_HANDLE` blocks (see
-# tools/migrations.R, tools/generate-migrations.R). Hand-written and tested
-# directly -- the generated blocks only carry the per-function configuration and
-# call this. Kept a plain function (not an inline closure) so it is easy to step
-# through in a debugger.
+# tools/migrations/README.md, tools/generate-migrations.R). Hand-written and
+# tested directly -- the generated blocks only carry the per-function
+# configuration and call this. Kept a plain function (not an inline closure) so
+# it is easy to step through in a debugger.
 #
 # Pure: it inspects `dots` against the supplied maps and returns the recovered
 # values plus the deprecation message parts, or NULL when there is nothing to
