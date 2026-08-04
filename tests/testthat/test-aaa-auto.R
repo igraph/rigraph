@@ -6426,7 +6426,7 @@ test_that("hrg_predict_impl errors", {
 
 test_that("hrg_create_impl basic", {
   igraph_local_seed(20250909)
-  g <- make_tree(5)
+  g <- make_tree(5, mode = "out")
   expect_snapshot(hrg_create_impl(
     graph = g,
     prob = rep(0.5, 2)

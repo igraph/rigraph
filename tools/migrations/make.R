@@ -194,7 +194,7 @@ migrations <- list(
     new = function(
       n,
       ...,
-      mode = c("in", "out", "mutual", "undirected"),
+      mode = c("undirected", "in", "out", "mutual"),
       center = 1
     ) {},
     when = "3.0.0"
@@ -206,7 +206,7 @@ migrations <- list(
       n,
       children = 2,
       ...,
-      mode = c("out", "in", "undirected")
+      mode = c("undirected", "out", "in")
     ) {},
     when = "3.0.0"
   ),

@@ -10,13 +10,13 @@ as_unnamed_dense_matrix <- function(x) {
 }
 
 make_test_named_tree <- function() {
-  g <- make_tree(20)
+  g <- make_tree(20, mode = "out")
   V(g)$name <- letters[1:vcount(g)]
   g
 }
 
 make_test_weighted_tree <- function() {
-  g <- make_tree(20)
+  g <- make_tree(20, mode = "out")
   V(g)$name <- letters[1:vcount(g)]
   el <- as_edgelist(g, names = FALSE)
   E(g)$weight <- el[, 1] * el[, 2]

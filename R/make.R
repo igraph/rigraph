@@ -13,7 +13,7 @@ graph <- function(
   ...,
   n = max(edges),
   isolates = NULL,
-  directed = TRUE,
+  directed = FALSE,
   dir = directed,
   simplify = TRUE
 ) {
@@ -97,9 +97,7 @@ graph <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
@@ -222,9 +220,7 @@ graph.famous <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
@@ -309,7 +305,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @inheritParams make_tree
 #' @keywords internal
 #' @export
-graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
+graph.tree <- function(n, children = 2, mode = c("undirected", "out", "in")) {
   # nocov start
   lifecycle::deprecate_warn("2.1.0", "graph.tree()", "make_tree()")
   mode <- igraph_match_arg(mode)
@@ -339,7 +335,7 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @export
 graph.star <- function(
   n,
-  mode = c("in", "out", "mutual", "undirected"),
+  mode = c("undirected", "in", "out", "mutual"),
   center = 1
 ) {
   # nocov start
@@ -1429,7 +1425,7 @@ make_graph <- function(
   ...,
   n = max(edges),
   isolates = NULL,
-  directed = TRUE,
+  directed = FALSE,
   dir = directed,
   simplify = TRUE
 ) {
@@ -1511,9 +1507,7 @@ make_graph <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
@@ -1926,7 +1920,7 @@ from_literal <- function(...) {
 make_star <- function(
   n,
   ...,
-  mode = c("in", "out", "mutual", "undirected"),
+  mode = c("undirected", "in", "out", "mutual"),
   center = 1
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_star, do not edit, see tools/generate-migrations.R
@@ -1939,7 +1933,7 @@ make_star <- function(
       match_names = c("mode", "center"),
       match_to = c("mode", "center"),
       defaults = list(
-        mode = c("in", "out", "mutual", "undirected"),
+        mode = c("undirected", "in", "out", "mutual"),
         center = 1
       ),
       head_args = c("n"),
@@ -2407,7 +2401,7 @@ make_tree <- function(
   n,
   children = 2,
   ...,
-  mode = c("out", "in", "undirected")
+  mode = c("undirected", "out", "in")
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -2418,7 +2412,7 @@ make_tree <- function(
       recover_old = c("mode"),
       match_names = c("mode"),
       match_to = c("mode"),
-      defaults = list(mode = c("out", "in", "undirected")),
+      defaults = list(mode = c("undirected", "out", "in")),
       head_args = c("n", "children"),
       fn_name = "make_tree"
     )

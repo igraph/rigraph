@@ -1,5 +1,5 @@
 test_that("min_cut() works -- value.only=FALSE", {
-  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
+  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1), directed = TRUE)
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, value.only = FALSE)
 
@@ -10,7 +10,7 @@ test_that("min_cut() works -- value.only=FALSE", {
 })
 
 test_that("min_cut() works -- value.only=TRUE", {
-  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
+  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1), directed = TRUE)
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, value.only = TRUE)
 
@@ -18,7 +18,7 @@ test_that("min_cut() works -- value.only=TRUE", {
 })
 
 test_that("min_cut() works -- value.only=FALSE source/target", {
-  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
+  g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1), directed = TRUE)
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = FALSE)
 
