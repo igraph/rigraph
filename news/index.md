@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.3.3.9025
+
+### Continuous integration
+
+- Use the daily-rebuilt `r-debug` sanitizer image, and fix the leak it
+  uncovered ([\#2802](https://github.com/igraph/rigraph/issues/2802)).
+
 ## igraph 2.3.3.9024
 
 ### Bug fixes
