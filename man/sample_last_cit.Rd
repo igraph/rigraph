@@ -9,14 +9,7 @@
 \alias{cit_cit_types}
 \title{Random citation graphs}
 \usage{
-sample_last_cit(
-  n,
-  edges = 1,
-  ...,
-  agebins = n/7100,
-  pref = (1:(agebins + 1))^-3,
-  directed = TRUE
-)
+sample_last_cit(n, edges = 1, ..., agebins, pref, directed = TRUE)
 
 last_cit(
   n,
@@ -74,11 +67,15 @@ cit_cit_types(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{agebins}{Number of aging bins.}
+\item{agebins}{Number of aging bins.
+Must be at least 1.
+This determines how finely the aging process is discretized.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types.}
+probabilities for the different vertex types.
+For \code{sample_last_cit()}, this should be a numeric vector of length \code{agebins + 1}.
+A common choice is a power-law decay, e.g., \code{(1:(agebins + 1))^-3}.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 
@@ -108,6 +105,15 @@ vertex only.
 \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_lastcit_game}{\code{lastcit_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_cited_type_game}{\code{cited_type_game()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_citing_cited_type_game}{\code{citing_cited_type_game()}}
 }
 
+\examples{
+# Create a citation graph with 100 vertices, 5 age bins,
+# and preferential attachment following a t^-3 power-law decay
+g <- sample_last_cit(100, edges = 1, agebins = 5, pref = (1:6)^-3)
+
+# The preference vector determines how likely vertices in each age bin
+# are to receive citations. Newer vertices (lower indices) are preferred.
+g2 <- sample_last_cit(200, edges = 2, agebins = 10, pref = (1:11)^-2)
+}
 \seealso{
 Random graph models (games):
 \code{\link[=bipartite_gnm]{bipartite_gnm()}},

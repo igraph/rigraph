@@ -3228,9 +3228,13 @@ smallworld <- function(
 #' @param edges Number of edges per step.
 #' @inheritParams rlang::args_dots_empty
 #' @param agebins Number of aging bins.
+#'   Must be at least 1.
+#'   This determines how finely the aging process is discretized.
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
 #'   probabilities for the different vertex types.
+#'   For `sample_last_cit()`, this should be a numeric vector of length `agebins + 1`.
+#'   A common choice is a power-law decay, e.g., `(1:(agebins + 1))^-3`.
 #' @param directed Logical, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
 #'   Types are numbered from zero.
@@ -3240,29 +3244,33 @@ smallworld <- function(
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family games
+#' @examples
+#' # Create a citation graph with 100 vertices, 5 age bins,
+#' # and preferential attachment following a t^-3 power-law decay
+#' g <- sample_last_cit(100, edges = 1, agebins = 5, pref = (1:6)^-3)
+#'
+#' # The preference vector determines how likely vertices in each age bin
+#' # are to receive citations. Newer vertices (lower indices) are preferred.
+#' g2 <- sample_last_cit(200, edges = 2, agebins = 10, pref = (1:11)^-2)
 #' @export
 sample_last_cit <- function(
   n,
   edges = 1,
   ...,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins,
+  pref,
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_last_cit, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(agebins = agebins, pref = pref, directed = directed),
+      current = list(directed = directed),
       recover_new = c("agebins", "pref", "directed"),
       recover_old = c("agebins", "pref", "directed"),
       match_names = c("agebins", "pref", "directed"),
       match_to = c("agebins", "pref", "directed"),
-      defaults = list(
-        agebins = n / 7100,
-        pref = (1:(agebins + 1))^-3,
-        directed = TRUE
-      ),
+      defaults = list(directed = TRUE),
       head_args = c("n", "edges"),
       fn_name = "sample_last_cit"
     )

@@ -375,8 +375,8 @@ migrations <- list(
       n,
       edges = 1,
       ...,
-      agebins = n / 7100,
-      pref = (1:(agebins + 1))^-3,
+      agebins,
+      pref,
       directed = TRUE
     ) {},
     when = "3.0.0"
