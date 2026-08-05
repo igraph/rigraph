@@ -87,23 +87,26 @@ identical_graphs <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: identical_graphs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(attrs = attrs),
-      recover_new = c("attrs"),
-      recover_old = c("attrs"),
-      match_names = c("attrs"),
-      match_to = c("attrs"),
-      defaults = list(attrs = TRUE),
-      head_args = c("g1", "g2"),
-      fn_name = "identical_graphs"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(attrs = attrs),
+        recover_new = c("attrs"),
+        recover_old = c("attrs"),
+        match_names = c("attrs"),
+        match_to = c("attrs"),
+        defaults = list(attrs = TRUE),
+        head_args = c("g1", "g2"),
+        fn_name = "identical_graphs"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -381,23 +384,26 @@ E <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: E, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(P = P, path = path, directed = directed),
-      recover_new = c("P", "path", "directed"),
-      recover_old = c("P", "path", "directed"),
-      match_names = c("P", "path", "directed"),
-      match_to = c("P", "path", "directed"),
-      defaults = list(P = NULL, path = NULL, directed = TRUE),
-      head_args = c("graph"),
-      fn_name = "E"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(P = P, path = path, directed = directed),
+        recover_new = c("P", "path", "directed"),
+        recover_old = c("P", "path", "directed"),
+        match_names = c("P", "path", "directed"),
+        match_to = c("P", "path", "directed"),
+        defaults = list(P = NULL, path = NULL, directed = TRUE),
+        head_args = c("graph"),
+        fn_name = "E"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

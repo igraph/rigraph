@@ -304,23 +304,26 @@ igraph_opt <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: igraph_opt, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(default = default),
-      recover_new = c("default"),
-      recover_old = c("default"),
-      match_names = c("default"),
-      match_to = c("default"),
-      defaults = list(default = NULL),
-      head_args = c("x"),
-      fn_name = "igraph_opt"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(default = default),
+        recover_new = c("default"),
+        recover_old = c("default"),
+        match_names = c("default"),
+        match_to = c("default"),
+        defaults = list(default = NULL),
+        head_args = c("x"),
+        fn_name = "igraph_opt"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

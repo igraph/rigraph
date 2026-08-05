@@ -138,27 +138,30 @@ each_edge <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: each_edge, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops, multiple = multiple, mode = mode),
-      recover_new = c("loops", "multiple", "mode"),
-      recover_old = c("loops", "multiple", "mode"),
-      match_names = c("loops", "multiple", "mode"),
-      match_to = c("loops", "multiple", "mode"),
-      defaults = list(
-        loops = FALSE,
-        multiple = FALSE,
-        mode = c("all", "out", "in", "total")
-      ),
-      head_args = c("prob"),
-      fn_name = "each_edge"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(loops = loops, multiple = multiple, mode = mode),
+        recover_new = c("loops", "multiple", "mode"),
+        recover_old = c("loops", "multiple", "mode"),
+        match_names = c("loops", "multiple", "mode"),
+        match_to = c("loops", "multiple", "mode"),
+        defaults = list(
+          loops = FALSE,
+          multiple = FALSE,
+          mode = c("all", "out", "in", "total")
+        ),
+        head_args = c("prob"),
+        fn_name = "each_edge"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

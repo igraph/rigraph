@@ -127,33 +127,36 @@ is_chordal <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_chordal, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        alpha = alpha,
-        alpham1 = alpham1,
-        fillin = fillin,
-        newgraph = newgraph
-      ),
-      recover_new = c("alpha", "alpham1", "fillin", "newgraph"),
-      recover_old = c("alpha", "alpham1", "fillin", "newgraph"),
-      match_names = c("alpha", "alpham1", "fillin", "newgraph"),
-      match_to = c("alpha", "alpham1", "fillin", "newgraph"),
-      defaults = list(
-        alpha = NULL,
-        alpham1 = NULL,
-        fillin = FALSE,
-        newgraph = FALSE
-      ),
-      head_args = c("graph"),
-      fn_name = "is_chordal"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          alpha = alpha,
+          alpham1 = alpham1,
+          fillin = fillin,
+          newgraph = newgraph
+        ),
+        recover_new = c("alpha", "alpham1", "fillin", "newgraph"),
+        recover_old = c("alpha", "alpham1", "fillin", "newgraph"),
+        match_names = c("alpha", "alpham1", "fillin", "newgraph"),
+        match_to = c("alpha", "alpham1", "fillin", "newgraph"),
+        defaults = list(
+          alpha = NULL,
+          alpham1 = NULL,
+          fillin = FALSE,
+          newgraph = FALSE
+        ),
+        head_args = c("graph"),
+        fn_name = "is_chordal"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

@@ -76,23 +76,26 @@ global_efficiency <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: global_efficiency, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, directed = directed),
-      recover_new = c("weights", "directed"),
-      recover_old = c("weights", "directed"),
-      match_names = c("weights", "directed"),
-      match_to = c("weights", "directed"),
-      defaults = list(weights = NULL, directed = TRUE),
-      head_args = c("graph"),
-      fn_name = "global_efficiency"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, directed = directed),
+        recover_new = c("weights", "directed"),
+        recover_old = c("weights", "directed"),
+        match_names = c("weights", "directed"),
+        match_to = c("weights", "directed"),
+        defaults = list(weights = NULL, directed = TRUE),
+        head_args = c("graph"),
+        fn_name = "global_efficiency"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -116,27 +119,30 @@ local_efficiency <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: local_efficiency, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, directed = directed, mode = mode),
-      recover_new = c("weights", "directed", "mode"),
-      recover_old = c("weights", "directed", "mode"),
-      match_names = c("weights", "directed", "mode"),
-      match_to = c("weights", "directed", "mode"),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        mode = c("all", "out", "in", "total")
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "local_efficiency"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, directed = directed, mode = mode),
+        recover_new = c("weights", "directed", "mode"),
+        recover_old = c("weights", "directed", "mode"),
+        match_names = c("weights", "directed", "mode"),
+        match_to = c("weights", "directed", "mode"),
+        defaults = list(
+          weights = NULL,
+          directed = TRUE,
+          mode = c("all", "out", "in", "total")
+        ),
+        head_args = c("graph", "vids"),
+        fn_name = "local_efficiency"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -165,27 +171,30 @@ average_local_efficiency <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: average_local_efficiency, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, directed = directed, mode = mode),
-      recover_new = c("weights", "directed", "mode"),
-      recover_old = c("weights", "directed", "mode"),
-      match_names = c("weights", "directed", "mode"),
-      match_to = c("weights", "directed", "mode"),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        mode = c("all", "out", "in", "total")
-      ),
-      head_args = c("graph"),
-      fn_name = "average_local_efficiency"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, directed = directed, mode = mode),
+        recover_new = c("weights", "directed", "mode"),
+        recover_old = c("weights", "directed", "mode"),
+        match_names = c("weights", "directed", "mode"),
+        match_to = c("weights", "directed", "mode"),
+        defaults = list(
+          weights = NULL,
+          directed = TRUE,
+          mode = c("all", "out", "in", "total")
+        ),
+        head_args = c("graph"),
+        fn_name = "average_local_efficiency"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

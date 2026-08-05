@@ -480,7 +480,10 @@ render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
 # (caller_env(2)) resolves to the user's frame -- no `.user_env` threading needed.
 #
 # The whole thing is guarded by `...length() > 0L` so the common path (a correct
-# new-API call with nothing in `...`) skips the helper call entirely.
+# new-API call with nothing in `...`) skips the helper call entirely. The inner
+# gate handles a call whose only dots are empty argument slots -- a trailing
+# comma, or magrittr's `f(., , x = 1)` -- which are not arguments to recover:
+# `migrate_capture_dots()` drops them, and an all-empty `...` must not warn.
 render_arg_handle <- function(entry) {
   keep <- intersect(entry$tail, names(entry$defaults))
   default_items <- vapply(
@@ -508,11 +511,10 @@ render_arg_handle <- function(entry) {
       "  )"
     )
   }
-  c(
-    "if (...length() > 0L) {",
+  body <- c(
     guard,
     "  .arg_handle <- migrate_recover_args(",
-    "    list(...),",
+    "    .migrate_dots,",
     render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
     render_call_arg("recover_new", "c", quote_items(entry$recover_new), "character(0)"),
     render_call_arg("recover_old", "c", quote_items(entry$recover_old), "character(0)"),
@@ -527,7 +529,14 @@ render_arg_handle <- function(entry) {
     paste0("    \"", entry$when, "\","),
     "    what = I(.arg_handle$what),",
     "    details = .arg_handle$details",
-    "  )",
+    "  )"
+  )
+  c(
+    "if (...length() > 0L) {",
+    "  .migrate_dots <- migrate_capture_dots()",
+    "  if (length(.migrate_dots$values) > 0L) {",
+    ifelse(nzchar(body), paste0("  ", body), body),
+    "  }",
     "}"
   )
 }

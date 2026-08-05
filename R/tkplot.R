@@ -536,23 +536,26 @@ tk_close <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_close, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(window.close = window.close),
-      recover_new = c("window.close"),
-      recover_old = c("window.close"),
-      match_names = c("window.close"),
-      match_to = c("window.close"),
-      defaults = list(window.close = TRUE),
-      head_args = c("tkp.id"),
-      fn_name = "tk_close"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(window.close = window.close),
+        recover_new = c("window.close"),
+        recover_old = c("window.close"),
+        match_names = c("window.close"),
+        match_to = c("window.close"),
+        defaults = list(window.close = TRUE),
+        head_args = c("tkp.id"),
+        fn_name = "tk_close"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -592,23 +595,26 @@ tk_fit <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_fit, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(width = width, height = height),
-      recover_new = c("width", "height"),
-      recover_old = c("width", "height"),
-      match_names = c("width", "height"),
-      match_to = c("width", "height"),
-      defaults = list(width = NULL, height = NULL),
-      head_args = c("tkp.id"),
-      fn_name = "tk_fit"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(width = width, height = height),
+        recover_new = c("width", "height"),
+        recover_old = c("width", "height"),
+        match_names = c("width", "height"),
+        match_to = c("width", "height"),
+        defaults = list(width = NULL, height = NULL),
+        head_args = c("tkp.id"),
+        fn_name = "tk_fit"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -710,23 +716,26 @@ tk_coords <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(norm = norm),
-      recover_new = c("norm"),
-      recover_old = c("norm"),
-      match_names = c("norm"),
-      match_to = c("norm"),
-      defaults = list(norm = FALSE),
-      head_args = c("tkp.id"),
-      fn_name = "tk_coords"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(norm = norm),
+        recover_new = c("norm"),
+        recover_old = c("norm"),
+        match_names = c("norm"),
+        match_to = c("norm"),
+        defaults = list(norm = FALSE),
+        head_args = c("tkp.id"),
+        fn_name = "tk_coords"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -767,23 +776,26 @@ tk_rotate <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_rotate, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(degree = degree, rad = rad),
-      recover_new = c("degree", "rad"),
-      recover_old = c("degree", "rad"),
-      match_names = c("degree", "rad"),
-      match_to = c("degree", "rad"),
-      defaults = list(degree = NULL, rad = NULL),
-      head_args = c("tkp.id"),
-      fn_name = "tk_rotate"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(degree = degree, rad = rad),
+        recover_new = c("degree", "rad"),
+        recover_old = c("degree", "rad"),
+        match_names = c("degree", "rad"),
+        match_to = c("degree", "rad"),
+        defaults = list(degree = NULL, rad = NULL),
+        head_args = c("tkp.id"),
+        fn_name = "tk_rotate"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

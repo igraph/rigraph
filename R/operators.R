@@ -908,23 +908,26 @@ complementer <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: complementer, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops),
-      recover_new = c("loops"),
-      recover_old = c("loops"),
-      match_names = c("loops"),
-      match_to = c("loops"),
-      defaults = list(loops = FALSE),
-      head_args = c("graph"),
-      fn_name = "complementer"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(loops = loops),
+        recover_new = c("loops"),
+        recover_old = c("loops"),
+        match_names = c("loops"),
+        match_to = c("loops"),
+        defaults = list(loops = FALSE),
+        head_args = c("graph"),
+        fn_name = "complementer"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1015,53 +1018,56 @@ compose <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: compose, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        byname = byname,
-        graph.attr.comb = graph.attr.comb,
-        vertex.attr.comb = vertex.attr.comb,
-        edge.attr.comb = edge.attr.comb
-      ),
-      recover_new = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      recover_old = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      match_names = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      match_to = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      defaults = list(
-        byname = "auto",
-        graph.attr.comb = NULL,
-        vertex.attr.comb = "rename",
-        edge.attr.comb = "rename"
-      ),
-      head_args = c("g1", "g2"),
-      fn_name = "compose"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          byname = byname,
+          graph.attr.comb = graph.attr.comb,
+          vertex.attr.comb = vertex.attr.comb,
+          edge.attr.comb = edge.attr.comb
+        ),
+        recover_new = c(
+          "byname",
+          "graph.attr.comb",
+          "vertex.attr.comb",
+          "edge.attr.comb"
+        ),
+        recover_old = c(
+          "byname",
+          "graph.attr.comb",
+          "vertex.attr.comb",
+          "edge.attr.comb"
+        ),
+        match_names = c(
+          "byname",
+          "graph.attr.comb",
+          "vertex.attr.comb",
+          "edge.attr.comb"
+        ),
+        match_to = c(
+          "byname",
+          "graph.attr.comb",
+          "vertex.attr.comb",
+          "edge.attr.comb"
+        ),
+        defaults = list(
+          byname = "auto",
+          graph.attr.comb = NULL,
+          vertex.attr.comb = "rename",
+          edge.attr.comb = "rename"
+        ),
+        head_args = c("g1", "g2"),
+        fn_name = "compose"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

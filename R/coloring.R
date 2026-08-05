@@ -38,23 +38,26 @@ greedy_vertex_coloring <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: greedy_vertex_coloring, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(heuristic = heuristic),
-      recover_new = c("heuristic"),
-      recover_old = c("heuristic"),
-      match_names = c("heuristic"),
-      match_to = c("heuristic"),
-      defaults = list(heuristic = c("colored_neighbors", "dsatur")),
-      head_args = c("graph"),
-      fn_name = "greedy_vertex_coloring"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(heuristic = heuristic),
+        recover_new = c("heuristic"),
+        recover_old = c("heuristic"),
+        match_names = c("heuristic"),
+        match_to = c("heuristic"),
+        defaults = list(heuristic = c("colored_neighbors", "dsatur")),
+        head_args = c("graph"),
+        fn_name = "greedy_vertex_coloring"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

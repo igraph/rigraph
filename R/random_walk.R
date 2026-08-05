@@ -59,27 +59,30 @@ random_walk <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: random_walk, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, mode = mode, stuck = stuck),
-      recover_new = c("weights", "mode", "stuck"),
-      recover_old = c("weights", "mode", "stuck"),
-      match_names = c("weights", "mode", "stuck"),
-      match_to = c("weights", "mode", "stuck"),
-      defaults = list(
-        weights = NULL,
-        mode = c("out", "in", "all", "total"),
-        stuck = c("return", "error")
-      ),
-      head_args = c("graph", "start", "steps"),
-      fn_name = "random_walk"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, mode = mode, stuck = stuck),
+        recover_new = c("weights", "mode", "stuck"),
+        recover_old = c("weights", "mode", "stuck"),
+        match_names = c("weights", "mode", "stuck"),
+        match_to = c("weights", "mode", "stuck"),
+        defaults = list(
+          weights = NULL,
+          mode = c("out", "in", "all", "total"),
+          stuck = c("return", "error")
+        ),
+        head_args = c("graph", "start", "steps"),
+        fn_name = "random_walk"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -112,27 +115,30 @@ random_edge_walk <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: random_edge_walk, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, mode = mode, stuck = stuck),
-      recover_new = c("weights", "mode", "stuck"),
-      recover_old = c("weights", "mode", "stuck"),
-      match_names = c("weights", "mode", "stuck"),
-      match_to = c("weights", "mode", "stuck"),
-      defaults = list(
-        weights = NULL,
-        mode = c("out", "in", "all", "total"),
-        stuck = c("return", "error")
-      ),
-      head_args = c("graph", "start", "steps"),
-      fn_name = "random_edge_walk"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, mode = mode, stuck = stuck),
+        recover_new = c("weights", "mode", "stuck"),
+        recover_old = c("weights", "mode", "stuck"),
+        match_names = c("weights", "mode", "stuck"),
+        match_to = c("weights", "mode", "stuck"),
+        defaults = list(
+          weights = NULL,
+          mode = c("out", "in", "all", "total"),
+          stuck = c("return", "error")
+        ),
+        head_args = c("graph", "start", "steps"),
+        fn_name = "random_edge_walk"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

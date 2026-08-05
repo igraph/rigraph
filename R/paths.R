@@ -118,23 +118,26 @@ all_simple_paths <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: all_simple_paths, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, cutoff = cutoff),
-      recover_new = c("mode", "cutoff"),
-      recover_old = c("mode", "cutoff"),
-      match_names = c("mode", "cutoff"),
-      match_to = c("mode", "cutoff"),
-      defaults = list(mode = c("out", "in", "all", "total"), cutoff = -1),
-      head_args = c("graph", "from", "to"),
-      fn_name = "all_simple_paths"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode, cutoff = cutoff),
+        recover_new = c("mode", "cutoff"),
+        recover_old = c("mode", "cutoff"),
+        match_names = c("mode", "cutoff"),
+        match_to = c("mode", "cutoff"),
+        defaults = list(mode = c("out", "in", "all", "total"), cutoff = -1),
+        head_args = c("graph", "from", "to"),
+        fn_name = "all_simple_paths"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -446,23 +449,26 @@ distance_table <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: distance_table, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = TRUE),
-      head_args = c("graph"),
-      fn_name = "distance_table"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed),
+        recover_new = c("directed"),
+        recover_old = c("directed"),
+        match_names = c("directed"),
+        match_to = c("directed"),
+        defaults = list(directed = TRUE),
+        head_args = c("graph"),
+        fn_name = "distance_table"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

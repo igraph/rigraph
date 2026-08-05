@@ -885,71 +885,74 @@ sample_pa <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        out.dist = out.dist,
-        out.seq = out.seq,
-        out.pref = out.pref,
-        zero.appeal = zero.appeal,
-        directed = directed,
-        algorithm = algorithm,
-        start.graph = start.graph
-      ),
-      recover_new = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      recover_old = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      match_names = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      match_to = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      defaults = list(
-        out.dist = NULL,
-        out.seq = NULL,
-        out.pref = FALSE,
-        zero.appeal = 1,
-        directed = TRUE,
-        algorithm = c("psumtree", "psumtree-multiple", "bag"),
-        start.graph = NULL
-      ),
-      head_args = c("n", "power", "m"),
-      fn_name = "sample_pa"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          out.dist = out.dist,
+          out.seq = out.seq,
+          out.pref = out.pref,
+          zero.appeal = zero.appeal,
+          directed = directed,
+          algorithm = algorithm,
+          start.graph = start.graph
+        ),
+        recover_new = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        recover_old = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        match_names = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        match_to = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        defaults = list(
+          out.dist = NULL,
+          out.seq = NULL,
+          out.pref = FALSE,
+          zero.appeal = 1,
+          directed = TRUE,
+          algorithm = c("psumtree", "psumtree-multiple", "bag"),
+          start.graph = NULL
+        ),
+        head_args = c("n", "power", "m"),
+        fn_name = "sample_pa"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1052,71 +1055,74 @@ pa <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        out.dist = out.dist,
-        out.seq = out.seq,
-        out.pref = out.pref,
-        zero.appeal = zero.appeal,
-        directed = directed,
-        algorithm = algorithm,
-        start.graph = start.graph
-      ),
-      recover_new = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      recover_old = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      match_names = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      match_to = c(
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "zero.appeal",
-        "directed",
-        "algorithm",
-        "start.graph"
-      ),
-      defaults = list(
-        out.dist = NULL,
-        out.seq = NULL,
-        out.pref = FALSE,
-        zero.appeal = 1,
-        directed = TRUE,
-        algorithm = c("psumtree", "psumtree-multiple", "bag"),
-        start.graph = NULL
-      ),
-      head_args = c("n", "power", "m"),
-      fn_name = "pa"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          out.dist = out.dist,
+          out.seq = out.seq,
+          out.pref = out.pref,
+          zero.appeal = zero.appeal,
+          directed = directed,
+          algorithm = algorithm,
+          start.graph = start.graph
+        ),
+        recover_new = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        recover_old = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        match_names = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        match_to = c(
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "zero.appeal",
+          "directed",
+          "algorithm",
+          "start.graph"
+        ),
+        defaults = list(
+          out.dist = NULL,
+          out.seq = NULL,
+          out.pref = FALSE,
+          zero.appeal = 1,
+          directed = TRUE,
+          algorithm = c("psumtree", "psumtree-multiple", "bag"),
+          start.graph = NULL
+        ),
+        head_args = c("n", "power", "m"),
+        fn_name = "pa"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1183,23 +1189,26 @@ sample_gnp <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_gnp, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "p"),
-      fn_name = "sample_gnp"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "p"),
+        fn_name = "sample_gnp"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1233,23 +1242,26 @@ gnp <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: gnp, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "p"),
-      fn_name = "gnp"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "p"),
+        fn_name = "gnp"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1290,23 +1302,26 @@ sample_gnm <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_gnm, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "m"),
-      fn_name = "sample_gnm"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "m"),
+        fn_name = "sample_gnm"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1340,23 +1355,26 @@ gnm <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: gnm, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "m"),
-      fn_name = "gnm"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "m"),
+        fn_name = "gnm"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1624,25 +1642,28 @@ sample_degseq <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_degseq, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(method = method),
-      recover_new = c("method"),
-      recover_old = c("method"),
-      match_names = c("method"),
-      match_to = c("method"),
-      defaults = list(
-        method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")
-      ),
-      head_args = c("out.deg", "in.deg"),
-      fn_name = "sample_degseq"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(method = method),
+        recover_new = c("method"),
+        recover_old = c("method"),
+        match_names = c("method"),
+        match_to = c("method"),
+        defaults = list(
+          method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")
+        ),
+        head_args = c("out.deg", "in.deg"),
+        fn_name = "sample_degseq"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1888,94 +1909,97 @@ sample_pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("a", "ag", "agi", "agin", "aging", "aging."),
-      "sample_pa_age"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        aging.bin = aging.bin,
-        out.dist = out.dist,
-        out.seq = out.seq,
-        out.pref = out.pref,
-        directed = directed,
-        zero.deg.appeal = zero.deg.appeal,
-        zero.age.appeal = zero.age.appeal,
-        deg.coef = deg.coef,
-        age.coef = age.coef,
-        time.window = time.window
-      ),
-      recover_new = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      recover_old = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      match_names = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      match_to = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      defaults = list(
-        aging.bin = 300,
-        out.dist = NULL,
-        out.seq = NULL,
-        out.pref = FALSE,
-        directed = TRUE,
-        zero.deg.appeal = 1,
-        zero.age.appeal = 0,
-        deg.coef = 1,
-        age.coef = 1,
-        time.window = NULL
-      ),
-      head_args = c("n", "pa.exp", "aging.exp", "m"),
-      fn_name = "sample_pa_age"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("a", "ag", "agi", "agin", "aging", "aging."),
+        "sample_pa_age"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          aging.bin = aging.bin,
+          out.dist = out.dist,
+          out.seq = out.seq,
+          out.pref = out.pref,
+          directed = directed,
+          zero.deg.appeal = zero.deg.appeal,
+          zero.age.appeal = zero.age.appeal,
+          deg.coef = deg.coef,
+          age.coef = age.coef,
+          time.window = time.window
+        ),
+        recover_new = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        recover_old = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        match_names = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        match_to = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        defaults = list(
+          aging.bin = 300,
+          out.dist = NULL,
+          out.seq = NULL,
+          out.pref = FALSE,
+          directed = TRUE,
+          zero.deg.appeal = 1,
+          zero.age.appeal = 0,
+          deg.coef = 1,
+          age.coef = 1,
+          time.window = NULL
+        ),
+        head_args = c("n", "pa.exp", "aging.exp", "m"),
+        fn_name = "sample_pa_age"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2112,94 +2136,97 @@ pa_age <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pa_age, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("a", "ag", "agi", "agin", "aging", "aging."),
-      "pa_age"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        aging.bin = aging.bin,
-        out.dist = out.dist,
-        out.seq = out.seq,
-        out.pref = out.pref,
-        directed = directed,
-        zero.deg.appeal = zero.deg.appeal,
-        zero.age.appeal = zero.age.appeal,
-        deg.coef = deg.coef,
-        age.coef = age.coef,
-        time.window = time.window
-      ),
-      recover_new = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      recover_old = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      match_names = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      match_to = c(
-        "aging.bin",
-        "out.dist",
-        "out.seq",
-        "out.pref",
-        "directed",
-        "zero.deg.appeal",
-        "zero.age.appeal",
-        "deg.coef",
-        "age.coef",
-        "time.window"
-      ),
-      defaults = list(
-        aging.bin = 300,
-        out.dist = NULL,
-        out.seq = NULL,
-        out.pref = FALSE,
-        directed = TRUE,
-        zero.deg.appeal = 1,
-        zero.age.appeal = 0,
-        deg.coef = 1,
-        age.coef = 1,
-        time.window = NULL
-      ),
-      head_args = c("n", "pa.exp", "aging.exp", "m"),
-      fn_name = "pa_age"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("a", "ag", "agi", "agin", "aging", "aging."),
+        "pa_age"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          aging.bin = aging.bin,
+          out.dist = out.dist,
+          out.seq = out.seq,
+          out.pref = out.pref,
+          directed = directed,
+          zero.deg.appeal = zero.deg.appeal,
+          zero.age.appeal = zero.age.appeal,
+          deg.coef = deg.coef,
+          age.coef = age.coef,
+          time.window = time.window
+        ),
+        recover_new = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        recover_old = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        match_names = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        match_to = c(
+          "aging.bin",
+          "out.dist",
+          "out.seq",
+          "out.pref",
+          "directed",
+          "zero.deg.appeal",
+          "zero.age.appeal",
+          "deg.coef",
+          "age.coef",
+          "time.window"
+        ),
+        defaults = list(
+          aging.bin = 300,
+          out.dist = NULL,
+          out.seq = NULL,
+          out.pref = FALSE,
+          directed = TRUE,
+          zero.deg.appeal = 1,
+          zero.age.appeal = 0,
+          deg.coef = 1,
+          age.coef = 1,
+          time.window = NULL
+        ),
+        head_args = c("n", "pa.exp", "aging.exp", "m"),
+        fn_name = "pa_age"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2275,38 +2302,41 @@ sample_traits_callaway <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "sample_traits_callaway"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        edge.per.step = edge.per.step,
-        type.dist = type.dist,
-        pref.matrix = pref.matrix,
-        directed = directed
-      ),
-      recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      defaults = list(
-        edge.per.step = 1,
-        type.dist = NULL,
-        pref.matrix = NULL,
-        directed = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "sample_traits_callaway"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "sample_traits_callaway"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          edge.per.step = edge.per.step,
+          type.dist = type.dist,
+          pref.matrix = pref.matrix,
+          directed = directed
+        ),
+        recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        defaults = list(
+          edge.per.step = 1,
+          type.dist = NULL,
+          pref.matrix = NULL,
+          directed = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "sample_traits_callaway"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2353,38 +2383,41 @@ traits_callaway <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "traits_callaway"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        edge.per.step = edge.per.step,
-        type.dist = type.dist,
-        pref.matrix = pref.matrix,
-        directed = directed
-      ),
-      recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
-      defaults = list(
-        edge.per.step = 1,
-        type.dist = NULL,
-        pref.matrix = NULL,
-        directed = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "traits_callaway"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "traits_callaway"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          edge.per.step = edge.per.step,
+          type.dist = type.dist,
+          pref.matrix = pref.matrix,
+          directed = directed
+        ),
+        recover_new = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        recover_old = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        match_names = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        match_to = c("edge.per.step", "type.dist", "pref.matrix", "directed"),
+        defaults = list(
+          edge.per.step = 1,
+          type.dist = NULL,
+          pref.matrix = NULL,
+          directed = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "traits_callaway"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2420,32 +2453,35 @@ sample_traits <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "sample_traits"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist = type.dist,
-        pref.matrix = pref.matrix,
-        directed = directed
-      ),
-      recover_new = c("type.dist", "pref.matrix", "directed"),
-      recover_old = c("type.dist", "pref.matrix", "directed"),
-      match_names = c("type.dist", "pref.matrix", "directed"),
-      match_to = c("type.dist", "pref.matrix", "directed"),
-      defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
-      head_args = c("nodes", "types", "k"),
-      fn_name = "sample_traits"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "sample_traits"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist = type.dist,
+          pref.matrix = pref.matrix,
+          directed = directed
+        ),
+        recover_new = c("type.dist", "pref.matrix", "directed"),
+        recover_old = c("type.dist", "pref.matrix", "directed"),
+        match_names = c("type.dist", "pref.matrix", "directed"),
+        match_to = c("type.dist", "pref.matrix", "directed"),
+        defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
+        head_args = c("nodes", "types", "k"),
+        fn_name = "sample_traits"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2488,32 +2524,35 @@ traits <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "traits"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist = type.dist,
-        pref.matrix = pref.matrix,
-        directed = directed
-      ),
-      recover_new = c("type.dist", "pref.matrix", "directed"),
-      recover_old = c("type.dist", "pref.matrix", "directed"),
-      match_names = c("type.dist", "pref.matrix", "directed"),
-      match_to = c("type.dist", "pref.matrix", "directed"),
-      defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
-      head_args = c("nodes", "types", "k"),
-      fn_name = "traits"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "traits"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist = type.dist,
+          pref.matrix = pref.matrix,
+          directed = directed
+        ),
+        recover_new = c("type.dist", "pref.matrix", "directed"),
+        recover_old = c("type.dist", "pref.matrix", "directed"),
+        match_names = c("type.dist", "pref.matrix", "directed"),
+        match_to = c("type.dist", "pref.matrix", "directed"),
+        defaults = list(type.dist = NULL, pref.matrix = NULL, directed = FALSE),
+        head_args = c("nodes", "types", "k"),
+        fn_name = "traits"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2576,23 +2615,26 @@ sample_grg <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_grg, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(torus = torus, coords = coords),
-      recover_new = c("torus", "coords"),
-      recover_old = c("torus", "coords"),
-      match_names = c("torus", "coords"),
-      match_to = c("torus", "coords"),
-      defaults = list(torus = FALSE, coords = FALSE),
-      head_args = c("nodes", "radius"),
-      fn_name = "sample_grg"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(torus = torus, coords = coords),
+        recover_new = c("torus", "coords"),
+        recover_old = c("torus", "coords"),
+        match_names = c("torus", "coords"),
+        match_to = c("torus", "coords"),
+        defaults = list(torus = FALSE, coords = FALSE),
+        head_args = c("nodes", "radius"),
+        fn_name = "sample_grg"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2628,23 +2670,26 @@ grg <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: grg, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(torus = torus, coords = coords),
-      recover_new = c("torus", "coords"),
-      recover_old = c("torus", "coords"),
-      match_names = c("torus", "coords"),
-      match_to = c("torus", "coords"),
-      defaults = list(torus = FALSE, coords = FALSE),
-      head_args = c("nodes", "radius"),
-      fn_name = "grg"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(torus = torus, coords = coords),
+        recover_new = c("torus", "coords"),
+        recover_old = c("torus", "coords"),
+        match_names = c("torus", "coords"),
+        match_to = c("torus", "coords"),
+        defaults = list(torus = FALSE, coords = FALSE),
+        head_args = c("nodes", "radius"),
+        fn_name = "grg"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2732,64 +2777,67 @@ sample_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "sample_pref"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist = type.dist,
-        fixed.sizes = fixed.sizes,
-        pref.matrix = pref.matrix,
-        directed = directed,
-        loops = loops
-      ),
-      recover_new = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      recover_old = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      match_names = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      match_to = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      defaults = list(
-        type.dist = NULL,
-        fixed.sizes = FALSE,
-        pref.matrix = NULL,
-        directed = FALSE,
-        loops = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "sample_pref"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "sample_pref"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist = type.dist,
+          fixed.sizes = fixed.sizes,
+          pref.matrix = pref.matrix,
+          directed = directed,
+          loops = loops
+        ),
+        recover_new = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        recover_old = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        match_names = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        match_to = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        defaults = list(
+          type.dist = NULL,
+          fixed.sizes = FALSE,
+          pref.matrix = NULL,
+          directed = FALSE,
+          loops = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "sample_pref"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2843,64 +2891,67 @@ pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "pref"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist = type.dist,
-        fixed.sizes = fixed.sizes,
-        pref.matrix = pref.matrix,
-        directed = directed,
-        loops = loops
-      ),
-      recover_new = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      recover_old = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      match_names = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      match_to = c(
-        "type.dist",
-        "fixed.sizes",
-        "pref.matrix",
-        "directed",
-        "loops"
-      ),
-      defaults = list(
-        type.dist = NULL,
-        fixed.sizes = FALSE,
-        pref.matrix = NULL,
-        directed = FALSE,
-        loops = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "pref"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "pref"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist = type.dist,
+          fixed.sizes = fixed.sizes,
+          pref.matrix = pref.matrix,
+          directed = directed,
+          loops = loops
+        ),
+        recover_new = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        recover_old = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        match_names = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        match_to = c(
+          "type.dist",
+          "fixed.sizes",
+          "pref.matrix",
+          "directed",
+          "loops"
+        ),
+        defaults = list(
+          type.dist = NULL,
+          fixed.sizes = FALSE,
+          pref.matrix = NULL,
+          directed = FALSE,
+          loops = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "pref"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2936,36 +2987,39 @@ sample_asym_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "sample_asym_pref"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist.matrix = type.dist.matrix,
-        pref.matrix = pref.matrix,
-        loops = loops
-      ),
-      recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
-      recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
-      match_names = c("type.dist.matrix", "pref.matrix", "loops"),
-      match_to = c("type.dist.matrix", "pref.matrix", "loops"),
-      defaults = list(
-        type.dist.matrix = NULL,
-        pref.matrix = NULL,
-        loops = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "sample_asym_pref"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "sample_asym_pref"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist.matrix = type.dist.matrix,
+          pref.matrix = pref.matrix,
+          loops = loops
+        ),
+        recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
+        recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
+        match_names = c("type.dist.matrix", "pref.matrix", "loops"),
+        match_to = c("type.dist.matrix", "pref.matrix", "loops"),
+        defaults = list(
+          type.dist.matrix = NULL,
+          pref.matrix = NULL,
+          loops = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "sample_asym_pref"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3023,36 +3077,39 @@ asym_pref <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("t", "ty", "typ", "type"),
-      "asym_pref"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        type.dist.matrix = type.dist.matrix,
-        pref.matrix = pref.matrix,
-        loops = loops
-      ),
-      recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
-      recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
-      match_names = c("type.dist.matrix", "pref.matrix", "loops"),
-      match_to = c("type.dist.matrix", "pref.matrix", "loops"),
-      defaults = list(
-        type.dist.matrix = NULL,
-        pref.matrix = NULL,
-        loops = FALSE
-      ),
-      head_args = c("nodes", "types"),
-      fn_name = "asym_pref"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("t", "ty", "typ", "type"),
+        "asym_pref"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          type.dist.matrix = type.dist.matrix,
+          pref.matrix = pref.matrix,
+          loops = loops
+        ),
+        recover_new = c("type.dist.matrix", "pref.matrix", "loops"),
+        recover_old = c("type.dist.matrix", "pref.matrix", "loops"),
+        match_names = c("type.dist.matrix", "pref.matrix", "loops"),
+        match_to = c("type.dist.matrix", "pref.matrix", "loops"),
+        defaults = list(
+          type.dist.matrix = NULL,
+          pref.matrix = NULL,
+          loops = FALSE
+        ),
+        head_args = c("nodes", "types"),
+        fn_name = "asym_pref"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3087,23 +3144,26 @@ connect <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: connect, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode),
-      recover_new = c("mode"),
-      recover_old = c("mode"),
-      match_names = c("mode"),
-      match_to = c("mode"),
-      defaults = list(mode = c("all", "out", "in", "total")),
-      head_args = c("graph", "order"),
-      fn_name = "connect"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode),
+        recover_new = c("mode"),
+        recover_old = c("mode"),
+        match_names = c("mode"),
+        match_to = c("mode"),
+        defaults = list(mode = c("all", "out", "in", "total")),
+        head_args = c("graph", "order"),
+        fn_name = "connect"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3175,23 +3235,26 @@ sample_smallworld <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_smallworld, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops, multiple = multiple),
-      recover_new = c("loops", "multiple"),
-      recover_old = c("loops", "multiple"),
-      match_names = c("loops", "multiple"),
-      match_to = c("loops", "multiple"),
-      defaults = list(loops = FALSE, multiple = FALSE),
-      head_args = c("dim", "size", "nei", "p"),
-      fn_name = "sample_smallworld"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(loops = loops, multiple = multiple),
+        recover_new = c("loops", "multiple"),
+        recover_old = c("loops", "multiple"),
+        match_names = c("loops", "multiple"),
+        match_to = c("loops", "multiple"),
+        defaults = list(loops = FALSE, multiple = FALSE),
+        head_args = c("dim", "size", "nei", "p"),
+        fn_name = "sample_smallworld"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3229,23 +3292,26 @@ smallworld <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: smallworld, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops, multiple = multiple),
-      recover_new = c("loops", "multiple"),
-      recover_old = c("loops", "multiple"),
-      match_names = c("loops", "multiple"),
-      match_to = c("loops", "multiple"),
-      defaults = list(loops = FALSE, multiple = FALSE),
-      head_args = c("dim", "size", "nei", "p"),
-      fn_name = "smallworld"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(loops = loops, multiple = multiple),
+        recover_new = c("loops", "multiple"),
+        recover_old = c("loops", "multiple"),
+        match_names = c("loops", "multiple"),
+        match_to = c("loops", "multiple"),
+        defaults = list(loops = FALSE, multiple = FALSE),
+        head_args = c("dim", "size", "nei", "p"),
+        fn_name = "smallworld"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3305,23 +3371,26 @@ sample_last_cit <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_last_cit, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(agebins = agebins, pref = pref, directed = directed),
-      recover_new = c("agebins", "pref", "directed"),
-      recover_old = c("agebins", "pref", "directed"),
-      match_names = c("agebins", "pref", "directed"),
-      match_to = c("agebins", "pref", "directed"),
-      defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
-      head_args = c("n", "edges"),
-      fn_name = "sample_last_cit"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(agebins = agebins, pref = pref, directed = directed),
+        recover_new = c("agebins", "pref", "directed"),
+        recover_old = c("agebins", "pref", "directed"),
+        match_names = c("agebins", "pref", "directed"),
+        match_to = c("agebins", "pref", "directed"),
+        defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
+        head_args = c("n", "edges"),
+        fn_name = "sample_last_cit"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3360,23 +3429,26 @@ last_cit <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: last_cit, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(agebins = agebins, pref = pref, directed = directed),
-      recover_new = c("agebins", "pref", "directed"),
-      recover_old = c("agebins", "pref", "directed"),
-      match_names = c("agebins", "pref", "directed"),
-      match_to = c("agebins", "pref", "directed"),
-      defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
-      head_args = c("n", "edges"),
-      fn_name = "last_cit"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(agebins = agebins, pref = pref, directed = directed),
+        recover_new = c("agebins", "pref", "directed"),
+        recover_old = c("agebins", "pref", "directed"),
+        match_names = c("agebins", "pref", "directed"),
+        match_to = c("agebins", "pref", "directed"),
+        defaults = list(agebins = NULL, pref = NULL, directed = TRUE),
+        head_args = c("n", "edges"),
+        fn_name = "last_cit"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3411,23 +3483,26 @@ sample_cit_types <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_cit_types, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(pref = pref, directed = directed, attr = attr),
-      recover_new = c("pref", "directed", "attr"),
-      recover_old = c("pref", "directed", "attr"),
-      match_names = c("pref", "directed", "attr"),
-      match_to = c("pref", "directed", "attr"),
-      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
-      head_args = c("n", "edges", "types"),
-      fn_name = "sample_cit_types"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(pref = pref, directed = directed, attr = attr),
+        recover_new = c("pref", "directed", "attr"),
+        recover_old = c("pref", "directed", "attr"),
+        match_names = c("pref", "directed", "attr"),
+        match_to = c("pref", "directed", "attr"),
+        defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
+        head_args = c("n", "edges", "types"),
+        fn_name = "sample_cit_types"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3469,23 +3544,26 @@ cit_types <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cit_types, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(pref = pref, directed = directed, attr = attr),
-      recover_new = c("pref", "directed", "attr"),
-      recover_old = c("pref", "directed", "attr"),
-      match_names = c("pref", "directed", "attr"),
-      match_to = c("pref", "directed", "attr"),
-      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
-      head_args = c("n", "edges", "types"),
-      fn_name = "cit_types"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(pref = pref, directed = directed, attr = attr),
+        recover_new = c("pref", "directed", "attr"),
+        recover_old = c("pref", "directed", "attr"),
+        match_names = c("pref", "directed", "attr"),
+        match_to = c("pref", "directed", "attr"),
+        defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
+        head_args = c("n", "edges", "types"),
+        fn_name = "cit_types"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3521,23 +3599,26 @@ sample_cit_cit_types <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_cit_cit_types, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(pref = pref, directed = directed, attr = attr),
-      recover_new = c("pref", "directed", "attr"),
-      recover_old = c("pref", "directed", "attr"),
-      match_names = c("pref", "directed", "attr"),
-      match_to = c("pref", "directed", "attr"),
-      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
-      head_args = c("n", "edges", "types"),
-      fn_name = "sample_cit_cit_types"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(pref = pref, directed = directed, attr = attr),
+        recover_new = c("pref", "directed", "attr"),
+        recover_old = c("pref", "directed", "attr"),
+        match_names = c("pref", "directed", "attr"),
+        match_to = c("pref", "directed", "attr"),
+        defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
+        head_args = c("n", "edges", "types"),
+        fn_name = "sample_cit_cit_types"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3580,23 +3661,26 @@ cit_cit_types <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cit_cit_types, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(pref = pref, directed = directed, attr = attr),
-      recover_new = c("pref", "directed", "attr"),
-      recover_old = c("pref", "directed", "attr"),
-      match_names = c("pref", "directed", "attr"),
-      match_to = c("pref", "directed", "attr"),
-      defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
-      head_args = c("n", "edges", "types"),
-      fn_name = "cit_cit_types"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(pref = pref, directed = directed, attr = attr),
+        recover_new = c("pref", "directed", "attr"),
+        recover_old = c("pref", "directed", "attr"),
+        match_names = c("pref", "directed", "attr"),
+        match_to = c("pref", "directed", "attr"),
+        defaults = list(pref = NULL, directed = TRUE, attr = TRUE),
+        head_args = c("n", "edges", "types"),
+        fn_name = "cit_cit_types"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3902,23 +3986,26 @@ sample_sbm <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sbm, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "pref.matrix", "block.sizes"),
-      fn_name = "sample_sbm"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "pref.matrix", "block.sizes"),
+        fn_name = "sample_sbm"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3944,23 +4031,26 @@ sbm <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sbm, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, loops = loops),
-      recover_new = c("directed", "loops"),
-      recover_old = c("directed", "loops"),
-      match_names = c("directed", "loops"),
-      match_to = c("directed", "loops"),
-      defaults = list(directed = FALSE, loops = FALSE),
-      head_args = c("n", "pref.matrix", "block.sizes"),
-      fn_name = "sbm"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, loops = loops),
+        recover_new = c("directed", "loops"),
+        recover_old = c("directed", "loops"),
+        match_names = c("directed", "loops"),
+        match_to = c("directed", "loops"),
+        defaults = list(directed = FALSE, loops = FALSE),
+        head_args = c("n", "pref.matrix", "block.sizes"),
+        fn_name = "sbm"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4119,23 +4209,26 @@ sample_dot_product <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_dot_product, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = FALSE),
-      head_args = c("vecs"),
-      fn_name = "sample_dot_product"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed),
+        recover_new = c("directed"),
+        recover_old = c("directed"),
+        match_names = c("directed"),
+        match_to = c("directed"),
+        defaults = list(directed = FALSE),
+        head_args = c("vecs"),
+        fn_name = "sample_dot_product"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4155,23 +4248,26 @@ dot_product <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: dot_product, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = FALSE),
-      head_args = c("vecs"),
-      fn_name = "dot_product"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed),
+        recover_new = c("directed"),
+        recover_old = c("directed"),
+        match_names = c("directed"),
+        match_to = c("directed"),
+        defaults = list(directed = FALSE),
+        head_args = c("vecs"),
+        fn_name = "dot_product"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4267,23 +4363,26 @@ sample_k_regular <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_k_regular, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, multiple = multiple),
-      recover_new = c("directed", "multiple"),
-      recover_old = c("directed", "multiple"),
-      match_names = c("directed", "multiple"),
-      match_to = c("directed", "multiple"),
-      defaults = list(directed = FALSE, multiple = FALSE),
-      head_args = c("no.of.nodes", "k"),
-      fn_name = "sample_k_regular"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed, multiple = multiple),
+        recover_new = c("directed", "multiple"),
+        recover_old = c("directed", "multiple"),
+        match_names = c("directed", "multiple"),
+        match_to = c("directed", "multiple"),
+        defaults = list(directed = FALSE, multiple = FALSE),
+        head_args = c("no.of.nodes", "k"),
+        fn_name = "sample_k_regular"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4543,23 +4642,26 @@ sample_fitness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_fitness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops, multiple = multiple),
-      recover_new = c("loops", "multiple"),
-      recover_old = c("loops", "multiple"),
-      match_names = c("loops", "multiple"),
-      match_to = c("loops", "multiple"),
-      defaults = list(loops = FALSE, multiple = FALSE),
-      head_args = c("no.of.edges", "fitness.out", "fitness.in"),
-      fn_name = "sample_fitness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(loops = loops, multiple = multiple),
+        recover_new = c("loops", "multiple"),
+        recover_old = c("loops", "multiple"),
+        match_names = c("loops", "multiple"),
+        match_to = c("loops", "multiple"),
+        defaults = list(loops = FALSE, multiple = FALSE),
+        head_args = c("no.of.edges", "fitness.out", "fitness.in"),
+        fn_name = "sample_fitness"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4646,36 +4748,39 @@ sample_fitness_pl <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_fitness_pl, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        loops = loops,
-        multiple = multiple,
-        finite.size.correction = finite.size.correction
-      ),
-      recover_new = c("loops", "multiple", "finite.size.correction"),
-      recover_old = c("loops", "multiple", "finite.size.correction"),
-      match_names = c("loops", "multiple", "finite.size.correction"),
-      match_to = c("loops", "multiple", "finite.size.correction"),
-      defaults = list(
-        loops = FALSE,
-        multiple = FALSE,
-        finite.size.correction = TRUE
-      ),
-      head_args = c(
-        "no.of.nodes",
-        "no.of.edges",
-        "exponent.out",
-        "exponent.in"
-      ),
-      fn_name = "sample_fitness_pl"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          loops = loops,
+          multiple = multiple,
+          finite.size.correction = finite.size.correction
+        ),
+        recover_new = c("loops", "multiple", "finite.size.correction"),
+        recover_old = c("loops", "multiple", "finite.size.correction"),
+        match_names = c("loops", "multiple", "finite.size.correction"),
+        match_to = c("loops", "multiple", "finite.size.correction"),
+        defaults = list(
+          loops = FALSE,
+          multiple = FALSE,
+          finite.size.correction = TRUE
+        ),
+        head_args = c(
+          "no.of.nodes",
+          "no.of.edges",
+          "exponent.out",
+          "exponent.in"
+        ),
+        fn_name = "sample_fitness_pl"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4770,23 +4875,26 @@ sample_forestfire <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_forestfire, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(bw.factor = bw.factor, ambs = ambs, directed = directed),
-      recover_new = c("bw.factor", "ambs", "directed"),
-      recover_old = c("bw.factor", "ambs", "directed"),
-      match_names = c("bw.factor", "ambs", "directed"),
-      match_to = c("bw.factor", "ambs", "directed"),
-      defaults = list(bw.factor = 1, ambs = 1, directed = TRUE),
-      head_args = c("nodes", "fw.prob"),
-      fn_name = "sample_forestfire"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(bw.factor = bw.factor, ambs = ambs, directed = directed),
+        recover_new = c("bw.factor", "ambs", "directed"),
+        recover_old = c("bw.factor", "ambs", "directed"),
+        match_names = c("bw.factor", "ambs", "directed"),
+        match_to = c("bw.factor", "ambs", "directed"),
+        defaults = list(bw.factor = 1, ambs = 1, directed = TRUE),
+        head_args = c("nodes", "fw.prob"),
+        fn_name = "sample_forestfire"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -4854,23 +4962,26 @@ sample_correlated_gnp <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_correlated_gnp, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(p = p, permutation = permutation),
-      recover_new = c("p", "permutation"),
-      recover_old = c("p", "permutation"),
-      match_names = c("p", "permutation"),
-      match_to = c("p", "permutation"),
-      defaults = list(p = NULL, permutation = NULL),
-      head_args = c("old.graph", "corr"),
-      fn_name = "sample_correlated_gnp"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(p = p, permutation = permutation),
+        recover_new = c("p", "permutation"),
+        recover_old = c("p", "permutation"),
+        match_names = c("p", "permutation"),
+        match_to = c("p", "permutation"),
+        defaults = list(p = NULL, permutation = NULL),
+        head_args = c("old.graph", "corr"),
+        fn_name = "sample_correlated_gnp"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

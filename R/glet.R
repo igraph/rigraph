@@ -144,23 +144,26 @@ graphlet_basis <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_basis, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights),
-      recover_new = c("weights"),
-      recover_old = c("weights"),
-      match_names = c("weights"),
-      match_to = c("weights"),
-      defaults = list(weights = NULL),
-      head_args = c("graph"),
-      fn_name = "graphlet_basis"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights),
+        recover_new = c("weights"),
+        recover_old = c("weights"),
+        match_names = c("weights"),
+        match_to = c("weights"),
+        defaults = list(weights = NULL),
+        head_args = c("graph"),
+        fn_name = "graphlet_basis"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -183,23 +186,26 @@ graphlet_proj <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, niter = niter, Mu = Mu),
-      recover_new = c("weights", "cliques", "niter", "Mu"),
-      recover_old = c("weights", "cliques", "niter", "Mu"),
-      match_names = c("weights", "cliques", "niter", "Mu"),
-      match_to = c("weights", "cliques", "niter", "Mu"),
-      defaults = list(weights = NULL, niter = 1000, Mu = NULL),
-      head_args = c("graph"),
-      fn_name = "graphlet_proj"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, niter = niter, Mu = Mu),
+        recover_new = c("weights", "cliques", "niter", "Mu"),
+        recover_old = c("weights", "cliques", "niter", "Mu"),
+        match_names = c("weights", "cliques", "niter", "Mu"),
+        match_to = c("weights", "cliques", "niter", "Mu"),
+        defaults = list(weights = NULL, niter = 1000, Mu = NULL),
+        head_args = c("graph"),
+        fn_name = "graphlet_proj"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -294,23 +300,26 @@ graphlets <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, niter = niter),
-      recover_new = c("weights", "niter"),
-      recover_old = c("weights", "niter"),
-      match_names = c("weights", "niter"),
-      match_to = c("weights", "niter"),
-      defaults = list(weights = NULL, niter = 1000),
-      head_args = c("graph"),
-      fn_name = "graphlets"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, niter = niter),
+        recover_new = c("weights", "niter"),
+        recover_old = c("weights", "niter"),
+        match_names = c("weights", "niter"),
+        match_to = c("weights", "niter"),
+        defaults = list(weights = NULL, niter = 1000),
+        head_args = c("graph"),
+        fn_name = "graphlets"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

@@ -392,23 +392,26 @@ count_max_cliques <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_max_cliques, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(subset = subset),
-      recover_new = c("subset"),
-      recover_old = c("subset"),
-      match_names = c("subset"),
-      match_to = c("subset"),
-      defaults = list(subset = NULL),
-      head_args = c("graph", "min", "max"),
-      fn_name = "count_max_cliques"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(subset = subset),
+        recover_new = c("subset"),
+        recover_old = c("subset"),
+        match_names = c("subset"),
+        match_to = c("subset"),
+        defaults = list(subset = NULL),
+        head_args = c("graph", "min", "max"),
+        fn_name = "count_max_cliques"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -504,33 +507,36 @@ weighted_cliques <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        vertex.weights = vertex.weights,
-        min.weight = min.weight,
-        max.weight = max.weight,
-        maximal = maximal
-      ),
-      recover_new = c("vertex.weights", "min.weight", "max.weight", "maximal"),
-      recover_old = c("vertex.weights", "min.weight", "max.weight", "maximal"),
-      match_names = c("vertex.weights", "min.weight", "max.weight", "maximal"),
-      match_to = c("vertex.weights", "min.weight", "max.weight", "maximal"),
-      defaults = list(
-        vertex.weights = NULL,
-        min.weight = 0,
-        max.weight = 0,
-        maximal = FALSE
-      ),
-      head_args = c("graph"),
-      fn_name = "weighted_cliques"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          vertex.weights = vertex.weights,
+          min.weight = min.weight,
+          max.weight = max.weight,
+          maximal = maximal
+        ),
+        recover_new = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+        recover_old = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+        match_names = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+        match_to = c("vertex.weights", "min.weight", "max.weight", "maximal"),
+        defaults = list(
+          vertex.weights = NULL,
+          min.weight = 0,
+          max.weight = 0,
+          maximal = FALSE
+        ),
+        head_args = c("graph"),
+        fn_name = "weighted_cliques"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -552,23 +558,26 @@ largest_weighted_cliques <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: largest_weighted_cliques, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(vertex.weights = vertex.weights),
-      recover_new = c("vertex.weights"),
-      recover_old = c("vertex.weights"),
-      match_names = c("vertex.weights"),
-      match_to = c("vertex.weights"),
-      defaults = list(vertex.weights = NULL),
-      head_args = c("graph"),
-      fn_name = "largest_weighted_cliques"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(vertex.weights = vertex.weights),
+        recover_new = c("vertex.weights"),
+        recover_old = c("vertex.weights"),
+        match_names = c("vertex.weights"),
+        match_to = c("vertex.weights"),
+        defaults = list(vertex.weights = NULL),
+        head_args = c("graph"),
+        fn_name = "largest_weighted_cliques"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -587,23 +596,26 @@ weighted_clique_num <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: weighted_clique_num, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(vertex.weights = vertex.weights),
-      recover_new = c("vertex.weights"),
-      recover_old = c("vertex.weights"),
-      match_names = c("vertex.weights"),
-      match_to = c("vertex.weights"),
-      defaults = list(vertex.weights = NULL),
-      head_args = c("graph"),
-      fn_name = "weighted_clique_num"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(vertex.weights = vertex.weights),
+        recover_new = c("vertex.weights"),
+        recover_old = c("vertex.weights"),
+        match_names = c("vertex.weights"),
+        match_to = c("vertex.weights"),
+        defaults = list(vertex.weights = NULL),
+        head_args = c("graph"),
+        fn_name = "weighted_clique_num"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -760,23 +772,26 @@ clique_size_counts <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: clique_size_counts, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(min = min, max = max, maximal = maximal),
-      recover_new = c("min", "max", "maximal"),
-      recover_old = c("min", "max", "maximal"),
-      match_names = c("min", "max", "maximal"),
-      match_to = c("min", "max", "maximal"),
-      defaults = list(min = 0, max = 0, maximal = FALSE),
-      head_args = c("graph"),
-      fn_name = "clique_size_counts"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(min = min, max = max, maximal = maximal),
+        recover_new = c("min", "max", "maximal"),
+        recover_old = c("min", "max", "maximal"),
+        match_names = c("min", "max", "maximal"),
+        match_to = c("min", "max", "maximal"),
+        defaults = list(min = 0, max = 0, maximal = FALSE),
+        head_args = c("graph"),
+        fn_name = "clique_size_counts"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -843,23 +858,26 @@ is_clique <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_clique, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = FALSE),
-      head_args = c("graph", "candidate"),
-      fn_name = "is_clique"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed),
+        recover_new = c("directed"),
+        recover_old = c("directed"),
+        match_names = c("directed"),
+        match_to = c("directed"),
+        defaults = list(directed = FALSE),
+        head_args = c("graph", "candidate"),
+        fn_name = "is_clique"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

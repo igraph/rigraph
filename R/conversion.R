@@ -452,35 +452,38 @@ as_adjacency_matrix <- function(
 
   # BEGIN GENERATED ARG_HANDLE: as_adjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        edges = edges,
-        attr = attr
-      ),
-      recover_new = c("weights", "edges", "names", "sparse"),
-      recover_old = c("attr", "edges", "names", "sparse"),
-      match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
-      match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = NULL,
-        edges = deprecated(),
-        attr = deprecated()
-      ),
-      head_args = c("graph", "type"),
-      fn_name = "as_adjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          names = names,
+          sparse = sparse,
+          edges = edges,
+          attr = attr
+        ),
+        recover_new = c("weights", "edges", "names", "sparse"),
+        recover_old = c("attr", "edges", "names", "sparse"),
+        match_names = c("attr", "weights", "names", "sparse", "edges", "attr"),
+        match_to = c("weights", "weights", "names", "sparse", "edges", "attr"),
+        defaults = list(
+          weights = NULL,
+          names = TRUE,
+          sparse = NULL,
+          edges = deprecated(),
+          attr = deprecated()
+        ),
+        head_args = c("graph", "type"),
+        fn_name = "as_adjacency_matrix"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -574,23 +577,26 @@ as_edgelist <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_edgelist, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(names = names),
-      recover_new = c("names"),
-      recover_old = c("names"),
-      match_names = c("names"),
-      match_to = c("names"),
-      defaults = list(names = TRUE),
-      head_args = c("graph"),
-      fn_name = "as_edgelist"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(names = names),
+        recover_new = c("names"),
+        recover_old = c("names"),
+        match_names = c("names"),
+        match_to = c("names"),
+        defaults = list(names = TRUE),
+        head_args = c("graph"),
+        fn_name = "as_edgelist"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -713,23 +719,26 @@ as_directed <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_directed, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode),
-      recover_new = c("mode"),
-      recover_old = c("mode"),
-      match_names = c("mode"),
-      match_to = c("mode"),
-      defaults = list(mode = c("mutual", "arbitrary", "random", "acyclic")),
-      head_args = c("graph"),
-      fn_name = "as_directed"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode),
+        recover_new = c("mode"),
+        recover_old = c("mode"),
+        match_names = c("mode"),
+        match_to = c("mode"),
+        defaults = list(mode = c("mutual", "arbitrary", "random", "acyclic")),
+        head_args = c("graph"),
+        fn_name = "as_directed"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -820,27 +829,30 @@ as_adj_list <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_adj_list, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, multiple = multiple),
-      recover_new = c("mode", "loops", "multiple"),
-      recover_old = c("mode", "loops", "multiple"),
-      match_names = c("mode", "loops", "multiple"),
-      match_to = c("mode", "loops", "multiple"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = c("twice", "once", "ignore"),
-        multiple = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "as_adj_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode, loops = loops, multiple = multiple),
+        recover_new = c("mode", "loops", "multiple"),
+        recover_old = c("mode", "loops", "multiple"),
+        match_names = c("mode", "loops", "multiple"),
+        match_to = c("mode", "loops", "multiple"),
+        defaults = list(
+          mode = c("all", "out", "in", "total"),
+          loops = c("twice", "once", "ignore"),
+          multiple = TRUE
+        ),
+        head_args = c("graph"),
+        fn_name = "as_adj_list"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -879,26 +891,29 @@ as_adj_edge_list <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_adj_edge_list, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops),
-      recover_new = c("mode", "loops"),
-      recover_old = c("mode", "loops"),
-      match_names = c("mode", "loops"),
-      match_to = c("mode", "loops"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = c("twice", "once", "ignore")
-      ),
-      head_args = c("graph"),
-      fn_name = "as_adj_edge_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode, loops = loops),
+        recover_new = c("mode", "loops"),
+        recover_old = c("mode", "loops"),
+        match_names = c("mode", "loops"),
+        match_to = c("mode", "loops"),
+        defaults = list(
+          mode = c("all", "out", "in", "total"),
+          loops = c("twice", "once", "ignore")
+        ),
+        head_args = c("graph"),
+        fn_name = "as_adj_edge_list"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -977,23 +992,26 @@ graph_from_graphnel <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_graphnel, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(name = name, weight = weight, unlist.attrs = unlist.attrs),
-      recover_new = c("name", "weight", "unlist.attrs"),
-      recover_old = c("name", "weight", "unlist.attrs"),
-      match_names = c("name", "weight", "unlist.attrs"),
-      match_to = c("name", "weight", "unlist.attrs"),
-      defaults = list(name = TRUE, weight = TRUE, unlist.attrs = TRUE),
-      head_args = c("graphNEL"),
-      fn_name = "graph_from_graphnel"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(name = name, weight = weight, unlist.attrs = unlist.attrs),
+        recover_new = c("name", "weight", "unlist.attrs"),
+        recover_old = c("name", "weight", "unlist.attrs"),
+        match_names = c("name", "weight", "unlist.attrs"),
+        match_to = c("name", "weight", "unlist.attrs"),
+        defaults = list(name = TRUE, weight = TRUE, unlist.attrs = TRUE),
+        head_args = c("graphNEL"),
+        fn_name = "graph_from_graphnel"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1326,33 +1344,36 @@ as_biadjacency_matrix <- function(
 
   # BEGIN GENERATED ARG_HANDLE: as_biadjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        names = names,
-        sparse = sparse,
-        attr = attr
-      ),
-      recover_new = c("weights", "names", "sparse"),
-      recover_old = c("attr", "names", "sparse"),
-      match_names = c("attr", "weights", "names", "sparse", "attr"),
-      match_to = c("weights", "weights", "names", "sparse", "attr"),
-      defaults = list(
-        weights = NULL,
-        names = TRUE,
-        sparse = FALSE,
-        attr = deprecated()
-      ),
-      head_args = c("graph", "types"),
-      fn_name = "as_biadjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          names = names,
+          sparse = sparse,
+          attr = attr
+        ),
+        recover_new = c("weights", "names", "sparse"),
+        recover_old = c("attr", "names", "sparse"),
+        match_names = c("attr", "weights", "names", "sparse", "attr"),
+        match_to = c("weights", "weights", "names", "sparse", "attr"),
+        defaults = list(
+          weights = NULL,
+          names = TRUE,
+          sparse = FALSE,
+          attr = deprecated()
+        ),
+        head_args = c("graph", "types"),
+        fn_name = "as_biadjacency_matrix"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1507,23 +1528,26 @@ graph_from_adj_list <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_adj_list, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, duplicate = duplicate),
-      recover_new = c("mode", "duplicate"),
-      recover_old = c("mode", "duplicate"),
-      match_names = c("mode", "duplicate"),
-      match_to = c("mode", "duplicate"),
-      defaults = list(mode = c("out", "in", "all", "total"), duplicate = TRUE),
-      head_args = c("adjlist"),
-      fn_name = "graph_from_adj_list"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode, duplicate = duplicate),
+        recover_new = c("mode", "duplicate"),
+        recover_old = c("mode", "duplicate"),
+        match_names = c("mode", "duplicate"),
+        match_to = c("mode", "duplicate"),
+        defaults = list(mode = c("out", "in", "all", "total"), duplicate = TRUE),
+        head_args = c("adjlist"),
+        fn_name = "graph_from_adj_list"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1852,23 +1876,26 @@ graph_from_data_frame <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_data_frame, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(vertices = vertices),
-      recover_new = c("vertices"),
-      recover_old = c("vertices"),
-      match_names = c("vertices"),
-      match_to = c("vertices"),
-      defaults = list(vertices = NULL),
-      head_args = c("d", "directed"),
-      fn_name = "graph_from_data_frame"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(vertices = vertices),
+        recover_new = c("vertices"),
+        recover_old = c("vertices"),
+        match_names = c("vertices"),
+        match_to = c("vertices"),
+        defaults = list(vertices = NULL),
+        head_args = c("d", "directed"),
+        fn_name = "graph_from_data_frame"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1982,23 +2009,26 @@ graph_from_edgelist <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_edgelist, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = TRUE),
-      head_args = c("el"),
-      fn_name = "graph_from_edgelist"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(directed = directed),
+        recover_new = c("directed"),
+        recover_old = c("directed"),
+        match_names = c("directed"),
+        match_to = c("directed"),
+        defaults = list(directed = TRUE),
+        head_args = c("el"),
+        fn_name = "graph_from_edgelist"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

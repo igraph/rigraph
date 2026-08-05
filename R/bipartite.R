@@ -171,33 +171,36 @@ bipartite_projection <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: bipartite_projection, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        multiplicity = multiplicity,
-        probe1 = probe1,
-        which = which,
-        remove.type = remove.type
-      ),
-      recover_new = c("multiplicity", "probe1", "which", "remove.type"),
-      recover_old = c("multiplicity", "probe1", "which", "remove.type"),
-      match_names = c("multiplicity", "probe1", "which", "remove.type"),
-      match_to = c("multiplicity", "probe1", "which", "remove.type"),
-      defaults = list(
-        multiplicity = TRUE,
-        probe1 = NULL,
-        which = c("both", "true", "false"),
-        remove.type = TRUE
-      ),
-      head_args = c("graph", "types"),
-      fn_name = "bipartite_projection"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          multiplicity = multiplicity,
+          probe1 = probe1,
+          which = which,
+          remove.type = remove.type
+        ),
+        recover_new = c("multiplicity", "probe1", "which", "remove.type"),
+        recover_old = c("multiplicity", "probe1", "which", "remove.type"),
+        match_names = c("multiplicity", "probe1", "which", "remove.type"),
+        match_to = c("multiplicity", "probe1", "which", "remove.type"),
+        defaults = list(
+          multiplicity = TRUE,
+          probe1 = NULL,
+          which = c("both", "true", "false"),
+          remove.type = TRUE
+        ),
+        head_args = c("graph", "types"),
+        fn_name = "bipartite_projection"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
