@@ -86,12 +86,12 @@ subcomponent(g, 1, "in")
 #> deprecated in igraph 3.0.0.
 #> ℹ Detected call: subcomponent(graph, v, mode)
 #> ℹ Use instead: subcomponent(graph, v, mode = )
-#> ── <vertex sequence> 1/100 · from e313a1c ──────────────────────────────────────
+#> ── <vertex sequence> 1/100 · from 3aba59d ──────────────────────────────────────
 #> [1] 1
 subcomponent(g, 1, "out")
-#> ── <vertex sequence> 1/100 · from e313a1c ──────────────────────────────────────
+#> ── <vertex sequence> 1/100 · from 3aba59d ──────────────────────────────────────
 #> [1] 1
 subcomponent(g, 1, "all")
-#> ── <vertex sequence> 1/100 · from e313a1c ──────────────────────────────────────
+#> ── <vertex sequence> 1/100 · from 3aba59d ──────────────────────────────────────
 #> [1] 1
 ```

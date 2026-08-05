@@ -75,7 +75,7 @@ g <- g + edge(1, 5, color = "green") +
   edge("8|9")
 
 E(g)[[]]
-#> ── <edge sequence> 11/11 · from 408d67f ────────────────────────────────────────
+#> ── <edge sequence> 11/11 · from ba29da0 ────────────────────────────────────────
 #>    tail head tid hid color
 #> 1     1    2   1   2   red
 #> 2     2    3   2   3   red

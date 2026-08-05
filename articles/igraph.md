@@ -96,7 +96,7 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── fd3c1ad ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── b34a7a0 ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -123,7 +123,7 @@ edges:
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── fd3c1ad ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── b34a7a0 ──
     ## ℹ undirected · named
     ## ℹ 10 vertices · 2 edges
     ## 
@@ -252,7 +252,7 @@ g <- g %>%
 g
 ```
 
-    ## ── <igraph> Zachary ───────────────────────────────────────────────── e40144d ──
+    ## ── <igraph> Zachary ───────────────────────────────────────────────── 9fc4d4e ──
     ## ℹ undirected
     ## ℹ 40 vertices · 86 edges
     ## 
@@ -393,7 +393,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(graph1)
 ```
 
-    ## ── <igraph> Tree ──────────────────────────────────────────────────── 044b102 ──
+    ## ── <igraph> Tree ──────────────────────────────────────────────────── b88e6d4 ──
     ## ℹ undirected
     ## ℹ 127 vertices · 126 edges
     ## 
@@ -427,7 +427,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## ── <igraph> Geometric random graph ────────────────────────────────── af585d1 ──
+    ## ── <igraph> Geometric random graph ────────────────────────────────── 34ddab9 ──
     ## ℹ undirected
     ## ℹ 100 vertices · 499 edges
     ## 
@@ -504,7 +504,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## ── <igraph> ───────────────────────────────────────────────────────── 7639cf4 ──
+    ## ── <igraph> ───────────────────────────────────────────────────────── 6eff15a ──
     ## ℹ undirected · named
     ## ℹ 7 vertices · 9 edges
     ## 
@@ -585,7 +585,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## ── <vertex sequence> 7/7 · named · from 7639cf4 ────────────────────────────────
+    ## ── <vertex sequence> 7/7 · named · from 6eff15a ────────────────────────────────
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 To delete attributes:
@@ -760,7 +760,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## ── <vertex sequence> 3/10 · from 7a5f64a ───────────────────────────────────────
+    ## ── <vertex sequence> 3/10 · from 1f5fc6d ───────────────────────────────────────
     ## [1] 2 3 7
 
 ``` r
@@ -769,7 +769,7 @@ seq <- seq[1, 3] # filtering an existing vertex set
 seq
 ```
 
-    ## ── <vertex sequence> 2/10 · from 7a5f64a ───────────────────────────────────────
+    ## ── <vertex sequence> 2/10 · from 1f5fc6d ───────────────────────────────────────
     ## [1] 2 7
 
 Selecting a vertex that does not exist results in an error:
@@ -853,7 +853,7 @@ Carmina (who has vertex index 3):
 E(g)[.from(3)]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from 7639cf4 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from 6eff15a ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -864,7 +864,7 @@ Of course it also works with vertex names:
 E(g)[.from("Carmina")]
 ```
 
-    ## ── <edge sequence> 4/9 · vertex names · from 7639cf4 ───────────────────────────
+    ## ── <edge sequence> 4/9 · vertex names · from 6eff15a ───────────────────────────
     ## [1] Alejandra ─ Carmina  Carmina ─ Moshe      Carmina ─ Nang      
     ## [4] Carmina ─ Samira
 
@@ -887,7 +887,7 @@ index 3), Nang (vertex index 5) and Samira (vertex index 6):
 E(g)[3:5 %--% 5:6]
 ```
 
-    ## ── <edge sequence> 3/9 · vertex names · from 7639cf4 ───────────────────────────
+    ## ── <edge sequence> 3/9 · vertex names · from 6eff15a ───────────────────────────
     ## [1] Carmina ─ Nang    Carmina ─ Samira  Nang ─ Samira
 
 To make the `%--%` operator work with names, you can build string
@@ -922,7 +922,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## ── <edge sequence> 5/9 · vertex names · from 7639cf4 ───────────────────────────
+    ## ── <edge sequence> 5/9 · vertex names · from 6eff15a ───────────────────────────
     ## [1] Alejandra ─ Bruno  Alejandra ─ Moshe  Carmina ─ Moshe    Carmina ─ Nang    
     ## [5] Nang ─ Samira
 
