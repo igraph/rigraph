@@ -1,5 +1,46 @@
 # Changelog
 
+## igraph 2.3.3.9026
+
+### Features
+
+#### migrations
+
+- Require constant defaults, resolve complex ones in the body
+  ([\#2784](https://github.com/igraph/rigraph/issues/2784)).
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#2807](https://github.com/igraph/rigraph/issues/2807)).
+
+- Auto-update from GitHub Actions
+  ([\#2806](https://github.com/igraph/rigraph/issues/2806)).
+
+### Continuous integration
+
+- Remove unused pr-commands workflow.
+
+### Documentation
+
+- Zoning rules for arguments around the ellipsis
+  ([\#2757](https://github.com/igraph/rigraph/issues/2757)).
+
+- Revdep results before PR.
+
+- Revdep problems for PR.
+
+### Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block
+  ([\#103](https://github.com/igraph/rigraph/issues/103)).
+
+- Ci: Pass workflow context through the environment, not into script
+  text ([\#102](https://github.com/igraph/rigraph/issues/102)).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release
+  ([\#99](https://github.com/igraph/rigraph/issues/99)).
+
 ## igraph 2.3.3.9025
 
 ### Continuous integration
