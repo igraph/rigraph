@@ -234,7 +234,7 @@ jobs:
           echo -n "${{ steps.commit.outputs.sha }}" > rcc-smoke-sha.txt
         shell: bash
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt
