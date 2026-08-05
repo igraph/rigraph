@@ -93,4 +93,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace",
     "igraph.r2cdocs::docs_rd", "devtag::dev_roclet"))
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)
-Config/roxygen2/version: 8.0.0.9000
+Config/roxygen2/version: 8.1.0.9000
