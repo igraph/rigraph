@@ -33,7 +33,7 @@ preflight (1 job; a dry run stops before it)
          warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
-  ├─ unpack the prebuilt packages the plan found
+  ├─ unpack this run's preflight library, then the plan's donors
   ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
   ├─ phase old: reuse baselines, check the rest against the CRAN version
   ├─ install the prebuilt dev binary
@@ -170,12 +170,14 @@ the affected packages are simply checked fresh.
 
 ## Prebuilt packages, and which runs they come from
 
-Installing the dependency universe is the other half of the bill.
-Every shard installs its own union,
-and the preflight installs all of it once before them,
-so a package that CRAN has not touched since the last run
-is built again in every one of those jobs, every run,
-for a result that is byte-for-byte what the last run already had.
+Installing the dependency universe is the other half of the bill,
+and it is paid twice over.
+The preflight installs all of it,
+then every shard installs its own union again —
+so on a runner with no binaries to install from,
+one package is compiled once in the preflight
+and once more in each of the twenty shards,
+every run, for a result identical each time.
 
 So the preflight publishes what it installed.
 Its library is packed into `revdep2-lib`
@@ -188,7 +190,16 @@ The index is a separate artifact on purpose:
 a later plan reads it to decide what a run is good for
 without downloading the library it describes.
 
-The plan then walks the workflow's completed runs, youngest first,
+That artifact is reused twice, and the first one needs no history at all:
+**every shard unpacks its own run's preflight library** —
+`preflight` is a `needs` of `test`, so it is simply downloaded —
+and only then falls back to earlier runs
+for whatever the preflight could not supply.
+This is the half that pays on the very first run:
+the compile happens once in the preflight
+instead of once more in each shard.
+
+For the rest, the plan walks the workflow's completed runs, youngest first,
 and takes libraries until it has covered
 every package this run will install,
 or has run out of runs:
@@ -204,10 +215,12 @@ or has run out of runs:
   reuse off) — every extra donor is another full library download.
 
 What it settles lands in `plan.json` as `prebuilt.runs`,
-and the preflight and every shard unpack from exactly that list,
-taking only the packages they need
-and never overwriting what is already in their library
-(pak and everything the job itself installed stays untouched).
+and the preflight and every shard unpack from exactly that list —
+the shards after their own run's library, for the gaps it leaves.
+Every unpack takes only the packages that job needs,
+and never overwrites what is already in the library
+or loaded in the session
+(pak and everything the job installed for itself stays untouched).
 
 **pak still runs over the whole set afterwards.**
 Unpacking is not installing:
@@ -277,7 +290,8 @@ so its report is complete again, not a fragment.
 | A shard job dies hard | its packages have no manifest entries; the collector reports what exists; `retry-run` re-plans the rest |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
 | The baseline artifact is gone | planner reuses nothing, everything checked fresh |
-| No earlier run has a usable library | nothing is unpacked, pak installs everything from scratch |
+| No earlier run has a usable library | shards still unpack this run's preflight library; only the preflight itself installs from scratch |
+| The preflight could not pack a library | the download step is skipped, shards fall back to the plan's donors and pak |
 | A donor's library artifact expires between plan and shard | that shard installs those packages itself; the run is unaffected |
 | A restored binary will not load | the preflight rebuilds it from source and re-tests; only a second failure is a `depfail` |
 | CRAN bumps a dependency mid-run | shards install what resolves at their start; the recorded fingerprint is the plan's — next run re-fingerprints |

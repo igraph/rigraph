@@ -320,6 +320,76 @@ pack_library <- function(lib, dest, index_dest = NULL) {
   names(versions)
 }
 
+# The packages of `lib` a caller may still want: everything not already
+# installed there, and nothing this session has loaded -- a package must never
+# be overwritten underneath the driver that is using it.
+missing_from <- function(lib, wanted) {
+  setdiff(
+    unique(unlist(wanted, use.names = FALSE)),
+    c(list.dirs(lib, full.names = FALSE, recursive = FALSE), loadedNamespaces())
+  )
+}
+
+# Extract `take` out of a packed library into `lib`, and report what landed.
+unpack_library <- function(tarball, lib, take) {
+  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
+  members <- tempfile("members-")
+  writeLines(take, members)
+  on.exit(unlink(members))
+  # A member the index promised but the tar does not hold makes tar exit
+  # non-zero after extracting the rest; what actually landed is the answer, so
+  # the status is not consulted.
+  system2(
+    "tar",
+    # Quoted: system2() quotes the command, but not the arguments.
+    shQuote(c("-xf", tarball, "-C", lib, "-T", members)),
+    stdout = NULL,
+    stderr = NULL
+  )
+  got <- intersect(take, list.dirs(lib, full.names = FALSE, recursive = FALSE))
+  # A half-extracted package directory is worse than none: drop anything
+  # without a DESCRIPTION and let pak install it properly.
+  broken <- got[!file.exists(file.path(lib, got, "DESCRIPTION"))]
+  if (length(broken) > 0) {
+    unlink(file.path(lib, broken), recursive = TRUE)
+    inform("Prebuilt: discarded ", length(broken), " incomplete package(s)")
+  }
+  setdiff(got, broken)
+}
+
+# Unpack a library artifact this job already has on disk -- in practice this
+# run's own preflight library, handed to the shards through the workflow.
+#
+# This is the reuse that pays on the very first run: without it every shard
+# rebuilds from source what the preflight of the same run compiled minutes
+# earlier, once per shard.
+restore_local_library <- function(dir, lib, wanted) {
+  tarball <- file.path(dir, "library.tar")
+  if (!nzchar(dir) || !file.exists(tarball)) {
+    return(character())
+  }
+  take <- missing_from(lib, wanted)
+  index <- file.path(dir, "lib.json")
+  if (file.exists(index)) {
+    have <- vapply(
+      read_json(index)$packages,
+      function(e) e$package,
+      character(1)
+    )
+    take <- intersect(take, have)
+  }
+  if (length(take) == 0) {
+    return(character())
+  }
+  got <- unpack_library(tarball, lib, take)
+  inform(
+    "Prebuilt: restored ",
+    length(got),
+    " package(s) from this run's preflight"
+  )
+  got
+}
+
 # Unpack what earlier runs already built into `lib`, taking only the packages
 # in `wanted` that are not there yet.
 #
@@ -330,23 +400,16 @@ pack_library <- function(lib, dest, index_dest = NULL) {
 # skip resolving it.
 restore_prebuilt <- function(plan, lib, wanted) {
   donors <- plan$prebuilt$runs %||% list()
-  wanted <- unique(unlist(wanted, use.names = FALSE))
-  if (length(donors) == 0 || length(wanted) == 0) {
+  if (length(donors) == 0 || length(unlist(wanted)) == 0) {
     return(character())
   }
   dir.create(lib, recursive = TRUE, showWarnings = FALSE)
-  present <- function() {
-    list.dirs(lib, full.names = FALSE, recursive = FALSE)
-  }
   restored <- character()
   for (donor in donors) {
     run_id <- as.character(donor$run_id)
-    # Whatever is in the library already stays, and so does anything this
-    # session has loaded: a package must never be overwritten underneath the
-    # driver that is using it. A younger donor has priority over an older one.
-    take <- setdiff(
-      intersect(unlist(donor$packages, use.names = FALSE), wanted),
-      c(present(), loadedNamespaces())
+    take <- intersect(
+      unlist(donor$packages, use.names = FALSE),
+      missing_from(lib, wanted)
     )
     if (length(take) == 0) {
       next
@@ -359,31 +422,12 @@ restore_prebuilt <- function(plan, lib, wanted) {
       unlink(dir, recursive = TRUE)
       next
     }
-    members <- tempfile("members-")
-    writeLines(take, members)
-    # A member the index promised but the tar does not hold makes tar exit
-    # non-zero after extracting the rest; what actually landed is the answer,
-    # so the status is not consulted.
-    system2(
-      "tar",
-      # Quoted: system2() quotes the command, but not the arguments.
-      shQuote(c("-xf", tarball, "-C", lib, "-T", members)),
-      stdout = NULL,
-      stderr = NULL
-    )
-    unlink(c(dir, members), recursive = TRUE)
-    got <- intersect(take, present())
+    got <- unpack_library(tarball, lib, take)
+    unlink(dir, recursive = TRUE)
     restored <- c(restored, got)
     inform("Prebuilt: restored ", length(got), " package(s) from run ", run_id)
   }
-  # A half-extracted package directory is worse than none: drop anything
-  # without a DESCRIPTION and let pak install it properly.
-  broken <- restored[!file.exists(file.path(lib, restored, "DESCRIPTION"))]
-  if (length(broken) > 0) {
-    unlink(file.path(lib, broken), recursive = TRUE)
-    inform("Prebuilt: discarded ", length(broken), " incomplete package(s)")
-  }
-  setdiff(restored, broken)
+  restored
 }
 
 # ------------------------------------------------------------ CRAN metadata --

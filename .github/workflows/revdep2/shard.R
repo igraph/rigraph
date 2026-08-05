@@ -17,14 +17,16 @@
 # an old-version result whose new-version counterpart was cut off -- are still
 # uploaded, so nothing decided is lost to the deadline.
 #
-# Before installing anything, the shard unpacks the prebuilt dependencies the
-# plan found on earlier runs (see util.R); pak then only has to build what
-# CRAN has changed since.
+# Before installing anything, the shard unpacks prebuilt dependencies (see
+# util.R): this run's preflight library, and then the earlier runs the plan
+# picked. pak only has to build what neither of them had.
 #
 # Environment variables:
 #   SHARD                  - shard index from plan.json (required)
 #   PLAN                   - plan file (default: plan.json)
 #   PKG_DIR                - the revdep2-pkg artifact: meta.json, bin/ (required)
+#   LIB_DIR                - the revdep2-lib artifact of *this* run: the
+#                            preflight's library; may be missing or empty
 #   BASELINE_DIR           - the revdep2-baseline artifact of the donor run;
 #                            may be missing or empty, then everything is fresh
 #   OUT_DIR                - results directory, uploaded as the shard artifact
@@ -123,12 +125,23 @@ counts <- function(x) {
 
 install <- unlist(shard$install, use.names = FALSE)
 
-# What earlier runs already built, unpacked into the library pak installs
-# into. pak still resolves the whole set afterwards -- CRAN moves between
-# runs, and a package whose version changed has to be built anyway -- but
-# everything unchanged is already there, and is skipped.
-restored <- restore_prebuilt(plan, .libPaths()[[1]], install)
-inform(length(restored), " dependency binaries restored from earlier runs")
+# What is already built, unpacked into the library pak installs into: this
+# run's own preflight library first -- it is the freshest there is, and
+# without it every shard would rebuild what the preflight compiled minutes
+# ago -- then the earlier runs the plan picked, for whatever the preflight
+# could not supply. pak still resolves the whole set afterwards; the point is
+# to skip *building* what has not changed, not to skip resolving it.
+lib <- .libPaths()[[1]]
+restored <- c(
+  restore_local_library(env_chr("LIB_DIR"), lib, install),
+  restore_prebuilt(plan, lib, install)
+)
+inform(
+  length(restored),
+  " dependency binaries restored, ",
+  length(install) - length(restored),
+  " left to pak"
+)
 
 # With a restored library, `upgrade = FALSE` would freeze whatever version the
 # donor happened to hold; the plan's dependency fingerprints are computed from

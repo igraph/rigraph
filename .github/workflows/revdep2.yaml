@@ -13,11 +13,12 @@
 # planning. The preflight job installs and loads the whole dependency
 # universe -- every package any revdep needs -- so broken dependencies surface
 # before the first check minute is spent, and the pak cache the shards restore
-# is warm. Its library is published too: the plan walks earlier runs
-# youngest first until their libraries cover everything this run installs, and
-# the preflight and the shards unpack those instead of building the same
-# packages again. pak still runs over the whole set afterwards, because CRAN
-# moves between runs and what changed has to be built after all.
+# is warm. Its library is published too, and unpacked rather than rebuilt
+# twice over: every shard takes this run's preflight library, and the plan
+# walks earlier runs youngest first for whatever that leaves -- until their
+# libraries cover everything this run installs, or the history runs out. pak
+# still runs over the whole set afterwards, because CRAN moves between runs
+# and what changed has to be built after all.
 #
 # Each test shard installs its dependency union, checks every one of its
 # packages against the CRAN version (or reuses a baseline), swaps in the dev
@@ -396,6 +397,16 @@ jobs:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
 
+      # This run's own preflight library: the shard unpacks it instead of
+      # building the same packages the preflight built minutes ago. It is a
+      # `needs`, so it is always there -- unless the preflight could not pack
+      # one, which is a slower shard, not a broken one.
+      - uses: actions/download-artifact@v6
+        continue-on-error: true
+        with:
+          name: revdep2-lib
+          path: ${{ runner.temp }}/lib
+
       # The baseline lives on an earlier run; absence is not an error, the
       # shard just checks the CRAN version fresh.
       - uses: actions/download-artifact@v6
@@ -414,6 +425,7 @@ jobs:
           SHARD: ${{ matrix.shard }}
           PLAN: ${{ runner.temp }}/plan/plan.json
           PKG_DIR: ${{ runner.temp }}/pkg
+          LIB_DIR: ${{ runner.temp }}/lib
           BASELINE_DIR: ${{ runner.temp }}/baseline
           OUT_DIR: ${{ runner.temp }}/results
           TIMEOUT_FACTOR: ${{ env.REVDEP2_TIMEOUT_FACTOR }}
