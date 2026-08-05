@@ -18,16 +18,22 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
   ├─ enumerate revdeps to `depth`,       └─ R CMD build
   │    or take the retry/explicit list        + R CMD INSTALL --build
   ├─ weigh each by CRAN's check time             → revdep2-pkg artifact
-  ├─ resolve the baseline donor run,
-  │    decide per package what is reusable
+  ├─ walk earlier runs youngest first:
+  │    the baseline donor, and the
+  │    prebuilt libraries to unpack
+  ├─ decide per package what is reusable
   └─ partition into shards
        → plan.json (artifact) + matrix (job output)
 
 preflight (1 job; a dry run stops before it)
-  └─ install + load *every* dependency any revdep needs
-       → depfail.json, warm pak cache (saved under the plan hash)
+  ├─ unpack the prebuilt packages the plan found
+  ├─ install + load *every* dependency any revdep needs
+  └─ pack the library for the next run
+       → depfail.json, revdep2-lib(-index),
+         warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
+  ├─ unpack the prebuilt packages the plan found
   ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
   ├─ phase old: reuse baselines, check the rest against the CRAN version
   ├─ install the prebuilt dev binary
@@ -157,9 +163,69 @@ a result ages from the day it actually ran.
 
 Baselines are looked up newest-run-first across the workflow's history
 (any branch — the dev code plays no part in an old check),
+in the same single walk that picks the prebuilt libraries below,
 and a retried run's own report doubles as its donor.
 A missing, expired, or partially unusable baseline is never an error;
 the affected packages are simply checked fresh.
+
+## Prebuilt packages, and which runs they come from
+
+Installing the dependency universe is the other half of the bill.
+Every shard installs its own union,
+and the preflight installs all of it once before them,
+so a package that CRAN has not touched since the last run
+is built again in every one of those jobs, every run,
+for a result that is byte-for-byte what the last run already had.
+
+So the preflight publishes what it installed.
+Its library is packed into `revdep2-lib`
+(one uncompressed `library.tar` — `upload-artifact` zips what it uploads,
+and deflating gigabytes twice buys nothing),
+next to `revdep2-lib-index`,
+a small `lib.json` naming the R series, the platform,
+and every package version in it.
+The index is a separate artifact on purpose:
+a later plan reads it to decide what a run is good for
+without downloading the library it describes.
+
+The plan then walks the workflow's completed runs, youngest first,
+and takes libraries until it has covered
+every package this run will install,
+or has run out of runs:
+
+* a run only donates while its library is younger than
+  `REVDEP2_PREBUILT_MAX_AGE_DAYS` (default 14)
+  and its index reports the same R series and platform —
+  binaries are only portable that far;
+* each donor is credited only with the packages
+  no younger donor already had,
+  so a run that adds nothing is never downloaded;
+* at most `REVDEP2_PREBUILT_MAX_RUNS` runs donate (default 5, `0` turns
+  reuse off) — every extra donor is another full library download.
+
+What it settles lands in `plan.json` as `prebuilt.runs`,
+and the preflight and every shard unpack from exactly that list,
+taking only the packages they need
+and never overwriting what is already in their library
+(pak and everything the job itself installed stays untouched).
+
+**pak still runs over the whole set afterwards.**
+Unpacking is not installing:
+CRAN moves between runs, and a package whose version changed
+has to be built after all.
+The install runs with `upgrade = TRUE` whenever anything was restored,
+because the plan's dependency fingerprints — the ones that decide
+baseline reuse — are computed from CRAN *now*,
+and `upgrade = FALSE` would quietly freeze the donor's versions instead.
+Reuse therefore skips *building* what has not changed;
+it never skips resolving it.
+
+The one failure mode reuse introduces is a stale binary:
+a runner image moves under a package that was compiled against the old one.
+The preflight load-tests everything it installs anyway,
+so it catches exactly that — a restored package that will not load
+is thrown away, rebuilt from source, and load-tested again
+before it counts as a dependency failure.
 
 ## Results, artifacts, tooling
 
@@ -170,6 +236,8 @@ Every artifact this workflow writes:
 | `revdep2-plan` | `plan.json` | 30 days |
 | `revdep2-pkg` | source tarball, platform binary, `meta.json` | 30 days |
 | `revdep2-preflight` | `depfail.json` | 30 days |
+| `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json` | 14 days |
+| `revdep2-lib-index` | `lib.json`: R series, platform, package versions | 30 days |
 | `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
 | `revdep2-report` | `README.md`, `problems.md`, `failures.md`, `cran.md`, `manifest.json`, all `pkgs/` | 90 days |
 | `revdep2-baseline` | `baseline.json`, `old-rds/<p>.rds` | 90 days |
@@ -209,6 +277,9 @@ so its report is complete again, not a fragment.
 | A shard job dies hard | its packages have no manifest entries; the collector reports what exists; `retry-run` re-plans the rest |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
 | The baseline artifact is gone | planner reuses nothing, everything checked fresh |
+| No earlier run has a usable library | nothing is unpacked, pak installs everything from scratch |
+| A donor's library artifact expires between plan and shard | that shard installs those packages itself; the run is unaffected |
+| A restored binary will not load | the preflight rebuilds it from source and re-tests; only a second failure is a `depfail` |
 | CRAN bumps a dependency mid-run | shards install what resolves at their start; the recorded fingerprint is the plan's — next run re-fingerprints |
 | The package is not on CRAN | plan emits zero shards, run ends green |
 | `collect` finds new problems | reported in the summary and the report artifact; the run stays green |
@@ -227,6 +298,9 @@ so its report is complete again, not a fragment.
 | Concurrent shards | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
 | Ignore reusable baselines | `refresh-baseline` | — | false |
 | Oldest reusable baseline | `baseline-max-age-days` | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |
+| Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
+| Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
+| Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
 | Per-check timeout factor | — | `REVDEP2_TIMEOUT_FACTOR` | 1.5 × CRAN time |
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 10 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
@@ -275,3 +349,10 @@ that part is new here.
    and whose availability is per-repository;
    an orphan branch (the `rcc` model) would be durable and fetchable
    but grows the repository.
+5. Prebuilt-library reuse trades download for build:
+   every shard fetches each donor library whole,
+   because artifacts cannot be fetched in part.
+   That is a clear win where the runner has no binaries to install from
+   and a marginal one where it does,
+   and the crossover has not been measured —
+   `REVDEP2_PREBUILT_MAX_RUNS=0` turns it off if it ever stops paying.

@@ -17,6 +17,10 @@
 # an old-version result whose new-version counterpart was cut off -- are still
 # uploaded, so nothing decided is lost to the deadline.
 #
+# Before installing anything, the shard unpacks the prebuilt dependencies the
+# plan found on earlier runs (see util.R); pak then only has to build what
+# CRAN has changed since.
+#
 # Environment variables:
 #   SHARD                  - shard index from plan.json (required)
 #   PLAN                   - plan file (default: plan.json)
@@ -107,10 +111,23 @@ counts <- function(x) {
 # ---------------------------------------------------------------- install ----
 
 install <- unlist(shard$install, use.names = FALSE)
+
+# What earlier runs already built, unpacked into the library pak installs
+# into. pak still resolves the whole set afterwards -- CRAN moves between
+# runs, and a package whose version changed has to be built anyway -- but
+# everything unchanged is already there, and is skipped.
+restored <- restore_prebuilt(plan, .libPaths()[[1]], install)
+inform(length(restored), " dependency binaries restored from earlier runs")
+
+# With a restored library, `upgrade = FALSE` would freeze whatever version the
+# donor happened to hold; the plan's dependency fingerprints are computed from
+# CRAN *now*, so the library has to follow CRAN now.
+upgrade <- length(restored) > 0
+
 inform("Installing ", length(install), " dependencies")
 bulk_ok <- tryCatch(
   {
-    pak::pkg_install(install, ask = FALSE)
+    pak::pkg_install(install, ask = FALSE, upgrade = upgrade)
     TRUE
   },
   error = function(e) {
@@ -124,7 +141,7 @@ if (!bulk_ok) {
       next
     }
     tryCatch(
-      pak::pkg_install(p, ask = FALSE),
+      pak::pkg_install(p, ask = FALSE, upgrade = upgrade),
       error = function(e) inform("Could not install ", p, ": ", conditionMessage(e))
     )
   }

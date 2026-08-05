@@ -13,7 +13,11 @@
 # planning. The preflight job installs and loads the whole dependency
 # universe -- every package any revdep needs -- so broken dependencies surface
 # before the first check minute is spent, and the pak cache the shards restore
-# is warm.
+# is warm. Its library is published too: the plan walks earlier runs
+# youngest first until their libraries cover everything this run installs, and
+# the preflight and the shards unpack those instead of building the same
+# packages again. pak still runs over the whole set afterwards, because CRAN
+# moves between runs and what changed has to be built after all.
 #
 # Each test shard installs its dependency union, checks every one of its
 # packages against the CRAN version (or reuses a baseline), swaps in the dev
@@ -35,6 +39,10 @@
 #                     revdep's version, our CRAN version, the R series and the
 #                     resolved dependency versions all still match (and the
 #                     result is younger than baseline-max-age-days)
+#   revdep2-lib       the preflight's installed dependency library, unpacked by
+#                     later runs to skip rebuilding what has not changed
+#   revdep2-lib-index what is in that library, so a plan can decide which runs
+#                     to take it from without downloading it
 #
 # To re-check only what a run could not declare ok, dispatch again with
 # `retry-run: <run-id>`; the new report carries the old run's good results
@@ -119,6 +127,11 @@ env:
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
   REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
+  # Prebuilt dependency libraries of earlier runs: how many runs may donate one
+  # (0 turns reuse off), and how old a library may be before its binaries are
+  # no longer trusted against the current runner image.
+  REVDEP2_PREBUILT_MAX_RUNS: ${{ vars.REVDEP2_PREBUILT_MAX_RUNS || '5' }}
+  REVDEP2_PREBUILT_MAX_AGE_DAYS: ${{ vars.REVDEP2_PREBUILT_MAX_AGE_DAYS || '14' }}
   # Per-check timeout: factor times the package's CRAN check time, but never
   # below the floor -- CRAN's machines are not these runners.
   REVDEP2_TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
@@ -230,6 +243,8 @@ jobs:
 
     permissions:
       contents: read
+      # To download the prebuilt library artifacts of the runs the plan picked.
+      actions: read
 
     steps:
       - uses: actions/checkout@v6
@@ -262,8 +277,11 @@ jobs:
 
       - name: Install and load every dependency
         env:
+          GH_TOKEN: ${{ github.token }}
           PLAN: ${{ runner.temp }}/plan/plan.json
           OUT_DIR: ${{ runner.temp }}/preflight
+          LIB_OUT: ${{ runner.temp }}/lib
+          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
           PKG_SYSREQS: true
         run: |
           Rscript ./.github/workflows/revdep2/preflight.R
@@ -273,6 +291,28 @@ jobs:
         with:
           name: revdep2-preflight
           path: ${{ runner.temp }}/preflight
+          retention-days: 30
+          overwrite: true
+
+      # The library the next runs unpack. It is the big one -- a whole
+      # dependency universe, gigabytes of it -- so it is kept exactly as long
+      # as a plan would still reuse it, while the index that describes it is
+      # cheap and outlives it.
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: revdep2-lib
+          path: ${{ runner.temp }}/lib
+          if-no-files-found: ignore
+          retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
+          overwrite: true
+
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: revdep2-lib-index
+          path: ${{ runner.temp }}/lib-index
+          if-no-files-found: ignore
           retention-days: 30
           overwrite: true
 
@@ -295,7 +335,8 @@ jobs:
 
     permissions:
       contents: read
-      # To download the baseline artifact, which lives on an earlier run.
+      # To download the baseline and prebuilt-library artifacts, which live on
+      # earlier runs.
       actions: read
 
     strategy:
@@ -368,6 +409,8 @@ jobs:
 
       - name: Check the shard
         env:
+          # To fetch the prebuilt libraries of the runs the plan picked.
+          GH_TOKEN: ${{ github.token }}
           SHARD: ${{ matrix.shard }}
           PLAN: ${{ runner.temp }}/plan/plan.json
           PKG_DIR: ${{ runner.temp }}/pkg
