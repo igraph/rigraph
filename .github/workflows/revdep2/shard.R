@@ -35,7 +35,10 @@
 #                            these runners (default: 10)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 shard_index <- as.integer(env_chr("SHARD"))
 stopifnot(!is.na(shard_index))
@@ -59,8 +62,14 @@ work <- file.path(env_chr("RUNNER_TEMP", tempdir()), "revdep2-work")
 dir.create(work, recursive = TRUE, showWarnings = FALSE)
 
 inform(
-  "Shard ", shard_index, ": ", length(members), " package(s), ",
-  "estimated ~", shard$estimate_minutes, " min"
+  "Shard ",
+  shard_index,
+  ": ",
+  length(members),
+  " package(s), ",
+  "estimated ~",
+  shard$estimate_minutes,
+  " min"
 )
 
 # The running state per package; every entry ends up as one manifest line.
@@ -104,7 +113,9 @@ counts <- function(x) {
   }
   sprintf(
     "%dE %dW %dN",
-    length(x$errors), length(x$warnings), length(x$notes)
+    length(x$errors),
+    length(x$warnings),
+    length(x$notes)
   )
 }
 
@@ -142,28 +153,36 @@ if (!bulk_ok) {
     }
     tryCatch(
       pak::pkg_install(p, ask = FALSE, upgrade = upgrade),
-      error = function(e) inform("Could not install ", p, ": ", conditionMessage(e))
+      error = function(e) {
+        inform("Could not install ", p, ": ", conditionMessage(e))
+      }
     )
   }
 }
 
 installed <- rownames(utils::installed.packages())
 our_version <- function() {
-  tryCatch(as.character(utils::packageVersion(package)), error = function(e) NA_character_)
+  tryCatch(as.character(utils::packageVersion(package)), error = function(e) {
+    NA_character_
+  })
 }
 our_cran_version <- our_version()
 if (!identical(our_cran_version, plan$cran_version)) {
   # The library must hold the *CRAN release* for the old phase; the resolver
   # may have kept some other version it found satisfactory.
   inform(
-    "Installed version is ", our_cran_version, ", plan expected ",
-    plan$cran_version, "; reinstalling from the repositories"
+    "Installed version is ",
+    our_cran_version,
+    ", plan expected ",
+    plan$cran_version,
+    "; reinstalling from the repositories"
   )
   utils::install.packages(package)
   our_cran_version <- our_version()
   if (!identical(our_cran_version, plan$cran_version)) {
     inform(
-      "Note: old checks run against ", our_cran_version,
+      "Note: old checks run against ",
+      our_cran_version,
       " (the repositories lag CRAN)"
     )
   }
@@ -174,7 +193,12 @@ if (!identical(our_cran_version, plan$cran_version)) {
 # with _R_CHECK_FORCE_SUGGESTS_=false, the way CRAN treats unavailable ones.
 db <- cran_db()
 strong_missing <- function(name) {
-  strong <- tools::package_dependencies(name, db = db, which = "strong", recursive = TRUE)[[1]]
+  strong <- tools::package_dependencies(
+    name,
+    db = db,
+    which = "strong",
+    recursive = TRUE
+  )[[1]]
   setdiff(intersect(strong, rownames(db)), c(installed, base_packages()))
 }
 runnable <- character()
@@ -184,9 +208,17 @@ for (name in members) {
     update(
       name,
       result = "depfail",
-      message = paste("Dependencies not installed:", paste(missing, collapse = ", "))
+      message = paste(
+        "Dependencies not installed:",
+        paste(missing, collapse = ", ")
+      )
     )
-    inform(name, ": dependencies missing (", paste(missing, collapse = ", "), ")")
+    inform(
+      name,
+      ": dependencies missing (",
+      paste(missing, collapse = ", "),
+      ")"
+    )
   } else {
     runnable <- c(runnable, name)
   }
@@ -212,11 +244,19 @@ for (name in runnable) {
     error = function(e) NULL
   )
   if (is.null(tarball)) {
-    update(name, result = "error", message = "Source tarball could not be downloaded")
+    update(
+      name,
+      result = "error",
+      message = "Source tarball could not be downloaded"
+    )
     inform(name, ": source download failed")
   } else {
     sources[[name]] <- tarball
-    actual <- sub(sprintf("^%s_(.*)[.]tar[.]gz$", name), "\\1", basename(tarball))
+    actual <- sub(
+      sprintf("^%s_(.*)[.]tar[.]gz$", name),
+      "\\1",
+      basename(tarball)
+    )
     update(name, version = actual)
   }
 }
@@ -263,7 +303,8 @@ run_check <- function(name, phase) {
   # A check that hits the timeout is killed, and rcmdcheck surfaces that as an
   # error rather than a result object; tell it apart from a genuine crash by
   # the clock.
-  attr(result, "timed_out") <- inherits(result, "error") && duration >= timeout_sec - 1
+  attr(result, "timed_out") <- inherits(result, "error") &&
+    duration >= timeout_sec - 1
   result
 }
 
@@ -273,10 +314,19 @@ check_failure <- function(name, phase, result) {
       name,
       result = "failed",
       message = sprintf(
-        "%s check timed out after %ds", phase, attr(result, "duration")
+        "%s check timed out after %ds",
+        phase,
+        attr(result, "duration")
       )
     )
-    inform(name, ": ", phase, " check timed out (", attr(result, "duration"), "s)")
+    inform(
+      name,
+      ": ",
+      phase,
+      " check timed out (",
+      attr(result, "duration"),
+      "s)"
+    )
   } else {
     update(name, result = "error", message = conditionMessage(result))
     inform(name, ": ", phase, " check errored: ", conditionMessage(result))
@@ -372,7 +422,12 @@ for (name in runnable) {
     error = function(e) NULL
   )
   if (is.null(cmp)) {
-    update(name, result = "failed", status_new = counts(new), t_new = attr(new, "duration"))
+    update(
+      name,
+      result = "failed",
+      status_new = counts(new),
+      t_new = attr(new, "duration")
+    )
   } else {
     new_issues <- sum(cmp$cmp$change == 1)
     update(
@@ -386,9 +441,16 @@ for (name in runnable) {
   }
   entry <- get(name, envir = state)
   inform(
-    name, ": ", entry$result,
-    " (old ", entry$status_old, ", new ", entry$status_new,
-    ", ", attr(new, "duration"), "s)"
+    name,
+    ": ",
+    entry$result,
+    " (old ",
+    entry$status_old,
+    ", new ",
+    entry$status_new,
+    ", ",
+    attr(new, "duration"),
+    "s)"
   )
 
   # The parsed results carry everything the reports need; raw check output is
@@ -472,6 +534,8 @@ for (entry in entries) {
 }
 
 inform(
-  "Shard ", shard_index, " done: ",
+  "Shard ",
+  shard_index,
+  " done: ",
   paste(names(table(results)), table(results), sep = "=", collapse = ", ")
 )

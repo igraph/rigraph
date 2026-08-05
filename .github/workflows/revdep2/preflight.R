@@ -22,7 +22,10 @@
 #   LIB_INDEX_OUT - where a copy of lib.json alone lands, for the small
 #                   artifact a later plan reads without the tar
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 plan <- read_json(env_chr("PLAN", "plan.json"))
 out_dir <- env_chr("OUT_DIR", "preflight")
@@ -38,7 +41,11 @@ failures <- list()
 # package whose version changed has to be built after all -- but everything
 # unchanged is now already there, and is skipped.
 restored <- restore_prebuilt(plan, lib, install_union)
-inform("Preflight: ", length(restored), " package(s) restored from earlier runs")
+inform(
+  "Preflight: ",
+  length(restored),
+  " package(s) restored from earlier runs"
+)
 
 # With a restored library, `upgrade = FALSE` would freeze whatever version the
 # donor happened to hold; the plan's dependency fingerprints are computed from
@@ -131,12 +138,18 @@ for (chunk in chunks) {
 # mode reuse introduces, and it is cheap to undo.
 stale <- intersect(names(load_failures), restored)
 if (length(stale) > 0) {
-  inform("Preflight: rebuilding ", length(stale), " restored package(s) that would not load")
+  inform(
+    "Preflight: rebuilding ",
+    length(stale),
+    " restored package(s) that would not load"
+  )
   unlink(file.path(lib, stale), recursive = TRUE)
   for (p in stale) {
     tryCatch(
       pak::pkg_install(p, lib = lib, ask = FALSE, upgrade = FALSE),
-      error = function(e) inform("Could not reinstall ", p, ": ", conditionMessage(e))
+      error = function(e) {
+        inform("Could not reinstall ", p, ": ", conditionMessage(e))
+      }
     )
   }
   for (p in stale) {
@@ -167,7 +180,11 @@ lib_out <- env_chr("LIB_OUT")
 index_out <- env_chr("LIB_INDEX_OUT")
 packed <- character()
 if (nzchar(lib_out)) {
-  packed <- pack_library(lib, lib_out, if (nzchar(index_out)) index_out else NULL)
+  packed <- pack_library(
+    lib,
+    lib_out,
+    if (nzchar(index_out)) index_out else NULL
+  )
   inform("Preflight: published ", length(packed), " package(s) for later runs")
 }
 

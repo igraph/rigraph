@@ -69,7 +69,9 @@ md_table <- function(df) {
   rule <- paste0("|", paste(rep(" --- ", ncol(df)), collapse = "|"), "|")
   rows <- vapply(
     seq_len(nrow(df)),
-    function(i) paste0("| ", paste(esc(unlist(df[i, ])), collapse = " | "), " |"),
+    function(i) {
+      paste0("| ", paste(esc(unlist(df[i, ])), collapse = " | "), " |")
+    },
     character(1)
   )
   c(header, rule, rows)
@@ -86,7 +88,10 @@ md_details <- function(title, lines, max_lines = 80) {
   lines <- sanitize_log(lines)
   omitted <- character()
   if (length(lines) > max_lines) {
-    omitted <- sprintf("... (%d earlier lines omitted)", length(lines) - max_lines)
+    omitted <- sprintf(
+      "... (%d earlier lines omitted)",
+      length(lines) - max_lines
+    )
     lines <- utils::tail(lines, max_lines)
   }
   c(
@@ -114,7 +119,8 @@ gh_repo <- function() {
 }
 
 gh_ok <- function() {
-  nzchar(Sys.which("gh")) && nzchar(env_chr("GH_TOKEN", env_chr("GITHUB_TOKEN")))
+  nzchar(Sys.which("gh")) &&
+    nzchar(env_chr("GH_TOKEN", env_chr("GITHUB_TOKEN")))
 }
 
 # `gh`, with its arguments quoted for the shell: system2() quotes the command
@@ -145,7 +151,11 @@ run_artifacts <- function(run_id) {
   }
   out <- gh_lines(
     "api",
-    sprintf("repos/%s/actions/runs/%s/artifacts?per_page=100", gh_repo(), run_id),
+    sprintf(
+      "repos/%s/actions/runs/%s/artifacts?per_page=100",
+      gh_repo(),
+      run_id
+    ),
     "--jq",
     ".artifacts[] | select(.expired == false) | [.name, .id] | @tsv"
   )
@@ -169,7 +179,12 @@ unzip_into <- function(zip, dest) {
     status <- tryCatch(
       suppressWarnings(
         # Quoted: system2() quotes the command, but not the arguments.
-        system2("unzip", shQuote(c("-q", "-o", zip, "-d", dest)), stdout = NULL, stderr = NULL)
+        system2(
+          "unzip",
+          shQuote(c("-q", "-o", zip, "-d", dest)),
+          stdout = NULL,
+          stderr = NULL
+        )
       ),
       error = function(e) 1L
     )
@@ -250,18 +265,27 @@ pack_library <- function(lib, dest, index_dest = NULL) {
   index <- list(
     run_id = env_chr("GITHUB_RUN_ID"),
     created_at = now_utc(),
-    r_version = paste(R.version$major, sub("[.].*$", "", R.version$minor), sep = "."),
+    r_version = paste(
+      R.version$major,
+      sub("[.].*$", "", R.version$minor),
+      sep = "."
+    ),
     platform = R.version$platform,
     count = length(versions),
     packages = unname(Map(
       function(p, v) list(package = p, version = unname(v)),
-      names(versions), versions
+      names(versions),
+      versions
     ))
   )
   write_json(index, file.path(dest, "lib.json"))
   if (!is.null(index_dest)) {
     dir.create(index_dest, recursive = TRUE, showWarnings = FALSE)
-    file.copy(file.path(dest, "lib.json"), file.path(index_dest, "lib.json"), overwrite = TRUE)
+    file.copy(
+      file.path(dest, "lib.json"),
+      file.path(index_dest, "lib.json"),
+      overwrite = TRUE
+    )
   }
   if (length(versions) == 0) {
     inform("Nothing to pack: ", lib, " holds no installed packages")
@@ -282,8 +306,16 @@ pack_library <- function(lib, dest, index_dest = NULL) {
     return(character())
   }
   inform(
-    "Packed ", length(versions), " package(s) into ", basename(tarball),
-    " (", format(structure(file.size(tarball), class = "object_size"), units = "auto"), ")"
+    "Packed ",
+    length(versions),
+    " package(s) into ",
+    basename(tarball),
+    " (",
+    format(
+      structure(file.size(tarball), class = "object_size"),
+      units = "auto"
+    ),
+    ")"
   )
   names(versions)
 }

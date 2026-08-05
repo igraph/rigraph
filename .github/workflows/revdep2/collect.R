@@ -27,7 +27,10 @@
 # Always exits zero: check results are the report's business, not the job
 # status's -- only a genuinely broken collector fails this job.
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 results_dir <- env_chr("RESULTS_DIR")
 stopifnot(nzchar(results_dir))
@@ -37,7 +40,11 @@ out_dir <- env_chr("OUT_DIR", "revdep")
 baseline_out <- env_chr("BASELINE_OUT", "baseline")
 
 dir.create(file.path(out_dir, "pkgs"), recursive = TRUE, showWarnings = FALSE)
-dir.create(file.path(baseline_out, "old-rds"), recursive = TRUE, showWarnings = FALSE)
+dir.create(
+  file.path(baseline_out, "old-rds"),
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 # ------------------------------------------------------------------- merge ---
 
@@ -74,7 +81,13 @@ for (dir in shard_dirs) {
     }
   }
 }
-inform("Collected ", length(entries), " package(s) from ", length(shard_dirs), " shard artifact(s)")
+inform(
+  "Collected ",
+  length(entries),
+  " package(s) from ",
+  length(shard_dirs),
+  " shard artifact(s)"
+)
 
 # A retried run reports the whole picture: results the retry did not touch are
 # carried over from the earlier run's report, marked as such.
@@ -87,7 +100,12 @@ if (nzchar(retry_dir) && file.exists(file.path(retry_dir, "manifest.json"))) {
       carried <- carried + 1L
     }
   }
-  inform("Carried ", carried, " untouched result(s) over from run ", plan$retry_of)
+  inform(
+    "Carried ",
+    carried,
+    " untouched result(s) over from run ",
+    plan$retry_of
+  )
 }
 
 entries <- entries[order(names(entries))]
@@ -115,10 +133,17 @@ write_json(unname(entries), file.path(out_dir, "manifest.json"))
 baseline <- list()
 for (entry in entries) {
   rds <- file.path(out_dir, "pkgs", entry$package, "old.rds")
-  if (!file.exists(rds) || is.null(entry$old_checked_at) || is.na(entry$old_checked_at)) {
+  if (
+    !file.exists(rds) ||
+      is.null(entry$old_checked_at) ||
+      is.na(entry$old_checked_at)
+  ) {
     next
   }
-  file.copy(rds, file.path(baseline_out, "old-rds", paste0(entry$package, ".rds")))
+  file.copy(
+    rds,
+    file.path(baseline_out, "old-rds", paste0(entry$package, ".rds"))
+  )
   baseline[[length(baseline) + 1]] <- list(
     package = entry$package,
     version = entry$version,
@@ -207,20 +232,34 @@ if (has_revdepcheck) {
     file.path(out_dir, "README.md")
   )
   writeLines(
-    capture_report(revdepcheck::cloud_report_problems, pkg = ".", results = results),
+    capture_report(
+      revdepcheck::cloud_report_problems,
+      pkg = ".",
+      results = results
+    ),
     file.path(out_dir, "problems.md")
   )
   writeLines(
-    capture_report(revdepcheck::cloud_report_failures, pkg = ".", results = results),
+    capture_report(
+      revdepcheck::cloud_report_failures,
+      pkg = ".",
+      results = results
+    ),
     file.path(out_dir, "failures.md")
   )
   writeLines(
-    capture_report(revdepcheck::revdep_report_cran, pkg = ".", results = results),
+    capture_report(
+      revdepcheck::revdep_report_cran,
+      pkg = ".",
+      results = results
+    ),
     file.path(out_dir, "cran.md")
   )
   inform("Reports written to ", out_dir)
 } else {
-  inform("revdepcheck is not installed; writing the manifest-derived summary only")
+  inform(
+    "revdepcheck is not installed; writing the manifest-derived summary only"
+  )
   df <- data.frame(
     package = names(entries),
     version = vapply(entries, function(e) e$version %||% "?", character(1)),
@@ -243,12 +282,14 @@ not_ok <- sum(results_tbl != "ok")
 headline <- if (tally("newly_broken") > 0) {
   sprintf(
     "**%d of %d packages newly broken.**",
-    tally("newly_broken"), length(entries)
+    tally("newly_broken"),
+    length(entries)
   )
 } else if (not_ok > 0) {
   sprintf(
     "No new breakage; %d of %d packages could not be fully checked.",
-    not_ok, length(entries)
+    not_ok,
+    length(entries)
   )
 } else {
   sprintf("All good: no new problems in %d packages.", length(entries))
@@ -302,6 +343,10 @@ append_summary(c(
 ))
 
 inform(
-  length(entries), " package(s): ", sum(results_tbl == "ok"), " ok, ",
-  not_ok, " with findings -- see the summary and the revdep2-report artifact"
+  length(entries),
+  " package(s): ",
+  sum(results_tbl == "ok"),
+  " ok, ",
+  not_ok,
+  " with findings -- see the summary and the revdep2-report artifact"
 )

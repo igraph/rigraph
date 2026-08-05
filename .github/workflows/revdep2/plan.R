@@ -49,10 +49,16 @@
 # discovery, uses the `gh` CLI with GH_TOKEN. Without gh or a token the plan
 # simply reuses nothing.
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 out_path <- env_chr("OUT", "plan.json")
-which_input <- match.arg(env_chr("REVDEP2_WHICH", "strong"), c("strong", "most"))
+which_input <- match.arg(
+  env_chr("REVDEP2_WHICH", "strong"),
+  c("strong", "most")
+)
 depth_raw <- tolower(env_chr("REVDEP2_DEPTH", "1"))
 depth <- if (depth_raw %in% c("all", "max", "inf", "infinity")) {
   Inf
@@ -77,7 +83,11 @@ retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
 timing_flavor <- env_chr("REVDEP2_TIMING_FLAVOR", "r-release-linux-x86_64")
 
-r_version <- paste(R.version$major, sub("[.].*$", "", R.version$minor), sep = ".")
+r_version <- paste(
+  R.version$major,
+  sub("[.].*$", "", R.version$minor),
+  sep = "."
+)
 
 # ------------------------------------------------------------ empty plans ----
 
@@ -112,7 +122,12 @@ plan_nothing <- function(reason) {
 # `history_runs` runs; reuse is an optimization, and an optimization does not
 # get to spend the planning budget.
 scan_history <- function(want_baseline, needed) {
-  empty <- list(baseline_run = NULL, prebuilt = list(), scanned = 0L, missing = needed)
+  empty <- list(
+    baseline_run = NULL,
+    prebuilt = list(),
+    scanned = 0L,
+    missing = needed
+  )
   if (!gh_ok() || !nzchar(repo)) {
     return(empty)
   }
@@ -120,7 +135,8 @@ scan_history <- function(want_baseline, needed) {
     "api",
     sprintf(
       "repos/%s/actions/workflows/revdep2.yaml/runs?status=completed&per_page=%d",
-      repo, history_runs
+      repo,
+      history_runs
     ),
     "--jq",
     ".workflow_runs[] | [.id, .created_at] | @tsv"
@@ -134,7 +150,10 @@ scan_history <- function(want_baseline, needed) {
   prebuilt <- list()
   scanned <- 0L
   for (row in rows) {
-    if (!want_baseline && (length(needed) == 0 || length(prebuilt) >= max_prebuilt_runs)) {
+    if (
+      !want_baseline &&
+        (length(needed) == 0 || length(prebuilt) >= max_prebuilt_runs)
+    ) {
       break
     }
     fields <- strsplit(row, "\t", fixed = TRUE)[[1]]
@@ -160,13 +179,22 @@ scan_history <- function(want_baseline, needed) {
       !is.na(created) &&
       as.numeric(Sys.Date() - created) <= prebuilt_max_age
     if (take_library) {
-      dir <- fetch_artifact_id(ids[["revdep2-lib-index"]], tempfile("lib-index-"))
+      dir <- fetch_artifact_id(
+        ids[["revdep2-lib-index"]],
+        tempfile("lib-index-")
+      )
       index_path <- if (is.null(dir)) NULL else file.path(dir, "lib.json")
-      index <- if (!is.null(index_path) && file.exists(index_path)) read_json(index_path) else NULL
+      index <- if (!is.null(index_path) && file.exists(index_path)) {
+        read_json(index_path)
+      } else {
+        NULL
+      }
       unlink(dir, recursive = TRUE)
-      if (!is.null(index) &&
-        identical(index$r_version, r_version) &&
-        identical(index$platform, R.version$platform)) {
+      if (
+        !is.null(index) &&
+          identical(index$r_version, r_version) &&
+          identical(index$platform, R.version$platform)
+      ) {
         have <- vapply(index$packages, function(e) e$package, character(1))
         gain <- intersect(needed, have)
         if (length(gain) > 0) {
@@ -197,7 +225,10 @@ inform("Package under test: ", package, " ", dev_version)
 
 db <- cran_db()
 if (!package %in% rownames(db)) {
-  plan_nothing(sprintf("%s is not on CRAN, so it has no CRAN reverse dependencies", package))
+  plan_nothing(sprintf(
+    "%s is not on CRAN, so it has no CRAN reverse dependencies",
+    package
+  ))
 }
 cran_version <- unname(db[package, "Version"])
 inform("CRAN version: ", cran_version)
@@ -229,9 +260,16 @@ while (level < depth && length(frontier) > 0) {
 revdeps <- sort(names(level_of))
 level_counts <- table(level_of)
 inform(
-  length(revdeps), " reverse dependencies (", which_input, ", depth ", depth_raw,
+  length(revdeps),
+  " reverse dependencies (",
+  which_input,
+  ", depth ",
+  depth_raw,
   if (length(level_counts) > 1) {
-    paste0("; ", paste0("level ", names(level_counts), ": ", level_counts, collapse = ", "))
+    paste0(
+      "; ",
+      paste0("level ", names(level_counts), ": ", level_counts, collapse = ", ")
+    )
   } else {
     ""
   },
@@ -240,7 +278,10 @@ inform(
 
 selection <- "all"
 retry_manifest <- NULL
-packages_input <- trimws(strsplit(env_chr("REVDEP2_PACKAGES"), "[,[:space:]]+")[[1]])
+packages_input <- trimws(strsplit(
+  env_chr("REVDEP2_PACKAGES"),
+  "[,[:space:]]+"
+)[[1]])
 packages_input <- packages_input[nzchar(packages_input)]
 
 if (length(packages_input) > 0) {
@@ -251,7 +292,11 @@ if (length(packages_input) > 0) {
   dir <- fetch_artifact(retry_run, "revdep2-report", tempfile("retry-"))
   manifest_path <- if (is.null(dir)) NULL else file.path(dir, "manifest.json")
   if (is.null(manifest_path) || !file.exists(manifest_path)) {
-    stop("Cannot fetch the revdep2-report artifact of run ", retry_run, call. = FALSE)
+    stop(
+      "Cannot fetch the revdep2-report artifact of run ",
+      retry_run,
+      call. = FALSE
+    )
   }
   retry_manifest <- read_json(manifest_path)
   results <- vapply(retry_manifest, function(e) e$result, character(1))
@@ -259,8 +304,12 @@ if (length(packages_input) > 0) {
     vapply(results, needs_recheck, logical(1))
   ]
   inform(
-    "Retrying ", length(candidates), " of ", length(retry_manifest),
-    " packages from run ", retry_run
+    "Retrying ",
+    length(candidates),
+    " of ",
+    length(retry_manifest),
+    " packages from run ",
+    retry_run
   )
 } else {
   candidates <- revdeps
@@ -300,8 +349,13 @@ fallback <- if (any(known)) stats::median(t_total[known]) else 300
 t_total[!known] <- fallback
 t_total <- pmax(t_total, 60)
 inform(
-  sum(known), " of ", length(packages), " check times known from CRAN; ",
-  "median fallback ", round(fallback), "s for the rest"
+  sum(known),
+  " of ",
+  length(packages),
+  " check times known from CRAN; ",
+  "median fallback ",
+  round(fallback),
+  "s for the rest"
 )
 
 # --------------------------------------------------------------- closures ----
@@ -326,7 +380,10 @@ parse_dep_field <- function(field) {
   names <- trimws(sub("[([].*$", "", entries))
   names[nzchar(names) & names != "R"]
 }
-dev_deps <- unique(unlist(lapply(c("Depends", "Imports", "LinkingTo"), parse_dep_field)))
+dev_deps <- unique(unlist(lapply(
+  c("Depends", "Imports", "LinkingTo"),
+  parse_dep_field
+)))
 dev_deps <- intersect(dev_deps, rownames(db))
 dev_closure <- sort(setdiff(
   unique(c(
@@ -351,7 +408,9 @@ local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
 history <- scan_history(
   # A retried run donates its own baseline, and the two offline hooks bypass
   # discovery entirely; the walk then only looks for prebuilt libraries.
-  want_baseline = !refresh_baseline && !nzchar(local_baseline) && !nzchar(retry_run),
+  want_baseline = !refresh_baseline &&
+    !nzchar(local_baseline) &&
+    !nzchar(retry_run),
   needed = universe
 )
 
@@ -372,7 +431,13 @@ if (refresh_baseline) {
       entries,
       vapply(entries, function(e) e$package, character(1))
     )
-    inform("Baseline from ", local_baseline, " (", length(baseline_manifest), " entries)")
+    inform(
+      "Baseline from ",
+      local_baseline,
+      " (",
+      length(baseline_manifest),
+      " entries)"
+    )
   }
 } else {
   donor <- if (nzchar(retry_run)) retry_run else history$baseline_run
@@ -382,7 +447,11 @@ if (refresh_baseline) {
     dir <- fetch_artifact(donor, "revdep2-baseline", tempfile("baseline-"))
     manifest_path <- if (is.null(dir)) NULL else file.path(dir, "baseline.json")
     if (is.null(manifest_path) || !file.exists(manifest_path)) {
-      inform("Baseline artifact of run ", donor, " is unavailable; reusing nothing")
+      inform(
+        "Baseline artifact of run ",
+        donor,
+        " is unavailable; reusing nothing"
+      )
     } else {
       baseline_run <- as.integer(donor)
       entries <- read_json(manifest_path)
@@ -390,7 +459,13 @@ if (refresh_baseline) {
         entries,
         vapply(entries, function(e) e$package, character(1))
       )
-      inform("Baseline donor: run ", donor, " (", length(baseline_manifest), " entries)")
+      inform(
+        "Baseline donor: run ",
+        donor,
+        " (",
+        length(baseline_manifest),
+        " entries)"
+      )
     }
   }
 }
@@ -431,8 +506,11 @@ reuse <- verdicts == "reuse"
 if (baseline_run > 0) {
   stale <- table(verdicts[!reuse])
   inform(
-    "Baseline: ", sum(reuse), " reusable, ",
-    sum(!reuse), " to check fresh",
+    "Baseline: ",
+    sum(reuse),
+    " reusable, ",
+    sum(!reuse),
+    " to check fresh",
     if (length(stale) > 0) {
       paste0(" (", paste(names(stale), stale, sep = ": ", collapse = ", "), ")")
     } else {
@@ -451,8 +529,13 @@ prebuilt <- history$prebuilt
 prebuilt_covered <- length(universe) - length(history$missing)
 if (length(prebuilt) > 0) {
   inform(
-    "Prebuilt libraries: ", prebuilt_covered, " of ", length(universe),
-    " packages from ", length(prebuilt), " run(s) (",
+    "Prebuilt libraries: ",
+    prebuilt_covered,
+    " of ",
+    length(universe),
+    " packages from ",
+    length(prebuilt),
+    " run(s) (",
     paste(
       vapply(
         prebuilt,
@@ -464,7 +547,9 @@ if (length(prebuilt) > 0) {
     ")"
   )
 } else if (max_prebuilt_runs > 0) {
-  inform("No reusable prebuilt package library found; everything is installed fresh")
+  inform(
+    "No reusable prebuilt package library found; everything is installed fresh"
+  )
 }
 
 # Weight: one check of the revdep costs about what CRAN's Linux machine spends
@@ -479,7 +564,10 @@ k <- max(1L, min(as.integer(ceiling(total_check / budget)), max_shards, n))
 inform(
   sprintf(
     "%d packages, ~%.0f check minutes, budget %.0f min/shard -> %d shard(s)",
-    n, total_check, budget, k
+    n,
+    total_check,
+    budget,
+    k
   )
 )
 
@@ -617,7 +705,11 @@ matrix <- list(
   include = lapply(shard_list, function(s) {
     list(
       shard = s$index,
-      label = sprintf("%d pkgs, ~%.0f min", length(s$packages), s$estimate_minutes)
+      label = sprintf(
+        "%d pkgs, ~%.0f min",
+        length(s$packages),
+        s$estimate_minutes
+      )
     )
   })
 )
@@ -638,8 +730,14 @@ top <- function(s) {
 summary_df <- data.frame(
   Shard = vapply(shard_list, function(s) s$index, integer(1)),
   Packages = vapply(shard_list, function(s) length(s$packages), integer(1)),
-  `Check est.` = sprintf("~%.0f min", vapply(shard_list, function(s) s$check_minutes, numeric(1))),
-  `Total est.` = sprintf("~%.0f min", vapply(shard_list, function(s) s$estimate_minutes, numeric(1))),
+  `Check est.` = sprintf(
+    "~%.0f min",
+    vapply(shard_list, function(s) s$check_minutes, numeric(1))
+  ),
+  `Total est.` = sprintf(
+    "~%.0f min",
+    vapply(shard_list, function(s) s$estimate_minutes, numeric(1))
+  ),
   Installs = vapply(shard_list, function(s) s$install_packages, integer(1)),
   Heaviest = vapply(shard_list, top, character(1)),
   check.names = FALSE
