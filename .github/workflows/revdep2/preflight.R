@@ -80,7 +80,8 @@ load_batch <- function(pkgs) {
   )
   out <- suppressWarnings(system2(
     "Rscript",
-    c("--vanilla", script, pkgs),
+    # Quoted: system2() quotes the command, but not the arguments.
+    shQuote(c("--vanilla", script, pkgs)),
     stdout = TRUE,
     stderr = TRUE
   ))
