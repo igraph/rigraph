@@ -88,9 +88,25 @@ plan_nothing <- function(reason) {
 
 gh_ok <- nzchar(Sys.which("gh")) && nzchar(env_chr("GH_TOKEN", env_chr("GITHUB_TOKEN")))
 
+# `gh`, with its arguments quoted for the shell: system2() quotes the command
+# but hands the arguments to `sh` as written, and these carry `?`, `&`, `|`,
+# quotes and spaces. Unquoted, an API path ends at its first `&`, and what
+# follows becomes a second command the shell cannot find.
+#
+# Every failure -- no gh, no network, an API error, a token without
+# `actions: read` -- becomes NULL, including the ones system2() raises instead
+# of returning: a command the shell cannot run exits 127, which `stdout = TRUE`
+# turns into an R error rather than a status. Baseline discovery is an
+# optimization and must never fail the plan.
 gh_lines <- function(...) {
-  out <- suppressWarnings(system2("gh", c(...), stdout = TRUE, stderr = NULL))
-  if (!is.null(attr(out, "status")) && attr(out, "status") != 0) NULL else out
+  out <- tryCatch(
+    suppressWarnings(
+      system2("gh", shQuote(c(...)), stdout = TRUE, stderr = NULL)
+    ),
+    error = function(e) NULL
+  )
+  status <- attr(out, "status")
+  if (is.null(out) || (!is.null(status) && status != 0)) NULL else out
 }
 
 # Fetch one artifact of one run into a directory; NULL when it does not exist,
@@ -109,19 +125,26 @@ fetch_artifact <- function(run_id, name, dest) {
     return(NULL)
   }
   zip <- tempfile(fileext = ".zip")
-  status <- suppressWarnings(system2(
-    "gh",
-    c("api", sprintf("repos/%s/actions/artifacts/%s/zip", repo, ids[[1]])),
-    stdout = zip,
-    stderr = NULL
+  args <- shQuote(c(
+    "api",
+    sprintf("repos/%s/actions/artifacts/%s/zip", repo, ids[[1]])
   ))
-  if (!identical(status, 0L) || !file.exists(zip)) {
+  status <- tryCatch(
+    suppressWarnings(system2("gh", args, stdout = zip, stderr = NULL)),
+    error = function(e) 1L
+  )
+  if (!identical(as.integer(status), 0L) || !file.exists(zip)) {
     return(NULL)
   }
   dir.create(dest, recursive = TRUE, showWarnings = FALSE)
-  utils::unzip(zip, exdir = dest)
+  # A gh that wrote an error body instead of the artifact leaves something that
+  # is not a zip; that is a missing baseline, not a usable one.
+  extracted <- tryCatch(
+    suppressWarnings(utils::unzip(zip, exdir = dest)),
+    error = function(e) character()
+  )
   unlink(zip)
-  dest
+  if (length(extracted) == 0) NULL else dest
 }
 
 # Newest completed run of this workflow that still holds a baseline artifact.

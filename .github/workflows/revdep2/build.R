@@ -42,7 +42,8 @@ build_lib <- tempfile("lib-")
 dir.create(build_lib)
 status <- system2(
   "R",
-  c("CMD", "INSTALL", "--build", "-l", build_lib, tarball)
+  # Quoted: system2() quotes the command, but not the arguments.
+  c("CMD", "INSTALL", "--build", "-l", shQuote(build_lib), shQuote(tarball))
 )
 if (status != 0) {
   stop("R CMD INSTALL --build failed", call. = FALSE)
