@@ -69,7 +69,9 @@ md_table <- function(df) {
   rule <- paste0("|", paste(rep(" --- ", ncol(df)), collapse = "|"), "|")
   rows <- vapply(
     seq_len(nrow(df)),
-    function(i) paste0("| ", paste(esc(unlist(df[i, ])), collapse = " | "), " |"),
+    function(i) {
+      paste0("| ", paste(esc(unlist(df[i, ])), collapse = " | "), " |")
+    },
     character(1)
   )
   c(header, rule, rows)
@@ -86,7 +88,10 @@ md_details <- function(title, lines, max_lines = 80) {
   lines <- sanitize_log(lines)
   omitted <- character()
   if (length(lines) > max_lines) {
-    omitted <- sprintf("... (%d earlier lines omitted)", length(lines) - max_lines)
+    omitted <- sprintf(
+      "... (%d earlier lines omitted)",
+      length(lines) - max_lines
+    )
     lines <- utils::tail(lines, max_lines)
   }
   c(
@@ -100,6 +105,329 @@ md_details <- function(title, lines, max_lines = 80) {
     "</details>",
     ""
   )
+}
+
+# --------------------------------------------------------- gh and artifacts --
+
+# The plan resolves donor runs through the API, and the preflight and the
+# shards fetch artifacts off them. Everything here is an optimization: a
+# missing gh, a token without `actions: read`, an expired artifact, a network
+# hiccup -- all of them have to end as "reuse nothing", never as a failure.
+
+gh_repo <- function() {
+  env_chr("GITHUB_REPOSITORY")
+}
+
+gh_ok <- function() {
+  nzchar(Sys.which("gh")) &&
+    nzchar(env_chr("GH_TOKEN", env_chr("GITHUB_TOKEN")))
+}
+
+# `gh`, with its arguments quoted for the shell: system2() quotes the command
+# but hands the arguments to `sh` as written, and these carry `?`, `&`, `|`,
+# quotes and spaces. Unquoted, an API path ends at its first `&`, and what
+# follows becomes a second command the shell cannot find.
+#
+# Every failure becomes NULL, including the ones system2() raises instead of
+# returning: a command the shell cannot run exits 127, which `stdout = TRUE`
+# turns into an R error rather than a status.
+gh_lines <- function(...) {
+  out <- tryCatch(
+    suppressWarnings(
+      system2("gh", shQuote(c(...)), stdout = TRUE, stderr = NULL)
+    ),
+    error = function(e) NULL
+  )
+  status <- attr(out, "status")
+  if (is.null(out) || (!is.null(status) && status != 0)) NULL else out
+}
+
+# The unexpired artifacts of one run, as a named character vector of ids;
+# empty when the run has none or when gh cannot say. One API call per run, so
+# a walk over the run history calls this once per run and asks it everything.
+run_artifacts <- function(run_id) {
+  if (!gh_ok() || !nzchar(gh_repo())) {
+    return(character())
+  }
+  out <- gh_lines(
+    "api",
+    sprintf(
+      "repos/%s/actions/runs/%s/artifacts?per_page=100",
+      gh_repo(),
+      run_id
+    ),
+    "--jq",
+    ".artifacts[] | select(.expired == false) | [.name, .id] | @tsv"
+  )
+  out <- out[nzchar(out)]
+  if (length(out) == 0) {
+    return(character())
+  }
+  parts <- strsplit(out, "\t", fixed = TRUE)
+  stats::setNames(
+    vapply(parts, function(p) p[[2]], character(1)),
+    vapply(parts, function(p) p[[1]], character(1))
+  )
+}
+
+# utils::unzip() refuses archives above 4 GB, which a library artifact reaches
+# without trying; the system unzip has no such limit, so prefer it and keep
+# the internal one for a runner without it.
+unzip_into <- function(zip, dest) {
+  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
+  if (nzchar(Sys.which("unzip"))) {
+    status <- tryCatch(
+      suppressWarnings(
+        # Quoted: system2() quotes the command, but not the arguments.
+        system2(
+          "unzip",
+          shQuote(c("-q", "-o", zip, "-d", dest)),
+          stdout = NULL,
+          stderr = NULL
+        )
+      ),
+      error = function(e) 1L
+    )
+    return(identical(as.integer(status), 0L))
+  }
+  # A gh that wrote an error body instead of the artifact leaves something
+  # that is not a zip; that is a missing artifact, not a usable one.
+  extracted <- tryCatch(
+    suppressWarnings(utils::unzip(zip, exdir = dest)),
+    error = function(e) character()
+  )
+  length(extracted) > 0
+}
+
+# Download one artifact by id into a directory; NULL when it cannot be had.
+fetch_artifact_id <- function(id, dest) {
+  if (!gh_ok() || !nzchar(gh_repo())) {
+    return(NULL)
+  }
+  zip <- tempfile(fileext = ".zip")
+  # Quoted: system2() quotes the command, but not the arguments.
+  args <- shQuote(c("api", sprintf("repos/%s/actions/artifacts/%s/zip", gh_repo(), id)))
+  status <- tryCatch(
+    suppressWarnings(system2("gh", args, stdout = zip, stderr = NULL)),
+    error = function(e) 1L
+  )
+  if (!identical(as.integer(status), 0L) || !file.exists(zip)) {
+    unlink(zip)
+    return(NULL)
+  }
+  ok <- unzip_into(zip, dest)
+  unlink(zip)
+  if (ok) dest else NULL
+}
+
+# Fetch one named artifact of one run; NULL when the run does not have it, it
+# has expired, or it cannot be downloaded.
+fetch_artifact <- function(run_id, name, dest) {
+  ids <- run_artifacts(run_id)
+  id <- unname(ids[names(ids) == name])
+  if (length(id) == 0) {
+    return(NULL)
+  }
+  fetch_artifact_id(id[[1]], dest)
+}
+
+# ------------------------------------------------------ prebuilt libraries --
+
+# A run's installed dependency library, carried to the next run as an
+# artifact: one tar of the package directories, plus the index a later plan
+# reads to decide which packages that run is good for.
+#
+# The tar is stored uncompressed on purpose -- upload-artifact zips what it
+# uploads, and deflating a few gigabytes twice buys nothing. Packing the
+# directories by name (rather than the library itself) keeps the member paths
+# at `<package>/...`, which is what a partial extraction asks for.
+
+# Package directories of `lib` that look installed, with their versions.
+library_versions <- function(lib) {
+  pkgs <- list.dirs(lib, full.names = FALSE, recursive = FALSE)
+  pkgs <- pkgs[file.exists(file.path(lib, pkgs, "DESCRIPTION"))]
+  versions <- vapply(
+    pkgs,
+    function(p) {
+      tryCatch(
+        unname(read.dcf(file.path(lib, p, "DESCRIPTION"), "Version")[1, 1]),
+        error = function(e) NA_character_
+      )
+    },
+    character(1)
+  )
+  versions[!is.na(versions)]
+}
+
+pack_library <- function(lib, dest, index_dest = NULL) {
+  versions <- library_versions(lib)
+  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
+  index <- list(
+    run_id = env_chr("GITHUB_RUN_ID"),
+    created_at = now_utc(),
+    r_version = paste(
+      R.version$major,
+      sub("[.].*$", "", R.version$minor),
+      sep = "."
+    ),
+    platform = R.version$platform,
+    count = length(versions),
+    packages = unname(Map(
+      function(p, v) list(package = p, version = unname(v)),
+      names(versions),
+      versions
+    ))
+  )
+  write_json(index, file.path(dest, "lib.json"))
+  if (!is.null(index_dest)) {
+    dir.create(index_dest, recursive = TRUE, showWarnings = FALSE)
+    file.copy(
+      file.path(dest, "lib.json"),
+      file.path(index_dest, "lib.json"),
+      overwrite = TRUE
+    )
+  }
+  if (length(versions) == 0) {
+    inform("Nothing to pack: ", lib, " holds no installed packages")
+    return(character())
+  }
+  members <- tempfile("members-")
+  writeLines(names(versions), members)
+  on.exit(unlink(members))
+  tarball <- file.path(dest, "library.tar")
+  status <- system2(
+    "tar",
+    # Quoted: system2() quotes the command, but not the arguments.
+    shQuote(c("-cf", tarball, "-C", lib, "-T", members))
+  )
+  if (!identical(as.integer(status), 0L) || !file.exists(tarball)) {
+    inform("Packing ", lib, " failed; this run contributes no prebuilt library")
+    unlink(tarball)
+    return(character())
+  }
+  inform(
+    "Packed ",
+    length(versions),
+    " package(s) into ",
+    basename(tarball),
+    " (",
+    format(
+      structure(file.size(tarball), class = "object_size"),
+      units = "auto"
+    ),
+    ")"
+  )
+  names(versions)
+}
+
+# The packages of `lib` a caller may still want: everything not already
+# installed there, and nothing this session has loaded -- a package must never
+# be overwritten underneath the driver that is using it.
+missing_from <- function(lib, wanted) {
+  setdiff(
+    unique(unlist(wanted, use.names = FALSE)),
+    c(list.dirs(lib, full.names = FALSE, recursive = FALSE), loadedNamespaces())
+  )
+}
+
+# Extract `take` out of a packed library into `lib`, and report what landed.
+unpack_library <- function(tarball, lib, take) {
+  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
+  members <- tempfile("members-")
+  writeLines(take, members)
+  on.exit(unlink(members))
+  # A member the index promised but the tar does not hold makes tar exit
+  # non-zero after extracting the rest; what actually landed is the answer, so
+  # the status is not consulted.
+  system2(
+    "tar",
+    # Quoted: system2() quotes the command, but not the arguments.
+    shQuote(c("-xf", tarball, "-C", lib, "-T", members)),
+    stdout = NULL,
+    stderr = NULL
+  )
+  got <- intersect(take, list.dirs(lib, full.names = FALSE, recursive = FALSE))
+  # A half-extracted package directory is worse than none: drop anything
+  # without a DESCRIPTION and let pak install it properly.
+  broken <- got[!file.exists(file.path(lib, got, "DESCRIPTION"))]
+  if (length(broken) > 0) {
+    unlink(file.path(lib, broken), recursive = TRUE)
+    inform("Prebuilt: discarded ", length(broken), " incomplete package(s)")
+  }
+  setdiff(got, broken)
+}
+
+# Unpack a library artifact this job already has on disk -- in practice this
+# run's own preflight library, handed to the shards through the workflow.
+#
+# This is the reuse that pays on the very first run: without it every shard
+# rebuilds from source what the preflight of the same run compiled minutes
+# earlier, once per shard.
+restore_local_library <- function(dir, lib, wanted) {
+  tarball <- file.path(dir, "library.tar")
+  if (!nzchar(dir) || !file.exists(tarball)) {
+    return(character())
+  }
+  take <- missing_from(lib, wanted)
+  index <- file.path(dir, "lib.json")
+  if (file.exists(index)) {
+    have <- vapply(
+      read_json(index)$packages,
+      function(e) e$package,
+      character(1)
+    )
+    take <- intersect(take, have)
+  }
+  if (length(take) == 0) {
+    return(character())
+  }
+  got <- unpack_library(tarball, lib, take)
+  inform(
+    "Prebuilt: restored ",
+    length(got),
+    " package(s) from this run's preflight"
+  )
+  got
+}
+
+# Unpack what earlier runs already built into `lib`, taking only the packages
+# in `wanted` that are not there yet.
+#
+# The plan named the donor runs, youngest first, and which packages each one
+# is good for; a younger donor always wins, and a donor that has nothing left
+# to give is never downloaded. Whatever lands here is still handed to pak
+# afterwards: the point is to skip *building* what has not changed, not to
+# skip resolving it.
+restore_prebuilt <- function(plan, lib, wanted) {
+  donors <- plan$prebuilt$runs %||% list()
+  if (length(donors) == 0 || length(unlist(wanted)) == 0) {
+    return(character())
+  }
+  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
+  restored <- character()
+  for (donor in donors) {
+    run_id <- as.character(donor$run_id)
+    take <- intersect(
+      unlist(donor$packages, use.names = FALSE),
+      missing_from(lib, wanted)
+    )
+    if (length(take) == 0) {
+      next
+    }
+    inform("Prebuilt: fetching ", length(take), " package(s) from run ", run_id)
+    dir <- fetch_artifact(run_id, "revdep2-lib", tempfile("prebuilt-"))
+    tarball <- if (is.null(dir)) NULL else file.path(dir, "library.tar")
+    if (is.null(tarball) || !file.exists(tarball)) {
+      inform("Prebuilt: run ", run_id, " no longer has a library artifact")
+      unlink(dir, recursive = TRUE)
+      next
+    }
+    got <- unpack_library(tarball, lib, take)
+    unlink(dir, recursive = TRUE)
+    restored <- c(restored, got)
+    inform("Prebuilt: restored ", length(got), " package(s) from run ", run_id)
+  }
+  restored
 }
 
 # ------------------------------------------------------------ CRAN metadata --

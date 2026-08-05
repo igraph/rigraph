@@ -11,11 +11,21 @@
 # its own check with an install log, which is the result a report can work
 # with.
 #
+# The library this job ends up with is also the run's contribution to the next
+# one: it is packed into the revdep2-lib artifact, which later runs unpack
+# instead of building the same packages again (see util.R).
+#
 # Environment variables:
-#   PLAN     - plan.json from plan.R (default: plan.json)
-#   OUT_DIR  - where depfail.json lands (default: preflight)
+#   PLAN       - plan.json from plan.R (default: plan.json)
+#   OUT_DIR    - where depfail.json lands (default: preflight)
+#   LIB_OUT    - where library.tar and lib.json land; empty skips packing
+#   LIB_INDEX_OUT - where a copy of lib.json alone lands, for the small
+#                   artifact a later plan reads without the tar
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 plan <- read_json(env_chr("PLAN", "plan.json"))
 out_dir <- env_chr("OUT_DIR", "preflight")
@@ -26,10 +36,26 @@ lib <- file.path(env_chr("RUNNER_TEMP", tempdir()), "revdep2-preflight-lib")
 dir.create(lib, recursive = TRUE, showWarnings = FALSE)
 failures <- list()
 
+# What earlier runs already built, unpacked before pak sees the library. pak
+# still resolves the whole union afterwards -- CRAN moves between runs, and a
+# package whose version changed has to be built after all -- but everything
+# unchanged is now already there, and is skipped.
+restored <- restore_prebuilt(plan, lib, install_union)
+inform(
+  "Preflight: ",
+  length(restored),
+  " package(s) restored from earlier runs"
+)
+
+# With a restored library, `upgrade = FALSE` would freeze whatever version the
+# donor happened to hold; the plan's dependency fingerprints are computed from
+# CRAN *now*, so the library has to follow CRAN now.
+upgrade <- length(restored) > 0
+
 inform("Preflight: installing ", length(install_union), " packages")
 installed_ok <- tryCatch(
   {
-    pak::pkg_install(install_union, lib = lib, ask = FALSE)
+    pak::pkg_install(install_union, lib = lib, ask = FALSE, upgrade = upgrade)
     TRUE
   },
   error = function(e) {
@@ -46,7 +72,7 @@ if (!installed_ok) {
     }
     result <- tryCatch(
       {
-        pak::pkg_install(p, lib = lib, ask = FALSE)
+        pak::pkg_install(p, lib = lib, ask = FALSE, upgrade = upgrade)
         NULL
       },
       error = function(e) conditionMessage(e)
@@ -88,6 +114,7 @@ load_batch <- function(pkgs) {
   loaded <- sub("^LOADED ", "", grep("^LOADED ", out, value = TRUE))
   list(failed = setdiff(pkgs, loaded), log = out)
 }
+load_failures <- list()
 chunks <- split(installed, ceiling(seq_along(installed) / 40))
 for (chunk in chunks) {
   first <- load_batch(chunk)
@@ -97,16 +124,69 @@ for (chunk in chunks) {
   for (p in first$failed) {
     single <- load_batch(p)
     if (length(single$failed) > 0) {
-      failures[[length(failures) + 1]] <- list(
-        package = p,
-        phase = "load",
-        message = paste(utils::tail(sanitize_log(single$log), 20), collapse = "\n")
+      load_failures[[p]] <- paste(
+        utils::tail(sanitize_log(single$log), 20),
+        collapse = "\n"
       )
     }
   }
 }
 
+# A restored package that will not load is a stale binary, not a broken
+# package: the runner image moved under it. Throw it away, let pak build it
+# from source, and judge it on the second attempt -- this is the one failure
+# mode reuse introduces, and it is cheap to undo.
+stale <- intersect(names(load_failures), restored)
+if (length(stale) > 0) {
+  inform(
+    "Preflight: rebuilding ",
+    length(stale),
+    " restored package(s) that would not load"
+  )
+  unlink(file.path(lib, stale), recursive = TRUE)
+  for (p in stale) {
+    tryCatch(
+      pak::pkg_install(p, lib = lib, ask = FALSE, upgrade = FALSE),
+      error = function(e) {
+        inform("Could not reinstall ", p, ": ", conditionMessage(e))
+      }
+    )
+  }
+  for (p in stale) {
+    retried <- load_batch(p)
+    if (length(retried$failed) == 0) {
+      load_failures[[p]] <- NULL
+    } else {
+      load_failures[[p]] <- paste(
+        utils::tail(sanitize_log(retried$log), 20),
+        collapse = "\n"
+      )
+    }
+  }
+}
+for (p in names(load_failures)) {
+  failures[[length(failures) + 1]] <- list(
+    package = p,
+    phase = "load",
+    message = load_failures[[p]]
+  )
+}
+
 write_json(failures, file.path(out_dir, "depfail.json"))
+
+# ------------------------------------------------------------------ library --
+
+lib_out <- env_chr("LIB_OUT")
+index_out <- env_chr("LIB_INDEX_OUT")
+packed <- character()
+if (nzchar(lib_out)) {
+  packed <- pack_library(
+    lib,
+    lib_out,
+    if (nzchar(index_out)) index_out else NULL
+  )
+  inform("Preflight: published ", length(packed), " package(s) for later runs")
+}
 
 append_summary(c(
   "## revdep2 preflight",
@@ -114,6 +194,13 @@ append_summary(c(
   sprintf(
     "Installed and loaded %d dependencies: %d could not be installed or loaded.",
     length(install_union), length(failures)
+  ),
+  "",
+  sprintf(
+    "%d package(s) came prebuilt from earlier runs%s; %d are published for the next one.",
+    length(restored),
+    if (length(stale) > 0) sprintf(" (%d rebuilt after failing to load)", length(stale)) else "",
+    length(packed)
   ),
   ""
 ))
