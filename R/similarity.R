@@ -70,27 +70,30 @@ similarity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: similarity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, method = method),
-      recover_new = c("mode", "loops", "method"),
-      recover_old = c("mode", "loops", "method"),
-      match_names = c("mode", "loops", "method"),
-      match_to = c("mode", "loops", "method"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = FALSE,
-        method = c("jaccard", "dice", "invlogweighted")
-      ),
-      head_args = c("graph", "vids"),
-      fn_name = "similarity"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode, loops = loops, method = method),
+        recover_new = c("mode", "loops", "method"),
+        recover_old = c("mode", "loops", "method"),
+        match_names = c("mode", "loops", "method"),
+        match_to = c("mode", "loops", "method"),
+        defaults = list(
+          mode = c("all", "out", "in", "total"),
+          loops = FALSE,
+          method = c("jaccard", "dice", "invlogweighted")
+        ),
+        head_args = c("graph", "vids"),
+        fn_name = "similarity"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

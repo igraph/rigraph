@@ -99,6 +99,84 @@ test_that("recovery emits a single deprecation warning, not one per slot", {
   expect_length(warnings, 1L)
 })
 
+# ---- empty argument slots (#2646) -------------------------------------------
+
+# A call may leave a slot empty: a trailing comma, or a skipped positional,
+# which is what magrittr writes for `x %>% f(., , directed = TRUE)`. Those used
+# to match a formal by position and leave it missing; now they land in `...`.
+
+test_that("a trailing comma is not an argument to recover", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, ))
+  expect_equal(
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "out", directed = FALSE)
+  )
+})
+
+test_that("a trailing comma after new-API arguments is ignored", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, type = "in", ))
+  expect_equal(res$type, "in")
+})
+
+test_that("an empty slot still consumes its position during recovery", {
+  # Old signature f(graph, n, weight, kind, directed): the empty slot took
+  # `weight`, so "in"/TRUE must land on `type`/`directed`, not `weights`/`type`.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture("g", 5, , "in", TRUE)
+  )
+  expect_equal(
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "in", directed = TRUE)
+  )
+})
+
+test_that("empty slots mixed with named recovery keep their offsets", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  lifecycle::expect_deprecated(
+    res <- migration_fixture("g", 5, , , TRUE)
+  )
+  expect_equal(res$directed, TRUE)
+  expect_equal(res$weights, NULL)
+  expect_equal(res$type, "out")
+})
+
+test_that("migrate_capture_dots() reports supplied dots and their positions", {
+  # `migrate_capture_dots_at()` (helper-test-functions.R) is a bare host
+  # function that returns `migrate_capture_dots()` from its own frame.
+  expect_equal(
+    migrate_capture_dots_at(1, 9, kind = "in"),
+    list(
+      values = list(9, kind = "in"),
+      pos = c(1L, NA_integer_)
+    )
+  )
+  expect_equal(
+    migrate_capture_dots_at(1, , 9),
+    list(
+      values = list(9),
+      pos = 2L
+    )
+  )
+  # Nothing but empty slots reads as no dots at all, so recovery never engages.
+  expect_equal(
+    migrate_capture_dots_at(1, ),
+    list(
+      values = list(),
+      pos = integer(0)
+    )
+  )
+  expect_equal(
+    migrate_capture_dots_at(1),
+    list(
+      values = list(),
+      pos = integer(0)
+    )
+  )
+})
+
 # ---- prefix-overlap fixture -------------------------------------------------
 
 # migration_fixture_prefix(dimvector, p, ..., dim = NULL, permutation = NULL):

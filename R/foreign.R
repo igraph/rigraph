@@ -838,77 +838,80 @@ graph_from_graphdb <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_graphdb, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        prefix = prefix,
-        type = type,
-        nodes = nodes,
-        pair = pair,
-        which = which,
-        base = base,
-        compressed = compressed,
-        directed = directed
-      ),
-      recover_new = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      recover_old = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      match_names = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      match_to = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      defaults = list(
-        prefix = "iso",
-        type = "r001",
-        nodes = NULL,
-        pair = "A",
-        which = 0,
-        base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
-        compressed = TRUE,
-        directed = TRUE
-      ),
-      head_args = c("url"),
-      fn_name = "graph_from_graphdb"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          prefix = prefix,
+          type = type,
+          nodes = nodes,
+          pair = pair,
+          which = which,
+          base = base,
+          compressed = compressed,
+          directed = directed
+        ),
+        recover_new = c(
+          "prefix",
+          "type",
+          "nodes",
+          "pair",
+          "which",
+          "base",
+          "compressed",
+          "directed"
+        ),
+        recover_old = c(
+          "prefix",
+          "type",
+          "nodes",
+          "pair",
+          "which",
+          "base",
+          "compressed",
+          "directed"
+        ),
+        match_names = c(
+          "prefix",
+          "type",
+          "nodes",
+          "pair",
+          "which",
+          "base",
+          "compressed",
+          "directed"
+        ),
+        match_to = c(
+          "prefix",
+          "type",
+          "nodes",
+          "pair",
+          "which",
+          "base",
+          "compressed",
+          "directed"
+        ),
+        defaults = list(
+          prefix = "iso",
+          type = "r001",
+          nodes = NULL,
+          pair = "A",
+          which = 0,
+          base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+          compressed = TRUE,
+          directed = TRUE
+        ),
+        head_args = c("url"),
+        fn_name = "graph_from_graphdb"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

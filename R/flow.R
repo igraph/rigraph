@@ -394,23 +394,26 @@ min_cut <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: min_cut, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(capacity = capacity, value.only = value.only),
-      recover_new = c("capacity", "value.only"),
-      recover_old = c("capacity", "value.only"),
-      match_names = c("capacity", "value.only"),
-      match_to = c("capacity", "value.only"),
-      defaults = list(capacity = NULL, value.only = TRUE),
-      head_args = c("graph", "source", "target"),
-      fn_name = "min_cut"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(capacity = capacity, value.only = value.only),
+        recover_new = c("capacity", "value.only"),
+        recover_old = c("capacity", "value.only"),
+        match_names = c("capacity", "value.only"),
+        match_to = c("capacity", "value.only"),
+        defaults = list(capacity = NULL, value.only = TRUE),
+        head_args = c("graph", "source", "target"),
+        fn_name = "min_cut"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -548,23 +551,26 @@ vertex_connectivity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: vertex_connectivity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(checks = checks),
-      recover_new = c("checks"),
-      recover_old = c("checks"),
-      match_names = c("checks"),
-      match_to = c("checks"),
-      defaults = list(checks = TRUE),
-      head_args = c("graph", "source", "target"),
-      fn_name = "vertex_connectivity"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(checks = checks),
+        recover_new = c("checks"),
+        recover_old = c("checks"),
+        match_names = c("checks"),
+        match_to = c("checks"),
+        defaults = list(checks = TRUE),
+        head_args = c("graph", "source", "target"),
+        fn_name = "vertex_connectivity"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -675,23 +681,26 @@ edge_connectivity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: edge_connectivity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(checks = checks),
-      recover_new = c("checks"),
-      recover_old = c("checks"),
-      match_names = c("checks"),
-      match_to = c("checks"),
-      defaults = list(checks = TRUE),
-      head_args = c("graph", "source", "target"),
-      fn_name = "edge_connectivity"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(checks = checks),
+        recover_new = c("checks"),
+        recover_old = c("checks"),
+        match_names = c("checks"),
+        match_to = c("checks"),
+        defaults = list(checks = TRUE),
+        head_args = c("graph", "source", "target"),
+        fn_name = "edge_connectivity"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -752,23 +761,26 @@ adhesion <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: adhesion, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(checks = checks),
-      recover_new = c("checks"),
-      recover_old = c("checks"),
-      match_names = c("checks"),
-      match_to = c("checks"),
-      defaults = list(checks = TRUE),
-      head_args = c("graph"),
-      fn_name = "adhesion"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(checks = checks),
+        recover_new = c("checks"),
+        recover_old = c("checks"),
+        match_names = c("checks"),
+        match_to = c("checks"),
+        defaults = list(checks = TRUE),
+        head_args = c("graph"),
+        fn_name = "adhesion"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -904,23 +916,26 @@ st_min_cuts <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: st_min_cuts, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(capacity = capacity),
-      recover_new = c("capacity"),
-      recover_old = c("capacity"),
-      match_names = c("capacity"),
-      match_to = c("capacity"),
-      defaults = list(capacity = NULL),
-      head_args = c("graph", "source", "target"),
-      fn_name = "st_min_cuts"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(capacity = capacity),
+        recover_new = c("capacity"),
+        recover_old = c("capacity"),
+        match_names = c("capacity"),
+        match_to = c("capacity"),
+        defaults = list(capacity = NULL),
+        head_args = c("graph", "source", "target"),
+        fn_name = "st_min_cuts"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1004,23 +1019,26 @@ dominator_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: dominator_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode),
-      recover_new = c("mode"),
-      recover_old = c("mode"),
-      match_names = c("mode"),
-      match_to = c("mode"),
-      defaults = list(mode = c("out", "in", "all", "total")),
-      head_args = c("graph", "root"),
-      fn_name = "dominator_tree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(mode = mode),
+        recover_new = c("mode"),
+        recover_old = c("mode"),
+        match_names = c("mode"),
+        match_to = c("mode"),
+        defaults = list(mode = c("out", "in", "all", "total")),
+        head_args = c("graph", "root"),
+        fn_name = "dominator_tree"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1180,23 +1198,26 @@ max_flow <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: max_flow, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(capacity = capacity),
-      recover_new = c("capacity"),
-      recover_old = c("capacity"),
-      match_names = c("capacity"),
-      match_to = c("capacity"),
-      defaults = list(capacity = NULL),
-      head_args = c("graph", "source", "target"),
-      fn_name = "max_flow"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(capacity = capacity),
+        recover_new = c("capacity"),
+        recover_old = c("capacity"),
+        match_names = c("capacity"),
+        match_to = c("capacity"),
+        defaults = list(capacity = NULL),
+        head_args = c("graph", "source", "target"),
+        fn_name = "max_flow"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

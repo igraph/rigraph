@@ -382,23 +382,26 @@ add_shape <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(clip = clip, plot = plot, parameters = parameters),
-      recover_new = c("clip", "plot", "parameters"),
-      recover_old = c("clip", "plot", "parameters"),
-      match_names = c("clip", "plot", "parameters"),
-      match_to = c("clip", "plot", "parameters"),
-      defaults = list(clip = NULL, plot = NULL, parameters = list()),
-      head_args = c("shape"),
-      fn_name = "add_shape"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(clip = clip, plot = plot, parameters = parameters),
+        recover_new = c("clip", "plot", "parameters"),
+        recover_old = c("clip", "plot", "parameters"),
+        match_names = c("clip", "plot", "parameters"),
+        match_to = c("clip", "plot", "parameters"),
+        defaults = list(clip = NULL, plot = NULL, parameters = list()),
+        head_args = c("shape"),
+        fn_name = "add_shape"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

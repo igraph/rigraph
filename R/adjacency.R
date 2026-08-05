@@ -293,58 +293,61 @@ graph_from_adjacency_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_adjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("a", "ad"),
-      "graph_from_adjacency_matrix"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        mode = mode,
-        weighted = weighted,
-        diag = diag,
-        add.colnames = add.colnames,
-        add.rownames = add.rownames
-      ),
-      recover_new = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      recover_old = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      match_names = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
-      defaults = list(
-        mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
-        weighted = NULL,
-        diag = TRUE,
-        add.colnames = NULL,
-        add.rownames = NA
-      ),
-      head_args = c("adjmatrix"),
-      fn_name = "graph_from_adjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("a", "ad"),
+        "graph_from_adjacency_matrix"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          mode = mode,
+          weighted = weighted,
+          diag = diag,
+          add.colnames = add.colnames,
+          add.rownames = add.rownames
+        ),
+        recover_new = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        recover_old = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        match_names = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
+        defaults = list(
+          mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+          weighted = NULL,
+          diag = TRUE,
+          add.colnames = NULL,
+          add.rownames = NA
+        ),
+        head_args = c("adjmatrix"),
+        fn_name = "graph_from_adjacency_matrix"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -461,58 +464,61 @@ from_adjacency <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: from_adjacency, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("a", "ad"),
-      "from_adjacency"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        mode = mode,
-        weighted = weighted,
-        diag = diag,
-        add.colnames = add.colnames,
-        add.rownames = add.rownames
-      ),
-      recover_new = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      recover_old = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      match_names = c(
-        "mode",
-        "weighted",
-        "diag",
-        "add.colnames",
-        "add.rownames"
-      ),
-      match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
-      defaults = list(
-        mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
-        weighted = NULL,
-        diag = TRUE,
-        add.colnames = NULL,
-        add.rownames = NA
-      ),
-      head_args = c("adjmatrix"),
-      fn_name = "from_adjacency"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("a", "ad"),
+        "from_adjacency"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          mode = mode,
+          weighted = weighted,
+          diag = diag,
+          add.colnames = add.colnames,
+          add.rownames = add.rownames
+        ),
+        recover_new = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        recover_old = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        match_names = c(
+          "mode",
+          "weighted",
+          "diag",
+          "add.colnames",
+          "add.rownames"
+        ),
+        match_to = c("mode", "weighted", "diag", "add.colnames", "add.rownames"),
+        defaults = list(
+          mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+          weighted = NULL,
+          diag = TRUE,
+          add.colnames = NULL,
+          add.rownames = NA
+        ),
+        head_args = c("adjmatrix"),
+        fn_name = "from_adjacency"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

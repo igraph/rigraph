@@ -158,12 +158,27 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 # ---- test-migration-fixture.R -----------------------------------------------
 
 # Config equivalent to the fixture, for exercising the helper directly.
+# Minimal host for `migrate_capture_dots()`: the same shape as a migrated
+# function (head args, then `...`, then the recoverable tail), so the helper
+# sees a real `...` and can be checked directly.
+migrate_capture_dots_at <- function(a, ..., b = 1) {
+  migrate_capture_dots()
+}
+
 fixture_args <- function(
   dots,
-  current = list(weights = NULL, type = "out", directed = FALSE)
+  current = list(weights = NULL, type = "out", directed = FALSE),
+  pos = NULL
 ) {
+  # Callers pass the plain dots list; wrap it the way `migrate_capture_dots()`
+  # would. Unnamed slots take their ordinal in order unless `pos` overrides it
+  # (which is how an empty slot shifts the later positionals along).
+  if (is.null(pos)) {
+    unnamed <- !nzchar(rlang::names2(dots))
+    pos <- ifelse(unnamed, cumsum(unnamed), NA_integer_)
+  }
   migrate_recover_args(
-    dots,
+    list(values = dots, pos = as.integer(pos)),
     current = current,
     recover_new = c("weights", "type", "directed"),
     recover_old = c("weight", "kind", "directed"),

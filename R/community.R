@@ -780,32 +780,35 @@ make_clusters <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_clusters, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("m", "me"),
-      "make_clusters"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        algorithm = algorithm,
-        merges = merges,
-        modularity = modularity
-      ),
-      recover_new = c("algorithm", "merges", "modularity"),
-      recover_old = c("algorithm", "merges", "modularity"),
-      match_names = c("algorithm", "merges", "modularity"),
-      match_to = c("algorithm", "merges", "modularity"),
-      defaults = list(algorithm = NULL, merges = NULL, modularity = TRUE),
-      head_args = c("graph", "membership"),
-      fn_name = "make_clusters"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("m", "me"),
+        "make_clusters"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          algorithm = algorithm,
+          merges = merges,
+          modularity = modularity
+        ),
+        recover_new = c("algorithm", "merges", "modularity"),
+        recover_old = c("algorithm", "merges", "modularity"),
+        match_names = c("algorithm", "merges", "modularity"),
+        match_to = c("algorithm", "merges", "modularity"),
+        defaults = list(algorithm = NULL, merges = NULL, modularity = TRUE),
+        head_args = c("graph", "membership"),
+        fn_name = "make_clusters"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -983,27 +986,30 @@ modularity_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: modularity_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        resolution = resolution,
-        directed = directed
-      ),
-      recover_new = c("weights", "resolution", "directed"),
-      recover_old = c("weights", "resolution", "directed"),
-      match_names = c("weights", "resolution", "directed"),
-      match_to = c("weights", "resolution", "directed"),
-      defaults = list(weights = NULL, resolution = 1, directed = TRUE),
-      head_args = c("graph", "membership"),
-      fn_name = "modularity_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          resolution = resolution,
+          directed = directed
+        ),
+        recover_new = c("weights", "resolution", "directed"),
+        recover_old = c("weights", "resolution", "directed"),
+        match_names = c("weights", "resolution", "directed"),
+        match_to = c("weights", "resolution", "directed"),
+        defaults = list(weights = NULL, resolution = 1, directed = TRUE),
+        head_args = c("graph", "membership"),
+        fn_name = "modularity_matrix"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1555,100 +1561,103 @@ cluster_spinglass <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_spinglass, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("g"),
-      "cluster_spinglass"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        vertex = vertex,
-        spins = spins,
-        parupdate = parupdate,
-        start.temp = start.temp,
-        stop.temp = stop.temp,
-        cool.fact = cool.fact,
-        update.rule = update.rule,
-        gamma = gamma,
-        implementation = implementation,
-        gamma.minus = gamma.minus
-      ),
-      recover_new = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      recover_old = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      match_names = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      match_to = c(
-        "weights",
-        "vertex",
-        "spins",
-        "parupdate",
-        "start.temp",
-        "stop.temp",
-        "cool.fact",
-        "update.rule",
-        "gamma",
-        "implementation",
-        "gamma.minus"
-      ),
-      defaults = list(
-        weights = NULL,
-        vertex = NULL,
-        spins = 25,
-        parupdate = FALSE,
-        start.temp = 1,
-        stop.temp = 0.01,
-        cool.fact = 0.99,
-        update.rule = c("config", "random", "simple"),
-        gamma = 1,
-        implementation = c("orig", "neg"),
-        gamma.minus = 1
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_spinglass"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      migrate_check_call_tags(
+        sys.call(),
+        c("g"),
+        "cluster_spinglass"
+      )
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          vertex = vertex,
+          spins = spins,
+          parupdate = parupdate,
+          start.temp = start.temp,
+          stop.temp = stop.temp,
+          cool.fact = cool.fact,
+          update.rule = update.rule,
+          gamma = gamma,
+          implementation = implementation,
+          gamma.minus = gamma.minus
+        ),
+        recover_new = c(
+          "weights",
+          "vertex",
+          "spins",
+          "parupdate",
+          "start.temp",
+          "stop.temp",
+          "cool.fact",
+          "update.rule",
+          "gamma",
+          "implementation",
+          "gamma.minus"
+        ),
+        recover_old = c(
+          "weights",
+          "vertex",
+          "spins",
+          "parupdate",
+          "start.temp",
+          "stop.temp",
+          "cool.fact",
+          "update.rule",
+          "gamma",
+          "implementation",
+          "gamma.minus"
+        ),
+        match_names = c(
+          "weights",
+          "vertex",
+          "spins",
+          "parupdate",
+          "start.temp",
+          "stop.temp",
+          "cool.fact",
+          "update.rule",
+          "gamma",
+          "implementation",
+          "gamma.minus"
+        ),
+        match_to = c(
+          "weights",
+          "vertex",
+          "spins",
+          "parupdate",
+          "start.temp",
+          "stop.temp",
+          "cool.fact",
+          "update.rule",
+          "gamma",
+          "implementation",
+          "gamma.minus"
+        ),
+        defaults = list(
+          weights = NULL,
+          vertex = NULL,
+          spins = 25,
+          parupdate = FALSE,
+          start.temp = 1,
+          stop.temp = 0.01,
+          cool.fact = 0.99,
+          update.rule = c("config", "random", "simple"),
+          gamma = 1,
+          implementation = c("orig", "neg"),
+          gamma.minus = 1
+        ),
+        head_args = c("graph"),
+        fn_name = "cluster_spinglass"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2039,35 +2048,38 @@ cluster_walktrap <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_walktrap, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        steps = steps,
-        merges = merges,
-        modularity = modularity,
-        membership = membership
-      ),
-      recover_new = c("weights", "steps", "merges", "modularity", "membership"),
-      recover_old = c("weights", "steps", "merges", "modularity", "membership"),
-      match_names = c("weights", "steps", "merges", "modularity", "membership"),
-      match_to = c("weights", "steps", "merges", "modularity", "membership"),
-      defaults = list(
-        weights = NULL,
-        steps = 4,
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_walktrap"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          steps = steps,
+          merges = merges,
+          modularity = modularity,
+          membership = membership
+        ),
+        recover_new = c("weights", "steps", "merges", "modularity", "membership"),
+        recover_old = c("weights", "steps", "merges", "modularity", "membership"),
+        match_names = c("weights", "steps", "merges", "modularity", "membership"),
+        match_to = c("weights", "steps", "merges", "modularity", "membership"),
+        defaults = list(
+          weights = NULL,
+          steps = 4,
+          merges = TRUE,
+          modularity = TRUE,
+          membership = TRUE
+        ),
+        head_args = c("graph"),
+        fn_name = "cluster_walktrap"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2207,71 +2219,74 @@ cluster_edge_betweenness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_edge_betweenness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        weights = weights,
-        directed = directed,
-        edge.betweenness = edge.betweenness,
-        merges = merges,
-        bridges = bridges,
-        modularity = modularity,
-        membership = membership
-      ),
-      recover_new = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      recover_old = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      match_names = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      match_to = c(
-        "weights",
-        "directed",
-        "edge.betweenness",
-        "merges",
-        "bridges",
-        "modularity",
-        "membership"
-      ),
-      defaults = list(
-        weights = NULL,
-        directed = TRUE,
-        edge.betweenness = TRUE,
-        merges = TRUE,
-        bridges = TRUE,
-        modularity = TRUE,
-        membership = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_edge_betweenness"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          weights = weights,
+          directed = directed,
+          edge.betweenness = edge.betweenness,
+          merges = merges,
+          bridges = bridges,
+          modularity = modularity,
+          membership = membership
+        ),
+        recover_new = c(
+          "weights",
+          "directed",
+          "edge.betweenness",
+          "merges",
+          "bridges",
+          "modularity",
+          "membership"
+        ),
+        recover_old = c(
+          "weights",
+          "directed",
+          "edge.betweenness",
+          "merges",
+          "bridges",
+          "modularity",
+          "membership"
+        ),
+        match_names = c(
+          "weights",
+          "directed",
+          "edge.betweenness",
+          "merges",
+          "bridges",
+          "modularity",
+          "membership"
+        ),
+        match_to = c(
+          "weights",
+          "directed",
+          "edge.betweenness",
+          "merges",
+          "bridges",
+          "modularity",
+          "membership"
+        ),
+        defaults = list(
+          weights = NULL,
+          directed = TRUE,
+          edge.betweenness = TRUE,
+          merges = TRUE,
+          bridges = TRUE,
+          modularity = TRUE,
+          membership = TRUE
+        ),
+        head_args = c("graph"),
+        fn_name = "cluster_edge_betweenness"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2371,33 +2386,36 @@ cluster_fast_greedy <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_fast_greedy, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        merges = merges,
-        modularity = modularity,
-        membership = membership,
-        weights = weights
-      ),
-      recover_new = c("merges", "modularity", "membership", "weights"),
-      recover_old = c("merges", "modularity", "membership", "weights"),
-      match_names = c("merges", "modularity", "membership", "weights"),
-      match_to = c("merges", "modularity", "membership", "weights"),
-      defaults = list(
-        merges = TRUE,
-        modularity = TRUE,
-        membership = TRUE,
-        weights = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_fast_greedy"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          merges = merges,
+          modularity = modularity,
+          membership = membership,
+          weights = weights
+        ),
+        recover_new = c("merges", "modularity", "membership", "weights"),
+        recover_old = c("merges", "modularity", "membership", "weights"),
+        match_names = c("merges", "modularity", "membership", "weights"),
+        match_to = c("merges", "modularity", "membership", "weights"),
+        defaults = list(
+          merges = TRUE,
+          modularity = TRUE,
+          membership = TRUE,
+          weights = NULL
+        ),
+        head_args = c("graph"),
+        fn_name = "cluster_fast_greedy"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2828,23 +2846,26 @@ cluster_louvain <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_louvain, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, resolution = resolution),
-      recover_new = c("weights", "resolution"),
-      recover_old = c("weights", "resolution"),
-      match_names = c("weights", "resolution"),
-      match_to = c("weights", "resolution"),
-      defaults = list(weights = NULL, resolution = 1),
-      head_args = c("graph"),
-      fn_name = "cluster_louvain"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights, resolution = resolution),
+        recover_new = c("weights", "resolution"),
+        recover_old = c("weights", "resolution"),
+        match_names = c("weights", "resolution"),
+        match_to = c("weights", "resolution"),
+        defaults = list(weights = NULL, resolution = 1),
+        head_args = c("graph"),
+        fn_name = "cluster_louvain"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2947,23 +2968,26 @@ cluster_optimal <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_optimal, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights),
-      recover_new = c("weights"),
-      recover_old = c("weights"),
-      match_names = c("weights"),
-      match_to = c("weights"),
-      defaults = list(weights = NULL),
-      head_args = c("graph"),
-      fn_name = "cluster_optimal"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(weights = weights),
+        recover_new = c("weights"),
+        recover_old = c("weights"),
+        match_names = c("weights"),
+        match_to = c("weights"),
+        defaults = list(weights = NULL),
+        head_args = c("graph"),
+        fn_name = "cluster_optimal"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3056,33 +3080,36 @@ cluster_infomap <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        e.weights = e.weights,
-        v.weights = v.weights,
-        nb.trials = nb.trials,
-        modularity = modularity
-      ),
-      recover_new = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      recover_old = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      match_names = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      match_to = c("e.weights", "v.weights", "nb.trials", "modularity"),
-      defaults = list(
-        e.weights = NULL,
-        v.weights = NULL,
-        nb.trials = 10,
-        modularity = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "cluster_infomap"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .migrate_dots <- migrate_capture_dots()
+    if (length(.migrate_dots$values) > 0L) {
+      .arg_handle <- migrate_recover_args(
+        .migrate_dots,
+        current = list(
+          e.weights = e.weights,
+          v.weights = v.weights,
+          nb.trials = nb.trials,
+          modularity = modularity
+        ),
+        recover_new = c("e.weights", "v.weights", "nb.trials", "modularity"),
+        recover_old = c("e.weights", "v.weights", "nb.trials", "modularity"),
+        match_names = c("e.weights", "v.weights", "nb.trials", "modularity"),
+        match_to = c("e.weights", "v.weights", "nb.trials", "modularity"),
+        defaults = list(
+          e.weights = NULL,
+          v.weights = NULL,
+          nb.trials = 10,
+          modularity = TRUE
+        ),
+        head_args = c("graph"),
+        fn_name = "cluster_infomap"
+      )
+      list2env(.arg_handle$values, environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = I(.arg_handle$what),
+        details = .arg_handle$details
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
