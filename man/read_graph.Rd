@@ -10,12 +10,7 @@
 \alias{UCINET}
 \title{Reading foreign file formats}
 \usage{
-read_graph(
-  file,
-  format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "graphdb", "gml",
-    "dl"),
-  ...
-)
+read_graph(file, format = NULL, ...)
 }
 \arguments{
 \item{file}{The connection to read from. This can be a local file, or a

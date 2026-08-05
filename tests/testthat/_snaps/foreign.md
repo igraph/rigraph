@@ -42,6 +42,64 @@
       Error in `write_graph()`:
       ! `format` must be one of "edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot", or "leda", not "blop".
 
+# reading GML file works with lesmis
+
+    Code
+      read_graph(igraphdata::lesmis_gml(), format = "gml")
+    Output
+      IGRAPH UN-- 77 254 -- 
+      + attr: id (v/n), name (v/c), value (e/n)
+      + edges (vertex names):
+       [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
+       [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
+       [5] Myriel        --CountessDeLo   Myriel        --Geborand      
+       [7] Myriel        --Champtercier   Myriel        --Cravatte      
+       [9] Myriel        --Count          Myriel        --OldMan        
+      [11] Labarre       --Valjean        MmeMagloire   --Valjean       
+      [13] MlleBaptistine--Valjean        Myriel        --Valjean       
+      [15] Valjean       --Marguerite     Valjean       --MmeDeR        
+      + ... omitted several edges
+
+# reading GraphML file works with lesmis
+
+    Code
+      read_graph(igraphdata::lesmis_graphml(), format = "graphml")
+    Condition
+      Warning in `read_graph_graphml_impl()`:
+      Could not add vertex ids, there is already an 'id' vertex attribute.
+      Source: io/graphml.c:486
+    Output
+      IGRAPH UN-- 77 254 -- 
+      + attr: id (v/n), name (v/c), value (e/n)
+      + edges (vertex names):
+       [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
+       [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
+       [5] Myriel        --CountessDeLo   Myriel        --Geborand      
+       [7] Myriel        --Champtercier   Myriel        --Cravatte      
+       [9] Myriel        --Count          Myriel        --OldMan        
+      [11] Labarre       --Valjean        MmeMagloire   --Valjean       
+      [13] MlleBaptistine--Valjean        Myriel        --Valjean       
+      [15] Valjean       --Marguerite     Valjean       --MmeDeR        
+      + ... omitted several edges
+
+# reading Pajek file works with lesmis
+
+    Code
+      read_graph(igraphdata::lesmis_pajek(), format = "pajek")
+    Output
+      IGRAPH UN-- 77 254 -- 
+      + attr: id (v/c), name (v/c)
+      + edges (vertex names):
+       [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
+       [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
+       [5] Myriel        --CountessDeLo   Myriel        --Geborand      
+       [7] Myriel        --Champtercier   Myriel        --Cravatte      
+       [9] Myriel        --Count          Myriel        --OldMan        
+      [11] Labarre       --Valjean        MmeMagloire   --Valjean       
+      [13] MlleBaptistine--Valjean        Myriel        --Valjean       
+      [15] Valjean       --Marguerite     Valjean       --MmeDeR        
+      + ... omitted several edges
+
 # graph_from_graphdb works
 
     Code

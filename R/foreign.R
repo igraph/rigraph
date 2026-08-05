@@ -303,19 +303,10 @@ write.graph.fromraw <- function(buffer, file) {
 #' @keywords graphs
 #' @family foreign
 #' @export
+
 read_graph <- function(
   file,
-  format = c(
-    "edgelist",
-    "pajek",
-    "ncol",
-    "lgl",
-    "graphml",
-    "dimacs",
-    "graphdb",
-    "gml",
-    "dl"
-  ),
+  format = NULL,
   ...
 ) {
   if (
@@ -328,7 +319,41 @@ read_graph <- function(
     write.graph.fromraw(buffer, file)
   }
 
-  format <- igraph_match_arg(format)
+  file_extension <- tools::file_ext(file)
+  if (is.null(format)) {
+    format <- switch(
+      file_extension,
+      "net" = "pajek",
+      "gml" = "gml",
+      "graphml" = "graphml",
+      {
+        lifecycle::deprecate_soft(
+          "2.3.3",
+          sprintf(
+            "read_graph(format = 'must be non NULL for file extension %s')",
+            file_extension
+          ),
+          details = "Defaulting to `edgelist`"
+        )
+        "edgelist"
+      }
+    )
+  }
+
+  format <- rlang::arg_match(
+    format,
+    c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "graphdb",
+    "gml",
+    "dl"
+  )
+  )
   res <- switch(
     format,
     "pajek" = read.graph.pajek(file, ...),
@@ -465,17 +490,7 @@ read_graph <- function(
 write_graph <- function(
   graph,
   file,
-  format = c(
-    "edgelist",
-    "pajek",
-    "ncol",
-    "lgl",
-    "graphml",
-    "dimacs",
-    "gml",
-    "dot",
-    "leda"
-  ),
+  format = NULL,
   ...
 ) {
   ensure_igraph(graph)
@@ -491,7 +506,41 @@ write_graph <- function(
     tmpfile <- FALSE
   }
 
-  format <- igraph_match_arg(format)
+  file_extension <- tools::file_ext(file)
+  if (is.null(format)) {
+    format <- switch(
+      file_extension,
+      "net" = "pajek",
+      "gml" = "gml",
+      "graphml" = "graphml",
+      {
+        lifecycle::deprecate_soft(
+          "2.3.3",
+          sprintf(
+            "write_graph(format = 'must be non NULL for file extension %s')",
+            file_extension
+          ),
+          details = "Defaulting to `edgelist`"
+        )
+        "edgelist"
+      }
+    )
+  }
+
+  format <- rlang::arg_match(
+    format,
+    c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "gml",
+    "dot",
+    "leda"
+  )
+  )
   res <- switch(
     format,
     "pajek" = write.graph.pajek(graph, file, ...),
