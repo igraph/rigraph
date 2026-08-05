@@ -19,19 +19,18 @@ migration_fixture <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: migration_fixture, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights, type = type, directed = directed),
-        recover_new = c("weights", "type", "directed"),
-        recover_old = c("weight", "kind", "directed"),
-        match_names = c("weight", "kind", "weights", "type", "directed"),
-        match_to = c("weights", "type", "weights", "type", "directed"),
-        defaults = list(weights = NULL, type = "out", directed = FALSE),
-        head_args = c("graph", "n"),
-        fn_name = "migration_fixture"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights, type = type, directed = directed),
+      recover_new = c("weights", "type", "directed"),
+      recover_old = c("weight", "kind", "directed"),
+      match_names = c("weight", "kind", "weights", "type", "directed"),
+      match_to = c("weights", "type", "weights", "type", "directed"),
+      defaults = list(weights = NULL, type = "out", directed = FALSE),
+      head_args = c("graph", "n"),
+      fn_name = "migration_fixture"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -67,24 +66,23 @@ migration_fixture_prefix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: migration_fixture_prefix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      migrate_check_call_tags(
-        sys.call(),
-        c("d", "di"),
-        "migration_fixture_prefix"
-      )
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(dim = dim, permutation = permutation),
-        recover_new = c("dim", "permutation"),
-        recover_old = c("dim", "permutation"),
-        match_names = c("dim", "permutation"),
-        match_to = c("dim", "permutation"),
-        defaults = list(dim = NULL, permutation = NULL),
-        head_args = c("dimvector", "p"),
-        fn_name = "migration_fixture_prefix"
-      )
+    migrate_check_call_tags(
+      sys.call(),
+      c("d", "di"),
+      "migration_fixture_prefix"
+    )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(dim = dim, permutation = permutation),
+      recover_new = c("dim", "permutation"),
+      recover_old = c("dim", "permutation"),
+      match_names = c("dim", "permutation"),
+      match_to = c("dim", "permutation"),
+      defaults = list(dim = NULL, permutation = NULL),
+      head_args = c("dimvector", "p"),
+      fn_name = "migration_fixture_prefix"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

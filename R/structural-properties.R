@@ -760,23 +760,22 @@ diameter <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: diameter, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          directed = directed,
-          unconnected = unconnected,
-          weights = weights
-        ),
-        recover_new = c("directed", "unconnected", "weights"),
-        recover_old = c("directed", "unconnected", "weights"),
-        match_names = c("directed", "unconnected", "weights"),
-        match_to = c("directed", "unconnected", "weights"),
-        defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
-        head_args = c("graph"),
-        fn_name = "diameter"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "diameter"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -820,23 +819,22 @@ get_diameter <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: get_diameter, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          directed = directed,
-          unconnected = unconnected,
-          weights = weights
-        ),
-        recover_new = c("directed", "unconnected", "weights"),
-        recover_old = c("directed", "unconnected", "weights"),
-        match_names = c("directed", "unconnected", "weights"),
-        match_to = c("directed", "unconnected", "weights"),
-        defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
-        head_args = c("graph"),
-        fn_name = "get_diameter"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "get_diameter"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -887,23 +885,22 @@ farthest_vertices <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: farthest_vertices, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          directed = directed,
-          unconnected = unconnected,
-          weights = weights
-        ),
-        recover_new = c("directed", "unconnected", "weights"),
-        recover_old = c("directed", "unconnected", "weights"),
-        match_names = c("directed", "unconnected", "weights"),
-        match_to = c("directed", "unconnected", "weights"),
-        defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
-        head_args = c("graph"),
-        fn_name = "farthest_vertices"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        directed = directed,
+        unconnected = unconnected,
+        weights = weights
+      ),
+      recover_new = c("directed", "unconnected", "weights"),
+      recover_old = c("directed", "unconnected", "weights"),
+      match_names = c("directed", "unconnected", "weights"),
+      match_to = c("directed", "unconnected", "weights"),
+      defaults = list(directed = TRUE, unconnected = TRUE, weights = NULL),
+      head_args = c("graph"),
+      fn_name = "farthest_vertices"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -955,29 +952,28 @@ mean_distance <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: mean_distance, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          weights = weights,
-          directed = directed,
-          unconnected = unconnected,
-          details = details
-        ),
-        recover_new = c("weights", "directed", "unconnected", "details"),
-        recover_old = c("weights", "directed", "unconnected", "details"),
-        match_names = c("weights", "directed", "unconnected", "details"),
-        match_to = c("weights", "directed", "unconnected", "details"),
-        defaults = list(
-          weights = NULL,
-          directed = TRUE,
-          unconnected = TRUE,
-          details = FALSE
-        ),
-        head_args = c("graph"),
-        fn_name = "mean_distance"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        weights = weights,
+        directed = directed,
+        unconnected = unconnected,
+        details = details
+      ),
+      recover_new = c("weights", "directed", "unconnected", "details"),
+      recover_old = c("weights", "directed", "unconnected", "details"),
+      match_names = c("weights", "directed", "unconnected", "details"),
+      match_to = c("weights", "directed", "unconnected", "details"),
+      defaults = list(
+        weights = NULL,
+        directed = TRUE,
+        unconnected = TRUE,
+        details = FALSE
+      ),
+      head_args = c("graph"),
+      fn_name = "mean_distance"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1051,23 +1047,22 @@ degree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: degree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, loops = loops, normalized = normalized),
-        recover_new = c("mode", "loops", "normalized"),
-        recover_old = c("mode", "loops", "normalized"),
-        match_names = c("mode", "loops", "normalized"),
-        match_to = c("mode", "loops", "normalized"),
-        defaults = list(
-          mode = c("all", "out", "in", "total"),
-          loops = TRUE,
-          normalized = FALSE
-        ),
-        head_args = c("graph", "v"),
-        fn_name = "degree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, loops = loops, normalized = normalized),
+      recover_new = c("mode", "loops", "normalized"),
+      recover_old = c("mode", "loops", "normalized"),
+      match_names = c("mode", "loops", "normalized"),
+      match_to = c("mode", "loops", "normalized"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        normalized = FALSE
+      ),
+      head_args = c("graph", "v"),
+      fn_name = "degree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1132,19 +1127,18 @@ mean_degree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: mean_degree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(loops = loops),
-        recover_new = c("loops"),
-        recover_old = c("loops"),
-        match_names = c("loops"),
-        match_to = c("loops"),
-        defaults = list(loops = TRUE),
-        head_args = c("graph"),
-        fn_name = "mean_degree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = TRUE),
+      head_args = c("graph"),
+      fn_name = "mean_degree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1402,23 +1396,22 @@ distances <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: distances, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, weights = weights, algorithm = algorithm),
-        recover_new = c("mode", "weights", "algorithm"),
-        recover_old = c("mode", "weights", "algorithm"),
-        match_names = c("mode", "weights", "algorithm"),
-        match_to = c("mode", "weights", "algorithm"),
-        defaults = list(
-          mode = c("all", "out", "in"),
-          weights = NULL,
-          algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall")
-        ),
-        head_args = c("graph", "v", "to"),
-        fn_name = "distances"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, weights = weights, algorithm = algorithm),
+      recover_new = c("mode", "weights", "algorithm"),
+      recover_old = c("mode", "weights", "algorithm"),
+      match_names = c("mode", "weights", "algorithm"),
+      match_to = c("mode", "weights", "algorithm"),
+      defaults = list(
+        mode = c("all", "out", "in"),
+        weights = NULL,
+        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson", "floyd-warshall")
+      ),
+      head_args = c("graph", "v", "to"),
+      fn_name = "distances"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1532,61 +1525,60 @@ shortest_paths <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: shortest_paths, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          mode = mode,
-          weights = weights,
-          output = output,
-          predecessors = predecessors,
-          inbound.edges = inbound.edges,
-          algorithm = algorithm
-        ),
-        recover_new = c(
-          "mode",
-          "weights",
-          "output",
-          "predecessors",
-          "inbound.edges",
-          "algorithm"
-        ),
-        recover_old = c(
-          "mode",
-          "weights",
-          "output",
-          "predecessors",
-          "inbound.edges",
-          "algorithm"
-        ),
-        match_names = c(
-          "mode",
-          "weights",
-          "output",
-          "predecessors",
-          "inbound.edges",
-          "algorithm"
-        ),
-        match_to = c(
-          "mode",
-          "weights",
-          "output",
-          "predecessors",
-          "inbound.edges",
-          "algorithm"
-        ),
-        defaults = list(
-          mode = c("out", "all", "in"),
-          weights = NULL,
-          output = c("vpath", "epath", "both"),
-          predecessors = FALSE,
-          inbound.edges = FALSE,
-          algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
-        ),
-        head_args = c("graph", "from", "to"),
-        fn_name = "shortest_paths"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        output = output,
+        predecessors = predecessors,
+        inbound.edges = inbound.edges,
+        algorithm = algorithm
+      ),
+      recover_new = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      recover_old = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      match_names = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      match_to = c(
+        "mode",
+        "weights",
+        "output",
+        "predecessors",
+        "inbound.edges",
+        "algorithm"
+      ),
+      defaults = list(
+        mode = c("out", "all", "in"),
+        weights = NULL,
+        output = c("vpath", "epath", "both"),
+        predecessors = FALSE,
+        inbound.edges = FALSE,
+        algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
+      ),
+      head_args = c("graph", "from", "to"),
+      fn_name = "shortest_paths"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1709,19 +1701,18 @@ all_shortest_paths <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: all_shortest_paths, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, weights = weights),
-        recover_new = c("mode", "weights"),
-        recover_old = c("mode", "weights"),
-        match_names = c("mode", "weights"),
-        match_to = c("mode", "weights"),
-        defaults = list(mode = c("out", "all", "in"), weights = NULL),
-        head_args = c("graph", "from", "to"),
-        fn_name = "all_shortest_paths"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, weights = weights),
+      recover_new = c("mode", "weights"),
+      recover_old = c("mode", "weights"),
+      match_names = c("mode", "weights"),
+      match_to = c("mode", "weights"),
+      defaults = list(mode = c("out", "all", "in"), weights = NULL),
+      head_args = c("graph", "from", "to"),
+      fn_name = "all_shortest_paths"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1863,19 +1854,18 @@ subcomponent <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: subcomponent, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("all", "out", "in")),
-        head_args = c("graph", "v"),
-        fn_name = "subcomponent"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in")),
+      head_args = c("graph", "v"),
+      fn_name = "subcomponent"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1962,21 +1952,20 @@ induced_subgraph <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: induced_subgraph, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(impl = impl),
-        recover_new = c("impl"),
-        recover_old = c("impl"),
-        match_names = c("impl"),
-        match_to = c("impl"),
-        defaults = list(
-          impl = c("auto", "copy_and_delete", "create_from_scratch")
-        ),
-        head_args = c("graph", "vids"),
-        fn_name = "induced_subgraph"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(impl = impl),
+      recover_new = c("impl"),
+      recover_old = c("impl"),
+      match_names = c("impl"),
+      match_to = c("impl"),
+      defaults = list(
+        impl = c("auto", "copy_and_delete", "create_from_scratch")
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "induced_subgraph"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2016,19 +2005,18 @@ subgraph_from_edges <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: subgraph_from_edges, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(delete.vertices = delete.vertices),
-        recover_new = c("delete.vertices"),
-        recover_old = c("delete.vertices"),
-        match_names = c("delete.vertices"),
-        match_to = c("delete.vertices"),
-        defaults = list(delete.vertices = TRUE),
-        head_args = c("graph", "eids"),
-        fn_name = "subgraph_from_edges"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(delete.vertices = delete.vertices),
+      recover_new = c("delete.vertices"),
+      recover_old = c("delete.vertices"),
+      match_names = c("delete.vertices"),
+      match_to = c("delete.vertices"),
+      defaults = list(delete.vertices = TRUE),
+      head_args = c("graph", "eids"),
+      fn_name = "subgraph_from_edges"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2215,19 +2203,18 @@ transitivity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: transitivity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(vids = vids, weights = weights, isolates = isolates),
-        recover_new = c("vids", "weights", "isolates"),
-        recover_old = c("vids", "weights", "isolates"),
-        match_names = c("vids", "weights", "isolates"),
-        match_to = c("vids", "weights", "isolates"),
-        defaults = list(vids = NULL, weights = NULL, isolates = c("NaN", "zero")),
-        head_args = c("graph", "type"),
-        fn_name = "transitivity"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(vids = vids, weights = weights, isolates = isolates),
+      recover_new = c("vids", "weights", "isolates"),
+      recover_old = c("vids", "weights", "isolates"),
+      match_names = c("vids", "weights", "isolates"),
+      match_to = c("vids", "weights", "isolates"),
+      defaults = list(vids = NULL, weights = NULL, isolates = c("NaN", "zero")),
+      head_args = c("graph", "type"),
+      fn_name = "transitivity"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2393,19 +2380,18 @@ constraint <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: constraint, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights),
-        recover_new = c("weights"),
-        recover_old = c("weights"),
-        match_names = c("weights"),
-        match_to = c("weights"),
-        defaults = list(weights = NULL),
-        head_args = c("graph", "nodes"),
-        fn_name = "constraint"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights),
+      recover_new = c("weights"),
+      recover_old = c("weights"),
+      match_names = c("weights"),
+      match_to = c("weights"),
+      defaults = list(weights = NULL),
+      head_args = c("graph", "nodes"),
+      fn_name = "constraint"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2482,19 +2468,18 @@ reciprocity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: reciprocity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(ignore.loops = ignore.loops, mode = mode),
-        recover_new = c("ignore.loops", "mode"),
-        recover_old = c("ignore.loops", "mode"),
-        match_names = c("ignore.loops", "mode"),
-        match_to = c("ignore.loops", "mode"),
-        defaults = list(ignore.loops = TRUE, mode = c("default", "ratio")),
-        head_args = c("graph"),
-        fn_name = "reciprocity"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(ignore.loops = ignore.loops, mode = mode),
+      recover_new = c("ignore.loops", "mode"),
+      recover_old = c("ignore.loops", "mode"),
+      match_names = c("ignore.loops", "mode"),
+      match_to = c("ignore.loops", "mode"),
+      defaults = list(ignore.loops = TRUE, mode = c("default", "ratio")),
+      head_args = c("graph"),
+      fn_name = "reciprocity"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2558,19 +2543,18 @@ edge_density <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: edge_density, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(loops = loops),
-        recover_new = c("loops"),
-        recover_old = c("loops"),
-        match_names = c("loops"),
-        match_to = c("loops"),
-        defaults = list(loops = FALSE),
-        head_args = c("graph"),
-        fn_name = "edge_density"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = FALSE),
+      head_args = c("graph"),
+      fn_name = "edge_density"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2600,19 +2584,18 @@ ego_size <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: ego_size, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, mindist = mindist),
-        recover_new = c("mode", "mindist"),
-        recover_old = c("mode", "mindist"),
-        match_names = c("mode", "mindist"),
-        match_to = c("mode", "mindist"),
-        defaults = list(mode = c("all", "out", "in"), mindist = 0),
-        head_args = c("graph", "order", "nodes"),
-        fn_name = "ego_size"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "ego_size"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2745,19 +2728,18 @@ ego <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: ego, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, mindist = mindist),
-        recover_new = c("mode", "mindist"),
-        recover_old = c("mode", "mindist"),
-        match_names = c("mode", "mindist"),
-        match_to = c("mode", "mindist"),
-        defaults = list(mode = c("all", "out", "in"), mindist = 0),
-        head_args = c("graph", "order", "nodes"),
-        fn_name = "ego"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "ego"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2810,19 +2792,18 @@ make_ego_graph <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_ego_graph, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, mindist = mindist),
-        recover_new = c("mode", "mindist"),
-        recover_old = c("mode", "mindist"),
-        match_names = c("mode", "mindist"),
-        match_to = c("mode", "mindist"),
-        defaults = list(mode = c("all", "out", "in"), mindist = 0),
-        head_args = c("graph", "order", "nodes"),
-        fn_name = "make_ego_graph"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, mindist = mindist),
+      recover_new = c("mode", "mindist"),
+      recover_old = c("mode", "mindist"),
+      match_names = c("mode", "mindist"),
+      match_to = c("mode", "mindist"),
+      defaults = list(mode = c("all", "out", "in"), mindist = 0),
+      head_args = c("graph", "order", "nodes"),
+      fn_name = "make_ego_graph"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2900,19 +2881,18 @@ coreness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: coreness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("all", "out", "in")),
-        head_args = c("graph"),
-        fn_name = "coreness"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("all", "out", "in")),
+      head_args = c("graph"),
+      fn_name = "coreness"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2973,19 +2953,18 @@ topo_sort <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: topo_sort, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("out", "all", "in")),
-        head_args = c("graph"),
-        fn_name = "topo_sort"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "all", "in")),
+      head_args = c("graph"),
+      fn_name = "topo_sort"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3051,19 +3030,18 @@ feedback_arc_set <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: feedback_arc_set, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights, algo = algo),
-        recover_new = c("weights", "algo"),
-        recover_old = c("weights", "algo"),
-        match_names = c("weights", "algo"),
-        match_to = c("weights", "algo"),
-        defaults = list(weights = NULL, algo = c("approx_eades", "exact_ip")),
-        head_args = c("graph"),
-        fn_name = "feedback_arc_set"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights, algo = algo),
+      recover_new = c("weights", "algo"),
+      recover_old = c("weights", "algo"),
+      match_names = c("weights", "algo"),
+      match_to = c("weights", "algo"),
+      defaults = list(weights = NULL, algo = c("approx_eades", "exact_ip")),
+      head_args = c("graph"),
+      fn_name = "feedback_arc_set"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3118,19 +3096,18 @@ feedback_vertex_set <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: feedback_vertex_set, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights, algo = algo),
-        recover_new = c("weights", "algo"),
-        recover_old = c("weights", "algo"),
-        match_names = c("weights", "algo"),
-        match_to = c("weights", "algo"),
-        defaults = list(weights = NULL, algo = c("exact_ip")),
-        head_args = c("graph"),
-        fn_name = "feedback_vertex_set"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights, algo = algo),
+      recover_new = c("weights", "algo"),
+      recover_old = c("weights", "algo"),
+      match_names = c("weights", "algo"),
+      match_to = c("weights", "algo"),
+      defaults = list(weights = NULL, algo = c("exact_ip")),
+      head_args = c("graph"),
+      fn_name = "feedback_vertex_set"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3203,19 +3180,18 @@ girth <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: girth, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(circle = circle),
-        recover_new = c("circle"),
-        recover_old = c("circle"),
-        match_names = c("circle"),
-        match_to = c("circle"),
-        defaults = list(circle = TRUE),
-        head_args = c("graph"),
-        fn_name = "girth"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(circle = circle),
+      recover_new = c("circle"),
+      recover_old = c("circle"),
+      match_names = c("circle"),
+      match_to = c("circle"),
+      defaults = list(circle = TRUE),
+      head_args = c("graph"),
+      fn_name = "girth"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3966,19 +3942,18 @@ components <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: components, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("weak", "strong")),
-        head_args = c("graph"),
-        fn_name = "components"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "components"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4017,19 +3992,18 @@ is_connected <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_connected, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("weak", "strong")),
-        head_args = c("graph"),
-        fn_name = "is_connected"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "is_connected"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4056,19 +4030,18 @@ count_components <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_components, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("weak", "strong")),
-        head_args = c("graph"),
-        fn_name = "count_components"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "count_components"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4138,19 +4111,18 @@ count_reachable <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_reachable, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("out", "in", "all", "total")),
-        head_args = c("graph"),
-        fn_name = "count_reachable"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph"),
+      fn_name = "count_reachable"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4215,19 +4187,18 @@ unfold_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: unfold_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode", "roots"),
-        recover_old = c("mode", "roots"),
-        match_names = c("mode", "roots"),
-        match_to = c("mode", "roots"),
-        defaults = list(mode = c("all", "out", "in", "total")),
-        head_args = c("graph"),
-        fn_name = "unfold_tree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode", "roots"),
+      recover_old = c("mode", "roots"),
+      match_names = c("mode", "roots"),
+      match_to = c("mode", "roots"),
+      defaults = list(mode = c("all", "out", "in", "total")),
+      head_args = c("graph"),
+      fn_name = "unfold_tree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4510,19 +4481,18 @@ max_bipartite_match <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: max_bipartite_match, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights, eps = eps),
-        recover_new = c("weights", "eps"),
-        recover_old = c("weights", "eps"),
-        match_names = c("weights", "eps"),
-        match_to = c("weights", "eps"),
-        defaults = list(weights = NULL, eps = NULL),
-        head_args = c("graph", "types"),
-        fn_name = "max_bipartite_match"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights, eps = eps),
+      recover_new = c("weights", "eps"),
+      recover_old = c("weights", "eps"),
+      match_names = c("weights", "eps"),
+      match_to = c("weights", "eps"),
+      defaults = list(weights = NULL, eps = NULL),
+      head_args = c("graph", "types"),
+      fn_name = "max_bipartite_match"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4593,19 +4563,18 @@ which_mutual <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: which_mutual, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(loops = loops),
-        recover_new = c("loops"),
-        recover_old = c("loops"),
-        match_names = c("loops"),
-        match_to = c("loops"),
-        defaults = list(loops = TRUE),
-        head_args = c("graph", "eids"),
-        fn_name = "which_mutual"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(loops = loops),
+      recover_new = c("loops"),
+      recover_old = c("loops"),
+      match_names = c("loops"),
+      match_to = c("loops"),
+      defaults = list(loops = TRUE),
+      head_args = c("graph", "eids"),
+      fn_name = "which_mutual"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -4713,27 +4682,26 @@ knn <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: knn, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          mode = mode,
-          neighbor.degree.mode = neighbor.degree.mode,
-          weights = weights
-        ),
-        recover_new = c("mode", "neighbor.degree.mode", "weights"),
-        recover_old = c("mode", "neighbor.degree.mode", "weights"),
-        match_names = c("mode", "neighbor.degree.mode", "weights"),
-        match_to = c("mode", "neighbor.degree.mode", "weights"),
-        defaults = list(
-          mode = c("all", "out", "in", "total"),
-          neighbor.degree.mode = c("all", "out", "in", "total"),
-          weights = NULL
-        ),
-        head_args = c("graph", "vids"),
-        fn_name = "knn"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        mode = mode,
+        neighbor.degree.mode = neighbor.degree.mode,
+        weights = weights
+      ),
+      recover_new = c("mode", "neighbor.degree.mode", "weights"),
+      recover_old = c("mode", "neighbor.degree.mode", "weights"),
+      match_names = c("mode", "neighbor.degree.mode", "weights"),
+      match_to = c("mode", "neighbor.degree.mode", "weights"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        neighbor.degree.mode = c("all", "out", "in", "total"),
+        weights = NULL
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "knn"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

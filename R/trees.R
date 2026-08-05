@@ -49,19 +49,18 @@ is_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, details = details),
-        recover_new = c("mode", "details"),
-        recover_old = c("mode", "details"),
-        match_names = c("mode", "details"),
-        match_to = c("mode", "details"),
-        defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
-        head_args = c("graph"),
-        fn_name = "is_tree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, details = details),
+      recover_new = c("mode", "details"),
+      recover_old = c("mode", "details"),
+      match_names = c("mode", "details"),
+      match_to = c("mode", "details"),
+      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
+      head_args = c("graph"),
+      fn_name = "is_tree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -135,19 +134,18 @@ is_forest <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_forest, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, details = details),
-        recover_new = c("mode", "details"),
-        recover_old = c("mode", "details"),
-        match_names = c("mode", "details"),
-        match_to = c("mode", "details"),
-        defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
-        head_args = c("graph"),
-        fn_name = "is_forest"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, details = details),
+      recover_new = c("mode", "details"),
+      recover_old = c("mode", "details"),
+      match_names = c("mode", "details"),
+      match_to = c("mode", "details"),
+      defaults = list(mode = c("out", "in", "all", "total"), details = FALSE),
+      head_args = c("graph"),
+      fn_name = "is_forest"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -229,19 +227,18 @@ sample_spanning_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_spanning_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(vid = vid),
-        recover_new = c("vid"),
-        recover_old = c("vid"),
-        match_names = c("vid"),
-        match_to = c("vid"),
-        defaults = list(vid = 0),
-        head_args = c("graph"),
-        fn_name = "sample_spanning_tree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(vid = vid),
+      recover_new = c("vid"),
+      recover_old = c("vid"),
+      match_names = c("vid"),
+      match_to = c("vid"),
+      defaults = list(vid = 0),
+      head_args = c("graph"),
+      fn_name = "sample_spanning_tree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

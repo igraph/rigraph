@@ -440,29 +440,28 @@ betweenness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: betweenness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          directed = directed,
-          weights = weights,
-          normalized = normalized,
-          cutoff = cutoff
-        ),
-        recover_new = c("directed", "weights", "normalized", "cutoff"),
-        recover_old = c("directed", "weights", "normalized", "cutoff"),
-        match_names = c("directed", "weights", "normalized", "cutoff"),
-        match_to = c("directed", "weights", "normalized", "cutoff"),
-        defaults = list(
-          directed = TRUE,
-          weights = NULL,
-          normalized = FALSE,
-          cutoff = -1
-        ),
-        head_args = c("graph", "v"),
-        fn_name = "betweenness"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        directed = directed,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("directed", "weights", "normalized", "cutoff"),
+      recover_old = c("directed", "weights", "normalized", "cutoff"),
+      match_names = c("directed", "weights", "normalized", "cutoff"),
+      match_to = c("directed", "weights", "normalized", "cutoff"),
+      defaults = list(
+        directed = TRUE,
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "v"),
+      fn_name = "betweenness"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -510,19 +509,18 @@ edge_betweenness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: edge_betweenness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed, weights = weights, cutoff = cutoff),
-        recover_new = c("directed", "weights", "cutoff"),
-        recover_old = c("directed", "weights", "cutoff"),
-        match_names = c("directed", "weights", "cutoff"),
-        match_to = c("directed", "weights", "cutoff"),
-        defaults = list(directed = TRUE, weights = NULL, cutoff = -1),
-        head_args = c("graph", "e"),
-        fn_name = "edge_betweenness"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed, weights = weights, cutoff = cutoff),
+      recover_new = c("directed", "weights", "cutoff"),
+      recover_old = c("directed", "weights", "cutoff"),
+      match_names = c("directed", "weights", "cutoff"),
+      match_to = c("directed", "weights", "cutoff"),
+      defaults = list(directed = TRUE, weights = NULL, cutoff = -1),
+      head_args = c("graph", "e"),
+      fn_name = "edge_betweenness"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -654,29 +652,28 @@ closeness <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: closeness, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          mode = mode,
-          weights = weights,
-          normalized = normalized,
-          cutoff = cutoff
-        ),
-        recover_new = c("mode", "weights", "normalized", "cutoff"),
-        recover_old = c("mode", "weights", "normalized", "cutoff"),
-        match_names = c("mode", "weights", "normalized", "cutoff"),
-        match_to = c("mode", "weights", "normalized", "cutoff"),
-        defaults = list(
-          mode = c("out", "in", "all", "total"),
-          weights = NULL,
-          normalized = FALSE,
-          cutoff = -1
-        ),
-        head_args = c("graph", "vids"),
-        fn_name = "closeness"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("mode", "weights", "normalized", "cutoff"),
+      recover_old = c("mode", "weights", "normalized", "cutoff"),
+      match_names = c("mode", "weights", "normalized", "cutoff"),
+      match_to = c("mode", "weights", "normalized", "cutoff"),
+      defaults = list(
+        mode = c("out", "in", "all", "total"),
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "closeness"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1183,19 +1180,18 @@ subgraph_centrality <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: subgraph_centrality, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(diag = diag),
-        recover_new = c("diag"),
-        recover_old = c("diag"),
-        match_names = c("diag"),
-        match_to = c("diag"),
-        defaults = list(diag = FALSE),
-        head_args = c("graph"),
-        fn_name = "subgraph_centrality"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(diag = diag),
+      recover_new = c("diag"),
+      recover_old = c("diag"),
+      match_names = c("diag"),
+      match_to = c("diag"),
+      defaults = list(diag = FALSE),
+      head_args = c("graph"),
+      fn_name = "subgraph_centrality"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1519,23 +1515,22 @@ strength <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: strength, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, loops = loops, weights = weights),
-        recover_new = c("mode", "loops", "weights"),
-        recover_old = c("mode", "loops", "weights"),
-        match_names = c("mode", "loops", "weights"),
-        match_to = c("mode", "loops", "weights"),
-        defaults = list(
-          mode = c("all", "out", "in", "total"),
-          loops = TRUE,
-          weights = NULL
-        ),
-        head_args = c("graph", "vids"),
-        fn_name = "strength"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, loops = loops, weights = weights),
+      recover_new = c("mode", "loops", "weights"),
+      recover_old = c("mode", "loops", "weights"),
+      match_names = c("mode", "loops", "weights"),
+      match_to = c("mode", "loops", "weights"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        weights = NULL
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "strength"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1610,19 +1605,18 @@ diversity <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: diversity, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(weights = weights, vids = vids),
-        recover_new = c("weights", "vids"),
-        recover_old = c("weights", "vids"),
-        match_names = c("weights", "vids"),
-        match_to = c("weights", "vids"),
-        defaults = list(weights = NULL, vids = NULL),
-        head_args = c("graph"),
-        fn_name = "diversity"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(weights = weights, vids = vids),
+      recover_new = c("weights", "vids"),
+      recover_old = c("weights", "vids"),
+      match_names = c("weights", "vids"),
+      match_to = c("weights", "vids"),
+      defaults = list(weights = NULL, vids = NULL),
+      head_args = c("graph"),
+      fn_name = "diversity"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1905,67 +1899,66 @@ page_rank <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          algo = algo,
-          vids = vids,
-          directed = directed,
-          damping = damping,
-          personalized = personalized,
-          weights = weights,
-          options = options
-        ),
-        recover_new = c(
-          "algo",
-          "vids",
-          "directed",
-          "damping",
-          "personalized",
-          "weights",
-          "options"
-        ),
-        recover_old = c(
-          "algo",
-          "vids",
-          "directed",
-          "damping",
-          "personalized",
-          "weights",
-          "options"
-        ),
-        match_names = c(
-          "algo",
-          "vids",
-          "directed",
-          "damping",
-          "personalized",
-          "weights",
-          "options"
-        ),
-        match_to = c(
-          "algo",
-          "vids",
-          "directed",
-          "damping",
-          "personalized",
-          "weights",
-          "options"
-        ),
-        defaults = list(
-          algo = c("prpack", "arpack"),
-          vids = NULL,
-          directed = TRUE,
-          damping = 0.85,
-          personalized = NULL,
-          weights = NULL,
-          options = NULL
-        ),
-        head_args = c("graph"),
-        fn_name = "page_rank"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        algo = algo,
+        vids = vids,
+        directed = directed,
+        damping = damping,
+        personalized = personalized,
+        weights = weights,
+        options = options
+      ),
+      recover_new = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      recover_old = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      match_names = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      match_to = c(
+        "algo",
+        "vids",
+        "directed",
+        "damping",
+        "personalized",
+        "weights",
+        "options"
+      ),
+      defaults = list(
+        algo = c("prpack", "arpack"),
+        vids = NULL,
+        directed = TRUE,
+        damping = 0.85,
+        personalized = NULL,
+        weights = NULL,
+        options = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "page_rank"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2050,29 +2043,28 @@ harmonic_centrality <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: harmonic_centrality, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          mode = mode,
-          weights = weights,
-          normalized = normalized,
-          cutoff = cutoff
-        ),
-        recover_new = c("mode", "weights", "normalized", "cutoff"),
-        recover_old = c("mode", "weights", "normalized", "cutoff"),
-        match_names = c("mode", "weights", "normalized", "cutoff"),
-        match_to = c("mode", "weights", "normalized", "cutoff"),
-        defaults = list(
-          mode = c("out", "in", "all", "total"),
-          weights = NULL,
-          normalized = FALSE,
-          cutoff = -1
-        ),
-        head_args = c("graph", "vids"),
-        fn_name = "harmonic_centrality"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        mode = mode,
+        weights = weights,
+        normalized = normalized,
+        cutoff = cutoff
+      ),
+      recover_new = c("mode", "weights", "normalized", "cutoff"),
+      recover_old = c("mode", "weights", "normalized", "cutoff"),
+      match_names = c("mode", "weights", "normalized", "cutoff"),
+      match_to = c("mode", "weights", "normalized", "cutoff"),
+      defaults = list(
+        mode = c("out", "in", "all", "total"),
+        weights = NULL,
+        normalized = FALSE,
+        cutoff = -1
+      ),
+      head_args = c("graph", "vids"),
+      fn_name = "harmonic_centrality"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2290,54 +2282,53 @@ power_centrality <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: power_centrality, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          loops = loops,
-          exponent = exponent,
-          rescale = rescale,
-          tol = tol,
-          sparse = sparse,
-          weights = weights
-        ),
-        recover_new = c(
-          "loops",
-          "exponent",
-          "rescale",
-          "tol",
-          "sparse",
-          "weights"
-        ),
-        recover_old = c(
-          "loops",
-          "exponent",
-          "rescale",
-          "tol",
-          "sparse",
-          "weights"
-        ),
-        match_names = c(
-          "loops",
-          "exponent",
-          "rescale",
-          "tol",
-          "sparse",
-          "weights"
-        ),
-        match_to = c("loops", "exponent", "rescale", "tol", "sparse", "weights"),
-        defaults = list(
-          loops = FALSE,
-          exponent = 1,
-          rescale = FALSE,
-          tol = 1e-07,
-          sparse = TRUE,
-          weights = NULL
-        ),
-        head_args = c("graph", "nodes"),
-        fn_name = "power_centrality"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        loops = loops,
+        exponent = exponent,
+        rescale = rescale,
+        tol = tol,
+        sparse = sparse,
+        weights = weights
+      ),
+      recover_new = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      recover_old = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      match_names = c(
+        "loops",
+        "exponent",
+        "rescale",
+        "tol",
+        "sparse",
+        "weights"
+      ),
+      match_to = c("loops", "exponent", "rescale", "tol", "sparse", "weights"),
+      defaults = list(
+        loops = FALSE,
+        exponent = 1,
+        rescale = FALSE,
+        tol = 1e-07,
+        sparse = TRUE,
+        weights = NULL
+      ),
+      head_args = c("graph", "nodes"),
+      fn_name = "power_centrality"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2518,33 +2509,32 @@ alpha_centrality <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: alpha_centrality, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          alpha = alpha,
-          loops = loops,
-          exo = exo,
-          weights = weights,
-          tol = tol,
-          sparse = sparse
-        ),
-        recover_new = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-        recover_old = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-        match_names = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-        match_to = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
-        defaults = list(
-          alpha = 1,
-          loops = FALSE,
-          exo = 1,
-          weights = NULL,
-          tol = 1e-07,
-          sparse = TRUE
-        ),
-        head_args = c("graph", "nodes"),
-        fn_name = "alpha_centrality"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        alpha = alpha,
+        loops = loops,
+        exo = exo,
+        weights = weights,
+        tol = tol,
+        sparse = sparse
+      ),
+      recover_new = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      recover_old = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      match_names = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      match_to = c("alpha", "loops", "exo", "weights", "tol", "sparse"),
+      defaults = list(
+        alpha = 1,
+        loops = FALSE,
+        exo = 1,
+        weights = NULL,
+        tol = 1e-07,
+        sparse = TRUE
+      ),
+      head_args = c("graph", "nodes"),
+      fn_name = "alpha_centrality"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

@@ -148,21 +148,20 @@ is_graphical <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_graphical, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(allowed.edge.types = allowed.edge.types),
-        recover_new = c("allowed.edge.types"),
-        recover_old = c("allowed.edge.types"),
-        match_names = c("allowed.edge.types"),
-        match_to = c("allowed.edge.types"),
-        defaults = list(
-          allowed.edge.types = c("simple", "loops", "multi", "all")
-        ),
-        head_args = c("out.deg", "in.deg"),
-        fn_name = "is_graphical"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(allowed.edge.types = allowed.edge.types),
+      recover_new = c("allowed.edge.types"),
+      recover_old = c("allowed.edge.types"),
+      match_names = c("allowed.edge.types"),
+      match_to = c("allowed.edge.types"),
+      defaults = list(
+        allowed.edge.types = c("simple", "loops", "multi", "all")
+      ),
+      head_args = c("out.deg", "in.deg"),
+      fn_name = "is_graphical"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

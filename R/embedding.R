@@ -116,31 +116,30 @@ embed_adjacency_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_adjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          weights = weights,
-          which = which,
-          scaled = scaled,
-          cvec = cvec,
-          options = options
-        ),
-        recover_new = c("weights", "which", "scaled", "cvec", "options"),
-        recover_old = c("weights", "which", "scaled", "cvec", "options"),
-        match_names = c("weights", "which", "scaled", "cvec", "options"),
-        match_to = c("weights", "which", "scaled", "cvec", "options"),
-        defaults = list(
-          weights = NULL,
-          which = c("lm", "la", "sa"),
-          scaled = TRUE,
-          cvec = NULL,
-          options = NULL
-        ),
-        head_args = c("graph", "no"),
-        fn_name = "embed_adjacency_matrix"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        weights = weights,
+        which = which,
+        scaled = scaled,
+        cvec = cvec,
+        options = options
+      ),
+      recover_new = c("weights", "which", "scaled", "cvec", "options"),
+      recover_old = c("weights", "which", "scaled", "cvec", "options"),
+      match_names = c("weights", "which", "scaled", "cvec", "options"),
+      match_to = c("weights", "which", "scaled", "cvec", "options"),
+      defaults = list(
+        weights = NULL,
+        which = c("lm", "la", "sa"),
+        scaled = TRUE,
+        cvec = NULL,
+        options = NULL
+      ),
+      head_args = c("graph", "no"),
+      fn_name = "embed_adjacency_matrix"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -336,31 +335,30 @@ embed_laplacian_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: embed_laplacian_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          weights = weights,
-          which = which,
-          type = type,
-          scaled = scaled,
-          options = options
-        ),
-        recover_new = c("weights", "which", "type", "scaled", "options"),
-        recover_old = c("weights", "which", "type", "scaled", "options"),
-        match_names = c("weights", "which", "type", "scaled", "options"),
-        match_to = c("weights", "which", "type", "scaled", "options"),
-        defaults = list(
-          weights = NULL,
-          which = c("lm", "la", "sa"),
-          type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
-          scaled = TRUE,
-          options = NULL
-        ),
-        head_args = c("graph", "no"),
-        fn_name = "embed_laplacian_matrix"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        weights = weights,
+        which = which,
+        type = type,
+        scaled = scaled,
+        options = options
+      ),
+      recover_new = c("weights", "which", "type", "scaled", "options"),
+      recover_old = c("weights", "which", "type", "scaled", "options"),
+      match_names = c("weights", "which", "type", "scaled", "options"),
+      match_to = c("weights", "which", "type", "scaled", "options"),
+      defaults = list(
+        weights = NULL,
+        which = c("lm", "la", "sa"),
+        type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
+        scaled = TRUE,
+        options = NULL
+      ),
+      head_args = c("graph", "no"),
+      fn_name = "embed_laplacian_matrix"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -425,19 +423,18 @@ sample_sphere_surface <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sphere_surface, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(radius = radius, positive = positive),
-        recover_new = c("radius", "positive"),
-        recover_old = c("radius", "positive"),
-        match_names = c("radius", "positive"),
-        match_to = c("radius", "positive"),
-        defaults = list(radius = 1, positive = TRUE),
-        head_args = c("dim", "n"),
-        fn_name = "sample_sphere_surface"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(radius = radius, positive = positive),
+      recover_new = c("radius", "positive"),
+      recover_old = c("radius", "positive"),
+      match_names = c("radius", "positive"),
+      match_to = c("radius", "positive"),
+      defaults = list(radius = 1, positive = TRUE),
+      head_args = c("dim", "n"),
+      fn_name = "sample_sphere_surface"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -495,19 +492,18 @@ sample_sphere_volume <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_sphere_volume, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(radius = radius, positive = positive),
-        recover_new = c("radius", "positive"),
-        recover_old = c("radius", "positive"),
-        match_names = c("radius", "positive"),
-        match_to = c("radius", "positive"),
-        defaults = list(radius = 1, positive = TRUE),
-        head_args = c("dim", "n"),
-        fn_name = "sample_sphere_volume"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(radius = radius, positive = positive),
+      recover_new = c("radius", "positive"),
+      recover_old = c("radius", "positive"),
+      match_names = c("radius", "positive"),
+      match_to = c("radius", "positive"),
+      defaults = list(radius = 1, positive = TRUE),
+      head_args = c("dim", "n"),
+      fn_name = "sample_sphere_volume"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

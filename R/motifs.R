@@ -181,19 +181,18 @@ motifs <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: motifs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(cut.prob = cut.prob, callback = callback),
-        recover_new = c("cut.prob", "callback"),
-        recover_old = c("cut.prob", "callback"),
-        match_names = c("cut.prob", "callback"),
-        match_to = c("cut.prob", "callback"),
-        defaults = list(cut.prob = NULL, callback = NULL),
-        head_args = c("graph", "size"),
-        fn_name = "motifs"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(cut.prob = cut.prob, callback = callback),
+      recover_new = c("cut.prob", "callback"),
+      recover_old = c("cut.prob", "callback"),
+      match_names = c("cut.prob", "callback"),
+      match_to = c("cut.prob", "callback"),
+      defaults = list(cut.prob = NULL, callback = NULL),
+      head_args = c("graph", "size"),
+      fn_name = "motifs"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -264,19 +263,18 @@ count_motifs <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_motifs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(cut.prob = cut.prob),
-        recover_new = c("cut.prob"),
-        recover_old = c("cut.prob"),
-        match_names = c("cut.prob"),
-        match_to = c("cut.prob"),
-        defaults = list(cut.prob = NULL),
-        head_args = c("graph", "size"),
-        fn_name = "count_motifs"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(cut.prob = cut.prob),
+      recover_new = c("cut.prob"),
+      recover_old = c("cut.prob"),
+      match_names = c("cut.prob"),
+      match_to = c("cut.prob"),
+      defaults = list(cut.prob = NULL),
+      head_args = c("graph", "size"),
+      fn_name = "count_motifs"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -343,28 +341,27 @@ sample_motifs <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      migrate_check_call_tags(
-        sys.call(),
-        c("s"),
-        "sample_motifs"
-      )
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          cut.prob = cut.prob,
-          sample.size = sample.size,
-          sample = sample
-        ),
-        recover_new = c("cut.prob", "sample.size", "sample"),
-        recover_old = c("cut.prob", "sample.size", "sample"),
-        match_names = c("cut.prob", "sample.size", "sample"),
-        match_to = c("cut.prob", "sample.size", "sample"),
-        defaults = list(cut.prob = NULL, sample.size = NULL, sample = NULL),
-        head_args = c("graph", "size"),
-        fn_name = "sample_motifs"
-      )
+    migrate_check_call_tags(
+      sys.call(),
+      c("s"),
+      "sample_motifs"
+    )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        cut.prob = cut.prob,
+        sample.size = sample.size,
+        sample = sample
+      ),
+      recover_new = c("cut.prob", "sample.size", "sample"),
+      recover_old = c("cut.prob", "sample.size", "sample"),
+      match_names = c("cut.prob", "sample.size", "sample"),
+      match_to = c("cut.prob", "sample.size", "sample"),
+      defaults = list(cut.prob = NULL, sample.size = NULL, sample = NULL),
+      head_args = c("graph", "size"),
+      fn_name = "sample_motifs"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

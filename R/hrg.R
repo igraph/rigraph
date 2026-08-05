@@ -242,19 +242,18 @@ fit_hrg <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: fit_hrg, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(start = start, steps = steps),
-        recover_new = c("start", "steps"),
-        recover_old = c("start", "steps"),
-        match_names = c("start", "steps"),
-        match_to = c("start", "steps"),
-        defaults = list(start = FALSE, steps = 0),
-        head_args = c("graph", "hrg"),
-        fn_name = "fit_hrg"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(start = start, steps = steps),
+      recover_new = c("start", "steps"),
+      recover_old = c("start", "steps"),
+      match_names = c("start", "steps"),
+      match_to = c("start", "steps"),
+      defaults = list(start = FALSE, steps = 0),
+      head_args = c("graph", "hrg"),
+      fn_name = "fit_hrg"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -346,19 +345,18 @@ consensus_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: consensus_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(start = start, num.samples = num.samples),
-        recover_new = c("start", "num.samples"),
-        recover_old = c("start", "num.samples"),
-        match_names = c("start", "num.samples"),
-        match_to = c("start", "num.samples"),
-        defaults = list(start = FALSE, num.samples = 10000),
-        head_args = c("graph", "hrg"),
-        fn_name = "consensus_tree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(start = start, num.samples = num.samples),
+      recover_new = c("start", "num.samples"),
+      recover_old = c("start", "num.samples"),
+      match_names = c("start", "num.samples"),
+      match_to = c("start", "num.samples"),
+      defaults = list(start = FALSE, num.samples = 10000),
+      head_args = c("graph", "hrg"),
+      fn_name = "consensus_tree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -515,23 +513,22 @@ predict_edges <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: predict_edges, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          start = start,
-          num.samples = num.samples,
-          num.bins = num.bins
-        ),
-        recover_new = c("start", "num.samples", "num.bins"),
-        recover_old = c("start", "num.samples", "num.bins"),
-        match_names = c("start", "num.samples", "num.bins"),
-        match_to = c("start", "num.samples", "num.bins"),
-        defaults = list(start = FALSE, num.samples = 10000, num.bins = 25),
-        head_args = c("graph", "hrg"),
-        fn_name = "predict_edges"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        start = start,
+        num.samples = num.samples,
+        num.bins = num.bins
+      ),
+      recover_new = c("start", "num.samples", "num.bins"),
+      recover_old = c("start", "num.samples", "num.bins"),
+      match_names = c("start", "num.samples", "num.bins"),
+      match_to = c("start", "num.samples", "num.bins"),
+      defaults = list(start = FALSE, num.samples = 10000, num.bins = 25),
+      head_args = c("graph", "hrg"),
+      fn_name = "predict_edges"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

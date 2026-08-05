@@ -1,63 +1,15 @@
-# Capture `...` for the recovery layer without tripping over empty arguments.
-#
-# A call may leave an argument slot empty -- a trailing comma
-# (`f(x, mode = "out", )`) or a skipped positional slot, which is what
-# magrittr produces for `x %>% f(., , directed = FALSE)`. Under the old
-# signatures those empty slots matched a formal by position and simply left it
-# missing, so the formal's default applied. Now that the optional arguments sit
-# behind `...`, the empty slot lands in `...` instead, where `list(...)` forces
-# it and errors with "argument is missing, with no default" (#2646).
-#
-# So collect the supplied dots only, and remember where each one sat among the
-# unnamed slots: an empty slot still consumed a formal under the old signature,
-# so `f(g, , 5)` must recover `5` into the *second* recoverable argument, not
-# the first. `pos` carries that ordinal (NA for named dots, which recover by
-# name); `values` holds just the supplied ones.
-#
-# `substitute(...())` yields the unevaluated dot expressions -- an empty slot
-# shows up as the empty symbol -- so missing-ness is decided without forcing
-# anything. Only the supplied slots are then forced, via `...elt()`.
-
-#' @noRd
-migrate_capture_dots <- function(env = parent.frame()) {
-  exprs <- as.list(eval(quote(substitute(...())), env))
-  if (length(exprs) == 0L) {
-    return(list(values = list(), pos = integer(0)))
-  }
-
-  # `quote(expr = )` is inlined rather than bound to a local: evaluating a
-  # variable that holds the empty symbol is itself a "argument is missing"
-  # error, so it must never be looked up by name.
-  supplied <- !vapply(exprs, identical, logical(1), quote(expr = ))
-  if (!any(supplied)) {
-    # Nothing but empty slots: the formals keep their defaults, exactly as
-    # under the old signature. No recovery, and no deprecation warning.
-    return(list(values = list(), pos = integer(0)))
-  }
-
-  nms <- rlang::names2(exprs)
-  unnamed <- !nzchar(nms)
-  # Ordinal among the unnamed slots, counting the empty ones.
-  ordinal <- cumsum(unnamed)
-  ordinal[!unnamed] <- NA_integer_
-
-  idx <- which(supplied)
-  values <- lapply(idx, function(k) eval(call("...elt", k), env))
-  if (any(nzchar(nms[idx]))) {
-    # Left unnamed when no dot was tagged, matching what `list(...)` produced.
-    names(values) <- nms[idx]
-  }
-  list(values = values, pos = as.integer(ordinal[idx]))
-}
-
 # Runtime helper behind the generated `# ... ARG_HANDLE` blocks (see
 # tools/migrations.R, tools/generate-migrations.R). Hand-written and tested
 # directly -- the generated blocks only carry the per-function configuration and
 # call this. Kept a plain function (not an inline closure) so it is easy to step
 # through in a debugger.
 #
-# `dots` is the `migrate_capture_dots()` result -- `$values` (supplied dots
-# only) and `$pos` (their ordinal among the unnamed slots).
+# `dots` is `rlang::pairlist2(...)`, not `list(...)`: a call may leave an
+# argument slot empty -- a trailing comma (`f(x, mode = "out", )`) or a skipped
+# positional, which is what magrittr writes for `x %>% f(., , directed = FALSE)`
+# -- and `list(...)` forces such a slot, erroring with "argument is missing,
+# with no default" (#2646). `pairlist2()` keeps the empty slots as the missing
+# argument instead, so they arrive here unforced and are simply skipped below.
 #
 # Pure: it inspects `dots` against the supplied maps and returns the recovered
 # values plus the deprecation message parts, or NULL when there is nothing to
@@ -79,18 +31,23 @@ migrate_recover_args <- function(
   fn_name,
   call = rlang::caller_env()
 ) {
-  dot_pos <- dots$pos
-  dots <- dots$values
-  if (length(dots) == 0L) {
-    return(NULL)
-  }
-
   dot_names <- rlang::names2(dots)
   values <- list()
   rebound_old <- character()
   rebound_new <- character()
+  pos <- 0L
   for (k in seq_along(dots)) {
     nm <- dot_names[[k]]
+    if (rlang::is_missing(dots[[k]])) {
+      # An empty slot is not an argument to recover, but it still consumed a
+      # formal under the old signature -- so it keeps its position, and the
+      # positionals after it shift along: `f(g, , 5)` recovers 5 into the
+      # *second* recoverable argument, not the first.
+      if (!nzchar(nm)) {
+        pos <- pos + 1L
+      }
+      next
+    }
     if (nzchar(nm)) {
       # Named (possibly abbreviated): partial-match the recoverable names.
       j <- charmatch(nm, match_names)
@@ -112,10 +69,8 @@ migrate_recover_args <- function(
       new_name <- match_to[[j]]
       old_label <- match_names[[j]]
     } else {
-      # Unnamed: recover by position into the old slot this one sat in, past
-      # the head. Empty slots were dropped but still count towards the
-      # ordinal, so a skipped slot shifts the later positionals along.
-      pos <- dot_pos[[k]]
+      # Unnamed: recover by position into the next old slot past the head.
+      pos <- pos + 1L
       if (pos > length(recover_new)) {
         cli::cli_abort(
           "Too many arguments passed to {.fn {fn_name}}.",
@@ -143,6 +98,13 @@ migrate_recover_args <- function(
     values[[new_name]] <- dots[[k]]
     rebound_old <- c(rebound_old, old_label)
     rebound_new <- c(rebound_new, new_name)
+  }
+
+  if (length(rebound_new) == 0L) {
+    # No dots at all, or nothing but empty slots: the formals keep their
+    # defaults, exactly as under the old signature. Nothing to recover, and no
+    # deprecation to emit.
+    return(NULL)
   }
 
   detected <- paste0(

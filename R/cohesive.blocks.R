@@ -358,19 +358,18 @@ cohesive_blocks <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: cohesive_blocks, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(labels = labels),
-        recover_new = c("labels"),
-        recover_old = c("labels"),
-        match_names = c("labels"),
-        match_to = c("labels"),
-        defaults = list(labels = TRUE),
-        head_args = c("graph"),
-        fn_name = "cohesive_blocks"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(labels = labels),
+      recover_new = c("labels"),
+      recover_old = c("labels"),
+      match_names = c("labels"),
+      match_to = c("labels"),
+      defaults = list(labels = TRUE),
+      head_args = c("graph"),
+      fn_name = "cohesive_blocks"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -633,19 +632,18 @@ export_pajek <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(project.file = project.file),
-        recover_new = c("project.file"),
-        recover_old = c("project.file"),
-        match_names = c("project.file"),
-        match_to = c("project.file"),
-        defaults = list(project.file = TRUE),
-        head_args = c("blocks", "graph", "file"),
-        fn_name = "export_pajek"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(project.file = project.file),
+      recover_new = c("project.file"),
+      recover_old = c("project.file"),
+      match_names = c("project.file"),
+      match_to = c("project.file"),
+      defaults = list(project.file = TRUE),
+      head_args = c("blocks", "graph", "file"),
+      fn_name = "export_pajek"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

@@ -197,36 +197,35 @@ graph.subisomorphic.lad <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.lad, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      migrate_check_call_tags(
-        sys.call(),
-        c("t"),
-        "graph.subisomorphic.lad"
-      )
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          domains = domains,
-          induced = induced,
-          map = map,
-          all.maps = all.maps,
-          time.limit = time.limit
-        ),
-        recover_new = c("domains", "induced", "map", "all.maps", "time.limit"),
-        recover_old = c("domains", "induced", "map", "all.maps", "time.limit"),
-        match_names = c("domains", "induced", "map", "all.maps", "time.limit"),
-        match_to = c("domains", "induced", "map", "all.maps", "time.limit"),
-        defaults = list(
-          domains = NULL,
-          induced = FALSE,
-          map = TRUE,
-          all.maps = FALSE,
-          time.limit = Inf
-        ),
-        head_args = c("pattern", "target"),
-        fn_name = "graph.subisomorphic.lad"
-      )
+    migrate_check_call_tags(
+      sys.call(),
+      c("t"),
+      "graph.subisomorphic.lad"
+    )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        domains = domains,
+        induced = induced,
+        map = map,
+        all.maps = all.maps,
+        time.limit = time.limit
+      ),
+      recover_new = c("domains", "induced", "map", "all.maps", "time.limit"),
+      recover_old = c("domains", "induced", "map", "all.maps", "time.limit"),
+      match_names = c("domains", "induced", "map", "all.maps", "time.limit"),
+      match_to = c("domains", "induced", "map", "all.maps", "time.limit"),
+      defaults = list(
+        domains = NULL,
+        induced = FALSE,
+        map = TRUE,
+        all.maps = FALSE,
+        time.limit = Inf
+      ),
+      head_args = c("pattern", "target"),
+      fn_name = "graph.subisomorphic.lad"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -438,23 +437,22 @@ graph.isomorphic.bliss <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.bliss, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(colors1 = colors1, colors2 = colors2, sh = sh),
-        recover_new = c("colors1", "colors2", "sh"),
-        recover_old = c("colors1", "colors2", "sh"),
-        match_names = c("colors1", "colors2", "sh"),
-        match_to = c("colors1", "colors2", "sh"),
-        defaults = list(
-          colors1 = NULL,
-          colors2 = NULL,
-          sh = c("fm", "f", "fs", "fl", "flm", "fsm")
-        ),
-        head_args = c("graph1", "graph2"),
-        fn_name = "graph.isomorphic.bliss"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(colors1 = colors1, colors2 = colors2, sh = sh),
+      recover_new = c("colors1", "colors2", "sh"),
+      recover_old = c("colors1", "colors2", "sh"),
+      match_names = c("colors1", "colors2", "sh"),
+      match_to = c("colors1", "colors2", "sh"),
+      defaults = list(
+        colors1 = NULL,
+        colors2 = NULL,
+        sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.isomorphic.bliss"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -486,49 +484,48 @@ graph.isomorphic.vf2 <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.vf2, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          vertex.color1 = vertex.color1,
-          vertex.color2 = vertex.color2,
-          edge.color1 = edge.color1,
-          edge.color2 = edge.color2
-        ),
-        recover_new = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        recover_old = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_names = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_to = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        defaults = list(
-          vertex.color1 = NULL,
-          vertex.color2 = NULL,
-          edge.color1 = NULL,
-          edge.color2 = NULL
-        ),
-        head_args = c("graph1", "graph2"),
-        fn_name = "graph.isomorphic.vf2"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.isomorphic.vf2"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -569,49 +566,48 @@ graph.subisomorphic.vf2 <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.vf2, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          vertex.color1 = vertex.color1,
-          vertex.color2 = vertex.color2,
-          edge.color1 = edge.color1,
-          edge.color2 = edge.color2
-        ),
-        recover_new = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        recover_old = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_names = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_to = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        defaults = list(
-          vertex.color1 = NULL,
-          vertex.color2 = NULL,
-          edge.color1 = NULL,
-          edge.color2 = NULL
-        ),
-        head_args = c("graph1", "graph2"),
-        fn_name = "graph.subisomorphic.vf2"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.subisomorphic.vf2"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -823,49 +819,48 @@ graph.count.isomorphisms.vf2 <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.count.isomorphisms.vf2, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          vertex.color1 = vertex.color1,
-          vertex.color2 = vertex.color2,
-          edge.color1 = edge.color1,
-          edge.color2 = edge.color2
-        ),
-        recover_new = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        recover_old = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_names = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_to = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        defaults = list(
-          vertex.color1 = NULL,
-          vertex.color2 = NULL,
-          edge.color1 = NULL,
-          edge.color2 = NULL
-        ),
-        head_args = c("graph1", "graph2"),
-        fn_name = "graph.count.isomorphisms.vf2"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.count.isomorphisms.vf2"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -986,49 +981,48 @@ graph.count.subisomorphisms.vf2 <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.count.subisomorphisms.vf2, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          vertex.color1 = vertex.color1,
-          vertex.color2 = vertex.color2,
-          edge.color1 = edge.color1,
-          edge.color2 = edge.color2
-        ),
-        recover_new = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        recover_old = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_names = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        match_to = c(
-          "vertex.color1",
-          "vertex.color2",
-          "edge.color1",
-          "edge.color2"
-        ),
-        defaults = list(
-          vertex.color1 = NULL,
-          vertex.color2 = NULL,
-          edge.color1 = NULL,
-          edge.color2 = NULL
-        ),
-        head_args = c("graph1", "graph2"),
-        fn_name = "graph.count.subisomorphisms.vf2"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        vertex.color1 = vertex.color1,
+        vertex.color2 = vertex.color2,
+        edge.color1 = edge.color1,
+        edge.color2 = edge.color2
+      ),
+      recover_new = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      recover_old = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_names = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      match_to = c(
+        "vertex.color1",
+        "vertex.color2",
+        "edge.color1",
+        "edge.color2"
+      ),
+      defaults = list(
+        vertex.color1 = NULL,
+        vertex.color2 = NULL,
+        edge.color1 = NULL,
+        edge.color2 = NULL
+      ),
+      head_args = c("graph1", "graph2"),
+      fn_name = "graph.count.subisomorphisms.vf2"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1339,19 +1333,18 @@ graph_from_isomorphism_class <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_isomorphism_class, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed),
-        recover_new = c("directed"),
-        recover_old = c("directed"),
-        match_names = c("directed"),
-        match_to = c("directed"),
-        defaults = list(directed = TRUE),
-        head_args = c("size", "number"),
-        fn_name = "graph_from_isomorphism_class"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("size", "number"),
+      fn_name = "graph_from_isomorphism_class"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1486,19 +1479,18 @@ canonical_permutation <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: canonical_permutation, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(sh = sh),
-        recover_new = c("sh"),
-        recover_old = c("sh"),
-        match_names = c("sh"),
-        match_to = c("sh"),
-        defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
-        head_args = c("graph", "colors"),
-        fn_name = "canonical_permutation"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(sh = sh),
+      recover_new = c("sh"),
+      recover_old = c("sh"),
+      match_names = c("sh"),
+      match_to = c("sh"),
+      defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
+      head_args = c("graph", "colors"),
+      fn_name = "canonical_permutation"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1662,19 +1654,18 @@ count_automorphisms <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_automorphisms, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(sh = sh),
-        recover_new = c("sh"),
-        recover_old = c("sh"),
-        match_names = c("sh"),
-        match_to = c("sh"),
-        defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
-        head_args = c("graph", "colors"),
-        fn_name = "count_automorphisms"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(sh = sh),
+      recover_new = c("sh"),
+      recover_old = c("sh"),
+      match_names = c("sh"),
+      match_to = c("sh"),
+      defaults = list(sh = c("fm", "f", "fs", "fl", "flm", "fsm")),
+      head_args = c("graph", "colors"),
+      fn_name = "count_automorphisms"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1774,22 +1765,21 @@ automorphism_group <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: automorphism_group, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(sh = sh, details = details),
-        recover_new = c("sh", "details"),
-        recover_old = c("sh", "details"),
-        match_names = c("sh", "details"),
-        match_to = c("sh", "details"),
-        defaults = list(
-          sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
-          details = FALSE
-        ),
-        head_args = c("graph", "colors"),
-        fn_name = "automorphism_group"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(sh = sh, details = details),
+      recover_new = c("sh", "details"),
+      recover_old = c("sh", "details"),
+      match_names = c("sh", "details"),
+      match_to = c("sh", "details"),
+      defaults = list(
+        sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
+        details = FALSE
+      ),
+      head_args = c("graph", "colors"),
+      fn_name = "automorphism_group"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

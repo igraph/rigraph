@@ -133,7 +133,7 @@ test_that("an empty slot still consumes its position during recovery", {
   )
 })
 
-test_that("empty slots mixed with named recovery keep their offsets", {
+test_that("several empty slots each consume a position", {
   rlang::local_options(lifecycle_verbosity = "warning")
   lifecycle::expect_deprecated(
     res <- migration_fixture("g", 5, , , TRUE)
@@ -143,37 +143,33 @@ test_that("empty slots mixed with named recovery keep their offsets", {
   expect_equal(res$type, "out")
 })
 
-test_that("migrate_capture_dots() reports supplied dots and their positions", {
-  # `migrate_capture_dots_at()` (helper-test-functions.R) is a bare host
-  # function that returns `migrate_capture_dots()` from its own frame.
+test_that("a `...` of nothing but empty slots does not engage recovery", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_no_warning(res <- migration_fixture("g", 5, , ))
   expect_equal(
-    migrate_capture_dots_at(1, 9, kind = "in"),
-    list(
-      values = list(9, kind = "in"),
-      pos = c(1L, NA_integer_)
-    )
+    res,
+    list(graph = "g", n = 5, weights = NULL, type = "out", directed = FALSE)
+  )
+})
+
+test_that("migrate_recover_args() skips empty slots but keeps their position", {
+  # `rlang::pairlist2()` is what the generated block hands over: it keeps an
+  # empty argument slot as the missing argument instead of forcing it.
+  expect_null(fixture_args(rlang::pairlist2()))
+  expect_null(fixture_args(rlang::pairlist2(,)))
+
+  expect_equal(
+    fixture_args(rlang::pairlist2(, "in"))$values,
+    list(type = "in")
   )
   expect_equal(
-    migrate_capture_dots_at(1, , 9),
-    list(
-      values = list(9),
-      pos = 2L
-    )
+    fixture_args(rlang::pairlist2(1:3, , TRUE))$values,
+    list(weights = 1:3, directed = TRUE)
   )
-  # Nothing but empty slots reads as no dots at all, so recovery never engages.
+  # A named slot left empty is not an argument either, and consumes no position.
   expect_equal(
-    migrate_capture_dots_at(1, ),
-    list(
-      values = list(),
-      pos = integer(0)
-    )
-  )
-  expect_equal(
-    migrate_capture_dots_at(1),
-    list(
-      values = list(),
-      pos = integer(0)
-    )
+    fixture_args(rlang::pairlist2(kind = , 1:3))$values,
+    list(weights = 1:3)
   )
 })
 

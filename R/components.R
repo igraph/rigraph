@@ -206,27 +206,26 @@ decompose <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: decompose, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          mode = mode,
-          max.comps = max.comps,
-          min.vertices = min.vertices
-        ),
-        recover_new = c("mode", "max.comps", "min.vertices"),
-        recover_old = c("mode", "max.comps", "min.vertices"),
-        match_names = c("mode", "max.comps", "min.vertices"),
-        match_to = c("mode", "max.comps", "min.vertices"),
-        defaults = list(
-          mode = c("weak", "strong"),
-          max.comps = NA,
-          min.vertices = 0
-        ),
-        head_args = c("graph"),
-        fn_name = "decompose"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        mode = mode,
+        max.comps = max.comps,
+        min.vertices = min.vertices
+      ),
+      recover_new = c("mode", "max.comps", "min.vertices"),
+      recover_old = c("mode", "max.comps", "min.vertices"),
+      match_names = c("mode", "max.comps", "min.vertices"),
+      match_to = c("mode", "max.comps", "min.vertices"),
+      defaults = list(
+        mode = c("weak", "strong"),
+        max.comps = NA,
+        min.vertices = 0
+      ),
+      head_args = c("graph"),
+      fn_name = "decompose"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -438,19 +437,18 @@ largest_component <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: largest_component, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("weak", "strong")),
-        head_args = c("graph"),
-        fn_name = "largest_component"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("weak", "strong")),
+      head_args = c("graph"),
+      fn_name = "largest_component"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

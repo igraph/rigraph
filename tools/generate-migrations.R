@@ -474,16 +474,22 @@ render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
 #
 # Shape: the per-function configuration is passed to `migrate_recover_args()`
 # (a hand-written, debuggable helper) which returns the recovered values plus the
-# deprecation message parts. The host frame then assigns the recovered values
-# over its own locals and emits a single `lifecycle::deprecate_soft()`. Because
-# that call sits directly in the host function, its default `user_env`
-# (caller_env(2)) resolves to the user's frame -- no `.user_env` threading needed.
+# deprecation message parts, or NULL when there is nothing to recover. The host
+# frame then assigns the recovered values over its own locals and emits a single
+# `lifecycle::deprecate_soft()`. Because that call sits directly in the host
+# function, its default `user_env` (caller_env(2)) resolves to the user's frame
+# -- no `.user_env` threading needed.
+#
+# `...` is collected with `rlang::pairlist2()` rather than `list()`: a call may
+# leave an argument slot empty -- a trailing comma, or magrittr's
+# `f(., , x = 1)` -- and `list(...)` forces such a slot into an "argument is
+# missing, with no default" error (#2646). `pairlist2()` hands the empty slots
+# over as the missing argument, and `migrate_recover_args()` skips them.
 #
 # The whole thing is guarded by `...length() > 0L` so the common path (a correct
-# new-API call with nothing in `...`) skips the helper call entirely. The inner
-# gate handles a call whose only dots are empty argument slots -- a trailing
-# comma, or magrittr's `f(., , x = 1)` -- which are not arguments to recover:
-# `migrate_capture_dots()` drops them, and an all-empty `...` must not warn.
+# new-API call with nothing in `...`) skips the helper call entirely. The NULL
+# check covers a `...` that held nothing but empty slots: there is nothing to
+# recover, and nothing to deprecate either.
 render_arg_handle <- function(entry) {
   keep <- intersect(entry$tail, names(entry$defaults))
   default_items <- vapply(
@@ -511,10 +517,11 @@ render_arg_handle <- function(entry) {
       "  )"
     )
   }
-  body <- c(
+  c(
+    "if (...length() > 0L) {",
     guard,
     "  .arg_handle <- migrate_recover_args(",
-    "    .migrate_dots,",
+    "    rlang::pairlist2(...),",
     render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
     render_call_arg("recover_new", "c", quote_items(entry$recover_new), "character(0)"),
     render_call_arg("recover_old", "c", quote_items(entry$recover_old), "character(0)"),
@@ -524,18 +531,13 @@ render_arg_handle <- function(entry) {
     render_call_arg("head_args", "c", quote_items(entry$head), "character(0)"),
     paste0("    fn_name = \"", entry$fn, "\""),
     "  )",
-    "  list2env(.arg_handle$values, environment())",
-    "  lifecycle::deprecate_soft(",
-    paste0("    \"", entry$when, "\","),
-    "    what = I(.arg_handle$what),",
-    "    details = .arg_handle$details",
-    "  )"
-  )
-  c(
-    "if (...length() > 0L) {",
-    "  .migrate_dots <- migrate_capture_dots()",
-    "  if (length(.migrate_dots$values) > 0L) {",
-    ifelse(nzchar(body), paste0("  ", body), body),
+    "  if (!is.null(.arg_handle)) {",
+    "    list2env(.arg_handle$values, environment())",
+    "    lifecycle::deprecate_soft(",
+    paste0("      \"", entry$when, "\","),
+    "      what = I(.arg_handle$what),",
+    "      details = .arg_handle$details",
+    "    )",
     "  }",
     "}"
   )

@@ -729,19 +729,18 @@ layout_as_bipartite <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_bipartite, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(hgap = hgap, vgap = vgap, maxiter = maxiter),
-        recover_new = c("hgap", "vgap", "maxiter"),
-        recover_old = c("hgap", "vgap", "maxiter"),
-        match_names = c("hgap", "vgap", "maxiter"),
-        match_to = c("hgap", "vgap", "maxiter"),
-        defaults = list(hgap = 1, vgap = 1, maxiter = 100),
-        head_args = c("graph", "types"),
-        fn_name = "layout_as_bipartite"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(hgap = hgap, vgap = vgap, maxiter = maxiter),
+      recover_new = c("hgap", "vgap", "maxiter"),
+      recover_old = c("hgap", "vgap", "maxiter"),
+      match_names = c("hgap", "vgap", "maxiter"),
+      match_to = c("hgap", "vgap", "maxiter"),
+      defaults = list(hgap = 1, vgap = 1, maxiter = 100),
+      head_args = c("graph", "types"),
+      fn_name = "layout_as_bipartite"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -811,19 +810,18 @@ layout_as_star <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_star, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(center = center, order = order),
-        recover_new = c("center", "order"),
-        recover_old = c("center", "order"),
-        match_names = c("center", "order"),
-        match_to = c("center", "order"),
-        defaults = list(center = NULL, order = NULL),
-        head_args = c("graph"),
-        fn_name = "layout_as_star"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(center = center, order = order),
+      recover_new = c("center", "order"),
+      recover_old = c("center", "order"),
+      match_names = c("center", "order"),
+      match_to = c("center", "order"),
+      defaults = list(center = NULL, order = NULL),
+      head_args = c("graph"),
+      fn_name = "layout_as_star"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -929,31 +927,30 @@ layout_as_tree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          root = root,
-          circular = circular,
-          rootlevel = rootlevel,
-          mode = mode,
-          flip.y = flip.y
-        ),
-        recover_new = c("root", "circular", "rootlevel", "mode", "flip.y"),
-        recover_old = c("root", "circular", "rootlevel", "mode", "flip.y"),
-        match_names = c("root", "circular", "rootlevel", "mode", "flip.y"),
-        match_to = c("root", "circular", "rootlevel", "mode", "flip.y"),
-        defaults = list(
-          root = numeric(),
-          circular = FALSE,
-          rootlevel = numeric(),
-          mode = c("out", "in", "all"),
-          flip.y = TRUE
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_as_tree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        root = root,
+        circular = circular,
+        rootlevel = rootlevel,
+        mode = mode,
+        flip.y = flip.y
+      ),
+      recover_new = c("root", "circular", "rootlevel", "mode", "flip.y"),
+      recover_old = c("root", "circular", "rootlevel", "mode", "flip.y"),
+      match_names = c("root", "circular", "rootlevel", "mode", "flip.y"),
+      match_to = c("root", "circular", "rootlevel", "mode", "flip.y"),
+      defaults = list(
+        root = numeric(),
+        circular = FALSE,
+        rootlevel = numeric(),
+        mode = c("out", "in", "all"),
+        flip.y = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_as_tree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1249,19 +1246,18 @@ layout_on_grid <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_on_grid, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(width = width, height = height, dim = dim),
-        recover_new = c("width", "height", "dim"),
-        recover_old = c("width", "height", "dim"),
-        match_names = c("width", "height", "dim"),
-        match_to = c("width", "height", "dim"),
-        defaults = list(width = 0, height = 0, dim = 2),
-        head_args = c("graph"),
-        fn_name = "layout_on_grid"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(width = width, height = height, dim = dim),
+      recover_new = c("width", "height", "dim"),
+      recover_old = c("width", "height", "dim"),
+      match_names = c("width", "height", "dim"),
+      match_to = c("width", "height", "dim"),
+      defaults = list(width = 0, height = 0, dim = 2),
+      head_args = c("graph"),
+      fn_name = "layout_on_grid"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1376,19 +1372,18 @@ layout_randomly <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_randomly, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(dim = dim),
-        recover_new = c("dim"),
-        recover_old = c("dim"),
-        match_names = c("dim"),
-        match_to = c("dim"),
-        defaults = list(dim = c(2, 3)),
-        head_args = c("graph"),
-        fn_name = "layout_randomly"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(dim = dim),
+      recover_new = c("dim"),
+      recover_old = c("dim"),
+      match_names = c("dim"),
+      match_to = c("dim"),
+      defaults = list(dim = c(2, 3)),
+      head_args = c("graph"),
+      fn_name = "layout_randomly"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1566,79 +1561,78 @@ layout_with_dh <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          coords = coords,
-          maxiter = maxiter,
-          fineiter = fineiter,
-          cool.fact = cool.fact,
-          weight.node.dist = weight.node.dist,
-          weight.border = weight.border,
-          weight.edge.lengths = weight.edge.lengths,
-          weight.edge.crossings = weight.edge.crossings,
-          weight.node.edge.dist = weight.node.edge.dist
-        ),
-        recover_new = c(
-          "coords",
-          "maxiter",
-          "fineiter",
-          "cool.fact",
-          "weight.node.dist",
-          "weight.border",
-          "weight.edge.lengths",
-          "weight.edge.crossings",
-          "weight.node.edge.dist"
-        ),
-        recover_old = c(
-          "coords",
-          "maxiter",
-          "fineiter",
-          "cool.fact",
-          "weight.node.dist",
-          "weight.border",
-          "weight.edge.lengths",
-          "weight.edge.crossings",
-          "weight.node.edge.dist"
-        ),
-        match_names = c(
-          "coords",
-          "maxiter",
-          "fineiter",
-          "cool.fact",
-          "weight.node.dist",
-          "weight.border",
-          "weight.edge.lengths",
-          "weight.edge.crossings",
-          "weight.node.edge.dist"
-        ),
-        match_to = c(
-          "coords",
-          "maxiter",
-          "fineiter",
-          "cool.fact",
-          "weight.node.dist",
-          "weight.border",
-          "weight.edge.lengths",
-          "weight.edge.crossings",
-          "weight.node.edge.dist"
-        ),
-        defaults = list(
-          coords = NULL,
-          maxiter = 10,
-          fineiter = NULL,
-          cool.fact = 0.75,
-          weight.node.dist = 1,
-          weight.border = 0,
-          weight.edge.lengths = NULL,
-          weight.edge.crossings = NULL,
-          weight.node.edge.dist = NULL
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_dh"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        coords = coords,
+        maxiter = maxiter,
+        fineiter = fineiter,
+        cool.fact = cool.fact,
+        weight.node.dist = weight.node.dist,
+        weight.border = weight.border,
+        weight.edge.lengths = weight.edge.lengths,
+        weight.edge.crossings = weight.edge.crossings,
+        weight.node.edge.dist = weight.node.edge.dist
+      ),
+      recover_new = c(
+        "coords",
+        "maxiter",
+        "fineiter",
+        "cool.fact",
+        "weight.node.dist",
+        "weight.border",
+        "weight.edge.lengths",
+        "weight.edge.crossings",
+        "weight.node.edge.dist"
+      ),
+      recover_old = c(
+        "coords",
+        "maxiter",
+        "fineiter",
+        "cool.fact",
+        "weight.node.dist",
+        "weight.border",
+        "weight.edge.lengths",
+        "weight.edge.crossings",
+        "weight.node.edge.dist"
+      ),
+      match_names = c(
+        "coords",
+        "maxiter",
+        "fineiter",
+        "cool.fact",
+        "weight.node.dist",
+        "weight.border",
+        "weight.edge.lengths",
+        "weight.edge.crossings",
+        "weight.node.edge.dist"
+      ),
+      match_to = c(
+        "coords",
+        "maxiter",
+        "fineiter",
+        "cool.fact",
+        "weight.node.dist",
+        "weight.border",
+        "weight.edge.lengths",
+        "weight.edge.crossings",
+        "weight.node.edge.dist"
+      ),
+      defaults = list(
+        coords = NULL,
+        maxiter = 10,
+        fineiter = NULL,
+        cool.fact = 0.75,
+        weight.node.dist = 1,
+        weight.border = 0,
+        weight.edge.lengths = NULL,
+        weight.edge.crossings = NULL,
+        weight.node.edge.dist = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_dh"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -1796,132 +1790,131 @@ layout_with_fr <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      migrate_check_call_tags(
-        sys.call(),
-        c("g", "gr"),
-        "layout_with_fr"
-      )
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          coords = coords,
-          dim = dim,
-          niter = niter,
-          start.temp = start.temp,
-          grid = grid,
-          weights = weights,
-          minx = minx,
-          maxx = maxx,
-          miny = miny,
-          maxy = maxy,
-          minz = minz,
-          maxz = maxz,
-          coolexp = coolexp,
-          maxdelta = maxdelta,
-          area = area,
-          repulserad = repulserad,
-          maxiter = maxiter
-        ),
-        recover_new = c(
-          "coords",
-          "dim",
-          "niter",
-          "start.temp",
-          "grid",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "coolexp",
-          "maxdelta",
-          "area",
-          "repulserad",
-          "maxiter"
-        ),
-        recover_old = c(
-          "coords",
-          "dim",
-          "niter",
-          "start.temp",
-          "grid",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "coolexp",
-          "maxdelta",
-          "area",
-          "repulserad",
-          "maxiter"
-        ),
-        match_names = c(
-          "coords",
-          "dim",
-          "niter",
-          "start.temp",
-          "grid",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "coolexp",
-          "maxdelta",
-          "area",
-          "repulserad",
-          "maxiter"
-        ),
-        match_to = c(
-          "coords",
-          "dim",
-          "niter",
-          "start.temp",
-          "grid",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "coolexp",
-          "maxdelta",
-          "area",
-          "repulserad",
-          "maxiter"
-        ),
-        defaults = list(
-          coords = NULL,
-          dim = c(2, 3),
-          niter = 500,
-          start.temp = NULL,
-          grid = c("auto", "grid", "nogrid"),
-          weights = NULL,
-          minx = NULL,
-          maxx = NULL,
-          miny = NULL,
-          maxy = NULL,
-          minz = NULL,
-          maxz = NULL,
-          coolexp = deprecated(),
-          maxdelta = deprecated(),
-          area = deprecated(),
-          repulserad = deprecated(),
-          maxiter = deprecated()
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_fr"
-      )
+    migrate_check_call_tags(
+      sys.call(),
+      c("g", "gr"),
+      "layout_with_fr"
+    )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        coords = coords,
+        dim = dim,
+        niter = niter,
+        start.temp = start.temp,
+        grid = grid,
+        weights = weights,
+        minx = minx,
+        maxx = maxx,
+        miny = miny,
+        maxy = maxy,
+        minz = minz,
+        maxz = maxz,
+        coolexp = coolexp,
+        maxdelta = maxdelta,
+        area = area,
+        repulserad = repulserad,
+        maxiter = maxiter
+      ),
+      recover_new = c(
+        "coords",
+        "dim",
+        "niter",
+        "start.temp",
+        "grid",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "coolexp",
+        "maxdelta",
+        "area",
+        "repulserad",
+        "maxiter"
+      ),
+      recover_old = c(
+        "coords",
+        "dim",
+        "niter",
+        "start.temp",
+        "grid",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "coolexp",
+        "maxdelta",
+        "area",
+        "repulserad",
+        "maxiter"
+      ),
+      match_names = c(
+        "coords",
+        "dim",
+        "niter",
+        "start.temp",
+        "grid",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "coolexp",
+        "maxdelta",
+        "area",
+        "repulserad",
+        "maxiter"
+      ),
+      match_to = c(
+        "coords",
+        "dim",
+        "niter",
+        "start.temp",
+        "grid",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "coolexp",
+        "maxdelta",
+        "area",
+        "repulserad",
+        "maxiter"
+      ),
+      defaults = list(
+        coords = NULL,
+        dim = c(2, 3),
+        niter = 500,
+        start.temp = NULL,
+        grid = c("auto", "grid", "nogrid"),
+        weights = NULL,
+        minx = NULL,
+        maxx = NULL,
+        miny = NULL,
+        maxy = NULL,
+        minz = NULL,
+        maxz = NULL,
+        coolexp = deprecated(),
+        maxdelta = deprecated(),
+        area = deprecated(),
+        repulserad = deprecated(),
+        maxiter = deprecated()
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_fr"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2105,31 +2098,30 @@ layout_with_gem <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          coords = coords,
-          maxiter = maxiter,
-          temp.max = temp.max,
-          temp.min = temp.min,
-          temp.init = temp.init
-        ),
-        recover_new = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-        recover_old = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-        match_names = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-        match_to = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-        defaults = list(
-          coords = NULL,
-          maxiter = NULL,
-          temp.max = NULL,
-          temp.min = 0.1,
-          temp.init = NULL
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_gem"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        coords = coords,
+        maxiter = maxiter,
+        temp.max = temp.max,
+        temp.min = temp.min,
+        temp.init = temp.init
+      ),
+      recover_new = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
+      recover_old = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
+      match_names = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
+      match_to = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
+      defaults = list(
+        coords = NULL,
+        maxiter = NULL,
+        temp.max = NULL,
+        temp.min = 0.1,
+        temp.init = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_gem"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2231,67 +2223,66 @@ layout_with_graphopt <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_graphopt, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          start = start,
-          niter = niter,
-          charge = charge,
-          mass = mass,
-          spring.length = spring.length,
-          spring.constant = spring.constant,
-          max.sa.movement = max.sa.movement
-        ),
-        recover_new = c(
-          "start",
-          "niter",
-          "charge",
-          "mass",
-          "spring.length",
-          "spring.constant",
-          "max.sa.movement"
-        ),
-        recover_old = c(
-          "start",
-          "niter",
-          "charge",
-          "mass",
-          "spring.length",
-          "spring.constant",
-          "max.sa.movement"
-        ),
-        match_names = c(
-          "start",
-          "niter",
-          "charge",
-          "mass",
-          "spring.length",
-          "spring.constant",
-          "max.sa.movement"
-        ),
-        match_to = c(
-          "start",
-          "niter",
-          "charge",
-          "mass",
-          "spring.length",
-          "spring.constant",
-          "max.sa.movement"
-        ),
-        defaults = list(
-          start = NULL,
-          niter = 500,
-          charge = 0.001,
-          mass = 30,
-          spring.length = 0,
-          spring.constant = 1,
-          max.sa.movement = 5
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_graphopt"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        start = start,
+        niter = niter,
+        charge = charge,
+        mass = mass,
+        spring.length = spring.length,
+        spring.constant = spring.constant,
+        max.sa.movement = max.sa.movement
+      ),
+      recover_new = c(
+        "start",
+        "niter",
+        "charge",
+        "mass",
+        "spring.length",
+        "spring.constant",
+        "max.sa.movement"
+      ),
+      recover_old = c(
+        "start",
+        "niter",
+        "charge",
+        "mass",
+        "spring.length",
+        "spring.constant",
+        "max.sa.movement"
+      ),
+      match_names = c(
+        "start",
+        "niter",
+        "charge",
+        "mass",
+        "spring.length",
+        "spring.constant",
+        "max.sa.movement"
+      ),
+      match_to = c(
+        "start",
+        "niter",
+        "charge",
+        "mass",
+        "spring.length",
+        "spring.constant",
+        "max.sa.movement"
+      ),
+      defaults = list(
+        start = NULL,
+        niter = 500,
+        charge = 0.001,
+        mass = 30,
+        spring.length = 0,
+        spring.constant = 1,
+        max.sa.movement = 5
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_graphopt"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2420,127 +2411,126 @@ layout_with_kk <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_kk, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          coords = coords,
-          dim = dim,
-          maxiter = maxiter,
-          epsilon = epsilon,
-          kkconst = kkconst,
-          weights = weights,
-          minx = minx,
-          maxx = maxx,
-          miny = miny,
-          maxy = maxy,
-          minz = minz,
-          maxz = maxz,
-          niter = niter,
-          sigma = sigma,
-          initemp = initemp,
-          coolexp = coolexp,
-          start = start
-        ),
-        recover_new = c(
-          "coords",
-          "dim",
-          "maxiter",
-          "epsilon",
-          "kkconst",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "niter",
-          "sigma",
-          "initemp",
-          "coolexp",
-          "start"
-        ),
-        recover_old = c(
-          "coords",
-          "dim",
-          "maxiter",
-          "epsilon",
-          "kkconst",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "niter",
-          "sigma",
-          "initemp",
-          "coolexp",
-          "start"
-        ),
-        match_names = c(
-          "coords",
-          "dim",
-          "maxiter",
-          "epsilon",
-          "kkconst",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "niter",
-          "sigma",
-          "initemp",
-          "coolexp",
-          "start"
-        ),
-        match_to = c(
-          "coords",
-          "dim",
-          "maxiter",
-          "epsilon",
-          "kkconst",
-          "weights",
-          "minx",
-          "maxx",
-          "miny",
-          "maxy",
-          "minz",
-          "maxz",
-          "niter",
-          "sigma",
-          "initemp",
-          "coolexp",
-          "start"
-        ),
-        defaults = list(
-          coords = NULL,
-          dim = c(2, 3),
-          maxiter = NULL,
-          epsilon = 0,
-          kkconst = NULL,
-          weights = NULL,
-          minx = NULL,
-          maxx = NULL,
-          miny = NULL,
-          maxy = NULL,
-          minz = NULL,
-          maxz = NULL,
-          niter = deprecated(),
-          sigma = deprecated(),
-          initemp = deprecated(),
-          coolexp = deprecated(),
-          start = deprecated()
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_kk"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        coords = coords,
+        dim = dim,
+        maxiter = maxiter,
+        epsilon = epsilon,
+        kkconst = kkconst,
+        weights = weights,
+        minx = minx,
+        maxx = maxx,
+        miny = miny,
+        maxy = maxy,
+        minz = minz,
+        maxz = maxz,
+        niter = niter,
+        sigma = sigma,
+        initemp = initemp,
+        coolexp = coolexp,
+        start = start
+      ),
+      recover_new = c(
+        "coords",
+        "dim",
+        "maxiter",
+        "epsilon",
+        "kkconst",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "niter",
+        "sigma",
+        "initemp",
+        "coolexp",
+        "start"
+      ),
+      recover_old = c(
+        "coords",
+        "dim",
+        "maxiter",
+        "epsilon",
+        "kkconst",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "niter",
+        "sigma",
+        "initemp",
+        "coolexp",
+        "start"
+      ),
+      match_names = c(
+        "coords",
+        "dim",
+        "maxiter",
+        "epsilon",
+        "kkconst",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "niter",
+        "sigma",
+        "initemp",
+        "coolexp",
+        "start"
+      ),
+      match_to = c(
+        "coords",
+        "dim",
+        "maxiter",
+        "epsilon",
+        "kkconst",
+        "weights",
+        "minx",
+        "maxx",
+        "miny",
+        "maxy",
+        "minz",
+        "maxz",
+        "niter",
+        "sigma",
+        "initemp",
+        "coolexp",
+        "start"
+      ),
+      defaults = list(
+        coords = NULL,
+        dim = c(2, 3),
+        maxiter = NULL,
+        epsilon = 0,
+        kkconst = NULL,
+        weights = NULL,
+        minx = NULL,
+        maxx = NULL,
+        miny = NULL,
+        maxy = NULL,
+        minz = NULL,
+        maxz = NULL,
+        niter = deprecated(),
+        sigma = deprecated(),
+        initemp = deprecated(),
+        coolexp = deprecated(),
+        start = deprecated()
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_kk"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -2723,67 +2713,66 @@ layout_with_lgl <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_lgl, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          maxiter = maxiter,
-          maxdelta = maxdelta,
-          area = area,
-          coolexp = coolexp,
-          repulserad = repulserad,
-          cellsize = cellsize,
-          root = root
-        ),
-        recover_new = c(
-          "maxiter",
-          "maxdelta",
-          "area",
-          "coolexp",
-          "repulserad",
-          "cellsize",
-          "root"
-        ),
-        recover_old = c(
-          "maxiter",
-          "maxdelta",
-          "area",
-          "coolexp",
-          "repulserad",
-          "cellsize",
-          "root"
-        ),
-        match_names = c(
-          "maxiter",
-          "maxdelta",
-          "area",
-          "coolexp",
-          "repulserad",
-          "cellsize",
-          "root"
-        ),
-        match_to = c(
-          "maxiter",
-          "maxdelta",
-          "area",
-          "coolexp",
-          "repulserad",
-          "cellsize",
-          "root"
-        ),
-        defaults = list(
-          maxiter = 150,
-          maxdelta = NULL,
-          area = NULL,
-          coolexp = 1.5,
-          repulserad = NULL,
-          cellsize = NULL,
-          root = NULL
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_lgl"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        maxiter = maxiter,
+        maxdelta = maxdelta,
+        area = area,
+        coolexp = coolexp,
+        repulserad = repulserad,
+        cellsize = cellsize,
+        root = root
+      ),
+      recover_new = c(
+        "maxiter",
+        "maxdelta",
+        "area",
+        "coolexp",
+        "repulserad",
+        "cellsize",
+        "root"
+      ),
+      recover_old = c(
+        "maxiter",
+        "maxdelta",
+        "area",
+        "coolexp",
+        "repulserad",
+        "cellsize",
+        "root"
+      ),
+      match_names = c(
+        "maxiter",
+        "maxdelta",
+        "area",
+        "coolexp",
+        "repulserad",
+        "cellsize",
+        "root"
+      ),
+      match_to = c(
+        "maxiter",
+        "maxdelta",
+        "area",
+        "coolexp",
+        "repulserad",
+        "cellsize",
+        "root"
+      ),
+      defaults = list(
+        maxiter = 150,
+        maxdelta = NULL,
+        area = NULL,
+        coolexp = 1.5,
+        repulserad = NULL,
+        cellsize = NULL,
+        root = NULL
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_lgl"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3156,61 +3145,60 @@ layout_with_sugiyama <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_sugiyama, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          layers = layers,
-          hgap = hgap,
-          vgap = vgap,
-          maxiter = maxiter,
-          weights = weights,
-          attributes = attributes
-        ),
-        recover_new = c(
-          "layers",
-          "hgap",
-          "vgap",
-          "maxiter",
-          "weights",
-          "attributes"
-        ),
-        recover_old = c(
-          "layers",
-          "hgap",
-          "vgap",
-          "maxiter",
-          "weights",
-          "attributes"
-        ),
-        match_names = c(
-          "layers",
-          "hgap",
-          "vgap",
-          "maxiter",
-          "weights",
-          "attributes"
-        ),
-        match_to = c(
-          "layers",
-          "hgap",
-          "vgap",
-          "maxiter",
-          "weights",
-          "attributes"
-        ),
-        defaults = list(
-          layers = NULL,
-          hgap = 1,
-          vgap = 1,
-          maxiter = 100,
-          weights = NULL,
-          attributes = c("default", "all", "none")
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_sugiyama"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        layers = layers,
+        hgap = hgap,
+        vgap = vgap,
+        maxiter = maxiter,
+        weights = weights,
+        attributes = attributes
+      ),
+      recover_new = c(
+        "layers",
+        "hgap",
+        "vgap",
+        "maxiter",
+        "weights",
+        "attributes"
+      ),
+      recover_old = c(
+        "layers",
+        "hgap",
+        "vgap",
+        "maxiter",
+        "weights",
+        "attributes"
+      ),
+      match_names = c(
+        "layers",
+        "hgap",
+        "vgap",
+        "maxiter",
+        "weights",
+        "attributes"
+      ),
+      match_to = c(
+        "layers",
+        "hgap",
+        "vgap",
+        "maxiter",
+        "weights",
+        "attributes"
+      ),
+      defaults = list(
+        layers = NULL,
+        hgap = 1,
+        vgap = 1,
+        maxiter = 100,
+        weights = NULL,
+        attributes = c("default", "all", "none")
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_sugiyama"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3399,19 +3387,18 @@ merge_coords <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: merge_coords, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(method = method),
-        recover_new = c("method"),
-        recover_old = c("method"),
-        match_names = c("method"),
-        match_to = c("method"),
-        defaults = list(method = "dla"),
-        head_args = c("graphs", "layouts"),
-        fn_name = "merge_coords"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(method = method),
+      recover_new = c("method"),
+      recover_old = c("method"),
+      match_names = c("method"),
+      match_to = c("method"),
+      defaults = list(method = "dla"),
+      head_args = c("graphs", "layouts"),
+      fn_name = "merge_coords"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3469,33 +3456,32 @@ norm_coords <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: norm_coords, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          xmin = xmin,
-          xmax = xmax,
-          ymin = ymin,
-          ymax = ymax,
-          zmin = zmin,
-          zmax = zmax
-        ),
-        recover_new = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-        recover_old = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-        match_names = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-        match_to = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-        defaults = list(
-          xmin = -1,
-          xmax = 1,
-          ymin = -1,
-          ymax = 1,
-          zmin = -1,
-          zmax = 1
-        ),
-        head_args = c("layout"),
-        fn_name = "norm_coords"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        xmin = xmin,
+        xmax = xmax,
+        ymin = ymin,
+        ymax = ymax,
+        zmin = zmin,
+        zmax = zmax
+      ),
+      recover_new = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
+      recover_old = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
+      match_names = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
+      match_to = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
+      defaults = list(
+        xmin = -1,
+        xmax = 1,
+        ymin = -1,
+        ymax = 1,
+        zmin = -1,
+        zmax = 1
+      ),
+      head_args = c("layout"),
+      fn_name = "norm_coords"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -3797,31 +3783,30 @@ layout_with_drl <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_drl, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          use.seed = use.seed,
-          seed = seed,
-          options = options,
-          weights = weights,
-          dim = dim
-        ),
-        recover_new = c("use.seed", "seed", "options", "weights", "dim"),
-        recover_old = c("use.seed", "seed", "options", "weights", "dim"),
-        match_names = c("use.seed", "seed", "options", "weights", "dim"),
-        match_to = c("use.seed", "seed", "options", "weights", "dim"),
-        defaults = list(
-          use.seed = FALSE,
-          seed = NULL,
-          options = NULL,
-          weights = NULL,
-          dim = c(2, 3)
-        ),
-        head_args = c("graph"),
-        fn_name = "layout_with_drl"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        use.seed = use.seed,
+        seed = seed,
+        options = options,
+        weights = weights,
+        dim = dim
+      ),
+      recover_new = c("use.seed", "seed", "options", "weights", "dim"),
+      recover_old = c("use.seed", "seed", "options", "weights", "dim"),
+      match_names = c("use.seed", "seed", "options", "weights", "dim"),
+      match_to = c("use.seed", "seed", "options", "weights", "dim"),
+      defaults = list(
+        use.seed = FALSE,
+        seed = NULL,
+        options = NULL,
+        weights = NULL,
+        dim = c(2, 3)
+      ),
+      head_args = c("graph"),
+      fn_name = "layout_with_drl"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

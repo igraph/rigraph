@@ -323,22 +323,21 @@ centralize <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centralize, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          theoretical.max = theoretical.max,
-          normalized = normalized
-        ),
-        recover_new = c("theoretical.max", "normalized"),
-        recover_old = c("theoretical.max", "normalized"),
-        match_names = c("theoretical.max", "normalized"),
-        match_to = c("theoretical.max", "normalized"),
-        defaults = list(theoretical.max = 0, normalized = TRUE),
-        head_args = c("scores"),
-        fn_name = "centralize"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        theoretical.max = theoretical.max,
+        normalized = normalized
+      ),
+      recover_new = c("theoretical.max", "normalized"),
+      recover_old = c("theoretical.max", "normalized"),
+      match_names = c("theoretical.max", "normalized"),
+      match_to = c("theoretical.max", "normalized"),
+      defaults = list(theoretical.max = 0, normalized = TRUE),
+      head_args = c("scores"),
+      fn_name = "centralize"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -405,23 +404,22 @@ centr_degree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_degree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, loops = loops, normalized = normalized),
-        recover_new = c("mode", "loops", "normalized"),
-        recover_old = c("mode", "loops", "normalized"),
-        match_names = c("mode", "loops", "normalized"),
-        match_to = c("mode", "loops", "normalized"),
-        defaults = list(
-          mode = c("all", "out", "in", "total"),
-          loops = TRUE,
-          normalized = TRUE
-        ),
-        head_args = c("graph"),
-        fn_name = "centr_degree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, loops = loops, normalized = normalized),
+      recover_new = c("mode", "loops", "normalized"),
+      recover_old = c("mode", "loops", "normalized"),
+      match_names = c("mode", "loops", "normalized"),
+      match_to = c("mode", "loops", "normalized"),
+      defaults = list(
+        mode = c("all", "out", "in", "total"),
+        loops = TRUE,
+        normalized = TRUE
+      ),
+      head_args = c("graph"),
+      fn_name = "centr_degree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -540,19 +538,18 @@ centr_betw <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_betw, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed, normalized = normalized),
-        recover_new = c("directed", "normalized"),
-        recover_old = c("directed", "normalized"),
-        match_names = c("directed", "normalized"),
-        match_to = c("directed", "normalized"),
-        defaults = list(directed = TRUE, normalized = TRUE),
-        head_args = c("graph"),
-        fn_name = "centr_betw"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed, normalized = normalized),
+      recover_new = c("directed", "normalized"),
+      recover_old = c("directed", "normalized"),
+      match_names = c("directed", "normalized"),
+      match_to = c("directed", "normalized"),
+      defaults = list(directed = TRUE, normalized = TRUE),
+      head_args = c("graph"),
+      fn_name = "centr_betw"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -613,19 +610,18 @@ centr_betw_tmax <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_betw_tmax, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed),
-        recover_new = c("directed"),
-        recover_old = c("directed"),
-        match_names = c("directed"),
-        match_to = c("directed"),
-        defaults = list(directed = TRUE),
-        head_args = c("graph", "nodes"),
-        fn_name = "centr_betw_tmax"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph", "nodes"),
+      fn_name = "centr_betw_tmax"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -688,19 +684,18 @@ centr_clo <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_clo, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode, normalized = normalized),
-        recover_new = c("mode", "normalized"),
-        recover_old = c("mode", "normalized"),
-        match_names = c("mode", "normalized"),
-        match_to = c("mode", "normalized"),
-        defaults = list(mode = c("out", "in", "all", "total"), normalized = TRUE),
-        head_args = c("graph"),
-        fn_name = "centr_clo"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode, normalized = normalized),
+      recover_new = c("mode", "normalized"),
+      recover_old = c("mode", "normalized"),
+      match_names = c("mode", "normalized"),
+      match_to = c("mode", "normalized"),
+      defaults = list(mode = c("out", "in", "all", "total"), normalized = TRUE),
+      head_args = c("graph"),
+      fn_name = "centr_clo"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -751,19 +746,18 @@ centr_clo_tmax <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_clo_tmax, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(mode = mode),
-        recover_new = c("mode"),
-        recover_old = c("mode"),
-        match_names = c("mode"),
-        match_to = c("mode"),
-        defaults = list(mode = c("out", "in", "all", "total")),
-        head_args = c("graph", "nodes"),
-        fn_name = "centr_clo_tmax"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(mode = mode),
+      recover_new = c("mode"),
+      recover_old = c("mode"),
+      match_names = c("mode"),
+      match_to = c("mode"),
+      defaults = list(mode = c("out", "in", "all", "total")),
+      head_args = c("graph", "nodes"),
+      fn_name = "centr_clo_tmax"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

@@ -250,19 +250,18 @@ assortativity_nominal <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: assortativity_nominal, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed, normalized = normalized),
-        recover_new = c("directed", "normalized"),
-        recover_old = c("directed", "normalized"),
-        match_names = c("directed", "normalized"),
-        match_to = c("directed", "normalized"),
-        defaults = list(directed = TRUE, normalized = TRUE),
-        head_args = c("graph", "types"),
-        fn_name = "assortativity_nominal"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed, normalized = normalized),
+      recover_new = c("directed", "normalized"),
+      recover_old = c("directed", "normalized"),
+      match_names = c("directed", "normalized"),
+      match_to = c("directed", "normalized"),
+      defaults = list(directed = TRUE, normalized = TRUE),
+      head_args = c("graph", "types"),
+      fn_name = "assortativity_nominal"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
@@ -296,19 +295,18 @@ assortativity_degree <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: assortativity_degree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(directed = directed),
-        recover_new = c("directed"),
-        recover_old = c("directed"),
-        match_names = c("directed"),
-        match_to = c("directed"),
-        defaults = list(directed = TRUE),
-        head_args = c("graph"),
-        fn_name = "assortativity_degree"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(directed = directed),
+      recover_new = c("directed"),
+      recover_old = c("directed"),
+      match_names = c("directed"),
+      match_to = c("directed"),
+      defaults = list(directed = TRUE),
+      head_args = c("graph"),
+      fn_name = "assortativity_degree"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

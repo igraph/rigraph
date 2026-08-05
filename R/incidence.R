@@ -196,31 +196,30 @@ graph_from_biadjacency_matrix <- function(
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_biadjacency_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(
-          directed = directed,
-          mode = mode,
-          multiple = multiple,
-          weighted = weighted,
-          add.names = add.names
-        ),
-        recover_new = c("directed", "mode", "multiple", "weighted", "add.names"),
-        recover_old = c("directed", "mode", "multiple", "weighted", "add.names"),
-        match_names = c("directed", "mode", "multiple", "weighted", "add.names"),
-        match_to = c("directed", "mode", "multiple", "weighted", "add.names"),
-        defaults = list(
-          directed = FALSE,
-          mode = c("all", "out", "in", "total"),
-          multiple = FALSE,
-          weighted = NULL,
-          add.names = NULL
-        ),
-        head_args = c("incidence"),
-        fn_name = "graph_from_biadjacency_matrix"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(
+        directed = directed,
+        mode = mode,
+        multiple = multiple,
+        weighted = weighted,
+        add.names = add.names
+      ),
+      recover_new = c("directed", "mode", "multiple", "weighted", "add.names"),
+      recover_old = c("directed", "mode", "multiple", "weighted", "add.names"),
+      match_names = c("directed", "mode", "multiple", "weighted", "add.names"),
+      match_to = c("directed", "mode", "multiple", "weighted", "add.names"),
+      defaults = list(
+        directed = FALSE,
+        mode = c("all", "out", "in", "total"),
+        multiple = FALSE,
+        weighted = NULL,
+        add.names = NULL
+      ),
+      head_args = c("incidence"),
+      fn_name = "graph_from_biadjacency_matrix"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",

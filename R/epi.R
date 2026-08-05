@@ -37,19 +37,18 @@ time_bins <- function(
 time_bins.sir <- function(x, ..., middle = TRUE) {
   # BEGIN GENERATED ARG_HANDLE: time_bins, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
-    .migrate_dots <- migrate_capture_dots()
-    if (length(.migrate_dots$values) > 0L) {
-      .arg_handle <- migrate_recover_args(
-        .migrate_dots,
-        current = list(middle = middle),
-        recover_new = c("middle"),
-        recover_old = c("middle"),
-        match_names = c("middle"),
-        match_to = c("middle"),
-        defaults = list(middle = TRUE),
-        head_args = c("x"),
-        fn_name = "time_bins"
-      )
+    .arg_handle <- migrate_recover_args(
+      rlang::pairlist2(...),
+      current = list(middle = middle),
+      recover_new = c("middle"),
+      recover_old = c("middle"),
+      match_names = c("middle"),
+      match_to = c("middle"),
+      defaults = list(middle = TRUE),
+      head_args = c("x"),
+      fn_name = "time_bins"
+    )
+    if (!is.null(.arg_handle)) {
       list2env(.arg_handle$values, environment())
       lifecycle::deprecate_soft(
         "3.0.0",
