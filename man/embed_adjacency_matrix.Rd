@@ -11,8 +11,8 @@ embed_adjacency_matrix(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
-  options = arpack_defaults()
+  cvec = NULL,
+  options = NULL
 )
 }
 \arguments{
@@ -41,11 +41,13 @@ are used for the ordering.}
 returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{cvec}{A numeric vector, its length is the number vertices in the
-graph. This vector is added to the diagonal of the adjacency matrix.}
+graph. This vector is added to the diagonal of the adjacency matrix. The
+default \code{NULL} uses
+\code{strength(graph, weights = weights) / (vcount(graph) - 1)}.}
 
 \item{options}{A named list containing the parameters for the SVD
-computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
+computation algorithm in ARPACK. The default \code{NULL} uses the values given
+by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A list containing with entries:

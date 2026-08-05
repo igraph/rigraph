@@ -11,7 +11,7 @@ layout_with_fr(
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
-  start.temp = sqrt(vcount(graph)),
+  start.temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -46,7 +46,8 @@ space.}
 
 \item{start.temp}{Real scalar, the start temperature. This is the maximum
 amount of movement alloved along one axis, within one step, for a vertex.
-Currently it is decreased linearly to zero during the iteration.}
+Currently it is decreased linearly to zero during the iteration. The
+default \code{NULL} uses \code{sqrt(vcount(graph))}.}
 
 \item{grid}{Character scalar, whether to use the faster, but less accurate
 grid based implementation of the algorithm. By default (\dQuote{auto}), the

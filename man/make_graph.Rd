@@ -12,16 +12,16 @@
 make_graph(
   edges,
   ...,
-  n = max(edges),
+  n = NULL,
   isolates = NULL,
   directed = TRUE,
-  dir = directed,
+  dir = NULL,
   simplify = TRUE
 )
 
-make_directed_graph(edges, n = max(edges))
+make_directed_graph(edges, n = NULL)
 
-make_undirected_graph(edges, n = max(edges))
+make_undirected_graph(edges, n = NULL)
 
 directed_graph(...)
 
@@ -53,7 +53,8 @@ Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
 is also ignored if there is a bigger vertex ID in \code{edges}. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate.}
+vertex with the largest ID is not an isolate. The default \code{NULL} uses
+the largest vertex ID in \code{edges}.}
 
 \item{isolates}{Character vector, names of isolate vertices,
 for symbolic edge lists. It is ignored for numeric edge lists.}

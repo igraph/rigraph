@@ -16,7 +16,8 @@ estimate_closeness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.}
+\item{vids}{The vertices for which closeness will be calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths

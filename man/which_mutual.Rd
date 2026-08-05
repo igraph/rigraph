@@ -4,13 +4,13 @@
 \alias{which_mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = E(graph), ..., loops = TRUE)
+which_mutual(graph, eids = NULL, ..., loops = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{eids}{Edge sequence, the edges that will be probed. By default is
-includes all edges in the order of their IDs.}
+\item{eids}{Edge sequence, the edges that will be probed. The default
+\code{NULL} includes all edges in the order of their IDs.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

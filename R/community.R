@@ -3130,7 +3130,7 @@ plot.communities <- function(
 
 #' @rdname plot_dendrogram.communities
 #' @export
-plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+plot_dendrogram <- function(x, mode = NULL, ...) {
   UseMethod("plot_dendrogram")
 }
 
@@ -3197,6 +3197,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @param x An object containing the community structure of a graph. See
 #'   [communities()] for details.
 #' @param mode Which dendrogram plotting function to use. See details below.
+#'   The default `NULL` uses the `dend.plot.type` igraph option.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
 #' @param use.modularity Logical, whether to use the modularity values
@@ -3217,11 +3218,14 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #'
 plot_dendrogram.communities <- function(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
 ) {
+  if (is.null(mode)) {
+    mode <- igraph_opt("dend.plot.type")
+  }
   mode <- igraph_match_arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
@@ -3600,7 +3604,8 @@ communities <- groups.communities
 #'   correspond to the vertices, and for each element the ID in the new graph is
 #'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#'   the new graph. Please see [attribute.combination()] for details.
+#'   the new graph. Please see [attribute.combination()] for details. The
+#'   default `NULL` uses the `vertex.attr.comb` igraph option.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -3624,8 +3629,12 @@ communities <- groups.communities
 contract <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  vertex.attr.comb = NULL
 ) {
+  if (is.null(vertex.attr.comb)) {
+    vertex.attr.comb <- igraph_opt("vertex.attr.comb")
+  }
+
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,

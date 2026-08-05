@@ -27,7 +27,7 @@ migrations <- list(
       g2,
       ...,
       byname = "auto",
-      graph.attr.comb = igraph_opt("graph.attr.comb"),
+      graph.attr.comb = NULL,
       vertex.attr.comb = "rename",
       edge.attr.comb = "rename"
     ) {},

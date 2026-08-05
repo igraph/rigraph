@@ -140,19 +140,88 @@ test_that("render_call_arg() wraps a single long item without a stray comma", {
 })
 
 test_that("default expressions keep air's spacing around binary `/`", {
+  # The constant-defaults rule keeps arithmetic like `n / 7100` out of real
+  # registries, but the renderer must stay air-clean for any deparsed
+  # expression, so exercise the helpers directly.
+  gen <- local_generator()
+  fmls <- formals(function(agebins = n / 7100, base = "http://a/b") {})
+  expect_identical(gen$default_expr(fmls, "agebins"), "n / 7100")
+  # slashes inside string literals stay untouched
+  expect_identical(gen$default_expr(fmls, "base"), "\"http://a/b\"")
+})
+
+test_that("is_constant_default() classifies expressions", {
+  gen <- local_generator()
+  const <- alist(
+    NULL,
+    TRUE,
+    1,
+    -1,
+    "out",
+    NA,
+    NA_character_,
+    Inf,
+    c("a", "b"),
+    c(1, -2.5),
+    list(),
+    (2),
+    deprecated(),
+    lifecycle::deprecated(),
+    # typed empty vectors: the canonical spelling of an empty sequence
+    logical(),
+    integer(),
+    numeric(),
+    double(),
+    complex(),
+    character(),
+    raw()
+  )
+  for (e in const) {
+    expect_true(gen$is_constant_default(e), label = deparse(e))
+  }
+  nonconst <- alist(
+    igraph_opt("sparsematrices"),
+    V(graph),
+    bins * 2,
+    new.env(),
+    stats::runif(1),
+    rep(0, 3),
+    sqrt(.Machine$double.eps),
+    .Machine$double.eps,
+    x,
+    T,
+    c(1, n),
+    # not empty constructors: sized or converting calls stay non-constant
+    numeric(2),
+    integer(n),
+    vector("numeric")
+  )
+  for (e in nonconst) {
+    expect_false(gen$is_constant_default(e), label = deparse(e))
+  }
+})
+
+test_that("non-constant defaults are rejected, with no escape hatch", {
   gen <- local_generator()
   entry <- list(
-    old = function(graph, agebins, base) {},
-    new = function(
-      graph,
-      ...,
-      agebins = n / 7100,
-      base = "http://a/b"
-    ) {},
+    old = function(graph, vids) {},
+    new = function(graph, ..., vids = V(graph)) {},
     when = "3.0.0"
   )
-  norm <- gen$normalise_migration("fn_slash", entry)
-  expect_identical(norm$defaults$agebins, "n / 7100")
-  # slashes inside string literals stay untouched
-  expect_identical(norm$defaults$base, "\"http://a/b\"")
+  expect_error(
+    gen$normalise_migration("fn_nc", entry),
+    "non-constant default"
+  )
+
+  # the constant replacement passes
+  entry$new <- function(graph, ..., vids = NULL) {}
+  expect_silent(norm <- gen$normalise_migration("fn_nc", entry))
+  expect_identical(norm$tail, "vids")
+
+  # the retired grandfather field is called out explicitly
+  entry$nonconst_defaults <- "vids"
+  expect_error(
+    gen$normalise_migration("fn_nc", entry),
+    "not supported"
+  )
 })

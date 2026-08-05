@@ -1393,7 +1393,8 @@ with_graph_ <- function(...) {
 #'   ignored (with a warning) if `edges` are symbolic vertex names. It
 #'   is also ignored if there is a bigger vertex ID in `edges`. This
 #'   means that for this function it is safe to supply zero here if the
-#'   vertex with the largest ID is not an isolate.
+#'   vertex with the largest ID is not an isolate. The default `NULL` uses
+#'   the largest vertex ID in `edges`.
 #' @param isolates Character vector, names of isolate vertices,
 #'   for symbolic edge lists. It is ignored for numeric edge lists.
 #' @param directed Whether to create a directed graph.
@@ -1427,14 +1428,14 @@ with_graph_ <- function(...) {
 make_graph <- function(
   edges,
   ...,
-  n = max(edges),
+  n = NULL,
   isolates = NULL,
   directed = TRUE,
-  dir = directed,
+  dir = NULL,
   simplify = TRUE
 ) {
   if (inherits(edges, "formula")) {
-    if (!missing(n)) {
+    if (!is.null(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
     }
     if (!missing(isolates)) {
@@ -1452,16 +1453,16 @@ make_graph <- function(
       cli::cli_abort("{.arg simplify} should only be used for graph literals")
     }
 
-    if (!missing(dir) && !missing(directed)) {
+    if (!is.null(dir) && !missing(directed)) {
       cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
     }
 
-    if (!missing(dir) && missing(directed)) {
+    if (!is.null(dir) && missing(directed)) {
       directed <- dir
     }
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) {
+      if (!is.null(n)) {
         cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(isolates)) {
@@ -1474,7 +1475,7 @@ make_graph <- function(
           "{.arg directed} is ignored for the {.str {edges}} graph."
         )
       }
-      if (!missing(dir)) {
+      if (!is.null(dir)) {
         cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
       if (length(list(...))) {
@@ -1508,7 +1509,7 @@ make_graph <- function(
       }
 
       args <- list(edges, ...)
-      if (!missing(n)) {
+      if (!is.null(n)) {
         args <- c(args, list(n = n))
       }
       if (!missing(directed)) {
@@ -1517,7 +1518,7 @@ make_graph <- function(
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
-      if (!missing(n)) {
+      if (!is.null(n)) {
         cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) {
@@ -1552,8 +1553,8 @@ make_famous_graph <- function(name) {
 
 #' @rdname make_graph
 #' @export
-make_directed_graph <- function(edges, n = max(edges)) {
-  if (missing(n)) {
+make_directed_graph <- function(edges, n = NULL) {
+  if (is.null(n)) {
     make_graph(edges, directed = TRUE)
   } else {
     make_graph(edges, n = n, directed = TRUE)
@@ -1562,8 +1563,8 @@ make_directed_graph <- function(edges, n = max(edges)) {
 
 #' @rdname make_graph
 #' @export
-make_undirected_graph <- function(edges, n = max(edges)) {
-  if (missing(n)) {
+make_undirected_graph <- function(edges, n = NULL) {
+  if (is.null(n)) {
     make_graph(edges, directed = FALSE)
   } else {
     make_graph(edges, n = n, directed = FALSE)

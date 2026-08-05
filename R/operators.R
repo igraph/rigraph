@@ -290,10 +290,10 @@ apply_one_combiner <- function(comb, x) {
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
 #' @param graph.attr.comb Specification for combining shared graph attributes.
-#'   Defaults to the `graph.attr.comb` igraph option (`"rename"` unless changed
-#'   via [igraph_options()]), which preserves the historical behaviour of
-#'   appending `_1`, `_2`, ... suffixes to clashing attribute names. See
-#'   [igraph-attribute-combination] for the available combiners.
+#'   The default `NULL` uses the `graph.attr.comb` igraph option (`"rename"`
+#'   unless changed via [igraph_options()]), which preserves the historical
+#'   behaviour of appending `_1`, `_2`, ... suffixes to clashing attribute
+#'   names. See [igraph-attribute-combination] for the available combiners.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -309,8 +309,12 @@ apply_one_combiner <- function(comb, x) {
 #' @export
 disjoint_union <- function(
   ...,
-  graph.attr.comb = igraph_opt("graph.attr.comb")
+  graph.attr.comb = NULL
 ) {
+  if (is.null(graph.attr.comb)) {
+    graph.attr.comb <- igraph_opt("graph.attr.comb")
+  }
+
   graphs <- unlist(
     recursive = FALSE,
     lapply(list(...), function(l) {
@@ -1005,7 +1009,7 @@ compose <- function(
   g2,
   ...,
   byname = "auto",
-  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  graph.attr.comb = NULL,
   vertex.attr.comb = "rename",
   edge.attr.comb = "rename"
 ) {
@@ -1045,7 +1049,7 @@ compose <- function(
       ),
       defaults = list(
         byname = "auto",
-        graph.attr.comb = igraph_opt("graph.attr.comb"),
+        graph.attr.comb = NULL,
         vertex.attr.comb = "rename",
         edge.attr.comb = "rename"
       ),
@@ -1063,6 +1067,10 @@ compose <- function(
 
   ensure_igraph(g1)
   ensure_igraph(g2)
+
+  if (is.null(graph.attr.comb)) {
+    graph.attr.comb <- igraph_opt("graph.attr.comb")
+  }
 
   if (byname != "auto" && !is.logical(byname)) {
     cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
@@ -1604,7 +1612,8 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.
-#' @param eids The edge IDs of the edges to reverse.
+#' @param eids The edge IDs of the edges to reverse. The default `NULL`
+#'   reverses all edges.
 #' @return The result graph where the direction of the edges with the given
 #'   IDs are reversed
 #'
@@ -1614,7 +1623,11 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
-reverse_edges <- function(graph, eids = E(graph)) {
+reverse_edges <- function(graph, eids = NULL) {
+  if (is.null(eids)) {
+    eids <- E(graph)
+  }
+
   reverse_edges_impl(
     graph = graph,
     eids = eids

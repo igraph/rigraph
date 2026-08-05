@@ -21,8 +21,8 @@ mean_distance(
 
 distances(
   graph,
-  v = V(graph),
-  to = V(graph),
+  v = NULL,
+  to = NULL,
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -33,7 +33,7 @@ distances(
 shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL,
@@ -46,7 +46,7 @@ shortest_paths(
 all_shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL
@@ -78,10 +78,10 @@ additional information like the number of disconnected vertex pairs in
 the result when this parameter is set to \code{TRUE}.}
 
 \item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated.}
+calculated. The default \code{NULL} selects all vertices.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
-calculated. By default it includes all vertices. Note that for
+calculated. The default \code{NULL} includes all vertices. Note that for
 \code{distances()} every vertex must be included here at most once. (This
 is not required for \code{shortest_paths()}.}
 

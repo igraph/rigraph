@@ -422,7 +422,7 @@ get.adjacency.sparse <- function(
 #'   is present in the graph.
 #' @param sparse Logical, whether to create a sparse matrix. The
 #'   \sQuote{`Matrix`} package must be installed for creating sparse
-#'   matrices.
+#'   matrices. The default `NULL` uses the `sparsematrices` igraph option.
 #' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
 #'   matrix.
 #'
@@ -444,7 +444,7 @@ as_adjacency_matrix <- function(
   ...,
   weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices"),
+  sparse = NULL,
   edges = deprecated(),
   attr = deprecated()
 ) {
@@ -468,7 +468,7 @@ as_adjacency_matrix <- function(
       defaults = list(
         weights = NULL,
         names = TRUE,
-        sparse = igraph_opt("sparsematrices"),
+        sparse = NULL,
         edges = deprecated(),
         attr = deprecated()
       ),
@@ -483,6 +483,10 @@ as_adjacency_matrix <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
@@ -740,15 +744,19 @@ as_directed <- function(
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
-#'   this.
+#'   this. The default `NULL` uses the `edge.attr.comb` igraph option.
 #' @export
 as_undirected <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(edge.attr.comb)) {
+    edge.attr.comb <- igraph_opt("edge.attr.comb")
+  }
+
   mode <- igraph_match_arg(mode)
 
   # Function call

@@ -55,7 +55,8 @@ get.stochastic <- function(
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical, whether to return a sparse matrix. The
-#'   `Matrix` package is needed for sparse matrices.
+#'   `Matrix` package is needed for sparse matrices. The default `NULL` uses
+#'   the `sparsematrices` igraph option.
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -79,7 +80,7 @@ stochastic_matrix <- function(
   graph,
   ...,
   column.wise = FALSE,
-  sparse = igraph_opt("sparsematrices")
+  sparse = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: stochastic_matrix, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -90,10 +91,7 @@ stochastic_matrix <- function(
       recover_old = c("column.wise", "sparse"),
       match_names = c("column.wise", "sparse"),
       match_to = c("column.wise", "sparse"),
-      defaults = list(
-        column.wise = FALSE,
-        sparse = igraph_opt("sparsematrices")
-      ),
+      defaults = list(column.wise = FALSE, sparse = NULL),
       head_args = c("graph"),
       fn_name = "stochastic_matrix"
     )
@@ -107,6 +105,10 @@ stochastic_matrix <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
 
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {

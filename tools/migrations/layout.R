@@ -21,7 +21,7 @@ migrations <- list(
     new = function(
       graph,
       ...,
-      center = V(graph)[1],
+      center = NULL,
       order = NULL
     ) {},
     when = "3.0.0"
@@ -81,13 +81,13 @@ migrations <- list(
       ...,
       coords = NULL,
       maxiter = 10,
-      fineiter = max(10, log2(vcount(graph))),
+      fineiter = NULL,
       cool.fact = 0.75,
       weight.node.dist = 1.0,
       weight.border = 0.0,
-      weight.edge.lengths = edge_density(graph) / 10,
-      weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
-      weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+      weight.edge.lengths = NULL,
+      weight.edge.crossings = NULL,
+      weight.node.edge.dist = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -98,8 +98,8 @@ migrations <- list(
       graph,
       ...,
       use.seed = FALSE,
-      seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-      options = drl_defaults$default,
+      seed = NULL,
+      options = NULL,
       weights = NULL,
       dim = c(2, 3)
     ) {},
@@ -133,7 +133,7 @@ migrations <- list(
       coords = NULL,
       dim = c(2, 3),
       niter = 500,
-      start.temp = sqrt(vcount(graph)),
+      start.temp = NULL,
       grid = c("auto", "grid", "nogrid"),
       weights = NULL,
       minx = NULL,
@@ -157,10 +157,10 @@ migrations <- list(
       graph,
       ...,
       coords = NULL,
-      maxiter = 40 * vcount(graph)^2,
-      temp.max = max(vcount(graph), 1),
-      temp.min = 1 / 10,
-      temp.init = sqrt(max(vcount(graph), 1))
+      maxiter = NULL,
+      temp.max = NULL,
+      temp.min = 0.1,
+      temp.init = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -216,9 +216,9 @@ migrations <- list(
       ...,
       coords = NULL,
       dim = c(2, 3),
-      maxiter = 50 * vcount(graph),
+      maxiter = NULL,
       epsilon = 0.0,
-      kkconst = max(vcount(graph), 1),
+      kkconst = NULL,
       weights = NULL,
       minx = NULL,
       maxx = NULL,
@@ -250,11 +250,11 @@ migrations <- list(
       graph,
       ...,
       maxiter = 150,
-      maxdelta = vcount(graph),
-      area = vcount(graph)^2,
+      maxdelta = NULL,
+      area = NULL,
       coolexp = 1.5,
-      repulserad = area * vcount(graph),
-      cellsize = sqrt(sqrt(area)),
+      repulserad = NULL,
+      cellsize = NULL,
       root = NULL
     ) {},
     when = "3.0.0"

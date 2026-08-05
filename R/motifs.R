@@ -331,7 +331,7 @@ sample_motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = rep(0, size),
+  cut.prob = NULL,
   sample.size = NULL,
   sample = NULL
 ) {
@@ -353,11 +353,7 @@ sample_motifs <- function(
       recover_old = c("cut.prob", "sample.size", "sample"),
       match_names = c("cut.prob", "sample.size", "sample"),
       match_to = c("cut.prob", "sample.size", "sample"),
-      defaults = list(
-        cut.prob = rep(0, size),
-        sample.size = NULL,
-        sample = NULL
-      ),
+      defaults = list(cut.prob = NULL, sample.size = NULL, sample = NULL),
       head_args = c("graph", "size"),
       fn_name = "sample_motifs"
     )

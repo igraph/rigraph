@@ -8,7 +8,7 @@ sample_motifs(
   graph,
   size = 3,
   ...,
-  cut.prob = rep(0, size),
+  cut.prob = NULL,
   sample.size = NULL,
   sample = NULL
 )

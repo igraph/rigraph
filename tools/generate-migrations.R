@@ -130,9 +130,111 @@ space_binary_slash <- function(text) {
   gsub("[ ]+/[ ]+", " / ", paste(chars, collapse = ""))
 }
 
+# ---- constant-default rule --------------------------------------------------
+#
+# Defaults in migrated (`new`) signatures must be *constant expressions*:
+# literals, NULL/TRUE/FALSE/NA*/Inf/NaN, `c()`/`list()` of constants, a typed
+# empty vector (`integer()`, `numeric()`, ...), a unary sign, or the
+# `deprecated()` sentinel. Anything else -- option lookups, `V(graph)`,
+# cross-references to other arguments, RNG draws, `rep()`, ... -- is evaluated
+# lazily at an unpredictable time, invites forcing hazards in the recovery
+# machinery, and hides the real default from the signature. There is no escape
+# hatch: express a complex default as `NULL` and resolve it in the body after
+# all arguments are available.
+
+is_constant_default <- function(expr) {
+  if (is.null(expr)) {
+    return(TRUE)
+  }
+  if (is.atomic(expr)) {
+    return(TRUE)
+  }
+  if (is.symbol(expr)) {
+    # TRUE/FALSE/NULL/NA/Inf/NaN parse as literals, not symbols; any symbol
+    # here references an argument or a global -- not constant. (T/F included.)
+    return(FALSE)
+  }
+  if (is.call(expr)) {
+    head <- expr[[1]]
+    if (is.call(head)) {
+      # namespaced sentinel: lifecycle::deprecated()
+      return(
+        length(expr) == 1L &&
+          identical(head, quote(lifecycle::deprecated))
+      )
+    }
+    if (!is.symbol(head)) {
+      return(FALSE)
+    }
+    fn <- as.character(head)
+    if (fn %in% c("c", "list", "(")) {
+      args <- as.list(expr)[-1]
+      return(all(vapply(args, is_constant_default, logical(1))))
+    }
+    empty_ctors <- c(
+      "logical",
+      "integer",
+      "numeric",
+      "double",
+      "complex",
+      "character",
+      "raw"
+    )
+    if (fn %in% empty_ctors && length(expr) == 1L) {
+      # A typed empty vector is a literal: the canonical spelling of an
+      # empty-sequence default (`c()` would be NULL in disguise).
+      return(TRUE)
+    }
+    if (fn %in% c("+", "-") && length(expr) == 2L) {
+      return(is_constant_default(expr[[2]]))
+    }
+    if (fn == "deprecated" && length(expr) == 1L) {
+      return(TRUE)
+    }
+    return(FALSE)
+  }
+  FALSE
+}
+
+check_constant_defaults <- function(fn, new_fmls) {
+  flagged <- character(0)
+  for (nm in names(new_fmls)) {
+    if (nm == "...") {
+      next
+    }
+    if (!nzchar(default_expr(new_fmls, nm))) {
+      next
+    } # no default
+    if (!is_constant_default(new_fmls[[nm]])) {
+      flagged <- c(flagged, nm)
+    }
+  }
+  if (length(flagged)) {
+    stop(
+      "Migration `",
+      fn,
+      "`: non-constant default(s) for ",
+      paste0("`", flagged, "`", collapse = ", "),
+      ".\nDeclare the formal as `NULL` and resolve it in the body after all\n",
+      "arguments are available (see tools/migrations/README.md).",
+      call. = FALSE
+    )
+  }
+  invisible(TRUE)
+}
+
 # Turn one registry entry (with `old`/`new` as function objects) into the flat
 # structure the renderer consumes.
 normalise_migration <- function(fn, entry) {
+  if (!is.null(entry$nonconst_defaults)) {
+    stop(
+      "Migration `",
+      fn,
+      "`: `nonconst_defaults` is not supported; defaults must be constant\n",
+      "expressions (declare the formal as `NULL` and resolve it in the body).",
+      call. = FALSE
+    )
+  }
   for (field in c("old", "new")) {
     if (!is.function(entry[[field]])) {
       stop(
@@ -150,6 +252,7 @@ normalise_migration <- function(fn, entry) {
 
   old_fmls <- formals(entry$old)
   new_fmls <- formals(entry$new)
+  check_constant_defaults(fn, new_fmls)
   entry$old <- names(old_fmls)
   entry$new <- names(new_fmls)
 

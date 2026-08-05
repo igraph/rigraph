@@ -44,11 +44,7 @@ parent(blocks)
   ...
 )
 
-plot_hierarchy(
-  blocks,
-  layout = layout_as_tree(hierarchy(blocks), root = 1),
-  ...
-)
+plot_hierarchy(blocks, layout = NULL, ...)
 
 export_pajek(blocks, graph, file, ..., project.file = TRUE)
 
@@ -92,8 +88,8 @@ them. By default all cohesive blocks are marked, except the one
 corresponding to the all vertices.}
 
 \item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph()}, see the possible formats there. By default the
-Reingold-Tilford layout generator is used.}
+\code{plot.igraph()}, see the possible formats there. The default \code{NULL} uses
+the Reingold-Tilford layout generator.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
 

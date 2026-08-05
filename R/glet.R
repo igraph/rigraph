@@ -71,7 +71,8 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param cliques A list of vertex IDs, the graphlet basis to use for the
 #'   projection.
-#' @param Mu Starting weights for the projection.
+#' @param Mu Starting weights for the projection. The default `NULL` uses a
+#'   weight of one for each clique.
 #' @return `graphlets()` returns a list with two members:
 #'   \describe{
 #'     \item{cliques}{
@@ -178,7 +179,7 @@ graphlet_proj <- function(
   weights = NULL,
   cliques,
   niter = 1000,
-  Mu = rep(1, length(cliques))
+  Mu = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -189,11 +190,7 @@ graphlet_proj <- function(
       recover_old = c("weights", "cliques", "niter", "Mu"),
       match_names = c("weights", "cliques", "niter", "Mu"),
       match_to = c("weights", "cliques", "niter", "Mu"),
-      defaults = list(
-        weights = NULL,
-        niter = 1000,
-        Mu = rep(1, length(cliques))
-      ),
+      defaults = list(weights = NULL, niter = 1000, Mu = NULL),
       head_args = c("graph"),
       fn_name = "graphlet_proj"
     )
@@ -208,6 +205,10 @@ graphlet_proj <- function(
 
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(Mu)) {
+    Mu <- rep(1, length(cliques))
+  }
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }

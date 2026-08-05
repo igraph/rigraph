@@ -189,12 +189,17 @@ head_print_callback <- function(
 #'
 #' @param ... Passed to the printing function.
 #' @param .indent Character scalar, indent the printout with this.
-#' @param .printer The printing function, defaults to [print].
+#' @param .printer The printing function. The default `NULL` uses
+#'   [print].
 #' @return The first element in `...`, invisibly.
 #'
 #' @export
 
-indent_print <- function(..., .indent = " ", .printer = print) {
+indent_print <- function(..., .indent = " ", .printer = NULL) {
+  if (is.null(.printer)) {
+    .printer <- print
+  }
+
   if (length(.indent) != 1 || !is.character(.indent)) {
     indent <- .indent # cli literal cannot start with a dot
     cli::cli_abort(

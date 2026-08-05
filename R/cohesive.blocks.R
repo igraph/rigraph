@@ -259,8 +259,8 @@ blockGraphs <- function(blocks, graph) {
 #'   them. By default all cohesive blocks are marked, except the one
 #'   corresponding to the all vertices.
 #' @param layout The layout of a plot, it is simply passed on to
-#'   `plot.igraph()`, see the possible formats there. By default the
-#'   Reingold-Tilford layout generator is used.
+#'   `plot.igraph()`, see the possible formats there. The default `NULL` uses
+#'   the Reingold-Tilford layout generator.
 #' @param \dots Additional arguments. `plot_hierarchy()` and [plot()] pass
 #'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
 #' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
@@ -538,9 +538,13 @@ plot.cohesiveBlocks <- function(
 #' @importFrom graphics plot
 plot_hierarchy <- function(
   blocks,
-  layout = layout_as_tree(hierarchy(blocks), root = 1),
+  layout = NULL,
   ...
 ) {
+  if (is.null(layout)) {
+    layout <- layout_as_tree(hierarchy(blocks), root = 1)
+  }
+
   plot(hierarchy(blocks), layout = layout, ...)
 }
 

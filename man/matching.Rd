@@ -10,13 +10,7 @@ is_matching(graph, matching, types = NULL)
 
 is_max_matching(graph, matching, types = NULL)
 
-max_bipartite_match(
-  graph,
-  types = NULL,
-  ...,
-  weights = NULL,
-  eps = .Machine$double.eps
-)
+max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It might be directed, but edge directions will
@@ -40,9 +34,9 @@ much as possible.}
 \item{eps}{A small real number used in equality tests in the weighted
 bipartite matching algorithm. Two real numbers are considered equal in
 the algorithm if their difference is smaller than \code{eps}. This is
-required to avoid the accumulation of numerical errors. By default it is
-set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
-holds. If you are running the algorithm with no weights, this argument
+required to avoid the accumulation of numerical errors. The default
+\code{NULL} stands for the smallest \eqn{x}, such that
+\eqn{1+x \ne 1}{1+x != 1} holds (\code{.Machine$double.eps}). If you are running the algorithm with no weights, this argument
 is ignored.}
 }
 \value{

@@ -26,7 +26,8 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex IDs for which the similarity is calculated.
+#' @param vids The vertex IDs for which the similarity is calculated. The
+#'   default `NULL` selects all vertices.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
@@ -52,7 +53,7 @@
 #' similarity(g, method = "jaccard")
 similarity <- function(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c(
     "all",
@@ -92,6 +93,10 @@ similarity <- function(
     )
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
 
   method <- igraph_match_arg(method)
   if (method == "jaccard") {
