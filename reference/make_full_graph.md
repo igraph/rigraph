@@ -60,7 +60,7 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> ── <igraph> Full graph ────────────────────────────────────────────── 2c5bb1a ──
+#> ── <igraph> Full graph ────────────────────────────────────────────── e9d23b6 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 10 edges
 #> 
@@ -70,7 +70,7 @@ make_full_graph(5)
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #>  [1] 1 ─ 2  1 ─ 3  1 ─ 4  1 ─ 5  2 ─ 3  2 ─ 4  2 ─ 5  3 ─ 4  3 ─ 5  4 ─ 5 
 print_all(make_full_graph(4, directed = TRUE))
-#> ── <igraph> Full graph ────────────────────────────────────────────── 1bcb9f1 ──
+#> ── <igraph> Full graph ────────────────────────────────────────────── cbe6619 ──
 #> ℹ directed
 #> ℹ 4 vertices · 12 edges
 #> 

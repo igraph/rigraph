@@ -69,7 +69,7 @@ Other functions for manipulating graph structure:
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
   vertices("X", "Y")
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 68d409c ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 5876ad1 ──
 #> ℹ undirected · named
 #> ℹ 12 vertices · 10 edges
 #> 

@@ -65,20 +65,20 @@ Other vertex and edge sequences:
 # Unnamed graphs
 g <- make_ring(10)
 V(g)
-#> ── <vertex sequence> 10/10 · from 7575f2a ──────────────────────────────────────
+#> ── <vertex sequence> 10/10 · from 2a18b84 ──────────────────────────────────────
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Named graphs
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g2)
-#> ── <vertex sequence> 10/10 · named · from 2201c54 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from 5b63bd6 ──────────────────────────────
 #>  [1] A B C D E F G H I J
 
 # All vertices in the sequence
 g3 <- make_ring(1000)
 V(g3)
-#> ── <vertex sequence> 1000/1000 · from 37498bc ──────────────────────────────────
+#> ── <vertex sequence> 1000/1000 · from 68f1360 ──────────────────────────────────
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -91,7 +91,7 @@ V(g3)
 #>  [127]  127  128  129  130  131  132  133  134  135  136  137  138  139  140
 #> + ... omitted several vertices
 print(V(g3), full = TRUE)
-#> ── <vertex sequence> 1000/1000 · from 37498bc ──────────────────────────────────
+#> ── <vertex sequence> 1000/1000 · from 68f1360 ──────────────────────────────────
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -170,7 +170,7 @@ g4 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10]) %>%
   set_vertex_attr("color", value = "red")
 V(g4)[[]]
-#> ── <vertex sequence> 10/10 · named · from 7c33c14 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from b91a9e3 ──────────────────────────────
 #>    name color
 #> 1     A   red
 #> 2     B   red
@@ -183,7 +183,7 @@ V(g4)[[]]
 #> 9     I   red
 #> 10    J   red
 V(g4)[[2:5, 7:8]]
-#> ── <vertex sequence> 6/10 · named · from 7c33c14 ───────────────────────────────
+#> ── <vertex sequence> 6/10 · named · from b91a9e3 ───────────────────────────────
 #>   name color
 #> 2    B   red
 #> 3    C   red
