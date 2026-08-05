@@ -12,7 +12,7 @@ layout_with_fr(
   coords = NULL,
   dim = c(2, 3),
   niter = 500,
-  start.temp = sqrt(vcount(graph)),
+  start.temp = NULL,
   grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
@@ -60,7 +60,8 @@ with_fr(...)
 
   Real scalar, the start temperature. This is the maximum amount of
   movement alloved along one axis, within one step, for a vertex.
-  Currently it is decreased linearly to zero during the iteration.
+  Currently it is decreased linearly to zero during the iteration. The
+  default `NULL` uses `sqrt(vcount(graph))`.
 
 - grid:
 

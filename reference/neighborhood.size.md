@@ -31,7 +31,8 @@ neighborhood.size(
 
 - nodes:
 
-  The vertices for which the calculation is performed.
+  The vertices for which the calculation is performed. The default
+  `NULL` selects all vertices.
 
 - mode:
 

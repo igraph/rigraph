@@ -62,8 +62,8 @@
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lm"</span>, <span class="st">"la"</span>, <span class="st">"sa"</span><span class="op">)</span>,</span>
 <span>  scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  cvec <span class="op">=</span> <span class="fu"><a href="strength.html">strength</a></span><span class="op">(</span><span class="va">graph</span>, weights <span class="op">=</span> <span class="va">weights</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu"><a href="arpack.html">arpack_defaults</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  cvec <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  options <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -109,13 +109,15 @@ returned instead of \(X\) and \(Y\).</p></dd>
 
 <dt id="arg-cvec">cvec<a class="anchor" aria-label="anchor" href="#arg-cvec"></a></dt>
 <dd><p>A numeric vector, its length is the number vertices in the
-graph. This vector is added to the diagonal of the adjacency matrix.</p></dd>
+graph. This vector is added to the diagonal of the adjacency matrix. The
+default <code>NULL</code> uses
+<code>strength(graph, weights = weights) / (vcount(graph) - 1)</code>.</p></dd>
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>A named list containing the parameters for the SVD
-computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by <code><a href="arpack.html">arpack_defaults()</a></code>.</p></dd>
+computation algorithm in ARPACK. The default <code>NULL</code> uses the values given
+by <code><a href="arpack.html">arpack_defaults()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

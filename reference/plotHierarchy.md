@@ -22,8 +22,8 @@ plotHierarchy(
 
   The layout of a plot, it is simply passed on to
   [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md), see
-  the possible formats there. By default the Reingold-Tilford layout
-  generator is used.
+  the possible formats there. The default `NULL` uses the
+  Reingold-Tilford layout generator.
 
 - ...:
 

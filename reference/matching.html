@@ -65,13 +65,7 @@ matching is maximal if it is not a proper subset of any other matching.</p>
 <span></span>
 <span><span class="fu">is_max_matching</span><span class="op">(</span><span class="va">graph</span>, <span class="va">matching</span>, types <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">max_bipartite_match</span><span class="op">(</span></span>
-<span>  <span class="va">graph</span>,</span>
-<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  eps <span class="op">=</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">max_bipartite_match</span><span class="op">(</span><span class="va">graph</span>, types <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, eps <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -110,9 +104,9 @@ much as possible.</p></dd>
 <dd><p>A small real number used in equality tests in the weighted
 bipartite matching algorithm. Two real numbers are considered equal in
 the algorithm if their difference is smaller than <code>eps</code>. This is
-required to avoid the accumulation of numerical errors. By default it is
-set to the smallest \(x\), such that \(1+x \ne 1\)
-holds. If you are running the algorithm with no weights, this argument
+required to avoid the accumulation of numerical errors. The default
+<code>NULL</code> stands for the smallest \(x\), such that
+\(1+x \ne 1\) holds (<code>.Machine$double.eps</code>). If you are running the algorithm with no weights, this argument
 is ignored.</p></dd>
 
 </dl></div>
@@ -217,7 +211,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 5ec2be4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 029d017 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · bipartite</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 6 vertices · 5 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -250,7 +244,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">a</span> <span class="op">-</span> <span class="va">b</span> <span class="op">-</span> <span class="va">c</span> <span class="op">-</span> <span class="va">d</span> <span class="op">-</span> <span class="va">e</span> <span class="op">-</span> <span class="va">f</span> <span class="op">-</span> <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g2</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 159c3d4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 8451bed ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named · bipartite</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 7 vertices · 6 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

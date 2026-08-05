@@ -20,8 +20,8 @@ layout.star(graph, center = V(graph)[1], order = NULL)
 
 - center:
 
-  The ID of the vertex to put in the center. By default it is the first
-  vertex.
+  The ID of the vertex to put in the center. The default `NULL` uses the
+  first vertex.
 
 - order:
 

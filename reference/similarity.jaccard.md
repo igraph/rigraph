@@ -25,7 +25,8 @@ similarity.jaccard(
 
 - vids:
 
-  The vertex IDs for which the similarity is calculated.
+  The vertex IDs for which the similarity is calculated. The default
+  `NULL` selects all vertices.
 
 - mode:
 

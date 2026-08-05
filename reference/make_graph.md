@@ -8,16 +8,16 @@ Create an igraph graph from a list of edges, or a notable graph
 make_graph(
   edges,
   ...,
-  n = max(edges),
+  n = NULL,
   isolates = NULL,
   directed = TRUE,
-  dir = directed,
+  dir = NULL,
   simplify = TRUE
 )
 
-make_directed_graph(edges, n = max(edges))
+make_directed_graph(edges, n = NULL)
 
-make_undirected_graph(edges, n = max(edges))
+make_undirected_graph(edges, n = NULL)
 
 directed_graph(...)
 
@@ -56,7 +56,8 @@ undirected_graph(...)
   warning) if `edges` are symbolic vertex names. It is also ignored if
   there is a bigger vertex ID in `edges`. This means that for this
   function it is safe to supply zero here if the vertex with the largest
-  ID is not an isolate.
+  ID is not an isolate. The default `NULL` uses the largest vertex ID in
+  `edges`.
 
 - isolates:
 
@@ -294,14 +295,14 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── c0a11c9 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 0631d30 ──
 #> ℹ undirected
 #> ℹ 6 vertices · 4 edges
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 1 ─ 2  2 ─ 3  3 ─ 4  5 ─ 6 
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 7ac015d ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 8b9b2d3 ──
 #> ℹ undirected · named
 #> ℹ 4 vertices · 3 edges
 #> 

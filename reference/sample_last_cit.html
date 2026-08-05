@@ -65,26 +65,19 @@ happened.</p>
 <span>  <span class="va">n</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  agebins <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fl">7100</span>,</span>
-<span>  pref <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">agebins</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">-</span><span class="fl">3</span>,</span>
+<span>  agebins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pref <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">last_cit</span><span class="op">(</span></span>
-<span>  <span class="va">n</span>,</span>
-<span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  agebins <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fl">7100</span>,</span>
-<span>  pref <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">agebins</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">-</span><span class="fl">3</span>,</span>
-<span>  directed <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">last_cit</span><span class="op">(</span><span class="va">n</span>, edges <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, agebins <span class="op">=</span> <span class="cn">NULL</span>, pref <span class="op">=</span> <span class="cn">NULL</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">sample_cit_types</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  pref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pref <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  attr <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -92,9 +85,9 @@ happened.</p>
 <span><span class="fu">cit_types</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  pref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pref <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  attr <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -102,9 +95,9 @@ happened.</p>
 <span><span class="fu">sample_cit_cit_types</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  pref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pref <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  attr <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -112,9 +105,9 @@ happened.</p>
 <span><span class="fu">cit_cit_types</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
 <span>  edges <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  pref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">types</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pref <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  attr <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -137,13 +130,15 @@ happened.</p>
 
 
 <dt id="arg-agebins">agebins<a class="anchor" aria-label="anchor" href="#arg-agebins"></a></dt>
-<dd><p>Number of aging bins.</p></dd>
+<dd><p>Number of aging bins. The default <code>NULL</code> uses <code>n / 7100</code>.</p></dd>
 
 
 <dt id="arg-pref">pref<a class="anchor" aria-label="anchor" href="#arg-pref"></a></dt>
 <dd><p>Vector (<code>sample_last_cit()</code> and <code>sample_cit_types()</code> or
 matrix (<code>sample_cit_cit_types()</code>) giving the (unnormalized) citation
-probabilities for the different vertex types.</p></dd>
+probabilities for the different vertex types. The default <code>NULL</code> uses
+<code>(1:(agebins + 1))^-3</code> for <code>sample_last_cit()</code> and all-one probabilities
+for the other two.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
@@ -152,7 +147,8 @@ probabilities for the different vertex types.</p></dd>
 
 <dt id="arg-types">types<a class="anchor" aria-label="anchor" href="#arg-types"></a></dt>
 <dd><p>Vector of length ‘<code>n</code>’, the types of the vertices.
-Types are numbered from zero.</p></dd>
+Types are numbered from zero. The default <code>NULL</code> gives all vertices
+type zero.</p></dd>
 
 
 <dt id="arg-attr">attr<a class="anchor" aria-label="anchor" href="#arg-attr"></a></dt>

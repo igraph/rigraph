@@ -87,11 +87,7 @@
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot_hierarchy</span><span class="op">(</span></span>
-<span>  <span class="va">blocks</span>,</span>
-<span>  layout <span class="op">=</span> <span class="fu"><a href="layout_as_tree.html">layout_as_tree</a></span><span class="op">(</span><span class="fu">hierarchy</span><span class="op">(</span><span class="va">blocks</span><span class="op">)</span>, root <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">plot_hierarchy</span><span class="op">(</span><span class="va">blocks</span>, layout <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">export_pajek</span><span class="op">(</span><span class="va">blocks</span>, <span class="va">graph</span>, <span class="va">file</span>, <span class="va">...</span>, project.file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -155,8 +151,8 @@ corresponding to the all vertices.</p></dd>
 
 <dt id="arg-layout">layout<a class="anchor" aria-label="anchor" href="#arg-layout"></a></dt>
 <dd><p>The layout of a plot, it is simply passed on to
-<code><a href="plot.igraph.html">plot.igraph()</a></code>, see the possible formats there. By default the
-Reingold-Tilford layout generator is used.</p></dd>
+<code><a href="plot.igraph.html">plot.igraph()</a></code>, see the possible formats there. The default <code>NULL</code> uses
+the Reingold-Tilford layout generator.</p></dd>
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
@@ -312,23 +308,23 @@ wrote the first version in R.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    '- B-5   c 3, n  4   ......o.oo o......... ... </span>
 <span class="r-in"><span><span class="fu">blocks</span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 23/23 · named · from a6027a3 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 23/23 · named · from e921925 ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 14/23 · named · from a6027a3 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 14/23 · named · from e921925 ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/23 · named · from a6027a3 ──────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 10/23 · named · from e921925 ──────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 7  8  11 14 9  10 12 13 16 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/23 · named · from a6027a3 ───────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 7/23 · named · from e921925 ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/23 · named · from a6027a3 ───────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;vertex sequence&gt; 4/23 · named · from e921925 ───────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  8  11 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="vertex_connectivity.html">cohesion</a></span><span class="op">(</span><span class="va">mwBlocks</span><span class="op">)</span></span></span>

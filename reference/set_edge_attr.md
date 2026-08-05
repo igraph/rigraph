@@ -5,7 +5,7 @@ Set edge attributes
 ## Usage
 
 ``` r
-set_edge_attr(graph, name, index = E(graph), value)
+set_edge_attr(graph, name, index = NULL, value)
 ```
 
 ## Arguments
@@ -21,6 +21,7 @@ set_edge_attr(graph, name, index = E(graph), value)
 - index:
 
   An optional edge sequence to set the attributes of a subset of edges.
+  The default `NULL` selects all edges.
 
 - value:
 
@@ -66,7 +67,7 @@ Vertex, edge and graph attributes:
 g <- make_ring(10) %>%
   set_edge_attr("label", value = LETTERS[1:10])
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── bd7aeef ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── de78586 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

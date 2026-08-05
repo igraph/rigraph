@@ -12,8 +12,8 @@ embed_adjacency_matrix(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
-  options = arpack_defaults()
+  cvec = NULL,
+  options = NULL
 )
 ```
 
@@ -57,13 +57,14 @@ embed_adjacency_matrix(
 - cvec:
 
   A numeric vector, its length is the number vertices in the graph. This
-  vector is added to the diagonal of the adjacency matrix.
+  vector is added to the diagonal of the adjacency matrix. The default
+  `NULL` uses
+  `strength(graph, weights = weights) / (vcount(graph) - 1)`.
 
 - options:
 
   A named list containing the parameters for the SVD computation
-  algorithm in ARPACK. By default, the list of values is assigned the
-  values given by
+  algorithm in ARPACK. The default `NULL` uses the values given by
   [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value

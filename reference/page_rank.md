@@ -9,7 +9,7 @@ page_rank(
   graph,
   ...,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vids = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -42,7 +42,7 @@ page_rank(
 
 - vids:
 
-  The vertices of interest.
+  The vertices of interest. The default `NULL` selects all vertices.
 
 - directed:
 
@@ -168,10 +168,10 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
-#>  [1] 0.06265024 0.04420947 0.05577015 0.05330769 0.02519847 0.05104152
-#>  [7] 0.06457791 0.08617833 0.05618098 0.05861773 0.05355785 0.04694985
-#> [13] 0.02562674 0.03832697 0.05055077 0.02559788 0.04430313 0.06348034
-#> [19] 0.04774245 0.04613152
+#>  [1] 0.04215661 0.09824681 0.03977792 0.01910739 0.05193305 0.06261304
+#>  [7] 0.04569037 0.08245031 0.07998563 0.04030150 0.04855028 0.02141830
+#> [13] 0.02684548 0.03068174 0.01994499 0.04604005 0.04787266 0.03632619
+#> [19] 0.04341032 0.11664736
 
 g2 <- make_star(10)
 page_rank(g2)$vector

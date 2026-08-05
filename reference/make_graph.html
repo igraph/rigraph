@@ -58,16 +58,16 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_graph</span><span class="op">(</span></span>
 <span>  <span class="va">edges</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  isolates <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  dir <span class="op">=</span> <span class="va">directed</span>,</span>
+<span>  dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  simplify <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">make_directed_graph</span><span class="op">(</span><span class="va">edges</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">make_directed_graph</span><span class="op">(</span><span class="va">edges</span>, n <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">make_undirected_graph</span><span class="op">(</span><span class="va">edges</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">make_undirected_graph</span><span class="op">(</span><span class="va">edges</span>, n <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">directed_graph</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
@@ -106,7 +106,8 @@ Passed to <code>make_directed_graph()</code> or <code>make_undirected_graph()</c
 ignored (with a warning) if <code>edges</code> are symbolic vertex names. It
 is also ignored if there is a bigger vertex ID in <code>edges</code>. This
 means that for this function it is safe to supply zero here if the
-vertex with the largest ID is not an isolate.</p></dd>
+vertex with the largest ID is not an isolate. The default <code>NULL</code> uses
+the largest vertex ID in <code>edges</code>.</p></dd>
 
 
 <dt id="arg-isolates">isolates<a class="anchor" aria-label="anchor" href="#arg-isolates"></a></dt>
@@ -302,14 +303,14 @@ Journal of Anthropological Research 33, 452-473 (1977).</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── c0a11c9 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 0631d30 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 6 vertices · 4 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Edges ───────────────────────────────────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 ─ 2  2 ─ 3  3 ─ 4  5 ─ 6 </span>
 <span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 7ac015d ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 8b9b2d3 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · named</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">which_mutual</span><span class="op">(</span><span class="va">graph</span>, eids <span class="op">=</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>, <span class="va">...</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">which_mutual</span><span class="op">(</span><span class="va">graph</span>, eids <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,8 +67,8 @@
 
 
 <dt id="arg-eids">eids<a class="anchor" aria-label="anchor" href="#arg-eids"></a></dt>
-<dd><p>Edge sequence, the edges that will be probed. By default is
-includes all edges in the order of their IDs.</p></dd>
+<dd><p>Edge sequence, the edges that will be probed. The default
+<code>NULL</code> includes all edges in the order of their IDs.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

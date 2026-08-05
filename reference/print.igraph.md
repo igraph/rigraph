@@ -9,13 +9,13 @@ readable form.
 # S3 method for class 'igraph'
 print(
   x,
-  full = igraph_opt("print.full"),
-  graph.attributes = igraph_opt("print.graph.attributes"),
-  vertex.attributes = igraph_opt("print.vertex.attributes"),
-  edge.attributes = igraph_opt("print.edge.attributes"),
+  full = NULL,
+  graph.attributes = NULL,
+  vertex.attributes = NULL,
+  edge.attributes = NULL,
   names = TRUE,
-  max.lines = igraph_opt("auto.print.lines"),
-  id = igraph_opt("print.id"),
+  max.lines = NULL,
+  id = NULL,
   ...
 )
 
@@ -31,19 +31,23 @@ summary(object, ...)
 
 - full:
 
-  Logical, whether to print the graph structure itself as well.
+  Logical, whether to print the graph structure itself as well. The
+  default `NULL` uses the `print.full` igraph option.
 
 - graph.attributes:
 
-  Logical, whether to print graph attributes.
+  Logical, whether to print graph attributes. The default `NULL` uses
+  the `print.graph.attributes` igraph option.
 
 - vertex.attributes:
 
-  Logical, whether to print vertex attributes.
+  Logical, whether to print vertex attributes. The default `NULL` uses
+  the `print.vertex.attributes` igraph option.
 
 - edge.attributes:
 
-  Logical, whether to print edge attributes.
+  Logical, whether to print edge attributes. The default `NULL` uses the
+  `print.edge.attributes` igraph option.
 
 - names:
 
@@ -53,11 +57,13 @@ summary(object, ...)
 - max.lines:
 
   The maximum number of lines to use. The rest of the output will be
-  truncated.
+  truncated. If not given, the `auto.print.lines` igraph option applies;
+  `NULL` prints all lines.
 
 - id:
 
-  Whether to print the graph ID.
+  Whether to print the graph ID. The default `NULL` uses the `print.id`
+  igraph option.
 
 - ...:
 
@@ -149,7 +155,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- make_ring(10)
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 85708e4 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 82fb72d ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -160,7 +166,7 @@ g
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 summary(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 85708e4 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 82fb72d ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

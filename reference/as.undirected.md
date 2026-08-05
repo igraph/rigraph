@@ -36,7 +36,8 @@ as.undirected(
   `mode="mutual"`. In these cases many edges might be mapped to a single
   one in the new graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The default `NULL` uses the `edge.attr.comb`
+  igraph option.
 
 ## Related documentation in the C library
 

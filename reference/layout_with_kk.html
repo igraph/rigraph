@@ -63,9 +63,9 @@ model of springs.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>  maxiter <span class="op">=</span> <span class="fl">50</span> <span class="op">*</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  maxiter <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  epsilon <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  kkconst <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kkconst <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  minx <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  maxx <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -109,7 +109,8 @@ space.</p></dd>
 
 <dt id="arg-maxiter">maxiter<a class="anchor" aria-label="anchor" href="#arg-maxiter"></a></dt>
 <dd><p>The maximum number of iterations to perform. The algorithm
-might terminate earlier, see the <code>epsilon</code> argument.</p></dd>
+might terminate earlier, see the <code>epsilon</code> argument. The default <code>NULL</code>
+uses <code>50 * vcount(graph)</code>.</p></dd>
 
 
 <dt id="arg-epsilon">epsilon<a class="anchor" aria-label="anchor" href="#arg-epsilon"></a></dt>
@@ -121,7 +122,7 @@ iterations.</p></dd>
 
 <dt id="arg-kkconst">kkconst<a class="anchor" aria-label="anchor" href="#arg-kkconst"></a></dt>
 <dd><p>Numeric scalar, the Kamada-Kawai vertex attraction constant.
-Typical (and default) value is the number of vertices.</p></dd>
+The default <code>NULL</code> uses the number of vertices.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>

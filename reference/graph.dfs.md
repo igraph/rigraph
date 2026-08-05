@@ -83,7 +83,8 @@ graph.dfs(
 
 - rho:
 
-  The environment in which the callback function is evaluated.
+  The environment in which the callback function is evaluated. The
+  default `NULL` uses the caller's environment.
 
 - neimode:
 

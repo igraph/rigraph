@@ -9,7 +9,7 @@ simplify(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 )
 
 is_simple(graph)
@@ -37,7 +37,8 @@ simplify_and_colorize(graph)
   In this case many edges might be mapped to a single one in the new
   graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The default `NULL` uses the `edge.attr.comb`
+  igraph option.
 
 ## Value
 

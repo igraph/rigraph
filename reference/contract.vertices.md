@@ -33,7 +33,8 @@ contract.vertices(
   Specifies how to combine the vertex attributes in the new graph.
   Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details.
+  for details. The default `NULL` uses the `vertex.attr.comb` igraph
+  option.
 
 ## Related documentation in the C library
 

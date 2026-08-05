@@ -58,7 +58,8 @@ graph(
   warning) if `edges` are symbolic vertex names. It is also ignored if
   there is a bigger vertex ID in `edges`. This means that for this
   function it is safe to supply zero here if the vertex with the largest
-  ID is not an isolate.
+  ID is not an isolate. The default `NULL` uses the largest vertex ID in
+  `edges`.
 
 - isolates:
 

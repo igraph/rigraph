@@ -64,7 +64,7 @@ all edges, this operation is also known as graph transpose.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reverse_edges</span><span class="op">(</span><span class="va">graph</span>, eids <span class="op">=</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reverse_edges</span><span class="op">(</span><span class="va">graph</span>, eids <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'igraph'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
@@ -79,7 +79,8 @@ all edges, this operation is also known as graph transpose.</p>
 
 
 <dt id="arg-eids">eids<a class="anchor" aria-label="anchor" href="#arg-eids"></a></dt>
-<dd><p>The edge IDs of the edges to reverse.</p></dd>
+<dd><p>The edge IDs of the edges to reverse. The default <code>NULL</code>
+reverses all edges.</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -129,7 +130,7 @@ IDs are reversed</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="fl">1</span> <span class="op">-</span><span class="op">+</span> <span class="fl">2</span>, <span class="fl">2</span> <span class="op">-</span><span class="op">+</span> <span class="fl">3</span>, <span class="fl">3</span> <span class="op">-</span><span class="op">+</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">reverse_edges</span><span class="op">(</span><span class="va">g</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── d0305b8 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 9a426ac ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed · named</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 4 vertices · 3 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

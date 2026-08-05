@@ -60,7 +60,7 @@ triangles of a graph.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">triangles</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">count_triangles</span><span class="op">(</span><span class="va">graph</span>, vids <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">count_triangles</span><span class="op">(</span><span class="va">graph</span>, vids <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,9 +73,9 @@ ignored.</p></dd>
 
 
 <dt id="arg-vids">vids<a class="anchor" aria-label="anchor" href="#arg-vids"></a></dt>
-<dd><p>The vertices to query, all of them by default. This might be a
-vector of numeric IDs, or a character vector of symbolic vertex names for
-named graphs.</p></dd>
+<dd><p>The vertices to query. This might be a vector of numeric IDs,
+or a character vector of symbolic vertex names for named graphs. The
+default <code>NULL</code> selects all vertices.</p></dd>
 
 </dl></div>
     <div class="section level2">

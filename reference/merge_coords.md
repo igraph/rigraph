@@ -7,7 +7,7 @@ Place several graphs on the same layout
 ``` r
 merge_coords(graphs, layouts, ..., method = "dla")
 
-layout_components(graph, layout = layout_with_kk, ...)
+layout_components(graph, layout = NULL, ...)
 ```
 
 ## Arguments
@@ -35,7 +35,8 @@ layout_components(graph, layout = layout_with_kk, ...)
 
 - layout:
 
-  A function object, the layout function to use.
+  A function object, the layout function to use. The default `NULL` uses
+  `layout_with_kk`.
 
 ## Value
 

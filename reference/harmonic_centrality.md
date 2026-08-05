@@ -9,7 +9,7 @@ considered to be zero.
 ``` r
 harmonic_centrality(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -26,7 +26,8 @@ harmonic_centrality(
 
 - vids:
 
-  The vertices for which harmonic centrality will be calculated.
+  The vertices for which harmonic centrality will be calculated. The
+  default `NULL` selects all vertices.
 
 - ...:
 

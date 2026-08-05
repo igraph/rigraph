@@ -11,8 +11,8 @@ layout_with_drl(
   graph,
   ...,
   use.seed = FALSE,
-  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-  options = drl_defaults$default,
+  seed = NULL,
+  options = NULL,
   weights = NULL,
   dim = c(2, 3)
 )
@@ -38,11 +38,13 @@ with_drl(...)
 - seed:
 
   A matrix with two columns, the starting coordinates for the vertices
-  is `use.seed` is `TRUE`. It is ignored otherwise.
+  is `use.seed` is `TRUE`. It is ignored otherwise. The default `NULL`
+  draws uniformly random starting coordinates.
 
 - options:
 
-  Options for the layout generator, a named list. See details below.
+  Options for the layout generator, a named list. See details below. The
+  default `NULL` uses `drl_defaults$default`.
 
 - weights:
 

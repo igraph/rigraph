@@ -10,7 +10,7 @@ sample_motifs(
   graph,
   size = 3,
   ...,
-  cut.prob = rep(0, size),
+  cut.prob = NULL,
   sample.size = NULL,
   sample = NULL
 )
@@ -77,9 +77,9 @@ Other graph motifs:
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 268  NA  83   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 347  NA  88   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 351
+#> [1] 435
 sample_motifs(g, 3)
-#> [1] 10
+#> [1] 30
 ```

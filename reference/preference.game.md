@@ -34,7 +34,7 @@ preference.game(
 
   The distribution of the vertex types, a numeric vector of length
   ‘types’ containing non-negative numbers. The vector will be normed to
-  obtain probabilities.
+  obtain probabilities. The default `NULL` gives a uniform distribution.
 
 - fixed.sizes:
 
@@ -46,7 +46,7 @@ preference.game(
 
   A square matrix giving the preferences of the vertex types. The matrix
   has ‘types’ rows and columns. When generating an undirected graph, it
-  must be symmetric.
+  must be symmetric. The default `NULL` sets all preferences to one.
 
 - directed:
 

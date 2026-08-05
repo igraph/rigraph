@@ -12,13 +12,7 @@ shape_noclip(coords, el, params, end = c("both", "from", "to"))
 
 shape_noplot(coords, v = NULL, params)
 
-add_shape(
-  shape,
-  ...,
-  clip = shape_noclip,
-  plot = shape_noplot,
-  parameters = list()
-)
+add_shape(shape, ..., clip = NULL, plot = NULL, parameters = list())
 ```
 
 ## Arguments
@@ -38,11 +32,13 @@ add_shape(
 
 - clip:
 
-  An R function object, the clipping function.
+  An R function object, the clipping function. The default `NULL` uses
+  `shape_noclip`.
 
 - plot:
 
-  An R function object, the plotting function.
+  An R function object, the plotting function. The default `NULL` uses
+  `shape_noplot`.
 
 - parameters:
 

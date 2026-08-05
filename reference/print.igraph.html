@@ -61,13 +61,13 @@ form.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'igraph'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  full <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.full"</span><span class="op">)</span>,</span>
-<span>  graph.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.graph.attributes"</span><span class="op">)</span>,</span>
-<span>  vertex.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.vertex.attributes"</span><span class="op">)</span>,</span>
-<span>  edge.attributes <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.edge.attributes"</span><span class="op">)</span>,</span>
+<span>  full <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  graph.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  vertex.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  edge.attributes <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  max.lines <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"auto.print.lines"</span><span class="op">)</span>,</span>
-<span>  id <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"print.id"</span><span class="op">)</span>,</span>
+<span>  max.lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -85,20 +85,23 @@ form.</p>
 
 <dt id="arg-full">full<a class="anchor" aria-label="anchor" href="#arg-full"></a></dt>
 <dd><p>Logical, whether to print the graph structure itself as
-well.</p></dd>
+well. The default <code>NULL</code> uses the <code>print.full</code> igraph option.</p></dd>
 
 
 <dt id="arg-graph-attributes">graph.attributes<a class="anchor" aria-label="anchor" href="#arg-graph-attributes"></a></dt>
-<dd><p>Logical, whether to print graph attributes.</p></dd>
+<dd><p>Logical, whether to print graph attributes. The
+default <code>NULL</code> uses the <code>print.graph.attributes</code> igraph option.</p></dd>
 
 
 <dt id="arg-vertex-attributes">vertex.attributes<a class="anchor" aria-label="anchor" href="#arg-vertex-attributes"></a></dt>
 <dd><p>Logical, whether to print vertex
-attributes.</p></dd>
+attributes. The default <code>NULL</code> uses the <code>print.vertex.attributes</code> igraph
+option.</p></dd>
 
 
 <dt id="arg-edge-attributes">edge.attributes<a class="anchor" aria-label="anchor" href="#arg-edge-attributes"></a></dt>
-<dd><p>Logical, whether to print edge attributes.</p></dd>
+<dd><p>Logical, whether to print edge attributes. The
+default <code>NULL</code> uses the <code>print.edge.attributes</code> igraph option.</p></dd>
 
 
 <dt id="arg-names">names<a class="anchor" aria-label="anchor" href="#arg-names"></a></dt>
@@ -108,11 +111,13 @@ the <code>name</code> vertex attribute) or vertex IDs.</p></dd>
 
 <dt id="arg-max-lines">max.lines<a class="anchor" aria-label="anchor" href="#arg-max-lines"></a></dt>
 <dd><p>The maximum number of lines to use. The rest of the
-output will be truncated.</p></dd>
+output will be truncated. If not given, the <code>auto.print.lines</code> igraph
+option applies; <code>NULL</code> prints all lines.</p></dd>
 
 
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
-<dd><p>Whether to print the graph ID.</p></dd>
+<dd><p>Whether to print the graph ID. The default <code>NULL</code> uses the
+<code>print.id</code> igraph option.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -186,7 +191,7 @@ listings and Unicode arrows for edges. Set
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 85708e4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 82fb72d ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -197,7 +202,7 @@ listings and Unicode arrows for edges. Set
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] 1 ─ 10 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 85708e4 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 82fb72d ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

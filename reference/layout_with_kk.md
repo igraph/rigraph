@@ -11,9 +11,9 @@ layout_with_kk(
   ...,
   coords = NULL,
   dim = c(2, 3),
-  maxiter = 50 * vcount(graph),
+  maxiter = NULL,
   epsilon = 0,
-  kkconst = max(vcount(graph), 1),
+  kkconst = NULL,
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -54,7 +54,8 @@ with_kk(...)
 - maxiter:
 
   The maximum number of iterations to perform. The algorithm might
-  terminate earlier, see the `epsilon` argument.
+  terminate earlier, see the `epsilon` argument. The default `NULL` uses
+  `50 * vcount(graph)`.
 
 - epsilon:
 
@@ -64,8 +65,8 @@ with_kk(...)
 
 - kkconst:
 
-  Numeric scalar, the Kamada-Kawai vertex attraction constant. Typical
-  (and default) value is the number of vertices.
+  Numeric scalar, the Kamada-Kawai vertex attraction constant. The
+  default `NULL` uses the number of vertices.
 
 - weights:
 

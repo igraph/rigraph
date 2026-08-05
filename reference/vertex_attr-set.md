@@ -5,7 +5,7 @@ Set one or more vertex attributes
 ## Usage
 
 ``` r
-vertex_attr(graph, name, index = V(graph)) <- value
+vertex_attr(graph, name, index = NULL) <- value
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ vertex_attr(graph, name, index = V(graph)) <- value
 - index:
 
   An optional vertex sequence to set the attributes of a subset of
-  vertices.
+  vertices. The default `NULL` selects all vertices.
 
 - value:
 
@@ -64,7 +64,7 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 9bb9b7a ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── a6c6d3d ──
 #> ℹ undirected · named
 #> ℹ 10 vertices · 10 edges
 #> 

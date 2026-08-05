@@ -13,7 +13,7 @@ embed_laplacian_matrix(
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
-  options = arpack_defaults()
+  options = NULL
 )
 ```
 
@@ -79,8 +79,7 @@ embed_laplacian_matrix(
 - options:
 
   A named list containing the parameters for the SVD computation
-  algorithm in ARPACK. By default, the list of values is assigned the
-  values given by
+  algorithm in ARPACK. The default `NULL` uses the values given by
   [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
 
 ## Value

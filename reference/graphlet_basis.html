@@ -72,14 +72,7 @@ coefficient for each clique in the candidate basis.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">graphlet_basis</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">graphlet_proj</span><span class="op">(</span></span>
-<span>  <span class="va">graph</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">cliques</span>,</span>
-<span>  niter <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  Mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cliques</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">graphlet_proj</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">cliques</span>, niter <span class="op">=</span> <span class="fl">1000</span>, Mu <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">graphlets</span><span class="op">(</span><span class="va">graph</span>, <span class="va">...</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, niter <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -113,7 +106,8 @@ projection.</p></dd>
 
 
 <dt id="arg-mu">Mu<a class="anchor" aria-label="anchor" href="#arg-mu"></a></dt>
-<dd><p>Starting weights for the projection.</p></dd>
+<dd><p>Starting weights for the projection. The default <code>NULL</code> uses a
+weight of one for each clique.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -12,7 +12,7 @@ as_directed(graph, ..., mode = c("mutual", "arbitrary", "random", "acyclic"))
 as_undirected(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 )
 ```
 
@@ -39,7 +39,8 @@ as_undirected(
   `mode="mutual"`. In these cases many edges might be mapped to a single
   one in the new graph, and their attributes are combined. Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details on this.
+  for details on this. The default `NULL` uses the `edge.attr.comb`
+  igraph option.
 
 ## Value
 
@@ -134,7 +135,7 @@ as_directed(g, "mutual")
 #> in igraph 3.0.0.
 #> ℹ Detected call: as_directed(graph, mode)
 #> ℹ Use instead: as_directed(graph, mode = )
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 16c85d9 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── ed45a3a ──
 #> ℹ directed
 #> ℹ 10 vertices · 20 edges
 #> 
@@ -147,7 +148,7 @@ as_directed(g, "mutual")
 #> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 17a53ea ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── ef347d5 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -163,7 +164,7 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 7318139 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9f3bfe8 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -192,7 +193,7 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── a3d5b40 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 8001c59 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 7 edges
 #> 

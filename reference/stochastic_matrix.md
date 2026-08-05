@@ -5,12 +5,7 @@ Retrieves the stochastic matrix of a graph of class `igraph`.
 ## Usage
 
 ``` r
-stochastic_matrix(
-  graph,
-  ...,
-  column.wise = FALSE,
-  sparse = igraph_opt("sparsematrices")
-)
+stochastic_matrix(graph, ..., column.wise = FALSE, sparse = NULL)
 ```
 
 ## Arguments
@@ -31,7 +26,8 @@ stochastic_matrix(
 - sparse:
 
   Logical, whether to return a sparse matrix. The `Matrix` package is
-  needed for sparse matrices.
+  needed for sparse matrices. The default `NULL` uses the
+  `sparsematrices` igraph option.
 
 ## Value
 

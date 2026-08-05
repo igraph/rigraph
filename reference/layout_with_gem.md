@@ -10,10 +10,10 @@ layout_with_gem(
   graph,
   ...,
   coords = NULL,
-  maxiter = 40 * vcount(graph)^2,
-  temp.max = max(vcount(graph), 1),
-  temp.min = 1/10,
-  temp.init = sqrt(max(vcount(graph), 1))
+  maxiter = NULL,
+  temp.max = NULL,
+  temp.min = 0.1,
+  temp.init = NULL
 )
 
 with_gem(...)
@@ -37,14 +37,14 @@ with_gem(...)
 - maxiter:
 
   The maximum number of iterations to perform. Updating a single vertex
-  counts as an iteration. A reasonable default is 40 \* n \* n, where n
+  counts as an iteration. The default `NULL` uses 40 \* n \* n, where n
   is the number of vertices. The original paper suggests 4 \* n \* n,
   but this usually only works if the other parameters are set up
   carefully.
 
 - temp.max:
 
-  The maximum allowed local temperature. A reasonable default is the
+  The maximum allowed local temperature. The default `NULL` uses the
   number of vertices.
 
 - temp.min:
@@ -54,7 +54,7 @@ with_gem(...)
 
 - temp.init:
 
-  Initial local temperature of all vertices. A reasonable default is the
+  Initial local temperature of all vertices. The default `NULL` uses the
   square root of the number of vertices.
 
 ## Value

@@ -52,7 +52,8 @@ get.adjacency(
 - sparse:
 
   Logical, whether to create a sparse matrix. The ‘`Matrix`’ package
-  must be installed for creating sparse matrices.
+  must be installed for creating sparse matrices. The default `NULL`
+  uses the `sparsematrices` igraph option.
 
 ## Related documentation in the C library
 

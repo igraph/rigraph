@@ -116,7 +116,7 @@ Random graph models (games):
 
 ## empty graph
 sample_bipartite_gnp(10, 5, p = 0)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 63e5a9c ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── aba2854 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 0 edges
 #> 
@@ -126,7 +126,7 @@ sample_bipartite_gnp(10, 5, p = 0)
 
 ## full graph
 sample_bipartite_gnp(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── a4f65b5 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 9789936 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 50 edges
 #> 
@@ -145,20 +145,20 @@ sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite_gnp(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 4864fd5 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 9a5704b ──
 #> ℹ undirected · bipartite
-#> ℹ 15 vertices · 6 edges
+#> ℹ 15 vertices · 4 edges
 #> 
 #> ── Attributes ──────────────────────────────────────────────────────────────────
 #> → graph:  name <chr>, p <dbl>
 #> → vertex: type <lgl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 7 ─ 11   6 ─ 14   9 ─ 14   3 ─ 15   6 ─ 15   10 ─ 15 
+#> [1] 7 ─ 12  2 ─ 13  3 ─ 13  6 ─ 15 
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── 19cae3b ──
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── a881f00 ──
 #> ℹ directed · bipartite
 #> ℹ 15 vertices · 20 edges
 #> 
@@ -167,7 +167,7 @@ sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
 #> → vertex: type <lgl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 4 → 12   4 → 13   7 → 13   8 → 13   3 → 14   5 → 14   7 → 14   4 → 15  
-#>  [9] 15 → 1   11 → 2   14 → 2   11 → 3   14 → 4   13 → 5   12 → 6   14 → 6  
-#> [17] 11 → 7   12 → 7   15 → 9   12 → 10 
+#>  [1] 10 → 11  2 → 12   3 → 12   4 → 12   3 → 13   6 → 13   7 → 13   8 → 13  
+#>  [9] 10 → 13  6 → 14   10 → 14  7 → 15   11 → 1   11 → 3   12 → 3   14 → 4  
+#> [17] 11 → 7   11 → 8   12 → 8   15 → 8  
 ```

@@ -30,7 +30,7 @@ lastcit.game(
 
 - agebins:
 
-  Number of aging bins.
+  Number of aging bins. The default `NULL` uses `n / 7100`.
 
 - pref:
 
@@ -41,7 +41,9 @@ lastcit.game(
   or matrix
   ([`sample_cit_cit_types()`](https://r.igraph.org/reference/sample_last_cit.md))
   giving the (unnormalized) citation probabilities for the different
-  vertex types.
+  vertex types. The default `NULL` uses `(1:(agebins + 1))^-3` for
+  [`sample_last_cit()`](https://r.igraph.org/reference/sample_last_cit.md)
+  and all-one probabilities for the other two.
 
 - directed:
 

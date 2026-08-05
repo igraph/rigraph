@@ -25,6 +25,7 @@ set.edge.attribute(graph, name, index = E(graph), value)
 - index:
 
   An optional edge sequence to set the attributes of a subset of edges.
+  The default `NULL` selects all edges.
 
 - value:
 

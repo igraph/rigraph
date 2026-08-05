@@ -6,7 +6,7 @@ circle and the rest of the vertices equidistantly on the perimeter.
 ## Usage
 
 ``` r
-layout_as_star(graph, ..., center = V(graph)[1], order = NULL)
+layout_as_star(graph, ..., center = NULL, order = NULL)
 
 as_star(...)
 ```
@@ -23,8 +23,8 @@ as_star(...)
 
 - center:
 
-  The ID of the vertex to put in the center. By default it is the first
-  vertex.
+  The ID of the vertex to put in the center. The default `NULL` uses the
+  first vertex.
 
 - order:
 

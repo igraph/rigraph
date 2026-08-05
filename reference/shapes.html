@@ -64,13 +64,7 @@ vertex shapes when plotting graphs.</p>
 <span></span>
 <span><span class="fu">shape_noplot</span><span class="op">(</span><span class="va">coords</span>, v <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">params</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">add_shape</span><span class="op">(</span></span>
-<span>  <span class="va">shape</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  clip <span class="op">=</span> <span class="va">shape_noclip</span>,</span>
-<span>  plot <span class="op">=</span> <span class="va">shape_noplot</span>,</span>
-<span>  parameters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">add_shape</span><span class="op">(</span><span class="va">shape</span>, <span class="va">...</span>, clip <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">NULL</span>, parameters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -93,11 +87,13 @@ functions below.</p></dd>
 
 
 <dt id="arg-clip">clip<a class="anchor" aria-label="anchor" href="#arg-clip"></a></dt>
-<dd><p>An R function object, the clipping function.</p></dd>
+<dd><p>An R function object, the clipping function. The default
+<code>NULL</code> uses <code>shape_noclip</code>.</p></dd>
 
 
 <dt id="arg-plot">plot<a class="anchor" aria-label="anchor" href="#arg-plot"></a></dt>
-<dd><p>An R function object, the plotting function.</p></dd>
+<dd><p>An R function object, the plotting function. The default
+<code>NULL</code> uses <code>shape_noplot</code>.</p></dd>
 
 
 <dt id="arg-parameters">parameters<a class="anchor" aria-label="anchor" href="#arg-parameters"></a></dt>

@@ -58,10 +58,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">normalize</span><span class="op">(</span></span>
 <span>  xmin <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>  xmax <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  ymin <span class="op">=</span> <span class="va">xmin</span>,</span>
-<span>  ymax <span class="op">=</span> <span class="va">xmax</span>,</span>
-<span>  zmin <span class="op">=</span> <span class="va">xmin</span>,</span>
-<span>  zmax <span class="op">=</span> <span class="va">xmax</span></span>
+<span>  ymin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zmin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zmax <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -74,11 +74,15 @@
 
 
 <dt id="arg-ymin-ymax">ymin, ymax<a class="anchor" aria-label="anchor" href="#arg-ymin-ymax"></a></dt>
-<dd><p>Minimum and maximum for y coordinates.</p></dd>
+<dd><p>Minimum and maximum for y coordinates. When omitted,
+they follow <code>xmin</code> and <code>xmax</code>; <code>NULL</code> disables normalization along
+this axis.</p></dd>
 
 
 <dt id="arg-zmin-zmax">zmin, zmax<a class="anchor" aria-label="anchor" href="#arg-zmin-zmax"></a></dt>
-<dd><p>Minimum and maximum for z coordinates.</p></dd>
+<dd><p>Minimum and maximum for z coordinates. When omitted,
+they follow <code>xmin</code> and <code>xmax</code>; <code>NULL</code> disables normalization along
+this axis.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -114,17 +118,17 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="layout_.html">layout_</a></span><span class="op">(</span><span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="layout_with_fr.html">with_fr</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">normalize</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  0.4076009 -0.9100312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  0.8645217 -0.4764106</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  1.0000000  0.1388144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  0.7473962  0.7089222</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  0.2021167  1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -0.4097792  0.9134202</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -0.8688450  0.4833613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] -1.0000000 -0.1308647</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.7490148 -0.7046509</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] -0.2073220 -1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  0.7738661 -0.63329611</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  1.0000000 -0.01457634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  0.8336608  0.61930828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  0.3436190  1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] -0.2645944  0.99545569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -0.7727763  0.62808822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -1.0000000  0.01209923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] -0.8366545 -0.62163536</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.3437400 -1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  0.2636660 -0.99741995</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

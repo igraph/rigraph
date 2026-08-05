@@ -41,7 +41,8 @@ graphlets.project(
 
 - Mu:
 
-  Starting weights for the projection.
+  Starting weights for the projection. The default `NULL` uses a weight
+  of one for each clique.
 
 ## Related documentation in the C library
 

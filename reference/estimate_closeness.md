@@ -26,7 +26,8 @@ estimate_closeness(
 
 - vids:
 
-  The vertices for which closeness will be calculated.
+  The vertices for which closeness will be calculated. The default
+  `NULL` selects all vertices.
 
 - mode:
 

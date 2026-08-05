@@ -37,11 +37,7 @@ plot(
   ...
 )
 
-plot_hierarchy(
-  blocks,
-  layout = layout_as_tree(hierarchy(blocks), root = 1),
-  ...
-)
+plot_hierarchy(blocks, layout = NULL, ...)
 
 export_pajek(blocks, graph, file, ..., project.file = TRUE)
 
@@ -108,8 +104,8 @@ max_cohesion(blocks)
 
   The layout of a plot, it is simply passed on to
   [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md), see
-  the possible formats there. By default the Reingold-Tilford layout
-  generator is used.
+  the possible formats there. The default `NULL` uses the
+  Reingold-Tilford layout generator.
 
 - file:
 
@@ -315,23 +311,23 @@ mwBlocks
 #>    '- B-5   c 3, n  4   ......o.oo o......... ... 
 blocks(mwBlocks)
 #> [[1]]
-#> ── <vertex sequence> 23/23 · named · from a6027a3 ──────────────────────────────
+#> ── <vertex sequence> 23/23 · named · from e921925 ──────────────────────────────
 #>  [1] 1  2  3  4  5  6  7  21 8  11 14 19 9  10 12 13 16 15 17 18 20 22 23
 #> 
 #> [[2]]
-#> ── <vertex sequence> 14/23 · named · from a6027a3 ──────────────────────────────
+#> ── <vertex sequence> 14/23 · named · from e921925 ──────────────────────────────
 #>  [1] 1  2  3  4  5  6  7  21 19 17 18 20 22 23
 #> 
 #> [[3]]
-#> ── <vertex sequence> 10/23 · named · from a6027a3 ──────────────────────────────
+#> ── <vertex sequence> 10/23 · named · from e921925 ──────────────────────────────
 #>  [1] 7  8  11 14 9  10 12 13 16 15
 #> 
 #> [[4]]
-#> ── <vertex sequence> 7/23 · named · from a6027a3 ───────────────────────────────
+#> ── <vertex sequence> 7/23 · named · from e921925 ───────────────────────────────
 #> [1] 1 2 3 4 5 6 7
 #> 
 #> [[5]]
-#> ── <vertex sequence> 4/23 · named · from a6027a3 ───────────────────────────────
+#> ── <vertex sequence> 4/23 · named · from e921925 ───────────────────────────────
 #> [1] 7  8  11 14
 #> 
 cohesion(mwBlocks)

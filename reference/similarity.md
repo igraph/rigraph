@@ -8,7 +8,7 @@ connection patterns.
 ``` r
 similarity(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
@@ -24,7 +24,8 @@ similarity(
 
 - vids:
 
-  The vertex IDs for which the similarity is calculated.
+  The vertex IDs for which the similarity is calculated. The default
+  `NULL` selects all vertices.
 
 - ...:
 

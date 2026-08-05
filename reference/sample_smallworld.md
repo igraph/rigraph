@@ -117,7 +117,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-#> [1] 2.705859
+#> [1] 2.704444
 transitivity(g, type = "average")
-#> [1] 0.499254
+#> [1] 0.5105538
 ```

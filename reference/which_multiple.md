@@ -7,13 +7,13 @@ A graph without multiple and loop edges is called a simple graph.
 ## Usage
 
 ``` r
-which_multiple(graph, eids = E(graph))
+which_multiple(graph, eids = NULL)
 
 any_multiple(graph)
 
-count_multiple(graph, eids = E(graph))
+count_multiple(graph, eids = NULL)
 
-which_loop(graph, eids = E(graph))
+which_loop(graph, eids = NULL)
 
 any_loop(graph)
 
@@ -28,8 +28,8 @@ count_loops(graph)
 
 - eids:
 
-  The edges to which the query is restricted. By default this is all
-  edges in the graph.
+  The edges to which the query is restricted. The default `NULL` selects
+  all edges.
 
 ## Value
 

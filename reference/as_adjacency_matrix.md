@@ -12,7 +12,7 @@ as_adjacency_matrix(
   ...,
   weights = NULL,
   names = TRUE,
-  sparse = igraph_opt("sparsematrices"),
+  sparse = NULL,
   edges = deprecated(),
   attr = deprecated()
 )
@@ -64,7 +64,8 @@ as_adjacency_matrix(
 - sparse:
 
   Logical, whether to create a sparse matrix. The ‘`Matrix`’ package
-  must be installed for creating sparse matrices.
+  must be installed for creating sparse matrices. The default `NULL`
+  uses the `sparsematrices` igraph option.
 
 - edges:
 

@@ -59,7 +59,7 @@
 <span>  <span class="va">graph</span>,</span>
 <span>  remove.multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  remove.loops <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  edge.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"edge.attr.comb"</span><span class="op">)</span></span>
+<span>  edge.attr.comb <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">is_simple</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
@@ -88,7 +88,8 @@ removed.</p></dd>
 <dd><p>Specifies what to do with edge attributes, if
 <code>remove.multiple=TRUE</code>. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
-<code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this.</p></dd>
+<code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on this. The default <code>NULL</code> uses
+the <code>edge.attr.comb</code> igraph option.</p></dd>
 
 </dl></div>
     <div class="section level2">

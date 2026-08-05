@@ -36,12 +36,13 @@ callaway.traits.game(
 - type.dist:
 
   The distribution of the vertex types. This is assumed to be stationary
-  in time.
+  in time. The default `NULL` gives a uniform distribution.
 
 - pref.matrix:
 
   A matrix giving the preferences of the given vertex types. These
-  should be probabilities, i.e. numbers between zero and one.
+  should be probabilities, i.e. numbers between zero and one. The
+  default `NULL` sets all preferences to one.
 
 - directed:
 

@@ -63,13 +63,13 @@ algorithm by Davidson and Harel.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  fineiter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  fineiter <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cool.fact <span class="op">=</span> <span class="fl">0.75</span>,</span>
 <span>  weight.node.dist <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  weight.border <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  weight.edge.lengths <span class="op">=</span> <span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span>,</span>
-<span>  weight.edge.crossings <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  weight.node.edge.dist <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="edge_density.html">edge_density</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span>
+<span>  weight.edge.lengths <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weight.edge.crossings <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weight.node.edge.dist <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">with_dh</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -98,7 +98,8 @@ coordinates.</p></dd>
 
 
 <dt id="arg-fineiter">fineiter<a class="anchor" aria-label="anchor" href="#arg-fineiter"></a></dt>
-<dd><p>Number of iterations in the fine tuning phase.</p></dd>
+<dd><p>Number of iterations in the fine tuning phase. The
+default <code>NULL</code> uses <code>max(10, log2(vcount(graph)))</code>.</p></dd>
 
 
 <dt id="arg-cool-fact">cool.fact<a class="anchor" aria-label="anchor" href="#arg-cool-fact"></a></dt>
@@ -118,17 +119,19 @@ on the border.</p></dd>
 
 <dt id="arg-weight-edge-lengths">weight.edge.lengths<a class="anchor" aria-label="anchor" href="#arg-weight-edge-lengths"></a></dt>
 <dd><p>Weight for the edge length component of the
-energy function.</p></dd>
+energy function. The default <code>NULL</code> uses <code>edge_density(graph) / 10</code>.</p></dd>
 
 
 <dt id="arg-weight-edge-crossings">weight.edge.crossings<a class="anchor" aria-label="anchor" href="#arg-weight-edge-crossings"></a></dt>
 <dd><p>Weight for the edge crossing component of the
-energy function.</p></dd>
+energy function. The default <code>NULL</code> uses
+<code>1 - sqrt(edge_density(graph))</code>.</p></dd>
 
 
 <dt id="arg-weight-node-edge-dist">weight.node.edge.dist<a class="anchor" aria-label="anchor" href="#arg-weight-node-edge-dist"></a></dt>
 <dd><p>Weight for the node-edge distance component of
-the energy function.</p></dd>
+the energy function. The default <code>NULL</code> uses
+<code>0.2 * (1 - edge_density(graph))</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

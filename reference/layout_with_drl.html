@@ -65,8 +65,8 @@ National Laboratories.</p>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  use.seed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>  options <span class="op">=</span> <span class="va">drl_defaults</span><span class="op">$</span><span class="va">default</span>,</span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -93,12 +93,13 @@ National Laboratories.</p>
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
 <dd><p>A matrix with two columns, the starting coordinates for the
-vertices is <code>use.seed</code> is <code>TRUE</code>. It is ignored otherwise.</p></dd>
+vertices is <code>use.seed</code> is <code>TRUE</code>. It is ignored otherwise. The default
+<code>NULL</code> draws uniformly random starting coordinates.</p></dd>
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>Options for the layout generator, a named list. See details
-below.</p></dd>
+below. The default <code>NULL</code> uses <code>drl_defaults$default</code>.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>

@@ -8,7 +8,7 @@ geodesics (shortest paths) going through a vertex or an edge.
 ``` r
 betweenness(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -18,7 +18,7 @@ betweenness(
 
 edge_betweenness(
   graph,
-  e = E(graph),
+  e = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -34,7 +34,8 @@ edge_betweenness(
 
 - v:
 
-  The vertices for which the vertex betweenness will be calculated.
+  The vertices for which the vertex betweenness will be calculated. The
+  default `NULL` selects all vertices.
 
 - ...:
 
@@ -71,7 +72,8 @@ edge_betweenness(
 
 - e:
 
-  The edges for which the edge betweenness will be calculated.
+  The edges for which the edge betweenness will be calculated. The
+  default `NULL` selects all edges.
 
 ## Value
 

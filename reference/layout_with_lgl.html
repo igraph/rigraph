@@ -59,11 +59,11 @@
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  maxiter <span class="op">=</span> <span class="fl">150</span>,</span>
-<span>  maxdelta <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
-<span>  area <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span>
+<span>  maxdelta <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  area <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  coolexp <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>  repulserad <span class="op">=</span> <span class="va">area</span> <span class="op">*</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
-<span>  cellsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  repulserad <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cellsize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  root <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -87,13 +87,13 @@
 
 
 <dt id="arg-maxdelta">maxdelta<a class="anchor" aria-label="anchor" href="#arg-maxdelta"></a></dt>
-<dd><p>The maximum change for a vertex during an iteration (the
-number of vertices).</p></dd>
+<dd><p>The maximum change for a vertex during an iteration. The
+default <code>NULL</code> uses the number of vertices.</p></dd>
 
 
 <dt id="arg-area">area<a class="anchor" aria-label="anchor" href="#arg-area"></a></dt>
-<dd><p>The area of the surface on which the vertices are placed (square
-of the number of vertices).</p></dd>
+<dd><p>The area of the surface on which the vertices are placed. The
+default <code>NULL</code> uses the square of the number of vertices.</p></dd>
 
 
 <dt id="arg-coolexp">coolexp<a class="anchor" aria-label="anchor" href="#arg-coolexp"></a></dt>
@@ -101,15 +101,15 @@ of the number of vertices).</p></dd>
 
 
 <dt id="arg-repulserad">repulserad<a class="anchor" aria-label="anchor" href="#arg-repulserad"></a></dt>
-<dd><p>Cancellation radius for the repulsion (the <code>area</code>
-times the number of vertices).</p></dd>
+<dd><p>Cancellation radius for the repulsion. The default
+<code>NULL</code> uses the <code>area</code> times the number of vertices.</p></dd>
 
 
 <dt id="arg-cellsize">cellsize<a class="anchor" aria-label="anchor" href="#arg-cellsize"></a></dt>
 <dd><p>The size of the cells for the grid. When calculating the
 repulsion forces between vertices only vertices in the same or neighboring
-grid cells are taken into account (the fourth root of the number of
-<code>area</code>.</p></dd>
+grid cells are taken into account. The default <code>NULL</code> uses the square
+root of the square root of the <code>area</code>.</p></dd>
 
 
 <dt id="arg-root">root<a class="anchor" aria-label="anchor" href="#arg-root"></a></dt>

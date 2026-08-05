@@ -63,8 +63,8 @@ types.</p>
 <span>  <span class="va">types</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -73,8 +73,8 @@ types.</p>
 <span>  <span class="va">types</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -83,8 +83,8 @@ types.</p>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -93,8 +93,8 @@ types.</p>
 <span>  <span class="va">types</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
-<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -121,12 +121,13 @@ types.</p>
 
 <dt id="arg-type-dist">type.dist<a class="anchor" aria-label="anchor" href="#arg-type-dist"></a></dt>
 <dd><p>The distribution of the vertex types. This is assumed to be
-stationary in time.</p></dd>
+stationary in time. The default <code>NULL</code> gives a uniform distribution.</p></dd>
 
 
 <dt id="arg-pref-matrix">pref.matrix<a class="anchor" aria-label="anchor" href="#arg-pref-matrix"></a></dt>
 <dd><p>A matrix giving the preferences of the given vertex
-types. These should be probabilities, i.e. numbers between zero and one.</p></dd>
+types. These should be probabilities, i.e. numbers between zero and one.
+The default <code>NULL</code> sets all preferences to one.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>

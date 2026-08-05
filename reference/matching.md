@@ -11,13 +11,7 @@ is_matching(graph, matching, types = NULL)
 
 is_max_matching(graph, matching, types = NULL)
 
-max_bipartite_match(
-  graph,
-  types = NULL,
-  ...,
-  weights = NULL,
-  eps = .Machine$double.eps
-)
+max_bipartite_match(graph, types = NULL, ..., weights = NULL, eps = NULL)
 ```
 
 ## Arguments
@@ -54,9 +48,10 @@ max_bipartite_match(
   A small real number used in equality tests in the weighted bipartite
   matching algorithm. Two real numbers are considered equal in the
   algorithm if their difference is smaller than `eps`. This is required
-  to avoid the accumulation of numerical errors. By default it is set to
-  the smallest \\x\\, such that \\1+x \ne 1\\ holds. If you are running
-  the algorithm with no weights, this argument is ignored.
+  to avoid the accumulation of numerical errors. The default `NULL`
+  stands for the smallest \\x\\, such that \\1+x \ne 1\\ holds
+  (`.Machine$double.eps`). If you are running the algorithm with no
+  weights, this argument is ignored.
 
 ## Value
 
@@ -171,7 +166,7 @@ is_max_matching(g, m3)
 
 V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 5ec2be4 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 029d017 ──
 #> ℹ undirected · named · bipartite
 #> ℹ 6 vertices · 5 edges
 #> 
@@ -204,7 +199,7 @@ max_bipartite_match(g)
 g2 <- graph_from_literal(a - b - c - d - e - f - g)
 V(g2)$type <- rep(c(FALSE, TRUE), length.out = vcount(g2))
 print_all(g2, v = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 159c3d4 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 8451bed ──
 #> ℹ undirected · named · bipartite
 #> ℹ 7 vertices · 6 edges
 #> 

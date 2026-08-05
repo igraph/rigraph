@@ -64,7 +64,7 @@ Fruchterman and Reingold.</p>
 <span>  coords <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  niter <span class="op">=</span> <span class="fl">500</span>,</span>
-<span>  start.temp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  start.temp <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"grid"</span>, <span class="st">"nogrid"</span><span class="op">)</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  minx <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -114,7 +114,8 @@ space.</p></dd>
 <dt id="arg-start-temp">start.temp<a class="anchor" aria-label="anchor" href="#arg-start-temp"></a></dt>
 <dd><p>Real scalar, the start temperature. This is the maximum
 amount of movement alloved along one axis, within one step, for a vertex.
-Currently it is decreased linearly to zero during the iteration.</p></dd>
+Currently it is decreased linearly to zero during the iteration. The
+default <code>NULL</code> uses <code>sqrt(vcount(graph))</code>.</p></dd>
 
 
 <dt id="arg-grid">grid<a class="anchor" aria-label="anchor" href="#arg-grid"></a></dt>

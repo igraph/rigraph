@@ -64,9 +64,9 @@ both cite, <code>bibcoupling()</code> calculates this.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cocitation</span><span class="op">(</span><span class="va">graph</span>, v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cocitation</span><span class="op">(</span><span class="va">graph</span>, v <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">bibcoupling</span><span class="op">(</span><span class="va">graph</span>, v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">bibcoupling</span><span class="op">(</span><span class="va">graph</span>, v <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,7 +80,7 @@ both cite, <code>bibcoupling()</code> calculates this.</p>
 <dt id="arg-v">v<a class="anchor" aria-label="anchor" href="#arg-v"></a></dt>
 <dd><p>Vertex sequence or numeric vector, the vertex IDs for which the
 cocitation or bibliographic coupling values we want to calculate. The
-default is all vertices.</p></dd>
+default <code>NULL</code> selects all vertices.</p></dd>
 
 </dl></div>
     <div class="section level2">

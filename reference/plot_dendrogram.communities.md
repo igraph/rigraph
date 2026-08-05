@@ -5,12 +5,12 @@ Plot a hierarchical community structure as a dendrogram.
 ## Usage
 
 ``` r
-plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
+plot_dendrogram(x, mode = NULL, ...)
 
 # S3 method for class 'communities'
 plot_dendrogram(
   x,
-  mode = igraph_opt("dend.plot.type"),
+  mode = NULL,
   ...,
   use.modularity = FALSE,
   palette = categorical_pal(8)
@@ -27,7 +27,8 @@ plot_dendrogram(
 
 - mode:
 
-  Which dendrogram plotting function to use. See details below.
+  Which dendrogram plotting function to use. See details below. The
+  default `NULL` uses the `dend.plot.type` igraph option.
 
 - ...:
 

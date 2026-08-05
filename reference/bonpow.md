@@ -29,7 +29,7 @@ bonpow(
 - nodes:
 
   vertex sequence indicating which vertices are to be included in the
-  calculation. By default, all vertices are included.
+  calculation. The default `NULL` selects all vertices.
 
 - loops:
 

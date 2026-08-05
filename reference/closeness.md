@@ -8,7 +8,7 @@ every other vertex from a given vertex.
 ``` r
 closeness(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   mode = c("out", "in", "all", "total"),
   weights = NULL,
@@ -25,7 +25,8 @@ closeness(
 
 - vids:
 
-  The vertices for which closeness will be calculated.
+  The vertices for which closeness will be calculated. The default
+  `NULL` selects all vertices.
 
 - ...:
 

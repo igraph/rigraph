@@ -31,8 +31,8 @@ alpha.centrality(
 - nodes:
 
   Vertex sequence, the vertices for which the alpha centrality values
-  are returned. (For technical reasons they will be calculated for all
-  vertices, anyway.)
+  are returned. The default `NULL` selects all vertices. (For technical
+  reasons they will be calculated for all vertices, anyway.)
 
 - alpha:
 

@@ -20,7 +20,8 @@ piecewise.layout(graph, layout = layout_with_kk, ...)
 
 - layout:
 
-  A function object, the layout function to use.
+  A function object, the layout function to use. The default `NULL` uses
+  `layout_with_kk`.
 
 - ...:
 

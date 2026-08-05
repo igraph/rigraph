@@ -10,7 +10,7 @@ compose(
   g2,
   ...,
   byname = "auto",
-  graph.attr.comb = igraph_opt("graph.attr.comb"),
+  graph.attr.comb = NULL,
   vertex.attr.comb = "rename",
   edge.attr.comb = "rename"
 )
@@ -100,8 +100,8 @@ to get rid of the self-loops.
 
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`permute_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_permute_vertices),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
@@ -144,7 +144,7 @@ g1 <- make_ring(10)
 g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
-#> ── <igraph> ───────────────────────────────────────────────────────── b050057 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 4b3151e ──
 #> ℹ undirected
 #> ℹ 10 vertices · 36 edges
 #> 
@@ -158,7 +158,7 @@ print_all(gc)
 #> [25] 1 ─ 9    1 ─ 9    1 ─ 10   10 ─ 10  9 ─ 10   8 ─ 10   7 ─ 10   6 ─ 10  
 #> [33] 5 ─ 10   4 ─ 10   3 ─ 10   2 ─ 10  
 print_all(simplify(gc))
-#> ── <igraph> ───────────────────────────────────────────────────────── a4ba12f ──
+#> ── <igraph> ───────────────────────────────────────────────────────── a2d423c ──
 #> ℹ undirected
 #> ℹ 10 vertices · 24 edges
 #> 

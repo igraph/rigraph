@@ -6,7 +6,7 @@ have disjoint vertex sets.
 ## Usage
 
 ``` r
-disjoint_union(..., graph.attr.comb = igraph_opt("graph.attr.comb"))
+disjoint_union(..., graph.attr.comb = NULL)
 
 x %du% y
 ```
@@ -19,8 +19,9 @@ x %du% y
 
 - graph.attr.comb:
 
-  Specification for combining shared graph attributes. Defaults to the
-  `graph.attr.comb` igraph option (`"rename"` unless changed via
+  Specification for combining shared graph attributes. The default
+  `NULL` uses the `graph.attr.comb` igraph option (`"rename"` unless
+  changed via
   [`igraph_options()`](https://r.igraph.org/reference/igraph_options.md)),
   which preserves the historical behaviour of appending `_1`, `_2`, ...
   suffixes to clashing attribute names. See
@@ -63,8 +64,8 @@ undirected.
 ## Related documentation in the C library
 
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`get_eids()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_get_eids),
+[`edges()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_edges),
 [`ecount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_ecount)
 
 ## See also
@@ -109,7 +110,7 @@ V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
 print_all(g1 %du% g2)
-#> ── <igraph> ───────────────────────────────────────────────────────── 44ff298 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 0bad3fe ──
 #> ℹ undirected · named
 #> ℹ 20 vertices · 19 edges
 #> 

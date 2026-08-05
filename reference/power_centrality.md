@@ -9,7 +9,7 @@ power contributions is specified by `exponent` (1 by default).
 ``` r
 power_centrality(
   graph,
-  nodes = V(graph),
+  nodes = NULL,
   ...,
   loops = FALSE,
   exponent = 1,
@@ -29,7 +29,7 @@ power_centrality(
 - nodes:
 
   vertex sequence indicating which vertices are to be included in the
-  calculation. By default, all vertices are included.
+  calculation. The default `NULL` selects all vertices.
 
 - ...:
 

@@ -84,13 +84,14 @@ consistent API.</p>
 
 <dt id="arg-type-dist-matrix">type.dist.matrix<a class="anchor" aria-label="anchor" href="#arg-type-dist-matrix"></a></dt>
 <dd><p>The joint distribution of the in- and out-vertex
-types.</p></dd>
+types. The default <code>NULL</code> gives a uniform distribution.</p></dd>
 
 
 <dt id="arg-pref-matrix">pref.matrix<a class="anchor" aria-label="anchor" href="#arg-pref-matrix"></a></dt>
 <dd><p>A square matrix giving the preferences of the vertex
 types. The matrix has ‘types’ rows and columns. When generating
-an undirected graph, it must be symmetric.</p></dd>
+an undirected graph, it must be symmetric. The default <code>NULL</code> sets all
+preferences to one.</p></dd>
 
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>

@@ -21,8 +21,8 @@ mean_distance(
 
 distances(
   graph,
-  v = V(graph),
-  to = V(graph),
+  v = NULL,
+  to = NULL,
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -33,7 +33,7 @@ distances(
 shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL,
@@ -46,7 +46,7 @@ shortest_paths(
 all_shortest_paths(
   graph,
   from,
-  to = V(graph),
+  to = NULL,
   ...,
   mode = c("out", "all", "in"),
   weights = NULL
@@ -94,12 +94,12 @@ all_shortest_paths(
 - v:
 
   Numeric vector, the vertices from which the shortest paths will be
-  calculated.
+  calculated. The default `NULL` selects all vertices.
 
 - to:
 
   Numeric vector, the vertices to which the shortest paths will be
-  calculated. By default it includes all vertices. Note that for
+  calculated. The default `NULL` includes all vertices. Note that for
   `distances()` every vertex must be included here at most once. (This
   is not required for `shortest_paths()`.
 
@@ -371,43 +371,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> ── <vertex sequence> 5/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> ── <vertex sequence> 4/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> ── <vertex sequence> 3/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> ── <vertex sequence> 2/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 2/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> ── <vertex sequence> 1/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 1/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> ── <vertex sequence> 2/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 2/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> ── <vertex sequence> 3/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 3/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> ── <vertex sequence> 4/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> ── <vertex sequence> 5/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> ── <vertex sequence> 6/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -423,37 +423,37 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> ── <vertex sequence> 6/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> ── <vertex sequence> 6/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> ── <vertex sequence> 5/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> ── <vertex sequence> 4/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> ── <edge sequence> 5/10 · from 3486abe ─────────────────────────────────────────
+#> ── <edge sequence> 5/10 · from 7fe4677 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8   6 ─ 7  
 #> 
 #> $epaths[[2]]
-#> ── <edge sequence> 5/10 · from 3486abe ─────────────────────────────────────────
+#> ── <edge sequence> 5/10 · from 7fe4677 ─────────────────────────────────────────
 #> [1] 1 ─ 2  2 ─ 3  3 ─ 4  4 ─ 5  5 ─ 6 
 #> 
 #> $epaths[[3]]
-#> ── <edge sequence> 4/10 · from 3486abe ─────────────────────────────────────────
+#> ── <edge sequence> 4/10 · from 7fe4677 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9   7 ─ 8  
 #> 
 #> $epaths[[4]]
-#> ── <edge sequence> 3/10 · from 3486abe ─────────────────────────────────────────
+#> ── <edge sequence> 3/10 · from 7fe4677 ─────────────────────────────────────────
 #> [1] 1 ─ 10  9 ─ 10  8 ─ 9  
 #> 
 #> 
@@ -462,19 +462,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> ── <vertex sequence> 6/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> ── <vertex sequence> 6/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 6/10 · from 7fe4677 ───────────────────────────────────────
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> ── <vertex sequence> 5/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 5/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> ── <vertex sequence> 4/10 · from 3486abe ───────────────────────────────────────
+#> ── <vertex sequence> 4/10 · from 7fe4677 ───────────────────────────────────────
 #> [1]  1 10  9  8
 #> 
 #> 

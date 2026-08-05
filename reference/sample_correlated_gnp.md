@@ -6,13 +6,7 @@ and shuffling its vertices.
 ## Usage
 
 ``` r
-sample_correlated_gnp(
-  old.graph,
-  corr,
-  ...,
-  p = edge_density(old.graph),
-  permutation = NULL
-)
+sample_correlated_gnp(old.graph, corr, ..., p = NULL, permutation = NULL)
 ```
 
 ## Arguments
@@ -34,10 +28,10 @@ sample_correlated_gnp(
 - p:
 
   A numeric scalar, the probability of an edge between two vertices, it
-  must in the open (0,1) interval. The default is the empirical edge
-  density of the graph. If you are resampling an Erdős-Rényi graph and
-  you know the original edge probability of the Erdős-Rényi model, you
-  should supply that explicitly.
+  must in the open (0,1) interval. The default `NULL` uses the empirical
+  edge density of the graph. If you are resampling an Erdős-Rényi graph
+  and you know the original edge probability of the Erdős-Rényi model,
+  you should supply that explicitly.
 
 - permutation:
 
@@ -103,45 +97,45 @@ Random graph models (games):
 g <- sample_gnp(1000, 0.1)
 g2 <- sample_correlated_gnp(g, corr = 0.5)
 cor(as.vector(g[]), as.vector(g2[]))
-#> [1] 0.5027749
+#> [1] 0.5028799
 g
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── f88634e ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── b36d9fa ──
 #> ℹ undirected
-#> ℹ 1000 vertices · 49901 edges
+#> ℹ 1000 vertices · 49890 edges
 #> 
 #> ── Attributes ──────────────────────────────────────────────────────────────────
 #> → graph:  name <chr>, type <chr>, loops <lgl>, p <dbl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#>     [1] 1 ─ 3       3 ─ 5       2 ─ 7       4 ─ 8       9 ─ 10      6 ─ 11     
-#>     [7] 11 ─ 12     6 ─ 15      11 ─ 15     14 ─ 15     1 ─ 17      3 ─ 17     
-#>    [13] 10 ─ 17     4 ─ 18      9 ─ 18      10 ─ 18     16 ─ 18     9 ─ 19     
-#>    [19] 9 ─ 21      15 ─ 21     2 ─ 22      8 ─ 22      18 ─ 22     17 ─ 23    
-#>    [25] 21 ─ 23     22 ─ 23     3 ─ 24      8 ─ 25      21 ─ 25     2 ─ 26     
-#>    [31] 6 ─ 27      11 ─ 27     5 ─ 28      14 ─ 28     18 ─ 29     21 ─ 29    
-#>    [37] 24 ─ 29     27 ─ 29     7 ─ 30      11 ─ 30     21 ─ 30     6 ─ 31     
-#>    [43] 10 ─ 31     17 ─ 31     27 ─ 31     6 ─ 32      10 ─ 32     18 ─ 32    
-#>    [49] 21 ─ 32     22 ─ 32     4 ─ 33      6 ─ 33      9 ─ 33      12 ─ 33    
-#>    [55] 13 ─ 33     18 ─ 33     27 ─ 33     9 ─ 34      10 ─ 34     24 ─ 34    
+#>     [1] 5 ─ 7       6 ─ 7       6 ─ 8       3 ─ 9       6 ─ 10      1 ─ 12     
+#>     [7] 1 ─ 13      4 ─ 13      7 ─ 13      8 ─ 13      8 ─ 14      9 ─ 14     
+#>    [13] 3 ─ 15      4 ─ 16      13 ─ 16     3 ─ 18      5 ─ 18      7 ─ 18     
+#>    [19] 9 ─ 18      10 ─ 18     17 ─ 18     7 ─ 19      11 ─ 19     7 ─ 21     
+#>    [25] 16 ─ 21     6 ─ 22      16 ─ 22     18 ─ 22     4 ─ 23      8 ─ 23     
+#>    [31] 16 ─ 23     1 ─ 24      7 ─ 24      4 ─ 25      5 ─ 26      10 ─ 26    
+#>    [37] 11 ─ 26     5 ─ 27      11 ─ 27     14 ─ 27     15 ─ 27     2 ─ 28     
+#>    [43] 4 ─ 28      10 ─ 28     15 ─ 28     16 ─ 29     25 ─ 29     9 ─ 30     
+#>    [49] 11 ─ 30     14 ─ 30     23 ─ 30     28 ─ 30     1 ─ 31      20 ─ 31    
+#>    [55] 23 ─ 31     2 ─ 32      4 ─ 32      9 ─ 32      12 ─ 32     15 ─ 32    
 #> + ... omitted several edges
 g2
-#> ── <igraph> Correlated random graph ───────────────────────────────── 5e42f92 ──
+#> ── <igraph> Correlated random graph ───────────────────────────────── b74015c ──
 #> ℹ undirected
-#> ℹ 1000 vertices · 50083 edges
+#> ℹ 1000 vertices · 50075 edges
 #> 
 #> ── Attributes ──────────────────────────────────────────────────────────────────
 #> → graph:  name <chr>, corr <dbl>, p <dbl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#>     [1] 2 ─ 7       4 ─ 8       9 ─ 10      4 ─ 15      6 ─ 15      9 ─ 15     
-#>     [7] 13 ─ 15     14 ─ 15     14 ─ 16     1 ─ 17      9 ─ 18      6 ─ 20     
-#>    [13] 5 ─ 21      8 ─ 22      13 ─ 22     15 ─ 22     18 ─ 22     3 ─ 24     
-#>    [19] 15 ─ 26     18 ─ 26     21 ─ 27     5 ─ 28      14 ─ 28     16 ─ 28    
-#>    [25] 27 ─ 28     14 ─ 29     18 ─ 29     24 ─ 29     7 ─ 30      3 ─ 31     
-#>    [31] 27 ─ 31     6 ─ 32      9 ─ 32      13 ─ 32     22 ─ 32     25 ─ 32    
-#>    [37] 26 ─ 32     3 ─ 33      4 ─ 33      6 ─ 33      12 ─ 33     18 ─ 33    
-#>    [43] 27 ─ 33     9 ─ 34      10 ─ 34     15 ─ 34     29 ─ 34     4 ─ 35     
-#>    [49] 5 ─ 35      6 ─ 35      17 ─ 35     27 ─ 35     31 ─ 35     32 ─ 35    
-#>    [55] 34 ─ 35     5 ─ 36      13 ─ 36     15 ─ 36     21 ─ 36     24 ─ 36    
+#>     [1] 2 ─ 4       3 ─ 5       6 ─ 7       6 ─ 8       6 ─ 10      7 ─ 12     
+#>     [7] 7 ─ 13      8 ─ 13      10 ─ 13     8 ─ 14      9 ─ 14      3 ─ 15     
+#>    [13] 4 ─ 16      13 ─ 16     7 ─ 18      9 ─ 18      10 ─ 18     17 ─ 18    
+#>    [19] 3 ─ 20      7 ─ 20      17 ─ 20     7 ─ 21      15 ─ 21     8 ─ 22     
+#>    [25] 16 ─ 22     18 ─ 22     19 ─ 22     4 ─ 23      22 ─ 23     1 ─ 24     
+#>    [31] 7 ─ 24      23 ─ 24     4 ─ 25      1 ─ 26      11 ─ 26     5 ─ 27     
+#>    [37] 11 ─ 27     14 ─ 27     2 ─ 28      4 ─ 28      15 ─ 28     24 ─ 28    
+#>    [43] 4 ─ 29      13 ─ 29     23 ─ 29     25 ─ 29     11 ─ 30     18 ─ 30    
+#>    [49] 23 ─ 30     28 ─ 30     1 ─ 31      10 ─ 31     15 ─ 31     27 ─ 31    
+#>    [55] 7 ─ 32      9 ─ 32      12 ─ 32     16 ─ 32     18 ─ 32     23 ─ 32    
 #> + ... omitted several edges
 ```

@@ -55,12 +55,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_dendrogram</span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"dend.plot.type"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_dendrogram</span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'communities'</span></span>
 <span><span class="fu">plot_dendrogram</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  mode <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"dend.plot.type"</span><span class="op">)</span>,</span>
+<span>  mode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  use.modularity <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  palette <span class="op">=</span> <span class="fu"><a href="categorical_pal.html">categorical_pal</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
@@ -77,7 +77,8 @@
 
 
 <dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
-<dd><p>Which dendrogram plotting function to use. See details below.</p></dd>
+<dd><p>Which dendrogram plotting function to use. See details below.
+The default <code>NULL</code> uses the <code>dend.plot.type</code> igraph option.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

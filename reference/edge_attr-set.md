@@ -5,7 +5,7 @@ Set one or more edge attributes
 ## Usage
 
 ``` r
-edge_attr(graph, name, index = E(graph)) <- value
+edge_attr(graph, name, index = NULL) <- value
 ```
 
 ## Arguments
@@ -22,6 +22,7 @@ edge_attr(graph, name, index = E(graph)) <- value
 - index:
 
   An optional edge sequence to set the attributes of a subset of edges.
+  The default `NULL` selects all edges.
 
 - value:
 
@@ -63,7 +64,7 @@ edge_attr(g) <- list(
 )
 edge_attr(g, "label") <- E(g)$name
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 4a0529a ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 1a4d6ec ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 

@@ -11,7 +11,7 @@ global_efficiency(graph, ..., weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
-  vids = V(graph),
+  vids = NULL,
   ...,
   weights = NULL,
   directed = TRUE,
@@ -51,7 +51,8 @@ average_local_efficiency(
 - vids:
 
   The vertex IDs of the vertices for which the calculation will be done.
-  Applies to the local efficiency calculation only.
+  Applies to the local efficiency calculation only. The default `NULL`
+  selects all vertices.
 
 - mode:
 

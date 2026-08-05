@@ -5,7 +5,7 @@ Query edge attributes of a graph
 ## Usage
 
 ``` r
-edge_attr(graph, name, index = E(graph))
+edge_attr(graph, name, index = NULL)
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ edge_attr(graph, name, index = E(graph))
 - index:
 
   An optional edge sequence to query edge attributes for a subset of
-  edges.
+  edges. The default `NULL` selects all edges.
 
 ## Value
 
@@ -65,7 +65,7 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 2326fb0 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── cb3aa34 ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 

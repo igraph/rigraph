@@ -41,9 +41,10 @@ maximum.bipartite.matching(
   A small real number used in equality tests in the weighted bipartite
   matching algorithm. Two real numbers are considered equal in the
   algorithm if their difference is smaller than `eps`. This is required
-  to avoid the accumulation of numerical errors. By default it is set to
-  the smallest \\x\\, such that \\1+x \ne 1\\ holds. If you are running
-  the algorithm with no weights, this argument is ignored.
+  to avoid the accumulation of numerical errors. The default `NULL`
+  stands for the smallest \\x\\, such that \\1+x \ne 1\\ holds
+  (`.Machine$double.eps`). If you are running the algorithm with no
+  weights, this argument is ignored.
 
 ## Related documentation in the C library
 

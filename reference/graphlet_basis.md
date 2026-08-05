@@ -13,14 +13,7 @@ basis.
 ``` r
 graphlet_basis(graph, ..., weights = NULL)
 
-graphlet_proj(
-  graph,
-  ...,
-  weights = NULL,
-  cliques,
-  niter = 1000,
-  Mu = rep(1, length(cliques))
-)
+graphlet_proj(graph, ..., weights = NULL, cliques, niter = 1000, Mu = NULL)
 
 graphlets(graph, ..., weights = NULL, niter = 1000)
 ```
@@ -52,7 +45,8 @@ graphlets(graph, ..., weights = NULL, niter = 1000)
 
 - Mu:
 
-  Starting weights for the projection.
+  Starting weights for the projection. The default `NULL` uses a weight
+  of one for each clique.
 
 ## Value
 

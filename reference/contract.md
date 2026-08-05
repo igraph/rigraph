@@ -7,7 +7,7 @@ input graph.
 ## Usage
 
 ``` r
-contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
+contract(graph, mapping, vertex.attr.comb = NULL)
 ```
 
 ## Arguments
@@ -27,7 +27,8 @@ contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
   Specifies how to combine the vertex attributes in the new graph.
   Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
-  for details.
+  for details. The default `NULL` uses the `vertex.attr.comb` igraph
+  option.
 
 ## Value
 
@@ -91,7 +92,7 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> ── <igraph> Ring ──────────────────────────────────────────────────── 5ff14f8 ──
+#> ── <igraph> Ring ──────────────────────────────────────────────────── 2d90e69 ──
 #> ℹ undirected · named · weighted
 #> ℹ 5 vertices · 10 edges
 #> 

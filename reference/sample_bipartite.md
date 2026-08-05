@@ -119,7 +119,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sample_bipartite(10, 5, p = 0)
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnp()` instead.
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 92915f8 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 7f270d1 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 0 edges
 #> 
@@ -129,7 +129,7 @@ sample_bipartite(10, 5, p = 0)
 
 ## full graph
 sample_bipartite(10, 5, p = 1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── fb581c0 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 73fcc46 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 50 edges
 #> 
@@ -148,7 +148,7 @@ sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite(10, 5, p = 0.1)
-#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── e965ce9 ──
+#> ── <igraph> Bipartite Gnp random graph ────────────────────────────── 0cf3c67 ──
 #> ℹ undirected · bipartite
 #> ℹ 15 vertices · 4 edges
 #> 
@@ -157,13 +157,13 @@ sample_bipartite(10, 5, p = 0.1)
 #> → vertex: type <lgl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#> [1] 4 ─ 11  6 ─ 12  7 ─ 15  8 ─ 15 
+#> [1] 4 ─ 14  5 ─ 14  6 ─ 14  6 ─ 15 
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnm()` instead.
-#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── 3197228 ──
+#> ── <igraph> Bipartite Gnm random graph ────────────────────────────── c5afa15 ──
 #> ℹ directed · bipartite
 #> ℹ 15 vertices · 20 edges
 #> 
@@ -172,7 +172,7 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> → vertex: type <lgl>
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
-#>  [1] 4 → 11   7 → 11   9 → 12   6 → 13   1 → 14   2 → 14   6 → 14   13 → 1  
-#>  [9] 13 → 2   14 → 2   15 → 2   11 → 4   13 → 4   15 → 5   15 → 6   12 → 7  
-#> [17] 15 → 7   14 → 8   15 → 8   12 → 10 
+#>  [1] 3 → 11   8 → 11   1 → 12   2 → 12   10 → 12  3 → 13   9 → 13   10 → 13 
+#>  [9] 8 → 14   10 → 15  12 → 1   13 → 1   12 → 2   13 → 2   11 → 4   11 → 8  
+#> [17] 14 → 8   11 → 9   13 → 9   14 → 9  
 ```

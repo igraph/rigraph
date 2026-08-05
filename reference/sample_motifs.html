@@ -62,7 +62,7 @@ structure.  These functions search a graph for various motifs.</p>
 <span>  <span class="va">graph</span>,</span>
 <span>  size <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  cut.prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">size</span><span class="op">)</span>,</span>
+<span>  cut.prob <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sample.size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sample <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -130,11 +130,11 @@ size in a graph based on a sample.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="motifs.html">motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  NA  NA 268  NA  83   0   0   0   0   0   0   0   0   0   0   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  NA  NA 347  NA  88   0   0   0   0   0   0   0   0   0   0   0</span>
 <span class="r-in"><span><span class="fu"><a href="count_motifs.html">count_motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 435</span>
 <span class="r-in"><span><span class="fu">sample_motifs</span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

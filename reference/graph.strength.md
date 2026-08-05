@@ -26,7 +26,8 @@ graph.strength(
 
 - vids:
 
-  The vertices for which the strength will be calculated.
+  The vertices for which the strength will be calculated. The default
+  `NULL` selects all vertices.
 
 - mode:
 

@@ -8,7 +8,7 @@ of its adjacent edges.
 ``` r
 degree(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
@@ -18,7 +18,7 @@ degree(
 max_degree(
   graph,
   ...,
-  v = V(graph),
+  v = NULL,
   mode = c("all", "out", "in", "total"),
   loops = TRUE
 )
@@ -36,7 +36,8 @@ degree_distribution(graph, cumulative = FALSE, ...)
 
 - v:
 
-  The IDs of vertices of which the degree will be calculated.
+  The IDs of vertices of which the degree will be calculated. The
+  default `NULL` selects all vertices.
 
 - ...:
 
