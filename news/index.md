@@ -1,5 +1,36 @@
 # Changelog
 
+## igraph 2.3.3.9027
+
+### Bug fixes
+
+#### ci
+
+- Quote `gh` arguments in the `revdep2` plan job
+  ([\#2811](https://github.com/igraph/rigraph/issues/2811)).
+
+### Features
+
+#### ci
+
+- Reuse prebuilt packages in `revdep2` instead of rebuilding them
+  ([\#2814](https://github.com/igraph/rigraph/issues/2814)).
+
+### Continuous integration
+
+- Move remaining Node 20 actions to their Node 24 releases
+  ([\#2813](https://github.com/igraph/rigraph/issues/2813)).
+
+- Add sharded `revdep2` workflow.
+
+### Uncategorized
+
+- Ci: Harden `workflow_run` workflows against untrusted pull requests
+  ([\#106](https://github.com/igraph/rigraph/issues/106)).
+
+- Ci: Pin third-party actions to commits and let Renovate keep them
+  pinned ([\#105](https://github.com/igraph/rigraph/issues/105)).
+
 ## igraph 2.3.3.9026
 
 ### Features
