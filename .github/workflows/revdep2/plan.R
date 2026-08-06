@@ -33,6 +33,12 @@
 #   REVDEP2_REFRESH_BASELINE- if truthy, ignore reusable baselines and re-check
 #                             the CRAN version of everything
 #   REVDEP2_BASELINE_MAX_AGE_DAYS - oldest baseline worth reusing (default: 30)
+#   REVDEP2_PREBUILT_MAX_RUNS - earlier runs whose prebuilt package libraries
+#                             this run may reuse (default: 5; 0 disables)
+#   REVDEP2_PREBUILT_MAX_AGE_DAYS - oldest prebuilt library worth reusing
+#                             (default: 14)
+#   REVDEP2_HISTORY_RUNS    - earlier runs the donor walk looks at at all
+#                             (default: 40)
 #   REVDEP2_INSTALL_SECONDS - marginal install cost charged per dependency a
 #                             package adds to its shard (default: 2.5)
 #   REVDEP2_TIMINGS_FILE    - offline hook: RDS or CSV with columns Package and
@@ -43,10 +49,16 @@
 # discovery, uses the `gh` CLI with GH_TOKEN. Without gh or a token the plan
 # simply reuses nothing.
 
-source(file.path(dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))), "util.R"))
+source(file.path(
+  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+  "util.R"
+))
 
 out_path <- env_chr("OUT", "plan.json")
-which_input <- match.arg(env_chr("REVDEP2_WHICH", "strong"), c("strong", "most"))
+which_input <- match.arg(
+  env_chr("REVDEP2_WHICH", "strong"),
+  c("strong", "most")
+)
 depth_raw <- tolower(env_chr("REVDEP2_DEPTH", "1"))
 depth <- if (depth_raw %in% c("all", "max", "inf", "infinity")) {
   Inf
@@ -61,6 +73,9 @@ max_shards <- min(env_num("REVDEP2_MAX_SHARDS", 250), 250)
 max_parallel <- env_num("REVDEP2_MAX_PARALLEL", 20)
 refresh_baseline <- env_flag("REVDEP2_REFRESH_BASELINE")
 baseline_max_age <- env_num("REVDEP2_BASELINE_MAX_AGE_DAYS", 30)
+max_prebuilt_runs <- env_num("REVDEP2_PREBUILT_MAX_RUNS", 5)
+prebuilt_max_age <- env_num("REVDEP2_PREBUILT_MAX_AGE_DAYS", 14)
+history_runs <- env_num("REVDEP2_HISTORY_RUNS", 40)
 install_seconds <- env_num("REVDEP2_INSTALL_SECONDS", 2.5)
 setup_minutes <- env_num("REVDEP2_SETUP_MINUTES", 6)
 overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
@@ -68,7 +83,11 @@ retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
 timing_flavor <- env_chr("REVDEP2_TIMING_FLAVOR", "r-release-linux-x86_64")
 
-r_version <- paste(R.version$major, sub("[.].*$", "", R.version$minor), sep = ".")
+r_version <- paste(
+  R.version$major,
+  sub("[.].*$", "", R.version$minor),
+  sep = "."
+)
 
 # ------------------------------------------------------------ empty plans ----
 
@@ -84,73 +103,117 @@ plan_nothing <- function(reason) {
   quit(save = "no", status = 0)
 }
 
-# --------------------------------------------------------------- gh helper ----
+# ------------------------------------------------------------ run history ----
 
-gh_ok <- nzchar(Sys.which("gh")) && nzchar(env_chr("GH_TOKEN", env_chr("GITHUB_TOKEN")))
-
-gh_lines <- function(...) {
-  out <- suppressWarnings(system2("gh", c(...), stdout = TRUE, stderr = NULL))
-  if (!is.null(attr(out, "status")) && attr(out, "status") != 0) NULL else out
-}
-
-# Fetch one artifact of one run into a directory; NULL when it does not exist,
-# has expired, or cannot be downloaded.
-fetch_artifact <- function(run_id, name, dest) {
-  if (!gh_ok || !nzchar(repo)) {
-    return(NULL)
-  }
-  ids <- gh_lines(
-    "api",
-    sprintf("repos/%s/actions/runs/%s/artifacts?per_page=100", repo, run_id),
-    "--jq",
-    sprintf('.artifacts[] | select(.name == "%s" and .expired == false) | .id', name)
+# The gh plumbing itself lives in util.R, because the preflight and the shards
+# fetch artifacts too; what is planned here is *which* earlier runs to take
+# them from.
+#
+# One walk over the workflow's completed runs, youngest first, answers both
+# questions this plan asks of its history, and asks the API for a run's
+# artifacts at most once:
+#
+#   * which run donates the CRAN baseline -- the newest one that still has it;
+#   * which runs donate prebuilt package libraries -- as many as it takes to
+#     cover everything this run installs, youngest first, each one credited
+#     only with what the younger ones did not already have.
+#
+# The walk stops as soon as it has both, and never looks at more than
+# `history_runs` runs; reuse is an optimization, and an optimization does not
+# get to spend the planning budget.
+scan_history <- function(want_baseline, needed) {
+  empty <- list(
+    baseline_run = NULL,
+    prebuilt = list(),
+    scanned = 0L,
+    missing = needed
   )
-  if (length(ids) == 0 || !nzchar(ids[[1]])) {
-    return(NULL)
+  if (!gh_ok() || !nzchar(repo)) {
+    return(empty)
   }
-  zip <- tempfile(fileext = ".zip")
-  status <- suppressWarnings(system2(
-    "gh",
-    c("api", sprintf("repos/%s/actions/artifacts/%s/zip", repo, ids[[1]])),
-    stdout = zip,
-    stderr = NULL
-  ))
-  if (!identical(status, 0L) || !file.exists(zip)) {
-    return(NULL)
-  }
-  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
-  utils::unzip(zip, exdir = dest)
-  unlink(zip)
-  dest
-}
-
-# Newest completed run of this workflow that still holds a baseline artifact.
-find_baseline_run <- function() {
-  if (!gh_ok || !nzchar(repo)) {
-    return(NULL)
-  }
-  runs <- gh_lines(
+  rows <- gh_lines(
     "api",
     sprintf(
-      "repos/%s/actions/workflows/revdep2.yaml/runs?status=completed&per_page=40",
-      repo
+      "repos/%s/actions/workflows/revdep2.yaml/runs?status=completed&per_page=%d",
+      repo,
+      history_runs
     ),
     "--jq",
-    ".workflow_runs[].id"
+    ".workflow_runs[] | [.id, .created_at] | @tsv"
   )
+  rows <- rows[nzchar(rows)]
+  if (length(rows) == 0) {
+    return(empty)
+  }
   this_run <- env_chr("GITHUB_RUN_ID")
-  for (run in setdiff(as.character(runs), this_run)) {
-    hits <- gh_lines(
-      "api",
-      sprintf("repos/%s/actions/runs/%s/artifacts?per_page=100", repo, run),
-      "--jq",
-      '.artifacts[] | select(.name == "revdep2-baseline" and .expired == false) | .id'
-    )
-    if (length(hits) > 0 && nzchar(hits[[1]])) {
-      return(run)
+  baseline_run <- NULL
+  prebuilt <- list()
+  scanned <- 0L
+  for (row in rows) {
+    if (
+      !want_baseline &&
+        (length(needed) == 0 || length(prebuilt) >= max_prebuilt_runs)
+    ) {
+      break
+    }
+    fields <- strsplit(row, "\t", fixed = TRUE)[[1]]
+    run <- fields[[1]]
+    if (identical(run, this_run)) {
+      next
+    }
+    created <- suppressWarnings(as.Date(fields[[2]]))
+    scanned <- scanned + 1L
+    ids <- run_artifacts(run)
+    artifacts <- names(ids)
+    if (want_baseline && "revdep2-baseline" %in% artifacts) {
+      baseline_run <- run
+      want_baseline <- FALSE
+    }
+    # A library is only worth carrying while its binaries still match the R
+    # series and the platform they were built for, and while the runner image
+    # they were built on is plausibly the current one -- which is what the age
+    # cap stands in for, the same way it does for baselines.
+    take_library <- length(needed) > 0 &&
+      length(prebuilt) < max_prebuilt_runs &&
+      all(c("revdep2-lib", "revdep2-lib-index") %in% artifacts) &&
+      !is.na(created) &&
+      as.numeric(Sys.Date() - created) <= prebuilt_max_age
+    if (take_library) {
+      dir <- fetch_artifact_id(
+        ids[["revdep2-lib-index"]],
+        tempfile("lib-index-")
+      )
+      index_path <- if (is.null(dir)) NULL else file.path(dir, "lib.json")
+      index <- if (!is.null(index_path) && file.exists(index_path)) {
+        read_json(index_path)
+      } else {
+        NULL
+      }
+      unlink(dir, recursive = TRUE)
+      if (
+        !is.null(index) &&
+          identical(index$r_version, r_version) &&
+          identical(index$platform, R.version$platform)
+      ) {
+        have <- vapply(index$packages, function(e) e$package, character(1))
+        gain <- intersect(needed, have)
+        if (length(gain) > 0) {
+          prebuilt[[length(prebuilt) + 1]] <- list(
+            run_id = run,
+            created_at = fields[[2]],
+            packages = as.list(gain)
+          )
+          needed <- setdiff(needed, gain)
+        }
+      }
     }
   }
-  NULL
+  list(
+    baseline_run = baseline_run,
+    prebuilt = prebuilt,
+    scanned = scanned,
+    missing = needed
+  )
 }
 
 # ------------------------------------------------- the package under test ----
@@ -162,7 +225,10 @@ inform("Package under test: ", package, " ", dev_version)
 
 db <- cran_db()
 if (!package %in% rownames(db)) {
-  plan_nothing(sprintf("%s is not on CRAN, so it has no CRAN reverse dependencies", package))
+  plan_nothing(sprintf(
+    "%s is not on CRAN, so it has no CRAN reverse dependencies",
+    package
+  ))
 }
 cran_version <- unname(db[package, "Version"])
 inform("CRAN version: ", cran_version)
@@ -194,18 +260,31 @@ while (level < depth && length(frontier) > 0) {
 revdeps <- sort(names(level_of))
 level_counts <- table(level_of)
 inform(
-  length(revdeps), " reverse dependencies (", which_input, ", depth ", depth_raw,
+  length(revdeps),
+  " reverse dependencies (",
+  which_input,
+  ", depth ",
+  depth_raw,
   if (length(level_counts) > 1) {
-    paste0("; ", paste0("level ", names(level_counts), ": ", level_counts, collapse = ", "))
+    paste0(
+      "; ",
+      paste0("level ", names(level_counts), ": ", level_counts, collapse = ", ")
+    )
   } else {
     ""
   },
   ")"
 )
 
+# `selection` goes into plan.json, so it stays plain; `selection_md` is the
+# same thing with the run id clickable, for the job summary.
 selection <- "all"
+selection_md <- NULL
 retry_manifest <- NULL
-packages_input <- trimws(strsplit(env_chr("REVDEP2_PACKAGES"), "[,[:space:]]+")[[1]])
+packages_input <- trimws(strsplit(
+  env_chr("REVDEP2_PACKAGES"),
+  "[,[:space:]]+"
+)[[1]])
 packages_input <- packages_input[nzchar(packages_input)]
 
 if (length(packages_input) > 0) {
@@ -213,10 +292,15 @@ if (length(packages_input) > 0) {
   candidates <- unique(packages_input)
 } else if (nzchar(retry_run)) {
   selection <- sprintf("retry of run %s", retry_run)
+  selection_md <- sprintf("retry of run %s", run_link(retry_run))
   dir <- fetch_artifact(retry_run, "revdep2-report", tempfile("retry-"))
   manifest_path <- if (is.null(dir)) NULL else file.path(dir, "manifest.json")
   if (is.null(manifest_path) || !file.exists(manifest_path)) {
-    stop("Cannot fetch the revdep2-report artifact of run ", retry_run, call. = FALSE)
+    stop(
+      "Cannot fetch the revdep2-report artifact of run ",
+      retry_run,
+      call. = FALSE
+    )
   }
   retry_manifest <- read_json(manifest_path)
   results <- vapply(retry_manifest, function(e) e$result, character(1))
@@ -224,8 +308,12 @@ if (length(packages_input) > 0) {
     vapply(results, needs_recheck, logical(1))
   ]
   inform(
-    "Retrying ", length(candidates), " of ", length(retry_manifest),
-    " packages from run ", retry_run
+    "Retrying ",
+    length(candidates),
+    " of ",
+    length(retry_manifest),
+    " packages from run ",
+    retry_run
   )
 } else {
   candidates <- revdeps
@@ -265,8 +353,13 @@ fallback <- if (any(known)) stats::median(t_total[known]) else 300
 t_total[!known] <- fallback
 t_total <- pmax(t_total, 60)
 inform(
-  sum(known), " of ", length(packages), " check times known from CRAN; ",
-  "median fallback ", round(fallback), "s for the rest"
+  sum(known),
+  " of ",
+  length(packages),
+  " check times known from CRAN; ",
+  "median fallback ",
+  round(fallback),
+  "s for the rest"
 )
 
 # --------------------------------------------------------------- closures ----
@@ -291,7 +384,10 @@ parse_dep_field <- function(field) {
   names <- trimws(sub("[([].*$", "", entries))
   names[nzchar(names) & names != "R"]
 }
-dev_deps <- unique(unlist(lapply(c("Depends", "Imports", "LinkingTo"), parse_dep_field)))
+dev_deps <- unique(unlist(lapply(
+  c("Depends", "Imports", "LinkingTo"),
+  parse_dep_field
+)))
 dev_deps <- intersect(dev_deps, rownames(db))
 dev_closure <- sort(setdiff(
   unique(c(
@@ -304,11 +400,28 @@ dev_closure <- sort(setdiff(
   base_packages()
 ))
 
+# Everything this run installs anywhere: the union of the revdeps' closures
+# and the dev version's own dependencies. It prices the partitioning penalty
+# below, and it is the set the prebuilt libraries of earlier runs are matched
+# against.
+universe <- unique(c(unlist(closure, use.names = FALSE), dev_closure))
+
+# ------------------------------------------------------------ earlier runs ---
+
+local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
+history <- scan_history(
+  # A retried run donates its own baseline, and the two offline hooks bypass
+  # discovery entirely; the walk then only looks for prebuilt libraries.
+  want_baseline = !refresh_baseline &&
+    !nzchar(local_baseline) &&
+    !nzchar(retry_run),
+  needed = universe
+)
+
 # ---------------------------------------------------------------- baseline ---
 
-baseline_run <- 0L
+baseline_run <- "0"
 baseline_manifest <- list()
-local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
 if (refresh_baseline) {
   inform("Baseline reuse disabled by input")
 } else if (nzchar(local_baseline)) {
@@ -322,25 +435,41 @@ if (refresh_baseline) {
       entries,
       vapply(entries, function(e) e$package, character(1))
     )
-    inform("Baseline from ", local_baseline, " (", length(baseline_manifest), " entries)")
+    inform(
+      "Baseline from ",
+      local_baseline,
+      " (",
+      length(baseline_manifest),
+      " entries)"
+    )
   }
 } else {
-  donor <- if (nzchar(retry_run)) retry_run else find_baseline_run()
+  donor <- if (nzchar(retry_run)) retry_run else history$baseline_run
   if (is.null(donor) || !nzchar(donor)) {
     inform("No earlier run with a baseline artifact found")
   } else {
     dir <- fetch_artifact(donor, "revdep2-baseline", tempfile("baseline-"))
     manifest_path <- if (is.null(dir)) NULL else file.path(dir, "baseline.json")
     if (is.null(manifest_path) || !file.exists(manifest_path)) {
-      inform("Baseline artifact of run ", donor, " is unavailable; reusing nothing")
+      inform(
+        "Baseline artifact of run ",
+        donor,
+        " is unavailable; reusing nothing"
+      )
     } else {
-      baseline_run <- as.integer(donor)
+      baseline_run <- run_id_chr(donor)
       entries <- read_json(manifest_path)
       baseline_manifest <- setNames(
         entries,
         vapply(entries, function(e) e$package, character(1))
       )
-      inform("Baseline donor: run ", donor, " (", length(baseline_manifest), " entries)")
+      inform(
+        "Baseline donor: run ",
+        donor,
+        " (",
+        length(baseline_manifest),
+        " entries)"
+      )
     }
   }
 }
@@ -378,16 +507,52 @@ baseline_verdict <- function(p) {
 }
 verdicts <- vapply(packages, baseline_verdict, character(1))
 reuse <- verdicts == "reuse"
-if (baseline_run > 0) {
+if (has_run(baseline_run)) {
   stale <- table(verdicts[!reuse])
   inform(
-    "Baseline: ", sum(reuse), " reusable, ",
-    sum(!reuse), " to check fresh",
+    "Baseline: ",
+    sum(reuse),
+    " reusable, ",
+    sum(!reuse),
+    " to check fresh",
     if (length(stale) > 0) {
       paste0(" (", paste(names(stale), stale, sep = ": ", collapse = ", "), ")")
     } else {
       ""
     }
+  )
+}
+
+# --------------------------------------------------------------- prebuilt ---
+
+# What the preflight and the shards will unpack instead of building. Recording
+# it here rather than letting every job walk the history itself keeps the
+# decision in one place, makes it inspectable in the plan and the summary, and
+# spends the API calls once.
+prebuilt <- history$prebuilt
+prebuilt_covered <- length(universe) - length(history$missing)
+if (length(prebuilt) > 0) {
+  inform(
+    "Prebuilt libraries: ",
+    prebuilt_covered,
+    " of ",
+    length(universe),
+    " packages from ",
+    length(prebuilt),
+    " run(s) (",
+    paste(
+      vapply(
+        prebuilt,
+        function(d) sprintf("%s: %d", d$run_id, length(d$packages)),
+        character(1)
+      ),
+      collapse = ", "
+    ),
+    ")"
+  )
+} else if (max_prebuilt_runs > 0) {
+  inform(
+    "No reusable prebuilt package library found; everything is installed fresh"
   )
 }
 
@@ -403,11 +568,13 @@ k <- max(1L, min(as.integer(ceiling(total_check / budget)), max_shards, n))
 inform(
   sprintf(
     "%d packages, ~%.0f check minutes, budget %.0f min/shard -> %d shard(s)",
-    n, total_check, budget, k
+    n,
+    total_check,
+    budget,
+    k
   )
 )
 
-universe <- unique(c(unlist(closure, use.names = FALSE), dev_closure))
 dep_idx <- lapply(closure, function(deps) match(deps, universe))
 penalty <- install_seconds / 60
 
@@ -498,12 +665,20 @@ plan <- list(
   selection = selection,
   generated_at = now_utc(),
   timing_flavor = timing_flavor,
-  retry_of = if (nzchar(retry_run)) as.integer(retry_run) else 0L,
+  retry_of = if (nzchar(retry_run)) run_id_chr(retry_run) else "0",
   baseline = list(
     run_id = baseline_run,
     max_age_days = baseline_max_age,
     reused = sum(reuse),
     fresh = sum(!reuse)
+  ),
+  prebuilt = list(
+    max_runs = max_prebuilt_runs,
+    max_age_days = prebuilt_max_age,
+    runs_scanned = history$scanned,
+    covered = prebuilt_covered,
+    missing = length(history$missing),
+    runs = prebuilt
   ),
   params = list(
     shard_budget_minutes = budget,
@@ -534,7 +709,11 @@ matrix <- list(
   include = lapply(shard_list, function(s) {
     list(
       shard = s$index,
-      label = sprintf("%d pkgs, ~%.0f min", length(s$packages), s$estimate_minutes)
+      label = sprintf(
+        "%d pkgs, ~%.0f min",
+        length(s$packages),
+        s$estimate_minutes
+      )
     )
   })
 )
@@ -543,7 +722,7 @@ set_output("matrix", jsonlite::toJSON(matrix, auto_unbox = TRUE))
 set_output("shards", as.character(k))
 set_output("packages", as.character(n))
 set_output("max_parallel", as.character(parallel))
-set_output("baseline_run", as.character(baseline_run))
+set_output("baseline_run", baseline_run)
 set_output("plan_hash", plan_hash)
 
 # ------------------------------------------------------------------ summary --
@@ -555,8 +734,14 @@ top <- function(s) {
 summary_df <- data.frame(
   Shard = vapply(shard_list, function(s) s$index, integer(1)),
   Packages = vapply(shard_list, function(s) length(s$packages), integer(1)),
-  `Check est.` = sprintf("~%.0f min", vapply(shard_list, function(s) s$check_minutes, numeric(1))),
-  `Total est.` = sprintf("~%.0f min", vapply(shard_list, function(s) s$estimate_minutes, numeric(1))),
+  `Check est.` = sprintf(
+    "~%.0f min",
+    vapply(shard_list, function(s) s$check_minutes, numeric(1))
+  ),
+  `Total est.` = sprintf(
+    "~%.0f min",
+    vapply(shard_list, function(s) s$estimate_minutes, numeric(1))
+  ),
   Installs = vapply(shard_list, function(s) s$install_packages, integer(1)),
   Heaviest = vapply(shard_list, top, character(1)),
   check.names = FALSE
@@ -568,7 +753,7 @@ append_summary(c(
   "| | |",
   "| --- | --- |",
   sprintf("| Package | `%s` %s (CRAN: %s) |", package, dev_version, cran_version),
-  sprintf("| Selection | %s |", selection),
+  sprintf("| Selection | %s |", selection_md %||% selection),
   sprintf(
     "| Packages to check | %d (of %d revdeps%s) |",
     n,
@@ -587,9 +772,30 @@ append_summary(c(
     if (length(baseline_manifest) > 0) {
       sprintf(
         "%s: %d reused, %d fresh",
-        if (baseline_run > 0) sprintf("run %d", baseline_run) else "local",
+        if (has_run(baseline_run)) {
+          paste("run", run_link(baseline_run))
+        } else {
+          "local"
+        },
         sum(reuse),
         sum(!reuse)
+      )
+    } else {
+      "none"
+    }
+  ),
+  sprintf(
+    "| Prebuilt packages | %s |",
+    if (length(prebuilt) > 0) {
+      sprintf(
+        "%d of %d from run%s %s",
+        prebuilt_covered,
+        length(universe),
+        if (length(prebuilt) > 1) "s" else "",
+        paste(
+          vapply(prebuilt, function(d) run_link(d$run_id), character(1)),
+          collapse = ", "
+        )
       )
     } else {
       "none"
