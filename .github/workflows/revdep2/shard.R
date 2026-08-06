@@ -439,7 +439,8 @@ for (name in runnable) {
       name,
       result = "failed",
       status_new = counts(new),
-      t_new = attr(new, "duration")
+      t_new = attr(new, "duration"),
+      message = "both checks ran, but their results could not be compared"
     )
   } else {
     new_issues <- sum(cmp$cmp$change == 1)
@@ -449,7 +450,10 @@ for (name in runnable) {
       status = cmp$status,
       status_new = counts(new),
       new_issues = new_issues,
-      t_new = attr(new, "duration")
+      t_new = attr(new, "duration"),
+      # An install failure or a timeout leaves nothing to compare, so the
+      # result is only "failed"; say which one it was.
+      message = status_message(cmp$status)
     )
   }
   entry <- get(name, envir = state)
@@ -532,16 +536,25 @@ for (entry in entries) {
   if (entry$result %in% c("ok", "deferred")) {
     next
   }
+  # The reason goes in the title, where `md_details()` cannot tail it away;
+  # the body is the check log where there is one, because the reason alone
+  # rarely says which check step broke.
   log <- file.path(out_dir, "pkgs", entry$package, "new-check", "00check.log")
-  lines <- if (nzchar(entry$message)) {
-    strsplit(entry$message, "\n")[[1]]
-  } else if (file.exists(log)) {
+  reason <- gsub("\n", " ", entry$message %||% "")
+  lines <- if (file.exists(log)) {
     readLines(log, warn = FALSE)
+  } else if (nzchar(reason)) {
+    strsplit(entry$message, "\n")[[1]]
   } else {
     "(no log captured)"
   }
   append_summary(md_details(
-    sprintf("<code>%s</code> &mdash; %s", entry$package, entry$result),
+    sprintf(
+      "<code>%s</code> &mdash; %s%s",
+      entry$package,
+      entry$result,
+      if (nzchar(reason)) paste0(": ", md_escape_html(reason)) else ""
+    ),
     lines
   ))
 }

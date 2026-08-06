@@ -276,7 +276,10 @@ inform(
   ")"
 )
 
+# `selection` goes into plan.json, so it stays plain; `selection_md` is the
+# same thing with the run id clickable, for the job summary.
 selection <- "all"
+selection_md <- NULL
 retry_manifest <- NULL
 packages_input <- trimws(strsplit(
   env_chr("REVDEP2_PACKAGES"),
@@ -289,6 +292,7 @@ if (length(packages_input) > 0) {
   candidates <- unique(packages_input)
 } else if (nzchar(retry_run)) {
   selection <- sprintf("retry of run %s", retry_run)
+  selection_md <- sprintf("retry of run %s", run_link(retry_run))
   dir <- fetch_artifact(retry_run, "revdep2-report", tempfile("retry-"))
   manifest_path <- if (is.null(dir)) NULL else file.path(dir, "manifest.json")
   if (is.null(manifest_path) || !file.exists(manifest_path)) {
@@ -416,7 +420,7 @@ history <- scan_history(
 
 # ---------------------------------------------------------------- baseline ---
 
-baseline_run <- 0L
+baseline_run <- "0"
 baseline_manifest <- list()
 if (refresh_baseline) {
   inform("Baseline reuse disabled by input")
@@ -453,7 +457,7 @@ if (refresh_baseline) {
         " is unavailable; reusing nothing"
       )
     } else {
-      baseline_run <- as.integer(donor)
+      baseline_run <- run_id_chr(donor)
       entries <- read_json(manifest_path)
       baseline_manifest <- setNames(
         entries,
@@ -503,7 +507,7 @@ baseline_verdict <- function(p) {
 }
 verdicts <- vapply(packages, baseline_verdict, character(1))
 reuse <- verdicts == "reuse"
-if (baseline_run > 0) {
+if (has_run(baseline_run)) {
   stale <- table(verdicts[!reuse])
   inform(
     "Baseline: ",
@@ -661,7 +665,7 @@ plan <- list(
   selection = selection,
   generated_at = now_utc(),
   timing_flavor = timing_flavor,
-  retry_of = if (nzchar(retry_run)) as.integer(retry_run) else 0L,
+  retry_of = if (nzchar(retry_run)) run_id_chr(retry_run) else "0",
   baseline = list(
     run_id = baseline_run,
     max_age_days = baseline_max_age,
@@ -718,7 +722,7 @@ set_output("matrix", jsonlite::toJSON(matrix, auto_unbox = TRUE))
 set_output("shards", as.character(k))
 set_output("packages", as.character(n))
 set_output("max_parallel", as.character(parallel))
-set_output("baseline_run", as.character(baseline_run))
+set_output("baseline_run", baseline_run)
 set_output("plan_hash", plan_hash)
 
 # ------------------------------------------------------------------ summary --
@@ -749,7 +753,7 @@ append_summary(c(
   "| | |",
   "| --- | --- |",
   sprintf("| Package | `%s` %s (CRAN: %s) |", package, dev_version, cran_version),
-  sprintf("| Selection | %s |", selection),
+  sprintf("| Selection | %s |", selection_md %||% selection),
   sprintf(
     "| Packages to check | %d (of %d revdeps%s) |",
     n,
@@ -768,7 +772,11 @@ append_summary(c(
     if (length(baseline_manifest) > 0) {
       sprintf(
         "%s: %d reused, %d fresh",
-        if (baseline_run > 0) sprintf("run %d", baseline_run) else "local",
+        if (has_run(baseline_run)) {
+          paste("run", run_link(baseline_run))
+        } else {
+          "local"
+        },
         sum(reuse),
         sum(!reuse)
       )
@@ -784,7 +792,10 @@ append_summary(c(
         prebuilt_covered,
         length(universe),
         if (length(prebuilt) > 1) "s" else "",
-        paste(vapply(prebuilt, function(d) d$run_id, character(1)), collapse = ", ")
+        paste(
+          vapply(prebuilt, function(d) run_link(d$run_id), character(1)),
+          collapse = ", "
+        )
       )
     } else {
       "none"
