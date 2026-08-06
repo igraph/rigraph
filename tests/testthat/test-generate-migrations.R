@@ -121,24 +121,6 @@ test_that("load_migrations() tolerates empty registries", {
   expect_identical(gen$load_migrations(character(0)), list())
 })
 
-test_that("render_call_arg() wraps a single long item without a stray comma", {
-  gen <- local_generator()
-  long_item <- paste0(
-    "impl = c(\"auto\", \"copy_and_delete\", \"create_from_scratch\")"
-  )
-  out <- gen$render_call_arg("defaults", "list", long_item, "list()")
-  expect_identical(
-    out,
-    c(
-      "    defaults = list(",
-      paste0("      ", long_item),
-      "    ),"
-    )
-  )
-  # and no element is a bare comma
-  expect_false(any(grepl("^\\s*,\\s*$", out)))
-})
-
 test_that("default expressions keep air's spacing around binary `/`", {
   # The constant-defaults rule keeps arithmetic like `n / 7100` out of real
   # registries, but the renderer must stay air-clean for any deparsed

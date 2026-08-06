@@ -33,5 +33,30 @@ migrations <- list(
     old = function(dimvector, p, dim, permutation) {},
     new = function(dimvector, p, ..., dim = NULL, permutation = NULL) {},
     when = "3.0.0"
+  ),
+
+  # Exercises the two hazards the generated block has to survive in someone
+  # else's function body, both taken from as_adjacency_matrix():
+  #
+  #   * Formals that shadow the functions the block calls. `names` and `c` are
+  #     argument names here, and a *missing* formal is worse than a shadowing
+  #     one -- R forces the promise while looking for a function of that name.
+  #     Every call in a generated block is namespace-qualified for this reason.
+  #   * An old name renamed away while a deprecated formal of that name stays
+  #     behind: `attr` is recovered as `weights`, and `attr =` still binds the
+  #     retained formal. Abbreviations of it (`a`, `at`, `att`) mean either, so
+  #     the generator enumerates them and the block rejects them -- base R,
+  #     which only sees the old names, would resolve them to `weights` silently.
+  migration_fixture_shadow = list(
+    old = function(graph, attr = weights, names, c) {},
+    new = function(
+      graph,
+      ...,
+      weights = NULL,
+      names = TRUE,
+      c = NULL,
+      attr = deprecated()
+    ) {},
+    when = "3.0.0"
   )
 )

@@ -203,16 +203,28 @@ as_biadjacency_matrix <- function(graph, types, ..., weights = NULL,
 }
 ```
 
-The recovery runs inline, so there is no handler function and no `.user_env`
-plumbing. The generated `lifecycle::deprecate_soft()` sits directly in the
-function body, so its default `user_env` (`caller_env(2)`) already resolves to
-the *user's* frame: real user calls warn, while genuinely internal igraph callers
-stay correctly silent — the point of a *soft* deprecation. The matching itself is
-delegated to a small hand-written helper, `migrate_recover_args()`
-([`R/migrate-args.R`](../R/migrate-args.R)) — a plain, debuggable function that
-takes the per-function maps and returns the recovered values plus message parts
-(or `NULL`); the generated block just supplies the configuration and assigns the
-results.
+The recovery runs inline, so there is no handler function, no runtime matcher
+and no `.user_env` plumbing. The generated `lifecycle::deprecate_soft()` sits
+directly in the function body, so its default `user_env` (`caller_env(2)`)
+already resolves to the *user's* frame: real user calls warn, while genuinely
+internal igraph callers stay correctly silent — the point of a *soft*
+deprecation.
+
+The matching is base R's own. The block declares the pre-migration tail
+signature as a local `.old_signature()` and matches `...` against it, so
+positional and partial matching — and an empty argument slot, which stays
+missing while still consuming its position — behave exactly as they did before
+the migration. Each recoverable argument then gets one unrolled
+`if (!base::missing(<old>))` line to pick its value up, and one
+`base::missing(<new>)` line to reject it being supplied both ways.
+
+Every call in a generated block is written namespace-qualified. The block is
+spliced into someone else's function body, where a formal may be named `names`
+or `c` — and a *missing* formal is worse than a shadowing one, since R forces
+the promise while looking for a function to call. Qualifying unconditionally
+keeps every block the same shape instead of making it depend on the signature.
+The block also opens with `# fmt: skip`, so its layout is the generator's rather
+than `air`'s.
 
 ### Reordering or removing an argument
 

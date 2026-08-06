@@ -357,24 +357,37 @@ cohesive_blocks <- function(
   labels = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cohesive_blocks, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(labels = labels),
-      recover_new = c("labels"),
-      recover_old = c("labels"),
-      match_names = c("labels"),
-      match_to = c("labels"),
-      defaults = list(labels = TRUE),
-      head_args = c("graph"),
-      fn_name = "cohesive_blocks"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: cohesive_blocks(graph, labels)
+    .old_signature <- function(labels, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn cohesive_blocks}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn cohesive_blocks}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(labels)) base::list(labels = labels)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(labels)) "labels"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn cohesive_blocks} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `cohesive_blocks()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  cohesive_blocks(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    cohesive_blocks(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -629,24 +642,37 @@ export_pajek <- function(
   project.file = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: export_pajek, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(project.file = project.file),
-      recover_new = c("project.file"),
-      recover_old = c("project.file"),
-      match_names = c("project.file"),
-      match_to = c("project.file"),
-      defaults = list(project.file = TRUE),
-      head_args = c("blocks", "graph", "file"),
-      fn_name = "export_pajek"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: export_pajek(blocks, graph, file, project.file)
+    .old_signature <- function(project.file, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn export_pajek}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn export_pajek}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(project.file)) base::list(project.file = project.file)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(project.file)) "project.file"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn export_pajek} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `export_pajek()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  export_pajek(", base::paste(base::c("blocks", "graph", "file", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    export_pajek(", base::paste(base::c("blocks", "graph", "file", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
