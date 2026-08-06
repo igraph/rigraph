@@ -69,7 +69,7 @@ Other vertex and edge sequences:
 # Unnamed graphs
 g <- make_ring(10)
 E(g)
-#> ── <edge sequence> 10/10 · from c2a2428 ────────────────────────────────────────
+#> ── <edge sequence> 10/10 · from 58feeb8 ────────────────────────────────────────
 #>  [1] 1 ─ 2   2 ─ 3   3 ─ 4   4 ─ 5   5 ─ 6   6 ─ 7   7 ─ 8   8 ─ 9   9 ─ 10 
 #> [10] 1 ─ 10 
 
@@ -77,13 +77,13 @@ E(g)
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 E(g2)
-#> ── <edge sequence> 10/10 · vertex names · from bd22241 ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 21d591d ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 
 # All edges in a long sequence
 g3 <- make_ring(200)
 E(g3)
-#> ── <edge sequence> 200/200 · from 0eda19c ──────────────────────────────────────
+#> ── <edge sequence> 200/200 · from 382eb99 ──────────────────────────────────────
 #>   [1] 1 ─ 2      2 ─ 3      3 ─ 4      4 ─ 5      5 ─ 6      6 ─ 7     
 #>   [7] 7 ─ 8      8 ─ 9      9 ─ 10     10 ─ 11    11 ─ 12    12 ─ 13   
 #>  [13] 13 ─ 14    14 ─ 15    15 ─ 16    16 ─ 17    17 ─ 18    18 ─ 19   
@@ -96,7 +96,7 @@ E(g3)
 #>  [55] 55 ─ 56    56 ─ 57    57 ─ 58    58 ─ 59    59 ─ 60    60 ─ 61   
 #> + ... omitted several edges
 E(g3) %>% print(full = TRUE)
-#> ── <edge sequence> 200/200 · from 0eda19c ──────────────────────────────────────
+#> ── <edge sequence> 200/200 · from 382eb99 ──────────────────────────────────────
 #>   [1] 1 ─ 2      2 ─ 3      3 ─ 4      4 ─ 5      5 ─ 6      6 ─ 7     
 #>   [7] 7 ─ 8      8 ─ 9      9 ─ 10     10 ─ 11    11 ─ 12    12 ─ 13   
 #>  [13] 13 ─ 14    14 ─ 15    15 ─ 16    16 ─ 17    17 ─ 18    18 ─ 19   
@@ -138,10 +138,10 @@ g4 <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "green")
 E(g4)
-#> ── <edge sequence> 10/10 · vertex names · from 4068c1d ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 4c334f5 ─────────────────────────
 #>  [1] A ─ B  B ─ C  C ─ D  D ─ E  E ─ F  F ─ G  G ─ H  H ─ I  I ─ J  A ─ J 
 E(g4)[[]]
-#> ── <edge sequence> 10/10 · vertex names · from 4068c1d ─────────────────────────
+#> ── <edge sequence> 10/10 · vertex names · from 4c334f5 ─────────────────────────
 #>    tail head tid hid weight color
 #> 1     A    B   1   2      1 green
 #> 2     B    C   2   3      2 green
@@ -154,7 +154,7 @@ E(g4)[[]]
 #> 9     I    J   9  10      9 green
 #> 10    A    J   1  10     10 green
 E(g4)[[1:5]]
-#> ── <edge sequence> 5/10 · vertex names · from 4068c1d ──────────────────────────
+#> ── <edge sequence> 5/10 · vertex names · from 4c334f5 ──────────────────────────
 #>   tail head tid hid weight color
 #> 1    A    B   1   2      1 green
 #> 2    B    C   2   3      2 green
