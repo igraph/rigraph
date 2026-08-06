@@ -28,6 +28,62 @@ now_utc <- function() {
   format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
 }
 
+# ---------------------------------------------------------------- run ids ----
+
+# GitHub run ids passed `.Machine$integer.max` in 2026, so they are carried as
+# strings everywhere here: `as.integer("31048405399")` is a silent NA, and an
+# NA reaching `if (run > 0)` takes the whole planning job down. "0" is the
+# "no such run" sentinel the workflow's job outputs and plan.json use.
+run_id_chr <- function(x) {
+  if (is.null(x) || length(x) != 1 || is.na(x)) "0" else trimws(as.character(x))
+}
+
+has_run <- function(x) {
+  id <- run_id_chr(x)
+  nzchar(id) && !identical(id, "0")
+}
+
+# ------------------------------------------------------- links in summaries --
+
+# A job summary is rendered at the run's own URL, so every link it carries has
+# to be absolute; relative ones resolve against /actions/runs/<id> and 404.
+
+# A run id, linked to its page; plain text off GitHub (a local run).
+run_link <- function(x) {
+  id <- run_id_chr(x)
+  if (!nzchar(gh_repo())) {
+    return(id)
+  }
+  sprintf(
+    "[%s](%s/%s/actions/runs/%s)",
+    id,
+    env_chr("GITHUB_SERVER_URL", "https://github.com"),
+    gh_repo(),
+    id
+  )
+}
+
+# This run's page, where its artifacts are.
+this_run_link <- function(text = env_chr("GITHUB_RUN_ID", "local")) {
+  id <- run_id_chr(env_chr("GITHUB_RUN_ID"))
+  if (!has_run(id) || !nzchar(gh_repo())) {
+    return(text)
+  }
+  sprintf(
+    "[%s](%s/%s/actions/runs/%s)",
+    text,
+    env_chr("GITHUB_SERVER_URL", "https://github.com"),
+    gh_repo(),
+    id
+  )
+}
+
+# A revdep, linked to its CRAN page -- the one page about it that is reachable
+# from a job summary, and the one that names its maintainer.
+cran_link <- function(package) {
+  sprintf("[%s](https://cran.r-project.org/package=%s)", package, package)
+}
+
 # ------------------------------------------------------------------- JSON ----
 
 write_json <- function(x, path) {
@@ -75,6 +131,28 @@ md_table <- function(df) {
     character(1)
   )
   c(header, rule, rows)
+}
+
+# Drop one markdown section: the first heading matching `heading`, and
+# everything under it up to the next heading of any level.
+drop_section <- function(lines, heading) {
+  at <- grep(heading, lines)
+  if (length(at) == 0) {
+    return(lines)
+  }
+  from <- at[[1]]
+  later <- grep("^#+[[:space:]]", lines)
+  later <- later[later > from]
+  to <- if (length(later) == 0) length(lines) else later[[1]] - 1L
+  lines[-seq(from, to)]
+}
+
+# Text going into an HTML fragment of a summary (a <summary> title, say),
+# where markdown's escaping does not apply.
+md_escape_html <- function(x) {
+  x <- gsub("&", "&amp;", x, fixed = TRUE)
+  x <- gsub("<", "&lt;", x, fixed = TRUE)
+  gsub(">", "&gt;", x, fixed = TRUE)
 }
 
 # Strip ANSI escapes and carriage returns before quoting logs into markdown.
@@ -506,6 +584,23 @@ classify_status <- function(status, new_issues) {
   } else {
     "failed"
   }
+}
+
+# What a status that `classify_status()` can only call "failed" actually means,
+# in words. A reader of the summary has to tell "broken under the dev version"
+# apart from "broken everywhere" without opening the artifact, and the one word
+# in the manifest cannot say it. Empty for the two statuses that compared.
+status_message <- function(status) {
+  switch(
+    status,
+    "+" = ,
+    "-" = "",
+    "i-" = "installs against the CRAN version, fails to install against the dev version",
+    "i+" = "fails to install against either version",
+    "t-" = "check timed out against the dev version, not against the CRAN version",
+    "t+" = "check timed out against both versions",
+    sprintf("check comparison inconclusive (status `%s`)", status)
+  )
 }
 
 needs_recheck <- function(result) {

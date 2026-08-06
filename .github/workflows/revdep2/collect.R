@@ -307,6 +307,45 @@ counts_df <- data.frame(
 )
 counts_df <- counts_df[counts_df$Packages > 0 | counts_df$Result == "ok", ]
 
+# Packages that produced no comparison at all. revdepcheck lists them too, but
+# only as bare names under "Failed to check" -- no version it could resolve and
+# no reason, because the shim it is fed carries neither. The manifest has both,
+# so that section is dropped from the embedded report and this table takes its
+# place.
+unchecked <- Filter(
+  function(e) !e$result %in% c("ok", "newly_broken"),
+  unname(entries)
+)
+reason_of <- function(e) {
+  message <- gsub("[[:space:]]+", " ", trimws(e$message %||% ""))
+  # Results carried over from an older run predate the shard recording one.
+  if (!nzchar(message) && nzchar(e$status %||% "")) {
+    message <- status_message(e$status)
+  }
+  if (nzchar(message)) {
+    return(message)
+  }
+  switch(
+    e$result,
+    deferred = "the shard hit its deadline before this package was checked",
+    depfail = "dependencies could not be installed",
+    sprintf("no reason recorded (result `%s`)", e$result)
+  )
+}
+unchecked_df <- data.frame(
+  Package = vapply(unchecked, function(e) cran_link(e$package), character(1)),
+  Version = vapply(unchecked, function(e) e$version %||% "?", character(1)),
+  Result = vapply(unchecked, function(e) e$result, character(1)),
+  Shard = vapply(
+    unchecked,
+    function(e) as.character(e$shard %||% ""),
+    character(1)
+  ),
+  Old = vapply(unchecked, function(e) e$status_old %||% "", character(1)),
+  New = vapply(unchecked, function(e) e$status_new %||% "", character(1)),
+  Reason = vapply(unchecked, reason_of, character(1))
+)
+
 # The report itself, nested under this section: headings demoted two levels,
 # and the platform preamble dropped -- the sentence above already says what
 # was compared against what.
@@ -315,6 +354,17 @@ revdeps_at <- grep("^# Revdeps", readme)[1]
 if (!is.na(revdeps_at)) {
   readme <- readme[seq(revdeps_at, length(readme))]
 }
+readme <- drop_section(readme, "^## Failed to check")
+# revdepcheck's tables link into the sibling report files, which is right
+# inside the artifact and wrong here: a job summary is served from the run's
+# own URL, where `problems.md#pkg` resolves to /actions/runs/problems.md and
+# 404s. The package's CRAN page is the reachable equivalent; where the details
+# actually live is said once, below.
+readme <- gsub(
+  "\\[([^][]+)\\]\\([^)]*[.]md(#[^)]*)?\\)",
+  "[\\1](https://cran.r-project.org/package=\\1)",
+  readme
+)
 readme <- gsub("^(#+)(\\s)", "##\\1\\2", readme)
 
 run_id <- env_chr("GITHUB_RUN_ID")
@@ -324,7 +374,11 @@ append_summary(c(
   sprintf(
     "`%s` %s (dev) vs %s (CRAN), R %s%s.",
     plan$package, plan$dev_version, plan$cran_version, plan$r_version,
-    if (plan$retry_of > 0) sprintf(", retry of run %d", plan$retry_of) else ""
+    if (has_run(plan$retry_of)) {
+      sprintf(", retry of run %s", run_link(plan$retry_of))
+    } else {
+      ""
+    }
   ),
   "",
   headline,
@@ -333,11 +387,39 @@ append_summary(c(
   "",
   readme,
   "",
+  if (nrow(unchecked_df) > 0) {
+    # A run where everything defers would put every revdep in this table; the
+    # summary has a size limit, and losing it whole is worse than a cut list.
+    shown <- utils::head(unchecked_df, 200)
+    c(
+      sprintf("### Could not be checked (%d)", nrow(unchecked_df)),
+      "",
+      paste(
+        "No comparison was produced for these, so they say nothing about the",
+        "dev version either way. The shard job named in `Shard` has the full",
+        "check log for each."
+      ),
+      "",
+      md_table(shown),
+      if (nrow(shown) < nrow(unchecked_df)) {
+        c("", sprintf(
+          "... and %d more; the full list is `manifest.json` in the report artifact.",
+          nrow(unchecked_df) - nrow(shown)
+        ))
+      },
+      ""
+    )
+  },
   "### Getting the results",
+  "",
+  sprintf(
+    "The full report -- `problems.md`, `failures.md`, `cran.md` and every check's output -- is the `revdep2-report` artifact of %s.",
+    this_run_link("this run")
+  ),
   "",
   "```sh",
   sprintf("gh run download %s --name revdep2-report --dir revdep/", run_id),
-  sprintf("# retry everything that is not ok:"),
+  "# retry everything that is not ok:",
   sprintf("gh workflow run revdep2.yaml -f retry-run=%s", run_id),
   "```"
 ))

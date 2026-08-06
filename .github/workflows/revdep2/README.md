@@ -260,6 +260,25 @@ generated through its `results` injection point
 (`cloud_report_summary()` and friends),
 so `README.md` reads exactly like a local `revdep_check()`'s.
 
+The job summary embeds that report,
+with two changes that a summary needs and a file does not.
+Its links are rewritten:
+a summary is served from the run's own URL,
+where revdepcheck's `problems.md#pkg` resolves to `/actions/runs/problems.md`
+and 404s,
+so package names point at CRAN instead
+and the report files are named where they actually live —
+the `revdep2-report` artifact of the run.
+And its "Failed to check" section is replaced
+by a **Could not be checked** table
+listing, per package, the version, the shard,
+the check counts of whichever phase ran, and *why* —
+the timeout and its duration, the dependencies that would not install,
+whether installation failed under the dev version only or under both.
+revdepcheck cannot say any of that
+because the shim it is fed for an uncomparable package carries no detail;
+the manifest has it all.
+
 To fetch a run's results:
 
 ```sh
@@ -297,6 +316,15 @@ so its report is complete again, not a fragment.
 | CRAN bumps a dependency mid-run | shards install what resolves at their start; the recorded fingerprint is the plan's — next run re-fingerprints |
 | The package is not on CRAN | plan emits zero shards, run ends green |
 | `collect` finds new problems | reported in the summary and the report artifact; the run stays green |
+
+Run ids are strings everywhere in these scripts,
+never integers, and `"0"` is the "no such run" sentinel
+that `plan.json` and the plan job's outputs use.
+GitHub's run ids passed `.Machine$integer.max` in 2026,
+so `as.integer("31048405399")` is a silent `NA`
+that only surfaces as `missing value where TRUE/FALSE needed`
+at the next `if`.
+`run_id_chr()` and `has_run()` in `util.R` are how they are handled.
 
 ## Knobs
 
