@@ -299,7 +299,7 @@ jobs:
       # dependency universe, gigabytes of it -- so it is kept exactly as long
       # as a plan would still reuse it, while the index that describes it is
       # cheap and outlives it.
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-lib
@@ -308,7 +308,7 @@ jobs:
           retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
           overwrite: true
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-lib-index
@@ -401,7 +401,7 @@ jobs:
       # building the same packages the preflight built minutes ago. It is a
       # `needs`, so it is always there -- unless the preflight could not pack
       # one, which is a slower shard, not a broken one.
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         continue-on-error: true
         with:
           name: revdep2-lib
