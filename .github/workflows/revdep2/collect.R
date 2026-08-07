@@ -15,7 +15,9 @@
 # plus the baseline artifact content (baseline.json, old-rds/<p>.rds): every
 # reusable old-version result of this run, stamped with the metadata the next
 # plan compares against -- versions, R series, dependency fingerprint, and the
-# date the old check *actually* ran (reuse does not refresh it).
+# date the old check *actually* ran (reuse does not refresh it),
+# and timings.json: what the checks and the shards actually cost, which is what
+# the next plan calibrates its cost model with instead of guessing.
 #
 # Environment variables:
 #   RESULTS_DIR  - directory the shard artifacts were downloaded into (required)
@@ -23,6 +25,10 @@
 #   RETRY_DIR    - the revdep2-report artifact of the run being retried, if any
 #   OUT_DIR      - report directory (default: revdep)
 #   BASELINE_OUT - baseline directory (default: baseline)
+#   TIMINGS_OUT  - timings directory (default: timings)
+#
+# Reads GH_TOKEN, if it has one, only to ask the API how long the shard *jobs*
+# took: the part of a shard's cost that happens before its driver starts.
 #
 # Always exits zero: check results are the report's business, not the job
 # status's -- only a genuinely broken collector fails this job.
@@ -38,6 +44,7 @@ plan <- read_json(env_chr("PLAN", "plan.json"))
 retry_dir <- env_chr("RETRY_DIR")
 out_dir <- env_chr("OUT_DIR", "revdep")
 baseline_out <- env_chr("BASELINE_OUT", "baseline")
+timings_out <- env_chr("TIMINGS_OUT", "timings")
 
 dir.create(file.path(out_dir, "pkgs"), recursive = TRUE, showWarnings = FALSE)
 dir.create(
@@ -45,6 +52,7 @@ dir.create(
   recursive = TRUE,
   showWarnings = FALSE
 )
+dir.create(timings_out, recursive = TRUE, showWarnings = FALSE)
 
 # ------------------------------------------------------------------- merge ---
 
@@ -70,7 +78,15 @@ take <- function(entry, from) {
   }
 }
 
+shard_timings <- list()
 for (dir in shard_dirs) {
+  timing <- file.path(dir, "timing.json")
+  if (file.exists(timing)) {
+    row <- tryCatch(read_json(timing), error = function(e) NULL)
+    if (!is.null(row$index)) {
+      shard_timings[[as.character(row$index)]] <- row
+    }
+  }
   manifest <- file.path(dir, "manifest.ndjson")
   if (!file.exists(manifest)) {
     next
@@ -157,6 +173,95 @@ for (entry in entries) {
 }
 write_json(baseline, file.path(baseline_out, "baseline.json"))
 inform("Baseline carries ", length(baseline), " old-version result(s)")
+
+# ----------------------------------------------------------------- timings ---
+
+# What this run cost, in the form the next plan can use: one row per package
+# (seconds per check here, next to the seconds CRAN reports) and one per shard
+# (install, check, script and job minutes, next to what was predicted).
+#
+# The plan's cost model is three constants -- how fast checks run here, what a
+# shard costs before it checks anything, what one more dependency costs to
+# install -- and every one of them is measurable. Measuring them is what keeps
+# the shard count honest: a model that overestimates the work cuts it into more
+# shards than the parallel capacity can run, and each extra shard is another
+# setup paid for nothing.
+seconds_of <- function(entry) {
+  both <- suppressWarnings(as.numeric(c(entry$t_old, entry$t_new)))
+  both <- both[!is.na(both) & both > 0]
+  if (length(both) == 0) {
+    NULL
+  } else {
+    list(seconds = mean(both), checks = length(both))
+  }
+}
+package_rows <- list()
+for (entry in entries) {
+  measured <- seconds_of(entry)
+  if (is.null(measured)) {
+    next
+  }
+  package_rows[[length(package_rows) + 1]] <- list(
+    package = entry$package,
+    version = entry$version,
+    t_total = entry$t_total %||% 0,
+    checks = measured$checks,
+    seconds = round(measured$seconds, 1)
+  )
+}
+
+# The shard's own clock covers install and checks; the minutes before its
+# driver starts -- runner image, R, pandoc, TinyTeX, artifact downloads -- are
+# only visible from the API, and they are precisely the price of one more
+# shard.
+job_minutes <- run_shard_job_minutes(env_chr("GITHUB_RUN_ID"))
+shard_rows <- lapply(shard_timings, function(t) {
+  index <- as.character(t$index)
+  install <- ((t$restore_seconds %||% 0) + (t$install_seconds %||% 0)) / 60
+  list(
+    index = t$index,
+    packages = t$packages %||% 0,
+    checks = t$checks %||% 0,
+    install_packages = t$install_packages %||% 0,
+    restored = t$restored %||% 0,
+    install_minutes = round(install, 2),
+    check_minutes = round((t$check_seconds %||% 0) / 60, 2),
+    script_minutes = round((t$script_seconds %||% 0) / 60, 2),
+    job_minutes = if (index %in% names(job_minutes)) {
+      round(unname(job_minutes[[index]]), 2)
+    } else {
+      NULL
+    },
+    planned_minutes = t$planned_minutes,
+    planned_check_minutes = t$planned_check_minutes
+  )
+})
+shard_rows <- unname(shard_rows[order(as.numeric(names(shard_rows)))])
+
+timings <- list(
+  run_id = env_chr("GITHUB_RUN_ID"),
+  generated_at = now_utc(),
+  r_version = plan$r_version,
+  platform = R.version$platform,
+  timing_flavor = plan$timing_flavor,
+  packages = package_rows,
+  shards = shard_rows
+)
+cal <- calibration(list(timings))
+timings$calibration <- list(
+  check_scale = cal$check_scale,
+  setup_minutes = cal$setup_minutes,
+  install_seconds = cal$install_seconds
+)
+write_json(timings, file.path(timings_out, "timings.json"))
+inform(
+  "Timings: ",
+  length(package_rows),
+  " package(s), ",
+  length(shard_rows),
+  " shard(s)",
+  if (length(job_minutes) == 0) " (job durations unavailable)" else ""
+)
 
 # ----------------------------------------------------------------- reports ---
 
@@ -407,6 +512,71 @@ append_summary(c(
           nrow(unchecked_df) - nrow(shown)
         ))
       },
+      ""
+    )
+  },
+  # What the run cost, in the terms the next plan is sized in. A plan that
+  # overestimates buys shards it cannot run in parallel, so these three numbers
+  # are worth showing next to the results they came from.
+  if (length(package_rows) > 0 || length(shard_rows) > 0) {
+    or_unmeasured <- function(x, fmt, ...) {
+      if (is.null(x)) "not measured" else sprintf(fmt, x, ...)
+    }
+    # From the package rows, not the shard rows: a shard whose job died leaves
+    # no timing of its own, but the checks it did finish are still in the
+    # manifest the collector just merged.
+    check_minutes <- sum(vapply(
+      package_rows,
+      function(p) p$seconds * p$checks / 60,
+      numeric(1)
+    ))
+    job <- vapply(
+      shard_rows,
+      function(s) s$job_minutes %||% NA_real_,
+      numeric(1)
+    )
+    c(
+      "### What this run cost",
+      "",
+      md_table(data.frame(
+        Measured = c(
+          "Checks",
+          "Check speed",
+          "Shard jobs",
+          "Setup per shard",
+          "Install per dependency"
+        ),
+        Value = c(
+          sprintf(
+            "%d in %d package(s), ~%.0f min",
+            sum(vapply(package_rows, function(p) p$checks, numeric(1))),
+            length(package_rows),
+            check_minutes
+          ),
+          or_unmeasured(cal$check_scale, "%.2f x the time CRAN reports"),
+          if (all(is.na(job))) {
+            sprintf("%d shard(s), job durations unavailable", length(shard_rows))
+          } else {
+            sprintf(
+              "%d shard(s), median ~%.0f min, longest ~%.0f min",
+              length(shard_rows),
+              stats::median(job, na.rm = TRUE),
+              max(job, na.rm = TRUE)
+            )
+          },
+          or_unmeasured(
+            cal$setup_minutes,
+            "~%.1f min before the driver starts"
+          ),
+          or_unmeasured(cal$install_seconds, "~%.1f s")
+        ),
+        check.names = FALSE
+      )),
+      "",
+      sprintf(
+        "The next plan reads these from the `revdep2-timings` artifact of %s and sizes its shards with them.",
+        this_run_link("this run")
+      ),
       ""
     )
   },

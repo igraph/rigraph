@@ -1,10 +1,10 @@
 # Plan the sharded reverse-dependency check.
 #
 # Enumerates the reverse dependencies of the package in the current directory,
-# weighs each one by the time CRAN's own check machine spends on it, decides
-# which CRAN-baseline results from an earlier run can be reused, and partitions
-# the packages into cost-balanced shards. One shard becomes one matrix leg of
-# .github/workflows/revdep2.yaml.
+# weighs each one by what its check is expected to cost on these runners,
+# decides which CRAN-baseline results from an earlier run can be reused, and
+# partitions the packages into cost-balanced shards. One shard becomes one
+# matrix leg of .github/workflows/revdep2.yaml.
 #
 # The partitioning is greedy, in two phases (see revdep2/README.md for why
 # greedy beats an exact formulation here):
@@ -16,9 +16,17 @@
 #      for each dependency the shard does not already need. The penalty is what
 #      pulls packages with overlapping dependency trees onto the same shard.
 #
-# K itself is the smallest shard count whose average check load fits the
-# per-shard budget, capped by the matrix limit -- so wall clock is bought with
-# more shards until the budget says the shards are small enough.
+# K is bounded by the parallel capacity, not by the budget alone. Only
+# `max-parallel` shards ever run at once, so shard K+1 of a full wave does not
+# start any earlier for having been split off -- it just pays another setup.
+# The rule is therefore: as many shards as the budget wants while they all fit
+# in one wave, and beyond that, whole waves -- as many as the per-shard
+# capacity demands, and no more.
+#
+# The cost model behind all of it -- how fast a check runs here, what a shard
+# costs before it checks anything, what one more dependency costs to install --
+# is calibrated from the timings artifact of the last runs, and falls back to
+# CRAN's numbers and the defaults below when no run has measured anything yet.
 #
 # Environment variables (inputs):
 #   REVDEP2_PACKAGES        - explicit packages to check (comma/space separated;
@@ -28,8 +36,12 @@
 #   REVDEP2_RETRY_RUN       - run id of an earlier revdep2 run; check only the
 #                             packages that run could not declare ok
 #   REVDEP2_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
+#   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
+#                             most, which is what forces a second wave
+#                             (default: 80% of REVDEP2_DEADLINE_MINUTES)
 #   REVDEP2_MAX_SHARDS      - matrix legs to emit at most (default: 250)
-#   REVDEP2_MAX_PARALLEL    - legs to run concurrently (default: 20)
+#   REVDEP2_MAX_PARALLEL    - legs to run concurrently, and so the size of one
+#                             wave (default: 20)
 #   REVDEP2_REFRESH_BASELINE- if truthy, ignore reusable baselines and re-check
 #                             the CRAN version of everything
 #   REVDEP2_BASELINE_MAX_AGE_DAYS - oldest baseline worth reusing (default: 30)
@@ -39,8 +51,21 @@
 #                             (default: 14)
 #   REVDEP2_HISTORY_RUNS    - earlier runs the donor walk looks at at all
 #                             (default: 40)
+#   REVDEP2_MEASURED_MAX_RUNS - earlier runs whose measured timings calibrate
+#                             the cost model (default: 3; 0 disables)
+#   REVDEP2_MEASURED_MAX_AGE_DAYS - oldest measurement worth trusting
+#                             (default: 60)
+#   REVDEP2_MEASURED_DIR    - offline hook: a directory holding a timings.json,
+#                             used instead of walking the run history
+#   REVDEP2_CHECK_SCALE     - check seconds here per second CRAN reports;
+#                             overrides the measured value (default: measured,
+#                             else 1)
+#   REVDEP2_SETUP_MINUTES   - fixed cost of one shard before it checks anything;
+#                             overrides the measured value (default: measured,
+#                             else 6)
 #   REVDEP2_INSTALL_SECONDS - marginal install cost charged per dependency a
-#                             package adds to its shard (default: 2.5)
+#                             package adds to its shard; overrides the measured
+#                             value (default: measured, else 2.5)
 #   REVDEP2_TIMINGS_FILE    - offline hook: RDS or CSV with columns Package and
 #                             T_total, used instead of tools::CRAN_check_results()
 #   OUT                     - plan file to write (default: plan.json)
@@ -71,13 +96,18 @@ if (is.na(depth) || depth < 1) {
 budget <- env_num("REVDEP2_SHARD_BUDGET_MINUTES", 45)
 max_shards <- min(env_num("REVDEP2_MAX_SHARDS", 250), 250)
 max_parallel <- env_num("REVDEP2_MAX_PARALLEL", 20)
+# A shard stops starting checks at its own deadline and defers the rest, so the
+# deadline is what actually caps a shard's check load; the plan aims below it,
+# leaving the rest of the job for installing and for the checks running long.
+deadline_minutes <- env_num("REVDEP2_DEADLINE_MINUTES", 300)
+capacity <- env_num("REVDEP2_SHARD_CAPACITY_MINUTES", 0.8 * deadline_minutes)
 refresh_baseline <- env_flag("REVDEP2_REFRESH_BASELINE")
 baseline_max_age <- env_num("REVDEP2_BASELINE_MAX_AGE_DAYS", 30)
 max_prebuilt_runs <- env_num("REVDEP2_PREBUILT_MAX_RUNS", 5)
 prebuilt_max_age <- env_num("REVDEP2_PREBUILT_MAX_AGE_DAYS", 14)
 history_runs <- env_num("REVDEP2_HISTORY_RUNS", 40)
-install_seconds <- env_num("REVDEP2_INSTALL_SECONDS", 2.5)
-setup_minutes <- env_num("REVDEP2_SETUP_MINUTES", 6)
+max_measured_runs <- env_num("REVDEP2_MEASURED_MAX_RUNS", 3)
+measured_max_age <- env_num("REVDEP2_MEASURED_MAX_AGE_DAYS", 60)
 overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
 retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
@@ -109,22 +139,26 @@ plan_nothing <- function(reason) {
 # fetch artifacts too; what is planned here is *which* earlier runs to take
 # them from.
 #
-# One walk over the workflow's completed runs, youngest first, answers both
-# questions this plan asks of its history, and asks the API for a run's
+# One walk over the workflow's completed runs, youngest first, answers every
+# question this plan asks of its history, and asks the API for a run's
 # artifacts at most once:
 #
 #   * which run donates the CRAN baseline -- the newest one that still has it;
 #   * which runs donate prebuilt package libraries -- as many as it takes to
 #     cover everything this run installs, youngest first, each one credited
-#     only with what the younger ones did not already have.
+#     only with what the younger ones did not already have;
+#   * which runs donate measured timings -- the youngest few, whose numbers
+#     calibrate the cost model below.
 #
-# The walk stops as soon as it has both, and never looks at more than
+# The walk stops as soon as it has all of them, and never looks at more than
 # `history_runs` runs; reuse is an optimization, and an optimization does not
 # get to spend the planning budget.
-scan_history <- function(want_baseline, needed) {
+scan_history <- function(want_baseline, want_timings, needed) {
   empty <- list(
     baseline_run = NULL,
     prebuilt = list(),
+    timings = list(),
+    timings_runs = character(),
     scanned = 0L,
     missing = needed
   )
@@ -148,10 +182,13 @@ scan_history <- function(want_baseline, needed) {
   this_run <- env_chr("GITHUB_RUN_ID")
   baseline_run <- NULL
   prebuilt <- list()
+  timings <- list()
+  timings_runs <- character()
   scanned <- 0L
   for (row in rows) {
     if (
       !want_baseline &&
+        length(timings) >= want_timings &&
         (length(needed) == 0 || length(prebuilt) >= max_prebuilt_runs)
     ) {
       break
@@ -168,6 +205,25 @@ scan_history <- function(want_baseline, needed) {
     if (want_baseline && "revdep2-baseline" %in% artifacts) {
       baseline_run <- run
       want_baseline <- FALSE
+    }
+    # Timings age the way baselines do: a runner image moves, and with it what
+    # a check costs. They are tiny, so taking the youngest few and pooling them
+    # is cheaper than trusting a single run that may have been a small retry.
+    take_timings <- length(timings) < want_timings &&
+      "revdep2-timings" %in% artifacts &&
+      !is.na(created) &&
+      as.numeric(Sys.Date() - created) <= measured_max_age
+    if (take_timings) {
+      dir <- fetch_artifact_id(ids[["revdep2-timings"]], tempfile("timings-"))
+      measured <- read_timings(dir)
+      unlink(dir, recursive = TRUE)
+      if (
+        !is.null(measured) &&
+          identical(measured$platform, R.version$platform)
+      ) {
+        timings[[length(timings) + 1]] <- measured
+        timings_runs <- c(timings_runs, run)
+      }
     }
     # A library is only worth carrying while its binaries still match the R
     # series and the platform they were built for, and while the runner image
@@ -211,6 +267,8 @@ scan_history <- function(want_baseline, needed) {
   list(
     baseline_run = baseline_run,
     prebuilt = prebuilt,
+    timings = timings,
+    timings_runs = timings_runs,
     scanned = scanned,
     missing = needed
   )
@@ -409,12 +467,15 @@ universe <- unique(c(unlist(closure, use.names = FALSE), dev_closure))
 # ------------------------------------------------------------ earlier runs ---
 
 local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
+local_measured <- env_chr("REVDEP2_MEASURED_DIR")
 history <- scan_history(
-  # A retried run donates its own baseline, and the two offline hooks bypass
-  # discovery entirely; the walk then only looks for prebuilt libraries.
+  # A retried run donates its own baseline, and the offline hooks bypass
+  # discovery entirely; whatever is supplied that way, the walk stops looking
+  # for.
   want_baseline = !refresh_baseline &&
     !nzchar(local_baseline) &&
     !nzchar(retry_run),
+  want_timings = if (nzchar(local_measured)) 0 else max_measured_runs,
   needed = universe
 )
 
@@ -556,22 +617,124 @@ if (length(prebuilt) > 0) {
   )
 }
 
-# Weight: one check of the revdep costs about what CRAN's Linux machine spends
-# on it end to end; a package without a reusable baseline is checked twice.
-weight <- ((!reuse) + 1) * t_total / 60 + overhead_minutes
+# ------------------------------------------------------------- calibration ---
+
+# CRAN's `T_total` ranks packages well and predicts minutes here badly: it
+# comes from a different machine under a different load, and it is the only
+# number available for a package this workflow has never checked. So the last
+# runs' own measurements come first, and CRAN's number is scaled by what those
+# runs say the ratio between the two is.
+#
+# Every constant is overridable by hand, and every fallback is the value that
+# was hard-coded before anything measured itself.
+measured_runs <- if (nzchar(local_measured)) {
+  # Offline hook for reading a downloaded revdep2-timings artifact, the way
+  # REVDEP2_BASELINE_DIR reads a downloaded baseline.
+  Filter(Negate(is.null), list(read_timings(local_measured)))
+} else {
+  history$timings
+}
+cal <- calibration(measured_runs)
+measured_seconds <- measured_check_seconds(measured_runs)
+
+check_scale <- env_num_opt("REVDEP2_CHECK_SCALE") %||% cal$check_scale %||% 1
+setup_minutes <- env_num_opt("REVDEP2_SETUP_MINUTES") %||%
+  cal$setup_minutes %||%
+  6
+install_seconds <- env_num_opt("REVDEP2_INSTALL_SECONDS") %||%
+  cal$install_seconds %||%
+  2.5
+
+if (length(measured_runs) > 0) {
+  inform(
+    sprintf(
+      "Calibrated from %d run(s) (%s): checks run at %.2fx their CRAN time, %.1f min setup per shard, %.1f s per dependency installed",
+      length(measured_runs),
+      paste(
+        if (nzchar(local_measured)) local_measured else history$timings_runs,
+        collapse = ", "
+      ),
+      check_scale,
+      setup_minutes,
+      install_seconds
+    )
+  )
+} else {
+  inform(
+    "No measured timings found; using CRAN check times as they are, with the default shard costs"
+  )
+}
+
+# What one check of each package is expected to cost *here*: what the last runs
+# measured, or CRAN's time scaled to this machine. The floor keeps a package
+# with an implausibly small measurement from looking free.
+check_seconds <- t_total * check_scale
+seen <- intersect(packages, names(measured_seconds))
+check_seconds[seen] <- measured_seconds[seen]
+check_seconds <- pmax(check_seconds, 30)
+timing_source <- ifelse(
+  packages %in% seen,
+  "measured",
+  ifelse(known, "cran", "median")
+)
+inform(
+  sum(packages %in% seen),
+  " of ",
+  length(packages),
+  " check times measured by an earlier run"
+)
+
+# Weight: one check of the revdep costs what it is expected to cost here; a
+# package without a reusable baseline is checked twice.
+weight <- ((!reuse) + 1) * check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
 
 n <- length(packages)
 total_check <- sum(weight)
-k <- max(1L, min(as.integer(ceiling(total_check / budget)), max_shards, n))
+
+# How many shards can actually run at the same time. Everything past that waits
+# for a lane, so the shard count is counted in waves of this size.
+lanes <- max(1L, min(as.integer(max_parallel), as.integer(max_shards), n))
+
+# Two demands, and they do not agree once the batch is large:
+#
+#   * the budget wants shards of at most `budget` check minutes -- short legs,
+#     quick feedback, cheap re-runs;
+#   * the capacity says a shard can hold `capacity` check minutes before its
+#     own deadline starts deferring packages.
+#
+# While the budget's answer fits in one wave, it wins: those shards all start
+# at once, so cutting finer really does buy wall clock. Past that it stops
+# buying anything -- shard 21 of 40 waits for shard 1 to finish either way, and
+# arrives having paid a second setup for the privilege. So beyond one wave the
+# capacity decides, and it decides in whole waves: as many as it takes to keep
+# every shard under its deadline, and not one more.
+by_budget <- max(1L, as.integer(ceiling(total_check / budget)))
+by_capacity <- max(1L, as.integer(ceiling(total_check / max(capacity, 1))))
+# Neither dial may be violated inside a wave, so the larger of the two wins
+# there; a capacity smaller than the budget is a contradiction, and the one
+# that keeps shards inside their deadline is the one to honour.
+k <- if (max(by_budget, by_capacity) <= lanes) {
+  max(by_budget, by_capacity)
+} else {
+  lanes * as.integer(ceiling(by_capacity / lanes))
+}
+k <- max(1L, min(k, as.integer(max_shards), n))
+waves <- as.integer(ceiling(k / lanes))
 inform(
   sprintf(
-    "%d packages, ~%.0f check minutes, budget %.0f min/shard -> %d shard(s)",
+    "%d packages, ~%.0f check minutes; budget %.0f min asks for %d shard(s), capacity %.0f min needs %d, %d lane(s) -> %d shard(s) in %d wave(s), ~%.0f check min each",
     n,
     total_check,
     budget,
-    k
+    by_budget,
+    capacity,
+    by_capacity,
+    lanes,
+    k,
+    waves,
+    total_check / k
   )
 )
 
@@ -634,7 +797,8 @@ shard_list <- lapply(seq_len(k), function(s) {
         level = if (p %in% names(level_of)) unname(level_of[[p]]) else 0L,
         weight_minutes = round(unname(weight[[p]]), 2),
         t_total = unname(t_total[[p]]),
-        timing_source = if (known[[match(p, packages)]]) "cran" else "median",
+        check_seconds = round(unname(check_seconds[[p]])),
+        timing_source = timing_source[[match(p, packages)]],
         dep_fingerprint = unname(fingerprint[[p]]),
         baseline = unname(reuse[[p]])
       )
@@ -680,10 +844,26 @@ plan <- list(
     missing = length(history$missing),
     runs = prebuilt
   ),
+  calibration = list(
+    runs = if (nzchar(local_measured)) {
+      as.list(local_measured)
+    } else {
+      as.list(history$timings_runs)
+    },
+    max_runs = max_measured_runs,
+    max_age_days = measured_max_age,
+    packages_measured = sum(packages %in% seen),
+    check_scale = round(check_scale, 3),
+    setup_minutes = round(setup_minutes, 2),
+    install_seconds = round(install_seconds, 2)
+  ),
   params = list(
     shard_budget_minutes = budget,
+    shard_capacity_minutes = capacity,
     max_shards = max_shards,
     max_parallel = max_parallel,
+    lanes = lanes,
+    waves = waves,
     install_seconds_per_package = install_seconds,
     setup_minutes = setup_minutes,
     package_overhead_minutes = overhead_minutes
@@ -693,6 +873,7 @@ plan <- list(
     packages = n,
     check_minutes = round(total_check, 1),
     estimate_minutes = round(sum(load), 1),
+    wave_minutes = round(waves * max(load), 1),
     install_union = length(universe)
   ),
   dropped_unknown = as.list(dropped),
@@ -801,7 +982,47 @@ append_summary(c(
       "none"
     }
   ),
-  sprintf("| Shards | %d (max-parallel %d, budget %.0f min) |", k, parallel, budget),
+  sprintf(
+    "| Cost model | %s |",
+    if (length(measured_runs) > 0) {
+      sprintf(
+        "measured by %s: checks at %.2f&times; their CRAN time, %.1f min setup per shard, %.1f s per dependency installed (%d of %d packages timed here before)",
+        if (nzchar(local_measured)) {
+          sprintf("`%s`", local_measured)
+        } else {
+          sprintf(
+            "run%s %s",
+            if (length(history$timings_runs) > 1) "s" else "",
+            paste(
+              vapply(history$timings_runs, run_link, character(1)),
+              collapse = ", "
+            )
+          )
+        },
+        check_scale,
+        setup_minutes,
+        install_seconds,
+        sum(packages %in% seen),
+        n
+      )
+    } else {
+      "uncalibrated: CRAN check times as they are, default shard costs"
+    }
+  ),
+  sprintf(
+    "| Shards | %d in %d wave(s) of %d (budget %.0f min, capacity %.0f min per shard) |",
+    k,
+    waves,
+    parallel,
+    budget,
+    capacity
+  ),
+  sprintf(
+    "| Estimated wall clock | ~%.0f min (%d wave(s) of ~%.0f min) |",
+    waves * max(load),
+    waves,
+    max(load)
+  ),
   sprintf("| Estimated runner time | ~%.0f min |", sum(load)),
   "",
   md_table(summary_df)
