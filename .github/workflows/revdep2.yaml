@@ -97,7 +97,7 @@ on:
         type: string
         default: ""
       max-parallel:
-        description: "Shards to run concurrently, and so the wave size the plan partitions into"
+        description: "Shards to run concurrently, and so the wave size the plan cuts: set it to the concurrency the account really has, never more (GitHub queues past its own limit anyway)"
         type: string
         default: ""
       refresh-baseline:
@@ -255,6 +255,11 @@ jobs:
 
     runs-on: ubuntu-26.04
 
+    # This job installs the whole dependency universe; when that goes wrong it
+    # tends to go wrong slowly. Below the 6 h ceiling so it ends as a failure
+    # with logs rather than as a hard kill.
+    timeout-minutes: 300
+
     name: "Preflight all dependencies"
 
     permissions:
@@ -266,6 +271,24 @@ jobs:
       - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
+
+      # A runner ships with ~25 GB of toolchains this job will never use, and
+      # a dependency universe of a few thousand packages -- sources, binaries,
+      # build directories and the installed library at once -- is the one job
+      # here that can plausibly fill the disk. Reclaiming the space is cheap
+      # insurance; printing what is left makes the next failure diagnosable
+      # instead of a bare exit 143.
+      - name: Make room for the dependency universe
+        run: |
+          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/powershell /usr/share/swift || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          echo "Free disk: ${before}G -> ${after}G"
+          free -g
+        shell: bash
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -303,10 +326,23 @@ jobs:
           Rscript ./.github/workflows/revdep2/preflight.R
         shell: bash
 
+      # Runs even when the install step died, because "how much disk and
+      # memory were left" is the first question about a job that was killed
+      # rather than failed.
+      - name: Report what the install consumed
+        if: always()
+        run: |
+          df -h / /mnt || true
+          free -g || true
+          du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
+        shell: bash
+
       - uses: actions/upload-artifact@v6
+        if: always()
         with:
           name: revdep2-preflight
           path: ${{ runner.temp }}/preflight
+          if-no-files-found: ignore
           retention-days: 30
           overwrite: true
 
@@ -338,7 +374,19 @@ jobs:
       - build
       - preflight
 
-    if: needs.plan.outputs.shards != '0'
+    # The preflight is an optimization and an early diagnosis, not a
+    # prerequisite: a shard installs its own dependency union anyway, and that
+    # union is a fraction of the universe the preflight takes on (~500 of 4400
+    # in the run that made this necessary). So a preflight that dies must not
+    # take the checks with it -- `!cancelled()` is what lets this job run past
+    # a failed `needs`, and the dry-run guard has to be spelled out because a
+    # skipped preflight no longer skips this job either.
+    if: >-
+      !cancelled()
+      && needs.plan.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
 
     runs-on: ubuntu-26.04
 
@@ -470,10 +518,18 @@ jobs:
       - test
 
     # `always()` so a run with red shards still reports -- a broken revdep is
-    # the result this workflow exists to surface. Guarded on the earlier
-    # stages having succeeded, because without a plan and a binary there is
-    # nothing to collect; a dry run skips preflight and therefore this too.
-    if: always() && needs.plan.result == 'success' && needs.build.result == 'success' && needs.preflight.result == 'success' && needs.plan.outputs.shards != '0'
+    # the result this workflow exists to surface. Guarded on the plan and the
+    # binary, because without those there is nothing to collect, and on the
+    # dry-run input, which is now the only thing that stops this job from
+    # reporting: the preflight's result is deliberately not consulted, since a
+    # run whose preflight died still has shards, results, and packages to
+    # account for.
+    if: >-
+      always()
+      && needs.plan.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
 
     runs-on: ubuntu-26.04
 

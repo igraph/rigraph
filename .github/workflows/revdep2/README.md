@@ -30,7 +30,7 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
        one wave can run, in whole waves
        → plan.json (artifact) + matrix (job output)
 
-preflight (1 job; a dry run stops before it)
+preflight (1 job; a dry run stops before it; failure does not stop the run)
   ├─ unpack the prebuilt packages the plan found
   ├─ install + load *every* dependency any revdep needs
   └─ pack the library for the next run
@@ -104,9 +104,20 @@ and against the local estimate that same factor would be a third as forgiving.
 ### The shard count is bounded by the parallel capacity
 
 Only `max-parallel` shards run at once (default 20),
-so shards come in waves of that size,
-and the shard after a full wave does not start any earlier for existing:
-it waits for a lane, and arrives having paid another setup
+so shards come in waves of that size.
+That default is not arbitrary and raising it is not free:
+GitHub caps how many jobs an account may run concurrently
+(20 on the free plan, more on paid ones),
+and 20 leaves room for the rest of the repository's CI.
+Past that ceiling GitHub queues jobs whatever `max-parallel` says —
+so a plan told it has more lanes than the account really has
+does not get them, it just cuts more shards,
+each paying its own setup while it waits for one.
+**`max-parallel` should be the concurrency that actually exists, never more.**
+
+Waves are what makes the shard count a real decision:
+a shard after a full wave does not start any earlier for existing.
+It waits for a lane, and arrives having paid another setup
 (runner image, R, pandoc, TinyTeX, artifact downloads —
 charged at 6 minutes until a run measures it)
 plus its own dependency install.
@@ -154,6 +165,11 @@ Past that the plan **refuses to start**, with the numbers that make the case
 and the ways out — rather than dispatching a run
 that spends hours to report half its packages as `deferred`.
 
+That ceiling is about the matrix, not about patience.
+At 20 lanes, 250 shards is thirteen waves;
+a batch anywhere near the limit is a multi-day run long before it is
+an impossible one, and the wave count in the plan summary is what says so.
+
 The way out it recommends is `part`:
 
 ```sh
@@ -172,12 +188,48 @@ because baselines and prebuilt libraries are shared through the usual
 artifacts.
 The plan prints the `G` it needs, so the number is never guessed.
 
-For scale: `tibble`'s 2398 strong reverse dependencies plan as
-250 shards in one wave (heaviest ~125 min) with `max-parallel: 250`,
-or 60 shards in three waves with the default 20 —
-roughly a quarter of what would trigger the refusal.
-Its 3266-package dependency universe, and the preflight that installs it,
-is the part of that run to worry about, not the shard count.
+**What a split does not buy is wall clock.**
+Run back to back or at the same time, the parts draw on the same account
+concurrency, so the total time is what it always was —
+plus one more preflight per part.
+What it buys is a run that fits: shards inside their deadline,
+a report per part rather than one that lands hours late and half `deferred`,
+and a retry granularity that is a part rather than the whole set.
+That is also why the refusal is the only place `part` is recommended:
+a batch that fits should stay one run.
+
+For scale, the largest set anyone here runs — `tibble`'s,
+planned at the default 20 lanes:
+
+* 2398 strong revdeps, 14 035 check minutes on CRAN's numbers:
+  60 shards in three waves, ~13 h;
+  40 shards in two waves, ~7 h, once the 0.47 measured scale applies.
+* 3032 with `which: most` (Suggests included), 18 515 check minutes:
+  80 shards in four waves, ~17 h;
+  40 shards in two waves, ~9 h, calibrated.
+
+Both are well inside the refusal, which is about the matrix limit —
+but neither is short, and shard *count* is not what makes them long.
+Three things bound such a run before the shard count does:
+
+* **the lanes.** Wall clock is roughly total work ÷ concurrency,
+  and concurrency is the account's ceiling
+  (20 concurrent jobs on a free plan, more on paid ones).
+  Nothing in this plan changes that number:
+  splitting into more shards, or into `part` runs, only adds setups.
+* **the preflight**, which installs the whole 3675-package dependency
+  universe in one job before any shard starts, and is not parallel at all.
+* **the heaviest single package**, which is never split across shards.
+  `duckdb` alone is a 171-minute leg of the `most` plan on CRAN's numbers;
+  no shard count gets under it, and the refusal names such a package
+  rather than recommending a split that cannot help.
+
+The capacity-bound plans above also sit close to their deadline by design
+(the `most` one is planned at ~91% of it):
+filling the capacity is what keeps the wave count down,
+and a shard that overruns anyway defers the rest for `retry-run`
+rather than losing it.
+`shard-capacity-minutes` is the dial to lower if that trade reads wrong.
 
 Assignment is greedy, in two phases:
 
@@ -331,6 +383,18 @@ This is the half that pays on the very first run:
 the compile happens once in the preflight
 instead of once more in each shard.
 
+It is a `needs`, but not a prerequisite.
+`test` runs on `!cancelled()` past a failed preflight
+and `collect` does not consult its result at all,
+because the preflight buys two things —
+a free rebuild for the shards, and dependency failures diagnosed early —
+and neither is worth the run.
+A shard installs its own union regardless,
+and that union is a fraction of what the preflight takes on:
+in the run that made this necessary,
+a median of 478 packages against the preflight's 4397.
+Losing the preflight makes a run slower and blinder, not void.
+
 For the rest, the plan walks the workflow's completed runs, youngest first,
 and takes libraries until it has covered
 every package this run will install,
@@ -452,6 +516,7 @@ so its report is complete again, not a fragment.
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
+| The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
@@ -489,13 +554,14 @@ at the next `if`.
 | One G-th of the revdeps, for a set too big for one run | `part` (`i/G`) | `REVDEP2_PART` | — |
 | Plan only | `dry-run` | — | false |
 | Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
-| Concurrent shards, and so the wave size | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
+| Concurrent shards, and so the wave size — set it to the concurrency the account really has, never more | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
 | Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |
 | Ignore reusable baselines | `refresh-baseline` | — | false |
 | Oldest reusable baseline | `baseline-max-age-days` | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |
 | Check seconds here per CRAN second | — | `REVDEP2_CHECK_SCALE` | measured, else 1 |

@@ -42,6 +42,9 @@
 #   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
 #                             (default: 80% of REVDEP2_DEADLINE_MINUTES)
+#   REVDEP2_LONG_RUN_HOURS  - estimated wall clock past which the plan warns in
+#                             the job summary; it never refuses for length
+#                             alone (default: 12)
 #   REVDEP2_MAX_SHARDS      - matrix legs to emit at most (default: 250)
 #   REVDEP2_MAX_PARALLEL    - legs to run concurrently, and so the size of one
 #                             wave (default: 20)
@@ -876,7 +879,11 @@ plan_too_big <- function() {
   worst <- which.max(load)
   overhead <- load[[worst]] - check_load[[worst]]
   headroom <- deadline_minutes - overhead
-  parts <- if (headroom <= 0) {
+  # A package is never split across shards, so one package heavier than the
+  # room a shard has is a wall that no number of parts gets around. Say which
+  # package, and stop recommending a split that cannot work.
+  giants <- names(weight)[weight > headroom]
+  parts <- if (headroom <= 0 || length(giants) > 0) {
     NA_integer_
   } else {
     max(2L, as.integer(ceiling(check_load[[worst]] / headroom)))
@@ -909,11 +916,30 @@ plan_too_big <- function() {
       deadline_minutes
     ),
     "",
-    if (is.na(parts)) {
+    if (headroom <= 0) {
       c(
         sprintf(
           "Setup and installs alone (~%.0f min) already exceed the deadline, so splitting the packages will not help: raise `REVDEP2_DEADLINE_MINUTES` (and the job's `timeout-minutes`, up to GitHub's 6 h ceiling) first.",
           overhead
+        ),
+        ""
+      )
+    } else if (length(giants) > 0) {
+      # Naming them matters: this is the one case where the operator has to
+      # decide something (wait longer, or check less), and the decision is
+      # about these packages specifically.
+      c(
+        sprintf(
+          "%s alone %s more than the ~%.0f min a shard has left for checks, and a package is never split across shards — so no `part` split helps here.",
+          paste0("`", paste(utils::head(sort(giants), 5), collapse = "`, `"), "`"),
+          if (length(giants) == 1) "needs" else "need",
+          headroom
+        ),
+        "",
+        sprintf(
+          "Raise `REVDEP2_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (now 350, GitHub's ceiling is 6 h), or leave %s out of the run with an explicit `packages` list.",
+          deadline_minutes,
+          if (length(giants) == 1) "it" else "them"
         ),
         ""
       )
@@ -970,6 +996,15 @@ inform(sprintf(
   max(check_load),
   deadline_minutes
 ))
+
+# A plan can fit the matrix and still be a bad idea: `which: most` at `depth:
+# 2` is 3419 packages and about 22 hours of waves here, which is a run nobody
+# is watching by the end and a day of artifacts riding on one preflight. It is
+# a legitimate thing to ask for, so this warns rather than refuses -- but it
+# warns where the dispatcher will see it, not only in the wave line.
+wall_minutes <- waves * max(load)
+long_run_hours <- env_num("REVDEP2_LONG_RUN_HOURS", 12)
+long_run <- wall_minutes > long_run_hours * 60
 
 # ------------------------------------------------------------------ output ---
 
@@ -1128,6 +1163,27 @@ append_summary(c(
   "## revdep2 plan",
   "",
   if (env_flag("REVDEP2_DRY_RUN")) c("**Dry run: planning only, no checks started.**", ""),
+  if (long_run) {
+    c(
+      sprintf(
+        "> **This plan is about %.0f hours of wall clock** — %d shards, %d waves of %d. It fits, and it will run; the note is that %s.",
+        wall_minutes / 60,
+        k,
+        waves,
+        lanes,
+        if (length(measured_runs) == 0) {
+          "nothing is measured yet, so it is priced on CRAN's times, which have run about twice the local cost \u2014 the same plan calibrated is roughly half this"
+        } else {
+          "a run this long rides on one preflight and a day of artifacts"
+        }
+      ),
+      sprintf(
+        "> A narrower `which` or `depth` is the dial; `part=i/%d` splits it into runs that each report on their own, without making the total any shorter.",
+        max(2L, as.integer(ceiling(wall_minutes / (long_run_hours * 60))))
+      ),
+      ""
+    )
+  },
   "| | |",
   "| --- | --- |",
   sprintf("| Package | `%s` %s (CRAN: %s) |", package, dev_version, cran_version),
@@ -1222,17 +1278,19 @@ append_summary(c(
   ),
   sprintf("| Estimated runner time | ~%.0f min |", sum(load)),
   "",
-  # A run in more than one wave is waiting on lanes, not on work, and the
-  # dispatch form is where that is fixed -- so say it here, with the number.
+  # More than one wave means the run is bound by how many jobs may run at
+  # once, and that ceiling is the account's, not this workflow's: past it
+  # GitHub queues jobs no matter what `max-parallel` says, and a plan told it
+  # has more lanes than it does just cuts more shards, each paying its own
+  # setup while it waits. So state the fact and the condition, not a knob to
+  # turn.
   if (waves > 1) {
     c(
       sprintf(
-        "These %d shards run %d at a time, so %d waves. Dispatching with `max-parallel: %d` would run them in one, at roughly %.0f min instead of %.0f — worth it if that many runners are available.",
+        "These %d shards run %d at a time, so %d waves, ~%.0f min. Raising `max-parallel` shortens that only if the account can really run more jobs at once (GitHub queues past its own concurrency limit either way); a `part` split does not shorten it at all, since the parts compete for the same lanes.",
         k,
         lanes,
         waves,
-        k,
-        max(load),
         waves * max(load)
       ),
       ""
