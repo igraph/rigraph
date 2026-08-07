@@ -172,12 +172,25 @@ because baselines and prebuilt libraries are shared through the usual
 artifacts.
 The plan prints the `G` it needs, so the number is never guessed.
 
-For scale: `tibble`'s 2398 strong reverse dependencies plan as
-250 shards in one wave (heaviest ~125 min) with `max-parallel: 250`,
-or 60 shards in three waves with the default 20 —
-roughly a quarter of what would trigger the refusal.
-Its 3266-package dependency universe, and the preflight that installs it,
-is the part of that run to worry about, not the shard count.
+For scale, the largest set anyone here runs — `tibble`'s, on CRAN's numbers
+with nothing measured yet:
+
+* 2398 strong revdeps, 14 035 check minutes:
+  250 shards in one wave, heaviest ~125 min, with `max-parallel: 250`;
+  60 shards in three waves with the default 20.
+* 3032 with `which: most` (Suggests included), 18 515 check minutes:
+  250 shards in one wave, heaviest ~171 min;
+  80 shards in four waves at the default 20.
+
+Both are about a quarter of what would trigger the refusal,
+and both halve again once measurements replace CRAN's times.
+Two things bound such a run before the shard count does:
+its 3675-package dependency universe, and the preflight that installs it;
+and the heaviest single package, which is never split across shards —
+`duckdb` alone accounts for that 171-minute leg,
+and it is the floor no shard count gets under.
+The refusal names such a package rather than recommending a split
+that cannot help.
 
 Assignment is greedy, in two phases:
 

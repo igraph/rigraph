@@ -876,7 +876,11 @@ plan_too_big <- function() {
   worst <- which.max(load)
   overhead <- load[[worst]] - check_load[[worst]]
   headroom <- deadline_minutes - overhead
-  parts <- if (headroom <= 0) {
+  # A package is never split across shards, so one package heavier than the
+  # room a shard has is a wall that no number of parts gets around. Say which
+  # package, and stop recommending a split that cannot work.
+  giants <- names(weight)[weight > headroom]
+  parts <- if (headroom <= 0 || length(giants) > 0) {
     NA_integer_
   } else {
     max(2L, as.integer(ceiling(check_load[[worst]] / headroom)))
@@ -909,11 +913,30 @@ plan_too_big <- function() {
       deadline_minutes
     ),
     "",
-    if (is.na(parts)) {
+    if (headroom <= 0) {
       c(
         sprintf(
           "Setup and installs alone (~%.0f min) already exceed the deadline, so splitting the packages will not help: raise `REVDEP2_DEADLINE_MINUTES` (and the job's `timeout-minutes`, up to GitHub's 6 h ceiling) first.",
           overhead
+        ),
+        ""
+      )
+    } else if (length(giants) > 0) {
+      # Naming them matters: this is the one case where the operator has to
+      # decide something (wait longer, or check less), and the decision is
+      # about these packages specifically.
+      c(
+        sprintf(
+          "%s alone %s more than the ~%.0f min a shard has left for checks, and a package is never split across shards — so no `part` split helps here.",
+          paste0("`", paste(utils::head(sort(giants), 5), collapse = "`, `"), "`"),
+          if (length(giants) == 1) "needs" else "need",
+          headroom
+        ),
+        "",
+        sprintf(
+          "Raise `REVDEP2_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (now 350, GitHub's ceiling is 6 h), or leave %s out of the run with an explicit `packages` list.",
+          deadline_minutes,
+          if (length(giants) == 1) "it" else "them"
         ),
         ""
       )
