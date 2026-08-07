@@ -733,6 +733,8 @@ dep_fingerprint <- function(deps, db) {
 #   depfail      -- dependencies could not be installed, check not attempted
 #   deferred     -- shard deadline hit before this package was checked
 #   error        -- the shard driver itself broke on this package
+#   missing      -- the plan named it, no shard ever reported it: the job died
+#                   (assigned by the collector, never by a shard)
 classify_status <- function(status, new_issues) {
   if (status %in% c("+", "-")) {
     if (identical(status, "-") && new_issues > 0) "newly_broken" else "ok"

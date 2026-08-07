@@ -124,6 +124,54 @@ if (nzchar(retry_dir) && file.exists(file.path(retry_dir, "manifest.json"))) {
   )
 }
 
+# Every package the plan named has to appear in the report, including the ones
+# whose shard uploaded nothing at all: a job that dies -- runner failure,
+# cancellation, the job timeout above the shard's own deadline -- takes its
+# manifest with it, and a package silently absent from a report reads as one
+# that was fine. `missing` is a not-ok result, so `retry-run` picks exactly
+# these up, the same way it picks up a deferral.
+missing <- 0L
+for (shard in plan$shards %||% list()) {
+  for (p in shard$packages %||% list()) {
+    if (!is.null(entries[[p$name]])) {
+      next
+    }
+    entries[[p$name]] <- list(
+      package = p$name,
+      version = p$version,
+      level = p$level %||% 0L,
+      shard = shard$index,
+      weight_minutes = p$weight_minutes,
+      t_total = p$t_total %||% 0,
+      dep_fingerprint = p$dep_fingerprint,
+      baseline_planned = isTRUE(p$baseline),
+      baseline_reused = FALSE,
+      result = "missing",
+      status = "",
+      status_old = "",
+      status_new = "",
+      new_issues = 0L,
+      t_old = NA,
+      t_new = NA,
+      old_checked_at = NA,
+      message = sprintf(
+        "shard %s uploaded no result for this package; its job did not finish",
+        shard$index
+      ),
+      our_cran_version = plan$cran_version,
+      our_dev_version = plan$dev_version,
+      carried = FALSE
+    )
+    missing <- missing + 1L
+  }
+}
+if (missing > 0) {
+  inform(
+    missing,
+    " planned package(s) have no result at all; reported as missing"
+  )
+}
+
 entries <- entries[order(names(entries))]
 results_tbl <- vapply(entries, function(e) e$result, character(1))
 
@@ -403,11 +451,13 @@ headline <- if (tally("newly_broken") > 0) {
 counts_df <- data.frame(
   Result = c(
     "ok", "newly broken", "failed to check",
-    "dependencies not installable", "shard error", "deferred"
+    "dependencies not installable", "shard error", "deferred",
+    "no result from its shard"
   ),
   Packages = c(
     tally("ok"), tally("newly_broken"), tally("failed"),
-    tally("depfail"), tally("error"), tally("deferred")
+    tally("depfail"), tally("error"), tally("deferred"),
+    tally("missing")
   )
 )
 counts_df <- counts_df[counts_df$Packages > 0 | counts_df$Result == "ok", ]
@@ -434,6 +484,7 @@ reason_of <- function(e) {
     e$result,
     deferred = "the shard hit its deadline before this package was checked",
     depfail = "dependencies could not be installed",
+    missing = "its shard uploaded no results; the job did not finish",
     sprintf("no reason recorded (result `%s`)", e$result)
   )
 }

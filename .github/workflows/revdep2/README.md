@@ -133,6 +133,52 @@ The result is `max-parallel` shards for anything that fits in one wave,
 `2 × max-parallel` for twice that, and so on —
 the capacity is filled, and nothing is split for the sake of splitting.
 
+Both steps count *check* minutes,
+but a shard also pays its setup and its installs inside the same deadline,
+and how much that is only a real partition can say
+(a shard's install union is not a per-package constant).
+So the greedy pass below runs, the heaviest shard's **full** estimate is
+compared against `REVDEP2_DEADLINE_MINUTES`,
+and a shard count that cannot hold it grows by another whole wave
+and partitions again.
+The 20% between `shard-capacity-minutes` and the deadline is the room
+this check normally finds sufficient;
+the re-partition is what happens when it is not.
+
+### When even the matrix is not enough
+
+A matrix holds at most 256 legs, so `max-shards` caps at 250,
+and 250 shards × 240 check minutes is the ceiling of one run:
+about 60 000 check minutes.
+Past that the plan **refuses to start**, with the numbers that make the case
+and the ways out — rather than dispatching a run
+that spends hours to report half its packages as `deferred`.
+
+The way out it recommends is `part`:
+
+```sh
+gh workflow run revdep2.yaml -f part=1/3
+gh workflow run revdep2.yaml -f part=2/3
+gh workflow run revdep2.yaml -f part=3/3
+```
+
+Each part is an ordinary, independent run with its own report.
+The cut is made on the weight-ordered package list, dealt round robin,
+so the parts are of similar size and no coordination is needed:
+every part re-derives the same order from the same CRAN metadata,
+and a part that is still too big refuses in turn and names a bigger `G`.
+Later parts start warmer than the first,
+because baselines and prebuilt libraries are shared through the usual
+artifacts.
+The plan prints the `G` it needs, so the number is never guessed.
+
+For scale: `tibble`'s 2398 strong reverse dependencies plan as
+250 shards in one wave (heaviest ~125 min) with `max-parallel: 250`,
+or 60 shards in three waves with the default 20 —
+roughly a quarter of what would trigger the refusal.
+Its 3266-package dependency universe, and the preflight that installs it,
+is the part of that run to worry about, not the shard count.
+
 Assignment is greedy, in two phases:
 
 1. **Round-robin the heavyweights.**
@@ -407,7 +453,9 @@ so its report is complete again, not a fragment.
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
-| A shard job dies hard | its packages have no manifest entries; the collector reports what exists; `retry-run` re-plans the rest |
+| A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
+| Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
+| The batch is too big for 250 shards | the plan refuses before anything starts, and names the `part` split that fits |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
 | The baseline artifact is gone | planner reuses nothing, everything checked fresh |
 | No run has published timings yet | the plan uses CRAN's times unscaled and the fallback constants, and errs towards more shards |
@@ -438,6 +486,7 @@ at the next `if`.
 | Revdep set | `which` | — | `strong` |
 | Revdep depth (`1`, `2`, …, `all`) | `depth` | — | 1 |
 | Retry a run | `retry-run` | — | — |
+| One G-th of the revdeps, for a set too big for one run | `part` (`i/G`) | `REVDEP2_PART` | — |
 | Plan only | `dry-run` | — | false |
 | Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
 | Concurrent shards, and so the wave size | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |

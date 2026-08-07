@@ -88,6 +88,10 @@ on:
         description: "Run id of an earlier revdep2 run; re-check only its not-ok packages"
         type: string
         default: ""
+      part:
+        description: "Check one G-th of the reverse dependencies, as 'i/G'; for a set too big for one run (the plan says when, and with which G)"
+        type: string
+        default: ""
       shard-budget-minutes:
         description: "Check-time target per shard; smaller buys wall clock with more shards, up to one wave of max-parallel"
         type: string
@@ -129,6 +133,7 @@ env:
   REVDEP2_WHICH: ${{ inputs.which || 'strong' }}
   REVDEP2_DEPTH: ${{ inputs.depth || '1' }}
   REVDEP2_RETRY_RUN: ${{ inputs.retry-run || '' }}
+  REVDEP2_PART: ${{ inputs.part || '' }}
   REVDEP2_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEP2_SHARD_BUDGET_MINUTES || '45' }}
   REVDEP2_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEP2_MAX_PARALLEL || '20' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for
@@ -509,7 +514,11 @@ jobs:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
+      # Tolerated because a run in which no shard uploaded anything is still
+      # worth a report: the collector reconciles against the plan and names
+      # every package it never heard about, which is what `retry-run` needs.
       - uses: actions/download-artifact@v7
+        continue-on-error: true
         with:
           pattern: revdep2-results-*
           path: ${{ runner.temp }}/results

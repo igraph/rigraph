@@ -35,6 +35,9 @@
 #                             Enhances dependents)
 #   REVDEP2_RETRY_RUN       - run id of an earlier revdep2 run; check only the
 #                             packages that run could not declare ok
+#   REVDEP2_PART            - "i/G": check one G-th of the batch, for a revdep
+#                             set too big for a single run (the plan refuses
+#                             such a batch and prints the G it needs)
 #   REVDEP2_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
 #   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
@@ -410,6 +413,65 @@ known <- !is.na(t_total)
 fallback <- if (any(known)) stats::median(t_total[known]) else 300
 t_total[!known] <- fallback
 t_total <- pmax(t_total, 60)
+
+# ---------------------------------------------------------------- parts -----
+
+# `part: i/G` takes one G-th of the batch, for a revdep set too big to check in
+# one run (see the refusal in the partitioning section, which computes G and
+# prints the dispatch lines). The cut is made here, on CRAN's times, because
+# everything downstream -- closures, the dependency universe, the prebuilt
+# lookup -- should see only the packages this run will check.
+#
+# Dealing the weight-ordered list round robin keeps the parts of similar size
+# without any coordination between the runs: each one re-derives the same
+# order from the same CRAN metadata. A package that moves between dispatches
+# can land in another part or in none; `retry-run` on the union is the sweep
+# for that, and nothing here depends on the parts being exact.
+part_input <- trimws(env_chr("REVDEP2_PART"))
+part <- NULL
+if (nzchar(part_input)) {
+  fields <- suppressWarnings(as.integer(strsplit(part_input, "/")[[1]]))
+  if (
+    length(fields) != 2 ||
+      anyNA(fields) ||
+      fields[[1]] < 1 ||
+      fields[[2]] < 1 ||
+      fields[[1]] > fields[[2]]
+  ) {
+    stop(
+      "REVDEP2_PART must be `i/G` with 1 <= i <= G, not ",
+      part_input,
+      call. = FALSE
+    )
+  }
+  part <- list(index = fields[[1]], of = fields[[2]])
+  mine <- order(-t_total)[
+    seq(part$index, length(packages), by = part$of)
+  ]
+  packages <- sort(packages[mine])
+  t_total <- t_total[packages]
+  known <- known[packages]
+  their_version <- their_version[packages]
+  suffix <- sprintf(", part %d of %d", part$index, part$of)
+  selection <- paste0(selection, suffix)
+  if (!is.null(selection_md)) {
+    selection_md <- paste0(selection_md, suffix)
+  }
+  inform(
+    "Part ",
+    part$index,
+    " of ",
+    part$of,
+    ": ",
+    length(packages),
+    " packages, ~",
+    round(sum(t_total) / 60),
+    " CRAN check minutes"
+  )
+  if (length(packages) == 0) {
+    plan_nothing(sprintf("part %d of %d is empty", part$index, part$of))
+  }
+}
 inform(
   sum(known),
   " of ",
@@ -720,11 +782,11 @@ k <- if (max(by_budget, by_capacity) <= lanes) {
 } else {
   lanes * as.integer(ceiling(by_capacity / lanes))
 }
-k <- max(1L, min(k, as.integer(max_shards), n))
-waves <- as.integer(ceiling(k / lanes))
+max_k <- max(1L, min(as.integer(max_shards), n))
+k <- max(1L, min(k, max_k))
 inform(
   sprintf(
-    "%d packages, ~%.0f check minutes; budget %.0f min asks for %d shard(s), capacity %.0f min needs %d, %d lane(s) -> %d shard(s) in %d wave(s), ~%.0f check min each",
+    "%d packages, ~%.0f check minutes; budget %.0f min asks for %d shard(s), capacity %.0f min needs %d, %d lane(s) -> %d shard(s), ~%.0f check min each",
     n,
     total_check,
     budget,
@@ -733,7 +795,6 @@ inform(
     by_capacity,
     lanes,
     k,
-    waves,
     total_check / k
   )
 )
@@ -742,38 +803,173 @@ dep_idx <- lapply(closure, function(deps) match(deps, universe))
 penalty <- install_seconds / 60
 
 ord <- order(-weight)
-assignment <- integer(n)
-load <- rep(setup_minutes + length(dev_closure) * penalty, k)
-check_load <- numeric(k)
-install_count <- rep(length(dev_closure), k)
-have <- matrix(FALSE, nrow = length(universe), ncol = k)
-have[match(dev_closure, universe), ] <- TRUE
 
-place <- function(i, s) {
-  p <- ord[[i]]
-  fresh <- sum(!have[dep_idx[[p]], s])
-  assignment[[p]] <<- s
-  check_load[[s]] <<- check_load[[s]] + weight[[p]]
-  load[[s]] <<- load[[s]] + weight[[p]] + fresh * penalty
-  install_count[[s]] <<- install_count[[s]] + fresh
-  have[dep_idx[[p]], s] <<- TRUE
-}
+# The greedy pass, for a given shard count. It is cheap enough (O(n x K) with a
+# bitmap per shard) to run more than once, which is what lets the deadline
+# check below see a real partition rather than an average.
+partition <- function(k) {
+  assignment <- integer(n)
+  load <- rep(setup_minutes + length(dev_closure) * penalty, k)
+  check_load <- numeric(k)
+  have <- matrix(FALSE, nrow = length(universe), ncol = k)
+  have[match(dev_closure, universe), ] <- TRUE
 
-# Phase 1: the K heaviest packages, dealt round-robin.
-for (i in seq_len(min(k, n))) {
-  place(i, i)
-}
-
-# Phase 2: everything else goes where it costs least, dependency reuse folded
-# into the price.
-if (n > k) {
-  for (i in seq(k + 1L, n)) {
+  place <- function(i, s) {
     p <- ord[[i]]
-    fresh <- colSums(!have[dep_idx[[p]], , drop = FALSE])
-    score <- load + weight[[p]] + fresh * penalty
-    place(i, which.min(score))
+    fresh <- sum(!have[dep_idx[[p]], s])
+    assignment[[p]] <<- s
+    check_load[[s]] <<- check_load[[s]] + weight[[p]]
+    load[[s]] <<- load[[s]] + weight[[p]] + fresh * penalty
+    have[dep_idx[[p]], s] <<- TRUE
   }
+
+  # Phase 1: the K heaviest packages, dealt round-robin.
+  for (i in seq_len(min(k, n))) {
+    place(i, i)
+  }
+
+  # Phase 2: everything else goes where it costs least, dependency reuse folded
+  # into the price.
+  if (n > k) {
+    for (i in seq(k + 1L, n)) {
+      p <- ord[[i]]
+      fresh <- colSums(!have[dep_idx[[p]], , drop = FALSE])
+      score <- load + weight[[p]] + fresh * penalty
+      place(i, which.min(score))
+    }
+  }
+
+  list(assignment = assignment, load = load, check_load = check_load)
 }
+
+# `capacity` bounds the *checks* a shard may hold; the shard also spends its
+# setup and its installs inside the same deadline, and only a real partition
+# says how much that is -- the install union of a shard is not a per-package
+# constant. So the estimate is checked against the deadline here, and a shard
+# count that cannot hold it grows by whole waves until it can.
+fit <- partition(k)
+while (max(fit$load) > deadline_minutes && k < max_k) {
+  grown <- min(as.integer(k + lanes), max_k)
+  inform(sprintf(
+    "Heaviest shard estimated at ~%.0f min, past the %.0f min deadline; growing to %d shard(s)",
+    max(fit$load),
+    deadline_minutes,
+    grown
+  ))
+  k <- grown
+  fit <- partition(k)
+}
+assignment <- fit$assignment
+load <- fit$load
+check_load <- fit$check_load
+waves <- as.integer(ceiling(k / lanes))
+
+# Out of room: the matrix limit (or the package count) caps the shards below
+# what the work needs, so every shard would run into its deadline and defer.
+# That is a plan worth refusing -- a run started this way spends hours to
+# report half its packages as deferred, and says so only at the end.
+#
+# How many runs it takes instead: splitting into G parts divides a shard's
+# check load by G, but not its setup or its installs, so the question is how
+# much of the deadline is left for checks once those are paid.
+plan_too_big <- function() {
+  worst <- which.max(load)
+  overhead <- load[[worst]] - check_load[[worst]]
+  headroom <- deadline_minutes - overhead
+  parts <- if (headroom <= 0) {
+    NA_integer_
+  } else {
+    max(2L, as.integer(ceiling(check_load[[worst]] / headroom)))
+  }
+  inform(sprintf(
+    "Too big for one run: %d shard(s) is the limit, and the heaviest would be ~%.0f min against a %.0f min deadline",
+    k,
+    load[[worst]],
+    deadline_minutes
+  ))
+  append_summary(c(
+    "## revdep2 plan",
+    "",
+    "**Too big for one run — nothing was started.**",
+    "",
+    sprintf(
+      "%d packages need ~%.0f check minutes. At most %d shard%s can be planned (%s), which puts the heaviest at ~%.0f min: ~%.0f min of checks on top of ~%.0f min of setup and installs, against the %.0f min a shard has before its deadline starts deferring packages.",
+      n,
+      total_check,
+      max_k,
+      if (max_k == 1) "" else "s",
+      if (max_k < as.integer(max_shards)) {
+        sprintf("one per package, and there are only %d", n)
+      } else {
+        sprintf("`max-shards`, itself capped at 250 by the matrix limit")
+      },
+      load[[worst]],
+      check_load[[worst]],
+      overhead,
+      deadline_minutes
+    ),
+    "",
+    if (is.na(parts)) {
+      c(
+        sprintf(
+          "Setup and installs alone (~%.0f min) already exceed the deadline, so splitting the packages will not help: raise `REVDEP2_DEADLINE_MINUTES` (and the job's `timeout-minutes`, up to GitHub's 6 h ceiling) first.",
+          overhead
+        ),
+        ""
+      )
+    } else {
+      c(
+        sprintf("Split it into %d runs, each an independent report:", parts),
+        "",
+        "```sh",
+        paste0(
+          sprintf(
+            "gh workflow run revdep2.yaml -f part=%d/%d",
+            seq_len(parts),
+            parts
+          ),
+          collapse = "\n"
+        ),
+        "```",
+        "",
+        paste(
+          "The parts are cut from the same weight-ordered list, dealt round",
+          "robin, so they are of similar size and together cover everything —",
+          "and each part re-plans itself, so a part that is still too big says",
+          "so in turn. They share baselines and prebuilt libraries through the",
+          "usual artifacts, so the later parts start warmer than the first."
+        ),
+        ""
+      )
+    },
+    "Or keep it in one run by making the shards fit:",
+    "",
+    sprintf(
+      "* `max-parallel` above %d does not change this — the limit is how many shards may exist (250), not how many run at once.",
+      max_parallel
+    ),
+    sprintf(
+      "* raise `shard-capacity-minutes` (now %.0f) only together with `REVDEP2_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (350): the deadline is what a shard actually has.",
+      capacity,
+      deadline_minutes
+    ),
+    "* pass an explicit `packages` list, or a smaller `depth`, to check less.",
+    ""
+  ))
+  quit(save = "no", status = 1)
+}
+if (max(load) > deadline_minutes) {
+  plan_too_big()
+}
+
+inform(sprintf(
+  "%d shard(s) in %d wave(s); heaviest ~%.0f min (checks ~%.0f, deadline %.0f)",
+  k,
+  waves,
+  max(load),
+  max(check_load),
+  deadline_minutes
+))
 
 # ------------------------------------------------------------------ output ---
 
@@ -827,6 +1023,7 @@ plan <- list(
   depth = depth_raw,
   levels = as.list(level_counts),
   selection = selection,
+  part = part,
   generated_at = now_utc(),
   timing_flavor = timing_flavor,
   retry_of = if (nzchar(retry_run)) run_id_chr(retry_run) else "0",
@@ -1025,5 +1222,21 @@ append_summary(c(
   ),
   sprintf("| Estimated runner time | ~%.0f min |", sum(load)),
   "",
+  # A run in more than one wave is waiting on lanes, not on work, and the
+  # dispatch form is where that is fixed -- so say it here, with the number.
+  if (waves > 1) {
+    c(
+      sprintf(
+        "These %d shards run %d at a time, so %d waves. Dispatching with `max-parallel: %d` would run them in one, at roughly %.0f min instead of %.0f — worth it if that many runners are available.",
+        k,
+        lanes,
+        waves,
+        k,
+        max(load),
+        waves * max(load)
+      ),
+      ""
+    )
+  },
   md_table(summary_df)
 ))
