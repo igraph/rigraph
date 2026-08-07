@@ -21,6 +21,11 @@
 # util.R): this run's preflight library, and then the earlier runs the plan
 # picked. pak only has to build what neither of them had.
 #
+# What each phase costs is recorded in timing.json next to the results: the
+# collector folds it into the run's timings artifact, and the next plan sizes
+# its shards from what this one measured rather than from CRAN's numbers and a
+# guess.
+#
 # Environment variables:
 #   SHARD                  - shard index from plan.json (required)
 #   PLAN                   - plan file (default: plan.json)
@@ -41,6 +46,11 @@ source(file.path(
   dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
   "util.R"
 ))
+
+script_started <- Sys.time()
+elapsed <- function(from) {
+  round(as.numeric(difftime(Sys.time(), from, units = "secs")), 1)
+}
 
 shard_index <- as.integer(env_chr("SHARD"))
 stopifnot(!is.na(shard_index))
@@ -132,10 +142,12 @@ install <- unlist(shard$install, use.names = FALSE)
 # could not supply. pak still resolves the whole set afterwards; the point is
 # to skip *building* what has not changed, not to skip resolving it.
 lib <- .libPaths()[[1]]
+restore_started <- Sys.time()
 restored <- c(
   restore_local_library(env_chr("LIB_DIR"), lib, install),
   restore_prebuilt(plan, lib, install)
 )
+restore_seconds <- elapsed(restore_started)
 inform(
   length(restored),
   " dependency binaries restored, ",
@@ -149,6 +161,7 @@ inform(
 upgrade <- length(restored) > 0
 
 inform("Installing ", length(install), " dependencies")
+install_started <- Sys.time()
 bulk_ok <- tryCatch(
   {
     pak::pkg_install(install, ask = FALSE, upgrade = upgrade)
@@ -172,6 +185,15 @@ if (!bulk_ok) {
     )
   }
 }
+
+install_seconds <- elapsed(install_started)
+inform(
+  "Dependencies ready after ",
+  round(install_seconds / 60, 1),
+  " min (",
+  round(restore_seconds / 60, 1),
+  " min unpacking prebuilt)"
+)
 
 installed <- rownames(utils::installed.packages())
 our_version <- function() {
@@ -281,6 +303,7 @@ runnable <- names(sources)
 # attempt the first check of a phase, or a mis-budgeted shard would make no
 # progress at all and a retry would repeat the mistake.
 checks_started <- 0L
+check_seconds <- 0
 out_of_time <- function(entry) {
   if (checks_started == 0L) {
     return(FALSE)
@@ -312,6 +335,9 @@ run_check <- function(name, phase) {
     error = function(e) e
   )
   duration <- round(as.numeric(Sys.time() - started, units = "secs"))
+  # Every check counts towards what this shard cost, including the ones that
+  # errored or timed out -- they spent the same minutes.
+  check_seconds <<- check_seconds + duration
   attr(result, "duration") <- duration
   # A check that hits the timeout is killed, and rcmdcheck surfaces that as an
   # error rather than a result object; tell it apart from a genuine crash by
@@ -505,6 +531,32 @@ for (entry in entries) {
     append = TRUE
   )
 }
+
+# ----------------------------------------------------------------- timings ---
+
+# What this shard cost, next to what the plan thought it would: the collector
+# pools these into the run's timings artifact, and the next plan calibrates its
+# cost model from them. The job's own minutes -- the runner image, R, TinyTeX,
+# the artifact downloads before this script even starts -- are not visible from
+# here; the collector reads those off the API and adds them.
+write_json(
+  list(
+    index = shard_index,
+    packages = length(members),
+    checks = checks_started,
+    install_packages = length(install),
+    restored = length(restored),
+    restore_seconds = restore_seconds,
+    install_seconds = install_seconds,
+    check_seconds = round(check_seconds, 1),
+    script_seconds = elapsed(script_started),
+    started_at = format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+    finished_at = now_utc(),
+    planned_minutes = shard$estimate_minutes,
+    planned_check_minutes = shard$check_minutes
+  ),
+  file.path(out_dir, "timing.json")
+)
 
 # ------------------------------------------------------------------ summary --
 

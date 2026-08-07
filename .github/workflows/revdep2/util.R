@@ -12,8 +12,16 @@ env_chr <- function(name, default = "") {
 }
 
 env_num <- function(name, default) {
+  value <- env_num_opt(name)
+  if (is.null(value)) default else value
+}
+
+# The same, but NULL when the variable is unset or unusable -- so a caller can
+# tell "not given" from "given the value that happens to be the default", which
+# is what an explicit knob overriding a measurement needs to know.
+env_num_opt <- function(name) {
   value <- suppressWarnings(as.numeric(env_chr(name)))
-  if (length(value) != 1 || is.na(value)) default else value
+  if (length(value) != 1 || is.na(value)) NULL else value
 }
 
 env_flag <- function(name) {
@@ -508,6 +516,153 @@ restore_prebuilt <- function(plan, lib, wanted) {
   restored
 }
 
+# --------------------------------------------------------- measured timings --
+
+# What a run measured about itself, so the next plan can stop guessing.
+#
+# The collector writes one `timings.json` per run -- a row per package (how
+# long its checks actually took here, next to what CRAN reports for it) and a
+# row per shard (job, install and check minutes, next to what the plan
+# predicted) -- and publishes it as the small `revdep2-timings` artifact,
+# separate from the report the way `revdep2-lib-index` is separate from the
+# library: a plan reads it without downloading anything else.
+#
+# Three constants come out of it, each a median over what actually happened,
+# and each NULL when the runs measured nothing usable -- the caller keeps its
+# default then. `runs` is youngest first; a younger measurement of a package
+# wins, and the constants pool every row there is.
+
+read_timings <- function(dir) {
+  if (!nzchar(dir %||% "")) {
+    return(NULL)
+  }
+  path <- file.path(dir, "timings.json")
+  if (!file.exists(path)) {
+    return(NULL)
+  }
+  tryCatch(read_json(path), error = function(e) NULL)
+}
+
+# Seconds one check of a package took here, per package, youngest run first.
+measured_check_seconds <- function(runs) {
+  out <- stats::setNames(numeric(), character())
+  for (run in runs) {
+    for (row in run$packages %||% list()) {
+      seconds <- suppressWarnings(as.numeric(row$seconds %||% NA))
+      if (
+        is.null(row$package) ||
+          row$package %in% names(out) ||
+          is.na(seconds) ||
+          seconds <= 0
+      ) {
+        next
+      }
+      out[[row$package]] <- seconds
+    }
+  }
+  out
+}
+
+# The medians the plan's cost model runs on:
+#   check_scale     - check seconds here per second CRAN reports (T_total);
+#                     these runners are not CRAN's machines
+#   setup_minutes   - per-shard fixed cost, from job start to the driver's
+#                     first line: the runner image, R, TinyTeX, the artifacts
+#   install_seconds - marginal cost of one more dependency in a shard's union
+calibration <- function(runs) {
+  scales <- numeric()
+  setups <- numeric()
+  installs <- numeric()
+  packages <- 0L
+  shards <- 0L
+  for (run in runs) {
+    for (row in run$packages %||% list()) {
+      seconds <- suppressWarnings(as.numeric(row$seconds %||% NA))
+      cran <- suppressWarnings(as.numeric(row$t_total %||% NA))
+      packages <- packages + 1L
+      if (!is.na(seconds) && !is.na(cran) && seconds > 0 && cran > 0) {
+        scales <- c(scales, seconds / cran)
+      }
+    }
+    for (row in run$shards %||% list()) {
+      shards <- shards + 1L
+      job <- suppressWarnings(as.numeric(row$job_minutes %||% NA))
+      script <- suppressWarnings(as.numeric(row$script_minutes %||% NA))
+      if (!is.na(job) && !is.na(script) && job >= script) {
+        setups <- c(setups, job - script)
+      }
+      minutes <- suppressWarnings(as.numeric(row$install_minutes %||% NA))
+      count <- suppressWarnings(as.numeric(row$install_packages %||% NA))
+      if (!is.na(minutes) && !is.na(count) && count > 0) {
+        installs <- c(installs, minutes * 60 / count)
+      }
+    }
+  }
+  median_or_null <- function(x) {
+    if (length(x) == 0) NULL else unname(stats::median(x))
+  }
+  list(
+    check_scale = median_or_null(scales),
+    setup_minutes = median_or_null(setups),
+    install_seconds = median_or_null(installs),
+    packages = packages,
+    shards = shards,
+    runs = length(runs)
+  )
+}
+
+# How long each shard's *job* took, by shard index. The driver can time itself,
+# but not the minutes before it starts -- the runner image, R, pandoc, TinyTeX,
+# the artifact downloads. That gap is exactly the per-shard setup cost the plan
+# charges for every extra shard, so it is measured here, in the one job that
+# runs after all the shards and can still ask the API about them.
+run_shard_job_minutes <- function(run_id) {
+  empty <- stats::setNames(numeric(), character())
+  if (!gh_ok() || !nzchar(gh_repo())) {
+    return(empty)
+  }
+  rows <- character()
+  for (page in 1:5) {
+    got <- gh_lines(
+      "api",
+      sprintf(
+        "repos/%s/actions/runs/%s/jobs?per_page=100&page=%d",
+        gh_repo(),
+        run_id,
+        page
+      ),
+      "--jq",
+      ".jobs[] | [.name, .started_at, .completed_at] | @tsv"
+    )
+    got <- if (is.null(got)) character() else got[nzchar(got)]
+    rows <- c(rows, got)
+    if (length(got) < 100) {
+      break
+    }
+  }
+  out <- empty
+  stamp <- function(x) {
+    as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
+  }
+  for (row in rows) {
+    fields <- strsplit(row, "\t", fixed = TRUE)[[1]]
+    if (length(fields) < 3 || !grepl("^shard [0-9]+ ", fields[[1]])) {
+      next
+    }
+    index <- sub("^shard ([0-9]+) .*$", "\\1", fields[[1]])
+    from <- stamp(fields[[2]])
+    to <- stamp(fields[[3]])
+    if (is.na(from) || is.na(to) || to < from) {
+      next
+    }
+    minutes <- as.numeric(difftime(to, from, units = "mins"))
+    # A re-run reports the later attempt last; it is the one that produced the
+    # artifact the collector is reading.
+    out[[index]] <- minutes
+  }
+  out
+}
+
 # ------------------------------------------------------------ CRAN metadata --
 
 cran_repo <- function() {
@@ -578,6 +733,8 @@ dep_fingerprint <- function(deps, db) {
 #   depfail      -- dependencies could not be installed, check not attempted
 #   deferred     -- shard deadline hit before this package was checked
 #   error        -- the shard driver itself broke on this package
+#   missing      -- the plan named it, no shard ever reported it: the job died
+#                   (assigned by the collector, never by a shard)
 classify_status <- function(status, new_issues) {
   if (status %in% c("+", "-")) {
     if (identical(status, "-") && new_issues > 0) "newly_broken" else "ok"
