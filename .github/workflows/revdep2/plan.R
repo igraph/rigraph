@@ -1245,17 +1245,19 @@ append_summary(c(
   ),
   sprintf("| Estimated runner time | ~%.0f min |", sum(load)),
   "",
-  # A run in more than one wave is waiting on lanes, not on work, and the
-  # dispatch form is where that is fixed -- so say it here, with the number.
+  # More than one wave means the run is bound by how many jobs may run at
+  # once, and that ceiling is the account's, not this workflow's: past it
+  # GitHub queues jobs no matter what `max-parallel` says, and a plan told it
+  # has more lanes than it does just cuts more shards, each paying its own
+  # setup while it waits. So state the fact and the condition, not a knob to
+  # turn.
   if (waves > 1) {
     c(
       sprintf(
-        "These %d shards run %d at a time, so %d waves. Dispatching with `max-parallel: %d` would run them in one, at roughly %.0f min instead of %.0f — worth it if that many runners are available.",
+        "These %d shards run %d at a time, so %d waves, ~%.0f min. Raising `max-parallel` shortens that only if the account can really run more jobs at once (GitHub queues past its own concurrency limit either way); a `part` split does not shorten it at all, since the parts compete for the same lanes.",
         k,
         lanes,
         waves,
-        k,
-        max(load),
         waves * max(load)
       ),
       ""

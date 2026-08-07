@@ -97,7 +97,7 @@ on:
         type: string
         default: ""
       max-parallel:
-        description: "Shards to run concurrently, and so the wave size the plan partitions into"
+        description: "Shards to run concurrently, and so the wave size the plan cuts: set it to the concurrency the account really has, never more (GitHub queues past its own limit anyway)"
         type: string
         default: ""
       refresh-baseline:
