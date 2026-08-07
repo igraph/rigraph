@@ -255,7 +255,15 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
 
             if param.is_optional and param.is_input and res:
                 res = optional_wrapper_r(res)
-
+                # For optional VERTEX parameters, add the subtraction inside the NULL check
+                if param.type == "VERTEX":
+                    # Add the subtraction at the end of the wrapped block
+                    name = get_r_parameter_name(param)
+                    res = res.rstrip()
+                    if res.endswith("}"):
+                        # Insert before the closing brace
+                        res = res[:-1] + f"  {name} <- {name} - 1\n}}"
+                    
             # Replace template placeholders
             res = indent(res).replace("%I%", get_r_parameter_name(param))
             for i, dep in enumerate(param.dependencies):
@@ -299,9 +307,13 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
             name = get_r_parameter_name(param)
             call = type.get("CALL", name)
             if call:
-                call_formatted = call.replace("%I%", name)
-                # Add spaces around arithmetic operators
-                call_formatted = re.sub(r'(\w+)(\+|\-|\*|/)(\d+)', r'\1 \2 \3', call_formatted)
+                # For optional VERTEX parameters, subtraction is done in INCONV, so just use the name
+                if param.is_optional and param.type == "VERTEX":
+                    call_formatted = name
+                else:
+                    call_formatted = call.replace("%I%", name)
+                    # Add spaces around arithmetic operators
+                    call_formatted = re.sub(r'(\w+)(\+|\-|\*|/)(\d+)', r'\1 \2 \3', call_formatted)
                 parts.append(call_formatted)
 
         # Format .Call() as multi-line with each argument on its own line

@@ -198,7 +198,7 @@ to_prufer <- function(graph) {
 #'   the graph is directed.
 #' @inheritParams rlang::args_dots_empty
 #' @param vid When the graph is disconnected, this argument specifies how to
-#'   handle the situation. When the argument is zero (the default), the sampling
+#'   handle the situation. When the argument is `NULL` (the default), the sampling
 #'   will be performed component-wise, and the result will be a spanning forest.
 #'   When the argument contains a vertex ID, only the component containing the
 #'   given vertex will be processed, and the result will be a spanning tree of the
@@ -216,10 +216,11 @@ to_prufer <- function(graph) {
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_random_spanning_tree
 sample_spanning_tree <- function(
   graph,
   ...,
-  vid = 0
+  vid = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_spanning_tree, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
@@ -230,7 +231,7 @@ sample_spanning_tree <- function(
       recover_old = c("vid"),
       match_names = c("vid"),
       match_to = c("vid"),
-      defaults = list(vid = 0),
+      defaults = list(vid = NULL),
       head_args = c("graph"),
       fn_name = "sample_spanning_tree"
     )

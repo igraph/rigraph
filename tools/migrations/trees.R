@@ -43,7 +43,7 @@ migrations <- list(
     new = function(
       graph,
       ...,
-      vid = 0
+      vid = NULL
     ) {},
     when = "3.0.0"
   )

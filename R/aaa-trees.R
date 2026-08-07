@@ -138,7 +138,7 @@ minimum_spanning_tree_unweighted_impl <- function(
 
 random_spanning_tree_impl <- function(
   graph,
-  vid = 0
+  vid = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -150,6 +150,7 @@ random_spanning_tree_impl <- function(
         call = rlang::caller_env()
       )
     }
+    vid <- vid - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -157,7 +158,7 @@ random_spanning_tree_impl <- function(
   res <- .Call(
     R_igraph_random_spanning_tree,
     graph,
-    vid - 1
+    vid
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)

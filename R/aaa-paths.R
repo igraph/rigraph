@@ -1324,6 +1324,7 @@ vertex_path_from_edge_path_impl <- function(
         call = rlang::caller_env()
       )
     }
+    start <- start - 1
   }
   edge_path <- as_igraph_es(graph, edge_path)
   mode <- switch_igraph_arg(
@@ -1339,7 +1340,7 @@ vertex_path_from_edge_path_impl <- function(
   res <- .Call(
     R_igraph_vertex_path_from_edge_path,
     graph,
-    start - 1,
+    start,
     edge_path - 1,
     mode
   )

@@ -142,6 +142,7 @@ fundamental_cycles_impl <- function(
         call = rlang::caller_env()
       )
     }
+    start <- start - 1
   }
   bfs_cutoff <- as.numeric(bfs_cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -158,7 +159,7 @@ fundamental_cycles_impl <- function(
   res <- .Call(
     R_igraph_fundamental_cycles,
     graph,
-    start - 1,
+    start,
     bfs_cutoff,
     weights
   )
