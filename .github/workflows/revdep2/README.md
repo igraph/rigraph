@@ -4,11 +4,13 @@
 package twice — once against the CRAN version, once against the checked-out
 dev version — and reports the difference,
 the way [revdepcheck](https://github.com/r-lib/revdepcheck) does,
-but spread over as many GitHub Actions jobs as the batch needs.
+but spread over as many GitHub Actions jobs as can actually run at once.
 The trade is deliberate:
 runner minutes are spent (duplicate setup, duplicate dependency installs)
-to buy wall clock,
-where the older `revdep.yaml` spends one job per package
+to buy wall clock —
+but only while a free lane makes that a trade at all,
+which is why the shard count follows `max-parallel` rather than the budget.
+The older `revdep.yaml` spends one job per package,
 and `revdepcheck::revdep_check()` spends one machine for everything.
 
 ## Topology
@@ -17,12 +19,15 @@ and `revdepcheck::revdep_check()` spends one machine for everything.
 plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
   ├─ enumerate revdeps to `depth`,       └─ R CMD build
   │    or take the retry/explicit list        + R CMD INSTALL --build
-  ├─ weigh each by CRAN's check time             → revdep2-pkg artifact
+  ├─ weigh each by what its check cost           → revdep2-pkg artifact
+  │    here last time, else by CRAN's
+  │    time scaled to this machine
   ├─ walk earlier runs youngest first:
-  │    the baseline donor, and the
-  │    prebuilt libraries to unpack
+  │    the baseline donor, the prebuilt
+  │    libraries, the measured timings
   ├─ decide per package what is reusable
-  └─ partition into shards
+  └─ partition into as many shards as
+       one wave can run, in whole waves
        → plan.json (artifact) + matrix (job output)
 
 preflight (1 job; a dry run stops before it)
@@ -43,7 +48,9 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
 collect   (1 job, if: always() past plan/build/preflight)
   ├─ merge all shard attempts (+ carried results of a retried run)
   ├─ reports via revdepcheck: README.md, problems.md, failures.md, cran.md
-  └─ manifest.json, job summary, revdep2-report + revdep2-baseline artifacts
+  ├─ pool what every check and every shard cost, job durations included
+  └─ manifest.json, job summary, revdep2-report + revdep2-baseline
+       + revdep2-timings artifacts
 ```
 
 The workflow is dispatch-only — nothing runs on push —
@@ -72,24 +79,105 @@ Deeper levels break through their intermediaries,
 so their CRAN-vs-dev comparison stays meaningful,
 and their install closures pull the intermediaries in automatically.
 
-CRAN publishes per-package check times for each flavor;
-`tools::CRAN_check_results()` carries them as `T_total`.
-The planner takes the `r-release-linux-x86_64` flavor as the proxy
-for what a check costs here:
-one check ≈ `T_total`, a package without a reusable baseline pays two,
+A package's weight is what its two checks are expected to cost *here*.
+The best answer is what they cost here last time —
+the timings artifact below carries it per package.
+Where no run has checked the package yet,
+CRAN's own number stands in:
+`tools::CRAN_check_results()` publishes per-package check times per flavor as
+`T_total`,
+the planner takes the `r-release-linux-x86_64` flavor,
+and scales it by the ratio the last runs measured between CRAN's machine and
+this one
+(0.47 in the first calibrated run: these runners check faster than CRAN
+reports).
+Packages CRAN has no timing for either get the cohort median.
+A package without a reusable baseline is checked twice, so it weighs double,
 plus a small fixed overhead.
-Packages CRAN has no timing for get the cohort median.
-The same number sizes the per-check timeout:
-`max(REVDEP2_TIMEOUT_MIN_MINUTES, REVDEP2_TIMEOUT_FACTOR × T_total)`,
-so a package gets killed relative to what it normally costs,
-with the floor covering the gap between CRAN's machines and these runners.
 
-The shard count is demand-driven:
-the smallest `K` whose average check load fits `shard-budget-minutes`
-(default 45), capped by the 250-leg matrix limit.
-A smaller budget buys wall clock with more shards;
-the per-shard setup (~6 min: R, pandoc, TinyTeX, dependency install)
-is the price of each extra shard.
+The per-check timeout stays on CRAN's number and is not calibrated:
+`max(REVDEP2_TIMEOUT_MIN_MINUTES, REVDEP2_TIMEOUT_FACTOR × T_total)`.
+A timeout is a safety net for a check that has gone wrong,
+so it should be generous where the estimate is merely typical —
+and against the local estimate that same factor would be a third as forgiving.
+
+### The shard count is bounded by the parallel capacity
+
+Only `max-parallel` shards run at once (default 20),
+so shards come in waves of that size,
+and the shard after a full wave does not start any earlier for existing:
+it waits for a lane, and arrives having paid another setup
+(runner image, R, pandoc, TinyTeX, artifact downloads —
+charged at 6 minutes until a run measures it)
+plus its own dependency install.
+Splitting past one wave therefore buys nothing and costs per shard,
+which is what a 45-minute budget did to the 771-revdep batch:
+111 shards, six waves, 6 h 16 min end to end,
+for 2233 minutes of checking that one wave of 20 shards holds comfortably.
+
+So the count is decided in two steps:
+
+* **while one wave is enough, the budget decides.**
+  `ceil(check minutes / shard-budget-minutes)`, capped at `max-parallel`.
+  Below a full wave every extra shard really does start immediately,
+  so cutting finer buys wall clock, and a small batch stays cheap.
+* **past that, the capacity decides, in whole waves.**
+  `shard-capacity-minutes` (default 80% of the shard's own deadline,
+  so 240 min) is the most check time one shard may be given
+  before its deadline starts deferring packages.
+  The plan takes `ceil(check minutes / capacity)` shards,
+  rounded up to a whole number of waves,
+  and never more than the 250-leg matrix limit.
+
+The result is `max-parallel` shards for anything that fits in one wave,
+`2 × max-parallel` for twice that, and so on —
+the capacity is filled, and nothing is split for the sake of splitting.
+
+Both steps count *check* minutes,
+but a shard also pays its setup and its installs inside the same deadline,
+and how much that is only a real partition can say
+(a shard's install union is not a per-package constant).
+So the greedy pass below runs, the heaviest shard's **full** estimate is
+compared against `REVDEP2_DEADLINE_MINUTES`,
+and a shard count that cannot hold it grows by another whole wave
+and partitions again.
+The 20% between `shard-capacity-minutes` and the deadline is the room
+this check normally finds sufficient;
+the re-partition is what happens when it is not.
+
+### When even the matrix is not enough
+
+A matrix holds at most 256 legs, so `max-shards` caps at 250,
+and 250 shards × 240 check minutes is the ceiling of one run:
+about 60 000 check minutes.
+Past that the plan **refuses to start**, with the numbers that make the case
+and the ways out — rather than dispatching a run
+that spends hours to report half its packages as `deferred`.
+
+The way out it recommends is `part`:
+
+```sh
+gh workflow run revdep2.yaml -f part=1/3
+gh workflow run revdep2.yaml -f part=2/3
+gh workflow run revdep2.yaml -f part=3/3
+```
+
+Each part is an ordinary, independent run with its own report.
+The cut is made on the weight-ordered package list, dealt round robin,
+so the parts are of similar size and no coordination is needed:
+every part re-derives the same order from the same CRAN metadata,
+and a part that is still too big refuses in turn and names a bigger `G`.
+Later parts start warmer than the first,
+because baselines and prebuilt libraries are shared through the usual
+artifacts.
+The plan prints the `G` it needs, so the number is never guessed.
+
+For scale: `tibble`'s 2398 strong reverse dependencies plan as
+250 shards in one wave (heaviest ~125 min) with `max-parallel: 250`,
+or 60 shards in three waves with the default 20 —
+roughly a quarter of what would trigger the refusal.
+Its 3266-package dependency universe, and the preflight that installs it,
+is the part of that run to worry about, not the shard count.
 
 Assignment is greedy, in two phases:
 
@@ -104,6 +192,50 @@ Assignment is greedy, in two phases:
    The install penalty (default 2.5 s per package, from a warm binary cache)
    is what pulls packages with overlapping dependency trees together,
    so a shard's install phase is amortised over packages that share it.
+
+### Calibration: the plan learns from the last runs
+
+Three constants drive everything above,
+and all three used to be guesses:
+how fast a check runs here, what a shard costs before it checks anything,
+and what one more dependency costs to install.
+Guesses compound in the wrong direction —
+an overestimate of the check load asks for more shards than the capacity can
+run,
+and every one of those shards costs a setup it never earns back.
+
+So every run now measures itself.
+Each shard records what its phases cost
+(`timing.json`: unpack, install, checks, and its own wall time),
+the collector adds what the shards' *jobs* took —
+read off the API, because the minutes before the driver starts
+are invisible from inside it and are precisely the price of one more shard —
+and publishes the lot as `revdep2-timings`,
+a small artifact next to the report the way `revdep2-lib-index`
+sits next to the library.
+
+The next plan takes the youngest few of those
+(`REVDEP2_MEASURED_MAX_RUNS`, default 3, within
+`REVDEP2_MEASURED_MAX_AGE_DAYS`, default 60, same platform),
+and reduces them to medians:
+
+| Constant | Measured as | Fallback |
+| --- | --- | --- |
+| check scale | check seconds here ÷ `T_total` | 1 |
+| setup per shard | job minutes − driver minutes | 6 min |
+| install per dependency | install minutes ÷ packages installed | 2.5 s |
+
+Per-package measurements win over the scaled CRAN number wherever a run has
+one;
+the scale only prices the packages nobody has checked here yet.
+Pooling several runs rather than trusting the newest
+keeps a small retry run — which measures a handful of packages —
+from redefining the constants on its own.
+`REVDEP2_CHECK_SCALE`, `REVDEP2_SETUP_MINUTES` and `REVDEP2_INSTALL_SECONDS`
+override the measurement where a human knows better,
+and a fresh repository with no measured run at all
+simply plans on CRAN's numbers and the fallbacks,
+which is what the workflow did before.
 
 ### Why greedy, not an exact optimisation
 
@@ -254,6 +386,7 @@ Every artifact this workflow writes:
 | `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
 | `revdep2-report` | `README.md`, `problems.md`, `failures.md`, `cran.md`, `manifest.json`, all `pkgs/` | 90 days |
 | `revdep2-baseline` | `baseline.json`, `old-rds/<p>.rds` | 90 days |
+| `revdep2-timings` | `timings.json`: check seconds per package, cost per shard | 90 days |
 
 The reports are revdepcheck's own,
 generated through its `results` injection point
@@ -279,11 +412,25 @@ revdepcheck cannot say any of that
 because the shim it is fed for an uncomparable package carries no detail;
 the manifest has it all.
 
+The summary closes with **What this run cost** —
+check speed against CRAN's numbers, shard job durations,
+setup and install cost —
+because those are the numbers the next plan is sized in,
+and they are worth reading next to the results they came from.
+
 To fetch a run's results:
 
 ```sh
 .github/workflows/revdep2/fetch.sh            # newest completed run
 .github/workflows/revdep2/fetch.sh <run-id>   # a specific one
+```
+
+It brings `timings.json` down with the report,
+so a plan can be replayed against exactly what that run measured:
+
+```sh
+REVDEP2_MEASURED_DIR=revdep OUT=plan.json \
+  Rscript .github/workflows/revdep2/plan.R
 ```
 
 To re-check only what a run could not declare ok —
@@ -306,9 +453,13 @@ so its report is complete again, not a fragment.
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
-| A shard job dies hard | its packages have no manifest entries; the collector reports what exists; `retry-run` re-plans the rest |
+| A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
+| Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
+| The batch is too big for 250 shards | the plan refuses before anything starts, and names the `part` split that fits |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
 | The baseline artifact is gone | planner reuses nothing, everything checked fresh |
+| No run has published timings yet | the plan uses CRAN's times unscaled and the fallback constants, and errs towards more shards |
+| The collector cannot read the job durations | setup stays at its default; check and install costs are still measured |
 | No earlier run has a usable library | shards still unpack this run's preflight library; only the preflight itself installs from scratch |
 | The preflight could not pack a library | the download step is skipped, shards fall back to the plan's donors and pak |
 | A donor's library artifact expires between plan and shard | that shard installs those packages itself; the run is unaffected |
@@ -335,14 +486,21 @@ at the next `if`.
 | Revdep set | `which` | — | `strong` |
 | Revdep depth (`1`, `2`, …, `all`) | `depth` | — | 1 |
 | Retry a run | `retry-run` | — | — |
+| One G-th of the revdeps, for a set too big for one run | `part` (`i/G`) | `REVDEP2_PART` | — |
 | Plan only | `dry-run` | — | false |
-| Check-time target per shard | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
-| Concurrent shards | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
+| Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
+| Concurrent shards, and so the wave size | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
+| Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |
 | Ignore reusable baselines | `refresh-baseline` | — | false |
 | Oldest reusable baseline | `baseline-max-age-days` | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
+| Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |
+| Check seconds here per CRAN second | — | `REVDEP2_CHECK_SCALE` | measured, else 1 |
+| Fixed cost of one shard | — | `REVDEP2_SETUP_MINUTES` | measured, else 6 min |
+| Cost of one more dependency install | — | `REVDEP2_INSTALL_SECONDS` | measured, else 2.5 s |
 | Per-check timeout factor | — | `REVDEP2_TIMEOUT_FACTOR` | 1.5 × CRAN time |
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 10 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
@@ -377,11 +535,17 @@ that part is new here.
 
 ## Not yet validated
 
-1. The cost model's constants
-   (45 min budget, 6 min setup, 2.5 s per dependency install, 0.5 min
-   per-package overhead) are estimates, not fits.
-   Shard manifests record actual durations, so they can be fitted
-   from real runs the way duckdb-r recalibrated `each`.
+1. Three of the cost model's constants are now fitted from the last runs
+   (check scale, per-shard setup, per-dependency install);
+   the per-package overhead (0.5 min) and the budget itself
+   are still estimates.
+   The fit is a median, not a regression:
+   install cost in particular is charged per package
+   where it plainly is not linear in the package count,
+   and a shard holding twice as many packages installs a union
+   that is much less than twice as large.
+   The measured numbers are in each run's `revdep2-timings`,
+   so a better model can be fitted whenever the linear one is seen to hurt.
 2. Bioconductor revdeps are out of scope:
    enumeration, versions and fingerprints all come from CRAN metadata.
 3. The report generation leans on unexported revdepcheck internals

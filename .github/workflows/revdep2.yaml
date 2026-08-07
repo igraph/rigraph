@@ -2,11 +2,15 @@
 # plan + build (parallel) -> preflight -> test (matrix) -> collect.
 #
 # The plan job enumerates the CRAN reverse dependencies of this package (to
-# any depth), weighs each one by the time CRAN's own Linux check machine
-# spends on it, decides which CRAN-baseline results from an earlier run are
-# still valid, and deals the packages into cost-balanced shards -- the
-# heaviest round-robin first, everything else placed where it shares the most
-# dependencies (see revdep2/README.md for the algorithm and its trade-offs).
+# any depth), weighs each one by what its check is expected to cost here --
+# what the last runs measured, or the time CRAN's own Linux check machine
+# spends on it, scaled to this one -- decides which CRAN-baseline results from
+# an earlier run are still valid, and deals the packages into cost-balanced
+# shards: the heaviest round-robin first, everything else placed where it
+# shares the most dependencies. The shard count follows the parallel capacity,
+# because only max-parallel shards ever run at once and every shard past that
+# pays another setup without starting any earlier (see revdep2/README.md for
+# the algorithm and its trade-offs).
 #
 # The build job compiles the dev version once into the binary artifact every
 # shard installs; it needs only the checkout, so it runs in parallel with
@@ -44,6 +48,8 @@
 #                     later runs to skip rebuilding what has not changed
 #   revdep2-lib-index what is in that library, so a plan can decide which runs
 #                     to take it from without downloading it
+#   revdep2-timings   what the checks and the shards actually cost, which is how
+#                     the next plan sizes its shards
 #
 # To re-check only what a run could not declare ok, dispatch again with
 # `retry-run: <run-id>`; the new report carries the old run's good results
@@ -82,12 +88,16 @@ on:
         description: "Run id of an earlier revdep2 run; re-check only its not-ok packages"
         type: string
         default: ""
+      part:
+        description: "Check one G-th of the reverse dependencies, as 'i/G'; for a set too big for one run (the plan says when, and with which G)"
+        type: string
+        default: ""
       shard-budget-minutes:
-        description: "Check-time target per shard; smaller buys wall clock with more shards"
+        description: "Check-time target per shard; smaller buys wall clock with more shards, up to one wave of max-parallel"
         type: string
         default: ""
       max-parallel:
-        description: "Shards to run concurrently"
+        description: "Shards to run concurrently, and so the wave size the plan partitions into"
         type: string
         default: ""
       refresh-baseline:
@@ -123,8 +133,13 @@ env:
   REVDEP2_WHICH: ${{ inputs.which || 'strong' }}
   REVDEP2_DEPTH: ${{ inputs.depth || '1' }}
   REVDEP2_RETRY_RUN: ${{ inputs.retry-run || '' }}
+  REVDEP2_PART: ${{ inputs.part || '' }}
   REVDEP2_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEP2_SHARD_BUDGET_MINUTES || '45' }}
   REVDEP2_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEP2_MAX_PARALLEL || '20' }}
+  # Check minutes one shard may be planned to hold. Only a batch too big for
+  # one wave of REVDEP2_MAX_PARALLEL shards ever hits it, and then it decides
+  # how many waves there are; empty means 80% of REVDEP2_DEADLINE_MINUTES.
+  REVDEP2_SHARD_CAPACITY_MINUTES: ${{ vars.REVDEP2_SHARD_CAPACITY_MINUTES || '' }}
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
   REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
@@ -499,7 +514,11 @@ jobs:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
+      # Tolerated because a run in which no shard uploaded anything is still
+      # worth a report: the collector reconciles against the plan and names
+      # every package it never heard about, which is what `retry-run` needs.
       - uses: actions/download-artifact@v7
+        continue-on-error: true
         with:
           pattern: revdep2-results-*
           path: ${{ runner.temp }}/results
@@ -515,11 +534,15 @@ jobs:
 
       - name: Collect results
         env:
+          # To read how long the shard *jobs* took -- the minutes before their
+          # driver starts, which is what an extra shard really costs.
+          GH_TOKEN: ${{ github.token }}
           PLAN: ${{ runner.temp }}/plan/plan.json
           RESULTS_DIR: ${{ runner.temp }}/results
           RETRY_DIR: ${{ runner.temp }}/retry-report
           OUT_DIR: revdep
           BASELINE_OUT: ${{ runner.temp }}/baseline
+          TIMINGS_OUT: ${{ runner.temp }}/timings
         run: |
           Rscript ./.github/workflows/revdep2/collect.R
         shell: bash
@@ -537,5 +560,17 @@ jobs:
         with:
           name: revdep2-baseline
           path: ${{ runner.temp }}/baseline
+          retention-days: 90
+          overwrite: true
+
+      # What the run cost, per package and per shard. Small on purpose and
+      # separate from the report: the next plan downloads it to calibrate its
+      # cost model, and should not have to fetch a report to do so.
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-timings
+          path: ${{ runner.temp }}/timings
+          if-no-files-found: ignore
           retention-days: 90
           overwrite: true
