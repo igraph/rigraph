@@ -64,7 +64,7 @@ Other deterministic constructors:
 
 ``` r
 make_star(10, mode = "out")
-#> ── <igraph> Out-star ──────────────────────────────────────────────── d963cf6 ──
+#> ── <igraph> Out-star ──────────────────────────────────────────────── 6cc4b83 ──
 #> ℹ directed
 #> ℹ 10 vertices · 9 edges
 #> 
@@ -74,7 +74,7 @@ make_star(10, mode = "out")
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 1 → 2   1 → 3   1 → 4   1 → 5   1 → 6   1 → 7   1 → 8   1 → 9   1 → 10 
 make_star(5, mode = "undirected")
-#> ── <igraph> Star ──────────────────────────────────────────────────── 406a4eb ──
+#> ── <igraph> Star ──────────────────────────────────────────────────── 40abd6e ──
 #> ℹ undirected
 #> ℹ 5 vertices · 4 edges
 #> 
