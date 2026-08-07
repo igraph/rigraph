@@ -17,7 +17,7 @@ undirected."><meta property="og:image" content="https://r.igraph.org/logo.png"><
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9027</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.3.9028</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,7 +180,7 @@ a graph.</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> in igraph 3.0.0.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Detected call: as_directed(graph, mode)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use instead: as_directed(graph, mode = )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 87b2fb6 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── c4a892f ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> directed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 20 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -193,7 +193,7 @@ a graph.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [19] 10 → 9  10 → 1 </span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as_undirected</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── be7b6ef ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 486518e ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -209,7 +209,7 @@ a graph.</p>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ug3</span> <span class="op">&lt;-</span> <span class="fu">as_undirected</span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ug3</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── a7f20bf ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; Ring graph ────────────────────────────────────────────── 1a8dc56 ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 10 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -238,7 +238,7 @@ a graph.</p>
 <span class="r-in"><span>  edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">length</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ug4</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── 1051191 ──</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── &lt;igraph&gt; ───────────────────────────────────────────────────────── be529ea ──</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> undirected · weighted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 10 vertices · 7 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

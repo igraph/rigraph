@@ -1,5 +1,20 @@
 # Changelog
 
+## igraph 2.3.3.9028
+
+### Bug fixes
+
+#### ci
+
+- Carry `revdep2` run ids as strings, and make its summary
+  self-contained
+  ([\#2816](https://github.com/igraph/rigraph/issues/2816)).
+
+### Continuous integration
+
+- Move the `revdep2` library artifact steps to their Node 24 releases
+  ([\#2817](https://github.com/igraph/rigraph/issues/2817)).
+
 ## igraph 2.3.3.9027
 
 ### Bug fixes
