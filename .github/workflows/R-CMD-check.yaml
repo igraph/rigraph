@@ -73,6 +73,11 @@ jobs:
     # mutate the repo. Revisit once the arm image is generally available.
     runs-on: ubuntu-26.04
 
+    # DO NOT MERGE -- this branch exists to exercise the ubuntu-26.04 R-devel
+    # entry on its own. Skipping the smoke test also skips
+    # rcc-smoke-check-matrix and rcc-suggests, which both depend on it.
+    if: false
+
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
       versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
@@ -378,12 +383,10 @@ jobs:
           matrix: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix }}
 
   rcc-full:
-    needs:
-      - rcc-smoke
-
+    # DO NOT MERGE -- `needs: rcc-smoke` and the `if:` guard on the generated
+    # matrix are removed so that this job runs on its own, without the smoke
+    # test in front of it.
     runs-on: ${{ matrix.os }}
-
-    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
 
     name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
@@ -396,12 +399,17 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
+      # DO NOT MERGE -- the generated matrix is replaced by the single entry
+      # under test, verbatim what
+      # .github/workflows/versions-matrix/action.R emits for `linux_devel`.
+      matrix:
+        include:
+          - os: ubuntu-26.04
+            r: devel
+            http-user-agent: release
 
     steps:
       - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.rcc-smoke.outputs.sha }}
 
       - name: Apply environment variables from the test matrix
         # Generic: matrix entries defined in .github/versions-matrix.R can
