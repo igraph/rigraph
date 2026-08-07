@@ -155,26 +155,6 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   list(cliques = clf[Smb$ix], Mu = Mu[Smb$ix])
 }
 
-# ---- test-migration-fixture.R -----------------------------------------------
-
-# Config equivalent to the fixture, for exercising the helper directly.
-fixture_args <- function(
-  dots,
-  current = list(weights = NULL, type = "out", directed = FALSE)
-) {
-  migrate_recover_args(
-    dots,
-    current = current,
-    recover_new = c("weights", "type", "directed"),
-    recover_old = c("weight", "kind", "directed"),
-    match_names = c("weight", "kind", "weights", "type", "directed"),
-    match_to = c("weights", "type", "weights", "type", "directed"),
-    defaults = list(weights = NULL, type = "out", directed = FALSE),
-    head_args = c("graph", "n"),
-    fn_name = "migration_fixture"
-  )
-}
-
 # ---- test-other.R -----------------------------------------------------------
 
 # A hand-built karate-club graph in the *old* igraph data format, used to test

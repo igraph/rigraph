@@ -50,6 +50,113 @@
       [1] FALSE
       
 
+# empty argument slot messages
+
+    Code
+      migration_fixture("g", 5, )
+    Output
+      $graph
+      [1] "g"
+      
+      $n
+      [1] 5
+      
+      $weights
+      NULL
+      
+      $type
+      [1] "out"
+      
+      $directed
+      [1] FALSE
+      
+
+---
+
+    Code
+      migration_fixture("g", 5, , "in", TRUE)
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, kind, directed)
+      i Use instead: migration_fixture(graph, n, type = , directed = )
+    Output
+      $graph
+      [1] "g"
+      
+      $n
+      [1] 5
+      
+      $weights
+      NULL
+      
+      $type
+      [1] "in"
+      
+      $directed
+      [1] TRUE
+      
+
+---
+
+    Code
+      migration_fixture("g", 5, , , TRUE)
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, directed)
+      i Use instead: migration_fixture(graph, n, directed = )
+    Output
+      $graph
+      [1] "g"
+      
+      $n
+      [1] 5
+      
+      $weights
+      NULL
+      
+      $type
+      [1] "out"
+      
+      $directed
+      [1] TRUE
+      
+
+---
+
+    Code
+      migration_fixture("g", 5, kind = , 1:3)
+    Condition
+      Warning:
+      Calling `migration_fixture()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture(graph, n, weight)
+      i Use instead: migration_fixture(graph, n, weights = )
+    Output
+      $graph
+      [1] "g"
+      
+      $n
+      [1] 5
+      
+      $weights
+      [1] 1 2 3
+      
+      $type
+      [1] "out"
+      
+      $directed
+      [1] FALSE
+      
+
+# a slot past the last recoverable one is surplus, empty or not
+
+    Code
+      migration_fixture("g", 5, 1, 2, 3, )
+    Condition
+      Error in `migration_fixture()`:
+      ! Too many arguments passed to `migration_fixture()`.
+
 # forbidden prefixes error only when legacy arguments engage recovery
 
     Code
@@ -274,4 +381,125 @@
     Condition
       Error in `migration_fixture()`:
       ! Too many arguments passed to `migration_fixture()`.
+
+# an argument passed at its own default still counts as supplied
+
+    Code
+      migration_fixture("g", 5, weights = NULL, 1:3)
+    Condition
+      Error in `migration_fixture()`:
+      ! Argument `weights` of `migration_fixture()` was supplied more than once.
+      i Pass it exactly once, by its new name `weights`.
+
+# shadow fixture messages
+
+    Code
+      migration_fixture_shadow("g", 1:3)
+    Condition
+      Warning:
+      Calling `migration_fixture_shadow()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture_shadow(graph, attr)
+      i Use instead: migration_fixture_shadow(graph, weights = )
+    Output
+      $graph
+      [1] "g"
+      
+      $weights
+      [1] 1 2 3
+      
+      $names
+      [1] TRUE
+      
+      $c
+      NULL
+      
+      $attr
+      
+      
+
+---
+
+    Code
+      migration_fixture_shadow("g", nam = FALSE)
+    Condition
+      Warning:
+      Calling `migration_fixture_shadow()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture_shadow(graph, names)
+      i Use instead: migration_fixture_shadow(graph, names = )
+    Output
+      $graph
+      [1] "g"
+      
+      $weights
+      NULL
+      
+      $names
+      [1] FALSE
+      
+      $c
+      NULL
+      
+      $attr
+      
+      
+
+---
+
+    Code
+      migration_fixture_shadow("g", 1, 2, 3)
+    Condition
+      Warning:
+      Calling `migration_fixture_shadow()` with positional or abbreviated arguments was deprecated in igraph 3.0.0.
+      i Detected call: migration_fixture_shadow(graph, attr, names, c)
+      i Use instead: migration_fixture_shadow(graph, weights = , names = , c = )
+    Output
+      $graph
+      [1] "g"
+      
+      $weights
+      [1] 1
+      
+      $names
+      [1] 2
+      
+      $c
+      [1] 3
+      
+      $attr
+      
+      
+
+---
+
+    Code
+      migration_fixture_shadow("g", at = "w")
+    Condition
+      Error in `migration_fixture_shadow()`:
+      ! Argument `at` matches multiple arguments of `migration_fixture_shadow()`.
+
+---
+
+    Code
+      migration_fixture_shadow("g", foo = 1)
+    Condition
+      Error in `migration_fixture_shadow()`:
+      ! Unexpected argument passed to `migration_fixture_shadow()`: `foo`.
+      i Arguments after `...` must be spelled out in full.
+
+---
+
+    Code
+      migration_fixture_shadow("g", 1, 2, 3, 4)
+    Condition
+      Error in `migration_fixture_shadow()`:
+      ! Too many arguments passed to `migration_fixture_shadow()`.
+
+---
+
+    Code
+      migration_fixture_shadow("g", 1:3, names = FALSE, 9)
+    Condition
+      Error in `migration_fixture_shadow()`:
+      ! Argument `names` of `migration_fixture_shadow()` was supplied more than once.
+      i Pass it exactly once, by its new name `names`.
 

@@ -907,24 +907,37 @@ complementer <- function(
   loops = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: complementer, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(loops = loops),
-      recover_new = c("loops"),
-      recover_old = c("loops"),
-      match_names = c("loops"),
-      match_to = c("loops"),
-      defaults = list(loops = FALSE),
-      head_args = c("graph"),
-      fn_name = "complementer"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: complementer(graph, loops)
+    .old_signature <- function(loops, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn complementer}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn complementer}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(loops)) base::list(loops = loops)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(loops)) "loops"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn complementer} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `complementer()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  complementer(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    complementer(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1014,54 +1027,43 @@ compose <- function(
   edge.attr.comb = "rename"
 ) {
   # BEGIN GENERATED ARG_HANDLE: compose, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        byname = byname,
-        graph.attr.comb = graph.attr.comb,
-        vertex.attr.comb = vertex.attr.comb,
-        edge.attr.comb = edge.attr.comb
-      ),
-      recover_new = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      recover_old = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      match_names = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      match_to = c(
-        "byname",
-        "graph.attr.comb",
-        "vertex.attr.comb",
-        "edge.attr.comb"
-      ),
-      defaults = list(
-        byname = "auto",
-        graph.attr.comb = NULL,
-        vertex.attr.comb = "rename",
-        edge.attr.comb = "rename"
-      ),
-      head_args = c("g1", "g2"),
-      fn_name = "compose"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: compose(g1, g2, byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb)
+    .old_signature <- function(byname, graph.attr.comb, vertex.attr.comb, edge.attr.comb, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn compose}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn compose}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(byname)) base::list(byname = byname),
+        if (!base::missing(graph.attr.comb)) base::list(graph.attr.comb = graph.attr.comb),
+        if (!base::missing(vertex.attr.comb)) base::list(vertex.attr.comb = vertex.attr.comb),
+        if (!base::missing(edge.attr.comb)) base::list(edge.attr.comb = edge.attr.comb)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(byname)) "byname",
+        if (!base::missing(graph.attr.comb)) "graph.attr.comb",
+        if (!base::missing(vertex.attr.comb)) "vertex.attr.comb",
+        if (!base::missing(edge.attr.comb)) "edge.attr.comb"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn compose} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `compose()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  compose(", base::paste(base::c("g1", "g2", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    compose(", base::paste(base::c("g1", "g2", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

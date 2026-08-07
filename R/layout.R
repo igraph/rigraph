@@ -728,24 +728,41 @@ layout_as_bipartite <- function(
   maxiter = 100
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_bipartite, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(hgap = hgap, vgap = vgap, maxiter = maxiter),
-      recover_new = c("hgap", "vgap", "maxiter"),
-      recover_old = c("hgap", "vgap", "maxiter"),
-      match_names = c("hgap", "vgap", "maxiter"),
-      match_to = c("hgap", "vgap", "maxiter"),
-      defaults = list(hgap = 1, vgap = 1, maxiter = 100),
-      head_args = c("graph", "types"),
-      fn_name = "layout_as_bipartite"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_as_bipartite(graph, types, hgap, vgap, maxiter)
+    .old_signature <- function(hgap, vgap, maxiter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_bipartite}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_bipartite}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(hgap)) base::list(hgap = hgap),
+        if (!base::missing(vgap)) base::list(vgap = vgap),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(hgap)) "hgap",
+        if (!base::missing(vgap)) "vgap",
+        if (!base::missing(maxiter)) "maxiter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_bipartite} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_bipartite()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_bipartite(", base::paste(base::c("graph", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_bipartite(", base::paste(base::c("graph", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -807,24 +824,39 @@ layout_as_star <- function(
   order = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_star, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(center = center, order = order),
-      recover_new = c("center", "order"),
-      recover_old = c("center", "order"),
-      match_names = c("center", "order"),
-      match_to = c("center", "order"),
-      defaults = list(center = NULL, order = NULL),
-      head_args = c("graph"),
-      fn_name = "layout_as_star"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_as_star(graph, center, order)
+    .old_signature <- function(center, order, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_star}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_star}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(center)) base::list(center = center),
+        if (!base::missing(order)) base::list(order = order)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(center)) "center",
+        if (!base::missing(order)) "order"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_star} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_star()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_star(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_star(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -922,36 +954,47 @@ layout_as_tree <- function(
   flip.y = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_as_tree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        root = root,
-        circular = circular,
-        rootlevel = rootlevel,
-        mode = mode,
-        flip.y = flip.y
-      ),
-      recover_new = c("root", "circular", "rootlevel", "mode", "flip.y"),
-      recover_old = c("root", "circular", "rootlevel", "mode", "flip.y"),
-      match_names = c("root", "circular", "rootlevel", "mode", "flip.y"),
-      match_to = c("root", "circular", "rootlevel", "mode", "flip.y"),
-      defaults = list(
-        root = numeric(),
-        circular = FALSE,
-        rootlevel = numeric(),
-        mode = c("out", "in", "all"),
-        flip.y = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_as_tree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "ro", "roo"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_as_tree}.")
+    # Pre-3.0.0 signature: layout_as_tree(graph, root, circular, rootlevel, mode, flip.y)
+    .old_signature <- function(root, circular, rootlevel, mode, flip.y, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_as_tree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_as_tree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(root)) base::list(root = root),
+        if (!base::missing(circular)) base::list(circular = circular),
+        if (!base::missing(rootlevel)) base::list(rootlevel = rootlevel),
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(flip.y)) base::list(flip.y = flip.y)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(root)) "root",
+        if (!base::missing(circular)) "circular",
+        if (!base::missing(rootlevel)) "rootlevel",
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(flip.y)) "flip.y"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_as_tree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_as_tree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_as_tree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_as_tree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1239,24 +1282,41 @@ layout_on_grid <- function(
   dim = 2
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_on_grid, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(width = width, height = height, dim = dim),
-      recover_new = c("width", "height", "dim"),
-      recover_old = c("width", "height", "dim"),
-      match_names = c("width", "height", "dim"),
-      match_to = c("width", "height", "dim"),
-      defaults = list(width = 0, height = 0, dim = 2),
-      head_args = c("graph"),
-      fn_name = "layout_on_grid"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_on_grid(graph, width, height, dim)
+    .old_signature <- function(width, height, dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_on_grid}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_on_grid}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(width)) base::list(width = width),
+        if (!base::missing(height)) base::list(height = height),
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(width)) "width",
+        if (!base::missing(height)) "height",
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_on_grid} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_on_grid()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_on_grid(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_on_grid(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1363,24 +1423,37 @@ layout_randomly <- function(
   dim = c(2, 3)
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_randomly, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(dim = dim),
-      recover_new = c("dim"),
-      recover_old = c("dim"),
-      match_names = c("dim"),
-      match_to = c("dim"),
-      defaults = list(dim = c(2, 3)),
-      head_args = c("graph"),
-      fn_name = "layout_randomly"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_randomly(graph, dim)
+    .old_signature <- function(dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_randomly}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_randomly}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_randomly} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_randomly()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_randomly(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_randomly(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1550,84 +1623,55 @@ layout_with_dh <- function(
   weight.node.edge.dist = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        coords = coords,
-        maxiter = maxiter,
-        fineiter = fineiter,
-        cool.fact = cool.fact,
-        weight.node.dist = weight.node.dist,
-        weight.border = weight.border,
-        weight.edge.lengths = weight.edge.lengths,
-        weight.edge.crossings = weight.edge.crossings,
-        weight.node.edge.dist = weight.node.edge.dist
-      ),
-      recover_new = c(
-        "coords",
-        "maxiter",
-        "fineiter",
-        "cool.fact",
-        "weight.node.dist",
-        "weight.border",
-        "weight.edge.lengths",
-        "weight.edge.crossings",
-        "weight.node.edge.dist"
-      ),
-      recover_old = c(
-        "coords",
-        "maxiter",
-        "fineiter",
-        "cool.fact",
-        "weight.node.dist",
-        "weight.border",
-        "weight.edge.lengths",
-        "weight.edge.crossings",
-        "weight.node.edge.dist"
-      ),
-      match_names = c(
-        "coords",
-        "maxiter",
-        "fineiter",
-        "cool.fact",
-        "weight.node.dist",
-        "weight.border",
-        "weight.edge.lengths",
-        "weight.edge.crossings",
-        "weight.node.edge.dist"
-      ),
-      match_to = c(
-        "coords",
-        "maxiter",
-        "fineiter",
-        "cool.fact",
-        "weight.node.dist",
-        "weight.border",
-        "weight.edge.lengths",
-        "weight.edge.crossings",
-        "weight.node.edge.dist"
-      ),
-      defaults = list(
-        coords = NULL,
-        maxiter = 10,
-        fineiter = NULL,
-        cool.fact = 0.75,
-        weight.node.dist = 1,
-        weight.border = 0,
-        weight.edge.lengths = NULL,
-        weight.edge.crossings = NULL,
-        weight.node.edge.dist = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_dh"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_dh}.")
+    # Pre-3.0.0 signature: layout_with_dh(graph, coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist)
+    .old_signature <- function(coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_dh}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_dh}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(fineiter)) base::list(fineiter = fineiter),
+        if (!base::missing(cool.fact)) base::list(cool.fact = cool.fact),
+        if (!base::missing(weight.node.dist)) base::list(weight.node.dist = weight.node.dist),
+        if (!base::missing(weight.border)) base::list(weight.border = weight.border),
+        if (!base::missing(weight.edge.lengths)) base::list(weight.edge.lengths = weight.edge.lengths),
+        if (!base::missing(weight.edge.crossings)) base::list(weight.edge.crossings = weight.edge.crossings),
+        if (!base::missing(weight.node.edge.dist)) base::list(weight.node.edge.dist = weight.node.edge.dist)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(fineiter)) "fineiter",
+        if (!base::missing(cool.fact)) "cool.fact",
+        if (!base::missing(weight.node.dist)) "weight.node.dist",
+        if (!base::missing(weight.border)) "weight.border",
+        if (!base::missing(weight.edge.lengths)) "weight.edge.lengths",
+        if (!base::missing(weight.edge.crossings)) "weight.edge.crossings",
+        if (!base::missing(weight.node.edge.dist)) "weight.node.edge.dist"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_dh} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_dh()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_dh(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_dh(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -1777,137 +1821,73 @@ layout_with_fr <- function(
   maxiter = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("g", "gr"),
-      "layout_with_fr"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        coords = coords,
-        dim = dim,
-        niter = niter,
-        start.temp = start.temp,
-        grid = grid,
-        weights = weights,
-        minx = minx,
-        maxx = maxx,
-        miny = miny,
-        maxy = maxy,
-        minz = minz,
-        maxz = maxz,
-        coolexp = coolexp,
-        maxdelta = maxdelta,
-        area = area,
-        repulserad = repulserad,
-        maxiter = maxiter
-      ),
-      recover_new = c(
-        "coords",
-        "dim",
-        "niter",
-        "start.temp",
-        "grid",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "coolexp",
-        "maxdelta",
-        "area",
-        "repulserad",
-        "maxiter"
-      ),
-      recover_old = c(
-        "coords",
-        "dim",
-        "niter",
-        "start.temp",
-        "grid",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "coolexp",
-        "maxdelta",
-        "area",
-        "repulserad",
-        "maxiter"
-      ),
-      match_names = c(
-        "coords",
-        "dim",
-        "niter",
-        "start.temp",
-        "grid",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "coolexp",
-        "maxdelta",
-        "area",
-        "repulserad",
-        "maxiter"
-      ),
-      match_to = c(
-        "coords",
-        "dim",
-        "niter",
-        "start.temp",
-        "grid",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "coolexp",
-        "maxdelta",
-        "area",
-        "repulserad",
-        "maxiter"
-      ),
-      defaults = list(
-        coords = NULL,
-        dim = c(2, 3),
-        niter = 500,
-        start.temp = NULL,
-        grid = c("auto", "grid", "nogrid"),
-        weights = NULL,
-        minx = NULL,
-        maxx = NULL,
-        miny = NULL,
-        maxy = NULL,
-        minz = NULL,
-        maxz = NULL,
-        coolexp = deprecated(),
-        maxdelta = deprecated(),
-        area = deprecated(),
-        repulserad = deprecated(),
-        maxiter = deprecated()
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_fr"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g", "gr"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn layout_with_fr}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "mi", "min", "ma", "max"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_fr}.")
+    # Pre-3.0.0 signature: layout_with_fr(graph, coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter)
+    .old_signature <- function(coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_fr}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_fr}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(dim)) base::list(dim = dim),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(start.temp)) base::list(start.temp = start.temp),
+        if (!base::missing(grid)) base::list(grid = grid),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(minx)) base::list(minx = minx),
+        if (!base::missing(maxx)) base::list(maxx = maxx),
+        if (!base::missing(miny)) base::list(miny = miny),
+        if (!base::missing(maxy)) base::list(maxy = maxy),
+        if (!base::missing(minz)) base::list(minz = minz),
+        if (!base::missing(maxz)) base::list(maxz = maxz),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(maxdelta)) base::list(maxdelta = maxdelta),
+        if (!base::missing(area)) base::list(area = area),
+        if (!base::missing(repulserad)) base::list(repulserad = repulserad),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(dim)) "dim",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(start.temp)) "start.temp",
+        if (!base::missing(grid)) "grid",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(minx)) "minx",
+        if (!base::missing(maxx)) "maxx",
+        if (!base::missing(miny)) "miny",
+        if (!base::missing(maxy)) "maxy",
+        if (!base::missing(minz)) "minz",
+        if (!base::missing(maxz)) "maxz",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(maxdelta)) "maxdelta",
+        if (!base::missing(area)) "area",
+        if (!base::missing(repulserad)) "repulserad",
+        if (!base::missing(maxiter)) "maxiter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_fr} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_fr()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_fr(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2083,36 +2063,47 @@ layout_with_gem <- function(
   temp.init = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        coords = coords,
-        maxiter = maxiter,
-        temp.max = temp.max,
-        temp.min = temp.min,
-        temp.init = temp.init
-      ),
-      recover_new = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-      recover_old = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-      match_names = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-      match_to = c("coords", "maxiter", "temp.max", "temp.min", "temp.init"),
-      defaults = list(
-        coords = NULL,
-        maxiter = NULL,
-        temp.max = NULL,
-        temp.min = 0.1,
-        temp.init = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_gem"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("t", "te", "tem", "temp", "temp.", "temp.m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_gem}.")
+    # Pre-3.0.0 signature: layout_with_gem(graph, coords, maxiter, temp.max, temp.min, temp.init)
+    .old_signature <- function(coords, maxiter, temp.max, temp.min, temp.init, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_gem}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_gem}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(temp.max)) base::list(temp.max = temp.max),
+        if (!base::missing(temp.min)) base::list(temp.min = temp.min),
+        if (!base::missing(temp.init)) base::list(temp.init = temp.init)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(temp.max)) "temp.max",
+        if (!base::missing(temp.min)) "temp.min",
+        if (!base::missing(temp.init)) "temp.init"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_gem} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_gem()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_gem(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_gem(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2206,72 +2197,51 @@ layout_with_graphopt <- function(
   max.sa.movement = 5
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_graphopt, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        start = start,
-        niter = niter,
-        charge = charge,
-        mass = mass,
-        spring.length = spring.length,
-        spring.constant = spring.constant,
-        max.sa.movement = max.sa.movement
-      ),
-      recover_new = c(
-        "start",
-        "niter",
-        "charge",
-        "mass",
-        "spring.length",
-        "spring.constant",
-        "max.sa.movement"
-      ),
-      recover_old = c(
-        "start",
-        "niter",
-        "charge",
-        "mass",
-        "spring.length",
-        "spring.constant",
-        "max.sa.movement"
-      ),
-      match_names = c(
-        "start",
-        "niter",
-        "charge",
-        "mass",
-        "spring.length",
-        "spring.constant",
-        "max.sa.movement"
-      ),
-      match_to = c(
-        "start",
-        "niter",
-        "charge",
-        "mass",
-        "spring.length",
-        "spring.constant",
-        "max.sa.movement"
-      ),
-      defaults = list(
-        start = NULL,
-        niter = 500,
-        charge = 0.001,
-        mass = 30,
-        spring.length = 0,
-        spring.constant = 1,
-        max.sa.movement = 5
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_graphopt"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "m", "ma", "sp", "spr", "spri", "sprin", "spring", "spring."))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_graphopt}.")
+    # Pre-3.0.0 signature: layout_with_graphopt(graph, start, niter, charge, mass, spring.length, spring.constant, max.sa.movement)
+    .old_signature <- function(start, niter, charge, mass, spring.length, spring.constant, max.sa.movement, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_graphopt}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_graphopt}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(start)) base::list(start = start),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(charge)) base::list(charge = charge),
+        if (!base::missing(mass)) base::list(mass = mass),
+        if (!base::missing(spring.length)) base::list(spring.length = spring.length),
+        if (!base::missing(spring.constant)) base::list(spring.constant = spring.constant),
+        if (!base::missing(max.sa.movement)) base::list(max.sa.movement = max.sa.movement)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(start)) "start",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(charge)) "charge",
+        if (!base::missing(mass)) "mass",
+        if (!base::missing(spring.length)) "spring.length",
+        if (!base::missing(spring.constant)) "spring.constant",
+        if (!base::missing(max.sa.movement)) "max.sa.movement"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_graphopt} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_graphopt()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_graphopt(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_graphopt(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2392,132 +2362,71 @@ layout_with_kk <- function(
   start = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_kk, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        coords = coords,
-        dim = dim,
-        maxiter = maxiter,
-        epsilon = epsilon,
-        kkconst = kkconst,
-        weights = weights,
-        minx = minx,
-        maxx = maxx,
-        miny = miny,
-        maxy = maxy,
-        minz = minz,
-        maxz = maxz,
-        niter = niter,
-        sigma = sigma,
-        initemp = initemp,
-        coolexp = coolexp,
-        start = start
-      ),
-      recover_new = c(
-        "coords",
-        "dim",
-        "maxiter",
-        "epsilon",
-        "kkconst",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "niter",
-        "sigma",
-        "initemp",
-        "coolexp",
-        "start"
-      ),
-      recover_old = c(
-        "coords",
-        "dim",
-        "maxiter",
-        "epsilon",
-        "kkconst",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "niter",
-        "sigma",
-        "initemp",
-        "coolexp",
-        "start"
-      ),
-      match_names = c(
-        "coords",
-        "dim",
-        "maxiter",
-        "epsilon",
-        "kkconst",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "niter",
-        "sigma",
-        "initemp",
-        "coolexp",
-        "start"
-      ),
-      match_to = c(
-        "coords",
-        "dim",
-        "maxiter",
-        "epsilon",
-        "kkconst",
-        "weights",
-        "minx",
-        "maxx",
-        "miny",
-        "maxy",
-        "minz",
-        "maxz",
-        "niter",
-        "sigma",
-        "initemp",
-        "coolexp",
-        "start"
-      ),
-      defaults = list(
-        coords = NULL,
-        dim = c(2, 3),
-        maxiter = NULL,
-        epsilon = 0,
-        kkconst = NULL,
-        weights = NULL,
-        minx = NULL,
-        maxx = NULL,
-        miny = NULL,
-        maxy = NULL,
-        minz = NULL,
-        maxz = NULL,
-        niter = deprecated(),
-        sigma = deprecated(),
-        initemp = deprecated(),
-        coolexp = deprecated(),
-        start = deprecated()
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_kk"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "ma", "max", "mi", "min", "s"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_kk}.")
+    # Pre-3.0.0 signature: layout_with_kk(graph, coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start)
+    .old_signature <- function(coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_kk}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_kk}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(coords)) base::list(coords = coords),
+        if (!base::missing(dim)) base::list(dim = dim),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(epsilon)) base::list(epsilon = epsilon),
+        if (!base::missing(kkconst)) base::list(kkconst = kkconst),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(minx)) base::list(minx = minx),
+        if (!base::missing(maxx)) base::list(maxx = maxx),
+        if (!base::missing(miny)) base::list(miny = miny),
+        if (!base::missing(maxy)) base::list(maxy = maxy),
+        if (!base::missing(minz)) base::list(minz = minz),
+        if (!base::missing(maxz)) base::list(maxz = maxz),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(sigma)) base::list(sigma = sigma),
+        if (!base::missing(initemp)) base::list(initemp = initemp),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(start)) base::list(start = start)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(coords)) "coords",
+        if (!base::missing(dim)) "dim",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(epsilon)) "epsilon",
+        if (!base::missing(kkconst)) "kkconst",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(minx)) "minx",
+        if (!base::missing(maxx)) "maxx",
+        if (!base::missing(miny)) "miny",
+        if (!base::missing(maxy)) "maxy",
+        if (!base::missing(minz)) "minz",
+        if (!base::missing(maxz)) "maxz",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(sigma)) "sigma",
+        if (!base::missing(initemp)) "initemp",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(start)) "start"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_kk} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_kk()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_kk(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_kk(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -2692,72 +2601,51 @@ layout_with_lgl <- function(
   root = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_lgl, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        maxiter = maxiter,
-        maxdelta = maxdelta,
-        area = area,
-        coolexp = coolexp,
-        repulserad = repulserad,
-        cellsize = cellsize,
-        root = root
-      ),
-      recover_new = c(
-        "maxiter",
-        "maxdelta",
-        "area",
-        "coolexp",
-        "repulserad",
-        "cellsize",
-        "root"
-      ),
-      recover_old = c(
-        "maxiter",
-        "maxdelta",
-        "area",
-        "coolexp",
-        "repulserad",
-        "cellsize",
-        "root"
-      ),
-      match_names = c(
-        "maxiter",
-        "maxdelta",
-        "area",
-        "coolexp",
-        "repulserad",
-        "cellsize",
-        "root"
-      ),
-      match_to = c(
-        "maxiter",
-        "maxdelta",
-        "area",
-        "coolexp",
-        "repulserad",
-        "cellsize",
-        "root"
-      ),
-      defaults = list(
-        maxiter = 150,
-        maxdelta = NULL,
-        area = NULL,
-        coolexp = 1.5,
-        repulserad = NULL,
-        cellsize = NULL,
-        root = NULL
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_lgl"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max", "c", "r"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_lgl}.")
+    # Pre-3.0.0 signature: layout_with_lgl(graph, maxiter, maxdelta, area, coolexp, repulserad, cellsize, root)
+    .old_signature <- function(maxiter, maxdelta, area, coolexp, repulserad, cellsize, root, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_lgl}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_lgl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(maxdelta)) base::list(maxdelta = maxdelta),
+        if (!base::missing(area)) base::list(area = area),
+        if (!base::missing(coolexp)) base::list(coolexp = coolexp),
+        if (!base::missing(repulserad)) base::list(repulserad = repulserad),
+        if (!base::missing(cellsize)) base::list(cellsize = cellsize),
+        if (!base::missing(root)) base::list(root = root)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(maxdelta)) "maxdelta",
+        if (!base::missing(area)) "area",
+        if (!base::missing(coolexp)) "coolexp",
+        if (!base::missing(repulserad)) "repulserad",
+        if (!base::missing(cellsize)) "cellsize",
+        if (!base::missing(root)) "root"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_lgl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_lgl()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_lgl(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_lgl(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3122,66 +3010,47 @@ layout_with_sugiyama <- function(
   attributes = c("default", "all", "none")
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_sugiyama, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        layers = layers,
-        hgap = hgap,
-        vgap = vgap,
-        maxiter = maxiter,
-        weights = weights,
-        attributes = attributes
-      ),
-      recover_new = c(
-        "layers",
-        "hgap",
-        "vgap",
-        "maxiter",
-        "weights",
-        "attributes"
-      ),
-      recover_old = c(
-        "layers",
-        "hgap",
-        "vgap",
-        "maxiter",
-        "weights",
-        "attributes"
-      ),
-      match_names = c(
-        "layers",
-        "hgap",
-        "vgap",
-        "maxiter",
-        "weights",
-        "attributes"
-      ),
-      match_to = c(
-        "layers",
-        "hgap",
-        "vgap",
-        "maxiter",
-        "weights",
-        "attributes"
-      ),
-      defaults = list(
-        layers = NULL,
-        hgap = 1,
-        vgap = 1,
-        maxiter = 100,
-        weights = NULL,
-        attributes = c("default", "all", "none")
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_sugiyama"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_with_sugiyama(graph, layers, hgap, vgap, maxiter, weights, attributes)
+    .old_signature <- function(layers, hgap, vgap, maxiter, weights, attributes, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_sugiyama}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_sugiyama}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(layers)) base::list(layers = layers),
+        if (!base::missing(hgap)) base::list(hgap = hgap),
+        if (!base::missing(vgap)) base::list(vgap = vgap),
+        if (!base::missing(maxiter)) base::list(maxiter = maxiter),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(attributes)) base::list(attributes = attributes)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(layers)) "layers",
+        if (!base::missing(hgap)) "hgap",
+        if (!base::missing(vgap)) "vgap",
+        if (!base::missing(maxiter)) "maxiter",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(attributes)) "attributes"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_sugiyama} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_sugiyama()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_sugiyama(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_sugiyama(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3362,24 +3231,37 @@ merge_coords <- function(
   method = "dla"
 ) {
   # BEGIN GENERATED ARG_HANDLE: merge_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(method = method),
-      recover_new = c("method"),
-      recover_old = c("method"),
-      match_names = c("method"),
-      match_to = c("method"),
-      defaults = list(method = "dla"),
-      head_args = c("graphs", "layouts"),
-      fn_name = "merge_coords"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: merge_coords(graphs, layouts, method)
+    .old_signature <- function(method, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn merge_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn merge_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(method)) base::list(method = method)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(method)) "method"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn merge_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `merge_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  merge_coords(", base::paste(base::c("graphs", "layouts", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    merge_coords(", base::paste(base::c("graphs", "layouts", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3429,38 +3311,49 @@ norm_coords <- function(
   zmax = 1
 ) {
   # BEGIN GENERATED ARG_HANDLE: norm_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        xmin = xmin,
-        xmax = xmax,
-        ymin = ymin,
-        ymax = ymax,
-        zmin = zmin,
-        zmax = zmax
-      ),
-      recover_new = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-      recover_old = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-      match_names = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-      match_to = c("xmin", "xmax", "ymin", "ymax", "zmin", "zmax"),
-      defaults = list(
-        xmin = -1,
-        xmax = 1,
-        ymin = -1,
-        ymax = 1,
-        zmin = -1,
-        zmax = 1
-      ),
-      head_args = c("layout"),
-      fn_name = "norm_coords"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("x", "xm", "y", "ym", "z", "zm"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn norm_coords}.")
+    # Pre-3.0.0 signature: norm_coords(layout, xmin, xmax, ymin, ymax, zmin, zmax)
+    .old_signature <- function(xmin, xmax, ymin, ymax, zmin, zmax, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn norm_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn norm_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(xmin)) base::list(xmin = xmin),
+        if (!base::missing(xmax)) base::list(xmax = xmax),
+        if (!base::missing(ymin)) base::list(ymin = ymin),
+        if (!base::missing(ymax)) base::list(ymax = ymax),
+        if (!base::missing(zmin)) base::list(zmin = zmin),
+        if (!base::missing(zmax)) base::list(zmax = zmax)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(xmin)) "xmin",
+        if (!base::missing(xmax)) "xmax",
+        if (!base::missing(ymin)) "ymin",
+        if (!base::missing(ymax)) "ymax",
+        if (!base::missing(zmin)) "zmin",
+        if (!base::missing(zmax)) "zmax"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn norm_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `norm_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  norm_coords(", base::paste(base::c("layout", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    norm_coords(", base::paste(base::c("layout", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -3754,36 +3647,45 @@ layout_with_drl <- function(
   dim = c(2, 3)
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_drl, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        use.seed = use.seed,
-        seed = seed,
-        options = options,
-        weights = weights,
-        dim = dim
-      ),
-      recover_new = c("use.seed", "seed", "options", "weights", "dim"),
-      recover_old = c("use.seed", "seed", "options", "weights", "dim"),
-      match_names = c("use.seed", "seed", "options", "weights", "dim"),
-      match_to = c("use.seed", "seed", "options", "weights", "dim"),
-      defaults = list(
-        use.seed = FALSE,
-        seed = NULL,
-        options = NULL,
-        weights = NULL,
-        dim = c(2, 3)
-      ),
-      head_args = c("graph"),
-      fn_name = "layout_with_drl"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: layout_with_drl(graph, use.seed, seed, options, weights, dim)
+    .old_signature <- function(use.seed, seed, options, weights, dim, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn layout_with_drl}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn layout_with_drl}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(use.seed)) base::list(use.seed = use.seed),
+        if (!base::missing(seed)) base::list(seed = seed),
+        if (!base::missing(options)) base::list(options = options),
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(dim)) base::list(dim = dim)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(use.seed)) "use.seed",
+        if (!base::missing(seed)) "seed",
+        if (!base::missing(options)) "options",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(dim)) "dim"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_drl} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `layout_with_drl()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  layout_with_drl(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    layout_with_drl(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

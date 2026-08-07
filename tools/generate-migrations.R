@@ -12,9 +12,11 @@
 #
 # The spliced block recovers a legacy call to the pre-migration signature (after
 # `...` was inserted) -- both positional values and (partially) named ones -- and
-# emits a single soft-deprecation. There is no handler function and no caller-env
-# threading: the `lifecycle::deprecate_soft()` call sits directly in the host
-# function, so its default `user_env` already resolves to the user's frame.
+# emits a single soft-deprecation. There is no handler function and no runtime
+# matcher: the block declares the old signature as a local `.old_signature()` and
+# matches `...` against it, so base R does the matching, and everything else is
+# written out per argument. The `lifecycle::deprecate_soft()` call sits directly
+# in the host function, so its default `user_env` resolves to the user's frame.
 #
 # Usage:
 #   Rscript tools/generate-migrations.R
@@ -370,8 +372,8 @@ normalise_migration <- function(fn, entry) {
   #    with legacy arguments in `...`: the tag steals the head slot,
   #    positionals shift into the wrong formals, and the recovery layer
   #    would rescue a never-valid call behind a soft-deprecation warning.
-  #    Those *forbidden prefixes* are enumerable: emit a runtime guard
-  #    (migrate_check_call_tags()) inside the recovery gate, so the tag is
+  #    Those *forbidden prefixes* are enumerable: emit a guard inside the
+  #    recovery gate, so the tag is
   #    rejected only when `...` is non-empty. Tags that prefix two head
   #    args stay out of the list -- base R still errors on those by itself.
   renamed_old <- entry$recover_old[renamed]
@@ -433,101 +435,230 @@ quote_items <- function(x) {
   paste0('"', x, '"')
 }
 
-# Render one `name = ctor(items)` argument of the migrate_recover_args() call,
-# laid out exactly as `air` (line-width 80) formats it: kept on one line when it
-# fits, otherwise wrapped one item per line. `splice_blocks()` prepends 2 spaces
-# of indentation to every block line, so the fit test accounts for that; the
-# call's own args sit at 4 spaces (final 6) and wrapped items at 6 (final 8).
-# `empty` is the literal emitted for zero items (e.g. "character(0)", "list()").
-render_call_arg <- function(name, ctor, items, empty, trailing = ",") {
-  arg_indent <- strrep(" ", 4L)
+# Abbreviations that were ambiguous under the pre-migration matcher: proper
+# prefixes matching more than one of the old and new names at once. Base R only
+# ever sees the old names in `.old_signature()`, so it would resolve some of
+# these silently (e.g. `at` for `as_adjacency_matrix(attr =)`, which the
+# migration renamed to `weights` while a deprecated `attr` formal remains) and
+# reject the rest with a message that does not name the argument. The block
+# tests the dot tags against this list first, so both keep the message they had.
+ambiguous_tags <- function(entry) {
+  names <- entry$match_names
+  if (length(names) == 0L) {
+    return(character(0))
+  }
+  prefixes <- unique(unlist(lapply(names, function(nm) {
+    if (nchar(nm) > 1L) {
+      substring(nm, 1L, seq_len(nchar(nm) - 1L))
+    } else {
+      character(0)
+    }
+  })))
+  prefixes <- setdiff(prefixes, names)
+  prefixes[vapply(
+    prefixes,
+    function(p) {
+      j <- charmatch(p, names)
+      !is.na(j) && j == 0L
+    },
+    logical(1)
+  )]
+}
+
+# `base::c("a", "b")`, or `base::character(0)` for nothing.
+render_vector <- function(items) {
   if (length(items) == 0L) {
-    return(paste0(arg_indent, name, " = ", empty, trailing))
+    return("base::character(0)")
   }
-  one_line <- paste0(
-    arg_indent,
-    name,
-    " = ",
-    ctor,
-    "(",
-    paste(items, collapse = ", "),
-    ")",
-    trailing
-  )
-  if (nchar(one_line) + 2L <= 80L) {
-    return(one_line)
-  }
-  item_indent <- strrep(" ", 6L)
-  n <- length(items)
-  c(
-    paste0(arg_indent, name, " = ", ctor, "("),
-    # paste0() would turn character(0) into "," for a single item
-    if (n > 1L) paste0(item_indent, items[-n], ","),
-    paste0(item_indent, items[[n]]),
-    paste0(arg_indent, ")", trailing)
-  )
+  paste0("base::c(", paste(items, collapse = ", "), ")")
 }
 
 # Render the inline ARG_HANDLE block spliced into a function body between the
-# markers. It is laid out exactly as `air` formats it so regeneration leaves no
-# drift in the (hand-written) host file.
+# markers.
 #
-# Shape: the per-function configuration is passed to `migrate_recover_args()`
-# (a hand-written, debuggable helper) which returns the recovered values plus the
-# deprecation message parts. The host frame then assigns the recovered values
-# over its own locals and emits a single `lifecycle::deprecate_soft()`. Because
-# that call sits directly in the host function, its default `user_env`
-# (caller_env(2)) resolves to the user's frame -- no `.user_env` threading needed.
+# Shape: the recovery is written out in full, per function, with no runtime
+# matcher behind it. `.old_signature()` carries the pre-migration tail formals
+# and `...` is matched against it -- so base R's own argument matching does the
+# recovery, exactly as it did before the migration: positionally, by partial
+# name, and leaving an empty argument slot (a trailing comma, or magrittr's
+# `f(., , x = 1)`) missing while it still consumes its position (#2646). Each
+# recoverable argument then gets one unrolled `if (!base::missing(<old>))` line,
+# so what a call does to its arguments is readable in the function itself.
+#
+# `.old_signature()` takes a trailing `...` of its own so that an unknown or
+# surplus argument lands there instead of tripping base R's "unused argument";
+# it is reported with the same message the runtime matcher used to produce. The
+# tags are read off `substitute(...())`, which forces nothing -- a surplus slot
+# may be empty.
+#
+# An argument supplied both ways -- recovered out of `...`, and passed under its
+# new name past `...` -- is rejected the same unrolled way, one `base::missing()`
+# per recoverable argument in the *host* frame. `missing()` answers "was this
+# passed" directly, so the block needs neither the defaults nor a comparison
+# against them, and an argument passed its own default value is caught too.
+#
+# Every call is written `base::`-qualified (`cli::`, `lifecycle::` for the rest).
+# The block is spliced into someone else's function body, where a formal may be
+# named `names` or `c` -- and a *missing* formal is worse than a shadowing one,
+# since R forces the promise while looking for a function to call and reports
+# `argument "names" is missing`. Qualifying unconditionally keeps every block the
+# same shape instead of making it depend on the signature. Operators (`$`, `[[`,
+# `&&`, `>`) and `...length()` are left alone: they cannot be shadowed by a
+# formal.
 #
 # The whole thing is guarded by `...length() > 0L` so the common path (a correct
-# new-API call with nothing in `...`) skips the helper call entirely.
+# new-API call with nothing in `...`) skips it entirely, and the deprecation is
+# additionally gated on something having been recovered -- a `...` of nothing but
+# empty slots leaves the formals at their defaults and must not warn.
+#
+# The block opens with `# fmt: skip` so `air` leaves it alone: the layout is this
+# generator's, which buys back the vertical space the unrolling costs and drops
+# the code that used to predict how `air` would wrap.
 render_arg_handle <- function(entry) {
-  keep <- intersect(entry$tail, names(entry$defaults))
-  default_items <- vapply(
-    keep,
-    function(nm) paste0(nm, " = ", entry$defaults[[nm]]),
-    character(1),
-    USE.NAMES = FALSE
-  )
-  guard <- character(0)
+  fn <- entry$fn
+  old <- entry$recover_old
+  new <- entry$recover_new
+
+  guards <- character(0)
   if (length(entry$forbidden_tags)) {
-    quoted <- quote_items(entry$forbidden_tags)
-    joined <- paste0("    c(", paste(quoted, collapse = ", "), "),")
-    if (nchar(joined) + 2L > 80L) {
-      joined <- c(
-        "    c(",
-        paste0("      ", quoted, c(rep(",", length(quoted) - 1L), "")),
-        "    ),"
+    guards <- c(
+      guards,
+      paste0(
+        "  .arg_forbidden <- base::intersect(base::names(base::sys.call()), ",
+        render_vector(quote_items(entry$forbidden_tags)),
+        ")"
+      ),
+      paste0(
+        "  if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c(\"Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn ",
+        fn,
+        "}.\", i = \"Spell out the full argument name.\"))"
       )
-    }
-    guard <- c(
-      "  migrate_check_call_tags(",
-      "    sys.call(),",
-      joined,
-      paste0("    \"", entry$fn, "\""),
-      "  )"
     )
   }
+  ambiguous <- ambiguous_tags(entry)
+  if (length(ambiguous)) {
+    guards <- c(
+      guards,
+      paste0(
+        "  .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), ",
+        render_vector(quote_items(ambiguous)),
+        ")"
+      ),
+      paste0(
+        "  if (base::length(.arg_ambiguous) > 0L) cli::cli_abort(\"Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn ",
+        fn,
+        "}.\")"
+      )
+    )
+  }
+
+  # `detected` shows what the call looked like under the old signature, so a
+  # renamed argument is listed under its old name.
+  detected <- if (identical(old, new)) {
+    ".arg_names"
+  } else {
+    paste0(
+      render_vector(paste0(new, " = \"", old, "\"")),
+      "[.arg_names]"
+    )
+  }
+  in_call <- function(items) {
+    paste0(
+      "base::paste(",
+      render_vector(c(quote_items(entry$head), items)),
+      ", collapse = \", \")"
+    )
+  }
+
   c(
+    "# fmt: skip",
     "if (...length() > 0L) {",
-    guard,
-    "  .arg_handle <- migrate_recover_args(",
-    "    list(...),",
-    render_call_arg("current", "list", paste0(keep, " = ", keep), "list()"),
-    render_call_arg("recover_new", "c", quote_items(entry$recover_new), "character(0)"),
-    render_call_arg("recover_old", "c", quote_items(entry$recover_old), "character(0)"),
-    render_call_arg("match_names", "c", quote_items(entry$match_names), "character(0)"),
-    render_call_arg("match_to", "c", quote_items(entry$match_to), "character(0)"),
-    render_call_arg("defaults", "list", default_items, "list()"),
-    render_call_arg("head_args", "c", quote_items(entry$head), "character(0)"),
-    paste0("    fn_name = \"", entry$fn, "\""),
-    "  )",
-    "  list2env(.arg_handle$values, environment())",
-    "  lifecycle::deprecate_soft(",
-    paste0("    \"", entry$when, "\","),
-    "    what = I(.arg_handle$what),",
-    "    details = .arg_handle$details",
-    "  )",
+    guards,
+    paste0(
+      "  # Pre-",
+      entry$when,
+      " signature: ",
+      fn,
+      "(",
+      paste(entry$old, collapse = ", "),
+      ")"
+    ),
+    paste0(
+      "  .old_signature <- function(",
+      paste(c(old, "..."), collapse = ", "),
+      ") {"
+    ),
+    "    if (...length() > 0L) {",
+    "      .arg_extra <- base::names(base::substitute(...()))",
+    "      .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]",
+    paste0(
+      "      if (base::length(.arg_extra) == 0L) cli::cli_abort(\"Too many arguments passed to {.fn ",
+      fn,
+      "}.\", call = base::parent.frame())"
+    ),
+    paste0(
+      "      cli::cli_abort(base::c(\"Unexpected argument passed to {.fn ",
+      fn,
+      "}: {.arg {(.arg_extra)}}.\", i = \"Arguments after {.arg ...} must be spelled out in full.\"), call = base::parent.frame())"
+    ),
+    "    }",
+    "    base::c(",
+    paste0(
+      "      if (!base::missing(",
+      old,
+      ")) base::list(",
+      new,
+      " = ",
+      old,
+      ")",
+      c(rep(",", length(old) - 1L), "")
+    ),
+    "    )",
+    "  }",
+    "  .arg_handle <- .old_signature(...)",
+    "  if (base::length(.arg_handle) > 0L) {",
+    "    .arg_names <- base::names(.arg_handle)",
+    "    .arg_conflict <- base::intersect(.arg_names, base::c(",
+    paste0(
+      "      if (!base::missing(",
+      new,
+      ")) \"",
+      new,
+      "\"",
+      c(rep(",", length(new) - 1L), "")
+    ),
+    "    ))",
+    paste0(
+      "    if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c(\"Argument {.arg {(.arg_conflict)}} of {.fn ",
+      fn,
+      "} was supplied more than once.\", i = \"Pass it exactly once, by its new name {.arg {(.arg_conflict)}}.\"))"
+    ),
+    "    base::list2env(.arg_handle, base::environment())",
+    "    lifecycle::deprecate_soft(",
+    paste0("      \"", entry$when, "\","),
+    paste0(
+      "      what = base::I(\"Calling `",
+      fn,
+      "()` with positional or abbreviated arguments\"),"
+    ),
+    "      details = base::c(",
+    paste0(
+      "        i = base::paste0(\"Detected call:  ",
+      fn,
+      "(\", ",
+      in_call(detected),
+      ", \")\"),"
+    ),
+    paste0(
+      "        i = base::paste0(\"Use instead:    ",
+      fn,
+      "(\", ",
+      in_call("base::paste0(.arg_names, \" = \")"),
+      ", \")\")"
+    ),
+    "      )",
+    "    )",
+    "  }",
     "}"
   )
 }

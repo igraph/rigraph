@@ -322,27 +322,39 @@ centralize <- function(
   normalized = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centralize, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        theoretical.max = theoretical.max,
-        normalized = normalized
-      ),
-      recover_new = c("theoretical.max", "normalized"),
-      recover_old = c("theoretical.max", "normalized"),
-      match_names = c("theoretical.max", "normalized"),
-      match_to = c("theoretical.max", "normalized"),
-      defaults = list(theoretical.max = 0, normalized = TRUE),
-      head_args = c("scores"),
-      fn_name = "centralize"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centralize(scores, theoretical.max, normalized)
+    .old_signature <- function(theoretical.max, normalized, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centralize}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centralize}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(theoretical.max)) base::list(theoretical.max = theoretical.max),
+        if (!base::missing(normalized)) base::list(normalized = normalized)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(theoretical.max)) "theoretical.max",
+        if (!base::missing(normalized)) "normalized"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centralize} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centralize()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centralize(", base::paste(base::c("scores", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centralize(", base::paste(base::c("scores", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -401,28 +413,41 @@ centr_degree <- function(
   normalized = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_degree, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, loops = loops, normalized = normalized),
-      recover_new = c("mode", "loops", "normalized"),
-      recover_old = c("mode", "loops", "normalized"),
-      match_names = c("mode", "loops", "normalized"),
-      match_to = c("mode", "loops", "normalized"),
-      defaults = list(
-        mode = c("all", "out", "in", "total"),
-        loops = TRUE,
-        normalized = TRUE
-      ),
-      head_args = c("graph"),
-      fn_name = "centr_degree"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centr_degree(graph, mode, loops, normalized)
+    .old_signature <- function(mode, loops, normalized, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_degree}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_degree}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(loops)) base::list(loops = loops),
+        if (!base::missing(normalized)) base::list(normalized = normalized)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(loops)) "loops",
+        if (!base::missing(normalized)) "normalized"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_degree} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_degree()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_degree(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_degree(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -533,24 +558,39 @@ centr_betw <- function(
   normalized = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_betw, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed, normalized = normalized),
-      recover_new = c("directed", "normalized"),
-      recover_old = c("directed", "normalized"),
-      match_names = c("directed", "normalized"),
-      match_to = c("directed", "normalized"),
-      defaults = list(directed = TRUE, normalized = TRUE),
-      head_args = c("graph"),
-      fn_name = "centr_betw"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centr_betw(graph, directed, normalized)
+    .old_signature <- function(directed, normalized, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_betw}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_betw}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(normalized)) base::list(normalized = normalized)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(normalized)) "normalized"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_betw} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_betw()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_betw(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_betw(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -603,24 +643,37 @@ centr_betw_tmax <- function(
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_betw_tmax, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(directed = directed),
-      recover_new = c("directed"),
-      recover_old = c("directed"),
-      match_names = c("directed"),
-      match_to = c("directed"),
-      defaults = list(directed = TRUE),
-      head_args = c("graph", "nodes"),
-      fn_name = "centr_betw_tmax"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centr_betw_tmax(graph, nodes, directed)
+    .old_signature <- function(directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_betw_tmax}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_betw_tmax}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_betw_tmax} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_betw_tmax()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_betw_tmax(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_betw_tmax(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -675,24 +728,39 @@ centr_clo <- function(
   normalized = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_clo, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode, normalized = normalized),
-      recover_new = c("mode", "normalized"),
-      recover_old = c("mode", "normalized"),
-      match_names = c("mode", "normalized"),
-      match_to = c("mode", "normalized"),
-      defaults = list(mode = c("out", "in", "all", "total"), normalized = TRUE),
-      head_args = c("graph"),
-      fn_name = "centr_clo"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centr_clo(graph, mode, normalized)
+    .old_signature <- function(mode, normalized, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_clo}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_clo}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(normalized)) base::list(normalized = normalized)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(normalized)) "normalized"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_clo} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_clo()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_clo(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_clo(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -735,24 +803,37 @@ centr_clo_tmax <- function(
   mode = c("out", "in", "all", "total")
 ) {
   # BEGIN GENERATED ARG_HANDLE: centr_clo_tmax, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(mode = mode),
-      recover_new = c("mode"),
-      recover_old = c("mode"),
-      match_names = c("mode"),
-      match_to = c("mode"),
-      defaults = list(mode = c("out", "in", "all", "total")),
-      head_args = c("graph", "nodes"),
-      fn_name = "centr_clo_tmax"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: centr_clo_tmax(graph, nodes, mode)
+    .old_signature <- function(mode, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn centr_clo_tmax}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn centr_clo_tmax}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(mode)) base::list(mode = mode)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(mode)) "mode"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn centr_clo_tmax} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `centr_clo_tmax()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  centr_clo_tmax(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    centr_clo_tmax(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

@@ -147,26 +147,37 @@ is_graphical <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all")
 ) {
   # BEGIN GENERATED ARG_HANDLE: is_graphical, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(allowed.edge.types = allowed.edge.types),
-      recover_new = c("allowed.edge.types"),
-      recover_old = c("allowed.edge.types"),
-      match_names = c("allowed.edge.types"),
-      match_to = c("allowed.edge.types"),
-      defaults = list(
-        allowed.edge.types = c("simple", "loops", "multi", "all")
-      ),
-      head_args = c("out.deg", "in.deg"),
-      fn_name = "is_graphical"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: is_graphical(out.deg, in.deg, allowed.edge.types)
+    .old_signature <- function(allowed.edge.types, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn is_graphical}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn is_graphical}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(allowed.edge.types)) base::list(allowed.edge.types = allowed.edge.types)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(allowed.edge.types)) "allowed.edge.types"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn is_graphical} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `is_graphical()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  is_graphical(", base::paste(base::c("out.deg", "in.deg", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    is_graphical(", base::paste(base::c("out.deg", "in.deg", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

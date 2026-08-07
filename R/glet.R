@@ -143,24 +143,37 @@ graphlet_basis <- function(
   weights = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_basis, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights),
-      recover_new = c("weights"),
-      recover_old = c("weights"),
-      match_names = c("weights"),
-      match_to = c("weights"),
-      defaults = list(weights = NULL),
-      head_args = c("graph"),
-      fn_name = "graphlet_basis"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graphlet_basis(graph, weights)
+    .old_signature <- function(weights, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlet_basis}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlet_basis}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_basis} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlet_basis()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlet_basis(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlet_basis(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -182,24 +195,43 @@ graphlet_proj <- function(
   Mu = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlet_proj, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, niter = niter, Mu = Mu),
-      recover_new = c("weights", "cliques", "niter", "Mu"),
-      recover_old = c("weights", "cliques", "niter", "Mu"),
-      match_names = c("weights", "cliques", "niter", "Mu"),
-      match_to = c("weights", "cliques", "niter", "Mu"),
-      defaults = list(weights = NULL, niter = 1000, Mu = NULL),
-      head_args = c("graph"),
-      fn_name = "graphlet_proj"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graphlet_proj(graph, weights, cliques, niter, Mu)
+    .old_signature <- function(weights, cliques, niter, Mu, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlet_proj}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlet_proj}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(cliques)) base::list(cliques = cliques),
+        if (!base::missing(niter)) base::list(niter = niter),
+        if (!base::missing(Mu)) base::list(Mu = Mu)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(cliques)) "cliques",
+        if (!base::missing(niter)) "niter",
+        if (!base::missing(Mu)) "Mu"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlet_proj} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlet_proj()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlet_proj(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlet_proj(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -293,24 +325,39 @@ graphlets <- function(
   niter = 1000
 ) {
   # BEGIN GENERATED ARG_HANDLE: graphlets, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(weights = weights, niter = niter),
-      recover_new = c("weights", "niter"),
-      recover_old = c("weights", "niter"),
-      match_names = c("weights", "niter"),
-      match_to = c("weights", "niter"),
-      defaults = list(weights = NULL, niter = 1000),
-      head_args = c("graph"),
-      fn_name = "graphlets"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: graphlets(graph, weights, niter)
+    .old_signature <- function(weights, niter, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graphlets}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graphlets}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(weights)) base::list(weights = weights),
+        if (!base::missing(niter)) base::list(niter = niter)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(niter)) "niter"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graphlets} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graphlets()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graphlets(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graphlets(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

@@ -37,24 +37,37 @@ greedy_vertex_coloring <- function(
   heuristic = c("colored_neighbors", "dsatur")
 ) {
   # BEGIN GENERATED ARG_HANDLE: greedy_vertex_coloring, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(heuristic = heuristic),
-      recover_new = c("heuristic"),
-      recover_old = c("heuristic"),
-      match_names = c("heuristic"),
-      match_to = c("heuristic"),
-      defaults = list(heuristic = c("colored_neighbors", "dsatur")),
-      head_args = c("graph"),
-      fn_name = "greedy_vertex_coloring"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: greedy_vertex_coloring(graph, heuristic)
+    .old_signature <- function(heuristic, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn greedy_vertex_coloring}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn greedy_vertex_coloring}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(heuristic)) base::list(heuristic = heuristic)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(heuristic)) "heuristic"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn greedy_vertex_coloring} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `greedy_vertex_coloring()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  greedy_vertex_coloring(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    greedy_vertex_coloring(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

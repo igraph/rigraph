@@ -535,24 +535,37 @@ tk_close <- function(
   window.close = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_close, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(window.close = window.close),
-      recover_new = c("window.close"),
-      recover_old = c("window.close"),
-      match_names = c("window.close"),
-      match_to = c("window.close"),
-      defaults = list(window.close = TRUE),
-      head_args = c("tkp.id"),
-      fn_name = "tk_close"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: tk_close(tkp.id, window.close)
+    .old_signature <- function(window.close, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_close}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_close}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(window.close)) base::list(window.close = window.close)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(window.close)) "window.close"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_close} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_close()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_close(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_close(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -591,24 +604,39 @@ tk_fit <- function(
   height = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_fit, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(width = width, height = height),
-      recover_new = c("width", "height"),
-      recover_old = c("width", "height"),
-      match_names = c("width", "height"),
-      match_to = c("width", "height"),
-      defaults = list(width = NULL, height = NULL),
-      head_args = c("tkp.id"),
-      fn_name = "tk_fit"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: tk_fit(tkp.id, width, height)
+    .old_signature <- function(width, height, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_fit}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_fit}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(width)) base::list(width = width),
+        if (!base::missing(height)) base::list(height = height)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(width)) "width",
+        if (!base::missing(height)) "height"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_fit} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_fit()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_fit(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_fit(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -709,24 +737,37 @@ tk_coords <- function(
   norm = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_coords, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(norm = norm),
-      recover_new = c("norm"),
-      recover_old = c("norm"),
-      match_names = c("norm"),
-      match_to = c("norm"),
-      defaults = list(norm = FALSE),
-      head_args = c("tkp.id"),
-      fn_name = "tk_coords"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: tk_coords(tkp.id, norm)
+    .old_signature <- function(norm, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_coords}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_coords}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(norm)) base::list(norm = norm)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(norm)) "norm"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_coords} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_coords()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_coords(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_coords(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -766,24 +807,39 @@ tk_rotate <- function(
   rad = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: tk_rotate, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(degree = degree, rad = rad),
-      recover_new = c("degree", "rad"),
-      recover_old = c("degree", "rad"),
-      match_names = c("degree", "rad"),
-      match_to = c("degree", "rad"),
-      defaults = list(degree = NULL, rad = NULL),
-      head_args = c("tkp.id"),
-      fn_name = "tk_rotate"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: tk_rotate(tkp.id, degree, rad)
+    .old_signature <- function(degree, rad, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn tk_rotate}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn tk_rotate}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(degree)) base::list(degree = degree),
+        if (!base::missing(rad)) base::list(rad = rad)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(degree)) "degree",
+        if (!base::missing(rad)) "rad"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn tk_rotate} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `tk_rotate()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  tk_rotate(", base::paste(base::c("tkp.id", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    tk_rotate(", base::paste(base::c("tkp.id", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

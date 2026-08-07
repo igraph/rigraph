@@ -195,36 +195,47 @@ graph_from_biadjacency_matrix <- function(
   add.names = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_biadjacency_matrix, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        directed = directed,
-        mode = mode,
-        multiple = multiple,
-        weighted = weighted,
-        add.names = add.names
-      ),
-      recover_new = c("directed", "mode", "multiple", "weighted", "add.names"),
-      recover_old = c("directed", "mode", "multiple", "weighted", "add.names"),
-      match_names = c("directed", "mode", "multiple", "weighted", "add.names"),
-      match_to = c("directed", "mode", "multiple", "weighted", "add.names"),
-      defaults = list(
-        directed = FALSE,
-        mode = c("all", "out", "in", "total"),
-        multiple = FALSE,
-        weighted = NULL,
-        add.names = NULL
-      ),
-      head_args = c("incidence"),
-      fn_name = "graph_from_biadjacency_matrix"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_biadjacency_matrix}.")
+    # Pre-3.0.0 signature: graph_from_biadjacency_matrix(incidence, directed, mode, multiple, weighted, add.names)
+    .old_signature <- function(directed, mode, multiple, weighted, add.names, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_biadjacency_matrix}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_biadjacency_matrix}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(directed)) base::list(directed = directed),
+        if (!base::missing(mode)) base::list(mode = mode),
+        if (!base::missing(multiple)) base::list(multiple = multiple),
+        if (!base::missing(weighted)) base::list(weighted = weighted),
+        if (!base::missing(add.names)) base::list(add.names = add.names)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(directed)) "directed",
+        if (!base::missing(mode)) "mode",
+        if (!base::missing(multiple)) "multiple",
+        if (!base::missing(weighted)) "weighted",
+        if (!base::missing(add.names)) "add.names"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_biadjacency_matrix} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_biadjacency_matrix()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_biadjacency_matrix(", base::paste(base::c("incidence", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_biadjacency_matrix(", base::paste(base::c("incidence", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
