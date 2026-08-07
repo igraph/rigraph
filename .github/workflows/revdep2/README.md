@@ -30,7 +30,7 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
        one wave can run, in whole waves
        → plan.json (artifact) + matrix (job output)
 
-preflight (1 job; a dry run stops before it)
+preflight (1 job; a dry run stops before it; failure does not stop the run)
   ├─ unpack the prebuilt packages the plan found
   ├─ install + load *every* dependency any revdep needs
   └─ pack the library for the next run
@@ -383,6 +383,18 @@ This is the half that pays on the very first run:
 the compile happens once in the preflight
 instead of once more in each shard.
 
+It is a `needs`, but not a prerequisite.
+`test` runs on `!cancelled()` past a failed preflight
+and `collect` does not consult its result at all,
+because the preflight buys two things —
+a free rebuild for the shards, and dependency failures diagnosed early —
+and neither is worth the run.
+A shard installs its own union regardless,
+and that union is a fraction of what the preflight takes on:
+in the run that made this necessary,
+a median of 478 packages against the preflight's 4397.
+Losing the preflight makes a run slower and blinder, not void.
+
 For the rest, the plan walks the workflow's completed runs, youngest first,
 and takes libraries until it has covered
 every package this run will install,
@@ -504,6 +516,7 @@ so its report is complete again, not a fragment.
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
+| The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
@@ -548,6 +561,7 @@ at the next `if`.
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |
 | Check seconds here per CRAN second | — | `REVDEP2_CHECK_SCALE` | measured, else 1 |

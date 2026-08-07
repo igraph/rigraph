@@ -42,6 +42,9 @@
 #   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
 #                             (default: 80% of REVDEP2_DEADLINE_MINUTES)
+#   REVDEP2_LONG_RUN_HOURS  - estimated wall clock past which the plan warns in
+#                             the job summary; it never refuses for length
+#                             alone (default: 12)
 #   REVDEP2_MAX_SHARDS      - matrix legs to emit at most (default: 250)
 #   REVDEP2_MAX_PARALLEL    - legs to run concurrently, and so the size of one
 #                             wave (default: 20)
@@ -994,6 +997,15 @@ inform(sprintf(
   deadline_minutes
 ))
 
+# A plan can fit the matrix and still be a bad idea: `which: most` at `depth:
+# 2` is 3419 packages and about 22 hours of waves here, which is a run nobody
+# is watching by the end and a day of artifacts riding on one preflight. It is
+# a legitimate thing to ask for, so this warns rather than refuses -- but it
+# warns where the dispatcher will see it, not only in the wave line.
+wall_minutes <- waves * max(load)
+long_run_hours <- env_num("REVDEP2_LONG_RUN_HOURS", 12)
+long_run <- wall_minutes > long_run_hours * 60
+
 # ------------------------------------------------------------------ output ---
 
 shard_list <- lapply(seq_len(k), function(s) {
@@ -1151,6 +1163,27 @@ append_summary(c(
   "## revdep2 plan",
   "",
   if (env_flag("REVDEP2_DRY_RUN")) c("**Dry run: planning only, no checks started.**", ""),
+  if (long_run) {
+    c(
+      sprintf(
+        "> **This plan is about %.0f hours of wall clock** — %d shards, %d waves of %d. It fits, and it will run; the note is that %s.",
+        wall_minutes / 60,
+        k,
+        waves,
+        lanes,
+        if (length(measured_runs) == 0) {
+          "nothing is measured yet, so it is priced on CRAN's times, which have run about twice the local cost \u2014 the same plan calibrated is roughly half this"
+        } else {
+          "a run this long rides on one preflight and a day of artifacts"
+        }
+      ),
+      sprintf(
+        "> A narrower `which` or `depth` is the dial; `part=i/%d` splits it into runs that each report on their own, without making the total any shorter.",
+        max(2L, as.integer(ceiling(wall_minutes / (long_run_hours * 60))))
+      ),
+      ""
+    )
+  },
   "| | |",
   "| --- | --- |",
   sprintf("| Package | `%s` %s (CRAN: %s) |", package, dev_version, cran_version),
