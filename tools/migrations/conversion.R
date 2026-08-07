@@ -125,7 +125,8 @@ migrations <- list(
     new = function(
       graph,
       ...,
-      names = TRUE
+      names = TRUE,
+      as.vector = FALSE
     ) {},
     when = "3.0.0"
   ),

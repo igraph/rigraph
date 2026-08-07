@@ -554,8 +554,15 @@ as_adj <- function(
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
 #'   vertex IDs.
-#' @return A `ecount(graph)` by 2 numeric matrix.
-#' @seealso [graph_from_adjacency_matrix()], [read_graph()]
+#' @param as.vector Logical scalar, whether to return the edge list as a vector
+#'   instead of a matrix.
+#'   When `TRUE`, the result is a vector in the format `c(from1, to1, from2, to2, ...)`
+#'   which is suitable for passing to [make_graph()].
+#'   When `FALSE` (the default), the result is an `ecount(graph)` by 2 matrix.
+#' @return If `as.vector` is `FALSE` (the default), an `ecount(graph)` by 2 numeric matrix.
+#'   If `as.vector` is `TRUE`, a vector of length `2 * ecount(graph)` with edges
+#'   in the format `c(from1, to1, from2, to2, ...)`.
+#' @seealso [graph_from_adjacency_matrix()], [read_graph()], [make_graph()]
 #' @keywords graphs
 #' @examples
 #'
@@ -565,23 +572,30 @@ as_adj <- function(
 #' V(g)$name <- LETTERS[seq_len(gorder(g))]
 #' as_edgelist(g)
 #'
+#' # Get edges as a vector suitable for make_graph()
+#' g2 <- make_graph(c(1, 2, 2, 3, 3, 4))
+#' edges <- as_edgelist(g2, names = FALSE, as.vector = TRUE)
+#' g3 <- make_graph(edges)
+#' identical_graphs(g2, g3)
+#'
 #' @family conversion
 #' @export
 as_edgelist <- function(
   graph,
   ...,
-  names = TRUE
+  names = TRUE,
+  as.vector = FALSE
 ) {
   # BEGIN GENERATED ARG_HANDLE: as_edgelist, do not edit, see tools/generate-migrations.R
   if (...length() > 0L) {
     .arg_handle <- migrate_recover_args(
       list(...),
-      current = list(names = names),
+      current = list(names = names, as.vector = as.vector),
       recover_new = c("names"),
       recover_old = c("names"),
-      match_names = c("names"),
-      match_to = c("names"),
-      defaults = list(names = TRUE),
+      match_names = c("names", "as.vector"),
+      match_to = c("names", "as.vector"),
+      defaults = list(names = TRUE, as.vector = FALSE),
       head_args = c("graph"),
       fn_name = "as_edgelist"
     )
@@ -595,10 +609,20 @@ as_edgelist <- function(
   # END GENERATED ARG_HANDLE
 
   ensure_igraph(graph)
-  res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
-  res <- res + 1
-  if (names && "name" %in% vertex_attr_names(graph)) {
-    res <- matrix(V(graph)$name[res], ncol = 2)
+  if (as.vector) {
+    # Return a flat vector suitable for make_graph():
+    # bycol = FALSE gives edges in the format c(from1, to1, from2, to2, ...).
+    res <- get_edgelist_impl(graph = graph, bycol = FALSE)
+    res <- res + 1
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      res <- V(graph)$name[res]
+    }
+  } else {
+    res <- matrix(get_edgelist_impl(graph = graph, bycol = TRUE), ncol = 2)
+    res <- res + 1
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      res <- matrix(V(graph)$name[res], ncol = 2)
+    }
   }
 
   res
