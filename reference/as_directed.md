@@ -135,7 +135,7 @@ as_directed(g, "mutual")
 #> in igraph 3.0.0.
 #> ℹ Detected call: as_directed(graph, mode)
 #> ℹ Use instead: as_directed(graph, mode = )
-#> ── <igraph> Ring graph ────────────────────────────────────────────── cb30e09 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 88f3f34 ──
 #> ℹ directed
 #> ℹ 10 vertices · 20 edges
 #> 
@@ -148,7 +148,7 @@ as_directed(g, "mutual")
 #> [19] 10 → 9  10 → 1 
 g2 <- make_star(10)
 as_undirected(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 3d4298c ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9bb6251 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -164,7 +164,7 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── ceba9f9 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── ba25f0b ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -193,7 +193,7 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> ── <igraph> ───────────────────────────────────────────────────────── 65d4248 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 8c77f9c ──
 #> ℹ undirected · weighted
 #> ℹ 10 vertices · 7 edges
 #> 
