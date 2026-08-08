@@ -106,5 +106,21 @@
       E(g)[c(TRUE, FALSE)]
     Condition
       Error in `FUN()`:
-      ! Error: Logical index length does not match the number of edges. Recycling is not allowed.
+      ! Logical index length does not match the number of edges. Recycling is not allowed.
+
+# `[[<-.igraph.es` and `V<-` error well
+
+    Code
+      V(g) <- "blue"
+    Condition
+      Error in `V<-`:
+      ! Can't find "name" for vertex attribute.
+
+---
+
+    Code
+      E(g)[1] <- "blue"
+    Condition
+      Error in `[<-`:
+      ! Can't find "name" for attribute.
 

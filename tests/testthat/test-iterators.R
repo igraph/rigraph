@@ -476,3 +476,19 @@ test_that("identical_graphs() tail arguments and legacy positional recovery", {
   )
   expect_identical(res, identical_graphs(g1, g2, attrs = FALSE))
 })
+
+test_that("`[[<-.igraph.es` and `V<-` error well", {
+  g <- make_(
+    ring(10),
+    with_vertex_(
+      name = LETTERS[1:10],
+      color = sample(1:2, 10, replace = TRUE)
+    )
+  )
+  expect_snapshot(error = TRUE, {
+    V(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[1] <- "blue"
+  })
+})
