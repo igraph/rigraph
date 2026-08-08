@@ -221,8 +221,11 @@ clique.number <- function(graph) {
 #'   vectors of vertex IDs. Each list element is a clique, i.e. a vertex sequence
 #'   of class [igraph.vs][V].
 #'
-#'   `max_cliques()` returns `NULL`, invisibly, if its `file`
-#'   argument is not `NULL`. The output is written to the specified file in
+#'   `max_cliques()` returns:
+#'   - When `file` is `NULL` and `callback` is `NULL`, a list of vertex sequences.
+#'   - When `callback` is not `NULL`, the callback function is called for each clique,
+#'    then `max_cliques()` returns `NULL` invisibly.
+#'   - When `file` is not `NULL`, the output is written to the specified file in
 #'   this case.
 #'
 #'   `clique_num()` and `count_max_cliques()` return an integer
@@ -286,24 +289,26 @@ largest_cliques <- function(graph) {
 }
 
 #' @rdname cliques
-#' @param subset If not `NULL`, then it must be a vector of vertex IDs,
+#' @param subset A vector of vertex IDs,
 #'   numeric or symbolic if the graph is named. The algorithm is run from these
 #'   vertices only, so only a subset of all maximal cliques is returned. See the
 #'   Eppstein paper for details. This argument makes it possible to easily
-#'   parallelize the finding of maximal cliques.
-#' @param file If not `NULL`, then it must be a file name, i.e. a
-#'   character scalar. The output of the algorithm is written to this file. (If
-#'   it exists, then it will be overwritten.) Each clique will be a separate line
-#'   in the file, given with the numeric IDs of its vertices, separated by
-#'   whitespace.
+#'   parallelize the finding of maximal cliques. Default: `NULL`, the algorithm
+#'   is run from all vertices.
+#' @param file A file name, i.e. a character scalar.
+#'   The output of the algorithm is written to this file.
+#'   (If it exists, then it will be overwritten.)
+#'   Each clique will be a separate line in the file,
+#'   given with the numeric IDs of its vertices, separated by whitespace.
+#'   Default: `NULL`, the function returns a list of vertex sequences.
 #' @export
 max_cliques <- function(
   graph,
   min = NULL,
   max = NULL,
   subset = NULL,
-  file = NULL,
   ...,
+  file = NULL,
   callback = NULL
 ) {
   ensure_igraph(graph)
@@ -311,30 +316,21 @@ max_cliques <- function(
 
   # Handle file and subset modes (original functionality)
   if (!is.null(file)) {
-    if (
-      !is.character(file) ||
-        length(grep("://", file, fixed = TRUE)) > 0 ||
-        length(grep("~", file, fixed = TRUE)) > 0
-    ) {
-      tmpfile <- TRUE
-      origfile <- file
-      file <- tempfile()
-    } else {
-      tmpfile <- FALSE
+    if (!is.character(file)) {
+      cli::cli_abort("{.arg file} must be a file path, not a connection.")
+    }
+    if (grepl("://", file, fixed = TRUE)) {
+      cli::cli_abort("{.arg file} must be a file path, not a URL.")
     }
     on.exit(.Call(Rx_igraph_finalizer))
-    res <- .Call(
+    .Call(
       Rx_igraph_maximal_cliques_file,
       graph,
       subset,
-      file,
+      path.expand(file),
       as.numeric(min %||% 0),
       as.numeric(max %||% 0)
     )
-    if (tmpfile) {
-      buffer <- read.graph.toraw(file)
-      write.graph.fromraw(buffer, origfile)
-    }
     return(invisible(NULL))
   }
 
