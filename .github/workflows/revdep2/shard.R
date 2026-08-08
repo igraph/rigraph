@@ -160,18 +160,23 @@ inform(
 # CRAN *now*, so the library has to follow CRAN now.
 upgrade <- length(restored) > 0
 
-inform("Installing ", length(install), " dependencies")
-install_started <- Sys.time()
-bulk_ok <- tryCatch(
-  {
-    pak::pkg_install(install, ask = FALSE, upgrade = upgrade)
-    TRUE
-  },
-  error = function(e) {
-    inform("Bulk install failed: ", conditionMessage(e))
-    FALSE
-  }
+# In dependency order, a hundred at a time, for the same reason the preflight
+# does it: one pak call for the whole set is one resolution of the whole set,
+# and that is the part that stops degrading gracefully as the set grows. A
+# shard's union is a fraction of the preflight's, but it is the same call.
+chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+chunks <- install_chunks(install, cran_db(), chunk_size)
+inform(
+  "Installing ",
+  length(install),
+  " dependencies in ",
+  length(chunks),
+  " chunk(s) of at most ",
+  chunk_size,
+  ", dependencies first"
 )
+install_started <- Sys.time()
+bulk_ok <- install_in_chunks(chunks, upgrade = upgrade)
 if (!bulk_ok) {
   for (p in install) {
     if (requireNamespace(p, quietly = TRUE)) {

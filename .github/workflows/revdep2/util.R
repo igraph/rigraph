@@ -901,6 +901,92 @@ install_closure <- function(packages, db) {
   })
 }
 
+# The same set, cut into installable pieces: chunks of at most `size`,
+# ordered so that every strong dependency inside the set is installed before
+# the package that needs it.
+#
+# One pak call for a few thousand refs means one resolution of a few thousand
+# refs, and that is where the preflight of run 31270092803 died: ten minutes
+# inside pak, not one install started, then the runner was shut down. The
+# resolution is the part that does not degrade gracefully, so it is the part
+# that is kept small -- each chunk resolves against a library where its
+# dependencies already are.
+#
+# It also changes what a failure costs. Whatever earlier chunks installed is
+# on disk and is skipped on the next attempt, so a chunk that dies costs a
+# chunk; and the log says which one, which a single opaque call never could.
+#
+# Ordering is on strong dependencies only. Suggests are in the set because a
+# revdep's *check* needs them, not its installation, and they are what makes
+# the graph cyclic -- ordering on them would order on nothing.
+install_chunks <- function(pkgs, db, size = 100) {
+  pkgs <- unique(pkgs)
+  if (length(pkgs) == 0) {
+    return(list())
+  }
+  deps <- tools::package_dependencies(pkgs, db = db, which = "strong")
+  index <- stats::setNames(seq_along(pkgs), pkgs)
+  needs <- lapply(pkgs, function(p) {
+    unname(index[intersect(deps[[p]] %||% character(), pkgs)])
+  })
+  done <- logical(length(pkgs))
+  order <- integer()
+  repeat {
+    ready <- which(!done & vapply(needs, function(d) all(done[d]), logical(1)))
+    if (length(ready) == 0) {
+      break
+    }
+    done[ready] <- TRUE
+    order <- c(order, ready)
+  }
+  # A cycle, or a dependency this index cannot describe, leaves packages that
+  # never become ready. They go last, together, for pak to sort out among
+  # themselves -- which is what it was doing for the whole set before.
+  order <- c(order, which(!done))
+  unname(split(pkgs[order], ceiling(seq_along(order) / size)))
+}
+
+# Install one chunked set, reporting each chunk as it lands. Returns TRUE when
+# every chunk succeeded; a caller that cares which packages are missing asks
+# the library, not this.
+install_in_chunks <- function(chunks, lib = NULL, upgrade = FALSE, label = "") {
+  ok <- TRUE
+  prefix <- if (nzchar(label)) paste0(label, ": ") else ""
+  for (i in seq_along(chunks)) {
+    started <- Sys.time()
+    chunk_ok <- tryCatch(
+      {
+        if (is.null(lib)) {
+          pak::pkg_install(chunks[[i]], ask = FALSE, upgrade = upgrade)
+        } else {
+          pak::pkg_install(
+            chunks[[i]],
+            lib = lib,
+            ask = FALSE,
+            upgrade = upgrade
+          )
+        }
+        TRUE
+      },
+      error = function(e) {
+        inform(prefix, "chunk ", i, " failed: ", conditionMessage(e))
+        FALSE
+      }
+    )
+    ok <- ok && chunk_ok
+    inform(sprintf(
+      "%schunk %d/%d (%d packages) %s after %.1f min",
+      prefix,
+      i,
+      length(chunks),
+      length(chunks[[i]]),
+      if (chunk_ok) "installed" else "failed",
+      as.numeric(difftime(Sys.time(), started, units = "mins"))
+    ))
+  }
+  ok
+}
+
 # Fingerprint of the *versions* of everything a check installs, from CRAN
 # metadata. Two runs whose fingerprints agree resolved the same dependency
 # tree, so an old-version check result can be carried from one to the other.

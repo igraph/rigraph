@@ -565,6 +565,7 @@ the report is about *results*, a retry is about *coverage*.
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
+| A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
@@ -616,6 +617,30 @@ so three things are arranged to be *live* rather than after the fact:
   which separates "this job asked for too much memory"
   from "the host went away".
 
+The install itself is also cut down to a size pak handles predictably.
+One `pak::pkg_install()` call for a few thousand refs
+resolves all of them before it installs any of them,
+and that resolution is the part that stops degrading gracefully:
+the run above spent ten minutes in it
+without a single install starting.
+So both the preflight and the shards install in chunks of
+`REVDEP2_INSTALL_CHUNK` packages (100),
+ordered so that every strong dependency inside the set
+is installed before the package that needs it —
+each chunk then resolves against a library where its dependencies already are.
+The ordering is on strong dependencies only:
+Suggests are in the set because a revdep's *check* needs them,
+not its installation,
+and they are what would make the graph cyclic.
+Packages a cycle or a gap in the index leaves unordered go last, together.
+
+That also changes what a failure costs.
+Whatever earlier chunks installed is on disk
+and is skipped on the next attempt,
+so a chunk that dies costs a chunk rather than the job —
+and the log names which one,
+where a single opaque call could only go quiet.
+
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,
 so its failure never stops a run —
@@ -660,6 +685,7 @@ at the next `if`.
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
 | Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |
