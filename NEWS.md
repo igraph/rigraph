@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9030
+
+## Bug fixes
+
+### ci
+
+- Check `windows-11-arm` with `error_on = "error"` (#2821).
+
+## Features
+
+### ci
+
+- Commit the `revdep2` report, and re-check what it lists (#2827).
+
+## Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
+
 # igraph 2.3.3.9029
 
 ## Bug fixes
