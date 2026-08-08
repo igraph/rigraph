@@ -516,6 +516,80 @@ restore_prebuilt <- function(plan, lib, wanted) {
   restored
 }
 
+# ------------------------------------------------------- the last report ----
+
+# The packages an earlier report says were not ok, read from the `revdep/`
+# directory in the checkout rather than from a run's artifacts.
+#
+# That directory is the durable record: the collector commits it back to the
+# checked branch, and before this workflow existed `revdepcheck::cloud_check()`
+# wrote the same four files there. So both generations are read: `manifest.json`
+# when this workflow wrote it (it says exactly which result each package got),
+# and otherwise revdepcheck's own markdown -- one `# <package> (<version>)`
+# heading per package in problems.md and failures.md, plus the "Failed to
+# check" table in README.md, which is where a package that produced no
+# comparison at all is named.
+report_packages <- function(dir) {
+  none <- list(packages = character(), source = "")
+  if (!nzchar(dir %||% "") || !dir.exists(dir)) {
+    return(none)
+  }
+  manifest <- file.path(dir, "manifest.json")
+  if (file.exists(manifest)) {
+    entries <- tryCatch(read_json(manifest), error = function(e) NULL)
+    if (length(entries) > 0) {
+      names <- vapply(entries, function(e) e$package %||% "", character(1))
+      results <- vapply(entries, function(e) e$result %||% "", character(1))
+      take <- nzchar(names) & vapply(results, needs_recheck, logical(1))
+      if (any(take)) {
+        return(list(
+          packages = sort(unique(names[take])),
+          source = "manifest.json"
+        ))
+      }
+    }
+  }
+  headings <- function(file) {
+    if (!file.exists(file)) {
+      return(character())
+    }
+    lines <- grep("^# ", readLines(file, warn = FALSE), value = TRUE)
+    trimws(sub("^# ([^ (]+).*$", "\\1", lines))
+  }
+  failed_table <- function(file) {
+    if (!file.exists(file)) {
+      return(character())
+    }
+    lines <- readLines(file, warn = FALSE)
+    from <- grep("^#+ +Failed to check", lines)
+    if (length(from) == 0) {
+      return(character())
+    }
+    after <- grep("^#+ ", lines)
+    after <- after[after > from[[1]]]
+    block <- lines[seq(
+      from[[1]],
+      if (length(after) > 0) after[[1]] - 1L else length(lines)
+    )]
+    cells <- trimws(sub(
+      "^\\|([^|]*)\\|.*$",
+      "\\1",
+      grep("^\\|", block, value = TRUE)
+    ))
+    # Drop the header and the alignment row; what is left is one package each.
+    cells[nzchar(cells) & cells != "package" & !grepl("^:?-+:?$", cells)]
+  }
+  packages <- unique(c(
+    headings(file.path(dir, "problems.md")),
+    headings(file.path(dir, "failures.md")),
+    failed_table(file.path(dir, "README.md"))
+  ))
+  list(
+    packages = sort(packages[nzchar(packages)]),
+    source = "problems.md, failures.md, README.md"
+  )
+}
+
 # --------------------------------------------------------- measured timings --
 
 # What a run measured about itself, so the next plan can stop guessing.

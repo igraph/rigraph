@@ -30,7 +30,8 @@
 #
 # Environment variables (inputs):
 #   REVDEP2_PACKAGES        - explicit packages to check (comma/space separated;
-#                             default: all reverse dependencies)
+#                             default: all reverse dependencies), or the word
+#                             `broken` to take them from the committed report
 #   REVDEP2_WHICH           - "strong" (default) or "most" (adds Suggests/
 #                             Enhances dependents)
 #   REVDEP2_RETRY_RUN       - run id of an earlier revdep2 run; check only the
@@ -38,6 +39,9 @@
 #   REVDEP2_PART            - "i/G": check one G-th of the batch, for a revdep
 #                             set too big for a single run (the plan refuses
 #                             such a batch and prints the G it needs)
+#   REVDEP2_RECHECK_REPORT  - if truthy, check what the committed report lists
+#                             as broken or failed (same as REVDEP2_PACKAGES=broken)
+#   REVDEP2_REPORT_DIR      - where that report lives (default: revdep)
 #   REVDEP2_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
 #   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
@@ -114,6 +118,8 @@ prebuilt_max_age <- env_num("REVDEP2_PREBUILT_MAX_AGE_DAYS", 14)
 history_runs <- env_num("REVDEP2_HISTORY_RUNS", 40)
 max_measured_runs <- env_num("REVDEP2_MEASURED_MAX_RUNS", 3)
 measured_max_age <- env_num("REVDEP2_MEASURED_MAX_AGE_DAYS", 60)
+recheck_report <- env_flag("REVDEP2_RECHECK_REPORT")
+report_dir <- env_chr("REVDEP2_REPORT_DIR", "revdep")
 overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
 retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
@@ -351,9 +357,42 @@ packages_input <- trimws(strsplit(
 )[[1]])
 packages_input <- packages_input[nzchar(packages_input)]
 
+# `packages: broken` is a selector, not a package name: the dispatch form has
+# room for few inputs, and "what was wrong last time" belongs with "what to
+# check" rather than beside it.
+if (
+  length(packages_input) == 1 &&
+    tolower(packages_input) %in% c("broken", "failed", "report")
+) {
+  recheck_report <- TRUE
+  packages_input <- character()
+}
+
 if (length(packages_input) > 0) {
   selection <- "explicit"
   candidates <- unique(packages_input)
+} else if (recheck_report) {
+  # The committed report is the durable record of what was wrong last time:
+  # every package it lists as a problem or a failure, re-checked. This is the
+  # `revdep/run-broken.R` loop that predates this workflow, as an input.
+  found <- report_packages(report_dir)
+  if (length(found$packages) == 0) {
+    plan_nothing(sprintf(
+      "%s lists no broken or failed packages (looked for manifest.json, problems.md, failures.md, README.md)",
+      report_dir
+    ))
+  }
+  selection <- sprintf("broken and failed in %s", report_dir)
+  candidates <- found$packages
+  inform(
+    "Re-checking ",
+    length(candidates),
+    " package(s) from ",
+    report_dir,
+    " (",
+    found$source,
+    ")"
+  )
 } else if (nzchar(retry_run)) {
   selection <- sprintf("retry of run %s", retry_run)
   selection_md <- sprintf("retry of run %s", run_link(retry_run))

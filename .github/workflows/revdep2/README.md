@@ -100,6 +100,11 @@ The per-check timeout stays on CRAN's number and is not calibrated:
 A timeout is a safety net for a check that has gone wrong,
 so it should be generous where the estimate is merely typical —
 and against the local estimate that same factor would be a third as forgiving.
+The floor matters more than the factor:
+19 of 770 packages in run 31048405399 were killed by a 10-minute one,
+all of them compile-heavy (Stan models, mostly) and cheap by CRAN's numbers,
+13 with the floor as their entire budget.
+It is 20 minutes now, which covers every one of them.
 
 ### The shard count is bounded by the parallel capacity
 
@@ -507,11 +512,55 @@ gh workflow run revdep2.yaml -f retry-run=<run-id>
 The retry's collector carries the donor run's untouched results over,
 so its report is complete again, not a fragment.
 
+## The report is the repository's record
+
+`revdep/` in the checkout is where the results live between runs.
+`revdepcheck::cloud_check()` wrote `README.md`, `problems.md`,
+`failures.md` and `cran.md` there long before this workflow existed,
+`revdep/run-broken.R` read them back to re-check what was broken,
+and the analysis next to them — `problems-analysis.md`, `examples/`,
+the notification scripts — is what a human adds on top.
+So the collector writes the same four files, in the same format
+(they come out of revdepcheck itself), plus `manifest.json`,
+and commits them back to the ref that was checked.
+
+Only those five paths are staged.
+The analysis and the examples beside them are human-authored,
+and `pkgs/` — the raw check output, gigabytes of it —
+belongs in the `revdep2-report` artifact and nowhere near a commit.
+
+A ref that cannot receive a commit simply does not get one:
+a tag, a SHA, a fork's branch.
+That is a fact about the dispatch rather than a failure,
+so the step says so with a `::notice::` and stops;
+the report is in the artifact either way.
+The same applies to a protected branch, a read-only token, or a push
+that races with someone else's — the step is `continue-on-error`,
+because a report that cannot be committed is still a report.
+Set the repository variable `REVDEP2_COMMIT_REPORT` to `false`
+to turn the commit off entirely.
+
+### Re-checking what was broken
+
+`packages: broken` takes the packages to check from that committed report:
+`manifest.json` when this workflow wrote it (every result that is not `ok`),
+and otherwise revdepcheck's own markdown —
+the `# <package> (<version>)` headings of `problems.md` and `failures.md`,
+plus the "Failed to check" table in `README.md`.
+That is `revdep/run-broken.R`'s loop, as a dispatch input.
+
+It is the cheap run: 39 packages rather than 771 for the report as it stands,
+one wave, and every one of them a package that was wrong last time.
+`retry-run: <id>` is the sibling for a run that did not finish —
+the report is about *results*, a retry is about *coverage*.
+
 ## Failure modes
 
 | Situation | Outcome |
 | --- | --- |
 | A revdep breaks under the dev version | `newly_broken` in manifest and report; the run stays green |
+| The checked ref is a tag or a SHA | the report is not committed; a `::notice::` says so and the artifact still has it |
+| The report cannot be pushed (protection, fork, race) | the step is `continue-on-error`; the run keeps its result |
 | A revdep fails under both versions | `ok` (no *new* problems), visible in the report's tables |
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
@@ -547,7 +596,9 @@ at the next `if`.
 | Knob | Input | Variable | Default |
 | --- | --- | --- | --- |
 | Ref to check (branch, tag, SHA) | `ref` | — | the dispatched ref |
-| Packages to check | `packages` | — | all revdeps |
+| Packages to check, or `broken` for the committed report's | `packages` | `REVDEP2_PACKAGES` | all revdeps |
+| Where that report lives | — | `REVDEP2_REPORT_DIR` | `revdep` |
+| Commit the report back to the checked branch | — | `REVDEP2_COMMIT_REPORT` | on |
 | Revdep set | `which` | — | `strong` |
 | Revdep depth (`1`, `2`, …, `all`) | `depth` | — | 1 |
 | Retry a run | `retry-run` | — | — |
@@ -568,7 +619,7 @@ at the next `if`.
 | Fixed cost of one shard | — | `REVDEP2_SETUP_MINUTES` | measured, else 6 min |
 | Cost of one more dependency install | — | `REVDEP2_INSTALL_SECONDS` | measured, else 2.5 s |
 | Per-check timeout factor | — | `REVDEP2_TIMEOUT_FACTOR` | 1.5 × CRAN time |
-| Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 10 |
+| Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
 
 ## Prior art
