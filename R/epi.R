@@ -213,7 +213,7 @@ plot.sir <- function(
   if (is.null(quantile_color)) {
     quantile_color <- c(NI = "blue", NS = "red", NR = "gold")[comp]
   }
-  quantile_color <- rep(quantile_color, length.out = length(quantiles))
+  quantile_color <- vctrs::vec_recycle(quantile_color, length(quantiles))
 
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
   ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
