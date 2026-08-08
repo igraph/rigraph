@@ -345,7 +345,7 @@ library_versions <- function(lib) {
   versions[!is.na(versions)]
 }
 
-pack_library <- function(lib, dest, index_dest = NULL) {
+pack_library <- function(lib, dest, index_dest = NULL, name = "library") {
   versions <- library_versions(lib)
   dir.create(dest, recursive = TRUE, showWarnings = FALSE)
   index <- list(
@@ -364,12 +364,17 @@ pack_library <- function(lib, dest, index_dest = NULL) {
       versions
     ))
   )
-  write_json(index, file.path(dest, "lib.json"))
+  index_name <- if (identical(name, "library")) {
+    "lib.json"
+  } else {
+    paste0(name, ".json")
+  }
+  write_json(index, file.path(dest, index_name))
   if (!is.null(index_dest)) {
     dir.create(index_dest, recursive = TRUE, showWarnings = FALSE)
     file.copy(
-      file.path(dest, "lib.json"),
-      file.path(index_dest, "lib.json"),
+      file.path(dest, index_name),
+      file.path(index_dest, index_name),
       overwrite = TRUE
     )
   }
@@ -380,7 +385,7 @@ pack_library <- function(lib, dest, index_dest = NULL) {
   members <- tempfile("members-")
   writeLines(names(versions), members)
   on.exit(unlink(members))
-  tarball <- file.path(dest, "library.tar")
+  tarball <- file.path(dest, paste0(name, ".tar"))
   status <- system2(
     "tar",
     # Quoted: system2() quotes the command, but not the arguments.
@@ -449,13 +454,29 @@ unpack_library <- function(tarball, lib, take) {
 # This is the reuse that pays on the very first run: without it every shard
 # rebuilds from source what the preflight of the same run compiled minutes
 # earlier, once per shard.
-restore_local_library <- function(dir, lib, wanted) {
-  tarball <- file.path(dir, "library.tar")
+restore_local_library <- function(
+  dir,
+  lib,
+  wanted,
+  name = "library",
+  over = FALSE
+) {
+  tarball <- file.path(dir, paste0(name, ".tar"))
   if (!nzchar(dir) || !file.exists(tarball)) {
     return(character())
   }
-  take <- missing_from(lib, wanted)
-  index <- file.path(dir, "lib.json")
+  # The r-universe overlay is the one case where an already-installed package
+  # has to be replaced rather than skipped: pak has just resolved the whole
+  # union against CRAN, so the dev build it should shadow is sitting there.
+  take <- if (over) {
+    setdiff(unique(unlist(wanted, use.names = FALSE)), loadedNamespaces())
+  } else {
+    missing_from(lib, wanted)
+  }
+  index <- file.path(
+    dir,
+    if (identical(name, "library")) "lib.json" else paste0(name, ".json")
+  )
   if (file.exists(index)) {
     have <- vapply(
       read_json(index)$packages,
@@ -514,6 +535,243 @@ restore_prebuilt <- function(plan, lib, wanted) {
     inform("Prebuilt: restored ", length(got), " package(s) from run ", run_id)
   }
   restored
+}
+
+# ------------------------------------------------------- the last report ----
+
+# The packages an earlier report says were not ok, read from the `revdep/`
+# directory in the checkout rather than from a run's artifacts.
+#
+# That directory is the durable record: the collector commits it back to the
+# checked branch, and before this workflow existed `revdepcheck::cloud_check()`
+# wrote the same four files there. So both generations are read: `manifest.json`
+# when this workflow wrote it (it says exactly which result each package got),
+# and otherwise revdepcheck's own markdown -- one `# <package> (<version>)`
+# heading per package in problems.md and failures.md, plus the "Failed to
+# check" table in README.md, which is where a package that produced no
+# comparison at all is named.
+report_packages <- function(dir) {
+  none <- list(packages = character(), source = "")
+  if (!nzchar(dir %||% "") || !dir.exists(dir)) {
+    return(none)
+  }
+  manifest <- file.path(dir, "manifest.json")
+  if (file.exists(manifest)) {
+    entries <- tryCatch(read_json(manifest), error = function(e) NULL)
+    if (length(entries) > 0) {
+      names <- vapply(entries, function(e) e$package %||% "", character(1))
+      results <- vapply(entries, function(e) e$result %||% "", character(1))
+      take <- nzchar(names) & vapply(results, needs_recheck, logical(1))
+      if (any(take)) {
+        return(list(
+          packages = sort(unique(names[take])),
+          source = "manifest.json"
+        ))
+      }
+    }
+  }
+  headings <- function(file) {
+    if (!file.exists(file)) {
+      return(character())
+    }
+    lines <- grep("^# ", readLines(file, warn = FALSE), value = TRUE)
+    trimws(sub("^# ([^ (]+).*$", "\\1", lines))
+  }
+  failed_table <- function(file) {
+    if (!file.exists(file)) {
+      return(character())
+    }
+    lines <- readLines(file, warn = FALSE)
+    from <- grep("^#+ +Failed to check", lines)
+    if (length(from) == 0) {
+      return(character())
+    }
+    after <- grep("^#+ ", lines)
+    after <- after[after > from[[1]]]
+    block <- lines[seq(
+      from[[1]],
+      if (length(after) > 0) after[[1]] - 1L else length(lines)
+    )]
+    cells <- trimws(sub(
+      "^\\|([^|]*)\\|.*$",
+      "\\1",
+      grep("^\\|", block, value = TRUE)
+    ))
+    # Drop the header and the alignment row; what is left is one package each.
+    cells[nzchar(cells) & cells != "package" & !grepl("^:?-+:?$", cells)]
+  }
+  packages <- unique(c(
+    headings(file.path(dir, "problems.md")),
+    headings(file.path(dir, "failures.md")),
+    failed_table(file.path(dir, "README.md"))
+  ))
+  list(
+    packages = sort(packages[nzchar(packages)]),
+    source = "problems.md, failures.md, README.md"
+  )
+}
+
+# ---------------------------------------------------------- r-universe -------
+
+# Where a package can be had in a version newer than CRAN's.
+#
+# A revdep that breaks against the dev version has often been fixed upstream
+# already, and r-universe is where that fix is built and installable before it
+# reaches CRAN. Each universe serves an ordinary CRAN-like repository, so
+# `available.packages()` reads it and `download.packages()` fetches from it --
+# no bespoke client, and the `Repository` column carries the exact tarball URL.
+#
+# `universes` are names (`r-lib`) or full URLs; `"auto"` asks r-universe.dev
+# itself which universe builds each package, which needs that host reachable
+# and simply finds nothing when it is not.
+universe_repo <- function(universe) {
+  if (grepl("^https?://", universe)) {
+    sub("/+$", "", universe)
+  } else {
+    sprintf("https://%s.r-universe.dev", universe)
+  }
+}
+
+universe_owner <- function(package) {
+  url <- sprintf("https://r-universe.dev/api/packages/%s", package)
+  info <- tryCatch(
+    suppressWarnings(jsonlite::fromJSON(url, simplifyVector = FALSE)),
+    error = function(e) NULL
+  )
+  owner <- info[["_user"]] %||% info[["_owner"]] %||% NULL
+  if (is.character(owner) && length(owner) == 1 && nzchar(owner)) {
+    owner
+  } else {
+    NULL
+  }
+}
+
+# Package -> list(version, repo) for everything `packages` can be had from
+# `universes` in a version newer than `cran_version[[package]]`. Older or equal
+# versions are ignored: checking a stale rebuild of what CRAN already has
+# answers nothing, and it would invalidate the baseline for no reason.
+# Installing from r-universe, the way `.github/workflows/R-CMD-check-dev.yaml`
+# does it: `remotes::install_runiverse()` off the branch that carries it, which
+# takes the Linux binaries r-universe builds for `ubuntu:latest` rather than
+# compiling every dev version again. `linux_distro` has to name the runner's
+# release ("resolute" for ubuntu-26.04), and the universe is passed explicitly
+# because the plan already resolved it -- that also skips the API lookup
+# `install_runiverse()` would otherwise do per package.
+#
+# The function takes no `...`, so the library is chosen the only way it can be:
+# by putting it first on the search path for the duration.
+runiverse_remotes <- function() {
+  ok <- function() {
+    requireNamespace("remotes", quietly = TRUE) &&
+      "install_runiverse" %in% getNamespaceExports("remotes")
+  }
+  if (ok()) {
+    return(TRUE)
+  }
+  inform("Installing remotes with install_runiverse()")
+  tryCatch(
+    pak::pkg_install("r-lib/remotes@f-618-universe", ask = FALSE),
+    error = function(e) inform("Could not install it: ", conditionMessage(e))
+  )
+  ok()
+}
+
+# `sources` is the plan's r-universe list: package, universe, version.
+runiverse_install <- function(sources, lib, distro) {
+  if (length(sources) == 0) {
+    return(character())
+  }
+  if (!runiverse_remotes()) {
+    inform("r-universe: install_runiverse() unavailable; nothing installed")
+    return(character())
+  }
+  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
+  before <- .libPaths()
+  on.exit(.libPaths(before), add = TRUE)
+  .libPaths(c(lib, before))
+  installed <- character()
+  for (source in sources) {
+    done <- tryCatch(
+      {
+        remotes::install_runiverse(
+          source$package,
+          universe = source$universe,
+          linux_distro = distro
+        )
+        TRUE
+      },
+      error = function(e) {
+        inform(
+          "r-universe: ",
+          source$package,
+          " from ",
+          source$universe,
+          " failed: ",
+          conditionMessage(e)
+        )
+        FALSE
+      }
+    )
+    if (done && dir.exists(file.path(lib, source$package))) {
+      installed <- c(installed, source$package)
+    }
+  }
+  inform(
+    "r-universe: installed ",
+    length(installed),
+    " of ",
+    length(sources),
+    " package(s) into ",
+    lib
+  )
+  installed
+}
+
+universe_sources <- function(universes, packages, cran_version) {
+  out <- list()
+  if (length(universes) == 0 || length(packages) == 0) {
+    return(out)
+  }
+  if (identical(universes, "auto")) {
+    owners <- unique(Filter(
+      Negate(is.null),
+      lapply(packages, universe_owner)
+    ))
+    universes <- unlist(owners, use.names = FALSE)
+    inform(
+      "r-universe: ",
+      length(universes),
+      " universe(s) discovered for ",
+      length(packages),
+      " package(s)"
+    )
+  }
+  for (universe in unique(universes)) {
+    repo <- universe_repo(universe)
+    db <- tryCatch(
+      suppressWarnings(utils::available.packages(
+        repos = repo,
+        type = "source"
+      )),
+      error = function(e) NULL
+    )
+    if (is.null(db) || nrow(db) == 0) {
+      inform("r-universe: ", repo, " has no readable package index")
+      next
+    }
+    for (p in intersect(packages, rownames(db))) {
+      version <- unname(db[p, "Version"])
+      if (
+        !is.null(out[[p]]) ||
+          is.na(version) ||
+          package_version(version) <= package_version(cran_version[[p]])
+      ) {
+        next
+      }
+      out[[p]] <- list(version = version, repo = repo, universe = universe)
+    }
+  }
+  out
 }
 
 # --------------------------------------------------------- measured timings --
