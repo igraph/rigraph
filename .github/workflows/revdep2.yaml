@@ -115,6 +115,13 @@ on:
 
 name: revdep2
 
+# GitHub does not show a run the inputs it was dispatched with, so the two
+# that decide how much work the run is -- how wide the net is cast, and how
+# deep -- go into the run's own title, where the run list and every link to it
+# carry them. "Was that depth 2 or the whole closure?" is otherwise only
+# answerable by reading the plan job's log.
+run-name: "revdep2 ${{ inputs.packages && format('({0})', inputs.packages) || format('({0}, depth {1})', inputs.which || 'strong', inputs.depth || '1') }}${{ inputs['retry-run'] && format(', retry of {0}', inputs['retry-run']) || '' }}${{ inputs['dry-run'] && ', dry run' || '' }}"
+
 # Read-only by default; every job opts back into what it actually needs.
 # Note that for a pull request from a fork GitHub caps the token at read-only
 # regardless of what is requested here.
@@ -327,6 +334,25 @@ jobs:
           restore-keys: |
             revdep2-pak-
 
+      # The install is wrapped rather than run bare, because when this job
+      # dies the wrapping is the only diagnosis there is: run 31270092803
+      # spent ten minutes inside pak and then hit `exit 143` -- the runner
+      # shut down -- with nothing in the log between the two, and no
+      # post-step ran to say what it had run out of.
+      #
+      # Three things address that, all of them live rather than after the
+      # fact, because a runner that is shut down never reaches "after":
+      #
+      #  * a sampler prints memory, swap, disk and the largest processes every
+      #    30 s, so a kill has a curve leading up to it;
+      #  * `stdbuf` makes R line-buffered. R block-buffers stdout when it is
+      #    not a terminal, so pak's progress is flushed on exit -- which is
+      #    the one thing a killed process does not do, and why those ten
+      #    minutes were blank while the `message()` calls around them (stderr,
+      #    unbuffered) came through;
+      #  * the kernel's own OOM log is read afterwards when there still is an
+      #    afterwards, which separates "this job asked for too much memory"
+      #    from "the host went away".
       - name: Install and load every dependency
         env:
           GH_TOKEN: ${{ github.token }}
@@ -335,18 +361,35 @@ jobs:
           LIB_OUT: ${{ runner.temp }}/lib
           LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
           PKG_SYSREQS: true
+          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
         run: |
-          Rscript ./.github/workflows/revdep2/preflight.R
+          mkdir -p "${RUNNER_TEMP}/preflight"
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          "${watch}" once "before the install"
+          "${watch}" watch 30 "installing" &
+          watcher=$!
+          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
+          unbuffered=""
+          if command -v stdbuf > /dev/null 2>&1; then
+            unbuffered="stdbuf -oL -eL"
+          fi
+          status=0
+          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
+          kill "${watcher}" 2> /dev/null || true
+          "${watch}" once "after the install"
+          exit "${status}"
         shell: bash
 
       # Runs even when the install step died, because "how much disk and
       # memory were left" is the first question about a job that was killed
-      # rather than failed.
+      # rather than failed. It cannot run when the *runner* died -- hence the
+      # sampler above -- but it is what answers the question in every case
+      # where the job merely failed.
       - name: Report what the install consumed
         if: always()
         run: |
-          df -h / /mnt || true
-          free -g || true
+          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
+          ./.github/workflows/revdep2/watch-resources.sh oom
           du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
         shell: bash
 

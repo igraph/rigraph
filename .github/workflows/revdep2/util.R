@@ -256,12 +256,50 @@ run_artifacts <- function(run_id) {
   )
 }
 
+# Everything below reports why it could not do its job, not only that it
+# could not. These fetches are optimizations, so a failure is swallowed and
+# the run continues -- which is exactly the situation where a silent one is
+# expensive: a prebuilt library that does not arrive costs an hour of
+# rebuilding, and the causes (an artifact that really is gone, a download
+# that failed, a truncated zip, an unzip that refused it) call for entirely
+# different fixes and used to look identical in the log.
+
+# The last few lines of what a command wrote to stderr, which is where every
+# one of these tools says what went wrong.
+stderr_tail <- function(path, n = 3) {
+  if (!file.exists(path)) {
+    return("")
+  }
+  lines <- tryCatch(readLines(path, warn = FALSE), error = function(e) {
+    character()
+  })
+  paste(utils::tail(lines[nzchar(trimws(lines))], n), collapse = "; ")
+}
+
+format_bytes <- function(n) {
+  if (!is.finite(n) || n < 0) {
+    return("unknown size")
+  }
+  if (n >= 1024^3) {
+    sprintf("%.2f GiB", n / 1024^3)
+  } else if (n >= 1024^2) {
+    sprintf("%.1f MiB", n / 1024^2)
+  } else {
+    sprintf("%.0f B", n)
+  }
+}
+
 # utils::unzip() refuses archives above 4 GB, which a library artifact reaches
 # without trying; the system unzip has no such limit, so prefer it and keep
 # the internal one for a runner without it.
+#
+# Returns TRUE, or a string saying why not -- both are truthy in R, so callers
+# must test with isTRUE().
 unzip_into <- function(zip, dest) {
   dir.create(dest, recursive = TRUE, showWarnings = FALSE)
   if (nzchar(Sys.which("unzip"))) {
+    err <- tempfile(fileext = ".err")
+    on.exit(unlink(err), add = TRUE)
     status <- tryCatch(
       suppressWarnings(
         # Quoted: system2() quotes the command, but not the arguments.
@@ -269,12 +307,20 @@ unzip_into <- function(zip, dest) {
           "unzip",
           shQuote(c("-q", "-o", zip, "-d", dest)),
           stdout = NULL,
-          stderr = NULL
+          stderr = err
         )
       ),
       error = function(e) 1L
     )
-    return(identical(as.integer(status), 0L))
+    if (identical(as.integer(status), 0L)) {
+      return(TRUE)
+    }
+    detail <- stderr_tail(err)
+    return(sprintf(
+      "unzip exited %d%s",
+      as.integer(status),
+      if (nzchar(detail)) paste0(": ", detail) else ""
+    ))
   }
   # A gh that wrote an error body instead of the artifact leaves something
   # that is not a zip; that is a missing artifact, not a usable one.
@@ -282,39 +328,75 @@ unzip_into <- function(zip, dest) {
     suppressWarnings(utils::unzip(zip, exdir = dest)),
     error = function(e) character()
   )
-  length(extracted) > 0
+  if (length(extracted) > 0) TRUE else "utils::unzip() extracted nothing"
 }
 
-# Download one artifact by id into a directory; NULL when it cannot be had.
-fetch_artifact_id <- function(id, dest) {
+# Download one artifact by id into a directory; NULL when it cannot be had,
+# with a line in the log saying which of the ways it failed.
+fetch_artifact_id <- function(id, dest, what = paste("artifact", id)) {
   if (!gh_ok() || !nzchar(gh_repo())) {
+    inform(what, ": not fetched (no gh, or no token with `actions: read`)")
     return(NULL)
   }
   zip <- tempfile(fileext = ".zip")
+  on.exit(unlink(zip), add = TRUE)
+  err <- tempfile(fileext = ".err")
+  on.exit(unlink(err), add = TRUE)
+  started <- Sys.time()
   # Quoted: system2() quotes the command, but not the arguments.
   args <- shQuote(c("api", sprintf("repos/%s/actions/artifacts/%s/zip", gh_repo(), id)))
   status <- tryCatch(
-    suppressWarnings(system2("gh", args, stdout = zip, stderr = NULL)),
+    suppressWarnings(system2("gh", args, stdout = zip, stderr = err)),
     error = function(e) 1L
   )
-  if (!identical(as.integer(status), 0L) || !file.exists(zip)) {
-    unlink(zip)
+  elapsed <- as.numeric(difftime(Sys.time(), started, units = "secs"))
+  bytes <- if (file.exists(zip)) file.size(zip) else 0
+  if (!identical(as.integer(status), 0L) || bytes == 0) {
+    detail <- stderr_tail(err)
+    inform(sprintf(
+      "%s: download failed after %.0f s -- gh exited %d, %s written%s",
+      what,
+      elapsed,
+      as.integer(status),
+      format_bytes(bytes),
+      if (nzchar(detail)) paste0(": ", detail) else ""
+    ))
     return(NULL)
   }
-  ok <- unzip_into(zip, dest)
-  unlink(zip)
-  if (ok) dest else NULL
+  inform(sprintf(
+    "%s: downloaded %s in %.0f s (%.0f MB/s)",
+    what,
+    format_bytes(bytes),
+    elapsed,
+    bytes / 1e6 / max(elapsed, 1)
+  ))
+  unpacked <- unzip_into(zip, dest)
+  if (!isTRUE(unpacked)) {
+    inform(what, ": the download is not usable -- ", unpacked)
+    return(NULL)
+  }
+  dest
 }
 
 # Fetch one named artifact of one run; NULL when the run does not have it, it
-# has expired, or it cannot be downloaded.
+# has expired, or it cannot be downloaded -- and the log says which.
 fetch_artifact <- function(run_id, name, dest) {
   ids <- run_artifacts(run_id)
   id <- unname(ids[names(ids) == name])
+  what <- sprintf("%s of run %s", name, run_id)
   if (length(id) == 0) {
+    inform(
+      what,
+      ": the run has no unexpired artifact by that name",
+      if (length(ids) > 0) {
+        paste0(" (it has: ", paste(sort(names(ids)), collapse = ", "), ")")
+      } else {
+        " (and none at all, or gh could not list them)"
+      }
+    )
     return(NULL)
   }
-  fetch_artifact_id(id[[1]], dest)
+  fetch_artifact_id(id[[1]], dest, what)
 }
 
 # ------------------------------------------------------ prebuilt libraries --
@@ -424,15 +506,28 @@ unpack_library <- function(tarball, lib, take) {
   on.exit(unlink(members))
   # A member the index promised but the tar does not hold makes tar exit
   # non-zero after extracting the rest; what actually landed is the answer, so
-  # the status is not consulted.
+  # the status is not consulted. Its complaints still are, when fewer packages
+  # land than were asked for: "no space left on device" and "member not found"
+  # are the same shortfall here and the same silence before.
+  err <- tempfile(fileext = ".err")
+  on.exit(unlink(err), add = TRUE)
   system2(
     "tar",
     # Quoted: system2() quotes the command, but not the arguments.
     shQuote(c("-xf", tarball, "-C", lib, "-T", members)),
     stdout = NULL,
-    stderr = NULL
+    stderr = err
   )
   got <- intersect(take, list.dirs(lib, full.names = FALSE, recursive = FALSE))
+  if (length(got) < length(take)) {
+    detail <- stderr_tail(err)
+    inform(sprintf(
+      "Prebuilt: tar produced %d of %d requested package(s)%s",
+      length(got),
+      length(take),
+      if (nzchar(detail)) paste0("; tar said: ", detail) else ""
+    ))
+  }
   # A half-extracted package directory is worse than none: drop anything
   # without a DESCRIPTION and let pak install it properly.
   broken <- got[!file.exists(file.path(lib, got, "DESCRIPTION"))]
@@ -501,17 +596,41 @@ restore_prebuilt <- function(plan, lib, wanted) {
       next
     }
     inform("Prebuilt: fetching ", length(take), " package(s) from run ", run_id)
+    started <- Sys.time()
     dir <- fetch_artifact(run_id, "revdep2-lib", tempfile("prebuilt-"))
     tarball <- if (is.null(dir)) NULL else file.path(dir, "library.tar")
     if (is.null(tarball) || !file.exists(tarball)) {
-      inform("Prebuilt: run ", run_id, " no longer has a library artifact")
+      # Three different failures used to share one message, and the one that
+      # actually happened -- the artifact was there, the download or the
+      # unpacking was not -- was the one the message denied.
+      inform(sprintf(
+        "Prebuilt: nothing restored from run %s after %.0f s; %s",
+        run_id,
+        as.numeric(difftime(Sys.time(), started, units = "secs")),
+        if (is.null(dir)) {
+          "see the reason above"
+        } else {
+          paste0(
+            "the artifact unpacked to ",
+            paste(list.files(dir), collapse = ", "),
+            ", which has no library.tar"
+          )
+        }
+      ))
       unlink(dir, recursive = TRUE)
       next
     }
     got <- unpack_library(tarball, lib, take)
+    inform(sprintf(
+      "Prebuilt: restored %d of %d package(s) from run %s in %.0f s (%s tarball)",
+      length(got),
+      length(take),
+      run_id,
+      as.numeric(difftime(Sys.time(), started, units = "secs")),
+      format_bytes(file.size(tarball))
+    ))
     unlink(dir, recursive = TRUE)
     restored <- c(restored, got)
-    inform("Prebuilt: restored ", length(got), " package(s) from run ", run_id)
   }
   restored
 }

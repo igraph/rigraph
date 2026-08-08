@@ -40,11 +40,19 @@ failures <- list()
 # still resolves the whole union afterwards -- CRAN moves between runs, and a
 # package whose version changed has to be built after all -- but everything
 # unchanged is now already there, and is skipped.
+promised <- unique(unlist(
+  lapply(plan$prebuilt$runs %||% list(), function(d) {
+    unlist(d$packages, use.names = FALSE)
+  }),
+  use.names = FALSE
+))
 restored <- restore_prebuilt(plan, lib, install_union)
 inform(
   "Preflight: ",
   length(restored),
-  " package(s) restored from earlier runs"
+  " of the ",
+  length(intersect(promised, install_union)),
+  " package(s) the plan expected were restored from earlier runs"
 )
 
 # With a restored library, `upgrade = FALSE` would freeze whatever version the
@@ -52,7 +60,21 @@ inform(
 # CRAN *now*, so the library has to follow CRAN now.
 upgrade <- length(restored) > 0
 
-inform("Preflight: installing ", length(install_union), " packages")
+# This one call is the whole job, and the place it has died: pak resolves
+# every one of these refs before it installs anything, and the resolution of a
+# few thousand is where a run that is killed rather than failed gets killed.
+# So say what it is about to attempt, and how long it took to either finish or
+# die -- the workflow's resource sampler supplies the other half of that
+# picture, a memory curve on the same clock.
+inform(
+  "Preflight: installing ",
+  length(install_union),
+  " packages (",
+  length(missing_from(lib, install_union)),
+  " not in the library yet), upgrade = ",
+  upgrade
+)
+install_started <- Sys.time()
 installed_ok <- tryCatch(
   {
     pak::pkg_install(install_union, lib = lib, ask = FALSE, upgrade = upgrade)
@@ -63,6 +85,11 @@ installed_ok <- tryCatch(
     FALSE
   }
 )
+inform(sprintf(
+  "Preflight: the bulk install %s after %.1f min",
+  if (installed_ok) "finished" else "failed",
+  as.numeric(difftime(Sys.time(), install_started, units = "mins"))
+))
 if (!installed_ok) {
   # One bad package must not hide the state of the other thousand: retry each
   # missing package on its own and record exactly which ones will not install.
