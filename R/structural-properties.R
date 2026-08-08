@@ -4930,6 +4930,54 @@ which_mutual <- function(
 }
 
 
+#' Check if a directed graph has any mutual edges
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `any_mutual()` checks whether a directed graph
+#' contains at least one pair of mutual edges.
+#'
+#' @details
+#' In a directed graph, a non-loop (A,B) edge is mutual
+#' if the graph also includes a (B,A) directed edge.
+#' Whether directed self-loops are considered mutual
+#' is controlled by the `loops` argument.
+#'
+#' In undirected graphs, all edges are considered mutual by definition.
+#' Thus, for an undirected graph,
+#' this function returns `FALSE` only when the graph has no edges.
+#'
+#' To check whether a graph is an oriented graph,
+#' use this function together with [is_directed()].
+#'
+#' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
+#' @param loops Logical, whether to consider directed self-loops to be mutual.
+#' @return A logical scalar,
+#'   `TRUE` if the graph contains at least one pair of mutual edges,
+#'   `FALSE` otherwise.
+#' @seealso [which_mutual()] to find the mutual edges,
+#'   [reciprocity()] and [dyad_census()]
+#'   if you just want some statistics about mutual edges.
+#' @family structural.properties
+#' @export
+#' @examples
+#' g <- make_ring(10, directed = TRUE)
+#' any_mutual(g)
+#'
+#' g2 <- add_edges(g, c(2, 1))
+#' any_mutual(g2)
+any_mutual <- function(graph, ..., loops = TRUE) {
+  check_dots_empty()
+  ensure_igraph(graph)
+  has_mutual_impl(
+    graph = graph,
+    loops = loops
+  )
+}
+
+
 #' Average nearest neighbor degree
 #'
 #' Calculate the average nearest neighbor degree of the given vertices and the
