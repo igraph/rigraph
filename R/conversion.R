@@ -2057,7 +2057,7 @@ graph_from_data_frame <- function(
   }
 
   # add the edges
-  g <- add_edges(g, edges, attr = attrs)
+  g <- add_edges(g, c(edges), attr = attrs)
   g
 }
 
@@ -2149,7 +2149,7 @@ graph_from_edgelist <- function(
       V(res)$name <- names
     } else {
       ## normal edge list
-      res <- make_graph(t(el), directed = directed)
+      res <- make_graph(c(t(el)), directed = directed)
     }
   }
 
