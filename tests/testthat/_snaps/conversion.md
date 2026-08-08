@@ -456,3 +456,100 @@
       B 0 1 1
       C 1 0 0
 
+# as_veincidence_matrix() errors
+
+    Code
+      as_veincidence_matrix(g, weights = "nonexistent")
+    Condition
+      Error in `as_veincidence_matrix()`:
+      ! No such edge attribute
+
+---
+
+    Code
+      as_veincidence_matrix(g, weights = c(1, 2, 3))
+    Condition
+      Error in `as_veincidence_matrix()`:
+      ! `weights` must have length equal to the number of edges in the graph.
+      i Expected length 2, got 3.
+
+---
+
+    Code
+      as_veincidence_matrix(g, weights = list(1, 2))
+    Condition
+      Error in `as_veincidence_matrix()`:
+      ! `weights` must be `NULL`, `NA`, a numeric vector, or an edge attribute name.
+
+---
+
+    Code
+      as_veincidence_matrix(g, weights = "label")
+    Condition
+      Error in `as_veincidence_matrix()`:
+      ! The "label" edge attribute must be numeric or logical.
+      i Pass `weights = NA` to ignore it.
+
+---
+
+    Code
+      as_veincidence_matrix(g, NA)
+    Condition
+      Error in `as_veincidence_matrix()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = NA
+      i Did you forget to name an argument?
+
+# as_veincidence_matrix() snapshot tests
+
+    Code
+      as_veincidence_matrix(g, sparse = TRUE)
+    Output
+      3 x 4 sparse Matrix of class "dgCMatrix"
+                     
+      [1,] -1  .  1 .
+      [2,]  1 -1  . .
+      [3,]  .  1 -1 .
+
+---
+
+    Code
+      as_veincidence_matrix(g, sparse = FALSE)
+    Output
+           [,1] [,2] [,3] [,4]
+      [1,]   -1    0    1    0
+      [2,]    1   -1    0    0
+      [3,]    0    1   -1    0
+
+---
+
+    Code
+      as_veincidence_matrix(g, sparse = FALSE)
+    Output
+           [,1] [,2] [,3] [,4]
+      [1,] -1.5  0.0  3.7    0
+      [2,]  1.5 -2.3  0.0    0
+      [3,]  0.0  2.3 -3.7    0
+
+---
+
+    Code
+      as_veincidence_matrix(g, sparse = FALSE)
+    Output
+          e1   e2   e3 e4
+      A -1.5  0.0  3.7  0
+      B  1.5 -2.3  0.0  0
+      C  0.0  2.3 -3.7  0
+
+---
+
+    Code
+      as_veincidence_matrix(g, sparse = TRUE)
+    Output
+      3 x 4 sparse Matrix of class "dgCMatrix"
+          e1   e2   e3 e4
+      A -1.5  .    3.7  .
+      B  1.5 -2.3  .    .
+      C  .    2.3 -3.7  .
+

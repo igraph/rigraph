@@ -1042,6 +1042,243 @@ test_that("as_adjacency_matrix() comprehensive snapshot tests", {
   expect_snapshot(as_adjacency_matrix(g_named, sparse = FALSE))
 })
 
+# --- as_veincidence_matrix() ------------------------------------------------
+
+test_that("as_veincidence_matrix() works -- dense undirected", {
+  g <- make_ring(3, circular = FALSE)
+  expected <- matrix(c(1, 1, 0, 0, 1, 1), nrow = 3)
+  expect_equal(as_veincidence_matrix(g, sparse = FALSE), expected)
+})
+
+test_that("as_veincidence_matrix() works -- dense directed", {
+  g <- make_ring(3, circular = FALSE, directed = TRUE)
+  expected <- matrix(c(-1, 1, 0, 0, -1, 1), nrow = 3)
+  expect_equal(as_veincidence_matrix(g, sparse = FALSE), expected)
+})
+
+test_that("as_veincidence_matrix() works -- sparse", {
+  g <- make_ring(5, circular = FALSE)
+  inc_sparse <- as_veincidence_matrix(g, sparse = TRUE)
+  expect_s4_class(inc_sparse, "sparseMatrix")
+  expect_equal(
+    as.matrix(inc_sparse),
+    as_veincidence_matrix(g, sparse = FALSE)
+  )
+})
+
+test_that("as_veincidence_matrix() default sparse follows the igraph option", {
+  g <- make_ring(3, circular = FALSE)
+  local_igraph_options(sparsematrices = TRUE)
+  expect_s4_class(as_veincidence_matrix(g), "sparseMatrix")
+  local_igraph_options(sparsematrices = FALSE)
+  expect_true(is.matrix(as_veincidence_matrix(g)))
+})
+
+test_that("as_veincidence_matrix() handles loops", {
+  g_undir <- make_graph(c(1, 1, 1, 2), directed = FALSE)
+  expected_undir <- matrix(c(2, 0, 1, 1), nrow = 2)
+  expect_equal(as_veincidence_matrix(g_undir, sparse = FALSE), expected_undir)
+  expect_equal(
+    as.matrix(as_veincidence_matrix(g_undir, sparse = TRUE)),
+    expected_undir
+  )
+
+  g_dir <- make_graph(c(1, 1, 1, 2), directed = TRUE)
+  expected_dir <- matrix(c(0, 0, -1, 1), nrow = 2)
+  expect_equal(as_veincidence_matrix(g_dir, sparse = FALSE), expected_dir)
+  expect_equal(
+    as.matrix(as_veincidence_matrix(g_dir, sparse = TRUE)),
+    expected_dir
+  )
+})
+
+test_that("as_veincidence_matrix() gives each parallel edge its own column", {
+  g <- make_graph(c(1, 2, 1, 2, 2, 3), directed = FALSE)
+  expected <- matrix(c(1, 1, 0, 1, 1, 0, 0, 1, 1), nrow = 3)
+  expect_equal(as_veincidence_matrix(g, sparse = FALSE), expected)
+  expect_equal(as.matrix(as_veincidence_matrix(g, sparse = TRUE)), expected)
+})
+
+test_that("as_veincidence_matrix() picks up `weight` attribute by default", {
+  g <- make_ring(3, circular = FALSE, directed = TRUE)
+  E(g)$weight <- c(2, 5)
+  expected <- matrix(c(-2, 2, 0, 0, -5, 5), nrow = 3)
+  expect_equal(as_veincidence_matrix(g, sparse = FALSE), expected)
+  expect_equal(as.matrix(as_veincidence_matrix(g, sparse = TRUE)), expected)
+})
+
+test_that("as_veincidence_matrix() weights = NA returns unweighted matrix", {
+  g <- make_ring(3, circular = FALSE)
+  E(g)$weight <- c(2, 3)
+  plain <- matrix(c(1, 1, 0, 0, 1, 1), nrow = 3)
+  expect_equal(as_veincidence_matrix(g, weights = NA, sparse = FALSE), plain)
+  expect_equal(
+    as.matrix(as_veincidence_matrix(g, weights = NA, sparse = TRUE)),
+    plain
+  )
+})
+
+test_that("as_veincidence_matrix() accepts a numeric weights vector", {
+  g <- make_ring(3, circular = FALSE)
+  expected <- matrix(c(10, 10, 0, 0, 20, 20), nrow = 3)
+  expect_equal(
+    as_veincidence_matrix(g, weights = c(10, 20), sparse = FALSE),
+    expected
+  )
+  expect_equal(
+    as.matrix(as_veincidence_matrix(g, weights = c(10, 20), sparse = TRUE)),
+    expected
+  )
+})
+
+test_that("as_veincidence_matrix() weights = character names an edge attribute", {
+  g <- make_ring(3, circular = FALSE)
+  E(g)$myweight <- c(7, 8)
+  expect_equal(
+    as_veincidence_matrix(g, weights = "myweight", sparse = FALSE),
+    as_veincidence_matrix(g, weights = c(7, 8), sparse = FALSE)
+  )
+})
+
+test_that("as_veincidence_matrix() scales loops by their weight", {
+  g <- make_graph(c(1, 1, 1, 2), directed = FALSE)
+  E(g)$weight <- c(3, 4)
+  expected <- matrix(c(6, 0, 4, 4), nrow = 2)
+  expect_equal(as_veincidence_matrix(g, sparse = FALSE), expected)
+  expect_equal(as.matrix(as_veincidence_matrix(g, sparse = TRUE)), expected)
+})
+
+test_that("as_veincidence_matrix() assigns dimnames from attributes", {
+  g <- make_graph(c("a", "b", "b", "c"), directed = FALSE)
+  E(g)$label <- c("e1", "e2")
+
+  inc_dense <- as_veincidence_matrix(g, sparse = FALSE)
+  expect_equal(rownames(inc_dense), c("a", "b", "c"))
+  expect_equal(colnames(inc_dense), c("e1", "e2"))
+
+  inc_sparse <- as_veincidence_matrix(g, sparse = TRUE)
+  expect_equal(rownames(inc_sparse), c("a", "b", "c"))
+  expect_equal(colnames(inc_sparse), c("e1", "e2"))
+
+  inc_unnamed <- as_veincidence_matrix(g, names = FALSE, sparse = FALSE)
+  expect_null(dimnames(inc_unnamed))
+
+  inc_sparse_unnamed <- as_veincidence_matrix(g, names = FALSE, sparse = TRUE)
+  expect_null(rownames(inc_sparse_unnamed))
+  expect_null(colnames(inc_sparse_unnamed))
+
+  # no dimnames without the corresponding attributes
+  g_plain <- make_ring(3, circular = FALSE)
+  expect_null(dimnames(as_veincidence_matrix(g_plain, sparse = FALSE)))
+})
+
+test_that("as_veincidence_matrix() handles graphs without edges", {
+  g <- make_empty_graph(5)
+  expect_identical(dim(as_veincidence_matrix(g, sparse = FALSE)), c(5L, 0L))
+  expect_identical(dim(as_veincidence_matrix(g, sparse = TRUE)), c(5L, 0L))
+
+  g0 <- make_empty_graph(0)
+  expect_identical(dim(as_veincidence_matrix(g0, sparse = FALSE)), c(0L, 0L))
+  expect_identical(dim(as_veincidence_matrix(g0, sparse = TRUE)), c(0L, 0L))
+})
+
+test_that("as_veincidence_matrix() dense/sparse parity for arbitrary weights", {
+  edges <- c(1, 2, 1, 2, 2, 3, 3, 3, 3, 1)
+  w <- c(0.5, 1.5, -2.5, 3.5, 4.5)
+  for (directed in c(TRUE, FALSE)) {
+    g <- make_graph(edges, directed = directed)
+    inc_dense <- as_veincidence_matrix(g, weights = w, sparse = FALSE)
+    inc_sparse <- as_veincidence_matrix(g, weights = w, sparse = TRUE)
+    expect_equal(as.matrix(inc_sparse), inc_dense, info = directed)
+  }
+})
+
+test_that("as_veincidence_matrix() satisfies Laplacian identities", {
+  # For an undirected loop-free graph, B %*% t(B) is the signless Laplacian
+  g <- make_ring(4)
+  B <- as_veincidence_matrix(g, sparse = FALSE)
+  Q <- diag(degree(g)) + as_adjacency_matrix(g, sparse = FALSE)
+  expect_equal(B %*% t(B), Q)
+
+  # For a directed loop-free graph, B %*% t(B) is the Laplacian of the
+  # underlying undirected graph
+  g_dir <- make_ring(4, directed = TRUE)
+  B_dir <- as_veincidence_matrix(g_dir, sparse = FALSE)
+  L <- laplacian_matrix(as_undirected(g_dir), sparse = FALSE)
+  expect_equal(B_dir %*% t(B_dir), L)
+})
+
+test_that("as_veincidence_matrix() reproduces the examples from #1122", {
+  # Undirected multigraph
+  g2 <- make_graph(c(1, 2, 1, 2, 2, 3), directed = FALSE)
+  expect_equal(
+    as_veincidence_matrix(g2, sparse = FALSE),
+    matrix(c(1, 1, 0, 1, 1, 0, 0, 1, 1), nrow = 3)
+  )
+
+  # Directed weighted multigraph
+  g4w <- make_graph(c(1, 2, 1, 2, 2, 3), directed = TRUE)
+  E(g4w)$weight <- c(2, 3, 5)
+  expect_equal(
+    as_veincidence_matrix(g4w, sparse = FALSE),
+    matrix(c(-2, 2, 0, -3, 3, 0, 0, -5, 5), nrow = 3)
+  )
+
+  # Named directed graph with edge labels
+  g6 <- make_graph(c("a", "b", "b", "c", "c", "a", "a", "d"), directed = TRUE)
+  E(g6)$label <- as.character(1:4)
+  inc6 <- as_veincidence_matrix(g6, sparse = FALSE)
+  expect_equal(rownames(inc6), c("a", "b", "c", "d"))
+  expect_equal(colnames(inc6), as.character(1:4))
+
+  # Undirected and directed graphs with loops
+  g7 <- make_graph(c(1, 1, 1, 1, 1, 2, 1, 2), directed = FALSE)
+  expect_equal(
+    as_veincidence_matrix(g7, sparse = FALSE),
+    matrix(c(2, 0, 2, 0, 1, 1, 1, 1), nrow = 2)
+  )
+  g8 <- make_graph(c(1, 1, 1, 1, 1, 2, 1, 2), directed = TRUE)
+  expect_equal(
+    as_veincidence_matrix(g8, sparse = FALSE),
+    matrix(c(0, 0, 0, 0, -1, 1, -1, 1), nrow = 2)
+  )
+})
+
+test_that("as_veincidence_matrix() errors", {
+  g <- make_ring(3, circular = FALSE)
+  expect_snapshot_igraph_error(
+    as_veincidence_matrix(g, weights = "nonexistent")
+  )
+  expect_snapshot_igraph_error(
+    as_veincidence_matrix(g, weights = c(1, 2, 3))
+  )
+  expect_snapshot_igraph_error(
+    as_veincidence_matrix(g, weights = list(1, 2))
+  )
+  E(g)$label <- c("x", "y")
+  expect_snapshot_igraph_error(
+    as_veincidence_matrix(g, weights = "label")
+  )
+  # arguments after the ellipsis must be named
+  expect_snapshot_igraph_error(
+    as_veincidence_matrix(g, NA)
+  )
+})
+
+test_that("as_veincidence_matrix() snapshot tests", {
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 2, 2), directed = TRUE)
+  expect_snapshot(as_veincidence_matrix(g, sparse = TRUE))
+  expect_snapshot(as_veincidence_matrix(g, sparse = FALSE))
+
+  E(g)$weight <- c(1.5, 2.3, 3.7, 0.5)
+  expect_snapshot(as_veincidence_matrix(g, sparse = FALSE))
+
+  V(g)$name <- c("A", "B", "C")
+  E(g)$label <- paste0("e", 1:4)
+  expect_snapshot(as_veincidence_matrix(g, sparse = FALSE))
+  expect_snapshot(as_veincidence_matrix(g, sparse = TRUE))
+})
+
 # ---- ellipsis migration: argument coverage ----------------------------
 
 test_that("as_adj_list() covers tail args by name and recovers positional calls", {

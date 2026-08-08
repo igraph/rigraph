@@ -626,6 +626,172 @@ as_edgelist <- function(
   res
 }
 
+#' Convert a graph to a vertex-edge incidence matrix
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `as_veincidence_matrix()` returns the vertex-edge incidence matrix
+#' of a graph,
+#' a regular matrix if `sparse` is `FALSE`,
+#' or a sparse matrix, as defined in the \sQuote{`Matrix`} package,
+#' if `sparse` is `TRUE`.
+#'
+#' The vertex-edge incidence matrix has one row for each vertex
+#' and one column for each edge.
+#' For an undirected graph,
+#' the matrix element is 1 if the vertex is incident to the edge,
+#' 2 if the edge is a loop on the vertex,
+#' and 0 otherwise.
+#' For a directed graph,
+#' the element is -1 if the vertex is the tail (source) of the edge,
+#' 1 if it is the head (target),
+#' and 0 otherwise;
+#' loops contribute 0.
+#'
+#' When edge weights are used,
+#' the values -1, 1, and 2 are scaled
+#' by the weight of the corresponding edge.
+#'
+#' @param graph The graph to convert.
+#' @inheritParams rlang::args_dots_empty
+#' @param weights One of the following:
+#'   \itemize{
+#'     \item `NULL` (default): use the `weight` edge attribute if the graph has
+#'       one, otherwise return an unweighted incidence matrix.
+#'     \item `NA`: explicitly unweighted, ignoring any `weight` edge attribute.
+#'     \item A numeric or logical vector of length [ecount()]: use these values
+#'       directly as edge weights.
+#'     \item A character scalar: the name of an edge attribute whose values are
+#'       used as weights. The attribute must be numeric or logical.
+#'   }
+#' @param names Logical, whether to assign row and column names to the matrix.
+#'   Row names are taken from the `name` vertex attribute
+#'   and column names from the `label` edge attribute,
+#'   if present.
+#' @param sparse Logical, whether to create a sparse matrix.
+#'   The \sQuote{`Matrix`} package must be installed
+#'   for creating sparse matrices.
+#'   The default `NULL` uses the `sparsematrices` igraph option.
+#' @return A `vcount(graph)` by `ecount(graph)` (usually) numeric matrix.
+#'
+#' @seealso [as_adjacency_matrix()], [as_edgelist()], [laplacian_matrix()]
+#' @family conversion
+#' @export
+#' @examples
+#' # Undirected graph
+#' g1 <- make_ring(3, circular = FALSE)
+#' as_veincidence_matrix(g1, sparse = FALSE)
+#'
+#' # Directed graph
+#' g2 <- make_ring(3, circular = FALSE, directed = TRUE)
+#' as_veincidence_matrix(g2, sparse = FALSE)
+#'
+#' # Weighted graph
+#' g3 <- make_ring(3, circular = FALSE)
+#' E(g3)$weight <- c(2, 3)
+#' as_veincidence_matrix(g3, sparse = FALSE)
+#'
+#' # Named graph with edge labels
+#' g4 <- graph_from_literal(a - b, b - c, c - d)
+#' E(g4)$label <- paste0("e", seq_len(ecount(g4)))
+#' as_veincidence_matrix(g4, sparse = FALSE)
+#'
+#' # Loops count twice in undirected graphs
+#' g5 <- make_graph(c(1, 1, 1, 2), directed = FALSE)
+#' as_veincidence_matrix(g5, sparse = FALSE)
+as_veincidence_matrix <- function(
+  graph,
+  ...,
+  weights = NULL,
+  names = TRUE,
+  sparse = NULL
+) {
+  ensure_igraph(graph)
+  check_dots_empty()
+
+  if (is.null(sparse)) {
+    sparse <- igraph_opt("sparsematrices")
+  }
+
+  weights <- resolve_edge_weights(
+    graph,
+    weights,
+    fn = "as_veincidence_matrix"
+  )
+
+  if (sparse) {
+    get_veincidence_sparse(graph, weights = weights, names = names)
+  } else {
+    get_veincidence_dense(graph, weights = weights, names = names)
+  }
+}
+
+get_veincidence_dense <- function(graph, weights = numeric(), names = TRUE) {
+  ec <- ecount(graph)
+  el <- as_edgelist(graph, names = FALSE)
+  eseq <- seq_len(ec)
+  if (length(weights) == 0) {
+    weights <- rep(1, ec)
+  }
+  loop <- el[, 1] == el[, 2]
+
+  res <- matrix(0, nrow = vcount(graph), ncol = ec)
+  if (is_directed(graph)) {
+    # Loops contribute 0 in directed graphs
+    res[cbind(el[!loop, 1], eseq[!loop])] <- -weights[!loop]
+    res[cbind(el[!loop, 2], eseq[!loop])] <- weights[!loop]
+  } else {
+    res[cbind(el[!loop, 1], eseq[!loop])] <- weights[!loop]
+    res[cbind(el[!loop, 2], eseq[!loop])] <- weights[!loop]
+    # Loops contribute twice their weight in undirected graphs
+    res[cbind(el[loop, 1], eseq[loop])] <- 2 * weights[loop]
+  }
+
+  set_veincidence_dimnames(res, graph, names)
+}
+
+get_veincidence_sparse <- function(graph, weights = numeric(), names = TRUE) {
+  ec <- ecount(graph)
+  el <- as_edgelist(graph, names = FALSE)
+  eseq <- seq_len(ec)
+  if (length(weights) == 0) {
+    weights <- rep(1, ec)
+  }
+  loop <- el[, 1] == el[, 2]
+
+  if (is_directed(graph)) {
+    # Loops contribute 0 in directed graphs and are omitted
+    i <- c(el[!loop, 1], el[!loop, 2])
+    j <- c(eseq[!loop], eseq[!loop])
+    x <- c(-weights[!loop], weights[!loop])
+  } else {
+    # Loops contribute twice their weight in undirected graphs
+    i <- c(el[!loop, 1], el[!loop, 2], el[loop, 1])
+    j <- c(eseq[!loop], eseq[!loop], eseq[loop])
+    x <- c(weights[!loop], weights[!loop], 2 * weights[loop])
+  }
+
+  res <- Matrix::sparseMatrix(
+    i = i,
+    j = j,
+    x = x,
+    dims = c(vcount(graph), ec)
+  )
+  set_veincidence_dimnames(res, graph, names)
+}
+
+set_veincidence_dimnames <- function(res, graph, names) {
+  if (!names) {
+    return(res)
+  }
+  if ("name" %in% vertex_attr_names(graph)) {
+    rownames(res) <- V(graph)$name
+  }
+  if ("label" %in% edge_attr_names(graph)) {
+    colnames(res) <- E(graph)$label
+  }
+  res
+}
 
 #' Convert between directed and undirected graphs
 #'
