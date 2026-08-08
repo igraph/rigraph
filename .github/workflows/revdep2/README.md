@@ -566,6 +566,9 @@ the report is about *results*, a retry is about *coverage*.
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
+| A pak install chunk never returns | killed at `REVDEP2_INSTALL_TIMEOUT_MINUTES`, tree and all; the next chunk starts a fresh pak |
+| The installs cannot finish inside the job | no chunk is started past `REVDEP2_INSTALL_DEADLINE_MINUTES`; what did install is still load-tested, packed and published |
+| A dependency's `loadNamespace()` hangs | the batch times out and is retried one package at a time, so the culprit is named as a load failure |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
@@ -641,6 +644,53 @@ so a chunk that dies costs a chunk rather than the job —
 and the log names which one,
 where a single opaque call could only go quiet.
 
+### Nothing waits for ever
+
+A hang is not a crash, and the difference matters:
+a job that fails is over in a minute and says why,
+a job that hangs holds a runner
+until someone notices and cancels it.
+Run 31276552027 spent 76 minutes that way —
+`pak::pkg_install()` on chunk 21 of 45 never returned,
+at one busy core and flat memory,
+after chunks 14 and 20 had already failed
+with "error in pak subprocess".
+There was no loop to break;
+the call simply did not come back,
+and nothing in these scripts had a clock.
+
+Now everything that calls out has one:
+
+- **each pak install** runs in a `callr` child
+  and is killed at `REVDEP2_INSTALL_TIMEOUT_MINUTES` (20).
+  It is killed with `kill_tree()`, not `kill()`,
+  because what wedges is pak's *own* subprocess —
+  a grandchild, which outlives a plain kill of its parent.
+  The child inherits stdout and stderr,
+  so pak's progress still streams to the job log
+  with nobody draining a pipe.
+- **each load-test batch** runs under a `processx` timeout
+  (`REVDEP2_LOAD_TIMEOUT_MINUTES`, 10).
+  `loadNamespace()` is not a thing that necessarily returns:
+  a package whose `.onLoad` waits on a lock, a port or a display
+  hangs the child for good.
+- **the installs as a whole** stop at
+  `REVDEP2_INSTALL_DEADLINE_MINUTES` (210),
+  below the job's own 300.
+  That is a different question from the per-call limit:
+  one bounds a single call, the other stops 45 of them
+  from adding up past what the job has —
+  and what it cuts off is named,
+  while the packages that did install
+  are still load-tested, packed and published.
+
+Running each install in its own child buys one more thing.
+A wedged pak subprocess used to poison every call after it,
+which is the likeliest reason chunk 21 hung
+where 14 and 20 had merely failed.
+Each chunk now starts a fresh R and a fresh pak,
+so a bad one is contained to itself.
+
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,
 so its failure never stops a run —
@@ -686,6 +736,9 @@ at the next `if`.
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
 | Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
+| Time limit on one `pak::pkg_install()` call | — | `REVDEP2_INSTALL_TIMEOUT_MINUTES` | 20 |
+| Wall clock past which no further install is started | — | `REVDEP2_INSTALL_DEADLINE_MINUTES` | 210 |
+| Time limit on one load-test batch | — | `REVDEP2_LOAD_TIMEOUT_MINUTES` | 10 |
 | Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |

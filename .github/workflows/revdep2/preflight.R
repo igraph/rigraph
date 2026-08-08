@@ -21,6 +21,11 @@
 #   LIB_OUT    - where library.tar and lib.json land; empty skips packing
 #   LIB_INDEX_OUT - where a copy of lib.json alone lands, for the small
 #                   artifact a later plan reads without the tar
+#
+# Nothing here waits without a clock: REVDEP2_INSTALL_TIMEOUT_MINUTES bounds
+# one pak call, REVDEP2_LOAD_TIMEOUT_MINUTES one load-test batch, and
+# REVDEP2_INSTALL_DEADLINE_MINUTES the installs together -- see the README's
+# "Nothing waits for ever".
 
 source(file.path(
   dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
@@ -69,6 +74,12 @@ upgrade <- length(restored) > 0
 # counter -- the workflow's resource sampler supplies the other half of that
 # picture, a memory curve on the same clock.
 chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+# Past this, no further chunk is started. The job's own `timeout-minutes` is
+# 300 and cancels everything; this stops earlier and on purpose, so that the
+# packages that did install are still load-tested, packed and published
+# instead of dying with the job.
+install_deadline <- Sys.time() +
+  env_num("REVDEP2_INSTALL_DEADLINE_MINUTES", 210) * 60
 chunks <- install_chunks(install_union, cran_db(), chunk_size)
 inform(
   "Preflight: installing ",
@@ -83,7 +94,13 @@ inform(
   upgrade
 )
 install_started <- Sys.time()
-installed_ok <- install_in_chunks(chunks, lib, upgrade, "Preflight")
+installed_ok <- install_in_chunks(
+  chunks,
+  lib,
+  upgrade,
+  "Preflight",
+  deadline = install_deadline
+)
 inform(sprintf(
   "Preflight: the install %s after %.1f min; %d of %d packages are in the library",
   if (installed_ok) "finished" else "failed",
@@ -94,22 +111,32 @@ inform(sprintf(
 if (!installed_ok) {
   # One bad package must not hide the state of the other thousand: retry each
   # missing package on its own and record exactly which ones will not install.
-  for (p in install_union) {
-    if (dir.exists(file.path(lib, p))) {
-      next
+  # Bounded twice over -- one package may not hang the retry, and the retry as
+  # a whole may not eat the minutes the load test and the library packing still
+  # need. What the deadline cuts off is named rather than reported as failing.
+  retry <- missing_from(lib, install_union)
+  inform("Preflight: retrying ", length(retry), " package(s) one at a time")
+  for (i in seq_along(retry)) {
+    if (Sys.time() > install_deadline) {
+      inform(sprintf(
+        "Preflight: the install deadline passed; %d of %d package(s) not retried",
+        length(retry) - i + 1L,
+        length(retry)
+      ))
+      break
     }
-    result <- tryCatch(
-      {
-        pak::pkg_install(p, lib = lib, ask = FALSE, upgrade = upgrade)
-        NULL
-      },
-      error = function(e) conditionMessage(e)
+    run <- pak_install(
+      retry[[i]],
+      lib = lib,
+      upgrade = upgrade,
+      timeout_seconds = install_timeout_seconds(),
+      label = paste("Preflight: installing", retry[[i]])
     )
-    if (!is.null(result)) {
+    if (!run$ok) {
       failures[[length(failures) + 1]] <- list(
-        package = p,
+        package = retry[[i]],
         phase = "install",
-        message = result
+        message = run$message
       )
     }
   }
@@ -120,6 +147,15 @@ if (!installed_ok) {
 # namespace names itself.
 installed <- intersect(install_union, rownames(utils::installed.packages(lib)))
 inform("Preflight: loading ", length(installed), " packages")
+
+# Bounded, because `loadNamespace()` is not a thing that necessarily returns:
+# a package whose .onLoad waits on a lock, a port or a display hangs the child
+# for ever, and this used to wait for it with no clock -- the same unbounded
+# wait that cost run 31276552027 its preflight, one call further on. A batch
+# that runs out of time is retried package by package, which is already how a
+# failing batch names its culprit; a single package that then times out is a
+# load failure like any other, with "timed out" as its reason.
+load_timeout_sec <- env_num("REVDEP2_LOAD_TIMEOUT_MINUTES", 10) * 60
 load_batch <- function(pkgs) {
   script <- tempfile(fileext = ".R")
   writeLines(
@@ -132,15 +168,31 @@ load_batch <- function(pkgs) {
     ),
     script
   )
-  out <- suppressWarnings(system2(
-    "Rscript",
-    # Quoted: system2() quotes the command, but not the arguments.
-    shQuote(c("--vanilla", script, pkgs)),
-    stdout = TRUE,
-    stderr = TRUE
-  ))
+  args <- c("--vanilla", script, pkgs)
+  if (requireNamespace("processx", quietly = TRUE)) {
+    # processx runs the command directly rather than through a shell, so the
+    # arguments need no quoting of their own.
+    run <- processx::run(
+      "Rscript",
+      args,
+      timeout = load_timeout_sec,
+      error_on_status = FALSE,
+      stderr_to_stdout = TRUE
+    )
+    out <- strsplit(run$stdout %||% "", "\n", fixed = TRUE)[[1]]
+    timed_out <- isTRUE(run$timeout)
+  } else {
+    out <- suppressWarnings(system2(
+      "Rscript",
+      # Quoted: system2() quotes the command, but not the arguments.
+      shQuote(args),
+      stdout = TRUE,
+      stderr = TRUE
+    ))
+    timed_out <- FALSE
+  }
   loaded <- sub("^LOADED ", "", grep("^LOADED ", out, value = TRUE))
-  list(failed = setdiff(pkgs, loaded), log = out)
+  list(failed = setdiff(pkgs, loaded), log = out, timed_out = timed_out)
 }
 load_failures <- list()
 chunks <- split(installed, ceiling(seq_along(installed) / 40))
@@ -152,10 +204,11 @@ for (chunk in chunks) {
   for (p in first$failed) {
     single <- load_batch(p)
     if (length(single$failed) > 0) {
-      load_failures[[p]] <- paste(
-        utils::tail(sanitize_log(single$log), 20),
-        collapse = "\n"
-      )
+      load_failures[[p]] <- if (isTRUE(single$timed_out)) {
+        sprintf("loading timed out after %.0f min", load_timeout_sec / 60)
+      } else {
+        paste(utils::tail(sanitize_log(single$log), 20), collapse = "\n")
+      }
     }
   }
 }
@@ -173,12 +226,16 @@ if (length(stale) > 0) {
   )
   unlink(file.path(lib, stale), recursive = TRUE)
   for (p in stale) {
-    tryCatch(
-      pak::pkg_install(p, lib = lib, ask = FALSE, upgrade = FALSE),
-      error = function(e) {
-        inform("Could not reinstall ", p, ": ", conditionMessage(e))
-      }
+    run <- pak_install(
+      p,
+      lib = lib,
+      upgrade = FALSE,
+      timeout_seconds = install_timeout_seconds(),
+      label = paste("Preflight: rebuilding", p)
     )
+    if (!run$ok) {
+      inform("Could not reinstall ", p, ": ", run$message)
+    }
   }
   for (p in stale) {
     retried <- load_batch(p)

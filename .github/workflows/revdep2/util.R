@@ -949,42 +949,165 @@ install_chunks <- function(pkgs, db, size = 100) {
 # Install one chunked set, reporting each chunk as it lands. Returns TRUE when
 # every chunk succeeded; a caller that cares which packages are missing asks
 # the library, not this.
-install_in_chunks <- function(chunks, lib = NULL, upgrade = FALSE, label = "") {
+# Run `fun` in a child R process and give up on it after `timeout_seconds`.
+#
+# Nothing this workflow calls out to has a time limit of its own, and in run
+# 31276552027 that cost a job: `pak::pkg_install()` on chunk 21 never returned,
+# and the preflight sat at one busy core and flat memory for 76 minutes until
+# it was cancelled by hand. There is no loop to break there -- the call simply
+# does not come back -- so the only thing that helps is a clock.
+#
+# Two details make this work where `tryCatch` and `setTimeLimit` do not. The
+# child inherits this process's stdout and stderr, so pak's progress still
+# streams to the job log with nobody draining a pipe; and it is killed with
+# `kill_tree()`, because what wedges is pak's *own* subprocess, a grandchild,
+# which outlives a plain kill of its parent.
+#
+# It also isolates the calls from each other. Chunks 14 and 20 of that run had
+# already failed with "error in pak subprocess" before 21 hung, and one wedged
+# pak subprocess used to poison every call after it; now each one starts a
+# fresh R and a fresh pak.
+#
+# callr comes with rcmdcheck, and the preflight installs it outright. Where it
+# is missing there is no way to bound anything, so the call is made inline --
+# the old behaviour, announced rather than silent.
+run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
+  if (!requireNamespace("callr", quietly = TRUE)) {
+    inform(label, ": callr is not installed, running without a time limit")
+    message <- tryCatch(
+      {
+        do.call(fun, args)
+        ""
+      },
+      error = function(e) conditionMessage(e)
+    )
+    return(list(ok = !nzchar(message), timed_out = FALSE, message = message))
+  }
+  process <- callr::r_bg(
+    fun,
+    args = args,
+    stdout = "",
+    stderr = "2>&1",
+    supervise = TRUE
+  )
+  process$wait(timeout = timeout_seconds * 1000)
+  if (process$is_alive()) {
+    process$kill_tree()
+    process$wait(timeout = 10000)
+    return(list(
+      ok = FALSE,
+      timed_out = TRUE,
+      message = sprintf(
+        "no output and no result after %s; killed",
+        format_duration(timeout_seconds)
+      )
+    ))
+  }
+  message <- tryCatch(
+    {
+      process$get_result()
+      ""
+    },
+    # callr reports a child's failure wrapped in its own condition, and the
+    # wrapper is three lines of scaffolding around the one line that says what
+    # broke -- which is the line that ends up in depfail.json.
+    error = function(e) conditionMessage(e$parent %||% e)
+  )
+  list(ok = !nzchar(message), timed_out = FALSE, message = message)
+}
+
+format_duration <- function(seconds) {
+  if (seconds < 90) {
+    sprintf("%.0f s", seconds)
+  } else {
+    sprintf("%.0f min", seconds / 60)
+  }
+}
+
+# One pak install, bounded. Separate from install_in_chunks() because the
+# per-package retry after a failed chunk needs exactly the same treatment: it
+# is the same call, one package at a time, and it used to be just as
+# unbounded.
+pak_install <- function(
+  pkgs,
+  lib = NULL,
+  upgrade = FALSE,
+  timeout_seconds,
+  label = ""
+) {
+  run_with_timeout(
+    function(pkgs, lib, upgrade) {
+      if (is.null(lib)) {
+        pak::pkg_install(pkgs, ask = FALSE, upgrade = upgrade)
+      } else {
+        pak::pkg_install(pkgs, lib = lib, ask = FALSE, upgrade = upgrade)
+      }
+      invisible(NULL)
+    },
+    args = list(pkgs = pkgs, lib = lib, upgrade = upgrade),
+    timeout_seconds = timeout_seconds,
+    label = label
+  )
+}
+
+# `deadline` is the wall clock past which no further chunk is started. It is
+# not a second timeout but the answer to a different question: the per-chunk
+# limit stops one call from running for ever, and this stops 45 of them from
+# adding up past what the job has. What is left unattempted is named, and the
+# caller still gets to pack and publish what did install.
+install_in_chunks <- function(
+  chunks,
+  lib = NULL,
+  upgrade = FALSE,
+  label = "",
+  timeout_seconds = install_timeout_seconds(),
+  deadline = NULL
+) {
   ok <- TRUE
   prefix <- if (nzchar(label)) paste0(label, ": ") else ""
   for (i in seq_along(chunks)) {
+    if (!is.null(deadline) && Sys.time() > deadline) {
+      inform(sprintf(
+        "%sthe install deadline passed; %d of %d chunk(s) not attempted",
+        prefix,
+        length(chunks) - i + 1L,
+        length(chunks)
+      ))
+      return(FALSE)
+    }
     started <- Sys.time()
-    chunk_ok <- tryCatch(
-      {
-        if (is.null(lib)) {
-          pak::pkg_install(chunks[[i]], ask = FALSE, upgrade = upgrade)
-        } else {
-          pak::pkg_install(
-            chunks[[i]],
-            lib = lib,
-            ask = FALSE,
-            upgrade = upgrade
-          )
-        }
-        TRUE
-      },
-      error = function(e) {
-        inform(prefix, "chunk ", i, " failed: ", conditionMessage(e))
-        FALSE
-      }
+    run <- pak_install(
+      chunks[[i]],
+      lib = lib,
+      upgrade = upgrade,
+      timeout_seconds = timeout_seconds,
+      label = sprintf("%schunk %d/%d", prefix, i, length(chunks))
     )
-    ok <- ok && chunk_ok
+    if (!run$ok) {
+      inform(prefix, "chunk ", i, " failed: ", run$message)
+    }
+    ok <- ok && run$ok
     inform(sprintf(
       "%schunk %d/%d (%d packages) %s after %.1f min",
       prefix,
       i,
       length(chunks),
       length(chunks[[i]]),
-      if (chunk_ok) "installed" else "failed",
+      if (run$ok) {
+        "installed"
+      } else if (run$timed_out) {
+        "timed out"
+      } else {
+        "failed"
+      },
       as.numeric(difftime(Sys.time(), started, units = "mins"))
     ))
   }
   ok
+}
+
+install_timeout_seconds <- function() {
+  env_num("REVDEP2_INSTALL_TIMEOUT_MINUTES", 20) * 60
 }
 
 # Fingerprint of the *versions* of everything a check installs, from CRAN
