@@ -70,7 +70,7 @@ on:
         type: string
         default: ""
       packages:
-        description: "Packages to check (comma/space separated; default: all reverse dependencies)"
+        description: "Packages to check (comma/space separated), or 'broken' to take what the committed revdep/ report lists as broken or failed; default: all reverse dependencies"
         type: string
         default: ""
       which:
@@ -149,9 +149,12 @@ env:
   REVDEP2_PREBUILT_MAX_RUNS: ${{ vars.REVDEP2_PREBUILT_MAX_RUNS || '5' }}
   REVDEP2_PREBUILT_MAX_AGE_DAYS: ${{ vars.REVDEP2_PREBUILT_MAX_AGE_DAYS || '14' }}
   # Per-check timeout: factor times the package's CRAN check time, but never
-  # below the floor -- CRAN's machines are not these runners.
+  # below the floor -- CRAN's machines are not these runners. The floor was 10
+  # minutes and killed 19 of 770 packages in run 31048405399, every one of them
+  # compile-heavy (Stan models, mostly) and fast on CRAN's own numbers: 13 of
+  # them had the floor as their whole budget. 20 minutes covers all 19.
   REVDEP2_TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
-  REVDEP2_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '10' }}
+  REVDEP2_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '20' }}
   REVDEP2_DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
 
 jobs:
@@ -177,11 +180,13 @@ jobs:
       actions: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
@@ -190,8 +195,8 @@ jobs:
           install.packages("jsonlite")
         shell: Rscript {0}
 
-      - id: plan
-        name: Plan shards
+      - name: Plan shards
+        id: plan
         env:
           GH_TOKEN: ${{ github.token }}
           OUT: ${{ runner.temp }}/plan.json
@@ -199,7 +204,8 @@ jobs:
           Rscript ./.github/workflows/revdep2/plan.R
         shell: bash
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload the shard plan
+        uses: actions/upload-artifact@v6
         if: steps.plan.outputs.shards != '0'
         with:
           name: revdep2-plan
@@ -221,11 +227,13 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: ./.github/workflows/install
+      - name: Install R and the package dependencies
+        uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: revdep2-1
@@ -238,7 +246,8 @@ jobs:
           Rscript ./.github/workflows/revdep2/build.R
         shell: bash
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload the package binary
+        uses: actions/upload-artifact@v6
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
@@ -268,7 +277,8 @@ jobs:
       actions: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -290,7 +300,8 @@ jobs:
           free -g
         shell: bash
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
@@ -300,14 +311,16 @@ jobs:
           install.packages("jsonlite")
         shell: Rscript {0}
 
-      - uses: actions/download-artifact@v7
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
       # The preflight downloads every dependency binary once; saving the pak
       # cache under the plan's hash hands the shards a warm start.
-      - uses: actions/cache@v5
+      - name: Cache the pak package cache
+        uses: actions/cache@v5
         with:
           path: ~/.cache/R/pkgcache
           key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
@@ -337,7 +350,8 @@ jobs:
           du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
         shell: bash
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload the preflight report
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-preflight
@@ -350,7 +364,8 @@ jobs:
       # dependency universe, gigabytes of it -- so it is kept exactly as long
       # as a plan would still reuse it, while the index that describes it is
       # cheap and outlives it.
-      - uses: actions/upload-artifact@v6
+      - name: Upload the preflight library
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-lib
@@ -359,7 +374,8 @@ jobs:
           retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
           overwrite: true
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload the library index
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-lib-index
@@ -419,17 +435,29 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-pandoc@v2
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@v2
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Close the log group that setup-pandoc leaves open
+        # See `.github/workflows/install/action.yml` for why this is needed.
+        # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
+        if: runner.os == 'Linux'
+        run: |
+          echo "::endgroup::"
+        shell: bash
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-tinytex@v2
+      - name: Set up TinyTeX
+        uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install system tools for checking
         run: |
@@ -443,19 +471,22 @@ jobs:
           install.packages(c("jsonlite", "rcmdcheck"))
         shell: Rscript {0}
 
-      - uses: actions/cache/restore@v5
+      - name: Restore the pak package cache
+        uses: actions/cache/restore@v5
         with:
           path: ~/.cache/R/pkgcache
           key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
           restore-keys: |
             revdep2-pak-
 
-      - uses: actions/download-artifact@v7
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
-      - uses: actions/download-artifact@v7
+      - name: Download the package binary
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
@@ -464,7 +495,8 @@ jobs:
       # building the same packages the preflight built minutes ago. It is a
       # `needs`, so it is always there -- unless the preflight could not pack
       # one, which is a slower shard, not a broken one.
-      - uses: actions/download-artifact@v7
+      - name: Download this run's preflight library
+        uses: actions/download-artifact@v7
         continue-on-error: true
         with:
           name: revdep2-lib
@@ -472,7 +504,8 @@ jobs:
 
       # The baseline lives on an earlier run; absence is not an error, the
       # shard just checks the CRAN version fresh.
-      - uses: actions/download-artifact@v7
+      - name: Download the baseline results
+        uses: actions/download-artifact@v7
         if: needs.plan.outputs.baseline_run != '0'
         continue-on-error: true
         with:
@@ -502,7 +535,8 @@ jobs:
       # Named per attempt: a re-run of one shard must not overwrite the results
       # the other shards uploaded in the first attempt; the collector reads
       # every attempt and lets the later one win per package.
-      - uses: actions/upload-artifact@v6
+      - name: Upload the shard results
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
@@ -536,16 +570,19 @@ jobs:
     name: "Collect results and report"
 
     permissions:
-      contents: read
+      # To commit the report back to the checked branch.
+      contents: write
       # To download the retried run's report artifact, which lives on that run.
       actions: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
@@ -565,7 +602,8 @@ jobs:
           pak::pkg_install("krlmlr/revdepcheck")
         shell: Rscript {0}
 
-      - uses: actions/download-artifact@v7
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
@@ -573,13 +611,15 @@ jobs:
       # Tolerated because a run in which no shard uploaded anything is still
       # worth a report: the collector reconciles against the plan and names
       # every package it never heard about, which is what `retry-run` needs.
-      - uses: actions/download-artifact@v7
+      - name: Download the results of all shards
+        uses: actions/download-artifact@v7
         continue-on-error: true
         with:
           pattern: revdep2-results-*
           path: ${{ runner.temp }}/results
 
-      - uses: actions/download-artifact@v7
+      - name: Download the report of the run being retried
+        uses: actions/download-artifact@v7
         if: env.REVDEP2_RETRY_RUN != ''
         continue-on-error: true
         with:
@@ -603,7 +643,8 @@ jobs:
           Rscript ./.github/workflows/revdep2/collect.R
         shell: bash
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload the report
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-report
@@ -611,7 +652,73 @@ jobs:
           retention-days: 90
           overwrite: true
 
-      - uses: actions/upload-artifact@v6
+      # The report is also the repository's own record: `revdep/README.md` and
+      # friends have been committed here since `revdepcheck::cloud_check()`
+      # wrote them, and `recheck-report` reads them back. Only the four
+      # generated files and the manifest are staged -- the analysis, the
+      # examples and the notification scripts next to them are human-authored,
+      # and `pkgs/` is gigabytes of check output that belongs in the artifact
+      # only.
+      #
+      # A ref that is not a branch (a tag, a SHA, a fork's ref) cannot receive
+      # a commit; that is a fact about the dispatch, not a failure, so the step
+      # says so and stops. `continue-on-error` covers the rest: a protected
+      # branch, a read-only token on a fork, a race with another push. The
+      # report is in the artifact either way.
+      - name: Commit the report to the checked ref
+        if: always() && vars.REVDEP2_COMMIT_REPORT != 'false'
+        continue-on-error: true
+        env:
+          REF_INPUT: ${{ inputs.ref }}
+        run: |
+          set -eu
+          # Without a `ref` input the dispatch decides, and GitHub says outright
+          # what kind of ref it was; with one, only the remote can say whether
+          # it names a branch. Anything else -- a tag, a SHA, a branch that does
+          # not exist here -- has nowhere to put a commit.
+          if [ -z "${REF_INPUT}" ]; then
+            REF="${GITHUB_REF_NAME}"
+            if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+              echo "::notice::${REF} is a ${GITHUB_REF_TYPE}, not a branch; the report stays in the artifact only."
+              exit 0
+            fi
+          else
+            REF="${REF_INPUT}"
+            if ! git ls-remote --exit-code --heads origin "${REF}" > /dev/null 2>&1; then
+              echo "::notice::${REF} is not a branch of this repository; the report stays in the artifact only."
+              exit 0
+            fi
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only what this run generated, and only what it managed to write:
+          # a collector that fell back to the manifest-derived summary has a
+          # README.md and no problems.md, which is a report, not an error.
+          files=""
+          for f in README.md problems.md failures.md cran.md manifest.json; do
+            if [ -f "revdep/${f}" ]; then
+              files="${files} revdep/${f}"
+            fi
+          done
+          if [ -z "${files}" ]; then
+            echo "::notice::No report files were written; nothing to commit."
+            exit 0
+          fi
+          git add -- ${files}
+          if git diff --cached --quiet; then
+            echo "::notice::The report is unchanged; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: Update revdep report from run ${GITHUB_RUN_ID}" \
+            -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git fetch origin "${REF}"
+          git rebase "origin/${REF}"
+          git push origin "HEAD:${REF}"
+          echo "::notice::Report committed to ${REF}."
+        shell: bash
+
+      - name: Upload the new baseline
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-baseline
@@ -622,7 +729,8 @@ jobs:
       # What the run cost, per package and per shard. Small on purpose and
       # separate from the report: the next plan downloads it to calibrate its
       # cost model, and should not have to fetch a report to do so.
-      - uses: actions/upload-artifact@v6
+      - name: Upload the measured timings
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-timings
