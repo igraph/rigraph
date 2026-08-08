@@ -12,7 +12,9 @@ head_of(graph, es)
 \item{es}{The edges to query.}
 }
 \value{
-A vertex sequence with the head(s) of the edge(s).
+A vertex sequence with the head(s) of the edge(s) if
+the \code{return.vs.es} igraph option is true (the default), or a numeric
+vector of vertex IDs otherwise.
 }
 \description{
 For undirected graphs, head and tail is not defined.  In this case
