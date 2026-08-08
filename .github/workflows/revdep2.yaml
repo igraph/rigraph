@@ -88,6 +88,10 @@ on:
         description: "Run id of an earlier revdep2 run; re-check only its not-ok packages"
         type: string
         default: ""
+      r-universe:
+        description: "Comma-separated r-universe names (or 'auto') whose newer builds replace the CRAN sources, e.g. 'thomasp85,stocnet'"
+        type: string
+        default: ""
       part:
         description: "Check one G-th of the reverse dependencies, as 'i/G'; for a set too big for one run (the plan says when, and with which G)"
         type: string
@@ -104,10 +108,6 @@ on:
         description: "Re-check the CRAN version even where a baseline is reusable"
         type: boolean
         default: false
-      baseline-max-age-days:
-        description: "Oldest baseline result worth reusing"
-        type: string
-        default: ""
       dry-run:
         description: "Plan only: report the shards and reuse decisions, start no checks"
         type: boolean
@@ -134,6 +134,11 @@ env:
   REVDEP2_DEPTH: ${{ inputs.depth || '1' }}
   REVDEP2_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEP2_PART: ${{ inputs.part || '' }}
+  REVDEP2_UNIVERSE: ${{ inputs.r-universe || vars.REVDEP2_UNIVERSE || '' }}
+  # r-universe publishes Linux binaries for `ubuntu:latest`, which now tracks
+  # 26.04 "resolute"; this must name the release the jobs above run on, exactly
+  # as .github/workflows/R-CMD-check-dev.yaml does for our own dependencies.
+  REVDEP2_UNIVERSE_DISTRO: ${{ vars.REVDEP2_UNIVERSE_DISTRO || 'resolute' }}
   REVDEP2_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEP2_SHARD_BUDGET_MINUTES || '45' }}
   REVDEP2_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEP2_MAX_PARALLEL || '20' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for
@@ -141,7 +146,7 @@ env:
   # how many waves there are; empty means 80% of REVDEP2_DEADLINE_MINUTES.
   REVDEP2_SHARD_CAPACITY_MINUTES: ${{ vars.REVDEP2_SHARD_CAPACITY_MINUTES || '' }}
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
-  REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
+  REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
   # Prebuilt dependency libraries of earlier runs: how many runs may donate one
   # (0 turns reuse off), and how old a library may be before its binaries are

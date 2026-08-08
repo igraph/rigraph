@@ -539,6 +539,31 @@ append_summary(c(
   "",
   headline,
   "",
+  # A package checked from r-universe answers a different question than the
+  # rest of the table -- "is the maintainer's fix enough?" rather than "does
+  # CRAN's version still work?" -- so the reader has to be told which ones.
+  local({
+    dev <- Filter(function(e) !identical(e$source %||% "cran", "cran"), entries)
+    if (length(dev) == 0) {
+      NULL
+    } else {
+      c(
+        sprintf(
+          "%d package(s) were checked from r-universe rather than CRAN: %s.",
+          length(dev),
+          paste(
+            vapply(
+              unname(dev),
+              function(e) sprintf("`%s` %s (%s)", e$package, e$version, e$source),
+              character(1)
+            ),
+            collapse = ", "
+          )
+        ),
+        ""
+      )
+    }
+  }),
   md_table(counts_df),
   "",
   readme,

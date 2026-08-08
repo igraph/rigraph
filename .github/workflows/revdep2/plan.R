@@ -42,6 +42,9 @@
 #   REVDEP2_RECHECK_REPORT  - if truthy, check what the committed report lists
 #                             as broken or failed (same as REVDEP2_PACKAGES=broken)
 #   REVDEP2_REPORT_DIR      - where that report lives (default: revdep)
+#   REVDEP2_UNIVERSE        - r-universe names, or `auto`: any package they
+#                             build in a version newer than CRAN's is checked
+#                             from there instead (default: none)
 #   REVDEP2_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
 #   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
@@ -120,6 +123,8 @@ max_measured_runs <- env_num("REVDEP2_MEASURED_MAX_RUNS", 3)
 measured_max_age <- env_num("REVDEP2_MEASURED_MAX_AGE_DAYS", 60)
 recheck_report <- env_flag("REVDEP2_RECHECK_REPORT")
 report_dir <- env_chr("REVDEP2_REPORT_DIR", "revdep")
+runiverse <- trimws(strsplit(env_chr("REVDEP2_UNIVERSE"), "[,[:space:]]+")[[1]])
+runiverse <- runiverse[nzchar(runiverse)]
 overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
 retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
@@ -523,6 +528,52 @@ inform(
   round(fallback),
   "s for the rest"
 )
+
+# ------------------------------------------------------------- r-universe ----
+
+# Which packages to check from a dev source instead of from CRAN.
+#
+# A revdep that breaks against the dev version has often been fixed by its
+# maintainer already, and the fix sits on r-universe for weeks before it
+# reaches CRAN. Checking that build answers the question the CRAN tarball
+# cannot: is this still broken, or is it only CRAN that has not caught up?
+#
+# Only versions newer than CRAN's are taken, and the version recorded here is
+# the one that is checked -- which is also what keeps baseline reuse honest,
+# since a baseline is keyed on the revdep's version.
+runiverse_sources <- list()
+if (length(runiverse) > 0) {
+  runiverse_sources <- universe_sources(runiverse, packages, their_version)
+  if (length(runiverse_sources) > 0) {
+    for (p in names(runiverse_sources)) {
+      their_version[[p]] <- runiverse_sources[[p]]$version
+    }
+    inform(
+      length(runiverse_sources),
+      " of ",
+      length(packages),
+      " package(s) come from r-universe: ",
+      paste(
+        utils::head(
+          sprintf(
+            "%s %s (%s)",
+            names(runiverse_sources),
+            vapply(runiverse_sources, function(s) s$version, character(1)),
+            vapply(runiverse_sources, function(s) s$universe, character(1))
+          ),
+          6
+        ),
+        collapse = ", "
+      ),
+      if (length(runiverse_sources) > 6) ", ..." else ""
+    )
+  } else {
+    inform(
+      "No package has a version newer than CRAN's in: ",
+      paste(runiverse, collapse = ", ")
+    )
+  }
+}
 
 # --------------------------------------------------------------- closures ----
 
@@ -1069,6 +1120,14 @@ shard_list <- lapply(seq_len(k), function(s) {
         t_total = unname(t_total[[p]]),
         check_seconds = round(unname(check_seconds[[p]])),
         timing_source = timing_source[[match(p, packages)]],
+        # Where the shard downloads this package's source from; absent means
+        # CRAN, which is the overwhelming majority.
+        source = if (is.null(runiverse_sources[[p]])) {
+          "cran"
+        } else {
+          runiverse_sources[[p]]$universe
+        },
+        source_repo = runiverse_sources[[p]]$repo,
         dep_fingerprint = unname(fingerprint[[p]]),
         baseline = unname(reuse[[p]])
       )
@@ -1114,6 +1173,21 @@ plan <- list(
     covered = prebuilt_covered,
     missing = length(history$missing),
     runs = prebuilt
+  ),
+  r_universe = list(
+    universes = as.list(runiverse),
+    # r-universe builds Linux binaries for `ubuntu:latest`; this has to name
+    # the runner's release, the way R-CMD-check-dev.yaml does.
+    linux_distro = env_chr("REVDEP2_UNIVERSE_DISTRO", "resolute"),
+    packages = length(runiverse_sources),
+    sources = lapply(names(runiverse_sources), function(p) {
+      list(
+        package = p,
+        version = runiverse_sources[[p]]$version,
+        universe = runiverse_sources[[p]]$universe,
+        repo = runiverse_sources[[p]]$repo
+      )
+    })
   ),
   calibration = list(
     runs = if (nzchar(local_measured)) {
@@ -1257,6 +1331,29 @@ append_summary(c(
       "none"
     }
   ),
+  if (length(runiverse) > 0) {
+    sprintf(
+      "| r-universe | %d of %d package(s) checked from %s instead of CRAN%s |",
+      length(runiverse_sources),
+      n,
+      paste(runiverse, collapse = ", "),
+      if (length(runiverse_sources) > 0) {
+        paste0(
+          ": ",
+          paste(
+            sprintf(
+              "`%s` %s",
+              names(runiverse_sources),
+              vapply(runiverse_sources, function(s) s$version, character(1))
+            ),
+            collapse = ", "
+          )
+        )
+      } else {
+        ""
+      }
+    )
+  },
   sprintf(
     "| Prebuilt packages | %s |",
     if (length(prebuilt) > 0) {

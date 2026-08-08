@@ -92,11 +92,11 @@ if (!installed_ok) {
 # namespace names itself.
 installed <- intersect(install_union, rownames(utils::installed.packages(lib)))
 inform("Preflight: loading ", length(installed), " packages")
-load_batch <- function(pkgs) {
+load_batch <- function(pkgs, libs = lib) {
   script <- tempfile(fileext = ".R")
   writeLines(
     c(
-      sprintf(".libPaths(c(%s, .libPaths()))", deparse(lib)),
+      sprintf(".libPaths(c(%s, .libPaths()))", deparse(libs)),
       "for (p in commandArgs(trailingOnly = TRUE)) {",
       "  loadNamespace(p)",
       "  writeLines(paste0('LOADED ', p))",
@@ -172,6 +172,48 @@ for (p in names(load_failures)) {
   )
 }
 
+# ------------------------------------------------------------- r-universe --
+
+# The second half of "preload everything": where the plan resolved packages to
+# r-universe, their dev builds are installed too, into a library of their own,
+# and packed beside the CRAN one. Two libraries rather than one because they
+# hold the same package names at different versions -- the shards install the
+# CRAN union first and lay these over it, so the dev build is what a check
+# sees, and neither has to be built again.
+runiverse_lib <- file.path(
+  env_chr("RUNNER_TEMP", tempdir()),
+  "revdep2-preflight-lib-runiverse"
+)
+runiverse_sources <- plan$r_universe$sources %||% list()
+runiverse_packed <- character()
+if (length(runiverse_sources) > 0) {
+  inform(
+    "Preflight: installing ",
+    length(runiverse_sources),
+    " r-universe build(s)"
+  )
+  runiverse_install(
+    runiverse_sources,
+    runiverse_lib,
+    env_chr("REVDEP2_UNIVERSE_DISTRO", "resolute")
+  )
+  # Load-tested with the dev build first on the path, which is the order a
+  # shard will see it in.
+  for (p in list.dirs(runiverse_lib, full.names = FALSE, recursive = FALSE)) {
+    loaded <- load_batch(p, libs = c(runiverse_lib, lib))
+    if (length(loaded$failed) > 0) {
+      failures[[length(failures) + 1]] <- list(
+        package = p,
+        phase = "load",
+        message = paste(
+          utils::tail(sanitize_log(loaded$log), 20),
+          collapse = "\n"
+        )
+      )
+    }
+  }
+}
+
 write_json(failures, file.path(out_dir, "depfail.json"))
 
 # ------------------------------------------------------------------ library --
@@ -186,6 +228,19 @@ if (nzchar(lib_out)) {
     if (nzchar(index_out)) index_out else NULL
   )
   inform("Preflight: published ", length(packed), " package(s) for later runs")
+  if (length(runiverse_sources) > 0) {
+    runiverse_packed <- pack_library(
+      runiverse_lib,
+      lib_out,
+      if (nzchar(index_out)) index_out else NULL,
+      name = "library-runiverse"
+    )
+    inform(
+      "Preflight: published ",
+      length(runiverse_packed),
+      " r-universe build(s) for the shards"
+    )
+  }
 }
 
 append_summary(c(

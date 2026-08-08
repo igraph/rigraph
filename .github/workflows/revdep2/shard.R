@@ -94,6 +94,7 @@ for (p in shard$packages) {
       version = p$version,
       level = p$level %||% 0L,
       shard = shard_index,
+      source = p$source %||% "cran",
       weight_minutes = p$weight_minutes,
       t_total = p$t_total %||% 0,
       dep_fingerprint = p$dep_fingerprint,
@@ -186,6 +187,44 @@ if (!bulk_ok) {
   }
 }
 
+# The r-universe overlay goes on last, deliberately: pak has just resolved the
+# whole union against CRAN, so any dev build it should shadow has been
+# installed over. What lands here is what the checks -- both phases of them --
+# will see, so the comparison still differs in one thing only, the version of
+# the package under test.
+#
+# The preflight built these, so normally this is an unpack; only a run without
+# a usable preflight library installs them itself, the same way rcc-dev does.
+runiverse_sources <- Filter(
+  function(s) s$package %in% install,
+  plan$r_universe$sources %||% list()
+)
+if (length(runiverse_sources) > 0) {
+  wanted <- vapply(runiverse_sources, function(s) s$package, character(1))
+  restored_dev <- restore_local_library(
+    env_chr("LIB_DIR"),
+    lib,
+    wanted,
+    name = "library-runiverse",
+    over = TRUE
+  )
+  missing_dev <- setdiff(wanted, restored_dev)
+  if (length(missing_dev) > 0) {
+    runiverse_install(
+      Filter(function(s) s$package %in% missing_dev, runiverse_sources),
+      lib,
+      env_chr("REVDEP2_UNIVERSE_DISTRO", "resolute")
+    )
+  }
+  inform(
+    "r-universe: ",
+    length(restored_dev),
+    " dev build(s) unpacked, ",
+    length(missing_dev),
+    " installed"
+  )
+}
+
 install_seconds <- elapsed(install_started)
 inform(
   "Dependencies ready after ",
@@ -263,6 +302,19 @@ for (name in members) {
 
 src_dir <- file.path(work, "src")
 dir.create(src_dir, showWarnings = FALSE)
+
+# Where each package's tarball comes from. CRAN for almost everything; an
+# r-universe repository for the packages the plan resolved to a newer build
+# there, which is how a fix that has not reached CRAN yet gets checked.
+source_repo <- stats::setNames(
+  vapply(
+    shard$packages,
+    function(p) p$source_repo %||% cran_repo(),
+    character(1)
+  ),
+  members
+)
+
 sources <- list()
 for (name in runnable) {
   tarball <- tryCatch(
@@ -270,7 +322,7 @@ for (name in runnable) {
       hit <- utils::download.packages(
         name,
         destdir = src_dir,
-        repos = cran_repo(),
+        repos = source_repo[[name]],
         type = "source",
         quiet = TRUE
       )

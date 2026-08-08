@@ -450,7 +450,7 @@ Every artifact this workflow writes:
 | `revdep2-plan` | `plan.json` | 30 days |
 | `revdep2-pkg` | source tarball, platform binary, `meta.json` | 30 days |
 | `revdep2-preflight` | `depfail.json` | 30 days |
-| `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json` | 14 days |
+| `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json`, and with `r-universe` also `library-runiverse.tar` | 14 days |
 | `revdep2-lib-index` | `lib.json`: R series, platform, package versions | 30 days |
 | `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
 | `revdep2-report` | `README.md`, `problems.md`, `failures.md`, `cran.md`, `manifest.json`, all `pkgs/` | 90 days |
@@ -554,6 +554,77 @@ one wave, and every one of them a package that was wrong last time.
 `retry-run: <id>` is the sibling for a run that did not finish —
 the report is about *results*, a retry is about *coverage*.
 
+### Checking the fix instead of the breakage
+
+A revdep that breaks against the dev version has often been fixed already:
+the maintainer merged a PR, and the fix sits on r-universe
+for weeks before it reaches CRAN.
+`r-universe: thomasp85,stocnet,natverse` names the universes to consult;
+any package they build in a version newer than CRAN's
+is checked from there instead, and the plan says which ones:
+
+| package | CRAN | checked instead |
+| --- | --- | --- |
+| `tidygraph` | 1.3.1 | 1.3.1.9000 (thomasp85) |
+| `ggraph` | 2.2.2 | 2.2.2.9000 (thomasp85) |
+| `netrics` | 0.4.0 | 0.4.1 (stocnet) |
+| `nat` | 1.8.25 | 1.11.0 (natverse) |
+
+Each universe is an ordinary CRAN-like repository,
+so `available.packages()` reads it and `download.packages()` fetches from it;
+no bespoke client, and the version recorded in the plan
+is the one that is checked — which also keeps baseline reuse honest,
+since a baseline is keyed on the revdep's version.
+Only *newer* versions are taken:
+re-checking a rebuild of what CRAN already has answers nothing.
+
+`r-universe: auto` asks `r-universe.dev` which universe builds each package,
+which needs that host reachable and finds nothing when it is not;
+naming the universes is the reliable form,
+and the maintainer PRs tracked in the revdep issue are where the names
+come from.
+
+Dependencies still resolve against CRAN metadata,
+so a dev version that added a dependency CRAN does not have yet
+will fail to install rather than being silently checked against the wrong
+tree.
+
+### Preloading both, the way `rcc-dev` installs
+
+Checking a package from r-universe is one thing;
+its *dependents* in the same shard are another.
+`.github/workflows/R-CMD-check-dev.yaml` already solves that problem
+for this package's own dependencies —
+`remotes::install_runiverse(pkg, linux_distro = "resolute")`,
+from the branch of remotes that carries it —
+and this uses the same call, with the same reason for the distro:
+r-universe builds Linux binaries for `ubuntu:latest`,
+so the name has to match the runner's release,
+or every dev version is compiled from source instead.
+The universe is passed in rather than looked up,
+because the plan resolved it already.
+
+Which means the preflight has to preload **both** repositories:
+the CRAN dependency universe as before,
+and the r-universe builds of whatever the plan resolved there.
+They are the same package names at different versions,
+so they cannot share one library —
+the preflight installs them into a second one,
+load-tests it with the dev build first on the path,
+and packs it as `library-runiverse.tar` beside `library.tar`
+in the same `revdep2-lib` artifact.
+
+A shard then does what it always did, and one thing more:
+pak resolves its whole union against CRAN,
+and only then is the r-universe library laid *over* the result,
+for the packages that shard installs.
+Order matters — pak would otherwise resolve the dev build back to CRAN's —
+and so does the fact that this happens before *both* check phases,
+so the old and the new check still differ in exactly one thing,
+the version of the package under test.
+A shard whose run has no usable preflight library
+installs the dev builds itself, through the same `install_runiverse()`.
+
 ## Failure modes
 
 | Situation | Outcome |
@@ -561,6 +632,8 @@ the report is about *results*, a retry is about *coverage*.
 | A revdep breaks under the dev version | `newly_broken` in manifest and report; the run stays green |
 | The checked ref is a tag or a SHA | the report is not committed; a `::notice::` says so and the artifact still has it |
 | The report cannot be pushed (protection, fork, race) | the step is `continue-on-error`; the run keeps its result |
+| A package is not in any named r-universe | it is checked from CRAN, like everything else |
+| `install_runiverse()` is unavailable or fails | the dev build is skipped with a log line; the CRAN version is checked instead |
 | A revdep fails under both versions | `ok` (no *new* problems), visible in the report's tables |
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
@@ -598,6 +671,8 @@ at the next `if`.
 | Ref to check (branch, tag, SHA) | `ref` | — | the dispatched ref |
 | Packages to check, or `broken` for the committed report's | `packages` | `REVDEP2_PACKAGES` | all revdeps |
 | Where that report lives | — | `REVDEP2_REPORT_DIR` | `revdep` |
+| r-universe names whose newer builds replace the CRAN sources | `r-universe` | `REVDEP2_UNIVERSE` | none |
+| Linux release r-universe binaries are taken for | — | `REVDEP2_UNIVERSE_DISTRO` | `resolute` (ubuntu-26.04) |
 | Commit the report back to the checked branch | — | `REVDEP2_COMMIT_REPORT` | on |
 | Revdep set | `which` | — | `strong` |
 | Revdep depth (`1`, `2`, …, `all`) | `depth` | — | 1 |
@@ -608,7 +683,7 @@ at the next `if`.
 | Concurrent shards, and so the wave size — set it to the concurrency the account really has, never more | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
 | Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |
 | Ignore reusable baselines | `refresh-baseline` | — | false |
-| Oldest reusable baseline | `baseline-max-age-days` | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |
+| Oldest reusable baseline | — | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
