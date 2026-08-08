@@ -67,7 +67,7 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> ── <igraph> ───────────────────────────────────────────────────────── e7a05d8 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── b09fac7 ──
 #> ℹ directed · named
 #> ℹ 3 vertices · 2 edges
 #> 
@@ -79,7 +79,7 @@ graph_from_edgelist(el)
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> ── <igraph> ───────────────────────────────────────────────────────── dc520b3 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 50f8088 ──
 #> ℹ directed
 #> ℹ 10 vertices · 10 edges
 #> 
