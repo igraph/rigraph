@@ -67,7 +67,7 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   delete_edges(seq(1, 9, by = 2))
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── bf096ee ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 5b900a1 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 5 edges
 #> 
@@ -80,7 +80,7 @@ g
 g <- make_ring(10) %>%
   delete_edges("10|1")
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 32fdde7 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 0311a7b ──
 #> ℹ undirected
 #> ℹ 10 vertices · 9 edges
 #> 
@@ -93,7 +93,7 @@ g
 g <- make_ring(5)
 g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 716028c ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── fd65bc8 ──
 #> ℹ undirected
 #> ℹ 5 vertices · 3 edges
 #> 

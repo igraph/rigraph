@@ -61,6 +61,6 @@ g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)
 n34 <- neighbors(g, 34)
 intersection(n1, n34)
-#> ── <vertex sequence> 4/34 · from 5863eb3 ───────────────────────────────────────
+#> ── <vertex sequence> 4/34 · from 0b40e73 ───────────────────────────────────────
 #> [1]  9 14 20 32
 ```
