@@ -55,7 +55,7 @@ Vertex, edge and graph attributes:
 g <- make_graph(~ A - B:C:D)
 graph_attr(g, "name") <- "4-star"
 g
-#> ── <igraph> 4-star ────────────────────────────────────────────────── 5c838ca ──
+#> ── <igraph> 4-star ────────────────────────────────────────────────── f1ec788 ──
 #> ℹ undirected · named
 #> ℹ 4 vertices · 3 edges
 #> 
