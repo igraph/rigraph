@@ -41,6 +41,9 @@
 #   TIMEOUT_MIN_MINUTES    - floor for that timeout; CRAN's machines are not
 #                            these runners (default: 10)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
+#   REVDEP2_CHECK_WORKERS  - checks to run at once, when plan.json does not say
+#                            (default: 2); the plan's value wins, because the
+#                            shard was sized on it
 
 source(file.path(
   dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
@@ -61,6 +64,16 @@ out_dir <- env_chr("OUT_DIR", "results")
 timeout_factor <- env_num("TIMEOUT_FACTOR", 1.5)
 timeout_min_sec <- env_num("TIMEOUT_MIN_MINUTES", 10) * 60
 deadline <- Sys.time() + env_num("DEADLINE_MINUTES", 300) * 60
+# How many checks run at once here. It comes from the plan, because the plan
+# sized this shard on the assumption that it would: a shard told to run one at
+# a time what was planned for two takes twice as long as its estimate and
+# defers the difference.
+check_workers <- max(
+  1L,
+  as.integer(
+    plan$check_workers %||% env_num("REVDEP2_CHECK_WORKERS", 2)
+  )
+)
 
 shard <- Filter(function(s) s$index == shard_index, plan$shards)[[1]]
 members <- vapply(shard$packages, function(p) p$name, character(1))
@@ -317,7 +330,14 @@ out_of_time <- function(entry) {
   Sys.time() + budget_sec > deadline
 }
 
-run_check <- function(name, phase) {
+# One check, started in the background and left to run. A hosted runner has
+# four cores and one `R CMD check` keeps about one of them busy, so what
+# bounds a shard's wall clock is how many checks it will run at once, not the
+# machine. The checks are independent by construction -- separate processes,
+# a check directory each, and a library that nothing writes to while a phase
+# is running (the dev binary goes in *between* the phases, with the queue
+# drained) -- which is what makes running several of them at once safe.
+start_check <- function(name, phase) {
   checks_started <<- checks_started + 1L
   check_dir <- file.path(work, "check", name, phase)
   dir.create(check_dir, recursive = TRUE, showWarnings = FALSE)
@@ -328,28 +348,101 @@ run_check <- function(name, phase) {
     timeout_min_sec,
     timeout_factor * (get(name, envir = state)$t_total %||% 0)
   )
-  started <- Sys.time()
-  result <- tryCatch(
-    rcmdcheck::rcmdcheck(
-      sources[[name]],
-      args = c("--no-manual", "--as-cran"),
-      error_on = "never",
-      check_dir = check_dir,
-      timeout = timeout_sec
-    ),
-    error = function(e) e
+  list(
+    name = name,
+    phase = phase,
+    started = Sys.time(),
+    timeout = timeout_sec,
+    # callr rather than rcmdcheck's own process class: the child runs exactly
+    # the rcmdcheck() call this driver used to run inline, so the timeout, the
+    # arguments and the returned object are the same as they were, and its
+    # chatter goes to a file instead of a pipe this driver would have to keep
+    # draining.
+    process = callr::r_bg(
+      function(path, args, check_dir, timeout) {
+        rcmdcheck::rcmdcheck(
+          path,
+          args = args,
+          error_on = "never",
+          check_dir = check_dir,
+          timeout = timeout
+        )
+      },
+      args = list(
+        path = sources[[name]],
+        args = c("--no-manual", "--as-cran"),
+        check_dir = check_dir,
+        timeout = timeout_sec
+      ),
+      stdout = file.path(check_dir, "driver.log"),
+      stderr = "2>&1",
+      supervise = TRUE
+    )
   )
-  duration <- round(as.numeric(Sys.time() - started, units = "secs"))
+}
+
+# Collect a finished check, with the same result contract the inline version
+# had: an rcmdcheck object, or the condition that stopped it.
+finish_check <- function(job) {
+  result <- tryCatch(job$process$get_result(), error = function(e) e)
+  # callr reports a child's failure wrapped in its own condition; the check's
+  # own error is what the rest of this driver reads.
+  if (inherits(result, "error")) {
+    result <- result$parent %||% result
+  }
+  duration <- round(as.numeric(Sys.time() - job$started, units = "secs"))
   # Every check counts towards what this shard cost, including the ones that
-  # errored or timed out -- they spent the same minutes.
+  # errored or timed out -- they spent the same minutes. Under more than one
+  # worker these add up past the shard's own wall clock, which is the point:
+  # this is the work done, and the plan divides it by the worker count to get
+  # back to wall clock.
   check_seconds <<- check_seconds + duration
   attr(result, "duration") <- duration
   # A check that hits the timeout is killed, and rcmdcheck surfaces that as an
   # error rather than a result object; tell it apart from a genuine crash by
   # the clock.
   attr(result, "timed_out") <- inherits(result, "error") &&
-    duration >= timeout_sec - 1
+    duration >= job$timeout - 1
   result
+}
+
+# Run one phase's checks, `check_workers` at a time, handing each result to
+# `collect` in this process as it lands -- so everything that reads or writes
+# the shard's state still happens one at a time, in this driver, exactly as it
+# did when the checks themselves were sequential.
+#
+# The queue is heaviest-first. With one worker the order only moved the log
+# around; with several it decides the makespan, and starting the long checks
+# last is how a shard ends with one straggler and idle workers.
+run_phase <- function(pending, phase, collect) {
+  weight_of <- function(name) get(name, envir = state)$weight_minutes %||% 0
+  run_queue(
+    pending[order(-vapply(pending, weight_of, numeric(1)))],
+    workers = check_workers,
+    start = function(name) start_check(name, phase),
+    alive = function(job) job$process$is_alive(),
+    finish = function(job) collect(job$name, finish_check(job)),
+    skip = function(name) {
+      if (!out_of_time(get(name, envir = state))) {
+        return(FALSE)
+      }
+      inform(name, ": deferred (deadline)")
+      TRUE
+    },
+    # rcmdcheck enforces the timeout itself; this is the backstop for a child
+    # that does not come back from it, which under one worker merely ran long
+    # and now would hold a worker for the rest of the job.
+    tick = function(jobs) {
+      for (job in jobs) {
+        overdue <- as.numeric(Sys.time() - job$started, units = "secs") >
+          job$timeout + 300
+        if (overdue) {
+          inform(job$name, ": killing a check that outlived its timeout")
+          job$process$kill()
+        }
+      }
+    }
+  )
 }
 
 check_failure <- function(name, phase, result) {
@@ -386,6 +479,7 @@ pkg_out <- function(name) {
 # Phase 1: the CRAN version of the package under test is installed; reuse or
 # produce every package's old-version result.
 inform("Phase old: against ", package, " ", our_cran_version)
+to_check <- character()
 for (name in runnable) {
   entry <- get(name, envir = state)
   reused <- FALSE
@@ -411,25 +505,23 @@ for (name in runnable) {
     }
   }
   if (!reused) {
-    if (out_of_time(entry)) {
-      inform(name, ": deferred (deadline)")
-      next
-    }
-    old <- run_check(name, "old")
-    if (inherits(old, "error")) {
-      check_failure(name, "old", old)
-      next
-    }
-    saveRDS(old, file.path(pkg_out(name), "old.rds"))
-    update(
-      name,
-      status_old = counts(old),
-      t_old = attr(old, "duration"),
-      old_checked_at = now_utc()
-    )
-    inform(name, ": old ", counts(old), " (", attr(old, "duration"), "s)")
+    to_check <- c(to_check, name)
   }
 }
+run_phase(to_check, "old", function(name, old) {
+  if (inherits(old, "error")) {
+    check_failure(name, "old", old)
+    return(invisible())
+  }
+  saveRDS(old, file.path(pkg_out(name), "old.rds"))
+  update(
+    name,
+    status_old = counts(old),
+    t_old = attr(old, "duration"),
+    old_checked_at = now_utc()
+  )
+  inform(name, ": old ", counts(old), " (", attr(old, "duration"), "s)")
+})
 
 # Between the phases: the dev binary replaces the CRAN version.
 binary <- file.path(pkg_dir, meta$binary)
@@ -441,6 +533,7 @@ our_dev_version <- as.character(utils::packageVersion(package))
 
 # Phase 2: check against the dev version and compare.
 inform("Phase new: against ", package, " ", our_dev_version)
+to_check <- character()
 for (name in runnable) {
   entry <- get(name, envir = state)
   if (entry$result != "deferred") {
@@ -449,14 +542,12 @@ for (name in runnable) {
   if (!file.exists(file.path(pkg_out(name), "old.rds"))) {
     next # old phase never reached it; stays deferred
   }
-  if (out_of_time(entry)) {
-    inform(name, ": deferred (deadline)")
-    next
-  }
-  new <- run_check(name, "new")
+  to_check <- c(to_check, name)
+}
+run_phase(to_check, "new", function(name, new) {
   if (inherits(new, "error")) {
     check_failure(name, "new", new)
-    next
+    return(invisible())
   }
   saveRDS(new, file.path(pkg_out(name), "new.rds"))
   old <- readRDS(file.path(pkg_out(name), "old.rds"))
@@ -520,7 +611,7 @@ for (name in runnable) {
     }
     unlink(file.path(work, "check", name), recursive = TRUE)
   }
-}
+})
 
 # ---------------------------------------------------------------- manifest ---
 
@@ -549,6 +640,9 @@ write_json(
     index = shard_index,
     packages = length(members),
     checks = checks_started,
+    # Which regime produced the numbers below: `check_seconds` is the work
+    # done, and only this says how much wall clock that was.
+    check_workers = check_workers,
     install_packages = length(install),
     restored = length(restored),
     restore_seconds = restore_seconds,

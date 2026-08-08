@@ -43,6 +43,7 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
   ├─ phase old: reuse baselines, check the rest against the CRAN version
   ├─ install the prebuilt dev binary
   ├─ phase new: check everything again, compare per package
+  │    (both phases run check-workers checks at once, heaviest first)
   └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
 collect   (1 job, if: always() past plan/build/preflight)
@@ -105,6 +106,56 @@ The floor matters more than the factor:
 all of them compile-heavy (Stan models, mostly) and cheap by CRAN's numbers,
 13 with the floor as their entire budget.
 It is 20 minutes now, which covers every one of them.
+
+### Two axes of parallelism, and they multiply
+
+Checks run in parallel twice over,
+and the two are independent:
+
+* **across jobs.** `max-parallel` shards run at once — this is the sharding
+  the whole workflow is built around, and the section below is about how many
+  shards there should be.
+* **inside a job.** Each shard runs `check-workers` checks at once (default 2),
+  which is what `revdepcheck::revdep_check(num_workers =)` does on one machine.
+
+The second one exists because a hosted runner has four cores
+and one `R CMD check` keeps about one of them busy:
+a shard checking its packages strictly one at a time
+leaves most of the machine idle for its entire deadline.
+Two checks at once is a shard that gets through twice the work
+in the same deadline, which means half as many shards,
+which means half as many setups paid and fewer waves waited through.
+Two is the default rather than four
+because they share the runner's 16 GB,
+and a check that compiles hard wants that headroom;
+`check-workers` raises it for a batch known to be light.
+
+The plan is where the two meet.
+It weighs each package by what one check of it costs,
+then divides by `check-workers` to get what a *shard* spends on it,
+and sizes shards on that —
+so a shard is given as much check work
+as its deadline and its workers can really get through.
+The shard then reads the worker count back out of `plan.json`
+rather than from its own environment,
+because a shard that runs one at a time what was planned for two
+takes twice its estimate and defers the difference.
+
+The calibration keeps the division honest without being told to.
+Measured check times come from runs that ran under some worker count,
+so they already carry whatever contention that count caused:
+where checks do not contend, the measurement stays put
+and dividing by the worker count buys the whole factor;
+where they contend completely, the measurement doubles
+and the division gives back exactly what one worker would have done.
+Only the first run after the knob changes
+is estimated on the previous regime's numbers.
+
+Inside a shard the queue is heaviest-first.
+With one worker that only moved the log around;
+with several it decides the makespan,
+since starting the long checks last
+is how a phase ends with one straggler and idle workers.
 
 ### The shard count is bounded by the parallel capacity
 
@@ -452,7 +503,7 @@ Every artifact this workflow writes:
 | `revdep2-preflight` | `depfail.json`, `resources.log` | 30 days |
 | `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json` | 14 days |
 | `revdep2-lib-index` | `lib.json`: R series, platform, package versions | 30 days |
-| `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
+| `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output, `resources.log` | 30 days |
 | `revdep2-report` | `README.md`, `problems.md`, `failures.md`, `cran.md`, `manifest.json`, all `pkgs/` | 90 days |
 | `revdep2-baseline` | `baseline.json`, `old-rds/<p>.rds` | 90 days |
 | `revdep2-timings` | `timings.json`: check seconds per package, cost per shard | 90 days |
@@ -567,6 +618,7 @@ the report is about *results*, a retry is about *coverage*.
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
+| Two concurrent checks exhaust the runner's memory | the sampler's memory curve is in the log and in `resources.log`; lower `check-workers` |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
@@ -679,6 +731,7 @@ at the next `if`.
 | Plan only | `dry-run` | — | false |
 | Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
 | Concurrent shards, and so the wave size — set it to the concurrency the account really has, never more | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
+| Checks one shard runs at once | `check-workers` | `REVDEP2_CHECK_WORKERS` | 2 |
 | Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |
 | Ignore reusable baselines | `refresh-baseline` | — | false |
 | Oldest reusable baseline | `baseline-max-age-days` | `REVDEP2_BASELINE_MAX_AGE_DAYS` | 30 days |

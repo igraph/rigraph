@@ -121,6 +121,11 @@ measured_max_age <- env_num("REVDEP2_MEASURED_MAX_AGE_DAYS", 60)
 recheck_report <- env_flag("REVDEP2_RECHECK_REPORT")
 report_dir <- env_chr("REVDEP2_REPORT_DIR", "revdep")
 overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
+# Checks a shard runs at once. A hosted runner has four cores and one
+# `R CMD check` keeps about one of them busy, so this is what decides how much
+# of a shard's deadline goes to waiting. It is planned here and carried in
+# plan.json, because the shard must run what its size assumed.
+check_workers <- max(1L, as.integer(env_num("REVDEP2_CHECK_WORKERS", 2)))
 retry_run <- env_chr("REVDEP2_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
 timing_flavor <- env_chr("REVDEP2_TIMING_FLAVOR", "r-release-linux-x86_64")
@@ -792,10 +797,30 @@ inform(
 # package without a reusable baseline is checked twice.
 weight <- ((!reuse) + 1) * check_seconds / 60 + overhead_minutes
 
+# What a shard actually spends on a package, which is not the same number: a
+# shard runs `check_workers` checks at once, so `check_workers` packages
+# advance per minute of its deadline. Everything that models a shard's wall
+# clock -- how many shards the budget and the capacity ask for, and what the
+# greedy pass thinks a shard costs -- goes through `wall`; `weight` stays what
+# one check costs, because that is what the shard's own deadline test asks of
+# each package before it starts it.
+#
+# The calibration keeps this honest by itself. `check_seconds` is measured
+# from runs that ran under some worker count, so it already carries whatever
+# contention that count caused: with no contention the measurement stays put
+# and dividing by `check_workers` buys the full factor, with total contention
+# the measurement doubles and the division gives back exactly what one worker
+# would have done. Only the first run after the knob changes is estimated on
+# the old regime's numbers.
+wall <- weight / check_workers
+
 # ------------------------------------------------------------- partitioning --
 
 n <- length(packages)
 total_check <- sum(weight)
+# The wall clock those checks turn into, which is what the shard count and
+# every deadline here are measured against.
+total_wall <- sum(wall)
 
 # How many shards can actually run at the same time. Everything past that waits
 # for a lane, so the shard count is counted in waves of this size.
@@ -814,8 +839,8 @@ lanes <- max(1L, min(as.integer(max_parallel), as.integer(max_shards), n))
 # arrives having paid a second setup for the privilege. So beyond one wave the
 # capacity decides, and it decides in whole waves: as many as it takes to keep
 # every shard under its deadline, and not one more.
-by_budget <- max(1L, as.integer(ceiling(total_check / budget)))
-by_capacity <- max(1L, as.integer(ceiling(total_check / max(capacity, 1))))
+by_budget <- max(1L, as.integer(ceiling(total_wall / budget)))
+by_capacity <- max(1L, as.integer(ceiling(total_wall / max(capacity, 1))))
 # Neither dial may be violated inside a wave, so the larger of the two wins
 # there; a capacity smaller than the budget is a contradiction, and the one
 # that keeps shards inside their deadline is the one to honour.
@@ -828,16 +853,18 @@ max_k <- max(1L, min(as.integer(max_shards), n))
 k <- max(1L, min(k, max_k))
 inform(
   sprintf(
-    "%d packages, ~%.0f check minutes; budget %.0f min asks for %d shard(s), capacity %.0f min needs %d, %d lane(s) -> %d shard(s), ~%.0f check min each",
+    "%d packages, ~%.0f check minutes at %d worker(s) -> ~%.0f min of shard time; budget %.0f min asks for %d shard(s), capacity %.0f min needs %d, %d lane(s) -> %d shard(s), ~%.0f min each",
     n,
     total_check,
+    check_workers,
+    total_wall,
     budget,
     by_budget,
     capacity,
     by_capacity,
     lanes,
     k,
-    total_check / k
+    total_wall / k
   )
 )
 
@@ -860,8 +887,8 @@ partition <- function(k) {
     p <- ord[[i]]
     fresh <- sum(!have[dep_idx[[p]], s])
     assignment[[p]] <<- s
-    check_load[[s]] <<- check_load[[s]] + weight[[p]]
-    load[[s]] <<- load[[s]] + weight[[p]] + fresh * penalty
+    check_load[[s]] <<- check_load[[s]] + wall[[p]]
+    load[[s]] <<- load[[s]] + wall[[p]] + fresh * penalty
     have[dep_idx[[p]], s] <<- TRUE
   }
 
@@ -876,7 +903,7 @@ partition <- function(k) {
     for (i in seq(k + 1L, n)) {
       p <- ord[[i]]
       fresh <- colSums(!have[dep_idx[[p]], , drop = FALSE])
-      score <- load + weight[[p]] + fresh * penalty
+      score <- load + wall[[p]] + fresh * penalty
       place(i, which.min(score))
     }
   }
@@ -939,9 +966,11 @@ plan_too_big <- function() {
     "**Too big for one run — nothing was started.**",
     "",
     sprintf(
-      "%d packages need ~%.0f check minutes. At most %d shard%s can be planned (%s), which puts the heaviest at ~%.0f min: ~%.0f min of checks on top of ~%.0f min of setup and installs, against the %.0f min a shard has before its deadline starts deferring packages.",
+      "%d packages need ~%.0f check minutes, which %d worker(s) per shard turn into ~%.0f min of shard time. At most %d shard%s can be planned (%s), which puts the heaviest at ~%.0f min: ~%.0f min of checks on top of ~%.0f min of setup and installs, against the %.0f min a shard has before its deadline starts deferring packages.",
       n,
       total_check,
+      check_workers,
+      total_wall,
       max_k,
       if (max_k == 1) "" else "s",
       if (max_k < as.integer(max_shards)) {
@@ -1095,6 +1124,7 @@ plan <- list(
   ref = env_chr("GITHUB_REF_NAME"),
   which = which_input,
   depth = depth_raw,
+  check_workers = check_workers,
   levels = as.list(level_counts),
   selection = selection,
   part = part,
@@ -1315,6 +1345,15 @@ append_summary(c(
     parallel,
     budget,
     capacity
+  ),
+  # Two axes, and they multiply: `parallel` shards run at once, and each of
+  # them runs `check_workers` checks at once.
+  sprintf(
+    "| Checks at a time | %d per shard, so up to %d at once across the run (~%.0f check minutes become ~%.0f min of shard time) |",
+    check_workers,
+    parallel * check_workers,
+    total_check,
+    total_wall
   ),
   sprintf(
     "| Estimated wall clock | ~%.0f min (%d wave(s) of ~%.0f min) |",

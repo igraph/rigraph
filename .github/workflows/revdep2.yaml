@@ -31,6 +31,12 @@
 # never a job failure; the shard defers what its deadline cannot fit and says
 # so.
 #
+# Parallelism has two axes and they multiply: `max-parallel` shards run at
+# once, and each shard runs `check-workers` checks at once (the runner has
+# four cores and one R CMD check keeps about one busy). The plan sizes shards
+# on both, so a shard holds as much check work as its deadline and its workers
+# can really get through.
+#
 # The collect job folds every shard artifact (and, on a retry, the untouched
 # results of the run being retried) into revdepcheck-style reports (README.md,
 # problems.md, failures.md, cran.md), a machine-readable manifest, and the
@@ -100,6 +106,10 @@ on:
         description: "Shards to run concurrently, and so the wave size the plan cuts: set it to the concurrency the account really has, never more (GitHub queues past its own limit anyway)"
         type: string
         default: ""
+      check-workers:
+        description: "Checks one shard runs at once; the runner has four cores and one check keeps about one busy, so this multiplies with max-parallel"
+        type: string
+        default: ""
       refresh-baseline:
         description: "Re-check the CRAN version even where a baseline is reusable"
         type: boolean
@@ -143,6 +153,12 @@ env:
   REVDEP2_PART: ${{ inputs.part || '' }}
   REVDEP2_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEP2_SHARD_BUDGET_MINUTES || '45' }}
   REVDEP2_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEP2_MAX_PARALLEL || '20' }}
+  # Checks one shard runs at once. This is the second axis of parallelism, and
+  # it multiplies with the first: REVDEP2_MAX_PARALLEL shards, each running
+  # this many checks. The plan sizes shards on it and records it in plan.json,
+  # so a shard always runs what its size assumed. Two leaves headroom on a
+  # four-core, 16 GB runner; a check that compiles hard wants that headroom.
+  REVDEP2_CHECK_WORKERS: ${{ inputs.check-workers || vars.REVDEP2_CHECK_WORKERS || '2' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for
   # one wave of REVDEP2_MAX_PARALLEL shards ever hits it, and then it decides
   # how many waves there are; empty means 80% of REVDEP2_DEADLINE_MINUTES.
@@ -571,8 +587,31 @@ jobs:
           TIMEOUT_MIN_MINUTES: ${{ env.REVDEP2_TIMEOUT_MIN_MINUTES }}
           DEADLINE_MINUTES: ${{ env.REVDEP2_DEADLINE_MINUTES }}
           PKG_SYSREQS: true
+          RESOURCE_LOG: ${{ runner.temp }}/results/resources.log
+        # Sampled and line-buffered for the same reason the preflight is: this
+        # job can be killed rather than fail, and then only what was already
+        # streamed survives. It matters more now that the shard runs several
+        # checks at once -- two concurrent checks share the runner's 16 GB, and
+        # the memory curve is what says whether that was the problem. Five
+        # minutes rather than the preflight's 30 seconds: this job runs for
+        # hours, and a check is not a thing that turns over quickly.
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          mkdir -p "${RUNNER_TEMP}/results"
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          "${watch}" once "before the shard"
+          "${watch}" watch 300 "checking" &
+          watcher=$!
+          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
+          unbuffered=""
+          if command -v stdbuf > /dev/null 2>&1; then
+            unbuffered="stdbuf -oL -eL"
+          fi
+          status=0
+          ${unbuffered} Rscript ./.github/workflows/revdep2/shard.R || status=$?
+          kill "${watcher}" 2> /dev/null || true
+          "${watch}" once "after the shard"
+          "${watch}" oom
+          exit "${status}"
         shell: bash
 
       # Named per attempt: a re-run of one shard must not overwrite the results

@@ -270,6 +270,9 @@ shard_rows <- lapply(shard_timings, function(t) {
     index = t$index,
     packages = t$packages %||% 0,
     checks = t$checks %||% 0,
+    # How many checks ran at once, which is the difference between the work
+    # below and the wall clock it took.
+    check_workers = t$check_workers %||% 1,
     install_packages = t$install_packages %||% 0,
     restored = t$restored %||% 0,
     install_minutes = round(install, 2),

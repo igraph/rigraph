@@ -987,6 +987,65 @@ install_in_chunks <- function(chunks, lib = NULL, upgrade = FALSE, label = "") {
   ok
 }
 
+# --------------------------------------------------------------- work queue --
+
+# A fixed-width queue: at most `workers` jobs in flight at a time.
+#
+#   start(item)   opens a job and returns whatever describes it
+#   alive(job)    TRUE while it is still running
+#   finish(job)   closes it -- called in this process, one job at a time, so a
+#                 caller's bookkeeping never needs a lock
+#   skip(item)    drops an item before it is ever started (a deadline, say)
+#   tick(jobs)    called on every idle pass, for whatever has to watch the
+#                 jobs in flight
+#
+# Everything specific to what is being run lives in those callbacks, which is
+# what makes this testable without running the real thing. `wait` is the idle
+# poll interval; the jobs here take minutes, so a second costs nothing.
+run_queue <- function(
+  items,
+  workers,
+  start,
+  alive,
+  finish,
+  skip = NULL,
+  tick = NULL,
+  wait = 1
+) {
+  queue <- as.list(items)
+  running <- list()
+  while (length(queue) > 0 || length(running) > 0) {
+    while (length(running) < workers && length(queue) > 0) {
+      item <- queue[[1]]
+      queue <- queue[-1]
+      if (!is.null(skip) && isTRUE(skip(item))) {
+        next
+      }
+      running[[length(running) + 1L]] <- start(item)
+    }
+    # Everything left was skipped rather than started; the outer condition
+    # ends the loop.
+    if (length(running) == 0) {
+      next
+    }
+    repeat {
+      done <- !vapply(running, alive, logical(1))
+      if (any(done)) {
+        break
+      }
+      if (!is.null(tick)) {
+        tick(running)
+      }
+      Sys.sleep(wait)
+    }
+    for (job in running[done]) {
+      finish(job)
+    }
+    running <- running[!done]
+  }
+  invisible(NULL)
+}
+
 # Fingerprint of the *versions* of everything a check installs, from CRAN
 # metadata. Two runs whose fingerprints agree resolved the same dependency
 # tree, so an old-version check result can be carried from one to the other.
