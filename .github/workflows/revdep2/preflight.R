@@ -40,11 +40,19 @@ failures <- list()
 # still resolves the whole union afterwards -- CRAN moves between runs, and a
 # package whose version changed has to be built after all -- but everything
 # unchanged is now already there, and is skipped.
+promised <- unique(unlist(
+  lapply(plan$prebuilt$runs %||% list(), function(d) {
+    unlist(d$packages, use.names = FALSE)
+  }),
+  use.names = FALSE
+))
 restored <- restore_prebuilt(plan, lib, install_union)
 inform(
   "Preflight: ",
   length(restored),
-  " package(s) restored from earlier runs"
+  " of the ",
+  length(intersect(promised, install_union)),
+  " package(s) the plan expected were restored from earlier runs"
 )
 
 # With a restored library, `upgrade = FALSE` would freeze whatever version the
@@ -52,17 +60,37 @@ inform(
 # CRAN *now*, so the library has to follow CRAN now.
 upgrade <- length(restored) > 0
 
-inform("Preflight: installing ", length(install_union), " packages")
-installed_ok <- tryCatch(
-  {
-    pak::pkg_install(install_union, lib = lib, ask = FALSE, upgrade = upgrade)
-    TRUE
-  },
-  error = function(e) {
-    inform("Bulk install failed: ", conditionMessage(e))
-    FALSE
-  }
+# This install is the whole job, and the place it has died: handed the whole
+# universe at once, pak resolves every one of those refs before it installs
+# any of them, and the resolution of a few thousand is where a run that is
+# killed rather than failed gets killed. So it goes in dependency order, a
+# hundred at a time (see install_chunks() in util.R), which keeps every
+# resolution small and turns a fatal ten minutes of silence into a chunk
+# counter -- the workflow's resource sampler supplies the other half of that
+# picture, a memory curve on the same clock.
+chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+chunks <- install_chunks(install_union, cran_db(), chunk_size)
+inform(
+  "Preflight: installing ",
+  length(install_union),
+  " packages (",
+  length(missing_from(lib, install_union)),
+  " not in the library yet) in ",
+  length(chunks),
+  " chunk(s) of at most ",
+  chunk_size,
+  ", dependencies first; upgrade = ",
+  upgrade
 )
+install_started <- Sys.time()
+installed_ok <- install_in_chunks(chunks, lib, upgrade, "Preflight")
+inform(sprintf(
+  "Preflight: the install %s after %.1f min; %d of %d packages are in the library",
+  if (installed_ok) "finished" else "failed",
+  as.numeric(difftime(Sys.time(), install_started, units = "mins")),
+  length(install_union) - length(missing_from(lib, install_union)),
+  length(install_union)
+))
 if (!installed_ok) {
   # One bad package must not hide the state of the other thousand: retry each
   # missing package on its own and record exactly which ones will not install.

@@ -449,7 +449,7 @@ Every artifact this workflow writes:
 | --- | --- | --- |
 | `revdep2-plan` | `plan.json` | 30 days |
 | `revdep2-pkg` | source tarball, platform binary, `meta.json` | 30 days |
-| `revdep2-preflight` | `depfail.json` | 30 days |
+| `revdep2-preflight` | `depfail.json`, `resources.log` | 30 days |
 | `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json` | 14 days |
 | `revdep2-lib-index` | `lib.json`: R series, platform, package versions | 30 days |
 | `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
@@ -565,6 +565,7 @@ the report is about *results*, a retry is about *coverage*.
 | A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
+| A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
@@ -581,6 +582,78 @@ the report is about *results*, a retry is about *coverage*.
 | CRAN bumps a dependency mid-run | shards install what resolves at their start; the recorded fingerprint is the plan's — next run re-fingerprints |
 | The package is not on CRAN | plan emits zero shards, run ends green |
 | `collect` finds new problems | reported in the summary and the report artifact; the run stays green |
+
+### When a job is killed rather than failed
+
+A job that *fails* leaves a diagnosis:
+the step reports its error,
+the `if: always()` steps run,
+and the artifacts are uploaded.
+A job that is *killed* leaves almost nothing.
+`The runner has received a shutdown signal` and `exit code 143`
+is the whole of it —
+no post-step runs,
+nothing is uploaded,
+and the only record that survives
+is whatever had already been streamed to the log.
+
+The preflight is where that happens,
+because it is the one job that takes on the entire dependency universe at once,
+so three things are arranged to be *live* rather than after the fact:
+
+- `watch-resources.sh` samples memory, swap, disk, load
+  and the three largest processes every 30 seconds
+  while the install runs,
+  so a kill has a curve leading up to it
+  instead of a blank.
+- The R script runs under `stdbuf -oL`.
+  R block-buffers stdout when it is not a terminal
+  and flushes it on exit,
+  which a killed process never reaches —
+  that is why pak's progress used to vanish
+  while the `message()` calls around it, on unbuffered stderr, came through.
+- Afterwards, when there is an afterwards,
+  the kernel's own OOM log is read,
+  which separates "this job asked for too much memory"
+  from "the host went away".
+
+The install itself is also cut down to a size pak handles predictably.
+One `pak::pkg_install()` call for a few thousand refs
+resolves all of them before it installs any of them,
+and that resolution is the part that stops degrading gracefully:
+the run above spent ten minutes in it
+without a single install starting.
+So both the preflight and the shards install in chunks of
+`REVDEP2_INSTALL_CHUNK` packages (100),
+ordered so that every strong dependency inside the set
+is installed before the package that needs it —
+each chunk then resolves against a library where its dependencies already are.
+The ordering is on strong dependencies only:
+Suggests are in the set because a revdep's *check* needs them,
+not its installation,
+and they are what would make the graph cyclic.
+Packages a cycle or a gap in the index leaves unordered go last, together.
+
+That also changes what a failure costs.
+Whatever earlier chunks installed is on disk
+and is skipped on the next attempt,
+so a chunk that dies costs a chunk rather than the job —
+and the log names which one,
+where a single opaque call could only go quiet.
+
+The same principle applies to everything these scripts swallow.
+Fetching an artifact is an optimization,
+so its failure never stops a run —
+which is exactly why it has to say *which* failure it was.
+An artifact that has really expired,
+a `gh` that could not download it,
+a truncated zip,
+an `unzip` that refused it,
+and a tar that ran out of disk
+each name themselves now;
+before, all of them printed
+"no longer has a library artifact",
+including the cases where the artifact was demonstrably still there.
 
 Run ids are strings everywhere in these scripts,
 never integers, and `"0"` is the "no such run" sentinel
@@ -612,6 +685,7 @@ at the next `if`.
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
 | Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |

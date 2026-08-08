@@ -1227,19 +1227,26 @@ append_summary(c(
   "| --- | --- |",
   sprintf("| Package | `%s` %s (CRAN: %s) |", package, dev_version, cran_version),
   sprintf("| Selection | %s |", selection_md %||% selection),
+  # The dispatch inputs that decide how wide the net was, echoed verbatim.
+  # GitHub does not show a run which inputs it was given, and a plan that says
+  # only "all" and a package count leaves "was that depth 2 or the whole
+  # closure?" unanswerable from the run page -- which is a question worth
+  # asking, since the two differ by hours.
   sprintf(
-    "| Packages to check | %d (of %d revdeps%s) |",
-    n,
-    length(revdeps),
-    if (length(level_counts) > 1) {
+    "| Reverse dependencies | `which: %s`, `depth: %s`%s%s |",
+    which_input,
+    depth_raw,
+    if (identical(depth, Inf)) " (the full transitive closure)" else "",
+    if (length(level_counts) > 0) {
       paste0(
-        "; ",
+        " &mdash; ",
         paste0("level ", names(level_counts), ": ", level_counts, collapse = ", ")
       )
     } else {
       ""
     }
   ),
+  sprintf("| Packages to check | %d (of %d revdeps) |", n, length(revdeps)),
   sprintf(
     "| Baseline | %s |",
     if (length(baseline_manifest) > 0) {
