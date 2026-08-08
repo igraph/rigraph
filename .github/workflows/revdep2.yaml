@@ -312,10 +312,15 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install pak and jsonlite
+      # callr (and the processx it brings) is what puts a clock on the calls
+      # that have none of their own: pak's install runs in a callr child that
+      # can be killed, and the load test runs under a processx timeout. pak
+      # vendors its own copy of both and exports neither, so they are
+      # installed here in their own right.
+      - name: Install pak, jsonlite and callr
         run: |
           install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-          install.packages("jsonlite")
+          install.packages(c("jsonlite", "callr"))
         shell: Rscript {0}
 
       - name: Download the shard plan

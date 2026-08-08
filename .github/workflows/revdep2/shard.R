@@ -176,18 +176,30 @@ inform(
   ", dependencies first"
 )
 install_started <- Sys.time()
-bulk_ok <- install_in_chunks(chunks, upgrade = upgrade)
+# The deadline is the shard's own: an install that runs into it leaves no time
+# to check anything, so it stops and lets the checks report what they can
+# rather than being cancelled with the job.
+bulk_ok <- install_in_chunks(
+  chunks,
+  lib = lib,
+  upgrade = upgrade,
+  deadline = deadline
+)
 if (!bulk_ok) {
   for (p in install) {
-    if (requireNamespace(p, quietly = TRUE)) {
+    if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
       next
     }
-    tryCatch(
-      pak::pkg_install(p, ask = FALSE, upgrade = upgrade),
-      error = function(e) {
-        inform("Could not install ", p, ": ", conditionMessage(e))
-      }
+    run <- pak_install(
+      p,
+      lib = lib,
+      upgrade = upgrade,
+      timeout_seconds = install_timeout_seconds(),
+      label = paste("installing", p)
     )
+    if (!run$ok) {
+      inform("Could not install ", p, ": ", run$message)
+    }
   }
 }
 
