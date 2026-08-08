@@ -2286,6 +2286,54 @@ lattice <- function(
 
 ## -----------------------------------------------------------------
 
+#' Create a hypercube graph
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' The n-dimensional hypercube graph has \eqn{2^n} vertices
+#' and \eqn{2^{n-1} n} edges.
+#' Two vertices are connected
+#' if the binary representations of their vertex IDs
+#' (minus one, to make them zero-based)
+#' differ in precisely one bit.
+#'
+#' @param dim The dimension of the hypercube graph.
+#'   Must be non-negative and not greater than 57.
+#' @inheritParams rlang::args_dots_empty
+#' @param directed Logical scalar, whether the graph should be directed.
+#'   If `TRUE`,
+#'   edges point from vertices with lower IDs
+#'   toward vertices with higher IDs.
+#' @return An igraph graph.
+#'
+#' @concept Hypercube
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # 3-dimensional hypercube (cube)
+#' print_all(make_hypercube(3))
+#' # 4-dimensional hypercube (tesseract)
+#' print_all(make_hypercube(4))
+#' @cdocs igraph_hypercube
+make_hypercube <- function(dim, ..., directed = FALSE) {
+  check_dots_empty()
+  res <- hypercube_impl(n = dim, directed = directed)
+  if (igraph_opt("add.params")) {
+    res$name <- "Hypercube graph"
+    res$dim <- dim
+  }
+  res
+}
+
+#' @rdname make_hypercube
+#' @export
+hypercube <- function(dim, ..., directed = FALSE) {
+  check_dots_empty()
+  constructor_spec(make_hypercube, dim, directed = directed)
+}
+
+## -----------------------------------------------------------------
+
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
