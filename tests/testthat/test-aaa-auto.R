@@ -2006,6 +2006,76 @@ test_that("get_widest_paths_impl errors", {
   ))
 })
 
+# 68. widest_path_widths_dijkstra_impl
+
+test_that("widest_path_widths_dijkstra_impl basic", {
+  igraph_local_seed(20250909)
+  g <- path_graph_impl(
+    n = 3
+  )
+
+  expect_snapshot(widest_path_widths_dijkstra_impl(
+    graph = g,
+    from = 1,
+    to = 3,
+    weights = c(1, 2)
+  ))
+
+  # Structured tests
+  result <- widest_path_widths_dijkstra_impl(
+    graph = g,
+    from = 1,
+    to = 3,
+    weights = c(1, 2)
+  )
+  expect_true(is.matrix(result))
+  expect_equal(result[1, 1], 1)
+})
+
+test_that("widest_path_widths_dijkstra_impl errors", {
+  igraph_local_seed(20250909)
+  expect_snapshot_igraph_error(widest_path_widths_dijkstra_impl(
+    graph = NULL,
+    from = 1,
+    to = 3
+  ))
+})
+
+# 69. widest_path_widths_floyd_warshall_impl
+
+test_that("widest_path_widths_floyd_warshall_impl basic", {
+  igraph_local_seed(20250909)
+  g <- path_graph_impl(
+    n = 3
+  )
+
+  expect_snapshot(widest_path_widths_floyd_warshall_impl(
+    graph = g,
+    from = 1,
+    to = 3,
+    weights = c(1, 2)
+  ))
+
+  # Structured tests
+  result <- widest_path_widths_floyd_warshall_impl(
+    graph = g,
+    from = 1,
+    to = 3,
+    weights = c(1, 2)
+  )
+  expect_true(is.matrix(result))
+  expect_equal(result[1, 1], 1)
+})
+
+test_that("widest_path_widths_floyd_warshall_impl errors", {
+  igraph_local_seed(20250909)
+  expect_snapshot_igraph_error(widest_path_widths_floyd_warshall_impl(
+    graph = NULL,
+    from = 1,
+    to = 3
+  ))
+})
+
 # 70. spanner_impl
 
 test_that("spanner_impl basic", {
