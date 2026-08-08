@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9029
+
+## Bug fixes
+
+### ci
+
+- Let a `revdep2` run survive its preflight, and finish the shard-count follow-ups (#2820).
+
+### migrations
+
+- Recover legacy arguments against the old signature (#2812).
+
+## Features
+
+### ci
+
+- Size `revdep2` shards by the parallel capacity, calibrated from measured timings (#2819).
+
+
 # igraph 2.3.3.9028
 
 ## Bug fixes
