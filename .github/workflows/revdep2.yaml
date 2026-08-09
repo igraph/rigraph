@@ -730,8 +730,12 @@ jobs:
       # says so and stops. `continue-on-error` covers the rest: a protected
       # branch, a read-only token on a fork, a race with another push. The
       # report is in the artifact either way.
+      # `!cancelled()` rather than `always()`: a cancelled run has no shard
+      # results, so its report is every package `missing`. Run 31303054725 was
+      # cancelled and pushed 104k lines of that onto the branch it was testing.
+      # A run with red shards is a different thing and still reports.
       - name: Commit the report to the checked ref
-        if: always() && vars.REVDEP2_COMMIT_REPORT != 'false'
+        if: '!cancelled() && vars.REVDEP2_COMMIT_REPORT != ''false'''
         continue-on-error: true
         env:
           REF_INPUT: ${{ inputs.ref }}
