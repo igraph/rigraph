@@ -276,9 +276,13 @@ if (nzchar(lib_out)) {
 append_summary(c(
   "## revdep2 preflight",
   "",
+  # The count is not the whole universe, and saying so here saves the reader a
+  # trip to the plan: what only one shard needs is installed by that shard.
   sprintf(
-    "Installed and loaded %d dependencies: %d could not be installed or loaded.",
-    length(install_union), length(failures)
+    "Installed and loaded %d of the run's %d dependencies -- the ones more than one shard needs. %d could not be installed or loaded.",
+    length(install_union),
+    plan$totals$universe %||% length(install_union),
+    length(failures)
   ),
   "",
   sprintf(

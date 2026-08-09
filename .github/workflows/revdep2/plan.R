@@ -61,6 +61,9 @@
 #                             (default: 14)
 #   REVDEP2_HISTORY_RUNS    - earlier runs the donor walk looks at at all
 #                             (default: 40)
+#   REVDEP2_PREFLIGHT_MIN_SHARDS - shards a package must be needed by before
+#                             the preflight installs it centrally; 1 is the
+#                             whole universe (default: 2)
 #   REVDEP2_MEASURED_MAX_RUNS - earlier runs whose measured timings calibrate
 #                             the cost model (default: 3; 0 disables)
 #   REVDEP2_MEASURED_MAX_AGE_DAYS - oldest measurement worth trusting
@@ -1047,13 +1050,56 @@ long_run <- wall_minutes > long_run_hours * 60
 
 # ------------------------------------------------------------------ output ---
 
-shard_list <- lapply(seq_len(k), function(s) {
+shard_members <- lapply(seq_len(k), function(s) {
   members <- packages[assignment == s]
-  members <- members[order(-weight[members])]
-  install <- sort(unique(c(
-    dev_closure,
-    unlist(closure[members], use.names = FALSE)
-  )))
+  members[order(-weight[members])]
+})
+shard_install <- lapply(shard_members, function(members) {
+  sort(unique(c(dev_closure, unlist(closure[members], use.names = FALSE))))
+})
+
+# What the preflight installs, which is not the whole universe.
+#
+# A shard unpacks the preflight's library and builds only what is missing, so
+# preflighting a package is worth it exactly when more than one shard needs
+# it: build it once centrally instead of once per shard. A package only one
+# shard needs is built once either way -- the preflight merely moves that
+# build off the shard, where it runs 20-wide, and onto the critical path,
+# where it runs alone.
+#
+# On the 3434-revdep set, planned into 60 shards, that is 1639 of 4406
+# packages -- 37% of the preflight's work for no saving at all. Dropping them
+# is free in the strict sense: the total number of installs across the run is
+# identical (4406 either way), and so is the number of downloads, since a
+# package one shard needs is fetched once whoever fetches it.
+#
+# Going further is a real trade rather than a freebie. A threshold of 3 sheds
+# another 659 packages but has each of them built twice instead of once, so
+# the run does 5065 installs instead of 4406. Worth having as a knob for a
+# preflight under time pressure, not worth defaulting to.
+#
+# The threshold is capped at the shard count: with one shard every package is
+# needed by every shard, and the preflight installing nothing would leave the
+# next run without a donor library.
+preflight_min_shards <- max(
+  1L,
+  min(as.integer(env_num("REVDEP2_PREFLIGHT_MIN_SHARDS", 2)), k)
+)
+shards_needing <- table(unlist(shard_install, use.names = FALSE))
+preflight_union <- sort(names(shards_needing)[
+  shards_needing >= preflight_min_shards
+])
+inform(sprintf(
+  "Preflight installs %d of the %d packages in the universe: those at least %d shard(s) need (%d are needed by one shard, and stay with it)",
+  length(preflight_union),
+  length(universe),
+  preflight_min_shards,
+  sum(shards_needing < preflight_min_shards)
+))
+
+shard_list <- lapply(seq_len(k), function(s) {
+  members <- shard_members[[s]]
+  install <- shard_install[[s]]
   list(
     index = s,
     estimate_minutes = round(load[[s]], 1),
@@ -1145,10 +1191,14 @@ plan <- list(
     check_minutes = round(total_check, 1),
     estimate_minutes = round(sum(load), 1),
     wave_minutes = round(waves * max(load), 1),
-    install_union = length(universe)
+    universe = length(universe),
+    install_union = length(preflight_union),
+    preflight_min_shards = preflight_min_shards
   ),
   dropped_unknown = as.list(dropped),
-  install_union = as.list(sort(universe)),
+  # The preflight's list, not the universe: the shards install their own
+  # unions, and what only one of them needs is left to it.
+  install_union = as.list(preflight_union),
   dev_closure = as.list(dev_closure),
   shards = shard_list
 )
@@ -1280,6 +1330,15 @@ append_summary(c(
     } else {
       "none"
     }
+  ),
+  sprintf(
+    "| Preflight installs | %d of %d (what at least %d shard%s need%s; the other %d stay with the one shard that needs them) |",
+    length(preflight_union),
+    length(universe),
+    preflight_min_shards,
+    if (preflight_min_shards == 1) "" else "s",
+    if (preflight_min_shards == 1) "s" else "",
+    length(universe) - length(preflight_union)
   ),
   sprintf(
     "| Cost model | %s |",

@@ -32,7 +32,7 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
 
 preflight (1 job; a dry run stops before it; failure does not stop the run)
   ├─ unpack the prebuilt packages the plan found
-  ├─ install + load *every* dependency any revdep needs
+  ├─ install + load every dependency more than one shard needs
   └─ pack the library for the next run
        → depfail.json, revdep2-lib(-index),
          warm pak cache (saved under the plan hash)
@@ -222,8 +222,10 @@ Three things bound such a run before the shard count does:
   (20 concurrent jobs on a free plan, more on paid ones).
   Nothing in this plan changes that number:
   splitting into more shards, or into `part` runs, only adds setups.
-* **the preflight**, which installs the whole 3675-package dependency
+* **the preflight**, which installs the shared part of the dependency
   universe in one job before any shard starts, and is not parallel at all.
+  Keeping it to what more than one shard needs is why it is the shared part
+  and not all 4406 packages.
 * **the heaviest single package**, which is never split across shards.
   `duckdb` alone is a 171-minute leg of the `most` plan on CRAN's numbers;
   no shard count gets under it, and the refusal names such a package
@@ -360,15 +362,13 @@ the affected packages are simply checked fresh.
 ## Prebuilt packages, and which runs they come from
 
 Installing the dependency universe is the other half of the bill,
-and it is paid twice over.
-The preflight installs all of it,
-then every shard installs its own union again —
+and without care it is paid many times over:
+every shard installs its own union,
 so on a runner with no binaries to install from,
-one package is compiled once in the preflight
-and once more in each of the twenty shards,
+one package is compiled once in each of the shards that needs it,
 every run, for a result identical each time.
 
-So the preflight publishes what it installed.
+So the preflight installs it once centrally and publishes what it installed.
 Its library is packed into `revdep2-lib`
 (one uncompressed `library.tar` — `upload-artifact` zips what it uploads,
 and deflating gigabytes twice buys nothing),
@@ -388,6 +388,51 @@ This is the half that pays on the very first run:
 the compile happens once in the preflight
 instead of once more in each shard.
 
+### What the preflight installs, and what it leaves alone
+
+Not the whole universe — only what more than one shard needs.
+
+The saving from preflighting a package
+is exactly the number of shards that need it, minus one:
+build it once centrally instead of once per shard.
+For a package only one shard needs, that saving is zero.
+It is built once either way;
+all the preflight does is move that build
+off a shard, where it runs twenty-wide,
+and onto the critical path, where it runs alone.
+
+On the 3434-revdep set that is not a small tail —
+**1633 of 4406 packages, 37% of the preflight's work, for no saving at all.**
+Leaving them to their shard is free in the strict sense:
+
+- `REVDEP2_PREFLIGHT_MIN_SHARDS: 1` — preflight 4406, **4406 installs across the run**
+- `REVDEP2_PREFLIGHT_MIN_SHARDS: 2` — preflight 2767, **4406 installs across the run**
+- `REVDEP2_PREFLIGHT_MIN_SHARDS: 3` — preflight 2108, **5065 installs across the run**
+
+Two is the default because it is the last threshold that costs nothing:
+the total number of installs is identical,
+and so is the number of downloads,
+since a package one shard needs is fetched once whoever fetches it.
+Three sheds another 659 packages from the preflight
+but has each of them built twice instead of once —
+a real trade, worth having as a knob
+for a preflight under time pressure,
+not worth defaulting to.
+The proportions barely move with the shard count:
+at 120 shards instead of 60 the same threshold keeps 2773 rather than 2767.
+
+The threshold is capped at the shard count.
+With a single shard every package is needed by every shard,
+so the cap is what stops a small run
+from publishing an empty library to the next one.
+
+What this costs is early warning.
+The preflight load-tests what it installs,
+so a dependency only one shard needs
+is no longer proven before the checks start —
+it fails in that shard instead, as a `depfail`,
+which is a result the report already knows how to carry.
+
 It is a `needs`, but not a prerequisite.
 `test` runs on `!cancelled()` past a failed preflight
 and `collect` does not consult its result at all,
@@ -395,9 +440,9 @@ because the preflight buys two things —
 a free rebuild for the shards, and dependency failures diagnosed early —
 and neither is worth the run.
 A shard installs its own union regardless,
-and that union is a fraction of what the preflight takes on:
+and that union is a fraction of the universe:
 in the run that made this necessary,
-a median of 478 packages against the preflight's 4397.
+a median of 478 packages against 4397.
 Losing the preflight makes a run slower and blinder, not void.
 
 For the rest, the plan walks the workflow's completed runs, youngest first,
@@ -735,6 +780,7 @@ at the next `if`.
 | Runs donating prebuilt packages | — | `REVDEP2_PREBUILT_MAX_RUNS` | 5 (`0` disables) |
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
+| Shards a package must be needed by before the preflight installs it | — | `REVDEP2_PREFLIGHT_MIN_SHARDS` | 2 (`1` is the whole universe) |
 | Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
 | Time limit on one `pak::pkg_install()` call | — | `REVDEP2_INSTALL_TIMEOUT_MINUTES` | 20 |
 | Wall clock past which no further install is started | — | `REVDEP2_INSTALL_DEADLINE_MINUTES` | 210 |
