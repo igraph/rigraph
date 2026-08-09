@@ -157,6 +157,12 @@ if (!installed_ok) {
   }
 }
 
+# Before the load test, because a restored package whose system library is
+# absent fails to load for a reason that has nothing to do with the package:
+# without this it would be judged stale and rebuilt from source, and fail
+# again the same way.
+ensure_sysreqs(lib, "Preflight")
+
 # Load every installed dependency, in chunks small enough to stay clear of the
 # DLL limit; a failing chunk is retried one package at a time so a single bad
 # namespace names itself.

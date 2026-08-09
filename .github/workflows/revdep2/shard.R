@@ -213,6 +213,13 @@ if (!bulk_ok) {
   }
 }
 
+# After the installs and before the first check: pak has covered whatever it
+# installed itself, so what is left is exactly the restored packages -- this
+# run's preflight library and the plan's donors. A shard has no load test, so
+# an unmet system requirement here would surface as a check failure blamed on
+# the revdep.
+ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
+
 install_seconds <- elapsed(install_started)
 inform(
   "Dependencies ready after ",

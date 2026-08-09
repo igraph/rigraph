@@ -40,6 +40,7 @@ preflight (1 job; a dry run stops before it; failure does not stop the run)
 test      (one job per shard, max-parallel throttled, fail-fast: false)
   ├─ unpack this run's preflight library, then the plan's donors
   ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
+  ├─ install the system requirements of what was unpacked, not installed
   ├─ phase old: reuse baselines, check the rest against the CRAN version
   ├─ install the prebuilt dev binary
   ├─ phase new: check everything again, compare per package
@@ -615,6 +616,7 @@ the report is about *results*, a retry is about *coverage*.
 | The installs cannot finish inside the job | no chunk is started past `REVDEP2_INSTALL_DEADLINE_MINUTES`; what did install is still load-tested, packed and published |
 | A dependency's `loadNamespace()` hangs | the batch times out and is retried one package at a time, so the culprit is named as a load failure |
 | pak's metadata database is empty or unreadable | detected by probe before the first install, cleared and rebuilt once; the preflight stops if that does not fix it |
+| A restored package's system library is absent | `sysreqs_check_installed()` names it and `sysreqs_fix_installed()` installs it, in both the preflight and every shard |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
@@ -789,6 +791,41 @@ A chunk that fails is retried once,
 but only when the rebuild actually changed something —
 against a healthy database, a failed chunk is a real failure.
 
+### System requirements of packages nobody installed
+
+`PKG_SYSREQS` is on in both jobs, so pak runs `apt-get`
+for the packages *it* installs —
+independently on each runner, nothing shared between them.
+That covers everything pak builds.
+
+It does not cover what was unpacked rather than installed.
+A shard untars this run's preflight library and the plan's donors
+before pak sees anything —
+170 of one shard's 436 dependencies in run 31282820357 —
+and pak never resolves system requirements for a package
+it was not asked to install.
+It usually survives, because something else pulls the same apt package in
+or the runner image already carries it.
+When it does not, a restored binary cannot load its shared library,
+and a shard has no load test to catch that:
+it surfaces as a check failure blamed on the revdep.
+
+So the library is asked directly rather than the install list.
+`sysreqs_check_installed(library =)` names what is missing
+and which packages want it — printed either way, so the gap is visible
+even when there is nothing to do — and `sysreqs_fix_installed()` installs it.
+Reading the library rather than a recorded apt diff
+is what makes this cover donor libraries from earlier runs as well:
+their apt state was never recorded anywhere,
+but pak can still read what they left behind.
+
+The preflight does this before its load test,
+because a restored package whose system library is absent
+fails to load for a reason that has nothing to do with the package —
+without it, the package is judged stale, rebuilt from source,
+and fails again the same way.
+A shard does it after its installs and before its first check.
+
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,
 so its failure never stops a run —
@@ -840,6 +877,7 @@ at the next `if`.
 | Time limit on one load-test batch | — | `REVDEP2_LOAD_TIMEOUT_MINUTES` | 10 |
 | Packages probed to tell a usable metadata database from an empty one | — | `REVDEP2_METADATA_PROBE` | `vctrs,cli,R6` |
 | Time limit on probing or rebuilding that database | — | `REVDEP2_METADATA_TIMEOUT_MINUTES` | 10 |
+| Time limit on surveying or installing system requirements | — | `REVDEP2_SYSREQS_TIMEOUT_MINUTES` | 20 |
 | Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |

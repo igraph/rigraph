@@ -1185,6 +1185,115 @@ ensure_metadata <- local({
   }
 })
 
+# -------------------------------------------------- system requirements ----
+
+sysreqs_timeout_seconds <- function() {
+  env_num("REVDEP2_SYSREQS_TIMEOUT_MINUTES", 20) * 60
+}
+
+# The system requirements of packages that were unpacked rather than installed.
+#
+# pak installs system requirements for the packages *it* installs. Everything
+# restored from a library tarball -- this run's preflight library, an earlier
+# run's donor -- it never sees, so their apt packages are never resolved: 170
+# of a shard's 436 dependencies arrived that way in run 31282820357. It
+# usually survives, because something else pulls the same apt package in or
+# the runner image already carries it; when it does not, a restored binary
+# cannot load its shared library, and a shard has no load test to catch that.
+#
+# So the library is asked directly rather than the install list, which is what
+# makes this cover donor libraries from earlier runs too -- their apt state was
+# never recorded anywhere, and pak can still read what they left behind.
+#
+# `sysreqs_check_installed()` says what is missing and which packages want it,
+# which is worth printing either way; `sysreqs_fix_installed()` installs it.
+ensure_sysreqs <- function(lib = NULL, label = "") {
+  prefix <- if (nzchar(label)) paste0(label, ": ") else ""
+
+  survey <- function(what) {
+    run <- run_with_timeout(
+      function(repos, lib) {
+        options(repos = repos)
+        got <- pak::sysreqs_check_installed(library = lib)
+        absent <- !got$installed
+        list(
+          total = nrow(got),
+          missing = as.character(got$system_package[absent]),
+          wanted_by = vapply(
+            got$packages[absent],
+            function(p) paste(p, collapse = ", "),
+            character(1)
+          )
+        )
+      },
+      args = list(repos = pinned_repos(), lib = lib),
+      timeout_seconds = sysreqs_timeout_seconds(),
+      label = paste0(prefix, what)
+    )
+    if (!isTRUE(run$ok)) {
+      inform(prefix, "could not check system requirements: ", run$message)
+      return(NULL)
+    }
+    run$value
+  }
+
+  before <- survey("system requirements survey")
+  if (is.null(before)) {
+    return(invisible(NULL))
+  }
+  if (length(before$missing) == 0) {
+    inform(sprintf(
+      "%sall %d system requirement(s) of the installed library are present",
+      prefix,
+      before$total
+    ))
+    return(invisible(character()))
+  }
+  inform(sprintf(
+    "%s%d of %d system requirement(s) are missing: %s",
+    prefix,
+    length(before$missing),
+    before$total,
+    paste(
+      sprintf("%s (%s)", before$missing, before$wanted_by),
+      collapse = "; "
+    )
+  ))
+
+  fixed <- run_with_timeout(
+    function(repos, lib) {
+      options(repos = repos)
+      pak::sysreqs_fix_installed(library = lib)
+      invisible(NULL)
+    },
+    args = list(repos = pinned_repos(), lib = lib),
+    timeout_seconds = sysreqs_timeout_seconds(),
+    label = paste0(prefix, "system requirements install")
+  )
+  if (!isTRUE(fixed$ok)) {
+    inform(prefix, "installing them failed: ", fixed$message)
+    return(invisible(before$missing))
+  }
+
+  after <- survey("system requirements re-survey")
+  still <- if (is.null(after)) before$missing else after$missing
+  if (length(still) == 0) {
+    inform(sprintf(
+      "%sinstalled %d missing system package(s)",
+      prefix,
+      length(before$missing)
+    ))
+  } else {
+    inform(sprintf(
+      "%s%d system package(s) are still missing: %s",
+      prefix,
+      length(still),
+      paste(still, collapse = ", ")
+    ))
+  }
+  invisible(still)
+}
+
 # One pak install, bounded. Separate from install_in_chunks() because the
 # per-package retry after a failed chunk needs exactly the same treatment: it
 # is the same call, one package at a time, and it used to be just as
