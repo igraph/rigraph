@@ -974,14 +974,20 @@ install_chunks <- function(pkgs, db, size = 100) {
 run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
   if (!requireNamespace("callr", quietly = TRUE)) {
     inform(label, ": callr is not installed, running without a time limit")
+    value <- NULL
     message <- tryCatch(
       {
-        do.call(fun, args)
+        value <- do.call(fun, args)
         ""
       },
       error = function(e) conditionMessage(e)
     )
-    return(list(ok = !nzchar(message), timed_out = FALSE, message = message))
+    return(list(
+      ok = !nzchar(message),
+      timed_out = FALSE,
+      message = message,
+      value = value
+    ))
   }
   process <- callr::r_bg(
     fun,
@@ -1003,9 +1009,10 @@ run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
       )
     ))
   }
+  value <- NULL
   message <- tryCatch(
     {
-      process$get_result()
+      value <- process$get_result()
       ""
     },
     # callr reports a child's failure wrapped in its own condition, and the
@@ -1013,7 +1020,12 @@ run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
     # broke -- which is the line that ends up in depfail.json.
     error = function(e) conditionMessage(e$parent %||% e)
   )
-  list(ok = !nzchar(message), timed_out = FALSE, message = message)
+  list(
+    ok = !nzchar(message),
+    timed_out = FALSE,
+    message = message,
+    value = value
+  )
 }
 
 format_duration <- function(seconds) {
@@ -1023,6 +1035,155 @@ format_duration <- function(seconds) {
     sprintf("%.0f min", seconds / 60)
   }
 }
+
+# ---------------------------------------------------- pak's repositories ----
+
+# The repository set, resolved once and pinned.
+#
+# pak reads `getOption("repos")` and adds the Bioconductor repositories to it
+# the moment something needs them -- and its metadata database is keyed on the
+# set. In run 31282820357 the first Bioconductor package landed in chunk 11 of
+# 45; the set went from 1 repository to 6 and the database from 7 files to 9,
+# the rebuilt database came back empty ("0 B in 9 files", parsed in 20 ms
+# rather than 9 s), and from chunk 12 on pak could not find a single package
+# on CRAN. Not vctrs -- all 4406 of them.
+#
+# Installing in chunks is what made that reachable: 45 short-lived pak
+# processes each re-read the database from disk, so the set changing under one
+# of them poisons all the rest. Resolving the set here, before the first
+# install, is what stops it from changing at all.
+pinned_repos <- local({
+  repos <- NULL
+  function() {
+    if (is.null(repos)) {
+      repos <<- tryCatch(
+        {
+          got <- pak::repo_get(bioc = TRUE)
+          stats::setNames(got$url, got$name)
+        },
+        error = function(e) {
+          inform("Could not resolve the repository set: ", conditionMessage(e))
+          getOption("repos")
+        }
+      )
+      inform(
+        "Repositories pinned: ",
+        length(repos),
+        " (",
+        paste(names(repos), collapse = ", "),
+        ")"
+      )
+    }
+    repos
+  }
+})
+
+# ------------------------------------------------------ pak's metadata db ----
+
+# Packages that must be in any CRAN snapshot. If pak cannot see these, it
+# cannot see anything, and what follows is not a dependency problem.
+metadata_probe <- function() {
+  strsplit(env_chr("REVDEP2_METADATA_PROBE", "vctrs,cli,R6"), ",")[[1]]
+}
+
+metadata_timeout_seconds <- function() {
+  env_num("REVDEP2_METADATA_TIMEOUT_MINUTES", 10) * 60
+}
+
+# How many of those packages pak can actually see, or -1 when it could not be
+# asked. `meta_list()` is the low-level view of the database itself, so a
+# broken one answers immediately instead of being reported as a dependency
+# that cannot be solved.
+#
+# It has to run in a fresh process. pak keeps the parsed database in the
+# memory of its own subprocess, so a session that already loaded a good one
+# goes on reporting health that is no longer on disk -- which is why the break
+# in that run only surfaced at the *next* chunk.
+metadata_found <- function() {
+  run <- run_with_timeout(
+    function(repos, probe) {
+      options(repos = repos)
+      nrow(pak::meta_list(pkg = probe))
+    },
+    args = list(repos = pinned_repos(), probe = metadata_probe()),
+    timeout_seconds = metadata_timeout_seconds(),
+    label = "pak metadata probe"
+  )
+  if (!isTRUE(run$ok)) {
+    return(-1L)
+  }
+  as.integer(run$value %||% 0L)
+}
+
+# Delete the metadata database and fetch it again.
+#
+# `meta_clean(force = TRUE)` is the part that matters. pak's own repair --
+# `meta_update()` alone -- is what produced "0 B in 9 files": it re-validated
+# the broken files, found them unchanged, and left the empty database in
+# place. Only deleting it first gets a good one back.
+metadata_repair <- function() {
+  run_with_timeout(
+    function(repos) {
+      options(repos = repos)
+      pak::meta_clean(force = TRUE)
+      pak::meta_update()
+      invisible(NULL)
+    },
+    args = list(repos = pinned_repos()),
+    timeout_seconds = metadata_timeout_seconds(),
+    label = "pak metadata rebuild"
+  )
+}
+
+# Assess pak's metadata database, and rebuild it at most once per job.
+#
+# Returns "ok", "repaired" or "broken". Once per job is deliberate: a database
+# that is still empty after a clean rebuild is not a stale cache, and clearing
+# it in a loop would spend the job's minutes hiding that.
+ensure_metadata <- local({
+  repaired <- FALSE
+  function(where = "") {
+    prefix <- if (nzchar(where)) paste0(where, ": ") else ""
+    wanted <- length(metadata_probe())
+    found <- metadata_found()
+    if (found >= wanted) {
+      return("ok")
+    }
+    if (repaired) {
+      inform(sprintf(
+        "%spak still sees %d of %d probe packages after a rebuild; not clearing again",
+        prefix,
+        max(found, 0L),
+        wanted
+      ))
+      return("broken")
+    }
+    repaired <<- TRUE
+    inform(sprintf(
+      "%spak sees %d of %d packages that must exist -- its metadata database is unusable; clearing and rebuilding it once",
+      prefix,
+      max(found, 0L),
+      wanted
+    ))
+    rebuild <- metadata_repair()
+    if (!isTRUE(rebuild$ok)) {
+      inform(prefix, "the rebuild failed: ", rebuild$message)
+      return("broken")
+    }
+    found <- metadata_found()
+    if (found >= wanted) {
+      inform(prefix, "the metadata database is usable again")
+      return("repaired")
+    }
+    inform(sprintf(
+      "%sstill %d of %d after the rebuild; the repositories themselves are not answering",
+      prefix,
+      max(found, 0L),
+      wanted
+    ))
+    "broken"
+  }
+})
 
 # One pak install, bounded. Separate from install_in_chunks() because the
 # per-package retry after a failed chunk needs exactly the same treatment: it
@@ -1036,7 +1197,11 @@ pak_install <- function(
   label = ""
 ) {
   run_with_timeout(
-    function(pkgs, lib, upgrade) {
+    function(pkgs, lib, upgrade, repos) {
+      # The pin travels into every child: an option set in the parent is not
+      # inherited, and a child that resolves its own repository set is a child
+      # that can change it.
+      options(repos = repos)
       if (is.null(lib)) {
         pak::pkg_install(pkgs, ask = FALSE, upgrade = upgrade)
       } else {
@@ -1044,7 +1209,12 @@ pak_install <- function(
       }
       invisible(NULL)
     },
-    args = list(pkgs = pkgs, lib = lib, upgrade = upgrade),
+    args = list(
+      pkgs = pkgs,
+      lib = lib,
+      upgrade = upgrade,
+      repos = pinned_repos()
+    ),
     timeout_seconds = timeout_seconds,
     label = label
   )
@@ -1076,13 +1246,31 @@ install_in_chunks <- function(
       return(FALSE)
     }
     started <- Sys.time()
+    label <- sprintf("%schunk %d/%d", prefix, i, length(chunks))
     run <- pak_install(
       chunks[[i]],
       lib = lib,
       upgrade = upgrade,
       timeout_seconds = timeout_seconds,
-      label = sprintf("%schunk %d/%d", prefix, i, length(chunks))
+      label = label
     )
+    # A chunk that fails may have failed because pak could not see the
+    # repositories at all, which is a different thing from a package that will
+    # not install -- and it is the state that, left alone, fails every chunk
+    # after it too. Only a rebuild that actually changed something earns the
+    # retry; a healthy database means the failure was real.
+    if (
+      !run$ok && identical(ensure_metadata(sub(": $", "", prefix)), "repaired")
+    ) {
+      inform(prefix, "retrying chunk ", i, " against the rebuilt metadata")
+      run <- pak_install(
+        chunks[[i]],
+        lib = lib,
+        upgrade = upgrade,
+        timeout_seconds = timeout_seconds,
+        label = label
+      )
+    }
     if (!run$ok) {
       inform(prefix, "chunk ", i, " failed: ", run$message)
     }

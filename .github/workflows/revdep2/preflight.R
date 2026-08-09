@@ -93,6 +93,21 @@ inform(
   ", dependencies first; upgrade = ",
   upgrade
 )
+# Before the first install, not after the first failure: a poisoned metadata
+# database is inherited through the pak cache the workflow restores, so the
+# job can start with one. Asking pak what it can see costs seconds and is the
+# difference between one bad job and a run where every shard installs nothing.
+metadata <- ensure_metadata("Preflight")
+if (identical(metadata, "broken")) {
+  stop(
+    "pak cannot see the packages that must exist, before or after rebuilding ",
+    "its metadata database. Installing anything now would fail package by ",
+    "package for hours and publish a cache that fails every shard the same ",
+    "way.",
+    call. = FALSE
+  )
+}
+
 install_started <- Sys.time()
 installed_ok <- install_in_chunks(
   chunks,

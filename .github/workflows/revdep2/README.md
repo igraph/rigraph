@@ -614,6 +614,7 @@ the report is about *results*, a retry is about *coverage*.
 | A pak install chunk never returns | killed at `REVDEP2_INSTALL_TIMEOUT_MINUTES`, tree and all; the next chunk starts a fresh pak |
 | The installs cannot finish inside the job | no chunk is started past `REVDEP2_INSTALL_DEADLINE_MINUTES`; what did install is still load-tested, packed and published |
 | A dependency's `loadNamespace()` hangs | the batch times out and is retried one package at a time, so the culprit is named as a load failure |
+| pak's metadata database is empty or unreadable | detected by probe before the first install, cleared and rebuilt once; the preflight stops if that does not fix it |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
@@ -736,6 +737,58 @@ where 14 and 20 had merely failed.
 Each chunk now starts a fresh R and a fresh pak,
 so a bad one is contained to itself.
 
+### pak's repositories are pinned, and its metadata is checked
+
+pak reads `getOption("repos")` and adds the Bioconductor repositories
+the moment something needs them —
+and its metadata database is keyed on that set.
+In run 31282820357 the first Bioconductor package
+landed in chunk 11 of 45.
+The repository set went from 1 to 6,
+the metadata database from 7 files to 9,
+and the rebuilt database came back **empty**:
+`Updated metadata database: 0 B in 9 files`,
+parsed in 20 ms where a good one takes 9 seconds.
+From chunk 12 on, pak could not find a single package on CRAN —
+not vctrs, all 4406 of them.
+
+Installing in chunks is what made that reachable.
+One long-lived pak process holds the parsed database in memory;
+45 short-lived ones each re-read it from disk,
+so a set that changes under one of them poisons every one that follows.
+
+Three things follow from that:
+
+- **The repository set is resolved once and pinned.**
+  `repo_get(bioc = TRUE)` up front, before the first install,
+  and the resulting set is handed to every pak child —
+  an option set in the parent is not inherited,
+  and a child that resolves its own set is a child that can change it.
+- **The database is assessed before it is trusted**, with `meta_list()`
+  rather than by watching installs fail:
+  pak is asked how many of a few packages that must exist it can see
+  (`REVDEP2_METADATA_PROBE`, default `vctrs,cli,R6`).
+  The probe runs in a fresh process,
+  because pak keeps the parsed database in the memory of its own subprocess —
+  which is precisely why the break only surfaced at the *next* chunk.
+- **A broken one is cleared exactly once.**
+  `meta_clean(force = TRUE)` then `meta_update()`.
+  The clean is the part that matters:
+  `meta_update()` alone is what produced "0 B in 9 files",
+  re-validating the broken files and leaving the empty database in place.
+  Once per job is deliberate —
+  a database still empty after a clean rebuild is not a stale cache,
+  and clearing it in a loop would spend the job hiding that.
+
+The preflight checks before its first install and stops if it cannot be fixed,
+rather than failing package by package for hours
+and then publishing a cache that fails every shard the same way.
+Each shard checks after restoring that cache,
+which is the difference between one bad job and sixty.
+A chunk that fails is retried once,
+but only when the rebuild actually changed something —
+against a healthy database, a failed chunk is a real failure.
+
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,
 so its failure never stops a run —
@@ -785,6 +838,8 @@ at the next `if`.
 | Time limit on one `pak::pkg_install()` call | — | `REVDEP2_INSTALL_TIMEOUT_MINUTES` | 20 |
 | Wall clock past which no further install is started | — | `REVDEP2_INSTALL_DEADLINE_MINUTES` | 210 |
 | Time limit on one load-test batch | — | `REVDEP2_LOAD_TIMEOUT_MINUTES` | 10 |
+| Packages probed to tell a usable metadata database from an empty one | — | `REVDEP2_METADATA_PROBE` | `vctrs,cli,R6` |
+| Time limit on probing or rebuilding that database | — | `REVDEP2_METADATA_TIMEOUT_MINUTES` | 10 |
 | Wall clock past which the plan warns (never refuses) | — | `REVDEP2_LONG_RUN_HOURS` | 12 h |
 | Runs whose timings calibrate the cost model | — | `REVDEP2_MEASURED_MAX_RUNS` | 3 (`0` disables) |
 | Oldest measurement worth trusting | — | `REVDEP2_MEASURED_MAX_AGE_DAYS` | 60 days |

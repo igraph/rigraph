@@ -160,6 +160,16 @@ inform(
 # CRAN *now*, so the library has to follow CRAN now.
 upgrade <- length(restored) > 0
 
+# The pak cache this shard restored was saved by the preflight, so a metadata
+# database broken there arrives here intact -- which is how run 31282820357
+# turned one bad preflight into sixty shards that installed nothing and
+# reported every one of their packages as a depfail. Asking pak what it can
+# see costs seconds, and a shard that cannot see CRAN is worth saying out loud
+# rather than working around.
+if (identical(ensure_metadata(sprintf("Shard %d", shard_index)), "broken")) {
+  inform("pak cannot see CRAN here; every check will be a depfail")
+}
+
 # In dependency order, a hundred at a time, for the same reason the preflight
 # does it: one pak call for the whole set is one resolution of the whole set,
 # and that is the part that stops degrading gracefully as the set grows. A
