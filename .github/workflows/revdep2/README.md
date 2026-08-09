@@ -616,6 +616,7 @@ the report is about *results*, a retry is about *coverage*.
 | The installs cannot finish inside the job | no chunk is started past `REVDEP2_INSTALL_DEADLINE_MINUTES`; what did install is still load-tested, packed and published |
 | A dependency's `loadNamespace()` hangs | the batch times out and is retried one package at a time, so the culprit is named as a load failure |
 | pak's metadata database is empty or unreadable | detected by probe before the first install, cleared and rebuilt once; the preflight stops if that does not fix it |
+| `/tmp` fills and R can no longer start | `TMPDIR` is on the big disk, so it does not; the sampler still reports `/tmp` if it ever does |
 | A restored package's system library is absent | `sysreqs_check_installed()` names it and `sysreqs_fix_installed()` installs it, in both the preflight and every shard |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
@@ -825,6 +826,35 @@ fails to load for a reason that has nothing to do with the package —
 without it, the package is judged stale, rebuilt from source,
 and fails again the same way.
 A shard does it after its installs and before its first check.
+
+### Temporary files go on the big disk
+
+`/tmp` on this runner image is its own filesystem of about 8 GB —
+half the RAM, so a tmpfs —
+while the disk `runner.temp` lives on has over 100 GB free.
+Everything R does temporarily lands in `/tmp` by default:
+source builds, unpacked tarballs,
+and callr's own startup files.
+
+Run 31303054725 filled it after eleven chunks.
+What that looks like is not "no space left on device" anywhere useful:
+
+```
+08:19:33  /tmp 8G free                                    ← job starts
+08:30:34  /tmp 2G free
+08:31:12  Error in saveRDS(client_env, file = env_file, …) :
+            error writing to connection
+08:31:13  chunk 13 failed: ! callr subprocess failed: could not start R
+```
+
+Once callr cannot write its startup environment,
+no R process starts at all,
+and every chunk after that fails in about a second —
+which reads like the metadata database being empty,
+and is a completely different problem.
+So `TMPDIR` points at `runner.temp` in both jobs,
+and the sampler keeps `/tmp` in its list
+whether or not anything is still using it.
 
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,

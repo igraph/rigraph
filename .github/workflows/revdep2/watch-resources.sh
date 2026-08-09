@@ -53,7 +53,7 @@ sample() {
   # here actually writes to; duplicates collapse, so naming a path twice or
   # naming one that does not exist costs nothing.
   disk=$(df -BG --output=target,avail \
-    / /mnt "${RUNNER_TEMP:-/tmp}" "${TMPDIR:-/tmp}" 2> /dev/null |
+    / /mnt /tmp "${RUNNER_TEMP:-/tmp}" "${TMPDIR:-/tmp}" 2> /dev/null |
     awk 'NR > 1 && !seen[$1]++ { printf "%s %s free; ", $1, $2 }' |
     sed 's/; $//')
 

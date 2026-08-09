@@ -367,8 +367,19 @@ jobs:
           LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
           PKG_SYSREQS: true
           RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
+          # `/tmp` on this image is its own filesystem of about 8 GB -- half
+          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
+          # over 100 GB free. Everything R does temporarily lands there:
+          # source builds, unpacked tarballs, and callr's own startup files.
+          # In run 31303054725 it filled after eleven chunks, and callr could
+          # then not start R at all -- "error writing to connection" from the
+          # saveRDS of its startup environment -- which failed every chunk
+          # after it in about a second. The space is on the big disk.
+          TMPDIR: ${{ runner.temp }}/tmp
+          TMP: ${{ runner.temp }}/tmp
+          TEMP: ${{ runner.temp }}/tmp
         run: |
-          mkdir -p "${RUNNER_TEMP}/preflight"
+          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
           watch=./.github/workflows/revdep2/watch-resources.sh
           "${watch}" once "before the install"
           "${watch}" watch 30 "installing" &
@@ -576,7 +587,13 @@ jobs:
           TIMEOUT_MIN_MINUTES: ${{ env.REVDEP2_TIMEOUT_MIN_MINUTES }}
           DEADLINE_MINUTES: ${{ env.REVDEP2_DEADLINE_MINUTES }}
           PKG_SYSREQS: true
+          # The same small `/tmp` as the preflight, and a shard builds source
+          # packages and unpacks check directories into it for hours.
+          TMPDIR: ${{ runner.temp }}/tmp
+          TMP: ${{ runner.temp }}/tmp
+          TEMP: ${{ runner.temp }}/tmp
         run: |
+          mkdir -p "${RUNNER_TEMP}/tmp"
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 

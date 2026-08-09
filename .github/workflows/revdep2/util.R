@@ -1110,6 +1110,12 @@ metadata_found <- function() {
     label = "pak metadata probe"
   )
   if (!isTRUE(run$ok)) {
+    # Not the same thing as an empty database, and saying so matters: in run
+    # 31303054725 `/tmp` filled, callr could no longer start R, and every
+    # probe from then on failed to run at all -- reported as "pak sees 0 of
+    # 3", which reads like the database being empty and is a completely
+    # different problem.
+    inform("Could not ask pak what it can see: ", run$message)
     return(-1L)
   }
   as.integer(run$value %||% 0L)
@@ -1148,6 +1154,14 @@ ensure_metadata <- local({
     found <- metadata_found()
     if (found >= wanted) {
       return("ok")
+    }
+    # A probe that could not be run says nothing about the database, and
+    # clearing it on that evidence would spend the one rebuild on a machine
+    # problem -- which is exactly what would have happened when R could no
+    # longer start.
+    if (found < 0) {
+      inform(prefix, "the state of the metadata database is unknown")
+      return("unknown")
     }
     if (repaired) {
       inform(sprintf(
