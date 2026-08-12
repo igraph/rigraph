@@ -312,7 +312,28 @@ max_cliques <- function(
   callback = NULL
 ) {
   ensure_igraph(graph)
-  check_dots_empty()
+
+  # BEGIN GENERATED ARG_HANDLE: max_cliques, do not edit, see tools/generate-migrations.R
+  if (...length() > 0L) {
+    .arg_handle <- migrate_recover_args(
+      list(...),
+      current = list(file = file, callback = callback),
+      recover_new = c("file"),
+      recover_old = c("file"),
+      match_names = c("file", "callback"),
+      match_to = c("file", "callback"),
+      defaults = list(file = NULL, callback = NULL),
+      head_args = c("graph", "min", "max", "subset"),
+      fn_name = "max_cliques"
+    )
+    list2env(.arg_handle$values, environment())
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what = I(.arg_handle$what),
+      details = .arg_handle$details
+    )
+  }
+  # END GENERATED ARG_HANDLE
 
   # Handle file and subset modes (original functionality)
   if (!is.null(file)) {

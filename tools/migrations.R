@@ -30,6 +30,13 @@
 #         name, e.g. `c = c_renamed` means the old `c` argument is the new
 #         `c_renamed`. Formals without a symbol default keep their name.
 #
+#         `old` may itself contain `...`, when the function was already
+#         migrated once before and this entry captures a *later* migration on
+#         top of that (e.g. reordering an argument that already sits after
+#         `...`). Names before it are still positional; names after it were
+#         already keyword-only and stay recoverable by (partial) name only,
+#         never by position.
+#
 #   new   The post-migration signature. Must contain exactly one `...`. The
 #         non-`...` formals are the new-API arguments, in order; their defaults
 #         become the function's defaults and the values the conflict check
@@ -91,6 +98,26 @@ migrations <- list(
       names = TRUE,
       sparse = FALSE,
       attr = deprecated()
+    ) {},
+    when = "3.0.0"
+  ),
+
+  # `file` moves from a positional slot to keyword-only, past `...`, so a call
+  # that used to pass it as the 5th positional argument still needs recovering.
+  # `old` documents the signature as it stood just before this reordering --
+  # which already had `...` in it (a previous, unregistered change had added
+  # `callback` as keyword-only) -- so `callback` sits after `old`'s own `...`
+  # and is recovered by name only, exactly as it already was.
+  max_cliques = list(
+    old = function(graph, min, max, subset, file, ..., callback) {},
+    new = function(
+      graph,
+      min = NULL,
+      max = NULL,
+      subset = NULL,
+      ...,
+      file = NULL,
+      callback = NULL
     ) {},
     when = "3.0.0"
   ),

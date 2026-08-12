@@ -247,3 +247,148 @@ test_that("render_call_arg() wraps long arguments the way air formats them", {
   )
   expect_true(all(nchar(wrapped) + 2L <= 80L))
 })
+
+test_that("`...` in `old` marks a name-only boundary, not a positional slot", {
+  # max_cliques() is migrated a second time: `file` moves from positional to
+  # keyword-only, past `...` -- and `old` documents the signature as it stood
+  # just before that, which already had `...` (from an earlier, unregistered
+  # change that added `callback` as keyword-only). `callback` must land past
+  # `old`'s own `...` and stay name-only-recoverable, never folded into the
+  # positional `recover_old`/`recover_new` pair.
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  entry <- gen_env$normalise_migration(
+    "fn",
+    list(
+      old = function(graph, min, max, subset, file, ..., callback) {},
+      new = function(
+        graph,
+        min = NULL,
+        max = NULL,
+        subset = NULL,
+        ...,
+        file = NULL,
+        callback = NULL
+      ) {}
+    )
+  )
+
+  expect_identical(entry$old, c("graph", "min", "max", "subset", "file"))
+  expect_identical(entry$recover_old, "file")
+  expect_identical(entry$recover_new, "file")
+  # `callback` is matchable by name (it is already in `new`'s tail) but does
+  # not appear a second time as a positionally-recoverable slot.
+  expect_identical(entry$match_names, c("file", "callback"))
+  expect_identical(entry$match_to, c("file", "callback"))
+})
+
+test_that("inject_block() splices a fresh block at the top of a bare function", {
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  entry <- gen_env$normalise_migration(
+    "fn",
+    list(
+      old = function(graph, n, weights, directed) {},
+      new = function(graph, n, ..., weights = NULL, directed = FALSE) {}
+    )
+  )
+
+  lines <- c(
+    "#' @noRd",
+    "fn <- function(",
+    "  graph,",
+    "  n,",
+    "  ...,",
+    "  weights = NULL,",
+    "  directed = FALSE",
+    ") {",
+    "  do_the_thing(graph)",
+    "}"
+  )
+
+  out <- gen_env$inject_block(lines, "fn", entry)
+
+  expect_identical(out[seq_len(8)], lines[seq_len(8)])
+  expect_true(any(grepl("BEGIN GENERATED ARG_HANDLE: fn", out)))
+  expect_true(any(grepl("END GENERATED ARG_HANDLE", out)))
+  # Injected before the pre-existing body, i.e. at the very beginning.
+  begin_at <- which(grepl("BEGIN GENERATED ARG_HANDLE", out))
+  body_at <- which(grepl("do_the_thing", out))
+  expect_lt(begin_at, body_at)
+  expect_identical(out[[length(out)]], "}")
+
+  # Idempotent once spliced: re-running the normal marker-based path leaves it
+  # unchanged.
+  spliced <- gen_env$splice_blocks(out, list(fn = entry))
+  expect_identical(spliced$lines, out)
+  expect_identical(spliced$filled, "fn")
+})
+
+test_that("inject_block() returns NULL when the function isn't in `lines`", {
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  entry <- gen_env$normalise_migration(
+    "fn",
+    list(
+      old = function(graph, n, weights) {},
+      new = function(graph, n, ..., weights = NULL) {}
+    )
+  )
+  expect_null(gen_env$inject_block(
+    c("other_fn <- function(graph) {", "}"),
+    "fn",
+    entry
+  ))
+})
+
+test_that("generate_migrations() injects a missing block and warns, then stays quiet", {
+  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
+  skip_if_not(file.exists(generator))
+  gen_env <- new.env()
+  sys.source(generator, envir = gen_env)
+
+  registry_dir <- withr::local_tempdir()
+  registry <- file.path(registry_dir, "migrations.R")
+  writeLines(
+    c(
+      "migrations <- list(",
+      "  fn = list(",
+      "    old = function(graph, n, weights) {},",
+      "    new = function(graph, n, ..., weights = NULL) {}",
+      "  )",
+      ")"
+    ),
+    registry
+  )
+
+  src_dir <- withr::local_tempdir()
+  fn_file <- file.path(src_dir, "fn.R")
+  writeLines(
+    c(
+      "fn <- function(graph, n, ..., weights = NULL) {",
+      "  do_the_thing(graph)",
+      "}"
+    ),
+    fn_file
+  )
+
+  expect_warning(
+    gen_env$generate_migrations(registry, src_dir),
+    "injected"
+  )
+  lines <- readLines(fn_file, warn = FALSE)
+  expect_true(any(grepl("BEGIN GENERATED ARG_HANDLE: fn", lines)))
+
+  # Re-running now finds the marker and is a silent no-op.
+  expect_no_warning(gen_env$generate_migrations(registry, src_dir))
+  expect_identical(readLines(fn_file, warn = FALSE), lines)
+})

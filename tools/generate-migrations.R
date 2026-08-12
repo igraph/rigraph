@@ -17,6 +17,11 @@
 # Usage:
 #   Rscript tools/generate-migrations.R
 #
+# If a registry entry has no marker pair anywhere yet, one is injected at the
+# very beginning of the function's body (with a warning) instead of leaving
+# the migration unwired -- move it by hand afterwards if a later placement
+# reads better, then re-run the generator.
+#
 # Output is deterministic and idempotent (running twice produces no diff) and is
 # laid out exactly as `air` formats it, so the host files stay clean. A testthat
 # helper regenerates automatically when the registry is newer; CI fails on any
@@ -85,7 +90,21 @@ normalise_migration <- function(fn, entry) {
 
   old_fmls <- formals(entry$old)
   new_fmls <- formals(entry$new)
-  entry$old <- names(old_fmls)
+
+  old_names_raw <- names(old_fmls)
+  old_dots_idx <- which(old_names_raw == "...")
+  # `old` may itself carry `...` -- this migration is not the function's
+  # first: an earlier migration already made the names past it keyword-only,
+  # so they were never positionally callable and must stay recoverable by
+  # (partial) name only, never folded into the positional recovery below.
+  if (length(old_dots_idx) == 1L) {
+    old_positional <- old_names_raw[seq_len(old_dots_idx - 1L)]
+    old_keyword_only <- old_names_raw[(old_dots_idx + 1L):length(old_names_raw)]
+  } else {
+    old_positional <- old_names_raw
+    old_keyword_only <- character(0)
+  }
+  entry$old <- old_positional
   entry$new <- names(new_fmls)
 
   if (sum(entry$new == "...") != 1L) {
@@ -99,7 +118,7 @@ normalise_migration <- function(fn, entry) {
 
   # Renames: an old formal whose default is a bare symbol points at its new name.
   renames <- character(0)
-  for (nm in entry$old) {
+  for (nm in c(old_positional, old_keyword_only)) {
     if (!nzchar(default_expr(old_fmls, nm))) {
       next
     } # no default -> no rename
@@ -155,7 +174,18 @@ normalise_migration <- function(fn, entry) {
     USE.NAMES = FALSE
   )
 
-  bad <- setdiff(entry$recover_new, entry$tail)
+  # Old names already past `old`'s own `...` map through the same renames, but
+  # -- unlike `recover_old`/`recover_new` -- never drive positional recovery.
+  keyword_only_new <- vapply(
+    old_keyword_only,
+    function(nm) {
+      if (nm %in% names(entry$renames)) entry$renames[[nm]] else nm
+    },
+    character(1),
+    USE.NAMES = FALSE
+  )
+
+  bad <- setdiff(c(entry$recover_new, keyword_only_new), entry$tail)
   if (length(bad)) {
     stop(
       "Migration `",
@@ -171,8 +201,17 @@ normalise_migration <- function(fn, entry) {
   # the new tail names (so abbreviations of the new args are matched too). Each
   # entry records where it resolves in the new API.
   renamed <- entry$recover_old != entry$recover_new
-  entry$match_names <- c(entry$recover_old[renamed], entry$tail)
-  entry$match_to <- c(entry$recover_new[renamed], entry$tail)
+  keyword_renamed <- old_keyword_only != keyword_only_new
+  entry$match_names <- c(
+    entry$recover_old[renamed],
+    old_keyword_only[keyword_renamed],
+    entry$tail
+  )
+  entry$match_to <- c(
+    entry$recover_new[renamed],
+    keyword_only_new[keyword_renamed],
+    entry$tail
+  )
 
   entry
 }
@@ -322,6 +361,91 @@ splice_blocks <- function(lines, by_fn) {
   list(lines = out, filled = filled)
 }
 
+# ---- injecting a block when no marker exists -------------------------------
+
+# Escape a function name for literal use inside a regex. Registry names are
+# always identifiers (`[A-Za-z0-9._]+`, per `begin_re` above), so `.` is the
+# only metacharacter that can occur.
+regex_escape <- function(x) {
+  gsub(".", "\\.", x, fixed = TRUE)
+}
+
+# A registry entry with no `# BEGIN GENERATED ARG_HANDLE` marker anywhere
+# would otherwise stay silently unwired -- easy to miss when adding a new
+# migration, since the generator would just warn and move on. Instead, locate
+# the function's definition (`<fn> <- function(`) and inject a freshly
+# rendered block right after the opening `{` of its body: the safest default,
+# since it then runs before anything else touches the (possibly still-legacy)
+# arguments. It is very likely not the *best* spot -- an early argument-check
+# such as `ensure_igraph()` usually reads better before it -- so the caller
+# always pairs this with a warning asking for a manual look. Returns NULL
+# (added nothing) if `fn`'s definition is not in `lines`.
+inject_block <- function(lines, fn, entry) {
+  def_re <- paste0("^", regex_escape(fn), "\\s*<-\\s*function\\s*\\(")
+  idx <- which(grepl(def_re, lines))
+  if (length(idx) == 0L) {
+    return(NULL)
+  }
+  i <- idx[[1]]
+
+  # Walk forward from the definition, tracking paren depth, to the line where
+  # the signature's closing `)` brings it back to zero -- this spans however
+  # many lines the (possibly multi-line, `air`-formatted) signature takes.
+  depth <- 0L
+  j <- i
+  repeat {
+    ch <- strsplit(lines[[j]], "", fixed = TRUE)[[1]]
+    depth <- depth + sum(ch == "(") - sum(ch == ")")
+    if (depth <= 0L) {
+      break
+    }
+    j <- j + 1L
+    if (j > length(lines)) {
+      stop(
+        "Could not find the end of `",
+        fn,
+        "`'s signature while injecting an ARG_HANDLE block.",
+        call. = FALSE
+      )
+    }
+  }
+
+  # The body's opening `{` is usually on the same line as that closing `)`
+  # (`air`'s style); scan forward otherwise.
+  while (!grepl("{", lines[[j]], fixed = TRUE)) {
+    j <- j + 1L
+    if (j > length(lines)) {
+      stop(
+        "Could not find the opening `{` of `",
+        fn,
+        "`'s body while injecting an ARG_HANDLE block.",
+        call. = FALSE
+      )
+    }
+  }
+  brace_pos <- regexpr("{", lines[[j]], fixed = TRUE)[[1]]
+  before <- substring(lines[[j]], 1L, brace_pos)
+  after <- substring(lines[[j]], brace_pos + 1L)
+
+  block <- c(
+    paste0(
+      "  # BEGIN GENERATED ARG_HANDLE: ",
+      fn,
+      ", do not edit, see tools/generate-migrations.R"
+    ),
+    paste0("  ", render_arg_handle(entry)),
+    "  # END GENERATED ARG_HANDLE"
+  )
+
+  c(
+    lines[seq_len(j - 1L)],
+    before,
+    block,
+    if (nzchar(after)) after,
+    if (j < length(lines)) lines[(j + 1L):length(lines)]
+  )
+}
+
 # ---- driver ----------------------------------------------------------------
 
 generate_migrations <- function(registry_path, src_dir) {
@@ -332,25 +456,58 @@ generate_migrations <- function(registry_path, src_dir) {
   )
 
   files <- list.files(src_dir, pattern = "\\.R$", full.names = TRUE)
+  orig_lines <- stats::setNames(lapply(files, readLines, warn = FALSE), files)
+  file_lines <- orig_lines
   filled <- character()
+
   for (f in files) {
-    lines <- readLines(f, warn = FALSE)
+    lines <- file_lines[[f]]
     if (!any(grepl(begin_re, lines))) {
       next
     }
     res <- splice_blocks(lines, by_fn)
+    file_lines[[f]] <- res$lines
     filled <- c(filled, res$filled)
-    if (!identical(res$lines, lines)) {
-      writeLines(res$lines, f)
+  }
+
+  # Entries that never had a marker: inject one rather than leave them unwired.
+  missing <- setdiff(names(by_fn), filled)
+  for (fn in missing) {
+    for (f in files) {
+      new_lines <- inject_block(file_lines[[f]], fn, by_fn[[fn]])
+      if (is.null(new_lines)) {
+        next
+      }
+      file_lines[[f]] <- new_lines
+      filled <- c(filled, fn)
+      warning(
+        paste0(
+          "No `# BEGIN GENERATED ARG_HANDLE` marker found for `",
+          fn,
+          "`; injected one at the very beginning of its body in ",
+          f,
+          ". An early argument-checking guard usually belongs before it -- ",
+          "review the placement, then re-run the generator."
+        ),
+        call. = FALSE
+      )
+      break
+    }
+  }
+
+  for (f in files) {
+    if (!identical(file_lines[[f]], orig_lines[[f]])) {
+      writeLines(file_lines[[f]], f)
       message("updated ", f)
     }
   }
 
-  missing <- setdiff(names(by_fn), filled)
-  if (length(missing)) {
+  still_missing <- setdiff(names(by_fn), filled)
+  if (length(still_missing)) {
     warning(
       "No `# BEGIN GENERATED ARG_HANDLE` marker found for: ",
-      paste(missing, collapse = ", "),
+      paste(still_missing, collapse = ", "),
+      ", and no matching `<fn> <- function(` definition to inject one into.",
       call. = FALSE
     )
   }
