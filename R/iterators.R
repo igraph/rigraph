@@ -1200,6 +1200,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
   }
+  if (!rlang::has_name(attributes(value), "value")) {
+    cli::cli_abort(
+      "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
+    )
+  }
   if (is.null(get_vs_graph(x))) {
     cli::cli_abort("Graph is unknown.", .internal = TRUE)
   }
@@ -1218,6 +1223,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 `[[<-.igraph.es` <- function(x, i, value) {
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
+  }
+  if (!rlang::has_name(attributes(value), "value")) {
+    cli::cli_abort(
+      "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
+    )
   }
   if (is.null(get_es_graph(x))) {
     cli::cli_abort("Graph is unknown.", .internal = TRUE)
@@ -1386,6 +1396,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for vertex attribute.")
   }
+  if (!rlang::has_name(attributes(value), "value")) {
+    cli::cli_abort(
+      "Can't find {.val value} for vertex attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
+    )
+  }
   i_set_vertex_attr(
     x,
     attr(value, "name"),
@@ -1406,6 +1421,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   ensure_igraph(x)
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for edge attribute.")
+  }
+  if (!rlang::has_name(attributes(value), "value")) {
+    cli::cli_abort(
+      "Can't find {.val value} for edge attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
+    )
   }
   i_set_edge_attr(
     x,
