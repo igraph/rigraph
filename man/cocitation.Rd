@@ -5,16 +5,16 @@
 \alias{bibcoupling}
 \title{Cocitation coupling}
 \usage{
-cocitation(graph, v = V(graph))
+cocitation(graph, v = NULL)
 
-bibcoupling(graph, v = V(graph))
+bibcoupling(graph, v = NULL)
 }
 \arguments{
 \item{graph}{The graph object to analyze}
 
 \item{v}{Vertex sequence or numeric vector, the vertex IDs for which the
 cocitation or bibliographic coupling values we want to calculate. The
-default is all vertices.}
+default \code{NULL} selects all vertices.}
 }
 \value{
 A numeric matrix with \code{length(v)} lines and

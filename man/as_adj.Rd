@@ -49,7 +49,7 @@ is present in the graph.}
 
 \item{sparse}{Logical, whether to create a sparse matrix. The
 \sQuote{\code{Matrix}} package must be installed for creating sparse
-matrices.}
+matrices. The default \code{NULL} uses the \code{sparsematrices} igraph option.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

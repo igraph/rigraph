@@ -68,7 +68,7 @@ migrations <- list(
       graph,
       ...,
       column.wise = FALSE,
-      sparse = igraph_opt("sparsematrices")
+      sparse = NULL
     ) {},
     when = "3.0.0"
   )

@@ -1,5 +1,135 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9031
+
+## Continuous integration
+
+### revdep2
+
+- Put a clock on every call that can hang (#2832).
+
+### revdep2
+
+- Install in chunks, and diagnose a preflight that is killed rather than failed (#2830).
+
+
+# igraph 2.3.3.9030
+
+## Bug fixes
+
+### ci
+
+- Check `windows-11-arm` with `error_on = "error"` (#2821).
+
+## Features
+
+### ci
+
+- Commit the `revdep2` report, and re-check what it lists (#2827).
+
+## Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
+
+# igraph 2.3.3.9029
+
+## Bug fixes
+
+### ci
+
+- Let a `revdep2` run survive its preflight, and finish the shard-count follow-ups (#2820).
+
+### migrations
+
+- Recover legacy arguments against the old signature (#2812).
+
+## Features
+
+### ci
+
+- Size `revdep2` shards by the parallel capacity, calibrated from measured timings (#2819).
+
+
+# igraph 2.3.3.9028
+
+## Bug fixes
+
+### ci
+
+- Carry `revdep2` run ids as strings, and make its summary self-contained (#2816).
+
+## Continuous integration
+
+- Move the `revdep2` library artifact steps to their Node 24 releases (#2817).
+
+
+# igraph 2.3.3.9027
+
+## Bug fixes
+
+### ci
+
+- Quote `gh` arguments in the `revdep2` plan job (#2811).
+
+## Features
+
+### ci
+
+- Reuse prebuilt packages in `revdep2` instead of rebuilding them (#2814).
+
+## Continuous integration
+
+- Move remaining Node 20 actions to their Node 24 releases (#2813).
+
+- Add sharded `revdep2` workflow.
+
+## Uncategorized
+
+- Ci: Harden `workflow_run` workflows against untrusted pull requests (#106).
+
+- Ci: Pin third-party actions to commits and let Renovate keep them pinned (#105).
+
+
+# igraph 2.3.3.9026
+
+## Features
+
+### migrations
+
+- Require constant defaults, resolve complex ones in the body (#2784).
+
+## Chore
+
+- Auto-update from GitHub Actions (#2807).
+
+- Auto-update from GitHub Actions (#2806).
+
+## Continuous integration
+
+- Remove unused pr-commands workflow.
+
+## Documentation
+
+- Zoning rules for arguments around the ellipsis (#2757).
+
+- Revdep results before PR.
+
+- Revdep problems for PR.
+
+## Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block (#103).
+
+- Ci: Pass workflow context through the environment, not into script text (#102).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release (#99).
+
+
 # igraph 2.3.3.9025
 
 ## Continuous integration

@@ -17,11 +17,13 @@ lastcit.game(
 
 \item{edges}{Number of edges per step.}
 
-\item{agebins}{Number of aging bins.}
+\item{agebins}{Number of aging bins. The default \code{NULL} uses \code{n / 7100}.}
 
 \item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
 matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
-probabilities for the different vertex types.}
+probabilities for the different vertex types. The default \code{NULL} uses
+\code{(1:(agebins + 1))^-3} for \code{sample_last_cit()} and all-one probabilities
+for the other two.}
 
 \item{directed}{Logical, whether to generate directed networks.}
 }

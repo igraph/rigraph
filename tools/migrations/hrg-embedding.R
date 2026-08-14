@@ -12,8 +12,8 @@ migrations <- list(
       weights = NULL,
       which = c("lm", "la", "sa"),
       scaled = TRUE,
-      cvec = strength(graph, weights = weights) / (vcount(graph) - 1),
-      options = arpack_defaults()
+      cvec = NULL,
+      options = NULL
     ) {},
     when = "3.0.0"
   ),
@@ -28,7 +28,7 @@ migrations <- list(
       which = c("lm", "la", "sa"),
       type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
       scaled = TRUE,
-      options = arpack_defaults()
+      options = NULL
     ) {},
     when = "3.0.0"
   ),

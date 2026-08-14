@@ -11,10 +11,47 @@ for the mechanics.
 A function may be declared in only one registry file;
 the generator stops with an error on duplicates.
 
+The design rules for choosing which arguments go before and after `...`
+are documented in
+[CONTRIBUTING.md](../../CONTRIBUTING.md#argument-order-and-the-ellipsis).
+
 Regenerate the spliced blocks after editing any registry file:
 
 ```sh
 Rscript tools/generate-migrations.R
+```
+
+## Constant defaults
+
+Defaults in migrated (`new`) signatures must be **constant expressions**:
+literals, `NULL`/`TRUE`/`FALSE`/`NA*`/`Inf`/`NaN`,
+`c()`/`list()` of constants,
+a typed empty vector (`integer()`, `numeric()`, ...),
+a unary sign,
+or the `deprecated()` sentinel.
+An empty-sequence default must be spelled as a typed empty vector,
+never as `c()`:
+`c()` evaluates to `NULL`,
+and `NULL` is reserved as the resolve-in-body sentinel.
+Anything else -- option lookups, `V(graph)`,
+references to other arguments, RNG draws --
+is evaluated lazily at an unpredictable time,
+invites forcing hazards in the recovery machinery,
+and hides the real default from the signature.
+The generator stops with an error on any non-constant default;
+there is no escape hatch.
+Express a complex default as `NULL`
+and resolve it in the body
+after all arguments are available:
+
+```r
+some_fun <- function(graph, ..., vids = NULL) {
+  # (generated ARG_HANDLE block)
+  if (is.null(vids)) {
+    vids <- V(graph)
+  }
+  ...
+}
 ```
 
 ## Entry schema

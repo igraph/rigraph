@@ -232,8 +232,10 @@ add.vertex.shape <- function(
 #' @param shape Character scalar, name of a vertex shape. If it is
 #'    `NULL` for `shapes()`, then the names of all defined
 #'    vertex shapes are returned.
-#' @param clip An R function object, the clipping function.
-#' @param plot An R function object, the plotting function.
+#' @param clip An R function object, the clipping function. The default
+#'   `NULL` uses `shape_noclip`.
+#' @param plot An R function object, the plotting function. The default
+#'   `NULL` uses `shape_noplot`.
 #' @param parameters Named list, additional plot/vertex/edge
 #'    parameters. The element named define the new parameters, and the
 #'    elements themselves define their default values.
@@ -374,35 +376,57 @@ shape_noplot <- function(coords, v = NULL, params) {
 add_shape <- function(
   shape,
   ...,
-  clip = shape_noclip,
-  plot = shape_noplot,
+  clip = NULL,
+  plot = NULL,
   parameters = list()
 ) {
   # BEGIN GENERATED ARG_HANDLE: add_shape, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(clip = clip, plot = plot, parameters = parameters),
-      recover_new = c("clip", "plot", "parameters"),
-      recover_old = c("clip", "plot", "parameters"),
-      match_names = c("clip", "plot", "parameters"),
-      match_to = c("clip", "plot", "parameters"),
-      defaults = list(
-        clip = shape_noclip,
-        plot = shape_noplot,
-        parameters = list()
-      ),
-      head_args = c("shape"),
-      fn_name = "add_shape"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("p"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn add_shape}.")
+    # Pre-3.0.0 signature: add_shape(shape, clip, plot, parameters)
+    .old_signature <- function(clip, plot, parameters, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn add_shape}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn add_shape}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(clip)) base::list(clip = clip),
+        if (!base::missing(plot)) base::list(plot = plot),
+        if (!base::missing(parameters)) base::list(parameters = parameters)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(clip)) "clip",
+        if (!base::missing(plot)) "plot",
+        if (!base::missing(parameters)) "parameters"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn add_shape} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `add_shape()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  add_shape(", base::paste(base::c("shape", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    add_shape(", base::paste(base::c("shape", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
+
+  if (is.null(clip)) {
+    clip <- shape_noclip
+  }
+  if (is.null(plot)) {
+    plot <- shape_noplot
+  }
 
   if (!is.character(shape) || length(shape) != 1) {
     cli::cli_abort(c(

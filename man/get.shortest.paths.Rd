@@ -24,7 +24,7 @@ be calculated. Note that right now this is not a vector of vertex IDs, but
 only a single vertex.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
-calculated. By default it includes all vertices. Note that for
+calculated. The default \code{NULL} includes all vertices. Note that for
 \code{distances()} every vertex must be included here at most once. (This
 is not required for \code{shortest_paths()}.}
 

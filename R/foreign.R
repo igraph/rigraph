@@ -837,78 +837,53 @@ graph_from_graphdb <- function(
   directed = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph_from_graphdb, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        prefix = prefix,
-        type = type,
-        nodes = nodes,
-        pair = pair,
-        which = which,
-        base = base,
-        compressed = compressed,
-        directed = directed
-      ),
-      recover_new = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      recover_old = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      match_names = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      match_to = c(
-        "prefix",
-        "type",
-        "nodes",
-        "pair",
-        "which",
-        "base",
-        "compressed",
-        "directed"
-      ),
-      defaults = list(
-        prefix = "iso",
-        type = "r001",
-        nodes = NULL,
-        pair = "A",
-        which = 0,
-        base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
-        compressed = TRUE,
-        directed = TRUE
-      ),
-      head_args = c("url"),
-      fn_name = "graph_from_graphdb"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("p"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn graph_from_graphdb}.")
+    # Pre-3.0.0 signature: graph_from_graphdb(url, prefix, type, nodes, pair, which, base, compressed, directed)
+    .old_signature <- function(prefix, type, nodes, pair, which, base, compressed, directed, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn graph_from_graphdb}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn graph_from_graphdb}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(prefix)) base::list(prefix = prefix),
+        if (!base::missing(type)) base::list(type = type),
+        if (!base::missing(nodes)) base::list(nodes = nodes),
+        if (!base::missing(pair)) base::list(pair = pair),
+        if (!base::missing(which)) base::list(which = which),
+        if (!base::missing(base)) base::list(base = base),
+        if (!base::missing(compressed)) base::list(compressed = compressed),
+        if (!base::missing(directed)) base::list(directed = directed)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(prefix)) "prefix",
+        if (!base::missing(type)) "type",
+        if (!base::missing(nodes)) "nodes",
+        if (!base::missing(pair)) "pair",
+        if (!base::missing(which)) "which",
+        if (!base::missing(base)) "base",
+        if (!base::missing(compressed)) "compressed",
+        if (!base::missing(directed)) "directed"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn graph_from_graphdb} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `graph_from_graphdb()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  graph_from_graphdb(", base::paste(base::c("url", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    graph_from_graphdb(", base::paste(base::c("url", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

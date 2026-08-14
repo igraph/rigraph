@@ -9,7 +9,7 @@
 \usage{
 betweenness(
   graph,
-  v = V(graph),
+  v = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -19,7 +19,7 @@ betweenness(
 
 edge_betweenness(
   graph,
-  e = E(graph),
+  e = NULL,
   ...,
   directed = TRUE,
   weights = NULL,
@@ -29,7 +29,8 @@ edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The vertices for which the vertex betweenness will be calculated.}
+\item{v}{The vertices for which the vertex betweenness will be calculated.
+The default \code{NULL} selects all vertices.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
@@ -56,7 +57,8 @@ from each other may be less than \eqn{(n-1)(n-2)/2}.}
 \item{cutoff}{The maximum shortest path length to consider when calculating
 betweenness. If negative, then there is no such limit.}
 
-\item{e}{The edges for which the edge betweenness will be calculated.}
+\item{e}{The edges for which the edge betweenness will be calculated.
+The default \code{NULL} selects all edges.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in

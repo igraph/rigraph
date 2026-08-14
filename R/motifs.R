@@ -180,24 +180,41 @@ motifs <- function(
   callback = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: motifs, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(cut.prob = cut.prob, callback = callback),
-      recover_new = c("cut.prob", "callback"),
-      recover_old = c("cut.prob", "callback"),
-      match_names = c("cut.prob", "callback"),
-      match_to = c("cut.prob", "callback"),
-      defaults = list(cut.prob = NULL, callback = NULL),
-      head_args = c("graph", "size"),
-      fn_name = "motifs"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn motifs}.")
+    # Pre-3.0.0 signature: motifs(graph, size, cut.prob, callback)
+    .old_signature <- function(cut.prob, callback, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn motifs}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob),
+        if (!base::missing(callback)) base::list(callback = callback)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(cut.prob)) "cut.prob",
+        if (!base::missing(callback)) "callback"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `motifs()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -260,24 +277,37 @@ count_motifs <- function(
   cut.prob = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: count_motifs, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(cut.prob = cut.prob),
-      recover_new = c("cut.prob"),
-      recover_old = c("cut.prob"),
-      match_names = c("cut.prob"),
-      match_to = c("cut.prob"),
-      defaults = list(cut.prob = NULL),
-      head_args = c("graph", "size"),
-      fn_name = "count_motifs"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    # Pre-3.0.0 signature: count_motifs(graph, size, cut.prob)
+    .old_signature <- function(cut.prob, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn count_motifs}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn count_motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(cut.prob)) "cut.prob"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn count_motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `count_motifs()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  count_motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    count_motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 
@@ -331,42 +361,50 @@ sample_motifs <- function(
   graph,
   size = 3,
   ...,
-  cut.prob = rep(0, size),
+  cut.prob = NULL,
   sample.size = NULL,
   sample = NULL
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_motifs, do not edit, see tools/generate-migrations.R
+  # fmt: skip
   if (...length() > 0L) {
-    migrate_check_call_tags(
-      sys.call(),
-      c("s"),
-      "sample_motifs"
-    )
-    .arg_handle <- migrate_recover_args(
-      list(...),
-      current = list(
-        cut.prob = cut.prob,
-        sample.size = sample.size,
-        sample = sample
-      ),
-      recover_new = c("cut.prob", "sample.size", "sample"),
-      recover_old = c("cut.prob", "sample.size", "sample"),
-      match_names = c("cut.prob", "sample.size", "sample"),
-      match_to = c("cut.prob", "sample.size", "sample"),
-      defaults = list(
-        cut.prob = rep(0, size),
-        sample.size = NULL,
-        sample = NULL
-      ),
-      head_args = c("graph", "size"),
-      fn_name = "sample_motifs"
-    )
-    list2env(.arg_handle$values, environment())
-    lifecycle::deprecate_soft(
-      "3.0.0",
-      what = I(.arg_handle$what),
-      details = .arg_handle$details
-    )
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("s"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn sample_motifs}.", i = "Spell out the full argument name."))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "sa", "sam", "samp", "sampl"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn sample_motifs}.")
+    # Pre-3.0.0 signature: sample_motifs(graph, size, cut.prob, sample.size, sample)
+    .old_signature <- function(cut.prob, sample.size, sample, ...) {
+      if (...length() > 0L) {
+        .arg_extra <- base::names(base::substitute(...()))
+        .arg_extra <- .arg_extra[base::nzchar(.arg_extra)]
+        if (base::length(.arg_extra) == 0L) cli::cli_abort("Too many arguments passed to {.fn sample_motifs}.", call = base::parent.frame())
+        cli::cli_abort(base::c("Unexpected argument passed to {.fn sample_motifs}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
+      }
+      base::c(
+        if (!base::missing(cut.prob)) base::list(cut.prob = cut.prob),
+        if (!base::missing(sample.size)) base::list(sample.size = sample.size),
+        if (!base::missing(sample)) base::list(sample = sample)
+      )
+    }
+    .arg_handle <- .old_signature(...)
+    if (base::length(.arg_handle) > 0L) {
+      .arg_names <- base::names(.arg_handle)
+      .arg_conflict <- base::intersect(.arg_names, base::c(
+        if (!base::missing(cut.prob)) "cut.prob",
+        if (!base::missing(sample.size)) "sample.size",
+        if (!base::missing(sample)) "sample"
+      ))
+      if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn sample_motifs} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
+      base::list2env(.arg_handle, base::environment())
+      lifecycle::deprecate_soft(
+        "3.0.0",
+        what = base::I("Calling `sample_motifs()` with positional or abbreviated arguments"),
+        details = base::c(
+          i = base::paste0("Detected call:  sample_motifs(", base::paste(base::c("graph", "size", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_motifs(", base::paste(base::c("graph", "size", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+        )
+      )
+    }
   }
   # END GENERATED ARG_HANDLE
 

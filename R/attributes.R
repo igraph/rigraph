@@ -433,7 +433,7 @@ graph.attributes <- function(graph) {
 #' @param name Name of the attribute to query. If missing, then
 #'   all vertex attributes are returned in a list.
 #' @param index An optional vertex sequence to query the attribute only
-#'   for these vertices.
+#'   for these vertices. The default `NULL` selects all vertices.
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
 #'
@@ -448,16 +448,19 @@ graph.attributes <- function(graph) {
 #' vertex_attr(g, "label")
 #' vertex_attr(g)
 #' plot(g)
-vertex_attr <- function(graph, name, index = V(graph)) {
+vertex_attr <- function(graph, name, index = NULL) {
   ensure_igraph(graph)
   if (missing(name)) {
-    if (missing(index)) {
+    if (is.null(index)) {
       return(vertex.attributes(graph))
     }
     return(vertex.attributes(graph, index = index))
   }
 
   check_string(name)
+  if (is.null(index)) {
+    index <- V(graph)
+  }
   myattr <-
     .Call(
       Rx_igraph_mybracket2,
@@ -479,7 +482,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   then `value` must be a named list, and its entries are
 #'   set as vertex attributes.
 #' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices.
+#'   of a subset of vertices. The default `NULL` selects all vertices.
 #' @param value The new value of the attribute(s) for all
 #'   (or `index`) vertices.
 #' @return The graph, with the vertex attribute(s) added or set.
@@ -497,7 +500,10 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' vertex_attr(g, "label") <- V(g)$name
 #' g
 #' plot(g)
-`vertex_attr<-` <- function(graph, name, index = V(graph), value) {
+`vertex_attr<-` <- function(graph, name, index = NULL, value) {
+  if (is.null(index)) {
+    index <- V(graph)
+  }
   if (missing(name)) {
     `vertex.attributes<-`(graph, index = index, value = value)
   } else {
@@ -512,7 +518,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' @param graph The graph.
 #' @param name  The name of the attribute to set.
 #' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices.
+#'   of a subset of vertices. The default `NULL` selects all vertices.
 #' @param value The new value of the attribute for all (or `index`)
 #'   vertices.
 #'   If `NULL`, the input is returned unchanged.
@@ -526,9 +532,13 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_vertex_attr <- function(graph, name, index = V(graph), value) {
+set_vertex_attr <- function(graph, name, index = NULL, value) {
   call <- rlang::current_env()
   check_string(name)
+
+  if (is.null(index)) {
+    index <- V(graph)
+  }
 
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(
@@ -554,7 +564,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' @param graph The graph.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
 #' @param index An optional vertex sequence to set the attributes
-#'   of a subset of vertices.
+#'   of a subset of vertices. The default `NULL` selects all vertices.
 #' @return The graph, with the vertex attributes added or set.
 #'
 #' @family attributes
@@ -568,12 +578,16 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' set_vertex_attrs(g, !!!x)
 #' # to set an attribute named "index" use `:=`
 #' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
-set_vertex_attrs <- function(graph, ..., index = V(graph)) {
+set_vertex_attrs <- function(graph, ..., index = NULL) {
   call <- rlang::current_env()
   dots <- rlang::list2(...)
 
   if (!rlang::is_named(dots)) {
     cli::cli_abort("All arguments in `...` must be named.")
+  }
+
+  if (is.null(index)) {
+    index <- V(graph)
   }
 
   for (attr_name in names(dots)) {
@@ -660,10 +674,10 @@ i_set_vertex_attr <- function(
 }
 
 #' @export
-vertex.attributes <- function(graph, index = V(graph)) {
+vertex.attributes <- function(graph, index = NULL) {
   ensure_igraph(graph)
 
-  if (!missing(index)) {
+  if (!is.null(index)) {
     index <- as_igraph_vs(graph, index)
   }
 
@@ -674,7 +688,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
     igraph_attr_idx_vertex
   )
 
-  if (!missing(index)) {
+  if (!is.null(index)) {
     if (!index_is_natural_vertex_sequence(index, graph)) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
@@ -743,7 +757,7 @@ set_value_at <- function(value, idx, length_out) {
 #' @param name The name of the attribute to query. If missing, then
 #'   all edge attributes are returned in a list.
 #' @param index An optional edge sequence to query edge attributes
-#'   for a subset of edges.
+#'   for a subset of edges. The default `NULL` selects all edges.
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
 #'
@@ -757,17 +771,20 @@ set_value_at <- function(value, idx, length_out) {
 #'   set_edge_attr("color", value = "red")
 #' g
 #' plot(g, edge.width = E(g)$weight)
-edge_attr <- function(graph, name, index = E(graph)) {
+edge_attr <- function(graph, name, index = NULL) {
   ensure_igraph(graph)
 
   if (missing(name)) {
-    if (missing(index)) {
+    if (is.null(index)) {
       edge.attributes(graph)
     } else {
       edge.attributes(graph, index = index)
     }
   } else {
     check_string(name)
+    if (is.null(index)) {
+      index <- E(graph)
+    }
     myattr <- .Call(
       Rx_igraph_mybracket2,
       graph,
@@ -790,7 +807,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   then `value` must be a named list, and its entries are
 #'   set as edge attributes.
 #' @param index An optional edge sequence to set the attributes
-#'   of a subset of edges.
+#'   of a subset of edges. The default `NULL` selects all edges.
 #' @param value The new value of the attribute(s) for all
 #'   (or `index`) edges.
 #' @return The graph, with the edge attribute(s) added or set.
@@ -808,7 +825,10 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' edge_attr(g, "label") <- E(g)$name
 #' g
 #' plot(g)
-`edge_attr<-` <- function(graph, name, index = E(graph), value) {
+`edge_attr<-` <- function(graph, name, index = NULL, value) {
+  if (is.null(index)) {
+    index <- E(graph)
+  }
   if (missing(name)) {
     `edge.attributes<-`(graph, index = index, value = value)
   } else {
@@ -822,7 +842,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' @param graph The graph
 #' @param name  The name of the attribute to set.
 #' @param index An optional edge sequence to set the attributes of
-#'   a subset of edges.
+#'   a subset of edges. The default `NULL` selects all edges.
 #' @param value The new value of the attribute for all (or `index`)
 #'   edges.
 #'   If `NULL`, the input is returned unchanged.
@@ -836,9 +856,12 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_edge_attr <- function(graph, name, index = E(graph), value) {
+set_edge_attr <- function(graph, name, index = NULL, value) {
   call <- rlang::current_env()
   check_string(name)
+  if (is.null(index)) {
+    index <- E(graph)
+  }
   if (is_complete_iterator(index)) {
     i_set_edge_attr(
       graph = graph,
@@ -928,10 +951,10 @@ i_set_edge_attr <- function(
 }
 
 #' @export
-edge.attributes <- function(graph, index = E(graph)) {
+edge.attributes <- function(graph, index = NULL) {
   ensure_igraph(graph)
 
-  if (!missing(index)) {
+  if (!is.null(index)) {
     index <- as_igraph_es(graph, index)
   }
 
@@ -943,7 +966,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   )
 
   if (
-    !missing(index) &&
+    !is.null(index) &&
       !index_is_natural_edge_sequence(index, graph)
   ) {
     for (i in seq_along(res)) {

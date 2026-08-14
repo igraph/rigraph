@@ -71,7 +71,8 @@ is.simple <- function(graph) {
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
-#'   [attribute.combination()] for details on this.
+#'   [attribute.combination()] for details on this. The default `NULL` uses
+#'   the `edge.attr.comb` igraph option.
 #' @return a graph object with the loop and/or multiple edges removed; the
 #'   input graph is returned unchanged if it is already simple.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -94,7 +95,7 @@ simplify <- function(
   graph,
   remove.multiple = TRUE,
   remove.loops = TRUE,
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge.attr.comb = NULL
 ) {
   # A graph that is already simple has no loops and no multiple edges, so
   # simplify_impl() would not change its structure regardless of the
@@ -103,6 +104,9 @@ simplify <- function(
   # is_simple() is orders of magnitude cheaper than simplify().
   if (is_simple(graph)) {
     return(graph)
+  }
+  if (is.null(edge.attr.comb)) {
+    edge.attr.comb <- igraph_opt("edge.attr.comb")
   }
   simplify_impl(
     graph = graph,

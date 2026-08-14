@@ -16,9 +16,11 @@ add.vertex.shape(
 \code{NULL} for \code{shapes()}, then the names of all defined
 vertex shapes are returned.}
 
-\item{clip}{An R function object, the clipping function.}
+\item{clip}{An R function object, the clipping function. The default
+\code{NULL} uses \code{shape_noclip}.}
 
-\item{plot}{An R function object, the plotting function.}
+\item{plot}{An R function object, the plotting function. The default
+\code{NULL} uses \code{shape_noplot}.}
 
 \item{parameters}{Named list, additional plot/vertex/edge
 parameters. The element named define the new parameters, and the
