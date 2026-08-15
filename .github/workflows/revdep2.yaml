@@ -1,5 +1,5 @@
 # Sharded reverse-dependency check:
-# plan + build (parallel) -> preflight -> test (matrix) -> collect.
+# plan+preflight and build (parallel) -> test (matrix) -> collect.
 #
 # The plan job enumerates the CRAN reverse dependencies of this package (to
 # any depth), weighs each one by what its check is expected to cost here --
@@ -14,8 +14,8 @@
 #
 # The build job compiles the dev version once into the binary artifact every
 # shard installs; it needs only the checkout, so it runs in parallel with
-# planning. The preflight job installs and loads the whole dependency
-# universe -- every package any revdep needs -- so broken dependencies surface
+# planning. The same job then preflights: it installs and loads the whole
+# dependency universe -- every package any revdep needs -- so broken dependencies surface
 # before the first check minute is spent, and the pak cache the shards restore
 # is warm. Its library is published too, and unpacked rather than rebuilt
 # twice over: every shard takes this run's preflight library, and the plan
@@ -177,10 +177,34 @@ env:
   REVDEP2_DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
 
 jobs:
+  # Planning and the preflight are one job.
+  #
+  # They were two, and the second did nothing the first had not already paid
+  # for: a runner, a checkout, `setup-r`, a pak install -- and then downloaded
+  # the plan artifact the first had just uploaded, only to read it back. That
+  # is about two minutes of a three-hour run, which is not the point; the point
+  # is that planning is 20 seconds of work wearing a whole job's overhead, and
+  # it sits on the critical path, because the preflight cannot start until it
+  # ends and every shard waits on the preflight.
+  #
+  # Merging them costs one thing, and it has to be bought back explicitly: a
+  # preflight failure used to be survivable, because the plan's outputs -- the
+  # shard matrix among them -- were already safe in a job that had succeeded.
+  # In one job a failing preflight step would take the matrix with it and the
+  # run would have nothing to check. So the plan's outputs are set before the
+  # preflight step runs, and the preflight step is `continue-on-error`: it
+  # shows as failed, the summary says what it could not install, and the shards
+  # go ahead and install those packages themselves. Which is exactly what the
+  # preflight is: an optimization, never a gate.
   plan:
     runs-on: ubuntu-26.04
 
-    name: "Plan revdep shards"
+    # The preflight installs the whole dependency universe; when that goes
+    # wrong it tends to go wrong slowly. Below the 6 h ceiling so it ends as a
+    # failure with logs rather than as a hard kill.
+    timeout-minutes: 300
+
+    name: "Plan shards and preflight dependencies"
 
     outputs:
       # Fallbacks cover a planning step that did not run at all: `test` is
@@ -195,7 +219,8 @@ jobs:
     permissions:
       contents: read
       # To find the newest earlier run with a baseline artifact and read its
-      # manifest, and to read the retried run's report.
+      # manifest, to read the retried run's report, and to download the
+      # prebuilt library artifacts of the runs the plan picked.
       actions: read
 
     steps:
@@ -209,9 +234,16 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install jsonlite
+      # callr (and the processx it brings) is what puts a clock on the calls
+      # that have none of their own: pak's install runs in a callr child that
+      # can be killed, and the load test runs under a processx timeout. pak
+      # vendors its own copy of both and exports neither, so they are
+      # installed here in their own right. The planning step needs only
+      # jsonlite, but it is one install either way.
+      - name: Install pak, jsonlite and callr
         run: |
-          install.packages("jsonlite")
+          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+          install.packages(c("jsonlite", "callr"))
         shell: Rscript {0}
 
       - name: Plan shards
@@ -223,12 +255,139 @@ jobs:
           Rscript ./.github/workflows/revdep2/plan.R
         shell: bash
 
+      # Before anything can fail: the shards are planned, and the plan is
+      # published whatever the preflight goes on to do.
       - name: Upload the shard plan
         uses: actions/upload-artifact@v6
         if: steps.plan.outputs.shards != '0'
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan.json
+          retention-days: 30
+          overwrite: true
+
+      # ---- preflight ----------------------------------------------------
+      # Everything below is skipped by a dry run, which is what makes
+      # `dry-run` "plan only" now that there is no separate job to skip.
+
+      # A runner ships with ~25 GB of toolchains this job will never use, and
+      # a dependency universe of a few thousand packages -- sources, binaries,
+      # build directories and the installed library at once -- is the one job
+      # here that can plausibly fill the disk. Reclaiming the space is cheap
+      # insurance; printing what is left makes the next failure diagnosable
+      # instead of a bare exit 143.
+      - name: Make room for the dependency universe
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        run: |
+          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/powershell /usr/share/swift || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          echo "Free disk: ${before}G -> ${after}G"
+          free -g
+        shell: bash
+
+      # The preflight downloads every dependency binary once; saving the pak
+      # cache under the plan's hash hands the shards a warm start.
+      - name: Cache the pak package cache
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/R/pkgcache
+          key: revdep2-pak-${{ steps.plan.outputs.plan_hash }}
+          restore-keys: |
+            revdep2-pak-
+
+      - name: Install and load every dependency
+        # The plan is already uploaded and this job's outputs are already set,
+        # so a preflight that dies costs the run its warm start and nothing
+        # else: every shard installs what it needs either way. Failing the job
+        # here would take the shard matrix with it.
+        continue-on-error: true
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLAN: ${{ runner.temp }}/plan.json
+          OUT_DIR: ${{ runner.temp }}/preflight
+          LIB_OUT: ${{ runner.temp }}/lib
+          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
+          PKG_SYSREQS: true
+          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
+          # `/tmp` on this image is its own filesystem of about 8 GB -- half
+          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
+          # over 100 GB free. Everything R does temporarily lands there:
+          # source builds, unpacked tarballs, and callr's own startup files.
+          # In run 31303054725 it filled after eleven chunks, and callr could
+          # then not start R at all -- "error writing to connection" from the
+          # saveRDS of its startup environment -- which failed every chunk
+          # after it in about a second. The space is on the big disk.
+          TMPDIR: ${{ runner.temp }}/tmp
+          TMP: ${{ runner.temp }}/tmp
+          TEMP: ${{ runner.temp }}/tmp
+        run: |
+          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          "${watch}" once "before the install"
+          "${watch}" watch 30 "installing" &
+          watcher=$!
+          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
+          unbuffered=""
+          if command -v stdbuf > /dev/null 2>&1; then
+            unbuffered="stdbuf -oL -eL"
+          fi
+          status=0
+          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
+          kill "${watcher}" 2> /dev/null || true
+          "${watch}" once "after the install"
+          exit "${status}"
+        shell: bash
+
+      # Runs even when the install step died, because "how much disk and
+      # memory were left" is the first question about a job that was killed
+      # rather than failed. It cannot run when the *runner* died -- hence the
+      # sampler above -- but it is what answers the question in every case
+      # where the job merely failed.
+      - name: Report what the install consumed
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        run: |
+          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
+          ./.github/workflows/revdep2/watch-resources.sh oom
+          du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
+        shell: bash
+
+      - name: Upload the preflight report
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-preflight
+          path: ${{ runner.temp }}/preflight
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+
+      # The library the next runs unpack. It is the big one -- a whole
+      # dependency universe, gigabytes of it -- so it is kept exactly as long
+      # as a plan would still reuse it, while the index that describes it is
+      # cheap and outlives it.
+      - name: Upload the preflight library
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-lib
+          path: ${{ runner.temp }}/lib
+          if-no-files-found: ignore
+          retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
+          overwrite: true
+
+      - name: Upload the library index
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-lib-index
+          path: ${{ runner.temp }}/lib-index
+          if-no-files-found: ignore
           retention-days: 30
           overwrite: true
 
@@ -273,201 +432,20 @@ jobs:
           retention-days: 30
           overwrite: true
 
-  preflight:
-    needs:
-      - plan
-
-    # A dry run stops after planning; skipping preflight cascades to test and,
-    # through the `needs.*.result == 'success'` guards, to collect.
-    if: needs.plan.outputs.shards != '0' && inputs.dry-run != true
-
-    runs-on: ubuntu-26.04
-
-    # This job installs the whole dependency universe; when that goes wrong it
-    # tends to go wrong slowly. Below the 6 h ceiling so it ends as a failure
-    # with logs rather than as a hard kill.
-    timeout-minutes: 300
-
-    name: "Preflight all dependencies"
-
-    permissions:
-      contents: read
-      # To download the prebuilt library artifacts of the runs the plan picked.
-      actions: read
-
-    steps:
-      - name: Check out the ref under test
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ inputs.ref || github.ref }}
-
-      # A runner ships with ~25 GB of toolchains this job will never use, and
-      # a dependency universe of a few thousand packages -- sources, binaries,
-      # build directories and the installed library at once -- is the one job
-      # here that can plausibly fill the disk. Reclaiming the space is cheap
-      # insurance; printing what is left makes the next failure diagnosable
-      # instead of a bare exit 143.
-      - name: Make room for the dependency universe
-        run: |
-          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
-            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
-            /usr/local/share/powershell /usr/share/swift || true
-          sudo docker image prune --all --force > /dev/null 2>&1 || true
-          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          echo "Free disk: ${before}G -> ${after}G"
-          free -g
-        shell: bash
-
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
-
-      # callr (and the processx it brings) is what puts a clock on the calls
-      # that have none of their own: pak's install runs in a callr child that
-      # can be killed, and the load test runs under a processx timeout. pak
-      # vendors its own copy of both and exports neither, so they are
-      # installed here in their own right.
-      - name: Install pak, jsonlite and callr
-        run: |
-          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-          install.packages(c("jsonlite", "callr"))
-        shell: Rscript {0}
-
-      - name: Download the shard plan
-        uses: actions/download-artifact@v7
-        with:
-          name: revdep2-plan
-          path: ${{ runner.temp }}/plan
-
-      # The preflight downloads every dependency binary once; saving the pak
-      # cache under the plan's hash hands the shards a warm start.
-      - name: Cache the pak package cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/R/pkgcache
-          key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
-          restore-keys: |
-            revdep2-pak-
-
-      # The install is wrapped rather than run bare, because when this job
-      # dies the wrapping is the only diagnosis there is: run 31270092803
-      # spent ten minutes inside pak and then hit `exit 143` -- the runner
-      # shut down -- with nothing in the log between the two, and no
-      # post-step ran to say what it had run out of.
-      #
-      # Three things address that, all of them live rather than after the
-      # fact, because a runner that is shut down never reaches "after":
-      #
-      #  * a sampler prints memory, swap, disk and the largest processes every
-      #    30 s, so a kill has a curve leading up to it;
-      #  * `stdbuf` makes R line-buffered. R block-buffers stdout when it is
-      #    not a terminal, so pak's progress is flushed on exit -- which is
-      #    the one thing a killed process does not do, and why those ten
-      #    minutes were blank while the `message()` calls around them (stderr,
-      #    unbuffered) came through;
-      #  * the kernel's own OOM log is read afterwards when there still is an
-      #    afterwards, which separates "this job asked for too much memory"
-      #    from "the host went away".
-      - name: Install and load every dependency
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          OUT_DIR: ${{ runner.temp }}/preflight
-          LIB_OUT: ${{ runner.temp }}/lib
-          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
-          PKG_SYSREQS: true
-          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
-          # `/tmp` on this image is its own filesystem of about 8 GB -- half
-          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
-          # over 100 GB free. Everything R does temporarily lands there:
-          # source builds, unpacked tarballs, and callr's own startup files.
-          # In run 31303054725 it filled after eleven chunks, and callr could
-          # then not start R at all -- "error writing to connection" from the
-          # saveRDS of its startup environment -- which failed every chunk
-          # after it in about a second. The space is on the big disk.
-          TMPDIR: ${{ runner.temp }}/tmp
-          TMP: ${{ runner.temp }}/tmp
-          TEMP: ${{ runner.temp }}/tmp
-        run: |
-          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
-          watch=./.github/workflows/revdep2/watch-resources.sh
-          "${watch}" once "before the install"
-          "${watch}" watch 30 "installing" &
-          watcher=$!
-          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
-          unbuffered=""
-          if command -v stdbuf > /dev/null 2>&1; then
-            unbuffered="stdbuf -oL -eL"
-          fi
-          status=0
-          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
-          kill "${watcher}" 2> /dev/null || true
-          "${watch}" once "after the install"
-          exit "${status}"
-        shell: bash
-
-      # Runs even when the install step died, because "how much disk and
-      # memory were left" is the first question about a job that was killed
-      # rather than failed. It cannot run when the *runner* died -- hence the
-      # sampler above -- but it is what answers the question in every case
-      # where the job merely failed.
-      - name: Report what the install consumed
-        if: always()
-        run: |
-          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
-          ./.github/workflows/revdep2/watch-resources.sh oom
-          du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
-        shell: bash
-
-      - name: Upload the preflight report
-        uses: actions/upload-artifact@v6
-        if: always()
-        with:
-          name: revdep2-preflight
-          path: ${{ runner.temp }}/preflight
-          if-no-files-found: ignore
-          retention-days: 30
-          overwrite: true
-
-      # The library the next runs unpack. It is the big one -- a whole
-      # dependency universe, gigabytes of it -- so it is kept exactly as long
-      # as a plan would still reuse it, while the index that describes it is
-      # cheap and outlives it.
-      - name: Upload the preflight library
-        uses: actions/upload-artifact@v6
-        if: always()
-        with:
-          name: revdep2-lib
-          path: ${{ runner.temp }}/lib
-          if-no-files-found: ignore
-          retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
-          overwrite: true
-
-      - name: Upload the library index
-        uses: actions/upload-artifact@v6
-        if: always()
-        with:
-          name: revdep2-lib-index
-          path: ${{ runner.temp }}/lib-index
-          if-no-files-found: ignore
-          retention-days: 30
-          overwrite: true
-
   test:
     needs:
       - plan
       - build
-      - preflight
 
     # The preflight is an optimization and an early diagnosis, not a
     # prerequisite: a shard installs its own dependency union anyway, and that
     # union is a fraction of the universe the preflight takes on (~500 of 4400
     # in the run that made this necessary). So a preflight that dies must not
-    # take the checks with it -- `!cancelled()` is what lets this job run past
-    # a failed `needs`, and the dry-run guard has to be spelled out because a
-    # skipped preflight no longer skips this job either.
+    # take the checks with it -- which is now a `continue-on-error` on the
+    # preflight step itself, since it shares a job with the planning that
+    # produces this matrix. `!cancelled()` still lets this job run past a
+    # failed `needs`, and the dry-run guard is spelled out because nothing
+    # upstream is skipped by it any more.
     if: >-
       !cancelled()
       && needs.plan.result == 'success'
@@ -663,7 +641,14 @@ jobs:
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
+      # `!cancelled()` rather than the default `success()`: an install step
+      # that *failed* still leaves a shard full of packages to account for, and
+      # the driver reports a package it could not install as a depfail, which
+      # is a result. Skipping this step instead left all 50 of shard 3's
+      # packages as `missing` in run 31893156685 -- the one outcome that tells
+      # nobody anything.
       - name: Check the shard
+        if: '!cancelled()'
         env:
           PHASE: check
         run: |
@@ -686,15 +671,14 @@ jobs:
     needs:
       - plan
       - build
-      - preflight
       - test
 
     # `always()` so a run with red shards still reports -- a broken revdep is
     # the result this workflow exists to surface. Guarded on the plan and the
     # binary, because without those there is nothing to collect, and on the
     # dry-run input, which is now the only thing that stops this job from
-    # reporting: the preflight's result is deliberately not consulted, since a
-    # run whose preflight died still has shards, results, and packages to
+    # reporting: the preflight is a step of the plan job and cannot fail it, so
+    # a run whose preflight died still has shards, results, and packages to
     # account for.
     if: >-
       always()

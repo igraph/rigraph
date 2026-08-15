@@ -234,19 +234,59 @@ if (do_install) {
     ", dependencies first"
   )
   install_started <- Sys.time()
-  # The deadline is the shard's own: an install that runs into it leaves no time
-  # to check anything, so it stops and lets the checks report what they can
-  # rather than being cancelled with the job.
+  # The install gets a slice of the shard's time, not all of it.
+  #
+  # It used to be handed the shard's whole deadline, on the reasoning that an
+  # install running into it "leaves no time to check anything". That is true
+  # and it is the wrong conclusion: a shard that spends its entire budget
+  # installing reports *nothing at all*, where one that stops early reports a
+  # depfail for the packages it could not install and a real verdict for the
+  # rest. Shard 3 of run 31893156685 sat in this step for 2 h 33 m and had to
+  # be cancelled; its 50 packages came back `missing`, which is the one result
+  # that says nothing to anybody.
+  #
+  # 45 minutes, from the 39 shard installs the last two runs measured:
+  # median 9.4, p90 13.7, worst 16.6. So the budget is 2.7x the worst install
+  # anyone has actually seen, and 15% of the shard's deadline -- loose enough
+  # that a healthy shard can never notice it, tight enough that shard 3's
+  # 2 h 33 m would have been cut off more than three times sooner.
+  #
+  # Doubled where little was restored, because every one of those 39 had its
+  # preflight library (95% of the union or better) and a cold install is
+  # therefore unmeasured. A preflight that dies is survivable by design -- more
+  # so since it became a `continue-on-error` step -- so cold shards will
+  # happen, and the one thing worse than a slow install is depfailing 50
+  # packages that would have installed given a few more minutes.
+  install_budget <- env_num("REVDEP2_SHARD_INSTALL_MINUTES", 45)
+  if (length(restored) < 0.5 * length(install)) {
+    install_budget <- 2 * install_budget
+    inform(sprintf(
+      "Only %d of %d dependencies were restored; allowing %.0f min to install",
+      length(restored),
+      length(install),
+      install_budget
+    ))
+  }
+  install_deadline <- min(deadline, Sys.time() + install_budget * 60)
   bulk_ok <- install_in_chunks(
     chunks,
     lib = lib,
     upgrade = upgrade,
-    deadline = deadline
+    deadline = install_deadline
   )
   if (!bulk_ok) {
-    for (p in install) {
-      if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
-        next
+    # Which packages are missing is a question about the filesystem, and
+    # `missing_from()` answers it that way -- as the preflight already did.
+    # Asking `requireNamespace()` instead *loads* each one: hundreds of
+    # namespaces and their DLLs into the driver process, and past
+    # `R_MAX_NUM_DLLS` (614) it starts returning FALSE for packages that are
+    # installed, so the loop reinstalls them. And `next` on the deadline only
+    # skipped the install, after the namespace had been loaded; it never
+    # stopped.
+    for (p in missing_from(lib, install)) {
+      if (Sys.time() > install_deadline) {
+        inform("Past the install deadline; the rest is left to depfail")
+        break
       }
       run <- pak_install(
         p,
@@ -351,13 +391,39 @@ if (!do_check) {
   quit(save = "no", status = 0)
 }
 
+# An install phase that never finished leaves no state, and there is nothing
+# to check without the two one-package libraries it builds. But every package
+# still has to be *accounted for*: `missing` -- which is what the collector
+# reports for a shard that uploaded nothing -- says only that a job died, while
+# a manifest full of `error` says which shard, and why, and is picked up by
+# `retry-run` just the same. Shard 3 of run 31893156685 lost 50 packages to
+# exactly this.
 if (!file.exists(install_state)) {
-  stop(
-    "No install state in ",
-    work,
-    ": the install phase did not finish",
-    call. = FALSE
+  reason <- sprintf(
+    "shard %d: the install phase did not finish, so nothing could be checked",
+    shard_index
   )
+  inform(reason)
+  invisible(file.create(manifest_path))
+  for (name in members) {
+    update(name, result = "error", message = reason)
+    entry <- get(name, envir = state)
+    entry$our_cran_version <- plan$cran_version
+    entry$our_dev_version <- plan$dev_version
+    cat(
+      jsonlite::toJSON(entry, auto_unbox = TRUE, null = "null"),
+      "\n",
+      sep = "",
+      file = manifest_path,
+      append = TRUE
+    )
+  }
+  append_summary(c(
+    sprintf("### Shard %d", shard_index),
+    "",
+    sprintf("%d package(s) not checked: %s.", length(members), reason)
+  ))
+  quit(save = "no", status = 0)
 }
 installed_state <- read_json(install_state)
 our_cran_version <- installed_state$our_cran_version
@@ -653,6 +719,24 @@ check_pair <- function(name) {
           res$errors <- neutral$errors
           res$warnings <- neutral$warnings
           res$notes <- neutral$notes
+          # Who to tell about a broken package.
+          #
+          # revdepcheck's reports head each package with its own GitHub, its
+          # maintainer's email and its CRAN mirror, and it reads all three out
+          # of `$description` and `$cran` on the result. `rcmdcheck()` filled
+          # those in because it had the package's source; `parse_check()`
+          # cannot know them from a log, so every entry in problems.md came out
+          # as "* : <UNKNOWN>" once the driver switched. The check directory has
+          # the installed DESCRIPTION sitting in it, and every package here is
+          # from CRAN by construction.
+          described <- file.path(dirname(log), name, "DESCRIPTION")
+          if (file.exists(described)) {
+            res$description <- paste(
+              readLines(described, warn = FALSE),
+              collapse = "\n"
+            )
+          }
+          res$cran <- TRUE
           res
         },
         error = function(e) {

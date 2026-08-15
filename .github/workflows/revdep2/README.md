@@ -16,7 +16,7 @@ and `revdepcheck::revdep_check()` spends one machine for everything.
 ## Topology
 
 ```
-plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
+plan      (1 job, ~30 min)             build  (1 job, parallel to plan)
   ├─ enumerate revdeps to `depth`,       └─ R CMD build
   │    or take the retry/explicit list        + R CMD INSTALL --build
   ├─ weigh each by what its check cost           → revdep2-pkg artifact
@@ -26,16 +26,17 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
   │    the baseline donor, the prebuilt
   │    libraries, the measured timings
   ├─ decide per package what is reusable
-  └─ partition into as many shards as
-       one wave can run, in whole waves
-       → plan.json (artifact) + matrix (job output)
-
-preflight (1 job; a dry run stops before it; failure does not stop the run)
-  ├─ unpack the prebuilt packages the plan found
-  ├─ install + load every dependency more than one shard needs
-  └─ pack the library for the next run
-       → depfail.json, revdep2-lib(-index),
-         warm pak cache (saved under the plan hash)
+  ├─ partition into as many shards as
+  │    one wave can run, in whole waves
+  │    → plan.json (artifact) + matrix (job output)
+  └─ then, in the same job, the preflight
+       (skipped by a dry run; continue-on-error,
+        so it cannot take the matrix with it)
+       ├─ unpack the prebuilt packages the plan found
+       ├─ install + load every dependency more than one shard needs
+       └─ pack the library for the next run
+            → depfail.json, revdep2-lib(-index),
+              warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
   ├─ "Install packages" step (PHASE=install)
@@ -47,7 +48,7 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
        ├─ per package, both checks at once against those cascading libraries
        └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
-collect   (1 job, if: always() past plan/build/preflight)
+collect   (1 job, if: always() past plan/build/test)
   ├─ merge all shard attempts (+ carried results of a retried run)
   ├─ reports via revdepcheck: README.md, problems.md, failures.md, cran.md
   ├─ pool what every check and every shard cost, job durations included
@@ -62,6 +63,28 @@ The `ref` input checks any branch, tag or commit SHA:
 the dispatch itself can only target a branch or tag,
 so arbitrary SHAs travel through the input,
 with the one constraint that the tree must contain these scripts.
+
+Planning and the preflight share a job. They were two, and the second did
+nothing the first had not already paid for: a runner, a checkout, `setup-r`, a
+pak install — and then downloaded the plan artifact the first had just
+uploaded, to read it back. That is about two minutes of a three-hour run,
+which is not really the point; the point is that planning is twenty seconds of
+work wearing a whole job's overhead, and it sits on the critical path, because
+the preflight cannot start until it ends and every shard waits on the
+preflight.
+
+Merging them costs one thing, and it has to be bought back explicitly.
+A preflight failure used to be survivable
+because the plan's outputs — the shard matrix among them —
+were already safe in a job that had succeeded.
+In one job a failing preflight step would take the matrix with it,
+and the run would have nothing left to check.
+So the plan's outputs are set and its artifact uploaded
+*before* the preflight step runs,
+and that step is `continue-on-error`:
+it shows as failed, the summary says what it could not install,
+and the shards go ahead and install those packages themselves.
+Which is what the preflight has always been — an optimization, never a gate.
 
 The shard's two steps are one driver called twice, `PHASE=install` and
 `PHASE=check` (`PHASE=all` runs both in one process, which is what a local
@@ -824,6 +847,90 @@ A chunk that fails is retried once,
 but only when the rebuild actually changed something —
 against a healthy database, a failed chunk is a real failure.
 
+### Loading is tested one package at a time, in parallel
+
+Loading a namespace loads everything it imports, transitively,
+so loading the packages *nothing else in the set depends on*
+covers the whole set:
+in a DAG every other package is reachable from one of those roots
+by following dependents upwards.
+Measured on the real universe:
+**865 roots out of 2645 packages, and nothing left uncovered.**
+
+The saving in sessions is not the point.
+One session per package means one clock per package.
+A package whose `.onLoad` blocks used to spend a batch's whole ten minutes
+and take 39 innocent packages with it,
+and the batch then had to be re-run package by package
+to find out which one it was.
+And independent sessions run at once,
+which is what the runner's other three cores are for
+(`load-test.sh`, GNU `parallel` where it exists and `xargs -P` where it does
+not, `timeout` per package).
+
+It is more total work: the roots' closures sum to about 48,000 namespace loads
+against roughly 27,000 for 67 batches of 40,
+because each root reloads what it shares with the others.
+Against that, the batched sweep ran serially,
+so four at a time should still roughly halve it.
+That last part is a projection, not a measurement —
+the next run's preflight timing is what settles it.
+`REVDEP2_LOAD_JOBS` and `REVDEP2_LOAD_SWEEP_MINUTES` are the knobs;
+the failures are re-run singly afterwards to keep their output,
+and there are few of them by construction.
+
+### A shard that cannot install still reports
+
+An install that overruns used to be given the shard's whole deadline,
+on the reasoning that an install running into it
+leaves no time to check anything.
+That is true, and it is the wrong conclusion.
+Shard 3 of run 31893156685 sat in its install step for 2 h 33 m,
+was cancelled, and its 50 packages came back `missing` —
+the one result that tells nobody anything.
+
+Three things now stand between an install and that outcome:
+
+- the install gets `REVDEP2_SHARD_INSTALL_MINUTES` of the shard's time,
+  not all of it, and what it could not install becomes a depfail,
+  which is a *result*;
+- the check step runs on `!cancelled()` rather than `success()`,
+  so a *failed* install still gets its packages accounted for;
+- a check phase that finds no install state writes a manifest saying so
+  for every package in the shard, rather than exiting and leaving them
+  to be reported as `missing`.
+
+**45 minutes**, and that number is measured rather than picked.
+The last two runs recorded 39 shard installs:
+median 9.4 minutes, p90 13.7, worst 16.6.
+So the budget is 2.7× the worst install anyone has actually seen
+and 15% of the shard's deadline —
+loose enough that a healthy shard can never notice it,
+tight enough that shard 3's 2 h 33 m
+would have been cut off more than three times sooner.
+
+It doubles where little was restored.
+Every one of those 39 installs had its preflight library —
+95% of the union or better, in both runs —
+so a *cold* install is unmeasured,
+and a preflight that dies is survivable by design
+(more so now that it is a `continue-on-error` step),
+so cold shards will happen.
+The one thing worse than a slow install
+is depfailing 50 packages that would have installed
+given a few more minutes.
+
+The per-package fallback in the install is also no longer
+`requireNamespace()` in a loop.
+That *loads* each package — hundreds of namespaces and their DLLs
+into the driver process, and past `R_MAX_NUM_DLLS` (614)
+it starts returning `FALSE` for packages that are installed,
+so the loop reinstalls them —
+and its deadline check only skipped the install,
+after the namespace had been loaded.
+Which packages are missing is a question about the filesystem,
+and `missing_from()` answers it that way.
+
 ### System requirements of packages nobody installed
 
 `PKG_SYSREQS` is on in both jobs, so pak runs `apt-get`
@@ -1199,6 +1306,9 @@ at the next `if`.
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
 | Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
+| Load tests run at once | — | `REVDEP2_LOAD_JOBS` | one per core |
+| Time limit on the whole load sweep | — | `REVDEP2_LOAD_SWEEP_MINUTES` | 60 |
+| Shard minutes the install may take before the checks get the rest (doubled on a cold library) | — | `REVDEP2_SHARD_INSTALL_MINUTES` | 45 |
 | Transcript lines shown per install/test block in the summary | — | `REVDEP2_DETAIL_MAX_LINES` | 300 |
 
 ## Prior art
