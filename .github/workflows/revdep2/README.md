@@ -16,7 +16,7 @@ and `revdepcheck::revdep_check()` spends one machine for everything.
 ## Topology
 
 ```
-plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
+plan      (1 job, ~30 min)             build  (1 job, parallel to plan)
   ├─ enumerate revdeps to `depth`,       └─ R CMD build
   │    or take the retry/explicit list        + R CMD INSTALL --build
   ├─ weigh each by what its check cost           → revdep2-pkg artifact
@@ -26,16 +26,17 @@ plan      (1 job, ~2 min)              build  (1 job, parallel to plan)
   │    the baseline donor, the prebuilt
   │    libraries, the measured timings
   ├─ decide per package what is reusable
-  └─ partition into as many shards as
-       one wave can run, in whole waves
-       → plan.json (artifact) + matrix (job output)
-
-preflight (1 job; a dry run stops before it; failure does not stop the run)
-  ├─ unpack the prebuilt packages the plan found
-  ├─ install + load every dependency more than one shard needs
-  └─ pack the library for the next run
-       → depfail.json, revdep2-lib(-index),
-         warm pak cache (saved under the plan hash)
+  ├─ partition into as many shards as
+  │    one wave can run, in whole waves
+  │    → plan.json (artifact) + matrix (job output)
+  └─ then, in the same job, the preflight
+       (skipped by a dry run; continue-on-error,
+        so it cannot take the matrix with it)
+       ├─ unpack the prebuilt packages the plan found
+       ├─ install + load every dependency more than one shard needs
+       └─ pack the library for the next run
+            → depfail.json, revdep2-lib(-index),
+              warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
   ├─ "Install packages" step (PHASE=install)
@@ -47,7 +48,7 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
        ├─ per package, both checks at once against those cascading libraries
        └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
-collect   (1 job, if: always() past plan/build/preflight)
+collect   (1 job, if: always() past plan/build/test)
   ├─ merge all shard attempts (+ carried results of a retried run)
   ├─ reports via revdepcheck: README.md, problems.md, failures.md, cran.md
   ├─ pool what every check and every shard cost, job durations included
@@ -62,6 +63,28 @@ The `ref` input checks any branch, tag or commit SHA:
 the dispatch itself can only target a branch or tag,
 so arbitrary SHAs travel through the input,
 with the one constraint that the tree must contain these scripts.
+
+Planning and the preflight share a job. They were two, and the second did
+nothing the first had not already paid for: a runner, a checkout, `setup-r`, a
+pak install — and then downloaded the plan artifact the first had just
+uploaded, to read it back. That is about two minutes of a three-hour run,
+which is not really the point; the point is that planning is twenty seconds of
+work wearing a whole job's overhead, and it sits on the critical path, because
+the preflight cannot start until it ends and every shard waits on the
+preflight.
+
+Merging them costs one thing, and it has to be bought back explicitly.
+A preflight failure used to be survivable
+because the plan's outputs — the shard matrix among them —
+were already safe in a job that had succeeded.
+In one job a failing preflight step would take the matrix with it,
+and the run would have nothing left to check.
+So the plan's outputs are set and its artifact uploaded
+*before* the preflight step runs,
+and that step is `continue-on-error`:
+it shows as failed, the summary says what it could not install,
+and the shards go ahead and install those packages themselves.
+Which is what the preflight has always been — an optimization, never a gate.
 
 The shard's two steps are one driver called twice, `PHASE=install` and
 `PHASE=check` (`PHASE=all` runs both in one process, which is what a local
