@@ -1,16 +1,16 @@
-# basket ()
+# AnimalSequences ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "basket")` for more info
+Run `revdepcheck::revdep_details(, "AnimalSequences")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -20,26 +20,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# BoundaryStats ()
+# ape ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "BoundaryStats")` for more info
+Run `revdepcheck::revdep_details(, "ape")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -49,26 +49,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# ConnectednessApproach ()
+# bbnet ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "ConnectednessApproach")` for more info
+Run `revdepcheck::revdep_details(, "bbnet")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-new check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -78,26 +78,26 @@ new check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-new check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# eicm ()
+# cancerGI ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "eicm")` for more info
+Run `revdepcheck::revdep_details(, "cancerGI")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -107,26 +107,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# evolqg ()
+# CoNI ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "evolqg")` for more info
+Run `revdepcheck::revdep_details(, "CoNI")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -136,26 +136,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# FactorCopula ()
+# cspp ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "FactorCopula")` for more info
+Run `revdepcheck::revdep_details(, "cspp")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -165,26 +165,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# frechet ()
+# csurvey ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "frechet")` for more info
+Run `revdepcheck::revdep_details(, "csurvey")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+new check timed out after 1200s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -194,7 +194,268 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+new check timed out after 1200s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+# dyndimred ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "dyndimred")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# dynetNLAResistance ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "dynetNLAResistance")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# egor ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "egor")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# epigraphdb ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "epigraphdb")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# fakemake ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "fakemake")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# flownet ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "flownet")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# gemtc ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "gemtc")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# ggExametrika ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "ggExametrika")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# gtexture ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "gtexture")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -230,6 +491,64 @@ Source tarball could not be downloaded
 
 
 ```
+# ig.degree.betweenness ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "ig.degree.betweenness")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# Karen ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "Karen")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
 # klassR ()
 
 * GitHub: <https://github.com/igraph/rigraph>
@@ -242,7 +561,7 @@ Run `revdepcheck::revdep_details(, "klassR")` for more info
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -252,26 +571,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# lame ()
+# L1centrality ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "lame")` for more info
+Run `revdepcheck::revdep_details(, "L1centrality")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -281,26 +600,26 @@ old check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# madrat ()
+# LorMe ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "madrat")` for more info
+Run `revdepcheck::revdep_details(, "LorMe")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -310,26 +629,26 @@ old check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# MBNMAdose ()
+# mlr3shiny ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "MBNMAdose")` for more info
+Run `revdepcheck::revdep_details(, "mlr3shiny")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -339,26 +658,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# mfrmr ()
+# MultiTraits ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "mfrmr")` for more info
+Run `revdepcheck::revdep_details(, "MultiTraits")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -368,26 +687,26 @@ old check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# mlr3pipelines ()
+# mverse ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "mlr3pipelines")` for more info
+Run `revdepcheck::revdep_details(, "mverse")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -397,26 +716,26 @@ old check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# multinma ()
+# netseg ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "multinma")` for more info
+Run `revdepcheck::revdep_details(, "netseg")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 3654s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -426,26 +745,26 @@ old check timed out after 3654s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 3654s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# NetworkToolbox ()
+# networksem ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "NetworkToolbox")` for more info
+Run `revdepcheck::revdep_details(, "networksem")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -455,7 +774,65 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# nlnet ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "nlnet")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# NMAforest ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "NMAforest")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -473,7 +850,7 @@ Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
 *   checking whether package ‘optbdmaeAT’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/new/optbdmaeAT.Rcheck/00install.out’ for details.
+     See ‘<lib>/optbdmaeAT.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -531,7 +908,7 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 *   checking whether package ‘optrcdmaeAT’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/new/optrcdmaeAT.Rcheck/00install.out’ for details.
+     See ‘<lib>/optrcdmaeAT.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -578,19 +955,19 @@ ERROR: lazy loading failed for package ‘optrcdmaeAT’
 
 
 ```
-# pcFactorStan ()
+# outbreaker2 ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "pcFactorStan")` for more info
+Run `revdepcheck::revdep_details(, "outbreaker2")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 2388s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -600,26 +977,26 @@ old check timed out after 2388s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 2388s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# sdmTMB ()
+# paramlink ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "sdmTMB")` for more info
+Run `revdepcheck::revdep_details(, "paramlink")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -629,7 +1006,384 @@ old check timed out after 1200s, at: * checking tests ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking tests ...
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# pcutils ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "pcutils")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# pcvr ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "pcvr")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# pfwim ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "pfwim")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# postHoc ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "postHoc")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# provGraphR ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "provGraphR")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# RcmdrPlugin.RMTCJags ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "RcmdrPlugin.RMTCJags")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# rgph ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "rgph")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# RMCDA ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "RMCDA")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# RNetLogo ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "RNetLogo")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# rnmamod ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "rnmamod")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# rtemis ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "rtemis")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# sigmajs ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "sigmajs")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# snahelper ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "snahelper")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -647,7 +1401,7 @@ Run `revdepcheck::revdep_details(, "soptdmaeA")` for more info
 *   checking whether package ‘soptdmaeA’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘/home/runner/work/_temp/revdep2-work/check/soptdmaeA/new/soptdmaeA.Rcheck/00install.out’ for details.
+     See ‘<lib>/soptdmaeA.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -694,6 +1448,93 @@ ERROR: lazy loading failed for package ‘soptdmaeA’
 
 
 ```
+# spatsoc ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "spatsoc")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# spdep ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "spdep")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# ssifs ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "ssifs")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
 # streamDAG ()
 
 * GitHub: <https://github.com/igraph/rigraph>
@@ -706,7 +1547,7 @@ Run `revdepcheck::revdep_details(, "streamDAG")` for more info
 ### Devel
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -716,26 +1557,26 @@ Dependencies not installed: asbio, gWidgets2tcltk
 ### CRAN
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# tip ()
+# tall ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "tip")` for more info
+Run `revdepcheck::revdep_details(, "tall")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -745,26 +1586,26 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
 
 
 ```
-# varPro ()
+# TAShiny ()
 
 * GitHub: <https://github.com/igraph/rigraph>
 * Email: <mailto:kirill@cynkra.com>
 
-Run `revdepcheck::revdep_details(, "varPro")` for more info
+Run `revdepcheck::revdep_details(, "TAShiny")` for more info
 
 ## Error before installation
 
 ### Devel
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
@@ -774,7 +1615,94 @@ old check timed out after 1200s, at: * checking examples with --run-donttest ...
 ### CRAN
 
 ```
-old check timed out after 1200s, at: * checking examples with --run-donttest ...
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# tinyVAST ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "tinyVAST")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+new check timed out after 1245s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+### CRAN
+
+```
+new check timed out after 1245s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+# wildlifeDI ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "wildlifeDI")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# XYomics ()
+
+* GitHub: <https://github.com/igraph/rigraph>
+* Email: <mailto:kirill@cynkra.com>
+
+Run `revdepcheck::revdep_details(, "XYomics")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 3 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 3 uploaded no result for this package; its job did not finish
 
 
 
