@@ -451,11 +451,16 @@ headline <- if (tally("newly_broken") > 0) {
 counts_df <- data.frame(
   Result = c(
     "ok", "newly broken", "failed to check",
+    # Its own row, and deliberately not counted as a failure: a check killed
+    # by the clock says nothing about the package, and in the old half it says
+    # nothing about our change either.
+    "timed out, not checked",
     "dependencies not installable", "shard error", "deferred",
     "no result from its shard"
   ),
   Packages = c(
     tally("ok"), tally("newly_broken"), tally("failed"),
+    tally("timeout"),
     tally("depfail"), tally("error"), tally("deferred"),
     tally("missing")
   )

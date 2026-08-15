@@ -41,9 +41,9 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
   ├─ unpack this run's preflight library, then the plan's donors
   ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
   ├─ install the system requirements of what was unpacked, not installed
-  ├─ phase old: reuse baselines, check the rest against the CRAN version
-  ├─ install the prebuilt dev binary
-  ├─ phase new: check everything again, compare per package
+  ├─ build two one-package libraries: CRAN release, dev binary
+  ├─ per package, both checks at once against those cascading libraries
+  │    (a reusable baseline stands in for the old half)
   └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
 collect   (1 job, if: always() past plan/build/preflight)
@@ -608,7 +608,7 @@ the report is about *results*, a retry is about *coverage*.
 | The checked ref is a tag or a SHA | the report is not committed; a `::notice::` says so and the artifact still has it |
 | The report cannot be pushed (protection, fork, race) | the step is `continue-on-error`; the run keeps its result |
 | A revdep fails under both versions | `ok` (no *new* problems), visible in the report's tables |
-| A check times out | rcmdcheck kills it at `max(floor, factor × its CRAN time)`; compared as `t-`, reported `failed` |
+| A check times out | `timeout` kills it at `max(floor, factor × its CRAN time)`; reported `timeout`, not `failed`, with the check step it died at |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
@@ -855,6 +855,60 @@ and is a completely different problem.
 So `TMPDIR` points at `runner.temp` in both jobs,
 and the sampler keeps `/tmp` in its list
 whether or not anything is still using it.
+
+### Old and new run at the same time
+
+A shard used to make two passes: every old check, then `R CMD INSTALL` of the
+dev binary over the CRAN one, then every new check.
+The install in the middle is what forced them apart —
+one library can only hold one version of the package under test.
+
+Two libraries can.
+`R_LIBS` is a search path,
+so each check names a library holding *exactly one* package —
+the CRAN release for old, the dev build for new —
+in front of the shared library holding every dependency.
+Nothing is installed or uninstalled between them,
+so the pair runs concurrently:
+`check-pair.sh` starts both `R CMD check` invocations, waits, and records
+each one's log and exit status.
+
+That is worth two things.
+A package's wall clock halves, on a four-core runner
+where one check keeps about one core busy.
+And a package whose old check hangs still gets its new answer,
+where before the old timeout meant the run learnt nothing about it at all.
+
+The timeout is coreutils' `timeout` rather than rcmdcheck's,
+which makes the distinction reliable:
+exit 124 is the deadline, anything else is the check saying something.
+`rcmdcheck::parse_check()` then turns each `00check.log`
+into the same object `rcmdcheck()` used to return,
+so the counts, `compare_checks()` and the manifest are unchanged.
+
+For a package that is not ok, what is kept is the **difference** between the
+two logs (`00check.diff`) next to the new one.
+The logs are thousands of lines that are identical in both,
+and the handful that are not is the entire point.
+
+### A timeout is not a failure
+
+Run 31304411628 put 60 packages into `failures.md` marked "timed out",
+and shard 7's log shows no sign of trouble — two of them, both stuck at
+`Running 'testthat.R'` after every other check step passed in seconds.
+Both things are true.
+CRAN checks those 60 in a median of 275 s
+and these runners measure about half CRAN's time,
+so a 20-minute kill is not slowness; it is a hang.
+
+The reporting was the wrong part.
+A check killed by the clock says nothing about the package,
+and in the *old* half it says nothing about our change either —
+the dev version is not even on that library path.
+Such a package is now `timeout` rather than `failed`,
+with its own row in the summary and the check step it died at in the message.
+`needs_recheck()` treats it as not-ok either way,
+so `retry-run` still picks it up.
 
 The same principle applies to everything these scripts swallow.
 Fetching an artifact is an optimization,

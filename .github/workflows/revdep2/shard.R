@@ -1,11 +1,11 @@
 # Check one shard of a revdep2 plan: many reverse dependencies, one job, one
 # shared library.
 #
-# The shard installs the union of its packages' dependencies once, then walks
-# its packages in two phases: every package is checked against the CRAN version
-# of the package under test (or its baseline result is reused), the dev binary
-# is installed over the CRAN version, and every package is checked again. The
-# two rcmdcheck results are compared per package, revdepcheck-style.
+# The shard installs the union of its packages' dependencies once, then checks
+# each of its packages against both versions of the package under test at the
+# same time: two `R CMD check` runs side by side, against library stacks that
+# differ in exactly that one package (a reusable baseline stands in for the
+# old half). The two results are compared per package, revdepcheck-style.
 #
 # Failure is data here, never a job failure: a package that breaks, times out,
 # or cannot even install its dependencies gets a manifest entry saying so, and
@@ -42,10 +42,12 @@
 #                            these runners (default: 10)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
 
-source(file.path(
-  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
-  "util.R"
+script_dir <- dirname(sub(
+  "--file=",
+  "",
+  grep("^--file=", commandArgs(), value = TRUE)
 ))
+source(file.path(script_dir, "util.R"))
 
 script_started <- Sys.time()
 elapsed <- function(from) {
@@ -235,27 +237,59 @@ our_version <- function() {
     NA_character_
   })
 }
-our_cran_version <- our_version()
-if (!identical(our_cran_version, plan$cran_version)) {
-  # The library must hold the *CRAN release* for the old phase; the resolver
-  # may have kept some other version it found satisfactory.
-  inform(
-    "Installed version is ",
-    our_cran_version,
-    ", plan expected ",
-    plan$cran_version,
-    "; reinstalling from the repositories"
-  )
-  utils::install.packages(package)
-  our_cran_version <- our_version()
-  if (!identical(our_cran_version, plan$cran_version)) {
-    inform(
-      "Note: old checks run against ",
-      our_cran_version,
-      " (the repositories lag CRAN)"
-    )
-  }
+# The two versions cascade rather than replace each other.
+#
+# `R_LIBS` is a search path, so a check can name a library holding exactly one
+# package -- the CRAN release, or the dev build -- in front of the shared
+# library holding every dependency. Nothing is installed or uninstalled
+# between the phases, which is what used to force them to run one after the
+# other; now both can run at once against libraries that differ in exactly the
+# package under test.
+lib_old <- file.path(work, "lib-old")
+lib_new <- file.path(work, "lib-new")
+dir.create(lib_old, recursive = TRUE, showWarnings = FALSE)
+dir.create(lib_new, recursive = TRUE, showWarnings = FALSE)
+
+# The shared library must not hold the package under test at all, or it would
+# shadow neither and both checks would see whatever the resolver left there.
+unlink(file.path(lib, package), recursive = TRUE)
+
+inform("Installing ", package, " ", plan$cran_version, " into the old library")
+cran_install <- pak_install(
+  package,
+  lib = lib_old,
+  upgrade = FALSE,
+  timeout_seconds = install_timeout_seconds(),
+  label = paste("installing", package)
+)
+if (!cran_install$ok) {
+  stop("Installing the CRAN release of ", package, " failed", call. = FALSE)
 }
+our_cran_version <- as.character(utils::packageVersion(package, lib_old))
+if (!identical(our_cran_version, plan$cran_version)) {
+  inform(
+    "Note: old checks run against ",
+    our_cran_version,
+    " (the repositories lag CRAN, the plan expected ",
+    plan$cran_version,
+    ")"
+  )
+}
+
+binary <- file.path(pkg_dir, meta$binary)
+inform("Installing dev binary ", basename(binary), " into the new library")
+if (
+  system2("R", c("CMD", "INSTALL", "-l", shQuote(lib_new), shQuote(binary))) !=
+    0
+) {
+  stop("Installing the prebuilt dev binary failed", call. = FALSE)
+}
+our_dev_version <- as.character(utils::packageVersion(package, lib_new))
+inform(sprintf(
+  "Checking old (%s) and new (%s) concurrently, two at a time per package",
+  our_cran_version,
+  our_dev_version
+))
 
 # A package whose *strong* dependency closure is incomplete cannot produce a
 # check result worth comparing; missing suggests are tolerable, the check runs
@@ -346,10 +380,22 @@ out_of_time <- function(entry) {
   Sys.time() + budget_sec > deadline
 }
 
-run_check <- function(name, phase) {
+# One package, both versions, at once.
+#
+# check-pair.sh runs the two `R CMD check` invocations concurrently against the
+# cascading libraries and writes each one's log and exit status; this reads
+# them back. `rcmdcheck::parse_check()` turns a 00check.log into the same
+# object `rcmdcheck()` used to return, so everything downstream -- the counts,
+# `compare_checks()`, the manifest -- is unchanged.
+#
+# The timeout is coreutils' rather than rcmdcheck's, which is what makes the
+# distinction reliable: exit 124 is the deadline, anything else is the check
+# saying something.
+check_pair <- function(name) {
   checks_started <<- checks_started + 1L
-  check_dir <- file.path(work, "check", name, phase)
-  dir.create(check_dir, recursive = TRUE, showWarnings = FALSE)
+  work_dir <- file.path(work, "check", name)
+  unlink(work_dir, recursive = TRUE)
+  dir.create(work_dir, recursive = TRUE, showWarnings = FALSE)
   # The timeout scales with what the check costs CRAN, floored because these
   # runners are slower than CRAN's machines and a tiny package must not be
   # killed over the difference.
@@ -358,38 +404,83 @@ run_check <- function(name, phase) {
     timeout_factor * (get(name, envir = state)$t_total %||% 0)
   )
   started <- Sys.time()
-  result <- tryCatch(
-    rcmdcheck::rcmdcheck(
+  system2(
+    file.path(script_dir, "check-pair.sh"),
+    shQuote(c(
       sources[[name]],
-      args = c("--no-manual", "--as-cran"),
-      error_on = "never",
-      check_dir = check_dir,
-      timeout = timeout_sec
-    ),
-    error = function(e) e
+      work_dir,
+      lib_old,
+      lib_new,
+      lib,
+      format(round(timeout_sec), scientific = FALSE)
+    ))
   )
   duration <- round(as.numeric(Sys.time() - started, units = "secs"))
-  # Every check counts towards what this shard cost, including the ones that
-  # errored or timed out -- they spent the same minutes.
-  check_seconds <<- check_seconds + duration
-  attr(result, "duration") <- duration
-  # A check that hits the timeout is killed, and rcmdcheck surfaces that as an
-  # error rather than a result object; tell it apart from a genuine crash by
-  # the clock.
-  attr(result, "timed_out") <- inherits(result, "error") &&
-    duration >= timeout_sec - 1
-  result
+  # Both checks ran side by side, so the pair cost what the slower one cost --
+  # but each half is still charged, because that is the work the cost model
+  # measures and the shard's own deadline spends.
+  check_seconds <<- check_seconds + 2 * duration
+
+  read_side <- function(phase) {
+    dir <- file.path(work_dir, phase)
+    status <- suppressWarnings(as.integer(readLines(
+      file.path(dir, "status"),
+      warn = FALSE
+    )[[1]]))
+    log <- file.path(dir, paste0(name, ".Rcheck"), "00check.log")
+    result <- if (identical(status, 124L)) {
+      simpleError(sprintf(
+        "%s check timed out after %ds",
+        phase,
+        round(timeout_sec)
+      ))
+    } else {
+      tryCatch(
+        rcmdcheck::parse_check(log),
+        error = function(e) {
+          simpleError(sprintf(
+            "%s check produced no readable result (exit %s): %s",
+            phase,
+            status,
+            conditionMessage(e)
+          ))
+        }
+      )
+    }
+    attr(result, "duration") <- duration
+    attr(result, "timed_out") <- identical(status, 124L)
+    # Where it was when the clock ran out. A check killed in `tests` is a
+    # different animal from one killed while compiling, and the report used to
+    # say only "timed out".
+    attr(result, "last_step") <- if (file.exists(log)) {
+      steps <- grep("^[*] ", readLines(log, warn = FALSE), value = TRUE)
+      if (length(steps) > 0) utils::tail(steps, 1) else ""
+    } else {
+      ""
+    }
+    result
+  }
+
+  list(old = read_side("old"), new = read_side("new"))
 }
 
 check_failure <- function(name, phase, result) {
   if (isTRUE(attr(result, "timed_out"))) {
+    # `timeout`, not `failed`. A check killed by the clock says nothing about
+    # the package, and in the old phase it says nothing about our change
+    # either -- the dev version is not even on that library path. Reporting it
+    # as a failure put 60 packages into failures.md in run 31304411628 that
+    # the run had learnt nothing about. `needs_recheck()` picks it up either
+    # way, so `retry-run` still re-checks them.
+    step <- attr(result, "last_step") %||% ""
     update(
       name,
-      result = "failed",
+      result = "timeout",
       message = sprintf(
-        "%s check timed out after %ds",
+        "%s check timed out after %ds%s",
         phase,
-        attr(result, "duration")
+        attr(result, "duration"),
+        if (nzchar(step)) paste0(", at: ", trimws(step)) else ""
       )
     )
     inform(
@@ -398,7 +489,8 @@ check_failure <- function(name, phase, result) {
       phase,
       " check timed out (",
       attr(result, "duration"),
-      "s)"
+      "s)",
+      if (nzchar(step)) paste0(" at ", trimws(step)) else ""
     )
   } else {
     update(name, result = "error", message = conditionMessage(result))
@@ -412,12 +504,26 @@ pkg_out <- function(name) {
   dir
 }
 
-# Phase 1: the CRAN version of the package under test is installed; reuse or
-# produce every package's old-version result.
-inform("Phase old: against ", package, " ", our_cran_version)
+# The checks: one pass, both versions of every package at once.
+#
+# There used to be two passes -- every old check, then the dev binary
+# installed over the CRAN one, then every new check -- because the library
+# could only hold one version at a time. With the two cascading libraries it
+# can hold both, so a package's pair runs together and the shard makes one
+# pass. That halves a package's wall clock, and it means a package whose old
+# check hangs still gets its new answer instead of the run learning nothing
+# about it.
+inform(sprintf(
+  "Checking %d package(s), old and new side by side",
+  length(runnable)
+))
 for (name in runnable) {
   entry <- get(name, envir = state)
+
+  # A reusable baseline still stands in for the old check; only the new one is
+  # then run, and it runs alone.
   reused <- FALSE
+  old <- NULL
   if (entry$baseline_planned) {
     rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
     old <- tryCatch(readRDS(rds), error = function(e) NULL)
@@ -439,16 +545,23 @@ for (name in runnable) {
       inform(name, ": planned baseline unavailable, checking fresh")
     }
   }
+
+  if (out_of_time(entry)) {
+    inform(name, ": deferred (deadline)")
+    next
+  }
+
+  pair <- check_pair(name)
+  new <- pair$new
   if (!reused) {
-    if (out_of_time(entry)) {
-      inform(name, ": deferred (deadline)")
-      next
-    }
-    old <- run_check(name, "old")
-    if (inherits(old, "error")) {
-      check_failure(name, "old", old)
-      next
-    }
+    old <- pair$old
+  }
+
+  if (inherits(old, "error")) {
+    check_failure(name, "old", old)
+    next
+  }
+  if (!reused) {
     saveRDS(old, file.path(pkg_out(name), "old.rds"))
     update(
       name,
@@ -456,39 +569,12 @@ for (name in runnable) {
       t_old = attr(old, "duration"),
       old_checked_at = now_utc()
     )
-    inform(name, ": old ", counts(old), " (", attr(old, "duration"), "s)")
   }
-}
-
-# Between the phases: the dev binary replaces the CRAN version.
-binary <- file.path(pkg_dir, meta$binary)
-inform("Installing dev binary ", basename(binary))
-if (system2("R", c("CMD", "INSTALL", shQuote(binary))) != 0) {
-  stop("Installing the prebuilt dev binary failed", call. = FALSE)
-}
-our_dev_version <- as.character(utils::packageVersion(package))
-
-# Phase 2: check against the dev version and compare.
-inform("Phase new: against ", package, " ", our_dev_version)
-for (name in runnable) {
-  entry <- get(name, envir = state)
-  if (entry$result != "deferred") {
-    next # depfail or error already decided
-  }
-  if (!file.exists(file.path(pkg_out(name), "old.rds"))) {
-    next # old phase never reached it; stays deferred
-  }
-  if (out_of_time(entry)) {
-    inform(name, ": deferred (deadline)")
-    next
-  }
-  new <- run_check(name, "new")
   if (inherits(new, "error")) {
     check_failure(name, "new", new)
     next
   }
   saveRDS(new, file.path(pkg_out(name), "new.rds"))
-  old <- readRDS(file.path(pkg_out(name), "old.rds"))
 
   cmp <- tryCatch(
     rcmdcheck::compare_checks(old, new),
@@ -510,7 +596,6 @@ for (name in runnable) {
       status = cmp$status,
       status_new = counts(new),
       new_issues = new_issues,
-      t_new = attr(new, "duration"),
       # An install failure or a timeout leaves nothing to compare, so the
       # result is only "failed"; say which one it was.
       message = status_message(cmp$status)
@@ -527,29 +612,46 @@ for (name in runnable) {
     entry$status_new,
     ", ",
     attr(new, "duration"),
-    "s)"
+    "s for the pair)"
   )
 
   # The parsed results carry everything the reports need; raw check output is
-  # kept only where a human will want to dig, and only for the new version.
+  # kept only where a human will want to dig, and then as the *difference*
+  # between the two logs rather than the whole of the new one. The whole log
+  # is thousands of lines that are identical in both, and what a reader wants
+  # is the handful that are not.
   if (entry$result == "ok") {
     unlink(file.path(work, "check", name), recursive = TRUE)
   } else {
     keep <- file.path(out_dir, "pkgs", name, "new-check")
     dir.create(keep, recursive = TRUE, showWarnings = FALSE)
-    rcheck <- file.path(work, "check", name, "new", paste0(name, ".Rcheck"))
+    rcheck <- function(phase) {
+      file.path(work, "check", name, phase, paste0(name, ".Rcheck"))
+    }
     for (f in c(
       "00check.log",
       "00install.out",
-      list.files(rcheck, pattern = "[.]Rout[.]fail$", recursive = TRUE)
+      list.files(rcheck("new"), pattern = "[.]Rout[.]fail$", recursive = TRUE)
     )) {
-      if (file.exists(file.path(rcheck, f))) {
-        file.copy(file.path(rcheck, f), file.path(keep, basename(f)))
+      if (file.exists(file.path(rcheck("new"), f))) {
+        file.copy(file.path(rcheck("new"), f), file.path(keep, basename(f)))
       }
+    }
+    old_log <- file.path(rcheck("old"), "00check.log")
+    new_log <- file.path(rcheck("new"), "00check.log")
+    if (file.exists(old_log) && file.exists(new_log)) {
+      diff <- suppressWarnings(system2(
+        "diff",
+        shQuote(c("-u", "--label", "old", old_log, "--label", "new", new_log)),
+        stdout = TRUE,
+        stderr = NULL
+      ))
+      writeLines(diff, file.path(keep, "00check.diff"))
     }
     unlink(file.path(work, "check", name), recursive = TRUE)
   }
 }
+
 
 # ---------------------------------------------------------------- manifest ---
 
@@ -611,8 +713,9 @@ append_summary(c(
   sprintf("### Shard %d", shard_index),
   "",
   sprintf(
-    "%d ok, %d newly broken, %d failed, %d depfail, %d error, %d deferred.",
+    "%d ok, %d newly broken, %d failed, %d timed out, %d depfail, %d error, %d deferred.",
     sum(results == "ok"), sum(results == "newly_broken"), sum(results == "failed"),
+    sum(results == "timeout"),
     sum(results == "depfail"), sum(results == "error"), sum(results == "deferred")
   ),
   "",
