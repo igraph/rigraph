@@ -995,10 +995,27 @@ which is both what a reader wants
 and the part the old/new diff has to see to be worth printing.
 `REVDEP2_DETAIL_MAX_LINES` (300) bounds the two transcript blocks.
 
-Every line that reports a package carries its position in the shard —
-`protti: ok (old 0E 0W 0N, new 0E 0W 0N, 1072s for the pair, 1/51)`.
+Every line that reports a package carries its position in the shard
+and an estimate for what is left:
+
+```
+protti: ok (old 0E 0W 0N, new 0E 0W 0N, 1072s for the pair, 1/51, ~5.0 h left)
+```
+
 A shard runs for hours and its log is read while it runs,
-so "is this nearly done?" should not need counting lines.
+so "is this nearly done?" should not need counting lines,
+and the question actually being asked is *when*.
+
+The plan already priced every package;
+what it could not know is how this runner would compare to its model.
+So the remaining packages are priced in the plan's own units
+and rescaled by how its estimates have held up in this shard so far —
+which absorbs both a slow runner
+and a systematically optimistic model,
+without either having to be known in advance.
+Before the first pair finishes there is nothing to rescale by
+and the plan's number stands, which is why the estimate can move a long way
+on the first package and very little after that.
 
 ### Spelling is not checked
 
@@ -1011,14 +1028,22 @@ R's spelling stage lives inside `check_CRAN_incoming()` —
 and `_R_CHECK_CRAN_INCOMING_USE_ASPELL_: false` says so out loud
 so that `--as-cran` cannot turn it back on.
 
-A package's *own* `tests/spelling.R` is a different thing
-and this does not touch it.
+A package's *own* `tests/spelling.R` is a different thing.
 Those run because `r-lib/actions/setup-r` sets `NOT_CRAN=true`,
 which is what makes `skip_on_cran()` not skip.
-Turning that off would silence them,
-and would also skip every other `skip_on_cran()` test —
-often the ones most likely to exercise igraph —
-so it is not a knob to turn without deciding to.
+The shards now set `NOT_CRAN=false` instead,
+so they behave like CRAN's own check machines:
+the point of this workflow is to find what a released igraph would break,
+and a test CRAN never runs cannot break on CRAN.
+That silences the spelling tests
+and every other `skip_on_cran()` test with them —
+a real reduction in what is exercised,
+which is why it is an input rather than a constant.
+Dispatch with `not-cran: true` to widen the net again.
+
+`NOT_CRAN` is written in a step rather than in the job's `env`
+because `setup-r` writes its own value into `$GITHUB_ENV`,
+and a later write is what reliably overrides an earlier one.
 
 ### `\donttest` examples are not run
 
@@ -1090,6 +1115,7 @@ at the next `if`.
 | Retry a run | `retry-run` | — | — |
 | One G-th of the revdeps, for a set too big for one run | `part` (`i/G`) | `REVDEP2_PART` | — |
 | Plan only | `dry-run` | — | false |
+| Run the tests CRAN skips (`skip_on_cran()`, spelling tests) | `not-cran` | `REVDEP2_NOT_CRAN` | false |
 | Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
 | Concurrent shards, and so the wave size — set it to the concurrency the account really has, never more | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
 | Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |

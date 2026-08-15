@@ -108,6 +108,10 @@ on:
         description: "Oldest baseline result worth reusing"
         type: string
         default: ""
+      not-cran:
+        description: "Run the tests CRAN skips: sets NOT_CRAN=true, so skip_on_cran() does not skip (slower, noisier, and includes packages' own spelling tests)"
+        type: boolean
+        default: false
       dry-run:
         description: "Plan only: report the shards and reuse decisions, start no checks"
         type: boolean
@@ -150,6 +154,13 @@ env:
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
   REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
+  # Whether the shards behave like CRAN's own check machines or like a
+  # developer's. `skip_on_cran()` reads `NOT_CRAN`, and `r-lib/actions/setup-r`
+  # sets it to `true` -- which is why packages' own `tests/spelling.R` runs
+  # here at all. CRAN-like is the default: the point of this workflow is to
+  # find what a released igraph would break, and a test CRAN never runs cannot
+  # break on CRAN. Dispatch with `not-cran: true` to widen the net again.
+  REVDEP2_NOT_CRAN: ${{ inputs.not-cran && 'true' || 'false' }}
   # Prebuilt dependency libraries of earlier runs: how many runs may donate one
   # (0 turns reuse off), and how old a library may be before its binaries are
   # no longer trusted against the current runner image.
@@ -605,10 +616,18 @@ jobs:
       # Both driver steps need these and neither can name them itself: the
       # `runner` context does not reach the job's `env`, so they are set here
       # for every step that follows.
+      #
+      # `NOT_CRAN` is here rather than in the job's `env` because
+      # `r-lib/actions/setup-r` writes `NOT_CRAN=true` into `$GITHUB_ENV`, and
+      # a later write is what reliably overrides an earlier one. This step runs
+      # after it and before both driver steps.
       - name: Point the driver at this runner's directories
+        env:
+          NOT_CRAN_INPUT: ${{ env.REVDEP2_NOT_CRAN }}
         run: |
           mkdir -p "${RUNNER_TEMP}/tmp"
           {
+            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
             echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
             echo "PKG_DIR=${RUNNER_TEMP}/pkg"
             echo "LIB_DIR=${RUNNER_TEMP}/lib"

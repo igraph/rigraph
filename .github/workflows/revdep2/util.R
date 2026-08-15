@@ -1047,8 +1047,12 @@ run_with_timeout <- function(fun, args = list(), timeout_seconds, label = "") {
 format_duration <- function(seconds) {
   if (seconds < 90) {
     sprintf("%.0f s", seconds)
-  } else {
+  } else if (seconds < 90 * 60) {
     sprintf("%.0f min", seconds / 60)
+  } else {
+    # A shard runs for hours, and "217 min left" is a number the reader has to
+    # divide before it means anything.
+    sprintf("%.1f h", seconds / 3600)
   }
 }
 

@@ -648,17 +648,52 @@ inform(sprintf(
   "Checking %d package(s), old and new side by side",
   length(runnable)
 ))
+# How far along the shard is, on every line that reports a package.
+#
+# A shard runs for hours and its log is read while it runs, so "3/51" answers
+# "is this nearly done?" without counting lines. The estimate answers the
+# question actually being asked, which is when.
+#
+# The plan already priced every package; what it could not know is how this
+# runner would compare. So the remaining packages are priced in the plan's own
+# units and then rescaled by how its estimates have held up here so far --
+# which absorbs both a slow runner and a systematically optimistic model,
+# without either having to be known in advance. Before the first pair finishes
+# there is nothing to rescale by and the plan's number stands.
+planned_done <- 0
+actual_done <- 0
+planned_minutes <- function(name) {
+  max(get(name, envir = state)$weight_minutes %||% 0, 0)
+}
+progress_note <- function(position) {
+  left <- sum(vapply(
+    utils::tail(runnable, length(runnable) - position),
+    planned_minutes,
+    numeric(1)
+  ))
+  scale <- if (planned_done > 0 && actual_done > 0) {
+    actual_done / planned_done
+  } else {
+    1
+  }
+  sprintf(
+    "%d/%d, %s",
+    position,
+    length(runnable),
+    if (left > 0) {
+      paste0("~", format_duration(left * scale * 60), " left")
+    } else {
+      "last one"
+    }
+  )
+}
+
 for (position in seq_along(runnable)) {
   name <- runnable[[position]]
   entry <- get(name, envir = state)
 
-  # How far along the shard is, on every line that reports a package. A shard
-  # runs for hours and its log is read while it runs; "3/51" answers "is this
-  # nearly done?" without counting lines or knowing what the shard holds.
-  progress <- sprintf("%d/%d", position, length(runnable))
-
   if (out_of_time(entry)) {
-    inform(name, ": deferred (deadline), ", progress)
+    inform(name, ": deferred (deadline), ", progress_note(position))
     next
   }
 
@@ -672,6 +707,12 @@ for (position in seq_along(runnable)) {
   pair <- check_pair(name)
   old <- pair$old
   new <- pair$new
+
+  # What this one was priced at against what it cost, which is what prices the
+  # rest. A timed-out check counts too: the clock really did spend it.
+  planned_done <- planned_done + planned_minutes(name)
+  actual_done <- actual_done + (attr(new, "duration") %||% 0) / 60
+  progress <- progress_note(position)
 
   if (inherits(old, "error")) {
     check_failure(name, "old", old, progress)
