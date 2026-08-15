@@ -704,6 +704,11 @@ for (name in runnable) {
       result = classify_status(cmp$status, new_issues),
       status = cmp$status,
       status_new = counts(new),
+      # The pair's wall clock, charged to both halves: they ran side by side,
+      # so neither one's own time is separable from the other's. It used to be
+      # recorded only where the comparison failed, which left `t_new` null for
+      # every package that compared -- that is, for all of them.
+      t_new = attr(new, "duration"),
       new_issues = new_issues,
       # An install failure or a timeout leaves nothing to compare, so the
       # result is only "failed"; say which one it was.
