@@ -1,6 +1,8 @@
 # archeofrag (1.2.4)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/sebastien-plutniak/archeofrag>
+* Email: <mailto:sebastien.plutniak@posteo.net>
+* GitHub mirror: <https://github.com/cran/archeofrag>
 
 Run `revdepcheck::revdep_details(, "archeofrag")` for more info
 
@@ -9,17 +11,17 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
 *   checking tests ... [] ERROR
      ```
      ...
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+                                    H1 != H2? p.value Obs. value/H1 Obs. value/H2
+       edges                            FALSE     0.4         lower         lower
+       balance                          FALSE    0.38        within        within
+       components.balance               FALSE    0.39        within        within
+       disturbance                      FALSE    0.36        within        within
+       admixture                        FALSE    0.08        within        within
+       cohesion1                         TRUE    0.01        within        higher
+       cohesion2                         TRUE       0        within         lower
+       edge.weights.sum                 FALSE    0.57         lower         lower
+       edge.weights.median              FALSE    0.25         lower         lower
+       edge.weights.median.abs.dev.     FALSE    0.24         lower         lower
        [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
@@ -36,39 +38,10 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
        Execution halted
      ```
 
-## In both
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     Error(s) in re-building vignettes:
-       ...
-     --- re-building ‘archeofrag-vignette.Rmd’ using rmarkdown
-     
-     Quitting from archeofrag-vignette.Rmd:238-253 [simulator-test]
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     <error/rlang_error>
-     Error in `if (planar == TRUE & (!requireNamespace("RBGL", quietly = TRUE))) ...`:
-     ! missing value where TRUE/FALSE needed
-     ---
-     Backtrace:
-         ▆
-      1. └─archeofrag::frag.simul.process(...)
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     
-     Error: processing vignette 'archeofrag-vignette.Rmd' failed with diagnostics:
-     missing value where TRUE/FALSE needed
-     --- failed re-building ‘archeofrag-vignette.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘archeofrag-vignette.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
-
 # bnstruct (1.0.15)
 
-* : <UNKNOWN>
+* Email: <mailto:afranzin@ulb.ac.be>
+* GitHub mirror: <https://github.com/cran/bnstruct>
 
 Run `revdepcheck::revdep_details(, "bnstruct")` for more info
 
@@ -136,7 +109,9 @@ Run `revdepcheck::revdep_details(, "bnstruct")` for more info
 
 # cfid (0.1.8)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/santikka/cfid>
+* Email: <mailto:santtuth@gmail.com>
+* GitHub mirror: <https://github.com/cran/cfid>
 
 Run `revdepcheck::revdep_details(, "cfid")` for more info
 
@@ -172,47 +147,10 @@ Run `revdepcheck::revdep_details(, "cfid")` for more info
        Execution halted
      ```
 
-# cia (1.0.0)
-
-* : <UNKNOWN>
-
-Run `revdepcheck::revdep_details(, "cia")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     ...
-     The error most likely occurred in:
-     
-     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-     > ### Name: CalculateAcceptanceRates
-     > ### Title: Calculate acceptance rates
-     > ### Aliases: CalculateAcceptanceRates
-     > 
-     > ### ** Examples
-     > 
-     > data <- bnlearn::learning.test
-     > 
-     > dag <- UniformlySampleDAG(colnames(data))
-     Loading required namespace: igraph
-     > partitioned_nodes <- DAGtoPartition(dag)
-     > 
-     > scorer <- CreateScorer(
-     +   scorer = BNLearnScorer, 
-     +   data = data
-     +   )
-     > 
-     > results <- SampleChains(10, partitioned_nodes, PartitionMCMC(), scorer)
-     Error in serverSocket(port = port) : 
-       creation of server socket failed: port 11477 cannot be opened
-     Calls: SampleChains -> <Anonymous> -> makePSOCKcluster -> serverSocket
-     Execution halted
-     ```
-
 # comato (1.1)
 
-* : <UNKNOWN>
+* Email: <mailto:andreas.muehling@tum.de>
+* GitHub mirror: <https://github.com/cran/comato>
 
 Run `revdepcheck::revdep_details(, "comato")` for more info
 
@@ -270,7 +208,9 @@ Run `revdepcheck::revdep_details(, "comato")` for more info
 
 # cranly (0.6.0)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/ikosmidis/cranly>
+* Email: <mailto:ioannis.kosmidis@warwick.ac.uk>
+* GitHub mirror: <https://github.com/cran/cranly>
 
 Run `revdepcheck::revdep_details(, "cranly")` for more info
 
@@ -308,7 +248,9 @@ Run `revdepcheck::revdep_details(, "cranly")` for more info
 
 # dci (1.0.3)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/aarkilanian/dci>
+* Email: <mailto:a.arkilanian@gmail.com>
+* GitHub mirror: <https://github.com/cran/dci>
 
 Run `revdepcheck::revdep_details(, "dci")` for more info
 
@@ -406,7 +348,8 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
 
 # degreenet (1.3-7)
 
-* : <UNKNOWN>
+* Email: <mailto:handcock@stat.ucla.edu>
+* GitHub mirror: <https://github.com/cran/degreenet>
 
 Run `revdepcheck::revdep_details(, "degreenet")` for more info
 
@@ -443,7 +386,9 @@ Run `revdepcheck::revdep_details(, "degreenet")` for more info
 
 # ECoL (0.4.4)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/lpfgarcia/ECoL>
+* Email: <mailto:luis.garcia@unb.br>
+* GitHub mirror: <https://github.com/cran/ECoL>
 
 Run `revdepcheck::revdep_details(, "ECoL")` for more info
 
@@ -509,9 +454,51 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
        Execution halted
      ```
 
+# gemtc (1.1-1)
+
+* GitHub: <https://github.com/gertvv/gemtc>
+* Email: <mailto:gert@gertvv.nl>
+* GitHub mirror: <https://github.com/cran/gemtc>
+
+Run `revdepcheck::revdep_details(, "gemtc")` for more info
+
+## Newly broken
+
+*   checking tests ... [] ERROR
+     ```
+     ...
+     Complete output:
+       > library(testthat)
+       > test_check('gemtc', filter="unit")
+       Loading required package: gemtc
+       Loading required package: coda
+       Saving _problems/test-unit-relative.effect-65.R
+       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-unit-relative.effect.R:65:3'): tree.relative.effect handles a more complex tree ──
+       Expected `x` to be equivalent to `expected`.
+       3/7 mismatches (average diff: 1.33)
+       [3]  0 - -1 ==  1
+       [5]  1 -  0 ==  1
+       [6] -1 -  1 == -2
+       Backtrace:
+           ▆
+        1. └─testthat::expect_that(...) at test-unit-relative.effect.R:65:3
+        2.   └─testthat (local) condition(object)
+        3.     └─testthat::expect_equivalent(x, expected, expected.label = label)
+       
+       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
 # ggraph (2.2.2)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/thomasp85/ggraph>
+* Email: <mailto:thomasp85@gmail.com>
+* GitHub mirror: <https://github.com/cran/ggraph>
 
 Run `revdepcheck::revdep_details(, "ggraph")` for more info
 
@@ -579,7 +566,9 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
 
 # glyrepr (0.14.0)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/glycoverse/glyrepr>
+* Email: <mailto:23110220018@m.fudan.edu.cn>
+* GitHub mirror: <https://github.com/cran/glyrepr>
 
 Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 
@@ -617,7 +606,9 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 
 # GoodFitSBM (0.0.1)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/Roy-SR-007/GoodFitSBM>
+* Email: <mailto:sohamghosh@tamu.edu>
+* GitHub mirror: <https://github.com/cran/GoodFitSBM>
 
 Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
 
@@ -655,7 +646,9 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
 
 # manynet (2.2.3)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/stocnet/manynet>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/manynet>
 
 Run `revdepcheck::revdep_details(, "manynet")` for more info
 
@@ -693,7 +686,9 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
 
 # MetaNet (0.3.2)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/Asa12138/MetaNet>
+* Email: <mailto:bfzede@gmail.com>
+* GitHub mirror: <https://github.com/cran/MetaNet>
 
 Run `revdepcheck::revdep_details(, "MetaNet")` for more info
 
@@ -719,13 +714,15 @@ Run `revdepcheck::revdep_details(, "MetaNet")` for more info
      Execution halted
      Examples with CPU (user + system) or elapsed time > 5s
                           user system elapsed
-     compare_rand       22.226  0.017  10.031
-     extract_sample_net 11.204  0.021   3.781
+     extract_sample_net 12.777  0.021   5.475
+     compare_rand       12.448  0.011   5.552
      ```
 
 # nat (1.8.26)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/natverse/nat>
+* Email: <mailto:jefferis@gmail.com>
+* GitHub mirror: <https://github.com/cran/nat>
 
 Run `revdepcheck::revdep_details(, "nat")` for more info
 
@@ -826,12 +823,14 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘com.google.Chrome.bSwBnz’
+       ‘com.google.Chrome.9h6QvD’
      ```
 
 # netrics (0.4.0)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/stocnet/netrics>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/netrics>
 
 Run `revdepcheck::revdep_details(, "netrics")` for more info
 
@@ -869,7 +868,8 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
 
 # R6causal (0.8.3)
 
-* : <UNKNOWN>
+* Email: <mailto:juha.karvanen@iki.fi>
+* GitHub mirror: <https://github.com/cran/R6causal>
 
 Run `revdepcheck::revdep_details(, "R6causal")` for more info
 
@@ -884,47 +884,51 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
      ```
 
-# SEMgraph (1.2.4)
+# SemNeT (1.4.5)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/AlexChristensen/SemNeT>
+* Email: <mailto:alexpaulchristensen@gmail.com>
+* GitHub mirror: <https://github.com/cran/SemNeT>
 
-Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
+Run `revdepcheck::revdep_details(, "SemNeT")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
+*   checking examples ... [] ERROR
      ```
      ...
-       Please report the issue at <https://github.com/igraph/rigraph/issues>.
-     > plot(dag0$dag, layout=layout.circle, main = "Output DAG")
-     Warning: vertex attribute color contains NAs. Replacing with default value 1
-     > plot(dag0$dag.old, layout=layout.circle, main = "Inferred old edges")
-     Warning: vertex attribute color contains NAs. Replacing with default value 1
-     > plot(dag0$dag.new, layout=layout.circle, main = "Inferred new edges")
-     Warning: vertex attribute color contains NAs. Replacing with default value 1
-     > par(old.par)
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: randwalk
+     > ### Title: Random Walk Simulation
+     > ### Aliases: randwalk
      > 
-     > # Four DAG estimation
-     > dag1 <- SEMdag(ig, X, LO="TO")
-     WARNING: input graph is not acyclic !
-      Applying graph -> DAG conversion...
-     DAG conversion : TRUE
-     Node Linear Ordering with TO setting
-     
-     > dag2 <- SEMdag(ig, X, LO="TL")
-     WARNING: input graph is not acyclic !
-      Applying graph -> DAG conversion...
-     DAG conversion : TRUE
-     Node Linear Ordering with TL setting
-     
-     Error in l2[[L]] : subscript out of bounds
-     Calls: SEMdag -> getParents -> buildLevels
+     > ### ** Examples
+     > 
+     > # Simulate Datasets
+     > one <- sim.fluency(10)
+     > two <- sim.fluency(10)
+     > 
+     > # Compute similarity matrix
+     > cos1 <- similarity(one, method = "cosine")
+     > cos2 <- similarity(two, method = "cosine")
+     > 
+     > # Compute networks
+     > net1 <- TMFG(cos1)
+     > net2 <- TMFG(cos2)
+     > ## Don't show: 
+     > rw.results <- randwalk(net1, net2, iter = 10, cores = 2)
+     Error in serverSocket(port = port) : 
+       creation of server socket failed: port 11558 cannot be opened
+     Calls: randwalk -> <Anonymous> -> makePSOCKcluster -> serverSocket
      Execution halted
      ```
 
 # sfclust (1.1.0)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/ErickChacon/sfclust>
+* Email: <mailto:erick.chaconmontalvan@wur.nl>
+* GitHub mirror: <https://github.com/cran/sfclust>
 
 Run `revdepcheck::revdep_details(, "sfclust")` for more info
 
@@ -960,47 +964,11 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Execution halted
      ```
 
-# TDApplied (3.0.4)
-
-* : <UNKNOWN>
-
-Run `revdepcheck::revdep_details(, "TDApplied")` for more info
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... [] ERROR
-     ```
-     ...
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     Warning in doTryCatch(return(expr), name, parentenv, handler) :
-       zero-length arrow is of indeterminate angle and so skipped
-     --- finished re-building ‘Speed.Rmd’
-     
-     --- re-building ‘comparing_calcs.Rmd’ using rmarkdown
-     --- finished re-building ‘comparing_calcs.Rmd’
-     
-     --- re-building ‘personalized_analyses.Rmd’ using rmarkdown
-     --- finished re-building ‘personalized_analyses.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘ML_and_Inference.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
-
 # tidygraph (1.3.1)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/thomasp85/tidygraph>
+* Email: <mailto:thomasp85@gmail.com>
+* GitHub mirror: <https://github.com/cran/tidygraph>
 
 Run `revdepcheck::revdep_details(, "tidygraph")` for more info
 
@@ -1078,7 +1046,9 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
 
 # vkR (0.2)
 
-* : <UNKNOWN>
+* GitHub: <https://github.com/Dementiy/vkR>
+* Email: <mailto:dementiy@yandex.ru>
+* GitHub mirror: <https://github.com/cran/vkR>
 
 Run `revdepcheck::revdep_details(, "vkR")` for more info
 
