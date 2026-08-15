@@ -109,8 +109,20 @@ this one
 (0.47 in the first calibrated run: these runners check faster than CRAN
 reports).
 Packages CRAN has no timing for either get the cohort median.
-A package without a reusable baseline is checked twice, so it weighs double,
+Every package is checked twice, so every package weighs double,
 plus a small fixed overhead.
+
+That used to be conditional —
+a package *without* a reusable baseline weighed double,
+one with a baseline weighed single, because the baseline stood in for its old
+check. Now that both halves always run, that condition is simply wrong,
+and wrong in the direction that under-fills whichever shards hold
+the most reusable packages. In run 31879790285 that would have been
+909 packages out of 1011, priced at half of what they cost.
+The factor of two is nominal in any case:
+`check_scale` is fitted from what the last runs measured,
+so what a pair is really worth in wall clock is absorbed there.
+What matters is that every package is priced the same way.
 
 The per-check timeout stays on CRAN's number and is not calibrated:
 `max(REVDEP2_TIMEOUT_MIN_MINUTES, REVDEP2_TIMEOUT_FACTOR × T_total)`.
@@ -969,6 +981,22 @@ checking tests ...          |  checking tests ... ERROR
 Their `00check.diff` is eight lines, all of it the log directory:
 the *logs* agree, and only the objects disagree.
 
+Run 31879790285 finished with the whole set and the split is stark:
+
+- of the **909** packages whose old half came from a reused baseline,
+  **76** were called `newly_broken` — 8.4%;
+- of the **78** that ran a fresh old check, **2** were — 2.6%,
+  and both are real
+  (`cranly` on `eigen_centrality(scale = FALSE)` now being a
+  `deprecate_stop()`, and `vkR`).
+
+29 of the 76 have *identical* counts in both halves,
+which is the parser artefact exactly;
+the other 47 differ, which is a baseline being a result
+from another machine and another CRAN snapshot.
+Both are the same mistake: comparing against something
+that is not this run.
+
 This is why both halves always run now.
 With the pair concurrent the old check costs no wall clock,
 so substituting a baseline bought nothing and cost comparability —
@@ -988,12 +1016,35 @@ Three blocks, each with its own budget rather than sharing one:
   which used to mean downloading the artifact to read a compiler error;
 - the **`.Rout.fail` transcript**, which is the whole test run.
 
-`_R_CHECK_TESTS_NLINES_=0` also widens the check log's own copy
-of a failed test from R's default 13 lines to the complete output —
+and — where the failure was in the examples —
+the **`-Ex.Rout` transcript**, which is the same for them.
+
+`_R_CHECK_TESTS_NLINES_=300` also widens the check log's own copy
+of a failed test from R's default 13 lines —
 thirteen routinely cuts off the failure itself,
 which is both what a reader wants
 and the part the old/new diff has to see to be worth printing.
-`REVDEP2_DETAIL_MAX_LINES` (300) bounds the two transcript blocks.
+Not unlimited, because that text is carried three times over
+(the check log, the diff, the summary)
+and one chatty test would otherwise bury the rest of the shard in all three.
+`REVDEP2_DETAIL_MAX_LINES` (300) bounds the transcript blocks.
+
+Bounding it costs nothing, because the complete transcript is kept beside it.
+R writes `<file>.Rout.fail` for a test file that failed
+and `<pkg>-Ex.Rout` for the examples,
+each the whole thing whatever `_R_CHECK_TESTS_NLINES_` says —
+measured: 521 lines at 13, at 300 and at 0 alike.
+Both are copied into the shard artifact.
+The `-Ex.Rout` one is not a `.fail` file
+and so used to be dropped,
+which left an examples failure with nothing but the check log's excerpt —
+and examples is where most of the interesting failures are.
+
+What is *not* kept: anything at all for a package that came out `ok`
+(its check directory is deleted, deliberately —
+909 of them in run 31879790285),
+and the old half's own `00check.log`,
+which survives only as its half of `00check.diff`.
 
 Every line that reports a package carries its position in the shard
 and an estimate for what is left:

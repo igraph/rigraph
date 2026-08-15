@@ -791,9 +791,22 @@ inform(
   " check times measured by an earlier run"
 )
 
-# Weight: one check of the revdep costs what it is expected to cost here; a
-# package without a reusable baseline is checked twice.
-weight <- ((!reuse) + 1) * check_seconds / 60 + overhead_minutes
+# Weight: every package is checked twice, whether or not a baseline could have
+# been reused.
+#
+# It used to be `((!reuse) + 1) *`: a reusable baseline stood in for the old
+# check, so that package cost one check instead of two. It does not any more.
+# The two halves run concurrently against cascading libraries, so the old check
+# costs no wall clock worth saving, and a baseline is a result from another
+# machine and another CRAN snapshot -- in run 31879790285 that mismatch
+# accounted for 76 of the 78 `newly_broken` packages. Both halves always run
+# now, so pricing the reused ones at half is simply wrong, and wrong in a way
+# that under-fills exactly the shards holding the most of them.
+#
+# The factor of two is nominal: `check_scale` is fitted from what the last runs
+# measured, so whatever it is really worth in wall clock is absorbed there. What
+# matters here is that every package is priced the same way.
+weight <- 2 * check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
 

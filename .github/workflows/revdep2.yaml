@@ -517,11 +517,15 @@ jobs:
       # differences. `_R_CHECK_CRAN_INCOMING_: false` already suppresses it;
       # this says so out loud so `--as-cran` cannot turn it back on.
       _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
-      # The whole test transcript in the check log, not the last 13 lines.
-      # Thirteen is R's default and it routinely cuts off the failure itself,
-      # which is both what a reader wants and the part the old/new diff has to
-      # see to be worth printing.
-      _R_CHECK_TESTS_NLINES_: 0
+      # 300 lines of a failed test transcript in the check log, not R's default
+      # 13 -- thirteen routinely cuts off the failure itself, which is both
+      # what a reader wants and the part the old/new diff has to see to be
+      # worth printing. Not unlimited, because this text is carried in the
+      # check log, in the diff and in the summary, and one chatty test would
+      # otherwise bury the rest of the shard in all three. Nothing is lost by
+      # bounding it: R writes the *complete* transcript to `<file>.Rout.fail`
+      # whatever this is set to, and the shard keeps that file.
+      _R_CHECK_TESTS_NLINES_: 300
 
       # What the driver reads in both of its phases and does not need the
       # runner for. The `runner` context is not available this far up -- only

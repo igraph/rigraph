@@ -807,10 +807,20 @@ for (position in seq_along(runnable)) {
     rcheck <- function(phase) {
       file.path(work, "check", name, phase, paste0(name, ".Rcheck"))
     }
+    # The complete transcripts, so that bounding what goes into the check log
+    # never costs anything. R writes `<file>.Rout.fail` for a test file that
+    # failed and `<pkg>-Ex.Rout` for the examples -- the second one is not a
+    # `.fail` file and so used to be dropped, which left an examples failure
+    # (13 of run 31879790285's 19 timeouts, and both of its genuine
+    # regressions) with nothing to read but the check log's own excerpt.
     for (f in c(
       "00check.log",
       "00install.out",
-      list.files(rcheck("new"), pattern = "[.]Rout[.]fail$", recursive = TRUE)
+      list.files(
+        rcheck("new"),
+        pattern = "[.]Rout[.]fail$|-Ex[.]Rout$",
+        recursive = TRUE
+      )
     )) {
       if (file.exists(file.path(rcheck("new"), f))) {
         file.copy(file.path(rcheck("new"), f), file.path(keep, basename(f)))
@@ -946,18 +956,23 @@ for (entry in entries) {
   )
   append_summary(md_details(title, lines))
 
-  # The check log says what broke; these two say why, and neither of them fits
-  # in it. `00install.out` is where a package that could not be installed
-  # explains itself -- the check log only points at the file, which used to
-  # mean downloading the artifact to read a compiler error. And a `.Rout.fail`
-  # is the whole test transcript, where the check log carries only its tail.
-  # Each gets its own block and its own budget rather than sharing one, or the
-  # tail of the pair would be all anyone saw.
+  # The check log says what broke; these say why, and none of them fits in it.
+  # `00install.out` is where a package that could not be installed explains
+  # itself -- the check log only points at the file, which used to mean
+  # downloading the artifact to read a compiler error. A `.Rout.fail` is a
+  # failed test file's whole transcript and `-Ex.Rout` the examples', where the
+  # check log carries a bounded excerpt. Each gets its own block and its own
+  # budget rather than sharing one, or the tail of the set would be all anyone
+  # saw.
   for (extra in list(
     list(file = "00install.out", what = "installation output"),
     list(
       file = list.files(kept, pattern = "[.]Rout[.]fail$"),
       what = "test output"
+    ),
+    list(
+      file = list.files(kept, pattern = "-Ex[.]Rout$"),
+      what = "example output"
     )
   )) {
     for (f in extra$file) {
