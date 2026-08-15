@@ -1,6 +1,10 @@
 # Check one shard of a revdep2 plan: many reverse dependencies, one job, one
 # shared library.
 #
+# It runs in two phases, `install` and `check`, so that the workflow can put
+# each in its own step and Actions can time them separately; `PHASE=all` runs
+# both in one go, which is what a local invocation wants.
+#
 # The shard installs the union of its packages' dependencies once, then checks
 # each of its packages against both versions of the package under test at the
 # same time: two `R CMD check` runs side by side, against library stacks that
@@ -41,6 +45,8 @@
 #   TIMEOUT_MIN_MINUTES    - floor for that timeout; CRAN's machines are not
 #                            these runners (default: 10)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
+#   PHASE                  - "install", "check", or "all" (default): which half
+#                            of the shard this invocation runs
 
 script_dir <- dirname(sub(
   "--file=",
@@ -71,9 +77,21 @@ package <- plan$package
 
 dir.create(file.path(out_dir, "pkgs"), recursive = TRUE, showWarnings = FALSE)
 manifest_path <- file.path(out_dir, "manifest.ndjson")
-file.create(manifest_path)
 work <- file.path(env_chr("RUNNER_TEMP", tempdir()), "revdep2-work")
 dir.create(work, recursive = TRUE, showWarnings = FALSE)
+
+# Which half of the shard this invocation runs. The workflow calls the driver
+# twice so that Actions times the install and the checks separately; `all` is
+# for running the whole shard in one process, which is what a local invocation
+# wants. The install leaves `install-state.json` behind and the checks read it,
+# so the split costs one small file and repeats nothing.
+phase <- env_chr("PHASE", "all")
+if (!phase %in% c("all", "install", "check")) {
+  stop("PHASE must be one of \"all\", \"install\", \"check\"", call. = FALSE)
+}
+do_install <- phase %in% c("all", "install")
+do_check <- phase %in% c("all", "check")
+install_state <- file.path(work, "install-state.json")
 
 inform(
   "Shard ",
@@ -100,7 +118,9 @@ for (p in shard$packages) {
       t_total = p$t_total %||% 0,
       dep_fingerprint = p$dep_fingerprint,
       baseline_planned = isTRUE(p$baseline),
-      baseline_reused = FALSE,
+      # Whether the old check reproduced the baseline this run was offered.
+      # NA when there was none to compare against.
+      baseline_agrees = NA,
       result = "deferred",
       status = "",
       status_old = "",
@@ -135,108 +155,6 @@ counts <- function(x) {
 
 # ---------------------------------------------------------------- install ----
 
-install <- unlist(shard$install, use.names = FALSE)
-
-# What is already built, unpacked into the library pak installs into: this
-# run's own preflight library first -- it is the freshest there is, and
-# without it every shard would rebuild what the preflight compiled minutes
-# ago -- then the earlier runs the plan picked, for whatever the preflight
-# could not supply. pak still resolves the whole set afterwards; the point is
-# to skip *building* what has not changed, not to skip resolving it.
-lib <- .libPaths()[[1]]
-restore_started <- Sys.time()
-restored <- c(
-  restore_local_library(env_chr("LIB_DIR"), lib, install),
-  restore_prebuilt(plan, lib, install)
-)
-restore_seconds <- elapsed(restore_started)
-inform(
-  length(restored),
-  " dependency binaries restored, ",
-  length(install) - length(restored),
-  " left to pak"
-)
-
-# With a restored library, `upgrade = FALSE` would freeze whatever version the
-# donor happened to hold; the plan's dependency fingerprints are computed from
-# CRAN *now*, so the library has to follow CRAN now.
-upgrade <- length(restored) > 0
-
-# The pak cache this shard restored was saved by the preflight, so a metadata
-# database broken there arrives here intact -- which is how run 31282820357
-# turned one bad preflight into sixty shards that installed nothing and
-# reported every one of their packages as a depfail. Asking pak what it can
-# see costs seconds, and a shard that cannot see CRAN is worth saying out loud
-# rather than working around.
-if (identical(ensure_metadata(sprintf("Shard %d", shard_index)), "broken")) {
-  inform("pak cannot see CRAN here; every check will be a depfail")
-}
-
-# In dependency order, a hundred at a time, for the same reason the preflight
-# does it: one pak call for the whole set is one resolution of the whole set,
-# and that is the part that stops degrading gracefully as the set grows. A
-# shard's union is a fraction of the preflight's, but it is the same call.
-chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
-chunks <- install_chunks(install, cran_db(), chunk_size)
-inform(
-  "Installing ",
-  length(install),
-  " dependencies in ",
-  length(chunks),
-  " chunk(s) of at most ",
-  chunk_size,
-  ", dependencies first"
-)
-install_started <- Sys.time()
-# The deadline is the shard's own: an install that runs into it leaves no time
-# to check anything, so it stops and lets the checks report what they can
-# rather than being cancelled with the job.
-bulk_ok <- install_in_chunks(
-  chunks,
-  lib = lib,
-  upgrade = upgrade,
-  deadline = deadline
-)
-if (!bulk_ok) {
-  for (p in install) {
-    if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
-      next
-    }
-    run <- pak_install(
-      p,
-      lib = lib,
-      upgrade = upgrade,
-      timeout_seconds = install_timeout_seconds(),
-      label = paste("installing", p)
-    )
-    if (!run$ok) {
-      inform("Could not install ", p, ": ", run$message)
-    }
-  }
-}
-
-# After the installs and before the first check: pak has covered whatever it
-# installed itself, so what is left is exactly the restored packages -- this
-# run's preflight library and the plan's donors. A shard has no load test, so
-# an unmet system requirement here would surface as a check failure blamed on
-# the revdep.
-ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
-
-install_seconds <- elapsed(install_started)
-inform(
-  "Dependencies ready after ",
-  round(install_seconds / 60, 1),
-  " min (",
-  round(restore_seconds / 60, 1),
-  " min unpacking prebuilt)"
-)
-
-installed <- rownames(utils::installed.packages())
-our_version <- function() {
-  tryCatch(as.character(utils::packageVersion(package)), error = function(e) {
-    NA_character_
-  })
-}
 # The two versions cascade rather than replace each other.
 #
 # `R_LIBS` is a search path, so a check can name a library holding exactly one
@@ -245,46 +163,189 @@ our_version <- function() {
 # between the phases, which is what used to force them to run one after the
 # other; now both can run at once against libraries that differ in exactly the
 # package under test.
+lib <- .libPaths()[[1]]
 lib_old <- file.path(work, "lib-old")
 lib_new <- file.path(work, "lib-new")
-dir.create(lib_old, recursive = TRUE, showWarnings = FALSE)
-dir.create(lib_new, recursive = TRUE, showWarnings = FALSE)
 
-# The shared library must not hold the package under test at all, or it would
-# shadow neither and both checks would see whatever the resolver left there.
-unlink(file.path(lib, package), recursive = TRUE)
+if (do_install) {
+  install <- unlist(shard$install, use.names = FALSE)
 
-inform("Installing ", package, " ", plan$cran_version, " into the old library")
-cran_install <- pak_install(
-  package,
-  lib = lib_old,
-  upgrade = FALSE,
-  timeout_seconds = install_timeout_seconds(),
-  label = paste("installing", package)
-)
-if (!cran_install$ok) {
-  stop("Installing the CRAN release of ", package, " failed", call. = FALSE)
-}
-our_cran_version <- as.character(utils::packageVersion(package, lib_old))
-if (!identical(our_cran_version, plan$cran_version)) {
+  # What is already built, unpacked into the library pak installs into: this
+  # run's own preflight library first -- it is the freshest there is, and
+  # without it every shard would rebuild what the preflight compiled minutes
+  # ago -- then the earlier runs the plan picked, for whatever the preflight
+  # could not supply. pak still resolves the whole set afterwards; the point is
+  # to skip *building* what has not changed, not to skip resolving it.
+  restore_started <- Sys.time()
+  restored <- c(
+    restore_local_library(env_chr("LIB_DIR"), lib, install),
+    restore_prebuilt(plan, lib, install)
+  )
+  restore_seconds <- elapsed(restore_started)
   inform(
-    "Note: old checks run against ",
-    our_cran_version,
-    " (the repositories lag CRAN, the plan expected ",
+    length(restored),
+    " dependency binaries restored, ",
+    length(install) - length(restored),
+    " left to pak"
+  )
+
+  # With a restored library, `upgrade = FALSE` would freeze whatever version the
+  # donor happened to hold; the plan's dependency fingerprints are computed from
+  # CRAN *now*, so the library has to follow CRAN now.
+  upgrade <- length(restored) > 0
+
+  # The pak cache this shard restored was saved by the preflight, so a metadata
+  # database broken there arrives here intact -- which is how run 31282820357
+  # turned one bad preflight into sixty shards that installed nothing and
+  # reported every one of their packages as a depfail. Asking pak what it can
+  # see costs seconds, and a shard that cannot see CRAN is worth saying out loud
+  # rather than working around.
+  if (identical(ensure_metadata(sprintf("Shard %d", shard_index)), "broken")) {
+    inform("pak cannot see CRAN here; every check will be a depfail")
+  }
+
+  # In dependency order, a hundred at a time, for the same reason the preflight
+  # does it: one pak call for the whole set is one resolution of the whole set,
+  # and that is the part that stops degrading gracefully as the set grows. A
+  # shard's union is a fraction of the preflight's, but it is the same call.
+  chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+  chunks <- install_chunks(install, cran_db(), chunk_size)
+  inform(
+    "Installing ",
+    length(install),
+    " dependencies in ",
+    length(chunks),
+    " chunk(s) of at most ",
+    chunk_size,
+    ", dependencies first"
+  )
+  install_started <- Sys.time()
+  # The deadline is the shard's own: an install that runs into it leaves no time
+  # to check anything, so it stops and lets the checks report what they can
+  # rather than being cancelled with the job.
+  bulk_ok <- install_in_chunks(
+    chunks,
+    lib = lib,
+    upgrade = upgrade,
+    deadline = deadline
+  )
+  if (!bulk_ok) {
+    for (p in install) {
+      if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
+        next
+      }
+      run <- pak_install(
+        p,
+        lib = lib,
+        upgrade = upgrade,
+        timeout_seconds = install_timeout_seconds(),
+        label = paste("installing", p)
+      )
+      if (!run$ok) {
+        inform("Could not install ", p, ": ", run$message)
+      }
+    }
+  }
+
+  # After the installs and before the first check: pak has covered whatever it
+  # installed itself, so what is left is exactly the restored packages -- this
+  # run's preflight library and the plan's donors. A shard has no load test, so
+  # an unmet system requirement here would surface as a check failure blamed on
+  # the revdep.
+  ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
+
+  install_seconds <- elapsed(install_started)
+  inform(
+    "Dependencies ready after ",
+    round(install_seconds / 60, 1),
+    " min (",
+    round(restore_seconds / 60, 1),
+    " min unpacking prebuilt)"
+  )
+
+  dir.create(lib_old, recursive = TRUE, showWarnings = FALSE)
+  dir.create(lib_new, recursive = TRUE, showWarnings = FALSE)
+
+  # The shared library must not hold the package under test at all, or it would
+  # shadow neither and both checks would see whatever the resolver left there.
+  unlink(file.path(lib, package), recursive = TRUE)
+
+  inform(
+    "Installing ",
+    package,
+    " ",
     plan$cran_version,
-    ")"
+    " into the old library"
+  )
+  cran_install <- pak_install(
+    package,
+    lib = lib_old,
+    upgrade = FALSE,
+    timeout_seconds = install_timeout_seconds(),
+    label = paste("installing", package)
+  )
+  if (!cran_install$ok) {
+    stop("Installing the CRAN release of ", package, " failed", call. = FALSE)
+  }
+  our_cran_version <- as.character(utils::packageVersion(package, lib_old))
+  if (!identical(our_cran_version, plan$cran_version)) {
+    inform(
+      "Note: old checks run against ",
+      our_cran_version,
+      " (the repositories lag CRAN, the plan expected ",
+      plan$cran_version,
+      ")"
+    )
+  }
+
+  binary <- file.path(pkg_dir, meta$binary)
+  inform("Installing dev binary ", basename(binary), " into the new library")
+  if (
+    system2(
+      "R",
+      c("CMD", "INSTALL", "-l", shQuote(lib_new), shQuote(binary))
+    ) !=
+      0
+  ) {
+    stop("Installing the prebuilt dev binary failed", call. = FALSE)
+  }
+  our_dev_version <- as.character(utils::packageVersion(package, lib_new))
+
+  # What the check phase needs to know about this one, and what the timings at
+  # the end report. Everything else it can work out for itself from the library
+  # it finds on disk.
+  write_json(
+    list(
+      install_packages = length(install),
+      restored = length(restored),
+      restore_seconds = restore_seconds,
+      install_seconds = install_seconds,
+      our_cran_version = our_cran_version,
+      our_dev_version = our_dev_version
+    ),
+    install_state
   )
 }
 
-binary <- file.path(pkg_dir, meta$binary)
-inform("Installing dev binary ", basename(binary), " into the new library")
-if (
-  system2("R", c("CMD", "INSTALL", "-l", shQuote(lib_new), shQuote(binary))) !=
-    0
-) {
-  stop("Installing the prebuilt dev binary failed", call. = FALSE)
+if (!do_check) {
+  inform("Install phase complete; the check phase runs as its own step")
+  quit(save = "no", status = 0)
 }
-our_dev_version <- as.character(utils::packageVersion(package, lib_new))
+
+if (!file.exists(install_state)) {
+  stop(
+    "No install state in ",
+    work,
+    ": the install phase did not finish",
+    call. = FALSE
+  )
+}
+installed_state <- read_json(install_state)
+our_cran_version <- installed_state$our_cran_version
+our_dev_version <- installed_state$our_dev_version
+invisible(file.create(manifest_path))
+
+installed <- rownames(utils::installed.packages())
 inform(sprintf(
   "Checking old (%s) and new (%s) concurrently, two at a time per package",
   our_cran_version,
@@ -391,6 +452,66 @@ out_of_time <- function(entry) {
 # The timeout is coreutils' rather than rcmdcheck's, which is what makes the
 # distinction reliable: exit 124 is the deadline, anything else is the check
 # saying something.
+# The check log with this run's incidentals taken out of it.
+#
+# Two things differ between the halves for reasons that have nothing to do with
+# the package:
+#
+#   * the paths. The libraries cascade, so they differ by construction --
+#     `.../lib-old/...` against `.../lib-new/...` -- and so do the two check
+#     directories, which the log names in its first line and quotes in every
+#     "see ... for details".
+#   * the timings. `--as-cran` sets `_R_CHECK_TIMINGS_`, so every stage slower
+#     than ten seconds prints its own `[user/elapsed]` pair, and two checks
+#     racing each other for the same four cores never agree on those. A run of
+#     rphylopic against the *same* igraph on both sides differed in exactly two
+#     lines: the log directory, and `[14s/12s]` against `[13s/11s]`.
+#
+# Both matter twice. `compare_checks()` matches issues by their text, so a
+# difference in the first line of an issue makes an issue both halves have look
+# like a new one; and the diff between the halves is only worth printing if two
+# identical results produce an empty one.
+#
+# Nothing else is touched: a difference anywhere but here is exactly what this
+# workflow exists to find.
+neutral_log <- function(path, name) {
+  lines <- readLines(path, warn = FALSE)
+  for (from in c(lib_old, lib_new, file.path(work, "check", name))) {
+    lines <- gsub(from, "<lib>", lines, fixed = TRUE)
+  }
+  # The phase also names itself in the .Rcheck path under the work directory.
+  lines <- gsub("<lib>/(old|new)", "<lib>", lines)
+  # `[14s/12s]`, and the one-number form R uses where it has only one.
+  gsub("\\[[0-9.]+s(/[0-9.]+s)?\\]", "[]", lines)
+}
+
+# How much of a package's diff goes into the job log before it is cut off.
+diff_max_lines <- env_num("REVDEP2_DIFF_MAX_LINES", 200)
+
+# How much of an installation or test transcript goes into the job summary.
+# Both are read to find out why something broke, and 80 lines -- the default
+# for the check log, which is a summary of stages -- cuts a compiler error or a
+# testthat run off in the middle.
+detail_max_lines <- env_num("REVDEP2_DETAIL_MAX_LINES", 300)
+
+# The two halves' check logs, as a patch.
+#
+# Both sides are neutralised first, so the paths and the stage timings that
+# differ in every pair are gone and what is left is the package: an empty diff
+# means the dev version changed nothing about this check, however long the log.
+check_diff <- function(name, old_log, new_log) {
+  tmp <- file.path(tempdir(), c("old-00check.log", "new-00check.log"))
+  writeLines(neutral_log(old_log, name), tmp[[1]])
+  writeLines(neutral_log(new_log, name), tmp[[2]])
+  on.exit(unlink(tmp), add = TRUE)
+  suppressWarnings(system2(
+    "diff",
+    shQuote(c("-u", "--label", "old", tmp[[1]], "--label", "new", tmp[[2]])),
+    stdout = TRUE,
+    stderr = NULL
+  ))
+}
+
 check_pair <- function(name) {
   checks_started <<- checks_started + 1L
   work_dir <- file.path(work, "check", name)
@@ -436,7 +557,7 @@ check_pair <- function(name) {
       ))
     } else {
       tryCatch(
-        rcmdcheck::parse_check(log),
+        rcmdcheck::parse_check(text = neutral_log(log, name)),
         error = function(e) {
           simpleError(sprintf(
             "%s check produced no readable result (exit %s): %s",
@@ -464,7 +585,7 @@ check_pair <- function(name) {
   list(old = read_side("old"), new = read_side("new"))
 }
 
-check_failure <- function(name, phase, result) {
+check_failure <- function(name, phase, result, progress) {
   if (isTRUE(attr(result, "timed_out"))) {
     # `timeout`, not `failed`. A check killed by the clock says nothing about
     # the package, and in the old phase it says nothing about our change
@@ -490,11 +611,21 @@ check_failure <- function(name, phase, result) {
       " check timed out (",
       attr(result, "duration"),
       "s)",
-      if (nzchar(step)) paste0(" at ", trimws(step)) else ""
+      if (nzchar(step)) paste0(" at ", trimws(step)) else "",
+      ", ",
+      progress
     )
   } else {
     update(name, result = "error", message = conditionMessage(result))
-    inform(name, ": ", phase, " check errored: ", conditionMessage(result))
+    inform(
+      name,
+      ": ",
+      phase,
+      " check errored: ",
+      conditionMessage(result),
+      ", ",
+      progress
+    )
   }
 }
 
@@ -517,61 +648,102 @@ inform(sprintf(
   "Checking %d package(s), old and new side by side",
   length(runnable)
 ))
-for (name in runnable) {
+# How far along the shard is, on every line that reports a package.
+#
+# A shard runs for hours and its log is read while it runs, so "3/51" answers
+# "is this nearly done?" without counting lines. The estimate answers the
+# question actually being asked, which is when.
+#
+# The plan already priced every package; what it could not know is how this
+# runner would compare. So the remaining packages are priced in the plan's own
+# units and then rescaled by how its estimates have held up here so far --
+# which absorbs both a slow runner and a systematically optimistic model,
+# without either having to be known in advance. Before the first pair finishes
+# there is nothing to rescale by and the plan's number stands.
+planned_done <- 0
+actual_done <- 0
+planned_minutes <- function(name) {
+  max(get(name, envir = state)$weight_minutes %||% 0, 0)
+}
+progress_note <- function(position) {
+  left <- sum(vapply(
+    utils::tail(runnable, length(runnable) - position),
+    planned_minutes,
+    numeric(1)
+  ))
+  scale <- if (planned_done > 0 && actual_done > 0) {
+    actual_done / planned_done
+  } else {
+    1
+  }
+  sprintf(
+    "%d/%d, %s",
+    position,
+    length(runnable),
+    if (left > 0) {
+      paste0("~", format_duration(left * scale * 60), " left")
+    } else {
+      "last one"
+    }
+  )
+}
+
+for (position in seq_along(runnable)) {
+  name <- runnable[[position]]
   entry <- get(name, envir = state)
 
-  # A reusable baseline still stands in for the old check; only the new one is
-  # then run, and it runs alone.
-  reused <- FALSE
-  old <- NULL
-  if (entry$baseline_planned) {
-    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
-    old <- tryCatch(readRDS(rds), error = function(e) NULL)
-    if (!is.null(old)) {
-      saveRDS(old, file.path(pkg_out(name), "old.rds"))
-      donor <- Filter(
-        function(e) identical(e$package, name),
-        read_json(file.path(baseline_dir, "baseline.json"))
-      )
-      update(
-        name,
-        baseline_reused = TRUE,
-        status_old = counts(old),
-        old_checked_at = if (length(donor) > 0) donor[[1]]$checked_at else NA
-      )
-      reused <- TRUE
-      inform(name, ": baseline reused")
-    } else {
-      inform(name, ": planned baseline unavailable, checking fresh")
-    }
-  }
-
   if (out_of_time(entry)) {
-    inform(name, ": deferred (deadline)")
+    inform(name, ": deferred (deadline), ", progress_note(position))
     next
   }
 
+  # Both halves, always. A baseline used to stand in for the old check and
+  # save it; with the pair running concurrently the old check costs no wall
+  # clock at all, and reusing a result from another run means comparing
+  # against a machine, a CRAN snapshot and a dependency tree that are not
+  # this run's. The baseline is still read, but as a second opinion: if it
+  # disagrees with what the old check just produced, that is drift worth
+  # printing rather than a comparison worth trusting.
   pair <- check_pair(name)
+  old <- pair$old
   new <- pair$new
-  if (!reused) {
-    old <- pair$old
-  }
+
+  # What this one was priced at against what it cost, which is what prices the
+  # rest. A timed-out check counts too: the clock really did spend it.
+  planned_done <- planned_done + planned_minutes(name)
+  actual_done <- actual_done + (attr(new, "duration") %||% 0) / 60
+  progress <- progress_note(position)
 
   if (inherits(old, "error")) {
-    check_failure(name, "old", old)
+    check_failure(name, "old", old, progress)
     next
   }
-  if (!reused) {
-    saveRDS(old, file.path(pkg_out(name), "old.rds"))
-    update(
-      name,
-      status_old = counts(old),
-      t_old = attr(old, "duration"),
-      old_checked_at = now_utc()
-    )
+  saveRDS(old, file.path(pkg_out(name), "old.rds"))
+  update(
+    name,
+    status_old = counts(old),
+    t_old = attr(old, "duration"),
+    old_checked_at = now_utc()
+  )
+
+  if (entry$baseline_planned) {
+    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
+    baseline <- tryCatch(readRDS(rds), error = function(e) NULL)
+    if (!is.null(baseline)) {
+      agrees <- identical(counts(baseline), counts(old))
+      update(name, baseline_agrees = agrees)
+      if (!agrees) {
+        inform(sprintf(
+          "%s: the baseline said %s, the old check now says %s",
+          name,
+          counts(baseline),
+          counts(old)
+        ))
+      }
+    }
   }
   if (inherits(new, "error")) {
-    check_failure(name, "new", new)
+    check_failure(name, "new", new, progress)
     next
   }
   saveRDS(new, file.path(pkg_out(name), "new.rds"))
@@ -595,6 +767,11 @@ for (name in runnable) {
       result = classify_status(cmp$status, new_issues),
       status = cmp$status,
       status_new = counts(new),
+      # The pair's wall clock, charged to both halves: they ran side by side,
+      # so neither one's own time is separable from the other's. It used to be
+      # recorded only where the comparison failed, which left `t_new` null for
+      # every package that compared -- that is, for all of them.
+      t_new = attr(new, "duration"),
       new_issues = new_issues,
       # An install failure or a timeout leaves nothing to compare, so the
       # result is only "failed"; say which one it was.
@@ -612,7 +789,9 @@ for (name in runnable) {
     entry$status_new,
     ", ",
     attr(new, "duration"),
-    "s for the pair)"
+    "s for the pair, ",
+    progress,
+    ")"
   )
 
   # The parsed results carry everything the reports need; raw check output is
@@ -628,10 +807,20 @@ for (name in runnable) {
     rcheck <- function(phase) {
       file.path(work, "check", name, phase, paste0(name, ".Rcheck"))
     }
+    # The complete transcripts, so that bounding what goes into the check log
+    # never costs anything. R writes `<file>.Rout.fail` for a test file that
+    # failed and `<pkg>-Ex.Rout` for the examples -- the second one is not a
+    # `.fail` file and so used to be dropped, which left an examples failure
+    # (13 of run 31879790285's 19 timeouts, and both of its genuine
+    # regressions) with nothing to read but the check log's own excerpt.
     for (f in c(
       "00check.log",
       "00install.out",
-      list.files(rcheck("new"), pattern = "[.]Rout[.]fail$", recursive = TRUE)
+      list.files(
+        rcheck("new"),
+        pattern = "[.]Rout[.]fail$|-Ex[.]Rout$",
+        recursive = TRUE
+      )
     )) {
       if (file.exists(file.path(rcheck("new"), f))) {
         file.copy(file.path(rcheck("new"), f), file.path(keep, basename(f)))
@@ -640,13 +829,32 @@ for (name in runnable) {
     old_log <- file.path(rcheck("old"), "00check.log")
     new_log <- file.path(rcheck("new"), "00check.log")
     if (file.exists(old_log) && file.exists(new_log)) {
-      diff <- suppressWarnings(system2(
-        "diff",
-        shQuote(c("-u", "--label", "old", old_log, "--label", "new", new_log)),
-        stdout = TRUE,
-        stderr = NULL
-      ))
+      diff <- check_diff(name, old_log, new_log)
       writeLines(diff, file.path(keep, "00check.diff"))
+      # And into the job log, where it is the one thing a reader of the run
+      # actually wants: what the dev version changed about this package, in the
+      # package's own words. Downloading an artifact to find out that a NOTE
+      # gained a line is a poor trade. It is bounded because a package that
+      # fails to install differs in thousands of lines and would bury the rest
+      # of the shard; the whole diff is in the artifact either way.
+      print_group(
+        sprintf("%s: old vs new check log (%d line diff)", name, length(diff)),
+        if (length(diff) == 0) {
+          # Worth saying rather than leaving as an empty block. A package
+          # called `newly_broken` whose two logs are identical once the paths
+          # and the stage timings are out of them is not newly broken; it is
+          # this harness getting it wrong, and this line is how a reader of the
+          # run finds that out without downloading anything.
+          "The two logs are identical apart from paths and stage timings."
+        },
+        head(diff, diff_max_lines),
+        if (length(diff) > diff_max_lines) {
+          sprintf(
+            "[%d more lines; the whole diff is 00check.diff in the shard artifact]",
+            length(diff) - diff_max_lines
+          )
+        }
+      )
     }
     unlink(file.path(work, "check", name), recursive = TRUE)
   }
@@ -680,11 +888,13 @@ write_json(
     index = shard_index,
     packages = length(members),
     checks = checks_started,
-    install_packages = length(install),
-    restored = length(restored),
-    restore_seconds = restore_seconds,
-    install_seconds = install_seconds,
+    install_packages = installed_state$install_packages,
+    restored = installed_state$restored,
+    restore_seconds = installed_state$restore_seconds,
+    install_seconds = installed_state$install_seconds,
     check_seconds = round(check_seconds, 1),
+    # The install phase is its own step now, so this is the check phase's own
+    # wall clock; the two together are what the shard job cost.
     script_seconds = elapsed(script_started),
     started_at = format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     finished_at = now_utc(),
@@ -728,7 +938,8 @@ for (entry in entries) {
   # The reason goes in the title, where `md_details()` cannot tail it away;
   # the body is the check log where there is one, because the reason alone
   # rarely says which check step broke.
-  log <- file.path(out_dir, "pkgs", entry$package, "new-check", "00check.log")
+  kept <- file.path(out_dir, "pkgs", entry$package, "new-check")
+  log <- file.path(kept, "00check.log")
   reason <- gsub("\n", " ", entry$message %||% "")
   lines <- if (file.exists(log)) {
     readLines(log, warn = FALSE)
@@ -737,15 +948,50 @@ for (entry in entries) {
   } else {
     "(no log captured)"
   }
-  append_summary(md_details(
-    sprintf(
-      "<code>%s</code> &mdash; %s%s",
-      entry$package,
-      entry$result,
-      if (nzchar(reason)) paste0(": ", md_escape_html(reason)) else ""
+  title <- sprintf(
+    "<code>%s</code> &mdash; %s%s",
+    entry$package,
+    entry$result,
+    if (nzchar(reason)) paste0(": ", md_escape_html(reason)) else ""
+  )
+  append_summary(md_details(title, lines))
+
+  # The check log says what broke; these say why, and none of them fits in it.
+  # `00install.out` is where a package that could not be installed explains
+  # itself -- the check log only points at the file, which used to mean
+  # downloading the artifact to read a compiler error. A `.Rout.fail` is a
+  # failed test file's whole transcript and `-Ex.Rout` the examples', where the
+  # check log carries a bounded excerpt. Each gets its own block and its own
+  # budget rather than sharing one, or the tail of the set would be all anyone
+  # saw.
+  for (extra in list(
+    list(file = "00install.out", what = "installation output"),
+    list(
+      file = list.files(kept, pattern = "[.]Rout[.]fail$"),
+      what = "test output"
     ),
-    lines
-  ))
+    list(
+      file = list.files(kept, pattern = "-Ex[.]Rout$"),
+      what = "example output"
+    )
+  )) {
+    for (f in extra$file) {
+      path <- file.path(kept, f)
+      if (!file.exists(path)) {
+        next
+      }
+      append_summary(md_details(
+        sprintf(
+          "<code>%s</code> &mdash; %s (<code>%s</code>)",
+          entry$package,
+          extra$what,
+          f
+        ),
+        readLines(path, warn = FALSE),
+        max_lines = detail_max_lines
+      ))
+    }
+  }
 }
 
 inform(

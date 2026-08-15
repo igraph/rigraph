@@ -108,6 +108,10 @@ on:
         description: "Oldest baseline result worth reusing"
         type: string
         default: ""
+      not-cran:
+        description: "Run the tests CRAN skips: sets NOT_CRAN=true, so skip_on_cran() does not skip (slower, noisier, and includes packages' own spelling tests)"
+        type: boolean
+        default: false
       dry-run:
         description: "Plan only: report the shards and reuse decisions, start no checks"
         type: boolean
@@ -150,6 +154,13 @@ env:
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
   REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
+  # Whether the shards behave like CRAN's own check machines or like a
+  # developer's. `skip_on_cran()` reads `NOT_CRAN`, and `r-lib/actions/setup-r`
+  # sets it to `true` -- which is why packages' own `tests/spelling.R` runs
+  # here at all. CRAN-like is the default: the point of this workflow is to
+  # find what a released igraph would break, and a test CRAN never runs cannot
+  # break on CRAN. Dispatch with `not-cran: true` to widen the net again.
+  REVDEP2_NOT_CRAN: ${{ inputs.not-cran && 'true' || 'false' }}
   # Prebuilt dependency libraries of earlier runs: how many runs may donate one
   # (0 turns reuse off), and how old a library may be before its binaries are
   # no longer trusted against the current runner image.
@@ -492,6 +503,39 @@ jobs:
       _R_CHECK_SYSTEM_CLOCK_: false
       _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
       _R_CHECK_FORCE_SUGGESTS_: false
+      # `--as-cran` turns on `--run-donttest`, which is the most expensive
+      # thing a check does and the least useful thing for this workflow:
+      # `\donttest{}` is where packages put the examples too slow to run on
+      # CRAN, so it is where the runners spend hours and where the timeouts
+      # land -- varPro's old half was killed at 1200s in "checking examples
+      # with --run-donttest". `\dontrun{}` is off unless asked for, and stays
+      # off. What is left is every example a package expects to run.
+      _R_CHECK_DONTTEST_EXAMPLES_: false
+      # No spell checking. It cannot tell us anything about igraph -- a
+      # misspelling in a revdep's DESCRIPTION is the same misspelling in both
+      # halves -- and it is noise in a log that is read to find real
+      # differences. `_R_CHECK_CRAN_INCOMING_: false` already suppresses it;
+      # this says so out loud so `--as-cran` cannot turn it back on.
+      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
+      # 300 lines of a failed test transcript in the check log, not R's default
+      # 13 -- thirteen routinely cuts off the failure itself, which is both
+      # what a reader wants and the part the old/new diff has to see to be
+      # worth printing. Not unlimited, because this text is carried in the
+      # check log, in the diff and in the summary, and one chatty test would
+      # otherwise bury the rest of the shard in all three. Nothing is lost by
+      # bounding it: R writes the *complete* transcript to `<file>.Rout.fail`
+      # whatever this is set to, and the shard keeps that file.
+      _R_CHECK_TESTS_NLINES_: 300
+
+      # What the driver reads in both of its phases and does not need the
+      # runner for. The `runner` context is not available this far up -- only
+      # in a step -- so the directories are set once in `$GITHUB_ENV` below.
+      GH_TOKEN: ${{ github.token }}
+      SHARD: ${{ matrix.shard }}
+      TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '20' }}
+      DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
+      PKG_SYSREQS: true
 
     steps:
       - name: Check out the ref under test
@@ -573,27 +617,55 @@ jobs:
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/baseline
 
-      - name: Check the shard
+      # Both driver steps need these and neither can name them itself: the
+      # `runner` context does not reach the job's `env`, so they are set here
+      # for every step that follows.
+      #
+      # `NOT_CRAN` is here rather than in the job's `env` because
+      # `r-lib/actions/setup-r` writes `NOT_CRAN=true` into `$GITHUB_ENV`, and
+      # a later write is what reliably overrides an earlier one. This step runs
+      # after it and before both driver steps.
+      - name: Point the driver at this runner's directories
         env:
-          # To fetch the prebuilt libraries of the runs the plan picked.
-          GH_TOKEN: ${{ github.token }}
-          SHARD: ${{ matrix.shard }}
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          PKG_DIR: ${{ runner.temp }}/pkg
-          LIB_DIR: ${{ runner.temp }}/lib
-          BASELINE_DIR: ${{ runner.temp }}/baseline
-          OUT_DIR: ${{ runner.temp }}/results
-          TIMEOUT_FACTOR: ${{ env.REVDEP2_TIMEOUT_FACTOR }}
-          TIMEOUT_MIN_MINUTES: ${{ env.REVDEP2_TIMEOUT_MIN_MINUTES }}
-          DEADLINE_MINUTES: ${{ env.REVDEP2_DEADLINE_MINUTES }}
-          PKG_SYSREQS: true
-          # The same small `/tmp` as the preflight, and a shard builds source
-          # packages and unpacks check directories into it for hours.
-          TMPDIR: ${{ runner.temp }}/tmp
-          TMP: ${{ runner.temp }}/tmp
-          TEMP: ${{ runner.temp }}/tmp
+          NOT_CRAN_INPUT: ${{ env.REVDEP2_NOT_CRAN }}
         run: |
           mkdir -p "${RUNNER_TEMP}/tmp"
+          {
+            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
+            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
+            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
+            echo "LIB_DIR=${RUNNER_TEMP}/lib"
+            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
+            echo "OUT_DIR=${RUNNER_TEMP}/results"
+            # The same small `/tmp` as the preflight, and a shard builds source
+            # packages and unpacks check directories into it for hours.
+            echo "TMPDIR=${RUNNER_TEMP}/tmp"
+            echo "TMP=${RUNNER_TEMP}/tmp"
+            echo "TEMP=${RUNNER_TEMP}/tmp"
+          } >> "${GITHUB_ENV}"
+        shell: bash
+
+      # Two steps, one driver. The install is minutes to an hour and the checks
+      # are hours, and as one step the run page could only report their sum --
+      # so "shard 14 took five hours" said nothing about whether it spent them
+      # unpacking dependencies or checking packages, and the install times turn
+      # out to vary by a lot between shards. Split, each is timed by Actions
+      # itself and readable at a glance from the job page.
+      #
+      # The phases share the job's environment and the work directory; the
+      # install leaves the libraries and a note of what it cost behind, and the
+      # check picks both up. Nothing is done twice.
+      - name: Install packages
+        env:
+          PHASE: install
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      - name: Check the shard
+        env:
+          PHASE: check
+        run: |
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 

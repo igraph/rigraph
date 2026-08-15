@@ -38,13 +38,15 @@ preflight (1 job; a dry run stops before it; failure does not stop the run)
          warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
-  ├─ unpack this run's preflight library, then the plan's donors
-  ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
-  ├─ install the system requirements of what was unpacked, not installed
-  ├─ build two one-package libraries: CRAN release, dev binary
-  ├─ per package, both checks at once against those cascading libraries
-  │    (a reusable baseline stands in for the old half)
-  └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
+  ├─ "Install packages" step (PHASE=install)
+  │    ├─ unpack this run's preflight library, then the plan's donors
+  │    ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
+  │    ├─ install the system requirements of what was unpacked, not installed
+  │    └─ build two one-package libraries: CRAN release, dev binary
+  └─ "Check the shard" step (PHASE=check)
+       ├─ per package, both checks at once against those cascading libraries
+       │    (a reusable baseline stands in for the old half)
+       └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
 collect   (1 job, if: always() past plan/build/preflight)
   ├─ merge all shard attempts (+ carried results of a retried run)
@@ -61,6 +63,20 @@ The `ref` input checks any branch, tag or commit SHA:
 the dispatch itself can only target a branch or tag,
 so arbitrary SHAs travel through the input,
 with the one constraint that the tree must contain these scripts.
+
+The shard's two steps are one driver called twice, `PHASE=install` and
+`PHASE=check` (`PHASE=all` runs both in one process, which is what a local
+invocation wants).
+Splitting them is a reporting change and nothing else:
+the install is minutes to an hour, the checks are hours,
+and as one step the run page could only report their sum —
+so "shard 14 took five hours" said nothing about
+whether it spent them unpacking dependencies or checking packages,
+and the install times turn out to vary a lot between shards.
+The phases share the job environment and the work directory;
+the install leaves the libraries and an `install-state.json`
+of what it cost behind, and the check phase picks both up.
+Nothing is done twice.
 
 A failing check never fails anything:
 `fail-fast: false` isolates shard-level accidents,
@@ -93,8 +109,20 @@ this one
 (0.47 in the first calibrated run: these runners check faster than CRAN
 reports).
 Packages CRAN has no timing for either get the cohort median.
-A package without a reusable baseline is checked twice, so it weighs double,
+Every package is checked twice, so every package weighs double,
 plus a small fixed overhead.
+
+That used to be conditional —
+a package *without* a reusable baseline weighed double,
+one with a baseline weighed single, because the baseline stood in for its old
+check. Now that both halves always run, that condition is simply wrong,
+and wrong in the direction that under-fills whichever shards hold
+the most reusable packages. In run 31879790285 that would have been
+909 packages out of 1011, priced at half of what they cost.
+The factor of two is nominal in any case:
+`check_scale` is fitted from what the last runs measured,
+so what a pair is really worth in wall clock is absorbed there.
+What matters is that every package is priced the same way.
 
 The per-check timeout stays on CRAN's number and is not calibrated:
 `max(REVDEP2_TIMEOUT_MIN_MINUTES, REVDEP2_TIMEOUT_FACTOR × T_total)`.
@@ -887,9 +915,201 @@ into the same object `rcmdcheck()` used to return,
 so the counts, `compare_checks()` and the manifest are unchanged.
 
 For a package that is not ok, what is kept is the **difference** between the
-two logs (`00check.diff`) next to the new one.
+two logs (`00check.diff`) next to the new one,
+and the same diff is printed into the job log
+under a foldable `::group::` heading.
 The logs are thousands of lines that are identical in both,
-and the handful that are not is the entire point.
+and the handful that are not is the entire point —
+so the run page can carry them for every package that is not ok
+without anyone downloading an artifact to find out
+that a NOTE gained a line.
+`REVDEP2_DIFF_MAX_LINES` bounds what is printed (200 by default);
+the whole diff is always in the artifact.
+
+### What the halves differ in that is not the package
+
+A diff is only worth printing if two identical results produce an empty one,
+and two concurrent checks do not naturally produce identical logs.
+Two things differ for reasons that have nothing to do with the package:
+
+- **The paths.** The libraries cascade, so they differ by construction —
+  `.../lib-old/...` against `.../lib-new/...` — and so do the two check
+  directories, which the log names in its first line
+  and quotes in every "see … for details".
+- **The stage timings.** `--as-cran` sets `_R_CHECK_TIMINGS_`,
+  so every stage slower than ten seconds
+  prints its own `[user/elapsed]` pair,
+  and two checks racing each other for the same four cores
+  never agree on those.
+
+Both are removed before the log is parsed *and* before it is diffed.
+Measured, not assumed: rphylopic checked against the *same* igraph
+on both sides differed in exactly two lines —
+the log directory, and `[14s/12s]` against `[13s/11s]` —
+and in none once neutralised.
+
+This is hygiene rather than a fix for anything observed:
+`compare_checks()` hashes only the *first line* of each issue,
+so noise further down could never have mattered to it.
+What it buys is the diff: an empty one now means
+the dev version changed nothing about this check.
+A package called `newly_broken` whose two logs are identical
+is this harness getting it wrong, and the job log says so in as many words.
+
+### Why a reused baseline made packages look newly broken
+
+Run 31879790285's shard 9 reported `rphylopic`, `HospitalNetwork` and `orthGS`
+as `newly_broken` with the same `1E 0W 0N` in both halves.
+All three had a **reused baseline** standing in for the old half.
+All eight packages in that shard that ran a fresh old check were `ok`.
+
+The two halves were parsed by two different parsers.
+A baseline from an earlier run was produced by `rcmdcheck::rcmdcheck()`,
+which parses the *stream* as `R CMD check` writes it;
+this run's half is `parse_check()` on the finished `00check.log`,
+where R has gone back and appended the status to the line it opened.
+The same failing test therefore renders two ways:
+
+```
+checking tests ...          |  checking tests ... ERROR
+  Running 'testthat.R'      |    Running 'testthat.R'
+ ERROR                      |  Running the tests in ... failed.
+```
+
+`compare_checks()` hashes the first line, so those are two different issues —
+`81f6423…` against `23e57fe…` — and the new one matches nothing in the old.
+Their `00check.diff` is eight lines, all of it the log directory:
+the *logs* agree, and only the objects disagree.
+
+Run 31879790285 finished with the whole set and the split is stark:
+
+- of the **909** packages whose old half came from a reused baseline,
+  **76** were called `newly_broken` — 8.4%;
+- of the **78** that ran a fresh old check, **2** were — 2.6%,
+  and both are real
+  (`cranly` on `eigen_centrality(scale = FALSE)` now being a
+  `deprecate_stop()`, and `vkR`).
+
+29 of the 76 have *identical* counts in both halves,
+which is the parser artefact exactly;
+the other 47 differ, which is a baseline being a result
+from another machine and another CRAN snapshot.
+Both are the same mistake: comparing against something
+that is not this run.
+
+This is why both halves always run now.
+With the pair concurrent the old check costs no wall clock,
+so substituting a baseline bought nothing and cost comparability —
+and a baseline is a result from another run anyway:
+another machine, another CRAN snapshot, another dependency tree.
+It is still read as a second opinion, and when it disagrees
+with the old check just run, the shard says so
+and records `baseline_agrees` in the manifest.
+
+### What the summary shows for a package that broke
+
+Three blocks, each with its own budget rather than sharing one:
+
+- the **check log**, which says *what* broke and at which stage;
+- **`00install.out`**, where a package that could not be installed explains
+  itself. The check log only points at the file,
+  which used to mean downloading the artifact to read a compiler error;
+- the **`.Rout.fail` transcript**, which is the whole test run.
+
+and — where the failure was in the examples —
+the **`-Ex.Rout` transcript**, which is the same for them.
+
+`_R_CHECK_TESTS_NLINES_=300` also widens the check log's own copy
+of a failed test from R's default 13 lines —
+thirteen routinely cuts off the failure itself,
+which is both what a reader wants
+and the part the old/new diff has to see to be worth printing.
+Not unlimited, because that text is carried three times over
+(the check log, the diff, the summary)
+and one chatty test would otherwise bury the rest of the shard in all three.
+`REVDEP2_DETAIL_MAX_LINES` (300) bounds the transcript blocks.
+
+Bounding it costs nothing, because the complete transcript is kept beside it.
+R writes `<file>.Rout.fail` for a test file that failed
+and `<pkg>-Ex.Rout` for the examples,
+each the whole thing whatever `_R_CHECK_TESTS_NLINES_` says —
+measured: 521 lines at 13, at 300 and at 0 alike.
+Both are copied into the shard artifact.
+The `-Ex.Rout` one is not a `.fail` file
+and so used to be dropped,
+which left an examples failure with nothing but the check log's excerpt —
+and examples is where most of the interesting failures are.
+
+What is *not* kept: anything at all for a package that came out `ok`
+(its check directory is deleted, deliberately —
+909 of them in run 31879790285),
+and the old half's own `00check.log`,
+which survives only as its half of `00check.diff`.
+
+Every line that reports a package carries its position in the shard
+and an estimate for what is left:
+
+```
+protti: ok (old 0E 0W 0N, new 0E 0W 0N, 1072s for the pair, 1/51, ~5.0 h left)
+```
+
+A shard runs for hours and its log is read while it runs,
+so "is this nearly done?" should not need counting lines,
+and the question actually being asked is *when*.
+
+The plan already priced every package;
+what it could not know is how this runner would compare to its model.
+So the remaining packages are priced in the plan's own units
+and rescaled by how its estimates have held up in this shard so far —
+which absorbs both a slow runner
+and a systematically optimistic model,
+without either having to be known in advance.
+Before the first pair finishes there is nothing to rescale by
+and the plan's number stands, which is why the estimate can move a long way
+on the first package and very little after that.
+
+### Spelling is not checked
+
+It cannot say anything about igraph:
+a misspelling in a revdep's DESCRIPTION is the same misspelling in both halves,
+so it cancels out of every comparison the workflow makes,
+and what is left is noise in a log read to find real differences.
+`_R_CHECK_CRAN_INCOMING_: false` already suppresses it —
+R's spelling stage lives inside `check_CRAN_incoming()` —
+and `_R_CHECK_CRAN_INCOMING_USE_ASPELL_: false` says so out loud
+so that `--as-cran` cannot turn it back on.
+
+A package's *own* `tests/spelling.R` is a different thing.
+Those run because `r-lib/actions/setup-r` sets `NOT_CRAN=true`,
+which is what makes `skip_on_cran()` not skip.
+The shards now set `NOT_CRAN=false` instead,
+so they behave like CRAN's own check machines:
+the point of this workflow is to find what a released igraph would break,
+and a test CRAN never runs cannot break on CRAN.
+That silences the spelling tests
+and every other `skip_on_cran()` test with them —
+a real reduction in what is exercised,
+which is why it is an input rather than a constant.
+Dispatch with `not-cran: true` to widen the net again.
+
+`NOT_CRAN` is written in a step rather than in the job's `env`
+because `setup-r` writes its own value into `$GITHUB_ENV`,
+and a later write is what reliably overrides an earlier one.
+
+### `\donttest` examples are not run
+
+`--as-cran` turns on `--run-donttest`.
+That is the most expensive thing a check does
+and the least useful thing for this workflow:
+`\donttest{}` is where packages put the examples too slow to run on CRAN,
+so it is where the runners spend their hours
+and where the timeouts land —
+varPro's old half was killed at 1200 s
+in `checking examples with --run-donttest`.
+`_R_CHECK_DONTTEST_EXAMPLES_=false` turns it back off.
+`\dontrun{}` is off unless asked for, and stays off.
+What is left is every example a package expects to run,
+which is the part a change to igraph can break.
 
 ### A timeout is not a failure
 
@@ -946,6 +1166,7 @@ at the next `if`.
 | Retry a run | `retry-run` | — | — |
 | One G-th of the revdeps, for a set too big for one run | `part` (`i/G`) | `REVDEP2_PART` | — |
 | Plan only | `dry-run` | — | false |
+| Run the tests CRAN skips (`skip_on_cran()`, spelling tests) | `not-cran` | `REVDEP2_NOT_CRAN` | false |
 | Check-time target per shard, up to one wave | `shard-budget-minutes` | `REVDEP2_SHARD_BUDGET_MINUTES` | 45 |
 | Concurrent shards, and so the wave size — set it to the concurrency the account really has, never more | `max-parallel` | `REVDEP2_MAX_PARALLEL` | 20 |
 | Check minutes one shard may hold, which forces further waves | — | `REVDEP2_SHARD_CAPACITY_MINUTES` | 80% of the deadline |
@@ -971,6 +1192,8 @@ at the next `if`.
 | Per-check timeout factor | — | `REVDEP2_TIMEOUT_FACTOR` | 1.5 × CRAN time |
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
+| Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
+| Transcript lines shown per install/test block in the summary | — | `REVDEP2_DETAIL_MAX_LINES` | 300 |
 
 ## Prior art
 

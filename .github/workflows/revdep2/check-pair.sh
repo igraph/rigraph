@@ -31,6 +31,21 @@ lib_new=$4
 lib_shared=$5
 seconds=$6
 
+# Seconds since the check started, in front of every line it prints.
+#
+# `R CMD check` only reports a stage's own time when it exceeds its threshold,
+# and never for the stage it was killed in -- which is the one worth knowing
+# about. Stamping the stream costs nothing and turns "timed out at * checking
+# examples with --run-donttest" into how long every stage before it took, and
+# how long that one had been running. `EPOCHSECONDS` is a bash builtin, so
+# this spawns nothing per line.
+stamp() {
+  local start=${EPOCHSECONDS} line
+  while IFS= read -r line; do
+    printf '[%5ds] %s\n' "$((EPOCHSECONDS - start))" "${line}"
+  done
+}
+
 check_one() {
   local phase=$1
   local lib=$2
@@ -38,11 +53,12 @@ check_one() {
   mkdir -p "${out}"
   # `timeout` sends TERM at the deadline and KILL a minute later, and R CMD
   # check's own children go with it because it runs in its own process group.
+  # The status is PIPESTATUS[0] because the stamping is downstream of it.
   R_LIBS="${lib}:${lib_shared}" \
     timeout --kill-after=60s "${seconds}s" \
-    R CMD check --no-manual --as-cran --output="${out}" "${tarball}" \
-    > "${out}/driver.log" 2>&1
-  echo $? > "${out}/status"
+    R CMD check --no-manual --as-cran --output="${out}" "${tarball}" 2>&1 |
+    stamp > "${out}/driver.log"
+  echo "${PIPESTATUS[0]}" > "${out}/status"
 }
 
 check_one old "${lib_old}" &
