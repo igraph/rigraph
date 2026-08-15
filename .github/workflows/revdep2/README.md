@@ -879,6 +879,51 @@ the next run's preflight timing is what settles it.
 the failures are re-run singly afterwards to keep their output,
 and there are few of them by construction.
 
+Every tested package gets a line, with what it cost,
+in a collapsed `::group::` sorted slowest first.
+That is ~500 lines the default view never shows,
+against a step that otherwise says nothing at all
+between "load-testing 498 packages" and the summary —
+and it is the only place a package that loads *slowly* appears,
+though every check of anything downstream of it pays that cost again.
+The slowest few are repeated outside the group, where they are read.
+
+### The two halves get a network port each
+
+`parallel` picks its default PSOCK port once, when its namespace loads:
+
+```r
+ran1 <- sample.int(.Machine$integer.max - 1L, 1L) / .Machine$integer.max
+port <- 11000 + 1000 * ((ran1 + unclass(Sys.time())/300) %% 1)
+```
+
+The random term is only random while the RNG stream is.
+Anything that calls `set.seed()` before `parallel` first loads —
+which examples, vignettes and testthat do constantly, for reproducibility —
+makes it deterministic, and both halves draw the same number.
+Measured: three sessions seeded with 42 gave 11181, 11183, 11183,
+against 11005, 11214, 11652 unseeded.
+
+The time term cannot separate them either.
+It sweeps 1000 ports over 300 seconds — 3.3 ports per second —
+so two halves that load `parallel`
+within a third of a second of each other
+land on the same integer port.
+They start together and run the same script, so they do.
+And the choice is made once per *session*, not per cluster,
+so from then on every cluster either half opens races for that one port.
+
+In run 31893156685 that cost `cia` (port 11477) and `TDApplied` (11058),
+both reported `newly_broken` with nothing wrong with them.
+Staggering the halves is not a fix:
+the separation would have to hold at the moment each loads `parallel`,
+the two drift apart by minutes over a check,
+and at 300 seconds the sweep wraps back onto itself.
+`R_PARALLEL_PORT`, 20000 for old and 30000 for new,
+costs nothing that was not already the case —
+R fixes one port per session and reuses it regardless —
+and both are far from R's own 11000–12000 band.
+
 ### A shard that cannot install still reports
 
 An install that overruns used to be given the shard's whole deadline,

@@ -49,21 +49,54 @@ stamp() {
 check_one() {
   local phase=$1
   local lib=$2
+  local port=$3
   local out="${work}/${phase}"
   mkdir -p "${out}"
   # `timeout` sends TERM at the deadline and KILL a minute later, and R CMD
   # check's own children go with it because it runs in its own process group.
   # The status is PIPESTATUS[0] because the stamping is downstream of it.
   R_LIBS="${lib}:${lib_shared}" \
+    R_PARALLEL_PORT="${port}" \
     timeout --kill-after=60s "${seconds}s" \
     R CMD check --no-manual --as-cran --output="${out}" "${tarball}" 2>&1 |
     stamp > "${out}/driver.log"
   echo "${PIPESTATUS[0]}" > "${out}/status"
 }
 
-check_one old "${lib_old}" &
+# A port each, because the two halves would otherwise pick the same one.
+#
+# `parallel` chooses its default PSOCK port once, when its namespace loads:
+#
+#   ran1 <- sample.int(.Machine$integer.max - 1L, 1L) / .Machine$integer.max
+#   port <- 11000 + 1000 * ((ran1 + unclass(Sys.time())/300) %% 1)
+#
+# The random term is drawn from the session's RNG stream, so it is only random
+# while the stream is. Anything that calls `set.seed()` before `parallel` is
+# first loaded -- which examples, vignettes and testthat do constantly, for
+# reproducibility -- makes it deterministic, and both halves then draw the same
+# number. Measured: three sessions seeded with 42 gave 11181, 11183, 11183,
+# against 11005, 11214, 11652 unseeded.
+#
+# The time term cannot separate them either. It sweeps 1000 ports over 300
+# seconds -- 3.3 ports per second -- so two halves that load `parallel` within
+# a third of a second of each other land on the same integer port. They start
+# together and run the same script, so they do. And the choice is made once per
+# session, not per cluster, so from then on *every* cluster either half opens
+# races for that one port.
+#
+# In run 31893156685 that cost `cia` (port 11477) and `TDApplied` (11058),
+# both reported as newly broken having nothing wrong with them. Staggering the
+# halves is not a fix: the separation would have to hold at the moment each
+# loads `parallel`, the two drift apart by minutes over a check, and at 300
+# seconds the sweep wraps back onto itself.
+#
+# Setting the port explicitly costs nothing that was not already the case --
+# R fixes one port per session and reuses it regardless -- and the two ranges
+# are far from R's own 11000-12000 band, so a session that inherits neither
+# cannot wander into either.
+check_one old "${lib_old}" 20000 &
 old_pid=$!
-check_one new "${lib_new}" &
+check_one new "${lib_new}" 30000 &
 new_pid=$!
 
 wait "${old_pid}"
