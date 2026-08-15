@@ -45,7 +45,6 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
   │    └─ build two one-package libraries: CRAN release, dev binary
   └─ "Check the shard" step (PHASE=check)
        ├─ per package, both checks at once against those cascading libraries
-       │    (a reusable baseline stands in for the old half)
        └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
 collect   (1 job, if: always() past plan/build/preflight)
@@ -109,20 +108,24 @@ this one
 (0.47 in the first calibrated run: these runners check faster than CRAN
 reports).
 Packages CRAN has no timing for either get the cohort median.
-Every package is checked twice, so every package weighs double,
-plus a small fixed overhead.
+Every package is checked twice, but the two run at once,
+so a package weighs one pair of checks plus a small fixed overhead.
 
 That used to be conditional —
 a package *without* a reusable baseline weighed double,
 one with a baseline weighed single, because the baseline stood in for its old
-check. Now that both halves always run, that condition is simply wrong,
-and wrong in the direction that under-fills whichever shards hold
-the most reusable packages. In run 31879790285 that would have been
-909 packages out of 1011, priced at half of what they cost.
-The factor of two is nominal in any case:
-`check_scale` is fitted from what the last runs measured,
-so what a pair is really worth in wall clock is absorbed there.
-What matters is that every package is priced the same way.
+check. Now that both halves always run, the condition is gone.
+So is the doubling, and that part is easy to get backwards:
+the two halves run *concurrently*,
+so a package costs the shard the wall clock of the slower one,
+not the sum of both.
+`check_scale` is fitted from exactly that quantity —
+`t_old` and `t_new` are both recorded as the pair's wall clock,
+and the calibration fits `median(seconds / T_total)` from them —
+so the weight already *is* the pair.
+Multiplying by two would price every shard at twice its wall clock,
+which buys twice the shards, each paying its own setup,
+and defers packages at the deadline that would have fit.
 
 The per-check timeout stays on CRAN's number and is not calibrated:
 `max(REVDEP2_TIMEOUT_MIN_MINUTES, REVDEP2_TIMEOUT_FACTOR × T_total)`.
@@ -635,7 +638,8 @@ the report is about *results*, a retry is about *coverage*.
 | A revdep breaks under the dev version | `newly_broken` in manifest and report; the run stays green |
 | The checked ref is a tag or a SHA | the report is not committed; a `::notice::` says so and the artifact still has it |
 | The report cannot be pushed (protection, fork, race) | the step is `continue-on-error`; the run keeps its result |
-| A revdep fails under both versions | `ok` (no *new* problems), visible in the report's tables |
+| A revdep fails the same way under both versions | `ok` (no *new* problems), visible in the report's tables |
+| A revdep fails to *install* under both versions | `failed` — there is nothing to compare |
 | A check times out | `timeout` kills it at `max(floor, factor × its CRAN time)`; reported `timeout`, not `failed`, with the check step it died at |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
@@ -905,7 +909,9 @@ That is worth two things.
 A package's wall clock halves, on a four-core runner
 where one check keeps about one core busy.
 And a package whose old check hangs still gets its new answer,
-where before the old timeout meant the run learnt nothing about it at all.
+where before the old timeout meant the run learnt nothing about it at all —
+the half that finished is saved, with its own check output,
+even though there is no verdict to draw from one side.
 
 The timeout is coreutils' `timeout` rather than rcmdcheck's,
 which makes the distinction reliable:

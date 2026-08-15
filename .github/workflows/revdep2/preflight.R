@@ -80,6 +80,27 @@ chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
 # instead of dying with the job.
 install_deadline <- Sys.time() +
   env_num("REVDEP2_INSTALL_DEADLINE_MINUTES", 210) * 60
+# And a deadline for the whole job, because stopping the *installs* early only
+# helps if what follows them is bounded too. After `install_deadline` come the
+# sysreqs survey, some seventy load batches at up to `REVDEP2_LOAD_TIMEOUT_
+# MINUTES` each, a per-package retry of every failure, and a rebuild loop of
+# up to `REVDEP2_INSTALL_TIMEOUT_MINUTES` per stale binary -- whose worst case
+# is far past the job's own `timeout-minutes: 300`. Reaching that means the
+# library is never packed and `revdep2-lib` is never uploaded, so every shard
+# rebuilds from scratch: the one outcome this job exists to prevent.
+job_deadline <- Sys.time() +
+  env_num("REVDEP2_JOB_DEADLINE_MINUTES", 270) * 60
+out_of_time <- function(what) {
+  if (Sys.time() <= job_deadline) {
+    return(FALSE)
+  }
+  inform(
+    "Past the job deadline; ",
+    what,
+    " stops here so the library is packed"
+  )
+  TRUE
+}
 chunks <- install_chunks(install_union, cran_db(), chunk_size)
 inform(
   "Preflight: installing ",
@@ -218,11 +239,17 @@ load_batch <- function(pkgs) {
 load_failures <- list()
 chunks <- split(installed, ceiling(seq_along(installed) / 40))
 for (chunk in chunks) {
+  if (out_of_time("the load test")) {
+    break
+  }
   first <- load_batch(chunk)
   if (length(first$failed) == 0) {
     next
   }
   for (p in first$failed) {
+    if (out_of_time("the load test")) {
+      break
+    }
     single <- load_batch(p)
     if (length(single$failed) > 0) {
       load_failures[[p]] <- if (isTRUE(single$timed_out)) {

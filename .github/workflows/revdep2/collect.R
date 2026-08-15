@@ -145,7 +145,9 @@ for (shard in plan$shards %||% list()) {
       t_total = p$t_total %||% 0,
       dep_fingerprint = p$dep_fingerprint,
       baseline_planned = isTRUE(p$baseline),
-      baseline_reused = FALSE,
+      # Matches the shard's own entry shape; `baseline_reused` was dropped when
+      # both halves became mandatory, and nothing sets it any more.
+      baseline_agrees = NA,
       result = "missing",
       status = "",
       status_old = "",
@@ -431,6 +433,25 @@ if (has_revdepcheck) {
 tally <- function(what) sum(results_tbl == what)
 not_ok <- sum(results_tbl != "ok")
 
+# Whether this report is worth writing over the committed one.
+#
+# The report in `revdep/` is the repository's record, and `packages: broken`
+# reads it back to decide what to re-check. A run in which nothing produced a
+# comparison -- every shard dead, every package `missing`, a bad plan, a driver
+# bug that turned the whole set into `depfail` -- would replace that record with
+# a list of things it never learnt anything about, and there is no way back to
+# it. So the run says out loud whether it compared anything at all, and the
+# workflow gates the commit on that; the artifact is uploaded either way, so
+# nothing is hidden, only the destructive step is skipped.
+compared <- tally("ok") + tally("newly_broken")
+set_output("compared", compared)
+if (compared == 0) {
+  inform(
+    "No package produced a comparison; the report is written and uploaded, ",
+    "but the committed one is left alone"
+  )
+}
+
 # The one sentence a reader needs, before any table.
 headline <- if (tally("newly_broken") > 0) {
   sprintf(
@@ -521,8 +542,11 @@ readme <- drop_section(readme, "^## Failed to check")
 # own URL, where `problems.md#pkg` resolves to /actions/runs/problems.md and
 # 404s. The package's CRAN page is the reachable equivalent; where the details
 # actually live is said once, below.
+# Only where the link text is a package name -- the anchor form revdepcheck
+# emits for a package. A bare `[failures.md](failures.md)` is a link to the
+# report's own file, and rewriting it to `package=failures.md` was nonsense.
 readme <- gsub(
-  "\\[([^][]+)\\]\\([^)]*[.]md(#[^)]*)?\\)",
+  "\\[([a-zA-Z][a-zA-Z0-9.]*)\\]\\([^)]*[.]md(#[^)]*)?\\)",
   "[\\1](https://cran.r-project.org/package=\\1)",
   readme
 )
@@ -581,9 +605,11 @@ append_summary(c(
     # From the package rows, not the shard rows: a shard whose job died leaves
     # no timing of its own, but the checks it did finish are still in the
     # manifest the collector just merged.
+    # `seconds` is the pair's wall clock, not one half's, so it is not
+    # multiplied by `checks` -- the two ran at the same time.
     check_minutes <- sum(vapply(
       package_rows,
-      function(p) p$seconds * p$checks / 60,
+      function(p) p$seconds / 60,
       numeric(1)
     ))
     job <- vapply(

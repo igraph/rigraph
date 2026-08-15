@@ -245,14 +245,22 @@ gh_lines <- function(...) {
 }
 
 # The unexpired artifacts of one run, as a named character vector of ids;
-# empty when the run has none or when gh cannot say. One API call per run, so
-# a walk over the run history calls this once per run and asks it everything.
+# empty when the run has none or when gh cannot say.
+#
+# Paginated, because a single page is not enough and the ones that fall off it
+# are exactly the ones that matter. A run publishes one
+# `revdep2-results-<shard>-<attempt>` per shard -- up to 250 -- and uploads
+# `revdep2-baseline`, `revdep2-timings` and `revdep2-report` last of all. Ask
+# for one page of 100 and a run with a hundred shards hides its baseline behind
+# its results: reuse would silently stop and `retry-run` would fail outright,
+# both for a reason no log would name.
 run_artifacts <- function(run_id) {
   if (!gh_ok() || !nzchar(gh_repo())) {
     return(character())
   }
   out <- gh_lines(
     "api",
+    "--paginate",
     sprintf(
       "repos/%s/actions/runs/%s/artifacts?per_page=100",
       gh_repo(),

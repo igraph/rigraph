@@ -24,9 +24,10 @@
 # still runs over the whole set afterwards, because CRAN moves between runs
 # and what changed has to be built after all.
 #
-# Each test shard installs its dependency union, checks every one of its
-# packages against the CRAN version (or reuses a baseline), swaps in the dev
-# binary, checks again, and compares -- revdepcheck-style, one manifest line
+# Each test shard installs its dependency union, then checks every one of its
+# packages against the CRAN version and the dev version at the same time --
+# two `R CMD check` runs side by side against library stacks differing in that
+# one package -- and compares the pair, revdepcheck-style, one manifest line
 # and a pair of rcmdcheck results per package. A broken package is a result,
 # never a job failure; the shard defers what its deadline cannot fit and says
 # so.
@@ -766,6 +767,7 @@ jobs:
           path: ${{ runner.temp }}/retry-report
 
       - name: Collect results
+        id: collect
         env:
           # To read how long the shard *jobs* took -- the minutes before their
           # driver starts, which is what an extra shard really costs.
@@ -806,8 +808,17 @@ jobs:
       # results, so its report is every package `missing`. Run 31303054725 was
       # cancelled and pushed 104k lines of that onto the branch it was testing.
       # A run with red shards is a different thing and still reports.
+      #
+      # `compared > 0` covers the rest of that family: a run in which *no*
+      # package produced a comparison learnt nothing, and the committed report
+      # is the repository's record and what `packages: broken` reads back. The
+      # report is still built and uploaded; only overwriting the good one is
+      # skipped.
       - name: Commit the report to the checked ref
-        if: '!cancelled() && vars.REVDEP2_COMMIT_REPORT != ''false'''
+        if: >-
+          !cancelled()
+          && vars.REVDEP2_COMMIT_REPORT != 'false'
+          && steps.collect.outputs.compared != '0'
         continue-on-error: true
         env:
           REF_INPUT: ${{ inputs.ref }}
