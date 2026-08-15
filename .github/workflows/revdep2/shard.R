@@ -1,6 +1,10 @@
 # Check one shard of a revdep2 plan: many reverse dependencies, one job, one
 # shared library.
 #
+# It runs in two phases, `install` and `check`, so that the workflow can put
+# each in its own step and Actions can time them separately; `PHASE=all` runs
+# both in one go, which is what a local invocation wants.
+#
 # The shard installs the union of its packages' dependencies once, then checks
 # each of its packages against both versions of the package under test at the
 # same time: two `R CMD check` runs side by side, against library stacks that
@@ -41,6 +45,8 @@
 #   TIMEOUT_MIN_MINUTES    - floor for that timeout; CRAN's machines are not
 #                            these runners (default: 10)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
+#   PHASE                  - "install", "check", or "all" (default): which half
+#                            of the shard this invocation runs
 
 script_dir <- dirname(sub(
   "--file=",
@@ -71,9 +77,21 @@ package <- plan$package
 
 dir.create(file.path(out_dir, "pkgs"), recursive = TRUE, showWarnings = FALSE)
 manifest_path <- file.path(out_dir, "manifest.ndjson")
-file.create(manifest_path)
 work <- file.path(env_chr("RUNNER_TEMP", tempdir()), "revdep2-work")
 dir.create(work, recursive = TRUE, showWarnings = FALSE)
+
+# Which half of the shard this invocation runs. The workflow calls the driver
+# twice so that Actions times the install and the checks separately; `all` is
+# for running the whole shard in one process, which is what a local invocation
+# wants. The install leaves `install-state.json` behind and the checks read it,
+# so the split costs one small file and repeats nothing.
+phase <- env_chr("PHASE", "all")
+if (!phase %in% c("all", "install", "check")) {
+  stop("PHASE must be one of \"all\", \"install\", \"check\"", call. = FALSE)
+}
+do_install <- phase %in% c("all", "install")
+do_check <- phase %in% c("all", "check")
+install_state <- file.path(work, "install-state.json")
 
 inform(
   "Shard ",
@@ -137,108 +155,6 @@ counts <- function(x) {
 
 # ---------------------------------------------------------------- install ----
 
-install <- unlist(shard$install, use.names = FALSE)
-
-# What is already built, unpacked into the library pak installs into: this
-# run's own preflight library first -- it is the freshest there is, and
-# without it every shard would rebuild what the preflight compiled minutes
-# ago -- then the earlier runs the plan picked, for whatever the preflight
-# could not supply. pak still resolves the whole set afterwards; the point is
-# to skip *building* what has not changed, not to skip resolving it.
-lib <- .libPaths()[[1]]
-restore_started <- Sys.time()
-restored <- c(
-  restore_local_library(env_chr("LIB_DIR"), lib, install),
-  restore_prebuilt(plan, lib, install)
-)
-restore_seconds <- elapsed(restore_started)
-inform(
-  length(restored),
-  " dependency binaries restored, ",
-  length(install) - length(restored),
-  " left to pak"
-)
-
-# With a restored library, `upgrade = FALSE` would freeze whatever version the
-# donor happened to hold; the plan's dependency fingerprints are computed from
-# CRAN *now*, so the library has to follow CRAN now.
-upgrade <- length(restored) > 0
-
-# The pak cache this shard restored was saved by the preflight, so a metadata
-# database broken there arrives here intact -- which is how run 31282820357
-# turned one bad preflight into sixty shards that installed nothing and
-# reported every one of their packages as a depfail. Asking pak what it can
-# see costs seconds, and a shard that cannot see CRAN is worth saying out loud
-# rather than working around.
-if (identical(ensure_metadata(sprintf("Shard %d", shard_index)), "broken")) {
-  inform("pak cannot see CRAN here; every check will be a depfail")
-}
-
-# In dependency order, a hundred at a time, for the same reason the preflight
-# does it: one pak call for the whole set is one resolution of the whole set,
-# and that is the part that stops degrading gracefully as the set grows. A
-# shard's union is a fraction of the preflight's, but it is the same call.
-chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
-chunks <- install_chunks(install, cran_db(), chunk_size)
-inform(
-  "Installing ",
-  length(install),
-  " dependencies in ",
-  length(chunks),
-  " chunk(s) of at most ",
-  chunk_size,
-  ", dependencies first"
-)
-install_started <- Sys.time()
-# The deadline is the shard's own: an install that runs into it leaves no time
-# to check anything, so it stops and lets the checks report what they can
-# rather than being cancelled with the job.
-bulk_ok <- install_in_chunks(
-  chunks,
-  lib = lib,
-  upgrade = upgrade,
-  deadline = deadline
-)
-if (!bulk_ok) {
-  for (p in install) {
-    if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
-      next
-    }
-    run <- pak_install(
-      p,
-      lib = lib,
-      upgrade = upgrade,
-      timeout_seconds = install_timeout_seconds(),
-      label = paste("installing", p)
-    )
-    if (!run$ok) {
-      inform("Could not install ", p, ": ", run$message)
-    }
-  }
-}
-
-# After the installs and before the first check: pak has covered whatever it
-# installed itself, so what is left is exactly the restored packages -- this
-# run's preflight library and the plan's donors. A shard has no load test, so
-# an unmet system requirement here would surface as a check failure blamed on
-# the revdep.
-ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
-
-install_seconds <- elapsed(install_started)
-inform(
-  "Dependencies ready after ",
-  round(install_seconds / 60, 1),
-  " min (",
-  round(restore_seconds / 60, 1),
-  " min unpacking prebuilt)"
-)
-
-installed <- rownames(utils::installed.packages())
-our_version <- function() {
-  tryCatch(as.character(utils::packageVersion(package)), error = function(e) {
-    NA_character_
-  })
-}
 # The two versions cascade rather than replace each other.
 #
 # `R_LIBS` is a search path, so a check can name a library holding exactly one
@@ -247,46 +163,189 @@ our_version <- function() {
 # between the phases, which is what used to force them to run one after the
 # other; now both can run at once against libraries that differ in exactly the
 # package under test.
+lib <- .libPaths()[[1]]
 lib_old <- file.path(work, "lib-old")
 lib_new <- file.path(work, "lib-new")
-dir.create(lib_old, recursive = TRUE, showWarnings = FALSE)
-dir.create(lib_new, recursive = TRUE, showWarnings = FALSE)
 
-# The shared library must not hold the package under test at all, or it would
-# shadow neither and both checks would see whatever the resolver left there.
-unlink(file.path(lib, package), recursive = TRUE)
+if (do_install) {
+  install <- unlist(shard$install, use.names = FALSE)
 
-inform("Installing ", package, " ", plan$cran_version, " into the old library")
-cran_install <- pak_install(
-  package,
-  lib = lib_old,
-  upgrade = FALSE,
-  timeout_seconds = install_timeout_seconds(),
-  label = paste("installing", package)
-)
-if (!cran_install$ok) {
-  stop("Installing the CRAN release of ", package, " failed", call. = FALSE)
-}
-our_cran_version <- as.character(utils::packageVersion(package, lib_old))
-if (!identical(our_cran_version, plan$cran_version)) {
+  # What is already built, unpacked into the library pak installs into: this
+  # run's own preflight library first -- it is the freshest there is, and
+  # without it every shard would rebuild what the preflight compiled minutes
+  # ago -- then the earlier runs the plan picked, for whatever the preflight
+  # could not supply. pak still resolves the whole set afterwards; the point is
+  # to skip *building* what has not changed, not to skip resolving it.
+  restore_started <- Sys.time()
+  restored <- c(
+    restore_local_library(env_chr("LIB_DIR"), lib, install),
+    restore_prebuilt(plan, lib, install)
+  )
+  restore_seconds <- elapsed(restore_started)
   inform(
-    "Note: old checks run against ",
-    our_cran_version,
-    " (the repositories lag CRAN, the plan expected ",
+    length(restored),
+    " dependency binaries restored, ",
+    length(install) - length(restored),
+    " left to pak"
+  )
+
+  # With a restored library, `upgrade = FALSE` would freeze whatever version the
+  # donor happened to hold; the plan's dependency fingerprints are computed from
+  # CRAN *now*, so the library has to follow CRAN now.
+  upgrade <- length(restored) > 0
+
+  # The pak cache this shard restored was saved by the preflight, so a metadata
+  # database broken there arrives here intact -- which is how run 31282820357
+  # turned one bad preflight into sixty shards that installed nothing and
+  # reported every one of their packages as a depfail. Asking pak what it can
+  # see costs seconds, and a shard that cannot see CRAN is worth saying out loud
+  # rather than working around.
+  if (identical(ensure_metadata(sprintf("Shard %d", shard_index)), "broken")) {
+    inform("pak cannot see CRAN here; every check will be a depfail")
+  }
+
+  # In dependency order, a hundred at a time, for the same reason the preflight
+  # does it: one pak call for the whole set is one resolution of the whole set,
+  # and that is the part that stops degrading gracefully as the set grows. A
+  # shard's union is a fraction of the preflight's, but it is the same call.
+  chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+  chunks <- install_chunks(install, cran_db(), chunk_size)
+  inform(
+    "Installing ",
+    length(install),
+    " dependencies in ",
+    length(chunks),
+    " chunk(s) of at most ",
+    chunk_size,
+    ", dependencies first"
+  )
+  install_started <- Sys.time()
+  # The deadline is the shard's own: an install that runs into it leaves no time
+  # to check anything, so it stops and lets the checks report what they can
+  # rather than being cancelled with the job.
+  bulk_ok <- install_in_chunks(
+    chunks,
+    lib = lib,
+    upgrade = upgrade,
+    deadline = deadline
+  )
+  if (!bulk_ok) {
+    for (p in install) {
+      if (requireNamespace(p, quietly = TRUE) || Sys.time() > deadline) {
+        next
+      }
+      run <- pak_install(
+        p,
+        lib = lib,
+        upgrade = upgrade,
+        timeout_seconds = install_timeout_seconds(),
+        label = paste("installing", p)
+      )
+      if (!run$ok) {
+        inform("Could not install ", p, ": ", run$message)
+      }
+    }
+  }
+
+  # After the installs and before the first check: pak has covered whatever it
+  # installed itself, so what is left is exactly the restored packages -- this
+  # run's preflight library and the plan's donors. A shard has no load test, so
+  # an unmet system requirement here would surface as a check failure blamed on
+  # the revdep.
+  ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
+
+  install_seconds <- elapsed(install_started)
+  inform(
+    "Dependencies ready after ",
+    round(install_seconds / 60, 1),
+    " min (",
+    round(restore_seconds / 60, 1),
+    " min unpacking prebuilt)"
+  )
+
+  dir.create(lib_old, recursive = TRUE, showWarnings = FALSE)
+  dir.create(lib_new, recursive = TRUE, showWarnings = FALSE)
+
+  # The shared library must not hold the package under test at all, or it would
+  # shadow neither and both checks would see whatever the resolver left there.
+  unlink(file.path(lib, package), recursive = TRUE)
+
+  inform(
+    "Installing ",
+    package,
+    " ",
     plan$cran_version,
-    ")"
+    " into the old library"
+  )
+  cran_install <- pak_install(
+    package,
+    lib = lib_old,
+    upgrade = FALSE,
+    timeout_seconds = install_timeout_seconds(),
+    label = paste("installing", package)
+  )
+  if (!cran_install$ok) {
+    stop("Installing the CRAN release of ", package, " failed", call. = FALSE)
+  }
+  our_cran_version <- as.character(utils::packageVersion(package, lib_old))
+  if (!identical(our_cran_version, plan$cran_version)) {
+    inform(
+      "Note: old checks run against ",
+      our_cran_version,
+      " (the repositories lag CRAN, the plan expected ",
+      plan$cran_version,
+      ")"
+    )
+  }
+
+  binary <- file.path(pkg_dir, meta$binary)
+  inform("Installing dev binary ", basename(binary), " into the new library")
+  if (
+    system2(
+      "R",
+      c("CMD", "INSTALL", "-l", shQuote(lib_new), shQuote(binary))
+    ) !=
+      0
+  ) {
+    stop("Installing the prebuilt dev binary failed", call. = FALSE)
+  }
+  our_dev_version <- as.character(utils::packageVersion(package, lib_new))
+
+  # What the check phase needs to know about this one, and what the timings at
+  # the end report. Everything else it can work out for itself from the library
+  # it finds on disk.
+  write_json(
+    list(
+      install_packages = length(install),
+      restored = length(restored),
+      restore_seconds = restore_seconds,
+      install_seconds = install_seconds,
+      our_cran_version = our_cran_version,
+      our_dev_version = our_dev_version
+    ),
+    install_state
   )
 }
 
-binary <- file.path(pkg_dir, meta$binary)
-inform("Installing dev binary ", basename(binary), " into the new library")
-if (
-  system2("R", c("CMD", "INSTALL", "-l", shQuote(lib_new), shQuote(binary))) !=
-    0
-) {
-  stop("Installing the prebuilt dev binary failed", call. = FALSE)
+if (!do_check) {
+  inform("Install phase complete; the check phase runs as its own step")
+  quit(save = "no", status = 0)
 }
-our_dev_version <- as.character(utils::packageVersion(package, lib_new))
+
+if (!file.exists(install_state)) {
+  stop(
+    "No install state in ",
+    work,
+    ": the install phase did not finish",
+    call. = FALSE
+  )
+}
+installed_state <- read_json(install_state)
+our_cran_version <- installed_state$our_cran_version
+our_dev_version <- installed_state$our_dev_version
+invisible(file.create(manifest_path))
+
+installed <- rownames(utils::installed.packages())
 inform(sprintf(
   "Checking old (%s) and new (%s) concurrently, two at a time per package",
   our_cran_version,
@@ -393,19 +452,27 @@ out_of_time <- function(entry) {
 # The timeout is coreutils' rather than rcmdcheck's, which is what makes the
 # distinction reliable: exit 124 is the deadline, anything else is the check
 # saying something.
-# The check log with this run's paths taken out of it.
+# The check log with this run's incidentals taken out of it.
 #
-# `compare_checks()` matches issues by their text, so any text that differs
-# between the halves for reasons that are not the package makes a shared issue
-# look like a new one. Since the two libraries cascade, they differ by
-# construction -- `.../lib-old/...` against `.../lib-new/...` -- and so do the
-# check directories. In run 31879790285 that turned packages with the same one
-# error in both halves into `newly_broken`: `dm` and `fsbrain` both reported
-# "old 1E 0W 0N, new 1E 0W 0N" and were called newly broken, because the error
-# quoted a path.
+# Two things differ between the halves for reasons that have nothing to do with
+# the package:
 #
-# So both are replaced by a constant before the log is parsed. Nothing else is
-# touched: a difference anywhere but in these paths is exactly what this
+#   * the paths. The libraries cascade, so they differ by construction --
+#     `.../lib-old/...` against `.../lib-new/...` -- and so do the two check
+#     directories, which the log names in its first line and quotes in every
+#     "see ... for details".
+#   * the timings. `--as-cran` sets `_R_CHECK_TIMINGS_`, so every stage slower
+#     than ten seconds prints its own `[user/elapsed]` pair, and two checks
+#     racing each other for the same four cores never agree on those. A run of
+#     rphylopic against the *same* igraph on both sides differed in exactly two
+#     lines: the log directory, and `[14s/12s]` against `[13s/11s]`.
+#
+# Both matter twice. `compare_checks()` matches issues by their text, so a
+# difference in the first line of an issue makes an issue both halves have look
+# like a new one; and the diff between the halves is only worth printing if two
+# identical results produce an empty one.
+#
+# Nothing else is touched: a difference anywhere but here is exactly what this
 # workflow exists to find.
 neutral_log <- function(path, name) {
   lines <- readLines(path, warn = FALSE)
@@ -413,7 +480,30 @@ neutral_log <- function(path, name) {
     lines <- gsub(from, "<lib>", lines, fixed = TRUE)
   }
   # The phase also names itself in the .Rcheck path under the work directory.
-  gsub("<lib>/(old|new)", "<lib>", lines)
+  lines <- gsub("<lib>/(old|new)", "<lib>", lines)
+  # `[14s/12s]`, and the one-number form R uses where it has only one.
+  gsub("\\[[0-9.]+s(/[0-9.]+s)?\\]", "[]", lines)
+}
+
+# How much of a package's diff goes into the job log before it is cut off.
+diff_max_lines <- env_num("REVDEP2_DIFF_MAX_LINES", 200)
+
+# The two halves' check logs, as a patch.
+#
+# Both sides are neutralised first, so the paths and the stage timings that
+# differ in every pair are gone and what is left is the package: an empty diff
+# means the dev version changed nothing about this check, however long the log.
+check_diff <- function(name, old_log, new_log) {
+  tmp <- file.path(tempdir(), c("old-00check.log", "new-00check.log"))
+  writeLines(neutral_log(old_log, name), tmp[[1]])
+  writeLines(neutral_log(new_log, name), tmp[[2]])
+  on.exit(unlink(tmp), add = TRUE)
+  suppressWarnings(system2(
+    "diff",
+    shQuote(c("-u", "--label", "old", tmp[[1]], "--label", "new", tmp[[2]])),
+    stdout = TRUE,
+    stderr = NULL
+  ))
 }
 
 check_pair <- function(name) {
@@ -659,13 +749,32 @@ for (name in runnable) {
     old_log <- file.path(rcheck("old"), "00check.log")
     new_log <- file.path(rcheck("new"), "00check.log")
     if (file.exists(old_log) && file.exists(new_log)) {
-      diff <- suppressWarnings(system2(
-        "diff",
-        shQuote(c("-u", "--label", "old", old_log, "--label", "new", new_log)),
-        stdout = TRUE,
-        stderr = NULL
-      ))
+      diff <- check_diff(name, old_log, new_log)
       writeLines(diff, file.path(keep, "00check.diff"))
+      # And into the job log, where it is the one thing a reader of the run
+      # actually wants: what the dev version changed about this package, in the
+      # package's own words. Downloading an artifact to find out that a NOTE
+      # gained a line is a poor trade. It is bounded because a package that
+      # fails to install differs in thousands of lines and would bury the rest
+      # of the shard; the whole diff is in the artifact either way.
+      print_group(
+        sprintf("%s: old vs new check log (%d line diff)", name, length(diff)),
+        if (length(diff) == 0) {
+          # Worth saying rather than leaving as an empty block. A package
+          # called `newly_broken` whose two logs are identical once the paths
+          # and the stage timings are out of them is not newly broken; it is
+          # this harness getting it wrong, and this line is how a reader of the
+          # run finds that out without downloading anything.
+          "The two logs are identical apart from paths and stage timings."
+        },
+        head(diff, diff_max_lines),
+        if (length(diff) > diff_max_lines) {
+          sprintf(
+            "[%d more lines; the whole diff is 00check.diff in the shard artifact]",
+            length(diff) - diff_max_lines
+          )
+        }
+      )
     }
     unlink(file.path(work, "check", name), recursive = TRUE)
   }
@@ -699,11 +808,13 @@ write_json(
     index = shard_index,
     packages = length(members),
     checks = checks_started,
-    install_packages = length(install),
-    restored = length(restored),
-    restore_seconds = restore_seconds,
-    install_seconds = install_seconds,
+    install_packages = installed_state$install_packages,
+    restored = installed_state$restored,
+    restore_seconds = installed_state$restore_seconds,
+    install_seconds = installed_state$install_seconds,
     check_seconds = round(check_seconds, 1),
+    # The install phase is its own step now, so this is the check phase's own
+    # wall clock; the two together are what the shard job cost.
     script_seconds = elapsed(script_started),
     started_at = format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     finished_at = now_utc(),

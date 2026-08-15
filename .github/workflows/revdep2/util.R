@@ -36,6 +36,22 @@ now_utc <- function() {
   format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
 }
 
+# A block of output under a heading the reader can fold away.
+#
+# Actions renders `::group::` as a collapsed section in the job log, so a
+# hundred shard packages can each contribute their diff without any of them
+# getting in the way of the summary lines between them. Outside Actions the
+# markers are just two extra lines. NULL arguments are dropped, so a caller can
+# pass a trailing note conditionally.
+print_group <- function(title, ...) {
+  body <- unlist(list(...), use.names = FALSE)
+  message("::group::", title)
+  if (length(body) > 0) {
+    message(paste(body, collapse = "\n"))
+  }
+  message("::endgroup::")
+}
+
 # ---------------------------------------------------------------- run ids ----
 
 # GitHub run ids passed `.Machine$integer.max` in 2026, so they are carried as

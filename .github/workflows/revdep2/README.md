@@ -38,13 +38,15 @@ preflight (1 job; a dry run stops before it; failure does not stop the run)
          warm pak cache (saved under the plan hash)
 
 test      (one job per shard, max-parallel throttled, fail-fast: false)
-  ├─ unpack this run's preflight library, then the plan's donors
-  ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
-  ├─ install the system requirements of what was unpacked, not installed
-  ├─ build two one-package libraries: CRAN release, dev binary
-  ├─ per package, both checks at once against those cascading libraries
-  │    (a reusable baseline stands in for the old half)
-  └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
+  ├─ "Install packages" step (PHASE=install)
+  │    ├─ unpack this run's preflight library, then the plan's donors
+  │    ├─ install the shard's dependency union (pak, sysreqs on, warm cache)
+  │    ├─ install the system requirements of what was unpacked, not installed
+  │    └─ build two one-package libraries: CRAN release, dev binary
+  └─ "Check the shard" step (PHASE=check)
+       ├─ per package, both checks at once against those cascading libraries
+       │    (a reusable baseline stands in for the old half)
+       └─ results + manifest.ndjson → revdep2-results-<shard>-<attempt>
 
 collect   (1 job, if: always() past plan/build/preflight)
   ├─ merge all shard attempts (+ carried results of a retried run)
@@ -61,6 +63,20 @@ The `ref` input checks any branch, tag or commit SHA:
 the dispatch itself can only target a branch or tag,
 so arbitrary SHAs travel through the input,
 with the one constraint that the tree must contain these scripts.
+
+The shard's two steps are one driver called twice, `PHASE=install` and
+`PHASE=check` (`PHASE=all` runs both in one process, which is what a local
+invocation wants).
+Splitting them is a reporting change and nothing else:
+the install is minutes to an hour, the checks are hours,
+and as one step the run page could only report their sum —
+so "shard 14 took five hours" said nothing about
+whether it spent them unpacking dependencies or checking packages,
+and the install times turn out to vary a lot between shards.
+The phases share the job environment and the work directory;
+the install leaves the libraries and an `install-state.json`
+of what it cost behind, and the check phase picks both up.
+Nothing is done twice.
 
 A failing check never fails anything:
 `fail-fast: false` isolates shard-level accidents,
@@ -887,9 +903,65 @@ into the same object `rcmdcheck()` used to return,
 so the counts, `compare_checks()` and the manifest are unchanged.
 
 For a package that is not ok, what is kept is the **difference** between the
-two logs (`00check.diff`) next to the new one.
+two logs (`00check.diff`) next to the new one,
+and the same diff is printed into the job log
+under a foldable `::group::` heading.
 The logs are thousands of lines that are identical in both,
-and the handful that are not is the entire point.
+and the handful that are not is the entire point —
+so the run page can carry them for every package that is not ok
+without anyone downloading an artifact to find out
+that a NOTE gained a line.
+`REVDEP2_DIFF_MAX_LINES` bounds what is printed (200 by default);
+the whole diff is always in the artifact.
+
+### What the halves differ in that is not the package
+
+A diff is only worth printing if two identical results produce an empty one,
+and two concurrent checks do not naturally produce identical logs.
+Two things differ for reasons that have nothing to do with the package:
+
+- **The paths.** The libraries cascade, so they differ by construction —
+  `.../lib-old/...` against `.../lib-new/...` — and so do the two check
+  directories, which the log names in its first line
+  and quotes in every "see … for details".
+- **The stage timings.** `--as-cran` sets `_R_CHECK_TIMINGS_`,
+  so every stage slower than ten seconds
+  prints its own `[user/elapsed]` pair,
+  and two checks racing each other for the same four cores
+  never agree on those.
+
+Both are removed before the log is parsed *and* before it is diffed.
+Measured, not assumed: rphylopic checked against the *same* igraph
+on both sides differed in exactly two lines —
+the log directory, and `[14s/12s]` against `[13s/11s]` —
+and in none once neutralised.
+
+This matters twice over, because `compare_checks()` matches issues
+by their text: a difference in the first line of an issue
+makes an issue both halves have look like a new one.
+In run 31879790285, `dm`, `fsbrain`, `rphylopic` and `GGally`
+each reported the same single error in both halves
+and were still called `newly_broken`.
+Neutralising removes the differences that are known not to be the package;
+**whether that was the whole of it is not yet confirmed**,
+which is why an empty diff now says so in the job log in as many words.
+A package called `newly_broken` whose two logs are identical
+is this harness getting it wrong, and the run page will say so.
+
+### `\donttest` examples are not run
+
+`--as-cran` turns on `--run-donttest`.
+That is the most expensive thing a check does
+and the least useful thing for this workflow:
+`\donttest{}` is where packages put the examples too slow to run on CRAN,
+so it is where the runners spend their hours
+and where the timeouts land —
+varPro's old half was killed at 1200 s
+in `checking examples with --run-donttest`.
+`_R_CHECK_DONTTEST_EXAMPLES_=false` turns it back off.
+`\dontrun{}` is off unless asked for, and stays off.
+What is left is every example a package expects to run,
+which is the part a change to igraph can break.
 
 ### A timeout is not a failure
 
@@ -971,6 +1043,7 @@ at the next `if`.
 | Per-check timeout factor | — | `REVDEP2_TIMEOUT_FACTOR` | 1.5 × CRAN time |
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
+| Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
 
 ## Prior art
 

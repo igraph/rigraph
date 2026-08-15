@@ -492,6 +492,24 @@ jobs:
       _R_CHECK_SYSTEM_CLOCK_: false
       _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
       _R_CHECK_FORCE_SUGGESTS_: false
+      # `--as-cran` turns on `--run-donttest`, which is the most expensive
+      # thing a check does and the least useful thing for this workflow:
+      # `\donttest{}` is where packages put the examples too slow to run on
+      # CRAN, so it is where the runners spend hours and where the timeouts
+      # land -- varPro's old half was killed at 1200s in "checking examples
+      # with --run-donttest". `\dontrun{}` is off unless asked for, and stays
+      # off. What is left is every example a package expects to run.
+      _R_CHECK_DONTTEST_EXAMPLES_: false
+
+      # What the driver reads in both of its phases and does not need the
+      # runner for. The `runner` context is not available this far up -- only
+      # in a step -- so the directories are set once in `$GITHUB_ENV` below.
+      GH_TOKEN: ${{ github.token }}
+      SHARD: ${{ matrix.shard }}
+      TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '20' }}
+      DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
+      PKG_SYSREQS: true
 
     steps:
       - name: Check out the ref under test
@@ -573,27 +591,47 @@ jobs:
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/baseline
 
-      - name: Check the shard
-        env:
-          # To fetch the prebuilt libraries of the runs the plan picked.
-          GH_TOKEN: ${{ github.token }}
-          SHARD: ${{ matrix.shard }}
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          PKG_DIR: ${{ runner.temp }}/pkg
-          LIB_DIR: ${{ runner.temp }}/lib
-          BASELINE_DIR: ${{ runner.temp }}/baseline
-          OUT_DIR: ${{ runner.temp }}/results
-          TIMEOUT_FACTOR: ${{ env.REVDEP2_TIMEOUT_FACTOR }}
-          TIMEOUT_MIN_MINUTES: ${{ env.REVDEP2_TIMEOUT_MIN_MINUTES }}
-          DEADLINE_MINUTES: ${{ env.REVDEP2_DEADLINE_MINUTES }}
-          PKG_SYSREQS: true
-          # The same small `/tmp` as the preflight, and a shard builds source
-          # packages and unpacks check directories into it for hours.
-          TMPDIR: ${{ runner.temp }}/tmp
-          TMP: ${{ runner.temp }}/tmp
-          TEMP: ${{ runner.temp }}/tmp
+      # Both driver steps need these and neither can name them itself: the
+      # `runner` context does not reach the job's `env`, so they are set here
+      # for every step that follows.
+      - name: Point the driver at this runner's directories
         run: |
           mkdir -p "${RUNNER_TEMP}/tmp"
+          {
+            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
+            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
+            echo "LIB_DIR=${RUNNER_TEMP}/lib"
+            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
+            echo "OUT_DIR=${RUNNER_TEMP}/results"
+            # The same small `/tmp` as the preflight, and a shard builds source
+            # packages and unpacks check directories into it for hours.
+            echo "TMPDIR=${RUNNER_TEMP}/tmp"
+            echo "TMP=${RUNNER_TEMP}/tmp"
+            echo "TEMP=${RUNNER_TEMP}/tmp"
+          } >> "${GITHUB_ENV}"
+        shell: bash
+
+      # Two steps, one driver. The install is minutes to an hour and the checks
+      # are hours, and as one step the run page could only report their sum --
+      # so "shard 14 took five hours" said nothing about whether it spent them
+      # unpacking dependencies or checking packages, and the install times turn
+      # out to vary by a lot between shards. Split, each is timed by Actions
+      # itself and readable at a glance from the job page.
+      #
+      # The phases share the job's environment and the work directory; the
+      # install leaves the libraries and a note of what it cost behind, and the
+      # check picks both up. Nothing is done twice.
+      - name: Install packages
+        env:
+          PHASE: install
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      - name: Check the shard
+        env:
+          PHASE: check
+        run: |
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
