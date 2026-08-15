@@ -244,10 +244,30 @@ if (do_install) {
   # rest. Shard 3 of run 31893156685 sat in this step for 2 h 33 m and had to
   # be cancelled; its 50 packages came back `missing`, which is the one result
   # that says nothing to anybody.
-  install_deadline <- min(
-    deadline,
-    Sys.time() + env_num("REVDEP2_SHARD_INSTALL_MINUTES", 90) * 60
-  )
+  #
+  # 45 minutes, from the 39 shard installs the last two runs measured:
+  # median 9.4, p90 13.7, worst 16.6. So the budget is 2.7x the worst install
+  # anyone has actually seen, and 15% of the shard's deadline -- loose enough
+  # that a healthy shard can never notice it, tight enough that shard 3's
+  # 2 h 33 m would have been cut off more than three times sooner.
+  #
+  # Doubled where little was restored, because every one of those 39 had its
+  # preflight library (95% of the union or better) and a cold install is
+  # therefore unmeasured. A preflight that dies is survivable by design -- more
+  # so since it became a `continue-on-error` step -- so cold shards will
+  # happen, and the one thing worse than a slow install is depfailing 50
+  # packages that would have installed given a few more minutes.
+  install_budget <- env_num("REVDEP2_SHARD_INSTALL_MINUTES", 45)
+  if (length(restored) < 0.5 * length(install)) {
+    install_budget <- 2 * install_budget
+    inform(sprintf(
+      "Only %d of %d dependencies were restored; allowing %.0f min to install",
+      length(restored),
+      length(install),
+      install_budget
+    ))
+  }
+  install_deadline <- min(deadline, Sys.time() + install_budget * 60)
   bulk_ok <- install_in_chunks(
     chunks,
     lib = lib,

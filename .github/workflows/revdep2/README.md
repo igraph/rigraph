@@ -891,7 +891,7 @@ the one result that tells nobody anything.
 
 Three things now stand between an install and that outcome:
 
-- the install gets `REVDEP2_SHARD_INSTALL_MINUTES` (90) of the shard's time,
+- the install gets `REVDEP2_SHARD_INSTALL_MINUTES` of the shard's time,
   not all of it, and what it could not install becomes a depfail,
   which is a *result*;
 - the check step runs on `!cancelled()` rather than `success()`,
@@ -899,6 +899,26 @@ Three things now stand between an install and that outcome:
 - a check phase that finds no install state writes a manifest saying so
   for every package in the shard, rather than exiting and leaving them
   to be reported as `missing`.
+
+**45 minutes**, and that number is measured rather than picked.
+The last two runs recorded 39 shard installs:
+median 9.4 minutes, p90 13.7, worst 16.6.
+So the budget is 2.7× the worst install anyone has actually seen
+and 15% of the shard's deadline —
+loose enough that a healthy shard can never notice it,
+tight enough that shard 3's 2 h 33 m
+would have been cut off more than three times sooner.
+
+It doubles where little was restored.
+Every one of those 39 installs had its preflight library —
+95% of the union or better, in both runs —
+so a *cold* install is unmeasured,
+and a preflight that dies is survivable by design
+(more so now that it is a `continue-on-error` step),
+so cold shards will happen.
+The one thing worse than a slow install
+is depfailing 50 packages that would have installed
+given a few more minutes.
 
 The per-package fallback in the install is also no longer
 `requireNamespace()` in a loop.
@@ -1288,7 +1308,7 @@ at the next `if`.
 | Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
 | Load tests run at once | — | `REVDEP2_LOAD_JOBS` | one per core |
 | Time limit on the whole load sweep | — | `REVDEP2_LOAD_SWEEP_MINUTES` | 60 |
-| Shard minutes the install may take before the checks get the rest | — | `REVDEP2_SHARD_INSTALL_MINUTES` | 90 |
+| Shard minutes the install may take before the checks get the rest (doubled on a cold library) | — | `REVDEP2_SHARD_INSTALL_MINUTES` | 45 |
 | Transcript lines shown per install/test block in the summary | — | `REVDEP2_DETAIL_MAX_LINES` | 300 |
 
 ## Prior art
