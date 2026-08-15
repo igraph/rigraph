@@ -936,17 +936,47 @@ on both sides differed in exactly two lines —
 the log directory, and `[14s/12s]` against `[13s/11s]` —
 and in none once neutralised.
 
-This matters twice over, because `compare_checks()` matches issues
-by their text: a difference in the first line of an issue
-makes an issue both halves have look like a new one.
-In run 31879790285, `dm`, `fsbrain`, `rphylopic` and `GGally`
-each reported the same single error in both halves
-and were still called `newly_broken`.
-Neutralising removes the differences that are known not to be the package;
-**whether that was the whole of it is not yet confirmed**,
-which is why an empty diff now says so in the job log in as many words.
+This is hygiene rather than a fix for anything observed:
+`compare_checks()` hashes only the *first line* of each issue,
+so noise further down could never have mattered to it.
+What it buys is the diff: an empty one now means
+the dev version changed nothing about this check.
 A package called `newly_broken` whose two logs are identical
-is this harness getting it wrong, and the run page will say so.
+is this harness getting it wrong, and the job log says so in as many words.
+
+### Why a reused baseline made packages look newly broken
+
+Run 31879790285's shard 9 reported `rphylopic`, `HospitalNetwork` and `orthGS`
+as `newly_broken` with the same `1E 0W 0N` in both halves.
+All three had a **reused baseline** standing in for the old half.
+All eight packages in that shard that ran a fresh old check were `ok`.
+
+The two halves were parsed by two different parsers.
+A baseline from an earlier run was produced by `rcmdcheck::rcmdcheck()`,
+which parses the *stream* as `R CMD check` writes it;
+this run's half is `parse_check()` on the finished `00check.log`,
+where R has gone back and appended the status to the line it opened.
+The same failing test therefore renders two ways:
+
+```
+checking tests ...          |  checking tests ... ERROR
+  Running 'testthat.R'      |    Running 'testthat.R'
+ ERROR                      |  Running the tests in ... failed.
+```
+
+`compare_checks()` hashes the first line, so those are two different issues —
+`81f6423…` against `23e57fe…` — and the new one matches nothing in the old.
+Their `00check.diff` is eight lines, all of it the log directory:
+the *logs* agree, and only the objects disagree.
+
+This is why both halves always run now.
+With the pair concurrent the old check costs no wall clock,
+so substituting a baseline bought nothing and cost comparability —
+and a baseline is a result from another run anyway:
+another machine, another CRAN snapshot, another dependency tree.
+It is still read as a second opinion, and when it disagrees
+with the old check just run, the shard says so
+and records `baseline_agrees` in the manifest.
 
 ### `\donttest` examples are not run
 
