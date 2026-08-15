@@ -488,6 +488,12 @@ neutral_log <- function(path, name) {
 # How much of a package's diff goes into the job log before it is cut off.
 diff_max_lines <- env_num("REVDEP2_DIFF_MAX_LINES", 200)
 
+# How much of an installation or test transcript goes into the job summary.
+# Both are read to find out why something broke, and 80 lines -- the default
+# for the check log, which is a summary of stages -- cuts a compiler error or a
+# testthat run off in the middle.
+detail_max_lines <- env_num("REVDEP2_DETAIL_MAX_LINES", 300)
+
 # The two halves' check logs, as a patch.
 #
 # Both sides are neutralised first, so the paths and the stage timings that
@@ -579,7 +585,7 @@ check_pair <- function(name) {
   list(old = read_side("old"), new = read_side("new"))
 }
 
-check_failure <- function(name, phase, result) {
+check_failure <- function(name, phase, result, progress) {
   if (isTRUE(attr(result, "timed_out"))) {
     # `timeout`, not `failed`. A check killed by the clock says nothing about
     # the package, and in the old phase it says nothing about our change
@@ -605,11 +611,21 @@ check_failure <- function(name, phase, result) {
       " check timed out (",
       attr(result, "duration"),
       "s)",
-      if (nzchar(step)) paste0(" at ", trimws(step)) else ""
+      if (nzchar(step)) paste0(" at ", trimws(step)) else "",
+      ", ",
+      progress
     )
   } else {
     update(name, result = "error", message = conditionMessage(result))
-    inform(name, ": ", phase, " check errored: ", conditionMessage(result))
+    inform(
+      name,
+      ": ",
+      phase,
+      " check errored: ",
+      conditionMessage(result),
+      ", ",
+      progress
+    )
   }
 }
 
@@ -632,11 +648,17 @@ inform(sprintf(
   "Checking %d package(s), old and new side by side",
   length(runnable)
 ))
-for (name in runnable) {
+for (position in seq_along(runnable)) {
+  name <- runnable[[position]]
   entry <- get(name, envir = state)
 
+  # How far along the shard is, on every line that reports a package. A shard
+  # runs for hours and its log is read while it runs; "3/51" answers "is this
+  # nearly done?" without counting lines or knowing what the shard holds.
+  progress <- sprintf("%d/%d", position, length(runnable))
+
   if (out_of_time(entry)) {
-    inform(name, ": deferred (deadline)")
+    inform(name, ": deferred (deadline), ", progress)
     next
   }
 
@@ -652,7 +674,7 @@ for (name in runnable) {
   new <- pair$new
 
   if (inherits(old, "error")) {
-    check_failure(name, "old", old)
+    check_failure(name, "old", old, progress)
     next
   }
   saveRDS(old, file.path(pkg_out(name), "old.rds"))
@@ -680,7 +702,7 @@ for (name in runnable) {
     }
   }
   if (inherits(new, "error")) {
-    check_failure(name, "new", new)
+    check_failure(name, "new", new, progress)
     next
   }
   saveRDS(new, file.path(pkg_out(name), "new.rds"))
@@ -726,7 +748,9 @@ for (name in runnable) {
     entry$status_new,
     ", ",
     attr(new, "duration"),
-    "s for the pair)"
+    "s for the pair, ",
+    progress,
+    ")"
   )
 
   # The parsed results carry everything the reports need; raw check output is
@@ -863,7 +887,8 @@ for (entry in entries) {
   # The reason goes in the title, where `md_details()` cannot tail it away;
   # the body is the check log where there is one, because the reason alone
   # rarely says which check step broke.
-  log <- file.path(out_dir, "pkgs", entry$package, "new-check", "00check.log")
+  kept <- file.path(out_dir, "pkgs", entry$package, "new-check")
+  log <- file.path(kept, "00check.log")
   reason <- gsub("\n", " ", entry$message %||% "")
   lines <- if (file.exists(log)) {
     readLines(log, warn = FALSE)
@@ -872,15 +897,45 @@ for (entry in entries) {
   } else {
     "(no log captured)"
   }
-  append_summary(md_details(
-    sprintf(
-      "<code>%s</code> &mdash; %s%s",
-      entry$package,
-      entry$result,
-      if (nzchar(reason)) paste0(": ", md_escape_html(reason)) else ""
-    ),
-    lines
-  ))
+  title <- sprintf(
+    "<code>%s</code> &mdash; %s%s",
+    entry$package,
+    entry$result,
+    if (nzchar(reason)) paste0(": ", md_escape_html(reason)) else ""
+  )
+  append_summary(md_details(title, lines))
+
+  # The check log says what broke; these two say why, and neither of them fits
+  # in it. `00install.out` is where a package that could not be installed
+  # explains itself -- the check log only points at the file, which used to
+  # mean downloading the artifact to read a compiler error. And a `.Rout.fail`
+  # is the whole test transcript, where the check log carries only its tail.
+  # Each gets its own block and its own budget rather than sharing one, or the
+  # tail of the pair would be all anyone saw.
+  for (extra in list(
+    list(file = "00install.out", what = "installation output"),
+    list(
+      file = list.files(kept, pattern = "[.]Rout[.]fail$"),
+      what = "test output"
+    )
+  )) {
+    for (f in extra$file) {
+      path <- file.path(kept, f)
+      if (!file.exists(path)) {
+        next
+      }
+      append_summary(md_details(
+        sprintf(
+          "<code>%s</code> &mdash; %s (<code>%s</code>)",
+          entry$package,
+          extra$what,
+          f
+        ),
+        readLines(path, warn = FALSE),
+        max_lines = detail_max_lines
+      ))
+    }
+  }
 }
 
 inform(

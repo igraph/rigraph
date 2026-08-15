@@ -978,6 +978,48 @@ It is still read as a second opinion, and when it disagrees
 with the old check just run, the shard says so
 and records `baseline_agrees` in the manifest.
 
+### What the summary shows for a package that broke
+
+Three blocks, each with its own budget rather than sharing one:
+
+- the **check log**, which says *what* broke and at which stage;
+- **`00install.out`**, where a package that could not be installed explains
+  itself. The check log only points at the file,
+  which used to mean downloading the artifact to read a compiler error;
+- the **`.Rout.fail` transcript**, which is the whole test run.
+
+`_R_CHECK_TESTS_NLINES_=0` also widens the check log's own copy
+of a failed test from R's default 13 lines to the complete output —
+thirteen routinely cuts off the failure itself,
+which is both what a reader wants
+and the part the old/new diff has to see to be worth printing.
+`REVDEP2_DETAIL_MAX_LINES` (300) bounds the two transcript blocks.
+
+Every line that reports a package carries its position in the shard —
+`protti: ok (old 0E 0W 0N, new 0E 0W 0N, 1072s for the pair, 1/51)`.
+A shard runs for hours and its log is read while it runs,
+so "is this nearly done?" should not need counting lines.
+
+### Spelling is not checked
+
+It cannot say anything about igraph:
+a misspelling in a revdep's DESCRIPTION is the same misspelling in both halves,
+so it cancels out of every comparison the workflow makes,
+and what is left is noise in a log read to find real differences.
+`_R_CHECK_CRAN_INCOMING_: false` already suppresses it —
+R's spelling stage lives inside `check_CRAN_incoming()` —
+and `_R_CHECK_CRAN_INCOMING_USE_ASPELL_: false` says so out loud
+so that `--as-cran` cannot turn it back on.
+
+A package's *own* `tests/spelling.R` is a different thing
+and this does not touch it.
+Those run because `r-lib/actions/setup-r` sets `NOT_CRAN=true`,
+which is what makes `skip_on_cran()` not skip.
+Turning that off would silence them,
+and would also skip every other `skip_on_cran()` test —
+often the ones most likely to exercise igraph —
+so it is not a knob to turn without deciding to.
+
 ### `\donttest` examples are not run
 
 `--as-cran` turns on `--run-donttest`.
@@ -1074,6 +1116,7 @@ at the next `if`.
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
 | Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
+| Transcript lines shown per install/test block in the summary | — | `REVDEP2_DETAIL_MAX_LINES` | 300 |
 
 ## Prior art
 

@@ -500,6 +500,17 @@ jobs:
       # with --run-donttest". `\dontrun{}` is off unless asked for, and stays
       # off. What is left is every example a package expects to run.
       _R_CHECK_DONTTEST_EXAMPLES_: false
+      # No spell checking. It cannot tell us anything about igraph -- a
+      # misspelling in a revdep's DESCRIPTION is the same misspelling in both
+      # halves -- and it is noise in a log that is read to find real
+      # differences. `_R_CHECK_CRAN_INCOMING_: false` already suppresses it;
+      # this says so out loud so `--as-cran` cannot turn it back on.
+      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
+      # The whole test transcript in the check log, not the last 13 lines.
+      # Thirteen is R's default and it routinely cuts off the failure itself,
+      # which is both what a reader wants and the part the old/new diff has to
+      # see to be worth printing.
+      _R_CHECK_TESTS_NLINES_: 0
 
       # What the driver reads in both of its phases and does not need the
       # runner for. The `runner` context is not available this far up -- only
