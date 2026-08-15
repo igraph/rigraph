@@ -791,22 +791,22 @@ inform(
   " check times measured by an earlier run"
 )
 
-# Weight: every package is checked twice, whether or not a baseline could have
-# been reused.
+# Weight: what one package costs the shard in wall clock, which is one *pair*
+# of checks.
 #
-# It used to be `((!reuse) + 1) *`: a reusable baseline stood in for the old
-# check, so that package cost one check instead of two. It does not any more.
-# The two halves run concurrently against cascading libraries, so the old check
-# costs no wall clock worth saving, and a baseline is a result from another
-# machine and another CRAN snapshot -- in run 31879790285 that mismatch
-# accounted for 76 of the 78 `newly_broken` packages. Both halves always run
-# now, so pricing the reused ones at half is simply wrong, and wrong in a way
-# that under-fills exactly the shards holding the most of them.
-#
-# The factor of two is nominal: `check_scale` is fitted from what the last runs
-# measured, so whatever it is really worth in wall clock is absorbed there. What
-# matters here is that every package is priced the same way.
-weight <- 2 * check_seconds / 60 + overhead_minutes
+# This used to be `((!reuse) + 1) *`: a reusable baseline stood in for the old
+# check, so such a package cost one check and everything else cost two. Both
+# halves always run now, so the condition is gone -- but so is the factor of
+# two, and that part is easy to get backwards. The two halves run
+# *concurrently*, so a package costs the shard the wall clock of the slower
+# one, not the sum. And `check_scale` is fitted from exactly that quantity:
+# `collect.R` records `t_old` and `t_new` as the pair's wall clock and
+# `calibration()` fits `median(seconds / T_total)` from it, so
+# `check_seconds` already *is* the pair. Multiplying by two here would price
+# every shard at twice its wall clock -- which buys twice the shards, each
+# paying its own setup, and defers packages at the deadline that would have
+# fit.
+weight <- check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
 

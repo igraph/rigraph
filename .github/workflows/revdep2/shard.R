@@ -8,8 +8,11 @@
 # The shard installs the union of its packages' dependencies once, then checks
 # each of its packages against both versions of the package under test at the
 # same time: two `R CMD check` runs side by side, against library stacks that
-# differ in exactly that one package (a reusable baseline stands in for the
-# old half). The two results are compared per package, revdepcheck-style.
+# differ in exactly that one package. Both halves always run -- a reusable
+# baseline used to stand in for the old one, and comparing against another
+# run's machine and CRAN snapshot is what made 76 of run 31879790285's 78
+# `newly_broken` verdicts false. The two results are compared per package,
+# revdepcheck-style.
 #
 # Failure is data here, never a job failure: a package that breaks, times out,
 # or cannot even install its dependencies gets a manifest entry saying so, and
@@ -43,7 +46,7 @@
 #   TIMEOUT_FACTOR         - per-check timeout as a multiple of the package's
 #                            CRAN check time (default: 1.5)
 #   TIMEOUT_MIN_MINUTES    - floor for that timeout; CRAN's machines are not
-#                            these runners (default: 10)
+#                            these runners (default: 20 in the workflow)
 #   DEADLINE_MINUTES       - stop starting new checks past this (default: 300)
 #   PHASE                  - "install", "check", or "all" (default): which half
 #                            of the shard this invocation runs
@@ -70,7 +73,18 @@ timeout_factor <- env_num("TIMEOUT_FACTOR", 1.5)
 timeout_min_sec <- env_num("TIMEOUT_MIN_MINUTES", 10) * 60
 deadline <- Sys.time() + env_num("DEADLINE_MINUTES", 300) * 60
 
-shard <- Filter(function(s) s$index == shard_index, plan$shards)[[1]]
+mine <- Filter(function(s) s$index == shard_index, plan$shards)
+if (length(mine) == 0) {
+  stop(
+    "Plan has no shard ",
+    shard_index,
+    " (it has ",
+    length(plan$shards),
+    "); the plan and the matrix disagree",
+    call. = FALSE
+  )
+}
+shard <- mine[[1]]
 members <- vapply(shard$packages, function(p) p$name, character(1))
 meta <- read_json(file.path(pkg_dir, "meta.json"))
 package <- plan$package
@@ -321,7 +335,12 @@ if (do_install) {
       restore_seconds = restore_seconds,
       install_seconds = install_seconds,
       our_cran_version = our_cran_version,
-      our_dev_version = our_dev_version
+      our_dev_version = our_dev_version,
+      # When the shard's clock started, and what the install phase spent of it.
+      # Both matter to the phase that follows: it has to finish inside the same
+      # job, and its own `script_seconds` is no longer the whole driver.
+      started_at = format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+      phase_seconds = elapsed(script_started)
     ),
     install_state
   )
@@ -343,9 +362,63 @@ if (!file.exists(install_state)) {
 installed_state <- read_json(install_state)
 our_cran_version <- installed_state$our_cran_version
 our_dev_version <- installed_state$our_dev_version
+
+# The deadline belongs to the *shard*, not to this process.
+#
+# `deadline` was computed at the top of the script, so the check phase gave
+# itself a fresh 300 minutes on top of whatever the install phase had already
+# spent -- and the job's own `timeout-minutes: 350` covers their sum. A shard
+# with a 50-minute install could then be killed mid-check by Actions instead of
+# stopping itself and deferring, which is the one thing the deadline exists to
+# prevent. Rebased on when the install phase started.
+shard_started <- tryCatch(
+  as.POSIXct(
+    installed_state$started_at,
+    format = "%Y-%m-%dT%H:%M:%SZ",
+    tz = "UTC"
+  ),
+  error = function(e) NA
+)
+if (!is.na(shard_started)) {
+  deadline <- shard_started + env_num("DEADLINE_MINUTES", 300) * 60
+  inform(sprintf(
+    "Install phase took %s; %s of the shard's deadline left for checks",
+    format_duration(installed_state$phase_seconds %||% 0),
+    format_duration(max(0, as.numeric(deadline - Sys.time(), units = "secs")))
+  ))
+}
 invisible(file.create(manifest_path))
 
-installed <- rownames(utils::installed.packages())
+# What a check will be able to load, which is not the same as what is in the
+# shared library: the package under test is deliberately *not* there. It is
+# unlinked at the end of the install phase so that neither half's cascading
+# library is shadowed by it, and it lives in `lib-old` and `lib-new` instead --
+# neither of which is on this process's `.libPaths()`, because only
+# `check-pair.sh` puts them on `R_LIBS`.
+#
+# Asking the bare `installed.packages()` therefore reports the package under
+# test as missing, and `strong_missing()` below then reports it missing for
+# every revdep that depends on it strongly -- which is every revdep, under
+# `which: strong`. The whole shard would come back `depfail` having checked
+# nothing. Before the install and check phases were split this line ran while
+# the package was still in the shared library, so the question never arose.
+installed <- rownames(utils::installed.packages(
+  lib.loc = c(.libPaths(), lib_old)
+))
+
+# One manifest line, appended as soon as the package has one.
+reported <- character()
+write_manifest_line <- function(entry) {
+  entry$our_cran_version <- our_cran_version
+  entry$our_dev_version <- our_dev_version
+  cat(
+    jsonlite::toJSON(entry, auto_unbox = TRUE, null = "null"),
+    "\n",
+    sep = "",
+    file = manifest_path,
+    append = TRUE
+  )
+}
 inform(sprintf(
   "Checking old (%s) and new (%s) concurrently, two at a time per package",
   our_cran_version,
@@ -537,17 +610,24 @@ check_pair <- function(name) {
     ))
   )
   duration <- round(as.numeric(Sys.time() - started, units = "secs"))
-  # Both checks ran side by side, so the pair cost what the slower one cost --
-  # but each half is still charged, because that is the work the cost model
-  # measures and the shard's own deadline spends.
-  check_seconds <<- check_seconds + 2 * duration
+  # Both checks ran side by side, so the pair cost what the slower one cost,
+  # and that -- not the sum of the two -- is what the shard's deadline spends
+  # and what the cost model is fitted against.
+  check_seconds <<- check_seconds + duration
 
   read_side <- function(phase) {
     dir <- file.path(work_dir, phase)
-    status <- suppressWarnings(as.integer(readLines(
-      file.path(dir, "status"),
-      warn = FALSE
-    )[[1]]))
+    # A pair that never wrote its status -- an unwritable work directory, a
+    # full disk, `check-pair.sh` dying before its last line -- used to throw
+    # "subscript out of bounds" out of the whole loop. It is one package's
+    # problem, so it reads as one.
+    status <- tryCatch(
+      suppressWarnings(as.integer(readLines(
+        file.path(dir, "status"),
+        warn = FALSE
+      )[[1]])),
+      error = function(e) NA_integer_
+    )
     log <- file.path(dir, paste0(name, ".Rcheck"), "00check.log")
     result <- if (identical(status, 124L)) {
       simpleError(sprintf(
@@ -557,7 +637,24 @@ check_pair <- function(name) {
       ))
     } else {
       tryCatch(
-        rcmdcheck::parse_check(text = neutral_log(log, name)),
+        {
+          # Parsed twice, on purpose. `parse_check()` reads `00install.out`
+          # and the test transcripts off the check directory it finds named in
+          # the log's first line -- so parsing the *neutralised* text alone,
+          # where that path has been replaced by a constant, silently leaves
+          # `install_out` at "<00install.out file does not exist>" and
+          # `test_fail` empty, and revdepcheck's failures.md loses exactly the
+          # output a reader opens it for. So the real file gives the object,
+          # and the neutralised text gives only the three fields that are
+          # compared and diffed, where the paths and stage timings would
+          # otherwise make two identical halves look different.
+          res <- rcmdcheck::parse_check(log)
+          neutral <- rcmdcheck::parse_check(text = neutral_log(log, name))
+          res$errors <- neutral$errors
+          res$warnings <- neutral$warnings
+          res$notes <- neutral$notes
+          res
+        },
         error = function(e) {
           simpleError(sprintf(
             "%s check produced no readable result (exit %s): %s",
@@ -583,6 +680,57 @@ check_pair <- function(name) {
   }
 
   list(old = read_side("old"), new = read_side("new"))
+}
+
+# Record the half that did produce a result, when its partner did not.
+#
+# There is nothing to compare, so there is no verdict -- but the check ran, and
+# what it found is the only thing anyone will have to go on when they come back
+# to the package. Kept where the comparison path keeps it, so `retry-run` and a
+# human reading the artifact find it in the usual place.
+keep_side <- function(name, phase, result) {
+  saveRDS(result, file.path(pkg_out(name), paste0(phase, ".rds")))
+  if (identical(phase, "old")) {
+    update(
+      name,
+      status_old = counts(result),
+      t_old = attr(result, "duration"),
+      old_checked_at = now_utc()
+    )
+  } else {
+    update(
+      name,
+      status_new = counts(result),
+      t_new = attr(result, "duration")
+    )
+  }
+  copy_check_output(
+    file.path(work, "check", name, phase, paste0(name, ".Rcheck")),
+    file.path(out_dir, "pkgs", name, paste0(phase, "-check"))
+  )
+}
+
+# The files worth carrying out of a check directory: what broke, and the
+# complete transcripts of the two stages that explain why.
+copy_check_output <- function(rcheck, keep) {
+  dir.create(keep, recursive = TRUE, showWarnings = FALSE)
+  for (f in c(
+    "00check.log",
+    "00install.out",
+    list.files(
+      rcheck,
+      pattern = "[.]Rout[.]fail$|-Ex[.]Rout$",
+      recursive = TRUE
+    )
+  )) {
+    if (file.exists(file.path(rcheck, f))) {
+      file.copy(
+        file.path(rcheck, f),
+        file.path(keep, basename(f)),
+        overwrite = TRUE
+      )
+    }
+  }
 }
 
 check_failure <- function(name, phase, result, progress) {
@@ -688,13 +836,14 @@ progress_note <- function(position) {
   )
 }
 
-for (position in seq_along(runnable)) {
-  name <- runnable[[position]]
+# One package: both halves, compared, recorded. Returns nothing; everything it
+# learns goes into `state`, and the caller writes that out however this ends.
+check_package <- function(name, position) {
   entry <- get(name, envir = state)
 
   if (out_of_time(entry)) {
     inform(name, ": deferred (deadline), ", progress_note(position))
-    next
+    return(invisible(NULL))
   }
 
   # Both halves, always. A baseline used to stand in for the old check and
@@ -710,13 +859,28 @@ for (position in seq_along(runnable)) {
 
   # What this one was priced at against what it cost, which is what prices the
   # rest. A timed-out check counts too: the clock really did spend it.
-  planned_done <- planned_done + planned_minutes(name)
-  actual_done <- actual_done + (attr(new, "duration") %||% 0) / 60
+  planned_done <<- planned_done + planned_minutes(name)
+  actual_done <<- actual_done + (attr(new, "duration") %||% 0) / 60
   progress <- progress_note(position)
 
+  # A half that produced a result is kept even when its partner did not.
+  #
+  # Running the pair concurrently was supposed to mean that "a package whose
+  # old check hangs still gets its new answer" -- but the old half's error used
+  # to `next` straight past the code that saves the new one, so the answer was
+  # produced and then thrown away, and the artifact held nothing at all for
+  # that package. 19 packages in run 31879790285 lost a half this way.
+  if (inherits(new, "error")) {
+    if (!inherits(old, "error")) {
+      keep_side(name, "old", old)
+    }
+    check_failure(name, "new", new, progress)
+    return(invisible(NULL))
+  }
   if (inherits(old, "error")) {
+    keep_side(name, "new", new)
     check_failure(name, "old", old, progress)
-    next
+    return(invisible(NULL))
   }
   saveRDS(old, file.path(pkg_out(name), "old.rds"))
   update(
@@ -741,10 +905,6 @@ for (position in seq_along(runnable)) {
         ))
       }
     }
-  }
-  if (inherits(new, "error")) {
-    check_failure(name, "new", new, progress)
-    next
   }
   saveRDS(new, file.path(pkg_out(name), "new.rds"))
 
@@ -803,29 +963,10 @@ for (position in seq_along(runnable)) {
     unlink(file.path(work, "check", name), recursive = TRUE)
   } else {
     keep <- file.path(out_dir, "pkgs", name, "new-check")
-    dir.create(keep, recursive = TRUE, showWarnings = FALSE)
     rcheck <- function(phase) {
       file.path(work, "check", name, phase, paste0(name, ".Rcheck"))
     }
-    # The complete transcripts, so that bounding what goes into the check log
-    # never costs anything. R writes `<file>.Rout.fail` for a test file that
-    # failed and `<pkg>-Ex.Rout` for the examples -- the second one is not a
-    # `.fail` file and so used to be dropped, which left an examples failure
-    # (13 of run 31879790285's 19 timeouts, and both of its genuine
-    # regressions) with nothing to read but the check log's own excerpt.
-    for (f in c(
-      "00check.log",
-      "00install.out",
-      list.files(
-        rcheck("new"),
-        pattern = "[.]Rout[.]fail$|-Ex[.]Rout$",
-        recursive = TRUE
-      )
-    )) {
-      if (file.exists(file.path(rcheck("new"), f))) {
-        file.copy(file.path(rcheck("new"), f), file.path(keep, basename(f)))
-      }
-    }
+    copy_check_output(rcheck("new"), keep)
     old_log <- file.path(rcheck("old"), "00check.log")
     new_log <- file.path(rcheck("new"), "00check.log")
     if (file.exists(old_log) && file.exists(new_log)) {
@@ -858,23 +999,50 @@ for (position in seq_along(runnable)) {
     }
     unlink(file.path(work, "check", name), recursive = TRUE)
   }
+  invisible(NULL)
+}
+
+for (position in seq_along(runnable)) {
+  name <- runnable[[position]]
+  # A driver error is this package's problem, not the shard's. Before, an
+  # unguarded `readLines(.../status)[[1]]` on a check-pair that never wrote its
+  # status file -- a full disk, an unwritable work directory -- threw out of
+  # the loop and took every remaining package with it.
+  tryCatch(
+    check_package(name, position),
+    error = function(e) {
+      update(
+        name,
+        result = "error",
+        message = paste("driver error:", conditionMessage(e))
+      )
+      inform(name, ": driver error: ", conditionMessage(e))
+    }
+  )
+
+  # This package's line, now rather than at the end of the shard.
+  #
+  # The file is newline-delimited JSON precisely so that it can be appended to,
+  # but it used to be written in one pass after the loop -- so a shard killed
+  # by the job timeout, or thrown out of the loop by an unhandled error, left
+  # an *empty* manifest next to a full set of results, and `collect.R` skips a
+  # directory whose manifest has no lines. Hours of finished checks were one
+  # kill away from being reported as `missing`. Deferred and unreached packages
+  # are appended at the end, and the collector reconciles the rest against the
+  # plan.
+  write_manifest_line(get(name, envir = state))
+  reported <- c(reported, name)
 }
 
 
 # ---------------------------------------------------------------- manifest ---
 
-entries <- lapply(members, function(name) get(name, envir = state))
-for (entry in entries) {
-  entry$our_cran_version <- our_cran_version
-  entry$our_dev_version <- our_dev_version
-  cat(
-    jsonlite::toJSON(entry, auto_unbox = TRUE, null = "null"),
-    "\n",
-    sep = "",
-    file = manifest_path,
-    append = TRUE
-  )
+# Whatever the loop never reached: deferred packages, and the ones a depfail or
+# a missing source knocked out before it started.
+for (name in setdiff(members, reported)) {
+  write_manifest_line(get(name, envir = state))
 }
+entries <- lapply(members, function(name) get(name, envir = state))
 
 # ----------------------------------------------------------------- timings ---
 
@@ -893,10 +1061,18 @@ write_json(
     restore_seconds = installed_state$restore_seconds,
     install_seconds = installed_state$install_seconds,
     check_seconds = round(check_seconds, 1),
-    # The install phase is its own step now, so this is the check phase's own
-    # wall clock; the two together are what the shard job cost.
-    script_seconds = elapsed(script_started),
-    started_at = format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+    # Both phases, because the collector fits `setup_minutes` as
+    # `job_minutes - script_minutes` -- the minutes before the driver starts.
+    # Reporting only this process would have charged the whole install phase to
+    # "setup", which the plan then seeds every shard's load with *and* prices
+    # again per dependency, and a setup of tens of minutes instead of six is
+    # what tips a plan into extra waves.
+    script_seconds = round(
+      (installed_state$phase_seconds %||% 0) + elapsed(script_started),
+      1
+    ),
+    started_at = installed_state$started_at %||%
+      format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     finished_at = now_utc(),
     planned_minutes = shard$estimate_minutes,
     planned_check_minutes = shard$check_minutes
@@ -913,10 +1089,22 @@ df <- data.frame(
   Result = results,
   Old = vapply(entries, function(e) e$status_old, character(1)),
   New = vapply(entries, function(e) e$status_new, character(1)),
-  Baseline = ifelse(
-    vapply(entries, function(e) isTRUE(e$baseline_reused), logical(1)),
-    "reused",
-    ""
+  # `baseline_reused` stopped being set when both halves became mandatory, so
+  # this column was empty in every row. What the baseline is still good for is
+  # the drift check -- whether a result from an earlier run still reproduces --
+  # and that is what it says now.
+  Baseline = vapply(
+    entries,
+    function(e) {
+      if (isTRUE(e$baseline_agrees)) {
+        "agrees"
+      } else if (isFALSE(e$baseline_agrees)) {
+        "disagrees"
+      } else {
+        ""
+      }
+    },
+    character(1)
   )
 )
 append_summary(c(
