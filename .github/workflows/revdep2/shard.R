@@ -100,7 +100,9 @@ for (p in shard$packages) {
       t_total = p$t_total %||% 0,
       dep_fingerprint = p$dep_fingerprint,
       baseline_planned = isTRUE(p$baseline),
-      baseline_reused = FALSE,
+      # Whether the old check reproduced the baseline this run was offered.
+      # NA when there was none to compare against.
+      baseline_agrees = NA,
       result = "deferred",
       status = "",
       status_old = "",
@@ -391,6 +393,29 @@ out_of_time <- function(entry) {
 # The timeout is coreutils' rather than rcmdcheck's, which is what makes the
 # distinction reliable: exit 124 is the deadline, anything else is the check
 # saying something.
+# The check log with this run's paths taken out of it.
+#
+# `compare_checks()` matches issues by their text, so any text that differs
+# between the halves for reasons that are not the package makes a shared issue
+# look like a new one. Since the two libraries cascade, they differ by
+# construction -- `.../lib-old/...` against `.../lib-new/...` -- and so do the
+# check directories. In run 31879790285 that turned packages with the same one
+# error in both halves into `newly_broken`: `dm` and `fsbrain` both reported
+# "old 1E 0W 0N, new 1E 0W 0N" and were called newly broken, because the error
+# quoted a path.
+#
+# So both are replaced by a constant before the log is parsed. Nothing else is
+# touched: a difference anywhere but in these paths is exactly what this
+# workflow exists to find.
+neutral_log <- function(path, name) {
+  lines <- readLines(path, warn = FALSE)
+  for (from in c(lib_old, lib_new, file.path(work, "check", name))) {
+    lines <- gsub(from, "<lib>", lines, fixed = TRUE)
+  }
+  # The phase also names itself in the .Rcheck path under the work directory.
+  gsub("<lib>/(old|new)", "<lib>", lines)
+}
+
 check_pair <- function(name) {
   checks_started <<- checks_started + 1L
   work_dir <- file.path(work, "check", name)
@@ -436,7 +461,7 @@ check_pair <- function(name) {
       ))
     } else {
       tryCatch(
-        rcmdcheck::parse_check(log),
+        rcmdcheck::parse_check(text = neutral_log(log, name)),
         error = function(e) {
           simpleError(sprintf(
             "%s check produced no readable result (exit %s): %s",
@@ -520,55 +545,49 @@ inform(sprintf(
 for (name in runnable) {
   entry <- get(name, envir = state)
 
-  # A reusable baseline still stands in for the old check; only the new one is
-  # then run, and it runs alone.
-  reused <- FALSE
-  old <- NULL
-  if (entry$baseline_planned) {
-    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
-    old <- tryCatch(readRDS(rds), error = function(e) NULL)
-    if (!is.null(old)) {
-      saveRDS(old, file.path(pkg_out(name), "old.rds"))
-      donor <- Filter(
-        function(e) identical(e$package, name),
-        read_json(file.path(baseline_dir, "baseline.json"))
-      )
-      update(
-        name,
-        baseline_reused = TRUE,
-        status_old = counts(old),
-        old_checked_at = if (length(donor) > 0) donor[[1]]$checked_at else NA
-      )
-      reused <- TRUE
-      inform(name, ": baseline reused")
-    } else {
-      inform(name, ": planned baseline unavailable, checking fresh")
-    }
-  }
-
   if (out_of_time(entry)) {
     inform(name, ": deferred (deadline)")
     next
   }
 
+  # Both halves, always. A baseline used to stand in for the old check and
+  # save it; with the pair running concurrently the old check costs no wall
+  # clock at all, and reusing a result from another run means comparing
+  # against a machine, a CRAN snapshot and a dependency tree that are not
+  # this run's. The baseline is still read, but as a second opinion: if it
+  # disagrees with what the old check just produced, that is drift worth
+  # printing rather than a comparison worth trusting.
   pair <- check_pair(name)
+  old <- pair$old
   new <- pair$new
-  if (!reused) {
-    old <- pair$old
-  }
 
   if (inherits(old, "error")) {
     check_failure(name, "old", old)
     next
   }
-  if (!reused) {
-    saveRDS(old, file.path(pkg_out(name), "old.rds"))
-    update(
-      name,
-      status_old = counts(old),
-      t_old = attr(old, "duration"),
-      old_checked_at = now_utc()
-    )
+  saveRDS(old, file.path(pkg_out(name), "old.rds"))
+  update(
+    name,
+    status_old = counts(old),
+    t_old = attr(old, "duration"),
+    old_checked_at = now_utc()
+  )
+
+  if (entry$baseline_planned) {
+    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
+    baseline <- tryCatch(readRDS(rds), error = function(e) NULL)
+    if (!is.null(baseline)) {
+      agrees <- identical(counts(baseline), counts(old))
+      update(name, baseline_agrees = agrees)
+      if (!agrees) {
+        inform(sprintf(
+          "%s: the baseline said %s, the old check now says %s",
+          name,
+          counts(baseline),
+          counts(old)
+        ))
+      }
+    }
   }
   if (inherits(new, "error")) {
     check_failure(name, "new", new)
