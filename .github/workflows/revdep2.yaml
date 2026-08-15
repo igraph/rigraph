@@ -641,7 +641,14 @@ jobs:
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
+      # `!cancelled()` rather than the default `success()`: an install step
+      # that *failed* still leaves a shard full of packages to account for, and
+      # the driver reports a package it could not install as a depfail, which
+      # is a result. Skipping this step instead left all 50 of shard 3's
+      # packages as `missing` in run 31893156685 -- the one outcome that tells
+      # nobody anything.
       - name: Check the shard
+        if: '!cancelled()'
         env:
           PHASE: check
         run: |

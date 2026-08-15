@@ -27,10 +27,12 @@
 # REVDEP2_INSTALL_DEADLINE_MINUTES the installs together -- see the README's
 # "Nothing waits for ever".
 
-source(file.path(
-  dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
-  "util.R"
+script_dir <- dirname(sub(
+  "--file=",
+  "",
+  grep("^--file=", commandArgs(), value = TRUE)
 ))
+source(file.path(script_dir, "util.R"))
 
 plan <- read_json(env_chr("PLAN", "plan.json"))
 out_dir <- env_chr("OUT_DIR", "preflight")
@@ -198,6 +200,10 @@ inform("Preflight: loading ", length(installed), " packages")
 # failing batch names its culprit; a single package that then times out is a
 # load failure like any other, with "timed out" as its reason.
 load_timeout_sec <- env_num("REVDEP2_LOAD_TIMEOUT_MINUTES", 10) * 60
+# One session per package, several at a time. The runner has four cores and
+# loading is mostly I/O and dynamic linking, so it parallelises well.
+load_jobs <- max(1, env_num("REVDEP2_LOAD_JOBS", parallel::detectCores()))
+load_sweep_sec <- env_num("REVDEP2_LOAD_SWEEP_MINUTES", 60) * 60
 load_batch <- function(pkgs) {
   script <- tempfile(fileext = ".R")
   writeLines(
@@ -236,28 +242,104 @@ load_batch <- function(pkgs) {
   loaded <- sub("^LOADED ", "", grep("^LOADED ", out, value = TRUE))
   list(failed = setdiff(pkgs, loaded), log = out, timed_out = timed_out)
 }
+# Which packages actually have to be loaded.
+#
+# Loading a namespace loads everything it imports, transitively -- so loading
+# the packages nothing else in the set depends on covers the whole set. In a
+# DAG every other package is reachable from at least one of those roots, by
+# following dependents upwards until there are none. For a universe of a few
+# thousand packages the roots are a few hundred, so this is the same coverage
+# for a fraction of the sessions.
+#
+# The saving is real but it is not the main point. One session per package
+# means one clock per package: a package whose `.onLoad` blocks used to spend
+# a batch's whole ten minutes and take 39 innocent packages with it, and the
+# batch then had to be re-run package by package to find out which one it was.
+# And independent sessions run at once, which is what the runner's other three
+# cores are for.
+load_roots <- function(pkgs) {
+  db <- cran_db()
+  known <- intersect(pkgs, rownames(db))
+  if (length(known) == 0) {
+    return(pkgs)
+  }
+  deps <- tools::package_dependencies(
+    known,
+    db = db,
+    which = "strong",
+    recursive = TRUE
+  )
+  depended_on <- unique(unlist(deps, use.names = FALSE))
+  roots <- setdiff(known, depended_on)
+  # Anything the database cannot speak for is tested in its own right rather
+  # than assumed to be covered by something else.
+  c(roots, setdiff(pkgs, known))
+}
+
 load_failures <- list()
-chunks <- split(installed, ceiling(seq_along(installed) / 40))
-for (chunk in chunks) {
+roots <- load_roots(installed)
+inform(sprintf(
+  "Preflight: load-testing %d of %d installed package(s) -- the ones nothing else needs, which pull the rest in -- %d at a time, %.0f min each",
+  length(roots),
+  length(installed),
+  load_jobs,
+  load_timeout_sec / 60
+))
+if (!out_of_time("the load test") && length(roots) > 0) {
+  list_file <- file.path(tempdir(), "load-roots.txt")
+  writeLines(roots, list_file)
+  run <- run_with_timeout(
+    function(script, args) {
+      system2(script, args, stdout = TRUE, stderr = TRUE)
+    },
+    list(
+      script = file.path(script_dir, "load-test.sh"),
+      args = shQuote(c(
+        list_file,
+        lib,
+        format(round(load_timeout_sec), scientific = FALSE),
+        format(load_jobs)
+      ))
+    ),
+    # The whole sweep, bounded independently of the per-package clocks: with
+    # `jobs` in parallel the worst case is roughly `roots / jobs` timeouts, and
+    # this is the backstop for the case where that is still too long.
+    timeout_seconds = min(
+      load_sweep_sec,
+      max(60, as.numeric(difftime(job_deadline, Sys.time(), units = "secs")))
+    ),
+    label = "load test"
+  )
+  out <- if (is.character(run$value)) run$value else character()
+  for (line in grep("^FAIL ", out, value = TRUE)) {
+    parts <- strsplit(line, " ", fixed = TRUE)[[1]]
+    load_failures[[parts[[2]]]] <- if (identical(parts[[3]], "timeout")) {
+      sprintf("loading timed out after %.0f min", load_timeout_sec / 60)
+    } else {
+      "loading failed"
+    }
+  }
+  if (!run$ok) {
+    inform("The load test did not finish: ", run$message)
+  }
+}
+
+# What a failure means is worth a second look, so the ones that failed are
+# re-run alone with their output kept. There are few of them by construction.
+for (p in names(load_failures)) {
   if (out_of_time("the load test")) {
     break
   }
-  first <- load_batch(chunk)
-  if (length(first$failed) == 0) {
+  single <- load_batch(p)
+  if (length(single$failed) == 0) {
+    load_failures[[p]] <- NULL
     next
   }
-  for (p in first$failed) {
-    if (out_of_time("the load test")) {
-      break
-    }
-    single <- load_batch(p)
-    if (length(single$failed) > 0) {
-      load_failures[[p]] <- if (isTRUE(single$timed_out)) {
-        sprintf("loading timed out after %.0f min", load_timeout_sec / 60)
-      } else {
-        paste(utils::tail(sanitize_log(single$log), 20), collapse = "\n")
-      }
-    }
+  if (!isTRUE(single$timed_out)) {
+    load_failures[[p]] <- paste(
+      utils::tail(sanitize_log(single$log), 20),
+      collapse = "\n"
+    )
   }
 }
 

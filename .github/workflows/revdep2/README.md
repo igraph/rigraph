@@ -847,6 +847,70 @@ A chunk that fails is retried once,
 but only when the rebuild actually changed something —
 against a healthy database, a failed chunk is a real failure.
 
+### Loading is tested one package at a time, in parallel
+
+Loading a namespace loads everything it imports, transitively,
+so loading the packages *nothing else in the set depends on*
+covers the whole set:
+in a DAG every other package is reachable from one of those roots
+by following dependents upwards.
+Measured on the real universe:
+**865 roots out of 2645 packages, and nothing left uncovered.**
+
+The saving in sessions is not the point.
+One session per package means one clock per package.
+A package whose `.onLoad` blocks used to spend a batch's whole ten minutes
+and take 39 innocent packages with it,
+and the batch then had to be re-run package by package
+to find out which one it was.
+And independent sessions run at once,
+which is what the runner's other three cores are for
+(`load-test.sh`, GNU `parallel` where it exists and `xargs -P` where it does
+not, `timeout` per package).
+
+It is more total work: the roots' closures sum to about 48,000 namespace loads
+against roughly 27,000 for 67 batches of 40,
+because each root reloads what it shares with the others.
+Against that, the batched sweep ran serially,
+so four at a time should still roughly halve it.
+That last part is a projection, not a measurement —
+the next run's preflight timing is what settles it.
+`REVDEP2_LOAD_JOBS` and `REVDEP2_LOAD_SWEEP_MINUTES` are the knobs;
+the failures are re-run singly afterwards to keep their output,
+and there are few of them by construction.
+
+### A shard that cannot install still reports
+
+An install that overruns used to be given the shard's whole deadline,
+on the reasoning that an install running into it
+leaves no time to check anything.
+That is true, and it is the wrong conclusion.
+Shard 3 of run 31893156685 sat in its install step for 2 h 33 m,
+was cancelled, and its 50 packages came back `missing` —
+the one result that tells nobody anything.
+
+Three things now stand between an install and that outcome:
+
+- the install gets `REVDEP2_SHARD_INSTALL_MINUTES` (90) of the shard's time,
+  not all of it, and what it could not install becomes a depfail,
+  which is a *result*;
+- the check step runs on `!cancelled()` rather than `success()`,
+  so a *failed* install still gets its packages accounted for;
+- a check phase that finds no install state writes a manifest saying so
+  for every package in the shard, rather than exiting and leaving them
+  to be reported as `missing`.
+
+The per-package fallback in the install is also no longer
+`requireNamespace()` in a loop.
+That *loads* each package — hundreds of namespaces and their DLLs
+into the driver process, and past `R_MAX_NUM_DLLS` (614)
+it starts returning `FALSE` for packages that are installed,
+so the loop reinstalls them —
+and its deadline check only skipped the install,
+after the namespace had been loaded.
+Which packages are missing is a question about the filesystem,
+and `missing_from()` answers it that way.
+
 ### System requirements of packages nobody installed
 
 `PKG_SYSREQS` is on in both jobs, so pak runs `apt-get`
@@ -1222,6 +1286,9 @@ at the next `if`.
 | Per-check timeout floor | — | `REVDEP2_TIMEOUT_MIN_MINUTES` | 20 |
 | Shard graceful deadline | — | `REVDEP2_DEADLINE_MINUTES` | 300 |
 | Diff lines printed into the job log per package | — | `REVDEP2_DIFF_MAX_LINES` | 200 |
+| Load tests run at once | — | `REVDEP2_LOAD_JOBS` | one per core |
+| Time limit on the whole load sweep | — | `REVDEP2_LOAD_SWEEP_MINUTES` | 60 |
+| Shard minutes the install may take before the checks get the rest | — | `REVDEP2_SHARD_INSTALL_MINUTES` | 90 |
 | Transcript lines shown per install/test block in the summary | — | `REVDEP2_DETAIL_MAX_LINES` | 300 |
 
 ## Prior art
