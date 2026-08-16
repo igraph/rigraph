@@ -380,6 +380,63 @@ test_that("as_adjacency_matrix(attr =) is deprecated but still works", {
   expect_equal(A, expected)
 })
 
+test_that("as_adjacency_matrix(attr = NULL) still means unweighted", {
+  # `attr = NULL` was the documented spelling of "give me a plain 0/1 matrix";
+  # `weights = NULL` means the opposite, "use the weight attribute if there is
+  # one". Translating one into the other inverted every call that spelled it
+  # out -- silently, since the graph having a `weight` attribute is exactly the
+  # case where the caller bothers to ask for an unweighted matrix.
+  rlang::local_options(lifecycle_verbosity = "quiet")
+  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  E(g)$weight <- c(0.5, 0.7)
+
+  expect_equal(
+    as_adjacency_matrix(g, attr = NULL, sparse = FALSE),
+    as_adjacency_matrix(g, weights = NA, sparse = FALSE)
+  )
+  expect_true(all(as_adjacency_matrix(g, attr = NULL, sparse = FALSE) %in% 0:1))
+
+  # And the other spellings keep their meanings.
+  expect_equal(
+    as_adjacency_matrix(g, attr = "weight", sparse = FALSE),
+    as_adjacency_matrix(g, weights = "weight", sparse = FALSE)
+  )
+})
+
+test_that("as_biadjacency_matrix(attr = NULL) still means unweighted", {
+  # Same translation, same shared helper -- the second caller of it.
+  rlang::local_options(lifecycle_verbosity = "quiet")
+  g <- make_bipartite_graph(c(0, 1, 0, 1), c(1, 2, 3, 4))
+  E(g)$weight <- c(0.5, 0.7)
+
+  expect_equal(
+    as_biadjacency_matrix(g, attr = NULL, sparse = FALSE),
+    as_biadjacency_matrix(g, weights = NA, sparse = FALSE)
+  )
+  expect_true(
+    all(as_biadjacency_matrix(g, attr = NULL, sparse = FALSE) %in% 0:1)
+  )
+})
+
+test_that("the `attr` deprecation warning spells out the NULL translation", {
+  # Following the bare "use `weights` instead" advice literally would turn
+  # `attr = NULL` into `weights = NULL`, which means the opposite thing.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  E(g)$weight <- c(0.5, 0.7)
+
+  expect_warning(
+    as_adjacency_matrix(g, attr = NULL, sparse = FALSE),
+    "weights = NA",
+    fixed = TRUE
+  )
+  expect_warning(
+    as_adjacency_matrix(g, attr = "weight", sparse = FALSE),
+    "weights",
+    fixed = TRUE
+  )
+})
+
 test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
   # The generic recovery machinery (messages, errors, abbreviations) is tested
   # exhaustively in test-migration-fixture.R; here we only confirm the block is
