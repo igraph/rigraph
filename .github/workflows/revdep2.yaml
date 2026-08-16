@@ -688,27 +688,90 @@ jobs:
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
-      # `!cancelled()` rather than the default `success()`: an install step
-      # that *failed* still leaves a shard full of packages to account for, and
-      # the driver reports a package it could not install as a depfail, which
-      # is a result. Skipping this step instead left all 50 of shard 3's
-      # packages as `missing` in run 31893156685 -- the one outcome that tells
-      # nobody anything.
-      - name: Check the shard
+      # The checks run in three slices, each followed by an upload.
+      #
+      # The driver has always written its results as it goes, so that a shard
+      # killed part way through still accounts for what it finished -- but the
+      # upload was one step at the end, and `if: always()` cannot save a step on
+      # a runner that is no longer there. Shard 16 of run 31951756102 got three
+      # minutes into a 196-minute check budget before
+      #
+      #   ##[error]The runner has received a shutdown signal.
+      #   ##[error]Process completed with exit code 143.
+      #
+      # took the whole job with it. The upload was skipped and all 87 packages
+      # were reported `missing`, having cost a runner an hour. At three slices
+      # that is bounded to a third of the shard, and the interim artifacts also
+      # say `deferred` for the packages not yet reached, which is truer than the
+      # `missing` the collector would otherwise reconcile them into.
+      #
+      # Three rather than more because each upload is a step, and the artifact
+      # carries the whole results directory every time; the shard's own deadline
+      # already caps the tail.
+      #
+      # `!cancelled()` rather than the default `success()`: an install step that
+      # *failed* still leaves a shard full of packages to account for, and the
+      # driver reports a package it could not install as a depfail, which is a
+      # result. Skipping this step instead left all 50 of shard 3's packages as
+      # `missing` in run 31893156685 -- the one outcome that tells nobody
+      # anything. The later slices additionally tolerate an earlier one having
+      # failed, for the same reason.
+      - name: Check the shard (1 of 3)
         if: '!cancelled()'
         env:
           PHASE: check
+          CHECK_SLICE: 1/3
         run: |
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
       # Named per attempt: a re-run of one shard must not overwrite the results
       # the other shards uploaded in the first attempt; the collector reads
-      # every attempt and lets the later one win per package.
-      # Before the upload, so the last sample and the OOM verdict ride in the
-      # artifact. It cannot run when the *runner* died -- hence the sampler
-      # above -- but it is what answers "was it memory?" in every case where the
-      # job merely failed.
+      # every attempt and lets the later one win per package. `overwrite` so the
+      # slices replace one another under the one name -- they share a results
+      # directory, so the newest upload is a superset of the ones before it.
+      - name: Upload the shard results (1 of 3)
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (2 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 2/3
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      - name: Upload the shard results (2 of 3)
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (3 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 3/3
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      # Before the final upload, so the last sample and the OOM verdict ride in
+      # the artifact. It cannot run when the *runner* died -- hence the sampler
+      # started before the install -- but it is what answers "was it memory?" in
+      # every case where the job merely failed.
       - name: Report what the shard consumed
         if: always()
         run: |
@@ -724,6 +787,7 @@ jobs:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/results
           if-no-files-found: ignore
+          overwrite: true
           retention-days: 30
 
   collect:
