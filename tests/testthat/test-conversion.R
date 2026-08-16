@@ -420,21 +420,14 @@ test_that("as_biadjacency_matrix(attr = NULL) still means unweighted", {
 
 test_that("the `attr` deprecation warning spells out the NULL translation", {
   # Following the bare "use `weights` instead" advice literally would turn
-  # `attr = NULL` into `weights = NULL`, which means the opposite thing.
+  # `attr = NULL` into `weights = NULL`, which means the opposite thing. The
+  # extra line is only there for the `NULL` case, so both are snapshotted.
   rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
   E(g)$weight <- c(0.5, 0.7)
 
-  expect_warning(
-    as_adjacency_matrix(g, attr = NULL, sparse = FALSE),
-    "weights = NA",
-    fixed = TRUE
-  )
-  expect_warning(
-    as_adjacency_matrix(g, attr = "weight", sparse = FALSE),
-    "weights",
-    fixed = TRUE
-  )
+  expect_snapshot(A <- as_adjacency_matrix(g, attr = NULL, sparse = FALSE))
+  expect_snapshot(B <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE))
 })
 
 test_that("as_adjacency_matrix() wires up legacy `attr` recovery", {
