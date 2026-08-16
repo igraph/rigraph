@@ -5,10 +5,20 @@
 # Usage:
 #   load-test.sh <package-list-file> <library> <seconds> <jobs>
 #
-# Reads one package name per line. Prints one line per package that did not
-# load -- `FAIL <package> <timeout|error>` -- and nothing for the ones that
-# did. Always exits 0: which packages failed is the caller's business, not the
+# Reads one package name per line. Prints one line per package:
+#
+#   OK   <package> <seconds>
+#   FAIL <package> <timeout|error> <seconds>
+#
+# Always exits 0: which packages failed is the caller's business, not the
 # shell's.
+#
+# The `OK` lines are the whole log of a step that otherwise says nothing
+# between "load-testing 498 packages" and the summary. They are also the only
+# place a package that loads *slowly* -- half a minute of `.onLoad`, every
+# time anything downstream of it is checked -- ever shows up. The caller folds
+# them into a collapsed group, so the cost of the other 497 is a line nobody
+# has to scroll past.
 #
 # Why one session per package rather than batches:
 #
@@ -33,19 +43,19 @@ jobs=$4
 # One package, one session, one clock. `--vanilla` so nothing in a profile
 # loads anything this is supposed to be testing.
 load_one() {
-  local pkg=$1 status=0
+  local pkg=$1 status=0 start=${EPOCHSECONDS}
   timeout --kill-after=60s "${seconds}s" \
     Rscript --vanilla -e \
     ".libPaths(c('${lib}', .libPaths())); loadNamespace('${pkg}')" \
     > /dev/null 2>&1 || status=$?
+  local took=$((EPOCHSECONDS - start))
   if [ "${status}" -eq 0 ]; then
-    return 0
-  fi
+    echo "OK ${pkg} ${took}"
   # 124 is coreutils' timeout; anything else is R saying something.
-  if [ "${status}" -eq 124 ] || [ "${status}" -eq 137 ]; then
-    echo "FAIL ${pkg} timeout"
+  elif [ "${status}" -eq 124 ] || [ "${status}" -eq 137 ]; then
+    echo "FAIL ${pkg} timeout ${took}"
   else
-    echo "FAIL ${pkg} error"
+    echo "FAIL ${pkg} error ${took}"
   fi
 }
 export -f load_one

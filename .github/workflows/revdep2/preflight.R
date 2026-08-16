@@ -319,6 +319,51 @@ if (!out_of_time("the load test") && length(roots) > 0) {
       "loading failed"
     }
   }
+
+  # Every package that was tested, and what it cost, folded away.
+  #
+  # Without this the step says "load-testing 498 packages" and then nothing at
+  # all until the summary -- and a package that loads *slowly* has nowhere to
+  # show up, though every check of anything downstream of it pays that cost
+  # again. 498 lines is a lot to scroll past, so they go in a collapsed group
+  # and the interesting ones are repeated outside it.
+  timed <- do.call(
+    rbind,
+    lapply(
+      strsplit(grep("^(OK|FAIL) ", out, value = TRUE), " ", fixed = TRUE),
+      function(p) {
+        data.frame(
+          package = p[[2]],
+          seconds = suppressWarnings(as.numeric(utils::tail(p, 1))),
+          ok = identical(p[[1]], "OK")
+        )
+      }
+    )
+  )
+  if (!is.null(timed) && nrow(timed) > 0) {
+    timed <- timed[order(-timed$seconds), ]
+    print_group(
+      sprintf("Load test: %d package(s), slowest first", nrow(timed)),
+      sprintf(
+        "%6.0fs  %-30s %s",
+        timed$seconds,
+        timed$package,
+        ifelse(timed$ok, "", "FAILED")
+      )
+    )
+    slow <- utils::head(timed[timed$ok, ], 5)
+    inform(sprintf(
+      "Load test: %d ok, %d failed, %s of CPU across %d job(s); slowest: %s",
+      sum(timed$ok),
+      sum(!timed$ok),
+      format_duration(sum(timed$seconds)),
+      load_jobs,
+      paste(
+        sprintf("%s (%.0fs)", slow$package, slow$seconds),
+        collapse = ", "
+      )
+    ))
+  }
   if (!run$ok) {
     inform("The load test did not finish: ", run$message)
   }

@@ -496,6 +496,25 @@ jobs:
       # differences. `_R_CHECK_CRAN_INCOMING_: false` already suppresses it;
       # this says so out loud so `--as-cran` cannot turn it back on.
       _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
+      # No timings in the check output.
+      #
+      # `--as-cran` sets `_R_CHECK_TIMINGS_` to 10, which stamps every stage
+      # slower than that with its own `[user/elapsed]` pair and appends an
+      # "Examples with CPU ... > 5s" table. Both are pure noise here: they
+      # differ between the two halves by construction -- they are wall clock,
+      # measured on two checks racing each other for the same four cores --
+      # so every one of them is a line in the diff that says nothing about the
+      # package. `neutral_log()` strips them so the *comparison* is not fooled;
+      # this stops them being produced at all, so the diff a human reads is
+      # only what changed.
+      #
+      # Nothing is lost. What a stage cost is still recorded, per line and for
+      # every stage rather than only the slow ones, by the elapsed stamping in
+      # check-pair.sh -- which is on the driver log, not on the file the halves
+      # are compared through.
+      _R_CHECK_TIMINGS_: ""
+      _R_CHECK_EXAMPLE_TIMING_THRESHOLD_: 99999
+
       # 300 lines of a failed test transcript in the check log, not R's default
       # 13 -- thirteen routinely cuts off the failure itself, which is both
       # what a reader wants and the part the old/new diff has to see to be
