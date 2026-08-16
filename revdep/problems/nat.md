@@ -103,6 +103,6 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘com.google.Chrome.ZETBx5’
+       ‘com.google.Chrome.3ecrYW’
      ```
 
