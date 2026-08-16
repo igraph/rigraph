@@ -130,6 +130,7 @@ local_scan <- function(
   stopifnot(
     is.null(FUN) || is.function(FUN) || (is.character(FUN) && length(FUN) == 1)
   )
+  check_deprecated_function(FUN)
 
   ## Logical
   stopifnot(is.logical(weighted), length(weighted) == 1)

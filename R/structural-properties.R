@@ -3795,6 +3795,7 @@ bfs <- function(
   }
   if (!is.null(callback)) {
     callback <- as.function(callback)
+    check_deprecated_function(callback)
   }
 
   on.exit(.Call(Rx_igraph_finalizer))
@@ -4058,9 +4059,11 @@ dfs <- function(
   unreachable <- as.logical(unreachable)
   if (!is.null(in.callback)) {
     in.callback <- as.function(in.callback)
+    check_deprecated_function(in.callback)
   }
   if (!is.null(out.callback)) {
     out.callback <- as.function(out.callback)
+    check_deprecated_function(out.callback)
   }
 
   on.exit(.Call(Rx_igraph_finalizer))

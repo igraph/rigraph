@@ -2562,6 +2562,7 @@ cluster_leading_eigen <- function(
 
   # Argument checks
   ensure_igraph(graph)
+  check_deprecated_function(callback)
 
   steps <- as.numeric(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {

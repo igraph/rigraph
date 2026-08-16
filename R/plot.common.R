@@ -552,6 +552,7 @@ i.parse.plot.params <- function(graph, params) {
     ret <- function() {
       v <- p[[type]][[name]]
       if (is.function(v) && !dontcall) {
+        check_deprecated_function(v)
         v <- v(graph)
       }
       if (is.null(range)) {

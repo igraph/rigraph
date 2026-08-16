@@ -221,6 +221,7 @@ motifs <- function(
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
   }
+  check_deprecated_function(callback)
 
   # If callback is provided, use the callback implementation
   if (!is.null(callback)) {

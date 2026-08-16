@@ -1327,6 +1327,12 @@ igraph.i.attribute.combination <- function(comb, allow_rename = FALSE) {
       "Attribute combination element must be a function or character scalar."
     )
   }
+  # A plain loop, not lapply(): check_deprecated_function() reads the call
+  # stack to find out who igraph was called by, and a functional in between
+  # would hide the caller behind a frame of its own.
+  for (element in comb) {
+    check_deprecated_function(element)
+  }
   if (is.null(names(comb))) {
     names(comb) <- rep("", length(comb))
   }

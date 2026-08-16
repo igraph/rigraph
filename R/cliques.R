@@ -257,6 +257,7 @@ clique.number <- function(graph) {
 cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
   ensure_igraph(graph)
   check_dots_empty()
+  check_deprecated_function(callback)
 
   if (is.null(callback)) {
     # Collector mode: use original implementation
@@ -308,6 +309,7 @@ max_cliques <- function(
 ) {
   ensure_igraph(graph)
   check_dots_empty()
+  check_deprecated_function(callback)
 
   # Handle file and subset modes (original functionality)
   if (!is.null(file)) {

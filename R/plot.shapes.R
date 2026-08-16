@@ -459,6 +459,9 @@ add_shape <- function(
     ))
   }
 
+  check_deprecated_function(clip)
+  check_deprecated_function(plot)
+
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph_options, parameters)
   invisible(TRUE)

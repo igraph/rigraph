@@ -899,9 +899,6 @@
 - `layout.kamada.kawai()` is now deprecated with a warning instead of a message.
 - `layout.lgl()` is now deprecated with a warning instead of a message.
 - `layout_with_mds()` is now deprecated with a warning instead of a message.
-- `layout.spring()` is now defunct (errors instead of warning).
-- `layout.svd()` is now defunct (errors instead of warning).
-- `layout.fruchterman.reingold.grid()` is now defunct (errors instead of warning).
 - `layout.drl()` is now deprecated with a warning instead of a message.
 - `nei()` has been removed.
 - `innei()` has been removed.

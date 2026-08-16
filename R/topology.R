@@ -1060,6 +1060,7 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ..., callback = NULL) {
       "Only {.arg method} = {.val vf2} is currently supported."
     )
   }
+  check_deprecated_function(callback)
 
   if (is.null(callback)) {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
@@ -1191,6 +1192,7 @@ subgraph_isomorphisms <- function(
       "Callback parameter is only supported for {.arg method} = {.val vf2}."
     )
   }
+  check_deprecated_function(callback)
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps

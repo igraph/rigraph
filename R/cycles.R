@@ -166,6 +166,7 @@ simple_cycles <- function(
   # Argument checks
   ensure_igraph(graph)
   check_dots_empty()
+  check_deprecated_function(callback)
 
   if (is.null(callback)) {
     simple_cycles_impl(

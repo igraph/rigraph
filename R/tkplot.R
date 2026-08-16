@@ -700,6 +700,7 @@ tk_center <- function(tkp.id) {
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   # nocov start
+  check_deprecated_function(newlayout)
   tkp <- .tkplot.get(tkp.id)
   new_coords <- do_call(
     newlayout,
