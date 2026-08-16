@@ -790,7 +790,7 @@ and that resolution is the part that stops degrading gracefully:
 the run above spent ten minutes in it
 without a single install starting.
 So both the preflight and the shards install in chunks of
-`REVDEP2_INSTALL_CHUNK` packages (100),
+`REVDEP2_INSTALL_CHUNK` packages (400),
 ordered so that every strong dependency inside the set
 is installed before the package that needs it —
 each chunk then resolves against a library where its dependencies already are.
@@ -1403,7 +1403,7 @@ at the next `if`.
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
 | Shards a package must be needed by before the preflight installs it | — | `REVDEP2_PREFLIGHT_MIN_SHARDS` | 2 (`1` is the whole universe) |
-| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
+| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 400 |
 | Time limit on one `pak::pkg_install()` call | — | `REVDEP2_INSTALL_TIMEOUT_MINUTES` | 20 |
 | Wall clock past which no further install is started | — | `REVDEP2_INSTALL_DEADLINE_MINUTES` | 210 |
 | Time limit on one load-test batch | — | `REVDEP2_LOAD_TIMEOUT_MINUTES` | 10 |

@@ -70,12 +70,12 @@ upgrade <- length(restored) > 0
 # This install is the whole job, and the place it has died: handed the whole
 # universe at once, pak resolves every one of those refs before it installs
 # any of them, and the resolution of a few thousand is where a run that is
-# killed rather than failed gets killed. So it goes in dependency order, a
+# killed rather than failed gets killed. So it goes in dependency order, four
 # hundred at a time (see install_chunks() in util.R), which keeps every
-# resolution small and turns a fatal ten minutes of silence into a chunk
-# counter -- the workflow's resource sampler supplies the other half of that
-# picture, a memory curve on the same clock.
-chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+# resolution well clear of the size that killed it and turns a fatal ten
+# minutes of silence into a chunk counter -- the workflow's resource sampler
+# supplies the other half of that picture, a memory curve on the same clock.
+chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 400)
 # Past this, no further chunk is started. The job's own `timeout-minutes` is
 # 300 and cancels everything; this stops earlier and on purpose, so that the
 # packages that did install are still load-tested, packed and published
