@@ -290,7 +290,10 @@ if (!out_of_time("the load test") && length(roots) > 0) {
   writeLines(roots, list_file)
   run <- run_with_timeout(
     function(script, args) {
-      system2(script, args, stdout = TRUE, stderr = TRUE)
+      # stdout captured, stderr inherited: the script writes its verdicts to
+      # both, and the stderr copy is what reaches the job log as the sweep
+      # runs rather than half an hour later.
+      system2(script, args, stdout = TRUE, stderr = "")
     },
     list(
       script = file.path(script_dir, "load-test.sh"),
