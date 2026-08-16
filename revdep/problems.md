@@ -1,3 +1,161 @@
+# ECoL (0.4.4)
+
+* GitHub: <https://github.com/lpfgarcia/ECoL>
+* Email: <mailto:luis.garcia@unb.br>
+* GitHub mirror: <https://github.com/cran/ECoL>
+
+Run `revdepcheck::revdep_details(, "ECoL")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     ! `hub.score()` was deprecated in igraph 2.0.0 and is now defunct.
+     ℹ Please use `hits_scores()` instead.
+     Backtrace:
+          ▆
+       1. ├─ECoL::complexity(Species ~ ., iris)
+       2. └─ECoL:::complexity.formula(Species ~ ., iris)
+       3.   └─ECoL:::complexity.default(...)
+       4.     ├─base::unlist(...)
+       5.     └─base::sapply(...)
+       6.       └─base::lapply(X = X, FUN = FUN, ...)
+       7.         └─ECoL (local) FUN(X[[i]], ...)
+       8.           ├─base::do.call(group, list(x = x, y = y, summary = summary, ...))
+       9.           ├─ECoL::network(x = `<data.frame>`, y = `<fct>`, summary = `<chr>`)
+      10.           └─ECoL:::network.default(x = `<data.frame>`, y = `<fct>`, summary = `<chr>`)
+      11.             └─base::sapply(...)
+      12.               └─base::lapply(X = X, FUN = FUN, ...)
+      13.                 └─ECoL (local) FUN(X[[i]], ...)
+      14.                   ├─base::eval(call(paste("class", f, sep = "."), graph))
+      15.                   │ └─base::eval(call(paste("class", f, sep = "."), graph))
+      16.                   └─ECoL:::class.G3(`<S3: igraph>`)
+      17.                     └─igraph::hub.score(graph)
+      18.                       └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
+      19.                         └─lifecycle:::deprecate_stop0(msg)
+      20.                           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking tests ... ERROR
+     ```
+     ...
+        20.                           └─rlang::cnd_signal(...)
+       ── Error ('test_network.R:11:3'): multiclass.result ────────────────────────────
+       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
+       Error: `hub.score()` was deprecated in igraph 2.0.0 and is now defunct.
+       ℹ Please use `hits_scores()` instead.
+       Backtrace:
+            ▆
+         1. ├─ECoL::network(Species ~ ., iris, measures = "G3", summary = "mean") at test_network.R:11:3
+         2. └─ECoL:::network.formula(Species ~ ., iris, measures = "G3", summary = "mean")
+         3.   └─ECoL:::network.default(...)
+         4.     └─base::sapply(...)
+         5.       └─base::lapply(X = X, FUN = FUN, ...)
+         6.         └─ECoL (local) FUN(X[[i]], ...)
+         7.           ├─base::eval(call(paste("class", f, sep = "."), graph))
+         8.           │ └─base::eval(call(paste("class", f, sep = "."), graph))
+         9.           └─ECoL:::class.G3(`<S3: igraph>`)
+        10.             └─igraph::hub.score(graph)
+        11.               └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
+        12.                 └─lifecycle:::deprecate_stop0(msg)
+        13.                   └─rlang::cnd_signal(...)
+       
+       [ FAIL 3 | WARN 4 | SKIP 0 | PASS 96 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+# GoodFitSBM (0.0.1)
+
+* GitHub: <https://github.com/Roy-SR-007/GoodFitSBM>
+* Email: <mailto:sohamghosh@tamu.edu>
+* GitHub mirror: <https://github.com/cran/GoodFitSBM>
+
+Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     ℹ The deprecated feature was likely used in the GoodFitSBM package.
+       Please report the issue at <https://github.com/Roy-SR-007/GoodFitSBM/issues>.
+     Warning: `get.edge.ids()` was deprecated in igraph 2.1.0.
+     ℹ Please use `get_edge_ids()` instead.
+     ℹ The deprecated feature was likely used in the GoodFitSBM package.
+       Please report the issue at <https://github.com/Roy-SR-007/GoodFitSBM/issues>.
+     Error:
+     ! The `vp` argument of `get_edge_ids()` supplied as a matrix should be a
+       n times 2 matrix, not 2 times n as of igraph 2.1.5.
+     ℹ either transpose the matrix with t() or convert it to a data.frame with two
+       columns.
+     Backtrace:
+          ▆
+       1. └─GoodFitSBM::goftest_BetaSBM(adjsymm, C = class, numGraphs = 10)
+       2.   └─GoodFitSBM::sample_a_move_BetaSBM(C, G)
+       3.     └─GoodFitSBM:::Get.Next.Network(...)
+       4.       └─GoodFitSBM:::Get.Move.beta.SBM(b, blocks = SBM.blocks, coin = beta.SBM.coin)
+       5.         └─GoodFitSBM:::Get.Induced.Subgraph(g, v.block[[i]])
+       6.           └─igraph::get.edge.ids(g, pairs)
+       7.             └─igraph::get_edge_ids(...) at igraph/R/interface.R:756:3
+       8.               └─igraph:::el_to_vec(vp, call = rlang::caller_env()) at igraph/R/interface.R:716:3
+       9.                 └─lifecycle::deprecate_stop(...) at igraph/R/interface.R:600:7
+      10.                   └─lifecycle:::deprecate_stop0(msg)
+      11.                     └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+# MetaNet (0.3.2)
+
+* GitHub: <https://github.com/Asa12138/MetaNet>
+* Email: <mailto:bfzede@gmail.com>
+* GitHub mirror: <https://github.com/cran/MetaNet>
+
+Run `revdepcheck::revdep_details(, "MetaNet")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘MetaNet-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: zp_analyse
+     > ### Title: Zi-Pi calculate
+     > ### Aliases: zp_analyse zp_plot
+     > 
+     > ### ** Examples
+     > 
+     > data("c_net")
+     > module_detect(co_net) -> co_net_modu
+     > zp_analyse(co_net_modu) -> co_net_modu
+     Error in deter_role(x["Pi"], x["Zi"], backs) : object 'role' not found
+     Calls: zp_analyse -> apply -> FUN -> deter_role
+     Execution halted
+     ```
+
+# R6causal (0.8.3)
+
+* Email: <mailto:juha.karvanen@iki.fi>
+* GitHub mirror: <https://github.com/cran/R6causal>
+
+Run `revdepcheck::revdep_details(, "R6causal")` for more info
+
+## Newly broken
+
+*   checking whether package ‘R6causal’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
+       Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
+       Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
+     See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
+     ```
+
 # archeofrag (1.2.4)
 
 * GitHub: <https://github.com/sebastien-plutniak/archeofrag>
@@ -8,20 +166,20 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
 
 ## Newly broken
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
-                                    H1 != H2? p.value Obs. value/H1 Obs. value/H2
-       edges                            FALSE     0.4         lower         lower
-       balance                          FALSE    0.38        within        within
-       components.balance               FALSE    0.39        within        within
-       disturbance                      FALSE    0.36        within        within
-       admixture                        FALSE    0.08        within        within
-       cohesion1                         TRUE    0.01        within        higher
-       cohesion2                         TRUE       0        within         lower
-       edge.weights.sum                 FALSE    0.57         lower         lower
-       edge.weights.median              FALSE    0.25         lower         lower
-       edge.weights.median.abs.dev.     FALSE    0.24         lower         lower
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
+       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
+       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
        [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
@@ -36,6 +194,36 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+## In both
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘archeofrag-vignette.Rmd’ using rmarkdown
+     
+     Quitting from archeofrag-vignette.Rmd:238-253 [simulator-test]
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     <error/rlang_error>
+     Error in `if (planar == TRUE & (!requireNamespace("RBGL", quietly = TRUE))) ...`:
+     ! missing value where TRUE/FALSE needed
+     ---
+     Backtrace:
+         ▆
+      1. └─archeofrag::frag.simul.process(...)
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     Error: processing vignette 'archeofrag-vignette.Rmd' failed with diagnostics:
+     missing value where TRUE/FALSE needed
+     --- failed re-building ‘archeofrag-vignette.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘archeofrag-vignette.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
      ```
 
 # bnstruct (1.0.15)
@@ -216,7 +404,7 @@ Run `revdepcheck::revdep_details(, "cranly")` for more info
 
 ## Newly broken
 
-*   checking re-building of vignette outputs ... [] ERROR
+*   checking re-building of vignette outputs ... ERROR
      ```
      ...
          ▆
@@ -384,76 +572,6 @@ Run `revdepcheck::revdep_details(, "degreenet")` for more info
      Execution halted
      ```
 
-# ECoL (0.4.4)
-
-* GitHub: <https://github.com/lpfgarcia/ECoL>
-* Email: <mailto:luis.garcia@unb.br>
-* GitHub mirror: <https://github.com/cran/ECoL>
-
-Run `revdepcheck::revdep_details(, "ECoL")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     ...
-     ! `hub.score()` was deprecated in igraph 2.0.0 and is now defunct.
-     ℹ Please use `hits_scores()` instead.
-     Backtrace:
-          ▆
-       1. ├─ECoL::complexity(Species ~ ., iris)
-       2. └─ECoL:::complexity.formula(Species ~ ., iris)
-       3.   └─ECoL:::complexity.default(...)
-       4.     ├─base::unlist(...)
-       5.     └─base::sapply(...)
-       6.       └─base::lapply(X = X, FUN = FUN, ...)
-       7.         └─ECoL (local) FUN(X[[i]], ...)
-       8.           ├─base::do.call(group, list(x = x, y = y, summary = summary, ...))
-       9.           ├─ECoL::network(x = `<data.frame>`, y = `<fct>`, summary = `<chr>`)
-      10.           └─ECoL:::network.default(x = `<data.frame>`, y = `<fct>`, summary = `<chr>`)
-      11.             └─base::sapply(...)
-      12.               └─base::lapply(X = X, FUN = FUN, ...)
-      13.                 └─ECoL (local) FUN(X[[i]], ...)
-      14.                   ├─base::eval(call(paste("class", f, sep = "."), graph))
-      15.                   │ └─base::eval(call(paste("class", f, sep = "."), graph))
-      16.                   └─ECoL:::class.G3(`<S3: igraph>`)
-      17.                     └─igraph::hub.score(graph)
-      18.                       └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
-      19.                         └─lifecycle:::deprecate_stop0(msg)
-      20.                           └─rlang::cnd_signal(...)
-     Execution halted
-     ```
-
-*   checking tests ... ERROR
-     ```
-     ...
-        20.                           └─rlang::cnd_signal(...)
-       ── Error ('test_network.R:11:3'): multiclass.result ────────────────────────────
-       <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-       Error: `hub.score()` was deprecated in igraph 2.0.0 and is now defunct.
-       ℹ Please use `hits_scores()` instead.
-       Backtrace:
-            ▆
-         1. ├─ECoL::network(Species ~ ., iris, measures = "G3", summary = "mean") at test_network.R:11:3
-         2. └─ECoL:::network.formula(Species ~ ., iris, measures = "G3", summary = "mean")
-         3.   └─ECoL:::network.default(...)
-         4.     └─base::sapply(...)
-         5.       └─base::lapply(X = X, FUN = FUN, ...)
-         6.         └─ECoL (local) FUN(X[[i]], ...)
-         7.           ├─base::eval(call(paste("class", f, sep = "."), graph))
-         8.           │ └─base::eval(call(paste("class", f, sep = "."), graph))
-         9.           └─ECoL:::class.G3(`<S3: igraph>`)
-        10.             └─igraph::hub.score(graph)
-        11.               └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
-        12.                 └─lifecycle:::deprecate_stop0(msg)
-        13.                   └─rlang::cnd_signal(...)
-       
-       [ FAIL 3 | WARN 4 | SKIP 0 | PASS 96 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
 # gemtc (1.1-1)
 
 * GitHub: <https://github.com/gertvv/gemtc>
@@ -464,7 +582,7 @@ Run `revdepcheck::revdep_details(, "gemtc")` for more info
 
 ## Newly broken
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
      Complete output:
@@ -534,7 +652,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
      Execution halted
      ```
 
-*   checking re-building of vignette outputs ... [] ERROR
+*   checking re-building of vignette outputs ... ERROR
      ```
      ...
       16.           └─lifecycle:::deprecate_stop0(msg)
@@ -574,7 +692,7 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
 
 ## Newly broken
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
        [ FAIL 1 | WARN 0 | SKIP 21 | PASS 1300 ]
@@ -604,46 +722,6 @@ Run `revdepcheck::revdep_details(, "glyrepr")` for more info
        Execution halted
      ```
 
-# GoodFitSBM (0.0.1)
-
-* GitHub: <https://github.com/Roy-SR-007/GoodFitSBM>
-* Email: <mailto:sohamghosh@tamu.edu>
-* GitHub mirror: <https://github.com/cran/GoodFitSBM>
-
-Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     ...
-     ℹ The deprecated feature was likely used in the GoodFitSBM package.
-       Please report the issue at <https://github.com/Roy-SR-007/GoodFitSBM/issues>.
-     Warning: `get.edge.ids()` was deprecated in igraph 2.1.0.
-     ℹ Please use `get_edge_ids()` instead.
-     ℹ The deprecated feature was likely used in the GoodFitSBM package.
-       Please report the issue at <https://github.com/Roy-SR-007/GoodFitSBM/issues>.
-     Error:
-     ! The `vp` argument of `get_edge_ids()` supplied as a matrix should be a
-       n times 2 matrix, not 2 times n as of igraph 2.1.5.
-     ℹ either transpose the matrix with t() or convert it to a data.frame with two
-       columns.
-     Backtrace:
-          ▆
-       1. └─GoodFitSBM::goftest_BetaSBM(adjsymm, C = class, numGraphs = 10)
-       2.   └─GoodFitSBM::sample_a_move_BetaSBM(C, G)
-       3.     └─GoodFitSBM:::Get.Next.Network(...)
-       4.       └─GoodFitSBM:::Get.Move.beta.SBM(b, blocks = SBM.blocks, coin = beta.SBM.coin)
-       5.         └─GoodFitSBM:::Get.Induced.Subgraph(g, v.block[[i]])
-       6.           └─igraph::get.edge.ids(g, pairs)
-       7.             └─igraph::get_edge_ids(...) at igraph/R/interface.R:756:3
-       8.               └─igraph:::el_to_vec(vp, call = rlang::caller_env()) at igraph/R/interface.R:716:3
-       9.                 └─lifecycle::deprecate_stop(...) at igraph/R/interface.R:600:7
-      10.                   └─lifecycle:::deprecate_stop0(msg)
-      11.                     └─rlang::cnd_signal(...)
-     Execution halted
-     ```
-
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
@@ -654,7 +732,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
 
 ## Newly broken
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
            ▆
@@ -678,44 +756,10 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 644 | SKIP 78 | PASS 3303 ]
+       [ FAIL 2 | WARN 644 | SKIP 77 | PASS 3304 ]
        Error:
        ! Test failures.
        Execution halted
-     ```
-
-# MetaNet (0.3.2)
-
-* GitHub: <https://github.com/Asa12138/MetaNet>
-* Email: <mailto:bfzede@gmail.com>
-* GitHub mirror: <https://github.com/cran/MetaNet>
-
-Run `revdepcheck::revdep_details(, "MetaNet")` for more info
-
-## Newly broken
-
-*   checking examples ... [] ERROR
-     ```
-     Running examples in ‘MetaNet-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-     > ### Name: zp_analyse
-     > ### Title: Zi-Pi calculate
-     > ### Aliases: zp_analyse zp_plot
-     > 
-     > ### ** Examples
-     > 
-     > data("c_net")
-     > module_detect(co_net) -> co_net_modu
-     > zp_analyse(co_net_modu) -> co_net_modu
-     Error in deter_role(x["Pi"], x["Zi"], backs) : object 'role' not found
-     Calls: zp_analyse -> apply -> FUN -> deter_role
-     Execution halted
-     Examples with CPU (user + system) or elapsed time > 5s
-                          user system elapsed
-     extract_sample_net 12.777  0.021   5.475
-     compare_rand       12.448  0.011   5.552
      ```
 
 # nat (1.8.26)
@@ -758,7 +802,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
      Execution halted
      ```
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
          7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
@@ -823,7 +867,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘com.google.Chrome.9h6QvD’
+       ‘com.google.Chrome.ZETBx5’
      ```
 
 # netrics (0.4.0)
@@ -836,7 +880,7 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
 
 ## Newly broken
 
-*   checking tests ... [] ERROR
+*   checking tests ... ERROR
      ```
      ...
          'test-motif_net.R:6:7'
@@ -860,68 +904,10 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
         4. └─netrics:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
        
-       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
+       [ FAIL 1 | WARN 0 | SKIP 40 | PASS 1805 ]
        Error:
        ! Test failures.
        Execution halted
-     ```
-
-# R6causal (0.8.3)
-
-* Email: <mailto:juha.karvanen@iki.fi>
-* GitHub mirror: <https://github.com/cran/R6causal>
-
-Run `revdepcheck::revdep_details(, "R6causal")` for more info
-
-## Newly broken
-
-*   checking whether package ‘R6causal’ can be installed ... WARNING
-     ```
-     Found the following significant warnings:
-       Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
-       Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
-       Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
-     See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
-     ```
-
-# SemNeT (1.4.5)
-
-* GitHub: <https://github.com/AlexChristensen/SemNeT>
-* Email: <mailto:alexpaulchristensen@gmail.com>
-* GitHub mirror: <https://github.com/cran/SemNeT>
-
-Run `revdepcheck::revdep_details(, "SemNeT")` for more info
-
-## Newly broken
-
-*   checking examples ... [] ERROR
-     ```
-     ...
-     
-     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-     > ### Name: randwalk
-     > ### Title: Random Walk Simulation
-     > ### Aliases: randwalk
-     > 
-     > ### ** Examples
-     > 
-     > # Simulate Datasets
-     > one <- sim.fluency(10)
-     > two <- sim.fluency(10)
-     > 
-     > # Compute similarity matrix
-     > cos1 <- similarity(one, method = "cosine")
-     > cos2 <- similarity(two, method = "cosine")
-     > 
-     > # Compute networks
-     > net1 <- TMFG(cos1)
-     > net2 <- TMFG(cos2)
-     > ## Don't show: 
-     > rw.results <- randwalk(net1, net2, iter = 10, cores = 2)
-     Error in serverSocket(port = port) : 
-       creation of server socket failed: port 11558 cannot be opened
-     Calls: randwalk -> <Anonymous> -> makePSOCKcluster -> serverSocket
-     Execution halted
      ```
 
 # sfclust (1.1.0)

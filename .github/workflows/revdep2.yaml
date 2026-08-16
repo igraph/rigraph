@@ -855,6 +855,14 @@ jobs:
               files="${files} revdep/${f}"
             fi
           done
+          # The per-package sections `problems.md` and `failures.md` are
+          # assembled from. `git add <dir>` stages removals as well, which is
+          # what retires a package the run found fixed.
+          for d in problems failures; do
+            if [ -d "revdep/${d}" ]; then
+              files="${files} revdep/${d}"
+            fi
+          done
           if [ -z "${files}" ]; then
             echo "::notice::No report files were written; nothing to commit."
             exit 0

@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 1011 reverse dependencies (1009 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1011 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 21 new problems
- * We failed to check 4 packages
+ * We saw 20 new problems
+ * We failed to check 6 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -11,7 +11,7 @@ Issues with CRAN packages are summarised below.
 (This reports the first line of each new failure)
 
 * archeofrag
-  checking tests ... [] ERROR
+  checking tests ... ERROR
 
 * bnstruct
   checking tests ... ERROR
@@ -23,7 +23,7 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
 
 * cranly
-  checking re-building of vignette outputs ... [] ERROR
+  checking re-building of vignette outputs ... ERROR
 
 * dci
   checking examples ... ERROR
@@ -38,37 +38,34 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
 
 * gemtc
-  checking tests ... [] ERROR
+  checking tests ... ERROR
 
 * ggraph
   checking examples ... ERROR
-  checking re-building of vignette outputs ... [] ERROR
+  checking re-building of vignette outputs ... ERROR
 
 * glyrepr
-  checking tests ... [] ERROR
+  checking tests ... ERROR
 
 * GoodFitSBM
   checking examples ... ERROR
 
 * manynet
-  checking tests ... [] ERROR
+  checking tests ... ERROR
 
 * MetaNet
-  checking examples ... [] ERROR
+  checking examples ... ERROR
 
 * nat
   checking examples ... ERROR
-  checking tests ... [] ERROR
+  checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
 * netrics
-  checking tests ... [] ERROR
+  checking tests ... ERROR
 
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
-
-* SemNeT
-  checking examples ... [] ERROR
 
 * sfclust
   checking tests ... ERROR
@@ -82,7 +79,9 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
+* hespdiv     (NA)
 * Libra       (NA)
 * optbdmaeAT  (NA)
 * optrcdmaeAT (NA)
 * soptdmaeA   (NA)
+* streamDAG   (NA)

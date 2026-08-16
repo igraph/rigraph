@@ -58,12 +58,25 @@ dir.create(timings_out, recursive = TRUE, showWarnings = FALSE)
 
 # Shard artifacts are named revdep2-results-<shard>-<attempt>; walking them in
 # attempt order makes the later attempt win when a shard was re-run.
+#
+# `download-artifact` only creates the per-artifact subdirectory when it
+# downloads more than one: a run planned into a single shard has its
+# manifest.ndjson land directly in `results_dir`, not in
+# `results_dir/revdep2-results-1-1/`. Run 31930350338 was that run, and the
+# collector found one directory (`results/pkgs`), no manifest in it, and
+# collected nothing -- then carried all 1011 results over from the run it was
+# retrying and committed them as if they were fresh. So the layout is
+# discovered rather than assumed: a shard directory is one that has a manifest.
 attempt_of <- function(path) {
   n <- suppressWarnings(as.integer(sub("^.*-", "", basename(path))))
   if (is.na(n)) 0L else n
 }
-shard_dirs <- list.dirs(results_dir, recursive = FALSE)
+has_manifest <- function(paths) {
+  paths[file.exists(file.path(paths, "manifest.ndjson"))]
+}
+shard_dirs <- has_manifest(list.dirs(results_dir, recursive = FALSE))
 shard_dirs <- shard_dirs[order(vapply(shard_dirs, attempt_of, integer(1)))]
+shard_dirs <- c(has_manifest(results_dir), shard_dirs)
 
 entries <- list()
 take <- function(entry, from) {
@@ -331,6 +344,20 @@ comparison_of <- function(entry) {
       new = list(stdout = message, stderr = "")
     )
     res$version <- entry$version
+    # `pkg_links()` reads the maintainer and the URL out of
+    # `result$new$description`, and `desc::desc(text = NULL)` falls back to the
+    # DESCRIPTION of the working directory -- which here is igraph's own. Left
+    # alone, a package that never got far enough to have a DESCRIPTION was
+    # reported with igraph's repository and igraph's maintainer address next to
+    # its name. A synthetic one carries no maintainer and no URL, so only the
+    # CRAN mirror link is emitted, and `[UNKNOWN]` is avoided as well.
+    res$new$version <- entry$version
+    res$new$description <- sprintf(
+      "Package: %s\nVersion: %s\n",
+      entry$package,
+      entry$version %||% "0"
+    )
+    res$new$cran <- TRUE
     res
   }
   if (!file.exists(old_path) || !file.exists(new_path)) {
@@ -386,22 +413,104 @@ if (has_revdepcheck) {
     ),
     file.path(out_dir, "README.md")
   )
-  writeLines(
-    capture_report(
-      revdepcheck::cloud_report_problems,
-      pkg = ".",
-      results = results
-    ),
-    file.path(out_dir, "problems.md")
+  # `problems.md` and `failures.md` are assembled from one file per package
+  # rather than written whole.
+  #
+  # Two things fall out of that, and the second is why it was done. A diff
+  # names the package that changed instead of a line range in a file thousands
+  # of lines long. And a run only has to touch the packages it actually
+  # checked: a retry of 27 rewrites 27 files and leaves the other 984 exactly
+  # as the repository has them. Writing the file whole made every run restate
+  # the entire record, so a run that learnt nothing about a package could still
+  # rewrite that package's section -- from a shim, if its check output had not
+  # survived the trip.
+  #
+  # Empty is revdepcheck's own wording, so an assembled file with no sections
+  # reads the way the single-call version did.
+  no_problems <- "*Wow, no problems at all. :)*"
+  sections <- list(
+    problems = revdepcheck::cloud_report_problems,
+    failures = revdepcheck::cloud_report_failures
   )
-  writeLines(
-    capture_report(
-      revdepcheck::cloud_report_failures,
-      pkg = ".",
-      results = results
-    ),
-    file.path(out_dir, "failures.md")
-  )
+  for (dir in names(sections)) {
+    dir.create(file.path(out_dir, dir), showWarnings = FALSE)
+  }
+
+  # revdepcheck emits one `# <package> (<version>)` block per package that its
+  # predicate selects, and the sentence above when it selects none. Asking it
+  # about a single package therefore yields exactly that package's section, or
+  # nothing.
+  section_of <- function(fun, package) {
+    lines <- capture_report(fun, pkg = ".", results = results[package])
+    if (identical(trimws(paste(lines, collapse = "")), no_problems)) {
+      NULL
+    } else {
+      lines
+    }
+  }
+
+  # What this run is entitled to overwrite. A carried result is one this run
+  # never checked, and `missing` and `deferred` mean the shard did not get to
+  # it -- in all three cases the committed section is better evidence than
+  # anything reconstructible here. The `file.exists` clause makes that a
+  # preference rather than a rule: with no section on disk there is nothing to
+  # protect, so it is written from the comparison like any other.
+  keeps_committed <- function(entry, dir) {
+    (isTRUE(entry$carried) || entry$result %in% c("missing", "deferred")) &&
+      file.exists(file.path(out_dir, dir, paste0(entry$package, ".md")))
+  }
+
+  written <- setNames(integer(length(sections)), names(sections))
+  for (entry in entries) {
+    for (dir in names(sections)) {
+      if (keeps_committed(entry, dir)) {
+        next
+      }
+      path <- file.path(out_dir, dir, paste0(entry$package, ".md"))
+      lines <- section_of(sections[[dir]], entry$package)
+      if (is.null(lines)) {
+        unlink(path)
+      } else {
+        writeLines(lines, path)
+        written[[dir]] <- written[[dir]] + 1L
+      }
+    }
+  }
+
+  # Sorted by file name, so the assembled order is the package order rather
+  # than however the shards happened to be cut. `method = "radix"` is the C
+  # collation, which is the one a shell glob expands in under `LC_ALL=C` -- so
+  #
+  #   LC_ALL=C cat revdep/problems/*.md > revdep/problems.md
+  #
+  # reproduces the assembled file byte for byte, on any machine. Under R's
+  # default (locale) collation it would not: `ECoL` sorts before `archeofrag`
+  # in C and after it in en_US.
+  for (dir in names(sections)) {
+    files <- list.files(
+      file.path(out_dir, dir),
+      pattern = "[.]md$",
+      full.names = TRUE
+    )
+    files <- files[order(basename(files), method = "radix")]
+    writeLines(
+      if (length(files) == 0) {
+        no_problems
+      } else {
+        unlist(lapply(files, readLines, warn = FALSE), use.names = FALSE)
+      },
+      file.path(out_dir, paste0(dir, ".md"))
+    )
+    inform(
+      dir,
+      ".md: ",
+      length(files),
+      " package(s), ",
+      written[[dir]],
+      " written by this run"
+    )
+  }
+
   writeLines(
     capture_report(
       revdepcheck::revdep_report_cran,

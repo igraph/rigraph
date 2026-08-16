@@ -50,7 +50,7 @@ test      (one job per shard, max-parallel throttled, fail-fast: false)
 
 collect   (1 job, if: always() past plan/build/test)
   ├─ merge all shard attempts (+ carried results of a retried run)
-  ├─ reports via revdepcheck: README.md, problems.md, failures.md, cran.md
+  ├─ reports via revdepcheck: README.md, cran.md, problems{,.md}/, failures{,.md}/
   ├─ pool what every check and every shard cost, job durations included
   └─ manifest.json, job summary, revdep2-report + revdep2-baseline
        + revdep2-timings artifacts
@@ -553,7 +553,7 @@ Every artifact this workflow writes:
 | `revdep2-lib` | `library.tar` (the preflight's installed library), `lib.json` | 14 days |
 | `revdep2-lib-index` | `lib.json`: R series, platform, package versions | 30 days |
 | `revdep2-results-<shard>-<attempt>` | `manifest.ndjson`, `pkgs/<p>/{old,new}.rds`, kept check output | 30 days |
-| `revdep2-report` | `README.md`, `problems.md`, `failures.md`, `cran.md`, `manifest.json`, all `pkgs/` | 90 days |
+| `revdep2-report` | `README.md`, `cran.md`, `manifest.json`, `problems.md` + `problems/`, `failures.md` + `failures/`, all `pkgs/` | 90 days |
 | `revdep2-baseline` | `baseline.json`, `old-rds/<p>.rds` | 90 days |
 | `revdep2-timings` | `timings.json`: check seconds per package, cost per shard | 90 days |
 
@@ -624,7 +624,42 @@ So the collector writes the same four files, in the same format
 (they come out of revdepcheck itself), plus `manifest.json`,
 and commits them back to the ref that was checked.
 
-Only those five paths are staged.
+`problems.md` and `failures.md` are *assembled* rather than written whole.
+Each package with a section has its own file —
+`revdep/problems/<package>.md`, `revdep/failures/<package>.md` —
+and the standalone file is the concatenation of them:
+
+```sh
+LC_ALL=C cat revdep/problems/*.md > revdep/problems.md
+```
+
+That command reproduces the committed file byte for byte,
+which is why the collector sorts with `method = "radix"`:
+C collation is what a shell glob expands in under `LC_ALL=C`,
+and R's default (locale) collation is not.
+
+Two things fall out of the split.
+A diff names the package that changed
+instead of a line range in a file thousands of lines long.
+And a run only has to touch the packages it actually checked —
+a retry of 27 rewrites 27 files
+and leaves the other 984 exactly as the repository has them.
+That last part is the point:
+a run that learnt nothing about a package
+no longer gets to rewrite that package's section.
+The rule is one predicate in `collect.R` —
+a result that is `carried`, `missing` or `deferred`
+keeps whatever the repository already has,
+and everything else is written from this run's comparison
+or deleted when there is nothing left to report.
+The `file.exists` half of it makes that a preference rather than a rule:
+with no section on disk there is nothing to protect,
+so it is written like any other.
+
+Only those paths are staged —
+the five files and the two directories.
+`git add <dir>` stages removals too,
+which is what retires a package the run found fixed.
 The analysis and the examples beside them are human-authored,
 and `pkgs/` — the raw check output, gigabytes of it —
 belongs in the `revdep2-report` artifact and nowhere near a commit.
@@ -679,6 +714,7 @@ the report is about *results*, a retry is about *coverage*.
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
 | The batch is too big for 250 shards | the plan refuses before anything starts, and names the `part` split that fits |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
+| The run is planned into a single shard | `download-artifact` unpacks a lone match into the download path itself rather than a per-artifact subdirectory, so the collector looks for a `manifest.ndjson` in both places |
 | The baseline artifact is gone | planner reuses nothing, everything checked fresh |
 | No run has published timings yet | the plan uses CRAN's times unscaled and the fallback constants, and errs towards more shards |
 | The collector cannot read the job durations | setup stays at its default; check and install costs are still measured |
