@@ -35,7 +35,7 @@ printer_callback <- function(fun) {
   if (!is.function(fun)) {
     warning("'fun' is not a function")
   }
-  add_class(fun, "printer_callback")
+  add_class(as_user_callback(fun), "printer_callback")
 }
 
 #' Is this a printer callback?
@@ -58,7 +58,7 @@ print_footer <- function(footer) {
 }
 
 print_head_foot <- function(head_foot) {
-  if (is.function(head_foot)) head_foot() else cat(head_foot)
+  if (is.function(head_foot)) call_user_callback(head_foot) else cat(head_foot)
 }
 
 #' Print the only the head of an R object
@@ -199,6 +199,7 @@ indent_print <- function(..., .indent = " ", .printer = NULL) {
   if (is.null(.printer)) {
     .printer <- print
   }
+  .printer <- as_user_callback(.printer)
 
   if (length(.indent) != 1 || !is.character(.indent)) {
     indent <- .indent # cli literal cannot start with a dot
