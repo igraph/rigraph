@@ -131,6 +131,18 @@ if (identical(metadata, "broken")) {
   )
 }
 
+# What the resource sampler calls the samples it is taking. It runs for the
+# whole job, so a label fixed when it started would say `installing` through the
+# load test and the packing as well -- which is what it used to do.
+phase_file <- env_chr("RESOURCE_PHASE_FILE")
+phase <- function(name) {
+  if (nzchar(phase_file)) {
+    writeLines(name, phase_file)
+  }
+  invisible(name)
+}
+
+phase("installing")
 install_started <- Sys.time()
 installed_ok <- install_in_chunks(
   chunks,
@@ -184,12 +196,14 @@ if (!installed_ok) {
 # absent fails to load for a reason that has nothing to do with the package:
 # without this it would be judged stale and rebuilt from source, and fail
 # again the same way.
+phase("surveying system requirements")
 ensure_sysreqs(lib, "Preflight")
 
 # Load every installed dependency, in chunks small enough to stay clear of the
 # DLL limit; a failing chunk is retried one package at a time so a single bad
 # namespace names itself.
 installed <- intersect(install_union, rownames(utils::installed.packages(lib)))
+phase("load-testing")
 inform("Preflight: loading ", length(installed), " packages")
 
 # Bounded, because `loadNamespace()` is not a thing that necessarily returns:
@@ -439,6 +453,7 @@ write_json(failures, file.path(out_dir, "depfail.json"))
 
 # ------------------------------------------------------------------ library --
 
+phase("packing the library")
 lib_out <- env_chr("LIB_OUT")
 index_out <- env_chr("LIB_INDEX_OUT")
 packed <- character()

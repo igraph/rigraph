@@ -18,6 +18,12 @@
 #
 # Every sample also goes to $RESOURCE_LOG when that is set, so a job that does
 # reach its upload step carries the series in its artifact too.
+#
+# In `watch` mode the label may move: with $RESOURCE_PHASE_FILE set, each sample
+# reads its first line and uses that instead of the fixed argument. The sampler
+# outlives any one phase of the work -- that is the point of it -- so a label
+# fixed when it starts is wrong for everything after. The preflight labelled
+# half an hour of load-testing `installing` because of exactly this.
 
 set -u
 
@@ -37,6 +43,9 @@ emit() {
 sample() {
   local label="${1:-}"
   local mem disk load top
+  if [ -n "${RESOURCE_PHASE_FILE:-}" ] && [ -r "${RESOURCE_PHASE_FILE}" ]; then
+    label=$(head -n 1 "${RESOURCE_PHASE_FILE}" 2> /dev/null) || label="${1:-}"
+  fi
 
   mem=$(awk '
     /^MemTotal:/     { total = $2 }

@@ -326,20 +326,25 @@ jobs:
           TMPDIR: ${{ runner.temp }}/tmp
           TMP: ${{ runner.temp }}/tmp
           TEMP: ${{ runner.temp }}/tmp
+          RESOURCE_PHASE_FILE: ${{ runner.temp }}/preflight/phase
         run: |
           mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
           watch=./.github/workflows/revdep2/watch-resources.sh
+          # Backgrounded and left running, like the shard's. It used to be
+          # killed when this step ended, which left the two artifact uploads
+          # after it unsampled -- and this job's library artifact is gigabytes
+          # (4.1 GB in run 31951756102), so "the runner stopped answering while
+          # packing" was exactly as unanswerable as it was for shard 16.
+          # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
           "${watch}" once "before the install"
-          "${watch}" watch 30 "installing" &
-          watcher=$!
-          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
+          "${watch}" watch 30 "preflight" &
+          disown || true
           unbuffered=""
           if command -v stdbuf > /dev/null 2>&1; then
             unbuffered="stdbuf -oL -eL"
           fi
           status=0
           ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
-          kill "${watcher}" 2> /dev/null || true
           "${watch}" once "after the install"
           exit "${status}"
         shell: bash
