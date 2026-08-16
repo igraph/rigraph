@@ -1405,6 +1405,85 @@ test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
   expect_length(graph_attr_names(compose(g1, g2)), 0)
 })
 
+# A fresh already-simple graph with two edge attributes, one of which the
+# default combination list keeps and one of which it drops. Each caller needs
+# its own: the C core's property cache lives in the graph object, and merely
+# asking whether the graph is simple changes what simplifying it does -- see
+# the second test below.
+simple_graph_with_attrs <- function() {
+  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  E(g)$weight <- c(1, 2)
+  E(g)$foo <- c("a", "b")
+  g
+}
+
+test_that("simplify() applies edge.attr.comb to an already-simple graph", {
+  # `edge.attr.comb` does not only combine attributes across merged edges, it
+  # decides which survive at all: an attribute the list does not name is
+  # dropped even when every group has one member. So a graph that is already
+  # simple still has to go through the combination.
+
+  # The default list ends in "ignore", so `weight` survives and `foo` does not.
+  expect_equal(edge_attr_names(simplify(simple_graph_with_attrs())), "weight")
+  expect_length(
+    edge_attr_names(simplify(
+      simple_graph_with_attrs(),
+      edge.attr.comb = "ignore"
+    )),
+    0
+  )
+  expect_setequal(
+    edge_attr_names(simplify(
+      simple_graph_with_attrs(),
+      edge.attr.comb = list(weight = "sum", foo = "first")
+    )),
+    c("weight", "foo")
+  )
+
+  # Values are untouched -- each edge is its own group.
+  expect_equal(E(simplify(simple_graph_with_attrs()))$weight, c(1, 2))
+})
+
+test_that("simplify() is still cache-sensitive, which is a C-core issue", {
+  # This pins behaviour that is wrong, so that fixing it is noticed here.
+  #
+  # `is_simple()` populates the C core's property cache, and `simplify.c` has
+  # a cache fast path that returns early -- without applying `edge_comb` --
+  # once the cache says there is nothing to remove. So asking whether a graph
+  # is simple changes what simplifying it does. 2.3.3 behaves this way too.
+  # The R side no longer *causes* it: `simplify()` used to open with
+  # `is_simple(graph)`, which warmed the cache on every call and made the
+  # cache-warm answer the only answer. It cannot cure it either --
+  # that fix belongs in src/vendor/cigraph/src/operators/simplify.c.
+  cold <- simple_graph_with_attrs()
+  warm <- simple_graph_with_attrs()
+  invisible(is_simple(warm))
+
+  expect_length(edge_attr_names(simplify(cold, edge.attr.comb = "ignore")), 0)
+  expect_setequal(
+    edge_attr_names(simplify(warm, edge.attr.comb = "ignore")),
+    c("weight", "foo")
+  )
+})
+
+test_that("graph_from_literal() keeps the formula's edge order", {
+  # #824 / #1981: a formula that declares no loops and no multiple edges has no
+  # reason to be rebuilt, so the edges come back in the order they were
+  # written. `graph_from_literal_i()` skips `simplify()` outright to get that,
+  # rather than `simplify()` skipping itself -- which would also suppress
+  # `edge.attr.comb` for every other caller.
+  expect_equal(
+    as_edgelist(graph_from_literal(X - +Z - +Y, Y - +X, X - +Y)),
+    rbind(c("X", "Z"), c("Z", "Y"), c("Y", "X"), c("X", "Y"))
+  )
+
+  # A formula that does need simplifying still gets the canonical order.
+  expect_equal(
+    as_edgelist(graph_from_literal(X - +Z - +Y, Y - +X, X - +Y, X - +Z)),
+    rbind(c("X", "Z"), c("X", "Y"), c("Z", "Y"), c("Y", "X"))
+  )
+})
+
 test_that("simplify() rejects 'rename' combiner", {
   g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
   E(g)$weight <- 1:5
