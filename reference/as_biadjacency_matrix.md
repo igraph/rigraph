@@ -69,8 +69,10 @@ as_biadjacency_matrix(
 
 - attr:
 
-  **\[deprecated\]** Use `weights` instead. If supplied, the value is
-  forwarded to `weights` as a character edge attribute name.
+  **\[deprecated\]** Use `weights` instead. A character edge attribute
+  name is forwarded to `weights` unchanged; `NULL` becomes
+  `weights = NA`, since `attr = NULL` asked for a traditional unweighted
+  matrix while `weights = NULL` picks the `weight` attribute up.
 
 ## Value
 

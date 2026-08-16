@@ -27,8 +27,10 @@ get.incidence(graph, types = NULL, attr = NULL, names = TRUE, sparse = FALSE)
 
 - attr:
 
-  **\[deprecated\]** Use `weights` instead. If supplied, the value is
-  forwarded to `weights` as a character edge attribute name.
+  **\[deprecated\]** Use `weights` instead. A character edge attribute
+  name is forwarded to `weights` unchanged; `NULL` becomes
+  `weights = NA`, since `attr = NULL` asked for a traditional unweighted
+  matrix while `weights = NULL` picks the `weight` attribute up.
 
 - names:
 

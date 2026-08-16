@@ -1,5 +1,19 @@
 # Changelog
 
+## igraph 2.3.3.9031
+
+### Continuous integration
+
+#### revdep2
+
+- Put a clock on every call that can hang
+  ([\#2832](https://github.com/igraph/rigraph/issues/2832)).
+
+#### revdep2
+
+- Install in chunks, and diagnose a preflight that is killed rather than
+  failed ([\#2830](https://github.com/igraph/rigraph/issues/2830)).
+
 ## igraph 2.3.3.9030
 
 ### Bug fixes
