@@ -143,6 +143,65 @@ test_that("several empty slots each consume a position", {
   expect_equal(res$type, "out")
 })
 
+# The two guards that run before `.old_signature()` read argument *names* and
+# never look at the values, so an empty slot used to trip them even though it
+# supplies nothing. `f(x, a = )` returned a matrix on 2.3.3 and errored with
+# "matches multiple arguments" on the dev version.
+
+test_that("a named empty slot is not an ambiguous abbreviation", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  # `w` could mean `weights` or the deprecated `weight`; empty, it means
+  # neither, and the old signature would have matched it by position.
+  expect_no_warning(res <- migration_fixture("g", 5, w = ))
+  expect_equal(res$weights, NULL)
+
+  # `a` could mean `attr` or `weights`-via-`attr` in the shadow fixture.
+  expect_no_warning(res <- migration_fixture_shadow("g", a = ))
+  expect_equal(res$weights, NULL)
+
+  # A value in the same slot is still rejected.
+  expect_snapshot(error = TRUE, migration_fixture_shadow("g", a = 1))
+})
+
+test_that("a named empty slot is not a forbidden prefix", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  # `d` is a strict prefix of both `dimvector` and `dim`.
+  expect_no_warning(res <- migration_fixture_prefix(1:2, 0.5, d = ))
+  expect_equal(res$dim, NULL)
+
+  # A value in the same slot is still rejected.
+  expect_snapshot(error = TRUE, migration_fixture_prefix(1:2, 0.5, d = 3))
+})
+
+test_that("the two shapes from #2646 behave as they do on CRAN", {
+  # The reproducers verbatim, tied to the bug rather than to the fixture.
+  rlang::local_options(lifecycle_verbosity = "warning")
+  m <- matrix(c(0, 1, 1, 0), 2, dimnames = list(c("a", "b"), c("a", "b")))
+  d <- data.frame(from = "a", to = "b")
+
+  expect_no_warning(
+    g <- graph_from_adjacency_matrix(
+      adjmatrix = m,
+      mode = "undirected",
+      weighted = TRUE,
+    )
+  )
+  expect_ecount(g, 1)
+
+  expect_no_warning(h <- graph_from_data_frame(d, , directed = FALSE))
+  expect_ecount(h, 1)
+  expect_false(is_directed(h))
+
+  # A named empty slot on a real migrated function, which is what the guards
+  # were getting wrong.
+  expect_equal(
+    dim(as_adjacency_matrix(make_ring(4), a = , sparse = FALSE)),
+    c(4L, 4L)
+  )
+})
+
 test_that("a `...` of nothing but empty slots does not engage recovery", {
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_no_warning(res <- migration_fixture("g", 5, , ))

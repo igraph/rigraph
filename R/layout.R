@@ -956,7 +956,7 @@ layout_as_tree <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_as_tree, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("r", "ro", "roo"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("r", "ro", "roo"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_as_tree}.")
     # Pre-3.0.0 signature: layout_as_tree(graph, root, circular, rootlevel, mode, flip.y)
     .old_signature <- function(root, circular, rootlevel, mode, flip.y, ...) {
@@ -1625,7 +1625,7 @@ layout_with_dh <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_dh, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("c", "co", "coo", "w", "we", "wei", "weig", "weigh", "weight", "weight.", "weight.n", "weight.no", "weight.nod", "weight.node", "weight.node.", "weight.e", "weight.ed", "weight.edg", "weight.edge", "weight.edge."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_dh}.")
     # Pre-3.0.0 signature: layout_with_dh(graph, coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist)
     .old_signature <- function(coords, maxiter, fineiter, cool.fact, weight.node.dist, weight.border, weight.edge.lengths, weight.edge.crossings, weight.node.edge.dist, ...) {
@@ -1823,9 +1823,9 @@ layout_with_fr <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g", "gr"))
+    .arg_forbidden <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::sys.call())[-1L])), base::c("g", "gr"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn layout_with_fr}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "mi", "min", "ma", "max"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("c", "co", "coo", "m", "mi", "min", "ma", "max"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_fr}.")
     # Pre-3.0.0 signature: layout_with_fr(graph, coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter)
     .old_signature <- function(coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter, ...) {
@@ -2065,7 +2065,7 @@ layout_with_gem <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_gem, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("t", "te", "tem", "temp", "temp.", "temp.m"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("t", "te", "tem", "temp", "temp.", "temp.m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_gem}.")
     # Pre-3.0.0 signature: layout_with_gem(graph, coords, maxiter, temp.max, temp.min, temp.init)
     .old_signature <- function(coords, maxiter, temp.max, temp.min, temp.init, ...) {
@@ -2199,7 +2199,7 @@ layout_with_graphopt <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_graphopt, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("s", "m", "ma", "sp", "spr", "spri", "sprin", "spring", "spring."))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("s", "m", "ma", "sp", "spr", "spri", "sprin", "spring", "spring."))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_graphopt}.")
     # Pre-3.0.0 signature: layout_with_graphopt(graph, start, niter, charge, mass, spring.length, spring.constant, max.sa.movement)
     .old_signature <- function(start, niter, charge, mass, spring.length, spring.constant, max.sa.movement, ...) {
@@ -2364,7 +2364,7 @@ layout_with_kk <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_kk, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "ma", "max", "mi", "min", "s"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("c", "co", "coo", "m", "ma", "max", "mi", "min", "s"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_kk}.")
     # Pre-3.0.0 signature: layout_with_kk(graph, coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start)
     .old_signature <- function(coords, dim, maxiter, epsilon, kkconst, weights, minx, maxx, miny, maxy, minz, maxz, niter, sigma, initemp, coolexp, start, ...) {
@@ -2603,7 +2603,7 @@ layout_with_lgl <- function(
   # BEGIN GENERATED ARG_HANDLE: layout_with_lgl, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max", "c", "r"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "ma", "max", "c", "r"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_lgl}.")
     # Pre-3.0.0 signature: layout_with_lgl(graph, maxiter, maxdelta, area, coolexp, repulserad, cellsize, root)
     .old_signature <- function(maxiter, maxdelta, area, coolexp, repulserad, cellsize, root, ...) {
@@ -3313,7 +3313,7 @@ norm_coords <- function(
   # BEGIN GENERATED ARG_HANDLE: norm_coords, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("x", "xm", "y", "ym", "z", "zm"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("x", "xm", "y", "ym", "z", "zm"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn norm_coords}.")
     # Pre-3.0.0 signature: norm_coords(layout, xmin, xmax, ymin, ymax, zmin, zmax)
     .old_signature <- function(xmin, xmax, ymin, ymax, zmin, zmax, ...) {
