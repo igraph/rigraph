@@ -194,3 +194,21 @@ test_that("callbacks report a deprecated function", {
     "is_igraph"
   )
 })
+
+# ---- the layout functions plot() may be handed -------------------------
+
+test_that("the layout functions that plot() may be handed still work", {
+  g <- make_ring(5)
+
+  expect_deprecation(coords <- layout.spring(g), "layout_with_fr")
+  expect_equal(dim(coords), c(5, 2))
+
+  expect_deprecation(coords <- layout.svd(g), "layout_with_fr")
+  expect_equal(dim(coords), c(5, 2))
+
+  expect_deprecation(
+    coords <- layout.fruchterman.reingold.grid(g),
+    "layout_with_fr"
+  )
+  expect_equal(dim(coords), c(5, 2))
+})
