@@ -16,15 +16,6 @@ as_user <- function(fn, ...) {
   user(...)
 }
 
-expect_deprecation <- function(expr, regexp) {
-  warnings <- testthat::capture_warnings(expr)
-  expect_gt(length(warnings), 0)
-  expect_match(warnings, regexp, all = TRUE)
-  # The point of the exercise: lifecycle appends this to a deprecation it holds
-  # igraph responsible for, and asks the user to report a bug about it.
-  expect_no_match(warnings, "likely used in")
-}
-
 # A function that igraph deprecates, without the noise of one that also does
 # something. Its name is what tells lifecycle's deduplication one deprecation
 # apart from the other, so each test needs its own.
@@ -68,17 +59,27 @@ test_that("a callback is called by the user, not by igraph", {
   expect_equal(as_user(igraph_function(TRUE), caller_package), "R_GlobalEnv")
 })
 
-test_that("a soft deprecation reaches the user that caused it", {
-  # Silent as things stand: lifecycle sees an igraph frame as the caller, and
-  # does not report a package's own use of a softly deprecated function.
-  expect_no_warning(
-    as_user(igraph_function(FALSE), deprecated_igraph_function("soft_silent()"))
-  )
+test_that("lifecycle names the user rather than igraph", {
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(
-    as_user(igraph_function(TRUE), deprecated_igraph_function("soft_heard()")),
-    "soft_heard"
-  )
+  expect_snapshot({
+    # As things stand, a soft deprecation goes unmentioned, because lifecycle
+    # does not report a package's own use of one ...
+    as_user(igraph_function(FALSE), deprecated_igraph_function("soft_plain()"))
+
+    # ... and a warning deprecation asks the user to report an igraph bug.
+    as_user(
+      igraph_function(FALSE),
+      deprecated_igraph_function("warn_plain()", "deprecate_warn")
+    )
+
+    # Called from the environment igraph was called from, both name the user.
+    as_user(igraph_function(TRUE), deprecated_igraph_function("soft_wrapped()"))
+    as_user(
+      igraph_function(TRUE),
+      deprecated_igraph_function("warn_wrapped()", "deprecate_warn")
+    )
+  })
 })
 
 test_that("a soft deprecation stays silent for another package", {
@@ -95,42 +96,29 @@ test_that("a soft deprecation stays silent for another package", {
   expect_no_warning(igraph_caller())
 })
 
-test_that("a warning deprecation stops blaming igraph for the user's choice", {
-  blamed <- testthat::capture_warnings(
-    as_user(
-      igraph_function(FALSE),
-      deprecated_igraph_function("warn_blamed()", "deprecate_warn")
-    )
-  )
-  expect_match(blamed, "likely used in the .*igraph.* package")
-
-  attributed <- testthat::capture_warnings(
-    as_user(
-      igraph_function(TRUE),
-      deprecated_igraph_function("warn_attributed()", "deprecate_warn")
-    )
-  )
-  expect_no_match(attributed, "likely used in")
-})
-
 # ---- deprecated functions passed as arguments -------------------------
 
 test_that("plot() reports a deprecated layout function", {
   g <- make_ring(5)
   withr::local_pdf(NULL)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(
-    as_user(plot, g, layout = layout.circle),
-    "layout_in_circle"
+  # expect_snapshot() has no way to replay the plot a plotting call records,
+  # so capture the warnings first and snapshot those.
+  warnings <- testthat::capture_warnings(
+    as_user(plot, g, layout = layout.circle)
   )
+  expect_snapshot(cat(warnings, sep = "\n"))
 })
 
 test_that("plot() reports a deprecated layout graph attribute", {
   g <- make_ring(5)
   g$layout <- layout.random
   withr::local_pdf(NULL)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(as_user(plot, g), "layout_randomly")
+  warnings <- testthat::capture_warnings(as_user(plot, g))
+  expect_snapshot(cat(warnings, sep = "\n"))
 })
 
 test_that("plot() is silent about a current layout function", {
@@ -143,72 +131,55 @@ test_that("plot() is silent about a current layout function", {
 test_that("layout_nicely() reports a deprecated layout graph attribute", {
   g <- make_ring(5)
   g$layout <- layout.circle
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(as_user(layout_nicely, g), "layout_in_circle")
+  expect_snapshot(coords <- as_user(layout_nicely, g))
 })
 
 test_that("layout_components() reports a deprecated layout function", {
   g <- make_ring(5) + make_ring(4)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(
-    as_user(layout_components, g, layout.circle),
-    "layout_in_circle"
-  )
+  expect_snapshot(coords <- as_user(layout_components, g, layout.circle))
 })
 
 test_that("add_shape() reports a deprecated shape function when it is used", {
   g <- make_ring(5)
   withr::local_pdf(NULL)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
   as_user(add_shape, "test-noplot", plot = igraph.shape.noplot)
-  expect_deprecation(plot(g, vertex.shape = "test-noplot"), "shape_noplot")
+  warnings <- testthat::capture_warnings(plot(g, vertex.shape = "test-noplot"))
+  expect_snapshot(cat(warnings, sep = "\n"))
 })
 
 test_that("local_scan() reports a deprecated FUN", {
-  g <- make_ring(5)
+  # Two vertices, so that the snapshot stays short: `FUN` is called for each of
+  # them, and the "warning" verbosity these tests need turns off the
+  # deduplication that leaves a user with one warning.
+  g <- make_ring(2)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  expect_deprecation(
-    as_user(local_scan, g, FUN = graph.density),
-    "edge_density"
-  )
+  expect_snapshot(scan <- as_user(local_scan, g, FUN = graph.density))
 })
 
 test_that("attribute combinations report a deprecated function", {
   g <- make_graph(c(1, 2, 1, 2))
   E(g)$weight <- c(1, 2)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
   # `is.igraph()` is not a meaningful combiner, but it is softly deprecated and
   # accepts the vector of attribute values that a combiner is handed.
-  expect_deprecation(
-    as_user(simplify, g, edge.attr.comb = list(weight = is.igraph)),
-    "is_igraph"
+  expect_snapshot(
+    simple <- as_user(simplify, g, edge.attr.comb = list(weight = is.igraph))
   )
 })
 
 test_that("callbacks report a deprecated function", {
   g <- make_ring(3)
+  rlang::local_options(lifecycle_verbosity = "warning")
 
-  # Called with each clique, and FALSE keeps the search going.
-  expect_deprecation(
-    as_user(cliques, g, min = 2, callback = is.igraph),
-    "is_igraph"
-  )
-})
-
-# ---- the layout functions plot() may be handed -------------------------
-
-test_that("the layout functions that plot() may be handed still work", {
-  g <- make_ring(5)
-
-  expect_deprecation(coords <- layout.spring(g), "layout_with_fr")
-  expect_equal(dim(coords), c(5, 2))
-
-  expect_deprecation(coords <- layout.svd(g), "layout_with_fr")
-  expect_equal(dim(coords), c(5, 2))
-
-  expect_deprecation(
-    coords <- layout.fruchterman.reingold.grid(g),
-    "layout_with_fr"
-  )
-  expect_equal(dim(coords), c(5, 2))
+  # Called with each clique -- the one triangle -- and FALSE keeps the search
+  # going.
+  expect_snapshot(as_user(cliques, g, min = 3, callback = is.igraph))
 })
