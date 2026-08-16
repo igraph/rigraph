@@ -268,8 +268,8 @@ are specified.)
 [`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple)
+[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
+[`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount)
 
 ## See also
 
@@ -295,14 +295,14 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── e781f33 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── c8e268e ──
 #> ℹ undirected
 #> ℹ 6 vertices · 4 edges
 #> 
 #> ── Edges ───────────────────────────────────────────────────────────────────────
 #> [1] 1 ─ 2  2 ─ 3  3 ─ 4  5 ─ 6 
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> ── <igraph> ───────────────────────────────────────────────────────── b9bbed8 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── 3cf04fd ──
 #> ℹ undirected · named
 #> ℹ 4 vertices · 3 edges
 #> 

@@ -41,7 +41,7 @@ graph.formula(..., simplify = TRUE)
 
 [`create()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_create),
 [`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple),
+[`famous()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_famous),
 [`vcount()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_vcount),
 [`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty)

@@ -113,7 +113,7 @@ max_cardinality(g1)
 #> [1] 9 4 6 8 3 5 7 2 1
 #> 
 #> $alpham1
-#> ── <vertex sequence> 9/9 · named · from 8163940 ────────────────────────────────
+#> ── <vertex sequence> 9/9 · named · from 49d47ff ────────────────────────────────
 #> [1] G F D B E C H I A
 #> 
 is_chordal(g1, fillin = TRUE)
@@ -137,7 +137,7 @@ max_cardinality(g2)
 #>  [1] 10  8  9  6  7  5  4  2  3  1
 #> 
 #> $alpham1
-#> ── <vertex sequence> 10/10 · named · from 5c56014 ──────────────────────────────
+#> ── <vertex sequence> 10/10 · named · from d8e45d8 ──────────────────────────────
 #>  [1] J H I G C F D B E A
 #> 
 is_chordal(g2, fillin = TRUE)
