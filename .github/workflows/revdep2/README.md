@@ -653,13 +653,31 @@ That last part is the point:
 a run that learnt nothing about a package
 no longer gets to rewrite that package's section.
 The rule is one predicate in `collect.R` —
-a result that is `carried`, `missing` or `deferred`
+a result that is `carried`, `missing` or `deferred`,
+or one that is `ok` only because the package errors under *both* versions,
 keeps whatever the repository already has,
 and everything else is written from this run's comparison
 or deleted when there is nothing left to report.
 The `file.exists` half of it makes that a preference rather than a rule:
 with no section on disk there is nothing to protect,
 so it is written like any other.
+
+The `ok`-but-broken clause is worth spelling out.
+`ok` means there is no *new* problem, which is what this workflow is for —
+it does not mean the package works.
+79 of run 31930350338's 984 `ok` results error under both versions:
+55 never got as far as a check
+(their dependencies would not install,
+so both halves stopped at `checking package dependencies`
+within a couple of seconds and agreed),
+and 24 are real checks of genuinely broken packages.
+A run that reproduces breakage on both sides
+has not shown that a section someone wrote for that package is stale,
+so it does not delete it.
+This only declines to delete; nothing is added.
+`problems.md` is the newly-broken list by design,
+and widening it to "still broken" is revdepcheck's `all = TRUE`
+and a different report.
 
 Only those paths are staged —
 the five files and the two directories.

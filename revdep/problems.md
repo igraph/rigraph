@@ -137,6 +137,44 @@ Run `revdepcheck::revdep_details(, "bnstruct")` for more info
      Execution halted
      ```
 
+# Boptbd (1.0.7)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/Boptbd>
+
+Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptBbd
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     alpha <- 0.1 #alpha value 
+     >     beta  <- 0.1 #beta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #Bayesian A-optimal block design (loop design)
+     > 
+     >     graphoptBbd(trt.N = 10, blk.N = 10, alpha = 0.1, beta = 0.1, OptdesF, Optcrit = "A")
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─Boptbd::graphoptBbd(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
 # cfid (0.1.8)
 
 * GitHub: <https://github.com/santikka/cfid>
@@ -524,6 +562,83 @@ Run `revdepcheck::revdep_details(, "gemtc")` for more info
        Execution halted
      ```
 
+# ggm (2.5.4)
+
+* GitHub mirror: <https://github.com/cran/ggm>
+
+Run `revdepcheck::revdep_details(, "ggm")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     +              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0),16,16,byrow=TRUE)
+     > M <- c(3,5,6,15,16)
+     > C <- c(4,7)
+     > AG(ex, M, C, plot = TRUE)
+     Warning: `graph()` was deprecated in igraph 2.1.0.
+     ℹ Please use `make_graph()` instead.
+     ℹ The deprecated feature was likely used in the ggm package.
+       Please report the issue to the authors.
+     Warning: `get.edgelist()` was deprecated in igraph 2.0.0.
+     ℹ Please use `as_edgelist()` instead.
+     ℹ The deprecated feature was likely used in the ggm package.
+       Please report the issue to the authors.
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─ggm::AG(ex, M, C, plot = TRUE)
+      2.   └─ggm (local) plotfun(fr, ...)
+      3.     └─igraph::tkplot(...)
+      4.       └─lifecycle::deprecate_stop("3.0.0", "tkplot()") at igraph/R/tkplot.R:329:3
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+*   checking examples with --run-donttest ... ERROR
+     ```
+     ...
+     +              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+     +              1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
+     +              0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0),16,16,byrow=TRUE)
+     > M <- c(3,5,6,15,16)
+     > C <- c(4,7)
+     > AG(ex, M, C, plot = TRUE)
+     Warning: `graph()` was deprecated in igraph 2.1.0.
+     ℹ Please use `make_graph()` instead.
+     ℹ The deprecated feature was likely used in the ggm package.
+       Please report the issue to the authors.
+     Warning: `get.edgelist()` was deprecated in igraph 2.0.0.
+     ℹ Please use `as_edgelist()` instead.
+     ℹ The deprecated feature was likely used in the ggm package.
+       Please report the issue to the authors.
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─ggm::AG(ex, M, C, plot = TRUE)
+      2.   └─ggm (local) plotfun(fr, ...)
+      3.     └─igraph::tkplot(...)
+      4.       └─lifecycle::deprecate_stop("3.0.0", "tkplot()") at igraph/R/tkplot.R:329:3
+      5.         └─lifecycle:::deprecate_stop0(msg)
+      6.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## Newly fixed
+
+*   checking package dependencies ... ERROR
+     ```
+     Package required but not available: ‘graph’
+     
+     See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+     manual.
+     ```
 # ggraph (2.2.2)
 
 * GitHub: <https://github.com/thomasp85/ggraph>
@@ -674,6 +789,73 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
+# lagdynamics (0.32)
+
+* GitHub: <https://github.com/mohsaqr/lagdynamics>
+* Email: <mailto:saqr@saqr.me>
+* GitHub mirror: <https://github.com/cran/lagdynamics>
+
+Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘lagdynamics-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > ### Name: lsa_to_tna
+     > ### Title: Convert an lsa Fit to a tna Network
+     > ### Aliases: lsa_to_tna lsa_to_tna.lsa lsa_to_tna.lsa_group
+     > 
+     > ### ** Examples
+     > 
+     > ## Don't show: 
+     > if (requireNamespace("tna", quietly = TRUE)) withAutoprint({ # examplesIf
+     + ## End(Don't show)
+     + fit <- lsa(engagement)
+     + net <- lsa_to_tna(fit, weights = "prob")
+     + tna::centralities(net)
+     + ## Don't show: 
+     + }) # examplesIf
+     > fit <- lsa(engagement)
+     > net <- lsa_to_tna(fit, weights = "prob")
+     > tna::centralities(net)
+     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
+       argument is missing, with no default
+     Calls: withAutoprint ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     
+     Error: processing vignette 'interop.Rmd' failed with diagnostics:
+     argument is missing, with no default
+     --- failed re-building ‘interop.Rmd’
+     
+     --- re-building ‘intro.Rmd’ using rmarkdown
+     --- finished re-building ‘intro.Rmd’
+     
+     --- re-building ‘lag-transition-networks.Rmd’ using rmarkdown
+     --- finished re-building ‘lag-transition-networks.Rmd’
+     
+     --- re-building ‘lagdynamics.Rmd’ using rmarkdown
+     --- finished re-building ‘lagdynamics.Rmd’
+     
+     --- re-building ‘plotting.Rmd’ using rmarkdown
+     --- finished re-building ‘plotting.Rmd’
+     
+     --- re-building ‘workflow.Rmd’ using rmarkdown
+     --- finished re-building ‘workflow.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘interop.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
@@ -744,6 +926,38 @@ Run `revdepcheck::revdep_details(, "MetaNet")` for more info
      Execution halted
      ```
 
+# migraph (1.6.8)
+
+* GitHub: <https://github.com/stocnet/migraph>
+* Email: <mailto:james.hollway@graduateinstitute.ch>
+* GitHub mirror: <https://github.com/cran/migraph>
+
+Run `revdepcheck::revdep_details(, "migraph")` for more info
+
+## Newly broken
+
+*   checking tests ...
+     ```
+       Running ‘testthat.R’ [21s/13s]
+      [22s/13s] ERROR
+     Running the tests in ‘tests/testthat.R’ failed.
+     Last 13 lines of output:
+       `expected` is NULL
+       
+       Warning in expression 17 : rg <- create_ring(32, width = 2)
+       Backtrace:
+           ▆
+        1. ├─testthat::expect_null(...) at test-tutorials_migraph.R:12:5
+        2. │ └─testthat::quasi_label(enquo(object), label)
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. └─migraph:::check_tute_functions(tute, skip = "ergm\\(|play_diffusions\\(")
+        5.   └─testthat::expect_null(...) at ./helper-functions.R:126:5
+       
+       [ FAIL 1 | WARN 0 | SKIP 3 | PASS 260 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
 # nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
@@ -910,6 +1124,90 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
      See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
      ```
 
+# scistreer (1.2.1)
+
+* GitHub: <https://github.com/kharchenkolab/scistreer>
+* Email: <mailto:tgaoteng@gmail.com>
+* GitHub mirror: <https://github.com/cran/scistreer>
+
+Run `revdepcheck::cloud_details(, "scistreer")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     ℹ Please use the `parent` argument instead.
+     Backtrace:
+          ▆
+       1. ├─scistreer::annotate_tree(tree_small, P_small)
+       2. │ └─scistreer::mut_to_tree(gtree, mut_nodes)
+       3. │   └─... %>% ...
+       4. ├─dplyr::mutate(., GT = ifelse(GT == "" & !is.na(site), site, GT))
+       5. ├─dplyr::mutate(...)
+       6. ├─tidygraph:::mutate.tbl_graph(...)
+       7. │ └─tidygraph::mutate_as_tbl(.data, !!!dot)
+       8. │   ├─dplyr::mutate(d_tmp, ...)
+       9. │   └─dplyr:::mutate.data.frame(d_tmp, ...)
+      10. │     └─dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
+      11. │       ├─base::withCallingHandlers(...)
+      12. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
+      13. │         └─mask$eval_all_mutate(quo)
+      14. │           └─dplyr (local) eval()
+      15. ├─base::unlist(...)
+      16. └─tidygraph::map_bfs(...)
+      17.   └─tidygraph:::bfs_df(graph, root, mode, unreachable)
+      18.     └─igraph::bfs(...)
+      19.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
+      20.         └─lifecycle:::deprecate_stop0(msg)
+      21.           └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+     ```
+     Namespace in Imports field not imported from: ‘Rcpp’
+       All declared Imports should be used.
+     ```
+# SEMgraph (1.2.4)
+
+* GitHub mirror: <https://github.com/cran/SEMgraph>
+
+Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+       Please report the issue at <https://github.com/igraph/rigraph/issues>.
+     > plot(dag0$dag, layout=layout.circle, main = "Output DAG")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > plot(dag0$dag.old, layout=layout.circle, main = "Inferred old edges")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > plot(dag0$dag.new, layout=layout.circle, main = "Inferred new edges")
+     Warning: vertex attribute color contains NAs. Replacing with default value 1
+     > par(old.par)
+     > 
+     > # Four DAG estimation
+     > dag1 <- SEMdag(ig, X, LO="TO")
+     WARNING: input graph is not acyclic !
+      Applying graph -> DAG conversion...
+     DAG conversion : TRUE
+     Node Linear Ordering with TO setting
+     
+     > dag2 <- SEMdag(ig, X, LO="TL")
+     WARNING: input graph is not acyclic !
+      Applying graph -> DAG conversion...
+     DAG conversion : TRUE
+     Node Linear Ordering with TL setting
+     
+     Error in l2[[L]] : subscript out of bounds
+     Calls: SEMdag -> getParents -> buildLevels
+     Execution halted
+     ```
 # sfclust (1.1.0)
 
 * GitHub: <https://github.com/ErickChacon/sfclust>

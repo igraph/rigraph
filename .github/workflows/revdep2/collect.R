@@ -449,6 +449,32 @@ if (has_revdepcheck) {
     }
   }
 
+  # A package whose check errors under *both* versions. `ok` is the verdict --
+  # there is no new problem, which is what this workflow is for -- but the
+  # package is broken, and a section someone put in the report for it is not
+  # made stale by a run that reproduces the breakage on both sides. 79 of run
+  # 31930350338's 984 `ok` results are of this shape; 55 of them never got as
+  # far as a check at all (their dependencies would not install, so both
+  # halves stopped at `checking package dependencies` in a couple of seconds
+  # and agreed), and 24 are real checks of genuinely broken packages.
+  #
+  # This only declines to *delete*; nothing is added. revdepcheck's
+  # `problems.md` is the newly-broken list by design, and widening it to
+  # "still broken" is `all = TRUE` and a different report.
+  # `ok` specifically: a `newly_broken` package can error on both sides too --
+  # archeofrag went 1E to 2E in run 31930350338 -- and that one was checked
+  # here, so its section is this run's to rewrite.
+  still_broken <- function(entry) {
+    e <- function(status) {
+      n <- regmatches(
+        status %||% "",
+        regexpr("^[0-9]+(?=E)", status %||% "", perl = TRUE)
+      )
+      length(n) > 0 && as.integer(n) > 0
+    }
+    identical(entry$result, "ok") && e(entry$status_old) && e(entry$status_new)
+  }
+
   # What this run is entitled to overwrite. A carried result is one this run
   # never checked, and `missing` and `deferred` mean the shard did not get to
   # it -- in all three cases the committed section is better evidence than
@@ -456,7 +482,9 @@ if (has_revdepcheck) {
   # preference rather than a rule: with no section on disk there is nothing to
   # protect, so it is written from the comparison like any other.
   keeps_committed <- function(entry, dir) {
-    (isTRUE(entry$carried) || entry$result %in% c("missing", "deferred")) &&
+    (isTRUE(entry$carried) ||
+      entry$result %in% c("missing", "deferred") ||
+      still_broken(entry)) &&
       file.exists(file.path(out_dir, dir, paste0(entry$package, ".md")))
   }
 
