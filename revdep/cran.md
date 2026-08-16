@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 2641 reverse dependencies (2640 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1011 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 32 new problems
+ * We saw 20 new problems
  * We failed to check 6 packages
 
 Issues with CRAN packages are summarised below.
@@ -15,12 +15,6 @@ Issues with CRAN packages are summarised below.
 
 * bnstruct
   checking tests ... ERROR
-
-* Boptbd
-  checking examples ... ERROR
-
-* c3net
-  checking examples ... ERROR
 
 * cfid
   checking tests ... ERROR
@@ -46,9 +40,6 @@ Issues with CRAN packages are summarised below.
 * gemtc
   checking tests ... ERROR
 
-* ggm
-  checking examples ... ERROR
-
 * ggraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -59,21 +50,11 @@ Issues with CRAN packages are summarised below.
 * GoodFitSBM
   checking examples ... ERROR
 
-* lagdynamics
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * manynet
   checking tests ... ERROR
 
 * MetaNet
   checking examples ... ERROR
-
-* migraph
-  checking tests ... ERROR
-
-* modelbpp
-  checking tests ... ERROR
 
 * nat
   checking examples ... ERROR
@@ -83,23 +64,8 @@ Issues with CRAN packages are summarised below.
 * netrics
   checking tests ... ERROR
 
-* NetSci
-  checking examples ... ERROR
-
-* optbdmaeAT
-  checking examples ... ERROR
-
-* optrcdmaeAT
-  checking examples ... ERROR
-
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
-
-* scistreer
-  checking examples ... ERROR
-
-* SEMgraph
-  checking examples ... ERROR
 
 * sfclust
   checking tests ... ERROR
@@ -108,19 +74,14 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* tna
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * vkR
   checking dependencies in R code ... WARNING
 
 ### Failed to check
 
-* blavaan     (NA)
-* deepSTRAPP  (NA)
-* ggpicrust2  (NA)
-* MiscMetabar (NA)
-* multinma    (NA)
+* hespdiv     (NA)
+* Libra       (NA)
+* optbdmaeAT  (NA)
+* optrcdmaeAT (NA)
+* soptdmaeA   (NA)
 * streamDAG   (NA)
