@@ -97,14 +97,31 @@ simplify <- function(
   remove.loops = TRUE,
   edge.attr.comb = NULL
 ) {
-  # A graph that is already simple has no loops and no multiple edges, so
-  # simplify_impl() would not change its structure regardless of the
-  # remove.* / edge.attr.comb arguments. Short-circuiting here avoids the
-  # cost of rebuilding the graph in the (common) already-simple case;
-  # is_simple() is orders of magnitude cheaper than simplify().
-  if (is_simple(graph)) {
-    return(graph)
-  }
+  # There was a short-circuit here -- `if (is_simple(graph)) return(graph)` --
+  # on the grounds that a graph with no loops and no multiple edges has
+  # nothing for simplify_impl() to remove. That is true of its *structure* and
+  # false of its attributes: `edge.attr.comb` does not only combine attributes
+  # across merged edges, it decides which survive at all, and an attribute the
+  # combination list does not name is dropped even when every group has one
+  # member. The default list ends in `"ignore"`, so `simplify(g)` on a simple
+  # graph is meant to keep `weight` and drop everything else, and
+  # `edge.attr.comb = "ignore"` is meant to leave no edge attributes at all.
+  # Returning `graph` untouched silently kept them both.
+  #
+  # Guarding the short-circuit on the graph having no edge attributes does not
+  # fix it, which is the part worth remembering: `is_simple()` populates the
+  # C core's property cache, and `simplify.c` has a cache fast path of its own
+  # that returns early without applying `edge_comb` once the cache says there
+  # is nothing to remove. So merely *asking* whether the graph is simple
+  # changes what simplifying it does. On 2.3.3 that made the result depend on
+  # whether anything had happened to touch the cache first; the short-circuit
+  # made the cache-warm answer the only answer.
+  #
+  # The check therefore lives at the call site that wants it --
+  # `graph_from_literal_i()`, which is what #824 and #1981 were about, and
+  # which simplifies a graph it has only just built from the formula, before
+  # any attribute is set on it. Everywhere else `simplify()` goes through
+  # `simplify_impl()` as it always did.
   if (is.null(edge.attr.comb)) {
     edge.attr.comb <- igraph_opt("edge.attr.comb")
   }
