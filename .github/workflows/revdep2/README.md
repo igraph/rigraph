@@ -1094,11 +1094,21 @@ Two things differ for reasons that have nothing to do with the package:
   `.../lib-old/...` against `.../lib-new/...` — and so do the two check
   directories, which the log names in its first line
   and quotes in every "see … for details".
-- **The stage timings.** `--as-cran` sets `_R_CHECK_TIMINGS_`,
-  so every stage slower than ten seconds
-  prints its own `[user/elapsed]` pair,
+- **The stage timings.** `--as-cran` used to set `_R_CHECK_TIMINGS_` to 10,
+  so every stage slower than that printed its own `[user/elapsed]` pair,
   and two checks racing each other for the same four cores
   never agree on those.
+  They are off now — `_R_CHECK_TIMINGS_=""` for the stamps,
+  `_R_CHECK_EXAMPLE_TIMING_THRESHOLD_=99999` for the
+  "Examples with CPU … > 5s" table, which is the same noise in table form.
+  `neutral_log()` still strips them, because a reused baseline
+  or an older artifact may carry them,
+  but nothing produces them any more, so the diff a human reads
+  is only what changed.
+  Nothing is lost: what a stage cost is still recorded, per line
+  and for *every* stage rather than only the slow ones,
+  by the elapsed stamping in `check-pair.sh` —
+  which is on the driver log, not on the file the halves are compared through.
 
 Both are removed before the log is parsed *and* before it is diffed.
 Measured, not assumed: rphylopic checked against the *same* igraph
