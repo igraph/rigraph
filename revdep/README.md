@@ -5,11 +5,11 @@
 | package | igraph |
 | dev | 2.3.3.9031 |
 | CRAN | 2.3.3 |
-| commit | 31d63bf15 |
+| commit | be6df9094 |
 | R | 4.6 |
 | platform | x86_64-pc-linux-gnu |
-| run | 31903576720 |
-| date | 2026-08-15 |
+| run | 31930350338 |
+| date | 2026-08-16 |
 
 # Revdeps
 
