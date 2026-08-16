@@ -1,3 +1,31 @@
+# hespdiv (1.2.10)
+
+* GitHub mirror: <https://github.com/cran/hespdiv>
+
+Run `revdepcheck::revdep_details(, "hespdiv")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Source tarball could not be downloaded
+
+
+
+
+
+```
+### CRAN
+
+```
+Source tarball could not be downloaded
+
+
+
+
+
+```
 # Libra (1.7)
 
 * GitHub mirror: <https://github.com/cran/Libra>
@@ -51,34 +79,6 @@ compilation terminated.
 make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
 ERROR: compilation failed for package ‘Libra’
 * removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/old/Libra.Rcheck/Libra’
-
-
-```
-# hespdiv (1.2.10)
-
-* GitHub mirror: <https://github.com/cran/hespdiv>
-
-Run `revdepcheck::revdep_details(, "hespdiv")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-Source tarball could not be downloaded
-
-
-
-
-
-```
-### CRAN
-
-```
-Source tarball could not be downloaded
-
-
-
 
 
 ```

@@ -478,21 +478,26 @@ if (has_revdepcheck) {
   }
 
   # Sorted by file name, so the assembled order is the package order rather
-  # than however the shards happened to be cut. `method = "radix"` is the C
-  # collation, which is the one a shell glob expands in under `LC_ALL=C` -- so
+  # than however the shards happened to be cut -- case-insensitively, which is
+  # the order revdepcheck's own single-call version produced and therefore the
+  # order the committed report is already in. Sorting the raw names instead
+  # moves `ECoL`, `GoodFitSBM`, `MetaNet` and `R6causal` to the front of
+  # `problems.md` and rewrites the whole file for nothing.
   #
-  #   LC_ALL=C cat revdep/problems/*.md > revdep/problems.md
-  #
-  # reproduces the assembled file byte for byte, on any machine. Under R's
-  # default (locale) collation it would not: `ECoL` sorts before `archeofrag`
-  # in C and after it in en_US.
+  # `method = "radix"` on a lowercased key rather than plain `sort()`: the
+  # latter collates in the runner's locale, so the committed order would
+  # depend on where the collector happened to run. Radix is C collation, and
+  # C collation of the lowercased name is exactly the case-insensitive order.
+  # The file name is the tie-break, so the sort is total.
   for (dir in names(sections)) {
     files <- list.files(
       file.path(out_dir, dir),
       pattern = "[.]md$",
       full.names = TRUE
     )
-    files <- files[order(basename(files), method = "radix")]
+    files <- files[
+      order(tolower(basename(files)), basename(files), method = "radix")
+    ]
     writeLines(
       if (length(files) == 0) {
         no_problems

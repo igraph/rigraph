@@ -627,16 +627,21 @@ and commits them back to the ref that was checked.
 `problems.md` and `failures.md` are *assembled* rather than written whole.
 Each package with a section has its own file —
 `revdep/problems/<package>.md`, `revdep/failures/<package>.md` —
-and the standalone file is the concatenation of them:
+and the standalone file is the concatenation of them,
+in case-insensitive name order:
 
 ```sh
-LC_ALL=C cat revdep/problems/*.md > revdep/problems.md
+cat $(ls revdep/problems/*.md | LC_COLLATE=C sort -f) > revdep/problems.md
 ```
 
-That command reproduces the committed file byte for byte,
-which is why the collector sorts with `method = "radix"`:
-C collation is what a shell glob expands in under `LC_ALL=C`,
-and R's default (locale) collation is not.
+Case-insensitive because that is the order
+revdepcheck's own single-call version produced,
+so the committed report keeps the order it already had;
+sorting the raw names instead moves `ECoL`, `GoodFitSBM`, `MetaNet`
+and `R6causal` to the front and rewrites the whole file for nothing.
+`method = "radix"` on a lowercased key rather than plain `sort()`,
+because `sort()` collates in the runner's locale —
+the committed order should not depend on where the collector ran.
 
 Two things fall out of the split.
 A diff names the package that changed
