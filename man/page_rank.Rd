@@ -8,7 +8,7 @@ page_rank(
   graph,
   ...,
   algorithm = c("prpack", "arpack"),
-  vids = NULL,
+  vertices = NULL,
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -30,7 +30,7 @@ for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
 default implementation from igraph version 0.5 until version 0.7. It computes
 PageRank scores by solving an eingevalue problem.}
 
-\item{vids}{The vertices of interest.
+\item{vertices}{The vertices of interest.
 The default \code{NULL} selects all vertices.}
 
 \item{directed}{Logical, if true directed paths will be considered for

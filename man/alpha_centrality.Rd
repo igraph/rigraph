@@ -6,21 +6,22 @@
 \usage{
 alpha_centrality(
   graph,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   alpha = 1,
   loops = FALSE,
   exo = 1,
   weights = NULL,
   tol = 1e-07,
-  sparse = TRUE
+  sparse = TRUE,
+  nodes = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph, can be directed or undirected. In undirected
 graphs, edges are treated as if they were reciprocal directed ones.}
 
-\item{nodes}{Vertex sequence, the vertices for which the alpha centrality
+\item{vertices}{Vertex sequence, the vertices for which the alpha centrality
 values are returned. The default \code{NULL} selects all vertices.
 (For technical reasons they will be calculated for all vertices, anyway.)}
 
@@ -57,6 +58,8 @@ is included in the matrix.}
 \item{sparse}{Logical, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
 support}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A numeric vector contaning the centrality scores for the selected

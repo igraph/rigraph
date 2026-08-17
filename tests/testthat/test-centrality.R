@@ -967,7 +967,7 @@ test_that("betweenness() covers migrated tail args and positional recovery", {
 
   res <- betweenness(
     ring,
-    v = V(ring)[1:3],
+    vertices = V(ring)[1:3],
     directed = FALSE,
     weights = rep(1, 5),
     normalized = TRUE,
@@ -996,7 +996,7 @@ test_that("closeness() covers migrated tail args and positional recovery", {
 
   res <- closeness(
     path,
-    vids = V(path)[3],
+    vertices = V(path)[3],
     mode = "in",
     weights = c(1, 1),
     normalized = TRUE,
@@ -1008,7 +1008,7 @@ test_that("closeness() covers migrated tail args and positional recovery", {
   expect_equal(
     closeness(
       path,
-      vids = V(path)[3],
+      vertices = V(path)[3],
       mode = "in",
       weights = c(1, 1),
       cutoff = 1
@@ -1060,7 +1060,7 @@ test_that("harmonic_centrality() covers migrated tail args and positional recove
 
   res <- harmonic_centrality(
     path,
-    vids = V(path)[3],
+    vertices = V(path)[3],
     mode = "in",
     weights = c(1, 1),
     normalized = TRUE,
@@ -1072,7 +1072,7 @@ test_that("harmonic_centrality() covers migrated tail args and positional recove
   expect_equal(
     harmonic_centrality(
       path,
-      vids = V(path)[3],
+      vertices = V(path)[3],
       mode = "in",
       weights = c(1, 1),
       normalized = TRUE,
@@ -1099,7 +1099,7 @@ test_that("page_rank() covers migrated tail args and positional recovery", {
   res <- page_rank(
     star,
     algorithm = "prpack",
-    vids = V(star)[1:5],
+    vertices = V(star)[1:5],
     directed = FALSE,
     damping = 0.9,
     personalized = c(1, rep(0, 9)),
@@ -1145,7 +1145,7 @@ test_that("strength() covers migrated tail args and positional recovery", {
 
   res <- strength(
     star,
-    vids = V(star)[1:3],
+    vertices = V(star)[1:3],
     mode = "out",
     loops = FALSE,
     weights = 1:6
@@ -1156,7 +1156,7 @@ test_that("strength() covers migrated tail args and positional recovery", {
   expect_equal(
     strength(
       star,
-      vids = V(star)[1:3],
+      vertices = V(star)[1:3],
       mode = "out",
       loops = TRUE,
       weights = 1:6
@@ -1174,7 +1174,7 @@ test_that("diversity() covers migrated tail args and positional recovery", {
   rlang::local_options(lifecycle_verbosity = "warning")
   ring <- make_ring(10)
 
-  res <- diversity(ring, weights = 1:10, vids = V(ring)[1:4])
+  res <- diversity(ring, weights = 1:10, vertices = V(ring)[1:4])
   # Scaled entropy of the two incident edge weights, e.g. {10, 1} for vertex 1.
   expect_equal(
     res,
@@ -1215,7 +1215,7 @@ test_that("power_centrality() covers migrated tail args and positional recovery"
 
   res <- power_centrality(
     ring,
-    nodes = V(ring)[1:3],
+    vertices = V(ring)[1:3],
     loops = FALSE,
     exponent = 0.2,
     normalized = TRUE,
@@ -1230,7 +1230,7 @@ test_that("power_centrality() covers migrated tail args and positional recovery"
   lifecycle::expect_deprecated(
     res_legacy <- power_centrality(
       ring,
-      nodes = V(ring)[1:3],
+      vertices = V(ring)[1:3],
       exponent = 0.2,
       rescale = TRUE,
       sparse = FALSE,
@@ -1273,7 +1273,7 @@ test_that("alpha_centrality() covers migrated tail args and positional recovery"
   # The scores are linear in the exogenous input.
   res <- alpha_centrality(
     dag,
-    nodes = V(dag)[1:3],
+    vertices = V(dag)[1:3],
     alpha = 0.5,
     loops = TRUE,
     exo = 2,
@@ -1298,4 +1298,51 @@ test_that("alpha_centrality() covers migrated tail args and positional recovery"
     res_legacy <- alpha_centrality(dag, V(dag), 0.75)
   )
   expect_identical(res_legacy, alpha_centrality(dag, V(dag), alpha = 0.75))
+})
+
+# ---- vertex selector rename: v/vids/nodes -> vertices -----------------
+
+test_that("closeness(vids = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  expect_snapshot(
+    res_legacy <- closeness(g, vids = 1:3)
+  )
+  expect_identical(res_legacy, closeness(g, vertices = 1:3))
+})
+
+test_that("betweenness(v = ) and strength(vids = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- betweenness(g, v = 1:3)
+  )
+  expect_identical(res_legacy, betweenness(g, vertices = 1:3))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- strength(g, vids = 1:3)
+  )
+  expect_identical(res_legacy, strength(g, vertices = 1:3))
+})
+
+test_that("power_centrality(nodes = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  lifecycle::expect_deprecated(
+    res_legacy <- power_centrality(g, nodes = 1:3, exponent = 0.2)
+  )
+  expect_identical(
+    res_legacy,
+    power_centrality(g, vertices = 1:3, exponent = 0.2)
+  )
+})
+
+test_that("page_rank(vids = ) is recovered as `vertices`", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  lifecycle::expect_deprecated(
+    res_legacy <- page_rank(g, vids = 1:3)
+  )
+  expect_identical(res_legacy, page_rank(g, vertices = 1:3))
 })

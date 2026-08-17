@@ -15,7 +15,7 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
     "adjacent.triangles()",
     "count_triangles()"
   )
-  count_triangles(graph = graph, vids = vids)
+  count_triangles(graph = graph, vertices = vids)
 } # nocov end
 
 ## -----------------------------------------------------------------------
@@ -55,9 +55,10 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
 #' @aliases triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
-#' @param vids The vertices to query. This might be a vector of numeric IDs,
-#'   or a character vector of symbolic vertex names for named graphs. The
+#' @param vertices The vertices to query. This might be a vector of numeric
+#'   IDs, or a character vector of symbolic vertex names for named graphs. The
 #'   default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @return For `triangles()` a numeric vector of vertex IDs, the first three
 #'   vertices belong to the first triangle found, etc.
 #'
@@ -96,13 +97,28 @@ triangles <- function(graph) {
 
 #' @export
 #' @rdname count_triangles
-count_triangles <- function(graph, vids = NULL) {
-  if (is.null(vids)) {
-    vids <- V(graph)
+count_triangles <- function(graph, vertices = NULL, vids = deprecated()) {
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn count_triangles} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "count_triangles(vids = )",
+      "count_triangles(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   count_adjacent_triangles_impl(
     graph = graph,
-    vids = vids
+    vids = vertices
   )
 }

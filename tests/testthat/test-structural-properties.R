@@ -69,8 +69,8 @@ test_that("max_degree() works", {
   expect_equal(max_degree(g, loops = FALSE), 2)
   expect_equal(max_degree(g, mode = "out", loops = FALSE), 1)
   expect_equal(max_degree(g, mode = "in", loops = FALSE), 1)
-  expect_equal(max_degree(g, v = integer()), 0)
-  expect_equal(max_degree(g, v = NULL), max_degree(g))
+  expect_equal(max_degree(g, vertices = integer()), 0)
+  expect_equal(max_degree(g, vertices = NULL), max_degree(g))
   expect_equal(max_degree(make_empty_graph()), 0)
 })
 
@@ -352,7 +352,7 @@ test_that("farthest_vertices() works", {
   expect_equal(fn, list(vertices = c(1, 10), distance = 4))
 
   expect_equal(
-    distances(kite, v = fn$vertices[1], to = fn$vertices[2])[1],
+    distances(kite, vertices = fn$vertices[1], to = fn$vertices[2])[1],
     fn$distance
   )
   expect_equal(diameter(kite), fn$distance)
@@ -510,7 +510,7 @@ test_that("transitivity() works", {
   t2 <- transitivity(g, type = "average")
   expect_equal(t2, 0.10159943848720931481)
 
-  t3 <- transitivity(g, type = "local", vids = V(g))
+  t3 <- transitivity(g, type = "local", vertices = V(g))
   t33 <- transitivity(g, type = "local")
   est3 <- structure(
     c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
@@ -547,10 +547,10 @@ test_that("local transitivity() produces named vectors", {
   expect_named(t2, V(g)$name)
 
   vs <- c("a", "c")
-  t3 <- transitivity(g, type = "local", vids = vs)
+  t3 <- transitivity(g, type = "local", vertices = vs)
   expect_named(t3, vs)
 
-  t4 <- transitivity(g, type = "barrat", vids = vs)
+  t4 <- transitivity(g, type = "barrat", vertices = vs)
   expect_named(t4, vs)
 })
 
@@ -1194,7 +1194,7 @@ test_that("distances() legacy positional recovery", {
   g <- make_ring(5, directed = TRUE)
 
   lifecycle::expect_deprecated(res <- distances(g, V(g), V(g), "out"))
-  expect_identical(res, distances(g, v = V(g), to = V(g), mode = "out"))
+  expect_identical(res, distances(g, vertices = V(g), to = V(g), mode = "out"))
 })
 
 test_that("shortest_paths() tail arguments and legacy positional recovery", {
@@ -1284,7 +1284,7 @@ test_that("transitivity() tail arguments and legacy positional recovery", {
     transitivity(
       g,
       type = "barrat",
-      vids = V(g),
+      vertices = V(g),
       weights = rep(1, 4),
       isolates = "zero"
     ),
@@ -1292,7 +1292,7 @@ test_that("transitivity() tail arguments and legacy positional recovery", {
   )
 
   lifecycle::expect_deprecated(res <- transitivity(g, "local", V(g)))
-  expect_identical(res, transitivity(g, type = "local", vids = V(g)))
+  expect_identical(res, transitivity(g, type = "local", vertices = V(g)))
 })
 
 test_that("constraint() tail arguments and legacy positional recovery", {
@@ -1302,7 +1302,7 @@ test_that("constraint() tail arguments and legacy positional recovery", {
   # Explicit unit weights override the weight attribute:
   # every vertex of an unweighted triangle has constraint 1.125.
   expect_equal(
-    constraint(g, nodes = V(g), weights = rep(1, 3)),
+    constraint(g, vertices = V(g), weights = rep(1, 3)),
     c(a = 1.125, b = 1.125, c = 1.125)
   )
 
@@ -1333,7 +1333,10 @@ test_that("edge_density() tail arguments and legacy positional recovery", {
 test_that("ego_size() tail arguments and legacy positional recovery", {
   g <- make_ring(5, directed = TRUE)
 
-  expect_equal(ego_size(g, order = 1, nodes = 1, mode = "out", mindist = 1), 1)
+  expect_equal(
+    ego_size(g, order = 1, vertices = 1, mode = "out", mindist = 1),
+    1
+  )
 
   lifecycle::expect_deprecated(res <- ego_size(g, 1, 1, "out"))
   expect_identical(res, ego_size(g, 1, 1, mode = "out"))
@@ -1342,7 +1345,7 @@ test_that("ego_size() tail arguments and legacy positional recovery", {
 test_that("ego() tail arguments and legacy positional recovery", {
   g <- make_ring(5, directed = TRUE)
 
-  e <- ego(g, order = 1, nodes = 1, mode = "out", mindist = 1)
+  e <- ego(g, order = 1, vertices = 1, mode = "out", mindist = 1)
   expect_equal(as.numeric(e[[1]]), 2)
 
   lifecycle::expect_deprecated(res <- ego(g, 1, 1, "out"))
@@ -1352,7 +1355,7 @@ test_that("ego() tail arguments and legacy positional recovery", {
 test_that("make_ego_graph() tail arguments and legacy positional recovery", {
   g <- make_ring(5, directed = TRUE)
 
-  mg <- make_ego_graph(g, order = 1, nodes = 1, mode = "out", mindist = 1)
+  mg <- make_ego_graph(g, order = 1, vertices = 1, mode = "out", mindist = 1)
   expect_length(mg, 1)
   expect_equal(vcount(mg[[1]]), 1)
   expect_equal(ecount(mg[[1]]), 0)
@@ -1542,7 +1545,7 @@ test_that("knn() tail arguments and legacy positional recovery", {
   # only the centre has out-neighbours, each with in-degree 1.
   r <- knn(
     g,
-    vids = V(g),
+    vertices = V(g),
     mode = "out",
     neighbor.degree.mode = "in",
     weights = NA
@@ -1552,4 +1555,66 @@ test_that("knn() tail arguments and legacy positional recovery", {
 
   lifecycle::expect_deprecated(res <- knn(g, V(g), "out"))
   expect_identical(res, knn(g, V(g), mode = "out"))
+})
+
+# ---- vertex selector rename: v/vids/nodes -> vertices -----------------
+
+test_that("degree(v = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  expect_snapshot(
+    res_legacy <- degree(g, v = 1:3)
+  )
+  expect_identical(res_legacy, degree(g, vertices = 1:3))
+})
+
+test_that("degree() rejects `vertices` supplied both directly and as `v`", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  expect_snapshot(
+    degree(g, vertices = 1:3, v = 1:3),
+    error = TRUE
+  )
+})
+
+test_that("ego(nodes = ) and induced_subgraph(vids = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- ego(g, order = 1, nodes = 1:3)
+  )
+  expect_equal(res_legacy, ego(g, order = 1, vertices = 1:3))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- induced_subgraph(g, vids = 1:5)
+  )
+  expect_identical_graphs(res_legacy, induced_subgraph(g, vertices = 1:5))
+})
+
+test_that("distances(v = ) and max_degree(v = ) are deprecated but still work", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+
+  lifecycle::expect_deprecated(
+    res_legacy <- distances(g, v = 1:3)
+  )
+  expect_identical(res_legacy, distances(g, vertices = 1:3))
+
+  lifecycle::expect_deprecated(
+    res_legacy <- max_degree(g, v = 1:3)
+  )
+  expect_identical(res_legacy, max_degree(g, vertices = 1:3))
+})
+
+test_that("transitivity(vids = ) is recovered as `vertices`", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_graph(~ a - b - c - a - d)
+  lifecycle::expect_deprecated(
+    res_legacy <- transitivity(g, type = "local", vids = c("a", "c"))
+  )
+  expect_identical(
+    res_legacy,
+    transitivity(g, type = "local", vertices = c("a", "c"))
+  )
 })

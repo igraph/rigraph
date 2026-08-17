@@ -41,9 +41,10 @@
 #' @param weights The edge weights. All edge weights must be non-negative;
 #'   additionally, no edge weight may be NaN. If it is `NULL` (the default)
 #'   and the graph has a `weight` edge attribute, then it is used automatically.
-#' @param vids The vertex IDs of the vertices for which the calculation will be done.
+#' @param vertices The vertex IDs of the vertices for which the calculation will be done.
 #'   Applies to the local efficiency calculation only. The default `NULL`
 #'   selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @param directed Logical, whether to consider directed paths. Ignored
 #'   for undirected graphs.
 #' @param mode Specifies how to define the local neighborhood of a vertex in
@@ -123,15 +124,18 @@ global_efficiency <- function(
 #' @export
 local_efficiency <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   weights = NULL,
   directed = TRUE,
-  mode = c("all", "out", "in", "total")
+  mode = c("all", "out", "in", "total"),
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: local_efficiency, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn local_efficiency}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: local_efficiency(graph, vids, weights, directed, mode)
     .old_signature <- function(weights, directed, mode, ...) {
       if (...length() > 0L) {
@@ -160,21 +164,36 @@ local_efficiency <- function(
         "3.0.0",
         what = base::I("Calling `local_efficiency()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  local_efficiency(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    local_efficiency(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  local_efficiency(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    local_efficiency(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn local_efficiency} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "local_efficiency(vids = )",
+      "local_efficiency(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   local_efficiency_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     weights = weights,
     directed = directed,
     mode = mode

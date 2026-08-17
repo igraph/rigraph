@@ -5,21 +5,23 @@
 \alias{bibcoupling}
 \title{Cocitation coupling}
 \usage{
-cocitation(graph, v = NULL)
+cocitation(graph, vertices = NULL, v = deprecated())
 
-bibcoupling(graph, v = NULL)
+bibcoupling(graph, vertices = NULL, v = deprecated())
 }
 \arguments{
 \item{graph}{The graph object to analyze}
 
-\item{v}{Vertex sequence or numeric vector, the vertex IDs for which the
-cocitation or bibliographic coupling values we want to calculate. The
+\item{vertices}{Vertex sequence or numeric vector, the vertex IDs for which
+the cocitation or bibliographic coupling values we want to calculate. The
 default \code{NULL} selects all vertices.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
-A numeric matrix with \code{length(v)} lines and
+A numeric matrix with \code{length(vertices)} lines and
 \code{vcount(graph)} columns. Element \verb{(i,j)} contains the cocitation
-or bibliographic coupling for vertices \code{v[i]} and \code{j}.
+or bibliographic coupling for vertices \code{vertices[i]} and \code{j}.
 }
 \description{
 Two vertices are cocited if there is another vertex citing both of them.
@@ -29,10 +31,10 @@ both cite, \code{bibcoupling()} calculates this.
 }
 \details{
 \code{cocitation()} calculates the cocitation counts for the vertices in the
-\code{v} argument and all vertices in the graph.
+\code{vertices} argument and all vertices in the graph.
 
 \code{bibcoupling()} calculates the bibliographic coupling for vertices in
-\code{v} and all vertices in the graph.
+\code{vertices} and all vertices in the graph.
 
 Calculating the cocitation or bibliographic coupling for only one vertex
 costs the same amount of computation as for all vertices. This might change

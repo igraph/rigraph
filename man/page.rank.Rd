@@ -21,8 +21,8 @@ page.rank(
 \item{algo}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} in
 \code{\link[=page_rank]{page_rank()}} instead.}
 
-\item{vids}{The vertices of interest.
-The default \code{NULL} selects all vertices.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} in
+\code{\link[=page_rank]{page_rank()}} instead.}
 
 \item{directed}{Logical, if true directed paths will be considered for
 directed graphs. It is ignored for undirected graphs.}

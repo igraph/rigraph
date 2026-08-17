@@ -26,8 +26,9 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex IDs for which the similarity is calculated. The
+#' @param vertices The vertex IDs for which the similarity is calculated. The
 #'   default `NULL` selects all vertices.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
@@ -35,7 +36,7 @@
 #' @param loops Whether to include vertices themselves in the neighbor
 #'   sets.
 #' @param method The method to use.
-#' @return A `length(vids)` by `length(vids)` numeric matrix
+#' @return A `length(vertices)` by `length(vertices)` numeric matrix
 #'   containing the similarity scores. This argument is ignored by the
 #'   `invlogweighted` method.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -53,7 +54,7 @@
 #' similarity(g, method = "jaccard")
 similarity <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c(
     "all",
@@ -66,11 +67,14 @@ similarity <- function(
     "jaccard",
     "dice",
     "invlogweighted"
-  )
+  ),
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: similarity, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn similarity}.", i = "Spell out the full argument name."))
     .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn similarity}.")
     # Pre-3.0.0 signature: similarity(graph, vids, mode, loops, method)
@@ -101,37 +105,52 @@ similarity <- function(
         "3.0.0",
         what = base::I("Calling `similarity()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  similarity(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    similarity(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  similarity(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    similarity(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn similarity} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "similarity(vids = )",
+      "similarity(vertices = )"
+    )
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   method <- igraph_match_arg(method)
   if (method == "jaccard") {
     similarity_jaccard_impl(
       graph = graph,
-      vids = vids,
+      vids = vertices,
       mode = mode,
       loops = loops
     )
   } else if (method == "dice") {
     similarity_dice_impl(
       graph = graph,
-      vids = vids,
+      vids = vertices,
       mode = mode,
       loops = loops
     )
   } else if (method == "invlogweighted") {
     similarity_inverse_log_weighted_impl(
       graph = graph,
-      vids = vids,
+      vids = vertices,
       mode = mode
     )
   }
@@ -161,7 +180,7 @@ similarity.jaccard <- function(
 
   similarity(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     loops = loops,
     method = "jaccard"
@@ -192,7 +211,7 @@ similarity.dice <- function(
 
   similarity(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     loops = loops,
     method = "dice"
@@ -222,7 +241,7 @@ similarity.invlogweighted <- function(
 
   similarity(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     method = "invlogweighted"
   )

@@ -21,13 +21,14 @@ mean_distance(
 
 distances(
   graph,
-  v = NULL,
+  vertices = NULL,
   to = NULL,
   ...,
   mode = c("all", "out", "in"),
   weights = NULL,
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
-    "floyd-warshall")
+    "floyd-warshall"),
+  v = deprecated()
 )
 
 shortest_paths(
@@ -77,8 +78,8 @@ Functions accepting this argument (like \code{mean_distance()}) return
 additional information like the number of disconnected vertex pairs in
 the result when this parameter is set to \code{TRUE}.}
 
-\item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated. The default \code{NULL} selects all vertices.}
+\item{vertices}{Numeric vector, the vertices from which the shortest paths
+will be calculated. The default \code{NULL} selects all vertices.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
 calculated. The default \code{NULL} includes all vertices. Note that for
@@ -102,6 +103,8 @@ You can override igraph's choice by explicitly giving this parameter. Note
 that the igraph C core might still override your choice in obvious cases,
 i.e. if there are no edge weights, then the unweighted algorithm will be
 used, regardless of this argument.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{from}{Numeric constant, the vertex from or to the shortest paths will
 be calculated. Note that right now this is not a vector of vertex IDs, but
@@ -130,8 +133,9 @@ are reached.}
 }
 \value{
 For \code{distances()} a numeric matrix with \code{length(to)}
-columns and \code{length(v)} rows. The shortest path length from a vertex to
-itself is always zero. For unreachable vertices \code{Inf} is included.
+columns and \code{length(vertices)} rows. The shortest path length from a
+vertex to itself is always zero. For unreachable vertices \code{Inf} is
+included.
 
 For \code{shortest_paths()} a named list with four entries is returned:
 \item{vpath}{This itself is a list, of length \code{length(to)}; list

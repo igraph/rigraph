@@ -154,7 +154,7 @@ shortest.paths <- function(
   mode <- igraph_match_arg(mode)
   distances(
     graph = graph,
-    v = v,
+    vertices = v,
     to = to,
     mode = mode,
     weights = weights,
@@ -184,7 +184,7 @@ neighborhood.size <- function(
   ego_size(
     graph = graph,
     order = order,
-    nodes = nodes,
+    vertices = nodes,
     mode = mode,
     mindist = mindist
   )
@@ -337,7 +337,7 @@ induced.subgraph <- function(
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "induced.subgraph()", "induced_subgraph()")
-  induced_subgraph(graph = graph, vids = vids, impl = impl)
+  induced_subgraph(graph = graph, vertices = vids, impl = impl)
 } # nocov end
 
 #' Find the multiple or loop edges in a graph
@@ -378,7 +378,7 @@ graph.neighborhood <- function(
   make_ego_graph(
     graph = graph,
     order = order,
-    nodes = nodes,
+    vertices = nodes,
     mode = mode,
     mindist = mindist
   )
@@ -431,7 +431,7 @@ graph.knn <- function(
   lifecycle::deprecate_warn("2.0.0", "graph.knn()", "knn()")
   knn(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     neighbor.degree.mode = neighbor.degree.mode,
     weights = weights
@@ -1038,8 +1038,9 @@ mean_distance <- function(
 #'
 #'
 #' @param graph The graph to analyze.
-#' @param v The IDs of vertices of which the degree will be calculated.
+#' @param vertices The IDs of vertices of which the degree will be calculated.
 #'   The default `NULL` selects all vertices.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
@@ -1049,7 +1050,7 @@ mean_distance <- function(
 #'   number of vertices in the graph.
 #' @inheritParams rlang::args_dots_empty
 #' @return For `degree()` a numeric vector of the same length as argument
-#'   `v`.
+#'   `vertices`.
 #'
 #'   For `degree_distribution()` a numeric vector of the same length as the
 #'   maximum degree plus one. The first element is the relative frequency zero
@@ -1077,11 +1078,12 @@ mean_distance <- function(
 #'
 degree <- function(
   graph,
-  v = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
-  normalized = FALSE
+  normalized = FALSE,
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: degree, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1114,24 +1116,35 @@ degree <- function(
         "3.0.0",
         what = base::I("Calling `degree()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  degree(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    degree(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  degree(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    degree(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  if (is.null(v)) {
-    v <- V(graph)
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn degree} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "degree(v = )", "degree(vertices = )")
+    vertices <- v
   }
-  v <- as_igraph_vs(graph, v)
+
+  ensure_igraph(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
+  }
+  vertices <- as_igraph_vs(graph, vertices)
   mode <- igraph_match_arg(mode)
 
   res <- degree_impl(
     graph = graph,
-    vids = v,
+    vids = vertices,
     mode = mode,
     loops = loops
   )
@@ -1140,7 +1153,7 @@ degree <- function(
     res <- res / (vcount(graph) - 1)
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
+    names(res) <- V(graph)$name[vertices]
   }
   res
 }
@@ -1150,17 +1163,33 @@ degree <- function(
 max_degree <- function(
   graph,
   ...,
-  v = NULL,
+  vertices = NULL,
   mode = c("all", "out", "in", "total"),
-  loops = TRUE
+  loops = TRUE,
+  v = deprecated()
 ) {
-  if (is.null(v)) {
-    v <- V(graph)
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn max_degree} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "max_degree(v = )",
+      "max_degree(vertices = )"
+    )
+    vertices <- v
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   maxdegree_impl(
     graph = graph,
-    v = v,
+    v = vertices,
     mode = mode,
     loops = loops
   )
@@ -1294,8 +1323,9 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' histogram.
 #'
 #' @param graph The graph to work on.
-#' @param v Numeric vector, the vertices from which the shortest paths will be
-#'   calculated. The default `NULL` selects all vertices.
+#' @param vertices Numeric vector, the vertices from which the shortest paths
+#'   will be calculated. The default `NULL` selects all vertices.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
 #'   calculated. The default `NULL` includes all vertices. Note that for
 #'   `distances()` every vertex must be included here at most once. (This
@@ -1332,8 +1362,9 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   FALSE, the length of the missing paths are considered as having infinite
 #'   length, making the mean distance infinite as well.
 #' @return For `distances()` a numeric matrix with `length(to)`
-#'   columns and `length(v)` rows. The shortest path length from a vertex to
-#'   itself is always zero. For unreachable vertices `Inf` is included.
+#'   columns and `length(vertices)` rows. The shortest path length from a
+#'   vertex to itself is always zero. For unreachable vertices `Inf` is
+#'   included.
 #'
 #'   For `shortest_paths()` a named list with four entries is returned:
 #'   \item{vpath}{This itself is a list, of length `length(to)`; list
@@ -1440,7 +1471,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 distances <- function(
   graph,
-  v = NULL,
+  vertices = NULL,
   to = NULL,
   ...,
   mode = c("all", "out", "in"),
@@ -1452,7 +1483,8 @@ distances <- function(
     "bellman-ford",
     "johnson",
     "floyd-warshall"
-  )
+  ),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: distances, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1485,17 +1517,32 @@ distances <- function(
         "3.0.0",
         what = base::I("Calling `distances()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  distances(", base::paste(base::c("graph", "v", "to", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    distances(", base::paste(base::c("graph", "v", "to", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  distances(", base::paste(base::c("graph", "vertices", "to", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    distances(", base::paste(base::c("graph", "vertices", "to", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn distances} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "distances(v = )",
+      "distances(vertices = )"
+    )
+    vertices <- v
+  }
+
   ensure_igraph(graph)
-  if (is.null(v)) {
-    v <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   if (is.null(to)) {
     to <- V(graph)
@@ -1508,7 +1555,7 @@ distances <- function(
     mode <- "out"
   }
 
-  v <- as_igraph_vs(graph, v)
+  vertices <- as_igraph_vs(graph, vertices)
   to <- as_igraph_vs(graph, to)
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -1544,7 +1591,7 @@ distances <- function(
   res <- .Call(
     Rx_igraph_shortest_paths,
     graph,
-    v - 1,
+    vertices - 1,
     to - 1,
     as.numeric(mode),
     weights,
@@ -1552,7 +1599,7 @@ distances <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- V(graph)$name[v]
+    rownames(res) <- V(graph)$name[vertices]
     colnames(res) <- V(graph)$name[to]
   }
   res
@@ -2006,8 +2053,9 @@ subgraph <- function(graph, vids) {
 }
 
 #' @rdname subgraph
-#' @param vids Numeric vector, the vertices of the original graph which will
-#'   form the subgraph.
+#' @param vertices Numeric vector, the vertices of the original graph which
+#'   will form the subgraph.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param impl Character scalar, to choose between two implementation of the
 #'   subgraph calculation. \sQuote{`copy_and_delete`} copies the graph
@@ -2020,13 +2068,16 @@ subgraph <- function(graph, vids) {
 #' @export
 induced_subgraph <- function(
   graph,
-  vids,
+  vertices,
   ...,
-  impl = c("auto", "copy_and_delete", "create_from_scratch")
+  impl = c("auto", "copy_and_delete", "create_from_scratch"),
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: induced_subgraph, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn induced_subgraph}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: induced_subgraph(graph, vids, impl)
     .old_signature <- function(impl, ...) {
       if (...length() > 0L) {
@@ -2051,23 +2102,38 @@ induced_subgraph <- function(
         "3.0.0",
         what = base::I("Calling `induced_subgraph()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  induced_subgraph(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    induced_subgraph(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  induced_subgraph(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    induced_subgraph(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn induced_subgraph} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "induced_subgraph(vids = )",
+      "induced_subgraph(vertices = )"
+    )
+    vertices <- vids
+  }
+
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
+  vertices <- as_igraph_vs(graph, vertices)
   impl <- igraph_match_arg(impl)
 
   # Function call
   res <- induced_subgraph_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     impl = impl
   )
 
@@ -2199,7 +2265,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'     }
 #'     \item{"local"}{
 #'       The local transitivity of an undirected graph.
-#'       It is calculated for each vertex given in the `vids` argument.
+#'       It is calculated for each vertex given in the `vertices` argument.
 #'       The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
 #'       and the triples centered on the vertex.
 #'       In directed graphs, edge directions are ignored.
@@ -2221,7 +2287,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'     }
 #'   }
 #' @inheritParams rlang::args_dots_empty
-#' @param vids The vertex IDs for the local transitivity will be calculated.
+#' @param vertices The vertex IDs for the local transitivity will be calculated.
 #'   This will be ignored for global transitivity types.  The default value is
 #'   `NULL`, in this case all vertices are considered. It is slightly faster
 #'   to supply `NULL` here than `V(graph)`.
@@ -2243,7 +2309,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'   are no connected triples in the graph.
 #'
 #'   For \sQuote{`local`} a vector of transitivity scores, one for each
-#'   vertex in \sQuote{`vids`}.
+#'   vertex in \sQuote{`vertices`}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Wasserman, S., and Faust, K. (1994). *Social Network
 #' Analysis: Methods and Applications.* Cambridge: Cambridge University Press.
@@ -2265,8 +2331,8 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' gw <- graph_from_literal(A - B:C:D:E, B - C:D, C - D)
 #' E(gw)$weight <- 1
 #' E(gw)[V(gw)[name == "A"] %--% V(gw)[name == "E"]]$weight <- 5
-#' transitivity(gw, vids = "A", type = "local")
-#' transitivity(gw, vids = "A", type = "weighted")
+#' transitivity(gw, vertices = "A", type = "local")
+#' transitivity(gw, vertices = "A", type = "weighted")
 #'
 #' # Weighted reduces to "local" if weights are the same
 #' gw2 <- sample_gnp(1000, 10 / 1000)
@@ -2291,13 +2357,15 @@ transitivity <- function(
     "weighted"
   ),
   ...,
-  vids = NULL,
+  vertices = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
 ) {
   # BEGIN GENERATED ARG_HANDLE: transitivity, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn transitivity}.")
     # Pre-3.0.0 signature: transitivity(graph, type, vids, weights, isolates)
     .old_signature <- function(vids, weights, isolates, ...) {
       if (...length() > 0L) {
@@ -2307,7 +2375,7 @@ transitivity <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn transitivity}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(vids)) base::list(vids = vids),
+        if (!base::missing(vids)) base::list(vertices = vids),
         if (!base::missing(weights)) base::list(weights = weights),
         if (!base::missing(isolates)) base::list(isolates = isolates)
       )
@@ -2316,7 +2384,7 @@ transitivity <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(vids)) "vids",
+        if (!base::missing(vertices)) "vertices",
         if (!base::missing(weights)) "weights",
         if (!base::missing(isolates)) "isolates"
       ))
@@ -2326,7 +2394,7 @@ transitivity <- function(
         "3.0.0",
         what = base::I("Calling `transitivity()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  transitivity(", base::paste(base::c("graph", "type", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  transitivity(", base::paste(base::c("graph", "type", base::c(vertices = "vids", weights = "weights", isolates = "isolates")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    transitivity(", base::paste(base::c("graph", "type", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2368,7 +2436,7 @@ transitivity <- function(
     )
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
-    if (is.null(vids)) {
+    if (is.null(vertices)) {
       res <- .Call(
         Rx_igraph_transitivity_local_undirected_all,
         graph,
@@ -2381,11 +2449,11 @@ transitivity <- function(
     } else {
       res <- transitivity_local_undirected_impl(
         graph = graph,
-        vids = vids,
+        vids = vertices,
         mode = isolates
       )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
-        vids_indices <- as_igraph_vs(graph, vids)
+        vids_indices <- as_igraph_vs(graph, vertices)
         names(res) <- V(graph)$name[vids_indices]
       }
       res
@@ -2396,11 +2464,11 @@ transitivity <- function(
       mode = isolates
     )
   } else if (type == 3) {
-    # Save original vids for naming if needed
-    vids_for_names <- if (is.null(vids)) V(graph) else vids
+    # Save original vertices for naming if needed
+    vids_for_names <- if (is.null(vertices)) V(graph) else vertices
 
     res <- if (is.null(weights)) {
-      if (is.null(vids)) {
+      if (is.null(vertices)) {
         transitivity_local_undirected_impl(
           graph = graph,
           mode = isolates
@@ -2408,12 +2476,12 @@ transitivity <- function(
       } else {
         transitivity_local_undirected_impl(
           graph = graph,
-          vids = vids,
+          vids = vertices,
           mode = isolates
         )
       }
     } else {
-      if (is.null(vids)) {
+      if (is.null(vertices)) {
         transitivity_barrat_impl(
           graph = graph,
           weights = weights,
@@ -2422,7 +2490,7 @@ transitivity <- function(
       } else {
         transitivity_barrat_impl(
           graph = graph,
-          vids = vids,
+          vids = vertices,
           weights = weights,
           mode = isolates
         )
@@ -2461,8 +2529,9 @@ transitivity <- function(
 #' graph adjacency matrix. For isolated vertices, constraint is undefined.
 #'
 #' @param graph A graph object, the input graph.
-#' @param nodes The vertices for which the constraint will be calculated.
+#' @param vertices The vertices for which the constraint will be calculated.
 #'   The default `NULL` selects all vertices.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param weights The weights of the edges. If this is `NULL` and there is
 #'   a `weight` edge attribute this is used. If there is no such edge
@@ -2483,9 +2552,10 @@ transitivity <- function(
 #'
 constraint <- function(
   graph,
-  nodes = NULL,
+  vertices = NULL,
   ...,
-  weights = NULL
+  weights = NULL,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: constraint, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2514,19 +2584,34 @@ constraint <- function(
         "3.0.0",
         what = base::I("Calling `constraint()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  constraint(", base::paste(base::c("graph", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    constraint(", base::paste(base::c("graph", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  constraint(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    constraint(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  ensure_igraph(graph)
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn constraint} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "constraint(nodes = )",
+      "constraint(vertices = )"
+    )
+    vertices <- nodes
   }
-  nodes <- as_igraph_vs(graph, nodes)
+
+  ensure_igraph(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
+  }
+  vertices <- as_igraph_vs(graph, vertices)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -2536,11 +2621,11 @@ constraint <- function(
 
   res <- constraint_impl(
     graph = graph,
-    vids = nodes,
+    vids = vertices,
     weights = weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[nodes]
+    names(res) <- V(graph)$name[vertices]
   }
   res
 }
@@ -2721,10 +2806,11 @@ edge_density <- function(
 ego_size <- function(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: ego_size, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2757,17 +2843,32 @@ ego_size <- function(
         "3.0.0",
         what = base::I("Calling `ego_size()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  ego_size(", base::paste(base::c("graph", "order", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    ego_size(", base::paste(base::c("graph", "order", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  ego_size(", base::paste(base::c("graph", "order", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    ego_size(", base::paste(base::c("graph", "order", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn ego_size} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "ego_size(nodes = )",
+      "ego_size(vertices = )"
+    )
+    vertices <- nodes
+  }
+
   ensure_igraph(graph)
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -2777,7 +2878,7 @@ ego_size <- function(
   .Call(
     Rx_igraph_neighborhood_size,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2820,8 +2921,9 @@ neighborhood_size <- ego_size
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood. Negative values
 #'   indicate an infinite order.
-#' @param nodes The vertices for which the calculation is performed.
+#' @param vertices The vertices for which the calculation is performed.
 #'   The default `NULL` selects all vertices.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
@@ -2880,10 +2982,11 @@ neighborhood_size <- ego_size
 ego <- function(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: ego, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2916,17 +3019,28 @@ ego <- function(
         "3.0.0",
         what = base::I("Calling `ego()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  ego(", base::paste(base::c("graph", "order", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    ego(", base::paste(base::c("graph", "order", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  ego(", base::paste(base::c("graph", "order", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    ego(", base::paste(base::c("graph", "order", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn ego} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "ego(nodes = )", "ego(vertices = )")
+    vertices <- nodes
+  }
+
   ensure_igraph(graph)
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -2936,7 +3050,7 @@ ego <- function(
   res <- .Call(
     Rx_igraph_neighborhood,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2959,10 +3073,11 @@ neighborhood <- ego
 make_ego_graph <- function(
   graph,
   order = 1,
-  nodes = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in"),
-  mindist = 0
+  mindist = 0,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: make_ego_graph, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2995,17 +3110,32 @@ make_ego_graph <- function(
         "3.0.0",
         what = base::I("Calling `make_ego_graph()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  make_ego_graph(", base::paste(base::c("graph", "order", "nodes", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    make_ego_graph(", base::paste(base::c("graph", "order", "nodes", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  make_ego_graph(", base::paste(base::c("graph", "order", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    make_ego_graph(", base::paste(base::c("graph", "order", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn make_ego_graph} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "make_ego_graph(nodes = )",
+      "make_ego_graph(vertices = )"
+    )
+    vertices <- nodes
+  }
+
   ensure_igraph(graph)
-  if (is.null(nodes)) {
-    nodes <- V(graph)
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
@@ -3015,7 +3145,7 @@ make_ego_graph <- function(
   res <- .Call(
     Rx_igraph_neighborhood_graphs,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.integer(mode),
     mindist
@@ -4898,10 +5028,11 @@ which_mutual <- function(
 #' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
 #' @param graph The input graph. It may be directed.
-#' @param vids The vertices for which the calculation is performed.
+#' @param vertices The vertices for which the calculation is performed.
 #'   The default `NULL` includes all vertices. Note, that if not all vertices are given here, then
 #'   both \sQuote{`knn`} and \sQuote{`knnk`} will be calculated based
 #'   on the given vertices only.
+#' @param vids `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @param mode Character constant to indicate the type of neighbors to consider
 #'   in directed graphs. `out` considers out-neighbors, `in` considers
@@ -4919,7 +5050,7 @@ which_mutual <- function(
 #' @return A list with two members:
 #'   \describe{
 #'     \item{knn}{
-#'       A numeric vector giving the average nearest neighbor degree for all vertices in `vids`.
+#'       A numeric vector giving the average nearest neighbor degree for all vertices in `vertices`.
 #'     }
 #'     \item{knnk}{
 #'       A numeric vector, its length is the maximum (total) vertex degree in the graph.
@@ -4955,15 +5086,18 @@ which_mutual <- function(
 #' @export
 knn <- function(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
-  weights = NULL
+  weights = NULL,
+  vids = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: knn, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("v"))
+    if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn knn}.", i = "Spell out the full argument name."))
     # Pre-3.0.0 signature: knn(graph, vids, mode, neighbor.degree.mode, weights)
     .old_signature <- function(mode, neighbor.degree.mode, weights, ...) {
       if (...length() > 0L) {
@@ -4992,21 +5126,32 @@ knn <- function(
         "3.0.0",
         what = base::I("Calling `knn()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  knn(", base::paste(base::c("graph", "vids", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    knn(", base::paste(base::c("graph", "vids", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  knn(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    knn(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(vids)) {
-    vids <- V(graph)
+  if (lifecycle::is_present(vids)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn knn} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg vids}."
+      ))
+    }
+    lifecycle::deprecate_soft("3.0.0", "knn(vids = )", "knn(vertices = )")
+    vertices <- vids
+  }
+
+  if (is.null(vertices)) {
+    vertices <- V(graph)
   }
 
   avg_nearest_neighbor_degree_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     neighbor_degree_mode = neighbor.degree.mode,
     weights = weights
