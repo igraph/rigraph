@@ -17,25 +17,26 @@ standardize_eigen_signs <- function(x) {
   })
 }
 
-order_by_magnitude <- function(x) {
+order_eigenvalues_by_magnitude <- function(x) {
   order(abs(x), sign(x), decreasing = TRUE)
 }
 
-sort_by_magnitude <- function(x) {
-  x[order_by_magnitude(x)]
+sort_eigenvalues_by_magnitude <- function(x) {
+  x[order_eigenvalues_by_magnitude(x)]
 }
 
 # ---- test-operators.R -------------------------------------------------------
 
-order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
+sort_edgelist_rows <- function(x) x[order(x[, 1], x[, 2]), ]
 
-rn <- function(D) {
+name_rows_by_edge_endpoints <- function(D) {
   rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
   D
 }
 
-# Input/expected pairs for the unique()-on-vertex-sequence tests.
-unique_tests <- function() {
+# Input/expected vertex-index pairs for the unique()-on-vertex-sequence tests:
+# each element is `list(<indices to select>, <indices left after unique()>)`.
+unique_vertex_seq_cases <- function() {
   list(
     list(1:5, 1:5),
     list(c(1, 1, 2:5), 1:5),
@@ -51,7 +52,7 @@ unique_tests <- function() {
 # default combination list keeps and one of which it drops. Each caller needs
 # its own: the C core's property cache lives in the graph object, and merely
 # asking whether the graph is simple changes what simplifying it does.
-simple_graph_with_attrs <- function() {
+simple_graph_with_edge_attrs <- function() {
   g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
   E(g)$weight <- c(1, 2)
   E(g)$foo <- c("a", "b")
@@ -62,7 +63,7 @@ simple_graph_with_attrs <- function() {
 
 # Shared fixture: the weighted overlapping-groups graph from the examples.
 # Its `weight` edge attribute has four distinct threshold levels.
-make_graphlet_graph <- function() {
+make_weighted_graphlet_graph <- function() {
   D1 <- matrix(0, 5, 5)
   D2 <- matrix(0, 5, 5)
   D3 <- matrix(0, 5, 5)
@@ -76,13 +77,18 @@ make_graphlet_graph <- function() {
   ))
 }
 
-sortgl <- function(x) {
+# Canonicalise a graphlet_basis() result for comparison: sort the vertices
+# within each clique, then the cliques by size (carrying their thresholds).
+sort_graphlets_by_size <- function(x) {
   cl <- lapply(x$cliques, sort)
   n <- lengths(cl)
   list(cliques = cl[order(n)], thresholds = x$thresholds[order(n)])
 }
 
-threshold.net <- function(graph, level) {
+# The maximal cliques of the subgraph left after dropping every edge whose
+# weight is below `level`, largest first. One thresholding step of
+# graphlet_basis_reference() below.
+max_cliques_above_weight <- function(graph, level) {
   graph.t <- delete_edges(graph, which(E(graph)$weight < level))
 
   clqt <- unvs(max_cliques(graph.t))
@@ -90,7 +96,9 @@ threshold.net <- function(graph, level) {
   clqt[order(lengths(clqt), decreasing = TRUE)]
 }
 
-graphlets.old <- function(graph) {
+# Pure-R reference implementations of graphlet_basis() and graphlet_proj(),
+# kept to cross-check the C results.
+graphlet_basis_reference <- function(graph) {
   if (!is_weighted(graph)) {
     cli::cli_abort("Graph not weighted")
   }
@@ -100,7 +108,7 @@ graphlets.old <- function(graph) {
 
   ## Do all thresholds
   cl <- lapply(sort(unique(E(graph)$weight)), function(w) {
-    threshold.net(graph, w)
+    max_cliques_above_weight(graph, w)
   })
 
   ## Put the cliques in one long list
@@ -118,7 +126,7 @@ graphlets.old <- function(graph) {
   clf
 }
 
-graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
+graphlet_proj_reference <- function(graph, cliques, iter, Mu = NULL) {
   if (!is_weighted(graph)) {
     cli::cli_abort("Graph not weighted")
   }
@@ -190,7 +198,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 # that VS/ES require (and survive) an explicit upgrade. Renamed from the
 # file-local `names`/`karate` to avoid shadowing base `names()` once sourced
 # into the shared testthat environment.
-karate_oldstyle_names <- function() {
+karate_oldstyle_vertex_names <- function() {
   c(
     "Mr Hi", "Actor 2", "Actor 3", "Actor 4",
     "Actor 5", "Actor 6", "Actor 7", "Actor 8", "Actor 9", "Actor 10",
@@ -201,7 +209,7 @@ karate_oldstyle_names <- function() {
   )
 }
 
-karate_oldstyle <- function() {
+karate_oldstyle_graph <- function() {
   structure(
     list(
       34,
@@ -264,7 +272,7 @@ karate_oldstyle <- function() {
               2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2,
               2, 2, 2, 2, 2
             ),
-            name = karate_oldstyle_names()
+            name = karate_oldstyle_vertex_names()
           ),
           names = c("Faction", "name")
         ),
@@ -313,7 +321,7 @@ tarjan_yannakakis_graph <- function() {
 # Source the ellipsis-migration generator into a fresh environment and return
 # it. The generator only exists in a source checkout (tools/ is
 # .Rbuildignore'd), so the caller is skipped when it is missing.
-local_generator <- function(env = parent.frame()) {
+load_migration_generator <- function() {
   generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
   skip_if_not(file.exists(generator), "tools/generate-migrations.R not found")
   gen_env <- new.env()
@@ -322,7 +330,7 @@ local_generator <- function(env = parent.frame()) {
 }
 
 # Write a throw-away registry file and return its path.
-write_registry <- function(dir, name, code) {
+write_migration_registry <- function(dir, name, code) {
   path <- file.path(dir, name)
   writeLines(code, path)
   path
@@ -333,7 +341,7 @@ write_registry <- function(dir, name, code) {
 # A compact shared fixture: a tiny two-clique graph and one HRG fitted to it,
 # reused by the consensus_tree() and predict_edges() blocks.
 # Fitting a real HRG is the awkward part of constructing valid inputs there.
-hrg_fixture <- function() {
+hrg_graph_and_fit <- function() {
   g <- make_full_graph(4) + make_full_graph(4)
   igraph_with_seed(1, list(graph = g, hrg = fit_hrg(g)))
 }

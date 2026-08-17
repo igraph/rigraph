@@ -2,27 +2,27 @@
 # The generator is plain base R and only exists in a source checkout
 # (tools/ is .Rbuildignore'd), so these tests are skipped in a built package.
 
-# The `local_generator()` and `write_registry()` helpers used below live in
-# helper-test-functions.R.
+# The `load_migration_generator()` and `write_migration_registry()` helpers
+# used below live in helper-test-functions.R.
 
 test_that("migration_registry_files() finds the legacy file and topic files", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   root <- withr::local_tempdir()
   dir.create(file.path(root, "tools", "migrations"), recursive = TRUE)
 
   expect_identical(gen$migration_registry_files(root), character(0))
 
-  legacy <- write_registry(
+  legacy <- write_migration_registry(
     file.path(root, "tools"),
     "migrations.R",
     "migrations <- list()"
   )
-  b <- write_registry(
+  b <- write_migration_registry(
     file.path(root, "tools", "migrations"),
     "b-topic.R",
     "migrations <- list()"
   )
-  a <- write_registry(
+  a <- write_migration_registry(
     file.path(root, "tools", "migrations"),
     "a-topic.R",
     "migrations <- list()"
@@ -33,10 +33,10 @@ test_that("migration_registry_files() finds the legacy file and topic files", {
 })
 
 test_that("load_migrations() merges entries across registry files", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   dir <- withr::local_tempdir()
 
-  one <- write_registry(
+  one <- write_migration_registry(
     dir,
     "one.R",
     c(
@@ -49,7 +49,7 @@ test_that("load_migrations() merges entries across registry files", {
       ")"
     )
   )
-  two <- write_registry(
+  two <- write_migration_registry(
     dir,
     "two.R",
     c(
@@ -69,7 +69,7 @@ test_that("load_migrations() merges entries across registry files", {
 })
 
 test_that("load_migrations() rejects duplicate entries across files", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   dir <- withr::local_tempdir()
 
   entry <- c(
@@ -81,8 +81,8 @@ test_that("load_migrations() rejects duplicate entries across files", {
     "  )",
     ")"
   )
-  one <- write_registry(dir, "one.R", entry)
-  two <- write_registry(dir, "two.R", entry)
+  one <- write_migration_registry(dir, "one.R", entry)
+  two <- write_migration_registry(dir, "two.R", entry)
 
   expect_error(
     gen$load_migrations(c(one, two)),
@@ -91,10 +91,10 @@ test_that("load_migrations() rejects duplicate entries across files", {
 })
 
 test_that("load_migrations() rejects files without a migrations list", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   dir <- withr::local_tempdir()
 
-  bad <- write_registry(dir, "bad.R", "not_migrations <- list()")
+  bad <- write_migration_registry(dir, "bad.R", "not_migrations <- list()")
   expect_error(
     gen$load_migrations(bad),
     "must define a `migrations` list"
@@ -102,10 +102,10 @@ test_that("load_migrations() rejects files without a migrations list", {
 })
 
 test_that("load_migrations() tolerates empty registries", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   dir <- withr::local_tempdir()
 
-  empty <- write_registry(dir, "empty.R", "migrations <- list()")
+  empty <- write_migration_registry(dir, "empty.R", "migrations <- list()")
   expect_identical(gen$load_migrations(empty), list())
   expect_identical(gen$load_migrations(character(0)), list())
 })
@@ -114,7 +114,7 @@ test_that("default expressions keep air's spacing around binary `/`", {
   # The constant-defaults rule keeps arithmetic like `n / 7100` out of real
   # registries, but the renderer must stay air-clean for any deparsed
   # expression, so exercise the helpers directly.
-  gen <- local_generator()
+  gen <- load_migration_generator()
   fmls <- formals(function(agebins = n / 7100, base = "http://a/b") {})
   expect_identical(gen$default_expr(fmls, "agebins"), "n / 7100")
   # slashes inside string literals stay untouched
@@ -122,7 +122,7 @@ test_that("default expressions keep air's spacing around binary `/`", {
 })
 
 test_that("is_constant_default() classifies expressions", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   const <- alist(
     NULL,
     TRUE,
@@ -173,7 +173,7 @@ test_that("is_constant_default() classifies expressions", {
 })
 
 test_that("non-constant defaults are rejected, with no escape hatch", {
-  gen <- local_generator()
+  gen <- load_migration_generator()
   entry <- list(
     old = function(graph, vids) {},
     new = function(graph, ..., vids = V(graph)) {},
