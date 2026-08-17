@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.3.3.9032
+
+## Bug fixes
+
+- `simplify()` honours `edge.attr.comb` on an already-simple graph again (#2843).
+
+- `as_adjacency_matrix(attr = NULL)` is unweighted again (#2842).
+
+## Features
+
+### ci
+
+- Make `revdep2` runs comparable, resilient, and honest about what they checked (#2834).
+
+
 # igraph 2.3.3.9031
 
 ## Continuous integration
