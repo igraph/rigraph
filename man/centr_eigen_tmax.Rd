@@ -6,23 +6,29 @@
 \usage{
 centr_eigen_tmax(
   graph = NULL,
-  nodes = 0,
+  n = 0,
+  ...,
   directed = FALSE,
-  scale = deprecated()
+  scale = deprecated(),
+  nodes = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL}, if
-\code{nodes} is given.}
+\code{n} is given.}
 
-\item{nodes}{The number of vertices. This is ignored if the graph is
+\item{n}{The number of vertices. This is ignored if the graph is
 given.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical, whether to consider edge directions
 during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
 eigenvector centralization requires normalized eigenvector centrality scores.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
