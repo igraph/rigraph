@@ -48,13 +48,13 @@ test_that("weighted_cliques works", {
   }
 
   expect_equal(
-    lapply(largest_weighted_cliques(g, vertex.weights = weights), as.numeric),
+    lapply(largest_weighted_cliques(g, vertex_weights = weights), as.numeric),
     list(c(1, 2, 3))
   )
 
   V(g)$weight <- weights
   cl <- sapply(
-    weighted_cliques(g, min.weight = 9),
+    weighted_cliques(g, min_weight = 9),
     is_clique_weight,
     graph = g,
     min_weight = 9
@@ -64,7 +64,7 @@ test_that("weighted_cliques works", {
   karate <- make_graph("zachary")
   weights <- rep(1, vcount(karate))
   weights[c(1, 2, 3, 4, 14)] <- 3
-  expect_equal(weighted_clique_num(karate, vertex.weights = weights), 15)
+  expect_equal(weighted_clique_num(karate, vertex_weights = weights), 15)
 
   V(karate)$weight <- weights * 2
   expect_equal(weighted_clique_num(karate), 30)
@@ -522,19 +522,19 @@ test_that("weighted_cliques() covers all tail arguments", {
   # Under the attribute weights only the edge satisfies the weight bounds.
   res_attr <- weighted_cliques(
     g,
-    min.weight = 6,
-    max.weight = 9,
+    min_weight = 6,
+    max_weight = 9,
     maximal = TRUE
   )
   expect_identical(lapply(res_attr, as.numeric), list(c(4, 5)))
 
-  # An explicit `vertex.weights` overrides the attribute,
+  # An explicit `vertex_weights` overrides the attribute,
   # flipping the selection to the triangle.
   res <- weighted_cliques(
     g,
-    vertex.weights = w,
-    min.weight = 6,
-    max.weight = 9,
+    vertex_weights = w,
+    min_weight = 6,
+    max_weight = 9,
     maximal = TRUE
   )
   expect_identical(lapply(res, as.numeric), list(c(1, 2, 3)))
@@ -543,21 +543,42 @@ test_that("weighted_cliques() covers all tail arguments", {
   lifecycle::expect_deprecated(
     res <- weighted_cliques(g, w, 6)
   )
-  expect_identical(res, weighted_cliques(g, vertex.weights = w, min.weight = 6))
+  expect_identical(res, weighted_cliques(g, vertex_weights = w, min_weight = 6))
 })
 
-test_that("largest_weighted_cliques() covers vertex.weights", {
+test_that("weighted_cliques(vertex.weights = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_weighted_clique_graph()
+  w <- c(3, 3, 3, 1, 1)
+
+  expect_snapshot(
+    res <- weighted_cliques(g, vertex.weights = w, min.weight = 6)
+  )
+  expect_identical(res, weighted_cliques(g, vertex_weights = w, min_weight = 6))
+
+  lifecycle::expect_deprecated(
+    res_num <- weighted_clique_num(g, vertex.weights = w)
+  )
+  expect_identical(res_num, weighted_clique_num(g, vertex_weights = w))
+
+  lifecycle::expect_deprecated(
+    res_largest <- largest_weighted_cliques(g, vertex.weights = w)
+  )
+  expect_identical(res_largest, largest_weighted_cliques(g, vertex_weights = w))
+})
+
+test_that("largest_weighted_cliques() covers vertex_weights", {
   g <- make_weighted_clique_graph()
   w <- c(3, 3, 3, 1, 1)
 
   # Attribute weights favor the edge,
-  # the explicit `vertex.weights` vector overrides them.
+  # the explicit `vertex_weights` vector overrides them.
   expect_identical(
     lapply(largest_weighted_cliques(g), as.numeric),
     list(c(4, 5))
   )
   expect_identical(
-    lapply(largest_weighted_cliques(g, vertex.weights = w), as.numeric),
+    lapply(largest_weighted_cliques(g, vertex_weights = w), as.numeric),
     list(c(1, 2, 3))
   )
 
@@ -565,21 +586,21 @@ test_that("largest_weighted_cliques() covers vertex.weights", {
   lifecycle::expect_deprecated(
     res <- largest_weighted_cliques(g, w)
   )
-  expect_identical(res, largest_weighted_cliques(g, vertex.weights = w))
+  expect_identical(res, largest_weighted_cliques(g, vertex_weights = w))
 })
 
-test_that("weighted_clique_num() covers vertex.weights", {
+test_that("weighted_clique_num() covers vertex_weights", {
   g <- make_weighted_clique_graph()
   w <- c(3, 3, 3, 1, 1)
 
   # Attribute weights favor the edge,
-  # the explicit `vertex.weights` vector overrides them.
+  # the explicit `vertex_weights` vector overrides them.
   expect_equal(weighted_clique_num(g), 8)
-  expect_equal(weighted_clique_num(g, vertex.weights = w), 9)
+  expect_equal(weighted_clique_num(g, vertex_weights = w), 9)
 
   # Legacy positional `vertex.weights` is recovered with a deprecation warning.
   lifecycle::expect_deprecated(
     res <- weighted_clique_num(g, w)
   )
-  expect_identical(res, weighted_clique_num(g, vertex.weights = w))
+  expect_identical(res, weighted_clique_num(g, vertex_weights = w))
 })

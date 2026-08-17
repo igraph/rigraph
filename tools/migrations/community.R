@@ -42,12 +42,18 @@ migrations <- list(
   ),
 
   cluster_infomap = list(
-    old = function(graph, e.weights, v.weights, nb.trials, modularity) {},
+    old = function(
+      graph,
+      e.weights = weights,
+      v.weights = vertex_weights,
+      nb.trials,
+      modularity
+    ) {},
     new = function(
       graph,
       ...,
-      e.weights = NULL,
-      v.weights = NULL,
+      weights = NULL,
+      vertex_weights = NULL,
       nb.trials = 10,
       modularity = TRUE
     ) {},

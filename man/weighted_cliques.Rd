@@ -7,9 +7,9 @@
 weighted_cliques(
   graph,
   ...,
-  vertex.weights = NULL,
-  min.weight = 0,
-  max.weight = 0,
+  vertex_weights = NULL,
+  min_weight = 0,
+  max_weight = 0,
   maximal = FALSE
 )
 }
@@ -19,16 +19,16 @@ undirected ones, multiple edges and loops are ignored.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
+\item{vertex_weights}{Vertex weight vector. If the graph has a \code{weight}
 vertex attribute, then this is used by default. If the graph does not have a
 \code{weight} vertex attribute and this argument is \code{NULL}, then every
 vertex is assumed to have a weight of 1. Note that the current implementation
 of the weighted clique finder supports positive integer weights only.}
 
-\item{min.weight}{Numeric constant, lower limit on the weight of the cliques to find.
+\item{min_weight}{Numeric constant, lower limit on the weight of the cliques to find.
 \code{NULL} means no limit, i.e. it is the same as 0.}
 
-\item{max.weight}{Numeric constant, upper limit on the weight of the cliques to find.
+\item{max_weight}{Numeric constant, upper limit on the weight of the cliques to find.
 \code{NULL} means no limit.}
 
 \item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
