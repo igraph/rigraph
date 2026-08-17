@@ -151,8 +151,15 @@ permissions:
 # the committed report, the baseline lineage and the universe image's
 # `latest` tag; letting them interleave on the same ref would race all three.
 # A queued run waits rather than killing shards mid-check.
+#
+# `github.ref_name`, not `github.ref`: the input holds a bare name ("main")
+# while `github.ref` is fully qualified ("refs/heads/main"), and a group
+# built from the mismatched pair would let a run dispatched with the input
+# filled in interleave with one dispatched without it -- on the very same
+# branch the group exists to serialize. (A SHA or tag typed into the input
+# forms its own group, which is correct: it is its own checked tree.)
 concurrency:
-  group: revdepx-${{ inputs.ref || github.ref }}
+  group: revdepx-${{ inputs.ref || github.ref_name }}
   cancel-in-progress: false
 
 env:

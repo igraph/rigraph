@@ -168,10 +168,23 @@ R CMD check --no-manual --as-cran --output=/revdepx/out \
 # downstream of it. 125, 126 and 127 out of `docker run` mean docker could
 # not run the check at all, and the log says so explicitly rather than
 # letting it read as a package failure.
+run_started=${EPOCHSECONDS}
 timeout "$((seconds + 300))s" \
   docker run "${run_args[@]}" "${image}" sh -c "${in_container}" 2>&1 |
   stamp > "${out}/driver.log"
 status=${PIPESTATUS[0]}
+# Both clocks exit 124, and they mean different things: the inner one is the
+# check hitting its budget (a result about the package), the outer one is a
+# wedged container runtime (a result about the runner). Tell them apart by
+# when the axe fell -- the outer clock cannot fire before seconds+300 -- and
+# report the outer case as a docker-level failure so the manifest does not
+# call a healthy package's check "timed out".
+if [ "${status}" -eq 124 ] \
+  && [ "$((EPOCHSECONDS - run_started))" -ge "$((seconds + 295))" ]; then
+  status=125
+  echo "the outer safety-net timeout fired at $((seconds + 300))s: the container runtime stopped answering -- the runner's failure, not the package's" \
+    >> "${out}/driver.log"
+fi
 echo "${status}" > "${out}/status"
 if [ "${status}" -ge 125 ]; then
   echo "docker run exited ${status}: the container could not run -- the runner's failure, not the package's" \

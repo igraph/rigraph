@@ -566,6 +566,39 @@ for (name in members) {
   }
 }
 
+# ------------------------------------------------------------------ slice ----
+
+# Dealt round robin rather than in blocks. `runnable` is heaviest first, so a
+# contiguous cut would put every long check in the first slice and leave the
+# last one with nothing but the cheap ones -- and the deadline, which stops the
+# shard when the next check will not fit, would then bite unevenly. Round robin
+# gives every slice the same mix.
+#
+# Cut before the downloads, not after: every slice derives the same screened,
+# heaviest-first list from the same plan, so the deal is stable, and slicing
+# first means each slice downloads only its own tarballs instead of the whole
+# shard's three times over.
+#
+# Not `seq(index, length(runnable), by = of)`: seq() refuses a `from` past
+# `to` ("wrong sign in 'by' argument"), so that spelling is an R *error* for
+# a shard with fewer runnable packages than slices -- a 1-package shard, the
+# common retry case, crashed slices 2 and 3 -- and for an empty `runnable`
+# (say, a half-built universe image depfailing everything) it crashed slice 1
+# before a single manifest line was written, turning recorded diagnoses into
+# `missing`.
+if (check_slice$of > 1L) {
+  mine <- seq_along(runnable)
+  mine <- mine[mine %% check_slice$of == check_slice$index %% check_slice$of]
+  inform(sprintf(
+    "Slice %d/%d: %d of this shard's %d runnable package(s)",
+    check_slice$index,
+    check_slice$of,
+    length(mine),
+    length(runnable)
+  ))
+  runnable <- runnable[mine]
+}
+
 # ---------------------------------------------------------------- sources ----
 
 src_dir <- file.path(work, "src")
@@ -603,23 +636,6 @@ for (name in runnable) {
   }
 }
 runnable <- names(sources)
-
-# Dealt round robin rather than in blocks. `runnable` is heaviest first, so a
-# contiguous cut would put every long check in the first slice and leave the
-# last one with nothing but the cheap ones -- and the deadline, which stops the
-# shard when the next check will not fit, would then bite unevenly. Round robin
-# gives every slice the same mix.
-if (check_slice$of > 1L) {
-  mine <- seq(check_slice$index, length(runnable), by = check_slice$of)
-  inform(sprintf(
-    "Slice %d/%d: %d of this shard's %d runnable package(s)",
-    check_slice$index,
-    check_slice$of,
-    length(mine),
-    length(runnable)
-  ))
-  runnable <- runnable[mine]
-}
 
 # ------------------------------------------------------------------ checks ---
 
@@ -1060,6 +1076,24 @@ if (engine == "pair") {
       "; reading back what it left"
     )
   }
+
+  # The queue's forensics -- who claimed what, and the closing tallies -- go
+  # into the results artifact, named per slice so later slices do not
+  # overwrite them. Left in the work directory alone they die with the
+  # runner, which is exactly when they are wanted.
+  for (record in c("claimed.log", "queue-state.json")) {
+    from <- file.path(queue_work, record)
+    if (file.exists(from)) {
+      file.copy(
+        from,
+        file.path(
+          out_dir,
+          sprintf("queue-slice-%d-%s", check_slice$index, record)
+        ),
+        overwrite = TRUE
+      )
+    }
+  }
 }
 
 # ---------------------------------------------------------------- manifest ---
@@ -1164,14 +1198,18 @@ write_json(
     restore_seconds = installed_state$restore_seconds,
     install_seconds = installed_state$install_seconds,
     check_seconds = round(check_seconds + (earlier$check_seconds %||% 0), 1),
-    # Both phases, because the collector fits `setup_minutes` as
-    # `job_minutes - script_minutes` -- the minutes before the driver starts.
-    # Reporting only this process would have charged the whole prepare phase
-    # to "setup", which the plan then seeds every shard's load with, and a
-    # setup of tens of minutes instead of a few is what tips a plan into
-    # extra waves.
+    # Both phases AND every earlier slice, because the collector fits
+    # `setup_minutes` as `job_minutes - script_minutes` -- the minutes before
+    # the driver starts. Reporting only this process would charge the prepare
+    # phase and the earlier slices' driver time to "setup"; with three slices
+    # that hands up to two thirds of the shard's check minutes to the fixed
+    # cost, which the plan then seeds every shard's load with, and a setup of
+    # tens of minutes instead of a few is what tips a plan into extra waves.
+    # `earlier$script_seconds` already carries the prepare phase from slice 1,
+    # so it replaces `phase_seconds` rather than adding to it.
     script_seconds = round(
-      (installed_state$phase_seconds %||% 0) + elapsed(script_started),
+      (earlier$script_seconds %||% installed_state$phase_seconds %||% 0) +
+        elapsed(script_started),
       1
     ),
     started_at = installed_state$started_at %||%
