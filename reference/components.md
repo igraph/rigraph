@@ -179,7 +179,7 @@ groups(clu)
 #> [1] 17
 #> 
 largest_component(g)
-#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── bb7470f ──
+#> ── <igraph> Erdos-Renyi (gnp) graph ───────────────────────────────── 446ab55 ──
 #> ℹ undirected
 #> ℹ 8 vertices · 7 edges
 #> 

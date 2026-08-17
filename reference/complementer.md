@@ -79,7 +79,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Complementer of a ring
 g <- make_ring(10)
 complementer(g)
-#> ── <igraph> Ring graph ────────────────────────────────────────────── 22fd940 ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 5e350b6 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 35 edges
 #> 
@@ -97,7 +97,7 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-#> ── <igraph> ───────────────────────────────────────────────────────── 4c80f64 ──
+#> ── <igraph> ───────────────────────────────────────────────────────── f5fbed0 ──
 #> ℹ undirected
 #> ℹ 10 vertices · 45 edges
 #> 
