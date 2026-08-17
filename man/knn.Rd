@@ -6,17 +6,18 @@
 \usage{
 knn(
   graph,
-  vids = NULL,
+  vertices = NULL,
   ...,
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
-  weights = NULL
+  weights = NULL,
+  vids = deprecated()
 )
 }
 \arguments{
 \item{graph}{The input graph. It may be directed.}
 
-\item{vids}{The vertices for which the calculation is performed.
+\item{vertices}{The vertices for which the calculation is performed.
 The default \code{NULL} includes all vertices. Note, that if not all vertices are given here, then
 both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
 on the given vertices only.}
@@ -38,12 +39,14 @@ degree. But note that \code{knnk} is still given in the function of the
 normal vertex degree.
 Weights are are used to calculate a weighted degree (also called
 \code{\link[=strength]{strength()}}) instead of the degree.}
+
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 A list with two members:
 \describe{
 \item{knn}{
-A numeric vector giving the average nearest neighbor degree for all vertices in \code{vids}.
+A numeric vector giving the average nearest neighbor degree for all vertices in \code{vertices}.
 }
 \item{knnk}{
 A numeric vector, its length is the maximum (total) vertex degree in the graph.

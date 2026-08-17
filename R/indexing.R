@@ -538,9 +538,9 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
     if (missing(i) && missing(j)) {
       todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(incident_edges(x, v = i, mode = "out"))
+      todel <- unlist(incident_edges(x, vertices = i, mode = "out"))
     } else if (missing(i)) {
-      todel <- unlist(incident_edges(x, v = j, mode = "in"))
+      todel <- unlist(incident_edges(x, vertices = j, mode = "in"))
     } else {
       edge_pairs <- expand.grid(i, j)
       edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))

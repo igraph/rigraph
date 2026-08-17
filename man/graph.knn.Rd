@@ -15,10 +15,7 @@ graph.knn(
 \arguments{
 \item{graph}{The input graph. It may be directed.}
 
-\item{vids}{The vertices for which the calculation is performed.
-The default \code{NULL} includes all vertices. Note, that if not all vertices are given here, then
-both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
-on the given vertices only.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 
 \item{mode}{Character constant to indicate the type of neighbors to consider
 in directed graphs. \code{out} considers out-neighbors, \verb{in} considers

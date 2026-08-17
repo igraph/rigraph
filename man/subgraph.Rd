@@ -10,9 +10,10 @@ subgraph(graph, vids)
 
 induced_subgraph(
   graph,
-  vids,
+  vertices,
   ...,
-  impl = c("auto", "copy_and_delete", "create_from_scratch")
+  impl = c("auto", "copy_and_delete", "create_from_scratch"),
+  vids = deprecated()
 )
 
 subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
@@ -20,8 +21,10 @@ subgraph_from_edges(graph, eids, ..., delete.vertices = TRUE)
 \arguments{
 \item{graph}{The original graph.}
 
-\item{vids}{Numeric vector, the vertices of the original graph which will
-form the subgraph.}
+\item{vids}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
+
+\item{vertices}{Numeric vector, the vertices of the original graph which
+will form the subgraph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
