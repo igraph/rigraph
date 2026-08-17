@@ -308,6 +308,11 @@ if (do_install) {
   # the revdep.
   ensure_sysreqs(lib, sprintf("Shard %d", shard_index))
 
+  # And the requirements of the packages this shard will *check*, which the
+  # survey above cannot see: they are never installed into the library, `R CMD
+  # check` builds each one from its tarball.
+  ensure_check_sysreqs(members, sprintf("Shard %d", shard_index))
+
   install_seconds <- elapsed(install_started)
   inform(
     "Dependencies ready after ",

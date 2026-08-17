@@ -1346,6 +1346,110 @@ ensure_sysreqs <- function(lib = NULL, label = "") {
   invisible(still)
 }
 
+# The system requirements of the packages the shard is about to *check*.
+#
+# `ensure_sysreqs()` above reads the installed library, which is the right
+# question for dependencies and the wrong one for the revdeps themselves: a
+# shard installs each package's dependency closure and never the package, so
+# the revdep under test is never in that library. `R CMD check` builds it from
+# its tarball, and nothing has resolved its `SystemRequirements` -- not
+# `PKG_SYSREQS`, which covers what pak installs, and not
+# `sysreqs_fix_installed()`, which covers what is on disk.
+#
+# Libra is the case that found this. It declares `SystemRequirements: gsl`,
+# `pak::pkg_sysreqs("Libra")` resolves it to `libgsl0-dev` without difficulty,
+# and nobody asked: the check failed to compile `LBLasso.c` under both versions
+# with `fatal error: gsl/gsl_vector.h: No such file or directory`, which the
+# report then recorded as a package that fails to install rather than as a
+# runner that could not build it.
+#
+# Only the missing ones are installed. `sysreqs_list_system_packages()` says
+# what is already there, including what other packages *provide* -- a virtual
+# package satisfies a dependency just as a real one does -- so a shard whose
+# requirements the image already carries runs no apt at all.
+ensure_check_sysreqs <- function(packages, label = "") {
+  prefix <- if (nzchar(label)) paste0(label, ": ") else ""
+  if (length(packages) == 0) {
+    return(invisible(character()))
+  }
+
+  run <- run_with_timeout(
+    function(repos, packages) {
+      options(repos = repos)
+      wanted <- unique(unlist(
+        pak::pkg_sysreqs(packages)$packages$system_packages,
+        use.names = FALSE
+      ))
+      have <- pak::sysreqs_list_system_packages()
+      present <- unique(c(
+        have$package,
+        unlist(have$provides, use.names = FALSE)
+      ))
+      list(wanted = wanted, missing = setdiff(wanted, present))
+    },
+    args = list(repos = pinned_repos(), packages = packages),
+    timeout_seconds = sysreqs_timeout_seconds(),
+    label = paste0(prefix, "check system requirements survey")
+  )
+  if (!isTRUE(run$ok)) {
+    inform(
+      prefix,
+      "could not resolve the checked packages' system requirements: ",
+      run$message
+    )
+    return(invisible(NULL))
+  }
+
+  if (length(run$value$missing) == 0) {
+    inform(sprintf(
+      "%sall %d system requirement(s) of the %d package(s) to check are present",
+      prefix,
+      length(run$value$wanted),
+      length(packages)
+    ))
+    return(invisible(character()))
+  }
+  inform(sprintf(
+    "%s%d of %d system requirement(s) of the packages to check are missing: %s",
+    prefix,
+    length(run$value$missing),
+    length(run$value$wanted),
+    paste(run$value$missing, collapse = ", ")
+  ))
+
+  # apt directly rather than through pak: `sysreqs_fix_installed()` reads the
+  # library, and these packages are not in it. Failure is reported and not
+  # fatal -- the check will fail either way, and it will say why more clearly
+  # than this can.
+  sudo <- if (identical(Sys.info()[["effective_user"]], "root")) {
+    character()
+  } else {
+    "sudo"
+  }
+  status <- suppressWarnings(system2(
+    if (length(sudo)) "sudo" else "apt-get",
+    c(
+      if (length(sudo)) "apt-get",
+      "-o",
+      "DPkg::Lock::Timeout=300",
+      "install",
+      "-y",
+      "--no-install-recommends",
+      run$value$missing
+    )
+  ))
+  if (!identical(status, 0L)) {
+    inform(prefix, "apt-get exited ", status, "; the checks run anyway")
+    return(invisible(run$value$missing))
+  }
+  inform(sprintf(
+    "%sinstalled %d system package(s) for the packages to check",
+    prefix,
+    length(run$value$missing)
+  ))
+  invisible(character())
+}
+
 # One pak install, bounded. Separate from install_in_chunks() because the
 # per-package retry after a failed chunk needs exactly the same treatment: it
 # is the same call, one package at a time, and it used to be just as

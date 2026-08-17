@@ -731,6 +731,7 @@ the report is about *results*, a retry is about *coverage*.
 | pak's metadata database is empty or unreadable | detected by probe before the first install, cleared and rebuilt once; the preflight stops if that does not fix it |
 | `/tmp` fills and R can no longer start | `TMPDIR` is on the big disk, so it does not; the sampler still reports `/tmp` if it ever does |
 | A restored package's system library is absent | `sysreqs_check_installed()` names it and `sysreqs_fix_installed()` installs it, in both the preflight and every shard |
+| A *checked* package needs a system library | the revdep is never in the library -- `R CMD check` builds it from its tarball -- so the shard resolves the members' own `SystemRequirements` with `pkg_sysreqs()` and installs what is missing before the first check |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | The runner stops answering the service | "The hosted runner lost communication with the server" names CPU, memory and network starvation as its causes, and a dead runner takes its `if: always()` steps with it — so both the preflight and the shards stream a resource sample every 30 s while they work, and the checks run under `nice -n 10` (and `ionice -c3` where it exists) so the agent is never the process that loses |
