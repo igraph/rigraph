@@ -403,6 +403,7 @@ jobs:
             -e REVDEPX_BUILD_DEPS=1 \
             -e PKG_SYSREQS=true \
             -e OUT_DIR=/revdepx/pkg-out \
+            -e GITHUB_SHA \
             "${BASE_IMAGE}" \
             Rscript ./.github/workflows/revdepx/build.R
         shell: bash
