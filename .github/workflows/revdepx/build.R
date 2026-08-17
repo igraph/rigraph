@@ -68,7 +68,17 @@ if (!nzchar(head_sha)) {
 }
 
 inform("Building ", package, " ", dev_version)
-status <- system2("R", c("CMD", "build", "--no-manual", "."))
+# `--no-build-vignettes` on top of revdep2's `--no-manual`: this binary
+# exists to be installed into the checks' new-half library, and no check
+# ever builds or reads the package-under-test's own vignettes -- the revdeps'
+# vignettes are what get built, inside their own checks. Building them here
+# would drag the whole Suggests tree (knitr, rmarkdown and friends) into a
+# container that needs none of it; the first live run failed on exactly
+# that ("vignette builder 'knitr' not found").
+status <- system2(
+  "R",
+  c("CMD", "build", "--no-manual", "--no-build-vignettes", ".")
+)
 if (status != 0) {
   stop("R CMD build failed", call. = FALSE)
 }
