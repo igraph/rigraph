@@ -107,6 +107,41 @@ do_install <- phase %in% c("all", "install")
 do_check <- phase %in% c("all", "check")
 install_state <- file.path(work, "install-state.json")
 
+# Which slice of the shard's packages this invocation checks, as `i/n`.
+#
+# The driver has always written its results as it goes -- one manifest line per
+# package, appended -- so that a shard killed part way through still accounts
+# for what it finished. That only helps if someone *uploads* them, and the
+# upload was one step at the very end. Shard 16 of run 31951756102 got three
+# minutes into a 196-minute check budget before its runner was reclaimed:
+#
+#   ##[error]The runner has received a shutdown signal.
+#   ##[error]Process completed with exit code 143.
+#
+# `if: always()` cannot help there -- a reclaimed runner runs nothing further,
+# so the upload was skipped and all 87 packages came back `missing`. Slicing
+# the check phase into several steps, each followed by an upload, bounds that
+# loss to one slice. The slices share `OUT_DIR`, and the artifact is overwritten
+# under one name, so the last upload to survive carries everything before it.
+check_slice <- local({
+  raw <- trimws(env_chr("CHECK_SLICE"))
+  if (!nzchar(raw)) {
+    return(list(index = 1L, of = 1L))
+  }
+  parts <- suppressWarnings(as.integer(strsplit(raw, "/", fixed = TRUE)[[1]]))
+  if (
+    length(parts) != 2 ||
+      anyNA(parts) ||
+      parts[[1]] < 1 ||
+      parts[[2]] < 1 ||
+      parts[[1]] > parts[[2]]
+  ) {
+    stop("CHECK_SLICE must be `i/n` with 1 <= i <= n, not ", raw, call. = FALSE)
+  }
+  list(index = parts[[1]], of = parts[[2]])
+})
+last_slice <- check_slice$index == check_slice$of
+
 inform(
   "Shard ",
   shard_index,
@@ -424,7 +459,11 @@ if (!file.exists(install_state)) {
     )
   }
   append_summary(c(
-    sprintf("### Shard %d", shard_index),
+    if (check_slice$of > 1L) {
+    sprintf("### Shard %d, slice %d/%d", shard_index, check_slice$index, check_slice$of)
+  } else {
+    sprintf("### Shard %d", shard_index)
+  },
     "",
     sprintf("%d package(s) not checked: %s.", length(members), reason)
   ))
@@ -569,6 +608,23 @@ for (name in runnable) {
   }
 }
 runnable <- names(sources)
+
+# Dealt round robin rather than in blocks. `runnable` is heaviest first, so a
+# contiguous cut would put every long check in the first slice and leave the
+# last one with nothing but the cheap ones -- and the deadline, which stops the
+# shard when the next check will not fit, would then bite unevenly. Round robin
+# gives every slice the same mix.
+if (check_slice$of > 1L) {
+  mine <- seq(check_slice$index, length(runnable), by = check_slice$of)
+  inform(sprintf(
+    "Slice %d/%d: %d of this shard's %d runnable package(s)",
+    check_slice$index,
+    check_slice$of,
+    length(mine),
+    length(runnable)
+  ))
+  runnable <- runnable[mine]
+}
 
 # ------------------------------------------------------------------ checks ---
 
@@ -1149,10 +1205,36 @@ for (position in seq_along(runnable)) {
 
 # Whatever the loop never reached: deferred packages, and the ones a depfail or
 # a missing source knocked out before it started.
-for (name in setdiff(members, reported)) {
+#
+# Under slicing this also covers the packages belonging to *later* slices, which
+# is deliberate: an interim artifact that says `deferred` for them is the truth
+# at that moment, and better than the `missing` the collector would otherwise
+# reconcile them into. What it must not do is overwrite a result an *earlier*
+# slice already wrote -- those packages are still `deferred` in this process's
+# memory, and a later line wins in the collector. So the manifest is read back
+# and anything already accounted for is left alone.
+already <- if (file.exists(manifest_path)) {
+  lines <- readLines(manifest_path, warn = FALSE)
+  lines <- lines[nzchar(trimws(lines))]
+  vapply(
+    lines,
+    function(line) jsonlite::fromJSON(line, simplifyVector = FALSE)$package,
+    character(1),
+    USE.NAMES = FALSE
+  )
+} else {
+  character()
+}
+for (name in setdiff(members, c(reported, already))) {
   write_manifest_line(get(name, envir = state))
 }
-entries <- lapply(members, function(name) get(name, envir = state))
+# The summary below is this slice's, not the shard's: the other slices' packages
+# are still at their initial `deferred` in this process and would pad every
+# table with rows that say nothing.
+entries <- lapply(
+  if (check_slice$of > 1L) reported else members,
+  function(name) get(name, envir = state)
+)
 
 # ----------------------------------------------------------------- timings ---
 
@@ -1161,16 +1243,26 @@ entries <- lapply(members, function(name) get(name, envir = state))
 # cost model from them. The job's own minutes -- the runner image, R, TinyTeX,
 # the artifact downloads before this script even starts -- are not visible from
 # here; the collector reads those off the API and adds them.
+# Across slices, not per slice: the collector fits the cost model from these,
+# and a `check_seconds` covering a third of the shard next to a `script_seconds`
+# covering the job would make every shard look three times cheaper than it is.
+earlier <- if (file.exists(file.path(out_dir, "timing.json"))) {
+  tryCatch(read_json(file.path(out_dir, "timing.json")), error = function(e) {
+    NULL
+  })
+} else {
+  NULL
+}
 write_json(
   list(
     index = shard_index,
     packages = length(members),
-    checks = checks_started,
+    checks = checks_started + (earlier$checks %||% 0L),
     install_packages = installed_state$install_packages,
     restored = installed_state$restored,
     restore_seconds = installed_state$restore_seconds,
     install_seconds = installed_state$install_seconds,
-    check_seconds = round(check_seconds, 1),
+    check_seconds = round(check_seconds + (earlier$check_seconds %||% 0), 1),
     # Both phases, because the collector fits `setup_minutes` as
     # `job_minutes - script_minutes` -- the minutes before the driver starts.
     # Reporting only this process would have charged the whole install phase to
@@ -1182,6 +1274,7 @@ write_json(
       1
     ),
     started_at = installed_state$started_at %||%
+      earlier$started_at %||%
       format(script_started, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     finished_at = now_utc(),
     planned_minutes = shard$estimate_minutes,

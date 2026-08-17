@@ -736,7 +736,7 @@ the report is about *results*, a retry is about *coverage*.
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
 | The runner stops answering the service | "The hosted runner lost communication with the server" names CPU, memory and network starvation as its causes, and a dead runner takes its `if: always()` steps with it — so both the preflight and the shards stream a resource sample every 30 s while they work, and the checks run under `nice -n 10` (and `ionice -c3` where it exists) so the agent is never the process that loses |
-| A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
+| A shard job dies hard | the checks run in three slices, each followed by an upload, so at most a third is lost and the rest is already in the artifact; packages a later slice never reached are `deferred`, anything with no line at all the collector reconciles against the plan as `missing`, naming the shard, and `retry-run` re-checks exactly those |
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
 | The batch is too big for 250 shards | the plan refuses before anything starts, and names the `part` split that fits |
 | A shard is re-run | new artifact per attempt; the collector lets the later attempt win per package |
