@@ -1766,7 +1766,6 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @param coolexp,maxdelta,area,repulserad `r lifecycle::badge("deprecated")` These
 #'  arguments are not supported from igraph version 0.8.0 and are ignored
 #'  (with a warning).
-#' @param maxiter A deprecated synonym of `niter`, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #'   vertex, according to the IDs of the vertex IDs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1817,15 +1816,14 @@ layout_with_fr <- function(
   coolexp = deprecated(),
   maxdelta = deprecated(),
   area = deprecated(),
-  repulserad = deprecated(),
-  maxiter = deprecated()
+  repulserad = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: layout_with_fr, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
     .arg_forbidden <- base::intersect(base::names(base::sys.call()), base::c("g", "gr"))
     if (base::length(.arg_forbidden) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_forbidden)}} matches multiple formal arguments of {.fn layout_with_fr}.", i = "Spell out the full argument name."))
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("c", "co", "coo", "m", "mi", "min", "ma", "max"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max", "c", "co", "coo", "mi", "min"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn layout_with_fr}.")
     # Pre-3.0.0 signature: layout_with_fr(graph, coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter)
     .old_signature <- function(coords, dim, niter, start.temp, grid, weights, minx, maxx, miny, maxy, minz, maxz, coolexp, maxdelta, area, repulserad, maxiter, ...) {
@@ -1852,7 +1850,7 @@ layout_with_fr <- function(
         if (!base::missing(maxdelta)) base::list(maxdelta = maxdelta),
         if (!base::missing(area)) base::list(area = area),
         if (!base::missing(repulserad)) base::list(repulserad = repulserad),
-        if (!base::missing(maxiter)) base::list(maxiter = maxiter)
+        if (!base::missing(maxiter)) base::list(niter = maxiter)
       )
     }
     .arg_handle <- .old_signature(...)
@@ -1875,7 +1873,7 @@ layout_with_fr <- function(
         if (!base::missing(maxdelta)) "maxdelta",
         if (!base::missing(area)) "area",
         if (!base::missing(repulserad)) "repulserad",
-        if (!base::missing(maxiter)) "maxiter"
+        if (!base::missing(niter)) "niter"
       ))
       if (base::length(.arg_conflict) > 0L) cli::cli_abort(base::c("Argument {.arg {(.arg_conflict)}} of {.fn layout_with_fr} was supplied more than once.", i = "Pass it exactly once, by its new name {.arg {(.arg_conflict)}}."))
       base::list2env(.arg_handle, base::environment())
@@ -1883,7 +1881,7 @@ layout_with_fr <- function(
         "3.0.0",
         what = base::I("Calling `layout_with_fr()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  layout_with_fr(", base::paste(base::c("graph", base::c(coords = "coords", dim = "dim", niter = "niter", start.temp = "start.temp", grid = "grid", weights = "weights", minx = "minx", maxx = "maxx", miny = "miny", maxy = "maxy", minz = "minz", maxz = "maxz", coolexp = "coolexp", maxdelta = "maxdelta", area = "area", repulserad = "repulserad", niter = "maxiter")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    layout_with_fr(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -1899,15 +1897,6 @@ layout_with_fr <- function(
 
   coords[] <- as.numeric(coords)
   dim <- igraph_match_arg(dim)
-  if (!missing(niter) && !missing(maxiter)) {
-    cli::cli_abort(c(
-      "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
-      i = "Specify only {.arg niter}, {.arg maxiter} is deprecated."
-    ))
-  }
-  if (!missing(maxiter)) {
-    niter <- maxiter
-  }
   niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
@@ -2322,7 +2311,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   \sQuote{z} coordinates.
 #' @param niter,sigma,initemp,coolexp `r lifecycle::badge("deprecated")` These
 #' arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).
-#' @param start Deprecated synonym for `coords`, for compatibility.
+#' @param start `r lifecycle::badge("deprecated")` Use `coords` instead.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
 #'   many rows as the number of vertices, the x, y and potentially z coordinates
 #'   of the vertices.
@@ -2445,6 +2434,11 @@ layout_with_kk <- function(
     ))
   }
   if (!missing(start)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "layout_with_kk(start = )",
+      "layout_with_kk(coords = )"
+    )
     coords <- start
   }
 

@@ -80,7 +80,7 @@ Default: \code{NULL}.}
 \item{niter, sigma, initemp, coolexp}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These
 arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
-\item{start}{Deprecated synonym for \code{coords}, for compatibility.}
+\item{start}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{coords} instead.}
 }
 \value{
 A numeric matrix with two (dim=2) or three (dim=3) columns, and as

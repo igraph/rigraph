@@ -125,7 +125,7 @@ migrations <- list(
       maxdelta,
       area,
       repulserad,
-      maxiter
+      maxiter = niter
     ) {},
     new = function(
       graph,
@@ -145,8 +145,7 @@ migrations <- list(
       coolexp = deprecated(),
       maxdelta = deprecated(),
       area = deprecated(),
-      repulserad = deprecated(),
-      maxiter = deprecated()
+      repulserad = deprecated()
     ) {},
     when = "3.0.0"
   ),
