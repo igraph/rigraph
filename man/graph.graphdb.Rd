@@ -30,7 +30,8 @@ values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
 \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
 \code{b09m}.}
 
-\item{nodes}{The number of vertices in the graph.}
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} in
+\code{\link[=graph_from_graphdb]{graph_from_graphdb()}} instead.}
 
 \item{pair}{Specifies which graph of the pair to read. Possible values:
 \code{A} and \code{B}.}

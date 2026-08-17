@@ -5,12 +5,12 @@
 \alias{grg}
 \title{Geometric random graphs}
 \usage{
-sample_grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
+sample_grg(n, radius, ..., torus = FALSE, coords = FALSE, nodes = deprecated())
 
-grg(nodes, radius, ..., torus = FALSE, coords = FALSE)
+grg(n, radius, ..., torus = FALSE, coords = FALSE, nodes = deprecated())
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
@@ -21,6 +21,8 @@ edge.}
 
 \item{coords}{Logical, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 }
 \value{
 A graph object. If \code{coords} is \code{TRUE} then with vertex

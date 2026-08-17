@@ -67,6 +67,8 @@ read.graph <- function(
 #' `graph.graphdb()` was renamed to [graph_from_graphdb()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_graphdb
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` in
+#'   [graph_from_graphdb()] instead.
 #' @keywords internal
 #' @export
 graph.graphdb <- function(
@@ -86,7 +88,7 @@ graph.graphdb <- function(
     url = url,
     prefix = prefix,
     type = type,
-    nodes = nodes,
+    n = nodes,
     pair = pair,
     which = which,
     base = base,
@@ -785,7 +787,7 @@ write.graph.dot <- function(graph, file) {
 #' [read_graph()] with the proper arguments to read the file.
 #'
 #' If `url` is `NULL`, and this is the default, then the filename is
-#' assembled from the `base`, `prefix`, `type`, `nodes`,
+#' assembled from the `base`, `prefix`, `type`, `n`,
 #' `pair` and `which` arguments.
 #'
 #' Unfortunately the original graph database homepage is now defunct, but see
@@ -804,7 +806,7 @@ write.graph.dot <- function(graph, file) {
 #'   `m3Dr4`, `m3Dr6`, `m4D`, `m4Dr2`, `m4Dr4`,
 #'   `m4Dr6`, `b03`, `b03m`, `b06`, `b06m`, `b09`,
 #'   `b09m`.
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
 #' @param pair Specifies which graph of the pair to read. Possible values:
 #'   `A` and `B`.
 #' @param which Gives the number of the graph to read. For every graph type
@@ -829,7 +831,7 @@ graph_from_graphdb <- function(
   ...,
   prefix = "iso",
   type = "r001",
-  nodes = NULL,
+  n = NULL,
   pair = "A",
   which = 0,
   base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
@@ -852,7 +854,7 @@ graph_from_graphdb <- function(
       base::c(
         if (!base::missing(prefix)) base::list(prefix = prefix),
         if (!base::missing(type)) base::list(type = type),
-        if (!base::missing(nodes)) base::list(nodes = nodes),
+        if (!base::missing(nodes)) base::list(n = nodes),
         if (!base::missing(pair)) base::list(pair = pair),
         if (!base::missing(which)) base::list(which = which),
         if (!base::missing(base)) base::list(base = base),
@@ -866,7 +868,7 @@ graph_from_graphdb <- function(
       .arg_conflict <- base::intersect(.arg_names, base::c(
         if (!base::missing(prefix)) "prefix",
         if (!base::missing(type)) "type",
-        if (!base::missing(nodes)) "nodes",
+        if (!base::missing(n)) "n",
         if (!base::missing(pair)) "pair",
         if (!base::missing(which)) "which",
         if (!base::missing(base)) "base",
@@ -879,7 +881,7 @@ graph_from_graphdb <- function(
         "3.0.0",
         what = base::I("Calling `graph_from_graphdb()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  graph_from_graphdb(", base::paste(base::c("url", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  graph_from_graphdb(", base::paste(base::c("url", base::c(prefix = "prefix", type = "type", n = "nodes", pair = "pair", which = "which", base = "base", compressed = "compressed", directed = "directed")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    graph_from_graphdb(", base::paste(base::c("url", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -887,8 +889,8 @@ graph_from_graphdb <- function(
   }
   # END GENERATED ARG_HANDLE
 
-  if (is.null(nodes) && is.null(url)) {
-    cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
+  if (is.null(n) && is.null(url)) {
+    cli::cli_abort("Either {.arg n}' or `{.arg url}' must be non-null.")
   }
 
   if (is.null(url)) {
@@ -917,9 +919,9 @@ graph_from_graphdb <- function(
       "b09",
       "b09m"
     )
-    sizecode <- if (nodes <= 100) {
+    sizecode <- if (n <= 100) {
       "s"
-    } else if (nodes < 2000) {
+    } else if (n < 2000) {
       "m"
     } else {
       "l"
@@ -958,7 +960,7 @@ graph_from_graphdb <- function(
       type,
       "_",
       sizecode,
-      nodes,
+      n,
       ".",
       pair,
       formatC(which, width = 2, flag = "0"),

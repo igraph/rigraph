@@ -8,47 +8,51 @@
 \title{Graph generation based on different vertex types}
 \usage{
 sample_traits_callaway(
-  nodes,
+  n,
   types,
   ...,
   edge.per.step = 1,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 )
 
 traits_callaway(
-  nodes,
+  n,
   types,
   ...,
   edge.per.step = 1,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 )
 
 sample_traits(
-  nodes,
+  n,
   types,
   k = 1,
   ...,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 )
 
 traits(
-  nodes,
+  n,
   types,
   k = 1,
   ...,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{types}{The number of different vertex types.}
 
@@ -64,6 +68,8 @@ types. These should be probabilities, i.e. numbers between zero and one.
 The default \code{NULL} sets all preferences to one.}
 
 \item{directed}{Logical, whether to generate directed graphs.}
+
+\item{nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{n} instead.}
 
 \item{k}{The number of trials per time step, see details below.}
 }
