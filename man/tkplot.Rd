@@ -28,7 +28,7 @@ tk_reshape(tkp.id, newlayout, ..., params)
 
 tk_postscript(tkp.id)
 
-tk_coords(tkp.id, ..., norm = FALSE)
+tk_coords(tkp.id, ..., normalized = FALSE)
 
 tk_set_coords(tkp.id, coords)
 
@@ -56,7 +56,7 @@ the complete list.}
 
 \item{params}{Extra parameters in a list, to pass to the layout function.}
 
-\item{norm}{Logical, should we norm the coordinates.}
+\item{normalized}{Logical, should we norm the coordinates.}
 
 \item{coords}{Two-column numeric matrix, the new coordinates of the
 vertices, in absolute coordinates.}

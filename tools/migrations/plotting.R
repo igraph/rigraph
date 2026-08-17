@@ -46,11 +46,11 @@ migrations <- list(
   ),
 
   tk_coords = list(
-    old = function(tkp.id, norm) {},
+    old = function(tkp.id, norm = normalized) {},
     new = function(
       tkp.id,
       ...,
-      norm = FALSE
+      normalized = FALSE
     ) {},
     when = "3.0.0"
   ),
