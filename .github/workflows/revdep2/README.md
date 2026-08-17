@@ -733,6 +733,7 @@ the report is about *results*, a retry is about *coverage*.
 | A restored package's system library is absent | `sysreqs_check_installed()` names it and `sysreqs_fix_installed()` installs it, in both the preflight and every shard |
 | The preflight job itself dies | the shards run anyway and install their own unions, the collector still reports; only the free rebuild and the early diagnosis are lost |
 | A shard hits its deadline | remaining packages `deferred`; finished old-halves still uploaded and baseline-fed |
+| The runner stops answering the service | "The hosted runner lost communication with the server" names CPU, memory and network starvation as its causes, and a dead runner takes its `if: always()` steps with it — so both the preflight and the shards stream a resource sample every 30 s while they work, and the checks run under `nice -n 10` (and `ionice -c3` where it exists) so the agent is never the process that loses |
 | A shard job dies hard | the collector reconciles against the plan: its packages are reported `missing`, naming the shard, and `retry-run` re-checks exactly them |
 | Every shard dies | the report is still written, with every package `missing`; the artifact download is tolerated, not required |
 | The batch is too big for 250 shards | the plan refuses before anything starts, and names the `part` split that fits |
@@ -790,7 +791,7 @@ and that resolution is the part that stops degrading gracefully:
 the run above spent ten minutes in it
 without a single install starting.
 So both the preflight and the shards install in chunks of
-`REVDEP2_INSTALL_CHUNK` packages (100),
+`REVDEP2_INSTALL_CHUNK` packages (400),
 ordered so that every strong dependency inside the set
 is installed before the package that needs it —
 each chunk then resolves against a library where its dependencies already are.
@@ -1403,7 +1404,7 @@ at the next `if`.
 | Oldest reusable prebuilt library | — | `REVDEP2_PREBUILT_MAX_AGE_DAYS` | 14 days |
 | Runs the history walk looks at | — | `REVDEP2_HISTORY_RUNS` | 40 |
 | Shards a package must be needed by before the preflight installs it | — | `REVDEP2_PREFLIGHT_MIN_SHARDS` | 2 (`1` is the whole universe) |
-| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 100 |
+| Packages per `pak::pkg_install()` call | — | `REVDEP2_INSTALL_CHUNK` | 400 |
 | Time limit on one `pak::pkg_install()` call | — | `REVDEP2_INSTALL_TIMEOUT_MINUTES` | 20 |
 | Wall clock past which no further install is started | — | `REVDEP2_INSTALL_DEADLINE_MINUTES` | 210 |
 | Time limit on one load-test batch | — | `REVDEP2_LOAD_TIMEOUT_MINUTES` | 10 |

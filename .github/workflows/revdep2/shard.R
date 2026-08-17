@@ -222,7 +222,7 @@ if (do_install) {
   # does it: one pak call for the whole set is one resolution of the whole set,
   # and that is the part that stops degrading gracefully as the set grows. A
   # shard's union is a fraction of the preflight's, but it is the same call.
-  chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+  chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 400)
   chunks <- install_chunks(install, cran_db(), chunk_size)
   inform(
     "Installing ",

@@ -5,10 +5,20 @@
 # Usage:
 #   load-test.sh <package-list-file> <library> <seconds> <jobs>
 #
-# Reads one package name per line. Prints one line per package:
+# Reads one package name per line. Prints one line per package on stdout:
 #
 #   OK   <package> <seconds>
 #   FAIL <package> <timeout|error> <seconds>
+#
+# and the same verdict on stderr as it happens, with a running count:
+#
+#   [load  123/1173] OK    red                             19s
+#
+# The two streams are separate on purpose. stdout is the caller's data and is
+# captured; stderr is the live log, so a sweep that takes half an hour says
+# what it is doing while it does it instead of only afterwards. The caller
+# still folds the sorted summary into a collapsed group at the end -- that is
+# the one that answers "what was slow", which the arrival order cannot.
 #
 # Always exits 0: which packages failed is the caller's business, not the
 # shell's.
@@ -40,6 +50,16 @@ lib=$2
 seconds=$3
 jobs=$4
 
+total=$(grep -c . "${list}" || true)
+width=${#total}
+
+# The running count, without a lock. Every finished package appends one byte
+# and reads the size back; single-byte appends to an O_APPEND descriptor do not
+# interleave, so the number is exact rather than approximately right. A stale
+# count would be cosmetic either way -- it is a progress indicator, not data.
+progress=$(mktemp)
+trap 'rm -f "${progress}"' EXIT
+
 # One package, one session, one clock. `--vanilla` so nothing in a profile
 # loads anything this is supposed to be testing.
 load_one() {
@@ -48,18 +68,25 @@ load_one() {
     Rscript --vanilla -e \
     ".libPaths(c('${lib}', .libPaths())); loadNamespace('${pkg}')" \
     > /dev/null 2>&1 || status=$?
-  local took=$((EPOCHSECONDS - start))
+  local took=$((EPOCHSECONDS - start)) verdict
   if [ "${status}" -eq 0 ]; then
+    verdict=OK
     echo "OK ${pkg} ${took}"
   # 124 is coreutils' timeout; anything else is R saying something.
   elif [ "${status}" -eq 124 ] || [ "${status}" -eq 137 ]; then
+    verdict=TIMEOUT
     echo "FAIL ${pkg} timeout ${took}"
   else
+    verdict=ERROR
     echo "FAIL ${pkg} error ${took}"
   fi
+  printf '.' >> "${progress}"
+  printf '[load %*d/%d] %-7s %-32s %ss\n' \
+    "${width}" "$(wc -c < "${progress}")" "${total}" \
+    "${verdict}" "${pkg}" "${took}" >&2
 }
 export -f load_one
-export lib seconds
+export lib seconds progress total width
 
 # GNU parallel where it exists, `xargs -P` where it does not -- the runners
 # have both, but a local invocation may not, and the two are interchangeable

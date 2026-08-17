@@ -70,12 +70,12 @@ upgrade <- length(restored) > 0
 # This install is the whole job, and the place it has died: handed the whole
 # universe at once, pak resolves every one of those refs before it installs
 # any of them, and the resolution of a few thousand is where a run that is
-# killed rather than failed gets killed. So it goes in dependency order, a
+# killed rather than failed gets killed. So it goes in dependency order, four
 # hundred at a time (see install_chunks() in util.R), which keeps every
-# resolution small and turns a fatal ten minutes of silence into a chunk
-# counter -- the workflow's resource sampler supplies the other half of that
-# picture, a memory curve on the same clock.
-chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 100)
+# resolution well clear of the size that killed it and turns a fatal ten
+# minutes of silence into a chunk counter -- the workflow's resource sampler
+# supplies the other half of that picture, a memory curve on the same clock.
+chunk_size <- env_num("REVDEP2_INSTALL_CHUNK", 400)
 # Past this, no further chunk is started. The job's own `timeout-minutes` is
 # 300 and cancels everything; this stops earlier and on purpose, so that the
 # packages that did install are still load-tested, packed and published
@@ -131,6 +131,18 @@ if (identical(metadata, "broken")) {
   )
 }
 
+# What the resource sampler calls the samples it is taking. It runs for the
+# whole job, so a label fixed when it started would say `installing` through the
+# load test and the packing as well -- which is what it used to do.
+phase_file <- env_chr("RESOURCE_PHASE_FILE")
+phase <- function(name) {
+  if (nzchar(phase_file)) {
+    writeLines(name, phase_file)
+  }
+  invisible(name)
+}
+
+phase("installing")
 install_started <- Sys.time()
 installed_ok <- install_in_chunks(
   chunks,
@@ -184,12 +196,14 @@ if (!installed_ok) {
 # absent fails to load for a reason that has nothing to do with the package:
 # without this it would be judged stale and rebuilt from source, and fail
 # again the same way.
+phase("surveying system requirements")
 ensure_sysreqs(lib, "Preflight")
 
 # Load every installed dependency, in chunks small enough to stay clear of the
 # DLL limit; a failing chunk is retried one package at a time so a single bad
 # namespace names itself.
 installed <- intersect(install_union, rownames(utils::installed.packages(lib)))
+phase("load-testing")
 inform("Preflight: loading ", length(installed), " packages")
 
 # Bounded, because `loadNamespace()` is not a thing that necessarily returns:
@@ -290,7 +304,10 @@ if (!out_of_time("the load test") && length(roots) > 0) {
   writeLines(roots, list_file)
   run <- run_with_timeout(
     function(script, args) {
-      system2(script, args, stdout = TRUE, stderr = TRUE)
+      # stdout captured, stderr inherited: the script writes its verdicts to
+      # both, and the stderr copy is what reaches the job log as the sweep
+      # runs rather than half an hour later.
+      system2(script, args, stdout = TRUE, stderr = "")
     },
     list(
       script = file.path(script_dir, "load-test.sh"),
@@ -436,6 +453,7 @@ write_json(failures, file.path(out_dir, "depfail.json"))
 
 # ------------------------------------------------------------------ library --
 
+phase("packing the library")
 lib_out <- env_chr("LIB_OUT")
 index_out <- env_chr("LIB_INDEX_OUT")
 packed <- character()

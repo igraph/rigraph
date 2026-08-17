@@ -940,10 +940,20 @@ install_closure <- function(packages, db) {
 # on disk and is skipped on the next attempt, so a chunk that dies costs a
 # chunk; and the log says which one, which a single opaque call never could.
 #
+# The size is a trade, and 100 was too far towards small. A chunk pays one
+# resolution whether or not it installs anything: run 31930350338's preflight
+# logged `80 pkgs + 214 deps: kept 294 [44s]` for a chunk that built nothing at
+# all. At 100, the 4406-package universe is 45 chunks and something like half
+# an hour of resolution before a single build starts -- on the critical path,
+# since every shard waits for the preflight. At 400 it is 12 chunks. A chunk
+# that dies costs four times as much to redo, which is the price; the counter
+# is that the resolution which killed run 31270092803 was a few thousand refs,
+# and 400 is an order of magnitude below that.
+#
 # Ordering is on strong dependencies only. Suggests are in the set because a
 # revdep's *check* needs them, not its installation, and they are what makes
 # the graph cyclic -- ordering on them would order on nothing.
-install_chunks <- function(pkgs, db, size = 100) {
+install_chunks <- function(pkgs, db, size = 400) {
   pkgs <- unique(pkgs)
   if (length(pkgs) == 0) {
     return(list())

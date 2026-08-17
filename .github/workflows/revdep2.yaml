@@ -326,20 +326,25 @@ jobs:
           TMPDIR: ${{ runner.temp }}/tmp
           TMP: ${{ runner.temp }}/tmp
           TEMP: ${{ runner.temp }}/tmp
+          RESOURCE_PHASE_FILE: ${{ runner.temp }}/preflight/phase
         run: |
           mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
           watch=./.github/workflows/revdep2/watch-resources.sh
+          # Backgrounded and left running, like the shard's. It used to be
+          # killed when this step ended, which left the two artifact uploads
+          # after it unsampled -- and this job's library artifact is gigabytes
+          # (4.1 GB in run 31951756102), so "the runner stopped answering while
+          # packing" was exactly as unanswerable as it was for shard 16.
+          # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
           "${watch}" once "before the install"
-          "${watch}" watch 30 "installing" &
-          watcher=$!
-          trap 'kill "${watcher}" 2> /dev/null || true' EXIT
+          "${watch}" watch 30 "preflight" &
+          disown || true
           unbuffered=""
           if command -v stdbuf > /dev/null 2>&1; then
             unbuffered="stdbuf -oL -eL"
           fi
           status=0
           ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
-          kill "${watcher}" 2> /dev/null || true
           "${watch}" once "after the install"
           exit "${status}"
         shell: bash
@@ -653,6 +658,29 @@ jobs:
       # The phases share the job's environment and the work directory; the
       # install leaves the libraries and a note of what it cost behind, and the
       # check picks both up. Nothing is done twice.
+      # The same sampler the preflight runs, for the same reason, and the shard
+      # needed it more.
+      #
+      # Shard 16 of run 31951756102 died with "The hosted runner lost
+      # communication with the server", whose own advice names starvation of
+      # CPU, memory or network as the causes -- and there was not one number
+      # from that job to say which, because a runner that stops answering takes
+      # its `if: always()` steps with it. Only what was already streamed to the
+      # log survives, so the numbers have to be emitted while the work runs.
+      #
+      # Backgrounded once here rather than per step: a process started in one
+      # step outlives it, and Actions reaps it with the job. `RESOURCE_LOG` also
+      # puts the series in the shard artifact, for the jobs that do reach their
+      # upload.
+      - name: Start the resource sampler
+        run: |
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          "${watch}" once "shard ${SHARD} before the install"
+          RESOURCE_LOG="${RUNNER_TEMP}/results/resources.log" \
+            "${watch}" watch 30 "shard ${SHARD}" &
+          disown || true
+        shell: bash
+
       - name: Install packages
         env:
           PHASE: install
@@ -677,6 +705,18 @@ jobs:
       # Named per attempt: a re-run of one shard must not overwrite the results
       # the other shards uploaded in the first attempt; the collector reads
       # every attempt and lets the later one win per package.
+      # Before the upload, so the last sample and the OOM verdict ride in the
+      # artifact. It cannot run when the *runner* died -- hence the sampler
+      # above -- but it is what answers "was it memory?" in every case where the
+      # job merely failed.
+      - name: Report what the shard consumed
+        if: always()
+        run: |
+          ./.github/workflows/revdep2/watch-resources.sh once "shard ${SHARD} after the checks"
+          ./.github/workflows/revdep2/watch-resources.sh oom
+          df -BG / "${RUNNER_TEMP}" 2>/dev/null || true
+        shell: bash
+
       - name: Upload the shard results
         uses: actions/upload-artifact@v6
         if: always()

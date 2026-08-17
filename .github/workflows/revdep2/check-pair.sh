@@ -24,6 +24,25 @@
 
 set -u
 
+# The checks run at a lower priority than everything else on the runner.
+#
+# Two `R CMD check` processes at once, each with children of its own -- a test
+# suite that opens a PSOCK cluster, a vignette that knits -- can take every core
+# the runner has. The runner agent is a process on that machine too, and it has
+# to reach the service regularly or the job dies with
+#
+#   The hosted runner lost communication with the server.
+#
+# which names starvation as one of its causes. `nice` costs nothing when there
+# is headroom: the scheduler only consults priority when there is more work than
+# cores, which is exactly the case worth protecting. `ionice` does the same for
+# the disk, where a check writing its .Rcheck directory competes with the agent
+# writing logs; it is best-effort, since not every image has it.
+low_priority=(nice -n 10)
+if command -v ionice > /dev/null 2>&1 && ionice -c3 true > /dev/null 2>&1; then
+  low_priority+=(ionice -c3)
+fi
+
 tarball=$1
 work=$2
 lib_old=$3
@@ -57,6 +76,7 @@ check_one() {
   # The status is PIPESTATUS[0] because the stamping is downstream of it.
   R_LIBS="${lib}:${lib_shared}" \
     R_PARALLEL_PORT="${port}" \
+    "${low_priority[@]}" \
     timeout --kill-after=60s "${seconds}s" \
     R CMD check --no-manual --as-cran --output="${out}" "${tarball}" 2>&1 |
     stamp > "${out}/driver.log"
