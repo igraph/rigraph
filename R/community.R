@@ -282,6 +282,10 @@ is.hierarchical <- function(communities) {
 #' `infomap.community()` was renamed to [cluster_infomap()] to create a more
 #' consistent API.
 #' @inheritParams cluster_infomap
+#' @param e.weights `r lifecycle::badge("deprecated")` Use `weights` in
+#'   [cluster_infomap()] instead.
+#' @param v.weights `r lifecycle::badge("deprecated")` Use `vertex_weights` in
+#'   [cluster_infomap()] instead.
 #' @keywords internal
 #' @export
 infomap.community <- function(
@@ -295,8 +299,8 @@ infomap.community <- function(
   lifecycle::deprecate_warn("2.0.0", "infomap.community()", "cluster_infomap()")
   cluster_infomap(
     graph = graph,
-    e.weights = e.weights,
-    v.weights = v.weights,
+    weights = e.weights,
+    vertex_weights = v.weights,
     nb.trials = nb.trials,
     modularity = modularity
   )
@@ -3020,12 +3024,12 @@ cluster_optimal <- function(
 #'
 #' @param graph The input graph. Edge directions will be taken into account.
 #' @inheritParams rlang::args_dots_empty
-#' @param e.weights Numeric vector of edge weights.
+#' @param weights Numeric vector of edge weights.
 #'   The length must match the number of edges in the graph.  By default (`NULL`) the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
 #'   present, then all edges are considered to have the same weight.
 #'   Larger edge weights correspond to stronger connections.
-#' @param v.weights Numeric vector of vertex
+#' @param vertex_weights Numeric vector of vertex
 #'   weights. The length must match the number of vertices in the graph.  By
 #'   default (`NULL`) the \sQuote{`weight`} vertex attribute is used as weights. If
 #'   it is not present, then all vertices are considered to have the same weight.
@@ -3063,14 +3067,16 @@ cluster_optimal <- function(
 cluster_infomap <- function(
   graph,
   ...,
-  e.weights = NULL,
-  v.weights = NULL,
+  weights = NULL,
+  vertex_weights = NULL,
   nb.trials = 10,
   modularity = TRUE
 ) {
   # BEGIN GENERATED ARG_HANDLE: cluster_infomap, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("v"))
+    if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn cluster_infomap}.")
     # Pre-3.0.0 signature: cluster_infomap(graph, e.weights, v.weights, nb.trials, modularity)
     .old_signature <- function(e.weights, v.weights, nb.trials, modularity, ...) {
       if (...length() > 0L) {
@@ -3080,8 +3086,8 @@ cluster_infomap <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn cluster_infomap}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(e.weights)) base::list(e.weights = e.weights),
-        if (!base::missing(v.weights)) base::list(v.weights = v.weights),
+        if (!base::missing(e.weights)) base::list(weights = e.weights),
+        if (!base::missing(v.weights)) base::list(vertex_weights = v.weights),
         if (!base::missing(nb.trials)) base::list(nb.trials = nb.trials),
         if (!base::missing(modularity)) base::list(modularity = modularity)
       )
@@ -3090,8 +3096,8 @@ cluster_infomap <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(e.weights)) "e.weights",
-        if (!base::missing(v.weights)) "v.weights",
+        if (!base::missing(weights)) "weights",
+        if (!base::missing(vertex_weights)) "vertex_weights",
         if (!base::missing(nb.trials)) "nb.trials",
         if (!base::missing(modularity)) "modularity"
       ))
@@ -3101,7 +3107,7 @@ cluster_infomap <- function(
         "3.0.0",
         what = base::I("Calling `cluster_infomap()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  cluster_infomap(", base::paste(base::c("graph", base::c(weights = "e.weights", vertex_weights = "v.weights", nb.trials = "nb.trials", modularity = "modularity")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    cluster_infomap(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -3111,8 +3117,8 @@ cluster_infomap <- function(
 
   res <- community_infomap_impl(
     graph = graph,
-    e_weights = e.weights,
-    v_weights = v.weights,
+    e_weights = weights,
+    v_weights = vertex_weights,
     nb_trials = nb.trials
   )
 
@@ -3123,7 +3129,7 @@ cluster_infomap <- function(
   res$algorithm <- "infomap"
   res$membership <- res$membership + 1
   if (modularity) {
-    res$modularity <- modularity(graph, res$membership, weights = e.weights)
+    res$modularity <- modularity(graph, res$membership, weights = weights)
   }
   class(res) <- "communities"
   res
