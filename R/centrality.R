@@ -26,6 +26,8 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' `page.rank()` was renamed to [page_rank()] to create a more
 #' consistent API.
 #' @inheritParams page_rank
+#' @param algo `r lifecycle::badge("deprecated")` Use `algorithm` in
+#'   [page_rank()] instead.
 #' @keywords internal
 #' @export
 page.rank <- function(
@@ -42,7 +44,7 @@ page.rank <- function(
   lifecycle::deprecate_warn("2.0.0", "page.rank()", "page_rank()")
   page_rank(
     graph = graph,
-    algo = algo,
+    algorithm = algo,
     vids = vids,
     directed = directed,
     damping = damping,
@@ -1884,7 +1886,7 @@ hub_score <- function(
 #'
 #' @param graph The graph object.
 #' @inheritParams rlang::args_dots_empty
-#' @param algo Character scalar, which implementation to use to carry out the
+#' @param algorithm Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library
 #'   (<https://github.com/dgleich/prpack>) to calculate PageRank scores
 #'   by solving a set of linear equations. This is a new implementation in igraph
@@ -1953,7 +1955,7 @@ hub_score <- function(
 page_rank <- function(
   graph,
   ...,
-  algo = c("prpack", "arpack"),
+  algorithm = c("prpack", "arpack"),
   vids = NULL,
   directed = TRUE,
   damping = 0.85,
@@ -1964,7 +1966,7 @@ page_rank <- function(
   # BEGIN GENERATED ARG_HANDLE: page_rank, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("d"))
+    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("a", "al", "alg", "d"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn page_rank}.")
     # Pre-3.0.0 signature: page_rank(graph, algo, vids, directed, damping, personalized, weights, options)
     .old_signature <- function(algo, vids, directed, damping, personalized, weights, options, ...) {
@@ -1975,7 +1977,7 @@ page_rank <- function(
         cli::cli_abort(base::c("Unexpected argument passed to {.fn page_rank}: {.arg {(.arg_extra)}}.", i = "Arguments after {.arg ...} must be spelled out in full."), call = base::parent.frame())
       }
       base::c(
-        if (!base::missing(algo)) base::list(algo = algo),
+        if (!base::missing(algo)) base::list(algorithm = algo),
         if (!base::missing(vids)) base::list(vids = vids),
         if (!base::missing(directed)) base::list(directed = directed),
         if (!base::missing(damping)) base::list(damping = damping),
@@ -1988,7 +1990,7 @@ page_rank <- function(
     if (base::length(.arg_handle) > 0L) {
       .arg_names <- base::names(.arg_handle)
       .arg_conflict <- base::intersect(.arg_names, base::c(
-        if (!base::missing(algo)) "algo",
+        if (!base::missing(algorithm)) "algorithm",
         if (!base::missing(vids)) "vids",
         if (!base::missing(directed)) "directed",
         if (!base::missing(damping)) "damping",
@@ -2002,7 +2004,7 @@ page_rank <- function(
         "3.0.0",
         what = base::I("Calling `page_rank()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  page_rank(", base::paste(base::c("graph", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Detected call:  page_rank(", base::paste(base::c("graph", base::c(algorithm = "algo", vids = "vids", directed = "directed", damping = "damping", personalized = "personalized", weights = "weights", options = "options")[.arg_names]), collapse = ", "), ")"),
           i = base::paste0("Use instead:    page_rank(", base::paste(base::c("graph", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
@@ -2016,7 +2018,7 @@ page_rank <- function(
 
   personalized_pagerank_impl(
     graph = graph,
-    algo = algo,
+    algo = algorithm,
     vids = vids,
     directed = directed,
     damping = damping,
