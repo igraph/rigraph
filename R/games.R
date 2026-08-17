@@ -150,7 +150,7 @@ preference.game <- function(
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "preference.game()", "sample_pref()")
   sample_pref(
-    nodes = nodes,
+    n = nodes,
     types = types,
     type.dist = type.dist,
     fixed.sizes = fixed.sizes,
@@ -252,7 +252,7 @@ interconnected.islands.game <- function(
 grg.game <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "grg.game()", "sample_grg()")
-  sample_grg(nodes = nodes, radius = radius, torus = torus, coords = coords)
+  sample_grg(n = nodes, radius = radius, torus = torus, coords = coords)
 } # nocov end
 
 #' Growing random graph generation
@@ -299,7 +299,7 @@ forest.fire.game <- function(
     "sample_forestfire()"
   )
   sample_forestfire(
-    nodes = nodes,
+    n = nodes,
     fw.prob = fw.prob,
     bw.factor = bw.factor,
     ambs = ambs,
@@ -328,7 +328,7 @@ establishment.game <- function(
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "establishment.game()", "sample_traits()")
   sample_traits(
-    nodes = nodes,
+    n = nodes,
     types = types,
     k = k,
     type.dist = type.dist,
@@ -470,7 +470,7 @@ callaway.traits.game <- function(
     "sample_traits_callaway()"
   )
   sample_traits_callaway(
-    nodes = nodes,
+    n = nodes,
     types = types,
     edge.per.step = edge.per.step,
     type.dist = type.dist,
@@ -605,7 +605,7 @@ asymmetric.preference.game <- function(
     "sample_asym_pref()"
   )
   sample_asym_pref(
-    nodes = nodes,
+    n = nodes,
     types = types,
     type.dist.matrix = type.dist.matrix,
     pref.matrix = pref.matrix,
@@ -2200,7 +2200,8 @@ pa_age <- function(
 #' depends on the types of the vertices involved and is taken from
 #' `pref.matrix`.
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param types The number of different vertex types.
 #' @inheritParams rlang::args_dots_empty
 #' @param edge.per.step The number of edges to add to the graph per time step.
@@ -2222,13 +2223,14 @@ pa_age <- function(
 #' g1 <- sample_traits_callaway(1000, 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 #' g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 sample_traits_callaway <- function(
-  nodes,
+  n,
   types,
   ...,
   edge.per.step = 1,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits_callaway, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2265,13 +2267,28 @@ sample_traits_callaway <- function(
         "3.0.0",
         what = base::I("Calling `sample_traits_callaway()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_traits_callaway(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_traits_callaway(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_traits_callaway(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_traits_callaway(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_traits_callaway} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_traits_callaway(nodes = )",
+      "sample_traits_callaway(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2281,7 +2298,7 @@ sample_traits_callaway <- function(
   }
 
   res <- callaway_traits_game_impl(
-    nodes = nodes,
+    nodes = n,
     types = types,
     edges_per_step = edge.per.step,
     type_dist = type.dist,
@@ -2306,13 +2323,14 @@ sample_traits_callaway <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 traits_callaway <- function(
-  nodes,
+  n,
   types,
   ...,
   edge.per.step = 1,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits_callaway, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2349,13 +2367,28 @@ traits_callaway <- function(
         "3.0.0",
         what = base::I("Calling `traits_callaway()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  traits_callaway(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    traits_callaway(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  traits_callaway(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    traits_callaway(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn traits_callaway} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "traits_callaway(nodes = )",
+      "traits_callaway(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2366,7 +2399,7 @@ traits_callaway <- function(
 
   constructor_spec(
     sample_traits_callaway,
-    nodes,
+    n,
     types,
     edge.per.step = edge.per.step,
     type.dist = type.dist,
@@ -2379,13 +2412,14 @@ traits_callaway <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 sample_traits <- function(
-  nodes,
+  n,
   types,
   k = 1,
   ...,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_traits, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2420,13 +2454,28 @@ sample_traits <- function(
         "3.0.0",
         what = base::I("Calling `sample_traits()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_traits(", base::paste(base::c("nodes", "types", "k", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_traits(", base::paste(base::c("nodes", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_traits(", base::paste(base::c("n", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_traits(", base::paste(base::c("n", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_traits} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_traits(nodes = )",
+      "sample_traits(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2436,7 +2485,7 @@ sample_traits <- function(
   }
 
   res <- establishment_game_impl(
-    nodes = nodes,
+    nodes = n,
     types = types,
     k = k,
     type_dist = type.dist,
@@ -2457,13 +2506,14 @@ sample_traits <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 traits <- function(
-  nodes,
+  n,
   types,
   k = 1,
   ...,
   type.dist = NULL,
   pref.matrix = NULL,
-  directed = FALSE
+  directed = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: traits, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2498,13 +2548,28 @@ traits <- function(
         "3.0.0",
         what = base::I("Calling `traits()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  traits(", base::paste(base::c("nodes", "types", "k", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    traits(", base::paste(base::c("nodes", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  traits(", base::paste(base::c("n", "types", "k", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    traits(", base::paste(base::c("n", "types", "k", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn traits} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "traits(nodes = )",
+      "traits(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2515,7 +2580,7 @@ traits <- function(
 
   constructor_spec(
     sample_traits,
-    nodes,
+    n,
     types,
     k = k,
     type.dist = type.dist,
@@ -2537,7 +2602,8 @@ traits <- function(
 #' Euclidean norm than a given radius. If the `torus` argument is
 #' `TRUE` then a unit area torus is used instead of a square.
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
 #' @inheritParams rlang::args_dots_empty
@@ -2557,11 +2623,12 @@ traits <- function(
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
 sample_grg <- function(
-  nodes,
+  n,
   radius,
   ...,
   torus = FALSE,
-  coords = FALSE
+  coords = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_grg, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2592,18 +2659,33 @@ sample_grg <- function(
         "3.0.0",
         what = base::I("Calling `sample_grg()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_grg(", base::paste(base::c("nodes", "radius", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_grg(", base::paste(base::c("nodes", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_grg(", base::paste(base::c("n", "radius", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_grg(", base::paste(base::c("n", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_grg} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_grg(nodes = )",
+      "sample_grg(n = )"
+    )
+    n <- nodes
+  }
+
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     Rx_igraph_grg_game,
-    as.double(nodes),
+    as.double(n),
     as.double(radius),
     as.logical(torus),
     as.logical(coords)
@@ -2624,11 +2706,12 @@ sample_grg <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 grg <- function(
-  nodes,
+  n,
   radius,
   ...,
   torus = FALSE,
-  coords = FALSE
+  coords = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: grg, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2659,17 +2742,32 @@ grg <- function(
         "3.0.0",
         what = base::I("Calling `grg()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  grg(", base::paste(base::c("nodes", "radius", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    grg(", base::paste(base::c("nodes", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  grg(", base::paste(base::c("n", "radius", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    grg(", base::paste(base::c("n", "radius", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn grg} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "grg(nodes = )",
+      "grg(n = )"
+    )
+    n <- nodes
+  }
+
   constructor_spec(
     sample_grg,
-    nodes = nodes,
+    n = n,
     radius = radius,
     torus = torus,
     coords = coords
@@ -2700,7 +2798,8 @@ grg <- function(
 #' `type` vertex attribute for `sample_pref()` and from the
 #' `intype` and `outtype` vertex attribute for `sample_asym_pref()`.
 #'
-#' @param nodes The number of vertices in the graphs.
+#' @param n The number of vertices in the graphs.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param types The number of different vertex types.
 #' @inheritParams rlang::args_dots_empty
 #' @param type.dist The distribution of the vertex types, a numeric vector of
@@ -2740,14 +2839,15 @@ grg <- function(
 #' tkplot(g, layout = layout_in_circle)
 #'
 sample_pref <- function(
-  nodes,
+  n,
   types,
   ...,
   type.dist = NULL,
   fixed.sizes = FALSE,
   pref.matrix = NULL,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2786,13 +2886,28 @@ sample_pref <- function(
         "3.0.0",
         what = base::I("Calling `sample_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_pref} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_pref(nodes = )",
+      "sample_pref(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2809,7 +2924,7 @@ sample_pref <- function(
   }
 
   res <- preference_game_impl(
-    nodes = nodes,
+    nodes = n,
     types = types,
     type_dist = type.dist,
     fixed_sizes = fixed.sizes,
@@ -2833,14 +2948,15 @@ sample_pref <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 pref <- function(
-  nodes,
+  n,
   types,
   ...,
   type.dist = NULL,
   fixed.sizes = FALSE,
   pref.matrix = NULL,
   directed = FALSE,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2879,13 +2995,28 @@ pref <- function(
         "3.0.0",
         what = base::I("Calling `pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn pref} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "pref(nodes = )",
+      "pref(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist)) {
     type.dist <- rep(1, types)
@@ -2896,7 +3027,7 @@ pref <- function(
 
   constructor_spec(
     sample_pref,
-    nodes,
+    n,
     types,
     type.dist = type.dist,
     fixed.sizes = fixed.sizes,
@@ -2910,12 +3041,13 @@ pref <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 sample_asym_pref <- function(
-  nodes,
+  n,
   types,
   ...,
   type.dist.matrix = NULL,
   pref.matrix = NULL,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_asym_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -2950,13 +3082,28 @@ sample_asym_pref <- function(
         "3.0.0",
         what = base::I("Calling `sample_asym_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_asym_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_asym_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_asym_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_asym_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_asym_pref} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_asym_pref(nodes = )",
+      "sample_asym_pref(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist.matrix)) {
     type.dist.matrix <- matrix(1, types, types)
@@ -2979,7 +3126,7 @@ sample_asym_pref <- function(
   }
 
   res <- asymmetric_preference_game_impl(
-    nodes = nodes,
+    nodes = n,
     out_types = types,
     in_types = types,
     type_dist_matrix = type.dist.matrix,
@@ -3003,12 +3150,13 @@ sample_asym_pref <- function(
 #' @inheritParams rlang::args_dots_empty
 #' @export
 asym_pref <- function(
-  nodes,
+  n,
   types,
   ...,
   type.dist.matrix = NULL,
   pref.matrix = NULL,
-  loops = FALSE
+  loops = FALSE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: asym_pref, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -3043,13 +3191,28 @@ asym_pref <- function(
         "3.0.0",
         what = base::I("Calling `asym_pref()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  asym_pref(", base::paste(base::c("nodes", "types", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    asym_pref(", base::paste(base::c("nodes", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  asym_pref(", base::paste(base::c("n", "types", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    asym_pref(", base::paste(base::c("n", "types", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
+
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn asym_pref} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "asym_pref(nodes = )",
+      "asym_pref(n = )"
+    )
+    n <- nodes
+  }
 
   if (is.null(type.dist.matrix)) {
     type.dist.matrix <- matrix(1, types, types)
@@ -3060,7 +3223,7 @@ asym_pref <- function(
 
   constructor_spec(
     sample_asym_pref,
-    nodes,
+    n,
     types,
     type.dist.matrix = type.dist.matrix,
     pref.matrix = pref.matrix,
@@ -4954,7 +5117,8 @@ sample_fitness_pl <- function(
 #' available then we cite all of them.  \item The same procedure is applied to
 #' all the newly cited vertices.  }
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
+#' @param nodes `r lifecycle::badge("deprecated")` Use `n` instead.
 #' @param fw.prob The forward burning probability, see details below.
 #' @inheritParams rlang::args_dots_empty
 #' @param bw.factor The backward burning ratio. The backward burning
@@ -4991,12 +5155,13 @@ sample_fitness_pl <- function(
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 sample_forestfire <- function(
-  nodes,
+  n,
   fw.prob,
   ...,
   bw.factor = 1,
   ambs = 1,
-  directed = TRUE
+  directed = TRUE,
+  nodes = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: sample_forestfire, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -5029,16 +5194,31 @@ sample_forestfire <- function(
         "3.0.0",
         what = base::I("Calling `sample_forestfire()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  sample_forestfire(", base::paste(base::c("nodes", "fw.prob", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    sample_forestfire(", base::paste(base::c("nodes", "fw.prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  sample_forestfire(", base::paste(base::c("n", "fw.prob", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    sample_forestfire(", base::paste(base::c("n", "fw.prob", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(nodes)) {
+    if (!missing(n)) {
+      cli::cli_abort(c(
+        "Argument {.arg n} of {.fn sample_forestfire} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg nodes}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "sample_forestfire(nodes = )",
+      "sample_forestfire(n = )"
+    )
+    n <- nodes
+  }
+
   res <- forest_fire_game_impl(
-    nodes = nodes,
+    nodes = n,
     fw_prob = fw.prob,
     bw_factor = bw.factor,
     ambs = ambs,
