@@ -23,8 +23,7 @@ layout_with_fr(
   coolexp = deprecated(),
   maxdelta = deprecated(),
   area = deprecated(),
-  repulserad = deprecated(),
-  maxiter = deprecated()
+  repulserad = deprecated()
 )
 
 with_fr(...)
@@ -82,8 +81,6 @@ Default: \code{NULL}.}
 \item{coolexp, maxdelta, area, repulserad}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These
 arguments are not supported from igraph version 0.8.0 and are ignored
 (with a warning).}
-
-\item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
