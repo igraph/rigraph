@@ -8,7 +8,7 @@
 # The queue file has one package per line, tab-separated, sorted
 # heaviest-first by the caller (shard.R):
 #
-#   name  tarball-abs-path  timeout_sec  weight_minutes  skip_old(0|1)
+#   name  tarball-abs-path  timeout_sec  weight_minutes
 #
 # The list is consumed from both ends at once. Worker 1 takes the next line
 # from the top -- the heaviest package still unclaimed -- and the remaining
@@ -39,8 +39,9 @@
 # heaviest remaining package and may stop while the light lanes, pricing the
 # lightest, keep draining.
 #
-# Per package: check-half.sh old (skipped when skip_old=1 -- the baseline
-# stands in), then check-half.sh new, then compare-one.R, which parses,
+# Per package: check-half.sh old, then check-half.sh new -- both halves
+# always run fresh; a stored old result is compare-one.R's second opinion,
+# never a substitute -- then compare-one.R, which parses,
 # compares, salvages and appends the package's manifest line itself under
 # <manifest-path>.lock. Every failure past a claim still produces a manifest
 # line: compare-one.R crashing gets a second run with --error; that failing
@@ -201,14 +202,15 @@ append_manifest_line() {
 # script, and the name/version fields are sanitised above, so nothing here
 # can break the JSON.
 write_fallback_line() {
-  local name=$1 tarball=$2 weight=$3 skip_old=$4 t_old=$5 t_new=$6 message=$7
+  local name=$1 tarball=$2 weight=$3 t_old=$4 t_new=$5 message=$6
   local base=${tarball##*/} version=''
   if [[ ${base} == "${name}_"*.tar.gz ]]; then
     version=${base#"${name}_"}
     version=${version%.tar.gz}
   fi
+  # The plan may have offered a second opinion for this package; this
+  # last-resort writer cannot know, and false is the harmless default.
   local planned=false
-  if [ "${skip_old}" = 1 ]; then planned=true; fi
   local shard=${SHARD:-0}
   if ! [[ ${shard} =~ ^[0-9]+$ ]]; then shard=0; fi
   local line
@@ -278,9 +280,8 @@ claim() {
 # driver itself broke mid-package; the caller then writes the fallback line.
 process_claim() {
   local worker_id=$1 lane=$2 line_no=$3 line=$4
-  local name tarball timeout_sec weight skip_old rest
-  IFS=$'\t' read -r name tarball timeout_sec weight skip_old rest <<< "${line}"
-  skip_old=${skip_old:-0}
+  local name tarball timeout_sec weight rest
+  IFS=$'\t' read -r name tarball timeout_sec weight rest <<< "${line}"
   if [ -z "${name}" ]; then
     log "[queue w${worker_id} ${lane}] line ${line_no} is blank; skipping"
     return 0
@@ -310,15 +311,13 @@ process_claim() {
   # the harness around the container broke, and compare-one.R reading the
   # half's absent status file turns that into this one package's error line.
   local t_old='' t_new='' started status
-  if [ "${skip_old}" != 1 ]; then
-    started=${EPOCHSECONDS}
-    status=0
-    "${CHECK_HALF}" old "${tarball}" "${pkg_work}" "${old_lib}" "${timeout_sec}" 1>&2 ||
-      status=$?
-    t_old=$((EPOCHSECONDS - started))
-    if (( status != 0 )); then
-      log "[queue w${worker_id} ${lane}] ${name}: check-half.sh old exited ${status} (its contract says 0); reading what is there"
-    fi
+  started=${EPOCHSECONDS}
+  status=0
+  "${CHECK_HALF}" old "${tarball}" "${pkg_work}" "${old_lib}" "${timeout_sec}" 1>&2 ||
+    status=$?
+  t_old=$((EPOCHSECONDS - started))
+  if (( status != 0 )); then
+    log "[queue w${worker_id} ${lane}] ${name}: check-half.sh old exited ${status} (its contract says 0); reading what is there"
   fi
   started=${EPOCHSECONDS}
   status=0
@@ -338,7 +337,6 @@ process_claim() {
     --baseline-dir "${BASELINE_DIR:-}"
     --plan "${PLAN:-plan.json}"
     --shard "${SHARD:-0}"
-    --skip-old "${skip_old}"
     --timeout "${timeout_sec}"
     --t-old "${t_old}"
     --t-new "${t_new}"
@@ -359,7 +357,7 @@ process_claim() {
     if (( rc2 != 0 )); then
       verdict=fallback
       log "[queue w${worker_id} ${lane}] ${name}: compare-one.R --error failed too (exit ${rc2}); writing the fallback line"
-      write_fallback_line "${name}" "${tarball}" "${weight}" "${skip_old}" \
+      write_fallback_line "${name}" "${tarball}" "${weight}" \
         "${t_old}" "${t_new}" "${msg}"
     fi
   fi
@@ -370,13 +368,8 @@ process_claim() {
   printf '.' >> "${done_count}"
   local finished parts total_s
   finished=$(wc -c < "${done_count}")
-  if [ -n "${t_old}" ]; then
-    total_s=$((t_old + t_new))
-    parts="old ${t_old}s + new ${t_new}s"
-  else
-    total_s=${t_new}
-    parts="old baseline + new ${t_new}s"
-  fi
+  total_s=$((t_old + t_new))
+  parts="old ${t_old}s + new ${t_new}s"
   printf '[queue w%d %-5s %*d/%d] %s %s in %ds (%s)\n' \
     "${worker_id}" "${lane}" "${width}" "${finished}" "${total}" \
     "${name}" "${verdict}" "${total_s}" "${parts}" >&2
@@ -413,10 +406,10 @@ worker() {
         (process_claim "${worker_id}" "${lane}" "${CLAIM_NO}" "${CLAIM_LINE}") ||
           rc=$?
         if (( rc != 0 )); then
-          local fname ftarball fweight fskip
-          IFS=$'\t' read -r fname ftarball _ fweight fskip _ <<< "${CLAIM_LINE}"
+          local fname ftarball fweight
+          IFS=$'\t' read -r fname ftarball _ fweight _ <<< "${CLAIM_LINE}"
           log "[queue w${worker_id} ${lane}] ${fname}: worker error (exit ${rc}); writing the fallback line"
-          write_fallback_line "${fname}" "${ftarball}" "${fweight}" "${fskip:-0}" \
+          write_fallback_line "${fname}" "${ftarball}" "${fweight}" \
             '' '' "driver error: worker failed unexpectedly (exit ${rc})"
           printf '.' >> "${done_count}"
         fi
@@ -456,9 +449,9 @@ while IFS=$'\t' read -r _ _ _ line_no cname; do
   if [ -z "${cname}" ]; then continue; fi
   if ! grep -qxF -- "${cname}" <<< "${manifest_names}"; then
     cline=${queue_lines[line_no - 1]}
-    IFS=$'\t' read -r sname starball _ sweight sskip _ <<< "${cline}"
+    IFS=$'\t' read -r sname starball _ sweight _ <<< "${cline}"
     log "[queue] ${cname}: claimed (line ${line_no}) but never reported; writing the fallback line"
-    write_fallback_line "${sname}" "${starball}" "${sweight}" "${sskip:-0}" '' '' \
+    write_fallback_line "${sname}" "${starball}" "${sweight}" '' '' \
       'driver error: worker exited before reporting this package'
   fi
 done < "${claimed_log}"

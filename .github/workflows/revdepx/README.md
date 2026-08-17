@@ -135,8 +135,8 @@ carry over unchanged (`compare.R`).
 The pair engine runs two such containers side by side
 (`../revdep3/check-pair.sh`);
 the queue engine runs them back to back per package,
-several packages at once (`../revdep4/queue.sh`),
-and skips the old half where the plan certified a baseline.
+several packages at once (`../revdep4/queue.sh`).
+Both halves are always fresh checks, in both engines.
 
 ## Dropped from revdep2, deliberately
 

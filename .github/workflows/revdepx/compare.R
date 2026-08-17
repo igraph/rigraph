@@ -295,84 +295,51 @@ check_failure <- function(name, phase, result, progress = "") {
 # Two parsed halves into one verdict: the tail of revdep2's per-package flow,
 # as a plain function.
 #
-# `old` is the parsed old-half result, or the string "baseline" to stand the
-# donor run's parsed old result in for a fresh check (skip_old mode; the queue
-# engine only). Returns the manifest-field updates -- result, status,
-# status_old, status_new, new_issues, t_old, t_new, old_checked_at, message,
-# baseline_agrees -- whichever of them this package's comparison decided.
+# Both halves are always fresh checks. Where the plan certified a stored old
+# result as comparable (`baseline_planned`), it is read back purely as a
+# *second opinion*: `baseline_agrees` records whether the fresh old check
+# reproduced it, and a disagreement is printed as drift. It never substitutes
+# for the check itself -- revdep2 tried that once, and 76 of run
+# 31879790285's 78 `newly_broken` verdicts were false; the identical
+# container platform would make substitution far safer now, but a fresh old
+# is the only result whose provenance this run fully controls, so the stored
+# one is kept in the advisory seat. Returns the manifest-field updates --
+# result, status, status_old, status_new, new_issues, t_old, t_new,
+# old_checked_at, message, baseline_agrees -- whichever of them this
+# package's comparison decided.
 compare_halves <- function(
   name,
   old,
   new,
   pkgs_dir,
   baseline_dir = NULL,
-  baseline_planned = FALSE,
-  baseline_checked_at = NULL
+  baseline_planned = FALSE
 ) {
   updates <- list()
 
-  if (identical(old, "baseline")) {
-    # The old half from the baseline instead of a fresh check.
-    #
-    # revdep2 abandoned exactly this: 76 of run 31879790285's 78
-    # `newly_broken` verdicts were false because the baseline had been
-    # produced on another machine, against another CRAN snapshot and another
-    # dependency tree, and the baseline was demoted to a drift check. It is
-    # sound again here because both eras come out of the identical container
-    # image -- the plan refuses baselines whose `base_image` or dependency
-    # fingerprint differ from this run's, so same R, same platform, same
-    # resolved tree, same in-container paths -- and through the same parser
-    # into the same rds shape. Only the queue engine asks for it: its halves
-    # run sequentially, so a skipped old half is real wall clock saved, where
-    # the pair engine's concurrent old half was free.
-    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
-    old <- tryCatch(readRDS(rds), error = function(e) NULL)
-    if (is.null(old)) {
-      # The queue only marks skip_old when the file exists, so this is a
-      # corrupt or half-written rds -- one package's problem, said plainly.
-      return(list(
-        result = "error",
-        status_new = counts(new),
-        t_new = attr(new, "duration"),
-        message = sprintf(
-          "the baseline old result could not be read (%s)",
-          rds
-        )
-      ))
-    }
-    # Re-saved under the usual name so the artifact keeps its shape:
-    # collect.R reads `old.rds` for the reports and gathers it into the next
-    # baseline, and neither needs to know this one was inherited rather than
-    # fresh.
-    saveRDS(old, file.path(pkg_out(pkgs_dir, name), "old.rds"))
-    updates$status_old <- counts(old)
-    # `t_old` stays null -- no old check ran, so no seconds were spent on one
-    # -- and the checked-at stamp is the baseline's own, so the age of the
-    # reused result stays visible downstream.
-    updates$old_checked_at <- baseline_checked_at
-  } else {
-    saveRDS(old, file.path(pkg_out(pkgs_dir, name), "old.rds"))
-    updates$status_old <- counts(old)
-    updates$t_old <- attr(old, "duration")
-    updates$old_checked_at <- now_utc()
+  saveRDS(old, file.path(pkg_out(pkgs_dir, name), "old.rds"))
+  updates$status_old <- counts(old)
+  updates$t_old <- attr(old, "duration")
+  updates$old_checked_at <- now_utc()
 
-    # The baseline as a second opinion, not a substitute: if it disagrees
-    # with what the old check just produced, that is drift worth printing
-    # rather than a comparison worth trusting.
-    if (isTRUE(baseline_planned) && !is.null(baseline_dir)) {
-      rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
-      baseline <- tryCatch(readRDS(rds), error = function(e) NULL)
-      if (!is.null(baseline)) {
-        agrees <- identical(counts(baseline), counts(old))
-        updates$baseline_agrees <- agrees
-        if (!agrees) {
-          inform(sprintf(
-            "%s: the baseline said %s, the old check now says %s",
-            name,
-            counts(baseline),
-            counts(old)
-          ))
-        }
+  # The second opinion: if the stored result disagrees with what the old
+  # check just produced under identical conditions -- same base image, same
+  # dependency fingerprint, or the plan would not have offered it -- that is
+  # drift worth recording and printing, wherever it comes from (a flaky test,
+  # a moved system library, this harness).
+  if (isTRUE(baseline_planned) && !is.null(baseline_dir)) {
+    rds <- file.path(baseline_dir, "old-rds", paste0(name, ".rds"))
+    baseline <- tryCatch(readRDS(rds), error = function(e) NULL)
+    if (!is.null(baseline)) {
+      agrees <- identical(counts(baseline), counts(old))
+      updates$baseline_agrees <- agrees
+      if (!agrees) {
+        inform(sprintf(
+          "%s: the baseline said %s, the old check now says %s",
+          name,
+          counts(baseline),
+          counts(old)
+        ))
       }
     }
   }

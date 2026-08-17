@@ -20,21 +20,19 @@
 # *different* packages from each other -- stronger than revdep2, which only
 # ever separated the two halves' ports.
 #
-# Sequential halves change two economics. Per-half durations become real
-# measurements (revdep2 could only record the pair's wall clock), and a
-# reusable baseline finally buys minutes: where the plan finds a valid
-# old-version result from an earlier run -- of this workflow or of revdep3
-# -- the old half is skipped outright and the new half is compared against
-# the stored result. That comparison is sound here in a way it was not for
-# revdep2 (which retired it after 8.4% false newly-broken): both eras now
-# run in the same pinned container image and are parsed by the same code.
+# Sequential halves make per-half durations real measurements -- revdep2
+# could only ever record the pair's shared wall clock. Both halves always
+# run fresh: where the plan finds a valid old-version result from an earlier
+# run -- of this workflow or of revdep3 -- it rides along as a *second
+# opinion* (`baseline_agrees` records whether the fresh old check reproduced
+# it, and disagreement is reported as drift), never as a substitute for the
+# check itself.
 #
 # The jobs:
 #
 #   plan      enumerates the revdeps, weighs them (measured timings, else
-#             CRAN's times scaled; sequential halves priced at two checks,
-#             baseline-covered ones at one), deals cost-balanced shards
-#             sized by the worker count.
+#             CRAN's times scaled; sequential halves priced at two checks),
+#             deals cost-balanced shards sized by the worker count.
 #   base      builds (or finds, by content-derived tag) the check platform:
 #             rocker/r-ver at the resolved R version (r-oldrel by default --
 #             a fixed target) plus qpdf, ghostscript, pandoc, TeX and pak.
@@ -67,8 +65,9 @@
 #   revdepx-report          the merged report -- fetch with
 #                           `gh run download <run-id> --name revdepx-report`
 #                           or ./.github/workflows/revdepx/fetch.sh <run-id>
-#   revdepx-baseline        old-version results, reused by later runs of
-#                           either workflow while the revdep's version, our
+#   revdepx-baseline        old-version results, read back by later runs of
+#                           either workflow as a second opinion beside their
+#                           fresh old checks, while the revdep's version, our
 #                           CRAN version, the container R, the base image and
 #                           the resolved dependency versions all still match
 #   revdepx-timings         what the checks and shards actually cost; the
@@ -131,7 +130,7 @@ on:
         type: string
         default: ""
       refresh-baseline:
-        description: "Re-check the CRAN version even where a baseline is reusable"
+        description: "Offer no stored old results as second opinions (the old half always runs fresh either way)"
         type: boolean
         default: false
       baseline-max-age-days:

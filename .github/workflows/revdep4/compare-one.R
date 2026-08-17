@@ -27,11 +27,8 @@
 #   --baseline-dir  baseline artifact directory; "" or absent = no baseline
 #   --plan          plan.json, for the package's metadata (default: plan.json)
 #   --shard         shard index (default: 0)
-#   --skip-old      "1" = the old half was not run; the baseline's old.rds
-#                   stands in for it
 #   --timeout       per-half timeout in seconds, for the timeout messages
-#   --t-old         old half's wall seconds as queue.sh measured them; ""
-#                   when the half was skipped
+#   --t-old         old half's wall seconds as queue.sh measured them
 #   --t-new         new half's wall seconds
 #   --cran-version  what the prepare phase installed as the old igraph
 #   --dev-version   ... and as the new one
@@ -78,7 +75,6 @@ shard_index <- as.integer(num_or_na(opt$shard))
 if (is.na(shard_index)) {
   shard_index <- 0L
 }
-skip_old <- identical(opt[["skip-old"]], "1")
 t_old <- num_or_na(opt[["t-old"]])
 t_new <- num_or_na(opt[["t-new"]])
 timeout_sec <- num_or_na(opt$timeout)
@@ -160,21 +156,13 @@ apply_updates <- function(entry, updates) {
   entry
 }
 
-baseline_checked_at <- NA
-
 finish <- function(entry) {
   # Queue semantics for the time fields, whatever the updates said: t_old and
   # t_new are the true per-half wall seconds queue.sh measured around each
   # check-half.sh call. The halves run one after the other here, unlike the
-  # pair engine, whose halves share one wall clock and one number. A skipped
-  # old half cost nothing, and its stamp is the baseline's, not this run's:
-  # that is when the result it contributes was actually produced.
-  entry$t_old <- if (skip_old) NA else t_old
+  # pair engine, whose halves share one wall clock and one number.
+  entry$t_old <- t_old
   entry$t_new <- t_new
-  if (skip_old) {
-    entry$baseline_planned <- TRUE
-    entry$old_checked_at <- baseline_checked_at
-  }
   # One write per package, at the very end, under the manifest lock (inside
   # write_manifest_line): the line appears whole or not at all, and queue.sh
   # covers "not at all".
@@ -200,38 +188,15 @@ work_dir <- req("workdir")
 
 # read_side() (compare.R) parses a half back from its container's output:
 # an rcmdcheck object, or an error condition, with the duration/timed_out/
-# last_step attributes attached. In skip_old mode there is no old directory
-# to read -- compare_halves() loads the baseline's parsed result itself when
-# handed the "baseline" sentinel.
+# last_step attributes attached. Both halves always ran -- a stored old
+# result is only ever a second opinion, applied inside compare_halves().
 new <- read_side(work_dir, "new", name, timeout_sec, t_new)
-old <- if (skip_old) {
-  "baseline"
-} else {
-  read_side(work_dir, "old", name, timeout_sec, t_old)
-}
-
-# The reused result's own date, for the manifest and compare_halves(): the
-# age of what stood in for the old half must stay visible downstream.
-if (skip_old && nzchar(baseline_dir)) {
-  rows <- tryCatch(
-    read_json(file.path(baseline_dir, "baseline.json")),
-    error = function(e) NULL
-  )
-  for (row in rows) {
-    if (identical(row$package, name)) {
-      baseline_checked_at <- row$checked_at %||% NA
-    }
-  }
-}
+old <- read_side(work_dir, "old", name, timeout_sec, t_old)
 
 # A half that produced a result is kept even when its partner did not --
-# the same dance as the pair engine, through the same functions. With the
-# old half skipped, a new-side failure is new's alone: no old check ran, so
-# there is nothing to salvage, and the baseline stays where it is (this
-# package then re-enters the next run without a baseline old.rds of its own,
-# which re-checks its old half fresh -- the conservative direction).
+# the same dance as the pair engine, through the same functions.
 if (inherits(new, "error")) {
-  if (!skip_old && !inherits(old, "error")) {
+  if (!inherits(old, "error")) {
     entry <- apply_updates(
       entry,
       keep_side(work_dir, pkgs_dir, name, "old", old)
@@ -240,7 +205,7 @@ if (inherits(new, "error")) {
   entry <- apply_updates(entry, check_failure(name, "new", new))
   finish(entry)
 }
-if (!skip_old && inherits(old, "error")) {
+if (inherits(old, "error")) {
   entry <- apply_updates(
     entry,
     keep_side(work_dir, pkgs_dir, name, "new", new)
@@ -252,11 +217,10 @@ if (!skip_old && inherits(old, "error")) {
 # ------------------------------------------------------------- comparison ---
 
 # compare.R owns everything from here to the verdict: the rds saves, the
-# baseline drift check (when a baseline was offered but not reusable enough
-# to skip the old half), the skip_old substitution with its unreadable-rds
-# guard, compare_checks(), the both-halves-depfail guard, classify_status().
-# One code path for both engines is the point of the extraction: the two
-# cannot drift in how they read a check.
+# second-opinion drift check against the stored old result the plan offered,
+# compare_checks(), the both-halves-depfail guard, classify_status(). One
+# code path for both engines is the point of the extraction: the two cannot
+# drift in how they read a check.
 entry <- apply_updates(
   entry,
   compare_halves(
@@ -265,22 +229,18 @@ entry <- apply_updates(
     new,
     pkgs_dir = pkgs_dir,
     baseline_dir = if (nzchar(baseline_dir)) baseline_dir else NULL,
-    baseline_planned = isTRUE(entry$baseline_planned),
-    baseline_checked_at = baseline_checked_at
+    baseline_planned = isTRUE(entry$baseline_planned)
   )
 )
 
 inform(sprintf(
-  "%s: %s (old %s, new %s, %s)",
+  "%s: %s (old %s, new %s, old %ds + new %ds)",
   name,
   entry$result,
   entry$status_old,
   entry$status_new,
-  if (skip_old) {
-    sprintf("old baseline + new %ds", round(t_new))
-  } else {
-    sprintf("old %ds + new %ds", round(t_old), round(t_new))
-  }
+  round(t_old),
+  round(t_new)
 ))
 
 # -------------------------------------------------------------- artifacts ---
@@ -302,24 +262,6 @@ tryCatch(
         paste0(name, ".Rcheck"),
         "00check.log"
       )
-      if (skip_old) {
-        # No old check ran this time, but the baseline's parsed result
-        # carries the full log text it was parsed from, so the diff exists
-        # in skip mode too. Written into the workdir, which is cleaned up
-        # below either way.
-        baseline_obj <- tryCatch(
-          readRDS(file.path(baseline_dir, "old-rds", paste0(name, ".rds"))),
-          error = function(e) NULL
-        )
-        if (
-          !is.null(baseline_obj) &&
-            is.character(baseline_obj$stdout) &&
-            length(baseline_obj$stdout) > 0
-        ) {
-          old_log <- file.path(work_dir, "baseline-00check.log")
-          writeLines(baseline_obj$stdout, old_log)
-        }
-      }
       new_log <- file.path(new_rcheck, "00check.log")
       if (file.exists(old_log) && file.exists(new_log)) {
         diff <- check_diff(name, old_log, new_log, work_dir)

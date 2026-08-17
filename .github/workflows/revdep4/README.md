@@ -56,7 +56,7 @@ so the log diff no longer needs path neutralisation to be honest.
 ## The queue
 
 `shard.R` writes one line per runnable package —
-name, tarball, timeout, weight, skip-old flag —
+name, tarball, timeout, weight —
 sorted heaviest first, and hands the file to `queue.sh`.
 The list is consumed from both ends:
 
@@ -113,36 +113,34 @@ Dependency *count* enters only the depfail screen
 (a package whose strong closure is incomplete is never queued),
 and dealing affinity is moot under a shared image.
 For shard sizing, the plan prices a queue package
-at both halves' seconds — twice the per-half estimate —
-dropping back to one when the old half will be skipped.
+at both halves' seconds — twice the per-half estimate.
 
-## Baseline reuse: the old half actually skipped
+## The stored old result: always a second opinion, never a substitute
 
-Under the pair engine the old check is free —
-it rides along on the same wall clock —
-so `revdep3` always runs both halves
-and demotes the baseline to a drift check,
-exactly as `revdep2` did.
-Sequentially, the old half costs real time again,
-so this engine skips it when the plan says the baseline is reusable:
-`skip_old=1` in the queue line,
-the baseline's parsed `old.rds` stands in for the old side,
-and `old_checked_at` on the manifest line is the baseline's stamp,
-with `t_old` null.
+Both halves always run fresh, in this engine as in `revdep3`.
+Sequential halves would make skipping the old check tempting —
+unlike the pair engine's free concurrent old half,
+it costs real wall clock here —
+and the pinned container platform would even make the substitution
+far safer than when `revdep2` tried and abandoned it
+(76 of one run's 78 `newly_broken` verdicts were false,
+compared across different machines, paths and CRAN snapshots).
+The temptation is declined on purpose:
+a fresh old check is the only result
+whose provenance this run fully controls.
 
-`revdep2` tried cross-run reuse and abandoned it —
-76 of one run's 78 `newly_broken` verdicts were false —
-because it compared across different machines,
-different library paths and different CRAN snapshots.
-That comparison is sound *now* because the moving parts are pinned:
-the plan only offers a baseline whose `base_image` tag
-and dependency fingerprint match this run's,
-so both eras checked inside the same image
-(same R, same library, same paths),
-and both sides come out of the same parser on the same host.
-What is left to differ is the package under test, which is the point.
+What the stored result does instead is stand *beside* the fresh one.
+Where the plan certifies an earlier run's old result as comparable —
+same revdep version, our CRAN version, container R series,
+`base_image` tag and dependency fingerprint, within the age cap —
+`compare-one.R` records whether the fresh old check reproduced it
+(`baseline_agrees` on the manifest line)
+and prints any disagreement as drift.
+A disagreement under pinned conditions is a signal worth reading:
+a flaky test, a moved system library, or this harness getting it wrong.
 Old `revdep2` baselines lack the `base_image` field
-and are never reused — a deliberate firewall.
+and are never offered — a deliberate firewall,
+since their checks ran on a different platform entirely.
 
 ## Workers, memory, deadline
 
