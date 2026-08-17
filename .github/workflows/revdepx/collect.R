@@ -603,7 +603,19 @@ not_ok <- sum(results_tbl != "ok")
 # it. So the run says out loud whether it compared anything at all, and the
 # workflow gates the commit on that; the artifact is uploaded either way, so
 # nothing is hidden, only the destructive step is skipped.
-compared <- tally("ok") + tally("newly_broken")
+#
+# Only *this run's* comparisons count. A retry whose shards all died still
+# carries the donor run's good results (`carried = TRUE`) -- that is the
+# retry contract -- but they are the donor's learning, not this run's, and a
+# gate they could pass would let the exact run this gate exists for (learnt
+# nothing, every fresh package `missing`) overwrite the record after all.
+compared <- sum(vapply(
+  entries,
+  function(e) {
+    !isTRUE(e$carried) && (e$result %in% c("ok", "newly_broken"))
+  },
+  logical(1)
+))
 set_output("compared", compared)
 if (compared == 0) {
   inform(

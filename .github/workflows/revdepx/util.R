@@ -1218,10 +1218,28 @@ ensure_check_sysreqs <- function(packages, label = "") {
   # library, and these packages are not in it. Failure is reported and not
   # fatal -- the check will fail either way, and it will say why more clearly
   # than this can.
+  #
+  # `update` first, always: the base image deletes /var/lib/apt/lists after
+  # its own installs (as images do), and pak only refreshes them when it
+  # installs a sysreq of its own in the same container. Without this, every
+  # install below dies with "Unable to locate package" -- warned, non-fatal,
+  # and exactly the silent gap this function exists to close.
   sudo <- if (identical(Sys.info()[["effective_user"]], "root")) {
     character()
   } else {
     "sudo"
+  }
+  update_status <- suppressWarnings(system2(
+    if (length(sudo)) "sudo" else "apt-get",
+    c(
+      if (length(sudo)) "apt-get",
+      "-o",
+      "DPkg::Lock::Timeout=300",
+      "update"
+    )
+  ))
+  if (!identical(update_status, 0L)) {
+    inform(prefix, "apt-get update exited ", update_status, "; trying anyway")
   }
   status <- suppressWarnings(system2(
     if (length(sudo)) "sudo" else "apt-get",

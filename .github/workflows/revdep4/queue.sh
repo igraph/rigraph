@@ -87,6 +87,15 @@ new_lib=$4
 manifest=$5
 deadline=$6
 
+# The claim protocol is flock or nothing: without it the cursor updates race
+# and two workers can check the same package. CI runners always have it; a
+# laptop that does not gets a loud refusal here instead of a silently
+# unserialized queue.
+if ! command -v flock > /dev/null 2>&1; then
+  echo "queue.sh: flock is not available; the claim protocol cannot run safely" >&2
+  exit 2
+fi
+
 if [ ! -r "${queue_file}" ]; then
   echo "queue.sh: queue file not readable: ${queue_file}" >&2
   exit 2

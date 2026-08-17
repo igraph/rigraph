@@ -4,10 +4,16 @@
 # The base image is rocker/r-ver plus what `R CMD check --as-cran` needs and
 # an R distribution deliberately does not carry -- qpdf and ghostscript for
 # the PDF checks, pandoc for vignettes, enough of TeX Live to build manuals
-# and vignettes, tidy for HTML validation -- plus pak and jsonlite, so an
-# image build or an in-container install can start without bootstrapping
-# either. Everything downstream (the universe image, every check container)
-# stands on this.
+# and vignettes, tidy for HTML validation -- plus pak, jsonlite and callr, so
+# an image build or an in-container install can start without bootstrapping
+# any of them. callr (and the processx it brings) is not a convenience: it is
+# what puts a clock on the calls that have none of their own -- util.R's
+# run_with_timeout() degrades to an *unbounded* inline call without it, and
+# image.R's chunked installs, metadata probes and sysreqs surveys all run
+# inside this container. pak vendors its own private copies of both and
+# exports neither, which is why they are installed here in their own right
+# (the same lesson revdep2 learnt on the host). Everything downstream (the
+# universe image, every check container) stands on this.
 #
 # Usage:
 #   base-image.sh <r-version> <registry-image>   # ensure it exists, print ref
@@ -35,9 +41,11 @@
 # Environment:
 #   REVDEPX_PUSH=1      - push :<tag> and :latest-r-<version> after building
 #                         (only jobs with packages:write set this). A push
-#                         failure is a warning, not an error: the image
-#                         exists locally and callers on this runner can use
-#                         it; callers elsewhere find no manifest and rebuild.
+#                         failure under REVDEPX_PUSH=1 is a hard error: every
+#                         downstream job pulls this ref from the registry and
+#                         the base image has no artifact fallback, so failing
+#                         here is the one loud failure instead of four
+#                         confusing ones later.
 #   GITHUB_STEP_SUMMARY - appended to when set.
 #
 # Everything informational goes to stderr. The LAST line on stdout is the
@@ -99,8 +107,8 @@ RUN apt-get update \\
 RUN Rscript -e 'lines <- readLines("/etc/os-release"); \\
     codename <- sub("^VERSION_CODENAME=", "", grep("^VERSION_CODENAME=", lines, value = TRUE)[[1]]); \\
     options(repos = c(CRAN = sprintf("https://p3m.dev/cran/__linux__/%s/latest", codename))); \\
-    install.packages(c("pak", "jsonlite")); \\
-    stopifnot(requireNamespace("pak"), requireNamespace("jsonlite"))'
+    install.packages(c("pak", "jsonlite", "callr")); \\
+    stopifnot(requireNamespace("pak"), requireNamespace("jsonlite"), requireNamespace("callr"))'
 LABEL org.opencontainers.image.source=https://github.com/igraph/rigraph
 EOF
 
@@ -112,8 +120,15 @@ if [ "${REVDEPX_PUSH:-0}" = "1" ]; then
     echo "Pushed ${ref} and ${alias_ref}." >&2
     summary "Base image: built and pushed \`${ref}\`."
   else
-    echo "WARNING: pushing ${ref} failed; the image exists locally only." >&2
-    summary "Base image: built \`${ref}\` locally; the push FAILED."
+    # Loudly, unlike the universe image's push failure: the universe has an
+    # artifact fallback, the base does not -- build, universe and every
+    # shard's local fallback all pull this ref from the registry. Carrying on
+    # here would trade one clear failure at its cause for four confusing
+    # ones far from it, on a run that cannot succeed anyway.
+    echo "ERROR: pushing ${ref} failed, and everything downstream pulls it from the registry." >&2
+    echo "If GITHUB_TOKEN may not write packages here, allow it (or pre-push a base image by hand)." >&2
+    summary "Base image: built \`${ref}\` but the push FAILED; the run cannot proceed."
+    exit 1
   fi
 else
   echo "REVDEPX_PUSH is not 1; built ${ref} locally without pushing." >&2

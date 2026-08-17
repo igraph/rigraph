@@ -542,9 +542,13 @@ if (nzchar(part_input)) {
     )
   }
   part <- list(index = fields[[1]], of = fields[[2]])
-  mine <- order(-t_total)[
-    seq(part$index, length(packages), by = part$of)
-  ]
+  # Not `seq(index, n, by = of)`: seq() errors outright ("wrong sign in
+  # 'by'") when fewer packages remain than the part index -- `part: 4/4`
+  # over a 3-package explicit list must reach the empty-part plan_nothing()
+  # below, not die here.
+  positions <- seq_along(packages)
+  positions <- positions[positions %% part$of == part$index %% part$of]
+  mine <- order(-t_total)[positions]
   packages <- sort(packages[mine])
   t_total <- t_total[packages]
   known <- known[packages]
