@@ -73,3 +73,21 @@
       [2,] -210  590 -380
       [3,] -200 -380  580
 
+# degree(v = ) is deprecated but still works
+
+    Code
+      res_legacy <- degree(g, v = 1:3)
+    Condition
+      Warning:
+      The `v` argument of `degree()` is deprecated as of igraph 3.0.0.
+      i Please use the `vertices` argument instead.
+
+# degree() rejects `vertices` supplied both directly and as `v`
+
+    Code
+      degree(g, vertices = 1:3, v = 1:3)
+    Condition
+      Error in `degree()`:
+      ! Argument `vertices` of `degree()` was supplied more than once.
+      i It was also supplied via its legacy name `v`.
+

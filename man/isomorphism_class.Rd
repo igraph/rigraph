@@ -6,13 +6,15 @@
 \alias{graph.isoclass.subgraph}
 \title{Isomorphism class of a graph}
 \usage{
-isomorphism_class(graph, v)
+isomorphism_class(graph, vertices, v = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{v}{Optionally a vertex sequence. If not missing, then an induced
-subgraph of the input graph, consisting of this vertices, is used.}
+\item{vertices}{Optionally a vertex sequence. If not missing, then an
+induced subgraph of the input graph, consisting of this vertices, is used.}
+
+\item{v}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{vertices} instead.}
 }
 \value{
 An integer number.

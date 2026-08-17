@@ -27,7 +27,7 @@ is.directed <- function(graph) {
 delete.vertices <- function(graph, v) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "delete.vertices()", "delete_vertices()")
-  delete_vertices(graph = graph, v = v)
+  delete_vertices(graph = graph, vertices = v)
 } # nocov end
 
 #' Delete edges from a graph
@@ -273,7 +273,8 @@ delete_edges <- function(graph, edges) {
 #' Delete vertices from a graph
 #'
 #' @param graph The input graph.
-#' @param v The vertices to remove, a vertex sequence.
+#' @param vertices The vertices to remove, a vertex sequence.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @return The graph, with the vertices removed.
 #'
 #' @family functions for manipulating graph structure
@@ -289,10 +290,25 @@ delete_edges <- function(graph, edges) {
 #'   delete_vertices("B")
 #' g2
 #' V(g2)
-delete_vertices <- function(graph, v) {
+delete_vertices <- function(graph, vertices, v = deprecated()) {
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn delete_vertices} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "delete_vertices(v = )",
+      "delete_vertices(vertices = )"
+    )
+    vertices <- v
+  }
+
   delete_vertices_impl(
     graph = graph,
-    vertices = v
+    vertices = vertices
   )
 }
 
@@ -787,7 +803,8 @@ gorder <- vcount
 #' the adjacent vertices for multiple vertices at once.
 #'
 #' @param graph Input graph.
-#' @param v The vertices to query.
+#' @param vertices The vertices to query.
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams neighbors
 #' @inheritParams rlang::args_dots_empty
 #' @return A list of vertex sequences.
@@ -799,9 +816,10 @@ gorder <- vcount
 #' adjacent_vertices(g, c(1, 34))
 adjacent_vertices <- function(
   graph,
-  v,
+  vertices,
   ...,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: adjacent_vertices, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -830,17 +848,32 @@ adjacent_vertices <- function(
         "3.0.0",
         what = base::I("Calling `adjacent_vertices()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  adjacent_vertices(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    adjacent_vertices(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  adjacent_vertices(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    adjacent_vertices(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn adjacent_vertices} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "adjacent_vertices(v = )",
+      "adjacent_vertices(vertices = )"
+    )
+    vertices <- v
+  }
+
   ensure_igraph(graph)
 
-  vv <- as_igraph_vs(graph, v) - 1
+  vv <- as_igraph_vs(graph, vertices) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(Rx_igraph_finalizer))
@@ -865,7 +898,8 @@ adjacent_vertices <- function(
 #' queries multiple vertices at once.
 #'
 #' @param graph Input graph.
-#' @param v The vertices to query
+#' @param vertices The vertices to query
+#' @param v `r lifecycle::badge("deprecated")` Use `vertices` instead.
 #' @inheritParams neighbors
 #' @inheritParams rlang::args_dots_empty
 #' @return A list of edge sequences.
@@ -877,9 +911,10 @@ adjacent_vertices <- function(
 #' incident_edges(g, c(1, 34))
 incident_edges <- function(
   graph,
-  v,
+  vertices,
   ...,
-  mode = c("out", "in", "all", "total")
+  mode = c("out", "in", "all", "total"),
+  v = deprecated()
 ) {
   # BEGIN GENERATED ARG_HANDLE: incident_edges, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -908,17 +943,32 @@ incident_edges <- function(
         "3.0.0",
         what = base::I("Calling `incident_edges()` with positional or abbreviated arguments"),
         details = base::c(
-          i = base::paste0("Detected call:  incident_edges(", base::paste(base::c("graph", "v", .arg_names), collapse = ", "), ")"),
-          i = base::paste0("Use instead:    incident_edges(", base::paste(base::c("graph", "v", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
+          i = base::paste0("Detected call:  incident_edges(", base::paste(base::c("graph", "vertices", .arg_names), collapse = ", "), ")"),
+          i = base::paste0("Use instead:    incident_edges(", base::paste(base::c("graph", "vertices", base::paste0(.arg_names, " = ")), collapse = ", "), ")")
         )
       )
     }
   }
   # END GENERATED ARG_HANDLE
 
+  if (lifecycle::is_present(v)) {
+    if (!missing(vertices)) {
+      cli::cli_abort(c(
+        "Argument {.arg vertices} of {.fn incident_edges} was supplied more than once.",
+        i = "It was also supplied via its legacy name {.arg v}."
+      ))
+    }
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "incident_edges(v = )",
+      "incident_edges(vertices = )"
+    )
+    vertices <- v
+  }
+
   ensure_igraph(graph)
 
-  vv <- as_igraph_vs(graph, v) - 1
+  vv <- as_igraph_vs(graph, vertices) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(Rx_igraph_finalizer))

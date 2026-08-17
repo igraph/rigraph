@@ -86,9 +86,10 @@ migrations <- list(
     old = function(graph, nodes, weights) {},
     new = function(
       graph,
-      nodes = NULL,
+      vertices = NULL,
       ...,
-      weights = NULL
+      weights = NULL,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -127,11 +128,12 @@ migrations <- list(
     old = function(graph, v, mode, loops, normalized) {},
     new = function(
       graph,
-      v = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       loops = TRUE,
-      normalized = FALSE
+      normalized = FALSE,
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -152,7 +154,7 @@ migrations <- list(
     old = function(graph, v, to, mode, weights, algorithm) {},
     new = function(
       graph,
-      v = NULL,
+      vertices = NULL,
       to = NULL,
       ...,
       mode = c("all", "out", "in"),
@@ -164,7 +166,8 @@ migrations <- list(
         "bellman-ford",
         "johnson",
         "floyd-warshall"
-      )
+      ),
+      v = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -184,10 +187,11 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in"),
-      mindist = 0
+      mindist = 0,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -197,10 +201,11 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in"),
-      mindist = 0
+      mindist = 0,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -265,9 +270,10 @@ migrations <- list(
     old = function(graph, vids, impl) {},
     new = function(
       graph,
-      vids,
+      vertices,
       ...,
-      impl = c("auto", "copy_and_delete", "create_from_scratch")
+      impl = c("auto", "copy_and_delete", "create_from_scratch"),
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -286,11 +292,12 @@ migrations <- list(
     old = function(graph, vids, mode, neighbor.degree.mode, weights) {},
     new = function(
       graph,
-      vids = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in", "total"),
       neighbor.degree.mode = c("all", "out", "in", "total"),
-      weights = NULL
+      weights = NULL,
+      vids = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -300,10 +307,11 @@ migrations <- list(
     new = function(
       graph,
       order = 1,
-      nodes = NULL,
+      vertices = NULL,
       ...,
       mode = c("all", "out", "in"),
-      mindist = 0
+      mindist = 0,
+      nodes = deprecated()
     ) {},
     when = "3.0.0"
   ),
@@ -414,7 +422,7 @@ migrations <- list(
   ),
 
   transitivity = list(
-    old = function(graph, type, vids, weights, isolates) {},
+    old = function(graph, type, vids = vertices, weights, isolates) {},
     new = function(
       graph,
       type = c(
@@ -430,7 +438,7 @@ migrations <- list(
         "weighted"
       ),
       ...,
-      vids = NULL,
+      vertices = NULL,
       weights = NULL,
       isolates = c("NaN", "zero")
     ) {},

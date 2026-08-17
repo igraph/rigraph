@@ -9,7 +9,7 @@ transitivity(
   type = c("undirected", "global", "globalundirected", "localundirected", "local",
     "average", "localaverage", "localaverageundirected", "barrat", "weighted"),
   ...,
-  vids = NULL,
+  vertices = NULL,
   weights = NULL,
   isolates = c("NaN", "zero")
 )
@@ -26,7 +26,7 @@ In directed graphs, edge directions are ignored.
 }
 \item{"local"}{
 The local transitivity of an undirected graph.
-It is calculated for each vertex given in the \code{vids} argument.
+It is calculated for each vertex given in the \code{vertices} argument.
 The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
 and the triples centered on the vertex.
 In directed graphs, edge directions are ignored.
@@ -50,7 +50,7 @@ The same as \code{barrat}.
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{vids}{The vertex IDs for the local transitivity will be calculated.
+\item{vertices}{The vertex IDs for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is
 \code{NULL}, in this case all vertices are considered. It is slightly faster
 to supply \code{NULL} here than \code{V(graph)}.}
@@ -76,7 +76,7 @@ For \sQuote{\code{global}} a single number, or \code{NaN} if there
 are no connected triples in the graph.
 
 For \sQuote{\code{local}} a vector of transitivity scores, one for each
-vertex in \sQuote{\code{vids}}.
+vertex in \sQuote{\code{vertices}}.
 }
 \description{
 Transitivity measures the probability that the adjacent vertices of a vertex
@@ -120,8 +120,8 @@ transitivity(g2) # this is about 10/1000
 gw <- graph_from_literal(A - B:C:D:E, B - C:D, C - D)
 E(gw)$weight <- 1
 E(gw)[V(gw)[name == "A"] \%--\% V(gw)[name == "E"]]$weight <- 5
-transitivity(gw, vids = "A", type = "local")
-transitivity(gw, vids = "A", type = "weighted")
+transitivity(gw, vertices = "A", type = "local")
+transitivity(gw, vertices = "A", type = "weighted")
 
 # Weighted reduces to "local" if weights are the same
 gw2 <- sample_gnp(1000, 10 / 1000)

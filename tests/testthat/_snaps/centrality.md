@@ -87,3 +87,12 @@
       i Detected call: page_rank(graph, algo)
       i Use instead: page_rank(graph, algorithm = )
 
+# closeness(vids = ) is deprecated but still works
+
+    Code
+      res_legacy <- closeness(g, vids = 1:3)
+    Condition
+      Warning:
+      The `vids` argument of `closeness()` is deprecated as of igraph 3.0.0.
+      i Please use the `vertices` argument instead.
+
