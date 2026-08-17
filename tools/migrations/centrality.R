@@ -88,7 +88,7 @@ migrations <- list(
   page_rank = list(
     old = function(
       graph,
-      algo,
+      algo = algorithm,
       vids,
       directed,
       damping,
@@ -99,7 +99,7 @@ migrations <- list(
     new = function(
       graph,
       ...,
-      algo = c("prpack", "arpack"),
+      algorithm = c("prpack", "arpack"),
       vids = NULL,
       directed = TRUE,
       damping = 0.85,
