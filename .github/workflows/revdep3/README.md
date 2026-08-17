@@ -58,11 +58,10 @@ Two side effects are worth having on their own:
 - Wall clock per package is the slower half,
   not the sum — the pair is the faster engine
   for a full sweep with few reusable baselines.
-- Both halves always run,
-  so a reusable baseline saves nothing here;
-  it is carried as a drift check (`baseline_agrees`) only.
-  In revdep4's sequential engine
-  the same baseline skips half the package's cost.
+- Both halves always run fresh, here and in revdep4:
+  a stored old result from an earlier run
+  is a second opinion (`baseline_agrees`),
+  never a substitute for the old check.
 - Per-half timings remain inseparable
   (both are recorded as the pair's wall clock);
   revdep4 measures real ones.

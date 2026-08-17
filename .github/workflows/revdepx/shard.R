@@ -976,36 +976,36 @@ if (engine == "pair") {
   }
 
   # One line per runnable package: name, tarball, per-half timeout seconds,
-  # the plan's weight in minutes (queue.sh defers on it near the deadline),
-  # and the skip_old flag. `runnable` is already heaviest first -- the plan
-  # deals shard members that way and nothing above reorders them -- which is
-  # what queue.sh's two cursors rely on: one worker eats from the heavy end,
-  # the rest from the light end, so a giant cannot strand a tail of cheap
+  # and the plan's weight in minutes (queue.sh defers on it near the
+  # deadline). `runnable` is already heaviest first -- the plan deals shard
+  # members that way and nothing above reorders them -- which is what
+  # queue.sh's two cursors rely on: one worker eats from the heavy end, the
+  # rest from the light end, so a giant cannot strand a tail of cheap
   # packages behind it.
   #
-  # skip_old: the old half can be answered by the baseline when the plan says
-  # the donor result is comparable (same base image, same dependency
-  # fingerprint -- see compare.R for why that makes it sound again) and its
-  # rds actually arrived. Unlike the pair engine, whose concurrent old half
-  # is free, sequential halves make a skipped old check real wall clock
-  # saved.
-  skip_old <- vapply(
+  # Both halves always run fresh, in this engine as in the pair engine. A
+  # stored old result the plan certified as comparable is read back by
+  # compare-one.R purely as a second opinion (`baseline_agrees`) -- never as
+  # a substitute for the old check, however tempting the saved wall clock: a
+  # fresh old is the only result whose provenance this run controls, and the
+  # second opinion is exactly how a discrepancy in the stored one gets
+  # noticed rather than trusted.
+  second_opinions <- sum(vapply(
     runnable,
     function(name) {
       isTRUE(get(name, envir = state)$baseline_planned) &&
         file.exists(file.path(baseline_dir, "old-rds", paste0(name, ".rds")))
     },
     logical(1)
-  )
+  ))
   queue_file <- file.path(
     work,
     sprintf("queue-slice-%d.tsv", check_slice$index)
   )
   writeLines(
     vapply(
-      seq_along(runnable),
-      function(i) {
-        name <- runnable[[i]]
+      runnable,
+      function(name) {
         entry <- get(name, envir = state)
         paste(
           name,
@@ -1016,7 +1016,6 @@ if (engine == "pair") {
             scientific = FALSE,
             trim = TRUE
           ),
-          if (skip_old[[i]]) "1" else "0",
           sep = "\t"
         )
       },
@@ -1025,9 +1024,9 @@ if (engine == "pair") {
     queue_file
   )
   inform(sprintf(
-    "Queue: %d package(s), %d with a reusable baseline old half",
+    "Queue: %d package(s), %d with a stored old result as a second opinion",
     length(runnable),
-    sum(skip_old)
+    second_opinions
   ))
 
   queue_work <- file.path(work, "check")
@@ -1118,8 +1117,7 @@ if (engine == "pair") {
   # accumulated in-process. `check_seconds` sums true per-half seconds
   # (t_old + t_new) over the lines this slice produced, and `checks_started`
   # counts halves run -- one for each positive t -- where the pair engine
-  # counts pairs and pair wall clocks. A skipped old half contributes
-  # neither, which is the point of skipping it.
+  # counts pairs and pair wall clocks.
   ran <- lapply(
     intersect(runnable, names(by_package)),
     function(name) by_package[[name]]

@@ -2,8 +2,9 @@
 #
 # Enumerates the reverse dependencies of the package in the current directory,
 # weighs each one by what its check is expected to cost on these runners,
-# decides which CRAN-baseline results from an earlier run can be reused, and
-# partitions the packages into cost-balanced shards. One shard becomes one
+# decides which stored old-version results may stand beside this run's fresh
+# checks as second opinions, and partitions the packages into cost-balanced
+# shards. One shard becomes one
 # matrix leg of revdep3.yaml or revdep4.yaml -- the same plan serves both, and
 # the history it mines is shared: baselines, timings and reports of *either*
 # workflow feed the next run of either.
@@ -15,10 +16,14 @@
 #            container each; a package costs the wall clock of its slower
 #            half, and a shard works through its packages one at a time.
 #   queue  (revdep4) - the halves run sequentially, so a package costs both
-#            of them end to end -- unless a reusable baseline stands in for
-#            the old half, which is the one engine where a baseline buys
-#            minutes -- and REVDEPX_WORKERS packages run at once, so a
-#            shard's wall clock is its check load divided by the workers.
+#            of them end to end, and REVDEPX_WORKERS packages run at once,
+#            so a shard's wall clock is its check load divided by the
+#            workers.
+#
+# Both engines always check both halves fresh. A stored old result from an
+# earlier run (the baseline) rides along as a *second opinion* -- the shard
+# records whether the fresh old check reproduced it (`baseline_agrees`) --
+# and never substitutes for the check itself.
 #
 # The partitioning is greedy, in two phases (see revdep2/README.md for why
 # greedy beats an exact formulation here):
@@ -81,8 +86,8 @@
 #   REVDEPX_MAX_SHARDS      - matrix legs to emit at most (default: 250)
 #   REVDEPX_MAX_PARALLEL    - legs to run concurrently, and so the size of one
 #                             wave (default: 20)
-#   REVDEPX_REFRESH_BASELINE- if truthy, ignore reusable baselines and re-check
-#                             the CRAN version of everything
+#   REVDEPX_REFRESH_BASELINE- if truthy, offer no stored old results as second
+#                             opinions (the old half runs fresh either way)
 #   REVDEPX_BASELINE_MAX_AGE_DAYS - oldest baseline worth reusing (default: 30)
 #   REVDEPX_HISTORY_RUNS    - earlier runs the donor walk looks at at all
 #                             (default: 40)
@@ -688,19 +693,21 @@ if (refresh_baseline) {
   }
 }
 
-# Reuse an old-version verdict only when everything that shaped it is
-# unchanged: the revdep's version, the CRAN version of the package under test,
-# the R series, the base image the checks stood on, and the resolved versions
-# of the whole install closure -- plus an age cap as the backstop for what
-# metadata cannot see (the universe image accumulates deltas between full
-# rebuilds).
+# Offer a stored old-version verdict as a second opinion only when everything
+# that shaped it is unchanged: the revdep's version, the CRAN version of the
+# package under test, the R series, the base image the checks stood on, and
+# the resolved versions of the whole install closure -- plus an age cap as
+# the backstop for what metadata cannot see (the universe image accumulates
+# deltas between full rebuilds). The old half runs fresh regardless; a row
+# that fails these conditions is not wrong, it is merely not comparable, and
+# a drift verdict against an incomparable row would be noise.
 #
 # The base-image condition is also the firewall against revdep2-era baselines:
 # those rows were measured on the runner's own R and toolchain, carry no
 # `base_image`, and two parsers and two machines apart they produced 8.4%
-# false newly-broken when they stood in for the old half. Rows from either
-# revdepx workflow name the same tag when nothing changed -- which is exactly
-# when they are interchangeable.
+# false newly-broken back when they were allowed to stand in for the old
+# half. Rows from either revdepx workflow name the same tag when nothing
+# changed -- which is exactly when a disagreement means drift and not noise.
 baseline_verdict <- function(p) {
   e <- baseline_manifest[[p]]
   if (is.null(e)) {
@@ -737,9 +744,9 @@ if (has_run(baseline_run)) {
   inform(
     "Baseline: ",
     sum(reuse),
-    " reusable, ",
+    " with a second opinion, ",
     sum(!reuse),
-    " to check fresh",
+    " without",
     if (length(stale) > 0) {
       paste0(" (", paste(names(stale), stale, sep = ": ", collapse = ", "), ")")
     } else {
@@ -835,13 +842,13 @@ inform(
 #           two here would price every shard at twice its wall clock -- twice
 #           the shards, each paying its own setup, and packages deferred at
 #           the deadline that would have fit.
-#   queue - the halves run back to back, so the package costs both -- unless a
-#           reusable baseline stands in for the old half, which makes this the
-#           one engine where `refresh-baseline: false` buys real minutes. This
-#           is the `((!reuse) + 1) *` factor revdep2 retired when it stopped
-#           skipping halves, back for the engine that skips them again.
-# (`reuse` is already all-FALSE under `refresh-baseline`, so no extra guard.)
-halves <- if (engine == "queue") 2 - as.numeric(reuse) else 1
+#   queue - the halves run back to back, so the package always costs both.
+#           Both halves run fresh in every engine: a stored old result is a
+#           second opinion (`baseline_agrees`), never a substitute, so a
+#           baseline changes no weight. This is where revdep2's
+#           `((!reuse) + 1) *` factor would otherwise come back; it stays
+#           retired on purpose.
+halves <- if (engine == "queue") 2 else 1
 weight <- halves * check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
@@ -1346,7 +1353,7 @@ append_summary(c(
     "| Baseline | %s |",
     if (length(baseline_manifest) > 0) {
       sprintf(
-        "%s: %d reused, %d fresh",
+        "%s: %d with a second opinion, %d without",
         if (has_run(baseline_run)) {
           paste("run", run_link(baseline_run))
         } else {

@@ -59,8 +59,9 @@
 #   revdepx-report          the merged report -- fetch with
 #                           `gh run download <run-id> --name revdepx-report`
 #                           or ./.github/workflows/revdepx/fetch.sh <run-id>
-#   revdepx-baseline        old-version results, reused by later runs of
-#                           either workflow while the revdep's version, our
+#   revdepx-baseline        old-version results, read back by later runs of
+#                           either workflow as a second opinion beside their
+#                           fresh old checks, while the revdep's version, our
 #                           CRAN version, the container R, the base image and
 #                           the resolved dependency versions all still match
 #   revdepx-timings         what the checks and shards actually cost; the
@@ -119,7 +120,7 @@ on:
         type: string
         default: ""
       refresh-baseline:
-        description: "Re-check the CRAN version even where a baseline is reusable"
+        description: "Offer no stored old results as second opinions (the old half always runs fresh either way)"
         type: boolean
         default: false
       baseline-max-age-days:
