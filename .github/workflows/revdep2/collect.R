@@ -483,7 +483,7 @@ if (has_revdepcheck) {
   # protect, so it is written from the comparison like any other.
   keeps_committed <- function(entry, dir) {
     (isTRUE(entry$carried) ||
-      entry$result %in% c("missing", "deferred") ||
+      entry$result %in% c("missing", "deferred", "depmissing") ||
       still_broken(entry)) &&
       file.exists(file.path(out_dir, dir, paste0(entry$package, ".md")))
   }
@@ -618,13 +618,18 @@ counts_df <- data.frame(
     # by the clock says nothing about the package, and in the old half it says
     # nothing about our change either.
     "timed out, not checked",
-    "dependencies not installable", "shard error", "deferred",
+    "dependencies not installable",
+    # `R CMD check` refused to start, in both halves, because something the
+    # package needs is not installed. Its own row rather than a failure: the
+    # package is not broken, it is unknown.
+    "dependencies unavailable to R CMD check",
+    "shard error", "deferred",
     "no result from its shard"
   ),
   Packages = c(
     tally("ok"), tally("newly_broken"), tally("failed"),
     tally("timeout"),
-    tally("depfail"), tally("error"), tally("deferred"),
+    tally("depfail"), tally("depmissing"), tally("error"), tally("deferred"),
     tally("missing")
   )
 )
@@ -652,6 +657,7 @@ reason_of <- function(e) {
     e$result,
     deferred = "the shard hit its deadline before this package was checked",
     depfail = "dependencies could not be installed",
+    depmissing = "R CMD check stopped at `checking package dependencies` under both versions",
     missing = "its shard uploaded no results; the job did not finish",
     sprintf("no reason recorded (result `%s`)", e$result)
   )

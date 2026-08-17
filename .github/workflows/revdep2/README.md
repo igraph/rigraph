@@ -723,6 +723,7 @@ the report is about *results*, a retry is about *coverage*.
 | A revdep fails to *install* under both versions | `failed` — there is nothing to compare |
 | A check times out | `timeout` kills it at `max(floor, factor × its CRAN time)`; reported `timeout`, not `failed`, with the check step it died at |
 | A revdep's strong dependencies cannot install | `depfail`, check not attempted, named in the shard summary |
+| A revdep needs a package that is not on CRAN | both halves stop at `checking package dependencies ... ERROR` in seconds and agree, so the pair compares clean; reported `depmissing`, not `ok`, with the missing packages named |
 | A dependency fails the preflight | reported in the preflight summary and `depfail.json`; shards still try their own subset |
 | A pak install chunk fails | the chunk is reported and the rest still run; what is still missing is retried one package at a time |
 | A pak install chunk never returns | killed at `REVDEP2_INSTALL_TIMEOUT_MINUTES`, tree and all; the next chunk starts a fresh pak |

@@ -1598,6 +1598,62 @@ classify_status <- function(status, new_issues) {
   }
 }
 
+# Did `R CMD check` refuse to start because a package this one needs is not
+# installed?
+#
+# That stage is fatal: check reports the one error and stops, in two or three
+# seconds, having looked at nothing. When it happens to *both* halves -- and it
+# always does, since the two libraries differ only in igraph -- the pair
+# compares clean, `compare_checks()` returns `+`, and the verdict is `ok`.
+#
+# 55 of run 31930350338's 984 `ok` results were that: every one of them a
+# package whose Bioconductor dependencies are not on CRAN and so were never
+# installed. `SEMgraph` is the clearest -- `1E 0W 0N` on both sides in three
+# seconds, reported `ok`, while being genuinely broken by a dev change nobody
+# saw because the check never ran.
+#
+# The check log is the only place this is visible; the status is `+` like any
+# other agreeing pair.
+aborted_on_dependencies <- function(check) {
+  errors <- check$errors %||% character()
+  length(errors) > 0 &&
+    any(grepl("^checking package dependencies [.]{3} ERROR", errors))
+}
+
+# The packages the aborted check named, for the manifest message: the whole
+# point of the class is that a reader can see *what* was missing without
+# opening the artifact.
+missing_dependencies <- function(check) {
+  errors <- check$errors %||% character()
+  hit <- grep(
+    "^checking package dependencies [.]{3} ERROR",
+    errors,
+    value = TRUE
+  )
+  if (length(hit) == 0) {
+    return(character())
+  }
+  lines <- strsplit(hit[[1]], "\n", fixed = TRUE)[[1]]
+  # `Packages required but not available:` puts them on the next line, quoted;
+  # `Package required but not available: 'x'` puts one on the same line.
+  named <- grep("required but not available", lines)
+  if (length(named) == 0) {
+    return(character())
+  }
+  block <- paste(
+    lines[seq(named[[1]], min(named[[1]] + 1L, length(lines)))],
+    collapse = " "
+  )
+  unique(gsub(
+    "[‘’']",
+    "",
+    regmatches(
+      block,
+      gregexpr("[‘'][^’']+[’']", block)
+    )[[1]]
+  ))
+}
+
 # What a status that `classify_status()` can only call "failed" actually means,
 # in words. A reader of the summary has to tell "broken under the dev version"
 # apart from "broken everywhere" without opening the artifact, and the one word

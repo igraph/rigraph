@@ -1009,6 +1009,27 @@ check_package <- function(name, position) {
       t_new = attr(new, "duration"),
       message = "both checks ran, but their results could not be compared"
     )
+  } else if (aborted_on_dependencies(new) && aborted_on_dependencies(old)) {
+    # Neither half ran. `compare_checks()` still says `+` -- the two agree, and
+    # they agree on having done nothing -- so without this the package is
+    # reported `ok`. It is not ok, it is unknown, and `needs_recheck()` picks
+    # `depmissing` up so a retry with those repositories enabled re-checks it.
+    absent <- missing_dependencies(new)
+    update(
+      name,
+      result = "depmissing",
+      status = cmp$status,
+      status_new = counts(new),
+      t_new = attr(new, "duration"),
+      new_issues = 0L,
+      message = paste0(
+        "R CMD check stopped at `checking package dependencies` under both ",
+        "versions; nothing was checked",
+        if (length(absent) > 0) {
+          paste0(" (not installed: ", paste(absent, collapse = ", "), ")")
+        }
+      )
+    )
   } else {
     new_issues <- sum(cmp$cmp$change == 1)
     update(
@@ -1200,10 +1221,11 @@ append_summary(c(
   sprintf("### Shard %d", shard_index),
   "",
   sprintf(
-    "%d ok, %d newly broken, %d failed, %d timed out, %d depfail, %d error, %d deferred.",
+    "%d ok, %d newly broken, %d failed, %d timed out, %d depfail, %d depmissing, %d error, %d deferred.",
     sum(results == "ok"), sum(results == "newly_broken"), sum(results == "failed"),
     sum(results == "timeout"),
-    sum(results == "depfail"), sum(results == "error"), sum(results == "deferred")
+    sum(results == "depfail"), sum(results == "depmissing"),
+    sum(results == "error"), sum(results == "deferred")
   ),
   "",
   md_table(df)
