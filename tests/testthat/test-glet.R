@@ -82,21 +82,8 @@ test_that("Graphlet projection works", {
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# Shared fixture: the weighted overlapping-groups graph from the examples.
-# Its `weight` edge attribute has four distinct threshold levels.
-make_graphlet_graph <- function() {
-  D1 <- matrix(0, 5, 5)
-  D2 <- matrix(0, 5, 5)
-  D3 <- matrix(0, 5, 5)
-  D1[1:3, 1:3] <- 2
-  D2[3:5, 3:5] <- 3
-  D3[2:5, 2:5] <- 1
-  simplify(graph_from_adjacency_matrix(
-    D1 + D2 + D3,
-    mode = "undirected",
-    weighted = TRUE
-  ))
-}
+# The `make_graphlet_graph()` fixture used below lives in
+# helper-test-functions.R.
 
 test_that("graphlet_basis() covers weights", {
   g <- make_graphlet_graph()

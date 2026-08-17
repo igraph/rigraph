@@ -1248,11 +1248,11 @@ test_that("rev on detached vs, names", {
   }
 })
 
-# `unique_tests` (the input/expected pairs used below) lives in
+# `unique_tests()` (the input/expected pairs used below) lives in
 # helper-test-functions.R.
 
 test_that("unique on attached vs", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_tests(), function(d) {
     g <- make_ring(10)
     vg <- unique(V(g)[d[[1]]])
     vr <- V(g)[d[[2]]]
@@ -1261,7 +1261,7 @@ test_that("unique on attached vs", {
 })
 
 test_that("unique on detached vs", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_tests(), function(d) {
     g <- make_ring(10)
     vg <- V(g)[d[[1]]]
     vr <- V(g)[d[[2]]]
@@ -1273,7 +1273,7 @@ test_that("unique on detached vs", {
 })
 
 test_that("unique on attached vs, names", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_tests(), function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
     vg <- unique(V(g)[d[[1]]])
@@ -1283,7 +1283,7 @@ test_that("unique on attached vs, names", {
 })
 
 test_that("unique on detached vs, names", {
-  sapply(unique_tests, function(d) {
+  sapply(unique_tests(), function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
     vg <- V(g)[d[[1]]]
@@ -1405,17 +1405,8 @@ test_that("graph.attr.comb defaults to the graph.attr.comb igraph option", {
   expect_length(graph_attr_names(compose(g1, g2)), 0)
 })
 
-# A fresh already-simple graph with two edge attributes, one of which the
-# default combination list keeps and one of which it drops. Each caller needs
-# its own: the C core's property cache lives in the graph object, and merely
-# asking whether the graph is simple changes what simplifying it does -- see
-# the second test below.
-simple_graph_with_attrs <- function() {
-  g <- make_graph(c(1, 2, 2, 3), directed = FALSE)
-  E(g)$weight <- c(1, 2)
-  E(g)$foo <- c("a", "b")
-  g
-}
+# The `simple_graph_with_attrs()` fixture used below lives in
+# helper-test-functions.R.
 
 test_that("simplify() applies edge.attr.comb to an already-simple graph", {
   # `edge.attr.comb` does not only combine attributes across merged edges, it

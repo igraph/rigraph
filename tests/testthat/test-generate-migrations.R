@@ -2,19 +2,8 @@
 # The generator is plain base R and only exists in a source checkout
 # (tools/ is .Rbuildignore'd), so these tests are skipped in a built package.
 
-local_generator <- function(env = parent.frame()) {
-  generator <- testthat::test_path("..", "..", "tools", "generate-migrations.R")
-  skip_if_not(file.exists(generator), "tools/generate-migrations.R not found")
-  gen_env <- new.env()
-  sys.source(generator, envir = gen_env)
-  gen_env
-}
-
-write_registry <- function(dir, name, code) {
-  path <- file.path(dir, name)
-  writeLines(code, path)
-  path
-}
+# The `local_generator()` and `write_registry()` helpers used below live in
+# helper-test-functions.R.
 
 test_that("migration_registry_files() finds the legacy file and topic files", {
   gen <- local_generator()

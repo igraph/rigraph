@@ -141,13 +141,7 @@ test_that("print.igrapHRG() works", {
 
 # ---- ellipsis migration: argument coverage ----------------------------
 
-# A compact shared fixture: a tiny two-clique graph and one HRG fitted to it,
-# reused by the consensus_tree() and predict_edges() blocks below.
-# Fitting a real HRG is the awkward part of constructing valid inputs there.
-hrg_fixture <- function() {
-  g <- make_full_graph(4) + make_full_graph(4)
-  igraph_with_seed(1, list(graph = g, hrg = fit_hrg(g)))
-}
+# The `hrg_fixture()` fixture used below lives in helper-test-functions.R.
 
 test_that("fit_hrg() recovers a legacy positional argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
