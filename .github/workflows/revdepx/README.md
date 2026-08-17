@@ -53,7 +53,10 @@ from "an earlier run of this one":
   our CRAN version, the container R series,
   the base-image tag, the dependency fingerprint,
   and the date of the actual old check.
-  `plan.R` reuses a row only when all of them still match.
+  `plan.R` offers a row as a second opinion
+  only when all of them still match;
+  the old half runs fresh regardless,
+  and `baseline_agrees` records whether it reproduced the stored result.
   The base-image condition is also the firewall
   against revdep2-era baselines,
   which were measured on the runner's own toolchain
@@ -65,8 +68,7 @@ from "an earlier run of this one":
   for the queue engine it is the mean of two real halves.
   Either plan converts it to its own bill:
   the pair plan uses it as-is,
-  the queue plan doubles it
-  (and halves it back where a baseline covers the old half).
+  the queue plan doubles it.
   Shard-level rows (setup, install minutes) are engine-shaped,
   so `calibration()` takes them only from same-engine runs;
   the per-package pool is shared.
