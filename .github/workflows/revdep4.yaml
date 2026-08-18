@@ -83,7 +83,16 @@
 # turn the run red -- the summary and the report artifact are the
 # deliverable; only infrastructure failures fail jobs.
 
+# TEMPORARY (live test): GitHub only registers a workflow_dispatch workflow
+# once its file exists on the default branch, so a branch-only workflow
+# cannot be dispatched by API or UI. Until the PR merges, this push trigger
+# fires the run from the branch itself, with the dispatch inputs hardcoded
+# to the test parameters (most, depth 2) below and in `run-name`. Revert
+# this commit after the test run.
 on:
+  push:
+    branches:
+      - "claude/revdep-check-collision-cfavj8-seq"
   workflow_dispatch:
     inputs:
       ref:
@@ -150,7 +159,9 @@ name: revdep4
 
 # GitHub does not show a run the inputs it was dispatched with, so the ones
 # that decide how much work the run is go into the run's own title.
-run-name: "revdep4 ${{ inputs.packages && format('({0})', inputs.packages) || format('({0}, depth {1})', inputs.which || 'strong', inputs.depth || '1') }}${{ inputs['retry-run'] && format(', retry of {0}', inputs['retry-run']) || '' }}${{ inputs['dry-run'] && ', dry run' || '' }}"
+# TEMPORARY: hardcoded while the push trigger drives the test run -- a push
+# event has no inputs, and the expression's defaults would mislabel the run.
+run-name: "revdep4 (most, depth 2)"
 
 # Read-only by default; every job opts back into what it actually needs.
 permissions:
@@ -175,8 +186,10 @@ concurrency:
 env:
   REVDEPX_ENGINE: queue
   REVDEPX_PACKAGES: ${{ inputs.packages || '' }}
-  REVDEPX_WHICH: ${{ inputs.which || 'strong' }}
-  REVDEPX_DEPTH: ${{ inputs.depth || '1' }}
+  # TEMPORARY: hardcoded for the push-triggered live test run (a push event
+  # has no inputs); dispatch inputs take over again once this is reverted.
+  REVDEPX_WHICH: ${{ inputs.which || 'most' }}
+  REVDEPX_DEPTH: ${{ inputs.depth || '2' }}
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || 'oldrel' }}
