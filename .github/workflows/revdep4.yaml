@@ -83,16 +83,7 @@
 # turn the run red -- the summary and the report artifact are the
 # deliverable; only infrastructure failures fail jobs.
 
-# TEMPORARY (first live run): GitHub only registers a workflow_dispatch
-# workflow once its file exists on the default branch, so a branch-only
-# workflow cannot be dispatched by API or UI. Until the PR merges, this push
-# trigger -- the same device the old revdep.yaml uses -- fires the run from
-# the branch itself, with the dispatch inputs hardcoded below. Revert this
-# commit after the test run.
 on:
-  push:
-    branches:
-      - "claude/revdep-check-collision-cfavj8-seq"
   workflow_dispatch:
     inputs:
       ref:
@@ -184,10 +175,8 @@ concurrency:
 env:
   REVDEPX_ENGINE: queue
   REVDEPX_PACKAGES: ${{ inputs.packages || '' }}
-  # TEMPORARY: hardcoded for the push-triggered first live run (a push event
-  # has no inputs); dispatch inputs take over again once this is reverted.
-  REVDEPX_WHICH: ${{ inputs.which || 'most' }}
-  REVDEPX_DEPTH: ${{ inputs.depth || '2' }}
+  REVDEPX_WHICH: ${{ inputs.which || 'strong' }}
+  REVDEPX_DEPTH: ${{ inputs.depth || '1' }}
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || 'oldrel' }}
@@ -352,7 +341,7 @@ jobs:
         shell: bash
 
       - name: Log in to the container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -395,7 +384,7 @@ jobs:
           ref: ${{ inputs.ref || github.ref }}
 
       - name: Log in to the container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -466,6 +455,7 @@ jobs:
     outputs:
       image: ${{ steps.publish.outputs.image }}
       pushed: ${{ steps.publish.outputs.pushed }}
+      saved: ${{ steps.publish.outputs.saved }}
 
     permissions:
       contents: read
@@ -485,17 +475,21 @@ jobs:
           path: ${{ runner.temp }}/plan
 
       - name: Log in to the container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      # A universe image is gigabytes of layers, and /var/lib/docker sits on
-      # the runner's small root disk while the big one holds RUNNER_TEMP.
-      # Move the daemon before it writes anything large; drop the toolchains
-      # this job will never use for good measure.
-      - name: Move docker onto the big disk and make room
+      # These runners have ONE disk: there is no separate /mnt volume, and
+      # RUNNER_TEMP, /var/lib/docker and the checkout all share the root
+      # filesystem (run 32068290691's sampler shows / only). So this cannot
+      # move docker anywhere roomier -- what it does is make room (the
+      # preinstalled toolchains this job never uses are tens of gigabytes)
+      # and put the data-root under RUNNER_TEMP, so every heavy write of
+      # this job lands in one accounted place. The commit step below
+      # measures against that one disk before copying anything large.
+      - name: Make room for docker on the one disk
         run: |
           set -eu
           before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
@@ -568,6 +562,18 @@ jobs:
           fi
 
           mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out"
+
+          # Streamed from inside this step, on top of the file-writing
+          # sampler the earlier step backgrounded: that one keeps appending
+          # to its RESOURCE_LOG, but its stdout stops reaching the job log
+          # the moment its own step ends -- and when a runner dies, the
+          # streamed lines are all that survives (the artifact upload and
+          # the `always()` steps die with it).
+          RESOURCE_PHASE_FILE="${RUNNER_TEMP}/universe-out/phase" \
+            ./.github/workflows/revdepx/watch-resources.sh watch 120 "universe build" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+
           status=0
           docker run --name revdepx-universe-build \
             -v "${GITHUB_WORKSPACE}/.github/workflows/revdepx:/revdepx/scripts:ro" \
@@ -587,35 +593,94 @@ jobs:
           fi
         shell: bash
 
+      # `docker commit` writes a full copy of the container's rw layer -- the
+      # entire installed universe -- as a new image layer, on the same one
+      # disk everything else already occupies. Run 32068779192 died exactly
+      # there: the copy filled the disk mid-commit, the runner agent could no
+      # longer write, and the job was killed with its logs, artifacts and
+      # cache saves. So this step measures first and commits only when the
+      # copy provably fits, with margin; a skipped commit is not a failed
+      # run, it is the shards' local-build fallback -- slower, but alive,
+      # and the same path a failed universe job already takes.
       - name: Commit and push the universe image
         id: publish
         run: |
           set -eu
           universe=$(printf '%s' "${{ steps.build-universe.outputs.universe }}")
-          docker commit revdepx-universe-build "${universe}:run-${GITHUB_RUN_ID}"
-          docker tag "${universe}:run-${GITHUB_RUN_ID}" "${universe}:latest"
-          pushed=true
-          docker push "${universe}:run-${GITHUB_RUN_ID}" || pushed=false
+
+          upper=$(docker inspect \
+            --format '{{ .GraphDriver.Data.UpperDir }}' \
+            revdepx-universe-build 2> /dev/null || true)
+          delta_gb=""
+          if [ -n "${upper}" ] && sudo test -d "${upper}"; then
+            delta_gb=$(sudo du -s -BG "${upper}" 2> /dev/null | cut -f1 |
+              tr -dc '0-9' || true)
+          fi
+          # Unmeasurable (another storage driver, an inspect surprise) means
+          # proceed as before -- with the sampler below streaming, so a
+          # repeat of the death at least explains itself in the log.
+          delta_gb=${delta_gb:-0}
+          free_gb=$(df -BG --output=avail "${RUNNER_TEMP}" | tail -1 |
+            tr -dc '0-9')
+          echo "Universe delta: ${delta_gb}G to copy; ${free_gb}G free"
+
+          # Streamed from inside the step (see the build step for why).
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "committing the universe image" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+
+          committed=false
+          pushed=false
+          saved=false
+          if [ "${free_gb}" -ge "$((delta_gb + 8))" ]; then
+            if docker commit revdepx-universe-build "${universe}:run-${GITHUB_RUN_ID}"; then
+              committed=true
+              # The rw layer just became an image layer; dropping the
+              # container drops the original copy, so the disk peak subsides
+              # before the push wants scratch space.
+              docker rm revdepx-universe-build || true
+              docker tag "${universe}:run-${GITHUB_RUN_ID}" "${universe}:latest"
+              pushed=true
+              docker push "${universe}:run-${GITHUB_RUN_ID}" || pushed=false
+            fi
+          else
+            echo "::warning::Not committing the universe image: the delta is ${delta_gb}G and only ${free_gb}G is free. The shards will build shard-local libraries instead."
+          fi
+
           if [ "${pushed}" = true ]; then
             docker push "${universe}:latest" || true
             echo "image=${universe}:run-${GITHUB_RUN_ID}" >> "${GITHUB_OUTPUT}"
-            echo "pushed=true" >> "${GITHUB_OUTPUT}"
-          else
+          elif [ "${committed}" = true ]; then
             # No registry (permissions, outage): hand the image to the shards
-            # as an artifact instead. Slower, but the run stays alive.
-            echo "::warning::Pushing to ${universe} failed; publishing the image as an artifact instead"
-            mkdir -p "${RUNNER_TEMP}/universe-image"
-            docker save "${universe}:run-${GITHUB_RUN_ID}" | zstd -T0 -3 \
-              > "${RUNNER_TEMP}/universe-image/universe-image.tar.zst"
+            # as an artifact instead -- when the compressed save fits beside
+            # what is already on the disk. When not even that fits, the
+            # shards' local fallback carries the run.
+            free_gb=$(df -BG --output=avail "${RUNNER_TEMP}" | tail -1 |
+              tr -dc '0-9')
+            if [ "${free_gb}" -ge "$((delta_gb / 2 + 8))" ]; then
+              echo "::warning::Pushing to ${universe} failed; publishing the image as an artifact instead"
+              mkdir -p "${RUNNER_TEMP}/universe-image"
+              if docker save "${universe}:run-${GITHUB_RUN_ID}" | zstd -T0 -3 \
+                > "${RUNNER_TEMP}/universe-image/universe-image.tar.zst"; then
+                saved=true
+              else
+                rm -f "${RUNNER_TEMP}/universe-image/universe-image.tar.zst"
+              fi
+            else
+              echo "::warning::Pushing to ${universe} failed, and ${free_gb}G free is too little to save the ${delta_gb}G image as an artifact; the shards will build shard-local libraries instead"
+            fi
             echo "image=" >> "${GITHUB_OUTPUT}"
-            echo "pushed=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "image=" >> "${GITHUB_OUTPUT}"
           fi
-          docker rm revdepx-universe-build || true
+          echo "pushed=${pushed}" >> "${GITHUB_OUTPUT}"
+          echo "saved=${saved}" >> "${GITHUB_OUTPUT}"
+          docker rm revdepx-universe-build 2> /dev/null || true
         shell: bash
 
       - name: Upload the universe image artifact (registry fallback only)
         uses: actions/upload-artifact@v6
-        if: steps.publish.outputs.pushed == 'false'
+        if: steps.publish.outputs.saved == 'true'
         with:
           name: revdepx-universe-image
           path: ${{ runner.temp }}/universe-image
@@ -760,27 +825,28 @@ jobs:
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/baseline
 
-      # Only when the universe job could not push: the image travelled as an
-      # artifact instead, and shard-prep.sh docker-loads it.
+      # Only when the universe job could not push but could save: the image
+      # travelled as an artifact instead, and shard-prep.sh docker-loads it.
       - name: Download the universe image artifact
         uses: actions/download-artifact@v7
-        if: needs.universe.outputs.pushed == 'false'
+        if: needs.universe.outputs.saved == 'true'
         continue-on-error: true
         with:
           name: revdepx-universe-image
           path: ${{ runner.temp }}/universe-image
 
       - name: Log in to the container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      # The universe image unpacks into docker's data-root, which sits on the
-      # small root disk; the checks' work directories and tmp live under
-      # RUNNER_TEMP on the big one. Move the daemon before the pull.
-      - name: Move docker onto the big disk and make room
+      # One disk on these runners (no /mnt): free what the preinstalled
+      # toolchains hold before the universe image unpacks into the data-root,
+      # and put that data-root under RUNNER_TEMP beside the checks' work
+      # directories, so everything heavy is in one accounted place.
+      - name: Make room for docker on the one disk
         run: |
           set -eu
           sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
@@ -843,6 +909,13 @@ jobs:
           REVDEPX_BASE_IMAGE: ${{ needs.base.outputs.image }}
           PLAN: ${{ runner.temp }}/plan/plan.json
         run: |
+          # Streamed from inside the step: on the local-build fallback this
+          # is the shard's longest phase, and the streamed samples are what
+          # survives if the runner dies in it (the file-writing sampler's
+          # stdout stopped reaching the log when its own step ended).
+          ./.github/workflows/revdepx/watch-resources.sh watch 120 "shard ${SHARD} image prep" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
           ./.github/workflows/revdepx/shard-prep.sh \
             "${UNIVERSE_IMAGE}" \
             "${RUNNER_TEMP}/universe-image" \
