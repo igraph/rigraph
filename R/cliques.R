@@ -518,7 +518,7 @@ weighted_cliques <- function(
   # BEGIN GENERATED ARG_HANDLE: weighted_cliques, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma", "max"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "ma", "max"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn weighted_cliques}.")
     # Pre-3.0.0 signature: weighted_cliques(graph, vertex.weights, min.weight, max.weight, maximal)
     .old_signature <- function(vertex.weights, min.weight, max.weight, maximal, ...) {
@@ -811,7 +811,7 @@ clique_size_counts <- function(
   # BEGIN GENERATED ARG_HANDLE: clique_size_counts, do not edit, see tools/generate-migrations.R
   # fmt: skip
   if (...length() > 0L) {
-    .arg_ambiguous <- base::intersect(base::names(base::substitute(...())), base::c("m", "ma"))
+    .arg_ambiguous <- base::intersect(base::names(base::Filter(function(.x) !(base::is.symbol(.x) && !base::nzchar(base::as.character(.x))), base::as.list(base::substitute(...())))), base::c("m", "ma"))
     if (base::length(.arg_ambiguous) > 0L) cli::cli_abort("Argument {.arg {(.arg_ambiguous[[1L]])}} matches multiple arguments of {.fn clique_size_counts}.")
     # Pre-3.0.0 signature: clique_size_counts(graph, min, max, maximal)
     .old_signature <- function(min, max, maximal, ...) {
