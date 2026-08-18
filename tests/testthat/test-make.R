@@ -224,6 +224,79 @@ test_that("make_lattice prints a warning for fractional length)", {
   expect_identical_graphs(lattice_rounded, lattice_integer)
 })
 
+test_that("make_tri_lattice works", {
+  # Triangular shape: each side of the triangle contains 3 vertices
+  tri <- make_tri_lattice(3)
+  expect_vcount(tri, 6)
+  expect_ecount(tri, 9)
+  expect_false(is_directed(tri))
+  expect_equal(tri$name, "Triangular lattice")
+  expect_equal(tri$dimvector, 3)
+
+  # Quasi-rectangular shape
+  rect <- make_tri_lattice(c(3, 3))
+  expect_vcount(rect, 9)
+  expect_ecount(rect, 16)
+
+  # Hexagonal shape
+  hex <- make_tri_lattice(c(2, 2, 2))
+  expect_vcount(hex, 7)
+  expect_ecount(hex, 12)
+})
+
+test_that("make_tri_lattice creates directed and mutual edges", {
+  tri <- make_tri_lattice(c(2, 2))
+  tri_directed <- make_tri_lattice(c(2, 2), directed = TRUE)
+  tri_mutual <- make_tri_lattice(c(2, 2), directed = TRUE, mutual = TRUE)
+
+  expect_false(is_directed(tri))
+  expect_true(is_directed(tri_directed))
+  expect_ecount(tri_directed, ecount(tri))
+  expect_ecount(tri_mutual, 2 * ecount(tri))
+})
+
+test_that("make_tri_lattice prints as expected", {
+  expect_snapshot(make_tri_lattice(c(2, 2)))
+})
+
+test_that("make_tri_lattice rejects invalid arguments", {
+  expect_snapshot_igraph_error(make_tri_lattice(-1))
+  expect_snapshot_igraph_error(make_tri_lattice(c(2, 2, 2, 2)))
+  expect_snapshot_igraph_error(make_tri_lattice(c(2, 2), TRUE))
+})
+
+test_that("make_tri_lattice returns the null graph for zero dimensions", {
+  # A zero component in dims yields the null graph, mirroring the C behavior.
+  null_graph <- make_tri_lattice(0)
+  expect_vcount(null_graph, 0)
+  expect_ecount(null_graph, 0)
+})
+
+test_that("triangular_lattice_impl agrees with make_tri_lattice", {
+  # Call the generated impl directly with the full argument set.
+  impl <- triangular_lattice_impl(
+    dimvector = c(2, 3),
+    directed = TRUE,
+    mutual = TRUE
+  )
+  expect_vcount(impl, 6)
+  expect_ecount(impl, 18)
+  expect_true(is_directed(impl))
+  expect_equal(impl$name, "Triangular lattice")
+  expect_equal(impl$dimvector, c(2, 3))
+  expect_true(impl$mutual)
+
+  # The exported wrapper is a thin shim over the impl.
+  wrapper <- make_tri_lattice(c(2, 3), directed = TRUE, mutual = TRUE)
+  expect_identical_graphs(impl, wrapper)
+})
+
+test_that("tri_lattice constructor spec works with make_()", {
+  g1 <- make_tri_lattice(c(3, 3))
+  g2 <- make_(tri_lattice(c(3, 3)))
+  expect_identical_graphs(g1, g2)
+})
+
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
   graph_elist <- make_empty_graph(n = 10) + edges(1:10)
