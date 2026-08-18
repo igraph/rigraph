@@ -560,7 +560,7 @@ i.parse.plot.params <- function(graph, params) {
         if (length(v) == 1) {
           return(rep(v, length(range)))
         } else {
-          return(rep(v, length.out = max(range) + 1)[[range + 1]])
+          return(vctrs::vec_recycle(v, max(range) + 1)[[range + 1]])
         }
       }
     }

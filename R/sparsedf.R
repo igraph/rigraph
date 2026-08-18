@@ -75,7 +75,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     cli::cli_abort("The row index must be numeric.")
   }
   if (missing(i)) {
-    rep(x[[j]], length.out = attr(x, "NROW"))
+    vctrs::vec_recycle(x[[j]], attr(x, "NROW"))
   } else {
     if (length(x[[j]]) == 1) {
       rep(x[[j]], length(i))
@@ -103,7 +103,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     if (length(value) != length(i) && length(value) != 1) {
       cli::cli_abort("Replacement value has the wrong length.")
     }
-    column_values <- rep(x[[j]], length.out = attr(x, "NROW"))
+    column_values <- vctrs::vec_recycle(x[[j]], attr(x, "NROW"))
     column_values[i] <- value
     if (length(unique(column_values)) == 1) {
       column_values <- column_values[1]
