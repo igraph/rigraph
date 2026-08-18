@@ -119,7 +119,11 @@ if [ -z "${got}" ]; then
   plan_dir=$(cd "$(dirname "${plan}")" && pwd)
   plan_abs="${plan_dir}/$(basename "${plan}")"
   scratch="${RUNNER_TEMP:-${TMPDIR:-/tmp}}/revdepx-universe-fallback"
-  mkdir -p "${scratch}"
+  # The container's /tmp lives on the host, not in the rw layer: killed
+  # subprocesses leave their build trees in /tmp, and `docker commit` would
+  # otherwise copy that residue into the image.
+  scratch_tmp="${scratch}-tmp"
+  mkdir -p "${scratch}" "${scratch_tmp}"
   cidfile="${scratch}/cid"
   rm -f "${cidfile}"
 
@@ -151,6 +155,7 @@ if [ -z "${got}" ]; then
     -v "${script_dir}:/revdepx/scripts:ro" \
     -v "${plan_abs}:/revdepx/plan.json:ro" \
     -v "${scratch}:/revdepx/out" \
+    -v "${scratch_tmp}:/tmp" \
     -e PLAN=/revdepx/plan.json \
     -e OUT_DIR=/revdepx/out \
     -e PKG_SYSREQS=true \
