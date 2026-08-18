@@ -104,8 +104,19 @@ binary <- sort(
   list.files(pattern = sprintf("^%s_.*_R_.*[.]tar[.]gz$", package)),
   decreasing = TRUE
 )[[1]]
-file.rename(binary, file.path(binary_dir, binary))
-file.copy(tarball, file.path(out_dir, tarball))
+# Copy, not file.rename(): the working directory and OUT_DIR are two
+# different bind mounts here, rename(2) across mounts fails with EXDEV,
+# and file.rename() reports that as a return value nobody is forced to
+# read. Run 32068779192 shipped a two-file artifact -- meta.json naming a
+# binary that was never moved -- and every shard failed installing it.
+# file.copy() works across mounts and its result is checked.
+if (!isTRUE(file.copy(binary, file.path(binary_dir, binary)))) {
+  stop("Copying ", binary, " into ", binary_dir, " failed", call. = FALSE)
+}
+unlink(binary)
+if (!isTRUE(file.copy(tarball, file.path(out_dir, tarball)))) {
+  stop("Copying ", tarball, " into ", out_dir, " failed", call. = FALSE)
+}
 
 write_json(
   list(
