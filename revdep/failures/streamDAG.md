@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "streamDAG")` for more info
 ### Devel
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+Dependencies not installed: asbio, gWidgets2tcltk, tkrplot
 
 
 
@@ -19,7 +19,7 @@ Dependencies not installed: asbio, gWidgets2tcltk
 ### CRAN
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+Dependencies not installed: asbio, gWidgets2tcltk, tkrplot
 
 
 

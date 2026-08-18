@@ -1,0 +1,28 @@
+# eva3dm (1.20)
+
+* GitHub mirror: <https://github.com/cran/eva3dm>
+
+Run `revdepcheck::revdep_details(, "eva3dm")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+shard 30 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+### CRAN
+
+```
+shard 30 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```

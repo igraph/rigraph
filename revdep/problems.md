@@ -68,6 +68,31 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
      Execution halted
      ```
 
+# ashapesampler (1.0.0)
+
+* Email: <mailto:emily_winn-nunez@brown.edu>
+* GitHub mirror: <https://github.com/cran/ashapesampler>
+
+Run `revdepcheck::revdep_details(, "ashapesampler")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+       Running ‘testthat.R’
+     Running the tests in ‘tests/testthat.R’ failed.
+     Complete output:
+       > library(testthat)
+       > library(ashapesampler)
+       > 
+       > test_check("ashapesampler")
+       [1] "Acceptance Rate is 0.57"
+       [1] "Acceptance Rate is 0.989333333333333"
+       [1] "Acceptance Rate is 0.67"
+       [1] "Acceptance Rate is 1"
+       Killed
+     ```
+
 # bnstruct (1.0.15)
 
 * Email: <mailto:afranzin@ulb.ac.be>
@@ -329,7 +354,7 @@ Run `revdepcheck::revdep_details(, "cranly")` for more info
       1. ├─base::summary(package_network)
       2. └─cranly:::summary.cranly_network(package_network)
       3.   └─igraph::eigen_centrality(cranly_graph, scale = FALSE)
-      4.     └─lifecycle::deprecate_stop(...) at igraph/R/centrality.R:1493:7
+      4.     └─lifecycle::deprecate_stop(...)
       5.       └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -711,7 +736,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
       13.   └─tidygraph::map_bfs(...)
       14.     └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       15.       └─igraph::bfs(...)
-      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
+      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
       17.           └─lifecycle:::deprecate_stop0(msg)
       18.             └─rlang::cnd_signal(...)
      Execution halted
@@ -745,6 +770,14 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
      
      Error: Vignette re-building failed.
      Execution halted
+     ```
+
+## In both
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # glyrepr (0.14.0)
@@ -827,73 +860,6 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# lagdynamics (0.32)
-
-* GitHub: <https://github.com/mohsaqr/lagdynamics>
-* Email: <mailto:saqr@saqr.me>
-* GitHub mirror: <https://github.com/cran/lagdynamics>
-
-Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     Running examples in ‘lagdynamics-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > ### Name: lsa_to_tna
-     > ### Title: Convert an lsa Fit to a tna Network
-     > ### Aliases: lsa_to_tna lsa_to_tna.lsa lsa_to_tna.lsa_group
-     > 
-     > ### ** Examples
-     > 
-     > ## Don't show: 
-     > if (requireNamespace("tna", quietly = TRUE)) withAutoprint({ # examplesIf
-     + ## End(Don't show)
-     + fit <- lsa(engagement)
-     + net <- lsa_to_tna(fit, weights = "prob")
-     + tna::centralities(net)
-     + ## Don't show: 
-     + }) # examplesIf
-     > fit <- lsa(engagement)
-     > net <- lsa_to_tna(fit, weights = "prob")
-     > tna::centralities(net)
-     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
-       argument is missing, with no default
-     Calls: withAutoprint ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
-     Execution halted
-     ```
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-     
-     Error: processing vignette 'interop.Rmd' failed with diagnostics:
-     argument is missing, with no default
-     --- failed re-building ‘interop.Rmd’
-     
-     --- re-building ‘intro.Rmd’ using rmarkdown
-     --- finished re-building ‘intro.Rmd’
-     
-     --- re-building ‘lag-transition-networks.Rmd’ using rmarkdown
-     --- finished re-building ‘lag-transition-networks.Rmd’
-     
-     --- re-building ‘lagdynamics.Rmd’ using rmarkdown
-     --- finished re-building ‘lagdynamics.Rmd’
-     
-     --- re-building ‘plotting.Rmd’ using rmarkdown
-     --- finished re-building ‘plotting.Rmd’
-     
-     --- re-building ‘workflow.Rmd’ using rmarkdown
-     --- finished re-building ‘workflow.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘interop.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
@@ -1030,7 +996,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        5.     ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        6.     └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
+       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
        9.           └─lifecycle:::deprecate_stop0(msg)
       10.             └─rlang::cnd_signal(...)
      Execution halted
@@ -1040,7 +1006,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
      ```
      ...
          7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
+         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
          9.           └─lifecycle:::deprecate_stop0(msg)
         10.             └─rlang::cnd_signal(...)
        ── Error ('test-seglist.R:13:3'): convert graph to seglist ─────────────────────
@@ -1056,7 +1022,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         4. ├─nat::as.seglist(g)
         5. └─nat:::as.seglist.igraph(g)
         6.   └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
+        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
@@ -1079,7 +1045,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        6.       ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        8.         └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
+       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
       10.             └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -1101,7 +1067,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘com.google.Chrome.ZETBx5’
+       ‘org.chromium.Chromium.WYIKcc’
      ```
 
 # netrics (0.4.0)
