@@ -34,8 +34,9 @@
 #             CRAN's times scaled; sequential halves priced at two checks),
 #             deals cost-balanced shards sized by the worker count.
 #   base      builds (or finds, by content-derived tag) the check platform:
-#             rocker/r-ver at the resolved R version (r-oldrel by default --
-#             a fixed target) plus qpdf, ghostscript, pandoc, TeX and pak.
+#             rocker/r-ver at the pinned R version (4.6.1 by default -- at
+#             least one reverse dependency needs R-release) plus qpdf,
+#             ghostscript, pandoc, TeX, Xvfb and pak.
 #   build     builds the dev package binary INSIDE the base container -- the
 #             binary must load under the container's R, not the runner's.
 #   universe  installs the whole dependency universe (plus every system
@@ -123,9 +124,9 @@ on:
         type: string
         default: ""
       r-version:
-        description: "R version the checks run under: 'oldrel', 'release', or an explicit version like 4.5.3. Pinning oldrel keeps the check platform still between R releases."
+        description: "R version the checks run under: an explicit version like 4.6.1 (the pinned default -- at least one reverse dependency needs R-release), or 'oldrel'/'release' to resolve at run time."
         type: string
-        default: "oldrel"
+        default: "4.6.1"
       workers:
         description: "Packages checked concurrently per shard by the queue (one heavy lane, the rest light); default: the runner's core count"
         type: string
@@ -192,7 +193,7 @@ env:
   REVDEPX_DEPTH: ${{ inputs.depth || '2' }}
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
-  REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || 'oldrel' }}
+  REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
   REVDEPX_WORKERS: ${{ inputs.workers || vars.REVDEPX_WORKERS || '4' }}
   # Hard memory cap per check container, e.g. '3g'; empty lets queue.sh
   # derive (total minus 2 GiB) / workers. A hungry check then kills its own
@@ -600,7 +601,11 @@ jobs:
           trap 'kill "${sampler}" 2> /dev/null || true' EXIT
 
           status=0
+          # The memory cap contains OOM kills to the container: the sysreqs
+          # survey once ballooned past 14 GB and the GLOBAL oom-killer chose
+          # the fat R process over the runner agent by luck, not design.
           docker run --name revdepx-universe-build \
+            --memory 14g --memory-swap 14g \
             -v "${GITHUB_WORKSPACE}/.github/workflows/revdepx:/revdepx/scripts:ro" \
             -v "${RUNNER_TEMP}/plan/plan.json:/revdepx/plan.json:ro" \
             -v "${RUNNER_TEMP}/pak-cache:/root/.cache/R/pkgcache" \
@@ -649,8 +654,35 @@ jobs:
           fi
           delta_gb=${delta_gb:-0}
           delta_files=${delta_files:-0}
+          size_rw=""
+          if [ "${delta_gb}" = "0" ]; then
+            # The containerd image store leaves GraphDriver empty (run
+            # 32114635495 measured "upper: <none>" and skipped a commit
+            # that would have fit five times over), but docker itself can
+            # still price the rw layer. The file count is not available
+            # this way; the guard's fixed inode margin covers that.
+            size_rw=$(docker ps -as --no-trunc \
+              --filter name=revdepx-universe-build \
+              --format '{{.Size}}' 2> /dev/null | head -1 |
+              cut -d' ' -f1 || true)
+            case "${size_rw}" in
+              *TB)
+                delta_gb=$(awk -v s="${size_rw%TB}" \
+                  'BEGIN { printf "%d", s * 1024 + 1 }' || echo 0)
+                ;;
+              *GB)
+                delta_gb=$(awk -v s="${size_rw%GB}" \
+                  'BEGIN { printf "%d", s + 1 }' || echo 0)
+                ;;
+              *MB | *kB | *B)
+                delta_gb=1
+                ;;
+            esac
+            delta_gb=${delta_gb:-0}
+          fi
           {
             echo "upper: ${upper:-<none>}"
+            echo "size_rw: ${size_rw:-<not needed>}"
             echo "delta_gb: ${delta_gb}"
             echo "delta_files: ${delta_files}"
             echo "--- df -BG ---"
@@ -1055,6 +1087,12 @@ jobs:
           PHASE: check
           CHECK_SLICE: 1/3
         run: |
+          # Streamed from inside the step -- a sampler backgrounded in an
+          # earlier step stops reaching the job log when that step ends, and
+          # the checks are where the minutes (and the memory) actually go.
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (1/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
           Rscript ./.github/workflows/revdepx/shard.R
         shell: bash
 
@@ -1074,6 +1112,9 @@ jobs:
           PHASE: check
           CHECK_SLICE: 2/3
         run: |
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (2/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
           Rscript ./.github/workflows/revdepx/shard.R
         shell: bash
 
@@ -1093,6 +1134,9 @@ jobs:
           PHASE: check
           CHECK_SLICE: 3/3
         run: |
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (3/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
           Rscript ./.github/workflows/revdepx/shard.R
         shell: bash
 
