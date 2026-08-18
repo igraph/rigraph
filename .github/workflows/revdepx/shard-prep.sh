@@ -124,6 +124,10 @@ if [ -z "${got}" ]; then
   # otherwise copy that residue into the image.
   scratch_tmp="${scratch}-tmp"
   mkdir -p "${scratch}" "${scratch_tmp}"
+  # A /tmp needs 1777: apt-key writes its temporary config there, and with
+  # a plain 755 directory every repository fails signature verification and
+  # every apt-get the build runs fails with it.
+  chmod 1777 "${scratch_tmp}"
   cidfile="${scratch}/cid"
   rm -f "${cidfile}"
 

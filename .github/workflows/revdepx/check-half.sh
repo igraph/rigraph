@@ -75,6 +75,9 @@ out="${work}/${half}"
 # per half, on the big disk, gone with the workdir. A check that fills its
 # /tmp fills its own, not its sibling's and not the runner's.
 mkdir -p "${out}/tmp" "${out}/home"
+# Real /tmp semantics inside the container: some test suites assume the
+# sticky world-writable mode even when everything runs as one user.
+chmod 1777 "${out}/tmp" 2> /dev/null || true
 
 # Seconds since the check started, in front of every line it prints.
 #
