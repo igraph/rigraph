@@ -102,6 +102,7 @@ RUN apt-get update \\
       qpdf ghostscript pandoc \\
       texlive-latex-base texlive-latex-recommended texlive-latex-extra \\
       texlive-fonts-recommended texlive-fonts-extra-links fonts-dejavu \\
+      xvfb xauth xfonts-base \\
       tidy curl file git locales unzip \\
     && rm -rf /var/lib/apt/lists/*
 RUN Rscript -e 'lines <- readLines("/etc/os-release"); \\

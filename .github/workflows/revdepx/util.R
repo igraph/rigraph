@@ -1173,10 +1173,23 @@ ensure_check_sysreqs <- function(packages, label = "") {
   run <- run_with_timeout(
     function(repos, packages) {
       options(repos = repos)
-      wanted <- unique(unlist(
-        pak::pkg_sysreqs(packages)$packages$system_packages,
-        use.names = FALSE
-      ))
+      # In chunks: one pak::pkg_sysreqs() call over 3435 packages grew past
+      # 14 GB and was OOM-killed (run 32114635495) -- pak solves the whole
+      # set in one subprocess. Per-chunk calls each get a fresh, bounded
+      # subprocess, and the union of apt packages is the same.
+      wanted <- character()
+      for (part in split(
+        packages,
+        ceiling(seq_along(packages) / 300)
+      )) {
+        wanted <- unique(c(
+          wanted,
+          unlist(
+            pak::pkg_sysreqs(part)$packages$system_packages,
+            use.names = FALSE
+          )
+        ))
+      }
       have <- pak::sysreqs_list_system_packages()
       present <- unique(c(
         have$package,

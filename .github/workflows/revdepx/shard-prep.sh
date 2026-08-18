@@ -156,6 +156,7 @@ if [ -z "${got}" ]; then
   done
   if docker run \
     --cidfile "${cidfile}" \
+    --memory 12g --memory-swap 12g \
     -v "${script_dir}:/revdepx/scripts:ro" \
     -v "${plan_abs}:/revdepx/plan.json:ro" \
     -v "${scratch}:/revdepx/out" \

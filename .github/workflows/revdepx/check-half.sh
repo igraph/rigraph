@@ -156,7 +156,15 @@ done
 # The library stacks cascade exactly as before: the half-specific library in
 # front holds one package -- the CRAN release or the dev build -- and the
 # shared trunk behind it is baked into the image.
-in_container="R_LIBS='/revdepx/lib-half:${universe_lib}' TMPDIR=/tmp \
+#
+# Xvfb first, where the image carries it: Tk-based packages need a display
+# for their examples and tests (and CRAN's own machines check under X);
+# `-ac` is safe inside the container's own network namespace, and the
+# server dies with the container. DISPLAY is set either way -- pointing at
+# a display that is not there fails exactly like no display did.
+in_container="command -v Xvfb > /dev/null 2>&1 \
+&& { Xvfb :99 -screen 0 1280x1024x24 -ac -nolisten tcp > /dev/null 2>&1 & } ; \
+DISPLAY=:99 R_LIBS='/revdepx/lib-half:${universe_lib}' TMPDIR=/tmp \
 timeout --kill-after=60s ${seconds}s \
 R CMD check --no-manual --as-cran --output=/revdepx/out \
 '/revdepx/src/${src_name}'"

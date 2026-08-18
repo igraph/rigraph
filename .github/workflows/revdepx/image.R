@@ -39,6 +39,26 @@ script_dir <- dirname(sub(
 ))
 source(file.path(script_dir, "util.R"))
 
+# A headless container has no X display, and Tk-based packages
+# (gWidgets2tcltk and friends) initialise Tk while their code is lazy-loaded
+# AT INSTALL TIME: without a display the install dies with
+# `[tcl] invalid command name "font"`. CRAN's own check machines run under
+# X; ours get a virtual framebuffer. Started here, once, so every child this
+# script spawns -- pak installs, load-test sessions -- inherits the display;
+# `-ac` is safe because nothing else shares the container's network
+# namespace. Dies with the container.
+if (!nzchar(Sys.getenv("DISPLAY")) && nzchar(Sys.which("Xvfb"))) {
+  system2(
+    "Xvfb",
+    c(":99", "-screen", "0", "1280x1024x24", "-ac", "-nolisten", "tcp"),
+    wait = FALSE,
+    stdout = FALSE,
+    stderr = FALSE
+  )
+  Sys.setenv(DISPLAY = ":99")
+  inform("Xvfb started on :99 for Tk-based installs and load tests")
+}
+
 # Before anything talks to a repository: the base image bakes in a p3m.dev
 # CRAN snapshot frozen on the day rocker built it. Installing against that
 # would quietly resolve last month's versions, while the plan's dependency
@@ -405,10 +425,16 @@ load_roots <- function(pkgs) {
   if (length(known) == 0) {
     return(pkgs)
   }
+  # Depends and Imports only, NOT "strong": "strong" includes LinkingTo,
+  # but loading a dependent never loads its LinkingTo-only dependencies at
+  # run time -- a header-only package (BH, cpp11) would be counted as
+  # covered by its dependents while never actually being loaded by anyone.
+  # With LinkingTo out of the reachability, such packages become roots and
+  # get their own load test, and the transitive-coverage argument is exact.
   deps <- tools::package_dependencies(
     known,
     db = db,
-    which = "strong",
+    which = c("Depends", "Imports"),
     recursive = TRUE
   )
   depended_on <- unique(unlist(deps, use.names = FALSE))
