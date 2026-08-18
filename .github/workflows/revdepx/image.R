@@ -246,11 +246,37 @@ inform(sprintf(
   length(install_set)
 ))
 if (!installed_ok) {
-  # One bad package must not hide the state of the other thousand: retry each
-  # missing package on its own and record exactly which ones will not install.
-  # Bounded twice over -- one package may not hang the retry, and the retry as
-  # a whole may not eat the minutes the load test and the indexing still need.
-  # What the deadline cuts off is named rather than reported as failing.
+  # One bad package must not hide the state of the other thousand -- but a
+  # pak transaction is all-or-nothing, so one bad package strands its whole
+  # 400-package chunk, and going straight to one-at-a-time from there pays
+  # pak's per-call resolution overhead once per stranded innocent: hundreds
+  # of calls, hours of tail, and the install deadline then cuts off
+  # packages that were never broken at all. Middle rung first: the missing
+  # set again in small chunks, which lands the innocents in a handful of
+  # transactions and leaves only the genuinely refusing packages for the
+  # one-at-a-time pass below, where each failure names itself.
+  retry <- missing_from(lib, install_set)
+  if (length(retry) > 0 && Sys.time() <= install_deadline) {
+    retry_chunk <- max(1L, min(50L, as.integer(ceiling(chunk_size / 8))))
+    inform(
+      "Image: re-trying ",
+      length(retry),
+      " missing package(s) in chunks of ",
+      retry_chunk
+    )
+    install_in_chunks(
+      install_chunks(retry, cran_db(), retry_chunk),
+      lib,
+      upgrade,
+      "Image retry",
+      deadline = install_deadline
+    )
+  }
+  # What survives two chunked passes gets the expensive certainty: its own
+  # pak call, its own log, its own line in depfail.json. Bounded twice over
+  # -- one package may not hang the retry, and the retry as a whole may not
+  # eat the minutes the load test and the indexing still need. What the
+  # deadline cuts off is named rather than reported as failing.
   retry <- missing_from(lib, install_set)
   inform("Image: retrying ", length(retry), " package(s) one at a time")
   for (i in seq_along(retry)) {
@@ -555,6 +581,37 @@ phase("surveying the checked packages' system requirements")
 if (!out_of_time("the check system-requirements survey")) {
   ensure_check_sysreqs(checked_packages, "Image")
 }
+
+# ------------------------------------------------------------- the sweep-up --
+
+# What the container wrote outside the library must not ride into the image:
+# `docker commit` copies every byte of the rw layer, and on the delta path
+# (FROM the previous universe image) anything committed once persists in
+# every descendant image for as long as the lineage lives. The pak download
+# and metadata cache is a host bind mount and never enters the layer; this
+# sweeps what does enter it -- apt's package lists from the sysreqs runs
+# (their .deb archives are auto-cleaned by the base image's docker-clean
+# hook), and the /tmp build trees that killed subprocesses leave behind: a
+# pak install that hits REVDEPX_INSTALL_TIMEOUT_MINUTES dies mid-build and
+# never removes its extracted sources and objects. When the caller
+# bind-mounts /tmp from the host too (the workflows now do), the /tmp part
+# is a no-op here and the residue never even counts toward the delta.
+phase("sweeping temporary files")
+if (nzchar(Sys.which("apt-get"))) {
+  system2("apt-get", "clean", stdout = FALSE, stderr = FALSE)
+}
+unlink("/var/lib/apt/lists", recursive = TRUE)
+dir.create(
+  "/var/lib/apt/lists/partial",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+tmp_junk <- setdiff(
+  list.files("/tmp", all.files = TRUE, full.names = TRUE, no.. = TRUE),
+  # This session's own tempdir stays: the report below still uses it.
+  tempdir()
+)
+unlink(tmp_junk, recursive = TRUE)
 
 # ------------------------------------------------------------------ the bake --
 

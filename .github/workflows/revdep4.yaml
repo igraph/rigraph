@@ -565,7 +565,8 @@ jobs:
             echo "No previous universe image; starting from the base image"
           fi
 
-          mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out"
+          mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out" \
+            "${RUNNER_TEMP}/universe-tmp"
 
           # Streamed from inside this step, on top of the file-writing
           # sampler the earlier step backgrounded: that one keeps appending
@@ -584,6 +585,7 @@ jobs:
             -v "${RUNNER_TEMP}/plan/plan.json:/revdepx/plan.json:ro" \
             -v "${RUNNER_TEMP}/pak-cache:/root/.cache/R/pkgcache" \
             -v "${RUNNER_TEMP}/universe-out:/revdepx/out" \
+            -v "${RUNNER_TEMP}/universe-tmp:/tmp" \
             -e PLAN=/revdepx/plan.json \
             -e OUT_DIR=/revdepx/out \
             -e PKG_SYSREQS=true \
