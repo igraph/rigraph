@@ -503,7 +503,16 @@ if (!is.na(shard_started)) {
     format_duration(max(0, as.numeric(deadline - Sys.time(), units = "secs")))
   ))
 }
-invisible(file.create(manifest_path))
+# Create, NEVER truncate: file.create() zeroes an existing file, and the
+# slices share this manifest. Run 32114635495 lost two thirds of its results
+# to exactly this line -- every slice wiped its predecessors' lines at
+# startup, and the account-for-everything sweep then faithfully re-wrote
+# those packages as `deferred`, erasing 2293 finished checks. The sweep at
+# the end was already written to leave existing lines alone; it just never
+# got to see them.
+if (!file.exists(manifest_path)) {
+  invisible(file.create(manifest_path))
+}
 
 # What a check will be able to load, which is nothing this host has
 # installed: the dependency library lives inside the universe image, at
