@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
       15.                   │ └─base::eval(call(paste("class", f, sep = "."), graph))
       16.                   └─ECoL:::class.G3(`<S3: igraph>`)
       17.                     └─igraph::hub.score(graph)
-      18.                       └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
+      18.                       └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()")
       19.                         └─lifecycle:::deprecate_stop0(msg)
       20.                           └─rlang::cnd_signal(...)
      Execution halted
@@ -58,7 +58,7 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
          8.           │ └─base::eval(call(paste("class", f, sep = "."), graph))
          9.           └─ECoL:::class.G3(`<S3: igraph>`)
         10.             └─igraph::hub.score(graph)
-        11.               └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()") at igraph/R/centrality.R:71:3
+        11.               └─lifecycle::deprecate_stop("2.0.0", "hub.score()", "hits_scores()")
         12.                 └─lifecycle:::deprecate_stop0(msg)
         13.                   └─rlang::cnd_signal(...)
        

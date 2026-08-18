@@ -8,12 +8,19 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
 
 ## Newly broken
 
-*   checking tests ...
+*   checking tests ... ERROR
      ```
-       Running ‘testthat.R’ [21s/13s]
-      [22s/13s] ERROR
-     Running the tests in ‘tests/testthat.R’ failed.
-     Last 13 lines of output:
+     ...
+       ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
+       • On Linux (1): 'test-model_tests.R:58:3'
+       • Skipping slow functions in diffusion.Rmd (1): 'test-tutorials_migraph.R:12:5'
+       • empty test (1): 'test-measure_over.R:1:1'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-tutorials_migraph.R:12:5'): migraph tutorial code runs without warnings or errors ──
+       Expected `w` to be NULL.
+       Differences:
+       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
        `expected` is NULL
        
        Warning in expression 17 : rg <- create_ring(32, width = 2)
@@ -30,3 +37,4 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
        ! Test failures.
        Execution halted
      ```
+

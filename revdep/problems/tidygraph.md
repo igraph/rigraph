@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
       13.   └─tidygraph::map_bfs(...)
       14.     └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       15.       └─igraph::bfs(...)
-      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
+      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
       17.           └─lifecycle:::deprecate_stop0(msg)
       18.             └─rlang::cnd_signal(...)
      Execution halted
@@ -76,5 +76,11 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
        |> or function shorthand \(...) syntax added in R 4.1.0.
        File(s) using such syntax:
          ‘iterate.Rd’ ‘random_walk_rank.Rd’
+     ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
