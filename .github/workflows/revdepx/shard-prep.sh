@@ -43,6 +43,18 @@ note() {
   echo "shard-prep: $*" >&2
 }
 
+# A tag alone proves nothing: the containerd store once produced a 1336-byte
+# manifest shell that docker-loaded cleanly, carried the right tag and held
+# no filesystem at all (run 32148999976) -- and the shard died on it instead
+# of building locally. An image is usable when its library index reads back
+# non-empty; the index lands in ${index_out} as a side effect, so the rung
+# that wins has already extracted it.
+usable() {
+  mkdir -p "$(dirname "${index_out}")"
+  docker run --rm "$1" cat /opt/revdepx/lib-index.json \
+    > "${index_out}" 2> /dev/null && [ -s "${index_out}" ]
+}
+
 got=""
 
 # ------------------------------------------------------------------ 1: pull --
@@ -53,7 +65,12 @@ got=""
 if [ -n "${ref_in}" ]; then
   for attempt in 1 2 3; do
     if docker pull "${ref_in}" >&2; then
-      got="${ref_in}"
+      if usable "${ref_in}"; then
+        got="${ref_in}"
+      else
+        # Retrying the pull would fetch the same broken content.
+        note "${ref_in} pulled but holds no readable library index; falling through"
+      fi
       break
     fi
     note "pull of ${ref_in} failed (attempt ${attempt} of 3)"
@@ -89,6 +106,9 @@ if [ -z "${got}" ] && [ -n "${fallback_dir}" ]; then
     got=$(printf '%s\n' "${loaded}" | sed -n 's/^Loaded image: //p' | tail -n 1)
     if [ -z "${got}" ]; then
       note "docker load reported no image ref; falling through"
+    elif ! usable "${got}"; then
+      note "${got} loaded but holds no readable library index; falling through to the local build"
+      got=""
     fi
   fi
 fi
@@ -188,12 +208,11 @@ fi
 
 mkdir -p "$(dirname "${index_out}")" "$(dirname "${ref_out}")"
 
-# The index is the shard's view of what the image can serve; a universe
-# image without a readable one is not a universe image, whatever its tag
-# says, and limping on would only move the failure into the driver where it
-# is harder to read.
-if ! docker run --rm "${got}" cat /opt/revdepx/lib-index.json \
-  > "${index_out}" || [ ! -s "${index_out}" ]; then
+# Rungs 1 and 2 already proved their image usable (or fell through); the
+# locally built one gets the same test, and failing it here is right --
+# there is no further rung, and limping on would only move the failure into
+# the driver where it is harder to read.
+if ! usable "${got}"; then
   note "the image ${got} has no readable /opt/revdepx/lib-index.json; it is not a universe image"
   exit 1
 fi
