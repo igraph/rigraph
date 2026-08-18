@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "MFF")` for more info
 ### Devel
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
+new check timed out after 1200s, at: * checking examples ...
 
 
 
@@ -19,7 +19,7 @@ shard 29 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
+new check timed out after 1200s, at: * checking examples ...
 
 
 

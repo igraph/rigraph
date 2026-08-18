@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "lgcp")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘lgcp’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/lgcp.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

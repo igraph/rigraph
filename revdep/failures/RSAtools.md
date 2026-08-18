@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "RSAtools")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘RSAtools’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/RSAtools.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

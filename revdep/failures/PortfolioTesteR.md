@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "PortfolioTesteR")` for more info
 ### Devel
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
+old check timed out after 1201s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -19,7 +19,7 @@ shard 21 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
+old check timed out after 1201s, at: * checking re-building of vignette outputs ...
 
 
 

@@ -34,25 +34,27 @@ Run `revdepcheck::revdep_details(, "a5R")` for more info
 
 Run `revdepcheck::revdep_details(, "abess")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘abess’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/abess.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -224,34 +226,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# adegenet (2.1.11)
-
-* GitHub mirror: <https://github.com/cran/adegenet>
-
-Run `revdepcheck::revdep_details(, "adegenet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # adespatial (0.3-29)
 
 * GitHub mirror: <https://github.com/cran/adespatial>
@@ -330,34 +304,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# admtools (0.6.0)
-
-* GitHub mirror: <https://github.com/cran/admtools>
-
-Run `revdepcheck::revdep_details(, "admtools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -453,62 +399,6 @@ shard 19 uploaded no result for this package; its job did not finish
 * GitHub mirror: <https://github.com/cran/agentr>
 
 Run `revdepcheck::revdep_details(, "agentr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# AgePopDenom (1.2.3)
-
-* GitHub mirror: <https://github.com/cran/AgePopDenom>
-
-Run `revdepcheck::revdep_details(, "AgePopDenom")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# agop (0.2.4)
-
-* GitHub mirror: <https://github.com/cran/agop>
-
-Run `revdepcheck::revdep_details(, "agop")` for more info
 
 ## Error before installation
 
@@ -980,62 +870,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# anipaths (0.10.6)
-
-* GitHub mirror: <https://github.com/cran/anipaths>
-
-Run `revdepcheck::revdep_details(, "anipaths")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# annotator (0.0.3.2)
-
-* GitHub mirror: <https://github.com/cran/annotator>
-
-Run `revdepcheck::revdep_details(, "annotator")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # anocva (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/anocva>
@@ -1176,34 +1010,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# aplore3 (0.9)
-
-* GitHub mirror: <https://github.com/cran/aplore3>
-
-Run `revdepcheck::revdep_details(, "aplore3")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # appeears (1.2)
 
 * GitHub mirror: <https://github.com/cran/appeears>
@@ -1232,62 +1038,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# applicable (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/applicable>
-
-Run `revdepcheck::revdep_details(, "applicable")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# aqp (2.3.2)
-
-* GitHub mirror: <https://github.com/cran/aqp>
-
-Run `revdepcheck::revdep_details(, "aqp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # AquaBEHER (1.4.0)
 
 * GitHub mirror: <https://github.com/cran/AquaBEHER>
@@ -1310,118 +1060,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 ```
 shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# arakno (1.3.2)
-
-* GitHub mirror: <https://github.com/cran/arakno>
-
-Run `revdepcheck::revdep_details(, "arakno")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# arcgislayers (0.6.1)
-
-* GitHub mirror: <https://github.com/cran/arcgislayers>
-
-Run `revdepcheck::revdep_details(, "arcgislayers")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ArchaeoPhases (2.1.1)
-
-* GitHub mirror: <https://github.com/cran/ArchaeoPhases>
-
-Run `revdepcheck::revdep_details(, "ArchaeoPhases")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# archeofrag.gui (1.1.4)
-
-* GitHub mirror: <https://github.com/cran/archeofrag.gui>
-
-Run `revdepcheck::revdep_details(, "archeofrag.gui")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -1484,34 +1122,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# arcpullr (0.3.5)
-
-* GitHub mirror: <https://github.com/cran/arcpullr>
-
-Run `revdepcheck::revdep_details(, "arcpullr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # arete (0.2)
 
 * GitHub mirror: <https://github.com/cran/arete>
@@ -1562,34 +1172,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# asnipe (1.1.17)
-
-* GitHub mirror: <https://github.com/cran/asnipe>
-
-Run `revdepcheck::revdep_details(, "asnipe")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -1680,34 +1262,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# atakrig (0.9.8.2)
-
-* GitHub mirror: <https://github.com/cran/atakrig>
-
-Run `revdepcheck::revdep_details(, "atakrig")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # audrex (3.0.0)
 
 * GitHub mirror: <https://github.com/cran/audrex>
@@ -1764,34 +1318,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# autoFlagR (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/autoFlagR>
-
-Run `revdepcheck::revdep_details(, "autoFlagR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # autoGO (1.0.3)
 
 * GitHub mirror: <https://github.com/cran/autoGO>
@@ -1814,34 +1340,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# autograph (1.1.2)
-
-* GitHub mirror: <https://github.com/cran/autograph>
-
-Run `revdepcheck::revdep_details(, "autograph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -2128,62 +1626,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# bartMan (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/bartMan>
-
-Run `revdepcheck::revdep_details(, "bartMan")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# BAS (2.0.2)
-
-* GitHub mirror: <https://github.com/cran/BAS>
-
-Run `revdepcheck::revdep_details(, "BAS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # basemaps (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/basemaps>
@@ -2268,34 +1710,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# baycn (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/baycn>
-
-Run `revdepcheck::revdep_details(, "baycn")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # bayesEO (0.2.2)
 
 * GitHub mirror: <https://github.com/cran/bayesEO>
@@ -2374,34 +1788,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# BayesSIM (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/BayesSIM>
-
-Run `revdepcheck::revdep_details(, "BayesSIM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -2576,34 +1962,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# bbnet (1.2.1)
-
-* GitHub mirror: <https://github.com/cran/bbnet>
-
-Run `revdepcheck::revdep_details(, "bbnet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # bc3net (1.0.5)
 
 * GitHub mirror: <https://github.com/cran/bc3net>
@@ -2654,62 +2012,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# bdc (1.1.6)
-
-* GitHub mirror: <https://github.com/cran/bdc>
-
-Run `revdepcheck::revdep_details(, "bdc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# BDgraph (2.74)
-
-* GitHub mirror: <https://github.com/cran/BDgraph>
-
-Run `revdepcheck::revdep_details(, "BDgraph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -2772,34 +2074,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# belg (1.5.3)
-
-* GitHub mirror: <https://github.com/cran/belg>
-
-Run `revdepcheck::revdep_details(, "belg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # bespatial (0.1.3)
 
 * GitHub mirror: <https://github.com/cran/bespatial>
@@ -2822,34 +2096,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# BetaBit (2.2)
-
-* GitHub mirror: <https://github.com/cran/BetaBit>
-
-Run `revdepcheck::revdep_details(, "BetaBit")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -3108,34 +2354,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# bio3d (2.4-5)
-
-* GitHub mirror: <https://github.com/cran/bio3d>
-
-Run `revdepcheck::revdep_details(, "bio3d")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # bioclim (0.4.0)
 
 * GitHub mirror: <https://github.com/cran/bioclim>
@@ -3248,34 +2466,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
-# BIOMASS (2.2.7-1)
-
-* GitHub mirror: <https://github.com/cran/BIOMASS>
-
-Run `revdepcheck::revdep_details(, "BIOMASS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # BioMoR (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/BioMoR>
@@ -3354,34 +2544,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# Bios2cor (2.2.2)
-
-* GitHub mirror: <https://github.com/cran/Bios2cor>
-
-Run `revdepcheck::revdep_details(, "Bios2cor")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -3496,34 +2658,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# bispdep (1.0-2)
-
-* GitHub mirror: <https://github.com/cran/bispdep>
-
-Run `revdepcheck::revdep_details(, "bispdep")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -3694,34 +2828,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# bluertopo (0.0.1)
-
-* GitHub mirror: <https://github.com/cran/bluertopo>
-
-Run `revdepcheck::revdep_details(, "bluertopo")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -3956,6 +3062,36 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
+# BNSP (2.2.3)
+
+* GitHub mirror: <https://github.com/cran/BNSP>
+
+Run `revdepcheck::revdep_details(, "BNSP")` for more info
+
+## In both
+
+*   checking whether package ‘BNSP’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/BNSP.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
 # BoltzMM (0.1.5)
 
 * GitHub mirror: <https://github.com/cran/BoltzMM>
@@ -3990,25 +3126,27 @@ shard 32 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "BoneDensityMapping")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘BoneDensityMapping’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/BoneDensityMapping.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -4062,34 +3200,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# bootcluster (0.4.3)
-
-* GitHub mirror: <https://github.com/cran/bootcluster>
-
-Run `revdepcheck::revdep_details(, "bootcluster")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -4158,25 +3268,27 @@ shard 39 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘Boptbd’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/Boptbd.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -4314,34 +3426,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# breathtestcore (0.8.11)
-
-* GitHub mirror: <https://github.com/cran/breathtestcore>
-
-Run `revdepcheck::revdep_details(, "breathtestcore")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -4516,34 +3600,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# bsocialv2 (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/bsocialv2>
-
-Run `revdepcheck::revdep_details(, "bsocialv2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # BSPADATA (1.1.0)
 
 * GitHub mirror: <https://github.com/cran/BSPADATA>
@@ -4600,34 +3656,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# bsts (0.9.11)
-
-* GitHub mirror: <https://github.com/cran/bsts>
-
-Run `revdepcheck::revdep_details(, "bsts")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # bsub (2.0.7)
 
 * GitHub mirror: <https://github.com/cran/bsub>
@@ -4650,34 +3678,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# btergm (1.11.1)
-
-* GitHub mirror: <https://github.com/cran/btergm>
-
-Run `revdepcheck::revdep_details(, "btergm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -4712,34 +3712,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# butcher (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/butcher>
-
-Run `revdepcheck::revdep_details(, "butcher")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # c3net (1.1.1.1)
 
 * GitHub mirror: <https://github.com/cran/c3net>
@@ -4762,34 +3734,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# C443 (3.4.0)
-
-* GitHub mirror: <https://github.com/cran/C443>
-
-Run `revdepcheck::revdep_details(, "C443")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -4936,34 +3880,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# caracas (2.1.1)
-
-* GitHub mirror: <https://github.com/cran/caracas>
-
-Run `revdepcheck::revdep_details(, "caracas")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # CARBayes (6.1.1)
 
 * GitHub mirror: <https://github.com/cran/CARBayes>
@@ -5014,34 +3930,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# caretSDM (1.9.7)
-
-* GitHub mirror: <https://github.com/cran/caretSDM>
-
-Run `revdepcheck::revdep_details(, "caretSDM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -5160,34 +4048,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# cassandRa (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/cassandRa>
-
-Run `revdepcheck::revdep_details(, "cassandRa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # CAST (1.1.1)
 
 * GitHub mirror: <https://github.com/cran/CAST>
@@ -5300,34 +4160,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# causaleffect (1.3.15)
-
-* GitHub mirror: <https://github.com/cran/causaleffect>
-
-Run `revdepcheck::revdep_details(, "causaleffect")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # CausalGPS (0.5.1)
 
 * GitHub mirror: <https://github.com/cran/CausalGPS>
@@ -5378,34 +4210,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CausalMixGPD (0.8.0)
-
-* GitHub mirror: <https://github.com/cran/CausalMixGPD>
-
-Run `revdepcheck::revdep_details(, "CausalMixGPD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -5496,34 +4300,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# CBnetworkMA (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/CBnetworkMA>
-
-Run `revdepcheck::revdep_details(, "CBnetworkMA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # cccd (1.6)
 
 * GitHub mirror: <https://github.com/cran/cccd>
@@ -5602,34 +4378,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cdlsim (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/cdlsim>
-
-Run `revdepcheck::revdep_details(, "cdlsim")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -5918,34 +4666,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# cholera (0.9.1)
-
-* GitHub mirror: <https://github.com/cran/cholera>
-
-Run `revdepcheck::revdep_details(, "cholera")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # chouca (0.1.991)
 
 * GitHub mirror: <https://github.com/cran/chouca>
@@ -5968,34 +4688,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cia (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/cia>
-
-Run `revdepcheck::revdep_details(, "cia")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -6142,34 +4834,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# clickstream (1.3.4)
-
-* GitHub mirror: <https://github.com/cran/clickstream>
-
-Run `revdepcheck::revdep_details(, "clickstream")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # climaemet (1.6.0)
 
 * GitHub mirror: <https://github.com/cran/climaemet>
@@ -6192,34 +4856,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 ```
 shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# climatehealth (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/climatehealth>
-
-Run `revdepcheck::revdep_details(, "climatehealth")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -6310,34 +4946,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# climetrics (1.0-15)
-
-* GitHub mirror: <https://github.com/cran/climetrics>
-
-Run `revdepcheck::revdep_details(, "climetrics")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ClimMobTools (1.8.2)
 
 * GitHub mirror: <https://github.com/cran/ClimMobTools>
@@ -6388,34 +4996,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cloneRate (0.2.3)
-
-* GitHub mirror: <https://github.com/cran/cloneRate>
-
-Run `revdepcheck::revdep_details(, "cloneRate")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -6528,34 +5108,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# clusterindices (1.0)
-
-* GitHub mirror: <https://github.com/cran/clusterindices>
-
-Run `revdepcheck::revdep_details(, "clusterindices")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -6698,34 +5250,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CMIP6VisR (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/CMIP6VisR>
-
-Run `revdepcheck::revdep_details(, "CMIP6VisR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -6956,90 +5480,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# coglyphr (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/coglyphr>
-
-Run `revdepcheck::revdep_details(, "coglyphr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CohortCharacteristics (1.1.3)
-
-* GitHub mirror: <https://github.com/cran/CohortCharacteristics>
-
-Run `revdepcheck::revdep_details(, "CohortCharacteristics")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CohortContrast (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/CohortContrast>
-
-Run `revdepcheck::revdep_details(, "CohortContrast")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # cohorttools (0.1.8)
 
 * GitHub mirror: <https://github.com/cran/cohorttools>
@@ -7152,90 +5592,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# comets (0.2-2)
-
-* GitHub mirror: <https://github.com/cran/comets>
-
-Run `revdepcheck::revdep_details(, "comets")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# commecometrics (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/commecometrics>
-
-Run `revdepcheck::revdep_details(, "commecometrics")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# compas (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/compas>
-
-Run `revdepcheck::revdep_details(, "compas")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Compind (3.6)
 
 * GitHub mirror: <https://github.com/cran/Compind>
@@ -7258,90 +5614,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CompositionalClust (1.3)
-
-* GitHub mirror: <https://github.com/cran/CompositionalClust>
-
-Run `revdepcheck::revdep_details(, "CompositionalClust")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# confcons (0.3.2)
-
-* GitHub mirror: <https://github.com/cran/confcons>
-
-Run `revdepcheck::revdep_details(, "confcons")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CongreveLamsdell2016 (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/CongreveLamsdell2016>
-
-Run `revdepcheck::revdep_details(, "CongreveLamsdell2016")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -7432,34 +5704,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# conserveR (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/conserveR>
-
-Run `revdepcheck::revdep_details(, "conserveR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # consort (1.2.3)
 
 * GitHub mirror: <https://github.com/cran/consort>
@@ -7516,34 +5760,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# constrainedKriging (0.2-11)
-
-* GitHub mirror: <https://github.com/cran/constrainedKriging>
-
-Run `revdepcheck::revdep_details(, "constrainedKriging")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # contagionchannels (0.1.3)
 
 * GitHub mirror: <https://github.com/cran/contagionchannels>
@@ -7566,34 +5782,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cooccure (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/cooccure>
-
-Run `revdepcheck::revdep_details(, "cooccure")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -7684,34 +5872,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# copulareg (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/copulareg>
-
-Run `revdepcheck::revdep_details(, "copulareg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # copyseparator (1.2.0)
 
 * GitHub mirror: <https://github.com/cran/copyseparator>
@@ -7734,62 +5894,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# corclass (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/corclass>
-
-Run `revdepcheck::revdep_details(, "corclass")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# corHMM (2.8)
-
-* GitHub mirror: <https://github.com/cran/corHMM>
-
-Run `revdepcheck::revdep_details(, "corHMM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -7824,62 +5928,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# corpustools (0.5.2)
-
-* GitHub mirror: <https://github.com/cran/corpustools>
-
-Run `revdepcheck::revdep_details(, "corpustools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# correlationfunnel (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/correlationfunnel>
-
-Run `revdepcheck::revdep_details(, "correlationfunnel")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # correspondenceTables (1.0.2)
 
 * GitHub mirror: <https://github.com/cran/correspondenceTables>
@@ -7902,34 +5950,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# corrselect (3.2.3)
-
-* GitHub mirror: <https://github.com/cran/corrselect>
-
-Run `revdepcheck::revdep_details(, "corrselect")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -8020,90 +6040,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# covid19dbcand (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/covid19dbcand>
-
-Run `revdepcheck::revdep_details(, "covid19dbcand")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# covtracer (0.0.3)
-
-* GitHub mirror: <https://github.com/cran/covtracer>
-
-Run `revdepcheck::revdep_details(, "covtracer")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cpfa (1.3.2)
-
-* GitHub mirror: <https://github.com/cran/cpfa>
-
-Run `revdepcheck::revdep_details(, "cpfa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # cpge (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/cpge>
@@ -8160,34 +6096,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# CRE (0.2.7)
-
-* GitHub mirror: <https://github.com/cran/CRE>
-
-Run `revdepcheck::revdep_details(, "CRE")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # criticality (0.9.3)
 
 * GitHub mirror: <https://github.com/cran/criticality>
@@ -8210,34 +6118,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# criticalpath (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/criticalpath>
-
-Run `revdepcheck::revdep_details(, "criticalpath")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -8272,90 +6152,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# cropZoning (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/cropZoning>
-
-Run `revdepcheck::revdep_details(, "cropZoning")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# crossnma (1.3.1)
-
-* GitHub mirror: <https://github.com/cran/crossnma>
-
-Run `revdepcheck::revdep_details(, "crossnma")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# csa (0.7.1)
-
-* GitHub mirror: <https://github.com/cran/csa>
-
-Run `revdepcheck::revdep_details(, "csa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # csmpv (1.0.5)
 
 * GitHub mirror: <https://github.com/cran/csmpv>
@@ -8378,62 +6174,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# csquares (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/csquares>
-
-Run `revdepcheck::revdep_details(, "csquares")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CTD (1.3)
-
-* GitHub mirror: <https://github.com/cran/CTD>
-
-Run `revdepcheck::revdep_details(, "CTD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -8468,62 +6208,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# CTNote (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/CTNote>
-
-Run `revdepcheck::revdep_details(, "CTNote")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cubble (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/cubble>
-
-Run `revdepcheck::revdep_details(, "cubble")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # cubeview (0.4.1)
 
 * GitHub mirror: <https://github.com/cran/cubeview>
@@ -8546,90 +6230,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CurricularAnalytics (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/CurricularAnalytics>
-
-Run `revdepcheck::revdep_details(, "CurricularAnalytics")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# CurricularComplexityData (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/CurricularComplexityData>
-
-Run `revdepcheck::revdep_details(, "CurricularComplexityData")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# cyclicwave (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/cyclicwave>
-
-Run `revdepcheck::revdep_details(, "cyclicwave")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -8670,25 +6270,27 @@ shard 29 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "CytoProfile")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘CytoProfile’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/CytoProfile.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -8742,90 +6344,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dagHMM (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/dagHMM>
-
-Run `revdepcheck::revdep_details(, "dagHMM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dagitty (0.3-4)
-
-* GitHub mirror: <https://github.com/cran/dagitty>
-
-Run `revdepcheck::revdep_details(, "dagitty")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dagwood (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/dagwood>
-
-Run `revdepcheck::revdep_details(, "dagwood")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
 
 
 
@@ -8916,34 +6434,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# DamageDetective (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/DamageDetective>
-
-Run `revdepcheck::revdep_details(, "DamageDetective")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # damAOI (0.1)
 
 * GitHub mirror: <https://github.com/cran/damAOI>
@@ -8972,34 +6462,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
-# DANDELION (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/DANDELION>
-
-Run `revdepcheck::revdep_details(, "DANDELION")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # dartR.base (1.2.3)
 
 * GitHub mirror: <https://github.com/cran/dartR.base>
@@ -9022,34 +6484,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dartR.captive (1.2.2)
-
-* GitHub mirror: <https://github.com/cran/dartR.captive>
-
-Run `revdepcheck::revdep_details(, "dartR.captive")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -9140,90 +6574,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# data.tree (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/data.tree>
-
-Run `revdepcheck::revdep_details(, "data.tree")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# data.validator (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/data.validator>
-
-Run `revdepcheck::revdep_details(, "data.validator")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# DatabionicSwarm (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/DatabionicSwarm>
-
-Run `revdepcheck::revdep_details(, "DatabionicSwarm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # DataExplorer (0.9.0)
 
 * GitHub mirror: <https://github.com/cran/DataExplorer>
@@ -9246,90 +6596,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# datapack (1.4.2)
-
-* GitHub mirror: <https://github.com/cran/datapack>
-
-Run `revdepcheck::revdep_details(, "datapack")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dataquieR (2.8.9)
-
-* GitHub mirror: <https://github.com/cran/dataquieR>
-
-Run `revdepcheck::revdep_details(, "dataquieR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# DataSimilarity (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/DataSimilarity>
-
-Run `revdepcheck::revdep_details(, "DataSimilarity")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -9420,90 +6686,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# DCLEAR (1.0.13)
-
-* GitHub mirror: <https://github.com/cran/DCLEAR>
-
-Run `revdepcheck::revdep_details(, "DCLEAR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dcmstan (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/dcmstan>
-
-Run `revdepcheck::revdep_details(, "dcmstan")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# DDD (5.2.5)
-
-* GitHub mirror: <https://github.com/cran/DDD>
-
-Run `revdepcheck::revdep_details(, "DDD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ddtlcm (0.2.1)
 
 * GitHub mirror: <https://github.com/cran/ddtlcm>
@@ -9560,34 +6742,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# DedooseR (2.0.0.2)
-
-* GitHub mirror: <https://github.com/cran/DedooseR>
-
-Run `revdepcheck::revdep_details(, "DedooseR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # DeepLearningCausal (0.0.107)
 
 * GitHub mirror: <https://github.com/cran/DeepLearningCausal>
@@ -9638,34 +6792,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# depCensoring (0.1.10)
-
-* GitHub mirror: <https://github.com/cran/depCensoring>
-
-Run `revdepcheck::revdep_details(, "depCensoring")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -10008,34 +7134,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# discursive (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/discursive>
-
-Run `revdepcheck::revdep_details(, "discursive")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # disdat (1.1-0)
 
 * GitHub mirror: <https://github.com/cran/disdat>
@@ -10058,34 +7156,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 ```
 shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# diseasemapping (2.0.6)
-
-* GitHub mirror: <https://github.com/cran/diseasemapping>
-
-Run `revdepcheck::revdep_details(, "diseasemapping")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -10204,62 +7274,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# DNetFinder (1.1)
-
-* GitHub mirror: <https://github.com/cran/DNetFinder>
-
-Run `revdepcheck::revdep_details(, "DNetFinder")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dnr (0.3.6)
-
-* GitHub mirror: <https://github.com/cran/dnr>
-
-Run `revdepcheck::revdep_details(, "dnr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # do3PCA (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/do3PCA>
@@ -10282,62 +7296,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dockViewR (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/dockViewR>
-
-Run `revdepcheck::revdep_details(, "dockViewR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# dodgr (0.4.3)
-
-* GitHub mirror: <https://github.com/cran/dodgr>
-
-Run `revdepcheck::revdep_details(, "dodgr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -10540,34 +7498,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
-# drake (7.13.11)
-
-* GitHub mirror: <https://github.com/cran/drake>
-
-Run `revdepcheck::revdep_details(, "drake")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # drclust (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/drclust>
@@ -10590,34 +7520,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# DrugSim2DR (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/DrugSim2DR>
-
-Run `revdepcheck::revdep_details(, "DrugSim2DR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
 
 
 
@@ -10707,34 +7609,6 @@ Run `revdepcheck::revdep_details(, "dsem")` for more info
 
 ```
 <00install.out file does not exist>
-
-
-```
-# dsmSearch (1.2.4)
-
-* GitHub mirror: <https://github.com/cran/dsmSearch>
-
-Run `revdepcheck::revdep_details(, "dsmSearch")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
 
 
 ```
@@ -10844,34 +7718,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# DWBmodelUN (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/DWBmodelUN>
-
-Run `revdepcheck::revdep_details(, "DWBmodelUN")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -11018,34 +7864,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# dySEM (1.4.1)
-
-* GitHub mirror: <https://github.com/cran/dySEM>
-
-Run `revdepcheck::revdep_details(, "dySEM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # E2E (0.1.3)
 
 * GitHub mirror: <https://github.com/cran/E2E>
@@ -11124,62 +7942,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# earthtones (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/earthtones>
-
-Run `revdepcheck::revdep_details(, "earthtones")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# easyalluvial (0.4.1)
-
-* GitHub mirror: <https://github.com/cran/easyalluvial>
-
-Run `revdepcheck::revdep_details(, "easyalluvial")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -11270,34 +8032,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# ebirdst (4.2023.0)
-
-* GitHub mirror: <https://github.com/cran/ebirdst>
-
-Run `revdepcheck::revdep_details(, "ebirdst")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ebmc (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/ebmc>
@@ -11320,34 +8054,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ecoCopula (1.0.6)
-
-* GitHub mirror: <https://github.com/cran/ecoCopula>
-
-Run `revdepcheck::revdep_details(, "ecoCopula")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -11466,34 +8172,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# econullnetr (0.2.2)
-
-* GitHub mirror: <https://github.com/cran/econullnetr>
-
-Run `revdepcheck::revdep_details(, "econullnetr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ecopower (0.2.0)
 
 * GitHub mirror: <https://github.com/cran/ecopower>
@@ -11550,34 +8228,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# ecostats (1.2.2)
-
-* GitHub mirror: <https://github.com/cran/ecostats>
-
-Run `revdepcheck::revdep_details(, "ecostats")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # EcotoneFinder (0.2.3)
 
 * GitHub mirror: <https://github.com/cran/EcotoneFinder>
@@ -11606,34 +8256,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# ecotraj (1.2.2)
-
-* GitHub mirror: <https://github.com/cran/ecotraj>
-
-Run `revdepcheck::revdep_details(, "ecotraj")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # edgebundleR (0.1.4)
 
 * GitHub mirror: <https://github.com/cran/edgebundleR>
@@ -11656,118 +8278,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# editbl (1.3.2)
-
-* GitHub mirror: <https://github.com/cran/editbl>
-
-Run `revdepcheck::revdep_details(, "editbl")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# eDITH (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/eDITH>
-
-Run `revdepcheck::revdep_details(, "eDITH")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# editrules (2.9.6)
-
-* GitHub mirror: <https://github.com/cran/editrules>
-
-Run `revdepcheck::revdep_details(, "editrules")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# EDOIF (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/EDOIF>
-
-Run `revdepcheck::revdep_details(, "EDOIF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -11914,62 +8424,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# elevatr (0.99.1)
-
-* GitHub mirror: <https://github.com/cran/elevatr>
-
-Run `revdepcheck::revdep_details(, "elevatr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# elsa (1.1-28)
-
-* GitHub mirror: <https://github.com/cran/elsa>
-
-Run `revdepcheck::revdep_details(, "elsa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # emcAdr (1.3)
 
 * GitHub mirror: <https://github.com/cran/emcAdr>
@@ -12082,34 +8536,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# envar (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/envar>
-
-Run `revdepcheck::revdep_details(, "envar")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # enveomics.R (1.10.0)
 
 * GitHub mirror: <https://github.com/cran/enveomics.R>
@@ -12135,6 +8561,36 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 
+
+
+```
+# envi (1.0.1)
+
+* GitHub mirror: <https://github.com/cran/envi>
+
+Run `revdepcheck::revdep_details(, "envi")` for more info
+
+## In both
+
+*   checking whether package ‘envi’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/envi.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
 
 
 ```
@@ -12306,34 +8762,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# epinetr (0.96)
-
-* GitHub mirror: <https://github.com/cran/epinetr>
-
-Run `revdepcheck::revdep_details(, "epinetr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # epiparameter (0.4.1)
 
 * GitHub mirror: <https://github.com/cran/epiparameter>
@@ -12446,90 +8874,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# epiworldRShiny (0.2.3)
-
-* GitHub mirror: <https://github.com/cran/epiworldRShiny>
-
-Run `revdepcheck::revdep_details(, "epiworldRShiny")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# equatiomatic (0.4.8)
-
-* GitHub mirror: <https://github.com/cran/equatiomatic>
-
-Run `revdepcheck::revdep_details(, "equatiomatic")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ERDbuilder (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/ERDbuilder>
-
-Run `revdepcheck::revdep_details(, "ERDbuilder")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ergMargins (1.6.2)
 
 * GitHub mirror: <https://github.com/cran/ergMargins>
@@ -12586,34 +8930,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# ERPM (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/ERPM>
-
-Run `revdepcheck::revdep_details(, "ERPM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # eRTG3D (0.7.0)
 
 * GitHub mirror: <https://github.com/cran/eRTG3D>
@@ -12664,34 +8980,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# eseis (0.8.1)
-
-* GitHub mirror: <https://github.com/cran/eseis>
-
-Run `revdepcheck::revdep_details(, "eseis")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -12778,34 +9066,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# eva3dm (1.20)
-
-* GitHub mirror: <https://github.com/cran/eva3dm>
-
-Run `revdepcheck::revdep_details(, "eva3dm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -12952,90 +9212,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# exdqlm (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/exdqlm>
-
-Run `revdepcheck::revdep_details(, "exdqlm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# explore (1.4.0)
-
-* GitHub mirror: <https://github.com/cran/explore>
-
-Run `revdepcheck::revdep_details(, "explore")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ExposR (1.2)
-
-* GitHub mirror: <https://github.com/cran/ExposR>
-
-Run `revdepcheck::revdep_details(, "ExposR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ExpressionCellNet (0.1.2)
 
 * GitHub mirror: <https://github.com/cran/ExpressionCellNet>
@@ -13114,34 +9290,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# FAIRmaterials (0.4.2.1)
-
-* GitHub mirror: <https://github.com/cran/FAIRmaterials>
-
-Run `revdepcheck::revdep_details(, "FAIRmaterials")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -13316,34 +9464,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# fastreg (0.14.1)
-
-* GitHub mirror: <https://github.com/cran/fastreg>
-
-Run `revdepcheck::revdep_details(, "fastreg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # FastRet (1.3.0)
 
 * GitHub mirror: <https://github.com/cran/FastRet>
@@ -13366,34 +9486,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# fastRG (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/fastRG>
-
-Run `revdepcheck::revdep_details(, "fastRG")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -13450,34 +9542,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# FD (1.0-12.5)
-
-* GitHub mirror: <https://github.com/cran/FD>
-
-Run `revdepcheck::revdep_details(, "FD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -13624,34 +9688,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# finalfit (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/finalfit>
-
-Run `revdepcheck::revdep_details(, "finalfit")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # finnts (0.6.0)
 
 * GitHub mirror: <https://github.com/cran/finnts>
@@ -13702,62 +9738,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# fishtree (0.3.4)
-
-* GitHub mirror: <https://github.com/cran/fishtree>
-
-Run `revdepcheck::revdep_details(, "fishtree")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# FjordLight (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/FjordLight>
-
-Run `revdepcheck::revdep_details(, "FjordLight")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
 
 
 
@@ -13904,34 +9884,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# flowcluster (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/flowcluster>
-
-Run `revdepcheck::revdep_details(, "flowcluster")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # fnets (0.1.6)
 
 * GitHub mirror: <https://github.com/cran/fnets>
@@ -13954,90 +9906,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# foodwebr (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/foodwebr>
-
-Run `revdepcheck::revdep_details(, "foodwebr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# FoRecoML (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/FoRecoML>
-
-Run `revdepcheck::revdep_details(, "FoRecoML")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ForestTools (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/ForestTools>
-
-Run `revdepcheck::revdep_details(, "ForestTools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -14094,34 +9962,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# fpp2 (2.5.1)
-
-* GitHub mirror: <https://github.com/cran/fpp2>
-
-Run `revdepcheck::revdep_details(, "fpp2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -14240,34 +10080,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# FRK (2.3.2)
-
-* GitHub mirror: <https://github.com/cran/FRK>
-
-Run `revdepcheck::revdep_details(, "FRK")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # fullRankMatrix (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/fullRankMatrix>
@@ -14318,62 +10130,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# funcMapper (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/funcMapper>
-
-Run `revdepcheck::revdep_details(, "funcMapper")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# funcml (0.7.1)
-
-* GitHub mirror: <https://github.com/cran/funcml>
-
-Run `revdepcheck::revdep_details(, "funcml")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -14436,179 +10192,11 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# funviewR (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/funviewR>
-
-Run `revdepcheck::revdep_details(, "funviewR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# FWRGB (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/FWRGB>
-
-Run `revdepcheck::revdep_details(, "FWRGB")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # GALLO (2.0)
 
 * GitHub mirror: <https://github.com/cran/GALLO>
 
 Run `revdepcheck::revdep_details(, "GALLO")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GapAnalysis (2.1.0)
-
-* GitHub mirror: <https://github.com/cran/GapAnalysis>
-
-Run `revdepcheck::revdep_details(, "GapAnalysis")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GCD (4.0.7)
-
-* GitHub mirror: <https://github.com/cran/GCD>
-
-Run `revdepcheck::revdep_details(, "GCD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GDPuc (1.6.1)
-
-* GitHub mirror: <https://github.com/cran/GDPuc>
-
-Run `revdepcheck::revdep_details(, "GDPuc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gdverse (1.6)
-
-* GitHub mirror: <https://github.com/cran/gdverse>
-
-Run `revdepcheck::revdep_details(, "gdverse")` for more info
 
 ## Error before installation
 
@@ -14660,34 +10248,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# gecko (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/gecko>
-
-Run `revdepcheck::revdep_details(, "gecko")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # gedi2 (2.3.4)
 
 * GitHub mirror: <https://github.com/cran/gedi2>
@@ -14710,118 +10270,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GeneNMF (0.9.2)
-
-* GitHub mirror: <https://github.com/cran/GeneNMF>
-
-Run `revdepcheck::revdep_details(, "GeneNMF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GenericML (0.2.3)
-
-* GitHub mirror: <https://github.com/cran/GenericML>
-
-Run `revdepcheck::revdep_details(, "GenericML")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# genridge (0.8.0)
-
-* GitHub mirror: <https://github.com/cran/genridge>
-
-Run `revdepcheck::revdep_details(, "genridge")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GeoAdjust (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/GeoAdjust>
-
-Run `revdepcheck::revdep_details(, "GeoAdjust")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -14878,62 +10326,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# geocomplexity (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/geocomplexity>
-
-Run `revdepcheck::revdep_details(, "geocomplexity")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# geodata (0.6-9)
-
-* GitHub mirror: <https://github.com/cran/geodata>
-
-Run `revdepcheck::revdep_details(, "geodata")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
 
 
 
@@ -15130,62 +10522,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# geoprofiler (0.0.3)
-
-* GitHub mirror: <https://github.com/cran/geoprofiler>
-
-Run `revdepcheck::revdep_details(, "geoprofiler")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GeoRange (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/GeoRange>
-
-Run `revdepcheck::revdep_details(, "GeoRange")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -15472,34 +10808,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# ggflowchart (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/ggflowchart>
-
-Run `revdepcheck::revdep_details(, "ggflowchart")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ggm (2.5.4)
 
 * GitHub mirror: <https://github.com/cran/ggm>
@@ -15533,34 +10841,6 @@ shard 38 uploaded no result for this package; its job did not finish
 * GitHub mirror: <https://github.com/cran/ggmapcn>
 
 Run `revdepcheck::revdep_details(, "ggmapcn")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ggmcmc (1.5.1.2)
-
-* GitHub mirror: <https://github.com/cran/ggmcmc>
-
-Run `revdepcheck::revdep_details(, "ggmcmc")` for more info
 
 ## Error before installation
 
@@ -15954,34 +11234,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# ggsem (1.0.0.1)
-
-* GitHub mirror: <https://github.com/cran/ggsem>
-
-Run `revdepcheck::revdep_details(, "ggsem")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ggspatial (1.1.10)
 
 * GitHub mirror: <https://github.com/cran/ggspatial>
@@ -16088,34 +11340,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gimme (10.0)
-
-* GitHub mirror: <https://github.com/cran/gimme>
-
-Run `revdepcheck::revdep_details(, "gimme")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -16434,62 +11658,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# gmgm (1.1.3)
-
-* GitHub mirror: <https://github.com/cran/gmgm>
-
-Run `revdepcheck::revdep_details(, "gmgm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GMPro (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/GMPro>
-
-Run `revdepcheck::revdep_details(, "GMPro")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # gms (0.31.2)
 
 * GitHub mirror: <https://github.com/cran/gms>
@@ -16512,34 +11680,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 ```
 shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gmwmx2 (0.0.5)
-
-* GitHub mirror: <https://github.com/cran/gmwmx2>
-
-Run `revdepcheck::revdep_details(, "gmwmx2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -16658,62 +11798,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 
 ```
-# goeveg (0.7.10)
-
-* GitHub mirror: <https://github.com/cran/goeveg>
-
-Run `revdepcheck::revdep_details(, "goeveg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# goldfish (1.6.12)
-
-* GitHub mirror: <https://github.com/cran/goldfish>
-
-Run `revdepcheck::revdep_details(, "goldfish")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # GoodFibes (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/GoodFibes>
@@ -16770,90 +11854,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# gor (2.0)
-
-* GitHub mirror: <https://github.com/cran/gor>
-
-Run `revdepcheck::revdep_details(, "gor")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gosset (1.5.1)
-
-* GitHub mirror: <https://github.com/cran/gosset>
-
-Run `revdepcheck::revdep_details(, "gosset")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# goxygen (1.4.5)
-
-* GitHub mirror: <https://github.com/cran/goxygen>
-
-Run `revdepcheck::revdep_details(, "goxygen")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # gpkg (0.0.14)
 
 * GitHub mirror: <https://github.com/cran/gpkg>
@@ -16876,34 +11876,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gps.track (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/gps.track>
-
-Run `revdepcheck::revdep_details(, "gps.track")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -16960,34 +11932,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 ```
 shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GRAB (0.2.5)
-
-* GitHub mirror: <https://github.com/cran/GRAB>
-
-Run `revdepcheck::revdep_details(, "GRAB")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
 
 
 
@@ -17078,34 +12022,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# graphonmix (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/graphonmix>
-
-Run `revdepcheck::revdep_details(, "graphonmix")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # grasps (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/grasps>
@@ -17134,34 +12050,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# gratia (0.11.2)
-
-* GitHub mirror: <https://github.com/cran/gratia>
-
-Run `revdepcheck::revdep_details(, "gratia")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # graticule (0.4.0)
 
 * GitHub mirror: <https://github.com/cran/graticule>
@@ -17184,34 +12072,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# gRaven (1.1.10)
-
-* GitHub mirror: <https://github.com/cran/gRaven>
-
-Run `revdepcheck::revdep_details(, "gRaven")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -17470,62 +12330,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# GUniFrac (1.9)
-
-* GitHub mirror: <https://github.com/cran/GUniFrac>
-
-Run `revdepcheck::revdep_details(, "GUniFrac")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# GWmodel (2.4-1)
-
-* GitHub mirror: <https://github.com/cran/GWmodel>
-
-Run `revdepcheck::revdep_details(, "GWmodel")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # GWSDAT (3.3.0)
 
 * GitHub mirror: <https://github.com/cran/GWSDAT>
@@ -17554,62 +12358,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# h3sdm (0.1.7)
-
-* GitHub mirror: <https://github.com/cran/h3sdm>
-
-Run `revdepcheck::revdep_details(, "h3sdm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# habtools (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/habtools>
-
-Run `revdepcheck::revdep_details(, "habtools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # HACSim (1.0.7-1)
 
 * GitHub mirror: <https://github.com/cran/HACSim>
@@ -17632,34 +12380,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# hagis (4.0.0)
-
-* GitHub mirror: <https://github.com/cran/hagis>
-
-Run `revdepcheck::revdep_details(, "hagis")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -17716,34 +12436,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 ```
 shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# harbinger (2.1.707)
-
-* GitHub mirror: <https://github.com/cran/harbinger>
-
-Run `revdepcheck::revdep_details(, "harbinger")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -17884,62 +12576,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# hdMTD (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/hdMTD>
-
-Run `revdepcheck::revdep_details(, "hdMTD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# healthiar (0.2.4)
-
-* GitHub mirror: <https://github.com/cran/healthiar>
-
-Run `revdepcheck::revdep_details(, "healthiar")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -18254,34 +12890,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# highcharter (0.9.5)
-
-* GitHub mirror: <https://github.com/cran/highcharter>
-
-Run `revdepcheck::revdep_details(, "highcharter")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # highMLR (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/highMLR>
@@ -18332,62 +12940,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# hipecR (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/hipecR>
-
-Run `revdepcheck::revdep_details(, "hipecR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# hisse (2.1.11)
-
-* GitHub mirror: <https://github.com/cran/hisse>
-
-Run `revdepcheck::revdep_details(, "hisse")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -18508,34 +13060,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# HonestDiD (0.2.8)
-
-* GitHub mirror: <https://github.com/cran/HonestDiD>
-
-Run `revdepcheck::revdep_details(, "HonestDiD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # hood2net (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/hood2net>
@@ -18558,34 +13082,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# HospitalNetwork (0.9.4)
-
-* GitHub mirror: <https://github.com/cran/HospitalNetwork>
-
-Run `revdepcheck::revdep_details(, "HospitalNetwork")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -18928,34 +13424,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# IATscores (0.2.8)
-
-* GitHub mirror: <https://github.com/cran/IATscores>
-
-Run `revdepcheck::revdep_details(, "IATscores")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # IBLM (1.0.2)
 
 * GitHub mirror: <https://github.com/cran/IBLM>
@@ -19068,118 +13536,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# ICtest (0.3-7)
-
-* GitHub mirror: <https://github.com/cran/ICtest>
-
-Run `revdepcheck::revdep_details(, "ICtest")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ICvectorfields (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/ICvectorfields>
-
-Run `revdepcheck::revdep_details(, "ICvectorfields")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ideanet (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/ideanet>
-
-Run `revdepcheck::revdep_details(, "ideanet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# idiographic (0.3.2)
-
-* GitHub mirror: <https://github.com/cran/idiographic>
-
-Run `revdepcheck::revdep_details(, "idiographic")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # IDMIR (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/IDMIR>
@@ -19286,34 +13642,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 ```
 shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ig.degree.betweenness (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/ig.degree.betweenness>
-
-Run `revdepcheck::revdep_details(, "ig.degree.betweenness")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -19594,34 +13922,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# immundata (0.0.7)
-
-* GitHub mirror: <https://github.com/cran/immundata>
-
-Run `revdepcheck::revdep_details(, "immundata")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
 
 
 
@@ -19936,34 +14236,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# infoxtr (0.2)
-
-* GitHub mirror: <https://github.com/cran/infoxtr>
-
-Run `revdepcheck::revdep_details(, "infoxtr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # INLABMA (0.1-12)
 
 * GitHub mirror: <https://github.com/cran/INLABMA>
@@ -19986,34 +14258,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# inlabru (2.15.0)
-
-* GitHub mirror: <https://github.com/cran/inlabru>
-
-Run `revdepcheck::revdep_details(, "inlabru")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -20070,118 +14314,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# interca (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/interca>
-
-Run `revdepcheck::revdep_details(, "interca")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# interflex (1.4.0)
-
-* GitHub mirror: <https://github.com/cran/interflex>
-
-Run `revdepcheck::revdep_details(, "interflex")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# interp (1.1-6)
-
-* GitHub mirror: <https://github.com/cran/interp>
-
-Run `revdepcheck::revdep_details(, "interp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# InterpolateR (1.4-3)
-
-* GitHub mirror: <https://github.com/cran/InterpolateR>
-
-Run `revdepcheck::revdep_details(, "InterpolateR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -20300,34 +14432,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# ipADMIXTURE (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/ipADMIXTURE>
-
-Run `revdepcheck::revdep_details(, "ipADMIXTURE")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ipdw (2.0-0)
 
 * GitHub mirror: <https://github.com/cran/ipdw>
@@ -20412,34 +14516,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# irboost (0.2-1.1)
-
-* GitHub mirror: <https://github.com/cran/irboost>
-
-Run `revdepcheck::revdep_details(, "irboost")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # irg (0.1.6)
 
 * GitHub mirror: <https://github.com/cran/irg>
@@ -20462,118 +14538,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# irtrees (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/irtrees>
-
-Run `revdepcheck::revdep_details(, "irtrees")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# isa2 (0.3.6)
-
-* GitHub mirror: <https://github.com/cran/isa2>
-
-Run `revdepcheck::revdep_details(, "isa2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# IsingFit (0.4)
-
-* GitHub mirror: <https://github.com/cran/IsingFit>
-
-Run `revdepcheck::revdep_details(, "IsingFit")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ivd (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/ivd>
-
-Run `revdepcheck::revdep_details(, "ivd")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -20776,34 +14740,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# joinery (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/joinery>
-
-Run `revdepcheck::revdep_details(, "joinery")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # jollofR (0.6.5)
 
 * GitHub mirror: <https://github.com/cran/jollofR>
@@ -20888,62 +14824,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# jsmodule (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/jsmodule>
-
-Run `revdepcheck::revdep_details(, "jsmodule")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# junco (0.1.6)
-
-* GitHub mirror: <https://github.com/cran/junco>
-
-Run `revdepcheck::revdep_details(, "junco")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # justifier (0.2.8)
 
 * GitHub mirror: <https://github.com/cran/justifier>
@@ -21000,34 +14880,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
-# kernelPhil (0.2)
-
-* GitHub mirror: <https://github.com/cran/kernelPhil>
-
-Run `revdepcheck::revdep_details(, "kernelPhil")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # kesernetwork (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/kesernetwork>
@@ -21078,34 +14930,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# kgraph (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/kgraph>
-
-Run `revdepcheck::revdep_details(, "kgraph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
 
 
 
@@ -21252,62 +15076,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# klovan (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/klovan>
-
-Run `revdepcheck::revdep_details(, "klovan")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# kmer (1.1.3)
-
-* GitHub mirror: <https://github.com/cran/kmer>
-
-Run `revdepcheck::revdep_details(, "kmer")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # KMLtoSHAPE (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/KMLtoSHAPE>
@@ -21330,118 +15098,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# knfi (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/knfi>
-
-Run `revdepcheck::revdep_details(, "knfi")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# knitr (1.51)
-
-* GitHub mirror: <https://github.com/cran/knitr>
-
-Run `revdepcheck::revdep_details(, "knitr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# knitrBootstrap (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/knitrBootstrap>
-
-Run `revdepcheck::revdep_details(, "knitrBootstrap")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# KOLaide (0.0.1)
-
-* GitHub mirror: <https://github.com/cran/KOLaide>
-
-Run `revdepcheck::revdep_details(, "KOLaide")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -21476,62 +15132,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# kuzco (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/kuzco>
-
-Run `revdepcheck::revdep_details(, "kuzco")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# L0Learn (2.1.0)
-
-* GitHub mirror: <https://github.com/cran/L0Learn>
-
-Run `revdepcheck::revdep_details(, "L0Learn")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # L1centrality (0.5.2)
 
 * GitHub mirror: <https://github.com/cran/L1centrality>
@@ -21554,62 +15154,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# l1spectral (0.99.6)
-
-* GitHub mirror: <https://github.com/cran/l1spectral>
-
-Run `revdepcheck::revdep_details(, "l1spectral")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LabApplStat (1.4.4)
-
-* GitHub mirror: <https://github.com/cran/LabApplStat>
-
-Run `revdepcheck::revdep_details(, "LabApplStat")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
 
 
 
@@ -21672,34 +15216,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# lagsarlmtree (1.0-2)
-
-* GitHub mirror: <https://github.com/cran/lagsarlmtree>
-
-Run `revdepcheck::revdep_details(, "lagsarlmtree")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # LAIr (0.3.0)
 
 * GitHub mirror: <https://github.com/cran/LAIr>
@@ -21722,34 +15238,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LAM (0.7-22)
-
-* GitHub mirror: <https://github.com/cran/LAM>
-
-Run `revdepcheck::revdep_details(, "LAM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -21784,34 +15272,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# lame (1.3.4)
-
-* GitHub mirror: <https://github.com/cran/lame>
-
-Run `revdepcheck::revdep_details(, "lame")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # landscapeR (1.3.1)
 
 * GitHub mirror: <https://github.com/cran/landscapeR>
@@ -21834,62 +15294,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# langevitour (0.8.1)
-
-* GitHub mirror: <https://github.com/cran/langevitour>
-
-Run `revdepcheck::revdep_details(, "langevitour")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# latbias (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/latbias>
-
-Run `revdepcheck::revdep_details(, "latbias")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -22008,34 +15412,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# lconnect (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/lconnect>
-
-Run `revdepcheck::revdep_details(, "lconnect")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # leafem (0.2.5)
 
 * GitHub mirror: <https://github.com/cran/leafem>
@@ -22058,90 +15434,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# leaflet (2.2.3)
-
-* GitHub mirror: <https://github.com/cran/leaflet>
-
-Run `revdepcheck::revdep_details(, "leaflet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LearnVizLMM (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/LearnVizLMM>
-
-Run `revdepcheck::revdep_details(, "LearnVizLMM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# leastcostpath (2.0.13)
-
-* GitHub mirror: <https://github.com/cran/leastcostpath>
-
-Run `revdepcheck::revdep_details(, "leastcostpath")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -22176,34 +15468,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# letsR (6.0)
-
-* GitHub mirror: <https://github.com/cran/letsR>
-
-Run `revdepcheck::revdep_details(, "letsR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # LexisNexisTools (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/LexisNexisTools>
@@ -22232,74 +15496,18 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# lexRankr (0.5.2)
-
-* GitHub mirror: <https://github.com/cran/lexRankr>
-
-Run `revdepcheck::revdep_details(, "lexRankr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # lgcp (2.0-1)
 
 * GitHub mirror: <https://github.com/cran/lgcp>
 
 Run `revdepcheck::revdep_details(, "lgcp")` for more info
 
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# Libra (1.7)
-
-* GitHub mirror: <https://github.com/cran/Libra>
-
-Run `revdepcheck::revdep_details(, "Libra")` for more info
-
 ## In both
 
-*   checking whether package ‘Libra’ can be installed ... ERROR
+*   checking whether package ‘lgcp’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/Libra.Rcheck/00install.out’ for details.
+     See ‘<lib>/lgcp.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -22307,40 +15515,14 @@ Run `revdepcheck::revdep_details(, "Libra")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/new/Libra.Rcheck/Libra’
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/old/Libra.Rcheck/Libra’
+<00install.out file does not exist>
 
 
 ```
@@ -22372,34 +15554,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# linkprediction (1.0-0)
-
-* GitHub mirror: <https://github.com/cran/linkprediction>
-
-Run `revdepcheck::revdep_details(, "linkprediction")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # lisat (0.1.2)
 
 * GitHub mirror: <https://github.com/cran/lisat>
@@ -22422,62 +15576,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LLMAgentR (0.3.2)
-
-* GitHub mirror: <https://github.com/cran/LLMAgentR>
-
-Run `revdepcheck::revdep_details(, "LLMAgentR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LLMing (1.2.1)
-
-* GitHub mirror: <https://github.com/cran/LLMing>
-
-Run `revdepcheck::revdep_details(, "LLMing")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -22568,34 +15666,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# lolog (1.3.2)
-
-* GitHub mirror: <https://github.com/cran/lolog>
-
-Run `revdepcheck::revdep_details(, "lolog")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # longreadvqs (0.1.5)
 
 * GitHub mirror: <https://github.com/cran/longreadvqs>
@@ -22663,7 +15733,7 @@ Run `revdepcheck::revdep_details(, "loon.ggplot")` for more info
 ### Devel
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
+Dependencies not installed: loon
 
 
 
@@ -22673,7 +15743,7 @@ shard 40 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
+Dependencies not installed: loon
 
 
 
@@ -22766,34 +15836,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# LorMe (2.0.2)
-
-* GitHub mirror: <https://github.com/cran/LorMe>
-
-Run `revdepcheck::revdep_details(, "LorMe")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # lpanda (0.2.1)
 
 * GitHub mirror: <https://github.com/cran/lpanda>
@@ -22878,34 +15920,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# LS2Wstat (2.1-5)
-
-* GitHub mirror: <https://github.com/cran/LS2Wstat>
-
-Run `revdepcheck::revdep_details(, "LS2Wstat")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # LSAMBA (2024.1.1)
 
 * GitHub mirror: <https://github.com/cran/LSAMBA>
@@ -22956,34 +15970,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# LSDsensitivity (1.3.2)
-
-* GitHub mirror: <https://github.com/cran/LSDsensitivity>
-
-Run `revdepcheck::revdep_details(, "LSDsensitivity")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -23124,34 +16110,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 ```
 shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# lvmPlot (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/lvmPlot>
-
-Run `revdepcheck::revdep_details(, "lvmPlot")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -23494,34 +16452,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# manydist (0.5.1)
-
-* GitHub mirror: <https://github.com/cran/manydist>
-
-Run `revdepcheck::revdep_details(, "manydist")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # manymome (0.3.6)
 
 * GitHub mirror: <https://github.com/cran/manymome>
@@ -23572,34 +16502,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# maotai (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/maotai>
-
-Run `revdepcheck::revdep_details(, "maotai")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -23718,34 +16620,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# mapscanner (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/mapscanner>
-
-Run `revdepcheck::revdep_details(, "mapscanner")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mapsf (1.2.1)
 
 * GitHub mirror: <https://github.com/cran/mapsf>
@@ -23768,34 +16642,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mapSpain (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/mapSpain>
-
-Run `revdepcheck::revdep_details(, "mapSpain")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
 
 
 
@@ -23858,34 +16704,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# markophylo (1.0.9)
-
-* GitHub mirror: <https://github.com/cran/markophylo>
-
-Run `revdepcheck::revdep_details(, "markophylo")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # marmap (1.0.12)
 
 * GitHub mirror: <https://github.com/cran/marmap>
@@ -23914,34 +16732,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# mascarade (0.4.3)
-
-* GitHub mirror: <https://github.com/cran/mascarade>
-
-Run `revdepcheck::revdep_details(, "mascarade")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # maskRangeR (1.1)
 
 * GitHub mirror: <https://github.com/cran/maskRangeR>
@@ -23964,34 +16754,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mastif (2.4)
-
-* GitHub mirror: <https://github.com/cran/mastif>
-
-Run `revdepcheck::revdep_details(, "mastif")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -24110,34 +16872,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# mbg (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/mbg>
-
-Run `revdepcheck::revdep_details(, "mbg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # MBGapp (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/MBGapp>
@@ -24160,118 +16894,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MBHdesign (2.3.15)
-
-* GitHub mirror: <https://github.com/cran/MBHdesign>
-
-Run `revdepcheck::revdep_details(, "MBHdesign")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MBMethPred (0.1.4.4)
-
-* GitHub mirror: <https://github.com/cran/MBMethPred>
-
-Run `revdepcheck::revdep_details(, "MBMethPred")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MBNMAdose (0.5.1)
-
-* GitHub mirror: <https://github.com/cran/MBNMAdose>
-
-Run `revdepcheck::revdep_details(, "MBNMAdose")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MBNMAtime (0.2.6)
-
-* GitHub mirror: <https://github.com/cran/MBNMAtime>
-
-Run `revdepcheck::revdep_details(, "MBNMAtime")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -24390,62 +17012,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# mcMST (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/mcMST>
-
-Run `revdepcheck::revdep_details(, "mcMST")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mcvis (1.0.8)
-
-* GitHub mirror: <https://github.com/cran/mcvis>
-
-Run `revdepcheck::revdep_details(, "mcvis")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # MDgof (1.1.0)
 
 * GitHub mirror: <https://github.com/cran/MDgof>
@@ -24502,34 +17068,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# metabook (0.2-0)
-
-* GitHub mirror: <https://github.com/cran/metabook>
-
-Run `revdepcheck::revdep_details(, "metabook")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # metacoder (0.3.9)
 
 * GitHub mirror: <https://github.com/cran/metacoder>
@@ -24558,67 +17096,11 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# metadat (1.6-0)
-
-* GitHub mirror: <https://github.com/cran/metadat>
-
-Run `revdepcheck::revdep_details(, "metadat")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # metafor (5.0-1)
 
 * GitHub mirror: <https://github.com/cran/metafor>
 
 Run `revdepcheck::revdep_details(, "metafor")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# metainsight (7.1.0)
-
-* GitHub mirror: <https://github.com/cran/metainsight>
-
-Run `revdepcheck::revdep_details(, "metainsight")` for more info
 
 ## Error before installation
 
@@ -24664,34 +17146,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 ```
 shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MetaNet (0.3.2)
-
-* GitHub mirror: <https://github.com/cran/MetaNet>
-
-Run `revdepcheck::revdep_details(, "MetaNet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
 
 
 
@@ -24894,62 +17348,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# mets (1.3.12)
-
-* GitHub mirror: <https://github.com/cran/mets>
-
-Run `revdepcheck::revdep_details(, "mets")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mFD (1.0.7)
-
-* GitHub mirror: <https://github.com/cran/mFD>
-
-Run `revdepcheck::revdep_details(, "mFD")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # MFF (0.2.0)
 
 * GitHub mirror: <https://github.com/cran/MFF>
@@ -24961,7 +17359,7 @@ Run `revdepcheck::revdep_details(, "MFF")` for more info
 ### Devel
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
+new check timed out after 1200s, at: * checking examples ...
 
 
 
@@ -24971,35 +17369,7 @@ shard 29 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mfpp (0.0.9)
-
-* GitHub mirror: <https://github.com/cran/mfpp>
-
-Run `revdepcheck::revdep_details(, "mfpp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
+new check timed out after 1200s, at: * checking examples ...
 
 
 
@@ -25028,62 +17398,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mgcViz (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/mgcViz>
-
-Run `revdepcheck::revdep_details(, "mgcViz")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# micd (1.1.2)
-
-* GitHub mirror: <https://github.com/cran/micd>
-
-Run `revdepcheck::revdep_details(, "micd")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
 
 
 
@@ -25140,34 +17454,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 ```
 shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# micromapST (3.1.1)
-
-* GitHub mirror: <https://github.com/cran/micromapST>
-
-Run `revdepcheck::revdep_details(, "micromapST")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
 
 
 
@@ -25336,34 +17622,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# miniCRAN (0.3.2)
-
-* GitHub mirror: <https://github.com/cran/miniCRAN>
-
-Run `revdepcheck::revdep_details(, "miniCRAN")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -25604,34 +17862,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
-# MissCP (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/MissCP>
-
-Run `revdepcheck::revdep_details(, "MissCP")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # missoNet (1.5.1)
 
 * GitHub mirror: <https://github.com/cran/missoNet>
@@ -25738,34 +17968,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mixgb (2.2.3)
-
-* GitHub mirror: <https://github.com/cran/mixgb>
-
-Run `revdepcheck::revdep_details(, "mixgb")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
 
 
 
@@ -26192,34 +18394,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# mlr3tuning (1.6.1)
-
-* GitHub mirror: <https://github.com/cran/mlr3tuning>
-
-Run `revdepcheck::revdep_details(, "mlr3tuning")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mlr3tuningspaces (0.7.0)
 
 * GitHub mirror: <https://github.com/cran/mlr3tuningspaces>
@@ -26276,34 +18450,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# mlrCPO (0.3.8)
-
-* GitHub mirror: <https://github.com/cran/mlrCPO>
-
-Run `revdepcheck::revdep_details(, "mlrCPO")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mlrintermbo (0.5.1-1)
 
 * GitHub mirror: <https://github.com/cran/mlrintermbo>
@@ -26354,90 +18500,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mlVAR (0.7.3)
-
-* GitHub mirror: <https://github.com/cran/mlVAR>
-
-Run `revdepcheck::revdep_details(, "mlVAR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mmibain (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/mmibain>
-
-Run `revdepcheck::revdep_details(, "mmibain")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MMOC (0.1.1.0)
-
-* GitHub mirror: <https://github.com/cran/MMOC>
-
-Run `revdepcheck::revdep_details(, "MMOC")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -26668,146 +18730,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# mop (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/mop>
-
-Run `revdepcheck::revdep_details(, "mop")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# moranajp (0.9.8)
-
-* GitHub mirror: <https://github.com/cran/moranajp>
-
-Run `revdepcheck::revdep_details(, "moranajp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# morph (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/morph>
-
-Run `revdepcheck::revdep_details(, "morph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mortar (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/mortar>
-
-Run `revdepcheck::revdep_details(, "mortar")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MosaiClusteR (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/MosaiClusteR>
-
-Run `revdepcheck::revdep_details(, "MosaiClusteR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # MoTBFs (1.4.2)
 
 * GitHub mirror: <https://github.com/cran/MoTBFs>
@@ -26864,34 +18786,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# motifr (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/motifr>
-
-Run `revdepcheck::revdep_details(, "motifr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # move (4.2.7)
 
 * GitHub mirror: <https://github.com/cran/move>
@@ -26914,34 +18808,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# move2 (0.5.0)
-
-* GitHub mirror: <https://github.com/cran/move2>
-
-Run `revdepcheck::revdep_details(, "move2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -27088,34 +18954,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# MRFcov (1.0.39)
-
-* GitHub mirror: <https://github.com/cran/MRFcov>
-
-Run `revdepcheck::revdep_details(, "MRFcov")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mRMRe (2.1.2.2)
 
 * GitHub mirror: <https://github.com/cran/mRMRe>
@@ -27228,34 +19066,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# MSclust (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/MSclust>
-
-Run `revdepcheck::revdep_details(, "MSclust")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # MSCsimtester (1.1)
 
 * GitHub mirror: <https://github.com/cran/MSCsimtester>
@@ -27278,34 +19088,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MSG (0.9)
-
-* GitHub mirror: <https://github.com/cran/MSG>
-
-Run `revdepcheck::revdep_details(, "MSG")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
 
 
 
@@ -27340,34 +19122,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# mtrank (0.2-0)
-
-* GitHub mirror: <https://github.com/cran/mtrank>
-
-Run `revdepcheck::revdep_details(, "mtrank")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mulea (1.1.1)
 
 * GitHub mirror: <https://github.com/cran/mulea>
@@ -27390,34 +19144,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 ```
 shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# multifear (0.1.5)
-
-* GitHub mirror: <https://github.com/cran/multifear>
-
-Run `revdepcheck::revdep_details(, "multifear")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
 
 
 
@@ -27538,34 +19264,6 @@ Run `revdepcheck::revdep_details(, "multinma")` for more info
 
 
 ```
-# multiScaleR (0.7.0)
-
-* GitHub mirror: <https://github.com/cran/multiScaleR>
-
-Run `revdepcheck::revdep_details(, "multiScaleR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # multisensi (2.1-1)
 
 * GitHub mirror: <https://github.com/cran/multisensi>
@@ -27616,90 +19314,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# multivariance (2.4.1)
-
-* GitHub mirror: <https://github.com/cran/multivariance>
-
-Run `revdepcheck::revdep_details(, "multivariance")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# MultivariateAnalysis (0.5.1)
-
-* GitHub mirror: <https://github.com/cran/MultivariateAnalysis>
-
-Run `revdepcheck::revdep_details(, "MultivariateAnalysis")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# mums2 (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/mums2>
-
-Run `revdepcheck::revdep_details(, "mums2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -27818,34 +19432,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# mvrsquared (0.1.5)
-
-* GitHub mirror: <https://github.com/cran/mvrsquared>
-
-Run `revdepcheck::revdep_details(, "mvrsquared")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # mwcsr (0.1.12)
 
 * GitHub mirror: <https://github.com/cran/mwcsr>
@@ -27932,34 +19518,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# NAC (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/NAC>
-
-Run `revdepcheck::revdep_details(, "NAC")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # nat.templatebrains (1.2.3)
 
 * GitHub mirror: <https://github.com/cran/nat.templatebrains>
@@ -28016,62 +19574,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# nda (0.2.5)
-
-* GitHub mirror: <https://github.com/cran/nda>
-
-Run `revdepcheck::revdep_details(, "nda")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# neat (1.2.4)
-
-* GitHub mirror: <https://github.com/cran/neat>
-
-Run `revdepcheck::revdep_details(, "neat")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # neatmaps (2.1.0)
 
 * GitHub mirror: <https://github.com/cran/neatmaps>
@@ -28122,34 +19624,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# nemoR (0.99.3)
-
-* GitHub mirror: <https://github.com/cran/nemoR>
-
-Run `revdepcheck::revdep_details(, "nemoR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
 
 
 
@@ -28240,34 +19714,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# netify (1.5.3)
-
-* GitHub mirror: <https://github.com/cran/netify>
-
-Run `revdepcheck::revdep_details(, "netify")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # netmediate (1.1.1)
 
 * GitHub mirror: <https://github.com/cran/netmediate>
@@ -28324,90 +19770,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# netropy (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/netropy>
-
-Run `revdepcheck::revdep_details(, "netropy")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# NetSci (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/NetSci>
-
-Run `revdepcheck::revdep_details(, "NetSci")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# netseg (1.0-3)
-
-* GitHub mirror: <https://github.com/cran/netseg>
-
-Run `revdepcheck::revdep_details(, "netseg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # netSEM (0.7.0)
 
 * GitHub mirror: <https://github.com/cran/netSEM>
@@ -28430,34 +19792,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# netsimhelpers (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/netsimhelpers>
-
-Run `revdepcheck::revdep_details(, "netsimhelpers")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -28604,67 +19938,11 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# NetworkRiskMeasures (0.1.7)
-
-* GitHub mirror: <https://github.com/cran/NetworkRiskMeasures>
-
-Run `revdepcheck::revdep_details(, "NetworkRiskMeasures")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # NetworkToolbox (1.4.4)
 
 * GitHub mirror: <https://github.com/cran/NetworkToolbox>
 
 Run `revdepcheck::revdep_details(, "NetworkToolbox")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# networktools (1.6.0)
-
-* GitHub mirror: <https://github.com/cran/networktools>
-
-Run `revdepcheck::revdep_details(, "networktools")` for more info
 
 ## Error before installation
 
@@ -28710,34 +19988,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# neuroim2 (0.13.0)
-
-* GitHub mirror: <https://github.com/cran/neuroim2>
-
-Run `revdepcheck::revdep_details(, "neuroim2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -28794,34 +20044,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ngme2 (0.9.8)
-
-* GitHub mirror: <https://github.com/cran/ngme2>
-
-Run `revdepcheck::revdep_details(, "ngme2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -29024,34 +20246,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# nimbleNoBounds (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/nimbleNoBounds>
-
-Run `revdepcheck::revdep_details(, "nimbleNoBounds")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # nimbleQuad (1.4.0)
 
 * GitHub mirror: <https://github.com/cran/nimbleQuad>
@@ -29136,90 +20330,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# nlrx (0.4.6)
-
-* GitHub mirror: <https://github.com/cran/nlrx>
-
-Run `revdepcheck::revdep_details(, "nlrx")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# nlsr (2026.4.29)
-
-* GitHub mirror: <https://github.com/cran/nlsr>
-
-Run `revdepcheck::revdep_details(, "nlsr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# nLTT (1.4.10)
-
-* GitHub mirror: <https://github.com/cran/nLTT>
-
-Run `revdepcheck::revdep_details(, "nLTT")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # NMAforest (0.1.3)
 
 * GitHub mirror: <https://github.com/cran/NMAforest>
@@ -29242,34 +20352,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# NMAoutlier (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/NMAoutlier>
-
-Run `revdepcheck::revdep_details(, "NMAoutlier")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -29360,34 +20442,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
-# nonnest2 (0.5-9)
-
-* GitHub mirror: <https://github.com/cran/nonnest2>
-
-Run `revdepcheck::revdep_details(, "nonnest2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # nsga3 (0.0.3)
 
 * GitHub mirror: <https://github.com/cran/nsga3>
@@ -29410,34 +20464,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# NST (3.1.10)
-
-* GitHub mirror: <https://github.com/cran/NST>
-
-Run `revdepcheck::revdep_details(, "NST")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
 
 
 
@@ -29494,34 +20520,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# nvmix (0.1-2)
-
-* GitHub mirror: <https://github.com/cran/nvmix>
-
-Run `revdepcheck::revdep_details(, "nvmix")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -29612,62 +20610,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# oce (1.8-4)
-
-* GitHub mirror: <https://github.com/cran/oce>
-
-Run `revdepcheck::revdep_details(, "oce")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# OCNet (1.2.3)
-
-* GitHub mirror: <https://github.com/cran/OCNet>
-
-Run `revdepcheck::revdep_details(, "OCNet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ODT (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/ODT>
@@ -29690,34 +20632,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 ```
 shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# OdysseusPathwayModule (0.0.1)
-
-* GitHub mirror: <https://github.com/cran/OdysseusPathwayModule>
-
-Run `revdepcheck::revdep_details(, "OdysseusPathwayModule")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -29948,34 +20862,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# oolong (0.7.0)
-
-* GitHub mirror: <https://github.com/cran/oolong>
-
-Run `revdepcheck::revdep_details(, "oolong")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # opalr (3.6.1)
 
 * GitHub mirror: <https://github.com/cran/opalr>
@@ -30082,34 +20968,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# openeo (1.4.1)
-
-* GitHub mirror: <https://github.com/cran/openeo>
-
-Run `revdepcheck::revdep_details(, "openeo")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -30286,62 +21144,6 @@ ERROR: lazy loading failed for package ‘optbdmaeAT’
 
 
 ```
-# opticskxi (1.2.2)
-
-* GitHub mirror: <https://github.com/cran/opticskxi>
-
-Run `revdepcheck::revdep_details(, "opticskxi")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# OptimalBinningWoE (1.0.8)
-
-* GitHub mirror: <https://github.com/cran/OptimalBinningWoE>
-
-Run `revdepcheck::revdep_details(, "OptimalBinningWoE")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # optimall (1.4.0)
 
 * GitHub mirror: <https://github.com/cran/optimall>
@@ -30389,42 +21191,14 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/new/optrcdmaeAT.Rcheck/optrcdmaeAT’
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/old/optrcdmaeAT.Rcheck/optrcdmaeAT’
+<00install.out file does not exist>
 
 
 ```
@@ -30456,6 +21230,34 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
+# orbital (0.5.1)
+
+* GitHub mirror: <https://github.com/cran/orbital>
+
+Run `revdepcheck::revdep_details(, "orbital")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
 # orchaRd (2.2.1)
 
 * GitHub mirror: <https://github.com/cran/orchaRd>
@@ -30467,7 +21269,7 @@ Run `revdepcheck::revdep_details(, "orchaRd")` for more info
 ### Devel
 
 ```
-shard 35 uploaded no result for this package; its job did not finish
+old check timed out after 1200s, at: * checking tests ...
 
 
 
@@ -30477,7 +21279,7 @@ shard 35 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 35 uploaded no result for this package; its job did not finish
+old check timed out after 1200s, at: * checking tests ...
 
 
 
@@ -30534,62 +21336,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 ```
 shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# orthGS (0.1.8)
-
-* GitHub mirror: <https://github.com/cran/orthGS>
-
-Run `revdepcheck::revdep_details(, "orthGS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# osmdata (0.4.0)
-
-* GitHub mirror: <https://github.com/cran/osmdata>
-
-Run `revdepcheck::revdep_details(, "osmdata")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
 
 
 
@@ -30704,34 +21450,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# outbreaker2 (1.1.4)
-
-* GitHub mirror: <https://github.com/cran/outbreaker2>
-
-Run `revdepcheck::revdep_details(, "outbreaker2")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -31046,90 +21764,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# paleotree (3.4.7)
-
-* GitHub mirror: <https://github.com/cran/paleotree>
-
-Run `revdepcheck::revdep_details(, "paleotree")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# pammtools (0.8.0)
-
-* GitHub mirror: <https://github.com/cran/pammtools>
-
-Run `revdepcheck::revdep_details(, "pammtools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# parameters (0.29.2)
-
-* GitHub mirror: <https://github.com/cran/parameters>
-
-Run `revdepcheck::revdep_details(, "parameters")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # paramlink (1.1-6)
 
 * GitHub mirror: <https://github.com/cran/paramlink>
@@ -31214,34 +21848,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# parttree (0.1.3)
-
-* GitHub mirror: <https://github.com/cran/parttree>
-
-Run `revdepcheck::revdep_details(, "parttree")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Path.Analysis (0.1)
 
 * GitHub mirror: <https://github.com/cran/Path.Analysis>
@@ -31292,34 +21898,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PathwaySpace (1.5.0)
-
-* GitHub mirror: <https://github.com/cran/PathwaySpace>
-
-Run `revdepcheck::revdep_details(, "PathwaySpace")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -31498,34 +22076,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# pchc (1.4)
-
-* GitHub mirror: <https://github.com/cran/pchc>
-
-Run `revdepcheck::revdep_details(, "pchc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # pcmabc (1.1.3)
 
 * GitHub mirror: <https://github.com/cran/pcmabc>
@@ -31576,34 +22126,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PCPS (1.0.9)
-
-* GitHub mirror: <https://github.com/cran/PCPS>
-
-Run `revdepcheck::revdep_details(, "PCPS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -31694,34 +22216,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# pec (2025.06.24)
-
-* GitHub mirror: <https://github.com/cran/pec>
-
-Run `revdepcheck::revdep_details(, "pec")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # pedtricks (0.5.0)
 
 * GitHub mirror: <https://github.com/cran/pedtricks>
@@ -31778,34 +22272,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# pepdiff (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/pepdiff>
-
-Run `revdepcheck::revdep_details(, "pepdiff")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # persistence (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/persistence>
@@ -31828,34 +22294,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# personalized (0.2.8)
-
-* GitHub mirror: <https://github.com/cran/personalized>
-
-Run `revdepcheck::revdep_details(, "personalized")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -32002,34 +22440,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# PheCAP (1.2.1)
-
-* GitHub mirror: <https://github.com/cran/PheCAP>
-
-Run `revdepcheck::revdep_details(, "PheCAP")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # phenopix (2.4.5)
 
 * GitHub mirror: <https://github.com/cran/phenopix>
@@ -32052,34 +22462,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PHENTHAUproc (1.1.2)
-
-* GitHub mirror: <https://github.com/cran/PHENTHAUproc>
-
-Run `revdepcheck::revdep_details(, "PHENTHAUproc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -32480,34 +22862,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# phymapnet (0.1.3)
-
-* GitHub mirror: <https://github.com/cran/phymapnet>
-
-Run `revdepcheck::revdep_details(, "phymapnet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # phyr (1.1.3)
 
 * GitHub mirror: <https://github.com/cran/phyr>
@@ -32614,34 +22968,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PiC (3.3.3)
-
-* GitHub mirror: <https://github.com/cran/PiC>
-
-Run `revdepcheck::revdep_details(, "PiC")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
 
 
 
@@ -32760,62 +23086,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# pipeflow (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/pipeflow>
-
-Run `revdepcheck::revdep_details(, "pipeflow")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# pkggraph (0.3.1)
-
-* GitHub mirror: <https://github.com/cran/pkggraph>
-
-Run `revdepcheck::revdep_details(, "pkggraph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # pkgGraphR (0.3.1)
 
 * GitHub mirror: <https://github.com/cran/pkgGraphR>
@@ -32866,62 +23136,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 ```
 shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# plainview (0.2.2)
-
-* GitHub mirror: <https://github.com/cran/plainview>
-
-Run `revdepcheck::revdep_details(, "plainview")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PlanetNICFI (1.0.5)
-
-* GitHub mirror: <https://github.com/cran/PlanetNICFI>
-
-Run `revdepcheck::revdep_details(, "PlanetNICFI")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -33182,34 +23396,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# plumber (1.3.3)
-
-* GitHub mirror: <https://github.com/cran/plumber>
-
-Run `revdepcheck::revdep_details(, "plumber")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # pmlsp (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/pmlsp>
@@ -33294,34 +23480,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# PointedSDMs (2.1.5)
-
-* GitHub mirror: <https://github.com/cran/PointedSDMs>
-
-Run `revdepcheck::revdep_details(, "PointedSDMs")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # poissonsuperlearner (0.2.0)
 
 * GitHub mirror: <https://github.com/cran/poissonsuperlearner>
@@ -33350,34 +23508,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# polle (1.6.4)
-
-* GitHub mirror: <https://github.com/cran/polle>
-
-Run `revdepcheck::revdep_details(, "polle")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # polmineR (0.8.9)
 
 * GitHub mirror: <https://github.com/cran/polmineR>
@@ -33400,34 +23530,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# polyqtlR (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/polyqtlR>
-
-Run `revdepcheck::revdep_details(, "polyqtlR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -33490,62 +23592,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# pomdp (1.2.5)
-
-* GitHub mirror: <https://github.com/cran/pomdp>
-
-Run `revdepcheck::revdep_details(, "pomdp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# pompom (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/pompom>
-
-Run `revdepcheck::revdep_details(, "pompom")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # POMS (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/POMS>
@@ -33568,90 +23614,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 ```
 shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# poolfstat (3.1.0)
-
-* GitHub mirror: <https://github.com/cran/poolfstat>
-
-Run `revdepcheck::revdep_details(, "poolfstat")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# pop (0.1)
-
-* GitHub mirror: <https://github.com/cran/pop>
-
-Run `revdepcheck::revdep_details(, "pop")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PopGenReport (3.1.3)
-
-* GitHub mirror: <https://github.com/cran/PopGenReport>
-
-Run `revdepcheck::revdep_details(, "PopGenReport")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
 
 
 
@@ -33753,7 +23715,7 @@ Run `revdepcheck::revdep_details(, "PortfolioTesteR")` for more info
 ### Devel
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
+old check timed out after 1201s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -33763,7 +23725,7 @@ shard 21 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
+old check timed out after 1201s, at: * checking re-building of vignette outputs ...
 
 
 
@@ -33792,34 +23754,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# POSTm (1.4)
-
-* GitHub mirror: <https://github.com/cran/POSTm>
-
-Run `revdepcheck::revdep_details(, "POSTm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -33915,34 +23849,6 @@ shard 40 uploaded no result for this package; its job did not finish
 * GitHub mirror: <https://github.com/cran/poweRbal>
 
 Run `revdepcheck::revdep_details(, "poweRbal")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# PoweREST (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/PoweREST>
-
-Run `revdepcheck::revdep_details(, "PoweREST")` for more info
 
 ## Error before installation
 
@@ -34072,34 +23978,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# prabclus (2.3-5)
-
-* GitHub mirror: <https://github.com/cran/prabclus>
-
-Run `revdepcheck::revdep_details(, "prabclus")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -34386,34 +24264,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# prism (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/prism>
-
-Run `revdepcheck::revdep_details(, "prism")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # PRISMA2020 (1.1.4)
 
 * GitHub mirror: <https://github.com/cran/PRISMA2020>
@@ -34498,34 +24348,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
-# projectLSA (0.0.9)
-
-* GitHub mirror: <https://github.com/cran/projectLSA>
-
-Run `revdepcheck::revdep_details(, "projectLSA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # projoint (1.1.3)
 
 * GitHub mirror: <https://github.com/cran/projoint>
@@ -34576,118 +24398,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# prova (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/prova>
-
-Run `revdepcheck::revdep_details(, "prova")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# provDebugR (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/provDebugR>
-
-Run `revdepcheck::revdep_details(, "provDebugR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# provGraphR (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/provGraphR>
-
-Run `revdepcheck::revdep_details(, "provGraphR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# psAve (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/psAve>
-
-Run `revdepcheck::revdep_details(, "psAve")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -34862,34 +24572,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# pwr4exp (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/pwr4exp>
-
-Run `revdepcheck::revdep_details(, "pwr4exp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # pwSEM (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/pwSEM>
@@ -34996,34 +24678,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# QRAGadget (0.4)
-
-* GitHub mirror: <https://github.com/cran/QRAGadget>
-
-Run `revdepcheck::revdep_details(, "QRAGadget")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -35254,34 +24908,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# Quartet (1.3.0)
-
-* GitHub mirror: <https://github.com/cran/Quartet>
-
-Run `revdepcheck::revdep_details(, "Quartet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # quaxnat (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/quaxnat>
@@ -35338,34 +24964,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# quincunx (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/quincunx>
-
-Run `revdepcheck::revdep_details(, "quincunx")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # R.temis (0.1.4)
 
 * GitHub mirror: <https://github.com/cran/R.temis>
@@ -35388,62 +24986,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# r3PG (0.1.6)
-
-* GitHub mirror: <https://github.com/cran/r3PG>
-
-Run `revdepcheck::revdep_details(, "r3PG")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# r4sub (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/r4sub>
-
-Run `revdepcheck::revdep_details(, "r4sub")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -35590,62 +25132,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# randomForestExplainer (0.10.1)
-
-* GitHub mirror: <https://github.com/cran/randomForestExplainer>
-
-Run `revdepcheck::revdep_details(, "randomForestExplainer")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# randomForestRHF (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/randomForestRHF>
-
-Run `revdepcheck::revdep_details(, "randomForestRHF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # randomForestSRC (3.6.2)
 
 * GitHub mirror: <https://github.com/cran/randomForestSRC>
@@ -35724,34 +25210,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rangr (1.0.9)
-
-* GitHub mirror: <https://github.com/cran/rangr>
-
-Run `revdepcheck::revdep_details(, "rangr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -35898,34 +25356,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 
 ```
-# raster (3.6-32)
-
-* GitHub mirror: <https://github.com/cran/raster>
-
-Run `revdepcheck::revdep_details(, "raster")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rasterbc (1.0.3)
 
 * GitHub mirror: <https://github.com/cran/rasterbc>
@@ -35976,34 +25406,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rasterKernelEstimates (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/rasterKernelEstimates>
-
-Run `revdepcheck::revdep_details(, "rasterKernelEstimates")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
 
 
 
@@ -36178,34 +25580,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# rbioacc (1.3.1)
-
-* GitHub mirror: <https://github.com/cran/rbioacc>
-
-Run `revdepcheck::revdep_details(, "rbioacc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rbmn (0.9-6)
 
 * GitHub mirror: <https://github.com/cran/rbmn>
@@ -36256,34 +25630,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rCBA (0.4.3)
-
-* GitHub mirror: <https://github.com/cran/rCBA>
-
-Run `revdepcheck::revdep_details(, "rCBA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -36374,62 +25720,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# RcmdrPlugin.RMTCJags (1.0-2)
-
-* GitHub mirror: <https://github.com/cran/RcmdrPlugin.RMTCJags>
-
-Run `revdepcheck::revdep_details(, "RcmdrPlugin.RMTCJags")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rCNV (1.3.0)
-
-* GitHub mirror: <https://github.com/cran/rCNV>
-
-Run `revdepcheck::revdep_details(, "rCNV")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rcoins (0.4.0)
 
 * GitHub mirror: <https://github.com/cran/rcoins>
@@ -36452,34 +25742,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rcontroll (0.1.3)
-
-* GitHub mirror: <https://github.com/cran/rcontroll>
-
-Run `revdepcheck::revdep_details(, "rcontroll")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -36514,34 +25776,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# rdecision (1.3.1)
-
-* GitHub mirror: <https://github.com/cran/rdecision>
-
-Run `revdepcheck::revdep_details(, "rdecision")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Rdimtools (1.1.4)
 
 * GitHub mirror: <https://github.com/cran/Rdimtools>
@@ -36564,34 +25798,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 ```
 shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rdracor (1.0.6)
-
-* GitHub mirror: <https://github.com/cran/rdracor>
-
-Run `revdepcheck::revdep_details(, "rdracor")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
 
 
 
@@ -36648,34 +25854,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# recipes (1.3.3)
-
-* GitHub mirror: <https://github.com/cran/recipes>
-
-Run `revdepcheck::revdep_details(, "recipes")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -36878,34 +26056,6 @@ shard 39 uploaded no result for this package; its job did not finish
 
 
 ```
-# remify (4.1.0)
-
-* GitHub mirror: <https://github.com/cran/remify>
-
-Run `revdepcheck::revdep_details(, "remify")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # remstats (4.1.0)
 
 * GitHub mirror: <https://github.com/cran/remstats>
@@ -37018,34 +26168,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# restriktor (0.6-50)
-
-* GitHub mirror: <https://github.com/cran/restriktor>
-
-Run `revdepcheck::revdep_details(, "restriktor")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Revticulate (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/Revticulate>
@@ -37096,34 +26218,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# Rforestry (0.11.1.0)
-
-* GitHub mirror: <https://github.com/cran/Rforestry>
-
-Run `revdepcheck::revdep_details(, "Rforestry")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -37298,34 +26392,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 
 ```
-# rgnoisefilt (1.1.3)
-
-* GitHub mirror: <https://github.com/cran/rgnoisefilt>
-
-Run `revdepcheck::revdep_details(, "rgnoisefilt")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rgplates (0.6.1)
 
 * GitHub mirror: <https://github.com/cran/rgplates>
@@ -37466,34 +26532,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 
 ```
-# RHMS (1.7)
-
-* GitHub mirror: <https://github.com/cran/RHMS>
-
-Run `revdepcheck::revdep_details(, "RHMS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Rhobots (0.1.10)
 
 * GitHub mirror: <https://github.com/cran/Rhobots>
@@ -37544,90 +26582,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ricci (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/ricci>
-
-Run `revdepcheck::revdep_details(, "ricci")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# richCluster (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/richCluster>
-
-Run `revdepcheck::revdep_details(, "richCluster")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# Riemann (0.1.7)
-
-* GitHub mirror: <https://github.com/cran/Riemann>
-
-Run `revdepcheck::revdep_details(, "Riemann")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
 
 
 
@@ -37914,90 +26868,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# rmake (1.2.2)
-
-* GitHub mirror: <https://github.com/cran/rmake>
-
-Run `revdepcheck::revdep_details(, "rmake")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# RMCDA (0.3.1)
-
-* GitHub mirror: <https://github.com/cran/RMCDA>
-
-Run `revdepcheck::revdep_details(, "RMCDA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rmcfs (1.3.6)
-
-* GitHub mirror: <https://github.com/cran/rmcfs>
-
-Run `revdepcheck::revdep_details(, "rmcfs")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rmedsem (1.0.0)
 
 * GitHub mirror: <https://github.com/cran/rmedsem>
@@ -38076,62 +26946,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 ```
 shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rncl (0.8.10)
-
-* GitHub mirror: <https://github.com/cran/rncl>
-
-Run `revdepcheck::revdep_details(, "rncl")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# RNeXML (2.4.11)
-
-* GitHub mirror: <https://github.com/cran/RNeXML>
-
-Run `revdepcheck::revdep_details(, "RNeXML")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -38362,118 +27176,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# roseRF (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/roseRF>
-
-Run `revdepcheck::revdep_details(, "roseRF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rotl (3.1.1)
-
-* GitHub mirror: <https://github.com/cran/rotl>
-
-Run `revdepcheck::revdep_details(, "rotl")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rPAex (1.0.5)
-
-* GitHub mirror: <https://github.com/cran/rPAex>
-
-Run `revdepcheck::revdep_details(, "rPAex")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# rPanglaoDB (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/rPanglaoDB>
-
-Run `revdepcheck::revdep_details(, "rPanglaoDB")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rpcss (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/rpcss>
@@ -38496,34 +27198,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 ```
 shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# RPhosFate (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/RPhosFate>
-
-Run `revdepcheck::revdep_details(, "RPhosFate")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -38958,25 +27632,27 @@ shard 32 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "RSAtools")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘RSAtools’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/RSAtools.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -39120,34 +27796,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 
 ```
-# rsppfp (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/rsppfp>
-
-Run `revdepcheck::revdep_details(, "rsppfp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # RStoolbox (1.0.2.3)
 
 * GitHub mirror: <https://github.com/cran/RStoolbox>
@@ -39210,53 +27858,27 @@ shard 25 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "RTMB")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘RTMB’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/RTMB.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# RTMBdist (1.0.5)
-
-* GitHub mirror: <https://github.com/cran/RTMBdist>
-
-Run `revdepcheck::revdep_details(, "RTMBdist")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -39570,34 +28192,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# Rwofost (0.8-7)
-
-* GitHub mirror: <https://github.com/cran/Rwofost>
-
-Run `revdepcheck::revdep_details(, "Rwofost")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rworldmap (1.3-8)
 
 * GitHub mirror: <https://github.com/cran/rworldmap>
@@ -39654,34 +28248,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# rwty (1.0.3)
-
-* GitHub mirror: <https://github.com/cran/rwty>
-
-Run `revdepcheck::revdep_details(, "rwty")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # rYWAASB (0.4.1)
 
 * GitHub mirror: <https://github.com/cran/rYWAASB>
@@ -39710,90 +28276,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# s20x (3.3.0)
-
-* GitHub mirror: <https://github.com/cran/s20x>
-
-Run `revdepcheck::revdep_details(, "s20x")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# S4DM (0.0.2)
-
-* GitHub mirror: <https://github.com/cran/S4DM>
-
-Run `revdepcheck::revdep_details(, "S4DM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# sabre (0.4.3)
-
-* GitHub mirror: <https://github.com/cran/sabre>
-
-Run `revdepcheck::revdep_details(, "sabre")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # sae.projection (0.1.5)
 
 * GitHub mirror: <https://github.com/cran/sae.projection>
@@ -39816,34 +28298,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# saeHB (0.2.3)
-
-* GitHub mirror: <https://github.com/cran/saeHB>
-
-Run `revdepcheck::revdep_details(, "saeHB")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
 
 
 
@@ -39906,34 +28360,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# SAFEMCN (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/SAFEMCN>
-
-Run `revdepcheck::revdep_details(, "SAFEMCN")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # sageR (0.7.0)
 
 * GitHub mirror: <https://github.com/cran/sageR>
@@ -39990,34 +28416,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# sampbias (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/sampbias>
-
-Run `revdepcheck::revdep_details(, "sampbias")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SampleCore (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/SampleCore>
@@ -40040,62 +28438,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# sand (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/sand>
-
-Run `revdepcheck::revdep_details(, "sand")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# satdad (1.1)
-
-* GitHub mirror: <https://github.com/cran/satdad>
-
-Run `revdepcheck::revdep_details(, "satdad")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -40410,34 +28752,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# scimo (0.0.3)
-
-* GitHub mirror: <https://github.com/cran/scimo>
-
-Run `revdepcheck::revdep_details(, "scimo")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SCIproj (1.0.1)
 
 * GitHub mirror: <https://github.com/cran/SCIproj>
@@ -40522,62 +28836,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# scMetaTraj (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/scMetaTraj>
-
-Run `revdepcheck::revdep_details(, "scMetaTraj")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# scoredec (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/scoredec>
-
-Run `revdepcheck::revdep_details(, "scoredec")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SCORPION (1.3.2)
 
 * GitHub mirror: <https://github.com/cran/SCORPION>
@@ -40634,34 +28892,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 
 ```
-# scpoisson (0.0.2)
-
-* GitHub mirror: <https://github.com/cran/scpoisson>
-
-Run `revdepcheck::revdep_details(, "scpoisson")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # scRNAstat (0.1.1.2)
 
 * GitHub mirror: <https://github.com/cran/scRNAstat>
@@ -40684,62 +28914,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# scSpatialSIM (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/scSpatialSIM>
-
-Run `revdepcheck::revdep_details(, "scSpatialSIM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# sdafilter (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/sdafilter>
-
-Run `revdepcheck::revdep_details(, "sdafilter")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -41054,34 +29228,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# sealeveltools (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/sealeveltools>
-
-Run `revdepcheck::revdep_details(, "sealeveltools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # sebkc (1.0-6)
 
 * GitHub mirror: <https://github.com/cran/sebkc>
@@ -41194,34 +29340,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# SegEnvIneq (1.2)
-
-* GitHub mirror: <https://github.com/cran/SegEnvIneq>
-
-Run `revdepcheck::revdep_details(, "SegEnvIneq")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # segtest (2.0.0)
 
 * GitHub mirror: <https://github.com/cran/segtest>
@@ -41300,34 +29418,6 @@ shard 36 uploaded no result for this package; its job did not finish
 
 ```
 shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SelectBoost.FDA (0.5.0)
-
-* GitHub mirror: <https://github.com/cran/SelectBoost.FDA>
-
-Run `revdepcheck::revdep_details(, "SelectBoost.FDA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -41418,34 +29508,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# sem (3.1-16)
-
-* GitHub mirror: <https://github.com/cran/sem>
-
-Run `revdepcheck::revdep_details(, "sem")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # semanticfa (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/semanticfa>
@@ -41474,34 +29536,6 @@ shard 37 uploaded no result for this package; its job did not finish
 
 
 ```
-# semboottools (0.1.2.1)
-
-* GitHub mirror: <https://github.com/cran/semboottools>
-
-Run `revdepcheck::revdep_details(, "semboottools")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SEMdeep (1.1.1)
 
 * GitHub mirror: <https://github.com/cran/SEMdeep>
@@ -41524,118 +29558,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# semdrw (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/semdrw>
-
-Run `revdepcheck::revdep_details(, "semdrw")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# semEff (0.7.2)
-
-* GitHub mirror: <https://github.com/cran/semEff>
-
-Run `revdepcheck::revdep_details(, "semEff")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SemiparMF (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/SemiparMF>
-
-Run `revdepcheck::revdep_details(, "SemiparMF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SemNeT (1.4.5)
-
-* GitHub mirror: <https://github.com/cran/SemNeT>
-
-Run `revdepcheck::revdep_details(, "SemNeT")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -41782,34 +29704,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 
 ```
-# sentiment.ai (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/sentiment.ai>
-
-Run `revdepcheck::revdep_details(, "sentiment.ai")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # seqtrie (0.4.0)
 
 * GitHub mirror: <https://github.com/cran/seqtrie>
@@ -41894,62 +29788,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# SEset (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/SEset>
-
-Run `revdepcheck::revdep_details(, "SEset")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# setweaver (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/setweaver>
-
-Run `revdepcheck::revdep_details(, "setweaver")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Seurat (5.5.1)
 
 * GitHub mirror: <https://github.com/cran/Seurat>
@@ -41972,34 +29810,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SeuratExplorer (0.1.6)
-
-* GitHub mirror: <https://github.com/cran/SeuratExplorer>
-
-Run `revdepcheck::revdep_details(, "SeuratExplorer")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -42118,62 +29928,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# sfnetworks (0.6.6)
-
-* GitHub mirror: <https://github.com/cran/sfnetworks>
-
-Run `revdepcheck::revdep_details(, "sfnetworks")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# sgraph (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/sgraph>
-
-Run `revdepcheck::revdep_details(, "sgraph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SHAPBoost (1.0.3)
 
 * GitHub mirror: <https://github.com/cran/SHAPBoost>
@@ -42258,62 +30012,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 
 ```
-# shapviz (0.10.3)
-
-* GitHub mirror: <https://github.com/cran/shapviz>
-
-Run `revdepcheck::revdep_details(, "shapviz")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# sharp (1.4.8)
-
-* GitHub mirror: <https://github.com/cran/sharp>
-
-Run `revdepcheck::revdep_details(, "sharp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # shazam (1.3.2)
 
 * GitHub mirror: <https://github.com/cran/shazam>
@@ -42370,34 +30068,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 
 ```
-# shinyrecipes (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/shinyrecipes>
-
-Run `revdepcheck::revdep_details(, "shinyrecipes")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # shinyscholar (0.4.5)
 
 * GitHub mirror: <https://github.com/cran/shinyscholar>
@@ -42448,34 +30118,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# ShiVa (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/ShiVa>
-
-Run `revdepcheck::revdep_details(, "ShiVa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
 
 
 
@@ -42678,90 +30320,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 
 ```
-# simmr (0.5.3)
-
-* GitHub mirror: <https://github.com/cran/simmr>
-
-Run `revdepcheck::revdep_details(, "simmr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# simPop (2.1.3)
-
-* GitHub mirror: <https://github.com/cran/simPop>
-
-Run `revdepcheck::revdep_details(, "simPop")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SimRDS (2.0.0)
-
-* GitHub mirror: <https://github.com/cran/SimRDS>
-
-Run `revdepcheck::revdep_details(, "SimRDS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # SiMRiv (1.0.7)
 
 * GitHub mirror: <https://github.com/cran/SiMRiv>
@@ -42784,34 +30342,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 ```
 shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# simulist (0.7.0)
-
-* GitHub mirror: <https://github.com/cran/simulist>
-
-Run `revdepcheck::revdep_details(, "simulist")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
 
 
 
@@ -43182,34 +30712,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# slxr (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/slxr>
-
-Run `revdepcheck::revdep_details(, "slxr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # smallstuff (1.0.6)
 
 * GitHub mirror: <https://github.com/cran/smallstuff>
@@ -43316,34 +30818,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# snowboot (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/snowboot>
-
-Run `revdepcheck::revdep_details(, "snowboot")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -43462,34 +30936,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# softwareRisk (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/softwareRisk>
-
-Run `revdepcheck::revdep_details(, "softwareRisk")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # soilassessment (1.3.1)
 
 * GitHub mirror: <https://github.com/cran/soilassessment>
@@ -43512,34 +30958,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# soilDB (2.9.2)
-
-* GitHub mirror: <https://github.com/cran/soilDB>
-
-Run `revdepcheck::revdep_details(, "soilDB")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -43822,62 +31240,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SPACO (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/SPACO>
-
-Run `revdepcheck::revdep_details(, "SPACO")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# spaMM (4.6.65)
-
-* GitHub mirror: <https://github.com/cran/spaMM>
-
-Run `revdepcheck::revdep_details(, "spaMM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -44278,34 +31640,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 
 ```
-# spatialreg (1.4-3)
-
-* GitHub mirror: <https://github.com/cran/spatialreg>
-
-Run `revdepcheck::revdep_details(, "spatialreg")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # spboost (0.7.0)
 
 * GitHub mirror: <https://github.com/cran/spboost>
@@ -44395,62 +31729,6 @@ shard 39 uploaded no result for this package; its job did not finish
 * GitHub mirror: <https://github.com/cran/spdgp>
 
 Run `revdepcheck::revdep_details(, "spdgp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SPECK (1.0.1)
-
-* GitHub mirror: <https://github.com/cran/SPECK>
-
-Run `revdepcheck::revdep_details(, "SPECK")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SpectralClMixed (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/SpectralClMixed>
-
-Run `revdepcheck::revdep_details(, "SpectralClMixed")` for more info
 
 ## Error before installation
 
@@ -44608,34 +31886,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SpiceFP (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/SpiceFP>
-
-Run `revdepcheck::revdep_details(, "SpiceFP")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
 
 
 
@@ -44810,87 +32060,33 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# spmixW (0.2.2)
-
-* GitHub mirror: <https://github.com/cran/spmixW>
-
-Run `revdepcheck::revdep_details(, "spmixW")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # spopt (0.1.2)
 
 * GitHub mirror: <https://github.com/cran/spopt>
 
 Run `revdepcheck::revdep_details(, "spopt")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘spopt’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/spopt.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# spqrp (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/spqrp>
-
-Run `revdepcheck::revdep_details(, "spqrp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -45000,34 +32196,6 @@ shard 31 uploaded no result for this package; its job did not finish
 
 ```
 shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# SSDM (0.2.11)
-
-* GitHub mirror: <https://github.com/cran/SSDM>
-
-Run `revdepcheck::revdep_details(, "SSDM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -45146,34 +32314,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# SSNbler (1.1.1)
-
-* GitHub mirror: <https://github.com/cran/SSNbler>
-
-Run `revdepcheck::revdep_details(, "SSNbler")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # sspse (1.1.0-6)
 
 * GitHub mirror: <https://github.com/cran/sspse>
@@ -45230,34 +32370,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# sta (0.1.7)
-
-* GitHub mirror: <https://github.com/cran/sta>
-
-Run `revdepcheck::revdep_details(, "sta")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # stackgbm (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/stackgbm>
@@ -45280,34 +32392,6 @@ shard 35 uploaded no result for this package; its job did not finish
 
 ```
 shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# StAMPP (1.6.3)
-
-* GitHub mirror: <https://github.com/cran/StAMPP>
-
-Run `revdepcheck::revdep_details(, "StAMPP")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
 
 
 
@@ -45426,62 +32510,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# STARTS (1.3-8)
-
-* GitHub mirror: <https://github.com/cran/STARTS>
-
-Run `revdepcheck::revdep_details(, "STARTS")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# statGraph (1.0.6)
-
-* GitHub mirror: <https://github.com/cran/statGraph>
-
-Run `revdepcheck::revdep_details(, "statGraph")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # stdbscan (0.2.0)
 
 * GitHub mirror: <https://github.com/cran/stdbscan>
@@ -45538,62 +32566,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# stim (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/stim>
-
-Run `revdepcheck::revdep_details(, "stim")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# stm (1.3.8)
-
-* GitHub mirror: <https://github.com/cran/stm>
-
-Run `revdepcheck::revdep_details(, "stm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # stmgui (0.1.6)
 
 * GitHub mirror: <https://github.com/cran/stmgui>
@@ -45616,34 +32588,6 @@ shard 34 uploaded no result for this package; its job did not finish
 
 ```
 shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# stplanr (1.2.3)
-
-* GitHub mirror: <https://github.com/cran/stplanr>
-
-Run `revdepcheck::revdep_details(, "stplanr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
 
 
 
@@ -45773,7 +32717,7 @@ Run `revdepcheck::revdep_details(, "streamDAG")` for more info
 ### Devel
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk, tkrplot
+Dependencies not installed: asbio, gWidgets2tcltk
 
 
 
@@ -45783,7 +32727,7 @@ Dependencies not installed: asbio, gWidgets2tcltk, tkrplot
 ### CRAN
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk, tkrplot
+Dependencies not installed: asbio, gWidgets2tcltk
 
 
 
@@ -45958,34 +32902,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 
 ```
-# SurfaceTortoise (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/SurfaceTortoise>
-
-Run `revdepcheck::revdep_details(, "SurfaceTortoise")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Surrogate (3.4.2)
 
 * GitHub mirror: <https://github.com/cran/Surrogate>
@@ -46064,34 +32980,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# survex (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/survex>
-
-Run `revdepcheck::revdep_details(, "survex")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -46182,59 +33070,33 @@ shard 28 uploaded no result for this package; its job did not finish
 
 
 ```
-# survNMA (1.1-1)
-
-* GitHub mirror: <https://github.com/cran/survNMA>
-
-Run `revdepcheck::revdep_details(, "survNMA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # survstan (0.0.7.1)
 
 * GitHub mirror: <https://github.com/cran/survstan>
 
 Run `revdepcheck::revdep_details(, "survstan")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘survstan’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/survstan.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -46406,62 +33268,6 @@ shard 26 uploaded no result for this package; its job did not finish
 
 
 ```
-# T2Qv (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/T2Qv>
-
-Run `revdepcheck::revdep_details(, "T2Qv")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tabs (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/tabs>
-
-Run `revdepcheck::revdep_details(, "tabs")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # tabularaster (0.7.2)
 
 * GitHub mirror: <https://github.com/cran/tabularaster>
@@ -46484,90 +33290,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TangledFeatures (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/TangledFeatures>
-
-Run `revdepcheck::revdep_details(, "TangledFeatures")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tapnet (0.6)
-
-* GitHub mirror: <https://github.com/cran/tapnet>
-
-Run `revdepcheck::revdep_details(, "tapnet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tarchetypes (0.14.1)
-
-* GitHub mirror: <https://github.com/cran/tarchetypes>
-
-Run `revdepcheck::revdep_details(, "tarchetypes")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
 
 
 
@@ -46658,62 +33380,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
-# tbnb (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/tbnb>
-
-Run `revdepcheck::revdep_details(, "tbnb")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TBRDist (2.0.1)
-
-* GitHub mirror: <https://github.com/cran/TBRDist>
-
-Run `revdepcheck::revdep_details(, "TBRDist")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # TCHazaRds (1.1.5)
 
 * GitHub mirror: <https://github.com/cran/TCHazaRds>
@@ -46742,207 +33408,11 @@ shard 34 uploaded no result for this package; its job did not finish
 
 
 ```
-# TDApplied (3.0.4)
-
-* GitHub mirror: <https://github.com/cran/TDApplied>
-
-Run `revdepcheck::revdep_details(, "TDApplied")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tdarec (0.2.1)
-
-* GitHub mirror: <https://github.com/cran/tdarec>
-
-Run `revdepcheck::revdep_details(, "tdarec")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tectonicr (0.4.8)
-
-* GitHub mirror: <https://github.com/cran/tectonicr>
-
-Run `revdepcheck::revdep_details(, "tectonicr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TemporalModelR (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/TemporalModelR>
-
-Run `revdepcheck::revdep_details(, "TemporalModelR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tenm (0.5.1)
-
-* GitHub mirror: <https://github.com/cran/tenm>
-
-Run `revdepcheck::revdep_details(, "tenm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # terralink (1.8.0)
 
 * GitHub mirror: <https://github.com/cran/terralink>
 
 Run `revdepcheck::revdep_details(, "terralink")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tesselle (1.7.0)
-
-* GitHub mirror: <https://github.com/cran/tesselle>
-
-Run `revdepcheck::revdep_details(, "tesselle")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TestAnaAPP (1.1.2)
-
-* GitHub mirror: <https://github.com/cran/TestAnaAPP>
-
-Run `revdepcheck::revdep_details(, "TestAnaAPP")` for more info
 
 ## Error before installation
 
@@ -46988,34 +33458,6 @@ shard 30 uploaded no result for this package; its job did not finish
 
 ```
 shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TextAnalysisR (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/TextAnalysisR>
-
-Run `revdepcheck::revdep_details(, "TextAnalysisR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -47072,34 +33514,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 ```
 shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# textrank (0.3.1)
-
-* GitHub mirror: <https://github.com/cran/textrank>
-
-Run `revdepcheck::revdep_details(, "textrank")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
 
 
 
@@ -47274,34 +33688,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 
 ```
-# tidycensuskr (0.3.0)
-
-* GitHub mirror: <https://github.com/cran/tidycensuskr>
-
-Run `revdepcheck::revdep_details(, "tidycensuskr")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # tidyclust (0.3.2)
 
 * GitHub mirror: <https://github.com/cran/tidyclust>
@@ -47330,34 +33716,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# tidycomm (0.4.2)
-
-* GitHub mirror: <https://github.com/cran/tidycomm>
-
-Run `revdepcheck::revdep_details(, "tidycomm")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 35 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # TidyConsultant (0.1.2)
 
 * GitHub mirror: <https://github.com/cran/TidyConsultant>
@@ -47380,62 +33738,6 @@ shard 28 uploaded no result for this package; its job did not finish
 
 ```
 shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tidycwl (1.0.7)
-
-* GitHub mirror: <https://github.com/cran/tidycwl>
-
-Run `revdepcheck::revdep_details(, "tidycwl")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tidyfun (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/tidyfun>
-
-Run `revdepcheck::revdep_details(, "tidyfun")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
 
 
 
@@ -47492,62 +33794,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 ```
 shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tidymodels (1.5.0)
-
-* GitHub mirror: <https://github.com/cran/tidymodels>
-
-Run `revdepcheck::revdep_details(, "tidymodels")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tidypredict (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/tidypredict>
-
-Run `revdepcheck::revdep_details(, "tidypredict")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
 
 
 
@@ -47946,34 +34192,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# TNC (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/TNC>
-
-Run `revdepcheck::revdep_details(, "TNC")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # tnet (3.0.16)
 
 * GitHub mirror: <https://github.com/cran/tnet>
@@ -48058,62 +34276,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 
 ```
-# TooManyCellsR (0.1.1.0)
-
-* GitHub mirror: <https://github.com/cran/TooManyCellsR>
-
-Run `revdepcheck::revdep_details(, "TooManyCellsR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# topicdoc (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/topicdoc>
-
-Run `revdepcheck::revdep_details(, "topicdoc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # topicmodels.etm (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/topicmodels.etm>
@@ -48136,62 +34298,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# topics (1.0)
-
-* GitHub mirror: <https://github.com/cran/topics>
-
-Run `revdepcheck::revdep_details(, "topics")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# topoDistance (1.0.2)
-
-* GitHub mirror: <https://github.com/cran/topoDistance>
-
-Run `revdepcheck::revdep_details(, "topoDistance")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 19 uploaded no result for this package; its job did not finish
 
 
 
@@ -48310,34 +34416,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# tracerer (2.2.4)
-
-* GitHub mirror: <https://github.com/cran/tracerer>
-
-Run `revdepcheck::revdep_details(, "tracerer")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # track2KBA (1.1.3)
 
 * GitHub mirror: <https://github.com/cran/track2KBA>
@@ -48422,34 +34500,6 @@ shard 27 uploaded no result for this package; its job did not finish
 
 
 ```
-# trackeR (1.6.1)
-
-* GitHub mirror: <https://github.com/cran/trackeR>
-
-Run `revdepcheck::revdep_details(, "trackeR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # trafficCAR (0.1.1)
 
 * GitHub mirror: <https://github.com/cran/trafficCAR>
@@ -48478,34 +34528,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 
 ```
-# traineR (2.2.12)
-
-* GitHub mirror: <https://github.com/cran/traineR>
-
-Run `revdepcheck::revdep_details(, "traineR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # transitiontrees (0.1.2)
 
 * GitHub mirror: <https://github.com/cran/transitiontrees>
@@ -48528,90 +34550,6 @@ shard 19 uploaded no result for this package; its job did not finish
 
 ```
 shard 19 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TreatmentPatterns (3.1.2)
-
-* GitHub mirror: <https://github.com/cran/TreatmentPatterns>
-
-Run `revdepcheck::revdep_details(, "TreatmentPatterns")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# treebalance (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/treebalance>
-
-Run `revdepcheck::revdep_details(, "treebalance")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 34 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# treedata.table (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/treedata.table>
-
-Run `revdepcheck::revdep_details(, "treedata.table")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
 
 
 
@@ -48735,62 +34673,6 @@ shard 32 uploaded no result for this package; its job did not finish
 * GitHub mirror: <https://github.com/cran/TreeSim>
 
 Run `revdepcheck::revdep_details(, "TreeSim")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TreeSimGM (2.5)
-
-* GitHub mirror: <https://github.com/cran/TreeSimGM>
-
-Run `revdepcheck::revdep_details(, "TreeSimGM")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# treesliceR (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/treesliceR>
-
-Run `revdepcheck::revdep_details(, "treesliceR")` for more info
 
 ## Error before installation
 
@@ -48954,34 +34836,6 @@ shard 32 uploaded no result for this package; its job did not finish
 
 
 ```
-# triageR (0.1.1)
-
-* GitHub mirror: <https://github.com/cran/triageR>
-
-Run `revdepcheck::revdep_details(, "triageR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 27 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # trialr (0.1.6)
 
 * GitHub mirror: <https://github.com/cran/trialr>
@@ -49009,34 +34863,6 @@ Run `revdepcheck::revdep_details(, "trialr")` for more info
 
 ```
 <00install.out file does not exist>
-
-
-```
-# truchet (0.0.1.1)
-
-* GitHub mirror: <https://github.com/cran/truchet>
-
-Run `revdepcheck::revdep_details(, "truchet")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 33 uploaded no result for this package; its job did not finish
-
-
-
 
 
 ```
@@ -49102,81 +34928,27 @@ shard 31 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "tsissm")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘tsissm’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/tsissm.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# TSLA (0.1.2)
-
-* GitHub mirror: <https://github.com/cran/TSLA>
-
-Run `revdepcheck::revdep_details(, "TSLA")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 37 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tsmp (0.4.16)
-
-* GitHub mirror: <https://github.com/cran/tsmp>
-
-Run `revdepcheck::revdep_details(, "tsmp")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 40 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -49202,34 +34974,6 @@ shard 24 uploaded no result for this package; its job did not finish
 
 ```
 shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# tspredit (2.0.707)
-
-* GitHub mirror: <https://github.com/cran/tspredit>
-
-Run `revdepcheck::revdep_details(, "tspredit")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 36 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 36 uploaded no result for this package; its job did not finish
 
 
 
@@ -49314,34 +35058,6 @@ shard 21 uploaded no result for this package; its job did not finish
 
 ```
 shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# twc (0.0.2)
-
-* GitHub mirror: <https://github.com/cran/twc>
-
-Run `revdepcheck::revdep_details(, "twc")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
 
 
 
@@ -49460,62 +35176,6 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# uci (0.3.1)
-
-* GitHub mirror: <https://github.com/cran/uci>
-
-Run `revdepcheck::revdep_details(, "uci")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# UEI (0.1.0)
-
-* GitHub mirror: <https://github.com/cran/UEI>
-
-Run `revdepcheck::revdep_details(, "UEI")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 28 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # ufs (25.7.1)
 
 * GitHub mirror: <https://github.com/cran/ufs>
@@ -49538,90 +35198,6 @@ shard 29 uploaded no result for this package; its job did not finish
 
 ```
 shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# umx (4.65.0)
-
-* GitHub mirror: <https://github.com/cran/umx>
-
-Run `revdepcheck::revdep_details(, "umx")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 22 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# UNCOVER (1.1.0)
-
-* GitHub mirror: <https://github.com/cran/UNCOVER>
-
-Run `revdepcheck::revdep_details(, "UNCOVER")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 31 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# UniprotR (2.5.1)
-
-* GitHub mirror: <https://github.com/cran/UniprotR>
-
-Run `revdepcheck::revdep_details(, "UniprotR")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
 
 
 
@@ -49908,34 +35484,6 @@ shard 25 uploaded no result for this package; its job did not finish
 
 
 ```
-# vhica (0.2.9)
-
-* GitHub mirror: <https://github.com/cran/vhica>
-
-Run `revdepcheck::revdep_details(, "vhica")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # viewscape (3.0.0)
 
 * GitHub mirror: <https://github.com/cran/viewscape>
@@ -49958,6 +35506,34 @@ shard 38 uploaded no result for this package; its job did not finish
 
 ```
 shard 38 uploaded no result for this package; its job did not finish
+
+
+
+
+
+```
+# VIM (7.0.0)
+
+* GitHub mirror: <https://github.com/cran/VIM>
+
+Run `revdepcheck::revdep_details(, "VIM")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (deferred)
 
 
 
@@ -50244,36 +35820,6 @@ shard 40 uploaded no result for this package; its job did not finish
 
 
 ```
-# vmeasur (0.1.4)
-
-* GitHub mirror: <https://github.com/cran/vmeasur>
-
-Run `revdepcheck::revdep_details(, "vmeasur")` for more info
-
-## In both
-
-*   checking whether package ‘vmeasur’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/vmeasur.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-<00install.out file does not exist>
-
-
-```
-### CRAN
-
-```
-<00install.out file does not exist>
-
-
-```
 # vsp (0.1.4)
 
 * GitHub mirror: <https://github.com/cran/vsp>
@@ -50414,62 +35960,6 @@ shard 38 uploaded no result for this package; its job did not finish
 
 
 ```
-# wdiEF (1.0.4)
-
-* GitHub mirror: <https://github.com/cran/wdiEF>
-
-Run `revdepcheck::revdep_details(, "wdiEF")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# weatherOz (3.0.0)
-
-* GitHub mirror: <https://github.com/cran/weatherOz>
-
-Run `revdepcheck::revdep_details(, "weatherOz")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # webSDM (1.1-5)
 
 * GitHub mirror: <https://github.com/cran/webSDM>
@@ -50504,53 +35994,27 @@ shard 23 uploaded no result for this package; its job did not finish
 
 Run `revdepcheck::revdep_details(, "weird")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘weird’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/weird.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# when (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/when>
-
-Run `revdepcheck::revdep_details(, "when")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -50694,95 +36158,11 @@ shard 22 uploaded no result for this package; its job did not finish
 
 
 ```
-# workflows (1.3.0)
-
-* GitHub mirror: <https://github.com/cran/workflows>
-
-Run `revdepcheck::revdep_details(, "workflows")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 25 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # WOTPLY (0.1.0)
 
 * GitHub mirror: <https://github.com/cran/WOTPLY>
 
 Run `revdepcheck::revdep_details(, "WOTPLY")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# wpa (1.10.1)
-
-* GitHub mirror: <https://github.com/cran/wpa>
-
-Run `revdepcheck::revdep_details(, "wpa")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# WRSS (3.2)
-
-* GitHub mirror: <https://github.com/cran/WRSS>
-
-Run `revdepcheck::revdep_details(, "WRSS")` for more info
 
 ## Error before installation
 
@@ -50834,34 +36214,6 @@ shard 23 uploaded no result for this package; its job did not finish
 
 
 ```
-# WVPlots (1.3.9)
-
-* GitHub mirror: <https://github.com/cran/WVPlots>
-
-Run `revdepcheck::revdep_details(, "WVPlots")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # xpect (1.2)
 
 * GitHub mirror: <https://github.com/cran/xpect>
@@ -50890,87 +36242,33 @@ old check timed out after 1200s, at: * checking tests ...
 
 
 ```
-# xplainfi (1.2.0)
-
-* GitHub mirror: <https://github.com/cran/xplainfi>
-
-Run `revdepcheck::revdep_details(, "xplainfi")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 26 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
 # Xplortext (1.6.1)
 
 * GitHub mirror: <https://github.com/cran/Xplortext>
 
 Run `revdepcheck::revdep_details(, "Xplortext")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘Xplortext’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/Xplortext.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 21 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# xpose.xtras (0.2.0)
-
-* GitHub mirror: <https://github.com/cran/xpose.xtras>
-
-Run `revdepcheck::revdep_details(, "xpose.xtras")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 24 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
@@ -51052,62 +36350,6 @@ shard 33 uploaded no result for this package; its job did not finish
 
 ```
 shard 33 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# xtdml (0.1.12)
-
-* GitHub mirror: <https://github.com/cran/xtdml>
-
-Run `revdepcheck::revdep_details(, "xtdml")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 39 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-# yaap (1.0.0)
-
-* GitHub mirror: <https://github.com/cran/yaap>
-
-Run `revdepcheck::revdep_details(, "yaap")` for more info
-
-## Error before installation
-
-### Devel
-
-```
-shard 29 uploaded no result for this package; its job did not finish
-
-
-
-
-
-```
-### CRAN
-
-```
-shard 29 uploaded no result for this package; its job did not finish
 
 
 

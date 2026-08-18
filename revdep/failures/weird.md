@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "weird")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘weird’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/weird.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

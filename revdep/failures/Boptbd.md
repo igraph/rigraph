@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘Boptbd’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/Boptbd.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 32 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

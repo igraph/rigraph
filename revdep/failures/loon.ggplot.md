@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "loon.ggplot")` for more info
 ### Devel
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
+Dependencies not installed: loon
 
 
 
@@ -19,7 +19,7 @@ shard 40 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 40 uploaded no result for this package; its job did not finish
+Dependencies not installed: loon
 
 
 

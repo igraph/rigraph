@@ -9,7 +9,7 @@ Run `revdepcheck::revdep_details(, "orchaRd")` for more info
 ### Devel
 
 ```
-shard 35 uploaded no result for this package; its job did not finish
+old check timed out after 1200s, at: * checking tests ...
 
 
 
@@ -19,7 +19,7 @@ shard 35 uploaded no result for this package; its job did not finish
 ### CRAN
 
 ```
-shard 35 uploaded no result for this package; its job did not finish
+old check timed out after 1200s, at: * checking tests ...
 
 
 

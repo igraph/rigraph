@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "RTMB")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘RTMB’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/RTMB.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 23 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

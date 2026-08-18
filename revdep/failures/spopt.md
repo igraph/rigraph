@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "spopt")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘spopt’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/spopt.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 38 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```

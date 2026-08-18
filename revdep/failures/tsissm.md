@@ -4,25 +4,27 @@
 
 Run `revdepcheck::revdep_details(, "tsissm")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘tsissm’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/tsissm.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-shard 30 uploaded no result for this package; its job did not finish
-
-
-
+<00install.out file does not exist>
 
 
 ```
