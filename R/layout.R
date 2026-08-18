@@ -1181,7 +1181,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
     lay <- graph_attr(graph, "layout")
     if (is.function(lay)) {
       if (!identical(lay, layout_nicely)) {
-        return(lay(graph, ...))
+        return(call_user_callback(lay, graph, ...))
       } else {
         # nop, we'll deal with it later below
       }
@@ -3409,6 +3409,7 @@ layout_components <- function(graph, layout = NULL, ...) {
   if (is.null(layout)) {
     layout <- layout_with_kk
   }
+  layout <- as_user_callback(layout)
 
   V(graph)$id <- seq(vcount(graph))
   gl <- decompose(graph)
