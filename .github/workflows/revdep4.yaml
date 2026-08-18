@@ -421,6 +421,10 @@ jobs:
             -e GITHUB_SHA \
             "${BASE_IMAGE}" \
             Rscript ./.github/workflows/revdepx/build.R
+          # Root in the container wrote the pak cache, and its 600 lock
+          # files defeat the cache post-step's tar ("Permission denied",
+          # save skipped). Hand the tree back to the runner user.
+          sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/pak-cache" || true
         shell: bash
 
       - name: Upload the package binary
@@ -587,6 +591,11 @@ jobs:
             -e RESOURCE_PHASE_FILE=/revdepx/out/phase \
             "${from}" \
             Rscript /revdepx/scripts/image.R || status=$?
+          # Root in the container wrote the pak cache; without this the
+          # cache post-step's tar hits its 600 lock files and the save is
+          # skipped ("Permission denied"). On failure paths too -- a partial
+          # cache is precisely what makes the retry cheap.
+          sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/pak-cache" || true
           if [ "${status}" -ne 0 ]; then
             echo "::error::The universe image build failed (exit ${status}); shards will fall back to building their own libraries"
             exit "${status}"
