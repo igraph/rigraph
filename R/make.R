@@ -2668,6 +2668,130 @@ tree <- function(...) {
 
 ## -----------------------------------------------------------------
 
+#' Create a regular tree graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `make_regular_tree()` creates a regular tree of height `h`
+#' in which all internal vertices have the same total degree `k`.
+#'
+#' @details
+#' All vertices of a regular tree, except its leaves,
+#' have the same total degree `k`.
+#' This is different from [make_tree()], which creates a k-ary tree,
+#' where all internal vertices have the same number of children,
+#' and thus the degree of the root is one less
+#' than the degree of the other internal vertices.
+#' Regular trees are also referred to as Bethe lattices.
+#'
+#' @concept Regular tree
+#' @param h Integer scalar, the height of the tree,
+#'   i.e. the distance between the root and the leaves.
+#'   Must be positive.
+#' @param k Integer scalar, the degree of the internal vertices.
+#'   Must be at least 2.
+#' @inheritParams rlang::args_dots_empty
+#' @param mode Defines the direction of the edges.
+#'   `out` indicates that the edges point from the parent to the children,
+#'   `in` indicates that they point from the children to their parents,
+#'   while `undirected` creates an undirected graph.
+#' @return An igraph graph.
+#'
+#' @seealso [make_tree()] to create k-ary trees,
+#'   where each vertex has the same number of children.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # In a regular tree, internal vertices share the same degree
+#' g <- make_regular_tree(2)
+#' degree(g)
+#'
+#' # A directed variant, with edges pointing towards the root
+#' make_regular_tree(3, k = 2, mode = "in")
+make_regular_tree <- function(
+  h,
+  k = 3,
+  ...,
+  mode = c("undirected", "out", "in")
+) {
+  check_dots_empty()
+  regular_tree_impl(
+    h = h,
+    k = k,
+    type = mode
+  )
+}
+
+#' @rdname make_regular_tree
+#' @export
+regular_tree <- function(
+  h,
+  k = 3,
+  ...,
+  mode = c("undirected", "out", "in")
+) {
+  check_dots_empty()
+  constructor_spec(make_regular_tree, h = h, k = k, mode = mode)
+}
+
+## -----------------------------------------------------------------
+
+#' Create a symmetric tree graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `make_symmetric_tree()` creates a tree
+#' in which all vertices at the same distance from the root
+#' have the same number of children.
+#'
+#' @concept Symmetric tree
+#' @param branches Numeric vector,
+#'   the number of children of the vertices at each level,
+#'   starting from the root.
+#'   All elements must be positive.
+#'   The tree will have `length(branches) + 1` levels.
+#' @inheritParams rlang::args_dots_empty
+#' @param mode Defines the direction of the edges.
+#'   `out` indicates that the edges point from the parent to the children,
+#'   `in` indicates that they point from the children to their parents,
+#'   while `undirected` creates an undirected graph.
+#' @return An igraph graph.
+#'
+#' @seealso [make_tree()] to create k-ary trees,
+#'   where each vertex has the same number of children.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # The root has three children, each of which has two children
+#' g <- make_symmetric_tree(c(3, 2))
+#' plot(g, layout = layout_as_tree)
+make_symmetric_tree <- function(
+  branches,
+  ...,
+  mode = c("out", "in", "undirected")
+) {
+  check_dots_empty()
+  symmetric_tree_impl(
+    branches = branches,
+    type = mode
+  )
+}
+
+#' @rdname make_symmetric_tree
+#' @export
+symmetric_tree <- function(
+  branches,
+  ...,
+  mode = c("out", "in", "undirected")
+) {
+  check_dots_empty()
+  constructor_spec(make_symmetric_tree, branches = branches, mode = mode)
+}
+
+## -----------------------------------------------------------------
+
 #' Create an undirected tree graph from its Prüfer sequence
 #'
 #' `make_from_prufer()` creates an undirected tree graph from its Prüfer
@@ -3670,6 +3794,63 @@ make_turan <- function(n, r) {
 #' @export
 turan <- function(n, r) {
   constructor_spec(make_turan, n = n, r = r)
+}
+
+## -----------------------------------------------------------------
+
+#' Create a generalized Petersen graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' The generalized Petersen graph \eqn{GP(n, k)}
+#' consists of \eqn{2n} vertices and \eqn{3n} edges:
+#' an outer cycle on \eqn{n} vertices,
+#' an inner circulant graph on \eqn{n} vertices
+#' in which vertex \eqn{i} is connected to vertex \eqn{i + k} (modulo \eqn{n}),
+#' and spokes connecting corresponding vertices of the two parts.
+#'
+#' @details
+#' Vertices `1` to `n` form the outer cycle
+#' and vertices `n + 1` to `2 * n` form the inner circulant graph.
+#' \eqn{GP(n, 1)} is the \eqn{n}-prism,
+#' and \eqn{GP(5, 2)} is the well-known Petersen graph,
+#' also available as `make_graph("Petersen")`.
+#'
+#' @concept Generalized Petersen graph
+#' @param n Integer scalar,
+#'   the number of vertices in the inner and outer parts.
+#'   Must be at least 3.
+#' @param k Integer scalar, the shift of the inner circulant graph.
+#'   Must satisfy \eqn{1 \le k < n / 2}{1 <= k < n / 2}.
+#' @inheritParams rlang::args_dots_empty
+#' @return An igraph graph.
+#'
+#' @references M. E. Watkins,
+#' A Theorem on Tait Colorings with an Application to the Generalized
+#' Petersen Graphs,
+#' Journal of Combinatorial Theory 6, 152-164 (1969).
+#' \doi{10.1016/S0021-9800(69)80116-X}
+#' @seealso [make_graph()] for the original Petersen graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # The Petersen graph
+#' g <- make_generalized_petersen(5, 2)
+#' plot(g)
+make_generalized_petersen <- function(n, k, ...) {
+  check_dots_empty()
+  generalized_petersen_impl(
+    n = n,
+    k = k
+  )
+}
+
+#' @rdname make_generalized_petersen
+#' @export
+generalized_petersen <- function(n, k, ...) {
+  check_dots_empty()
+  constructor_spec(make_generalized_petersen, n = n, k = k)
 }
 
 ## -----------------------------------------------------------------
