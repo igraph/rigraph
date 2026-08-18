@@ -106,5 +106,119 @@
       E(g)[c(TRUE, FALSE)]
     Condition
       Error in `FUN()`:
-      ! Error: Logical index length does not match the number of edges. Recycling is not allowed.
+      ! Logical index length does not match the number of edges. Recycling is not allowed.
+
+# assigning `NULL` errors clearly instead of silently doing nothing
+
+    Code
+      V(g)$color <- NULL
+    Condition
+      Error in `V<-`:
+      ! Can't find "value" for vertex attribute. To remove an attribute, use `delete_vertex_attr()` instead.
+
+---
+
+    Code
+      V(g)[1:3]$color <- NULL
+    Condition
+      Error in `[<-`:
+      ! Can't find "value" for attribute. To remove an attribute, use `delete_vertex_attr()` instead.
+
+---
+
+    Code
+      E(g)$weight <- NULL
+    Condition
+      Error in `E<-`:
+      ! Can't find "value" for edge attribute. To remove an attribute, use `delete_edge_attr()` instead.
+
+# direct misuse of `V<-`/`E<-`/`[<-`/`[[<-` errors well
+
+    Code
+      V(g) <- "blue"
+    Condition
+      Error in `V<-`:
+      ! Can't find "name" for vertex attribute.
+
+---
+
+    Code
+      E(g) <- "blue"
+    Condition
+      Error in `E<-`:
+      ! Can't find "name" for edge attribute.
+
+---
+
+    Code
+      V(g)[1] <- "blue"
+    Condition
+      Error in `[<-`:
+      ! Can't find "name" for attribute.
+
+---
+
+    Code
+      E(g)[1] <- "blue"
+    Condition
+      Error in `[<-`:
+      ! Can't find "name" for attribute.
+
+---
+
+    Code
+      V(g)[[1]] <- "blue"
+    Condition
+      Error in `[[<-`:
+      ! Can't find "name" for attribute.
+
+---
+
+    Code
+      E(g)[[1]] <- "blue"
+    Condition
+      Error in `[[<-`:
+      ! Can't find "name" for attribute.
+
+# querying or setting attributes errors when the graph is unknown
+
+    Code
+      vs$color
+    Condition
+      Error in `vs$color`:
+      ! Can't find graph.
+
+---
+
+    Code
+      vs$color <- "blue"
+    Condition
+      Error in `$<-`:
+      ! Can't find graph.
+
+---
+
+    Code
+      es$weight
+    Condition
+      Error in `es$weight`:
+      ! Can't find graph.
+
+---
+
+    Code
+      es$weight <- 0
+    Condition
+      Error in `$<-`:
+      ! Can't find graph.
+
+# `[<-.igraph.vs` reports an internal error when the graph is unknown
+
+    Code
+      `[<-.igraph.vs`(vs, 1, value = payload)
+    Condition
+      Error in `[<-.igraph.vs`:
+      ! Graph is unknown.
+      i This is an internal error that was detected in the igraph package.
+        Please report it at <https://github.com/igraph/rigraph/issues> with a reprex (<https://tidyverse.org/help/>) and the full backtrace.
 

@@ -476,3 +476,114 @@ test_that("identical_graphs() tail arguments and legacy positional recovery", {
   )
   expect_identical(res, identical_graphs(g1, g2, attrs = FALSE))
 })
+
+test_that("`V(g)[idx]$attr <-` and `E(g)[idx]$attr <-` set attributes as intended", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  V(g)[1:3]$color <- "blue"
+  expect_equal(V(g)$color, c("blue", "blue", "blue", "red", "red"))
+
+  E(g)[1:3]$weight <- 0
+  expect_equal(E(g)$weight, c(0, 0, 0, 4, 5))
+
+  V(g)$color <- "green"
+  expect_equal(V(g)$color, rep("green", 5))
+
+  E(g)$weight <- 9
+  expect_equal(E(g)$weight, rep(9, 5))
+})
+
+test_that("assigning `NA` blanks attribute values without removing the attribute", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+
+  V(g)$color <- NA
+  expect_true(all(is.na(V(g)$color)))
+  expect_true("color" %in% vertex_attr_names(g))
+})
+
+test_that("assigning `NULL` errors clearly instead of silently doing nothing", {
+  # `attr(x, "value") <- NULL` removes the "value" attribute that
+  # `$<-.igraph.vs`/`$<-.igraph.es` attach, rather than attaching a NULL
+  # value. That made `V(g)$attr <- NULL` (the base R idiom for removing a
+  # list/data.frame element) a silent no-op once the "value" attribute check
+  # was dropped. `delete_vertex_attr()`/`delete_edge_attr()` are the actual
+  # way to remove an attribute.
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  expect_snapshot(error = TRUE, {
+    V(g)$color <- NULL
+  })
+  expect_snapshot(error = TRUE, {
+    V(g)[1:3]$color <- NULL
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)$weight <- NULL
+  })
+})
+
+test_that("direct misuse of `V<-`/`E<-`/`[<-`/`[[<-` errors well", {
+  g <- make_(
+    ring(10),
+    with_vertex_(
+      name = LETTERS[1:10],
+      color = sample(1:2, 10, replace = TRUE)
+    )
+  )
+  expect_snapshot(error = TRUE, {
+    V(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g) <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    V(g)[1] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[1] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    V(g)[[1]] <- "blue"
+  })
+  expect_snapshot(error = TRUE, {
+    E(g)[[1]] <- "blue"
+  })
+})
+
+test_that("querying or setting attributes errors when the graph is unknown", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  vs <- V(g)
+  attr(vs, "env") <- NULL
+  es <- E(g)
+  attr(es, "env") <- NULL
+
+  expect_snapshot(error = TRUE, vs$color)
+  expect_snapshot(error = TRUE, {
+    vs$color <- "blue"
+  })
+  expect_snapshot(error = TRUE, es$weight)
+  expect_snapshot(error = TRUE, {
+    es$weight <- 0
+  })
+})
+
+test_that("`[<-.igraph.vs` reports an internal error when the graph is unknown", {
+  # Defensive branch flagged in PR #2006 review as possibly disappearing
+  # once attribute handling is reworked -- kept here as cheap insurance,
+  # not exhaustive coverage.
+  g <- make_ring(5)
+  vs <- V(g)
+  attr(vs, "env") <- NULL
+  payload <- structure(1, name = "color", value = "blue")
+
+  expect_snapshot(error = TRUE, {
+    `[<-.igraph.vs`(vs, 1, value = payload)
+  })
+})
