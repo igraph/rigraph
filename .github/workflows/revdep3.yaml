@@ -754,15 +754,24 @@ jobs:
               # before the push wants scratch space.
               docker rm revdepx-universe-build || true
               docker tag "${universe}:run-${GITHUB_RUN_ID}" "${universe}:latest"
+              # --platform first: the containerd image store commits an OCI
+              # manifest INDEX, and a plain push refuses it outright
+              # ("trying to push a manifest list/index", run 32148999976).
+              # Pushing the single platform manifest is what the error
+              # itself prescribes; the plain push stays as the fallback for
+              # a daemon whose push has no --platform flag.
               pushed=true
-              docker push "${universe}:run-${GITHUB_RUN_ID}" || pushed=false
+              docker push --platform linux/amd64 "${universe}:run-${GITHUB_RUN_ID}" \
+                || docker push "${universe}:run-${GITHUB_RUN_ID}" \
+                || pushed=false
             else
               echo "::warning::docker commit failed or was aborted; the shards will build shard-local libraries instead"
             fi
           fi
 
           if [ "${pushed}" = true ]; then
-            docker push "${universe}:latest" || true
+            docker push --platform linux/amd64 "${universe}:latest" \
+              || docker push "${universe}:latest" || true
             echo "image=${universe}:run-${GITHUB_RUN_ID}" >> "${GITHUB_OUTPUT}"
           elif [ "${committed}" = true ]; then
             # No registry (permissions, outage): hand the image to the shards
@@ -774,11 +783,27 @@ jobs:
             if [ "${free_gb}" -ge "$((delta_gb / 2 + 8))" ]; then
               echo "::warning::Pushing to ${universe} failed; publishing the image as an artifact instead"
               mkdir -p "${RUNNER_TEMP}/universe-image"
-              if docker save "${universe}:run-${GITHUB_RUN_ID}" | zstd -T0 -3 \
-                > "${RUNNER_TEMP}/universe-image/universe-image.tar.zst"; then
-                saved=true
+              save_to="${RUNNER_TEMP}/universe-image/universe-image.tar.zst"
+              # --platform for the same containerd-store reason as the push:
+              # a plain save of a commit-created index once produced a
+              # 1336-BYTE manifest-only tar, and every shard died loading
+              # the empty shell it restored.
+              if docker save --platform linux/amd64 \
+                "${universe}:run-${GITHUB_RUN_ID}" 2> /dev/null |
+                zstd -T0 -3 > "${save_to}" \
+                || docker save "${universe}:run-${GITHUB_RUN_ID}" |
+                  zstd -T0 -3 > "${save_to}"; then
+                # A universe image compresses to gigabytes; anything under
+                # 100 MB is a manifest shell, not an image, and shipping it
+                # costs every shard its run.
+                if [ "$(stat -c %s "${save_to}" 2> /dev/null || echo 0)" -ge 104857600 ]; then
+                  saved=true
+                else
+                  echo "::warning::docker save produced $(stat -c %s "${save_to}" 2> /dev/null || echo 0) bytes for a ${delta_gb}G image -- discarding the shell; the shards will build shard-local libraries instead"
+                  rm -f "${save_to}"
+                fi
               else
-                rm -f "${RUNNER_TEMP}/universe-image/universe-image.tar.zst"
+                rm -f "${save_to}"
               fi
             else
               echo "::warning::Pushing to ${universe} failed, and ${free_gb}G free is too little to save the ${delta_gb}G image as an artifact; the shards will build shard-local libraries instead"

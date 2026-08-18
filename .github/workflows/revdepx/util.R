@@ -1182,11 +1182,25 @@ ensure_check_sysreqs <- function(packages, label = "") {
         packages,
         ceiling(seq_along(packages) / 300)
       )) {
+        # Per-chunk tolerance: one chunk pak cannot solve (a package gone
+        # from the repositories, a resolution hiccup) must not cost the
+        # other chunks' system packages -- run 32148999976 lost the whole
+        # survey to a single subprocess error.
         wanted <- unique(c(
           wanted,
-          unlist(
-            pak::pkg_sysreqs(part)$packages$system_packages,
-            use.names = FALSE
+          tryCatch(
+            unlist(
+              pak::pkg_sysreqs(part)$packages$system_packages,
+              use.names = FALSE
+            ),
+            error = function(e) {
+              message(
+                "sysreqs survey chunk failed (",
+                conditionMessage(e),
+                "); continuing with the other chunks"
+              )
+              character()
+            }
           )
         ))
       }
