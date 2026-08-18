@@ -247,62 +247,75 @@ inform(sprintf(
 ))
 if (!installed_ok) {
   # One bad package must not hide the state of the other thousand -- but a
-  # pak transaction is all-or-nothing, so one bad package strands its whole
-  # 400-package chunk, and going straight to one-at-a-time from there pays
-  # pak's per-call resolution overhead once per stranded innocent: hundreds
-  # of calls, hours of tail, and the install deadline then cuts off
-  # packages that were never broken at all. Middle rung first: the missing
-  # set again in small chunks, which lands the innocents in a handful of
-  # transactions and leaves only the genuinely refusing packages for the
-  # one-at-a-time pass below, where each failure names itself.
-  retry <- missing_from(lib, install_set)
-  if (length(retry) > 0 && Sys.time() <= install_deadline) {
-    retry_chunk <- max(1L, min(50L, as.integer(ceiling(chunk_size / 8))))
-    inform(
-      "Image: re-trying ",
-      length(retry),
-      " missing package(s) in chunks of ",
-      retry_chunk
-    )
-    install_in_chunks(
-      install_chunks(retry, cran_db(), retry_chunk),
-      lib,
-      upgrade,
-      "Image retry",
-      deadline = install_deadline
-    )
-  }
-  # What survives two chunked passes gets the expensive certainty: its own
-  # pak call, its own log, its own line in depfail.json. Bounded twice over
-  # -- one package may not hang the retry, and the retry as a whole may not
-  # eat the minutes the load test and the indexing still need. What the
-  # deadline cuts off is named rather than reported as failing.
-  retry <- missing_from(lib, install_set)
-  inform("Image: retrying ", length(retry), " package(s) one at a time")
-  for (i in seq_along(retry)) {
+  # pak transaction is all-or-nothing, so one bad package strands whatever
+  # shared its chunk, and retrying the stranded one at a time pays pak's
+  # per-call overhead once per innocent: the resolver runs per call, in
+  # pak's own private subprocess, and no driver-side cleverness can
+  # amortise it -- the only lever is the NUMBER of calls. So: divide and
+  # conquer. Retry the missing set whole; a failing set of more than one
+  # package is split into three and each third retried, down to single
+  # packages -- the leaves, where a genuine failure names itself with its
+  # own log and its own depfail.json line. Subsets without a culprit
+  # succeed as one call, so d bad packages hiding in n cost about
+  # 3 * d * log3(n) calls instead of n. Three-way rather than two- or
+  # four-way because the call count scales with k/ln(k), minimal at k = 3
+  # (the group-testing classic; 2 and 4 cost ~6% more, and larger fans
+  # converge on the flat scan this replaces). The driver risks nothing by
+  # recursing: it is one long-lived R process whose every pak call already
+  # runs in its own clocked subprocess, and missing_from() re-measures
+  # before every call, so whatever a failing transaction did install --
+  # pak lands the dependency-ordered prefix before the culprit stops it --
+  # is never asked for twice, and a big retry that merely times out
+  # splits and continues instead of starting over.
+  install_divide <- function(pkgs, depth = 0L) {
+    pkgs <- missing_from(lib, pkgs)
+    if (length(pkgs) == 0) {
+      return(invisible(NULL))
+    }
     if (Sys.time() > install_deadline) {
       inform(sprintf(
-        "Image: the install deadline passed; %d of %d package(s) not retried",
-        length(retry) - i + 1L,
-        length(retry)
+        "Image: the install deadline passed; %d package(s) not retried (%s%s)",
+        length(pkgs),
+        paste(utils::head(pkgs, 5), collapse = ", "),
+        if (length(pkgs) > 5) ", ..." else ""
       ))
-      break
+      return(invisible(NULL))
     }
     run <- pak_install(
-      retry[[i]],
+      pkgs,
       lib = lib,
       upgrade = upgrade,
       timeout_seconds = install_timeout_seconds(),
-      label = paste("Image: installing", retry[[i]])
+      label = if (length(pkgs) == 1) {
+        paste("Image: installing", pkgs)
+      } else {
+        sprintf("Image retry: %d package(s), depth %d", length(pkgs), depth)
+      }
     )
-    if (!run$ok) {
-      failures[[length(failures) + 1]] <- list(
-        package = retry[[i]],
+    if (run$ok) {
+      return(invisible(NULL))
+    }
+    if (length(pkgs) == 1) {
+      failures[[length(failures) + 1]] <<- list(
+        package = pkgs,
         phase = "install",
         message = run$message
       )
+      return(invisible(NULL))
     }
+    size <- ceiling(length(pkgs) / 3)
+    for (part in split(pkgs, ceiling(seq_along(pkgs) / size))) {
+      install_divide(part, depth + 1L)
+    }
+    invisible(NULL)
   }
+  retry <- missing_from(lib, install_set)
+  inform(
+    "Image: isolating ",
+    length(retry),
+    " missing package(s) by trisection"
+  )
+  install_divide(retry)
 }
 
 # Before the load test, because a preinstalled package whose system library
