@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 644 | SKIP 77 | PASS 3304 ]
+       [ FAIL 2 | WARN 644 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted

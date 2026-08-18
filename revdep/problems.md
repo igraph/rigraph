@@ -1,140 +1,81 @@
-# archeofrag (1.2.4)
+# beastier (2.5.2)
 
-* GitHub: <https://github.com/sebastien-plutniak/archeofrag>
-* Email: <mailto:sebastien.plutniak@posteo.net>
-* GitHub mirror: <https://github.com/cran/archeofrag>
+* GitHub: <https://github.com/ropensci/beastier>
+* Email: <mailto:rjcbilderbeek@gmail.com>
+* GitHub mirror: <https://github.com/cran/beastier>
 
-Run `revdepcheck::revdep_details(, "archeofrag")` for more info
+Run `revdepcheck::revdep_details(, "beastier")` for more info
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
      ```
      ...
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA
-       The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-frag.edges.weighting.R:43:3'): weighting with morphometric and spatial parameters ──
-       Expected `sum(igraph::E(g)$weight)` to equal 64.95129.
-       Differences:
-         `actual`: 65.014
-       `expected`: 64.951
-       
-       
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 84 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
-## In both
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     Error(s) in re-building vignettes:
-       ...
-     --- re-building ‘archeofrag-vignette.Rmd’ using rmarkdown
-     
-     Quitting from archeofrag-vignette.Rmd:238-253 [simulator-test]
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     <error/rlang_error>
-     Error in `if (planar == TRUE & (!requireNamespace("RBGL", quietly = TRUE))) ...`:
-     ! missing value where TRUE/FALSE needed
-     ---
+     +           filename = tracelog_filename
+     +         )
+     +       )
+     +     )
+     +   )
+     +   extract_tracelog_filename_from_beast2_input_file(
+     +     input_filename = beast2_input_filename
+     +   )
+     +   file.remove(beast2_input_filename)
+     + 
+     +   remove_beaustier_folders()
+     + }
+     Error:
+     ! '/home/runner/.cache/beastier/file28625282cbbbf' does not exist.
      Backtrace:
          ▆
-      1. └─archeofrag::frag.simul.process(...)
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     
-     Error: processing vignette 'archeofrag-vignette.Rmd' failed with diagnostics:
-     missing value where TRUE/FALSE needed
-     --- failed re-building ‘archeofrag-vignette.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘archeofrag-vignette.Rmd’
-     
-     Error: Vignette re-building failed.
+      1. ├─beastier::extract_tracelog_filename_from_beast2_input_file(input_filename = beast2_input_filename)
+      2. │ └─readr::read_lines(input_filename, progress = FALSE)
+      3. │   └─vroom::vroom_lines(...)
+      4. │     └─vroom:::vroom_(...)
+      5. └─vroom (local) `<fn>`("/home/runner/.cache/beastier/file28625282cbbbf")
+      6.   └─vroom:::check_path(path)
+      7.     └─cli::cli_abort(msg, call = call)
+      8.       └─rlang::abort(...)
      Execution halted
      ```
 
-# bnstruct (1.0.15)
+# BeeBDC (1.3.4)
 
-* Email: <mailto:afranzin@ulb.ac.be>
-* GitHub mirror: <https://github.com/cran/bnstruct>
+* GitHub: <https://github.com/jbdorey/BeeBDC>
+* Email: <mailto:jbdorey@me.com>
+* GitHub mirror: <https://github.com/cran/BeeBDC>
 
-Run `revdepcheck::revdep_details(, "bnstruct")` for more info
+Run `revdepcheck::revdep_details(, "BeeBDC")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-       
-       The following object is masked from 'package:base':
-       
-           union
-       
-       Saving _problems/test_em-8.R
-       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
-       
-       ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
-       • On CRAN (1): 'test_em_contdata.R:3:1'
+       are planar
+        - Downloading taxonomy...
+       Saving _problems/test-taxadbToBeeBDC-18.R
+       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 248 ]
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test_em.R:8:1'): (code run outside of `test_that()`) ────────────────
-       Error in `if (!is.na(clique) && !is.na(parents.list[clique])) {     out <- compute.message(potentials[[process.order[clique]]], dimensions.contained[[process.order[clique]]], cliques[[process.order[clique]]], cliques[[parents.list[clique]]], node.sizes)     msg.pots[[process.order[clique]]] <- out$potential     msg.vars[[process.order[clique]]] <- out$vars     bk <- potentials[[parents.list[clique]]]     bkd <- dimensions.contained[[parents.list[clique]]]     out <- mult(potentials[[parents.list[clique]]], dimensions.contained[[parents.list[clique]]], msg.pots[[process.order[clique]]], msg.vars[[process.order[clique]]], node.sizes)     potentials[[parents.list[clique]]] <- out$potential     dimensions.contained[[parents.list[clique]]] <- out$vars }`: missing value where TRUE/FALSE needed
+       ── Error ('test-taxadbToBeeBDC.R:10:2'): (code run outside of `test_that()`) ───
+       <EEXIST/fs_error/error/condition>
+       Error: [EEXIST] Failed to copy '/home/runner/work/_temp/tmp/RtmpBlJICk/working_dir/RtmpI0P6Zm/file48e41257ae826parquet' to '/home/runner/.local/share/R/contentid/sha256/e4/a6/e4a60b68c986c27eeee0318a876f9a86cd8f452a6a77db3bf38b934862b7ce27': file already exists
        Backtrace:
            ▆
-        1. ├─bnstruct::em(inf.engine, dataset) at test_em.R:8:1
-        2. └─bnstruct::em(inf.engine, dataset)
-        3.   ├─bnstruct::belief.propagation(eng)
-        4.   └─bnstruct::belief.propagation(eng)
+        1. └─BeeBDC::taxadbToBeeBDC(...) at test-taxadbToBeeBDC.R:10:2
+        2.   └─taxadb::td_create(...)
+        3.     └─taxadb:::cache_urls(meta$url, meta$id)
+        4.       └─base::vapply(...)
+        5.         └─contentid (local) FUN(X[[i]], ...)
+        6.           └─contentid::store(path, dir = dir, algos = algo)
+        7.             └─base::vapply(...)
+        8.               └─contentid (local) FUN(X[[i]], ...)
+        9.                 └─fs::file_copy(filepath, dest)
        
-       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
+       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 248 ]
        Error:
        ! Test failures.
        Execution halted
-     ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-     ```
-     Error(s) in re-building vignettes:
-       ...
-     --- re-building ‘bnstruct.Rnw’ using Sweave
-     Error: processing vignette 'bnstruct.Rnw' failed with diagnostics:
-     Running 'texi2dvi' on 'bnstruct.tex' failed.
-     LaTeX errors:
-     ! LaTeX Error: File `pdfpages.sty' not found.
-     
-     Type X to quit or <RETURN> to proceed,
-     or enter new name. (Default extension: sty)
-     
-     ! Emergency stop.
-     <read *> 
-              
-     l.6 ^^M
-            
-     !  ==> Fatal error occurred, no output PDF file produced!
-     --- failed re-building ‘bnstruct.Rnw’
-     
-     SUMMARY: processing the following file failed:
-       ‘bnstruct.Rnw’
-     
-     Error: Vignette re-building failed.
-     Execution halted
      ```
 
 # Boptbd (1.0.7)
@@ -560,41 +501,81 @@ Run `revdepcheck::revdep_details(, "ECoL")` for more info
        Execution halted
      ```
 
-# gemtc (1.1-1)
+# eHDPrep (1.4.0)
 
-* GitHub: <https://github.com/gertvv/gemtc>
-* Email: <mailto:gert@gertvv.nl>
-* GitHub mirror: <https://github.com/cran/gemtc>
+* GitHub: <https://github.com/overton-group/eHDPrep>
+* Email: <mailto:I.Overton@qub.ac.uk>
+* GitHub mirror: <https://github.com/cran/eHDPrep>
 
-Run `revdepcheck::revdep_details(, "gemtc")` for more info
+Run `revdepcheck::revdep_details(, "eHDPrep")` for more info
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     tlmgr: package log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr.log
+     tlmgr: command log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr-commands.log
+     tlmgr: package repository https://tlnet.yihui.org (verified)
+     [1/1, ??:??/??:??] install: ulem [7k]
+     running mktexlsr ...
+     done running mktexlsr.
+     tlmgr: package log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr.log
+     tlmgr: command log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr-commands.log
+     tlmgr: package repository https://tlnet.yihui.org (verified)
+     [1/1, ??:??/??:??] install: makecell [5k]
+     running mktexlsr ...
+     done running mktexlsr.
+     tlmgr: package log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr.log
+     tlmgr: command log updated: /home/runner/.TinyTeX/texmf-var/web2c/tlmgr-commands.log
+     ! pdflatex: fatal: Could not undump 41 1-byte item(s) from /home/runner/.TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt.
+     
+     Error: processing vignette 'Introduction_to_eHDPrep.Rmd' failed with diagnostics:
+     LaTeX failed to compile <lib>/eHDPrep.Rcheck/vign_test/eHDPrep/vignettes/Introduction_to_eHDPrep.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See Introduction_to_eHDPrep.log for more info.
+     --- failed re-building ‘Introduction_to_eHDPrep.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘Introduction_to_eHDPrep.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# fsbrain (0.6.0)
+
+* GitHub: <https://github.com/dfsp-spirit/fsbrain>
+* Email: <mailto:ts+code@rcmd.org>
+* GitHub mirror: <https://github.com/cran/fsbrain>
+
+Run `revdepcheck::revdep_details(, "fsbrain")` for more info
 
 ## Newly broken
 
 *   checking tests ... ERROR
      ```
      ...
-     Complete output:
-       > library(testthat)
-       > test_check('gemtc', filter="unit")
-       Loading required package: gemtc
-       Loading required package: coda
-       Saving _problems/test-unit-relative.effect-65.R
-       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
+         'test-morph_concat.R:42:5', 'test-morph_concat.R:59:5',
+         'test-r_vis_volume.R:2:5', 'test-r_vis_volume.R:36:5',
+         'test-r_vis_volume.R:124:5', 'test-r_vis_volume.R:157:5',
+         'test-r_vis_volume.R:212:5', 'test-rglactions.R:3:5',
+         'test-rglactions.R:16:5', 'test-seg_stats.R:4:5', 'test-seg_stats.R:20:5',
+         'test-smooth.R:3:5', 'test-smooth.R:36:5', 'test-u_vis_volume_3d.R:4:5',
+         'test-u_vis_volume_3d.R:43:5', 'test-u_vis_volume_3d.R:56:5',
+         'test-u_vis_volume_3d.R:64:5', 'test-u_vis_volume_3d.R:74:5',
+         'test-u_vis_volume_3d.R:83:5', 'test-u_vis_volume_3d.R:125:5',
+         'test-u_vis_volume_3d.R:169:5', 'test-u_vis_volume_3d.R:190:5',
+         'test-u_vis_volume_3d.R:209:5'
        
        ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-unit-relative.effect.R:65:3'): tree.relative.effect handles a more complex tree ──
-       Expected `x` to be equivalent to `expected`.
-       3/7 mismatches (average diff: 1.33)
-       [3]  0 - -1 ==  1
-       [5]  1 -  0 ==  1
-       [6] -1 -  1 == -2
+       ── Error ('test-helpers.R:22:3'): The neigborhood of a vertex is computed correctly ──
+       Error in `pkgfilecache::get_filepath(pkg_info, filename, mustWork = mustWork)`: File 'subjects_dir' (from 'subjects_dir') does not exist in local package cache at '~/.local/share/fsbrain/subjects_dir', and mustWork is TRUE.
+       
        Backtrace:
            ▆
-        1. └─testthat::expect_that(...) at test-unit-relative.effect.R:65:3
-        2.   └─testthat (local) condition(object)
-        3.     └─testthat::expect_equivalent(x, expected, expected.label = label)
+        1. └─fsbrain::get_optional_data_filepath("subjects_dir") at test-helpers.R:22:3
+        2.   └─pkgfilecache::get_filepath(pkg_info, filename, mustWork = mustWork)
        
-       [ FAIL 1 | WARN 11 | SKIP 0 | PASS 377 ]
+       [ FAIL 1 | WARN 86 | SKIP 91 | PASS 325 ]
        Error:
        ! Test failures.
        Execution halted
@@ -827,73 +808,6 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
-# lagdynamics (0.32)
-
-* GitHub: <https://github.com/mohsaqr/lagdynamics>
-* Email: <mailto:saqr@saqr.me>
-* GitHub mirror: <https://github.com/cran/lagdynamics>
-
-Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
-
-## Newly broken
-
-*   checking examples ... ERROR
-     ```
-     Running examples in ‘lagdynamics-Ex.R’ failed
-     The error most likely occurred in:
-     
-     > ### Name: lsa_to_tna
-     > ### Title: Convert an lsa Fit to a tna Network
-     > ### Aliases: lsa_to_tna lsa_to_tna.lsa lsa_to_tna.lsa_group
-     > 
-     > ### ** Examples
-     > 
-     > ## Don't show: 
-     > if (requireNamespace("tna", quietly = TRUE)) withAutoprint({ # examplesIf
-     + ## End(Don't show)
-     + fit <- lsa(engagement)
-     + net <- lsa_to_tna(fit, weights = "prob")
-     + tna::centralities(net)
-     + ## Don't show: 
-     + }) # examplesIf
-     > fit <- lsa(engagement)
-     > net <- lsa_to_tna(fit, weights = "prob")
-     > tna::centralities(net)
-     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
-       argument is missing, with no default
-     Calls: withAutoprint ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
-     Execution halted
-     ```
-
-*   checking re-building of vignette outputs ... ERROR
-     ```
-     ...
-     
-     Error: processing vignette 'interop.Rmd' failed with diagnostics:
-     argument is missing, with no default
-     --- failed re-building ‘interop.Rmd’
-     
-     --- re-building ‘intro.Rmd’ using rmarkdown
-     --- finished re-building ‘intro.Rmd’
-     
-     --- re-building ‘lag-transition-networks.Rmd’ using rmarkdown
-     --- finished re-building ‘lag-transition-networks.Rmd’
-     
-     --- re-building ‘lagdynamics.Rmd’ using rmarkdown
-     --- finished re-building ‘lagdynamics.Rmd’
-     
-     --- re-building ‘plotting.Rmd’ using rmarkdown
-     --- finished re-building ‘plotting.Rmd’
-     
-     --- re-building ‘workflow.Rmd’ using rmarkdown
-     --- finished re-building ‘workflow.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘interop.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
-     ```
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
@@ -928,7 +842,7 @@ Run `revdepcheck::revdep_details(, "manynet")` for more info
         4. └─manynet:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-manynet.R:225:5
        
-       [ FAIL 2 | WARN 644 | SKIP 77 | PASS 3304 ]
+       [ FAIL 2 | WARN 644 | SKIP 78 | PASS 3303 ]
        Error:
        ! Test failures.
        Execution halted
@@ -974,12 +888,19 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
 
 ## Newly broken
 
-*   checking tests ...
+*   checking tests ... ERROR
      ```
-       Running ‘testthat.R’ [21s/13s]
-      [22s/13s] ERROR
-     Running the tests in ‘tests/testthat.R’ failed.
-     Last 13 lines of output:
+     ...
+       ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
+       • On Linux (1): 'test-model_tests.R:58:3'
+       • Skipping slow functions in diffusion.Rmd (1): 'test-tutorials_migraph.R:12:5'
+       • empty test (1): 'test-measure_over.R:1:1'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Failure ('test-tutorials_migraph.R:12:5'): migraph tutorial code runs without warnings or errors ──
+       Expected `w` to be NULL.
+       Differences:
+       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
        `expected` is NULL
        
        Warning in expression 17 : rg <- create_ring(32, width = 2)
@@ -996,6 +917,7 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
        ! Test failures.
        Execution halted
      ```
+
 # nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
@@ -1101,7 +1023,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘com.google.Chrome.ZETBx5’
+       ‘com.google.Chrome.3ecrYW’
      ```
 
 # netrics (0.4.0)
@@ -1138,7 +1060,7 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
         4. └─netrics:::check_tute_functions(tute)
         5.   └─testthat::expect_null(...) at ./helper-netrics.R:190:5
        
-       [ FAIL 1 | WARN 0 | SKIP 40 | PASS 1805 ]
+       [ FAIL 1 | WARN 0 | SKIP 41 | PASS 1803 ]
        Error:
        ! Test failures.
        Execution halted
@@ -1160,6 +1082,42 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
        Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
        Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
      See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
+     ```
+
+# rdwd (1.9.17)
+
+* GitHub: <https://github.com/brry/rdwd>
+* Email: <mailto:berry-b@gmx.de>
+* GitHub mirror: <https://github.com/cran/rdwd>
+
+Run `revdepcheck::revdep_details(, "rdwd")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘rdwd-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+     > ### Name: plotDWD
+     > ### Title: Quickly plot time series
+     > ### Aliases: plotDWD
+     > ### Keywords: hplot
+     > 
+     > ### ** Examples
+     > 
+     > link <- selectDWD("Potsdam", res="daily", var="kl", per="r")
+     > clim <- dataDWD(link, dir=locdir(), varnames=TRUE)
+     dataDWD -> dirDWD: adding to directory '/home/runner/.cache/R/rdwd'
+     dataDWD: 1 file already existing and not downloaded again:  'daily_kl_recent_tageswerte_KL_03987_akt.zip'
+     Now downloading 0 files...
+     Reading 1 file with readDWD.data() and fread=TRUE ...
+     Error: dataDWD -> readDWD -> lapply -> FUN: failure reading file:
+     /home/runner/.cache/R/rdwd/daily_kl_recent_tageswerte_KL_03987_akt.zip
+     Error in unzip(file, list = TRUE) : 
+       zip file '/home/runner/.cache/R/rdwd/daily_kl_recent_tageswerte_KL_03987_akt.zip' cannot be opened
+     Execution halted
      ```
 
 # scistreer (1.2.1)
@@ -1284,6 +1242,45 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# spacemodR (0.1.3)
+
+* Email: <mailto:virgile.baudrot@qonfluens.com>
+* GitHub mirror: <https://github.com/cran/spacemodR>
+
+Run `revdepcheck::revdep_details(, "spacemodR")` for more info
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     17: withRestartList(expr, restarts)
+     18: withRestarts(with_handlers({    for (expr in tle$exprs) {        ev <- withVisible(eval(expr, envir))        watcher$capture_plot_and_output()        watcher$print_value(ev$value, ev$visible, envir)    }    TRUE}, handlers), eval_continue = function() TRUE, eval_stop = function() FALSE)
+     19: evaluate::evaluate(...)
+     20: evaluate(code, envir = env, new_device = FALSE, keep_warning = if (is.numeric(options$warning)) TRUE else options$warning,     keep_message = if (is.numeric(options$message)) TRUE else options$message,     stop_on_error = if (is.numeric(options$error)) options$error else {        if (options$error && options$include)             0L        else 2L    }, output_handler = knit_handlers(options$render, options))
+     21: in_dir(input_dir(), expr)
+     22: in_input_dir(evaluate(code, envir = env, new_device = FALSE,     keep_warning = if (is.numeric(options$warning)) TRUE else options$warning,     keep_message = if (is.numeric(options$message)) TRUE else options$message,     stop_on_error = if (is.numeric(options$error)) options$error else {        if (options$error && options$include)             0L        else 2L    }, output_handler = knit_handlers(options$render, options)))
+     23: eng_r(options)
+     24: block_exec(params)
+     25: call_block(x)
+     26: process_group(group)
+     27: withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    })
+     28: with_options(withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    }), list(rlang_trace_top_env = knit_global()))
+     29: xfun:::handle_error(with_options(withCallingHandlers(if (tangle) process_tangle(group) else process_group(group),     error = function(e) {        if (progress && is.function(pb$interrupt))             pb$interrupt()        if (is_R_CMD_build() || is_R_CMD_check())             error <<- format(e)    }), list(rlang_trace_top_env = knit_global())), function(loc) {    setwd(wd)    write_utf8(res, output %n% stdout())    paste0("\nQuitting from ", loc, if (!is.null(error))         paste0("\n", rule(), error, "\n", rule()))}, if (labels[i] != "") sprintf(" [%s]", labels[i]), get_loc)
+     30: process_file(text, output)
+     31: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+     32: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
+     33: vweave_rmarkdown(...)
+     34: engine$weave(file, quiet = quiet, encoding = enc)
+     35: doTryCatch(return(expr), name, parentenv, handler)
+     36: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+     37: tryCatchList(expr, classes, parentenv, handlers)
+     38: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
+     39: tools::buildVignettes(dir = "<lib>/spacemodR.Rcheck/vign_test/spacemodR",     skip = TRUE, ser_elibs = "/home/runner/work/_temp/tmp/RtmpBkLAKt/file111773014081.rds")
+     An irrecoverable exception occurred. R is aborting now ...
+     Segmentation fault (core dumped)
      ```
 
 # tidygraph (1.3.1)
