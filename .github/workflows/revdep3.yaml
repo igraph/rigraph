@@ -552,6 +552,13 @@ jobs:
 
           mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out" \
             "${RUNNER_TEMP}/universe-tmp"
+          # A /tmp must be world-writable with the sticky bit -- apt-key
+          # writes its temporary config there and apt's sandboxed _apt user
+          # cannot use a 755 directory: with a plain mkdir every repository
+          # fails signature verification ("Couldn't create temporary file
+          # /tmp/apt.conf.XXXX") and every apt-get pak runs fails with it.
+          # Reproduced and verified against rocker/r-ver:4.5.3 locally.
+          chmod 1777 "${RUNNER_TEMP}/universe-tmp"
 
           # Streamed from inside this step, on top of the file-writing
           # sampler the earlier step backgrounded: that one keeps appending
