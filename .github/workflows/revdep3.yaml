@@ -587,36 +587,82 @@ jobs:
           fi
         shell: bash
 
+      # Everything here is written and UPLOADED before the commit below
+      # runs, because two runs (32068779192, 32084560474) died in that
+      # commit ~34 minutes in, runner and all -- and a dead runner turns out
+      # to lose even the log lines it already streamed. The numbers a
+      # post-mortem needs must be on the artifact store before the copy
+      # starts, or they do not exist.
+      - name: Record the state before the commit
+        id: precommit
+        run: |
+          set -eu
+          out="${RUNNER_TEMP}/universe-out"
+          mkdir -p "${out}"
+          upper=$(docker inspect \
+            --format '{{ .GraphDriver.Data.UpperDir }}' \
+            revdepx-universe-build 2> /dev/null || true)
+          delta_gb=""
+          delta_files=""
+          if [ -n "${upper}" ] && sudo test -d "${upper}"; then
+            delta_gb=$(sudo du -s -BG "${upper}" 2> /dev/null | cut -f1 |
+              tr -dc '0-9' || true)
+            delta_files=$(sudo du -s --inodes "${upper}" 2> /dev/null |
+              cut -f1 | tr -dc '0-9' || true)
+          fi
+          delta_gb=${delta_gb:-0}
+          delta_files=${delta_files:-0}
+          {
+            echo "upper: ${upper:-<none>}"
+            echo "delta_gb: ${delta_gb}"
+            echo "delta_files: ${delta_files}"
+            echo "--- df -BG ---"
+            df -BG || true
+            echo "--- df -i ---"
+            df -i || true
+            echo "--- meminfo ---"
+            grep -E 'MemTotal|MemAvailable|SwapTotal|SwapFree' /proc/meminfo || true
+            echo "--- docker system df ---"
+            docker system df || true
+          } | tee "${out}/pre-commit-state.txt"
+          echo "delta_gb=${delta_gb}" >> "${GITHUB_OUTPUT}"
+          echo "delta_files=${delta_files}" >> "${GITHUB_OUTPUT}"
+        shell: bash
+
+      - name: Publish the pre-commit state (survives a dying runner)
+        uses: actions/upload-artifact@v6
+        with:
+          name: revdepx-universe-precommit
+          path: ${{ runner.temp }}/universe-out/pre-commit-state.txt
+          retention-days: 30
+          overwrite: true
+
       # `docker commit` writes a full copy of the container's rw layer -- the
       # entire installed universe -- as a new image layer, on the same one
-      # disk everything else already occupies. Run 32068779192 died exactly
-      # there: the copy filled the disk mid-commit, the runner agent could no
-      # longer write, and the job was killed with its logs, artifacts and
-      # cache saves. So this step measures first and commits only when the
-      # copy provably fits, with margin; a skipped commit is not a failed
-      # run, it is the shards' local-build fallback -- slower, but alive,
-      # and the same path a failed universe job already takes.
+      # disk everything else already occupies. Two runs died exactly there,
+      # with logs, artifacts and cache saves. So: commit only when the copy
+      # provably fits -- in bytes AND in inodes, since `df` can show free
+      # gigabytes while the inode table runs dry under millions of small
+      # package files -- and even then under a watchdog that stops the
+      # docker daemon before the disk starves the runner agent: a wrong
+      # measurement must never cost a third runner. A skipped or aborted
+      # commit is not a failed run, it is the shards' local-build fallback
+      # -- slower, but alive, and the same path a failed universe job
+      # already takes.
       - name: Commit and push the universe image
         id: publish
         run: |
           set -eu
           universe=$(printf '%s' "${{ steps.build-universe.outputs.universe }}")
-
-          upper=$(docker inspect \
-            --format '{{ .GraphDriver.Data.UpperDir }}' \
-            revdepx-universe-build 2> /dev/null || true)
-          delta_gb=""
-          if [ -n "${upper}" ] && sudo test -d "${upper}"; then
-            delta_gb=$(sudo du -s -BG "${upper}" 2> /dev/null | cut -f1 |
-              tr -dc '0-9' || true)
-          fi
-          # Unmeasurable (another storage driver, an inspect surprise) means
-          # proceed as before -- with the sampler below streaming, so a
-          # repeat of the death at least explains itself in the log.
+          delta_gb=$(printf '%s' "${{ steps.precommit.outputs.delta_gb }}")
           delta_gb=${delta_gb:-0}
+          delta_files=$(printf '%s' "${{ steps.precommit.outputs.delta_files }}")
+          delta_files=${delta_files:-0}
           free_gb=$(df -BG --output=avail "${RUNNER_TEMP}" | tail -1 |
             tr -dc '0-9')
-          echo "Universe delta: ${delta_gb}G to copy; ${free_gb}G free"
+          free_inodes=$(df --output=iavail "${RUNNER_TEMP}" | tail -1 |
+            tr -dc '0-9')
+          echo "Universe delta: ${delta_gb}G in ${delta_files} files; free: ${free_gb}G, ${free_inodes} inodes"
 
           # Streamed from inside the step (see the build step for why).
           ./.github/workflows/revdepx/watch-resources.sh watch 60 "committing the universe image" &
@@ -626,9 +672,42 @@ jobs:
           committed=false
           pushed=false
           saved=false
-          if [ "${free_gb}" -ge "$((delta_gb + 8))" ]; then
+          if [ "${delta_gb}" -eq 0 ] \
+            || [ "${free_gb}" -lt "$((delta_gb + 8))" ] \
+            || [ "${free_inodes}" -lt "$((delta_files + 200000))" ]; then
+            # An unmeasurable delta (0) no longer means "hope": after two
+            # dead runners the burden of proof sits on the commit.
+            echo "::warning::Not committing the universe image: the copy needs ${delta_gb}G and ${delta_files} inodes, and ${free_gb}G and ${free_inodes} inodes are free. The shards will build shard-local libraries instead."
+          else
+            # The watchdog, not the guard, is what protects the runner: when
+            # disk, inodes or memory approach zero mid-commit it stops the
+            # docker daemon -- aborting the daemon-side copy, which a killed
+            # client would NOT abort -- then brings it back so the rest of
+            # the job (report, artifact, cache save, logout) still works.
+            (
+              while sleep 20; do
+                f=$(df -BG --output=avail "${RUNNER_TEMP}" 2> /dev/null |
+                  tail -1 | tr -dc '0-9') || break
+                i=$(df --output=iavail "${RUNNER_TEMP}" 2> /dev/null |
+                  tail -1 | tr -dc '0-9') || break
+                m=$(awk '/MemAvailable/ { print int($2 / 1048576) }' \
+                  /proc/meminfo 2> /dev/null) || break
+                if [ "${f:-0}" -lt 4 ] || [ "${i:-999999}" -lt 100000 ] \
+                  || [ "${m:-99}" -lt 1 ]; then
+                  echo "::warning::Aborting the commit: ${f}G disk, ${i} inodes, ${m}G memory left -- stopping docker before the runner dies"
+                  sudo systemctl stop docker || true
+                  sleep 3
+                  sudo systemctl start docker || true
+                  break
+                fi
+              done
+            ) &
+            watchdog=$!
             if docker commit revdepx-universe-build "${universe}:run-${GITHUB_RUN_ID}"; then
               committed=true
+            fi
+            kill "${watchdog}" 2> /dev/null || true
+            if [ "${committed}" = true ]; then
               # The rw layer just became an image layer; dropping the
               # container drops the original copy, so the disk peak subsides
               # before the push wants scratch space.
@@ -636,9 +715,9 @@ jobs:
               docker tag "${universe}:run-${GITHUB_RUN_ID}" "${universe}:latest"
               pushed=true
               docker push "${universe}:run-${GITHUB_RUN_ID}" || pushed=false
+            else
+              echo "::warning::docker commit failed or was aborted; the shards will build shard-local libraries instead"
             fi
-          else
-            echo "::warning::Not committing the universe image: the delta is ${delta_gb}G and only ${free_gb}G is free. The shards will build shard-local libraries instead."
           fi
 
           if [ "${pushed}" = true ]; then
