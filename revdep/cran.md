@@ -1,14 +1,20 @@
 ## revdepcheck results
 
-We checked 3435 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1011 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 19 new problems
- * We failed to check 70 packages
+ * We saw 20 new problems
+ * We failed to check 6 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
+
+* archeofrag
+  checking tests ... ERROR
+
+* bnstruct
+  checking tests ... ERROR
 
 * cfid
   checking tests ... ERROR
@@ -31,6 +37,9 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+* gemtc
+  checking tests ... ERROR
+
 * ggraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -47,9 +56,6 @@ Issues with CRAN packages are summarised below.
 * MetaNet
   checking examples ... ERROR
 
-* migraph
-  checking tests ... ERROR
-
 * nat
   checking examples ... ERROR
   checking tests ... ERROR
@@ -64,9 +70,6 @@ Issues with CRAN packages are summarised below.
 * sfclust
   checking tests ... ERROR
 
-* snapKrig
-  checking tests ... ERROR
-
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
@@ -76,73 +79,9 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* a5R                (NA)
-* abess              (NA)
-* BioTrajectory      (NA)
-* blavaan            (NA)
-* bmlm               (NA)
-* bmstdr             (NA)
-* BNSP               (NA)
-* BoneDensityMapping (NA)
-* Boptbd             (NA)
-* caugi              (NA)
-* CausalQueries      (NA)
-* CensSpatial        (NA)
-* clustTMB           (NA)
-* ctmm               (NA)
-* CytoProfile        (NA)
-* CytoSimplex        (NA)
-* dsem               (NA)
-* E2E                (NA)
-* envi               (NA)
-* evoper             (NA)
-* geostan            (NA)
-* gllvm              (NA)
-* glmmTMB            (NA)
-* glober             (NA)
-* hespdiv            (NA)
-* HiveR              (NA)
-* intervalpsych      (NA)
-* lgcp               (NA)
-* loon               (NA)
-* loon.ggplot        (NA)
-* MFF                (NA)
-* multinma           (NA)
-* mwTensor           (NA)
-* optbdmaeAT         (NA)
-* optrcdmaeAT        (NA)
-* orbital            (NA)
-* orchaRd            (NA)
-* osmnxr             (NA)
-* pcFactorStan       (NA)
-* phylopairs         (NA)
-* phylosem           (NA)
-* plantmix           (NA)
-* PortfolioTesteR    (NA)
-* RplotterPkg        (NA)
-* RSAtools           (NA)
-* RTMB               (NA)
-* rts2               (NA)
-* rvinecopulib       (NA)
-* sdmTMB             (NA)
-* SMMAL              (NA)
-* soilassessment     (NA)
-* soptdmaeA          (NA)
-* spANOVA            (NA)
-* sparrpowR          (NA)
-* spopt              (NA)
-* stppSim            (NA)
-* streamDAG          (NA)
-* survstan           (NA)
-* tinyVAST           (NA)
-* tipsae             (NA)
-* trialr             (NA)
-* tsissm             (NA)
-* tsnet              (NA)
-* ubms               (NA)
-* VIM                (NA)
-* vinereg            (NA)
-* weird              (NA)
-* xpect              (NA)
-* Xplortext          (NA)
-* zoomerjoin         (NA)
+* hespdiv     (NA)
+* Libra       (NA)
+* optbdmaeAT  (NA)
+* optrcdmaeAT (NA)
+* soptdmaeA   (NA)
+* streamDAG   (NA)

@@ -68,6 +68,113 @@ Run `revdepcheck::revdep_details(, "archeofrag")` for more info
      Execution halted
      ```
 
+# bnstruct (1.0.15)
+
+* Email: <mailto:afranzin@ulb.ac.be>
+* GitHub mirror: <https://github.com/cran/bnstruct>
+
+Run `revdepcheck::revdep_details(, "bnstruct")` for more info
+
+## Newly broken
+
+*   checking tests ... ERROR
+     ```
+     ...
+       
+       The following object is masked from 'package:base':
+       
+           union
+       
+       Saving _problems/test_em-8.R
+       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
+       
+       ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
+       • On CRAN (1): 'test_em_contdata.R:3:1'
+       
+       ══ Failed tests ════════════════════════════════════════════════════════════════
+       ── Error ('test_em.R:8:1'): (code run outside of `test_that()`) ────────────────
+       Error in `if (!is.na(clique) && !is.na(parents.list[clique])) {     out <- compute.message(potentials[[process.order[clique]]], dimensions.contained[[process.order[clique]]], cliques[[process.order[clique]]], cliques[[parents.list[clique]]], node.sizes)     msg.pots[[process.order[clique]]] <- out$potential     msg.vars[[process.order[clique]]] <- out$vars     bk <- potentials[[parents.list[clique]]]     bkd <- dimensions.contained[[parents.list[clique]]]     out <- mult(potentials[[parents.list[clique]]], dimensions.contained[[parents.list[clique]]], msg.pots[[process.order[clique]]], msg.vars[[process.order[clique]]], node.sizes)     potentials[[parents.list[clique]]] <- out$potential     dimensions.contained[[parents.list[clique]]] <- out$vars }`: missing value where TRUE/FALSE needed
+       Backtrace:
+           ▆
+        1. ├─bnstruct::em(inf.engine, dataset) at test_em.R:8:1
+        2. └─bnstruct::em(inf.engine, dataset)
+        3.   ├─bnstruct::belief.propagation(eng)
+        4.   └─bnstruct::belief.propagation(eng)
+       
+       [ FAIL 1 | WARN 5 | SKIP 1 | PASS 1 ]
+       Error:
+       ! Test failures.
+       Execution halted
+     ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+     ```
+     Error(s) in re-building vignettes:
+       ...
+     --- re-building ‘bnstruct.Rnw’ using Sweave
+     Error: processing vignette 'bnstruct.Rnw' failed with diagnostics:
+     Running 'texi2dvi' on 'bnstruct.tex' failed.
+     LaTeX errors:
+     ! LaTeX Error: File `pdfpages.sty' not found.
+     
+     Type X to quit or <RETURN> to proceed,
+     or enter new name. (Default extension: sty)
+     
+     ! Emergency stop.
+     <read *> 
+              
+     l.6 ^^M
+            
+     !  ==> Fatal error occurred, no output PDF file produced!
+     --- failed re-building ‘bnstruct.Rnw’
+     
+     SUMMARY: processing the following file failed:
+       ‘bnstruct.Rnw’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
+
+# Boptbd (1.0.7)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/Boptbd>
+
+Run `revdepcheck::cloud_details(, "Boptbd")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptBbd
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     alpha <- 0.1 #alpha value 
+     >     beta  <- 0.1 #beta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #Bayesian A-optimal block design (loop design)
+     > 
+     >     graphoptBbd(trt.N = 10, blk.N = 10, alpha = 0.1, beta = 0.1, OptdesF, Optcrit = "A")
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─Boptbd::graphoptBbd(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
 # c3net (1.1.1.1)
 
 * Email: <mailto:altayscience@gmail.com>
@@ -179,7 +286,7 @@ Run `revdepcheck::revdep_details(, "comato")` for more info
       1. ├─base::plot(simple_cms, layout = "spring")
       2. └─comato:::plot.conceptmaps(simple_cms, layout = "spring")
       3.   └─igraph::layout.spring(union)
-      4.     └─lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()")
+      4.     └─lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()") at igraph/R/layout.R:3436:3
       5.       └─lifecycle:::deprecate_stop0(msg)
       6.         └─rlang::cnd_signal(...)
      Execution halted
@@ -222,7 +329,7 @@ Run `revdepcheck::revdep_details(, "cranly")` for more info
       1. ├─base::summary(package_network)
       2. └─cranly:::summary.cranly_network(package_network)
       3.   └─igraph::eigen_centrality(cranly_graph, scale = FALSE)
-      4.     └─lifecycle::deprecate_stop(...)
+      4.     └─lifecycle::deprecate_stop(...) at igraph/R/centrality.R:1493:7
       5.       └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -279,7 +386,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
       18. └─tidygraph::map_bfs(...)
       19.   └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       20.     └─igraph::bfs(...)
-      21.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
+      21.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
       22.         └─lifecycle:::deprecate_stop0(msg)
       23.           └─rlang::cnd_signal(...)
      Execution halted
@@ -309,7 +416,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
        ! The `father` argument of `bfs()` was deprecated in igraph 2.2.0 and is now defunct.
        i Please use the `parent` argument instead.
        
-       [ FAIL 3 | WARN 0 | SKIP 1 | PASS 46 ]
+       [ FAIL 3 | WARN 0 | SKIP 2 | PASS 45 ]
        Error:
        ! Test failures.
        Execution halted
@@ -326,7 +433,7 @@ Run `revdepcheck::revdep_details(, "dci")` for more info
       20. └─tidygraph::map_bfs(...)
       21.   └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       22.     └─igraph::bfs(...)
-      23.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
+      23.       └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
       24.         └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -381,14 +488,6 @@ Run `revdepcheck::revdep_details(, "degreenet")` for more info
      Error in reedmolloy(s4) : 
        The reedmolloy function failed to form a valid network from the passed degree sequence.
      Execution halted
-     ```
-
-## In both
-
-*   checking compilation flags used ... NOTE
-     ```
-     Compilation used the following non-portable flag(s):
-       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # ECoL (0.4.4)
@@ -612,7 +711,7 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
       13.   └─tidygraph::map_bfs(...)
       14.     └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       15.       └─igraph::bfs(...)
-      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
+      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
       17.           └─lifecycle:::deprecate_stop0(msg)
       18.             └─rlang::cnd_signal(...)
      Execution halted
@@ -646,14 +745,6 @@ Run `revdepcheck::revdep_details(, "ggraph")` for more info
      
      Error: Vignette re-building failed.
      Execution halted
-     ```
-
-## In both
-
-*   checking compilation flags used ... NOTE
-     ```
-     Compilation used the following non-portable flag(s):
-       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # glyrepr (0.14.0)
@@ -736,6 +827,73 @@ Run `revdepcheck::revdep_details(, "GoodFitSBM")` for more info
      Execution halted
      ```
 
+# lagdynamics (0.32)
+
+* GitHub: <https://github.com/mohsaqr/lagdynamics>
+* Email: <mailto:saqr@saqr.me>
+* GitHub mirror: <https://github.com/cran/lagdynamics>
+
+Run `revdepcheck::cloud_details(, "lagdynamics")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     Running examples in ‘lagdynamics-Ex.R’ failed
+     The error most likely occurred in:
+     
+     > ### Name: lsa_to_tna
+     > ### Title: Convert an lsa Fit to a tna Network
+     > ### Aliases: lsa_to_tna lsa_to_tna.lsa lsa_to_tna.lsa_group
+     > 
+     > ### ** Examples
+     > 
+     > ## Don't show: 
+     > if (requireNamespace("tna", quietly = TRUE)) withAutoprint({ # examplesIf
+     + ## End(Don't show)
+     + fit <- lsa(engagement)
+     + net <- lsa_to_tna(fit, weights = "prob")
+     + tna::centralities(net)
+     + ## Don't show: 
+     + }) # examplesIf
+     > fit <- lsa(engagement)
+     > net <- lsa_to_tna(fit, weights = "prob")
+     > tna::centralities(net)
+     Error in igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = mode,  : 
+       argument is missing, with no default
+     Calls: withAutoprint ... as.igraph.matrix -> <Anonymous> -> migrate_recover_args
+     Execution halted
+     ```
+
+*   checking re-building of vignette outputs ... ERROR
+     ```
+     ...
+     
+     Error: processing vignette 'interop.Rmd' failed with diagnostics:
+     argument is missing, with no default
+     --- failed re-building ‘interop.Rmd’
+     
+     --- re-building ‘intro.Rmd’ using rmarkdown
+     --- finished re-building ‘intro.Rmd’
+     
+     --- re-building ‘lag-transition-networks.Rmd’ using rmarkdown
+     --- finished re-building ‘lag-transition-networks.Rmd’
+     
+     --- re-building ‘lagdynamics.Rmd’ using rmarkdown
+     --- finished re-building ‘lagdynamics.Rmd’
+     
+     --- re-building ‘plotting.Rmd’ using rmarkdown
+     --- finished re-building ‘plotting.Rmd’
+     
+     --- re-building ‘workflow.Rmd’ using rmarkdown
+     --- finished re-building ‘workflow.Rmd’
+     
+     SUMMARY: processing the following file failed:
+       ‘interop.Rmd’
+     
+     Error: Vignette re-building failed.
+     Execution halted
+     ```
 # manynet (2.2.3)
 
 * GitHub: <https://github.com/stocnet/manynet>
@@ -816,19 +974,12 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking tests ...
      ```
-     ...
-       ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
-       • On Linux (1): 'test-model_tests.R:58:3'
-       • Skipping slow functions in diffusion.Rmd (1): 'test-tutorials_migraph.R:12:5'
-       • empty test (1): 'test-measure_over.R:1:1'
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Failure ('test-tutorials_migraph.R:12:5'): migraph tutorial code runs without warnings or errors ──
-       Expected `w` to be NULL.
-       Differences:
-       `actual` is an S3 object of class <lifecycle_warning_deprecated/rlang_warning/warning/condition>, a list
+       Running ‘testthat.R’ [21s/13s]
+      [22s/13s] ERROR
+     Running the tests in ‘tests/testthat.R’ failed.
+     Last 13 lines of output:
        `expected` is NULL
        
        Warning in expression 17 : rg <- create_ring(32, width = 2)
@@ -845,7 +996,6 @@ Run `revdepcheck::revdep_details(, "migraph")` for more info
        ! Test failures.
        Execution halted
      ```
-
 # nat (1.8.26)
 
 * GitHub: <https://github.com/natverse/nat>
@@ -880,7 +1030,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        5.     ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        6.     └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
        9.           └─lifecycle:::deprecate_stop0(msg)
       10.             └─rlang::cnd_signal(...)
      Execution halted
@@ -890,7 +1040,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
      ```
      ...
          7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
          9.           └─lifecycle:::deprecate_stop0(msg)
         10.             └─rlang::cnd_signal(...)
        ── Error ('test-seglist.R:13:3'): convert graph to seglist ─────────────────────
@@ -906,7 +1056,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         4. ├─nat::as.seglist(g)
         5. └─nat:::as.seglist.igraph(g)
         6.   └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
@@ -929,7 +1079,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        6.       ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        8.         └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
       10.             └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -951,7 +1101,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.fi0CPs’
+       ‘com.google.Chrome.ZETBx5’
      ```
 
 # netrics (0.4.0)
@@ -1010,29 +1160,6 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
        Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
        Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
      See ‘<lib>/R6causal.Rcheck/00install.out’ for details.
-     ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-     ```
-     Error(s) in re-building vignettes:
-       ...
-     --- re-building ‘using_R6causal.Rmd’ using rmarkdown
-     ! LaTeX Error: File `lmodern.sty' not found.
-     
-     ! Emergency stop.
-     <read *> 
-     
-     Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
-     LaTeX failed to compile <lib>/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
-     --- failed re-building ‘using_R6causal.Rmd’
-     
-     SUMMARY: processing the following file failed:
-       ‘using_R6causal.Rmd’
-     
-     Error: Vignette re-building failed.
-     Execution halted
      ```
 
 # scistreer (1.2.1)
@@ -1159,46 +1286,6 @@ Run `revdepcheck::revdep_details(, "sfclust")` for more info
        Execution halted
      ```
 
-# snapKrig (0.0.3)
-
-* GitHub: <https://github.com/deankoch/snapKrig>
-* Email: <mailto:deankoch@gmail.com>
-* GitHub mirror: <https://github.com/cran/snapKrig>
-
-Run `revdepcheck::revdep_details(, "snapKrig")` for more info
-
-## Newly broken
-
-*   checking tests ... ERROR
-     ```
-     ...
-       > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-       > # * https://testthat.r-lib.org/articles/special-files.html
-       > 
-       > library(testthat)
-       > library(snapKrig)
-       > 
-       > test_check("snapKrig")
-       Saving _problems/test-sk_index-8.R
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 71 ]
-       
-       ══ Failed tests ════════════════════════════════════════════════════════════════
-       ── Error ('test-sk_index.R:8:3'): invert sk_rescale (going down then up) and check factor 1 case ──
-       Error in `sk_validate(sk_make(g))`: grid must have two or more grid lines along each dimension
-       Backtrace:
-           ▆
-        1. ├─utils::modifyList(sk_pars(gdim), list(eps = 0.01)) at test-sk_index.R:8:3
-        2. │ └─base::stopifnot(is.list(x), is.list(val))
-        3. └─snapKrig::sk_pars(gdim)
-        4.   └─snapKrig::sk(g)
-        5.     └─snapKrig::sk_validate(sk_make(g))
-       
-       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 71 ]
-       Error:
-       ! Test failures.
-       Execution halted
-     ```
-
 # tidygraph (1.3.1)
 
 * GitHub: <https://github.com/thomasp85/tidygraph>
@@ -1233,7 +1320,7 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
       13.   └─tidygraph::map_bfs(...)
       14.     └─tidygraph:::bfs_df(graph, root, mode, unreachable)
       15.       └─igraph::bfs(...)
-      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
+      16.         └─lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )") at igraph/R/structural-properties.R:3771:5
       17.           └─lifecycle:::deprecate_stop0(msg)
       18.             └─rlang::cnd_signal(...)
      Execution halted
@@ -1277,12 +1364,6 @@ Run `revdepcheck::revdep_details(, "tidygraph")` for more info
        |> or function shorthand \(...) syntax added in R 4.1.0.
        File(s) using such syntax:
          ‘iterate.Rd’ ‘random_walk_rank.Rd’
-     ```
-
-*   checking compilation flags used ... NOTE
-     ```
-     Compilation used the following non-portable flag(s):
-       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
      ```
 
 # vkR (0.2)

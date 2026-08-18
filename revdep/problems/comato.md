@@ -31,7 +31,7 @@ Run `revdepcheck::revdep_details(, "comato")` for more info
       1. ├─base::plot(simple_cms, layout = "spring")
       2. └─comato:::plot.conceptmaps(simple_cms, layout = "spring")
       3.   └─igraph::layout.spring(union)
-      4.     └─lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()")
+      4.     └─lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()") at igraph/R/layout.R:3436:3
       5.       └─lifecycle:::deprecate_stop0(msg)
       6.         └─rlang::cnd_signal(...)
      Execution halted

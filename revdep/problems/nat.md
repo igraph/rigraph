@@ -32,7 +32,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        5.     ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        6.     └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+       8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
        9.           └─lifecycle:::deprecate_stop0(msg)
       10.             └─rlang::cnd_signal(...)
      Execution halted
@@ -42,7 +42,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
      ```
      ...
          7.       └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+         8.         └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
          9.           └─lifecycle:::deprecate_stop0(msg)
         10.             └─rlang::cnd_signal(...)
        ── Error ('test-seglist.R:13:3'): convert graph to seglist ─────────────────────
@@ -58,7 +58,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
         4. ├─nat::as.seglist(g)
         5. └─nat:::as.seglist.igraph(g)
         6.   └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+        7.     └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
         8.       └─lifecycle:::deprecate_stop0(msg)
         9.         └─rlang::cnd_signal(...)
        
@@ -81,7 +81,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
        6.       ├─nat::as.seglist(masterg <- x, origin = origin, Verbose = Verbose)
        7.       └─nat:::as.seglist.igraph(masterg <- x, origin = origin, Verbose = Verbose)
        8.         └─igraph::dfs(x, root = origin, father = TRUE, mode = "all")
-       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
+       9.           └─lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )") at igraph/R/structural-properties.R:4047:5
       10.             └─lifecycle:::deprecate_stop0(msg)
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      
@@ -103,6 +103,6 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.fi0CPs’
+       ‘com.google.Chrome.ZETBx5’
      ```
 
