@@ -40,6 +40,83 @@
 
 # igraph 2.3.3.9031
 
+## Breaking changes
+
+- `weights = NULL` now picks up the `weight` edge attribute in the adjacency
+  matrix functions and in `power_centrality()` (#906, #1137, #2677).
+
+  This brings them in line with the rest of igraph — `distances()`,
+  `shortest_paths()` and friends have always read `weight` by default — but it
+  changes what these functions return for a graph that carries a `weight`
+  edge attribute, silently and without a warning:
+
+  ```r
+  g <- make_ring(4)
+  E(g)$weight <- c(0.5, 0.7, 0.2, 0.9)
+
+  as_adjacency_matrix(g)   # was a 0/1 matrix, now carries the weights
+  power_centrality(g)      # was -1 -1 -1 -1, now -1.211 -0.931 -0.727 -1.067
+  ```
+
+  Affected: `as_adjacency_matrix()` and its aliases `as_adj()` and
+  `get.adjacency()`; `as_biadjacency_matrix()` and its aliases
+  `as_incidence_matrix()` and `get.incidence()`; and `power_centrality()` with
+  its alias `bonpow()`. `alpha_centrality()` is unchanged — it already read
+  `weight`.
+
+  `power_centrality()` is the sharpest case: it had no weight argument at all
+  before, so this is a new default rather than a renamed one.
+
+  **To get the old behaviour, pass an all-NA `weights`**, which is how igraph
+  spells "explicitly unweighted":
+
+  ```r
+  as_adjacency_matrix(g, weights = NA)
+  power_centrality(g, weights = NA)
+  ```
+
+  "All NA" is the rule, not the single `NA`: any vector for which
+  `all(is.na(weights))` holds means unweighted, so `rep(NA, ecount(g))` works
+  too, and so does `numeric()` — `all(is.na(numeric()))` is `TRUE`. A vector in
+  which only *some* entries are NA is still an error, in every function.
+
+  `weights = NA` is not available on igraph 2.3.3 and earlier, where these
+  functions took `attr` instead. Code that has to work on both can either drop
+  the attribute:
+
+  ```r
+  as_adjacency_matrix(delete_edge_attr(g, "weight"))
+  ```
+
+  or binarise the result:
+
+  ```r
+  (as_adjacency_matrix(g) != 0) * 1
+  ```
+
+  The deprecated `attr = NULL` also still means unweighted on both, since
+  igraph 2.3.3.9032 — see below.
+
+- `distances()` and `shortest_paths()` accept any all-NA `weights`, not only a
+  single `NA`.
+
+  They tested `length(weights) == 1 && is.na(weights)`, so `rep(NA, ecount(g))`
+  and `numeric()` were errors there while meaning "unweighted" everywhere else
+  in igraph — the generated wrappers in `R/aaa-*.R` have always tested
+  `all(is.na(weights))`. They now do too. A vector in which only some entries
+  are NA is still rejected, by the C core, in both.
+
+- `as_adjacency_matrix(attr = NULL)` and `as_biadjacency_matrix(attr = NULL)`
+  are unweighted again (#2842).
+
+  The deprecation shim forwarded `attr` to `weights` unchanged, but the two
+  spell "unweighted" differently: `attr = NULL` was the documented way to ask
+  for a plain 0/1 matrix, while `weights = NULL` means the opposite. Every call
+  that spelled out `attr = NULL` was returning a weighted matrix. `attr = NULL`
+  now maps to `weights = NA`, and the deprecation warning says so.
+
+## Continuous integration
+
 ## Continuous integration
 
 ### revdep2

@@ -1532,7 +1532,13 @@ distances <- function(
       weights <- as.numeric(E(graph)$weight)
     }
   } else {
-    if (length(weights) == 1 && is.na(weights)) {
+    # `all(is.na())` rather than `length() == 1 && is.na()`: "unweighted" is
+    # spelled with any all-NA vector everywhere else in igraph -- that is what
+    # the generated blocks in R/aaa-*.R have always tested -- and a vector of
+    # NAs the right length for the graph, or a zero-length one, meant the same
+    # thing there and an error here. `all(is.na(numeric()))` is `TRUE`, so the
+    # empty vector comes along with it.
+    if (all(is.na(weights))) {
       weights <- NULL
     } else {
       weights <- as.numeric(weights)
@@ -1665,7 +1671,13 @@ shortest_paths <- function(
       weights <- as.numeric(E(graph)$weight)
     }
   } else {
-    if (length(weights) == 1 && is.na(weights)) {
+    # `all(is.na())` rather than `length() == 1 && is.na()`: "unweighted" is
+    # spelled with any all-NA vector everywhere else in igraph -- that is what
+    # the generated blocks in R/aaa-*.R have always tested -- and a vector of
+    # NAs the right length for the graph, or a zero-length one, meant the same
+    # thing there and an error here. `all(is.na(numeric()))` is `TRUE`, so the
+    # empty vector comes along with it.
+    if (all(is.na(weights))) {
       weights <- NULL
     } else {
       weights <- as.numeric(weights)
