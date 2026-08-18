@@ -107,7 +107,7 @@ graph_incidence_build <- function(
     res <- make_empty_graph(n = num_rows + num_cols, directed = directed)
     weight_attr <- list(el[, 3])
     names(weight_attr) <- weighted
-    res <- add_edges(res, edges = t(el[, 1:2]), attr = weight_attr)
+    res <- add_edges(res, edges = c(t(el[, 1:2])), attr = weight_attr)
   } else {
     # Handle unweighted edges, replicating rows for multiple edges
     el <- el[rep(seq_len(nrow(el)), times = el[, 3]), 1:2]
