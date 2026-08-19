@@ -38,6 +38,8 @@ igraph.console <- function() {
 
 #' The igraph console
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
 #' The igraph console is a GUI window that shows what the currently running
 #' igraph function is doing.
 #'
