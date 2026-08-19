@@ -4,7 +4,12 @@
 # The base image is rocker/r-ver plus what `R CMD check --as-cran` needs and
 # an R distribution deliberately does not carry -- qpdf and ghostscript for
 # the PDF checks, pandoc for vignettes, enough of TeX Live to build manuals
-# and vignettes, tidy for HTML validation -- plus pak, jsonlite and callr, so
+# and vignettes, tidy for HTML validation, the tcl/tk runtime libraries
+# (tcltk is a *base* R package, so pak's sysreqs machinery never sees it as
+# a dependency and never installs libtcl for it: in run 32281237129 a
+# universe built for a small package set had no other package pulling tcl
+# in, and every tcltk-using package failed to *install* with "libtcl8.6.so:
+# cannot open shared object file") -- plus pak, jsonlite and callr, so
 # an image build or an in-container install can start without bootstrapping
 # any of them. callr (and the processx it brings) is not a convenience: it is
 # what puts a clock on the calls that have none of their own -- util.R's
@@ -103,6 +108,7 @@ RUN apt-get update \\
       texlive-latex-base texlive-latex-recommended texlive-latex-extra \\
       texlive-fonts-recommended texlive-fonts-extra-links fonts-dejavu \\
       xvfb xauth xfonts-base \\
+      libtcl8.6 libtk8.6 \\
       tidy curl file git locales unzip \\
     && rm -rf /var/lib/apt/lists/*
 # Rust, for the reverse dependencies that compile cargo crates -- run
