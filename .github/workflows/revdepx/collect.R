@@ -138,6 +138,52 @@ if (nzchar(retry_dir) && file.exists(file.path(retry_dir, "manifest.json"))) {
   )
 }
 
+# A subset run -- `packages: broken`, an explicit list, a `part` -- reports
+# the whole record too. The committed manifest is the durable record of every
+# package the last full run checked, and writing this run's slice over it
+# would shrink 3435 rows to 204 (run 32260705703 did exactly that): the
+# repository would remember only what was just re-checked, and the next
+# `packages: broken` would select from an amnesiac record. So rows for
+# packages *outside this run's plan* are kept from the committed manifest,
+# marked carried. Planned packages are deliberately not eligible: a planned
+# package with no fresh result is a dead shard, and the `missing` fill below
+# must say so rather than let a stale row paper over it. Entries are set
+# directly, not through take(): the committed report has no pkgs/ payload to
+# copy, and take() would unlink the destination it copies into.
+committed_manifest <- file.path(out_dir, "manifest.json")
+if (
+  (!identical(plan$selection, "all") || !is.null(plan$part)) &&
+    file.exists(committed_manifest)
+) {
+  planned <- unlist(lapply(plan$shards %||% list(), function(shard) {
+    vapply(
+      shard$packages %||% list(),
+      function(p) p$name %||% "",
+      character(1)
+    )
+  }))
+  kept <- 0L
+  for (entry in tryCatch(
+    read_json(committed_manifest),
+    error = function(e) list()
+  )) {
+    name <- entry$package %||% ""
+    if (!nzchar(name) || !is.null(entries[[name]]) || name %in% planned) {
+      next
+    }
+    entry$carried <- TRUE
+    entries[[name]] <- entry
+    kept <- kept + 1L
+  }
+  if (kept > 0) {
+    inform(
+      "Kept ",
+      kept,
+      " committed result(s) for packages outside this run's selection"
+    )
+  }
+}
+
 # Every package the plan named has to appear in the report, including the ones
 # whose shard uploaded nothing at all: a job that dies -- runner failure,
 # cancellation, the job timeout above the shard's own deadline -- takes its

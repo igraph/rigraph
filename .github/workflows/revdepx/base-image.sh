@@ -105,6 +105,20 @@ RUN apt-get update \\
       xvfb xauth xfonts-base \\
       tidy curl file git locales unzip \\
     && rm -rf /var/lib/apt/lists/*
+# Rust, for the reverse dependencies that compile cargo crates -- run
+# 32260705703 left exactly six packages uninstallable, every one of them
+# "sh: 1: rustc: not found" (caugi needs rustc >= 1.80; Ubuntu 24.04's apt
+# rustc is 1.75, hence rustup). The toolchain lives system-wide under
+# /opt/rust, resolved to current stable at build time and frozen in the
+# image -- the way CRAN's own check machines track stable. RUSTUP_HOME must
+# persist (the rustc/cargo binaries are rustup proxies that read it), but
+# CARGO_HOME must NOT: at check time cargo runs as the mounted-HOME user and
+# defaults to a writable ~/.cargo, where /opt/rust is root-owned.
+ENV RUSTUP_HOME=/opt/rust
+RUN curl -fsSL https://sh.rustup.rs \\
+    | CARGO_HOME=/opt/rust sh -s -- -y --no-modify-path --profile minimal --default-toolchain stable \\
+    && ln -s /opt/rust/bin/cargo /opt/rust/bin/rustc /usr/local/bin/ \\
+    && rustc --version
 RUN Rscript -e 'lines <- readLines("/etc/os-release"); \\
     codename <- sub("^VERSION_CODENAME=", "", grep("^VERSION_CODENAME=", lines, value = TRUE)[[1]]); \\
     options(repos = c(CRAN = sprintf("https://p3m.dev/cran/__linux__/%s/latest", codename))); \\
