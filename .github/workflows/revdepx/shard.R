@@ -542,7 +542,11 @@ installed <- unique(c(
 # A package whose *strong* dependency closure is incomplete cannot produce a
 # check result worth comparing; missing suggests are tolerable, the check runs
 # with _R_CHECK_FORCE_SUGGESTS_=false, the way CRAN treats unavailable ones.
-db <- cran_db()
+# The dependency metadata spans CRAN and Bioconductor, like the planner's:
+# a Bioconductor dependency the image build could not deliver fails the
+# package here, as `depfail`, instead of costing two checks to learn
+# `depmissing`.
+db <- dep_db()
 strong_missing <- function(name) {
   strong <- tools::package_dependencies(
     name,

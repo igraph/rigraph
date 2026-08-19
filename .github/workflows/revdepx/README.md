@@ -99,6 +99,13 @@ from "an earlier run of this one":
   the base plus the whole dependency universe
   and every system requirement,
   built by `image.R` *inside* a container and committed.
+  Dependencies resolve against CRAN *and* Bioconductor
+  (`dep_db()` in `util.R`):
+  the checked packages are CRAN reverse dependencies,
+  but what they depend on may live in either repository —
+  run 32158907637 reported 121 packages `depmissing`
+  because the planner intersected dependency lists
+  with CRAN metadata alone.
   A fresh-enough `:latest` standing on the same base tag
   is used as the starting layer,
   so a quiet CRAN week costs a delta install, not a rebuild;
@@ -165,8 +172,11 @@ Repository variables (`vars.*`) shared by both:
 `REVDEPX_SHARD_CAPACITY_MINUTES`, `REVDEPX_BASELINE_MAX_AGE_DAYS`,
 `REVDEPX_IMAGE_MAX_AGE_DAYS`, `REVDEPX_TIMEOUT_FACTOR`,
 `REVDEPX_TIMEOUT_MIN_MINUTES`, `REVDEPX_DEADLINE_MINUTES`,
-`REVDEPX_COMMIT_REPORT`;
-queue engine only: `REVDEPX_WORKERS`, `REVDEPX_MEMORY_PER_CHECK`.
+`REVDEPX_COMMIT_REPORT`,
+`REVDEPX_MEMORY_PER_CHECK` (per-check container memory cap, default 6g;
+both engines honor it, and each derives a machine-sized cap when it is
+cleared);
+queue engine only: `REVDEPX_WORKERS`.
 Script-level environment variables are documented
 in the header of each script.
 

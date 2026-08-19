@@ -184,6 +184,13 @@ env:
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
+  # Hard memory cap per check container, one per half; empty lets
+  # check-pair.sh derive (total minus 2 GiB) / 2. A hungry check then kills
+  # its own container -- one package's result -- instead of the runner. 6g
+  # keeps the two engines' caps identical: the queue engine's derived ~3.4g
+  # OOM-killed cc1plus during Stan/TMB compiles in run 32158907637 --
+  # misreported as packages "failing to install".
+  REVDEPX_MEMORY_PER_CHECK: ${{ vars.REVDEPX_MEMORY_PER_CHECK || '6g' }}
   REVDEPX_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEPX_SHARD_BUDGET_MINUTES || '45' }}
   REVDEPX_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEPX_MAX_PARALLEL || '20' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for
