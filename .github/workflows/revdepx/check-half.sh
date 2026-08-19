@@ -34,6 +34,20 @@
 #                          nice/ionice did in the host design)
 #   REVDEPX_UNIVERSE_LIB - dependency library inside the image
 #                          (default /opt/revdepx/lib)
+#   REVDEPX_CHECK_FLAGS  - compiler flags appended (via ~/.R/Makevars) to
+#                          C/C++/Fortran flags for the *check's* compile of
+#                          the package under test; default -g0. Debug info is
+#                          what a template-heavy translation unit spends its
+#                          gigabytes on -- run 32158907637's dmesg watch
+#                          caught cc1plus OOM-killed at ~3.3 GiB anon-rss
+#                          compiling Stan/TMB code, and -g0 cuts exactly that
+#                          -- while both halves get identical flags, so the
+#                          comparison stays fair. Set to '-g' to restore
+#                          CRAN's own flags.
+#   REVDEPX_CHECK_MAKEFLAGS - MAKEFLAGS inside the check container (default
+#                          -j1): one compiler process per check, so the
+#                          memory cap is sized for one cc1plus, not for a
+#                          package Makefile's idea of parallelism.
 #
 # Leaves <workdir>/<half>/ holding the .Rcheck directory, `driver.log` (what
 # R CMD check said, each line stamped with elapsed seconds), `status` (the
@@ -78,6 +92,27 @@ mkdir -p "${out}/tmp" "${out}/home"
 # Real /tmp semantics inside the container: some test suites assume the
 # sticky world-writable mode even when everything runs as one user.
 chmod 1777 "${out}/tmp" 2> /dev/null || true
+
+# The check's own compile -- R CMD check installs the package under test from
+# source -- runs with these flags appended through the container HOME's
+# ~/.R/Makevars, which GNU make reads *after* R's Makeconf, so `+=` extends
+# what the image's R was built with. The default, -g0, drops debug info: that
+# is where a template-heavy translation unit (Stan, TMB) spends most of its
+# compiler memory, and the last -g* flag on the line wins, so appending
+# neutralises Makeconf's -g without touching optimisation. Identical for both
+# halves by construction -- the file is written per half, from the same
+# environment.
+check_flags=${REVDEPX_CHECK_FLAGS:-"-g0"}
+if [ -n "${check_flags}" ]; then
+  mkdir -p "${out}/home/.R"
+  {
+    echo "# Written by check-half.sh; identical for both halves."
+    for flag_var in CFLAGS CXXFLAGS CXX11FLAGS CXX14FLAGS CXX17FLAGS \
+      CXX20FLAGS CXX23FLAGS FFLAGS FCFLAGS; do
+      echo "${flag_var} += ${check_flags}"
+    done
+  } > "${out}/home/.R/Makevars"
+fi
 
 # Seconds since the check started, in front of every line it prints.
 #
@@ -139,6 +174,10 @@ run_args=(
   -e HOME=/revdepx/out/home
   -e USER=revdepx
   -e LOGNAME=revdepx
+  # One compiler process per check: the memory cap is sized for one cc1plus,
+  # and a package Makefile that would fan out -j$(nproc) compilers under a
+  # 6g cap trades one OOM-killed compiler for several.
+  -e MAKEFLAGS="${REVDEPX_CHECK_MAKEFLAGS:--j1}"
   -v "${tarball}:/revdepx/src/${src_name}:ro"
   -v "${out}:/revdepx/out"
   -v "${out}/tmp:/tmp"

@@ -175,10 +175,77 @@ Repository variables (`vars.*`) shared by both:
 `REVDEPX_COMMIT_REPORT`,
 `REVDEPX_MEMORY_PER_CHECK` (per-check container memory cap, default 6g;
 both engines honor it, and each derives a machine-sized cap when it is
-cleared);
+cleared),
+`REVDEPX_CHECK_FLAGS` (compiler flags appended for the check's own compile
+of the package under test, default `-g0` — template-heavy Stan/TMB
+translation units spend most of their compiler memory on debug info;
+set `-g` to restore CRAN's own flags),
+`REVDEPX_CHECK_MAKEFLAGS` (MAKEFLAGS inside the check container,
+default `-j1`: the memory cap is sized for one compiler process);
 queue engine only: `REVDEPX_WORKERS`.
 Script-level environment variables are documented
 in the header of each script.
+
+## Backlog
+
+Measured ideas, not yet implemented; numbers from the `most`/depth-2 pair
+(runs 32158907637 and 32196879628, 3435 packages, 40 shards, 20 lanes).
+
+- **Universe membership threshold.**
+  The universe image bakes the whole install union
+  (4675 packages, ~14.4 GB container delta over the ~1.9 GB base),
+  but membership is extremely long-tailed:
+  1696 of the 4675 are needed by exactly one shard,
+  and only 309 by all 40.
+  Limiting the image to packages needed by ≥ a fraction of shards
+  and installing the rest per shard on arrival would give,
+  at ≥ 1/4 of shards: an image of ~1151 packages (24%),
+  with a per-shard delta install of ~218 packages (max 303);
+  at ≥ 1/8: ~1725 packages baked, ~125 per shard.
+  What it buys: a much shorter universe job
+  (the critical path every shard waits on),
+  ~10 GB less registry churn per build
+  (the committed layer re-uploads whole every time),
+  and smaller pulls.
+  What it costs: ~5–15 min of per-shard delta install (parallel, off the
+  critical path), duplicated installs for packages under the threshold
+  (~2.5× for the tail at 1/4, roughly +2 runner-hours per full run),
+  and the delta must be committed shard-locally because apt-level
+  sysreqs of tail packages cannot ride a bind mount —
+  the rung-3 fallback machinery in `shard-prep.sh` already does exactly
+  this from the base image and would start from the pulled universe
+  instead.
+- **Shard-count layers.**
+  Simulation over the measured shard durations
+  (mean 2.57 h, cv 0.11 at ~86 packages/shard;
+  noise decomposed into a systemic runner-speed part
+  and a package-mix part that averages out by the CLT)
+  says full waves win:
+  at two layers, 40 shards beat 38 (+8 min) and 35 (+28 min) in
+  expected makespan; at three layers, 60 beats 55 (+13 min) and
+  50 (+43 min), with 57–60 within noise of each other.
+  Slack below a full wave only pays when per-shard variance is far
+  larger than measured — the planner's `max(heaviest, sum/workers)`
+  bound already guards the giant-package case — so the planner keeps
+  its existing rule (beyond one wave, whole waves:
+  `lanes × ceiling(by_capacity / lanes)`), and the one genuinely bad
+  region, a small overflow layer (41 shards ≈ +1.7 h over 40),
+  is exactly what that rule already avoids.
+  The live pathology that motivated the question —
+  the last shard of run 32196879628 waiting 1.4 h for a runner —
+  was org-pool contention from unrelated workflows,
+  which no shard arithmetic removes.
+- **Further compile-memory switches**, if `-g0` + `-j1` + 6g still
+  leave OOM-killed compilers: GCC garbage-collector tuning
+  (`--param ggc-min-expand=10 --param ggc-min-heapsize=32768`) trades
+  compile time for peak memory; `-Wl,--no-keep-memory` does the same
+  for the final link; `-O1` would cut further but changes generated
+  code enough to distort check timings. Rust builds (`caugi`,
+  `zoomerjoin`, `RPesto`) ignore all of these — cargo's memory story
+  is its own.
+- **Report the memory verdicts**: count OOM markers and
+  compiler-kill detections per run in the README summary, so a
+  cap regression is visible without opening `failures.md`.
 
 ## Operational notes
 
