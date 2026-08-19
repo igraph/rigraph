@@ -197,6 +197,8 @@ assign(".next", 1, .tkplot.env)
 
 #' Interactive plotting of graphs
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
 #' `tkplot()` and its companion functions serve as an interactive graph
 #' drawing facility. Not all parameters of the plot can be changed
 #' interactively right now though, e.g. the colors of vertices, edges, and also

@@ -10,10 +10,12 @@ console()
 \code{NULL}, invisibly.
 }
 \description{
-The igraph console is a GUI window that shows what the currently running
-igraph function is doing.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \details{
+The igraph console is a GUI window that shows what the currently running
+igraph function is doing.
+
 The console can be started by calling the \code{console()} function.
 Then it stays open, until the user closes it.
 

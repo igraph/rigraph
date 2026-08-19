@@ -78,12 +78,14 @@ used to manipulate it from the command line.
 and \code{tk_rotate()} return \code{NULL} invisibly.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+}
+\details{
 \code{tkplot()} and its companion functions serve as an interactive graph
 drawing facility. Not all parameters of the plot can be changed
 interactively right now though, e.g. the colors of vertices, edges, and also
 others have to be pre-defined.
-}
-\details{
+
 \code{tkplot()} is an interactive graph drawing facility. It is not very well
 developed at this stage, but it should be still useful.
 
