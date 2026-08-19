@@ -62,7 +62,13 @@ check_half="$(dirname "$0")/../revdepx/check-half.sh"
 # lost. Capped, the kernel kills the one container, check-half.sh records
 # `oom` next to the status, and the manifest names the one package. A
 # REVDEPX_MEMORY already in the environment wins: the caller sized it
-# deliberately.
+# deliberately. REVDEPX_MEMORY_PER_CHECK is the same knob under the name the
+# two engines share -- the yaml sets it to 6g by default; the derivation
+# below is the fallback when neither is set.
+if [ -z "${REVDEPX_MEMORY:-}" ] && [ -n "${REVDEPX_MEMORY_PER_CHECK:-}" ]; then
+  REVDEPX_MEMORY=${REVDEPX_MEMORY_PER_CHECK}
+  export REVDEPX_MEMORY
+fi
 if [ -z "${REVDEPX_MEMORY:-}" ]; then
   mem_kb=$(awk '/^MemTotal:/ { print $2 }' /proc/meminfo 2> /dev/null || echo 0)
   half_mb=$(((mem_kb / 1024 - 2048) / 2))

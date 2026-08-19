@@ -42,7 +42,9 @@ because nothing needs it any more.
 Two side effects are worth having on their own:
 
 - a **memory cap** per container
-  (`(RAM − 2 GiB) / 2` per half unless `REVDEPX_MEMORY` says otherwise),
+  (`REVDEPX_MEMORY_PER_CHECK`, 6g by default;
+  `(RAM − 2 GiB) / 2` per half when it is cleared,
+  and a caller-set `REVDEPX_MEMORY` wins over both),
   so a hungry check kills its own container —
   one package's recorded result —
   instead of starving the runner agent

@@ -162,6 +162,29 @@ read_side <- function(work_dir, phase, name, timeout_sec, duration) {
           )
         }
         res$cran <- TRUE
+        # `parse_check()` looks for 00install.out under the path in the log's
+        # first line -- the *container's* path, which no host filesystem has
+        # -- so `install_out` came out as "<00install.out file does not
+        # exist>" for every install failure, and failures.md showed a reader
+        # everything except the compiler error they opened it for. The real
+        # file sits next to the log; the tail is kept, because that is where
+        # a compile error ends up and whole Stan build transcripts run to
+        # thousands of lines.
+        install_log <- file.path(dirname(log), "00install.out")
+        if (file.exists(install_log)) {
+          lines <- readLines(install_log, warn = FALSE)
+          keep <- 200L
+          if (length(lines) > keep) {
+            lines <- c(
+              sprintf(
+                "[... %d earlier lines omitted; the full 00install.out is in the check artifact ...]",
+                length(lines) - keep
+              ),
+              utils::tail(lines, keep)
+            )
+          }
+          res$install_out <- paste(lines, collapse = "\n")
+        }
         res
       },
       error = function(e) {
@@ -186,6 +209,29 @@ read_side <- function(work_dir, phase, name, timeout_sec, duration) {
   } else {
     ""
   }
+  # The kernel killing one compiler inside the container kills neither the
+  # container (docker reports no OOM -- the `oom` marker stays absent) nor
+  # the check, which completes and reports "installation failed". Run
+  # 32158907637's dmesg watch caught two cc1plus processes killed at the
+  # per-check cap exactly this way, while the manifest said only "fails to
+  # install". The giveaway lines land in 00install.out, so they become an
+  # attribute the comparison can put into the message.
+  install_log <- file.path(dir, paste0(name, ".Rcheck"), "00install.out")
+  attr(result, "compiler_killed") <- tryCatch(
+    file.exists(install_log) &&
+      any(grepl(
+        paste0(
+          "Killed signal terminated program",
+          "|internal compiler error: Killed",
+          "|virtual memory exhausted",
+          "|signal: 9, SIGKILL",
+          "|Cannot allocate memory"
+        ),
+        readLines(install_log, warn = FALSE),
+        useBytes = TRUE
+      )),
+    error = function(e) FALSE
+  )
   result
 }
 
@@ -391,6 +437,20 @@ compare_halves <- function(
     # An install failure or a timeout leaves nothing to compare, so the
     # result is only "failed"; say which one it was.
     updates$message <- status_message(cmp$status)
+    # "Fails to install" reads as the package's fault; a compiler the kernel
+    # OOM-killed under the per-check cap is this harness's. Name it, so the
+    # reader reaches for REVDEPX_MEMORY_PER_CHECK instead of the maintainer.
+    if (
+      startsWith(cmp$status, "i") &&
+        (isTRUE(attr(new, "compiler_killed")) ||
+          isTRUE(attr(old, "compiler_killed")))
+    ) {
+      updates$message <- paste0(
+        updates$message,
+        "; the compiler was killed inside the container -- ",
+        "likely the per-check memory cap (REVDEPX_MEMORY_PER_CHECK)"
+      )
+    }
   }
   updates
 }

@@ -702,6 +702,95 @@ base_packages <- function() {
   rownames(utils::installed.packages(priority = c("base", "recommended")))
 }
 
+# The Bioconductor repositories matching the running R version -- software,
+# annotation, experiment and workflows, the four that hold packages a
+# dependency field can name. The version mapping is the one
+# setRepositories() itself uses (in utils since R 4.5, in tools before
+# that); it is an internal, so an R that keeps it somewhere else degrades to
+# "no Bioconductor metadata" rather than an error. R_BIOC_VERSION overrides
+# the mapping, as it does for base R.
+bioc_repos <- function() {
+  mapping <- function(ns) {
+    as.character(get(
+      ".BioC_version_associated_with_R_version",
+      envir = getNamespace(ns)
+    )())
+  }
+  version <- tryCatch(
+    mapping("utils"),
+    error = function(e) tryCatch(mapping("tools"), error = function(e) NA)
+  )
+  if (is.na(version) || !nzchar(version)) {
+    return(character())
+  }
+  mirror <- env_chr("REVDEPX_BIOC_MIRROR", "https://bioconductor.org")
+  c(
+    BioCsoft = sprintf("%s/packages/%s/bioc", mirror, version),
+    BioCann = sprintf("%s/packages/%s/data/annotation", mirror, version),
+    BioCexp = sprintf("%s/packages/%s/data/experiment", mirror, version),
+    BioCworkflows = sprintf("%s/packages/%s/workflows", mirror, version)
+  )
+}
+
+# cran_db() plus the Bioconductor repositories: the metadata to resolve
+# *dependencies* against, as opposed to the metadata that decides what is a
+# CRAN reverse dependency. In run 32158907637, 121 packages came back
+# `depmissing` on Bioconductor dependencies (DESeq2, pwalign, ...) that pak
+# would have installed happily -- pinned_repos() has carried the Bioconductor
+# repositories all along -- but install_closure() intersected every
+# dependency list with CRAN's rownames, so the planner dropped the names
+# before pak ever saw them. Enumeration stays on cran_db(): the packages
+# *checked* are CRAN's reverse dependencies, and this db only widens what
+# they may depend on.
+#
+# On a Bioconductor fetch failure the CRAN half still serves, degraded to
+# exactly the old behaviour; the pinned install repositories are resolved
+# independently by pak, so a blip here cannot skew an install, only thin a
+# closure.
+dep_db <- local({
+  db <- NULL
+  function() {
+    if (is.null(db)) {
+      cran <- cran_db()
+      repos <- bioc_repos()
+      bioc <- if (length(repos) == 0) {
+        NULL
+      } else {
+        inform(
+          "Fetching Bioconductor package metadata (",
+          paste(names(repos), collapse = ", "),
+          ")"
+        )
+        tryCatch(
+          utils::available.packages(repos = repos, filters = "duplicates"),
+          error = function(e) {
+            inform(
+              "Could not fetch Bioconductor metadata: ",
+              conditionMessage(e)
+            )
+            NULL
+          }
+        )
+      }
+      if (is.null(bioc) || nrow(bioc) == 0) {
+        db <<- cran
+      } else {
+        merged <- rbind(cran, bioc[, colnames(cran), drop = FALSE])
+        merged <- merged[!duplicated(rownames(merged)), , drop = FALSE]
+        inform(
+          "Dependency metadata: ",
+          nrow(cran),
+          " CRAN + ",
+          nrow(merged) - nrow(cran),
+          " Bioconductor packages"
+        )
+        db <<- merged
+      }
+    }
+    db
+  }
+})
+
 # The packages that must be installed to check `packages`: their hard
 # dependencies and direct suggests, plus the recursive hard dependencies of
 # all of those. One list per element of `packages`.

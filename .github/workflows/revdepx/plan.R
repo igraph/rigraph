@@ -586,16 +586,20 @@ inform(
 # --------------------------------------------------------------- closures ----
 
 inform("Computing dependency closures")
-closure <- install_closure(packages, db)
+# Closures resolve against CRAN *and* Bioconductor: `db` decides what gets
+# checked (CRAN reverse dependencies), `deps_db` what those checks need
+# installed -- a CRAN package may depend on Bioconductor freely.
+deps_db <- dep_db()
+closure <- install_closure(packages, deps_db)
 fingerprint <- vapply(
   packages,
-  function(p) dep_fingerprint(closure[[p]], db),
+  function(p) dep_fingerprint(closure[[p]], deps_db),
   character(1)
 )
 
 # The dev version's own dependencies: every shard installs the dev binary, so
 # every shard needs them even when no revdep pulls them in. Parsed from the
-# checkout's DESCRIPTION, resolved against CRAN.
+# checkout's DESCRIPTION, resolved against the dependency metadata.
 parse_dep_field <- function(field) {
   value <- desc[field]
   if (is.na(value)) {
@@ -609,12 +613,17 @@ dev_deps <- unique(unlist(lapply(
   c("Depends", "Imports", "LinkingTo"),
   parse_dep_field
 )))
-dev_deps <- intersect(dev_deps, rownames(db))
+dev_deps <- intersect(dev_deps, rownames(deps_db))
 dev_closure <- sort(setdiff(
   unique(c(
     dev_deps,
     unlist(
-      tools::package_dependencies(dev_deps, db = db, which = "strong", recursive = TRUE),
+      tools::package_dependencies(
+        dev_deps,
+        db = deps_db,
+        which = "strong",
+        recursive = TRUE
+      ),
       use.names = FALSE
     )
   )),
