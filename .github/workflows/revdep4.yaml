@@ -190,6 +190,12 @@ env:
   # compiles in run 32158907637 (dmesg: anon-rss ~3.3 GiB) -- misreported as
   # packages "failing to install".
   REVDEPX_MEMORY_PER_CHECK: ${{ vars.REVDEPX_MEMORY_PER_CHECK || '6g' }}
+  # Compiler flags appended for the check's own compile of the package under
+  # test (default -g0 in check-half.sh: debug info is what a Stan/TMB
+  # translation unit spends its compiler gigabytes on; set '-g' for CRAN's
+  # own flags) and MAKEFLAGS inside the check container (default -j1 there).
+  REVDEPX_CHECK_FLAGS: ${{ vars.REVDEPX_CHECK_FLAGS || '' }}
+  REVDEPX_CHECK_MAKEFLAGS: ${{ vars.REVDEPX_CHECK_MAKEFLAGS || '' }}
   REVDEPX_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEPX_SHARD_BUDGET_MINUTES || '45' }}
   REVDEPX_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEPX_MAX_PARALLEL || '20' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for
