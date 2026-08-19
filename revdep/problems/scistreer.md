@@ -4,7 +4,7 @@
 * Email: <mailto:tgaoteng@gmail.com>
 * GitHub mirror: <https://github.com/cran/scistreer>
 
-Run `revdepcheck::cloud_details(, "scistreer")` for more info
+Run `revdepcheck::revdep_details(, "scistreer")` for more info
 
 ## Newly broken
 
@@ -40,8 +40,23 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 
 ## In both
 
+*   checking whether package ‘scistreer’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/scistreer.Rcheck/00install.out’ for details.
+     ```
+
 *   checking dependencies in R code ... NOTE
      ```
      Namespace in Imports field not imported from: ‘Rcpp’
        All declared Imports should be used.
      ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+

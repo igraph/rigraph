@@ -17,14 +17,54 @@ Run `revdepcheck::revdep_details(, "a5R")` for more info
 ### Devel
 
 ```
-<00install.out file does not exist>
+* installing *source* package ‘a5R’ ...
+** this is package ‘a5R’ version ‘0.5.0’
+** package ‘a5R’ successfully unpacked and MD5 sums checked
+** using staged installation
+sh: 1: rustc: not found
+Error in value[[3L]](cond) : 
+  ----------------------- [RUST NOT FOUND]---------------------------
+The 'rustc' compiler was not found on the PATH. Please install
+rustc or higher from:
+https://www.rust-lang.org/tools/install
+...
+
+Alternatively, you may install Rust from your OS package manager:
+ - Debian/Ubuntu: apt-get install rustc
+ - Fedora/CentOS: dnf install rustc
+ - macOS: brew install rust
+-------------------------------------------------------------------
+Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+Execution halted
+ERROR: configuration failed for package ‘a5R’
+* removing ‘/revdepx/out/a5R.Rcheck/a5R’
 
 
 ```
 ### CRAN
 
 ```
-<00install.out file does not exist>
+* installing *source* package ‘a5R’ ...
+** this is package ‘a5R’ version ‘0.5.0’
+** package ‘a5R’ successfully unpacked and MD5 sums checked
+** using staged installation
+sh: 1: rustc: not found
+Error in value[[3L]](cond) : 
+  ----------------------- [RUST NOT FOUND]---------------------------
+The 'rustc' compiler was not found on the PATH. Please install
+rustc or higher from:
+https://www.rust-lang.org/tools/install
+...
+
+Alternatively, you may install Rust from your OS package manager:
+ - Debian/Ubuntu: apt-get install rustc
+ - Fedora/CentOS: dnf install rustc
+ - macOS: brew install rust
+-------------------------------------------------------------------
+Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+Execution halted
+ERROR: configuration failed for package ‘a5R’
+* removing ‘/revdepx/out/a5R.Rcheck/a5R’
 
 
 ```

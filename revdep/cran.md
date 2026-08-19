@@ -1,14 +1,17 @@
 ## revdepcheck results
 
-We checked 3435 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 204 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 21 new problems
- * We failed to check 62 packages
+ * We saw 25 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
+
+* Boptbd
+  checking examples ... ERROR
 
 * c3net
   checking examples ... ERROR
@@ -64,11 +67,20 @@ Issues with CRAN packages are summarised below.
 * netrics
   checking tests ... ERROR
 
+* optbdmaeAT
+  checking examples ... ERROR
+
 * optrcdmaeAT
   checking examples ... ERROR
 
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* SEMgraph
+  checking examples ... ERROR
 
 * sfclust
   checking tests ... ERROR
@@ -82,65 +94,11 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* a5R              (NA)
-* abess            (NA)
-* blavaan          (NA)
-* bmlm             (NA)
-* bmstdr           (NA)
-* BNSP             (NA)
-* Boptbd           (NA)
-* caugi            (NA)
-* CausalQueries    (NA)
-* CCI              (NA)
-* CensSpatial      (NA)
-* clustTMB         (NA)
-* ctmm             (NA)
-* dsem             (NA)
-* evoper           (NA)
-* gateR            (NA)
-* geostan          (NA)
-* gllvm            (NA)
-* glmmTMB          (NA)
-* hespdiv          (NA)
-* intervalpsych    (NA)
-* loon.ggplot      (NA)
-* metR             (NA)
-* multinma         (NA)
-* mwTensor         (NA)
-* optbdmaeAT       (NA)
-* orbital          (NA)
-* orchaRd          (NA)
-* osmnxr           (NA)
-* pcFactorStan     (NA)
-* phylopairs       (NA)
-* phylosem         (NA)
-* plantmix         (NA)
-* PortfolioTesteR  (NA)
-* rcontroll        (NA)
-* RplotterPkg      (NA)
-* RSA              (NA)
-* RSAtools         (NA)
-* RTMB             (NA)
-* rts2             (NA)
-* rvinecopulib     (NA)
-* sdmTMB           (NA)
-* sfcurve          (NA)
-* SMMAL            (NA)
-* soptdmaeA        (NA)
-* sparrpowR        (NA)
-* SpatialInference (NA)
-* spopt            (NA)
-* stppSim          (NA)
-* survstan         (NA)
-* TextMiningGUI    (NA)
-* tinyVAST         (NA)
-* tipsae           (NA)
-* trialr           (NA)
-* tsissm           (NA)
-* tsnet            (NA)
-* ubms             (NA)
-* vinereg          (NA)
-* vmeasur          (NA)
-* weird            (NA)
-* xpect            (NA)
-* zoomerjoin       (NA)
+* a5R        (NA)
+* caugi      (NA)
+* ctmm       (NA)
+* hespdiv    (NA)
+* osmnxr     (NA)
+* RPesto     (NA)
+* spopt      (NA)
+* zoomerjoin (NA)

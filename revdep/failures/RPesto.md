@@ -1,15 +1,15 @@
-# zoomerjoin (0.2.3)
+# RPesto (0.1.5)
 
-* GitHub mirror: <https://github.com/cran/zoomerjoin>
+* GitHub mirror: <https://github.com/cran/RPesto>
 
-Run `revdepcheck::revdep_details(, "zoomerjoin")` for more info
+Run `revdepcheck::revdep_details(, "RPesto")` for more info
 
 ## In both
 
-*   checking whether package ‘zoomerjoin’ can be installed ... ERROR
+*   checking whether package ‘RPesto’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/zoomerjoin.Rcheck/00install.out’ for details.
+     See ‘<lib>/RPesto.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -17,16 +17,16 @@ Run `revdepcheck::revdep_details(, "zoomerjoin")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘zoomerjoin’ ...
-** this is package ‘zoomerjoin’ version ‘0.2.3’
-** package ‘zoomerjoin’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘RPesto’ ...
+** this is package ‘RPesto’ version ‘0.1.5’
+** package ‘RPesto’ successfully unpacked and MD5 sums checked
 ** using staged installation
 sh: 1: rustc: not found
 Error in value[[3L]](cond) : 
   ----------------------- [RUST NOT FOUND]---------------------------
 The 'rustc' compiler was not found on the PATH. Please install
-rustc (>=
-1.70) or higher from:
+rustc or higher from:
+https://www.rust-lang.org/tools/install
 ...
 
 Alternatively, you may install Rust from your OS package manager:
@@ -36,24 +36,24 @@ Alternatively, you may install Rust from your OS package manager:
 -------------------------------------------------------------------
 Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
 Execution halted
-ERROR: configuration failed for package ‘zoomerjoin’
-* removing ‘/revdepx/out/zoomerjoin.Rcheck/zoomerjoin’
+ERROR: configuration failed for package ‘RPesto’
+* removing ‘/revdepx/out/RPesto.Rcheck/RPesto’
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘zoomerjoin’ ...
-** this is package ‘zoomerjoin’ version ‘0.2.3’
-** package ‘zoomerjoin’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘RPesto’ ...
+** this is package ‘RPesto’ version ‘0.1.5’
+** package ‘RPesto’ successfully unpacked and MD5 sums checked
 ** using staged installation
 sh: 1: rustc: not found
 Error in value[[3L]](cond) : 
   ----------------------- [RUST NOT FOUND]---------------------------
 The 'rustc' compiler was not found on the PATH. Please install
-rustc (>=
-1.70) or higher from:
+rustc or higher from:
+https://www.rust-lang.org/tools/install
 ...
 
 Alternatively, you may install Rust from your OS package manager:
@@ -63,8 +63,8 @@ Alternatively, you may install Rust from your OS package manager:
 -------------------------------------------------------------------
 Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
 Execution halted
-ERROR: configuration failed for package ‘zoomerjoin’
-* removing ‘/revdepx/out/zoomerjoin.Rcheck/zoomerjoin’
+ERROR: configuration failed for package ‘RPesto’
+* removing ‘/revdepx/out/RPesto.Rcheck/RPesto’
 
 
 ```

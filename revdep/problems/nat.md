@@ -103,6 +103,6 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.MmJcYJ’
+       ‘org.chromium.Chromium.d3Ea4m’
      ```
 

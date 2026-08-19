@@ -1,3 +1,42 @@
+# Boptbd (1.0.7)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/Boptbd>
+
+Run `revdepcheck::revdep_details(, "Boptbd")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptBbd
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     alpha <- 0.1 #alpha value 
+     >     beta  <- 0.1 #beta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #Bayesian A-optimal block design (loop design)
+     > 
+     >     graphoptBbd(trt.N = 10, blk.N = 10, alpha = 0.1, beta = 0.1, OptdesF, Optcrit = "A")
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─Boptbd::graphoptBbd(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
+     ```
+
 # c3net (1.1.1.1)
 
 * Email: <mailto:altayscience@gmail.com>
@@ -804,7 +843,7 @@ Run `revdepcheck::revdep_details(, "nat")` for more info
 *   checking for detritus in the temp directory ... NOTE
      ```
      Found the following files/directories:
-       ‘org.chromium.Chromium.MmJcYJ’
+       ‘org.chromium.Chromium.d3Ea4m’
      ```
 
 # netrics (0.4.0)
@@ -845,6 +884,45 @@ Run `revdepcheck::revdep_details(, "netrics")` for more info
        Error:
        ! Test failures.
        Execution halted
+     ```
+
+# optbdmaeAT (1.0.2)
+
+* Email: <mailto:diboobayu@gmail.com>
+* GitHub mirror: <https://github.com/cran/optbdmaeAT>
+
+Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
+
+## Newly broken
+
+*   checking examples ... ERROR
+     ```
+     ...
+     > ### Name: graphoptbd.mae
+     > ### Title: Creates the graphical layout of resultant optimal design
+     > ### Aliases: graphoptbd.mae
+     > ### Keywords: Graphical layout
+     > 
+     > ### ** Examples
+     > 
+     >     ##To create the graphical layout of the D-optimal block design
+     >     ##obtained using the treatment exchange algorithm for 
+     >     trt.N <- 10  #Number of treatments
+     >     blk.N <- 10  #Number of blocks
+     >     theta <- 0.2 #theta value 
+     >     OptdesF <- rbind(1:10, c(2:10,1)) #D-optimal design (loop design)
+     > 
+     >     graphoptbd.mae(trt.N = 10, blk.N = 10, theta = 0.2, OptdesF, Optcrit = "D", cbVal2 = 0)
+     Error:
+     ! `tkplot()` was deprecated in igraph 3.0.0 and is now defunct.
+     Backtrace:
+         ▆
+      1. └─optbdmaeAT::graphoptbd.mae(...)
+      2.   └─igraph::tkplot(...)
+      3.     └─lifecycle::deprecate_stop("3.0.0", "tkplot()")
+      4.       └─lifecycle:::deprecate_stop0(msg)
+      5.         └─rlang::cnd_signal(...)
+     Execution halted
      ```
 
 # optrcdmaeAT (1.0.1)
@@ -933,7 +1011,7 @@ Run `revdepcheck::revdep_details(, "R6causal")` for more info
 * Email: <mailto:tgaoteng@gmail.com>
 * GitHub mirror: <https://github.com/cran/scistreer>
 
-Run `revdepcheck::cloud_details(, "scistreer")` for more info
+Run `revdepcheck::revdep_details(, "scistreer")` for more info
 
 ## Newly broken
 
@@ -969,13 +1047,30 @@ Run `revdepcheck::cloud_details(, "scistreer")` for more info
 
 ## In both
 
+*   checking whether package ‘scistreer’ can be installed ... WARNING
+     ```
+     Found the following significant warnings:
+       'Rcpp:::LdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+       'RcppLdFlags' has not been needed since 2013 (!!) and may get removed in 2027. Please update your 'Makevars'.
+     See ‘<lib>/scistreer.Rcheck/00install.out’ for details.
+     ```
+
 *   checking dependencies in R code ... NOTE
      ```
      Namespace in Imports field not imported from: ‘Rcpp’
        All declared Imports should be used.
      ```
+
+*   checking compilation flags used ... NOTE
+     ```
+     Compilation used the following non-portable flag(s):
+       ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+     ```
+
 # SEMgraph (1.2.4)
 
+* GitHub: <https://github.com/fernandoPalluzzi/SEMgraph>
+* Email: <mailto:barbara.tarantino01@universitadipavia.it>
 * GitHub mirror: <https://github.com/cran/SEMgraph>
 
 Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
@@ -1011,6 +1106,7 @@ Run `revdepcheck::revdep_details(, "SEMgraph")` for more info
      Calls: SEMdag -> getParents -> buildLevels
      Execution halted
      ```
+
 # sfclust (1.1.0)
 
 * GitHub: <https://github.com/ErickChacon/sfclust>
