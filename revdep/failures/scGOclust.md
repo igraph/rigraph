@@ -1,0 +1,28 @@
+# scGOclust (0.2.1)
+
+* GitHub mirror: <https://github.com/cran/scGOclust>
+
+Run `revdepcheck::revdep_details(, "scGOclust")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (ok)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (ok)
+
+
+
+
+
+```

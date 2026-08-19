@@ -1,0 +1,28 @@
+# phyloseqGraphTest (0.1.1)
+
+* GitHub mirror: <https://github.com/cran/phyloseqGraphTest>
+
+Run `revdepcheck::revdep_details(, "phyloseqGraphTest")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (ok)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (ok)
+
+
+
+
+
+```

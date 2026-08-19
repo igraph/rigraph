@@ -1,0 +1,28 @@
+# cglasso (2.0.7)
+
+* GitHub mirror: <https://github.com/cran/cglasso>
+
+Run `revdepcheck::revdep_details(, "cglasso")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (ok)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (ok)
+
+
+
+
+
+```

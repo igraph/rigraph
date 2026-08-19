@@ -1,0 +1,28 @@
+# eDITH (1.1.0)
+
+* GitHub mirror: <https://github.com/cran/eDITH>
+
+Run `revdepcheck::revdep_details(, "eDITH")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (ok)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (ok)
+
+
+
+
+
+```
