@@ -182,10 +182,14 @@ env:
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
   REVDEPX_WORKERS: ${{ inputs.workers || vars.REVDEPX_WORKERS || '4' }}
-  # Hard memory cap per check container, e.g. '3g'; empty lets queue.sh
-  # derive (total minus 2 GiB) / workers. A hungry check then kills its own
-  # container -- one package's result -- instead of the runner.
-  REVDEPX_MEMORY_PER_CHECK: ${{ vars.REVDEPX_MEMORY_PER_CHECK || '' }}
+  # Hard memory cap per check container; empty lets queue.sh derive (total
+  # minus 2 GiB) / workers. A hungry check then kills its own container --
+  # one package's result -- instead of the runner. 6g deliberately
+  # overcommits the 15.6 GiB runner across 4 workers: checks rarely peak
+  # together, and the derived ~3.4g cap OOM-killed cc1plus during Stan/TMB
+  # compiles in run 32158907637 (dmesg: anon-rss ~3.3 GiB) -- misreported as
+  # packages "failing to install".
+  REVDEPX_MEMORY_PER_CHECK: ${{ vars.REVDEPX_MEMORY_PER_CHECK || '6g' }}
   REVDEPX_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEPX_SHARD_BUDGET_MINUTES || '45' }}
   REVDEPX_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEPX_MAX_PARALLEL || '20' }}
   # Check minutes one shard may be planned to hold. Only a batch too big for

@@ -208,7 +208,7 @@ out_of_time <- function(what) {
   )
   TRUE
 }
-chunks <- install_chunks(install_set, cran_db(), chunk_size)
+chunks <- install_chunks(install_set, dep_db(), chunk_size)
 inform(
   "Image: installing ",
   length(install_set),
@@ -420,7 +420,7 @@ load_batch <- function(pkgs) {
 # one it was. And independent sessions run at once, which is what the other
 # cores are for.
 load_roots <- function(pkgs) {
-  db <- cran_db()
+  db <- dep_db()
   known <- intersect(pkgs, rownames(db))
   if (length(known) == 0) {
     return(pkgs)

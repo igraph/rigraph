@@ -146,8 +146,12 @@ since their checks ran on a different platform entirely.
 
 - `REVDEPX_WORKERS` (default: `nproc`) sets the lane count.
 - Each check container gets a memory cap:
-  `REVDEPX_MEMORY_PER_CHECK`,
-  defaulting to `(MemTotal − 2 GiB) / workers`, floored at 2 GiB,
+  `REVDEPX_MEMORY_PER_CHECK` (6g by default —
+  a deliberate overcommit of the 15.6 GiB runner across 4 workers,
+  because checks rarely peak together
+  and the derived cap OOM-killed compilers during Stan/TMB installs),
+  falling back to `(MemTotal − 2 GiB) / workers`, floored at 2 GiB,
+  when cleared;
   exported to `check-half.sh` as `REVDEPX_MEMORY`.
   A hungry check OOM-kills its own container, not the runner,
   and the 2 GiB headroom keeps docker and the runner agent responsive —
