@@ -61,28 +61,46 @@ parse_lifecycle_call <- function(symbol_function_call) {
     warn = "2 -- warn",
     stop = "3 -- stop"
   )
-  
+
   args <- purrr::keep(
     xml2::xml_siblings(xml2::xml_parent(symbol_function_call)),
     \(x) xml2::xml_name(x) == "expr"
   )
   version <- xml2::xml_text(args[[1]])
   old <- xml2::xml_text(args[[2]])
-  new <- if (length(args) > 2) xml2::xml_text(args[[3]]) else ""
-  
-  new_text <- link_new(clean_arg(new))
-  
-  if (!grepl("<a", new_text)) {
-    old_text <- link_new(clean_arg(old))
+  if (grepl("I\\(", old)) {
+    old <- sub('.*I\\("(.*)"\\).*', '\\1', old)
+    old_text <- withr::with_options(list("downlit.attached" = "igraph"), {
+      downlit::downlit_md_string(old)
+    })
   } else {
-    old_text <- clean_arg(old)
+    old_text <- old
   }
-  
+  new <- if (length(args) > 2) xml2::xml_text(args[[3]]) else ""
+  if (grepl("base::c", new) || grepl("^sprintf", new)) {
+    new_text <- ""
+  } else if (grepl("I\\(", new)) {
+    new <- sub('.*I\\("(.*)"\\).*', '\\1', new)
+    new <- sub("^'", "", new)
+    new <- sub("'$", "", new)
+    new_text <- withr::with_options(list("downlit.attached" = "igraph"), {
+      downlit::downlit_md_string(new)
+    })
+  } else {
+    new_text <- sub("\n", "", link_new(clean_arg(new)))
+
+    if (!grepl("<a", new_text)) {
+      old_text <- link_new(clean_arg(old))
+    } else {
+      old_text <- clean_arg(old)
+    }
+  }
+
   tibble::tibble(
     level = level,
     version = clean_arg(version),
     old = old_text,
-    new  = new_text
+    new = new_text
   )
 }
 
@@ -92,12 +110,14 @@ parse_script <- function(path) {
     xmlparsedata::xml_parse_data(pretty = TRUE) |>
     xml2::read_xml() |>
     xml2::xml_find_all(
-    ".//SYMBOL_FUNCTION_CALL[contains(text(), 'deprecate_')]"
-  ) 
-  
-  if (length(lifecycle_calls) == 0) return(NULL)
-  
-  lifecycle_calls_info <-  purrr::map(lifecycle_calls, parse_lifecycle_call)
+      ".//SYMBOL_FUNCTION_CALL[contains(text(), 'deprecate_')]"
+    )
+
+  if (length(lifecycle_calls) == 0) {
+    return(NULL)
+  }
+
+  lifecycle_calls_info <- purrr::map(lifecycle_calls, parse_lifecycle_call)
 
   do.call(rbind, lifecycle_calls_info)
 }
@@ -109,7 +129,6 @@ table <- do.call(
   rbind,
   purrr::map(scripts, parse_script)
 )
-
+table <- table[order(table$level, table$version, decreasing = TRUE), ]
 knitr::kable(table)
-
 ```
