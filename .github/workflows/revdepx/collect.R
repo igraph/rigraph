@@ -425,6 +425,50 @@ comparison_of <- function(entry) {
     res
   }
   if (!file.exists(old_path) || !file.exists(new_path)) {
+    # A row carried from the committed manifest has no check payload -- it is
+    # the record speaking, not this run. Shimming it as an error made
+    # revdepcheck classify it "failed to check": run 32281237129 carried
+    # 3402 ok rows and its README announced "Failed to check (3407)", with a
+    # 28-line "Not checked (ok)" failure section for every one of them. An
+    # ok row becomes a clean two-sided comparison instead -- status "+",
+    # zero rows -- which the summary counts and every table ignores. Carried
+    # not-ok rows keep the shim: "failed to check, not by this run" is the
+    # closest bucket the report vocabulary has for them, and their committed
+    # sections are protected separately.
+    if (isTRUE(entry$carried) && identical(entry$result, "ok")) {
+      clean_half <- function() {
+        structure(
+          list(
+            package = entry$package,
+            version = entry$version %||% "0",
+            rversion = "",
+            platform = "",
+            errors = character(),
+            warnings = character(),
+            notes = character(),
+            description = sprintf(
+              "Package: %s\nVersion: %s\n",
+              entry$package,
+              entry$version %||% "0"
+            ),
+            cran = TRUE,
+            bioc = FALSE,
+            checkdir = "",
+            install_out = "",
+            test_fail = list(),
+            timeout = FALSE
+          ),
+          class = "rcmdcheck"
+        )
+      }
+      cmp <- tryCatch(
+        rcmdcheck::compare_checks(clean_half(), clean_half()),
+        error = function(e) NULL
+      )
+      if (!is.null(cmp)) {
+        return(cmp)
+      }
+    }
     message <- if (nzchar(entry$message %||% "")) {
       entry$message
     } else {
@@ -554,6 +598,17 @@ if (has_revdepcheck) {
 
   written <- setNames(integer(length(sections)), names(sections))
   for (entry in entries) {
+    # A carried row without a check payload has nothing to render a section
+    # from -- its committed section, where one exists, is already on disk
+    # and is better evidence than any shim. This run neither writes nor
+    # deletes for it. (Retry-carried rows are untouched by this: take()
+    # copied their payloads, so old.rds exists.)
+    if (
+      isTRUE(entry$carried) &&
+        !file.exists(file.path(out_dir, "pkgs", entry$package, "old.rds"))
+    ) {
+      next
+    }
     for (dir in names(sections)) {
       if (keeps_committed(entry, dir)) {
         next
