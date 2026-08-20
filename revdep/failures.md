@@ -1,3 +1,177 @@
+# a5R (0.5.0)
+
+* GitHub mirror: <https://github.com/cran/a5R>
+
+Run `revdepcheck::revdep_details(, "a5R")` for more info
+
+## In both
+
+*   checking whether package ‘a5R’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/a5R.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
+# bipartite (2.24)
+
+* GitHub mirror: <https://github.com/cran/bipartite>
+
+Run `revdepcheck::revdep_details(, "bipartite")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+### CRAN
+
+```
+Not checked (deferred)
+
+
+
+
+
+```
+# blavaan (0.5-10)
+
+* GitHub mirror: <https://github.com/cran/blavaan>
+
+Run `revdepcheck::revdep_details(, "blavaan")` for more info
+
+## In both
+
+*   checking whether package ‘blavaan’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/blavaan.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
+# caugi (1.2.0)
+
+* GitHub mirror: <https://github.com/cran/caugi>
+
+Run `revdepcheck::revdep_details(, "caugi")` for more info
+
+## In both
+
+*   checking whether package ‘caugi’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/caugi.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
+# ctmm (1.3.0)
+
+* GitHub mirror: <https://github.com/cran/ctmm>
+
+Run `revdepcheck::revdep_details(, "ctmm")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+### CRAN
+
+```
+new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+# E2E (0.1.3)
+
+* GitHub mirror: <https://github.com/cran/E2E>
+
+Run `revdepcheck::revdep_details(, "E2E")` for more info
+
+## Error before installation
+
+### Devel
+
+```
+new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
+### CRAN
+
+```
+new check timed out after 1201s, at: * checking re-building of vignette outputs ...
+
+
+
+
+
+```
 # ggpicrust2 (2.5.17)
 
 * GitHub: <https://github.com/cafferychen777/ggpicrust2>
@@ -172,6 +346,36 @@ Status: OK
 
 
 ```
+# gllvm (2.0.13)
+
+* GitHub mirror: <https://github.com/cran/gllvm>
+
+Run `revdepcheck::revdep_details(, "gllvm")` for more info
+
+## In both
+
+*   checking whether package ‘gllvm’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/gllvm.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
+
+
+```
 # hespdiv (1.2.10)
 
 * GitHub mirror: <https://github.com/cran/hespdiv>
@@ -197,62 +401,6 @@ Source tarball could not be downloaded
 
 
 
-
-
-```
-# Libra (1.7)
-
-* GitHub mirror: <https://github.com/cran/Libra>
-
-Run `revdepcheck::revdep_details(, "Libra")` for more info
-
-## In both
-
-*   checking whether package ‘Libra’ can be installed ... ERROR
-     ```
-     Installation failed.
-     See ‘<lib>/Libra.Rcheck/00install.out’ for details.
-     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/new/Libra.Rcheck/Libra’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘Libra’ ...
-** this is package ‘Libra’ version ‘1.7’
-** package ‘Libra’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
-gcc -I"/opt/R/4.6.1/lib/R/include" -DNDEBUG   -I/usr/local/include    -fpic  -g -O2  -c LBLasso.c -o LBLasso.o
-LBLasso.c:8:10: fatal error: gsl/gsl_vector.h: No such file or directory
-    8 | #include <gsl/gsl_vector.h>
-      |          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [/opt/R/4.6.1/lib/R/etc/Makeconf:190: LBLasso.o] Error 1
-ERROR: compilation failed for package ‘Libra’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/Libra/old/Libra.Rcheck/Libra’
 
 
 ```
@@ -434,18 +582,18 @@ Status: OK
 
 
 ```
-# optbdmaeAT (1.0.2)
+# multinma (0.9.1)
 
-* GitHub mirror: <https://github.com/cran/optbdmaeAT>
+* GitHub mirror: <https://github.com/cran/multinma>
 
-Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "multinma")` for more info
 
 ## In both
 
-*   checking whether package ‘optbdmaeAT’ can be installed ... ERROR
+*   checking whether package ‘multinma’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/optbdmaeAT.Rcheck/00install.out’ for details.
+     See ‘<lib>/multinma.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -453,57 +601,29 @@ Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘optbdmaeAT’ ...
-** this is package ‘optbdmaeAT’ version ‘1.0.2’
-** package ‘optbdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/new/optbdmaeAT.Rcheck/optbdmaeAT’
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘optbdmaeAT’ ...
-** this is package ‘optbdmaeAT’ version ‘1.0.2’
-** package ‘optbdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/old/optbdmaeAT.Rcheck/optbdmaeAT’
+<00install.out file does not exist>
 
 
 ```
-# optrcdmaeAT (1.0.1)
+# osmnxr (0.1.1)
 
-* GitHub mirror: <https://github.com/cran/optrcdmaeAT>
+* GitHub mirror: <https://github.com/cran/osmnxr>
 
-Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "osmnxr")` for more info
 
 ## In both
 
-*   checking whether package ‘optrcdmaeAT’ can be installed ... ERROR
+*   checking whether package ‘osmnxr’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/optrcdmaeAT.Rcheck/00install.out’ for details.
+     See ‘<lib>/osmnxr.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -511,57 +631,29 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/new/optrcdmaeAT.Rcheck/optrcdmaeAT’
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optrcdmaeAT’
-Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optrcdmaeAT/old/optrcdmaeAT.Rcheck/optrcdmaeAT’
+<00install.out file does not exist>
 
 
 ```
-# soptdmaeA (1.0.1)
+# RPesto (0.1.5)
 
-* GitHub mirror: <https://github.com/cran/soptdmaeA>
+* GitHub mirror: <https://github.com/cran/RPesto>
 
-Run `revdepcheck::revdep_details(, "soptdmaeA")` for more info
+Run `revdepcheck::revdep_details(, "RPesto")` for more info
 
 ## In both
 
-*   checking whether package ‘soptdmaeA’ can be installed ... ERROR
+*   checking whether package ‘RPesto’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/soptdmaeA.Rcheck/00install.out’ for details.
+     See ‘<lib>/RPesto.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -569,70 +661,74 @@ Run `revdepcheck::revdep_details(, "soptdmaeA")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘soptdmaeA’ ...
-** this is package ‘soptdmaeA’ version ‘1.0.1’
-** package ‘soptdmaeA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘soptdmaeA’
-Execution halted
-ERROR: lazy loading failed for package ‘soptdmaeA’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/soptdmaeA/new/soptdmaeA.Rcheck/soptdmaeA’
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘soptdmaeA’ ...
-** this is package ‘soptdmaeA’ version ‘1.0.1’
-** package ‘soptdmaeA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘soptdmaeA’
-Execution halted
-ERROR: lazy loading failed for package ‘soptdmaeA’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/soptdmaeA/old/soptdmaeA.Rcheck/soptdmaeA’
+<00install.out file does not exist>
 
 
 ```
-# streamDAG (1.6)
+# spopt (0.1.2)
 
-* GitHub mirror: <https://github.com/cran/streamDAG>
+* GitHub mirror: <https://github.com/cran/spopt>
 
-Run `revdepcheck::revdep_details(, "streamDAG")` for more info
+Run `revdepcheck::revdep_details(, "spopt")` for more info
 
-## Error before installation
+## In both
+
+*   checking whether package ‘spopt’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/spopt.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
 
 ### Devel
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
-
-
-
+<00install.out file does not exist>
 
 
 ```
 ### CRAN
 
 ```
-Dependencies not installed: asbio, gWidgets2tcltk
+<00install.out file does not exist>
 
 
+```
+# zoomerjoin (0.2.3)
 
+* GitHub mirror: <https://github.com/cran/zoomerjoin>
+
+Run `revdepcheck::revdep_details(, "zoomerjoin")` for more info
+
+## In both
+
+*   checking whether package ‘zoomerjoin’ can be installed ... ERROR
+     ```
+     Installation failed.
+     See ‘<lib>/zoomerjoin.Rcheck/00install.out’ for details.
+     ```
+
+## Installation
+
+### Devel
+
+```
+<00install.out file does not exist>
+
+
+```
+### CRAN
+
+```
+<00install.out file does not exist>
 
 
 ```
