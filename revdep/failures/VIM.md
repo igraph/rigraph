@@ -1,8 +1,8 @@
-# ctmm (1.3.0)
+# VIM (7.0.0)
 
-* GitHub mirror: <https://github.com/cran/ctmm>
+* GitHub mirror: <https://github.com/cran/VIM>
 
-Run `revdepcheck::revdep_details(, "ctmm")` for more info
+Run `revdepcheck::revdep_details(, "VIM")` for more info
 
 ## Error before installation
 

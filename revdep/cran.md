@@ -1,14 +1,20 @@
 ## revdepcheck results
 
-We checked 3435 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3441 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 20 new problems
- * We failed to check 5 packages
+ * We saw 25 new problems
+ * We failed to check 11 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
+
+* Boptbd
+  checking examples ... ERROR
+
+* c3net
+  checking examples ... ERROR
 
 * cfid
   checking tests ... ERROR
@@ -30,6 +36,9 @@ Issues with CRAN packages are summarised below.
 * ECoL
   checking examples ... ERROR
   checking tests ... ERROR
+
+* ggm
+  checking examples ... ERROR
 
 * ggraph
   checking examples ... ERROR
@@ -58,6 +67,12 @@ Issues with CRAN packages are summarised below.
 * netrics
   checking tests ... ERROR
 
+* optbdmaeAT
+  checking examples ... ERROR
+
+* optrcdmaeAT
+  checking examples ... ERROR
+
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
 
@@ -79,8 +94,14 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* Boptbd                    (NA)
-* ctmm                      (NA)
-* hespdiv                   (NA)
-* optbdmaeAT                (NA)
-* optrcdmaeAT               (NA)
+* ctmm            (NA)
+* E2E             (NA)
+* hespdiv         (NA)
+* intSDM          (NA)
+* orbital         (NA)
+* PointedSDMs     (NA)
+* PortfolioTesteR (NA)
+* scITD           (NA)
+* SMMAL           (NA)
+* VIM             (NA)
+* xpect           (NA)

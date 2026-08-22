@@ -1,8 +1,8 @@
-# ctmm (1.3.0)
+# PortfolioTesteR (0.1.4)
 
-* GitHub mirror: <https://github.com/cran/ctmm>
+* GitHub mirror: <https://github.com/cran/PortfolioTesteR>
 
-Run `revdepcheck::revdep_details(, "ctmm")` for more info
+Run `revdepcheck::revdep_details(, "PortfolioTesteR")` for more info
 
 ## Error before installation
 

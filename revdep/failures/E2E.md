@@ -1,8 +1,8 @@
-# ctmm (1.3.0)
+# E2E (0.1.3)
 
-* GitHub mirror: <https://github.com/cran/ctmm>
+* GitHub mirror: <https://github.com/cran/E2E>
 
-Run `revdepcheck::revdep_details(, "ctmm")` for more info
+Run `revdepcheck::revdep_details(, "E2E")` for more info
 
 ## Error before installation
 
