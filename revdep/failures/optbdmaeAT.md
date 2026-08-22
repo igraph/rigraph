@@ -23,15 +23,14 @@ Run `revdepcheck::revdep_details(, "optbdmaeAT")` for more info
 ** using staged installation
 ** R
 ** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
+Error: package or namespace load failed for ‘tcltk’:
+ .onLoad failed in loadNamespace() for 'tcltk', details:
+  call: dyn.load(file, DLLpath = DLLpath, ...)
+  error: unable to load shared object '/usr/local/lib/R/library/tcltk/libs/tcltk.so':
+  libtcl8.6.so: cannot open shared object file: No such file or directory
 Execution halted
 ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/new/optbdmaeAT.Rcheck/optbdmaeAT’
+* removing ‘/revdepx/out/optbdmaeAT.Rcheck/optbdmaeAT’
 
 
 ```
@@ -44,15 +43,14 @@ ERROR: lazy loading failed for package ‘optbdmaeAT’
 ** using staged installation
 ** R
 ** byte-compile and prepare package for lazy loading
-Warning message:
-no DISPLAY variable so Tk is not available 
-Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-  [tcl] invalid command name "font".
-
-Error: unable to load R code in package ‘optbdmaeAT’
+Error: package or namespace load failed for ‘tcltk’:
+ .onLoad failed in loadNamespace() for 'tcltk', details:
+  call: dyn.load(file, DLLpath = DLLpath, ...)
+  error: unable to load shared object '/usr/local/lib/R/library/tcltk/libs/tcltk.so':
+  libtcl8.6.so: cannot open shared object file: No such file or directory
 Execution halted
 ERROR: lazy loading failed for package ‘optbdmaeAT’
-* removing ‘/home/runner/work/_temp/revdep2-work/check/optbdmaeAT/old/optbdmaeAT.Rcheck/optbdmaeAT’
+* removing ‘/revdepx/out/optbdmaeAT.Rcheck/optbdmaeAT’
 
 
 ```

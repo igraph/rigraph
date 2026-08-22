@@ -1,15 +1,15 @@
-# optrcdmaeAT (1.0.1)
+# Boptbd (1.0.7)
 
-* GitHub mirror: <https://github.com/cran/optrcdmaeAT>
+* GitHub mirror: <https://github.com/cran/Boptbd>
 
-Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
+Run `revdepcheck::revdep_details(, "Boptbd")` for more info
 
 ## In both
 
-*   checking whether package ‘optrcdmaeAT’ can be installed ... ERROR
+*   checking whether package ‘Boptbd’ can be installed ... ERROR
      ```
      Installation failed.
-     See ‘<lib>/optrcdmaeAT.Rcheck/00install.out’ for details.
+     See ‘<lib>/Boptbd.Rcheck/00install.out’ for details.
      ```
 
 ## Installation
@@ -17,9 +17,9 @@ Run `revdepcheck::revdep_details(, "optrcdmaeAT")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘Boptbd’ ...
+** this is package ‘Boptbd’ version ‘1.0.7’
+** package ‘Boptbd’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -29,17 +29,17 @@ Error: package or namespace load failed for ‘tcltk’:
   error: unable to load shared object '/usr/local/lib/R/library/tcltk/libs/tcltk.so':
   libtcl8.6.so: cannot open shared object file: No such file or directory
 Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/revdepx/out/optrcdmaeAT.Rcheck/optrcdmaeAT’
+ERROR: lazy loading failed for package ‘Boptbd’
+* removing ‘/revdepx/out/Boptbd.Rcheck/Boptbd’
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘optrcdmaeAT’ ...
-** this is package ‘optrcdmaeAT’ version ‘1.0.1’
-** package ‘optrcdmaeAT’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘Boptbd’ ...
+** this is package ‘Boptbd’ version ‘1.0.7’
+** package ‘Boptbd’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -49,8 +49,8 @@ Error: package or namespace load failed for ‘tcltk’:
   error: unable to load shared object '/usr/local/lib/R/library/tcltk/libs/tcltk.so':
   libtcl8.6.so: cannot open shared object file: No such file or directory
 Execution halted
-ERROR: lazy loading failed for package ‘optrcdmaeAT’
-* removing ‘/revdepx/out/optrcdmaeAT.Rcheck/optrcdmaeAT’
+ERROR: lazy loading failed for package ‘Boptbd’
+* removing ‘/revdepx/out/Boptbd.Rcheck/Boptbd’
 
 
 ```

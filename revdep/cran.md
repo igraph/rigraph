@@ -1,20 +1,14 @@
 ## revdepcheck results
 
-We checked 1011 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3435 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 20 new problems
- * We failed to check 6 packages
+ * We failed to check 5 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
-
-* archeofrag
-  checking tests ... ERROR
-
-* bnstruct
-  checking tests ... ERROR
 
 * cfid
   checking tests ... ERROR
@@ -37,9 +31,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* gemtc
-  checking tests ... ERROR
-
 * ggraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -56,6 +47,9 @@ Issues with CRAN packages are summarised below.
 * MetaNet
   checking examples ... ERROR
 
+* migraph
+  checking tests ... ERROR
+
 * nat
   checking examples ... ERROR
   checking tests ... ERROR
@@ -66,6 +60,12 @@ Issues with CRAN packages are summarised below.
 
 * R6causal
   checking whether package ‘R6causal’ can be installed ... WARNING
+
+* scistreer
+  checking examples ... ERROR
+
+* SEMgraph
+  checking examples ... ERROR
 
 * sfclust
   checking tests ... ERROR
@@ -79,9 +79,8 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* hespdiv     (NA)
-* Libra       (NA)
-* optbdmaeAT  (NA)
-* optrcdmaeAT (NA)
-* soptdmaeA   (NA)
-* streamDAG   (NA)
+* Boptbd                    (NA)
+* ctmm                      (NA)
+* hespdiv                   (NA)
+* optbdmaeAT                (NA)
+* optrcdmaeAT               (NA)
