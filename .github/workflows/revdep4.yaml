@@ -85,11 +85,6 @@
 # deliverable; only infrastructure failures fail jobs.
 
 on:
-  # TEMPORARY: push trigger for the full most/depth-2 validation run (a
-  # workflow_dispatch workflow is only registered once its file exists on the
-  # default branch). Revert this commit after the run.
-  push:
-    branches: ["claude/revdep-check-collision-cfavj8-seq"]
   workflow_dispatch:
     inputs:
       ref:
@@ -156,7 +151,7 @@ name: revdep4
 
 # GitHub does not show a run the inputs it was dispatched with, so the ones
 # that decide how much work the run is go into the run's own title.
-run-name: "revdep4 (most, depth 2)"
+run-name: "revdep4 ${{ inputs.packages && format('({0})', inputs.packages) || format('({0}, depth {1})', inputs.which || 'strong', inputs.depth || '1') }}${{ inputs['retry-run'] && format(', retry of {0}', inputs['retry-run']) || '' }}${{ inputs['dry-run'] && ', dry run' || '' }}"
 
 # Read-only by default; every job opts back into what it actually needs.
 permissions:
@@ -181,8 +176,8 @@ concurrency:
 env:
   REVDEPX_ENGINE: queue
   REVDEPX_PACKAGES: ${{ inputs.packages || '' }}
-  REVDEPX_WHICH: ${{ inputs.which || 'most' }}
-  REVDEPX_DEPTH: ${{ inputs.depth || '2' }}
+  REVDEPX_WHICH: ${{ inputs.which || 'strong' }}
+  REVDEPX_DEPTH: ${{ inputs.depth || '1' }}
   REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
   REVDEPX_PART: ${{ inputs.part || '' }}
   REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
