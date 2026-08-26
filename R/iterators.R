@@ -1412,7 +1412,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   i_set_vertex_attr(
     x,
-    attr(value, "attr_name"),
+    name = attr(value, "attr_name"),
     index = value,
     value = attr(value, "attr_value"),
     check = FALSE
@@ -1441,7 +1441,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   i_set_edge_attr(
     x,
-    attr(value, "attr_name"),
+    name = attr(value, "attr_name"),
     index = value,
     value = attr(value, "attr_value"),
     check = FALSE
