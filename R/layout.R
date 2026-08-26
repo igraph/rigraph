@@ -136,7 +136,7 @@ layout.mds <- function(
 ) {
   # nocov start
   lifecycle::deprecate_warn("2.0.0", "layout.mds()", "layout_with_mds()")
-  layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
+  layout_with_mds(graph = graph, dist = dist, dim = dim)
 } # nocov end
 
 #' Simple grid layout
@@ -2733,8 +2733,9 @@ layout.lgl <- function(..., params = list()) {
 #'   minus one, but only if the graph is connected; for unconnected graphs, the
 #'   only possible value is 2. This is because `merge_coords()` only works in
 #'   2D.
-#' @param options This is currently ignored, as ARPACK is not used any more for
-#'   solving the eigenproblem
+#' @param options `r lifecycle::badge("deprecated")` This argument is not
+#'   supported from igraph version 1.6.0, as ARPACK is not used any more for
+#'   solving the eigenproblem. Supplying it raises an error.
 #' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -2753,21 +2754,13 @@ layout_with_mds <- function(
   graph,
   dist = NULL,
   dim = 2,
-  options = arpack_defaults()
+  options = deprecated()
 ) {
-  if (is.function(options)) {
-    lifecycle::deprecate_warn(
-      "1.6.0",
-      "layout_with_mds(options = 'must be a list')",
-      details = c(
-        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
-      )
-    )
-    options <- options()
-  }
-
   # Argument checks
   ensure_igraph(graph)
+  if (lifecycle::is_present(options)) {
+    lifecycle::deprecate_stop("1.6.0", "layout_with_mds(options = )")
+  }
   dist[] <- as.numeric(dist)
   dim <- as.numeric(dim)
 
