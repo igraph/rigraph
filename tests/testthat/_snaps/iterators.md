@@ -115,7 +115,7 @@
     Condition
       Error in `[<-`:
       ! Can't find "value" for attribute "color".
-      i Removing an attribute is only supported for the whole vertex sequence, e.g. `V(g)$color <- NULL`, not a subset. To remove it directly, use `delete_vertex_attr()`.
+      i Removing an attribute is only supported for the whole vertex sequence, e.g. `V(g)$color <- NULL`, not a subset, or use `delete_vertex_attr()`.
 
 ---
 
@@ -124,7 +124,7 @@
     Condition
       Error in `[<-`:
       ! Can't find "value" for attribute "weight".
-      i Removing an attribute is only supported for the whole edge sequence, e.g. `E(g)$weight <- NULL`, not a subset. To remove it directly, use `delete_edge_attr()`.
+      i Removing an attribute is only supported for the whole edge sequence, e.g. `E(g)$weight <- NULL`, not a subset, or use `delete_edge_attr()`.
 
 # assigning `NULL` for a non-existent attribute errors like `delete_vertex_attr()`/`delete_edge_attr()`
 
