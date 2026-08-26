@@ -1205,7 +1205,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       !is_complete_iterator(value)
   ) {
     cli::cli_abort(
-      "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
+      c(
+        "Can't find {.val value} for attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole vertex sequence, e.g. {.code V(g)${attr(value, 'attr_name')} <- NULL}, not a subset. To remove it directly, use {.fn delete_vertex_attr}."
+      )
     )
   }
   if (is.null(get_vs_graph(x))) {
@@ -1232,7 +1235,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       !is_complete_iterator(value)
   ) {
     cli::cli_abort(
-      "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
+      c(
+        "Can't find {.val value} for attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole edge sequence, e.g. {.code E(g)${attr(value, 'attr_name')} <- NULL}, not a subset. To remove it directly, use {.fn delete_edge_attr}."
+      )
     )
   }
   if (is.null(get_es_graph(x))) {
@@ -1407,7 +1413,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       return(delete_vertex_attr(x, attr(value, "attr_name")))
     }
     cli::cli_abort(
-      "Can't find {.val value} for vertex attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
+      c(
+        "Can't find {.val value} for vertex attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole vertex sequence, e.g. {.code V(g)${attr(value, 'attr_name')} <- NULL}, not a subset. To remove it directly, use {.fn delete_vertex_attr}."
+      )
     )
   }
   i_set_vertex_attr(
@@ -1436,7 +1445,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       return(delete_edge_attr(x, attr(value, "attr_name")))
     }
     cli::cli_abort(
-      "Can't find {.val value} for edge attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
+      c(
+        "Can't find {.val value} for edge attribute {.val {attr(value, 'attr_name')}}.",
+        i = "Removing an attribute is only supported for the whole edge sequence, e.g. {.code E(g)${attr(value, 'attr_name')} <- NULL}, not a subset. To remove it directly, use {.fn delete_edge_attr}."
+      )
     )
   }
   i_set_edge_attr(
