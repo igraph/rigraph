@@ -108,15 +108,7 @@
       Error in `FUN()`:
       ! Logical index length does not match the number of edges. Recycling is not allowed.
 
-# assigning `NULL` errors clearly instead of silently doing nothing
-
-    Code
-      V(g)$color <- NULL
-    Condition
-      Error in `V<-`:
-      ! Can't find "value" for vertex attribute. To remove an attribute, use `delete_vertex_attr()` instead.
-
----
+# assigning `NULL` to a subset of vertices/edges errors instead of silently doing nothing
 
     Code
       V(g)[1:3]$color <- NULL
@@ -127,10 +119,26 @@
 ---
 
     Code
+      E(g)[1:3]$weight <- NULL
+    Condition
+      Error in `[<-`:
+      ! Can't find "value" for attribute. To remove an attribute, use `delete_edge_attr()` instead.
+
+# assigning `NULL` for a non-existent attribute errors like `delete_vertex_attr()`/`delete_edge_attr()`
+
+    Code
+      V(g)$color <- NULL
+    Condition
+      Error in `delete_vertex_attr()`:
+      ! No vertex attribute `color` found.
+
+---
+
+    Code
       E(g)$weight <- NULL
     Condition
-      Error in `E<-`:
-      ! Can't find "value" for edge attribute. To remove an attribute, use `delete_edge_attr()` instead.
+      Error in `delete_edge_attr()`:
+      ! No edge attribute `weight` found.
 
 # direct misuse of `V<-`/`E<-`/`[<-`/`[[<-` errors well
 

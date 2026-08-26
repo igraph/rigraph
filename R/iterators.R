@@ -1200,7 +1200,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
   }
-  if (!rlang::has_name(attributes(value), "value")) {
+  if (
+    !rlang::has_name(attributes(value), "value") &&
+      !is_complete_iterator(value)
+  ) {
     cli::cli_abort(
       "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
     )
@@ -1224,7 +1227,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!rlang::has_name(attributes(value), "name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
   }
-  if (!rlang::has_name(attributes(value), "value")) {
+  if (
+    !rlang::has_name(attributes(value), "value") &&
+      !is_complete_iterator(value)
+  ) {
     cli::cli_abort(
       "Can't find {.val value} for attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
     )
@@ -1397,6 +1403,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     cli::cli_abort("Can't find {.val name} for vertex attribute.")
   }
   if (!rlang::has_name(attributes(value), "value")) {
+    if (is_complete_iterator(value)) {
+      return(delete_vertex_attr(x, attr(value, "name")))
+    }
     cli::cli_abort(
       "Can't find {.val value} for vertex attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
     )
@@ -1423,6 +1432,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     cli::cli_abort("Can't find {.val name} for edge attribute.")
   }
   if (!rlang::has_name(attributes(value), "value")) {
+    if (is_complete_iterator(value)) {
+      return(delete_edge_attr(x, attr(value, "name")))
+    }
     cli::cli_abort(
       "Can't find {.val value} for edge attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
     )

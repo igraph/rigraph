@@ -504,22 +504,43 @@ test_that("assigning `NA` blanks attribute values without removing the attribute
   expect_true("color" %in% vertex_attr_names(g))
 })
 
-test_that("assigning `NULL` errors clearly instead of silently doing nothing", {
+test_that("assigning `NULL` to the full sequence removes the attribute", {
+  g <- make_ring(5)
+  V(g)$color <- "red"
+  E(g)$weight <- 1:5
+
+  V(g)$color <- NULL
+  expect_false("color" %in% vertex_attr_names(g))
+
+  E(g)$weight <- NULL
+  expect_false("weight" %in% edge_attr_names(g))
+})
+
+test_that("assigning `NULL` to a subset of vertices/edges errors instead of silently doing nothing", {
   # `attr(x, "value") <- NULL` removes the "value" attribute that
   # `$<-.igraph.vs`/`$<-.igraph.es` attach, rather than attaching a NULL
-  # value. That made `V(g)$attr <- NULL` (the base R idiom for removing a
-  # list/data.frame element) a silent no-op once the "value" attribute check
-  # was dropped. `delete_vertex_attr()`/`delete_edge_attr()` are the actual
-  # way to remove an attribute.
+  # value, so a sentinel is stored instead to mark removal intent
+  # (see `.igraph_attr_removal_sentinel`). Removing an attribute only makes
+  # sense for the full vertex/edge sequence; indexed assignment can't
+  # partially remove an attribute, so it errors clearly instead of doing
+  # nothing.
   g <- make_ring(5)
   V(g)$color <- "red"
   E(g)$weight <- 1:5
 
   expect_snapshot(error = TRUE, {
-    V(g)$color <- NULL
+    V(g)[1:3]$color <- NULL
   })
   expect_snapshot(error = TRUE, {
-    V(g)[1:3]$color <- NULL
+    E(g)[1:3]$weight <- NULL
+  })
+})
+
+test_that("assigning `NULL` for a non-existent attribute errors like `delete_vertex_attr()`/`delete_edge_attr()`", {
+  g <- make_ring(5)
+
+  expect_snapshot(error = TRUE, {
+    V(g)$color <- NULL
   })
   expect_snapshot(error = TRUE, {
     E(g)$weight <- NULL
