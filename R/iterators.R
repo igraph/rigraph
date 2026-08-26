@@ -1198,7 +1198,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
   if (!rlang::has_name(attributes(value), "attr_name")) {
-    cli::cli_abort("Can't find {.val name} for attribute.")
+    cli::cli_abort("Can't find {.val name} for vertex attribute.")
   }
   if (
     !rlang::has_name(attributes(value), "attr_value") &&
@@ -1206,7 +1206,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   ) {
     cli::cli_abort(
       c(
-        "Can't find {.val value} for attribute {.val {attr(value, 'attr_name')}}.",
+        "Can't find {.val value} for vertex attribute {.val {attr(value, 'attr_name')}}.",
         i = "Removing an attribute is only supported for the whole vertex sequence, e.g. {.code V(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_vertex_attr}."
       )
     )
@@ -1228,7 +1228,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
   if (!rlang::has_name(attributes(value), "attr_name")) {
-    cli::cli_abort("Can't find {.val name} for attribute.")
+    cli::cli_abort("Can't find {.val name} for edge attribute.")
   }
   if (
     !rlang::has_name(attributes(value), "attr_value") &&
@@ -1236,7 +1236,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   ) {
     cli::cli_abort(
       c(
-        "Can't find {.val value} for attribute {.val {attr(value, 'attr_name')}}.",
+        "Can't find {.val value} for edge attribute {.val {attr(value, 'attr_name')}}.",
         i = "Removing an attribute is only supported for the whole edge sequence, e.g. {.code E(g)${attr(value, 'attr_name')} <- NULL}, not a subset. Use {.fn delete_edge_attr}."
       )
     )

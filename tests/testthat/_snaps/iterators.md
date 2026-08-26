@@ -114,7 +114,7 @@
       V(g)[1:3]$color <- NULL
     Condition
       Error in `[<-`:
-      ! Can't find "value" for attribute "color".
+      ! Can't find "value" for vertex attribute "color".
       i Removing an attribute is only supported for the whole vertex sequence, e.g. `V(g)$color <- NULL`, not a subset. Use `delete_vertex_attr()`.
 
 ---
@@ -123,7 +123,7 @@
       E(g)[1:3]$weight <- NULL
     Condition
       Error in `[<-`:
-      ! Can't find "value" for attribute "weight".
+      ! Can't find "value" for edge attribute "weight".
       i Removing an attribute is only supported for the whole edge sequence, e.g. `E(g)$weight <- NULL`, not a subset. Use `delete_edge_attr()`.
 
 # assigning `NULL` for a non-existent attribute errors like `delete_vertex_attr()`/`delete_edge_attr()`
@@ -164,7 +164,7 @@
       V(g)[1] <- "blue"
     Condition
       Error in `[<-`:
-      ! Can't find "name" for attribute.
+      ! Can't find "name" for vertex attribute.
 
 ---
 
@@ -172,7 +172,7 @@
       E(g)[1] <- "blue"
     Condition
       Error in `[<-`:
-      ! Can't find "name" for attribute.
+      ! Can't find "name" for edge attribute.
 
 ---
 
@@ -180,7 +180,7 @@
       V(g)[[1]] <- "blue"
     Condition
       Error in `[[<-`:
-      ! Can't find "name" for attribute.
+      ! Can't find "name" for vertex attribute.
 
 ---
 
@@ -188,7 +188,7 @@
       E(g)[[1]] <- "blue"
     Condition
       Error in `[[<-`:
-      ! Can't find "name" for attribute.
+      ! Can't find "name" for edge attribute.
 
 # querying or setting attributes errors when the graph is unknown
 
