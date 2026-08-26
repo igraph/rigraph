@@ -517,13 +517,6 @@ test_that("assigning `NULL` to the full sequence removes the attribute", {
 })
 
 test_that("assigning `NULL` to a subset of vertices/edges errors instead of silently doing nothing", {
-  # `attr(x, "value") <- NULL` removes the "value" attribute that
-  # `$<-.igraph.vs`/`$<-.igraph.es` attach, rather than attaching a NULL
-  # value, so a sentinel is stored instead to mark removal intent
-  # (see `.igraph_attr_removal_sentinel`). Removing an attribute only makes
-  # sense for the full vertex/edge sequence; indexed assignment can't
-  # partially remove an attribute, so it errors clearly instead of doing
-  # nothing.
   g <- make_ring(5)
   V(g)$color <- "red"
   E(g)$weight <- 1:5
@@ -602,7 +595,7 @@ test_that("`[<-.igraph.vs` reports an internal error when the graph is unknown",
   g <- make_ring(5)
   vs <- V(g)
   attr(vs, "env") <- NULL
-  payload <- structure(1, name = "color", value = "blue")
+  payload <- structure(1, attr_name = "color", attr_value = "blue")
 
   expect_snapshot(error = TRUE, {
     `[<-.igraph.vs`(vs, 1, value = payload)

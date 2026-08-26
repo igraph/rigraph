@@ -1197,11 +1197,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
-  if (!rlang::has_name(attributes(value), "name")) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
   }
   if (
-    !rlang::has_name(attributes(value), "value") &&
+    !rlang::has_name(attributes(value), "attr_value") &&
       !is_complete_iterator(value)
   ) {
     cli::cli_abort(
@@ -1224,11 +1224,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
-  if (!rlang::has_name(attributes(value), "name")) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
     cli::cli_abort("Can't find {.val name} for attribute.")
   }
   if (
-    !rlang::has_name(attributes(value), "value") &&
+    !rlang::has_name(attributes(value), "attr_value") &&
       !is_complete_iterator(value)
   ) {
     cli::cli_abort(
@@ -1375,8 +1375,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (is.null(get_vs_graph(x))) {
     cli::cli_abort("Can't find graph.")
   }
-  attr(x, "name") <- name
-  attr(x, "value") <- value
+  attr(x, "attr_name") <- name
+  attr(x, "attr_value") <- value
   x
 }
 
@@ -1390,8 +1390,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (is.null(get_es_graph(x))) {
     cli::cli_abort("Can't find graph.")
   }
-  attr(x, "name") <- name
-  attr(x, "value") <- value
+  attr(x, "attr_name") <- name
+  attr(x, "attr_value") <- value
   x
 }
 
@@ -1399,12 +1399,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `V<-` <- function(x, value) {
   ensure_igraph(x)
-  if (!rlang::has_name(attributes(value), "name")) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
     cli::cli_abort("Can't find {.val name} for vertex attribute.")
   }
-  if (!rlang::has_name(attributes(value), "value")) {
+  if (!rlang::has_name(attributes(value), "attr_value")) {
     if (is_complete_iterator(value)) {
-      return(delete_vertex_attr(x, attr(value, "name")))
+      return(delete_vertex_attr(x, attr(value, "attr_name")))
     }
     cli::cli_abort(
       "Can't find {.val value} for vertex attribute. To remove an attribute, use {.fn delete_vertex_attr} instead."
@@ -1412,9 +1412,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   i_set_vertex_attr(
     x,
-    attr(value, "name"),
+    attr(value, "attr_name"),
     index = value,
-    value = attr(value, "value"),
+    value = attr(value, "attr_value"),
     check = FALSE
   )
 }
@@ -1428,12 +1428,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
   ensure_igraph(x)
-  if (!rlang::has_name(attributes(value), "name")) {
+  if (!rlang::has_name(attributes(value), "attr_name")) {
     cli::cli_abort("Can't find {.val name} for edge attribute.")
   }
-  if (!rlang::has_name(attributes(value), "value")) {
+  if (!rlang::has_name(attributes(value), "attr_value")) {
     if (is_complete_iterator(value)) {
-      return(delete_edge_attr(x, attr(value, "name")))
+      return(delete_edge_attr(x, attr(value, "attr_name")))
     }
     cli::cli_abort(
       "Can't find {.val value} for edge attribute. To remove an attribute, use {.fn delete_edge_attr} instead."
@@ -1441,9 +1441,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   i_set_edge_attr(
     x,
-    attr(value, "name"),
+    attr(value, "attr_name"),
     index = value,
-    value = attr(value, "value"),
+    value = attr(value, "attr_value"),
     check = FALSE
   )
 }
