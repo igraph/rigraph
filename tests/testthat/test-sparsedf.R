@@ -7,7 +7,7 @@ test_that("sdf works", {
   sdf <- sdf(id = 1:10, color = "black")
   expect_equal(
     as.data.frame(sdf),
-    data.frame(id = 1:10, color = "black")
+    data.frame(id = 1:10, color = "black", stringsAsFactors = FALSE)
   )
 
   ## access
@@ -26,28 +26,32 @@ test_that("sdf works", {
   sdf2[5, "id"] <- 100
   expect_equal(
     as.data.frame(sdf2),
-    data.frame(id = c(1:4, 100, 6:10), color = "black")
+    data.frame(
+      id = c(1:4, 100, 6:10),
+      color = "black",
+      stringsAsFactors = FALSE
+    )
   )
 
   sdf2 <- sdf
   sdf2[, "id"] <- 0
   expect_equal(
     as.data.frame(sdf2),
-    data.frame(id = rep(0, 10), color = "black")
+    data.frame(id = rep(0, 10), color = "black", stringsAsFactors = FALSE)
   )
 
   sdf2 <- sdf
   sdf2[2:10, "id"] <- 1
   expect_equal(
     as.data.frame(sdf2),
-    data.frame(id = rep(1, 10), color = "black")
+    data.frame(id = rep(1, 10), color = "black", stringsAsFactors = FALSE)
   )
 
   sdf2 <- sdf
   sdf2[, "color"] <- "white"
   expect_equal(
     as.data.frame(sdf2),
-    data.frame(id = 1:10, color = "white")
+    data.frame(id = 1:10, color = "white", stringsAsFactors = FALSE)
   )
 
   sdf2 <- sdf

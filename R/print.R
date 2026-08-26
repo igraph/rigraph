@@ -173,7 +173,11 @@
         }))
     ) {
       ## create a table
-      tab <- data.frame(v = paste(sep = "", "[", ind, "]"), row.names = "v")
+      tab <- data.frame(
+        v = paste(sep = "", "[", ind, "]"),
+        row.names = "v",
+        stringsAsFactors = FALSE
+      )
       for (i in list) {
         tab[i] <- vertex_attr(x, i, ind)
       }

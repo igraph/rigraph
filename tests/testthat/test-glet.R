@@ -31,7 +31,8 @@ test_that("Graphlets filtering works", {
   df <- data.frame(
     from = c("A", "A", "B", "B", "B", "C", "C", "D"),
     to = c("B", "C", "C", "D", "E", "D", "E", "E"),
-    weight = c(8, 8, 8, 5, 5, 5, 5, 5)
+    weight = c(8, 8, 8, 5, 5, 5, 5, 5),
+    stringsAsFactors = FALSE
   )
 
   g <- graph_from_data_frame(

@@ -214,7 +214,7 @@ test_that("get_edge_id() errors correctly for wrong vp", {
   expect_error(get_edge_ids(g, NA))
 
   V(g)$name <- letters[1:3]
-  df <- data.frame(from = c("a", "b"), to = c(1, 2))
+  df <- data.frame(from = c("a", "b"), to = c(1, 2), stringsAsFactors = FALSE)
   expect_snapshot_igraph_error({
     get_edge_ids(g, df)
   })
