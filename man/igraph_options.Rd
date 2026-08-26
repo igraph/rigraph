@@ -2,31 +2,18 @@
 % Please edit documentation in R/par.R
 \name{igraph_options}
 \alias{igraph_options}
-\alias{igraph_opt}
 \title{Parameters for the igraph package}
 \usage{
 igraph_options(...)
-
-igraph_opt(x, ..., default = NULL)
 }
 \arguments{
 \item{\dots}{A list may be given as the only argument, or any number of
 arguments may be in the \code{name=value} form, or no argument at all may be
 given. See the Value and Details sections for explanation.}
-
-\item{x}{A character string holding an option name.}
-
-\item{default}{If the specified option is not set in the options list, this
-value is returned. This facilitates retrieving an option and checking
-whether it is set and setting it separately if not.}
 }
 \value{
-\code{igraph_options()} returns a list with the old values of the
-updated parameters, invisibly. Without any arguments, it returns the
-values of all options.
-
-For \code{igraph_opt()}, the current value set for option \code{x}, or
-\code{NULL} if the option is unset.
+A list with the old values of the updated parameters, invisibly.
+Without any arguments, it returns the values of all options.
 }
 \description{
 igraph has some parameters which (usually) affect the behavior of many
@@ -135,10 +122,11 @@ igraph_opt("verbose")
 
 }
 \seealso{
-\code{igraph_options()} is similar to \code{\link[=options]{options()}} and
-\code{igraph_opt()} is similar to \code{\link[=getOption]{getOption()}}.
+Similar to \code{\link[=options]{options()}}. See \code{\link[=igraph_opt]{igraph_opt()}} to retrieve the
+value of a single option.
 
 Other igraph options:
+\code{\link[=igraph_opt]{igraph_opt()}},
 \code{\link[=with_igraph_opt]{with_igraph_opt()}}
 }
 \author{

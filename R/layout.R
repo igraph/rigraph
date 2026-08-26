@@ -702,7 +702,8 @@ normalize <- function(
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout_with_sugiyama()]
+#' @seealso [layout_with_sugiyama()]. See [as_bipartite()] to build a lazy
+#'   layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -779,8 +780,31 @@ layout_as_bipartite <- function(
 }
 
 
-#' @rdname layout_as_bipartite
-#' @param ... Arguments to pass to `layout_as_bipartite()`.
+#' Layout specifications for `add_layout_()`
+#'
+#' @description
+#' Each of these functions builds a lazy layout specification for the given
+#' layout function, to be used with [add_layout_()]. The specification is
+#' only evaluated when the layout is actually computed, so it can be combined
+#' with layout modifiers such as [component_wise()] or [normalize()].
+#'
+#' `as_bipartite()`, `as_star()` and `as_tree()` wrap [layout_as_bipartite()],
+#' [layout_as_star()] and [layout_as_tree()] respectively. `in_circle()`,
+#' `nicely()`, `on_grid()`, `on_sphere()` and `randomly()` wrap
+#' [layout_in_circle()], [layout_nicely()], [layout_on_grid()],
+#' [layout_on_sphere()] and [layout_randomly()]. `with_dh()`, `with_fr()`,
+#' `with_gem()`, `with_graphopt()`, `with_kk()`, `with_lgl()`, `with_mds()`,
+#' `with_sugiyama()` and `with_drl()` wrap [layout_with_dh()],
+#' [layout_with_fr()], [layout_with_gem()], [layout_with_graphopt()],
+#' [layout_with_kk()], [layout_with_lgl()], [layout_with_mds()],
+#' [layout_with_sugiyama()] and [layout_with_drl()].
+#'
+#' @param ... Forwarded to the corresponding `layout_*()` function.
+#' @return An object of class `igraph_layout_spec`.
+#' @seealso [add_layout_()] to apply a layout specification to a graph.
+#' @family graph layouts
+#' @keywords graphs
+#' @rdname layout_spec
 #' @export
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
@@ -806,7 +830,8 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout()] and [layout_with_drl()] for other layout
 #' algorithms, [plot.igraph()] and [tkplot()] on how to
-#' plot graphs and [star()] on how to create ring graphs.
+#' plot graphs and [star()] on how to create ring graphs. See [as_star()] to
+#' build a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -879,8 +904,7 @@ layout_as_star <- function(
 }
 
 
-#' @rdname layout_as_star
-#' @param ... Arguments to pass to `layout_as_star()`.
+#' @rdname layout_spec
 #' @export
 as_star <- function(...) layout_spec(layout_as_star, ...)
 
@@ -928,6 +952,8 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' \email{csardi.gabor@@gmail.com}
 #' @references Reingold, E and Tilford, J (1981). Tidier drawing of trees.
 #' *IEEE Trans. on Softw. Eng.*, SE-7(2):223--228.
+#' @seealso [as_tree()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1027,8 +1053,7 @@ layout_as_tree <- function(
 }
 
 
-#' @rdname layout_as_tree
-#' @param ... Passed to `layout_as_tree()`.
+#' @rdname layout_spec
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
@@ -1068,6 +1093,8 @@ layout.reingold.tilford <- function(..., params = list()) {
 #'   IDs.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [in_circle()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1098,8 +1125,7 @@ layout_in_circle <- function(graph, order = NULL) {
   )
 }
 
-#' @rdname layout_in_circle
-#' @param ... Passed to `layout_in_circle()`.
+#' @rdname layout_spec
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
@@ -1159,12 +1185,12 @@ layout.circle <- function(..., params = list()) {
 #'
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param \dots For `layout_nicely()` the extra arguments are passed to
-#'   the real layout function. For `nicely()` all argument are passed to
-#'   `layout_nicely()`.
+#' @param \dots Extra arguments are passed to the real layout function that
+#'   `layout_nicely()` ends up calling.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [plot.igraph()]
+#' @seealso [plot.igraph()]. See [nicely()] to build a lazy layout
+#'   specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1230,7 +1256,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
 }
 
 
-#' @rdname layout_nicely
+#' @rdname layout_spec
 #' @export
 nicely <- function(...) layout_spec(layout_nicely, ...)
 
@@ -1258,7 +1284,8 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @param dim Two or three. Whether to make 2d or a 3d layout.
 #' @return A two-column or three-column matrix.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso [layout()] for other layout generators
+#' @seealso [layout()] for other layout generators. See [on_grid()] to build
+#'   a lazy layout specification for [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1345,8 +1372,7 @@ layout_on_grid <- function(
 }
 
 
-#' @rdname layout_on_grid
-#' @param ... Passed to `layout_on_grid()`.
+#' @rdname layout_spec
 #' @export
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
 ## ----------------------------------------------------------------
@@ -1366,6 +1392,8 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 #' @param graph The input graph.
 #' @return A numeric matrix with three columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [on_sphere()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1377,8 +1405,7 @@ layout_on_sphere <- function(graph) {
 }
 
 
-#' @rdname layout_on_sphere
-#' @param ... Passed to `layout_on_sphere()`.
+#' @rdname layout_spec
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
@@ -1414,6 +1441,8 @@ layout.sphere <- function(..., params = list()) {
 #'   or 3.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [randomly()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -1472,8 +1501,7 @@ layout_randomly <- function(
   }
 }
 
-#' @rdname layout_randomly
-#' @param ... Parameters to pass to `layout_randomly()`.
+#' @rdname layout_spec
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
@@ -1550,7 +1578,8 @@ layout.random <- function(..., params = list()) {
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_fr()],
-#' [layout_with_kk()] for other layout algorithms.
+#' [layout_with_kk()] for other layout algorithms. See [with_dh()] to build a
+#' lazy layout specification for [add_layout_()].
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 #' @export
@@ -1711,8 +1740,7 @@ layout_with_dh <- function(
 }
 
 
-#' @rdname layout_with_dh
-#' @param ... Passed to `layout_with_dh()`.
+#' @rdname layout_spec
 #' @export
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
@@ -1771,7 +1799,8 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   vertex, according to the IDs of the vertex IDs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_drl()], [layout_with_kk()] for
-#' other layout algorithms.
+#' other layout algorithms. See [with_fr()] to build a lazy layout
+#' specification for [add_layout_()].
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
 #' Force-directed Placement. *Software - Practice and Experience*,
 #' 21(11):1129-1164.
@@ -1988,8 +2017,7 @@ layout_with_fr <- function(
 }
 
 
-#' @rdname layout_with_fr
-#' @param ... Passed to `layout_with_fr()`.
+#' @rdname layout_spec
 #' @export
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
@@ -2040,7 +2068,8 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'   vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_fr()],
-#' [plot.igraph()], [tkplot()]
+#' [plot.igraph()], [tkplot()]. See [with_gem()] to build a lazy layout
+#' specification for [add_layout_()].
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
 #' Layout Algorithm for Undirected Graphs, *Proc. Graph Drawing 1994*,
 #' LNCS 894, pp. 388-403, 1995.
@@ -2136,8 +2165,7 @@ layout_with_gem <- function(
 }
 
 
-#' @rdname layout_with_gem
-#' @param ... Passed to `layout_with_gem()`.
+#' @rdname layout_spec
 #' @export
 with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
@@ -2182,6 +2210,8 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @return A numeric matrix with two columns, and a row for each vertex.
 #' @author Michael Schmuhl for the original graphopt code, rewritten and
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
+#' @seealso [with_graphopt()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -2269,8 +2299,7 @@ layout_with_graphopt <- function(
 }
 
 
-#' @rdname layout_with_graphopt
-#' @param ... Passed to `layout_with_graphopt()`.
+#' @rdname layout_spec
 #' @export
 with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
@@ -2328,7 +2357,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_drl()], [plot.igraph()],
-#' [tkplot()]
+#' [tkplot()]. See [with_kk()] to build a lazy layout specification for
+#' [add_layout_()].
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. *Information Processing Letters*, 31/1, 7--15, 1989.
 #' @export
@@ -2533,10 +2563,8 @@ layout_with_kk <- function(
 }
 
 
-#' @rdname layout_with_kk
-#' @param ... Passed to `layout_with_kk()`.
+#' @rdname layout_spec
 #' @export
-#'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
 #' The Kamada-Kawai layout algorithm
@@ -2586,6 +2614,8 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [with_lgl()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -2684,8 +2714,7 @@ layout_with_lgl <- function(
 }
 
 
-#' @rdname layout_with_lgl
-#' @param ... Passed to `layout_with_lgl()`.
+#' @rdname layout_spec
 #' @export
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
@@ -2738,7 +2767,8 @@ layout.lgl <- function(..., params = list()) {
 #' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [layout()], [plot.igraph()]
+#' @seealso [layout()], [plot.igraph()]. See [with_mds()] to build a lazy
+#'   layout specification for [add_layout_()].
 #' @references Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional
 #' Scaling*.  Second edition. Chapman and Hall.
 #' @export
@@ -2780,8 +2810,7 @@ layout_with_mds <- function(
 }
 
 
-#' @rdname layout_with_mds
-#' @param ... Passed to `layout_with_mds()`.
+#' @rdname layout_spec
 #' @export
 with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
@@ -2852,6 +2881,8 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @seealso [with_sugiyama()] to build a lazy layout specification for
+#'   [add_layout_()].
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 #' and Cybernetics 11(2):109-125, 1981.
@@ -3166,8 +3197,7 @@ layout_with_sugiyama <- function(
 }
 
 
-#' @rdname layout_with_sugiyama
-#' @param ... Passed to `layout_with_sugiyama()`.
+#' @rdname layout_spec
 #' @export
 with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
@@ -3198,7 +3228,6 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
-#' @inheritParams rlang::args_dots_empty
 #' @param method Character constant giving the method to use. Right now only
 #'   `dla` is implemented.
 #' @param layout A function object, the layout function to use. The default
@@ -3623,7 +3652,8 @@ layout.drl <- function(
 #' @author Shawn Martin (<https://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
-#' @seealso [layout()] for other layout generators.
+#' @seealso [layout()] for other layout generators. See [with_drl()] to
+#'   build a lazy layout specification for [add_layout_()].
 #' @references See the following technical report: Martin, S., Brown, W.M.,
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.
@@ -3738,9 +3768,7 @@ layout_with_drl <- function(
 }
 
 
-#' @rdname layout_with_drl
-#' @param ... Passed to `layout_with_drl()`.
-#' @family layout_drl
+#' @rdname layout_spec
 #' @export
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 

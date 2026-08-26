@@ -2,12 +2,9 @@
 % Please edit documentation in R/layout.R
 \name{layout_in_circle}
 \alias{layout_in_circle}
-\alias{in_circle}
 \title{Graph layout with vertices on a circle.}
 \usage{
 layout_in_circle(graph, order = NULL)
-
-in_circle(...)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -16,8 +13,6 @@ in_circle(...)
 desired placement. Vertices that are not included here will be placed at
 (0,0). The default \code{NULL} selects all vertices, in the order of their
 IDs.}
-
-\item{...}{Passed to \code{layout_in_circle()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -52,8 +47,12 @@ plot(karate, layout = coords)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{\link[=in_circle]{in_circle()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_bipartite]{layout_as_bipartite()}},

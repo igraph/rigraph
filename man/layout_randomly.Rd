@@ -2,17 +2,14 @@
 % Please edit documentation in R/layout.R
 \name{layout_randomly}
 \alias{layout_randomly}
-\alias{randomly}
 \title{Randomly place vertices on a plane or in 3d space}
 \usage{
 layout_randomly(graph, ..., dim = c(2, 3))
-
-randomly(...)
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Parameters to pass to \code{layout_randomly()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{dim}{Integer scalar, the dimension of the space to use. It must be 2
 or 3.}
@@ -34,8 +31,12 @@ layout generators.
 }
 
 \seealso{
+\code{\link[=randomly]{randomly()}} to build a lazy layout specification for
+\code{\link[=add_layout_]{add_layout_()}}.
+
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_bipartite]{layout_as_bipartite()}},

@@ -29,6 +29,7 @@ Add layout to graph
 \code{\link[=layout_]{layout_()}} for a description of the layout API.
 
 Other graph layouts:
+\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_bipartite]{layout_as_bipartite()}},

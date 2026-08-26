@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_bipartite}
 \alias{layout_as_bipartite}
-\alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{
 layout_as_bipartite(
@@ -13,8 +12,6 @@ layout_as_bipartite(
   vgap = 1,
   maxiter = 100
 )
-
-as_bipartite(...)
 }
 \arguments{
 \item{graph}{The bipartite input graph. It should have a logical
@@ -25,7 +22,7 @@ given.}
 \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
 used.}
 
-\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{hgap}{Real scalar, the minimum horizontal gap between vertices in the
 same layer.}
@@ -69,10 +66,12 @@ g \%>\%
   plot()
 }
 \seealso{
-\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}. See \code{\link[=as_bipartite]{as_bipartite()}} to build a lazy
+layout specification for \code{\link[=add_layout_]{add_layout_()}}.
 
 Other graph layouts:
 \code{\link[=add_layout_]{add_layout_()}},
+\code{\link[=as_bipartite]{as_bipartite()}},
 \code{\link[=component_wise]{component_wise()}},
 \code{\link[=layout_]{layout_()}},
 \code{\link[=layout_as_star]{layout_as_star()}},

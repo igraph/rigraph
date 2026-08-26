@@ -11,8 +11,9 @@ tkplot.reshape(tkp.id, newlayout, ..., params)
 
 \item{newlayout}{The new layout, see the \code{layout} parameter of tkplot.}
 
-\item{...}{Additional plotting parameters. See \link{igraph.plotting} for
-the complete list.}
+\item{...}{For \code{tkplot()}, additional plotting parameters, see
+\link{igraph.plotting} for the complete list. For \code{tk_close()}, \code{tk_fit()},
+\code{tk_coords()} and \code{tk_rotate()}, these dots must be empty.}
 
 \item{params}{Extra parameters in a list, to pass to the layout function.}
 }

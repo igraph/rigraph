@@ -31,7 +31,7 @@ vector of the community structure.}
 \item{directed}{Whether to use the directed or undirected version of
 modularity. Ignored for undirected graphs.}
 
-\item{\dots}{Additional arguments, none currently.}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 For \code{modularity()} a numeric scalar, the modularity score of the
