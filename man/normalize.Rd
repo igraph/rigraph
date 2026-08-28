@@ -4,14 +4,7 @@
 \alias{normalize}
 \title{Normalize layout}
 \usage{
-normalize(
-  xmin = -1,
-  xmax = 1,
-  ymin,
-  ymax,
-  zmin,
-  zmax
-)
+normalize(xmin = -1, xmax = 1, ymin, ymax, zmin, zmax)
 }
 \arguments{
 \item{xmin, xmax}{Minimum and maximum for x coordinates.}
