@@ -50,7 +50,7 @@ pkg_graph_version <- ver_1_5_0
 #' @family versions
 #' @export
 graph_version <- function(graph) {
-  if (missing(graph)) {
+  if (is_missing(graph)) {
     return(pkg_graph_version)
   }
 

@@ -1267,7 +1267,7 @@ subgraph_isomorphisms <- function(
 #' isomorphism_class(g2)
 #' isomorphic(g1, g2)
 isomorphism_class <- function(graph, v) {
-  if (missing(v)) {
+  if (is_missing(v)) {
     graph.isoclass(graph)
   } else {
     graph.isoclass.subgraph(graph, v)

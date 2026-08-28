@@ -47,7 +47,7 @@ igraph_match_arg <- function(
   # Materialize early, before accessing arg
   force(error_arg)
 
-  if (missing(values)) {
+  if (rlang::is_missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
   }
