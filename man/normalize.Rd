@@ -7,10 +7,10 @@
 normalize(
   xmin = -1,
   xmax = 1,
-  ymin = NULL,
-  ymax = NULL,
-  zmin = NULL,
-  zmax = NULL
+  ymin,
+  ymax,
+  zmin,
+  zmax
 )
 }
 \arguments{

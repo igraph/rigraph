@@ -435,8 +435,8 @@ graph.isomorphic.bliss <- function(
   graph1,
   graph2,
   ...,
-  colors1 = NULL,
-  colors2 = NULL,
+  colors1,
+  colors2,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.bliss, do not edit, see tools/generate-migrations.R
@@ -483,8 +483,8 @@ graph.isomorphic.bliss <- function(
   isomorphic_bliss_impl(
     graph1 = graph1,
     graph2 = graph2,
-    colors1 = if (missing(colors1)) missing_arg() else colors1,
-    colors2 = if (missing(colors2)) missing_arg() else colors2,
+    colors1 = if (is_missing(colors1)) missing_arg() else colors1,
+    colors2 = if (is_missing(colors2)) missing_arg() else colors2,
     sh = sh
   )
 }
@@ -494,10 +494,10 @@ graph.isomorphic.vf2 <- function(
   graph1,
   graph2,
   ...,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.isomorphic.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -545,18 +545,18 @@ graph.isomorphic.vf2 <- function(
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex_color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (is_missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex_color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (is_missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (is_missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (is_missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 #' @inheritParams rlang::args_dots_empty
@@ -565,10 +565,10 @@ graph.subisomorphic.vf2 <- function(
   graph1,
   graph2,
   ...,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.subisomorphic.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -616,18 +616,18 @@ graph.subisomorphic.vf2 <- function(
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex_color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (is_missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex_color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (is_missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (is_missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (is_missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -807,10 +807,10 @@ graph.count.isomorphisms.vf2 <- function(
   graph1,
   graph2,
   ...,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.count.isomorphisms.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -858,18 +858,18 @@ graph.count.isomorphisms.vf2 <- function(
   count_isomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex_color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (is_missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex_color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (is_missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (is_missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (is_missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -958,10 +958,10 @@ graph.count.subisomorphisms.vf2 <- function(
   graph1,
   graph2,
   ...,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
 ) {
   # BEGIN GENERATED ARG_HANDLE: graph.count.subisomorphisms.vf2, do not edit, see tools/generate-migrations.R
   # fmt: skip
@@ -1009,18 +1009,18 @@ graph.count.subisomorphisms.vf2 <- function(
   count_subisomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex_color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (is_missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex_color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (is_missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (is_missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (is_missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -1457,7 +1457,7 @@ graph_from_isomorphism_class <- function(
 #' @export
 canonical_permutation <- function(
   graph,
-  colors = NULL,
+  colors,
   ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
@@ -1498,7 +1498,7 @@ canonical_permutation <- function(
 
   canonical_permutation_impl(
     graph = graph,
-    colors = if (missing(colors)) missing_arg() else colors,
+    colors = if (is_missing(colors)) missing_arg() else colors,
     sh = sh
   )
 }
@@ -1643,7 +1643,7 @@ graph.isomorphic <- function(graph1, graph2) {
 #' @export
 count_automorphisms <- function(
   graph,
-  colors = NULL,
+  colors,
   ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
@@ -1684,7 +1684,7 @@ count_automorphisms <- function(
 
   count_automorphisms_impl(
     graph = graph,
-    colors = if (missing(colors)) missing_arg() else colors,
+    colors = if (is_missing(colors)) missing_arg() else colors,
     sh = sh
   )
 }
@@ -1764,7 +1764,7 @@ count_automorphisms <- function(
 #' @export
 automorphism_group <- function(
   graph,
-  colors = NULL,
+  colors,
   ...,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
@@ -1808,7 +1808,7 @@ automorphism_group <- function(
 
   automorphism_group_impl(
     graph = graph,
-    colors = if (missing(colors)) missing_arg() else colors,
+    colors = if (is_missing(colors)) missing_arg() else colors,
     sh = sh,
     details = details
   )
