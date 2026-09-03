@@ -2756,15 +2756,10 @@ layout_with_mds <- function(
   dim = 2,
   options = deprecated()
 ) {
-  # Argument checks
-  ensure_igraph(graph)
   if (lifecycle::is_present(options)) {
     lifecycle::deprecate_stop("1.6.0", "layout_with_mds(options = )")
   }
-  dist[] <- as.numeric(dist)
-  dim <- as.numeric(dim)
 
-  # Function call
   layout_mds_impl(
     graph = graph,
     dist = dist,
