@@ -96,7 +96,7 @@ V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
 g2 <- graph_from_graphnel(GNEL)
 g2
-#> ── <igraph> Ring graph ────────────────────────────────────────────── b6d827a ──
+#> ── <igraph> Ring graph ────────────────────────────────────────────── 9d8bd1b ──
 #> ℹ undirected · named · weighted
 #> ℹ 10 vertices · 10 edges
 #> 
@@ -114,7 +114,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-#> ── <igraph> In-star ───────────────────────────────────────────────── 5af1b80 ──
+#> ── <igraph> In-star ───────────────────────────────────────────────── 8c7c3da ──
 #> ℹ directed · named · weighted
 #> ℹ 10 vertices · 9 edges
 #> 

@@ -73,7 +73,7 @@ alpha.centrality(
 - tol:
 
   Tolerance for near-singularities during matrix inversion, see
-  [`solve()`](https://rdrr.io/r/base/solve.html).
+  [`Matrix::solve()`](https://rdrr.io/pkg/Matrix/man/solve-methods.html).
 
 - sparse:
 
