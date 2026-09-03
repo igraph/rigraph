@@ -173,6 +173,25 @@ test_that("authority_score survives stress test", {
   }
 })
 
+test_that("hits_scores(scale = ) is deprecated but still works", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_star(10)
+
+  expect_snapshot(
+    res_legacy <- hits_scores(g, scale = FALSE)
+  )
+  # ARPACK starts from a random vector, so compare with a tolerance.
+  expect_equal(
+    res_legacy[c("hub", "authority")],
+    hits_scores(g, normalized = FALSE)[c("hub", "authority")]
+  )
+
+  expect_snapshot(
+    error = TRUE,
+    hits_scores(g, normalized = FALSE, scale = FALSE)
+  )
+})
+
 test_that("`hits_score()` works -- authority", {
   igraph_local_seed(42)
   mscale <- function(x) {
@@ -1199,13 +1218,26 @@ test_that("power_centrality() covers migrated tail args and positional recovery"
     nodes = V(ring)[1:3],
     loops = FALSE,
     exponent = 0.2,
-    rescale = TRUE,
+    normalized = TRUE,
     tol = 1e-10,
     sparse = FALSE,
     weights = rep(1, 5)
   )
   # With unit weights the ring is symmetric and rescaled scores sum to one.
   expect_equal(res, rep(1 / 5, 3))
+
+  # The legacy `rescale` name is recovered as `normalized`.
+  lifecycle::expect_deprecated(
+    res_legacy <- power_centrality(
+      ring,
+      nodes = V(ring)[1:3],
+      exponent = 0.2,
+      rescale = TRUE,
+      sparse = FALSE,
+      weights = rep(1, 5)
+    )
+  )
+  expect_equal(res_legacy, res)
 
   # `loops` toggles the adjacency diagonal of a path with a loop on vertex 2.
   looped <- make_graph(c(1, 2, 2, 3, 2, 2), directed = FALSE)

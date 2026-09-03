@@ -9,7 +9,8 @@ tkplot.getcoords(tkp.id, norm = FALSE)
 \arguments{
 \item{tkp.id}{The ID of the tkplot window to close/reshape/etc.}
 
-\item{norm}{Logical, should we norm the coordinates.}
+\item{norm}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{normalized} in
+\code{\link[=tk_coords]{tk_coords()}} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

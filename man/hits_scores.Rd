@@ -4,14 +4,21 @@
 \alias{hits_scores}
 \title{Kleinberg's hub and authority centrality scores.}
 \usage{
-hits_scores(graph, ..., scale = TRUE, weights = NULL, options = NULL)
+hits_scores(
+  graph,
+  ...,
+  normalized = TRUE,
+  weights = NULL,
+  options = NULL,
+  scale = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{scale}{Logical, whether to scale the result to have a maximum
+\item{normalized}{Logical, whether to scale the result to have a maximum
 score of one. If no scaling is used then the result vector has unit length
 in the Euclidean norm.}
 
@@ -23,6 +30,8 @@ edges are effectively added up.}
 
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details. The default \code{NULL} uses \code{\link[=arpack_defaults]{arpack_defaults()}}.}
+
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{normalized} instead.}
 }
 \value{
 A named list with members:
