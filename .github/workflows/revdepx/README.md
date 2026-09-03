@@ -171,7 +171,11 @@ Repository variables (`vars.*`) shared by both:
 `REVDEPX_SHARD_BUDGET_MINUTES`, `REVDEPX_MAX_PARALLEL`,
 `REVDEPX_SHARD_CAPACITY_MINUTES`, `REVDEPX_BASELINE_MAX_AGE_DAYS`,
 `REVDEPX_IMAGE_MAX_AGE_DAYS`, `REVDEPX_TIMEOUT_FACTOR`,
-`REVDEPX_TIMEOUT_MIN_MINUTES`, `REVDEPX_DEADLINE_MINUTES`,
+`REVDEPX_TIMEOUT_MIN_MINUTES`
+(the per-check timeout floor, default 30 min:
+a saturated shard runs each check at roughly half speed,
+so a floor sized for uncontended times kills healthy checks),
+`REVDEPX_DEADLINE_MINUTES`,
 `REVDEPX_COMMIT_REPORT`,
 `REVDEPX_MEMORY_PER_CHECK` (per-check container memory cap, default 6g;
 both engines honor it, and each derives a machine-sized cap when it is
@@ -181,7 +185,15 @@ of the package under test, default `-g0` — template-heavy Stan/TMB
 translation units spend most of their compiler memory on debug info;
 set `-g` to restore CRAN's own flags),
 `REVDEPX_CHECK_MAKEFLAGS` (MAKEFLAGS inside the check container,
-default `-j1`: the memory cap is sized for one compiler process);
+default `-j1`: the memory cap is sized for one compiler process).
+Check containers also run with `_R_CHECK_LIMIT_CORES_=TRUE`
+(overridable through the environment),
+the value CRAN's own machines use:
+a test suite sizing itself from `parallel::detectCores()`
+would otherwise fan out one worker per runner core,
+and four such checks side by side
+drove 4-core shards to load 5–13 —
+the direct cause of the floor timeouts in run 32574134229;
 queue engine only: `REVDEPX_WORKERS`.
 Script-level environment variables are documented
 in the header of each script.
