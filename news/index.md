@@ -1,5 +1,31 @@
 # Changelog
 
+## igraph 2.3.3.9033
+
+### Bug fixes
+
+#### ci
+
+- Upload a shard’s results three times, not once
+  ([\#2854](https://github.com/igraph/rigraph/issues/2854)).
+
+#### ci
+
+- Stop reporting a check that never ran as `ok`
+  ([\#2849](https://github.com/igraph/rigraph/issues/2849)).
+
+#### ci
+
+- Install the system requirements of the packages being checked
+  ([\#2853](https://github.com/igraph/rigraph/issues/2853)).
+
+### Performance
+
+#### ci
+
+- Bigger install chunks, a shard resource sampler, and lower-priority
+  checks ([\#2852](https://github.com/igraph/rigraph/issues/2852)).
+
 ## igraph 2.3.3.9032
 
 ### Bug fixes
